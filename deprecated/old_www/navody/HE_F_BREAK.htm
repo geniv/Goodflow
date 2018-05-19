@@ -1,0 +1,46 @@
+<!doctype html public "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=Windows-1250">
+<title>Funkce Break</title>
+<link rel='stylesheet' style='text/css' href='../function.css'>
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000">
+
+
+
+<h2 class=function>Break</h2>
+<img src='../images/cpp.gif' width='44' height='16' border='0' alt='c/c++' align='middle' hspace='2'><img src='../images/pascal.gif' width='44' height='16' border='0' alt='pascal' align='middle' hspace='2'>
+
+
+<br><br>
+<div class='typ'>BOOL <b>[cd_]Break</b>([cdp_t cdp]);<br>
+function <b>[cd_]Break</b> ([cdp : cdp_t]) : Boolean;
+</div>
+
+
+<p><b>Parametry</b></p>
+
+<table border=1 cols=2 frame=box rules=all width=383>
+
+<tr valign="top">
+<td width=23%>[<i>cdp </i></td>
+<td width=77%><a href="HE_EXTCD.htm">kontextová proměnná</a> klienta]  </td>
+</tr>
+</table><br>
+
+<p><b>Popis</b></p>
+
+<p>Funkce <b><code>Break</code></b> vyšle požadavek na zrušení právě prováděného požadavku na server. Volání této funkce má smysl pouze v&nbsp;době, kdy hodnota funkce <b><code>answered</code></b> je FALSE, což může nastat buď v&nbsp;režimu souběžného zpracování, nebo při asynchronním volání <b><code>Break</code></b> např. přerušením z&nbsp;klávesnice, nebo z&nbsp;jiného počítače. Pokud tyto podmínky nejsou splněny, nemá procedura <b><code>Break</code></b> žádný efekt.</p>
+
+<p>Není zaručeno, že funkce <b><code>Break</code></b> zruší provádění posledního požadavku. Je zaručeno, že za konečnou dobu po provedení <b><code>Break</code></b> nabude funkce <b><code>answered</code></b> hodnoty TRUE. Zda ke zrušení požadavku došlo, lze pak zjistit voláním funkce <b><code>Sz_error</code></b>.</p>
+
+<p><i>UPOZORNĚNÍ: Protože funkce </i><i><code>Break</code></i><i> koliduje s klíčovým slovem Delphi, používejte v tomto prostředí místo </i><i><code>Break</code> variantu <code>wb_Break</code> (nebo <code>cd_Break</code>).</i></p>
+
+<p><b>Hodnota funkce</b></p>
+
+<p>Funkce <b><code>Break</code></b> vrací TRUE právě tehdy, pokud byla zavolána v&nbsp;době, kdy server nezpracovává žádný požadavek od volajícího programu. Hodnota funkce neříká, zda došlo ke zrušení požadavku.</p>
+
+</body>
+</html>

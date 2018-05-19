@@ -1,0 +1,5326 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head>
+<meta http-equiv="Content-Type" content="text/html; charset=Windows-1250"><title>3. Manipulace dat v SQL</title>
+                             
+
+	
+	<link rel="STYLESHEET" type="text/css" href="kap3_soubory/main.css">
+	<style type="text/css"><!--:hover { font-weight: bold;         color: red }
+--></style></head><body alink="Blue" background="kap3_soubory/pozadi.jpg" vlink="Blue">
+<a name="k"></a>
+<a href="http://www.cs.vsb.cz/amalka/tomica/sql/kap2.html"><img src="kap3_soubory/prev.gif" alt="2. Definice dat v SQL"></a>
+<a href="http://www.cs.vsb.cz/amalka/tomica/sql/kap4.html"><img src="kap3_soubory/next.gif" alt="4. Systémový katalog"></a>
+<a href="http://www.cs.vsb.cz/amalka/tomica/sql/index.html"><img src="kap3_soubory/toc.gif" alt="Obsah"></a>
+<hr color="Blue" size="1">
+<h1>3. Manipulace dat v SQL</h1>
+<dt><a href="#k1">3.1 Jednoduché dotazy v SQL</a></dt>
+<dt><a href="#k2">3.2 Aritmetika a agregační funkce</a></dt>
+<dt class="ODRAZ"><a href="#k21">3.2.1 Konstrukt GROUP BY</a></dt>
+<dt class="ODRAZ"><a href="#k22">3.2.2 Sémantika agregačních funkcí</a></dt>
+<dt><a href="#k3">3.3 Manipulace s množinami v SQL</a></dt>
+<dt><a href="#k4">3.4 Kvantifikace v SQL</a></dt>
+<dt><a href="#k5">3.5 Používání prázdných hodnot</a></dt>
+<dt><a href="#k6">3.6 Práce s kolekcemi v SQL</a></dt>
+<dt><a href="#k7">3.7 Práce s řetězci znaku v SQL</a></dt>
+<dt><a href="#k8">3.8 Sémantika příkazu SELECT</a></dt>
+<dt><a href="#k9">3.9 Aktualizace v SQL</a></dt>
+<br>
+<p>Jazyk DML (<i>D</i>ata <i>M</i>odification <i>L</i>anguage) obsahuje klíčová slova pro manipulaci s atributy, množinami entit a vazbami entit.</p>
+<center><h3>Přehled klíčových slov DML</h3></center>
+<table align="center" border="0" cellpadding="5" cellspacing="0">
+<tbody><tr>
+<td>
+<table align="center" border="1" cellpadding="1" cellspacing="1">
+<caption align="top"><i>aktualizace</i></caption>
+<tbody><tr bgcolor="Lime">
+    <td><center><b>SQL</b></center></td>
+    <td><center><b>Význam</b></center></td>
+  </tr>
+  <tr>
+    <td>DELETE</td>
+    <td>zruš položky</td>
+  </tr>
+  <tr>
+    <td>FROM</td>
+    <td>z</td>
+  </tr>
+  <tr>
+    <td>INSERT</td>
+    <td>vložit položky</td>
+  </tr>
+  <tr>
+    <td>INTO</td>
+    <td>dovnitř do</td>
+  </tr>
+  <tr>
+    <td>SELECT *</td>
+    <td>vybrat všechny</td>
+  </tr>
+  <tr>
+    <td>SET</td>
+    <td>nastavit</td>
+  </tr>
+  <tr>
+    <td>UPDATE</td>
+    <td>aktualizovat položky</td>
+  </tr>
+  <tr>
+    <td>VALUES</td>
+    <td>hodnoty</td>
+  </tr>
+  <tr>
+    <td>WHERE</td>
+    <td>kde</td>
+  </tr>
+</tbody></table>
+</td>
+<td>
+<table align="center" border="0" cellpadding="1" cellspacing="0">
+<tbody><tr>
+  <td>  </td>
+</tr>
+</tbody></table>
+</td>
+<td>
+<table align="center" border="1" cellpadding="1" cellspacing="1">
+<caption align="top"><i>projekce</i></caption>
+<tbody><tr bgcolor="Lime">
+    <th>SQL</th>
+    <th>Význam</th>
+  </tr>
+  <tr>
+    <td>*</td>
+    <td>všechno</td></tr>
+  <tr>
+    <td>AND</td>
+    <td>a současně</td>
+  </tr>
+  <tr>
+    <td>BY</td>
+    <td>podle</td>
+  </tr>
+  <tr>
+    <td>DESC</td>
+    <td>sestupně</td>
+  </tr>
+  <tr>
+    <td>FROM</td>
+    <td>z</td>
+  </tr>
+  <tr>
+    <td>INTO</td>
+    <td>dovnitř do</td>
+  </tr>
+  <tr>
+    <td>NOT</td>
+    <td>není pravda, že</td>
+  </tr>
+  <tr>
+    <td>OR</td>
+    <td>nebo</td>
+  </tr>
+  <tr>
+    <td>ORDER</td>
+    <td>seřaď</td>
+  </tr>
+  <tr>
+    <td>SELECT</td>
+    <td>vyber</td>
+  </tr>
+</tbody></table>
+</td>
+<td>
+<table align="center" border="0" cellpadding="1" cellspacing="0">
+<tbody><tr>
+  <td>  </td>
+</tr>
+</tbody></table>
+</td>
+<td>
+<table align="center" border="1" cellpadding="1" cellspacing="1">
+<caption align="top"><i>selekce</i></caption>
+<tbody><tr bgcolor="Lime">
+    <th>SQL</th>
+    <th>Význam</th>
+  </tr>
+  <tr>
+    <td>_</td>
+    <td>jeden znak</td></tr>
+  <tr>
+    <td>%</td>
+    <td>skupina znaků</td>
+  </tr>
+  <tr>
+    <td>IN</td>
+    <td>je uvnitř</td>
+  </tr>
+  <tr>
+    <td>IS</td>
+    <td>je</td>
+  </tr>
+  <tr>
+    <td>LIKE</td>
+    <td>vypadá jako</td>
+  </tr>
+  <tr>
+    <td>NOT</td>
+    <td>ne</td>
+  </tr>
+  <tr>
+    <td>PERCENT</td>
+    <td>procent</td>
+  </tr>
+  <tr>
+    <td>TOP</td>
+    <td>horních</td>
+  </tr>
+  <tr>
+    <td>WHERE</td>
+    <td>kde platí</td>
+  </tr>
+</tbody></table>
+</td>
+</tr>
+</tbody></table>
+<p class="BEZ"><i><b>Projekce -</b> V databázových systémech ovlivňuje
+konkrétní formulace projekce výsledek. Projekci můžeme realizovat
+takovým příkazem SELECT, který propustí informace o všech řádcích
+tabulky, zatímco informace o sloupcích je změněna projekcí. Projekcí
+tedy rozumíme způsob zobrazení </i></p>
+<p class="BEZ"><i>např. </i></p><pre><i>SELECT jmeno, adresa FROM Ctenar</i></pre><i>  zde je projekcí dán výstup, kde se vypíší jen sloupce JMENO a ADRESA z tabulky CTENAR se všemi příslušejícími řádky.</i><p></p>
+<p class="BEZ"><i><b>Selekce (restrikce) -</b> Jsou to podmínky a omezení pomocí nichž docílíme požadovaného výsledku. </i></p>
+<p>Databáze v SQL je kolekce tabulek a pohledů. Může být definována jedním nebo více schématy.</p>
+<p>Základním konstruktem SQL pro výběr dat je SELECT- FROM-WHERE blok
+(nebo též stručněji SELECT blok), který se skládá ze tří složek
+uvozených příslušnými vyhrazenými slovy:</p>
+<ul type="circle">
+<li> Klauzule SELECT koresponduje s operací projekce (případně spojení
+nebo kartézským součinem) z relační algebry. Obsahuje seznam jmen
+atributů vytvářejících (nepojmenované) schéma relace - pro výsledek
+dotazu reprezentovaného daným SELECT blokem. </li><li> Klauzule FROM obsahuje seznam jmen relací, nad kterými je dotaz definován. 
+</li><li> Klauzule WHERE obsahuje obecně podmínku, která definuje, co
+musí splňovat vyhledávaná data. Kdybychom chtěli formálně vyjádřit
+sémantiku SELECT-FROM-WHERE bloku, lze (v případě, že neuvažujeme
+prázdné hodnoty) použít např. relační algebru. </li></ul>
+<p>Má-li dotaz tvar</p>
+<pre>SELECT a1,a2,...,a3 
+FROM r1,r2,...,rk 
+WHERE &#216; </pre>
+<p>pak ekvivalentní dotaz v relační algebře by byl dán výrazem </p>
+<pre>(r1 x r2 x...xrk)(&#216;)[a1,a2...,aj] </pre>
+<p>Poznamenejme, že zde samozřejmě neřešíme, jak má vypadat podmínka (v
+relační operaci
+selekce byl dovolen pouze Booleovský výraz jednoduchých podmínek) a ke
+kterým relacím odkazují atributy A1 , A2, ... , Aj podmínky lze chápat
+jako TRUE. V relačním SŘBD ovšem dotaz není vyhodnocován tímto značně
+neefektivním způsobem. Ten nám zde slouží pouze pro objasnění sémantiky
+dotazu. </p>
+<p>Na rozdíl od teoretického RMD příkaz daný SELECT-FROM-WHERE blokem
+neeliminuje z výsledku duplicitní n-tice, tzn. že výsledkem vlastně
+není relace, ale kolekce n-tic. Můžeme také říci, že jde o tabulku
+obsahující nějaké (eventuálně některé stejné nebo také žádné) řádky.
+Tuto implicitní volbu lze vyjádřit explicitně pomocí ALL. Chceme-li
+získat skutečně relaci, musí
+se tento požadavek zadat explicitně slovem DISTINCT. Důvod pro toto
+řešení je celkem zřejmý. Jde o implementační potíže, které jsou
+způsobeny režií při odstraňování duplicitních n-tic kolekce. </p>
+<p>V úplné formě bychom mohli zapsat syntaxi dotazu v SQL následovně: </p>
+<pre>SELECT [DISTINCT |ALL] {*|jméno-atrl[jméno-atr2]...}
+FROM jméno-rell [,jméno-rel2]... 
+[WHERE podmínka] 
+[GROUP BY jméno-atrl [,jméno-atr2]... ] 
+[HAVING podmínka]
+[ORDER BY jméno-atr [ASC|DESC][,...]]</pre>
+<p>kde za ORDER BY je seznam atributů, podle kterých chceme uspořádat
+výsledek dotazu. Uspořádání výsledku je zavedeno z ryze praktických
+důvodů a překračuje rámec RMD. </p>
+
+<h2><a name="k1"></a>3.1 Jednoduché dotazy v SQL </h2>
+<a href="#k"><img src="kap3_soubory/toc.gif" alt="Obsah 3. kapitoly"></a>
+<br>
+<p>Pro následující příklady použijeme databázi KNIHOVNA s následujícími tabulkami :</p>
+<br>
+<table align="center" border="0" cellpadding="10" cellspacing="0">
+<tbody><tr>
+<td>
+<table align="left" border="1" cellpadding="1" cellspacing="1">
+<caption align="top"><i>CTENAR</i></caption>
+<tbody><tr bgcolor="#8080ff">
+    <th colspan="1">CISLO</th>
+	<th colspan="1">JMENO</th> 
+	<th colspan="1">ADRESA</th>   
+</tr>
+<tr>
+    <td>100</td>
+    <td>Tomica</td>
+    <td>Orlová</td>
+</tr>
+<tr>
+    <td>101</td>
+    <td>Begovská</td>
+    <td>Karviná</td>
+</tr>
+<tr>
+    <td>102</td>
+    <td>Piš</td>
+    <td>Orlová</td>
+</tr>
+<tr>
+    <td>103</td>
+    <td>Rojíček</td>
+    <td>Bohumín</td>
+</tr>
+<tr>
+    <td>104</td>
+    <td>Macura</td>
+    <td>Orlová</td>
+</tr>
+<tr>
+    <td>105</td>
+    <td>Káňa</td>
+    <td>Bohumín</td>
+</tr>
+<tr>
+    <td>106</td>
+    <td>Černek</td>
+    <td>Orlová</td>
+</tr>
+<tr>
+	<td>107</td>
+    <td>Piš</td>
+    <td>Orlová</td>
+</tr>
+</tbody></table>
+
+</td>
+<td>
+
+<table align="left" border="1" cellpadding="1" cellspacing="1">
+<caption align="top"><i>EXEMPLAR </i></caption>
+<tbody><tr bgcolor="#8080ff">
+    <th colspan="1">ISBN</th>
+	<th colspan="1">ID</th>
+	<th colspan="1">D_NAKUP</th> 
+	<th colspan="1">CENA</th>   
+</tr>
+<tr>
+	<td>1</td>
+    <td>1</td>
+    <td>11.5.1988</td>
+    <td>200</td>
+</tr>
+<tr>
+	<td>2</td>
+    <td>2</td>
+    <td>2.5.1978</td>
+    <td>255</td>
+</tr>
+<tr>
+	<td>2</td>
+    <td>3</td>
+    <td>15.6.1984</td>
+    <td>100</td>
+</tr>
+<tr>
+	<td>3</td>
+    <td>4</td>
+    <td>18.3.2000</td>
+	<td>560</td>
+</tr>
+<tr>
+	<td>2</td>
+    <td>5</td>
+    <td>15.2.2000</td>
+    <td>352</td>
+</tr>
+<tr>
+	<td>7</td>
+    <td>6</td>
+    <td>19.5.1977</td>
+    <td>102</td>
+</tr>
+<tr>
+	<td>8</td>
+    <td>7</td>
+    <td>14.6.1982</td>
+    <td>156</td>
+</tr>
+<tr>
+	<td>4</td>
+	<td>8</td>
+    <td>15.2.1985</td>
+    <td>125</td>
+</tr>
+</tbody></table>
+
+</td>
+</tr>
+
+<tr>
+<td>
+
+<table align="left" border="1" cellpadding="1" cellspacing="1">
+<caption align="top"><i>KNIHA</i></caption>
+<tbody><tr bgcolor="#8080ff">
+    <th colspan="1">ISBN</th>
+	<th colspan="1">NAZEV</th> 
+	<th colspan="1">AUTOR</th>   
+	<th colspan="1">ROK</th>   
+</tr>
+<tr>
+    <td>1</td>
+    <td>Noha</td>
+    <td>Černek</td>
+    <td>1988</td>	
+</tr>
+<tr>
+    <td>2</td>
+    <td>Tučňák</td>
+    <td>Macura</td>
+    <td>1977</td>
+</tr>
+<tr>
+    <td>3</td>
+    <td>Fazole</td>
+    <td>Káňa</td>
+    <td>1978</td>
+</tr>
+<tr>
+    <td>4</td>
+    <td>Chip</td>
+	<td>Široký</td>
+	<td>1981</td>
+</tr>
+<tr>
+    <td>5</td>
+    <td>Killer</td>
+    <td>Mareš</td>
+    <td>1999</td>
+</tr>
+<tr>
+    <td>6</td>
+    <td>Odpor</td>
+    <td>Kolář</td>
+    <td>1977</td>
+</tr>
+<tr>
+    <td>7</td>
+    <td>Policie</td>
+    <td>Kunčický</td>
+    <td>1980</td>
+</tr>
+<tr>
+	<td>8</td>
+    <td>Šef</td>
+    <td>Heňo</td>
+    <td>1972</td>
+</tr>
+</tbody></table>
+
+</td>
+<td>
+
+<table align="left" border="1" cellpadding="1" cellspacing="1">
+<caption align="top"><i>REZERVACE</i></caption>
+<tbody><tr bgcolor="#8080ff">
+    <th colspan="1">ID_R</th>
+    <th colspan="1">CISLO</th>	
+	<th colspan="1">ISBN</th> 
+	<th colspan="1">D_REZ</th>   
+</tr>
+<tr>
+    <td>1</td>
+    <td>100</td>
+    <td>2</td>
+    <td>1.1.2000</td>
+</tr>
+<tr>
+    <td>2</td>
+	<td>108</td>
+    <td>8</td>
+    <td>12.1.2000</td>
+</tr>
+<tr>
+    <td>3</td>
+	<td>105</td>
+    <td>7</td>
+    <td>5.2.2000</td>
+</tr>
+<tr>
+    <td>4</td>
+	<td>102</td>
+    <td>2</td>
+	<td>5.8.2000</td>
+</tr>
+<tr>
+    <td>5</td>
+	<td>108</td>
+    <td>3</td>
+    <td>4.1.2000</td>
+</tr>
+<tr>
+    <td>6</td>
+	<td>101</td>
+    <td>4</td>
+    <td>9.5.2000</td>
+</tr>
+<tr>
+    <td>7</td>
+	<td>108</td>
+    <td>8</td>
+    <td>25.2.2000</td>
+</tr>
+<tr>
+	<td>8</td>
+	<td>107</td>
+    <td>8</td>
+    <td>6.4.2000</td>
+</tr>
+</tbody></table>
+</td>
+</tr>
+</tbody></table>
+<i></i><p><i>V následujících tabulkách je barevně vyznačen výsledek (žlutě) a mezivýsledek (světle modře).</i>
+</p><p>Nejjednodušším příkladem jsou dotazy, kdy chybí nepovinné klauzule WHERE, ORDER BY, GROUP BY , HAVING, atd. </p>
+<p>Požadujeme-li do odpovědi celou relaci nebo její podmnožinu danou selekcí. užívá se za SELECT znak *. </p>
+<b>D1.</b> Vypiš vše z tabulky CTENAR<p> </p>
+<pre>SELECT * FROM Ctenar</pre>
+<table align="center" border="1" cellpadding="1" cellspacing="1">
+<caption align="top"><i>CTENAR</i></caption>
+<tbody><tr bgcolor="#8080ff">
+    <th colspan="1">CISLO</th>
+	<th colspan="1">JMENO</th> 
+	<th colspan="1">ADRESA</th>   
+</tr>
+<tr bgcolor="Yellow">
+    <td>100</td>
+    <td>Tomica</td>
+    <td>Orlová</td>
+</tr>
+<tr bgcolor="Yellow">
+    <td>101</td>
+    <td>Begovská</td>
+    <td>Karviná</td>
+</tr>
+<tr bgcolor="Yellow">
+    <td>102</td>
+    <td>Piš</td>
+    <td>Orlová</td>
+</tr>
+<tr bgcolor="Yellow">
+    <td>103</td>
+    <td>Rojíček</td>
+    <td>Bohumín</td>
+</tr>
+<tr bgcolor="Yellow">
+    <td>104</td>
+    <td>Macura</td>
+    <td>Orlová</td>
+</tr>
+<tr bgcolor="Yellow">
+    <td>105</td>
+    <td>Káňa</td>
+    <td>Bohumín</td>
+</tr>
+<tr bgcolor="Yellow">
+    <td>106</td>
+    <td>Černek</td>
+    <td>Orlová</td>
+</tr>
+<tr bgcolor="Yellow">
+	<td>107</td>
+    <td>Piš</td>
+    <td>Orlová</td>
+</tr>
+</tbody></table>
+<br>
+<b>D2.</b> Vypiš tabulku jmen čtenářů spolu s adresou. (projekce=výběr sloupců)<p> </p> 
+<pre>SELECT jmeno, adresa FROM Ctenar</pre>
+<table align="center" border="1" cellpadding="1" cellspacing="1">
+<caption align="top"><i>CTENAR</i></caption>
+<tbody><tr bgcolor="#8080ff">
+    <th colspan="1">CISLO</th>
+	<th colspan="1">JMENO</th> 
+	<th colspan="1">ADRESA</th>   	
+</tr>
+<tr>
+	<td>100</td>
+    <td bgcolor="Yellow">Tomica</td>
+    <td bgcolor="Yellow">Orlová</td>
+</tr>
+<tr>
+	<td>101</td>
+    <td bgcolor="Yellow">Begovská</td>
+    <td bgcolor="Yellow">Karviná</td>
+</tr>
+<tr>
+	<td>102</td>
+    <td bgcolor="Yellow">Piš</td>
+    <td bgcolor="Yellow">Orlová</td>
+</tr>
+<tr>
+	<td>103</td>
+    <td bgcolor="Yellow">Rojíček</td>
+    <td bgcolor="Yellow">Bohumín</td>
+</tr>
+<tr>
+	<td>104</td>
+    <td bgcolor="Yellow">Macura</td>
+    <td bgcolor="Yellow">Orlová</td>
+</tr>
+<tr>
+	<td>105</td>
+    <td bgcolor="Yellow">Káňa</td>
+    <td bgcolor="Yellow">Bohumín</td>
+</tr>
+<tr>
+	<td>106</td>
+    <td bgcolor="Yellow">Černek</td>
+    <td bgcolor="Yellow">Orlová</td>
+</tr>
+<tr>
+	<td>107</td>
+    <td bgcolor="Yellow">Piš</td>
+    <td bgcolor="Yellow">Orlová</td>
+</tr>
+</tbody></table>
+<p>Protože se můžou vyskytnout dva čtenáři téhož jména na stejné
+adrese, je vhodné odstranit takové duplicity pomocí zadání klauzule
+DISTINCT </p>
+<p class="BEZ"><i>Poznámka -</i> Výsledek SQL dotazu není množina jako
+v relační algebře, ale jsou možné i duplicitní řádky ve výsledné
+tabulce. Pokud je potřebujeme odstranit použijeme klauzule DISTINCT.</p>
+<pre>SELECT DISTINCT jmeno, adresa FROM Ctenar</pre>
+<table align="center" border="1" cellpadding="1" cellspacing="1">
+<caption align="top"><i>CTENAR</i></caption>
+<tbody><tr bgcolor="#8080ff">
+    <th colspan="1">CISLO</th>
+	<th colspan="1">JMENO</th> 
+	<th colspan="1">ADRESA</th>   	
+</tr>
+<tr>
+	<td>100</td>
+    <td bgcolor="Yellow">Tomica</td>
+    <td bgcolor="Yellow">Orlová</td>
+</tr>
+<tr>
+	<td>101</td>
+    <td bgcolor="Yellow">Begovská</td>
+    <td bgcolor="Yellow">Karviná</td>
+</tr>
+<tr>
+	<td>102</td>
+    <td bgcolor="Yellow">Piš</td>
+    <td bgcolor="Yellow">Orlová</td>
+</tr>
+<tr>
+	<td>103</td>
+    <td bgcolor="Yellow">Rojíček</td>
+    <td bgcolor="Yellow">Bohumín</td>
+</tr>
+<tr>
+	<td>104</td>
+    <td bgcolor="Yellow">Macura</td>
+    <td bgcolor="Yellow">Orlová</td>
+</tr>
+<tr>
+	<td>105</td>
+    <td bgcolor="Yellow">Káňa</td>
+    <td bgcolor="Yellow">Bohumín</td>
+</tr>
+<tr>
+	<td>106</td>
+    <td bgcolor="Yellow">Černek</td>
+    <td bgcolor="Yellow">Orlová</td>
+</tr>
+<tr>
+	<td>107</td>
+	<td>Piš</td>
+    <td>Orlová</td>
+</tr>
+</tbody></table>
+<p>V některých SŘBD (např. INFORMIX) se lze setkat v této souvislosti
+kromě DISTINCT i s vyhrazeným slovem UNIQUE. Standard neumožňuje
+použití obou možností. </p>
+<p>Chceme-li mít výslednou tabulku na výstupu uspořádanou např. podle jména čtenáře, zapíšeme </p>
+<pre>SELECT DISTINCT jmeno,adresa FROM Ctenar
+ORDER BY jmeno ASC </pre>
+<p>Výstup je shodný s předchozí úlohou s tím rozdílem, že nyní je
+setříděn podle jména vzestupně což je dáno klauzulí ASC, místo které
+může být klauzule DESC pro sestupné seřazení.</p>
+<b>D3.</b> Vypiš vše z tabulky EXEMPLAR. <p> </p>
+<pre>SELECT * FROM Exemplar</pre>
+<table align="center" border="1" cellpadding="1" cellspacing="1">
+<caption align="top"><i>EXEMPLAR </i></caption>
+<tbody><tr bgcolor="#8080ff">
+    <th colspan="1">ISBN</th>
+	<th colspan="1">ID</th>
+	<th colspan="1">D_NAKUP</th> 
+	<th colspan="1">CENA</th>   
+</tr>
+<tr bgcolor="Yellow">
+	<td>1</td>
+    <td>1</td>
+    <td>11.5.1988</td>
+    <td>200</td>
+</tr>
+<tr bgcolor="Yellow">
+	<td>2</td>
+    <td>2</td>
+    <td>2.5.1978</td>
+    <td>255</td>
+</tr>
+<tr bgcolor="Yellow">
+	<td>2</td>
+    <td>3</td>
+    <td>15.6.1984</td>
+    <td>100</td>
+</tr>
+<tr bgcolor="Yellow">
+	<td>3</td>
+    <td>4</td>
+    <td>18.3.2000</td>
+	<td>560</td>
+</tr>
+<tr bgcolor="Yellow">
+	<td>2</td>
+    <td>5</td>
+    <td>15.2.2000</td>
+    <td>352</td>
+</tr>
+<tr bgcolor="Yellow">
+	<td>7</td>
+    <td>6</td>
+    <td>19.5.1977</td>
+    <td>102</td>
+</tr>
+<tr bgcolor="Yellow">
+	<td>8</td>
+    <td>7</td>
+    <td>14.6.1982</td>
+    <td>156</td>
+</tr>
+<tr bgcolor="Yellow">
+	<td>4</td>
+	<td>8</td>
+    <td>15.2.1985</td>
+    <td>125</td>
+</tr>
+</tbody></table>
+<br>
+<b>D4.</b>Vypiš z relace EXEMPLAR n-tice týkající se nákupu po 20.3.1985. (selekce=výběr řádků) <p></p>
+<pre>SELECT * FROM Exemplar 
+  WHERE d_nakup&gt;'3/20/85' </pre>
+<table align="center" border="1" cellpadding="1" cellspacing="1">
+<caption align="top"><i>EXEMPLAR </i></caption>
+<tbody><tr bgcolor="#8080ff">
+    <th colspan="1">ISBN</th>
+	<th colspan="1">ID</th>
+	<th colspan="1">D_NAKUP</th> 
+	<th colspan="1">CENA</th>   
+</tr>
+<tr bgcolor="Yellow">
+	<td>1</td>
+    <td>1</td>
+    <td>11.5.1988</td>
+    <td>200</td>
+</tr>
+<tr>
+	<td>2</td>
+    <td>2</td>
+    <td>2.5.1978</td>
+    <td>255</td>
+</tr>
+<tr>
+	<td>2</td>
+    <td>3</td>
+    <td>15.6.1984</td>
+    <td>100</td>
+</tr>
+<tr bgcolor="Yellow">
+	<td>3</td>
+    <td>4</td>
+    <td>18.3.2000</td>
+	<td>560</td>
+</tr>
+<tr bgcolor="Yellow">
+	<td>2</td>
+    <td>5</td>
+    <td>15.2.2000</td>
+    <td>352</td>
+</tr>
+<tr>
+	<td>7</td>
+    <td>6</td>
+    <td>19.5.1977</td>
+    <td>102</td>
+</tr>
+<tr>
+	<td>8</td>
+    <td>7</td>
+    <td>14.6.1982</td>
+    <td>156</td>
+</tr>
+<tr>
+	<td>4</td>
+	<td>8</td>
+    <td>15.2.1985</td>
+    <td>125</td>
+</tr>
+</tbody></table>
+<p>Zatím byla ve výrazu za WHERE použita pouze jednoduchá podmínka.
+Obecně lze zadat libovolný Booleovský výraz používající operátory =,
+&lt;&gt; nebo != (není rovno), &lt;, &gt;, &lt;=, &gt;= . dále pak AND,
+OR, NOT (stejně jako v podmínce v definici selekce). Pro zjednodušeni
+intervalových podmínek zahrnuje SQL také porovnávací operátor BETWEEN.
+Výraz </p>
+<pre>d_nakup &gt; `3/20/88' AND d_nakup &lt; `3/25/88'</pre>
+<p>lze pak zapsat jako </p>
+<pre>d_nakup BETWEEN `3/20/88' AND `3/25/88' </pre>
+<p>Booleovský výraz kombinuje jednak jednoduché podmínky, jednak i další typy podmínek. o kterých se zmíníme později.</p>
+<p>Zajímavější dotazy se týkají případů, kdy jsou data do výsledku kombinována z více relací. </p>
+<b>D5.</b>Ukázka práce se dvěma tabulkami najednou bez selekcí.<p> </p>
+<center><b class="RED">!!! Pokud je za klíčovým slovem FROM uvedeno více tabulek (2 a víc) výsledkem je kartézský součin. !!!</b></center><br>
+<pre>SELECT * FROM Kniha, Rezervace</pre>
+<table align="center" border="1" cellpadding="1" cellspacing="1">
+<caption align="top"><i>Kartézský součin tabulek KNIHA a REZERVACE</i></caption>
+<tbody><tr bgcolor="#8080ff">
+    <th colspan="1">ISBN</th>
+	<th colspan="1">NAZEV</th> 
+	<th colspan="1">AUTOR</th>   
+	<th colspan="1">ROK</th>   
+    <th colspan="1">ID_R</th>
+    <th colspan="1">CISLO</th>	
+	<th colspan="1">ISBN</th> 
+	<th colspan="1">D_REZ</th>   
+</tr>	
+</tbody><tbody bgcolor="Yellow">
+<tr>
+    <td>1</td>
+    <td>Noha</td>
+    <td>Černek</td>
+    <td>1988</td>	
+    <td>1</td>
+    <td>100</td>
+    <td>2</td>
+    <td>1.1.2000</td>
+</tr>
+<tr>
+    <td>1</td>
+    <td>Noha</td>
+    <td>Černek</td>
+    <td>1988</td>	
+    <td>2</td>
+	<td>108</td>
+    <td>8</td>
+    <td>12.1.2000</td>
+</tr>
+<tr>
+    <td>1</td>
+    <td>Noha</td>
+    <td>Černek</td>
+    <td>1988</td>	
+    <td>3</td>
+	<td>105</td>
+    <td>7</td>
+    <td>5.2.2000</td>
+</tr>
+<tr>
+    <td>1</td>
+    <td>Noha</td>
+    <td>Černek</td>
+    <td>1988</td>	
+    <td>4</td>
+	<td>102</td>
+    <td>2</td>
+	<td>5.8.2000</td>
+</tr>
+<tr>
+    <td>1</td>
+    <td>Noha</td>
+    <td>Černek</td>
+    <td>1988</td>	
+    <td>5</td>
+	<td>108</td>
+    <td>3</td>
+    <td>4.1.2000</td>
+</tr>
+<tr>
+    <td>1</td>
+    <td>Noha</td>
+    <td>Černek</td>
+    <td>1988</td>	
+    <td>6</td>
+	<td>101</td>
+    <td>4</td>
+    <td>9.5.2000</td>
+</tr>
+<tr>
+    <td>1</td>
+    <td>Noha</td>
+    <td>Černek</td>
+    <td>1988</td>	
+    <td>7</td>
+	<td>108</td>
+    <td>8</td>
+    <td>25.2.2000</td>
+</tr>
+<tr>
+    <td>1</td>
+    <td>Noha</td>
+    <td>Černek</td>
+    <td>1988</td>	
+	<td>8</td>
+	<td>107</td>
+    <td>8</td>
+    <td>6.4.2000</td>
+</tr>
+<tr>
+    <td>2</td>
+    <td>Tučňák</td>
+    <td>Macura</td>
+    <td>1977</td>
+    <td>1</td>
+    <td>100</td>
+    <td>2</td>
+    <td>1.1.2000</td>
+</tr>
+<tr>
+    <td>2</td>
+    <td>Tučňák</td>
+    <td>Macura</td>
+    <td>1977</td>
+    <td>2</td>
+	<td>108</td>
+    <td>8</td>
+    <td>12.1.2000</td>
+</tr>
+<tr>
+    <td>2</td>
+    <td>Tučňák</td>
+    <td>Macura</td>
+    <td>1977</td>
+    <td>3</td>
+	<td>105</td>
+    <td>7</td>
+    <td>5.2.2000</td>
+</tr>
+<tr>
+    <td>2</td>
+    <td>Tučňák</td>
+    <td>Macura</td>
+    <td>1977</td>
+    <td>4</td>
+	<td>102</td>
+    <td>2</td>
+	<td>5.8.2000</td>
+</tr>
+<tr>
+    <td>2</td>
+    <td>Tučňák</td>
+    <td>Macura</td>
+    <td>1977</td>
+    <td>5</td>
+	<td>108</td>
+    <td>3</td>
+    <td>4.1.2000</td>
+</tr>
+<tr>
+    <td>2</td>
+    <td>Tučňák</td>
+    <td>Macura</td>
+    <td>1977</td>
+    <td>6</td>
+	<td>101</td>
+    <td>4</td>
+    <td>9.5.2000</td>
+</tr>
+<tr>
+    <td>2</td>
+    <td>Tučňák</td>
+    <td>Macura</td>
+    <td>1977</td>
+    <td>7</td>
+	<td>108</td>
+    <td>8</td>
+    <td>25.2.2000</td>
+</tr>
+<tr>    
+    <td>2</td>
+    <td>Tučňák</td>
+    <td>Macura</td>
+    <td>1977</td>
+	<td>8</td>
+	<td>107</td>
+    <td>8</td>
+    <td>6.4.2000</td>
+</tr>
+<tr>
+    <td>3</td>
+    <td>Fazole</td>
+    <td>Káňa</td>
+    <td>1978</td>
+    <td>1</td>
+    <td>100</td>
+    <td>2</td>
+    <td>1.1.2000</td>
+</tr>
+<tr>
+    <td>3</td>
+    <td>Fazole</td>
+    <td>Káňa</td>
+    <td>1978</td>
+    <td>2</td>
+	<td>108</td>
+    <td>8</td>
+    <td>12.1.2000</td>
+</tr>
+<tr>
+    <td>3</td>
+    <td>Fazole</td>
+    <td>Káňa</td>
+    <td>1978</td>
+    <td>3</td>
+	<td>105</td>
+    <td>7</td>
+    <td>5.2.2000</td>
+</tr>
+<tr>
+    <td>3</td>
+    <td>Fazole</td>
+    <td>Káňa</td>
+    <td>1978</td>
+    <td>4</td>
+	<td>102</td>
+    <td>2</td>
+	<td>5.8.2000</td>
+</tr>
+<tr>
+    <td>3</td>
+    <td>Fazole</td>
+    <td>Káňa</td>
+    <td>1978</td>
+    <td>5</td>
+	<td>108</td>
+    <td>3</td>
+    <td>4.1.2000</td>
+</tr>
+<tr>
+    <td>3</td>
+    <td>Fazole</td>
+    <td>Káňa</td>
+    <td>1978</td>
+    <td>6</td>
+	<td>101</td>
+    <td>4</td>
+    <td>9.5.2000</td>
+</tr>
+<tr>
+    <td>3</td>
+    <td>Fazole</td>
+    <td>Káňa</td>
+    <td>1978</td>
+    <td>7</td>
+	<td>108</td>
+    <td>8</td>
+    <td>25.2.2000</td>
+</tr>
+<tr>
+    <td>3</td>
+    <td>Fazole</td>
+    <td>Káňa</td>
+    <td>1978</td>
+	<td>8</td>
+	<td>107</td>
+    <td>8</td>
+    <td>6.4.2000</td>
+</tr>
+<tr>
+    <td>4</td>
+    <td>Chip</td>
+	<td>Široký</td>
+	<td>1981</td>
+    <td>1</td>
+    <td>100</td>
+    <td>2</td>
+    <td>1.1.2000</td>
+</tr>
+<tr>
+    <td>4</td>
+    <td>Chip</td>
+	<td>Široký</td>
+	<td>1981</td>
+    <td>2</td>
+	<td>108</td>
+    <td>8</td>
+    <td>12.1.2000</td>
+</tr>
+<tr>
+    <td>4</td>
+    <td>Chip</td>
+	<td>Široký</td>
+	<td>1981</td>
+    <td>3</td>
+	<td>105</td>
+    <td>7</td>
+    <td>5.2.2000</td>
+</tr>
+<tr>
+    <td>4</td>
+    <td>Chip</td>
+	<td>Široký</td>
+	<td>1981</td>
+    <td>4</td>
+	<td>102</td>
+    <td>2</td>
+	<td>5.8.2000</td>
+</tr>
+<tr>
+    <td>4</td>
+    <td>Chip</td>
+	<td>Široký</td>
+	<td>1981</td>
+    <td>5</td>
+	<td>108</td>
+    <td>3</td>
+    <td>4.1.2000</td>
+</tr>
+<tr>
+    <td>4</td>
+    <td>Chip</td>
+	<td>Široký</td>
+	<td>1981</td>
+    <td>6</td>
+	<td>101</td>
+    <td>4</td>
+    <td>9.5.2000</td>
+</tr>
+<tr>
+    <td>4</td>
+    <td>Chip</td>
+	<td>Široký</td>
+	<td>1981</td>
+    <td>7</td>
+	<td>108</td>
+    <td>8</td>
+    <td>25.2.2000</td>
+</tr>
+<tr>
+    <td>4</td>
+    <td>Chip</td>
+	<td>Široký</td>
+	<td>1981</td>
+	<td>8</td>
+	<td>107</td>
+    <td>8</td>
+    <td>6.4.2000</td>
+</tr>
+<tr>
+    <td>5</td>
+    <td>Killer</td>
+    <td>Mareš</td>
+    <td>1999</td>
+    <td>1</td>
+    <td>100</td>
+    <td>2</td>
+    <td>1.1.2000</td>
+</tr>
+<tr>
+    <td>5</td>
+    <td>Killer</td>
+    <td>Mareš</td>
+    <td>1999</td>
+    <td>2</td>
+	<td>108</td>
+    <td>8</td>
+    <td>12.1.2000</td>
+</tr>
+<tr>
+    <td>5</td>
+    <td>Killer</td>
+    <td>Mareš</td>
+    <td>1999</td>
+    <td>3</td>
+	<td>105</td>
+    <td>7</td>
+    <td>5.2.2000</td>
+</tr>
+<tr>
+    <td>5</td>
+    <td>Killer</td>
+    <td>Mareš</td>
+    <td>1999</td>
+    <td>4</td>
+	<td>102</td>
+    <td>2</td>
+	<td>5.8.2000</td>
+</tr>
+<tr>
+    <td>5</td>
+    <td>Killer</td>
+    <td>Mareš</td>
+    <td>1999</td>
+    <td>5</td>
+	<td>108</td>
+    <td>3</td>
+    <td>4.1.2000</td>
+</tr>
+<tr>
+    <td>5</td>
+    <td>Killer</td>
+    <td>Mareš</td>
+    <td>1999</td>
+    <td>6</td>
+	<td>101</td>
+    <td>4</td>
+    <td>9.5.2000</td>
+</tr>
+<tr>
+    <td>5</td>
+    <td>Killer</td>
+    <td>Mareš</td>
+    <td>1999</td>
+    <td>7</td>
+	<td>108</td>
+    <td>8</td>
+    <td>25.2.2000</td>
+</tr>
+<tr>
+    <td>5</td>
+    <td>Killer</td>
+    <td>Mareš</td>
+    <td>1999</td>
+	<td>8</td>
+	<td>107</td>
+    <td>8</td>
+    <td>6.4.2000</td>
+</tr>
+<tr>
+    <td>6</td>
+    <td>Odpor</td>
+    <td>Kolář</td>
+    <td>1977</td>
+    <td>1</td>
+    <td>100</td>
+    <td>2</td>
+    <td>1.1.2000</td>
+</tr>
+<tr>
+    <td>6</td>
+    <td>Odpor</td>
+    <td>Kolář</td>
+    <td>1977</td>
+    <td>2</td>
+	<td>108</td>
+    <td>8</td>
+    <td>12.1.2000</td>
+</tr>
+<tr>
+    <td>6</td>
+    <td>Odpor</td>
+    <td>Kolář</td>
+    <td>1977</td>
+    <td>3</td>
+	<td>105</td>
+    <td>7</td>
+    <td>5.2.2000</td>
+</tr>
+<tr>
+    <td>6</td>
+    <td>Odpor</td>
+    <td>Kolář</td>
+    <td>1977</td>
+    <td>4</td>
+	<td>102</td>
+    <td>2</td>
+	<td>5.8.2000</td>
+</tr>
+<tr>
+    <td>6</td>
+    <td>Odpor</td>
+    <td>Kolář</td>
+    <td>1977</td>
+    <td>5</td>
+	<td>108</td>
+    <td>3</td>
+    <td>4.1.2000</td>
+</tr>
+<tr>
+    <td>6</td>
+    <td>Odpor</td>
+    <td>Kolář</td>
+    <td>1977</td>
+    <td>6</td>
+	<td>101</td>
+    <td>4</td>
+    <td>9.5.2000</td>
+</tr>
+<tr>
+    <td>6</td>
+    <td>Odpor</td>
+    <td>Kolář</td>
+    <td>1977</td>
+    <td>7</td>
+	<td>108</td>
+    <td>8</td>
+    <td>25.2.2000</td>
+</tr>
+<tr>
+    <td>6</td>
+    <td>Odpor</td>
+    <td>Kolář</td>
+    <td>1977</td>
+	<td>8</td>
+	<td>107</td>
+    <td>8</td>
+    <td>6.4.2000</td>
+</tr>
+<tr>
+    <td>7</td>
+    <td>Policie</td>
+    <td>Kunčický</td>
+    <td>1980</td>
+    <td>1</td>
+    <td>100</td>
+    <td>2</td>
+    <td>1.1.2000</td>
+</tr>
+<tr>
+    <td>7</td>
+    <td>Policie</td>
+    <td>Kunčický</td>
+    <td>1980</td>
+    <td>2</td>
+	<td>108</td>
+    <td>8</td>
+    <td>12.1.2000</td>
+</tr>
+<tr>
+    <td>7</td>
+    <td>Policie</td>
+    <td>Kunčický</td>
+    <td>1980</td>
+    <td>3</td>
+	<td>105</td>
+    <td>7</td>
+    <td>5.2.2000</td>
+</tr>
+<tr>
+    <td>7</td>
+    <td>Policie</td>
+    <td>Kunčický</td>
+    <td>1980</td>
+    <td>4</td>
+	<td>102</td>
+    <td>2</td>
+	<td>5.8.2000</td>
+</tr>
+<tr>
+    <td>7</td>
+    <td>Policie</td>
+    <td>Kunčický</td>
+    <td>1980</td>
+    <td>5</td>
+	<td>108</td>
+    <td>3</td>
+    <td>4.1.2000</td>
+</tr>
+<tr>
+    <td>7</td>
+    <td>Policie</td>
+    <td>Kunčický</td>
+    <td>1980</td>
+    <td>6</td>
+	<td>101</td>
+    <td>4</td>
+    <td>9.5.2000</td>
+</tr>
+<tr>
+    <td>7</td>
+    <td>Policie</td>
+    <td>Kunčický</td>
+    <td>1980</td>
+    <td>7</td>
+	<td>108</td>
+    <td>8</td>
+    <td>25.2.2000</td>
+</tr>
+<tr>
+    <td>7</td>
+    <td>Policie</td>
+    <td>Kunčický</td>
+    <td>1980</td>
+	<td>8</td>
+	<td>107</td>
+    <td>8</td>
+    <td>6.4.2000</td>
+</tr>
+<tr>
+	<td>8</td>
+    <td>Šef</td>
+    <td>Heňo</td>
+    <td>1972</td>
+    <td>1</td>
+    <td>100</td>
+    <td>2</td>
+    <td>1.1.2000</td>
+</tr>
+<tr>
+	<td>8</td>
+    <td>Šef</td>
+    <td>Heňo</td>
+    <td>1972</td>
+    <td>2</td>
+	<td>108</td>
+    <td>8</td>
+    <td>12.1.2000</td>
+</tr>
+<tr>
+	<td>8</td>
+    <td>Šef</td>
+    <td>Heňo</td>
+    <td>1972</td>
+    <td>3</td>
+	<td>105</td>
+    <td>7</td>
+    <td>5.2.2000</td>
+</tr>
+<tr>
+	<td>8</td>
+    <td>Šef</td>
+    <td>Heňo</td>
+    <td>1972</td>
+    <td>4</td>
+	<td>102</td>
+    <td>2</td>
+	<td>5.8.2000</td>
+</tr>
+<tr>
+	<td>8</td>
+    <td>Šef</td>
+    <td>Heňo</td>
+    <td>1972</td>
+    <td>5</td>
+	<td>108</td>
+    <td>3</td>
+    <td>4.1.2000</td>
+</tr>
+<tr>
+	<td>8</td>
+    <td>Šef</td>
+    <td>Heňo</td>
+    <td>1972</td>
+    <td>6</td>
+	<td>101</td>
+    <td>4</td>
+    <td>9.5.2000</td>
+</tr>
+<tr>
+	<td>8</td>
+    <td>Šef</td>
+    <td>Heňo</td>
+    <td>1972</td>
+    <td>7</td>
+	<td>108</td>
+    <td>8</td>
+    <td>25.2.2000</td>
+</tr>
+<tr>
+    <td>8</td>
+    <td>Šef</td>
+    <td>Heňo</td>
+    <td>1972</td>
+	<td>8</td>
+	<td>107</td>
+    <td>8</td>
+    <td>6.4.2000</td>
+</tr>
+</tbody>
+</table>
+<br>
+<b>D6.</b>Vypiš všechny údaje o autorech, kteří mají rezervovanou libovolnou knihu.<p> </p>
+<pre>SELECT * FROM Kniha, Rezervace
+  WHERE Kniha.isbn = Rezervace.isbn </pre>
+<table align="center" border="1" cellpadding="1" cellspacing="1">
+<caption align="top"><i>Kartézský součin tabulek KNIHA a REZERVACE</i></caption>
+<tbody><tr bgcolor="#8080ff">
+    <th colspan="1">ISBN</th>
+	<th colspan="1">NAZEV</th> 
+	<th colspan="1">AUTOR</th>   
+	<th colspan="1">ROK</th>   
+    <th colspan="1">ID_R</th>
+    <th colspan="1">CISLO</th>	
+	<th colspan="1">ISBN</th> 
+	<th colspan="1">D_REZ</th>   
+</tr>	
+<tr>
+</tr><tr>
+    <td>1</td>
+    <td>Noha</td>
+    <td>Černek</td>
+    <td>1988</td>	
+    <td>1</td>
+    <td>100</td>
+    <td>2</td>
+    <td>1.1.2000</td>
+</tr>
+<tr>
+    <td>1</td>
+    <td>Noha</td>
+    <td>Černek</td>
+    <td>1988</td>	
+    <td>2</td>
+	<td>108</td>
+    <td>8</td>
+    <td>12.1.2000</td>
+</tr>
+<tr>
+    <td>1</td>
+    <td>Noha</td>
+    <td>Černek</td>
+    <td>1988</td>	
+    <td>3</td>
+	<td>105</td>
+    <td>7</td>
+    <td>5.2.2000</td>
+</tr>
+<tr>
+    <td>1</td>
+    <td>Noha</td>
+    <td>Černek</td>
+    <td>1988</td>	
+    <td>4</td>
+	<td>102</td>
+    <td>2</td>
+	<td>5.8.2000</td>
+</tr>
+<tr>
+    <td>1</td>
+    <td>Noha</td>
+    <td>Černek</td>
+    <td>1988</td>	
+    <td>5</td>
+	<td>108</td>
+    <td>3</td>
+    <td>4.1.2000</td>
+</tr>
+<tr>
+    <td>1</td>
+    <td>Noha</td>
+    <td>Černek</td>
+    <td>1988</td>	
+    <td>6</td>
+	<td>101</td>
+    <td>4</td>
+    <td>9.5.2000</td>
+</tr>
+<tr>
+    <td>1</td>
+    <td>Noha</td>
+    <td>Černek</td>
+    <td>1988</td>	
+    <td>7</td>
+	<td>108</td>
+    <td>8</td>
+    <td>25.2.2000</td>
+</tr>
+<tr>
+    <td>1</td>
+    <td>Noha</td>
+    <td>Černek</td>
+    <td>1988</td>	
+	<td>8</td>
+	<td>107</td>
+    <td>8</td>
+    <td>6.4.2000</td>
+</tr>
+<tr bgcolor="Yellow">
+    <td>2</td>
+    <td>Tučňák</td>
+    <td>Macura</td>
+    <td>1977</td>
+    <td>1</td>
+    <td>100</td>
+    <td>2</td>
+    <td>1.1.2000</td>
+</tr>
+<tr>
+    <td>2</td>
+    <td>Tučňák</td>
+    <td>Macura</td>
+    <td>1977</td>
+    <td>2</td>
+	<td>108</td>
+    <td>8</td>
+    <td>12.1.2000</td>
+</tr>
+<tr>
+    <td>2</td>
+    <td>Tučňák</td>
+    <td>Macura</td>
+    <td>1977</td>
+    <td>3</td>
+	<td>105</td>
+    <td>7</td>
+    <td>5.2.2000</td>
+</tr>
+<tr bgcolor="Yellow">
+    <td>2</td>
+    <td>Tučňák</td>
+    <td>Macura</td>
+    <td>1977</td>
+    <td>4</td>
+	<td>102</td>
+    <td>2</td>
+	<td>5.8.2000</td>
+</tr>
+<tr>
+    <td>2</td>
+    <td>Tučňák</td>
+    <td>Macura</td>
+    <td>1977</td>
+    <td>5</td>
+	<td>108</td>
+    <td>3</td>
+    <td>4.1.2000</td>
+</tr>
+<tr>
+    <td>2</td>
+    <td>Tučňák</td>
+    <td>Macura</td>
+    <td>1977</td>
+    <td>6</td>
+	<td>101</td>
+    <td>4</td>
+    <td>9.5.2000</td>
+</tr>
+<tr>
+    <td>2</td>
+    <td>Tučňák</td>
+    <td>Macura</td>
+    <td>1977</td>
+    <td>7</td>
+	<td>108</td>
+    <td>8</td>
+    <td>25.2.2000</td>
+</tr>
+<tr>    
+    <td>2</td>
+    <td>Tučňák</td>
+    <td>Macura</td>
+    <td>1977</td>
+	<td>8</td>
+	<td>107</td>
+    <td>8</td>
+    <td>6.4.2000</td>
+</tr>
+<tr>
+    <td>3</td>
+    <td>Fazole</td>
+    <td>Káňa</td>
+    <td>1978</td>
+    <td>1</td>
+    <td>100</td>
+    <td>2</td>
+    <td>1.1.2000</td>
+</tr>
+<tr>
+    <td>3</td>
+    <td>Fazole</td>
+    <td>Káňa</td>
+    <td>1978</td>
+    <td>2</td>
+	<td>108</td>
+    <td>8</td>
+    <td>12.1.2000</td>
+</tr>
+<tr>
+    <td>3</td>
+    <td>Fazole</td>
+    <td>Káňa</td>
+    <td>1978</td>
+    <td>3</td>
+	<td>105</td>
+    <td>7</td>
+    <td>5.2.2000</td>
+</tr>
+<tr>
+    <td>3</td>
+    <td>Fazole</td>
+    <td>Káňa</td>
+    <td>1978</td>
+    <td>4</td>
+	<td>102</td>
+    <td>2</td>
+	<td>5.8.2000</td>
+</tr>
+<tr bgcolor="Yellow">
+    <td>3</td>
+    <td>Fazole</td>
+    <td>Káňa</td>
+    <td>1978</td>
+    <td>5</td>
+	<td>108</td>
+    <td>3</td>
+    <td>4.1.2000</td>
+</tr>
+<tr>
+    <td>3</td>
+    <td>Fazole</td>
+    <td>Káňa</td>
+    <td>1978</td>
+    <td>6</td>
+	<td>101</td>
+    <td>4</td>
+    <td>9.5.2000</td>
+</tr>
+<tr>
+    <td>3</td>
+    <td>Fazole</td>
+    <td>Káňa</td>
+    <td>1978</td>
+    <td>7</td>
+	<td>108</td>
+    <td>8</td>
+    <td>25.2.2000</td>
+</tr>
+<tr>
+    <td>3</td>
+    <td>Fazole</td>
+    <td>Káňa</td>
+    <td>1978</td>
+	<td>8</td>
+	<td>107</td>
+    <td>8</td>
+    <td>6.4.2000</td>
+</tr>
+<tr>
+    <td>4</td>
+    <td>Chip</td>
+	<td>Široký</td>
+	<td>1981</td>
+    <td>1</td>
+    <td>100</td>
+    <td>2</td>
+    <td>1.1.2000</td>
+</tr>
+<tr>
+    <td>4</td>
+    <td>Chip</td>
+	<td>Široký</td>
+	<td>1981</td>
+    <td>2</td>
+	<td>108</td>
+    <td>8</td>
+    <td>12.1.2000</td>
+</tr>
+<tr>
+    <td>4</td>
+    <td>Chip</td>
+	<td>Široký</td>
+	<td>1981</td>
+    <td>3</td>
+	<td>105</td>
+    <td>7</td>
+    <td>5.2.2000</td>
+</tr>
+<tr>
+    <td>4</td>
+    <td>Chip</td>
+	<td>Široký</td>
+	<td>1981</td>
+    <td>4</td>
+	<td>102</td>
+    <td>2</td>
+	<td>5.8.2000</td>
+</tr>
+<tr>
+    <td>4</td>
+    <td>Chip</td>
+	<td>Široký</td>
+	<td>1981</td>
+    <td>5</td>
+	<td>108</td>
+    <td>3</td>
+    <td>4.1.2000</td>
+</tr>
+<tr bgcolor="Yellow">
+    <td>4</td>
+    <td>Chip</td>
+	<td>Široký</td>
+	<td>1981</td>
+    <td>6</td>
+	<td>101</td>
+    <td>4</td>
+    <td>9.5.2000</td>
+</tr>
+<tr>
+    <td>4</td>
+    <td>Chip</td>
+	<td>Široký</td>
+	<td>1981</td>
+    <td>7</td>
+	<td>108</td>
+    <td>8</td>
+    <td>25.2.2000</td>
+</tr>
+<tr>
+    <td>4</td>
+    <td>Chip</td>
+	<td>Široký</td>
+	<td>1981</td>
+	<td>8</td>
+	<td>107</td>
+    <td>8</td>
+    <td>6.4.2000</td>
+</tr>
+<tr>
+    <td>5</td>
+    <td>Killer</td>
+    <td>Mareš</td>
+    <td>1999</td>
+    <td>1</td>
+    <td>100</td>
+    <td>2</td>
+    <td>1.1.2000</td>
+</tr>
+<tr>
+    <td>5</td>
+    <td>Killer</td>
+    <td>Mareš</td>
+    <td>1999</td>
+    <td>2</td>
+	<td>108</td>
+    <td>8</td>
+    <td>12.1.2000</td>
+</tr>
+<tr>
+    <td>5</td>
+    <td>Killer</td>
+    <td>Mareš</td>
+    <td>1999</td>
+    <td>3</td>
+	<td>105</td>
+    <td>7</td>
+    <td>5.2.2000</td>
+</tr>
+<tr>
+    <td>5</td>
+    <td>Killer</td>
+    <td>Mareš</td>
+    <td>1999</td>
+    <td>4</td>
+	<td>102</td>
+    <td>2</td>
+	<td>5.8.2000</td>
+</tr>
+<tr>
+    <td>5</td>
+    <td>Killer</td>
+    <td>Mareš</td>
+    <td>1999</td>
+    <td>5</td>
+	<td>108</td>
+    <td>3</td>
+    <td>4.1.2000</td>
+</tr>
+<tr>
+    <td>5</td>
+    <td>Killer</td>
+    <td>Mareš</td>
+    <td>1999</td>
+    <td>6</td>
+	<td>101</td>
+    <td>4</td>
+    <td>9.5.2000</td>
+</tr>
+<tr>
+    <td>5</td>
+    <td>Killer</td>
+    <td>Mareš</td>
+    <td>1999</td>
+    <td>7</td>
+	<td>108</td>
+    <td>8</td>
+    <td>25.2.2000</td>
+</tr>
+<tr>
+    <td>5</td>
+    <td>Killer</td>
+    <td>Mareš</td>
+    <td>1999</td>
+	<td>8</td>
+	<td>107</td>
+    <td>8</td>
+    <td>6.4.2000</td>
+</tr>
+<tr>
+    <td>6</td>
+    <td>Odpor</td>
+    <td>Kolář</td>
+    <td>1977</td>
+    <td>1</td>
+    <td>100</td>
+    <td>2</td>
+    <td>1.1.2000</td>
+</tr>
+<tr>
+    <td>6</td>
+    <td>Odpor</td>
+    <td>Kolář</td>
+    <td>1977</td>
+    <td>2</td>
+	<td>108</td>
+    <td>8</td>
+    <td>12.1.2000</td>
+</tr>
+<tr>
+    <td>6</td>
+    <td>Odpor</td>
+    <td>Kolář</td>
+    <td>1977</td>
+    <td>3</td>
+	<td>105</td>
+    <td>7</td>
+    <td>5.2.2000</td>
+</tr>
+<tr>
+    <td>6</td>
+    <td>Odpor</td>
+    <td>Kolář</td>
+    <td>1977</td>
+    <td>4</td>
+	<td>102</td>
+    <td>2</td>
+	<td>5.8.2000</td>
+</tr>
+<tr>
+    <td>6</td>
+    <td>Odpor</td>
+    <td>Kolář</td>
+    <td>1977</td>
+    <td>5</td>
+	<td>108</td>
+    <td>3</td>
+    <td>4.1.2000</td>
+</tr>
+<tr>
+    <td>6</td>
+    <td>Odpor</td>
+    <td>Kolář</td>
+    <td>1977</td>
+    <td>6</td>
+	<td>101</td>
+    <td>4</td>
+    <td>9.5.2000</td>
+</tr>
+<tr>
+    <td>6</td>
+    <td>Odpor</td>
+    <td>Kolář</td>
+    <td>1977</td>
+    <td>7</td>
+	<td>108</td>
+    <td>8</td>
+    <td>25.2.2000</td>
+</tr>
+<tr>
+    <td>6</td>
+    <td>Odpor</td>
+    <td>Kolář</td>
+    <td>1977</td>
+	<td>8</td>
+	<td>107</td>
+    <td>8</td>
+    <td>6.4.2000</td>
+</tr>
+<tr>
+    <td>7</td>
+    <td>Policie</td>
+    <td>Kunčický</td>
+    <td>1980</td>
+    <td>1</td>
+    <td>100</td>
+    <td>2</td>
+    <td>1.1.2000</td>
+</tr>
+<tr>
+    <td>7</td>
+    <td>Policie</td>
+    <td>Kunčický</td>
+    <td>1980</td>
+    <td>2</td>
+	<td>108</td>
+    <td>8</td>
+    <td>12.1.2000</td>
+</tr>
+<tr bgcolor="Yellow">
+    <td>7</td>
+    <td>Policie</td>
+    <td>Kunčický</td>
+    <td>1980</td>
+    <td>3</td>
+	<td>105</td>
+    <td>7</td>
+    <td>5.2.2000</td>
+</tr>
+<tr>
+    <td>7</td>
+    <td>Policie</td>
+    <td>Kunčický</td>
+    <td>1980</td>
+    <td>4</td>
+	<td>102</td>
+    <td>2</td>
+	<td>5.8.2000</td>
+</tr>
+<tr>
+    <td>7</td>
+    <td>Policie</td>
+    <td>Kunčický</td>
+    <td>1980</td>
+    <td>5</td>
+	<td>108</td>
+    <td>3</td>
+    <td>4.1.2000</td>
+</tr>
+<tr>
+    <td>7</td>
+    <td>Policie</td>
+    <td>Kunčický</td>
+    <td>1980</td>
+    <td>6</td>
+	<td>101</td>
+    <td>4</td>
+    <td>9.5.2000</td>
+</tr>
+<tr>
+    <td>7</td>
+    <td>Policie</td>
+    <td>Kunčický</td>
+    <td>1980</td>
+    <td>7</td>
+	<td>108</td>
+    <td>8</td>
+    <td>25.2.2000</td>
+</tr>
+<tr>
+    <td>7</td>
+    <td>Policie</td>
+    <td>Kunčický</td>
+    <td>1980</td>
+	<td>8</td>
+	<td>107</td>
+    <td>8</td>
+    <td>6.4.2000</td>
+</tr>
+<tr>
+	<td>8</td>
+    <td>Šef</td>
+    <td>Heňo</td>
+    <td>1972</td>
+    <td>1</td>
+    <td>100</td>
+    <td>2</td>
+    <td>1.1.2000</td>
+</tr>
+<tr bgcolor="Yellow">
+	<td>8</td>
+    <td>Šef</td>
+    <td>Heňo</td>
+    <td>1972</td>
+    <td>2</td>
+	<td>108</td>
+    <td>8</td>
+    <td>12.1.2000</td>
+</tr>
+<tr>
+	<td>8</td>
+    <td>Šef</td>
+    <td>Heňo</td>
+    <td>1972</td>
+    <td>3</td>
+	<td>105</td>
+    <td>7</td>
+    <td>5.2.2000</td>
+</tr>
+<tr>
+	<td>8</td>
+    <td>Šef</td>
+    <td>Heňo</td>
+    <td>1972</td>
+    <td>4</td>
+	<td>102</td>
+    <td>2</td>
+	<td>5.8.2000</td>
+</tr>
+<tr>
+	<td>8</td>
+    <td>Šef</td>
+    <td>Heňo</td>
+    <td>1972</td>
+    <td>5</td>
+	<td>108</td>
+    <td>3</td>
+    <td>4.1.2000</td>
+</tr>
+<tr>
+	<td>8</td>
+    <td>Šef</td>
+    <td>Heňo</td>
+    <td>1972</td>
+    <td>6</td>
+	<td>101</td>
+    <td>4</td>
+    <td>9.5.2000</td>
+</tr>
+<tr bgcolor="Yellow">
+	<td>8</td>
+    <td>Šef</td>
+    <td>Heňo</td>
+    <td>1972</td>
+    <td>7</td>
+	<td>108</td>
+    <td>8</td>
+    <td>25.2.2000</td>
+</tr>
+<tr bgcolor="Yellow">
+    <td>8</td>
+    <td>Šef</td>
+    <td>Heňo</td>
+    <td>1972</td>
+	<td>8</td>
+	<td>107</td>
+    <td>8</td>
+    <td>6.4.2000</td>
+</tr>
+</tbody></table>
+<p class="BEZ"><i>Poznámka -</i> Zde dochází ke spojení tabulek pomocí tzv. podmínky spojení Kniha.isbn = Rezervace.isbn .</p>
+<b>D7.</b> Najdi autory, jejichž některé tituly jsou rezervovány do 6.2.2000.<p> </p>
+<pre>SELECT DISTINCT autor FROM Kniha, Rezervace 
+  WHERE Kniha.isbn = Rezervace.isbn AND d_rez &lt; ' 2/6/2000' </pre>
+<table align="center" border="1" cellpadding="1" cellspacing="1">
+<caption align="top"><i>Kartézský součin tabulek KNIHA a REZERVACE</i></caption>
+<tbody><tr bgcolor="#8080ff">
+    <th colspan="1">ISBN</th>
+	<th colspan="1">NAZEV</th> 
+	<th colspan="1">AUTOR</th>   
+	<th colspan="1">ROK</th>   
+    <th colspan="1">ID_R</th>
+    <th colspan="1">CISLO</th>	
+	<th colspan="1">ISBN</th> 
+	<th colspan="1">D_REZ</th>   
+</tr>	
+<tr>
+</tr><tr>
+    <td>1</td>
+    <td>Noha</td>
+    <td>Černek</td>
+    <td>1988</td>	
+    <td>1</td>
+    <td>100</td>
+    <td>2</td>
+    <td>1.1.2000</td>
+</tr>
+<tr>
+    <td>1</td>
+    <td>Noha</td>
+    <td>Černek</td>
+    <td>1988</td>	
+    <td>2</td>
+	<td>108</td>
+    <td>8</td>
+    <td>12.1.2000</td>
+</tr>
+<tr>
+    <td>1</td>
+    <td>Noha</td>
+    <td>Černek</td>
+    <td>1988</td>	
+    <td>3</td>
+	<td>105</td>
+    <td>7</td>
+    <td>5.2.2000</td>
+</tr>
+<tr>
+    <td>1</td>
+    <td>Noha</td>
+    <td>Černek</td>
+    <td>1988</td>	
+    <td>4</td>
+	<td>102</td>
+    <td>2</td>
+	<td>5.8.2000</td>
+</tr>
+<tr>
+    <td>1</td>
+    <td>Noha</td>
+    <td>Černek</td>
+    <td>1988</td>	
+    <td>5</td>
+	<td>108</td>
+    <td>3</td>
+    <td>4.1.2000</td>
+</tr>
+<tr>
+    <td>1</td>
+    <td>Noha</td>
+    <td>Černek</td>
+    <td>1988</td>	
+    <td>6</td>
+	<td>101</td>
+    <td>4</td>
+    <td>9.5.2000</td>
+</tr>
+<tr>
+    <td>1</td>
+    <td>Noha</td>
+    <td>Černek</td>
+    <td>1988</td>	
+    <td>7</td>
+	<td>108</td>
+    <td>8</td>
+    <td>25.2.2000</td>
+</tr>
+<tr>
+    <td>1</td>
+    <td>Noha</td>
+    <td>Černek</td>
+    <td>1988</td>	
+	<td>8</td>
+	<td>107</td>
+    <td>8</td>
+    <td>6.4.2000</td>
+</tr>
+<tr bgcolor="Aqua">
+    <td>2</td>
+    <td>Tučňák</td>
+    <td bgcolor="Yellow">Macura</td>
+    <td>1977</td>
+    <td>1</td>
+    <td>100</td>
+    <td>2</td>
+    <td>1.1.2000</td>
+</tr>
+<tr>
+    <td>2</td>
+    <td>Tučňák</td>
+    <td>Macura</td>
+    <td>1977</td>
+    <td>2</td>
+	<td>108</td>
+    <td>8</td>
+    <td>12.1.2000</td>
+</tr>
+<tr>
+    <td>2</td>
+    <td>Tučňák</td>
+    <td>Macura</td>
+    <td>1977</td>
+    <td>3</td>
+	<td>105</td>
+    <td>7</td>
+    <td>5.2.2000</td>
+</tr>
+<tr bgcolor="Aqua">
+    <td>2</td>
+    <td>Tučňák</td>
+    <td>Macura</td>
+    <td>1977</td>
+    <td>4</td>
+	<td>102</td>
+    <td>2</td>
+	<td>5.8.2000</td>
+</tr>
+<tr>
+    <td>2</td>
+    <td>Tučňák</td>
+    <td>Macura</td>
+    <td>1977</td>
+    <td>5</td>
+	<td>108</td>
+    <td>3</td>
+    <td>4.1.2000</td>
+</tr>
+<tr>
+    <td>2</td>
+    <td>Tučňák</td>
+    <td>Macura</td>
+    <td>1977</td>
+    <td>6</td>
+	<td>101</td>
+    <td>4</td>
+    <td>9.5.2000</td>
+</tr>
+<tr>
+    <td>2</td>
+    <td>Tučňák</td>
+    <td>Macura</td>
+    <td>1977</td>
+    <td>7</td>
+	<td>108</td>
+    <td>8</td>
+    <td>25.2.2000</td>
+</tr>
+<tr>    
+    <td>2</td>
+    <td>Tučňák</td>
+    <td>Macura</td>
+    <td>1977</td>
+	<td>8</td>
+	<td>107</td>
+    <td>8</td>
+    <td>6.4.2000</td>
+</tr>
+<tr>
+    <td>3</td>
+    <td>Fazole</td>
+    <td>Káňa</td>
+    <td>1978</td>
+    <td>1</td>
+    <td>100</td>
+    <td>2</td>
+    <td>1.1.2000</td>
+</tr>
+<tr>
+    <td>3</td>
+    <td>Fazole</td>
+    <td>Káňa</td>
+    <td>1978</td>
+    <td>2</td>
+	<td>108</td>
+    <td>8</td>
+    <td>12.1.2000</td>
+</tr>
+<tr>
+    <td>3</td>
+    <td>Fazole</td>
+    <td>Káňa</td>
+    <td>1978</td>
+    <td>3</td>
+	<td>105</td>
+    <td>7</td>
+    <td>5.2.2000</td>
+</tr>
+<tr>
+    <td>3</td>
+    <td>Fazole</td>
+    <td>Káňa</td>
+    <td>1978</td>
+    <td>4</td>
+	<td>102</td>
+    <td>2</td>
+	<td>5.8.2000</td>
+</tr>
+<tr bgcolor="Aqua">
+    <td>3</td>
+    <td>Fazole</td>
+    <td bgcolor="Yellow">Káňa</td>
+    <td>1978</td>
+    <td>5</td>
+	<td>108</td>
+    <td>3</td>
+    <td>4.1.2000</td>
+</tr>
+<tr>
+    <td>3</td>
+    <td>Fazole</td>
+    <td>Káňa</td>
+    <td>1978</td>
+    <td>6</td>
+	<td>101</td>
+    <td>4</td>
+    <td>9.5.2000</td>
+</tr>
+<tr>
+    <td>3</td>
+    <td>Fazole</td>
+    <td>Káňa</td>
+    <td>1978</td>
+    <td>7</td>
+	<td>108</td>
+    <td>8</td>
+    <td>25.2.2000</td>
+</tr>
+<tr>
+    <td>3</td>
+    <td>Fazole</td>
+    <td>Káňa</td>
+    <td>1978</td>
+	<td>8</td>
+	<td>107</td>
+    <td>8</td>
+    <td>6.4.2000</td>
+</tr>
+<tr>
+    <td>4</td>
+    <td>Chip</td>
+	<td>Široký</td>
+	<td>1981</td>
+    <td>1</td>
+    <td>100</td>
+    <td>2</td>
+    <td>1.1.2000</td>
+</tr>
+<tr>
+    <td>4</td>
+    <td>Chip</td>
+	<td>Široký</td>
+	<td>1981</td>
+    <td>2</td>
+	<td>108</td>
+    <td>8</td>
+    <td>12.1.2000</td>
+</tr>
+<tr>
+    <td>4</td>
+    <td>Chip</td>
+	<td>Široký</td>
+	<td>1981</td>
+    <td>3</td>
+	<td>105</td>
+    <td>7</td>
+    <td>5.2.2000</td>
+</tr>
+<tr>
+    <td>4</td>
+    <td>Chip</td>
+	<td>Široký</td>
+	<td>1981</td>
+    <td>4</td>
+	<td>102</td>
+    <td>2</td>
+	<td>5.8.2000</td>
+</tr>
+<tr>
+    <td>4</td>
+    <td>Chip</td>
+	<td>Široký</td>
+	<td>1981</td>
+    <td>5</td>
+	<td>108</td>
+    <td>3</td>
+    <td>4.1.2000</td>
+</tr>
+<tr bgcolor="Aqua">
+    <td>4</td>
+    <td>Chip</td>
+	<td>Široký</td>
+	<td>1981</td>
+    <td>6</td>
+	<td>101</td>
+    <td>4</td>
+    <td>9.5.2000</td>
+</tr>
+<tr>
+    <td>4</td>
+    <td>Chip</td>
+	<td>Široký</td>
+	<td>1981</td>
+    <td>7</td>
+	<td>108</td>
+    <td>8</td>
+    <td>25.2.2000</td>
+</tr>
+<tr>
+    <td>4</td>
+    <td>Chip</td>
+	<td>Široký</td>
+	<td>1981</td>
+	<td>8</td>
+	<td>107</td>
+    <td>8</td>
+    <td>6.4.2000</td>
+</tr>
+<tr>
+    <td>5</td>
+    <td>Killer</td>
+    <td>Mareš</td>
+    <td>1999</td>
+    <td>1</td>
+    <td>100</td>
+    <td>2</td>
+    <td>1.1.2000</td>
+</tr>
+<tr>
+    <td>5</td>
+    <td>Killer</td>
+    <td>Mareš</td>
+    <td>1999</td>
+    <td>2</td>
+	<td>108</td>
+    <td>8</td>
+    <td>12.1.2000</td>
+</tr>
+<tr>
+    <td>5</td>
+    <td>Killer</td>
+    <td>Mareš</td>
+    <td>1999</td>
+    <td>3</td>
+	<td>105</td>
+    <td>7</td>
+    <td>5.2.2000</td>
+</tr>
+<tr>
+    <td>5</td>
+    <td>Killer</td>
+    <td>Mareš</td>
+    <td>1999</td>
+    <td>4</td>
+	<td>102</td>
+    <td>2</td>
+	<td>5.8.2000</td>
+</tr>
+<tr>
+    <td>5</td>
+    <td>Killer</td>
+    <td>Mareš</td>
+    <td>1999</td>
+    <td>5</td>
+	<td>108</td>
+    <td>3</td>
+    <td>4.1.2000</td>
+</tr>
+<tr>
+    <td>5</td>
+    <td>Killer</td>
+    <td>Mareš</td>
+    <td>1999</td>
+    <td>6</td>
+	<td>101</td>
+    <td>4</td>
+    <td>9.5.2000</td>
+</tr>
+<tr>
+    <td>5</td>
+    <td>Killer</td>
+    <td>Mareš</td>
+    <td>1999</td>
+    <td>7</td>
+	<td>108</td>
+    <td>8</td>
+    <td>25.2.2000</td>
+</tr>
+<tr>
+    <td>5</td>
+    <td>Killer</td>
+    <td>Mareš</td>
+    <td>1999</td>
+	<td>8</td>
+	<td>107</td>
+    <td>8</td>
+    <td>6.4.2000</td>
+</tr>
+<tr>
+    <td>6</td>
+    <td>Odpor</td>
+    <td>Kolář</td>
+    <td>1977</td>
+    <td>1</td>
+    <td>100</td>
+    <td>2</td>
+    <td>1.1.2000</td>
+</tr>
+<tr>
+    <td>6</td>
+    <td>Odpor</td>
+    <td>Kolář</td>
+    <td>1977</td>
+    <td>2</td>
+	<td>108</td>
+    <td>8</td>
+    <td>12.1.2000</td>
+</tr>
+<tr>
+    <td>6</td>
+    <td>Odpor</td>
+    <td>Kolář</td>
+    <td>1977</td>
+    <td>3</td>
+	<td>105</td>
+    <td>7</td>
+    <td>5.2.2000</td>
+</tr>
+<tr>
+    <td>6</td>
+    <td>Odpor</td>
+    <td>Kolář</td>
+    <td>1977</td>
+    <td>4</td>
+	<td>102</td>
+    <td>2</td>
+	<td>5.8.2000</td>
+</tr>
+<tr>
+    <td>6</td>
+    <td>Odpor</td>
+    <td>Kolář</td>
+    <td>1977</td>
+    <td>5</td>
+	<td>108</td>
+    <td>3</td>
+    <td>4.1.2000</td>
+</tr>
+<tr>
+    <td>6</td>
+    <td>Odpor</td>
+    <td>Kolář</td>
+    <td>1977</td>
+    <td>6</td>
+	<td>101</td>
+    <td>4</td>
+    <td>9.5.2000</td>
+</tr>
+<tr>
+    <td>6</td>
+    <td>Odpor</td>
+    <td>Kolář</td>
+    <td>1977</td>
+    <td>7</td>
+	<td>108</td>
+    <td>8</td>
+    <td>25.2.2000</td>
+</tr>
+<tr>
+    <td>6</td>
+    <td>Odpor</td>
+    <td>Kolář</td>
+    <td>1977</td>
+	<td>8</td>
+	<td>107</td>
+    <td>8</td>
+    <td>6.4.2000</td>
+</tr>
+<tr>
+    <td>7</td>
+    <td>Policie</td>
+    <td>Kunčický</td>
+    <td>1980</td>
+    <td>1</td>
+    <td>100</td>
+    <td>2</td>
+    <td>1.1.2000</td>
+</tr>
+<tr>
+    <td>7</td>
+    <td>Policie</td>
+    <td>Kunčický</td>
+    <td>1980</td>
+    <td>2</td>
+	<td>108</td>
+    <td>8</td>
+    <td>12.1.2000</td>
+</tr>
+<tr bgcolor="Aqua">
+    <td>7</td>
+    <td>Policie</td>
+    <td bgcolor="Yellow">Kunčický</td>
+    <td>1980</td>
+    <td>3</td>
+	<td>105</td>
+    <td>7</td>
+    <td>5.2.2000</td>
+</tr>
+<tr>
+    <td>7</td>
+    <td>Policie</td>
+    <td>Kunčický</td>
+    <td>1980</td>
+    <td>4</td>
+	<td>102</td>
+    <td>2</td>
+	<td>5.8.2000</td>
+</tr>
+<tr>
+    <td>7</td>
+    <td>Policie</td>
+    <td>Kunčický</td>
+    <td>1980</td>
+    <td>5</td>
+	<td>108</td>
+    <td>3</td>
+    <td>4.1.2000</td>
+</tr>
+<tr>
+    <td>7</td>
+    <td>Policie</td>
+    <td>Kunčický</td>
+    <td>1980</td>
+    <td>6</td>
+	<td>101</td>
+    <td>4</td>
+    <td>9.5.2000</td>
+</tr>
+<tr>
+    <td>7</td>
+    <td>Policie</td>
+    <td>Kunčický</td>
+    <td>1980</td>
+    <td>7</td>
+	<td>108</td>
+    <td>8</td>
+    <td>25.2.2000</td>
+</tr>
+<tr>
+    <td>7</td>
+    <td>Policie</td>
+    <td>Kunčický</td>
+    <td>1980</td>
+	<td>8</td>
+	<td>107</td>
+    <td>8</td>
+    <td>6.4.2000</td>
+</tr>
+<tr>
+	<td>8</td>
+    <td>Šef</td>
+    <td>Heňo</td>
+    <td>1972</td>
+    <td>1</td>
+    <td>100</td>
+    <td>2</td>
+    <td>1.1.2000</td>
+</tr>
+<tr bgcolor="Aqua">
+	<td>8</td>
+    <td>Šef</td>
+    <td bgcolor="Yellow">Heňo</td>
+    <td>1972</td>
+    <td>2</td>
+	<td>108</td>
+    <td>8</td>
+    <td>12.1.2000</td>
+</tr>
+<tr>
+	<td>8</td>
+    <td>Šef</td>
+    <td>Heňo</td>
+    <td>1972</td>
+    <td>3</td>
+	<td>105</td>
+    <td>7</td>
+    <td>5.2.2000</td>
+</tr>
+<tr>
+	<td>8</td>
+    <td>Šef</td>
+    <td>Heňo</td>
+    <td>1972</td>
+    <td>4</td>
+	<td>102</td>
+    <td>2</td>
+	<td>5.8.2000</td>
+</tr>
+<tr>
+	<td>8</td>
+    <td>Šef</td>
+    <td>Heňo</td>
+    <td>1972</td>
+    <td>5</td>
+	<td>108</td>
+    <td>3</td>
+    <td>4.1.2000</td>
+</tr>
+<tr>
+	<td>8</td>
+    <td>Šef</td>
+    <td>Heňo</td>
+    <td>1972</td>
+    <td>6</td>
+	<td>101</td>
+    <td>4</td>
+    <td>9.5.2000</td>
+</tr>
+<tr bgcolor="Aqua">
+	<td>8</td>
+    <td>Šef</td>
+    <td>Heňo</td>
+    <td>1972</td>
+    <td>7</td>
+	<td>108</td>
+    <td>8</td>
+    <td>25.2.2000</td>
+</tr>
+<tr bgcolor="Aqua">
+    <td>8</td>
+    <td>Šef</td>
+    <td>Heňo</td>
+    <td>1972</td>
+	<td>8</td>
+	<td>107</td>
+    <td>8</td>
+    <td>6.4.2000</td>
+</tr>
+</tbody></table>
+<p class="BEZ"><i>Poznámka -</i> Zde je k podmínce spojení přidána selekce daná podmínkou d_rez &lt; ' 2/6/2000'.</p>
+<p class="BEZ"><i>Modrou barvou jsou zvýrazněné záznamy vyhovující
+podmínce Kniha.isbn = Rezervace.isbn a žlutou je vyznačen výsledek,
+který je dosažen konečnou podmínkou d_rez &lt; ' 2/6/2000' s ohledem na
+klíčové slovo DISTINCT (pokud výsledek obsahuje jméno autora, které se
+opakuje, DISTINCT zajistí pouze jeden výskyt tohoto jména ve výsledné
+tabulce).</i></p>
+<p>Pomocí tečkové notace znázorňujeme vztah jména atributu k relaci,
+je-li to nutné. Většinou není vždy zřejmé, kdy je možné jméno relace
+vynechat, a proto lze doporučit jeho použití vždy. Zvyšuje to též
+srozumitelnost dotazu. </p>
+<p>Mají-li se ve výsledku objevit všechny atributy např. obou relací,
+vyznačuje se tento fakt opět pomocí " * ", avšak také v tečkové notaci.
+Např. spojení relací Kniha a Exemplar bychom za slovem SELECT značili
+jako Kniha.*, Exemplar .*.</p>
+<p>Ve výsledné relaci se bude ale sloupec <i>isbn</i> dvakrát opakovat, a to se stejnými hodnotami. </p>
+<p>Jednoduchá podmínka Kniha.isbn = Exemplar .isbn za WHERE znamená
+vlastně
+spojení přes rovnost. Odstranění jednoho ze dvou stejných sloupců jeho
+explicitním vynecháním za SELECT získáme užitečnější výsledek
+odpovídající přirozenému spojení. Kdybychom vynechali v D7 klauzuli
+WHERE, obdrželi bychom kartézský součin relací Kniha a Exemplar . </p>
+<p>Často je užitečné spojení dvou relací navzájem. </p>
+<b>D8.</b> Najdi dvojice čtenářů, kteří mají stejnou adresu.<p> </p>
+<pre>SELECT Prvni.cislo, Druhy.cislo FROM Ctenar Prvni, Ctenar Druhy
+  WHERE Prvni.adresa = Druhy.adresa AND Prvni.cislo &lt; Druhy.cislo </pre>
+<table align="center" border="1" cellpadding="1" cellspacing="1">
+<caption align="top"><i>Kartézský součin dvou tabulek Ctenar s aliasy Prvni a Druhy</i></caption>
+<tbody><tr bgcolor="#8080ff">
+    <th colspan="1">CISLO</th>
+	<th colspan="1">JMENO</th> 
+	<th colspan="1">ADRESA</th>   
+    <th colspan="1">CISLO</th>
+	<th colspan="1">JMENO</th> 
+	<th colspan="1">ADRESA</th>   	
+</tr>
+<tr bgcolor="Aqua">
+    <td>100</td>
+    <td>Tomica</td>
+    <td>Orlová</td>
+    <td>100</td>
+    <td>Tomica</td>
+    <td>Orlová</td>
+</tr>
+<tr>
+    <td>100</td>
+    <td>Tomica</td>
+    <td>Orlová</td>
+    <td>101</td>
+    <td>Begovská</td>
+    <td>Karviná</td>
+</tr>
+<tr bgcolor="Aqua">
+    <td bgcolor="Yellow">100</td>
+    <td>Tomica</td>
+    <td>Orlová</td>
+    <td bgcolor="Yellow">102</td>
+    <td>Piš</td>
+    <td>Orlová</td>
+</tr>
+<tr>
+    <td>100</td>
+    <td>Tomica</td>
+    <td>Orlová</td>
+    <td>103</td>
+    <td>Rojíček</td>
+    <td>Bohumín</td>
+</tr>
+<tr bgcolor="Aqua">
+    <td bgcolor="Yellow">100</td>
+    <td>Tomica</td>
+    <td>Orlová</td>
+    <td bgcolor="Yellow">104</td>
+    <td>Macura</td>
+    <td>Orlová</td>
+</tr>
+<tr>
+    <td>100</td>
+    <td>Tomica</td>
+    <td>Orlová</td>
+    <td>105</td>
+    <td>Káňa</td>
+    <td>Bohumín</td>
+</tr>
+<tr bgcolor="Aqua">
+    <td bgcolor="Yellow">100</td>
+    <td>Tomica</td>
+    <td>Orlová</td>
+    <td bgcolor="Yellow">106</td>
+    <td>Černek</td>
+    <td>Orlová</td>
+</tr>
+<tr bgcolor="Aqua">
+    <td bgcolor="Yellow">100</td>
+    <td>Tomica</td>
+    <td>Orlová</td>
+	<td bgcolor="Yellow">107</td>
+    <td>Piš</td>
+    <td>Orlová</td>
+</tr>
+<tr>
+    <td>101</td>
+    <td>Begovská</td>
+    <td>Karviná</td>
+    <td>100</td>
+    <td>Tomica</td>
+    <td>Orlová</td>
+</tr>
+<tr bgcolor="Aqua">
+    <td>101</td>
+    <td>Begovská</td>
+    <td>Karviná</td>
+    <td>101</td>
+    <td>Begovská</td>
+    <td>Karviná</td>
+</tr>
+<tr>
+    <td>101</td>
+    <td>Begovská</td>
+    <td>Karviná</td>
+    <td>102</td>
+    <td>Piš</td>
+    <td>Orlová</td>
+</tr>
+<tr>
+    <td>101</td>
+    <td>Begovská</td>
+    <td>Karviná</td>
+    <td>103</td>
+    <td>Rojíček</td>
+    <td>Bohumín</td>
+</tr>
+<tr>
+    <td>101</td>
+    <td>Begovská</td>
+    <td>Karviná</td>
+    <td>104</td>
+    <td>Macura</td>
+    <td>Orlová</td>
+</tr>
+<tr>
+    <td>101</td>
+    <td>Begovská</td>
+    <td>Karviná</td>
+    <td>105</td>
+    <td>Káňa</td>
+    <td>Bohumín</td>
+</tr>
+<tr>
+    <td>101</td>
+    <td>Begovská</td>
+    <td>Karviná</td>
+    <td>106</td>
+    <td>Černek</td>
+    <td>Orlová</td>
+</tr>
+<tr>
+    <td>101</td>
+    <td>Begovská</td>
+    <td>Karviná</td>
+	<td>107</td>
+    <td>Piš</td>
+    <td>Orlová</td>
+</tr>
+<tr bgcolor="Aqua">
+    <td>102</td>
+    <td>Piš</td>
+    <td>Orlová</td>
+    <td>100</td>
+    <td>Tomica</td>
+    <td>Orlová</td>
+</tr>
+<tr>
+    <td>102</td>
+    <td>Piš</td>
+    <td>Orlová</td>
+    <td>101</td>
+    <td>Begovská</td>
+    <td>Karviná</td>
+</tr>
+<tr bgcolor="Aqua">
+    <td>102</td>
+    <td>Piš</td>
+    <td>Orlová</td>
+    <td>102</td>
+    <td>Piš</td>
+    <td>Orlová</td>
+</tr>
+<tr>
+    <td>102</td>
+    <td>Piš</td>
+    <td>Orlová</td>
+    <td>103</td>
+    <td>Rojíček</td>
+    <td>Bohumín</td>
+</tr>
+<tr bgcolor="Aqua">
+    <td bgcolor="Yellow">102</td>
+    <td>Piš</td>
+    <td>Orlová</td>
+    <td bgcolor="Yellow">104</td>
+    <td>Macura</td>
+    <td>Orlová</td>
+</tr>
+<tr>
+    <td>102</td>
+    <td>Piš</td>
+    <td>Orlová</td>
+    <td>105</td>
+    <td>Káňa</td>
+    <td>Bohumín</td>
+</tr>
+<tr bgcolor="Aqua">
+    <td bgcolor="Yellow">102</td>
+    <td>Piš</td>
+    <td>Orlová</td>
+    <td bgcolor="Yellow">106</td>
+    <td>Černek</td>
+    <td>Orlová</td>
+</tr>
+<tr bgcolor="Aqua">
+    <td bgcolor="Yellow">102</td>
+    <td>Piš</td>
+    <td>Orlová</td>
+	<td bgcolor="Yellow">107</td>
+    <td>Piš</td>
+    <td>Orlová</td>
+</tr>
+<tr>
+    <td>103</td>
+    <td>Rojíček</td>
+    <td>Bohumín</td>
+    <td>100</td>
+    <td>Tomica</td>
+    <td>Orlová</td>
+</tr>
+<tr>
+    <td>103</td>
+    <td>Rojíček</td>
+    <td>Bohumín</td>
+    <td>101</td>
+    <td>Begovská</td>
+    <td>Karviná</td>
+</tr>
+<tr>
+    <td>103</td>
+    <td>Rojíček</td>
+    <td>Bohumín</td>
+    <td>102</td>
+    <td>Piš</td>
+    <td>Orlová</td>
+</tr>
+<tr bgcolor="Aqua">
+    <td>103</td>
+    <td>Rojíček</td>
+    <td>Bohumín</td>
+    <td>103</td>
+    <td>Rojíček</td>
+    <td>Bohumín</td>
+</tr>
+<tr>
+    <td>103</td>
+    <td>Rojíček</td>
+    <td>Bohumín</td>
+    <td>104</td>
+    <td>Macura</td>
+    <td>Orlová</td>
+</tr>
+<tr bgcolor="Aqua">
+    <td bgcolor="Yellow">103</td>
+    <td>Rojíček</td>
+    <td>Bohumín</td>
+    <td bgcolor="Yellow">105</td>
+    <td>Káňa</td>
+    <td>Bohumín</td>
+</tr>
+<tr>
+    <td>103</td>
+    <td>Rojíček</td>
+    <td>Bohumín</td>
+    <td>106</td>
+    <td>Černek</td>
+    <td>Orlová</td>
+</tr>
+<tr>
+    <td>103</td>
+    <td>Rojíček</td>
+    <td>Bohumín</td>
+	<td>107</td>
+    <td>Piš</td>
+    <td>Orlová</td>
+</tr>
+<tr bgcolor="Aqua">
+    <td>104</td>
+    <td>Macura</td>
+    <td>Orlová</td>
+    <td>100</td>
+    <td>Tomica</td>
+    <td>Orlová</td>
+</tr>
+<tr>
+    <td>104</td>
+    <td>Macura</td>
+    <td>Orlová</td>
+    <td>101</td>
+    <td>Begovská</td>
+    <td>Karviná</td>
+</tr>
+<tr bgcolor="Aqua">
+    <td>104</td>
+    <td>Macura</td>
+    <td>Orlová</td>
+    <td>102</td>
+    <td>Piš</td>
+    <td>Orlová</td>
+</tr>
+<tr>
+    <td>104</td>
+    <td>Macura</td>
+    <td>Orlová</td>
+    <td>103</td>
+    <td>Rojíček</td>
+    <td>Bohumín</td>
+</tr>
+<tr bgcolor="Aqua">
+    <td>104</td>
+    <td>Macura</td>
+    <td>Orlová</td>
+    <td>104</td>
+    <td>Macura</td>
+    <td>Orlová</td>
+</tr>
+<tr>
+    <td>104</td>
+    <td>Macura</td>
+    <td>Orlová</td>
+    <td>105</td>
+    <td>Káňa</td>
+    <td>Bohumín</td>
+</tr>
+<tr bgcolor="Aqua">
+    <td bgcolor="Yellow">104</td>
+    <td>Macura</td>
+    <td>Orlová</td>
+    <td bgcolor="Yellow">106</td>
+    <td>Černek</td>
+    <td>Orlová</td>
+</tr>
+<tr bgcolor="Aqua">
+    <td bgcolor="Yellow">104</td>
+    <td>Macura</td>
+    <td>Orlová</td>
+	<td bgcolor="Yellow">107</td>
+    <td>Piš</td>
+    <td>Orlová</td>
+</tr>
+<tr>
+    <td>105</td>
+    <td>Káňa</td>
+    <td>Bohumín</td>
+    <td>100</td>
+    <td>Tomica</td>
+    <td>Orlová</td>
+</tr>
+<tr>
+    <td>105</td>
+    <td>Káňa</td>
+    <td>Bohumín</td>
+    <td>101</td>
+    <td>Begovská</td>
+    <td>Karviná</td>
+</tr>
+<tr>
+    <td>105</td>
+    <td>Káňa</td>
+    <td>Bohumín</td>
+    <td>102</td>
+    <td>Piš</td>
+    <td>Orlová</td>
+</tr>
+<tr bgcolor="Aqua">
+    <td>105</td>
+    <td>Káňa</td>
+    <td>Bohumín</td>
+    <td>103</td>
+    <td>Rojíček</td>
+    <td>Bohumín</td>
+</tr>
+<tr>
+    <td>105</td>
+    <td>Káňa</td>
+    <td>Bohumín</td>
+    <td>104</td>
+    <td>Macura</td>
+    <td>Orlová</td>
+</tr>
+<tr bgcolor="Aqua">
+    <td>105</td>
+    <td>Káňa</td>
+    <td>Bohumín</td>
+    <td>105</td>
+    <td>Káňa</td>
+    <td>Bohumín</td>
+</tr>
+<tr>
+    <td>105</td>
+    <td>Káňa</td>
+    <td>Bohumín</td>
+    <td>106</td>
+    <td>Černek</td>
+    <td>Orlová</td>
+</tr>
+<tr>
+    <td>105</td>
+    <td>Káňa</td>
+    <td>Bohumín</td>
+	<td>107</td>
+    <td>Piš</td>
+    <td>Orlová</td>
+</tr>
+<tr bgcolor="Aqua">
+    <td>106</td>
+    <td>Černek</td>
+    <td>Orlová</td>
+    <td>100</td>
+    <td>Tomica</td>
+    <td>Orlová</td>
+</tr>
+<tr>
+    <td>106</td>
+    <td>Černek</td>
+    <td>Orlová</td>
+    <td>101</td>
+    <td>Begovská</td>
+    <td>Karviná</td>
+</tr>
+<tr bgcolor="Aqua">
+    <td>106</td>
+    <td>Černek</td>
+    <td>Orlová</td>
+    <td>102</td>
+    <td>Piš</td>
+    <td>Orlová</td>
+</tr>
+<tr>
+    <td>106</td>
+    <td>Černek</td>
+    <td>Orlová</td>
+    <td>103</td>
+    <td>Rojíček</td>
+    <td>Bohumín</td>
+</tr>
+<tr bgcolor="Aqua">
+    <td>106</td>
+    <td>Černek</td>
+    <td>Orlová</td>
+    <td>104</td>
+    <td>Macura</td>
+    <td>Orlová</td>
+</tr>
+<tr>
+    <td>106</td>
+    <td>Černek</td>
+    <td>Orlová</td>
+    <td>105</td>
+    <td>Káňa</td>
+    <td>Bohumín</td>
+</tr>
+<tr bgcolor="Aqua">
+    <td>106</td>
+    <td>Černek</td>
+    <td>Orlová</td>
+    <td>106</td>
+    <td>Černek</td>
+    <td>Orlová</td>
+</tr>
+<tr bgcolor="Aqua">
+    <td bgcolor="Yellow">106</td>
+    <td>Černek</td>
+    <td>Orlová</td>
+	<td bgcolor="Yellow">107</td>
+    <td>Piš</td>
+    <td>Orlová</td>
+</tr>
+<tr bgcolor="Aqua">
+	<td>107</td>
+    <td>Piš</td>
+    <td>Orlová</td>
+    <td>100</td>
+    <td>Tomica</td>
+    <td>Orlová</td>
+</tr>
+<tr>
+	<td>107</td>
+    <td>Piš</td>
+    <td>Orlová</td>
+    <td>101</td>
+    <td>Begovská</td>
+    <td>Karviná</td>
+</tr>
+<tr bgcolor="Aqua">
+	<td>107</td>
+    <td>Piš</td>
+    <td>Orlová</td>
+    <td>102</td>
+    <td>Piš</td>
+    <td>Orlová</td>
+</tr>
+<tr>
+	<td>107</td>
+    <td>Piš</td>
+    <td>Orlová</td>
+    <td>103</td>
+    <td>Rojíček</td>
+    <td>Bohumín</td>
+</tr>
+<tr bgcolor="Aqua">
+	<td>107</td>
+    <td>Piš</td>
+    <td>Orlová</td>
+    <td>104</td>
+    <td>Macura</td>
+    <td>Orlová</td>
+</tr>
+<tr>
+	<td>107</td>
+    <td>Piš</td>
+    <td>Orlová</td>
+    <td>105</td>
+    <td>Káňa</td>
+    <td>Bohumín</td>
+</tr>
+<tr bgcolor="Aqua">
+	<td>107</td>
+    <td>Piš</td>
+    <td>Orlová</td>
+    <td>106</td>
+    <td>Černek</td>
+    <td>Orlová</td>
+</tr>
+<tr bgcolor="Aqua">
+	<td>107</td>
+    <td>Piš</td>
+    <td>Orlová</td>
+	<td>107</td>
+    <td>Piš</td>
+    <td>Orlová</td>
+</tr>
+</tbody></table>
+<p class="BEZ"><i>Poznámka -</i> Obdoba předchozího příkladu s ukázkou
+práce s pomocnými názvy tzv. aliasy. V našem případě bylo jejich
+použití nutné, protože musíme spojit tabulku CTENAR sama se sebou.
+Aliasy se definují za např. název tabulky, který mají nahradit. Jako
+podmínka spojení je zde Prvni.adresa = Druhy.adresa a selekce je dána
+výrazem Prvni.cislo &lt; Druhy.cislo.</p> 
+<p class="BEZ"><i>Modrou barvou jsou zvýrazněné celé záznamy vyhovující
+podmínce Prvni.adresa = Druhy.adresa a žlutou je vyznačen výsledek,
+který je dosažen konečnou podmínkou Prvni.cislo &lt; Druhy.cislo.</i></p>
+<p>Označení Prvni, Druhy znamená pouze lokální přejmenování (lépe
+"alias") relace CTENAR, která lze použít při vytváření podmínky za
+WHERE. Přejmenování by v dotazu D8 stačilo pouze jedno. (Nerovností
+mezi čísly čtenářů zabezpečíme, že se nám dvojice čtenářů se stejnou
+adresou nebudou opakovat, a že se neobjeví dvojice obsahující dvakrát
+téhož čtenáře.) </p>
+<p>Z hlediska relačního kalkulu nejde o nic jiného než o definice
+n-ticových proměnných Prvni a Druhy. n-ticové proměnné jsou vlastně v
+běžných dotazech definovány implicitně jménem relace za FROM. </p>
+<p>Závěrem odstavce zdůrazněme jeden důležitý prvek v koncepci SQL,
+kterým se liší od RMD. Tím, že byly zavedeny prázdné hodnoty, je nutné
+změnit sémantiku vyhodnocení logických podmínek. Řečeno z hlediska
+logiky, je nutné přejít od dvouhodnotové logiky k tříhodnotové. Vedle
+TRUE, FALSE je použito hodnoty NEDEF (nedefinováno). Všechny možnosti
+pro podmínky A, B jsou shrnuty v tabulce 1. </p>
+<table align="center" border="1" cellpadding="10" cellspacing="1">
+<caption align="top"><i>Tabulka 1</i></caption>
+<tbody><tr bgcolor="Lime">
+    <th colspan="1">A</th>
+	<th colspan="1">B</th> 
+	<th colspan="1">A and B</th>   
+	<th colspan="1">A or B</th>
+	<th colspan="1">not A</th>
+</tr>
+<tr>
+    <td>TRUE</td>
+    <td>TRUE</td>
+    <td>TRUE</td>
+    <td>TRUE</td>
+    <td>FALSE</td>
+</tr>
+<tr>
+    <td>TRUE</td>
+    <td>FALSE</td>
+    <td>FALSE</td>
+    <td>TRUE</td>
+    <td>FALSE</td>
+</tr>
+<tr>
+    <td>TRUE</td>
+    <td>NEDEF</td>
+    <td>NEDEF</td>
+    <td>TRUE</td>
+    <td>FALSE</td>
+</tr>
+<tr>
+    <td>FALSE</td>
+    <td>TRUE</td>
+    <td>FALSE</td>
+    <td>TRUE</td>
+    <td>TRUE</td>
+</tr>
+<tr>
+    <td>FALSE</td>
+    <td>FALSE</td>
+    <td>FALSE</td>
+    <td>FALSE</td>
+    <td>TRUE</td>
+</tr>
+<tr>
+    <td>FALSE</td>
+    <td>NEDEF</td>
+    <td>FALSE</td>
+    <td>NEDEF</td>
+    <td>TRUE</td>
+</tr>
+<tr>
+    <td>NEDEF</td>
+    <td>TRUE</td>
+    <td>NEDEF</td>
+    <td>TRUE</td>
+    <td>NEDEF</td>
+</tr>
+<tr>
+    <td>NEDEF</td>
+    <td>FALSE</td>
+    <td>FALSE</td>
+    <td>NEDEF</td>
+    <td>NEDEF</td>
+</tr>
+<tr>
+    <td>NEDEF</td>
+    <td>NEDEF</td>
+    <td>NEDEF</td>
+    <td>NEDEF</td>
+    <td>NEDEF</td>
+</tr>
+</tbody></table>
+<h2><a name="k2"></a>3.2 Aritmetika a agregační funkce </h2>
+<a href="#k"><img src="kap3_soubory/toc.gif" alt="Obsah 3. kapitoly"></a>
+<dt><a href="#k21">3.2.1 Konstrukt GROUP BY</a></dt>
+<dt><a href="#k22">3.2.2 Sémantika agregačních funkcí</a></dt>
+<br>
+<table align="center" border="0" cellpadding="5" cellspacing="0">
+<tbody><tr><td>              
+<table align="center" border="1" cellpadding="1" cellspacing="1">
+<caption align="top"><i>aritmetika</i></caption>
+<tbody><tr bgcolor="Lime">
+    <td><center><b>SQL</b></center></td>
+    <td><center><b>Význam</b></center></td>
+  </tr>
+  <tr>
+    <td>+,-,*,/</td>
+    <td>+,-,*,/</td>
+  </tr>
+  <tr>
+    <td>POWER(číslo,mocnitel)</td>
+    <td>mocnina</td>
+  </tr>
+  <tr>
+    <td>ROUND(číslo,poč_des_míst)</td>
+    <td>zaokrouhlení</td>
+  </tr>
+  <tr>
+    <td>ABS()</td>
+    <td>absolutní hodnota</td>
+  </tr>
+  <tr>
+    <td>SQRT()</td>
+    <td>druhá odmocnina</td>
+  </tr>
+  <tr>
+    <td>GREATEST(seznam hodnot)</td>
+    <td>maximum</td>
+  </tr>
+  <tr>
+    <td>LEAST(seznam hodnot)</td>
+    <td>minimum</td>
+  </tr>
+  <tr>
+    <td>MOD()</td>
+    <td>zbytek po dělení</td>
+  </tr>
+</tbody></table>
+</td>
+<td></td>
+<td>
+<table align="center" border="1" cellpadding="1" cellspacing="1">
+<caption align="top"><i>agregace</i></caption>
+<tbody><tr bgcolor="Lime">
+    <td><center><b>SQL</b></center></td>
+    <td><center><b>Význam</b></center></td>
+  </tr>
+  <tr>
+    <td>AVG()</td>
+    <td>průměr platných hodnot</td>
+  </tr>
+  <tr>
+    <td>COUNT(*)</td>
+    <td>počet řádků</td>
+  </tr>
+  <tr>
+    <td>COUNT()</td>
+    <td>počet platných hodnot</td>
+  </tr>
+  <tr>
+    <td>DISTINCT</td>
+    <td>pouze odlišné hodnoty</td>
+  </tr>
+  <tr>
+    <td>GROUP BY</td>
+    <td>seskupit podle klíče</td>
+  </tr>
+  <tr>
+    <td>HAVING</td>
+    <td>mající</td>
+  </tr>
+  <tr>
+    <td>MAX()</td>
+    <td>maximum platných hodnot</td>
+  </tr>
+  <tr>
+    <td>MIN()</td>
+    <td>minimum platných hodnot</td>
+  </tr>
+  <tr>
+    <td>SUM()</td>
+    <td>součet platných hodnot</td>
+  </tr>
+</tbody></table>
+</td>
+</tr>
+</tbody></table>
+<p>Jednoduché rozšíření základní verze relačního jazyka lze provést
+zavedením aritmetických operací. To umožní provádět jednoduché výpočty
+na hodnotách vstupujících do výsledné relace. Využijí se k tomu hodnoty
+atributů relací daných za FROM a typově stejné konstanty. Aritmetický
+výraz za SELECT lze využít např. v následujícím dotazu. </p>
+<b>D9.</b> Najdi všechny exempláře knihy Tučňák od Macury tzn. knihy s <i>isbn</i> = 2 a jejich cenu v DM ( současný kurz je 1 DM = 18 Kč ). <p> </p>
+<pre>SELECT isbn,id,cena/18 FROM Exemplar
+  WHERE isbn = 2 </pre>
+<table align="center" border="0" cellpadding="10" cellspacing="0">
+<tbody><tr>
+<td>
+<table align="left" border="1" cellpadding="1" cellspacing="1">
+<caption align="top"><i>EXEMPLAR </i></caption>
+<tbody><tr bgcolor="#8080ff">
+    <th colspan="1">ISBN</th>
+	<th colspan="1">ID</th>
+	<th colspan="1">cena/18</th>   
+</tr>
+<tr>
+	<td>1</td>
+    <td>1</td>
+    <td>200</td>
+</tr>
+<tr bgcolor="Aqua">
+	<td>2</td>
+    <td>2</td>
+    <td>255</td>
+</tr>
+<tr bgcolor="Aqua">
+	<td>2</td>
+    <td>3</td>
+    <td>100</td>
+</tr>
+<tr>
+	<td>3</td>
+    <td>4</td>
+	<td>560</td>
+</tr>
+<tr bgcolor="Aqua">
+	<td>2</td>
+    <td>5</td>
+    <td>352</td>
+</tr>
+<tr>
+	<td>7</td>
+    <td>6</td>
+    <td>102</td>
+</tr>
+<tr>
+	<td>8</td>
+    <td>7</td>
+    <td>156</td>
+</tr>
+<tr>
+	<td>4</td>
+	<td>8</td>
+    <td>125</td>
+</tr>
+</tbody></table>
+</td>
+<td>
+<table align="left" border="1" cellpadding="1" cellspacing="1">
+<tbody><tr bgcolor="#8080ff">
+    <th colspan="1">ISBN</th>
+	<th colspan="1">ID</th>
+	<th colspan="1">cena/18</th>   
+</tr>
+<tr bgcolor="Yellow">
+	<td>2</td>
+    <td>2</td>
+    <td>14</td>
+</tr>
+<tr bgcolor="Yellow">
+	<td>2</td>
+    <td>3</td>
+    <td>5</td>
+</tr>
+<tr bgcolor="Yellow">
+	<td>2</td>
+    <td>5</td>
+    <td>19</td>
+</tr>
+</tbody></table>
+</td>
+</tr>
+</tbody></table>
+<p>Dále lze sílu jazyka ovlivnit pomocí vestavěných agregačních
+funkcí.V SQL jsou k dispozici funkce COUNT, SUM, MAX, MIN a AVG.
+Použití těchto funkcí se vztahuje k hodnotám dotazem specifikovaného
+sloupce relace. Podle standardu ANSI, pro COUNT daného atributu musí
+být povinně specifikováno DISTINCT, naopak COUNT(*), tj. aplikace COUNT
+na celou relaci, počítá prvky včetně jejich duplicit. Funkce SUM a AVG
+počítají (není-li specifikováno DISTINCT) i s duplicitními hodnotami.
+Požadavek zahrnutí duplicitních hodnot do výpočtu lze zadat i
+explicitním vyjádřením ALL. Podle standardu mají agregační funkce
+(kromě COUNT) ignorovat prázdné hodnoty. </p>
+<p class="BEZ"><i>Pro zápis dotazu s agregací platí jednoduché pravidlo:</i></p>
+<pre>SELECT popis projekce FROM tabulka 
+  WHERE podmínka selekce
+  GROUP BY klíč agregace 
+  ORDER BY klíč třídění;</pre>
+<p>Jde vlastně o povinný popis projekce a datového zdroje, pak
+následuje nepovinný popis selekce, nepovinný klíč k agregaci a
+nepovinné setřídění podle obecně jiného klíče. Pro pochopení dotazu s
+agregací je třeba si uvědomit pořadí kroků, které se provádějí po
+obdržení dotazu. Nejprve je proveden výběr tabulky, pak následuje
+selekce, která většinou výrazně zmenší počet řádků. Následná agregace
+se zabývá pouze vybranými řádky po restrikci a podle klíče nebo bez něj
+sestaví agregáty s využitím agregačních funkcí. Ty jsou setříděny, a
+teprve potom dojde na projekci jednotlivých sloupců.</p>
+<p class="BEZ"><i>Tomu odpovídá schéma:</i></p>
+<pre>TABULKA =&gt; SELEKCE =&gt; AGREGACE =&gt; TŘÍDĚNÍ =&gt; PROJEKCE </pre>
+<b>D10.</b> Jak velký je celkový počet čtenářů. <p> </p>
+<pre> SELECT COUNT(*) FROM Ctenar </pre>
+<table align="center" border="1" cellpadding="1" cellspacing="1">
+<tbody><tr bgcolor="#8080ff">
+    <th colspan="1">COUNT (*)</th>
+</tr>
+<tr bgcolor="Yellow">
+	<td align="center">8</td>
+</tr>
+</tbody></table>
+<p>Výsledkem je zřejmě nepojmenovaná unární relace s jedním prvkem a s nepojmenovaným sloupcem.</p>
+<p class="BEZ"><i>Poznámka:</i> V SŘBD 1NFORMIX je sloupec pojmenován COUNT(*). </p>
+<b>D11.</b> Najdi celkový počet čtenářů, kteří mají rezervovanou nějakou knihu. <p> </p>
+<pre>SELECT COUNT(DISTINCT cislo) FROM Rezervace </pre>
+<table align="center" border="1" cellpadding="1" cellspacing="1">
+<tbody><tr bgcolor="#8080ff">
+    <th colspan="1">COUNT OF cislo</th>
+</tr>
+<tr bgcolor="Yellow">
+	<td align="center">5</td>
+</tr>
+</tbody></table>
+<b>D12.</b> Najdi počet knih v knihovně, které napsal Macura tzn. knih s <i>isbn</i> = 2. <p> </p>
+<pre>SELECT COUNT(*) FROM Exemplar 
+  WHERE isbn=2</pre>
+<table align="center" border="0" cellpadding="10" cellspacing="0">
+<tbody><tr>
+<td>
+<table align="left" border="1" cellpadding="1" cellspacing="1">
+<caption align="top"><i>EXEMPLAR </i></caption>
+<tbody><tr bgcolor="#8080ff">
+    <th colspan="1">ISBN</th>
+	<th colspan="1">ID</th>
+	<th colspan="1">D_NAKUP</th> 
+	<th colspan="1">CENA</th>   
+</tr>
+<tr>
+	<td>1</td>
+    <td>1</td>
+    <td>11.5.1988</td>
+    <td>200</td>
+</tr>
+<tr bgcolor="Aqua">
+	<td>2</td>
+    <td>2</td>
+    <td>2.5.1978</td>
+    <td>255</td>
+</tr>
+<tr bgcolor="Aqua">
+	<td>2</td>
+    <td>3</td>
+    <td>15.6.1984</td>
+    <td>100</td>
+</tr>
+<tr>
+	<td>3</td>
+    <td>4</td>
+    <td>18.3.2000</td>
+	<td>560</td>
+</tr>
+<tr bgcolor="Aqua">
+	<td>2</td>
+    <td>5</td>
+    <td>15.2.2000</td>
+    <td>352</td>
+</tr>
+<tr>
+	<td>7</td>
+    <td>6</td>
+    <td>19.5.1977</td>
+    <td>102</td>
+</tr>
+<tr>
+	<td>8</td>
+    <td>7</td>
+    <td>14.6.1982</td>
+    <td>156</td>
+</tr>
+<tr>
+	<td>4</td>
+	<td>8</td>
+    <td>15.2.1985</td>
+    <td>125</td>
+</tr>
+</tbody></table>
+</td>
+<td>
+<table align="center" border="1" cellpadding="1" cellspacing="1">
+<tbody><tr bgcolor="#8080ff">
+    <th colspan="1">COUNT (*)</th>
+</tr>
+<tr bgcolor="Yellow">
+	<td align="center">3</td>
+</tr>
+</tbody></table>
+</td>
+</tr>
+</tbody></table>
+<b>D13.</b> Jaká je celková <i>cena</i> Macurových knih v knihovně tzn. knih s <i>isbn</i> = 2. <p> </p>
+<pre>SELECT SUM(cena) FROM exemplar 
+  WHERE isbn = 2 </pre>
+<table align="center" border="0" cellpadding="10" cellspacing="0">
+<tbody><tr>
+<td>
+<table align="left" border="1" cellpadding="1" cellspacing="1">
+<caption align="top"><i>EXEMPLAR </i></caption>
+<tbody><tr bgcolor="#8080ff">
+    <th colspan="1">ISBN</th>
+	<th colspan="1">ID</th>
+	<th colspan="1">D_NAKUP</th> 
+	<th colspan="1">CENA</th>   
+</tr>
+<tr>
+	<td>1</td>
+    <td>1</td>
+    <td>11.5.1988</td>
+    <td>200</td>
+</tr>
+<tr bgcolor="Aqua">
+	<td>2</td>
+    <td>2</td>
+    <td>2.5.1978</td>
+    <td>255</td>
+</tr>
+<tr bgcolor="Aqua">
+	<td>2</td>
+    <td>3</td>
+    <td>15.6.1984</td>
+    <td>100</td>
+</tr>
+<tr>
+	<td>3</td>
+    <td>4</td>
+    <td>18.3.2000</td>
+	<td>560</td>
+</tr>
+<tr bgcolor="Aqua">
+	<td>2</td>
+    <td>5</td>
+    <td>15.2.2000</td>
+    <td>352</td>
+</tr>
+<tr>
+	<td>7</td>
+    <td>6</td>
+    <td>19.5.1977</td>
+    <td>102</td>
+</tr>
+<tr>
+	<td>8</td>
+    <td>7</td>
+    <td>14.6.1982</td>
+    <td>156</td>
+</tr>
+<tr>
+	<td>4</td>
+	<td>8</td>
+    <td>15.2.1985</td>
+    <td>125</td>
+</tr>
+</tbody></table>
+</td>
+<td>
+<table align="center" border="1" cellpadding="1" cellspacing="1">
+<tbody><tr bgcolor="#8080ff">
+    <th colspan="1">SUM(cena)</th>
+</tr>
+<tr bgcolor="Yellow">
+	<td align="center">707</td>
+</tr>
+</tbody></table>
+</td>
+</tr>
+</tbody></table>
+<p>Vyhodnocení dotazu vede k provedení součtu cen všech uvažovaných (i
+eventuálně stejných) knih. Vznikne jedna hodnota chápaná jako
+jednoprvková unární relace. Kombinací aritmetických výrazů a aplikací
+agregačních funkcí lze vytvářet složitější konstrukce označované jako <b>hodnotové výrazy</b>. První část příkazu SELECT má potom obecnější tvar </p>
+<pre>SELECT [DISTINCT | ALL] {* hodnotový-výrazl [,hodnotový-výraz2] ...} </pre>
+
+<h3><a name="k21"></a>3.2.1 Konstrukt GROUP BY </h3>
+<a href="#k2"><img src="kap3_soubory/toc.gif" alt="Obsah kapitoly 3.2"></a>
+<p>Speciální případ, kdy agregační funkce aplikujeme na celou relaci či
+její podmnožinu, lze rozšířit na možnost aplikace na podmnožiny relace
+zkonstruované podle výběrového kritéria. Toto kritérium představuje
+klasifikaci podle hodnot vybraného atributu. Relace se konceptuálně
+(tj. nikoliv fyzicky) rozdělí na skupiny, pro které je hodnota
+zvoleného atributu konstantní. Řádky, které obsahují v dané komponentě
+prázdnou hodnotu, se seskupí do jedné skupiny. (Pozor, v některých
+verzích SQL se tvoří pro každou prázdnou hodnotu jedna skupina.) Jména
+atributů, podle kterých se klasifikace provádí, jsou dána za vyhrazeným
+slovem GROUP BY . Za SELECT se pak jako jména atributů mohou použít jen
+tato klasifikační (v agregacích však mohou být další atributy). </p>
+<b>D14.</b>Vypiš <i>isbn</i> knih a kolik celkem knihovnu stály. <p> </p>
+<pre>SELECT isbn, sum(cena) CELKEM FROM Exemplar
+  GROUP BY isbn</pre>
+<table align="center" border="0" cellpadding="10" cellspacing="0">
+<tbody><tr>
+<td>
+<table align="left" border="1" cellpadding="1" cellspacing="1">
+<caption align="top"><i>EXEMPLAR </i></caption>
+<tbody><tr bgcolor="#8080ff">
+    <th colspan="1">ISBN</th>
+	<th colspan="1">ID</th>
+	<th colspan="1">D_NAKUP</th> 
+	<th colspan="1">CENA</th>   
+</tr>
+<tr>
+	<td>1</td>
+    <td>1</td>
+    <td>11.5.1988</td>
+    <td>200</td>
+</tr>
+<tr>
+	<td>2</td>
+    <td>2</td>
+    <td>2.5.1978</td>
+    <td>255</td>
+</tr>
+<tr>
+	<td>2</td>
+    <td>3</td>
+    <td>15.6.1984</td>
+    <td>100</td>
+</tr>
+<tr>
+	<td>3</td>
+    <td>4</td>
+    <td>18.3.2000</td>
+	<td>560</td>
+</tr>
+<tr>
+	<td>2</td>
+    <td>5</td>
+    <td>15.2.2000</td>
+    <td>352</td>
+</tr>
+<tr>
+	<td>7</td>
+    <td>6</td>
+    <td>19.5.1977</td>
+    <td>102</td>
+</tr>
+<tr>
+	<td>8</td>
+    <td>7</td>
+    <td>14.6.1982</td>
+    <td>156</td>
+</tr>
+<tr>
+	<td>4</td>
+	<td>8</td>
+    <td>15.2.1985</td>
+    <td>125</td>
+</tr>
+</tbody></table>
+</td>
+<td>
+<table align="left" border="1" cellpadding="1" cellspacing="1">
+<caption align="top"><i>EXEMPLAR </i></caption>
+<tbody><tr bgcolor="#8080ff">
+    <th colspan="1">ISBN</th>
+	<th colspan="1">CELKEM</th>   
+</tr>
+<tr bgcolor="Yellow">
+	<td>1</td>
+    <td>200</td>
+</tr>
+<tr bgcolor="Yellow">
+	<td>2</td>
+    <td>707</td>
+</tr>
+<tr bgcolor="Yellow">
+	<td>3</td>
+	<td>560</td>
+</tr>
+<tr bgcolor="Yellow">
+	<td>4</td>
+    <td>125</td>
+</tr>
+<tr bgcolor="Yellow">
+	<td>7</td>
+    <td>102</td>
+</tr>
+<tr bgcolor="Yellow">
+	<td>8</td>
+    <td>156</td>
+</tr>
+</tbody></table>
+</td>
+</tr>
+</tbody></table>
+<p class="BEZ"><i>Poznámka -</i> Zde vidíme další využití aliasu. V tomto případě je výraz SUM(cena), ve výsledném výpisu, nahrazen textem CELKEM.</p>
+<b>D15.</b>Vypiš <i>isbn</i> knih a kolik celkem knihovnu stály. Výstup setřiď podle celkové ceny.<p> </p>
+<pre>SELECT isbn, sum(cena) CELKEM FROM Exemplar
+  GROUP BY isbn
+  ORDER BY celkem</pre>
+<table align="center" border="0" cellpadding="10" cellspacing="0">
+<tbody><tr>
+<td>
+<table align="left" border="1" cellpadding="1" cellspacing="1">
+<caption align="top"><i>EXEMPLAR </i></caption>
+<tbody><tr bgcolor="#8080ff">
+    <th colspan="1">ISBN</th>
+	<th colspan="1">ID</th>
+	<th colspan="1">D_NAKUP</th> 
+	<th colspan="1">CENA</th>   
+</tr>
+<tr>
+	<td>1</td>
+    <td>1</td>
+    <td>11.5.1988</td>
+    <td>200</td>
+</tr>
+<tr>
+	<td>2</td>
+    <td>2</td>
+    <td>2.5.1978</td>
+    <td>255</td>
+</tr>
+<tr>
+	<td>2</td>
+    <td>3</td>
+    <td>15.6.1984</td>
+    <td>100</td>
+</tr>
+<tr>
+	<td>3</td>
+    <td>4</td>
+    <td>18.3.2000</td>
+	<td>560</td>
+</tr>
+<tr>
+	<td>2</td>
+    <td>5</td>
+    <td>15.2.2000</td>
+    <td>352</td>
+</tr>
+<tr>
+	<td>7</td>
+    <td>6</td>
+    <td>19.5.1977</td>
+    <td>102</td>
+</tr>
+<tr>
+	<td>8</td>
+    <td>7</td>
+    <td>14.6.1982</td>
+    <td>156</td>
+</tr>
+<tr>
+	<td>4</td>
+	<td>8</td>
+    <td>15.2.1985</td>
+    <td>125</td>
+</tr>
+</tbody></table>
+</td>
+<td>
+<table align="left" border="1" cellpadding="1" cellspacing="1">
+<caption align="top"><i>EXEMPLAR </i></caption>
+<tbody><tr bgcolor="#8080ff">
+    <th colspan="1">ISBN</th>
+	<th colspan="1">CELKEM</th>   
+</tr>
+<tr bgcolor="Yellow">
+	<td>7</td>
+    <td>102</td>
+</tr>
+<tr bgcolor="Yellow">
+	<td>4</td>
+    <td>125</td>
+</tr>
+<tr bgcolor="Yellow">
+	<td>8</td>
+    <td>156</td>
+</tr>
+<tr bgcolor="Yellow">
+	<td>1</td>
+    <td>200</td>
+</tr>
+<tr bgcolor="Yellow">
+	<td>3</td>
+	<td>560</td>
+</tr>
+<tr bgcolor="Yellow">
+	<td>2</td>
+    <td>707</td>
+</tr>
+</tbody></table>
+</td>
+</tr>
+</tbody></table>
+<b>D16.</b> Najdi pro každého čtenáře počet rezervovaných knih. <p> </p>
+<pre>SELECT cislo, COUNT(DISTINCT isbn) FROM Rezervace 
+  GROUP BY cislo</pre>
+<table align="center" border="0" cellpadding="10" cellspacing="0">
+<tbody><tr>
+<td>
+<table align="left" border="1" cellpadding="1" cellspacing="1">
+<caption align="top"><i>REZERVACE</i></caption>
+<tbody><tr bgcolor="#8080ff">
+    <th colspan="1">ID_R</th>
+    <th colspan="1">CISLO</th>	
+	<th colspan="1">ISBN</th> 
+	<th colspan="1">D_REZ</th>   
+</tr>
+<tr>
+    <td>1</td>
+    <td>100</td>
+    <td>2</td>
+    <td>1.1.2000</td>
+</tr>
+<tr>
+    <td>2</td>
+	<td>108</td>
+    <td>8</td>
+    <td>12.1.2000</td>
+</tr>
+<tr>
+    <td>3</td>
+	<td>105</td>
+    <td>7</td>
+    <td>5.2.2000</td>
+</tr>
+<tr>
+    <td>4</td>
+	<td>102</td>
+    <td>2</td>
+	<td>5.8.2000</td>
+</tr>
+<tr>
+    <td>5</td>
+	<td>108</td>
+    <td>3</td>
+    <td>4.1.2000</td>
+</tr>
+<tr>
+    <td>6</td>
+	<td>101</td>
+    <td>4</td>
+    <td>9.5.2000</td>
+</tr>
+<tr>
+    <td>7</td>
+	<td>108</td>
+    <td>8</td>
+    <td>25.2.2000</td>
+</tr>
+<tr>
+	<td>8</td>
+	<td>107</td>
+    <td>8</td>
+    <td>6.4.2000</td>
+</tr>
+</tbody></table>
+</td>
+<td>
+<table align="left" border="1" cellpadding="1" cellspacing="1">
+<tbody><tr bgcolor="#8080ff">
+    <th colspan="1">CISLO</th>	
+	<th colspan="1">COUNT OF isbn</th>   
+</tr>
+<tr bgcolor="Yellow">
+    <td>100</td>
+    <td>1</td>
+</tr>
+<tr bgcolor="Yellow">
+    <td>101</td>
+	<td>1</td>
+</tr>
+<tr bgcolor="Yellow">
+    <td>102</td>
+	<td>1</td>
+</tr>
+<tr bgcolor="Yellow">
+    <td>105</td>
+	<td>1</td>
+</tr>
+<tr bgcolor="Yellow">
+    <td>107</td>
+	<td>1</td>
+</tr>
+<tr bgcolor="Yellow">
+    <td>108</td>
+	<td>2</td>
+</tr>
+</tbody></table>
+</td>
+</tr>
+</tbody></table>
+<p>V dotazu D16 se relace VÝPŮJČKA rozdělí podle čísel čtenářů a na
+každou skupinu se aplikuje agregační funkce COUNT. Chceme-li, aby do
+výsledku přispívaly pouze některá z těchto skupin, lze použít klauzuli
+dotazu uvedenou vyhrazeným slovem HAVING. HAVING má obdobnou funkci
+jako WHERE při práci s celými relacemi (danými za FROM). Je třeba. aby
+výraz za SELECT vedl právě k jednomu prvku pro každou vybranou skupinu.
+</p>
+<p>Je přirozené, že i za HAVING lze použít agregační funkci. </p>
+<b>D17.</b> Najdi ty čtenáře, kteří mají rezervováno více než 1 knihu. <p> </p>
+<pre>SELECT cislo, COUNT(DISTINCT isbn) FROM Rezervace
+  GROUP BY cislo 
+  HAVING 1 &lt; COUNT(isbn) </pre>
+<table align="center" border="0" cellpadding="10" cellspacing="0">
+<tbody><tr>
+<td>
+<table align="left" border="1" cellpadding="1" cellspacing="1">
+<caption align="top"><i>REZERVACE</i></caption>
+<tbody><tr bgcolor="#8080ff">
+    <th colspan="1">ID_R</th>
+    <th colspan="1">CISLO</th>	
+	<th colspan="1">ISBN</th> 
+	<th colspan="1">D_REZ</th>   
+</tr>
+<tr>
+    <td>1</td>
+    <td>100</td>
+    <td>2</td>
+    <td>1.1.2000</td>
+</tr>
+<tr bgcolor="Aqua">
+    <td>2</td>
+	<td>108</td>
+    <td>8</td>
+    <td>12.1.2000</td>
+</tr>
+<tr>
+    <td>3</td>
+	<td>105</td>
+    <td>7</td>
+    <td>5.2.2000</td>
+</tr>
+<tr>
+    <td>4</td>
+	<td>102</td>
+    <td>2</td>
+	<td>5.8.2000</td>
+</tr>
+<tr bgcolor="Aqua">
+    <td>5</td>
+	<td>108</td>
+    <td>3</td>
+    <td>4.1.2000</td>
+</tr>
+<tr>
+    <td>6</td>
+	<td>101</td>
+    <td>4</td>
+    <td>9.5.2000</td>
+</tr>
+<tr bgcolor="Aqua">
+    <td>7</td>
+	<td>108</td>
+    <td>8</td>
+    <td>25.2.2000</td>
+</tr>
+<tr>
+	<td>8</td>
+	<td>107</td>
+    <td>8</td>
+    <td>6.4.2000</td>
+</tr>
+</tbody></table>
+</td>
+<td>
+<table align="left" border="1" cellpadding="1" cellspacing="1">
+<tbody><tr bgcolor="#8080ff">
+    <th colspan="1">CISLO</th>	
+	<th colspan="1">COUNT OF isbn</th>   
+</tr>
+<tr bgcolor="Yellow">
+    <td>108</td>
+    <td align="center">2</td>
+</tr>
+</tbody></table>
+</td>
+</tr>
+</tbody></table>
+<p>Výsledek je 2 a ne 3, protože SELECT obsahuje DISTINCT, který nám
+vypustí každou položku, která by se opakovala. V našem případě je to
+záznam s <i>isbn</i>=8. </p>
+<p class="BEZ"><i>Poznámka:</i> Je zajímavé, že tento syntakticky
+správný dotaz podle standardu je implementací SQL, v INFORMIXu odmítán
+(výskyt dvou DISTINCT v příkazu SELECT). Vynechání DISTINCT však vede
+opět k syntaktické chybě. </p>
+<p>Pro "čtivější" formát výstupu lze do tabulky umístit i konstantu,
+která se bude opakovat ve všech řádcích. Vložme takto do dotazu D17.
+řetězce znaků `SI REZERVOVAL', `KNIHY'. </p>
+<b>D17'.</b> 
+<pre>SELECT cislo,'SI REZERVOVAL',COUNT(isbn),'KNIHY' FROM Rezervace 
+  GROUP BY cislo 
+  HAVING 1 &lt; COUNT(DISTINCT isbn)</pre>
+<table align="center" border="1" cellpadding="1" cellspacing="1">
+<tbody><tr bgcolor="#8080ff">
+    <th colspan="1">CISLO</th>	
+    <th colspan="1"> </th>	
+	<th colspan="1">COUNT OF ISBN</th>   
+    <th colspan="1"> </th>	
+</tr>
+<tr bgcolor="Yellow">
+    <td>108</td>
+    <td>SI REZERVOVAL</td>
+    <td align="center">2</td>
+    <td>KNIHY</td>	
+</tr>
+</tbody></table>
+<h3><a name="k22"></a>3.2.2 Sémantika agregačních funkcí </h3>
+<a href="#k2"><img src="kap3_soubory/toc.gif" alt="Obsah kapitoly 3.2"></a>
+<p> Potřebný term má tvar </p>
+<p><i>agregační,funkce(výraz_ relačního_ kalkulu[,atributJ)</i></p>
+<p>Rozšíříme-li relační kalkul o tyto termy, obdržíme ovšem něco, co se
+poněkud odlišuje od agregačních funkcí v SQL. Např. na prázdných
+množinách vrací agregační funkce v SQ1. NULL, kromě COUNT, která dává
+správně 0. V kalkulu by sémantika mohla být bohatší (např . AVG by na
+prázdné množině měla hlásit chybu). V kalkulu také není nutné se
+zabývat DISTINCT, protože výraz_relačního_kalkulu dává množinu
+definitoricky a použití prvku atribut naopak implicitně neeliminuje
+duplicity, což je pro agregační funkce vhodné. </p>
+<p>Uvažujme schéma relace DODÁVÁ. Pak dotaz </p>
+<b>D18.</b> Najdi průměrné množství do knihoven dodaných knih se v relačním kalkulu vyjádří jako <p> </p>
+<pre> mn where mn = AVG(DODÁVÁ,MNOŽSTVÍ)</pre>
+<p>kde typ proměnné mn se dědí podle typu oboru hodnot agregačních funkcí. V SQL by měl dotaz D18 vyjádření </p>
+<pre>SELECT `MN =', AVG(mnozstvi) FROM Dodava </pre>
+<p class="BEZ"><i>Poznámka:</i>AVG je, co se výstupu týče, obdoba COUNT s tím rozdílem, že AVG vrací průměrnou hodnotu a COUNT počet záznamů</p> 
+<p>Kdybychom požadovali průměr pouze z různých množství dodávaných
+knih, bylo by nutné vytvořit projekci relace DODÁVÁ na atribut MNOŽSTVÍ
+(ta tvoří relaci) a na ni aplikovat agregační funkci. </p>
+<pre>mn where mn = AVG(x.MNOŽSTVÍ where DODÁVÁ(x), MNOŽSTVÍ) </pre>
+<p>V SQL jde o výraz </p>
+<pre>SELECT `MN =' AVG(DISTINCT mnozstvi) FROM Dodava </pre>
+<p>V dotazu D19 se budeme zajímat o průměrné množství dodaných knih pro
+každou knihovnu. V relačním kalkulu se tento požadavek vyjádří jako </p>
+<pre>x.NÁZEV_K, mn where DODÁVÁ(x) and 
+                   mn = AVG(y where DODÁVÁ(y) and 
+                            x.NÁZEV_K = y.NAZEV_K, MNOŽSTVÍ) </pre>
+<p> a v SQL jako </p>
+<b>D19.</b>
+<pre>SELECT nazev_k, `MN=', AVG(mnozstvi) FROM Dodava 
+  GROUP BY nazev_k </pre>
+<p>Vyzkoušíme nyní modifikaci D19 (označenou D19') s průměry různých
+množství dodaných knih pro každou knihovnu. V relačním kalkulu pouze
+provedeme projekci na MNOŽSTVÍ, tj. </p>
+<pre> x.NÁZEV_K, mn where DODÁVÁ(x) and 
+                    mn = AVG(y.MNOŽSTVÍ where DODÁVÁ(y) and 
+                             x.NÁZEV_K = y.NÁZEV_K, MNOŽSTVÍ), </pre>
+<p>zatímco v SQL se objeví klauzule DISTINCT. </p>
+<b>D19'.</b> 
+<pre>SELECT nazev_k, `MN =', AVG(DISTINCT mnozstvi) FROM Dodava 
+  GROUP BY nazev_k </pre>
+<p>Agregační funkce lze podobně jako za HAVING použít také za WHERE v hnízděných SELECT blocích (poddotazech). Uvažujme dotaz </p>
+<b>D20.</b> Vyber knihovny, do kterých bylo dodáno více než 50 knih. V relačním kalkulu jde o výraz <p> </p>
+<pre>x.NÁZEV_K where DODÁVÁ(x) and 
+               sumy where DODÁVÁ(y) and
+                         x.NÁZEV_ K = y.NÁZEV_ K, MNOŽSTVÍ)&gt;50 </pre>
+<p>Ekvivalentní výraz v SQL má tvar </p>
+<pre>SELECT DISTINCT nazev_k FROM Knihovna 
+  WHERE 50 &lt; (SELECT SUM(mnozstvi) FROM Dodava Y
+                WHERE Dodava.nazev_k = Y.nazev_k) </pre>
+<a href="#o1">Grafické vysvětlení hnízděného SELECT-FROM-WHERE bloku začíná u D27.</a>			
+<p class="BEZ"><i>Poznámka:</i> Podle standardu není možné porovnávat
+výsledek SELECT s hodnotou (danou výrazem ) v libovolném pořadí. Proto
+bylo nutné, oproti relačnímu kalkulu, v posledním dotazu SQL. pořadí
+operandů porovnání otočit. </p>
+<p>Vícenásobné použití agregačních funkcí v jedné úrovni nečiní žádné koncepční potíže. </p>
+<b>D21.</b> Dotaz - Najdi pro každou knihovnu minimální a maximální počet dodaných knih.
+se v relačním kalkulu zapíše jako <p> </p>
+<pre>x.NÁZEV_K, mi, ma where DODÁVÁ(x) and 
+    mi=miny where DODÁVÁ(y) and y.NÁZEV_K=x.NÁZEV K,MNOŽSTVÍ)
+    and ma=max(y where DODÁVÁ(z) and z.NÁZEV_K=x.NÁZEV K,MNOŽSTVÍ) </pre>
+<p> a v SQL jako </p>
+<pre>SELECT nazev_k,'MI=',MIN(mnozstvi),'MA=',MAX(mnozstvi) FROM Dodava 
+  GROUP BY nazev_k </pre>
+<p>Možnost dvou agregací vychází z toho, že jejich argument je tentýž. Problémy nastanou s hnízděnými agregacemi. </p>
+<p>Uvažujme dotaz </p>
+<b>D22.</b> Najdi průměrný celkový přírůstek knih do knihoven. <p></p>
+<p> V nelačním kalkulu bychom ho zapsali takto: </p>
+<pre>a where a = avg(v.t where DODÁVÁ(x) and 
+                          t=sum(y where DODÁVÁ(y) and 
+		                y.NÁZEV_K=x.NÁZEV_K. MNOŽSTVÍ),t) </pre>
+<p>Ve standardu SQL nelze jedním příkazem tento dotaz zapsat. Date se
+ovšem zmiňuje o existenci produktů SQL, které umožňují hnízdění
+agregačních funkcí do dvou úrovni. Z vlastní zkušenosti mohu upozornit
+na produkt SQLBase firmy GUPTA, který také dovoluje hnízdění
+agregačních funkcí. </p>
+<p>V standardním SQL lze dotaz D22 realizovat pomocí relačního přiřazovacího příkazu. </p>
+<pre>INSERT INTO X (nazev_k,t) 
+SELECT nazev_k, t=SUM(mnozstvi) FROM Dodava 
+  GROUP BY nazev_k </pre>
+<p>a následného provedení </p>
+<pre>SELECT AVG(t) FROM X </pre>
+<p>Zkomplikujeme dotazy dalším způsobem - aplikací agregačních funkcí v GROUP BY HAVING. Uvažujme relaci KNIHKUPEC a dotaz </p>
+<b>D23.</b> Najdi asociace, ve kterých je více než 150 knihkupců středoškolského vzdělání, který lze v SQL vyjádřit jako <p> </p>
+<pre>SELECT asociace FROM Knihkupec
+  WHERE vzdelani = `S' 
+  GROUP BY asociace 
+  HAVING 150 &lt; COUNT(*) </pre>
+<p>Formulujeme-li podobný dotaz </p>
+<b>D24.</b> Najdi asociace, ve kterých je méně než 150 knihkupců středoškolského vzdělání "inverzně" jako <p> </p>
+<pre>SELECT asociace FROM Knihkupec 
+  WHERE vzdelani = `S' 
+  GROUP BY asociace 
+  HAVING 150 &gt; COUNT(*) </pre>
+<p>nebude výsledek zcela korektní, protože nebude zahrnovat ty
+asociace, které nemají žádné knihkupce se středoškolským vzděláním. To
+ovšem nenastává v relačním kalkulu, kde dotaz D24 má tvar </p>
+<pre>x.ASOCIACE where KNIHKUPEC(x) and 
+                 count(y.JMÉNO_K where KNIHKUPEC(y) and 
+                       y.ASOCIACE=x.ASOCIACE and 
+                       y.VZDĚLÁNÍ='S') &lt; 150 </pre>
+<p>Abychom dosáhli ekvivalentu tohoto dotazu v SQL, je nutné jej zapsat takto: </p>
+<pre>SELECT asociace FROM Knihkupec
+WHERE 150 &gt;(SELECT COUNT DISTINCT jmeno_k FROM Knihkupec Y 
+              WHERE Y.asociace = asociace AND vzdelani = `S') </pre>
+<p>Dotaz D23 se vyjádří pouhou záměnou &gt; za &lt;. I když použijeme
+podobného triku u dalších agregačních funkcí, nemusí být výsledek bez
+problémů. Uvažujme opět schéma relace DODAVÁ. Pak dotaz </p>
+<b>D25.</b> Najdi knihovny, kde množství do nich dodávaných knih z
+Čapkova knihkupectví, je menší než 20 bychom podle daného vzoru
+zkonstruovali jako <p></p>
+<pre>SELECT DISTINCT nazev_k FROM dodava 
+  WHERE 20&gt;(SELECT SUM (mnozstvi) FROM Dodava X
+            WHERE Dodava.nazev_k = X.nazev_k
+                  AND X.jmeno_k='Čapek') </pre>
+<p>Je-li počet knih dodaných Čapkem nulový, nedává (tak jak bychom
+očekávali) SUM počet rovný 0, nýbrž NULL, tj. tyto knihovny se
+nedostanou do odpovědi. V DB2 se tento problém řeší konverzí NULL do 0
+pomocí funkce VALUE. </p>
+<b>D25.(DB2 - SQL)</b>  
+<pre>SELECT nazev_k FROM Dodava 
+  WHERE 20&gt;(SELECT VALUE (SUM (mnozstvi),0)
+              FROM Dodava X 
+              WHERE Dodava.nazev_k = X.nazev_k 
+                    AND X.jmeno_k='Čapek') </pre>
+<p>Dotazy obsahující více agregací různých množin hodnot je nutné řešit rozkladem na poddotazy. Např. dotaz</p>
+<b>D26.</b> Najdi pro každou asociaci počet knihovníků se středoškolským vzděláním a počet knihovníku s vysokoškolským vzděláním <p></p>
+<p class="BEZ">se rozloží na dva poddotazy, z nichž v prvním se pomocí
+INSERT uloží výsledek do SŠKNIH(ASOCIACE,SŠPOČET) a v druhém do
+VSKNIH(ASOCIACE, VŠPOČET). Potom se provede SELECT vytvářející spojení
+obou mezivýsledků. V relačním kalkulu jde ovšem o jeden výraz </p>
+<pre>x.ASOCIACE,sšpočet,všpočet where KNIHKUPEC(x) and
+      sšpočet=count(y.JMÉNO where KNIHKUPEC(y) and 
+                    y.ASOCIACE=x.ASOCIACE and y.VZDĚLÁNÍ='S') and
+      všpočet=count(y.JMÉNO where KNIHKUPEC(y) and 
+                    y.ASOCIACE=x.ASOCIACL and y.VZDĚLÁNÍ='V')</pre>
+<h2><a name="k3"></a>3.3 Manipulace s množinami v SQL</h2>
+<a href="#k"><img src="kap3_soubory/toc.gif" alt="Obsah 3. kapitoly"></a>
+<p>Některé složitější dotazy vyžadují další konstrukty, které obvykle
+vedou k hnízdění SELECT-FROM-WHERE bloků a dalším možnostem k vytváření
+podmínky za WHERE. </p>
+<p>Jeden z takových konstruktů je dán vyhrazeným slovem IN. Zápisem p IN A pak udáváme podmínku, že p je prvkem množiny A. </p>
+<a name="o1"></a>
+<b>D27.</b> Najdi čísla čtenářů, kteří mají rezervovány jisté tituly do 10.2.2000 a vypiš jen ty, kteří nejsou v tabulce CTENAR.<p> </p>
+<p class="BEZ"><i>Poznámka:</i> Závorky dávají jednoznačně sémantiku dotazu v češtině. </p>
+<pre>SELECT DISTINCT cislo FROM Rezervace 
+  WHERE d_rez &lt; ' 2/10/2000' AND 
+        cislo NOT IN (SELECT cislo FROM Ctenar) </pre>
+<table align="center" cellpadding="10" cellspacing="0">
+<tbody><tr>
+<td><b><i>A -</i> SELECT cislo FROM Ctenar</b></td>
+<td>
+<table align="left" border="1" cellpadding="1" cellspacing="1">
+<caption align="top"><i>CTENAR</i></caption>
+<tbody><tr bgcolor="#8080ff">
+    <th colspan="1">CISLO</th>
+	<th colspan="1">JMENO</th> 
+	<th colspan="1">ADRESA</th>   
+</tr>
+<tr>
+    <td bgcolor="Aqua">100</td>
+    <td>Tomica</td>
+    <td>Orlová</td>
+</tr>
+<tr>
+    <td bgcolor="Aqua">101</td>
+    <td>Begovská</td>
+    <td>Karviná</td>
+</tr>
+<tr>
+    <td bgcolor="Aqua">102</td>
+    <td>Piš</td>
+    <td>Orlová</td>
+</tr>
+<tr>
+    <td bgcolor="Aqua">103</td>
+    <td>Rojíček</td>
+    <td>Bohumín</td>
+</tr>
+<tr>
+    <td bgcolor="Aqua">104</td>
+    <td>Macura</td>
+    <td>Orlová</td>
+</tr>
+<tr>
+    <td bgcolor="Aqua">105</td>
+    <td>Káňa</td>
+    <td>Bohumín</td>
+</tr>
+<tr>
+    <td bgcolor="Aqua">106</td>
+    <td>Černek</td>
+    <td>Orlová</td>
+</tr>
+<tr>
+	<td bgcolor="Aqua">107</td>
+    <td>Piš</td>
+    <td>Orlová</td>
+</tr>
+</tbody></table>
+</td>
+</tr>
+<tr>
+<td><b><i>B -</i> SELECT DISTINCT cislo FROM Rezervace<br>
+WHERE d_rez &lt; ' 2/10/2000' </b></td>
+<td>
+<table align="left" border="1" cellpadding="1" cellspacing="1">
+<caption align="top"><i>REZERVACE</i></caption>
+<tbody><tr bgcolor="#8080ff">
+    <th colspan="1">ID_R</th>
+    <th colspan="1">CISLO</th>	
+	<th colspan="1">ISBN</th> 
+	<th colspan="1">D_REZ</th>   
+</tr>
+<tr>
+    <td>1</td>
+    <td bgcolor="Aqua">100</td>
+    <td>2</td>
+    <td>1.1.2000</td>
+</tr>
+<tr>
+    <td>2</td>
+	<td bgcolor="Aqua">108</td>
+    <td>8</td>
+    <td>12.1.2000</td>
+</tr>
+<tr>
+    <td>3</td>
+	<td bgcolor="Aqua">105</td>
+    <td>7</td>
+    <td>5.2.2000</td>
+</tr>
+<tr>
+    <td>4</td>
+	<td>102</td>
+    <td>2</td>
+	<td>5.8.2000</td>
+</tr>
+<tr>
+    <td>5</td>
+	<td>108</td>
+    <td>3</td>
+    <td>4.1.2000</td>
+</tr>
+<tr>
+    <td>6</td>
+	<td>101</td>
+    <td>4</td>
+    <td>9.5.2000</td>
+</tr>
+<tr>
+    <td>7</td>
+	<td>108</td>
+    <td>8</td>
+    <td>25.2.2000</td>
+</tr>
+<tr>
+	<td>8</td>
+	<td>107</td>
+    <td>8</td>
+    <td>6.4.2000</td>
+</tr>
+</tbody></table>
+</td>
+</tr>
+<tr>
+<td><b>3. spojení výrazů B NOT IN A</b></td>
+<td>
+<table align="left" border="1" cellpadding="1" cellspacing="1">
+<tbody><tr bgcolor="#8080ff">
+    <th>&nbsp;</th>	
+</tr>
+<tr bgcolor="Yellow">
+    <td>108</td>
+</tr>
+</tbody></table>
+</td>
+</tr>
+</tbody></table>	  
+<b>D28.</b> Najdi všechny exempláře knih, které mají <i>isbn</i> rovno 2 a 8. <p> </p>
+<pre>SELECT isbn, id FROM Exemplar 
+  WHERE isbn IN (2,8) </pre>
+<table align="center" border="1" cellpadding="1" cellspacing="1">
+<caption align="top"><i>EXEMPLAR </i></caption>
+<tbody><tr bgcolor="#8080ff">
+    <th colspan="1">ISBN</th>
+	<th colspan="1">ID</th>
+	<th colspan="1">D_NAKUP</th> 
+	<th colspan="1">CENA</th>   
+</tr>
+<tr>
+	<td>1</td>
+    <td>1</td>
+    <td>11.5.1988</td>
+    <td>200</td>
+</tr>
+<tr bgcolor="Aqua">
+	<td bgcolor="Yellow">2</td>
+    <td bgcolor="Yellow">2</td>
+    <td>2.5.1978</td>
+    <td>255</td>
+</tr>
+<tr bgcolor="Aqua">
+	<td bgcolor="Yellow">2</td>
+    <td bgcolor="Yellow">3</td>
+    <td>15.6.1984</td>
+    <td>100</td>
+</tr>
+<tr>
+	<td>3</td>
+    <td>4</td>
+    <td>18.3.2000</td>
+	<td>560</td>
+</tr>
+<tr bgcolor="Aqua">
+	<td bgcolor="Yellow">2</td>
+    <td bgcolor="Yellow">5</td>
+    <td>15.2.2000</td>
+    <td>352</td>
+</tr>
+<tr>
+	<td>7</td>
+    <td>6</td>
+    <td>19.5.1977</td>
+    <td>102</td>
+</tr>
+<tr bgcolor="Aqua">
+	<td bgcolor="Yellow">8</td>
+    <td bgcolor="Yellow">7</td>
+    <td>14.6.1982</td>
+    <td>156</td>
+</tr>
+<tr>
+	<td>4</td>
+	<td>8</td>
+    <td>15.2.1985</td>
+    <td>125</td>
+</tr>
+</tbody></table>
+<p>Hnízdění dotazů lze užít nejen v IN, ale i s porovnávacími
+operátory, máme-li zaručeno, že výsledek hnízděného dotazu bude právě
+jedna hodnota. </p>
+<b>D29.</b> Najdi jména čtenářů, kteří mají rezervovanou knihu Tučňák. <p> </p>
+<pre>SELECT jmeno FROM Ctenar 
+  WHERE cislo IN (SELECT cislo FROM Rezervace 
+                   WHERE isbn=(SELECT isbn 
+                                 FROM Kniha 
+                                 WHERE nazev_k='Tučňák'))</pre>
+<table align="center" cellpadding="10" cellspacing="0">
+<tbody><tr>
+<td><b><i>A -</i> SELECT isbn FROM Kniha<br> 
+WHERE nazev_k='Tučňák'</b></td>
+<td>
+<table align="left" border="1" cellpadding="1" cellspacing="1">
+<caption align="top"><i>KNIHA</i></caption>
+<tbody><tr bgcolor="#8080ff">
+    <th colspan="1">ISBN</th>
+	<th colspan="1">NAZEV</th> 
+	<th colspan="1">AUTOR</th>   
+	<th colspan="1">ROK</th>   
+</tr>
+<tr>
+    <td>1</td>
+    <td>Noha</td>
+    <td>Černek</td>
+    <td>1988</td>	
+</tr>
+<tr>
+    <td bgcolor="Aqua">2</td>
+    <td>Tučňák</td>
+    <td>Macura</td>
+    <td>1977</td>
+</tr>
+<tr>
+    <td>3</td>
+    <td>Fazole</td>
+    <td>Káňa</td>
+    <td>1978</td>
+</tr>
+<tr>
+    <td>4</td>
+    <td>Chip</td>
+	<td>Široký</td>
+	<td>1981</td>
+</tr>
+<tr>
+    <td>5</td>
+    <td>Killer</td>
+    <td>Mareš</td>
+    <td>1999</td>
+</tr>
+<tr>
+    <td>6</td>
+    <td>Odpor</td>
+    <td>Kolář</td>
+    <td>1977</td>
+</tr>
+<tr>
+    <td>7</td>
+    <td>Policie</td>
+    <td>Kunčický</td>
+    <td>1980</td>
+</tr>
+<tr>
+	<td>8</td>
+    <td>Šef</td>
+    <td>Heňo</td>
+    <td>1972</td>
+</tr>
+</tbody></table>
+</td>
+</tr>
+<tr>
+<td><b><i>B -</i> SELECT cislo FROM Rezervace</b></td>
+<td>
+<table align="left" border="1" cellpadding="1" cellspacing="1">
+<caption align="top"><i>REZERVACE</i></caption>
+<tbody><tr bgcolor="#8080ff">
+    <th colspan="1">ID_R</th>
+    <th colspan="1">CISLO</th>	
+	<th colspan="1">ISBN</th> 
+	<th colspan="1">D_REZ</th>   
+</tr>
+<tr>
+    <td>1</td>
+    <td bgcolor="Aqua">100</td>
+    <td>2</td>
+    <td>1.1.2000</td>
+</tr>
+<tr>
+    <td>2</td>
+	<td bgcolor="Aqua">108</td>
+    <td>8</td>
+    <td>12.1.2000</td>
+</tr>
+<tr>
+    <td>3</td>
+	<td bgcolor="Aqua">105</td>
+    <td>7</td>
+    <td>5.2.2000</td>
+</tr>
+<tr>
+    <td>4</td>
+	<td bgcolor="Aqua">102</td>
+    <td>2</td>
+	<td>5.8.2000</td>
+</tr>
+<tr>
+    <td>5</td>
+	<td bgcolor="Aqua">108</td>
+    <td>3</td>
+    <td>4.1.2000</td>
+</tr>
+<tr>
+    <td>6</td>
+	<td bgcolor="Aqua">101</td>
+    <td>4</td>
+    <td>9.5.2000</td>
+</tr>
+<tr>
+    <td>7</td>
+	<td bgcolor="Aqua">108</td>
+    <td>8</td>
+    <td>25.2.2000</td>
+</tr>
+<tr>
+	<td>8</td>
+	<td bgcolor="Aqua">107</td>
+    <td>8</td>
+    <td>6.4.2000</td>
+</tr>
+</tbody></table>
+</td>
+</tr>
+<tr>
+<td><b><i>C -</i> B WHERE isbn = A</b></td>
+<td>
+<table align="left" border="1" cellpadding="1" cellspacing="1">
+<tbody><tr bgcolor="#8080ff">
+    <th>&nbsp;</th>
+</tr>
+<tr bgcolor="Aqua">
+    <td>100</td>
+</tr>
+<tr bgcolor="Aqua">
+    <td>102</td>
+</tr>
+</tbody></table>
+</td>
+</tr>
+<tr>
+<td><b><i>D - </i>SELECT jmeno FROM Ctenar</b></td>
+<td>
+<table align="left" border="1" cellpadding="1" cellspacing="1">
+<caption align="top"><i>CTENAR</i></caption>
+<tbody><tr bgcolor="#8080ff">
+    <th colspan="1">CISLO</th>
+	<th colspan="1">JMENO</th> 
+	<th colspan="1">ADRESA</th>   
+</tr>
+<tr>
+    <td>100</td>
+    <td bgcolor="Aqua">Tomica</td>
+    <td>Orlová</td>
+</tr>
+<tr>
+    <td>101</td>
+    <td bgcolor="Aqua">Begovská</td>
+    <td>Karviná</td>
+</tr>
+<tr>
+    <td>102</td>
+    <td bgcolor="Aqua">Piš</td>
+    <td>Orlová</td>
+</tr>
+<tr>
+    <td>103</td>
+    <td bgcolor="Aqua">Rojíček</td>
+    <td>Bohumín</td>
+</tr>
+<tr>
+    <td>104</td>
+    <td bgcolor="Aqua">Macura</td>
+    <td>Orlová</td>
+</tr>
+<tr>
+    <td>105</td>
+    <td bgcolor="Aqua">Káňa</td>
+    <td>Bohumín</td>
+</tr>
+<tr>
+    <td>106</td>
+    <td bgcolor="Aqua">Černek</td>
+    <td>Orlová</td>
+</tr>
+<tr>
+	<td>107</td>
+    <td bgcolor="Aqua">Piš</td>
+    <td>Orlová</td>
+</tr>
+</tbody></table>
+</td>
+</tr>
+<tr>
+<td><b>D WHERE cislo IN C</b></td>
+<td>
+<table align="left" border="1" cellpadding="1" cellspacing="1">
+<tbody><tr bgcolor="#8080ff">
+    <th>&nbsp;</th>
+</tr>
+<tr bgcolor="Yellow">
+    <td>Tomica</td>
+</tr>
+<tr bgcolor="Yellow">
+    <td>Piš</td>
+</tr>
+</tbody></table>
+</td></tr></tbody></table>						   
+<p>Poznamenejme, že úvaha o jednoznačnosti <i>isbn</i> titulu Tučňák bude platit v případě, že existuje jen jedno vydání Tučňáka a že má vůbec přiřazeno <i>isbn</i>. Dotaz D29 nám zároveň ukázal i možnosti více úrovní hnízdění SELECT FROM WHERE bloků. </p>
+<p>Možnost porovnat hodnotu s hodnotou ze specifikované množiny
+nabízejí konstrukty &gt; SOME, &lt; SOME, ... . = SOME je zřejmě
+ekvivalentní použití IN. Klíčové slovo ANY je v SQL synonymum pro SOME.
+Zatímco dřívější verze SQL dovolovaly pouze ANY, které je v angličtině
+víceznačné, pozdější verze přidaly SOME.</p>
+<p> Dalším konstruktem je &gt; ALL vyjadřující "větší než všechny prvky
+ze specifikované množiny". K dispozici je i možnost použít další
+porovnávací predikáty před ALL. Použití != ALL je ekvivalentní NOT IN. </p>
+<b>D30.</b> Najdi <i>isbn</i> knih dražších než jakákoliv kniha z GB. <p> </p>
+<pre>SELECT isbn FROM Exemplar
+  WHERE cena &gt; ALL (SELECT Exemplar.cena 
+                      FROM Exemplar 
+                      WHERE Exemplar.zeme_vydani = `GB') </pre>
+<p>Původní Sequel obsahoval také množinové porovnání " je podmnožinou"
+CONTAINS, které se nevyskytuje ve standardu SQL. Důvodem je zřejmě
+vysoká cena vyhodnocení podmínky s CONTAINS. </p>
+<h2><a name="k4"></a>3.4 Kvantifikace v SQL </h2>
+<a href="#k"><img src="kap3_soubory/toc.gif" alt="Obsah 3. kapitoly"></a>
+<p>Uživatel jazyka SQL se občas setká s dotazy, které ve své složitosti
+obvykle přesahují rámec jednoduchých dotazů. Lze se snadno přesvědčit,
+že jednoduché dotazy lze vyjádřit jedním SELECT-FROM-WHERE příkazem. </p>
+<p>Těžší dotazy zřejmě vedou k hnízdění SELECT-FROM-WHERE bloků, což z
+hlediska např. relačního kalkulu může znamenat použití univerzálního
+kvantifikátoru a negace. Problémem je, že je obtížné formulovat takové
+dotazy přímo. Příkladem budiž dotaz </p>
+<b>D31.</b> Najdi jména a adresy knihkupců, kteří dodávají knihy do všech knihoven. V relačním kalkulu má vyjádření <p> </p>
+<pre>x.JMÉNO_K, x.MĚSTO where KNIHKUPEC(x) and forall y <span style="font-size: 12pt; font-family: Symbol;">Î</span> KNIHOVNA 
+                       (exists z <span style="font-size: 12pt; font-family: Symbol;">Î</span> DODÁVÁ (z.JMÉNO_K=x.JMÉNO_K and 
+                                            z.NÁZEV_K=y.NÁZEV_K)) </pre>
+<p> Uvidíme brzy, že vyjádření tohoto dotazu není v SQL triviální. </p>
+<p>V [DD92] navrhuje Date jednoduchou metodu, jak formulovat takové dotazy: </p>
+<ol>
+<li> vyjádřit dotaz v relačním kalkulu, 
+</li><li> transformovat výraz v relačním kalkulu do SQL. 
+</li></ol>
+<p>Výhoda tohoto postupu je zřejmá. Uživatel formulací v kalkulu
+vlastně provádí logickou analýzu dotazu, a to pomocí prostředku, který
+má oproti SQL mnohé výhody, jako např. ortogonálnost, systematičnost,
+přímou podporu univerzální a existenční kvantifikace apod. Výsledek
+transformace z relačního kalkulu do SQL bude sice možná méně průhledný,
+ale formálně správný. I když i to je třeba vzhledem k jistým
+záludnostem SQL brát s rezervou. </p>
+<p>Ze znalosti formálního relačního kalkulu vyplývá, že univerzální
+(forall) a existenční (exists) kvantifikátor jsou spolu svázány
+jednoduchou transformací: </p>
+<pre>forall x (p(x)) = not exists x (not p(x)) </pre>
+<p>Z toho plyne, že jakýkoliv výraz obsahující univerzální
+kvantifikátor může být nahrazen výrazem, který obsahuje pouze
+existenční kvantifikátor, a naopak. Uvažujme např. výraz </p>
+<pre>forall x exists y (y &gt; x) </pre>
+<p>Tento výraz může být nahrazen výrazem </p>
+<pre> not exists x (not exists y (y &gt; x)) </pre>
+<p>V přirozeném jazyku jde např. o konstrukce typu "Pro všechny knihy
+platí, že mají název". Ekvivalentní vyjádření je "Neexistuje kniha
+taková, že není pravda, že tato kniha má název". Jednodušeji řečeno,
+"Každá kniha má název" je ekvivalentní tvrzení "Neexistuje
+kniha bez názvu". </p>
+<p>Zřejmě je jednodušší myslet v univerzálních kvantifikátorech než v
+negacích existenčních kvantifikátorů. Zdůrazněme zde, že SQL nemá
+univerzální kvantifikátor. Obsahuje však konstrukt EXISTS, který
+simuluje existenční kvantifikátor. EXISTS v SQL není ovšem totéž. co
+existenční kvantifikátor. Je to test na neprázdnost množiny
+specifikované za EXISTS. </p>
+<p>Ukážeme nejprve několik příkladů pro použití EXISTS. </p>
+<b>D32.</b> Najdi jména čtenářů, kteří mají rezervovanou nějakou knihu. Reformulací dotazu získáme D32'.<p> </p>
+<b>D32'.</b> Najdi jména čtenářů takových, že existuje kniha, kterou mají rezervovanou. <p> </p>
+<pre>SELECT jmeno FROM Ctenar
+  WHERE EXISTS (SELECT * FROM Rezervace 
+                  WHERE cislo = Ctenar.cislo) </pre>
+<p>Sémantika výrazu EXISTS (SELECT * ...) je následující: výraz se
+vyhodnotí jako TRUE. je-li množina daná výrazem v závorkách neprázdná.
+Vidíme, že v tomto případě je konstrukt EXISTS redundantní, protože
+dotaz lze D32' lze formulovat i pomocí IN. </p>
+<p>Výraz s EXISTS lze také negovat pomocí NOT. Mějme dotaz </p>
+<b>D33.</b> Najdi čísla čtenářů takových, že nemají rezervovánu žádnou knihu od B. Němcově. <p> </p>
+<p>V logice l.řádu odpovídá dotazu D33 dotaz s univerzálním
+kvantifikátorem, který lze přeformulovat s použitím negace existenčního
+kvantifikátoru a negace následné podmínky. </p>
+<p>V přirozeném jazyku lze pak dotaz D33 vyjádřit následovně: </p>
+<b>D33'.</b> Najdi čísla čtenářů taková, že neexistuje jimi rezervovaná kniha, která by byla od B.Němcové. <p> </p>
+<b>D33.</b> 
+<pre>SELECT cislo FROM Rezervace X 
+  WHERE NOT EXISTS (SELECT * FROM Rezervace 
+                      WHERE X.cislo = cislo 
+                        AND isbn IN (SELECT isbn FROM Kniha
+                                       WHERE autor ='Němcová B.')) </pre>
+<p>Dotazem získáme ty čtenáře, pro které platí, že množina jejich rezervací, které se netýkají knih B.Němcové, je prázdná. </p>
+<p>Aplikujme nyní tuto transformaci výrazu s univerzálním
+kvantifikátorem na výraz s negaci existenčního kvantifikátoru v dotazu
+D31. V relačním kalkulu obdržíme </p>
+<pre>x.JMÉNO_K,x.MĚSTO where KNIHKUPEC(x) and not exists y <span style="font-size: 12pt; font-family: Symbol;">Î</span> KNIHOVNA 
+                      (not exists z <span style="font-size: 12pt; font-family: Symbol;">Î</span> DODÁVÁ (z.JMÉNO_K=x.JMÉNO_K and 
+                       z.NÁZEV_K=y.NÁZEV_K)) </pre>
+<p>Tento výraz již lze transformovat do SQL. </p>
+<b>D31.</b> 
+<pre>SELECT DISTINCT X.jmeno_k, X.mesto 
+     FROM Knihkupec X 
+     WHERE NOT EXISTS (SELECT DISTINCT Y.* 
+                       FROM Knihovna Y 
+                       WHERE NOT EXISTS (SELECT DISTINCT Z.* 
+                                         FROM Dodava Z 
+                                         WHERE Z.jmeno_k=X.jmeno_k 
+                                               AND Z.nazev_k=Y.nazev_k))  </pre>
+<p>Lze si povšimnout přímého vztahu mezi výrazem relačního kalkulu </p>
+<pre>exists y <span style="font-size: 12pt; font-family: Symbol;">Î</span> R (...) </pre>
+<p> a výrazem v SQL </p>
+<pre>EXISTS (SELECT DISTINCT Y.* FROM R Y WHERE ...) </pre>
+<p>V prvním případě výraz nabude hodnoty TRUE, jestliže existuje takový
+řádek z R. že nastává (...), v druhém případě nabude výraz hodnoty
+TRUE, je-li výsledek vyhodnocení příkazu SELECT za EXISTS neprázdnou
+množinou řádků z R. Zřejmě TRUE nastane v kalkulu v těch samých
+případech jako v SQL a naopak. Konstrukce jsou tedy ekvivalentní. </p>
+<p>Dotaz D31 v SQL ještě upravíme tak, že odstraníme ve všech úrovních
+SELECT bloku přejmenování relací, protože není nutné. Stejné je to i s
+vnitřními DISTINCT. Lepší je však zachovávat pravidlo "Použitím
+DISTINCT nic nezkazíš". </p>
+<pre>SELECT DISTINCT jmeno_k, mesto 
+     FROM Knihkupec 
+     WHERE NOT EXISTS (SELECT DISTINCT 
+                       FROM Knihovna 
+                       WHERE NOT EXISTS (SELECT DISTINCT 
+                                          FROM Dodava 
+                                          WHERE jmeno_k=jmeno_k 
+                                                AND nazev_k=nazev_k)) </pre>
+<p>Ještě je však třeba upozornit na fakt, že uvedená transformace vede
+k ekvivalenci vyjádřeni
+v SQL a v relačním kalkulu pouze tehdy, pohybujeme-li se na úrovni
+dvouhodnotové logik.. EXISTS v SQL totiž není vždy ekvivalentní
+implementaci existenčního kvantifikátoru. EXISTS dává FALSE i v
+případě, kdy množina za SELECT je prázdná a vznikla aplikací podmínek
+na prázdné hodnoty, tj. podmínky byly vyhodnoceny jako NEDEF. </p>
+<p>Ukážeme ještě dvě verze řešení dotazu D31, které by se nabízely, v
+případě, že by jazyk SQL. byl ortogonální. Jde o možnost použít
+porovnání dvou množin, resp. porovnání mohutnosti dvou množin. Bohužel
+ve stávajícím standardu SQL tyto konstrukce nelze použít. </p>
+<p>Porovnání dvou množin vychází z představy, že množina všech knihoven
+musí být stejná jako množina knihoven, do kterých dodává (z hlediska
+dotazu zajímavý) knihkupec. </p>
+<pre>SELECT DISTINCT jmeno_k, mesto FROM Knihkupec
+  WHERE (SELECT DISTINCT nazev_k FROM Dodava 
+           WHERE Knihkupec.jmeno_k=Dodava.jmeno_k ) 
+         =
+        (SELECT nazev_k FROM Knihovna) </pre>
+<p>Z povahy problému však vyplývá, že dané dvě množiny jsou identické, mají-li stejný počet prvků. </p>
+<pre>SELECT DISTINCT jmeno_k, mesto FROM Knihkupec  
+  WHERE (SELECT COUNT(DISTINCT nazev_k) FROM Dodava 
+           WHERE Knihkupec.jmeno_k=Dodava.jmeno_k ) 
+         =
+        (SELECT COUNT(DISTINCT nazev_k) FROM Knihovna) </pre>
+<p>Závěrem diskuse dotazu D31 prozradíme ještě jedno řešení, které
+standard dovoluje a které využívá konstruktu GROUP - BY - HAVING. </p>
+<pre>SELECT DISTINCT jmeno_k, mesto FROM Knihkupec 
+  WHERE jmeno_k IN (SELECT jmeno_k FROM Dodava 
+  GROUP BY jmeno_k 
+  HAVING COUNT(*) = (SELECT COUNT(*) FROM Knihovna ) ) </pre>
+<p>Vybírají se takoví knihkupci, jejichž počet knihoven, do kterých
+dodávají, je týž jako počet všech knihoven. Syntaxe je správná, protože
+vlevo od = je výraz definující hodnotu a vpravo hnízděný SELECT blok. </p>
+<p>Ještě komplikovanější jsou ty dotazy, které se relačním kalkulu
+vyjadřují univerzálně kvantifikovanou implikací. Příkladem může být
+dotaz </p>
+<b>D34.</b> Vyber knihkupce a jejich adresy, kteří dodávají alespoň do
+těch knihoven jako knihkupec Čapek. Tento dotaz má v relačním kalkulu
+vyjádření <p> </p>
+<pre>x.JMÉNO_K, x.MĚSTO where KNIHKUPEC(x) and forall y <span style="font-size: 12pt; font-family: Symbol;">Î</span> KNIHOVNA 
+                   (exists z <span style="font-size: 12pt; font-family: Symbol;">Î</span> DODÁVÁ(z.JMÉNO_K = `Čapek' and 
+                                       z.NÁZEV_K = y.NÁZEV_K) implies <p></p>
+                    exists t <span style="font-size: 12pt; font-family: Symbol;">Î</span> DODÁVÁ(t.JMÉNO_K =x.JMÉNO_K and 
+                                       t.NÁZEV_K = y.NÁZEV_K) ) </pre>
+<p>Teorie relačního kalkulu má ovšem k dispozici transformaci implikace pomocí negace a disjunkce. </p>
+<pre>(p implies q) = (not p) or (q) </pre>
+<p>Je-li implikace univerzálně kvantifikovaná, lze formulovat výslednou transformaci takto: </p>
+<pre>forall x (p(x) implies q(x)) = not exists x not(not p(x) or q(x)) </pre>
+<p>Aplikujeme-li tuto transformaci k dotazu D34, obdržíme v relačním kalkulu </p>
+<pre> x.JMÉNO_K, x.MĚSTO where x <span style="font-size: 12pt; font-family: Symbol;">Î</span> KNIHKUPEC and not exists y <span style="font-size: 12pt; font-family: Symbol;">Î</span> KNIHOVNA 
+                    not(not exists z <span style="font-size: 12pt; font-family: Symbol;">Î</span> DODÁVÁ(z.JMÉNO_K = `Čapek' and 
+                                               z.NÁZEV_K = y.NÁZEV_K)or 
+                    exists t <span style="font-size: 12pt; font-family: Symbol;">Î</span> DODÁVÁ(t.JMÉNO_K = x.JMÉNO_K and 
+                                       t.NÁZEV_K = y.NÁZEV_K)) </pre>
+<p>Nyní již lze provést transformaci dotazu do SQL. </p>
+<pre>SELECT DISTINCT X.jmeno_k, X.mesto FROM Knihkupec X 
+  WHERE NOT EXISTS (SELECT DISTINCT Y.* FROM Knihovna Y 
+                      WHERE NOT ( (NOT EXISTS (SELECT DISTINCT FROM Dodava Z
+            				         WHERE Z.jmeno_k = `Čapek' AND Z.nazev_k = Y.nazev_k) 
+                  			       		 OR (EXISTS SELECT DISTINCT FROM Dodava T 
+   							              WHERE T.jmeno_k=X.jmeno_k AND T.nazev_k = Y.nazev_k) </pre>
+<p>Výraz v SQL je možné učinit ještě srozumitelnější. V logice se používají tzv. De Morganova pravidla. Platí </p>
+<pre>(not (p or q) = (not p) and not (q) </pre>
+<p>Můžeme tedy odstranit dvě po sobě jdoucí NOT. Výsledkem je vyjádření </p>
+<pre>SELECT DISTINCT X.JMÉNO_K, X.MÉSTO FROM KNIHKUPEC X 
+  WHERE NOT EXISTS (SELECT DISTINCT Y.* FROM Knohovna Y 
+                      WHERE EXISTS (SELECT DISTINCT FROM Dodava Z 
+                                      WHERE Z.jmeno_k = `Čapek' 
+                                            AND Z.nazev_k = Y.nazev_k) 
+                                            AND NOT EXISTS (SELECT DISTINCT FROM Dodava T 
+                                                              WHERE T.jmeno_k -X.jmeno_k 
+                                                                    AND T.nazev_k = Y.nazev_k)) </pre>
+<p>V této verzi dotazu je vyjádřeno, že hledáme takové knihkupce, ke
+kterým neexistuje
+knihovna taková, že do ní dodává Čapek a současně do ní tito knihkupci
+nedodávají Samozřejmě, že v odpovědi na dotaz D34 se objeví i Čapek
+sám. Eliminaci tohoto prvku odpovědi by bylo nutné provést explicitně
+zadáním podmínky jmeno_k&lt;&gt; `Čapek'. </p>
+<p>Potencionálního uživatele může zaskočit složitost formulace takových
+dotazů. Komplikovanější dotazy je proto vhodné rozložit na poddotazy,
+jejichž výsledky lze umístit do dočasných pomocných relací. Tyto relace
+lze vytvářet pomocí CREATE TABLE. a jak uvidíme později, např. pomocí
+speciální formy příkazu INSERT. Samozřejmě, když takovou pomocnou
+relaci již nepotřebujeme, lze ji zrušit příkazem DROP TABLE. Druhou
+možností je vytvořit vhodný pohled (VIEW) a na něj aplikovat druhou
+část dotazu. </p>
+<p>Označme jako NĚMCOVÁ pomocnou relaci pro výsledek nejhlouběji zahnízděného poddotazu v D33'. Pak lze psát </p>
+<b>D33'.</b> 
+<pre>SELECT cislo FROM Rezervace X 
+  WHERE NOT EXISTS (SELECT * FROM Rezervace 
+                      WHERE X.cislo=cislo AND isbn IN NĚMCOVÁ)</pre>
+<p> Pro test negativní informace lze využít i možnosti porovnání 0=COUNT(...). </p>
+<b>D33".</b> 
+<pre>SELECT cislo FROM Rezervace X 
+  WHERE 0 = SELECT COUNT(*) FROM Rezervace 
+              WHERE X.cislo = cislo AND isbn IN NĚMCOVÁ </pre>
+<p>V některých relačních SŘBD je možné i jiné, explicitní vyjádření
+univerzálního kvantifikátoru, a sice pomocí ALL, nebo převedením na
+test vztahu "být podmnožinou''. tj. pomocí konstruktu CONTAINS. </p>
+<p>Posledním důležitým množinovým konstruktem je UNION, sjednocení
+relací. Přestože je součástí standardu, ne všechny implementace SQL ho
+obsahují. Za zmínku stojí, že UNION eliminuje duplikáty z výsledku. </p>
+<b>D35.</b> Najdi čísla čtenářů, kteří mají půjčenou nebo rezervovanou knihu do 31.12.1990 (nebo obojí).<p> </p>
+<pre>SELECT cislo FROM Rezervace 
+  WHERE d_rez &lt; ' 12/31 /90' 
+UNION
+SELECT cislo FROM Vypujcka 
+  WHERE d_zpet &lt; ' 12/31 /90' </pre>
+<p>Uživatelé si často myslí, že stejného efektu by dosáhli spojením obou relací přes rovnost hodnot atributů <i>cislo</i> a disjunkcí podmínek s <i>d_rez</i> a <i>d_zpet</i>.
+To ovšem není zcela pravda. neboť takto získáme pouze ty čtenáře, kteří
+splňují to, že mají současně něco rezervována a něco vypůjčeno. Výraz
+za WHERE by neměl obsahovat podmínku spojení. Z hlediska implementace,
+tj. vyhodnocení dotazu, by ovšem efektivnější byla forma dotazu D35 s
+použitím UNION. </p>
+<p>V původním Sequelu se nacházely také další množinové konstrukty -
+INTERSECT a MINUS. Tyto však nejsou součástí standardu SQL89 a jejich
+použití lze obejít pomocí jiných konstruktů SQL (IN a NOT IN). </p>
+<p>V různých dialektech SQL lze objevit další logické či množinové
+konstrukty, které ovšem nezvyšují sílu jazyka, tak jak byla podána zde.
+</p>
+<p>V závěru popisu prostředků SQL pro výběr dat si ještě všimneme
+některých speciálních detailů - možnosti používání prázdných hodnot,
+kolekcí a konstruktu LIKE, které přesahuj í rámec RMD. </p>
+<h2><a name="k5"></a>3.5 Používání prázdných hodnot </h2>
+<a href="#k"><img src="kap3_soubory/toc.gif" alt="Obsah 3. kapitoly"></a>
+<p>Prázdné hodnoty tvoří důležité rozšíření RMD. Existence prázdné
+hodnoty v SQL ovšem nutně vede ke změně sémantiky původních možností
+RMD. </p>
+<p>Vyskytne-li se v aritmetickém výrazu hodnota NULL, je výsledek také
+NULL. Při vyhodnocování aplikací porovnávacích operátorů platí, že
+porovnává-li se přitom s něčím prázdná hodnota, je výsledek vždycky
+NEDEF. Z toho plyne, že při spojení přes rovnost se nikdy do výsledku
+nespojí dvě n-tice, které mají ve spojovacím atributu prázdnou hodnotu.
+Syntakticky je zakázáno používat prázdnou hodnotu NULL jako konstantu v
+porovnáváni. tj. např. <i>d_nakup </i>= NULL vede k syntaktické chybě. </p>
+<p>Pro možnosti manipulace s prázdnými hodnotami je však k dispozici
+speciální porovnávati operátor IS NULL. Pak lze realizovat dotaz </p>
+<b>D36.</b> Vypiš inventární čísla exemplářů, které nebyly nakoupeny (ale získány nějakým jiným způsobem).<p> </p>
+<pre>SELECT id FROM Exemplar 
+  WHERE d_nakup IS NULL </pre>
+<p>Použití prázdných hodnot v kombinaci s prázdnými množinami mohou
+provázet i některé problémy. Uvažujme dotaz D30 a jeho vyjádření pomocí
+ALL. </p>
+<pre>SELECT isbn FROM Exemplar
+  WHERE cena &gt; ALL (SELECT Exemplar.cena FROM Exemplar
+                      WHERE Exemplar.zeme_vydani = `GB') </pre>
+<p>V této verzi dotazu se vybírají ty řádky relace EXEMPLAR , které mají hodnotu <i>cena</i>
+větší než kteroukoli z cen exemplářů anglických knih v knihovně. Je tak
+vlastně simulováno hledání maxima. Jestliže množina za ALL bude
+prázdná, pak vnější porovnání ceny dává TRUE pro každou hodnotu ceny a
+do odpovědi se dostanou všechny ceny z relace EXEMPLAR . </p>
+<p>Při použití funkce MAX ovšem dostaneme něco jiného. </p>
+<b>D30'.</b> 
+<pre>SELECT isbn FROM Exemplar 
+  WHERE cena &gt; (SELECT MAX(Exemplar.cena) FROM Exemplar
+                  WHERE Exemplar.zeme_vydani = `GB') </pre>
+<p>V SQL totiž MAX aplikovaná na prázdnou množinu dává hodnotu NULL a
+porovnání s cenou nebude TRUS pro žádnou hodnotu ceny. V odpovědi se
+tedy neobjeví žádné <i>isbn</i>, tj. odpovědí bude prázdná množina.</p>
+<p> Také funkce MIN, SUM a AVG aplikované na prázdnou množinu dávají
+vždy hodnotu NULL. Toto zřejmě není v souladu s běžnou intuicí. Např.
+mělo by platit </p>
+<pre>SUM( SUM(), SUM(X)) = SUM(X) </pre>
+<p>kde X je množina. Protože levou stranu lze redukovat na SUM() +
+SUM(X), mělo by být SUM() = 0. Podobně MIN() by se mělo vyhodnotit jako
+-nekonečno a MAX() jako
++nekonečno . Naopak AVG() by mělo být nedefinované, tj. spíše hlásit
+chybu. </p>
+<p>Funkce COUNT aplikovaná na prázdnou množinu dává v souladu s očekáváním 0. </p>
+<p>Ještě je nutné dodat, jak se chovají agregační funkce aplikované na
+daný sloupec s použitím klauzule DISTINCT. Nejprve se eliminují prázdné
+hodnoty (všechny), pak duplicitní hodnoty a poté se kalkuluje výsledek.
+Jistá nesymetričnost řešení ale vznikne při použití COUNT(*), kdy nejde
+použít DISTINCT a řádek prázdných hodnot je započítáván do výsledku, a
+to dokonce vícenásobně podle počtu výskytů. Počet prázdných hodnot
+sloupce A v relaci R lze snadno zjistit dotazem </p>
+<pre>SELECT COUNT(*) - COUNT(DISTINCT A) FROM R</pre>
+<p>Výskyt prázdných množin vede také k tomu, že výrazy s IN a EXISTS intuitivně ekvivalentu í se chovají jinak. Vyjdeme z dotazu </p>
+<b>D37.</b> Najdi <i>isbn</i> knih, jejichž cena není rovna ceně žádné z knih z Velké Británie.<p> </p>
+<pre>SELECT isbn FROM Exemplar
+  WHERE cena NOT IN (SELECT Exemplar.cena FROM Exemplar
+                       WHERE Exemplar.zeme_vydani = `GB')</pre>
+<p>Zdánlivě ekvivalentní vyjádření s EXISTS vede k výrazu</p>
+<b>D37'.</b> 
+<pre>SELECT isbn FROM exemplar X
+  WHERE NOT EXISTS (SELECT Exemplar.* FROM Exemplar
+                      WHERE Exemplar.zeme_vydani = `GB'
+                            AND X.cena = Exemplar.cena)</pre>
+<p>Předpokládejme, že existuje právě jedna britská kniha
+a to s neznámou cenou. V první formulaci množina za NOT IN obsahuje pouze
+NULL a tedy podmínka za vnějším WHERE bude vyhodnocena jako nedefinovaná
+pro každý exemplář. Odpovědí bude prázdná množina. V druhém případě
+hnízděný SELECT dává prázdnou množinu a odpovědi budou tedy vyhovovat všechny
+exempláře, tj. i všechna <i>isbn</i>.</p>
+<p>Při použití klauzule ORDER BY se prázdné hodnoty berou
+jako menší než jakákoli jiná hodnota, např. při vzestupném uspořádání
+se objeví na začátku výstupu.</p>
+<p>Date uvádí v [DD92] poznámku obsahující ještě další
+pozorování. Neexistují-li žádné britské knihy v knihovně a existuje
+exemplář jehož cenu neznáme, melo by se jeho <i>isbn</i> objevit ve výsledku. Jeho
+cena je jistě jiná než jakákoli cena britské knihy v knihovně. SŘBD ORACLE
+ovšem ve formulaci D37 nevybere takové <i>isbn</i> do odpovědi.</p>
+<h2><a name="k6"></a>3.6 Práce s kolekcemi v SQL</h2>
+<a href="#k"><img src="kap3_soubory/toc.gif" alt="Obsah 3. kapitoly"></a>
+<p>Pro práci s kolekcemi slouží nerelační operátory
+SELECT ALL, UNION ALL. Důsledkem jejich použití mohou vzniknout dost nepřirozené
+jevy.</p>
+<p>Uvažujme tři relace R(A). S(A) a T(A,B) dané tabulkou 2</p>
+<table align="center" border="0" cellpadding="10" cellspacing="0">
+<caption align="top"><i>Tabulka 2 Relace R,S,T</i></caption>
+  <tbody><tr align="center">
+    <th colspan="2">a)</th>
+    <th colspan="1"></th>
+	<th colspan="2">b)</th>
+    <th colspan="1"></th>
+	<th colspan="3">c)</th>
+  </tr>
+  <tr align="center">
+    <th bgcolor="Lime">R</th> 
+	<th bgcolor="Lime">A</th> 
+	<th></th>
+	<th bgcolor="Lime">S</th> 
+	<th bgcolor="Lime">A</th> 
+	<th></th> 
+	<th bgcolor="Lime">T</th>
+	<th bgcolor="Lime">A</th> 
+	<th bgcolor="Lime">C</th>
+  </tr>
+  <tr align="center">
+    <td>&nbsp;</td> 
+	<td>1</td> 
+    <td></td> 
+	<td>&nbsp;</td> 
+    <td>1</td> 
+	<td></td> 
+    <td>&nbsp;</td> 
+	<td>1</td> 
+    <td>3</td> 
+  </tr>
+  <tr align="center">
+    <td></td> 
+	<td></td> 
+    <td></td> 
+	<td>&nbsp;</td> 
+    <td>1</td> 
+	<td></td> 
+    <td>&nbsp;</td> 
+	<td>1</td> 
+    <td>4</td> 
+  </tr>
+  <tr align="center">
+    <td></td> 
+	<td></td> 
+    <td></td> 
+	<td></td> 
+    <td></td> 
+	<td></td> 
+    <td>&nbsp;</td> 
+	<td>0</td> 
+    <td>6</td> 
+  </tr>
+  <tr align="center">
+    <td></td> 
+	<td></td> 
+    <td></td> 
+	<td></td> 
+    <td></td> 
+	<td></td> 
+    <td>&nbsp;</td> 
+	<td>4</td> 
+    <td>1</td> 
+  </tr>
+</tbody></table>
+
+<p>UNION ALL relací R a S dává relaci obsahující třikrát
+hodnotu 1. UNION ovšem eliminuje duplicity, takže např. S UNION S dává R,
+což je poněkud absurdní. Něco sjednoceno samo se sebou by melo dávat totéž!
+Provedeme-li</p>
+<pre>SELECT ALL S.A,T.C FROM S,T
+  WHERE S.A = T.A</pre>
+<p>pak obdržíme výsledek v tab. 3.</p>
+<table align="center" border="0" cellpadding="15" cellspacing="0">
+<caption align="top"><i>Tabulka 3 Relace Y</i></caption>
+<tbody><tr bgcolor="Lime">
+    <th colspan="1">Y</th>
+	<th colspan="1">A</th> 
+	<th colspan="1">C</th>   
+</tr>
+<tr>
+	<td></td>
+	<td>1</td>
+	<td>3</td>
+</tr>
+<tr>
+	<td></td>
+	<td>1</td>
+	<td>3</td>
+</tr>
+<tr>
+	<td></td>
+	<td>1</td>
+	<td>4</td>
+</tr>
+<tr>
+	<td></td>
+	<td>1</td>
+	<td>4</td>
+</tr>
+</tbody></table>  
+<p>Provedeme-li následné projekce SELECT DISTINCT, resp. SELECT ALL na atribut A. obdržíme po řade výsledky v tab.4</p>
+<table align="center" border="0" cellpadding="15" cellspacing="0">
+<caption align="top"><i>Tabulka 4 Projekce relace Y</i></caption>
+<tbody><tr>
+    <th colspan="1" bgcolor="Lime">A</th>
+	<th colspan="2"> </th> 
+	<th colspan="1" bgcolor="Lime">A</th>   
+</tr>
+<tr>
+	<td>1</td>
+	<td> </td>
+	<td> </td>
+	<td>1</td>
+</tr>
+<tr>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td>1</td>
+</tr>
+<tr>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td>1</td>
+</tr>
+<tr>
+	<td></td>
+	<td></td>
+	<td></td>
+	<td>1</td>
+</tr>
+</tbody></table>  
+
+<p>tj. žádnou vhodnou selekci relace S.</p>
+<h2><a name="k7"></a>3.7 Práce s řetězci znaku v SQL</h2>
+<a href="#k"><img src="kap3_soubory/toc.gif" alt="Obsah 3. kapitoly"></a>
+<p>Konstrukt LIKE umožňuje pracovat s podřetězci hodnot atributu, které
+jsou typu CHAR nebo VARCHAR. Podmínka použitelná ve výrazu za WHERE
+(HAVING) má potom tvar</p>
+<p><i>jméno-atributu LIKE řetězcová-konstanta</i></p>
+<p>Použitím LIKE lze pak dosáhnout např. následujících selekcí relací:</p>
+<dt><b>AUTOR LIKE `JI%'</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- získají se jména autoru libovolné délky začínající na JI</dt>
+<dt><b>AUTOR LIKE `K-'</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- získají se dvoupísmenová jména autoru začínající na K</dt>
+<dt><b>AUTOR LIKE `%d--'</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- získají se minimálně třípísmenová jména autoru se třetím písmenem od konce rovným d</dt>
+<dt><b>ADRESA LIKE `%PRAHA%'</b>&nbsp;&nbsp;&nbsp;- získají se adresy obsahující kdekoliv slovo PRAHA.</dt>
+
+<h2><a name="k8"></a>3.8 Sémantika příkazu SELECT</h2>
+<a href="#k"><img src="kap3_soubory/toc.gif" alt="Obsah 3. kapitoly"></a>
+<p>Známe-li popsané konstrukty, je nutné vědět, v jakém pořadí se
+vyhodnocují, objeví-li se v jednom dotazu. Speciálně jde o případ
+použití SELECT-FROM-WHERE bloku následovaného GROUP-BY-HAVING.</p>
+<b>D38.</b> Vytvoř tabulku s čísly čtenářů, jmény a počtem výpůjček u
+čtenářů, kteří mají vypůjčeno více než 5 exemplářů. Tabulka nechť je
+netříděna sestupně podle poctu výpůjček a v rámci toho vzestupně podle
+jmen čtenářů.<p></p>
+<pre>SELECT cislo,jmeno,COUNT(id_v) FROM Vypujcka, Ctenar
+  WHERE Vypujcka.cislo = ctenar.cislo
+  GROUP BY Vypujcka.cislo
+  HAVING COUNT(id_v) &gt; `5'
+  ORDER BY 3 DESC,jmeno ASC</pre>
+<p>Procedurální sémantika dotazu (pozor, to neznamená, že
+skutečný vyhodnocovací algoritmus takto pracuje) je dána následujícím
+algoritmem:</p>
+<ol>
+<li>Vytvoří se Vypujcka X ctenar.
+</li><li>Vyhodnocením podmínky za WHERE se relace z kroku 1. zúží na spojení pres rovnost na atributech C_CT.
+</li><li>Relace z kroku 2. se rozdělí na podskupiny podle hodnot atributu <i>cislo</i>.
+</li><li>Ze skupin kroku 3. se vyberou jen ty skupiny, kde počet inventárních čísel je vetší než 5.
+</li><li>Každá skupina z kroku 4. přispívá do jednoho řádku výsledné relace.
+</li><li>Relace z 5. je uspořádána v souladu s ORDER BY. Protože třetí sloupec výsledné relace nemá jméno, je atribut zadán číslem.
+</li></ol>
+<h2><a name="k9"></a>3.9 Aktualizace v SQL </h2>
+<a href="#k"><img src="kap3_soubory/toc.gif" alt="Obsah 3. kapitoly"></a>
+<p>Aktualizační příkazy v SQL jsou INSERT, DELETE, UPDATE. Příkazy lze
+použít pro aktualizaci jedné n-tice relace nebo pro množinu n-tic.</p>
+<pre>INSERT
+INTO Ctenar (cislo,jmeno)
+VALUES (`Z20','NOVÁK P.')</pre>
+<p>Protože seznam atributu za jménem relace CTENAR neobsahuje atribut <i>adresa</i>,
+znamená to, že hodnota tohoto atributu bude pro vkládanou n-tici
+prázdná. V případě vložení kompletní n-tice není nutné seznam atributu
+uvádět.</p>
+<p>Množinové orientovaný příkaz INSERT znamená uložit výsledek dotazu
+do nějaké tabulky. To znamená, že po prvním použití INSERT na prázdnou
+tabulku lze takto simulovat přiřazovací příkaz.</p>
+<p>Chceme např. vytvořit relaci obsahující <i>isbn</i> a počet vypůjčených knih.</p>
+<pre>CREATE TABLE Kolik_ex
+           (isbn CHAR(8), pocet SMALLINT)
+INSERT
+INTO TABLE Kolik_ex
+     SELECT isbn, COUNT(id)
+     FROM Exemplar
+     GROUP BY isbn</pre>
+<p>Z relace lze odstranit i více záznamu pomocí příkazu DELETE
+formulací nějaké podmínky. Není-li zadána žádná podmínka, lze tak
+odstranit všechny řádky tabulky. (Tabulka se však nezruší, to umožňuje
+příkaz DROP TABLE).</p>
+<p>Odstranění všech výpůjček čtenáře Z20 z relace VYPUJCKA se provede příkazem</p>
+<pre>DELETE FROM Vypujcka
+WHERE cislo = Z20</pre>
+<p>Relace se modifikuje na jedné specifikované n-tici nebo
+na množině n-tic.</p>
+<p>Změní-li se jméno čtenářky Z10, modifikujeme je příkazem</p>
+<pre>UPDATE Ctenar
+SET jmeno = nové jméno
+WHERE cislo = `Z10'</pre>
+<p class="BEZ">kde "nové jméno" je výraz (zde konstanta) dávající
+nové jméno. Výraz muže být obecně dán pomocí aritmetických operací. Podmínka za WHERE opět muže specifikovat
+libovolnou selekci relace určené za UPDATE. Aktualizace specifikovaná za SET
+se provede na všech takto specifikovaných n-ticích.</p>
+<hr color="Blue" size="1">
+<a href="http://www.cs.vsb.cz/amalka/tomica/sql/kap2.html"><img src="kap3_soubory/prev.gif" alt="2. Definice dat v SQL" align="left"></a>
+<a href="http://www.cs.vsb.cz/amalka/tomica/sql/kap4.html"><img src="kap3_soubory/next.gif" alt="4. Systémový katalog" align="left"></a>
+<a href="http://www.cs.vsb.cz/amalka/tomica/sql/index.html"><img src="kap3_soubory/toc.gif" alt="Obsah" align="left"></a>
+    
+</body></html>

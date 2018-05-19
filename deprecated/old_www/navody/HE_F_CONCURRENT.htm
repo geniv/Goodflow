@@ -1,0 +1,61 @@
+<!doctype html public "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=Windows-1250">
+<title>Funkce concurrent</title>
+<link rel='stylesheet' style='text/css' href='../function.css'>
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000">
+
+
+
+<h2 class=function>concurrent</h2>
+<img src='../images/cpp.gif' width='44' height='16' border='0' alt='c/c++' align='middle' hspace='2'><img src='../images/pascal.gif' width='44' height='16' border='0' alt='pascal' align='middle' hspace='2'>
+
+
+<br><br>
+<div class='typ'>void <b>[cd_]concurrent</b>([cdp_t cdp], BOOL state);<br>
+procedure <b>[cd_]concurrent</b>([cdp : cdp_t]; state : Boolean);
+</div>
+
+
+<p><b>Parametry</b></p>
+
+<table border=1 cols=2 frame=box rules=all width=449>
+
+<tr valign="top">
+<td width=19%><i>state</i> </td>
+<td width=81%>TRUE zapíná a FALSE vypíná souběžnou práci klienta a serveru </td>
+</tr>
+
+<tr valign="top">
+<td width=19%>[<i>cdp </i></td>
+<td width=81%><a href="HE_EXTCD.htm">kontextová proměnná</a> klienta]  </td>
+</tr>
+</table><br>
+
+<p><b>Popis </b></p>
+
+<p>Procedura zapíná nebo vypíná souběžnou práci klient a serveru. </p>
+
+<p>Je-li parametr <i>state</i> roven FALSE, pak se po předání každého požadavku, který není obsažen v&nbsp;balíku, čeká na jeho provedení.</p>
+
+<p>Je-li parametr <i>state</i> roven TRUE, bude komunikace probíhat v&nbsp;režimu souběžného zpracování. V tomto režimu zavolání funkce databázového jádra způsobí vyslání požadavku do serveru, ale (z důvodů efektivnějšího fungování) se nečeká na výsledek. Po návratu z volání nemusí být tedy ve výstupních parametrech žádná smysluplná hodnota. Ta se do nich zapíše teprve poté, až přijde od serveru odpověď.</p>
+
+<p>Pozor !  Uvědomte si, že důsledkem toho mohou být zcela asynchronní změny obsahu proměnných, na něž byla spuštěna operace čtení!</p>
+
+<p>Klient může zjistit, zda na jeho poslední požadavek již přišla odpověď, když zavolá funkci <b><code>answered</code></b>. Její hodnota FALSE signalizuje, že odpověď dosud nedošla.</p>
+
+<p>Pokud klient vyšle další požadavek před obdržením odpovědi na předchozí požadavek, je tento nový požadavek pozdržen do příchodu odpovědi. Bezprostředně poté je nový požadavek komunikační knihovnou odeslán. Pro klienta pak neexistuje způsob, jak zjistit úspěch či neúspěch provedení prvního z těchto požadavků. Proto takový postup nedoporučujeme.</p>
+
+<p>Funkce <b><code>Break</code></b>, která ruší právě prováděný požadavek, pracuje asynchronně bez ohledu na to, zda je povolena souběžná práce.</p>
+
+<p>Po provedení funkce <b><code>interf_init</code></b> je souběžné zpracování vypnuto.</p>
+
+<p><b>Viz</b></p>
+
+<ul class='viz'><li><a href="HE_F_INTERFINIT.htm">interf_init</a> <li><a href="HE_F_BREAK.htm">Break</a> <li><a href="HE_F_ANSWERED.htm">answered</a></ul>
+
+</body>
+</html>

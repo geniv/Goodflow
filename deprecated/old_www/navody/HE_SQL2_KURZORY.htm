@@ -1,0 +1,121 @@
+<!doctype html public "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=Windows-1250">
+<title>Kurzory v SQL</title>
+<link rel='stylesheet' style='text/css' href='../function.css'>
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr>
+	<td style="background-image: url(../images/bghead.jpg);
+		background-position: right;
+		background-repeat: no-repeat;">
+	<table width="100%" border="0" cellpadding="0" cellspacing="0"
+		style="background-image:none">
+	<tr>
+		<td style="background-image:none" height="46"
+			width="15%"><img src="../images/title-cz.gif"
+			width="255" height="33"
+			alt="602SQL-Úplná dokumentace"
+			title="602SQL - Úplná dokumentace"
+			border="0"></td>
+		<td width="33%" align="right"><a href="../xml/html/top.html"><img class="floatno"
+			src="../images/index.gif"
+			width="15" height="16"
+			alt="Index" title="Zpět na obsah"
+			border="0" vspace="2"></a> &nbsp;
+			 </td>
+	</tr>
+	</table>
+	</td>
+</tr>
+</table><table class="navigace" border="0" width="100%"  bgcolor="#FFFFBF"><tr> <td
+width="20" align="center"><img class="floatno" src="../images/prev.gif"
+width="15" height="13" alt="&lt;&shy;" title="Předcházející téma"
+border="0"></td><td width="25%"><a
+href="HE_SQL2_SEKVENCE.htm">Sekvence</a></td> <td width="25%"
+align="right"><img class="floatno" src="../images/up.gif" width="13"
+height="15" alt="Nahoru" title="O jednu úroveň výš" border="0"
+align="middle"></td><td width="25%"><a href="HE_SQL2_JAZYKSQL.htm">Jazyk SQL a jeho implementace</a></td>
+<td width="25%" align="right"><a
+href="HE_SQL2_TRANSAKCE.htm">Transakce a body návratu</a></td><td width="20"
+align="center"><img class="floatno" src="../images/next.gif" width="15"
+height="13" alt="&shy;&gt;" title="Následující téma" border="0"></td>
+</tr></table>
+
+
+
+
+<h1><a name="he_sql2_kurzory"></a>Kurzory v SQL</h1>
+
+<p>Kurzory v&nbsp;SQL jsou nástrojem, jak programově zpracovat odpověď na <i>dotaz</i>. Umožňují číst řádky této odpovědi, modifikovat je nebo rušit je. Kurzor je vždy nastaven na některé řádce odpovědi, je před některou řádkou nebo za poslední řádkou odpovědi.</p>
+
+<p>Lokální kurzory lze <a href="HE_SQL2_DEKLARACEKURZORU.htm">deklarovat</a> v&nbsp;každém <a href="HE_SQL2_SLOZENYPRIKAZ.htm">složeném příkazu</a>. Mimo to lze pracovat s&nbsp;globálními kurzory, kterými jsou dotazy uložené v&nbsp;databázové aplikaci (vytvořené příkazem <a href="HE_SQL2_CREATEVIEW.htm">CREATE VIEW</a> nebo klientským návrhářem dotazů).</p>
+
+<p>Každý kurzor musí být nejprve otevřen příkazem <a href="HE_SQL2_OPEN.htm">OPEN</a>. Poté lze procházet a číst jeho řádky příkazem <a href="HE_SQL2_FETCH.htm">FETCH</a>, odvolávat se na jeho běžný záznam v&nbsp;příkazech <a href="HE_SQL2_UPDATECURRENT.htm">UPDATE CURRENT OF</a> a <a href="HE_SQL2_DELETECURRENT.htm">DELETE CURRENT OF</a> a nakonec jej uzavřít příkazem <a href="HE_SQL2_CLOSE.htm">CLOSE</a>.</p>
+
+<p>Neuzavřené lokální kurzory jsou automaticky uzavřeny při opuštění složeného příkazu, v&nbsp;němž jsou deklarovány.</p>
+
+<p>Jiný způsob, jak otevřít kurzor, projít a zpracovat postupně všechny jeho záznamy a kurzor uzavřít, nabízí <a href="HE_SQL2_FOR.htm">řídicí příkaz FOR</a>. Při použití FOR není třeba deklarovat NOT FOUND handler.</p>
+
+<p>Vyskytne-li se v době otevírání kurzoru chyba (tj. ne chyba syntaktická=kompilační, ale např. některá hodnota nejde zkonvertovat, k některé hodnotě nemáte právo apod.), záleží reakce na typu kurzoru. Je-li needitovatelný nebo INSENSITIVE, vytváří se vždy nová kopie kurzoru a musí se tedy kompletně vyhodnotit, proto se chyba projeví už zde. Naopak je-li kurzor editovatelný a SENSITIVE, tato chyba se projeví až při průchodu kurzorem ve FOR cyklu nebo pomocí FETCH na daném záznamu. Je-li chyba zachycena CONTINUE handlerem, pokračuje se dalším záznamem. Není-li nebo nejde-li handlovat, provede se rollback.</p>
+
+<br><p><b>Příklad použití:</b></p>
+
+<pre><code>PROCEDURE Nejlepsi (OUT MaxFirma CHAR(20), OUT MaxObjed INT); 
+BEGIN 
+  DECLARE err_notfound BIT DEFAULT FALSE;
+  DECLARE CONTINUE HANDLER FOR SQLSTATE '02000' BEGIN SET err_notfound=TRUE; END;
+<b>  DECLARE cur CURSOR FOR 
+    SELECT Firmy.adresa, CAST (SUM(Objednavky.objed) AS INT) 
+    FROM Firmy, Objednavky 
+    WHERE Objednavky.firma=Firmy.firma 
+    GROUP BY Firmy.firma 
+  FOR READ ONLY; </b>
+  DECLARE TatoHodnota INT; 
+  DECLARE TatoFirma CHAR(20); 
+  SET MaxObjed = 0; 
+<b>  OPEN cur; </b>
+  LabelLoop: LOOP 
+<b>     FETCH NEXT FROM cur INTO TatoFirma, TatoHodnota; </b>
+     IF err_notfound IS TRUE THEN LEAVE LabelLoop; END IF; 
+     IF TatoHodnota &gt; MaxObjed THEN 
+        SET MaxObjed = TatoHodnota; 
+        SET MaxFirma = TatoFirma; 
+      END IF; 
+<b>  END LOOP LabelLoop; 
+  CLOSE cur; </b>
+END ;</code></pre>
+
+
+
+<p class="subs">Seznam subsekcí:
+<ul class="subs">
+
+<li><a href="HE_SQL2_OPEN.htm">Příkaz OPEN</a>
+
+<li><a href="HE_SQL2_FETCH.htm">Příkaz FETCH</a>
+
+<li><a href="HE_SQL2_UPDATECURRENT.htm">Příkaz UPDATE CURRENT OF</a>
+
+<li><a href="HE_SQL2_DELETECURRENT.htm">Příkaz DELETE CURRENT OF</a>
+
+<li><a href="HE_SQL2_CLOSE.htm">Příkaz CLOSE</a>
+
+</ul>
+<table class="navigace" border="0" width="100%"  bgcolor="#FFFFBF"><tr> <td
+width="20" align="center"><img class="floatno" src="../images/prev.gif"
+width="15" height="13" alt="&lt;&shy;" title="Předcházející téma"
+border="0"></td><td width="25%"><a
+href="HE_SQL2_SEKVENCE.htm">Sekvence</a></td> <td width="25%"
+align="right"><img class="floatno" src="../images/up.gif" width="13"
+height="15" alt="Nahoru" title="O jednu úroveň výš" border="0"
+align="middle"></td><td width="25%"><a href="HE_SQL2_JAZYKSQL.htm">Jazyk SQL a jeho implementace</a></td>
+<td width="25%" align="right"><a
+href="HE_SQL2_TRANSAKCE.htm">Transakce a body návratu</a></td><td width="20"
+align="center"><img class="floatno" src="../images/next.gif" width="15"
+height="13" alt="&shy;&gt;" title="Následující téma" border="0"></td>
+</tr></table>
+</body>
+</html>

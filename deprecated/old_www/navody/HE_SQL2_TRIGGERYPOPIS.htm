@@ -1,0 +1,102 @@
+<!doctype html public "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=Windows-1250">
+<title>Triggery - popis syntaxe (SQL)</title>
+<link rel='stylesheet' style='text/css' href='../function.css'>
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr>
+	<td style="background-image: url(../images/bghead.jpg);
+		background-position: right;
+		background-repeat: no-repeat;">
+	<table width="100%" border="0" cellpadding="0" cellspacing="0"
+		style="background-image:none">
+	<tr>
+		<td style="background-image:none" height="46"
+			width="15%"><img src="../images/title-cz.gif"
+			width="255" height="33"
+			alt="602SQL-Úplná dokumentace"
+			title="602SQL - Úplná dokumentace"
+			border="0"></td>
+		<td width="33%" align="right"><a href="../xml/html/top.html"><img class="floatno"
+			src="../images/index.gif"
+			width="15" height="16"
+			alt="Index" title="Zpět na obsah"
+			border="0" vspace="2"></a> &nbsp;
+			 </td>
+	</tr>
+	</table>
+	</td>
+</tr>
+</table><table class="navigace" border="0" width="100%"  bgcolor="#FFFFBF">
+		  <tr>
+					 <td width="20" align="center">&nbsp;</td>
+					 <td width="25%">&nbsp;</td>
+					 <td width="25%"
+align="right"><img class="floatno" src="../images/up.gif" width="13"
+height="15" alt="Nahoru" title="O jednu úroveň výš" border="0"
+align="middle"></td><td width="25%"><a href="HE_SQL2_TRIGGERY.htm">Triggery</a></td>
+<td width="25%" align="right"><a
+href="../xml/html/updatetrigger.html">Spouštění UPDATE triggerů s uvedeným seznamem sloupců</a></td><td width="20"
+align="center"><img class="floatno" src="../images/next.gif" width="15"
+height="13" alt="&shy;&gt;" title="Následující téma" border="0"></td>
+</tr></table>
+
+
+
+
+
+<h1><a name="he_sql2_triggerypopis"></a>Syntaxe popisu triggeru (SQL)</h1>
+
+<pre><code>popis_triggeru ::= TRIGGER [schéma.]jméno_triggeru [ BEFORE | AFTER ] akce ON jméno_tabulky 
+    [&nbsp;reference ] [ granularita ] [ WHEN ( podmínka ) ] příkaz
+akce ::= INSERT | DELETE | UPDATE [ OF [ pravidlo ] sloupec { , sloupec }… ] 
+reference ::= REFERENCING { OLD [ ROW ] [ AS ] stará_řádka | NEW [ ROW ] [ AS ] nová_řádka }… 
+granularita ::= FOR EACH { ROW | STATEMENT }
+pravidlo ::= = | ANY</code></pre>
+
+<p><i>Jméno triggeru</i> musí být unikátní v rámci aplikace. <i>Jméno tabulky</i> musí označovat tabulku existující v rámci stejné aplikace a <i>sloupce</i> musí být jména vybraných sloupců této tabulky. Specifikace INSERT, DELETE nebo UPDATE říká, při jaké operaci s obsahem tabulky bude trigger spuštěn. Jsou-li za UPDATE uvedena navíc jména sloupců, bude spuštěn pouze při operacích modifikujících tuto množinu sloupců, není-li seznam sloupců uveden, trigger se spustí při změně v kterémkoliv sloupci. Viz <a href="../xml/html/updatetrigger.html">Spouštění UPDATE triggerů s uvedeným seznamem sloupců</a>.</p>
+
+<p>Identifikátory <i>stará řádka</i> a <i>nová řádka</i> umožňují odvolávat se v podmínce a v příkazu na obsah databázového záznamu před a po provedení akce, která trigger spustila. Zápis ve tvaru <code>stará_řádka.sloupec</code> resp. <code>nová_řádka.sloupec</code> označuje starou resp. novou hodnotu sloupce. Je-li uvedeno INSERT, nesmí být uvedena <i>stará řádka</i>, je-li uvedeno DELETE, nesmí být uvedena <i>nová řádka</i>, neboť tyto pojmy nemají v těchto případech smysl. Identifikátory <i>stará řádka</i> a <i>nová řádka</i> nesmí být stejné.</p>
+
+<p>Specifikace FOR EACH ROW říká, že trigger bude spuštěn pro každý změněný řádek zvlášť. Specifikace FOR EACH STATEMENT říká, že bude spuštěn pouze jednou v rámci provádění celého SQL příkazu, při němž se mění více řádků najednou. Není-li uvedeno jedno ani druhé, míní se FOR EACH STATEMENT. Specifikace nové řádky a staré řádky je povolena pouze v případě, že je uvedeno FOR EACH ROW. Transientní tabulky triggerů (dočasné tabulky obsahující smazané nebo vložené záznamy) nejsou ve 602SQL zatím implementovány, proto se varianta triggerů FOR EACH STATEMENT nedá použít, potřebujete-li číst staré a nové hodnoty v měněných řádcích. V této verzi je proto doporučováno použít FOR EACH ROW vždy.</p>
+
+<p>Při spuštění <a href="HE_SQL2_TRIGGERY.htm">triggeru</a> se nejprve vyhodnotí <a href="HE_SQL2_PODMINKA.htm"><i>podmínka</i></a> (je možné se v ní odkazovat i na staré a nové hodnoty měněných sloupců), a je-li splněná, provede se <i>příkaz</i> (<a href="HE_SQL2_PRIKAZY.htm">jednoduchý</a> nebo <a href="HE_SQL2_SLOZENYPRIKAZ.htm">složený</a>). V rámci <i>podmínky</i> ani <i>příkazu</i> nesmí být proveden příkaz otevírající nebo uzavírající transakci - chybový <a href="../xml/html/handlingcategories.html">sqlstate</a> 2D000 (SQ_INVAL_TRANS_TERM).</p>
+
+<p>BEFORE trigger při svém provádění vidí v tabulce původní verzi dat, zatímco AFTER trigger vidí již změněnou verzi dat. Ostatní klienti vidí změny (způsobené příkazem SQL nebo triggery) až po uzavření transakce.</p>
+
+<p><b>Příklad použití:</b></p>
+
+<p>trigger zajistí, že při vkládání záznamu do tabulky Firmy bude sloupec <i>nazev</i> zapsán velkými písmeny</p>
+
+<pre><code>TRIGGER VelkaPismena AFTER INSERT ON Firmy
+REFERENCING NEW ROW AS novaradka
+FOR EACH ROW
+BEGIN
+ SET novaradka.nazev=UPPER(novaradka.nazev);
+END</code></pre>
+
+<p><b>Viz</b></p>
+
+<ul class='viz'><li><a href="HE_SQL2_CREATETRIGGER.htm">CREATE TRIGGER</a> <li><a href="HE_SQL2_ALTERTRIGGER.htm">ALTER TRIGGER</a> <li><a href="HE_SQL2_DROPTRIGGER.htm">DROP TRIGGER</a></ul>
+
+
+
+<table class="navigace" border="0" width="100%"  bgcolor="#FFFFBF">
+		  <tr>
+					 <td width="20" align="center">&nbsp;</td>
+					 <td width="25%">&nbsp;</td>
+					 <td width="25%"
+align="right"><img class="floatno" src="../images/up.gif" width="13"
+height="15" alt="Nahoru" title="O jednu úroveň výš" border="0"
+align="middle"></td><td width="25%"><a href="HE_SQL2_TRIGGERY.htm">Triggery</a></td>
+<td width="25%" align="right"><a
+href="../xml/html/updatetrigger.html">Spouštění UPDATE triggerů s uvedeným seznamem sloupců</a></td><td width="20"
+align="center"><img class="floatno" src="../images/next.gif" width="15"
+height="13" alt="&shy;&gt;" title="Následující téma" border="0"></td>
+</tr></table>
+
+</body>
+</html>

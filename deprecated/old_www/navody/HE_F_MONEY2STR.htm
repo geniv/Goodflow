@@ -1,0 +1,79 @@
+<!doctype html public "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=Windows-1250">
+<title>Funkce Money2str</title>
+<link rel='stylesheet' style='text/css' href='../function.css'>
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000">
+
+<h2 class=function>Money2str</h2>
+<img src='../images/sql.gif' width='44' height='16' border='0' alt='sql' align='middle' hspace='2'>
+
+
+<br><br>
+<div class='typ'>FUNCTION <b>Money2str</b>(IN m NUMERIC(14,2), IN prez SMALLINT) RETURNS CHAR();
+</div>
+
+
+<p><b>Parametry</b></p>
+
+<table border=1 cols=2 frame=box rules=all width=383>
+
+<tr valign="top">
+<td width=18%><i>m</i> </td>
+<td width=82%>hodnota, která se má konvertovat</td>
+</tr>
+
+<tr valign="top">
+<td width=18%><i>prez</i> </td>
+<td width=82%>způsob konverze</td>
+</tr>
+</table><br>
+
+<p><b>Popis</b></p>
+
+<p>Funkce <b><code>Money2str</code></b> převede hodnotu zadanou prvním parametrem na řetězec znaků a vrátí jej. Při konverzi se použije hodnota parametru <i> prez</i> takto:</p>
+
+<table border=1 cols=2>
+
+<tr valign="top">
+<td width=8%><b>Hodnota</b></td>
+<td width=92%><b>Význam</b></td>
+</tr>
+
+<tr valign="top">
+<td width=8%>0</td>
+<td width=92%>desetinná část bude oddělena čárkou a je-li nulová, bude nahrazena pomlčkou (např. 89,30 nebo 123,-)</td>
+</tr>
+
+<tr valign="top">
+<td width=8%>1 </td>
+<td width=92%>desetinná část bude obsahovat dvě cifry oddělené od celé části tečkou (např. 89.30 nebo 123.00)</td>
+</tr>
+
+<tr valign="top">
+<td width=8%>2</td>
+<td width=92%>budou použity Windows separátory, a to jak oddělovač desetinných míst, tak oddělovač skupin číslic (např. tisíců)</td>
+</tr>
+
+<tr valign="top">
+<td width=8%>99</td>
+<td width=92%>zápis odpovídá syntaxi literálu v SQL: desetinná část bude obsahovat dvě cifry oddělené od celé části tečkou (např. 89.30 nebo 123.00)</td>
+</tr>
+
+</table><br>
+
+<p>Parametr <i>prez</i> má tedy stejný význam, jako parametr <b>Zobrazení</b> v popisu složky pohledu.</p>
+
+<p><b>Hodnota funkce</b></p>
+
+<p>Funkce vrací řetězec znaků, který je desítkovým zápisem čísla <i>m</i>.</p>
+
+<p><b>Viz</b></p>
+
+<ul class='viz'><li><a href="HE_F_INT2STR.htm">Int2str</a> <li><a href="HE_F_STR2INT.htm">Str2int</a> <li><a href="HE_F_REAL2STR.htm">Real2str</a> <li><a href="HE_F_STR2REAL.htm">Str2real</a> <li><a href="HE_F_STR2DATE.htm">Str2date</a> <li><a href="HE_F_STR2TIME.htm">Str2time</a> <li><a href="HE_F_TIME2STR.htm">Time2str</a> </ul>
+
+</body>
+</html>

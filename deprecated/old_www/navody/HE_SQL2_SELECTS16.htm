@@ -1,0 +1,121 @@
+<!doctype html public "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=Windows-1250">
+<title>Sbírka dotazů str. 16</title>
+<link rel='stylesheet' style='text/css' href='../function.css'>
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr>
+	<td style="background-image: url(../images/bghead.jpg);
+		background-position: right;
+		background-repeat: no-repeat;">
+	<table width="100%" border="0" cellpadding="0" cellspacing="0"
+		style="background-image:none">
+	<tr>
+		<td style="background-image:none" height="46"
+			width="15%"><img src="../images/title-cz.gif"
+			width="255" height="33"
+			alt="602SQL-Úplná dokumentace"
+			title="602SQL - Úplná dokumentace"
+			border="0"></td>
+		<td width="33%" align="right"><a href="../xml/html/top.html"><img class="floatno"
+			src="../images/index.gif"
+			width="15" height="16"
+			alt="Index" title="Zpět na obsah"
+			border="0" vspace="2"></a> &nbsp;
+			 </td>
+	</tr>
+	</table>
+	</td>
+</tr>
+</table><table class="navigace" border="0" width="100%"  bgcolor="#FFFFBF"><tr> <td
+width="20" align="center"><img class="floatno" src="../images/prev.gif"
+width="15" height="13" alt="&lt;&shy;" title="Předcházející téma"
+border="0"></td><td width="25%"><a
+href="HE_SQL2_SELECTS15.htm">Strana 15 (CASE v SELECT)</a></td> <td width="25%"
+align="right"><img class="floatno" src="../images/up.gif" width="13"
+height="15" alt="Nahoru" title="O jednu úroveň výš" border="0"
+align="middle"></td><td width="25%"><a href="HE_SQL2_SELECTS.htm">Sbírka příkladů SQL dotazů</a></td>
+<td width="25%" align="right"><a
+href="HE_SQL2_SELECTS17.htm">Strana 17 (duplicity v záznamech)</a></td><td width="20"
+align="center"><img class="floatno" src="../images/next.gif" width="15"
+height="13" alt="&shy;&gt;" title="Následující téma" border="0"></td>
+</tr></table>
+
+
+<h1><a name="he_sql2_selects16"></a>Sbírka dotazů – str. 16</h1>
+
+<p><b>Příklad 24</b></p>
+
+<p><b>Zadání:</b> Zjistěte, která firma má nejvyšší obrat</p>
+
+<p><b>Popis řešení:</b> Příklad se zdá jednodušší, než je ve skutečnosti.  Musí se totiž provést dvě agregační funkce (nejprve SUM a poté z výsledku MAX).</p>
+
+<p><b>SQL:</b></p>
+
+<pre>  SELECT *
+  FROM (SELECT SUM(Faktury.castka) AS suma,Firmy.nazev
+        FROM Firmy, Faktury
+        WHERE Faktury.firma=Firmy.cislo
+        GROUP BY Firmy.nazev)
+  WHERE suma=(SELECT MAX(suma) 
+              FROM (SELECT SUM(Faktury.castka) AS suma
+                        FROM Faktury
+                        GROUP BY Faktury.firma)
+             )</pre>
+
+<p>602SQL verze 8 disponuje klauzulí LIMIT, která dotaz podstatně zjednoduší:</p>
+
+<p><b>SQL:</b></p>
+
+<pre>  SELECT SUM(Faktury.castka) AS suma,Firmy.nazev
+  FROM Firmy, Faktury
+  WHERE Faktury.firma=Firmy.cislo
+  GROUP BY Firmy.nazev
+  ORDER BY suma DESC
+  LIMIT 1</pre>
+
+<p><b>Poznámky: </b></p>
+
+<p><b>a)</b> V příkladu je použito výběru prvního záznamu z dotazu obsahujícího firmy sestupně setříděné podle obratu.</p>
+
+<p><b>b) </b>Výsledkem je <b>vždy</b> jeden záznam, i když by dvě a více firem mělo stejný obrat. V tomto případě není definováno, která z firem  bude vybrána.</p>
+<br/>
+<p><b>Příklad 24 - ext.</b></p>
+<p>Pokud bychom chtěli vytvořit editovatelný dotaz obsahující všechny informace o firmě s největším obratem, můžeme např. použít tuto konstrukci:</p>
+
+<p><b>SQL:</b></p>
+
+<pre>  SELECT *
+  FROM (SELECT SUM(Faktury.castka) AS suma, Faktury.firma
+        FROM Faktury
+        GROUP BY Faktury.firma
+        ORDER BY suma DESC
+        LIMIT 1) As MaxObrat, Firmy
+  WHERE Firmy.cislo=MaxObrat.firma
+</pre>
+
+<p><b>Poznámky: </b></p>
+
+<p><b>a)</b> První operand joinu je pomocí LIMITu vybrané číslo firmy, joinem je připojená tabulka firem</p>
+<p><strong>b)</strong> Použití klauzule LIMIT uvnitř subdotazu nešlo použít vždy - až po úpravě optimalizátoru ve verzi 8.1b (28) a 9.0.05.0527</p>
+
+
+
+<table class="navigace" border="0" width="100%"  bgcolor="#FFFFBF"><tr> <td
+width="20" align="center"><img class="floatno" src="../images/prev.gif"
+width="15" height="13" alt="&lt;&shy;" title="Předcházející téma"
+border="0"></td><td width="25%"><a
+href="HE_SQL2_SELECTS15.htm">Strana 15 (CASE v SELECT)</a></td> <td width="25%"
+align="right"><img class="floatno" src="../images/up.gif" width="13"
+height="15" alt="Nahoru" title="O jednu úroveň výš" border="0"
+align="middle"></td><td width="25%"><a href="HE_SQL2_SELECTS.htm">Sbírka příkladů SQL dotazů</a></td>
+<td width="25%" align="right"><a
+href="HE_SQL2_SELECTS17.htm">Strana 17 (duplicity v záznamech)</a></td><td width="20"
+align="center"><img class="floatno" src="../images/next.gif" width="15"
+height="13" alt="&shy;&gt;" title="Následující téma" border="0"></td>
+</tr></table>
+</body>
+</html>

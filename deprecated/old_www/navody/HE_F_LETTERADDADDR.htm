@@ -1,0 +1,75 @@
+<!doctype html public "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=Windows-1250">
+<title>LetterAddAddr</title>
+<link rel='stylesheet' style='text/css' href='../function.css'>
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000">
+
+
+
+<h2 class=function>LetterAddAddr</h2><img src='../images/cpp.gif' width='44' height='16' border='0' alt='c/c++' align='middle' hspace='2'><img src='../images/pascal.gif' width='44' height='16' border='0' alt='pascal' align='middle' hspace='2'><img src='../images/sql.gif' width='44' height='16' border='0' alt='sql' align='middle' hspace='2'>
+
+
+<br><br>
+<div class='typ'>function <b>LetterAddAddr</b>(letter : integer; addr, addrtype : PChar; cc : boolean) : integer;<br>
+int <b>LetterAddAddr</b>(DWORD letter, char * addr, char * type, BOOL cc);<br>
+FUNCTION <b>LetterAddAddr</b>(IN letter INT, IN addr CHAR(64), IN addrtype CHAR(64), IN cc BIT) RETURNS INT;
+</div>
+
+
+<p><b>Parametry</b></p>
+
+<table border=1 cols=2>
+
+<tr valign="top">
+<td width=19%><i>letter</i></td>
+<td width=81%>handle dopisu</td>
+</tr>
+
+<tr valign="top">
+<td width=19%><i>addr</i></td>
+<td width=81%>adresa příjemce (<code>665000E1@MUJURAD</code> nebo <code>vonasek@mujurad.cz</code> )</td>
+</tr>
+
+<tr valign="top">
+<td width=19%><i>addrtype</i></td>
+<td width=81%>typ adresy (<code>MAIL602</code> nebo <code>Internet</code> )</td>
+</tr>
+
+<tr valign="top">
+<td width=19%><i>cc</i></td>
+<td width=81%>příznak, je-li zásilka určena adresátu přímo (<code>FALSE</code>) nebo na vědomí (<code>TRUE</code>)</td>
+</tr>
+</table><br>
+
+<p><b>Popis</b></p>
+
+<p>Funkce přidá jednoho adresáta do seznamu adresátů vytvářené zásilky <a href="HE_MAIL.htm">elektronické pošty</a>. Handle dopisu vrací (zásilku vytváří) funkce <b><code>LetterCreate</code></b></p>
+
+<p>Typ adresy <code>"Internet"</code> je ekvivalentní s typem <code>"SMTP"</code>.</p>
+
+<p>Ve (výjimečném) případě, kdy se v MAPI profilu používá jiný typ pošty, je nutné zadat adresu a typ adresy ve formátu dané pošty.</p>
+
+<p>Každá zásilka musí mít alespoň jednoho přímého adresáta, jinak při odeslání dojde k chybě č. 507. Pro rozesílání tzv. "slepých kopií"  použijte příznak <code>WBL_BCC</code> funkce <b><code>LetterCreate</code></b>.</p>
+
+<p><b>Hodnota funkce</b></p>
+
+<p>Funkce vrací nulu v případě úspěchu a  číslo chyby v případě neúspěchu. <a href="HE_MAILERRORS.htm">Číslo chyby</a> lze také zjistit pomocí <b><code>Sz_error</code></b> nebo <b><code>Signalize</code></b>.</p>
+
+<p><b>Příklad</b></p>
+
+<p><a href="HE_MAILEXAMSEND.htm">Příklad odeslání zásilky</a></p>
+
+<p><b>Viz</b></p>
+
+<ul class='viz'>
+ <li><a href="HE_F_LETTERCREATE.htm">LetterCreate</a> </li>
+ <li><a href="HE_F_LETTERCANCEL.htm">LetterCancel</a> </li>
+ <li><a href="HE_F_LETTERSEND.htm">LetterSend</a> </li>
+</ul>
+
+</body>
+</html>

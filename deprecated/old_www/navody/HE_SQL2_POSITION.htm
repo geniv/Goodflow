@@ -1,0 +1,107 @@
+<!doctype html public "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=Windows-1250">
+<title>Funkce POSITION (SQL)</title>
+<link rel='stylesheet' style='text/css' href='../function.css'>
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr>
+	<td style="background-image: url(../images/bghead.jpg);
+		background-position: right;
+		background-repeat: no-repeat;">
+	<table width="100%" border="0" cellpadding="0" cellspacing="0"
+		style="background-image:none">
+	<tr>
+		<td style="background-image:none" height="46"
+			width="15%"><img src="../images/title-cz.gif"
+			width="255" height="33"
+			alt="602SQL-Úplná dokumentace"
+			title="602SQL - Úplná dokumentace"
+			border="0"></td>
+		<td width="33%" align="right"><a href="../xml/html/top.html"><img class="floatno"
+			src="../images/index.gif"
+			width="15" height="16"
+			alt="Index" title="Zpět na obsah"
+			border="0" vspace="2"></a> &nbsp;
+			 </td>
+	</tr>
+	</table>
+	</td>
+</tr>
+</table><table class="navigace" border="0" width="100%"  bgcolor="#FFFFBF">
+		  <tr>
+					 <td width="20" align="center">&nbsp;</td>
+					 <td width="25%">&nbsp;</td>
+					 <td width="25%"
+align="right"><img class="floatno" src="../images/up.gif" width="13"
+height="15" alt="Nahoru" title="O jednu úroveň výš" border="0"
+align="middle"></td><td width="25%"><a href="HE_SQL2_FUNKCESQL.htm">Funkce definované normou SQL</a></td>
+<td width="25%" align="right"><a
+href="HE_SQL2_DELKARETEZCE.htm">CHAR_LENGTH, OCTET_LENGTH, BIT_LENGTH</a></td><td width="20"
+align="center"><img class="floatno" src="../images/next.gif" width="15"
+height="13" alt="&shy;&gt;" title="Následující téma" border="0"></td>
+</tr></table>
+
+
+
+
+
+<h1><a name="he_sql2_position"></a>Funkce POSITION (SQL)</h1>
+
+<pre><code>POSITION(str IN str2)</code></pre>
+
+<p>Funkce hledá řetězec nebo text <i>str </i>v&nbsp;řetězci nebo textu <i>str2</i>. Funkce vrací nulu, pokud řetězec nenašla, nebo první pozici, v&nbsp;níž se <i>str </i>v&nbsp;<i>str2</i> nachází, počítáno od jedné.</p>
+
+<p>Je-li <i>str</i> prázdný řetězec, funkce vrací 1, je-li <i>str2</i> prázdný řetězec, funkce vrací 0.</p>
+
+<p>Při hledání řetězce se hledá bez ohledu na velikost písmen, pokud <i>str2</i> je typu ignorujícího velikost písmen. </p>
+
+<p><b>Odchylky od Intermediate level směrem k&nbsp;Full level nebo k&nbsp;SQL 3</b>
+
+<ul>
+	<li>Tato funkce patří do Full SQL2.</li>
+</ul>
+
+<p><b>Odlišnosti od normy</b>
+
+<ul>
+	<li>Ve 602SQL není v&nbsp;typech řetězec a text rozdílu mezi prázdnou hodnotou a hodnotou NULL. Proto je-li první argument funkce POSITION NULL, funkce vrací 1, je-li druhý argument NULL, funkce vrací 0. </li>
+</ul>
+
+<br><p><b>Příklad použití:</b></p>
+
+<p>funkce, která vrátí pozici první mezery v parametru</p>
+
+<pre><code>FUNCTION PRVNIMEZERA (strpar CHAR (100)) RETURNS INT;
+BEGIN
+  RETURN (<b>POSITION</b>(' ' IN strpar));
+END</code></pre>
+
+<p><b>Viz</b></p>
+
+<ul class='viz'>
+ <li><a href="HE_SQL2_DELKARETEZCE.htm">CHAR_LENGTH</a> </li>
+ <li><a href="HE_SQL2_SUBSTRING.htm">SUBSTRING</a> </li>
+</ul>
+
+
+
+
+<table class="navigace" border="0" width="100%"  bgcolor="#FFFFBF">
+		  <tr>
+					 <td width="20" align="center">&nbsp;</td>
+					 <td width="25%">&nbsp;</td>
+					 <td width="25%"
+align="right"><img class="floatno" src="../images/up.gif" width="13"
+height="15" alt="Nahoru" title="O jednu úroveň výš" border="0"
+align="middle"></td><td width="25%"><a href="HE_SQL2_FUNKCESQL.htm">Funkce definované normou SQL</a></td>
+<td width="25%" align="right"><a
+href="HE_SQL2_DELKARETEZCE.htm">CHAR_LENGTH, OCTET_LENGTH, BIT_LENGTH</a></td><td width="20"
+align="center"><img class="floatno" src="../images/next.gif" width="15"
+height="13" alt="&shy;&gt;" title="Následující téma" border="0"></td>
+</tr></table>
+
+</body>
+</html>

@@ -1,0 +1,1 @@
+<?php--x--prohlížeč webkamer--x--vstupní heslo a ip adresu naleznete v aktualitách--x--obr/download/844_140v_eng_tcpipview.exe--x--winzip--x----x--obr/download/141_WINZIP70.EXE

@@ -1,0 +1,98 @@
+<!doctype html public "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=Windows-1250">
+<title>Kompletní CREATE TABLE</title>
+<link rel='stylesheet' style='text/css' href='../function.css'>
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr>
+	<td style="background-image: url(../images/bghead.jpg);
+		background-position: right;
+		background-repeat: no-repeat;">
+	<table width="100%" border="0" cellpadding="0" cellspacing="0"
+		style="background-image:none">
+	<tr>
+		<td style="background-image:none" height="46"
+			width="15%"><img src="../images/title-cz.gif"
+			width="255" height="33"
+			alt="602SQL-Úplná dokumentace"
+			title="602SQL - Úplná dokumentace"
+			border="0"></td>
+		<td width="33%" align="right"><a href="../xml/html/top.html"><img class="floatno"
+			src="../images/index.gif"
+			width="15" height="16"
+			alt="Index" title="Zpět na obsah"
+			border="0" vspace="2"></a> &nbsp;
+			 </td>
+	</tr>
+	</table>
+	</td>
+</tr>
+</table><table class="navigace" border="0" width="100%"  bgcolor="#FFFFBF"><tr> <td
+width="20" align="center"><img class="floatno" src="../images/prev.gif"
+width="15" height="13" alt="&lt;&shy;" title="Předcházející téma"
+border="0"></td><td width="25%"><a
+href="../xml/html/integrity_trigger.html">Pořadí akcí a kontrol při provádění příkazů</a></td> <td width="25%"
+align="right"><img class="floatno" src="../images/up.gif" width="13"
+height="15" alt="Nahoru" title="O jednu úroveň výš" border="0"
+align="middle"></td><td width="25%"><a href="../xml/html/sqltables.html">Databázové tabulky</a></td>
+<td width="25%" align="right"><a
+href="../xml/html/sql_alter_table.html">Příkaz ALTER TABLE - změna tabulky</a></td><td width="20"
+align="center"><img class="floatno" src="../images/next.gif" width="15"
+height="13" alt="&shy;&gt;" title="Následující téma" border="0"></td>
+</tr></table>
+
+
+<h1>Kompletní BNF zápis příkazu CREATE TABLE</h1>
+
+<pre><code>příkaz_CREATE_TABLE ::= CREATE [ IF NOT EXISTS ] TABLE [schéma.]jméno_tabulky [ příznak_tabulky … ]
+     	(popis_elementu {, popis_elementu}… )
+příznak_tabulky ::= REC_PRIVILS 
+popis_elementu ::= popis_sloupce | popis_omezení
+
+popis_sloupce ::= jméno_sloupce typ [ DEFAULT implic_hodnota ] 
+	[vlastnost_sloupce {, vlastnost_sloupce}… ] [ jazyk_a_třídění ]
+implic_hodnota ::= výraz | USER | UNIQUE 
+vlastnost_sloupce ::= PRIMARY KEY | UNIQUE | INDEX | NOT NULL | REFERENCES jméno_tabulky jméno_sloupce
+	| CHECK ( podmínka )
+jazyk_a_třídění ::= COLLATE [ jméno_jazyka ] [ IGNORE_CASE ]
+jméno_jazyka ::= { CSSTRING | CSISTRING | CZ | PL | FR | DE | IT | CZ_ISO | PL_ISO | FR_ISO | DE_ISO | IT_ISO }
+
+popis_omezení ::= [CONSTRAINT jméno_omezení] { popis_indexu | vnitřní_integritní_omezení
+	| referenční_integritní_omezení }
+
+popis_indexu ::= { UNIQUE | PRIMARY KEY | INDEX } (výraz [směr] {, výraz [směr] }… ) 
+	[{ NULL | NOT NULL }] 
+směr ::= ASC | DESC
+
+vnitřní_integritní_omezení ::= CHECK ( podmínka ) [ vyhodnocení ] 
+
+referenční_integritní_omezení ::= FOREIGN KEY (jméno_sloupce {, jméno_sloupce}… ) 
+	REFERENCES [schéma.]jméno_tabulky [ jméno_sloupce {, jméno_sloupce}… ] 
+	[ ON UPDATE akce_referenční_integrity ] [ ON DELETE akce_referenční_integrity ] 
+	[ vyhodnocení ]
+akce_referenční_integrity ::=  SET NULL | SET DEFAULT | CASCADE | NO ACTION 
+
+vyhodnoceni ::= INITIALLY { IMMEDIATE | DEFERRED }
+</code></pre>
+
+
+
+
+<table class="navigace" border="0" width="100%"  bgcolor="#FFFFBF"><tr> <td
+width="20" align="center"><img class="floatno" src="../images/prev.gif"
+width="15" height="13" alt="&lt;&shy;" title="Předcházející téma"
+border="0"></td><td width="25%"><a
+href="../xml/html/integrity_trigger.html">Pořadí akcí a kontrol při provádění příkazů</a></td> <td width="25%"
+align="right"><img class="floatno" src="../images/up.gif" width="13"
+height="15" alt="Nahoru" title="O jednu úroveň výš" border="0"
+align="middle"></td><td width="25%"><a href="../xml/html/sqltables.html">Databázové tabulky</a></td>
+<td width="25%" align="right"><a
+href="../xml/html/sql_alter_table.html">Příkaz ALTER TABLE - změna tabulky</a></td><td width="20"
+align="center"><img class="floatno" src="../images/next.gif" width="15"
+height="13" alt="&shy;&gt;" title="Následující téma" border="0"></td>
+</tr></table>
+</body>
+</html>

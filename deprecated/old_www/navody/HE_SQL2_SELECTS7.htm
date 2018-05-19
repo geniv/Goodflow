@@ -1,0 +1,131 @@
+<!doctype html public "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=Windows-1250">
+<title>Sbírka dotazů str. 7</title>
+<link rel='stylesheet' style='text/css' href='../function.css'>
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr>
+	<td style="background-image: url(../images/bghead.jpg);
+		background-position: right;
+		background-repeat: no-repeat;">
+	<table width="100%" border="0" cellpadding="0" cellspacing="0"
+		style="background-image:none">
+	<tr>
+		<td style="background-image:none" height="46"
+			width="15%"><img src="../images/title-cz.gif"
+			width="255" height="33"
+			alt="602SQL-Úplná dokumentace"
+			title="602SQL - Úplná dokumentace"
+			border="0"></td>
+		<td width="33%" align="right"><a href="../xml/html/top.html"><img class="floatno"
+			src="../images/index.gif"
+			width="15" height="16"
+			alt="Index" title="Zpět na obsah"
+			border="0" vspace="2"></a> &nbsp;
+			 </td>
+	</tr>
+	</table>
+	</td>
+</tr>
+</table><table class="navigace" border="0" width="100%"  bgcolor="#FFFFBF"><tr> <td
+width="20" align="center"><img class="floatno" src="../images/prev.gif"
+width="15" height="13" alt="&lt;&shy;" title="Předcházející téma"
+border="0"></td><td width="25%"><a
+href="HE_SQL2_SELECTS6.htm">Strana 6 (IS NULL, SELECT výraz)</a></td> <td width="25%"
+align="right"><img class="floatno" src="../images/up.gif" width="13"
+height="15" alt="Nahoru" title="O jednu úroveň výš" border="0"
+align="middle"></td><td width="25%"><a href="HE_SQL2_SELECTS.htm">Sbírka příkladů SQL dotazů</a></td>
+<td width="25%" align="right"><a
+href="HE_SQL2_SELECTS8.htm">Strana 8 (IN, BETWEEN, subdotaz)</a></td><td width="20"
+align="center"><img class="floatno" src="../images/next.gif" width="15"
+height="13" alt="&shy;&gt;" title="Následující téma" border="0"></td>
+</tr></table>
+
+
+<h1><a name="he_sql2_selects7"></a>Sbírka dotazů – str. 7</h1>
+
+<p><b>Příklad 13</b></p>
+
+<p><b>Zadání:</b> Zjistěte obraty a počty faktur firem po měsících.</p>
+
+<p><b>SQL:</b> </p>
+
+<pre><code>  SELECT Firmy.nazev, Month(dat1) AS Měsíc, 
+    COUNT(Faktury.cislo) AS Počet, 
+    SUM(Faktury.castka) AS Suma_Kč
+  FROM Faktury, Firmy
+  WHERE Faktury.firma= Firmy.cislo
+  GROUP BY Firmy.nazev,Month(dat1)</code></pre>
+
+<p><b>Poznámka:</b></p>
+
+<p>Pro skupinu je použita hodnota výrazu, místo funkce jazyka <code>Month</code> by šlo použít i SQL funkci <a href="HE_SQL2_EXTRACT.htm"><code>EXTRACT</code></a> ve tvaru </p>
+
+<pre><code>  EXTRACT (MONTH FROM dat1).</code></pre>
+
+<p><b>Příklad 14</b></p>
+
+<p><b>Zadání:</b> Vypište seznam všech firem a počet jejich faktur, včetně těch firem, které nemají ještě ani jednu fakturu.</p>
+
+<p><b>SQL:</b> </p>
+
+<pre><code>  SELECT Firmy.nazev, COUNT(Faktury.cislo)
+  FROM Firmy LEFT OUTER JOIN Faktury
+      ON (Firmy.cislo=Faktury.firma)
+  GROUP BY Firmy.nazev</code></pre>
+
+<p><b>Poznámky:</b></p>
+
+<p><b>a)</b> Zajímavější by to bylo v případě, kdyby nás zajímaly pouze faktury jednoho druhu. Kam umístit podmínku Faktury.druh=2?</p>
+
+<p>Správná odpověď je do podmínky JOINu za ON:</p>
+
+<pre><code>  SELECT Firmy.nazev, COUNT(Faktury.cislo)
+  FROM Firmy LEFT OUTER JOIN Faktury 
+      ON (Firmy.cislo=Faktury.firma AND Faktury.druh=2)
+  GROUP BY Firmy.nazev</code></pre>
+
+<p>Kdyby se podmínka umístila (chybně) do části WHERE</p>
+
+<pre><code>  SELECT Firmy.nazev, COUNT(Faktury.cislo)
+  FROM Firmy LEFT OUTER JOIN Faktury 
+      ON (Firmy.cislo=Faktury.firma)
+  WHERE Faktury.druh=2
+  GROUP BY Firmy.nazev</code></pre>
+
+<p>výslekem by byl nesprávný výsledek, protože podmínka WHERE se vyhodnocuje až po provedení JOINu, a toto vyhodnocení JOINu neobsahuje sloupec druh.</p>
+
+<p><b>b)</b> Je použito jedno vnější propojení. Pokud by existovala další tabulka relačně svázaná s tabulkou Faktury (nazvaná Polozky) přes dvojici sloupců <code>id_fakt</code>, je možné vytvořit dotaz se dvěma vnějšími propojeními:</p>
+
+<pre><code>  SELECT *
+  FROM Firmy LEFT OUTER JOIN Faktury 
+               LEFT OUTER JOIN Polozky ON (Faktury.id_fakt=Polozky.id_fakt) 
+       ON (Firmy.cislo=Faktury.firma)</code></pre>
+
+<p>nebo je možné uzávorkovat</p>
+
+<pre><code>  SELECT *
+  FROM (Firmy LEFT OUTER JOIN Faktury ON (Firmy.cislo=Faktury.firma))
+        LEFT OUTER JOIN Polozky ON (Faktury.id_fakt=Polozky.id_fakt) 
+    </code></pre>
+
+
+
+<table class="navigace" border="0" width="100%"  bgcolor="#FFFFBF"><tr> <td
+width="20" align="center"><img class="floatno" src="../images/prev.gif"
+width="15" height="13" alt="&lt;&shy;" title="Předcházející téma"
+border="0"></td><td width="25%"><a
+href="HE_SQL2_SELECTS6.htm">Strana 6 (IS NULL, SELECT výraz)</a></td> <td width="25%"
+align="right"><img class="floatno" src="../images/up.gif" width="13"
+height="15" alt="Nahoru" title="O jednu úroveň výš" border="0"
+align="middle"></td><td width="25%"><a href="HE_SQL2_SELECTS.htm">Sbírka příkladů SQL dotazů</a></td>
+<td width="25%" align="right"><a
+href="HE_SQL2_SELECTS8.htm">Strana 8 (IN, BETWEEN, subdotaz)</a></td><td width="20"
+align="center"><img class="floatno" src="../images/next.gif" width="15"
+height="13" alt="&shy;&gt;" title="Následující téma" border="0"></td>
+</tr></table>
+</body>
+</html>

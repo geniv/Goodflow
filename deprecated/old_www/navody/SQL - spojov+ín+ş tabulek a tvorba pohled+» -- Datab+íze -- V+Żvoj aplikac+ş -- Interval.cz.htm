@@ -1,0 +1,626 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="cs" lang="cs"><head>
+
+
+
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1250">
+<meta http-equiv="Content-language" content="cs">
+<meta http-equiv="Cache-control" content="no-cache">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="-1">
+<meta name="robots" content="index,follow">
+<meta name="googlebot" content="index,follow,snippet,noarchive">
+<meta name="description" content="Dnes se podíváme na vnější spojení tabulek, které nám rozšíří možnosti klasického  vnitřního přirozeného spojení. Uděláme si srovnání těchto metod a řekneme si,  jaké výhody nám vnější spojení tabulek může přinést. V druhé části se podíváme  na tvorbu pohledů v databázi (tzv. view), k čemu jsou nám dobrá a jak je můžeme  využít.">
+<meta name="keywords" content="Databáze, Vývoj aplikací, Interval">
+<meta name="ICBM" content="49.1915, 16.626">
+<meta name="DC.Title" content="Interval.cz">
+<meta name="DC.Identifier" content="http://interval.cz">
+<meta name="DC.Identifier" content="(SCHEME=ISSN) 12128651">
+<meta name="DC.Language" content="cs">
+<meta http-equiv="pics-label" content="(pics-1.1 &quot;http://www.icra.org/ratingsv02.html&quot; comment &quot;ICRAonline EN v2.0&quot; l gen true for &quot;http://interval.cz&quot; r (nz 1 vz 1 lz 1 oz 1 cz 1) &quot;http://www.rsac.org/ratingsv01.html&quot; l gen true for &quot;http://interval.cz&quot; r (n 0 s 0 v 0 l 0))">
+<meta http-equiv="imagetoolbar" content="no">
+<meta http-equiv="MSThemeCompatible" content="no">
+<meta name="MSSmartTagsPreventParsing" content="true">
+<link rel="shortcut icon" type="image/x-icon" href="http://interval.cz/favicon.ico">
+<link rel="alternate" type="application/atom+xml" title="Interval.cz -- SQL - spojování tabulek a tvorba pohledů -- (diskuse, Atom 0.3)" href="http://export.interval.cz/?type=atom&amp;discussion=399">
+<link rel="alternate" type="application/rdf+xml" title="Interval.cz -- SQL - spojování tabulek a tvorba pohledů -- (diskuse, RDF Site Summary 1.0)" href="http://export.interval.cz/?type=rdf&amp;discussion=399">
+<link rel="alternate" type="application/rss+xml" title="Interval.cz -- SQL - spojování tabulek a tvorba pohledů -- (diskuse, RSS 2.0)" href="http://export.interval.cz/?type=rss&amp;discussion=399">
+<link rel="home" href="http://interval.cz/">
+<link rel="search" href="http://interval.cz/search_ex.asp">
+<link rel="up" href="http://interval.cz/serialy/sql-structured-query-language/">
+<link rel="first" href="http://interval.cz/clanky/databaze-a-jazyk-sql/">
+<link rel="last" href="http://interval.cz/clanky/sql-jak-na-funkce/">
+<link rel="prev" href="http://interval.cz/clanky/sql-pokrocila-prace-s-tabulkami-a-daty/">
+<link rel="next" href="http://interval.cz/clanky/sql-jak-na-triggery/">
+<link rel="stylesheet" type="text/css" media="all" href="SQL%20-%20spojov%C3%A1n%C3%AD%20tabulek%20a%20tvorba%20pohled%C5%AF%20--%20Datab%C3%A1ze%20--%20V%C3%BDvoj%20aplikac%C3%AD%20--%20Interval.cz_soubory/html4.css">
+<link rel="stylesheet" type="text/css" media="all" href="SQL%20-%20spojov%C3%A1n%C3%AD%20tabulek%20a%20tvorba%20pohled%C5%AF%20--%20Datab%C3%A1ze%20--%20V%C3%BDvoj%20aplikac%C3%AD%20--%20Interval.cz_soubory/interval-display.css">
+
+<link rel="stylesheet" type="text/css" media="print" href="SQL%20-%20spojov%C3%A1n%C3%AD%20tabulek%20a%20tvorba%20pohled%C5%AF%20--%20Datab%C3%A1ze%20--%20V%C3%BDvoj%20aplikac%C3%AD%20--%20Interval.cz_soubory/interval-print.css"><title>SQL - spojování tabulek a tvorba pohledů -- Databáze -- Vývoj aplikací -- Interval.cz</title>
+
+<style>
+.bbt_w {color:green !important; text-decoration:underline !important; padding-bottom: 1px; border-bottom: 1px solid green !important;}
+.bbt_w:hover {color:green !important; text-decoration:underline !important; padding-bottom: 0px; border-bottom: 2px solid green !important;}
+.bbt_w:visited {color:green !important; text-decoration:underline !important; padding-bottom: 1px; border-bottom: 1px solid green !important;}
+</style><script charset="windows-1250" type="text/javascript" src="SQL%20-%20spojov%C3%A1n%C3%AD%20tabulek%20a%20tvorba%20pohled%C5%AF%20--%20Datab%C3%A1ze%20--%20V%C3%BDvoj%20aplikac%C3%AD%20--%20Interval.cz_soubory/a_009.js"></script></head><body class="interval interval-articles" id="article-399"><div class="audits">
+
+<!-- TOPList.cz -->
+<script type="text/javascript">
+<!-- <![CDATA[
+document.write ("<a href='http://www.toplist.cz'><img src='http://www.toplist.cz/dot.asp?id=33617&amp;http="+escape(document.referrer)+"&amp;wi="+escape(window.screen.width)+"&amp;he="+escape(window.screen.height)+"&amp;cd="+escape(window.screen.colorDepth)+"&amp;t="+escape(document.title)+"' style='border: 0; width: 1px; height: 1px' alt='.' /></a>");
+//]]> -->
+</script><a href="http://www.toplist.cz/"><img src="SQL%20-%20spojov%C3%A1n%C3%AD%20tabulek%20a%20tvorba%20pohled%C5%AF%20--%20Datab%C3%A1ze%20--%20V%C3%BDvoj%20aplikac%C3%AD%20--%20Interval.cz_soubory/dot.gif" style="border: 0pt none ; width: 1px; height: 1px;" alt="."></a>
+<noscript>
+<div><a href='http://www.toplist.cz'><img
+src='http://www.toplist.cz/dot.asp?id=33617' style='border: 0; width:
+1px; height: 1px' alt='.' /></a></div>
+</noscript>
+<!-- TOPList.cz - konec -->
+
+<!-- iAudit -->
+<img src="SQL%20-%20spojov%C3%A1n%C3%AD%20tabulek%20a%20tvorba%20pohled%C5%AF%20--%20Datab%C3%A1ze%20--%20V%C3%BDvoj%20aplikac%C3%AD%20--%20Interval.cz_soubory/a.gif" style="border: 0pt none ; width: 1px; height: 1px;" alt=".">
+<!-- iAudit - konec -->
+
+
+	<!-- (C)2005 Gemius SA - gemiusAudience  / Ostatni -->
+	<script type="text/javascript"><!--
+	
+	gemius_identifier = new String('bQzrQkrzLOWoKbJeudlKguTS7OndUMSqxutbeFviWMv.47');
+	
+	gemius_href=new String(document.location);
+	if (document.referrer) { gemius_ref = new String(document.referrer); } else { gemius_ref = ""; }
+	if(typeof(Error)!='undefined') eval("try { if (typeof(top.document.referrer)=='string') { gemius_ref = top.document.referrer } } catch(gemius_ex) {}");
+	iname = new String('id='+gemius_identifier+';ref='+escape(gemius_ref.substring(0,299))+';href='+escape(gemius_href.substring(0,299))+';');
+	document.write('<iframe src="http://spir.hit.gemius.pl/gemiusaudience.html" name="'+iname+'" width="1" height="1" frameborder="0" scrolling="no"></iframe>');
+	//-->
+	</script><iframe src="SQL%20-%20spojov%C3%A1n%C3%AD%20tabulek%20a%20tvorba%20pohled%C5%AF%20--%20Datab%C3%A1ze%20--%20V%C3%BDvoj%20aplikac%C3%AD%20--%20Interval.cz_soubory/gemiusaudience.htm" name="id=bQzrQkrzLOWoKbJeudlKguTS7OndUMSqxutbeFviWMv.47;ref=http%3A//interval.cz/clanky/databaze-a-jazyk-sql/;href=http%3A//interval.cz/clanky/sql-spojovani-tabulek-a-tvorba-pohledu/;" frameborder="0" height="1" scrolling="no" width="1"></iframe> 
+
+
+</div>
+	<div id="advertising-leader-board">
+	<!-- StartKód: adarbo2.bbmedia.cz 3.1 Nestandard  Interval(87) / cely web(1) / leaderboard 750x100(1) / nestandard(24) -->
+	<script type="text/javascript">
+	/* <![CDATA[ */
+	var bbs=screen,bbn=navigator,bbh;bbh='&ubl='+bbn.browserLanguage+'&ucc='+bbn.cpuClass+'&ucd='+bbs.colorDepth+'&uce='+bbn.cookieEnabled+'&udx='+bbs.deviceXDPI+'&udy='+bbs.deviceYDPI+'&usl='+bbn.systemLanguage+'&uje='+bbn.javaEnabled()+'&uah='+bbs.availHeight+'&uaw='+bbs.availWidth+'&ubd='+bbs.bufferDepth+'&uhe='+bbs.height+'&ulx='+bbs.logicalXDPI+'&uly='+bbs.logicalYDPI+'&use='+bbs.fontSmoothingEnabled+'&uto='+(new Date()).getTimezoneOffset()+'&uti='+(new Date()).getTime()+'&uui='+bbs.updateInterval+'&uul='+bbn.userLanguage+'&uwi='+bbs.width;
+	document.write("<scr"+"ipt  language='JavaScript' type='text/javascript' src='http://adarbo2.bbmedia.cz/please/showit/87/1/1/24/?typkodu=non-standard"+bbh+"&alttext=0&border=0&bgcolor=FFFFFF&text=000000&link=0000FF&target=_blank&bust="+Math.random()+"'>");
+	document.write("<"+"\/scr"+"ipt>");
+	/* ]]> */
+	</script><script language="JavaScript" type="text/javascript" src="SQL%20-%20spojov%C3%A1n%C3%AD%20tabulek%20a%20tvorba%20pohled%C5%AF%20--%20Datab%C3%A1ze%20--%20V%C3%BDvoj%20aplikac%C3%AD%20--%20Interval.cz_soubory/a_007.js"></script>
+	<!-- KonecKód: adarbo2.bbmedia.cz 3.1 Nestandard -->
+	</div>
+
+
+
+
+<div id="page-header">
+
+
+
+<div id="interval-logo">
+<h1 title="Interval.cz - webdesign a e-komerce denně (logo &amp; index link)"><a href="http://interval.cz/">Interval.cz<span></span></a></h1>
+</div>
+<div id="advertising-page-header">
+
+
+	<!-- StartKód: adarbo2.bbmedia.cz 3.1 Nestandard  Interval(87) / cely web(1) / horni468x60(2) / nestandard(24) -->
+	<script type="text/javascript">
+	/* <![CDATA[ */
+	var bbs=screen,bbn=navigator,bbh;bbh='&ubl='+bbn.browserLanguage+'&ucc='+bbn.cpuClass+'&ucd='+bbs.colorDepth+'&uce='+bbn.cookieEnabled+'&udx='+bbs.deviceXDPI+'&udy='+bbs.deviceYDPI+'&usl='+bbn.systemLanguage+'&uje='+bbn.javaEnabled()+'&uah='+bbs.availHeight+'&uaw='+bbs.availWidth+'&ubd='+bbs.bufferDepth+'&uhe='+bbs.height+'&ulx='+bbs.logicalXDPI+'&uly='+bbs.logicalYDPI+'&use='+bbs.fontSmoothingEnabled+'&uto='+(new Date()).getTimezoneOffset()+'&uti='+(new Date()).getTime()+'&uui='+bbs.updateInterval+'&uul='+bbn.userLanguage+'&uwi='+bbs.width;
+	document.write("<scr"+"ipt  type='text/javascript' src='http://adarbo2.bbmedia.cz/please/showit/87/1/2/24/?typkodu=non-standard"+bbh+"&alttext=0&border=0&bgcolor=FFFFFF&text=000000&link=0000FF&target=_top&bust="+Math.random()+"'>");
+	document.write("<"+"\/scr"+"ipt>");
+	/* ]]> */
+	</script><script type="text/javascript" src="SQL%20-%20spojov%C3%A1n%C3%AD%20tabulek%20a%20tvorba%20pohled%C5%AF%20--%20Datab%C3%A1ze%20--%20V%C3%BDvoj%20aplikac%C3%AD%20--%20Interval.cz_soubory/a_004.js"></script><!-- spir.czMonS[6__87.1.2.24__] --><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td><a href="http://adarbo2.bbmedia.cz/please/redirect/87/1/2/24/%21uwi=1440;uhe=900;uce=1;param=10214/11012_11_?" target="_top"><img src="SQL%20-%20spojov%C3%A1n%C3%AD%20tabulek%20a%20tvorba%20pohled%C5%AF%20--%20Datab%C3%A1ze%20--%20V%C3%BDvoj%20aplikac%C3%AD%20--%20Interval.cz_soubory/b10214_1.gif" alt="" border="0"></a></td></tr></tbody></table><!-- spir.czMonE -->
+	<!-- KonecKód: adarbo2.bbmedia.cz 3.1 Nestandard -->
+
+
+</div>
+<div class="page-maker">&nbsp;</div>
+</div>
+<div id="page-topmenu">
+<h2 class="textversion">Navigace</h2>
+
+<!-- cached 05-15-86-hlavni_menu_with_ascii.txt -->
+<!-- ,Vývoj aplikací ~~ ,,Databáze ~~ , --><div id="page-mainmenu"><h3 class="textversion">Hlavní menu</h3><ul><li class="first"><a href="http://interval.cz/">Titulka</a></li><li><a href="http://interval.cz/e-komerce/">E-komerce</a></li><li><a href="http://interval.cz/webdesign/">Webdesign</a></li><li class="selected"><a href="http://interval.cz/vyvoj-aplikaci/">Vývoj aplikací</a></li><li><a href="http://interval.cz/nastroje/">Nástroje</a></li><li><a href="http://interval.cz/magazin/">Magazín</a></li><li class="right selected"><a href="http://interval.inshop.cz/">Knihkupectví</a></li><li class="right"><a href="http://php.interval.cz/">PHP</a></li><li class="right"><a href="http://css.interval.cz/">CSS</a></li><li class="right"><a href="http://jednoduse.interval.cz/">Jednoduše</a></li></ul></div><div id="page-mainmenu-maker">&nbsp;</div><div id="page-mainsubmenu"><h3 class="textversion">Submenu</h3><ul><li><a href="http://interval.cz/vyvoj-aplikaci/ajax/">AJAX</a></li><li><a href="http://interval.cz/vyvoj-aplikaci/j2me/">J2ME</a></li><li><a href="http://interval.cz/vyvoj-aplikaci/asp/">ASP</a></li><li><a href="http://interval.cz/vyvoj-aplikaci/net/">.NET</a></li><li><a href="http://interval.cz/vyvoj-aplikaci/php/">PHP</a></li><li><a href="http://interval.cz/vyvoj-aplikaci/javascript/">JavaScript</a></li><li><a href="http://interval.cz/vyvoj-aplikaci/xml/">XML</a></li><li><a href="http://interval.cz/vyvoj-aplikaci/java/">Java</a></li><li><a href="http://interval.cz/vyvoj-aplikaci/perl-cgi/">PERL/CGI</a></li><li class="selected"><a href="http://interval.cz/vyvoj-aplikaci/databaze/">Databáze</a></li><li><a href="http://interval.cz/vyvoj-aplikaci/bezpecnost/">Bezpečnost</a></li><li><a href="http://interval.cz/vyvoj-aplikaci/analyzy/">Analýzy</a></li></ul><span id="page-mainsubmenu-maker">&nbsp;</span></div>
+ <!-- cas behu menu = 0 -->
+
+</div>
+<div id="page-body">
+<div id="page-left">
+
+
+
+
+
+
+<div id="article" class="bbtext">
+
+
+
+<h2>SQL - spojování tabulek a tvorba pohledů</h2>
+<p id="prepend" class="not4bbtext">Dnes se podíváme na vnější spojení tabulek, které nám rozšíří možnosti klasického 
+vnitřního přirozeného spojení. Uděláme si srovnání těchto metod a řekneme si, 
+jaké výhody nám vnější spojení tabulek může přinést. V druhé části se podíváme 
+na tvorbu pohledů v databázi (tzv. view), k čemu jsou nám dobrá a jak je můžeme 
+využít.
+</p>
+
+
+	<div class="advertising-bigsquare-outer noprint">
+	<div class="advertising-bigsquare-inner" style="width: 300px;">
+	<!-- StartKód: adarbo2.bbmedia.cz 3.1 Nestandard  Interval(87) / cely web(1) / ctverec250x250(8) / nestandard(24) -->
+	<script type="text/javascript">
+	/* <![CDATA[ */
+	var bbs=screen,bbn=navigator,bbh;bbh='&ubl='+bbn.browserLanguage+'&ucc='+bbn.cpuClass+'&ucd='+bbs.colorDepth+'&uce='+bbn.cookieEnabled+'&udx='+bbs.deviceXDPI+'&udy='+bbs.deviceYDPI+'&usl='+bbn.systemLanguage+'&uje='+bbn.javaEnabled()+'&uah='+bbs.availHeight+'&uaw='+bbs.availWidth+'&ubd='+bbs.bufferDepth+'&uhe='+bbs.height+'&ulx='+bbs.logicalXDPI+'&uly='+bbs.logicalYDPI+'&use='+bbs.fontSmoothingEnabled+'&uto='+(new Date()).getTimezoneOffset()+'&uti='+(new Date()).getTime()+'&uui='+bbs.updateInterval+'&uul='+bbn.userLanguage+'&uwi='+bbs.width;
+	document.write("<scr"+"ipt  type='text/javascript' src='http://adarbo2.bbmedia.cz/please/showit/87/1/8/24/?typkodu=non-standard"+bbh+"&alttext=0&border=0&bgcolor=FFFFFF&text=000000&link=0000FF&target=_top&bust="+Math.random()+"'>");
+	document.write("<"+"\/scr"+"ipt>");
+	/* ]]> */
+	</script><script type="text/javascript" src="SQL%20-%20spojov%C3%A1n%C3%AD%20tabulek%20a%20tvorba%20pohled%C5%AF%20--%20Datab%C3%A1ze%20--%20V%C3%BDvoj%20aplikac%C3%AD%20--%20Interval.cz_soubory/a_006.js"></script><!-- spir.czMonS[6_5461_87.1.8.24_CPT_22552] --><!-- StartKód: ad2.bbmedia.cz 4.1 Interval(1185) / Cely web(3) / 250x250(1) / square 250x250(17) -->
+<script language="JavaScript" type="text/javascript" charset="windows-1250" src="SQL%20-%20spojov%C3%A1n%C3%AD%20tabulek%20a%20tvorba%20pohled%C5%AF%20--%20Datab%C3%A1ze%20--%20V%C3%BDvoj%20aplikac%C3%AD%20--%20Interval.cz_soubory/code.js"></script><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td><iframe allowtransparency="true" style="position: relative;" name="bm2BBMEDIA_1185_3_1_17" id="bm2BBMEDIA_1185_3_1_17" marginwidth="0" marginheight="0" hspace="0" vspace="0" src="SQL%20-%20spojov%C3%A1n%C3%AD%20tabulek%20a%20tvorba%20pohled%C5%AF%20--%20Datab%C3%A1ze%20--%20V%C3%BDvoj%20aplikac%C3%AD%20--%20Interval.cz_soubory/a.htm" frameborder="0" height="250" scrolling="no" width="250">&lt;script
+language='JavaScript' type='text/javascript'
+charset='windows-1250'&gt;document.write("&lt;scr"+"ipt
+language='JavaScript' charset='windows-1250' type='text/javascript'
+src='http://ad2.bbmedia.cz/please/showit/1185/3/1/17/?typkodu=js"+bbh+"&amp;alttext=0&amp;border=0&amp;_idplan=47608&amp;bust="+Math.random()+"&amp;target=_blank'&gt;&lt;/scr"+"ipt&gt;");&lt;/script&gt;</iframe></td></tr><tr><td><iframe allowtransparency="true" name="bm2sBBMEDIA_1185_3_1_17" id="bm2sBBMEDIA_1185_3_1_17" marginwidth="0" marginheight="0" hspace="0" vspace="0" src="" style="position: absolute;" frameborder="0" height="0" scrolling="no" width="250"></iframe></td></tr></tbody></table>
+<noscript><table border=0 cellpadding=0 cellspacing=0><tr><td><a
+href="http://ad2.bbmedia.cz/please/redirect/1185/3/1/17/"
+target="_blank"><img
+src="http://ad2.bbmedia.cz/please/showit/1185/3/1/17/?typkodu=img&_idplan=47608"
+border=0 width=250 height=250 alt='' /></a></td></tr></table></noscript>
+<!-- KonecKód: ad2.bbmedia.cz 4.1 --><!-- spir.czMonE -->
+	<!-- KonecKód: adarbo2.bbmedia.cz 3.1 Nestandard -->
+	<!-- StartKód: adarbo2.bbmedia.cz 3.1 Nestandard  Interval(87) / homepage + cely web(1) / hypertext 250x100(14) / nestandard(24) -->
+	<script type="text/javascript">
+	/* <![CDATA[ */
+	var bbs=screen,bbn=navigator,bbh;bbh='&ubl='+bbn.browserLanguage+'&ucc='+bbn.cpuClass+'&ucd='+bbs.colorDepth+'&uce='+bbn.cookieEnabled+'&udx='+bbs.deviceXDPI+'&udy='+bbs.deviceYDPI+'&usl='+bbn.systemLanguage+'&uje='+bbn.javaEnabled()+'&uah='+bbs.availHeight+'&uaw='+bbs.availWidth+'&ubd='+bbs.bufferDepth+'&uhe='+bbs.height+'&ulx='+bbs.logicalXDPI+'&uly='+bbs.logicalYDPI+'&use='+bbs.fontSmoothingEnabled+'&uto='+(new Date()).getTimezoneOffset()+'&uti='+(new Date()).getTime()+'&uui='+bbs.updateInterval+'&uul='+bbn.userLanguage+'&uwi='+bbs.width;
+	document.write("<scr"+"ipt  language='JavaScript' type='text/javascript' src='http://adarbo2.bbmedia.cz/please/showit/87/1/14/24/?typkodu=non-standard"+bbh+"&alttext=0&border=0&bgcolor=FFFFFF&text=000000&link=0000FF&target=_blank&bust="+Math.random()+"'>");
+	document.write("<"+"\/scr"+"ipt>");
+	/* ]]> */
+	</script><script language="JavaScript" type="text/javascript" src="SQL%20-%20spojov%C3%A1n%C3%AD%20tabulek%20a%20tvorba%20pohled%C5%AF%20--%20Datab%C3%A1ze%20--%20V%C3%BDvoj%20aplikac%C3%AD%20--%20Interval.cz_soubory/a_005.js"></script>
+	<!-- KonecKód: adarbo2.bbmedia.cz 3.1 Nestandard -->
+	</div>
+	</div>
+
+
+<!-- cached sql-spojovani-tabulek-a-tvorba-pohledu-399.txt -->
+<p class="texttabulka"><b>Vnitřní spojení</b></p>
+
+<p class="texttabulka">
+Vzpomínáte si na 6. díl, kde jsem mluvil o přirozeném spojení tabulkek? Pro 
+<a target="_blank" href="http://ad2.billboard.cz/please/redirect/35974/1/1/32/%21hash=2199258689;h4r=34234950;p4r=305454699;uwi=800;uhe=600;uce=1;param=64117/841477_5?" class="bbt_w">rychlé</a> zopakování uvedu příklad:
+</p>
+
+<pre>POZDRAV   VYSLOVENÍ
+--------   --------
+cis poz     kdo  co
+1   ahoj    1    2
+2   zdar    2    3
+3   cau     3    2
+</pre>
+
+<p class="texttabulka">
+Uvedené dvě tabulky zobrazují informace o tom, jaká osoba (číslo) vyslovila jaký 
+pozdrav. Např. vyčteme, že osoba číslo 1 vyslovila pozdrav 'zdar', atd. Jak bude 
+vypadat přirozené spojení těchto dvou tabulek?
+</p>
+
+<pre>kdo  co cis poz
+---  -- --- ----
+1    2  2   zdar
+2    3  3   cau
+3    2  2   zdar
+</pre>
+
+<p class="texttabulka">
+Když jsem o přirozeném spojení mluvil, uváděl jsem jednu důležitou vlastnost. A 
+to, že do souhrnné tabulky nejsou zahrnuty řádky, které neměly odpovídající 
+záznamy v tabulce druhé. Konkrétně ve výsledné tabulce chybí záznam s položkou 
+'ahoj' - protože ji nikdo nevyslovil a neměla tedy záznam v tabulce VYSLOVENÍ. 
+Chceme seznam všech vyslovených pozdravů a u každého z nich, kolikrát bylo 
+vysloven:
+</p>
+
+<p class="texttabulka"></p><table bgcolor="black" border="0" cellpadding="1" cellspacing="0" width="100%"><tbody><tr><td><table border="0" cellpadding="2" cellspacing="0" width="100%"><tbody><tr><td class="aktuality" bgcolor="white">
+    
+	SELECT poz, count(*)<br>
+	FROM pozdrav, vyslovení<br>
+	WHERE co = cis<br>
+	GROUP BY poz<br>
+	
+</td></tr></tbody></table></td></tr></tbody></table> 
+
+<p class="texttabulka">
+Uvedený dotaz nám vrátí 2 záznamy, první pro pozdrav 'zdar' a druhý pro pozdrav 
+'cau'. Co kdybychom ale chtěli vypsat seznam všech existujících pozdravů a u 
+každého z nich vypsat, kolikrát byl vysloven? Chtěli bychom tedy vypsat i řádek 
+pro pozdrav 'ahoj' a u něj číslo 0.
+</p>
+
+<p class="texttabulka"><b>Vnější spojení</b></p>
+
+<p class="texttabulka">
+Je jasné, že s tímto dosavadním přístupem, který nazýváme <b>vnitřní spojení</b> 
+(= některé řádky, které nemají odpovídající partnery v jiných tabulkách, se do 
+výsledné souhrnné tabulky přirozeného spojení vůbec nedostanou), si nevystačíme. 
+Proto standard SQL definuje tzv. <b>vnější spojení</b>, které nám umožní do 
+souhrnné tabulky dostat i ty původně vynechávané řádky.
+</p>
+
+<p class="texttabulka">
+Chceme-li použít vnějšího spojení, musíme příkaz SELECT zapsat v odlišné 
+syntaxi. Ta dle standardu SQL vypadá následovně:
+</p>
+
+<p class="texttabulka"></p><table bgcolor="black" border="0" cellpadding="1" cellspacing="0" width="100%"><tbody><tr><td><table border="0" cellpadding="2" cellspacing="0" width="100%"><tbody><tr><td class="aktuality" bgcolor="white">
+    
+	SELECT seznam sloupců<br>
+	FROM první_tabulka LEFT|RIGHT JOIN druhá_tabulka ON podmínka_spojení<br>
+	WHERE restrikce<br>
+	...<br>
+
+</td></tr></tbody></table></td></tr></tbody></table> 
+
+<p class="texttabulka">
+Uvedená syntaxe se oproti té předchozí liší jen ve druhém řádku. Jako první a
+druhou tabulku uvedeme názvy tabulek, které chceme spojit. Pak můžeme použít
+LEFT nebo RIGHT JOIN. Co to znamená? Tím řekneme, že v levé nebo v pravé tabulce
+dovolíme výskyt prázdných hodnot. (Levou a pravou tabulkou rozumím tabulku,
+která je zapsaná vlevo nebo vpravo vzhledem ke klíčovému slovu LEFT JOIN nebo
+RIGHT JOIN.) Za klíčové slovo ON dáme podmínku pro spojení, která má stejný
+tvar, jako v případě klasického vnitřního spojení.
+</p>
+
+<p class="texttabulka">
+Pro lepší pochopení se vraťme k našemu příkladu. Chceme tedy seznam všech 
+pozdravů (nejen vyslovených) a u každého z nich uvedeno, kolikrát byl vysloven:
+</p>
+
+<p class="texttabulka"></p><table bgcolor="black" border="0" cellpadding="1" cellspacing="0" width="100%"><tbody><tr><td><table border="0" cellpadding="2" cellspacing="0" width="100%"><tbody><tr><td class="aktuality" bgcolor="white">
+    
+	SELECT poz, count(co)<br>
+	FROM pozdrav LEFT JOIN vysloveni ON cis = co<br>
+	GROUP BY poz<br>
+
+</td></tr></tbody></table></td></tr></tbody></table> 
+
+<p class="texttabulka">
+Spojujeme zleva, tj. řekli jsme, že v tabulce POZDRAV chceme do výstupu všechny
+její záznamy, i když nemají odpovídající "partnery" ve druhé tabulce. Jinými
+slovy, připouštíme existenci nulového výskytu hodnot pro odpovídající pozdrav v
+tabulce VYSLOVENI.
+</p>
+
+<p class="texttabulka"><b>Odlišnosti od standardu</b></p>
+
+<p class="texttabulka">
+Pokud byste hledali místo, kde se databázové <a target="_blank" href="http://ad2.billboard.cz/please/redirect/35974/1/1/32/%21hash=2199258689;h4r=2181824838;p4r=305431151;uwi=800;uhe=600;uce=1;param=63618/835045_5?" class="bbt_w">systémy</a> hodně liší od standardu, 
+pak vnější spojení je jedním z typických příkladů. Vezměme si dva, dle mého názoru  
+nejpoužívanější, systémy MySQL a Oracle. MySQL se tohoto standardu drží, ale 
+nemůžete použít RIGHT JOIN. Což až tak moc nevadí, neboť prohozením 
+pořadí první a druhé tabulky a zápisem LEFT JOIN vyjádříte totéž spojení. Systém 
+Oracle tuto situaci řeší jinak. V podstatě povoluje obě možnosti (levou i 
+pravou). Zápis je velmi podobný původnímu zápisu vnitřního spojení. 
+U názvu sloupce v restrikci zapíšeme vlevo nebo vpravo (tj. v závisloti, 
+zda-li chceme dělat LEFT nebo RIGHT JOIN) speciální operátor (+). Uvedený 
+příklad by v systému Oracle byl zapsán následovně:
+</p>
+
+<p class="texttabulka"></p><table bgcolor="black" border="0" cellpadding="1" cellspacing="0" width="100%"><tbody><tr><td><table border="0" cellpadding="2" cellspacing="0" width="100%"><tbody><tr><td class="aktuality" bgcolor="white">
+    
+	SELECT poz, count(co)<br>
+	FROM pozdrav, vysloveni<br>
+	WHERE pozdrav.cis (+) = vysloveni.co<br>
+	GROUP BY poz<br>
+
+</td></tr></tbody></table></td></tr></tbody></table> 
+
+<p class="texttabulka">
+Zápis je mnohem přehlednější a snadněji zapamatovatelný. Ve sloupci, ve 
+kterém chci povolit existenci nulového počtu odpovídajících partnerů v jiné 
+tabulce, zapíši operátor (+) a nemusím si pamatovat jinou syntaxi. S největší 
+pravděpodobností v jiných databázových systémech najdete další různé odlišnosti.
+</p>
+
+<p class="texttabulka"><b>Pohledy</b></p>
+
+<p class="texttabulka">
+Pohledy si lze představit jako virtuální (logické) tabulky v databázi. Pohledy
+nám mohou přinést řadu výhod. Jednou z nich je zpřehlednění <a target="_blank" href="http://ad2.billboard.cz/please/redirect/35974/1/1/32/%21hash=2199258689;h4r=34142534;p4r=305415775;uwi=800;uhe=600;uce=1;param=63030/815092_5?" class="bbt_w">práce</a> s daty a
+sestavování dotazů. Dále mají své velké uplatnění z hlediska ochrany dat, např. 
+můžeme vytvořit pohled, který bude mít stejný obsah jako tabulka záznamů o 
+lidech ve firmě, s tím, že nebude ale obsahovat sloupec RODNÉ_ČÍSLO. My jako 
+správci systému nemusíme nastavovat právo na čtení tabulky LIDÉ, ale dáme právo 
+na čtení takového pohledu a máme zajištěno, že si rodná čísla nepřečte žádná 
+neoprávněná osoba.
+</p>
+
+<p class="texttabulka">
+Pohled nemusí být vytvářen pouze nad jednou tabulkou, ale můžeme pohledem
+tabulek spojit více. A přesto, můžeme nad pohledy vykonávat standardní operace
+INSERT, DELETE, UPDATE, SELECT a SQL <a target="_blank" href="http://ad2.billboard.cz/please/redirect/35974/1/1/32/%21hash=2199258689;h4r=2181459782;p4r=305456741;uwi=800;uhe=600;uce=1;param=64320/844132_5?" class="bbt_w">server</a> už zajistí správnou manipulaci s
+odpovídajícími "fyzickými" tabulkami. Z hlediska práce s tabulkami se nám pohled
+(často nazývaný view) jeví jako normální tabulka.
+</p>
+
+<p class="texttabulka">
+Pohled se vytváří příkazem CREATE VIEW, jehož syntaxe je následující:
+</p>
+
+<p class="texttabulka"></p><table bgcolor="black" border="0" cellpadding="1" cellspacing="0" width="100%"><tbody><tr><td><table border="0" cellpadding="2" cellspacing="0" width="100%"><tbody><tr><td class="aktuality" bgcolor="white">
+    
+	CREATE VIEW název_pohledu [(názvy sloupců)] AS<br>
+	&nbsp;SELECT ...<br>
+
+</td></tr></tbody></table></td></tr></tbody></table> 
+
+<p class="texttabulka">
+V podstatě je view určeno výsledkem SQL dotazu, který může být libovolně 
+složitý. Zápis [(názvy sloupců)] použijeme tehdy, chceme-li nějakým způsobem změnit 
+názvy sloupců.
+</p>
+
+<p class="texttabulka"><b>Příklady pohledů</b></p>
+
+<p class="texttabulka">
+Máme tabulku LIDÉ v níž evidujeme údaje o <a target="_blank" href="http://ad2.billboard.cz/please/redirect/35974/1/1/32/%21hash=2199258689;h4r=34794566;p4r=305415775;uwi=800;uhe=600;uce=1;param=63358/826841_5?" class="bbt_w">zaměstnanci</a> ve firmě. Obsahuje sloupce 
+ID, JMÉNO, PŘÍJMENÍ, RODNÉ_ČÍSLO, <a target="_blank" href="http://www.etarget.cz/catalog.php?ref=4372&amp;catalogPartner=270&amp;c=900&amp;asynchronousConfirmURL=http%3A//ad2.billboard.cz/please/redirect/35974/1/1/32/%21etarget%3D1%3Bparam%3D62552/822987_0" class="bbt_w">VZDĚLÁNÍ</a>. Uživatelům budeme chtít zpřístupnit 
+údaje z této tabulky, vyjma rodných čísel:
+</p>
+
+<p class="texttabulka"></p><table bgcolor="black" border="0" cellpadding="1" cellspacing="0" width="100%"><tbody><tr><td><table border="0" cellpadding="2" cellspacing="0" width="100%"><tbody><tr><td class="aktuality" bgcolor="white">
+    
+	CREATE VIEW lidé_bez_rc AS<br>
+	 &nbsp;SELECT id, jméno, příjmení, vzdělání<br>
+	 &nbsp;FROM lidé<br>
+
+</td></tr></tbody></table></td></tr></tbody></table> 
+
+<p class="texttabulka">
+Uživatelé budou pracovat s pohledem LIDÉ_BEZ_RC, jako by to byla normální 
+tabulka. Takže pokud bude chtít uživatel zobrazit seznam všech vysokoškolsky 
+vzdělaných lidí, zapíše následující dotaz:
+</p>
+
+<p class="texttabulka"></p><table bgcolor="black" border="0" cellpadding="1" cellspacing="0" width="100%"><tbody><tr><td><table border="0" cellpadding="2" cellspacing="0" width="100%"><tbody><tr><td class="aktuality" bgcolor="white">
+    
+	SELECT jméno, příjmení<br>
+	FROM lidé_bez_rc<br>
+	WHERE vzdělání LIKE 'VŠ'<br>
+
+</td></tr></tbody></table></td></tr></tbody></table> 
+
+<p class="texttabulka">
+Dále lze view použít pro změnu názvů i formátů sloupců. Vytvoříme pohled, který 
+bude mít stejnou strukturu jako tabulka LIDÉ, jediný rozdíl bude v tom, že JMÉNO 
+a PŘÍJMENÍ bude jako jeden sloupec s názvem CELÉ_JMÉNO:
+</p>
+
+<p class="texttabulka"></p><table bgcolor="black" border="0" cellpadding="1" cellspacing="0" width="100%"><tbody><tr><td><table border="0" cellpadding="2" cellspacing="0" width="100%"><tbody><tr><td class="aktuality" bgcolor="white">
+    
+	CREATE VIEW lidé2 (id, celé_jméno, rodné_číslo, vzdělání) AS<br>
+	 &nbsp;SELECT id, příjmení+','+' '+jméno, rodné_číslo, vzdělání<br>
+	 &nbsp;FROM lidé<br>
+
+</td></tr></tbody></table></td></tr></tbody></table> 
+
+<p class="texttabulka">
+Pohledy nemusíme používat jen ve spojení se sloupci. Můžeme také využít 
+restrikce a omezit tak i některé řádky. Např. sekretářka bude mít právo 
+manipulovat pouze se záznamy středoškoláků. View, které pro ni vytvoříme, bude 
+vypadat následovně:
+</p>
+
+<p class="texttabulka"></p><table bgcolor="black" border="0" cellpadding="1" cellspacing="0" width="100%"><tbody><tr><td><table border="0" cellpadding="2" cellspacing="0" width="100%"><tbody><tr><td class="aktuality" bgcolor="white">
+    
+	CREATE VIEW středoškolák AS<br>
+	 SELECT *<br>
+	 FROM lidé<br>
+	 WHERE vzdělání LIKE 'SŠ'<br>
+
+</td></tr></tbody></table></td></tr></tbody></table> 
+
+<p class="texttabulka">
+Poslední příklad uvedu pro případ tvorby pohledu skrz více tabulek. V naší firmě 
+bude skupina ekonomů, která má právo vědět, kolik má kdo základní plat, ale už 
+nechceme, aby měli přístup k osobnímu ohodnocení. Mějme tabulku LIDÉ a dále 
+tabulku PLATY, která obsahuje sloupce ID_OSOBA, ZÁKL_PLAT, OSOBNÍ, PŘÍPL_VEDENÍ. 
+Pro ekonomy zkonstruujeme následující pohled:
+</p>
+
+<p class="texttabulka"></p><table bgcolor="black" border="0" cellpadding="1" cellspacing="0" width="100%"><tbody><tr><td><table border="0" cellpadding="2" cellspacing="0" width="100%"><tbody><tr><td class="aktuality" bgcolor="white">
+    
+	CREATE VIEW osoby_platy AS<br>
+	 &nbsp;SELECT id, jméno, příjmení, zákl_plat<br>
+	 &nbsp;FROM lidé, platy<br>
+	 &nbsp;WHERE lidé.id = platy.id_osoba<br>
+
+</td></tr></tbody></table></td></tr></tbody></table> 
+
+<p class="texttabulka">
+Dále pohledy můžeme využít v souvislosti s vnořováním dotazů. Pokud máme v našem 
+informačním systému několik SQL dotazů, ve kterých se nám nějaký subdotaz dost 
+často opakuje, můžeme si pro něj vytvořit view, na které se budeme pak v 
+dotazech odkazovat.
+</p>
+
+
+
+
+<div id="article-author">
+<a href="http://interval.cz/autori/skrivan-jaromir/">Skřivan, Jaromír</a> (30.&nbsp;10.&nbsp;2000)
+<div id="article-about-author">				
+		
+		</div>
+</div>
+
+
+<div class="refer noprint"><br><strong>Ulož odkaz na</strong>:<a href="http://del.icio.us/post?url=http://interval.cz/clanky/sql-spojovani-tabulek-a-tvorba-pohledu/&amp;title=SQL%20-%20spojov%E1n%ED%20tabulek%20a%20tvorba%20pohled%u016F">del.icio.us</a> | <a href="http://www.jagg.cz/bookmarks.php?action=add&amp;address=http://interval.cz/clanky/sql-spojovani-tabulek-a-tvorba-pohledu/&amp;title=SQL%20-%20spojov%E1n%ED%20tabulek%20a%20tvorba%20pohled%u016F">jagg.cz</a> | <a href="http://linkuj.cz/?id=linkuj&amp;url=http://interval.cz/clanky/sql-spojovani-tabulek-a-tvorba-pohledu/&amp;title=SQL%20-%20spojov%E1n%ED%20tabulek%20a%20tvorba%20pohled%u016F">linkuj.cz</a> | <a href="http://www.topclanky.cz/pridat-odkaz/?kde=http://interval.cz/clanky/sql-spojovani-tabulek-a-tvorba-pohledu/&amp;nadpis=SQL%20-%20spojov%E1n%ED%20tabulek%20a%20tvorba%20pohled%u016F">topclanky.cz</a> | <a href="http://vybrali.sme.sk/submit.php?url=http://interval.cz/clanky/sql-spojovani-tabulek-a-tvorba-pohledu/">vybrali.sme.sk</a>. <strong>Děkujeme!</strong></div><div class="refer"><h3><a href="http://interval.cz/serialy/sql-structured-query-language/" title="SQL - Structured Query Language (úplný přehled článků seriálu)">SQL - Structured Query Language</a></h3><p>Jazyk
+SQL se stal univerzálním standardem pro přístup k datům a zkratka SQL
+je dokonce používána jako synonymum pro databáze. Víte ale, co všechno
+tento jazyk svým uživatelům nabízí a jaké modifikace používají různé
+databázové systémy? Tato série článků již byla uzavřena, ačkoli další
+pokračování nelze vyloučit.</p><ul><li><a href="http://interval.cz/clanky/sql-jak-na-funkce/">SQL - jak na funkce</a> (27.&nbsp;2.&nbsp;2001)</li><li><a href="http://interval.cz/clanky/sql-jak-na-triggery/">SQL - jak na triggery</a> (13.&nbsp;11.&nbsp;2000)</li><li><strong>SQL - spojování tabulek a tvorba pohledů</strong> (právě čtete)</li><li><a href="http://interval.cz/clanky/sql-pokrocila-prace-s-tabulkami-a-daty/">SQL - pokročilá práce s tabulkami a daty</a> (23.&nbsp;10.&nbsp;2000)</li><li><a href="http://interval.cz/clanky/sql-pokrocile-dotazy/">SQL - pokročilé dotazy</a> (16.&nbsp;10.&nbsp;2000)</li><li><a href="http://interval.cz/clanky/sql-vnorene-dotazy/">SQL - vnořené dotazy</a> (9.&nbsp;10.&nbsp;2000)</li><li><a href="http://interval.cz/clanky/sql-skladani-dotazu/">SQL - skládání dotazů</a> (2.&nbsp;10.&nbsp;2000)</li><li><a href="http://interval.cz/clanky/sql-dotazy-s-agregaci/">SQL - dotazy s agregací</a> (25.&nbsp;9.&nbsp;2000)</li><li><a href="http://interval.cz/clanky/sql-jak-na-dotazy-2/">SQL - jak na dotazy 2.</a> (19.&nbsp;9.&nbsp;2000)</li><li><a href="http://interval.cz/clanky/sql-jak-na-dotazy-1/">SQL - jak na dotazy 1.</a> (4.&nbsp;9.&nbsp;2000)</li><li><a href="http://interval.cz/clanky/sql-vkladani-a-aktualizace-dat-v-tabulce/">SQL - vkládání a aktualizace dat v tabulce</a> (23.&nbsp;8.&nbsp;2000)</li><li><a href="http://interval.cz/clanky/sql-manipulace-s-tabulkami/">SQL - manipulace s tabulkami</a> (17.&nbsp;8.&nbsp;2000)</li><li><a href="http://interval.cz/clanky/sql-tvorba-tabulek/">SQL - tvorba tabulek</a> (10.&nbsp;8.&nbsp;2000)</li><li><a href="http://interval.cz/clanky/databaze-a-jazyk-sql/">Databáze a jazyk SQL</a> (4.&nbsp;8.&nbsp;2000)</li></ul></div>
+	<div class="noprint" id="article-discussion">
+	<!-- cached 399-tabulka-sql-spojovani-tabulek-a-tvorba-pohledu.txt --><div id="article-discussion-index"><form action="http://interval.cz/discussion-read.asp?disc=399" method="post"><table cellspacing="0"><tbody><tr><th colspan="4"><a href="http://interval.cz/clanky/sql-spojovani-tabulek-a-tvorba-pohledu/diskuse/" title="SQL - spojování tabulek a tvorba pohledů (diskuse)">SQL - spojování tabulek a tvorba pohledů (diskuse)</a></th></tr><tr><td class="checkbox"><input name="checkboxDISKUZE39508" title="0 39508" value="1" type="checkbox"></td><td class="date">2005-08-17 14:52:42</td><td class="sender">Michal Pospiech</td><td class="subject">Vypisování</td></tr><tr><td colspan="4" id="foot"><input value="Zobrazit vybrané" name="display_selected" id="display_selected" class="submit" type="submit"> &nbsp; <input value="Zobrazit vše" name="display_all" id="display_all" class="submit" type="submit"> &nbsp; <input value="Vložit nový" name="add_new" id="add_new" class="submit" type="submit"></td></tr></tbody></table></form></div>
+	</div>
+
+
+</div>
+
+
+
+
+
+
+</div>
+<div id="page-right">
+<h2 class="textversion">Pravý sloupek</h2>
+
+
+<div id="search">
+<h3 class="textversion">Vyhledávání</h3>
+
+	<form action="http://www.google.cz/custom" method="get">
+		<div>
+			<input name="domains" value="interval.cz" type="hidden">
+			<input id="sbi" class="text" name="q" size="15" value="" type="text">
+			<input id="sbb" class="submit" name="sa" value="Najdi" type="submit">
+			<input name="sitesearch" value="interval.cz" type="hidden">
+			<input name="client" value="pub-0627399152761886" type="hidden">
+			<input name="forid" value="1" type="hidden">
+			<input name="channel" value="6859855792" type="hidden">
+			<input name="ie" value="windows-1250" type="hidden">
+			<input name="oe" value="windows-1250" type="hidden">
+
+			<input name="flav" value="0000" type="hidden">
+			<input name="sig" value="fzsccwnc4ZQRtlyw" type="hidden">
+			<input name="cof" value="GALT:#008000;GL:1;DIV:#336699;VLC:663399;AH:center;BGC:FFFFFF;LBGC:336699;ALC:0000FF;LC:0000FF;T:000000;GFNT:0000FF;GIMP:0000FF;FORID:1" type="hidden">
+			<input name="hl" value="cs" type="hidden">
+		</div>
+	</form>
+
+</div>
+	<div id="advertising-arbo-rightcolumn-textbox" class="noprint" style="padding: 1em; font-size: 0.8em;">
+	<!-- StartKód: adarbo2.bbmedia.cz 3.1 Nestandard  Interval(87) / home page(2) / textbox(1) / nestandard(24) -->
+	<script type="text/javascript">
+	<!-- <![CDATA[
+	var bbs=screen,bbn=navigator,bbh;bbh='&ubl='+bbn.browserLanguage+'&ucc='+bbn.cpuClass+'&ucd='+bbs.colorDepth+'&uce='+bbn.cookieEnabled+'&udx='+bbs.deviceXDPI+'&udy='+bbs.deviceYDPI+'&usl='+bbn.systemLanguage+'&uje='+bbn.javaEnabled()+'&uah='+bbs.availHeight+'&uaw='+bbs.availWidth+'&ubd='+bbs.bufferDepth+'&uhe='+bbs.height+'&ulx='+bbs.logicalXDPI+'&uly='+bbs.logicalYDPI+'&use='+bbs.fontSmoothingEnabled+'&uto='+(new Date()).getTimezoneOffset()+'&uti='+(new Date()).getTime()+'&uui='+bbs.updateInterval+'&uul='+bbn.userLanguage+'&uwi='+bbs.width;
+	document.write("<scr"+"ipt  language='JavaScript' type='text/javascript' src='http://adarbo2.bbmedia.cz/please/showit/87/2/1/24/?typkodu=non-standard"+bbh+"&alttext=0&border=0&bgcolor=FFFFFF&text=000000&link=0000FF&target=_blank&bust="+Math.random()+"'>");
+	document.write("<"+"\/scr"+"ipt>");
+	//]]> -->
+	</script><script language="JavaScript" type="text/javascript" src="SQL%20-%20spojov%C3%A1n%C3%AD%20tabulek%20a%20tvorba%20pohled%C5%AF%20--%20Datab%C3%A1ze%20--%20V%C3%BDvoj%20aplikac%C3%AD%20--%20Interval.cz_soubory/a_008.js"></script>
+	<!-- KonecKód: adarbo2.bbmedia.cz 3.1 Nestandard -->
+	</div>
+<!-- cached 40-knizni_tip.txt --><div class="page-right-box book"><h3>Knižní tip</h3><div class="page-right-box-in"><div class="book-top"><h4><a href="http://interval.inshop.cz/inshop/scripts/detail.asp?kat=322">HTML a CSS - velká kniha řešení</a></h4></div><div class="image"><a href="http://interval.inshop.cz/inshop/scripts/detail.asp?kat=322"><img src="SQL%20-%20spojov%C3%A1n%C3%AD%20tabulek%20a%20tvorba%20pohled%C5%AF%20--%20Datab%C3%A1ze%20--%20V%C3%BDvoj%20aplikac%C3%AD%20--%20Interval.cz_soubory/322.jpg" alt="obálka" title="HTML a CSS - velká kniha řešení"></a></div></div></div>
+	<div class="page-right-box czechia-box">
+	<div style="padding: 7px; width: 166px; background-color: rgb(234, 223, 172); text-align: center; color: rgb(0, 0, 0);">
+	<a href="http://www.zoner.cz/"><strong>ZONER software, s.r.o.</strong></a>,
+	<br>přední
+český poskytovatel internetových služeb souvisejících s prezentací na
+internetu a e-komercí, hledá do svého týmu pracovníka na pozici <br><a href="http://www.czechia.com/clanek/kariera-u-nas/#programator-ASP" style="background-color: rgb(234, 223, 172); color: rgb(0, 0, 255); text-decoration: underline;"><strong>Programátor ASP.NET 2.0 </strong></a>.
+	</div>
+	</div>
+<!-- cached 30-nejctenejsi_clanky.txt --><div class="page-right-box reading"><h3 title="Nejčtenější články za posledních 90 dnů">Nejčtenější</h3><div class="page-right-box-in"><ul><li><a href="http://interval.cz/clanky/echo2-web-framework-echopointng-nech-sa-paci/">Echo2 Web Framework - Echopointng, nech sa páči</a></li><li><a href="http://interval.cz/clanky/spravy-zo-slovenskeho-internetu-28/">Správy zo slovenského internetu 28.</a></li><li><a href="http://interval.cz/clanky/soutez-s-inpage-o-80-cen-za-100-tisic/">Soutěž s inPage o 80 cen za 100 tisíc</a></li><li><a href="http://interval.cz/clanky/soutez-o-vstup-zdarma-na-konferenci-webcamp-08/">Soutěž o vstup zdarma na konferenci WebCamp'08</a></li><li><a href="http://interval.cz/clanky/echo2-web-framework-tabulka-a-klavesnica/">Echo2 Web Framework - tabuľka a klávesnica</a></li></ul></div></div>
+
+<div class="advertising-vertical-banner-outer">
+<div class="advertising-vertical-banner-inner">
+<object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" codebase="http://fpdownload.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,0,0" id="leto-s-domenou-300-120" align="middle" height="300" width="120">
+<param name="allowScriptAccess" value="sameDomain">
+<param name="movie" value="http://interval.cz/__services/__include_right/leto-s-domenou-300-120.swf"><param name="quality" value="high"><param name="bgcolor" value="#ffffff"><embed style="display: none;" src="SQL%20-%20spojov%C3%A1n%C3%AD%20tabulek%20a%20tvorba%20pohled%C5%AF%20--%20Datab%C3%A1ze%20--%20V%C3%BDvoj%20aplikac%C3%AD%20--%20Interval.cz_soubory/leto-s-domenou-300-120.swf" quality="high" bgcolor="#ffffff" name="leto-s-domenou-300-120" allowscriptaccess="sameDomain" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer" align="middle" height="300" width="120">
+</object>
+</div>
+</div>
+<div class="page-right-box emailserv">
+<h3>Info servis</h3>
+<div class="page-right-box-in">
+<ul>
+<li><a href="http://export.interval.cz/" title="Exporty aktuálních informací ve formátech Atom, RDF a RSS">Alternativní přístup k poskytovanému obsahu</a></li>
+<li><a href="http://export.interval.cz/?type=atom" title="Aktuální články magazínu ve formátu Atom">Atom</a> (<a href="http://export.interval.cz/?type=atom&amp;discussion=all" title="Aktuální diskuse magazínu ve formátu Atom">diskuse</a>)</li>
+<li><a href="http://export.interval.cz/?type=rdf" title="Aktuální články magazínu ve formátu RDF">RDF</a> (<a href="http://export.interval.cz/?type=rdf&amp;discussion=all" title="Aktuální diskuse magazínu ve formátu RDF">diskuse</a>)</li>
+<li><a href="http://export.interval.cz/?type=rss" title="Aktuální články magazínu ve formátu RSS">RSS</a> (<a href="http://export.interval.cz/?type=rss&amp;discussion=all" title="Aktuální diskuse magazínu ve formátu RSS">diskuse</a>)</li>
+</ul>
+</div>
+</div>
+<div class="advertising-vertical-banner-outer">
+<div class="advertising-vertical-banner-inner">
+
+	<!-- StartKód: adarbo2.bbmedia.cz 3.1 Nestandard  Interval(87) / homepage + cely web(1) / skyscraper120x600(6) / nestandard(24) -->
+	<script type="text/javascript">
+	/* <![CDATA[ */
+	var bbs=screen,bbn=navigator,bbh;bbh='&ubl='+bbn.browserLanguage+'&ucc='+bbn.cpuClass+'&ucd='+bbs.colorDepth+'&uce='+bbn.cookieEnabled+'&udx='+bbs.deviceXDPI+'&udy='+bbs.deviceYDPI+'&usl='+bbn.systemLanguage+'&uje='+bbn.javaEnabled()+'&uah='+bbs.availHeight+'&uaw='+bbs.availWidth+'&ubd='+bbs.bufferDepth+'&uhe='+bbs.height+'&ulx='+bbs.logicalXDPI+'&uly='+bbs.logicalYDPI+'&use='+bbs.fontSmoothingEnabled+'&uto='+(new Date()).getTimezoneOffset()+'&uti='+(new Date()).getTime()+'&uui='+bbs.updateInterval+'&uul='+bbn.userLanguage+'&uwi='+bbs.width;
+	document.write("<scr"+"ipt  type='text/javascript' src='http://adarbo2.bbmedia.cz/please/showit/87/1/6/24/?typkodu=non-standard"+bbh+"&alttext=0&border=0&bgcolor=FFFFFF&text=000000&link=0000FF&target=_top&bust="+Math.random()+"'>");
+	document.write("<"+"\/scr"+"ipt>");
+	/* ]]> */
+	</script><script type="text/javascript" src="SQL%20-%20spojov%C3%A1n%C3%AD%20tabulek%20a%20tvorba%20pohled%C5%AF%20--%20Datab%C3%A1ze%20--%20V%C3%BDvoj%20aplikac%C3%AD%20--%20Interval.cz_soubory/a_003.js"></script>
+	<!-- KonecKód: adarbo2.bbmedia.cz 3.1 Nestandard -->
+
+
+
+</div>
+</div>
+
+
+
+
+</div>
+<div class="page-maker">&nbsp;</div>
+<div class="page-maker-white">&nbsp;</div>
+</div>
+<div id="advertising-page-bottom">
+
+
+
+
+
+
+
+<div class="page-maker">&nbsp;</div>
+</div>
+<div id="page-foot">
+<div id="page-foot-menu">
+<a href="http://interval.cz/redakce-inzerce.asp">Inzerce na Interval.cz</a>
+&nbsp;|&nbsp;
+<a href="http://interval.cz/redakce.asp">Redakce Interval.cz</a>
+&nbsp;|&nbsp;
+<a href="http://interval.cz/autori.asp">Hledáme nové autory</a>
+</div>
+<div id="issn">
+<a href="http://jigsaw.w3.org/css-validator/validator?uri=http%3A%2F%2Finterval.cz%2Fclanky%2Fsql-spojovani-tabulek-a-tvorba-pohledu%2F" class="noprint">.</a>
+<span title="ID 399">ISSN 1212-8651</span>
+<a href="http://validator.w3.org/check?uri=http%3A%2F%2Finterval.cz%2Fclanky%2Fsql-spojovani-tabulek-a-tvorba-pohledu%2F&amp;charset=%28detect+automatically%29&amp;doctype=%28detect+automatically%29&amp;outline=1&amp;verbose=1" class="noprint">.</a>
+</div>
+<div id="page-foot-zoner">
+© <a href="http://www.zoner.eu/">Zoner software, s.r.o.</a>, všechna práva vyhrazena, tento server dodržuje
+<a href="http://interval.cz/privacy.asp">právní předpisy</a>
+o ochraně osobních údajů.
+</div>
+</div>
+
+<script type="text/javascript" src="SQL%20-%20spojov%C3%A1n%C3%AD%20tabulek%20a%20tvorba%20pohled%C5%AF%20--%20Datab%C3%A1ze%20--%20V%C3%BDvoj%20aplikac%C3%AD%20--%20Interval.cz_soubory/audits-footer.js"></script>
+<script type="text/javascript">
+	var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+	document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script><script src="SQL%20-%20spojov%C3%A1n%C3%AD%20tabulek%20a%20tvorba%20pohled%C5%AF%20--%20Datab%C3%A1ze%20--%20V%C3%BDvoj%20aplikac%C3%AD%20--%20Interval.cz_soubory/ga.js" type="text/javascript"></script>
+<script type="text/javascript">
+	var pageTracker = _gat._getTracker("UA-173085-1");
+	pageTracker._initData();
+	pageTracker._trackPageview();
+</script>
+
+
+	<div id="advertising-context" class="noprint">
+
+	<!-- StartKód: ad2.bbmedia.cz 3.1 Interval(2098) / BillBoard Intext(1) / Intext(1) -->
+	<script type="text/javascript">/* <![CDATA[ */
+	var bbs=screen,bbn=navigator,bbh;bbh='&ubl='+bbn.browserLanguage+'&ucc='+bbn.cpuClass+'&ucd='+bbs.colorDepth+'&uce='+bbn.cookieEnabled+'&udx='+bbs.deviceXDPI+'&udy='+bbs.deviceYDPI+'&usl='+bbn.systemLanguage+'&uje='+bbn.javaEnabled()+'&uah='+bbs.availHeight+'&uaw='+bbs.availWidth+'&ubd='+bbs.bufferDepth+'&uhe='+bbs.height+'&ulx='+bbs.logicalXDPI+'&uly='+bbs.logicalYDPI+'&use='+bbs.fontSmoothingEnabled+'&uto='+(new Date()).getTimezoneOffset()+'&uti='+(new Date()).getTime()+'&uui='+bbs.updateInterval+'&uul='+bbn.userLanguage+'&uwi='+bbs.width;
+	document.write("<scr"+"ipt type='text/javascript' src='http://ad2.bbmedia.cz/please/showit/2098/1/1/7/?typkodu=js"+bbh+"&alttext=0&border=0&bust="+Math.random()+"&target=_blank'><"+"\/scr"+"ipt>");
+	/* ]]> */
+	</script><script type="text/javascript" src="SQL%20-%20spojov%C3%A1n%C3%AD%20tabulek%20a%20tvorba%20pohled%C5%AF%20--%20Datab%C3%A1ze%20--%20V%C3%BDvoj%20aplikac%C3%AD%20--%20Interval.cz_soubory/a_002.js"></script><script type="text/javascript" charset="windows-1250" src="SQL%20-%20spojov%C3%A1n%C3%AD%20tabulek%20a%20tvorba%20pohled%C5%AF%20--%20Datab%C3%A1ze%20--%20V%C3%BDvoj%20aplikac%C3%AD%20--%20Interval.cz_soubory/bb4.js"></script><script type="text/javascript" charset="windows-1250">document.write("<scr"+"ipt  type='text/javascript' src='http://ad2.billboard.cz/please/showit/35974/1/1/31/?typkodu=js"+bbh+"' charset='windows-1250'><"+"/scr"+"ipt>");</script><script type="text/javascript" src="SQL%20-%20spojov%C3%A1n%C3%AD%20tabulek%20a%20tvorba%20pohled%C5%AF%20--%20Datab%C3%A1ze%20--%20V%C3%BDvoj%20aplikac%C3%AD%20--%20Interval.cz_soubory/a.js" charset="windows-1250"></script><script language="JavaScript" src="SQL%20-%20spojov%C3%A1n%C3%AD%20tabulek%20a%20tvorba%20pohled%C5%AF%20--%20Datab%C3%A1ze%20--%20V%C3%BDvoj%20aplikac%C3%AD%20--%20Interval.cz_soubory/pack107.js" charset="windows-1250"></script><script type="text/javascript" charset="windows-1250" src="SQL%20-%20spojov%C3%A1n%C3%AD%20tabulek%20a%20tvorba%20pohled%C5%AF%20--%20Datab%C3%A1ze%20--%20V%C3%BDvoj%20aplikac%C3%AD%20--%20Interval.cz_soubory/bbt2.js"></script>
+
+	<noscript>
+<div> <a href='http://ad2.bbmedia.cz/please/redirect/2098/1/1/7/'><img
+src='http://ad2.bbmedia.cz/please/showit/2098/1/1/7/?typkodu=img'
+alt='.' /></a></div> </noscript>
+	<!-- KonecKód: ad2.bbmedia.cz 3.1 -->
+
+	</div>
+
+
+<div style="position: absolute; left: -1000px; top: -1000px; display: none;" id="bbt_add455"><div class="bbt_border" onmouseout='this.className="bbt_border";' onmouseover='this.className="bbt_border bbt_border_over";'><div class="bbt_block"><h3 class="bbt_title" onclick="window.open('http://www.billboard.cz/media-text.php');javascript:event.cancelBubble=true;">Billboard Intextová reklama</h3><div class="bbt_adbox" onmouseout='this.className="bbt_adbox";' onmouseover='this.className="bbt_adbox_over";'><h4>Windows Server 2008</h4><p>Nespoutaný server. Bezpečnější<br>než kdykoliv předtím.<strong>serveronauti.cz</strong></p></div></div><h5 onclick="window.open('http://www.billboard.cz/media-text.php');javascript:event.cancelBubble=true;"><span></span><em>o reklamě Billboard »</em></h5></div></div><div style="position: absolute; left: -1000px; top: -1000px; display: none;" id="bbt_add431"><div class="bbt_border" onmouseout='this.className="bbt_border";' onmouseover='this.className="bbt_border bbt_border_over";'><div class="bbt_block"><h3 class="bbt_title" onclick="window.open('http://www.billboard.cz/media-text.php');javascript:event.cancelBubble=true;">Billboard Intextová reklama</h3><div class="bbt_adbox" onmouseout='this.className="bbt_adbox";' onmouseover='this.className="bbt_adbox_over";'><h4>Hledáte zaměstnance</h4><p>nebo práci v ČR? Inzerujte na našem<br>pracovním portálu a určitě najdete!<strong>www.pracevcr.cz</strong></p></div></div><h5 onclick="window.open('http://www.billboard.cz/media-text.php');javascript:event.cancelBubble=true;"><span></span><em>o reklamě Billboard »</em></h5></div></div><div style="position: absolute; left: -1000px; top: -1000px; display: none;" id="bbt_add38"><div class="bbt_border" onmouseout='this.className="bbt_border";' onmouseover='this.className="bbt_border bbt_border_over";'><div class="bbt_block"><h3 class="bbt_title" onclick="window.open('http://www.billboard.cz/media-text.php');javascript:event.cancelBubble=true;">Billboard Intextová reklama</h3><div class="bbt_adbox" onmouseout='this.className="bbt_adbox";' onmouseover='this.className="bbt_adbox_over";'><h4>Hledáte zaměstnance</h4><p>v Ostravě?<br>Inzerujte na našem portále!<strong>www.pracevostrave.cz</strong></p></div></div><h5 onclick="window.open('http://www.billboard.cz/media-text.php');javascript:event.cancelBubble=true;"><span></span><em>o reklamě Billboard »</em></h5></div></div><div style="position: absolute; left: -1000px; top: -1000px; display: none;" id="bbt_add1434"><div class="bbt_border" onmouseout='this.className="bbt_border";' onmouseover='this.className="bbt_border bbt_border_over";'><div class="bbt_block"><h3 class="bbt_title" onclick="window.open('http://www.billboard.cz/media-text.php');javascript:event.cancelBubble=true;">Billboard Intextová reklama</h3><div class="bbt_adbox" onmouseout='this.className="bbt_adbox";' onmouseover='this.className="bbt_adbox_over";'><h4>Vlastní web nebo eshop ?</h4><p>Co si dnes koupíte za 150,- Kč?<br>Třeba vlastní web a moderní eshop.<strong>www.web-rychle.cz</strong></p></div></div><h5 onclick="window.open('http://www.billboard.cz/media-text.php');javascript:event.cancelBubble=true;"><span></span><em>o reklamě Billboard »</em></h5></div></div><div style="position: absolute; left: -1000px; top: -1000px; display: none;" id="bbt_add538"><div class="bbt_border" onmouseout='this.className="bbt_border";' onmouseover='this.className="bbt_border bbt_border_over";'><div class="bbt_block"><h3 class="bbt_title" onclick="window.open('http://www.billboard.cz/media-text.php');javascript:event.cancelBubble=true;">Billboard Intextová reklama</h3><div class="bbt_adbox" onmouseout='this.className="bbt_adbox";' onmouseover='this.className="bbt_adbox_over";'><h4>Zabezpečení objektů</h4><p>a areálů. Projekce, montáž, servis,<br>bezpečnostní dokumentace a další.<strong>www.security.cz</strong></p></div></div><h5 onclick="window.open('http://www.billboard.cz/media-text.php');javascript:event.cancelBubble=true;"><span></span><em>o reklamě Billboard »</em></h5></div></div><div style="position: absolute; left: -1000px; top: -1000px; display: none;" id="bbt_add1099"><div class="bbt_border" style="width: 260px ! important;" onmouseout='this.className="bbt_border";' onmouseover='this.className="bbt_border bbt_border_over";'><h3 class="bbt_title" style="font-size: 0.85em; cursor: pointer;" onclick="window.open('http://www.billboard.cz/media-text.php');javascript:event.cancelBubble=true;">BillBoard Intextová reklama</h3><iframe id="bbtEtMainIfr1099" name="bbtEtMainIfr1099" allowtransparency="true" src="SQL%20-%20spojov%C3%A1n%C3%AD%20tabulek%20a%20tvorba%20pohled%C5%AF%20--%20Datab%C3%A1ze%20--%20V%C3%BDvoj%20aplikac%C3%AD%20--%20Interval.cz_soubory/a_002.htm" frameborder="0" height="260" scrolling="no" width="260"></iframe><h5 onclick="window.open('http://www.etarget.cz/catalog.php?ref=4372&catalogPartner=270&c=900&asynchronousConfirmURL=http%3A//ad2.billboard.cz/please/redirect/35974/1/1/32/%21etarget%3D1%3Bparam%3D62552/822987_0');javascript:event.cancelBubble=true;"><em>další z katalogu »</em></h5></div></div><div style="position: absolute; left: -1000px; top: -1000px; display: none;" id="bbt_add"><div class="bbt_border" onmouseout='this.className="bbt_border";' onmouseover='this.className="bbt_border bbt_border_over";' onclick="window.open('http://bb.billboard.cz/bbtext/');javascript:event.cancelBubble=true;"><div class="bbt_block"><div class="bbt_adbox" onmouseout='this.className="bbt_adbox";' onmouseover='this.className="bbt_adbox_over";'>bbtext</div></div></div></div><a style="display: none;" class="bbt_w">bbtext</a><div style="position: absolute; left: 364px; top: 101px; z-index: 1000000000 ! important; visibility: hidden; opacity: 1; width: 0px;" id="linkalert-box"><img style="width: 0px;" src="SQL%20-%20spojov%C3%A1n%C3%AD%20tabulek%20a%20tvorba%20pohled%C5%AF%20--%20Datab%C3%A1ze%20--%20V%C3%BDvoj%20aplikac%C3%AD%20--%20Interval.cz_soubory/none-icon.png" id="linkalert-icon-1"></div></body></html>

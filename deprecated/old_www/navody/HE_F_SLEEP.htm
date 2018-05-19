@@ -1,0 +1,62 @@
+<!doctype html public "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=Windows-1250">
+<title>Procedura Sleep</title>
+<link rel='stylesheet' style='text/css' href='../function.css'>
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000">
+
+
+
+<h2 class=function>Sleep</h2>
+<img src='../images/sql.gif' width='44' height='16' border='0' alt='sql' align='middle' hspace='2'>
+
+
+<br><br>
+<div class='typ'>FUNCTION <b>Sleep</b>(IN tm INT) RETURNS BOOLEAN;
+</div>
+
+
+<p><b>Parametry</b></p>
+
+<table border=1 cols=2 frame=box rules=all width=400>
+
+<tr valign="top">
+<td width=22%><i>tm</i></td>
+<td width=78%>počet milisekund</td>
+</tr>
+</table><br>
+
+<p><b>Od verze</b></p>
+
+<p>6.1</p>
+
+<p><b>Popis </b></p>
+
+<p>Funkce lze použít pouze v jazyce SQL.</p>
+
+<p>Funkce pozastaví provádění rutiny, dokud 
+
+<ul>
+<li>neuplyne zadaný časový interval </li>
+<li>není ukončen SQL server </li>
+<li>není vlákno násilně ukončeno z Klientského prostředí z okna <strong>Monitor</strong> nebo funkcí <a href="../xml/html/f_operation_limits.html"><code>Operation_limits</code></a>. </li>
+</ul>
+V <a href="../xml/html/_iv_logged_users.html">seznamu klientů</a> má toto "spící" vlákno uvedeno stav = 9.</p>
+
+<p><b>Hodnota funkce</b></p>
+
+<p>Pokud funkce skončí uplynutím intervalu, vrátí TRUE, jinak vrátí FALSE.</p>
+
+<p><b>Příklad</b></p>
+
+<p>Konstrukce, která zajistí periodické opakování určité práce každých např. 15 minut:</p>
+<pre><code>REPEAT
+<i> --  práce opakovaná s 15-minutovými přestávkami</i>
+UNTIL NOT <b>Sleep</b>(15*1000*60)
+END REPEAT;</code></pre>
+
+</body>
+</html>

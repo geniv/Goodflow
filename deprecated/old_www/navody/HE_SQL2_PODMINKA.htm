@@ -1,0 +1,211 @@
+<!doctype html public "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=Windows-1250">
+<title>Podmínka v SQL</title>
+<link rel='stylesheet' style='text/css' href='../function.css'>
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr>
+	<td style="background-image: url(../images/bghead.jpg);
+		background-position: right;
+		background-repeat: no-repeat;">
+	<table width="100%" border="0" cellpadding="0" cellspacing="0"
+		style="background-image:none">
+	<tr>
+		<td style="background-image:none" height="46"
+			width="15%"><img src="../images/title-cz.gif"
+			width="255" height="33"
+			alt="602SQL-Úplná dokumentace"
+			title="602SQL - Úplná dokumentace"
+			border="0"></td>
+		<td width="33%" align="right"><a href="../xml/html/top.html"><img class="floatno"
+			src="../images/index.gif"
+			width="15" height="16"
+			alt="Index" title="Zpět na obsah"
+			border="0" vspace="2"></a> &nbsp;
+			 </td>
+	</tr>
+	</table>
+	</td>
+</tr>
+</table><table class="navigace" border="0" width="100%"  bgcolor="#FFFFBF"><tr> <td
+width="20" align="center"><img class="floatno" src="../images/prev.gif"
+width="15" height="13" alt="&lt;&shy;" title="Předcházející téma"
+border="0"></td><td width="25%"><a
+href="HE_SQL2_VYRAZY.htm">Výrazy</a></td> <td width="25%"
+align="right"><img class="floatno" src="../images/up.gif" width="13"
+height="15" alt="Nahoru" title="O jednu úroveň výš" border="0"
+align="middle"></td><td width="25%"><a href="HE_SQL2_JAZYKSQL.htm">Jazyk SQL a jeho implementace</a></td>
+<td width="25%" align="right"><a
+href="HE_SQL2_DOTAZY.htm">Dotazy</a></td><td width="20"
+align="center"><img class="floatno" src="../images/next.gif" width="15"
+height="13" alt="&shy;&gt;" title="Následující téma" border="0"></td>
+</tr></table>
+
+
+
+
+<h1><a name="he_sql2_podminka"></a>Podmínka (SQL)</h1>
+<pre><code>podmínka ::= booleovský_faktor { OR booleovský_faktor }…
+booleovský_faktor ::= booleovský_term { AND booleovský_term }…
+booleovský_term ::= [ NOT ] predikát
+predikát ::= výraz relační_operátor výraz    
+    | predikát_IS 
+    | zobecněné_porovnání    
+    | predikát_BETWEEN    
+    | predikát_IN
+    | predikát_EXISTS
+    | predikát_UNIQUE
+    | predikát_LIKE 
+    | predikát_IS_NULL
+    | predikát Fulltext
+    | privil_predikáty
+    | ( podmínka )
+relační_operátor ::= &gt; | &lt; | &lt;= | &gt;= | = | &lt;&gt;
+predikát_IS ::= výraz IS [NOT] { TRUE | FALSE | UNKNOWN }
+</code></pre>
+
+<p><b>Popis:</b></p>
+
+<p><em>Podmínkou</em> rozumíme takový obecný <a href="HE_SQL2_VYRAZY.htm">výraz</a>, který nabývá hodnot TRUE, FALSE nebo UNKNOWN.</p>
+<p><i>Podmínka</i> se používá při vyhodnocování podmíněného výrazu <a href="HE_SQL2_VYRAZCASE.htm">CASE</a>, klauzule WHERE a klauzule HAVING <a href="HE_SQL2_SPECIFIKACEDOTAZU.htm">specifikace dotazu</a>, klauzule CHECK v <a href="../xml/html/sql_integrity.html">integritním omezení</a> nebo <a href="HE_SQL2_ZOBECNENATABULKA.htm">specifikace JOINu</a>, v příkazech <a href="HE_SQL2_UPDATE.htm">UPDATE</a> a <a href="HE_SQL2_DELETE.htm">DELETE</a>, v definici <a href="HE_SQL2_TRIGGERYPOPIS.htm">triggeru</a> nebo při vyhodnocení řídicích příkazů <a href="HE_SQL2_IF.htm">IF</a>, <a href="HE_SQL2_CASE.htm">CASE</a>, <a href="HE_SQL2_WHILE.htm">WHILE</a> a <a href="HE_SQL2_REPEAT.htm">REPEAT</a>.</p>
+
+<p>Priorita operátorů v podmínkách je následující:</p>
+<ol>
+<li> *,/,DIV a MOD pro násobení, dělení, celočíselné dělení a zbytek po dělení;</li>
+<li> unární - , binární + a - pro sčítání a odečítání;</li>
+<li> relační operátory &lt;,&gt;,=,&gt;=,&lt;=,&lt;&gt;,.=,.=.,~ a predikáty (BETWEEN, LIKE apod.);</li>
+<li> negace NOT;</li>
+<li> spojka AND;</li>
+<li> spojka OR.</li>
+</ol>
+<p><i>Podmínka</i> může nabývat tří hodnot: TRUE, FALSE nebo UNKNOWN. Hodnota UNKNOWN je ekvivalentní hodnotě NULL. </p>
+
+<p>Operátor OR provádí disjunkci pravdivostních hodnot. Jeho výsledek je TRUE, pokud alespoň jeden operand má hodnotu TRUE, výsledek je FALSE, pokud oba operandy jsou FALSE, jinak je výsledek UNKNOWN.</p>
+
+<p>Operátor AND provádí konjunkci pravdivostních hodnot. Jeho výsledek je TRUE, pokud oba operandy mají hodnotu TRUE, výsledek je FALSE, pokud alespoň jeden operand je FALSE, jinak je výsledek UNKNOWN.</p>
+
+<p>Operátor NOT provádí negaci pravdivostních hodnot, negace TRUE je FALSE, negace FALSE je TRUE, negace UNKNOWN je UNKNOWN.</p>
+
+<h3>Tabulka pravdivostních hodnot v tříhodnotové logice:</h3>
+
+<table cols=5 width=400 border=1>
+
+<tr valign="top">
+<td width=20%><b>&nbsp;a</b></td>
+<td width=20%><b>&nbsp;b</b></td>
+<td width=20%><b>&nbsp;a AND b</b></td>
+<td width=20%><b>&nbsp;a OR b</b></td>
+<td width=20%><b>&nbsp;NOT a</b></td>
+</tr>
+
+<tr valign="top">
+<td>TRUE</td><td>TRUE</td><td>TRUE</td><td>TRUE</td><td>FALSE</td>
+</tr>
+
+<tr valign="top">
+<td>TRUE</td><td>FALSE</td><td>FALSE</td><td>TRUE</td><td>FALSE</td>
+</tr>
+
+<tr valign="top">
+<td>TRUE</td><td>UNKNOWN</td><td>UNKNOWN</td><td>TRUE</td><td>FALSE</td>
+</tr>
+
+<tr valign="top">
+<td>FALSE</td><td>TRUE</td><td>FALSE</td><td>TRUE</td><td>TRUE</td>
+</tr>
+
+<tr valign="top">
+<td>FALSE</td><td>FALSE</td><td>FALSE</td><td>FALSE</td><td>TRUE</td>
+</tr>
+
+<tr valign="top">
+<td>FALSE</td><td>UNKNOWN</td><td>FALSE</td><td>UNKNOWN</td><td>TRUE</td>
+</tr>
+
+<tr valign="top">
+<td>UNKNOWN</td><td>TRUE</td><td>UNKNOWN</td><td>TRUE</td><td>UNKNOWN</td>
+</tr>
+
+<tr valign="top">
+<td>UNKNOWN</td><td>FALSE</td><td>FALSE</td><td>UNKNOWN</td><td>UNKNOWN</td>
+</tr>
+
+<tr valign="top">
+<td>UNKNOWN</td><td>UNKNOWN</td><td>UNKNOWN</td><td>UNKNOWN</td><td>UNKNOWN</td>
+</tr>
+</table><br>
+
+<p>Porovnání hodnot dvou výrazů pomocí relačních operátorů předpokládá, že oba výrazy jsou číselného <a href="HE_SQL2_DATOVETYPY.htm">typu</a>, typu znakový řetězec, typu binární řetězec nebo typu DATE, TIME nebo TIMESTAMP.</p>
+
+<p><i>Predikát IS</i> předpokládá, že v&nbsp;něm obsažený <i>výraz</i> je booleovského typu, a porovnává jej s&nbsp;booleovskou konstantou. 
+<pre>... WHERE zaplaceno IS NOT TRUE</pre>
+vybere záznamy, které mají ve sloupci <code>zaplaceno</code> hodnotu FALSE nebo NULL.
+</p>
+
+<p>Popis dalších typů predikátů je na následujících stránkách:
+
+<ul>
+	<li><a href="HE_SQL2_ZOBECNENEPOROVNAVANI.htm">zobecněné porovnávání (ANY, SOME, ALL)</a> </li>
+	<li><a href="HE_SQL2_BETWEEN.htm">predikát BETWEEN</a> </li>
+	<li><a href="HE_SQL2_IN.htm">predikát IN</a> </li>
+	<li><a href="HE_SQL2_EXISTS.htm">predikát EXISTS</a> </li>
+	<li><a href="HE_SQL2_UNIQUE.htm">predikát UNIQUE</a> </li>
+	<li><a href="HE_SQL2_LIKE.htm">predikát LIKE</a> </li>
+	<li><a href="HE_SQL2_ISNULL.htm">predikát IS NULL</a> </li>
+	<li><a href="../xml/html/fulltext_search.html">predikát Fulltext</a></li>
+	<li><a href="HE_SQL2_PRIVILS.htm">predikáty pro zjišťování práv</a></li>
+</ul>
+
+<h3>Odchylky od Intermediate level směrem k&nbsp;Full level nebo k&nbsp;SQL 3</h3>
+<ul>
+	<li>Predikát IS patří do Full level. Některé varianty použití booleovských operátorů patří do SQL 3.</li>
+</ul>
+
+<h3>Odchylky od Intermediate level směrem k&nbsp;Entry level</h3>
+<ul>
+	<li>Není implementován predikát OVERLAPS pro překrytí intervalů.</li>
+</ul>
+
+<h3>Rozšíření jazyka SQL proti normě</h3>
+<ul>
+	<li>Predikáty pro fulltextové vyhledávání a pro zjišťování práv jsou rozšířením 602SQL</li>
+</ul>
+
+
+
+<p class="subs">Seznam subsekcí:
+<ul class="subs">
+
+<li><a href="HE_SQL2_ZOBECNENEPOROVNAVANI.htm">Zobecněné porovnávání</a>
+
+<li><a href="HE_SQL2_BETWEEN.htm">Predikát BETWEEN</a>
+
+<li><a href="HE_SQL2_IN.htm">Predikát IN</a>
+
+<li><a href="HE_SQL2_EXISTS.htm">Predikát EXISTS</a>
+
+<li><a href="HE_SQL2_UNIQUE.htm">Predikát UNIQUE</a>
+
+<li><a href="HE_SQL2_LIKE.htm">Predikát LIKE</a>
+
+<li><a href="HE_SQL2_ISNULL.htm">Predikát IS NULL</a>
+
+</ul>
+<table class="navigace" border="0" width="100%"  bgcolor="#FFFFBF"><tr> <td
+width="20" align="center"><img class="floatno" src="../images/prev.gif"
+width="15" height="13" alt="&lt;&shy;" title="Předcházející téma"
+border="0"></td><td width="25%"><a
+href="HE_SQL2_VYRAZY.htm">Výrazy</a></td> <td width="25%"
+align="right"><img class="floatno" src="../images/up.gif" width="13"
+height="15" alt="Nahoru" title="O jednu úroveň výš" border="0"
+align="middle"></td><td width="25%"><a href="HE_SQL2_JAZYKSQL.htm">Jazyk SQL a jeho implementace</a></td>
+<td width="25%" align="right"><a
+href="HE_SQL2_DOTAZY.htm">Dotazy</a></td><td width="20"
+align="center"><img class="floatno" src="../images/next.gif" width="15"
+height="13" alt="&shy;&gt;" title="Následující téma" border="0"></td>
+</tr></table>
+</body>
+</html>

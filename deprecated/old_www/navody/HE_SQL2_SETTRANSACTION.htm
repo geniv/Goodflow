@@ -1,0 +1,87 @@
+<!doctype html public "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=Windows-1250">
+<title>Příkaz SET TRANSACTION v SQL</title>
+<link rel='stylesheet' style='text/css' href='../function.css'>
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr>
+	<td style="background-image: url(../images/bghead.jpg);
+		background-position: right;
+		background-repeat: no-repeat;">
+	<table width="100%" border="0" cellpadding="0" cellspacing="0"
+		style="background-image:none">
+	<tr>
+		<td style="background-image:none" height="46"
+			width="15%"><img src="../images/title-cz.gif"
+			width="255" height="33"
+			alt="602SQL-Úplná dokumentace"
+			title="602SQL - Úplná dokumentace"
+			border="0"></td>
+		<td width="33%" align="right"><a href="../xml/html/top.html"><img class="floatno"
+			src="../images/index.gif"
+			width="15" height="16"
+			alt="Index" title="Zpět na obsah"
+			border="0" vspace="2"></a> &nbsp;
+			 </td>
+	</tr>
+	</table>
+	</td>
+</tr>
+</table><table class="navigace" border="0" width="100%"  bgcolor="#FFFFBF"><tr> <td
+width="20" align="center"><img class="floatno" src="../images/prev.gif"
+width="15" height="13" alt="&lt;&shy;" title="Předcházející téma"
+border="0"></td><td width="25%"><a
+href="HE_SQL2_ROLLBACK.htm">Příkaz ROLLBACK</a></td> <td width="25%"
+align="right"><img class="floatno" src="../images/up.gif" width="13"
+height="15" alt="Nahoru" title="O jednu úroveň výš" border="0"
+align="middle"></td><td width="25%"><a href="HE_SQL2_TRANSAKCE.htm">Transakce a body návratu</a></td>
+<td width="25%" align="right"><a
+href="HE_SQL2_SAVEPOINT.htm">Příkaz SAVEPOINT</a></td><td width="20"
+align="center"><img class="floatno" src="../images/next.gif" width="15"
+height="13" alt="&shy;&gt;" title="Následující téma" border="0"></td>
+</tr></table>
+
+
+
+
+<h1><a name="he_sql2_settransaction"></a>Příkaz SET TRANSACTION (SQL)</h1>
+
+<pre><code>příkaz_SET_TRANSACTION ::= SET TRANSACTION [ izolace ] [, druh_transakce ]  
+izolace ::= ISOLATION LEVEL { READ UNCOMMITTED | READ COMMITTED | REPEATABLE READ | SERIALIZABLE }
+druh_transakce ::= READ ONLY | READ WRITE</code></pre>
+
+
+<p><a href="HE_SQL2_PRIKAZY.htm">Příkaz</a> SET TRANSACTION nastavuje vlastnosti implicitních <a href="HE_SQL2_TRANSAKCE.htm">transakcí</a>: určuje jejich druh a stupeň <a href="HE_SQL2_IZOLACETRANSAKCI.htm">izolace</a> od ostatních souběžně probíhajících transakcí. Toto nastavení platí i pro všechny následné transakce až do nového nastavení.</p>
+
+<p>Není-li specifikovaná <i>izolace</i>, uplatní se SERIALIZABLE. Není-li specifikován <i>druh transakce</i>, pak je-li specifikována <i>izolace</i> READ UNCOMMITTED, uplatní se READ ONLY, jinak se uplatní READ WRITE.</p>
+
+<p>Je-li tento příkaz proveden v situaci, kdy je <em>explicitní</em> transakce již zahájena, nastane chybový <a href="../xml/html/handlingcategories.html">sqlstate</a> 25001. </p>
+
+<p>Interně SQL server 602SQL implementuje pouze stupně izolace READ COMMITTED a SERIALIZABLE. Při nastavení READ UNCOMMITTED se vnitřně nastaví READ COMMITTED, při nastavení REPEATABLE READ se vnitřně nastaví SERIALIZABLE. Toto chování je plně v&nbsp;souladu s&nbsp;normou.</p>
+
+<p><b>Odlišnosti od normy</b>
+
+<ul>
+	<li>Na rozdíl od normy SQL platí v 602SQL takto nastavené vlastnosti transakce nejen pro nejbližší transakci, nýbrž (pro všechny implicitní transakce) až do příštího nastavení vlastností transakce příkazem SET TRANSACTION nebo <a href="HE_SQL2_STARTTRANSACTION.htm">START TRANSACTION</a>.</li>
+</ul>
+
+
+
+<table class="navigace" border="0" width="100%"  bgcolor="#FFFFBF"><tr> <td
+width="20" align="center"><img class="floatno" src="../images/prev.gif"
+width="15" height="13" alt="&lt;&shy;" title="Předcházející téma"
+border="0"></td><td width="25%"><a
+href="HE_SQL2_ROLLBACK.htm">Příkaz ROLLBACK</a></td> <td width="25%"
+align="right"><img class="floatno" src="../images/up.gif" width="13"
+height="15" alt="Nahoru" title="O jednu úroveň výš" border="0"
+align="middle"></td><td width="25%"><a href="HE_SQL2_TRANSAKCE.htm">Transakce a body návratu</a></td>
+<td width="25%" align="right"><a
+href="HE_SQL2_SAVEPOINT.htm">Příkaz SAVEPOINT</a></td><td width="20"
+align="center"><img class="floatno" src="../images/next.gif" width="15"
+height="13" alt="&shy;&gt;" title="Následující téma" border="0"></td>
+</tr></table>
+</body>
+</html>

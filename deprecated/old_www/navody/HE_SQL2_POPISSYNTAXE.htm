@@ -1,0 +1,114 @@
+<!doctype html public "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=Windows-1250">
+<title>Popis syntaxe SQL</title>
+<link rel='stylesheet' style='text/css' href='../function.css'>
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr>
+	<td style="background-image: url(../images/bghead.jpg);
+		background-position: right;
+		background-repeat: no-repeat;">
+	<table width="100%" border="0" cellpadding="0" cellspacing="0"
+		style="background-image:none">
+	<tr>
+		<td style="background-image:none" height="46"
+			width="15%"><img src="../images/title-cz.gif"
+			width="255" height="33"
+			alt="602SQL-Úplná dokumentace"
+			title="602SQL - Úplná dokumentace"
+			border="0"></td>
+		<td width="33%" align="right"><a href="../xml/html/top.html"><img class="floatno"
+			src="../images/index.gif"
+			width="15" height="16"
+			alt="Index" title="Zpět na obsah"
+			border="0" vspace="2"></a> &nbsp;
+			 </td>
+	</tr>
+	</table>
+	</td>
+</tr>
+</table><table class="navigace" border="0" width="100%"  bgcolor="#FFFFBF"><tr> <td
+width="20" align="center"><img class="floatno" src="../images/prev.gif"
+width="15" height="13" alt="&lt;&shy;" title="Předcházející téma"
+border="0"></td><td width="25%"><a
+href="../xml/html/sqloptions.html">Kompatibilita s normami SQL a staršími verzemi 602SQL</a></td> <td width="25%"
+align="right"><img class="floatno" src="../images/up.gif" width="13"
+height="15" alt="Nahoru" title="O jednu úroveň výš" border="0"
+align="middle"></td><td width="25%"><a href="HE_SQL2_JAZYKSQL.htm">Jazyk SQL a jeho implementace</a></td>
+<td width="25%" align="right"><a
+href="HE_SQL2_POUZITI.htm">Způsoby použití SQL ve 602SQL</a></td><td width="20"
+align="center"><img class="floatno" src="../images/next.gif" width="15"
+height="13" alt="&shy;&gt;" title="Následující téma" border="0"></td>
+</tr></table>
+
+
+
+
+<h1><a name="he_sql2_popissyntaxxe"></a>Popis syntaxe jazyka SQL ve 602SQL</h1>
+
+<p>Pro zápis syntaxe SQL se používá upravená BNF (Backus Naur Form). Syntaxe je popsána soustavou pravidel ve tvaru:</p>
+
+<pre><code>neterminál ::= popis_syntaxe_neterminálu</code></pre>
+
+<p>Pravá strana pravidla říká, jakou syntaxi může mít neterminál uvedený na jeho levé straně. Obsahuje symboly, které budou zapsány přímo v SQL (terminální symboly) a neterminály, které jsou definovány jinými pravidly. Na pravé straně se také mohou vyskytovat tyto metasymboly, tedy symboly, které nejsou součástí syntaxe, ale umožňují zápis syntaxe. Metasymboly jsou:</p>
+
+<table cols=2>
+
+<tr valign="top">
+<td width=8%><code>|</code> </td>
+<td width=92%>oddělovač variant - lze použít jednu nebo druhou variantu</td>
+</tr>
+<tr valign="top">
+<td width=8%><code>[ ]</code></td>
+<td width=92%>závorky vymezující nepovinnou část</td>
+</tr>
+<tr valign="top">
+<td width=8%><code>{ }</code></td>
+<td width=92%>metazávorky (ohraničují určitou část pravidla)</td>
+</tr>
+<tr valign="top">
+<td width=8%><code>…</code></td>
+<td width=92%>symbol označující nula nebo více opakování bezprostředně předcházejícího symbolu (nebo více symbolů v metazávorkách)</td>
+</tr>
+</table><br>
+
+<p><b>Příklad použití zápisu:</b></p>
+
+<pre><code>příkaz_INSERT ::= INSERT INTO jméno_tabulky [ ( jméno_sloupce {,jméno_sloupce}… ) ] obsah
+</code><code>obsah ::= VALUES ( hodnota {, hodnota }… ) | DEFAULT VALUES | dotazový_výraz</code></pre>
+
+<h2>Jak číst takovýto zápis:</h2>
+
+<p>Příkaz INSERT je definován takto: začíná povinnými vyhrazenými slovy INSERT INTO následovanými neterminálem <i>jméno_tabulky</i>. Obsah neterminálu <i>jméno_tabulky</i> je v tomto případě zřejmý.</p>
+
+<p>Dále následují metasymboly - hranaté závorky - vymezující nepovinnou část. V ní jsou kulaté závorky - ty nepatří mezi metasymboly, jsou tedy součástí příkazu. Obsahují jeden nebo více neterminálů <i>jméno_sloupce</i>. Složené závorky zde vymezují část, ke které se vztahuje symbol pro opakování.</p>
+
+<p>Následuje neterminál <i>obsah</i>, jehož syntaxe je definovaná v následujícím pravidle. Pomocí oddělovačů variant jsou naznačeny tři různé, navzájem se vylučující možnosti syntaxe. První varianta začíná vyhrazeným slovem VALUES a pokračuje výčtem jedné nebo více hodnot v kulatých závorkách. Druhá varianta se skládá pouze ze slov DEFAULT VALUES. Třetí varianta odkazuje na neterminál <i>dotazový výraz</i>. <i>Dotazový výraz</i> je pojmem, na který je odkazováno z mnoha míst, proto je definován na zvláštní stránce.</p>
+
+Příkladem příkazu INSERT vyhovujícímu těmto pravidlům, je:
+<pre><code>INSERT INTO Inventory(name, id, price) VALUES ('Empo', 546000, 489.20)</code></pre>
+
+<h2>Typografické poznámky</h2>
+
+<p>V příkladech dodržujeme tuto konvenci: zapisujeme jména tabulek s prvním písmenem velkým, jména sloupců malými písmeny, vyhrazená slova SQL velkými písmeny.</p>
+
+
+
+<table class="navigace" border="0" width="100%"  bgcolor="#FFFFBF"><tr> <td
+width="20" align="center"><img class="floatno" src="../images/prev.gif"
+width="15" height="13" alt="&lt;&shy;" title="Předcházející téma"
+border="0"></td><td width="25%"><a
+href="../xml/html/sqloptions.html">Kompatibilita s normami SQL a staršími verzemi 602SQL</a></td> <td width="25%"
+align="right"><img class="floatno" src="../images/up.gif" width="13"
+height="15" alt="Nahoru" title="O jednu úroveň výš" border="0"
+align="middle"></td><td width="25%"><a href="HE_SQL2_JAZYKSQL.htm">Jazyk SQL a jeho implementace</a></td>
+<td width="25%" align="right"><a
+href="HE_SQL2_POUZITI.htm">Způsoby použití SQL ve 602SQL</a></td><td width="20"
+align="center"><img class="floatno" src="../images/next.gif" width="15"
+height="13" alt="&shy;&gt;" title="Následující téma" border="0"></td>
+</tr></table>
+</body>
+</html>

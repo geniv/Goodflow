@@ -1,0 +1,102 @@
+<!doctype html public "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=Windows-1250">
+<title>Příkaz CREATE INDEX (SQL)</title>
+<link rel='stylesheet' style='text/css' href='../function.css'>
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr>
+	<td style="background-image: url(../images/bghead.jpg);
+		background-position: right;
+		background-repeat: no-repeat;">
+	<table width="100%" border="0" cellpadding="0" cellspacing="0"
+		style="background-image:none">
+	<tr>
+		<td style="background-image:none" height="46"
+			width="15%"><img src="../images/title-cz.gif"
+			width="255" height="33"
+			alt="602SQL-Úplná dokumentace"
+			title="602SQL - Úplná dokumentace"
+			border="0"></td>
+		<td width="33%" align="right"><a href="../xml/html/top.html"><img class="floatno"
+			src="../images/index.gif"
+			width="15" height="16"
+			alt="Index" title="Zpět na obsah"
+			border="0" vspace="2"></a> &nbsp;
+			 </td>
+	</tr>
+	</table>
+	</td>
+</tr>
+</table><table class="navigace" border="0" width="100%"  bgcolor="#FFFFBF"><tr> <td
+width="20" align="center"><img class="floatno" src="../images/prev.gif"
+width="15" height="13" alt="&lt;&shy;" title="Předcházející téma"
+border="0"></td><td width="25%"><a
+href="../xml/html/indexnotnull.html">Použití indexů neobsahujících hodnoty NULL</a></td> <td width="25%"
+align="right"><img class="floatno" src="../images/up.gif" width="13"
+height="15" alt="Nahoru" title="O jednu úroveň výš" border="0"
+align="middle"></td><td width="25%"><a href="../xml/html/sql_index.html">Indexy k databázovým tabulkám</a></td>
+<td width="25%" align="right"><a
+href="HE_SQL2_DROPINDEX.htm">Příkaz DROP INDEX</a></td><td width="20"
+align="center"><img class="floatno" src="../images/next.gif" width="15"
+height="13" alt="&shy;&gt;" title="Následující téma" border="0"></td>
+</tr></table>
+
+
+
+
+<h1><a name="he_sql2_createindex"></a>Příkaz CREATE INDEX (SQL)</h1>
+
+<pre><code>příkaz_CREATE_INDEX ::= CREATE [ IF NOT EXISTS ] [ UNIQUE ] INDEX jméno_indexu 
+  ON [schema.]jméno_tabulky ( výraz [ směr ] {, výraz [ směr ] }… ) [{ NULL | NOT NULL }]
+směr ::= ASC | DESC
+</code></pre>
+
+<p><b>Popis</b></p>
+
+<p><a href="HE_SQL2_PRIKAZY.htm">Příkaz</a> CREATE INDEX vytvoří nový <a href="../xml/html/sql_index.html">index</a> k&nbsp;zadané tabulce. Je možné jej nahradit obecnějším <a href="../xml/html/sql_alter_table.html">ALTER TABLE</a>. Po úspěšném vytvoření indexu se provede implicitní commit - změnu nelze odvolat v <a href="HE_SQL2_TRANSAKCE.htm">transakci</a>. </p>
+
+<p>Příkaz nelze použít na <a href="../xml/html/sql_declaretable.html">dočasnou tabulku</a>.</p>
+
+<p>Vyhrazené slovo UNIQUE způsobí vytvoření unikátního (jedinečného) indexu. Primární klíč tímto příkazem vytvořit nelze (použijte ALTER TABLE).</p>
+
+<p><em>Jméno_indexu</em> musí mít v rámci tabulky unikátní - v opačném případě nastane chybový <a href="../xml/html/handlingcategories.html">sqlstate</a> W1095 (kompilační chyba).</p>
+
+<p>Index je popsán množinou výrazů, následujících za vyhrazeným slovem ON. Každý výraz může být doplněn slovem DESC pro sestupné třídění. Implicitně se používá vzestupné třídění (slovo ASC).</p>
+
+<p>V definici indexu lze specifikovat, zda se do něj mají zahrnovat i ty řádky z databázové tabulky, pro které je hodnota indexového klíče NULL. Je-li na konci příkazu uvedeno NULL, pak index obsahuje i klíče s hodnotou NULL, je-li uvedeno NOT NULL, pak je neobsahuje. Není-li uvedeno NULL ani NOT NULL, pak záleží na typu indexu: neunikátní index bude moci obsahovat hodnoty NULL, zatímco unikátní index nebude obsahovat hodnoty NULL.</p>
+
+<p>Častěji se pro vytváření indexů k tabulkám používá interaktivní návrhář tabulek.</p>
+
+<p>Pokud index zadaného jména již existuje, pak je-li použita klauzule IF NOT EXISTS, příkaz neprovede žádnou akci, v opačném případě dojde k chybě.</p>
+<p><b>Odlišnosti od normy</b>
+
+<ul>
+	<li>příkaz CREATE INDEX není v normě SQL zaveden</li>
+</ul>
+
+<br>
+<p><b>Příklady použití:</b></p>
+
+<pre><code>CREATE UNIQUE INDEX ind ON Per_agen.Zamestnan (cislo);
+CREATE INDEX penize ON Zamestnan (plat DESC, prijmeni)</code></pre>
+
+
+
+<table class="navigace" border="0" width="100%"  bgcolor="#FFFFBF"><tr> <td
+width="20" align="center"><img class="floatno" src="../images/prev.gif"
+width="15" height="13" alt="&lt;&shy;" title="Předcházející téma"
+border="0"></td><td width="25%"><a
+href="../xml/html/indexnotnull.html">Použití indexů neobsahujících hodnoty NULL</a></td> <td width="25%"
+align="right"><img class="floatno" src="../images/up.gif" width="13"
+height="15" alt="Nahoru" title="O jednu úroveň výš" border="0"
+align="middle"></td><td width="25%"><a href="../xml/html/sql_index.html">Indexy k databázovým tabulkám</a></td>
+<td width="25%" align="right"><a
+href="HE_SQL2_DROPINDEX.htm">Příkaz DROP INDEX</a></td><td width="20"
+align="center"><img class="floatno" src="../images/next.gif" width="15"
+height="13" alt="&shy;&gt;" title="Následující téma" border="0"></td>
+</tr></table>
+</body>
+</html>

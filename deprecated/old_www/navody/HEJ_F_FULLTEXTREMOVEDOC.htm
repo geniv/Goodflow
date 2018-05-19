@@ -1,0 +1,66 @@
+<!doctype html public "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=Windows-1250">
+<title>Funkce Fulltext_remove_doc</title>
+<link rel='stylesheet' style='text/css' href='../function.css'>
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000">
+
+
+
+<h2 class=function>Fulltext_remove_doc</h2>
+<img src='../images/sql.gif' width='44' height='16' border='0' alt='sql' align='middle' hspace='2'>
+
+
+<br><br>
+<div class='typ'>PROCEDURE <b>Fulltext_remove_doc</b>(IN ft_label CHAR(52), IN docid INT);
+</div>
+
+
+<p><b>Parametry:</b></p>
+
+<table border=1 cols=2 frame=box>
+
+<tr valign="top">
+<td width=26%><i>ft_label </i></td>
+<td width=74%> označení fulltextového systému;</td>
+</tr>
+
+<tr valign="top">
+<td width=26%><i>docid </i></td>
+<td width=74%>číslo dokumentu</td>
+</tr>
+</table><br>
+
+<p><b>Od verze:</b></p>
+
+<p>7.0</p>
+
+<p><b>Popis:</b></p>
+
+<p>Funkce odstraní zadaný dokument z indexů fulltextového systému určeného parametrem <i>ft_label</i>.</p>
+
+<p>Funkci <b><code>Fulltext_remove_doc</code></b> není třeba volat po změně v dokumentu před voláním funkce <b><code>Fulltext_index_doc</code></b>, protože starý obsah dokumentu je při novém indexování odstraněn automaticky. Funkci lze volat například v triggeru na operaci DELETE na tabulce obsahující dokumenty.</p>
+
+<p><b>Příklad:</b></p>
+
+<pre><code>TRIGGER txdel BEFORE DELETE ON Txtab
+REFERENCING OLD AS stare FOR EACH ROW
+BEGIN
+   CALL <b>Fulltext_remove_doc</b>(".FT_FORUM", stare.cislo_doc);
+END</code></pre>
+
+<p><b>Viz</b></p>
+
+<ul class='viz'>
+ <li><a href="../xml/html/fulltext.html">Fulltextové nástroje ve 602SQL</a> </li>
+ <li><a href="../xml/html/fulltext_doctab.html">Označování a uložení dokumentů ve fulltextových systémech</a> </li>
+ <li><a href="../xml/html/fulltext_search.html">Fulltextové vyhledávání dokumentů</a></li>
+ <li><a href="../xml/html/f_fulltext_get_context.html">Fulltext_get_context</a></li>
+ <li><a href="HEJ_F_FULLTEXTINDEXDOC.htm">Fulltext_index_doc</a></li>
+</ul>
+
+</body>
+</html>

@@ -1,0 +1,142 @@
+<!doctype html public "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=Windows-1250">
+<title>Příklad odeslání zásilky</title>
+<link rel='stylesheet' style='text/css' href='../function.css'>
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr>
+	<td style="background-image: url(../images/bghead.jpg);
+		background-position: right;
+		background-repeat: no-repeat;">
+	<table width="100%" border="0" cellpadding="0" cellspacing="0"
+		style="background-image:none">
+	<tr>
+		<td style="background-image:none" height="46"
+			width="15%"><img src="../images/title-cz.gif"
+			width="255" height="33"
+			alt="602SQL-Úplná dokumentace"
+			title="602SQL - Úplná dokumentace"
+			border="0"></td>
+		<td width="33%" align="right"><a href="../xml/html/top.html"><img class="floatno"
+			src="../images/index.gif"
+			width="15" height="16"
+			alt="Index" title="Zpět na obsah"
+			border="0" vspace="2"></a> &nbsp;
+			 </td>
+	</tr>
+	</table>
+	</td>
+</tr>
+</table><table class="navigace" border="0" width="100%"  bgcolor="#FFFFBF"><tr> <td
+width="20" align="center"><img class="floatno" src="../images/prev.gif"
+width="15" height="13" alt="&lt;&shy;" title="Předcházející téma"
+border="0"></td><td width="25%"><a
+href="HE_MAILSEND.htm">Odesílání zásilek</a></td> <td width="25%"
+align="right"><img class="floatno" src="../images/up.gif" width="13"
+height="15" alt="Nahoru" title="O jednu úroveň výš" border="0"
+align="middle"></td><td width="25%"><a href="HE_MAILSEND.htm">Odesílání zásilek</a></td>
+<td width="25%" align="right">&nbsp;</td>
+<td width="20" align="center">&nbsp;</td>
+</tr></table>
+
+
+
+<h1><a name="he_mailexxamsend"></a>Příklad odesílání zásilky</h1>
+<!--
+<h2>Příklad v jazyku klienta:</h2>
+
+<pre><code>var 
+  letter, err : integer;
+  dopis : string[250];
+begin
+   letter := 0;
+   err := <b>InitWBMail</b>("winbase", nil); // inicializace pošty
+   if err = 0 then  begin  // vytvoření dopisu
+      dopis := "Data ze dne "+Date2str(Today,1);
+      err := <b>LetterCreate</b>("Data", dopis, 1+2+8, letter);
+   end;
+   if err = 0 then    // přidání adresáta
+      err := <b>LetterAddAddr</b>(letter, "NTserver@software602.cz", "SMTP", FALSE);
+   if err = 0 then    // připojení souboru
+      err := <b>LetterAddFile</b>(letter, "c:\temp\data.tdt");
+   if err = 0 then
+   begin              // odeslání dopisu  
+      err := <b>LetterSend</b>(letter);
+      letter := 0;
+   end;
+   if err &lt;&gt; 0 then
+   begin
+      Signalize;
+      if letter &lt;&gt; 0 then // nebyl odeslán, ale existuje - zrušit
+         <b>LetterCancel</b>(letter);
+   end;
+   <b>CloseWBMail</b>;  // ukončit komunikaci
+end.
+</code></pre>
+-->
+<h2>Příklad v SQL na serveru:</h2>
+
+<p>(funkce pro spolupráci s poštou nevyvolají <a href="../xml/html/errorsexceptions.html">výjimku</a> - nelze zachytit <a href="HE_SQL2_DEKLARACEHANDLERU.htm">handlerem</a>)</p>
+
+<pre><code>PROCEDURE OdesliMail();
+BEGIN
+   DECLARE Letter, Err INT;
+   DECLARE CrLf  CHAR(2) DEFAULT Chr(13)+Chr(10);
+   DECLARE Dopis NCLOB;
+   SET Letter = 0;
+   SET Err = <b>InitWBMail</b>('sql602test', NULL);
+   IF Err = 0 THEN BEGIN
+//  tělo i věc dopisu jsou s diakritikou
+      SET dopis = 'Data naměřená dne '||Date2str(Today,1)||Crlf||'---------------------------'||CrLf;
+      SET Err = <b>LetterCreateW</b>('Naměřená data ('||Date2str(Today,1)||')', dopis, 2+4, Letter);
+   END; 
+   END IF;
+   IF Err = 0 THEN
+      SET Err = <b>LetterAddAddr</b>(Letter,'NTserver@software602.cz','SMTP',FALSE);
+   END IF;
+   IF Err = 0 THEN
+      SET Err = <b>LetterAddFile</b>(Letter, 'c:\temp\data.tdt');
+//      SET Err = <b>LetterAddFile</b>(Letter, '/var/temp/data.tdt');   // na Linuxu
+   END IF;
+   IF Err = 0 THEN
+   BEGIN
+      SET Err = <b>LetterSend</b>(Letter);
+      SET Letter = 0;
+   END;
+   END IF;
+   IF Err &lt;&gt; 0 THEN
+   BEGIN
+      CALL Log_write('Chyba při odesílání pošty ' + int2str(Err));
+      IF Letter &lt;&gt; 0 THEN
+         CALL <b>LetterCancel</b>(Letter);
+      END IF;
+   END;
+   END IF;
+   CALL <b>CloseWBMail</b>();
+END</code></pre>
+
+<strong>Poznámky:</strong>
+<ul>
+<li>v praxi asi bude sestavené tělo dopisu vráceno uživatelskou funkcí, zde pro jednoduchost je tělo sestaveno v řetězcové proměnné; </li>
+<li>je-li potřeba změnit adresu odesílatele (obvykle proto, aby šlo odpovídat pomocí Re:), musí se použít <a href="HE_F_MAILCREATEPROFILE.htm">dočasný profil</a> a v něm zvolit jinou adresu;</li>
+</ul>
+
+
+
+<table class="navigace" border="0" width="100%"  bgcolor="#FFFFBF"><tr> <td
+width="20" align="center"><img class="floatno" src="../images/prev.gif"
+width="15" height="13" alt="&lt;&shy;" title="Předcházející téma"
+border="0"></td><td width="25%"><a
+href="HE_MAILSEND.htm">Odesílání zásilek</a></td> <td width="25%"
+align="right"><img class="floatno" src="../images/up.gif" width="13"
+height="15" alt="Nahoru" title="O jednu úroveň výš" border="0"
+align="middle"></td><td width="25%"><a href="HE_MAILSEND.htm">Odesílání zásilek</a></td>
+<td width="25%" align="right">&nbsp;</td>
+<td width="20" align="center">&nbsp;</td>
+</tr></table>
+
+</body>
+</html>

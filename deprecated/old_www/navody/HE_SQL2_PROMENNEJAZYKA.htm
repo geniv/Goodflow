@@ -1,0 +1,105 @@
+<!doctype html public "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=Windows-1250">
+<title>Proměnné klientských aplikací v příkazech SQL</title>
+<link rel='stylesheet' style='text/css' href='../function.css'>
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr>
+	<td style="background-image: url(../images/bghead.jpg);
+		background-position: right;
+		background-repeat: no-repeat;">
+	<table width="100%" border="0" cellpadding="0" cellspacing="0"
+		style="background-image:none">
+	<tr>
+		<td style="background-image:none" height="46"
+			width="15%"><img src="../images/title-cz.gif"
+			width="255" height="33"
+			alt="602SQL-Úplná dokumentace"
+			title="602SQL - Úplná dokumentace"
+			border="0"></td>
+		<td width="33%" align="right"><a href="../xml/html/top.html"><img class="floatno"
+			src="../images/index.gif"
+			width="15" height="16"
+			alt="Index" title="Zpět na obsah"
+			border="0" vspace="2"></a> &nbsp;
+			 </td>
+	</tr>
+	</table>
+	</td>
+</tr>
+</table><table class="navigace" border="0" width="100%"  bgcolor="#FFFFBF">
+		  <tr>
+					 <td width="20" align="center">&nbsp;</td>
+					 <td width="25%">&nbsp;</td>
+					 <td width="25%"
+align="right"><img class="floatno" src="../images/up.gif" width="13"
+height="15" alt="Nahoru" title="O jednu úroveň výš" border="0"
+align="middle"></td><td width="25%"><a href="HE_SQL2_POUZITI.htm">Způsoby použití SQL ve 602SQL</a></td>
+<td width="25%" align="right"><a
+href="HE_SQL2_PRIPRAVAPRIKAZU.htm">Příprava a provádění příkazů SQL</a></td><td width="20"
+align="center"><img class="floatno" src="../images/next.gif" width="15"
+height="13" alt="&shy;&gt;" title="Následující téma" border="0"></td>
+</tr></table>
+
+
+
+
+
+<h1><a name="he_sql2_promennejazyka"></a>Proměnné klientských aplikací v příkazech SQL</h1>
+
+<p>Při komunikaci mezi klientem s SQL serverem lze využít také proměnných, které:
+<ul>
+<li> jsou deklarovány v klientské aplikaci a zpřístupněny SQL serveru a</li>
+<li>jsou použity v příkazech jazyka SQL posílaných serveru.</li>
+</ul>
+Těmto proměnným se obvykle říká <i>embedded variables</i> nebo <i>host variables</i>. Mohou sloužit například pro zadání hodnot zapisovaných do databáze, pro určení vyhledávacích kritérií nebo pro získání výsledku dotazu či funkce z SQL serveru. Význam příkazů, ve kterých jsou proměnné použity, závisí na momentální hodnotě proměnných v okamžiku provedení příkazu.</p>
+
+<p>Před identifikátorem <i>id</i> takové proměnné je <b>nutno</b> uvést v SQL příkazu dvojtečku. Počet platných znaků v identifikátoru je do verze 9.0 pouze 18, od verze 9.5 31 znaků.</p>
+
+<p>Do SQL příkazu lze navíc přidat označení, zda jde o přenos hodnoty od klienta na server, ze serveru klientovi nebo oběma směry. Toto označení napatrně zefektivní přenosy dat mezi klientskou aplikaci a serverem. Proměnná se pak zapíše takto:
+
+<ul>
+	<li>Proměnná s obousměrným přenosem hodnoty: <code>:id</code> nebo <code>:&lt;&gt;id</code> nebo <code>:&gt;&lt;id</code></li>
+	<li>Proměnná, do níž se přenese hodnota přiřazená serverem: <code>:&gt;id</code></li>
+	<li>Proměnná, jejíž hodnotu může server přečíst: <code>:&lt;id</code></li>
+</ul>
+
+<h2>Přístupy přes různá rozhraní</h2>
+
+<p>Výše uvedené obecné postupy není třeba podrobně znát, pokud vývojář používá některé z existujících <a href="../xml/html/interfaces.html">rozhraní</a>, dodávané k 602SQL serveru.</p>
+
+<p>Vývojáři v Delphi používající <a href="../xml/html/cdkmain.html">CDK komponenty</a> mají tuto funkčnost zapouzdřenou ve třídách <a href="../xml/html/TSQL602DataSet.html"><code>TSQL602DataSet</code></a>, <a href="../xml/html/TSQL602Statement.html"><code>TSQL602Statement</code></a> a <a href="../xml/html/TSQL602StoredProc.html"><code>TSQL602StoredProc</code></a>, pro XML API ve třídě <a href="../xml/html/TSQL602XML.html"><code>TSQL602XML</code></a>.</p>
+
+<p>Vývojáři v <a href="../xml/html/php_modul_basics.html">PHP</a> mají postup předávání klientských proměnných pro 'prepared' SQL příkazy popsán <a href="../xml/html/php_psql.html">zde</a> a pro funkce XML API <a href="../xml/html/php_xml_hostvars.html">zde</a>.</p>
+
+<p>Vývojáři v <a href="../xml/html/dotnettop.html">ADO.NET</a> mají tuto funkčnost zapouzdřenou ve třídě <a href="../xml/html/SQL602Command.html"><code>SQL602Command</code></a>.</p>
+
+<p>Obecné použití pomocí API funkcí naleznete <a href="HE_SQL2_PROMENNEJAZYKA_EXT.htm">zde</a>.</p>
+
+
+
+<p class="subs">Seznam subsekcí:
+<ul class="subs">
+
+<li><a href="HE_SQL2_PROMENNEJAZYKA_EXT.htm">Proměnné z externích jazyků v příkazech SQL</a>
+
+</ul>
+<table class="navigace" border="0" width="100%"  bgcolor="#FFFFBF">
+		  <tr>
+					 <td width="20" align="center">&nbsp;</td>
+					 <td width="25%">&nbsp;</td>
+					 <td width="25%"
+align="right"><img class="floatno" src="../images/up.gif" width="13"
+height="15" alt="Nahoru" title="O jednu úroveň výš" border="0"
+align="middle"></td><td width="25%"><a href="HE_SQL2_POUZITI.htm">Způsoby použití SQL ve 602SQL</a></td>
+<td width="25%" align="right"><a
+href="HE_SQL2_PRIPRAVAPRIKAZU.htm">Příprava a provádění příkazů SQL</a></td><td width="20"
+align="center"><img class="floatno" src="../images/next.gif" width="15"
+height="13" alt="&shy;&gt;" title="Následující téma" border="0"></td>
+</tr></table>
+
+</body>
+</html>

@@ -1,0 +1,149 @@
+<!doctype html public "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=Windows-1250">
+<title>Příkaz FOR v SQL</title>
+<link rel='stylesheet' style='text/css' href='../function.css'>
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr>
+	<td style="background-image: url(../images/bghead.jpg);
+		background-position: right;
+		background-repeat: no-repeat;">
+	<table width="100%" border="0" cellpadding="0" cellspacing="0"
+		style="background-image:none">
+	<tr>
+		<td style="background-image:none" height="46"
+			width="15%"><img src="../images/title-cz.gif"
+			width="255" height="33"
+			alt="602SQL-Úplná dokumentace"
+			title="602SQL - Úplná dokumentace"
+			border="0"></td>
+		<td width="33%" align="right"><a href="../xml/html/top.html"><img class="floatno"
+			src="../images/index.gif"
+			width="15" height="16"
+			alt="Index" title="Zpět na obsah"
+			border="0" vspace="2"></a> &nbsp;
+			 </td>
+	</tr>
+	</table>
+	</td>
+</tr>
+</table><table class="navigace" border="0" width="100%"  bgcolor="#FFFFBF"><tr> <td
+width="20" align="center"><img class="floatno" src="../images/prev.gif"
+width="15" height="13" alt="&lt;&shy;" title="Předcházející téma"
+border="0"></td><td width="25%"><a
+href="HE_SQL2_LEAVE.htm">Příkaz LEAVE</a></td> <td width="25%"
+align="right"><img class="floatno" src="../images/up.gif" width="13"
+height="15" alt="Nahoru" title="O jednu úroveň výš" border="0"
+align="middle"></td><td width="25%"><a href="HE_SQL2_RIDICIPRIKAZY.htm">Řídící příkazy</a></td>
+<td width="25%" align="right"><a
+href="HE_SQL2_CALL.htm">Příkaz CALL - volání procedury</a></td><td width="20"
+align="center"><img class="floatno" src="../images/next.gif" width="15"
+height="13" alt="&shy;&gt;" title="Následující téma" border="0"></td>
+</tr></table>
+
+
+
+
+<h1><a name="he_sql2_for"></a>Příkaz FOR (SQL)</h1>
+
+<pre><code>příkaz_FOR ::= [ návěští : ] FOR řídicí_proměnná AS [ jméno_kurzoru [ SENSITIVE | INSENSITIVE] 
+    CURSOR FOR ] specifikace_kurzoru 
+DO příkaz… END FOR [ návěští ];</code></pre>
+
+<p><a href="HE_SQL2_PRIKAZY.htm">Příkaz</a> FOR slouží k zopakování posloupnosti <i>příkazů</i> pro všechny řádky odpovědi na dotaz zadaného <i>specifikací kurzoru</i>. Provádění příkazu skončí předčasně tehdy, provede-li se příkaz <a href="HE_SQL2_LEAVE.htm">LEAVE</a> na vnější návěští nebo dojde k chybě.</p>
+
+<p>V <i>příkazech</i> obsažených uvnitř příkazu FOR lze s hodnotami sloupců na aktuálním řádku kurzoru pracovat pomocí zápisu ve tvaru: </p>
+
+<p><code>řídicí_proměnná.jméno_sloupce</code></p>
+
+<p>Lze použít např. pro předání hodnoty sloupce proceduře - viz příklad 2. Pokud však opačně přiřadíte sloupci novou hodnotu, na datech v databázi se to neprojeví. </p>
+
+<p>Pro editaci sloupce je nutno použít příkazu <a href="HE_SQL2_UPDATECURRENT.htm">UPDATE CURRENT OF</a>, pak se na sloupce odkazuje pouze jejich jménem, bez <i>řídicí proměnné</i> (viz příklad 1). Kurzor v tomto případě nesmí být INSENSITIVE - pokud ano, změny se neuloží.</p>
+
+<p>Je-li uvedeno koncové <i>návěští</i>, pak musí být uvedeno také stejné počáteční <i>návěští</i>. Uvnitř příkazu FOR nesmí být žádný příkaz označen stejným návěštím.</p>
+
+<p>Význam <i>specifikace kurzoru</i> a specifikací SENSITIVE a INSENSITIVE je popsán v části o <a href="HE_SQL2_DEKLARACEKURZORU.htm">deklaraci kurzoru</a>.</p>
+
+<p>Je-li uvedeno <i>jméno kurzoru</i>, lze toto jméno uvnitř příkazu FOR používat v příkazech <a href="HE_SQL2_UPDATECURRENT.htm">UPDATE CURRENT OF</a> a <a href="HE_SQL2_DELETECURRENT.htm">DELETE CURRENT OF</a>, ale nikoli v příkazech <a href="HE_SQL2_OPEN.htm">OPEN</a>, <a href="HE_SQL2_CLOSE.htm">CLOSE</a> nebo <a href="HE_SQL2_FETCH.htm">FETCH</a>.</p>
+
+<br><p><b>Příklad použití č.1:</b></p>
+
+<p>Změňte cenu u položek ceníku takto: položky ceníku začínající na X +10%, začínající na A +100%, ostatní smazat.</p>
+
+<pre><code>PROCEDURE ZmenaCeniku();
+BEGIN 
+  <b>FOR radek AS curcen SENSITIVE CURSOR FOR </b>
+    SELECT cislo_pol, cena
+    FROM Cenik
+<b>  DO </b>
+    BEGIN
+     IF SUBSTRING(radek.cislo_pol FROM 1 FOR 1) = 'X' THEN 
+       UPDATE  SET cena = cena*1.1 WHERE CURRENT OF curcen;
+     ELSEIF SUBSTRING(radek.cislo_pol FROM 1 FOR 1) = 'A' THEN 
+       UPDATE  SET cena = cena*2 WHERE CURRENT OF curcen;
+     ELSE
+       DELETE WHERE CURRENT OF curcen;
+     END IF;
+    END;
+  <b>END FOR;</b>
+END;</code></pre>
+
+<p><b>Příklad použití č.2:</b></p>
+
+<p>Příklad z aplikace Knihovna - zrušit rezervace knih, které jsou rezervovány déle než limit.</p>
+
+<pre><code>PROCEDURE CancelRes(IN lim INT);
+BEGIN
+
+  DECLARE PROCEDURE CheckResBook(code CHAR(8));  // pomocná lokální procedura
+  BEGIN
+    DECLARE pocet INT;
+    SELECT COUNT(co) INTO pocet                // kolikrát je daná kniha rezervována?
+    FROM Rezervace
+    WHERE Rezervace.co = code;
+
+    IF pocet = 1 THEN                          // pouze jednou, pak odstraň označení
+      UPDATE Knihy
+      SET Knihy.rezervovana = FALSE
+      WHERE Knihy.kod = code;
+    END IF;
+  END;
+
+  <b>FOR radek AS pomc SENSITIVE CURSOR FOR </b>     // pro všechny rezervace po limitu proveď
+    SELECT * 
+    FROM Rezervace
+    WHERE CURRENT_DATE - Rezervace.dat_rez &gt; lim
+<b>  DO</b> BEGIN
+      CALL CheckResBook(radek.co);            // změň příznak, je-li rezervace jediná
+      DELETE WHERE CURRENT OF pomc;           // smaž záznam v tab. Rezervace
+    END;
+  <b>END FOR;</b>
+END</code></pre>
+
+<br><p><b>Příklad použití č.3:</b></p>
+<p>Průchod tabulkou:</p>
+<pre><code><strong>FOR radek_tabulky AS TABLE Tabulka_pokusna DO</strong>
+  ...
+  CALL Log_write(radek_tabulky.sloupec1);
+<strong>END FOR;</strong>
+</code></pre>
+
+
+<table class="navigace" border="0" width="100%"  bgcolor="#FFFFBF"><tr> <td
+width="20" align="center"><img class="floatno" src="../images/prev.gif"
+width="15" height="13" alt="&lt;&shy;" title="Předcházející téma"
+border="0"></td><td width="25%"><a
+href="HE_SQL2_LEAVE.htm">Příkaz LEAVE</a></td> <td width="25%"
+align="right"><img class="floatno" src="../images/up.gif" width="13"
+height="15" alt="Nahoru" title="O jednu úroveň výš" border="0"
+align="middle"></td><td width="25%"><a href="HE_SQL2_RIDICIPRIKAZY.htm">Řídící příkazy</a></td>
+<td width="25%" align="right"><a
+href="HE_SQL2_CALL.htm">Příkaz CALL - volání procedury</a></td><td width="20"
+align="center"><img class="floatno" src="../images/next.gif" width="15"
+height="13" alt="&shy;&gt;" title="Následující téma" border="0"></td>
+</tr></table>
+</body>
+</html>

@@ -1,0 +1,118 @@
+<!doctype html public "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=Windows-1250">
+<title>Specifikace dotazu v SQL</title>
+<link rel='stylesheet' style='text/css' href='../function.css'>
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr>
+	<td style="background-image: url(../images/bghead.jpg);
+		background-position: right;
+		background-repeat: no-repeat;">
+	<table width="100%" border="0" cellpadding="0" cellspacing="0"
+		style="background-image:none">
+	<tr>
+		<td style="background-image:none" height="46"
+			width="15%"><img src="../images/title-cz.gif"
+			width="255" height="33"
+			alt="602SQL-Úplná dokumentace"
+			title="602SQL - Úplná dokumentace"
+			border="0"></td>
+		<td width="33%" align="right"><a href="../xml/html/top.html"><img class="floatno"
+			src="../images/index.gif"
+			width="15" height="16"
+			alt="Index" title="Zpět na obsah"
+			border="0" vspace="2"></a> &nbsp;
+			 </td>
+	</tr>
+	</table>
+	</td>
+</tr>
+</table><table class="navigace" border="0" width="100%"  bgcolor="#FFFFBF"><tr> <td
+width="20" align="center"><img class="floatno" src="../images/prev.gif"
+width="15" height="13" alt="&lt;&shy;" title="Předcházející téma"
+border="0"></td><td width="25%"><a
+href="HE_SQL2_ZOBECNENATABULKA.htm">Zobecněná tabulka</a></td> <td width="25%"
+align="right"><img class="floatno" src="../images/up.gif" width="13"
+height="15" alt="Nahoru" title="O jednu úroveň výš" border="0"
+align="middle"></td><td width="25%"><a href="HE_SQL2_DOTAZY.htm">Dotazy</a></td>
+<td width="25%" align="right"><a
+href="HE_SQL2_DOTAZOVYVYRAZ.htm">Dotazový výraz</a></td><td width="20"
+align="center"><img class="floatno" src="../images/next.gif" width="15"
+height="13" alt="&shy;&gt;" title="Následující téma" border="0"></td>
+</tr></table>
+
+
+
+
+<h1><a name="he_sql2_specifikacedotazu"></a>Specifikace dotazu (SQL)</h1>
+
+<pre><code>specifikace_dotazu ::= SELECT [ ALL | DISTINCT ] výraz [ přejmenování ] { , výraz [ přejmenování ] }… 
+FROM zobecněná tabulka { , zobecněná tabulka }… 
+[ WHERE podmínka_where ] 
+[ GROUP BY výraz_group { , výraz_group }… ]
+[ HAVING podmínka_having ]
+přejmenování ::= AS jméno</code></pre>
+
+<p><i>Specifikace dotazu</i> vybere nebo vytvoří množinu záznamů ze záznamů uvedených <a href="HE_SQL2_ZOBECNENATABULKA.htm"><i>zobecněných tabulek</i></a>.</p>
+
+<p>Je-li uvedeno DISTINCT, vyberou se pouze odlišné záznamy (jen ve sloupcích pevné velikosti). Je-li uvedeno ALL (nebo nic), vyberou se všechny vyhovující záznamy.</p>
+
+<p>Je-li uvedena více než jedna <i>zobecněná tabulka</i>, provede se mezi nimi operace JOIN, tedy každý záznam se spojí s každým. Jinak se použijí všechny záznamy <i>zobecněné tabulky</i>.</p>
+
+<p>Je-li uvedena klauzule WHERE, ze získaných záznamů se vyberou pouze ty, na nichž je <i>podmínka_where</i> splněna.</p>
+
+<p>Je-li uvedena klauzule GROUP BY, záznamy se rozčlení do skupin tak, že každá skupina obsahuje záznamy se stejnými hodnotami všech <i>výrazů_group</i>. </p>
+
+<p>Je-li uvedena klauzule HAVING, vyberou se pouze ty skupiny, na nichž je splněna <i>podmínka having</i>.</p>
+
+<p>Odpověď na dotaz tvoří sloupce s hodnotami <i>výrazů</i> na získaných záznamech nebo skupinách záznamů. Aby bylo možno vyhodnotit <i>výrazy</i> nad skupinami, vyžaduje se, aby každý <i>výraz</i>
+<ul>
+  <li> byl buď totožný s některým <i>výrazem_group</i> </li>
+  <li>aby byl vytvořen tak, že má v rámci každé skupiny stejnou hodnotu - např. aby obsahoval odkazy na sloupce pouze jako argumenty agregačních funkcí </li>
+</ul>
+Pokud nejsou tyto podmínky splněné, není obsah tohoto výrazu v odpovědi definován.</p>
+
+<p>V <i>podmínce where</i> se nesmí vyskytovat agregační funkce (s výjimkou <a href="HE_SQL2_SUBDOTAZ.htm">subdotazů</a>). Tyto funkce je možno použít pouze ve <i>výrazech</i> v klauzuli SELECT a v <i>podmínce having</i>. Pokud <i>specifikace dotazu</i> neobsahuje GROUP BY, pak se tyto agregační funkce počítají vzhledem k celé odpovědi na dotaz, jinak se počítají zvlášť pro každou skupinu.</p>
+
+<p>Jména sloupců v odpovědi na dotaz závisejí na struktuře <i>výrazů.</i> Pokud <i>výraz</i> je tvořen jménem sloupce některé <i>zobecněné tabulky</i>, pak si jméno zachová, jinak je unikátní jméno přiděleno automaticky (např. Expr1 apod.). Vzniknou-li zachováním jmen sloupců duplikátní jména, mohou být automaticky odstraněna pomocí nastavení příznaku SQLOPT_DUPLIC_COLNAMES (256) ve funkci <a href="HE_F_SETSQLOPTION.htm"><code>Set_sql_option</code></a>. Také je možné jména sloupců určit již ve specifikaci - pomocí klauzule AS.</p>
+
+<p><i>Výraz</i> za SELECT může také být <code>*</code> - pak se v odpovědi objeví všechny sloupce všech zobecněných tabulek. Je-li <i>výraz</i> ve tvaru <code>zobecněná tabulka.*</code>, budou v odpovědi všechny sloupce zobecněné tabulky. Je-li použito klauzule <code>SELECT *</code>, nesmí již následovat další výrazy. Mají-li se do výběru sloupců zadaného pomocí <code>SELECT *</code> přidat i systémové sloupce (začínající _w5_...) je rozlišeno pomocí příznaku SQLOPT_USE_SYS_COLS (8192) ve funkci <a href="HE_F_SETSQLOPTION.htm"><code>Set_sql_option</code></a>.</p>
+
+<p><i>Výrazem</i> může být <a href="HE_SQL2_VYRAZSLOUPEC.htm">jméno sloupce</a> (nebo *), konstanta, <a href="HE_SQL2_VYRAZCASE.htm">podmíněný výraz CASE</a>, <a href="HE_SQL2_FUNKCESQL.htm">standardní SQL funkce</a> nebo funkce vytvořená pomocí <a href="HE_SQL2_STOREDPROCEDURE.htm">DECLARE FUNCTION</a>, <a href="HE_SQL2_AGREGACNI.htm">agregační funkce</a>, <a href="HE_SQL2_DEKLARACEPROMENNYCH.htm">proměnná serveru</a>, globální <a href="HE_SQL2_PROMENNEJAZYKA.htm">proměnná klienta</a>, <a href="HE_SQL2_SUBDOTAZ.htm">subdotaz</a> vracející jeden řádek a jeden sloupec nebo výraz tvořený těmito subvýrazy.</p>
+
+<p>Podrobnosti o sestavení podmínek ve <i>specifikaci dotazu</i> viz <a href="HE_SQL2_PODMINKA.htm">podmínka</a> </p>
+
+<p><b>Příklady:</b></p>
+
+<pre><code>SELECT Month(datum),SUM(Objednavky.objed)
+FROM Firmy, Objednavky
+WHERE Objednavky.firma=Firmy.firma
+GROUP BY Month(datum)</code></pre>
+
+<p><b>Viz</b></p>
+
+<ul class='viz'>
+ <li><a href="HE_SQL2_SELECTS.htm">Sbírka dotazů</a> 
+ <li><a href="HE_SQL2_VYRAZY.htm">Výrazy v SQL</a>
+</ul>
+
+
+
+<table class="navigace" border="0" width="100%"  bgcolor="#FFFFBF"><tr> <td
+width="20" align="center"><img class="floatno" src="../images/prev.gif"
+width="15" height="13" alt="&lt;&shy;" title="Předcházející téma"
+border="0"></td><td width="25%"><a
+href="HE_SQL2_ZOBECNENATABULKA.htm">Zobecněná tabulka</a></td> <td width="25%"
+align="right"><img class="floatno" src="../images/up.gif" width="13"
+height="15" alt="Nahoru" title="O jednu úroveň výš" border="0"
+align="middle"></td><td width="25%"><a href="HE_SQL2_DOTAZY.htm">Dotazy</a></td>
+<td width="25%" align="right"><a
+href="HE_SQL2_DOTAZOVYVYRAZ.htm">Dotazový výraz</a></td><td width="20"
+align="center"><img class="floatno" src="../images/next.gif" width="15"
+height="13" alt="&shy;&gt;" title="Následující téma" border="0"></td>
+</tr></table>
+</body>
+</html>

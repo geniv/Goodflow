@@ -1,0 +1,107 @@
+<!doctype html public "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=Windows-1250">
+<title>Profily poštovních parametrů</title>
+<link rel='stylesheet' style='text/css' href='../function.css'>
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr>
+	<td style="background-image: url(../images/bghead.jpg);
+		background-position: right;
+		background-repeat: no-repeat;">
+	<table width="100%" border="0" cellpadding="0" cellspacing="0"
+		style="background-image:none">
+	<tr>
+		<td style="background-image:none" height="46"
+			width="15%"><img src="../images/title-cz.gif"
+			width="255" height="33"
+			alt="602SQL-Úplná dokumentace"
+			title="602SQL - Úplná dokumentace"
+			border="0"></td>
+		<td width="33%" align="right"><a href="../xml/html/top.html"><img class="floatno"
+			src="../images/index.gif"
+			width="15" height="16"
+			alt="Index" title="Zpět na obsah"
+			border="0" vspace="2"></a> &nbsp;
+			 </td>
+	</tr>
+	</table>
+	</td>
+</tr>
+</table><table class="navigace" border="0" width="100%"  bgcolor="#FFFFBF"><tr> <td
+width="20" align="center"><img class="floatno" src="../images/prev.gif"
+width="15" height="13" alt="&lt;&shy;" title="Předcházející téma"
+border="0"></td><td width="25%"><a
+href="HE_MAILINIT.htm">Inicializace pošty</a></td> <td width="25%"
+align="right"><img class="floatno" src="../images/up.gif" width="13"
+height="15" alt="Nahoru" title="O jednu úroveň výš" border="0"
+align="middle"></td><td width="25%"><a href="HE_MAIL.htm">Rozhraní k elektronické poště</a></td>
+<td width="25%" align="right"><a
+href="HE_MAILSEND.htm">Odesílání zásilek</a></td><td width="20"
+align="center"><img class="floatno" src="../images/next.gif" width="15"
+height="13" alt="&shy;&gt;" title="Následující téma" border="0"></td>
+</tr></table>
+
+
+
+
+<h1><a name="he_mailprofiles"></a>Profily poštovních parametrů</h1>
+
+<p>Profil je nástroj, který zajišťuje nezávislost aplikace na typu a parametrech poskytovatele pošty. Profil obsahuje všechny parametry, které jsou potřeba k příjmu a odesílání pošty pomocí určitého poskytovatele. Aplikace uvede při inicializaci pošty jméno  profilu a dále již nemusí brát ohled na rozdíly mezi poštovními systémy. Pokud se změní některý z parametrů pošty, není třeba měnit aplikaci, stačí změnit hodnotu parametru v profilu.</p> 
+
+<p>V systému může existovat několik (trvalých, tj. uložených na disku) profilů, které se liší svým jménem. Kromě toho lze za běhu programu vytvářet dočasné profily a dynamicky jim nastavovat parametry.</p>
+
+<p>Pro vytváření a správu trvalých profilů lze použít <a href="../xml/html/controlpanel.html"><strong>Řídicí Panel</strong></a>, sekci <a href="../xml/html/thisclient.html"><strong>Lokální nastavení</strong></a>, subsekce <strong>Poštovní profily</strong>, resp. její větve tvořené jednotlivými profily. Editačí příkazy pro vytváření, editaci či rušení profilů jsou přístupné přes popup menu. Trvalé i dočasné profily lze vytvářet a spravovat také pomocí API funkcí jazyka <a href="HE_F_MAILCREATEPROFILE.htm"><code>MailCreateProfile</code></a>, <a href="HE_F_MAILDELETEPROFILE.htm"><code>MailDeleteProfile</code></a>, <a href="HE_F_MAILSETPROFILEPROP.htm"><code>MailSetProfileProp</code></a>, <a href="HE_F_MAILGETPROFILEPROP.htm"><code>MailGetProfileProp</code></a>.</p>
+
+<p>V prostředí Windows jsou profily uloženy v registrační databázi pod klíčem: <code>HKEY_LOCAL_MACHINE\Software\Software602\602SQL\Mail</code>. Pojmenované profily jsou uloženy jako podklíče daného jména. </p>
+
+<p>Na Linuxu jsou profily uloženy v <a href="../xml/html/configl.html">souboru <code>602sql</code></a> v sekci <code>[.MAIL_jméno profilu]</code>. Soubor <code>602sql</code> se edituje ručně (existuje i grafická konzole pro nastavování parametrů). Je zřejmé, že pro Linux se uplatní pouze profily typu SMTP/POP3. Do <code>602sql</code> nelze uložit přístupové heslo do POP3 schránky v zašifrované podobě.</p>
+
+<p><b>Příklad</b> profilu ABC definovaného na Linuxu ve <code>602sql</code>:</p>
+
+<pre><code>...
+[.MAIL_ABC]
+SMTPServer=602sql.soft602.cz
+MyAddress=server@soft602.cz
+POP3Server=602sql.soft602.cz
+UserName=server
+Password=xyz
+FilePath=/var/wbsend;/var/wbsend/temp
+...</code></pre>
+
+<p>Zde použitý pojem profil není totožný s profily používanými při MAPI komunikaci nebo s profily programu Mail602. Je to pojem obecnější, vyjmenované profily jsou jeho podmnožinou.</p>
+
+<p>Seznam profilů vytvořených na počítači, kde je spuštěn server, lze získat systémovým dotazem <a href="../xml/html/_iv_mail_profs.html"><code>_iv_mail_profs</code></a>.</p>
+
+<!--<p>Profily pošty se používají i při <a href="HE_REPLPARAM.htm">nastavování parametrů replikací</a> (pomocí elektronické pošty).--></p>
+
+
+
+
+<p class="subs">Seznam subsekcí:
+<ul class="subs">
+
+<li><a href="HE_MAILPROFSMTP.htm">SMTP/POP3</a>
+
+<li><a href="HE_MAILPROFMAIL602.htm">Mail602</a>
+
+<li><a href="HE_MAILPROFMAPI.htm">MAPI</a>
+
+</ul>
+<table class="navigace" border="0" width="100%"  bgcolor="#FFFFBF"><tr> <td
+width="20" align="center"><img class="floatno" src="../images/prev.gif"
+width="15" height="13" alt="&lt;&shy;" title="Předcházející téma"
+border="0"></td><td width="25%"><a
+href="HE_MAILINIT.htm">Inicializace pošty</a></td> <td width="25%"
+align="right"><img class="floatno" src="../images/up.gif" width="13"
+height="15" alt="Nahoru" title="O jednu úroveň výš" border="0"
+align="middle"></td><td width="25%"><a href="HE_MAIL.htm">Rozhraní k elektronické poště</a></td>
+<td width="25%" align="right"><a
+href="HE_MAILSEND.htm">Odesílání zásilek</a></td><td width="20"
+align="center"><img class="floatno" src="../images/next.gif" width="15"
+height="13" alt="&shy;&gt;" title="Následující téma" border="0"></td>
+</tr></table>
+</body>
+</html>

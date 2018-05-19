@@ -1,0 +1,114 @@
+<!doctype html public "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=Windows-1250">
+<title>Příkaz CALL - volání procedury v SQL</title>
+<link rel='stylesheet' style='text/css' href='../function.css'>
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr>
+	<td style="background-image: url(../images/bghead.jpg);
+		background-position: right;
+		background-repeat: no-repeat;">
+	<table width="100%" border="0" cellpadding="0" cellspacing="0"
+		style="background-image:none">
+	<tr>
+		<td style="background-image:none" height="46"
+			width="15%"><img src="../images/title-cz.gif"
+			width="255" height="33"
+			alt="602SQL-Úplná dokumentace"
+			title="602SQL - Úplná dokumentace"
+			border="0"></td>
+		<td width="33%" align="right"><a href="../xml/html/top.html"><img class="floatno"
+			src="../images/index.gif"
+			width="15" height="16"
+			alt="Index" title="Zpět na obsah"
+			border="0" vspace="2"></a> &nbsp;
+			 </td>
+	</tr>
+	</table>
+	</td>
+</tr>
+</table><table class="navigace" border="0" width="100%"  bgcolor="#FFFFBF"><tr> <td
+width="20" align="center"><img class="floatno" src="../images/prev.gif"
+width="15" height="13" alt="&lt;&shy;" title="Předcházející téma"
+border="0"></td><td width="25%"><a
+href="HE_SQL2_FOR.htm">Příkaz FOR</a></td> <td width="25%"
+align="right"><img class="floatno" src="../images/up.gif" width="13"
+height="15" alt="Nahoru" title="O jednu úroveň výš" border="0"
+align="middle"></td><td width="25%"><a href="HE_SQL2_RIDICIPRIKAZY.htm">Řídící příkazy</a></td>
+<td width="25%" align="right"><a
+href="HE_SQL2_SIGNAL.htm">Příkaz SIGNAL</a></td><td width="20"
+align="center"><img class="floatno" src="../images/next.gif" width="15"
+height="13" alt="&shy;&gt;" title="Následující téma" border="0"></td>
+</tr></table>
+
+
+
+
+<h1><a name="he_sql2_call"></a>Příkaz CALL - volání procedury (SQL)</h1>
+
+<pre><code>volání_procedury ::= CALL [</code><code>DETACHED] [schema.]jméno ([skutečný_parametr {, skutečný_parametr}… ]);
+skutečný_parametr ::= klíčový_parametr | poziční_parametr
+klíčový_parametr ::= jméno_formálního_parametru =&gt; výraz
+poziční_parametr ::= výraz</code></pre>
+
+<p><a href="HE_SQL2_PRIKAZY.htm">Příkaz</a> CALL zavolá proceduru vytvořenou příkazem <a href="HE_SQL2_CREATEPROCEDURE.htm">CREATE PROCEDURE</a> (globální - uloženou jako objekt aplikace) nebo lokální (deklarovanou pomocí <a href="HE_SQL2_DEKLARACERUTINY.htm">DECLARE PROCEDURE</a>) nebo standardní deklarovanou v jazyce (např. <a href="HE_F_SQLEXECUTE.htm"><code>SQL_execute</code></a>, <a href="HE_F_LOGWRITE.htm"><code>Log_write</code></a>, <a href="HE_F_FREEDELETED.htm"><code>Free_deleted</code></a>, <a href="HE_F_SETSQLOPTION.htm"><code>Set_sql_option</code></a>).</p>
+
+<p>Je možné volat i procedury uložené v jiné aplikaci - jméno procedury prefixujte jménem aplikace (v SQL terminologii schématu) a tečkou. Upozornění: procedura je kompilovaná v kontextu aplikace, kde je uložena, ne v kontextu aplikace, odkud je volána. Zavolá-li procedura tabulku neprefixovanou jménem aplikace, použije se tabulka v té aplikaci, kde je procedura uložena.</p>
+
+<p>Je-li použito slovo DETACHED, procedura se spustí v samostatném vlákně - <a href="../xml/html/threads.html">podrobnosti</a>. Jako DETACHED nelze spustit lokální nebo standardní procedury.</p>
+
+<p><i>Poziční skutečné parametry</i> se přiřazují formálním parametrům uvedeným v&nbsp;<a href="HE_SQL2_POPISPROCEDURY.htm">popisu procedury</a> na základě své pozice (po řadě zleva doprava), zatímco <i>klíčové parametry</i> jsou rozlišeny na základě <i>jména formálního parametru</i>. Poziční parametry musí být uvedeny před klíčovými. </p>
+
+<p>Hodnota vstupního parametrem je udána hodnotou <i>výrazu</i>. <a href="HE_SQL2_DATOVETYPY.htm">Typ</a> <i>výrazu</i> musí být takový, aby se jeho hodnota dala přiřadit do formálního parametru. Výstupním nebo vstupně-výstupním skutečným parametrem musí být proměnná nebo sloupec stejného typu, jakého je formální parametr.</p>
+
+<p><b>Rozšíření jazyka SQL proti normě</b>
+
+<ul>
+	<li>Skutečný poziční parametr lze přeskočit - místo parametru se uvede pouze za ním následující čárka (následují-li další skutečné parametry) nebo závorka (jde-li o poslední parametr);</li>
+</ul>
+
+<p><b>Implementací definované vlastnosti SQL ve 602SQL</b>
+
+<ul>
+	<li>Nespecifikovaný vstupní parametr, pro nějž není definována implicitní hodnota, má hodnotu NULL, nespecifikovaný výstupní parametr se při výstupu nikam nezapíše;</li>
+</ul>
+
+<p><b>Příklady použití:</b></p>
+
+<p>Mějme proceduru PARAM s jedním vstupním a jedním výstupním parametrem definovanou takto:</p>
+
+<pre><code>PROCEDURE Param( IN dt DATE, OUT res INT );
+BEGIN
+  SELECT COUNT(*) INTO res
+  FROM Tab1
+  WHERE dat = dt;
+END</code></pre>
+
+<p>Proceduru lze volat z klientského prostředí, kde jsou deklarovány proměnné <ident>datum</ident> typu DATE a <ident>kolik</ident> typu INT takto (poziční parametry):</p>
+
+<pre><code><b>CALL</b> Param(:&lt;datum, :&gt;kolik);</code></pre>
+
+<p>nebo takto (klíčové parametry):</p>
+
+<pre><code><b>CALL</b> Param(res=&gt;:&gt;kolik, dt=&gt;:&lt;datum);</code></pre>
+
+
+
+<table class="navigace" border="0" width="100%"  bgcolor="#FFFFBF"><tr> <td
+width="20" align="center"><img class="floatno" src="../images/prev.gif"
+width="15" height="13" alt="&lt;&shy;" title="Předcházející téma"
+border="0"></td><td width="25%"><a
+href="HE_SQL2_FOR.htm">Příkaz FOR</a></td> <td width="25%"
+align="right"><img class="floatno" src="../images/up.gif" width="13"
+height="15" alt="Nahoru" title="O jednu úroveň výš" border="0"
+align="middle"></td><td width="25%"><a href="HE_SQL2_RIDICIPRIKAZY.htm">Řídící příkazy</a></td>
+<td width="25%" align="right"><a
+href="HE_SQL2_SIGNAL.htm">Příkaz SIGNAL</a></td><td width="20"
+align="center"><img class="floatno" src="../images/next.gif" width="15"
+height="13" alt="&shy;&gt;" title="Následující téma" border="0"></td>
+</tr></table>
+</body>
+</html>

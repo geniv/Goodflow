@@ -1,0 +1,98 @@
+<!doctype html public "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=Windows-1250">
+<title>Funkce GetSet_group_role</title>
+<link rel='stylesheet' style='text/css' href='../function.css'>
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000">
+
+
+
+<h2 class=function>GetSet_group_role</h2>
+<img src='../images/cpp.gif' width='44' height='16' border='0' alt='c/c++' align='middle' hspace='2'><img src='../images/pascal.gif' width='44' height='16' border='0' alt='pascal' align='middle' hspace='2'>
+
+
+<br><br>
+<div class='typ'>BOOL <b>[cd_]GetSet_group_role</b>([cdp_t cdp], tobjnum user_or_group, tobjnum group_or_role, tcateg subject2, t_oper operation, uns32 * relation);<br>
+function <b>[cd_]GetSet_group_role</b>([cdp : cdp_t]; user_or_group, group_or_role : tobjnum; subject2 : tcateg; operation : t_oper, var relation : uns32) : Boolean;
+</div>
+
+
+<p><b>Parametry</b></p>
+
+<table border=1 cols=2>
+
+<tr valign="top">
+<td width=15%><i>user_or_group</i></td>
+<td width=85%>číslo uživatele nebo skupiny</td>
+</tr>
+
+<tr valign="top">
+<td width=15%><i>group_or_role</i> </td>
+<td width=85%>číslo skupiny nebo role</td>
+</tr>
+
+<tr valign="top">
+<td width=15%><i>subject2 </i></td>
+<td width=85%>udává význam parametru <i>group_or_role</i>, nabývá hodnot <code>CATEG_GROUP</code> nebo <code>CATEG_ROLE</code></td>
+</tr>
+
+<tr valign="top">
+<td width=15%><i>operation</i> </td>
+<td width=85%>- konstanta <code>OPER_SET</code> (zařazení / vyřazení)</td>
+</tr>
+
+<tr valign="top">
+<td width=15%>&nbsp;</td>
+<td width=85%>- konstanta <code>OPER_GET</code> (resp. <code>OPER_GETEFF</code>) (zjištění stavu)</td>
+</tr>
+
+<tr valign="top">
+<td width=15%><i>relation</i> </td>
+<td width=85%>- 1= zařadí / zařazeno </td>
+</tr>
+
+<tr valign="top">
+<td width=15%>&nbsp;</td>
+<td width=85%>- 0=vyřadí / vyřazeno</td>
+</tr>
+
+<tr valign="top">
+<td width=15%>[<i>cdp </i></td>
+<td width=85%><a href="HE_EXTCD.htm">kontextová proměnná</a> klienta]  </td>
+</tr>
+</table><br>
+
+<p><b>Od verze:</b></p>
+
+<p>5.0</p>
+
+<p><b>Popis </b></p>
+
+<p>Je-li<i> operation</i> rovno <code>OPER_SET</code>, funkce<b><code> GetSet_group_role</code></b> zařazuje<i> (relation</i> =1) nebo vyřazuje (<i>relation</i> = 0) uživatele nebo skupinu <i>user_or_group</i> do/ze skupiny nebo role <i>group_or_role</i>.</p>
+
+<p>Pro <i>operation</i> rovno <code>OPER_GET</code> funkce <b><code>GetSet_group_role</code></b> zjišťuje stav nalezení uživatele nebo skupiny<i> user_or_group</i> ve skupině nebo roli <i>group_or_role</i> a vrací hodnotu ve výstupním parametru <i>relation</i>. (<i>relation</i> =1 zařazeno a<i> relation</i> = 0 vyřazeno). Pro role je možné zjišťovat i efektivní náležení uživatele do role - pomocí <i>operation</i> rovno <code>OPER_GETEFF</code>. </p>
+
+<p>Číslo subjektu práv vrátí funkce <a href="HE_F_FINDFOBJECT.htm"><code>Find_object</code></a>.</p>
+
+<p>Zařazovat uživatele do skupiny smí pouze bezpečnostní a provozní <a href="../xml/html/admins.html">správce</a> databáze. Obsazovat uživatele nebo skupinu do role smí správce správce aplikace. Jinak dojde k chybě NO_RIGHT (Nemáte právo provést tuto akci).</p>
+
+<p>Funkce nahrazuje starší funkce <a href="HE_F_USERINGROUP.htm"><code>User_in_group</code></a> a <a href="HE_F_USERTOGROUP.htm"><code>User_to_group</code></a>.</p>
+
+<p>V jazyce SQL je obdobná dvojice funkcí <a href="../xml/html/f_set_membership.html"><code>Set_membership</code></a> a <a href="../xml/html/f_get_membership.html"><code>Get_membership</code></a>.</p>
+
+<p><b>Hodnota funkce </b></p>
+
+<p>Funkce vrací TRUE při chybě.</p>
+
+<p><b>Viz</b></p>
+
+<ul class='viz'>
+ <li><a href="HE_F_CREATEUSER.htm">Create_user</a> </li>
+ <li><a href="HE_F_FINDOBJECT.htm">Find_object</a> </li>
+</ul>
+
+</body>
+</html>

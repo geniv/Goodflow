@@ -1,0 +1,689 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+
+
+
+<meta name="description" content="V posledním díle jsme dokončili přehled SQL příkazů pro manipulaci s daty. Dnes se zaměříme na problematiku definice dat - konkrétně tvorby a úpravy tabulek." lang="cs">
+<meta name="description" content="V posledním díle jsme dokončili přehled SQL příkazů pro manipulaci s daty. Dnes se zaměříme na problematiku definice dat - konkrétně tvorby a úpravy tabulek." lang="en">
+<meta http-equiv="description" content="V posledním díle jsme dokončili přehled SQL příkazů pro manipulaci s daty. Dnes se zaměříme na problematiku definice dat - konkrétně tvorby a úpravy tabulek.">
+<meta http-equiv="content-language" content="cs">
+<meta http-equiv="content-type" content="text/html; charset=windows-1250"><title>Velké povídání o SQL (5.) -- PC Svět</title>
+
+<link rel="stylesheet" href="Velk%C3%A9%20pov%C3%ADd%C3%A1n%C3%AD%20o%20SQL%20%285.%29_soubory/www.css">
+<script language="javascript" type="text/javascript">
+<!--
+function getElement(e)
+{
+  if(document.all) return document.all[e];
+  else return document.getElementById(e);
+}
+
+peson = new Image(305,13);
+peson.src = "/images/1-5on.gif";
+pesoff = new Image(305,13);
+pesoff.src = "/images/1-5.gif";
+
+hledejon = new Image(20,11);
+hledejon.src = "/images/5-4on.gif";
+hledejoff = new Image(20,11);
+hledejoff.src = "/images/5-4.gif";
+
+topon = new Image(20,11);
+topon.src = "/images/7-pat-top-on.gif";
+topoff = new Image(20,11);
+topoff.src = "/images/7-pat-top-off.gif";
+
+var mnu = new Array();
+
+mnu[1] = 'komunikace:<img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/komunikace/mobily/" class="menu2">mobily</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/komunikace/site" class="menu2">sítě</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/komunikace/pripojeni" class="menu2">připojení</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11">';
+mnu[2] = 'internet:<img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/internet/webhosting/" class="menu2">webhosting</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/internet/webdesign" class="menu2">webdesign</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/internet/weby" class="menu2">weby</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11">';
+mnu[3] = 'programování:<img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/c/" class="menu2">C++</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/delphi/" class="menu2">Delphi</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/vbasic/" class="menu2">V.Basic</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/assembler/" class="menu2">Asm</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/pascal/" class="menu2">Pascal</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/java/" class="menu2">Java</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/sql/" class="menu2">SQL</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/wsh/" class="menu2">WSH</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11">';
+mnu[4] = 'web-programování:<img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/perl/" class="menu2">Perl</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/php/" class="menu2">PHP</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/asp/" class="menu2">ASP</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/javascript/" class="menu2">JavaScript</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/java/" class="menu2">Java</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/html/" class="menu2">HTML</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/sql/" class="menu2">SQL</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11">';
+mnu[5] = 'hw:<img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/hardware/motherboard/" class="menu2">desky</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/hardware/procesory/" class="menu2">procesory</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/hardware/grafika/" class="menu2">grafika</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/hardware/zvuk/" class="menu2">zvuk</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/hardware/periferie/" class="menu2">periferie</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/hardware/monitory/" class="menu2">monitory</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/hardware/mechaniky/" class="menu2">média</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/hardware/prislusenstvi/" class="menu2">přísluš.</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/hardware/testy/" class="menu2">testy</a>';
+mnu[6] = 'software:<img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/windows/" class="menu2">Windows</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/linux/" class="menu2">Linux</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/hry/" class="menu2">hry a zábava</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/software/recenze/" class="menu2">recenze</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/office/" class="menu2">MS Office</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11">';
+mnu[7] = 'bezpečnost:<img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/bezpecnost/viry/" class="menu2">Viry</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11">';
+mnu[8] = 'magazín:<img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/literatura/" class="menu2">literatura</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/magazin/akce/" class="menu2">akce</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/magazin/novinky/" class="menu2">novinky</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/magazin/tisk/" class="menu2">tiskové zprávy</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11">';
+
+function pmnu(mnu_id)
+{
+	 getElement("mnux").innerHTML = mnu[mnu_id];
+}
+// -->
+</script>
+
+<style type="text/css">
+<!--
+.mline { font-family: Tahoma, Arial, Verdana; font-size: 8pt; font-weight: bold; background-color: #444444; color: #FFFFFF }
+.mitem { cursor: hand }
+
+.mtable { font-family: Tahoma, Arial, Verdana; font-size: 8pt; border: 1px solid #000000; background-color: #EEEEEE; visibility: hidden; position: absolute }
+.mtitem { cursor: hand; background-color: #EEEEEE; color: #000000 }
+
+.mfirma { color: #DDDDDD; font-weight: none }
+.mfirma a { color: #DDDDDD; text-decoration: none }
+.mfirma a:active { color: #DDDDDD; text-decoration: none }
+.mfirma a:visited { color: #DDDDDD; text-decoration: none }
+.mfirma a:hover { color: #FFFFFF; text-decoration: underline }
+-->
+</style><style type="text/css">
+<!--
+P {
+	text-align : justify;
+}
+
+-->
+</style></head><body>
+
+
+<script language="JavaScript" type="text/javascript">
+<!--
+var intg;
+var tleft = 0;
+var PocetMenu = 0;
+var mLeft = new Array();
+
+function hidemenus(exc)
+{
+ clearInterval(intg);
+ intg = null;
+ for (id=1; id<=PocetMenu; id++){
+  document.all("mnui"+id).style.visibility = "hidden";
+  document.all("i"+id).style.color = "#FFFFFF";
+  document.all("i"+id).style.backgroundColor = "#444444";
+ }
+}
+
+function outobject()
+{
+ intg = setInterval("hidemenus(20)",400);
+}
+
+function onheader(hID)
+{
+ hidemenus(hID);
+ document.all("mnui"+hID).style.visibility = "visible";
+ document.all("i"+hID).style.color = "#000000";
+ document.all("i"+hID).style.backgroundColor = "#EEEEEE";	
+}
+
+function onobject()
+{
+ clearInterval(intg);
+ intg = null;
+}
+
+function onitem(obj)
+{
+ obj.style.color = "EEEEEE";
+ obj.style.backgroundColor = "111111";
+}
+
+function outitem(obj)
+{
+ obj.style.color = "000000";
+ obj.style.backgroundColor = "EEEEEE";
+}
+
+function setleft()
+{
+ for (i=1;i<=PocetMenu;i++) {
+  document.all("mnui"+i).style.left = mLeft[i];
+ }
+}
+
+function mAddHeader(ID,nadpis,leftpos) {
+ document.write('<td id="i'+ID+'" onmouseover="onheader('+ID+');" onmouseout="outobject();" class="mitem">&nbsp; '+nadpis+' &nbsp;</td>');
+ mLeft[ID] = leftpos;
+ if (PocetMenu < ID) PocetMenu = ID;
+}
+
+function mBeginTable(ID) {
+ document.write('<table style="z-index: 100;" width="120" id="mnui'+ID+'" border="0" cellspacing="1" cellpadding="2" class="mtable" onmouseover="onobject();" onmousemove="onobject();" onmouseout="outobject();" class="mtable">');
+}
+
+function mEndTable() {
+ document.write('</table>');
+}
+
+function mAddItem(nadpis,URL,Popis) {
+ document.write('<tr><td class="mtitem" onmouseover="onitem(this);" onmouseout="outitem(this);" onclick="window.navigate(\''+URL+'\');" title="'+Popis+'">'+nadpis+'</td></tr>');
+}
+
+if (window.clientInformation.userAgent.indexOf("MSIE") > 0 ||
+    window.clientInformation.userAgent.indexOf("pera/7.") > 0
+	)
+{
+	
+ document.write('<div align="center" style="z-index: 101; border-bottom: 1px solid white"><center><table id="ptable" border="0" cellspacing="2" cellpadding="0" class="mline" width="100%"><tr><td width="20">&nbsp;</td><td><table class="mline" cellspacing="0" cellpadding="0" border="0"><tr>');
+ mAddHeader(1,"Provozované servery",26);
+ mAddHeader(2,"DOMÉNY",156);
+ mAddHeader(3,"WEBHOSTING",257);
+ mAddHeader(4,"PŘIPOJENÍ",352);
+ mAddHeader(5,"SERVERHOSTING",452);
+ document.write('</tr></table></td><td width="120" class="mfirma"><a href="http://www.forpsi.com/">FORPSI</a></td><td width="20">&nbsp;</td></tr></table></center></div>');
+
+ mBeginTable(1);
+ mAddItem('Móda.cz','http://www.moda.cz/','Server o módě, stylu, zdraví a volném čase');
+ mAddItem('CzechWeb','http://www.czechweb.cz/','Žebříček registrátorů českých a slovenských domén, denně nové statistiky');
+ mAddItem('PC Svět','http://www.pcsvet.cz/','Počítače, programování, komunikace, Internet');
+ mAddItem('Právník.cz','http://www.pravnik.cz/','Internetový právník pro každého - úplná znění, články, poradna');
+ mAddItem('Počítadlo.cz','http://www.pocitadlo.cz/','Služba pro počítání přístupů na vaše stránky včetně podrobných statistik');
+ mAddItem('iReklama.cz','http://www.ireklama.cz/','Výměný reklamní systém pro vaše stránky');
+ mEndTable();
+
+ mBeginTable(2);
+ mAddItem('FORPSI.com - registrace domén','http://www.forpsi.com/domain/','Nejlevnější registrace domén'); 
+ mAddItem('Domény .cz','http://www.forpsi.com/domain/','Registrace domén již za 549,-Kč ročně');
+ mAddItem('Domény .com','http://www.forpsi.com/domain/','Registrace domén již za 219,-Kč ročně');
+ mEndTable();
+
+ mBeginTable(3);
+ mAddItem('FORPSI.com - homepage','http://www.forpsi.com/','FORPSI.com - homepage'); 
+ mAddItem('FORPSI.com - WEBHOSTING','http://www.forpsi.com/webhosting/','FORPSI.com - nejširší nabídka webhostingu'); 
+ mAddItem('PIDIhosting','http://www.forpsi.com/webhosting/pidi.php','Hosting pro každého'); 
+ mAddItem('PIDIhosting + mail','http://www.forpsi.com/webhosting/pidi.php','Hosting pro každého včetně mailu'); 
+ mAddItem('NORMALhosting','http://www.forpsi.com/webhosting/normal.php','Standardní hosting za rozumnou cenu');
+ mAddItem('EXCLUSIVEhosting','http://www.forpsi.com/webhosting/exclusive.php','To nejlepší pro ty nejlepší');
+ mAddItem('EMAILhosting','http://www.forpsi.com/webhosting/email.php','Hosting vašich mailů'); 
+ mEndTable();
+	
+ mBeginTable(4);
+ mAddItem('FORPSI - připojení k internetu','http://www.forpsi.com/internet/','Kompletní nabídka bezdrátového či pevného připojení k Internetu'); 
+ mAddItem('ADSL připojení','http://www.forpsi.com/internet/?page=adsl_cr_price','Připojení k Internetu telefonní linkou pomocí technologie ADSL'); 
+ mAddItem('Wi-Fi Lite','http://www.forpsi.com/internet/?page=wifi_lite_price','Nejjednodušší bezdrátové připojení technologií Wi-Fi'); 
+ mAddItem('Wi-Fi','http://www.forpsi.com/internet/?page=wifi_price','Profesionální připojení technologií Wi-Fi'); 
+ mEndTable();
+ 
+ mBeginTable(5);
+ mAddItem('FORPSI - serverhosting','http://www.forpsi.com/server/dedicated.php','SERVERHOSTING a SERVERHOUSING'); 
+ mAddItem('FORPSI - DEDICATED','http://www.forpsi.com/server/dedicated.php','Nabídka pronájmu serverů s kompletní nabídkou služeb'); 
+ mAddItem('FORPSI - Private','http://www.forpsi.com/server/private.php','Nabídka housingu vašich serverů s kompletní nabídkou služeb'); 
+ mEndTable();
+
+ setleft();
+}
+// -->
+</script>
+
+
+<table align="center" border="0" cellpadding="0" cellspacing="0" width="780">
+<tbody><tr><td width="767">
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tbody><tr>
+<td height="158" width="305">
+
+<table border="0" cellpadding="0" cellspacing="0">
+<tbody><tr><td colspan="3" height="14" width="305"><img src="Velk%C3%A9%20pov%C3%ADd%C3%A1n%C3%AD%20o%20SQL%20%285.%29_soubory/1-1.gif" alt=""></td></tr>
+<tr><td height="11" width="253"><img src="Velk%C3%A9%20pov%C3%ADd%C3%A1n%C3%AD%20o%20SQL%20%285.%29_soubory/1-2.gif" alt=""></td><td height="11" width="27"><a href="http://www.forpsi.com/" target="_top" onmouseover="pesoff.src=peson.src; return true" onmouseout="pesoff.src='/images/1-5.gif'; return true"><img src="Velk%C3%A9%20pov%C3%ADd%C3%A1n%C3%AD%20o%20SQL%20%285.%29_soubory/1-3.gif" alt="" border="0"></a></td><td height="11" width="25"><img src="Velk%C3%A9%20pov%C3%ADd%C3%A1n%C3%AD%20o%20SQL%20%285.%29_soubory/1-4.gif" alt=""></td></tr>
+<tr><td colspan="3" height="13" width="305"><img name="pesoff" src="Velk%C3%A9%20pov%C3%ADd%C3%A1n%C3%AD%20o%20SQL%20%285.%29_soubory/1-5.gif" alt=""></td></tr>
+<tr><td colspan="3" height="120" width="305"><a href="http://www.pcsvet.cz/"><img src="Velk%C3%A9%20pov%C3%ADd%C3%A1n%C3%AD%20o%20SQL%20%285.%29_soubory/1-6.gif" alt="" border="0"></a></td></tr>
+</tbody></table>
+
+</td>
+<td width="90">
+
+<table border="0" cellpadding="0" cellspacing="0" width="90">
+<tbody><tr><td background="Velk%C3%A9%20pov%C3%ADd%C3%A1n%C3%AD%20o%20SQL%20(5.)_soubory/2-1.gif" height="13" width="1"></td></tr>
+<tr><td bgcolor="white" height="145"><iframe src="Velk%C3%A9%20pov%C3%ADd%C3%A1n%C3%AD%20o%20SQL%20%285.%29_soubory/2-2.htm" name="menu1" marginwidth="0" marginheight="0" align="middle" frameborder="0" height="100%" scrolling="auto" width="100%"></iframe></td></tr>
+</tbody></table>
+
+</td>
+<td bgcolor="white" valign="top" width="10">
+<img src="Velk%C3%A9%20pov%C3%ADd%C3%A1n%C3%AD%20o%20SQL%20%285.%29_soubory/3.gif" alt="">
+</td>
+<td width="400">
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tbody><tr><td background="Velk%C3%A9%20pov%C3%ADd%C3%A1n%C3%AD%20o%20SQL%20(5.)_soubory/4-1.gif" height="8"></td></tr>
+<tr><td height="150"><iframe src="Velk%C3%A9%20pov%C3%ADd%C3%A1n%C3%AD%20o%20SQL%20%285.%29_soubory/topinfo.htm" name="4-2" marginwidth="0" marginheight="0" align="middle" frameborder="0" height="100%" scrolling="no" width="100%"></iframe></td></tr>
+</tbody></table>
+
+</td>
+</tr>
+<tr>
+<td colspan="4" height="35" width="100%">
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tbody><tr>
+<td width="28"><img src="Velk%C3%A9%20pov%C3%ADd%C3%A1n%C3%AD%20o%20SQL%20%285.%29_soubory/5-1.gif" alt=""></td>
+<td width="65">
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tbody><tr><td background="Velk%C3%A9%20pov%C3%ADd%C3%A1n%C3%AD%20o%20SQL%20(5.)_soubory/5-2.gif">&nbsp;</td></tr>
+<tr><td bgcolor="white"><form method="get" action="/misc/search.php" name="sfrm" style="margin-top: 0pt; margin-bottom: 0pt;"><input name="kde" value="1" type="hidden"><input size="10" name="co" value="hledat" onclick="value='';" style="border: 0px solid ; font-family: Verdana; font-size: 10px;" type="text"></form></td></tr>
+<tr><td><img src="Velk%C3%A9%20pov%C3%ADd%C3%A1n%C3%AD%20o%20SQL%20%285.%29_soubory/5-3.gif" alt=""></td></tr>
+</tbody></table>
+</td>
+<td width="18"><a href="#" onclick="sfrm.submit();" onmouseover="hledejoff.src=hledejon.src; window.status='hledej';return true" onmouseout="hledejoff.src='/images/5-4.gif'; window.status='pcsvět';return true"><img name="hledejoff" src="Velk%C3%A9%20pov%C3%ADd%C3%A1n%C3%AD%20o%20SQL%20%285.%29_soubory/5-4.gif" alt="go" border="0"></a></td>
+<td width="9"><img src="Velk%C3%A9%20pov%C3%ADd%C3%A1n%C3%AD%20o%20SQL%20%285.%29_soubory/5-5.gif" alt=""></td>
+<td>
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tbody><tr><td align="left" background="Velk%C3%A9%20pov%C3%ADd%C3%A1n%C3%AD%20o%20SQL%20(5.)_soubory/5-7.gif" height="11"><img src="Velk%C3%A9%20pov%C3%ADd%C3%A1n%C3%AD%20o%20SQL%20%285.%29_soubory/5-6.gif" alt=""></td></tr>
+<tr><td align="left" background="Velk%C3%A9%20pov%C3%ADd%C3%A1n%C3%AD%20o%20SQL%20(5.)_soubory/5-8.gif" height="24" valign="middle">
+<a href="http://www.pcsvet.cz/komunikace/" class="menu" onmouseover="pmnu(1);">komunikace</a>
+&nbsp;<a href="http://www.pcsvet.cz/internet/" class="menu" onmouseover="pmnu(2);">internet</a>
+&nbsp;<a href="http://www.pcsvet.cz/prog/" class="menu" onmouseover="pmnu(3);">prog.</a>
+&nbsp;<a href="http://www.pcsvet.cz/prog/" class="menu" onmouseover="pmnu(4);">web-prog.</a>
+&nbsp;<a href="http://www.pcsvet.cz/hardware/" class="menu" onmouseover="pmnu(5);">hardware</a>
+&nbsp;<a href="http://www.pcsvet.cz/software/" class="menu" onmouseover="pmnu(6);">software</a>
+&nbsp;<a href="http://www.pcsvet.cz/bezpecnost/" class="menu" onmouseover="pmnu(7);">bezpečnost</a>
+&nbsp;<a href="http://www.pcsvet.cz/magazin/" class="menu" onmouseover="pmnu(8);">magazín</a>
+&nbsp;<a href="http://www.pcsvet.cz/forum/" class="menu">disk.fórum</a>
+</td></tr>
+</tbody></table>
+</td></tr>
+</tbody></table>
+
+</td>
+</tr>
+<tr>
+<td colspan="4" background="Velk%C3%A9%20pov%C3%ADd%C3%A1n%C3%AD%20o%20SQL%20(5.)_soubory/6-2.gif" width="100%">
+
+<table border="0" cellpadding="0" cellspacing="0">
+<tbody><tr><td><img src="Velk%C3%A9%20pov%C3%ADd%C3%A1n%C3%AD%20o%20SQL%20%285.%29_soubory/6-1.gif" alt=""></td>
+<td id="mnux" valign="top"></td>
+
+</tr>
+</tbody></table>
+
+</td>
+</tr>
+<tr>
+<td colspan="4" width="100%">
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tbody><tr><td background="Velk%C3%A9%20pov%C3%ADd%C3%A1n%C3%AD%20o%20SQL%20(5.)_soubory/7.gif" width="15">&nbsp;</td><td bgcolor="white" width="5">&nbsp;</td><td align="left" bgcolor="white" valign="top">
+<table><tbody><tr><td height="1"></td></tr></tbody></table>
+
+
+<p class="ndp">Velké povídání o SQL (5.)</p>
+<p>počet názorů: <b>2</b> &nbsp; poslední: 18.07.2002 10:22:10 &nbsp; <a href="http://www.pcsvet.cz/forum/forum.php?art=1939" class="autor">číst názory</a> &nbsp; <a href="http://www.pcsvet.cz/forum/forum-add.php?art=1939" class="autor">přidat názor</a> &nbsp; <a href="http://www.pcsvet.cz/art/article_print.php?id=1939">vytisknout</a></p>
+<p>V posledním díle jsme dokončili přehled SQL příkazů pro manipulaci s
+daty. Dnes se zaměříme na problematiku definice dat - konkrétně tvorby
+a úpravy tabulek.</p>
+<hr color="#777777" size="1">
+
+<ws-body>
+</ws-body><p>Až doposud jsme stále pouze upravovali data v tabulkách, ale jak nějakou vytvořit s 
+pomocí jazyka SQL jsem Vám zatím zatajoval. U většiny databázových systémů jsou sice k dispozici 
+rozličná grafická prostředí usnadňující tuto činnost, ale především při definici relací 
+na vzdálených serverech se bez čistého SQL mnohdy neobejdete. </p>
+
+<p>V prvé řadě je třeba si uvědomit, že u lepších databázových systému jsou jednotlivé tabulky 
+sdruženy v databázi. Tu je nutné vytvořit. V případě, že pracujete na pronajatém vzdáleném 
+serveru, kde Vám poskytovatel zpřístupnil například systém MySQL nebo Microsoft SQL Server tak 
+pro Vás databázi zřejmě vytvořil a přihlašovací údaje Vám sdělil. Pouze v situaci, kdy chcete 
+pracovat dejme tomu na lokální instalaci MySQL je dobré ji založit. Standard jazyka 
+SQL bohužel tuto oblast nepokrývá. Nejčastěji se však setkáme s touto implementací:</p>
+
+<pre>CREATE DATABASE nazev_databaze</pre>
+
+<p>Opačným procesem je zničení databáze a k tomu použijeme příkazu DROP DATABASE nazev_databaze. 
+Stejně tak přihlášení k databázi není nijak standardizováno. Lze se setkat s konstrukcemi 
+DATABASE nazev_databaze, START DATABASE nazev_databaze nebo nejčastěji tak jak v 
+systému MySQL příkazem USE nazev_databaze.</p>
+
+<h2>Vytváření tabulek příkazem CREATE TABLE</h2>
+
+<p>Nyní tedy přejděme k jádru věci a prohlédněme si syntaxi příkazu CREATE TABLE:</p>
+
+<pre>CREATE TABLE nazev_tabulky
+(
+nazev_atributu datový_typ další_parametry,
+dalsí_atribut datový_typ,
+... ,
+...
+)
+</pre>
+
+<p>Každá implementace nabízí několik datových typů lišících se systém od systému. 
+Zpravidla nebudete mít problémy s typy CHAR, VARCHAR, NUMERIC, INTEGER, FLOAT, DATE. 
+Uveďme si přehled typů v MySQL:</p>
+
+<p>Pro celá čísla je typicky používán typ INTEGER, zkráceně INT. Má poměrně velký 
+rozsah (od -2147483648 do +2147483647). Ve speciálních případech kdy chcete 
+ušetřit trošku kapacity můžete definovat i menší typy jako MEDIUMINT, 
+SMALLINT či nejmenší TINYINT s rozsahem od -128 do +127. Jestli ovšem nehodláte 
+budovat terabajtovou databázi, klidně použijte INTEGER. Pokud se Vám jeho rozsah zdá 
+malý, je k dispozici i BIGINT kam lze nacpat i čísla v řádu 19 číslic. Pro reálná 
+čísla využijme typů FLOAT a DOUBLE. Kromě toho lze definovat i sloupec typu 
+DECIMAL (bývá pojmenován i NUMERIC), který je ukládán nikoli jako číslo, v  
+podobě řetězce. V závorce pak zbývá uvést počet míst před a počet míst 
+za desetinnou čárkou. Protože jsou čísla ukládána v řetězcích mají větší nároky 
+na výkon systému i úložný prostor.</p>
+
+<p>Ukládání časových údajů bývá mnohdy problémem. V některých implementacích se pod 
+typem DATE skrývá hodnota data a času, jinde se jedná opravdu pouze o datum. Další 
+možností je TIME a DATETIME. Někde jsou i samostatné typy pro léta, měsíce, ... 
+a to YEAR, MONTH, DAY, HOUR, SECOND. Specialitou lepších systémů MySQL 
+nevyjímaje je tzv. TIMESTAMP, kam systém sám vloží aktuální datum a čas v 
+okamžiku operace INSERT či UPDATE.</p>
+
+<p>Další kapitolou jsou řetězce. Pro krátké údaje jsou v zásadě dvě možnosti: CHAR 
+a VARCHAR. V závorce vždy uvádíme maximální počet znaků, které lze do sloupce 
+vložit a to v rozmezí 1 - 255 znaků. CHAR uchovává řetězce v pevně stanovené délce, tedy 
+když si vyhradíte třeba pro jméno 50 znaků a využijete jen 20, systém musí 
+ukládat i 30 zbytečných mezer. VARCHAR přináší variabilní délku, takže přebytečné 
+mezery neplýtvají místem. Zdálo by se, že nejsou důvody k použití CHAR, ale není 
+tomu tak. Za variabilitu platíme ukládáním přidaného ukončovacího znaku. Proto 
+sloupec zkratek čítajících vždy 5 znaků zabere s typem CHAR 5 bytů na záznam, ale 
+s VARCHAR je to 6 bytů. V ostatních případech však není důvod nepoužít variabilní 
+řetězce.</p>
+
+<p>Pro ukládání dat delších než 255 bytů použijeme typy BLOB a TEXT. Rozdíl mezi nimi 
+je pouze ten, že BLOB je indexován (tříděn) binárně, tedy s citlivostí na 
+velikost písmen a TEXT naopak. Do standardních typů BLOB a TEXT se vejde 65536 
+znaků. Je-li to málo, lze využít MEDIUMBLOB (MEDIUMTEXT) a LONGBLOB (LONGTEXT) 
+s kapacitami 16 mil. znaků a 4 mld. znaků. Samozřejmě uložíte-li do 
+tabulky např. celé články v redakčním systému, tak potom pro zobrazení 
+pouze názvů a popisů rozhodně neprovádějte SELECT * ! Data z těchto 
+sloupců jsou pomalá, často se ukládají do jiného prostoru (tzv. BLOB AREA), 
+takže se o ně zajímejte skutečně až tehdy, když je to nutné.</p>
+
+<p>Posledními typy jsou množiny a výčty. Výčet použijeme u sloupců jenž mohou 
+nabývat jen jedné z definovaných hodnot. Syntaxe je ENUM('hodnota1','hodnota2',...) 
+přičemž hodnoty musí být samozřejmě jedinečné a jejich počet je limitován na 
+65535. Množina je sloupec, který umožňuje uchovávat i víc kvalit z definované 
+množiny. Typicky například množinový typ použijeme pro záznam o znalosti 
+cizích jazyků. Definujeme jej takto: SET('angličtina','němčina',...). 
+Dlužno upozornit, že limit množin je v MySQL 64 prvků.</p>
+
+<p>Uveďme si nyní jednoduchý příklad:</p>
+
+<pre>CREATE TABLE zamestnanci
+(
+  Jmeno VARCHAR(60),
+  RodCislo CHAR(11),
+  Plat DECIMAL (6, 2),
+  Pohlavi ENUM('Muž','Žena'),
+  Zivotopis TEXT
+)
+</pre>
+
+<p>Vytvořili jsme tabulku zaměstnanců. Jméno je deklarováno v podobě variabilního řetězce a 
+nesmí přesáhnout 60 znaků. Rodné číslo je v pevně definované délce jedenácti znaků 
+(deset čísel + lomítko). Plat připouštíme jen šestimístný s přesností na haléře. 
+Pohlaví nabývá pouze uvedených hodnot a Zivotopis obsahuje text do velikosti 
+65536 znaků.</p>
+
+<p>
+Za datovým typem můžeme uvádět některé další instrukce. Jednou z nich je NOT NULL, která říká, 
+že sloupec musí být vždy vyplněn. Dalším modifikátorem je UNIQUE, který určuje, že hodnoty 
+ve sloupci musí být jedinečné. Identifikátor pomocí něhož můžeme přesně určit libovolný 
+záznam se nazývá primární klíč a má vlastnosti NOT NULL a UNIQUE. Tímto náš příklad 
+vylepšíme:
+</p>
+
+<pre>CREATE TABLE zamestnanci
+(
+  Jmeno VARCHAR(60) NOT NULL,
+  RodCislo CHAR(11) PRIMARY KEY,
+  Plat DECIMAL (6, 2),
+  Pohlavi ENUM('Muž','Žena') NOT NULL,
+  Zivotopis TEXT
+)
+</pre>
+
+
+<p>
+Identifikátorem je rodné číslo, takže musí být vždy vyplněno a nesmí se opakovat. 
+Jméno se opakovat může, ovšem rovněž musí být stejně jako pohlaví vždy uvedeno.
+</p>
+
+<p>
+Ještě si zmiňme operátor DEFAULT, který umožňuje přiřadit implicitní hodnotu sloupci v 
+případě, že jeho hodnotu přímo neuvedeme. Dodejme možnost použít klíčového slova 
+AUTO_INCREMENT, které zajistí automatickou tvorbu jedinečného čísla coby identifikátoru. 
+Výhodou je, že tak máme zajištěn umělý identifikátor (číslo) aniž bychom se o to 
+museli nějak starat. Tato syntaxe platí pro MySQL:
+</p>
+
+<pre>CREATE TABLE clanky
+(
+  ID INTEGER PRIMARY KEY AUTO_INCREMENT,
+  Nadpis VARCHAR(100) NOT NULL,
+  Telo TEXT,
+  Sazba INTEGER DEFAULT 10
+)
+</pre>
+
+<p>
+Do tabulky stačí vložit pouze nadpis článku (INSERT INTO clanky (Nadpis) VALUES ('SQL')). 
+Unikátní ID vloží sám systém a sazba bude stanovena na defaultních 10 kč za 100 
+čtenářů.
+</p>
+
+<p>
+Další možnosti při definici tabulek souvisí s referenční integritou o které si povíme 
+až v některém z dalších dílů seriálu. Teď si jen ještě ukážeme jak lze tabulky 
+modifikovat.
+</p>
+
+<h2>Modifikace tabulek příkazem ALTER TABLE</h2>
+
+<p>Zákládní syntaxe příkazu:</p>
+
+<pre>ALTER TABLE nazev_tabulky
+  ADD COLUMN nazev_atributu 
+       datový_typ další_parametry,
+  ALTER COLUMN nazev_atributu 
+       datový_typ další_parametry,
+  DROP COLUMN nazev_atributu
+</pre>
+
+<p>Příkaz ADD přidá nový sloupec, ALTER změní stávající sloupec a DROP jeden ze sloupců 
+zruší. Příkazem ALTER nelze měnit datový typ ani parametry NOT NULL či UNIQUE. 
+Hodí se především k nastavení nové implicitní hodnoty (SET DEFAULT) nebo zrušení 
+přiřazování této hodnoty (DROP DEFAULT). Zkusme modifikovat tabulku clanky:</p>
+
+<pre>ALTER TABLE clanky
+  ADD COLUMN Kvalita INTEGER
+</pre>
+
+<p>
+Tímto příkazem jsme rozšířili tabulku o sloupec Kvalita. Kdybychom nový sloupec definovali jako 
+NOT NULL, vloží se nám ke všem záznamům nula. Přidání sloupce, který má kvalitu 
+UNIQUE samozřejmě není tímto příkazem možné, protože by byla porušena podmínka 
+jedinečnosti. Zajímavým rozšířením standardu SQL je příkaz MODIFY, který přinesla 
+firma Oracle a je implementován i v MySQL. Ten umožňuje měnit i například 
+datový typ sloupců s tím, že systém se pokusí už vložené hodnoty překonvertovat, ale o 
+tom až příště. Zbývá 
+řící jak zrušit tabulku. Stačí jednoduše uvést DROP TABLE nazev_tabulky.
+</p>
+
+<p>
+V dnešním díle jsme si ukázali nejzákladnější příkazy pro definici dat. V díle příštím 
+se zaměříme na další možnosti databázových systémů, především referenční integritu, dynamické 
+změny datových typu či klíčů, definici doménové integrity a konstrukce omezení atributů, atd. 
+To bude problematika poněkud složitější, ale o to zajímavější.
+</p>
+
+
+
+<br>
+<br>
+<hr color="#777777" size="1">
+
+<table width="100%"><tbody><tr><td valign="top">
+Autor: <b>Tomáš Kubica</b>, <a href="http://www.pcsvet.cz/art/author.php?id=290">informace o autorovi</a><br>
+Rubrika: <b><a href="http://www.pcsvet.cz/asp/">Programování - ASP</a></b><br>
+Čtenářů: <b>7757</b> &nbsp; &nbsp; Zobrazení: <b>8800</b><br>
+<br>
+<b>Související články:</b><br>• <a href="http://www.pcsvet.cz/art/article.php?id=1380" title="První z delší série článků zabývajících se databázovým dotazovacím jazykem SQL. V tomto díle nejdřív naznačím, co nás čeká a jak se bude celý seriál vyvíjet a ve zbylém místě začneme s příkazem SELECT.">Velké povídání o SQL (1.)</a><br>• <a href="http://www.pcsvet.cz/art/article.php?id=1404" title="Jak jsem slíbil, je tu druhý díl povídání o SQL, a dnes se zaměříme restrikci výběru klauzulí WHERE, dále pak sdružování záznamů a třídění.">Velké povídání o SQL (2.)</a><br>• <a href="http://www.pcsvet.cz/art/article.php?id=1474" title="A je tady třetí pokračování našeho seriálu, tentokrát zaměřené na dotazy z více tabulek, propojování tabulek, vnořené dotazy.">Velké povídání o SQL (3.)</a><br>• <a href="http://www.pcsvet.cz/art/article.php?id=1938" title="V dnešním díle si představíme další základní SQL příkazy pro manipulaci s daty: INSERT, DELETE, UPDATE.">Velké povídání o SQL (4.)</a><br>• <a href="http://www.pcsvet.cz/art/article.php?id=1940" title="Základní syntaxi příkazů CREATE TABLE a ALTER TABLE jsme si vysvětlili minule a v tomto díle přistoupíme k dalším možnostem definice dat a řešením jejich integrity.">Velké povídání o SQL (6.)</a><br>• <a href="http://www.pcsvet.cz/art/article.php?id=1941" title="V předchozím článku jsme řešili integritu dat. Dnes dokončíme CREATE TABLE a ALTER TABLE popisem některých zajímavých dodatků a vrhneme se na tvorbu dynamických pohledů (VIEW).">Velké povídání o SQL (7.)</a><br>• <a href="http://www.pcsvet.cz/art/article.php?id=2237" title="Dnes se zaměříme na indexy - co je index, jak funguje, jak ho správně vytvořit">Velké povídání o SQL (8.)</a><br><br>
+
+</td><td align="center">
+
+
+Jak hodnotíte tento článek?<br><form method="post" action="article.php?id=1939"><input name="znamka" value="1" class="tlac" type="submit"> <input name="znamka" value="2" class="tlac" type="submit"> <input name="znamka" value="3" class="tlac" type="submit"> <input name="znamka" value="4" class="tlac" type="submit"> <input name="znamka" value="5" class="tlac" type="submit"><br>lepší &lt;--&gt;horší</form>
+
+</td></tr></tbody></table>
+Názory: počet: <b>2</b> &nbsp; poslední: 18.07.2002 10:22:10 &nbsp; <a href="http://www.pcsvet.cz/forum/forum.php?art=1939" class="autor">číst názory</a> &nbsp; <a href="http://www.pcsvet.cz/forum/forum-add.php?art=1939" class="autor">přidat názor</a> &nbsp; <a href="http://www.pcsvet.cz/art/article_print.php?id=1939">vytisknout</a><p></p>
+
+<a name="inquiry"></a>
+
+<hr color="white" size="1">
+
+<div align="center"><center><table class="ftable"><tbody><tr><td align="left"><b><i>Nadpis</i></b></td><td align="left"><b><i>Autor</i></b></td><td align="left"><b><i>Datum</i></b></td></tr><tr><td align="left"><b>Numeric vs float a integer</b></td><td align="left"><a href="mailto:kopca@petrol.cz">Jaroslav Kopeček</a></td><td align="left">18.07.2002 08:55:47</td></tr><tr><td align="left"><b>Re: Numeric vs float a integer</b></td><td align="left"><a href="mailto:kubica@kamarad.cz">Tomáš Kubica</a></td><td align="left">18.07.2002 10:22:10</td></tr></tbody></table></center></div>
+<form method="post" action="/forum/forum-add.php?art=1939&amp;reply=&amp;tema=">
+  <div align="center">
+    <table class="ftable" border="0" cellpadding="2" cellspacing="0">
+      <tbody><tr>
+        <td colspan="2" class="ftitle">Nový příspěvek</td>
+      </tr>
+      <tr>
+        <td class="fname" align="right"><b>Věc:</b></td>
+        <td class="fvalue" align="left"><input name="Nadpis" size="55" value="" type="text"></td>
+      </tr>
+      <tr>
+        <td class="fname" align="right"><b>Jméno:</b></td>
+        <td class="fvalue" align="left"><input name="Autor_Jmeno" size="30" value="" type="text"></td>
+      </tr>
+      <tr>
+        <td class="fname" align="right"><b>E-mail:</b></td>
+        <td class="fvalue" align="left"><input name="Autor_Email" size="20" value="" type="text"></td>
+      </tr>
+      <tr>
+        <td colspan="2" class="fvalue" align="left"><textarea rows="10" name="Obsah" cols="70"></textarea><br>
+		  - nepoužívejte HTML k formátování textu příspěvku<br>
+		  - nepoužívejte A HREF= pro odkazy, aktivní budou automaticky<br>
+		  - odřádkování provádějte klávesou ENTER, nikoliv tagem &lt;br&gt;</td>
+      </tr>
+      <tr>
+        <td colspan="2" class="fvalue" align="left"><input class="ftable" style="border: medium none ;" name="MailReply" value="1" type="checkbox">zasílat
+          odpovědi na můj e-mail      </td>
+</tr>
+      <tr>
+        <td colspan="2" align="center">
+          Opište text z obrázku: <input name="Kod" value="" class="f_name" size="8" type="text"> <img src="Velk%C3%A9%20pov%C3%ADd%C3%A1n%C3%AD%20o%20SQL%20%285.%29_soubory/captcha.htm" height="50" width="200"></td>
+      </tr>
+      <tr>
+        <td colspan="2" align="center">
+          <input value="Přidat příspěvek" class="fsubmit" type="submit"></td>
+      </tr>
+    </tbody></table>
+  </div>
+  <input name="filled" value="1" type="hidden">
+</form>
+
+<br><br><br><br><br><br><br><br>
+<div align="center">
+<center>
+<table border="0">
+<tbody><tr><td>
+<iframe src="Velk%C3%A9%20pov%C3%ADd%C3%A1n%C3%AD%20o%20SQL%20%285.%29_soubory/p-banner.htm" style="border: medium none ;" frameborder="0" height="60" scrolling="no" width="468">
+</iframe>
+<br><br>
+  <iframe name="rekl2" src="Velk%C3%A9%20pov%C3%ADd%C3%A1n%C3%AD%20o%20SQL%20%285.%29_soubory/2.htm" marginwidth="1" marginheight="1" frameborder="0" height="62" scrolling="no" width="472"></iframe>
+</td>
+</tr>
+</tbody></table>
+</center>
+</div>
+<br><br><br>
+<center><span style="font-size: 9px;">(c) P.E.S. consulting, s.r.o.
+2000-2005. Provozovatel nezodpovídá za obsah a původ článků a
+diskuzních příspěvků, odpovědnost nesou jednotliví redaktoři a autoři.
+Informace o PC Světě <a href="http://www.pcsvet.cz/informace.php">naleznete zde</a></span></center> 
+</td>
+<td bgcolor="white" width="10"></td>
+<td align="right" bgcolor="white" valign="top" width="160">
+
+<br><center>
+<center><a href="http://www.forpsi.com/" target="_blank"><img src="Velk%C3%A9%20pov%C3%ADd%C3%A1n%C3%AD%20o%20SQL%20%285.%29_soubory/125x125.gif" alt="FORPSI.com - webhosting, serverhosting, registrace domén, dedikované servery" border="0"></a></center>
+
+
+
+<table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td colspan="3" height="6" width="180"></td></tr><tr><td align="left" valign="top" width="15"><img src="Velk%C3%A9%20pov%C3%ADd%C3%A1n%C3%AD%20o%20SQL%20%285.%29_soubory/7-tab-1.gif" alt=""></td><td align="left" background="Velk%C3%A9%20pov%C3%ADd%C3%A1n%C3%AD%20o%20SQL%20(5.)_soubory/7-tab-2.gif" valign="bottom" width="165"><font class="tab-nadpis">
+Anketa
+</font></td></tr></tbody></table>
+<table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td align="left" valign="top" width="5"><img src="Velk%C3%A9%20pov%C3%ADd%C3%A1n%C3%AD%20o%20SQL%20%285.%29_soubory/7-tab-3.gif" alt=""></td><td align="left" width="175">
+<table class="tab" border="0" cellpadding="3" cellspacing="0"><tbody><tr><td bgcolor="white">
+</td></tr></tbody></table>
+</td></tr>
+</tbody></table>
+
+<table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td colspan="3" height="6" width="180"></td></tr><tr><td align="left" valign="top" width="15"><img src="Velk%C3%A9%20pov%C3%ADd%C3%A1n%C3%AD%20o%20SQL%20%285.%29_soubory/7-tab-1.gif" alt=""></td><td align="left" background="Velk%C3%A9%20pov%C3%ADd%C3%A1n%C3%AD%20o%20SQL%20(5.)_soubory/7-tab-2.gif" valign="bottom" width="165"><font class="tab-nadpis">
+Novinky e-mailem
+</font></td></tr></tbody></table>
+<table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td align="left" valign="top" width="5"><img src="Velk%C3%A9%20pov%C3%ADd%C3%A1n%C3%AD%20o%20SQL%20%285.%29_soubory/7-tab-3.gif" alt=""></td><td align="left" width="175">
+<table class="tab" border="0" cellpadding="3" cellspacing="0"><tbody><tr><td bgcolor="white">
+<form method="get" action="/user/register.php">
+<input name="email" size="16" value="vas@email.cz" onclick="this.value='';" type="text"><input value="ok" type="submit">
+Zasílání denního nebo týdenního přehledu nových článků
+</form>
+</td></tr></tbody></table>
+</td></tr>
+</tbody></table>
+
+<hr size="1">
+<iframe name="rekl2" src="Velk%C3%A9%20pov%C3%ADd%C3%A1n%C3%AD%20o%20SQL%20%285.%29_soubory/3.htm" marginwidth="1" marginheight="1" align="middle" frameborder="0" height="127" scrolling="no" width="127"></iframe>
+<hr size="1">
+<br><center>
+<center><a href="http://www.forpsi.com/" target="_blank"><img src="Velk%C3%A9%20pov%C3%ADd%C3%A1n%C3%AD%20o%20SQL%20%285.%29_soubory/125X125_evrop_dom_a_web.gif" alt="FORPSI.com - webhosting, serverhosting, registrace domén, dedikované servery" border="0"></a></center>
+
+
+<br><br>
+<a href="http://www.pravnik.cz/" target="_blank">Právník.cz - občanské, rodinné, pracovní, obchodní a jiné právo, smluvní vzory, úplná znění</a>
+
+<br><br><br><br><br>
+
+<center>
+</center>
+
+
+</center></center></td>
+
+
+</tr>
+</tbody></table>
+
+
+
+</td>
+</tr>
+
+</tbody></table>
+
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tbody><tr><td background="Velk%C3%A9%20pov%C3%ADd%C3%A1n%C3%AD%20o%20SQL%20(5.)_soubory/7.gif" width="15"></td><td bgcolor="white" width="150"></td><td width="68"><img src="Velk%C3%A9%20pov%C3%ADd%C3%A1n%C3%AD%20o%20SQL%20%285.%29_soubory/7-pat-1.gif" alt=""></td><td background="Velk%C3%A9%20pov%C3%ADd%C3%A1n%C3%AD%20o%20SQL%20(5.)_soubory/7-pat-2.gif" bgcolor="white" valign="bottom" width="360">© 2000-2004 pcsvět.cz / <a href="mailto:pcsvet@pcsvet.cz">pcsvet@pcsvet.cz</a> / ISSN 1213-6042</td><td bgcolor="white"><a href="#top" onmouseover="topoff.src=topon.src; window.status='nahoru';return true;" onmouseout="topoff.src='/images/7-pat-top-off.gif'; window.status='pcsvět';return true;"><img name="topoff" src="Velk%C3%A9%20pov%C3%ADd%C3%A1n%C3%AD%20o%20SQL%20%285.%29_soubory/7-pat-top-off.gif" alt="" border="0"></a></td></tr>
+</tbody></table>
+
+</td><td background="Velk%C3%A9%20pov%C3%ADd%C3%A1n%C3%AD%20o%20SQL%20(5.)_soubory/8-1.gif" valign="top" width="13"><img src="Velk%C3%A9%20pov%C3%ADd%C3%A1n%C3%AD%20o%20SQL%20%285.%29_soubory/8-2.gif" alt=""></td></tr>
+</tbody></table>
+
+<!-- Počítadlo.cz  počítadlo:527  uživatel:414 -->
+<script language="JavaScript" type="text/javascript">
+<!--
+Tmp=Math.floor(1000000 * Math.random());
+//document.write("<scr" + "ipt src=\"http://cnt1.pocitadlo.cz/counter.php?poc=527&ref="+escape(top.document.referrer)+"&depth="+screen.colorDepth+"&width="+screen.width+"&height="+screen.height+"&tmp="+Tmp+"\" language=\"JavaScript\" type=\"text/javascript\"></scr" + "ipt>");
+// -->
+</script>
+<noscript>
+<img src="http://cnt1.pocitadlo.czx/counter.php?poc=527&amp;ns=1" width="1" height="1" alt="" border="0">
+</noscript>
+<!-- Počítadlo.cz konec -->
+
+<!-- NAVRCHOLU.cz -->
+<script language="JavaScript" type="text/javascript">
+<!--
+pxDepth = screen.pixelDepth;
+if (!(pxDepth > 0))
+	pxDepth = screen.colorDepth;
+if (!(pxDepth > 0))
+	pxDepth = 0; 
+document.write("<img src=\"http://hit.navrcholu.cz/hit?id=3548;n=1;screenx=" + screen.width + ";screeny=" + screen.height + ";cdepth=" + pxDepth + ";ref=" + escape(top.document.referrer) + "\" width=\"1\" height=\"1\" alt=\"\">");
+// -->
+</script><img src="Velk%C3%A9%20pov%C3%ADd%C3%A1n%C3%AD%20o%20SQL%20%285.%29_soubory/hit" alt="" height="1" width="1">
+<noscript>
+<img src="http://hit.navrcholu.cz/hit?id=3548;n=1" width="1" height="1" alt="" border="0">
+</noscript>
+<!-- NAVRCHOLU.cz - konec -->
+
+<script src="Velk%C3%A9%20pov%C3%ADd%C3%A1n%C3%AD%20o%20SQL%20%285.%29_soubory/urchin.js" type="text/javascript">
+</script>
+<script type="text/javascript">
+_uacct = "UA-1217921-1";
+urchinTracker();
+</script>
+
+<div style="position: absolute; left: 0px; top: 0px; z-index: 1000000000 ! important; visibility: hidden; opacity: 1;" id="linkalert-box"><img src="Velk%C3%A9%20pov%C3%ADd%C3%A1n%C3%AD%20o%20SQL%20%285.%29_soubory/none-icon.png" id="linkalert-icon-1"></div></body></html>

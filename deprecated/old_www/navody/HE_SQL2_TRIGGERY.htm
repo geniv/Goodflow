@@ -1,0 +1,125 @@
+<!doctype html public "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=Windows-1250">
+<title>Triggery v SQL</title>
+<link rel='stylesheet' style='text/css' href='../function.css'>
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr>
+	<td style="background-image: url(../images/bghead.jpg);
+		background-position: right;
+		background-repeat: no-repeat;">
+	<table width="100%" border="0" cellpadding="0" cellspacing="0"
+		style="background-image:none">
+	<tr>
+		<td style="background-image:none" height="46"
+			width="15%"><img src="../images/title-cz.gif"
+			width="255" height="33"
+			alt="602SQL-Úplná dokumentace"
+			title="602SQL - Úplná dokumentace"
+			border="0"></td>
+		<td width="33%" align="right"><a href="../xml/html/top.html"><img class="floatno"
+			src="../images/index.gif"
+			width="15" height="16"
+			alt="Index" title="Zpět na obsah"
+			border="0" vspace="2"></a> &nbsp;
+			 </td>
+	</tr>
+	</table>
+	</td>
+</tr>
+</table><table class="navigace" border="0" width="100%"  bgcolor="#FFFFBF"><tr> <td
+width="20" align="center"><img class="floatno" src="../images/prev.gif"
+width="15" height="13" alt="&lt;&shy;" title="Předcházející téma"
+border="0"></td><td width="25%"><a
+href="HE_SQL2_STOREDPROCEDURE.htm">Rutiny uložené na serveru</a></td> <td width="25%"
+align="right"><img class="floatno" src="../images/up.gif" width="13"
+height="15" alt="Nahoru" title="O jednu úroveň výš" border="0"
+align="middle"></td><td width="25%"><a href="HE_SQL2_JAZYKSQL.htm">Jazyk SQL a jeho implementace</a></td>
+<td width="25%" align="right"><a
+href="HE_SQL2_SEKVENCE.htm">Sekvence</a></td><td width="20"
+align="center"><img class="floatno" src="../images/next.gif" width="15"
+height="13" alt="&shy;&gt;" title="Následující téma" border="0"></td>
+</tr></table>
+
+
+
+
+<h1><a name="he_sql2_triggery"></a>Triggery (SQL)</h1>
+
+<p>Trigger je nástroj, který zajišťuje automatické provedení programu v jazyce SQL při vložení, zrušení nebo změně záznamu v určité tabulce. Trigger může například zajistit, že:
+
+<ul>
+	<li>před vložením nového záznamu do tabulky bude provedena kontrola jeho obsahu a doplněny hodnoty některých sloupců;</li>
+	<li>po smazání záznamu se provedou následné akce;</li>
+	<li>při změně hodnoty určitého sloupce v záznamu se porovná stará a nová hodnota a na základě jejich vztahu se provedou další akce.</li>
+</ul>
+
+<p>Triggery zjednodušují tvorbu aplikací, protože přenášejí část práce databázové aplikace na server. Umožňují centralizované definování pravidel platných pro informační systém. Existuje-li například v podnikovém informačním systému tabulka zaměstnanců, lze pomocí triggerů popsat, jaké všechny akce musí být provedeny při přijetí nebo propuštění zaměstnance, změně platu nebo přeřazení do jiného oddělení. Tyto akce se naprogramují na jednom místě, ale budou sloužit všem aplikacím, které manipulují s tabulkou zaměstnanců. Dodržení pravidel pro údržbu evidence zaměstnanců pak bude zajišťovat server automaticky a konzistence dat bude zajištěna bez ohledu na možné chyby v měnících se aplikacích.</p>
+
+<p>Trigger je pojmenovaným objektem patřícím do databázové aplikace. Má tyto vlastnosti:
+
+<ul>
+	<li>je svázán s určitou tabulkou a reaguje na změny v této tabulce;</li>
+	<li>reaguje na právě jednu z SQL akcí <a href="HE_SQL2_INSERT.htm">INSERT</a>, <a href="HE_SQL2_DELETE.htm">DELETE</a> nebo <a href="HE_SQL2_UPDATE.htm">UPDATE</a>, triggery reagující na UPDATE mohou navíc <a href="../xml/html/updatetrigger.html">specifikovat množinu sloupců</a>, jejichž změna je spouští; trigger se spouští také prováděním obdobných akcí při práci s formuláři;</li>
+	<li>provádí se buď před (BEFORE) provedením výše specifikované akce, nebo po ní (AFTER);</li>
+	<li>pokud akce ovlivňuje více než jeden záznam, pak se může spouštět buď pro každý ovlivněný (tj. vložený, zrušený nebo změněný) záznam zvlášť, nebo pro všechny záznamy najednou;</li>
+	<li>může obsahovat podmínku, která se vyhodnotí před provedením triggeru a pokud není splněna, trigger nebude spuštěn;</li>
+	<li>specifikuje akci (zapsanou v jazyce SQL), která bude automaticky provedena, jakmile jsou splněny podmínky pro spuštění triggeru.</li>
+</ul>
+
+<p>Při provedení konkrétní akce mohou být splněny podmínky pro spuštění více než jednoho triggeru. V takovém případě jsou spuštěny po řadě všechny. V současné podobně návrhu normy SQL 3 není zahrnut způsob, jak by uživatel v textu triggerů mohl definovat pořadí jejich spouštění. Je pravděpodobné, že před definitivní redakcí normy bude tento způsob specifikován a poté bude přidán i do 602SQL.</p>
+
+<p>Provádění triggerů může měnit obsah databáze a tím spouštět další triggery. Spouštění triggerů se může do sebe libovolně zanořovat.</p>
+
+<p>Při provádění triggerů se nekontrolují práva (triggery se provádějí s maximálními právy). Aby díky tomu nemohlo dojít k neoprávněnému přístupu k datům, může triggery vytvářet pouze uživatel obsazený do <a href="../xml/html/role.html">role</a> <code>Author</code> v aplikaci, do níž trigger patří. V <a href="../xml/html/lockedappl.html">zamčené aplikaci</a> není tedy možné triggery vytvářet.</p>
+
+<p>INSERT a UPDATE triggery se nespouštějí při importu dat do tabulky<!-- ani při replikacích-->. DELETE triggery se nespouštějí při smazání tabulky jako objektu (při mazání záznamů samozřejmě ano). Spouštění triggerů při akcích vyvolaných aktivní referenční integritou závisí na nastavení <a href="../xml/html/sqloptions.html">příznaku kompatibility</a> SQLOPT_NO_REFINT_TRIGGERS (4096)</p>
+
+<p>Pro účely ladění může být výhodné <a href="../xml/html/tracelog.html">trasovat</a> spouštění triggerů (situace <code>TRACE_TRIGGER_EXEC</code>), triggery lze také <a href="../xml/html/debugger.html">debugovat</a> stejně jako procedury.</p>
+
+<h2>Triggery a transakce</h2>
+<p>Trigger se vždy provádí jako součást <a href="HE_SQL2_TRANSAKCE.htm">transakce</a>, v níž je spuštěn příkaz, který trigger spustil. <a href="../xml/html/errortransaction.html">Chyba</a>, která případně nastane při provádění triggeru, má stejné důsledky, jako chyba ve spouštěcím příkazu - trigger nelze odvolat bez odvolání tohoto příkazu, příkaz nelze odvolat bez odvolání změn provedených triggerem.</p>
+
+<p>Chyby <a href="../xml/html/handlingcategories.html">kategorie</a> "rollback exception condition", pokud se vyskytnou uvnitř triggeru, ignorují vnitřní deklarace handlerů (tj. handlery v triggeru a procedurách volaných tímto triggerem). Zachytit je lze pouze handlerem pro spouštěcí příkaz.</p>
+
+<p>Uvnitř triggerů se nesmí provádět žádné explicitní <a href="HE_SQL2_TRANSAKCE.htm">transakční příkazy</a>, v opačném případě nastane chybový <a href="../xml/html/handlingcategories.html">sqlstate</a> 2D000 (SQ_INVAL_TRANS_TERM).</p>
+
+
+
+
+<p class="subs">Seznam subsekcí:
+<ul class="subs">
+
+<li><a href="HE_SQL2_TRIGGERYPOPIS.htm">Popis triggeru</a>
+
+<li><a href="../xml/html/updatetrigger.html">Spouštění UPDATE triggerů s uvedeným seznamem sloupců</a>
+
+<li><a href="../xml/html/triggerform.html">Volání triggerů při ukládání změn ve formuláři</a>
+
+<li><a href="HE_SQL2_CREATETRIGGER.htm">Příkaz CREATE TRIGGER</a>
+
+<li><a href="HE_SQL2_ALTERTRIGGER.htm">Příkaz ALTER TRIGGER</a>
+
+<li><a href="HE_SQL2_DROPTRIGGER.htm">Příkaz DROP TRIGGER</a>
+
+<li><a href="HE_SQL2_EFTRIG.htm">Efektivita triggerů</a>
+
+</ul>
+<table class="navigace" border="0" width="100%"  bgcolor="#FFFFBF"><tr> <td
+width="20" align="center"><img class="floatno" src="../images/prev.gif"
+width="15" height="13" alt="&lt;&shy;" title="Předcházející téma"
+border="0"></td><td width="25%"><a
+href="HE_SQL2_STOREDPROCEDURE.htm">Rutiny uložené na serveru</a></td> <td width="25%"
+align="right"><img class="floatno" src="../images/up.gif" width="13"
+height="15" alt="Nahoru" title="O jednu úroveň výš" border="0"
+align="middle"></td><td width="25%"><a href="HE_SQL2_JAZYKSQL.htm">Jazyk SQL a jeho implementace</a></td>
+<td width="25%" align="right"><a
+href="HE_SQL2_SEKVENCE.htm">Sekvence</a></td><td width="20"
+align="center"><img class="floatno" src="../images/next.gif" width="15"
+height="13" alt="&shy;&gt;" title="Následující téma" border="0"></td>
+</tr></table>
+</body>
+</html>

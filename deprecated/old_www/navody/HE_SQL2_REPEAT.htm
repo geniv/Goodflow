@@ -1,0 +1,87 @@
+<!doctype html public "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=Windows-1250">
+<title>Příkaz REPEAT v SQL</title>
+<link rel='stylesheet' style='text/css' href='../function.css'>
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr>
+	<td style="background-image: url(../images/bghead.jpg);
+		background-position: right;
+		background-repeat: no-repeat;">
+	<table width="100%" border="0" cellpadding="0" cellspacing="0"
+		style="background-image:none">
+	<tr>
+		<td style="background-image:none" height="46"
+			width="15%"><img src="../images/title-cz.gif"
+			width="255" height="33"
+			alt="602SQL-Úplná dokumentace"
+			title="602SQL - Úplná dokumentace"
+			border="0"></td>
+		<td width="33%" align="right"><a href="../xml/html/top.html"><img class="floatno"
+			src="../images/index.gif"
+			width="15" height="16"
+			alt="Index" title="Zpět na obsah"
+			border="0" vspace="2"></a> &nbsp;
+			 </td>
+	</tr>
+	</table>
+	</td>
+</tr>
+</table><table class="navigace" border="0" width="100%"  bgcolor="#FFFFBF"><tr> <td
+width="20" align="center"><img class="floatno" src="../images/prev.gif"
+width="15" height="13" alt="&lt;&shy;" title="Předcházející téma"
+border="0"></td><td width="25%"><a
+href="HE_SQL2_WHILE.htm">Příkaz WHILE</a></td> <td width="25%"
+align="right"><img class="floatno" src="../images/up.gif" width="13"
+height="15" alt="Nahoru" title="O jednu úroveň výš" border="0"
+align="middle"></td><td width="25%"><a href="HE_SQL2_RIDICIPRIKAZY.htm">Řídící příkazy</a></td>
+<td width="25%" align="right"><a
+href="HE_SQL2_LEAVE.htm">Příkaz LEAVE</a></td><td width="20"
+align="center"><img class="floatno" src="../images/next.gif" width="15"
+height="13" alt="&shy;&gt;" title="Následující téma" border="0"></td>
+</tr></table>
+
+
+
+
+<h1><a name="he_sql2_repeat"></a>Příkaz REPEAT (SQL)</h1>
+
+<pre><code>příkaz_REPEAT ::= [ návěští : ] REPEAT příkaz … UNTIL podmínka END REPEAT [ návěští ];</code></pre>
+
+<p>Při provádění příkazu REPEAT se opakovaně provádějí <a href="HE_SQL2_PRIKAZY.htm"><i>příkazy</i></a> (resp. <a href="HE_SQL2_SLOZENYPRIKAZ.htm">složené příkazy</a>) v&nbsp;něm obsažené a vyhodnocuje se <a href="HE_SQL2_PODMINKA.htm"><i>podmínka</i></a>. Provádění skončí, jakmile <i>podmínka</i> bude mít hodnotu TRUE, provede se příkaz <a href="HE_SQL2_LEAVE.htm">LEAVE</a> nebo dojde k chybě.</p>
+
+<p>Je-li uvedeno koncové <i>návěští</i>, pak musí být uvedeno také stejné počáteční <i>návěští</i>. Uvnitř příkazu REPEAT nesmí být žádný příkaz označen stejným návěštím.</p>
+
+<br><p><b>Příklad použití:</b></p>
+
+<p>do tabulky vložit 10 záznamů a vzestupně je očíslovat </p>
+
+<pre><code>PROCEDURE Rep ();
+BEGIN
+  DECLARE i INT DEFAULT 1; 
+<b>  REPEAT</b>
+    INSERT INTO Tab3 (cislo) VALUES (i); 
+    SET i = i + 1; 
+<b>  UNTIL  i &gt; 10  END REPEAT; </b>
+END;</code></pre>
+
+
+
+<table class="navigace" border="0" width="100%"  bgcolor="#FFFFBF"><tr> <td
+width="20" align="center"><img class="floatno" src="../images/prev.gif"
+width="15" height="13" alt="&lt;&shy;" title="Předcházející téma"
+border="0"></td><td width="25%"><a
+href="HE_SQL2_WHILE.htm">Příkaz WHILE</a></td> <td width="25%"
+align="right"><img class="floatno" src="../images/up.gif" width="13"
+height="15" alt="Nahoru" title="O jednu úroveň výš" border="0"
+align="middle"></td><td width="25%"><a href="HE_SQL2_RIDICIPRIKAZY.htm">Řídící příkazy</a></td>
+<td width="25%" align="right"><a
+href="HE_SQL2_LEAVE.htm">Příkaz LEAVE</a></td><td width="20"
+align="center"><img class="floatno" src="../images/next.gif" width="15"
+height="13" alt="&shy;&gt;" title="Následující téma" border="0"></td>
+</tr></table>
+</body>
+</html>

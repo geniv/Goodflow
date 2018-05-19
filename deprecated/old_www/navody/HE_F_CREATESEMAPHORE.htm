@@ -1,0 +1,66 @@
+<!doctype html public "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=Windows-1250">
+<title>Procedura Create_semaphore</title>
+<link rel='stylesheet' style='text/css' href='../function.css'>
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000">
+
+
+
+<h2 class=function>Create_semaphore</h2>
+<img src='../images/sql.gif' width='44' height='16' border='0' alt='sql' align='middle' hspace='2'>
+
+
+<br><br>
+<div class='typ'>FUNCTION <b>Create_semaphore</b>(IN sname CHAR(31); IN snum INT) returns INT;
+</div>
+
+
+<p><b>Parametry</b></p>
+
+<table border=1 cols=2 frame=box rules=all width=393>
+
+<tr valign="top">
+<td width=22%><i>sname</i> </td>
+<td width=78%>jméno semaforu</td>
+</tr>
+
+<tr valign="top">
+<td width=22%><i>snum</i></td>
+<td width=78%>pro kolik vláken bude po vytvoření otevřen</td>
+</tr>
+</table><br>
+
+<p><b>Od verze:</b></p>
+
+<p>6.1</p>
+
+<p><b>Popis </b></p>
+
+<p>Procedura je určena výhradně k použití v příkazech jazyka SQL.</p>
+
+<p>Funkce vytvoří semafor označený jménem <i>sname</i> (pokud takový semafor dosud neexistuje) a vrátí jeho handle, který se použije ve všech dalších operacích vlákna s tímto semaforem.</p>
+
+<p>Pokud dvě vlákna volají tuto funkci se stejným jménem <i>sname</i>, pak obdrží handle ke stejnému semaforu - tyto handly však nemusí mít nutně stejnou hodnotu, proto každé vlákno musí používat vlastní handle získaný touto funkcí.</p>
+
+<p>Vytvořený semafor bude otevřen pro vstup <i>snum</i> vláken, což znamená, že <i>snum</i> vláken může provést funkci <code>Wait_for_semaphore</code> bez čekání, zatímco případná další vlákna budou v této funkci čekat na provedení funkce <code>Release_semaphore</code> jiným vláknem. Jako hodnota <i>snum</i> se nejčastěji používá 0 (semafor uzavřen) nebo 1 (semafor otevřen pro jedno vlákno). Hodnota <i>snum</i> se uplatní pouze u prvního vlákna volajícího funkci <code>Create_Semaphore</code> s určitým jménem, pokud funkce vrací handle k již existujícímu semaforu, hodnota <i>snum</i> se ignoruje.</p>
+
+<p>Více o synchronizaci vláken - <a href="../xml/html/threads.html">podrobnosti</a>.</p>
+
+<p><b>Hodnota funkce</b></p>
+
+<p>Funkce vrací při úspěchu identifikaci (handle) vytvořeného semaforu, při neúspěchu nulu.</p>
+
+<p><b>Viz</b></p>
+
+<ul class='viz'>
+  <li><a href="HE_F_CLOSESEMAPHORE.htm">Close_semaphore</a>
+  <li><a href="HE_F_RELEASESEMAPHORE.htm">Release_semaphore</a>
+  <li><a href="HE_F_WAITFORSEMAPHORE.htm">Wait_for_semaphore</a>
+</ul>
+
+</body>
+</html>

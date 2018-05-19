@@ -1,0 +1,507 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head>
+<meta http-equiv="Content-Type" content="text/html; charset=Windows-1250"><title>8. Programování s SQL</title>
+
+
+	
+	<link rel="STYLESHEET" type="text/css" href="kap8_soubory/main.css">
+	<style type="text/css"><!--:hover { font-weight: bold;         color: red }
+--></style></head><body alink="Blue" background="kap8_soubory/pozadi.jpg" vlink="Blue">
+<a name="k"></a>
+<a href="http://www.cs.vsb.cz/amalka/tomica/sql/kap7.html"><img src="kap8_soubory/prev.gif" alt="7. Integritní omezení v SQL"></a>
+<a href="http://www.cs.vsb.cz/amalka/tomica/sql/zaver.html"><img src="kap8_soubory/next.gif" alt="Závěrečné příklady"></a>
+<a href="http://www.cs.vsb.cz/amalka/tomica/sql/index.html"><img src="kap8_soubory/toc.gif" alt="Obsah"></a>
+<hr color="Blue" size="1">
+<h1>8. Programování s SQL</h1>
+<dt><a href="#k1">8.1 Hostitelská verze SQL</a></dt>
+<dt><a href="#k2">8.2 Jazyk modulů</a></dt>
+<dt><a href="#k3">8.3 Transakce v SQL</a></dt>
+<dt><a href="#k4">8.4 Za hranice relační úplnosti</a></dt>
+<h2><a name="k1"></a>8.1 Hostitelská verze SQL</h2>
+<a href="#k"><img src="kap8_soubory/toc.gif" alt="Obsah 8. kapitoly"></a>
+<p>Pro zpracování dat v relační databázi je potřebná verze SQL v
+hostitelské verzi. Až na malé výjimky platí, že každý příkaz SQL může
+být použit beze zbytku v hostitelském jazyku (opak neplatí). Příkazy
+SQL mohou obsahovat odkazy na proměnné v hostitelském jazyku Těmto
+proměnným je předsazen znak : . Lze je použít za INTO v SELECT nebo
+FETCH. SELECT, WHERE nebo HAVING, SET v UPDATE, VALUES v INSERT, mohou
+být uveden jako prvek skalárního výrazu v SELECT, WHERE, HAVING nebo
+SET (ne VALUES). kde výraz se vyhodnocuje jako hodnota, která má být
+vybrána, porovnána nebo přiřazena.</p>
+<p>Předpokládejme např., že hostitelským jazykem je PL/l. Všechny
+příkazy SQL v programu napsaném v PL/I mají předtext EXEC SQL a jsou
+ukončeny END_EXEC nebo ; . Základní relace (i pohledy) by měly být
+definovány příkazem</p>
+<pre>EXEC SQL DECLARE jméno TABLE (...);</pre>
+<p class="BEZ">který, na rozdíl od příkazů SQL v interakční verzi, je
+pouze deklarativní. Nevytváří se tedy skutečné relace, definice jsou
+uvedeny pouze z dokumentačních důvodů. Kompilátoru jsou však poskytnuty
+možnosti určitých kontrol.</p>
+<p> Rozhraní mezi výsledkem SELECT-FROM-WHERE blokem a PL/1 je snadné,
+je-li výsledek jednoprvkový. Pak lze užít INTO. Obecně však rozhraní
+mezi SQL a programovacím jazykem. dovoluje přenést pouze jeden řádek,
+bud' z programu do databáze nebo naopak. Toto omezení je dáno pro
+zjednodušení situace, která nastává v souvislosti s běžnými
+programovacími jazyky ve kterých nejsou k dispozici možnosti pro
+zacházení s množinami řádků proměnné délky Do hostitelského jazyka
+vnořený příkaz SQL SELECT vyžaduje použití INTO specifikujíc proměnné,
+kam budou hodnoty z databáze přiřazeny. Typy proměnných musí být
+kompatibilní s odpovídajícími typy atributů relační databáze. V SQL
+existuje mechanizmus tzv. kurzoru pro specifikaci množiny řádků, na
+kterých je pak možné operovat způsobem "po jednom" v čase.</p>
+<pre>EXEC SQL DECLARE CURSOR kdo_co
+         FOR SELECT (jmeno_c, isbn)
+             FROM Rezervace, Ctenar
+             WHERE Rezervace.cislo= Ctenar.cislo AND d_rez &gt; :X;
+EXEC OPEN kdo_co
+     loop:
+       EXEC SQL FETCH kdo_co
+       INTO(:IJMÉNO ČT,:IISBN)
+     end loop</pre>
+
+<p>Kurzor je tedy vlastně pojmenovaný použitý příkaz SELECT. Chceme-li
+přistoupit ke zpracování řádků daných kurzorem, je nutné kurzor otevřít
+příkazem OPEN. Příkaz FETCH zajistí umístění kurzoru na následující
+prvek odpovědi dané vyhodnocením příkazu SELECT a dosazení příslušných
+komponent prvku do proměnných hostitelského jazyka.</p>
+<p>Zpětná vazba po vyvolání příkazu SQL se provádí pomocí SQL
+Communication Area. speciálně v proměnné SQLCODE. Navrácená 0 znamená
+úspěšnost operace, hodnota +l00 indikuje úspěšnost operace s
+upozorněním na výskyt nějakých výjimečných podmínek, záporní hodnota
+znamená výskyt chyby. Principiálně za každým příkazem SQL by měl
+následovat test na SQLCODE.</p>
+<p>Průchod odpovědí na dotaz lze tedy řídit testem proměnné SQLCODE.
+Příkaz FETCH vlastně realizuje setříděné procházení odpovědi na dotaz
+daný příkazem SELECT v definici kurzoru.</p>
+<p>V definici kurzoru je možné použít proměnné X, Y apod., které se v
+SELECT příkazu zapisují jako :X, :Y Hodnoty proměnných jsou
+zpřístupněny při provedení OPEN, takže kurzor může poskytovat pro různá
+volání OPEN různé množiny řádků. V našem příkladě lze např. takto
+parametrizovat d_rez. Definice kurzoru s příkazem SELECT má zcela
+deklarativní charakter, tj. SELECT se v tomto místě nevolá, to se stane
+až při otevření kurzoru.</p>
+<p>Jestliže kurzor je v nějaké pozici, lze odpovídající (CURRENT) prvek bud' změnit nebo odstranit příkazy UPDATE, resp. DELETE.</p>
+<pre>EXEC SQL UPDATE Exemplar
+         SET cena = cena + :ncena
+         WHERE zeme_vydani = `GB'
+         WHERE CURRENT OF kur_exem;
+EXEC SQL DELETE
+         FROM Kniha
+         WHERE autor = :kdo
+         WHERE CURRENT OF kur_knuh;</pre>
+<p>Ovšem aby se mohla provést aktualizace kurzorem kur_exem, je nutné jej definovat s klauzulí FOR UPDATE OF zeme_vydani.</p>
+<p>Zbytek manipulačních příkazů (až na jisté výjimky) nevyžaduje
+kurzor. Patří sem použití SELECT dávající jednoprvkovou relaci, INSERT,
+DELETE a UPDATE.</p>
+<pre>EXEC SQL SELECT jmeno, adresa
+         INTO :j_kdo, :a_kdo
+         FROM Ctenar
+         WHERE cislo = H54;</pre>
+<p>Je-li v odpovědi pouze jeden takový čtenář (a měl by být), SQLCODE 0. neexistuje-li. SQLCODE
+=+100, je-li jich více, SQLCODE bude mít zápornou hodnotu.</p>
+<pre>EXEC SQL INSERT
+         INTO Ctenar(cislo, jmeno) 
+         VALUES(:cislo,:jmeno);</pre>
+<p class="BEZ">tj. hodnota adresa bude NULL.</p>
+<pre>EXEC SQL UPDATE Exemplar
+         SET cena = cena + :ncena
+         WHERE zeme_vydani = `GB';
+EXEC SQL DELETE
+         FROM Kniha
+         WHERE autor = :kdo;</pre>
+<h2><a name="k2"></a>8.2 Jazyk modulů</h2>
+<a href="#k"><img src="kap8_soubory/toc.gif" alt="Obsah 8. kapitoly"></a>
+<p>Standard SQL dovoluje dvě metody pro použití manipulačních příkazů v
+aplikačních programech. Kromě již zmíněného zapojení příkazů SQL přímo
+do programu pomocí EXEC SQL lze použít ještě tzv. jazyk modulů. Jde o
+jednoduchý jazyk umožňující vytvářet procedury. Procedura se skládá z
+hlavičky obsahující jméno procedury, deklarace parametrů a jednoduchého
+manipulačního příkazu v SQL. Např. procedura</p>
+<pre>PROCEDURE Vyrad_kus
+             SQLCODE
+             inv_c_param INTEGER;
+          DELETE
+          FROM Exemplar
+          WHERE Exemplar.id = inv_c_param</pre>
+<p class="BEZ">definuje postup vyřazení exempláře knihy z knihovny.
+SQLCODE vrací kód úspěšnosti provedení procedury programu, odkud byla
+procedura volána.</p>
+<p>Modul se deklaruje vyhrazeným slovem MODULE, jménem modulu, jménem
+programovacího jazyka, kam bude modul připojen, deklarací kurzorů a
+seznamem procedur. Syntaxi lze v první úrovni popsat takto:</p>
+<pre>MODULE [jméno-modulu]
+LANGUAGE programovací-jazyk
+AUTHORIZATION c-identifikátor
+[deklarace-kurzorů]...
+deklarace-procedury ...</pre>
+<p>Program v hostitelském jazyce volá odděleně přeložený program
+napsaný v SQL místo v hostitelském jazyce. Není tedy nutné měnit syntax
+hostitelského jazyka. Např. v
+PASCALu by bylo možné (pří vhodném zařazení procedury do modulu) použít
+proceduru VYŘAĎ_KUS takto:</p>
+<p><u><b>var</b></u></p>
+<pre>INVC: integer; /* pro INV_Č */
+SQLC: integer; /* pro SQLCODE */</pre>
+<p><u><b>begin</b></u></p>
+<pre>INVC := 85671
+VYŘAĎ KUS(INVC) /* vyřadí čtenáře 85671 */</pre>
+<p><u><b>end</b></u></p>
+<p>Výhodou toho, že existují dvě verze jazyka v rámci jednoho systému,
+je možnost odladit databázové části aplikačního programu interaktivně.</p>
+<h2><a name="k3"></a>8.3 Transakce v SQL</h2>
+<a href="#k"><img src="kap8_soubory/toc.gif" alt="Obsah 8. kapitoly"></a>
+<p>Standardní SQL podporuje koncepci transakce v rámci hostitelského
+jazyka. Transakce je definována jako posloupnost příkazů SQL formující
+jednotku zotavení z chyb a souběžného zpracování.</p>
+<p>Transakce jsou implicitní v tom smyslu, že první příkaz SQL znamená
+počátek transakce. Každá transakce končí vyvoláním bud' příkazu COMMIT
+WORK (normální ukončení) nebo ROLLBACK WORK (nenormální ukončení).</p>
+<p>V případě chyby či splnění dané podmínky se zpracování transakce
+přeruší a databáze se uvede do stavu před transakcí, v opačném případě
+dojde k provádění příkazů a k dokončení transakce a vytvoření
+permanentní verze nové databáze. Příkazy jsou z množiny manipulačních
+příkazů jazyka SQL.</p>
+<p>Lze se setkat i s jiným formátem transakce:</p>
+<pre>TRANSACTION jméno-transakce
+    WHENEVER {ERROR I podmínka} ROLLBACK
+    příkazy
+COMMIT END</pre>
+<p>Jako příklad uveďme transakci, která by měla přehodnotit ceny všech
+německých knih původně vedených v DM na ceny v českých korunách.</p>
+<pre>TRANSACTION Prehodnoceni
+    WHENEVER ERROR ROLLBACK
+    UPDATE Exemplar
+    SET cena = cena* 18 WHERE zeme_vydani = 'SRN'
+COMMIT END</pre>
+<h2><a name="k4"></a>8.4 Za hranice relační úplnosti</h2>
+<a href="#k"><img src="kap8_soubory/toc.gif" alt="Obsah 8. kapitoly"></a>
+<p>Dokázat, že SQL je relačně úplný jazyk není obtížné, i když důkaz je
+proveden na základě možnosti rozložit dotaz na poddotazy, tj.
+jednotlivé relační operace relačního výrazu se realizuj í samostatnými
+příkazy SQL. Nalézt obecně k libovolnému relačnímu výrazu ekvivalentní
+SELECT blok by bylo zřejmě obtížné, ne-li nemožné.</p>
+<p>Jde vlastně o to. nalézt pro každou operaci relační algebry odpovídající vyjádření v SQL.</p>
+<dl>
+<ul type="circle">
+<li>sjednocení T:=R U S
+<pre>INSERT INTO T
+       SELECT * FROM R
+INSERT INTO T
+       SELECT * FROM S</pre>
+</li><li>rozdíl T:=R - S
+<pre>INSERT INTO T
+       SELECT * FROM R
+DELETE FROM T
+       WHERE K IN (SELECT K FROM S)
+<i>kde K je klíčem v R i v S.</i></pre>
+</li><li>kartézský součin T:=R x S
+<pre>INSERT INTO T
+       SELECT R.*,S.* F
+       FROM R,S</pre>
+</li></ul>	   
+</dl>	   
+<p>Selekce a projekce vyplývají přímo z vlastností základního SELECT
+bloku. Řada relačních SŘBD obsahuje konstrukty jdoucí za rámec
+relačních jazyků. Např. ORACLE-SQL dovoluje použití rekurzivního
+SELECT-FROM-WHERE bloku, kterým lze realizovat dotazy na tranzitivní
+uzávěr relace, které nejsou v původní verzi SQL vyjádřitelné.</p>
+<p>Předpokládat budeme schéma relace</p>
+<pre>JE_ČÁSTÍ(OBJEKT.NADOBJEKT,POČ STRAN)</pre>
+<p class="BEZ">vyjadřující přímé vztahy mezi objekty a jejich
+nadobjekty. Aplikační doménou bude dokumentace o daných objektech. Za
+objekty lze zvolit např. jisté projekty, tj. v relaci JE_ČASTÍ* se
+třeba nachází trojice (RDBS,IS,500), kde RDBS znamená relační
+databázový systém, tj. platí, že RDBS je částí IS a jeho dokumentace
+činí 500 stran. Příklad relace JE ČÁSTÍ* je dán orientovaným grafem na
+obr.1.</p>
+<center><img src="kap8_soubory/obr1.htm">
+<br><i>Obr. č.1 Relace JE_ČÁSTÍ*</i></center>
+<p>Všimněme si, že nejde nutně o stromovou strukturu, DODÁVKY patří do
+dokumentace jak svazku EXTERNÍ_VAZBY, tak ke svazku APLIKACE.
+Dokumentace objektu neznamená, že se jedná o podčást dokumentace
+nadobjektu, spíše jde o další navazující svazek. Pracovníci používající
+IS jsou školeni tak, že pro vyškolení v nějakém objektu O musí
+absolvovat celou cestu v grafu, počínaje IS a objektem O konče. Ke
+školení obdrží vždy kompletní dokumentaci objektů na dané cestě.</p>
+<p>Dále ještě uvažujme relaci</p>
+<pre>SVAZKY(<u>OBJEKT</u>,AUTOR,DATUM VYDÁNÍ,VERZE)</pre>
+<p>Tranzitivní uzávěr relace představuje pouze jeden z možných typů rekurzivních dotazů. Jde např. o dotaz</p>
+<b>D41.</b> Najdi všechny podobjekty objektu APLIKACE <p> </p>
+<p>tj. všechny navazující díly dokumentace k dílu APLIKACE.</p>
+<p>Jde tedy vlastně o dotaz na jistou dosažitelnost uzlů ve směru šipek
+v daném grafu. Užitečné dotazy jsou však i proti směru těchto šipek.
+Např. bychom se mohli ptát na všechna školení, která předcházejí kurzu
+DODÁVKY (jde o APLIKACE, EXTERNÍ VAZBY, IS).</p>
+<p>Jiným typem dotazu je <i> vyčíslení všech cest</i> z daného uzlu do všech listů, tj. např. dotaz</p>
+<b>D41'. </b> "Najdi úplnou strukturu objektu IS se všemi navazujícími díly do všech úrovní".
+Na obr. 2 je stromová reprezentace výsledku takového dotazu.<p></p>
+<center><img src="kap8_soubory/obr2.htm">
+<br><i>Obr. č.2 Cesty dané relací JE_ČÁSTÍ*</i></center>
+<p>K dotazu tohoto typu lze přidat také požadavek na dílčí agregaci
+shora dolů, např. celkový počet stránek pro daný objekt na dané cestě.
+Obsahuje-li např. relace JE ČASTÍ* následující řádky</p>
+
+<table align="center" border="0" cellpadding="10" cellspacing="0">
+<tbody><tr>
+	<td>IS</td>	<td>dokumentace</td>	<td>20</td>
+</tr>
+<tr>
+	<td>aplikace</td>	<td>IS</td>	<td>300</td>
+</tr>
+<tr>
+	<td>externí_vazby</td>	<td>IS</td>	<td>170</td>
+</tr>
+<tr>
+	<td>dodávky</td>	<td>externí_vazby</td>	<td>20</td>
+</tr>
+<tr>
+	<td>dodávky</td>	<td>aplikace</td>	<td>20</td>
+</tr>
+<tr>
+	<td>RDBS</td>	<td>IS</td>	<td>800</td>
+</tr>
+<tr>
+	<td>výpůjčky</td>	<td>aplikace</td>	<td>25</td>
+</tr>
+<tr>
+	<td>rezervace</td>	<td>aplikace</td>	<td>12</td>
+</tr>
+<tr>
+	<td>povinné</td>	<td>dodávky</td>	<td>2</td>
+</tr>
+<tr>
+	<td>kupované</td>	<td>dodávky</td>	<td>6</td>
+</tr>
+<tr>
+	<td>výpočetní služby</td>	<td>externí_vazby</td>	<td>130</td>
+</tr>
+</tbody></table>
+
+<p>pak celkový počet stránek pro objekt DODÁVKA na cestě přes APLIKACE
+by byl 340, přes EXTERNÍ_VAZBY 190. Aplikuje se tedy agregační funkce
+SUM. Výsledek lze např. interpretovat jako počet stránek, které obdrží
+pracovník na daném školení.</p>
+<p>Konečně <i>agregace cest</i> znamená uvažovat opět graf na obr.2.
+aplikovat eventuálně nějaký výpočet na jednotlivých cestách a provést
+jisté součty při spojení cest do grafu na obr. 2. V naší aplikaci by
+byl smysluplný jednoduchý dotaz</p>
+<b>D41".</b> Kolik stránek až může obdržet pracovník pro objekt DODÁVKA
+(tj. do výsledku se zahrnují dokumentace jak od cesty přes APLIKACE,
+tak přes EXTERNÍ VAZBY).
+V dotazu D41" jsou samozřejmě zahrnuty některé díly dokumentace
+dvakrát. ORACLE-SQL podporuje dotazy na tranzitivní uzávěr a vyčíslení
+všech cest.
+<b>D41"(ORACLE-SQL)</b>
+<pre>SELECT level, objekt, nadobjekt
+FROM Je_částí
+CONNECT BY PRIOR objekt = nadobjekt
+START WITH nadobjekt = `IS'</pre>
+<p>Výsledkem bude speciálně uspořádaná tabulka obsahující řádky</p>
+<table align="center" border="0" cellpadding="10" cellspacing="0">
+<tbody><tr>
+	<td>1</td>	<td>RDBS</td>	<td>IS</td>
+</tr>
+<tr>
+	<td>1</td>	<td>aplikace</td>	<td>IS</td>
+</tr>
+<tr>
+	<td>2</td>	<td>výpůjčky</td>	<td>aplikace</td>
+</tr>
+<tr>
+	<td>2</td>	<td>rezervace</td>	<td>aplikace</td>
+</tr>
+<tr>
+	<td>2</td>	<td>dodávky</td>	<td>aplikace</td>
+</tr>
+<tr>
+	<td>3</td>	<td>povinné</td>	<td>dodávky</td>
+</tr>
+<tr>
+	<td>3</td>	<td>kupované</td>	<td>dodávky</td>
+</tr>
+<tr>
+	<td>1</td>	<td>externí_vazby</td>	<td>IS</td>
+</tr>
+<tr>
+	<td>2</td>	<td>dodávky</td>	<td>externí_vazby</td>
+</tr>
+<tr>
+	<td>3</td>	<td>povinné</td>	<td>dodávky</td>
+</tr>
+<tr>
+	<td>3</td>	<td>kupované</td>	<td>dodávky</td>
+</tr>
+<tr>
+	<td>2</td>	<td>výpočetní služby</td>	<td>externí vazby</td>
+</tr>
+</tbody></table>
+
+
+<p>Uspořádání pomocí ORDER BY nemá smysl, protože se tím ztratí
+struktura cest. Uspořádání dané explicitně ve výsledku ovšem omezuje
+použití výsledku v dalším zpracování. Výsledek totiž není skutečná
+tabulka ve smyslu SQL.</p>
+<p>Použitý konstrukt má ovšem jistá omezení. Např. nelze generovat pro
+jednotlivé podobjekty celkový počet stránek daný cestou od IS. CONNECT
+BY také neumožňuje formulovat spojení více relací, tj. nelze např.
+připojit k výsledným řádkům informace z relace SVAZKY.</p>
+<p>Jak se vypořádat s omezením SQL při řešení uvedených problémů, je
+navrženo v [Fr93]. Užitečná může být speciální relace obsahující
+vyčíslení všech cest (jejich krajních bodů) spolu s některými dalšími
+informacemi. V našem příkladě by mohla mít tvar daný tab. 5. Nazveme ji
+VVC (tab.6 obsahuje pouze část danou nadobjektem IS.)</p>
+<table align="center" border="1" cellpadding="4" cellspacing="1">
+<caption align="top"><i>Tabulka 5 Relace VVC*</i></caption>
+<tbody><tr align="left" bgcolor="Lime">
+    <th colspan="6"><b>VVC</b></th>
+</tr>
+<tr align="center" bgcolor="White">
+    <th>PČ</th> 
+	<th>ÚROVEŇ</th> 
+	<th>OBJEKT</th>
+	<th>NADOBJEKT</th> 
+	<th>MAX_PODSTROM</th> 
+	<th>SUMA</th>
+</tr>
+<tr align="center">
+	<td>1</td>
+	<td>1</td>
+	<td>RDBS</td>
+	<td>IS</td>
+	<td>1</td>
+	<td>820</td>
+</tr>
+<tr align="center">
+	<td>2</td>
+	<td>1</td>
+	<td>aplikace</td>
+	<td>IS</td>
+	<td>7</td>
+	<td>320</td>
+</tr>
+<tr align="center">
+	<td>3</td>
+	<td>2</td>
+	<td>výpůjčky</td>
+	<td>IS</td>
+	<td>3</td>
+	<td>345</td>
+</tr>
+<tr align="center">
+	<td>4</td>
+	<td>2</td>
+	<td>rezervace</td>
+	<td>IS</td>
+	<td>4</td>
+	<td>332</td>
+</tr>
+<tr align="center">
+	<td>5</td>
+	<td>2</td>
+	<td>dodávky</td>
+	<td>IS</td>
+	<td>7</td>
+	<td>340</td>
+</tr>
+<tr align="center">
+	<td>6</td>
+	<td>3</td>
+	<td>povinné</td>
+	<td>IS</td>
+	<td>6</td>
+	<td>342</td>
+</tr>
+<tr align="center">
+	<td>7</td>
+	<td>3</td>
+	<td>kupované</td>
+	<td>IS</td>
+	<td>7</td>
+	<td>346</td>
+</tr>
+<tr align="center">
+	<td>8</td>
+	<td>1</td>
+	<td>externí_vazby</td>
+	<td>IS</td>
+	<td>12</td>
+	<td>190</td>
+</tr>
+<tr align="center">
+	<td>9</td>
+	<td>2</td>
+	<td>dodávky</td>
+	<td>IS</td>
+	<td>11</td>
+	<td>210</td>
+</tr>
+<tr align="center">
+	<td>10</td>
+	<td>3</td>
+	<td>povinné</td>
+	<td>IS</td>
+	<td>10</td>
+	<td>212</td>
+</tr>
+<tr align="center">
+	<td>11</td>
+	<td>3</td>
+	<td>kupované</td>
+	<td>IS</td>
+	<td>11</td>
+	<td>216</td>	
+</tr>
+<tr align="center">
+	<td>12</td>
+	<td>2</td>
+	<td>výpočetní_služby</td>
+	<td>IS</td>
+	<td>12</td>	
+	<td>150</td>
+</tr>
+</tbody></table>
+<p>Pořadové číslo PČ udává pořadí uzlu v průchodu stromem, který se v
+teorii algoritmů nazývá preorder, max_podstrom je pč nejvzdálenějšího
+uzlu podstromu daného uzlem ve sloupci OBJEKT. Např pro APLIKACE v
+řádku s PČ = 2 je to uzel s pč = 7, pro EXTERNÍ VAZBY na řádku 8 činí
+hodnota max_podstrom=12.</p>
+<p>Je jisté, že tuto tabulku lze zatím získat pouze procedurálním způsobem (např. v jazyku 4GL nebo hostitelském jazyku).</p>
+<p>Různé rekurzivní dotazy lze pak řešit snadno nad touto tabulkou.</p>
+<b>D41.</b>
+<pre>SELECT DISTINCT objekt, nadobjekt
+FROM VVC
+WHERE nadobjekt = `IS'</pre>
+<p>Dotaz D41' rozšířený o součty stránek svazků na uvažovaných cestách z uzlu IS v grafu získáme přímo jako</p>
+<b>D41'</b> 
+<pre>SELECT *
+FROM VVC
+WHERE nadobjekt = `IS'
+ORDER BY pč</pre>
+<p>Dotaz D41" vyžaduje GROUP BY a použití SUM.</p>
+<b> D41"</b>
+<pre>SELECT objekt, nadobjekt, SUM(suma)
+FROM VVC
+WHERE nadobjekt = `IS' GROUP BY nadobjekt, objekt</pre>
+<p>Zkusíme nyní modifikovat dotaz D41 tak, že budeme navíc vyžadovat
+eliminaci objektu DODÁVKA včetně všech jeho podobjektů. K tomu se
+využije znalost hodnot atributu max_podstrom.</p>
+<pre>SELECT DISTINCT prvni.objekt, prvni.nadobjekt
+FROM VVC prvni, VVC druha
+WHERE prvni.nadobjekt = `IS' AND druha.nadobjekt = `IS'
+      AND druha.objekt = `dodavka'
+	  AND (prvni.pč NOT BETWEEN druha.pč AND
+	  druha.max_podstrom)</pre>
+<p>Z relace VVC* v tab. 6 tak budou vyloučeny řádky 9,10,11.</p>
+<p>Závěrem ještě ukážeme, jak lze v ORACLE-SQL řešit spojení s jinými
+relacemi, tj. dotaz D41 ve verzi s přidanými informacemi o objektech.</p>
+<pre>SELECT DISTINCT objekt, autor, datum_vydani, verze
+FROM svazky
+WHERE objekt IN (SELECT objekt                          
+		 FROM Je_částí
+		 CONNECT BY PRIOR objekt = nadobjekt
+		 START WITH nadobjekt = `IS')</pre>
+<hr color="Blue" size="1">
+<a href="http://www.cs.vsb.cz/amalka/tomica/sql/kap7.html"><img src="kap8_soubory/prev.gif" alt="7. Integritní omezení v SQL" align="left"></a>
+<a href="http://www.cs.vsb.cz/amalka/tomica/sql/zaver.html"><img src="kap8_soubory/next.gif" alt="Závěrečné příklady" align="left"></a>
+<a href="http://www.cs.vsb.cz/amalka/tomica/sql/index.html"><img src="kap8_soubory/toc.gif" alt="Obsah" align="left"></a>
+</body></html>

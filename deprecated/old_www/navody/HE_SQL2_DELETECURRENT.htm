@@ -1,0 +1,112 @@
+<!doctype html public "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=Windows-1250">
+<title>Příkaz DELETE CURRENT OF (SQL)</title>
+<link rel='stylesheet' style='text/css' href='../function.css'>
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr>
+	<td style="background-image: url(../images/bghead.jpg);
+		background-position: right;
+		background-repeat: no-repeat;">
+	<table width="100%" border="0" cellpadding="0" cellspacing="0"
+		style="background-image:none">
+	<tr>
+		<td style="background-image:none" height="46"
+			width="15%"><img src="../images/title-cz.gif"
+			width="255" height="33"
+			alt="602SQL-Úplná dokumentace"
+			title="602SQL - Úplná dokumentace"
+			border="0"></td>
+		<td width="33%" align="right"><a href="../xml/html/top.html"><img class="floatno"
+			src="../images/index.gif"
+			width="15" height="16"
+			alt="Index" title="Zpět na obsah"
+			border="0" vspace="2"></a> &nbsp;
+			 </td>
+	</tr>
+	</table>
+	</td>
+</tr>
+</table><table class="navigace" border="0" width="100%"  bgcolor="#FFFFBF"><tr> <td
+width="20" align="center"><img class="floatno" src="../images/prev.gif"
+width="15" height="13" alt="&lt;&shy;" title="Předcházející téma"
+border="0"></td><td width="25%"><a
+href="HE_SQL2_UPDATECURRENT.htm">Příkaz UPDATE CURRENT OF</a></td> <td width="25%"
+align="right"><img class="floatno" src="../images/up.gif" width="13"
+height="15" alt="Nahoru" title="O jednu úroveň výš" border="0"
+align="middle"></td><td width="25%"><a href="HE_SQL2_KURZORY.htm">Kurzory v SQL</a></td>
+<td width="25%" align="right"><a
+href="HE_SQL2_CLOSE.htm">Příkaz CLOSE</a></td><td width="20"
+align="center"><img class="floatno" src="../images/next.gif" width="15"
+height="13" alt="&shy;&gt;" title="Následující téma" border="0"></td>
+</tr></table>
+
+
+
+
+<h1><a name="he_sql2_deletecurrent"></a>Příkaz DELETE CURRENT OF (SQL)</h1>
+
+<pre><code>příkaz_DELETE_CURRENT_OF ::= DELETE [ FROM tabulka ] WHERE CURRENT OF jméno_kurzoru;</code></pre>
+
+<p><a href="HE_SQL2_PRIKAZY.htm">Příkaz</a> DELETE CURRENT OF (neboli <em>Positioned DELETE</em>) zruší řádku, na níž je nastaven <a href="HE_SQL2_KURZORY.htm">kurzor</a> zadaný <i>jménem_kurzoru</i>. <i>Jméno_kurzoru</i> musí být buď deklarováno v&nbsp;<a href="HE_SQL2_DEKLARACEKURZORU.htm">deklaraci kurzoru</a> nebo v příkazu <a href="HE_SQL2_FOR.htm">FOR</a> nebo musí označovat dotaz patřící do aplikace a uložený v&nbsp;databázi. Kurzor musí <a href="../xml/html/query_insdeledit.html"><a href="../xml/html/query_insdeledit.html">umožňovat rušení záznamů</a>.</p>
+
+<p>Je-li v&nbsp;příkazu uvedena <i>tabulka</i>, musí to být (jediná) tabulka zpřístupněná zadaným kurzorem.</p>
+
+<p>Pokud zadaný kurzor není otevřen), nastane chybový <a href="../xml/html/handlingcategories.html">sqlstate</a> 34000 (SQ_INVALID_CURSOR_NAME), pokud není nastaven na některý řádek (např. je před prvním nebo za posledním řádkem), nastane chybový <a href="../xml/html/handlingcategories.html">sqlstate</a> 24000 (SQ_INVALID_CURSOR_STATE). Je-li příkaz proveden v transakci READ ONLY, nastane chybový <a href="../xml/html/handlingcategories.html">sqlstate</a> 25006 (SQ_TRANS_STATE_RDONLY).</p>
+
+<br><p><b>Příklad použití:</b></p>
+
+<p>Změňte cenu u položek ceníku takto: položky ceníku začínající na X snižte o 10%, začínající na A zvyšte o 100%, ostatní smažte. Je to obdoba příkladu použitého pro demonstraci příkazu FOR:</p>
+
+<pre><code>PROCEDURE ZmenaCeniku();
+BEGIN 
+  DECLARE err_notfound BIT DEFAULT FALSE;
+  DECLARE CONTINUE HANDLER FOR SQLSTATE '02000' 
+    BEGIN SET err_notfound=TRUE; END;
+  DECLARE curcen SENSITIVE CURSOR FOR 
+    SELECT cislo_pol, cena
+    FROM Cenik
+  FOR UPDATE; 
+  DECLARE Polozka CHAR(20); 
+  DECLARE Cena NUMERIC(14,2); 
+  OPEN curcen; 
+  LabelLoop: LOOP 
+     FETCH NEXT FROM curcen INTO Polozka, Cena; 
+     IF err_notfound IS TRUE THEN LEAVE LabelLoop; END IF; 
+     IF SUBSTRING(Polozka FROM 1 FOR 1) = 'X' THEN 
+       UPDATE SET Cena = Cena*0.9 WHERE CURRENT OF curcen;
+     ELSEIF SUBSTRING(Polozka FROM 1 FOR 1) = 'A' THEN 
+       UPDATE SET Cena = Cena*2 WHERE CURRENT OF curcen;
+     ELSE
+<b>       DELETE WHERE CURRENT OF curcen;</b>
+     END IF; 
+  END LOOP LabelLoop; 
+  CLOSE curcen; 
+END;</code></pre>
+
+<p><b>Viz</b></p>
+
+<ul class='viz'>
+  <li><a href="HE_SQL2_DELETE.htm">DELETE (Searched)</a>
+</ul>
+
+
+
+<table class="navigace" border="0" width="100%"  bgcolor="#FFFFBF"><tr> <td
+width="20" align="center"><img class="floatno" src="../images/prev.gif"
+width="15" height="13" alt="&lt;&shy;" title="Předcházející téma"
+border="0"></td><td width="25%"><a
+href="HE_SQL2_UPDATECURRENT.htm">Příkaz UPDATE CURRENT OF</a></td> <td width="25%"
+align="right"><img class="floatno" src="../images/up.gif" width="13"
+height="15" alt="Nahoru" title="O jednu úroveň výš" border="0"
+align="middle"></td><td width="25%"><a href="HE_SQL2_KURZORY.htm">Kurzory v SQL</a></td>
+<td width="25%" align="right"><a
+href="HE_SQL2_CLOSE.htm">Příkaz CLOSE</a></td><td width="20"
+align="center"><img class="floatno" src="../images/next.gif" width="15"
+height="13" alt="&shy;&gt;" title="Následující téma" border="0"></td>
+</tr></table>
+</body>
+</html>

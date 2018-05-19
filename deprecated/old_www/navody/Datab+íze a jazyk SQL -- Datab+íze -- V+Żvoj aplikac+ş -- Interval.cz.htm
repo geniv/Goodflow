@@ -1,0 +1,621 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="cs" lang="cs"><head>
+
+
+
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1250">
+<meta http-equiv="Content-language" content="cs">
+<meta http-equiv="Cache-control" content="no-cache">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="-1">
+<meta name="robots" content="index,follow">
+<meta name="googlebot" content="index,follow,snippet,noarchive">
+<meta name="description" content="Pojem databáze dnes není zcela jistě nikomu cizí. Lidé mají potřebu evidovat a shromažďovat informace už odpradávna. Celá dnešní moderní společnost je postavena na databázových systémech, od evidence občanů, přes zdravotnictví, hospodářství, školství, až po letectví, výzkum, nebo síť mobilních telefonů.">
+<meta name="keywords" content="Databáze, Vývoj aplikací, Interval">
+<meta name="ICBM" content="49.1915, 16.626">
+<meta name="DC.Title" content="Interval.cz">
+<meta name="DC.Identifier" content="http://interval.cz">
+<meta name="DC.Identifier" content="(SCHEME=ISSN) 12128651">
+<meta name="DC.Language" content="cs">
+<meta http-equiv="pics-label" content="(pics-1.1 &quot;http://www.icra.org/ratingsv02.html&quot; comment &quot;ICRAonline EN v2.0&quot; l gen true for &quot;http://interval.cz&quot; r (nz 1 vz 1 lz 1 oz 1 cz 1) &quot;http://www.rsac.org/ratingsv01.html&quot; l gen true for &quot;http://interval.cz&quot; r (n 0 s 0 v 0 l 0))">
+<meta http-equiv="imagetoolbar" content="no">
+<meta http-equiv="MSThemeCompatible" content="no">
+<meta name="MSSmartTagsPreventParsing" content="true">
+<link rel="shortcut icon" type="image/x-icon" href="http://interval.cz/favicon.ico">
+<link rel="alternate" type="application/atom+xml" title="Interval.cz -- Databáze a jazyk SQL -- (diskuse, Atom 0.3)" href="http://export.interval.cz/?type=atom&amp;discussion=314">
+<link rel="alternate" type="application/rdf+xml" title="Interval.cz -- Databáze a jazyk SQL -- (diskuse, RDF Site Summary 1.0)" href="http://export.interval.cz/?type=rdf&amp;discussion=314">
+<link rel="alternate" type="application/rss+xml" title="Interval.cz -- Databáze a jazyk SQL -- (diskuse, RSS 2.0)" href="http://export.interval.cz/?type=rss&amp;discussion=314">
+<link rel="home" href="http://interval.cz/">
+<link rel="search" href="http://interval.cz/search_ex.asp">
+<link rel="up" href="http://interval.cz/serialy/sql-structured-query-language/">
+<link rel="last" href="http://interval.cz/clanky/sql-jak-na-funkce/">
+<link rel="next" href="http://interval.cz/clanky/sql-tvorba-tabulek/">
+<link rel="stylesheet" type="text/css" media="all" href="Datab%C3%A1ze%20a%20jazyk%20SQL%20--%20Datab%C3%A1ze%20--%20V%C3%BDvoj%20aplikac%C3%AD%20--%20Interval.cz_soubory/html4.css">
+<link rel="stylesheet" type="text/css" media="all" href="Datab%C3%A1ze%20a%20jazyk%20SQL%20--%20Datab%C3%A1ze%20--%20V%C3%BDvoj%20aplikac%C3%AD%20--%20Interval.cz_soubory/interval-display.css">
+
+<link rel="stylesheet" type="text/css" media="print" href="Datab%C3%A1ze%20a%20jazyk%20SQL%20--%20Datab%C3%A1ze%20--%20V%C3%BDvoj%20aplikac%C3%AD%20--%20Interval.cz_soubory/interval-print.css"><title>Databáze a jazyk SQL -- Databáze -- Vývoj aplikací -- Interval.cz</title>
+
+<style>
+.bbt_w {color:green !important; text-decoration:underline !important; padding-bottom: 1px; border-bottom: 1px solid green !important;}
+.bbt_w:hover {color:green !important; text-decoration:underline !important; padding-bottom: 0px; border-bottom: 2px solid green !important;}
+.bbt_w:visited {color:green !important; text-decoration:underline !important; padding-bottom: 1px; border-bottom: 1px solid green !important;}
+</style></head><body class="interval interval-articles" id="article-314"><div class="audits">
+
+<!-- TOPList.cz -->
+<script type="text/javascript">
+<!-- <![CDATA[
+document.write ("<a href='http://www.toplist.cz'><img src='http://www.toplist.cz/dot.asp?id=33617&amp;http="+escape(document.referrer)+"&amp;wi="+escape(window.screen.width)+"&amp;he="+escape(window.screen.height)+"&amp;cd="+escape(window.screen.colorDepth)+"&amp;t="+escape(document.title)+"' style='border: 0; width: 1px; height: 1px' alt='.' /></a>");
+//]]> -->
+</script><a href="http://www.toplist.cz/"><img src="Datab%C3%A1ze%20a%20jazyk%20SQL%20--%20Datab%C3%A1ze%20--%20V%C3%BDvoj%20aplikac%C3%AD%20--%20Interval.cz_soubory/dot.gif" style="border: 0pt none ; width: 1px; height: 1px;" alt="."></a>
+<noscript>
+<div><a href='http://www.toplist.cz'><img
+src='http://www.toplist.cz/dot.asp?id=33617' style='border: 0; width:
+1px; height: 1px' alt='.' /></a></div>
+</noscript>
+<!-- TOPList.cz - konec -->
+
+<!-- iAudit -->
+<img src="Datab%C3%A1ze%20a%20jazyk%20SQL%20--%20Datab%C3%A1ze%20--%20V%C3%BDvoj%20aplikac%C3%AD%20--%20Interval.cz_soubory/a.gif" style="border: 0pt none ; width: 1px; height: 1px;" alt=".">
+<!-- iAudit - konec -->
+
+
+	<!-- (C)2005 Gemius SA - gemiusAudience  / Ostatni -->
+	<script type="text/javascript"><!--
+	
+	gemius_identifier = new String('bQzrQkrzLOWoKbJeudlKguTS7OndUMSqxutbeFviWMv.47');
+	
+	gemius_href=new String(document.location);
+	if (document.referrer) { gemius_ref = new String(document.referrer); } else { gemius_ref = ""; }
+	if(typeof(Error)!='undefined') eval("try { if (typeof(top.document.referrer)=='string') { gemius_ref = top.document.referrer } } catch(gemius_ex) {}");
+	iname = new String('id='+gemius_identifier+';ref='+escape(gemius_ref.substring(0,299))+';href='+escape(gemius_href.substring(0,299))+';');
+	document.write('<iframe src="http://spir.hit.gemius.pl/gemiusaudience.html" name="'+iname+'" width="1" height="1" frameborder="0" scrolling="no"></iframe>');
+	//-->
+	</script><iframe src="Datab%C3%A1ze%20a%20jazyk%20SQL%20--%20Datab%C3%A1ze%20--%20V%C3%BDvoj%20aplikac%C3%AD%20--%20Interval.cz_soubory/gemiusaudience.htm" name="id=bQzrQkrzLOWoKbJeudlKguTS7OndUMSqxutbeFviWMv.47;ref=http%3A//interval.cz/clanky/sql-jak-na-dotazy-2/;href=http%3A//interval.cz/clanky/databaze-a-jazyk-sql/;" frameborder="0" height="1" scrolling="no" width="1"></iframe> 
+
+
+</div>
+	<div id="advertising-leader-board">
+	<!-- StartKód: adarbo2.bbmedia.cz 3.1 Nestandard  Interval(87) / cely web(1) / leaderboard 750x100(1) / nestandard(24) -->
+	<script type="text/javascript">
+	/* <![CDATA[ */
+	var bbs=screen,bbn=navigator,bbh;bbh='&ubl='+bbn.browserLanguage+'&ucc='+bbn.cpuClass+'&ucd='+bbs.colorDepth+'&uce='+bbn.cookieEnabled+'&udx='+bbs.deviceXDPI+'&udy='+bbs.deviceYDPI+'&usl='+bbn.systemLanguage+'&uje='+bbn.javaEnabled()+'&uah='+bbs.availHeight+'&uaw='+bbs.availWidth+'&ubd='+bbs.bufferDepth+'&uhe='+bbs.height+'&ulx='+bbs.logicalXDPI+'&uly='+bbs.logicalYDPI+'&use='+bbs.fontSmoothingEnabled+'&uto='+(new Date()).getTimezoneOffset()+'&uti='+(new Date()).getTime()+'&uui='+bbs.updateInterval+'&uul='+bbn.userLanguage+'&uwi='+bbs.width;
+	document.write("<scr"+"ipt  language='JavaScript' type='text/javascript' src='http://adarbo2.bbmedia.cz/please/showit/87/1/1/24/?typkodu=non-standard"+bbh+"&alttext=0&border=0&bgcolor=FFFFFF&text=000000&link=0000FF&target=_blank&bust="+Math.random()+"'>");
+	document.write("<"+"\/scr"+"ipt>");
+	/* ]]> */
+	</script><script language="JavaScript" type="text/javascript" src="Datab%C3%A1ze%20a%20jazyk%20SQL%20--%20Datab%C3%A1ze%20--%20V%C3%BDvoj%20aplikac%C3%AD%20--%20Interval.cz_soubory/a_007.js"></script><script language="JavaScript" src="Datab%C3%A1ze%20a%20jazyk%20SQL%20--%20Datab%C3%A1ze%20--%20V%C3%BDvoj%20aplikac%C3%AD%20--%20Interval.cz_soubory/bb_flash3.js"></script><object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" height="100" width="750"><param name="movie" value="http://adarbo2.bbmedia.cz/logos/b20012_1.swf?clickTag=http%3A//adarbo2.bbmedia.cz/please/redirect/87/1/1/24/%21uwi%3D1440%3Buhe%3D900%3Buce%3D1%3Bparam%3D20012/26539_1_%3F&amp;clickthru=http%3A//adarbo2.bbmedia.cz/please/redirect/87/1/1/24/%21uwi%3D1440%3Buhe%3D900%3Buce%3D1%3Bparam%3D20012/26539_1_%3F&amp;clickTarget=_blank"><param name="allowScriptAccess" value="always"><param name="wmode" value="opaque"><embed style="display: none;" src="Datab%C3%A1ze%20a%20jazyk%20SQL%20--%20Datab%C3%A1ze%20--%20V%C3%BDvoj%20aplikac%C3%AD%20--%20Interval.cz_soubory/b20012_1.swf" quality="high" type="application/x-shockwave-flash" wmode="opaque" allowscriptaccess="always" height="100" width="750"></object>
+	<!-- KonecKód: adarbo2.bbmedia.cz 3.1 Nestandard -->
+	</div>
+
+
+
+
+<div id="page-header">
+
+
+
+<div id="interval-logo">
+<h1 title="Interval.cz - webdesign a e-komerce denně (logo &amp; index link)"><a href="http://interval.cz/">Interval.cz<span></span></a></h1>
+</div>
+<div id="advertising-page-header">
+
+
+	<!-- StartKód: adarbo2.bbmedia.cz 3.1 Nestandard  Interval(87) / cely web(1) / horni468x60(2) / nestandard(24) -->
+	<script type="text/javascript">
+	/* <![CDATA[ */
+	var bbs=screen,bbn=navigator,bbh;bbh='&ubl='+bbn.browserLanguage+'&ucc='+bbn.cpuClass+'&ucd='+bbs.colorDepth+'&uce='+bbn.cookieEnabled+'&udx='+bbs.deviceXDPI+'&udy='+bbs.deviceYDPI+'&usl='+bbn.systemLanguage+'&uje='+bbn.javaEnabled()+'&uah='+bbs.availHeight+'&uaw='+bbs.availWidth+'&ubd='+bbs.bufferDepth+'&uhe='+bbs.height+'&ulx='+bbs.logicalXDPI+'&uly='+bbs.logicalYDPI+'&use='+bbs.fontSmoothingEnabled+'&uto='+(new Date()).getTimezoneOffset()+'&uti='+(new Date()).getTime()+'&uui='+bbs.updateInterval+'&uul='+bbn.userLanguage+'&uwi='+bbs.width;
+	document.write("<scr"+"ipt  type='text/javascript' src='http://adarbo2.bbmedia.cz/please/showit/87/1/2/24/?typkodu=non-standard"+bbh+"&alttext=0&border=0&bgcolor=FFFFFF&text=000000&link=0000FF&target=_top&bust="+Math.random()+"'>");
+	document.write("<"+"\/scr"+"ipt>");
+	/* ]]> */
+	</script><script type="text/javascript" src="Datab%C3%A1ze%20a%20jazyk%20SQL%20--%20Datab%C3%A1ze%20--%20V%C3%BDvoj%20aplikac%C3%AD%20--%20Interval.cz_soubory/a.js"></script><!-- spir.czMonS[6__87.1.2.24__] --><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td><a href="http://adarbo2.bbmedia.cz/please/redirect/87/1/2/24/%21uwi=1440;uhe=900;uce=1;param=10214/11012_11_?" target="_top"><img src="Datab%C3%A1ze%20a%20jazyk%20SQL%20--%20Datab%C3%A1ze%20--%20V%C3%BDvoj%20aplikac%C3%AD%20--%20Interval.cz_soubory/b10214_1.gif" alt="" border="0"></a></td></tr></tbody></table><!-- spir.czMonE -->
+	<!-- KonecKód: adarbo2.bbmedia.cz 3.1 Nestandard -->
+
+
+</div>
+<div class="page-maker">&nbsp;</div>
+</div>
+<div id="page-topmenu">
+<h2 class="textversion">Navigace</h2>
+
+<!-- cached 05-15-86-hlavni_menu_with_ascii.txt -->
+<!-- ,Vývoj aplikací ~~ ,,Databáze ~~ , --><div id="page-mainmenu"><h3 class="textversion">Hlavní menu</h3><ul><li class="first"><a href="http://interval.cz/">Titulka</a></li><li><a href="http://interval.cz/e-komerce/">E-komerce</a></li><li><a href="http://interval.cz/webdesign/">Webdesign</a></li><li class="selected"><a href="http://interval.cz/vyvoj-aplikaci/">Vývoj aplikací</a></li><li><a href="http://interval.cz/nastroje/">Nástroje</a></li><li><a href="http://interval.cz/magazin/">Magazín</a></li><li class="right selected"><a href="http://interval.inshop.cz/">Knihkupectví</a></li><li class="right"><a href="http://php.interval.cz/">PHP</a></li><li class="right"><a href="http://css.interval.cz/">CSS</a></li><li class="right"><a href="http://jednoduse.interval.cz/">Jednoduše</a></li></ul></div><div id="page-mainmenu-maker">&nbsp;</div><div id="page-mainsubmenu"><h3 class="textversion">Submenu</h3><ul><li><a href="http://interval.cz/vyvoj-aplikaci/ajax/">AJAX</a></li><li><a href="http://interval.cz/vyvoj-aplikaci/j2me/">J2ME</a></li><li><a href="http://interval.cz/vyvoj-aplikaci/asp/">ASP</a></li><li><a href="http://interval.cz/vyvoj-aplikaci/net/">.NET</a></li><li><a href="http://interval.cz/vyvoj-aplikaci/php/">PHP</a></li><li><a href="http://interval.cz/vyvoj-aplikaci/javascript/">JavaScript</a></li><li><a href="http://interval.cz/vyvoj-aplikaci/xml/">XML</a></li><li><a href="http://interval.cz/vyvoj-aplikaci/java/">Java</a></li><li><a href="http://interval.cz/vyvoj-aplikaci/perl-cgi/">PERL/CGI</a></li><li class="selected"><a href="http://interval.cz/vyvoj-aplikaci/databaze/">Databáze</a></li><li><a href="http://interval.cz/vyvoj-aplikaci/bezpecnost/">Bezpečnost</a></li><li><a href="http://interval.cz/vyvoj-aplikaci/analyzy/">Analýzy</a></li></ul><span id="page-mainsubmenu-maker">&nbsp;</span></div>
+ <!-- cas behu menu = 0 -->
+
+</div>
+<div id="page-body">
+<div id="page-left">
+
+
+
+
+
+
+<div id="article" class="bbtext">
+
+
+
+<h2>Databáze a jazyk SQL</h2>
+<p id="prepend" class="not4bbtext">Pojem databáze dnes není zcela jistě
+nikomu cizí. Lidé mají potřebu evidovat a shromažďovat informace už
+odpradávna. Celá dnešní moderní společnost je postavena na databázových
+systémech, od evidence občanů, přes zdravotnictví, hospodářství,
+školství, až po letectví, výzkum, nebo síť mobilních telefonů.</p>
+
+
+	<div class="advertising-bigsquare-outer noprint">
+	<div class="advertising-bigsquare-inner" style="width: 300px;">
+	<!-- StartKód: adarbo2.bbmedia.cz 3.1 Nestandard  Interval(87) / cely web(1) / ctverec250x250(8) / nestandard(24) -->
+	<script type="text/javascript">
+	/* <![CDATA[ */
+	var bbs=screen,bbn=navigator,bbh;bbh='&ubl='+bbn.browserLanguage+'&ucc='+bbn.cpuClass+'&ucd='+bbs.colorDepth+'&uce='+bbn.cookieEnabled+'&udx='+bbs.deviceXDPI+'&udy='+bbs.deviceYDPI+'&usl='+bbn.systemLanguage+'&uje='+bbn.javaEnabled()+'&uah='+bbs.availHeight+'&uaw='+bbs.availWidth+'&ubd='+bbs.bufferDepth+'&uhe='+bbs.height+'&ulx='+bbs.logicalXDPI+'&uly='+bbs.logicalYDPI+'&use='+bbs.fontSmoothingEnabled+'&uto='+(new Date()).getTimezoneOffset()+'&uti='+(new Date()).getTime()+'&uui='+bbs.updateInterval+'&uul='+bbn.userLanguage+'&uwi='+bbs.width;
+	document.write("<scr"+"ipt  type='text/javascript' src='http://adarbo2.bbmedia.cz/please/showit/87/1/8/24/?typkodu=non-standard"+bbh+"&alttext=0&border=0&bgcolor=FFFFFF&text=000000&link=0000FF&target=_top&bust="+Math.random()+"'>");
+	document.write("<"+"\/scr"+"ipt>");
+	/* ]]> */
+	</script><script type="text/javascript" src="Datab%C3%A1ze%20a%20jazyk%20SQL%20--%20Datab%C3%A1ze%20--%20V%C3%BDvoj%20aplikac%C3%AD%20--%20Interval.cz_soubory/a_008.js"></script><!-- spir.czMonS[6_5461_87.1.8.24_CPT_22552] --><!-- StartKód: ad2.bbmedia.cz 4.1 Interval(1185) / Cely web(3) / 250x250(1) / square 250x250(17) -->
+<script language="JavaScript" type="text/javascript" charset="windows-1250" src="Datab%C3%A1ze%20a%20jazyk%20SQL%20--%20Datab%C3%A1ze%20--%20V%C3%BDvoj%20aplikac%C3%AD%20--%20Interval.cz_soubory/code.js"></script><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td><iframe allowtransparency="true" style="position: relative;" name="bm2BBMEDIA_1185_3_1_17" id="bm2BBMEDIA_1185_3_1_17" marginwidth="0" marginheight="0" hspace="0" vspace="0" src="Datab%C3%A1ze%20a%20jazyk%20SQL%20--%20Datab%C3%A1ze%20--%20V%C3%BDvoj%20aplikac%C3%AD%20--%20Interval.cz_soubory/a.htm" frameborder="0" height="250" scrolling="no" width="250">&lt;script
+language='JavaScript' type='text/javascript'
+charset='windows-1250'&gt;document.write("&lt;scr"+"ipt
+language='JavaScript' charset='windows-1250' type='text/javascript'
+src='http://ad2.bbmedia.cz/please/showit/1185/3/1/17/?typkodu=js"+bbh+"&amp;alttext=0&amp;border=0&amp;_idplan=47608&amp;bust="+Math.random()+"&amp;target=_blank'&gt;&lt;/scr"+"ipt&gt;");&lt;/script&gt;</iframe></td></tr><tr><td><iframe allowtransparency="true" name="bm2sBBMEDIA_1185_3_1_17" id="bm2sBBMEDIA_1185_3_1_17" marginwidth="0" marginheight="0" hspace="0" vspace="0" src="" style="position: absolute;" frameborder="0" height="0" scrolling="no" width="250"></iframe></td></tr></tbody></table>
+<noscript><table border=0 cellpadding=0 cellspacing=0><tr><td><a
+href="http://ad2.bbmedia.cz/please/redirect/1185/3/1/17/"
+target="_blank"><img
+src="http://ad2.bbmedia.cz/please/showit/1185/3/1/17/?typkodu=img&_idplan=47608"
+border=0 width=250 height=250 alt='' /></a></td></tr></table></noscript>
+<!-- KonecKód: ad2.bbmedia.cz 4.1 --><!-- spir.czMonE -->
+	<!-- KonecKód: adarbo2.bbmedia.cz 3.1 Nestandard -->
+	<!-- StartKód: adarbo2.bbmedia.cz 3.1 Nestandard  Interval(87) / homepage + cely web(1) / hypertext 250x100(14) / nestandard(24) -->
+	<script type="text/javascript">
+	/* <![CDATA[ */
+	var bbs=screen,bbn=navigator,bbh;bbh='&ubl='+bbn.browserLanguage+'&ucc='+bbn.cpuClass+'&ucd='+bbs.colorDepth+'&uce='+bbn.cookieEnabled+'&udx='+bbs.deviceXDPI+'&udy='+bbs.deviceYDPI+'&usl='+bbn.systemLanguage+'&uje='+bbn.javaEnabled()+'&uah='+bbs.availHeight+'&uaw='+bbs.availWidth+'&ubd='+bbs.bufferDepth+'&uhe='+bbs.height+'&ulx='+bbs.logicalXDPI+'&uly='+bbs.logicalYDPI+'&use='+bbs.fontSmoothingEnabled+'&uto='+(new Date()).getTimezoneOffset()+'&uti='+(new Date()).getTime()+'&uui='+bbs.updateInterval+'&uul='+bbn.userLanguage+'&uwi='+bbs.width;
+	document.write("<scr"+"ipt  language='JavaScript' type='text/javascript' src='http://adarbo2.bbmedia.cz/please/showit/87/1/14/24/?typkodu=non-standard"+bbh+"&alttext=0&border=0&bgcolor=FFFFFF&text=000000&link=0000FF&target=_blank&bust="+Math.random()+"'>");
+	document.write("<"+"\/scr"+"ipt>");
+	/* ]]> */
+	</script><script language="JavaScript" type="text/javascript" src="Datab%C3%A1ze%20a%20jazyk%20SQL%20--%20Datab%C3%A1ze%20--%20V%C3%BDvoj%20aplikac%C3%AD%20--%20Interval.cz_soubory/a_006.js"></script>
+	<!-- KonecKód: adarbo2.bbmedia.cz 3.1 Nestandard -->
+	</div>
+	</div>
+
+
+<!-- cached databaze-a-jazyk-sql-314.txt -->
+<p>Následující seriál článků věnujících se SQL, vás seznámí nejen se
+základními pojmy z oblasti databází, ale i s konkrétními vlastnostmi a
+použitím jazyka SQL jako nástroje pro vytvoření databáze a manipulaci s
+daty. Jazyk SQL je standardním nástrojem, ze kterého většina dnes
+používaných databázových systémů vychází a v různé míře tyto systémy
+tento standard dodržují.</p>
+<p>V prvním článku vás seznámím se základní teorií databází, která je
+nesmírně důležitá pro jakoukoliv další práci v oblasti databázových
+systémů, ať už budete pracovat jako koncový uživatel, nebo návrhář, či
+programátor informačního systému.</p>
+
+<h3 id="inner-links-vyvoj-databazi">Vývoj databází</h3>
+<p>Nyní se vraťme asi o 40 let zpět. Právě v 60.&nbsp;letech tohoto
+století vzniká současný pojem databáze, entita, atribut entity a vazba
+mezi entitami. To jsou základní pojmy, o kterých se na úvod zmíním.</p>
+<p><strong>Databázi</strong> si lze představit jako soubor dat, který
+slouží pro popis reálného světa (např. evidence školní knihovny, sklad
+chemikálií, evidence studentů). <strong>Entita</strong> je prvek
+reálného světa (např. člověk, stroj, vyučovaný předmět, město), který
+je popsán svými charakteristikami (vlastnostmi). Ty se většinou
+považují za <strong>atribut</strong> (např. jméno, příjmení, stav, plat, hmotnost).</p>
+<p>Dalším důležitým pojmem je <strong>vazba mezi entitami</strong>.
+Jednotlivé entity odpovídající prvkům z reálného světa, mají mezi sebou
+určitý vztah. Např. každý člověk má právě jedny osobní údaje vedené na
+magistrátě, na oddělení občanských průkazů. To hovoříme o vazbě typu
+1:1. Dalším typem je vazba 1:N, jíž bude odpovídat např. skutečnost, že
+jeden člověk může vlastnit více kreditních karet (ale jedna kreditní
+karta může být vlastněna pouze jedním člověkem). Posledním typem vazby
+je M:N. Zde není žádné omezení, příkladem by mohla být situace, že
+student na vysoké škole si může zapsat několik různých předmětů (ale
+jeden předmět může být zároveň zapsán více studenty).</p>
+<p>V této době vzniká ještě jeden pojem, a to <strong>databázový model</strong>. Ten byl zaveden zejména matematiky, jako prostředek pro popis databáze. Zpočátku se používaly modely dvojího typu: <strong>hierarchický</strong> (založen na modelování hierarchie mezi entitami se vztahy podřízenosti a nadřízenosti) a dále <strong>síťový</strong>
+(vychází z teorie grafů, uzly v grafu odpovídají entitám a orientované
+hrany definují vztahy mezi entitami). V 70. letech se uvedené
+databázové modely ukázaly být nedostatečné (objevily se problémy s
+realizací a implementací vazby M:N), a proto vznikl <strong>relační model</strong>, který se stal standardem a používá se dodnes.</p>
+
+<h3 id="inner-links-relacni-databaze">Relační databáze</h3>
+<p>Podívejme se nyní blíže na relační model. Základním pojmem je <strong>relace</strong>.
+Relaci, aniž bych zaváděl jakékoliv matematické definice, si lze
+představit jako tabulku, která se skládá ze sloupců a řádků. Sloupce
+odpovídají jednotlivým vlastnostem (atributům) entity. Údaje v jednom
+řádku tabulky zobrazují aktuální stav světa. Budu mít např. tabulku <samp>ZAMĚSTNANEC</samp>, která bude popisovat entitu pracovníka ve firmě. Sloupce tabulky budou: <samp>ČÍSLO</samp>, <samp>JMÉNO</samp>, <samp>PŘÍJMENÍ</samp>, <samp>DAT_NAR</samp>, <samp>PLAT</samp> a <samp>SMLOUVA_OD</samp>. Atribut <samp>DAT_NAR</samp> značí datum narození pracovníka a <samp>SMLOUVA_OD</samp>
+uvádí datum, od kterého je pracovník v naší firmě zaměstnán. Představme
+si, že reálnému světu odpovídá následující naplnění tabulky:</p>
+
+<div class="table">
+<table cellspacing="0">
+<tbody><tr><th>ČÍSLO</th><th>JMÉNO</th><th>PŘÍJMENÍ</th><th>DAT_NAR</th><th>PLAT</th><th>SMLOUVA_OD</th></tr>
+<tr><td>1</td><td>jan</td><td>novák</td><td>15.10.75</td><td>15000</td><td>1.1.2000</td></tr>
+<tr><td>2</td><td>petr</td><td>nový</td><td>1.4.78</td><td>21500</td><td>12.5.1999</td></tr>
+<tr><td>3</td><td>jan</td><td>nováček</td><td>6.9.65</td><td>17500</td><td>7.7.1998</td></tr>
+</tbody></table>
+</div>
+
+<p><strong>Tabulka</strong> je základním stavebním kamenem pro budování
+celé databáze. Relace tedy odpovídá celé tabulce a prvku relace
+odpovídá jeden konkrétní řádek. Jeden řádek bývá často nazýván <strong>databázovým záznamem</strong>. Soubor tabulek (relací) pak tvoří celou databázi (<strong>relační schéma</strong>).</p>
+<p>U tabulek ještě chvíli zůstaňme. Jedna tabulka nám popisuje nějakou
+entitu. Za sloupce v tabulce zvolíme ty atributy, které o dané entitě
+chceme evidovat a které nás zajímají. Nyní je nejvyšší čas říci si něco
+o tvorbě relačních tabulek. Tvorba "dobře navržených" tabulek je
+klíčový a důležitý úkol zejména z hlediska dlouhodobého. (Pokud bychom
+v nějakém databázovém systému, který již nějakou dobu běží v ostrém
+provozu, nalezli nějakou chybu a zjistili bychom, že spočívá ve špatně
+navržené databázi, mělo by to katastrofální důsledky, a to nejen po
+finanční stránce.) Než budu pokračovat dál, vysvětlím další základní
+pojmy z oblasti relační databáze.</p>
+
+<h4 id="inner-links-zakladni-pojmy">Základní pojmy</h4>
+<p><strong>Hodnotou</strong> většinou rozumíme uživatelská data. Každý sloupec v tabulce má svůj <strong>datový typ</strong> (např. celé číslo, řetězec, datum, logická hodnota, apod).</p>
+<p>Pro práci s databázovými tabulkami je užitečné (ne-li přímo nutné)
+mít alespoň jednu položku (sloupec), jejíž hodnota nám bude jednoznačně
+identifikovat záznam v tabulce. Pokud taková položka nebude příliš
+velká (např. v počtu bajtů), zvolíme ji za tzv. <strong>primární klíč</strong>. V našem příkladu tabulky <samp>ZAMĚSTNANEC</samp> lze za primární klíč zvolit položku <samp>ČÍSLO</samp>.
+Primární klíč má tu vlastnost, že jeho hodnota je jedinečná, tj. pro
+žádné dva řádky v tabulce nemůže nastat situace, že by hodnota
+primárního klíče byla totožná. Databázové systémy většinou umožňují
+definovat jako primární klíč n-tici položek, např. dvojici nebo trojici
+položek. V takovém případě se mohou některé položky v klíčích opakovat,
+ale nesmí být shodné všechny položky dvou primárních klíčů najednou.</p>
+<p>Neméně důležitá je i <strong>funkční závislost</strong>. Funkční
+závislosti si lze představit jako tvrzení o reálném světě. Například
+plat zaměstnance závisí na tom, jakou vykonává funkci, tj. plat závisí
+na funkci, zapisujeme <samp>FUNKCE-&gt;PLAT</samp>. Druhým příkladem by mohla být výše jízdného, která závisí na délce vlakové trasy, tj. <samp>DÉLKA_TRASY-&gt;VÝŠE_JÍZDNÉHO</samp>. Takových příkladů z běžného života bychom našli mnoho.</p>
+
+<h3 id="inner-links-normalni-formy">Normální formy</h3>
+<p>Pojem normálních forem se používá ve spojitosti s dobře navrženými
+tabulkami. Správně vytvořené tabulky splňují 4 základní normální formy.</p>
+
+<h4 id="inner-links-1-normalni-forma-1nf">1. normální forma (1NF)</h4>
+<p>První, nejjednodušší, normální forma (značíme <strong>1NF</strong>)
+říká, že všechny atributy jsou atomické, tj. dále již nedělitelné
+(jinými slovy, hodnotou nesmí být relace). Mějme např. tabulku <samp>ADRESA</samp>, která bude mít sloupce <samp>JMÉNO</samp>, <samp>PŘÍJMENÍ</samp> a <samp>BYDLIŠTĚ</samp>. Naplnění tabulky nechť odpovídá reálnému světu:</p>
+
+<div class="table">
+<table cellspacing="0">
+<tbody><tr><th>JMÉNO</th><th>PŘÍJMENÍ</th><th>BYDLIŠTĚ</th></tr>
+<tr><td>jan</td><td>novák</td><td>Ostravská 16, Praha 16000</td></tr>
+<tr><td>petr</td><td>nový</td><td>Svitavská 8, Brno 61400</td></tr>
+<tr><td>jan</td><td>nováček</td><td>Na bradlech 1147, Ostrava 79002</td></tr>
+</tbody></table>
+</div>
+
+<p>Pokud bychom v této tabulce chtěli vypsat všechny pracovníky,
+jejichž PSČ je rovno určité hodnotě, dostali bychom se do potíží, neboť
+bychom to nemohli zjistit přímo a jednoduše. A to proto, že atribut <samp>BYDLIŠTĚ</samp> není atomický, skládá se z několika částí: <samp>ULICE</samp>, <samp>ČÍSLO</samp>, <samp>MĚSTO</samp> a <samp>PSČ</samp>. Správný návrh tabulky, který bude respektovat <strong>1NF</strong> bude vypadat následovně:</p>
+
+<div class="table">
+<table cellspacing="0">
+<tbody><tr><th>JMÉNO</th><th>PŘÍJMENÍ</th><th>ULICE</th><th>ČÍSLO</th><th>MĚSTO</th><th>PSČ</th></tr>
+<tr><td>jan</td><td>novák</td><td>Ostravská</td><td>16</td><td>Praha</td><td>16000</td></tr>
+<tr><td>petr</td><td>nový</td><td>Svitavská</td><td>8</td><td>Brno</td><td>61400</td></tr>
+<tr><td>jan</td><td>nováček</td><td>Na bradlech</td><td>1147</td><td>Ostrava</td><td>79002</td></tr>
+</tbody></table>
+</div>
+
+<p>Obecně bychom se měli snažit, aby obsahem jedné databázové položky byla právě jedna hodnota (určitého databázového typu).</p>
+
+<h4 id="inner-links-2-normalni-forma-2nf">2. normální forma (2NF)</h4>
+<p>Tabulka splňuje <strong>2NF</strong>, právě když splňuje <strong>1NF</strong>
+a navíc každý atribut, který není primárním klíčem je na primárním
+klíči úplně závislý. To znamená, že se nesmí v řádku tabulky objevit
+položka, která by byla závislá jen na části primárního klíče. Z
+definice vyplývá, že problém <strong>2NF</strong> se týká jenom
+tabulek, kde volíme za primární klíč více položek než jednu. Jinými
+slovy, pokud má tabulka jako primární klíč jenom jeden sloupec, pak <strong>2NF</strong> je splněna triviálně. Nechť máme tabulku <samp>PRACOVNÍK</samp>, která bude vypadat následovně (atribut <samp>ČÍS_PRAC</samp> značí číslo pracoviště, kde daný pracovník pracuje, atribut <samp>NÁZEV_PRAC</samp> uvádí jméno daného pracoviště):</p>
+
+<div class="table">
+<table cellspacing="0">
+<tbody><tr><th>ČÍSLO</th><th>JMÉNO</th><th>PŘÍJMENÍ</th><th>ČÍS_PRAC</th><th>NÁZEV_PRAC</th></tr>
+<tr><td>1</td><td>jan</td><td>novák</td><td>10</td><td>studovna</td></tr>
+<tr><td>2</td><td>petr</td><td>nový</td><td>15</td><td>centrála</td></tr>
+<tr><td>3</td><td>jan</td><td>nováček</td><td>10</td><td>studovna</td></tr>
+</tbody></table>
+</div>
+
+<p>Jaký primární klíč zvolíme v této tabulce? Pokud zvolíme pouze <samp>ČÍSLO</samp>,
+je to špatně, neboť zcela určitě název pracoviště, kde zaměstnanec
+pracuje, není závislý na číslu pracovníka. Takže za primární klíč
+musíme vzít dvojici (<samp>ČÍSLO,ČIS_PRAC</samp>). Tím nám ovšem vznikl nový problém. Položky <samp>JMÉNO</samp>, <samp>PŘÍJMENÍ</samp> a <samp>NÁZEV_PRAC</samp>
+nejsou úplně závislé na dvojici zvoleného primární klíče. Ať tedy
+děláme, co děláme, nejsme schopni vybrat takový primární klíč, aby
+tabulka splňovala <strong>2NF</strong>. Jak z tohoto problému ven? Obecně převedení do tabulky, která již bude splňovat <strong>2NF</strong>, znamená rozpad na dvě a více tabulek, kde každá už bude splňovat <strong>2NF</strong>. Takovému "rozpadu" na více tabulek se odborně říká <strong>dekompozice relačního schématu</strong>. Správně navržené tabulky splňující <strong>2NF</strong> budou vypadat následovně (tabulka <samp>PRACOVNÍK</samp> a <samp>PRACOVIŠTĚ</samp>):</p>
+
+<div class="table">
+<table cellspacing="0">
+<tbody><tr><th>ČÍSLO</th><th>JMÉNO</th><th>PŘÍJMENÍ</th><th>ČIS_PRAC</th></tr>
+<tr><td>1</td><td>jan</td><td>novák</td><td>10</td></tr>
+<tr><td>2</td><td>petr</td><td>nový</td><td>15</td></tr>
+<tr><td>3</td><td>jan</td><td>nováček</td><td>10</td></tr>
+</tbody></table>
+</div>
+
+<div class="table">
+<table cellspacing="0">
+<tbody><tr><th>ČÍSLO</th><th>NÁZEV</th></tr>
+<tr><td>10</td><td>studovna</td></tr>
+<tr><td>15</td><td>centrála</td></tr>
+</tbody></table>
+</div>
+
+<p>Dále si všimněte, že pokud tabulka nesplňuje <strong>2NF</strong>,
+dochází často k redundanci. Konkrétně v původní tabulce informace, že
+pracoviště číslo 10 se jmenuje "studovna", byla obsažena celkem
+dvakrát. <strong>Redundance</strong> je jev, který obvykle nesplnění <strong>2NF</strong>
+doprovází. O tom, že redundance je nežadoucí, netřeba pochybovat.
+Zkuste si rozmyslet, jak byste postupovali v obou příkladech, kdyby ve
+vaší společnosti došlo ke změně názvu pracoviště číslo 10 ze "studovna"
+na "klubovna".</p>
+
+<h4 id="inner-links-3-normalni-forma-3nf">3. normální forma (3NF)</h4>
+<p>Relační tabulky splňují třetí normální formu (<strong>3NF</strong>), jestliže splňují <strong>2NF</strong>
+a žádný atribut, který není primárním klíčem, není tranzitivně závislý
+na žádném klíči. Nejlépe to opět vysvětlí následující příklad. Mějme
+tabulku <samp>PLATY</samp>, která bude vypadat takto:</p>
+
+<div class="table">
+<table cellspacing="0">
+<tbody><tr><th>ČÍSLO</th><th>JMÉNO</th><th>PŘÍJMENÍ</th><th>FUNKCE</th><th>PLAT</th></tr>
+<tr><td>1</td><td>jan</td><td>novák</td><td>technik</td><td>15000</td></tr>
+<tr><td>2</td><td>petr</td><td>nový</td><td>vedoucí</td><td>21500</td></tr>
+<tr><td>3</td><td>jan</td><td>nováček</td><td>správce</td><td>17500</td></tr>
+</tbody></table>
+</div>
+
+<p>Pomineme zatím fakt, že tato tabulka nesplňuje ani <strong>2NF</strong>, což je základní předpoklad pro <strong>3NF</strong>. Chci zde jen vysvětlit pojem <strong>tranzitivní závislost</strong>. Nebudeme přemýšlet, co je primární klíč, na první pohled vidíme, že konkrétně atributy <samp>JMÉNO</samp>, <samp>PŘÍJMENÍ</samp> a <samp>FUNKCE</samp> závisí na atributu <samp>ČÍSLO</samp> (ten by nejspíš byl primárním klíčem). Dále můžeme vidět, že atribut <samp>PLAT</samp> zřejmě je funkčně závislý na atributu <samp>FUNKCE</samp> a pokud vememe v úvahu, že <samp>ČÍSLO-&gt;FUNKCE</samp> a <samp>FUNKCE-&gt;PLAT</samp>, dostaneme díky jevu nazývanému <em>tranzitivita</em>, že <samp>ČÍSLO-&gt;PLAT</samp>. Postup, jak dostat tabulky do <strong>3NF</strong>, je podobný jako v případě <strong>2NF</strong>, tj. opět provedeme dekompozici (tabulka <samp>FUNKCE</samp> a <samp>PLATY</samp>):</p>
+
+<div class="table">
+<table cellspacing="0">
+<tbody><tr><th>ČÍSLO</th><th>JMÉNO</th><th>PŘÍJMENÍ</th><th>FUNKCE</th></tr>
+<tr><td>1</td><td>jan</td><td>novák</td><td>technik</td></tr>
+<tr><td>2</td><td>petr</td><td>nový</td><td>vedoucí</td></tr>
+<tr><td>3</td><td>jan</td><td>nováček</td><td>správce</td></tr>
+</tbody></table>
+</div>
+
+<div class="table">
+<table cellspacing="0">
+<tbody><tr><th>FUNKCE</th><th>PLAT</th></tr>
+<tr><td>technik</td><td>21500</td></tr>
+<tr><td>vedoucí</td><td>17500</td></tr>
+<tr><td>správce</td><td>15000</td></tr>
+</tbody></table>
+</div>
+
+<p>Z hlediska základních tří normálních forem, jsou tyto dvě tabulky
+již v pořádku. Z praktického hlediska je vhodnější použít nějaký
+číselník funkcí, abychom splnili podmínku, že primární klíč v tabulkách
+má být co nejkratší délky. Nejlepší zápis je tedy následující:</p>
+
+<div class="table">
+<table cellspacing="0">
+<tbody><tr><th>ČÍSLO</th><th>JMÉNO</th><th>PŘÍJMENÍ</th><th>CIS_FUN</th></tr>
+<tr><td>1</td><td>jan</td><td>novák</td><td>121</td></tr>
+<tr><td>2</td><td>petr</td><td>nový</td><td>156</td></tr>
+<tr><td>3</td><td>jan</td><td>nováček</td><td>127</td></tr>
+</tbody></table>
+</div>
+
+<div class="table">
+<table cellspacing="0">
+<tbody><tr><th>ČÍSLO</th><th>FUNKCE</th><th>PLAT</th></tr>
+<tr><td>121</td><td>technik</td><td>21500</td></tr>
+<tr><td>156</td><td>vedoucí</td><td>17500</td></tr>
+<tr><td>127</td><td>správce</td><td>15000</td></tr>
+</tbody></table>
+</div>
+
+<h4 id="inner-links-boyce-coddova-normalni-forma">Boyce-Coddova normální forma</h4>
+<p>Poslední prakticky užívanou formou je tzv. <strong>Boyce-Coddova normální forma</strong> (<strong>BCNF</strong>). Tabulka splňuje <strong>BCNF</strong>, právě když pro dvě množiny atributů <samp>A</samp> a <samp>B</samp> platí: <samp>A-&gt;B</samp> a současně <samp>B</samp> není podmnožinou <samp>A</samp>, pak množina <samp>A</samp>
+obsahuje primární klíč tabulky. Tato forma zjednodušuje práci s
+tabulkami, ve většině případů, pokud dobře postupujeme při tvorbě
+tabulek, aby splňovaly postupně <strong>1NF</strong>, <strong>2NF</strong> a <strong>3NF</strong>, forma <strong>BCNF</strong> je splněna.</p>
+
+<h3 id="inner-links-jazyk-sql">Jazyk SQL</h3>
+<p>Po delším úvodu, který ale považuji za velmi důležitý pro pochopení
+základních principů a pojmů ze světa databází a který vám poskytuje
+návod, jak správně navrhnout databázové tabulky, se konečně dostávám k
+jazyku <strong>SQL</strong>.</p>
+<p>Historie jazyka <strong>SQL</strong> spadá do 70. a 80. let. První standard byl přijat v roce 1986 (označován jako <em>SQL86</em>). Časem se však projevily některé nedostatky. Opravená verze je z roku 1992 a je označována jako <em>SQL92</em>. Ten je v oblasti relačních databází standardem dodnes. Zkratka SQL značí <strong>Structured Query Language</strong>.
+Jazyk v sobě zahrnuje nástroje pro tvorbu databází (tabulek) a dále
+nástroje na manipulaci s daty (vkládání dat, aktualizace, mazání a
+vyhledávání informací).</p>
+<p>SQL patří mezi tzv. <strong>deklarativní programovací jazyky</strong>,
+což v praxi znamená, že kód jazyka SQL nepíšeme v žádném samostatném
+programu (jako by tomu bylo např. u jazyka C nebo Pascal), ale vkládáme
+jej do jiného programovacího jazyka, který je již procedurální. Se
+samotným jazykem SQL můžeme pracovat pouze v případě, že se terminálem
+připojíme na SQL server a na příkazový řádek bychom zadávali přímo
+příkazy jazyka SQL.</p>
+<p>Jak už jsem se zmínil, SQL se skládá z několika částí. Některé části
+jsou určeny pro administrátory a návrháře databázových systémů, jiné
+pak pro koncové uživatele a programátory. První částí jazyka SQL je
+jazyk <em>DDL</em> - <strong>Data Definition Language</strong>. Jedná se o jazyk pro vytváření databázových schémat a katalogů. Způsob ukládání tabulek definuje jazyk <em>SDL</em> - <strong>Storage Definition Language</strong>. Třetí částí pro návrháře a správce je jazyk <em>VDL</em> - <strong>View Definition Language</strong>,
+určující vytváření pohledů (pohled si lze představit jako virtuální
+tabulku složenou z různých jiných tabulek). Poslední částí, kterou se
+budu převážně zabývat, je jazyk <em>DML</em> - <strong>Data Manipulation Language</strong>, který obsahuje základní příkazy <code>INSERT</code>, <code>UPDATE</code>, <code>DELETE</code> a nejpoužívanější příkaz <code>SELECT</code>. S jazykem DML pracují nejvíce koncoví uživatelé a programátoři databázových aplikací.</p>
+
+
+
+<div id="article-author">
+<a href="http://interval.cz/autori/skrivan-jaromir/">Skřivan, Jaromír</a> (4.&nbsp;8.&nbsp;2000)
+<div id="article-about-author">				
+		
+		</div>
+</div>
+
+
+<div class="refer noprint"><br><strong>Ulož odkaz na</strong>:<a href="http://del.icio.us/post?url=http://interval.cz/clanky/databaze-a-jazyk-sql/&amp;title=Datab%E1ze%20a%20jazyk%20SQL">del.icio.us</a> | <a href="http://www.jagg.cz/bookmarks.php?action=add&amp;address=http://interval.cz/clanky/databaze-a-jazyk-sql/&amp;title=Datab%E1ze%20a%20jazyk%20SQL">jagg.cz</a> | <a href="http://linkuj.cz/?id=linkuj&amp;url=http://interval.cz/clanky/databaze-a-jazyk-sql/&amp;title=Datab%E1ze%20a%20jazyk%20SQL">linkuj.cz</a> | <a href="http://www.topclanky.cz/pridat-odkaz/?kde=http://interval.cz/clanky/databaze-a-jazyk-sql/&amp;nadpis=Datab%E1ze%20a%20jazyk%20SQL">topclanky.cz</a> | <a href="http://vybrali.sme.sk/submit.php?url=http://interval.cz/clanky/databaze-a-jazyk-sql/">vybrali.sme.sk</a>. <strong>Děkujeme!</strong></div><div class="refer"><h3><a href="http://interval.cz/serialy/sql-structured-query-language/" title="SQL - Structured Query Language (úplný přehled článků seriálu)">SQL - Structured Query Language</a></h3><p>Jazyk
+SQL se stal univerzálním standardem pro přístup k datům a zkratka SQL
+je dokonce používána jako synonymum pro databáze. Víte ale, co všechno
+tento jazyk svým uživatelům nabízí a jaké modifikace používají různé
+databázové systémy? Tato série článků již byla uzavřena, ačkoli další
+pokračování nelze vyloučit.</p><ul><li><a href="http://interval.cz/clanky/sql-jak-na-funkce/">SQL - jak na funkce</a> (27.&nbsp;2.&nbsp;2001)</li><li><a href="http://interval.cz/clanky/sql-jak-na-triggery/">SQL - jak na triggery</a> (13.&nbsp;11.&nbsp;2000)</li><li><a href="http://interval.cz/clanky/sql-spojovani-tabulek-a-tvorba-pohledu/">SQL - spojování tabulek a tvorba pohledů</a> (30.&nbsp;10.&nbsp;2000)</li><li><a href="http://interval.cz/clanky/sql-pokrocila-prace-s-tabulkami-a-daty/">SQL - pokročilá práce s tabulkami a daty</a> (23.&nbsp;10.&nbsp;2000)</li><li><a href="http://interval.cz/clanky/sql-pokrocile-dotazy/">SQL - pokročilé dotazy</a> (16.&nbsp;10.&nbsp;2000)</li><li><a href="http://interval.cz/clanky/sql-vnorene-dotazy/">SQL - vnořené dotazy</a> (9.&nbsp;10.&nbsp;2000)</li><li><a href="http://interval.cz/clanky/sql-skladani-dotazu/">SQL - skládání dotazů</a> (2.&nbsp;10.&nbsp;2000)</li><li><a href="http://interval.cz/clanky/sql-dotazy-s-agregaci/">SQL - dotazy s agregací</a> (25.&nbsp;9.&nbsp;2000)</li><li><a href="http://interval.cz/clanky/sql-jak-na-dotazy-2/">SQL - jak na dotazy 2.</a> (19.&nbsp;9.&nbsp;2000)</li><li><a href="http://interval.cz/clanky/sql-jak-na-dotazy-1/">SQL - jak na dotazy 1.</a> (4.&nbsp;9.&nbsp;2000)</li><li><a href="http://interval.cz/clanky/sql-vkladani-a-aktualizace-dat-v-tabulce/">SQL - vkládání a aktualizace dat v tabulce</a> (23.&nbsp;8.&nbsp;2000)</li><li><a href="http://interval.cz/clanky/sql-manipulace-s-tabulkami/">SQL - manipulace s tabulkami</a> (17.&nbsp;8.&nbsp;2000)</li><li><a href="http://interval.cz/clanky/sql-tvorba-tabulek/">SQL - tvorba tabulek</a> (10.&nbsp;8.&nbsp;2000)</li><li><strong>Databáze a jazyk SQL</strong> (právě čtete)</li></ul></div>
+	<div class="noprint" id="article-discussion">
+	<!-- cached 314-tabulka-databaze-a-jazyk-sql.txt --><div id="article-discussion-index"><form action="http://interval.cz/discussion-read.asp?disc=314" method="post"><table cellspacing="0"><tbody><tr><th colspan="4"><a href="http://interval.cz/clanky/databaze-a-jazyk-sql/diskuse/" title="Databáze a jazyk SQL (diskuse)">Databáze a jazyk SQL (diskuse)</a></th></tr><tr><td class="checkbox"><input name="checkboxDISKUZE1569" title="0 1569" value="1" type="checkbox"></td><td class="date">2000-08-22 11:45:00</td><td class="sender">Debak</td><td class="subject">SUPR CLANEK</td></tr><tr><td class="checkbox"><input name="checkboxDISKUZE6632" title="0 6632" value="1" type="checkbox"></td><td class="date">2002-07-25 08:36:49</td><td class="sender">Joe Darkman</td><td class="subject">Příspěvek</td></tr><tr><td class="checkbox"><input name="checkboxDISKUZE27707" title="0 27707" value="1" type="checkbox"></td><td class="date">2004-06-27 15:17:49</td><td class="sender">Ondrej Skrehota</td><td class="subject">Slova diku</td></tr><tr><td class="checkbox"><input name="checkboxDISKUZE30406" title="0 30406" value="1" type="checkbox"></td><td class="date">2004-09-27 13:30:46</td><td class="sender">Ondrej Sykora</td><td class="subject">Skvely i po nekolika letech</td></tr><tr><td class="checkbox"><input name="checkboxDISKUZE37592" title="0 37592" value="1" type="checkbox"></td><td class="date">2005-06-06 08:32:54</td><td class="sender">Marty</td><td class="subject">supr článek</td></tr><tr><td class="checkbox"><input name="checkboxDISKUZE37889" title="0 37889" value="1" type="checkbox"></td><td class="date">2005-06-18 15:49:22</td><td class="sender">ridcully</td><td class="subject">2NF - 3NF</td></tr><tr><td class="checkbox"><input name="checkboxDISKUZE38298" title="1 38298" value="1" type="checkbox"></td><td class="date">2005-07-07 14:36:58</td><td class="sender">net-ray</td><td class="subject"><img src="Datab%C3%A1ze%20a%20jazyk%20SQL%20--%20Datab%C3%A1ze%20--%20V%C3%BDvoj%20aplikac%C3%AD%20--%20Interval.cz_soubory/invisible.png" class="line" alt="."><img src="Datab%C3%A1ze%20a%20jazyk%20SQL%20--%20Datab%C3%A1ze%20--%20V%C3%BDvoj%20aplikac%C3%AD%20--%20Interval.cz_soubory/line3.png" class="line" alt=".">2NF - 3NF</td></tr><tr><td class="checkbox"><input name="checkboxDISKUZE44337" title="2 44337" value="1" type="checkbox"></td><td class="date">2006-05-18 18:29:50</td><td class="sender">Jarek Šeděnka</td><td class="subject"><img src="Datab%C3%A1ze%20a%20jazyk%20SQL%20--%20Datab%C3%A1ze%20--%20V%C3%BDvoj%20aplikac%C3%AD%20--%20Interval.cz_soubory/invisible.png" class="line" alt="."><img src="Datab%C3%A1ze%20a%20jazyk%20SQL%20--%20Datab%C3%A1ze%20--%20V%C3%BDvoj%20aplikac%C3%AD%20--%20Interval.cz_soubory/invisible.png" class="line" alt="."><img src="Datab%C3%A1ze%20a%20jazyk%20SQL%20--%20Datab%C3%A1ze%20--%20V%C3%BDvoj%20aplikac%C3%AD%20--%20Interval.cz_soubory/line3.png" class="line" alt=".">2NF - 3NF</td></tr><tr><td class="checkbox"><input name="checkboxDISKUZE44668" title="3 44668" value="1" type="checkbox"></td><td class="date">2006-06-12 13:43:41</td><td class="sender">Dochy</td><td class="subject"><img src="Datab%C3%A1ze%20a%20jazyk%20SQL%20--%20Datab%C3%A1ze%20--%20V%C3%BDvoj%20aplikac%C3%AD%20--%20Interval.cz_soubory/invisible.png" class="line" alt="."><img src="Datab%C3%A1ze%20a%20jazyk%20SQL%20--%20Datab%C3%A1ze%20--%20V%C3%BDvoj%20aplikac%C3%AD%20--%20Interval.cz_soubory/invisible.png" class="line" alt="."><img src="Datab%C3%A1ze%20a%20jazyk%20SQL%20--%20Datab%C3%A1ze%20--%20V%C3%BDvoj%20aplikac%C3%AD%20--%20Interval.cz_soubory/invisible.png" class="line" alt="."><img src="Datab%C3%A1ze%20a%20jazyk%20SQL%20--%20Datab%C3%A1ze%20--%20V%C3%BDvoj%20aplikac%C3%AD%20--%20Interval.cz_soubory/line3.png" class="line" alt=".">2NF - 3NF</td></tr><tr><td class="checkbox"><input name="checkboxDISKUZE40231" title="0 40231" value="1" type="checkbox"></td><td class="date">2005-09-14 11:53:34</td><td class="sender">PaulJ</td><td class="subject">pochvala</td></tr><tr><td class="checkbox"><input name="checkboxDISKUZE42577" title="0 42577" value="1" type="checkbox"></td><td class="date">2006-02-09 19:54:28</td><td class="sender">GeorgeP</td><td class="subject">OK</td></tr><tr><td class="checkbox"><input name="checkboxDISKUZE44069" title="0 44069" value="1" type="checkbox"></td><td class="date">2006-04-25 09:47:49</td><td class="sender">Pavel</td><td class="subject">Velike diky</td></tr><tr><td class="checkbox"><input name="checkboxDISKUZE44208" title="0 44208" value="1" type="checkbox"></td><td class="date">2006-05-06 15:32:29</td><td class="sender">Vebloud</td><td class="subject">BCNF není poslední</td></tr><tr><td class="checkbox"><input name="checkboxDISKUZE44336" title="1 44336" value="1" type="checkbox"></td><td class="date">2006-05-18 18:27:20</td><td class="sender">Jarek Šeděnka</td><td class="subject"><img src="Datab%C3%A1ze%20a%20jazyk%20SQL%20--%20Datab%C3%A1ze%20--%20V%C3%BDvoj%20aplikac%C3%AD%20--%20Interval.cz_soubory/invisible.png" class="line" alt="."><img src="Datab%C3%A1ze%20a%20jazyk%20SQL%20--%20Datab%C3%A1ze%20--%20V%C3%BDvoj%20aplikac%C3%AD%20--%20Interval.cz_soubory/line3.png" class="line" alt=".">BCNF není poslední</td></tr><tr><td class="checkbox"><input name="checkboxDISKUZE48307" title="2 48307" value="1" type="checkbox"></td><td class="date">2007-05-06 01:48:18</td><td class="sender">Vebloud</td><td class="subject"><img src="Datab%C3%A1ze%20a%20jazyk%20SQL%20--%20Datab%C3%A1ze%20--%20V%C3%BDvoj%20aplikac%C3%AD%20--%20Interval.cz_soubory/invisible.png" class="line" alt="."><img src="Datab%C3%A1ze%20a%20jazyk%20SQL%20--%20Datab%C3%A1ze%20--%20V%C3%BDvoj%20aplikac%C3%AD%20--%20Interval.cz_soubory/invisible.png" class="line" alt="."><img src="Datab%C3%A1ze%20a%20jazyk%20SQL%20--%20Datab%C3%A1ze%20--%20V%C3%BDvoj%20aplikac%C3%AD%20--%20Interval.cz_soubory/line3.png" class="line" alt=".">BCNF není poslední</td></tr><tr><td class="checkbox"><input name="checkboxDISKUZE45772" title="0 45772" value="1" type="checkbox"></td><td class="date">2006-08-22 10:18:19</td><td class="sender">Jirka</td><td class="subject">Dekuji</td></tr><tr><td class="checkbox"><input name="checkboxDISKUZE47586" title="0 47586" value="1" type="checkbox"></td><td class="date">2007-02-14 21:00:12</td><td class="sender">Leonit</td><td class="subject">NEJ</td></tr><tr><td class="checkbox"><input name="checkboxDISKUZE49039" title="0 49039" value="1" type="checkbox"></td><td class="date">2007-08-09 13:01:15</td><td class="sender">KoumakCNX</td><td class="subject">Podekovani</td></tr><tr><td class="checkbox"><input name="checkboxDISKUZE50846" title="0 50846" value="1" type="checkbox"></td><td class="date">2008-02-13 11:24:59</td><td class="sender">Mgr. Miloš Prokýšek</td><td class="subject">Pro studenty PF JCU CZ</td></tr><tr><td class="checkbox"><input name="checkboxDISKUZE50847" title="1 50847" value="1" type="checkbox"></td><td class="date">2008-02-13 13:43:40</td><td class="sender">docent Doudleba</td><td class="subject"><img src="Datab%C3%A1ze%20a%20jazyk%20SQL%20--%20Datab%C3%A1ze%20--%20V%C3%BDvoj%20aplikac%C3%AD%20--%20Interval.cz_soubory/invisible.png" class="line" alt="."><img src="Datab%C3%A1ze%20a%20jazyk%20SQL%20--%20Datab%C3%A1ze%20--%20V%C3%BDvoj%20aplikac%C3%AD%20--%20Interval.cz_soubory/line3.png" class="line" alt=".">Pro studenty PF JCU CZ</td></tr><tr><td class="checkbox"><input name="checkboxDISKUZE50876" title="0 50876" value="1" type="checkbox"></td><td class="date">2008-02-19 12:56:37</td><td class="sender">Mgr. Miloš Prokýšek</td><td class="subject">Jak je to s 2NF</td></tr><tr><td class="checkbox"><input name="checkboxDISKUZE50877" title="1 50877" value="1" type="checkbox"></td><td class="date">2008-02-19 14:39:42</td><td class="sender">Vilém Málek</td><td class="subject"><img src="Datab%C3%A1ze%20a%20jazyk%20SQL%20--%20Datab%C3%A1ze%20--%20V%C3%BDvoj%20aplikac%C3%AD%20--%20Interval.cz_soubory/invisible.png" class="line" alt="."><img src="Datab%C3%A1ze%20a%20jazyk%20SQL%20--%20Datab%C3%A1ze%20--%20V%C3%BDvoj%20aplikac%C3%AD%20--%20Interval.cz_soubory/line3.png" class="line" alt=".">Jak je to s 2NF</td></tr><tr><td class="checkbox"><input name="checkboxDISKUZE50882" title="0 50882" value="1" type="checkbox"></td><td class="date">2008-02-21 09:19:36</td><td class="sender">Jaromír Skřivan</td><td class="subject">Vyjádření autora článku po 8 letech</td></tr><tr><td class="checkbox"><input name="checkboxDISKUZE50930" title="1 50930" value="1" type="checkbox"></td><td class="date">2008-03-06 12:34:37</td><td class="sender">Miloš Prokýšek</td><td class="subject"><img src="Datab%C3%A1ze%20a%20jazyk%20SQL%20--%20Datab%C3%A1ze%20--%20V%C3%BDvoj%20aplikac%C3%AD%20--%20Interval.cz_soubory/invisible.png" class="line" alt="."><img src="Datab%C3%A1ze%20a%20jazyk%20SQL%20--%20Datab%C3%A1ze%20--%20V%C3%BDvoj%20aplikac%C3%AD%20--%20Interval.cz_soubory/line1.png" class="line" alt=".">Vyjádření autora článku po 8 letech</td></tr><tr><td class="checkbox"><input name="checkboxDISKUZE51038" title="1 51038" value="1" type="checkbox"></td><td class="date">2008-04-22 00:52:17</td><td class="sender">tomas</td><td class="subject"><img src="Datab%C3%A1ze%20a%20jazyk%20SQL%20--%20Datab%C3%A1ze%20--%20V%C3%BDvoj%20aplikac%C3%AD%20--%20Interval.cz_soubory/invisible.png" class="line" alt="."><img src="Datab%C3%A1ze%20a%20jazyk%20SQL%20--%20Datab%C3%A1ze%20--%20V%C3%BDvoj%20aplikac%C3%AD%20--%20Interval.cz_soubory/line3.png" class="line" alt=".">Skutečně vždy normalizace</td></tr><tr><td colspan="4" id="foot"><input value="Zobrazit vybrané" name="display_selected" id="display_selected" class="submit" type="submit"> &nbsp; <input value="Zobrazit vše" name="display_all" id="display_all" class="submit" type="submit"> &nbsp; <input value="Vložit nový" name="add_new" id="add_new" class="submit" type="submit"></td></tr></tbody></table></form></div>
+	</div>
+
+
+</div>
+
+
+
+
+
+
+</div>
+<div id="page-right">
+<h2 class="textversion">Pravý sloupek</h2>
+
+
+<div id="search">
+<h3 class="textversion">Vyhledávání</h3>
+
+	<form action="http://www.google.cz/custom" method="get">
+		<div>
+			<input name="domains" value="interval.cz" type="hidden">
+			<input id="sbi" class="text" name="q" size="15" value="" type="text">
+			<input id="sbb" class="submit" name="sa" value="Najdi" type="submit">
+			<input name="sitesearch" value="interval.cz" type="hidden">
+			<input name="client" value="pub-0627399152761886" type="hidden">
+			<input name="forid" value="1" type="hidden">
+			<input name="channel" value="6859855792" type="hidden">
+			<input name="ie" value="windows-1250" type="hidden">
+			<input name="oe" value="windows-1250" type="hidden">
+
+			<input name="flav" value="0000" type="hidden">
+			<input name="sig" value="fzsccwnc4ZQRtlyw" type="hidden">
+			<input name="cof" value="GALT:#008000;GL:1;DIV:#336699;VLC:663399;AH:center;BGC:FFFFFF;LBGC:336699;ALC:0000FF;LC:0000FF;T:000000;GFNT:0000FF;GIMP:0000FF;FORID:1" type="hidden">
+			<input name="hl" value="cs" type="hidden">
+		</div>
+	</form>
+
+</div>
+	<div id="advertising-arbo-rightcolumn-textbox" class="noprint" style="padding: 1em; font-size: 0.8em;">
+	<!-- StartKód: adarbo2.bbmedia.cz 3.1 Nestandard  Interval(87) / home page(2) / textbox(1) / nestandard(24) -->
+	<script type="text/javascript">
+	<!-- <![CDATA[
+	var bbs=screen,bbn=navigator,bbh;bbh='&ubl='+bbn.browserLanguage+'&ucc='+bbn.cpuClass+'&ucd='+bbs.colorDepth+'&uce='+bbn.cookieEnabled+'&udx='+bbs.deviceXDPI+'&udy='+bbs.deviceYDPI+'&usl='+bbn.systemLanguage+'&uje='+bbn.javaEnabled()+'&uah='+bbs.availHeight+'&uaw='+bbs.availWidth+'&ubd='+bbs.bufferDepth+'&uhe='+bbs.height+'&ulx='+bbs.logicalXDPI+'&uly='+bbs.logicalYDPI+'&use='+bbs.fontSmoothingEnabled+'&uto='+(new Date()).getTimezoneOffset()+'&uti='+(new Date()).getTime()+'&uui='+bbs.updateInterval+'&uul='+bbn.userLanguage+'&uwi='+bbs.width;
+	document.write("<scr"+"ipt  language='JavaScript' type='text/javascript' src='http://adarbo2.bbmedia.cz/please/showit/87/2/1/24/?typkodu=non-standard"+bbh+"&alttext=0&border=0&bgcolor=FFFFFF&text=000000&link=0000FF&target=_blank&bust="+Math.random()+"'>");
+	document.write("<"+"\/scr"+"ipt>");
+	//]]> -->
+	</script><script language="JavaScript" type="text/javascript" src="Datab%C3%A1ze%20a%20jazyk%20SQL%20--%20Datab%C3%A1ze%20--%20V%C3%BDvoj%20aplikac%C3%AD%20--%20Interval.cz_soubory/a_004.js"></script>
+	<!-- KonecKód: adarbo2.bbmedia.cz 3.1 Nestandard -->
+	</div>
+<!-- cached 10-knizni_tip.txt --><div class="page-right-box book"><h3>Knižní tip</h3><div class="page-right-box-in"><div class="book-top"><h4><a href="http://interval.inshop.cz/inshop/scripts/detail.asp?kat=322">HTML a CSS - velká kniha řešení</a></h4></div><div class="image"><a href="http://interval.inshop.cz/inshop/scripts/detail.asp?kat=322"><img src="Datab%C3%A1ze%20a%20jazyk%20SQL%20--%20Datab%C3%A1ze%20--%20V%C3%BDvoj%20aplikac%C3%AD%20--%20Interval.cz_soubory/322.jpg" alt="obálka" title="HTML a CSS - velká kniha řešení"></a></div></div></div>
+	<div class="page-right-box czechia-box">
+	<div style="padding: 7px; width: 166px; background-color: rgb(234, 223, 172); text-align: center; color: rgb(0, 0, 0);">
+	<a href="http://www.zoner.cz/"><strong>ZONER software, s.r.o.</strong></a>,
+	<br>přední
+český poskytovatel internetových služeb souvisejících s prezentací na
+internetu a e-komercí, hledá do svého týmu pracovníka na pozici <br><a href="http://www.czechia.com/clanek/kariera-u-nas/#programator-ASP" style="background-color: rgb(234, 223, 172); color: rgb(0, 0, 255); text-decoration: underline;"><strong>Programátor ASP.NET 2.0 </strong></a>.
+	</div>
+	</div>
+<!-- cached 30-nejctenejsi_clanky.txt --><div class="page-right-box reading"><h3 title="Nejčtenější články za posledních 90 dnů">Nejčtenější</h3><div class="page-right-box-in"><ul><li><a href="http://interval.cz/clanky/echo2-web-framework-echopointng-nech-sa-paci/">Echo2 Web Framework - Echopointng, nech sa páči</a></li><li><a href="http://interval.cz/clanky/spravy-zo-slovenskeho-internetu-28/">Správy zo slovenského internetu 28.</a></li><li><a href="http://interval.cz/clanky/soutez-s-inpage-o-80-cen-za-100-tisic/">Soutěž s inPage o 80 cen za 100 tisíc</a></li><li><a href="http://interval.cz/clanky/soutez-o-vstup-zdarma-na-konferenci-webcamp-08/">Soutěž o vstup zdarma na konferenci WebCamp'08</a></li><li><a href="http://interval.cz/clanky/echo2-web-framework-tabulka-a-klavesnica/">Echo2 Web Framework - tabuľka a klávesnica</a></li></ul></div></div>
+
+<div class="advertising-vertical-banner-outer">
+<div class="advertising-vertical-banner-inner">
+<object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" codebase="http://fpdownload.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,0,0" id="leto-s-domenou-300-120" align="middle" height="300" width="120">
+<param name="allowScriptAccess" value="sameDomain">
+<param name="movie" value="http://interval.cz/__services/__include_right/leto-s-domenou-300-120.swf"><param name="quality" value="high"><param name="bgcolor" value="#ffffff"><embed style="display: none;" src="Datab%C3%A1ze%20a%20jazyk%20SQL%20--%20Datab%C3%A1ze%20--%20V%C3%BDvoj%20aplikac%C3%AD%20--%20Interval.cz_soubory/leto-s-domenou-300-120.swf" quality="high" bgcolor="#ffffff" name="leto-s-domenou-300-120" allowscriptaccess="sameDomain" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer" align="middle" height="300" width="120">
+</object>
+</div>
+</div>
+<div class="page-right-box emailserv">
+<h3>Info servis</h3>
+<div class="page-right-box-in">
+<ul>
+<li><a href="http://export.interval.cz/" title="Exporty aktuálních informací ve formátech Atom, RDF a RSS">Alternativní přístup k poskytovanému obsahu</a></li>
+<li><a href="http://export.interval.cz/?type=atom" title="Aktuální články magazínu ve formátu Atom">Atom</a> (<a href="http://export.interval.cz/?type=atom&amp;discussion=all" title="Aktuální diskuse magazínu ve formátu Atom">diskuse</a>)</li>
+<li><a href="http://export.interval.cz/?type=rdf" title="Aktuální články magazínu ve formátu RDF">RDF</a> (<a href="http://export.interval.cz/?type=rdf&amp;discussion=all" title="Aktuální diskuse magazínu ve formátu RDF">diskuse</a>)</li>
+<li><a href="http://export.interval.cz/?type=rss" title="Aktuální články magazínu ve formátu RSS">RSS</a> (<a href="http://export.interval.cz/?type=rss&amp;discussion=all" title="Aktuální diskuse magazínu ve formátu RSS">diskuse</a>)</li>
+</ul>
+</div>
+</div>
+<div class="advertising-vertical-banner-outer">
+<div class="advertising-vertical-banner-inner">
+
+	<!-- StartKód: adarbo2.bbmedia.cz 3.1 Nestandard  Interval(87) / homepage + cely web(1) / skyscraper120x600(6) / nestandard(24) -->
+	<script type="text/javascript">
+	/* <![CDATA[ */
+	var bbs=screen,bbn=navigator,bbh;bbh='&ubl='+bbn.browserLanguage+'&ucc='+bbn.cpuClass+'&ucd='+bbs.colorDepth+'&uce='+bbn.cookieEnabled+'&udx='+bbs.deviceXDPI+'&udy='+bbs.deviceYDPI+'&usl='+bbn.systemLanguage+'&uje='+bbn.javaEnabled()+'&uah='+bbs.availHeight+'&uaw='+bbs.availWidth+'&ubd='+bbs.bufferDepth+'&uhe='+bbs.height+'&ulx='+bbs.logicalXDPI+'&uly='+bbs.logicalYDPI+'&use='+bbs.fontSmoothingEnabled+'&uto='+(new Date()).getTimezoneOffset()+'&uti='+(new Date()).getTime()+'&uui='+bbs.updateInterval+'&uul='+bbn.userLanguage+'&uwi='+bbs.width;
+	document.write("<scr"+"ipt  type='text/javascript' src='http://adarbo2.bbmedia.cz/please/showit/87/1/6/24/?typkodu=non-standard"+bbh+"&alttext=0&border=0&bgcolor=FFFFFF&text=000000&link=0000FF&target=_top&bust="+Math.random()+"'>");
+	document.write("<"+"\/scr"+"ipt>");
+	/* ]]> */
+	</script><script type="text/javascript" src="Datab%C3%A1ze%20a%20jazyk%20SQL%20--%20Datab%C3%A1ze%20--%20V%C3%BDvoj%20aplikac%C3%AD%20--%20Interval.cz_soubory/a_003.js"></script>
+	<!-- KonecKód: adarbo2.bbmedia.cz 3.1 Nestandard -->
+
+
+
+</div>
+</div>
+
+
+
+
+</div>
+<div class="page-maker">&nbsp;</div>
+<div class="page-maker-white">&nbsp;</div>
+</div>
+<div id="advertising-page-bottom">
+
+
+
+
+
+
+
+<div class="page-maker">&nbsp;</div>
+</div>
+<div id="page-foot">
+<div id="page-foot-menu">
+<a href="http://interval.cz/redakce-inzerce.asp">Inzerce na Interval.cz</a>
+&nbsp;|&nbsp;
+<a href="http://interval.cz/redakce.asp">Redakce Interval.cz</a>
+&nbsp;|&nbsp;
+<a href="http://interval.cz/autori.asp">Hledáme nové autory</a>
+</div>
+<div id="issn">
+<a href="http://jigsaw.w3.org/css-validator/validator?uri=http%3A%2F%2Finterval.cz%2Fclanky%2Fdatabaze-a-jazyk-sql%2F" class="noprint">.</a>
+<span title="ID 314">ISSN 1212-8651</span>
+<a href="http://validator.w3.org/check?uri=http%3A%2F%2Finterval.cz%2Fclanky%2Fdatabaze-a-jazyk-sql%2F&amp;charset=%28detect+automatically%29&amp;doctype=%28detect+automatically%29&amp;outline=1&amp;verbose=1" class="noprint">.</a>
+</div>
+<div id="page-foot-zoner">
+© <a href="http://www.zoner.eu/">Zoner software, s.r.o.</a>, všechna práva vyhrazena, tento server dodržuje
+<a href="http://interval.cz/privacy.asp">právní předpisy</a>
+o ochraně osobních údajů.
+</div>
+</div>
+
+<script type="text/javascript" src="Datab%C3%A1ze%20a%20jazyk%20SQL%20--%20Datab%C3%A1ze%20--%20V%C3%BDvoj%20aplikac%C3%AD%20--%20Interval.cz_soubory/audits-footer.js"></script>
+<script type="text/javascript">
+	var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+	document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script><script src="Datab%C3%A1ze%20a%20jazyk%20SQL%20--%20Datab%C3%A1ze%20--%20V%C3%BDvoj%20aplikac%C3%AD%20--%20Interval.cz_soubory/ga.js" type="text/javascript"></script>
+<script type="text/javascript">
+	var pageTracker = _gat._getTracker("UA-173085-1");
+	pageTracker._initData();
+	pageTracker._trackPageview();
+</script>
+
+
+	<div id="advertising-context" class="noprint">
+
+	<!-- StartKód: ad2.bbmedia.cz 3.1 Interval(2098) / BillBoard Intext(1) / Intext(1) -->
+	<script type="text/javascript">/* <![CDATA[ */
+	var bbs=screen,bbn=navigator,bbh;bbh='&ubl='+bbn.browserLanguage+'&ucc='+bbn.cpuClass+'&ucd='+bbs.colorDepth+'&uce='+bbn.cookieEnabled+'&udx='+bbs.deviceXDPI+'&udy='+bbs.deviceYDPI+'&usl='+bbn.systemLanguage+'&uje='+bbn.javaEnabled()+'&uah='+bbs.availHeight+'&uaw='+bbs.availWidth+'&ubd='+bbs.bufferDepth+'&uhe='+bbs.height+'&ulx='+bbs.logicalXDPI+'&uly='+bbs.logicalYDPI+'&use='+bbs.fontSmoothingEnabled+'&uto='+(new Date()).getTimezoneOffset()+'&uti='+(new Date()).getTime()+'&uui='+bbs.updateInterval+'&uul='+bbn.userLanguage+'&uwi='+bbs.width;
+	document.write("<scr"+"ipt type='text/javascript' src='http://ad2.bbmedia.cz/please/showit/2098/1/1/7/?typkodu=js"+bbh+"&alttext=0&border=0&bust="+Math.random()+"&target=_blank'><"+"\/scr"+"ipt>");
+	/* ]]> */
+	</script><script type="text/javascript" src="Datab%C3%A1ze%20a%20jazyk%20SQL%20--%20Datab%C3%A1ze%20--%20V%C3%BDvoj%20aplikac%C3%AD%20--%20Interval.cz_soubory/a_005.js"></script><script type="text/javascript" charset="windows-1250" src="Datab%C3%A1ze%20a%20jazyk%20SQL%20--%20Datab%C3%A1ze%20--%20V%C3%BDvoj%20aplikac%C3%AD%20--%20Interval.cz_soubory/bb4.js"></script><script type="text/javascript" charset="windows-1250">document.write("<scr"+"ipt  type='text/javascript' src='http://ad2.billboard.cz/please/showit/35974/1/1/31/?typkodu=js"+bbh+"' charset='windows-1250'><"+"/scr"+"ipt>");</script><script type="text/javascript" src="Datab%C3%A1ze%20a%20jazyk%20SQL%20--%20Datab%C3%A1ze%20--%20V%C3%BDvoj%20aplikac%C3%AD%20--%20Interval.cz_soubory/a_002.js" charset="windows-1250"></script><script language="JavaScript" src="Datab%C3%A1ze%20a%20jazyk%20SQL%20--%20Datab%C3%A1ze%20--%20V%C3%BDvoj%20aplikac%C3%AD%20--%20Interval.cz_soubory/pack107.js" charset="windows-1250"></script><script type="text/javascript" charset="windows-1250" src="Datab%C3%A1ze%20a%20jazyk%20SQL%20--%20Datab%C3%A1ze%20--%20V%C3%BDvoj%20aplikac%C3%AD%20--%20Interval.cz_soubory/bbt2.js"></script>
+
+	<noscript>
+<div> <a href='http://ad2.bbmedia.cz/please/redirect/2098/1/1/7/'><img
+src='http://ad2.bbmedia.cz/please/showit/2098/1/1/7/?typkodu=img'
+alt='.' /></a></div> </noscript>
+	<!-- KonecKód: ad2.bbmedia.cz 3.1 -->
+
+	</div>
+
+
+<div style="position: absolute; left: 480px; top: 5339px; z-index: 1000000000 ! important; visibility: hidden; opacity: 1; width: 0px;" id="linkalert-box"><img style="width: 0px;" src="Datab%C3%A1ze%20a%20jazyk%20SQL%20--%20Datab%C3%A1ze%20--%20V%C3%BDvoj%20aplikac%C3%AD%20--%20Interval.cz_soubory/none-icon.png" id="linkalert-icon-1"></div></body></html>

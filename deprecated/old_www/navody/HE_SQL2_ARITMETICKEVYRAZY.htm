@@ -1,0 +1,100 @@
+<!doctype html public "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=Windows-1250">
+<title>Aritmetické výrazy (SQL)</title>
+<link rel='stylesheet' style='text/css' href='../function.css'>
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr>
+	<td style="background-image: url(../images/bghead.jpg);
+		background-position: right;
+		background-repeat: no-repeat;">
+	<table width="100%" border="0" cellpadding="0" cellspacing="0"
+		style="background-image:none">
+	<tr>
+		<td style="background-image:none" height="46"
+			width="15%"><img src="../images/title-cz.gif"
+			width="255" height="33"
+			alt="602SQL-Úplná dokumentace"
+			title="602SQL - Úplná dokumentace"
+			border="0"></td>
+		<td width="33%" align="right"><a href="../xml/html/top.html"><img class="floatno"
+			src="../images/index.gif"
+			width="15" height="16"
+			alt="Index" title="Zpět na obsah"
+			border="0" vspace="2"></a> &nbsp;
+			 </td>
+	</tr>
+	</table>
+	</td>
+</tr>
+</table><table class="navigace" border="0" width="100%"  bgcolor="#FFFFBF"><tr> <td
+width="20" align="center"><img class="floatno" src="../images/prev.gif"
+width="15" height="13" alt="&lt;&shy;" title="Předcházející téma"
+border="0"></td><td width="25%"><a
+href="HE_SQL2_VYRAZSLOUPEC.htm">Název sloupce</a></td> <td width="25%"
+align="right"><img class="floatno" src="../images/up.gif" width="13"
+height="15" alt="Nahoru" title="O jednu úroveň výš" border="0"
+align="middle"></td><td width="25%"><a href="HE_SQL2_VYRAZY.htm">Výrazy</a></td>
+<td width="25%" align="right"><a
+href="HE_SQL2_RETEZCEVYRAZY.htm">Výrazy nad znakovými a binárními řetězci</a></td><td width="20"
+align="center"><img class="floatno" src="../images/next.gif" width="15"
+height="13" alt="&shy;&gt;" title="Následující téma" border="0"></td>
+</tr></table>
+
+
+
+
+<h1><a name="he_sql2_aritmetickevyrazy"></a>Aritmetické výrazy (SQL)</h1>
+
+<p>V&nbsp;aritmetických výrazech lze používat binární operátory <code>+</code> pro sčítání <a href="HE_SQL2_CISLA.htm">čísel</a>,  <code>-</code> pro odečítání, <code>*</code> pro násobení, <code>/</code> pro dělení, <code>DIV</code> pro celočíselné dělení a <code>MOD</code> pro zbytek po celočíselném dělení. Lze také používat unární minus <code>-</code> pro obrácenou hodnotu.</p>
+
+<p>Priorita aritmetických operátorů je obvyklá:<br>
+<ol>
+<li><code>*</code>,<code>/</code>,<code>DIV</code> a <code>MOD</code> (násobení, dělení, celočíselné dělení a zbytek po dělení) </li>
+<li>unární <code>-</code> , binární <code>+</code> a <code>-</code> (sčítání a odečítání) </li>
+</ol>
+Prioritu lze změnit uzávorkováním pomocí kulatých závorek.
+</p>
+
+<p>Při vyhodnocování výrazů dochází k&nbsp;implicitním konverzím typů operandů v&nbsp;rámci numerických <a href="HE_SQL2_DATOVETYPY.htm">typů</a>. Konverze probíhá vždy na typ s&nbsp;vyšším rozsahem, tedy postupně TINYINT na SMALLINT na INTEGER na BIGINT na REAL. </p>
+<br>
+<h3>Rozšíření jazyka SQL proti normě</h3>
+
+<ul>
+	<li>Operátory <code>DIV</code> a <code>MOD</code> jsou specifické pro 602SQL.</li>
+</ul>
+
+<h3>Příklad:</h3>
+<p>V dotazu je ukázáno několik kombinací aritmetických výrazů nad datumem a čísly</p>
+<pre>SELECT Faktury.castka AS ČÁSTKA,
+         (<strong>CURRENT_DATE-dat1-14</strong>) AS POČET_DNÍ,
+         <strong>(CURRENT_DATE-dat1-14)*0.01*castka</strong> AS PENÁLE,
+         <strong>castka+(CURRENT_DATE-dat1-14)*0.01*castka</strong> AS CELKEM,
+         Firmy.nazev AS NÁZEV,
+         Faktury.cislo AS FA_ČÍSLO
+  FROM Faktury, Firmy
+  WHERE Faktury.firma=Firmy.cislo
+    AND (Faktury.zaplaceno IS NULL AND 
+         Faktury.dat1&lt;=CURRENT_DATE-14 AND
+         Faktury.druh=2)
+</pre>
+
+
+<table class="navigace" border="0" width="100%"  bgcolor="#FFFFBF"><tr> <td
+width="20" align="center"><img class="floatno" src="../images/prev.gif"
+width="15" height="13" alt="&lt;&shy;" title="Předcházející téma"
+border="0"></td><td width="25%"><a
+href="HE_SQL2_VYRAZSLOUPEC.htm">Název sloupce</a></td> <td width="25%"
+align="right"><img class="floatno" src="../images/up.gif" width="13"
+height="15" alt="Nahoru" title="O jednu úroveň výš" border="0"
+align="middle"></td><td width="25%"><a href="HE_SQL2_VYRAZY.htm">Výrazy</a></td>
+<td width="25%" align="right"><a
+href="HE_SQL2_RETEZCEVYRAZY.htm">Výrazy nad znakovými a binárními řetězci</a></td><td width="20"
+align="center"><img class="floatno" src="../images/next.gif" width="15"
+height="13" alt="&shy;&gt;" title="Následující téma" border="0"></td>
+</tr></table>
+</body>
+</html>

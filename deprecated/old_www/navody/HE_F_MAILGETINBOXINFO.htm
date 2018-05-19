@@ -1,0 +1,76 @@
+<!doctype html public "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=Windows-1250">
+<title>Funkce MailGetInBoxInfo</title>
+<link rel='stylesheet' style='text/css' href='../function.css'>
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000">
+
+
+
+<h2 class=function>MailGetInBoxInfo</h2>
+<img src='../images/cpp.gif' width='44' height='16' border='0' alt='c/c++' align='middle' hspace='2'><img src='../images/pascal.gif' width='44' height='16' border='0' alt='pascal' align='middle' hspace='2'><img src='../images/sql.gif' width='44' height='16' border='0' alt='sql' align='middle' hspace='2'>
+
+
+<br><br>
+<div class='typ'>DWORD <b>MailGetInBoxInfo</b>(DWORD mailbox, char *mtblname,  ttablenum *mtblnum, char *ftblname, ttablenum *ftblnum);<br>
+function <b>MailGetInBoxInfo</b>(mailbox : integer; var mtblname : string; var mtblnum : ttablenum; var ftblname : string; var ftblnum : ttablenum) : integer;<br>
+FUNCTION <strong>MailGetInBoxInfo</strong>(IN mailbox INT, OUT mtblname CHAR(63), OUT mtblnum INT, OUT ftblname CHAR(63), OUT ftblnum INT) RETURNS INT;
+</div>
+
+
+<p><b>Parametry</b></p>
+
+<table border=1 cols=2 frame=box rules=all width=600>
+
+<tr valign="top">
+<td width=18%><i>mailbox</i></td>
+<td width=82%>handle poštovní schránky</td>
+</tr>
+
+<tr valign="top">
+<td width=18%><i>mtblname</i></td>
+<td width=82%>výstupní parametr, jméno tabulky pro informace o došlých zásilkách</td>
+</tr>
+
+<tr valign="top">
+<td width=18%><i>mtblnum</i></td>
+<td width=82%>výstupní parametr, číslo tabulky pro informace o došlých zásilkách</td>
+</tr>
+
+<tr valign="top">
+<td width=18%><i>ftblname</i></td>
+<td width=82%>výstupní parametr, jméno tabulky pro informace o připojených souborech</td>
+</tr>
+
+<tr valign="top">
+<td width=18%><i>ftblnum</i></td>
+<td width=82%>výstupní parametr, číslo tabulky pro informace o připojených souborech</td>
+</tr>
+</table><br>
+
+<p><b>Od verze</b></p>
+
+<p>6.0f</p>
+
+<p><b>Popis</b></p>
+
+<p>Vrací informace o <a href="HE_MAILTABLES.htm">tabulkách</a> použitých pro evidenci <a href="HE_MAILRECEIVE.htm">došlé pošty</a>. Jméno tabulky vrací ve formátu: <i>jméno_aplikace.jméno_tabulky</i>, délka řetězce, do něhož se předává musí mít tedy min. délku 64.</p>
+
+<p>V defaultním stavu jsou jména tabulek následující: <code>_SYSEXT._INBOXMSGS</code> a <code>_SYSEXT._INBOXFILES</code>. Jména lze nastavit různá pro různé <a href="HE_MAILPROFILES.htm">profily</a> - pomocí parametrů profilu <code>InBoxAppl</code>, <code>InBoxMessages</code> a <code>InBoxFiles</code>.</p>
+
+<p><b>Hodnota funkce</b></p>
+
+<p>Funkce vrací nulu v případě úspěchu a  číslo chyby v případě neúspěchu. <a href="HE_MAILERRORS.htm">Číslo chyby</a> lze zjistit také pomocí <b><code>Sz_error</code></b> nebo <b><code>Signalize</code></b>.</p>
+
+<p><b>Viz</b></p>
+
+<ul class='viz'>
+ <li><a href="HE_F_MAILGETTYPE.htm">MailGetType</a> </li>
+ <li><a href="HE_F_MAILCREINBOXTABLES.htm">MailCreInBoXTables</a></li>
+</ul>
+
+</body>
+</html>

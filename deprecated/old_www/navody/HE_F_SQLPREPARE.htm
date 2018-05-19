@@ -1,0 +1,68 @@
+<!doctype html public "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=Windows-1250">
+<title>Funkce SQL_prepare</title>
+<link rel='stylesheet' style='text/css' href='../function.css'>
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000">
+
+
+
+<h2 class=function>SQL_prepare</h2>
+<img src='../images/cpp.gif' width='44' height='16' border='0' alt='c/c++' align='middle' hspace='2'><img src='../images/pascal.gif' width='44' height='16' border='0' alt='pascal' align='middle' hspace='2'>
+
+
+<br><br>
+<div class='typ'>BOOL <b>[cd_]SQL_prepare</b>([cdp_t cdp], const char * statement, uns32 * handle);<br>
+function <b>[cd_]SQL_prepare</b>([cdp : cdp_t]; statement : PChar; var handle : uns32) : Boolean;
+</div>
+
+
+<p><b>Parametry</b></p>
+
+<table border=1 cols=2 width=440>
+
+<tr valign="top">
+<td width=18%><i>statement</i></td>
+<td width=82%>SQL příkaz</td>
+</tr>
+
+<tr valign="top">
+<td width=18%><i>handle</i></td>
+<td width=82%>handle (číslo) SQL požadavku</td>
+</tr>
+
+<tr valign="top">
+<td width=18%>[<i>cdp </i></td>
+<td width=82%><a href="HE_EXTCD.htm">kontextová proměnná</a> klienta]  </td>
+</tr>
+</table><br>
+
+<p><b>Od verze:</b></p>
+
+<p>5.1</p>
+
+<p><b>Popis </b></p>
+
+<p>Funkce připraví k provedení <a href="HE_SQL2_PRIPRAVAPRIKAZU.htm">příkaz</a> zadaný parametrem <i>statement</i> a v případě úspěchu vrátí jeho <i>handle</i>. Způsob předávání proměnných jazyka - viz <a href="HE_SQL2_PROMENNEJAZYKA.htm">Proměnné klientského programovacího jazyka v příkazech SQL</a>.</p>
+
+
+<p><b>Hodnota funkce </b></p>
+
+<p>Funkce vrací TRUE při chybě.</p>
+
+<p><b>Viz</b></p>
+
+<ul class='viz'>
+<li><a href="HE_F_SQLEXECUTE.htm">SQL_execute</a> </li>
+<li><a href="HE_F_SQLEXECPREPARED.htm">SQL_exec_prepared</a> </li>
+<li><a href="HE_F_SQLDROP.htm">SQL_drop</a> </li>
+<li><a href="HE_F_SQLHOSTEXECUTE.htm">SQL_host_execute</a> </li>
+<li><a href="../xml/html/f_sql_host_prepare.html">SQL_host_prepare</a> </li>
+
+</ul>
+
+</body>
+</html>

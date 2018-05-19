@@ -1,0 +1,143 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head>
+<meta http-equiv="Content-Type" content="text/html; charset=Windows-1250"><title>1. Úvod</title>
+
+
+	
+    <link rel="STYLESHEET" type="text/css" href="kap1_soubory/main.css">
+	<style type="text/css"><!--:hover { font-weight: bold;         color: red }
+--></style></head><body alink="Blue" background="kap1_soubory/pozadi.jpg" vlink="Blue">
+<a name="k"></a>
+<img src="kap1_soubory/prev.gif">
+<a href="http://www.cs.vsb.cz/amalka/tomica/sql/kap2.html"><img src="kap1_soubory/next.gif" alt="2. Definice dat v SQL "></a>
+<a href="http://www.cs.vsb.cz/amalka/tomica/sql/index.html"><img src="kap1_soubory/toc.gif" alt="Obsah"></a>
+<hr color="Blue" size="1">
+<h1>1. Úvod do SQL</h1>
+<p>Současné relační SŘBD obsahují ve většině případů uživatelský jazyk
+SQL (Structured Query Language). Jeho
+počátky sahají do r.1974, kdy se ještě nazýval Sequel [CB74] a byl
+zaměřen hlavně na svou dotazovací část. Jeho prototypová implementace
+byla součástí Systému R vyvinutého v laboratoři IBM v San Jose v
+Kalifornii (dnes Almaden Research Center), kde byl zaměstnán i tvůrce
+RMD (relační datový model) - Dr.E.F.Codd . </p>
+<p>Výchozí koncepce jazyka SQL (vyslovuj es kjú el) je tedy stará již
+20 let. Protože jazyk vznikal dosti živelným způsobem (podobně jako v
+programovacích jazycích FORTRAN), dlouho nebyla publikována jeho
+definitivní syntaxe. Řada "SQL-like" produktů, které vznikly v 1.
+polovině 80. let, se v některých rysech překrývá, v některých odlišuje;
+situace volala po standardizaci, ke které skutečně v r. 1986 došlo. Na
+trhu se již objevily desítky systémů SQL (Date uvádí v r.1986 více než
+35 komerčních produktů [Da86], Jones hovoří v roce 1989 již o více než
+55 produktech [Jo89]) Připomeňme v této souvislosti, že filozofie
+jazyka byla československé odborné veřejnosti prezentována na semináři
+SOFSEM již v r.1978 [PBK78]. </p>
+<p>Z prvních významnějších produktů obsahujících SQL jmenujme tři
+systémy IBM, jichž je SQL součástí: DB2, SQL/DS a QMF. DB2 je SŘBD pro
+operační systémy MVS/370 a MVS/XA, SQL/DS je SŘBD pro operační systémy
+VMJCMS a DOS/VSE. Oba SŘBD také umožňují využívat data z hierarchicky
+orientovaného SŘBD IMS. V QMF je SQL použit jako uživatelské rozhraní.
+Jak SQL/DS, tak DB2 vycházejí v základní koncepci ze Systému R. </p>
+<p>S nástupem počítačů třídy PC se řada světových výrobců software
+začala v 80. letech orientovat na implementaci SQL. Patřila mezi ně i
+známá firma Ashton-Tate s SQL v dBASE IV Implementace SQL v dBASE i
+FoxPro ovšem nejsou úplnými verzemi jazyka. Známý je i SQL/RT firmy IBM
+na osobním počítači RT, který se již vyrovná, co se týče výkonnosti,
+SŘBD na větších počítačích. Přehledné, i když dnes už spíše historické
+srovnání šesti SŘBD s SQL ve verzích pro počítače třídy PC (INFORMIX-
+SQL, INGRES pro PC, ORACLE, SQLBase, XDB II, XQL) je možné nalézt v
+článku [FP88], srovnání dBASE IV a ORACLE je v [KKD90]. </p>
+<p>Od jednouživatelských SŘBD (případně verzí těchto systémů v
+lokálních sítích) s SQL přistoupila řada výrobců k vytváření výkonných
+SŘBD v prostředí UNIX, resp. databázových serverů založených přímo na
+SQL. Z implementací této třídy je u nás k vidění např. SŘBD ORACLE,
+INFORMIX, PROGRESS, INGRES a další. Z kompatibilního software pro
+databázový server s SQL přímo v názvu produktu jmenujme alespoň SQL
+Server od Sybase (pro Netware, UNIX, VAX/VMS) a SQL Server od firmy
+Microsoft (pro
+OS2).</p>
+<p>SQL bývá použit i jako rozhraní jiných, obecně nerelačních systémů.
+SQL je obsažen
+též v poslední verzi velmi efektivního prostředku pro hierarchicky
+orientované databázové aplikace - DATAFLEXu. Také SŘBD ADABAS má
+rozhraní SQL. </p>
+<p>Zlomem ve vývoji SQL se stala jeho již zmíněná standardizace
+organizací ANSI v roce 1986 a její přijetí ISO v r. 1987 [IS087].
+Standard představoval v podstatě dialekt SQL firmy IBM a byl
+charakterizován jako "průnik existujících implementací". Nazývá se též
+SQL86. Rozšíření definičního jazyka týkající se možnosti definovat
+integritní omezení byla shrnuta ve zprávě [IS089]. Takto rozšířený SQL
+se nazývá SQL89. Další vývoj jazyka vyústil do standardu SQL92, který
+byl přijat ANSI v r. 1992. </p>
+<p>Mezi standardy též existuje verze X/OPEN SQL vycházející z ANSI,
+ovšem s některými rozdíly souvisejícími s použitím UNIXU jako
+implementačního prostředí. Firma IBM také publikovala svůj vlastní
+standard - Systems Application Architecture Database Interface
+(SAA-SQL). SQL je také částí federálního standardu pro zpracování
+informací (FIPS). </p>
+<p><i>SQL je více než dotazovací jazyk. Je možné v něm definovat data a
+provádět aktualizace, tak jak je obvyklé u každého SŘBD, možné je i
+definovat uživatelská práva přístupu k relacím. Zatímco definice dat
+prostřednictvím množiny tabulek (odpovídajících relačnímu schématu
+databáze) vedou k fyzicky existujícím objektům v podobě záznamů, nabízí
+SQL také možnost vytvářet pohledy.</i> </p>
+<p>Dalším rysem řady implementací SQL je možnost definovat indexy, tj.
+indexové struktury umožňující rychlejší přístup k prvkům relací při
+zpracování uživatelského požadavku. Jejich vyhodnocování ovšem provádí
+SŘBD, který sám určuje eventuální použití indexů, případně rozhodne o
+jejich dočasném (či trvalém) vytvoření. V tomto smyslu je dotazovací
+jazyk SQL nezávislý na fyzické organizaci dat; použití indexů se
+nevyskytuje explicitně v uživatelských dotazech. </p>
+<p>Pohledy i indexy mohou být v průběhu existence relační databáze
+definovány a opět rušeni. a to podle požadavků uživatele. V
+architektuře rozsáhlejších IS je přirozené nechat tuto starost na
+správci dat. </p>
+<p>SQL se v relačních SŘBD vyskytuje obvykle ve dvou verzích současně -
+interakční a hostitelské. V interakční verzi se příkazy dají používat
+samostatně v režimu online. v hostitelské se příkazy SQL stávají
+součástí hostitelského jazyka, jako je např. PL/1, COBOL. FORTRAN apod.
+V hostitelské verzi je nutné vhodně realizovat vazby mezi proměnnými
+programovacího jazyka a výsledky dotazů v SQL. Implementace SQL se liší
+ve způsobu práci s dotazem. Některé systémy jsou interpretační, některé
+kompilační. Např. SQL/DS nebo DBje plně kompilační systém, tj. jak v
+hostitelské, tak v interakční verzi je dotaz kompilován. Toto řešení je
+perspektivní v tom, že lze dosáhnout optimalizovaného kódu přeloženého
+dotazu. ovšem za cenu režie potřebné pro překlad a jeho optimalizaci. </p>
+<dl>
+<dt>Proces zpracování např. v hostitelské verzi pak probíhá následovně:</dt>
+<ul type="circle">
+<li> příkaz v SQL je předkompilátorem nahrazen jistým voláním procedury (CALL v PL/1), 
+</li><li> program je dále kompilován běžným způsobem, 
+</li><li> dotaz je kompilován, optimalizován a uložen ve vyvolatelné verzi ve slovníku dat. 
+</li></ul>
+</dl>
+<p>Takto vytvořená verze dotazu je potom k dispozici v okamžiku běhu
+programu, ovšem s tím. že po překladu dotazu mohly být změněny
+podmínky, za nichž byl způsob zpracování dotazu plánován (např. došlo
+ke změně indexu pro nějaký atribut relace). V době volání programu tedy
+již neplatí rozhodnutí užitá v době kompilace. V takovém případě zařídí
+např.
+SŘBD DB2 rekompilaci dotazu, ovšem tak, aniž by byl narušen
+zkompilovaný uživatelský program. Tímto způsobem je vlastně realizována
+tolik proklamovaná nezávislost programů na fyzických datech. </p>
+<dl>
+<dt>Jazyk SQL má několik částí:</dt>
+<ul>
+<li>jazyk pro definici dat, 
+</li><li>interaktivní jazyk pro manipulaci dat, 
+</li><li>jazyk pro manipulaci dat v hostitelské verzi, 
+</li><li>možnost definice pohledů, 
+</li><li>možnost definice přístupových práv, 
+</li><li>možnost definice integritních omezení (v praxi používaném standardu, tj. v
+  SQL89, jde zatím oproti původnímu Sequelu pouze o omezené možnosti), 
+</li><li>řízení transakcí (příkazy pro specifikaci začátku a konce
+transakce; SAA-SQL umožňuje i explicitní uzamykání dat pro paralelní
+přístup k datům). </li></ul>
+</dl>
+<p>Budeme se zatím věnovat jednotlivým rysům jazyka SQL bez ohledu na
+standard, tj. spíše z hlediska sjednocení různých prvků, tak jak se
+vyskytují v různých známých implementacích.</p>
+<hr color="Blue" size="1">
+<img src="kap1_soubory/prev.gif" align="left">
+<a href="http://www.cs.vsb.cz/amalka/tomica/sql/kap2.html"><img src="kap1_soubory/next.gif" alt="2. Definice dat v SQL " align="left"></a>
+<a href="http://www.cs.vsb.cz/amalka/tomica/sql/index.html"><img src="kap1_soubory/toc.gif" alt="Obsah" align="left"></a>
+<div style="position: absolute; left: 0px; top: 0px; z-index: 1000000000 ! important; visibility: hidden; opacity: 1;" id="linkalert-box"><img src="kap1_soubory/none-icon.png" id="linkalert-icon-1"></div></body></html>

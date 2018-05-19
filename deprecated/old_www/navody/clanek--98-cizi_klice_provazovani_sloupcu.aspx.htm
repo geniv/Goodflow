@@ -1,0 +1,576 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head id="ctl00_Head1">
+
+
+
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"><meta http-equiv="Content-Language" content="cs"><meta name="description" content="Články, diskuse, blogy a mnoho dalších informací o programování v jazyce Visual Basic .NET, o .NET frameworku obecně a o nejnovějších technologiích od Microsoftu."><meta name="author" content="Tomáš Jecha, Tomáš Herceg"><link rel="shortcut icon" href="http://www.vbnet.cz/vbnet.ico"><link rel="meta" href="http://www.vbnet.cz/pics-labels.xml" type="application/rdf xml" title="ICRA labels"><link rel="search" type="application/opensearchdescription+xml" href="http://www.vbnet.cz/vbnet-search.xml" title="VbNet.cz vyhledávání"><meta http-equiv="pics-Label" content="(pics-1.1 &quot;http://www.icra.org/pics/vocabularyv03/&quot; l gen true for     &quot;http://vbnet.cz&quot; r (n 0 s 0 v 0 l 0 oa 0 ob 0 oc 0 od 0 oe 0 of 0 og 0 oh 0 c 1) gen true for     &quot;http://www.vbnet.cz&quot; r (n 0 s 0 v 0 l 0 oa 0 ob 0 oc 0 od 0 oe 0 of 0 og 0 oh 0 c 1))"><title>VB.NET | Články - Stopařův průvodce po databázích - Díl 3. - Cizí klíče - provazování sloupců</title><link href="clanek--98-cizi_klice_provazovani_sloupcu.aspx_soubory/Style.css" type="text/css" rel="stylesheet"><meta name="robots" content="index, follow"><link rel="alternate" type="application/rss+xml" href="http://www.vbnet.cz/RSS.ashx?item=forum-thread&amp;id=1168" title="Diskuse k článku: Cizí klíče - provazování sloupců"><style type="text/css">
+
+
+
+
+.csharpcode, .csharpcode pre
+{
+	font-size: small;
+	color: black;
+	font-family: consolas, "Courier New", courier, monospace;
+	background-color: #ffffff;
+	/*white-space: pre;*/
+}
+.csharpcode pre { margin: 0em; }
+.csharpcode .rem { color: #008000; }
+.csharpcode .kwrd { color: #0000ff; }
+.csharpcode .str { color: #006080; }
+.csharpcode .op { color: #0000c0; }
+.csharpcode .preproc { color: #cc6633; }
+.csharpcode .asp { background-color: #ffff00; }
+.csharpcode .html { color: #800000; }
+.csharpcode .attr { color: #ff0000; }
+.csharpcode .alt 
+{
+	background-color: #f4f4f4;
+	width: 100%;
+	margin: 0em;
+}
+.csharpcode .lnum { color: #606060; }</style></head><body style="min-width: 950px;">
+    <form name="aspnetForm" method="post" action="Article.aspx?id=98" id="aspnetForm">
+<div>
+<input name="__EVENTTARGET" id="__EVENTTARGET" value="" type="hidden">
+<input name="__EVENTARGUMENT" id="__EVENTARGUMENT" value="" type="hidden">
+<input name="__VIEWSTATE" id="__VIEWSTATE" value="/wEPZwUPOGNhOTA5NjYzZThhYTY0lGhrfrWsbKP0goYqunlldreYF7c=" type="hidden">
+</div>
+
+<script type="text/javascript">
+//<![CDATA[
+var theForm = document.forms['aspnetForm'];
+function __doPostBack(eventTarget, eventArgument) {
+    if (!theForm.onsubmit || (theForm.onsubmit() != false)) {
+        theForm.__EVENTTARGET.value = eventTarget;
+        theForm.__EVENTARGUMENT.value = eventArgument;
+        theForm.submit();
+    }
+}
+//]]>
+</script>
+
+
+<script src="clanek--98-cizi_klice_provazovani_sloupcu.aspx_soubory/WebResource.js" type="text/javascript"></script>
+
+
+<script type="text/javascript">
+//<![CDATA[
+function getCookie(key) {      // získat hodnotu cookie
+  var cookies = document.cookie.split(';');
+  for (var i = 0; i < cookies.length; i++) {
+    while ((cookies[i].length > 0) && (cookies[i].charAt(0) == ' ')) cookies[i] = cookies[i].substring(1);
+    if (cookies[i].toLowerCase().indexOf(key.toLowerCase() + '=') == 0) 
+      return unescape(cookies[i].substring(key.length + 1));
+  }
+  return '';
+}
+function TreeViewExpandCollapse(id, imageName, listName, expandedUrl, collapsedUrl, expandedAlt, collapsedAlt) {
+  // rozbalí nebo sbalí položku menu
+  arr = getCookie('menuState').split('_');
+  if (document.getElementById(listName).style.display == 'none') {
+    document.getElementById(listName).style.display = '';
+    document.getElementById(imageName).src = expandedUrl;
+    document.getElementById(imageName).alt = expandedAlt;
+    document.getElementById(imageName).parentNode.parentNode.className = '';
+    for (var i = 0; i < arr.length; i++)
+      if (arr[i] == id) arr[i] = null;
+  } else {
+    document.getElementById(listName).style.display = 'none';
+    document.getElementById(imageName).src = collapsedUrl;
+    document.getElementById(imageName).alt = collapsedAlt;
+    document.getElementById(imageName).parentNode.parentNode.className = 'final';
+    arr[arr.length] = id;
+  }
+  document.cookie = 'menuState=' + arr.join('_');
+}
+function StarRatingSystem_mouseEn(index,unq) { StarRatingSystem_showStars(index,unq,1); }
+function StarRatingSystem_mouseLv(index,unq) { StarRatingSystem_showStars(index,unq,0); }
+function StarRatingSystem_showStars(cnt,unq,hvr) { 
+for (i=1;i<6;i++){ 
+if(i*2>cnt) { document.getElementById(unq+i).src='App_Themes/Default2/images/star_none.gif'; }
+if(i*2<=cnt && hvr==0) { document.getElementById(unq+i).src='App_Themes/Default2/images/star_full.gif'; }
+if(i*2<=cnt && hvr==1) { document.getElementById(unq+i).src='App_Themes/Default2/images/star_hover.gif'; }
+if(i*2==cnt+1) { document.getElementById(unq+i).src='App_Themes/Default2/images/star_half.gif'; } } }var __cultureInfo = '{"name":"cs-CZ","numberFormat":{"CurrencyDecimalDigits":2,"CurrencyDecimalSeparator":",","IsReadOnly":true,"CurrencyGroupSizes":[3],"NumberGroupSizes":[3],"PercentGroupSizes":[3],"CurrencyGroupSeparator":" ","CurrencySymbol":"Kč","NaNSymbol":"Není číslo","CurrencyNegativePattern":8,"NumberNegativePattern":1,"PercentPositivePattern":1,"PercentNegativePattern":1,"NegativeInfinitySymbol":"-nekonečno","NegativeSign":"-","NumberDecimalDigits":2,"NumberDecimalSeparator":",","NumberGroupSeparator":" ","CurrencyPositivePattern":3,"PositiveInfinitySymbol":"+nekonečno","PositiveSign":"+","PercentDecimalDigits":2,"PercentDecimalSeparator":",","PercentGroupSeparator":" ","PercentSymbol":"%","PerMilleSymbol":"‰","NativeDigits":["0","1","2","3","4","5","6","7","8","9"],"DigitSubstitution":1},"dateTimeFormat":{"AMDesignator":"dop.","Calendar":{"MinSupportedDateTime":"\/Date(-62135596800000)\/","MaxSupportedDateTime":"\/Date(253402297199999)\/","AlgorithmType":1,"CalendarType":1,"Eras":[1],"TwoDigitYearMax":2029,"IsReadOnly":true},"DateSeparator":".","FirstDayOfWeek":1,"CalendarWeekRule":0,"FullDateTimePattern":"d. MMMM yyyy H:mm:ss","LongDatePattern":"d. MMMM yyyy","LongTimePattern":"H:mm:ss","MonthDayPattern":"dd MMMM","PMDesignator":"odp.","RFC1123Pattern":"ddd, dd MMM yyyy HH\u0027:\u0027mm\u0027:\u0027ss \u0027GMT\u0027","ShortDatePattern":"d.M.yyyy","ShortTimePattern":"H:mm","SortableDateTimePattern":"yyyy\u0027-\u0027MM\u0027-\u0027dd\u0027T\u0027HH\u0027:\u0027mm\u0027:\u0027ss","TimeSeparator":":","UniversalSortableDateTimePattern":"yyyy\u0027-\u0027MM\u0027-\u0027dd HH\u0027:\u0027mm\u0027:\u0027ss\u0027Z\u0027","YearMonthPattern":"MMMM yyyy","AbbreviatedDayNames":["ne","po","út","st","čt","pá","so"],"ShortestDayNames":["ne","po","út","st","čt","pá","so"],"DayNames":["neděle","pondělí","úterý","středa","čtvrtek","pátek","sobota"],"AbbreviatedMonthNames":["I","II","III","IV","V","VI","VII","VIII","IX","X","XI","XII",""],"MonthNames":["leden","únor","březen","duben","květen","červen","červenec","srpen","září","říjen","listopad","prosinec",""],"IsReadOnly":true,"NativeCalendarName":"gregoriánský kalendář","AbbreviatedMonthGenitiveNames":["I","II","III","IV","V","VI","VII","VIII","IX","X","XI","XII",""],"MonthGenitiveNames":["ledna","února","března","dubna","května","června","července","srpna","září","října","listopadu","prosince",""]}}';//]]>
+</script>
+
+<script src="clanek--98-cizi_klice_provazovani_sloupcu.aspx_soubory/ScriptResource.js" type="text/javascript"></script>
+<script src="clanek--98-cizi_klice_provazovani_sloupcu.aspx_soubory/ScriptResource_002.js" type="text/javascript"></script>
+        <script type="text/javascript">
+//<![CDATA[
+Sys.WebForms.PageRequestManager._initialize('ctl00$ScriptManager1', document.getElementById('aspnetForm'));
+Sys.WebForms.PageRequestManager.getInstance()._updateControls(['tctl00$ctl10$updatePanelOpinionPool','tctl00$MainContent$Repeater1$ctl00$articleRating$UpdatePanel1'], [], [], 90);
+//]]>
+</script>
+
+        <div id="page_shadow">
+            <div id="page">
+                <div id="top_bnr">
+                    <div id="ln1">
+                        
+                        
+                        
+                        
+                                Nejste přihlášen |
+                                <a id="ctl00_LoginView1_HyperLink1" href="http://www.vbnet.cz/register.aspx">Zaregistrovat</a>
+                            
+                        |
+                        <a id="ctl00_LoginStatus1" href="javascript:__doPostBack('ctl00$LoginStatus1$ctl02','')">Přihlásit</a>
+                        
+                                | <a id="ctl00_LoginView4_hyperInfoCard" href="http://www.vbnet.cz/clogin.aspx?ReturnUrl=%2fclanek--98-cizi_klice_provazovani_sloupcu.aspx"><img id="ctl00_LoginView4_imgInfoCard" src="clanek--98-cizi_klice_provazovani_sloupcu.aspx_soubory/cardspace16.gif" alt="Přihlásit se pomocí technologie InfoCard" style="border-width: 0px;"></a>
+                            
+                    </div>
+                    <div id="main_menu">
+                        <a id="ctl00_HyperLinkSnippets" href="http://www.vbnet.cz/Snippets.aspx">snippety</a> | 
+                        <a id="ctl00_HyperLinkSeries" href="http://www.vbnet.cz/Series.aspx">seriály</a><br>
+                        <a id="ctl00_HyperLinkClanky" href="http://www.vbnet.cz/Articles.aspx">články</a> | 
+                        <a id="ctl00_HyperLinkBlogy" href="http://www.vbnet.cz/Blogs.aspx">blogy</a> |
+                        <a id="ctl00_HyperLinkFora" href="http://www.vbnet.cz/Forums.aspx">diskuse</a>
+                    </div>
+                </div>
+                <div id="left_menu">
+                    <div class="in">
+                        
+                        <ul>
+	<li class="final"><img src="clanek--98-cizi_klice_provazovani_sloupcu.aspx_soubory/non_expandable.gif" alt="&nbsp;">&nbsp;<a href="http://www.vbnet.cz/Default.aspx" title="">Home</a></li>
+	<li class="final"><img src="clanek--98-cizi_klice_provazovani_sloupcu.aspx_soubory/non_expandable.gif" alt="&nbsp;">&nbsp;<a href="http://www.vbnet.cz/Search.aspx" title="">Vyhledávání</a></li>
+	<li class="final"><img src="clanek--98-cizi_klice_provazovani_sloupcu.aspx_soubory/non_expandable.gif" alt="&nbsp;">&nbsp;<a href="http://www.vbnet.cz/Forums.aspx" title="">Diskusní fóra</a></li>
+	<li><a href="javascript:TreeViewExpandCollapse(3,'ctl00_TreeView1_img3','ctl00_TreeView1_node3','App_Themes/Default/images/collapsed.gif','App_Themes/Default/images/expanded.gif','+','-');"><img src="clanek--98-cizi_klice_provazovani_sloupcu.aspx_soubory/collapsed.gif" alt="+" style="border: medium none ; vertical-align: middle;" id="ctl00_TreeView1_img3"></a>&nbsp;<a href="http://www.vbnet.cz/Blogs.aspx" title="">Blogy</a>
+		<ul id="ctl00_TreeView1_node3">
+			<li class="final"><img src="clanek--98-cizi_klice_provazovani_sloupcu.aspx_soubory/non_expandable.gif" alt="&nbsp;">&nbsp;<a href="http://www.vbnet.cz/blog--tomas.aspx" title="Vývojářský blog Tomáše Hercega">Tomáš Herceg</a></li>
+			<li class="final"><img src="clanek--98-cizi_klice_provazovani_sloupcu.aspx_soubory/non_expandable.gif" alt="&nbsp;">&nbsp;<a href="http://www.vbnet.cz/blog--jechtom.aspx" title="Vývojářský blog Tomáše Jechy">Tomáš Jecha</a></li>
+			<li class="final"><img src="clanek--98-cizi_klice_provazovani_sloupcu.aspx_soubory/non_expandable.gif" alt="&nbsp;">&nbsp;<a href="http://www.vbnet.cz/blog--ctenari.aspx" title="Programy a aplikace od našich čtenářů">Od našich čtenářů</a></li>
+		</ul>
+	</li>
+	<li><a href="javascript:TreeViewExpandCollapse(7,'ctl00_TreeView1_img7','ctl00_TreeView1_node7','App_Themes/Default/images/collapsed.gif','App_Themes/Default/images/expanded.gif','+','-');"><img src="clanek--98-cizi_klice_provazovani_sloupcu.aspx_soubory/collapsed.gif" alt="+" style="border: medium none ; vertical-align: middle;" id="ctl00_TreeView1_img7"></a>&nbsp;<a href="http://www.vbnet.cz/Articles.aspx" title="">Články</a>
+		<ul id="ctl00_TreeView1_node7">
+			<li class="final"><img src="clanek--98-cizi_klice_provazovani_sloupcu.aspx_soubory/non_expandable.gif" alt="&nbsp;">&nbsp;<a href="http://www.vbnet.cz/kategorie--18.aspx" title="Vývoj webových aplikací v ASP.NET">ASP.NET</a></li>
+			<li class="final"><img src="clanek--98-cizi_klice_provazovani_sloupcu.aspx_soubory/non_expandable.gif" alt="&nbsp;">&nbsp;<a href="http://www.vbnet.cz/kategorie--1.aspx" title="Algoritmy a standardizované rychlé postupy pro řešení obecných úloh (třídění dat atd.)">Algoritmy</a></li>
+			<li class="final"><img src="clanek--98-cizi_klice_provazovani_sloupcu.aspx_soubory/non_expandable.gif" alt="&nbsp;">&nbsp;<a href="http://www.vbnet.cz/kategorie--2.aspx" title="Hotové aplikace a ukázky použití nějaké technologie">Aplikace</a></li>
+			<li class="final"><img src="clanek--98-cizi_klice_provazovani_sloupcu.aspx_soubory/non_expandable.gif" alt="&nbsp;">&nbsp;<a href="http://www.vbnet.cz/kategorie--3.aspx" title="Práce s databázemi (MS SQL 2005 a další)">Databáze</a></li>
+			<li class="final"><img src="clanek--98-cizi_klice_provazovani_sloupcu.aspx_soubory/non_expandable.gif" alt="&nbsp;">&nbsp;<a href="http://www.vbnet.cz/kategorie--4.aspx" title="Formuláře, MDI a práce s nimi">Formuláře</a></li>
+			<li><a href="javascript:TreeViewExpandCollapse(12,'ctl00_TreeView1_img12','ctl00_TreeView1_node12','App_Themes/Default/images/collapsed.gif','App_Themes/Default/images/expanded.gif','+','-');"><img src="clanek--98-cizi_klice_provazovani_sloupcu.aspx_soubory/collapsed.gif" alt="+" style="border: medium none ; vertical-align: middle;" id="ctl00_TreeView1_img12"></a>&nbsp;<a href="http://www.vbnet.cz/kategorie--5.aspx" title="Vše, co se týká grafiky, vykreslování a animací">Grafika</a>
+				<ul id="ctl00_TreeView1_node12">
+					<li class="final"><img src="clanek--98-cizi_klice_provazovani_sloupcu.aspx_soubory/non_expandable.gif" alt="&nbsp;">&nbsp;<a href="http://www.vbnet.cz/kategorie--13.aspx" title="2D a 3D zobrazení pomocí rozhraní DirectX">DirectX</a></li>
+					<li class="final"><img src="clanek--98-cizi_klice_provazovani_sloupcu.aspx_soubory/non_expandable.gif" alt="&nbsp;">&nbsp;<a href="http://www.vbnet.cz/kategorie--14.aspx" title="2D vykreslování pomocí System.Drawing">GDI+</a></li>
+					<li class="final"><img src="clanek--98-cizi_klice_provazovani_sloupcu.aspx_soubory/non_expandable.gif" alt="&nbsp;">&nbsp;<a href="http://www.vbnet.cz/kategorie--15.aspx" title="2D a 3D zobrazení s pomocí engine TrueVision 3D">TrueVision 3D</a></li>
+					<li class="final"><img src="clanek--98-cizi_klice_provazovani_sloupcu.aspx_soubory/non_expandable.gif" alt="&nbsp;">&nbsp;<a href="http://www.vbnet.cz/kategorie--16.aspx" title="Programování her pomocí XNA Frameworku">XNA</a></li>
+				</ul>
+			</li>
+			<li class="final"><img src="clanek--98-cizi_klice_provazovani_sloupcu.aspx_soubory/non_expandable.gif" alt="&nbsp;">&nbsp;<a href="http://www.vbnet.cz/kategorie--6.aspx" title="Hry a jednoduché aplikace pro pobavení">Hry</a></li>
+			<li class="final"><img src="clanek--98-cizi_klice_provazovani_sloupcu.aspx_soubory/non_expandable.gif" alt="&nbsp;">&nbsp;<a href="http://www.vbnet.cz/kategorie--7.aspx" title="Používání standardní palety komponent a tvorba vlastních komponent">Komponenty</a></li>
+			<li class="final"><img src="clanek--98-cizi_klice_provazovani_sloupcu.aspx_soubory/non_expandable.gif" alt="&nbsp;">&nbsp;<a href="http://www.vbnet.cz/kategorie--8.aspx" title="Multimédia, čili zvuk a video">Multimédia</a></li>
+			<li class="final"><img src="clanek--98-cizi_klice_provazovani_sloupcu.aspx_soubory/non_expandable.gif" alt="&nbsp;">&nbsp;<a href="http://www.vbnet.cz/kategorie--9.aspx" title="Komunikování a posílání dat po sítích a v Internetu">Sítě</a></li>
+			<li class="final"><img src="clanek--98-cizi_klice_provazovani_sloupcu.aspx_soubory/non_expandable.gif" alt="&nbsp;">&nbsp;<a href="http://www.vbnet.cz/kategorie--10.aspx" title="Práce se souborovým systémem počítače">Soubory</a></li>
+			<li class="final"><img src="clanek--98-cizi_klice_provazovani_sloupcu.aspx_soubory/non_expandable.gif" alt="&nbsp;">&nbsp;<a href="http://www.vbnet.cz/kategorie--11.aspx" title="Tipy a triky anebo co se jinam nevešlo">Tipy a triky</a></li>
+			<li class="final"><img src="clanek--98-cizi_klice_provazovani_sloupcu.aspx_soubory/non_expandable.gif" alt="&nbsp;">&nbsp;<a href="http://www.vbnet.cz/kategorie--12.aspx" title="Články a tutoriály pro úplné začátečníky">Začínáme</a></li>
+			<li class="final"><img src="clanek--98-cizi_klice_provazovani_sloupcu.aspx_soubory/non_expandable.gif" alt="&nbsp;">&nbsp;<a href="http://www.vbnet.cz/kategorie--17.aspx" title="Vše, co se týka Visual Studia">Visual Studio</a></li>
+		</ul>
+	</li>
+	<li class="final"><img src="clanek--98-cizi_klice_provazovani_sloupcu.aspx_soubory/non_expandable.gif" alt="&nbsp;">&nbsp;<a href="http://www.vbnet.cz/Contact.aspx" title="">Kontakt</a></li>
+	<li class="final"><img src="clanek--98-cizi_klice_provazovani_sloupcu.aspx_soubory/non_expandable.gif" alt="&nbsp;">&nbsp;<a href="http://www.vbnet.cz/About.aspx" title="">O webu</a></li>
+</ul>
+
+                        <br>
+                        <div id="ctl00_PanelCounter" style="text-align: center;">
+	
+                            <!--Počítadlo url="NetAgent.cz"-->
+                            <a href="http://www.netagent.cz/"><script language="JavaScript" type="text/javascript">
+                            <!--
+                            document.write ('<a href="http://www.netagent.cz" target="_top"><img src="http://www.netagent.cz/agent.php?id=2012&amp;box=1&amp;color=dark&amp;ur='+escape(document.referrer)+'&amp;rw='+escape(window.screen.width)+'&amp;rh='+escape(window.screen.height)+'&amp;cd='+escape(window.screen.colorDepth)+'&amp;pt='+escape(document.title)+'&amp;lc='+escape(document.location)+'" width="100" height="72" border="0" alt="NetAgent" /></a>');
+                            //-->
+                            </script></a><a href="http://www.netagent.cz/" target="_top"><img src="clanek--98-cizi_klice_provazovani_sloupcu.aspx_soubory/agent.png" alt="NetAgent" border="0" height="72" width="100"></a><noscript><a
+href="http://www.netagent.cz" target="_top"><img
+src="http://www.netagent.cz/agent.php?id=2012&amp;box=1&amp;color=dark"
+border="0" alt="NetAgent" width="100" height="72" /></a></noscript>
+                            <!--/Počítadlo-->
+                        
+</div>
+                    
+                        <br>&nbsp;<br>
+                        
+                        <div id="ctl00_PanelOpinions">
+	
+                        <div id="ctl00_ctl10_updatePanelOpinionPool">
+		
+        <div id="ctl00_ctl10_panelControl" style="margin: 10px 10px 10px 15px; font-size: 8.25pt;">
+			
+            <span id="ctl00_ctl10_labelQuestion">Co budete dělat o prázdninách?</span>
+            <div id="ctl00_ctl10_panelOpinions">
+				<a id="ctl00_ctl10_Opinion1" href="javascript:__doPostBack('ctl00$ctl10$Opinion1','')">Válet se a užívat si volna</a><span id="ctl00_ctl10_Bar1" title="4" style="overflow: visible; color: White; background-color: Blue; width: 9px; display: block; margin-bottom: 5px;">9%</span><a id="ctl00_ctl10_Opinion2" href="javascript:__doPostBack('ctl00$ctl10$Opinion2','')">Programovat, co jiného</a><span id="ctl00_ctl10_Bar2" title="14" style="overflow: visible; color: White; background-color: Blue; width: 31px; display: block; margin-bottom: 5px;">32%</span><a id="ctl00_ctl10_Opinion3" href="javascript:__doPostBack('ctl00$ctl10$Opinion3','')">Nemám prázdniny</a><span id="ctl00_ctl10_Bar3" title="23" style="overflow: visible; color: White; background-color: Blue; width: 52px; display: block; margin-bottom: 5px;">52%</span><a id="ctl00_ctl10_Opinion4" href="javascript:__doPostBack('ctl00$ctl10$Opinion4','')">Něco jiného</a><span id="ctl00_ctl10_Bar4" title="3" style="overflow: visible; color: White; background-color: Blue; width: 6px; display: block; margin-bottom: 5px;">7%</span>
+			</div>
+            <span id="ctl00_ctl10_labelTotalVotes">Celkem hlasů: 44</span>
+        
+		</div>
+    
+	</div>
+<p>&nbsp;</p>
+
+</div>
+                    </div>
+                </div>
+                <div id="content">
+                    
+
+    <h1 class="floating">Články</h1>
+
+    
+    
+            <div style="float: right;"><a id="ctl00_MainContent_Repeater1_ctl00_ImageLinkPrint" href="http://www.vbnet.cz/Article.aspx?show=print&amp;id=98" target="_blank"><img src="clanek--98-cizi_klice_provazovani_sloupcu.aspx_soubory/print.gif" alt="Tisk článku">&nbsp;Tisk článku</a></div>
+            <h1 style="clear: both;">Cizí klíče - provazování sloupců</h1>
+            <div style="float: right;"><a href="http://www.vbnet.cz/kategorie--3.aspx">[Zpět na kategorii]</a></div>
+            <p>
+                Datum: <strong>27. 5. 2008 7:28</strong> &nbsp; &nbsp; &nbsp; 
+                Autor: <strong>Tomáš Jecha</strong> &nbsp; &nbsp; &nbsp; 
+                Zobrazeno: <strong>268x</strong>
+            </p>
+            
+            <p style="float: right;">Kategorie:&nbsp;<a href="http://www.vbnet.cz/kategorie--3.aspx">Databáze</a></p>
+            <p>Témata: <a href="http://www.vbnet.cz/Articles.aspx?catId=7" title="Databáze a jazyk SQL">SQL</a></p>
+            <p style="text-align: center;">Seriál: <a href="http://www.vbnet.cz/serial--7-stoparuv_pruvodce_po_databazich.aspx">Stopařův průvodce po databázích</a> - Díl 3.</p>
+            <p><em>V
+dalším díle seriálu o databázích si povíme o jednom z nejdůležitějších
+pilířů databázové logiky - definování vztahů mezi sloupci tabulek.
+Popíšu výhody i nevýhody, kód pro zavedení i zrušení a samozřejmě
+nezapomenu na vizuální cestu konfigurace pomocí Management Studia.</em></p>
+            <hr>
+            <div id="Article">
+                <p>Dnes
+si povíme o velmi důležitém tématu. O propojování dvou sloupců.
+Nejčastěji se setkáme s propojením dvou tabulek, ale vše je možné
+provést i v rámci jedné. Tato technika se nazívá anglicky <strong>relationship</strong>
+(vztah). Jedná se prakticky o zajištění integrity mezi hlavním a
+vedlejším záznamem. Například máme seznam výrobců a každý je definován
+jednoznačným identifikátorem. Druhá tabulka pak obsahuje výrobky +
+identifikátor výrobce. Je jasné, že by zde neměl existovat žádný
+výrobek s identifikátorem nekorespondujícím s ani jedním výrobcem z
+první tabulky. Ano, v případě, že kód je napsán 100% správně, tak k
+této situaci vůbec nedojde, ale na druhou stranu je vždy dobré mít
+určitou jistotu, že data mají stanovenou integritu. Navíc se jedná o
+značné usnadnění například při mazání výrobce. Bez provázanosti na
+úrovni databáze musíte programově buď smazat všechny jeho výrobky nebo
+je upravit, aby jejich identifikátor odpovídal jinému výrobci. Pokud to
+neuděláte, začne se tabulka plnit nikomu nepatřícími výrobky. Takový
+slepý záznam má za následek (krom zanesení databáze) možné chyby při
+zobrazování a vůbec nepříjemnosti obecně. Díky provazováním, lze tyto
+stavy velmi snadno a bezpečně ošetřit.</p>  <h3>Jak to vlastně funguje?</h3>  <p>Pro
+větší přehlednost budeme využívat tzv. databázové diagramy. Pomocí nich
+uvidíme tabulky, sloupce, klíče a vztahy. Konkrétně na následujícím
+obrázku vidíme dvě tabulky <strong>Company </strong>(výrobci) a <strong>Product </strong>(produkty)
+a to včetně jejich sloupců a klíčů. Novinkou je právě onen vztah (čára
+s klíčem na konci) definující provázanost. Klíček tu značí hlavní
+tabulku podle níž jsou ověřovány hodnoty tabulky vedlejší: </p>  <p><a href="http://www.vbnet.cz/storage/WindowsLiveWriter-Provazovnsloupcprokdyajak_A200-image_2.png"><img style="border-width: 0px;" alt="Relationhip" src="clanek--98-cizi_klice_provazovani_sloupcu.aspx_soubory/WindowsLiveWriter-Provazovnsloupcprokdyajak_A200-image_thumb.png" border="0" height="167" width="493"></a> </p>  <p>Když obě tabulky naplníme údaji, můžou vypadata třeba takhle:</p>  <p><a href="http://www.vbnet.cz/storage/WindowsLiveWriter-Provazovnsloupcprokdyajak_A200-relationship_1.png" target="_blank"><img style="border-width: 0px;" alt="Relationship Product and Company" src="clanek--98-cizi_klice_provazovani_sloupcu.aspx_soubory/WindowsLiveWriter-Provazovnsloupcprokdyajak_A200-relationshi.png" border="0" height="294" width="600"></a> </p>  <p>Všimněte si, že sloupec <strong>CompanyId </strong>opravdu koresponduje s <strong>Id</strong>
+v druhé tabulce výrobců. Je tu také názorně vidět, proč je v
+databázovém diagramu označena hlavní tabulka výrobců malým klíčem a
+vedlejší znakem nakonečna (∞) - výrobce totiž musí mít jednoznačný
+identifikátor, tedy klíč, ale výrobků pro jednoho výrobce může být
+teoreticky nekonečno.</p>  <p>Sloupec <strong>CompanyId </strong>se označuje jako <strong>cizí klíč</strong>. Tedy hodnota, která musí korespondovat s klíčem z jiné tabulky.</p>  <h3>Jak provázanost nastavit?</h3>  <p>Samotný vztah sloupců se definuje jako tzv. <strong>cizí klíč </strong>(<strong>foreign key </strong>anglicky),
+jenž určuje, že hodnota musí korespondovat s jedním z klíčů z cílové
+tabulky. V naší ukázce tedy potřebujeme vytvořit do tabulky produktů
+cizí klíč pod sloupcem <strong>CompanyId</strong>, který odkazuje do tabulky <strong>Company</strong> na sloupec klíče výrobce <strong>Id</strong>.</p>  <p>Ideální
+bude, když si celý příklad ukážeme na praktické ukázce. Pro vytvoření
+tabulek a vložení dat využijte následující skript proti prázdné
+databázi:</p>  <p></p>  <pre class="csharpcode"><span class="kwrd">SET</span> ANSI_NULLS <span class="kwrd">ON</span>
+<span class="kwrd">GO</span>
+<span class="kwrd">SET</span> QUOTED_IDENTIFIER <span class="kwrd">ON</span>
+<span class="kwrd">GO</span>
+<span class="kwrd">CREATE</span> <span class="kwrd">TABLE</span> [dbo].[Product](
+    [Id] [<span class="kwrd">int</span>] <span class="kwrd">IDENTITY</span>(1,1) <span class="kwrd">NOT</span> <span class="kwrd">NULL</span>,
+    [CompanyId] [<span class="kwrd">int</span>] <span class="kwrd">NOT</span> <span class="kwrd">NULL</span>,
+    [Name] [nvarchar](100) <span class="kwrd">NOT</span> <span class="kwrd">NULL</span>,
+ <span class="kwrd">CONSTRAINT</span> [PK_Product] <span class="kwrd">PRIMARY</span> <span class="kwrd">KEY</span> <span class="kwrd">CLUSTERED</span> 
+(
+    [Id] <span class="kwrd">ASC</span>
+)<span class="kwrd">WITH</span> (PAD_INDEX  = <span class="kwrd">OFF</span>, STATISTICS_NORECOMPUTE  = <span class="kwrd">OFF</span>, IGNORE_DUP_KEY = <span class="kwrd">OFF</span>, ALLOW_ROW_LOCKS  = <span class="kwrd">ON</span>, ALLOW_PAGE_LOCKS  = <span class="kwrd">ON</span>) <span class="kwrd">ON</span> [<span class="kwrd">PRIMARY</span>]
+) <span class="kwrd">ON</span> [<span class="kwrd">PRIMARY</span>]
+<span class="kwrd">GO</span>
+<span class="kwrd">SET</span> ANSI_NULLS <span class="kwrd">ON</span>
+<span class="kwrd">GO</span>
+<span class="kwrd">SET</span> QUOTED_IDENTIFIER <span class="kwrd">ON</span>
+<span class="kwrd">GO</span>
+<span class="kwrd">SET</span> ANSI_PADDING <span class="kwrd">ON</span>
+<span class="kwrd">GO</span>
+<span class="kwrd">CREATE</span> <span class="kwrd">TABLE</span> [dbo].[Company](
+    [Id] [<span class="kwrd">int</span>] <span class="kwrd">IDENTITY</span>(1,1) <span class="kwrd">NOT</span> <span class="kwrd">NULL</span>,
+    [Name] [nvarchar](100) <span class="kwrd">NOT</span> <span class="kwrd">NULL</span> <span class="kwrd">DEFAULT</span> (<span class="str">'firma bez názvu'</span>),
+    [Description] [nvarchar](500) <span class="kwrd">NULL</span>,
+    [City] [nvarchar](100) <span class="kwrd">NOT</span> <span class="kwrd">NULL</span>,
+    [Website] [<span class="kwrd">varchar</span>](100) <span class="kwrd">NULL</span>,
+<span class="kwrd">PRIMARY</span> <span class="kwrd">KEY</span> <span class="kwrd">CLUSTERED</span> 
+(
+    [Id] <span class="kwrd">ASC</span>
+)<span class="kwrd">WITH</span> (PAD_INDEX  = <span class="kwrd">OFF</span>, STATISTICS_NORECOMPUTE  = <span class="kwrd">OFF</span>, IGNORE_DUP_KEY = <span class="kwrd">OFF</span>, ALLOW_ROW_LOCKS  = <span class="kwrd">ON</span>, ALLOW_PAGE_LOCKS  = <span class="kwrd">ON</span>) <span class="kwrd">ON</span> [<span class="kwrd">PRIMARY</span>]
+) <span class="kwrd">ON</span> [<span class="kwrd">PRIMARY</span>]
+<span class="kwrd">GO</span>
+<span class="kwrd">SET</span> ANSI_PADDING <span class="kwrd">OFF</span>
+<span class="kwrd">GO</span>
+<span class="kwrd">SET</span> <span class="kwrd">IDENTITY_INSERT</span> [dbo].[Product] <span class="kwrd">ON</span>
+INSERT [dbo].[Product] ([Id], [CompanyId], [Name]) <span class="kwrd">VALUES</span> (1, 16, N<span class="str">'Microsoft Windows Vista'</span>)
+INSERT [dbo].[Product] ([Id], [CompanyId], [Name]) <span class="kwrd">VALUES</span> (2, 16, N<span class="str">'Microsoft Office 2007'</span>)
+INSERT [dbo].[Product] ([Id], [CompanyId], [Name]) <span class="kwrd">VALUES</span> (3, 16, N<span class="str">'Microsoft Visual Studio'</span>)
+INSERT [dbo].[Product] ([Id], [CompanyId], [Name]) <span class="kwrd">VALUES</span> (4, 17, N<span class="str">'Doom'</span>)
+INSERT [dbo].[Product] ([Id], [CompanyId], [Name]) <span class="kwrd">VALUES</span> (8, 17, N<span class="str">'Wolfenstein'</span>)
+INSERT [dbo].[Product] ([Id], [CompanyId], [Name]) <span class="kwrd">VALUES</span> (10, 17, N<span class="str">'Quake'</span>)
+INSERT [dbo].[Product] ([Id], [CompanyId], [Name]) <span class="kwrd">VALUES</span> (11, 25, N<span class="str">'Apple IPod'</span>)
+<span class="kwrd">SET</span> <span class="kwrd">IDENTITY_INSERT</span> [dbo].[Product] <span class="kwrd">OFF</span>
+<span class="kwrd">GO</span>
+<span class="kwrd">SET</span> <span class="kwrd">IDENTITY_INSERT</span> [dbo].[Company] <span class="kwrd">ON</span>
+INSERT [dbo].[Company] ([Id], [Name], [Description], [City], [Website]) <span class="kwrd">VALUES</span> (16, N<span class="str">'Microsoft CZ'</span>, N<span class="str">'Pobočka ČR'</span>, N<span class="str">'Praha'</span>, N<span class="str">'http://www.microsoft.cz'</span>)
+INSERT [dbo].[Company] ([Id], [Name], [Description], [City], [Website]) <span class="kwrd">VALUES</span> (17, N<span class="str">'Id Software'</span>, N<span class="str">'Výrobce her'</span>, N<span class="str">'Texas'</span>, N<span class="str">'http://www.idsoftware.com/'</span>)
+<span class="kwrd">SET</span> <span class="kwrd">IDENTITY_INSERT</span> [dbo].[Company] <span class="kwrd">OFF</span>
+GO</pre>
+
+
+<p>Na nás je teď vytvořit provázanost. To ukazuje i následující video.
+Abych demonstroval kontrolu klíče, vložil jsem do tabulky produktů
+řádek "<strong>Apple IPod</strong>" odkazující na neexistujícího
+výrobce. To je důvod, proč nelze provázanost vytvořit dříve než tento
+řádek smažeme nebo vytvoříme výrobce s odpovídajícím identifikátorem:</p>
+
+<div class="wlWriterSmartContent" id="scid:5737277B-5D6D-4f48-ABFC-DD9C333F4C5D:b3f9d01b-9edf-482b-9eef-5337166fa869" style="margin: 0px; padding: 0px; display: inline; float: none; width: 591px;"><div id="806764ff-beff-4da2-988c-5127e10880a3" style="margin: 0px; padding: 0px; display: inline;"><div><embed style="display: none;" src="clanek--98-cizi_klice_provazovani_sloupcu.aspx_soubory/soapbox1_1.swf" quality="high" wmode="transparent" type="application/x-shockwave-flash" pluginspage="http://macromedia.com/go/getflashplayer" flashvars="c=v&amp;v=2b9879d2-262d-4d33-bae0-e8eda1d9046e&amp;from=writer" height="497" width="591"></div></div></div>
+
+<p>Teď když zkusíte vytvořit nový výrobek a CompanyId, které neexistuje
+v tabulce Company, tak vás SQL Server na chybu upozorní a řádek
+nevytvoří. Například tento dotaz:</p>
+
+<pre class="code"><span style="color: blue;">insert into </span>[Product] <span style="color: gray;">(</span>[CompanyId]<span style="color: gray;">, </span>[Name]<span style="color: gray;">) </span><span style="color: blue;">values </span><span style="color: gray;">(</span>1234<span style="color: gray;">, </span>N<span style="color: red;">'nějaká věc'</span><span style="color: gray;">)</span></pre>
+<a href="http://11011.net/software/vspaste"></a>
+
+<p>...vrátí chybu informující o konfliktu právě založeného cizího klíče s tabulkou výrobců:</p>
+
+<pre class="code">The INSERT statement conflicted with the FOREIGN KEY constraint "FK_Product_Company". The conflict occurred in database "eshop", table "dbo.Company", column 'Id'.</pre>
+
+<p>Další z věcí o které jsem zatím nemluvil je nastavení tzv. <strong>Delete </strong>a <strong>Update </strong>akcí. Ty definují chování vztahu při smazání nebo změně klíčového sloupce. U Delete i Update lze nastavit jednu z možností:</p>
+
+<ul>
+  <li><strong>No action </strong>- bez akce - neprovede se nic a záznamy zůstanou v databázi </li>
+
+  <li><strong>Set Null </strong>-
+nastavit na hodnotu NULL - všechny cizí sloupce se při změně nebo
+smazání klíčového nastaví na NULL (nesmí být u sloupce NOT NULL, to by
+databáze NULL nedovolila nastavit) </li>
+
+  <li><strong>Set Default </strong>- stejné jako Set Null, jen nastavuje sloupec na jeho defaultní hodnotu, pokud nějakou má </li>
+
+  <li><strong>Cascade </strong>- mazání nebo úpravy se provedou i s řádky cizího klíče a tak se zajístí smazání i všech záznamů, které existují pod ním </li>
+</ul>
+
+<p>Ve videu jsem nastavil při mazání akci <strong>Cascade</strong>,
+takže když smažete řádek libovolného výrobce, automaticky se smažou i
+řádky s jeho výrobky. Nyní tak máme díky foreign key zajištěno, že
+každý výrobek má vždy svého výrobce.</p>
+
+<h3>Jak to napsat T-SQL kódem?</h3>
+
+<p>Jak už jsem psal v předchozích dílech, všechno co v management
+studiu děláte se proti SQL Serveru interpretuje T-SQL jazykem. To
+samozřejmě platí i o cizích klíčech (nebo foreign keys, jestli to máte
+raději anglicky <img alt="Tongue out" src="clanek--98-cizi_klice_provazovani_sloupcu.aspx_soubory/tongue_smile.gif">).
+Protože se FK (foreign key) uchovávají v tabulce na kterou je
+aplikován, veškerá úpravy, mazaní a vytváření se provádí za kódem <strong>ALTER TABLE [Tabulka]</strong>. Například:</p>
+
+<pre class="code"><span style="color: blue;">ALTER TABLE </span>[dbo]<span style="color: gray;">.</span>[Product] <span style="color: blue;">ADD CONSTRAINT </span>[FK_Product_Company] <span style="color: blue;">FOREIGN KEY</span><span style="color: gray;">(</span>[CompanyId]<span style="color: gray;">)
+</span><span style="color: blue;">REFERENCES </span>[dbo]<span style="color: gray;">.</span>[Company] <span style="color: gray;">(</span>[Id]<span style="color: gray;">)</span></pre>
+
+<p>Za ALTER TABLE se nalézá slovo <strong>ADD CONSTRAINT [FK_Product_Company] FOREIGN KEY </strong>informující o přidávání "omezení" typu <strong>FOREIGN KEY</strong>. V závorce je pak jméno cizího sloupce a následně <strong>REFERENCES </strong>a jméno klíčové tabulky a klíčového sloupce na který vytváříme propojení</p>
+
+<p>Je možné použít i nepříliš odlišný příkaz pro odstranění:</p>
+
+<pre class="code"><span style="color: blue;">ALTER TABLE </span>[dbo]<span style="color: gray;">.</span>[Product] <span style="color: blue;">DROP CONSTRAINT </span>[FK_Product_Company]</pre>
+<a href="http://11011.net/software/vspaste"></a>
+
+<p>Příkaz je možné ještě rozšířit o řadu nastavení, konkrétně akci při
+smazání a úpravě hlavního klíče. Zapisuje se to klíčovými slovy <strong>ON DELETE</strong> a <strong>ON UPDATE </strong>na konec dotazu. Například:</p>
+
+<pre class="code"><span style="color: blue;">ALTER TABLE </span>[dbo]<span style="color: gray;">.</span>[Product] <span style="color: blue;">ADD CONSTRAINT </span>[FK_Product_Company] <span style="color: blue;">FOREIGN KEY</span><span style="color: gray;">(</span>[CompanyId]<span style="color: gray;">)
+</span><span style="color: blue;">REFERENCES </span>[dbo]<span style="color: gray;">.</span>[Company] <span style="color: gray;">(</span>[Id]<span style="color: gray;">) </span><span style="color: blue;">ON DELETE CASCADE ON UPDATE SET </span><span style="color: gray;">NULL</span></pre>
+
+<p>Poslední důležitý přídavek je podle mého názoru přepínač <strong>WITH CHECK </strong>/ <strong>WITH NOCHECK</strong>.
+Určí, jestli se provede/ neprovede kontrola již uložených dat proti
+hlavnímu klíči. Doporučuje se používat WITH CHECK kvůli integritě dat.
+WITCH NOCHECK je k užitku pouze, když víme, že uložená data jsou 100%
+správná a integritu již mají a chceme ušetřit trochu procesorového
+času. Implicitně pro nové cizí klíče je využito možnosti WITH CHECK,
+takže se zapisovat ani nemusí. Pokud ji chceme uvést, patří před ADD
+CONSTRAINT:</p>
+
+<pre class="code"><span style="color: blue;">ALTER TABLE </span>[dbo]<span style="color: gray;">.</span>[Product] <span style="color: blue;">WITH CHECK ADD CONSTRAINT </span>[FK_Product_Company] <span style="color: blue;">FOREIGN KEY</span><span style="color: gray;">(</span>[CompanyId]<span style="color: gray;">) </span><span style="color: blue;">REFERENCES </span>[dbo]<span style="color: gray;">.</span>[Company] <span style="color: gray;">(</span>[Id]<span style="color: gray;">)</span></pre>
+
+<h3>Jaké to má v praxi nevýhody?</h3>
+
+<p>Jak to tak bývá, nic není zadarmo. To platí i o provazování sloupců.
+Za prvé se jedná zákonitě o striktní omezení a aplikace si už nemůže
+dovolit například vkládání podpoložek dříve než vloží jejich "rodiče",
+protože ještě položka rodiče v databázi neexistuje. Nebo mazání
+klíčových tabulek bez předchozího odstranění definice cizího klíče. To
+může být nepříjemné při ručním mazání tabulek. Zkuste si smazat tabulku
+<strong>Company</strong>, nepůjde to:</p>
+
+<pre class="code">Could not drop object 'Company' because it is referenced by a FOREIGN KEY constraint.</pre>
+<a href="http://11011.net/software/vspaste"></a>
+
+<p>V překladu: <em>Nelze zrušit objekt 'Company', protože je odkazován omezením typu CIZÍ KLÍČ.</em></p>
+
+<h3>Typy vazeb</h3>
+
+<p>Ukázali jsme si jak vytvořit vazbu zapomocí cizího klíče. Teď by se hodilo popsat 3 základní druhy vazeb.</p>
+
+<h4>Vazba typu 1:1 a 1:N</h4>
+
+<p>Vazba typu 1:1 a 1:N jsou na fyzickou implementaci do databáze
+naprosto shodné. Obojí se skládají ze 2 tabulek. Jedné hlavní a druhé
+vedlejší, která obsahuje cizí klíč s referencí právě na tu hlavní.</p>
+
+<p>Vše funguje tak, že v hlavní tabulce máme položky jednoznačně
+identifikované nějakým klíčem a každé z nich odpovídá právě ''N''
+položek ve vedlejší tabulce (1:N) - viz příklad tabulky produktů - je
+vždy 1 výrobce a ten má N produktů.</p>
+
+<p>Pokud máme ale vše programově zařízené tak, aby k jedné položce v
+hlavní tabulce náležela jen jedna z vedlejší, pak je to vazba 1:1 (ale
+to je už jen záležitost používání, definová je stejně jako 1:N a je
+možné ji tak využít). </p>
+
+<h4>Vazba se spojovací tabulkou typu M:N</h4>
+
+<p>Zajímavější verze vazby je M:N. Opět se realizuje pomocí cizích
+klíčů, jen s tím rozdílem, že musíme definovat novou tabulku, která
+bude sloužit jako tzv. spojovací.</p>
+
+<p>Než jej popíši, uvedu malý příklad. Máme tabulku uživatelů (<strong>User</strong>) a pak skupin (<strong>Group</strong>),
+do které chceme přiřazovat uživatele. Normálně si uděláme do uživatelů
+sloupec určující identifikátor skupiny. Jenže až budeme požadovat
+přiřazení do více skupin najednou jednoho uživatele, jsme v koncích -
+do sloupce skupiny lze zadat jen jedna hodnota. Řešením je vyvoření tak
+zvané <em>spojovací tabulky</em>, která bude obsahovat všechny vazby
+mezi uživatelem a skupinou. Bude se skládat z identifikátoru skupiny a
+identifikátoru uživatele. Proto se vazbě říká M:N, je možné mít k
+tabulce 1 přiřazeno N záznamů z tabulky 2 a naopak - v našem případě k
+jednomu uživateli N skupin, ale zároveň k jedné skupině více uživatelů.
+Nejjasněji to lze zobrazit na ukázce databázového diagramu:</p>
+
+<p><img style="border-width: 0px;" alt="Relationship M:N" src="clanek--98-cizi_klice_provazovani_sloupcu.aspx_soubory/WindowsLiveWriter-Provazovnsloupcprokdyajak_A200-image_5.png" border="0" height="145" width="645"> </p>
+
+<p>Z obrázku lze vyčíst, že spojovací tabulka (<strong>UsersInGroups</strong> - uživatelů ve skupinách) obsahuje jen dva sloupce, <strong>Username</strong> a <strong>GroupId</strong>.
+Ty jsou označeny jako cizí klíče odkazující každý do jiné, přislušné
+tabulky. Každý záznam v UsersInGroups pak spojuje jednoho uživatele s
+jednou skupinou a možností vložit do tabulky N záznamů nám zajistí
+libovolný počet přiřazení do každé skupiny.</p>
+
+<p><em>Tip: U tohoto typu vazby je velmi výhodné použít u obou cizích
+klíčů akci při smazání CASCADE. Tedy pokud smažeme buď uživatele nebo
+skupinu, automaticky se zruší i všechny vazby, které se smazaným
+záznamem měli něco společného. Mít uživatele v neexistující skupině, či
+skupinu s neexistujícím uživatelem není dobré, ale o tom jsem ostatně
+psal už v přechdozích odstavcích.</em></p>
+
+<h3>Závěrem</h3>
+
+<p>Provazování sloupců je fajn. Pomáhá nám udržovat databázi čistou a
+bez chybných dat (alespoň co se týče referencí) a v dnešních
+databázových systémech je to nepostradatelná a nenahraditelná funkce.</p>
+
+<p>Příšte si přehledně shrneme všechny druhy omezení (constraint),
+které lze na tabulku a sloupce aplikovat - zatím to byly jen hlavní
+klíče a cizí klíče.</p>
+
+<p>Pokud máte nějaké dotazy nebo konstruktivní připomínky, ptejte se a přípomínejte <img alt="Wave" src="clanek--98-cizi_klice_provazovani_sloupcu.aspx_soubory/wave1.gif">.</p>
+            </div>
+            
+            <br><small><a href="#">&gt; Na začátek</a></small>
+            <p>&nbsp;</p>
+            <div style="float: left;">
+<div class="form_rating">
+    Hodnocení:<br>
+    <div id="ctl00_MainContent_Repeater1_ctl00_articleRating_UpdatePanel1">
+	
+            <input name="ctl00$MainContent$Repeater1$ctl00$articleRating$star1" id="ctl00_MainContent_Repeater1_ctl00_articleRating_star1" onmouseover='StarRatingSystem_mouseEn(2,"ctl00_MainContent_Repeater1_ctl00_articleRating_star")' onmouseout='StarRatingSystem_mouseLv(10,"ctl00_MainContent_Repeater1_ctl00_articleRating_star")' src="clanek--98-cizi_klice_provazovani_sloupcu.aspx_soubory/star_full.gif" style="border-width: 0px;" type="image">
+            <input name="ctl00$MainContent$Repeater1$ctl00$articleRating$star2" id="ctl00_MainContent_Repeater1_ctl00_articleRating_star2" onmouseover='StarRatingSystem_mouseEn(4,"ctl00_MainContent_Repeater1_ctl00_articleRating_star")' onmouseout='StarRatingSystem_mouseLv(10,"ctl00_MainContent_Repeater1_ctl00_articleRating_star")' src="clanek--98-cizi_klice_provazovani_sloupcu.aspx_soubory/star_full.gif" style="border-width: 0px;" type="image">
+            <input name="ctl00$MainContent$Repeater1$ctl00$articleRating$star3" id="ctl00_MainContent_Repeater1_ctl00_articleRating_star3" onmouseover='StarRatingSystem_mouseEn(6,"ctl00_MainContent_Repeater1_ctl00_articleRating_star")' onmouseout='StarRatingSystem_mouseLv(10,"ctl00_MainContent_Repeater1_ctl00_articleRating_star")' src="clanek--98-cizi_klice_provazovani_sloupcu.aspx_soubory/star_full.gif" style="border-width: 0px;" type="image">
+            <input name="ctl00$MainContent$Repeater1$ctl00$articleRating$star4" id="ctl00_MainContent_Repeater1_ctl00_articleRating_star4" onmouseover='StarRatingSystem_mouseEn(8,"ctl00_MainContent_Repeater1_ctl00_articleRating_star")' onmouseout='StarRatingSystem_mouseLv(10,"ctl00_MainContent_Repeater1_ctl00_articleRating_star")' src="clanek--98-cizi_klice_provazovani_sloupcu.aspx_soubory/star_full.gif" style="border-width: 0px;" type="image">
+            <input name="ctl00$MainContent$Repeater1$ctl00$articleRating$star5" id="ctl00_MainContent_Repeater1_ctl00_articleRating_star5" onmouseover='StarRatingSystem_mouseEn(10,"ctl00_MainContent_Repeater1_ctl00_articleRating_star")' onmouseout='StarRatingSystem_mouseLv(10,"ctl00_MainContent_Repeater1_ctl00_articleRating_star")' src="clanek--98-cizi_klice_provazovani_sloupcu.aspx_soubory/star_full.gif" style="border-width: 0px;" type="image">
+            <br><span id="ctl00_MainContent_Repeater1_ctl00_articleRating_lblInfo">Hlasů: 4</span>
+            <br><small><span id="ctl00_MainContent_Repeater1_ctl00_articleRating_lbl_Cnt">Zvolte své hodnocení</span></small>
+        
+</div>
+</div></div>
+            <div style="margin: 0px 10px 50px; float: left;"><div class="photo" style="background-image: url(/UserPhoto.ashx?user=jechtom&amp;theme=Default2);" onclick="javascript: location.href='/profil--jechtom.aspx';"><div class="infoRolesAdmin"></div><div class="infoRolesAuthor"></div></div></div>
+            <h3 style="text-align: left;">Tomáš Jecha</h3>
+            <p style="font-size: 9pt; margin-top: -15px;">Tomáš
+Jecha pracuje jako .NET vývojář a působí jako člen Liberecké pobočky
+WUGu starající se o přednášky pro IT veřejnost. Jeho nejoblíbenější
+programovací jazyk je Visual Basic. V současné době se zajímá především
+o technologie přicházející s .NET 3 a 3.5. Společně s Tomášem Hercegem
+napsal tento web a stará se o jeho administraci. </p>
+                        
+            <h2 style="clear: both;">Související články</h2>
+            
+            <div>
+	<table class="grid" id="ctl00_MainContent_Repeater1_ctl00_GridView1" style="border-collapse: collapse;" border="1" cellspacing="0" rules="all">
+		<tbody><tr class="gridHeader">
+			<th scope="col">Díl</th><th scope="col">Název článku</th><th scope="col">&nbsp;</th>
+		</tr><tr class="r1">
+			<td>Díl 1.</td><td>
+                            <a style="font-weight: bold;" href="http://www.vbnet.cz/clanek--60-stoparuv_pruvodce_po_databazich_dil_1_lehky_uvod_do_databazi_sql_server_pro_zacatecniky.aspx" title="První díl nového seriálu je věnován absolutním začátečníkům v této oblasti. Povíme si něco o SQL Serveru 2005, naučíme se základní práci s SQL Server Management Studiem, vytvoříme si databázi a probereme zakládání tabulek...">Lehký úvod do databází - SQL Server pro začátečníky</a>
+                        </td><td>15. 1. 2008</td>
+		</tr><tr class="r0">
+			<td>Díl 2.</td><td>
+                            <a style="font-weight: bold;" href="http://www.vbnet.cz/clanek--74-stoparuv_pruvodce_po_databazich_dil_2_databazova_materstina_sql.aspx" title="Po delší odmlce přináším druhý díl seriálu o databázích řešených Microsoft SQL Serverem. Ukážeme si základy SQL dotazovacího jazyka, jeho zpracování v SQL Server Management Studiu a zároveň rozšíříme tabulky našeho ukázkového internetového obchodu z prvního dílu.">Databázová mateřština SQL</a>
+                        </td><td>25. 2. 2008</td>
+		</tr><tr class="r1">
+			<td>Díl 3.</td><td>
+                            <strong title="V dalším díle seriálu o databázích si povíme o jednom z nejdůležitějších pilířů databázové logiky - definování vztahů mezi sloupci tabulek. Popíšu výhody i nevýhody, kód pro zavedení i zrušení a samozřejmě nezapomenu na vizuální cestu konfigurace pomocí Management Studia.">Cizí klíče - provazování sloupců</strong>
+                        </td><td>27. 5. 2008</td>
+		</tr>
+	</tbody></table>
+</div>
+
+            <hr>
+            <a name="diskuse" id="diskuse"></a>
+            <div style="float: right;"><a href="http://www.vbnet.cz/RSS.ashx?item=forum-thread&amp;id=1168"><img alt="RSS Feed" src="clanek--98-cizi_klice_provazovani_sloupcu.aspx_soubory/rss.gif"> RSS Feed</a>
+</div>
+            <h2>Diskuse</h2>
+            
+
+            
+            <div id="ctl00_MainContent_Repeater1_ctl00_ForumPostList1_PanelCreatePost" style="text-align: center;">
+	
+    <a id="ctl00_MainContent_Repeater1_ctl00_ForumPostList1_HyperLinkCreateNew" href="http://www.vbnet.cz/ForumPost.aspx?id=1168&amp;returnUrl=clanek--98-cizi_klice_provazovani_sloupcu.aspx">Přidat nový příspěvek</a><br>&nbsp;
+
+</div>
+
+
+
+            
+            
+        
+
+
+                </div>
+                                      
+                <div class="cleaner">&nbsp;</div>
+
+            </div>
+        </div>
+        <div id="page_shadow2">
+            <div id="page2">
+                <br>
+                VBNET.CZ | © 2007 <a href="http://www.herceg.cz/">Tomáš Herceg</a>, <a href="http://www.jecha.net/">Tomáš Jecha</a> | Kopírování a přejímání publikovaných článků nebo jejich částí je bez písemného svolení autorů zakázáno.
+            </div>
+        </div>
+    
+<div>
+
+	<input name="__EVENTVALIDATION" id="__EVENTVALIDATION" value="/wEWCwLo9qiTBwLh8vmTCALT4t/lCALT4ssKAtPit68HAtPiw60EAujXoJ0CAunXoJ0CAurXoJ0CAuPXoJ0CAuTXoJ0Cm9UNmkNh349ZeoJox5VU8dHDN1Y=" type="hidden">
+</div>
+
+<script type="text/javascript">
+//<![CDATA[
+Sys.Application.initialize();
+//]]>
+</script>
+</form>
+<div style="position: absolute; left: 736px; top: 5154px; z-index: 1000000000 ! important; visibility: hidden; opacity: 1; height: 16px; width: 0px;" id="linkalert-box"><img style="width: 0px;" src="clanek--98-cizi_klice_provazovani_sloupcu.aspx_soubory/img-icon.png" id="linkalert-icon-1"></div></body></html>

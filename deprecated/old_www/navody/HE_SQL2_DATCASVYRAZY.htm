@@ -1,0 +1,90 @@
+<!doctype html public "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=Windows-1250">
+<title>Výrazy nad datem a časem v SQL</title>
+<link rel='stylesheet' style='text/css' href='../function.css'>
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr>
+	<td style="background-image: url(../images/bghead.jpg);
+		background-position: right;
+		background-repeat: no-repeat;">
+	<table width="100%" border="0" cellpadding="0" cellspacing="0"
+		style="background-image:none">
+	<tr>
+		<td style="background-image:none" height="46"
+			width="15%"><img src="../images/title-cz.gif"
+			width="255" height="33"
+			alt="602SQL-Úplná dokumentace"
+			title="602SQL - Úplná dokumentace"
+			border="0"></td>
+		<td width="33%" align="right"><a href="../xml/html/top.html"><img class="floatno"
+			src="../images/index.gif"
+			width="15" height="16"
+			alt="Index" title="Zpět na obsah"
+			border="0" vspace="2"></a> &nbsp;
+			 </td>
+	</tr>
+	</table>
+	</td>
+</tr>
+</table><table class="navigace" border="0" width="100%"  bgcolor="#FFFFBF"><tr> <td
+width="20" align="center"><img class="floatno" src="../images/prev.gif"
+width="15" height="13" alt="&lt;&shy;" title="Předcházející téma"
+border="0"></td><td width="25%"><a
+href="HE_SQL2_RETEZCEVYRAZY.htm">Výrazy nad znakovými a binárními řetězci</a></td> <td width="25%"
+align="right"><img class="floatno" src="../images/up.gif" width="13"
+height="15" alt="Nahoru" title="O jednu úroveň výš" border="0"
+align="middle"></td><td width="25%"><a href="HE_SQL2_VYRAZY.htm">Výrazy</a></td>
+<td width="25%" align="right"><a
+href="../xml/html/rounding.html">Jak zaokrouhlovat čísla v SQL?</a></td><td width="20"
+align="center"><img class="floatno" src="../images/next.gif" width="15"
+height="13" alt="&shy;&gt;" title="Následující téma" border="0"></td>
+</tr></table>
+
+
+
+
+<h1><a name="he_sql2_datcasvyrazy"></a>Výrazy nad datem a časem (SQL)</h1>
+
+<p>K hodnotám <a href="HE_SQL2_DATOVETYPY.htm">typu</a> DATE, TIME a TIMESTAMP lze přičítat a odečítat celé číslo ve významu intervalu, lze také počítat rozdíl dvou hodnot těchto stejných typů a obdržet celé číslo. </p>
+
+<p>Interval pro typ DATE vyjadřuje počet dnů, pro typ TIME počet tisícin sekundy a pro typ TIMESTAMP počet sekund. Proto například interval získaný jako rozdíl dvou hodnot typu TIME je nutno před přičtením k hodnotě typu TIMESTAMP vydělit tisícem.</p>
+
+<p>Pokud prvním operandem ve výrazu je <a href="HE_SQL2_DATUMCAS.htm">literál</a> typu TIME nebo TIMESTAMP, pak před operátorem + nebo - je nutno uvést alespoň jednu mezeru, aby nedošlo k záměně sčítání resp. odečítání s údajem o časové zóně. V následujícím příkladu první plus označuje časovou zónu, druhé plus je operátor "přičtení tisícíny sekundy".</p>
+<pre>SET tm = 12:24:00+02 + 30*1000;</pre>
+
+<p><b>Odlišnosti od normy</b>
+
+<ul>
+	<li>Použití celočíselného typu místo typu zvláštního typu INTERVAL je specifické pro 602SQL.</li>
+</ul>
+
+<p><b>Příklad použití:</b></p>
+
+<p>Vybrat faktury za posledních deset dní, použita funkce CURRENT_DATE pro získání dnešního data</p>
+
+<pre>SELECT cislo,dat1
+FROM Faktury
+WHERE dat1 BETWEEN <b>CURRENT_DATE-10</b> AND <b>CURRENT_DATE</b></pre>
+
+
+
+
+<table class="navigace" border="0" width="100%"  bgcolor="#FFFFBF"><tr> <td
+width="20" align="center"><img class="floatno" src="../images/prev.gif"
+width="15" height="13" alt="&lt;&shy;" title="Předcházející téma"
+border="0"></td><td width="25%"><a
+href="HE_SQL2_RETEZCEVYRAZY.htm">Výrazy nad znakovými a binárními řetězci</a></td> <td width="25%"
+align="right"><img class="floatno" src="../images/up.gif" width="13"
+height="15" alt="Nahoru" title="O jednu úroveň výš" border="0"
+align="middle"></td><td width="25%"><a href="HE_SQL2_VYRAZY.htm">Výrazy</a></td>
+<td width="25%" align="right"><a
+href="../xml/html/rounding.html">Jak zaokrouhlovat čísla v SQL?</a></td><td width="20"
+align="center"><img class="floatno" src="../images/next.gif" width="15"
+height="13" alt="&shy;&gt;" title="Následující téma" border="0"></td>
+</tr></table>
+</body>
+</html>

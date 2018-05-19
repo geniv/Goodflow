@@ -1,0 +1,89 @@
+<!doctype html public "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=Windows-1250">
+<title>Funkce SQL_execute</title>
+<link rel='stylesheet' style='text/css' href='../function.css'>
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000">
+
+
+
+<h2 class=function>SQL_execute</h2>
+<img src='../images/cpp.gif' width='44' height='16' border='0' alt='c/c++' align='middle' hspace='2'><img src='../images/pascal.gif' width='44' height='16' border='0' alt='pascal' align='middle' hspace='2'><img src='../images/sql.gif' width='44' height='16' border='0' alt='sql' align='middle' hspace='2'>
+
+
+<br><br>
+<div class='typ'>BOOL <b>[cd_]SQL_execute</b>([cdp_t cdp], const char * statement, uns32 * results);<br>
+function <b>[cd_]SQL_execute</b>([cdp : cdp_t]; statement : Pchar; var results) : Boolean;<br>
+FUNCTION <b>SQL_execute</b>(IN statement CLOB) RETURNS INT;
+</div>
+
+
+<p><b>Parametry</b></p>
+
+<table border=1 cols=2>
+
+<tr valign="top">
+<td width=14%><i>statement </i></td>
+<td width=86%>příkaz jazyka SQL</td>
+</tr>
+
+<tr valign="top">
+<td width=14%><i>results </i></td>
+<td width=86%>pole čísel, do nichž se zapíše informace o výsledku operace; pole musí mít svou první složku před zavoláním inicializovanou hodnotou nula</td>
+</tr>
+
+<tr valign="top">
+<td width=14%>[<i>cdp </i></td>
+<td width=86%><a href="HE_EXTCD.htm">kontextová proměnná</a> klienta]  </td>
+</tr>
+</table><br>
+
+<p><b>Od verze:</b></p>
+
+<p>5.0, úprava ve verzi 8.0</p>
+
+<p><b>Popis</b></p>
+
+<p>Funkce vykoná příkaz jazyka SQL zadaný v parametru <i>statement</i>. Při překladu volání této funkce se nekontroluje smysluplnost SQL příkazu - případná syntaktická chyba příkazu se projeví až při běhu, kdy SQL server ohlásí, že nemůže splnit požadavek. </p>
+<p>Zadáte-li více příkazů oddělených středníkem, všechny se provedou v jedné transakci.</p>
+
+<p><i>POZOR! Funkce má různé syntaxe pro různá prostředí (klientské API a SQL)!</i></p>
+
+<p>V parametru <i>statement</i> může být více SQL příkazů oddělených středníkem. </p>
+
+<p>Při volání funkce z externího jazyka je nutné uvést výstupní parametr <i>results</i>. Tímto parametrem je pole 32-bitových celých čísel bez znaménka. Pole musí obsahovat nejméně tolik složek, kolik příkazů jazyka SQL je zadáno v parametru <i>statement</i>, maximálně však 10. Volání procedury se nebere jako jeden příkaz, ale uvažují se jednotlivé příkazy v ní obsažené.  Pole musí mít svou první složku před zavoláním inicializovanou hodnotou nula. Parametr <i>results</i> slouží k získání informací o výsledku provádění příkazů. Má relevantní hodnotu pouze v případě, že funkce <b><code>SQL_execute</code></b> skončila úspěšně. Pokud byl proveden příkaz <a href="HE_SQL2_UPDATE.htm">UPDATE</a>, <a href="HE_SQL2_DELETE.htm">DELETE</a> nebo <a href="HE_SQL2_INSERT.htm">INSERT</a>, hodnotou příslušného prvku pole je počet zpracovaných záznamů. Pokud byl proveden SELECT (není SQL příkaz, lze ho však zde použít pro otevření dotazu), pak hodnotou příslušného prvku pole je číslo otevřeného kurzoru a s tímto otevřeným kurzorem je možné dále pracovat (stejně jako by byl otevřen pomocí funkce <a href="HE_F_OPENCURSORDIRECT.htm"><code>Open_cursor_direct</code></a>). Otevřený kurzor se zavírá pomocí funkce <a href="HE_F_CLOSECURSOR.htm"><code>Close_cursor</code></a>.</p>
+
+<p><b>Hodnota funkce</b></p>
+
+<p>Klientská funkce vrací hodnotu FALSE, pokud se akci podařilo úspěšně provést. V opačném případě vrací TRUE a povahu chyby lze zjistit voláním funkce <b><code>Signalize</code></b>. </p>
+
+<p>Při použití této funkce v jazyce SQL se vrací buď číslo <a href="../xml/html/comperrors.html">kompilační chyby</a>, pokud příkazy předané jako parametr nelze přeložit, nebo 0, pokud bylo provedení příkazů úspěšné - použití viz  <a href="../xml/html/dynsql.html">Dynamické SQL příkazy uvnitř uložených procedur</a>. </p>
+
+<p><b>Příklad v SQL:</b></p>
+
+<p>může-li dojít ke kompilační chybě, je třeba ji ošetřit v kódu (nelze zachytit handlerem):</p>
+
+<pre><code>SET tabname="neex_tab" ;
+SET pomstr="INSERT INTO "||tabname||" DEFAULT VALUES";
+SET err=<b>SQL_execute</b>(pomstr);
+IF err=1069 THEN 
+  CALL Log_write("kompilační chyba: tabulka &gt;"|| tabname||"&lt; neexistuje!!");  
+  SIGNAL user_except_1;
+ELSEIF err&gt;0 THEN
+  CALL Log_write("kompilační chyba:"||Int2str(err));  
+ELSE ...</code></pre>
+
+<p><b>Viz</b></p>
+
+<ul class='viz'>
+ <li><a href="HE_F_SQLPREPARE.htm">SQL_prepare</a> </li>
+ <li><a href="HE_F_SQLEXECPREPARED.htm">SQL_exec_prepared</a> </li>
+ <li><a href="HE_F_SQLDROP.htm">SQL_drop</a> </li>
+ <li><a href="HE_F_SQLHOSTEXECUTE.htm">SQL_host_execute</a> </li>
+</ul>
+
+</body>
+</html>

@@ -1,0 +1,206 @@
+<!doctype html public "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=Windows-1250">
+<title>Parametry instalace v souboru SETUP.INI</title>
+<link rel='stylesheet' style='text/css' href='../function.css'>
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr>
+	<td style="background-image: url(../images/bghead.jpg);
+		background-position: right;
+		background-repeat: no-repeat;">
+	<table width="100%" border="0" cellpadding="0" cellspacing="0"
+		style="background-image:none">
+	<tr>
+		<td style="background-image:none" height="46"
+			width="15%"><img src="../images/title-cz.gif"
+			width="255" height="33"
+			alt="602SQL-Úplná dokumentace"
+			title="602SQL - Úplná dokumentace"
+			border="0"></td>
+		<td width="33%" align="right"><a href="../xml/html/top.html"><img class="floatno"
+			src="../images/index.gif"
+			width="15" height="16"
+			alt="Index" title="Zpět na obsah"
+			border="0" vspace="2"></a> &nbsp;
+			 </td>
+	</tr>
+	</table>
+	</td>
+</tr>
+</table><table class="navigace" border="0" width="100%"  bgcolor="#FFFFBF"><tr> <td
+width="20" align="center"><img class="floatno" src="../images/prev.gif"
+width="15" height="13" alt="&lt;&shy;" title="Předcházející téma"
+border="0"></td><td width="25%"><a
+href="HE_WBRINSTAL.htm">Instalace aplikace společně s klientským prostředím</a></td> <td width="25%"
+align="right"><img class="floatno" src="../images/up.gif" width="13"
+height="15" alt="Nahoru" title="O jednu úroveň výš" border="0"
+align="middle"></td><td width="25%"><a href="../xml/html/instalac.html">Instalace 602SQL na Windows</a></td>
+<td width="25%" align="right"><a
+href="HE_WBRINSTX.htm">Nestandardní způsoby instalace</a></td><td width="20"
+align="center"><img class="floatno" src="../images/next.gif" width="15"
+height="13" alt="&shy;&gt;" title="Následující téma" border="0"></td>
+</tr></table>
+
+
+
+
+<h1><a name="he_wbrsetup"></a>Parametry instalace v souboru SETUP.INI</h1>
+
+<p>Soubor <code>SETUP.INI</code> umístěný v témže adresáři jako <code>SETUP.EXE</code> ovlivňuje chování instalačního programu. Vývojáři <a href="../xml/html/apliktop.html">aplikací</a> tak mohou instalaci upravit podle svých potřeb.</p>
+
+<p>Měnit lze některé hodnoty v sekci <code>[602SQL]</code>:</p>
+
+<pre><code>Import=jméno aplikace (jméno APL souboru aplikace bez přípony)</code></pre>
+
+<p>po instalaci 602SQL se naimportuje aplikace; je-li instalace z disket, umístěte vyexportovanou aplikaci na samostatnou disketu, program si ji vyžádá, je-li instalace z CD, umístěte aplikaci na subadresáře a v parametru <code>Import</code> zadejte: <code>subadresář\jméno_aplikace </code>. Pokud se má importovat více než jedna aplikace, uvedou se jména aplikací za sebou oddělená znakem + (plus), bez mezer. </p>
+
+<p>Po importu aplikací vzniknou ikony pro spuštění  každé naimportované aplikace. Ikony se vytvoří ve folderu zadaném v parametru <code>ShortcutFolder</code>.</p>
+
+<pre><code>Title=titulek instalace</code></pre>
+
+<pre><code>WelcomeTitle=titulek úvodního dialogu 
+WelcomeText=začátek textu úvodního dialogu </code></pre>
+
+<p>je možné si sem umístit vlastní texty; zadáte-li hodnotu <code>WelcomeTitle=.</code> (tečka), pak se úvodní dialog nezobrazí.</p>
+
+<pre><code>InstallProduct=N</code></pre>
+
+<p>lze přednastavit, jaký produkt se bude instalovat, přičemž N je 1 pro kompletní instalaci (SQL server + klienti), 4 pro samostatného klienta. </p>
+
+<pre><code>AskProduct=0|1</code></pre>
+
+<p>nula se použije tehdy, nemá-li instalační program zobrazit okno s dotazem na výběr produktu k instalaci; jednička, pokud se okno objevit má. Default je 1, pokud není uvedeno <code>InstallProduct</code>, nebo 0, pokud je uvedeno <code>InstallProduct</code>. Je-li <code>AskProduct=0</code>, nesmí být vynecháno <code>InstallProduct</code>.</p>
+
+<pre><code>RTonly=1</code></pre>
+
+<p>je-li v <code>SETUP.INI</code> tento zápis, nebude se po instalaci spouštět klient jako Vývojové prostředí ale jako Provozní prostředí (RunTime), v němž je možné pouze spouštět aplikace. Ikona (zástupce) spouštějící Vývojové prostředí se v tomto případě nevytváří. Proto má použití tohoto parametru význam jen v kombinaci s importem aplikace, který vytváří ikony pro spuštění importovaných aplikací, nebo s explicitním vytvářením ikon pomocí parametru <code>CreateApplIcon</code>… </p>
+
+<pre><code>TargetDir=přednastavený adresář pro instalaci</code></pre>
+
+<p>adresář, který se nabídne v dialogu pro výběr adresáře, pokud již na počítači není instalována 602SQL. Pokud ano, nabídne se adresář s existující instalací;</p>
+
+<pre><code>AskTarget=0|1</code></pre>
+
+<p>nula se použije tehdy, nemá-li instalační program zobrazit okno s dotazem na umístění instalace; použije se adresář nastavený v <code>TargetDir</code>. Defaultně je nastavena 1;</p>
+
+<pre><code>MinimalTargetDirSpace=velikost v kB</code></pre>
+<p>Při AskTarget=1 - v kilobajtech uvedená požadovaná velikost volného místa ve zvoleném adresáři. Je-li v adresáři místa méně, je nutné zvolit jiný.</p>
+
+<pre><code>TargetDirMarkerFile=soubor</code></pre>
+<p>Při AskTarget=1 - jméno souboru, který se musí vyskytovat v cílovém adresáři. Umožňuje omezit výběr adresářů, např. při reinstalaci.</p>
+
+<pre><code>ServerName=přednastavené jméno serveru</code></pre>
+
+<p>jméno serveru, které se objeví v dialogu pro výběr jména serveru;</p>
+
+<pre><code>AskDb=0|1</code></pre>
+
+<p>nula se použije tehdy, nemá-li se instalační program ptát na jméno serveru; použije se jméno zadané v ServerName; databáze se vytvoří v adresáři nastaveném v <code>TargetDir</code>. Defaultně je nastavena 1;</p>
+
+<pre><code>ShortcutFolder=přednastavené jméno složky pro zástupce programů</code></pre>
+
+<p>jméno složky, která se objeví v dialogu pro výběr složky;</p>
+
+<pre><code>AskClientProtocol=0|1</code></pre>
+
+<p>nula se použije tehdy, nemá-li se instalační program ptát na druh síťového protokolu klienta; tato otázka se objevuje pouze při instalaci samostatného klienta nebo samostatného ODBC driveru. Pokud se při instalaci tento údaj neupřesní, bude se klient připojovat přednostně pomocí TCP/IP. Defaultně je nastavena 1;</p>
+
+<pre><code>AskFolder=0|1</code></pre>
+
+<p>nula se použije tehdy, nemá-li se instalační program ptát na jméno složky; použije se jméno zadané v <code>ShortcutFolder</code>. Defaultně je nastavena 1;</p>
+
+<pre><code>ShowSummary=0|1</code></pre>
+
+<p>nula se použije tehdy, nemá-li se po zadání parametrů instalace objevit okno se souhrnnou informací - použijte v případě <code>CopyFIL=1</code> nebo jsou-li předchozí hodnoty <code>Ask...</code> rovny 0. Defaultně je nastavena 1;</p>
+
+<pre><code>NoFinishDialog=0|1</code></pre>
+
+<p>jednička se použije tehdy, nemá-li se na závěr instalace objevit okno s informací o ukončení instalace (a případném zahájení importu aplikací). Defaultně je nastavena 0;</p>
+
+<pre><code>AskInsert=0|1</code></pre>
+
+<p>nulu použijte v případě, že nechcete zobrazit okno s výzvou k vložení diskety s aplikací nebo databázovým souborem. To má význam při instalaci z CD. Defaultně je nastavena 1;</p>
+
+<pre><code>CopyFIL=0|1</code></pre>
+
+<p>jednička se použije, pokud se místo importu aplikace má použít připravený databázový soubor (obsahující aplikace). Při této instalaci se nevytvoří automaticky ikona spouštějící aplikaci - je nutné ji vytvořit pomocí parametru <code>CreateApplIcon</code>… Defaultně je nastavena 0;</p>
+
+<pre><code>CreateApplIconNum=počet ikon pro spuštění aplikace, které se budou vytvářet</code></pre>
+
+<p>použijte v případě, že chcete vytvořit ikony aplikací, které jsou obsaženy v kopírovaném databázovém souboru. Zadejte číslicí počet ikon (zástupců), které se vytvoří. Podle zadaného počtu ikon se následující dvojice parametrů opakuje s číslem ikony na posledním místě parametru (<code>CreateApplIcon1</code>, <code>CreateApplIconCapt1</code>, <code>CreateApplIconDir1</code>, <code>CreateApplIcon2</code>, <code>CreateApplIconCapt2</code>, <code>CreateApplIconDir2</code> atd.)</p>
+
+<pre><code>CreateApplIcon1=jméno první aplikace</code></pre>
+
+<p>zadejte jméno první aplikace, pro níž se má vytvořit ikona, včetně případných <a href="../xml/html/clientparams.html">parametrů klienta na příkazové řádce</a> (v praxi se použije <code>/S</code> pro spuštění aplikace, možná <code>/L</code> pro anonymní přístup). V ikoně (umístěné ve <code>ShortcutFolder</code>) se vytvoří příkazový řádek (cíl) ve tvaru <code>TargetDir\602CLI8.EXE &amp;ServerName CreateApplIcon1</code></p>
+
+<pre><code>CreateApplIconCapt1=titulek první ikony</code></pre>
+
+<p>zadejte titulek ikony, kterou se bude spouštět aplikace</p>
+
+<pre><code>CreateApplIconDir1=pracovní adresář první ikony</code></pre>
+
+<p>zadejte adresář, který bude ve vlastnostech zástupce (ikony) označen jako pracovní (v CZ win pole 'Kde začít'). Zadáte-li * (hvězdičku), nahradí se adresářem, kam se instaloval 602SQL.</p>
+
+<pre><code>OnceOnly=0|1</code></pre>
+
+<p>použijte v případě, kdy chcete zajistit, aby provozní prostředí (s Vaší aplikací) nešlo spustit vícekrát než jednou. Na <a href="HE_WBRPARAM.htm">příkazový řádek</a> zástupce spouštějící aplikaci se přidá parametr <code>/1</code>.</p>
+
+<pre><code>CreateUninstallShortCut=0|1</code></pre>
+
+<p>použijte v případě, že chcete vytvořit zástupce pro odinstalování.</p>
+
+<pre><code>ClientOnly=0|1</code></pre>
+
+<p>jedničku použijte v případě, že chcete instalovat pouze klienta 602SQL, předpokládá se připojení na již existující (nejspíš síťový) 602SQL server. V tomto případě nezadávejte jméno aplikace k importu. Defaultně je nastavena 0. Je ekvivalentní <code>InstallProduct=4</code>.</p>
+
+<pre><code>ODBCOnly=0|1</code></pre>
+
+<p>jedničku použijte v případě, že chcete instalovat pouze ODBC driver 602SQL, předpokládá se přístup k datům již existujícího 602SQL serveru pomocí externího programu. Externí aplikace musí být schopna zaregistrovat vzdálený server bez přítomnosti Řídicího konzole (zápisem do registrů). V tomto případě nezadávejte jméno aplikace k importu. Defaultně je nastavena 0. </p>
+
+<pre><code>CopyFilesNum=počet souborů</code></pre>
+
+<p>zadejte číslicí počet souborů, které se mají při instalaci přenést - jedná se o soubory vytvořené vývojářem (např. help, DLL apod.), soubory potřebné pro 602SQL se kopírují automaticky. Následující parametr se opakuje podle zadaného počtu - <code>CopyFile1</code>, <code>CopyFile2</code> atd.</p>
+
+<pre><code>CopyFile1=jméno souboru</code></pre>
+
+<p>zadejte jméno prvního souboru, který se má přenést. Soubor musí být umístěn v témže adresáři jako je SETUP.INI. Soubor se přenese do adresáře zvoleného v <code>TargetDir</code>.</p>
+
+<pre><code>RunProgram=jméno programu</code></pre>
+
+<p>zadejte jméno programu, který se má spustit po skončení instalace (např. NOTEPAD.EXE). Program se musí zadat včetně cesty, pokud není v PATH.</p>
+
+<pre><code>RunProgramParam=parametry programu</code></pre>
+
+<p>zadejte obecné parametry příkazové řádky programu z RunProgram </p>
+
+<pre><code>RunProgramFile=jméno souboru předaného jako parametr programu</code></pre>
+
+<p>zadejte jméno souboru, který tvoří parametr programu z RunProgram (např. README.TXT). Tento soubor se musí zkopírovat do <code>TargetDir</code> pomocí <code>CopyFileN</code>. Není-li zadán program pomocí <code>RunProgram</code>, použije se ke spuštění tohoto souboru aplikace určená jeho registrací (např. pro textový soubor se spustí standardně Notepad - stejná akce jako při poklepání na soubor v Průzkumníku). Na registraci souboru (zvláště méně obvyklých formátů) nelze obecně spoléhat. Takto lze spustit i dávkový BAT soubor.</p>
+
+<p><b>Viz</b></p>
+
+<ul class='viz'>
+ <li><a href="HE_WBRINSTAL.htm">Instalace vlastní aplikace s provozním klientem</a> </li>
+ <li><a href="HE_WBRINSTX.htm">Nestandardní způsoby instalace</a> </li>
+</ul>
+
+
+
+<table class="navigace" border="0" width="100%"  bgcolor="#FFFFBF"><tr> <td
+width="20" align="center"><img class="floatno" src="../images/prev.gif"
+width="15" height="13" alt="&lt;&shy;" title="Předcházející téma"
+border="0"></td><td width="25%"><a
+href="HE_WBRINSTAL.htm">Instalace aplikace společně s klientským prostředím</a></td> <td width="25%"
+align="right"><img class="floatno" src="../images/up.gif" width="13"
+height="15" alt="Nahoru" title="O jednu úroveň výš" border="0"
+align="middle"></td><td width="25%"><a href="../xml/html/instalac.html">Instalace 602SQL na Windows</a></td>
+<td width="25%" align="right"><a
+href="HE_WBRINSTX.htm">Nestandardní způsoby instalace</a></td><td width="20"
+align="center"><img class="floatno" src="../images/next.gif" width="15"
+height="13" alt="&shy;&gt;" title="Následující téma" border="0"></td>
+</tr></table>
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head>
+<meta http-equiv="Content-Type" content="text/html; charset=Windows-1250"><title>4. Systémový katalog</title>
+
+
+	
+    	<link rel="STYLESHEET" type="text/css" href="kap4_soubory/main.css">
+		<style type="text/css"><!--:hover { font-weight: bold;         color: red }
+--></style></head><body alink="Blue" background="kap4_soubory/pozadi.jpg" vlink="Blue">
+<a href="http://www.cs.vsb.cz/amalka/tomica/sql/kap3.html"><img src="kap4_soubory/prev.gif" alt="3. Manipulace dat v SQL"></a>
+<a href="http://www.cs.vsb.cz/amalka/tomica/sql/kap5.html"><img src="kap4_soubory/next.gif" alt="5. Pohledy"></a>
+<a href="http://www.cs.vsb.cz/amalka/tomica/sql/index.html"><img src="kap4_soubory/toc.gif" alt="Obsah"></a>
+<hr color="Blue" size="1">
+<h1>4. Systémový katalog</h1>
+<p>Každý moderní SŘBD (a nejen relační či založený na SQL) obsahuje
+tzv. systémový katalog, podávající informace o relačním schématu
+databáze, o indexech apod. V systémech SQL je významné, že do
+systémového katalogu je přístup pomocí SQL.</p>
+<p>Systémový katalog obsahuje např. relace</p>
+<pre>SYSTABLES(NAME,CREATOR,COLCOUNT,...)
+SYSCOLUMNS(NAME,TBNAME,COLTYPE,...)
+SYSINDEXES(NAME,TBNAME,CREATOR,...)</pre>
+<p>Relace SYSTABLES obsahuje jméno relace, jméno uživatele, který ji
+vytvořil, počet atributů apod. Relace SYSCOLUMNS obsahuje jméno
+atributu, jméno relace, kde se vyskytuje, typ apod. Relace SYSINDEXES
+obsahuje jméno indexu, jméno relace, pro kterou je vytvořen, jméno
+autora, který ho vytvořil apod. Pomocí SQL lze pak např. zadat
+následující dotazy:</p>
+<b>D39.</b> Které relace obsahují atribut isbn? <p> </p>
+<pre>SELECT TBNAME FROM SYSCOLUMNS
+  WHERE NAME = 'isbn'</pre>
+<b>D40.</b> Jaké atributy má relace Kniha?<p> </p>
+<pre>SELECT NAME FROM SYSCOLUMNS
+  WHERE TBNAME = `Kniha'</pre>
+<p>Dotazy na katalog umožňují uživateli blíže poznat tu část schématu,
+kterou potřebuje ke svým dotazům. Katalog nelze aktualizovat běžnými
+aktualizačními příkazy SQL. To se provádí automaticky při použití
+definičních příkazů. Aktualizovat lze pouze hodnotu atributu REMARKS v
+relacích SYSTABLES a SYSCOLUMNS (tento atribut není explicitně vyznačen
+v našich schématech katalogu). K relačnímu schématu databáze lze tak
+zavést přídavnou informaci o schématech jeho relací:</p>
+<pre>COMMENT ON TABLE Kniha IS
+`Každý řádek říká, že kniha daná isbn obsahuje informace o ... .' 
+COMMENT ON COLUMN isbn IS
+`Jednoznačné mezinárodní číslo charakterizující knihu.'</pre>
+<p>Vyvolání každého z těchto příkazů implikuje na příslušném místě v
+katalogu změnu stávající hodnoty za řetězec znaků specifikovaný za IS.</p>
+<hr color="Blue" size="1">
+<a href="http://www.cs.vsb.cz/amalka/tomica/sql/kap3.html"><img src="kap4_soubory/prev.gif" alt="3. Manipulace dat v SQL"></a>
+<a href="http://www.cs.vsb.cz/amalka/tomica/sql/kap5.html"><img src="kap4_soubory/next.gif" alt="5. Pohledy"></a>
+<a href="http://www.cs.vsb.cz/amalka/tomica/sql/index.html"><img src="kap4_soubory/toc.gif" alt="Obsah"></a>
+<div style="position: absolute; left: 0px; top: 0px; z-index: 1000000000 ! important; visibility: hidden; opacity: 1;" id="linkalert-box"><img src="kap4_soubory/none-icon.png" id="linkalert-icon-1"></div></body></html>

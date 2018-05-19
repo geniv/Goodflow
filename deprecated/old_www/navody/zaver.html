@@ -1,0 +1,78 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head>
+<meta http-equiv="Content-Type" content="text/html; charset=Windows-1250"><title>Závěrečný příklad</title>
+
+
+	
+	<link rel="STYLESHEET" type="text/css" href="zaver_soubory/main.css">
+	<style type="text/css"><!--:hover { color: red }
+--></style></head><body alink="Blue" background="zaver_soubory/pozadi.jpg" vlink="Blue">
+<a href="http://www.cs.vsb.cz/amalka/tomica/sql/kap8.html"><img src="zaver_soubory/prev.gif" alt="8. Programování s SQL"></a>
+<img src="zaver_soubory/next.gif" alt="Další">
+<a href="http://www.cs.vsb.cz/amalka/tomica/sql/index.html"><img src="zaver_soubory/toc.gif" alt="Obsah"></a>
+<hr color="Blue" size="1">
+<h2>1.</h2>
+<b><dt><i>Máme půjčovnu aut s těmito relacemi :</i></dt>
+<dt class="ODRAZ">ZÁKAZNÍK(cislo,jmeno,adresa)</dt>
+<dt class="ODRAZ">TYP(typ_id,nazev,parametry)</dt>
+<dt class="ODRAZ">AUTO(id,typ_id,najeto_km,rok_vyroby,cena)</dt>
+<dt class="ODRAZ">VÝPŮJČKA(id_vypujcky,cislo,id,od,do)</dt></b>
+<br>
+<dl>
+<dt>Zadání:</dt>
+<ol>
+<li>Vypiš všechny vozidla, která jsou v půjčovně.&nbsp;&nbsp;&nbsp;<a href="http://www.cs.vsb.cz/amalka/tomica/sql/vysledek%5Cv1.html">Výsledek</a>
+</li><li>Vypiš pouze <i>id</i> a <i>najeto_km</i> všech aut v půjčovně.&nbsp;&nbsp;&nbsp;<a href="http://www.cs.vsb.cz/amalka/tomica/sql/vysledek%5Cv2.html">Výsledek</a>
+</li><li>Vypiš zákazníky z Ostravy.&nbsp;&nbsp;&nbsp;<a href="http://www.cs.vsb.cz/amalka/tomica/sql/vysledek%5Cv3.html">Výsledek</a>
+</li><li>Vypiš čísla zákazníků, kteří si půjčili auto do 2.2.2000.&nbsp;&nbsp;&nbsp;<a href="http://www.cs.vsb.cz/amalka/tomica/sql/vysledek%5Cv4.html">Výsledek</a>
+</li><li>Vypiš čísla zákazníků, kteří si půjčili auto mezi 2.2.2000 10.2.2000.&nbsp;&nbsp;&nbsp;<a href="http://www.cs.vsb.cz/amalka/tomica/sql/vysledek%5Cv5.html">Výsledek</a>
+</li><li>Vypiš vše u zákazníků, kteří mají půjčené auto.&nbsp;&nbsp;&nbsp;<a href="http://www.cs.vsb.cz/amalka/tomica/sql/vysledek%5Cv6.html">Výsledek</a>
+</li><li>Najdi zákazníky, kteří mají půjčené auto do 5.10.2000 a vypiš jejich jména.&nbsp;&nbsp;&nbsp;<a href="http://www.cs.vsb.cz/amalka/tomica/sql/vysledek%5Cv7.html">Výsledek</a>
+</li><li>Najdi dvojice zákazníků, kteří mají stejnou adresu.&nbsp;&nbsp;&nbsp;<a href="http://www.cs.vsb.cz/amalka/tomica/sql/vysledek%5Cv8.html">Výsledek</a>
+</li><li>Jak velký je celkový počet aut v půjčovně. &nbsp;&nbsp;&nbsp;<a href="http://www.cs.vsb.cz/amalka/tomica/sql/vysledek%5Cv9.html">Výsledek</a>
+</li><li>Najdi celkový počet zákazníků, kteří mají půjčené auto. &nbsp;&nbsp;&nbsp;<a href="http://www.cs.vsb.cz/amalka/tomica/sql/vysledek%5Cv10.html">Výsledek</a>
+</li><li>Jaká je celková cena aut FORD. &nbsp;&nbsp;&nbsp;<a href="http://www.cs.vsb.cz/amalka/tomica/sql/vysledek%5Cv11.html">Výsledek</a>
+</li><li>Vypiš <i>typ_id</i> aut a kolik celkem půjčovnu stálo. &nbsp;&nbsp;&nbsp;<a href="http://www.cs.vsb.cz/amalka/tomica/sql/vysledek%5Cv12.html">Výsledek</a>
+</li><li>Vypiš <i>typ_id</i> aut a kolik celkem půjčovnu stálo. Výstup setřiď podle celkové ceny.&nbsp;&nbsp;&nbsp;<a href="http://www.cs.vsb.cz/amalka/tomica/sql/vysledek%5Cv13.html">Výsledek</a>
+</li><li>Najdi jména zákazníků, kteří mají půjčené auto ŠKODA FAFORIT. &nbsp;&nbsp;&nbsp;<a href="http://www.cs.vsb.cz/amalka/tomica/sql/vysledek%5Cv14.html">Výsledek</a>
+</li></ol>
+</dl>
+<br>
+<a name="p"></a><h2>2.</h2>
+<b><dt><i>Máme knihovnu s relacemi :</i></dt>
+<dt class="ODRAZ">KNIHY(ISBN,autor,nazev,zeme)</dt>
+<dt class="ODRAZ">EXEMPLAR(isbn,prir,koupeno,cena)</dt>
+<dt class="ODRAZ">CTENAR(cislo,jmeno,adresa)</dt>
+<dt class="ODRAZ">VYPUJCKY(prir,cislo,pujceno)</dt>
+<dt class="ODRAZ">REZERVACE(isbn,cislo,rezervovano</dt></b>
+<dl>
+<dt>Zadání:</dt>
+<ol>
+<li>Vypište seznam jmen a adres čtenářů.&nbsp;&nbsp;&nbsp;<a href="http://www.cs.vsb.cz/amalka/tomica/sql/vysledek%5Cv21.html">Výsledek</a>
+</li><li>Vypište seznam čtenářů setříděný abecedně podle jmen.&nbsp;&nbsp;&nbsp;<a href="http://www.cs.vsb.cz/amalka/tomica/sql/vysledek%5Cv22.html">Výsledek</a>
+</li><li>Vypište knihy nakoupené po 20.3.1992.&nbsp;&nbsp;&nbsp;<a href="http://www.cs.vsb.cz/amalka/tomica/sql/vysledek%5Cv23.html">Výsledek</a>
+</li><li>Najděte autory,  na jejichž některé tituly je rezervace před 31.12.92.&nbsp;&nbsp;&nbsp;<a href="http://www.cs.vsb.cz/amalka/tomica/sql/vysledek%5Cv24.html">Výsledek</a>
+</li><li>Najděte dvojice čtenářů se stejnou adresou.&nbsp;&nbsp;&nbsp;<a href="http://www.cs.vsb.cz/amalka/tomica/sql/vysledek%5Cv25.html">Výsledek</a>
+</li><li>Najděte všechny exempláře vydané na Slovensku  a jejich cenu v SK.&nbsp;&nbsp;&nbsp;<a href="http://www.cs.vsb.cz/amalka/tomica/sql/vysledek%5Cv26.html">Výsledek</a>
+</li><li>Zjistěte celkový počet čtenářů knihovny.&nbsp;&nbsp;&nbsp;<a href="http://www.cs.vsb.cz/amalka/tomica/sql/vysledek%5Cv27.html">Výsledek</a>
+</li><li>Určete počet čtenářů, kteří mají rezervovanou nějakou knihu.&nbsp;&nbsp;&nbsp;<a href="http://www.cs.vsb.cz/amalka/tomica/sql/vysledek%5Cv28.html">Výsledek</a>
+</li><li>Určete počet titulů knihovny,které byly vydány na Slovensku.&nbsp;&nbsp;&nbsp;<a href="http://www.cs.vsb.cz/amalka/tomica/sql/vysledek%5Cv29.html">Výsledek</a>
+</li><li>Jaká je celková cena slovenských knih v knihovně ?&nbsp;&nbsp;&nbsp;<a href="http://www.cs.vsb.cz/amalka/tomica/sql/vysledek%5Cv210.html">Výsledek</a>
+</li><li>Určete pro každého čtenáře počet vypůjčených knih.&nbsp;&nbsp;&nbsp;<a href="http://www.cs.vsb.cz/amalka/tomica/sql/vysledek%5Cv211.html">Výsledek</a>
+</li><li>Najděte čtenáře, kteří mají půjčeno více než 5 knih.&nbsp;&nbsp;&nbsp;<a href="http://www.cs.vsb.cz/amalka/tomica/sql/vysledek%5Cv212.html">Výsledek</a>
+</li><li>Najděte všechny tituly vydané v SR, Rusku a MR.&nbsp;&nbsp;&nbsp;<a href="http://www.cs.vsb.cz/amalka/tomica/sql/vysledek%5Cv213.html">Výsledek</a>
+</li><li>Najděte čísla čtenářů, kteří mají současně zapůjčeny nějaké
+knihy a rezervovány nějaké tituly do konce roku 1992.&nbsp;&nbsp;&nbsp;<a href="http://www.cs.vsb.cz/amalka/tomica/sql/vysledek%5Cv214.html">Výsledek</a>
+</li><li>Najděte jména čtenářů, kteří mají rezervovánu knihu Babička.&nbsp;&nbsp;&nbsp;<a href="http://www.cs.vsb.cz/amalka/tomica/sql/vysledek%5Cv215.html">Výsledek</a>
+</li></ol>
+</dl>
+
+
+
+
+<hr color="Blue" size="1">  
+<a href="http://www.cs.vsb.cz/amalka/tomica/sql/kap8.html"><img src="zaver_soubory/prev.gif" alt="8. Programování s SQL" align="left"></a>
+<img src="zaver_soubory/next.gif" alt="Další" align="left">
+<a href="http://www.cs.vsb.cz/amalka/tomica/sql/index.html"><img src="zaver_soubory/toc.gif" alt="Obsah" align="left"></a>
+
+</body></html>

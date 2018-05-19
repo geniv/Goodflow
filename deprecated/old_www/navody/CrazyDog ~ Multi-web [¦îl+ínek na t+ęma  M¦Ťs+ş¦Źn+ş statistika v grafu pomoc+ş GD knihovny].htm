@@ -1,0 +1,712 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="cs"><head>
+
+
+
+  <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=iso-8859-2">
+  <meta http-equiv="Content-Language" content="cs">
+  <meta http-equiv="imagetoolbar" content="no">
+  <meta name="autosize" content="off">
+  <meta name="ICBM" content="49.679, 18.3584">
+  <meta name="DC.title" content="CrazyDog ~ Multi-web">
+  <meta name="description" content="Zábava, SMS zdarma, Flash hry, Online TV, Weblog, Články, Ubuntu Linux, Multiplayer hry, PHP scripty, Fotogalerie, Virtuální pokec">
+  <meta name="keywords" content="Flash videa,hry,hudba,Vtipné SMS,Obrázkové vtipy,Tapety,Ubuntu Linux,Free software,Torrent,PHP,JS">
+  <meta name="Author" content="all: Bronislav [CrazyDog] Filip; e-mail: crazydoga(a)gmail.com">
+  <meta name="robots" content="index,follow">
+  <meta name="googlebot" content="snippet,archive"><title>CrazyDog ~ Multi-web [Článek na téma: Měsíční statistika v grafu pomocí GD knihovny]</title>
+  
+  <link rel="stylesheet" href="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20M%C4%9Bs%C3%AD%C4%8Dn%C3%AD%20statistika%20v%20grafu%20pomoc%C3%AD%20GD%20knihovny%5D_soubory/style.css" type="text/css" media="all">
+  <link rel="stylesheet" href="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20M%C4%9Bs%C3%AD%C4%8Dn%C3%AD%20statistika%20v%20grafu%20pomoc%C3%AD%20GD%20knihovny%5D_soubory/tisk.css" type="text/css" media="print">
+  <link rel="shortcut icon" href="http://crazydog.cz/favicon.ico" type="image/x-icon">
+  <link rel="alternate" href="http://crazydog.cz/rss/clanky/" type="application/rss+xml" title="Články">
+  <script type="text/javascript" src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20M%C4%9Bs%C3%AD%C4%8Dn%C3%AD%20statistika%20v%20grafu%20pomoc%C3%AD%20GD%20knihovny%5D_soubory/util2.js"></script>
+  <link rel="index" href="http://crazydog.cz/" title="Úvodní stránka">
+  <link rel="author" href="http://crazydog.cz/home/webmaster/" title="Kontakt">
+  <link rel="contents" href="http://crazydog.cz/home/mapa-stranek/" title="Mapa stránek">
+  <link rel="copyright" href="http://crazydog.cz/home/webmaster/#copyright" title="Autorská práva webu"><!--<link rel="search" href="/home/hledat/" title="Hledaček" />-->
+  
+  <link rel="help" href="http://crazydog.cz/home/faq/" title="FAQ"></head><body><div id="topdown"><div id="header"></div>
+<div id="levy-stin"></div>
+<div id="pravy-stin"></div>
+  <div id="horni-lista">
+  <div id="horni-lista-prechod"></div>
+  <div id="horni-lista-prava">
+    <div class="kontakt" title="Kontakt"><a href="http://crazydog.cz/home/webmaster/"></a></div>
+    <div class="napoveda" title="FAQ - Nápověda"><a href="http://crazydog.cz/home/faq/"></a></div>
+    <div class="sitemap" title="Mapa stránek"><a href="http://crazydog.cz/home/mapa-stranek/"></a></div>
+    <div class="rss" title="RSS článků"><a href="http://crazydog.cz/rss/clanky/"></a></div>
+    <div class="tisk" title="Tisknout!"><a href="javascript: window.print()"></a></div>
+  </div>
+  </div>
+  <div id="logo"><a href="http://crazydog.cz/"><span>CrazyDog ~ Multi-web</span></a></div>
+  <div class="pngnadpis"></div>
+<div id="menu"><ul>
+  <li class="aktiv"><a href="http://crazydog.cz/" accesskey="h"><span>H</span>ome</a></li>
+  <li><a href="http://crazydog.cz/blog/" accesskey="b"><span>B</span>log</a></li>
+  <li><a href="http://crazydog.cz/zabava/" accesskey="z"><span>Z</span>ábava</a></li>
+  <li><a href="http://crazydog.cz/ke-stazeni/" accesskey="k"><span>K</span>e stažení</a></li>
+  <li><a href="http://crazydog.cz/fotogalerie/" accesskey="f"><span>F</span>otogalerie</a></li>
+  <li><a href="http://crazydog.cz/ubuntu/" accesskey="u"><span>U</span>buntu</a></li>
+  <li><a href="http://crazydog.cz/pro-web/" accesskey="p"><span>P</span>ro web</a></li>
+</ul></div>
+<div id="menu-right">
+  <form method="post" action="/home/hledat/"><div>
+  <input class="search" name="search" value="" type="text">
+  <input class="tlacitko" src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20M%C4%9Bs%C3%AD%C4%8Dn%C3%AD%20statistika%20v%20grafu%20pomoc%C3%AD%20GD%20knihovny%5D_soubory/search-tlacitko.jpg" type="image">
+  </div></form>
+</div>
+  
+<div id="center"><div id="center-rozek"></div>
+<!-- Hlavni obsah stranky -->
+<h1># Měsíční statistika v grafu pomocí GD knihovny</h1>
+<div class="h2pod seda">Ne, 13. led 2008, 11:36</div>
+<div class="img60"><img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20M%C4%9Bs%C3%AD%C4%8Dn%C3%AD%20statistika%20v%20grafu%20pomoc%C3%AD%20GD%20knihovny%5D_soubory/php.jpg" alt="logo"></div>
+<p>V minulém článku jsme si ukázali jak na&nbsp;<a href="http://crazydog.cz/pro-web/php-scripty/podrobne-statistiky-navstevnosti-v-php/">podrobné statistiky návštěvnosti</a>
+ve&nbsp;kterých jsme si zařídili i&nbsp;měsíční statistiku, kterou si
+v&nbsp;tomto článku převedeme do&nbsp;grafu generovaného GD knihovnou
+v&nbsp;PHP. Celý graf by měl v&nbsp;konečném výsledku vypadat nějak
+takto:
+</p><p></p><div class="center"><img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20M%C4%9Bs%C3%AD%C4%8Dn%C3%AD%20statistika%20v%20grafu%20pomoc%C3%AD%20GD%20knihovny%5D_soubory/mesicni-statistiky-v-grafu.jpg" alt="obrázek"></div>
+<p>Nejprve si vložte do&nbsp;souboru <strong>graf.php</strong> tento PHP script:
+</p><code>&lt;?php
+<br><span class="modra">$rok</span> = date(<span class="zelena">"Y"</span>);
+<br>
+<br><strong>function</strong> mesic(<span class="modra">$mes</span>) {
+<br><strong>include</strong>(<span class="zelena">"./db.php"</span>); <span class="seda italic">/* přístup k&nbsp;databázi*/</span>
+<br><span class="modra">$rok</span> = date(<span class="zelena">"Y"</span>);
+<br>
+<br><strong>if</strong>(<span class="modra">$mes</span> == <span class="zelena">"Led"</span>) {<span class="modra">$mesic</span> = mysql_fetch_array(mysql_query(<span class="zelena">"SELECT * FROM poc_mesic WHERE mesic='"</span>.<span class="modra">$rok</span>.<span class="zelena">"-01-00'"</span>)); <strong>return</strong> <span class="modra">$mesic</span>['pocet'];
+<br>} <strong>else</strong>if(<span class="modra">$mes</span> == <span class="zelena">"Úno"</span>) {<span class="modra">$mesic</span> = mysql_fetch_array(mysql_query(<span class="zelena">"SELECT * FROM poc_mesic WHERE mesic='"</span>.<span class="modra">$rok</span>.<span class="zelena">"-02-00'"</span>)); <strong>return</strong> <span class="modra">$mesic</span>['pocet'];
+<br>} <strong>else</strong>if(<span class="modra">$mes</span> == <span class="zelena">"Bře"</span>) {<span class="modra">$mesic</span> = mysql_fetch_array(mysql_query(<span class="zelena">"SELECT * FROM poc_mesic WHERE mesic='"</span>.<span class="modra">$rok</span>.<span class="zelena">"-03-00'"</span>)); <strong>return</strong> <span class="modra">$mesic</span>['pocet'];
+<br>} <strong>else</strong>if(<span class="modra">$mes</span> == <span class="zelena">"Dub"</span>) {<span class="modra">$mesic</span> = mysql_fetch_array(mysql_query(<span class="zelena">"SELECT * FROM poc_mesic WHERE mesic='"</span>.<span class="modra">$rok</span>.<span class="zelena">"-04-00'"</span>)); <strong>return</strong> <span class="modra">$mesic</span>['pocet'];
+<br>} <strong>else</strong>if(<span class="modra">$mes</span> == <span class="zelena">"Kvě"</span>) {<span class="modra">$mesic</span> = mysql_fetch_array(mysql_query(<span class="zelena">"SELECT * FROM poc_mesic WHERE mesic='"</span>.<span class="modra">$rok</span>.<span class="zelena">"-05-00'"</span>)); <strong>return</strong> <span class="modra">$mesic</span>['pocet'];
+<br>} <strong>else</strong>if(<span class="modra">$mes</span> == <span class="zelena">"Čen"</span>) {<span class="modra">$mesic</span> = mysql_fetch_array(mysql_query(<span class="zelena">"SELECT * FROM poc_mesic WHERE mesic='"</span>.<span class="modra">$rok</span>.<span class="zelena">"-06-00'"</span>)); <strong>return</strong> <span class="modra">$mesic</span>['pocet'];
+<br>} <strong>else</strong>if(<span class="modra">$mes</span> == <span class="zelena">"Čec"</span>) {<span class="modra">$mesic</span> = mysql_fetch_array(mysql_query(<span class="zelena">"SELECT * FROM poc_mesic WHERE mesic='"</span>.<span class="modra">$rok</span>.<span class="zelena">"-07-00'"</span>)); <strong>return</strong> <span class="modra">$mesic</span>['pocet'];
+<br>} <strong>else</strong>if(<span class="modra">$mes</span> == <span class="zelena">"Srp"</span>) {<span class="modra">$mesic</span> = mysql_fetch_array(mysql_query(<span class="zelena">"SELECT * FROM poc_mesic WHERE mesic='"</span>.<span class="modra">$rok</span>.<span class="zelena">"-08-00'"</span>)); <strong>return</strong> <span class="modra">$mesic</span>['pocet'];
+<br>} <strong>else</strong>if(<span class="modra">$mes</span> == <span class="zelena">"Zář"</span>) {<span class="modra">$mesic</span> = mysql_fetch_array(mysql_query(<span class="zelena">"SELECT * FROM poc_mesic WHERE mesic='"</span>.<span class="modra">$rok</span>.<span class="zelena">"-09-00'"</span>)); <strong>return</strong> <span class="modra">$mesic</span>['pocet'];
+<br>} <strong>else</strong>if(<span class="modra">$mes</span> == <span class="zelena">"Říj"</span>) {<span class="modra">$mesic</span> = mysql_fetch_array(mysql_query(<span class="zelena">"SELECT * FROM poc_mesic WHERE mesic='"</span>.<span class="modra">$rok</span>.<span class="zelena">"-10-00'"</span>)); <strong>return</strong> <span class="modra">$mesic</span>['pocet'];
+<br>} <strong>else</strong>if(<span class="modra">$mes</span> == <span class="zelena">"Lis"</span>) {<span class="modra">$mesic</span> = mysql_fetch_array(mysql_query(<span class="zelena">"SELECT * FROM poc_mesic WHERE mesic='"</span>.<span class="modra">$rok</span>.<span class="zelena">"-11-00'"</span>)); <strong>return</strong> <span class="modra">$mesic</span>['pocet'];
+<br>} <strong>else</strong>if(<span class="modra">$mes</span> == <span class="zelena">"Pro"</span>) {<span class="modra">$mesic</span> = mysql_fetch_array(mysql_query(<span class="zelena">"SELECT * FROM poc_mesic WHERE mesic='"</span>.<span class="modra">$rok</span>.<span class="zelena">"-12-00'"</span>)); <strong>return</strong> <span class="modra">$mesic</span>['pocet'];
+<br>}
+<br>}
+<br>
+<br><span class="modra">$data</span> =<strong> array</strong>(
+<br><span class="zelena">"Led"</span> =&gt; mesic('Led'),
+<br><span class="zelena">"Úno"</span> =&gt; mesic('Úno'),
+<br><span class="zelena">"Bře"</span> =&gt; mesic('Bře'),
+<br><span class="zelena">"Dub"</span> =&gt; mesic('Dub'),
+<br><span class="zelena">"Kvě"</span> =&gt; mesic('Kvě'),
+<br><span class="zelena">"Čen"</span> =&gt; mesic('Čen'),
+<br><span class="zelena">"Čec"</span> =&gt; mesic('Čec'),
+<br><span class="zelena">"Srp"</span> =&gt; mesic('Srp'),
+<br><span class="zelena">"Zář"</span> =&gt; mesic('Zář'),
+<br><span class="zelena">"Říj"</span> =&gt; mesic('Říj'),
+<br><span class="zelena">"Lis"</span> =&gt; mesic('Lis'),
+<br><span class="zelena">"Pro"</span> =&gt; mesic('Pro')
+<br>);
+<br>
+<br><span class="modra">$width</span> = 480;
+<br><span class="modra">$height</span> = 250;
+<br><span class="modra">$image</span> = imagecreate(<span class="modra">$width</span>, <span class="modra">$height</span>); <span class="seda italic">/* Výška a&nbsp;šířka grafu */</span>
+<br>
+<br><span class="modra">$white</span> = imagecolorallocate(<span class="modra">$image</span>, 255, 255, 255); <span class="seda italic">/* Bílé pozadí */</span>
+<br><span class="modra">$navy</span> = imagecolorallocate(<span class="modra">$image</span>, 84, 140, 93); <span class="seda italic">/* Zelené grafy */</span>
+<br><span class="modra">$black</span> = imagecolorallocate(<span class="modra">$image</span>, 51, 51, 51); <span class="seda italic">/* Černé orámovaní */</span>
+<br><span class="modra">$gray</span> = imagecolorallocate(<span class="modra">$image</span>, 183, 183, 183); <span class="seda italic">/* Šedé orámovaní */</span>
+<br>
+<br><span class="modra">$maxval</span> = max(<span class="modra">$data</span>);
+<br><span class="modra">$nval</span> = sizeof(<span class="modra">$data</span>);
+<br>
+<br><span class="modra">$vmargin</span> = 20;
+<br><span class="modra">$hmargin</span> = 38;
+<br>
+<br><span class="modra">$base</span> = floor((<span class="modra">$width</span>-<span class="modra">$hmargin</span>) / <span class="modra">$nval</span>);
+<br>
+<br><span class="modra">$ysize</span> = <span class="modra">$height</span>-2 * <span class="modra">$vmargin</span>;
+<br><span class="modra">$xsize</span> = <span class="modra">$nval</span> * <span class="modra">$base</span>;
+<br>
+<br><span class="modra">$titlefont</span> = 3;
+<br><span class="modra">$title</span> = <span class="zelena">"Měsíční statistika za&nbsp;rok "</span>.<span class="modra">$rok</span>; <span class="seda italic">/* Nadpis grafu */</span>
+<br><span class="modra">$txtsz</span> = imagefontwidth(<span class="modra">$titlefont</span>) * strlen(<span class="modra">$title</span>);
+<br><span class="modra">$xpos</span> = (int)(<span class="modra">$hmargin</span> + (<span class="modra">$xsize</span>-<span class="modra">$txtsz</span>)/2);
+<br><span class="modra">$xpos</span> = max(1, <span class="modra">$xpos</span>);
+<br><span class="modra">$ypos</span> = 3;
+<br>imagestring(<span class="modra">$image</span>, <span class="modra">$titlefont</span>, <span class="modra">$xpos</span>, <span class="modra">$ypos</span>, <span class="modra">$title</span>, <span class="modra">$black</span>);
+<br>
+<br><span class="modra">$labelfont</span> = 2;
+<br><span class="modra">$ngrid</span> = 6;
+<br>
+<br><span class="modra">$dydat</span> = <span class="modra">$maxval</span> / <span class="modra">$ngrid</span>;
+<br><span class="modra">$dypix</span> = <span class="modra">$ysize</span> / (<span class="modra">$ngrid</span> +1);
+<br>
+<br>for(<span class="modra">$i</span> = 0; <span class="modra">$i</span> &lt;= (<span class="modra">$ngrid</span> +1); <span class="modra">$i</span>++) {
+<br><span class="modra">$ydat</span> = (int)(<span class="modra">$i</span> * <span class="modra">$dydat</span>);
+<br>
+<br><span class="modra">$ypos</span> = <span class="modra">$vmargin</span> + <span class="modra">$ysize</span>-(int)(<span class="modra">$i</span>*<span class="modra">$dypix</span>);
+<br>
+<br><span class="modra">$txtsz</span> = imagefontwidth(<span class="modra">$labelfont</span>) * strlen(<span class="modra">$ydat</span>);
+<br><span class="modra">$txtht</span> = imagefontheight(<span class="modra">$labelfont</span>);
+<br>
+<br><span class="modra">$xpos</span> = (int)((<span class="modra">$hmargin</span>-<span class="modra">$txtsz</span>) / 2);
+<br><span class="modra">$xpos</span> = max(1, <span class="modra">$xpos</span>);
+<br>
+<br>imagestring(<span class="modra">$image</span>, <span class="modra">$labelfont</span>, <span class="modra">$xpos</span>, <span class="modra">$ypos</span>-(int)(<span class="modra">$txtht</span>/2), <span class="modra">$ydat</span>, <span class="modra">$black</span>);
+<br>
+<br><strong>if</strong>(!(<span class="modra">$i</span> == 0) &amp;&amp; !(<span class="modra">$i</span> &gt; <span class="modra">$ngrid</span>)) {
+<br>imageline(<span class="modra">$image</span>, <span class="modra">$hmargin</span>-3, <span class="modra">$ypos</span>, <span class="modra">$hmargin</span> + <span class="modra">$xsize</span>, <span class="modra">$ypos</span>, <span class="modra">$gray</span>);
+<br>}
+<br>}
+<br>
+<br><span class="modra">$padding</span> = 3;
+<br><span class="modra">$yscale</span> = <span class="modra">$ysize</span> / ((<span class="modra">$ngrid</span>+1) * <span class="modra">$dydat</span>);
+<br>
+<br>for(<span class="modra">$i</span> = 0; list(<span class="modra">$xval</span>, <span class="modra">$yval</span>) = each(<span class="modra">$data</span>); <span class="modra">$i</span>++) {
+<br><span class="modra">$ymax</span> = <span class="modra">$vmargin</span> + <span class="modra">$ysize</span>;
+<br><span class="modra">$ymin</span> = <span class="modra">$ymax</span>-(int)(<span class="modra">$yval</span>*<span class="modra">$yscale</span>);
+<br><span class="modra">$xmax</span> = <span class="modra">$hmargin</span> + (<span class="modra">$i</span>+1)*<span class="modra">$base</span>-<span class="modra">$padding</span>;
+<br><span class="modra">$xmin</span> = <span class="modra">$hmargin</span> + <span class="modra">$i</span>*<span class="modra">$base</span> + <span class="modra">$padding</span>;
+<br>imagefilledrectangle(<span class="modra">$image</span>, <span class="modra">$xmin</span>, <span class="modra">$ymin</span>, <span class="modra">$xmax</span>, <span class="modra">$ymax</span>, <span class="modra">$navy</span>);
+<br>
+<br><span class="modra">$txtsz</span> = imagefontwidth(<span class="modra">$labelfont</span>) * strlen(<span class="modra">$xval</span>);
+<br><span class="modra">$xpos</span> = <span class="modra">$xmin</span> + (int)((<span class="modra">$base</span>-<span class="modra">$txtsz</span>) / 2);
+<br><span class="modra">$xpos</span> = max(<span class="modra">$xmin</span>, <span class="modra">$xpos</span>);
+<br><span class="modra">$ypos</span> = <span class="modra">$ymax</span> + 3;
+<br>imagestring(<span class="modra">$image</span>, <span class="modra">$labelfont</span>, <span class="modra">$xpos</span>, <span class="modra">$ypos</span>, <span class="modra">$xval</span>, <span class="modra">$black</span>);
+<br><span class="seda italic">/* Počet návštěv nad&nbsp;grafy */</span>
+<br><strong>if</strong>(strlen(<span class="modra">$yval</span>) == 1) {<span class="modra">$center</span> = 4;}
+<br><strong>else</strong>if(strlen(<span class="modra">$yval</span>) == 2) {<span class="modra">$center</span> = 1;}
+<br><strong>else</strong>if(strlen(<span class="modra">$yval</span>) == 3) {<span class="modra">$center</span> = -2;}
+<br><strong>else</strong>if(strlen(<span class="modra">$yval</span>) == 4) {<span class="modra">$center</span> = -5;}
+<br><strong>else</strong> {<span class="modra">$center</span> = -8;}
+<br>imagestring(<span class="modra">$image</span>, <span class="modra">$labelfont</span>, <span class="modra">$xpos</span>+<span class="modra">$center</span>, <span class="modra">$ymin</span>-13, <span class="modra">$yval</span>, <span class="modra">$black</span>);
+<br>}
+<br>
+<br>imagerectangle(<span class="modra">$image</span>, <span class="modra">$hmargin</span>, <span class="modra">$vmargin</span>, <span class="modra">$hmargin</span> + <span class="modra">$xsize</span>, <span class="modra">$vmargin</span> + <span class="modra">$ysize</span>, <span class="modra">$black</span>);
+<br>
+<br>header(<span class="zelena">"Content-type: image/jpeg"</span>);
+<br>imagejpeg(<span class="modra">$image</span>);
+<br>imagedestroy(<span class="modra">$image</span>);
+<br>?&gt;
+<br></code><p>A nyní už stáčí v&nbsp;HTML zobrazit graf jako obrázek:
+</p><code>&lt;img src=<span class="zelena">"/graf.php"</span> alt=<span class="zelena">"Měsíční statistika za&nbsp;letošní rok"</span>&gt;</code><p>Barvy
+grafu si můžete upravit, ale jen v&nbsp;hexadecimální definici
+a&nbsp;pokud znáte barvy jen v&nbsp;RGB, tak doporučují program <a href="http://www.stahuj.centrum.cz/grafika_a_design/tvorba_grafiky/ostatni/colsel/">ColSel</a>, který umí převádět RGB barvy do&nbsp;HEX. Závěrem už jen přejí, ať vám graf slouží a&nbsp;ukazuje velké hodnoty.</p>
+<div class="text-r">
+<a href="http://crazydog.cz/home/registrovani/CrazyDog/">CrazyDog&nbsp;<img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20M%C4%9Bs%C3%AD%C4%8Dn%C3%AD%20statistika%20v%20grafu%20pomoc%C3%AD%20GD%20knihovny%5D_soubory/muz.gif" alt="muž"></a> |
+<img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20M%C4%9Bs%C3%AD%C4%8Dn%C3%AD%20statistika%20v%20grafu%20pomoc%C3%AD%20GD%20knihovny%5D_soubory/plus.gif" alt="+">
+<a href="http://crazydog.cz/pro-web/php-scripty/mesicni-statistika-v-grafu-pomoci-gd-knihovny/znamka-1/" rel="nofollow">1</a>
+<a href="http://crazydog.cz/pro-web/php-scripty/mesicni-statistika-v-grafu-pomoci-gd-knihovny/znamka-2/" rel="nofollow">2</a>
+<a href="http://crazydog.cz/pro-web/php-scripty/mesicni-statistika-v-grafu-pomoci-gd-knihovny/znamka-3/" rel="nofollow">3</a>
+<a href="http://crazydog.cz/pro-web/php-scripty/mesicni-statistika-v-grafu-pomoci-gd-knihovny/znamka-4/" rel="nofollow">4</a>
+<a href="http://crazydog.cz/pro-web/php-scripty/mesicni-statistika-v-grafu-pomoci-gd-knihovny/znamka-5/" rel="nofollow">5</a>
+<img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20M%C4%9Bs%C3%AD%C4%8Dn%C3%AD%20statistika%20v%20grafu%20pomoc%C3%AD%20GD%20knihovny%5D_soubory/minus.gif" alt="-"> |
+<span class="seda">307x</span> |
+<a href="http://crazydog.cz/pro-web/php-scripty/" title="Kategorie">PHP scripty</a> |
+<a href="http://crazydog.cz/pro-web/php-scripty/mesicni-statistika-v-grafu-pomoci-gd-knihovny/#komentare">Komentářů: <strong>18</strong></a></div>
+<div class="text-r t10">
+<script type="text/javascript">
+  document.writeln('<a href="http://linkuj.cz/?id=linkuj&url='+encodeURIComponent(document.URL)+'&title='+encodeURIComponent(document.title)+'"><img src="/css/obr/linkuj.png" alt="Linkuj.cz" /></a>');
+  document.writeln('<a href="http://www.jagg.cz/bookmarks.php?action=add&address='+encodeURIComponent(document.URL)+'&title='+encodeURIComponent(document.title)+'"><img src="/css/obr/jagg.gif" alt="Jagg.cz" /></a>');
+  document.writeln('<a href="http://zalinkuj.cz/submit.php?url='+encodeURIComponent(document.URL)+'&title='+encodeURIComponent(document.title)+'"><img src="/css/obr/zalinkuj.png" alt="Jagg.cz" /></a>');
+</script><a href="http://linkuj.cz/?id=linkuj&amp;url=http%3A%2F%2Fcrazydog.cz%2Fpro-web%2Fphp-scripty%2Fmesicni-statistika-v-grafu-pomoci-gd-knihovny%2F&amp;title=CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%3A%20M%C4%9Bs%C3%AD%C4%8Dn%C3%AD%20statistika%20v%20grafu%20pomoc%C3%AD%20GD%20knihovny%5D"><img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20M%C4%9Bs%C3%AD%C4%8Dn%C3%AD%20statistika%20v%20grafu%20pomoc%C3%AD%20GD%20knihovny%5D_soubory/linkuj.png" alt="Linkuj.cz"></a>
+<a href="http://www.jagg.cz/bookmarks.php?action=add&amp;address=http%3A%2F%2Fcrazydog.cz%2Fpro-web%2Fphp-scripty%2Fmesicni-statistika-v-grafu-pomoci-gd-knihovny%2F&amp;title=CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%3A%20M%C4%9Bs%C3%AD%C4%8Dn%C3%AD%20statistika%20v%20grafu%20pomoc%C3%AD%20GD%20knihovny%5D"><img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20M%C4%9Bs%C3%AD%C4%8Dn%C3%AD%20statistika%20v%20grafu%20pomoc%C3%AD%20GD%20knihovny%5D_soubory/jagg.gif" alt="Jagg.cz"></a>
+<a href="http://zalinkuj.cz/submit.php?url=http%3A%2F%2Fcrazydog.cz%2Fpro-web%2Fphp-scripty%2Fmesicni-statistika-v-grafu-pomoci-gd-knihovny%2F&amp;title=CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%3A%20M%C4%9Bs%C3%AD%C4%8Dn%C3%AD%20statistika%20v%20grafu%20pomoc%C3%AD%20GD%20knihovny%5D"><img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20M%C4%9Bs%C3%AD%C4%8Dn%C3%AD%20statistika%20v%20grafu%20pomoc%C3%AD%20GD%20knihovny%5D_soubory/zalinkuj.png" alt="Jagg.cz"></a>
+
+</div>
+<div class="komentare">
+<h2 id="komentare">Komentáře</h2>
+<div class="ram-top"></div>
+<div class="ram"><div class="ram-center"><div class="ram-leva">
+<div class="img60-book"><img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20M%C4%9Bs%C3%AD%C4%8Dn%C3%AD%20statistika%20v%20grafu%20pomoc%C3%AD%20GD%20knihovny%5D_soubory/Pajah_31-7-07.gif" alt="avatar"></div>
+</div><div class="ram-prava">
+<div class="ram-info-t"><div class="ram-info-l kursor" onclick="smajlik('{17} ')"><a href="http://crazydog.cz/home/registrovani/Pajah/"><img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20M%C4%9Bs%C3%AD%C4%8Dn%C3%AD%20statistika%20v%20grafu%20pomoc%C3%AD%20GD%20knihovny%5D_soubory/moderator.gif" alt="" title="Moderátor"></a> 
+Pajah&nbsp;<img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20M%C4%9Bs%C3%AD%C4%8Dn%C3%AD%20statistika%20v%20grafu%20pomoc%C3%AD%20GD%20knihovny%5D_soubory/muz.gif" alt="muž"> <a href="mailto:pajahodoval%5Bzavinac%5Dseznam%5Btecka%5Dcz"><img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20M%C4%9Bs%C3%AD%C4%8Dn%C3%AD%20statistika%20v%20grafu%20pomoc%C3%AD%20GD%20knihovny%5D_soubory/mail.gif" title="Email" alt="mail"></a>
+<a href="http://www.punkers.eu/"><img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20M%C4%9Bs%C3%AD%C4%8Dn%C3%AD%20statistika%20v%20grafu%20pomoc%C3%AD%20GD%20knihovny%5D_soubory/web.gif" alt="web"></a>
+<a href="http://www.icq.com/307362601"><img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20M%C4%9Bs%C3%AD%C4%8Dn%C3%AD%20statistika%20v%20grafu%20pomoc%C3%AD%20GD%20knihovny%5D_soubory/icq.gif" alt="icq" title="ICQ"></a>
+<a href="mailto:pajah14%5Bzavinac%5Dgmail%5Btecka%5Dcom"><img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20M%C4%9Bs%C3%AD%C4%8Dn%C3%AD%20statistika%20v%20grafu%20pomoc%C3%AD%20GD%20knihovny%5D_soubory/msn.gif" title="MSN" alt="msn"></a>
+</div><div class="ram-info-r">
+<span class="cislo" id="466">[466]</span></div></div><div class="ram-book-text">
+<p>Další článek, který využiju. :-)</p>
+</div><div class="ram-info"><div class="ram-info-l">
+Opera 9.25 / Windows XP
+</div><div class="ram-info-r">Ne, 13. led 2008, 12:13</div></div>
+</div></div></div>
+<div class="ram-bottom ram-book-t"></div>
+
+<div class="ram-top"></div>
+<div class="ram"><div class="ram-center"><div class="ram-leva">
+<div class="img60-book"><img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20M%C4%9Bs%C3%AD%C4%8Dn%C3%AD%20statistika%20v%20grafu%20pomoc%C3%AD%20GD%20knihovny%5D_soubory/noavatar.jpg" alt="avatar"></div>
+</div><div class="ram-prava">
+<div class="ram-info-t"><div class="ram-info-l kursor" onclick="smajlik('[nick]DJMiky[/nick] ')">DJMiky <a href="http://www.chmatakov.cz/"><img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20M%C4%9Bs%C3%AD%C4%8Dn%C3%AD%20statistika%20v%20grafu%20pomoc%C3%AD%20GD%20knihovny%5D_soubory/web.gif" title="Web" alt="web"></a>
+</div><div class="ram-info-r">
+<span class="cislo" id="467">[467]</span></div></div><div class="ram-book-text">
+<p>if, elseif, elseif, elseif, elseif, elseif&amp;#8230; Switch známe? <img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20M%C4%9Bs%C3%AD%C4%8Dn%C3%AD%20statistika%20v%20grafu%20pomoc%C3%AD%20GD%20knihovny%5D_soubory/1.gif" class="smiles" title="Šťastný" alt="[Happy]"> </p>
+</div><div class="ram-info"><div class="ram-info-l">
+Firefox 2.0.0.11 / Windows XP
+</div><div class="ram-info-r">Ne, 13. led 2008, 12:44</div></div>
+</div></div></div>
+<div class="ram-bottom ram-book-t"></div>
+
+<div class="ram-top"></div>
+<div class="ram"><div class="ram-center"><div class="ram-leva">
+<div class="img60-book"><img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20M%C4%9Bs%C3%AD%C4%8Dn%C3%AD%20statistika%20v%20grafu%20pomoc%C3%AD%20GD%20knihovny%5D_soubory/noavatar.jpg" alt="avatar"></div>
+</div><div class="ram-prava">
+<div class="ram-info-t"><div class="ram-info-l kursor" onclick="smajlik('[nick]DJMiky[/nick] ')">DJMiky <a href="http://www.chmatakov.cz/"><img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20M%C4%9Bs%C3%AD%C4%8Dn%C3%AD%20statistika%20v%20grafu%20pomoc%C3%AD%20GD%20knihovny%5D_soubory/web.gif" title="Web" alt="web"></a>
+</div><div class="ram-info-r">
+<span class="cislo" id="468">[468]</span></div></div><div class="ram-book-text">
+<p>Ještě dodatek &amp;#8211; lepší by snad bylo použít na&nbsp;obrázek PNG a&nbsp;ne JPG.</p>
+</div><div class="ram-info"><div class="ram-info-l">
+Firefox 2.0.0.11 / Windows XP
+</div><div class="ram-info-r">Ne, 13. led 2008, 12:49</div></div>
+</div></div></div>
+<div class="ram-bottom ram-book-t"></div>
+
+<div class="ram-top"></div>
+<div class="ram"><div class="ram-center"><div class="ram-leva">
+<div class="img60-book"><img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20M%C4%9Bs%C3%AD%C4%8Dn%C3%AD%20statistika%20v%20grafu%20pomoc%C3%AD%20GD%20knihovny%5D_soubory/CrazyDog_30-1-08.jpg" alt="avatar"></div>
+</div><div class="ram-prava">
+<div class="ram-info-t"><div class="ram-info-l kursor" onclick="smajlik('{1} ')"><a href="http://crazydog.cz/home/registrovani/CrazyDog/"><img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20M%C4%9Bs%C3%AD%C4%8Dn%C3%AD%20statistika%20v%20grafu%20pomoc%C3%AD%20GD%20knihovny%5D_soubory/administrator.gif" alt="" title="Administrátor"></a> 
+CrazyDog&nbsp;<img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20M%C4%9Bs%C3%AD%C4%8Dn%C3%AD%20statistika%20v%20grafu%20pomoc%C3%AD%20GD%20knihovny%5D_soubory/muz.gif" alt="muž"> <a href="mailto:crazydoga%5Bzavinac%5Dgmail%5Btecka%5Dcom"><img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20M%C4%9Bs%C3%AD%C4%8Dn%C3%AD%20statistika%20v%20grafu%20pomoc%C3%AD%20GD%20knihovny%5D_soubory/mail.gif" title="Email" alt="mail"></a>
+<a href="mailto:crazydoga%5Bzavinac%5Dgmail%5Btecka%5Dcom"><img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20M%C4%9Bs%C3%AD%C4%8Dn%C3%AD%20statistika%20v%20grafu%20pomoc%C3%AD%20GD%20knihovny%5D_soubory/msn.gif" title="MSN" alt="msn"></a>
+</div><div class="ram-info-r">
+<span class="cislo" id="469">[469]</span></div></div><div class="ram-book-text">
+<p><strong>DJMiky:</strong> Já vím. Nějak jsem si na&nbsp;to elseif zvykl :). To je moje temná stránka&#8230;
+</p><p><strong>Pajah&nbsp;<img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20M%C4%9Bs%C3%AD%C4%8Dn%C3%AD%20statistika%20v%20grafu%20pomoc%C3%AD%20GD%20knihovny%5D_soubory/muz.gif" alt="muž">:</strong> To jsem rád. <img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20M%C4%9Bs%C3%AD%C4%8Dn%C3%AD%20statistika%20v%20grafu%20pomoc%C3%AD%20GD%20knihovny%5D_soubory/5.gif" class="smiles" title="Ironický/Koketní" alt="[Flirty]"> </p>
+</div><div class="ram-info"><div class="ram-info-l">
+Firefox 2.0.0.11 / Ubuntu Linux
+</div><div class="ram-info-r">Ne, 13. led 2008, 18:34</div></div>
+</div></div></div>
+<div class="ram-bottom ram-book-t"></div>
+
+<div class="ram-top"></div>
+<div class="ram"><div class="ram-center"><div class="ram-leva">
+<div class="img60-book"><img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20M%C4%9Bs%C3%AD%C4%8Dn%C3%AD%20statistika%20v%20grafu%20pomoc%C3%AD%20GD%20knihovny%5D_soubory/Pajah_31-7-07.gif" alt="avatar"></div>
+</div><div class="ram-prava">
+<div class="ram-info-t"><div class="ram-info-l kursor" onclick="smajlik('{17} ')"><a href="http://crazydog.cz/home/registrovani/Pajah/"><img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20M%C4%9Bs%C3%AD%C4%8Dn%C3%AD%20statistika%20v%20grafu%20pomoc%C3%AD%20GD%20knihovny%5D_soubory/moderator.gif" alt="" title="Moderátor"></a> 
+Pajah&nbsp;<img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20M%C4%9Bs%C3%AD%C4%8Dn%C3%AD%20statistika%20v%20grafu%20pomoc%C3%AD%20GD%20knihovny%5D_soubory/muz.gif" alt="muž"> <a href="mailto:pajahodoval%5Bzavinac%5Dseznam%5Btecka%5Dcz"><img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20M%C4%9Bs%C3%AD%C4%8Dn%C3%AD%20statistika%20v%20grafu%20pomoc%C3%AD%20GD%20knihovny%5D_soubory/mail.gif" title="Email" alt="mail"></a>
+<a href="http://www.punkers.eu/"><img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20M%C4%9Bs%C3%AD%C4%8Dn%C3%AD%20statistika%20v%20grafu%20pomoc%C3%AD%20GD%20knihovny%5D_soubory/web.gif" alt="web"></a>
+<a href="http://www.icq.com/307362601"><img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20M%C4%9Bs%C3%AD%C4%8Dn%C3%AD%20statistika%20v%20grafu%20pomoc%C3%AD%20GD%20knihovny%5D_soubory/icq.gif" alt="icq" title="ICQ"></a>
+<a href="mailto:pajah14%5Bzavinac%5Dgmail%5Btecka%5Dcom"><img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20M%C4%9Bs%C3%AD%C4%8Dn%C3%AD%20statistika%20v%20grafu%20pomoc%C3%AD%20GD%20knihovny%5D_soubory/msn.gif" title="MSN" alt="msn"></a>
+</div><div class="ram-info-r">
+<span class="cislo" id="470">[470]</span></div></div><div class="ram-book-text">
+<p>CrazyDog: ale ten png by jsi tam mohl dát, png má hezky vykreslený
+text, jpeg má kolem textu šum. PNG je menší a&nbsp;má celkově lepší
+kvalitu. ;-)</p>
+</div><div class="ram-info"><div class="ram-info-l">
+Opera 9.25 / Windows XP
+</div><div class="ram-info-r">Út, 15. led 2008, 13:06</div></div>
+</div></div></div>
+<div class="ram-bottom ram-book-t"></div>
+
+<div class="ram-top"></div>
+<div class="ram"><div class="ram-center"><div class="ram-leva">
+<div class="img60-book"><img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20M%C4%9Bs%C3%AD%C4%8Dn%C3%AD%20statistika%20v%20grafu%20pomoc%C3%AD%20GD%20knihovny%5D_soubory/CrazyDog_30-1-08.jpg" alt="avatar"></div>
+</div><div class="ram-prava">
+<div class="ram-info-t"><div class="ram-info-l kursor" onclick="smajlik('{1} ')"><a href="http://crazydog.cz/home/registrovani/CrazyDog/"><img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20M%C4%9Bs%C3%AD%C4%8Dn%C3%AD%20statistika%20v%20grafu%20pomoc%C3%AD%20GD%20knihovny%5D_soubory/administrator.gif" alt="" title="Administrátor"></a> 
+CrazyDog&nbsp;<img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20M%C4%9Bs%C3%AD%C4%8Dn%C3%AD%20statistika%20v%20grafu%20pomoc%C3%AD%20GD%20knihovny%5D_soubory/muz.gif" alt="muž"> <a href="mailto:crazydoga%5Bzavinac%5Dgmail%5Btecka%5Dcom"><img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20M%C4%9Bs%C3%AD%C4%8Dn%C3%AD%20statistika%20v%20grafu%20pomoc%C3%AD%20GD%20knihovny%5D_soubory/mail.gif" title="Email" alt="mail"></a>
+<a href="mailto:crazydoga%5Bzavinac%5Dgmail%5Btecka%5Dcom"><img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20M%C4%9Bs%C3%AD%C4%8Dn%C3%AD%20statistika%20v%20grafu%20pomoc%C3%AD%20GD%20knihovny%5D_soubory/msn.gif" title="MSN" alt="msn"></a>
+</div><div class="ram-info-r">
+<span class="cislo" id="471">[471]</span></div></div><div class="ram-book-text">
+<p>Kdo to chce mít v&nbsp;PNG, tak ať místo
+</p><code>header(<span class="zelena">"Content-type: image/jpeg"</span>);
+<br>imagejpeg(<span class="modra">$image</span>);</code><p>dá
+</p><code>header(<span class="zelena">"Content-type: image/png"</span>);
+<br>imagepng(<span class="modra">$image</span>);</code><p>Je to ve&nbsp;spodku. <img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20M%C4%9Bs%C3%AD%C4%8Dn%C3%AD%20statistika%20v%20grafu%20pomoc%C3%AD%20GD%20knihovny%5D_soubory/4.gif" class="smiles" title="Smát se" alt="[Laughing]"> </p>
+</div><div class="ram-info"><div class="ram-info-l">
+Firefox 2.0.0.11 / Ubuntu Linux
+</div><div class="ram-info-r">Út, 15. led 2008, 14:44</div></div>
+</div></div></div>
+<div class="ram-bottom ram-book-t"></div>
+
+<div class="ram-top"></div>
+<div class="ram"><div class="ram-center"><div class="ram-leva">
+<div class="img60-book"><img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20M%C4%9Bs%C3%AD%C4%8Dn%C3%AD%20statistika%20v%20grafu%20pomoc%C3%AD%20GD%20knihovny%5D_soubory/Tondys_21-7-07.jpg" alt="avatar"></div>
+</div><div class="ram-prava">
+<div class="ram-info-t"><div class="ram-info-l kursor" onclick="smajlik('{9} ')"><a href="http://crazydog.cz/home/registrovani/Antonius/"><img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20M%C4%9Bs%C3%AD%C4%8Dn%C3%AD%20statistika%20v%20grafu%20pomoc%C3%AD%20GD%20knihovny%5D_soubory/pritel.gif" alt="" title="Přítel"></a> 
+Antonius&nbsp;<img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20M%C4%9Bs%C3%AD%C4%8Dn%C3%AD%20statistika%20v%20grafu%20pomoc%C3%AD%20GD%20knihovny%5D_soubory/muz.gif" alt="muž"> <a href="mailto:novak%5Bzavinac%5Dgreat-webdesign%5Btecka%5Dcz"><img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20M%C4%9Bs%C3%AD%C4%8Dn%C3%AD%20statistika%20v%20grafu%20pomoc%C3%AD%20GD%20knihovny%5D_soubory/mail.gif" title="Email" alt="mail"></a>
+<a href="http://antonius.great-webdesign.cz/"><img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20M%C4%9Bs%C3%AD%C4%8Dn%C3%AD%20statistika%20v%20grafu%20pomoc%C3%AD%20GD%20knihovny%5D_soubory/web.gif" alt="web"></a>
+<a href="mailto:novak%5Bzavinac%5Dgreat-webdesign%5Btecka%5Dcz"><img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20M%C4%9Bs%C3%AD%C4%8Dn%C3%AD%20statistika%20v%20grafu%20pomoc%C3%AD%20GD%20knihovny%5D_soubory/msn.gif" title="MSN" alt="msn"></a>
+</div><div class="ram-info-r">
+<span class="cislo" id="477">[477]</span></div></div><div class="ram-book-text">
+<p>hele <strong>CrazyDog&nbsp;<img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20M%C4%9Bs%C3%AD%C4%8Dn%C3%AD%20statistika%20v%20grafu%20pomoc%C3%AD%20GD%20knihovny%5D_soubory/muz.gif" alt="muž">:</strong> a&nbsp;ty na&nbsp;tom bananu, pipni, nebo na&nbsp;cem ses nemas ani awstats? <img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20M%C4%9Bs%C3%AD%C4%8Dn%C3%AD%20statistika%20v%20grafu%20pomoc%C3%AD%20GD%20knihovny%5D_soubory/6.gif" class="smiles" title="Váhající" alt="[Hesitant]"> </p>
+</div><div class="ram-info"><div class="ram-info-l">
+Opera 9.25 / Windows Vista
+</div><div class="ram-info-r">So, 19. led 2008, 21:05</div></div>
+</div></div></div>
+<div class="ram-bottom ram-book-t"></div>
+
+<div class="ram-top"></div>
+<div class="ram"><div class="ram-center"><div class="ram-leva">
+<div class="img60-book"><img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20M%C4%9Bs%C3%AD%C4%8Dn%C3%AD%20statistika%20v%20grafu%20pomoc%C3%AD%20GD%20knihovny%5D_soubory/CrazyDog_30-1-08.jpg" alt="avatar"></div>
+</div><div class="ram-prava">
+<div class="ram-info-t"><div class="ram-info-l kursor" onclick="smajlik('{1} ')"><a href="http://crazydog.cz/home/registrovani/CrazyDog/"><img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20M%C4%9Bs%C3%AD%C4%8Dn%C3%AD%20statistika%20v%20grafu%20pomoc%C3%AD%20GD%20knihovny%5D_soubory/administrator.gif" alt="" title="Administrátor"></a> 
+CrazyDog&nbsp;<img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20M%C4%9Bs%C3%AD%C4%8Dn%C3%AD%20statistika%20v%20grafu%20pomoc%C3%AD%20GD%20knihovny%5D_soubory/muz.gif" alt="muž"> <a href="mailto:crazydoga%5Bzavinac%5Dgmail%5Btecka%5Dcom"><img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20M%C4%9Bs%C3%AD%C4%8Dn%C3%AD%20statistika%20v%20grafu%20pomoc%C3%AD%20GD%20knihovny%5D_soubory/mail.gif" title="Email" alt="mail"></a>
+<a href="mailto:crazydoga%5Bzavinac%5Dgmail%5Btecka%5Dcom"><img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20M%C4%9Bs%C3%AD%C4%8Dn%C3%AD%20statistika%20v%20grafu%20pomoc%C3%AD%20GD%20knihovny%5D_soubory/msn.gif" title="MSN" alt="msn"></a>
+</div><div class="ram-info-r">
+<span class="cislo" id="478">[478]</span></div></div><div class="ram-book-text">
+<p><strong>Antonius&nbsp;<img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20M%C4%9Bs%C3%AD%C4%8Dn%C3%AD%20statistika%20v%20grafu%20pomoc%C3%AD%20GD%20knihovny%5D_soubory/muz.gif" alt="muž">:</strong>
+To jsem teď nepochopil. Mám awstats a&nbsp;jsem na&nbsp;blueboard.
+Tohle je jen třešnička na&nbsp;dortu. A&nbsp;někdo nemá vůbec
+statistiky, tak se&nbsp;mu to hodí, ne?</p>
+</div><div class="ram-info"><div class="ram-info-l">
+Firefox 2.0.0.11 / Ubuntu Linux
+</div><div class="ram-info-r">So, 19. led 2008, 22:13</div></div>
+</div></div></div>
+<div class="ram-bottom ram-book-t"></div>
+
+<div class="ram-top"></div>
+<div class="ram"><div class="ram-center"><div class="ram-leva">
+<div class="img60-book"><img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20M%C4%9Bs%C3%AD%C4%8Dn%C3%AD%20statistika%20v%20grafu%20pomoc%C3%AD%20GD%20knihovny%5D_soubory/Tondys_21-7-07.jpg" alt="avatar"></div>
+</div><div class="ram-prava">
+<div class="ram-info-t"><div class="ram-info-l kursor" onclick="smajlik('{9} ')"><a href="http://crazydog.cz/home/registrovani/Antonius/"><img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20M%C4%9Bs%C3%AD%C4%8Dn%C3%AD%20statistika%20v%20grafu%20pomoc%C3%AD%20GD%20knihovny%5D_soubory/pritel.gif" alt="" title="Přítel"></a> 
+Antonius&nbsp;<img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20M%C4%9Bs%C3%AD%C4%8Dn%C3%AD%20statistika%20v%20grafu%20pomoc%C3%AD%20GD%20knihovny%5D_soubory/muz.gif" alt="muž"> <a href="mailto:novak%5Bzavinac%5Dgreat-webdesign%5Btecka%5Dcz"><img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20M%C4%9Bs%C3%AD%C4%8Dn%C3%AD%20statistika%20v%20grafu%20pomoc%C3%AD%20GD%20knihovny%5D_soubory/mail.gif" title="Email" alt="mail"></a>
+<a href="http://antonius.great-webdesign.cz/"><img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20M%C4%9Bs%C3%AD%C4%8Dn%C3%AD%20statistika%20v%20grafu%20pomoc%C3%AD%20GD%20knihovny%5D_soubory/web.gif" alt="web"></a>
+<a href="mailto:novak%5Bzavinac%5Dgreat-webdesign%5Btecka%5Dcz"><img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20M%C4%9Bs%C3%AD%C4%8Dn%C3%AD%20statistika%20v%20grafu%20pomoc%C3%AD%20GD%20knihovny%5D_soubory/msn.gif" title="MSN" alt="msn"></a>
+</div><div class="ram-info-r">
+<span class="cislo" id="480">[480]</span></div></div><div class="ram-book-text">
+<p>jo, to urcite, ale tak koukal jsem ze&nbsp;to mas i&nbsp;tady na&nbsp;webu, tak uz jsem nad&nbsp;tim premyslel drive <img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20M%C4%9Bs%C3%AD%C4%8Dn%C3%AD%20statistika%20v%20grafu%20pomoc%C3%AD%20GD%20knihovny%5D_soubory/12.gif" class="smiles" title="Popletený" alt="[Confused]"> 
+</p><p>btw jake tam jsou na&nbsp;blueboardu v&nbsp;awstats plug-iny?
+Teda nevim jestli se&nbsp;to sem hodi, kdyztak mi to smaz a&nbsp;napis
+do&nbsp;knihy navstev, jestli ne.</p>
+</div><div class="ram-info"><div class="ram-info-l">
+Opera 9.25 / Windows Vista
+</div><div class="ram-info-r">Ne, 20. led 2008, 00:20</div></div>
+</div></div></div>
+<div class="ram-bottom ram-book-t"></div>
+
+<div class="ram-top"></div>
+<div class="ram"><div class="ram-center"><div class="ram-leva">
+<div class="img60-book"><img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20M%C4%9Bs%C3%AD%C4%8Dn%C3%AD%20statistika%20v%20grafu%20pomoc%C3%AD%20GD%20knihovny%5D_soubory/CrazyDog_30-1-08.jpg" alt="avatar"></div>
+</div><div class="ram-prava">
+<div class="ram-info-t"><div class="ram-info-l kursor" onclick="smajlik('{1} ')"><a href="http://crazydog.cz/home/registrovani/CrazyDog/"><img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20M%C4%9Bs%C3%AD%C4%8Dn%C3%AD%20statistika%20v%20grafu%20pomoc%C3%AD%20GD%20knihovny%5D_soubory/administrator.gif" alt="" title="Administrátor"></a> 
+CrazyDog&nbsp;<img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20M%C4%9Bs%C3%AD%C4%8Dn%C3%AD%20statistika%20v%20grafu%20pomoc%C3%AD%20GD%20knihovny%5D_soubory/muz.gif" alt="muž"> <a href="mailto:crazydoga%5Bzavinac%5Dgmail%5Btecka%5Dcom"><img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20M%C4%9Bs%C3%AD%C4%8Dn%C3%AD%20statistika%20v%20grafu%20pomoc%C3%AD%20GD%20knihovny%5D_soubory/mail.gif" title="Email" alt="mail"></a>
+<a href="mailto:crazydoga%5Bzavinac%5Dgmail%5Btecka%5Dcom"><img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20M%C4%9Bs%C3%AD%C4%8Dn%C3%AD%20statistika%20v%20grafu%20pomoc%C3%AD%20GD%20knihovny%5D_soubory/msn.gif" title="MSN" alt="msn"></a>
+</div><div class="ram-info-r">
+<span class="cislo" id="482">[482]</span></div></div><div class="ram-book-text">
+<p><strong>Antonius&nbsp;<img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20M%C4%9Bs%C3%AD%C4%8Dn%C3%AD%20statistika%20v%20grafu%20pomoc%C3%AD%20GD%20knihovny%5D_soubory/muz.gif" alt="muž">:</strong> S&nbsp;pluginy? Jako, že co to umí měřit nebo jestli tam jdou přidat další počitadla? <img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20M%C4%9Bs%C3%AD%C4%8Dn%C3%AD%20statistika%20v%20grafu%20pomoc%C3%AD%20GD%20knihovny%5D_soubory/12.gif" class="smiles" title="Popletený" alt="[Confused]"> </p>
+</div><div class="ram-info"><div class="ram-info-l">
+Firefox 2.0.0.11 / Ubuntu Linux
+</div><div class="ram-info-r">Ne, 20. led 2008, 09:54</div></div>
+</div></div></div>
+<div class="ram-bottom ram-book-t"></div>
+
+<div class="ram-top"></div>
+<div class="ram"><div class="ram-center"><div class="ram-leva">
+<div class="img60-book"><img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20M%C4%9Bs%C3%AD%C4%8Dn%C3%AD%20statistika%20v%20grafu%20pomoc%C3%AD%20GD%20knihovny%5D_soubory/Tondys_21-7-07.jpg" alt="avatar"></div>
+</div><div class="ram-prava">
+<div class="ram-info-t"><div class="ram-info-l kursor" onclick="smajlik('{9} ')"><a href="http://crazydog.cz/home/registrovani/Antonius/"><img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20M%C4%9Bs%C3%AD%C4%8Dn%C3%AD%20statistika%20v%20grafu%20pomoc%C3%AD%20GD%20knihovny%5D_soubory/pritel.gif" alt="" title="Přítel"></a> 
+Antonius&nbsp;<img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20M%C4%9Bs%C3%AD%C4%8Dn%C3%AD%20statistika%20v%20grafu%20pomoc%C3%AD%20GD%20knihovny%5D_soubory/muz.gif" alt="muž"> <a href="mailto:novak%5Bzavinac%5Dgreat-webdesign%5Btecka%5Dcz"><img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20M%C4%9Bs%C3%AD%C4%8Dn%C3%AD%20statistika%20v%20grafu%20pomoc%C3%AD%20GD%20knihovny%5D_soubory/mail.gif" title="Email" alt="mail"></a>
+<a href="http://antonius.great-webdesign.cz/"><img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20M%C4%9Bs%C3%AD%C4%8Dn%C3%AD%20statistika%20v%20grafu%20pomoc%C3%AD%20GD%20knihovny%5D_soubory/web.gif" alt="web"></a>
+<a href="mailto:novak%5Bzavinac%5Dgreat-webdesign%5Btecka%5Dcz"><img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20M%C4%9Bs%C3%AD%C4%8Dn%C3%AD%20statistika%20v%20grafu%20pomoc%C3%AD%20GD%20knihovny%5D_soubory/msn.gif" title="MSN" alt="msn"></a>
+</div><div class="ram-info-r">
+<span class="cislo" id="483">[483]</span></div></div><div class="ram-book-text">
+<p><strong>CrazyDog&nbsp;<img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20M%C4%9Bs%C3%AD%C4%8Dn%C3%AD%20statistika%20v%20grafu%20pomoc%C3%AD%20GD%20knihovny%5D_soubory/muz.gif" alt="muž">:</strong>
+dole v&nbsp;AWSTATS mas napsanou jejich verzi a&nbsp;pluginy ktere
+AWSTATS maji, tak me zajima jake tam na&nbsp;Blueboardu jsou a&nbsp;co
+to umi. Jsou to rozsireni AWSTATS, stejne jako jsou plug-iny rozsireni
+treba do Firefoxu&#8230;</p>
+</div><div class="ram-info"><div class="ram-info-l">
+Opera 9.25 / Windows Vista
+</div><div class="ram-info-r">Út, 22. led 2008, 14:45</div></div>
+</div></div></div>
+<div class="ram-bottom ram-book-t"></div>
+
+<div class="ram-top"></div>
+<div class="ram"><div class="ram-center"><div class="ram-leva">
+<div class="img60-book"><img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20M%C4%9Bs%C3%AD%C4%8Dn%C3%AD%20statistika%20v%20grafu%20pomoc%C3%AD%20GD%20knihovny%5D_soubory/CrazyDog_30-1-08.jpg" alt="avatar"></div>
+</div><div class="ram-prava">
+<div class="ram-info-t"><div class="ram-info-l kursor" onclick="smajlik('{1} ')"><a href="http://crazydog.cz/home/registrovani/CrazyDog/"><img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20M%C4%9Bs%C3%AD%C4%8Dn%C3%AD%20statistika%20v%20grafu%20pomoc%C3%AD%20GD%20knihovny%5D_soubory/administrator.gif" alt="" title="Administrátor"></a> 
+CrazyDog&nbsp;<img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20M%C4%9Bs%C3%AD%C4%8Dn%C3%AD%20statistika%20v%20grafu%20pomoc%C3%AD%20GD%20knihovny%5D_soubory/muz.gif" alt="muž"> <a href="mailto:crazydoga%5Bzavinac%5Dgmail%5Btecka%5Dcom"><img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20M%C4%9Bs%C3%AD%C4%8Dn%C3%AD%20statistika%20v%20grafu%20pomoc%C3%AD%20GD%20knihovny%5D_soubory/mail.gif" title="Email" alt="mail"></a>
+<a href="mailto:crazydoga%5Bzavinac%5Dgmail%5Btecka%5Dcom"><img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20M%C4%9Bs%C3%AD%C4%8Dn%C3%AD%20statistika%20v%20grafu%20pomoc%C3%AD%20GD%20knihovny%5D_soubory/msn.gif" title="MSN" alt="msn"></a>
+</div><div class="ram-info-r">
+<span class="cislo" id="484">[484]</span></div></div><div class="ram-book-text">
+<p><strong>Antonius&nbsp;<img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20M%C4%9Bs%C3%AD%C4%8Dn%C3%AD%20statistika%20v%20grafu%20pomoc%C3%AD%20GD%20knihovny%5D_soubory/muz.gif" alt="muž">:</strong> Pluginy tam nejsou vypsané, jen verze: <em>Advanced Web Statistics 6.6 (build 1.887)</em> Jinak to měří:
+</p><p>
+</p><ul><li>Souhrn
+</li><li>Za měsíc
+</li><li>Dny v&nbsp;měsíci
+</li><li>Dny v&nbsp;týdnu
+</li><li>Hodiny
+</li><li>Návštěvy domény/země
+</li><li>Hosté
+</li><li>Roboti
+</li><li>Trvání návštěv
+</li><li>Typ souboru
+</li><li>Stránky/<abbr title="Internetová adresa">URL</abbr>
+ </li><li>OS
+</li><li>Browsery (prohlížeče)
+</li><li>Přístup z
+</li><li>- Odkaz z&nbsp;Internetového vyhledávače
+</li><li>- Přímá adresa / Oblíbené (Bookmark)
+</li><li>- Odkaz z&nbsp;diskuzních skupin (News)
+</li><li>- Odkaz z&nbsp;jiné stránky (jiné stránky než vyhledávače)
+</li><li>Hledaná slovní spojení
+</li><li>Hledané výrazy
+</li><li>Oblíbené (odhad)
+</li><li>Chybové kódy HTTP
+</li></ul><p>
+</p><p>A to je asi&nbsp;tak vše&#8230;</p>
+</div><div class="ram-info"><div class="ram-info-l">
+Firefox 2.0.0.11 / Ubuntu Linux
+</div><div class="ram-info-r">Út, 22. led 2008, 15:07</div></div>
+</div></div></div>
+<div class="ram-bottom ram-book-t"></div>
+
+<div class="ram-top"></div>
+<div class="ram"><div class="ram-center"><div class="ram-leva">
+<div class="img60-book"><img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20M%C4%9Bs%C3%AD%C4%8Dn%C3%AD%20statistika%20v%20grafu%20pomoc%C3%AD%20GD%20knihovny%5D_soubory/Tondys_21-7-07.jpg" alt="avatar"></div>
+</div><div class="ram-prava">
+<div class="ram-info-t"><div class="ram-info-l kursor" onclick="smajlik('{9} ')"><a href="http://crazydog.cz/home/registrovani/Antonius/"><img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20M%C4%9Bs%C3%AD%C4%8Dn%C3%AD%20statistika%20v%20grafu%20pomoc%C3%AD%20GD%20knihovny%5D_soubory/pritel.gif" alt="" title="Přítel"></a> 
+Antonius&nbsp;<img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20M%C4%9Bs%C3%AD%C4%8Dn%C3%AD%20statistika%20v%20grafu%20pomoc%C3%AD%20GD%20knihovny%5D_soubory/muz.gif" alt="muž"> <a href="mailto:novak%5Bzavinac%5Dgreat-webdesign%5Btecka%5Dcz"><img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20M%C4%9Bs%C3%AD%C4%8Dn%C3%AD%20statistika%20v%20grafu%20pomoc%C3%AD%20GD%20knihovny%5D_soubory/mail.gif" title="Email" alt="mail"></a>
+<a href="http://antonius.great-webdesign.cz/"><img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20M%C4%9Bs%C3%AD%C4%8Dn%C3%AD%20statistika%20v%20grafu%20pomoc%C3%AD%20GD%20knihovny%5D_soubory/web.gif" alt="web"></a>
+<a href="mailto:novak%5Bzavinac%5Dgreat-webdesign%5Btecka%5Dcz"><img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20M%C4%9Bs%C3%AD%C4%8Dn%C3%AD%20statistika%20v%20grafu%20pomoc%C3%AD%20GD%20knihovny%5D_soubory/msn.gif" title="MSN" alt="msn"></a>
+</div><div class="ram-info-r">
+<span class="cislo" id="486">[486]</span></div></div><div class="ram-book-text">
+<p><strong>CrazyDog&nbsp;<img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20M%C4%9Bs%C3%AD%C4%8Dn%C3%AD%20statistika%20v%20grafu%20pomoc%C3%AD%20GD%20knihovny%5D_soubory/muz.gif" alt="muž">:</strong> aha, takze jen nejaky zaklad starsi verze. Ja mam <em>Advanced
+Web Statistics 6.7 (build 1.892)&nbsp;&#8211; Created by awstats (plugins:
+hostinfo, ipv6, graphapplet, geoip, decodeutfkeys, tooltips)</em> u&nbsp;martina na&nbsp;<a href="http://pond.cz/">Pondu</a> <img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20M%C4%9Bs%C3%AD%C4%8Dn%C3%AD%20statistika%20v%20grafu%20pomoc%C3%AD%20GD%20knihovny%5D_soubory/5.gif" class="smiles" title="Ironický/Koketní" alt="[Flirty]"> &nbsp;&#8211; doporucuju, ja tam presouvam postupne vsechno <img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20M%C4%9Bs%C3%AD%C4%8Dn%C3%AD%20statistika%20v%20grafu%20pomoc%C3%AD%20GD%20knihovny%5D_soubory/21.gif" class="smiles" title="Tondysův smajlík" alt="[Tondys]">  AWSTATS tam maji uz i&nbsp;utf, takze se&nbsp;ti zobrazujou klicova slova, atd. spravne a&nbsp;ne s&nbsp;klikihaky, jako driv <img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20M%C4%9Bs%C3%AD%C4%8Dn%C3%AD%20statistika%20v%20grafu%20pomoc%C3%AD%20GD%20knihovny%5D_soubory/5.gif" class="smiles" title="Ironický/Koketní" alt="[Flirty]"> </p>
+</div><div class="ram-info"><div class="ram-info-l">
+Opera 9.25 / Windows Vista
+</div><div class="ram-info-r">Út, 22. led 2008, 19:23</div></div>
+</div></div></div>
+<div class="ram-bottom ram-book-t"></div>
+
+<div class="ram-top"></div>
+<div class="ram"><div class="ram-center"><div class="ram-leva">
+<div class="img60-book"><img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20M%C4%9Bs%C3%AD%C4%8Dn%C3%AD%20statistika%20v%20grafu%20pomoc%C3%AD%20GD%20knihovny%5D_soubory/noavatar.jpg" alt="avatar"></div>
+</div><div class="ram-prava">
+<div class="ram-info-t"><div class="ram-info-l kursor" onclick="smajlik('[nick]zaachi[/nick] ')">zaachi <a href="http://zaachi.com/"><img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20M%C4%9Bs%C3%AD%C4%8Dn%C3%AD%20statistika%20v%20grafu%20pomoc%C3%AD%20GD%20knihovny%5D_soubory/web.gif" title="Web" alt="web"></a>
+</div><div class="ram-info-r">
+<span class="cislo" id="528">[528]</span></div></div><div class="ram-book-text">
+<p>Ajaj. chudina databaze tohle zpracovavat. 
+</p><p>Copak by vsechny ty dotazy nesly nacpat do&nbsp;jednoho
+a&nbsp;ne delat zbytecne tolik dotazu? Nebo alespon ty dotazy trosinku
+optimalizovat. </p><p>Proc prenaset cely obsah radku z&nbsp;SQL serveru
+na&nbsp;Webovy server, kdyz stejne ve&nbsp;vysledku chces jenom soucet
+radek? :-) </p><p>A ani webovemu serveru nezavidim, zpracovavat ty IF-else IF-else IF. 
+</p><p>A kdyz se&nbsp;divam sem pod&nbsp;tuhle textareu, do&nbsp;ktere
+pisu komentar, a&nbsp;vidim ze&nbsp;doba vygenerovani stranky byla 0.5
+sekundy, tak se&nbsp;ani moc nedivim. </p>
+</div><div class="ram-info"><div class="ram-info-l">
+Firefox 2.0.0.12 / Windows Vista
+</div><div class="ram-info-r">St, 12. bře 2008, 17:54</div></div>
+</div></div></div>
+<div class="ram-bottom ram-book-t"></div>
+
+<div class="ram-top"></div>
+<div class="ram"><div class="ram-center"><div class="ram-leva">
+<div class="img60-book"><img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20M%C4%9Bs%C3%AD%C4%8Dn%C3%AD%20statistika%20v%20grafu%20pomoc%C3%AD%20GD%20knihovny%5D_soubory/CrazyDog_30-1-08.jpg" alt="avatar"></div>
+</div><div class="ram-prava">
+<div class="ram-info-t"><div class="ram-info-l kursor" onclick="smajlik('{1} ')"><a href="http://crazydog.cz/home/registrovani/CrazyDog/"><img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20M%C4%9Bs%C3%AD%C4%8Dn%C3%AD%20statistika%20v%20grafu%20pomoc%C3%AD%20GD%20knihovny%5D_soubory/administrator.gif" alt="" title="Administrátor"></a> 
+CrazyDog&nbsp;<img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20M%C4%9Bs%C3%AD%C4%8Dn%C3%AD%20statistika%20v%20grafu%20pomoc%C3%AD%20GD%20knihovny%5D_soubory/muz.gif" alt="muž"> <a href="mailto:crazydoga%5Bzavinac%5Dgmail%5Btecka%5Dcom"><img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20M%C4%9Bs%C3%AD%C4%8Dn%C3%AD%20statistika%20v%20grafu%20pomoc%C3%AD%20GD%20knihovny%5D_soubory/mail.gif" title="Email" alt="mail"></a>
+<a href="mailto:crazydoga%5Bzavinac%5Dgmail%5Btecka%5Dcom"><img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20M%C4%9Bs%C3%AD%C4%8Dn%C3%AD%20statistika%20v%20grafu%20pomoc%C3%AD%20GD%20knihovny%5D_soubory/msn.gif" title="MSN" alt="msn"></a>
+</div><div class="ram-info-r">
+<span class="cislo" id="529">[529]</span></div></div><div class="ram-book-text">
+<p><strong>zaachi:</strong> IF je náhodou rychlejší než switch ale
+jinak když kliknu na&nbsp;statistiky dole, kde se&nbsp;všechny vypíšou,
+tak je to max. 0,04&#8230; a&nbsp;optimalizované to je akorát tím, že
+se&nbsp;zápis provádí jen jednou za&nbsp;den pro&nbsp;jednoho uživatele.</p>
+</div><div class="ram-info"><div class="ram-info-l">
+Firefox 2.0.0.12 / Ubuntu Linux
+</div><div class="ram-info-r">St, 12. bře 2008, 19:45</div></div>
+</div></div></div>
+<div class="ram-bottom ram-book-t"></div>
+
+<div class="ram-top"></div>
+<div class="ram"><div class="ram-center"><div class="ram-leva">
+<div class="img60-book"><img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20M%C4%9Bs%C3%AD%C4%8Dn%C3%AD%20statistika%20v%20grafu%20pomoc%C3%AD%20GD%20knihovny%5D_soubory/avatar.jpg" alt="avatar"></div>
+</div><div class="ram-prava">
+<div class="ram-info-t"><div class="ram-info-l kursor" onclick="smajlik('[nick]martin-vev[/nick] ')">martin-vev <a href="mailto:martin%5Btecka%5Dvev%5Bzavinac%5Dgmail%5Btecka%5Dcom"><img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20M%C4%9Bs%C3%AD%C4%8Dn%C3%AD%20statistika%20v%20grafu%20pomoc%C3%AD%20GD%20knihovny%5D_soubory/mail.gif" title="Email" alt="mail"></a>
+</div><div class="ram-info-r">
+<span class="cislo" id="536">[536]</span></div></div><div class="ram-book-text">
+<p>Narazil jsem na&nbsp;tento clanek uplne nahodou, a&nbsp;po precteni
+jsem byl opravdu zdesen. Nedalo mi to a&nbsp;upravil jsem ti prvni dva
+bloky kodu alespon takto.. dal uz to radeji nebudu rozebirat. ber to
+jako inspiraci a&nbsp;podivej se, proc je tvoje if-else metoda spatna
+(a ten tvuj argument se&nbsp;switch bezvyznamny). snad se&nbsp;tady kod
+zobrazi dobre
+</p><p>
+</p><p>[code]
+</p><p>function mesic($mes) {
+</p><p> include("./db.php"); /* přístup k&nbsp;databázi*/
+</p><p> $mesic = mysql_fetch_assoc(mysql_query("SELECT pocet FROM poc_mesic WHERE mesic='".date("Y")."-".(int)$mes."-00'"));
+</p><p> return $mesic['pocet'];
+</p><p>}
+</p><p>
+</p><p>$data = array(
+</p><p>"Led" =&gt; mesic(1),
+</p><p>"Úno" =&gt; mesic(2),
+</p><p>"Bře" =&gt; mesic(3),
+</p><p>"Dub" =&gt; mesic(4),
+</p><p>"Kvě" =&gt; mesic(5),
+</p><p>"Čen" =&gt; mesic(6),
+</p><p>"Čec" =&gt; mesic(7),
+</p><p>"Srp" =&gt; mesic(8),
+</p><p>"Zář" =&gt; mesic(9),
+</p><p>"Říj" =&gt; mesic(10),
+</p><p>\&amp;q...</p><div class="seda r b5 text-r">Příspěvěk má více jak 1000 znaků.<div class="r20"><a href="http://crazydog.cz/pro-web/php-scripty/mesicni-statistika-v-grafu-pomoci-gd-knihovny/zobrazit-536/#536">Zobrazit zbytek?</a></div></div>
+</div><div class="ram-info"><div class="ram-info-l">
+Firefox 2.0.0.12 / Windows Vista
+</div><div class="ram-info-r">St, 19. bře 2008, 17:06</div></div>
+</div></div></div>
+<div class="ram-bottom ram-book-t"></div>
+
+<div class="ram-top"></div>
+<div class="ram"><div class="ram-center"><div class="ram-leva">
+<div class="img60-book"><img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20M%C4%9Bs%C3%AD%C4%8Dn%C3%AD%20statistika%20v%20grafu%20pomoc%C3%AD%20GD%20knihovny%5D_soubory/CrazyDog_30-1-08.jpg" alt="avatar"></div>
+</div><div class="ram-prava">
+<div class="ram-info-t"><div class="ram-info-l kursor" onclick="smajlik('{1} ')"><a href="http://crazydog.cz/home/registrovani/CrazyDog/"><img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20M%C4%9Bs%C3%AD%C4%8Dn%C3%AD%20statistika%20v%20grafu%20pomoc%C3%AD%20GD%20knihovny%5D_soubory/administrator.gif" alt="" title="Administrátor"></a> 
+CrazyDog&nbsp;<img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20M%C4%9Bs%C3%AD%C4%8Dn%C3%AD%20statistika%20v%20grafu%20pomoc%C3%AD%20GD%20knihovny%5D_soubory/muz.gif" alt="muž"> <a href="mailto:crazydoga%5Bzavinac%5Dgmail%5Btecka%5Dcom"><img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20M%C4%9Bs%C3%AD%C4%8Dn%C3%AD%20statistika%20v%20grafu%20pomoc%C3%AD%20GD%20knihovny%5D_soubory/mail.gif" title="Email" alt="mail"></a>
+<a href="mailto:crazydoga%5Bzavinac%5Dgmail%5Btecka%5Dcom"><img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20M%C4%9Bs%C3%AD%C4%8Dn%C3%AD%20statistika%20v%20grafu%20pomoc%C3%AD%20GD%20knihovny%5D_soubory/msn.gif" title="MSN" alt="msn"></a>
+</div><div class="ram-info-r">
+<span class="cislo" id="537">[537]</span></div></div><div class="ram-book-text">
+<p><strong>martin-vev:</strong> To máš pravdu&#8230; Já neměl čas zjišťovat lepší řešení. Tohle je takové amatérsky napsané. Ale díky, že jsi na&nbsp;to upozornil.</p>
+</div><div class="ram-info"><div class="ram-info-l">
+Firefox 2.0.0.12 / Ubuntu Linux
+</div><div class="ram-info-r">St, 19. bře 2008, 20:49</div></div>
+</div></div></div>
+<div class="ram-bottom ram-book-t"></div>
+
+<div class="ram-top"></div>
+<div class="ram"><div class="ram-center"><div class="ram-leva">
+<div class="img60-book"><img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20M%C4%9Bs%C3%AD%C4%8Dn%C3%AD%20statistika%20v%20grafu%20pomoc%C3%AD%20GD%20knihovny%5D_soubory/avatar.jpg" alt="avatar"></div>
+</div><div class="ram-prava">
+<div class="ram-info-t"><div class="ram-info-l kursor" onclick="smajlik('[nick]martin-vev[/nick] ')">martin-vev <a href="mailto:martin%5Btecka%5Dvev%5Bzavinac%5Dgmail%5Btecka%5Dcom"><img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20M%C4%9Bs%C3%AD%C4%8Dn%C3%AD%20statistika%20v%20grafu%20pomoc%C3%AD%20GD%20knihovny%5D_soubory/mail.gif" title="Email" alt="mail"></a>
+</div><div class="ram-info-r">
+<span class="cislo" id="550">[550]</span></div></div><div class="ram-book-text">
+<p>nojo nikdo nema na&nbsp;nic cas a&nbsp;podle toho pak ty weby vypadaji :)</p>
+</div><div class="ram-info"><div class="ram-info-l">
+Firefox 2.0.0.13 / Windows Vista
+</div><div class="ram-info-r">So, 05. dub 2008, 19:54</div></div>
+</div></div></div>
+<div class="ram-bottom ram-book-t"></div>
+
+<script type="text/javascript" src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20M%C4%9Bs%C3%AD%C4%8Dn%C3%AD%20statistika%20v%20grafu%20pomoc%C3%AD%20GD%20knihovny%5D_soubory/formatovani.js"></script>
+<div class="mezera">&nbsp;</div>
+<form method="post" class="f_form" id="vzkaz" action="/pro-web/php-scripty/mesicni-statistika-v-grafu-pomoci-gd-knihovny/#bottom">
+<div class="l w480 b5">
+<div class="l l15e"><input name="nick" class="f_input" tabindex="1" value="" maxlength="20" type="text"> - <strong>Jméno</strong></div>
+<div class="r r15e"><input accesskey="s" tabindex="5" class="f_r-tlacitko tlacitko" value=" Uložit " type="submit"></div>
+</div><div class="l w480 iebug1">
+<div class="l l15e"><input name="web_mail" class="f_input" tabindex="2" value="" maxlength="50" type="text"> - Web nebo <abbr title="Email je propojený s Gravatarem">Email</abbr></div>
+<div class="r r15e"><img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20M%C4%9Bs%C3%AD%C4%8Dn%C3%AD%20statistika%20v%20grafu%20pomoc%C3%AD%20GD%20knihovny%5D_soubory/kod-knihy.png" title="Kód" class="f_kodimg" alt="Kód">
+<input tabindex="3" maxlength="4" name="kod" class="f_kod" value="Kód" onfocus="this.value='';" type="text"></div>
+</div>
+<p><textarea rows="6" cols="55" class="f_text" tabindex="4" name="text_gb"></textarea></p>
+<div class="no"><input name="odeslano" value="ano" type="hidden"></div>
+<p></p><div class="w480 l l15e" id="prvni">
+<div class="a-no l">
+<img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20M%C4%9Bs%C3%AD%C4%8Dn%C3%AD%20statistika%20v%20grafu%20pomoc%C3%AD%20GD%20knihovny%5D_soubory/1.gif" onclick="smajlik('[Happy]')" class="kursor" title="Šťastný" alt="[Happy]">
+<img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20M%C4%9Bs%C3%AD%C4%8Dn%C3%AD%20statistika%20v%20grafu%20pomoc%C3%AD%20GD%20knihovny%5D_soubory/2.gif" onclick="smajlik('[Sad]')" class="kursor" title="Smutný" alt="[Sad]">
+<img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20M%C4%9Bs%C3%AD%C4%8Dn%C3%AD%20statistika%20v%20grafu%20pomoc%C3%AD%20GD%20knihovny%5D_soubory/3.gif" onclick="smajlik('[Applause]')" class="kursor" title="Potlesk" alt="[Applause]">
+<img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20M%C4%9Bs%C3%AD%C4%8Dn%C3%AD%20statistika%20v%20grafu%20pomoc%C3%AD%20GD%20knihovny%5D_soubory/4.gif" onclick="smajlik('[Laughing]')" class="kursor" title="Smát se" alt="[Laughing]">
+<img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20M%C4%9Bs%C3%AD%C4%8Dn%C3%AD%20statistika%20v%20grafu%20pomoc%C3%AD%20GD%20knihovny%5D_soubory/5.gif" onclick="smajlik('[Flirty]')" class="kursor" title="Ironický/Koketní" alt="[Flirty]">
+<img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20M%C4%9Bs%C3%AD%C4%8Dn%C3%AD%20statistika%20v%20grafu%20pomoc%C3%AD%20GD%20knihovny%5D_soubory/6.gif" onclick="smajlik('[Hesitant]')" class="kursor" title="Váhající" alt="[Hesitant]">
+<img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20M%C4%9Bs%C3%AD%C4%8Dn%C3%AD%20statistika%20v%20grafu%20pomoc%C3%AD%20GD%20knihovny%5D_soubory/7.gif" onclick="smajlik('[Yummy]')" class="kursor" title="Báječný vtip" alt="[Yummy]">
+<img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20M%C4%9Bs%C3%AD%C4%8Dn%C3%AD%20statistika%20v%20grafu%20pomoc%C3%AD%20GD%20knihovny%5D_soubory/8.gif" onclick="smajlik('[Narky]')" class="kursor" title="Naštvaný" alt="[Narky]">
+<img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20M%C4%9Bs%C3%AD%C4%8Dn%C3%AD%20statistika%20v%20grafu%20pomoc%C3%AD%20GD%20knihovny%5D_soubory/9.gif" onclick="smajlik('[Mad]')" class="kursor" title="šílený" alt="[Mad]">
+<img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20M%C4%9Bs%C3%AD%C4%8Dn%C3%AD%20statistika%20v%20grafu%20pomoc%C3%AD%20GD%20knihovny%5D_soubory/10.gif" onclick="smajlik('[ROFL]')" class="kursor" title="Válet se smíchy" alt="[ROFL]">
+<img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20M%C4%9Bs%C3%AD%C4%8Dn%C3%AD%20statistika%20v%20grafu%20pomoc%C3%AD%20GD%20knihovny%5D_soubory/11.gif" onclick="smajlik('[Amazed]')" class="kursor" title="Ohromený" alt="[Amazed]">
+<img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20M%C4%9Bs%C3%AD%C4%8Dn%C3%AD%20statistika%20v%20grafu%20pomoc%C3%AD%20GD%20knihovny%5D_soubory/12.gif" onclick="smajlik('[Confused]')" class="kursor" title="Popletený" alt="[Confused]">
+<img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20M%C4%9Bs%C3%AD%C4%8Dn%C3%AD%20statistika%20v%20grafu%20pomoc%C3%AD%20GD%20knihovny%5D_soubory/13.gif" onclick="smajlik('[Crying]')" class="kursor" title="Plač" alt="[Crying]">
+<img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20M%C4%9Bs%C3%AD%C4%8Dn%C3%AD%20statistika%20v%20grafu%20pomoc%C3%AD%20GD%20knihovny%5D_soubory/14.gif" onclick="smajlik('[Fatigue]')" class="kursor" title="Únava" alt="[Fatigue]">
+<img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20M%C4%9Bs%C3%AD%C4%8Dn%C3%AD%20statistika%20v%20grafu%20pomoc%C3%AD%20GD%20knihovny%5D_soubory/15.gif" onclick="smajlik('[Zorro]')" class="kursor" title="Zorro" alt="[Zorro]">
+<img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20M%C4%9Bs%C3%AD%C4%8Dn%C3%AD%20statistika%20v%20grafu%20pomoc%C3%AD%20GD%20knihovny%5D_soubory/16.gif" onclick="smajlik('[Uptight]')" class="kursor" title="Podrážděný" alt="[Uptight]">
+<img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20M%C4%9Bs%C3%AD%C4%8Dn%C3%AD%20statistika%20v%20grafu%20pomoc%C3%AD%20GD%20knihovny%5D_soubory/17.gif" onclick="smajlik('[LOL]')" class="kursor" title="Hlasitý smích" alt="[LOL]">
+<img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20M%C4%9Bs%C3%AD%C4%8Dn%C3%AD%20statistika%20v%20grafu%20pomoc%C3%AD%20GD%20knihovny%5D_soubory/18.gif" onclick="smajlik('[Blush]')" class="kursor" title="Stydět se" alt="[Blush]">
+<img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20M%C4%9Bs%C3%AD%C4%8Dn%C3%AD%20statistika%20v%20grafu%20pomoc%C3%AD%20GD%20knihovny%5D_soubory/19.gif" onclick="smajlik('[Kissing]')" class="kursor" title="Polibek" alt="[Kissing]">
+<img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20M%C4%9Bs%C3%AD%C4%8Dn%C3%AD%20statistika%20v%20grafu%20pomoc%C3%AD%20GD%20knihovny%5D_soubory/20.gif" onclick="smajlik('[Ble]')" class="kursor" title="Nevolno" alt="[Ble]">
+<img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20M%C4%9Bs%C3%AD%C4%8Dn%C3%AD%20statistika%20v%20grafu%20pomoc%C3%AD%20GD%20knihovny%5D_soubory/21.gif" onclick="smajlik('[Tondys]')" class="kursor" title="Tondysův smajlík" alt="[Tondys]">
+</div><div class="r r20">
+<img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20M%C4%9Bs%C3%AD%C4%8Dn%C3%AD%20statistika%20v%20grafu%20pomoc%C3%AD%20GD%20knihovny%5D_soubory/sibka-dolu.gif" alt="+" onclick="zobrazit('prvni')" class="kursor" title="Formátování">
+</div></div>
+
+<div class="w480 l l15e" id="druhy" style="display: none;"><div class="a-no l">
+<img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20M%C4%9Bs%C3%AD%C4%8Dn%C3%AD%20statistika%20v%20grafu%20pomoc%C3%AD%20GD%20knihovny%5D_soubory/obr.gif" class="kursor" onclick="img('Zadejte adresu k obrázku. Adresa musí začínat http://','Kde má být umístěn (left|right|center)')" title="Obrázek" alt="[obr]">
+<img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20M%C4%9Bs%C3%AD%C4%8Dn%C3%AD%20statistika%20v%20grafu%20pomoc%C3%AD%20GD%20knihovny%5D_soubory/obrtext.gif" class="kursor" onclick="imgtext('Zadejte adresu k obrázku. Adresa musí začínat http://','Zadejte title pod obrázkem', 'Kde má být umístěn (left|right|center)')" title="Obrázek s textem" alt="[obrtext]">
+<img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20M%C4%9Bs%C3%AD%C4%8Dn%C3%AD%20statistika%20v%20grafu%20pomoc%C3%AD%20GD%20knihovny%5D_soubory/flash.gif" class="kursor" onclick="tagy('flash','Zadejte adresu k flashu. Adresa musí začínat http://')" title="Flash" alt="[flash]">
+<img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20M%C4%9Bs%C3%AD%C4%8Dn%C3%AD%20statistika%20v%20grafu%20pomoc%C3%AD%20GD%20knihovny%5D_soubory/e.gif" class="kursor" onclick="adresa('Celá adresa i s http://', 'Název')" title="Odkaz i s názvem" alt="[e]">
+<img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20M%C4%9Bs%C3%AD%C4%8Dn%C3%AD%20statistika%20v%20grafu%20pomoc%C3%AD%20GD%20knihovny%5D_soubory/b.gif" class="kursor" onclick="tagy('b','Text, který chcete mít zvýrazněný TUČNĚ')" title="Tučně" alt="[b]">
+<img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20M%C4%9Bs%C3%AD%C4%8Dn%C3%AD%20statistika%20v%20grafu%20pomoc%C3%AD%20GD%20knihovny%5D_soubory/i.gif" class="kursor" onclick="tagy('i','Text, který chcete mít zvýrazněný KURZÍVĚ')" title="Kurzívě" alt="[i]">
+<img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20M%C4%9Bs%C3%AD%C4%8Dn%C3%AD%20statistika%20v%20grafu%20pomoc%C3%AD%20GD%20knihovny%5D_soubory/s.gif" class="kursor" onclick="tagy('s','Text, který chcete mít zvýrazněný PŘEŠKRTNUTĚ')" title="Přeškrtnuté" alt="[s]">
+<img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20M%C4%9Bs%C3%AD%C4%8Dn%C3%AD%20statistika%20v%20grafu%20pomoc%C3%AD%20GD%20knihovny%5D_soubory/seznam.gif" class="kursor" onclick="smajlik('\n#-default\nText\ntext\nText\n#\n')" title="Seznam" alt="[seznam]">
+<img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20M%C4%9Bs%C3%AD%C4%8Dn%C3%AD%20statistika%20v%20grafu%20pomoc%C3%AD%20GD%20knihovny%5D_soubory/cislovany-seznam.gif" class="kursor" onclick="smajlik('\n#-cisla\nText\nText\nText\n#\n')" title="Číslovaný seznam" alt="[c.seznam]">
+<img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20M%C4%9Bs%C3%AD%C4%8Dn%C3%AD%20statistika%20v%20grafu%20pomoc%C3%AD%20GD%20knihovny%5D_soubory/code.gif" class="kursor" onclick="smajlik('\n[code][/code]\n')" title="Zdrojový kód" alt="[code]">
+<img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20M%C4%9Bs%C3%AD%C4%8Dn%C3%AD%20statistika%20v%20grafu%20pomoc%C3%AD%20GD%20knihovny%5D_soubory/kod.gif" class="kursor" onclick="smajlik('[kod][/kod]')" title="Zdrojový kód ve větě" alt="[kod]">
+<img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20M%C4%9Bs%C3%AD%C4%8Dn%C3%AD%20statistika%20v%20grafu%20pomoc%C3%AD%20GD%20knihovny%5D_soubory/cara.gif" class="kursor" onclick="smajlik('\n---\n')" title="Horizontální čára" alt="[---]">
+<img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20M%C4%9Bs%C3%AD%C4%8Dn%C3%AD%20statistika%20v%20grafu%20pomoc%C3%AD%20GD%20knihovny%5D_soubory/br.gif" class="kursor" onclick="smajlik('[br]\n')" title="Odřádkování" alt="[br]">
+<img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20M%C4%9Bs%C3%AD%C4%8Dn%C3%AD%20statistika%20v%20grafu%20pomoc%C3%AD%20GD%20knihovny%5D_soubory/h2.gif" class="kursor" onclick="tagy('h2','Nadpis druhé kategorie')" title="Nadpis druhé kategorie" alt="[h2]">
+<img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20M%C4%9Bs%C3%AD%C4%8Dn%C3%AD%20statistika%20v%20grafu%20pomoc%C3%AD%20GD%20knihovny%5D_soubory/h3.gif" class="kursor" onclick="tagy('h3','Nadpis třetí kategorie')" title="Nadpis třetí kategorie" alt="[h3]">
+<img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20M%C4%9Bs%C3%AD%C4%8Dn%C3%AD%20statistika%20v%20grafu%20pomoc%C3%AD%20GD%20knihovny%5D_soubory/abbr.gif" class="kursor" onclick="abbr('Zadejte viditelný text', 'Title textu')" title="Ustálený výraz ABBR" alt="[abbr]">
+<img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20M%C4%9Bs%C3%AD%C4%8Dn%C3%AD%20statistika%20v%20grafu%20pomoc%C3%AD%20GD%20knihovny%5D_soubory/sup.gif" class="kursor" onclick="tagy('sup','Text, který chcete mít jako horní index')" title="Horní index" alt="[sup]">
+<img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20M%C4%9Bs%C3%AD%C4%8Dn%C3%AD%20statistika%20v%20grafu%20pomoc%C3%AD%20GD%20knihovny%5D_soubory/sub.gif" class="kursor" onclick="tagy('sub','Text, který chcete mít jako dolní index')" title="Dolní index" alt="[sub]">
+</div><div class="r r20">
+<img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20M%C4%9Bs%C3%AD%C4%8Dn%C3%AD%20statistika%20v%20grafu%20pomoc%C3%AD%20GD%20knihovny%5D_soubory/sibka-nahoru.gif" alt="-" onclick="zobrazit('druhy');" class="kursor" title="Smajlíci">
+</div></div>
+</form>
+</div>
+<!-- Konec hlavniho obsahu stranky -->
+</div>
+
+<div id="right">
+<div class="konec">
+<div id="logo-r"></div>
+  <h3>Pro web</h3>
+  <ul>
+  <li><a href="http://crazydog.cz/pro-web/"><span class="cislo">[13]</span>Všechný články</a></li>
+  <li class="t10"><a href="http://crazydog.cz/pro-web/css-triky/"><span class="cislo">[1]</span>CSS triky</a></li>
+  <li><a href="http://crazydog.cz/pro-web/javascripty/"><span class="cislo">[2]</span>JavaScripty</a></li>
+  <li><a href="http://crazydog.cz/pro-web/php-scripty/"><span class="cislo">[10]</span>PHP scripty</a></li>
+  <li class="t10"><a href="http://crazydog.cz/pro-web/uzitecne-adresy/">Užitečné adresy</a></li>
+  </ul>
+
+  <h3>Poslední komentáře</h3>
+  <ul>
+    <li><a href="http://crazydog.cz/blog/technologie/zatim-nejvetsi-plazmova-tv-o-uhlopricce-381-cm/#579" title="Zatím největší plazmová TV o úhlkopříčce 381 cm"><span class="cislo">[Blog]</span>monky</a></li>
+    <li><a href="http://crazydog.cz/blog/technologie/zatim-nejvetsi-plazmova-tv-o-uhlopricce-381-cm/#578" title="Zatím největší plazmová TV o úhlkopříčce 381 cm"><span class="cislo">[Blog]</span>CrazyDog</a></li>
+    <li><a href="http://crazydog.cz/blog/technologie/zatim-nejvetsi-plazmova-tv-o-uhlopricce-381-cm/#577" title="Zatím největší plazmová TV o úhlkopříčce 381 cm"><span class="cislo">[Blog]</span>Evca</a></li>
+    <li><a href="http://crazydog.cz/blog/technologie/zatim-nejvetsi-plazmova-tv-o-uhlopricce-381-cm/#576" title="Zatím největší plazmová TV o úhlkopříčce 381 cm"><span class="cislo">[Blog]</span>fremy</a></li>
+    <li><a href="http://crazydog.cz/blog/nezaraditelne/na-co-si-dat-pozor-pri-zaverecne-jizde/#575" title="Na co si dat pozor při závěrečné jízdě"><span class="cislo">[Blog]</span>fremy</a></li>
+  </ul>
+  <h3>Přihlášení</h3>
+  <form method="post" class="text-r bug3" action="/home/login-kontrola/">
+  <p>Jméno - <input class="nick" name="nick" value=" Váš nick" onfocus="if(this.value==this.defaultValue)this.value=''" size="12" type="text"></p>
+  <p>Heslo - <input class="heslo" name="heslo" size="12" type="password"></p>
+  <p><input value="Přihlásit" class="tlacitko" type="submit"></p>
+  <p><a href="http://crazydog.cz/home/vse-k-registraci/">Vše k registraci</a></p>
+  </form>
+    
+  <h3>Aktuální anketa</h3>
+  <div class="b5 italic"><p>Který navigační program je pro vás lepší?</p></div>
+  <ul>
+  <li><a href="http://crazydog.cz/home/anketa-c-16/104/" rel="nofollow"><span class="cislo">[33]</span>Garmin</a></li>
+  <li><a href="http://crazydog.cz/home/anketa-c-16/105/" rel="nofollow"><span class="cislo">[20]</span>TomTom</a></li>
+  <li><a href="http://crazydog.cz/home/anketa-c-16/106/" rel="nofollow"><span class="cislo">[27]</span>iGO</a></li>
+  <li><a href="http://crazydog.cz/home/anketa-c-16/107/" rel="nofollow"><span class="cislo">[12]</span>Navicore</a></li>
+  <li><a href="http://crazydog.cz/home/anketa-c-16/108/" rel="nofollow"><span class="cislo">[8]</span>Jiný</a></li>
+  <li><a href="http://crazydog.cz/home/anketa-c-16/109/" rel="nofollow"><span class="cislo">[18]</span>GPS nepoužívám</a></li>
+  </ul>
+  
+  <h3>Rychlo odkazy</h3>
+  <ul>
+  <li><a href="">Spusť CrazyPlayer</a></li>
+  </ul>
+  
+</div>
+</div>
+
+<div id="bottom-no"></div>
+<div id="bottom">
+Copyright &#169; 2007 <a href="http://crazydog.cz/home/webmaster/#copyright">CrazyDog <img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20M%C4%9Bs%C3%AD%C4%8Dn%C3%AD%20statistika%20v%20grafu%20pomoc%C3%AD%20GD%20knihovny%5D_soubory/muz.gif" alt="muž"></a> | Vygenerováno za 0.199 s | &#187;<a href="http://crazydog.cz/home/statistiky/">Statistiky</a>&#171; | <a href="#topdown" onclick="javascript:pageScroll(0,0,20); return(false);">Nahoru &#8593;</a><br>
+Optimized for LCD color &amp; MSIE, Gecko and Opera Browser's | Technology XHTML, CSS, JS, PHP &amp; MySQL
+</div>
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script><script src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20M%C4%9Bs%C3%AD%C4%8Dn%C3%AD%20statistika%20v%20grafu%20pomoc%C3%AD%20GD%20knihovny%5D_soubory/ga.js" type="text/javascript"></script>
+<script type="text/javascript">
+var pageTracker = _gat._getTracker("UA-3766486-1");
+pageTracker._initData();
+pageTracker._trackPageview();
+</script>
+</div><div style="position: absolute; left: 652px; top: 137px; z-index: 1000000000; visibility: hidden; opacity: 1; width: 0px;" id="linkalert-box"><img style="width: 0px;" src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20M%C4%9Bs%C3%AD%C4%8Dn%C3%AD%20statistika%20v%20grafu%20pomoc%C3%AD%20GD%20knihovny%5D_soubory/none-icon.png" id="linkalert-icon-1"></div></body></html>

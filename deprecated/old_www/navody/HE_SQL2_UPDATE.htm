@@ -1,0 +1,121 @@
+<!doctype html public "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=Windows-1250">
+<title>Příkaz UPDATE (SQL)</title>
+<link rel='stylesheet' style='text/css' href='../function.css'>
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr>
+	<td style="background-image: url(../images/bghead.jpg);
+		background-position: right;
+		background-repeat: no-repeat;">
+	<table width="100%" border="0" cellpadding="0" cellspacing="0"
+		style="background-image:none">
+	<tr>
+		<td style="background-image:none" height="46"
+			width="15%"><img src="../images/title-cz.gif"
+			width="255" height="33"
+			alt="602SQL-Úplná dokumentace"
+			title="602SQL - Úplná dokumentace"
+			border="0"></td>
+		<td width="33%" align="right"><a href="../xml/html/top.html"><img class="floatno"
+			src="../images/index.gif"
+			width="15" height="16"
+			alt="Index" title="Zpět na obsah"
+			border="0" vspace="2"></a> &nbsp;
+			 </td>
+	</tr>
+	</table>
+	</td>
+</tr>
+</table><table class="navigace" border="0" width="100%"  bgcolor="#FFFFBF"><tr> <td
+width="20" align="center"><img class="floatno" src="../images/prev.gif"
+width="15" height="13" alt="&lt;&shy;" title="Předcházející téma"
+border="0"></td><td width="25%"><a
+href="HE_SQL2_REVOKE.htm">Příkaz REVOKE</a></td> <td width="25%"
+align="right"><img class="floatno" src="../images/up.gif" width="13"
+height="15" alt="Nahoru" title="O jednu úroveň výš" border="0"
+align="middle"></td><td width="25%"><a href="HE_SQL2_PRIKAZY.htm">SQL příkazy</a></td>
+<td width="25%" align="right"><a
+href="HE_SQL2_INSERT.htm">Příkaz INSERT</a></td><td width="20"
+align="center"><img class="floatno" src="../images/next.gif" width="15"
+height="13" alt="&shy;&gt;" title="Následující téma" border="0"></td>
+</tr></table>
+
+
+
+
+<h1><a name="he_sql2_update"></a>Příkaz UPDATE (SQL)</h1>
+
+<pre><code>příkaz_UPDATE ::= UPDATE [schema.]jméno_tabulky SET jméno_sloupce = výraz 
+    {, jméno_sloupce = výraz }… [WHERE podmínka]</code></pre>
+
+<p><b>Popis</b></p>
+
+<p><a href="HE_SQL2_PRIKAZY.htm">Příkaz</a> UPDATE (neboli <em>Searched UPDATE</em>) umožňuje hromadně změnit hodnoty sloupců v&nbsp;tabulce. Provedením příkazu se každému uvedenému <i>sloupci</i> přiřadí hodnota zadaná <i>výrazem</i>. Akce se provede s&nbsp;každým záznamem vyhovujícím <a href="HE_SQL2_PODMINKA.htm"><i>podmínce</i></a>, resp. se všemi záznamy v&nbsp;tabulce, pokud <i>podmínka</i> není uvedena. Počet dotčených záznamů je možné po provedení zjistit pomocí <a href="../xml/html/sysvars.html">systémové proměnné</a> @@ROWCOUNT.</p>
+
+<p>Je-li tabulka prefixována jménem aplikace (na stejném serveru), tabulka se hledá v uvedené aplikaci (schématu).</p>
+
+<p>Místo tabulky lze příkaz provádět i s <a href="../xml/html/query_insdeledit.html">editovatelným dotazem</a> (VIEW) (toto se rozpozná již při překladu). Při tom se nekontroluje, zda měněné hodnoty odpovídají podmínce dotazu.</p>
+
+<p>Příkaz UPDATE vyvolá UPDATE <a href="HE_SQL2_TRIGGERY.htm">trigger</a> pro každý měněný záznam. BEFORE UPDATE trigger se provede PŘED změnou záznamu, AFTER UPDATE trigger po změně. Dojde-li v triggeru k chybě, je obou případech příkaz UPDATE odvolán.  </p>
+
+<p>Je-li tabulka, na níž je příkaz UPDATE prováděn, nadřízenou tabulkou v <a href="../xml/html/sql_ref_integrity.html">aktivní referenční integritě</a> (RI), mohou nastat dva případy:
+<ul>
+<li>je-li v definici RI použito ON UPDATE CASCADE, SET NULL nebo SET DEFAULT, provede se záznamy v podřízené tabulce závislými na měněném záznamu akce podle definice</li>
+<li>jinak nastane <a href="../xml/html/handlingcategories.html">chyba</a> 40006 (REFERENTIAL_CONSTRAIN), která způsobí implicitní rollback. 
+</li>
+</ul>
+Je-li tabulka, na níž je příkaz UPDATE prováděn, podřízenou tabulkou v RI a nové hodnoty porušují pravidlo RI, nastane <a href="../xml/html/handlingcategories.html">chyba</a> 40006 (REFERENTIAL_CONSTRAIN).
+</p>
+
+<p>Uživatel, který přepisuje hodnoty sloupců v záznamech, musí mít k této činnosti dostatek efektivních <a href="../xml/html/userinfo.html">práv</a>.</p>
+
+<br>
+<p><b>Příklady použití:</b></p>
+
+<p>Zvýšit všem zaměstnancům z&nbsp;oddělení plat o 10%:</p>
+
+<pre><code>UPDATE Zamestnan
+SET plat = plat*1.1
+WHERE oddeleni = 1</code></pre>
+
+<p>Je tabulka Cenik obsahující sloupce id a cena, dále je tabulka Katalog se sloupci id a nova_cena stejných typů. Úkolem je změnit hodnoty sloupce cena v tabulce Cenik podle odpovídajících hodnot v Katalog:</p>
+
+<pre><code>UPDATE Cenik
+ SET cena = (SELECT nova_cena
+             FROM Katalog
+             WHERE Katalog.id=Cenik.id)
+ WHERE EXISTS (SELECT nova_cena
+               FROM Katalog
+                WHERE Katalog.id=Cenik.id);</code></pre>
+
+
+				
+<p><b>Viz</b></p>
+
+<ul class='viz'>
+  <li><a href="HE_SQL2_INSERT.htm">INSERT</a></li>
+  <li><a href="HE_SQL2_DELETE.htm">DELETE</a></li>
+  <li><a href="HE_SQL2_UPDATECURRENT.htm">UPDATE (Positioned)</a></li>
+</ul>
+
+
+
+<table class="navigace" border="0" width="100%"  bgcolor="#FFFFBF"><tr> <td
+width="20" align="center"><img class="floatno" src="../images/prev.gif"
+width="15" height="13" alt="&lt;&shy;" title="Předcházející téma"
+border="0"></td><td width="25%"><a
+href="HE_SQL2_REVOKE.htm">Příkaz REVOKE</a></td> <td width="25%"
+align="right"><img class="floatno" src="../images/up.gif" width="13"
+height="15" alt="Nahoru" title="O jednu úroveň výš" border="0"
+align="middle"></td><td width="25%"><a href="HE_SQL2_PRIKAZY.htm">SQL příkazy</a></td>
+<td width="25%" align="right"><a
+href="HE_SQL2_INSERT.htm">Příkaz INSERT</a></td><td width="20"
+align="center"><img class="floatno" src="../images/next.gif" width="15"
+height="13" alt="&shy;&gt;" title="Následující téma" border="0"></td>
+</tr></table>
+</body>
+</html>

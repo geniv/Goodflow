@@ -1,0 +1,514 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<html><head>
+
+
+
+
+
+<meta http-equiv="Content-Language" content="cs">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-2"><title>Mod_rewrite - návod</title>
+
+
+
+
+
+<link rel="stylesheet" href="mod-rewrite_soubory/jpw.css"></head><body class="ost" id="www-jakpsatweb-cz">
+<div id="text">
+	
+
+<h1>Mod_rewrite</h1>
+	<p class="podtitul">pokročilá manipulace s URL od základů</p>
+<p>Na serveru Apache může být nainstalován modul mod_rewrite, který umožňuje 
+podnikat <b>psí kusy s URL adresami -- přesměrování a podstrkávání</b>. Mod_rewrite 
+je dost šikovná věcička na složitější problémy. Na druhou stranu je dost těžké 
+se s ním naučit, mně to trvalo asi rok a stejně to ještě pořádně neumím. Tento 
+návod by vám měl ušetřit počáteční tápání (a ten rok času).</p>
+	<p>Většina <a href="http://www.jakpsatweb.cz/presmerovani.html">přesměrování se dá udělat i 
+	jednodušeji</a> (například meta tagem nebo pomocí mod_alias).</p>
+	<p class="zalozka"><a href="#podminky">Dá se mod_rewrite použít?</a> -
+	<a href="#priklady">První příklady na Mod_rewrite</a> -
+	<a href="#rewriterule">Obecný zápis RewriteRule</a> - <a href="#rozdil">
+	Podstrkávání a přesměrování</a> - <a href="#regular">Příklad jednoduchého 
+	regulárního výrazu</a> - <a href="#promenne">Proměnné z regulárů</a> -
+	<a href="#rewritecond">Podmínky RewriteCond</a> - <a href="#flags">Příznaky v 
+	hranatých závorkách</a> - <a href="#varianty">Varianty k mod_rewrite</a> -
+	<a href="#cesty">Bacha na interpretaci cest</a> -
+	<a href="#koncim">Končím tam, kde jiní začínají</a></p>
+	<h2><a name="podminky"></a>Dá se mod_rewrite použít?</h2>
+	<p>Ne na každém serveru se dá pracovat s mod_rewrite. Požadavky nutné:</p>
+	<ul>
+		<li>na serveru musí běžet Apache </li>
+		<li>na tom Apači musí být mod_rewrite nainstalován a povolen </li>
+		<li>musíte mít možnost konfigurovat server -- buďto souborem httpd.conf, 
+		nebo svým souborem <a href="http://www.jakpsatweb.cz/server/htaccess.html">.htaccess</a></li>
+	</ul>
+	<p>I tak to pořád nejsou podmínky dostačující. Někdy se mohou direktivy mod_rewrite 
+	třískat s jinými existujícími direktivami. Na mém serveru například začal 
+	mod_rewrite fungovat až poté, co jsem si do .htaccess přidal zápis </p>
+<p class="code">Options +FollowSymlinks</p>
+	<p>Jestliže nevíte, jestli mod_rewrite a .htaccess fungují, tak to prostě 
+	zkuste, případně se zeptejte správce serveru.</p>
+<h3>Bacha na chyby a na cyklení</h3>
+	<p>Jestliže jste nikdy nezkoušeli konfigurovat server nebo pracovat se 
+	souborem 
+	.htaccess, mod_rewrite asi není dobrá parketa, na které se to učit. Zkuste 
+	si napřed <a href="http://www.jakpsatweb.cz/server/htaccess.html">jednodušší věci s .htaccess</a>.</p>
+	<p>Asi jsem v životě v neviděl více serverových chyb, než když jsem se učil 
+	pracovat s mod_rewrite. Když se to rozbije, tak server hází chybu serveru s 
+	číslem 500 často i u stránek, se kterými jsem si původně hrát nechtěl. Užijete si spoustu srandy, stojí to za to.</p>
+	<p>Horší je, když nějakým pokusem mod_rewrite zacyklím. Pak se pětistovka 
+	objevit nemusí -- já koukám na prázdnou stránku a v serveru se zatím peče 
+	procesor.</p>
+<p>Osobně jsem věci s mod_rewrite vždy testoval v podadresáři na svém domácím 
+serveru. Dělejte to taky tak, jestli můžete (zkuste
+<a href="http://www.jakpsatweb.cz/php/easyphp.html">třeba EasyPHP</a>). Jestli nemůžete, poraďte si 
+jinak, ale vážně nedoporučuji experimentovat na ostrém serveru v adresáři, kde 
+máte živé stránky. Přinejhorším si tam udělejte testovací adresář s vlastním 
+.htaccess a hrajte si v něm. </p>
+	<p>Pokud pracujete s http.conf, nezapomeňte po každé změně server 
+	restartovat.</p>
+<h2 align="left"><a name="priklady"></a>První příklady na Mod_rewrite</h2>
+<p>Níže uvedená zaklínadla se zapisují do souboru .htaccess nebo httd.conf.</p>
+<h3>Příklad jednoduchého přesměrování</h3>
+	<p>Budu chtít, aby se mi stránka <code>http://muj-server.cz/<font color="#ff0000">pozadovany-soubor.html</font></code> 
+	přesměrovala na <code>http://muj-server.cz/<font color="#008000">vysledny-soubor.html</font></code>. Do souboru 
+	.htaccess nebo httpd.conf zadám tento kód:</p>
+<p class="code"># presmerovani<br>
+RewriteEngine on<br>
+RewriteRule&nbsp;&nbsp; <font color="#ff0000">pozadovany-soubor\.html</font>&nbsp;&nbsp;
+<font color="#008000">/vysledny-soubor.html</font>&nbsp;&nbsp;
+<font color="#800000">[R]</font></p>
+	<p>Když pak čtenář požádá o <font color="#ff0000">pozadovany-soubor.html</font>, tak místo něj dostane
+	<font color="#009933">vysledny-soubor.html</font>. </p>
+	<p>Tuto novou adresu 
+	<font color="#009933">vysledny.soubor.html</font> <b>uvidí i v adrese</b> 
+prohlížeče. <font color="#800000">To [R] je jako <i>redirect</i></font>, tedy přesměrování 
+	(hodí ho to na jinou adresu, než chtěl). </p>
+	<p>Cíl přesměrování musí být absolutní adresa. Všimněte si, že
+	<font color="#009933">/vysledny.soubor.html</font> začíná lomítkem, a tak se 
+	počítá od rootu webu (a je to tedy absolutní adresa).</p>
+<h3>Příklad jednoduchého podstrčení obsahu</h3>
+	<p>Do souboru .htaccess nebo httpd.conf se zadá tento kód:</p>
+<p class="code"># podstrceni<br>
+RewriteEngine on<br>
+RewriteRule <font color="#ff0000">zadana-stranka\.html</font>
+<font color="#008000">podstrcena-stranka.html</font></p>
+<p>Místo zadané stránky se pak objeví <b>obsah</b> podstrčené stránky. Zadaná 
+<b>adresa</b> v 
+prohlížeči ale <b>zůstává stejná</b>, totiž <font color="#ff0000">zadana-stranka.html</font>. Proto tomu říkám 
+podstrčení, odborněji se tomu říká přepisování. (Adresa bude červená, obsah zelený.)</p>
+	<p>Bude se to podstrkávat, protože tentokrát tam není to [R].</p>
+<p>Protože zápisy adres v tomto příkladu nezačínají lomítkem, adresa zadané stránky 
+se odvozuje od adresáře, ve 
+kterém se vyskytuje .htaccess. Stejně tak podstrcena-stranka.html (ta musela být 
+v minulém příkladu zadávána absolutně s lomítkem na začátku). Kdyby podstrčená 
+stránka začínala lomítkem, počítala by se nikoliv od aktuálního adresáře, ale od 
+kořene webu.</p>
+<p><font color="#ff0000">První parametr</font> se chápe jako regulární výraz. V zadané stránce (první 
+parametr) se tedy musejí některým znakům předřazovat zpětná lomítka (typicky 
+třeba před tečku), aby se tyto znaky jako regulární výraz neinterpretovaly. 
+Proto je zadaná stránka zapsaná se zpětným lomítkem před tečkou: zadana-stranka\.html. Naopak 
+v cílové stránce se žádné znaky nanahrazují (<font color="#009933">druhý 
+parametr</font> není regulár).</p>
+<h2><a name="rewriterule"></a>Obecný zápis RewriteRule</h2>
+	<p>Zápis mod_rewrite vždy začíná jeho zapnutím:</p>
+	<p class="code">RewriteEngine on</p>
+	<p>Je potřeba mít to tam samozřejmě vždycky, ale v příkladech to někdy 
+	vynechávám.</p>
+<p>RewriteRule má následující syntaxi:</p>
+<p class="code">RewriteEngine on<br>
+RewriteRule&nbsp;&nbsp; <font color="#ff0000">Na-co-se-ptá-klient</font>&nbsp;&nbsp;
+<font color="#008000">Co-skutečně-dostane</font>&nbsp;&nbsp;
+<font color="#800000">[nepovinná-pravidla]</font></p>
+<p>První řádek <code>RewriteEngine on</code> je to zaklínadlo, kterým se mod_rewrite 
+zapíná.</p>
+	<p>RewriteRule: Na co se ptá klient <font color="#ff0000">(první parametr)</font>, se 
+zpracovává jako cesta k souboru odvozená od rootu webu. Příklady: /index.html, 
+/archiv/akce.php Je to regulární výraz (některé znaky se musejí escapovat). Když 
+	server vidí, že klient chce stránku, která odpovídá <font color="#ff0000">prvnímu parametru</font>, začne 
+	něco podnikat.</p>
+<p>Adresa stránky, kterou uživatel skutečně dostane <font color="#008000">(druhý 
+parametr)</font>, je buďto absolutní adresa (začíná na http://), nebo relativní. 
+Relativní adresa se odvozuje buďto od aktuálního adresáře, nebo od rootu webu -- 
+to pokud zápis <font color="#008000">Co-skutečně-dostane</font> začíná lomítkem. 
+Například http://priklad.cz/soubor.html je adresa absolutní, zápis /soubor.html 
+je adresa relativní.</p>
+<p>Tento <font color="#008000">druhý parametr</font> se narozdíl od prvního 
+nezapisuje jako regulární výraz, například se tedy nemusejí escapovat tečky zpětným 
+lomítkem (ale zase když se zaescapují, tak to nevadí).</p>
+<p>Co se týká <font color="#800000">nepovinných pravidel</font>, budu je různě 
+zmiňovat v dalších příkladech a na <a href="#flags">na konci tohoto textu</a>.</p>
+<h2><a name="rozdil"></a>Podstrkávání a přesměrování</h2>
+<p>Pro pochopení mod_rewrite je naprosto nutné, abyste perfektně porozuměli 
+rozdílu mezi podstrkáváním a přesměrováním. Možná se vám bude zdát, že se 
+opakuji, ale je to důležité.</p>
+<p>Proberu opět jeden z původních příkladů. (Server bude všechny soubory chápat jako by 
+byly v aktuálním adresáři.)</p>
+<p class="code">RewriteEngine on<br>
+RewriteRule <font color="#ff0000">zadana-stranka\.html</font>
+<font color="#008000">podstrcena-stranka.html</font></p>
+<p>V tomto příkladu se neprovede přesměrování, nýbrž <b>podstrčení</b> (není tam 
+to <font color="#800000">[R]</font>). To znamená, že uživatel stále uvidí adresu, kterou zadal (případně na 
+kterou kliknul). Server mu na tuto adresu "podstrčí" obsah souboru
+<font color="#008000">podstrcena-stranka.html</font>. Všimněte si, že tentokrát 
+nejsou <font color="#800000">v žádných hranatých závorkách</font> žádné kódy -- podstrkávání je výchozí chování mod_rewrite.
+</p>
+	<h3>Podstrkávání</h3>
+<p>Když budu mít soubor .htaccess <b>s příkazem na podstrkávání</b> například v 
+adresáři adresar, tak se mi může stát, že </p>
+<ul>
+	<li>zadám do prohlížeče adresu http://priklad.cz/adresar/zadana-stranka.html </li>
+	<li>dostanu <b>obsah</b> z URL 
+	http://priklad.cz/adresar/podstrcena-stranka.html  
+	</li>
+	<li>ale v prohlížeči stále <b>uvidím původní adresu</b> 
+	http://priklad.cz/adresar/zadana-stranka.html
+	</li>
+</ul>
+<p>HTTP hlavičky (a vůbec všechno) vypadají zvenku tak, jako by soubor 
+/adresar/zadana-stranka.html skutečně existoval. Například http kód odpovědi je 
+"200 OK". Přitom ten soubor zadana-stranka.html ve skutečnosti vůbec nemusí 
+existovat (a většinou se taková věc dělá právě proto, že neexistuje).</p>
+<h3>Přesměrování místo podstrčení</h3>
+<p>Když v předchozím příkladu přidám na konec řádku RewriteRule do hranatých 
+závorek pravidlo [R=301], takto:</p>
+<p class="code">RewriteRule (.*) /stranka.html <font color="#800000">[R=301]</font></p>
+<p>tak se podstrčení změní na <font color="#800000">přesměrování</font>. </p>
+<ul>
+	<li>zadám třeba adresu http://priklad.cz/adresar/dotaz.html </li>
+	<li>pak v řádku prohlížeče <b>uvidím jinou adresu</b>: 
+	http://priklad.cz/adresar/vysledek.html  
+	</li>
+	<li>a dostanu i obsah této stránky vysledek.html</li>
+</ul>
+<p>Čili v tuto chvíli jde o přesměrování, nikoliv o podstrčení. Kdyby tam bylo 
+jenom [R] bez =301, tak to taky bude fungovat, ale server vrátí kód odpovědi 302 found 
+(což je většinou to samé, co 301, akorát 302 se bere jako dočasné přesměrování, 
+301 jako trvalé).</p>
+<h3>Kdy se podstrkává a kdy přesměrovává</h3>
+<p><b>Výchozí chování serveru je podstrkávání.</b> V jakých případech probíhá <b>
+přesměrování:</b></p>
+<ul>
+	<li>existuje jasná instrukce, že se má přesměrovávat (např. to [R])</li>
+	<li>nebo nelze podstrkávat -- jde o případy, kdy <font color="#008000">nová 
+	adresa</font> začíná na http://. Pak server nedovolí stránku podstrčit, i 
+	kdyby byla z jeho serveru. Následující zápis přesměrovává, i když nemá to 
+	[R]:</li>
+</ul>
+<p class="code">RewriteRule <font color="#ff0000">&nbsp;&nbsp; </font>(.*)&nbsp;&nbsp;&nbsp; 
+http://www.jakpsatweb.cz</p>
+<h2><a name="regular"></a>Příklad jednoduchého regulárního výrazu</h2>
+	<p>Jednou z krás mod_rewrite je to, že dovoluje ve svých direktivách 
+	využívat regulární výrazy.</p>
+<p>Pravidlo, které <font color="#ff0000">všechno</font> z aktuálního adresáře 
+(ve kterém je .htaccess) <b>přesměruje</b> na hlavní stránku
+<font color="#008000">www.jakpsatweb.cz</font>:</p>
+<p class="code">RewriteEngine on<br>
+RewriteRule <font color="#ff0000">&nbsp;&nbsp; (.*)</font> <font color="#008000">&nbsp;&nbsp; 
+http://www.jakpsatweb.cz</font>&nbsp;&nbsp;&nbsp;&nbsp; [R]</p>
+<p>Ten zápis <font color="#ff0000">(.*) </font> znamená<font color="#ff0000"> 
+"cokoliv"</font> (přesněji 
+řečeno libovoný počet (to je hvězdička) libovolných znaků (to je ta tečka)). 
+	</p>
+	<p>Pokud v tomto případě uživatel napíše <font color="#ff0000">libovolnou adresu</font>, 
+která míří do aktuálního adresáře (to je adresář, ve kterém mám .htaccess),
+<font color="#008000">přesměruje ho to na http://www.jakpsatweb.cz</font>. Tím eRkem v závorce 
+	opět říkám, že se bude přesměrovávat. </p>
+<p>Tento příklad není moc užitečný (přesněji řečeno není k ničemu), je ale 
+relativně jednoduchý, proto jím začínám výklad.</p>
+<h2><a name="promenne"></a>Proměnné z regulárů</h2>
+<p>Převádění jednoho souboru na druhý není moc užitečné. Mnohem lepší je v 
+zavolaném url něco najít a použít to na volání něčeho jiného. To "něco" bude 
+proměnná.</p>
+	<p>Třeba najdu číslo 
+článku a použiju ho na volání skrytého url. Následující příklad předpokládá, že 
+stránky jsou napsané v php a jejich adresy mají normálně za otazníkem parametry. 
+Články mají třeba toto url:</p>
+<p>nějakýweb.cz/skript.php?id=234</p>
+<p>Já bych ale chtěl na tuto stránku odkazovat a zapisovat adresou bez otazníku, 
+například</p>
+<p>nějakýweb.cz/clanek-234</p>
+<p>Udělám to tak, že v pravidle pro mod_rewrite najdu číslo článku jako proměnnou (bude se jmenovat $1) a 
+tuto proměnnou použiju ji při definici toho, co se má podstrčit. Zápis pravidla 
+vypadá tato:</p>
+<p class="code">RewriteRule&nbsp;&nbsp;&nbsp; <font color="#ff0000"> <span lang="en-us">^</span>clanek-</font><font color="#800080">(.*)</font>
+<font color="#ff0000">&nbsp;</font>&nbsp; <font color="#009933">skript.php?id=</font><font color="#800080">$1</font></p>
+<p>Vysvětlení zápisu: </p>
+<ul>
+	<li>uživatel si vyžádá url třeba <font color="#ff0000">clanek-</font><font color="#800080">543</font> </li>
+	<li>mod_rewrite to uvidí a všimne si, že to odpovídá regulárnímu výrazu
+	<font color="#ff0000">
+	<span lang="en-us">^</span>clanek-</font><font color="#800080">(.*)</font>. Závorce 
+	<font color="#800080">(.*)</font> totiž odpovídá libovolný 
+	počet znaků, a odpovídá mu tedy i řetězec "<font color="#800080">543</font>". Závorka se uloží do proměnné 
+	<font color="#800080">$1</font> (jednička, protože je to první závorka).</li>
+	<li>mod_rewrite dále podstrkává uživateli obsah, který najde na adrese 
+	<font color="#009933">skript.php?id=</font><font color="#800080">$1</font> </li>
+	<li>což nyní odpovídá adrese <font color="#009933">skript.php?id=</font><font color="#800080">543</font> 
+	, protože <font color="#800080">$1</font> se rovná <font color="#800080">543</font></li>
+	<li>(tuto složitou adresu s otazníkem a parametry uživatel vůbec neuvidí, 
+	jedná se o skryté url, i když je funkční)</li>
+	<li>uživatel dále vidí na konci adresy v prohlížeči clanek-543 (je to tedy 
+	podstrkávání)</li>
+</ul>
+<h3>Nebude to za vás měnit odkazy</h3>
+<p>Předchozí příklad úpravy ošklivých dynamických adres (s otazníkem) na hezké 
+adresy se hodí pouze v případě, že máte aplikaci, která už ty hezké adresy 
+používá v odkazech. Pokud máte starou aplikaci, která na každém kroku odkazuje 
+na skripty se spoustou parametrů, tak se to musí řešit mnohem složitěji. 
+(Dvojitě s nějakým dummy parametrem. Podrobnosti
+<a href="http://www.jakpsatweb.cz/server/mod_rewrite/mod-rewrite-priklady.html">v pokročilých příkladech</a>.) </p>
+<h2><a name="rewritecond"></a>Podmínky RewriteCond</h2>
+<p>Samotný zápis pomocí regulárů umožňuje hodně kouzel. Když ale reguláry 
+nestačí, nastupují další možnosti <b>podmínkování, kdy se má manipulace provést</b>, 
+a kdy ne.</p>
+	<h3>Přesměrování na doménu bez www</h3>
+<p>Požadavky na můj web mohou 
+požadavky přicházet s hostname "jakpsatweb.cz" nebo "www.jakpsatweb.cz". 
+Preferuji, aby lidé i vyhledávače chodili jenom na verzi s www, a tak je 
+přesměrovávám. </p>
+	<p>Příklad: Všechny požadavky, co míří na jakpsatweb.cz bez www, přesměruju na 
+verzi domény s www:</p>
+<p class="code">RewriteCond <font color="#800080">%{HTTP_HOST}</font> <font color="#800000">
+^jakpsatweb.cz</font><br>
+RewriteRule (.*) http://www.jakpsatweb.cz/$1 [R=301,QSA,L]</p>
+<p>S pravidlem RewriteRule se pracuje pouze v případě, že je splněna podmínka 
+RewriteCond. V tomto případě jsem například testoval proměnnou %{HTTP_HOST}, ve 
+které je hostname (doménová část) vyžádaného url. Pokud hostname ("jakpsatweb.cz" 
+nebo "www.jakpsatweb.cz") začíná (to je ta stříška) rovnou řetězcem "jakpsatweb.cz", 
+tak se pravidlo provede.</p>
+<p>A proto když někdo požádá o http://jakpsatweb.cz/cokoliv, je přesměrován na 
+http://www.jakpsatweb.cz/cokoliv . Příznak QSA v hranatých závorkách ještě 
+zařídí, že se do nové adresy přenese i query-string (část adresy za otazníkem).</p>
+	<p>Výše uvedený zápis musí být v rootu domény, protože jinak by se to $1 
+vyhodnocovalo relativně k adresáři (jméno adresáře by se uřízlo, nevím proč). 
+Toto asi nějak souvisí s RewriteBase (nevím).</p>
+	<h3>Podobný příklad: přesměrování staré domény na novou</h3>
+	<p class="code">RewriteCond %{HTTP_HOST} <span lang="en-us">^</span>stara-domena.cz 
+	[NC]<br>
+	RewriteRule <span lang="en-us">^</span>(.*)$ http://www.nova-domena.cz/$1 
+	[R=301,QSA,L]</p>
+	<h3>Symbolický zápis RewriteCond</h3>
+<p>RewriteCond se symbolicky zapisuje:</p>
+<p class="code">RewriteCond <font color="#800080">testovaný-řetězec</font>
+<font color="#800000">regulár</font><br>
+# pravidla RewriteRule</p>
+<p>V testovaném řetězci se dají používat proměnné, a v reguárech zvláštní znaky. 
+Např v příkladu: </p>
+	<p class="code">RewriteCond <font color="#800080">%{HTTP_HOST}</font> <font color="#800000">
+^jakpsatweb.cz</font></p>
+	<p>%{HTTP_HOST} je hostname, tedy celé jméno 
+domény. Stříška v příkladu znamená začátek řetězce.</p>
+<p>Více podmínek se řetězí operátory [OR] a píšou se na více řádků. Například:</p>
+<p class="code">RewriteCond %{REMOTE_HOST}&nbsp; ^domena1.*&nbsp; [OR]<br>
+RewriteCond %{REMOTE_HOST}&nbsp; ^domena2.*</p>
+<h3>Používané proměnné v RewriteRule</h3>
+<p>%{REQUEST_FILENAME}, %{REQUEST_URI}, %{REQUEST_METHOD}, %{REMOTE_ADDR}, %{REMOTE_HOST}</p>
+<p>%{PATH_INFO}</p>
+<p>%{QUERY_STRING}, %{SERVER_PORT}, %{SERVER_NAME}, %{HTTPS} (s hodnotou on)</p>
+<p>%{HTTP_USER_AGENT}, %{HTTP_COOKIE}, %{HTTP_ACCEPT_LANGUAGE}, %{HTTP_HOST}, 
+%{HTTP_REFERER}</p>
+<p>%{ENV:REDIRECT_STATUS}</p>
+<p>%{DOCUMENT_ROOT}/ (používá se spíše v druhém parametru, který říká, kam to 
+půjde)</p>
+<p>a možná ještě další</p>
+	<h2><a name="flags"></a>Příznaky v hranatých závorkách</h2>
+	<p>V příkladech použití mod_rewrite, které porůznu najdete na webu, se na 
+	konci pravidel často používají příznaky v hranatých závorkách. Anglicky se 
+	jim říká <i>flags</i>. Znám a používám jich jenom pár:</p>
+	<dl>
+		<dt>[L]</dt>
+		<dd>Poslední pravidlo, nic už dál nepřepisuj</dd>
+		<dt>[QSA]</dt>
+		<dd>Do přepsané / přesměrované adresy přidej za otazník vše, co je za 
+		otazníkem v původním 
+		požadavku&nbsp; (query string). Zkratka QSA znamená "query string 
+		append". Jestliže naopak chcete query string useknout, ukončete 
+		druhý parametr otazníkem.</dd>
+		<dt>[R]</dt>
+		<dd>bude se přesměrovávat (s kódem 302), nikoli podstrkávat </dd>
+		<dt>[R=301]</dt>
+		<dd>přesměrování půjde s http kódem 301</dd>
+		<dt>[F]</dt>
+		<dd>nastavuje kód 403 - zakázáno. V kombinaci s dobrou RewriteCond 
+		umožňuje podmíněně zakázat některá URL.</dd>
+		<dt>[T=mime-typ]</dt>
+		<dd>umožňuje výsledek poslat s jiným mime-typem. Použitelné zejména při 
+		přesměrování na binární soubory.</dd>
+		<dt>[NC]</dt>
+		<dd>nezáleží na velikosti písmen (vhodné zejména do řádku RewriteCond).</dd>
+	</dl>
+	<p>Více příznaků v hranatých závorkách se v odděluje čárkou.</p>
+	<h2><a name="varianty"></a>Varianty k mod_rewrite</h2>
+	<p>Na Windowsovském serveru IIS prý taky existuje něco, co funguje podobně 
+	jako mod_rewrite, ale nevím o tom nic víc než to, že to prý je nějaký ISAPI 
+	modul nebo produkt nazvaný IIS Rewrite. Myslím, že nic z toho není zadarmo. 
+	Na Intervalu je článek o
+	<a href="http://interval.cz/clanek.asp?article=4058" rel="nofollow">o HttpRequest.PathInfo 
+	v ASP.NET</a>, s čímž se dá dosáhnout efektu jako-statických adres, vhodných 
+	pro SEO.</p>
+	<p>Pokud nemůžete použít mod_rewrite (třeba na serveru nefunguje), v mnoha 
+	případech na přesměrování stejně dobře poslouží mod_alias. Jeho direktiva 
+	RedirectMatch mi pomohla v mnoha situacích. (Vizte
+	<a href="http://httpd.apache.org/docs/2.0/mod/mod_alias.html" rel="nofollow">dokumentaci 
+	mod_alias</a> - anglicky.) Podobné věci prý umí mod_redirect, ale s ním 
+	nemám žádnou zkušenost.</p>
+	<h2><a name="cesty"></a>Bacha na interpretaci cest</h2>
+	<p>Když prohlížeči, který požaduje stránku A, podstrčíte stránku B, která na 
+	svém původním místě používá relativní adresy (obrázky, styly, odkazy), tak 
+	ty adresy nebudou fungovat. Uvědomte si, že prohlížeč (obecně klient) 
+	odvozuje cesty od adresy, kterou vidí (a uživatel ji vidí ve stavovém 
+	řádku). Jestliže stránky A a B leží ve stejném adresáři (i virtuálním), tak 
+	je to v pohodě, odkazy budou fungovat. Jestli ale leží jinde, musíte v 
+	podstrčeném kódu používat absolutní adresy (alespoň musejí začínat 
+	lomítkem), nebo předem počítat s budoucím umístěním na adrese A (to se ale 
+	dost blbě ladí). </p>
+	<p>To se týká podstrkávání. Při přesměrování tenhle problém samozřejmě není.</p>
+	<h2><a name="koncim"></a>Končím tam, kde jiní začínají</h2>
+	<p>Různých návodů na mod_rewrite se po webu potuluje spousta, věřím, že 
+	nějaký naleznete a pustíte se do dalšího studia. V tomto textu jsem popsal 
+	základy, které dělaly problém mně. Nic víc jsem tímto návodem nesledoval. </p>
+	<p><a href="http://www.jakpsatweb.cz/server/mod_rewrite/mod-rewrite-priklady.html">Vyšší dívčí příkladů na 
+	mod_rewrite</a> sepsal Petr Neuman.</p>
+
+	
+	<p>&nbsp;</p>
+	
+
+<!--XXXwebbot bot="Include" U-Include="adsense-dole-zluta.html" TAG="BODY" -->
+
+
+<h3>Reklama</h3>
+<p><a href="http://www.webhosting-c4.cz/adv/jw1">
+<img src="mod-rewrite_soubory/c4-01.gif" alt="www.c4.cz, hosting za 1.200 Kč na rok s doménou v ceně" border="0" height="60" width="468"></a></p>
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+</div>
+
+<div id="navigace">
+	
+<h3>Další:</h3>
+	<p><a id="next" href="http://www.jakpsatweb.cz/server/mod_rewrite/mod-rewrite-priklady.html">Mod_rewrite - 
+	příklady</a></p>
+	<h3>Vizte též:</h3>
+	<ul>
+		<li><a href="http://www.jakpsatweb.cz/server/htaccess.html">Použití souboru .htaccess</a></li>
+		<li><a href="http://www.jakpsatweb.cz/presmerovani.html">Přesměrování stránky, různé možnosti</a></li>
+		<li><a href="http://www.jakpsatweb.cz/clanky/lomitka-tecky.html">Lomítka a tečka v adresách 
+		souborů</a></li>
+	</ul>
+	<h3>Odkazy jinam</h3>
+<p><a href="http://www.cmo.com.tw/manual/mod/mod_rewrite.html" rel="nofollow">Návod na mod_rewrite</a> 
+(anglicky)</p>
+	<p><a href="http://httpd.apache.org/docs/mod/mod_rewrite.html" rel="nofollow">Dokumentace k 
+	mod_rewrite na Apache 1.3</a> (anglicky)</p>
+<p><a href="http://httpd.apache.org/docs-2.1/mod/mod_rewrite.html" rel="nofollow">mod_rewrite 
+na Apache 2</a>, funguje stejně (anglicky) </p>
+<p><a href="http://httpd.apache.org/docs-2.0/mod/mod_rewrite.html" rel="nofollow">Podobná 
+dokumentace</a> (anglicky), 
+ale na začátku jsou zajímavé kecy</p>
+	<p>
+	<a href="http://www.ilovejackdaniels.com/apache/mod_rewrite-cheat-sheet/" rel="nofollow">
+	Taháky na mod_rewrite</a> (anglicky, PDF nebo PNG)</p>
+	<p>
+	<a href="http://www.sovavsiti.cz/2003/mod_rewrite.html" rel="nofollow">Mod_rewrite pro 
+	lepší odkazy</a>, Sova v síti </p>
+	
+	
+
+
+<script type="text/javascript"><!--
+google_ad_client = "pub-4372514035999321";
+google_ad_width = 125;
+google_ad_height = 125;
+google_ad_format = "125x125_as";
+google_ad_type = "text";
+//2006-12-16: jpw vpravo, ostatni jpw
+google_ad_channel = "2626615486+9426052476";
+google_color_border = "FFFFEE";
+google_color_bg = "FFFFEE";
+google_color_link = "0000FF";
+google_color_text = "000000";
+google_color_url = "000080";
+//--></script>
+<script type="text/javascript" src="mod-rewrite_soubory/show_ads.js">
+</script><iframe name="google_ads_frame" src="mod-rewrite_soubory/ads.htm" marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" frameborder="0" height="125" scrolling="no" width="125"></iframe>
+
+
+</div>
+
+
+
+<div id="hlavicka">
+
+
+	<div id="logo">
+		<a href="http://www.jakpsatweb.cz/index.html" id="logoa" accesskey="1">
+		<img src="mod-rewrite_soubory/jakpw.gif" alt="Jak psát web" height="88" width="131"></a>
+	</div>
+
+	<div id="slogan">
+		o tvorbě, údržbě a zlepšování internetových stránek
+	</div>
+
+
+<div id="hledani">
+	<form action="http://www.google.com/custom">
+		<p>
+			<input name="cx" value="008997274925841959410:atrkgfnhjvc" type="hidden">	
+			<input name="cof" value="LH:;CX:Jak%20ps%C3%A1t%20web;LW:0;FORID:1;S:http://www.jakpsatweb.cz;L:http://www.jakpsatweb.cz/images/jakpw-100.gif;LP:1" type="hidden">
+			<input name="hl" value="cs" type="hidden">
+			<input name="ie" value="iso-8859-2" type="hidden">
+			<input name="client" value="pub-4372514035999321" type="hidden">
+			<input name="channel" value="8759767026" type="hidden">
+			<input name="q" class="text" size="12" type="text">
+			<input name="sa" class="submit" value="Hledat" type="submit">
+		</p>
+	</form>
+
+</div>
+<div id="ouska">
+		<a class="zak" href="http://www.jakpsatweb.cz/index.html">Návody</a>
+		<a class="html" href="http://www.jakpsatweb.cz/html/index.html">HTML</a>
+		<a class="css" href="http://www.jakpsatweb.cz/css/index.html">CSS</a>
+		<a class="js" href="http://www.jakpsatweb.cz/javascript/index.html">JavaScript</a>
+		<a class="clanky" href="http://www.jakpsatweb.cz/clanky/index.html">Články</a>
+		<a class="ost" href="http://www.jakpsatweb.cz/navigace/ostatni.html">Ostatní</a>
+	</div>
+	
+<div id="prouzek">
+		
+			
+
+<p><a href="http://www.jakpsatweb.cz/enc/encyklopedie.html">Encyklopedie</a>
+<a href="http://www.jakpsatweb.cz/frontpage/index.html">FrontPage</a>
+<a href="http://www.jakpsatweb.cz/reklama/index.html">Reklama</a> 
+<a href="http://www.jakpsatweb.cz/php/index.html">PHP</a>
+<a href="http://www.jakpsatweb.cz/server/index.html" id="sel">Server</a>
+
+</p></div>
+</div>
+
+
+<div id="hrasek"><a href="http://www.jakpsatweb.cz/index.html">Jak psát web</a> <b>&gt;</b>  <a href="http://www.jakpsatweb.cz/navigace/ostatni.html">Ostatní</a> <b>&gt;</b>  <a href="http://www.jakpsatweb.cz/server/index.html">Server</a> <b>&gt;</b> Mod_rewrite</div>
+
+<script type="text/javascript" src="mod-rewrite_soubory/patka.js"></script><div id="prevnexttop" class="panel"> <a href="http://www.jakpsatweb.cz/server/index.html" title="Obsah podsekce Server">^</a> <a href="http://www.jakpsatweb.cz/server/mod_rewrite/mod-rewrite-priklady.html" title="Další: Mod_rewrite - 
+	příklady">&gt;</a></div><div id="prevnextbottom" class="panel"> <a href="http://www.jakpsatweb.cz/server/index.html" title="Obsah podsekce Server">^</a> <a href="http://www.jakpsatweb.cz/server/mod_rewrite/mod-rewrite-priklady.html" title="Další: Mod_rewrite - 
+	příklady">&gt;</a></div><div id="wherenext"><a href="#navigace" onclick="navigaciDolu(); return false;">Kam dál?</a></div>
+
+<p class="patka-global"><a href="http://www.jakpsatweb.cz/">Jak psát web</a> píše Yuhů, 
+Dušan Janovský. <a href="http://www.jakpsatweb.cz/kontakt.html">Kontakt</a>. 
+<a href="http://www.jakpsatweb.cz/archiv/pristupnost.html">Prohlášení o přístupnosti</a>. Poslední aktualizace
+26. dubna 2008.
+
+</p>
+
+<script src="mod-rewrite_soubory/my-urchin.js" type="text/javascript"></script>
+
+
+
+
+
+<div style="position: absolute; left: 1074px; top: 218px; z-index: 1000000000; visibility: hidden; opacity: 1; width: 0px;" id="linkalert-box"><img style="width: 0px;" src="mod-rewrite_soubory/none-icon.png" id="linkalert-icon-1"></div></body></html>

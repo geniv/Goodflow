@@ -1,0 +1,856 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr"><head profile="http://gmpg.org/xfn/11"><title>How to write INSERT IF NOT EXISTS queries in standard SQL at Xaprb</title>
+
+
+
+	
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta name="generator" content="WordPress 2.2.2">
+	<meta name="template" content="K2 Beta Two svn">
+ 	<meta name="description" content="Stay curious!">
+  
+	<link rel="stylesheet" type="text/css" media="screen" href="How%20to%20write%20INSERT%20IF%20NOT%20EXISTS%20queries%20in%20standard%20SQL%20at%20Xaprb_soubory/style.css">
+	<link rel="stylesheet" type="text/css" media="print" href="How%20to%20write%20INSERT%20IF%20NOT%20EXISTS%20queries%20in%20standard%20SQL%20at%20Xaprb_soubory/print.css">
+			<link rel="stylesheet" type="text/css" media="screen" href="How%20to%20write%20INSERT%20IF%20NOT%20EXISTS%20queries%20in%20standard%20SQL%20at%20Xaprb_soubory/baron.css">
+	
+	<link rel="alternate" type="application/rss+xml" title="RSS 2.0" href="http://www.xaprb.com/blog/feed/">
+	<link rel="alternate" type="text/xml" title="RSS .92" href="http://www.xaprb.com/blog/feed/rss/">
+	<link rel="alternate" type="application/atom+xml" title="Atom 0.3" href="http://www.xaprb.com/blog/feed/atom/">
+
+		<link rel="pingback" href="http://www.xaprb.com/blog/xmlrpc.php"><!-- META Tags added by Add-Meta-Tags WordPress plugin. Get it at: http://www.g-loaded.eu/ -->
+	
+	
+
+<meta name="description" content="If necessary, INSERT IF NOT EXISTS queries can be written in a single atomic statement, eliminating the need for a transaction, and without violating standards. In this article I'll explain several ways to write such queries in a platform-independent way.">
+<meta name="keywords" content="sql">
+
+
+	<link rel="EditURI" type="application/rsd+xml" title="RSD" href="http://www.xaprb.com/blog/xmlrpc.php?rsd">
+<script type="text/javascript" src="How%20to%20write%20INSERT%20IF%20NOT%20EXISTS%20queries%20in%20standard%20SQL%20at%20Xaprb_soubory/prototype.js"></script>
+<script type="text/javascript" src="How%20to%20write%20INSERT%20IF%20NOT%20EXISTS%20queries%20in%20standard%20SQL%20at%20Xaprb_soubory/wp-scriptaculous.js"></script>
+<script type="text/javascript" src="How%20to%20write%20INSERT%20IF%20NOT%20EXISTS%20queries%20in%20standard%20SQL%20at%20Xaprb_soubory/effects.js"></script>
+<script type="text/javascript" src="How%20to%20write%20INSERT%20IF%20NOT%20EXISTS%20queries%20in%20standard%20SQL%20at%20Xaprb_soubory/k2functions.php"></script>
+<script type="text/javascript" src="How%20to%20write%20INSERT%20IF%20NOT%20EXISTS%20queries%20in%20standard%20SQL%20at%20Xaprb_soubory/comments.php"></script><!-- Bad Behavior 2.0.11 run time: 4.494 ms -->
+
+
+<script type="text/javascript">
+<!--
+function bb2_addLoadEvent(func) {
+	var oldonload = window.onload;
+	if (typeof window.onload != 'function') {
+		window.onload = func;
+	} else {
+		window.onload = function() {
+			oldonload();
+			func();
+		}
+	}
+}
+
+bb2_addLoadEvent(function() {
+	for ( i=0; i < document.forms.length; i++ ) {
+		if (document.forms[i].method == 'post') {
+			var myElement = document.createElement('input');
+			myElement.setAttribute('type', 'hidden');
+			myElement.name = 'bb2_screener_';
+			myElement.value = '1212183715 80.78.146.245';
+			document.forms[i].appendChild(myElement);
+		}
+	}
+});
+// --></script>
+		
+	<link rel="stylesheet" href="How%20to%20write%20INSERT%20IF%20NOT%20EXISTS%20queries%20in%20standard%20SQL%20at%20Xaprb_soubory/ela.css" type="text/css" media="screen">
+		<style type="text/css">
+				</style>
+		<style type="text/css">.recentcomments a{display:inline !important;padding: 0 !important;margin: 0 !important;}</style>
+	
+
+	<script type="text/javascript">
+	//<![CDATA[
+		var K2 = {};
+
+		
+		
+			//]]>
+	</script>
+
+		<link rel="archives" title="May 2008" href="http://www.xaprb.com/blog/2008/05/">
+	<link rel="archives" title="April 2008" href="http://www.xaprb.com/blog/2008/04/">
+	<link rel="archives" title="March 2008" href="http://www.xaprb.com/blog/2008/03/">
+	<link rel="archives" title="February 2008" href="http://www.xaprb.com/blog/2008/02/">
+	<link rel="archives" title="January 2008" href="http://www.xaprb.com/blog/2008/01/">
+	<link rel="archives" title="December 2007" href="http://www.xaprb.com/blog/2007/12/">
+	<link rel="archives" title="November 2007" href="http://www.xaprb.com/blog/2007/11/">
+	<link rel="archives" title="October 2007" href="http://www.xaprb.com/blog/2007/10/">
+	<link rel="archives" title="September 2007" href="http://www.xaprb.com/blog/2007/09/">
+	<link rel="archives" title="August 2007" href="http://www.xaprb.com/blog/2007/08/">
+	<link rel="archives" title="July 2007" href="http://www.xaprb.com/blog/2007/07/">
+	<link rel="archives" title="June 2007" href="http://www.xaprb.com/blog/2007/06/">
+	<link rel="archives" title="May 2007" href="http://www.xaprb.com/blog/2007/05/">
+	<link rel="archives" title="April 2007" href="http://www.xaprb.com/blog/2007/04/">
+	<link rel="archives" title="March 2007" href="http://www.xaprb.com/blog/2007/03/">
+	<link rel="archives" title="February 2007" href="http://www.xaprb.com/blog/2007/02/">
+	<link rel="archives" title="January 2007" href="http://www.xaprb.com/blog/2007/01/">
+	<link rel="archives" title="December 2006" href="http://www.xaprb.com/blog/2006/12/">
+	<link rel="archives" title="November 2006" href="http://www.xaprb.com/blog/2006/11/">
+	<link rel="archives" title="October 2006" href="http://www.xaprb.com/blog/2006/10/">
+	<link rel="archives" title="September 2006" href="http://www.xaprb.com/blog/2006/09/">
+	<link rel="archives" title="August 2006" href="http://www.xaprb.com/blog/2006/08/">
+	<link rel="archives" title="July 2006" href="http://www.xaprb.com/blog/2006/07/">
+	<link rel="archives" title="June 2006" href="http://www.xaprb.com/blog/2006/06/">
+	<link rel="archives" title="May 2006" href="http://www.xaprb.com/blog/2006/05/">
+	<link rel="archives" title="April 2006" href="http://www.xaprb.com/blog/2006/04/">
+	<link rel="archives" title="March 2006" href="http://www.xaprb.com/blog/2006/03/">
+	<link rel="archives" title="February 2006" href="http://www.xaprb.com/blog/2006/02/">
+	<link rel="archives" title="January 2006" href="http://www.xaprb.com/blog/2006/01/">
+	<link rel="archives" title="December 2005" href="http://www.xaprb.com/blog/2005/12/">
+	<link rel="archives" title="November 2005" href="http://www.xaprb.com/blog/2005/11/">
+	<link rel="archives" title="October 2005" href="http://www.xaprb.com/blog/2005/10/">
+	<link rel="archives" title="September 2005" href="http://www.xaprb.com/blog/2005/09/"></head><body class="wordpress k2 y2008 m05 d30 h05 single s-y2005 s-m09 s-d25 s-h11 s-category-sql s-author-baron sidebar-single"><div style="position: absolute; left: 683px; top: 257px; z-index: 1000000000 ! important; visibility: hidden; opacity: 1; width: 0px;" id="linkalert-box"><img style="width: 0px;" src="How%20to%20write%20INSERT%20IF%20NOT%20EXISTS%20queries%20in%20standard%20SQL%20at%20Xaprb_soubory/none-icon.png" id="linkalert-icon-1"></div>
+
+<div id="page">
+
+	<div id="header">
+
+		<h1><a href="http://www.xaprb.com/blog/">Xaprb</a></h1>
+		<p class="description">Stay curious!</p>
+
+		<ul class="menu">
+						<li class="current_page_item"><a href="http://www.xaprb.com/blog/" title="Blog">Blog</a></li>
+						<li class="page_item"><a href="http://www.xaprb.com/blog/donate/" title="Support">Support</a></li>
+<li class="page_item"><a href="http://www.xaprb.com/blog/subscribe/" title="Subscribe">Subscribe</a></li>
+<li class="page_item"><a href="http://www.xaprb.com/blog/legal/" title="Legal">Legal</a></li>
+<li class="page_item"><a href="http://www.xaprb.com/blog/k2archives/" title="Archives">Archives</a></li>
+					</ul>
+
+	</div>
+
+		<hr>
+<div class="content">
+
+	<div id="primary">
+		<div id="current-content" class="hfeed">
+
+			
+	
+	 
+
+
+	
+			
+	<hr>
+
+	
+	<div class="navigation">
+		<div class="left"><span>«</span> <a href="http://www.xaprb.com/blog/2005/09/23/how-to-write-a-sql-exclusion-join/">How to write a SQL exclusion join</a></div>		<div class="right"><a href="http://www.xaprb.com/blog/2005/09/26/sql-subqueries-and-derived-tables/">The difference between subqueries and derived tables in SQL</a> <span>»</span></div>		<div class="clear"></div>
+	</div>
+
+	
+	<hr>
+
+		<div id="post-8" class="hentry p1 post publish author-baron category-sql y2005 m09 d25 h11 alt">
+			<div class="entry-head">
+				<h3 class="entry-title"><a href="http://www.xaprb.com/blog/2005/09/25/insert-if-not-exists-queries-in-mysql/" rel="bookmark" title="Permanent Link to &quot;How to write INSERT IF NOT EXISTS queries in standard  SQL&quot;">How to write INSERT IF NOT EXISTS queries in standard  SQL</a></h3>
+				
+				<div class="entry-meta">
+					<span class="chronodata">
+						Published  <abbr class="published" title="2005-09-25T11:48:56-0400">at September 25, 2005</abbr>					</span>
+
+					<span class="entry-category">
+						in <a href="http://www.xaprb.com/blog/category/sql/" title="View all posts in SQL">SQL</a>.					</span>
+
+					
+					
+											<span class="entry-tags">Tags: No Tags.</span>
+									</div> <!-- .entry-meta -->
+			</div> <!-- .entry-head -->
+
+			<div class="entry-content">
+				<p>If
+necessary, INSERT IF NOT EXISTS queries can be written in a single
+atomic statement, eliminating the need for a transaction, and without
+violating standards. In this article I’ll explain several ways to write
+such queries in a platform-independent way.</p>
+
+<h3>Motivation</h3>
+
+<p>Suppose a table of urls has a unique index on the url:</p>
+
+<pre>create table urls(url varchar(200) primary key);</pre>
+
+<p>Now suppose I want to insert a row in a single statement, without
+using a transaction, and I only want the row to get inserted if the url
+isn’t already in the table. I don’t want any warnings or errors. I just
+want to issue a normal <code>INSERT</code> statement and know the url is now in the table.</p>
+
+<p>Standard SQL provides no means of doing this.  There’s no syntax like this:</p>
+
+<pre>insert if not exists into url(url) values(...)</pre>
+
+<p>In Microsoft SQL Server, I can use an <code>IF</code> statement:</p>
+
+<pre>if not exists (select * from url where url = ...)
+   insert into url...</pre>
+
+<p>This has to be wrapped in a transaction to avoid a race condition,
+though. Otherwise someone might insert a row between the time I check
+the table and when I insert the row. I want to do this in a single
+statement, without a transaction.</p>
+
+<h3>Several solutions</h3>
+
+<p>One solution is to use a <a href="http://www.xaprb.com/blog/2005/09/22/mutex-tables-in-sql/">mutex table</a>:</p>
+
+<pre>insert into urls(url)
+select 'http://www.xaprb.com/blog/'
+from mutex
+    left outer join urls
+        on urls.url = 'http://www.xaprb.com/blog/'
+where mutex.i = 1 and urls.url is null;</pre>
+
+<p>There are more flexible variations on this technique. Suppose there
+is no unique index on the url column. If desired, it is possible to
+insert several values in a single statement by changing the <code>WHERE</code> clause:</p>
+
+<pre>insert into urls(url)
+select 'http://www.xaprb.com/blog/'
+from mutex
+    left outer join urls
+        on urls.url = 'http://www.xaprb.com/blog/'
+where mutex.i &lt; 5 and urls.url is null;</pre>
+
+<p>Now suppose the requirements specify up to three duplicate entries
+in the table, and each insert should add a single row. It is possible
+to insert a row at a time while enforcing the requirement with the
+following query:</p>
+
+<pre>insert into urls(url)
+select 'http://www.xaprb.com/blog/'
+from mutex
+    left outer join urls
+        on urls.url = 'http://www.xaprb.com/blog/'
+where mutex.i = 1
+group by urls.url
+having count(*) &lt; 3;</pre>
+
+<p>This query shows the input to the <code>INSERT</code> statement:</p>
+
+<pre>select 'http://www.xaprb.com/blog/', count(*)
+from mutex
+    left outer join urls
+        on urls.url = 'http://www.xaprb.com/blog/'
+where mutex.i = 1
+group by urls.url;</pre>
+
+<p>If this article was useful to you, you should <a href="http://www.xaprb.com/blog/subscribe/">subscribe</a> to stay current with my upcoming articles.  It’s free and convenient.</p>
+
+<p><strong>Edit 2006-02-26</strong>  See also my article on using this and other techniques to do <a href="http://www.xaprb.com/blog/2006/02/21/flexible-insert-and-update-in-mysql/">flexible INSERT and UPDATE statements in MySQL</a>.</p><span class="UTWPrimaryTags">Technorati Tags:No Tags</span>
+                                  <h4>You might also like:</h4>  <ol>  <li><a href="http://www.xaprb.com/blog/2005/09/22/mutex-tables-in-sql/" rel="bookmark" title="Permanent Link: Mutex tables in SQL">Mutex tables in SQL</a></li><li><a href="http://www.xaprb.com/blog/2005/09/22/union-in-mysql/" rel="bookmark" title="Permanent Link: How to write a UNION in SQL without using UNION">How to write a UNION in SQL without using UNION</a></li><li><a href="http://www.xaprb.com/blog/2005/09/21/subselects-in-mysql/" rel="bookmark" title="Permanent Link: How to write subqueries without using subqueries in SQL">How to write subqueries without using subqueries in SQL</a></li><li><a href="http://www.xaprb.com/blog/2005/12/07/the-integers-table/" rel="bookmark" title="Permanent Link: The integers table">The integers table</a></li><li><a href="http://www.xaprb.com/blog/2006/05/26/how-to-write-full-outer-join-in-mysql/" rel="bookmark" title="Permanent Link: How to simulate FULL OUTER JOIN in MySQL">How to simulate FULL OUTER JOIN in MySQL</a></li>  </ol>  
+							</div> <!-- .entry-content -->
+
+		</div> <!-- #post-ID -->
+
+		
+	
+			
+	
+	<div class="comments">
+
+		<h4><span id="comments">18</span> Responses to “How to write INSERT IF NOT EXISTS queries in standard  SQL”</h4>
+
+		<div class="metalinks">
+			<span class="commentsrsslink"><a href="http://www.xaprb.com/blog/2005/09/25/insert-if-not-exists-queries-in-mysql/feed/">Feed for this Entry</a></span>
+			<span class="trackbacklink"><a href="http://www.xaprb.com/blog/2005/09/25/insert-if-not-exists-queries-in-mysql/trackback/" title="Copy this URI to trackback this entry.">Trackback Address</a></span>		</div>
+
+		
+	<hr>
+
+				<ol id="commentlist">
+
+			
+			<li id="comment-2210" class="comment c1 c-y2006 c-m10 c-d17 c-h02 alt">
+								<a href="#comment-2210" class="counter" title="Permanent Link to this Comment">1</a>
+				<span class="commentauthor">Megha</span>
+
+				<div class="comment-meta">
+				<a href="#comment-2210" title="Permanent Link to this Comment">Oct 17th, 2006 at 2:02 am</a>												</div>
+			
+				<div class="comment-content">
+					<p>I have query.<br>
+syntax ‘if not exists’ is not working in oracle 10g. please give solution for it as soon as possible.</p>
+<p>Thanks,<br>
+Megha</p>
+ 
+				</div>
+
+							</li>
+
+			
+			<li id="comment-2211" class="comment c2 byuser commentauthor-baron bypostauthor c-y2006 c-m10 c-d17 c-h07">
+								<a href="#comment-2211" class="counter" title="Permanent Link to this Comment">2</a>
+				<span class="commentauthor"><a href="http://www.xaprb.com/" rel="external nofollow">Xaprb</a></span>
+
+				<div class="comment-meta">
+				<a href="#comment-2211" title="Permanent Link to this Comment">Oct 17th, 2006 at 7:30 am</a>												</div>
+			
+				<div class="comment-content">
+					<p>Sorry Megha, I am not very familiar with Oracle.  You may want to look into the MERGE command.</p>
+ 
+				</div>
+
+							</li>
+
+			
+			<li id="comment-2298" class="comment c3 c-y2006 c-m10 c-d27 c-h06 alt">
+								<a href="#comment-2298" class="counter" title="Permanent Link to this Comment">3</a>
+				<span class="commentauthor">Jon</span>
+
+				<div class="comment-meta">
+				<a href="#comment-2298" title="Permanent Link to this Comment">Oct 27th, 2006 at 6:08 pm</a>												</div>
+			
+				<div class="comment-content">
+					<p>I
+had a similar issue in oracle and got around it by using derived values
+from a subquery within an insert statement. Using the assumption that
+My_Table is defined to have the following fields:</p>
+<pre>EMP_TYPE_CODE (PK)
+EMPLOYEE_ID (PK)
+UPDATE_USERID
+UPDATE_TIMESTAMP
+EMP_CODE   (PK)</pre>
+<p>I’ll insert values based off a subquery which checks if the newly
+inputted values have a count = 0. If the count doesn’t = 0 (the newly
+inputted values currently exist in that table) then the subquery
+returns nothing to the INSERT statement and hence there is no insert.
+This of course returns 0 records affected which you can bubble up to
+the app level and do with it what you want. </p>
+<p>-Jon</p>
+<pre>INSERT INTO My_Table
+    (SELECT
+        'FT' AS EMP_TYPE_CODE,
+        678 AS EMPLOYEE_ID,
+        'JON' AS UPDATE_USERID,
+        sysdate AS UPDATE_TIMESTAMP,
+        12345 AS EMP_CODE
+    FROM
+        My_Table
+    WHERE
+        EMP_CODE = 12345
+        AND TRIM(EMP_TYPE_CODE) = 'FT'
+        AND EMPLOYEE_ID = 678
+    HAVING COUNT(*) = 0
+    )</pre>
+ 
+				</div>
+
+							</li>
+
+			
+			<li id="comment-2823" class="comment c4 c-y2006 c-m12 c-d16 c-h03">
+								<a href="#comment-2823" class="counter" title="Permanent Link to this Comment">4</a>
+				<span class="commentauthor">vineeta</span>
+
+				<div class="comment-meta">
+				<a href="#comment-2823" title="Permanent Link to this Comment">Dec 16th, 2006 at 2:27 am</a>												</div>
+			
+				<div class="comment-content">
+					<p>How can we write SQL Server query where we can provide condition of “if not exists” with insert statement?</p>
+ 
+				</div>
+
+							</li>
+
+			
+			<li id="comment-2846" class="comment c5 byuser commentauthor-baron bypostauthor c-y2006 c-m12 c-d18 c-h04 alt">
+								<a href="#comment-2846" class="counter" title="Permanent Link to this Comment">5</a>
+				<span class="commentauthor"><a href="http://www.xaprb.com/" rel="external nofollow">Xaprb</a></span>
+
+				<div class="comment-meta">
+				<a href="#comment-2846" title="Permanent Link to this Comment">Dec 18th, 2006 at 3:36 pm</a>												</div>
+			
+				<div class="comment-content">
+					<p>The same way I wrote in the article, or you may do it this way too:</p>
+<pre>begin transaction;
+if not exists(select * from tbl(updlock holdlock) where...)
+begin
+   insert into tbl...
+else
+begin
+   update tbl...
+end
+commit;</pre>
+<p>Sorry, I’m a bit rusty on my SQL Server syntax, but that should get
+you close. The BEGIN and COMMIT are very important, as is the locking
+hint (updlock holdlock). If you are unclear about this, the SQL Server
+documentation is an excellent reference.</p>
+ 
+				</div>
+
+							</li>
+
+			
+			<li id="comment-4638" class="comment c6 c-y2007 c-m02 c-d27 c-h01">
+								<a href="#comment-4638" class="counter" title="Permanent Link to this Comment">6</a>
+				<span class="commentauthor"><a href="http://no/" onclick="javascript:urchinTracker('/outbound/commentauthor/no');" rel="external nofollow">Michele Scaramal</a></span>
+
+				<div class="comment-meta">
+				<a href="#comment-4638" title="Permanent Link to this Comment">Feb 27th, 2007 at 12:10 pm</a>												</div>
+			
+				<div class="comment-content">
+					<pre>insert
+  when (condition='true')
+      then into tablela(columna,columnb) values('valuea','valueb')
+  select 'true' as condition from dual where not exists ( Insert your select here to check existence/not existence)</pre>
+ 
+				</div>
+
+							</li>
+
+			
+			<li id="comment-4657" class="comment c7 c-y2007 c-m02 c-d28 c-h05 alt">
+								<a href="#comment-4657" class="counter" title="Permanent Link to this Comment">7</a>
+				<span class="commentauthor"><a href="http://no/" onclick="javascript:urchinTracker('/outbound/commentauthor/no');" rel="external nofollow">Michele Scaramal</a></span>
+
+				<div class="comment-meta">
+				<a href="#comment-4657" title="Permanent Link to this Comment">Feb 28th, 2007 at 4:31 am</a>												</div>
+			
+				<div class="comment-content">
+					<p>by the way, the post above applies to oracle!</p>
+ 
+				</div>
+
+							</li>
+
+			
+			<li id="comment-6189" class="comment c8 c-y2007 c-m05 c-d02 c-h05">
+								<a href="#comment-6189" class="counter" title="Permanent Link to this Comment">8</a>
+				<span class="commentauthor"><a href="http://www.universalist.de/" onclick="javascript:urchinTracker('/outbound/commentauthor/www.universalist.de');" rel="external nofollow">Chris</a></span>
+
+				<div class="comment-meta">
+				<a href="#comment-6189" title="Permanent Link to this Comment">May 2nd, 2007 at 5:41 am</a>												</div>
+			
+				<div class="comment-content">
+					<p>My solution to this problem is to just do an “INSERT IGNORE”.<br>
+If the Row already exists nothing will happen, if not it will be inserted.<br>
+Provided our value is in an unique column it will work perfectly like an “INSERT IF NOT EXISTS”.</p>
+ 
+				</div>
+
+							</li>
+
+			
+			<li id="comment-6453" class="comment c9 c-y2007 c-m05 c-d09 c-h05 alt">
+								<a href="#comment-6453" class="counter" title="Permanent Link to this Comment">9</a>
+				<span class="commentauthor">Win</span>
+
+				<div class="comment-meta">
+				<a href="#comment-6453" title="Permanent Link to this Comment">May 9th, 2007 at 5:32 pm</a>												</div>
+			
+				<div class="comment-content">
+					<p>Hello
+Chris I am looking for that exact solution for MySQL but I can’t find
+the query could you post it again “INSERT IF NOT EXISTS”.</p>
+<p>Thanks</p>
+ 
+				</div>
+
+							</li>
+
+			
+			<li id="comment-8147" class="comment c10 c-y2007 c-m05 c-d21 c-h09">
+								<a href="#comment-8147" class="counter" title="Permanent Link to this Comment">10</a>
+				<span class="commentauthor"><a href="http://www.universalist.de/" onclick="javascript:urchinTracker('/outbound/commentauthor/www.universalist.de');" rel="external nofollow">Universalist (Chris)</a></span>
+
+				<div class="comment-meta">
+				<a href="#comment-8147" title="Permanent Link to this Comment">May 21st, 2007 at 9:37 pm</a>												</div>
+			
+				<div class="comment-content">
+					<p>Alright, with pleasure.</p>
+<p>The query is “insert IGNORE into url(url) values(…)”.</p>
+<p>Explanation:<br>
+Lets assume the scenario mentioned above.<br>
+We want to do the following (impossible): “insert if not exists into url(url) values(…)”</p>
+<p>Now, `url` is the primary key, thus has to be unique. This makes
+mySQL throw an error if we try to insert a value that already exists
+and, more importantly: the new value won’t be inserted.</p>
+<p>Thats practically already an “insert if not exists”. We just have to
+make mySQL not throw an error if it encounters duplicate unique values,
+and that’s exactly what “ignore” is for (it has only this purpose, to
+my knowledge).</p>
+<p>So we just do “insert IGNORE into url(url) values(…)” and everybody should be happy :D</p>
+ 
+				</div>
+
+							</li>
+
+			
+			<li id="comment-11921" class="comment c11 c-y2007 c-m06 c-d27 c-h06 alt">
+								<a href="#comment-11921" class="counter" title="Permanent Link to this Comment">11</a>
+				<span class="commentauthor"><a href="http://www.quadrimind.com/" onclick="javascript:urchinTracker('/outbound/commentauthor/www.quadrimind.com');" rel="external nofollow">Leo Muniz</a></span>
+
+				<div class="comment-meta">
+				<a href="#comment-11921" title="Permanent Link to this Comment">Jun 27th, 2007 at 6:33 pm</a>												</div>
+			
+				<div class="comment-content">
+					<p>Hey Chris,<br>
+I would like just to thank you. I’ve been searching for this solution
+the hole afternoon and now i have it because of you. Thanks.</p>
+ 
+				</div>
+
+							</li>
+
+			
+			<li id="comment-11922" class="comment c12 c-y2007 c-m06 c-d27 c-h08">
+								<a href="#comment-11922" class="counter" title="Permanent Link to this Comment">12</a>
+				<span class="commentauthor"><a href="http://www.quadrimind.com/" onclick="javascript:urchinTracker('/outbound/commentauthor/www.quadrimind.com');" rel="external nofollow">Leo Muniz</a></span>
+
+				<div class="comment-meta">
+				<a href="#comment-11922" title="Permanent Link to this Comment">Jun 27th, 2007 at 8:37 pm</a>												</div>
+			
+				<div class="comment-content">
+					<p>Hey guys,<br>
+      I have a doubt. How can I select * except the columns that I specify?<br>
+      Example:<br>
+      table users<br>
+      id_name, description, age</p>
+<p>      select * except age from users;</p>
+<p> i wanna this because i’ll probably need to insert columns at the
+table and want there are in the select query without having to rewrite
+it.<br>
+      thanks</p>
+ 
+				</div>
+
+							</li>
+
+			
+			<li id="comment-13386" class="comment c13 c-y2007 c-m09 c-d09 c-h12 alt">
+								<a href="#comment-13386" class="counter" title="Permanent Link to this Comment">13</a>
+				<span class="commentauthor">arasu</span>
+
+				<div class="comment-meta">
+				<a href="#comment-13386" title="Permanent Link to this Comment">Sep 9th, 2007 at 12:04 pm</a>												</div>
+			
+				<div class="comment-content">
+					<p>the information given to me was valuable.. thank for the information..</p>
+ 
+				</div>
+
+							</li>
+
+			
+			<li id="comment-13543" class="comment c14 c-y2007 c-m10 c-d18 c-h09">
+								<a href="#comment-13543" class="counter" title="Permanent Link to this Comment">14</a>
+				<span class="commentauthor"><a href="http://bogdan.org.ua/" onclick="javascript:urchinTracker('/outbound/commentauthor/bogdan.org.ua');" rel="external nofollow">Bogdan</a></span>
+
+				<div class="comment-meta">
+				<a href="#comment-13543" title="Permanent Link to this Comment">Oct 18th, 2007 at 9:14 am</a>												</div>
+			
+				<div class="comment-content">
+					<p>to
+Chris: IGNORE also ignores several other error conditions (such as
+charset conversion, invalid values etc). Thus it is advisable to first
+test the query without IGNORE…</p>
+<p>It might be a good alternative to use INSERT … ON DUPLICATE KEY
+UPDATE syntax with doing nothing in the UPDATE part, but I didn’t test
+this solution myself.</p>
+ 
+				</div>
+
+							</li>
+
+			
+			<li id="comment-14134" class="comment c15 c-y2008 c-m01 c-d07 c-h04 alt">
+								<a href="#comment-14134" class="counter" title="Permanent Link to this Comment">15</a>
+				<span class="commentauthor">Bruno Tarcha</span>
+
+				<div class="comment-meta">
+				<a href="#comment-14134" title="Permanent Link to this Comment">Jan 7th, 2008 at 3:18 pm</a>												</div>
+			
+				<div class="comment-content">
+					<p>Awesome solution!!<br>
+This saved me so much time that I cannot even estimate.<br>
+Thank you very much and congratulations!</p>
+ 
+				</div>
+
+							</li>
+
+			
+			<li id="comment-14166" class="comment c16 c-y2008 c-m01 c-d15 c-h08">
+								<a href="#comment-14166" class="counter" title="Permanent Link to this Comment">16</a>
+				<span class="commentauthor"><a href="http://feedknopka.com/" onclick="javascript:urchinTracker('/outbound/commentauthor/feedknopka.com');" rel="external nofollow">manovich</a></span>
+
+				<div class="comment-meta">
+				<a href="#comment-14166" title="Permanent Link to this Comment">Jan 15th, 2008 at 7:35 pm</a>												</div>
+			
+				<div class="comment-content">
+					<p>Two approaches to update database row if exists, insert if not - <a href="http://dotnettipoftheday.org/tips/update-insert-row-sql.aspx" rel="nofollow">http://dotnettipoftheday.org/tips/update-insert-row-sql.aspx</a></p>
+ 
+				</div>
+
+							</li>
+
+			
+			<li id="comment-14255" class="comment c17 c-y2008 c-m02 c-d27 c-h05 alt">
+								<a href="#comment-14255" class="counter" title="Permanent Link to this Comment">17</a>
+				<span class="commentauthor">Sonia</span>
+
+				<div class="comment-meta">
+				<a href="#comment-14255" title="Permanent Link to this Comment">Feb 27th, 2008 at 4:03 pm</a>												</div>
+			
+				<div class="comment-content">
+					<p>Thanks so much. This really sped up my query in comparison to ‘not exists’.</p>
+ 
+				</div>
+
+							</li>
+
+			
+			<li id="comment-14299" class="comment c18 c-y2008 c-m03 c-d15 c-h07">
+								<a href="#comment-14299" class="counter" title="Permanent Link to this Comment">18</a>
+				<span class="commentauthor">Brent</span>
+
+				<div class="comment-meta">
+				<a href="#comment-14299" title="Permanent Link to this Comment">Mar 15th, 2008 at 7:01 pm</a>												</div>
+			
+				<div class="comment-content">
+					<p>For MySQL users, this idea might work, although it may be clunky. I’d be happy to hear any means of improving efficiency here!</p>
+<p>/*1. Check if record exists. Assign @ifExists the recordID.*/<br>
+SELECT @ifExists := ifnull(recordID,0) FROM table where url = ‘http://www.disney.com’;</p>
+<p>/*2. Assign @stmt to a valid SQL statement. If recordID = 0, the
+record doesn’t exist, so use an INSERT statement; otherwise, use a
+dummy statement. Remember to escape apostrophes within the control
+clause, as in “\’”.*/<br>
+SET @stmt = IF(@ifExists = 0,’INSERT INTO target (field1) values(\’field1 value\’);’,'SELECT null;’);</p>
+<p>/*3. Prepare and Execute @stmt*/<br>
+PREPARE stmt FROM @stmt;<br>
+EXECUTE stmt;<br>
+DEALLOCATE PREPARE stmt;</p>
+ 
+				</div>
+
+							</li>
+
+			
+		</ol> <!-- END #commentlist -->
+				
+				
+				
+		
+	</div> <!-- END .comments 1 -->
+		
+		
+		<div class="comments">
+		<h4 id="respond" class="reply">Leave a Reply</h4>
+		
+		
+			<form action="http://www.xaprb.com/blog/wp-comments-post.php" method="post" id="commentform">
+
+						
+							<div id="comment-personaldetails">
+					<p><input name="author" id="author" value="" size="22" tabindex="1" type="text">
+					<label for="author"><strong>Name</strong> (required)</label></p>
+					
+					<p><input name="email" id="email" value="" size="22" tabindex="2" type="text">
+					<label for="email"><strong>Mail</strong> (will not be published) (required)</label></p>
+					
+					<p><input name="url" id="url" value="" size="22" tabindex="3" type="text">
+					<label for="url"><strong>Website</strong></label></p>			
+				</div>
+							<!--<p><strong>XHTML:</strong> You can use these tags &lt;a href=&quot;&quot; title=&quot;&quot;&gt; &lt;abbr title=&quot;&quot;&gt; &lt;acronym title=&quot;&quot;&gt; &lt;b&gt; &lt;blockquote cite=&quot;&quot;&gt; &lt;code&gt; &lt;em&gt; &lt;i&gt; &lt;strike&gt; &lt;strong&gt; :</p>-->
+		
+				<p><textarea name="comment" id="comment" cols="100" rows="10" tabindex="4"></textarea><span style="display: none;" id="error"></span></p>
+
+<p><input name="response" id="response" size="22" tabindex="5" type="text"> <label for="response"><small>'Three' is the number you shall type.  No more, no less. (Type 'three' not '3')</small></label> <input name="key" value="0417333bfa62e972aa2f30f1b1dd03e9" type="hidden"></p>
+		
+				
+
+	<p style="clear: both;" class="subscribe-to-comments">
+	<input name="subscribe" id="subscribe" value="subscribe" style="width: auto;" type="checkbox">
+	<label for="subscribe">Notify me of followup comments via e-mail</label>
+	</p>
+
+
+				
+                                <p style="border: 1px solid red;">Please <strong>do not</strong>
+use this blog to get help with problems or bugs in Maatkit or innotop:
+use the Sourceforge forums, mailing list, or bug trackers. If you're
+asking for help with MySQL, please use the MySQL mailing list instead. </p>
+				<p>
+					<input name="submit" id="submit" tabindex="5" value="Submit" type="submit"><img style="display: none;" src="How%20to%20write%20INSERT%20IF%20NOT%20EXISTS%20queries%20in%20standard%20SQL%20at%20Xaprb_soubory/spinner.gif" id="commentload">
+					<input name="comment_count" value="" type="hidden">
+					<input name="comment_post_ID" value="8" type="hidden">
+					<span id="commentload"></span>
+				</p>
+
+				
+			<input value="1212183715 80.78.146.245" name="bb2_screener_" type="hidden"></form>
+
+				
+			
+	<hr>
+
+	
+	<div class="navigation">
+		<div class="left"><span>«</span> <a href="http://www.xaprb.com/blog/2005/09/23/how-to-write-a-sql-exclusion-join/">How to write a SQL exclusion join</a></div>		<div class="right"><a href="http://www.xaprb.com/blog/2005/09/26/sql-subqueries-and-derived-tables/">The difference between subqueries and derived tables in SQL</a> <span>»</span></div>		<div class="clear"></div>
+	</div>
+
+	
+	<hr>
+	
+	</div> <!-- END .comments #2 -->
+	
+		</div> <!-- #current-content -->
+
+		<div id="dynamic-content"></div>
+	</div> <!-- #primary -->
+
+	<hr>
+<div id="sidebar-main" class="secondary">
+		<div id="text-1" class="widget widget_text">			<h2 class="widgettitle">You Ought To Know</h2>
+			<div class="textwidget"><p>I'm the lead author of <a href="http://www.amazon.com/gp/redirect.html%3FASIN=0596101716%26tag=xaprb-20%26lcode=xm2%26cID=2025%26ccmID=165953%26location=/o/ASIN/0596101716%253FSubscriptionId=1N9AHEAQ2F6SVD97BE02">High Performance MySQL, Second Edition.</a></p>
+
+<p style="text-align: center;"><a href="http://www.amazon.com/gp/redirect.html%3FASIN=0596101716%26tag=xaprb-20%26lcode=xm2%26cID=2025%26ccmID=165953%26location=/o/ASIN/0596101716%253FSubscriptionId=1N9AHEAQ2F6SVD97BE02"><img src="How%20to%20write%20INSERT%20IF%20NOT%20EXISTS%20queries%20in%20standard%20SQL%20at%20Xaprb_soubory/high_performance_mysql.jpg" alt="High Performance MySQL"></a></p>
+
+<p>You can hire me!  I work as a consultant for <a href="http://www.percona.com/">Percona</a> with some of my co-authors and other performance experts.  You can contact me like this:</p>
+
+<p><code>SELECT REVERSE('moc.anocrep@norab');</code></p>
+
+<p>If you're looking for free, fast, friendly MySQL help instead of
+expert consulting, please send your questions to the MySQL mailing
+list, or hop on #mysql at FreeNode on IRC. Thanks!</p></div>
+		</div>		<div id="search" class="widget widget_search">			<form id="searchform" method="get" action="http://www.xaprb.com/blog">
+			<div>
+			<input name="s" id="s" size="15" type="text"><br>
+			<input value="Search" type="submit">
+			</div>
+			</form>
+		</div>		<div id="recent-posts" class="widget widget_recent_entries">			<h2 class="widgettitle">Hot Hot Headlines</h2>
+			<ul>
+						<li><a href="http://www.xaprb.com/blog/2008/05/30/official-website-launched-for-high-performance-mysql/">Official website launched for High Performance MySQL </a></li>
+						<li><a href="http://www.xaprb.com/blog/2008/05/25/screenshots-of-improved-mysql-cacti-templates/">Screenshots of improved MySQL Cacti templates </a></li>
+						<li><a href="http://www.xaprb.com/blog/2008/05/23/mysql-62-is-ga-but-51-is-rc-and-60-is-alpha/">MySQL 6.2 is GA, but 5.1 is RC and 6.0 is alpha </a></li>
+						<li><a href="http://www.xaprb.com/blog/2008/05/22/why-is-postgresql-getting-dramatically-more-patches/">Why is PostgreSQL getting dramatically more patches? </a></li>
+						<li><a href="http://www.xaprb.com/blog/2008/05/21/i-moved-this-blog-to-pairlite-with-zero-downtime-and-it-was-easy/">I moved this blog to pairLite with zero downtime, and it was easy </a></li>
+						<li><a href="http://www.xaprb.com/blog/2008/05/21/get-maatkit-fast-command-line/">Get Maatkit fast from the command line </a></li>
+						<li><a href="http://www.xaprb.com/blog/2008/05/18/why-is-mysql-more-popular-than-postgresql/">Why is MySQL more popular than PostgreSQL? </a></li>
+						<li><a href="http://www.xaprb.com/blog/2008/05/14/mysql-free-software-but-not-open-source/">MySQL: Free Software but not Open Source </a></li>
+						<li><a href="http://www.xaprb.com/blog/2008/05/13/maatkit-in-rhel-and-centos/">Maatkit in RHEL and CentOS </a></li>
+						<li><a href="http://www.xaprb.com/blog/2008/05/07/high-performance-mysql-second-edition-schedule/">High Performance MySQL Second Edition Schedule </a></li>
+						</ul>
+		</div>
+		<div id="recent-comments" class="widget widget_recent_comments">			<h2 class="widgettitle">You Were Saying?</h2>
+			<ul id="recentcomments"><li class="recentcomments">Jay on <a href="http://www.xaprb.com/blog/2005/12/06/find-missing-numbers-in-a-sequence-with-sql/#comment-14678">How to find missing values in a sequence with SQL</a></li><li class="recentcomments"><a href="http://www.xaprb.com/" rel="external nofollow">Xaprb</a> on <a href="http://www.xaprb.com/blog/2008/05/02/news-flash-mysql-51-has-zero-bugs/#comment-14677">News flash: MySQL 5.1 has zero bugs</a></li><li class="recentcomments"><a href="http://monty-says.blogspot.com/" onclick="javascript:urchinTracker('/outbound/commentauthor/monty-says.blogspot.com');" rel="external nofollow">Michael Widenius</a> on <a href="http://www.xaprb.com/blog/2008/05/02/news-flash-mysql-51-has-zero-bugs/#comment-14676">News flash: MySQL 5.1 has zero bugs</a></li><li class="recentcomments">avery on <a href="http://www.xaprb.com/blog/2005/10/14/how-to-create-a-vb6-console-program/#comment-14675">How to  create a VB6 console program</a></li><li class="recentcomments">avery on <a href="http://www.xaprb.com/blog/2005/10/14/how-to-create-a-vb6-console-program/#comment-14674">How to  create a VB6 console program</a></li></ul>
+		</div><div id="links" class="widget widget_links"><h2 class="widgettitle">Respected Sites</h2>
+
+	<ul>
+<li><a href="http://blog.kovyrin.net/" title="Homo Adminus: the creator of MySQL Master Master toolset">Alexey Kovyrin</a></li>
+<li><a href="http://blog.paragon-cs.com/" rel="colleague" title="Writings about MySQL administration">B. Keith Murphy</a></li>
+<li><a href="http://brainonfire.net/" rel="co-worker" title="Tim McCormack">Brain On Fire</a></li>
+<li><a href="http://mysqldba.blogspot.com/" title="The DB architect for Flickr">Dathan Pattishall</a></li>
+<li><a href="http://www.fixpert.com/" rel="friend co-worker" title="Web design and bikes">Fixpert</a></li>
+<li><a href="http://mysqlha.blogspot.com/" rel="acquaintance met colleague" title="Writings from a MySQL guru">High Availability MySQL</a></li>
+<li><a href="http://ithunkso.com/" rel="met co-worker colleague" title="Cool designer who works where I used to work.">I Thunk So</a></li>
+<li><a href="http://www.thekatespanos.com/" rel="acquaintance co-worker" title="Web design and Irish dancing">Kate Spanos</a></li>
+<li><a href="http://www.locohistory.org/blog/" title="Local County History for Albemarle County by a member of the historical society.">LocoHistory</a></li>
+<li><a href="http://mandyowen.net/" rel="acquaintance met neighbor">Mandy Owen</a></li>
+<li><a href="http://www.mysqlperformanceblog.com/" rel="colleague" title="Consulting and articles on performance by former MySQL employees">MySQL Performance</a></li>
+<li><a href="http://www.planetmysql.org/" title="Top aggregator of MySQL bloggers">Planet MySQL</a></li>
+<li><a href="http://provenscaling.com/" rel="friend met colleague" title="MySQL experts and nice guys">Proven Scaling</a></li>
+<li><a href="http://www.semiantics.com/" rel="met sibling">SemiAntics</a></li>
+<li><a href="http://www.squidfingers.com/" title="Credit: background pattern">squidfingers</a></li>
+<li><a href="http://venublog.com/" title="MySQL expert at Yahoo">Venu Anuganti</a></li>
+
+	</ul>
+</div>
+		<div id="meta" class="widget widget_meta">			<h2 class="widgettitle">Stuff To Do</h2>
+			<ul>
+						<li><a href="http://www.xaprb.com/blog/wp-login.php">Login</a></li>
+			<li><a href="http://www.xaprb.com/blog/feed/" title="Syndicate this site using RSS 2.0">Entries <abbr title="Really Simple Syndication">RSS</abbr></a></li>
+			<li><a href="http://www.xaprb.com/blog/comments/feed/" title="The latest comments to all posts in RSS">Comments <abbr title="Really Simple Syndication">RSS</abbr></a></li>
+			<li><a href="http://wordpress.org/" title="Powered by WordPress, state-of-the-art semantic personal publishing platform.">WordPress.org</a></li>
+						</ul>
+		</div><div id="archives" class="widget widget_archives"><h2 class="widgettitle">Think Inside The Box</h2>
+		<ul>
+			<li><a href="http://www.xaprb.com/blog/2008/05/" title="May 2008">May 2008</a>&nbsp;(15)</li>
+	<li><a href="http://www.xaprb.com/blog/2008/04/" title="April 2008">April 2008</a>&nbsp;(18)</li>
+	<li><a href="http://www.xaprb.com/blog/2008/03/" title="March 2008">March 2008</a>&nbsp;(9)</li>
+	<li><a href="http://www.xaprb.com/blog/2008/02/" title="February 2008">February 2008</a>&nbsp;(4)</li>
+	<li><a href="http://www.xaprb.com/blog/2008/01/" title="January 2008">January 2008</a>&nbsp;(9)</li>
+	<li><a href="http://www.xaprb.com/blog/2007/12/" title="December 2007">December 2007</a>&nbsp;(11)</li>
+	<li><a href="http://www.xaprb.com/blog/2007/11/" title="November 2007">November 2007</a>&nbsp;(19)</li>
+	<li><a href="http://www.xaprb.com/blog/2007/10/" title="October 2007">October 2007</a>&nbsp;(18)</li>
+	<li><a href="http://www.xaprb.com/blog/2007/09/" title="September 2007">September 2007</a>&nbsp;(11)</li>
+	<li><a href="http://www.xaprb.com/blog/2007/08/" title="August 2007">August 2007</a>&nbsp;(12)</li>
+	<li><a href="http://www.xaprb.com/blog/2007/07/" title="July 2007">July 2007</a>&nbsp;(9)</li>
+	<li><a href="http://www.xaprb.com/blog/2007/06/" title="June 2007">June 2007</a>&nbsp;(12)</li>
+	<li><a href="http://www.xaprb.com/blog/2007/05/" title="May 2007">May 2007</a>&nbsp;(13)</li>
+	<li><a href="http://www.xaprb.com/blog/2007/04/" title="April 2007">April 2007</a>&nbsp;(12)</li>
+	<li><a href="http://www.xaprb.com/blog/2007/03/" title="March 2007">March 2007</a>&nbsp;(17)</li>
+	<li><a href="http://www.xaprb.com/blog/2007/02/" title="February 2007">February 2007</a>&nbsp;(6)</li>
+	<li><a href="http://www.xaprb.com/blog/2007/01/" title="January 2007">January 2007</a>&nbsp;(10)</li>
+	<li><a href="http://www.xaprb.com/blog/2006/12/" title="December 2006">December 2006</a>&nbsp;(8)</li>
+	<li><a href="http://www.xaprb.com/blog/2006/11/" title="November 2006">November 2006</a>&nbsp;(8)</li>
+	<li><a href="http://www.xaprb.com/blog/2006/10/" title="October 2006">October 2006</a>&nbsp;(12)</li>
+	<li><a href="http://www.xaprb.com/blog/2006/09/" title="September 2006">September 2006</a>&nbsp;(9)</li>
+	<li><a href="http://www.xaprb.com/blog/2006/08/" title="August 2006">August 2006</a>&nbsp;(19)</li>
+	<li><a href="http://www.xaprb.com/blog/2006/07/" title="July 2006">July 2006</a>&nbsp;(14)</li>
+	<li><a href="http://www.xaprb.com/blog/2006/06/" title="June 2006">June 2006</a>&nbsp;(15)</li>
+	<li><a href="http://www.xaprb.com/blog/2006/05/" title="May 2006">May 2006</a>&nbsp;(15)</li>
+	<li><a href="http://www.xaprb.com/blog/2006/04/" title="April 2006">April 2006</a>&nbsp;(12)</li>
+	<li><a href="http://www.xaprb.com/blog/2006/03/" title="March 2006">March 2006</a>&nbsp;(10)</li>
+	<li><a href="http://www.xaprb.com/blog/2006/02/" title="February 2006">February 2006</a>&nbsp;(5)</li>
+	<li><a href="http://www.xaprb.com/blog/2006/01/" title="January 2006">January 2006</a>&nbsp;(12)</li>
+	<li><a href="http://www.xaprb.com/blog/2005/12/" title="December 2005">December 2005</a>&nbsp;(18)</li>
+	<li><a href="http://www.xaprb.com/blog/2005/11/" title="November 2005">November 2005</a>&nbsp;(14)</li>
+	<li><a href="http://www.xaprb.com/blog/2005/10/" title="October 2005">October 2005</a>&nbsp;(9)</li>
+	<li><a href="http://www.xaprb.com/blog/2005/09/" title="September 2005">September 2005</a>&nbsp;(16)</li>
+		</ul>
+</div>		<div id="text-2" class="widget widget_text">			<h2 class="widgettitle">Sponsored Links</h2>
+			<div class="textwidget"><script type="text/javascript"><!--
+google_ad_client = "pub-5313772850190933";
+/* 160x600, created 5/26/08 */
+google_ad_slot = "8811350873";
+google_ad_width = 160;
+google_ad_height = 600;
+//-->
+</script>
+<script type="text/javascript" src="How%20to%20write%20INSERT%20IF%20NOT%20EXISTS%20queries%20in%20standard%20SQL%20at%20Xaprb_soubory/show_ads.js">
+</script><iframe name="google_ads_frame" src="How%20to%20write%20INSERT%20IF%20NOT%20EXISTS%20queries%20in%20standard%20SQL%20at%20Xaprb_soubory/ads.htm" marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" frameborder="0" height="600" scrolling="no" width="160"></iframe></div>
+		</div></div> <!-- #sidebar-main -->
+
+
+<div class="clear"></div>
+
+</div> <!-- .content -->
+
+	<div class="clear"></div>
+
+</div> <!-- Close Page -->
+
+<hr>
+
+<div id="footer">
+	<p>Xaprb is powered by <a href="http://wordpress.org/" title="Where children sing songs of binary bliss">WordPress 2.2.2</a> and <a href="http://getk2.com/" title="Loves you like a kitten.">K2<!--Beta Two svn--></a></p>
+	<p>Current style is <a href="" title=" by "> </a> by <a href=""></a><br></p>	<p><a href="http://www.xaprb.com/blog/feed/">RSS Entries</a> and <a href="http://www.xaprb.com/blog/comments/feed/">RSS Comments</a></p>
+	<!-- 45 queries. 0.2350 seconds. -->
+</div>
+
+
+
+<!--
+Google Analytics Plugin for Wordpress and BBPress
+http://boakes.org/analytics
+-->
+<script src="How%20to%20write%20INSERT%20IF%20NOT%20EXISTS%20queries%20in%20standard%20SQL%20at%20Xaprb_soubory/urchin.js" type="text/javascript">
+</script>
+<script type="text/javascript">
+_uacct = "UA-101883-1";
+urchinTracker();
+</script>
+
+
+</body></html>

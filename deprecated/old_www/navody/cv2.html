@@ -1,0 +1,130 @@
+<html><head>
+
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-2"><title>Cviceni 2</title></head><body>
+<pre><b>-- tabulka vydavatelu knih s pojmenovanym primarnim klicem vydavatel_id a
+-- jmenem vydavatele, ktere musi byt vyplneno a zadano velkymi pismeny </b>
+SQL&gt; <font color="#0000ff">CREATE TABLE Vydavatele (
+	vydavatel_id NUMBER CONSTRAINT pk_vydavatelid PRIMARY KEY,
+	vydavatel_jmeno VARCHAR2(50) CONSTRAINT vydavatel_upper CHECK(vydavatel_jmeno = UPPER(vydavatel_jmeno))
+			             CONSTRAINT vydavatel_notnull NOT NULL
+				     CONSTRAINT vydavatel_uniq UNIQUE);</font>
+
+Table created.
+
+<b>--zobrazi informace o vytvorenych integritnich omezenich vcetne jeho typu
+--ze systemove tabulky 'user_constraints'
+--(dalsi zajimava tabulka je 'user_cons_columns') </b>
+SQL&gt; <font color="#0000ff"> SELECT table_name, constraint_name, constraint_type FROM user_constraints WHERE UPPER(table_name) = 'VYDAVATELE';</font>
+
+TABLE_NAME                     CONSTRAINT_NAME                C
+------------------------------ ------------------------------ -
+VYDAVATELE                     VYDAVATEL_NOTNULL              C
+VYDAVATELE                     VYDAVATEL_UPPER                C
+VYDAVATELE                     PK_VYDAVATELID                 P
+VYDAVATELE                     VYDAVATEL_UNIQ                 U
+
+
+<b>-- vlozeni legalniho zaznamu do tabulky Vydavatele</b>
+SQL&gt; <font color="#0000ff"> INSERT INTO Vydavatele (vydavatel_id, vydavatel_jmeno) VALUES (1, 'GRADA');</font>
+
+1 row created.
+
+<b>-- chyba: vlozeni zaznamu bez vyplneneho jmena</b>
+SQL&gt; <font color="#0000ff"> INSERT INTO Vydavatele (vydavatel_id) VALUES (3);</font>
+
+INSERT INTO Vydavatele (vydavatel_id) VALUES (3)
+            *
+ERROR at line 1:
+ORA-01400: cannot insert NULL into ("XSVENDA"."VYDAVATELE"."VYDAVATEL_JMENO")
+
+
+<b>-- chyba: vlozeni zaznamu bez velkych pismen:</b>
+SQL&gt; <font color="#0000ff">INSERT INTO Vydavatele (vydavatel_id, vydavatel_jmeno) VALUES (2, 'Marecek');</font>
+
+INSERT INTO Vydavatele (vydavatel_id, vydavatel_jmeno) VALUES (2, 'Marecek')
+            *
+ERROR at line 1:
+ORA-02290: check constraint (XSVENDA.VYDAVATEL_UPPER) violated
+
+
+<b>-- chyba: vlozeni neunikatniho zaznamu</b>
+SQL&gt; <font color="#0000ff"> INSERT INTO Vydavatele (vydavatel_id, vydavatel_jmeno) VALUES (2, 'GRADA');</font>
+
+INSERT INTO Vydavatele (vydavatel_id, vydavatel_jmeno) VALUES (2, 'GRADA')
+            *
+ERROR at line 1:
+ORA-00001: unique constraint (XSVENDA.VYDAVATEL_UNIQ) violated
+
+
+<b>-- kniha_id je primarni klic. constraint pojmenovan jako pk_bookid;
+-- kniha_jmeno musi byt vyplnen a unikatni. constraint neni pojmenovan;
+-- nakladatel musi byt vyplnen. Prodej zahajen dle 'start_prodeje', pokud
+-- neni pri vkladani vyplneno, pouzije se aktualni datum </b>
+SQL&gt; <font color="#0000ff"> CREATE TABLE Knihy (
+	kniha_id NUMBER CONSTRAINT pk_bookid PRIMARY KEY,
+	kniha_jmeno VARCHAR2(30) NOT NULL UNIQUE,
+	vydavatel_id NUMBER NOT NULL,        
+	start_prodeje DATE DEFAULT SYSDATE);</font>
+
+Table created.
+
+<b>--pridame pozadavek na vyplneni polozky isbn a jeji unikatnost </b>
+SQL&gt; <font color="#0000ff">ALTER TABLE Knihy ADD CONSTRAINT uniq_isbn isbn VARCHAR2(15) UNIQUE NOT NULL;</font>
+
+Table altered.
+
+<b>--pridame referenci na cizi klic z tabulky Vydavatele na polozku
+--Vydavatele.vydavatel_id. od teto chvile bude kontrolovan vyskyt hodnoty
+--Knihy.vydavatel_id v tabulce Vydavatele a tabulka Vydavatele pujde
+--odstranit az po odstraneni tabulky Knihy (ktera ji referencuje) </b> 
+
+SQL&gt; <font color="#0000ff">ALTER TABLE Knihy ADD CONSTRAINT fk_publishid FOREIGN KEY (vydavatel_id) REFERENCES Vydavatele(vydavatel_id);</font>
+
+Table altered.
+
+<b>--chyba: nelze odstranit tabulku, na kterou je uvedena reference pres FOREIGN KEY</b>
+SQL&gt; <font color="#0000ff">DROP TABLE Vydavatele;</font>
+
+DROP TABLE Vydavatele
+           *
+ERROR at line 1:
+ORA-02449: unique/primary keys in table referenced by foreign keys
+
+
+<b>--vlozeni legalniho zaznamu do tabulky Knihy </b>
+SQL&gt; <font color="#0000ff">INSERT INTO Knihy (kniha_id, kniha_jmeno, isbn, vydavatel_id) VALUES (1, 'Citadela', '80-5246545-321', 1);</font>
+
+1 row created.
+
+<b>--chyba: nelze vlozit zaznam do Knih pro neexistujiciho vydavatele </b>
+SQL&gt; <font color="#0000ff">INSERT INTO Knihy (kniha_id, kniha_jmeno, isbn, vydavatel_id) VALUES (2, '1984', '80-032453434-12', 3);</font>
+
+INSERT INTO Knihy (kniha_id, kniha_jmeno, isbn, vydavatel_id) VALUES (2,
+            *
+ERROR at line 1:
+ORA-02291: integrity constraint (XSVENDA.FK_PUBLISHID) violated - parent key
+not found
+
+
+<b>--chyba: nelze odstranit vydavatele, ktery je referencovan zaznamen z tabulky Knihy</b> 
+SQL&gt; <font color="#0000ff">DELETE FROM Vydavatele WHERE vydavatel_id = 1;</font>
+
+DELETE FROM Vydavatele WHERE vydavatel_id = 1
+            *
+ERROR at line 1:
+ORA-02292: integrity constraint (XSVENDA.FK_PUBLISHID) violated - child record
+found
+
+<b>-- odstraneni omezeni na unikatnost jmena vydavatele</b>
+SQL&gt; <font color="#0000ff">ALTER TABLE VYdavatele DROP CONSTRAINT vydavatel_uniq;</font> 
+
+Table altered.
+
+<b>-- odstraneni tabulky Vydavatele vcetne vsech souvisejicich integritnich
+-- omezeni (Knihy.fk_publishid)</b>
+SQL&gt; <font color="#0000ff">DROP TABLE Vydavatele CASCADE CONSTRAINTS;</font>
+
+Table dropped.
+
+</pre>
+<div style="position: absolute; left: 0px; top: 0px; z-index: 1000000000 ! important; visibility: hidden; opacity: 1;" id="linkalert-box"><img src="cv2_soubory/none-icon.png" id="linkalert-icon-1"></div></body></html>

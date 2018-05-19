@@ -1,0 +1,178 @@
+<!doctype html public "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=Windows-1250">
+<title>Volání externích rutin v SQL</title>
+<link rel='stylesheet' style='text/css' href='../function.css'>
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr>
+	<td style="background-image: url(../images/bghead.jpg);
+		background-position: right;
+		background-repeat: no-repeat;">
+	<table width="100%" border="0" cellpadding="0" cellspacing="0"
+		style="background-image:none">
+	<tr>
+		<td style="background-image:none" height="46"
+			width="15%"><img src="../images/title-cz.gif"
+			width="255" height="33"
+			alt="602SQL-Úplná dokumentace"
+			title="602SQL - Úplná dokumentace"
+			border="0"></td>
+		<td width="33%" align="right"><a href="../xml/html/top.html"><img class="floatno"
+			src="../images/index.gif"
+			width="15" height="16"
+			alt="Index" title="Zpět na obsah"
+			border="0" vspace="2"></a> &nbsp;
+			 </td>
+	</tr>
+	</table>
+	</td>
+</tr>
+</table><table class="navigace" border="0" width="100%"  bgcolor="#FFFFBF"><tr> <td
+width="20" align="center"><img class="floatno" src="../images/prev.gif"
+width="15" height="13" alt="&lt;&shy;" title="Předcházející téma"
+border="0"></td><td width="25%"><a
+href="HE_SQL2_DROPPROCEDURE.htm">Zrušení rutiny (DROP PROCEDURE | FUNCTION)</a></td> <td width="25%"
+align="right"><img class="floatno" src="../images/up.gif" width="13"
+height="15" alt="Nahoru" title="O jednu úroveň výš" border="0"
+align="middle"></td><td width="25%"><a href="HE_SQL2_STOREDPROCEDURE.htm">Rutiny uložené na serveru</a></td>
+<td width="25%" align="right"><a
+href="../xml/html/dllfolders.html">Určení adresářů s DLL knihovnami pro SQL server</a></td><td width="20"
+align="center"><img class="floatno" src="../images/next.gif" width="15"
+height="13" alt="&shy;&gt;" title="Následující téma" border="0"></td>
+</tr></table>
+
+
+
+
+<h1><a name="he_sql2_externirutiny"></a>Volání externích rutin a předávání parametrů (SQL)</h1>
+
+<p>Rutiny uložené na serveru mohou volat procedury a funkce vytvořené v externím programovacím prostředí. Způsob deklarace těchto rutin je popsán v <a href="HE_SQL2_POPISPROCEDURY.htm">popisu procedury</a>. Pokud SQL server na Linuxu běží pod účtem uživatele root, <b>není dovoleno</b> volat externí procedury - při pokusu je vyvolána <a href="../xml/html/handlingcategories.html">chyba</a> WONT_RUN_AS_ROOT (228).</p>
+
+<p><b>Příklad:</b></p>
+
+<pre><code>DECLARE FUNCTION TestFnc(INOUT cis CHAR(25)) RETURNS INT;  
+EXTERNAL NAME 'TestFnc@TestDLL';</code></pre>
+
+<p>O externích rutinách se předpokládá, že používají volací konvenci _STDCALL. Musí být umístěny v 32-bitové knihovně DLL (resp. so na Linuxu). Volání 16-bitových rutin nebo rutin s jinou volací konvencí není možné.</p>
+
+<p>Při vytváření knihovny funkcí je nutno nastavit parametry překladače tak, aby, funkce používaly standardní stack frame. Parametry se jim nesmějí předávat v registrech. Zejména knihovny vytvářené v Delphi občas dostávají parametry v registrech a pak je nelze volat ze SQL serveru.</p>
+
+<p>Formální parametry označené OUT nebo INOUT se jim předávají referencí (tedy předává se adresa hodnoty parametru), formální parametry označené IN nebo neoznačené se předávají hodnotou. Označení a typ formálního parametru v deklaraci rutiny musí souhlasit s typem a způsobem předávání parametru v modulu, v němž je rutina implementována, podle pravidel daných touto tabulkou:</p>
+
+<table cols=3 width=520>
+
+<tr valign="top">
+<td width=27%><b>typ v jazyce C/C++</b></td>
+<td width=36%><b>typ v jazyce PASCAL</b></td>
+<td width=37%><b>typ v popisu rutiny v SQL</b></td>
+</tr>
+
+<tr valign="top">
+<td width=27%>int</td>
+<td width=36%>Integer</td>
+<td width=37%>IN INT</td>
+</tr>
+
+<tr valign="top">
+<td width=27%>int *</td>
+<td width=36%>VAR Integer</td>
+<td width=37%>INOUT INT</td>
+</tr>
+
+<tr valign="top">
+<td width=27%>short</td>
+<td width=36%>SmallInt</td>
+<td width=37%>IN SMALLINT</td>
+</tr>
+
+<tr valign="top">
+<td width=27%>short *</td>
+<td width=36%>VAR SmallInt</td>
+<td width=37%>INOUT SMALLINT</td>
+</tr>
+
+<tr valign="top">
+<td width=27%>double</td>
+<td width=36%>Double</td>
+<td width=37%>IN REAL</td>
+</tr>
+
+<tr valign="top">
+<td width=27%>double *</td>
+<td width=36%>VAR Double</td>
+<td width=37%>INOUT REAL</td>
+</tr>
+
+<tr valign="top">
+<td width=27%>char *</td>
+<td width=36%>PChar</td>
+<td width=37%>INOUT CHAR(N)</td>
+</tr>
+
+<tr valign="top">
+<td width=27%>char</td>
+<td width=36%>Boolean</td>
+<td width=37%>IN BOOLEAN</td>
+</tr>
+
+<tr valign="top">
+<td width=27%>unsigned char *</td>
+<td width=36%>VAR Boolean</td>
+<td width=37%>INOUT BOOLEAN</td>
+</tr>
+
+<tr valign="top">
+<td width=27%>struct { char[N]; }</td>
+<td width=36%>pole bajtů předávané hodnotou</td>
+<td width=37%>IN BIT(N), N &gt; 1</td>
+</tr>
+
+<tr valign="top">
+<td width=27%>struct { char[N+1]; }</td>
+<td width=36%>pole znaků předávané hodnotou</td>
+<td width=37%>IN CHAR(N)</td>
+</tr>
+
+<tr valign="top">
+<td width=27%>char *</td>
+<td width=36%>PChar</td>
+<td width=37%>INOUT BIT(N) , N &gt; 1</td>
+</tr>
+
+<tr valign="top">
+<td width=27%>char *</td>
+<td width=36%>PChar</td>
+<td width=37%>INOUT CLOB</td>
+</tr>
+</table><br>
+
+<p>Pro mód OUT platí stejná pravidla jako pro mód INOUT. Parametr se předává referencí, ale jeho hodnota se nepřenáší dovnitř volané funkce, pouze z ní ven.</p>
+
+<p>S typem BLOB se zachází stejně jako s typem CLOB. S typem REAL lze zacházet stejně jako s DOUBLE PRECISION. S typy TIME, DATE a TIMESTAMP lze zacházet stejně jako s typem INT, ale na straně externí rutiny je nutné správné dekódování hodnoty.</p>
+
+<p>Externí rutině lze předat jako parametr hodnotu proměnné velikosti (BLOB, CLOB). Hodnotu lze měnit, nesmí však zvětšit svoji velikost.</p>
+
+<p><i>Pozor!</i></p>
+
+<p><i>Nedodržení těchto konvencí (záměna IN a OUT/INOUT v deklaraci externí rutiny) může vést k přepsání paměti a pádu SQL serveru.</i></p>
+
+
+
+<table class="navigace" border="0" width="100%"  bgcolor="#FFFFBF"><tr> <td
+width="20" align="center"><img class="floatno" src="../images/prev.gif"
+width="15" height="13" alt="&lt;&shy;" title="Předcházející téma"
+border="0"></td><td width="25%"><a
+href="HE_SQL2_DROPPROCEDURE.htm">Zrušení rutiny (DROP PROCEDURE | FUNCTION)</a></td> <td width="25%"
+align="right"><img class="floatno" src="../images/up.gif" width="13"
+height="15" alt="Nahoru" title="O jednu úroveň výš" border="0"
+align="middle"></td><td width="25%"><a href="HE_SQL2_STOREDPROCEDURE.htm">Rutiny uložené na serveru</a></td>
+<td width="25%" align="right"><a
+href="../xml/html/dllfolders.html">Určení adresářů s DLL knihovnami pro SQL server</a></td><td width="20"
+align="center"><img class="floatno" src="../images/next.gif" width="15"
+height="13" alt="&shy;&gt;" title="Následující téma" border="0"></td>
+</tr></table>
+</body>
+</html>

@@ -1,0 +1,584 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" dir="ltr" lang="cs-CZ"><head profile="http://gmpg.org/xfn/11">
+
+
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Webové aplikace » Uložené procedury (stored procedures) v MySQL</title>
+
+
+
+<meta name="generator" content="WordPress 2.2.1"><!-- leave this for stats --> 
+
+<link rel="stylesheet" href="Webov%C3%A9%20aplikace%20%C2%BB%20Ulo%C5%BEen%C3%A9%20procedury%20%28stored%20procedures%29%20v%20MySQL_soubory/style.css" type="text/css" media="screen">
+<link rel="alternate" type="application/rss+xml" title="RSS 2.0" href="http://weboveaplikace.info/feed/">
+<link rel="pingback" href="http://weboveaplikace.info/xmlrpc.php">
+<link rel="shortcut icon" type="image/x-icon" href="http://weboveaplikace.info/wp-content/themes/cerny/images/favicon.ico">
+<script type="text/javascript" src="Webov%C3%A9%20aplikace%20%C2%BB%20Ulo%C5%BEen%C3%A9%20procedury%20%28stored%20procedures%29%20v%20MySQL_soubory/naseptavac.js"></script>
+
+
+
+
+
+
+	<link rel="EditURI" type="application/rsd+xml" title="RSD" href="http://weboveaplikace.info/xmlrpc.php?rsd">
+<link rel="stylesheet" href="Webov%C3%A9%20aplikace%20%C2%BB%20Ulo%C5%BEen%C3%A9%20procedury%20%28stored%20procedures%29%20v%20MySQL_soubory/slimbox.css" type="text/css" media="screen">
+<script type="text/javascript" src="Webov%C3%A9%20aplikace%20%C2%BB%20Ulo%C5%BEen%C3%A9%20procedury%20%28stored%20procedures%29%20v%20MySQL_soubory/mootools.js"></script>
+<script type="text/javascript" src="Webov%C3%A9%20aplikace%20%C2%BB%20Ulo%C5%BEen%C3%A9%20procedury%20%28stored%20procedures%29%20v%20MySQL_soubory/slimbox.js"></script>
+<link rel="stylesheet" href="Webov%C3%A9%20aplikace%20%C2%BB%20Ulo%C5%BEen%C3%A9%20procedury%20%28stored%20procedures%29%20v%20MySQL_soubory/syntax_hilite_css.css" type="text/css" media="all"></head><body onclick="bodyclick(event)">
+
+
+<div id="header">
+	<div id="headerimg">
+		<h1><a href="http://weboveaplikace.info/">Webové aplikace</a></h1>
+		<div class="description">Webové aplikace a vše kolem nich…</div>
+	</div>
+</div>
+<div id="header2">
+	<div id="inheader">
+		<a href="http://weboveaplikace.info/"><img src="Webov%C3%A9%20aplikace%20%C2%BB%20Ulo%C5%BEen%C3%A9%20procedury%20%28stored%20procedures%29%20v%20MySQL_soubory/cernahlavicka.jpg"></a>
+	</div>	
+</div>
+<hr>
+<div id="page">
+
+	<div id="content" class="widecolumn">
+<div id="goorektop">
+<script type="text/javascript"><!--
+google_ad_client = "pub-1775260309320795";
+//StrankaNahore
+google_ad_slot = "9654690702";
+google_ad_width = 468;
+google_ad_height = 60;
+//--></script>
+<script type="text/javascript" src="Webov%C3%A9%20aplikace%20%C2%BB%20Ulo%C5%BEen%C3%A9%20procedury%20%28stored%20procedures%29%20v%20MySQL_soubory/show_ads.js">
+</script><iframe name="google_ads_frame" src="Webov%C3%A9%20aplikace%20%C2%BB%20Ulo%C5%BEen%C3%A9%20procedury%20%28stored%20procedures%29%20v%20MySQL_soubory/ads.htm" marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" frameborder="0" height="60" scrolling="no" width="468"></iframe>
+</div>
+	
+		<div class="navigation">
+			<div class="alignleft">« <a href="http://weboveaplikace.info/2008/01/17/vim-najdi-a-nahrad/">VIM - najdi a nahraď</a></div>
+			<div class="alignright"><a href="http://weboveaplikace.info/2008/02/01/recenze-redakcniho-systemu-joomla-15/">Recenze redakčního systému Joomla! 1.5</a> »</div>
+		</div>
+
+
+		<div class="post" id="post-19">
+			<h2><a href="http://weboveaplikace.info/2008/01/25/procedury-v-mysql/" rel="bookmark" title="Permanent Link: Uložené procedury (stored procedures) v MySQL">Uložené procedury (stored procedures) v MySQL</a></h2>
+
+			<div class="entry">
+				<p>V článku <a href="http://weboveaplikace.info/2007/12/08/kurzory-v-mysql/">Kurzory v MySQL</a>
+jsem pro předvedení funkčních příkladů použil jednu z programových
+jednotek MySQL. Konkrétně stored procedure, tedy uloženou proceduru. V
+tomto článku bych se jim chtěl věnovat trochu blíže.<br>
+Procedury jsou programové jednotky určené pro opakované spouštění skupiny příkazů. <span id="more-19"></span>Jejich kód je uložený na serveru a je zkompilovaný pro rychlejší vykonání.<br>
+Procedury mohou obsahovat vstupní parametry. Pokud však nadefinujeme
+proceduru s parametrem, nelze jí poté volat bez parametru. Stejně tak
+volání procedury, která nemá vstupní parametr, skončí chybou, pokud se
+jí budeme snažit použít s parametrem.<br>
+Procedury nevrací žádnou hodnotu. Nelze je tedy použít jako součást
+vykonávaných dotazů. Je však možné je použít uvnitř dalších
+programových jednotek. Což může být vhodné u procedur, které modifikují
+nějaká data.</p>
+<p>Volání procedur se provádí příkazem:<br>
+<code>CALL jmenoProcedury([parametr1, parametr2]);</code><br>
+Smazání procedury se provede pomocí:<br>
+<code>DROP PROCEDURE jmenoProcedury;</code></p>
+<p>Vytvoření a použití procedur ukážu opět na několika příkladech</p>
+<h2>Příprava databáze</h2>
+<p>Vytvoření databáze</p>
+<div class="syntax_hilite">
+<div id="mysql-1">
+<div class="mysql"><span style="color: rgb(153, 51, 51); font-weight: bold;">CREATE DATABASE</span> <span style="color: rgb(255, 0, 0);">'test_procedura'</span>;</div>
+</div>
+</div>
+<p></p>
+<p>Vytvoření tabulek</p>
+<div class="syntax_hilite">
+<div id="mysql-2">
+<div class="mysql"><span style="color: rgb(153, 51, 51); font-weight: bold;">CREATE TABLE</span> `studenti` <span style="color: rgb(102, 204, 102);">(</span><br>
+&nbsp; `rod_cislo` <span style="color: rgb(170, 153, 51); font-weight: bold;">VARCHAR</span><span style="color: rgb(102, 204, 102);">(</span><span style="color: rgb(204, 102, 204);">11</span><span style="color: rgb(102, 204, 102);">)</span> <span style="color: rgb(170, 51, 153); font-weight: bold;">NOT NULL</span>,<br>
+&nbsp; `jmeno` <span style="color: rgb(170, 153, 51); font-weight: bold;">VARCHAR</span><span style="color: rgb(102, 204, 102);">(</span><span style="color: rgb(204, 102, 204);">15</span><span style="color: rgb(102, 204, 102);">)</span> <span style="color: rgb(170, 51, 153); font-weight: bold;">NOT NULL</span>,<br>
+&nbsp; `prijmeni` <span style="color: rgb(170, 153, 51); font-weight: bold;">VARCHAR</span><span style="color: rgb(102, 204, 102);">(</span><span style="color: rgb(204, 102, 204);">15</span><span style="color: rgb(102, 204, 102);">)</span> <span style="color: rgb(170, 51, 153); font-weight: bold;">NOT NULL</span>,<br>
+&nbsp; `trida` <span style="color: rgb(170, 153, 51); font-weight: bold;">VARCHAR</span><span style="color: rgb(102, 204, 102);">(</span><span style="color: rgb(204, 102, 204);">4</span><span style="color: rgb(102, 204, 102);">)</span> <span style="color: rgb(170, 51, 153); font-weight: bold;">NOT NULL</span>,<br>
+&nbsp; <span style="color: rgb(153, 51, 51); font-weight: bold;">PRIMARY KEY</span>&nbsp; <span style="color: rgb(102, 204, 102);">(</span>`rod_cislo`<span style="color: rgb(102, 204, 102);">)</span><br>
+<span style="color: rgb(102, 204, 102);">)</span> ;
+<p><span style="color: rgb(153, 51, 51); font-weight: bold;">CREATE TABLE</span> `predmety` <span style="color: rgb(102, 204, 102);">(</span><br>
+&nbsp; `cis_predmetu` <span style="color: rgb(170, 153, 51); font-weight: bold;">TINYINT</span><span style="color: rgb(102, 204, 102);">(</span><span style="color: rgb(204, 102, 204);">2</span><span style="color: rgb(102, 204, 102);">)</span> <span style="color: rgb(170, 51, 153); font-weight: bold;">NOT NULL</span>,<br>
+&nbsp; `nazev` <span style="color: rgb(170, 153, 51); font-weight: bold;">VARCHAR</span><span style="color: rgb(102, 204, 102);">(</span><span style="color: rgb(204, 102, 204);">15</span><span style="color: rgb(102, 204, 102);">)</span> <span style="color: rgb(170, 51, 153); font-weight: bold;">NOT NULL</span>,<br>
+&nbsp; <span style="color: rgb(153, 51, 51); font-weight: bold;">PRIMARY KEY</span>&nbsp; <span style="color: rgb(102, 204, 102);">(</span>`cis_predmetu`<span style="color: rgb(102, 204, 102);">)</span><br>
+<span style="color: rgb(102, 204, 102);">)</span>;</p>
+<p><span style="color: rgb(153, 51, 51); font-weight: bold;">CREATE TABLE</span> `znamky` <span style="color: rgb(102, 204, 102);">(</span><br>
+&nbsp; `rod_cislo` <span style="color: rgb(170, 153, 51); font-weight: bold;">VARCHAR</span><span style="color: rgb(102, 204, 102);">(</span><span style="color: rgb(204, 102, 204);">11</span><span style="color: rgb(102, 204, 102);">)</span> <span style="color: rgb(170, 51, 153); font-weight: bold;">NOT NULL</span>,<br>
+&nbsp; `cis_predmetu` <span style="color: rgb(170, 153, 51); font-weight: bold;">TINYINT</span><span style="color: rgb(102, 204, 102);">(</span><span style="color: rgb(204, 102, 204);">2</span><span style="color: rgb(102, 204, 102);">)</span> <span style="color: rgb(170, 51, 153); font-weight: bold;">NOT NULL</span>,<br>
+&nbsp; `znamka` <span style="color: rgb(170, 153, 51); font-weight: bold;">TINYINT</span><span style="color: rgb(102, 204, 102);">(</span><span style="color: rgb(204, 102, 204);">1</span><span style="color: rgb(102, 204, 102);">)</span> <span style="color: rgb(170, 51, 153); font-weight: bold;">NOT NULL</span>,<br>
+&nbsp; <span style="color: rgb(153, 51, 51); font-weight: bold;">PRIMARY KEY</span>&nbsp; <span style="color: rgb(102, 204, 102);">(</span>`rod_cislo`,`cis_predmetu`<span style="color: rgb(102, 204, 102);">)</span><br>
+<span style="color: rgb(102, 204, 102);">)</span>;</p></div>
+</div>
+</div>
+<p></p>
+<p>Naplnění tabulek testovacími daty (kvůli množství záznamů v tabulce <code>znamky</code>, jsem uvedl insert jen pro jednoho studenta)</p>
+<div class="syntax_hilite">
+<div id="mysql-3">
+<div class="mysql"><span style="color: rgb(153, 51, 51); font-weight: bold;">INSERT</span> <span style="color: rgb(153, 51, 51); font-weight: bold;">INTO</span> `studenti` <span style="color: rgb(102, 204, 102);">(</span>`rod_cislo`, `jmeno`, `prijmeni`, `trida`<span style="color: rgb(102, 204, 102);">)</span> <span style="color: rgb(153, 51, 51); font-weight: bold;">VALUES</span><br>
+<span style="color: rgb(102, 204, 102);">(</span><span style="color: rgb(255, 0, 0);">'886114/3871'</span>, <span style="color: rgb(255, 0, 0);">'Petra'</span>, <span style="color: rgb(255, 0, 0);">'B'</span>, <span style="color: rgb(255, 0, 0);">'8A'</span><span style="color: rgb(102, 204, 102);">)</span>,<br>
+<span style="color: rgb(102, 204, 102);">(</span><span style="color: rgb(255, 0, 0);">'890702/2587'</span>, <span style="color: rgb(255, 0, 0);">'Marek'</span>, <span style="color: rgb(255, 0, 0);">'P'</span>, <span style="color: rgb(255, 0, 0);">'8B'</span><span style="color: rgb(102, 204, 102);">)</span>,<br>
+<span style="color: rgb(102, 204, 102);">(</span><span style="color: rgb(255, 0, 0);">'881122/9654'</span>, <span style="color: rgb(255, 0, 0);">'Honza'</span>, <span style="color: rgb(255, 0, 0);">'U'</span>, <span style="color: rgb(255, 0, 0);">'8B'</span><span style="color: rgb(102, 204, 102);">)</span>,<br>
+<span style="color: rgb(102, 204, 102);">(</span><span style="color: rgb(255, 0, 0);">'870826/8742'</span>, <span style="color: rgb(255, 0, 0);">'Petr'</span>, <span style="color: rgb(255, 0, 0);">'J'</span>, <span style="color: rgb(255, 0, 0);">'8A'</span><span style="color: rgb(102, 204, 102);">)</span>,<br>
+<span style="color: rgb(102, 204, 102);">(</span><span style="color: rgb(255, 0, 0);">'880828/5141'</span>, <span style="color: rgb(255, 0, 0);">'Jarek'</span>, <span style="color: rgb(255, 0, 0);">'M'</span>, <span style="color: rgb(255, 0, 0);">'8A'</span><span style="color: rgb(102, 204, 102);">)</span>,<br>
+<span style="color: rgb(102, 204, 102);">(</span><span style="color: rgb(255, 0, 0);">'895502/6574'</span>, <span style="color: rgb(255, 0, 0);">'Jana'</span>, <span style="color: rgb(255, 0, 0);">'N'</span>, <span style="color: rgb(255, 0, 0);">'8A'</span><span style="color: rgb(102, 204, 102);">)</span>,<br>
+<span style="color: rgb(102, 204, 102);">(</span><span style="color: rgb(255, 0, 0);">'876130/6871'</span>, <span style="color: rgb(255, 0, 0);">'Veronika'</span>, <span style="color: rgb(255, 0, 0);">'B'</span>, <span style="color: rgb(255, 0, 0);">'8A'</span><span style="color: rgb(102, 204, 102);">)</span>,<br>
+<span style="color: rgb(102, 204, 102);">(</span><span style="color: rgb(255, 0, 0);">'881206/5741'</span>, <span style="color: rgb(255, 0, 0);">'Mirek'</span>, <span style="color: rgb(255, 0, 0);">'S'</span>, <span style="color: rgb(255, 0, 0);">'8B'</span><span style="color: rgb(102, 204, 102);">)</span>,<br>
+<span style="color: rgb(102, 204, 102);">(</span><span style="color: rgb(255, 0, 0);">'896015/5874'</span>, <span style="color: rgb(255, 0, 0);">'Olga'</span>, <span style="color: rgb(255, 0, 0);">'H'</span>, <span style="color: rgb(255, 0, 0);">'8B'</span><span style="color: rgb(102, 204, 102);">)</span>,<br>
+<span style="color: rgb(102, 204, 102);">(</span><span style="color: rgb(255, 0, 0);">'881027/6571'</span>, <span style="color: rgb(255, 0, 0);">'Rudolf'</span>, <span style="color: rgb(255, 0, 0);">'E'</span>, <span style="color: rgb(255, 0, 0);">'8B'</span><span style="color: rgb(102, 204, 102);">)</span>;
+<p><span style="color: rgb(153, 51, 51); font-weight: bold;">INSERT</span> <span style="color: rgb(153, 51, 51); font-weight: bold;">INTO</span> `predmety` <span style="color: rgb(102, 204, 102);">(</span>`cis_predmetu`, `nazev`<span style="color: rgb(102, 204, 102);">)</span> <span style="color: rgb(153, 51, 51); font-weight: bold;">VALUES</span><br>
+<span style="color: rgb(102, 204, 102);">(</span><span style="color: rgb(204, 102, 204);">1</span>, <span style="color: rgb(255, 0, 0);">'matematika'</span><span style="color: rgb(102, 204, 102);">)</span>,<br>
+<span style="color: rgb(102, 204, 102);">(</span><span style="color: rgb(204, 102, 204);">2</span>, <span style="color: rgb(255, 0, 0);">'cestina'</span><span style="color: rgb(102, 204, 102);">)</span>,<br>
+<span style="color: rgb(102, 204, 102);">(</span><span style="color: rgb(204, 102, 204);">3</span>, <span style="color: rgb(255, 0, 0);">'dejepis'</span><span style="color: rgb(102, 204, 102);">)</span>,<br>
+<span style="color: rgb(102, 204, 102);">(</span><span style="color: rgb(204, 102, 204);">4</span>, <span style="color: rgb(255, 0, 0);">'zemepis'</span><span style="color: rgb(102, 204, 102);">)</span>,<br>
+<span style="color: rgb(102, 204, 102);">(</span><span style="color: rgb(204, 102, 204);">5</span>, <span style="color: rgb(255, 0, 0);">'telocvik'</span><span style="color: rgb(102, 204, 102);">)</span>,<br>
+<span style="color: rgb(102, 204, 102);">(</span><span style="color: rgb(204, 102, 204);">6</span>, <span style="color: rgb(255, 0, 0);">'chemie'</span><span style="color: rgb(102, 204, 102);">)</span>;</p>
+<p><span style="color: rgb(153, 51, 51); font-weight: bold;">INSERT</span> <span style="color: rgb(153, 51, 51); font-weight: bold;">INTO</span> `znamky` <span style="color: rgb(102, 204, 102);">(</span>`rod_cislo`, `cis_predmetu`, `znamka`<span style="color: rgb(102, 204, 102);">)</span> <span style="color: rgb(153, 51, 51); font-weight: bold;">VALUES</span><br>
+<span style="color: rgb(102, 204, 102);">(</span><span style="color: rgb(255, 0, 0);">'886114/3871'</span>, <span style="color: rgb(204, 102, 204);">1</span>, <span style="color: rgb(204, 102, 204);">2</span><span style="color: rgb(102, 204, 102);">)</span>,<br>
+<span style="color: rgb(102, 204, 102);">(</span><span style="color: rgb(255, 0, 0);">'886114/3871'</span>, <span style="color: rgb(204, 102, 204);">2</span>, <span style="color: rgb(204, 102, 204);">1</span><span style="color: rgb(102, 204, 102);">)</span>,<br>
+<span style="color: rgb(102, 204, 102);">(</span><span style="color: rgb(255, 0, 0);">'886114/3871'</span>, <span style="color: rgb(204, 102, 204);">3</span>, <span style="color: rgb(204, 102, 204);">1</span><span style="color: rgb(102, 204, 102);">)</span>,<br>
+<span style="color: rgb(102, 204, 102);">(</span><span style="color: rgb(255, 0, 0);">'886114/3871'</span>, <span style="color: rgb(204, 102, 204);">4</span>, <span style="color: rgb(204, 102, 204);">2</span><span style="color: rgb(102, 204, 102);">)</span>,<br>
+<span style="color: rgb(102, 204, 102);">(</span><span style="color: rgb(255, 0, 0);">'886114/3871'</span>, <span style="color: rgb(204, 102, 204);">5</span>, <span style="color: rgb(204, 102, 204);">1</span><span style="color: rgb(102, 204, 102);">)</span>,<br>
+<span style="color: rgb(102, 204, 102);">(</span><span style="color: rgb(255, 0, 0);">'886114/3871'</span>, <span style="color: rgb(204, 102, 204);">6</span>, <span style="color: rgb(204, 102, 204);">1</span><span style="color: rgb(102, 204, 102);">)</span>;</p></div>
+</div>
+</div>
+<p></p>
+<h3>Příklad na proceduru bez parametrů</h3>
+<p>Vyznamenáni jsou vždy studenti, kteří mají průměr známek menší či
+roven 1.5 a nejhorší známku dvojku. Tato procedura projde všechny
+studenty a vypíše ty, kteří splňuji podmínky pro vyznamenání.</p>
+<div class="syntax_hilite">
+<div id="mysql-4">
+<div class="mysql">mysql&gt; DELIMITER //<br>
+mysql&gt; <span style="color: rgb(153, 51, 51); font-weight: bold;">CREATE PROCEDURE</span> vyznamenani<span style="color: rgb(102, 204, 102);">(</span><span style="color: rgb(102, 204, 102);">)</span><br>
+&nbsp; &nbsp; -&gt; <span style="color: rgb(153, 51, 51); font-weight: bold;">BEGIN</span><br>
+&nbsp; &nbsp; -&gt; <span style="color: rgb(153, 51, 51); font-weight: bold;">DECLARE</span> prumer <span style="color: rgb(170, 153, 51); font-weight: bold;">FLOAT</span><span style="color: rgb(102, 204, 102);">(</span><span style="color: rgb(204, 102, 204);">3</span><span style="color: rgb(102, 204, 102);">)</span>;<br>
+&nbsp; &nbsp; -&gt; <span style="color: rgb(153, 51, 51); font-weight: bold;">DECLARE</span> pocet_znamek <span style="color: rgb(170, 153, 51); font-weight: bold;">INT</span><span style="color: rgb(102, 204, 102);">(</span><span style="color: rgb(204, 102, 204);">2</span><span style="color: rgb(102, 204, 102);">)</span>;<br>
+&nbsp; &nbsp; -&gt; <span style="color: rgb(153, 51, 51); font-weight: bold;">DECLARE</span> soucet <span style="color: rgb(170, 153, 51); font-weight: bold;">INT</span><span style="color: rgb(102, 204, 102);">(</span><span style="color: rgb(204, 102, 204);">3</span><span style="color: rgb(102, 204, 102);">)</span>;<br>
+&nbsp; &nbsp; -&gt; <span style="color: rgb(153, 51, 51); font-weight: bold;">DECLARE</span> nejvetsi <span style="color: rgb(170, 153, 51); font-weight: bold;">TINYINT</span><span style="color: rgb(102, 204, 102);">(</span><span style="color: rgb(204, 102, 204);">1</span><span style="color: rgb(102, 204, 102);">)</span>;<br>
+&nbsp; &nbsp; -&gt; <br>
+&nbsp; &nbsp; -&gt; <span style="color: rgb(153, 51, 51); font-weight: bold;">DECLARE</span> done <span style="color: rgb(170, 153, 51); font-weight: bold;">BIT</span><span style="color: rgb(102, 204, 102);">(</span><span style="color: rgb(204, 102, 204);">1</span><span style="color: rgb(102, 204, 102);">)</span> <span style="color: rgb(170, 51, 153); font-weight: bold;">DEFAULT</span> <span style="color: rgb(204, 102, 204);">0</span>;<br>
+&nbsp; &nbsp; -&gt; <br>
+&nbsp; &nbsp; -&gt; <span style="color: rgb(153, 51, 51); font-weight: bold;">DECLARE</span> s_rod_cislo <span style="color: rgb(170, 153, 51); font-weight: bold;">VARCHAR</span><span style="color: rgb(102, 204, 102);">(</span><span style="color: rgb(204, 102, 204);">11</span><span style="color: rgb(102, 204, 102);">)</span>;<br>
+&nbsp; &nbsp; -&gt; <span style="color: rgb(153, 51, 51); font-weight: bold;">DECLARE</span> s_jmeno <span style="color: rgb(170, 153, 51); font-weight: bold;">VARCHAR</span><span style="color: rgb(102, 204, 102);">(</span><span style="color: rgb(204, 102, 204);">15</span><span style="color: rgb(102, 204, 102);">)</span>;<br>
+&nbsp; &nbsp; -&gt; <span style="color: rgb(153, 51, 51); font-weight: bold;">DECLARE</span> s_prijmeni <span style="color: rgb(170, 153, 51); font-weight: bold;">VARCHAR</span><span style="color: rgb(102, 204, 102);">(</span><span style="color: rgb(204, 102, 204);">15</span><span style="color: rgb(102, 204, 102);">)</span>;<br>
+&nbsp; &nbsp; -&gt; <span style="color: rgb(153, 51, 51); font-weight: bold;">DECLARE</span> s_trida <span style="color: rgb(170, 153, 51); font-weight: bold;">VARCHAR</span><span style="color: rgb(102, 204, 102);">(</span><span style="color: rgb(204, 102, 204);">4</span><span style="color: rgb(102, 204, 102);">)</span>;<br>
+&nbsp; &nbsp; -&gt; <br>
+&nbsp; &nbsp; -&gt; <span style="color: rgb(153, 51, 51); font-weight: bold;">DECLARE</span> student CURSOR FOR<br>
+&nbsp; &nbsp; -&gt; <span style="color: rgb(153, 51, 51); font-weight: bold;">SELECT</span> rod_cislo, jmeno, prijmeni, trida<br>
+&nbsp; &nbsp; -&gt; <span style="color: rgb(153, 51, 51); font-weight: bold;">FROM</span> studenti <span style="color: rgb(153, 51, 51); font-weight: bold;">ORDER</span> <span style="color: rgb(153, 51, 51); font-weight: bold;">BY</span> trida;<br>
+&nbsp; &nbsp; -&gt; <br>
+&nbsp; &nbsp; -&gt; <span style="color: rgb(153, 51, 51); font-weight: bold;">DECLARE</span> CONTINUE <span style="color: rgb(153, 51, 51); font-weight: bold;">HANDLER</span> FOR <span style="color: rgb(170, 51, 153); font-weight: bold;">NOT</span> FOUND <span style="color: rgb(153, 51, 51); font-weight: bold;">SET</span> done = <span style="color: rgb(204, 102, 204);">1</span>;<br>
+&nbsp; &nbsp; -&gt; <br>
+&nbsp; &nbsp; -&gt; <span style="color: rgb(153, 51, 51); font-weight: bold;">CREATE TABLE</span> vystup<span style="color: rgb(102, 204, 102);">(</span><br>
+&nbsp; &nbsp; -&gt; jmeno <span style="color: rgb(170, 153, 51); font-weight: bold;">VARCHAR</span><span style="color: rgb(102, 204, 102);">(</span><span style="color: rgb(204, 102, 204);">15</span><span style="color: rgb(102, 204, 102);">)</span>,<br>
+&nbsp; &nbsp; -&gt; prijmeni <span style="color: rgb(170, 153, 51); font-weight: bold;">VARCHAR</span><span style="color: rgb(102, 204, 102);">(</span><span style="color: rgb(204, 102, 204);">15</span><span style="color: rgb(102, 204, 102);">)</span>,<br>
+&nbsp; &nbsp; -&gt; trida <span style="color: rgb(170, 153, 51); font-weight: bold;">VARCHAR</span><span style="color: rgb(102, 204, 102);">(</span><span style="color: rgb(204, 102, 204);">4</span><span style="color: rgb(102, 204, 102);">)</span>,<br>
+&nbsp; &nbsp; -&gt; prumer <span style="color: rgb(170, 153, 51); font-weight: bold;">FLOAT</span><span style="color: rgb(102, 204, 102);">(</span><span style="color: rgb(204, 102, 204);">3</span><span style="color: rgb(102, 204, 102);">)</span><span style="color: rgb(102, 204, 102);">)</span>;<br>
+&nbsp; &nbsp; -&gt; <br>
+&nbsp; &nbsp; -&gt; OPEN student;<br>
+&nbsp; &nbsp; -&gt; student_loop: LOOP<br>
+&nbsp; &nbsp; -&gt; FETCH student <span style="color: rgb(153, 51, 51); font-weight: bold;">INTO</span> s_rod_cislo, s_jmeno, s_prijmeni, s_trida;<br>
+&nbsp; &nbsp; -&gt; IF done <span style="color: rgb(153, 51, 51); font-weight: bold;">THEN</span> LEAVE student_loop; <span style="color: rgb(153, 51, 51); font-weight: bold;">END</span> IF;<br>
+&nbsp; &nbsp; -&gt; <br>
+&nbsp; &nbsp; -&gt; <span style="color: rgb(153, 51, 51); font-weight: bold;">SELECT</span> sum<span style="color: rgb(102, 204, 102);">(</span> znamka <span style="color: rgb(102, 204, 102);">)</span>, count<span style="color: rgb(102, 204, 102);">(</span> znamka <span style="color: rgb(102, 204, 102);">)</span>, max<span style="color: rgb(102, 204, 102);">(</span> znamka <span style="color: rgb(102, 204, 102);">)</span><br>
+&nbsp; &nbsp; -&gt; <span style="color: rgb(153, 51, 51); font-weight: bold;">INTO</span> soucet, pocet_znamek, nejvetsi<br>
+&nbsp; &nbsp; -&gt; <span style="color: rgb(153, 51, 51); font-weight: bold;">FROM</span> znamky <span style="color: rgb(153, 51, 51); font-weight: bold;">WHERE</span> rod_cislo = s_rod_cislo;<br>
+&nbsp; &nbsp; -&gt; <br>
+&nbsp; &nbsp; -&gt; <span style="color: rgb(153, 51, 51); font-weight: bold;">SET</span> prumer = soucet / pocet_znamek;<br>
+&nbsp; &nbsp; -&gt; IF prumer &lt;= <span style="color: rgb(204, 102, 204);">1</span>.<span style="color: rgb(204, 102, 204);">5</span> AND nejvetsi &lt;<span style="color: rgb(204, 102, 204);">3</span> <span style="color: rgb(153, 51, 51); font-weight: bold;">THEN</span><br>
+&nbsp; &nbsp; -&gt; <span style="color: rgb(153, 51, 51); font-weight: bold;">INSERT</span> <span style="color: rgb(153, 51, 51); font-weight: bold;">INTO</span> vystup<br>
+&nbsp; &nbsp; -&gt; <span style="color: rgb(153, 51, 51); font-weight: bold;">VALUES</span><span style="color: rgb(102, 204, 102);">(</span>s_jmeno,s_prijmeni,s_trida,<span style="color: rgb(153, 51, 51); font-weight: bold;">ROUND</span><span style="color: rgb(102, 204, 102);">(</span>prumer,<span style="color: rgb(204, 102, 204);">2</span><span style="color: rgb(102, 204, 102);">)</span><span style="color: rgb(102, 204, 102);">)</span>;<br>
+&nbsp; &nbsp; -&gt; <span style="color: rgb(153, 51, 51); font-weight: bold;">END</span> IF;<br>
+&nbsp; &nbsp; -&gt; <br>
+&nbsp; &nbsp; -&gt; <span style="color: rgb(153, 51, 51); font-weight: bold;">END</span> LOOP student_loop;<br>
+&nbsp; &nbsp; -&gt; CLOSE student;<br>
+&nbsp; &nbsp; -&gt; <br>
+&nbsp; &nbsp; -&gt; <span style="color: rgb(153, 51, 51); font-weight: bold;">SELECT</span> * <span style="color: rgb(153, 51, 51); font-weight: bold;">FROM</span> vystup;<br>
+&nbsp; &nbsp; -&gt; <span style="color: rgb(153, 51, 51); font-weight: bold;">DROP TABLE</span> vystup;<br>
+&nbsp; &nbsp; -&gt; <span style="color: rgb(153, 51, 51); font-weight: bold;">END</span>;//<br>
+Query OK, <span style="color: rgb(204, 102, 204);">0</span> rows affected <span style="color: rgb(102, 204, 102);">(</span><span style="color: rgb(204, 102, 204);">0</span>.<span style="color: rgb(204, 102, 204);">00</span> sec<span style="color: rgb(102, 204, 102);">)</span>
+<p>mysql&gt; DELIMITER ;</p></div>
+</div>
+</div>
+<p>
+Na začátku procedury jsou uvedeny deklarace proměnných. Následuje deklarace <a href="http://weboveaplikace.info/2007/12/08/kurzory-v-mysql/#explicitni">explicitního kurzoru</a>,
+do kterého jsou načteny údaje o studentech. Dále je vytvořena tabulka
+pro ukládání vyznamenaných studentů. Ta bude na konci procedury smazána.<br>
+Zde by šla použít také dočasná tabulka, která se automaticky smaže po
+ukončení spojení s MySQL serverem. Ovšem v případě, že pracujete v
+MySQL konzoli, a budete chtít proceduru spustit dvakrát za sebou,
+skončíte na chybě: <code>ERROR 1050 (42S01): Table 'vystup' already exists</code>.
+Spojení se serverem totiž nebylo ukončeno a tak se dočasná tabulka
+nesmazala. Pokud by jste se přesto rozhodli pro dočasnou tabulku, stačí
+upravit příkaz na její vytvoření na <code>CREATE TEMPORARY TABLE vystup</code>. Příkaz <code>DROP TABLE vystup;</code> na konci procedury by pak nebyl potřeba.<br>
+V cyklu, který čte záznamy z kurzoru <code>student</code> je použit <a href="http://weboveaplikace.info/2007/12/08/kurzory-v-mysql/#implicitni">implicitni kurzor</a>,
+načítající údaje o známkách studenta. Pokud známky vyhovují podmínkám
+pro vyznamenání, je student přidán do tabulky pro výstup.</p>
+<p>Z mých testovacích dat, vybere procedura tyto studenty, kteří splňují podmínky pro vyznamenání:</p>
+<div class="syntax_hilite">
+<div id="mysql-5">
+<div class="mysql">mysql&gt; <span style="color: rgb(153, 51, 51); font-weight: bold;">CALL</span> vyznamenani<span style="color: rgb(102, 204, 102);">(</span><span style="color: rgb(102, 204, 102);">)</span>;<br>
++<span style="color: rgb(128, 128, 128); font-style: italic;">----------+----------+-------+--------+</span><br>
+| jmeno&nbsp; &nbsp; | prijmeni | trida | prumer |<br>
++<span style="color: rgb(128, 128, 128); font-style: italic;">----------+----------+-------+--------+</span><br>
+| Petra&nbsp; &nbsp; | B&nbsp; &nbsp; &nbsp; &nbsp; | 8A&nbsp; &nbsp; |&nbsp; &nbsp;<span style="color: rgb(204, 102, 204);">1</span>.<span style="color: rgb(204, 102, 204);">33</span> | <br>
+| Veronika | B&nbsp; &nbsp; &nbsp; &nbsp; | 8A&nbsp; &nbsp; |&nbsp; &nbsp;<span style="color: rgb(204, 102, 204);">1</span>.<span style="color: rgb(204, 102, 204);">33</span> | <br>
+| Honza&nbsp; &nbsp; | U&nbsp; &nbsp; &nbsp; &nbsp; | 8B&nbsp; &nbsp; |&nbsp; &nbsp;<span style="color: rgb(204, 102, 204);">1</span>.<span style="color: rgb(204, 102, 204);">17</span> | <br>
++<span style="color: rgb(128, 128, 128); font-style: italic;">----------+----------+-------+--------+</span><br>
+<span style="color: rgb(204, 102, 204);">3</span> rows in <span style="color: rgb(153, 51, 51); font-weight: bold;">SET</span> <span style="color: rgb(102, 204, 102);">(</span><span style="color: rgb(204, 102, 204);">0</span>.<span style="color: rgb(204, 102, 204);">01</span> sec<span style="color: rgb(102, 204, 102);">)</span>
+<p>Query OK, <span style="color: rgb(204, 102, 204);">0</span> rows affected <span style="color: rgb(102, 204, 102);">(</span><span style="color: rgb(204, 102, 204);">0</span>.<span style="color: rgb(204, 102, 204);">01</span> sec<span style="color: rgb(102, 204, 102);">)</span></p></div>
+</div>
+</div>
+<p></p>
+<h3>Příklad na proceduru s parametrem</h3>
+<p>Tato procedura vypíše všechny studenty, a předměty, ze kterých mají známku 5. Vstupní parametr <code>p</code>
+je řetězec, označující třídu, ze které chcete studenty vypsat. Pokud je
+zadán parametr, který neodpovídá žádné třídě, jsou vypsáni "propadlíci"
+ze všech tříd.</p>
+<div class="syntax_hilite">
+<div id="mysql-6">
+<div class="mysql">mysql&gt; DELIMITER //<br>
+mysql&gt; <span style="color: rgb(153, 51, 51); font-weight: bold;">CREATE PROCEDURE</span> propadajici<span style="color: rgb(102, 204, 102);">(</span>p <span style="color: rgb(170, 153, 51); font-weight: bold;">VARCHAR</span><span style="color: rgb(102, 204, 102);">(</span><span style="color: rgb(204, 102, 204);">4</span><span style="color: rgb(102, 204, 102);">)</span><span style="color: rgb(102, 204, 102);">)</span><br>
+&nbsp; &nbsp; -&gt; <span style="color: rgb(153, 51, 51); font-weight: bold;">BEGIN</span><br>
+&nbsp; &nbsp; -&gt; <br>
+&nbsp; &nbsp; -&gt; <span style="color: rgb(153, 51, 51); font-weight: bold;">DECLARE</span> done <span style="color: rgb(170, 153, 51); font-weight: bold;">BIT</span><span style="color: rgb(102, 204, 102);">(</span><span style="color: rgb(204, 102, 204);">1</span><span style="color: rgb(102, 204, 102);">)</span> <span style="color: rgb(170, 51, 153); font-weight: bold;">DEFAULT</span> <span style="color: rgb(204, 102, 204);">0</span>;<br>
+&nbsp; &nbsp; -&gt; <span style="color: rgb(153, 51, 51); font-weight: bold;">DECLARE</span> parametr_ok <span style="color: rgb(170, 153, 51); font-weight: bold;">TINYINT</span><span style="color: rgb(102, 204, 102);">(</span><span style="color: rgb(204, 102, 204);">1</span><span style="color: rgb(102, 204, 102);">)</span>;<br>
+&nbsp; &nbsp; -&gt; <span style="color: rgb(153, 51, 51); font-weight: bold;">DECLARE</span> s_jmeno <span style="color: rgb(170, 153, 51); font-weight: bold;">VARCHAR</span><span style="color: rgb(102, 204, 102);">(</span><span style="color: rgb(204, 102, 204);">15</span><span style="color: rgb(102, 204, 102);">)</span>;<br>
+&nbsp; &nbsp; -&gt; <span style="color: rgb(153, 51, 51); font-weight: bold;">DECLARE</span> s_prijmeni <span style="color: rgb(170, 153, 51); font-weight: bold;">VARCHAR</span><span style="color: rgb(102, 204, 102);">(</span><span style="color: rgb(204, 102, 204);">15</span><span style="color: rgb(102, 204, 102);">)</span>;<br>
+&nbsp; &nbsp; -&gt; <span style="color: rgb(153, 51, 51); font-weight: bold;">DECLARE</span> s_trida <span style="color: rgb(170, 153, 51); font-weight: bold;">VARCHAR</span><span style="color: rgb(102, 204, 102);">(</span><span style="color: rgb(204, 102, 204);">4</span><span style="color: rgb(102, 204, 102);">)</span>;<br>
+&nbsp; &nbsp; -&gt; <span style="color: rgb(153, 51, 51); font-weight: bold;">DECLARE</span> s_nazev <span style="color: rgb(170, 153, 51); font-weight: bold;">VARCHAR</span><span style="color: rgb(102, 204, 102);">(</span><span style="color: rgb(204, 102, 204);">15</span><span style="color: rgb(102, 204, 102);">)</span>;<br>
+&nbsp; &nbsp; -&gt; <br>
+&nbsp; &nbsp; -&gt; <span style="color: rgb(153, 51, 51); font-weight: bold;">DECLARE</span> studenti CURSOR FOR<br>
+&nbsp; &nbsp; -&gt; <span style="color: rgb(153, 51, 51); font-weight: bold;">SELECT</span> jmeno, prijmeni, trida, nazev<br>
+&nbsp; &nbsp; -&gt; <span style="color: rgb(153, 51, 51); font-weight: bold;">FROM</span> znamky z, studenti s, predmety p<br>
+&nbsp; &nbsp; -&gt; <span style="color: rgb(153, 51, 51); font-weight: bold;">WHERE</span> z.rod_cislo = s.rod_cislo<br>
+&nbsp; &nbsp; -&gt; AND z.cis_predmetu = p.cis_predmetu<br>
+&nbsp; &nbsp; -&gt; AND znamka = <span style="color: rgb(204, 102, 204);">5</span>;<br>
+&nbsp; &nbsp; -&gt; <br>
+&nbsp; &nbsp; -&gt; <span style="color: rgb(153, 51, 51); font-weight: bold;">DECLARE</span> CONTINUE <span style="color: rgb(153, 51, 51); font-weight: bold;">HANDLER</span> FOR <span style="color: rgb(170, 51, 153); font-weight: bold;">NOT</span> FOUND <span style="color: rgb(153, 51, 51); font-weight: bold;">SET</span> done = <span style="color: rgb(204, 102, 204);">1</span>;<br>
+&nbsp; &nbsp; -&gt; <br>
+&nbsp; &nbsp; -&gt; <span style="color: rgb(153, 51, 51); font-weight: bold;">SELECT</span> COUNT<span style="color: rgb(102, 204, 102);">(</span>*<span style="color: rgb(102, 204, 102);">)</span> <span style="color: rgb(153, 51, 51); font-weight: bold;">INTO</span> parametr_ok<br>
+&nbsp; &nbsp; -&gt; <span style="color: rgb(153, 51, 51); font-weight: bold;">FROM</span> studenti <span style="color: rgb(153, 51, 51); font-weight: bold;">WHERE</span> trida = p;<br>
+&nbsp; &nbsp; -&gt; <br>
+&nbsp; &nbsp; -&gt; <span style="color: rgb(153, 51, 51); font-weight: bold;">CREATE TABLE</span> vystup<span style="color: rgb(102, 204, 102);">(</span><br>
+&nbsp; &nbsp; -&gt; jmeno <span style="color: rgb(170, 153, 51); font-weight: bold;">VARCHAR</span><span style="color: rgb(102, 204, 102);">(</span><span style="color: rgb(204, 102, 204);">15</span><span style="color: rgb(102, 204, 102);">)</span>,<br>
+&nbsp; &nbsp; -&gt; prijmeni <span style="color: rgb(170, 153, 51); font-weight: bold;">VARCHAR</span><span style="color: rgb(102, 204, 102);">(</span><span style="color: rgb(204, 102, 204);">15</span><span style="color: rgb(102, 204, 102);">)</span>,<br>
+&nbsp; &nbsp; -&gt; trida <span style="color: rgb(170, 153, 51); font-weight: bold;">VARCHAR</span><span style="color: rgb(102, 204, 102);">(</span><span style="color: rgb(204, 102, 204);">4</span><span style="color: rgb(102, 204, 102);">)</span>,<br>
+&nbsp; &nbsp; -&gt; predmet <span style="color: rgb(170, 153, 51); font-weight: bold;">VARCHAR</span><span style="color: rgb(102, 204, 102);">(</span><span style="color: rgb(204, 102, 204);">15</span><span style="color: rgb(102, 204, 102);">)</span><span style="color: rgb(102, 204, 102);">)</span>;<br>
+&nbsp; &nbsp; -&gt; <br>
+&nbsp; &nbsp; -&gt; OPEN studenti;<br>
+&nbsp; &nbsp; -&gt; studenti_loop: LOOP<br>
+&nbsp; &nbsp; -&gt; FETCH studenti <span style="color: rgb(153, 51, 51); font-weight: bold;">INTO</span> s_jmeno, s_prijmeni, s_trida, s_nazev;<br>
+&nbsp; &nbsp; -&gt; IF done <span style="color: rgb(153, 51, 51); font-weight: bold;">THEN</span> LEAVE studenti_loop; <span style="color: rgb(153, 51, 51); font-weight: bold;">END</span> IF;<br>
+&nbsp; &nbsp; -&gt; IF s_trida = p OR parametr_ok = <span style="color: rgb(204, 102, 204);">0</span> <span style="color: rgb(153, 51, 51); font-weight: bold;">THEN</span><br>
+&nbsp; &nbsp; -&gt; <span style="color: rgb(153, 51, 51); font-weight: bold;">INSERT</span> <span style="color: rgb(153, 51, 51); font-weight: bold;">INTO</span> vystup <span style="color: rgb(153, 51, 51); font-weight: bold;">VALUES</span> <span style="color: rgb(102, 204, 102);">(</span>s_jmeno,s_prijmeni,s_trida,s_nazev<span style="color: rgb(102, 204, 102);">)</span>;<br>
+&nbsp; &nbsp; -&gt; <span style="color: rgb(153, 51, 51); font-weight: bold;">END</span> IF;<br>
+&nbsp; &nbsp; -&gt; <span style="color: rgb(153, 51, 51); font-weight: bold;">END</span> LOOP studenti_loop;<br>
+&nbsp; &nbsp; -&gt; CLOSE studenti;<br>
+&nbsp; &nbsp; -&gt; <br>
+&nbsp; &nbsp; -&gt; <span style="color: rgb(153, 51, 51); font-weight: bold;">SELECT</span> * <span style="color: rgb(153, 51, 51); font-weight: bold;">FROM</span> vystup;<br>
+&nbsp; &nbsp; -&gt; <span style="color: rgb(153, 51, 51); font-weight: bold;">DROP TABLE</span> vystup;<br>
+&nbsp; &nbsp; -&gt; <span style="color: rgb(153, 51, 51); font-weight: bold;">END</span>;//<br>
+Query OK, <span style="color: rgb(204, 102, 204);">0</span> rows affected <span style="color: rgb(102, 204, 102);">(</span><span style="color: rgb(204, 102, 204);">0</span>.<span style="color: rgb(204, 102, 204);">00</span> sec<span style="color: rgb(102, 204, 102);">)</span>
+<p>mysql&gt; DELIMITER ;</p></div>
+</div>
+</div>
+<p>
+Procedura opět začíná deklarací proměnných, za kterými následuje <a href="http://weboveaplikace.info/2007/12/08/kurzory-v-mysql/#explicitni">explicitní kurzor</a> <code>studenti</code>, který pomocí klauzule <code>WHERE</code> spojuje všechny tři tabulky, a kurzor naplní potřebnými daty. <a href="http://weboveaplikace.info/2007/12/08/kurzory-v-mysql/#implicitni">Implicitni kurzor</a> poté do proměnné <code>parametr_ok</code> uloží počet výskytů řetězce v tabulce <code>studenti</code>, který byl vložen jako parametr procedury. Pokud je počet roven nule, tedy třída se v tabulce <code>studenti</code> nenachází, je tento parametr považován za neplatný a výpis propadajících studentů bude ze všech tříd.</p>
+<p>Výstup volání procedury <code>propadajici</code> s platnými parametry (třídy 8A a 8B) a s neplatným parametrem "8C":</p>
+<div class="syntax_hilite">
+<div id="mysql-7">
+<div class="mysql">mysql&gt; <span style="color: rgb(153, 51, 51); font-weight: bold;">CALL</span> propadajici<span style="color: rgb(102, 204, 102);">(</span><span style="color: rgb(255, 0, 0);">"8A"</span><span style="color: rgb(102, 204, 102);">)</span>;<br>
++<span style="color: rgb(128, 128, 128); font-style: italic;">-------+----------+-------+------------+</span><br>
+| jmeno | prijmeni | trida | predmet&nbsp; &nbsp; |<br>
++<span style="color: rgb(128, 128, 128); font-style: italic;">-------+----------+-------+------------+</span><br>
+| Jarek | M&nbsp; &nbsp; &nbsp; &nbsp; | 8A&nbsp; &nbsp; | matematika | <br>
+| Jana&nbsp; | N&nbsp; &nbsp; &nbsp; &nbsp; | 8A&nbsp; &nbsp; | dejepis&nbsp; &nbsp; | <br>
++<span style="color: rgb(128, 128, 128); font-style: italic;">-------+----------+-------+------------+</span><br>
+<span style="color: rgb(204, 102, 204);">2</span> rows in <span style="color: rgb(153, 51, 51); font-weight: bold;">SET</span> <span style="color: rgb(102, 204, 102);">(</span><span style="color: rgb(204, 102, 204);">0</span>.<span style="color: rgb(204, 102, 204);">00</span> sec<span style="color: rgb(102, 204, 102);">)</span>
+<p>Query OK, <span style="color: rgb(204, 102, 204);">0</span> rows affected <span style="color: rgb(102, 204, 102);">(</span><span style="color: rgb(204, 102, 204);">0</span>.<span style="color: rgb(204, 102, 204);">01</span> sec<span style="color: rgb(102, 204, 102);">)</span></p>
+<p>mysql&gt; <span style="color: rgb(153, 51, 51); font-weight: bold;">CALL</span> propadajici<span style="color: rgb(102, 204, 102);">(</span><span style="color: rgb(255, 0, 0);">"8B"</span><span style="color: rgb(102, 204, 102);">)</span>;<br>
++<span style="color: rgb(128, 128, 128); font-style: italic;">--------+----------+-------+---------+</span><br>
+| jmeno&nbsp; | prijmeni | trida | predmet |<br>
++<span style="color: rgb(128, 128, 128); font-style: italic;">--------+----------+-------+---------+</span><br>
+| Rudolf | E&nbsp; &nbsp; &nbsp; &nbsp; | 8B&nbsp; &nbsp; | zemepis | <br>
+| Rudolf | E&nbsp; &nbsp; &nbsp; &nbsp; | 8B&nbsp; &nbsp; | chemie&nbsp; | <br>
++<span style="color: rgb(128, 128, 128); font-style: italic;">--------+----------+-------+---------+</span><br>
+<span style="color: rgb(204, 102, 204);">2</span> rows in <span style="color: rgb(153, 51, 51); font-weight: bold;">SET</span> <span style="color: rgb(102, 204, 102);">(</span><span style="color: rgb(204, 102, 204);">0</span>.<span style="color: rgb(204, 102, 204);">02</span> sec<span style="color: rgb(102, 204, 102);">)</span></p>
+<p>Query OK, <span style="color: rgb(204, 102, 204);">0</span> rows affected <span style="color: rgb(102, 204, 102);">(</span><span style="color: rgb(204, 102, 204);">0</span>.<span style="color: rgb(204, 102, 204);">02</span> sec<span style="color: rgb(102, 204, 102);">)</span></p>
+<p>mysql&gt; <span style="color: rgb(153, 51, 51); font-weight: bold;">CALL</span> propadajici<span style="color: rgb(102, 204, 102);">(</span><span style="color: rgb(255, 0, 0);">"8C"</span><span style="color: rgb(102, 204, 102);">)</span>;<br>
++<span style="color: rgb(128, 128, 128); font-style: italic;">--------+----------+-------+------------+</span><br>
+| jmeno&nbsp; | prijmeni | trida | predmet&nbsp; &nbsp; |<br>
++<span style="color: rgb(128, 128, 128); font-style: italic;">--------+----------+-------+------------+</span><br>
+| Jarek&nbsp; | M&nbsp; &nbsp; &nbsp; &nbsp; | 8A&nbsp; &nbsp; | matematika | <br>
+| Jana&nbsp; &nbsp;| N&nbsp; &nbsp; &nbsp; &nbsp; | 8A&nbsp; &nbsp; | dejepis&nbsp; &nbsp; | <br>
+| Rudolf | E&nbsp; &nbsp; &nbsp; &nbsp; | 8B&nbsp; &nbsp; | zemepis&nbsp; &nbsp; | <br>
+| Rudolf | E&nbsp; &nbsp; &nbsp; &nbsp; | 8B&nbsp; &nbsp; | chemie&nbsp; &nbsp; &nbsp;| <br>
++<span style="color: rgb(128, 128, 128); font-style: italic;">--------+----------+-------+------------+</span><br>
+<span style="color: rgb(204, 102, 204);">4</span> rows in <span style="color: rgb(153, 51, 51); font-weight: bold;">SET</span> <span style="color: rgb(102, 204, 102);">(</span><span style="color: rgb(204, 102, 204);">0</span>.<span style="color: rgb(204, 102, 204);">00</span> sec<span style="color: rgb(102, 204, 102);">)</span></p>
+<p>Query OK, <span style="color: rgb(204, 102, 204);">0</span> rows affected <span style="color: rgb(102, 204, 102);">(</span><span style="color: rgb(204, 102, 204);">0</span>.<span style="color: rgb(204, 102, 204);">00</span> sec<span style="color: rgb(102, 204, 102);">)</span></p></div>
+</div>
+</div>
+<p></p>
+<h3>Procedura volaná uvnitř programové jednotky</h3>
+<p>Tato procedura načte z tabulky <code>studenti</code> všechny třídy a ty pak v cyklu použije jako parametr dříve vytvořené procedury <code>propadajici</code>.</p>
+<div class="syntax_hilite">
+<div id="mysql-8">
+<div class="mysql">mysql&gt; DELIMITER //<br>
+mysql&gt; <span style="color: rgb(153, 51, 51); font-weight: bold;">CREATE PROCEDURE</span> test<span style="color: rgb(102, 204, 102);">(</span><span style="color: rgb(102, 204, 102);">)</span><br>
+&nbsp; &nbsp; -&gt; <span style="color: rgb(153, 51, 51); font-weight: bold;">BEGIN</span><br>
+&nbsp; &nbsp; -&gt; <br>
+&nbsp; &nbsp; -&gt; <span style="color: rgb(153, 51, 51); font-weight: bold;">DECLARE</span> done <span style="color: rgb(170, 153, 51); font-weight: bold;">BIT</span><span style="color: rgb(102, 204, 102);">(</span><span style="color: rgb(204, 102, 204);">1</span><span style="color: rgb(102, 204, 102);">)</span> <span style="color: rgb(170, 51, 153); font-weight: bold;">DEFAULT</span> <span style="color: rgb(204, 102, 204);">0</span>;<br>
+&nbsp; &nbsp; -&gt; <span style="color: rgb(153, 51, 51); font-weight: bold;">DECLARE</span> s_trida <span style="color: rgb(170, 153, 51); font-weight: bold;">VARCHAR</span><span style="color: rgb(102, 204, 102);">(</span><span style="color: rgb(204, 102, 204);">4</span><span style="color: rgb(102, 204, 102);">)</span>;<br>
+&nbsp; &nbsp; -&gt; <br>
+&nbsp; &nbsp; -&gt; <span style="color: rgb(153, 51, 51); font-weight: bold;">DECLARE</span> tridy CURSOR FOR<br>
+&nbsp; &nbsp; -&gt; <span style="color: rgb(153, 51, 51); font-weight: bold;">SELECT</span> trida <span style="color: rgb(153, 51, 51); font-weight: bold;">FROM</span> studenti<br>
+&nbsp; &nbsp; -&gt; <span style="color: rgb(153, 51, 51); font-weight: bold;">GROUP</span> <span style="color: rgb(153, 51, 51); font-weight: bold;">BY</span> trida;<br>
+&nbsp; &nbsp; -&gt; <br>
+&nbsp; &nbsp; -&gt; <span style="color: rgb(153, 51, 51); font-weight: bold;">DECLARE</span> CONTINUE <span style="color: rgb(153, 51, 51); font-weight: bold;">HANDLER</span> FOR <span style="color: rgb(170, 51, 153); font-weight: bold;">NOT</span> FOUND <span style="color: rgb(153, 51, 51); font-weight: bold;">SET</span> done = <span style="color: rgb(204, 102, 204);">1</span>;<br>
+&nbsp; &nbsp; -&gt; <br>
+&nbsp; &nbsp; -&gt; OPEN tridy;<br>
+&nbsp; &nbsp; -&gt; tridy_loop: LOOP<br>
+&nbsp; &nbsp; -&gt; FETCH tridy <span style="color: rgb(153, 51, 51); font-weight: bold;">INTO</span> s_trida;<br>
+&nbsp; &nbsp; -&gt; IF done <span style="color: rgb(153, 51, 51); font-weight: bold;">THEN</span> LEAVE tridy_loop; <span style="color: rgb(153, 51, 51); font-weight: bold;">END</span> IF;<br>
+&nbsp; &nbsp; -&gt; <span style="color: rgb(153, 51, 51); font-weight: bold;">CALL</span> propadajici<span style="color: rgb(102, 204, 102);">(</span>s_trida<span style="color: rgb(102, 204, 102);">)</span>;<br>
+&nbsp; &nbsp; -&gt; <span style="color: rgb(153, 51, 51); font-weight: bold;">END</span> LOOP tridy_loop;<br>
+&nbsp; &nbsp; -&gt; CLOSE tridy;<br>
+&nbsp; &nbsp; -&gt; <br>
+&nbsp; &nbsp; -&gt; <span style="color: rgb(153, 51, 51); font-weight: bold;">END</span>;//<br>
+Query OK, <span style="color: rgb(204, 102, 204);">0</span> rows affected <span style="color: rgb(102, 204, 102);">(</span><span style="color: rgb(204, 102, 204);">0</span>.<span style="color: rgb(204, 102, 204);">00</span> sec<span style="color: rgb(102, 204, 102);">)</span>
+<p>mysql&gt; DELIMITER ;</p>
+<p>mysql&gt; <span style="color: rgb(153, 51, 51); font-weight: bold;">CALL</span> test<span style="color: rgb(102, 204, 102);">(</span><span style="color: rgb(102, 204, 102);">)</span>;<br>
++<span style="color: rgb(128, 128, 128); font-style: italic;">-------+----------+-------+------------+</span><br>
+| jmeno | prijmeni | trida | predmet&nbsp; &nbsp; |<br>
++<span style="color: rgb(128, 128, 128); font-style: italic;">-------+----------+-------+------------+</span><br>
+| Jarek | M&nbsp; &nbsp; &nbsp; &nbsp; | 8A&nbsp; &nbsp; | matematika | <br>
+| Jana&nbsp; | N&nbsp; &nbsp; &nbsp; &nbsp; | 8A&nbsp; &nbsp; | dejepis&nbsp; &nbsp; | <br>
++<span style="color: rgb(128, 128, 128); font-style: italic;">-------+----------+-------+------------+</span><br>
+<span style="color: rgb(204, 102, 204);">2</span> rows in <span style="color: rgb(153, 51, 51); font-weight: bold;">SET</span> <span style="color: rgb(102, 204, 102);">(</span><span style="color: rgb(204, 102, 204);">0</span>.<span style="color: rgb(204, 102, 204);">01</span> sec<span style="color: rgb(102, 204, 102);">)</span></p>
+<p>+<span style="color: rgb(128, 128, 128); font-style: italic;">--------+----------+-------+---------+</span><br>
+| jmeno&nbsp; | prijmeni | trida | predmet |<br>
++<span style="color: rgb(128, 128, 128); font-style: italic;">--------+----------+-------+---------+</span><br>
+| Rudolf | E&nbsp; &nbsp; &nbsp; &nbsp; | 8B&nbsp; &nbsp; | zemepis | <br>
+| Rudolf | E&nbsp; &nbsp; &nbsp; &nbsp; | 8B&nbsp; &nbsp; | chemie&nbsp; | <br>
++<span style="color: rgb(128, 128, 128); font-style: italic;">--------+----------+-------+---------+</span><br>
+<span style="color: rgb(204, 102, 204);">2</span> rows in <span style="color: rgb(153, 51, 51); font-weight: bold;">SET</span> <span style="color: rgb(102, 204, 102);">(</span><span style="color: rgb(204, 102, 204);">0</span>.<span style="color: rgb(204, 102, 204);">02</span> sec<span style="color: rgb(102, 204, 102);">)</span></p>
+<p>Query OK, <span style="color: rgb(204, 102, 204);">0</span> rows affected <span style="color: rgb(102, 204, 102);">(</span><span style="color: rgb(204, 102, 204);">0</span>.<span style="color: rgb(204, 102, 204);">02</span> sec<span style="color: rgb(102, 204, 102);">)</span></p></div>
+</div>
+</div>
+<p>
+Takto použité volání procedury je v celku zbytečné (stejného efektu lze
+dosáhnout jednodušeji). Pokud by však procedura, volaná například v
+cyklu další programové jednotky, upravovala data, nad kterými
+programová jednotka pracuje, měl by tento způsob použití určitě svůj
+smysl.</p>
+
+				
+				<p class="postmetadata alt">
+					<small>
+						Tento článek byl publikován
+												dne 25. 1. 2008 (Pátek) v 03:14						v rubrice <a href="http://weboveaplikace.info/category/mysql/" title="Zobrazit všechny příspěvky v MySQL" rel="category tag">MySQL</a>.
+						Komentáře můžete sledovat přes <a href="http://weboveaplikace.info/2008/01/25/procedury-v-mysql/feed/">RSS 2.0</a> kanál.
+
+													Můžete zanechat svůj komentář.
+
+													<br>Pokud se Vám článek líbil, zalinkujte jej prosím:
+<script type="text/javascript">
+badge = '<a href="http://linkuj.cz/?id=linkuj&url=' + encodeURIComponent('http://weboveaplikace.info/2008/01/25/procedury-v-mysql/') + '&title=' + encodeURIComponent('Uložené procedury (stored procedures) v MySQL') + '"><img src="http://linkuj.cz/img/badge.png" border="0" title="Linkuj si !" alt="Linkuj si !" /></a>';
+document.writeln(badge);
+</script><a href="http://linkuj.cz/?id=linkuj&amp;url=http%3A%2F%2Fweboveaplikace.info%2F2008%2F01%2F25%2Fprocedury-v-mysql%2F&amp;title=Ulo%C5%BEen%C3%A9%20procedury%20%28stored%20procedures%29%20v%20MySQL"><img src="Webov%C3%A9%20aplikace%20%C2%BB%20Ulo%C5%BEen%C3%A9%20procedury%20%28stored%20procedures%29%20v%20MySQL_soubory/badge.png" title="Linkuj si !" alt="Linkuj si !" border="0"></a>
+
+						
+					</small>
+				</p>
+
+
+			</div>
+		</div>
+		<div class="navigation">
+			<div class="alignleft">« <a href="http://weboveaplikace.info/2008/01/17/vim-najdi-a-nahrad/">VIM - najdi a nahraď</a></div>
+			<div class="alignright"><a href="http://weboveaplikace.info/2008/02/01/recenze-redakcniho-systemu-joomla-15/">Recenze redakčního systému Joomla! 1.5</a> »</div>
+		</div>
+
+	
+<!-- You can start editing here. -->
+
+<h3 id="comments">Jeden komentář k článku “Uložené procedury (stored procedures) v MySQL”</h3>
+
+	<ol class="commentlist">
+
+	
+		<li class="alt" id="comment-598">
+			<cite><a href="http://myego.cz/" rel="external nofollow">Radek Hulán</a></cite> říká:
+						<br>
+
+			<small class="commentmetadata"><a href="#comment-598" title="">Leden 31, 2008 v 02:27</a> </small>
+
+			<p>Hezkej
+článek. Praktické použití triggerů a uložených procedur naráží ovšem na
+mizernou koncepci práv uživatele, kdy webhosting prostě CREATE TRIGGER
+nemůže povolit..</p>
+
+		</li>
+
+	
+	
+	</ol>
+
+ 
+
+
+<h3 id="respond">Zaklikněte komentář</h3>
+<div class="postreachclickcomments"><script style="display: none;" type="text/javascript" src="Webov%C3%A9%20aplikace%20%C2%BB%20Ulo%C5%BEen%C3%A9%20procedury%20%28stored%20procedures%29%20v%20MySQL_soubory/display_iframe.htm"></script></div><h3 id="respond">Zanechte komentář</h3>
+
+
+<form action="http://weboveaplikace.info/wp-comments-post.php" method="post" id="commentform">
+
+
+<p><input name="author" id="author" value="" size="22" tabindex="1" type="text">
+<label for="author"><small>Jméno (vyžadováno)</small></label></p>
+
+<p><input name="postovniadresa" id="email" value="" size="22" tabindex="2" type="text">
+<label for="email"><small>E–mail (nebude zobrazen) (vyžadováno)</small></label></p>
+
+<p><input name="url" id="url" value="" size="22" tabindex="3" type="text">
+<label for="url"><small>Web</small></label></p>
+
+
+<!--<p><small><strong>XHTML:</strong> You can use these tags: <code>&lt;a href=&quot;&quot; title=&quot;&quot;&gt; &lt;abbr title=&quot;&quot;&gt; &lt;acronym title=&quot;&quot;&gt; &lt;b&gt; &lt;blockquote cite=&quot;&quot;&gt; &lt;code&gt; &lt;em&gt; &lt;i&gt; &lt;strike&gt; &lt;strong&gt; </code></small></p>-->
+
+<p><textarea name="comment" id="comment" cols="100" rows="10" tabindex="4"></textarea></p>
+
+<p><input name="submit" id="submit" tabindex="5" value="Odeslat" type="submit">
+<input name="comment_post_ID" value="19" type="hidden">
+</p>
+<input name="email" id="email" value="" size="0" tabindex="-1" style="margin: 0pt; padding: 0pt; width: 0px; height: 0px; visibility: hidden;" type="text">
+</form>
+
+
+
+	
+	</div>
+	<div id="sidebar">
+		<ul>
+						<li>
+				<form method="get" id="searchform" action="http://weboveaplikace.info/">
+<div><input value="" name="s" id="s" onkeyup="vyhledejUdaje();" type="text">
+<input id="searchsubmit" value="Hledej" type="submit">
+<div id="nabidka" style="position: absolute;">
+                <table id="tabulkaUdaju">
+                    <tbody id="tabulkaUdajuTelo"><tr><td></td></tr></tbody>
+                </table>
+</div>
+</div>
+</form>
+			</li>
+
+			<!-- Author information is disabled per default. Uncomment and fill in your details if you want to use it.
+			<li><h2>Author</h2>
+			<p>A little something about you, the author. Nothing lengthy, just an overview.</p>
+			</li>
+			-->
+
+			
+			
+			<li><h2>Archiv</h2>
+				<ul>
+					<li><a href="http://weboveaplikace.info/2008/02/" title="Únor 2008">Únor 2008</a></li>
+	<li><a href="http://weboveaplikace.info/2008/01/" title="Leden 2008">Leden 2008</a></li>
+	<li><a href="http://weboveaplikace.info/2007/12/" title="Prosinec 2007">Prosinec 2007</a></li>
+	<li><a href="http://weboveaplikace.info/2007/11/" title="Listopad 2007">Listopad 2007</a></li>
+	<li><a href="http://weboveaplikace.info/2007/09/" title="Září 2007">Září 2007</a></li>
+	<li><a href="http://weboveaplikace.info/2007/08/" title="Srpen 2007">Srpen 2007</a></li>
+	<li><a href="http://weboveaplikace.info/2007/07/" title="Červenec 2007">Červenec 2007</a></li>
+				</ul>
+			</li>
+
+			<li class="categories"><h2>Kategorie</h2><ul>	<li><a href="http://weboveaplikace.info/category/fora/" title="Zobrazit všechny příspěvky zařazené do Fóra">Fóra</a> (1)
+</li>
+	<li><a href="http://weboveaplikace.info/category/instalace-cms/" title="Zobrazit všechny příspěvky zařazené do Instalace cms">Instalace cms</a> (4)
+</li>
+	<li><a href="http://weboveaplikace.info/category/mysql/" title="Zobrazit všechny příspěvky zařazené do MySQL">MySQL</a> (3)
+</li>
+	<li><a href="http://weboveaplikace.info/category/php/" title="Zobrazit všechny příspěvky zařazené do PHP">PHP</a> (3)
+</li>
+	<li><a href="http://weboveaplikace.info/category/redakcni-systemy/" title="Zobrazit všechny příspěvky zařazené do Redakční systémy">Redakční systémy</a> (4)
+</li>
+	<li><a href="http://weboveaplikace.info/category/vim/" title="Zobrazit všechny příspěvky zařazené do Vim">Vim</a> (3)
+</li>
+	<li><a href="http://weboveaplikace.info/category/wordpress/" title="Zobrazit všechny příspěvky zařazené do WordPress">WordPress</a> (2)
+</li>
+</ul></li>
+							<li id="linkcat-2" class="linkcat"><h2>Odkazy</h2>
+	<ul>
+<li><a href="http://forum.weboveaplikace.info/" title="Fórum - webové aplikace . info" target="_blank">Fórum</a></li>
+
+	</ul>
+</li>
+
+				<li><h2>Meta</h2>
+                <ul>
+                    <li><a href="http://weboveaplikace.info/">Home</a></li>
+										<li><a href="http://weboveaplikace.info/wp-login.php">Přihlášení</a></li>
+					<!--<li><a href="http://validator.w3.org/check/referer" title="This page validates as XHTML 1.0 Transitional">Valid <abbr title="eXtensible HyperText Markup Language">XHTML</abbr></a></li>-->
+					<!--<li><a href="http://gmpg.org/xfn/"><abbr title="XHTML Friends Network">XFN</abbr></a></li>-->
+					<li><a href="http://wordpress.org/" title="Powered by WordPress, state-of-the-art semantic personal publishing platform.">WordPress</a></li>
+									</ul>
+				</li>
+						
+					</ul>
+	</div>
+
+<div id="gooreksidebar">
+<script type="text/javascript"><!--
+google_ad_client = "pub-1775260309320795";
+//160x600,ClanekVpravoSloupec
+google_ad_slot = "5945210889";
+google_ad_width = 160;
+google_ad_height = 600;
+//--></script>
+<script type="text/javascript" src="Webov%C3%A9%20aplikace%20%C2%BB%20Ulo%C5%BEen%C3%A9%20procedury%20%28stored%20procedures%29%20v%20MySQL_soubory/show_ads.js">
+</script><iframe name="google_ads_frame" src="Webov%C3%A9%20aplikace%20%C2%BB%20Ulo%C5%BEen%C3%A9%20procedury%20%28stored%20procedures%29%20v%20MySQL_soubory/ads_002.htm" marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" frameborder="0" height="600" scrolling="no" width="160"></iframe>
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script><script src="Webov%C3%A9%20aplikace%20%C2%BB%20Ulo%C5%BEen%C3%A9%20procedury%20%28stored%20procedures%29%20v%20MySQL_soubory/ga.js" type="text/javascript"></script>
+</div>
+<hr>
+<div id="footer">
+<!-- If you'd like to support WordPress, having the "powered by" link somewhere on your blog is the best way, it's our only promotion or advertising. -->
+	<p>
+		Webové aplikace pohání
+		<a href="http://wordpress.org/">WordPress</a>
+		<br><a href="http://weboveaplikace.info/feed/">RSS kanál pro články</a>
+		a <a href="http://weboveaplikace.info/comments/feed/">RSS kanál pro komentáře</a>.
+		<!-- 27 queries. 0.408 seconds. -->
+<a href="http://technorati.com/faves?sub=addfavbtn&amp;add=http://weboveaplikace.info">Add to Technorati Favorites</a>
+	</p>
+</div>
+</div>
+
+<!-- toplist -->
+<a href="http://www.toplist.cz/"><script language="JavaScript" type="text/javascript">
+<!--
+document.write ('<img src="http://toplist.cz/dot.asp?id=561548&amp;http='+escape(document.referrer)+'" width="1" height="1" border=0 alt="TOPlist" />'); 
+//--></script><img src="Webov%C3%A9%20aplikace%20%C2%BB%20Ulo%C5%BEen%C3%A9%20procedury%20%28stored%20procedures%29%20v%20MySQL_soubory/dot.gif" alt="TOPlist" border="0" height="1" width="1"></a><noscript><img src="http://toplist.cz/dot.asp?id=561548" border="0"
+alt="TOPlist" width="1" height="1" /></noscript>
+<!-- toplist-end -->
+
+<!-- Gorgeous design by Michael Heilemann - http://binarybonsai.com/kubrick/ -->
+
+		
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script><script src="Webov%C3%A9%20aplikace%20%C2%BB%20Ulo%C5%BEen%C3%A9%20procedury%20%28stored%20procedures%29%20v%20MySQL_soubory/ga.js" type="text/javascript"></script>
+<script type="text/javascript">
+var pageTracker = _gat._getTracker("UA-3540339-1");
+pageTracker._initData();
+pageTracker._trackPageview();
+</script>
+<div style="visibility: hidden; opacity: 0;" id="lbOverlay"></div><div style="width: 250px; height: 250px; margin-left: -125px; display: none;" id="lbCenter"><div id="lbImage"><a style="display: none;" href="#" id="lbPrevLink"></a><a style="display: none;" href="#" id="lbNextLink"></a></div></div><div style="display: none;" id="lbBottomContainer"><div id="lbBottom"><a href="#" id="lbCloseLink"></a><div id="lbCaption"></div><div id="lbNumber"></div><div style="clear: both;"></div></div></div><div style="position: absolute; left: 766px; top: 176px; z-index: 1000000000 ! important; visibility: hidden; opacity: 1; width: 0px;" id="linkalert-box"><img style="width: 0px;" src="Webov%C3%A9%20aplikace%20%C2%BB%20Ulo%C5%BEen%C3%A9%20procedury%20%28stored%20procedures%29%20v%20MySQL_soubory/none-icon.png" id="linkalert-icon-1"></div></body></html>

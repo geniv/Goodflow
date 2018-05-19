@@ -1,0 +1,96 @@
+<!doctype html public "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=Windows-1250">
+<title>Funkce Write_var</title>
+<link rel='stylesheet' style='text/css' href='../function.css'>
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000">
+
+
+
+<h2 class=function>Write_var</h2>
+<img src='../images/cpp.gif' width='44' height='16' border='0' alt='c/c++' align='middle' hspace='2'><img src='../images/pascal.gif' width='44' height='16' border='0' alt='pascal' align='middle' hspace='2'>
+
+
+<br><br>
+<div class='typ'>BOOL <b>[cd_]Write_var</b>([cdp_t cdp], tcurstab curs, trecnum position, tattrib attr, uns16 index, uns32 start, uns32 size, void * buffer);<br>
+function <b>[cd_]Write_var</b>([cdp : cdp_t]; curs : tcurstab; position : trecnum; attr : tattrib; index : uns16; start,size : uns32; var buffer) : Boolean;
+</div>
+
+
+<p><b>Parametry</b></p>
+
+<table border=1 cols=2 frame=box rules=all width=480>
+
+<tr valign="top">
+<td width=21%><i>curs</i> </td>
+<td width=79%>číslo otevřeného kurzoru nebo tabulky - viz <a href="HE_KYPAR.htm">podrobnosti</a></td>
+</tr>
+
+<tr valign="top">
+<td width=21%><i>position</i> </td>
+<td width=79%>číslo záznamu, kam se údaje mají zapsat</td>
+</tr>
+
+<tr valign="top">
+<td width=21%><i>attr </i></td>
+<td width=79%>číslo sloupce, jehož hodnota se přepisuje </td>
+</tr>
+
+<tr valign="top">
+<td width=21%><i>index </i></td>
+<td width=79%>vždy kontanta NOINDEX</td>
+</tr>
+
+<tr valign="top">
+<td width=21%><i>start </i></td>
+<td width=79%>kam se zapisuje</td>
+</tr>
+
+<tr valign="top">
+<td width=21%><i>size </i></td>
+<td width=79%>kolik bajtů se zapisuje</td>
+</tr>
+
+<tr valign="top">
+<td width=21%><i>buffer </i></td>
+<td width=79%>zapisovaná hodnota</td>
+</tr>
+
+<tr valign="top">
+<td width=21%>[<i>cdp </i></td>
+<td width=79%><a href="HE_EXTCD.htm">kontextová proměnná</a> klienta]  </td>
+</tr>
+</table><br>
+
+<p><b>Popis </b></p>
+
+<p>Funkce zapíše v tabulce, jejíž číslo <i>curs</i> bylo nalezeno pomocí funkce <b><code>Find_object</code></b>, nebo v dotazu číslo <i>curs</i> otevřeného funkcemi <b><code>Open_cursor</code></b> nebo <b><code>Open_cursor_direct</code></b>, do sloupce proměnné velikosti <i>attr</i> od pozice <i>start</i> <i>size</i> bajtů z&nbsp;proměnné <i>buffer</i>.</p>
+<p>K zápisu celé hodnoty do sloupce proměnné velikosti najednou slouží obdobná funkce <b><code>Write_lob</code></b>.</p>
+
+<!--<p>Funkci <b><code>Write_var</code></b> nahrazuje v klientském programovacím jazyce přiřazovací příkaz mezi sloupcem proměnné velikosti s dvojindexem [<i>start</i>, <i>size</i>] na levé a řetězcem nebo strukturou na pravé straně.</p>-->
+
+<p><b>Hodnota funkce </b></p>
+
+<p>Funkce vrací při úspěchu FALSE, při neúspěchu TRUE.</p>
+
+<p><b>Viz</b></p>
+
+<ul class='viz'>
+ <li><a href="HE_F_READ_E.htm">Read</a> </li>
+ <li><a href="HE_F_WRITE_E.htm">Write</a> </li>
+ <li><a href="HE_F_READIND.htm">Read_ind</a> </li>
+ <li><a href="HE_F_READVAR.htm">Read_var</a> </li>
+ <li><a href="HE_F_READLEN.htm">Read_len</a> </li>
+ <li><a href="HE_F_WRITEIND.htm">Write_ind</a> </li>
+ <li><a href="HE_F_WRITELEN.htm">Write_len</a> </li>
+ <li><a href="HE_F_WRITELOB.htm">Write_lob</a> </li>
+ <li><a href="HE_F_FINDOBJECT.htm">Find_object</a> </li>
+ <li><a href="HE_F_OPENCURSOR_E.htm">Open_cursor</a> </li>
+ <li><a href="HE_F_OPENCURSORDIRECT.htm">Open_cursor_direct</a></li>
+</ul>
+
+</body>
+</html>

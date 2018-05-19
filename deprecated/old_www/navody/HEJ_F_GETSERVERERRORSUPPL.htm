@@ -1,0 +1,61 @@
+<!doctype html public "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=Windows-1250">
+<title>funkce Get_server_error_suppl</title>
+<link rel='stylesheet' style='text/css' href='../function.css'>
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000">
+
+
+
+<h2 class=function>Get_server_error_suppl </h2>
+<img src='../images/cpp.gif' width='44' height='16' border='0' alt='c/c++' align='middle' hspace='2'><img src='../images/pascal.gif' width='44' height='16' border='0' alt='pascal' align='middle' hspace='2'>
+
+
+<br><br>
+<div class='typ'>BOOL WINAPI <b>Get_server_error_suppl</b>(cdp_t cdp, tptr buf);<br>
+function <b>Get_server_error_suppl</b>(cdp : cdp_t;  var buf : PChar) : Boolean;
+</div>
+
+
+<p><b>Parametry</b></p>
+
+<table border=1 cols=2 width=500>
+
+<tr valign="top">
+<td width=14%><i>buf</i></td>
+<td width=86%>prostor pro vrácený řetězec znaků, dostatečná velikost je 32 bajtů</td>
+</tr>
+
+<tr valign="top">
+<td width=14%><i>cdp </i></td>
+<td width=86%><a href="HE_EXTCD.htm">kontextová proměnná</a> klienta</td>
+</tr>
+</table><br>
+
+<p><b>Od verze</b></p>
+
+<p>7.0</p>
+
+<p><b>Popis</b></p>
+
+<p>Pokud je tato funkce zavolána ihned po chybě, v jejímž popisu je proměnná informace, pak do parametru <i>buf</i> zapíše proměnnou část popisu chyby. Obvykle je to jméno tabulky, sloupce, integritního omezení apod. Tato informace je obvykle obsažena také ve výsledku funkce <a href="HEJ_F_GETERRORNUMTEXT.htm"><code>Get_error_num_text</code></a>.</p>
+<p>Podrobnosti o zjišťování detailů poslední chybě naleznete <a href="HEJ_ERRORINFO.htm">zde</a>.</p>
+
+<p>Pokud poslední chyba neobsahuje proměnnou informaci, vrácená hodnota není definována.</p>
+
+<p><b>Hodnota funkce</b></p>
+
+<p>Funkce vrací FALSE v&nbsp;případě úspěchu, TRUE při chybě.</p>
+
+<p><b>Viz</b></p>
+
+<ul class='viz'>
+ <li><a href="HEJ_F_GETERRORNUMTEXT.htm">Get_error_num_text</a> </li>
+ <li><a href="HEJ_F_GETSERVERERRORCONTEXT.htm">Get_server_error_context</a> </li>
+</ul>
+
+</body>
+</html>

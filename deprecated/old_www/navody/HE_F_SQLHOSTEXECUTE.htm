@@ -1,0 +1,80 @@
+<!doctype html public "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=Windows-1250">
+<title>Funkce SQL_host_execute</title>
+<link rel='stylesheet' style='text/css' href='../function.css'>
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000">
+
+
+
+<h2 class=function>SQL_host_execute</h2>
+<img src='../images/cpp.gif' width='44' height='16' border='0' alt='c/c++' align='middle' hspace='2'><img src='../images/pascal.gif' width='44' height='16' border='0' alt='pascal' align='middle' hspace='2'>
+
+
+<br><br>
+<div class='typ'>BOOL <b>cd_SQL_host_execute</b>(cdp_t cdp, const char * statement, uns32 * results, const t_clivar * hostvars, unsigned hostvars_count);<br>
+function <b>cd_SQL_host_execute</b>(cdp : cdp_t; statement : Pchar; var results;  hostvars : ^t_clivar;  hostvars_count : Integer) : Boolean;
+</div>
+
+
+<p><b>Parametry</b></p>
+
+<table border=1 cols=2>
+
+<tr valign="top">
+<td width=22%><i>cdp </i></td>
+<td width=78%><a href="HE_EXTCD.htm">kontextová proměnná</a> klienta]  </td>
+</tr>
+
+<tr valign="top">
+<td width=22%><i>statement </i></td>
+<td width=78%>příkaz jazyka SQL</td>
+</tr>
+
+<tr valign="top">
+<td width=22%><i>results </i></td>
+<td width=78%>pole čísel, do nichž se zapíše informace o výsledku operace; musí mít svou první složku před zavoláním inicializovanou hodnotou nula</td>
+</tr>
+
+<tr valign="top">
+<td width=22%><i>hostvars</i></td>
+<td width=78%>pole popisující proměnné klienta</td>
+</tr>
+
+<tr valign="top">
+<td width=22%><i>hostvars_count</i></td>
+<td width=78%>počet složek pole <i>hostvars</i></td>
+</tr>
+</table><br>
+
+<p><b>Od verze:</b></p>
+
+<p>7.0</p>
+
+<p><b>Popis</b></p>
+
+<p>Funkce vykoná příkaz jazyka SQL zadaný v&nbsp;parametru <i>statement</i>. Při překladu volání této funkce se nekontroluje smysluplnost SQL příkazu - případná syntaktická chyba příkazu se projeví až při běhu, kdy SQL server ohlásí, že nemůže splnit požadavek. </p>
+
+<p>Platí pro ní vše, co je uvedeno v popisu funkce <a href="HE_F_SQLEXECUTE.htm"><code>SQL_execute</code></a>.</p>
+
+<p>Pomocí <a href="HE_SQL2_PROMENNEJAZYKA_EXT.htm">pole <i>hostvars</i></a> lze SQL serveru předat popis proměnných klientské aplikace, které mohou být použity v příkazu <i>statement</i>. Parametr <i>hostvars_count</i> obsahuje počet takto předávaných proměnných.</p>
+
+<p><b>Hodnota funkce</b></p>
+
+<p>Funkce vrací hodnotu FALSE, pokud se akci podařilo úspěšně provést. V&nbsp;opačném případě vrací TRUE a povahu chyby lze zjistit voláním funkce <b><code>Signalize</code></b>.</p>
+
+<p><b>Viz</b></p>
+
+<ul class='viz'>
+<li><a href="HE_F_SQLEXECUTE.htm">SQL_execute</a> 
+<li><a href="HE_F_SQLPREPARE.htm">SQL_prepare</a> 
+<li><a href="../xml/html/f_sql_host_prepare.html">SQL_host_prepare</a> 
+<li><a href="HE_F_SQLEXECPREPARED.htm">SQL_exec_prepared</a> 
+<li><a href="HE_F_SQLDROP.htm">SQL_drop</a> 
+</ul>
+
+</body>
+</html>

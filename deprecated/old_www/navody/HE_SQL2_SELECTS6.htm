@@ -1,0 +1,106 @@
+<!doctype html public "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=Windows-1250">
+<title>Sbírka dotazů str. 6</title>
+<link rel='stylesheet' style='text/css' href='../function.css'>
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr>
+	<td style="background-image: url(../images/bghead.jpg);
+		background-position: right;
+		background-repeat: no-repeat;">
+	<table width="100%" border="0" cellpadding="0" cellspacing="0"
+		style="background-image:none">
+	<tr>
+		<td style="background-image:none" height="46"
+			width="15%"><img src="../images/title-cz.gif"
+			width="255" height="33"
+			alt="602SQL-Úplná dokumentace"
+			title="602SQL - Úplná dokumentace"
+			border="0"></td>
+		<td width="33%" align="right"><a href="../xml/html/top.html"><img class="floatno"
+			src="../images/index.gif"
+			width="15" height="16"
+			alt="Index" title="Zpět na obsah"
+			border="0" vspace="2"></a> &nbsp;
+			 </td>
+	</tr>
+	</table>
+	</td>
+</tr>
+</table><table class="navigace" border="0" width="100%"  bgcolor="#FFFFBF"><tr> <td
+width="20" align="center"><img class="floatno" src="../images/prev.gif"
+width="15" height="13" alt="&lt;&shy;" title="Předcházející téma"
+border="0"></td><td width="25%"><a
+href="HE_SQL2_SELECTS5.htm">Strana 5 (Self-join, DISTINCT)</a></td> <td width="25%"
+align="right"><img class="floatno" src="../images/up.gif" width="13"
+height="15" alt="Nahoru" title="O jednu úroveň výš" border="0"
+align="middle"></td><td width="25%"><a href="HE_SQL2_SELECTS.htm">Sbírka příkladů SQL dotazů</a></td>
+<td width="25%" align="right"><a
+href="HE_SQL2_SELECTS7.htm">Strana 7 (EXTRACT, OUTER JOIN)</a></td><td width="20"
+align="center"><img class="floatno" src="../images/next.gif" width="15"
+height="13" alt="&shy;&gt;" title="Následující téma" border="0"></td>
+</tr></table>
+
+
+<h1><a name="he_sql2_selects6"></a>Sbírka dotazů – str. 6</h1>
+
+<p><b>Příklad 11</b></p>
+
+<p><b>Zadání:</b> Vyberte ty faktury, které nejsou zaplacené</p>
+
+<p><b>SQL:</b> </p>
+
+<pre><code>  SELECT *
+  FROM Faktury
+  WHERE (Faktury.zaplaceno IS NULL)</code></pre>
+
+<p><b>Poznámka:</b></p>
+
+<p><b>a)</b> Operátor <code>IS NULL</code> se používá právě v takovýchto příkladech: vybrat ty záznamy, v nichž některý sloupec je nebo není vyplněn.</p>
+
+<p><b>b) </b>Pokud bychom chtěli tuto podmínku obrátit (negovat), lze použít dva ekvivalentní zápisy: <code>WHERE (Faktury.zaplaceno IS NOT NULL)</code> nebo <code>WHERE NOT (Faktury.zaplaceno IS NULL)</code>.</p>
+
+<p><b>Příklad 12</b></p>
+
+<p><b>Zadání:</b> Vytvořte dotaz, který zjistí nezaplacené faktury odběratelů a vypočítá penále k&nbsp;dnešnímu dni. Lhůta na zaplacení nechť je 14 dní, penále je 1% z&nbsp;ceny za každý den po lhůtě.</p>
+
+<p><b>SQL:</b> </p>
+
+<pre><code>  SELECT Faktury.castka AS ČÁSTKA,
+         (Today-dat1-14) AS POČET_DNÍ,
+         (Today-dat1-14)*0.01*castka AS PENÁLE,
+         castka+(Today-dat1-14)*0.01*castka AS CELKEM,
+         Firmy.nazev AS NÁZEV,
+         Faktury.cislo AS FA_ČÍSLO
+  FROM Faktury, Firmy
+  WHERE Faktury.firma=Firmy.cislo
+    AND (Faktury.zaplaceno IS NULL AND 
+         Faktury.dat1&lt;=Today-14 AND
+         Faktury.druh=2)</code></pre>
+
+<p><b>Poznámky:</b> </p>
+
+<p><b>a)</b> Všimněte si, že odpověď na tento dotaz se liší den ode dne - jak narůstá penále.</p>
+
+<p><b>b) </b>Ve výrazu v&nbsp;části SELECT i v&nbsp;podmínce WHERE lze používat některé <a href="HE_SQL2_FUNKCEWINBASE.htm">funkce programovacího jazyka</a>. Místo funkce jazyka <code>Today</code> by šlo se stejným výsledkem použít i funkci SQL <a href="HE_SQL2_CURRENT.htm"><code>CURRENT_DATE</code></a>.</p>
+
+
+
+<table class="navigace" border="0" width="100%"  bgcolor="#FFFFBF"><tr> <td
+width="20" align="center"><img class="floatno" src="../images/prev.gif"
+width="15" height="13" alt="&lt;&shy;" title="Předcházející téma"
+border="0"></td><td width="25%"><a
+href="HE_SQL2_SELECTS5.htm">Strana 5 (Self-join, DISTINCT)</a></td> <td width="25%"
+align="right"><img class="floatno" src="../images/up.gif" width="13"
+height="15" alt="Nahoru" title="O jednu úroveň výš" border="0"
+align="middle"></td><td width="25%"><a href="HE_SQL2_SELECTS.htm">Sbírka příkladů SQL dotazů</a></td>
+<td width="25%" align="right"><a
+href="HE_SQL2_SELECTS7.htm">Strana 7 (EXTRACT, OUTER JOIN)</a></td><td width="20"
+align="center"><img class="floatno" src="../images/next.gif" width="15"
+height="13" alt="&shy;&gt;" title="Následující téma" border="0"></td>
+</tr></table>
+</body>
+</html>

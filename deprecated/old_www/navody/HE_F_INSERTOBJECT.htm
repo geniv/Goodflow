@@ -1,0 +1,72 @@
+<!doctype html public "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=Windows-1250">
+<title>Funkce Insert_object</title>
+<link rel='stylesheet' style='text/css' href='../function.css'>
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000">
+
+
+
+<h2 class=function>Insert_object</h2>
+<img src='../images/cpp.gif' width='44' height='16' border='0' alt='c/c++' align='middle' hspace='2'><img src='../images/pascal.gif' width='44' height='16' border='0' alt='pascal' align='middle' hspace='2'>
+
+
+<br><br>
+<div class='typ'>BOOL <b>[cd_]Insert_object</b>([cdp_t cdp], const char * name,  tcateg category, tobjnum * objnum);<br>
+function <b>[cd_]Insert_object</b>([cdp : cdp_t]; name : PChar;  category : tcateg; var objnum : tobjnum) : Boolean;
+</div>
+
+
+<p><b>Parametry</b></p>
+
+<table border=1 cols=2>
+
+<tr valign="top">
+<td width=22%><i>name</i> </td>
+<td width=78%>jméno objektu;</td>
+</tr>
+
+<tr valign="top">
+<td width=22%><i>category</i> </td>
+<td width=78%>kategorie objektu;</td>
+</tr>
+
+<tr valign="top">
+<td width=22%><i>objnum</i> </td>
+<td width=78%>vrácená hodnota: číslo objektu.</td>
+</tr>
+
+<tr valign="top">
+<td width=22%>[<i>cdp </i></td>
+<td width=78%><a href="HE_EXTCD.htm">kontextová proměnná</a> klienta]  </td>
+</tr>
+</table><br>
+
+<p><b>Popis</b></p>
+
+<p>Tato funkce vytvoří nový objekt zadané kategorie <i>category</i> a zadaného jména <i>name</i>. V&nbsp;parametru <i>objnum</i> vrátí číslo vytvořeného objektu. Objekt bude patřit do právě otevřené aplikace.</p>
+
+<p>Parametr <i>category</i> musí být jedna z konstant <code>CATEG_DOMAIN</code>, <code>CATEG_CURSOR</code>, <code>CATEG_PGMSRC</code>, <code>CATEG_APPL</code>, <code>CATEG_ROLE</code>, <code>CATEG_PROCEDURE</code>, <code>CATEG_TRIGGER</code>, <code>CATEG_DRAWING</code>, <code>CATEG_SEQUENCE</code>.</p>
+
+<p>Funkce vloží záznam s číslem <i>objnum</i> do <a href="../xml/html/systab.html">systémové tabulky</a> OBJTAB. Po zavolání funkce je třeba do sloupce proměnné délky DEFIN zapsat textovou definici objektu.</p>
+
+<p>Pro vytvoření tabulky se použije SQL příkaz <code><a href="../xml/html/sql_create_table.html">CREATE TABLE</a></code>. Pro vytvoření pevného dotazu můžete použít SQL příkaz <a href="HE_SQL2_CREATEVIEW.htm"><code>CREATE VIEW</code></a>. Pro vytvoření uložené procedury nebo triggeru můžete použít SQL příkazy <a href="HE_SQL2_CREATEPROCEDURE.htm"><code>CREATE PROCEDURE</code></a> nebo <a href="HE_SQL2_CREATETRIGGER.htm"><code>CREATE TRIGGER</code></a>. Pro vytváření uživatele se použije funkce <a href="HE_F_CREATEUSER.htm"><code>Create_user</code></a> nebo SQL příkaz <a href="HE_SQL2_CREATEUSER.htm"><code>CREATE USER</code></a>. Pro vytvoření skupiny uživatelů se používá funkce <a href="HE_F_CREATEGROUP.htm"><code>Create_group</code></a> nebo SQL příkaz <a href="HE_SQL2_CREATEGROUP.htm"><code>CREATE GROUP</code></a>. </p>
+
+<p>Má-li se objekt zařadit do jiného než základního folderu, přeuňte jej po vytvoření pomocí funkce <code>Move_obj_to_folder</code>.</p>
+
+<p><b>Hodnota funkce</b></p>
+
+<p>Funkce vrací při úspěchu FALSE, při neúspěchu TRUE. </p>
+
+<p><b>Viz</b></p>
+
+<ul class='viz'>
+ <li><a href="HE_F_SQLEXECUTE.htm">SQL_execute</a> </li>
+ <li><a href="../xml/html/f_move_obj_to_folder.html">Move_obj_to_folder</a></li> 
+</ul>
+
+</body>
+</html>

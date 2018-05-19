@@ -1,0 +1,69 @@
+<!doctype html public "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=Windows-1250">
+<title>Funkce MailBoxDeleteMsg</title>
+<link rel='stylesheet' style='text/css' href='../function.css'>
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000">
+
+
+
+<h2 class=function>MailBoxDeleteMsg</h2>
+<img src='../images/cpp.gif' width='44' height='16' border='0' alt='c/c++' align='middle' hspace='2'><img src='../images/pascal.gif' width='44' height='16' border='0' alt='pascal' align='middle' hspace='2'><img src='../images/sql.gif' width='44' height='16' border='0' alt='sql' align='middle' hspace='2'>
+
+
+<br><br>
+<div class='typ'>DWORD <b>MailBoxDeleteMsg</b>(DWORD mailbox, DWORD id, BOOL delrec);<br>
+function <b>MailBoxDeleteMsg</b>(mailbox : integer; id : integer; delrec : boolean) : integer;<br>
+FUNCTION <strong>MailBoxDeleteMsg</strong>(IN mailbox INT, IN id INT, IN delrec BOOLEAN) RETURNS INT;
+
+</div>
+
+
+<p><b>Parametry</b></p>
+
+<table border=1 cols=2>
+
+<tr valign="top">
+<td width=14%><i>mailbox </i></td>
+<td width=86%>handle poštovní schránky</td>
+</tr>
+
+<tr valign="top">
+<td width=14%><i>id</i> </td>
+<td width=86%>identifikátor zásilky</td>
+</tr>
+
+<tr valign="top">
+<td width=14%><i>delrec</i></td>
+<td width=86%>příznak, mají-li se smazat i záznamy o zásilce a k&nbsp;ní připojených souborech v databázi</td>
+</tr>
+</table><br>
+
+<p><b>Od verze</b></p>
+
+<p>6.0f</p>
+
+<p><b>Popis</b></p>
+
+<p>Smaže zásilku v poštovní schránce (v <a href="HE_MAILPROFILES.htm">profilu</a> zvoleného) <a href="HE_MAIL.htm">poštovního systému</a>. Podle typu poskytovatele pošty se smazání provede na místním počítači, nebo na vzdáleném poštovním serveru, anebo na obou těchto místech (pokud je použit vzdálený klient Mail602).</p>
+
+<p>Má-li parametr <em>delrec</em> hodnotu TRUE, smažou se také záznamy <a href="HE_MAILTABLES.htm">tabulek</a> <code>_INBOXMSGS</code> a <code>_INBOXFILES</code> obsahující tuto zásilku.</p>
+
+
+<p><b>Hodnota funkce:</b></p>
+
+<p>Funkce vrací nulu v případě úspěchu a číslo chyby v případě neúspěchu. <a href="HE_MAILERRORS.htm">Číslo chyby</a> lze zjistit také pomocí <b><code>Sz_error</code></b> nebo <b><code>Signalize</code></b>.</p>
+
+
+<p><b>Viz</b></p>
+
+<ul class='viz'>
+ <li><a href="HE_F_MAILOPENINBOX.htm">MailOpenInBox</a> </li>
+ <li><a href="HE_F_MAILBOXLOAD.htm">MailBoxLoad</a> </li>
+</ul>
+
+</body>
+</html>

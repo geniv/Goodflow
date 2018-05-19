@@ -1,0 +1,301 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="cs" dir="ltr" lang="cs"><head>
+
+  
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="KEYWORDS" content="Jazyk pro definici dat DDL SQL">
+<meta name="robots" content="index,follow">
+<link rel="shortcut icon" href="http://student.cvut.cz/favicon.ico"><title>Jazyk pro definici dat DDL SQL - ČWUT</title>
+    
+    <style type="text/css" media="screen,projection">/*<![CDATA[*/ @import "/cwut/skins/cwutskin/main.css"; /*]]>*/</style>
+    <link rel="stylesheet" type="text/css" media="print" href="Jazyk_pro_definici_dat_DDL_SQL_soubory/commonPrint.css"><!--[if lt IE 5.5000]><style type="text/css">@import "/cwut/skins/cwutskin/IE50Fixes.css";</style><![endif]--><!--[if IE 5.5000]><style type="text/css">@import "/cwut/skins/cwutskin/IE55Fixes.css";</style><![endif]--><!--[if IE 6]><style type="text/css">@import "/cwut/skins/cwutskin/IE60Fixes.css";</style><![endif]--><!--[if IE]><script type="text/javascript" src="/cwut/skins/common/IEFixes.js"></script>
+    <meta http-equiv="imagetoolbar" content="no" /><![endif]-->
+    
+    
+    
+    
+    <script type="text/javascript" src="Jazyk_pro_definici_dat_DDL_SQL_soubory/index.php"></script>    <script type="text/javascript" src="Jazyk_pro_definici_dat_DDL_SQL_soubory/wikibits.js"></script>
+    <style type="text/css">/*<![CDATA[*/
+@import "/cwut/index.php?title=MediaWiki:Cwutskin.css&action=raw&ctype=text/css&smaxage=18000";
+@import "/cwut/index.php?title=-&action=raw&gen=css";
+/*]]>*/</style>            <script src="Jazyk_pro_definici_dat_DDL_SQL_soubory/urchin.js" type="text/javascript">
+    </script>
+    <script type="text/javascript">
+      _uacct = "UA-82145-1";
+       urchinTracker();
+    </script></head><body class="ns-0">
+  
+    <div id="cwutTop"> 
+    <a href="http://www.student.cvut.cz/cwut/"><img src="Jazyk_pro_definici_dat_DDL_SQL_soubory/cwut-logo.gif" alt="CWUT logo"></a>
+    </div>
+
+    <div class="rozcestnik">
+      <h5>SU Media:</h5>
+      <a href="http://www.student.cvut.cz/" title="Studentský informační server ČVUT">Student</a> |
+      <a href="http://strednik.su.cvut.cz/" title="Středník - časopis Studentské unie ČVUT">Středník</a> |
+      <a href="http://www.student.cvut.cz/cwut/" title="Studentův wiki průvodce po ČVUT">ČWUT</a> |
+      <a href="http://avc.sh.cvut.cz/" title="Audiovizuální centrum Silicon Hill">AVC SH</a> |
+      <a href="http://www.radioakropolis.cz/" title="Studentské rádio Akropolis">Akropolis</a> |
+      <a href="http://www.ikariera.cz/" title="Nabídky práce pro studenty">iKariéra</a> 
+    </div>    
+               
+    <div id="globalWrapper">
+      <div id="column-content">
+	<div id="content">
+	  <a name="top" id="contentTop"></a>
+	  	  <h1 class="firstHeading">Jazyk pro definici dat DDL SQL</h1>
+	  <div id="bodyContent">
+	    <h3 id="siteSub">&lt;small&gt;Z ČWUT&lt;/small&gt;</h3>
+	    <div id="contentSub"></div>
+	    	    	    <!-- start content -->
+	    <table id="toc" border="0"><tbody><tr id="toctitle"><td align="center">
+<b>Obsah</b> <script type="text/javascript">showTocToggle("zobrazit","skrýt")</script><span class="toctoggle">[<a href="javascript:toggleToc()" class="internal"><span id="showlink" style="display: none;">zobrazit</span><span id="hidelink">skrýt</span></a>]</span>
+</td></tr><tr id="tocinside"><td>
+<div class="tocline"><a href="#Tabulka">1 Tabulka</a><br></div>
+<div class="tocindent">
+<p><a href="#Definice_tabulky">1.1 Definice tabulky</a><br>
+<a href="#Vytvo.C5.99en.C3.AD_tabulky">1.2 Vytvoření tabulky</a><br>
+</p>
+</div>
+<div class="tocline"><a href="#Pohled">2 Pohled</a><br></div>
+<div class="tocline"><a href="#Index">3 Index</a><br></div>
+<div class="tocindent">
+<p><a href="#Vytvo.C5.99en.C3.AD_indexu">3.1 Vytvoření indexu</a><br>
+<a href="#Typy_index.C5.AF">3.2 Typy indexů</a><br>
+</p>
+</div>
+<div class="tocline"><a href="#Sekvence">4 Sekvence</a><br></div>
+</td></tr></tbody></table>
+<div class="editsection" style="float: right; margin-left: 5px;">[<a href="http://student.cvut.cz/cwut/index.php?title=Jazyk_pro_definici_dat_DDL_SQL&amp;action=edit&amp;section=1" title="Jazyk pro definici dat DDL SQL">editovat</a>]</div><a name="Tabulka"></a><h2> Tabulka </h2>
+<ul><li>je jedním ze základních databázových objektů, který slouží k přímému uložení dat do paměťového prostoru relační databáze.
+</li><li>Databázovou tabulku si lze představit jako běžnou
+dvourozměrnou tabulku, která má pevně daný počet a význam jednotlivých
+sloupců (t.j. nemůže se stát, že by třetí sloupec obsahoval v jednom
+řádku datum a v jiném řádku rodné číslo) a může obsahovat teoreticky
+neomezený (v praxi omezený technickými možnostmi použité databáze a
+použitého serveru) počet řádků, které všechny respektují její předem
+danou strukturu.
+</li></ul>
+<div class="editsection" style="float: right; margin-left: 5px;">[<a href="http://student.cvut.cz/cwut/index.php?title=Jazyk_pro_definici_dat_DDL_SQL&amp;action=edit&amp;section=2" title="Jazyk pro definici dat DDL SQL">editovat</a>]</div><a name="Definice_tabulky"></a><h3> Definice tabulky </h3>
+<p>Tabulka je (obecně) definována seznamem omezení, která jsou kladena na její jednotlivé sloupce. <br>
+Konkrétně v případě použití SQL obsahuje definice tabulky:
+</p>
+<ul><li>údaje o názvu, typu (datum - číslo - slovo) a velikosti jednotlivých sloupců
+</li><li>údaje o tom, který sloupec musí být povinně vyplněn nějakou hodnotou, a který nikoliv
+</li><li>údaje o cizích klíčích a pravidla referenční integrity
+</li><li>údaj o primárním klíči
+</li><li>podle použité konkrétní technologie nepovinně další údaje o
+paměťových nárocích tabulky a způsobu uložení (e)|Partitioning,
+velikost segmentu)
+</li></ul>
+<div class="editsection" style="float: right; margin-left: 5px;">[<a href="http://student.cvut.cz/cwut/index.php?title=Jazyk_pro_definici_dat_DDL_SQL&amp;action=edit&amp;section=3" title="Jazyk pro definici dat DDL SQL">editovat</a>]</div><a name="Vytvo.C5.99en.C3.AD_tabulky"></a><h3> Vytvoření tabulky </h3>
+<pre>CREATE TABLE [nazev_databaze.]nazev_tabulky
+   (&lt;nazev sloupce&gt; &lt;datovy typ&gt;
+      [DEFAULT &lt;konstantni vyraz&gt;]
+      [NULL | NOT NULL]
+      [&lt;omezeni pro sloupce&gt;]
+      |[&lt;omezeni pro tabulku&gt;]
+      [,...n]
+   )
+</pre>
+<div class="editsection" style="float: right; margin-left: 5px;">[<a href="http://student.cvut.cz/cwut/index.php?title=Jazyk_pro_definici_dat_DDL_SQL&amp;action=edit&amp;section=4" title="Jazyk pro definici dat DDL SQL">editovat</a>]</div><a name="Pohled"></a><h2> Pohled </h2>
+<ul><li>je databázový objekt, který uživateli poskytuje data ve stejné
+podobě jako tabulka. Na rozdíl od tabulky, kde jsou data přímo uložena,
+obsahuje pohled pouze předpis, jakým způsobem mají být data získána z
+tabulek a jiných pohledů. Z toho vyplývají některé základní rozdíly v
+chování tabulky a pohledu:
+<ul><li>Data tabulky lze přímo modifikovat pomocí příkazů DML SQL
+(INSERT,UPDATE,DELETE). Data poskytovaná pohledem nelze přímo
+modifikovat - výsledek, který pohled poskytuje, se změní v případě, že
+se změní data v tabulkách, ze kterých pohled čerpá.
+</li><li>Na rozdíl od tabulky pohled nezabírá v paměti téměř žádné
+místo, protože neobsahuje data, ale pouze předpis pro získání dat
+(obvykle příkaz SELECT).
+</li><li>Získání výsledku především u komplikovanějších pohledů může
+být časově výrazně náročnější než u přímého přístupu k tabulce, neboť
+data musí být při každém použití pohledu získána z podkladových pohledů
+a tabulek (výpočet může být často dost složitý). Tento problém lze
+řešit vytvořením vhodných indexů na podkladových tabulkách. Druhou
+možností používanou především u agregačních pohledů v datových skladech
+je použití „hybridu“ mezi tabulkou a pohledem - tzv. materializovaného
+pohledu.
+</li></ul>
+</li></ul>
+<pre>CREATE VIEW &lt;nazev pohledu&gt;
+ AS
+ &lt;SELECT prikaz&gt;
+</pre>
+<div class="editsection" style="float: right; margin-left: 5px;">[<a href="http://student.cvut.cz/cwut/index.php?title=Jazyk_pro_definici_dat_DDL_SQL&amp;action=edit&amp;section=5" title="Jazyk pro definici dat DDL SQL">editovat</a>]</div><a name="Index"></a><h2> Index </h2>
+<ul><li>INDEX (někdy též označovaný jako klíč - KEY) je databázová
+entita, sloužící ke zrychlení vyhledávacích a dotazovacích procesů v
+databázi, definování unikátní hodnoty sloupce tabulky nebo optimalizaci
+full-textového vyhledávání.
+</li></ul>
+<div class="editsection" style="float: right; margin-left: 5px;">[<a href="http://student.cvut.cz/cwut/index.php?title=Jazyk_pro_definici_dat_DDL_SQL&amp;action=edit&amp;section=6" title="Jazyk pro definici dat DDL SQL">editovat</a>]</div><a name="Vytvo.C5.99en.C3.AD_indexu"></a><h3> Vytvoření indexu </h3>
+<ul><li>primární klíč
+</li></ul>
+<p><br>
+</p>
+<pre>CREATE TABLE table_name (
+    id_col  INT,
+    col2    CHARACTER VARYING(20),
+    ...
+    CONSTRAINT tab_pk PRIMARY KEY(id_col),
+    ...
+ )
+</pre>
+<ul><li>pokud klíč obsahuje jen jeden sloupec
+</li></ul>
+<pre>CREATE TABLE table_name (
+    id_col  INT  PRIMARY KEY,
+    col2    CHARACTER VARYING(20),
+    ...
+ )
+</pre>
+<ul><li>primární klíč dodatečně (více sloupců)
+</li></ul>
+<pre>ALTER TABLE table identifier
+     ADD [ CONSTRAINT &lt;constraint identifier&gt; ] 
+     PRIMARY KEY ( &lt;column expression&gt; {, &lt;column expression&gt;}... )
+</pre>
+<p><br>
+</p>
+<ul><li>obecný index
+</li></ul>
+<pre>CREATE [UNIQUE] [CLUSTERED | NONCLUSTERED]
+INDEX &lt;nazev indexu&gt; ON &lt;nazev tabulky nebo pohledu&gt;(&lt;nazev sloupce&gt; [ASC | DESC] [,...n])
+</pre>
+<div class="editsection" style="float: right; margin-left: 5px;">[<a href="http://student.cvut.cz/cwut/index.php?title=Jazyk_pro_definici_dat_DDL_SQL&amp;action=edit&amp;section=7" title="Jazyk pro definici dat DDL SQL">editovat</a>]</div><a name="Typy_index.C5.AF"></a><h3> Typy indexů </h3>
+<ul><li><b>PRIMARY</b> - Tento primární index tvoří sloupec (nebo
+sloupce), které obsahují primární klíč (někdy označován také jako
+hlavní index). V každé tabulce se může vyskytovat nejvýše jednou. Je
+definován sloupcem (sloupci) tabulky, který svou hodnotou jednoznačně
+identifikují každý záznam. Klíč je tedy v tabulce unikátní, jedná se de
+facto o zvláštní případ typu klíče UNIQUE.
+</li></ul>
+<ul><li><b>UNIQUE</b> - jedná se o speciální typ indexu, který je
+významově podobný předchozímu typu PRIMARY co do jednoznačnosti záznamu
+podle unikátní hodnoty klíče (typ PRIMARY je pouze zvláštní případ typu
+UNIQUE)
+</li></ul>
+<p>Na rozdíl od předchozího typu však není index definován pouze pro
+jeden jediný sloupec, ale může být definován pro více sloupců tabulky. </p>
+<ul><li><b>INDEX</b> nebo také <b>SECONDARY</b> je tvořen záznamy,
+které obsahují sekundární klíč. Definicí jednoho či více indexů tohoto
+typu bývá v tabulce zajištěna optimalizace vyhledávání podle jednoho či
+více sloupců, pro které jsou dané indexy definovány. Na rozdíl od
+předchozích typů PRIMARY a UNIQUE lze do tabulky vkládat záznamy, které
+nejsou unikátní resp. obsahují duplicitní či multiplicitní hodnoty
+klíče (v jednom i více sloupcích). </li></ul>
+<ul><li><b>FULL-TEXT</b> - snaha optimalizovat full-textové vyhledávání
+v daném sloupci u dané tabulky. To, jakým způsobem to udělá, záleží na
+databázovém serveru samotném, průvodním jevem může být to, že na disku
+nebo v operační paměti bude udržovat například statistiku slov, které
+byly v tomto sloupci a tabulce zadány, nebo jiné pomocné hashovací
+funkce nebo vyhledávací tabulky.
+</li></ul>
+<div class="editsection" style="float: right; margin-left: 5px;">[<a href="http://student.cvut.cz/cwut/index.php?title=Jazyk_pro_definici_dat_DDL_SQL&amp;action=edit&amp;section=8" title="Jazyk pro definici dat DDL SQL">editovat</a>]</div><a name="Sekvence"></a><h2> Sekvence </h2>
+<ul><li>Pomocí tohoto objektu můžete poměrně snadno vytvářet jakousi předpřipravenou "frontu" číselných posloupností. 
+</li><li>Vlastní sekvence se zakládá příkazem CREATE SEQUENCE, jehož základní tvar vypadá takto:
+</li></ul>
+<pre>CREATE SEQUENCE název_seq
+ [INCREMENT BY počet]
+ [START WITH číslo]
+ [MAXVALUE číslo | NOMAXVALUE]
+ [MINVALUE číslo | NOMINVALUE]
+ [CYCLE | NOCYCLE]
+</pre>
+<ul><li>Volba INCREMENT určuje krok sekvence (implicitní hodnota je 1 a
+pomocí záporného čísla vytvoříte klesající posloupnost), START WITH
+počáteční hodnotu (implicitní hodnota je opět 1). Volby MINVALUE a
+MAXVALUE určují krajní hodnoty sekvence a pomocí volby CYCLE zajistíte,
+že po dosažení maximální (minimální) hodnoty se sekvence spustí opět od
+začátku. </li></ul>
+<ul><li>Jednoduchou sekvenci začínající na desíti s krokem tři (10, 13, 16 ...) můžete založit takto: 
+</li></ul>
+<pre>CREATE SEQUENCE pokusna INCREMENT BY 3 START WITH 10 
+</pre>
+<ul><li>V aplikacích se k hodnotám sekvencí "dostanete" pomocí
+pseudoatributů NEXTVAL a CURVAL. První z nich způsobí "vygenerování"
+další hodnoty v řadě, pomocí druhého můžete získat hodnotu naposledy
+přiděleného čísla ze sekvence. Konkrétní příklad může vypadat například
+takto: </li></ul>
+<pre>INSERT INTO zakaznici VALUES (sekvence1.NEXTVAL,'Omáčka','František')
+</pre>
+<p>Je dobré si uvědomit, že jednou přidělené číslo pomocí NEXVTAL již
+nebude opětovně přiděleno (vyjma opakujících se sekvencí a použití
+atributu CURVAL, který hodnotu sekvence nezvyšuje).
+</p><p><a href="http://www.dbsvet.cz/view.php?cisloclanku=2001110101" class="external" title="http://www.dbsvet.cz/view.php?cisloclanku=2001110101" rel="nofollow">převztato z dbsvet</a><span class="urlexpansion">&nbsp;(<i>http://www.dbsvet.cz/view.php?cisloclanku=2001110101</i>)</span>
+</p>
+<!-- Saved in parser cache with key student:pcache:idhash:2269-1!1!0!1!0!1!0!!cs and timestamp 20080530095946 -->
+<div class="printfooter">
+Citováno z „<a href="http://student.cvut.cz/cwut/index.php/Jazyk_pro_definici_dat_DDL_SQL">http://student.cvut.cz/cwut/index.php/Jazyk_pro_definici_dat_DDL_SQL</a>“</div>
+	    <div id="catlinks"><p class="catlinks"><a href="http://student.cvut.cz/cwut/index.php?title=Speci%C3%A1ln%C3%AD:Categories&amp;article=Jazyk_pro_definici_dat_DDL_SQL" title="Speciální:Categories">Kategorie</a>: <a href="http://student.cvut.cz/cwut/index.php/Kategorie:FEL" title="Kategorie:FEL">FEL</a></p></div>	    <!-- end content -->
+	    <div class="visualClear"></div>
+	  </div>
+	</div>
+      </div>
+  
+      <div id="column-one">
+	<div id="p-cactions" class="portlet">
+	  <h5>Views</h5>
+	  <ul>
+	    <li id="ca-nstab-main" class="selected"><a href="http://student.cvut.cz/cwut/index.php/Jazyk_pro_definici_dat_DDL_SQL">Článek</a></li><li id="ca-talk" class="new"><a href="http://student.cvut.cz/cwut/index.php?title=Diskuse:Jazyk_pro_definici_dat_DDL_SQL&amp;action=edit">Diskuse</a></li><li id="ca-edit"><a href="http://student.cvut.cz/cwut/index.php?title=Jazyk_pro_definici_dat_DDL_SQL&amp;action=edit">Editovat</a></li><li id="ca-history"><a href="http://student.cvut.cz/cwut/index.php?title=Jazyk_pro_definici_dat_DDL_SQL&amp;action=history">Historie</a></li>	  </ul>
+	</div>
+	
+	<script type="text/javascript"> if (window.isMSIE55) fixalpha(); </script>
+	<div class="portlet" id="p-nav">
+	  <h5>Navigace</h5>
+	  <div class="pBody">
+	    <ul>
+	      	      <li id="n-mainpage"><a href="http://student.cvut.cz/cwut/index.php/Hlavn%C3%AD_strana">Hlavní strana</a></li>	      <li id="n-PruvodcePrvaka"><a href="http://student.cvut.cz/cwut/index.php/Pr%C5%AFvodce_prv%C3%A1ka">Průvodce prváka</a></li>	      <li id="n-recentchanges"><a href="http://student.cvut.cz/cwut/index.php/Speci%C3%A1ln%C3%AD:Recentchanges">Poslední změny</a></li>	      <li id="n-randompage"><a href="http://student.cvut.cz/cwut/index.php/Speci%C3%A1ln%C3%AD:Randompage">Náhodná stránka</a></li>	      <li id="n-help"><a href="http://student.cvut.cz/cwut/index.php/N%C3%A1pov%C4%9Bda:Obsah">Nápověda</a></li>	    </ul>
+	  </div>
+	</div>
+	<div id="p-search" class="portlet">
+	  <h5><label for="searchInput">Hledat</label></h5>
+	  <div class="pBody">
+	    <form name="searchform" action="/cwut/index.php/Speci%C3%A1ln%C3%AD:Search" id="searchform">
+	      <input id="searchInput" name="search" accesskey="f" value="" type="text">
+	      <input name="go" class="searchButton" id="searchGoButton" value="Jít na" type="submit">&nbsp;<input name="fulltext" class="searchButton" value="Hledat" type="submit">
+	    </form>
+	  </div>
+	</div>
+	
+	<div class="portlet" id="p-tb">
+	  <h5>Nástroje</h5>
+	  <div class="pBody">
+	    <ul>
+		  		  <li id="t-whatlinkshere"><a href="http://student.cvut.cz/cwut/index.php?title=Speci%C3%A1ln%C3%AD:Whatlinkshere&amp;target=Jazyk_pro_definici_dat_DDL_SQL">Odkazuje sem</a></li>
+		  		  <li id="t-recentchangeslinked"><a href="http://student.cvut.cz/cwut/index.php?title=Speci%C3%A1ln%C3%AD:Recentchangeslinked&amp;target=Jazyk_pro_definici_dat_DDL_SQL">Související změny</a></li>
+		  	      	      	      	      	      	      	      	      	      <li id="t-specialpages"><a href="http://student.cvut.cz/cwut/index.php/Speci%C3%A1ln%C3%AD:Specialpages">Speciální stránky</a></li>	      	    </ul>
+	  </div>
+	</div>
+	
+	<div class="portlet" id="p-personal">
+	  <h5 id="pt-userpage">Osobní nástroje</h5>
+	  <div class="pBody">
+	    <ul>
+	    <li id="pt-login"><a href="http://student.cvut.cz/cwut/index.php?title=Speci%C3%A1ln%C3%AD:Userlogin&amp;returnto=Jazyk_pro_definici_dat_DDL_SQL">Přihlašte se</a></li>	    </ul>
+	  </div>
+	</div>
+	
+	      </div><!-- end of the left (by default at least) column -->
+      <div class="visualClear"></div>
+      <div id="footer">
+    <div id="f-poweredbyico"><a href="http://www.mediawiki.org/"><img src="Jazyk_pro_definici_dat_DDL_SQL_soubory/poweredby_mediawiki_88x31.png" alt="MediaWiki"></a></div>		<ul id="f-list">
+	  <li id="f-lastmod">  Stránka byla naposledy editována v 09:51, 29. 5. 2008.</li>	  <li id="f-viewcount">Stránka byla zobrazena 723-krát.</li>	  	  	  <li id="f-about"><a href="http://student.cvut.cz/cwut/index.php/%C4%8CWUT" title="ČWUT">O&nbsp;ČWUT</a></li>	  <li id="f-disclaimer"><a href="http://student.cvut.cz/cwut/index.php/%C4%8CWUT:Vylou%C4%8Den%C3%AD_odpov%C4%9Bdnosti" title="ČWUT:Vyloučení odpovědnosti">Vyloučení odpovědnosti</a></li>	</ul>
+      </div>
+	<div id="footer">
+      <ul id="f-list">
+      <li><a href="http://www.cvut.cz/cz/educa/grantped/studgran.html"><img src="Jazyk_pro_definici_dat_DDL_SQL_soubory/SGS.gif"></a></li>
+      <li><a href="http://www.student.cvut.cz/cwut/index.php/Isc_Media"><img src="Jazyk_pro_definici_dat_DDL_SQL_soubory/ISCM.gif"></a></li>
+      <li><a href="http://www.su.cvut.cz/"><img src="Jazyk_pro_definici_dat_DDL_SQL_soubory/SU.gif"></a></li>
+      <li><a href="http://www.isc.cvut.cz/"><img src="Jazyk_pro_definici_dat_DDL_SQL_soubory/ISC.gif"></a></li>
+      <li><a href="http://www.cvut.iaeste.cz/"><img src="Jazyk_pro_definici_dat_DDL_SQL_soubory/IAESTE.gif"></a></li>
+      <li><a href="http://www.stormtype.com/"><img src="Jazyk_pro_definici_dat_DDL_SQL_soubory/STORM.gif"></a></li>
+      </ul>
+      </div>
+
+    </div>
+    <!-- Served by hades in 0.14 secs. -->
+  <div style="position: absolute; left: 0px; top: 0px; z-index: 1000000000 ! important; visibility: hidden; opacity: 1;" id="linkalert-box"><img src="Jazyk_pro_definici_dat_DDL_SQL_soubory/none-icon.png" id="linkalert-icon-1"></div></body></html>

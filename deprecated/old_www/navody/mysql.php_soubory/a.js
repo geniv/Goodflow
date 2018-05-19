@@ -1,0 +1,1 @@
+var _bbttmp_ads = (typeof bbt_ads == 'undefined' ? '' : '&ads='+bbt_ads);bbt_backcall='http://ad2.billboard.cz/please/showit/491/1/2/32/?typkodu=js'+_bbttmp_ads+'&ip_ip=2481275146&ip_uu=488119002&bust=894468751&bbtids=';document.write("<scr"+"ipt language=JavaScript src='http://ad2.billboard.cz/bbtext/code/words/pack510.js?42036331' charset='windows-1250'><"+"/scr"+"ipt>");

@@ -1,0 +1,492 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="cs" lang="cs"><head>
+
+
+
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1250">
+<meta http-equiv="Content-language" content="cs">
+<meta http-equiv="Cache-control" content="no-cache">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="-1">
+<meta name="robots" content="index,follow">
+<meta name="googlebot" content="index,follow,snippet,noarchive">
+<meta name="description" content="Mod_rewrite zažívá v dnešní SEO době velký boom, a přitom na českém internetu stále chybí ucelený pohled na tuto problematiku. V následující sérii článků se pokusím do tajů přepisování URL proniknout co nejhlouběji a poskytnout vám podrobného průvodce, který vám ozřejmí smysl, principy i praktické použití mod_rewrite.">
+<meta name="keywords" content="Servery, Nástroje, Interval">
+<meta name="ICBM" content="49.1915, 16.626">
+<meta name="DC.Title" content="Interval.cz">
+<meta name="DC.Identifier" content="http://interval.cz">
+<meta name="DC.Identifier" content="(SCHEME=ISSN) 12128651">
+<meta name="DC.Language" content="cs">
+<meta http-equiv="pics-label" content="(pics-1.1 &quot;http://www.icra.org/ratingsv02.html&quot; comment &quot;ICRAonline EN v2.0&quot; l gen true for &quot;http://interval.cz&quot; r (nz 1 vz 1 lz 1 oz 1 cz 1) &quot;http://www.rsac.org/ratingsv01.html&quot; l gen true for &quot;http://interval.cz&quot; r (n 0 s 0 v 0 l 0))">
+<meta http-equiv="imagetoolbar" content="no">
+<meta http-equiv="MSThemeCompatible" content="no">
+<meta name="MSSmartTagsPreventParsing" content="true">
+<link rel="shortcut icon" type="image/x-icon" href="http://interval.cz/favicon.ico">
+<link rel="alternate" type="application/atom+xml" title="Interval.cz -- Mod_rewrite pro hezká URL - RewriteEngine a RewriteRule -- (diskuse, Atom 0.3)" href="http://export.interval.cz/?type=atom&amp;discussion=3950">
+<link rel="alternate" type="application/rdf+xml" title="Interval.cz -- Mod_rewrite pro hezká URL - RewriteEngine a RewriteRule -- (diskuse, RDF Site Summary 1.0)" href="http://export.interval.cz/?type=rdf&amp;discussion=3950">
+<link rel="alternate" type="application/rss+xml" title="Interval.cz -- Mod_rewrite pro hezká URL - RewriteEngine a RewriteRule -- (diskuse, RSS 2.0)" href="http://export.interval.cz/?type=rss&amp;discussion=3950">
+<link rel="home" href="http://interval.cz/">
+<link rel="search" href="http://interval.cz/search_ex.asp">
+<link rel="up" href="http://interval.cz/serialy/mod-rewrite-pro-hezka-url/">
+<link rel="last" href="http://interval.cz/clanky/mod-rewrite-pro-hezka-url-rewritebase-a-rewritecond-podrobneji/">
+<link rel="next" href="http://interval.cz/clanky/mod-rewrite-pro-hezka-url-rewritecond/">
+<link rel="stylesheet" type="text/css" media="all" href="Mod_rewrite%20pro%20hezk%C3%A1%20URL%20-%20RewriteEngine%20a%20RewriteRule%20--%20Servery%20--%20N%C3%A1stroje%20--%20Interval.cz_soubory/html4.css">
+<link rel="stylesheet" type="text/css" media="all" href="Mod_rewrite%20pro%20hezk%C3%A1%20URL%20-%20RewriteEngine%20a%20RewriteRule%20--%20Servery%20--%20N%C3%A1stroje%20--%20Interval.cz_soubory/interval-display.css">
+
+<link rel="stylesheet" type="text/css" media="print" href="Mod_rewrite%20pro%20hezk%C3%A1%20URL%20-%20RewriteEngine%20a%20RewriteRule%20--%20Servery%20--%20N%C3%A1stroje%20--%20Interval.cz_soubory/interval-print.css"><title>Mod_rewrite pro hezká URL - RewriteEngine a RewriteRule -- Servery -- Nástroje -- Interval.cz</title>
+
+<style>
+.bbt_w {color:green !important; text-decoration:underline !important; padding-bottom: 1px; border-bottom: 1px solid green !important;}
+.bbt_w:hover {color:green !important; text-decoration:underline !important; padding-bottom: 0px; border-bottom: 2px solid green !important;}
+.bbt_w:visited {color:green !important; text-decoration:underline !important; padding-bottom: 1px; border-bottom: 1px solid green !important;}
+</style><script charset="windows-1250" type="text/javascript" src="Mod_rewrite%20pro%20hezk%C3%A1%20URL%20-%20RewriteEngine%20a%20RewriteRule%20--%20Servery%20--%20N%C3%A1stroje%20--%20Interval.cz_soubory/a_005.js"></script></head><body class="interval interval-articles" id="article-3950"><div class="audits">
+
+<!-- TOPList.cz -->
+<script type="text/javascript">
+<!-- <![CDATA[
+document.write ("<a href='http://www.toplist.cz'><img src='http://www.toplist.cz/dot.asp?id=33617&amp;http="+escape(document.referrer)+"&amp;wi="+escape(window.screen.width)+"&amp;he="+escape(window.screen.height)+"&amp;cd="+escape(window.screen.colorDepth)+"&amp;t="+escape(document.title)+"' style='border: 0; width: 1px; height: 1px' alt='.' /></a>");
+//]]> -->
+</script><a href="http://www.toplist.cz/"><img src="Mod_rewrite%20pro%20hezk%C3%A1%20URL%20-%20RewriteEngine%20a%20RewriteRule%20--%20Servery%20--%20N%C3%A1stroje%20--%20Interval.cz_soubory/dot.gif" style="border: 0pt none ; width: 1px; height: 1px;" alt="."></a>
+<noscript>
+<div><a href='http://www.toplist.cz'><img
+src='http://www.toplist.cz/dot.asp?id=33617' style='border: 0; width:
+1px; height: 1px' alt='.' /></a></div>
+</noscript>
+<!-- TOPList.cz - konec -->
+
+<!-- iAudit -->
+<img src="Mod_rewrite%20pro%20hezk%C3%A1%20URL%20-%20RewriteEngine%20a%20RewriteRule%20--%20Servery%20--%20N%C3%A1stroje%20--%20Interval.cz_soubory/a.gif" style="border: 0pt none ; width: 1px; height: 1px;" alt=".">
+<!-- iAudit - konec -->
+
+
+	<!-- (C)2005 Gemius SA - gemiusAudience  / Ostatni -->
+	<script type="text/javascript"><!--
+	
+	gemius_identifier = new String('bQzrQkrzLOWoKbJeudlKguTS7OndUMSqxutbeFviWMv.47');
+	
+	gemius_href=new String(document.location);
+	if (document.referrer) { gemius_ref = new String(document.referrer); } else { gemius_ref = ""; }
+	if(typeof(Error)!='undefined') eval("try { if (typeof(top.document.referrer)=='string') { gemius_ref = top.document.referrer } } catch(gemius_ex) {}");
+	iname = new String('id='+gemius_identifier+';ref='+escape(gemius_ref.substring(0,299))+';href='+escape(gemius_href.substring(0,299))+';');
+	document.write('<iframe src="http://spir.hit.gemius.pl/gemiusaudience.html" name="'+iname+'" width="1" height="1" frameborder="0" scrolling="no"></iframe>');
+	//-->
+	</script><iframe src="Mod_rewrite%20pro%20hezk%C3%A1%20URL%20-%20RewriteEngine%20a%20RewriteRule%20--%20Servery%20--%20N%C3%A1stroje%20--%20Interval.cz_soubory/gemiusaudience.htm" name="id=bQzrQkrzLOWoKbJeudlKguTS7OndUMSqxutbeFviWMv.47;ref=http%3A//php-weblog.pifik.com/skladiste/202/Mod_rewriteprohezkaURLI./;href=http%3A//interval.cz/clanky/mod-rewrite-pro-hezka-url-rewriteengine-a-rewriterule/;" frameborder="0" height="1" scrolling="no" width="1"></iframe> 
+
+
+</div>
+	<div id="advertising-leader-board">
+	<!-- StartKód: adarbo2.bbmedia.cz 3.1 Nestandard  Interval(87) / cely web(1) / leaderboard 750x100(1) / nestandard(24) -->
+	<script type="text/javascript">
+	/* <![CDATA[ */
+	var bbs=screen,bbn=navigator,bbh;bbh='&ubl='+bbn.browserLanguage+'&ucc='+bbn.cpuClass+'&ucd='+bbs.colorDepth+'&uce='+bbn.cookieEnabled+'&udx='+bbs.deviceXDPI+'&udy='+bbs.deviceYDPI+'&usl='+bbn.systemLanguage+'&uje='+bbn.javaEnabled()+'&uah='+bbs.availHeight+'&uaw='+bbs.availWidth+'&ubd='+bbs.bufferDepth+'&uhe='+bbs.height+'&ulx='+bbs.logicalXDPI+'&uly='+bbs.logicalYDPI+'&use='+bbs.fontSmoothingEnabled+'&uto='+(new Date()).getTimezoneOffset()+'&uti='+(new Date()).getTime()+'&uui='+bbs.updateInterval+'&uul='+bbn.userLanguage+'&uwi='+bbs.width;
+	document.write("<scr"+"ipt  language='JavaScript' type='text/javascript' src='http://adarbo2.bbmedia.cz/please/showit/87/1/1/24/?typkodu=non-standard"+bbh+"&alttext=0&border=0&bgcolor=FFFFFF&text=000000&link=0000FF&target=_blank&bust="+Math.random()+"'>");
+	document.write("<"+"\/scr"+"ipt>");
+	/* ]]> */
+	</script><script language="JavaScript" type="text/javascript" src="Mod_rewrite%20pro%20hezk%C3%A1%20URL%20-%20RewriteEngine%20a%20RewriteRule%20--%20Servery%20--%20N%C3%A1stroje%20--%20Interval.cz_soubory/a_003.js"></script>
+	<!-- KonecKód: adarbo2.bbmedia.cz 3.1 Nestandard -->
+	</div>
+
+
+
+
+<div id="page-header">
+
+
+
+<div id="interval-logo">
+<h1 title="Interval.cz - webdesign a e-komerce denně (logo &amp; index link)"><a href="http://interval.cz/">Interval.cz<span></span></a></h1>
+</div>
+<div id="advertising-page-header">
+
+
+	<!-- StartKód: adarbo2.bbmedia.cz 3.1 Nestandard  Interval(87) / cely web(1) / horni468x60(2) / nestandard(24) -->
+	<script type="text/javascript">
+	/* <![CDATA[ */
+	var bbs=screen,bbn=navigator,bbh;bbh='&ubl='+bbn.browserLanguage+'&ucc='+bbn.cpuClass+'&ucd='+bbs.colorDepth+'&uce='+bbn.cookieEnabled+'&udx='+bbs.deviceXDPI+'&udy='+bbs.deviceYDPI+'&usl='+bbn.systemLanguage+'&uje='+bbn.javaEnabled()+'&uah='+bbs.availHeight+'&uaw='+bbs.availWidth+'&ubd='+bbs.bufferDepth+'&uhe='+bbs.height+'&ulx='+bbs.logicalXDPI+'&uly='+bbs.logicalYDPI+'&use='+bbs.fontSmoothingEnabled+'&uto='+(new Date()).getTimezoneOffset()+'&uti='+(new Date()).getTime()+'&uui='+bbs.updateInterval+'&uul='+bbn.userLanguage+'&uwi='+bbs.width;
+	document.write("<scr"+"ipt  type='text/javascript' src='http://adarbo2.bbmedia.cz/please/showit/87/1/2/24/?typkodu=non-standard"+bbh+"&alttext=0&border=0&bgcolor=FFFFFF&text=000000&link=0000FF&target=_top&bust="+Math.random()+"'>");
+	document.write("<"+"\/scr"+"ipt>");
+	/* ]]> */
+	</script><script type="text/javascript" src="Mod_rewrite%20pro%20hezk%C3%A1%20URL%20-%20RewriteEngine%20a%20RewriteRule%20--%20Servery%20--%20N%C3%A1stroje%20--%20Interval.cz_soubory/a_002.js"></script><!-- spir.czMonS[6__87.1.2.24__] --><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td><a href="http://adarbo2.bbmedia.cz/please/redirect/87/1/2/24/%21uwi=1440;uhe=900;uce=1;param=9046/11012_11_?" target="_top"><img src="Mod_rewrite%20pro%20hezk%C3%A1%20URL%20-%20RewriteEngine%20a%20RewriteRule%20--%20Servery%20--%20N%C3%A1stroje%20--%20Interval.cz_soubory/b9046_2.gif" alt="" border="0"></a></td></tr></tbody></table><!-- spir.czMonE -->
+	<!-- KonecKód: adarbo2.bbmedia.cz 3.1 Nestandard -->
+
+
+</div>
+<div class="page-maker">&nbsp;</div>
+</div>
+<div id="page-topmenu">
+<h2 class="textversion">Navigace</h2>
+
+<!-- cached 05-17-37-hlavni_menu_with_ascii.txt -->
+<!-- ,Nástroje ~~ ,,Servery ~~ , --><div id="page-mainmenu"><h3 class="textversion">Hlavní menu</h3><ul><li class="first"><a href="http://interval.cz/">Titulka</a></li><li><a href="http://interval.cz/e-komerce/">E-komerce</a></li><li><a href="http://interval.cz/webdesign/">Webdesign</a></li><li><a href="http://interval.cz/vyvoj-aplikaci/">Vývoj aplikací</a></li><li class="selected"><a href="http://interval.cz/nastroje/">Nástroje</a></li><li><a href="http://interval.cz/magazin/">Magazín</a></li><li class="right selected"><a href="http://interval.inshop.cz/">Knihkupectví</a></li><li class="right"><a href="http://php.interval.cz/">PHP</a></li><li class="right"><a href="http://css.interval.cz/">CSS</a></li><li class="right"><a href="http://jednoduse.interval.cz/">Jednoduše</a></li></ul></div><div id="page-mainmenu-maker">&nbsp;</div><div id="page-mainsubmenu"><h3 class="textversion">Submenu</h3><ul><li><a href="http://interval.cz/nastroje/photoshop/">Photoshop</a></li><li><a href="http://interval.cz/nastroje/dalsi-grafika/">Další grafika</a></li><li><a href="http://interval.cz/nastroje/dreamweaver/">Dreamweaver</a></li><li><a href="http://interval.cz/nastroje/homesite/">HomeSite</a></li><li><a href="http://interval.cz/nastroje/pro-webdesign/">Pro webdesign</a></li><li><a href="http://interval.cz/nastroje/k-vyvoji-aplikaci/">K vývoji aplikací</a></li><li class="selected"><a href="http://interval.cz/nastroje/servery/">Servery</a></li></ul><span id="page-mainsubmenu-maker">&nbsp;</span></div>
+ <!-- cas behu menu = 0,015625 -->
+
+</div>
+<div id="page-body">
+<div id="page-left">
+
+
+
+
+
+
+<div id="article" class="bbtext">
+
+
+
+<h2>Mod_rewrite pro hezká URL - RewriteEngine a RewriteRule</h2>
+<p id="prepend" class="not4bbtext">Mod_rewrite zažívá v&nbsp;dnešní SEO
+době velký boom, a&nbsp;přitom na českém internetu stále chybí ucelený
+pohled na tuto problematiku. V&nbsp;následující sérii článků se pokusím
+do tajů přepisování URL proniknout co nejhlouběji a&nbsp;poskytnout vám
+podrobného průvodce, který vám ozřejmí smysl, principy i&nbsp;praktické
+použití mod_rewrite.</p>
+
+
+	<div class="advertising-bigsquare-outer noprint">
+	<div class="advertising-bigsquare-inner" style="width: 300px;">
+	<!-- StartKód: adarbo2.bbmedia.cz 3.1 Nestandard  Interval(87) / cely web(1) / ctverec250x250(8) / nestandard(24) -->
+	<script type="text/javascript">
+	/* <![CDATA[ */
+	var bbs=screen,bbn=navigator,bbh;bbh='&ubl='+bbn.browserLanguage+'&ucc='+bbn.cpuClass+'&ucd='+bbs.colorDepth+'&uce='+bbn.cookieEnabled+'&udx='+bbs.deviceXDPI+'&udy='+bbs.deviceYDPI+'&usl='+bbn.systemLanguage+'&uje='+bbn.javaEnabled()+'&uah='+bbs.availHeight+'&uaw='+bbs.availWidth+'&ubd='+bbs.bufferDepth+'&uhe='+bbs.height+'&ulx='+bbs.logicalXDPI+'&uly='+bbs.logicalYDPI+'&use='+bbs.fontSmoothingEnabled+'&uto='+(new Date()).getTimezoneOffset()+'&uti='+(new Date()).getTime()+'&uui='+bbs.updateInterval+'&uul='+bbn.userLanguage+'&uwi='+bbs.width;
+	document.write("<scr"+"ipt  type='text/javascript' src='http://adarbo2.bbmedia.cz/please/showit/87/1/8/24/?typkodu=non-standard"+bbh+"&alttext=0&border=0&bgcolor=FFFFFF&text=000000&link=0000FF&target=_top&bust="+Math.random()+"'>");
+	document.write("<"+"\/scr"+"ipt>");
+	/* ]]> */
+	</script><script type="text/javascript" src="Mod_rewrite%20pro%20hezk%C3%A1%20URL%20-%20RewriteEngine%20a%20RewriteRule%20--%20Servery%20--%20N%C3%A1stroje%20--%20Interval.cz_soubory/a.js"></script><!-- spir.czMonS[6_5461_87.1.8.24_CPT_22552] --><!-- StartKód: ad2.bbmedia.cz 4.1 Interval(1185) / Cely web(3) / 250x250(1) / square 250x250(17) -->
+<script language="JavaScript" type="text/javascript" charset="windows-1250" src="Mod_rewrite%20pro%20hezk%C3%A1%20URL%20-%20RewriteEngine%20a%20RewriteRule%20--%20Servery%20--%20N%C3%A1stroje%20--%20Interval.cz_soubory/code.js"></script><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td><iframe allowtransparency="true" style="position: relative;" name="bm2BBMEDIA_1185_3_1_17" id="bm2BBMEDIA_1185_3_1_17" marginwidth="0" marginheight="0" hspace="0" vspace="0" src="Mod_rewrite%20pro%20hezk%C3%A1%20URL%20-%20RewriteEngine%20a%20RewriteRule%20--%20Servery%20--%20N%C3%A1stroje%20--%20Interval.cz_soubory/a.htm" frameborder="0" height="250" scrolling="no" width="250">&lt;script
+language='JavaScript' type='text/javascript'
+charset='windows-1250'&gt;document.write("&lt;scr"+"ipt
+language='JavaScript' charset='windows-1250' type='text/javascript'
+src='http://ad2.bbmedia.cz/please/showit/1185/3/1/17/?typkodu=js"+bbh+"&amp;alttext=0&amp;border=0&amp;_idplan=47608&amp;bust="+Math.random()+"&amp;target=_blank'&gt;&lt;/scr"+"ipt&gt;");&lt;/script&gt;</iframe></td></tr><tr><td><iframe allowtransparency="true" name="bm2sBBMEDIA_1185_3_1_17" id="bm2sBBMEDIA_1185_3_1_17" marginwidth="0" marginheight="0" hspace="0" vspace="0" src="" style="position: absolute;" frameborder="0" height="0" scrolling="no" width="250"></iframe></td></tr></tbody></table>
+<noscript><table border=0 cellpadding=0 cellspacing=0><tr><td><a
+href="http://ad2.bbmedia.cz/please/redirect/1185/3/1/17/"
+target="_blank"><img
+src="http://ad2.bbmedia.cz/please/showit/1185/3/1/17/?typkodu=img&_idplan=47608"
+border=0 width=250 height=250 alt='' /></a></td></tr></table></noscript>
+<!-- KonecKód: ad2.bbmedia.cz 4.1 --><!-- spir.czMonE -->
+	<!-- KonecKód: adarbo2.bbmedia.cz 3.1 Nestandard -->
+	<!-- StartKód: adarbo2.bbmedia.cz 3.1 Nestandard  Interval(87) / homepage + cely web(1) / hypertext 250x100(14) / nestandard(24) -->
+	<script type="text/javascript">
+	/* <![CDATA[ */
+	var bbs=screen,bbn=navigator,bbh;bbh='&ubl='+bbn.browserLanguage+'&ucc='+bbn.cpuClass+'&ucd='+bbs.colorDepth+'&uce='+bbn.cookieEnabled+'&udx='+bbs.deviceXDPI+'&udy='+bbs.deviceYDPI+'&usl='+bbn.systemLanguage+'&uje='+bbn.javaEnabled()+'&uah='+bbs.availHeight+'&uaw='+bbs.availWidth+'&ubd='+bbs.bufferDepth+'&uhe='+bbs.height+'&ulx='+bbs.logicalXDPI+'&uly='+bbs.logicalYDPI+'&use='+bbs.fontSmoothingEnabled+'&uto='+(new Date()).getTimezoneOffset()+'&uti='+(new Date()).getTime()+'&uui='+bbs.updateInterval+'&uul='+bbn.userLanguage+'&uwi='+bbs.width;
+	document.write("<scr"+"ipt  language='JavaScript' type='text/javascript' src='http://adarbo2.bbmedia.cz/please/showit/87/1/14/24/?typkodu=non-standard"+bbh+"&alttext=0&border=0&bgcolor=FFFFFF&text=000000&link=0000FF&target=_blank&bust="+Math.random()+"'>");
+	document.write("<"+"\/scr"+"ipt>");
+	/* ]]> */
+	</script><script language="JavaScript" type="text/javascript" src="Mod_rewrite%20pro%20hezk%C3%A1%20URL%20-%20RewriteEngine%20a%20RewriteRule%20--%20Servery%20--%20N%C3%A1stroje%20--%20Interval.cz_soubory/a_004.js"></script>
+	<!-- KonecKód: adarbo2.bbmedia.cz 3.1 Nestandard -->
+	</div>
+	</div>
+
+
+<!-- cached mod-rewrite-pro-hezka-url-rewriteengine-a-rewriterule-3950.txt -->
+<h3 id="inner-links-co-to-je-mod-rewrite">Co to je mod_rewrite</h3>
+<p>Pojďme si nejdříve nasadit brýle začátečníka, který má z tohoto slova s podtržítkem ještě respekt. Takzvaný <em>mod_rewrite</em> je modul Apache, který se poprvé objevil v tomto serveru už ve verzi 1.2, tudíž je skoro zaručeno, že i váš webhosting si s <em>mod_rewrite</em> poradí.</p>
+<p>Systém <em>mod_rewrite</em> má  zcela zásadní <a target="_blank" href="http://ad2.billboard.cz/please/redirect/35974/1/1/32/%21hash=80008016;h4r=2180192068;p4r=305403518;uwi=800;uhe=600;uce=1;param=63781/838123_5?" class="bbt_w">význam</a> pro <em>Search Engine Optimization</em> (SEO), protože se každý snaží dostat do URL co nejvíce důležitých klíčových slov a také je zpřehlednit pro návštěvníka <a target="_blank" href="http://ad2.billboard.cz/please/redirect/35974/1/1/32/%21hash=80008016;h4r=2180529732;p4r=305433213;uwi=800;uhe=600;uce=1;param=35899/842693_5?" class="bbt_w">webu</a>. Podstata <em>mod_rewrite</em>
+tkví ve vymyšlených souborech, či adresářích, které na serveru fyzicky
+neexistují a přitom "normálně" fungují, protože server podstrčí
+uživateli existující, většinou dynamický soubor.</p>
+<p>Jednoduše řečeno - musíte určit, za jakých okolností se přesměrování provede a na jaký existující soubor bude směřovat.</p>
+
+<h3 id="inner-links-jde-to-i-jinak">Jde to i jinak?</h3>
+<p>Ovšem, pro jednoduché přesměrování se dá použít i metahlavička v XHTML či funkce <code>header()</code>
+v PHP, ale při jejich použití narazíte na zásadní problém - můžete
+přesměrovávat jen na existující soubory a URL navíc musí mít stále
+stejný tvar typu <samp>index.php?id_clanku=5</samp>.</p>
+<p>Pokud přesměrujete na neexistující soubor, většinou se zobrazí <a target="_blank" href="http://ad2.billboard.cz/please/redirect/35974/1/1/32/%21hash=80008016;h4r=32465476;p4r=305418856;uwi=800;uhe=600;uce=1;param=55034/369746_5?" class="bbt_w">stránka</a>
+chyby 404 - Document not found. Moderní webhostingy však již umožňují
+modifikaci těchto chybových stránek a jejich využití k přesměrování na
+korektní soubory. (Blíže viz článek <a href="http://interval.cz/clanky/vlastni-presmerovaci-sluzba/" title="Růžička, Pavel: Vlastní přesměrovací služba">Vlastní přesměrovací služba</a>, či novější <a href="http://www.mraveniste.org/weblog/2004/11/08-404-php.html" title="Nečekaný potenciál chybové 404 stránky  - Jan Bien (Mraveniště.ORG, 8. 11. 2004)">Nečekaný potenciál chybové 404 stránky</a>. Takto dosáhnete skoro stejného efektu jako s <em>mod_rewrite</em>, jen se uživateli mění URL pod nosem, což není zcela ideální a také to nepůsobí tím <a target="_blank" href="http://ad2.billboard.cz/please/redirect/35974/1/1/32/%21hash=80008016;h4r=32813380;p4r=305447529;uwi=800;uhe=600;uce=1;param=63530/827486_5?" class="bbt_w">správným</a> dojmem.</p>
+<p>Server Apache umožňuje i další řešení, spočívající v takzvaném <em>FilesMatch</em> (blíže viz <a href="http://hulan.cz/blog/item/htaccess-a-filesmatch-pro-seo-url" title=".htaccess a FilesMatch pro SEO URL - Radek Hulán (WELL.DONE, 10. 6. 2004)">.htaccess a FilesMatch pro SEO URL</a>).
+Potenciální nevýhoda je zde jasná - co se vlastně stane, musíte řešit
+až přímo ve skriptovacím jazyce, a tak si zbytečně znepřehledňujete <a target="_blank" href="http://ad2.billboard.cz/please/redirect/35974/1/1/32/%21hash=80008016;h4r=31247428;p4r=305456741;uwi=800;uhe=600;uce=1;param=50241/151869_5?" class="bbt_w">kód</a>.</p>
+<p>Poslední řešení mimo <em>mod_rewrite</em>, o kterém se zmíním, je jeho bratrský <em>mod_alias</em>, viz například článek <a href="http://www.chomat.net/articles/presmerovani-mod_alias" title="Na přesměrování je mod_alias - Jiří Chomát (Jirka Chomát, 14. 2. 2005)">Na přesměrování je mod_alias</a>. V podstatě je <em>mod_alias</em> hodně podobný <em>mod_rewrite</em>, jen je o něco rychlejší a neumožňuje toho tolik, co jeho složitější kolega. Za dalšího brášku by se dal pokládat i <em>mod _redirect</em> - oba se dají použít pro jednoduchá přesměrování.</p>
+
+<h3 id="inner-links-kdy-pouzit-mod-rewrite">Kdy použít mod_rewrite</h3>
+<p>Jak už jsem naznačil, největší uplatnění má při SEO, kdy z dlouhých,
+škaredých, dynamických URL vytvoříte výstižné, snadno zapamatovatelné <a target="_blank" href="http://ad2.billboard.cz/please/redirect/35974/1/1/32/%21hash=80008016;h4r=2179760452;p4r=305461854;uwi=800;uhe=600;uce=1;param=63906/840033_5?" class="bbt_w">adresy</a>, nazývané též <a href="http://www.w3.org/Provider/Style/URI.html" title="Cool URIs dont change - Tim Berners-Lee (W3C, 1998)">Cool URIs</a>. Skoro se mi chce říci, že se fantazii meze nekladou. Se změnou koncovek z <samp>*.php</samp> na <samp>*.html</samp> můžete například vytvořit skvělou iluzi statického webu.</p>
+<p>Jak sami uvidíte, používání <em>mod_rewrite</em> je velmi jednoduché, ovšem začátečníci mají problém s pochopením jedné věci, kterou jsem ještě přímo neobjasnil. Systém <em>mod_rewrite</em>
+za vás nepřevede odkazy na webu do oné vysněné podoby, to už musíte
+obstarat sami. Proto, když budete tvořit web, je dobré si už na začátku
+ujasnit, jaké Cool URIs budete používat, a svých zásad se držet (viz
+též <a href="http://interval.cz/clanky/seo-struktura-a-presmerovani/" title="Weida, Petr: SEO - struktura a přesměrování">SEO - struktura a přesměrování</a>).
+Také je dobré si vytvořit funkce, které vám na základě předaných
+parametrů hezká URL vygenerují a vy je dynamicky v kódu vypíšete.</p>
+
+<h3 id="inner-links-co-potrebuji-k-mod-rewrite">Co potřebuji k mod_rewrite</h3>
+<p>Jak jsem již zmínil, <em>mod_rewrite</em> je výsadou Apache od verze 1.2, takže v drtivé většině případů použijete také PHP. Modul <em>mod_rewrite</em> je standardní součástí serveru, jen ho musíte nahrát a povolit přepisování. Komplexnější <a target="_blank" href="http://ad2.billboard.cz/please/redirect/35974/1/1/32/%21hash=80008016;h4r=31729988;p4r=305431151;uwi=800;uhe=600;uce=1;param=55762/481893_5?" class="bbt_w">informace</a> o instalaci "svaté trojice", včetně <em>mod_rewrite</em>, naleznete například v článku <a href="http://hulan.cz/blog/item/jak-na-apache-s-mod-rewrite-php4-s-iconv-a-mysql-pod-windows" title="Jak na Apache s mod_rewrite, PHP4 s iconv, a MySQL pod Windows? - Radek Hulán (WELL.DONE, 19. 3. 2004)">Jak na Apache (s mod_rewrite), PHP4 (s iconv), a MySQL pod Windows?</a>.</p>
+<p>Pro aktivaci <em>mod_rewrite</em> je důležité při startu Apache nahrát příslušný modul. Provedete to většinou odkomentováním tohoto příkazu v souboru <em>httpd.conf</em>:</p>
+
+<div class="sample">
+LoadModule rewrite_module modules/mod_rewrite.so
+</div>
+
+<p>Jednotlivá pravidla se zapisují do magického souboru <em>.htaccess</em>, který asi znáte z jiných techtle mechtlí - třeba <a target="_blank" href="http://ad2.billboard.cz/please/redirect/35974/1/1/32/%21hash=80008016;h4r=2180393284;p4r=305411674;uwi=800;uhe=600;uce=1;param=56063/426180_5?" class="bbt_w">ochrany</a> souborů heslem, zakazování přístupů, modifikace chybových stránek a podobně.</p>
+<p>K opravdu pružnému využití <em>mod_rewrite</em> je potřeba i znalost
+regulárních výrazů. Ano, bohužel, bez nich to nejde. V obávanosti u
+začátečníků totiž regulární výrazy nad <em>mod_rewrite</em> jasně
+vedou, ale snad vás mohu trochu uklidnit - k základnímu ovládání si
+vystačíme i s jejich nulovou znalostí. Pokud však chcete regulární
+výrazy plně ovládnout, přečtěte si seriál <a href="http://interval.cz/serialy/perl-compatible-regularni-vyrazy-v-php/" title="Interval.cz: Perl-compatible regulární výrazy v PHP">Perl-compatible regulární výrazy v PHP</a>.</p>
+
+<h3 id="inner-links-mod-rewrite-prakticky">Mod_rewrite prakticky</h3>
+<p>Na úvod si dáme velice jednoduchý příklad z praxe. Generujete
+například nějaký XML výstup z PHP, ale nelíbí se vám koncovka? Horsta
+můžete nechat doma a peněženku zavřenou, protože stačí napsat jen dva
+řádky. Otevřete tedy <em>.htaccess</em>, uložte jej přímo do kořenového adresáře webu (rootu) a zapište do něj:</p>
+
+<div class="sample">
+RewriteEngine On
+<br>RewriteRule ^rss\.xml$ %{DOCUMENT_ROOT}/php/rss.php [L]
+</div>
+
+<p>Jak jednoduché, že? První řádek je zcela nevyhnutelný - <samp>RewriteEngine On</samp> zapíná <em>mod_rewrite</em>. Stejně tak ho lze jednoduše vypnout - <samp>RewriteEngine Off</samp>, pokud chcete deaktivovat celé přepisování URL.</p>
+<p>A toto je ta hybná část, aneb pravidlo, kdy se má přesměrování provést:</p>
+
+<div class="sample">
+RewriteRule&nbsp;&nbsp;&nbsp;co přesměrovat&nbsp;&nbsp;&nbsp;kam přesměrovat&nbsp;&nbsp;&nbsp;[příznaky]
+</div>
+
+<p>Jak vidíte, syntaxe není vůbec složitá, jen je potřeba nadefinovat,
+kdy a kam se přesměrování provede. Do hranatých závorek se pak
+přidávají další parametry, které si postupně vysvětlíme.</p>
+<p>Nejdříve tedy určíme, kdy se přesměrování provede. K tomu budeme potřebovat jednoduchý regulární výraz <samp>^rss\.xml$</samp>, který odpovídá pouze a jedině URL <samp>rss.xml</samp> v rootu webu. Znak <samp>^</samp> znamená začátek a <samp>$</samp>
+konec regulárního výrazu. Všimněte si "escapování" tečky pomocí
+zpětného lomítka. Tečka totiž znamená v regulárních výrazech jakýkoli
+znak, a tak by nám potom výrazu <samp>^rss.xml$</samp> odpovídal i řetězec <samp>rssoxml</samp> nebo <samp>rss9xml</samp> a podobné.</p>
+<p>Následuje URL, na které se přesměruje. Všimněte si proměnné <samp>%{DOCUMENT_ROOT}</samp>, kterou můžeme spolu s dalšími (ukážeme si je později) používat takřka kdekoli v <em>.htaccess</em>.
+Tuto proměnnou můžeme i vypustit a zadávat adresu jen relativně. Osobně
+to však nedoporučuji, protože u některých hostingů to nemusí fungovat.
+Lze použít i absolutní adresu, ale okrádáte se o nutnost přepisovat <em>.htaccess</em>
+při použití na jiné doméně. Funkční může být také použít nastavení do
+rootu pomocí jednoho lomítka na začátku. Je víceméně jen na vás, jak
+adresy budete zadávat, osobně ale doporučuji přidat proměnnou <samp>%{DOCUMENT_ROOT}</samp>.</p>
+<p>Do hranatých závorek se pak uzavírají další příkazy. V tomto případě jsme použili <samp>L</samp>
+(Last rule), což znamená, že je toto pravidlo konečné. Jak asi tušíte,
+pravidel může být více, a dokonce je můžeme mezi sebou křížit a
+kombinovat, jednoduše je oddělíme čárkami. Tento příznak je docela
+užitečný, protože někdy může jedna URL vyhovět více pravidlům, a za
+pomoci <samp>L</samp> se dají vytvořit priority.</p>
+
+<h3 id="inner-links-presmerovani-statickych-souboru-na-dynamicke">Přesměrování statických souborů na dynamické</h3>
+<p>Nyní si ukážeme, jak vytvořit iluzi statického webu. Budeme tedy všude používat URL s <samp>*.html</samp> na konci a zbavíme se ošklivě vyhlížejících dynamických adres typu <samp>/index.php?stranka=nasefirma</samp> (budeme používat <samp>/nasefirma.html</samp>).</p>
+<p>Podívejte se nejdříve na příklad:</p>
+
+<div class="sample">
+RewriteEngine On
+<br>RewriteRule ^(.*)\.html$ %{DOCUMENT_ROOT}/index.php?stranka=$1 [L,QSA]
+</div>
+
+<p>Regulární výraz už vypadá přeci jen trochu složitěji, než v předchozím příkladu. Tento odpovídá <samp>cokoli.html</samp>, jinak řečeno, každému řetězci s koncovkou <samp>.html</samp>. Část řetězce před <samp>.html</samp>
+jsme uzávorkovali, abychom mohli zjistit, co uživatel zadal, a použít
+to v následující části pravidla. Přesměrujeme totiž na dynamickou
+adresu <samp>index.php</samp>, které předáme proměnnou <samp>stranka</samp>,
+která bude obsahovat onen uzávorkovaný řetězec. Zpětných referencí
+(uzávorkovaných částí regulárního výrazu) se dá použít samozřejmě více,
+pak se na ně odkazujeme v pořadí, v jakém byly použity, tedy <samp>$1</samp> odpovídá první závorce, <samp>$2</samp> druhé a tak dále.</p>
+<p>Přibyl nám také další parametr - <samp>QSA</samp> (<em>Query String Append</em>). Představte si, že chcete předat v URL nějakou další proměnnou, například <samp>/nasefirma.html?oddeleni=managment</samp>. Pokud byste nepoužili parametr <samp>QSA</samp>, proměnná <samp>oddeleni</samp>
+by se vůbec skriptu nepředala. S parametrem QSA se budou cílovému
+skriptu předávat další použité proměnné ve fiktivní URL automaticky.</p>
+
+<h3 id="inner-links-odkazy-a-zdroje">Odkazy a zdroje</h3>
+
+<h4 id="inner-links-oficialni-dokumentace">Oficiální dokumentace</h4>
+
+<ul>
+<li><a href="http://httpd.apache.org/docs/mod/mod_rewrite.html">Oficiální dokumentace Mod_rewrite, Apache 1.3</a></li>
+<li><a href="http://httpd.apache.org/docs-2.0/mod/mod_rewrite.html">Oficiální dokumentace Mod_rewrite, Apache&nbsp;2.0</a></li>
+</ul>
+
+<h4 id="inner-links-souvisejici-clanky">Související články</h4>
+
+<ul>
+<li><a href="http://hulan.cz/blog/item/htaccess-a-filesmatch-pro-seo-url">.htaccess a FilesMatch pro SEO URL</a> - Radek Hulán (WELL.DONE, 10.&nbsp;6.&nbsp;2004)</li>
+<li><a href="http://www.root.cz/clanky/coz-si-tak-trochu-zaprepisovat/">Což si tak trochu zapřepisovat?</a> - Michal Krause (Root, 4.&nbsp;12.&nbsp;2000)</li>
+<li><a href="http://hulan.cz/blog/item/jak-na-apache-s-mod-rewrite-php4-s-iconv-a-mysql-pod-windows">Jak na Apache (s mod_rewrite)</a> - Radek Hulán (WELL.DONE, 19.&nbsp;3.&nbsp;2004)</li>
+<li><a href="http://www.chomat.net/articles/presmerovani-mod_alias">Na přesměrování je mod_alias</a> - Jiří Chomát (Chomat.net, 14.&nbsp;2.&nbsp;2005)</li>
+<li><a href="http://www.mraveniste.org/weblog/2004/11/08-404-php.html">Nečekaný potenciál chybové 404 stránky</a> - Jan Bien (Mraveniště.org, 8.&nbsp;11.&nbsp;2004)</li>
+<li><a href="http://www.sovavsiti.cz/2003/mod_rewrite.html">Mod_rewrite pro lepší odkazy</a> - Lukáš Oborský (Sova v síti, 2.&nbsp;8.&nbsp;2003)</li>
+<li><a href="http://interval.cz/clanky/seo-kontra-asp-za-url-krasnejsi/" title="Málek, Vilém: SEO kontra ASP - za URL krásnější">SEO kontra ASP - za URL krásnější</a> - Vilém Málek (Interval.cz, 19.&nbsp;9.&nbsp;2003)</li>
+<li><a href="http://interval.cz/clanky/vlastni-presmerovaci-sluzba/" title="Růžička, Pavel: Vlastní přesměrovací služba">Vlastní přesměrovací služba</a> - Pavel Růžička (Interval.cz, 27.&nbsp;2.&nbsp;2002)</li>
+</ul>
+
+
+
+<div id="article-author">
+<a href="http://interval.cz/autori/schlesinger-vojtech/">Schlesinger, Vojtěch</a> (15.&nbsp;7.&nbsp;2005)
+<div id="article-about-author">weblog autora: <a href="http://www.php-weblog.com/">PHP weblog</a>
+<br>autor je členem webstudia <a href="http://www.broskev.cz/">broskev</a></div>
+</div>
+
+
+<div class="refer noprint"><br><strong>Ulož odkaz na</strong>:<a href="http://del.icio.us/post?url=http://interval.cz/clanky/mod-rewrite-pro-hezka-url-rewriteengine-a-rewriterule/&amp;title=Mod_rewrite%20pro%20hezk%E1%20URL%20-%20RewriteEngine%20a%20RewriteRule">del.icio.us</a> | <a href="http://www.jagg.cz/bookmarks.php?action=add&amp;address=http://interval.cz/clanky/mod-rewrite-pro-hezka-url-rewriteengine-a-rewriterule/&amp;title=Mod_rewrite%20pro%20hezk%E1%20URL%20-%20RewriteEngine%20a%20RewriteRule">jagg.cz</a> | <a href="http://linkuj.cz/?id=linkuj&amp;url=http://interval.cz/clanky/mod-rewrite-pro-hezka-url-rewriteengine-a-rewriterule/&amp;title=Mod_rewrite%20pro%20hezk%E1%20URL%20-%20RewriteEngine%20a%20RewriteRule">linkuj.cz</a> | <a href="http://www.topclanky.cz/pridat-odkaz/?kde=http://interval.cz/clanky/mod-rewrite-pro-hezka-url-rewriteengine-a-rewriterule/&amp;nadpis=Mod_rewrite%20pro%20hezk%E1%20URL%20-%20RewriteEngine%20a%20RewriteRule">topclanky.cz</a> | <a href="http://vybrali.sme.sk/submit.php?url=http://interval.cz/clanky/mod-rewrite-pro-hezka-url-rewriteengine-a-rewriterule/">vybrali.sme.sk</a>. <strong>Děkujeme!</strong></div><div class="refer"><h3><a href="http://interval.cz/serialy/mod-rewrite-pro-hezka-url/" title="Mod_rewrite pro hezká URL (úplný přehled článků seriálu)">Mod_rewrite pro hezká URL</a></h3><p>Mod_rewrite
+je modul serveru Apache, který sleduje URL a provádí jejich interní
+překlad. Návštěvníci serveru tak mohou využívat výhod Cool URIs,
+zatímco server sám může pracovat s parametry, které jsou přijatelnější
+pro automatické zpracování. Tato série článků již byla uzavřena, ačkoli
+další pokračování nelze vyloučit.</p><ul><li><a href="http://interval.cz/clanky/mod-rewrite-pro-hezka-url-rewritebase-a-rewritecond-podrobneji/">Mod_rewrite pro hezká URL - RewriteBase a RewriteCond podrobněji</a> (21.&nbsp;4.&nbsp;2006)</li><li><a href="http://interval.cz/clanky/mod-rewrite-pro-hezka-url-lomitka-adresare-promenne/">Mod_rewrite pro hezká URL - lomítka, adresáře, proměnné</a> (19.&nbsp;8.&nbsp;2005)</li><li><a href="http://interval.cz/clanky/mod-rewrite-pro-hezka-url-rewritecond/">Mod_rewrite pro hezká URL - RewriteCond</a> (29.&nbsp;7.&nbsp;2005)</li><li><strong>Mod_rewrite pro hezká URL - RewriteEngine a RewriteRule</strong> (právě čtete)</li></ul></div>
+	<div class="noprint" id="article-discussion">
+	<!-- cached 3950-tabulka-mod-rewrite-pro-hezka-url-rewriteengine-a-rewriterule.txt --><div id="article-discussion-index"><form action="http://interval.cz/discussion-read.asp?disc=3950" method="post"><table cellspacing="0"><tbody><tr><th colspan="4"><a href="http://interval.cz/clanky/mod-rewrite-pro-hezka-url-rewriteengine-a-rewriterule/diskuse/" title="Mod_rewrite pro hezká URL - RewriteEngine a Rewrit ... (diskuse)">Mod_rewrite pro hezká URL - RewriteEngine a Rewrit ... (diskuse)</a></th></tr><tr><td class="checkbox"><input name="checkboxDISKUZE38470" title="0 38470" value="1" type="checkbox"></td><td class="date">2005-07-15 08:40:50</td><td class="sender">Petr Zelenka</td><td class="subject">dalsi clanky</td></tr><tr><td class="checkbox"><input name="checkboxDISKUZE38484" title="1 38484" value="1" type="checkbox"></td><td class="date">2005-07-15 13:02:10</td><td class="sender">4</td><td class="subject"><img src="Mod_rewrite%20pro%20hezk%C3%A1%20URL%20-%20RewriteEngine%20a%20RewriteRule%20--%20Servery%20--%20N%C3%A1stroje%20--%20Interval.cz_soubory/invisible.png" class="line" alt="."><img src="Mod_rewrite%20pro%20hezk%C3%A1%20URL%20-%20RewriteEngine%20a%20RewriteRule%20--%20Servery%20--%20N%C3%A1stroje%20--%20Interval.cz_soubory/line1.png" class="line" alt=".">dalsi clanky</td></tr><tr><td class="checkbox"><input name="checkboxDISKUZE38487" title="2 38487" value="1" type="checkbox"></td><td class="date">2005-07-15 13:16:18</td><td class="sender">Vojtech Schlesinger</td><td class="subject"><img src="Mod_rewrite%20pro%20hezk%C3%A1%20URL%20-%20RewriteEngine%20a%20RewriteRule%20--%20Servery%20--%20N%C3%A1stroje%20--%20Interval.cz_soubory/invisible.png" class="line" alt="."><img src="Mod_rewrite%20pro%20hezk%C3%A1%20URL%20-%20RewriteEngine%20a%20RewriteRule%20--%20Servery%20--%20N%C3%A1stroje%20--%20Interval.cz_soubory/line2.png" class="line" alt="."><img src="Mod_rewrite%20pro%20hezk%C3%A1%20URL%20-%20RewriteEngine%20a%20RewriteRule%20--%20Servery%20--%20N%C3%A1stroje%20--%20Interval.cz_soubory/line1.png" class="line" alt=".">dalsi clanky</td></tr><tr><td class="checkbox"><input name="checkboxDISKUZE39139" title="3 39139" value="1" type="checkbox"></td><td class="date">2005-08-07 00:20:54</td><td class="sender">Pavel Prostřední</td><td class="subject"><img src="Mod_rewrite%20pro%20hezk%C3%A1%20URL%20-%20RewriteEngine%20a%20RewriteRule%20--%20Servery%20--%20N%C3%A1stroje%20--%20Interval.cz_soubory/invisible.png" class="line" alt="."><img src="Mod_rewrite%20pro%20hezk%C3%A1%20URL%20-%20RewriteEngine%20a%20RewriteRule%20--%20Servery%20--%20N%C3%A1stroje%20--%20Interval.cz_soubory/line2.png" class="line" alt="."><img src="Mod_rewrite%20pro%20hezk%C3%A1%20URL%20-%20RewriteEngine%20a%20RewriteRule%20--%20Servery%20--%20N%C3%A1stroje%20--%20Interval.cz_soubory/line2.png" class="line" alt="."><img src="Mod_rewrite%20pro%20hezk%C3%A1%20URL%20-%20RewriteEngine%20a%20RewriteRule%20--%20Servery%20--%20N%C3%A1stroje%20--%20Interval.cz_soubory/line3.png" class="line" alt=".">dalsi clanky</td></tr><tr><td class="checkbox"><input name="checkboxDISKUZE38471" title="0 38471" value="1" type="checkbox"></td><td class="date">2005-07-15 09:24:30</td><td class="sender">Ondrej Ivanic</td><td class="subject">dalsi parameter</td></tr><tr><td class="checkbox"><input name="checkboxDISKUZE38472" title="0 38472" value="1" type="checkbox"></td><td class="date">2005-07-15 09:43:51</td><td class="sender">ho</td><td class="subject">stromove menu a jeho uri</td></tr><tr><td class="checkbox"><input name="checkboxDISKUZE38474" title="1 38474" value="1" type="checkbox"></td><td class="date">2005-07-15 10:03:15</td><td class="sender">Vojtech Schlesinger</td><td class="subject"><img src="Mod_rewrite%20pro%20hezk%C3%A1%20URL%20-%20RewriteEngine%20a%20RewriteRule%20--%20Servery%20--%20N%C3%A1stroje%20--%20Interval.cz_soubory/invisible.png" class="line" alt="."><img src="Mod_rewrite%20pro%20hezk%C3%A1%20URL%20-%20RewriteEngine%20a%20RewriteRule%20--%20Servery%20--%20N%C3%A1stroje%20--%20Interval.cz_soubory/line1.png" class="line" alt=".">stromove menu a jeho uri</td></tr><tr><td class="checkbox"><input name="checkboxDISKUZE38478" title="2 38478" value="1" type="checkbox"></td><td class="date">2005-07-15 10:42:57</td><td class="sender">ho</td><td class="subject"><img src="Mod_rewrite%20pro%20hezk%C3%A1%20URL%20-%20RewriteEngine%20a%20RewriteRule%20--%20Servery%20--%20N%C3%A1stroje%20--%20Interval.cz_soubory/invisible.png" class="line" alt="."><img src="Mod_rewrite%20pro%20hezk%C3%A1%20URL%20-%20RewriteEngine%20a%20RewriteRule%20--%20Servery%20--%20N%C3%A1stroje%20--%20Interval.cz_soubory/line2.png" class="line" alt="."><img src="Mod_rewrite%20pro%20hezk%C3%A1%20URL%20-%20RewriteEngine%20a%20RewriteRule%20--%20Servery%20--%20N%C3%A1stroje%20--%20Interval.cz_soubory/line1.png" class="line" alt=".">stromove menu a jeho uri</td></tr><tr><td class="checkbox"><input name="checkboxDISKUZE38479" title="3 38479" value="1" type="checkbox"></td><td class="date">2005-07-15 10:47:52</td><td class="sender">Vojtech Schlesinger</td><td class="subject"><img src="Mod_rewrite%20pro%20hezk%C3%A1%20URL%20-%20RewriteEngine%20a%20RewriteRule%20--%20Servery%20--%20N%C3%A1stroje%20--%20Interval.cz_soubory/invisible.png" class="line" alt="."><img src="Mod_rewrite%20pro%20hezk%C3%A1%20URL%20-%20RewriteEngine%20a%20RewriteRule%20--%20Servery%20--%20N%C3%A1stroje%20--%20Interval.cz_soubory/line2.png" class="line" alt="."><img src="Mod_rewrite%20pro%20hezk%C3%A1%20URL%20-%20RewriteEngine%20a%20RewriteRule%20--%20Servery%20--%20N%C3%A1stroje%20--%20Interval.cz_soubory/line2.png" class="line" alt="."><img src="Mod_rewrite%20pro%20hezk%C3%A1%20URL%20-%20RewriteEngine%20a%20RewriteRule%20--%20Servery%20--%20N%C3%A1stroje%20--%20Interval.cz_soubory/line3.png" class="line" alt=".">stromove menu a jeho uri</td></tr><tr><td class="checkbox"><input name="checkboxDISKUZE38481" title="4 38481" value="1" type="checkbox"></td><td class="date">2005-07-15 11:57:18</td><td class="sender">ho</td><td class="subject"><img src="Mod_rewrite%20pro%20hezk%C3%A1%20URL%20-%20RewriteEngine%20a%20RewriteRule%20--%20Servery%20--%20N%C3%A1stroje%20--%20Interval.cz_soubory/invisible.png" class="line" alt="."><img src="Mod_rewrite%20pro%20hezk%C3%A1%20URL%20-%20RewriteEngine%20a%20RewriteRule%20--%20Servery%20--%20N%C3%A1stroje%20--%20Interval.cz_soubory/line2.png" class="line" alt="."><img src="Mod_rewrite%20pro%20hezk%C3%A1%20URL%20-%20RewriteEngine%20a%20RewriteRule%20--%20Servery%20--%20N%C3%A1stroje%20--%20Interval.cz_soubory/line2.png" class="line" alt="."><img src="Mod_rewrite%20pro%20hezk%C3%A1%20URL%20-%20RewriteEngine%20a%20RewriteRule%20--%20Servery%20--%20N%C3%A1stroje%20--%20Interval.cz_soubory/invisible.png" class="line" alt="."><img src="Mod_rewrite%20pro%20hezk%C3%A1%20URL%20-%20RewriteEngine%20a%20RewriteRule%20--%20Servery%20--%20N%C3%A1stroje%20--%20Interval.cz_soubory/line3.png" class="line" alt=".">stromove menu a jeho uri</td></tr><tr><td class="checkbox"><input name="checkboxDISKUZE38482" title="5 38482" value="1" type="checkbox"></td><td class="date">2005-07-15 12:02:35</td><td class="sender">Vojtech Schlesinger</td><td class="subject"><img src="Mod_rewrite%20pro%20hezk%C3%A1%20URL%20-%20RewriteEngine%20a%20RewriteRule%20--%20Servery%20--%20N%C3%A1stroje%20--%20Interval.cz_soubory/invisible.png" class="line" alt="."><img src="Mod_rewrite%20pro%20hezk%C3%A1%20URL%20-%20RewriteEngine%20a%20RewriteRule%20--%20Servery%20--%20N%C3%A1stroje%20--%20Interval.cz_soubory/line2.png" class="line" alt="."><img src="Mod_rewrite%20pro%20hezk%C3%A1%20URL%20-%20RewriteEngine%20a%20RewriteRule%20--%20Servery%20--%20N%C3%A1stroje%20--%20Interval.cz_soubory/line2.png" class="line" alt="."><img src="Mod_rewrite%20pro%20hezk%C3%A1%20URL%20-%20RewriteEngine%20a%20RewriteRule%20--%20Servery%20--%20N%C3%A1stroje%20--%20Interval.cz_soubory/invisible.png" class="line" alt="."><img src="Mod_rewrite%20pro%20hezk%C3%A1%20URL%20-%20RewriteEngine%20a%20RewriteRule%20--%20Servery%20--%20N%C3%A1stroje%20--%20Interval.cz_soubory/invisible.png" class="line" alt="."><img src="Mod_rewrite%20pro%20hezk%C3%A1%20URL%20-%20RewriteEngine%20a%20RewriteRule%20--%20Servery%20--%20N%C3%A1stroje%20--%20Interval.cz_soubory/line3.png" class="line" alt=".">stromove menu a jeho uri</td></tr><tr><td class="checkbox"><input name="checkboxDISKUZE38473" title="0 38473" value="1" type="checkbox"></td><td class="date">2005-07-15 09:47:20</td><td class="sender">Vojtěch Semecký</td><td class="subject">Pár poznámek</td></tr><tr><td class="checkbox"><input name="checkboxDISKUZE39095" title="1 39095" value="1" type="checkbox"></td><td class="date">2005-08-06 02:16:28</td><td class="sender">ci5</td><td class="subject"><img src="Mod_rewrite%20pro%20hezk%C3%A1%20URL%20-%20RewriteEngine%20a%20RewriteRule%20--%20Servery%20--%20N%C3%A1stroje%20--%20Interval.cz_soubory/invisible.png" class="line" alt="."><img src="Mod_rewrite%20pro%20hezk%C3%A1%20URL%20-%20RewriteEngine%20a%20RewriteRule%20--%20Servery%20--%20N%C3%A1stroje%20--%20Interval.cz_soubory/line1.png" class="line" alt=".">404 proč ne?</td></tr><tr><td class="checkbox"><input name="checkboxDISKUZE39132" title="2 39132" value="1" type="checkbox"></td><td class="date">2005-08-06 08:23:59</td><td class="sender">Vilém Málek</td><td class="subject"><img src="Mod_rewrite%20pro%20hezk%C3%A1%20URL%20-%20RewriteEngine%20a%20RewriteRule%20--%20Servery%20--%20N%C3%A1stroje%20--%20Interval.cz_soubory/invisible.png" class="line" alt="."><img src="Mod_rewrite%20pro%20hezk%C3%A1%20URL%20-%20RewriteEngine%20a%20RewriteRule%20--%20Servery%20--%20N%C3%A1stroje%20--%20Interval.cz_soubory/line2.png" class="line" alt="."><img src="Mod_rewrite%20pro%20hezk%C3%A1%20URL%20-%20RewriteEngine%20a%20RewriteRule%20--%20Servery%20--%20N%C3%A1stroje%20--%20Interval.cz_soubory/line3.png" class="line" alt=".">404 proč ne?</td></tr><tr><td class="checkbox"><input name="checkboxDISKUZE38483" title="0 38483" value="1" type="checkbox"></td><td class="date">2005-07-15 12:56:40</td><td class="sender">maro</td><td class="subject">jazykové mutace</td></tr><tr><td class="checkbox"><input name="checkboxDISKUZE38485" title="1 38485" value="1" type="checkbox"></td><td class="date">2005-07-15 13:02:38</td><td class="sender">Vilém Málek</td><td class="subject"><img src="Mod_rewrite%20pro%20hezk%C3%A1%20URL%20-%20RewriteEngine%20a%20RewriteRule%20--%20Servery%20--%20N%C3%A1stroje%20--%20Interval.cz_soubory/invisible.png" class="line" alt="."><img src="Mod_rewrite%20pro%20hezk%C3%A1%20URL%20-%20RewriteEngine%20a%20RewriteRule%20--%20Servery%20--%20N%C3%A1stroje%20--%20Interval.cz_soubory/line1.png" class="line" alt=".">jazykové mutace</td></tr><tr><td class="checkbox"><input name="checkboxDISKUZE38488" title="2 38488" value="1" type="checkbox"></td><td class="date">2005-07-15 13:20:18</td><td class="sender">ho</td><td class="subject"><img src="Mod_rewrite%20pro%20hezk%C3%A1%20URL%20-%20RewriteEngine%20a%20RewriteRule%20--%20Servery%20--%20N%C3%A1stroje%20--%20Interval.cz_soubory/invisible.png" class="line" alt="."><img src="Mod_rewrite%20pro%20hezk%C3%A1%20URL%20-%20RewriteEngine%20a%20RewriteRule%20--%20Servery%20--%20N%C3%A1stroje%20--%20Interval.cz_soubory/line2.png" class="line" alt="."><img src="Mod_rewrite%20pro%20hezk%C3%A1%20URL%20-%20RewriteEngine%20a%20RewriteRule%20--%20Servery%20--%20N%C3%A1stroje%20--%20Interval.cz_soubory/line1.png" class="line" alt=".">jazykové mutace</td></tr><tr><td class="checkbox"><input name="checkboxDISKUZE38489" title="3 38489" value="1" type="checkbox"></td><td class="date">2005-07-15 13:25:01</td><td class="sender">Vilém Málek</td><td class="subject"><img src="Mod_rewrite%20pro%20hezk%C3%A1%20URL%20-%20RewriteEngine%20a%20RewriteRule%20--%20Servery%20--%20N%C3%A1stroje%20--%20Interval.cz_soubory/invisible.png" class="line" alt="."><img src="Mod_rewrite%20pro%20hezk%C3%A1%20URL%20-%20RewriteEngine%20a%20RewriteRule%20--%20Servery%20--%20N%C3%A1stroje%20--%20Interval.cz_soubory/line2.png" class="line" alt="."><img src="Mod_rewrite%20pro%20hezk%C3%A1%20URL%20-%20RewriteEngine%20a%20RewriteRule%20--%20Servery%20--%20N%C3%A1stroje%20--%20Interval.cz_soubory/line2.png" class="line" alt="."><img src="Mod_rewrite%20pro%20hezk%C3%A1%20URL%20-%20RewriteEngine%20a%20RewriteRule%20--%20Servery%20--%20N%C3%A1stroje%20--%20Interval.cz_soubory/line3.png" class="line" alt=".">jazykové mutace</td></tr><tr><td class="checkbox"><input name="checkboxDISKUZE38496" title="2 38496" value="1" type="checkbox"></td><td class="date">2005-07-15 22:16:40</td><td class="sender">maro</td><td class="subject"><img src="Mod_rewrite%20pro%20hezk%C3%A1%20URL%20-%20RewriteEngine%20a%20RewriteRule%20--%20Servery%20--%20N%C3%A1stroje%20--%20Interval.cz_soubory/invisible.png" class="line" alt="."><img src="Mod_rewrite%20pro%20hezk%C3%A1%20URL%20-%20RewriteEngine%20a%20RewriteRule%20--%20Servery%20--%20N%C3%A1stroje%20--%20Interval.cz_soubory/line2.png" class="line" alt="."><img src="Mod_rewrite%20pro%20hezk%C3%A1%20URL%20-%20RewriteEngine%20a%20RewriteRule%20--%20Servery%20--%20N%C3%A1stroje%20--%20Interval.cz_soubory/line3.png" class="line" alt=".">jazykové mutace</td></tr><tr><td class="checkbox"><input name="checkboxDISKUZE38498" title="3 38498" value="1" type="checkbox"></td><td class="date">2005-07-15 22:31:39</td><td class="sender">Vilém Málek</td><td class="subject"><img src="Mod_rewrite%20pro%20hezk%C3%A1%20URL%20-%20RewriteEngine%20a%20RewriteRule%20--%20Servery%20--%20N%C3%A1stroje%20--%20Interval.cz_soubory/invisible.png" class="line" alt="."><img src="Mod_rewrite%20pro%20hezk%C3%A1%20URL%20-%20RewriteEngine%20a%20RewriteRule%20--%20Servery%20--%20N%C3%A1stroje%20--%20Interval.cz_soubory/line2.png" class="line" alt="."><img src="Mod_rewrite%20pro%20hezk%C3%A1%20URL%20-%20RewriteEngine%20a%20RewriteRule%20--%20Servery%20--%20N%C3%A1stroje%20--%20Interval.cz_soubory/invisible.png" class="line" alt="."><img src="Mod_rewrite%20pro%20hezk%C3%A1%20URL%20-%20RewriteEngine%20a%20RewriteRule%20--%20Servery%20--%20N%C3%A1stroje%20--%20Interval.cz_soubory/line3.png" class="line" alt=".">jazykové mutace</td></tr><tr><td class="checkbox"><input name="checkboxDISKUZE38486" title="1 38486" value="1" type="checkbox"></td><td class="date">2005-07-15 13:02:53</td><td class="sender">Michal Kec (MiK)</td><td class="subject"><img src="Mod_rewrite%20pro%20hezk%C3%A1%20URL%20-%20RewriteEngine%20a%20RewriteRule%20--%20Servery%20--%20N%C3%A1stroje%20--%20Interval.cz_soubory/invisible.png" class="line" alt="."><img src="Mod_rewrite%20pro%20hezk%C3%A1%20URL%20-%20RewriteEngine%20a%20RewriteRule%20--%20Servery%20--%20N%C3%A1stroje%20--%20Interval.cz_soubory/line3.png" class="line" alt=".">jazykové mutace</td></tr><tr><td class="checkbox"><input name="checkboxDISKUZE38491" title="0 38491" value="1" type="checkbox"></td><td class="date">2005-07-15 14:13:42</td><td class="sender">Honza Spacil</td><td class="subject">Dekuji!</td></tr><tr><td class="checkbox"><input name="checkboxDISKUZE38499" title="0 38499" value="1" type="checkbox"></td><td class="date">2005-07-15 23:07:37</td><td class="sender">naluc</td><td class="subject">maličkost</td></tr><tr><td class="checkbox"><input name="checkboxDISKUZE38504" title="1 38504" value="1" type="checkbox"></td><td class="date">2005-07-16 00:12:09</td><td class="sender">Vilém Málek</td><td class="subject"><img src="Mod_rewrite%20pro%20hezk%C3%A1%20URL%20-%20RewriteEngine%20a%20RewriteRule%20--%20Servery%20--%20N%C3%A1stroje%20--%20Interval.cz_soubory/invisible.png" class="line" alt="."><img src="Mod_rewrite%20pro%20hezk%C3%A1%20URL%20-%20RewriteEngine%20a%20RewriteRule%20--%20Servery%20--%20N%C3%A1stroje%20--%20Interval.cz_soubory/line3.png" class="line" alt=".">maličkost</td></tr><tr><td class="checkbox"><input name="checkboxDISKUZE38506" title="2 38506" value="1" type="checkbox"></td><td class="date">2005-07-16 01:50:58</td><td class="sender">naluc</td><td class="subject"><img src="Mod_rewrite%20pro%20hezk%C3%A1%20URL%20-%20RewriteEngine%20a%20RewriteRule%20--%20Servery%20--%20N%C3%A1stroje%20--%20Interval.cz_soubory/invisible.png" class="line" alt="."><img src="Mod_rewrite%20pro%20hezk%C3%A1%20URL%20-%20RewriteEngine%20a%20RewriteRule%20--%20Servery%20--%20N%C3%A1stroje%20--%20Interval.cz_soubory/invisible.png" class="line" alt="."><img src="Mod_rewrite%20pro%20hezk%C3%A1%20URL%20-%20RewriteEngine%20a%20RewriteRule%20--%20Servery%20--%20N%C3%A1stroje%20--%20Interval.cz_soubory/line3.png" class="line" alt=".">maličkost</td></tr><tr><td class="checkbox"><input name="checkboxDISKUZE38515" title="0 38515" value="1" type="checkbox"></td><td class="date">2005-07-17 11:28:45</td><td class="sender">Michal Aichinger</td><td class="subject">Problem</td></tr><tr><td class="checkbox"><input name="checkboxDISKUZE38744" title="1 38744" value="1" type="checkbox"></td><td class="date">2005-07-25 21:08:50</td><td class="sender">Milan</td><td class="subject"><img src="Mod_rewrite%20pro%20hezk%C3%A1%20URL%20-%20RewriteEngine%20a%20RewriteRule%20--%20Servery%20--%20N%C3%A1stroje%20--%20Interval.cz_soubory/invisible.png" class="line" alt="."><img src="Mod_rewrite%20pro%20hezk%C3%A1%20URL%20-%20RewriteEngine%20a%20RewriteRule%20--%20Servery%20--%20N%C3%A1stroje%20--%20Interval.cz_soubory/line3.png" class="line" alt=".">Problem</td></tr><tr><td class="checkbox"><input name="checkboxDISKUZE38852" title="2 38852" value="1" type="checkbox"></td><td class="date">2005-07-29 01:07:00</td><td class="sender">Sahrk</td><td class="subject"><img src="Mod_rewrite%20pro%20hezk%C3%A1%20URL%20-%20RewriteEngine%20a%20RewriteRule%20--%20Servery%20--%20N%C3%A1stroje%20--%20Interval.cz_soubory/invisible.png" class="line" alt="."><img src="Mod_rewrite%20pro%20hezk%C3%A1%20URL%20-%20RewriteEngine%20a%20RewriteRule%20--%20Servery%20--%20N%C3%A1stroje%20--%20Interval.cz_soubory/invisible.png" class="line" alt="."><img src="Mod_rewrite%20pro%20hezk%C3%A1%20URL%20-%20RewriteEngine%20a%20RewriteRule%20--%20Servery%20--%20N%C3%A1stroje%20--%20Interval.cz_soubory/line3.png" class="line" alt=".">Řešení</td></tr><tr><td class="checkbox"><input name="checkboxDISKUZE38711" title="0 38711" value="1" type="checkbox"></td><td class="date">2005-07-25 08:43:05</td><td class="sender">rad</td><td class="subject">Nevím kde dělám chybu</td></tr><tr><td class="checkbox"><input name="checkboxDISKUZE38721" title="1 38721" value="1" type="checkbox"></td><td class="date">2005-07-25 12:18:54</td><td class="sender">m</td><td class="subject"><img src="Mod_rewrite%20pro%20hezk%C3%A1%20URL%20-%20RewriteEngine%20a%20RewriteRule%20--%20Servery%20--%20N%C3%A1stroje%20--%20Interval.cz_soubory/invisible.png" class="line" alt="."><img src="Mod_rewrite%20pro%20hezk%C3%A1%20URL%20-%20RewriteEngine%20a%20RewriteRule%20--%20Servery%20--%20N%C3%A1stroje%20--%20Interval.cz_soubory/line1.png" class="line" alt=".">Nevím kde dělám chybu</td></tr><tr><td class="checkbox"><input name="checkboxDISKUZE38800" title="1 38800" value="1" type="checkbox"></td><td class="date">2005-07-27 11:43:06</td><td class="sender">martin</td><td class="subject"><img src="Mod_rewrite%20pro%20hezk%C3%A1%20URL%20-%20RewriteEngine%20a%20RewriteRule%20--%20Servery%20--%20N%C3%A1stroje%20--%20Interval.cz_soubory/invisible.png" class="line" alt="."><img src="Mod_rewrite%20pro%20hezk%C3%A1%20URL%20-%20RewriteEngine%20a%20RewriteRule%20--%20Servery%20--%20N%C3%A1stroje%20--%20Interval.cz_soubory/line3.png" class="line" alt=".">Nevím kde dělám chybu - no já taky ne:...</td></tr><tr><td class="checkbox"><input name="checkboxDISKUZE42364" title="2 42364" value="1" type="checkbox"></td><td class="date">2006-01-28 16:31:17</td><td class="sender">Jakub Hanák</td><td class="subject"><img src="Mod_rewrite%20pro%20hezk%C3%A1%20URL%20-%20RewriteEngine%20a%20RewriteRule%20--%20Servery%20--%20N%C3%A1stroje%20--%20Interval.cz_soubory/invisible.png" class="line" alt="."><img src="Mod_rewrite%20pro%20hezk%C3%A1%20URL%20-%20RewriteEngine%20a%20RewriteRule%20--%20Servery%20--%20N%C3%A1stroje%20--%20Interval.cz_soubory/invisible.png" class="line" alt="."><img src="Mod_rewrite%20pro%20hezk%C3%A1%20URL%20-%20RewriteEngine%20a%20RewriteRule%20--%20Servery%20--%20N%C3%A1stroje%20--%20Interval.cz_soubory/line3.png" class="line" alt=".">Nevím kde dělám chybu - no já taky ne...</td></tr><tr><td class="checkbox"><input name="checkboxDISKUZE38749" title="0 38749" value="1" type="checkbox"></td><td class="date">2005-07-26 01:38:57</td><td class="sender">Karlosa</td><td class="subject">Problém řešící mod_rewrite</td></tr><tr><td class="checkbox"><input name="checkboxDISKUZE38796" title="1 38796" value="1" type="checkbox"></td><td class="date">2005-07-27 10:30:01</td><td class="sender">Jakub Podhorský</td><td class="subject"><img src="Mod_rewrite%20pro%20hezk%C3%A1%20URL%20-%20RewriteEngine%20a%20RewriteRule%20--%20Servery%20--%20N%C3%A1stroje%20--%20Interval.cz_soubory/invisible.png" class="line" alt="."><img src="Mod_rewrite%20pro%20hezk%C3%A1%20URL%20-%20RewriteEngine%20a%20RewriteRule%20--%20Servery%20--%20N%C3%A1stroje%20--%20Interval.cz_soubory/line3.png" class="line" alt=".">Problém řešící mod_rewrite</td></tr><tr><td class="checkbox"><input name="checkboxDISKUZE38868" title="2 38868" value="1" type="checkbox"></td><td class="date">2005-07-29 11:07:53</td><td class="sender">Vojtech Schlesinger</td><td class="subject"><img src="Mod_rewrite%20pro%20hezk%C3%A1%20URL%20-%20RewriteEngine%20a%20RewriteRule%20--%20Servery%20--%20N%C3%A1stroje%20--%20Interval.cz_soubory/invisible.png" class="line" alt="."><img src="Mod_rewrite%20pro%20hezk%C3%A1%20URL%20-%20RewriteEngine%20a%20RewriteRule%20--%20Servery%20--%20N%C3%A1stroje%20--%20Interval.cz_soubory/invisible.png" class="line" alt="."><img src="Mod_rewrite%20pro%20hezk%C3%A1%20URL%20-%20RewriteEngine%20a%20RewriteRule%20--%20Servery%20--%20N%C3%A1stroje%20--%20Interval.cz_soubory/line3.png" class="line" alt=".">Problém řešící mod_rewrite</td></tr><tr><td class="checkbox"><input name="checkboxDISKUZE38789" title="0 38789" value="1" type="checkbox"></td><td class="date">2005-07-26 21:24:07</td><td class="sender">Lukáš Trunečka</td><td class="subject">Další problém</td></tr><tr><td class="checkbox"><input name="checkboxDISKUZE40467" title="1 40467" value="1" type="checkbox"></td><td class="date">2005-09-24 21:09:30</td><td class="sender">oron</td><td class="subject"><img src="Mod_rewrite%20pro%20hezk%C3%A1%20URL%20-%20RewriteEngine%20a%20RewriteRule%20--%20Servery%20--%20N%C3%A1stroje%20--%20Interval.cz_soubory/invisible.png" class="line" alt="."><img src="Mod_rewrite%20pro%20hezk%C3%A1%20URL%20-%20RewriteEngine%20a%20RewriteRule%20--%20Servery%20--%20N%C3%A1stroje%20--%20Interval.cz_soubory/line3.png" class="line" alt=".">Další problém</td></tr><tr><td class="checkbox"><input name="checkboxDISKUZE39978" title="0 39978" value="1" type="checkbox"></td><td class="date">2005-09-01 15:10:48</td><td class="sender">ZIMINIX</td><td class="subject">Správnost řádku</td></tr><tr><td class="checkbox"><input name="checkboxDISKUZE40153" title="0 40153" value="1" type="checkbox"></td><td class="date">2005-09-08 13:01:46</td><td class="sender">czahoun</td><td class="subject">500 internal server error</td></tr><tr><td class="checkbox"><input name="checkboxDISKUZE42566" title="1 42566" value="1" type="checkbox"></td><td class="date">2006-02-09 12:03:05</td><td class="sender">honza</td><td class="subject"><img src="Mod_rewrite%20pro%20hezk%C3%A1%20URL%20-%20RewriteEngine%20a%20RewriteRule%20--%20Servery%20--%20N%C3%A1stroje%20--%20Interval.cz_soubory/invisible.png" class="line" alt="."><img src="Mod_rewrite%20pro%20hezk%C3%A1%20URL%20-%20RewriteEngine%20a%20RewriteRule%20--%20Servery%20--%20N%C3%A1stroje%20--%20Interval.cz_soubory/line3.png" class="line" alt=".">500 internal server error</td></tr><tr><td class="checkbox"><input name="checkboxDISKUZE41163" title="0 41163" value="1" type="checkbox"></td><td class="date">2005-10-28 11:06:26</td><td class="sender">PiT</td><td class="subject">co ano a co nie</td></tr><tr><td class="checkbox"><input name="checkboxDISKUZE45117" title="0 45117" value="1" type="checkbox"></td><td class="date">2006-07-16 13:57:29</td><td class="sender">Bluerabbit</td><td class="subject">detail v mod_rewrite</td></tr><tr><td class="checkbox"><input name="checkboxDISKUZE48938" title="1 48938" value="1" type="checkbox"></td><td class="date">2007-07-21 16:40:02</td><td class="sender">martin</td><td class="subject"><img src="Mod_rewrite%20pro%20hezk%C3%A1%20URL%20-%20RewriteEngine%20a%20RewriteRule%20--%20Servery%20--%20N%C3%A1stroje%20--%20Interval.cz_soubory/invisible.png" class="line" alt="."><img src="Mod_rewrite%20pro%20hezk%C3%A1%20URL%20-%20RewriteEngine%20a%20RewriteRule%20--%20Servery%20--%20N%C3%A1stroje%20--%20Interval.cz_soubory/line3.png" class="line" alt=".">detail v mod_rewrite</td></tr><tr><td class="checkbox"><input name="checkboxDISKUZE46289" title="0 46289" value="1" type="checkbox"></td><td class="date">2006-10-08 13:25:17</td><td class="sender">lucas</td><td class="subject">hezky</td></tr><tr><td class="checkbox"><input name="checkboxDISKUZE46855" title="0 46855" value="1" type="checkbox"></td><td class="date">2006-11-28 23:52:28</td><td class="sender">Tomac1</td><td class="subject">problém s  mod_rewrite na PHP Home Edit...</td></tr><tr><td class="checkbox"><input name="checkboxDISKUZE47647" title="0 47647" value="1" type="checkbox"></td><td class="date">2007-02-26 17:38:13</td><td class="sender">Milan</td><td class="subject">mod rewrite</td></tr><tr><td class="checkbox"><input name="checkboxDISKUZE48893" title="0 48893" value="1" type="checkbox"></td><td class="date">2007-07-14 18:18:59</td><td class="sender">Horac</td><td class="subject">děkuji za článek:D už mi jede</td></tr><tr><td colspan="4" id="foot"><input value="Zobrazit vybrané" name="display_selected" id="display_selected" class="submit" type="submit"> &nbsp; <input value="Zobrazit vše" name="display_all" id="display_all" class="submit" type="submit"> &nbsp; <input value="Vložit nový" name="add_new" id="add_new" class="submit" type="submit"></td></tr></tbody></table></form></div>
+	</div>
+
+
+</div>
+
+
+
+
+
+
+</div>
+<div id="page-right">
+<h2 class="textversion">Pravý sloupek</h2>
+
+
+<div id="search">
+<h3 class="textversion">Vyhledávání</h3>
+
+	<form action="http://www.google.cz/custom" method="get">
+		<div>
+			<input name="domains" value="interval.cz" type="hidden">
+			<input id="sbi" class="text" name="q" size="15" value="" type="text">
+			<input id="sbb" class="submit" name="sa" value="Najdi" type="submit">
+			<input name="sitesearch" value="interval.cz" type="hidden">
+			<input name="client" value="pub-0627399152761886" type="hidden">
+			<input name="forid" value="1" type="hidden">
+			<input name="channel" value="6859855792" type="hidden">
+			<input name="ie" value="windows-1250" type="hidden">
+			<input name="oe" value="windows-1250" type="hidden">
+
+			<input name="flav" value="0000" type="hidden">
+			<input name="sig" value="fzsccwnc4ZQRtlyw" type="hidden">
+			<input name="cof" value="GALT:#008000;GL:1;DIV:#336699;VLC:663399;AH:center;BGC:FFFFFF;LBGC:336699;ALC:0000FF;LC:0000FF;T:000000;GFNT:0000FF;GIMP:0000FF;FORID:1" type="hidden">
+			<input name="hl" value="cs" type="hidden">
+		</div>
+	</form>
+
+</div>
+	<div id="advertising-arbo-rightcolumn-textbox" class="noprint" style="padding: 1em; font-size: 0.8em;">
+	<!-- StartKód: adarbo2.bbmedia.cz 3.1 Nestandard  Interval(87) / home page(2) / textbox(1) / nestandard(24) -->
+	<script type="text/javascript">
+	<!-- <![CDATA[
+	var bbs=screen,bbn=navigator,bbh;bbh='&ubl='+bbn.browserLanguage+'&ucc='+bbn.cpuClass+'&ucd='+bbs.colorDepth+'&uce='+bbn.cookieEnabled+'&udx='+bbs.deviceXDPI+'&udy='+bbs.deviceYDPI+'&usl='+bbn.systemLanguage+'&uje='+bbn.javaEnabled()+'&uah='+bbs.availHeight+'&uaw='+bbs.availWidth+'&ubd='+bbs.bufferDepth+'&uhe='+bbs.height+'&ulx='+bbs.logicalXDPI+'&uly='+bbs.logicalYDPI+'&use='+bbs.fontSmoothingEnabled+'&uto='+(new Date()).getTimezoneOffset()+'&uti='+(new Date()).getTime()+'&uui='+bbs.updateInterval+'&uul='+bbn.userLanguage+'&uwi='+bbs.width;
+	document.write("<scr"+"ipt  language='JavaScript' type='text/javascript' src='http://adarbo2.bbmedia.cz/please/showit/87/2/1/24/?typkodu=non-standard"+bbh+"&alttext=0&border=0&bgcolor=FFFFFF&text=000000&link=0000FF&target=_blank&bust="+Math.random()+"'>");
+	document.write("<"+"\/scr"+"ipt>");
+	//]]> -->
+	</script><script language="JavaScript" type="text/javascript" src="Mod_rewrite%20pro%20hezk%C3%A1%20URL%20-%20RewriteEngine%20a%20RewriteRule%20--%20Servery%20--%20N%C3%A1stroje%20--%20Interval.cz_soubory/a_009.js"></script>
+	<!-- KonecKód: adarbo2.bbmedia.cz 3.1 Nestandard -->
+	</div>
+<!-- cached 11-knizni_tip.txt --><div class="page-right-box book"><h3>Knižní tip</h3><div class="page-right-box-in"><div class="book-top"><h4><a href="http://interval.inshop.cz/inshop/scripts/detail.asp?kat=279">Ladění a testování aplikací pro .NET a Windows</a></h4></div><div class="image"><a href="http://interval.inshop.cz/inshop/scripts/detail.asp?kat=279"><img src="Mod_rewrite%20pro%20hezk%C3%A1%20URL%20-%20RewriteEngine%20a%20RewriteRule%20--%20Servery%20--%20N%C3%A1stroje%20--%20Interval.cz_soubory/279.jpg" alt="obálka" title="Ladění a testování aplikací pro .NET a Windows"></a></div></div></div>
+	<div class="page-right-box czechia-box">
+	<div style="padding: 7px; width: 166px; background-color: rgb(234, 223, 172); text-align: center; color: rgb(0, 0, 0);">
+	<a href="http://www.zoner.cz/"><strong>ZONER software, s.r.o.</strong></a>,
+	<br>přední
+český poskytovatel internetových služeb souvisejících s prezentací na
+internetu a e-komercí, hledá do svého týmu pracovníka na pozici <br><a href="http://www.czechia.com/clanek/kariera-u-nas/#programator-ASP" style="background-color: rgb(234, 223, 172); color: rgb(0, 0, 255); text-decoration: underline;"><strong>Programátor ASP.NET 2.0 </strong></a>.
+	</div>
+	</div>
+<!-- cached 19-nejctenejsi_clanky.txt --><div class="page-right-box reading"><h3 title="Nejčtenější články za posledních 90 dnů">Nejčtenější</h3><div class="page-right-box-in"><ul><li><a href="http://interval.cz/clanky/javascript-a-ajax-john-resig/">JavaScript a Ajax (John Resig)</a></li><li><a href="http://interval.cz/clanky/echo2-web-framework-nase-okno-dostava-obsah/">Echo2 Web Framework - naše okno dostáva obsah</a></li><li><a href="http://interval.cz/clanky/kontrast-a-vyznam/">Kontrast a význam</a></li><li><a href="http://interval.cz/clanky/echo2-web-framework-echopointng-nech-sa-paci/">Echo2 Web Framework - Echopointng, nech sa páči</a></li><li><a href="http://interval.cz/clanky/interzen-2007-predstavuje-dobracajovnafm-cz/">Interzen 2007 představuje: dobracajovnafm.cz</a></li></ul></div></div>
+
+<div class="advertising-vertical-banner-outer">
+<div class="advertising-vertical-banner-inner">
+<a style="left: 120px ! important; top: 0px ! important;" title="Klepněte zde pro blokování tohoto objektu pomocí Adblock Plus" class="abp-objtab-019809405879845499 visible ontop" href="http://interval.cz/__services/__include_right/leto-s-domenou-300-120.swf"></a><object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" codebase="http://fpdownload.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,0,0" id="leto-s-domenou-300-120" align="middle" height="300" width="120">
+<param name="allowScriptAccess" value="sameDomain">
+<param name="movie" value="http://interval.cz/__services/__include_right/leto-s-domenou-300-120.swf"><param name="quality" value="high"><param name="bgcolor" value="#ffffff"><embed src="Mod_rewrite%20pro%20hezk%C3%A1%20URL%20-%20RewriteEngine%20a%20RewriteRule%20--%20Servery%20--%20N%C3%A1stroje%20--%20Interval.cz_soubory/leto-s-domenou-300-120.swf" quality="high" bgcolor="#ffffff" name="leto-s-domenou-300-120" allowscriptaccess="sameDomain" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer" align="middle" height="300" width="120">
+</object>
+</div>
+</div>
+<div class="page-right-box emailserv">
+<h3>Info servis</h3>
+<div class="page-right-box-in">
+<ul>
+<li><a href="http://export.interval.cz/" title="Exporty aktuálních informací ve formátech Atom, RDF a RSS">Alternativní přístup k poskytovanému obsahu</a></li>
+<li><a href="http://export.interval.cz/?type=atom" title="Aktuální články magazínu ve formátu Atom">Atom</a> (<a href="http://export.interval.cz/?type=atom&amp;discussion=all" title="Aktuální diskuse magazínu ve formátu Atom">diskuse</a>)</li>
+<li><a href="http://export.interval.cz/?type=rdf" title="Aktuální články magazínu ve formátu RDF">RDF</a> (<a href="http://export.interval.cz/?type=rdf&amp;discussion=all" title="Aktuální diskuse magazínu ve formátu RDF">diskuse</a>)</li>
+<li><a href="http://export.interval.cz/?type=rss" title="Aktuální články magazínu ve formátu RSS">RSS</a> (<a href="http://export.interval.cz/?type=rss&amp;discussion=all" title="Aktuální diskuse magazínu ve formátu RSS">diskuse</a>)</li>
+</ul>
+</div>
+</div>
+<div class="advertising-vertical-banner-outer">
+<div class="advertising-vertical-banner-inner">
+
+	<!-- StartKód: adarbo2.bbmedia.cz 3.1 Nestandard  Interval(87) / homepage + cely web(1) / skyscraper120x600(6) / nestandard(24) -->
+	<script type="text/javascript">
+	/* <![CDATA[ */
+	var bbs=screen,bbn=navigator,bbh;bbh='&ubl='+bbn.browserLanguage+'&ucc='+bbn.cpuClass+'&ucd='+bbs.colorDepth+'&uce='+bbn.cookieEnabled+'&udx='+bbs.deviceXDPI+'&udy='+bbs.deviceYDPI+'&usl='+bbn.systemLanguage+'&uje='+bbn.javaEnabled()+'&uah='+bbs.availHeight+'&uaw='+bbs.availWidth+'&ubd='+bbs.bufferDepth+'&uhe='+bbs.height+'&ulx='+bbs.logicalXDPI+'&uly='+bbs.logicalYDPI+'&use='+bbs.fontSmoothingEnabled+'&uto='+(new Date()).getTimezoneOffset()+'&uti='+(new Date()).getTime()+'&uui='+bbs.updateInterval+'&uul='+bbn.userLanguage+'&uwi='+bbs.width;
+	document.write("<scr"+"ipt  type='text/javascript' src='http://adarbo2.bbmedia.cz/please/showit/87/1/6/24/?typkodu=non-standard"+bbh+"&alttext=0&border=0&bgcolor=FFFFFF&text=000000&link=0000FF&target=_top&bust="+Math.random()+"'>");
+	document.write("<"+"\/scr"+"ipt>");
+	/* ]]> */
+	</script><script type="text/javascript" src="Mod_rewrite%20pro%20hezk%C3%A1%20URL%20-%20RewriteEngine%20a%20RewriteRule%20--%20Servery%20--%20N%C3%A1stroje%20--%20Interval.cz_soubory/a_007.js"></script>
+	<!-- KonecKód: adarbo2.bbmedia.cz 3.1 Nestandard -->
+
+
+
+</div>
+</div>
+
+
+
+
+</div>
+<div class="page-maker">&nbsp;</div>
+<div class="page-maker-white">&nbsp;</div>
+</div>
+<div id="advertising-page-bottom">
+
+
+
+
+
+
+
+<div class="page-maker">&nbsp;</div>
+</div>
+<div id="page-foot">
+<div id="page-foot-menu">
+<a href="http://interval.cz/redakce-inzerce.asp">Inzerce na Interval.cz</a>
+&nbsp;|&nbsp;
+<a href="http://interval.cz/redakce.asp">Redakce Interval.cz</a>
+&nbsp;|&nbsp;
+<a href="http://interval.cz/autori.asp">Hledáme nové autory</a>
+</div>
+<div id="issn">
+<a href="http://jigsaw.w3.org/css-validator/validator?uri=http%3A%2F%2Finterval.cz%2Fclanky%2Fmod-rewrite-pro-hezka-url-rewriteengine-a-rewriterule%2F" class="noprint">.</a>
+<span title="ID 3950">ISSN 1212-8651</span>
+<a href="http://validator.w3.org/check?uri=http%3A%2F%2Finterval.cz%2Fclanky%2Fmod-rewrite-pro-hezka-url-rewriteengine-a-rewriterule%2F&amp;charset=%28detect+automatically%29&amp;doctype=%28detect+automatically%29&amp;outline=1&amp;verbose=1" class="noprint">.</a>
+</div>
+<div id="page-foot-zoner">
+© <a href="http://www.zoner.eu/">Zoner software, s.r.o.</a>, všechna práva vyhrazena, tento server dodržuje
+<a href="http://interval.cz/privacy.asp">právní předpisy</a>
+o ochraně osobních údajů.
+</div>
+</div>
+
+<script type="text/javascript" src="Mod_rewrite%20pro%20hezk%C3%A1%20URL%20-%20RewriteEngine%20a%20RewriteRule%20--%20Servery%20--%20N%C3%A1stroje%20--%20Interval.cz_soubory/audits-footer.js"></script>
+<script type="text/javascript">
+	var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+	document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script><script src="Mod_rewrite%20pro%20hezk%C3%A1%20URL%20-%20RewriteEngine%20a%20RewriteRule%20--%20Servery%20--%20N%C3%A1stroje%20--%20Interval.cz_soubory/ga.js" type="text/javascript"></script>
+<script type="text/javascript">
+	var pageTracker = _gat._getTracker("UA-173085-1");
+	pageTracker._initData();
+	pageTracker._trackPageview();
+</script>
+
+
+	<div id="advertising-context" class="noprint">
+
+	<!-- StartKód: ad2.bbmedia.cz 3.1 Interval(2098) / BillBoard Intext(1) / Intext(1) -->
+	<script type="text/javascript">/* <![CDATA[ */
+	var bbs=screen,bbn=navigator,bbh;bbh='&ubl='+bbn.browserLanguage+'&ucc='+bbn.cpuClass+'&ucd='+bbs.colorDepth+'&uce='+bbn.cookieEnabled+'&udx='+bbs.deviceXDPI+'&udy='+bbs.deviceYDPI+'&usl='+bbn.systemLanguage+'&uje='+bbn.javaEnabled()+'&uah='+bbs.availHeight+'&uaw='+bbs.availWidth+'&ubd='+bbs.bufferDepth+'&uhe='+bbs.height+'&ulx='+bbs.logicalXDPI+'&uly='+bbs.logicalYDPI+'&use='+bbs.fontSmoothingEnabled+'&uto='+(new Date()).getTimezoneOffset()+'&uti='+(new Date()).getTime()+'&uui='+bbs.updateInterval+'&uul='+bbn.userLanguage+'&uwi='+bbs.width;
+	document.write("<scr"+"ipt type='text/javascript' src='http://ad2.bbmedia.cz/please/showit/2098/1/1/7/?typkodu=js"+bbh+"&alttext=0&border=0&bust="+Math.random()+"&target=_blank'><"+"\/scr"+"ipt>");
+	/* ]]> */
+	</script><script type="text/javascript" src="Mod_rewrite%20pro%20hezk%C3%A1%20URL%20-%20RewriteEngine%20a%20RewriteRule%20--%20Servery%20--%20N%C3%A1stroje%20--%20Interval.cz_soubory/a_006.js"></script><script type="text/javascript" charset="windows-1250" src="Mod_rewrite%20pro%20hezk%C3%A1%20URL%20-%20RewriteEngine%20a%20RewriteRule%20--%20Servery%20--%20N%C3%A1stroje%20--%20Interval.cz_soubory/bb4.js"></script><script type="text/javascript" charset="windows-1250">document.write("<scr"+"ipt  type='text/javascript' src='http://ad2.billboard.cz/please/showit/35974/1/1/31/?typkodu=js"+bbh+"' charset='windows-1250'><"+"/scr"+"ipt>");</script><script type="text/javascript" src="Mod_rewrite%20pro%20hezk%C3%A1%20URL%20-%20RewriteEngine%20a%20RewriteRule%20--%20Servery%20--%20N%C3%A1stroje%20--%20Interval.cz_soubory/a_008.js" charset="windows-1250"></script><script language="JavaScript" src="Mod_rewrite%20pro%20hezk%C3%A1%20URL%20-%20RewriteEngine%20a%20RewriteRule%20--%20Servery%20--%20N%C3%A1stroje%20--%20Interval.cz_soubory/pack107.js" charset="windows-1250"></script><script type="text/javascript" charset="windows-1250" src="Mod_rewrite%20pro%20hezk%C3%A1%20URL%20-%20RewriteEngine%20a%20RewriteRule%20--%20Servery%20--%20N%C3%A1stroje%20--%20Interval.cz_soubory/bbt2.js"></script>
+
+	<noscript>
+<div> <a href='http://ad2.bbmedia.cz/please/redirect/2098/1/1/7/'><img
+src='http://ad2.bbmedia.cz/please/showit/2098/1/1/7/?typkodu=img'
+alt='.' /></a></div> </noscript>
+	<!-- KonecKód: ad2.bbmedia.cz 3.1 -->
+
+	</div><div style="position: absolute; left: 0px; top: 0px; z-index: 1000000000; visibility: hidden; opacity: 1;" id="linkalert-box"><img src="Mod_rewrite%20pro%20hezk%C3%A1%20URL%20-%20RewriteEngine%20a%20RewriteRule%20--%20Servery%20--%20N%C3%A1stroje%20--%20Interval.cz_soubory/none-icon.png" id="linkalert-icon-1"></div>
+
+
+<div style="position: absolute; left: -1000px; top: -1000px; display: none;" id="bbt_add528"><div class="bbt_border" onmouseout='this.className="bbt_border";' onmouseover='this.className="bbt_border bbt_border_over";'><div class="bbt_block"><h3 class="bbt_title" onclick="window.open('http://www.billboard.cz/media-text.php');javascript:event.cancelBubble=true;">Billboard Intextová reklama</h3><div class="bbt_adbox" onmouseout='this.className="bbt_adbox";' onmouseover='this.className="bbt_adbox_over";'><h4>Microsoft Forefront</h4><p>Odražení virů. SNADNĚJŠÍ.<br>Obrana vašeho systému. JEDNODUŠŠÍ.<strong>www.microsoft.com/cze/forefront</strong></p></div></div><h5 onclick="window.open('http://www.billboard.cz/media-text.php');javascript:event.cancelBubble=true;"><span></span><em>o reklamě Billboard »</em></h5></div></div><div style="position: absolute; left: -1000px; top: -1000px; display: none;" id="bbt_add378"><div class="bbt_border" onmouseout='this.className="bbt_border";' onmouseover='this.className="bbt_border bbt_border_over";'><div class="bbt_block"><h3 class="bbt_title" onclick="window.open('http://www.billboard.cz/media-text.php');javascript:event.cancelBubble=true;">Billboard Intextová reklama</h3><div class="bbt_adbox" onmouseout='this.className="bbt_adbox";' onmouseover='this.className="bbt_adbox_over";'><h4>Veškeré právní služby,</h4><p>poskytované v souladu s platnou<br>právní úpravou, Vám nabízí advokát<strong>Mgr. Karel JANDUS</strong></p></div></div><h5 onclick="window.open('http://www.billboard.cz/media-text.php');javascript:event.cancelBubble=true;"><span></span><em>o reklamě Billboard »</em></h5></div></div><div style="position: absolute; left: -1000px; top: -1000px; display: none;" id="bbt_add169"><div class="bbt_border" onmouseout='this.className="bbt_border";' onmouseover='this.className="bbt_border bbt_border_over";'><div class="bbt_block"><h3 class="bbt_title" onclick="window.open('http://www.billboard.cz/media-text.php');javascript:event.cancelBubble=true;">Billboard Intextová reklama</h3><div class="bbt_adbox" onmouseout='this.className="bbt_adbox";' onmouseover='this.className="bbt_adbox_over";'><h4>Chraňte svůj majetek</h4><p>Aplikujte bezpečnostní fólie.<br>Atestováne fólie v kategori P2A P4A<strong>www.madico.cz</strong></p></div></div><h5 onclick="window.open('http://www.billboard.cz/media-text.php');javascript:event.cancelBubble=true;"><span></span><em>o reklamě Billboard »</em></h5></div></div><div style="position: absolute; left: -1000px; top: -1000px; display: none;" id="bbt_add926"><div class="bbt_border" onmouseout='this.className="bbt_border";' onmouseover='this.className="bbt_border bbt_border_over";'><div class="bbt_block"><h3 class="bbt_title" onclick="window.open('http://www.billboard.cz/media-text.php');javascript:event.cancelBubble=true;">Billboard Intextová reklama</h3><div class="bbt_adbox" onmouseout='this.className="bbt_adbox";' onmouseover='this.className="bbt_adbox_over";'><h4>Vyberte si hotovost</h4><p>u pokladny prodejen Albert<br>a Hypernova. Zdarma!<strong>Můžete si vyzvednout až 1500 Kč.</strong></p></div></div><h5 onclick="window.open('http://www.billboard.cz/media-text.php');javascript:event.cancelBubble=true;"><span></span><em>o reklamě Billboard »</em></h5></div></div><div style="position: absolute; left: -1000px; top: -1000px; display: none;" id="bbt_add1097"><div class="bbt_border" onmouseout='this.className="bbt_border";' onmouseover='this.className="bbt_border bbt_border_over";'><div class="bbt_block"><h3 class="bbt_title" onclick="window.open('http://www.billboard.cz/media-text.php');javascript:event.cancelBubble=true;">Billboard Intextová reklama</h3><div class="bbt_adbox" onmouseout='this.className="bbt_adbox";' onmouseover='this.className="bbt_adbox_over";'><h4>Kaspersky to je komplexní</h4><p>ochrana vašich dat ať jsou kdekoliv<br>Antivir, Antispam a nejenom pro PC!<strong>www.kaspersky.cz</strong></p></div></div><h5 onclick="window.open('http://www.billboard.cz/media-text.php');javascript:event.cancelBubble=true;"><span></span><em>o reklamě Billboard »</em></h5></div></div><div style="position: absolute; left: -1000px; top: -1000px; display: none;" id="bbt_add20876"><div class="bbt_border" onmouseout='this.className="bbt_border";' onmouseover='this.className="bbt_border bbt_border_over";'><div class="bbt_block"><h3 class="bbt_title" onclick="window.open('http://www.billboard.cz/media-text.php');javascript:event.cancelBubble=true;">Billboard Intextová reklama</h3><div class="bbt_adbox" onmouseout='this.className="bbt_adbox";' onmouseover='this.className="bbt_adbox_over";'><h4>Buďte krásná a svůdná!</h4><p>Vypracujte si vysněnou postavu s<br>našimi redukčními programy.<strong>být fit není jen sen</strong></p></div></div><h5 onclick="window.open('http://www.billboard.cz/media-text.php');javascript:event.cancelBubble=true;"><span></span><em>o reklamě Billboard »</em></h5></div></div><div style="position: absolute; left: -1000px; top: -1000px; display: none;" id="bbt_add1558"><div class="bbt_border" onmouseout='this.className="bbt_border";' onmouseover='this.className="bbt_border bbt_border_over";'><div class="bbt_block"><h3 class="bbt_title" onclick="window.open('http://www.billboard.cz/media-text.php');javascript:event.cancelBubble=true;">Billboard Intextová reklama</h3><div class="bbt_adbox" onmouseout='this.className="bbt_adbox";' onmouseover='this.className="bbt_adbox_over";'><h4>Vystup z davu!</h4><p>Vyber si COOL e-mailovou adresu.<br><strong>http://www.vystupzdavu.cz/</strong></p></div></div><h5 onclick="window.open('http://www.billboard.cz/media-text.php');javascript:event.cancelBubble=true;"><span></span><em>o reklamě Billboard »</em></h5></div></div><div style="position: absolute; left: -1000px; top: -1000px; display: none;" id="bbt_add8065"><div class="bbt_border" onmouseout='this.className="bbt_border";' onmouseover='this.className="bbt_border bbt_border_over";'><div class="bbt_block"><h3 class="bbt_title" onclick="window.open('http://www.billboard.cz/media-text.php');javascript:event.cancelBubble=true;">Billboard Intextová reklama</h3><div class="bbt_adbox" onmouseout='this.className="bbt_adbox";' onmouseover='this.className="bbt_adbox_over";'><h4>Hubnutí zdravé a trvalé</h4><p>Způsobem hubnutí, který nabízíme<br>zhubnete a váhu si i nadále udržíte!<strong>www.hubnete.cz</strong></p></div></div><h5 onclick="window.open('http://www.billboard.cz/media-text.php');javascript:event.cancelBubble=true;"><span></span><em>o reklamě Billboard »</em></h5></div></div><div style="position: absolute; left: -1000px; top: -1000px; display: none;" id="bbt_add"><div class="bbt_border" onmouseout='this.className="bbt_border";' onmouseover='this.className="bbt_border bbt_border_over";' onclick="window.open('http://bb.billboard.cz/bbtext/');javascript:event.cancelBubble=true;"><div class="bbt_block"><div class="bbt_adbox" onmouseout='this.className="bbt_adbox";' onmouseover='this.className="bbt_adbox_over";'>bbtext</div></div></div></div><a style="display: none;" class="bbt_w">bbtext</a></body></html>

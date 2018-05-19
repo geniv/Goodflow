@@ -1,0 +1,113 @@
+<!doctype html public "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=Windows-1250">
+<title>Funkce CAST (SQL)</title>
+<link rel='stylesheet' style='text/css' href='../function.css'>
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr>
+	<td style="background-image: url(../images/bghead.jpg);
+		background-position: right;
+		background-repeat: no-repeat;">
+	<table width="100%" border="0" cellpadding="0" cellspacing="0"
+		style="background-image:none">
+	<tr>
+		<td style="background-image:none" height="46"
+			width="15%"><img src="../images/title-cz.gif"
+			width="255" height="33"
+			alt="602SQL-Úplná dokumentace"
+			title="602SQL - Úplná dokumentace"
+			border="0"></td>
+		<td width="33%" align="right"><a href="../xml/html/top.html"><img class="floatno"
+			src="../images/index.gif"
+			width="15" height="16"
+			alt="Index" title="Zpět na obsah"
+			border="0" vspace="2"></a> &nbsp;
+			 </td>
+	</tr>
+	</table>
+	</td>
+</tr>
+</table><table class="navigace" border="0" width="100%"  bgcolor="#FFFFBF"><tr> <td
+width="20" align="center"><img class="floatno" src="../images/prev.gif"
+width="15" height="13" alt="&lt;&shy;" title="Předcházející téma"
+border="0"></td><td width="25%"><a
+href="HE_SQL2_COALESCE.htm">COALESCE</a></td> <td width="25%"
+align="right"><img class="floatno" src="../images/up.gif" width="13"
+height="15" alt="Nahoru" title="O jednu úroveň výš" border="0"
+align="middle"></td><td width="25%"><a href="HE_SQL2_FUNKCESQL.htm">Funkce definované normou SQL</a></td>
+<td width="25%" align="right"><a
+href="HE_SQL2_AGREGACNI.htm">Agregační funkce</a></td><td width="20"
+align="center"><img class="floatno" src="../images/next.gif" width="15"
+height="13" alt="&shy;&gt;" title="Následující téma" border="0"></td>
+</tr></table>
+
+
+
+
+<h1><a name="he_sql2_cast"></a>Funkce CAST (SQL)</h1>
+
+<pre><code>CAST (arg AS typ)</code></pre>
+
+<p>Funkce CAST provádí konverzi argumentu <i>arg</i> na zadaný <a href="HE_SQL2_DATOVETYPY.htm"><i>typ</i></a>. </p>
+
+<p><i>(Pozor - funkce není totožná s přetypováním (angl. casting) ve vyšších programovacích jazycích.)</i></p>
+
+<p>Při konverzi hodnoty na znakový řetězec nebo naopak není možné zvolit způsob formátování řetězce. Pokud to vadí, použijte specializovanou konverzní funkci jazyka 602SQL.</p>
+
+<p>Při provádění funkce může dojít k chybám trojího druhu:
+
+<ul>
+	<li>pokud se konvertuje řetězec znaků na jiný typ a hodnota řetězce znaků nereprezentuje hodnotu cílového typu (viz zápis <a href="HE_SQL2_CISLA.htm">čísel</a>, <a href="HE_SQL2_DATUMCAS.htm">data a času</a>), pak nastane chybový <a href="../xml/html/handlingcategories.html">sqlstate</a> 22018;</li>
+
+	<li>pokud se konvertuje na číselný typ a výsledná hodnota se v tomto typu nedá zobrazit (je příliš velká nebo příliš malá), pak nastane chybový <a href="../xml/html/handlingcategories.html">sqlstate</a> 22003;</li>
+
+	<li>pokud se konvertuje na znakový řetězec stanovené délky a převedená hodnota je delší, pak nastane chybový <a href="../xml/html/handlingcategories.html">sqlstate</a> 22001.</li>
+</ul>
+
+<p>Těmto chybám lze zabránit nastavením vhodných voleb ve funkci <a href="HE_F_SETSQLOPTION.htm"><code>Set_sql_option</code></a> (volba SQLOPT_MASK... (8,16,32)). Jsou-li tyto volby zapnuty, pak v prvních dvou případech je výsledkem hodnota NULL, ve třetím případě je řetězec seříznut zprava.</p>
+
+<p>Výsledkem konverze typu REAL na CHAR(n) je semilogaritmický tvar čísla (např. 1.2345E+4) s desetinným oddělovačem tečkou (pokud není <a href="../xml/html/propserver.html">vlastností</a> serveru <b>DecimalSeparator</b> zvolen jiný oddělovač).</p>
+
+<p>Výsledkem konverze typu DATE na CHAR(n) je tvar data 24.12.2002.</p>
+
+<p>Výsledkem konverze typu TIME na CHAR(n) je tvar času 15:45:02.000</p>
+
+<p>Výsledkem konverze typu TIMESTAMP na CHAR(n) je tvar data 24.12.2002 15:45:02.</p>
+
+<p>Výsledkem konverze typu BINARY(n) na CHAR(2*n) je hexadecimální zápis binárního řetězce</p>
+
+<p>Pro konverzi CHAR(n) na REAL platí pravidla pro konvertovatelný řetězec uvedená u funkce <a href="HE_F_STR2REAL.htm"><code>Str2real</code></a>.</p>
+
+<p><b>Příklad použití:</b></p>
+
+<p>Přetypování výrazu z NUMERIC na INTEGER</p>
+
+<pre><code>SELECT Firmy.firma,<b>CAST(SUM(Objednavky.objednavka) AS INT)</b>
+FROM Firmy, Objednavky
+WHERE Objednavky.firma=Firmy.firma
+GROUP BY Firmy.firma</code></pre>
+
+<p><b>Viz</b> konverzní funkce jazyka použitelné v SQL:</p>
+
+<p><a href="HE_F_STR2INT.htm"><code>Str2int</code></a>, <a href="HE_F_STR2BIGINT.htm"><code>Str2bigint</code></a>, <a href="HE_F_STR2REAL.htm"><code>Str2real</code></a>, <a href="HE_F_STR2DATE.htm"><code>Str2date</code></a>, <a href="HE_F_STR2TIME.htm"><code>Str2time</code></a>, <a href="HE_F_STR2TIMESTAMP.htm"><code>Str2timestamp</code></a>, <a href="HE_F_INT2STR.htm"><code>Int2str</code></a>, <a href="HE_F_BIGINT2STR.htm"><code>Bigint2str</code></a>, <a href="HE_F_REAL2STR.htm"><code>Real2str</code></a>, <a href="HE_F_DATE2STR.htm"><code>Date2str</code></a>, <a href="HE_F_TIME2STR.htm"><code>Time2str</code></a>, <a href="HE_F_TIMESTAMP2STR.htm"><code>Timestamp2str</code></a>, <a href="HE_F_DATETIME2TIMESTAMP.htm"><code>Datetime2timestamp</code></a>, <a href="HE_F_TIMESTAMP2DATE.htm"><code>Timestamp2date</code></a>, <a href="HE_F_TIMESTAMP2TIME.htm"><code>Timestamp2time</code></a>, <a href="HE_F_ORD.htm">Ord</a>, <a href="HE_F_CHR.htm"><code>Chr</code></a></p>
+
+
+
+<table class="navigace" border="0" width="100%"  bgcolor="#FFFFBF"><tr> <td
+width="20" align="center"><img class="floatno" src="../images/prev.gif"
+width="15" height="13" alt="&lt;&shy;" title="Předcházející téma"
+border="0"></td><td width="25%"><a
+href="HE_SQL2_COALESCE.htm">COALESCE</a></td> <td width="25%"
+align="right"><img class="floatno" src="../images/up.gif" width="13"
+height="15" alt="Nahoru" title="O jednu úroveň výš" border="0"
+align="middle"></td><td width="25%"><a href="HE_SQL2_FUNKCESQL.htm">Funkce definované normou SQL</a></td>
+<td width="25%" align="right"><a
+href="HE_SQL2_AGREGACNI.htm">Agregační funkce</a></td><td width="20"
+align="center"><img class="floatno" src="../images/next.gif" width="15"
+height="13" alt="&shy;&gt;" title="Následující téma" border="0"></td>
+</tr></table>
+</body>
+</html>

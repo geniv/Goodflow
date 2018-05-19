@@ -1,0 +1,359 @@
+<!doctype html public "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=Windows-1250">
+<title>Struktura systémových tabulek pro došlé zásilky</title>
+<link rel='stylesheet' style='text/css' href='../function.css'>
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr>
+	<td style="background-image: url(../images/bghead.jpg);
+		background-position: right;
+		background-repeat: no-repeat;">
+	<table width="100%" border="0" cellpadding="0" cellspacing="0"
+		style="background-image:none">
+	<tr>
+		<td style="background-image:none" height="46"
+			width="15%"><img src="../images/title-cz.gif"
+			width="255" height="33"
+			alt="602SQL-Úplná dokumentace"
+			title="602SQL - Úplná dokumentace"
+			border="0"></td>
+		<td width="33%" align="right"><a href="../xml/html/top.html"><img class="floatno"
+			src="../images/index.gif"
+			width="15" height="16"
+			alt="Index" title="Zpět na obsah"
+			border="0" vspace="2"></a> &nbsp;
+			 </td>
+	</tr>
+	</table>
+	</td>
+</tr>
+</table><table class="navigace" border="0" width="100%"  bgcolor="#FFFFBF"><tr> <td
+width="20" align="center"><img class="floatno" src="../images/prev.gif"
+width="15" height="13" alt="&lt;&shy;" title="Předcházející téma"
+border="0"></td><td width="25%"><a
+href="HE_MAILEXAMRECEIVE.htm">Příklad příjmu</a></td> <td width="25%"
+align="right"><img class="floatno" src="../images/up.gif" width="13"
+height="15" alt="Nahoru" title="O jednu úroveň výš" border="0"
+align="middle"></td><td width="25%"><a href="HE_MAILRECEIVE.htm">Příjímání zásilek</a></td>
+<td width="25%" align="right">&nbsp;</td>
+<td width="20" align="center">&nbsp;</td>
+</tr></table>
+
+
+
+
+
+<h1><a name="he_mailtables"></a>Struktura pracovních tabulek pro došlé zásilky</h1>
+
+<p>Pracovní tabulky (defaultně se nacházejí v systémové aplikaci <code>_SYSEXT</code>, není-li pomocí parametru profilu <code>InBoxAppl</code> řečeno jinak) je zakázáno editovat - změna struktury způsobí nefunkčnost přijímání pošty. Potřebujete-li přidat další sloupce s dodatečnými informacemi, vytvořte si novou tabulku a relačně ji připojte přes sloupec <code>ID</code>.</p>
+
+<p>Nové záznamy se do tabulek vkládají automaticky, mazat je lze nejlépe pomocí funkce <a href="HE_F_MAILBOXDELETEMSG.htm"><code>MailBoxDeleteMsg</code></a> s příznakem <em>delrec</em> = TRUE nebo běžnými databázovými operacemi.</p>
+
+<p>Sloupce typu řetězec znaků a CLOB (např. <code>Subject</code> nebo <code>Body</code>) používají kódování shodné se systémovým kódováním SQL serveru. Při příjmu zásilek se jejich obsah překóduje (v případě použití Mail602 z kódu Latin 2, v případě POP3 pošty například z kódu ISO-8859-2).</p>
+
+
+<h2>Tabulka s informacemi o došlých zásilkách</h2>
+
+<p>Informace o došlých zásilkách se ukládají do tabulky <code>_INBOXMSGS</code> (není-li pomocí parametru profilu <code>InBoxMessages</code> řečeno jinak). Pokud tato tabulka neexistuje, vytvoří se automaticky při otevření poštovní schránky nebo pomocí SQL funkce <code><a href="HE_F_MAILCREINBOXTABLES.htm">MailCreInBoXTables</a></code>. Aplikace může získat číslo a jméno tabulky pomocí funkce <a href="HE_F_MAILGETINBOXINFO.htm"><code>MailGetInBoxInfo</code></a>.</p> 
+
+<p>Tabulka má následující formát:</p>
+
+<table border=1 cols=5>
+
+<tr valign="top">
+<td width=4%>&nbsp;</td>
+<td width=13%><b>Sloupec</b></td>
+<td width=17%><b>Typ</b></td>
+<td colspan=2 width=66%><b>Popis</b></td>
+</tr>
+
+<tr valign="top">
+<td width=4%>1</td>
+<td width=13%><code>ID</code></td>
+<td width=17%>INT</td>
+<td colspan=2 width=66%>Serverem vytvořené unikátní číslo, slouží k&nbsp;identifikaci zásilky a jako reference do tabulky připojených souborů.</td>
+</tr>
+
+<tr valign="top">
+<td width=4%>2</td>
+<td width=13%><code>Subject</code></td>
+<td width=17%>CHAR(80)</td>
+<td colspan=2 width=66%>Věc zásilky</td>
+</tr>
+
+<tr valign="top">
+<td width=4%>3</td>
+<td width=13%><code>Sender</code></td>
+<td width=17%>CHAR (64)</td>
+<td colspan=2 width=66%>Adresa odesílatele</td>
+</tr>
+
+<tr valign="top">
+<td width=4%>4</td>
+<td width=13%><code>Recipient</code></td>
+<td width=17%>CHAR (64)</td>
+<td colspan=2 width=66%>Adresa příjemce</td>
+</tr>
+
+<tr valign="top">
+<td width=4%>5</td>
+<td width=13%><code>CreDate</code></td>
+<td width=17%>DATE</td>
+<td colspan=2 width=66%>Datum vytvoření zásilky (ne čas vložení tohoto záznamu!)</td>
+</tr>
+
+<tr valign="top">
+<td width=4%>6</td>
+<td width=13%><code>CreTime</code></td>
+<td width=17%>TIME</td>
+<td colspan=2 width=66%>Čas vytvoření zásilky</td>
+</tr>
+
+<tr valign="top">
+<td width=4%>7</td>
+<td width=13%><code>RcvDate</code></td>
+<td width=17%>DATE</td>
+<td colspan=2 width=66%>Datum přijetí zásilky</td>
+</tr>
+
+<tr valign="top">
+<td width=4%>8</td>
+<td width=13%><code>RcvTime</code></td>
+<td width=17%>TIME</td>
+<td colspan=2 width=66%>Čas přijetí zásilky</td>
+</tr>
+
+<tr valign="top">
+<td width=4%>9</td>
+<td width=13%><code>Size</code></td>
+<td width=17%>INT</td>
+<td colspan=2 width=66%>Délka textu dopisu; je-li rovna nule, zásilka neobsahuje dopis, je-li rovna NONEINTEGER, zásilka obsahuje dopis, ale ze seznamu zásilek (bez stažení celé zásilky) nelze zjistit jeho délku.</td>
+</tr>
+
+<tr valign="top">
+<td width=4%>10</td>
+<td width=13%><code>FileCnt</code></td>
+<td width=17%>SMALLINT</td>
+<td colspan=2 width=66%>Počet připojených souborů; pokud zásilka neobsahuje připojené soubory, je vždy rovno nule, pokud obsahuje soubory, pak: pro Mail602 je zde uveden počet souborů, pro ostatní je zde NONESHORT (v SQL NULL), protože přesný počet nelze ze seznamu zásilek (bez stažení celé zásilky) zjistit. Doplní se až po stažení dodatečných informací (buď funkcí <code>MailBoxLoad</code> s parametrem  <code>MBL_FILES </code> nebo funkcí <code>MailBoxGetFilInfo</code>)</td>
+</tr>
+
+<tr valign="top">
+<td width=4%>11</td>
+<td width=13%><code>Flags</code></td>
+<td width=17%>INT</td>
+<td colspan=2 width=66%>Příznaky zásilky</td>
+</tr>
+
+<tr valign="top">
+<td width=4%>&nbsp;</td>
+<td width=13%>&nbsp;</td>
+<td width=17%>&nbsp;</td>
+<td width=8%><code>1</code></td>
+<td width=58%>Zásilka je doporučená</td>
+</tr>
+
+<tr valign="top">
+<td width=4%>&nbsp;</td>
+<td width=13%>&nbsp;</td>
+<td width=17%>&nbsp;</td>
+<td width=8%><code>4</code></td>
+<td width=58%>Zásilka má nízkou prioritu</td>
+</tr>
+
+<tr valign="top">
+<td width=4%>&nbsp;</td>
+<td width=13%>&nbsp;</td>
+<td width=17%>&nbsp;</td>
+<td width=8%><code>8</code></td>
+<td width=58%>Zásilka má vysokou prioritu</td>
+</tr>
+
+<tr valign="top">
+<td width=4%>&nbsp;</td>
+<td width=13%>&nbsp;</td>
+<td width=17%>&nbsp;</td>
+<td width=8%><code>16</code></td>
+<td width=58%>Zásilka má "Osobní" citlivost</td>
+</tr>
+
+<tr valign="top">
+<td width=4%>&nbsp;</td>
+<td width=13%>&nbsp;</td>
+<td width=17%>&nbsp;</td>
+<td width=8%><code>32</code></td>
+<td width=58%>Zásilka má "Soukromou" citlivost</td>
+</tr>
+
+<tr valign="top">
+<td width=4%>&nbsp;</td>
+<td width=13%>&nbsp;</td>
+<td width=17%>&nbsp;</td>
+<td width=8%><code>64</code></td>
+<td width=58%>Zásilka má "Důvěrnou" citlivost</td>
+</tr>
+
+<tr valign="top">
+<td width=4%>&nbsp;</td>
+<td width=13%>&nbsp;</td>
+<td width=17%>&nbsp;</td>
+<td width=8%><code>512</code></td>
+<td width=58%>Zásilka už byla otevřená</td>
+</tr>
+
+<tr valign="top">
+<td width=4%>&nbsp;</td>
+<td width=13%>&nbsp;</td>
+<td width=17%>&nbsp;</td>
+<td width=8%><code>1024</code></td>
+<td width=58%>Zásilka je fax</td>
+</tr>
+
+<tr valign="top">
+<td width=4%>&nbsp;</td>
+<td width=13%>&nbsp;</td>
+<td width=17%>&nbsp;</td>
+<td width=8%><code>2048</code></td>
+<td width=58%>Zásilka je ve vzdálené poštovní schránce</td>
+</tr>
+
+<tr valign="top">
+<td width=4%>12</td>
+<td width=13%><code>Stat</code></td>
+<td width=17%>CHAR</td>
+<td colspan=2 width=66%>Stav zásilky</td>
+</tr>
+
+<tr valign="top">
+<td width=4%>&nbsp;</td>
+<td width=13%>&nbsp;</td>
+<td width=17%>&nbsp;</td>
+<td width=8%><code>0</code></td>
+<td width=58%>Nová zásilka, zásilka přibyla ve schránce od posledního volání funkce <code>MailBoxLoad</code></td>
+</tr>
+
+<tr valign="top">
+<td width=4%>&nbsp;</td>
+<td width=13%>&nbsp;</td>
+<td width=17%>&nbsp;</td>
+<td width=8%><code>1</code></td>
+<td width=58%>Stará zásilka, informace o zásilce byla získána už při minulém volání funkce <code>MailBoxLoad</code></td>
+</tr>
+
+<tr valign="top">
+<td width=4%>&nbsp;</td>
+<td width=13%>&nbsp;</td>
+<td width=17%>&nbsp;</td>
+<td width=8%><code>2</code></td>
+<td width=58%>Zásilka je smazaná, už není v&nbsp;poštovní schránce</td>
+</tr>
+
+<tr valign="top">
+<td width=4%>13</td>
+<td width=13%><code>MsgID</code></td>
+<td width=17%>BINARY(64)</td>
+<td colspan=2 width=66%>Unikátní ID zásilky, slouží k&nbsp;vyhledávání zásilky v&nbsp;poštovní schránce.</td>
+</tr>
+
+<tr valign="top">
+<td width=4%>14</td>
+<td width=13%><code>Body</code></td>
+<td width=17%>CLOB</td>
+<td colspan=2 width=66%>Text dopisu ze zásilky, načítá pouze na explicitní žádost (buď funkcí <code>MailBoxLoad</code> s parametrem  <code>MBL_BODY</code> nebo funkcí <code>MailBoxGetMsgEx</code>).</td>
+</tr>
+
+<tr valign="top">
+<td width=4%>15</td>
+<td width=13%><code>Addresses</code></td>
+<td width=17%>CLOB</td>
+<td colspan=2 width=66%>Seznam všech adresátů ve formátu 
+<code>TO: jméno</code>
+<br>
+a/nebo (v případě "na vědomí") ve formátu <code>CC: jméno</code>
+</td>
+</tr>
+
+<tr valign="top">
+<td width=4%>16</td>
+<td width=13%><code>Profile</code></td>
+<td width=17%>CHAR (64)</td>
+<td colspan=2 width=66%>Jméno profilu, pod kterým byl záznam vytvořen; to je kvůli případu, když víc aplikací stahuje poštu pod různými profily.</td>
+</tr>
+
+<tr valign="top">
+<td width=4%>17</td>
+<td width=13%><code>Header</code></td>
+<td width=17%>CLOB</td>
+<td colspan=2 width=66%>Hlavička zásilky</td>
+</tr>
+</table><br>
+
+<p>Struktura tabulky <code>_INBOXMSGS</code> se změnila ve verzi 7.0d (přibyly poslední 3 sloupce). Konverze na novou strukturu proběhne automaticky.</p>
+
+<h2>Tabulka s informacemi o připojených souborech</h2>
+
+<p>Informace o připojených tabulkách se ukládají do tabulky <code>_INBOXFILES</code> (není-li pomocí parametru profilu <code>InBoxFiles</code> řečeno jinak). Pokud tato tabulka neexistuje, vytvoří se automaticky při otevření poštovní schránky nebo pomocí SQL funkce <code><a href="HE_F_MAILCREINBOXTABLES.htm">MailCreInBoXTables</a></code>. Aplikace může získat číslo a jméno tabulky pomocí funkce <a href="HE_F_MAILGETINBOXINFO.htm"><code>MailGetInBoxInfo</code></a>. Tabulka má následující formát:</p>
+
+<table border=1 cols=4>
+
+<tr valign="top">
+<td width=4%>&nbsp;</td>
+<td width=15%><b>Sloupec</b></td>
+<td width=22%><b>Typ</b></td>
+<td width=59%><b>Popis</b></td>
+</tr>
+
+<tr valign="top">
+<td width=4%>1</td>
+<td width=15%><code>ID</code></td>
+<td width=22%>INT</td>
+<td width=59%>ID záznamu o zásilce z tabulky <code>_INBOXMSGS</code>.</td>
+</tr>
+
+<tr valign="top">
+<td width=4%>2</td>
+<td width=15%><code>Name</code></td>
+<td width=22%>CHAR (254)</td>
+<td width=59%>Jméno souboru</td>
+</tr>
+
+<tr valign="top">
+<td width=4%>3</td>
+<td width=15%><code>Size</code></td>
+<td width=22%>INT</td>
+<td width=59%>Velikost souboru</td>
+</tr>
+
+<tr valign="top">
+<td width=4%>4</td>
+<td width=15%><code>Fdate</code></td>
+<td width=22%>DATE</td>
+<td width=59%>Datum vytvoření souboru</td>
+</tr>
+
+<tr valign="top">
+<td width=4%>5</td>
+<td width=15%><code>FTime</code></td>
+<td width=22%>TIME</td>
+<td width=59%>Čas vytvoření souboru</td>
+</tr>
+</table><br>
+
+
+
+<table class="navigace" border="0" width="100%"  bgcolor="#FFFFBF"><tr> <td
+width="20" align="center"><img class="floatno" src="../images/prev.gif"
+width="15" height="13" alt="&lt;&shy;" title="Předcházející téma"
+border="0"></td><td width="25%"><a
+href="HE_MAILEXAMRECEIVE.htm">Příklad příjmu</a></td> <td width="25%"
+align="right"><img class="floatno" src="../images/up.gif" width="13"
+height="15" alt="Nahoru" title="O jednu úroveň výš" border="0"
+align="middle"></td><td width="25%"><a href="HE_MAILRECEIVE.htm">Příjímání zásilek</a></td>
+<td width="25%" align="right">&nbsp;</td>
+<td width="20" align="center">&nbsp;</td>
+</tr></table>
+
+</body>
+</html>

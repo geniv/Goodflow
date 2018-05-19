@@ -1,0 +1,53 @@
+<!doctype html public "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=Windows-1250">
+<title>Funkce Logout</title>
+<link rel='stylesheet' style='text/css' href='../function.css'>
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000">
+
+
+
+<h2 class=function>Logout</h2>
+<img src='../images/cpp.gif' width='44' height='16' border='0' alt='c/c++' align='middle' hspace='2'><img src='../images/pascal.gif' width='44' height='16' border='0' alt='pascal' align='middle' hspace='2'>
+
+
+<br><br>
+<div class='typ'>BOOL <b>[cd_]Logout</b>([cdp_t cdp]);<br>
+function <b>[cd_]Logout </b>([cdp : cdp_t]) : Boolean;
+</div>
+
+
+<p><b>Parametry</b></p>
+
+<table border=1 cols=2 frame=box rules=all width=383>
+
+<tr valign="top">
+<td width=23%>[<i>cdp </i></td>
+<td width=77%><a href="HE_EXTCD.htm">kontextová proměnná</a> klienta]  </td>
+</tr>
+</table><br>
+
+<p><b>Popis </b></p>
+
+<p>Funkce <b><code>Logout</code></b> ukončuje komunikaci mezi aplikací a databází - odhlašuje uživatele. Po provedení <b><code>Logout</code></b> zůstává klient přihlášen jako Anonymní a komunikovat s&nbsp;databází lze pouze v případě přidělených práv tomuto uživateli (funkce <b><code>Logout</code></b> má stejný význam jako anonymní login).  </p>
+
+<p>Použití - viz <a href="../xml/html/extstartstop.html">kostra aplikace</a> v externím jazyce.</p>
+
+<p>Pokud je funkce <b><code>Logout</code></b> provedena uvnitř transakce (což nelze doporučit), pak automaticky vyvolá operaci <b><code>Commit</code></b>. Takový případ je ohlášen varováním. Je-li <b><code>Commit</code></b> neúspěšný, bude neúspěšný také <b><code>Logout</code></b>.</p>
+
+<p><b>Hodnota funkce </b></p>
+
+<p>Pokud funkce vrátí FALSE, stane se přihlášeným uživatelem uživatel ANONYMOUS. Vrátí-li funkce TRUE, pak došlo k chybě.&nbsp; Povahu chyby lze zjistit voláním funkce <b><code>Signalize.</code></b></p>
+
+<p><b>Viz</b></p>
+
+<ul class='viz'>
+  <li><a href="HE_F_LOGIN.htm">Login</a> </li>
+  <li><a href="HE_F_WHOAMI.htm">Who_am_I</a></li>
+</ul>
+
+</body>
+</html>

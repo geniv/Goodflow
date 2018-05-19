@@ -1,0 +1,100 @@
+<!doctype html public "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=Windows-1250">
+<title>Funkce SUBSTRING (SQL)</title>
+<link rel='stylesheet' style='text/css' href='../function.css'>
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr>
+	<td style="background-image: url(../images/bghead.jpg);
+		background-position: right;
+		background-repeat: no-repeat;">
+	<table width="100%" border="0" cellpadding="0" cellspacing="0"
+		style="background-image:none">
+	<tr>
+		<td style="background-image:none" height="46"
+			width="15%"><img src="../images/title-cz.gif"
+			width="255" height="33"
+			alt="602SQL-Úplná dokumentace"
+			title="602SQL - Úplná dokumentace"
+			border="0"></td>
+		<td width="33%" align="right"><a href="../xml/html/top.html"><img class="floatno"
+			src="../images/index.gif"
+			width="15" height="16"
+			alt="Index" title="Zpět na obsah"
+			border="0" vspace="2"></a> &nbsp;
+			 </td>
+	</tr>
+	</table>
+	</td>
+</tr>
+</table><table class="navigace" border="0" width="100%"  bgcolor="#FFFFBF"><tr> <td
+width="20" align="center"><img class="floatno" src="../images/prev.gif"
+width="15" height="13" alt="&lt;&shy;" title="Předcházející téma"
+border="0"></td><td width="25%"><a
+href="HE_SQL2_DELKARETEZCE.htm">CHAR_LENGTH, OCTET_LENGTH, BIT_LENGTH</a></td> <td width="25%"
+align="right"><img class="floatno" src="../images/up.gif" width="13"
+height="15" alt="Nahoru" title="O jednu úroveň výš" border="0"
+align="middle"></td><td width="25%"><a href="HE_SQL2_FUNKCESQL.htm">Funkce definované normou SQL</a></td>
+<td width="25%" align="right"><a
+href="HE_SQL2_UPPERLOWER.htm">UPPER, LOWER</a></td><td width="20"
+align="center"><img class="floatno" src="../images/next.gif" width="15"
+height="13" alt="&shy;&gt;" title="Následující téma" border="0"></td>
+</tr></table>
+
+
+
+
+<h1>Funkce SUBSTRING (SQL)</h1>
+
+<pre><code>SUBSTRING ( str FROM start [ FOR délka ] )</code></pre>
+
+<p>Funkce SUBSTRING vybírá podřetězec ze znakového nebo binárního&nbsp;řetězce, CLOBu nebo BLOBu <i>str</i> (včetně unicodových řetězců). Podřetězec začíná od pozice <i>start</i> a sahá nejvýše do konce argumentu <i>str</i>. Je-li uvedena <i>délka</i>, pak výsledný řetězec není delší než tato délka.</p>
+
+<p>Parametry<i> start</i> a <i>délka</i> musí být celočíselné. Pozice v&nbsp;řetězci se číslují od 1. Je-li některý argument NULL, pak výsledek je NULL.</p>
+
+<p>Před verzí 8.0 byl typ hodnoty této funkce vždy stejný jako typ argumentu <i>str</i>. Od verze 8.0 je-li uvedena <i>délka</i>, je-li to celočíselná konstanta a nepřevyšuje-li maximální možnou délku řetězce, pak:
+
+<ul>
+	<li>pokud <i>str</i> je znakový nebo binární řetězec s maximální délkou větši než <i>délka</i>, pak hodnota funkce je stejného typu, ale maximální délka hodnoty je <i>délka</i>;</li>
+
+	<li>pokud <i>str</i> je BLOB, pak hodnota funkce je binární řetězec s maximální délkou <i>délka</i>;</li>
+
+	<li>pokud <i>str</i> je CLOB, pak hodnota funkce je znakový řetězec s maximální délkou <i>délka</i>;</li>
+</ul>
+
+<p>v ostatních případech je typ hodnoty funkce stejný jako typ argumentu <i>str</i>. Tato změna umožňuje využít funkci SUBSTRING pro efektivní tvorbu indexových výrazů.</p>
+
+<p><b>Příklad použití:</b></p>
+
+<p>Test, začíná-li hodnota proměnné znakem X:</p>
+
+<pre><code>IF <b>SUBSTRING</b>(Polozka FROM 1 FOR 1) = 'X' THEN 
+    UPDATE  SET cena = cena*1.1 WHERE CURRENT OF curcen;</code></pre>
+
+<p><b>Viz</b></p>
+
+<ul class='viz'>
+ <li><a href="HE_SQL2_DELKARETEZCE.htm">CHAR_LENGTH</a> </li>
+ <li><a href="HE_SQL2_POSITION.htm">POSITION</a> </li>
+</ul>
+
+
+
+<table class="navigace" border="0" width="100%"  bgcolor="#FFFFBF"><tr> <td
+width="20" align="center"><img class="floatno" src="../images/prev.gif"
+width="15" height="13" alt="&lt;&shy;" title="Předcházející téma"
+border="0"></td><td width="25%"><a
+href="HE_SQL2_DELKARETEZCE.htm">CHAR_LENGTH, OCTET_LENGTH, BIT_LENGTH</a></td> <td width="25%"
+align="right"><img class="floatno" src="../images/up.gif" width="13"
+height="15" alt="Nahoru" title="O jednu úroveň výš" border="0"
+align="middle"></td><td width="25%"><a href="HE_SQL2_FUNKCESQL.htm">Funkce definované normou SQL</a></td>
+<td width="25%" align="right"><a
+href="HE_SQL2_UPPERLOWER.htm">UPPER, LOWER</a></td><td width="20"
+align="center"><img class="floatno" src="../images/next.gif" width="15"
+height="13" alt="&shy;&gt;" title="Následující téma" border="0"></td>
+</tr></table>
+</body>
+</html>

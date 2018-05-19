@@ -1,0 +1,405 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="cs" lang="cs"><head>
+
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"><title>PHP triky - Návrh databáze</title>
+
+<style type="text/css">@import url(jush.css);</style>
+<link rel="stylesheet" type="text/css" href="navrh-databaze.php_soubory/default.css">
+<link rel="shortcut icon" type="image/x-icon" href="http://php.vrana.cz/favicon.ico">
+<link rel="alternate" type="application/rss+xml" href="http://php.vrana.cz/rss.php" title="PHP triky">
+<link rel="alternate" type="application/atom+xml" href="http://php.vrana.cz/atom.php" title="PHP triky">
+<link rel="alternate" type="application/atom+xml" href="http://php.vrana.cz/atom.php?diskuse=" title="PHP triky - diskuse">
+<link rel="search" type="application/opensearchdescription+xml" href="http://php.vrana.cz/opensearch.php" title="PHP triky">
+<script type="text/javascript" src="navrh-databaze.php_soubory/jush.js" defer="defer"></script></head><body onload="jush.highlight_tag('pre'); jush.highlight_tag('code');">
+<div id="hlavni">
+
+<script type="text/javascript">
+google_language = 'cs';
+google_ad_client = "pub-0606179420487318";
+google_alternate_ad_url = "http://php.vrana.cz/adsense.html";
+google_ad_width = 728;
+google_ad_height = 15;
+google_ad_format = "728x15_0ads_al_s";
+google_ad_channel = "0944389564"; // Hlavička
+google_color_border = "FFFFFF";
+</script>
+<script type="text/javascript" src="navrh-databaze.php_soubory/show_ads.js"></script><iframe name="google_ads_frame" src="navrh-databaze.php_soubory/ads.htm" marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" frameborder="0" height="15" scrolling="no" width="728"></iframe>
+
+<!-- google_ad_section_start -->
+<h1>Návrh databáze</h1>
+<div style="border: 3px solid Navy; margin: 0pt 0pt 0.5em 0.5em; padding: 5px 5px 0pt; background: rgb(221, 221, 255) none repeat scroll 0%; float: right; width: 28em; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial;">
+<h3 style="margin-top: 0pt;">Školení, která pořádám</h3>
+<ul>
+<li><b>24.6.2008</b> <a href="http://php.vrana.cz/skoleni-bezpecnost-php-aplikaci.php">Bezpečnost PHP aplikací</a></li>
+<li><b>25.6.2008</b> <a href="http://php.vrana.cz/skoleni-navrh-a-pouzivani-mysql-databaze.php">Návrh a používání MySQL databáze</a></li>
+<li><b>26.6.2008</b> <a href="http://php.vrana.cz/skoleni-javascript-a-ajax.php">JavaScript a AJAX</a></li>
+<li><b>27.6.2008</b> <a href="http://php.vrana.cz/skoleni-vykonnost-webovych-aplikaci.php">Výkonnost webových aplikací</a></li>
+<li><a href="http://www.root.cz/texty/akademie-uvod-do-php/">Úvod do PHP</a></li>
+<li><a href="http://www.root.cz/texty/kurz-programovani-v-php-5/">Programování v PHP 5</a></li>
+</ul>
+</div>
+<p>Při vytváření webové aplikace, která načítá nebo ukládá nějaká data,
+je jedním z nejdůležitějších prvních kroků správný návrh datových
+struktur, ve kterých budou tato data uchována. V první řadě musím
+doporučit pro ukládání dat zásadně používat databáze. K webovým
+aplikacím totiž může přistupovat více uživatelů najednou a např. při
+ukládání dat do souborů se nevyhnete nutnosti tyto soubory např.
+správně <a href="http://www.php.net/manual/en/function.flock.php" title="flock">zamykat</a>. Kromě toho databáze nabízí nesrovnatelně větší komfort při jakékoliv manipulaci s daty.</p>
+<p>Optimálnímu návrhu databáze se věnují celé teorie, obvykle ale stačí používat selský rozum a dodržovat několik zásad:</p>
+<ol>
+<li>Hodnoty v jednotlivých sloupcích tabulek by měly být vnitřně nedělitelné. Je tedy např. lepší ukládat samostatně <i>Křestní jméno</i> a <i>Příjmení</i> než celkové <i>Jméno</i>. Správně by odděleně mělo být uloženo např. i <i>Ulice</i> a <i>Číslo popisné</i>, to mi ale připadá už jako zbytečné pedantství.</li>
+<li>Data by měla být ukládána do sloupců správných typů. Nebojte se používat typy <a href="http://dev.mysql.com/doc/refman/4.1/en/enum.html"><kbd>ENUM</kbd></a> nebo <a href="http://dev.mysql.com/doc/refman/4.1/en/datetime.html"><kbd>DATE</kbd></a>.
+Pokud pro některá data neexistuje odpovídající databázový typ (např.
+telefonní číslo), zvolte a používejte pro něj jednotný formát (nejlépe
+podle již existující normy).</li>
+<li>Jednotlivé řádky by měly mít jednoznačný identifikátor (primární
+klíč) nezávislý na uložených datech. Nezávislost na datech je důležitá
+kvůli možnosti libovolná data změnit, skutečných jednoznačných
+identifikátorů navíc ve skutečném životě není moc (nelze se spolehnout
+např. ani na rodné číslo). Tento identifikátor se nikde nemusí
+zobrazovat, ale použije se při aktualizaci nebo mazání záznamů, při
+odkazování na záznam z jiných tabulek a podobně. V MySQL lze s výhodou
+použít modifikátor <a href="http://dev.mysql.com/doc/refman/4.1/en/example-auto-increment.html"><kbd>AUTO_INCREMENT</kbd></a>, jinde se obvykle používají <a href="http://www.postgresql.org/docs/8.0/static/sql-createsequence.html">sekvence</a>.</li>
+<li>Veškerá data kromě odkazů na primární klíče by v databázi měla být uložena právě jednou. Tedy např. tabulka <code>vyrobky(id int, nazev varchar(100), skupina varchar(50))</code> je navržená špatně, správný návrh zahrnuje dvě tabulky – <code>vyrobky(id int, nazev varchar(100), skupina int)</code> a <code>skupiny(id int, nazev varchar(50))</code>.
+Pokud se data opakují, vede to k neefektivitě (jak paměťové, tak
+výkonnostní) a zhoršuje se možnost úpravy dat a případného rozšiřování
+databáze (např. situace, kdy bychom kromě názvu skupiny chtěli evidovat
+také pořadí skupiny při výpisu). Pokud se jeden výrobek může nacházet
+ve více skupinách, obsahuje správný návrh tři tabulky – <code>vyrobky(id int, nazev varchar(100))</code>, <code>skupiny(id int, nazev varchar(50))</code> a <code>vyrobky_skupiny(vyrobek int, skupina int)</code>.</li>
+<li>Návrh databáze by měl být pevný a webová aplikace by ani neměla mít
+právo modifikovat strukturu existujících tabulek nebo vytvářet tabulky
+nové. Viděl jsem aplikaci, která pro každé diskusní fórum vytvářela
+tabulku s jeho příspěvky, tedy něco jako <code>prispevky_<i>id_skupiny</i>(id int, autor varchar(50), zprava text)</code>. Takto navržená databáze je rychle zamořená spoustou tabulek, takže např. příkaz <a href="http://dev.mysql.com/doc/refman/4.1/en/show-tables.html"><kbd>SHOW TABLES</kbd></a> se stává v podstatě nepoužitelný, a jakékoliv změny ve struktuře nebo datech tabulky jsou mnohem pracnější. Správný návrh je <code>prispevky(id int, skupina int, autor varchar(50), zprava text)</code>, při <a href="http://www.root.cz/clanky/vyuziti-databazovych-indexu/" title="Jakub Vrána: Využití databázových indexů">správně navržených indexech</a> samozřejmě ani neutrpí výkon.</li>
+</ol>
+<p>Dobrou zásadou je také ukládat opravdu všechna data do databáze a ne
+např. přímo do PHP kódu. Při vytvoření vhodného administračního
+rozhraní vás pak uživatel aplikace nemusí obtěžovat ani v případě, kdy
+bude chtít změnit nějakou zdánlivě neměnnou položku jako např. cenu
+poštovného a balného nebo výši DPH.</p>
+<p class="skoleni">Přijďte si o tomto tématu popovídat na <a href="http://php.vrana.cz/skoleni-navrh-a-pouzivani-mysql-databaze.php" class="inner">školení o návrhu a používání MySQL databáze</a> (25.&nbsp;6.&nbsp;2008, Brno).</p>
+<div class="podpis">Jakub Vrána, <a href="http://php.vrana.cz/-vyuka.php">Výuka</a>, 2.5.2005, <a href="#diskuse" name="diskuse">diskuse</a>: 18 (nové: 0) - <a href="http://php.vrana.cz/atom.php?diskuse=navrh-databaze">Atom diskuse</a></div>
+<h2>Články, které by vás také mohly zajímat</h2>
+<ul>
+<li><a href="http://php.vrana.cz/neinicializovane-promenne.php">Neinicializované proměnné</a> <!-- (20) --></li>
+<li><a href="http://php.vrana.cz/konfigurace-v-zavislosti-na-stroji.php">Konfigurace v závislosti na stroji</a> <!-- (19) --></li>
+<li><a href="http://php.vrana.cz/total-commander.php">Total Commander</a> <!-- (19) --></li>
+<li><a href="http://php.vrana.cz/reference.php">Reference</a> <!-- (19) --></li>
+<li><a href="http://php.vrana.cz/skryti-zdrojoveho-kodu.php">Skrytí zdrojového kódu</a> <!-- (19) --></li>
+</ul>
+
+<h2>Diskuse</h2>
+<div id="d-305" class="diskuse">
+<h3>Erix: </h3>
+"by ani neměla mít právo modifikovat strukturu existujících tabulek"
+<br>Prave premyslim, jak vytvorit vicejazycny web. Mel jsem v hlave
+tabulku se strukturou, kde kazdy radek by predstavoval jeden urcity
+vyraz <br>a sloupce jednotlive jazyky. Ale prave pri pridavani dalsiho
+jazyka by se modifikovala tabulka pridanim dalsiho sloupce. Jak lepe
+byste to resili?
+<br>Erix <div class="podpis"><a href="#d-305">#</a> 2.5.2005 02:10:43 <a href="http://php.vrana.cz/navrh-databaze.php?re=305#prispevek" rel="nofollow" onclick="document.getElementById('re').value = '305'; document.getElementById('reakce-na').innerHTML = 'Reakce na: Erix'; location.href = '#prispevek'; return false;">reagovat</a></div>
+</div>
+<div id="d-306" class="diskuse" style="margin-left: 3ex;">
+<h3><img src="navrh-databaze.php_soubory/www.png" alt="ikona" height="16" width="16"> <a href="http://www.dgx.cz/trine/" rel="nofollow">dgx</a>: </h3>Asi bych vytvořil tabulku se třemi sloupci: 
+<br>
+<br>ID výrazu (řetězec)
+<br>ID jazyka (dva znaky)
+<br>přeložený výraz (řetězec)
+<br>
+<br>(ID výrazu + ID jazyka) by tvořilo primární klíč.
+<br>
+<br>Takže přidání dalšího jazyka by znamenalo jen přidání řádků do tabulky.<div class="podpis"><a href="#d-306">#</a> 2.5.2005 03:47:09 <a href="http://php.vrana.cz/navrh-databaze.php?re=306#prispevek" rel="nofollow" onclick="document.getElementById('re').value = '306'; document.getElementById('reakce-na').innerHTML = 'Reakce na: dgx'; location.href = '#prispevek'; return false;">reagovat</a></div>
+</div>
+<div id="d-309" class="diskuse" style="margin-left: 3ex;">
+<h3><img src="navrh-databaze.php_soubory/php.png" alt="ikona" height="16" width="16"> <a href="http://php.vrana.cz/" rel="nofollow">Jakub Vrána</a>: </h3>Nechci
+"kázat vodu a pít víno", takže přiznávám, že modifikaci struktury
+tabulek kvůli přidání jazykové verze pokládám za nejmenší zlo. Mám o
+tom napsaný článek, vydám ho ve středu.<div class="podpis"><a href="#d-309">#</a> 2.5.2005 07:27:51 <a href="http://php.vrana.cz/navrh-databaze.php?re=309#prispevek" rel="nofollow" onclick="document.getElementById('re').value = '309'; document.getElementById('reakce-na').innerHTML = 'Reakce na: Jakub Vrána'; location.href = '#prispevek'; return false;">reagovat</a></div>
+</div>
+<div id="d-386" class="diskuse" style="margin-left: 3ex;">
+<h3>tom: </h3>
+delat vicejazycnou verzi pres ukladani do dbs je podle me zbytecne,
+staci vyuzit definovani vlastnich konstant do nejekeho souboru a ten si
+nacitat<div class="podpis"><a href="#d-386">#</a> 20.5.2005 15:38:11 <a href="http://php.vrana.cz/navrh-databaze.php?re=386#prispevek" rel="nofollow" onclick="document.getElementById('re').value = '386'; document.getElementById('reakce-na').innerHTML = 'Reakce na: tom'; location.href = '#prispevek'; return false;">reagovat</a></div>
+</div>
+<div id="d-387" class="diskuse" style="margin-left: 6ex;">
+<h3><img src="navrh-databaze.php_soubory/php.png" alt="ikona" height="16" width="16"> <a href="http://php.vrana.cz/" rel="nofollow">Jakub Vrána</a>: </h3>Myšlena
+je situace, kdy např. u výrobku má být uložen např. jak anglický název,
+tak český. To přes konstanty dost dobře dělat nejde.<div class="podpis"><a href="#d-387">#</a> 20.5.2005 15:42:41 <a href="http://php.vrana.cz/navrh-databaze.php?re=387#prispevek" rel="nofollow" onclick="document.getElementById('re').value = '387'; document.getElementById('reakce-na').innerHTML = 'Reakce na: Jakub Vrána'; location.href = '#prispevek'; return false;">reagovat</a></div>
+</div>
+<div id="d-6314" class="diskuse" style="margin-left: 9ex;">
+<h3>crook: </h3>
+Vyrobek ID Angl verze + nazev<br>Vyrobek ID Ceska verz verze + nazev ID jsou samozrejme stejna<div class="podpis"><a href="#d-6314">#</a> 21.4.2008 15:16:24 <a href="http://php.vrana.cz/navrh-databaze.php?re=6314#prispevek" rel="nofollow" onclick="document.getElementById('re').value = '6314'; document.getElementById('reakce-na').innerHTML = 'Reakce na: crook'; location.href = '#prispevek'; return false;">reagovat</a></div>
+</div>
+<div id="d-397" class="diskuse" style="margin-left: 3ex;">
+<h3>DaMage: </h3>
+Ak ide o jazykové mutácie systému (nie článkov), ja využívam jazyky v
+XML, hodnoty načitávam pomocou SimpleXML... celkovo vratane štruktury
+frameworku je to pod 50 riadkov kódu<div class="podpis"><a href="#d-397">#</a> 24.5.2005 21:00:02 <a href="http://php.vrana.cz/navrh-databaze.php?re=397#prispevek" rel="nofollow" onclick="document.getElementById('re').value = '397'; document.getElementById('reakce-na').innerHTML = 'Reakce na: DaMage'; location.href = '#prispevek'; return false;">reagovat</a></div>
+</div>
+<div id="d-307" class="diskuse">
+<h3><a href="http://llaik.rivil.com/" rel="nofollow">Llaik</a>: </h3>K
+posledni vete - to je mysleno tak, ze na kazde te strance budu mit
+minimalne o jeden dotaz do db vice jen proto, abych si vytahl hodnoty,
+ktere se meni jednou za X let?
+<br>
+<br>Vas databazovy server vas musi mit rad:)<div class="podpis"><a href="#d-307">#</a> 2.5.2005 06:26:03 <a href="http://php.vrana.cz/navrh-databaze.php?re=307#prispevek" rel="nofollow" onclick="document.getElementById('re').value = '307'; document.getElementById('reakce-na').innerHTML = 'Reakce na: Llaik'; location.href = '#prispevek'; return false;">reagovat</a></div>
+</div>
+<div id="d-308" class="diskuse" style="margin-left: 3ex;">
+<h3><img src="navrh-databaze.php_soubory/www.png" alt="ikona" height="16" width="16"> <a href="http://www.dgx.cz/trine/" rel="nofollow">dgx</a>: </h3>Pomiňme fakt, že takové dotazy jsou nesmírně rychlé a že vše se dá ještě vylepšit chytrým kešováním.
+<br>
+<br>Obecně jde o to, že v dnešní době máme gigaherzové procesory za pár
+korun a doslova nadbytek strojového času. Pokud se využije ke
+zkvalitnění kódu, tedy jako režie dobrých programátorských technik, je
+to jen dobře.
+<br>
+<br>Uvědomte si, že při rozšířování prasácky napsané aplikace vyhodíte
+stovky hodin práce jen kvůli hledání chyb a testování. Zatímco s
+křištálově čistým kódem je radost pracovat. A třeba tři stovky hodin
+programátora po 800,- Kč dělají v přepočtu 100 rychlých procesorů
+Pentium 2.4<div class="podpis"><a href="#d-308">#</a> 2.5.2005 07:26:08 <a href="http://php.vrana.cz/navrh-databaze.php?re=308#prispevek" rel="nofollow" onclick="document.getElementById('re').value = '308'; document.getElementById('reakce-na').innerHTML = 'Reakce na: dgx'; location.href = '#prispevek'; return false;">reagovat</a></div>
+</div>
+<div id="d-310" class="diskuse" style="margin-left: 6ex;">
+<h3>maro: </h3>
+Uvítal bych i nějaký článek o kešování. dík<div class="podpis"><a href="#d-310">#</a> 2.5.2005 10:33:36 <a href="http://php.vrana.cz/navrh-databaze.php?re=310#prispevek" rel="nofollow" onclick="document.getElementById('re').value = '310'; document.getElementById('reakce-na').innerHTML = 'Reakce na: maro'; location.href = '#prispevek'; return false;">reagovat</a></div>
+</div>
+<div id="d-313" class="diskuse" style="margin-left: 9ex;">
+<h3>JersyWoo: </h3>
+K nějakému článku o kešování se přidávám taky.<div class="podpis"><a href="#d-313">#</a> 2.5.2005 14:57:52 <a href="http://php.vrana.cz/navrh-databaze.php?re=313#prispevek" rel="nofollow" onclick="document.getElementById('re').value = '313'; document.getElementById('reakce-na').innerHTML = 'Reakce na: JersyWoo'; location.href = '#prispevek'; return false;">reagovat</a></div>
+</div>
+<div id="d-314" class="diskuse" style="margin-left: 6ex;">
+<h3><a href="http://llaik.rivil.com/" rel="nofollow">Llaik</a>: </h3>No pokud mam na stranku 200 hitu za vterinu, tak to znamena dalsich 200 dotazu za vterinu.
+<br>
+<br>V pripade, ze se mi jeden update zdrzi o 0.1s, tak za nim ceka ve
+fronte dalsich 200 dotazu, za kterymi muze cekat dalsi update...
+<br>
+<br>Jiste, v tomto pripade je to spatne navrzena db, ale co tim chci
+rici - proc delat naprosto zbytecne dotazy? Kvuli jednodussi
+administraci? Pokud se ta data meni jednou za rok, v cem je problem
+napsat administracni system, ktery hodnoty ulozi do konfiguraku na disk
+ke zbytku nastaveni?<div class="podpis"><a href="#d-314">#</a> 2.5.2005 20:46:08 <a href="http://php.vrana.cz/navrh-databaze.php?re=314#prispevek" rel="nofollow" onclick="document.getElementById('re').value = '314'; document.getElementById('reakce-na').innerHTML = 'Reakce na: Llaik'; location.href = '#prispevek'; return false;">reagovat</a></div>
+</div>
+<div id="d-315" class="diskuse" style="margin-left: 9ex;">
+<h3><img src="navrh-databaze.php_soubory/www.png" alt="ikona" height="16" width="16"> <a href="http://www.dgx.cz/trine/" rel="nofollow">dgx</a>: </h3>&gt;&gt; ktery hodnoty ulozi do konfiguraku na disk ke zbytku nastaveni?
+<br>
+<br>ano, to je právě to kešování. Data mohou být v databázi a při změně
+se v nějaké v(ý)hodné formě uloží na rychleji přístupné místo. <div class="podpis"><a href="#d-315">#</a> 3.5.2005 05:35:59 <a href="http://php.vrana.cz/navrh-databaze.php?re=315#prispevek" rel="nofollow" onclick="document.getElementById('re').value = '315'; document.getElementById('reakce-na').innerHTML = 'Reakce na: dgx'; location.href = '#prispevek'; return false;">reagovat</a></div>
+</div>
+<div id="d-311" class="diskuse">
+<h3>Solvina: </h3>
+"Optimálnímu návrhu databáze se věnují celé teorie, obvykle ale stačí používat selský rozum a dodržovat několik zásad"
+<br>
+<br>Jirka ma jiste pravdu. Nicmene o normalnich formach by mel slyset
+(a neco si precist) opravdu kazdy. Ony se vlastne ani moc nelisi od
+tech principu popsanych v clanku. <div class="podpis"><a href="#d-311">#</a> 2.5.2005 11:32:39 <a href="http://php.vrana.cz/navrh-databaze.php?re=311#prispevek" rel="nofollow" onclick="document.getElementById('re').value = '311'; document.getElementById('reakce-na').innerHTML = 'Reakce na: Solvina'; location.href = '#prispevek'; return false;">reagovat</a></div>
+</div>
+<div id="d-316" class="diskuse" style="margin-left: 3ex;">
+<h3>lamka: </h3>
+Jo, jenom člověk který ty xNF zná, může pracovat mnohem efektivněji,
+protože ví co dělá a kdy je která podoba dat výhodná. Narozdíl od lamy
+která slepě opakuje jakási dogmata.
+<br>
+<br>K poznámce o rozdělení jméno, příjmení a ulice, číslo:
+<br>
+<br>Všiml jste si pane geniální autore, že některé obce nemají ulice?
+Nebo že někteří lidé mají kromě jména a příjmení ještě něco jiného?
+Možná tomu navrhování db nerozumíte až tak jak si myslíte.<div class="podpis"><a href="#d-316">#</a> 3.5.2005 12:49:09 <a href="http://php.vrana.cz/navrh-databaze.php?re=316#prispevek" rel="nofollow" onclick="document.getElementById('re').value = '316'; document.getElementById('reakce-na').innerHTML = 'Reakce na: lamka'; location.href = '#prispevek'; return false;">reagovat</a></div>
+</div>
+<div id="d-317" class="diskuse" style="margin-left: 6ex;">
+<h3><img src="navrh-databaze.php_soubory/php.png" alt="ikona" height="16" width="16"> <a href="http://php.vrana.cz/" rel="nofollow">Jakub Vrána</a>: </h3>"Všiml
+jste si pane geniální autore, že některé obce nemají ulice? Nebo že
+někteří lidé mají kromě jména a příjmení ještě něco jiného?"
+<br>
+<br>No a? Pokud mě zajímá jen křestní jméno a příjmení, tak se o nic
+dalšího starat přeci nemusím. A pokud nejsou v obci ulice, tak je
+neukládám. Pokud jsou uloženy dohromady s číslem popisným, používá se
+"č. p.".
+<br>
+<br>Nějak nerozumím, o co vám jde. Možná by bylo lepší napsat něco konstruktivního než štěkat, že tomu nikdo kromě lamky nerozumí.<div class="podpis"><a href="#d-317">#</a> 3.5.2005 12:58:42 <a href="http://php.vrana.cz/navrh-databaze.php?re=317#prispevek" rel="nofollow" onclick="document.getElementById('re').value = '317'; document.getElementById('reakce-na').innerHTML = 'Reakce na: Jakub Vrána'; location.href = '#prispevek'; return false;">reagovat</a></div>
+</div>
+<div id="d-321" class="diskuse">
+<h3>migon: </h3>osobne a na velkych projektech zvlast mam v php ulozeny
+jen pristup k DB a konfig je celej v DB nikdy totiz nevim kdy budu
+muset neco pridat a pak je IMHO DB lepsi
+<br>ale to je jen muj nazor<div class="podpis"><a href="#d-321">#</a> 4.5.2005 06:51:32 <a href="http://php.vrana.cz/navrh-databaze.php?re=321#prispevek" rel="nofollow" onclick="document.getElementById('re').value = '321'; document.getElementById('reakce-na').innerHTML = 'Reakce na: migon'; location.href = '#prispevek'; return false;">reagovat</a></div>
+</div>
+<div id="d-465" class="diskuse">
+<h3>Kudlanka: </h3>Při normalizaci databáze je třeba dbát na výkonnost.
+Striktním dodržováním normalizačních forem může dojít k zahlcení
+databáze. Nejčastějším případem&nbsp; jsou joiny přes více než 3
+tabulky, kdy např. načítáme číselníkové hodnoty.<div class="podpis"><a href="#d-465">#</a> 8.6.2005 14:08:06 <a href="http://php.vrana.cz/navrh-databaze.php?re=465#prispevek" rel="nofollow" onclick="document.getElementById('re').value = '465'; document.getElementById('reakce-na').innerHTML = 'Reakce na: Kudlanka'; location.href = '#prispevek'; return false;">reagovat</a></div>
+</div>
+
+<div id="prispevek">
+<h2><a name="prispevek"></a>Vložit příspěvek</h2>
+<form action="diskuse.php?clanek=navrh-databaze#new" method="post">
+<p>Používejte diakritiku. Nelze používat HTML značky, ale URL budou převedeny na odkazy a PHP kód uzavřený do <code>&lt;?php ?&gt;</code> bude zvýrazněn. Pokud máte <strong>dotaz, který nesouvisí s článkem</strong>, zkuste raději <a href="http://diskuse.jakpsatweb.cz/index.php?action=vtopic&amp;forum=9">diskusi o PHP</a>, zde se odpovědi pravděpodobně nedočkáte.</p>
+<p>
+<input name="re" id="re" value="" type="hidden">
+Jméno: <input name="jmeno" maxlength="50" value="">
+<abbr title="Pro ikonu se použije /favicon.ico">URL</abbr>: <input name="url" maxlength="250" value="">
+<span id="reakce-na"></span>
+</p>
+<p><textarea name="zprava" rows="12" cols="60"></textarea></p>
+<noscript><p>Vyplňte spamno: <input name="robots" size="6" /></p></noscript>
+<script type="text/javascript">document.write(String.fromCharCode(60) + 'input type="hidden" name="robots" value="spam' + 'no" />');</script><input name="robots" value="spamno" type="hidden">
+<p><input value="Vložit příspěvek" onclick="if (this.form['jmeno'].value == '') { alert('Vyplňte prosím své jméno.'); this.form['jmeno'].focus(); return false; }" type="submit"></p>
+</form>
+</div>
+
+<!-- google_ad_section_end -->
+</div>
+
+<div id="navigace">
+<h2>Navigace</h2>
+<p style="text-align: center;"><a href="http://php.vrana.cz/" accesskey="2"><img src="navrh-databaze.php_soubory/logo.gif" alt="PHP triky" height="100" width="150"></a></p>
+
+<h3><a href="http://php.vrana.cz/">PHP triky</a></h3>
+<ul>
+<li><form action="hledat.php"><div><input name="search" value="" size="17" title="Fráze, % nahrazuje libovolný počet znaků" accesskey="4"> <input value="Vyhledat" type="submit"></div></form></li>
+<li><a href="http://php.vrana.cz/archiv.php">Archiv</a> (356)</li>
+<li><a href="http://php.vrana.cz/php-triky.tgz">Stažení celého webu</a></li>
+<li><a href="http://php.vrana.cz/rss.php">RSS</a>, <a href="http://php.vrana.cz/atom.php">Atom</a>, <a href="http://php.vrana.cz/atom.php?diskuse=">Atom diskusí</a> <img src="navrh-databaze.php_soubory/feed-icon.gif" alt="(syndikace obsahu)" height="12" width="12"></li>
+<li><a href="http://php.vrana.cz/ja-a-php.php">O autorovi, o webu</a></li>
+<li><form action="https://www.paypal.com/cgi-bin/webscr" method="post">
+<div>
+<input name="cmd" value="_s-xclick" type="hidden">
+<input src="navrh-databaze.php_soubory/x-click-but21.gif" name="submit" alt="Make a Donation" style="vertical-align: middle; width: 110px; height: 23px;" title="Make payments with PayPal - it's fast, free and secure!" type="image">
+<img alt="" src="navrh-databaze.php_soubory/pixel.gif" height="1" width="1">
+<input name="encrypted" value="-----BEGIN PKCS7-----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-----END PKCS7-----" type="hidden">
+</div>
+</form></li>
+</ul>
+
+<h3>Reklama</h3>
+<ul class="reklama">
+<li><a href="http://www.vrana.cz/redirect.php?url=http%3A%2F%2Fwww.cesky-hosting.cz%2F%3Fd%3Dvrana" title="platba za proklik">Český hosting</a></li>
+<li>Hledáte-li <a href="http://navolnenoze.cz/katalog/programovani/ref118/">programátora</a> nebo naopak sami programujete a nemáte do čeho píchnout, využijte služeb portálu nezávislých profesionálů <a href="http://navolnenoze.cz/ref118/">Na&nbsp;volné&nbsp;noze</a>.</li>
+<li><a href="http://php.vrana.cz/prostor-pro-pracovni-nabidky.php"><em>Přidejte vlastní pracovní nabídku</em></a></li>
+</ul>
+
+<h3>Články podle skupin</h3>
+<ul>
+<li><a href="http://php.vrana.cz/-rady.php">Dobře míněné rady</a> (58)</li>
+<li><a href="http://php.vrana.cz/-reseni.php">Řešení problému</a> (89)</li>
+<li><a href="http://php.vrana.cz/-vyuka.php">Výuka</a> (75)</li>
+<li><a href="http://php.vrana.cz/-seznameni.php">Seznámení s oblastí</a> (53)</li>
+<li><a href="http://php.vrana.cz/-zakulisi.php">Ze zákulisí</a> (62)</li>
+<li><a href="http://php.vrana.cz/-skoleni.php">Školení</a> (13)</li>
+<li><a href="http://php.vrana.cz/-verze-php.php">Verze PHP</a> (6)</li>
+</ul>
+<h3>Výběr článků</h3>
+<ul>
+<li><a href="http://php.vrana.cz/traverzovani-kolem-stromu-prakticky.php">Traverzování kolem stromu prakticky</a></li>
+<li><a href="http://php.vrana.cz/vlastni-poradi-radku-v-tabulce.php">Vlastní pořadí řádků v tabulce</a></li>
+<li><a href="http://php.vrana.cz/ukazka-pouziti-indexu.php">Ukázka použití indexů</a></li>
+<li><a href="http://php.vrana.cz/struktura-stranek.php">Struktura stránek</a></li>
+<li><a href="http://php.vrana.cz/unikatnost-navstevnika.php">Unikátnost návštěvníka</a></li>
+<li><a href="http://php.vrana.cz/vyhledavani-v-javascriptu.php">Vyhledávání v JavaScriptu</a></li>
+<li><a href="http://php.vrana.cz/kontrola-e-mailove-adresy.php">Kontrola e-mailové adresy</a></li>
+<li><a href="http://php.vrana.cz/vytvoreni-pratelskeho-url.php">Vytvoření přátelského URL</a></li>
+<li><a href="http://php.vrana.cz/http-cachovani.php">HTTP cachování</a></li>
+<li><a href="http://php.vrana.cz/atomicita-operaci.php">Atomicita operací</a></li>
+<li><a href="http://php.vrana.cz/vypnuti-magic_quotes_gpc.php">Vypnutí magic_quotes_gpc</a></li>
+<li><a href="http://php.vrana.cz/ukladani-souboru-od-uzivatele.php">Ukládání souborů od uživatele</a></li>
+<li><a href="http://php.vrana.cz/cross-site-scripting.php">Cross Site Scripting</a></li>
+<li><a href="http://php.vrana.cz/ajax.php">AJAX</a></li>
+<li><a href="http://php.vrana.cz/prihlasovani-uzivatelu.php">Přihlašování uživatelů</a></li>
+<li><a href="http://php.vrana.cz/mysql-4-1-kodovani.php">MySQL 4.1 – kódování</a></li>
+<li><a href="http://php.vrana.cz/vzajemne-propojeni-souboru.php">Vzájemné propojení souborů</a></li>
+<li><a href="http://php.vrana.cz/diskuse-s-reakcemi.php">Diskuse s reakcemi</a></li>
+<li><a href="http://php.vrana.cz/sablony.php">Šablony</a></li>
+<li><a href="http://php.vrana.cz/http-metody-get-a-post.php">HTTP metody GET a POST</a></li>
+<li><a href="http://php.vrana.cz/escapovani.php">Escapování</a></li>
+<li><a href="http://php.vrana.cz/ukladani-hesel.php">Ukládání hesel</a></li>
+<li><a href="http://php.vrana.cz/vyuziti-unikatnich-klicu-v-databazi.php">Využití unikátních klíčů v databázi</a></li>
+<li><a href="http://php.vrana.cz/obrana-proti-sql-injection.php">Obrana proti SQL Injection</a></li>
+</ul>
+<h3>Nejnovější články</h3>
+<ul>
+<li><a href="http://php.vrana.cz/slozitost-hesel.php">Složitost hesel</a></li>
+<li><a href="http://php.vrana.cz/vysel-phpminadmin-1-6-0.php">Vyšel phpMinAdmin 1.6.0</a></li>
+<li><a href="http://php.vrana.cz/rychlost-vkladani-do-innodb-tabulek.php">Rychlost vkládání do InnoDB tabulek</a></li>
+<li><a href="http://php.vrana.cz/skoleni-vykonnost-webovych-aplikaci.php">Školení: Výkonnost webových aplikací</a></li>
+<li><a href="http://php.vrana.cz/traverzovani-kolem-stromu-presuny-uzlu.php">Traverzování kolem stromu – přesuny uzlů</a></li>
+</ul>
+
+<h3>Normy a manuály</h3>
+<ul>
+<li><a href="http://www.php.net/manual/en/">PHP</a></li>
+<li><a href="http://dev.mysql.com/doc/mysql/en/">MySQL</a></li>
+<li><a href="http://www.w3.org/Protocols/rfc2616/rfc2616.html">HTTP</a></li>
+<li><a href="http://httpd.apache.org/docs/2.0/">Apache</a></li>
+<li><a href="http://www.w3.org/TR/html4/">HTML</a>, <a href="http://www.w3.org/TR/xhtml1/">XHTML</a></li>
+<!-- <li><a href="http://www.w3.org/TR/CSS21/">CSS</a></li> -->
+<!-- JavaScript -->
+</ul>
+
+<h3><a href="http://www.vrana.cz/">Další projekty</a></h3>
+<ul>
+<li><a href="http://www.adminer.cz/">Adminer</a></li>
+<li><a href="http://phpminadmin.sourceforge.net/">phpMinAdmin</a></li>
+<li><a href="http://jush.sourceforge.net/">JavaScript Syntax Highlighter</a></li>
+<li><a href="http://www.webcamp.cz/">Konference WebCamp</a></li>
+<li><a href="http://ctyrka.vrana.cz/">Čtyřka</a></li>
+<li><a href="http://www.matfyz.cz/">Matfyz.cz</a></li>
+</ul>
+
+
+<script type="text/javascript" src="navrh-databaze.php_soubory/toplist.js"></script><a href="http://www.toplist.cz/"><img src="navrh-databaze.php_soubory/dot.gif" alt="TOPlist" height="1" width="1"></a>
+<noscript><p><a href="http://www.toplist.cz/"><img src="http://toplist.cz/dot.asp?id=117577" alt="TOPlist" width="1" height="1" /></a></p></noscript>
+
+</div>
+
+<div id="paticka">
+<div id="adsense">
+<script type="text/javascript">
+google_ad_channel = "5652592138"; // Patička
+google_alternate_ad_url = "";
+if (1008 > (window.innerWidth ? window.innerWidth : document.documentElement.clientWidth)) {
+	google_ad_width = 468;
+	google_ad_height = 60;
+	document.getElementById('adsense').style.width = '468px';
+} else {
+	google_ad_width = 728;
+	google_ad_height = 90;
+}
+google_ad_format = google_ad_width + "x" + google_ad_height + "_as";
+google_ad_type = "text_image";
+google_color_border = "336699";
+google_color_bg = "FFFFFF";
+google_color_link = "0000FF";
+google_color_text = "000000";
+google_color_url = "008000";
+</script>
+<script type="text/javascript" src="navrh-databaze.php_soubory/show_ads.js"></script><iframe name="google_ads_frame" src="navrh-databaze.php_soubory/ads_002.htm" marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" frameborder="0" height="90" scrolling="no" width="728"></iframe>
+</div>
+<div id="copy">
+© 2005-2008 <a href="mailto:vrana@php.net" title="Neposkytuji e-mailovou podporu">Jakub Vrána</a>.
+Publikované texty můžete přetiskovat pouze se svolením autora. Ukázky
+kódu smíte používat s uvedením autora a URL tohoto webu bez dalších
+omezení <a href="http://creativecommons.org/licenses/by/2.5/" rel="license"><img src="navrh-databaze.php_soubory/cc.gif" alt="Creative Commons" height="11" width="11"></a>.
+<!--
+<rdf:RDF xmlns="http://web.resource.org/cc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+	<Work rdf:about="">
+		<license rdf:resource="http://creativecommons.org/licenses/by/2.5/" />
+		<dc:title>PHP triky</dc:title>
+		<dc:creator><Agent><dc:title>Jakub Vrána</dc:title></Agent></dc:creator>
+		<dc:type rdf:resource="http://purl.org/dc/dcmitype/Software" />
+		<dc:source rdf:resource="http://php.vrana.cz/" />
+	</Work>
+	<License rdf:about="http://creativecommons.org/licenses/by/2.5/">
+		<requires rdf:resource="http://web.resource.org/cc/Notice"/>
+		<requires rdf:resource="http://web.resource.org/cc/Attribution"/>
+		<permits rdf:resource="http://web.resource.org/cc/Reproduction"/>
+		<permits rdf:resource="http://web.resource.org/cc/Distribution"/>
+		<permits rdf:resource="http://web.resource.org/cc/DerivativeWorks"/>
+	</License>
+</rdf:RDF>
+-->
+Můžeme si tykat.
+Skripty předpokládají nastavení: <a href="http://www.php.net/manual/en/ref.info.php#ini.magic-quotes-gpc"><kbd>magic_quotes_gpc</kbd></a>=On, <a href="http://www.php.net/manual/en/ref.sybase.php#ini.magic-quotes-sybase"><kbd>magic_quotes_sybase</kbd></a>=Off, <a href="http://www.php.net/manual/en/ref.info.php#ini.magic-quotes-runtime"><kbd>magic_quotes_runtime</kbd></a>=Off, <a href="http://www.php.net/manual/en/ref.errorfunc.php#ini.error-reporting"><kbd>error_reporting</kbd></a>=E_ALL &amp; ~E_NOTICE.
+</div>
+</div>
+
+<div style="position: absolute; left: 243px; top: 385px; z-index: 1000000000 ! important; visibility: hidden; opacity: 1; width: 0px;" id="linkalert-box"><img style="width: 0px;" src="navrh-databaze.php_soubory/none-icon.png" id="linkalert-icon-1"></div></body></html>

@@ -1,0 +1,66 @@
+<!doctype html public "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=Windows-1250">
+<title>Funkce Compact_table</title>
+<link rel='stylesheet' style='text/css' href='../function.css'>
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000">
+
+
+
+<h2 class=function>Compact_table</h2>
+<img src='../images/cpp.gif' width='44' height='16' border='0' alt='c/c++' align='middle' hspace='2'><img src='../images/pascal.gif' width='44' height='16' border='0' alt='pascal' align='middle' hspace='2'>
+
+
+<br><br>
+<div class='typ'>BOOL <b>[cd_]Compact_table</b> ([cdp_t cdp,] ttablenum table);<br>
+function <b>[cd_]Compact_table</b> ([cdp : cdp_t;] table : ttablenum) : Boolean;<br>
+
+</div>
+
+
+<p><b>Parametry</b></p>
+
+<table border=1 cols=2 frame=box rules=all width=440>
+
+<tr valign="top">
+<td width=17%><i>table</i></td>
+<td width=83%> číslo tabulky</td>
+</tr>
+
+<tr valign="top">
+<td width=17%>[<i>cdp </i></td>
+<td width=83%><a href="HE_EXTCD.htm">kontextová proměnná</a> klienta]  </td>
+</tr>
+</table><br>
+
+<p><b>Od verze</b></p>
+
+<p>5.1</p>
+
+<p><b>Popis</b></p>
+
+<p>Funkce provede zkompaktnění tabulky. Uvolní zrušené záznamy  a přemístí záznamy tak, že v tabulce nebudou mezi platnými záznamy žádné uvolněné ani zrušené záznamy. Pořadí záznamů z doby před akcí nebude zachováno.</p>
+
+<p>Parametrem <i>table</i> je číslo tabulky získané voláním funkce <a href="HE_F_FINDOBJECT.htm"><code>Find_object</code></a>.</p>
+
+<p>Zkompaktnění nelze provést na systémových tabulkách.</p>
+
+<p>Pokud se do tabulky průběžně přidávají a ruší záznamy, pak stačí zajistit jejich uvolňování (buď průběžně v okamžiku zrušení (funkce <a href="HE_F_SETSQLOPTION.htm"><code>Set_sql_option</code></a> parametrem SQL_EXPLIC_FREE) nebo jednorázově (funkce <a href="HE_F_FREEDELETED.htm"><code>Free_deleted</code></a>)) a není třeba provádět zkompaktnění. Zkompaktnění má smysl pouze tehdy, pokud tabulka obsahuje velmi mnoho uvolněných záznamů, které nebudou v dohledné době využity pro vkládání nových záznamů.</p>
+
+<p>Funkce je ekvivalentní akci <strong>Zkompaktnění tabulky</strong>, kterou lze použít na jednu nebo více tabulek označených na řídicím panelu.</p>
+
+<p><i>Od verze 8:</i></p>
+
+<p>Při běžné práci s tabulkou (i po uvolnění zrušených záznamů v tabulce případně i po zkompaktnění tabulky) může být na konci tabulky nevelký počet volných záznamů. Souvisí to s novým mechanismem přidělování diskového prostoru tabulce a na činnost serveru to nemá žádný vliv. </p>
+
+<p><b>Viz</b></p>
+
+<ul class='viz'>
+ <li><a href="../xml/html/f_truncate_table.html">Truncate_table</a></li>
+</ul>
+
+</body>
+</html>

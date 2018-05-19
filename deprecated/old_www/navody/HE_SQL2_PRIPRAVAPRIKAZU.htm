@@ -1,0 +1,87 @@
+<!doctype html public "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=Windows-1250">
+<title>Příprava a provádění příkazů SQL</title>
+<link rel='stylesheet' style='text/css' href='../function.css'>
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr>
+	<td style="background-image: url(../images/bghead.jpg);
+		background-position: right;
+		background-repeat: no-repeat;">
+	<table width="100%" border="0" cellpadding="0" cellspacing="0"
+		style="background-image:none">
+	<tr>
+		<td style="background-image:none" height="46"
+			width="15%"><img src="../images/title-cz.gif"
+			width="255" height="33"
+			alt="602SQL-Úplná dokumentace"
+			title="602SQL - Úplná dokumentace"
+			border="0"></td>
+		<td width="33%" align="right"><a href="../xml/html/top.html"><img class="floatno"
+			src="../images/index.gif"
+			width="15" height="16"
+			alt="Index" title="Zpět na obsah"
+			border="0" vspace="2"></a> &nbsp;
+			 </td>
+	</tr>
+	</table>
+	</td>
+</tr>
+</table><table class="navigace" border="0" width="100%"  bgcolor="#FFFFBF"><tr> <td
+width="20" align="center"><img class="floatno" src="../images/prev.gif"
+width="15" height="13" alt="&lt;&shy;" title="Předcházející téma"
+border="0"></td><td width="25%"><a
+href="HE_SQL2_PROMENNEJAZYKA.htm">Proměnné klientských aplikací v příkazech SQL (Embedded SQL)</a></td> <td width="25%"
+align="right"><img class="floatno" src="../images/up.gif" width="13"
+height="15" alt="Nahoru" title="O jednu úroveň výš" border="0"
+align="middle"></td><td width="25%"><a href="HE_SQL2_POUZITI.htm">Způsoby použití SQL ve 602SQL</a></td>
+<td width="25%" align="right"><a
+href="../xml/html/dynsql.html">Dynamické SQL příkazy uvnitř uložených procedur</a></td><td width="20"
+align="center"><img class="floatno" src="../images/next.gif" width="15"
+height="13" alt="&shy;&gt;" title="Následující téma" border="0"></td>
+</tr></table>
+
+
+
+
+<h1><a name="he_sql2_pripravaprikazu"></a>Příprava a provádění příkazů SQL</h1>
+
+<p>Databázový klient 602SQL může provádět příkazy jazyka SQL dvojím způsobem:
+
+<ul>
+	<li><b><i>přímo</i></b>, tedy tak, že pomocí funkce <a href="HE_F_SQLEXECUTE.htm"><code>SQL_execute</code></a> předává serveru příkaz, který má být proveden;</li>
+
+	<li><b><i>s přípravou</i></b>, tedy tak, že nejprve pomocí funkce <a href="HE_F_SQLPREPARE.htm"><code>SQL_prepare</code></a> nebo <a href="../xml/html/f_sql_host_prepare.html"><code>cd_SQL_host_prepare</code></a> předá serveru příkaz, pak jej pomocí funkce <a href="HE_F_SQLEXECPREPARED.htm"><code>SQL_exec_prepared</code></a> jednou nebo vícekrát provede, a nakonec přípravu zruší pomocí funkce <a href="HE_F_SQLDROP.htm"><code>SQL_drop</code></a>.</li>
+</ul>
+
+<p>Výhodou <i>přímého</i> způsobu je jednoduchost na straně klienta. Volání jediné funkce vyvolá kompletní zpracování příkazu SQL.</p>
+
+<p>Výhodou provádění SQL příkazů <i>s přípravou</i> je zejména úspora času, pokud se stejný příkaz (případně s různými hodnotami parametrů) má provádět opakovaně. Během přípravy server kompletně analyzuje příkaz SQL a sestaví optimalizovaný plán pro jeho provedení. Každé zavolání funkce <a href="HE_F_SQLEXECPREPARED.htm"><code>SQL_exec_prepared</code></a> pak již jen vyvolá uskutečnění tohoto plánu. Funkce <a href="HE_F_SQLDROP.htm"><code>SQL_drop</code></a> zruší již nepotřebný plán provádění příkazu.</p>
+
+<p>Klient může mít v jednom okamžiku řadu připravených příkazů a může je provádět v libovolném pořadí.</p>
+
+<p>Pokud připravený příkaz obsahuje odkazy na globální proměnné projektu klienta, pak se při provádění příkazu uplatní hodnoty proměnných platné v okamžiku volání funkce <a href="HE_F_SQLEXECPREPARED.htm"><code>SQL_exec_prepared</code></a>. Díky tomu může opakované provedení připraveného příkazu pracovat pokaždé s jinými hodnotami.</p>
+
+<p>Případným voláním funkce <a href="HE_F_SETAPPLICATION.htm"><code>Set_application</code></a> se zruší příprava všech příkazů a zneplatní jejich handle.</p>
+
+
+
+
+<table class="navigace" border="0" width="100%"  bgcolor="#FFFFBF"><tr> <td
+width="20" align="center"><img class="floatno" src="../images/prev.gif"
+width="15" height="13" alt="&lt;&shy;" title="Předcházející téma"
+border="0"></td><td width="25%"><a
+href="HE_SQL2_PROMENNEJAZYKA.htm">Proměnné klientských aplikací v příkazech SQL (Embedded SQL)</a></td> <td width="25%"
+align="right"><img class="floatno" src="../images/up.gif" width="13"
+height="15" alt="Nahoru" title="O jednu úroveň výš" border="0"
+align="middle"></td><td width="25%"><a href="HE_SQL2_POUZITI.htm">Způsoby použití SQL ve 602SQL</a></td>
+<td width="25%" align="right"><a
+href="../xml/html/dynsql.html">Dynamické SQL příkazy uvnitř uložených procedur</a></td><td width="20"
+align="center"><img class="floatno" src="../images/next.gif" width="15"
+height="13" alt="&shy;&gt;" title="Následující téma" border="0"></td>
+</tr></table>
+</body>
+</html>

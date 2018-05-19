@@ -1,0 +1,511 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="cs" lang="cs"><head>
+
+
+
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1250">
+<meta http-equiv="Content-language" content="cs">
+<meta http-equiv="Cache-control" content="no-cache">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="-1">
+<meta name="robots" content="index,follow">
+<meta name="googlebot" content="index,follow,snippet,noarchive">
+<meta name="description" content="Pokud máte své stránky, asi by jste rádi věděli jakou mají návštěvnost. Není nic jednoduššího, než dát na stránku nějaké počítadlo přístupů. A přesně o tom bude můj dnešní článek - o vytvoření vlastního počítadla v PHP s pomocí MySQL a cookies.">
+<meta name="keywords" content="PHP, Vývoj aplikací, Interval">
+<meta name="ICBM" content="49.1915, 16.626">
+<meta name="DC.Title" content="Interval.cz">
+<meta name="DC.Identifier" content="http://interval.cz">
+<meta name="DC.Identifier" content="(SCHEME=ISSN) 12128651">
+<meta name="DC.Language" content="cs">
+<meta http-equiv="pics-label" content="(pics-1.1 &quot;http://www.icra.org/ratingsv02.html&quot; comment &quot;ICRAonline EN v2.0&quot; l gen true for &quot;http://interval.cz&quot; r (nz 1 vz 1 lz 1 oz 1 cz 1) &quot;http://www.rsac.org/ratingsv01.html&quot; l gen true for &quot;http://interval.cz&quot; r (n 0 s 0 v 0 l 0))">
+<meta http-equiv="imagetoolbar" content="no">
+<meta http-equiv="MSThemeCompatible" content="no">
+<meta name="MSSmartTagsPreventParsing" content="true">
+<link rel="shortcut icon" type="image/x-icon" href="http://interval.cz/favicon.ico">
+<link rel="alternate" type="application/atom+xml" title="Interval.cz -- Stránko moje, jakou návštěvnost dnes máš - základní skript -- (diskuse, Atom 0.3)" href="http://export.interval.cz/?type=atom&amp;discussion=453">
+<link rel="alternate" type="application/rdf+xml" title="Interval.cz -- Stránko moje, jakou návštěvnost dnes máš - základní skript -- (diskuse, RDF Site Summary 1.0)" href="http://export.interval.cz/?type=rdf&amp;discussion=453">
+<link rel="alternate" type="application/rss+xml" title="Interval.cz -- Stránko moje, jakou návštěvnost dnes máš - základní skript -- (diskuse, RSS 2.0)" href="http://export.interval.cz/?type=rss&amp;discussion=453">
+<link rel="home" href="http://interval.cz/">
+<link rel="search" href="http://interval.cz/search_ex.asp">
+<link rel="up" href="http://interval.cz/serialy/stranko-moje-jakou-navstevnost-dnes-mas/">
+<link rel="last" href="http://interval.cz/clanky/stranko-moje-jakou-navstevnost-dnes-mas-pokrocile-sledovani/">
+<link rel="next" href="http://interval.cz/clanky/stranko-moje-jakou-navstevnost-dnes-mas-pokrocile-sledovani/">
+<link rel="stylesheet" type="text/css" media="all" href="Str%C3%A1nko%20moje,%20jakou%20n%C3%A1v%C5%A1t%C4%9Bvnost%20dnes%20m%C3%A1%C5%A1%20-%20z%C3%A1kladn%C3%AD%20skript%20--%20PHP%20--%20V%C3%BDvoj%20aplikac%C3%AD%20--%20Interval.cz_soubory/html4.css">
+<link rel="stylesheet" type="text/css" media="all" href="Str%C3%A1nko%20moje,%20jakou%20n%C3%A1v%C5%A1t%C4%9Bvnost%20dnes%20m%C3%A1%C5%A1%20-%20z%C3%A1kladn%C3%AD%20skript%20--%20PHP%20--%20V%C3%BDvoj%20aplikac%C3%AD%20--%20Interval.cz_soubory/interval-display.css">
+
+<link rel="stylesheet" type="text/css" media="print" href="Str%C3%A1nko%20moje,%20jakou%20n%C3%A1v%C5%A1t%C4%9Bvnost%20dnes%20m%C3%A1%C5%A1%20-%20z%C3%A1kladn%C3%AD%20skript%20--%20PHP%20--%20V%C3%BDvoj%20aplikac%C3%AD%20--%20Interval.cz_soubory/interval-print.css"><title>Stránko moje, jakou návštěvnost dnes máš - základní skript -- PHP -- Vývoj aplikací -- Interval.cz</title>
+
+<style>
+.bbt_w {color:green !important; text-decoration:underline !important; padding-bottom: 1px; border-bottom: 1px solid green !important;}
+.bbt_w:hover {color:green !important; text-decoration:underline !important; padding-bottom: 0px; border-bottom: 2px solid green !important;}
+.bbt_w:visited {color:green !important; text-decoration:underline !important; padding-bottom: 1px; border-bottom: 1px solid green !important;}
+</style><script charset="windows-1250" type="text/javascript" src="Str%C3%A1nko%20moje,%20jakou%20n%C3%A1v%C5%A1t%C4%9Bvnost%20dnes%20m%C3%A1%C5%A1%20-%20z%C3%A1kladn%C3%AD%20skript%20--%20PHP%20--%20V%C3%BDvoj%20aplikac%C3%AD%20--%20Interval.cz_soubory/a_004.js"></script></head><body class="interval interval-articles" id="article-453"><div class="audits">
+
+<!-- TOPList.cz -->
+<script type="text/javascript">
+<!-- <![CDATA[
+document.write ("<a href='http://www.toplist.cz'><img src='http://www.toplist.cz/dot.asp?id=33617&amp;http="+escape(document.referrer)+"&amp;wi="+escape(window.screen.width)+"&amp;he="+escape(window.screen.height)+"&amp;cd="+escape(window.screen.colorDepth)+"&amp;t="+escape(document.title)+"' style='border: 0; width: 1px; height: 1px' alt='.' /></a>");
+//]]> -->
+</script><a href="http://www.toplist.cz/"><img src="Str%C3%A1nko%20moje,%20jakou%20n%C3%A1v%C5%A1t%C4%9Bvnost%20dnes%20m%C3%A1%C5%A1%20-%20z%C3%A1kladn%C3%AD%20skript%20--%20PHP%20--%20V%C3%BDvoj%20aplikac%C3%AD%20--%20Interval.cz_soubory/dot.gif" style="border: 0pt none ; width: 1px; height: 1px;" alt="."></a>
+<noscript>
+<div><a href='http://www.toplist.cz'><img
+src='http://www.toplist.cz/dot.asp?id=33617' style='border: 0; width:
+1px; height: 1px' alt='.' /></a></div>
+</noscript>
+<!-- TOPList.cz - konec -->
+
+<!-- iAudit -->
+<img src="Str%C3%A1nko%20moje,%20jakou%20n%C3%A1v%C5%A1t%C4%9Bvnost%20dnes%20m%C3%A1%C5%A1%20-%20z%C3%A1kladn%C3%AD%20skript%20--%20PHP%20--%20V%C3%BDvoj%20aplikac%C3%AD%20--%20Interval.cz_soubory/a.gif" style="border: 0pt none ; width: 1px; height: 1px;" alt=".">
+<!-- iAudit - konec -->
+
+
+	<!-- (C)2005 Gemius SA - gemiusAudience  / Ostatni -->
+	<script type="text/javascript"><!--
+	
+	gemius_identifier = new String('bQzrQkrzLOWoKbJeudlKguTS7OndUMSqxutbeFviWMv.47');
+	
+	gemius_href=new String(document.location);
+	if (document.referrer) { gemius_ref = new String(document.referrer); } else { gemius_ref = ""; }
+	if(typeof(Error)!='undefined') eval("try { if (typeof(top.document.referrer)=='string') { gemius_ref = top.document.referrer } } catch(gemius_ex) {}");
+	iname = new String('id='+gemius_identifier+';ref='+escape(gemius_ref.substring(0,299))+';href='+escape(gemius_href.substring(0,299))+';');
+	document.write('<iframe src="http://spir.hit.gemius.pl/gemiusaudience.html" name="'+iname+'" width="1" height="1" frameborder="0" scrolling="no"></iframe>');
+	//-->
+	</script><iframe src="Str%C3%A1nko%20moje,%20jakou%20n%C3%A1v%C5%A1t%C4%9Bvnost%20dnes%20m%C3%A1%C5%A1%20-%20z%C3%A1kladn%C3%AD%20skript%20--%20PHP%20--%20V%C3%BDvoj%20aplikac%C3%AD%20--%20Interval.cz_soubory/gemiusaudience.htm" name="id=bQzrQkrzLOWoKbJeudlKguTS7OndUMSqxutbeFviWMv.47;ref=http%3A//www.google.cz/search%3Fhl%3Dcs%26q%3Dpo%25C4%258D%25C3%25ADtadlo+u%25C5%25BEivatel%25C5%25AF+php+str%25C3%25A1nek%26btnG%3DHledat%26lr%3Dlang_cs;href=http%3A//interval.cz/clanky/stranko-moje-jakou-navstevnost-dnes-mas-zakladni-skript/;" frameborder="0" height="1" scrolling="no" width="1"></iframe> 
+
+
+</div>
+	<div id="advertising-leader-board">
+	<!-- StartKód: adarbo2.bbmedia.cz 3.1 Nestandard  Interval(87) / cely web(1) / leaderboard 750x100(1) / nestandard(24) -->
+	<script type="text/javascript">
+	/* <![CDATA[ */
+	var bbs=screen,bbn=navigator,bbh;bbh='&ubl='+bbn.browserLanguage+'&ucc='+bbn.cpuClass+'&ucd='+bbs.colorDepth+'&uce='+bbn.cookieEnabled+'&udx='+bbs.deviceXDPI+'&udy='+bbs.deviceYDPI+'&usl='+bbn.systemLanguage+'&uje='+bbn.javaEnabled()+'&uah='+bbs.availHeight+'&uaw='+bbs.availWidth+'&ubd='+bbs.bufferDepth+'&uhe='+bbs.height+'&ulx='+bbs.logicalXDPI+'&uly='+bbs.logicalYDPI+'&use='+bbs.fontSmoothingEnabled+'&uto='+(new Date()).getTimezoneOffset()+'&uti='+(new Date()).getTime()+'&uui='+bbs.updateInterval+'&uul='+bbn.userLanguage+'&uwi='+bbs.width;
+	document.write("<scr"+"ipt  language='JavaScript' type='text/javascript' src='http://adarbo2.bbmedia.cz/please/showit/87/1/1/24/?typkodu=non-standard"+bbh+"&alttext=0&border=0&bgcolor=FFFFFF&text=000000&link=0000FF&target=_blank&bust="+Math.random()+"'>");
+	document.write("<"+"\/scr"+"ipt>");
+	/* ]]> */
+	</script><script language="JavaScript" type="text/javascript" src="Str%C3%A1nko%20moje,%20jakou%20n%C3%A1v%C5%A1t%C4%9Bvnost%20dnes%20m%C3%A1%C5%A1%20-%20z%C3%A1kladn%C3%AD%20skript%20--%20PHP%20--%20V%C3%BDvoj%20aplikac%C3%AD%20--%20Interval.cz_soubory/a_002.js"></script>
+	<!-- KonecKód: adarbo2.bbmedia.cz 3.1 Nestandard -->
+	</div>
+
+
+
+
+<div id="page-header">
+
+
+
+<div id="interval-logo">
+<h1 title="Interval.cz - webdesign a e-komerce denně (logo &amp; index link)"><a href="http://interval.cz/">Interval.cz<span></span></a></h1>
+</div>
+<div id="advertising-page-header">
+
+
+	<!-- StartKód: adarbo2.bbmedia.cz 3.1 Nestandard  Interval(87) / cely web(1) / horni468x60(2) / nestandard(24) -->
+	<script type="text/javascript">
+	/* <![CDATA[ */
+	var bbs=screen,bbn=navigator,bbh;bbh='&ubl='+bbn.browserLanguage+'&ucc='+bbn.cpuClass+'&ucd='+bbs.colorDepth+'&uce='+bbn.cookieEnabled+'&udx='+bbs.deviceXDPI+'&udy='+bbs.deviceYDPI+'&usl='+bbn.systemLanguage+'&uje='+bbn.javaEnabled()+'&uah='+bbs.availHeight+'&uaw='+bbs.availWidth+'&ubd='+bbs.bufferDepth+'&uhe='+bbs.height+'&ulx='+bbs.logicalXDPI+'&uly='+bbs.logicalYDPI+'&use='+bbs.fontSmoothingEnabled+'&uto='+(new Date()).getTimezoneOffset()+'&uti='+(new Date()).getTime()+'&uui='+bbs.updateInterval+'&uul='+bbn.userLanguage+'&uwi='+bbs.width;
+	document.write("<scr"+"ipt  type='text/javascript' src='http://adarbo2.bbmedia.cz/please/showit/87/1/2/24/?typkodu=non-standard"+bbh+"&alttext=0&border=0&bgcolor=FFFFFF&text=000000&link=0000FF&target=_top&bust="+Math.random()+"'>");
+	document.write("<"+"\/scr"+"ipt>");
+	/* ]]> */
+	</script><script type="text/javascript" src="Str%C3%A1nko%20moje,%20jakou%20n%C3%A1v%C5%A1t%C4%9Bvnost%20dnes%20m%C3%A1%C5%A1%20-%20z%C3%A1kladn%C3%AD%20skript%20--%20PHP%20--%20V%C3%BDvoj%20aplikac%C3%AD%20--%20Interval.cz_soubory/a_006.js"></script><!-- spir.czMonS[6__87.1.2.24__] --><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td><a href="http://adarbo2.bbmedia.cz/please/redirect/87/1/2/24/%21uwi=1440;uhe=900;uce=1;param=17602/11012_10_?" target="_top"><img src="Str%C3%A1nko%20moje,%20jakou%20n%C3%A1v%C5%A1t%C4%9Bvnost%20dnes%20m%C3%A1%C5%A1%20-%20z%C3%A1kladn%C3%AD%20skript%20--%20PHP%20--%20V%C3%BDvoj%20aplikac%C3%AD%20--%20Interval.cz_soubory/b17602_1.gif" alt="" border="0"></a></td></tr></tbody></table><!-- spir.czMonE -->
+	<!-- KonecKód: adarbo2.bbmedia.cz 3.1 Nestandard -->
+
+
+</div>
+<div class="page-maker">&nbsp;</div>
+</div>
+<div id="page-topmenu">
+<h2 class="textversion">Navigace</h2>
+
+<!-- cached 05-15-62-hlavni_menu_with_ascii.txt -->
+<!-- ,Vývoj aplikací ~~ ,,PHP ~~ , --><div id="page-mainmenu"><h3 class="textversion">Hlavní menu</h3><ul><li class="first"><a href="http://interval.cz/">Titulka</a></li><li><a href="http://interval.cz/e-komerce/">E-komerce</a></li><li><a href="http://interval.cz/webdesign/">Webdesign</a></li><li class="selected"><a href="http://interval.cz/vyvoj-aplikaci/">Vývoj aplikací</a></li><li><a href="http://interval.cz/nastroje/">Nástroje</a></li><li><a href="http://interval.cz/magazin/">Magazín</a></li><li class="right selected"><a href="http://interval.inshop.cz/">Knihkupectví</a></li><li class="right"><a href="http://php.interval.cz/">PHP</a></li><li class="right"><a href="http://css.interval.cz/">CSS</a></li><li class="right"><a href="http://jednoduse.interval.cz/">Jednoduše</a></li></ul></div><div id="page-mainmenu-maker">&nbsp;</div><div id="page-mainsubmenu"><h3 class="textversion">Submenu</h3><ul><li><a href="http://interval.cz/vyvoj-aplikaci/ajax/">AJAX</a></li><li><a href="http://interval.cz/vyvoj-aplikaci/j2me/">J2ME</a></li><li><a href="http://interval.cz/vyvoj-aplikaci/asp/">ASP</a></li><li><a href="http://interval.cz/vyvoj-aplikaci/net/">.NET</a></li><li class="selected"><a href="http://interval.cz/vyvoj-aplikaci/php/">PHP</a></li><li><a href="http://interval.cz/vyvoj-aplikaci/javascript/">JavaScript</a></li><li><a href="http://interval.cz/vyvoj-aplikaci/xml/">XML</a></li><li><a href="http://interval.cz/vyvoj-aplikaci/java/">Java</a></li><li><a href="http://interval.cz/vyvoj-aplikaci/perl-cgi/">PERL/CGI</a></li><li><a href="http://interval.cz/vyvoj-aplikaci/databaze/">Databáze</a></li><li><a href="http://interval.cz/vyvoj-aplikaci/bezpecnost/">Bezpečnost</a></li><li><a href="http://interval.cz/vyvoj-aplikaci/analyzy/">Analýzy</a></li></ul><span id="page-mainsubmenu-maker">&nbsp;</span></div>
+ <!-- cas behu menu = 0 -->
+
+</div>
+<div id="page-body">
+<div id="page-left">
+
+
+
+
+
+
+<div id="article" class="bbtext">
+
+
+
+<h2>Stránko moje, jakou návštěvnost dnes máš - základní skript</h2>
+<p id="prepend" class="not4bbtext">Pokud máte své stránky, asi by jste
+rádi věděli jakou mají návštěvnost. Není nic jednoduššího, než dát na
+stránku nějaké počítadlo přístupů. A přesně o tom bude můj dnešní
+článek - o vytvoření vlastního počítadla v PHP s pomocí MySQL a
+cookies.
+</p>
+
+
+	<div class="advertising-bigsquare-outer noprint">
+	<div class="advertising-bigsquare-inner" style="width: 300px;">
+	<!-- StartKód: adarbo2.bbmedia.cz 3.1 Nestandard  Interval(87) / cely web(1) / ctverec250x250(8) / nestandard(24) -->
+	<script type="text/javascript">
+	/* <![CDATA[ */
+	var bbs=screen,bbn=navigator,bbh;bbh='&ubl='+bbn.browserLanguage+'&ucc='+bbn.cpuClass+'&ucd='+bbs.colorDepth+'&uce='+bbn.cookieEnabled+'&udx='+bbs.deviceXDPI+'&udy='+bbs.deviceYDPI+'&usl='+bbn.systemLanguage+'&uje='+bbn.javaEnabled()+'&uah='+bbs.availHeight+'&uaw='+bbs.availWidth+'&ubd='+bbs.bufferDepth+'&uhe='+bbs.height+'&ulx='+bbs.logicalXDPI+'&uly='+bbs.logicalYDPI+'&use='+bbs.fontSmoothingEnabled+'&uto='+(new Date()).getTimezoneOffset()+'&uti='+(new Date()).getTime()+'&uui='+bbs.updateInterval+'&uul='+bbn.userLanguage+'&uwi='+bbs.width;
+	document.write("<scr"+"ipt  type='text/javascript' src='http://adarbo2.bbmedia.cz/please/showit/87/1/8/24/?typkodu=non-standard"+bbh+"&alttext=0&border=0&bgcolor=FFFFFF&text=000000&link=0000FF&target=_top&bust="+Math.random()+"'>");
+	document.write("<"+"\/scr"+"ipt>");
+	/* ]]> */
+	</script><script type="text/javascript" src="Str%C3%A1nko%20moje,%20jakou%20n%C3%A1v%C5%A1t%C4%9Bvnost%20dnes%20m%C3%A1%C5%A1%20-%20z%C3%A1kladn%C3%AD%20skript%20--%20PHP%20--%20V%C3%BDvoj%20aplikac%C3%AD%20--%20Interval.cz_soubory/a.js"></script><!-- spir.czMonS[6_5461_87.1.8.24_CPT_22552] --><!-- StartKód: ad2.bbmedia.cz 4.1 Interval(1185) / Cely web(3) / 250x250(1) / square 250x250(17) -->
+<script language="JavaScript" type="text/javascript" charset="windows-1250" src="Str%C3%A1nko%20moje,%20jakou%20n%C3%A1v%C5%A1t%C4%9Bvnost%20dnes%20m%C3%A1%C5%A1%20-%20z%C3%A1kladn%C3%AD%20skript%20--%20PHP%20--%20V%C3%BDvoj%20aplikac%C3%AD%20--%20Interval.cz_soubory/code.js"></script><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td><iframe allowtransparency="true" style="position: relative;" name="bm2BBMEDIA_1185_3_1_17" id="bm2BBMEDIA_1185_3_1_17" marginwidth="0" marginheight="0" hspace="0" vspace="0" src="Str%C3%A1nko%20moje,%20jakou%20n%C3%A1v%C5%A1t%C4%9Bvnost%20dnes%20m%C3%A1%C5%A1%20-%20z%C3%A1kladn%C3%AD%20skript%20--%20PHP%20--%20V%C3%BDvoj%20aplikac%C3%AD%20--%20Interval.cz_soubory/a.htm" frameborder="0" height="250" scrolling="no" width="250">&lt;script
+language='JavaScript' type='text/javascript'
+charset='windows-1250'&gt;document.write("&lt;scr"+"ipt
+language='JavaScript' charset='windows-1250' type='text/javascript'
+src='http://ad2.bbmedia.cz/please/showit/1185/3/1/17/?typkodu=js"+bbh+"&amp;alttext=0&amp;border=0&amp;_idplan=47608&amp;bust="+Math.random()+"&amp;target=_blank'&gt;&lt;/scr"+"ipt&gt;");&lt;/script&gt;</iframe></td></tr><tr><td><iframe allowtransparency="true" name="bm2sBBMEDIA_1185_3_1_17" id="bm2sBBMEDIA_1185_3_1_17" marginwidth="0" marginheight="0" hspace="0" vspace="0" src="" style="position: absolute;" frameborder="0" height="0" scrolling="no" width="250"></iframe></td></tr></tbody></table>
+<noscript><table border=0 cellpadding=0 cellspacing=0><tr><td><a
+href="http://ad2.bbmedia.cz/please/redirect/1185/3/1/17/"
+target="_blank"><img
+src="http://ad2.bbmedia.cz/please/showit/1185/3/1/17/?typkodu=img&_idplan=47608"
+border=0 width=250 height=250 alt='' /></a></td></tr></table></noscript>
+<!-- KonecKód: ad2.bbmedia.cz 4.1 --><!-- spir.czMonE -->
+	<!-- KonecKód: adarbo2.bbmedia.cz 3.1 Nestandard -->
+	<!-- StartKód: adarbo2.bbmedia.cz 3.1 Nestandard  Interval(87) / homepage + cely web(1) / hypertext 250x100(14) / nestandard(24) -->
+	<script type="text/javascript">
+	/* <![CDATA[ */
+	var bbs=screen,bbn=navigator,bbh;bbh='&ubl='+bbn.browserLanguage+'&ucc='+bbn.cpuClass+'&ucd='+bbs.colorDepth+'&uce='+bbn.cookieEnabled+'&udx='+bbs.deviceXDPI+'&udy='+bbs.deviceYDPI+'&usl='+bbn.systemLanguage+'&uje='+bbn.javaEnabled()+'&uah='+bbs.availHeight+'&uaw='+bbs.availWidth+'&ubd='+bbs.bufferDepth+'&uhe='+bbs.height+'&ulx='+bbs.logicalXDPI+'&uly='+bbs.logicalYDPI+'&use='+bbs.fontSmoothingEnabled+'&uto='+(new Date()).getTimezoneOffset()+'&uti='+(new Date()).getTime()+'&uui='+bbs.updateInterval+'&uul='+bbn.userLanguage+'&uwi='+bbs.width;
+	document.write("<scr"+"ipt  language='JavaScript' type='text/javascript' src='http://adarbo2.bbmedia.cz/please/showit/87/1/14/24/?typkodu=non-standard"+bbh+"&alttext=0&border=0&bgcolor=FFFFFF&text=000000&link=0000FF&target=_blank&bust="+Math.random()+"'>");
+	document.write("<"+"\/scr"+"ipt>");
+	/* ]]> */
+	</script><script language="JavaScript" type="text/javascript" src="Str%C3%A1nko%20moje,%20jakou%20n%C3%A1v%C5%A1t%C4%9Bvnost%20dnes%20m%C3%A1%C5%A1%20-%20z%C3%A1kladn%C3%AD%20skript%20--%20PHP%20--%20V%C3%BDvoj%20aplikac%C3%AD%20--%20Interval.cz_soubory/a_008.js"></script>
+	<!-- KonecKód: adarbo2.bbmedia.cz 3.1 Nestandard -->
+	</div>
+	</div>
+
+
+<!-- cached stranko-moje-jakou-navstevnost-dnes-mas-zakladni-skript-453.txt -->
+<p class="texttabulka">Dříve, než začneme programovat, si řekneme něco o měření přístupu. Sice jen
+orientačně, ale je dobré něco o tom vědět. V zásadě se přístupy na stránky měří dvěmi způsoby:</p>
+<ul>
+  <li>zpracováním logů
+  </li><li>"měřícím" skriptem (počítadlo), který počítá návštěvníky.
+</li></ul>
+<p class="texttabulka">Zpracování logů je podrobnější a loguje každý stažený/prohlédnutý
+soubor z <a target="_blank" href="http://www.etarget.cz/catalog.php?ref=4372&amp;catalogPartner=270&amp;c=1300&amp;asynchronousConfirmURL=http%3A//ad2.billboard.cz/please/redirect/35974/1/1/32/%21etarget%3D1%3Bparam%3D62552/822488_0" class="bbt_w">webu</a>. Ale není online. Záznamy z logů se používají na zpětnou
+analýzu přístupů - odkud kdo a kam chodí, v kolik hodin, kdy je špička,
+atd.</p>
+
+<p class="texttabulka">Počítadla lze dělit do několika skupin např. podle toho co umožňují, kde
+jsou umístěna, jak pracují apod. Některá vám pouze zobrazí počet návštěv,
+jiná přidají i statistiky obdobné záznamům z logu. Ale na rozdíl od
+logu, počítadlo měří jen přístup na stránku, kde je umístěno. A
+je tu i další háček. Většina z volně poskytovaných počítadel na
+<a target="_blank" href="http://ad2.billboard.cz/please/redirect/35974/1/1/32/%21hash=83970898;h4r=33100101;p4r=305402478;uwi=800;uhe=600;uce=1;param=63906/840035_5?" class="bbt_w">Internetu</a> pracuje tak, že na své stránky umístíte ikonu počítadla, která
+je stahována ze serveru počítadla. Jenže hodně uživatelů má zakázáno zobrazování
+grafiky a vy tím pádem nevíte vůbec o jeho návštěvě.</p>
+
+<p class="texttabulka">Druhá varianta funguje za
+pomocí JavaSciptu, ale zase, tu a tam se najde někdo, kdo ho má vypnutý. A
+je tu ještě jeden problém, se kterým se velmi často setkáte. Počítadlo často
+nerozlišuje mezi první návštěvou na stránce a jejím reloadem. Takže sice
+počítadlo skáče, ale jeden člověk udělá třeba 5 návštěv, takže údaj
+je k ničemu. A i počítadla, které tuto chybu nemají, měří podle IP
+adresy, ale ne konkrétního uživatele. Prostě najít to nejlepší počítadlo
+je problém. A abych nezapomněl, váš web může běžet, ale služba počítadla
+ne.</p>
+
+<p class="texttabulka">Zavěrem předchozího odstavce je prostě to, že je
+lepší mít vlastní počítadlo. To, které si dnes naprogramuje, bude
+sloužit pouze k počítání přístupů a někdy příště si ho trošku
+rozšíříme.</p>
+
+<p class="texttabulka">K jednoznačnému určení návštěvníka použijeme cookies, což je asi
+jedna z nejméně vypínaných věcí. Cookies jsou malé soubory, které si
+prohlížeč ukládá na disk. Mohou obsahovat např. ID session na serveru,
+personifikační údaje pro úpravu vzhledu stránek které navštěvujete a v případě
+některých nesvéprávných programátorů i heslo. My si tam jenom uložíme
+ID počítadla pro identifikaci.</p>
+
+<p class="texttabulka">Při návrhu počítadla je třeba si uvědomit, co budeme považovat za návštěvu
+a co za reload stránky. Já <a target="_blank" href="http://ad2.billboard.cz/please/redirect/35974/1/1/32/%21hash=83970898;h4r=33278533;p4r=305454699;uwi=800;uhe=600;uce=1;param=62149/780320_5?" class="bbt_w">osobně</a> považuji návrat na stránku pod 20 minut za obyčejný
+reload. Ale někdo může mít jiný názor, a proto náš skript bude umožňovat
+změnu tohoto intervalu.</p>
+
+<p class="texttabulka">Nejdříve si navrhneme tabulku v databázi. Tady je SQL skript:</p>
+<p class="texttabulka"></p><table border="0" cellpadding="1" cellspacing="0" width="100%"><tbody><tr><td><table border="0" cellpadding="2" cellspacing="0" width="100%"><tbody><tr><td class="aktuality" bgcolor="white">
+CREATE TABLE Tcounter(<br>
+	CounterID INT NOT NULL PRIMARY KEY AUTO_INCREMENT, <span class="comment">-- identifikator počítadla</span><br>
+	SPath VARCHAR(122), <span class="comment">-- cesta ke stránce, kterou monitorujeme</span><br>
+	Visits INT <span class="comment">-- počet návštěv</span><br>
+);
+</td></tr></tbody></table></td></tr></tbody></table> 
+<p class="texttabulka">CounterID je jednoznačný identifikátor počítadla, který si budeme ukládat
+do cookie. SPath je cesta ke stránce kterou budeme monitorovat. No a Visits je
+počet návštěv na stránce.</p>
+
+<p class="texttabulka">Vlastní skript počítadla budeme do stránek vkládat pomocí direktivy
+include. Např. include("counter_inc.php"); Include, respektive zápis cookie, musí proběhnout
+před tím než odešlete cokoliv klientovy.</p>
+
+<p class="texttabulka">Nejdříve si sejmeme cestu ke stránce. Ta je uložená v PHP proměnné $PATH_INFO.
+Uložíme ji do proměnné $SPath. Pak nastavíme proměnnou $CookieDeath, která
+obsahuje časový limit v minutách, kdy se už nebere návštěva na stránce
+jako reload, ale jako další návštěva. Otevřeme si spojení na databázi s
+použitím @, jelikož nestojíme o to, aby nám případná chybka v komunikaci
+s DB počítadla, znemožnila zobrazení obsahu stránky. Zjistíme jestli je
+nastavena proměnná $CounterID. Tato proměnná se nesmí pochopitelně
+vyskytovat ve Vašem PHP kódu stránky. Tato proměnná je uložena v naší
+cookie a&nbsp; pokud není nastavena, znamená to, že:</p>
+
+<ol>
+  <li>cookie vypršela - návštěvník zde nebyl déle než limit nastavený v
+    $CookieDeath</li>
+  <li>první návštěva této stránky</li>
+  <li>cookies nejsou povoleny</li>
+</ol>
+
+<p class="texttabulka"></p><table border="0" cellpadding="1" cellspacing="0" width="100%"><tbody><tr><td><table border="0" cellpadding="2" cellspacing="0" width="100%"><tbody><tr><td class="aktuality" bgcolor="white">
+$SPath=$PATH_INFO;<br>
+$CookieDeath=20;<br>
+@$Conn=mysql_connect("adresa_srv","user_id","heslo");<br>
+mysql_select_db("moje_database");<br>
+
+if (empty($CounterID)){<br>
+	$SQLText="SELECT * FROM Tcounter WHERE SPath='$SPath"';<br>
+	$result=mysql_query($SQLText);<br>
+	if (mysql_num_rows($result)==0){<br>
+		$SQLText="INSERT INTO Tcounter (SPath,Visits) VALUES ('$SPath',1)";<br>
+		$result=mysql_query($SQLText);<br>
+		$Visits=1;<br>
+		$CounterID=mysql_insert_id($result);<br>
+	}<br>
+	else{<br>
+		$row=mysql_fetch_array($result);<br>
+		$Visits=++$row["Visits"];<br>
+		$CounterID=$row["CounterID"];<br>
+		$SQLText="UPDATE Tcounter SET Visits=$Visits WHERE CounterID=$CounterID";<br>
+$result=mysql_query($SQLText);<br>
+	}<br>
+}
+</td></tr></tbody></table></td></tr></tbody></table>
+<p class="texttabulka">Takže pokud není $CounterID nastaveno, zeptáme
+se databáze, jestli má záznam o naší stránce, pokud ne, založíme naší
+stránku do databáze s hodnotou Visits=1 a sejmeme si $CounterID našeho
+nového počítadla. Jestliže již počítání přístupů probíhá, vybereme
+si údaj o návštěvách a navýšíme ho o 1 a sejmeme si $CounterID pro
+danou
+stránku. Poté uložíme navýšený údaj o návštěvách do databáze.</p>
+
+
+<p class="texttabulka">Pokud je $CounterID nastaveno, vybereme si pouze údaj o počtu visits na stránce:</p>
+<p class="texttabulka"></p><table border="0" cellpadding="1" cellspacing="0" width="100%"><tbody><tr><td><table border="0" cellpadding="2" cellspacing="0" width="100%"><tbody><tr><td class="aktuality" bgcolor="white">
+	$SQLText="SELECT Visits FROM Tcounter WHERE CounterID=$CounterID";<br>
+	$result=mysql_query($SQLText);<br>
+	$row=mysql_fetch_array($result);<br>
+	$Visits=$row["Visits"];
+</td></tr></tbody></table></td></tr></tbody></table>
+
+<p class="texttabulka">Zavřeme databázi a nastavíme cookie. Jejími parametry jsou&nbsp;</p>
+
+<ul>
+  <li>jméno naší proměnné (CounterID)</li>
+  <li>hodnota této proměnné ($CounterID)</li>
+  <li>doba kdy tato cookie vyprší (time()+$CookieDeath*60). Stávající čas
+    + doba nastavená v $CookieDeath. To násobení 60 je tam proto, že time
+    vrací čas v sec.</li>
+</ul>
+
+<p class="texttabulka"></p><table border="0" cellpadding="1" cellspacing="0" width="100%"><tbody><tr><td><table border="0" cellpadding="2" cellspacing="0" width="100%"><tbody><tr><td class="aktuality" bgcolor="white">
+setcookie("CounterID",$CounterID,(time()+$CookieDeath*60));
+</td></tr></tbody></table></td></tr></tbody></table> 
+
+<p class="texttabulka">A to je vlastně vše. Nyní máme v proměnné $Visits aktuální počet návštěvníků
+a stačí jej zobrazit např. pomocí tohoto PHP skriptu: </p><p>
+
+</p><p class="texttabulka"></p><table border="0" cellpadding="1" cellspacing="0" width="100%"><tbody><tr><td><table border="0" cellpadding="2" cellspacing="0" width="100%"><tbody><tr><td class="aktuality" bgcolor="white">
+&lt;? echo "Počet návštěv na této
+stránce : $Visits"; ?&gt;
+</td></tr></tbody></table></td></tr></tbody></table> 
+<p class="texttabulka">A to je pro dnešek vše. Zdrojové soubory ke článku si můžete <a href="http://podklady.interval.cz/andrysek/pocitadlo.zip">stáhnout zde</a>.</p>
+
+
+
+
+
+
+
+
+
+
+<div id="article-author">
+<a href="http://interval.cz/autori/andrysek-tomas/">Andrýsek, Tomáš</a> (21.&nbsp;11.&nbsp;2000)
+
+</div>
+
+
+<div class="refer noprint"><br><strong>Ulož odkaz na</strong>:<a href="http://del.icio.us/post?url=http://interval.cz/clanky/stranko-moje-jakou-navstevnost-dnes-mas-zakladni-skript/&amp;title=Str%E1nko%20moje%2C%20jakou%20n%E1v%u0161t%u011Bvnost%20dnes%20m%E1%u0161%20-%20z%E1kladn%ED%20skript">del.icio.us</a> | <a href="http://www.jagg.cz/bookmarks.php?action=add&amp;address=http://interval.cz/clanky/stranko-moje-jakou-navstevnost-dnes-mas-zakladni-skript/&amp;title=Str%E1nko%20moje%2C%20jakou%20n%E1v%u0161t%u011Bvnost%20dnes%20m%E1%u0161%20-%20z%E1kladn%ED%20skript">jagg.cz</a> | <a href="http://linkuj.cz/?id=linkuj&amp;url=http://interval.cz/clanky/stranko-moje-jakou-navstevnost-dnes-mas-zakladni-skript/&amp;title=Str%E1nko%20moje%2C%20jakou%20n%E1v%u0161t%u011Bvnost%20dnes%20m%E1%u0161%20-%20z%E1kladn%ED%20skript">linkuj.cz</a> | <a href="http://www.topclanky.cz/pridat-odkaz/?kde=http://interval.cz/clanky/stranko-moje-jakou-navstevnost-dnes-mas-zakladni-skript/&amp;nadpis=Str%E1nko%20moje%2C%20jakou%20n%E1v%u0161t%u011Bvnost%20dnes%20m%E1%u0161%20-%20z%E1kladn%ED%20skript">topclanky.cz</a> | <a href="http://vybrali.sme.sk/submit.php?url=http://interval.cz/clanky/stranko-moje-jakou-navstevnost-dnes-mas-zakladni-skript/">vybrali.sme.sk</a>. <strong>Děkujeme!</strong></div><div class="refer"><h3><a href="http://interval.cz/serialy/stranko-moje-jakou-navstevnost-dnes-mas/" title="Stránko moje, jakou návštěvnost dnes máš? (úplný přehled článků seriálu)">Stránko moje, jakou návštěvnost dnes máš?</a></h3><p>Měření
+návštěvnosti se stalo nedílnou součástí webdesignu. Pomocí jednoduchého
+počitadla v PHP s podporou MySQL můžete získat poměrně dobrý přehled o
+popularitě svých stránek. Hotové kódy k dispozici. Tato série článků
+již byla uzavřena, ačkoli další pokračování nelze vyloučit.</p><ul><li><a href="http://interval.cz/clanky/stranko-moje-jakou-navstevnost-dnes-mas-pokrocile-sledovani/">Stránko moje, jakou návštěvnost dnes máš - pokročilé sledování</a> (5.&nbsp;12.&nbsp;2000)</li><li><strong>Stránko moje, jakou návštěvnost dnes máš - základní skript</strong> (právě čtete)</li></ul></div>
+	<div class="noprint" id="article-discussion">
+	<!-- cached 453-tabulka-stranko-moje-jakou-navstevnost-dnes-mas-zakladni-skript.txt --><div id="article-discussion-index"><form action="http://interval.cz/discussion-read.asp?disc=453" method="post"><table cellspacing="0"><tbody><tr><th colspan="4"><a href="http://interval.cz/clanky/stranko-moje-jakou-navstevnost-dnes-mas-zakladni-skript/diskuse/" title="Stránko moje, jakou návštěvnost dnes máš - základn ... (diskuse)">Stránko moje, jakou návštěvnost dnes máš - základn ... (diskuse)</a></th></tr><tr><td class="checkbox"><input name="checkboxDISKUZE21281" title="0 21281" value="1" type="checkbox"></td><td class="date">2003-11-27 19:02:29</td><td class="sender">Cipísek</td><td class="subject">Pocita moc</td></tr><tr><td class="checkbox"><input name="checkboxDISKUZE25112" title="1 25112" value="1" type="checkbox"></td><td class="date">2004-03-30 01:48:26</td><td class="sender">Orion</td><td class="subject"><img src="Str%C3%A1nko%20moje,%20jakou%20n%C3%A1v%C5%A1t%C4%9Bvnost%20dnes%20m%C3%A1%C5%A1%20-%20z%C3%A1kladn%C3%AD%20skript%20--%20PHP%20--%20V%C3%BDvoj%20aplikac%C3%AD%20--%20Interval.cz_soubory/invisible.png" class="line" alt="."><img src="Str%C3%A1nko%20moje,%20jakou%20n%C3%A1v%C5%A1t%C4%9Bvnost%20dnes%20m%C3%A1%C5%A1%20-%20z%C3%A1kladn%C3%AD%20skript%20--%20PHP%20--%20V%C3%BDvoj%20aplikac%C3%AD%20--%20Interval.cz_soubory/line1.png" class="line" alt=".">Pocita moc</td></tr><tr><td class="checkbox"><input name="checkboxDISKUZE33777" title="1 33777" value="1" type="checkbox"></td><td class="date">2005-01-01 21:13:05</td><td class="sender">alamos</td><td class="subject"><img src="Str%C3%A1nko%20moje,%20jakou%20n%C3%A1v%C5%A1t%C4%9Bvnost%20dnes%20m%C3%A1%C5%A1%20-%20z%C3%A1kladn%C3%AD%20skript%20--%20PHP%20--%20V%C3%BDvoj%20aplikac%C3%AD%20--%20Interval.cz_soubory/invisible.png" class="line" alt="."><img src="Str%C3%A1nko%20moje,%20jakou%20n%C3%A1v%C5%A1t%C4%9Bvnost%20dnes%20m%C3%A1%C5%A1%20-%20z%C3%A1kladn%C3%AD%20skript%20--%20PHP%20--%20V%C3%BDvoj%20aplikac%C3%AD%20--%20Interval.cz_soubory/line1.png" class="line" alt=".">Pocita moc</td></tr><tr><td class="checkbox"><input name="checkboxDISKUZE35322" title="2 35322" value="1" type="checkbox"></td><td class="date">2005-02-24 19:14:37</td><td class="sender">gtu</td><td class="subject"><img src="Str%C3%A1nko%20moje,%20jakou%20n%C3%A1v%C5%A1t%C4%9Bvnost%20dnes%20m%C3%A1%C5%A1%20-%20z%C3%A1kladn%C3%AD%20skript%20--%20PHP%20--%20V%C3%BDvoj%20aplikac%C3%AD%20--%20Interval.cz_soubory/invisible.png" class="line" alt="."><img src="Str%C3%A1nko%20moje,%20jakou%20n%C3%A1v%C5%A1t%C4%9Bvnost%20dnes%20m%C3%A1%C5%A1%20-%20z%C3%A1kladn%C3%AD%20skript%20--%20PHP%20--%20V%C3%BDvoj%20aplikac%C3%AD%20--%20Interval.cz_soubory/line2.png" class="line" alt="."><img src="Str%C3%A1nko%20moje,%20jakou%20n%C3%A1v%C5%A1t%C4%9Bvnost%20dnes%20m%C3%A1%C5%A1%20-%20z%C3%A1kladn%C3%AD%20skript%20--%20PHP%20--%20V%C3%BDvoj%20aplikac%C3%AD%20--%20Interval.cz_soubory/line3.png" class="line" alt=".">Pocita moc</td></tr><tr><td class="checkbox"><input name="checkboxDISKUZE36313" title="0 36313" value="1" type="checkbox"></td><td class="date">2005-04-09 02:30:28</td><td class="sender">Petra Honáková</td><td class="subject">Taky mi to nešlo...</td></tr><tr><td class="checkbox"><input name="checkboxDISKUZE41609" title="1 41609" value="1" type="checkbox"></td><td class="date">2005-12-13 21:15:53</td><td class="sender">Jirka Pánek</td><td class="subject"><img src="Str%C3%A1nko%20moje,%20jakou%20n%C3%A1v%C5%A1t%C4%9Bvnost%20dnes%20m%C3%A1%C5%A1%20-%20z%C3%A1kladn%C3%AD%20skript%20--%20PHP%20--%20V%C3%BDvoj%20aplikac%C3%AD%20--%20Interval.cz_soubory/invisible.png" class="line" alt="."><img src="Str%C3%A1nko%20moje,%20jakou%20n%C3%A1v%C5%A1t%C4%9Bvnost%20dnes%20m%C3%A1%C5%A1%20-%20z%C3%A1kladn%C3%AD%20skript%20--%20PHP%20--%20V%C3%BDvoj%20aplikac%C3%AD%20--%20Interval.cz_soubory/line1.png" class="line" alt=".">Taky mi to nešlo...</td></tr><tr><td class="checkbox"><input name="checkboxDISKUZE49934" title="2 49934" value="1" type="checkbox"></td><td class="date">2007-12-27 01:28:03</td><td class="sender">MajkyyX</td><td class="subject"><img src="Str%C3%A1nko%20moje,%20jakou%20n%C3%A1v%C5%A1t%C4%9Bvnost%20dnes%20m%C3%A1%C5%A1%20-%20z%C3%A1kladn%C3%AD%20skript%20--%20PHP%20--%20V%C3%BDvoj%20aplikac%C3%AD%20--%20Interval.cz_soubory/invisible.png" class="line" alt="."><img src="Str%C3%A1nko%20moje,%20jakou%20n%C3%A1v%C5%A1t%C4%9Bvnost%20dnes%20m%C3%A1%C5%A1%20-%20z%C3%A1kladn%C3%AD%20skript%20--%20PHP%20--%20V%C3%BDvoj%20aplikac%C3%AD%20--%20Interval.cz_soubory/line2.png" class="line" alt="."><img src="Str%C3%A1nko%20moje,%20jakou%20n%C3%A1v%C5%A1t%C4%9Bvnost%20dnes%20m%C3%A1%C5%A1%20-%20z%C3%A1kladn%C3%AD%20skript%20--%20PHP%20--%20V%C3%BDvoj%20aplikac%C3%AD%20--%20Interval.cz_soubory/line3.png" class="line" alt=".">Taky mi to nešlo...</td></tr><tr><td class="checkbox"><input name="checkboxDISKUZE45984" title="1 45984" value="1" type="checkbox"></td><td class="date">2006-09-15 18:38:28</td><td class="sender">cerber</td><td class="subject"><img src="Str%C3%A1nko%20moje,%20jakou%20n%C3%A1v%C5%A1t%C4%9Bvnost%20dnes%20m%C3%A1%C5%A1%20-%20z%C3%A1kladn%C3%AD%20skript%20--%20PHP%20--%20V%C3%BDvoj%20aplikac%C3%AD%20--%20Interval.cz_soubory/invisible.png" class="line" alt="."><img src="Str%C3%A1nko%20moje,%20jakou%20n%C3%A1v%C5%A1t%C4%9Bvnost%20dnes%20m%C3%A1%C5%A1%20-%20z%C3%A1kladn%C3%AD%20skript%20--%20PHP%20--%20V%C3%BDvoj%20aplikac%C3%AD%20--%20Interval.cz_soubory/line3.png" class="line" alt=".">Taky mi to nešlo...</td></tr><tr><td class="checkbox"><input name="checkboxDISKUZE50875" title="0 50875" value="1" type="checkbox"></td><td class="date">2008-02-19 09:51:27</td><td class="sender">sporda</td><td class="subject">nejde</td></tr><tr><td colspan="4" id="foot"><input value="Zobrazit vybrané" name="display_selected" id="display_selected" class="submit" type="submit"> &nbsp; <input value="Zobrazit vše" name="display_all" id="display_all" class="submit" type="submit"> &nbsp; <input value="Vložit nový" name="add_new" id="add_new" class="submit" type="submit"></td></tr></tbody></table></form></div>
+	</div>
+
+
+</div>
+
+
+
+
+
+
+</div>
+<div id="page-right">
+<h2 class="textversion">Pravý sloupek</h2>
+
+
+<div id="search">
+<h3 class="textversion">Vyhledávání</h3>
+
+	<form action="http://www.google.cz/custom" method="get">
+		<div>
+			<input name="domains" value="interval.cz" type="hidden">
+			<input id="sbi" class="text" name="q" size="15" value="" type="text">
+			<input id="sbb" class="submit" name="sa" value="Najdi" type="submit">
+			<input name="sitesearch" value="interval.cz" type="hidden">
+			<input name="client" value="pub-0627399152761886" type="hidden">
+			<input name="forid" value="1" type="hidden">
+			<input name="channel" value="6859855792" type="hidden">
+			<input name="ie" value="windows-1250" type="hidden">
+			<input name="oe" value="windows-1250" type="hidden">
+
+			<input name="flav" value="0000" type="hidden">
+			<input name="sig" value="fzsccwnc4ZQRtlyw" type="hidden">
+			<input name="cof" value="GALT:#008000;GL:1;DIV:#336699;VLC:663399;AH:center;BGC:FFFFFF;LBGC:336699;ALC:0000FF;LC:0000FF;T:000000;GFNT:0000FF;GIMP:0000FF;FORID:1" type="hidden">
+			<input name="hl" value="cs" type="hidden">
+		</div>
+	</form>
+
+</div>
+	<div id="advertising-arbo-rightcolumn-textbox" class="noprint" style="padding: 1em; font-size: 0.8em;">
+	<!-- StartKód: adarbo2.bbmedia.cz 3.1 Nestandard  Interval(87) / home page(2) / textbox(1) / nestandard(24) -->
+	<script type="text/javascript">
+	<!-- <![CDATA[
+	var bbs=screen,bbn=navigator,bbh;bbh='&ubl='+bbn.browserLanguage+'&ucc='+bbn.cpuClass+'&ucd='+bbs.colorDepth+'&uce='+bbn.cookieEnabled+'&udx='+bbs.deviceXDPI+'&udy='+bbs.deviceYDPI+'&usl='+bbn.systemLanguage+'&uje='+bbn.javaEnabled()+'&uah='+bbs.availHeight+'&uaw='+bbs.availWidth+'&ubd='+bbs.bufferDepth+'&uhe='+bbs.height+'&ulx='+bbs.logicalXDPI+'&uly='+bbs.logicalYDPI+'&use='+bbs.fontSmoothingEnabled+'&uto='+(new Date()).getTimezoneOffset()+'&uti='+(new Date()).getTime()+'&uui='+bbs.updateInterval+'&uul='+bbn.userLanguage+'&uwi='+bbs.width;
+	document.write("<scr"+"ipt  language='JavaScript' type='text/javascript' src='http://adarbo2.bbmedia.cz/please/showit/87/2/1/24/?typkodu=non-standard"+bbh+"&alttext=0&border=0&bgcolor=FFFFFF&text=000000&link=0000FF&target=_blank&bust="+Math.random()+"'>");
+	document.write("<"+"\/scr"+"ipt>");
+	//]]> -->
+	</script><script language="JavaScript" type="text/javascript" src="Str%C3%A1nko%20moje,%20jakou%20n%C3%A1v%C5%A1t%C4%9Bvnost%20dnes%20m%C3%A1%C5%A1%20-%20z%C3%A1kladn%C3%AD%20skript%20--%20PHP%20--%20V%C3%BDvoj%20aplikac%C3%AD%20--%20Interval.cz_soubory/a_003.js"></script>
+	<!-- KonecKód: adarbo2.bbmedia.cz 3.1 Nestandard -->
+	</div>
+<!-- cached 50-knizni_tip.txt --><div class="page-right-box book"><h3>Knižní tip</h3><div class="page-right-box-in"><div class="book-top"><h4><a href="http://interval.inshop.cz/inshop/scripts/detail.asp?kat=321">AJAX - Vytváříme vysoce interaktivní webové aplikace</a></h4></div><div class="image"><a href="http://interval.inshop.cz/inshop/scripts/detail.asp?kat=321"><img src="Str%C3%A1nko%20moje,%20jakou%20n%C3%A1v%C5%A1t%C4%9Bvnost%20dnes%20m%C3%A1%C5%A1%20-%20z%C3%A1kladn%C3%AD%20skript%20--%20PHP%20--%20V%C3%BDvoj%20aplikac%C3%AD%20--%20Interval.cz_soubory/321.jpg" alt="obálka" title="AJAX - Vytváříme vysoce interaktivní webové aplikace"></a></div></div></div>
+	<div class="page-right-box czechia-box">
+	<div style="padding: 7px; width: 166px; background-color: rgb(234, 223, 172); text-align: center; color: rgb(0, 0, 0);">
+	<a href="http://www.zoner.cz/"><strong>ZONER software, s.r.o.</strong></a>,
+	<br>přední
+český poskytovatel internetových služeb souvisejících s prezentací na
+internetu a e-komercí, hledá do svého týmu pracovníka na pozici <br><a href="http://www.czechia.com/clanek/kariera-u-nas/#programator-ASP" style="background-color: rgb(234, 223, 172); color: rgb(0, 0, 255); text-decoration: underline;"><strong>Programátor ASP.NET 2.0 </strong></a>.
+	</div>
+	</div>
+<!-- cached 09-nejctenejsi_clanky.txt --><div class="page-right-box reading"><h3 title="Nejčtenější články za posledních 90 dnů">Nejčtenější</h3><div class="page-right-box-in"><ul><li><a href="http://interval.cz/clanky/javascript-a-ajax-john-resig/">JavaScript a Ajax (John Resig)</a></li><li><a href="http://interval.cz/clanky/kontrast-a-vyznam/">Kontrast a význam</a></li><li><a href="http://interval.cz/clanky/echo2-web-framework-nase-okno-dostava-obsah/">Echo2 Web Framework - naše okno dostáva obsah</a></li><li><a href="http://interval.cz/clanky/echo2-web-framework-echopointng-nech-sa-paci/">Echo2 Web Framework - Echopointng, nech sa páči</a></li><li><a href="http://interval.cz/clanky/interzen-2007-predstavuje-dobracajovnafm-cz/">Interzen 2007 představuje: dobracajovnafm.cz</a></li></ul></div></div>
+
+<div class="advertising-vertical-banner-outer">
+<div class="advertising-vertical-banner-inner">
+<a style="left: 120px ! important; top: 0px ! important;" title="Klepněte zde pro blokování tohoto objektu pomocí Adblock Plus" class="abp-objtab-039055519099233205 visible ontop" href="http://interval.cz/__services/__include_right/leto-s-domenou-300-120.swf"></a><object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" codebase="http://fpdownload.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,0,0" id="leto-s-domenou-300-120" align="middle" height="300" width="120">
+<param name="allowScriptAccess" value="sameDomain">
+<param name="movie" value="http://interval.cz/__services/__include_right/leto-s-domenou-300-120.swf"><param name="quality" value="high"><param name="bgcolor" value="#ffffff"><embed src="Str%C3%A1nko%20moje,%20jakou%20n%C3%A1v%C5%A1t%C4%9Bvnost%20dnes%20m%C3%A1%C5%A1%20-%20z%C3%A1kladn%C3%AD%20skript%20--%20PHP%20--%20V%C3%BDvoj%20aplikac%C3%AD%20--%20Interval.cz_soubory/leto-s-domenou-300-120.swf" quality="high" bgcolor="#ffffff" name="leto-s-domenou-300-120" allowscriptaccess="sameDomain" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer" align="middle" height="300" width="120">
+</object>
+</div>
+</div>
+<div class="page-right-box emailserv">
+<h3>Info servis</h3>
+<div class="page-right-box-in">
+<ul>
+<li><a href="http://export.interval.cz/" title="Exporty aktuálních informací ve formátech Atom, RDF a RSS">Alternativní přístup k poskytovanému obsahu</a></li>
+<li><a href="http://export.interval.cz/?type=atom" title="Aktuální články magazínu ve formátu Atom">Atom</a> (<a href="http://export.interval.cz/?type=atom&amp;discussion=all" title="Aktuální diskuse magazínu ve formátu Atom">diskuse</a>)</li>
+<li><a href="http://export.interval.cz/?type=rdf" title="Aktuální články magazínu ve formátu RDF">RDF</a> (<a href="http://export.interval.cz/?type=rdf&amp;discussion=all" title="Aktuální diskuse magazínu ve formátu RDF">diskuse</a>)</li>
+<li><a href="http://export.interval.cz/?type=rss" title="Aktuální články magazínu ve formátu RSS">RSS</a> (<a href="http://export.interval.cz/?type=rss&amp;discussion=all" title="Aktuální diskuse magazínu ve formátu RSS">diskuse</a>)</li>
+</ul>
+</div>
+</div>
+<div class="advertising-vertical-banner-outer">
+<div class="advertising-vertical-banner-inner">
+
+	<!-- StartKód: adarbo2.bbmedia.cz 3.1 Nestandard  Interval(87) / homepage + cely web(1) / skyscraper120x600(6) / nestandard(24) -->
+	<script type="text/javascript">
+	/* <![CDATA[ */
+	var bbs=screen,bbn=navigator,bbh;bbh='&ubl='+bbn.browserLanguage+'&ucc='+bbn.cpuClass+'&ucd='+bbs.colorDepth+'&uce='+bbn.cookieEnabled+'&udx='+bbs.deviceXDPI+'&udy='+bbs.deviceYDPI+'&usl='+bbn.systemLanguage+'&uje='+bbn.javaEnabled()+'&uah='+bbs.availHeight+'&uaw='+bbs.availWidth+'&ubd='+bbs.bufferDepth+'&uhe='+bbs.height+'&ulx='+bbs.logicalXDPI+'&uly='+bbs.logicalYDPI+'&use='+bbs.fontSmoothingEnabled+'&uto='+(new Date()).getTimezoneOffset()+'&uti='+(new Date()).getTime()+'&uui='+bbs.updateInterval+'&uul='+bbn.userLanguage+'&uwi='+bbs.width;
+	document.write("<scr"+"ipt  type='text/javascript' src='http://adarbo2.bbmedia.cz/please/showit/87/1/6/24/?typkodu=non-standard"+bbh+"&alttext=0&border=0&bgcolor=FFFFFF&text=000000&link=0000FF&target=_top&bust="+Math.random()+"'>");
+	document.write("<"+"\/scr"+"ipt>");
+	/* ]]> */
+	</script><script type="text/javascript" src="Str%C3%A1nko%20moje,%20jakou%20n%C3%A1v%C5%A1t%C4%9Bvnost%20dnes%20m%C3%A1%C5%A1%20-%20z%C3%A1kladn%C3%AD%20skript%20--%20PHP%20--%20V%C3%BDvoj%20aplikac%C3%AD%20--%20Interval.cz_soubory/a_005.js"></script>
+	<!-- KonecKód: adarbo2.bbmedia.cz 3.1 Nestandard -->
+
+
+
+</div>
+</div>
+
+
+
+
+</div>
+<div class="page-maker">&nbsp;</div>
+<div class="page-maker-white">&nbsp;</div>
+</div>
+<div id="advertising-page-bottom">
+
+
+
+
+
+
+
+<div class="page-maker">&nbsp;</div>
+</div>
+<div id="page-foot">
+<div id="page-foot-menu">
+<a href="http://interval.cz/redakce-inzerce.asp">Inzerce na Interval.cz</a>
+&nbsp;|&nbsp;
+<a href="http://interval.cz/redakce.asp">Redakce Interval.cz</a>
+&nbsp;|&nbsp;
+<a href="http://interval.cz/autori.asp">Hledáme nové autory</a>
+</div>
+<div id="issn">
+<a href="http://jigsaw.w3.org/css-validator/validator?uri=http%3A%2F%2Finterval.cz%2Fclanky%2Fstranko-moje-jakou-navstevnost-dnes-mas-zakladni-skript%2F" class="noprint">.</a>
+<span title="ID 453">ISSN 1212-8651</span>
+<a href="http://validator.w3.org/check?uri=http%3A%2F%2Finterval.cz%2Fclanky%2Fstranko-moje-jakou-navstevnost-dnes-mas-zakladni-skript%2F&amp;charset=%28detect+automatically%29&amp;doctype=%28detect+automatically%29&amp;outline=1&amp;verbose=1" class="noprint">.</a>
+</div>
+<div id="page-foot-zoner">
+© <a href="http://www.zoner.eu/">Zoner software, s.r.o.</a>, všechna práva vyhrazena, tento server dodržuje
+<a href="http://interval.cz/privacy.asp">právní předpisy</a>
+o ochraně osobních údajů.
+</div>
+</div>
+
+<script type="text/javascript" src="Str%C3%A1nko%20moje,%20jakou%20n%C3%A1v%C5%A1t%C4%9Bvnost%20dnes%20m%C3%A1%C5%A1%20-%20z%C3%A1kladn%C3%AD%20skript%20--%20PHP%20--%20V%C3%BDvoj%20aplikac%C3%AD%20--%20Interval.cz_soubory/audits-footer.js"></script>
+<script type="text/javascript">
+	var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+	document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script><script src="Str%C3%A1nko%20moje,%20jakou%20n%C3%A1v%C5%A1t%C4%9Bvnost%20dnes%20m%C3%A1%C5%A1%20-%20z%C3%A1kladn%C3%AD%20skript%20--%20PHP%20--%20V%C3%BDvoj%20aplikac%C3%AD%20--%20Interval.cz_soubory/ga.js" type="text/javascript"></script>
+<script type="text/javascript">
+	var pageTracker = _gat._getTracker("UA-173085-1");
+	pageTracker._initData();
+	pageTracker._trackPageview();
+</script>
+
+
+	<div id="advertising-context" class="noprint">
+
+	<!-- StartKód: ad2.bbmedia.cz 3.1 Interval(2098) / BillBoard Intext(1) / Intext(1) -->
+	<script type="text/javascript">/* <![CDATA[ */
+	var bbs=screen,bbn=navigator,bbh;bbh='&ubl='+bbn.browserLanguage+'&ucc='+bbn.cpuClass+'&ucd='+bbs.colorDepth+'&uce='+bbn.cookieEnabled+'&udx='+bbs.deviceXDPI+'&udy='+bbs.deviceYDPI+'&usl='+bbn.systemLanguage+'&uje='+bbn.javaEnabled()+'&uah='+bbs.availHeight+'&uaw='+bbs.availWidth+'&ubd='+bbs.bufferDepth+'&uhe='+bbs.height+'&ulx='+bbs.logicalXDPI+'&uly='+bbs.logicalYDPI+'&use='+bbs.fontSmoothingEnabled+'&uto='+(new Date()).getTimezoneOffset()+'&uti='+(new Date()).getTime()+'&uui='+bbs.updateInterval+'&uul='+bbn.userLanguage+'&uwi='+bbs.width;
+	document.write("<scr"+"ipt type='text/javascript' src='http://ad2.bbmedia.cz/please/showit/2098/1/1/7/?typkodu=js"+bbh+"&alttext=0&border=0&bust="+Math.random()+"&target=_blank'><"+"\/scr"+"ipt>");
+	/* ]]> */
+	</script><script type="text/javascript" src="Str%C3%A1nko%20moje,%20jakou%20n%C3%A1v%C5%A1t%C4%9Bvnost%20dnes%20m%C3%A1%C5%A1%20-%20z%C3%A1kladn%C3%AD%20skript%20--%20PHP%20--%20V%C3%BDvoj%20aplikac%C3%AD%20--%20Interval.cz_soubory/a_007.js"></script><script type="text/javascript" charset="windows-1250" src="Str%C3%A1nko%20moje,%20jakou%20n%C3%A1v%C5%A1t%C4%9Bvnost%20dnes%20m%C3%A1%C5%A1%20-%20z%C3%A1kladn%C3%AD%20skript%20--%20PHP%20--%20V%C3%BDvoj%20aplikac%C3%AD%20--%20Interval.cz_soubory/bb4.js"></script><script type="text/javascript" charset="windows-1250">document.write("<scr"+"ipt  type='text/javascript' src='http://ad2.billboard.cz/please/showit/35974/1/1/31/?typkodu=js"+bbh+"' charset='windows-1250'><"+"/scr"+"ipt>");</script><script type="text/javascript" src="Str%C3%A1nko%20moje,%20jakou%20n%C3%A1v%C5%A1t%C4%9Bvnost%20dnes%20m%C3%A1%C5%A1%20-%20z%C3%A1kladn%C3%AD%20skript%20--%20PHP%20--%20V%C3%BDvoj%20aplikac%C3%AD%20--%20Interval.cz_soubory/a_009.js" charset="windows-1250"></script><script language="JavaScript" src="Str%C3%A1nko%20moje,%20jakou%20n%C3%A1v%C5%A1t%C4%9Bvnost%20dnes%20m%C3%A1%C5%A1%20-%20z%C3%A1kladn%C3%AD%20skript%20--%20PHP%20--%20V%C3%BDvoj%20aplikac%C3%AD%20--%20Interval.cz_soubory/pack107.js" charset="windows-1250"></script><script language="JavaScript" charset="windows-1250" src="Str%C3%A1nko%20moje,%20jakou%20n%C3%A1v%C5%A1t%C4%9Bvnost%20dnes%20m%C3%A1%C5%A1%20-%20z%C3%A1kladn%C3%AD%20skript%20--%20PHP%20--%20V%C3%BDvoj%20aplikac%C3%AD%20--%20Interval.cz_soubory/bbt2.js"></script>
+
+	<noscript>
+<div> <a href='http://ad2.bbmedia.cz/please/redirect/2098/1/1/7/'><img
+src='http://ad2.bbmedia.cz/please/showit/2098/1/1/7/?typkodu=img'
+alt='.' /></a></div> </noscript>
+	<!-- KonecKód: ad2.bbmedia.cz 3.1 -->
+
+	</div>
+
+
+<div style="position: absolute; left: -1000px; top: -1000px; display: none;" id="bbt_add133"><div class="bbt_border" onmouseout='this.className="bbt_border";' onmouseover='this.className="bbt_border bbt_border_over";'><div class="bbt_block"><h3 class="bbt_title" onclick="window.open('http://www.billboard.cz/media-text.php');javascript:event.cancelBubble=true;">Billboard Intextová reklama</h3><div class="bbt_adbox" onmouseout='this.className="bbt_adbox";' onmouseover='this.className="bbt_adbox_over";'><h4>Vystup z davu!</h4><p>Vyber si COOL e-mailovou adresu.<br><strong>http://www.vystupzdavu.cz/</strong></p></div></div><h5 onclick="window.open('http://www.billboard.cz/media-text.php');javascript:event.cancelBubble=true;"><span></span><em>o reklamě Billboard »</em></h5></div></div><div style="position: absolute; left: -1000px; top: -1000px; display: none;" id="bbt_add2357"><div class="bbt_border" onmouseout='this.className="bbt_border";' onmouseover='this.className="bbt_border bbt_border_over";'><div class="bbt_block"><h3 class="bbt_title" onclick="window.open('http://www.billboard.cz/media-text.php');javascript:event.cancelBubble=true;">Billboard Intextová reklama</h3><div class="bbt_adbox" onmouseout='this.className="bbt_adbox";' onmouseover='this.className="bbt_adbox_over";'><h4>Spořící účet: 3,5 % p.a.</h4><p>Máte nějaké volné peníze? Zúročte<br>je. Vybrat je můžete kdykoliv!<strong>www.bawag.cz</strong></p></div></div><h5 onclick="window.open('http://www.billboard.cz/media-text.php');javascript:event.cancelBubble=true;"><span></span><em>o reklamě Billboard »</em></h5></div></div><div style="position: absolute; left: -1000px; top: -1000px; display: none;" id="bbt_add169"><div class="bbt_border" style="width: 260px ! important;" onmouseout='this.className="bbt_border";' onmouseover='this.className="bbt_border bbt_border_over";'><h3 class="bbt_title" style="font-size: 0.85em; cursor: pointer;" onclick="window.open('http://www.billboard.cz/media-text.php');javascript:event.cancelBubble=true;">BillBoard Intextová reklama</h3><iframe id="bbtEtMainIfr169" name="bbtEtMainIfr169" allowtransparency="true" src="Str%C3%A1nko%20moje,%20jakou%20n%C3%A1v%C5%A1t%C4%9Bvnost%20dnes%20m%C3%A1%C5%A1%20-%20z%C3%A1kladn%C3%AD%20skript%20--%20PHP%20--%20V%C3%BDvoj%20aplikac%C3%AD%20--%20Interval.cz_soubory/a_002.htm" frameborder="0" height="260" scrolling="no" width="260"></iframe><h5 onclick="window.open('http://www.etarget.cz/catalog.php?ref=4372&catalogPartner=270&c=1300&asynchronousConfirmURL=http%3A//ad2.billboard.cz/please/redirect/35974/1/1/32/%21etarget%3D1%3Bparam%3D62552/822488_0');javascript:event.cancelBubble=true;"><em>další z katalogu »</em></h5></div></div><div style="position: absolute; left: -1000px; top: -1000px; display: none;" id="bbt_add"><div class="bbt_border" onmouseout='this.className="bbt_border";' onmouseover='this.className="bbt_border bbt_border_over";' onclick="window.open('http://bb.billboard.cz/bbtext/');javascript:event.cancelBubble=true;"><div class="bbt_block"><div class="bbt_adbox" onmouseout='this.className="bbt_adbox";' onmouseover='this.className="bbt_adbox_over";'>bbtext</div></div></div></div><a style="display: none;" class="bbt_w">bbtext</a><div style="position: absolute; left: 0px; top: 0px; z-index: 1000000000; visibility: hidden; opacity: 1;" id="linkalert-box"><img src="Str%C3%A1nko%20moje,%20jakou%20n%C3%A1v%C5%A1t%C4%9Bvnost%20dnes%20m%C3%A1%C5%A1%20-%20z%C3%A1kladn%C3%AD%20skript%20--%20PHP%20--%20V%C3%BDvoj%20aplikac%C3%AD%20--%20Interval.cz_soubory/none-icon.png" id="linkalert-icon-1"></div></body></html>

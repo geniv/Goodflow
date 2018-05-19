@@ -1,0 +1,67 @@
+<!doctype html public "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=Windows-1250">
+<title>Funkce User_to_group</title>
+<link rel='stylesheet' style='text/css' href='../function.css'>
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000">
+
+
+
+<h2 class=function>User_to_group</h2>
+<img src='../images/cpp.gif' width='44' height='16' border='0' alt='c/c++' align='middle' hspace='2'><img src='../images/pascal.gif' width='44' height='16' border='0' alt='pascal' align='middle' hspace='2'>
+
+
+<br><br>
+<div class='typ'>BOOL <b>User_to_group</b>(tobjnum user, tobjnum group, BOOL state)<br>
+function <b>User_to_group</b>(user, group : tobjnum; state : Boolean) : Boolean;
+</div>
+
+
+<p><b>Parametry</b></p>
+
+<table border=1 cols=2 frame=box rules=all width=440>
+
+<tr valign="top">
+<td width=19%><i>user</i> </td>
+<td width=81%>číslo uživatele</td>
+</tr>
+
+<tr valign="top">
+<td width=19%><i>group </i></td>
+<td width=81%>číslo skupiny</td>
+</tr>
+
+<tr valign="top">
+<td width=19%><i>state </i></td>
+<td width=81%>náležení uživatele do skupiny</td>
+</tr>
+</table><br>
+
+<p><b>Popis </b></p>
+
+<p>Funkce je od verze 5.0 zastaralá, je nahrazena obecnější funkcí <b><code>GetSet_group_role</code></b>.</p>
+
+<p>Funkce <b><code>User_in_group</code></b> zařazuje resp. vyřazuje uživatele  user do resp. ze skupiny  <i>group</i>. Je-li parametr  <i>state</i> roven TRUE, je uživatel zařazen do skupiny, je-li roven FALSE, je vyřazen ze skupiny.</p>
+
+<p>Číslo uživatele a číslo skupiny vrátí funkce <b><code>Find_object</code></b> s&nbsp;parametrem <code>CATEG_USER</code> resp <code>CATEG_GROUP</code>.</p>
+
+<p>Zařazovat uživatele do skupin a vyřazovat je z&nbsp;nich smí pouze provozní a bezpečnostní správce databáze.</p>
+
+<p><b>Hodnota funkce </b></p>
+
+<p>Funkce vrací FALSE při úspěchu, TRUE při chybě.</p>
+
+<p><b>Viz</b></p>
+
+<ul class='viz'>
+ <li><a href="HE_F_USERINGROUP.htm">User_in_group</a> </li>
+ <li><a href="HE_F_INSERTOBJECT.htm">Insert_object</a> </li>
+ <li><a href="HE_F_FINDOBJECT.htm">Find_object</a> </li>
+ <li><a href="HE_F_GETSETGROUPROLE.htm">GetSet_group_role</a></li>
+</ul>
+
+</body>
+</html>

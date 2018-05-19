@@ -1,0 +1,20 @@
+<!doctype html public "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=Windows-1250">
+<title>Kompatibilita SQL</title>
+<link rel='stylesheet' style='text/css' href='../function.css'>
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000">
+
+<h1><a name="he_sql2_kompatibilita"></a>Kompatibilita s&nbsp;normami SQL a staršími verzemi 602SQL</h1>
+
+<p>Starší verze serveru 602SQL se v&nbsp;řadě případů chovaly odlišně, než předepisují nové normy jazyka SQL. Kupříkladu pokud je při vytváření odpovědi na dotaz požadována typová konverze, kterou nelze provést, starší 602SQL vracela hodnotu NULL, zatímco dle normy má celá operace skončit neúspěchem.</p>
+
+<p>Aby byla zachována nezměněná funkce starších aplikací a přitom aby bylo možno vytvářet nové aplikace v&nbsp;souladu s&nbsp;normami SQL, umožňuje server 602SQL nastavit, do jaké míry se má zachovat kompatibilita funkce se staršími verze proti striktnímu dodržení norem. Toto nastavení lze libovolně měnit i za běhu jedné aplikace a pro různé klienty mohou ve stejném okamžiku platit různá nastavení. Změnu nastavení provádí klient voláním API funkce <a href="HE_F_SETSQLOPTION.htm"><code>Set_sql_option</code></a>, v jejímž popisu je také seznam možných voleb. Aktuální nastavení vrací funkce <a href="../xml/html/f_getsqloption.html"><code>Get_sql_option</code></a>. V prostředí serveru lze aktuální nastavení číst a měnit pomocí systémové proměnné <code>@@sqloptions</code>.</p>
+
+<p>Po připojení se nového klienta na server jsou všechny jeho volby nastaveny dle <a href="../xml/html/propserver.html">vlastnosti serveru</a> <code>DefaultSQLOption</code>. Pokud hodnota této vlastnosti není změněna, je zapnuta ve všech volbách kompatibilita se staršími verzemi 602SQL.</p>
+
+</body>
+</html>

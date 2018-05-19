@@ -1,0 +1,139 @@
+<!doctype html public "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=Windows-1250">
+<title>Příkaz REVOKE (SQL)</title>
+<link rel='stylesheet' style='text/css' href='../function.css'>
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr>
+	<td style="background-image: url(../images/bghead.jpg);
+		background-position: right;
+		background-repeat: no-repeat;">
+	<table width="100%" border="0" cellpadding="0" cellspacing="0"
+		style="background-image:none">
+	<tr>
+		<td style="background-image:none" height="46"
+			width="15%"><img src="../images/title-cz.gif"
+			width="255" height="33"
+			alt="602SQL-Úplná dokumentace"
+			title="602SQL - Úplná dokumentace"
+			border="0"></td>
+		<td width="33%" align="right"><a href="../xml/html/top.html"><img class="floatno"
+			src="../images/index.gif"
+			width="15" height="16"
+			alt="Index" title="Zpět na obsah"
+			border="0" vspace="2"></a> &nbsp;
+			 </td>
+	</tr>
+	</table>
+	</td>
+</tr>
+</table><table class="navigace" border="0" width="100%"  bgcolor="#FFFFBF"><tr> <td
+width="20" align="center"><img class="floatno" src="../images/prev.gif"
+width="15" height="13" alt="&lt;&shy;" title="Předcházející téma"
+border="0"></td><td width="25%"><a
+href="HE_SQL2_GRANT.htm">Příkaz GRANT</a></td> <td width="25%"
+align="right"><img class="floatno" src="../images/up.gif" width="13"
+height="15" alt="Nahoru" title="O jednu úroveň výš" border="0"
+align="middle"></td><td width="25%"><a href="HE_SQL2_PRIKAZY.htm">SQL příkazy</a></td>
+<td width="25%" align="right"><a
+href="HE_SQL2_UPDATE.htm">Příkaz UPDATE</a></td><td width="20"
+align="center"><img class="floatno" src="../images/next.gif" width="15"
+height="13" alt="&shy;&gt;" title="Následující téma" border="0"></td>
+</tr></table>
+
+
+
+
+<h1><a name="he_sql2_revoke"></a>Příkaz REVOKE (SQL)</h1>
+
+<pre><code>příkaz_REVOKE ::= příkaz_REVOKE_pro_tabulky | příkaz_REVOKE_pro_rutiny
+
+příkaz_REVOKE_pro_tabulky ::= REVOKE [ GRANT OPTION FOR ] výčet_práv ON [schema.]jméno_tabulky 
+    FROM seznam_subjektů [ WHERE podmínka_where ]
+výčet_práv ::= ALL [ PRIVILEGES ] | jednotlivé_právo {, jednotlivé_právo }…
+jednotlivé_právo ::=  DELETE | INSERT | SELECT | UPDATE [( seznam_sloupců )] 
+    | REFERENCES [( seznam_sloupců ) | GRANT ]
+seznam_sloupců ::= sloupec { , sloupec }…
+seznam_subjektů ::= PUBLIC | subjekt {, subjekt }…
+subjekt ::= [ USER ] jméno_uživatele | [ GROUP ] jméno_role | ROLE [schéma. ] jméno_role
+
+příkaz_REVOKE_pro_rutiny ::= REVOKE [ GRANT OPTION FOR ] výčet_práv ON [ PROCEDURE | FUNCTION ] 
+    [schema.]jméno_rutiny FROM seznam_subjektů
+výčet_práv ::= ALL [ PRIVILEGES ] | jednotlivé_právo {, jednotlivé_právo }…
+jednotlivé_právo ::= EXECUTE | UPDATE </code></pre>
+
+<p><strong>Popis</strong></p>
+
+<p><a href="HE_SQL2_PRIKAZY.htm">Příkaz</a> REVOKE odebere pro uživatele, skupiny uživatelů nebo role určené v <i>seznamu_subjektů</i> <a href="../xml/html/userinfo.html">práva</a> k:
+
+<ul>
+	<li>tabulce <i>jméno_tabulky</i> v aplikaci <i>schema</i></li>
+	<li>vybraným záznamům tabulky <i>jméno_tabulky</i> </li>
+	<li>SQL rutině <i>jméno_rutiny</i> (proceduře či funkci) </li>
+</ul>
+
+<p>Pro možný konflikt jména tabulky a jména <a href="HE_SQL2_STOREDPROCEDURE.htm">rutiny</a> je rozumné rutiny odlišit slovem PROCEDURE nebo FUNCTION. </p>
+
+<p>Mají-li se odebrat práva k jednotlivým záznamům (tzv. <a href="../xml/html/rightrecdat.html">záznamová práva</a>), musí se použít klauzule WHERE s omezující podmínkou na záznamy tabulky <i>jméno_tabulky</i> a současně tabulka musí mít tato práva povolena (při návrhu tabulky).</p>
+
+<p>Ve <i>výčtu_práv</i> definujete, jaká práva se mají odebrat. Použijete-li slovo ALL, odeberou se všechna možná práva k tabulce. Chcete-li odebrat pouze některá práva, jednotlivě je vypíšete a oddělíte čárkami. K dispozici jsou pro tabulky tato práva:
+
+<ul>
+	<li>DELETE - právo rušit záznamy;</li>
+	<li>INSERT - právo vkládat záznamy;</li>
+	<li>SELECT - právo číst všechny sloupce;</li>
+	<li>REFERENCES - právo číst pouze některé sloupce specifikované v <i>seznamu_sloupců</i>. Není-li <i>seznam_sloupců</i> uveden, právo číst platí pro všechny sloupce (totéž co SELECT);</li>
+	<li>UPDATE - právo přepisovat jednotlivé sloupce specifikované v <i>seznamu_sloupců</i>. Není-li <i>seznam_sloupců</i> uveden, právo přepisovat platí pro všechny sloupce.</li>
+	<li>GRANT - právo poskytnout svá práva dalším subjektům.</li>
+</ul>
+
+<p>Pro záznamová práva není k dispozici právo INSERT.</p>
+
+<p>Pro rutiny je výčet práv jednodušší:
+
+<ul>
+	<li>UPDATE - právo přepisovat definici objektu;</li>
+	<li>EXECUTE - právo spouštět rutinu.</li>
+</ul>
+
+<p>V <i>seznamu_subjektů</i> určujete, koho (jakých <a href="../xml/html/userinfo.html">subjektů práva</a>) se odebrání práv týká. Použijete-li slovo PUBLIC, práva se odeberou skupině EVERYBODY. V jiném případě se odeberou těm uživatelům, skupinám a rolím, které jsou uvedeny jmenovitě. Použijete-li jméno skupiny uživatelů (již definované na serveru), odeberou se práva této skupině, tzn. že uživatelé v ní zařazení práva ztratí automaticky (pokud je nemají přidělena explicitně). Pokud u subjektu práva není uvedeno USER, GROUP ani ROLE, pak se jeho jméno hledá nejprve mezi uživateli, pak mezi skupinami.</p>
+
+<p>Uvede-li se klauzule GRANT OPTION FOR, pak uživatelé a skupiny ztratí možnost svá práva poskytovat dalším uživatelům (totéž co GRANT ve <i>výčtu_práv</i>).</p>
+
+<br><p><strong>Příklad použití:</strong></p>
+
+<p>Všem uživatelům zabraňte v mazání záznamů a editaci čísla pracovníka a jeho platu.</p>
+
+<pre><code>REVOKE DELETE, UPDATE (Plat, Cislo)
+ON Zamestan
+FROM PUBLIC</code></pre>
+
+<p><strong>Viz</strong></p>
+
+<ul class='viz'>
+<li><a href="HE_SQL2_GRANT.htm">GRANT</a>
+<li><a href="HE_SQL2_PRAVA.htm">Práva a subjekty práva v SQL</a>
+</ul>
+
+
+
+
+
+<table class="navigace" border="0" width="100%"  bgcolor="#FFFFBF"><tr> <td
+width="20" align="center"><img class="floatno" src="../images/prev.gif"
+width="15" height="13" alt="&lt;&shy;" title="Předcházející téma"
+border="0"></td><td width="25%"><a
+href="HE_SQL2_GRANT.htm">Příkaz GRANT</a></td> <td width="25%"
+align="right"><img class="floatno" src="../images/up.gif" width="13"
+height="15" alt="Nahoru" title="O jednu úroveň výš" border="0"
+align="middle"></td><td width="25%"><a href="HE_SQL2_PRIKAZY.htm">SQL příkazy</a></td>
+<td width="25%" align="right"><a
+href="HE_SQL2_UPDATE.htm">Příkaz UPDATE</a></td><td width="20"
+align="center"><img class="floatno" src="../images/next.gif" width="15"
+height="13" alt="&shy;&gt;" title="Následující téma" border="0"></td>
+</tr></table>
+</body>
+</html>

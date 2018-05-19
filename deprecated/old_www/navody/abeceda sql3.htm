@@ -1,0 +1,559 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html><head>
+
+
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1250">
+<meta http-equiv="Content-language" content="cs">
+<link rel="shortcut icon" href="http://reboot.cz/img/favicon.ico">
+<link rel="alternate" type="application/rss+xml" title="RSS 2.00" href="http://reboot.cz/rss.php">
+<meta http-equiv="Cache-control" content="no-cache">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="1">
+<meta name="description" content="hacking underground startpage">
+<meta name="keywords" content="hackthispage, networ, geek, leet, hacker, hackers, hacking, debian, linux, howto, tutorials, security, girls, tool, utils, download, warez, wallpapers, seek, searchengines">
+<meta name="classification" content="Geek Only">
+<meta name="Rating" content="Geek">
+<meta name="robots" content="all, follow">
+<meta name="Revisit-after" content="1 days">
+<meta name="ObjectType" content="linux news windows">
+<meta name="Distribution" content="Global">
+<meta name="MSSmartTagsPreventParsing" content="TRUE"><title>Abeceda SQL (3. část - příkaz CREATE) &gt; r e b o o t . c z | it magazin | hackers - coders - admins - geeks &amp; girls</title>
+
+<link rel="stylesheet" type="text/css" href="abeceda%20sql3_soubory/vov.css">
+<link rel="stylesheet" type="text/css" href="abeceda%20sql3_soubory/litbox.css">
+<link rel="stylesheet" type="text/css" href="abeceda%20sql3_soubory/lightbox.css">
+<script type="text/javascript" src="abeceda%20sql3_soubory/poll.js"></script><script type="text/javascript" src="abeceda%20sql3_soubory/menu.js"></script><script type="text/javascript" src="abeceda%20sql3_soubory/prototype.js"></script><script type="text/javascript" src="abeceda%20sql3_soubory/scriptaculous.js"></script><script type="text/javascript" src="abeceda%20sql3_soubory/builder.js"></script><script type="text/javascript" src="abeceda%20sql3_soubory/effects.js"></script><script type="text/javascript" src="abeceda%20sql3_soubory/dragdrop.js"></script><script type="text/javascript" src="abeceda%20sql3_soubory/controls.js"></script><script type="text/javascript" src="abeceda%20sql3_soubory/slider.js"></script><script type="text/javascript" src="abeceda%20sql3_soubory/dragdrop.js"></script><script type="text/javascript" src="abeceda%20sql3_soubory/effects.js"></script><script type="text/javascript" src="abeceda%20sql3_soubory/lightbox.js"></script><script type="text/javascript" src="abeceda%20sql3_soubory/litbox.js"></script></head><body bgcolor="#000000" link="white" vlink="white">
+<img src="abeceda%20sql3_soubory/spacer.gif" alt="" height="1"><div id="page">
+<div id="page-box">
+<div id="header"><div id="header-box">
+<a href="http://reboot.cz/"><img src="abeceda%20sql3_soubory/logo.gif" alt="reboot.cz - geek magazine"></a><h1 class="hidden">priklady a konfigurace linux - reboot.cz</h1>
+<div class="menu"><div class="menu-box">
+<ul>
+<li class="active"><a href="http://reboot.cz/">REBOOT</a></li>
+<li><a href="http://reboot.cz/section/news/section.html?category=1">NEWS</a></li>
+<li><a href="http://reboot.cz/section/howto/section.html?category=2">HOWTO</a></li>
+<li><a href="http://reboot.cz/section/plus/section.html?category=3">PLUS</a></li>
+<li><a href="http://reboot.cz/section/english/section.html?category=5">ENGLISH</a></li>
+</ul>
+<form id="searchbox_009060672328437222643:tqwd5tox6wq" action="http://geekseek.reboot.cz/index.php">
+<input name="cx" value="009060672328437222643:tqwd5tox6wq" type="hidden"><input name="cof" value="FORID:11" type="hidden"><input class="text1" name="q" size="30" value="" type="text">&nbsp;
+<input class="button1" name="sa" value="Hledej" type="submit">
+</form>
+<div class="cleaner"></div>
+</div></div>
+</div></div>
+<div id="text" class="left">
+<div id="content" class="right"><div id="content-box">
+<div align="center">
+<img src="abeceda%20sql3_soubory/84.jpg" border="0"><img src="abeceda%20sql3_soubory/318.gif" alt="Fresh News" border="0">
+</div>
+<div class="banner"><div align="center">
+                <script type="text/javascript"><!--
+		google_ad_client = "pub-9121527408413093";
+		google_ad_width = 468;
+		google_ad_height = 60;
+		google_ad_format = "468x60_as";
+		google_ad_type = "text_image";
+		google_ad_channel = "8307452972";
+		google_color_border = "000000";
+		google_color_bg = "000000";
+		google_color_link = "80FF00";
+		google_color_text = "FFFFFF";
+		google_color_url = "FFFFFF";
+		//--></script>
+		<script type="text/javascript" src="abeceda%20sql3_soubory/show_ads.js">
+		  </script><iframe name="google_ads_frame" src="abeceda%20sql3_soubory/ads.htm" marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" frameborder="0" height="60" scrolling="no" width="468"></iframe>
+	        
+                </div></div>
+<div align="center">
+<img src="abeceda%20sql3_soubory/80.jpg" border="0"><img src="abeceda%20sql3_soubory/81.jpg" alt="Geek Seek" border="0">
+</div>
+<div align="center">
+                <script type="text/javascript" language="JavaScript"> document.write('<if'+'rame width="468px" height="60px" marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" frameborder="0" scrolling="no" style="border:0px;overflow:hidden;width:468px;height:60px;"src="http://cz.search.etargetnet.com/generic/generic.php?ref=3343&title_color=%2380FF00&title_underline=0&text_color=%23FFFFFF&border_color=%23000000&background_color=%23000000&font=Tahoma&target=_new&js=1&q='+escape(location.href)+'&css=custom&area=468x60"></if'+'rame>');</script><iframe marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" style="border: 0px none ; overflow: hidden; width: 468px; height: 60px;" src="abeceda%20sql3_soubory/generic.htm" frameborder="0" height="60" scrolling="no" width="468"></iframe>
+                </div>
+<div align="center">
+<form action="search.html" method="get">
+<fieldset>
+<input class="text1" size="30" name="q" type="text">
+<input class="button1" value="Hledej v kategorii" type="submit">
+</fieldset>
+</form>
+</div>
+<span class="navigation"><a href="http://reboot.cz/">HOME</a> &gt;
+                <a href="http://reboot.cz/howto/section.html?category=2">HOWTO</a> &gt;
+                <a href="http://reboot.cz/howto/databaze/section.html?subcategory=48">DATABÁZE</a></span><span class="news"><a href="http://reboot.cz/howto/section.html?category=2">HOWTO</a></span><h2>Abeceda SQL (3. část - příkaz CREATE)</h2>
+<span class="date">12. Prosinec 2000, 00:00 (2188x zobrazeno)</span><img class="left" src="abeceda%20sql3_soubory/360_227x116x75.jpg" alt="Abeceda SQL (3. část - příkaz CREATE)"><p>
+Dříve než začnete v SQL-databázi cokoliv používat, ať již tabulku,
+uživatele nebo index, musíte to nejdříve vytvořit (kdo by to byl čekal
+;-). K tomu slouží příkaz CREATE, který si podrobně popíšeme.
+</p><p>Příkaz CREATE (z anglického "vytvoř") patří do části SQL
+oaznačované jako DDL (Data Definition Language - jazyk pro definici
+dat). Dají se pomocí něho vytvářet tabulky, indexy a jiné objekty
+databáze. Za klíčovým slovem CREATE vždy následuje označení typu
+objektu, který chceme vytvořit, takže například příkaz CREATE USER
+vytvoří nového uživatele a CREATE TABLE novou tabulku v databázi. Nyní
+se podíváme na jednotlivé varianty podrobněji. </p>
+<p><strong>CREATE TABLE</strong><br> Asi nejpoužívanější je příkaz pro vytvoření nové tabulky. Syntaxe tohoto příkazu vypadá přibližně takto:
+</p><p>
+</p><pre> CREATE TABLE &lt;nazev tabulky&gt;   (   &lt;specifikace sloupce&gt; [, &lt;specifikace sloupce&gt;]*   );  &lt;specifikace sloupce&gt; =    {&lt;nazev sloupce&gt; &lt;datovy typ&gt; [&lt;omezeni sloupce&gt;]}    | &lt;omezeni tabulky&gt;  &lt;omezeni sloupce&gt; =    [CONSTRAINT &lt;nazev omezeni&gt;]   { [NOT] NULL } | { [NOT NULL] UNIQUE } |   { [NOT NULL] PRIMARY KEY } |    { REFERENCES &lt;nazev tabulky&gt; [(&lt;nazev sloupce&gt;)] } |   { CHECK (&lt;podminka&gt;) }  &lt;omezeni tabulky&gt; =    [CONSTRAINT &lt;nazev omezeni&gt;]   { UNIQUE (&lt;seznam sloupcu&gt;) } |   { PRIMARY KEY (&lt;seznam sloupcu&gt;) } |   { CHECK (&lt;podminka&gt;) } |   { FOREIGN KEY (&lt;seznam sloupcu&gt;)        REFERENCES &lt;nazev tabulky&gt; [(&lt;seznam sloupcu&gt;)] } </pre>
+<p> Text v "špičatých" závorkách je buď volitelný (názvy, seznamy) nebo
+je to termín dále vysvětlený. V hranatých závorkách jsou varianty,
+které se mohou, ale nemusí vyskytnout. Složené závorky označují blok.
+Pouze kulaté závorky jsou součástí příkazu. Hvězdička označuje
+libovolný počet opakování předcházející části, znak '|' znamená "nebo"
+- je možné zvolit jednu z variant.
+</p><p> Omezení sloupce se týkají vždy jednoho sloupce, omezení tabulky se týkají jednoho a více sloupců tabulky. Takže například:
+</p><p>
+</p><pre> cislo integer UNIQUE, </pre>
+a
+<pre> cislo integer, UNIQUE (cislo), </pre>
+<p>znamená to samé: ve sloupci cislo nesmí být žádná hodnota více než
+jednou. O omezeních PRIMARY KEY a NOT NULL již jsem psal: první z nich
+vytvoří tzv. primární klíč, druhé zabraňuje vložení hodnoty NULL (ve
+významu "nic", např. při vkládání dat pomocí příkazu INSERT) do
+sloupce. Použijeme-li PRIMARY KEY jako omezení tabulky, je možné
+definovat primární klíč, který se skládá z více sloupců (atributů). To
+se hodí například máme-li tabulku pracovníků, kteří jsou rozděleni do
+oddělení, každé oddělení má své číslo a každý zaměstnanec má své číslo
+v rámci oddělení - tzn. že dva pracovníci v různých odděleních mohou
+mít stejné číslo. Potřebujeme-li pak vyhledat nějakého zaměstnance,
+nestačí nám jen jeho číslo, potřebujeme i číslo oddělení. Můžeme to
+definovat třeba takto:
+</p><p>
+</p><pre> CREATE TABLE zamestnanec   (   cislo       integer not null,   oddeleni    integer not null,   jmeno       varchar(50),   primary key (cislo, oddeleni)   ); </pre>
+<p> Dále lze definovat tzv. cizí klíč (část REFERENCES resp. FOREIGN
+KEY ... REFERENCES). Jedná se o sloupec, který se odkazuje na řádek
+jiné tabulky. Tím se zajišťuje konzistentnost dat - např. není možné
+vymazat oddělení z tabulky oddělení, pokud zároveň nesmažeme všechny
+zaměstnance, které k danému oddělení přísluší. Tuto vlastnost zatím
+databáze PostgreSQL nemá (cizí klíč můžete definovat, PostgreSQL
+syntaxi rozumí, nicméně na ni nebere ohled). Ve velkých databázových
+systémech (Oracle, Sybase) se s cizími klíči můžete běžně setkat, u
+PostgreSQL zřejmě v nejbližší době také. Např. takto by se definoval
+sloupec oddeleni tabulky zamestnancu, který se odkazuje na tabulku
+oddeleni:
+</p><p>
+</p><pre> oddeleni INTEGER CONSTRAINT odd_fk REFERENCES oddeleni(cislo), </pre>
+<p>Zde je take videt použití části CONSTRAINT - jedná se v podstatě o pojmenování omezení.  </p>
+<p>Část DEFAULT umožňuje zadání hodnoty, kterou atribut získá, není-li
+mu explicitně přiřazena žádná hodnota. Chceme-li například, aby
+zaměstnanec měl pokaždé plat 10000, není-li určeno jinak, použijeme
+tuto definici:
+</p><p>
+</p><pre> plat DOUBLE DEFAULT 10000, </pre>
+<p>Poslední možností je definice podmínky, kterou musí hodnota ve
+sloupci splňovat: k tomu slouží omezení CHECK. Syntaxe zápisu podmínky
+je stejná jako v části WHERE příkazu SELECT. Chceme-li například
+zajistit, aby do nějakého sloupce šli vkládat pouze hodnoty v intervalu
+1 až 12 (číslo měsíce), můžeme to udělat takto:
+</p><p>
+</p><pre> mesic INTEGER CHECK (mesic BETWEEN 1 AND 7), </pre>
+<p><strong>CREATE INDEX</strong><br> Index v podstatě obsahuje seznam
+odkazů na řádky tabulky setříděný podle jednoho nebo více sloupců. To
+se hodí např. pokud podle určitého sloupce často v tabulce vyhledáváme
+a nebo požadujeme výstupy setříděné podle tohoto sloupce. Výsledek
+zpracování pak bývá několikanásobně rychlejší (efekt se projeví až při
+velkém počtu záznamů v tabulce). Nevýhodou je naopak dodatečné režie:
+indexy se při každé operaci (INSERT, DELETE, UPDATE) musí obnovovat a
+také zaberou místo na disku. Pokud při definici tabulky označíme nějaký
+sloupec jako PRIMARY KEY nebo UNIQUE, index se vytvoří automaticky.
+Takto se např. vytvoří index v tabulce zaměstnanců nad sloupcem
+oddeleni (sloupců může být uvedeno i více, oddělují se potom čárkou):
+</p><p>
+</p><pre> CREATE INDEX jmeno_indexu ON zamestnanec(oddeleni); </pre>
+<p>Pokud bychom použili příkaz CREATE UNIQUE INDEX, nemohou se vyskytnout ve slouci duplicitní hodnoty.
+</p><p><strong>CREATE VIEW</strong><br> Slouží k vytvoření tzv.
+pohledu, tj. fiktivní tabulky vytvořené na základě příkazu SELECT.
+Pohledy lze použít buď k zjednodušení práce (není nutno zadávat složítý
+SELECT příkaz - pohled jej buď nahradí nebo alespoň zjednodušší). Také
+můžeme potom lépe nastavit přístupová práva - chceme-li dát někomu
+možnost číst celou tabulku vyjme jednoho sloupce, vytvoříme jednoduše
+pohled, který tento sloupec nebude obsahovat. V PostgreSQL mají pohledy
+jedno nepříjemné omezení: jsou pouze pro čtení, nelze do nich
+zapisovat.
+</p><p>
+</p><pre> CREATE VIEW nejstarsi_zamestnanci_z_oddeleni_10 AS   SELECT cislo, jmeno FROM zamestnanec WHERE oddeleni = 10    ORDER BY cislo ASC LIMIT 0, 10; </pre>
+<p>Tento příkaz vytvoří novou tabulku (pohled) podle zadaného SELECTu. S pohledy je možné pracovat jako s tabulkami.
+</p><p><strong>CREATE SEQUENCE</strong><br> Sekvence slouží k vytvoření
+"řady" čísel - hodí se například pro generování "umělého" primárního
+klíče - máme zajištěno, že každý nový záznam dostane unikátní primární
+klíč. Syntaxe příkazu vypadá takto:
+</p><p>
+</p><pre> CREATE SEQUENCE &lt;nazev&gt;   [START WITH &lt;cislo&gt;]   [INCREMENT BY &lt;cislo&gt;]   [MINVALUE &lt;cislo&gt;]   [MAXVALUE &lt;cislo&gt;]   [CYCLE] </pre>
+<p>Vytvoříme tedy řadu začínající hodnotou START WITH, inkrementující
+se s krokem INCREMENT BY s minimální hodnotou MINVALUE a maximální
+MAXVALUE. Pokud zadáme parametr CYCLE, řada se po dosažení MAXVALUE
+opakuje. Pro práci se sekvencemi jsou definovány funkce NEXTVAL,
+CURRVAL a SETVAL. CURRVAL vrací aktuální hodnotu řady, NEXTVAL také,
+ale nejdřív ji inkrementuje a SETVAL slouží k nastavení hodnoty řady.
+Typické příklady použití:
+</p><p>
+</p><pre> CREATE SEQUENCE rada START WITH 0 INCREMENT BY 2;   SELECT currval('rada');  INSERT INTO zamestnanec (cislo, jmeno)    VALUES (nextval('rada'),'Jarda'); </pre>
+nebo:
+<pre> CREATE TABLE zamestnanec   (   cislo integer default nextval('rada'),   ... </pre>
+<p>Databáze MySQL tento problém řeší trochu jinak (nestandardně) - pomocí atributu auto_increment.
+</p><p>Opačný význam než CREATE má příkaz DROP, který slouží ke zrušení
+objektu, takže lze zadat např. DROP TABLE zamestnanec, DROP SEQUENCE
+rada apod.
+</p><p>Neuvedl jsem zdaleka všechny varianty a možnosti příkazu
+CREATE, ale pouze ty nejdůležitější, se kterými se můžete setkat ve
+většině databázových systémů.
+</p><p>Příští pokračování bude o příkazech INSERT, UPDATE a DELETE. </p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<p class="author"><em>autor: </em>Ing. Jiří Václavovič</p>
+<div class="cleaner"></div>
+<div id="rating">
+<h3 class="title">Líbil se vám článek?</h3>
+<p class="textr">1 (1x hodnoceno)<span class="stars"><a href="#" onclick="rateSet('rating', 79, 1); return false;"><img src="abeceda%20sql3_soubory/star.gif" alt="1" id="rating-1"></a><a href="#" onclick="rateSet('rating', 79, 2); return false;"><img src="abeceda%20sql3_soubory/star-bw.gif" alt="2" id="rating-2"></a><a href="#" onclick="rateSet('rating', 79, 3); return false;"><img src="abeceda%20sql3_soubory/star-bw.gif" alt="3" id="rating-3"></a><a href="#" onclick="rateSet('rating', 79, 4); return false;"><img src="abeceda%20sql3_soubory/star-bw.gif" alt="4" id="rating-4"></a><a href="#" onclick="rateSet('rating', 79, 5); return false;"><img src="abeceda%20sql3_soubory/star-bw.gif" alt="5" id="rating-5"></a></span></p>
+</div>
+<div class="tools">
+<h3 class="title">Přidejte si článek do oblíbených</h3>
+<p class="textr"><!--linkuj.cz start--><a href="http://linkuj.cz/?id=linkuj&amp;url=http://www.reboot.cz/howto/databaze/abeceda-sql-3-cast-prikaz-create/articles.html?id=79&amp;title=Abeceda%20SQL%20%283.%20%C4%8D%C3%A1st%20-%20p%C5%99%C3%ADkaz%20CREATE%29"><img src="abeceda%20sql3_soubory/linkuj.gif" alt="Linkuj.cz ico"> linkuj.cz</a><!--linkuj.cz end--><!--del.icio.us start--><a href="http://del.icio.us/post?url=http://www.reboot.cz/howto/databaze/abeceda-sql-3-cast-prikaz-create/articles.html?id=79&amp;title=Abeceda%20SQL%20%283.%20%C4%8D%C3%A1st%20-%20p%C5%99%C3%ADkaz%20CREATE%29"><img src="abeceda%20sql3_soubory/delicious.gif" alt="del.icio.us ico">del.icio.us</a><!--del.icio.us end--><!--rss category--><a href="http://reboot.cz/rss.html?category=2"><img src="abeceda%20sql3_soubory/rss.png" alt="rss ico">rss - HOWTO</a><!--rss subcategory--><a href="http://reboot.cz/rss.html?category=2&amp;subcategory=48"><img src="abeceda%20sql3_soubory/rss.png" alt="rss ico">rss - HOWTO &gt; DATABÁZE</a></p>
+</div>
+<h3 class="title">Související články</h3>
+<ul>
+<li><a href="http://reboot.cz/howto/databaze/abeceda-sql-1-cast-uvod/articles.html?id=63" title="Abeceda SQL (1.část - Úvod)">Abeceda SQL (1.část - Úvod)</a></li>
+<li><a href="http://reboot.cz/howto/databaze/abeceda-sql-2-cast/articles.html?id=72" title="Abeceda SQL (2. část)">Abeceda SQL (2. část)</a></li>
+</ul>
+<a name="comments"></a><h3 class="title">Komentáře</h3>
+<form method="get" action="comment_form.html?article=79"><p><input value="Přidat komentář" onclick="new LITBox(this.form.action + '&ajax=true',{type:'window',overlay:true,width:600,height:420}); return false;" type="submit"></p></form>
+<div class="cleaner"></div>
+<div align="left">
+                <script type="text/javascript" language="JavaScript">document.write('<if'+'rame width="300px" height="250px" marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" frameborder="0" scrolling="no"style="border:0px;overflow:hidden;width:300px;height:250px;"src="http://cz.search.etargetnet.com/generic/generic.php?ref=3373&title_color=%2380FF00&text_color=%23FFFFFF&border_color=%23000000&background_color=%23000000&font=Tahoma&target=_new&js=1&q='+escape(location.href)+'&css=custom&area=300x250"></if'+'rame>');</script><iframe marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" style="border: 0px none ; overflow: hidden; width: 300px; height: 250px;" src="abeceda%20sql3_soubory/generic_002.htm" frameborder="0" height="250" scrolling="no" width="300"></iframe>
+                </div>
+<div align="center">
+<img src="abeceda%20sql3_soubory/319.jpg" border="0"><img src="abeceda%20sql3_soubory/85.jpg" alt="Geek Seek" border="0">
+</div>
+<div class="banner"><div align="center">
+                <script type="text/javascript"><!--
+		google_ad_client = "pub-9121527408413093";
+		google_ad_width = 468;
+		google_ad_height = 60;
+		google_ad_format = "468x60_as";
+		google_ad_type = "text_image";
+		google_ad_channel = "8307452972";
+		google_color_border = "000000";
+		google_color_bg = "000000";
+		google_color_link = "80FF00";
+		google_color_text = "FFFFFF";
+		google_color_url = "FFFFFF";
+		//--></script>
+		<script type="text/javascript" src="abeceda%20sql3_soubory/show_ads.js">
+		  </script><iframe name="google_ads_frame" src="abeceda%20sql3_soubory/ads_002.htm" marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" frameborder="0" height="60" scrolling="no" width="468"></iframe>
+	        
+                </div></div>
+<div align="center">
+                
+<!-- Google CSE Search Box Begins  -->
+<br><form id="searchbox_009060672328437222643:tqwd5tox6wq" action="http://geekseek.reboot.cz/index.php">
+<input name="cx" value="009060672328437222643:tqwd5tox6wq" type="hidden">
+<input name="cof" value="FORID:11" type="hidden">
+<input name="q" size="30" value="" type="text">
+<input name="sa" value="Hledej s geek~seek" type="submit">
+</form><br>
+<!-- Google CSE Search Box Ends -->
+
+</div>
+<br><div class="cleaner"></div>
+</div></div>
+<div id="left-panel" class="left"><div id="left-panel-box">
+<h2>reboot.HOWTO</h2>
+<ul class="panel">
+<li><strong><a href="http://reboot.cz/linux-navody-howto/section.html?subcategory=46" target="_self">unix-linux</a></strong></li>
+<li><strong><a href="http://reboot.cz/windows-registr-triky-vista/section.html?subcategory=47" target="_self">windows</a></strong></li>
+<li><strong><a href="http://reboot.cz/prgramator-programy-programovani/section.html?subcategory=29" target="_self">programování</a></strong></li>
+<li><strong><a href="http://reboot.cz/linuxove-servery/section.html?subcategory=37" target="_self">servery</a></strong></li>
+<li><strong><a href="http://reboot.cz/network-monitoring/section.html?subcategory=49" target="_self">networking</a></strong></li>
+<li><strong><a href="http://reboot.cz/hacker-tools/section.html?subcategory=51" target="_self">hacking</a></strong></li>
+<li><strong><a href="http://reboot.cz/databaze-sql/section.html?subcategory=48" target="_self">databáze</a></strong></li>
+<li><strong><a href="http://reboot.cz/html-php-sql-css-xsl/section.html?subcategory=33" target="_self">webcoding</a></strong></li>
+<li><strong><a href="http://reboot.cz/grafika-gimp-photoshop/section.html?subcategory=50" target="_self">grafika</a></strong></li>
+<li><strong><a href="http://reboot.cz/hardware-rack-server/section.html?subcategory=38" target="_self">hardware</a></strong></li>
+<li><strong><a href="http://reboot.cz/software-application-plugins/section.html?subcategory=41" target="_self">software</a></strong></li>
+</ul>
+<div class="cleaner"></div>
+<h2>reboot.EXTRA</h2>
+<ul class="panel">
+<li><strong><a href="http://geekseek.reboot.cz/" target="_new">geek seek</a></strong></li>
+<li><strong><a href="http://reboot.cz/hackthispage/" target="_self">hack this page</a></strong></li>
+<li><strong><a href="http://reboot.cz/hacker-gallery/" target="_self">hacker gallery</a></strong></li>
+<li><strong><a href="http://reboot.cz/wallpapers.html" target="_self">tapety na plochu</a></strong></li>
+<li><strong><a href="http://reboot.cz/include.php?page=searchwords" target="_self">keywords</a></strong></li>
+<li><strong><a href="http://reboot.cz/link.php" target="_self">weblinks</a></strong></li>
+<li><strong><a href="http://mailomatic.reboot.cz/" target="_new">newsletter</a></strong></li>
+<li><strong><a href="http://banner.reboot.cz/" target="_new">banner</a></strong></li>
+<li><strong><a href="http://toplist.reboot.cz/" target="_new">forum toplist</a></strong></li>
+</ul>
+<div class="cleaner"></div>
+<h2>reboot.TOOLS</h2>
+<ul class="panel">
+<li><strong><a href="http://feed.reboot.cz/" target="_new">rss feedy</a></strong></li>
+<li><strong><a href="http://reboot.cz/section.html?subcategory=23" target="_self">teamspeak</a></strong></li>
+<li><strong><a href="http://reboot.cz/include.php?page=warrior" target="_self">warrior</a></strong></li>
+<li><strong><a href="http://reboot.cz/include.php?page=crypt" target="_self">encrypter</a></strong></li>
+<li><strong><a href="http://reboot.cz/include.php?page=show" target="_self">browser plugins</a></strong></li>
+<li><strong><a href="http://reboot.cz/tools/hta.php" target="_self">hta generator</a></strong></li>
+<li><strong><a href="http://reboot.cz/include.php?page=speedmeter" target="_self">speed-o-meter</a></strong></li>
+<li><strong><a href="http://reboot.cz/include.php?page=64bit" target="_self">server shop</a></strong></li>
+<li><strong><a href="http://howto.reboot.cz/" target="_new">linux howto</a></strong></li>
+<li><strong><a href="http://reboot.cz/tools/netcalc.php" target="_self">network calc</a></strong></li>
+<li><strong><a href="http://reboot.cz/tools/tests.php" target="_self">showinfo</a></strong></li>
+<li><strong><a href="http://reboot.cz/tools/status.php" target="_self">network status</a></strong></li>
+<li><strong><a href="http://forum.reboot.cz/" target="_new">forum</a></strong></li>
+<li><strong><a href="http://reboot.cz/section.html?subcategory=9" target="_self">FINANCE</a></strong></li>
+</ul>
+<div class="cleaner"></div>
+<h2>reboot.PLUS</h2>
+<ul class="panel">
+<li><strong><a href="http://reboot.cz/wallpapers.html" target="_self">wallpapers</a></strong></li>
+<li><strong><a href="http://reboot.cz/hitech-digital/section.html?subcategory=15" target="_self">hi-tech</a></strong></li>
+<li><strong><a href="http://reboot.cz/include.php?page=links" target="_self">top 40</a></strong></li>
+<li><strong><a href="http://reboot.cz/sexy-girls-at-reboot/section.html?subcategory=28" target="_self">girls</a></strong></li>
+<li><strong><a href="http://reboot.cz/komix-vtipy-zabava/section.html?subcategory=27" target="_self">jokes</a></strong></li>
+</ul>
+<div class="cleaner"></div>
+<h2>reboot.NEWS</h2>
+<ul class="panel">
+<li><strong><a href="http://reboot.cz/novinky-interview-technologie/section.html?subcategory=53" target="_self">interview</a></strong></li>
+<li><strong><a href="http://reboot.cz/novinky-dne-news/section.html?subcategory=8" target="_self">world</a></strong></li>
+<li><strong><a href="http://reboot.cz/novinky-lifestyle/section.html?subcategory=7" target="_self">local</a></strong></li>
+</ul>
+<div class="cleaner"></div>
+<h2>traffic trading</h2>
+<a href="http://toplist.reboot.cz/" target="_new"><img src="abeceda%20sql3_soubory/220.jpg" alt="TRAFFIC TRADING"></a><div class="cleaner"></div>
+<div class="poll" id="poll2">
+<h2>anketa</h2><h3>Chcete vydělávat na webu ?</h3><ul>
+<li><a href="#" onclick="pollVote('poll', 11, 45); return false;">..určitě ano!<strong><img src="abeceda%20sql3_soubory/poll.gif" alt="..určitě ano!" border="0" height="8" width="74">74%
+                        </strong></a></li>
+<li><a href="#" onclick="pollVote('poll', 11, 46); return false;">..asi ano.<strong><img src="abeceda%20sql3_soubory/poll.gif" alt="..asi ano." border="0" height="8" width="9">9%
+                        </strong></a></li>
+<li><a href="#" onclick="pollVote('poll', 11, 47); return false;">..nevím.<strong><img src="abeceda%20sql3_soubory/poll.gif" alt="..nevím." border="0" height="8" width="4">4%
+                        </strong></a></li>
+<li><a href="#" onclick="pollVote('poll', 11, 48); return false;">..asi ne.<strong><img src="abeceda%20sql3_soubory/poll.gif" alt="..asi ne." border="0" height="8" width="4">4%
+                        </strong></a></li>
+<li><a href="#" onclick="pollVote('poll', 11, 49); return false;">..určitě ne!<strong><img src="abeceda%20sql3_soubory/poll.gif" alt="..určitě ne!" border="0" height="8" width="9">9%
+                        </strong></a></li>
+</ul>
+</div>
+<div class="cleaner"></div>
+<div class="cleaner"></div>
+<h2>reboot.EXTRA</h2>
+<ul class="panel">
+<li><strong><a href="http://geekseek.reboot.cz/" target="_new">geek seek</a></strong></li>
+<li><strong><a href="http://reboot.cz/hackthispage/" target="_self">hack this page</a></strong></li>
+<li><strong><a href="http://reboot.cz/hacker-gallery/" target="_self">hacker gallery</a></strong></li>
+<li><strong><a href="http://reboot.cz/wallpapers.html" target="_self">tapety na plochu</a></strong></li>
+<li><strong><a href="http://reboot.cz/include.php?page=searchwords" target="_self">keywords</a></strong></li>
+<li><strong><a href="http://reboot.cz/link.php" target="_self">weblinks</a></strong></li>
+<li><strong><a href="http://mailomatic.reboot.cz/" target="_new">newsletter</a></strong></li>
+<li><strong><a href="http://banner.reboot.cz/" target="_new">banner</a></strong></li>
+<li><strong><a href="http://toplist.reboot.cz/" target="_new">forum toplist</a></strong></li>
+</ul>
+<div class="cleaner"></div>
+<h2>reboot.TOOLS</h2>
+<ul class="panel">
+<li><strong><a href="http://feed.reboot.cz/" target="_new">rss feedy</a></strong></li>
+<li><strong><a href="http://reboot.cz/section.html?subcategory=23" target="_self">teamspeak</a></strong></li>
+<li><strong><a href="http://reboot.cz/include.php?page=warrior" target="_self">warrior</a></strong></li>
+<li><strong><a href="http://reboot.cz/include.php?page=crypt" target="_self">encrypter</a></strong></li>
+<li><strong><a href="http://reboot.cz/include.php?page=show" target="_self">browser plugins</a></strong></li>
+<li><strong><a href="http://reboot.cz/tools/hta.php" target="_self">hta generator</a></strong></li>
+<li><strong><a href="http://reboot.cz/include.php?page=speedmeter" target="_self">speed-o-meter</a></strong></li>
+<li><strong><a href="http://reboot.cz/include.php?page=64bit" target="_self">server shop</a></strong></li>
+<li><strong><a href="http://howto.reboot.cz/" target="_new">linux howto</a></strong></li>
+<li><strong><a href="http://reboot.cz/tools/netcalc.php" target="_self">network calc</a></strong></li>
+<li><strong><a href="http://reboot.cz/tools/tests.php" target="_self">showinfo</a></strong></li>
+<li><strong><a href="http://reboot.cz/tools/status.php" target="_self">network status</a></strong></li>
+<li><strong><a href="http://forum.reboot.cz/" target="_new">forum</a></strong></li>
+<li><strong><a href="http://reboot.cz/section.html?subcategory=9" target="_self">FINANCE</a></strong></li>
+</ul>
+<div class="cleaner"></div>
+<div class="poll" id="poll">
+<h2>anketa</h2><h3>Jaký máte PR ?</h3><ul>
+<li><a href="#" onclick="pollVote('poll', 10, 41); return false;">0 až 2<strong><img src="abeceda%20sql3_soubory/poll.gif" alt="0 až 2" border="0" height="8" width="28">28%
+                        </strong></a></li>
+<li><a href="#" onclick="pollVote('poll', 10, 42); return false;">3 až 5<strong><img src="abeceda%20sql3_soubory/poll.gif" alt="3 až 5" border="0" height="8" width="40">40%
+                        </strong></a></li>
+<li><a href="#" onclick="pollVote('poll', 10, 43); return false;">6 až 8<strong><img src="abeceda%20sql3_soubory/poll.gif" alt="6 až 8" border="0" height="8" width="6">6%
+                        </strong></a></li>
+<li><a href="#" onclick="pollVote('poll', 10, 44); return false;">9 až 10<strong><img src="abeceda%20sql3_soubory/poll.gif" alt="9 až 10" border="0" height="8" width="26">26%
+                        </strong></a></li>
+</ul>
+</div>
+<div class="cleaner"></div>
+<div class="cleaner"></div>
+<h2>editorial</h2>
+<ul class="panel">
+<li><strong><a href="http://reboot.cz/include.php?page=team">reboot team</a></strong></li>
+<li><strong><a href="http://reboot.cz/include.php?page=kontakt">vzkaz rebootu</a></strong></li>
+<li><strong><a href="http://reboot.cz/include.php?page=job">reboot jobs</a></strong></li>
+<li><strong><a href="http://reboot.cz/include.php?page=kontakt">pošli námět</a></strong></li>
+<li><strong><a href="http://mailomatic.reboot.cz/" target="_new">newsletter</a></strong></li>
+<li><strong><a href="http://toplist.reboot.cz/" target="_new">linkuj na reboot</a></strong></li>
+</ul>
+<div class="cleaner"></div>
+<h2>&nbsp;
+</h2>
+<div class="cleaner"></div>
+<div class="cleaner"></div>
+</div></div>
+</div>
+<div id="right-panel" class="right"><div id="right-panel-box">
+<h2>reboot girl</h2>
+<div class="banner"><a href="http://reboot.cz/reboot-girls-foto-galerie/section.html?subcategory=28" class="girl"><img src="abeceda%20sql3_soubory/62.jpg" alt="REBOOT GIRL"></a></div>
+<div class="cleaner"></div>
+<div class="rpoll" id="poll3">
+<h2>anketa</h2><h3>Hlasoval si letos v soutěži REBOOT GIRL 07.</h3><ul>
+<li><a href="#" onclick="pollVote('poll', 19, 95); return false;">Ano, hlasoval ...<strong><img src="abeceda%20sql3_soubory/poll.gif" alt="Ano, hlasoval ..." border="0" height="8" width="28">28%
+                        </strong></a></li>
+<li><a href="#" onclick="pollVote('poll', 19, 96); return false;">Ne, nehlasoval...<strong><img src="abeceda%20sql3_soubory/poll.gif" alt="Ne, nehlasoval..." border="0" height="8" width="72">72%
+                        </strong></a></li>
+</ul>
+</div>
+<div class="cleaner"></div>
+<div class="cleaner"></div>
+<h2>seriály</h2>
+<div class="banner"><a href="http://reboot.cz/info/unix--linux/stoparuv-pruvodce-linuxem-1-cast/articles.html?id=101" class="girl"><img src="abeceda%20sql3_soubory/hh_250_100.jpg" alt="tutorial:stoparuv pruvodce linuxem"></a></div>
+<div class="banner"><a href="http://reboot.cz/info/databaze/abeceda-sql-1-cast-uvod/articles.html?id=63" class="girl"><img src="abeceda%20sql3_soubory/sql.jpg" alt="tutorial:ABECEDA SQL"></a></div>
+<div class="banner"><a href="http://reboot.cz/info/unix--linux/pronikame-do-operacniho-systemu-linux-1/articles.html?id=231" class="girl"><img src="abeceda%20sql3_soubory/pronikame.jpg" alt="tutorial:pronikame do os linux"></a></div>
+<div class="cleaner"></div>
+<h2>nejčtenější články</h2>
+<ul>
+<li><a href="http://reboot.cz/howto/hacking/hacker-zlomi-heslo-za-10-sec/articles.html?id=620">Hacker zlomí heslo za 10 sec. (17211x)</a></li>
+<li><a href="http://reboot.cz/plus/girls/lucie/articles.html?id=689">LUCIE (13217x)</a></li>
+<li><a href="http://reboot.cz/plus/girls/dominika/articles.html?id=762">Dominika  (11996x)</a></li>
+<li><a href="http://reboot.cz/plus/girls/reboot-girls-wallpapers/articles.html?id=667">reboot girls &amp; wallpapers (8655x)</a></li>
+<li><a href="http://reboot.cz/howto/hacking/email-seznam-cz-hacked/articles.html?id=722">Email Seznam.cz  HACKED! (6814x)</a></li>
+<li><a href="http://reboot.cz/plus/girls/reboot-girl-barborka/articles.html?id=688">reboot girl - Barborka (6771x)</a></li>
+<li><a href="http://reboot.cz/plus/girls/lea/articles.html?id=650">LEA (6737x)</a></li>
+<li><a href="http://reboot.cz/howto/unix-linux/pronikame-do-operacniho-systemu-linux-1/articles.html?id=231">Pronikáme do operačního systému Linux (1) (6119x)</a></li>
+<li><a href="http://reboot.cz/plus/girls/reboot-girl-eva/articles.html?id=648">reboot girl - eva (5483x)</a></li>
+<li><a href="http://reboot.cz/plus/girls/reboot-girl-iveta/articles.html?id=651">reboot girl - iveta (5426x)</a></li>
+</ul>
+<div class="cleaner"></div>
+<h2>hledáš job ?</h2>
+<div class="banner"><a href="http://reboot.cz/include.php?page=job" class="girl"><img src="abeceda%20sql3_soubory/89.jpg" alt="reboot jobs"></a></div>
+<div class="cleaner"></div>
+<h2>nejkomentovanější články</h2>
+<ul>
+<li><a href="http://reboot.cz/howto/hacking/hacker-zlomi-heslo-za-10-sec/articles.html?id=620">Hacker zlomí heslo za 10 sec. (53x)</a></li>
+<li><a href="http://reboot.cz/plus/girls/dominika/articles.html?id=762">Dominika  (28x)</a></li>
+<li><a href="http://reboot.cz/plus/girls/lucie/articles.html?id=689">LUCIE (27x)</a></li>
+<li><a href="http://reboot.cz/howto/windows/zdrojove-kody-windows-zverejneny/articles.html?id=134">Zdrojové kódy Windows zveřejněny (17x)</a></li>
+<li><a href="http://reboot.cz/news/local/hacker-game/articles.html?id=479">Hacker Game (13x)</a></li>
+<li><a href="http://reboot.cz/howto/hacking/urady-na-nase-data-kaslou/articles.html?id=414">Úřady na naše data kašlou  (13x)</a></li>
+<li><a href="http://reboot.cz/plus/robots/roboti-uz-jdou/articles.html?id=670">Roboti už jdou (12x)</a></li>
+<li><a href="http://reboot.cz/plus/fun/jak-jsem-se-stal-zelinarem/articles.html?id=668">Jak jsem se stal zelinářem (8x)</a></li>
+<li><a href="http://reboot.cz/news/world/suspendovan-za-pouziti-drogy-php/articles.html?id=520">Suspendován za použití drogy PHP (8x)</a></li>
+<li><a href="http://reboot.cz/howto/hacking/odpovednost-za-diry-v-bezpecnosti-systemu/articles.html?id=647">Odpovědnost za díry v bezpečnosti systému ? (7x)</a></li>
+</ul>
+<div class="cleaner"></div>
+<h2>related</h2>
+<div align="center">
+                
+                <iframe src="abeceda%20sql3_soubory/ireboot250.htm" marginwidth="0" marginheight="0" hspace="0" vspace="0" frameborder="0" height="400" scrolling="auto" width="270"></iframe>
+	        
+</div>
+<div class="cleaner"></div>
+<div align="center">
+                <script type="text/javascript" language="JavaScript">document.write('<if'+'rame width="240px" height="400px" marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" frameborder="0" scrolling="no" style="border:0px;overflow:hidden;width:240px;height:400px;" src="http://cz.search.etargetnet.com/generic/generic.php?ref=3363&title_color=%2380FF00&title_underline=0&text_color=%23FFFFFF&border_color=%23000000&background_color=%23000000&font=Tahoma&target=_new&js=1&q='+escape(location.href)+'&css=custom&area=240x400"></if'+'rame>');</script><iframe marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" style="border: 0px none ; overflow: hidden; width: 240px; height: 400px;" src="abeceda%20sql3_soubory/generic_003.htm" frameborder="0" height="400" scrolling="no" width="240"></iframe>
+                </div>
+<div class="cleaner"></div>
+<h2> &nbsp;
+</h2>
+<div class="cleaner"></div>
+</div></div>
+</div>
+<div class="cleaner"></div>
+<div id="footer"><div id="footer-box"><p><a href="http://reboot.cz/">ISSN:1213-9955</a>  |   <a href="http://feed.reboot.cz/index.php">feed</a>  |   <a href="http://wap.reboot.cz/">wap</a>  |   <a href="http://reboot.cz/rss.php">rss</a></p></div></div>
+<div align="center">
+<a target="_new" href="http://geekseek.reboot.cz/"><img src="abeceda%20sql3_soubory/hackerspot.jpg" alt="HACKER SITES" border="0" height="31" width="88"></a>&nbsp;
+                                <a target="_new" href="http://toplist.spoof-net.info/"><img src="abeceda%20sql3_soubory/11logo.gif" alt="geek music" border="0" height="31" width="88"></a>&nbsp;
+                                <a target="_new" href="http://cybergolf.networ.eu/"><img src="abeceda%20sql3_soubory/golf_ban.jpg" alt="golf.networ.eu" border="0" height="31" width="88"></a>&nbsp;
+                                <a target="_new" href="http://www.jinx.com/"><img src="abeceda%20sql3_soubory/banner.gif" alt="j!nx.com" border="0" height="31" width="88"></a>&nbsp;
+                            	<a target="_new" href="http://www.czfree.net/"><img src="abeceda%20sql3_soubory/czfree_small.gif" alt="www.czfree.net" border="0" height="31" width="88"></a>&nbsp;
+                                <a target="_new" href="http://reboot.cz/hackthispage/"><img src="abeceda%20sql3_soubory/hackpage_sm.jpg" alt="HackThisPage.info" border="0" height="31" width="88"></a>&nbsp;
+                            	<a target="_new" href="http://spoof.spoof-net.info/"><img src="abeceda%20sql3_soubory/buttonhaxx.gif" alt="HACKER GAME - HACK THIS SITE" border="0" height="31" width="88"></a>&nbsp;
+                                <a target="_new" href="http://www.fanynky.info/"><img src="abeceda%20sql3_soubory/buttonhell.gif" alt="HELL toplist" border="0" height="31" width="88"></a>&nbsp;
+				<a target="_new" href="http://www.bastardservers.com/"><img src="abeceda%20sql3_soubory/bastardlogosmall.gif" alt="www.BASTARDSERVERS.com" border="0" height="31" width="88"></a>&nbsp;
+				<a target="_new" href="http://www.debian.cz/"><img src="abeceda%20sql3_soubory/button_3.jpg" alt="DEBIAN GNU LINUX" border="0" height="31" width="88"></a>&nbsp;
+
+			        <br><a target="_new" href="http://www.blackhole.sk/"><img src="abeceda%20sql3_soubory/bh.gif" alt="www.blackhole.cz" border="0" height="31" width="88"></a>&nbsp;
+                                <a target="_new" href="http://www.linux.sk/"><img src="abeceda%20sql3_soubory/linsk.gif" alt="www.linux.sk" border="0" height="31" width="88"></a>&nbsp;
+                                <a target="_new" href="http://www.abclinuxu.cz/"><img src="abeceda%20sql3_soubory/abc.gif" alt="www.abclinuxu.cz" border="0" height="31" width="88"></a>&nbsp;
+                                <a target="_new" href="http://www.underground.cz/"><img src="abeceda%20sql3_soubory/ug.gif" alt="www.underground.cz" border="0" height="31" width="88"></a>&nbsp;
+				<a target="_new" href="http://stoyan.ic.cz/"><img src="abeceda%20sql3_soubory/stoyan_sm.png" alt="www.zi.cz" target="_blanc" border="0" height="31" width="88"></a>&nbsp;
+                                <a target="_new" href="http://toplist.reboot.cz/"><img src="abeceda%20sql3_soubory/toplist.jpg" alt="geek toplist" border="0" height="31" width="88"></a>&nbsp;
+                                <a target="_new" href="http://www.linuxzone.cz/"><img src="abeceda%20sql3_soubory/lz.gif" alt="www.linuxzone.cz" border="0" height="31" width="88"></a>&nbsp;
+                                <a target="_new" href="http://www.root.cz/"><img src="abeceda%20sql3_soubory/root.gif" alt="www.root.cz" border="0" height="31" width="88"></a>&nbsp;
+                                <a target="_new" href="http://www.penguin.cz/"><img src="abeceda%20sql3_soubory/penguin.gif" alt="www.penguin.cz" border="0" height="31" width="88"></a>&nbsp;
+                                <a target="_new" href="http://www.krypta.cz/"><img src="abeceda%20sql3_soubory/krypta.gif" alt="www.krypta.cz" border="0" height="31" width="88"></a>&nbsp;
+    
+                                <br><a target="_new" href="http://toplist.reboot.cz/"><img src="abeceda%20sql3_soubory/reboot_sm.gif" alt="HACKER SITES" border="0" height="31" width="88"></a>&nbsp;
+				<a target="_new" href="http://networ.eu/"><img src="abeceda%20sql3_soubory/networ.jpg" alt="networ.eu" border="0" height="31" width="88"></a>&nbsp;
+                                <a target="_new" href="http://geekseek.reboot.cz/"><img src="abeceda%20sql3_soubory/buttonhell.gif" alt="HELL toplist" border="0" height="31" width="88"></a>&nbsp;
+				<a target="_new" href="http://www.bastardservers.com/"><img src="abeceda%20sql3_soubory/bastardlogosmall.gif" alt="www.BASTARDSERVERS.com" border="0" height="31" width="88"></a>&nbsp;
+				<a target="_new" href="http://64bit.cz/"><img src="abeceda%20sql3_soubory/abc.gif" alt="G$BIT SERVERS" border="0" height="31" width="88"></a>&nbsp;
+                                <a target="_new" href="http://reboot.cz/hacker-gallery/"><img src="abeceda%20sql3_soubory/bttn1.gif" alt="geek music" border="0" height="31" width="88"></a>&nbsp;
+                                <a target="_new" href="http://www.soom.cz/"><img src="abeceda%20sql3_soubory/soom_sm.gif" alt="www.soom.cz" border="0" height="31" width="88"></a>&nbsp;
+                                <a target="_new" href="http://www.jinx.com/"><img src="abeceda%20sql3_soubory/banner.gif" alt="j!nx.com" border="0" height="31" width="88"></a>&nbsp;
+                                <a target="_new" href="http://reboot.cz/hackthispage/"><img src="abeceda%20sql3_soubory/hackpage_sm.jpg" alt="HackThisPage.info" border="0" height="31" width="88"></a>&nbsp;
+                            	<a target="_new" href="http://howto.reboot.cz/"><img src="abeceda%20sql3_soubory/buttonhaxx.gif" alt="HACKER GAME - HACK THIS SITE" border="0" height="31" width="88"></a>&nbsp;
+
+				<br><a target="_new" href="http://forum.networ.eu/"><img src="abeceda%20sql3_soubory/uc2.jpg" alt="HACKER FORUM" border="0" height="31" width="88"></a>&nbsp;
+				<a target="_new" href="http://toplist.reboot.cz/"><img src="abeceda%20sql3_soubory/uc3.jpg" alt="geek toplist" border="0" height="31" width="88"></a>&nbsp;
+                                <a target="_new" href="http://photopost.cz/"><img src="abeceda%20sql3_soubory/photopost.gif" alt="photopost.cz" border="0" height="31" width="88"></a>&nbsp;
+                                <a target="_new" href="http://www.apsara.cz/"><img src="abeceda%20sql3_soubory/ban_apsara_white.jpg" alt="apsara.cz" border="0" height="31" width="88"></a>&nbsp;
+                                <a target="_new" href="http://banner.reboot.cz/"><img src="abeceda%20sql3_soubory/banner_ban_sm.gif" alt="BANNER EXCHANGE" border="0" height="31" width="88"></a>&nbsp;
+                                <a target="_new" href="http://www.beefkiters.com/"><img src="abeceda%20sql3_soubory/beefkiters-anim-88x31.gif" alt="www.beefkiters.com" border="0" height="31" width="88"></a>&nbsp;
+        		        <a target="_new" href="http://dfklub.cz/"><img src="abeceda%20sql3_soubory/dfklub.gif" alt="dfklub.cz" border="0" height="31" width="88"></a>&nbsp;
+				<a target="_new" href="http://www.zoneinteractive.cz/"><img src="abeceda%20sql3_soubory/zi.jpg" alt="www.zi.cz" border="0" height="31" width="88"></a>&nbsp;
+				<a target="_new" href="http://networ.eu/"><img src="abeceda%20sql3_soubory/networ.jpg" alt="networ.eu" border="0" height="31" width="88"></a>&nbsp;
+				<a target="_new" href="http://reboot.cz/"><img src="abeceda%20sql3_soubory/reboot_sm.gif" alt="reboot.cz" border="0" height="31" width="88"></a>&nbsp;
+				<br><br>
+<script language="JavaScript"><!--
+function replace(string,text,by) {
+// Replaces text with by in string
+var strLength = string.length, txtLength = text.length;
+if ((strLength == 0) || (txtLength == 0)) return string;
+var i = string.indexOf(text);
+if ((!i) && (text != string.substring(0,txtLength))) return string;
+if (i == -1) return string;
+var newstr = string.substring(0,i) + by;
+if (i+txtLength < strLength)
+newstr += replace(string.substring(i+txtLength,strLength),text,by);
+return newstr;
+}
+var $referrer = document.referrer; 
+document.write('<IMG WIDTH=1 HEIGHT=1 SRC=http://webstats.networ.eu/webstats/counter.php?this_domain=reboot.cz&referrer=' +replace(''+$referrer+'','&','ANDSIGN') + ' />' );
+//--></script><img src="abeceda%20sql3_soubory/counter" height="1" width="1"><script src="abeceda%20sql3_soubory/urchin.js" type="text/javascript">
+</script><script type="text/javascript">_uacct = "UA-2062036-1";urchinTracker();</script>
+<br>
+</div>
+</div>
+<div style="display: none;" id="overlay"></div><div style="display: none;" id="lightbox"><div id="outerImageContainer"><div id="imageContainer"><img id="lightboxImage"><div id="hoverNav"><a href="#" id="prevLink"></a><a href="#" id="nextLink"></a></div><div id="loading"><a href="#" id="loadingLink"><img src="abeceda%20sql3_soubory/loading.gif"></a></div></div></div><div class="clearfix" id="imageDataContainer"><div id="imageData"><div id="imageDetails"><span id="caption"></span><span id="numberDisplay"></span></div><div id="bottomNav"><a href="#" id="bottomNavClose"><img src="abeceda%20sql3_soubory/closelabel.gif"></a></div></div></div></div><div style="position: absolute; left: 755px; top: 2975px; z-index: 1000000000 ! important; visibility: hidden; opacity: 1; width: 16px; height: 16px;" id="linkalert-box"><img style="width: 16px;" src="chrome://linkalert/skin/small/rss-icon.png" id="linkalert-icon-1"></div></body></html>

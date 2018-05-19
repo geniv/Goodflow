@@ -1,0 +1,76 @@
+<!doctype html public "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=Windows-1250">
+<title>Funkce GetSet_fil_blocks</title>
+<link rel='stylesheet' style='text/css' href='../function.css'>
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000">
+
+
+
+<h2 class=function>GetSet_fil_blocks</h2>
+<img src='../images/cpp.gif' width='44' height='16' border='0' alt='c/c++' align='middle' hspace='2'><img src='../images/pascal.gif' width='44' height='16' border='0' alt='pascal' align='middle' hspace='2'>
+
+
+<br><br>
+<div class='typ'>
+BOOL <b>[cd_]GetSet_fil_blocks</b> ([cdp_t cdp,] t_oper operation, uns32 * size);<br>
+function <b>[cd_]GetSet_fil_blocks</b> ([cdp : cdp_t;] operation : t_oper; var size uns32) : Boolean;<br>
+
+</div>
+
+
+<p><b>Parametry</b></p>
+
+<table border=1 cols=2 frame=box>
+
+<tr valign="top">
+<td width=18%><i>operation </i></td>
+<td width=82%>- OPER_GET pro zjištění velikosti</td>
+</tr>
+
+<tr valign="top">
+<td width=18%>&nbsp;</td>
+<td width=82%>- OPER_SET pro nastavení velikosti.</td>
+</tr>
+
+<tr valign="top">
+<td width=18%><i>size</i> </td>
+<td width=82%>velikost databázového souboru v blocích o velikosti 4 KB
+<br>( je výstupním parametrem při zjišťování velikosti, vstupním při nastavování)
+</td>
+</tr>
+
+<tr valign="top">
+<td width=18%>[<i>cdp </i></td>
+<td width=82%><a href="HE_EXTCD.htm">kontextová proměnná</a> klienta]  </td>
+</tr>
+</table><br>
+
+<p><b>Od verze</b></p>
+
+<p>6.0</p>
+
+<p><b>Popis</b></p>
+
+<p>Funkce <b><code>GetSet_fil_blocks</code></b> slouží ke zjištění nebo zvětšení velikosti databázového souboru. Touto funkci nelze zmenšit velikost souboru. Funkci s hodnotou OPER_SET smí volat pouze provozní správce (CONFIG_ADMIN), jinak dojde k chybě NO_RIGHTS (129 - Nemáte právo provést tuto akci).</p>
+
+<p>Používá se poté, co funkcí <b><code>Get_server_info</code></b> zjistíte malý počet volných clusterů databázového souboru nebo v&nbsp;aplikaci poté, co se při spuštění serveru (aplikací) objeví varovná hláška o nedostatku volných clusterů.</p>
+
+<p>Obdobnou funkci <b><code>GetSet_fil_size</code></b> lze použít k témuž účelu, velikost se však zadává (a zjišťuje) nikoliv v blocích 4 KB, ale přímo v bajtech.</p>
+
+<p><b>Hodnota funkce </b></p>
+
+<p>Vrátí TRUE při chybě, číslo chyby OS_FIL_ERROR (157 - Chyba při práci se souborem), když není dost místa na disku. Při pokusu o zmenšení souboru funkce neudělá nic a vrátí FALSE.</p>
+
+<p><b>Viz</b></p>
+
+<ul class='viz'>
+ <li><a href="HE_F_GETSETFILSIZE.htm">GetSet_fil_size</a> 
+ <li><a href="HEJ_F_GETSERVERINFO.htm">Get_server_info</a>
+</ul>
+
+</body>
+</html>

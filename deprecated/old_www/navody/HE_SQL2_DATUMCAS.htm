@@ -1,0 +1,159 @@
+<!doctype html public "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=Windows-1250">
+<title>Zápis času a data v SQL</title>
+<link rel='stylesheet' style='text/css' href='../function.css'>
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr>
+	<td style="background-image: url(../images/bghead.jpg);
+		background-position: right;
+		background-repeat: no-repeat;">
+	<table width="100%" border="0" cellpadding="0" cellspacing="0"
+		style="background-image:none">
+	<tr>
+		<td style="background-image:none" height="46"
+			width="15%"><img src="../images/title-cz.gif"
+			width="255" height="33"
+			alt="602SQL-Úplná dokumentace"
+			title="602SQL - Úplná dokumentace"
+			border="0"></td>
+		<td width="33%" align="right"><a href="../xml/html/top.html"><img class="floatno"
+			src="../images/index.gif"
+			width="15" height="16"
+			alt="Index" title="Zpět na obsah"
+			border="0" vspace="2"></a> &nbsp;
+			 </td>
+	</tr>
+	</table>
+	</td>
+</tr>
+</table><table class="navigace" border="0" width="100%"  bgcolor="#FFFFBF"><tr> <td
+width="20" align="center"><img class="floatno" src="../images/prev.gif"
+width="15" height="13" alt="&lt;&shy;" title="Předcházející téma"
+border="0"></td><td width="25%"><a
+href="HE_SQL2_RETEZCE.htm">Znakové a binární řetězce</a></td> <td width="25%"
+align="right"><img class="floatno" src="../images/up.gif" width="13"
+height="15" alt="Nahoru" title="O jednu úroveň výš" border="0"
+align="middle"></td><td width="25%"><a href="HE_SQL2_ELEMENTY.htm">Lexikální elementy</a></td>
+<td width="25%" align="right"><a
+href="HE_SQL2_KOMENTARE.htm">Komentáře</a></td><td width="20"
+align="center"><img class="floatno" src="../images/next.gif" width="15"
+height="13" alt="&shy;&gt;" title="Následující téma" border="0"></td>
+</tr></table>
+
+
+
+
+<h1>Zápis času a data (SQL)</h1>
+
+<p>Hodnoty <a href="HE_SQL2_DATOVETYPY.htm">typu</a> DATE, TIME a TIMESTAMP lze v SQL zapisovat až trojím způsobem: dle norem SQL, dle specifikace ODBC a dle starších konvencí 602SQL. Tabulka shrnuje jednotlivé způsoby zápisu:</p>
+
+<p><table cols=4>
+
+<tr valign="top">
+<td width=21%>&nbsp;</td>
+<td width=20%><b>Datum</b></td>
+<td width=22%><b>Čas</b></td>
+<td width=37%><b>Datum s&nbsp;časem</b></td>
+</tr>
+
+<tr valign="top">
+<td width=21%><b>norma SQL</b></td>
+<td width=20%><code>DATE'1962-04-27'</code></td>
+<td width=22%><code>TIME'12:34:56.789'</code></td>
+<td width=37%><code>TIMESTAMP'1962-04-27 12:34:56'</code></td>
+</tr>
+
+<tr valign="top">
+<td width=21%><b>specifikace ODBC</b></td>
+<td width=20%><code>{d '1962-04-27'}</code></td>
+<td width=22%><code>{t '12:34:56.789'}</code></td>
+<td width=37%><code>{ts '1962-04-27 12:34:56'}</code></td>
+</tr>
+
+<tr valign="top">
+<td width=21%><b>styl 602SQL</b></td>
+<td width=20%><code>27.4.1962</code></td>
+<td width=22%><code>12:34:56.789</code></td>
+<td width=37%><code>27.4.1962 12:34:56</code></td>
+</tr>
+</table></p>
+
+<p>Pokud údaj o čase obsahuje specifikaci časové zóny (zápis v UTC), zapisuje se takto:</p>
+
+<p><table cols=4>
+
+<tr valign="top">
+<td width=21%>&nbsp;</td>
+<td width=22%><b>Čas s časovou zónou</b></td>
+<td width=37%><b>Datum s&nbsp;časem a časovou zónou</b></td>
+</tr>
+
+<tr valign="top">
+<td width=21%><b>norma SQL</b></td>
+<td width=22%><code>TIME'12:34:56.789+02:00'</code></td>
+<td width=37%><code>TIMESTAMP'1962-04-27 12:34:56+02:00'</code></td>
+</tr>
+
+<tr valign="top">
+<td width=21%><b>specifikace ODBC</b></td>
+<td width=22%><code>{t '12:34:56.789+02:00'}</code></td>
+<td width=37%><code>{ts '1962-04-27 12:34:56+02:00'}</code></td>
+</tr>
+
+<tr valign="top">
+<td width=21%><b>styl 602SQL</b></td>
+<td width=22%><code>12:34:56.789+02:00</code></td>
+<td width=37%><code>27.4.1962 12:34:56+02:00</code></td>
+</tr>
+</table></p>
+
+<br><p><b>Poznámky:</b></p>
+
+<p>Zápis podle specifikace ODBC ve složených závorkách není chápán jako komentář. Případná desetinná část sekund v zápisu času se ignoruje.</p>
+
+<p>Označení časové zóny musí následovat bezprostředně za časem a začíná znaménkem + nebo -.</p>
+
+
+<p><b>Rozšíření jazyka SQL proti normě</b>
+<ul>
+	<li>Ze zápisu časové zóny vynechat dvojtečku a minuty - doplní se 00.</li>
+	<li>Použijete-li <i>styl 602SQL</i>, pak lze z data vypustit rok - doplní se běžný rok.</li>
+	<li>Použijete-li <i>styl 602SQL</i>, pak lze z časové značky vynechat část s datumem nebo část s časem - doplní se aktuální datum nebo aktuální čas.</li>
+</ul>
+
+
+<br><p><b>Příklad:</b></p>
+
+<p>Vložení datumu, času a časové značky třemi způsoby:</p>
+
+<pre>procedure InsDat();
+BEGIN
+  INSERT INTO DatCas(dat,cas,datcas) 
+         VALUES (DATE'1998-02-27',TIME'12:34:56',TIMESTAMP'1998-02-27 12:34:56');
+  INSERT INTO DatCas(dat,cas,datcas)
+        VALUES ({d'1998-02-27'},{t'12:34:56.789'},{ts'1998-02-27 12:34:56.789'});
+  INSERT INTO DatCas(dat,cas,datcas) 
+         VALUES (27.2.1998,12:34:56,27.2.1998 12:34:56);
+END</pre>
+
+
+
+<table class="navigace" border="0" width="100%"  bgcolor="#FFFFBF"><tr> <td
+width="20" align="center"><img class="floatno" src="../images/prev.gif"
+width="15" height="13" alt="&lt;&shy;" title="Předcházející téma"
+border="0"></td><td width="25%"><a
+href="HE_SQL2_RETEZCE.htm">Znakové a binární řetězce</a></td> <td width="25%"
+align="right"><img class="floatno" src="../images/up.gif" width="13"
+height="15" alt="Nahoru" title="O jednu úroveň výš" border="0"
+align="middle"></td><td width="25%"><a href="HE_SQL2_ELEMENTY.htm">Lexikální elementy</a></td>
+<td width="25%" align="right"><a
+href="HE_SQL2_KOMENTARE.htm">Komentáře</a></td><td width="20"
+align="center"><img class="floatno" src="../images/next.gif" width="15"
+height="13" alt="&shy;&gt;" title="Následující téma" border="0"></td>
+</tr></table>
+</body>
+</html>

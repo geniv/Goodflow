@@ -1,0 +1,120 @@
+<!doctype html public "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=Windows-1250">
+<title>Příkaz INSERT (SQL)</title>
+<link rel='stylesheet' style='text/css' href='../function.css'>
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr>
+	<td style="background-image: url(../images/bghead.jpg);
+		background-position: right;
+		background-repeat: no-repeat;">
+	<table width="100%" border="0" cellpadding="0" cellspacing="0"
+		style="background-image:none">
+	<tr>
+		<td style="background-image:none" height="46"
+			width="15%"><img src="../images/title-cz.gif"
+			width="255" height="33"
+			alt="602SQL-Úplná dokumentace"
+			title="602SQL - Úplná dokumentace"
+			border="0"></td>
+		<td width="33%" align="right"><a href="../xml/html/top.html"><img class="floatno"
+			src="../images/index.gif"
+			width="15" height="16"
+			alt="Index" title="Zpět na obsah"
+			border="0" vspace="2"></a> &nbsp;
+			 </td>
+	</tr>
+	</table>
+	</td>
+</tr>
+</table><table class="navigace" border="0" width="100%"  bgcolor="#FFFFBF"><tr> <td
+width="20" align="center"><img class="floatno" src="../images/prev.gif"
+width="15" height="13" alt="&lt;&shy;" title="Předcházející téma"
+border="0"></td><td width="25%"><a
+href="HE_SQL2_UPDATE.htm">Příkaz UPDATE</a></td> <td width="25%"
+align="right"><img class="floatno" src="../images/up.gif" width="13"
+height="15" alt="Nahoru" title="O jednu úroveň výš" border="0"
+align="middle"></td><td width="25%"><a href="HE_SQL2_PRIKAZY.htm">SQL příkazy</a></td>
+<td width="25%" align="right"><a
+href="HE_SQL2_DELETE.htm">Příkaz DELETE</a></td><td width="20"
+align="center"><img class="floatno" src="../images/next.gif" width="15"
+height="13" alt="&shy;&gt;" title="Následující téma" border="0"></td>
+</tr></table>
+
+
+
+
+<h1><a name="he_sql2_insert"></a>Příkaz INSERT (SQL)</h1>
+
+<pre><code>příkaz_INSERT ::= INSERT INTO [schema.]jméno_tabulky [( jméno_sloupce {, jméno_ sloupce }… )] obsah
+obsah ::= VALUES ( hodnota {, hodnota }… ) | DEFAULT VALUES | dotazový_výraz</code></pre>
+
+<p><b>Popis</b></p>
+
+<p><a href="HE_SQL2_PRIKAZY.htm">Příkaz</a> INSERT vloží do dané tabulky jeden nebo více záznamů. Jsou-li za jménem tabulky uvedena v závorkách jména sloupců, pak se zadané hodnoty zapíší po řadě do těchto sloupců, a do ostatních se zapíší implicitní hodnoty. Pokud se jména sloupců neuvedou, pak se hodnoty zapisují do všech sloupců tabulky postupně počínaje prvním.
+
+<ul>
+	<li>Použijete-li variantu VALUES, do tabulky se vloží jeden záznam s explicitně zadanými hodnotami. Počet zadávaných hodnot musí být menší nebo roven počtu sloupců uvedených za jménem tabulky, resp. všech sloupců tabulky.</li>
+	<li>DEFAULT VALUES vloží jeden záznam a vyplní ho implicitními hodnotami definovanými pro tuto tabulku. </li>
+	<li>Chcete-li vložit hodnoty vybrané z jiných tabulek, použijte poslední možnost. Potřebnou množinu záznamů zadáte pomocí <a href="HE_SQL2_DOTAZOVYVYRAZ.htm"><i>dotazového výrazu</i></a>. Sloupce v odpovědi na <i>dotazový výraz</i> musí typem odpovídat sloupcům uvedeným za jménem tabulky v příkazu INSERT, resp. všem sloupcům tabulky.</li>
+</ul>
+
+<p>Počet vložených záznamů je možné po provedení zjistit pomocí <a href="../xml/html/sysvars.html">systémové proměnné</a> @@ROWCOUNT.</p>
+
+<p>Je-li tabulka prefixována jménem aplikace (na stejném serveru), tabulka se hledá v uvedené aplikaci (schématu).</p>
+
+<p>Místo tabulky lze příkaz provádět i s pevným dotazem (VIEW), který <a href="../xml/html/query_insdeledit.html">umožňuje vkládání záznamů</a> (toto se rozpozná již při překladu). Při tom se nekontroluje, zda zadané hodnoty odpovídají podmínce dotazu.</p>
+
+<p>Příkaz INSERT vyvolá INSERT <a href="HE_SQL2_TRIGGERY.htm">trigger</a> pro každý vkládaný záznam. BEFORE INSERT trigger se provede PŘED vložením záznamu, AFTER INSERT trigger po vložení. Dojde-li v triggeru k chybě, je obou případech příkaz INSERT odvolán.  </p>
+
+Je-li tabulka, na níž je příkaz INSERT prováděn, podřízenou tabulkou v <a href="../xml/html/sql_ref_integrity.html">aktivní referenční integritě</a> (RI) a nově vkládané hodnoty porušují pravidlo RI, nastane <a href="../xml/html/handlingcategories.html">chyba</a> 40006 (REFERENTIAL_CONSTRAIN).
+</p>
+
+<p>Uživatel, který vkládá záznamy, musí mít k této činnosti dostatek efektivních <a href="../xml/html/userinfo.html">práv</a>.</p>
+
+<br>
+<p><b>Příklady použití:</b></p>
+
+<pre><code>INSERT INTO Zamestnan (cislo, jmeno, prijmeni)
+VALUES (55, 'Jan', 'Novák')
+
+INSERT INTO Zamestnan DEFAULT VALUES
+
+INSERT INTO Zamestnan
+SELECT * FROM Kartoteka WHERE cis_oddel = 1
+
+INSERT INTO Zamestnan (jmeno, prijmeni)
+SELECT jmeno_n, prijmeni_n FROM Nabor WHERE prijaty</code></pre>
+
+<p>Záloha dat tabulky do jiné aplikace:</p>
+
+<pre><code>INSERT INTO Zaloha.Zamestnan 
+SELECT * FROM Zamestnan</code></pre>
+
+<p><b>Viz</b></p>
+
+<ul class='viz'>
+  <li><a href="HE_SQL2_DELETE.htm">DELETE</a></li>
+  <li><a href="HE_SQL2_UPDATE.htm">UPDATE</a></li>
+</ul>
+
+
+
+<table class="navigace" border="0" width="100%"  bgcolor="#FFFFBF"><tr> <td
+width="20" align="center"><img class="floatno" src="../images/prev.gif"
+width="15" height="13" alt="&lt;&shy;" title="Předcházející téma"
+border="0"></td><td width="25%"><a
+href="HE_SQL2_UPDATE.htm">Příkaz UPDATE</a></td> <td width="25%"
+align="right"><img class="floatno" src="../images/up.gif" width="13"
+height="15" alt="Nahoru" title="O jednu úroveň výš" border="0"
+align="middle"></td><td width="25%"><a href="HE_SQL2_PRIKAZY.htm">SQL příkazy</a></td>
+<td width="25%" align="right"><a
+href="HE_SQL2_DELETE.htm">Příkaz DELETE</a></td><td width="20"
+align="center"><img class="floatno" src="../images/next.gif" width="15"
+height="13" alt="&shy;&gt;" title="Následující téma" border="0"></td>
+</tr></table>
+</body>
+</html>

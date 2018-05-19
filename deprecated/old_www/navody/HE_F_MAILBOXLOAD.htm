@@ -1,0 +1,118 @@
+<!doctype html public "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=Windows-1250">
+<title>Funkce MailBoxLoad</title>
+<link rel='stylesheet' style='text/css' href='../function.css'>
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000">
+
+
+
+<h2 class=function>MailBoxLoad</h2>
+<img src='../images/cpp.gif' width='44' height='16' border='0' alt='c/c++' align='middle' hspace='2'><img src='../images/pascal.gif' width='44' height='16' border='0' alt='pascal' align='middle' hspace='2'><img src='../images/sql.gif' width='44' height='16' border='0' alt='sql' align='middle' hspace='2'>
+
+
+<br><br>
+<div class='typ'>DWORD <b>MailBoxLoad</b>(DWORD mailbox, UINT flag);<br>
+function <b>MailBoxLoad</b>(mailbox : integer; flag : integer) : integer;<br>
+FUNCTION <strong>MailBoxLoad</strong>(IN mailbox INT, IN flag INT) RETURNS INT;
+</div>
+
+
+<p><b>Parametry</b></p>
+
+<table border=1 cols=2 frame=box rules=all width=480>
+
+<tr valign="top">
+<td width=19%><i>mailbox </i></td>
+<td width=81%>handle poštovní schránky</td>
+</tr>
+
+<tr valign="top">
+<td width=19%><i>flag</i> </td>
+<td width=81%>rozsah zápisu</td>
+</tr>
+</table><br>
+
+<p><b>Od verze</b></p>
+
+<p>6.0f</p>
+
+<p><b>Popis</b></p>
+
+<p>Funkce přečte z poštovní schránky (v <a href="HE_MAILPROFILES.htm">profilu</a> zvoleného) <a href="HE_MAIL.htm">poštovního systému</a> seznam zásilek a zapíše jej do databáze. Údaje o zásilkách se zapisují do <a href="HE_MAILTABLES.htm">speciálních tabulek</a> <code>_INBOXMSGS</code> a <code>_INBOXFILES</code> v aplikaci určené v profilu (implicitně v systémové aplikaci <code>_Sysext</code>).</p>
+
+<p>Pokud se z poštovního serveru opakovaně stahuje stejná zásilka, v poštovních tabulkách se nevytváří nový záznam, ale aktualizuje se starý. Dle obsahu sloupce <code>Stat</code> lze zjistit, zda zásilka byla již dříve stažena.</p>
+
+<p>Množství informací, které lze o zásilce získat ze seznamu zásilek se liší podle použité pošty. Nejste-li si jisti, pro který systém aplikaci píšete, předpokládejte POP3 protokol, ten je nejstručnější.</p>
+
+<p>Rozsah zápisu lze řídit pomocí parametru <i>flag</i>. Hodnota parametru může být součtem hodnot:</p>
+
+<table border=1 cols=3 frame=box >
+
+<tr valign="top">
+<td width=18%>&nbsp;</td>
+<td width=5%>0</td>
+<td width=77%>Do databáze se uloží jen seznam zásilek</td>
+</tr>
+
+<tr valign="top">
+<td width=18%>
+<code>MBL_BODY</code>
+</td>
+<td width=5%>1</td>
+<td width=77%>Do databáze se uloží také texty dopisů včetně hlavičky <code>(do sloupce <code>Body</code>)</code></td>
+</tr>
+
+<tr valign="top">
+<td width=18%>
+<code>MBL_FILES</code>
+</td>
+<td width=5%>2</td>
+<td width=77%>Do databáze se uloží také informace o připojených souborech (sloupec <code>FileCnt</code> a sloupce v tabulce <code>_INBOXFILES</code>)</td>
+</tr>
+
+<tr valign="top">
+<td width=18%>
+<code>MBL_HDRONLY</code>
+</td>
+<td width=5%>4</td>
+<td width=77%>Do databáze se uloží jen hlavičky (sloupec <code>Header</code>)</td>
+</tr>
+
+<tr valign="top">
+<td width=18%>
+<code>MBL_MSGONLY</code>
+</td>
+<td width=5%>8</td>
+<td width=77%>Do databáze se uloží jen texty dopisů (sloupec <code>Body</code>)</td>
+</tr>
+</table><br>
+
+<p>Hodnota <code>MBL_BODY</code> se vylučuje s hodnotami <code>MBL_HDRONLY</code> a <code>MBL_MSGONLY</code>. Hodnota <code>MBL_HDRONLY</code> nefunguje v případě MAPI pošty. V případě Mail602 pošty je sloupec <code>FileCnt</code> vyplněn již při základním stažení seznamu zásilek (není nutné <code>MBL_FILES</code>).</p>
+
+<p>Získat text dopisu nebo seznam připojených souborů může znamenat, podle použité pošty, stažení celé zásilky z Internetu nebo vzdáleného poštovního úřadu, což operaci načtení seznamu zásilek neúměrně prodlouží. Pokud se texty dopisů nezískají přímo touto funkcí, lze to provést později pro  jednotlivé zásilky funkce <b><code>MailBoxGetMsgEx</code></b>. Informace o připojených souborech pro jednotlivé zásilky lze později získat pomocí funkce <b><code>MailBoxGetFilInfo</code></b>. Uložení připojeného souboru na disk provádí funkce <b><code>MailBoxSaveFileAs</code></b>. Uložení připojeného souboru do tabulky provádí klientská funkce <strong><code>MailBoxSaveFileDBr</code></strong> nebo v SQL <strong><code>MailBoxSaveFileDBs</code></strong>.</p>
+
+<p><b>Hodnota funkce</b></p>
+
+<p>Funkce vrací nulu v případě úspěchu a  číslo chyby v případě neúspěchu. <a href="HE_MAILERRORS.htm">Číslo chyby</a> lze zjistit také pomocí <b><code>Sz_error</code></b> nebo <b><code>Signalize</code></b>.</p>
+
+<p><b>Příklad</b></p>
+
+<p><a href="HE_MAILEXAMRECEIVE.htm">Příklad příjmu zásilky</a> </p>
+
+<p><b>Viz</b></p>
+
+<ul class='viz'>
+ <li><a href="HE_F_MAILOPENINBOX.htm">MailOpenInBox</a> </li>
+ <li><a href="HE_F_MAILBOXGETMSGEX.htm">MailBoxGetMsgEx</a> </li>
+ <li><a href="HE_F_MAILBOXDELETEMSG.htm">MailBoxDeleteMsg</a> </li>
+ <li><a href="HE_F_MAILBOXGETFILINFO.htm">MailBoxGetFilInfo</a> </li>
+ <li><a href="HE_F_MAILBOXSAVEFILEAS.htm">MailBoxSaveFileAs</a> </li>
+ <li><a href="HE_F_MAILBOXSAVEFILEDBR.htm">MailBoxSaveFileDBr</a> </li>
+</ul>
+
+</body>
+</html>

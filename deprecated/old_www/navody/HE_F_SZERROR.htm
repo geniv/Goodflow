@@ -1,0 +1,52 @@
+<!doctype html public "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=Windows-1250">
+<title>Funkce Sz_error</title>
+<link rel='stylesheet' style='text/css' href='../function.css'>
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000">
+
+
+
+<h2 class=function>Sz_error</h2>
+<img src='../images/cpp.gif' width='44' height='16' border='0' alt='c/c++' align='middle' hspace='2'><img src='../images/pascal.gif' width='44' height='16' border='0' alt='pascal' align='middle' hspace='2'>
+
+
+<br><br>
+<div class='typ'>int <b>[cd_]Sz_error</b>([cdp_t cdp]);<br>
+function <b>[cd_]Sz_error</b> ([cdp : cdp_t]): integer;
+</div>
+
+
+<p><b>Parametry</b></p>
+
+<table border=1 cols=2>
+
+<tr valign="top">
+<td width=20%>[<i>cdp </i></td>
+<td width=80%><a href="HE_EXTCD.htm">kontextová proměnná</a> klienta]  </td>
+</tr>
+</table><br>
+
+<p><b>Popis </b></p>
+
+<p>Funkce zjišťuje číslo chyby, ke které došlo při posledním volání databázové operace, tedy např. při čtení nebo zápisu do databázového sloupce, otevření kurzoru, vložení záznamu a pod. </p>
+
+<p>POZOR! Funkce nepodává informace o chybách v&nbsp;prezentační vrstvě, tedy např. při otevírání pohledu nebo tisky sestavy.</p>
+
+<p>Tuto funkci volejte <b>bezprostředně</b> po provedení operace, jejíž výsledek chcete zjistit.</p>
+
+<p>Alternativou je funkce <a href="HE_F_SIGNALIZE.htm"><code>Signalize</code></a>, která přímo otevře okno s popisem chyby.</p>
+
+<p><b>Hodnota funkce </b></p>
+
+<p>Funkce vrací <a href="../xml/html/errortop.html">číslo chyby</a>, k&nbsp;níž došlo při provádění poslední operace. Speciální hodnotou je NO_ERROR signalizující, že zpracování proběhlo úspěšně. Každá jiná hodnota oznamuje, že požadavek nebyl proveden.</p>
+
+<p><b>Viz</b></p>
+
+<ul class='viz'><li><a href="HE_F_SIGNALIZE.htm">Signalize</a></ul>
+
+</body>
+</html>

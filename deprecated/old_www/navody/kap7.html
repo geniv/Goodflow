@@ -1,0 +1,86 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head>
+<meta http-equiv="Content-Type" content="text/html; charset=Windows-1250"><title>7. Integritní omezení v SQL</title>
+
+
+	
+	<link rel="STYLESHEET" type="text/css" href="kap7_soubory/main.css">
+	<style type="text/css"><!--:hover { font-weight: bold;         color: red }
+--></style></head><body alink="Blue" background="kap7_soubory/pozadi.jpg" vlink="Blue">
+<a href="http://www.cs.vsb.cz/amalka/tomica/sql/kap6.html"><img src="kap7_soubory/prev.gif" alt="6. Ochrana dat proti neoprávněnému přístupu"></a>
+<a href="http://www.cs.vsb.cz/amalka/tomica/sql/kap8.html"><img src="kap7_soubory/next.gif" alt="8. Programování s SQL"></a>
+<a href="http://www.cs.vsb.cz/amalka/tomica/sql/index.html"><img src="kap7_soubory/toc.gif" alt="Obsah"></a>
+<hr color="Blue" size="1">
+<h1>7. Integritní omezení v SQL</h1>
+<p>Implementace jazyka SQL nenabízejí příliš mnoho možností pro
+formulaci IO. Standard SQL86 připouští vlastně pouze NOT NULL a UNIQUE.
+Standard SQL89 rozšiřuje možnosti IO na kontrolování hodnoty komponenty
+n-tice relace (klauzule CHECK - lokální pro daný atribut nebo globální
+pro atributy jedné relace), zadání implicitní hodnoty při vkládání
+n-tice do relace (klauzule DEFAULT) a zadání referenční integrity
+pomocí explicitně definovaného primárního klíče (PRIMARY KEY) a cizích
+klíčů (FOREIGN KEY).</p>
+<p>Ve schématu Vypujcka jsou zřejmě id_v a cislo cizími klíči.
+Označíme-li tedy v definici relace Vypujcka atribut id_v za cizí klíč s
+odkazem na relaci Exemplar, měl by SŘBD kontrolovat při vstupu prvku do
+relace Vypujcka, zda inventární číslo zapůjčené knihy existuje v
+seznamu exemplářů. Dále předpokládejme, že čísla čtenářů jsou větší než
+100, a v případě prázdné hodnoty atributu d_zpet požadujme, aby SŘBD
+dosadil datum konce roku. Pak lze schéma relace Vypujcka popsat
+následovně:</p>
+<pre>CREATE TABLE Vypujcka
+    (id_v INTEGER NOT NULL,
+     cislo INTEGER NOT NULL CHECK (cislo &gt;= 100), 
+     d_zpet DATE DEFAULT 12/31 /89),
+     PRIMARY KEY (id_v),
+     FOREIGN KEY (id_v) REFERENCES Exemplar,
+     FOREIGN KEY (cislo) REFERENCES Ctenar)</pre>
+<p>Podobně lze definovat i další používaná schémata jako např.</p>
+<pre>CREATE TABLE Dodava
+    ( ...
+     PRIMARY KEY (JMÉNO_K,NÁZEV_K),
+     FOREIGN KEY (NÁZEV_K) REFERENCES Knihovna,
+     FOREIGN KEY (JMÉNO_K) REFERENCES Knihkupec)</pre>
+<p>Poznamenejme, že definice id_v jako PRIMARY KEY je sémanticky
+identická s užitím UNIQUE, avšak s tím rozdílem, že v CREATE TABLE lze
+použít klauzuli PRIMARY KEY pouze jednou. Atributy za PRIMARY KEY je
+ovšem nutné specifikovat jako NOT NULL. Za klauzulí CHECK se může
+vyskytnout Booleovský výraz jednoduchých podmínek týkajících se
+atributů daného schématu (je-li CHECK použita globálně), tj. jde o
+selektivní omezení. Klauzule CHECK použitá lokálně obsahuje pouze
+odkazy na daný atribut a vlastně dovoluje jemněji specifikovat doménu
+daného atributu.</p>
+<p>Jak vidíme z příkladu, klauzule DEFAULT je vhodnější než použití
+prázdných hodnot. Vede např. k tomu, že neexistenci hodnoty lze ošetřit
+různými implicitními hodnotami. což zlepšuje sémantiku ukládaných dat.</p>
+<p>Referenční integrita může být použita i rekurzivně, tj. hodnota
+atributu tabulky v jednom řádku může být hodnotou klíče tabulky z
+jiného řádku.</p>
+<pre>CREATE TABLE Synonyma
+    (KEY_WORD CHARACTER(12) PRIMARY KEY
+     S_KEY_WORD CHARACTER(12) REFERENCES Synonyma)</pre>
+<p>Zavedení PRIMARY KEY umožňuje jednoduše formulovat referenční
+integritu. Za REFERENCES není nutné vyjadřovat, o který atribut jde,
+implicitně se myslí primární klíč.</p>
+<p>Styl vyjádření referenční integrity přes FOREIGN KEY by vedl k ekvivalentnímu zápisu atributu S_KEY_WORD jako:</p>
+<pre>FOREIGN KEY (S_KEY_WORD) REFERENCES Synonyma(KEY_WORD)</pre>
+<p>Při zavedení referenční integrity v RMD s prázdnými hodnotami je
+užitečné připustit, že hodnotou každého atributu cizího klíče může být
+prázdná hodnota. Jakýkoliv pokus narušit referenční integritu vede k
+hlášení chyby. Jedná se o použití INSERT, DELETE, jako
+např. vkládání výpůjčky se čtenářem neexistujícím v tabulce Ctenar,
+nebo naopak rušení čtenáře, na kterého se odkazuje v tabulce Vypujcka.
+Je třeba si však uvědomit, že zatím jde pouze o kontroly, nikoliv např.
+indukované aplikace DELETE apod. Ty se vyskytují až v dalších verzích
+standardu, tj. v SQL92 a připravovaném SQL3.</p>
+<p class="BEZ"><i>Poznámka:</i> Informace o referenční integritě,
+splněné v nějaké verzi SQL daného produktu, ještě nemusí znamenat, že
+se konsistence databáze skutečně kontroluje. Může jít pouze a
+syntaktické možnosti ve snaze zachovat kompatibilitu s jinými systémy
+podporujícími SQL (viz např. SQL
+Server firmy Microsoft).</p>
+<hr color="Blue" size="1">
+<a href="http://www.cs.vsb.cz/amalka/tomica/sql/kap6.html"><img src="kap7_soubory/prev.gif" alt="6. Ochrana dat proti neoprávněnému přístupu" align="left"></a>
+<a href="http://www.cs.vsb.cz/amalka/tomica/sql/kap8.html"><img src="kap7_soubory/next.gif" alt="8. Programování s SQL" align="left"></a>
+<a href="http://www.cs.vsb.cz/amalka/tomica/sql/index.html"><img src="kap7_soubory/toc.gif" alt="Obsah" align="left"></a>
+</body></html>

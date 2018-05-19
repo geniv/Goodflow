@@ -1,0 +1,1 @@
+<?php--AKT--25.6. 2007 - Zde budou sdìlovány aktuální vzkazy, novinky, mimoøádná sdìlení, akce, slevy a další pro naše zákazníky

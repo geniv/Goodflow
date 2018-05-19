@@ -1,0 +1,114 @@
+<!doctype html public "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=Windows-1250">
+<title>Funkce Fulltext_context</title>
+<link rel='stylesheet' style='text/css' href='../function.css'>
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000">
+
+
+
+<h2 class=function>Fulltext_context</h2>
+<img src='../images/sql.gif' width='44' height='16' border='0' alt='sql' align='middle' hspace='2'>
+
+<br><br>
+<div class='typ'>function <b>Fulltext_context</b>(IN doc BLOB, IN format CHAR(10), IN mode INT, IN position INT, IN margin INT, IN decoration CHAR(50)); returns CLOB;
+</div>
+
+<p><b>Parametry:</b></p>
+
+<table border=1 cols=2>
+
+<tr valign="top">
+<td><i>doc </i></td>
+<td>dokument nebo odkaz na dokument</td>
+</tr>
+
+<tr valign="top">
+<td><i>format</i></td>
+<td>formát dokumentu (TXT, TEXT nebo PLAIN pro čistý text, RTF, DOC nebo HTML apod. pro ostatní definované) nebo prázdný řetězec</td>
+</tr>
+
+<tr valign="top">
+<td><i>mode</i></td>
+<td>způsob předání dokumentu</td>
+</tr>
+
+<tr valign="top">
+<td><i>position</i></td>
+<td>pozice (slova) v dokumentu, kolem níž se hledá kontext</td>
+</tr>
+
+<tr valign="top">
+<td><i>margin</i></td>
+<td>počet slov před a za <i>position</i> v kontextu</td>
+</tr>
+
+<tr valign="top">
+<td><i>decoration</i></td>
+<td>znaky, kterými se "obalí" slovo v pozici "position" ve výsledném kontextu </td>
+</tr>
+</table><br>
+
+<p><b>Od verze:</b></p>
+<p>7.0d, ve verzi 9.5 zastaralá</p>
+
+<p><b>Popis:</b></p>
+
+<p>Funkci lze od verze 9.5 používat na textové dokumenty, pro binární dokumenty zpracované externími konvertory nemusí funkce pracovat správně. Pro verzi 9.5 existuje funkce obdobná - <a href="../xml/html/f_fulltext_get_context.html"><code>Fulltext_get_context</code></a>.</p>
+
+<p>Funkce vrátí kontext (text okolo) výskytu (jednoho) slova vyhledaného pomocí predikátu <code>Fulltext</code>. </p>
+
+<p>Prohledávaný dokument lze předat dvojím způsobem, přičemž způsob předání popisuje parametr <em>mode</em> takto: </p>
+
+<table border=1 >
+<tr><td><strong>hodnota</strong></td><td><strong>&nbsp;&nbsp;popis</strong></td></tr>
+<tr><td>0 </td>	<td>dokument je obsahem parametru <i>doc</i> (textově nebo binárně)</td></tr>
+<tr><td>1 </td><td>dokument je v souboru, jehož jméno je v parametru <i>doc</i></td></tr>
+</table>
+<br>
+<p>Pomocí <i>format</i> lze určit, v jakém formátu se předpokládají texty k indexování. Znáte-li formát předem (např při indexování CLOBů v tabulce), použijte zkratku pro daný formát (např. TXT), neznáte-li jej (např. při indexování obsahu souborů v adresáři), použijte prázdný řetězec - proběhne analýza počátku textu a pro známé formáty se použije odpovídající konvertor. Nepodaří-li se analýza, funkce skončí s chybou. </p>
+
+<p>Pozice slova v dokumentu může být dána systémovou proměnnou <code>@@FULLTEXT_POSITION</code>, která je nastavena při každém vyhodnocení predikátu <code>Fultext</code> vracejícím TRUE. Při vyhledání víceslovné fráze bude pozice ukazovat na jedno ze slov.</p>
+
+<p>Parametrem <i>margin</i> stanovíte, kolik slov před a za nalezeným slovem se vrátí (spolu se slovem a znaky zadanými v <i>decoration</i>) jako výsledek funkce.</p>
+
+<p>Pomocí <i>decoration</i> lze zvýraznit hledané slovo v kontextu. Řetězcový parametr musí mít následující tvar <i><code>znaky_před%znaky_po</code></i>, kde % značí pozici hledaného slova. Bude-li výsledek funkce např. předán browseru jako HTML, lze s výhodou použít tohoto zvýraznění: <code>"&lt;B&gt;%&lt;/B&gt;"</code> </p>
+
+<p><b>Hodnota funkce</b></p>
+
+<p>Funkce vrací kontext výskytu slova délky <i>2*margin+1 </i>slov.</p>
+
+<p><b>Příklady:</b></p>
+
+<p>Nalézt v dokumentech uložených v databázi slovo Databáze a vrátit kontexty jeho výskytu: </p>
+
+<pre>SELECT Fulltext_context(doc,"TXT",0,@@FULLTEXT_POSITION,5,"&gt;&gt;%&lt;&lt;")
+FROM Doctab
+WHERE Fulltext(".ftx_test",id,"Databáze")
+</pre>
+
+<p>Totéž zadání - v proceduře pomocí průchodu kurzoru: </p>
+
+<pre>DECLARE pom CLOB;
+FOR radek AS ftcur INSENSITIVE CURSOR FOR
+  SELECT id,doc,@@FULLTEXT_POSITION AS pos
+  FROM Doctab
+  WHERE Fulltext(".ftx_test",id,"Databáze")
+DO
+  SET pom = Fulltext_context(radek.doc,"TXT",0,radek.pos,5,"&gt;&gt;%&lt;&lt;");
+  CALL log_write(pom);
+END FOR;</pre>
+
+<p><b>Viz</b></p>
+
+<ul class='viz'>
+ <li><a href="../xml/html/fulltext.html">Fulltextové nástroje ve 602SQL</a> </li>
+ <li><a href="../xml/html/fulltext_doctab.html">Označování a uložení dokumentů ve fulltextových systémech</a> </li>
+ <li><a href="../xml/html/fulltext_search.html">Fulltextové vyhledávání dokumentů</a></li>
+</ul>
+
+</body>
+</html>

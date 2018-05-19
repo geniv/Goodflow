@@ -1,0 +1,99 @@
+<!doctype html public "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=Windows-1250">
+<title>Predikát IN (SQL)</title>
+<link rel='stylesheet' style='text/css' href='../function.css'>
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr>
+	<td style="background-image: url(../images/bghead.jpg);
+		background-position: right;
+		background-repeat: no-repeat;">
+	<table width="100%" border="0" cellpadding="0" cellspacing="0"
+		style="background-image:none">
+	<tr>
+		<td style="background-image:none" height="46"
+			width="15%"><img src="../images/title-cz.gif"
+			width="255" height="33"
+			alt="602SQL-Úplná dokumentace"
+			title="602SQL - Úplná dokumentace"
+			border="0"></td>
+		<td width="33%" align="right"><a href="../xml/html/top.html"><img class="floatno"
+			src="../images/index.gif"
+			width="15" height="16"
+			alt="Index" title="Zpět na obsah"
+			border="0" vspace="2"></a> &nbsp;
+			 </td>
+	</tr>
+	</table>
+	</td>
+</tr>
+</table><table class="navigace" border="0" width="100%"  bgcolor="#FFFFBF"><tr> <td
+width="20" align="center"><img class="floatno" src="../images/prev.gif"
+width="15" height="13" alt="&lt;&shy;" title="Předcházející téma"
+border="0"></td><td width="25%"><a
+href="HE_SQL2_BETWEEN.htm">Predikát BETWEEN</a></td> <td width="25%"
+align="right"><img class="floatno" src="../images/up.gif" width="13"
+height="15" alt="Nahoru" title="O jednu úroveň výš" border="0"
+align="middle"></td><td width="25%"><a href="HE_SQL2_PODMINKA.htm">Podmínky a predikáty</a></td>
+<td width="25%" align="right"><a
+href="HE_SQL2_EXISTS.htm">Predikát EXISTS</a></td><td width="20"
+align="center"><img class="floatno" src="../images/next.gif" width="15"
+height="13" alt="&shy;&gt;" title="Následující téma" border="0"></td>
+</tr></table>
+
+
+
+
+<h1><a name="he_sql2_in"></a>Predikát IN (SQL)</h1>
+
+<pre><code>predikát_IN ::= výraz1 [NOT] IN {( výraz { , výraz }… ) | ( dotazový_výraz )}</code></pre>
+
+<p>Predikát IN říká, zda hodnota <i>výrazu1 </i>je mezi hodnotami uvedených <i>výrazů</i> nebo mezi hodnotami v&nbsp;odpovědi na <a href="HE_SQL2_DOTAZOVYVYRAZ.htm"><i>dotazový výraz</i></a> (<a href="HE_SQL2_SUBDOTAZ.htm">subdotaz</a>).</p>
+
+<p>Odpověď na <i>dotazový výraz</i> musí být skalární (musí obsahovat jediný sloupec). <a href="HE_SQL2_DATOVETYPY.htm">Typ</a> odpovědi na subdotaz a typy všech <i>výrazů</i> musí být porovnatelné s&nbsp;typem <i>výrazu1</i>.</p>
+<br/>
+<p><b>Příklad použití (výčet hodnot):</b></p>
+
+<p>Vybrat faktury z lichých měsíců:</p>
+
+<pre><code>SELECT *
+FROM Faktury
+WHERE Month(dat1) <b>IN</b> (1,3,5,7,9,11)</code></pre>
+
+<p><b>Příklad použití (subdotaz):</b></p>
+
+<p>Vyberte faktury, které patří firmám z Prahy</p>
+
+<pre><code>SELECT Faktury.cislo,Faktury.firma
+FROM Faktury
+WHERE firma <b>IN</b> (SELECT cislo
+                FROM Firmy
+                WHERE mesto LIKE 'Praha%')</code></pre>
+
+<p>Stejný výsledek lze dostat pomocí JOINu</p>
+
+<pre><code>SELECT DISTINCT Faktury.cislo, Faktury.firma
+FROM Faktury, Firmy
+WHERE Firmy.cislo=Faktury.firma
+ AND (Firmy.mesto.='Praha')</code></pre>
+
+
+
+<table class="navigace" border="0" width="100%"  bgcolor="#FFFFBF"><tr> <td
+width="20" align="center"><img class="floatno" src="../images/prev.gif"
+width="15" height="13" alt="&lt;&shy;" title="Předcházející téma"
+border="0"></td><td width="25%"><a
+href="HE_SQL2_BETWEEN.htm">Predikát BETWEEN</a></td> <td width="25%"
+align="right"><img class="floatno" src="../images/up.gif" width="13"
+height="15" alt="Nahoru" title="O jednu úroveň výš" border="0"
+align="middle"></td><td width="25%"><a href="HE_SQL2_PODMINKA.htm">Podmínky a predikáty</a></td>
+<td width="25%" align="right"><a
+href="HE_SQL2_EXISTS.htm">Predikát EXISTS</a></td><td width="20"
+align="center"><img class="floatno" src="../images/next.gif" width="15"
+height="13" alt="&shy;&gt;" title="Následující téma" border="0"></td>
+</tr></table>
+</body>
+</html>

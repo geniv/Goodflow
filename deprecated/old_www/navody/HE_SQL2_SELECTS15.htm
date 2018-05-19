@@ -1,0 +1,88 @@
+<!doctype html public "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=Windows-1250">
+<title>Sbírka dotazů str. 15</title>
+<link rel='stylesheet' style='text/css' href='../function.css'>
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr>
+	<td style="background-image: url(../images/bghead.jpg);
+		background-position: right;
+		background-repeat: no-repeat;">
+	<table width="100%" border="0" cellpadding="0" cellspacing="0"
+		style="background-image:none">
+	<tr>
+		<td style="background-image:none" height="46"
+			width="15%"><img src="../images/title-cz.gif"
+			width="255" height="33"
+			alt="602SQL-Úplná dokumentace"
+			title="602SQL - Úplná dokumentace"
+			border="0"></td>
+		<td width="33%" align="right"><a href="../xml/html/top.html"><img class="floatno"
+			src="../images/index.gif"
+			width="15" height="16"
+			alt="Index" title="Zpět na obsah"
+			border="0" vspace="2"></a> &nbsp;
+			 </td>
+	</tr>
+	</table>
+	</td>
+</tr>
+</table><table class="navigace" border="0" width="100%"  bgcolor="#FFFFBF"><tr> <td
+width="20" align="center"><img class="floatno" src="../images/prev.gif"
+width="15" height="13" alt="&lt;&shy;" title="Předcházející téma"
+border="0"></td><td width="25%"><a
+href="HE_SQL2_SELECTS14.htm">Strana 14 (INTERSECT, EXCEPT)</a></td> <td width="25%"
+align="right"><img class="floatno" src="../images/up.gif" width="13"
+height="15" alt="Nahoru" title="O jednu úroveň výš" border="0"
+align="middle"></td><td width="25%"><a href="HE_SQL2_SELECTS.htm">Sbírka příkladů SQL dotazů</a></td>
+<td width="25%" align="right"><a
+href="HE_SQL2_SELECTS16.htm">Strana 16 (LIMIT)</a></td><td width="20"
+align="center"><img class="floatno" src="../images/next.gif" width="15"
+height="13" alt="&shy;&gt;" title="Následující téma" border="0"></td>
+</tr></table>
+
+
+<h1><a name="he_sql2_selects15"></a>Sbírka dotazů – str. 15</h1>
+
+<p><b>Příklad 23</b></p>
+
+<p><b>Zadání:</b> Zjistěte, kolik faktur bylo došlých a kolik odeslaných.</p>
+
+<p><b>Popis řešení:</b> Takto jednoduchý dotaz se zdá nebýti hoden umístění na konci sbírky příkladů. Opravdu, dotaz</p>
+
+<pre><code>  SELECT Count(druh)
+  FROM Faktury
+  GROUP BY druh</code></pre>
+
+<p>zvládne každý. Výsledkem je jeden sloupec nadepsaný Druh se dvěma řádky pro dva typu faktur. My ale chceme, aby výsledek tvořil jeden řádek se dvěma sloupci, nadepsanými Došlé a Odeslané!!</p>
+
+<p>Podívejte se na následující dotaz:</p>
+
+<p><b>SQL:</b></p>
+
+<pre><code>  SELECT SUM(CASE WHEN druh=1 THEN 1 ELSE 0 END) AS Došlé,
+         SUM(CASE WHEN druh=2 THEN 1 ELSE 0 END) AS Odeslané
+  FROM Faktury</code></pre>
+
+<p>V dotazu je použito agregační funkce bez GROUP BY - odpověď tedy bude mít jeden záznam. V části SELECT jsou dva výrazy, odpověď tedy bude mít dva sloupce. Ve výrazu je použito podmíněného výrazu CASE, který fakturu jednoho typu nahrazuje jedničkou a druhého typu nulou. Pak stačí tyto jedničky sečíst agregační funkcí.</p>
+
+
+
+<table class="navigace" border="0" width="100%"  bgcolor="#FFFFBF"><tr> <td
+width="20" align="center"><img class="floatno" src="../images/prev.gif"
+width="15" height="13" alt="&lt;&shy;" title="Předcházející téma"
+border="0"></td><td width="25%"><a
+href="HE_SQL2_SELECTS14.htm">Strana 14 (INTERSECT, EXCEPT)</a></td> <td width="25%"
+align="right"><img class="floatno" src="../images/up.gif" width="13"
+height="15" alt="Nahoru" title="O jednu úroveň výš" border="0"
+align="middle"></td><td width="25%"><a href="HE_SQL2_SELECTS.htm">Sbírka příkladů SQL dotazů</a></td>
+<td width="25%" align="right"><a
+href="HE_SQL2_SELECTS16.htm">Strana 16 (LIMIT)</a></td><td width="20"
+align="center"><img class="floatno" src="../images/next.gif" width="15"
+height="13" alt="&shy;&gt;" title="Následující téma" border="0"></td>
+</tr></table>
+</body>
+</html>

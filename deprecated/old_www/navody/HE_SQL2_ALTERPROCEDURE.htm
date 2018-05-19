@@ -1,0 +1,100 @@
+<!doctype html public "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=Windows-1250">
+<title>Modifikování rutiny - ALTER PROCEDURE a ALTER FUNCTION v SQL</title>
+<link rel='stylesheet' style='text/css' href='../function.css'>
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr>
+	<td style="background-image: url(../images/bghead.jpg);
+		background-position: right;
+		background-repeat: no-repeat;">
+	<table width="100%" border="0" cellpadding="0" cellspacing="0"
+		style="background-image:none">
+	<tr>
+		<td style="background-image:none" height="46"
+			width="15%"><img src="../images/title-cz.gif"
+			width="255" height="33"
+			alt="602SQL-Úplná dokumentace"
+			title="602SQL - Úplná dokumentace"
+			border="0"></td>
+		<td width="33%" align="right"><a href="../xml/html/top.html"><img class="floatno"
+			src="../images/index.gif"
+			width="15" height="16"
+			alt="Index" title="Zpět na obsah"
+			border="0" vspace="2"></a> &nbsp;
+			 </td>
+	</tr>
+	</table>
+	</td>
+</tr>
+</table><table class="navigace" border="0" width="100%"  bgcolor="#FFFFBF"><tr> <td
+width="20" align="center"><img class="floatno" src="../images/prev.gif"
+width="15" height="13" alt="&lt;&shy;" title="Předcházející téma"
+border="0"></td><td width="25%"><a
+href="HE_SQL2_CREATEPROCEDURE.htm">Vytvoření rutiny (CREATE PROCEDURE | FUNCTION)</a></td> <td width="25%"
+align="right"><img class="floatno" src="../images/up.gif" width="13"
+height="15" alt="Nahoru" title="O jednu úroveň výš" border="0"
+align="middle"></td><td width="25%"><a href="HE_SQL2_STOREDPROCEDURE.htm">Rutiny uložené na serveru</a></td>
+<td width="25%" align="right"><a
+href="HE_SQL2_DROPPROCEDURE.htm">Zrušení rutiny (DROP PROCEDURE | FUNCTION)</a></td><td width="20"
+align="center"><img class="floatno" src="../images/next.gif" width="15"
+height="13" alt="&shy;&gt;" title="Následující téma" border="0"></td>
+</tr></table>
+
+
+
+
+<h1><a name="he_sql2_alterprocedure"></a>Modifikování rutiny - ALTER PROCEDURE a ALTER FUNCTION (SQL)</h1>
+
+<pre><code>příkaz_ALTER_routine ::= ALTER popis_rutiny;
+</code></pre>
+
+<p><a href="HE_SQL2_PRIKAZY.htm">Příkaz</a> modifikuje rutinu, jejíž <i>jméno</i> je součástí <a href="HE_SQL2_POPISPROCEDURY.htm"><i>popisu procedury</i></a><i> </i>nebo <a href="HE_SQL2_POPISPROCEDURY.htm"><i>popisu funkce</i></a>. Příkaz předpokládá, že taková globální rutina existuje. Rutiny deklarované jako lokální uvnitř složeného příkazu nelze modifikovat.</p>
+
+<p>Alternativně lze rutinu modifikovat pomocí řídicího panelu vývojového prostředí 602SQL.</p>
+
+<p>Při modifikování se v&nbsp;rutině stávající popis procedury nebo popis funkce nahradí zadaným <i>popisem procedury </i>resp. <i>popisem funkce.</i> Přitom se neprovádí syntaktická kontrola popisu, takže na serveru lze uložit i nehotovou rutinu.</p>
+
+<p>POZOR: Změna definice rutiny se projeví po uzavření transakce obsahující tento příkaz. I po tomto okamžiku pracují se <b>starou</b> verzí rutiny:
+
+<ul>
+	<li>příkazy zaslané serveru ve stejném požadavku klienta jako příkaz ALTER routine;</li>
+	<li>dříve <i>připravené</i> příkazy odvolávající se na tuto rutinu (včetně příkazů připravených jinými klienty)</li>
+	<li>dříve <i>otevřené</i> kurzory (včetně kurzorů otevřených jinými klienty).</li>
+</ul>
+
+<p><b>Implementací definované vlastnosti SQL ve 602SQL</b>
+
+<ul>
+	<li>Příkaz ALTER PROCEDURE a ALTER FUNCTION nelze vložit do jiné procedury, je možné jej volat pouze samostatně.</li>
+</ul>
+
+<p><b>Viz</b></p>
+
+<ul class='viz'>
+ <li><a href="HE_SQL2_CREATEPROCEDURE.htm">CREATE PROCEDURE</a> </li>
+ <li><a href="HE_SQL2_CREATEPROCEDURE.htm">CREATE FUNCTION</a> </li>
+ <li><a href="HE_SQL2_DROPPROCEDURE.htm">DROP PROCEDURE</a> </li>
+ <li><a href="HE_SQL2_DROPPROCEDURE.htm">DROP FUNCTION</a></li>
+</ul>
+
+
+
+<table class="navigace" border="0" width="100%"  bgcolor="#FFFFBF"><tr> <td
+width="20" align="center"><img class="floatno" src="../images/prev.gif"
+width="15" height="13" alt="&lt;&shy;" title="Předcházející téma"
+border="0"></td><td width="25%"><a
+href="HE_SQL2_CREATEPROCEDURE.htm">Vytvoření rutiny (CREATE PROCEDURE | FUNCTION)</a></td> <td width="25%"
+align="right"><img class="floatno" src="../images/up.gif" width="13"
+height="15" alt="Nahoru" title="O jednu úroveň výš" border="0"
+align="middle"></td><td width="25%"><a href="HE_SQL2_STOREDPROCEDURE.htm">Rutiny uložené na serveru</a></td>
+<td width="25%" align="right"><a
+href="HE_SQL2_DROPPROCEDURE.htm">Zrušení rutiny (DROP PROCEDURE | FUNCTION)</a></td><td width="20"
+align="center"><img class="floatno" src="../images/next.gif" width="15"
+height="13" alt="&shy;&gt;" title="Následující téma" border="0"></td>
+</tr></table>
+</body>
+</html>

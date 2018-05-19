@@ -1,0 +1,47 @@
+#Zakazování zobrazení složek
+Options -Indexes
+
+#Error page 400
+ErrorDocument 400 error_page/400.html
+
+#Error page 401
+ErrorDocument 401 error_page/401.html
+
+#Error page 403
+ErrorDocument 403 error_page/403.html
+
+#Error page 404
+ErrorDocument 404 error_page/404.html
+
+#Error page 500
+ErrorDocument 500 error_page/500.html
+
+#Error page 503
+ErrorDocument 503 error_page/503.html
+
+#Zapínání php5 na klenotu 1/2
+#AddHandler php5-cgi .php
+
+#Zapínání php5 na klenotu 2/2
+#Action php5-cgi /php5cgi/php
+
+#Zapínání rewrite
+RewriteEngine on
+
+#Nasměrování kořenu
+RewriteBase /
+
+#Přepis pro RSS
+#RewriteRule ^rss/([a-zA-Z-\_]+)/?$ ?action=rss&sablona=$1 [L]
+
+#Přepis pro stránkování
+#RewriteRule ^([a-zA-Z0-9-\_]+)/([0-9]+)?$ ?action=$1&str=$2 [L]
+
+
+#submenu
+RewriteRule ^([a-zA-Z0-9-_]+)/([a-zA-Z0-9-\_]+)/?$ ?action=$1&sub=$2 [L]
+
+
+#Přepis pro sekce
+RewriteRule ^([a-zA-Z0-9-\_]+)/?$ ?action=$1 [L]
+

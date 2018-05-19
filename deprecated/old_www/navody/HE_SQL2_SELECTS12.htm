@@ -1,0 +1,93 @@
+<!doctype html public "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=Windows-1250">
+<title>Sbírka dotazů str. 12</title>
+<link rel='stylesheet' style='text/css' href='../function.css'>
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr>
+	<td style="background-image: url(../images/bghead.jpg);
+		background-position: right;
+		background-repeat: no-repeat;">
+	<table width="100%" border="0" cellpadding="0" cellspacing="0"
+		style="background-image:none">
+	<tr>
+		<td style="background-image:none" height="46"
+			width="15%"><img src="../images/title-cz.gif"
+			width="255" height="33"
+			alt="602SQL-Úplná dokumentace"
+			title="602SQL - Úplná dokumentace"
+			border="0"></td>
+		<td width="33%" align="right"><a href="../xml/html/top.html"><img class="floatno"
+			src="../images/index.gif"
+			width="15" height="16"
+			alt="Index" title="Zpět na obsah"
+			border="0" vspace="2"></a> &nbsp;
+			 </td>
+	</tr>
+	</table>
+	</td>
+</tr>
+</table><table class="navigace" border="0" width="100%"  bgcolor="#FFFFBF"><tr> <td
+width="20" align="center"><img class="floatno" src="../images/prev.gif"
+width="15" height="13" alt="&lt;&shy;" title="Předcházející téma"
+border="0"></td><td width="25%"><a
+href="HE_SQL2_SELECTS11.htm">Strana 11 (SELECT subdotaz, COUNT DISTINCT)</a></td> <td width="25%"
+align="right"><img class="floatno" src="../images/up.gif" width="13"
+height="15" alt="Nahoru" title="O jednu úroveň výš" border="0"
+align="middle"></td><td width="25%"><a href="HE_SQL2_SELECTS.htm">Sbírka příkladů SQL dotazů</a></td>
+<td width="25%" align="right"><a
+href="HE_SQL2_SELECTS13.htm">Strana 13 (UNION, subdotaz)</a></td><td width="20"
+align="center"><img class="floatno" src="../images/next.gif" width="15"
+height="13" alt="&shy;&gt;" title="Následující téma" border="0"></td>
+</tr></table>
+
+
+<h1><a name="he_sql2_selects12"></a>Sbírka dotazů – str. 12</h1>
+
+<p><b>Příklad 20</b></p>
+
+<p><b>Zadání:</b> Mějme tabulky FAKTURY a FAKT_2 a v&nbsp;nich data z&nbsp;let 1998 a 1997. Vypište faktury odběratelů z&nbsp;dvou měsíců na přelomu roku 1997.</p>
+
+<p><b>Popis řešení: </b>Úloha vyžaduje spojení dat ze dvou tabulek, nikoli však na základě relačního vztahu, nýbrž pouhým přidáním záznamů za sebe. Sjednocení více tabulek sice <b>602SQL</b> pomocí SQL umí vytvořit, nicméně tato operace není ani obvyklá ani častá. Není proto ani implementována do interaktivního návrháře. Pokud chcete tabulky sjednotit, musíte zapsat příkaz SQL přímo v&nbsp;jeho textové podobě. Obě části dotazu spojte klíčovým slovem UNION a výsledek můžete setřídit sestupně podle data.</p>
+
+<p><b>SQL:</b> </p>
+
+<pre><code>  SELECT *
+  FROM Fakt_2
+  WHERE dat1 &gt; 30.11.1997
+     UNION
+  SELECT *
+  FROM Faktury
+  WHERE dat1 &lt; 1.2.1998
+  ORDER BY dat1 DESC</code></pre>
+
+<p><b>Poznámky:</b> </p>
+
+<p><b>a)</b> Obě části sjednocení musí mít v&nbsp;části SELECT položky stejných typů.</p>
+
+<p><b>b)</b> Setřídění se týká obou částí dotazu, třídit jednotlivé části před sjednocením nelze.</p>
+
+<p><b>c)</b> Použitím <code>UNION</code> (bez <code>ALL</code>) říkáte, že každý záznam bude ve výsledku nejvýše jednou (duplicity budou vyloučeny).</p>
+
+<p><b>d)</b> Není-li třeba zajistit, aby ve výsledku byl každý záznam jen jednou (jako v tomto případě), použijte klauzuli <code>UNION ALL</code>, která výrazně zrychlí vyhodnocení. Mají-li však obě části UNIONu neprázdný průnik, je třeba použití <code>ALL</code> zvažovat - např. pro výpis je vhodná unikátnost záznamů, ale je-li tento dotaz např. zdrojem pro další databázovou operaci, může být rychlejší sestavit dotaz s duplicitami a pro ně provést operaci dvakrát než vyhodnocovat unikátnost.</p>
+
+
+
+<table class="navigace" border="0" width="100%"  bgcolor="#FFFFBF"><tr> <td
+width="20" align="center"><img class="floatno" src="../images/prev.gif"
+width="15" height="13" alt="&lt;&shy;" title="Předcházející téma"
+border="0"></td><td width="25%"><a
+href="HE_SQL2_SELECTS11.htm">Strana 11 (SELECT subdotaz, COUNT DISTINCT)</a></td> <td width="25%"
+align="right"><img class="floatno" src="../images/up.gif" width="13"
+height="15" alt="Nahoru" title="O jednu úroveň výš" border="0"
+align="middle"></td><td width="25%"><a href="HE_SQL2_SELECTS.htm">Sbírka příkladů SQL dotazů</a></td>
+<td width="25%" align="right"><a
+href="HE_SQL2_SELECTS13.htm">Strana 13 (UNION, subdotaz)</a></td><td width="20"
+align="center"><img class="floatno" src="../images/next.gif" width="15"
+height="13" alt="&shy;&gt;" title="Následující téma" border="0"></td>
+</tr></table>
+</body>
+</html>

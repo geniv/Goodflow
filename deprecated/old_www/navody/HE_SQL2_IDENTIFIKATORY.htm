@@ -1,0 +1,119 @@
+<!doctype html public "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=Windows-1250">
+<title>Identifikátory a vyhrazená slova SQL</title>
+<link rel='stylesheet' style='text/css' href='../function.css'>
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr>
+	<td style="background-image: url(../images/bghead.jpg);
+		background-position: right;
+		background-repeat: no-repeat;">
+	<table width="100%" border="0" cellpadding="0" cellspacing="0"
+		style="background-image:none">
+	<tr>
+		<td style="background-image:none" height="46"
+			width="15%"><img src="../images/title-cz.gif"
+			width="255" height="33"
+			alt="602SQL-Úplná dokumentace"
+			title="602SQL - Úplná dokumentace"
+			border="0"></td>
+		<td width="33%" align="right"><a href="../xml/html/top.html"><img class="floatno"
+			src="../images/index.gif"
+			width="15" height="16"
+			alt="Index" title="Zpět na obsah"
+			border="0" vspace="2"></a> &nbsp;
+			 </td>
+	</tr>
+	</table>
+	</td>
+</tr>
+</table><table class="navigace" border="0" width="100%"  bgcolor="#FFFFBF">
+		  <tr>
+					 <td width="20" align="center">&nbsp;</td>
+					 <td width="25%">&nbsp;</td>
+					 <td width="25%"
+align="right"><img class="floatno" src="../images/up.gif" width="13"
+height="15" alt="Nahoru" title="O jednu úroveň výš" border="0"
+align="middle"></td><td width="25%"><a href="HE_SQL2_ELEMENTY.htm">Lexikální elementy</a></td>
+<td width="25%" align="right"><a
+href="HE_SQL2_CISLA.htm">Čísla</a></td><td width="20"
+align="center"><img class="floatno" src="../images/next.gif" width="15"
+height="13" alt="&shy;&gt;" title="Následující téma" border="0"></td>
+</tr></table>
+
+
+
+
+
+<h1><a name="he_sql2_identifikatory"></a>Identifikátory a vyhrazená slova (SQL)</h1>
+
+<h2>Psaní identifikátorů</h2>
+
+<h3>Standardně zapsané identifikátory</h3>
+
+<p>Standardně zapsané identifikátory jazyka SQL začínají písmenem nebo podtržítkem ("_") a mohou obsahovat písmena, číslice a podtržítko.</p>
+
+<p>Přípustná jsou i národní písmena patřící do <a href="../xml/html/syscharset.html">systémové znakové sady</a> serveru, např. písmena s diakritikou.</p>
+
+<p>Příklady: <code>I</code>, <code>new_value</code>, <code>zisk_po_zdanění_2005</code>.</p>
+
+<h3>Identifikátory obsahující nealfanumerické znaky</h3>
+
+<p>Pokud identifikátor má obsahovat jiné než alfanumerické znaky, pak musí být na začátku a na konci vymezen dvojicí speciálních omezovačů. Omezovači mohou být obrácené apostrofy nebo úvozovky. Použití uvozovek vyžaduje vhodné nastavení příznaků kompatibility SQL (pomocí procedury <a href="HE_F_SETSQLOPTION.htm"><code>Set_sql_option</code></a> (volba <code>SQLOPT_QUOTED_IDENT</code>)).</p>
+
+<p>Omezovač nemůže být obsažen uvnitř takto zapsaného identifikátoru.</p>
+
+<p>Příklady: <code>`Průměrný zisk za 5 let`</code>, <code>"Reader's digest"</code>, <code>`UPDATE`</code>.</p>
+
+<h3>Identifikátory obsahující nezapsatelné znaky</h3>
+
+<p>Součástí identifikátoru může být i znak, který nelze do příkazu přímo napsat, protože na klávesnici chybí. Pro jeho zápis lze použít Unicode escape sekvenci, v níž se nezapsatelný znak nahradí svým kódem v Unicode. Před identifikátorem je vždy U&amp;, Unicode escape sekvence začíná úvodním Unicode Escape znakem a obsahuje 4 hexadecimální číslice.</p>
+
+<p>Příklady: <code>U&amp;`poci\0105g`</code>, <code>U&amp;`po*0142owa`UESCAPE'*'</code> (totéž jako <code>poci&#x105;g</code>, <code>po&#x142;owa</code>).</p>
+
+<h2>Vlastností identifikátorů</h2>
+
+<p>Identifikátory, bez ohledu na to, kterým způsobem jsou zapsány, mohou obsahovat pouze znaky patřící do <a href="../xml/html/syscharset.html">systémové znakové sady</a> databáze.</p>
+
+<p>Počet signifikantních znaků v&nbsp;identifikátorech je 31, proto identifikátory, které se liší až za 31. znakem, budou považovány za stejné. V&nbsp;identifikátorech se nerozlišuje mezi velkými a malými písmeny.</p>
+
+<p>Standardní identifikátory se musí lišit od tzv. vyhrazených slov, což je skupina identifikátorů s&nbsp;pevně daným neměnným významem. Vyhrazená slova jsou:</p>
+
+<p>"<code>ADD</code>", "<code>AFTER</code>", "<code>ALL</code>", "<code>ALTER</code>", "<code>AND</code>", "<code>ANY</code>", "<code>AS</code>", "<code>ASC</code>", "<code>AUTHOR</code>", "<code>AUTOR</code>", "<code>AVG</code>", "<code>BEFORE</code>", "<code>BEGIN</code>", "<code>BETWEEN</code>", "<code>BIGINT</code>", "<code>BINARY</code>", "<code>BIPTR</code>", "<code>BIT</code>", "<code>BLOB</code>", "<code>BOOLEAN</code>", "<code>BY</code>", "<code>CALL</code>", "<code>CASCADE</code>", "<code>CASE</code>", "<code>CAST</code>", "<code>CHAR</code>", "<code>CHARACTER</code>", "<code>CHECK</code>", "<code>CLOB</code>", "<code>CLOSE</code>", "<code>COALESCE</code>", "<code>COLLATE</code>", "<code>COMMIT</code>", "<code>CONCAT</code>", "<code>CONDITION</code>", "<code>CONSTANT</code>", "<code>CONSTRAINT</code>", "<code>CONTINUE</code>", "<code>CORRESPONDING</code>", "<code>COUNT</code>", "<code>CREATE</code>", "<code>CROSS</code>", "<code>CURRENT</code>", "<code>CURSOR</code>", "<code>DATE</code>", "<code>DATIM</code>", "<code>DEC</code>", "<code>DECIMAL</code>", "<code>DECLARE</code>", "<code>DEFAULT</code>", "<code>DELETE</code>", "<code>DESC</code>", "<code>DISTINCT</code>", "<code>DIV</code>", "<code>DO</code>", "<code>DOUBLE</code>", "<code>DROP</code>", "<code>ELSE</code>", "<code>ELSEIF</code>", "<code>END</code>", "<code>ESCAPE</code>", "<code>EXCEPT</code>", "<code>EXISTS</code>", "<code>EXIT</code>", "<code>EXTERNAL</code>", "<code>FETCH</code>", "<code>FLOAT</code>", "<code>FOR</code>", "<code>FOREIGN</code>", "<code>FROM</code>", "<code>FULL</code>", "<code>FUNCTION</code>", "<code>GRANT</code>", "<code>GROUP</code>", "<code>HANDLER</code>", "<code>HAVING</code>", "<code>HISTORY</code>", "<code>IF</code>", "<code>IN</code>", "<code>INDEX</code>", "<code>INNER</code>", "<code>INOUT</code>", "<code>INSERT</code>", "<code>INT</code>", "<code>INTEGER</code>", "<code>INTERSECT</code>", "<code>INTO</code>", "<code>IS</code>", "<code>JOIN</code>", "<code>KEY</code>", "<code>LARGE</code>", "<code>LEAVE</code>", "<code>LEFT</code>", "<code>LIKE</code>", "<code>LONG</code>", "<code>LOOP</code>", "<code>MAX</code>", "<code>MIN</code>", "<code>MOD</code>", "<code>NATIONAL</code>", "<code>NATURAL</code>", "<code>NCHAR</code>", "<code>NOT</code>", "<code>NULL</code>", "<code>NULLIF</code>", "<code>NUMERIC</code>", "<code>OBJECT</code>", "<code>OF</code>", "<code>ON</code>", "<code>OPEN</code>", "<code>OR</code>", "<code>ORDER</code>", "<code>OTHERS</code>", "<code>OUT</code>", "<code>OUTER</code>", "<code>POINTER</code>", "<code>PRECISION</code>", "<code>PRIMARY</code>", "<code>PROCEDURE</code>", "<code>PUBLIC</code>", "<code>REAL</code>", "<code>REDO</code>", "<code>REFERENCES</code>", "<code>REFERENCING</code>", "<code>RELEASE</code>", "<code>REPEAT</code>", "<code>RESIGNAL</code>", "<code>RESTRICT</code>", "<code>RETURN</code>", "<code>RETURNS</code>", "<code>REVOKE</code>", "<code>RIGHT</code>", "<code>ROLLBACK</code>", "<code>SAVEPOINT</code>", "<code>SELECT</code>", "<code>SET</code>", "<code>SIGNAL</code>", "<code>SIGNATURE</code>", "<code>SMALLINT</code>", "<code>SOME</code>", "<code>SQLEXCEPTION</code>", "<code>SQLSTATE</code>", "<code>SQLWARNING</code>", "<code>START</code>", "<code>SUM</code>", "<code>TABLE</code>", "<code>THEN</code>", "<code>TIME</code>", "<code>TIMESTAMP</code>", "<code>TO</code>", "<code>TRIGGER</code>", "<code>TUPLE</code>", "<code>UNDO</code>", "<code>UNION</code>", "<code>UNIQUE</code>", "<code>UNTIL</code>", "<code>UPDATABLE</code>", "<code>UPDATE</code>", "<code>USER</code>", "<code>USING</code>", "<code>VALUES</code>", "<code>VARBINARY</code>", "<code>VARCHAR</code>", "<code>VARYING</code>", "<code>VIEW</code>", "<code>WHEN</code>", "<code>WHERE</code>", "<code>WHILE</code>", "<code>WITH</code>".</p>
+
+<p>Řada dalších slov má v&nbsp;SQL předem daný význam, nejsou však vyhrazena, a tudíž je lze volně používat ve funkci identifikátorů.</p>
+
+
+<p><b>Rozšíření proti normě</b>
+
+<ul>
+	<li>Identifikátory, které obsahují nealfanumerické znaky nebo které jsou shodné s&nbsp;některým vyhrazeným slovem, lze uzavřít do obrácených apostrofů. Norma SQL používá pouze uvozovky.</li>
+
+<li>Počet signifikantních znaků je 31, norma předepisuje minimum 18.</li>
+</ul>
+
+
+<p><b>Odlišnosti od normy</b>
+
+<ul><li>Ve všech identifikátorech se ignoruje rozdíl mezi velkými a malými písmeny. Podle normy se má ignorovat pouze ve standardně zapsaných identifikátorech.</li></ul>
+
+
+<table class="navigace" border="0" width="100%"  bgcolor="#FFFFBF">
+		  <tr>
+					 <td width="20" align="center">&nbsp;</td>
+					 <td width="25%">&nbsp;</td>
+					 <td width="25%"
+align="right"><img class="floatno" src="../images/up.gif" width="13"
+height="15" alt="Nahoru" title="O jednu úroveň výš" border="0"
+align="middle"></td><td width="25%"><a href="HE_SQL2_ELEMENTY.htm">Lexikální elementy</a></td>
+<td width="25%" align="right"><a
+href="HE_SQL2_CISLA.htm">Čísla</a></td><td width="20"
+align="center"><img class="floatno" src="../images/next.gif" width="15"
+height="13" alt="&shy;&gt;" title="Následující téma" border="0"></td>
+</tr></table>
+
+</body>
+</html>

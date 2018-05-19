@@ -1,0 +1,911 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+
+
+
+<meta name="description" content="Už jste znuděni věčným prohlížením obrázků v programech jako IrfanView či jiných? Pokud ano, tak co takhle zkusit vytvořit svůj vlastní v PHP." lang="cs">
+<meta name="description" content="Už jste znuděni věčným prohlížením obrázků v programech jako IrfanView či jiných? Pokud ano, tak co takhle zkusit vytvořit svůj vlastní v PHP." lang="en">
+<meta http-equiv="description" content="Už jste znuděni věčným prohlížením obrázků v programech jako IrfanView či jiných? Pokud ano, tak co takhle zkusit vytvořit svůj vlastní v PHP.">
+<meta http-equiv="content-language" content="cs">
+<meta http-equiv="content-type" content="text/html; charset=windows-1250"><title>Prohlížeč obrázků aneb Galerie tak trochu jinak -- PC Svět</title>
+
+<link rel="stylesheet" href="galerie_soubory/www.css">
+<script language="javascript" type="text/javascript">
+<!--
+function getElement(e)
+{
+  if(document.all) return document.all[e];
+  else return document.getElementById(e);
+}
+
+peson = new Image(305,13);
+peson.src = "/images/1-5on.gif";
+pesoff = new Image(305,13);
+pesoff.src = "/images/1-5.gif";
+
+hledejon = new Image(20,11);
+hledejon.src = "/images/5-4on.gif";
+hledejoff = new Image(20,11);
+hledejoff.src = "/images/5-4.gif";
+
+topon = new Image(20,11);
+topon.src = "/images/7-pat-top-on.gif";
+topoff = new Image(20,11);
+topoff.src = "/images/7-pat-top-off.gif";
+
+var mnu = new Array();
+
+mnu[1] = 'komunikace:<img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/komunikace/mobily/" class="menu2">mobily</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/komunikace/site" class="menu2">sítě</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/komunikace/pripojeni" class="menu2">připojení</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11">';
+mnu[2] = 'internet:<img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/internet/webhosting/" class="menu2">webhosting</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/internet/webdesign" class="menu2">webdesign</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/internet/weby" class="menu2">weby</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11">';
+mnu[3] = 'programování:<img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/c/" class="menu2">C++</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/delphi/" class="menu2">Delphi</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/vbasic/" class="menu2">V.Basic</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/assembler/" class="menu2">Asm</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/pascal/" class="menu2">Pascal</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/java/" class="menu2">Java</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/sql/" class="menu2">SQL</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/wsh/" class="menu2">WSH</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11">';
+mnu[4] = 'web-programování:<img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/perl/" class="menu2">Perl</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/php/" class="menu2">PHP</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/asp/" class="menu2">ASP</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/javascript/" class="menu2">JavaScript</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/java/" class="menu2">Java</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/html/" class="menu2">HTML</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/sql/" class="menu2">SQL</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11">';
+mnu[5] = 'hw:<img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/hardware/motherboard/" class="menu2">desky</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/hardware/procesory/" class="menu2">procesory</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/hardware/grafika/" class="menu2">grafika</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/hardware/zvuk/" class="menu2">zvuk</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/hardware/periferie/" class="menu2">periferie</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/hardware/monitory/" class="menu2">monitory</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/hardware/mechaniky/" class="menu2">média</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/hardware/prislusenstvi/" class="menu2">přísluš.</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/hardware/testy/" class="menu2">testy</a>';
+mnu[6] = 'software:<img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/windows/" class="menu2">Windows</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/linux/" class="menu2">Linux</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/hry/" class="menu2">hry a zábava</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/software/recenze/" class="menu2">recenze</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/office/" class="menu2">MS Office</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11">';
+mnu[7] = 'bezpečnost:<img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/bezpecnost/viry/" class="menu2">Viry</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11">';
+mnu[8] = 'magazín:<img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/literatura/" class="menu2">literatura</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/magazin/akce/" class="menu2">akce</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/magazin/novinky/" class="menu2">novinky</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/magazin/tisk/" class="menu2">tiskové zprávy</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11">';
+
+function pmnu(mnu_id)
+{
+	 getElement("mnux").innerHTML = mnu[mnu_id];
+}
+// -->
+</script>
+
+<style type="text/css">
+<!--
+.mline { font-family: Tahoma, Arial, Verdana; font-size: 8pt; font-weight: bold; background-color: #444444; color: #FFFFFF }
+.mitem { cursor: hand }
+
+.mtable { font-family: Tahoma, Arial, Verdana; font-size: 8pt; border: 1px solid #000000; background-color: #EEEEEE; visibility: hidden; position: absolute }
+.mtitem { cursor: hand; background-color: #EEEEEE; color: #000000 }
+
+.mfirma { color: #DDDDDD; font-weight: none }
+.mfirma a { color: #DDDDDD; text-decoration: none }
+.mfirma a:active { color: #DDDDDD; text-decoration: none }
+.mfirma a:visited { color: #DDDDDD; text-decoration: none }
+.mfirma a:hover { color: #FFFFFF; text-decoration: underline }
+-->
+</style></head><body>
+
+
+<script language="JavaScript" type="text/javascript">
+<!--
+var intg;
+var tleft = 0;
+var PocetMenu = 0;
+var mLeft = new Array();
+
+function hidemenus(exc)
+{
+ clearInterval(intg);
+ intg = null;
+ for (id=1; id<=PocetMenu; id++){
+  document.all("mnui"+id).style.visibility = "hidden";
+  document.all("i"+id).style.color = "#FFFFFF";
+  document.all("i"+id).style.backgroundColor = "#444444";
+ }
+}
+
+function outobject()
+{
+ intg = setInterval("hidemenus(20)",400);
+}
+
+function onheader(hID)
+{
+ hidemenus(hID);
+ document.all("mnui"+hID).style.visibility = "visible";
+ document.all("i"+hID).style.color = "#000000";
+ document.all("i"+hID).style.backgroundColor = "#EEEEEE";	
+}
+
+function onobject()
+{
+ clearInterval(intg);
+ intg = null;
+}
+
+function onitem(obj)
+{
+ obj.style.color = "EEEEEE";
+ obj.style.backgroundColor = "111111";
+}
+
+function outitem(obj)
+{
+ obj.style.color = "000000";
+ obj.style.backgroundColor = "EEEEEE";
+}
+
+function setleft()
+{
+ for (i=1;i<=PocetMenu;i++) {
+  document.all("mnui"+i).style.left = mLeft[i];
+ }
+}
+
+function mAddHeader(ID,nadpis,leftpos) {
+ document.write('<td id="i'+ID+'" onmouseover="onheader('+ID+');" onmouseout="outobject();" class="mitem">&nbsp; '+nadpis+' &nbsp;</td>');
+ mLeft[ID] = leftpos;
+ if (PocetMenu < ID) PocetMenu = ID;
+}
+
+function mBeginTable(ID) {
+ document.write('<table style="z-index: 100;" width="120" id="mnui'+ID+'" border="0" cellspacing="1" cellpadding="2" class="mtable" onmouseover="onobject();" onmousemove="onobject();" onmouseout="outobject();" class="mtable">');
+}
+
+function mEndTable() {
+ document.write('</table>');
+}
+
+function mAddItem(nadpis,URL,Popis) {
+ document.write('<tr><td class="mtitem" onmouseover="onitem(this);" onmouseout="outitem(this);" onclick="window.navigate(\''+URL+'\');" title="'+Popis+'">'+nadpis+'</td></tr>');
+}
+
+if (window.clientInformation.userAgent.indexOf("MSIE") > 0 ||
+    window.clientInformation.userAgent.indexOf("pera/7.") > 0
+	)
+{
+	
+ document.write('<div align="center" style="z-index: 101; border-bottom: 1px solid white"><center><table id="ptable" border="0" cellspacing="2" cellpadding="0" class="mline" width="100%"><tr><td width="20">&nbsp;</td><td><table class="mline" cellspacing="0" cellpadding="0" border="0"><tr>');
+ mAddHeader(1,"Provozované servery",26);
+ mAddHeader(2,"DOMÉNY",156);
+ mAddHeader(3,"WEBHOSTING",257);
+ mAddHeader(4,"PŘIPOJENÍ",352);
+ mAddHeader(5,"SERVERHOSTING",452);
+ document.write('</tr></table></td><td width="120" class="mfirma"><a href="http://www.forpsi.com/">FORPSI</a></td><td width="20">&nbsp;</td></tr></table></center></div>');
+
+ mBeginTable(1);
+ mAddItem('Móda.cz','http://www.moda.cz/','Server o módě, stylu, zdraví a volném čase');
+ mAddItem('CzechWeb','http://www.czechweb.cz/','Žebříček registrátorů českých a slovenských domén, denně nové statistiky');
+ mAddItem('PC Svět','http://www.pcsvet.cz/','Počítače, programování, komunikace, Internet');
+ mAddItem('Právník.cz','http://www.pravnik.cz/','Internetový právník pro každého - úplná znění, články, poradna');
+ mAddItem('Počítadlo.cz','http://www.pocitadlo.cz/','Služba pro počítání přístupů na vaše stránky včetně podrobných statistik');
+ mAddItem('iReklama.cz','http://www.ireklama.cz/','Výměný reklamní systém pro vaše stránky');
+ mEndTable();
+
+ mBeginTable(2);
+ mAddItem('FORPSI.com - registrace domén','http://www.forpsi.com/domain/','Nejlevnější registrace domén'); 
+ mAddItem('Domény .cz','http://www.forpsi.com/domain/','Registrace domén již za 549,-Kč ročně');
+ mAddItem('Domény .com','http://www.forpsi.com/domain/','Registrace domén již za 219,-Kč ročně');
+ mEndTable();
+
+ mBeginTable(3);
+ mAddItem('FORPSI.com - homepage','http://www.forpsi.com/','FORPSI.com - homepage'); 
+ mAddItem('FORPSI.com - WEBHOSTING','http://www.forpsi.com/webhosting/','FORPSI.com - nejširší nabídka webhostingu'); 
+ mAddItem('PIDIhosting','http://www.forpsi.com/webhosting/pidi.php','Hosting pro každého'); 
+ mAddItem('PIDIhosting + mail','http://www.forpsi.com/webhosting/pidi.php','Hosting pro každého včetně mailu'); 
+ mAddItem('NORMALhosting','http://www.forpsi.com/webhosting/normal.php','Standardní hosting za rozumnou cenu');
+ mAddItem('EXCLUSIVEhosting','http://www.forpsi.com/webhosting/exclusive.php','To nejlepší pro ty nejlepší');
+ mAddItem('EMAILhosting','http://www.forpsi.com/webhosting/email.php','Hosting vašich mailů'); 
+ mEndTable();
+	
+ mBeginTable(4);
+ mAddItem('FORPSI - připojení k internetu','http://www.forpsi.com/internet/','Kompletní nabídka bezdrátového či pevného připojení k Internetu'); 
+ mAddItem('ADSL připojení','http://www.forpsi.com/internet/?page=adsl_cr_price','Připojení k Internetu telefonní linkou pomocí technologie ADSL'); 
+ mAddItem('Wi-Fi Lite','http://www.forpsi.com/internet/?page=wifi_lite_price','Nejjednodušší bezdrátové připojení technologií Wi-Fi'); 
+ mAddItem('Wi-Fi','http://www.forpsi.com/internet/?page=wifi_price','Profesionální připojení technologií Wi-Fi'); 
+ mEndTable();
+ 
+ mBeginTable(5);
+ mAddItem('FORPSI - serverhosting','http://www.forpsi.com/server/dedicated.php','SERVERHOSTING a SERVERHOUSING'); 
+ mAddItem('FORPSI - DEDICATED','http://www.forpsi.com/server/dedicated.php','Nabídka pronájmu serverů s kompletní nabídkou služeb'); 
+ mAddItem('FORPSI - Private','http://www.forpsi.com/server/private.php','Nabídka housingu vašich serverů s kompletní nabídkou služeb'); 
+ mEndTable();
+
+ setleft();
+}
+// -->
+</script>
+
+
+<table align="center" border="0" cellpadding="0" cellspacing="0" width="780">
+<tbody><tr><td width="767">
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tbody><tr>
+<td height="158" width="305">
+
+<table border="0" cellpadding="0" cellspacing="0">
+<tbody><tr><td colspan="3" height="14" width="305"><img src="galerie_soubory/1-1.gif" alt=""></td></tr>
+<tr><td height="11" width="253"><img src="galerie_soubory/1-2.gif" alt=""></td><td height="11" width="27"><a href="http://www.forpsi.com/" target="_top" onmouseover="pesoff.src=peson.src; return true" onmouseout="pesoff.src='/images/1-5.gif'; return true"><img src="galerie_soubory/1-3.gif" alt="" border="0"></a></td><td height="11" width="25"><img src="galerie_soubory/1-4.gif" alt=""></td></tr>
+<tr><td colspan="3" height="13" width="305"><img name="pesoff" src="galerie_soubory/1-5.gif" alt=""></td></tr>
+<tr><td colspan="3" height="120" width="305"><a href="http://www.pcsvet.cz/"><img src="galerie_soubory/1-6.gif" alt="" border="0"></a></td></tr>
+</tbody></table>
+
+</td>
+<td width="90">
+
+<table border="0" cellpadding="0" cellspacing="0" width="90">
+<tbody><tr><td background="galerie_soubory/2-1.gif" height="13" width="1"></td></tr>
+<tr><td bgcolor="white" height="145"><iframe src="galerie_soubory/2-2.htm" name="menu1" marginwidth="0" marginheight="0" align="middle" frameborder="0" height="100%" scrolling="auto" width="100%"></iframe></td></tr>
+</tbody></table>
+
+</td>
+<td bgcolor="white" valign="top" width="10">
+<img src="galerie_soubory/3.gif" alt="">
+</td>
+<td width="400">
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tbody><tr><td background="galerie_soubory/4-1.gif" height="8"></td></tr>
+<tr><td height="150"><iframe src="galerie_soubory/topinfo.htm" name="4-2" marginwidth="0" marginheight="0" align="middle" frameborder="0" height="100%" scrolling="no" width="100%"></iframe></td></tr>
+</tbody></table>
+
+</td>
+</tr>
+<tr>
+<td colspan="4" height="35" width="100%">
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tbody><tr>
+<td width="28"><img src="galerie_soubory/5-1.gif" alt=""></td>
+<td width="65">
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tbody><tr><td background="galerie_soubory/5-2.gif">&nbsp;</td></tr>
+<tr><td bgcolor="white"><form method="get" action="/misc/search.php" name="sfrm" style="margin-top: 0pt; margin-bottom: 0pt;"><input name="kde" value="1" type="hidden"><input size="10" name="co" value="hledat" onclick="value='';" style="border: 0px solid ; font-family: Verdana; font-size: 10px;" type="text"></form></td></tr>
+<tr><td><img src="galerie_soubory/5-3.gif" alt=""></td></tr>
+</tbody></table>
+</td>
+<td width="18"><a href="#" onclick="sfrm.submit();" onmouseover="hledejoff.src=hledejon.src; window.status='hledej';return true" onmouseout="hledejoff.src='/images/5-4.gif'; window.status='pcsvět';return true"><img name="hledejoff" src="galerie_soubory/5-4.gif" alt="go" border="0"></a></td>
+<td width="9"><img src="galerie_soubory/5-5.gif" alt=""></td>
+<td>
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tbody><tr><td align="left" background="galerie_soubory/5-7.gif" height="11"><img src="galerie_soubory/5-6.gif" alt=""></td></tr>
+<tr><td align="left" background="galerie_soubory/5-8.gif" height="24" valign="middle">
+<a href="http://www.pcsvet.cz/komunikace/" class="menu" onmouseover="pmnu(1);">komunikace</a>
+&nbsp;<a href="http://www.pcsvet.cz/internet/" class="menu" onmouseover="pmnu(2);">internet</a>
+&nbsp;<a href="http://www.pcsvet.cz/prog/" class="menu" onmouseover="pmnu(3);">prog.</a>
+&nbsp;<a href="http://www.pcsvet.cz/prog/" class="menu" onmouseover="pmnu(4);">web-prog.</a>
+&nbsp;<a href="http://www.pcsvet.cz/hardware/" class="menu" onmouseover="pmnu(5);">hardware</a>
+&nbsp;<a href="http://www.pcsvet.cz/software/" class="menu" onmouseover="pmnu(6);">software</a>
+&nbsp;<a href="http://www.pcsvet.cz/bezpecnost/" class="menu" onmouseover="pmnu(7);">bezpečnost</a>
+&nbsp;<a href="http://www.pcsvet.cz/magazin/" class="menu" onmouseover="pmnu(8);">magazín</a>
+&nbsp;<a href="http://www.pcsvet.cz/forum/" class="menu">disk.fórum</a>
+</td></tr>
+</tbody></table>
+</td></tr>
+</tbody></table>
+
+</td>
+</tr>
+<tr>
+<td colspan="4" background="galerie_soubory/6-2.gif" width="100%">
+
+<table border="0" cellpadding="0" cellspacing="0">
+<tbody><tr><td><img src="galerie_soubory/6-1.gif" alt=""></td>
+<td id="mnux" valign="top"></td>
+
+</tr>
+</tbody></table>
+
+</td>
+</tr>
+<tr>
+<td colspan="4" width="100%">
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tbody><tr><td background="galerie_soubory/7.gif" width="15">&nbsp;</td><td bgcolor="white" width="5">&nbsp;</td><td align="left" bgcolor="white" valign="top">
+<table><tbody><tr><td height="1"></td></tr></tbody></table>
+
+<p class="ndp">Prohlížeč obrázků aneb Galerie tak trochu jinak</p>
+<p>počet názorů: <b>28</b> &nbsp; poslední: 25.06.2006 10:33:29 &nbsp; <a href="http://www.pcsvet.cz/forum/forum.php?art=4482" class="autor">číst názory</a> &nbsp; <a href="http://www.pcsvet.cz/forum/forum-add.php?art=4482" class="autor">přidat názor</a> &nbsp; <a href="http://www.pcsvet.cz/art/article_print.php?id=4482">vytisknout</a></p>
+<p>Už jste znuděni věčným prohlížením obrázků v programech jako
+IrfanView či jiných? Pokud ano, tak co takhle zkusit vytvořit svůj
+vlastní v PHP.</p>
+<hr color="#777777" size="1">
+
+<ws-body>
+</ws-body><h3>Struktura</h3>
+<p>Vlastní program se skládá z více částí, z hlavního skriptu, který jsem pojmenoval <b>main.php</b>, volitelného souboru <b>index.php</b> a ze souboru <b>slide.php</b>. Dále program využívá externí css styl (<b>style.css</b>) a javascript (<b>scripts.js</b>). K chodu programu jsou nezbytné 4 textové soubory - <b>current.txt</b>, <b>last.txt</b>, <b>slozka.txt</b> a <b>slide.txt</b>.</p>
+<p>V názvu článku jsem podotknul, že tato galerie se od ostatních
+trochu liší. Rozdíly tkví v použití filtrů od Microsoftu, čili podpora
+výhradně v Internet Exploreru 5.5 a vyšším. Obslužné skripty těchto
+filtrů se nachází ve složce <b>filters</b>. V programu jsou použity obrázky, které našly místo v adresáři pojmenovaném <b>pictures</b>. A nakonec poslední a nejdůležitější věc je úložiště vašich obrázků, které chcete prohlížet, složka <b>images</b>.
+Chtěl bych poznamenat, že tento adresář slouží pouze k uložení dalších
+podadresářů, ve kterých se již nacházejí vlastní obrázky.</p>
+<p>Ukázkovou galerii můžete zhlédnout zde: <a href="http://kweb.wz.cz/browser" target="_blank"><b>http://kweb.wz.cz/browser</b></a></p>
+<h3>Podpora</h3>
+<p>Již jsem zmínil pár informací ohledně podpory filtrů, z toho plyne
+mé doporučení vlastnit nejlépe Internet Explorer 6. Co se týče
+programu, je vytvořen v rozlišení 1024x768px, ve Windows XP a s
+použitím 32b hloubky barev. Galerie je určena spíše pro menší obrázky
+(410x410px), nejlépe čtvercového tvaru (otáčení). U větších nastává
+nepěkné roztažení tabulky, která tvoří vlastní program.</p>
+<p>Pro zajištění správného chodu galerie je nutné mít zapnutou direktivu <b>register_globals</b> v <b>php.ini</b> a na druhou stranu vypnutou kontrolu <b>magic_quotes_gpc</b> a <b>magic_quotes_runtime</b>.</p>
+<p>Všechny javascripty, až na pár výjimek, jsou převzaty z internetu.</p>
+<h3>index.php</h3>
+<p>Soubor sloužící k načtení podadresářů složky images. Zahrnuje
+formulář, který obsahuje jejich nabídku, jímž si vyberete jeden z nich.</p>
+
+<p></p><pre class="kod">&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"&gt;
+&lt;html&gt;&lt;head&gt;
+&lt;meta http-equiv="Content-Type" content="text/html; charset=windows-1250"&gt;
+&lt;meta http-equiv="Content-Language" content="cs"&gt;
+&lt;meta name="Author" content="Dušan Kaloč"&gt;
+&lt;title&gt; (-: DUSS IMAGE BROWSER :-) &lt;/title&gt;
+&lt;style type="text/css" media="all"&gt;@import "style.css";&lt;/style&gt;
+&lt;script language="javascript" type="text/javascript"&gt;
+&lt;!--
+status = "Duss Image Browser :: created by Dušan Kaloč";
+//--&gt;
+&lt;/script&gt;
+&lt;/head&gt;
+&lt;body bgcolor="#FFFFFF"&gt;
+&lt;center&gt;
+&lt;table cellspacing="0" cellpadding="0" border="0" width="400"&gt;
+&lt;tr&gt;&lt;td align="center" valign="middle" width="400" height="400" id="indeximg"&gt;
+&lt;form method="post" action="main.php"&gt;
+&lt;?php
+error_reporting(0);
+function chyba() { //pomocná funkce
+ echo ("&lt;script language=\"javascript\"&gt;" .
+       "alert('Omlouváme se, ale nastala interní chyba.');" .
+       "&lt;/script&gt;");
+ exit();
+} 
+$slozka = "images"; //hlavní složka s Vašimi podadresáři
+$otevri = opendir($slozka); //otevření složky
+if (!$otevri) chyba();
+for ($i = 0; $nazev = readdir($otevri); $i++): //následné procházení
+ $kategorie[$i] = $nazev; //načtení do pole
+endfor;
+closedir($otevri);
+reset($kategorie);
+$pocet = count($kategorie);
+$default_folder = $kategorie[2]; //výchozí adresář (v pořadí až třetí, kvůli . a ..)
+echo ("&lt;input type=\"hidden\" name=\"default_folder\" value=\"$default_folder\"&gt;");
+echo ("&lt;select name=\"zdroj\" class=\"formfiltryindex\" onchange=\"this.form.submit();\"&gt;\n"); //vytvoření výběru adresářů
+echo ("&lt;option&gt;vyber složku:&lt;/option&gt;\n");
+for($i = 2; $i &lt; $pocet; $i++):
+ if ($kategorie[$i] != "Thumbs.db") //opatření proti tomuto nechtěnému souboru (WinXP)
+ echo ("&lt;option value=\"$kategorie[$i]\"&gt;$kategorie[$i]&lt;/option&gt;\n");
+endfor;
+echo ("&lt;/select&gt;");
+echo ("&nbsp;&lt;noscript&gt;&lt;input type=\"submit\" name=\"submit\" value=\"ok\" class=\"submitjeden\"&gt;&lt;/noscript&gt;");
+?&gt;
+&lt;/form&gt;
+&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td width="400" height="74"&gt;&nbsp;&lt;/td&gt;&lt;/tr&gt;
+&lt;/table&gt;
+&lt;/center&gt;
+&lt;p&gt;
+&lt;a href="http://validator.w3.org/check/referer"&gt;&lt;img border="0"
+src="pictures/valid-html401.png"
+alt="Valid HTML 4.01!" height="31" width="88"&gt;&lt;/a&gt;&nbsp;
+&lt;a href="http://jigsaw.w3.org/css-validator"&gt;&lt;img border="0"
+src="pictures/css.bmp"
+alt="Valid CSS!" height="31" width="88"&gt;&lt;/a&gt;
+&lt;/p&gt;
+&lt;/body&gt;&lt;/html&gt;
+</pre><p></p>
+<h3>main.php</h3>
+<p>Hlavní soubor, jenž přebírá Vámi zvolený adresář a prochází jím.
+Načte jeho obsah (tzn. obrázky) a zobrazí první z nich. Poté pomocí
+šipek doleva a doprava můžete zobrazit následující či předcházející
+prvek. Nezávisle vypisuje nabídku filtrů, které můžete aplikovat na
+aktuální obrázek, a zároveň se stará o výpis aktuální složky, obrázku a
+jeho informací (velikost, šířka, výška).</p>
+
+<p></p><pre class="kod">&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"&gt;
+&lt;html&gt;&lt;head&gt;
+&lt;meta http-equiv="Content-Type" content="text/html; charset=windows-1250"&gt;
+&lt;meta http-equiv="Content-Language" content="cs"&gt;
+&lt;meta http-equiv="Cache-control" content="no-cache"&gt;
+&lt;meta http-equiv="Pragma" content="no-cache"&gt;
+&lt;meta http-equiv="Expires" content="0"&gt;
+&lt;meta name="Author" content="Dušan Kaloč"&gt;
+&lt;title&gt; (-: DUSS IMAGE BROWSER :-) &lt;/title&gt;
+&lt;script type="text/javascript" language="Javascript" src="scripts.js"&gt;&lt;/script&gt;
+&lt;style type="text/css" media="all"&gt;@import "style.css";&lt;/style&gt;
+&lt;/head&gt;
+&lt;body bgcolor="#FFFFFF" onLoad="MM_preloadImages('pictures/arrow_prev_2.png','pictures/arrow_next_2.png')"&gt;
+&lt;center&gt;
+&lt;table width="733" border="1" cellspacing="0" cellpadding="0" class="maintable"&gt;
+&lt;tr&gt;
+&lt;td width="550" height="450" align="center" valign="middle" rowspan="2" class="showimagebunka"&gt;
+&lt;!-- obrázek ´´´´´´´´´´´´´´´´´´´´´´´´´´´´ --&gt;
+
+&lt;?php
+error_reporting(0);
+function chyba() { //pomocná funkce
+ echo ("&lt;script language=\"javascript\"&gt;" .
+       "alert('Omlouváme se, ale nastala interní chyba.');" .
+       "&lt;/script&gt;");
+ exit();
+} 
+if ($zdroj != "") {
+ if ($zdroj == "vyber složku:") $zdroj = $default_folder;
+ $resource = fopen("slozka.txt", "w"); if (!$resource) chyba(); fwrite ($resource, $zdroj);
+ fclose($resource); //pokud je vybrána složka, vloží se do souboru
+} else {
+ $resource = fopen("slozka.txt", "r"); if (!$resource) chyba(); $zdroj = fread($resource,
+ filesize("slozka.txt")); fclose($resource); //zjištění aktuálního adresáře
+}
+$folder = "images/" . $zdroj;
+$open_dir = opendir($folder);
+if (!$open_dir) chyba();
+for ($i = 0; $content = readdir($open_dir); $i++): //procházení adresářem
+ $images[$i] = $content; //pole $images obsahující obsah momentální složky
+ if ($i &gt; 1) $slide .= $folder . "/$images[$i]\", \""; //ukládání názvů obrázků do proměnné
+endfor;
+closedir ($open_dir);
+$resource = fopen("slide.txt", "w"); if (!$resource) { $err_slide = 1; } else { $err_slide = 0; } fwrite ($resource, $slide);
+ fclose($resource); //uložení proměnné $slide do souboru
+reset ($images);
+$last_image = count($images) - 1; //index posledního obrázku v podobě proměnné $last_image
+$celkovy_pocet = count($images) - 2; //celkový počet
+//pokud není vybrán žádný obrázek, přiřadíme proměnné $show_image první prvek ve složce
+if (empty($show_image)) { $show_image = $images[2]; $index = 2; }
+if (($jeform == 0) and ($vyber_filtru == false)) {
+ /* v případě, že uživatel nevybral či nepoužil určitý filtr, zapíšeme aktuální název obrázku
+    do souboru */
+ $current = fopen("current.txt", "w");
+ if (!$current) chyba();
+ $vloz = $show_image . "×ß×" . $index;
+ fwrite ($current, $vloz);
+ fclose($current);
+}
+if (($vyber_filtru != "") and ($vyber_filtru != "vyber filtr:")) {
+ /* pokud je zvolen filtr a zároveň se nerovná nechtěnému "vyber filtr:", vložíme jej do
+    souboru */
+ $last = fopen("last.txt", "w");
+ if (!$last) chyba();
+ $insert = $vyber_filtru;
+ fwrite ($last, $insert);
+ fclose($last);
+}
+?&gt;
+
+&lt;table width="550" border="0" cellspacing="0" cellpadding="0"&gt;
+&lt;tr&gt;&lt;td width="550" height="417" colspan="3" align="center" valign="middle"&gt;
+&lt;?php
+error_reporting(0);
+if (isset($include)) {
+ include ($include); //jestliže je vybrán filtr, vložíme potřebné skripty
+ if (!defined("INCLUDE")) chyba();
+} else {
+ if ($vyber_filtru == true) {
+  $current = fopen("current.txt", "r"); if (!$current) chyba(); $obsah = fread($current,
+  filesize("current.txt")); fclose($current); //zjištění posledního obrázku
+  $obsah_pole = split("×ß×", $obsah);
+  $show_image = $obsah_pole[0]; //název
+  $index = $obsah_pole[1]; //index
+  $info_image = getimagesize("$folder/$show_image"); //parametry
+  $velikost = filesize("$folder/$show_image"); //velikost
+  $velikost /= 1000;
+  $velikost = round($velikost);
+  $velikost .= " kb";
+  echo ("&lt;div id='info' align=\"left\"&gt;&nbsp;&lt;font
+  color=\"darkblue\"&gt;název:&lt;/font&gt;&lt;br&gt;&nbsp;&nbsp;$show_image&lt;br&gt;&nbsp;&lt;font
+  color=\"darkblue\"&gt;velikost:&lt;/font&gt;&lt;br&gt;&nbsp;&nbsp;$velikost&lt;br&gt;&nbsp;&lt;font
+  color=\"darkblue\"&gt;šířka:&lt;/font&gt;&lt;br&gt;&nbsp;&nbsp;$info_image[0] px&lt;br&gt;&nbsp;&lt;font
+  color=\"darkblue\"&gt;výška:&lt;/font&gt;&lt;br&gt;&nbsp;&nbsp;$info_image[1] px&lt;/div&gt;");
+  echo ("&lt;img src=\"" . $folder . "/" . $show_image . "\" " . $info_image[3] . " alt=\"\"
+  border=\"0\" onmousemove=\"popUp('info',true);javascript:window.status=''\"
+  onmouseout=\"popUp('info',false);javascript:window.status=''\"&gt;"); //následný výstup
+ } else { //pokud není vybrán či použit filtr 
+  $info_image = getimagesize("$folder/$show_image");
+  $velikost = filesize("$folder/$show_image");
+  $velikost /= 1000;
+  $velikost = round($velikost);
+  $velikost .= " kb";
+  echo ("&lt;div id='info' align=\"left\"&gt;&nbsp;&lt;font
+  color=\"darkblue\"&gt;název:&lt;/font&gt;&lt;br&gt;&nbsp;&nbsp;$show_image&lt;br&gt;&nbsp;&lt;font
+  color=\"darkblue\"&gt;velikost:&lt;/font&gt;&lt;br&gt;&nbsp;&nbsp;$velikost&lt;br&gt;&nbsp;&lt;font
+  color=\"darkblue\"&gt;šířka:&lt;/font&gt;&lt;br&gt;&nbsp;&nbsp;$info_image[0] px&lt;br&gt;&nbsp;&lt;font
+  color=\"darkblue\"&gt;výška:&lt;/font&gt;&lt;br&gt;&nbsp;&nbsp;$info_image[1] px&lt;/div&gt;");
+  echo ("&lt;img src=\"" . $folder . "/" . $show_image . "\" " . $info_image[3] . " alt=\"\"
+  border=\"0\" onmousemove=\"popUp('info',true);javascript:window.status=''\"
+  onmouseout=\"popUp('info',false);javascript:window.status=''\"&gt;");
+ }
+}
+?&gt;
+&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td width="240" height="33" align="center"&gt;
+&lt;?php
+if ($show_image == $images[2]) { //v případě, že je obrázek prvním prvkem adresáře
+ $index_p = $last_image; //předchozí index se rovná poslednímu
+ $show_image_p = $images[$last_image]; //předchozí název se také rovná poslednímu
+} else { //pokud není prvním
+ $index_p = ($index - 1);
+ $show_image_p = $images[$index_p];
+}
+if ($show_image == $images[$last_image]) { //v případě, že je obrázek posledním prvkem adresáře
+ $index_n = 2; //následující index se rovná prvnímu
+ $show_image_n = $images[2]; // následující název se také rovná prvnímu
+} else { //pokud není posledním
+ $index_n = ($index + 1);
+ $show_image_n = $images[$index_n];
+}
+?&gt;
+&lt;a href="main.php?show_image=&lt;?php echo ($show_image_p); ?&gt;&amp;
+index=&lt;?php echo ($index_p); ?&gt;" onMouseOut="MM_swapImgRestore()"
+ onMouseOver="MM_swapImage('previous','','pictures/arrow_prev_2.png',1)"&gt;
+&lt;img src="pictures/arrow_prev.png" border="0" alt="prev" width="70" height="33"
+ name="previous"&gt;&lt;/a&gt;
+&lt;/td&gt; &lt;td align="center"
+ valign="middle" width="70" height="33"&gt;&lt;div class="text"&gt;
+&lt;?php $kolikaty = $index - 1; echo ("$kolikaty z ($celkovy_pocet)"); ?&gt;
+&lt;/div&gt;&lt;/td&gt; &lt;td width="240" height="33" align="center"&gt;
+&lt;a href="main.php?show_image=&lt;?php echo ($show_image_n); ?&gt;
+&amp;index=&lt;?php echo ($index_n); ?&gt;" onMouseOut="MM_swapImgRestore()"
+ onMouseOver="MM_swapImage('next','','pictures/arrow_next_2.png',1)"&gt;
+&lt;img src="pictures/arrow_next.png" border="0" alt="next" width="70"
+ height="33" name="next"&gt;&lt;/a&gt;
+&lt;/td&gt;&lt;/tr&gt;
+&lt;/table&gt;
+
+&lt;!-- obrázek konec ´´´´´´´´´´´´´´´´´´´´´´ --&gt;
+&lt;/td&gt;
+
+&lt;td width="3" height="450" rowspan="2" class="maintable"&gt;
+&nbsp;
+&lt;/td&gt;
+
+&lt;td width="180" height="300" align="center" valign="top" class="filterbunka"&gt;
+&lt;!-- formulář filtry ´´´´´´´´´´´´´´´´´´´´´´´´´´´´ --&gt;
+
+&lt;form method="post" action="main.php"&gt;
+&lt;table border="0" cellspacing="0" cellpadding="0" class="text"&gt;
+&lt;tr&gt;&lt;td&gt;
+&lt;?php
+error_reporting(0);
+$slozka = "filters";
+$otevri = opendir($slozka);
+if (!$otevri) chyba();
+for ($i = 0; $nazev = readdir($otevri); $i++):
+ $filtr[$i] = $nazev; //zapsání typů filtrů do pole $filtr
+endfor;
+closedir($otevri);
+reset($filtr);
+$pocet_filtru = count($filtr);
+echo ("&lt;select name=\"vyber_filtru\" class=\"formfiltry\"&gt;\n"); //jejich následný výběr
+echo ("&lt;option&gt;vyber filtr:&lt;/option&gt;\n");
+for ($i = 2; $i &lt; $pocet_filtru; $i++):
+ echo ("&lt;option value=\"$filtr[$i]\"&gt;$filtr[$i]&lt;/option&gt;\n");
+endfor;
+echo ("&lt;/select&gt;");
+?&gt;
+&lt;/td&gt; &lt;td style="padding-left: 3px;"&gt;&lt;input type="submit" name="submit" value="ok" class="submitjeden"&gt;
+&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="2" align="center" valign="middle"
+ style="color: darkblue;"&gt;&lt;?php error_reporting(0); if (($vyber_filtru != "")
+ and ($vyber_filtru != "vyber filtr:")) { echo ($vyber_filtru); } else
+ { $oplast = fopen("last.txt", "r"); if (!$oplast) chyba(); $lastone = fread
+($oplast, filesize("last.txt")); fclose($oplast);
+ if ($lastone != "") { echo ($lastone); } else { echo ($filtr[2]);
+ } } //výpis názvu momentálního filtru ?&gt;&lt;/td&gt;&lt;/tr&gt;
+&lt;/table&gt;
+&lt;/form&gt;
+
+&lt;br&gt;
+
+&lt;?php
+error_reporting(0);
+if (($vyber_filtru != "") and ($vyber_filtru != "vyber filtr:")) {
+ //načtení obsahu obslužného skriptu aktuálního filtru
+ $jaky = "filters/" . $vyber_filtru . "/form.txt";
+ $otevri = fopen($jaky, "r");
+ if (!$otevri) chyba();
+ fpassthru($otevri);
+} else {
+ if ($lastone != "") { //pokud nebyl vybrán žádný filtr, načteme posledně použitý
+  $last = "filters/" . $lastone . "/form.txt";
+  $otevri = fopen($last, "r");
+  if (!$otevri) chyba();
+  fpassthru($otevri);
+ } else { //výchozí filtr
+  $default = "filters/" . $filtr[2] . "/form.txt";
+  $otevri = fopen($default, "r");
+  if (!$otevri) chyba();
+  fpassthru($otevri);
+ }
+}
+?&gt;
+
+&lt;!-- formulář filtry konec ´´´´´´´´´´´´´´´´´´´´´´ --&gt;
+&lt;/td&gt;
+&lt;/tr&gt;
+
+&lt;tr&gt;
+&lt;td width="180" height="150" align="center" valign="middle" class="filterbunka2"&gt;
+&lt;?php
+//kód vypisující nabídku adresářů (viz. index.php)
+echo ("-- aktuálně --&lt;br&gt;&lt;font color=\"darkblue\"&gt;$zdroj&lt;br&gt;$show_image&lt;/font&gt;");
+echo ("&lt;form method=\"post\" action=\"main.php\"&gt;");
+$slozka = "images";
+$otevri = opendir($slozka);
+if (!$otevri) chyba();
+for ($i = 0; $nazev = readdir($otevri); $i++):
+ $kategorie[$i] = $nazev;
+endfor;
+closedir($otevri);
+reset($kategorie);
+$pocet = count($kategorie);
+$default_folder = $kategorie[2];
+echo ("&lt;input type=\"hidden\" name=\"default_folder\" value=\"$default_folder\"&gt;");
+echo ("&lt;select name=\"zdroj\" class=\"formfiltryindex\" onchange=\"this.form.submit();\"&gt;\n");
+echo ("&lt;option&gt;vyber složku:&lt;/option&gt;\n");
+for($i = 2; $i &lt; $pocet; $i++):
+ if ($kategorie[$i] != "Thumbs.db") echo ("&lt;option
+ value=\"$kategorie[$i]\"&gt;$kategorie[$i]&lt;/option&gt;\n");
+endfor;
+echo ("&lt;/select&gt;");
+echo ("&nbsp;&lt;noscript&gt;&lt;input type=\"submit\" name=\"submit\" value=\"ok\" class=\"submitjeden\"&gt;&lt;/noscript&gt;");
+echo ("&lt;/form&gt;");
+?&gt;
+&lt;a href="javascript:okno('slide.php?err_slide=&lt;?php echo ($err_slide); ?&gt;');"&gt;· zobrazit jako slideshow ·&lt;/a&gt;
+&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/table&gt;
+&lt;/center&gt;
+&lt;/body&gt;&lt;/html&gt;
+</pre><p></p>
+<h3>slide.php</h3>
+<p>Pracuje s prvky aktuálního adresáře ve formě řetězcové proměnné,
+kterou načítá z externího souboru. Tyto obrázky poté zpracuje
+javascript, tzn. zobrazení jako slideshow (změna obrázků s určitou
+časovou prodlevou).</p>
+
+<p></p><pre class="kod">&lt;!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"&gt;
+&lt;html&gt;&lt;head&gt;
+&lt;meta http-equiv="Content-Type" content="text/html; charset=windows-1250"&gt;
+&lt;meta http-equiv="Content-Language" content="cs"&gt;
+&lt;meta name="Author" content="Dušan Kaloč"&gt;
+&lt;title&gt; (-: DUSS IMAGE BROWSER :-) &lt;/title&gt;
+&lt;style type="text/css" media="all"&gt;@import "style.css";&lt;/style&gt;
+&lt;/head&gt;
+&lt;body bgcolor="#FFFFFF"&gt;
+&lt;center&gt;
+&lt;table width="250" border="0" cellspacing="0" cellpadding="0" class="text"&gt;
+&lt;tr&gt;&lt;td align="center" width="250"&gt;
+&lt;form method="post" action="slide.php"&gt;
+&lt;select name="rychlost" class="slideselect" onchange="this.form.submit();"&gt;&lt;option&gt;rychlost změny:&lt;/option&gt;&lt;option
+ value="1"&gt;1&lt;/option&gt;&lt;option value="2"&gt;2&lt;/option&gt;&lt;
+option value="3"&gt;3&lt;/option&gt;&lt;option value="4"&gt;4&lt;/option&gt;&lt;option value="5"&gt;5&lt;/option&gt;
+&lt;option value="6"&gt;6&lt;/option&gt;&lt;option value="7"&gt;7&lt;/option&gt;&lt;option value="8"&gt;
+8&lt;/option&gt;&lt;/select&gt;
+&lt;noscript&gt;&nbsp;&lt;input type="submit"
+ name="submit" value="ok" class="submitjeden"&gt;&lt;
+/noscript&gt;&nbsp;&lt;input type="submit" value="zavřít"
+ onclick="javascript:window.close();"&gt;&lt;/form&gt;&lt;
+/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td width="250" height="40"&gt;&nbsp;&lt;
+/td&gt;&lt;/tr&gt;
+&lt;/table&gt;
+&lt;?php
+function chyba() { //pomocná funkce
+ echo ("&lt;script language=\"javascript\" type=\"text/javascript\"&gt;" .
+       "alert('Omlouváme se, ale nastala interní chyba.');" .
+       "&lt;/script&gt;");
+ exit();
+}
+?&gt;
+&lt;script language="javascript" type="text/javascript"&gt;
+&lt;!--
+&lt;?php
+error_reporting(0);
+//ověříme úspěšnost zapsání obrázků aktuální složky do souboru
+if ($err_slide == 1) chyba(); //$err_slide – viz. main.php
+$resource = fopen("slide.txt", "r"); if (!$resource) chyba();
+ $slide = fread ($resource, filesize("slide.txt")); fclose($resource); //načtení do řetězcové proměnné
+$prvni = split("\", \"", $slide); //zjištění prvního obrázku
+//úprava řetězce do tvaru "název1", "název2", "název3",…
+$delka = strlen($slide) - 3;
+$slide = substr($slide, 0, $delka);
+$slide = "\"$slide";
+echo ("src = [$slide]");
+?&gt;
+
+duration = &lt;?php if (($rychlost == "") xor ($rychlost == "rychlost změny:")) { echo (3); } else { echo ($rychlost); } ?&gt;
+
+ads=[]; ct=0;
+function switchAd() {
+var n=(ct+1)%src.length;
+if (ads[n] &amp;&amp; (ads[n].complete || ads[n].complete==null)) {
+document["slide_show"].src = ads[ct=n].src;
+}
+ads[n=(ct+1)%src.length] = new Image;
+ads[n].src = src[n];
+setTimeout("switchAd()",duration*1000);
+}
+onload = function(){
+if (document.images)
+switchAd();
+}
+//--&gt;
+&lt;/script&gt;
+&lt;img name="slide_show" src="&lt;?php echo ($prvni[0]); ?&gt;" border="0" alt=""&gt;
+&lt;/center&gt;
+&lt;/body&gt;&lt;/html&gt;
+</pre><p></p>
+<p>Zdrojové kódy si můžete stáhnout <a href="http://www.pcsvet.cz/cldata/4482/soubory.zip">zde</a>.</p>
+
+
+<br>
+<br>
+<hr color="#777777" size="1">
+
+<table width="100%"><tbody><tr><td valign="top">
+Autor: <b>Dušan Kaloč</b>, <a href="http://www.pcsvet.cz/art/author.php?id=6714">informace o autorovi</a><br>
+Rubrika: <b><a href="http://www.pcsvet.cz/php/">Programování - PHP</a></b><br>
+Čtenářů: <b>7668</b> &nbsp; &nbsp; Zobrazení: <b>8939</b><br>
+<br>
+
+
+</td><td align="center">
+
+
+Jak hodnotíte tento článek?<br><form method="post" action="article.php?id=4482"><input name="znamka" value="1" class="tlac" type="submit"> <input name="znamka" value="2" class="tlac" type="submit"> <input name="znamka" value="3" class="tlac" type="submit"> <input name="znamka" value="4" class="tlac" type="submit"> <input name="znamka" value="5" class="tlac" type="submit"><br>lepší &lt;--&gt;horší</form>
+
+</td></tr></tbody></table>
+Názory: počet: <b>28</b> &nbsp; poslední: 25.06.2006 10:33:29 &nbsp; <a href="http://www.pcsvet.cz/forum/forum.php?art=4482" class="autor">číst názory</a> &nbsp; <a href="http://www.pcsvet.cz/forum/forum-add.php?art=4482" class="autor">přidat názor</a> &nbsp; <a href="http://www.pcsvet.cz/art/article_print.php?id=4482">vytisknout</a><p></p>
+
+<a name="inquiry"></a>
+
+<hr color="white" size="1">
+
+<div align="center"><center><table class="ftable"><tbody><tr><td align="left"><b><i>Nadpis</i></b></td><td align="left"><b><i>Autor</i></b></td><td align="left"><b><i>Datum</i></b></td></tr><tr><td align="left"><b>error_reporting(0);</b></td><td align="left"><a href="mailto:info@creckx.com">Creckx</a></td><td align="left">29.12.2003 00:45:24</td></tr><tr><td align="left">&nbsp; Re: error_reporting(0);</td><td align="left">Vilda</td><td align="left">29.12.2003 00:56:17</td></tr><tr><td align="left">&nbsp; &nbsp; Re: error_reporting(0);</td><td align="left"><a href="mailto:info@creckx.com">Creckx</a></td><td align="left">29.12.2003 01:10:11</td></tr><tr><td align="left"><b>Nepřehlednost</b></td><td align="left"><a href="mailto:premm@post.cz">Dušan Kaloč</a></td><td align="left">29.12.2003 20:22:06</td></tr><tr><td align="left">&nbsp; Re: Nepřehlednost</td><td align="left"><a href="mailto:info@creckx.com">Creckx</a></td><td align="left">29.12.2003 21:21:54</td></tr><tr><td align="left">&nbsp; &nbsp; Re: Nepřehlednost</td><td align="left"><a href="mailto:premm@post.cz">Dušan Kaloč</a></td><td align="left">30.12.2003 19:56:58</td></tr><tr><td align="left">&nbsp; &nbsp; &nbsp; Re: Nepřehlednost</td><td align="left"><a href="mailto:info@creckx.com">Creckx</a></td><td align="left">30.12.2003 21:43:49</td></tr><tr><td align="left">&nbsp; &nbsp; &nbsp; &nbsp; Re: Nepřehlednost</td><td align="left"><a href="mailto:premm@post.cz">Dušan Kaloč</a></td><td align="left">30.12.2003 22:19:52</td></tr><tr><td align="left">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Re: Nepřehlednost</td><td align="left"><a href="mailto:info@creckx.com">Creckx</a></td><td align="left">30.12.2003 22:59:09</td></tr><tr><td align="left">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Re: Nepřehlednost</td><td align="left"><a href="mailto:premm@post.cz">Dušan Kaloč</a></td><td align="left">31.12.2003 19:14:56</td></tr><tr><td align="left">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Re: Nepřehlednost</td><td align="left"><a href="mailto:info@creckx.com">Creckx</a></td><td align="left">31.12.2003 20:39:09</td></tr><tr><td align="left">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Re: Nepřehlednost</td><td align="left">Martin Uhlík</td><td align="left">03.04.2004 10:22:11</td></tr><tr><td align="left"><b>Syntaxe if() ... endif;</b></td><td align="left"><a href="mailto:premm@post.cz">Dušan Kaloč</a></td><td align="left">30.12.2003 22:32:44</td></tr><tr><td align="left">&nbsp; Re: Syntaxe if() ... endif;</td><td align="left"><a href="mailto:info@creckx.com">Creckx</a></td><td align="left">30.12.2003 23:00:59</td></tr><tr><td align="left">&nbsp; &nbsp; Re: Syntaxe if() ... endif;</td><td align="left"><a href="mailto:premm@post.cz">Dušan Kaloč</a></td><td align="left">31.12.2003 19:01:26</td></tr><tr><td align="left">&nbsp; &nbsp; &nbsp; Re: Syntaxe if() ... endif;</td><td align="left"><a href="mailto:info@creckx.com">Creckx</a></td><td align="left">31.12.2003 20:41:50</td></tr><tr><td align="left"><b>Error_reporting() podruhé</b></td><td align="left"><a href="mailto:premm@post.cz">Dušan Kaloč</a></td><td align="left">31.12.2003 19:09:38</td></tr><tr><td align="left">&nbsp; Re: Error_reporting() podruhé</td><td align="left"><a href="mailto:info@creckx.com">Creckx</a></td><td align="left">31.12.2003 21:07:23</td></tr><tr><td align="left"><b>Spolupráce</b></td><td align="left"><a href="mailto:premm@post.cz">Dušan Kaloč</a></td><td align="left">31.12.2003 19:19:02</td></tr><tr><td align="left">&nbsp; Re: Spolupráce</td><td align="left"><a href="mailto:info@creckx.com">Creckx</a></td><td align="left">31.12.2003 20:39:39</td></tr><tr><td align="left">&nbsp; &nbsp; Re: Spolupráce</td><td align="left"><a href="mailto:premm@post.cz">Dušan Kaloč</a></td><td align="left">01.01.2004 12:27:50</td></tr><tr><td align="left">&nbsp; &nbsp; &nbsp; Re: Spolupráce</td><td align="left"><a href="mailto:info@creckx.com">Creckx</a></td><td align="left">01.01.2004 13:03:20</td></tr><tr><td align="left">&nbsp; &nbsp; &nbsp; &nbsp; Re: Spolupráce</td><td align="left"><a href="mailto:premm@post.cz">Dušan Kaloč</a></td><td align="left">01.01.2004 18:39:10</td></tr><tr><td align="left">&nbsp; &nbsp; &nbsp; &nbsp; Re: Spolupráce</td><td align="left"><a href="mailto:premm@post.cz">Dušan Kaloč</a></td><td align="left">01.01.2004 18:44:17</td></tr><tr><td align="left">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Re: Spolupráce</td><td align="left"><a href="mailto:admin@pcsvet.cz">Petr Šťastný</a></td><td align="left">28.01.2004 22:56:03</td></tr><tr><td align="left">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Re: Spolupráce</td><td align="left"><a href="mailto:premm@post.cz">Dušan Kaloč</a></td><td align="left">29.01.2004 20:44:38</td></tr><tr><td align="left">&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; Re: Spolupráce</td><td align="left">Gustav</td><td align="left">19.01.2005 14:38:07</td></tr><tr><td align="left"><b>SUPR</b></td><td align="left"><a href="mailto:t.kalanek@seznam.cz">tomas</a></td><td align="left">25.06.2006 10:33:29</td></tr></tbody></table></center></div>
+<form method="post" action="/forum/forum-add.php?art=4482&amp;reply=&amp;tema=">
+  <div align="center">
+    <table class="ftable" border="0" cellpadding="2" cellspacing="0">
+      <tbody><tr>
+        <td colspan="2" class="ftitle">Nový příspěvek</td>
+      </tr>
+      <tr>
+        <td class="fname" align="right"><b>Věc:</b></td>
+        <td class="fvalue" align="left"><input name="Nadpis" size="55" value="" type="text"></td>
+      </tr>
+      <tr>
+        <td class="fname" align="right"><b>Jméno:</b></td>
+        <td class="fvalue" align="left"><input name="Autor_Jmeno" size="30" value="" type="text"></td>
+      </tr>
+      <tr>
+        <td class="fname" align="right"><b>E-mail:</b></td>
+        <td class="fvalue" align="left"><input name="Autor_Email" size="20" value="" type="text"></td>
+      </tr>
+      <tr>
+        <td colspan="2" class="fvalue" align="left"><textarea rows="10" name="Obsah" cols="70"></textarea><br>
+		  - nepoužívejte HTML k formátování textu příspěvku<br>
+		  - nepoužívejte A HREF= pro odkazy, aktivní budou automaticky<br>
+		  - odřádkování provádějte klávesou ENTER, nikoliv tagem &lt;br&gt;</td>
+      </tr>
+      <tr>
+        <td colspan="2" class="fvalue" align="left"><input class="ftable" style="border: medium none ;" name="MailReply" value="1" type="checkbox">zasílat
+          odpovědi na můj e-mail      </td>
+</tr>
+      <tr>
+        <td colspan="2" align="center">
+          Opište text z obrázku: <input name="Kod" value="" class="f_name" size="8" type="text"> <img src="galerie_soubory/captcha.htm" height="50" width="200"></td>
+      </tr>
+      <tr>
+        <td colspan="2" align="center">
+          <input value="Přidat příspěvek" class="fsubmit" type="submit"></td>
+      </tr>
+    </tbody></table>
+  </div>
+  <input name="filled" value="1" type="hidden">
+</form>
+
+<br><br><br><br><br><br><br><br>
+<div align="center">
+<center>
+<table border="0">
+<tbody><tr><td>
+<iframe src="galerie_soubory/p-banner.htm" style="border: medium none ;" frameborder="0" height="60" scrolling="no" width="468">
+</iframe>
+<br><br>
+  <iframe name="rekl2" src="galerie_soubory/2.htm" marginwidth="1" marginheight="1" frameborder="0" height="62" scrolling="no" width="472"></iframe>
+</td>
+</tr>
+</tbody></table>
+</center>
+</div>
+<br><br><br>
+<center><span style="font-size: 9px;">(c) P.E.S. consulting, s.r.o.
+2000-2005. Provozovatel nezodpovídá za obsah a původ článků a
+diskuzních příspěvků, odpovědnost nesou jednotliví redaktoři a autoři.
+Informace o PC Světě <a href="http://www.pcsvet.cz/informace.php">naleznete zde</a></span></center> 
+</td>
+<td bgcolor="white" width="10"></td>
+<td align="right" bgcolor="white" valign="top" width="160">
+
+<br><center>
+<center><a href="http://www.forpsi.com/" target="_blank"><img src="galerie_soubory/125x125.gif" alt="FORPSI.com - webhosting, serverhosting, registrace domén, dedikované servery" border="0"></a></center>
+
+
+
+<table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td colspan="3" height="6" width="180"></td></tr><tr><td align="left" valign="top" width="15"><img src="galerie_soubory/7-tab-1.gif" alt=""></td><td align="left" background="galerie_soubory/7-tab-2.gif" valign="bottom" width="165"><font class="tab-nadpis">
+Anketa
+</font></td></tr></tbody></table>
+<table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td align="left" valign="top" width="5"><img src="galerie_soubory/7-tab-3.gif" alt=""></td><td align="left" width="175">
+<table class="tab" border="0" cellpadding="3" cellspacing="0"><tbody><tr><td bgcolor="white">
+</td></tr></tbody></table>
+</td></tr>
+</tbody></table>
+
+<table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td colspan="3" height="6" width="180"></td></tr><tr><td align="left" valign="top" width="15"><img src="galerie_soubory/7-tab-1.gif" alt=""></td><td align="left" background="galerie_soubory/7-tab-2.gif" valign="bottom" width="165"><font class="tab-nadpis">
+Novinky e-mailem
+</font></td></tr></tbody></table>
+<table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td align="left" valign="top" width="5"><img src="galerie_soubory/7-tab-3.gif" alt=""></td><td align="left" width="175">
+<table class="tab" border="0" cellpadding="3" cellspacing="0"><tbody><tr><td bgcolor="white">
+<form method="get" action="/user/register.php">
+<input name="email" size="16" value="vas@email.cz" onclick="this.value='';" type="text"><input value="ok" type="submit">
+Zasílání denního nebo týdenního přehledu nových článků
+</form>
+</td></tr></tbody></table>
+</td></tr>
+</tbody></table>
+
+<hr size="1">
+<iframe name="rekl2" src="galerie_soubory/3.htm" marginwidth="1" marginheight="1" align="middle" frameborder="0" height="127" scrolling="no" width="127"></iframe>
+<hr size="1">
+<br><center>
+<center><a href="http://www.forpsi.com/" target="_blank"><img src="galerie_soubory/125X125_evrop_dom_a_web.gif" alt="FORPSI.com - webhosting, serverhosting, registrace domén, dedikované servery" border="0"></a></center>
+
+
+<br><br>
+<a href="http://www.pravnik.cz/" target="_blank">Právník.cz - občanské, rodinné, pracovní, obchodní a jiné právo, smluvní vzory, úplná znění</a>
+
+<br><br><br><br><br>
+
+<center>
+</center>
+
+
+</center></center></td>
+
+
+</tr>
+</tbody></table>
+
+
+
+</td>
+</tr>
+
+</tbody></table>
+
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tbody><tr><td background="galerie_soubory/7.gif" width="15"></td><td bgcolor="white" width="150"></td><td width="68"><img src="galerie_soubory/7-pat-1.gif" alt=""></td><td background="galerie_soubory/7-pat-2.gif" bgcolor="white" valign="bottom" width="360">© 2000-2004 pcsvět.cz / <a href="mailto:pcsvet@pcsvet.cz">pcsvet@pcsvet.cz</a> / ISSN 1213-6042</td><td bgcolor="white"><a href="#top" onmouseover="topoff.src=topon.src; window.status='nahoru';return true;" onmouseout="topoff.src='/images/7-pat-top-off.gif'; window.status='pcsvět';return true;"><img name="topoff" src="galerie_soubory/7-pat-top-off.gif" alt="" border="0"></a></td></tr>
+</tbody></table>
+
+</td><td background="galerie_soubory/8-1.gif" valign="top" width="13"><img src="galerie_soubory/8-2.gif" alt=""></td></tr>
+</tbody></table>
+
+<!-- Počítadlo.cz  počítadlo:527  uživatel:414 -->
+<script language="JavaScript" type="text/javascript">
+<!--
+Tmp=Math.floor(1000000 * Math.random());
+//document.write("<scr" + "ipt src=\"http://cnt1.pocitadlo.cz/counter.php?poc=527&ref="+escape(top.document.referrer)+"&depth="+screen.colorDepth+"&width="+screen.width+"&height="+screen.height+"&tmp="+Tmp+"\" language=\"JavaScript\" type=\"text/javascript\"></scr" + "ipt>");
+// -->
+</script>
+<noscript>
+<img src="http://cnt1.pocitadlo.czx/counter.php?poc=527&amp;ns=1" width="1" height="1" alt="" border="0">
+</noscript>
+<!-- Počítadlo.cz konec -->
+
+<!-- NAVRCHOLU.cz -->
+<script language="JavaScript" type="text/javascript">
+<!--
+pxDepth = screen.pixelDepth;
+if (!(pxDepth > 0))
+	pxDepth = screen.colorDepth;
+if (!(pxDepth > 0))
+	pxDepth = 0; 
+document.write("<img src=\"http://hit.navrcholu.cz/hit?id=3548;n=1;screenx=" + screen.width + ";screeny=" + screen.height + ";cdepth=" + pxDepth + ";ref=" + escape(top.document.referrer) + "\" width=\"1\" height=\"1\" alt=\"\">");
+// -->
+</script><img src="galerie_soubory/hit" alt="" height="1" width="1">
+<noscript>
+<img src="http://hit.navrcholu.cz/hit?id=3548;n=1" width="1" height="1" alt="" border="0">
+</noscript>
+<!-- NAVRCHOLU.cz - konec -->
+
+<script src="galerie_soubory/urchin.js" type="text/javascript">
+</script>
+<script type="text/javascript">
+_uacct = "UA-1217921-1";
+urchinTracker();
+</script>
+
+<div style="position: absolute; left: 0px; top: 0px; z-index: 1000000000 ! important; visibility: hidden; opacity: 1;" id="linkalert-box"><img src="galerie_soubory/none-icon.png" id="linkalert-icon-1"></div></body></html>

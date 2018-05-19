@@ -1,0 +1,75 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" Content="text/html; charset=Windows-1250">
+<TITLE>Efektivita triggerů</TITLE>
+<link rel='stylesheet' style='text/css' href='../function.css'>
+</HEAD>
+
+<BODY BGCOLOR="#FFFFFF" TEXT="#000000"><table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr>
+	<td style="background-image: url(../images/bghead.jpg);
+		background-position: right;
+		background-repeat: no-repeat;">
+	<table width="100%" border="0" cellpadding="0" cellspacing="0"
+		style="background-image:none">
+	<tr>
+		<td style="background-image:none" height="46"
+			width="15%"><img src="../images/title-cz.gif"
+			width="255" height="33"
+			alt="602SQL-Úplná dokumentace"
+			title="602SQL - Úplná dokumentace"
+			border="0"></td>
+		<td width="33%" align="right"><a href="../xml/html/top.html"><img class="floatno"
+			src="../images/index.gif"
+			width="15" height="16"
+			alt="Index" title="Zpět na obsah"
+			border="0" vspace="2"></a> &nbsp;
+			 </td>
+	</tr>
+	</table>
+	</td>
+</tr>
+</table><table class="navigace" border="0" width="100%"  bgcolor="#FFFFBF"><tr> <td
+width="20" align="center"><img class="floatno" src="../images/prev.gif"
+width="15" height="13" alt="&lt;&shy;" title="Předcházející téma"
+border="0"></td><td width="25%"><a
+href="HE_SQL2_DROPTRIGGER.htm">Příkaz DROP TRIGGER</a></td> <td width="25%"
+align="right"><img class="floatno" src="../images/up.gif" width="13"
+height="15" alt="Nahoru" title="O jednu úroveň výš" border="0"
+align="middle"></td><td width="25%"><a href="HE_SQL2_TRIGGERY.htm">Triggery</a></td>
+<td width="25%" align="right">&nbsp;</td>
+<td width="20" align="center">&nbsp;</td>
+</tr></table>
+
+
+
+
+
+<H1><A NAME="he_sql2_eftrig"></A>Efektivita triggerů</H1>
+<P>Provedení akcí pomocí <A HREF="HE_SQL2_TRIGGERY.htm">triggeru</A> reagujícího na příkaz SQL je zpravidla efektivnější než explicitní volání stejných akcí klientem. Nicméně v&nbsp;efektivitě provádění triggerů existují rozdíly:
+
+<UL>
+	<LI>Nejefektivnější jsou triggery AFTER INSERT a BEFORE DELETE. Jejich provedení neznamená pro server prakticky žádnou dodatečnou zátěž.</LI>
+	<LI>Dosti efektivní jsou také triggery AFTER DELETE a AFTER UPDATE. Jejich provedení vyžaduje pouze vykopírování určitých řádků z&nbsp;databáze do transientních proměnných.</LI>
+	<LI>Triggery BEFORE INSERT a BEFORE UPDATE poněkud snižují rychlost provádění operací, protože nutí server, aby kvůli vytvoření správných transientních proměnných prováděl operaci INSERT resp. UPDATE méně efektivním způsobem.</LI>
+</UL>
+
+<P>V&nbsp;řadě situací nehraje roli, zda se použije BEFORE nebo AFTER trigger. Pak lze využít výše uvedených řádek k&nbsp;zefektivnění práce serveru.</P>
+
+
+
+<table class="navigace" border="0" width="100%"  bgcolor="#FFFFBF"><tr> <td
+width="20" align="center"><img class="floatno" src="../images/prev.gif"
+width="15" height="13" alt="&lt;&shy;" title="Předcházející téma"
+border="0"></td><td width="25%"><a
+href="HE_SQL2_DROPTRIGGER.htm">Příkaz DROP TRIGGER</a></td> <td width="25%"
+align="right"><img class="floatno" src="../images/up.gif" width="13"
+height="15" alt="Nahoru" title="O jednu úroveň výš" border="0"
+align="middle"></td><td width="25%"><a href="HE_SQL2_TRIGGERY.htm">Triggery</a></td>
+<td width="25%" align="right">&nbsp;</td>
+<td width="20" align="center">&nbsp;</td>
+</tr></table>
+
+</BODY>
+</HTML>

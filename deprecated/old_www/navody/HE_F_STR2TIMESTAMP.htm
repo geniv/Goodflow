@@ -1,0 +1,75 @@
+<!doctype html public "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=Windows-1250">
+<title>Funkce str2timestamp</title>
+<link rel='stylesheet' style='text/css' href='../function.css'>
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000">
+
+
+
+<h2 class=function>Str2timestamp</h2>
+<img src='../images/cpp.gif' width='44' height='16' border='0' alt='c/c++' align='middle' hspace='2'><img src='../images/pascal.gif' width='44' height='16' border='0' alt='pascal' align='middle' hspace='2'><img src='../images/sql.gif' width='44' height='16' border='0' alt='sql' align='middle' hspace='2'>
+
+
+<br><br>
+<div class='typ'>BOOL <b>str2timestamp</b>(const char * s, uns32 * ts);<br>
+function <b>str2timestamp</b>(s : PChar;  var ts : uns32) : Boolean;<br>
+FUNCTION <b>Str2timestamp</b>(IN s CHAR(n)) RETURNS TIMESTAMP;
+</div>
+
+
+<p><b>Parametry</b></p>
+
+<table border=1 cols=2 frame=box rules=all width=400>
+
+<tr valign="top">
+<td width=26%><i>s </i></td>
+<td width=74%>řetězec znaků obsahující zápis timestampu </td>
+</tr>
+
+<tr valign="top">
+<td width=26%><i>ts</i></td>
+<td width=74%>výstupní parametr: datum a čas (timestamp)</td>
+</tr>
+</table><br>
+
+<p><b>Od verze:</b></p>
+<p>6.0</p>
+
+<p><b>Popis </b></p>
+
+<p>Funkce <b><code>str2timestamp</code></b> převede zápis času v řetězci <i>s</i> na hodnotu typu Timestamp a vrátí ji. Prázdný řetězec se převede na hodnotu NONETIMESTAMP (NULL v SQL).</p>
+
+<p>Formát řetězce <i>s</i> musí být jeden z následujících:</p>
+
+<p><i>den.měsíc.rok hodina:minuta:sekunda</i></p>
+
+<p><i>den.měsíc.rok hodina:minuta</i></p>
+
+<p><i>den.měsíc hodina:minuta:sekunda</i></p>
+
+<p><i>den.měsíc hodina:minuta</i></p>
+
+<p>Není-li uveden rok, dosadí se rok aktuální.</p>
+
+<p>V jazyce SQL slouží stejnému účelu také obecná funkce <a href="HE_SQL2_CAST.htm">CAST</a>.</p>
+
+<p><b>Hodnota funkce</b></p>
+
+<p>V SQL funkce vrátí údaj o datu a čase (timestamp), pokud jeho zápis je (jediným) obsahem řetězce <i>s</i>, jinak vrací NULL. V jazyce C a v Pascalu funkce vrací TRUE pokud převod byl úspěšný.</p>
+
+<p><b>Viz</b></p>
+
+<ul class='viz'>
+ <li><a href="HE_F_TIMESTAMP2STR.htm">timestamp2str</a> </li>
+ <li><a href="HE_F_DATE2STR.htm">Date2str</a> </li>
+ <li><a href="HE_F_TIME2STR.htm">Time2str</a> </li>
+ <li><a href="HE_F_STR2DATE.htm">Str2date</a> </li>
+ <li><a href="HE_F_STR2TIME.htm">Str2time</a> </li>
+</ul>
+
+</body>
+</html>

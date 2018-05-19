@@ -1,0 +1,239 @@
+/* Zakladni layout */
+html, body {height: 100%; background-color: #768a80;}
+body {color: #333333; font-size: 12px; min-width: 701px; text-align: center; font-family: Verdana, lucida, sans-serif; background: #768a80 url("./grafika/prechod.jpg") repeat-x top; margin: 0; padding: 0;}
+#topdown {width: 701px; margin: 0 auto; text-align: left; background: white url("./grafika/topdown.gif") repeat-y; min-height: 100%; height: 100%; position: relative;}
+body>#topdown {height: auto;}
+#levy-stin {width: 14px; left: 0; height: 129px; position: absolute; background: url("./grafika/levy-stin.jpg") no-repeat;}
+#pravy-stin {width: 14px; right: -1px; height: 129px; position: absolute; background: url("./grafika/pravy-stin.jpg") no-repeat;}
+html>body #topdown #pravy-stin {right: 0;}
+#horni-lista {height: 13px; float: left; width: 672px; border-left: 1px solid #949E99; margin: 0 0 0 7px; background: white url("./grafika/horni-lista.gif") repeat-x;}
+#horni-lista-prava {height: 27px; width: 89px; right: 14px; top: 0; position: absolute; padding: 4px 5px 0 5px; background: url("./grafika/horni-lista-prava.gif") repeat-x;}
+html>body #topdown #horni-lista-prava {right: 15px;}
+#horni-lista-prechod {height: 27px; right: 114px; width: 14px; top: 0; position: absolute; background: url("./grafika/horni-lista-prechod.gif") no-repeat;}
+#logo a {display: block; float: left; height: 116px; width: 672px; border-left: 1px solid #949E99; margin: 0 0 0 7px; background: url("./grafika/logo.jpg") no-repeat;}
+html>body #topdown #horni-lista, html>body #topdown #logo a {margin: 0 15px 0 15px; border: 0; width: 671px;}
+#logo a span {display: none;}
+/*.pngnadpis {position: absolute; top: 25px; left: 130px; background: url("./grafika/beta.png") no-repeat; width: 400px; height: 100px;}*/
+#menu {height: 23px; line-height: 1.5; font-size: 13px; float: left; width: 456px; background: url("./grafika/menu.gif") repeat-x; margin-left: 7px; border-left: 1px solid #949E99;}
+html>body #topdown #horni-lista, html>body #topdown #logo a, html>body #topdown #menu {margin: 0 15px 0 15px; border: 0; width: 671px;}
+html>body #topdown #menu {width: 455px;}
+#menu ul {padding: 0; margin: 0; list-style-type: none;}
+#menu ul li {display: inline;}
+#menu ul li a {padding: 1px 5px; float: left; margin: 1px 0; text-decoration: none; background: url("./grafika/menu-hover.gif") 0 -1px; color: black; border-right: 1px solid #d7d8d8;}
+html>body #topdown #menu ul li a {padding: 1px 5px;}
+#menu ul li a span {font-weight: bold;}
+#menu ul li a:hover {background-position: 0px -24px;}
+#menu-right {height: 23px; width: 217px; float: right; border-right: 1px solid #949E99; margin-right: 7px; background: url("./grafika/menu-right.jpg") no-repeat;}
+html>body #topdown #menu-right {width: 216px; border: 0; margin-right: 15px; margin-top: -23px;}
+#menu-right .search {width: 105px; height: 16px; border: 0; background: none; font-weight: bold; position: absolute; right: 68px; top: 140px;}
+#menu-right .tlacitko {position: absolute; right: 41px; top: 131px;}
+#center {margin: 0 0 0 15px; font-size: 12px; width: 482px; float: left; line-height: 1.5;}
+html>body #topdown #center {margin: 0 0 0 30px;}
+#center-rozek {top: 152px; right: 173px; width: 34px; height: 34px; position: absolute; background: url("./grafika/center-top.jpg") no-repeat;}
+html>body #topdown #center-rozek {right: 174px;}
+h1 {margin: 8px 0 8px 5px; padding: 0; font-size: 16px;}
+#center p {text-indent: 15px; text-align: justify; margin: 5px 0 5px 0;}
+#center p:first-letter {font-weight: bold; font-size: 12px; color: #2b5f00;}
+#right {float: right; width: 160px; font-size: 11px; text-align: left; margin-right: 7px; border-right: 1px solid #949E99; background: url("./grafika/right.gif") repeat-y;}
+html>body #topdown #right {margin-right: 15px; width: 159px; border: 0;}
+#right h3 {margin: 6px 5px 6px 0; padding-right: 2px; font-weight: bold; font-size: 12px; border-bottom: 1px solid #949e99; text-align: right;}
+#right ul {list-style-type: none; padding: 0; margin: 17px 5px -12px 5px;}
+html>body #topdown #right ul {margin: 2px 5px 0 5px;}
+#right ul li {margin-top: -10px;}
+#right ul li.t10 {padding-top: 10px;}
+html>body #topdown #right ul li {margin: 0; line-height: 1.5;}
+#right ul li a {text-decoration: none; padding-left: 12px; display: block; background: url("./grafika/menu-puntik.gif") no-repeat 2px 5px;}
+#right ul li a:hover {background-position: 3px -72px;}
+#right ul li a span {float: right;}
+#right p {margin: 2px 5px 0 5px; padding: 0;}
+#right .konec {float: left; width: 159px; padding-bottom: 15px; background: url("./grafika/right-konec.jpg") bottom no-repeat;}
+#right #logo-r {float: right; width: 159px; height: 35px; margin-bottom: 6px; background: url("./grafika/right-logo.jpg") no-repeat;}
+form .nick, form .heslo {width: 95px; height: 20px; padding-left: 17px; border: 1px solid #949e99;}
+html>body #topdown form .nick, html>body #topdown form .heslo {width: 75px; height: 15px;}
+form .nick {background: url("./gr/user.gif") left no-repeat;}
+form .heslo {background: url("./gr/lock.gif") left no-repeat;}
+#bottom-no {height: 40px; clear: both; width: 100%;}
+#bottom {padding-top: 3px; font-size: 10px; width: 671px; height: 30px; overflow: hidden; font-weight: bold; position: absolute; bottom: 0; left: 15px; text-align: center; background: url("./grafika/bottom.jpg") no-repeat;}
+html>body #topdown #bottom {padding-top: 5px; height: 27px;}
+#bottom a {text-decoration: none;}
+
+/* Horni lista  */
+#horni-lista .kontakt a {background: url("./gr/kontakt..gif") no-repeat; right: 83px; top: 4px; position: absolute; width: 16px; height: 16px;}
+#horni-lista .napoveda a {background: url("./gr/napoveda..gif") no-repeat; right: 63px; top: 4px; position: absolute; width: 16px; height: 16px;}
+#horni-lista .sitemap a {background: url("./gr/sitemap..gif") no-repeat; right: 43px; top: 4px; position: absolute; width: 16px; height: 16px;}
+#horni-lista .rss a {background: url("./gr/rss2..gif") no-repeat; right: 24px; top: 5px; position: absolute; width: 16px; height: 16px;}
+#horni-lista .tisk a {background: url("./gr/tisk..gif") no-repeat; right: 5px; top: 4px; position: absolute; width: 16px; height: 16px;}
+#horni-lista .tisk a:hover, #horni-lista .rss a:hover, #horni-lista .sitemap a:hover, #horni-lista .napoveda a:hover, #horni-lista .kontakt a:hover {background-position: 0 -16px;}
+
+/* Not Warnings Validator */
+#topdown, #horni-lista {color: #333333;}
+
+/* Dulezite stylovani */
+img {border: 0;}
+h2 {font-size: 13px; margin: 8px 0 3px 0;}
+a, h2 {color: #669900;}
+#center h3 {font-size: 12px; margin: 8px 0 5px 0;}
+#center .left {float: left; width: 250px; margin-left: 10px;}
+#center .right {float: left;}
+#center ul {padding: 0; margin: 0 0 0 20px;}
+a:hover {color: black;}
+#center a:hover {background-color: #669900; color: white; text-decoration: none;}
+.cislo {font-family: Georgia; font-size: 10px; font-weight: normal; color: gray;}
+p.no {margin: 0; padding: 0;}
+form .nick, form .heslo, #center {background-color: white;}
+.mezera {height: 12px; width: 100%; float: left;}
+.cara {height: 1px; width: 425px; float: left; margin: 5px 0;}
+.h2pod {margin: -4px 0 0 10px;}
+#center form input, table, textarea, #right .tlacitko {border: 1px solid #949e99; overflow: auto;}
+#center form input {height: 21px; overflow: hidden;}
+html>body #topdown #center form input {height: 17px;}
+html>body #topdown #center form input.no {height: 13px;}
+html>body #topdown #center form input.file {height: 21px;}
+html>body #topdown #center form input.tlacitko {height: 21px;}
+#center form input.no {border: 0; margin-left: 0;}
+#center p input, #center p textarea {margin-left: 15px;}
+html>body #topdown p input, html>body #topdown p textarea {margin-left: 0;}
+td, th {padding: 0 2px}
+#center ul {list-style-image: url("./gr/ctverecek.gif");}
+#center ul.cisla {list-style-type: decimal; list-style-image: none;}
+#center .ram-book-text ul.cisla {margin-left: 25px;}
+#center ul.plus {list-style-image: url("./gr/plus.gif");}
+#center ul.minus {list-style-image: url("./gr/minus.gif");}
+.img60, .img60r {float: left; margin: 6px 6px 1px 0; padding: 5px 0 0 5px; width: 70px; height: 70px; background-image: url("./grafika/img60.jpg");}
+html>body #topdown .img60, html>body #topdown .img60r {width: 65px; height: 65px;}
+.img60r {float: right; margin: 6px -2px 1px 6px;}
+#right .img60r {background-image: url("./grafika/ram-img.jpg");}
+.cara {height: 1px; font-size: 1px; line-height: 1; width: 425px; float: left; margin: 5px 15px; background-image: url("./grafika/cara.jpg");}
+html>body #topdown #center .cara {margin: 5px 30px;}
+.ram-book-text .cara {height: 1px; font-size: 1px; line-height: 1; width: 340px;  float: left; margin: 5px 0; background-image: url("./grafika/cara-gb.jpg");}
+html>body #topdown #center .ram-book-text .cara {margin: 5px 0;}
+.smiles {vertical-align: middle;}
+code {border: 1px dotted #949e99; overflow: auto; background-color: rgb(217,255,198); display: block; _width: 100%; text-align: left; padding: 2px; white-space: nowrap ! important; }
+code.inline {display: inline; padding: 1px; overflow: auto;}
+#center .tlacitko, #right .tlacitko {background: url("./grafika/menu-hover.gif") 0 -1px; height: 21px;}
+#center .tlacitko:hover, #right .tlacitko:hover {background-position: 0px -24px; cursor: Pointer;}
+
+/* ramy */
+.ram-top, .ram-bottom {width: 468px; height: 13px; float: left;}
+.ram-top {background: url("./grafika/ram-top.gif") bottom no-repeat; margin: 10px 0 -1px 3px; position: relative;}
+html>body #topdown .ram-top {margin-bottom: 0;}
+.ram-bottom {background: url("./grafika/ram-bottom.gif") no-repeat; margin: 0 0 10px 3px;}
+.ram {margin: 0 0 0 3px; float: left; width: 468px; background: url("./grafika/ram-main.gif") repeat-y;}
+html>body #topdown .ram-top, html>body #topdown .ram-bottom, html>body #topdown .ram {margin-left: 6px;}
+.ram-center {padding: 0 10px 0 10px;}
+.ram-center strong {width: 448px;}
+.ram-top-main {position: absolute; height: 26px; top: -10px; right: 15px; background: url("./grafika/ram-top-main.gif") repeat-x;}
+.ram-top-mainl {position: absolute; height: 26px; top: -10px; left: 15px; background: url("./grafika/ram-top-main.gif") repeat-x;}
+.ram-bottom-main {position: absolute; height: 26px; bottom: -10px; right: 15px; background: url("./grafika/ram-bottom-main.gif") repeat-x;}
+.ram-top-left {height: 26px; float: left; width: 12px; background: url("./grafika/ram-top-left.gif") left no-repeat;}
+.ram-bottom-left {height: 26px; float: left; width: 12px; background: url("./grafika/ram-bottom-left.gif") left no-repeat;}
+.ram-top-right {height: 26px; float: left; width: 12px; background: url("./grafika/ram-top-right.gif") right no-repeat;}
+.ram-bottom-right {height: 26px; float: left; width: 12px; background: url("./grafika/ram-bottom-right.gif") right no-repeat;}
+.ram-top-text {float: left; margin-top: 5px; font-size: 11px;}
+.ram .img60 {float: left; margin: 6px 6px 6px 0; padding: 5px 0 0 5px; width: 70px; height: 70px; background-image: url("./grafika/ram-img.jpg");}
+html>body #topdown .ram .img60 {width: 65px; height: 65px;}
+.ram-paticka-text {margin: 0 5px 0 5px; font-size: 11px;}
+.ram-paticka-text span {font-style: italic; color: gray;}
+.ram a, #bottom a {text-decoration: none;}
+/* Doplnky pro navstevni knihu */
+.ram-leva {float: left; width: 85px; height: 85px}
+.ram-prava {float: right; width: 363px;}
+.img60-book {float: left; width: 80px; height: 80px; padding: 10px 0 0 10px; background-image: url("/css/grafika/img60-book.jpg");}
+html>body #topdown .img60-book {width: 70px; height: 70px;}
+.ram-book-text {background: #fafff4 url("/css/grafika/uvozovky-leve.gif") right bottom no-repeat; border: 1px solid #c5d0c2; margin: 0 5px 0 0px; padding: 0 5px; position: relative; overflow: hidden; width: 356px;}
+html>body #topdown .ram-book-text {width: 346px;}
+#center .ram-book-text p.pbook {/*text-indent: 25px;*/}
+.ram-uvozovky-leve {width: 25px; height: 20px; background: url("/css/grafika/uvozovky-leve.gif") no-repeat; left: -4px; top: 1px; position: absolute;}
+html>body #topdown .ram-uvozovky-leve {left: 0; top: 0;}
+.ram-info {font-size: 10px; height: 12px; font-style: italic; color: gray; margin: 2px 6px 0 0; position: relative;}
+.ram-info-t {height: 14px; margin: -5px 6px 5px 0; position: relative; font-weight: bold;}
+.ram-info-l {position: absolute; left: 0; top: 0;}
+.ram-info-r {position: absolute; right: 0; top: 0;}
+.ram-book-t {margin-top: -5px;}
+.obrram, .obrram2 {font-size: 11px; margin: 0 auto 0 auto; text-align: center; font-style: italic;}
+.obrram img {border: 1px solid #949e99; padding: 3px; margin: 0 auto; display: block; line-height: 1px;}
+.obrram2 img {margin: 0 auto; display: block; line-height: 1px; padding: 5px 5px 5px 5px; width: 60px; height: 60px; background-image: url("./grafika/img60.jpg");}
+
+/* Form */
+.f_form {margin-top: 10px;}
+.f_input {width: 200px;}
+.f_text {width: 450px; height: 95px; margin-top: 5px;}
+.f_text_reg {width: 380px; height: 95px; margin-top: 5px;}
+.f_kod {width: 40px;}
+.f_kodimg {margin-bottom: -6px;}
+
+/* Jen doplnky */
+.l {float: left;}
+.r {float: right;}
+.text-r {text-align: right;}
+.text-l {text-align: left;}
+.text-c {text-align: center;}
+.t5 {margin-top: 5px;}
+.t10 {margin-top: 10px;}
+.t15 {margin-top: 15px;}
+.r5 {margin-right: 5px;}
+.r10 {margin-right: 10px;}
+.r15 {margin-right: 15px;}
+.r20 {margin-right: 20px;}
+.r15e {margin-right: 5px;}
+html>body #topdown .r15e {margin-right: 15px;}
+.l5 {margin-left: 5px;}
+.l10 {margin-left: 10px;}
+.l15e {margin-left: 5px;}
+html>body #topdown .l15e {margin-left: 15px;}
+.l15 {margin-left: 15px;}
+.l25 {margin-left: 25px;}
+.l30 {margin-left: 30px;}
+.l-30 {margin-left: -30px;}
+.b5 {margin-bottom: 5px;}
+.b10 {margin-bottom: 10px;}
+.pt5 {padding-top: 5px;}
+.pb5 {padding-bottom: 5px;}
+.pb10 {padding-bottom: 5px;}
+.pt10 {padding-top: 10px;}
+.ok {color: #548c5d;}
+.ko {color: #ff4f56;}
+.oo {color: #dfb700;}
+.black {color: #333333;}
+.seda {color: gray;}
+.modra {color: blue;}
+.zelena {color: green;}
+.white {color: white;}
+.zelenepozadi {background-color: rgb(217,255,198);}
+.bold {font-weight: bold;}
+.nobold {font-weight: normal;}
+.italic {font-style: italic;}
+.center {text-align: center;}
+.text10 {font-size: 10px;}
+.text13 {font-size: 13px;}
+.border {border: 1px solid #949e99;}
+.noborder {border: 0;}
+.border-top {border-top: 1px solid #949e99;}
+.border-left {border-left: 1px solid #949e99;}
+.border-right {border-right: 1px solid #949e99;}
+.border-bottom {border-bottom: 1px solid #949e99;}
+.a-no a {text-decoration: none;}
+.kursor {cursor: Pointer;}
+abbr {cursor: help;}
+.relative {position: relative;}
+
+/* vhodne velikosti */
+.w100 {width: 426px;}
+.w350 {width: 395px;}
+html>body #topdown .w350 {width: 402px;}
+.w230 {width: 250px;}
+.w175 {width: 175px;}
+.w480 {width: 481px;} /* 100% */
+.w75  {width: 75px;}
+.h80  {height: 80px;}
+.h240 {height: 230px;}
+
+/* Anketa */
+.pozan {width: 170px; margin-bottom: 5px; height: 13px; font-size: 9px; background-image: url("./grafika/ank1.gif");}
+.pozhlas {height: 13px; background-image: url("./grafika/ank2.gif");}
+.textan {position: absolute; margin-left: 5px; margin-top: -1px;}
+
+/* RSSAd */
+.rssadico {display: none;}
+.rssad ul li {color: gray; text-align: right;}
+.rssad ul li a {text-align: left;}

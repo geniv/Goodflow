@@ -1,0 +1,111 @@
+<!doctype html public "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=Windows-1250">
+<title>Příkaz DELETE (SQL)</title>
+<link rel='stylesheet' style='text/css' href='../function.css'>
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr>
+	<td style="background-image: url(../images/bghead.jpg);
+		background-position: right;
+		background-repeat: no-repeat;">
+	<table width="100%" border="0" cellpadding="0" cellspacing="0"
+		style="background-image:none">
+	<tr>
+		<td style="background-image:none" height="46"
+			width="15%"><img src="../images/title-cz.gif"
+			width="255" height="33"
+			alt="602SQL-Úplná dokumentace"
+			title="602SQL - Úplná dokumentace"
+			border="0"></td>
+		<td width="33%" align="right"><a href="../xml/html/top.html"><img class="floatno"
+			src="../images/index.gif"
+			width="15" height="16"
+			alt="Index" title="Zpět na obsah"
+			border="0" vspace="2"></a> &nbsp;
+			 </td>
+	</tr>
+	</table>
+	</td>
+</tr>
+</table><table class="navigace" border="0" width="100%"  bgcolor="#FFFFBF"><tr> <td
+width="20" align="center"><img class="floatno" src="../images/prev.gif"
+width="15" height="13" alt="&lt;&shy;" title="Předcházející téma"
+border="0"></td><td width="25%"><a
+href="HE_SQL2_INSERT.htm">Příkaz INSERT</a></td> <td width="25%"
+align="right"><img class="floatno" src="../images/up.gif" width="13"
+height="15" alt="Nahoru" title="O jednu úroveň výš" border="0"
+align="middle"></td><td width="25%"><a href="HE_SQL2_PRIKAZY.htm">SQL příkazy</a></td>
+<td width="25%" align="right"><a
+href="HE_SQL2_SELECTINTO.htm">Příkaz SELECT INTO</a></td><td width="20"
+align="center"><img class="floatno" src="../images/next.gif" width="15"
+height="13" alt="&shy;&gt;" title="Následující téma" border="0"></td>
+</tr></table>
+
+
+
+
+<h1><a name="he_sql2_delete"></a>Příkaz DELETE (SQL)</h1>
+
+<pre><code>příkaz_DELETE ::= DELETE FROM [schema.]jméno_tabulky [ WHERE podmínka ]</code></pre>
+
+<p><b>Popis</b></p>
+
+<p><a href="HE_SQL2_PRIKAZY.htm">Příkaz</a> DELETE (neboli <em>Searched DELETE</em>) vymaže záznamy z dané tabulky. Není-li použita omezující <a href="HE_SQL2_PODMINKA.htm"><i>podmínka</i></a>, příkaz vymaže všechny záznamy v tabulce, jinak se vymažou pouze záznamy podmínce vyhovující. Záznamy jsou jen smazané, je možné je případně obnovit nebo definitivně uvolnit (automatické uvolňování mazaných záznamů lze nastavit pomocí <a href="../xml/html/sqloptions.html">příznaku kompatibility</a> <code>SQLOPT_EXPLIC_FREE</code>). Počet zrušených záznamů je možné po provedení zjistit pomocí <a href="../xml/html/sysvars.html">systémové proměnné</a> @@ROWCOUNT.</p>
+
+<p>Je-li tabulka prefixována jménem aplikace (na stejném serveru), tabulka se hledá v uvedené aplikaci (schématu).</p>
+<p>Místo tabulky lze příkaz provádět i s pevným dotazem (VIEW), který <a href="../xml/html/query_insdeledit.html">umožňuje mazání záznamů</a> (toto se rozpozná již při překladu). </p>
+
+<p>Příkaz DELETE vyvolá DELETE <a href="HE_SQL2_TRIGGERY.htm">trigger</a> pro každý rušený záznam. BEFORE DELETE trigger se provede PŘED smazáním záznamu, AFTER DELETE trigger po smazaní. Dojde-li v triggeru k chybě, je obou případech příkaz DELETE odvolán.  </p>
+
+<p>Je-li tabulka, na níž je příkaz DELETE prováděn, nadřízenou tabulkou v <a href="../xml/html/sql_ref_integrity.html">aktivní referenční integritě</a> (RI), mohou nastat dva případy:
+<ul>
+<li>je-li v definici RI použito ON DELETE CASCADE, SET NULL nebo SET DEFAULT, provede se záznamy v podřízené tabulce závislými na rušeném záznamu akce podle definice</li>
+<li>jinak nastane <a href="../xml/html/handlingcategories.html">chyba</a> 40006 (REFERENTIAL_CONSTRAIN), která způsobí implicitní rollback. 
+</li>
+</ul></p>
+
+<p>Uživatel, který ruší záznamy, musí mít k této činnosti dostatek efektivních <a href="../xml/html/userinfo.html">práv</a>.</p>
+
+<h3>Rychlé mazání všech záznamů tabulky</h3>
+<p>Častým případem použití tohoto příkazu je kompletní vymazání obsahu tabulky. Pokud tabulka obsahuje indexy, bývá rychlejší indexy nejprve zrušit příkazem DROP INDEX, poté provést smazání příkazem DELETE (a uvolnění pomocí <ident>CALL Free_deleted</ident>) a indexy znovu vytvořit. Toto nejde použít, je-li index v definici referenční integrity, je-li třeba v případných DELETE triggerech použít tento index nebo je-li potřeba provést celé vymazání až do <ident>Free_deleted</ident> v jedné transakci.</p>
+<p>Od verze 8.1 existuje pro tyto případy funkce <a href="../xml/html/f_truncate_table.html"><code>Truncate_table</code></a> použitelná i v SQL na serveru. </p>
+
+<br>
+<p><b>Příklady použití</b></p>
+
+<p>Vymazat záznamy patřící do oddělení 1</p>
+<pre><code>DELETE FROM Zamestnan WHERE Oddeleni = 1</code></pre>
+
+<p>Vymazat záznamy, které mají hodnotu sloupce <code>cislo</code> větší než průměrnou</p>
+<pre><code>DELETE FROM Tab3
+ WHERE cislo &gt; (SELECT Avg(cislo) FROM Tab3);</code></pre>
+
+
+<p><b>Viz</b></p>
+
+<ul class='viz'>
+  <li><a href="HE_SQL2_INSERT.htm">INSERT</a> </li>
+  <li><a href="HE_SQL2_UPDATE.htm">UPDATE</a> </li>
+  <li><a href="HE_SQL2_DELETECURRENT.htm">DELETE (Positioned)</a> </li>
+</ul>
+
+
+
+<table class="navigace" border="0" width="100%"  bgcolor="#FFFFBF"><tr> <td
+width="20" align="center"><img class="floatno" src="../images/prev.gif"
+width="15" height="13" alt="&lt;&shy;" title="Předcházející téma"
+border="0"></td><td width="25%"><a
+href="HE_SQL2_INSERT.htm">Příkaz INSERT</a></td> <td width="25%"
+align="right"><img class="floatno" src="../images/up.gif" width="13"
+height="15" alt="Nahoru" title="O jednu úroveň výš" border="0"
+align="middle"></td><td width="25%"><a href="HE_SQL2_PRIKAZY.htm">SQL příkazy</a></td>
+<td width="25%" align="right"><a
+href="HE_SQL2_SELECTINTO.htm">Příkaz SELECT INTO</a></td><td width="20"
+align="center"><img class="floatno" src="../images/next.gif" width="15"
+height="13" alt="&shy;&gt;" title="Následující téma" border="0"></td>
+</tr></table>
+</body>
+</html>

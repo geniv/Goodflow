@@ -1,0 +1,56 @@
+<!doctype html public "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=Windows-1250">
+<title>Funkce Write_unlock_record</title>
+<link rel='stylesheet' style='text/css' href='../function.css'>
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000">
+
+
+
+<h2 class=function>Write_unlock_record</h2>
+<img src='../images/cpp.gif' width='44' height='16' border='0' alt='c/c++' align='middle' hspace='2'><img src='../images/pascal.gif' width='44' height='16' border='0' alt='pascal' align='middle' hspace='2'>
+
+
+<br><br>
+<div class='typ'>BOOL <b>[cd_]Write_unlock_record</b>([cdp_t cdp], tcurstab curs, trecnum position);<br>
+function <b>[cd_]Write_unlock_record</b>([cdp : cdp_t]; curs : tcurstab; position : trecnum) : Boolean;
+</div>
+
+
+<p><b>Parametry</b></p>
+
+<table border=1 cols=2 frame=box rules=all width=480>
+
+<tr valign="top">
+<td width=21%><i>curs </i></td>
+<td width=79%>otevřený kurzor nebo tabulka - viz <a href="HE_KYPAR.htm">podrobnosti</a></td>
+</tr>
+
+<tr valign="top">
+<td width=21%><i>position </i></td>
+<td width=79%>číslo záznamu (absolutní)</td>
+</tr>
+
+<tr valign="top">
+<td width=21%>[<i>cdp </i></td>
+<td width=79%><a href="HE_EXTCD.htm">kontextová proměnná</a> klienta]  </td>
+</tr>
+</table><br>
+
+<p><b>Popis</b></p>
+
+<p>Funkce odemkne dříve uzamčený záznam pro zápis (odstraní <a href="../xml/html/waiting.html">zámek</a> pro přepis). Pokud uvedený kurzor zahrnuje více spojených tabulek, odemknou se příslušné záznamy ve všech těchto tabulkách.</p>
+
+<p><b>Hodnota funkce</b></p>
+
+<p>Funkce vrací při úspěchu FALSE, při neúspěchu TRUE. Je-li odemykán nezamčený záznam, dojde k chybě 180 (Chyba v argumentu funkce). </p>
+
+<p><b>Viz</b></p>
+
+<ul class='viz'><li><a href="HE_F_READLOCKRECORD.htm">Read_lock_record</a> <li><a href="HE_F_READLOCKTABLE.htm">Read_lock_table</a> <li><a href="HE_F_READUNLOCKRECORD.htm">Read_unlock_record</a> <li><a href="HE_F_READUNLOCKTABLE.htm">Read_unlock_table</a> <li><a href="HE_F_WRITELOCKRECORD.htm">Write_lock_record</a> <li><a href="HE_F_WRITELOCKTABLE.htm">Write_lock_table</a> <li><a href="HE_F_WRITEUNLOCKTABLE.htm">Write_unlock_table</a></ul>
+
+</body>
+</html>

@@ -1,0 +1,3 @@
+// MIMA: the setTimeout( function( ) {bmone2n.moveAd(); },100); call is some kind of dirty hack I had to use to make the IE to actually draw the ad...without it, the place remained blank :-( do not know why...
+// normally, bmone2n.moveAd(); should suffice
+document.write("<div id='bmone2t-"+bbmPosition+"' style='display:none'><SCR"+"IPT type='text/javascript'>/* <![CDATA[ */ bmone2n.makeAd('"+bbmPosition+"'); /* ]]> */<"+"/SCR"+"IPT></div>\n<SCR"+"IPT type='text/javascript'>/* <![CDATA[ */   setTimeout( function( ) {bmone2n.moveAd(); },100); /* ]]> */<"+"/SCR"+"IPT>");

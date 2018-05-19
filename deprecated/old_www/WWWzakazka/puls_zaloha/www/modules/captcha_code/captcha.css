@@ -1,0 +1,311 @@
+/* captcha obrazky */
+/* vypis fontu a captcha obrazku */
+.captcha_obrazky .captcha_polozky {
+  margin-top: 30px;
+}
+
+.captcha_obrazky .odkazy_captcha {
+  margin: 0 10px 40px;
+  overflow: hidden;
+}
+
+.captcha_obrazky .odkazy_captcha a {
+  display: block;
+  float: right;
+}
+
+.captcha_obrazky .odkazy_captcha .pridat_font {
+  float: left;
+}
+
+.captcha_obrazky ul {
+  position: relative;
+}
+
+.captcha_obrazky ul.font_polozka {
+  margin: 60px 0 3px 0;
+  padding-bottom: 3px;
+  border-bottom: 1px solid;
+}
+
+.captcha_obrazky ul.captcha_polozka {
+  margin: 0 0 3px 30px;
+  padding-bottom: 3px;
+  border-bottom: 1px dotted;
+}
+
+.captcha_obrazky ul li {
+  margin: 3px 0;
+}
+
+.captcha_obrazky ul li .tooltip {
+  display: none;
+  width: 191px; /* 191px + 10px + 10px = 211px */
+  height: 73px; /* 73px + 10px + 16px = 99px */
+  padding: 10px 10px 16px;
+  background: url(../../obr/tooltip.png) no-repeat left bottom;
+  text-align: center;
+  color: #fff;
+  font-size: 14px;
+  border: none;
+}
+
+.captcha_obrazky ul li.nazev_captcha {
+  margin-bottom: 3px;
+  padding: 2px 0 3px;
+  overflow: hidden;
+  border-bottom: 1px dotted;
+}
+
+.captcha_obrazky ul li.nazev_captcha em {
+  display: block;
+  margin-right: 3px;
+  float: left;
+  font-style: normal;
+}
+
+.captcha_obrazky ul li.nazev_captcha em.prvni_em {
+  margin-left: 10px;
+}
+
+.captcha_obrazky ul li.nazev_captcha span.font_existuje,
+.captcha_obrazky ul li.nazev_captcha span.font_neexistuje {
+  display: block;
+  width: 17px;
+  height: 17px;
+  margin-right: 3px;
+  float: left;
+  background: url(../../obr/admin/font_kontrola.png) no-repeat;
+}
+
+.captcha_obrazky ul li.nazev_captcha span.font_existuje {
+  background-position: left;
+}
+
+.captcha_obrazky ul li.nazev_captcha span.font_neexistuje {
+  background-position: right;
+}
+
+.captcha_obrazky ul li.odkazy_captcha_editace {
+  position: absolute;
+  top: 0;
+  right: 10px;
+}
+
+.captcha_obrazky ul li.odkazy_captcha_editace a {
+  font-size: 11px;
+}
+
+.captcha_obrazky ul li.cesta_font_captcha {
+  margin-left: 20px;
+  font-size: 11px;
+}
+
+.captcha_obrazky ul li img {
+  display: block;
+  margin: 10px 0 10px 30px;
+}/* /vypis fontu a captcha obrazku */
+
+/* pridat a upravit font */
+.captcha_pridat_upravit_font .backlink_captcha {
+  margin: 0 0 30px 10px;
+}
+
+.captcha_pridat_upravit_font form label {
+  display: block;
+  overflow: hidden;
+  margin-bottom: 10px;
+}
+
+.captcha_pridat_upravit_font form label span,
+.captcha_pridat_upravit_font form label input {
+  display: block;
+  float: left;
+}
+
+.captcha_pridat_upravit_font form label span {
+  display: block;
+  width: 160px;
+  margin-right: 10px;
+  padding-top: 4px;
+  text-align: right;
+}
+
+.captcha_pridat_upravit_font form label span.font_dodatek {
+  width: auto;
+  margin-left: 180px;
+  clear: both;
+  font-size: 11px;
+  text-align: left;
+}
+
+.captcha_pridat_upravit_font form label.input_text input {
+  width: 300px;
+  padding: 3px;
+  border: 1px dotted;
+  color: #7a7a7a;
+}
+
+.captcha_pridat_upravit_font form label input:focus {
+  color: #000;
+  background-color: #ececec;
+}
+
+.captcha_pridat_upravit_font form label.input_file {
+  margin-bottom: 20px;
+}
+
+.captcha_pridat_upravit_font form label.submit input {
+  margin-left: 170px;
+  padding: 3px;
+  border: 1px dotted;
+  cursor: pointer;
+  color: #7a7a7a;
+}
+
+.captcha_pridat_upravit_font form label.submit input:hover,
+.captcha_pridat_upravit_font form label.submit input:focus {
+  text-decoration: underline;
+  color: #000;
+}/* /pridat a upravit font */
+
+/* pridat a upravit captcha obrazek */
+.captcha_obrazek_pridat_upravit .backlink_captcha {
+  margin: 0 0 30px 10px;
+}
+
+.captcha_obrazek_pridat_upravit form label {
+  display: block;
+  overflow: hidden;
+  margin-bottom: 10px;
+}
+
+.captcha_obrazek_pridat_upravit form label span,
+.captcha_obrazek_pridat_upravit form label input,
+.captcha_obrazek_pridat_upravit form label select {
+  display: block;
+  float: left;
+}
+
+.captcha_obrazek_pridat_upravit form label span {
+  display: block;
+  width: 340px;
+  margin-right: 10px;
+  padding-top: 4px;
+  text-align: right;
+  cursor: pointer;
+}
+
+.captcha_obrazek_pridat_upravit form label span.captcha_dodatek {
+  width: auto;
+  margin: 2px 0 3px 350px;
+  padding-top: 0;
+  float: left;
+  clear: both;
+  font-size: 11px;
+  text-align: left;
+  cursor: default;
+}
+
+.captcha_obrazek_pridat_upravit form label.input_select select,
+.captcha_obrazek_pridat_upravit form label.input_text input {
+  width: 200px;
+  float: left;
+  border: 1px dotted;
+  padding: 3px;
+  color: #7a7a7a;
+}
+
+.captcha_obrazek_pridat_upravit form label.input_text .barvapicker {
+  width: 195px;
+  margin: 0;
+  margin-left: 350px;
+  padding: 0;
+}
+
+.captcha_obrazek_pridat_upravit form label.input_text .barvapicker .farbtastic {
+  position: relative;
+}
+
+.captcha_obrazek_pridat_upravit form label.input_text .barvapicker .farbtastic * {
+  position: absolute;
+  cursor: crosshair;
+}
+
+.captcha_obrazek_pridat_upravit form label.input_text .barvapicker .farbtastic, .farbtastic .wheel {
+  width: 195px;
+  height: 195px;
+}
+
+.captcha_obrazek_pridat_upravit form label.input_text .barvapicker .farbtastic .color, .farbtastic .overlay {
+  top: 47px;
+  left: 47px;
+  width: 101px;
+  height: 101px;
+}
+
+.captcha_obrazek_pridat_upravit form label.input_text .barvapicker .farbtastic .wheel {
+  background: url(script/farbtastic/wheel.png) no-repeat;
+  width: 195px;
+  height: 195px;
+}
+
+.captcha_obrazek_pridat_upravit form label.input_text .barvapicker .farbtastic .overlay {
+  background: url(script/farbtastic/mask.png) no-repeat;
+}
+
+.captcha_obrazek_pridat_upravit form label.input_text .barvapicker .farbtastic .marker {
+  width: 17px;
+  height: 17px;
+  margin: -8px 0 0 -8px;
+  overflow: hidden; 
+  background: url(script/farbtastic/marker.png) no-repeat;
+}
+
+.captcha_obrazek_pridat_upravit form label.input_select select {
+  width: 300px;
+  cursor: pointer;
+}
+
+.captcha_obrazek_pridat_upravit form label.input_select select:focus,
+.captcha_obrazek_pridat_upravit form label.input_text input:focus {
+  color: #000;
+  background-color: #ececec;
+}
+
+.captcha_obrazek_pridat_upravit form label.input_select select:focus option {
+  background-color: #fff;
+}
+
+.captcha_obrazek_pridat_upravit form label.input_radio input {
+  margin-top: 6px;
+  cursor: pointer;
+}
+
+.captcha_obrazek_pridat_upravit form label.input_checkbox input {
+  margin-top: 7px;
+  cursor: pointer;
+}
+
+.captcha_obrazek_pridat_upravit form label.input_file img {
+  display: block;
+  max-width: 300px;
+  margin: 28px 0 3px 350px;
+}
+
+.captcha_obrazek_pridat_upravit form label.submit input {
+  margin: 20px 0 20px 270px;
+  padding: 3px;
+  border: 1px dotted;
+  cursor: pointer;
+  color: #7a7a7a;
+}
+
+.captcha_obrazek_pridat_upravit form label.submit input:focus,
+.captcha_obrazek_pridat_upravit form label.submit input:hover {
+  text-decoration: underline;
+  color: #000;
+}/* /pridat a upravit captcha obrazek */
+/* /captcha obrazky */
+
+/* Fugess (Martin) */

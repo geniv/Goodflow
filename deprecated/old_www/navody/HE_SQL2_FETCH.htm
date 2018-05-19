@@ -1,0 +1,110 @@
+<!doctype html public "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=Windows-1250">
+<title>Příkaz FETCH v SQL</title>
+<link rel='stylesheet' style='text/css' href='../function.css'>
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr>
+	<td style="background-image: url(../images/bghead.jpg);
+		background-position: right;
+		background-repeat: no-repeat;">
+	<table width="100%" border="0" cellpadding="0" cellspacing="0"
+		style="background-image:none">
+	<tr>
+		<td style="background-image:none" height="46"
+			width="15%"><img src="../images/title-cz.gif"
+			width="255" height="33"
+			alt="602SQL-Úplná dokumentace"
+			title="602SQL - Úplná dokumentace"
+			border="0"></td>
+		<td width="33%" align="right"><a href="../xml/html/top.html"><img class="floatno"
+			src="../images/index.gif"
+			width="15" height="16"
+			alt="Index" title="Zpět na obsah"
+			border="0" vspace="2"></a> &nbsp;
+			 </td>
+	</tr>
+	</table>
+	</td>
+</tr>
+</table><table class="navigace" border="0" width="100%"  bgcolor="#FFFFBF"><tr> <td
+width="20" align="center"><img class="floatno" src="../images/prev.gif"
+width="15" height="13" alt="&lt;&shy;" title="Předcházející téma"
+border="0"></td><td width="25%"><a
+href="HE_SQL2_OPEN.htm">Příkaz OPEN</a></td> <td width="25%"
+align="right"><img class="floatno" src="../images/up.gif" width="13"
+height="15" alt="Nahoru" title="O jednu úroveň výš" border="0"
+align="middle"></td><td width="25%"><a href="HE_SQL2_KURZORY.htm">Kurzory v SQL</a></td>
+<td width="25%" align="right"><a
+href="HE_SQL2_UPDATECURRENT.htm">Příkaz UPDATE CURRENT OF</a></td><td width="20"
+align="center"><img class="floatno" src="../images/next.gif" width="15"
+height="13" alt="&shy;&gt;" title="Následující téma" border="0"></td>
+</tr></table>
+
+
+
+
+<h1><a name="he_sql2_fetch"></a>Příkaz FETCH (SQL)</h1>
+
+<pre><code>Příkaz_FETCH ::= FETCH [ [ směr ] FROM ] jméno_kurzoru [ INTO cíl [ {, cíl }…] ];
+směr ::= NEXT | PRIOR | FIRST | LAST | ABSOLUTE výraz | RELATIVE výraz</code></pre>
+
+<p><a href="HE_SQL2_PRIKAZY.htm">Příkaz</a> FETCH nastaví zadaný <a href="HE_SQL2_KURZORY.htm">kurzor</a> na řádek určený klauzulí <i>směr</i> a zapíše hodnoty jednotlivých sloupců tohoto řádku po řadě do uvedených <i>cílů</i>. Nastavení kurzoru na specifikovaný řádek ovlivní následující příkazy <a href="HE_SQL2_DELETECURRENT.htm">DELETE CURRENT OF</a> a <a href="HE_SQL2_UPDATECURRENT.htm">UPDATE CURRENT OF</a>.</p>
+
+<p><i>Jméno_kurzoru</i> musí být buď deklarováno v <a href="HE_SQL2_DEKLARACEKURZORU.htm">deklaraci kurzoru</a> nebo musí označovat dotaz patřící do aplikace a uložený v databázi.</p>
+
+<p>Není-li uveden <i>směr</i>, použije se směr NEXT. <i>Směry</i> mají tento význam:
+
+<ul>
+	<li>NEXT - další řádek (první řádek, je-li kurzor nastaven před prvním řádkem);</li>
+	<li>PRIOR - předchozí řádek (poslední řádek, je-li kurzor nastaven za posledním řádkem);</li>
+	<li>FIRST - první řádek odpovědi;</li>
+	<li>LAST - poslední řádek odpovědi;</li>
+	<li>ABSOLUTE - řádek, jehož pořadové číslo v odpovědi udává <i>výraz</i> (řádky jsou očíslovány od jedné);</li>
+	<li>RELATIVE - řádek, který je od běžného řádku vzdálen o počet řádků udaný <i>výrazem</i> (záporná hodnota určuje řádek před běžným řádkem, kladná za běžným řádkem).</li>
+</ul>
+
+<p><i>Výraz</i> musí být celočíselného <a href="HE_SQL2_DATOVETYPY.htm">typu</a>.</p>
+
+<p>Příkaz FETCH bez uvedení <em>cíle</em> pouze změní pozici v kurzoru.</p>
+
+<p><i>Cílem</i> musí být proměnná, jejíž typ umožňuje přiřazení hodnoty odpovídajícího sloupce kurzoru. Počet <i>cílů</i> musí být stejný jako počet sloupců kurzoru.</p>
+
+<p>Pokud zadaný kurzor není otevřen nebo je již zavřen, nastane chybový <a href="../xml/html/handlingcategories.html">sqlstate</a> 24000 (SQ_INVALID_CURSOR_STATE). Není-li kurzor deklarován nebo neexistuje-li v aplikaci, nastane sqlstate 34000 (SQ_INVALID_CURSOR_NAME). Pokud zadaný řádek neexistuje, nastane sqlstate 02000 (NOT_FOUND). Pokud nelze provést přiřazení mezi sloupcem a cílem z důvodu natolik odlišných typů, že automatická konverze selže, nastane sqlstate W0141 (CANNOT_CONVERT_DATA).</p>
+
+<br><p><b>Příklad použití:</b></p>
+<p>Máme-li pevný dotaz používaný na více místech, není třeba jej pokaždé deklarovat. Víme, že dotaz má vždy jeden záznam a proto není třeba uvažovat o chybě NOT FOUND.</p>
+
+<pre>
+DECLARE pocetrec INT;
+DECLARE sumcastka REAL;
+...
+OPEN Archiv_sum;          // pevný kurzor uložený v aplikaci
+ <strong>FETCH FIRST FROM Archiv_sum INTO pocetrec, sumcastka;</strong>
+CLOSE Archiv_sum; 
+</pre>
+<p>Dotaz <code>Archiv_sum</code> je definován takto:</p>
+<pre>
+SELECT COUNT(*),SUM(cena)
+FROM Archiv
+</pre>
+
+
+<table class="navigace" border="0" width="100%"  bgcolor="#FFFFBF"><tr> <td
+width="20" align="center"><img class="floatno" src="../images/prev.gif"
+width="15" height="13" alt="&lt;&shy;" title="Předcházející téma"
+border="0"></td><td width="25%"><a
+href="HE_SQL2_OPEN.htm">Příkaz OPEN</a></td> <td width="25%"
+align="right"><img class="floatno" src="../images/up.gif" width="13"
+height="15" alt="Nahoru" title="O jednu úroveň výš" border="0"
+align="middle"></td><td width="25%"><a href="HE_SQL2_KURZORY.htm">Kurzory v SQL</a></td>
+<td width="25%" align="right"><a
+href="HE_SQL2_UPDATECURRENT.htm">Příkaz UPDATE CURRENT OF</a></td><td width="20"
+align="center"><img class="floatno" src="../images/next.gif" width="15"
+height="13" alt="&shy;&gt;" title="Následující téma" border="0"></td>
+</tr></table>
+</body>
+</html>

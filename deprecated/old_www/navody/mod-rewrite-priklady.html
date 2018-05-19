@@ -1,0 +1,527 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<html><head>
+
+
+
+
+
+<meta http-equiv="Content-Language" content="cs">
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-2"><title>Mod_rewrite - příklady</title>
+
+
+<style type="text/css">
+pre {overflow:auto;padding:1em 0px; margin-top:.5em;background-color:#F4F4FF;color:black}
+pre .barva01 {color:red;}
+pre .barva02 {color:#2634CF;}
+pre .barva03 {color:#EF1DC3;}
+pre .barva04 {color:#67A0CF;}
+pre .barva05 {color:#CF5919;}
+pre .barva06 {color:#A367CF;}
+pre .rwkoment {color:gray;}
+</style>
+
+
+
+<link rel="stylesheet" href="mod-rewrite-priklady_soubory/jpw.css"></head><body class="ost" id="www-jakpsatweb-cz">
+<div id="text">
+	
+
+<h1>Mod_rewrite - příklady</h1>
+<p class="podtitul">Petr Neuman</p>
+
+<p>Toto není popis tohoto módu. Těchto pár příkladů je pouze doplňkem
+<a href="http://www.jakpsatweb.cz/server/mod-rewrite.html">k úvodnímu návodu</a> a snad poslouží jako zdroj inspirace 
+či k pochopení některých vztahů.
+</p>
+
+<ul>
+<li><a href="#dyntostat">Změna dynamických adres na statické</a></li>
+<li><a href="#zakaz">Zakázání některých souborů</a></li>
+<li><a href="#zakaz_parametru_robotum">Zakázání parametrů některým robotům</a></li>
+<li><a href="#oprava_ampersandu">Převádění <tt>&amp;amp;</tt> na <tt>&amp;</tt> v query 
+stringu</a></li>
+<li><a href="#oprava_adresy">Opravení špatně vyparsované adresy</a></li>
+<li><a href="#rozlozeni_zateze">Rozložení zátěže na více počítačů</a></li>
+<li><a href="#ukladani_souboru">Ukládací dialog pro známé soubory</a></li>
+<li><a href="#robots_txt">Různé <tt>robots.txt</tt> podle domény</a></li>
+<li><a href="#minibb-base">Zapnutí rewrite u minibb 2.0</a></li>
+<li><a href="#minibb-advanced">Zapnutí rewrite u minibb 2.0 s rewritemapou</a></li>
+</ul>
+
+
+<h3 id="dyntostat">Změna dynamických adres na statické</h3>
+<p>Následující použití ukazuje jednoduchý příklad přechodu na přepisované 
+adresy. Původní adresy byly typu <tt>/index.php?page=neco</tt> - rádi bychom <tt>
+/neco.html</tt> skrytě přepsané na fungující skript. Pro zachování odkazů z 
+jiných webů a vyhledávačů (ale se snahou o propagaci nové podoby adres) 
+vytvoříme přesměrování na nové adresy.
+</p>
+<pre>RewriteEngine On
+<span class="rwkoment">#RewriteBase /adresar</span>
+RewriteCond %{QUERY_STRING} ^page=<span class="barva01">(</span>[^&amp;]+<span class="barva01">)</span>$
+RewriteRule ^index\.php$ <span class="barva01">%1</span>.html? [R=301,L]
+RewriteRule ^<span class="barva02">(</span>[^/]+<span class="barva02">)</span>\.html index.php?rw=1&amp;page=<span class="barva02">$1</span> [L,QSA]</pre>
+<p>
+Protože v <tt>RewriteRule</tt> nelze testovat parametry za otazníkem (query 
+string), musíme použít pomínku <tt>RewriteCond</tt> s testováním této proměnné. 
+Pokud má požadovaný tvar, bude kontrolovat následující pravidlo. V něm vytáhneme 
+ozávorkovanou část z poslední použité podmínky díky <tt>%1</tt>. Za koncovku <tt>
+.html</tt> přidáme ještě onen otazník, aby se automaticky nepřidal query string. 
+Další pravidlo je už klasické - skrytý přepis statické adresy na dynamickou. 
+Přidáme však nějaký parametr (v našem případě <tt>rw=1</tt>), aby se přepisování 
+necyklilo.
+</p>
+<p>
+Pokud to máme v nějakém adresáři, odkomentujte druhý řádek s <tt>RewriteBase</tt> 
+a napište tam správnou cestu toho adresáře. Pro kořenový adresář tedy použijte <tt>
+/</tt>.
+</p>
+
+
+<h3 id="zakaz">Zakázání některých souborů</h3>
+<p>Pokud máme na webu soubory, které tam vyžadujeme, ale nechceme, aby si je 
+mohl někdo prohlížet, můžeme využít síly Rewrite módu. Například schovat všechny 
+soubory v adresářích CVS tím, že server vrátí kód 403 - zakázané.
+</p>
+	<pre>RewriteEngine On
+RewriteRule ^(.*/)?CVS/.* - [F]</pre>
+<p>
+Onen příznak F znamená Forbidden. Pomlčka je speciální znak pro zachování počtu 
+parametrů jedlotlivých příkazů bez hlubšího smyslu (u <tt>RewriteRule</tt> tedy 
+znamená něco jako "nech být, jak to je").
+</p>
+
+<h3 id="zakaz_parametru_robotum">Zakázání parametrů některým robotům</h3>
+<p>Na zakázání přístupu robotů do určitých částí stránek můžeme vcelku s 
+úspěchem použít <tt>robots.txt</tt>. Pokud ale chceme zakázat třeba jen některé 
+parametry pro naše skripty, s <tt>robots.txt</tt> toho nedosáhneme. Můžeme tedy 
+testovat, zda jde o roboty, kteří nám při takových parametrech dělají neplechu a 
+například indexují i stránky, kde je v meta elementu <tt>robots</tt> nastavena 
+hodnota <tt>noindex</tt>. Následují příklad znepřístupní vyjmenovaným třem 
+robotům jakoukoliv stránku s nastaveným parametrem od (který máme např. použitý 
+pro listování).
+</p>
+<pre>RewriteEngine on
+RewriteCond %{QUERY_STRING} ^(.*&amp;)?od=.*$
+RewriteCond %{HTTP_USER_AGENT} ^Jyxobot.*$ [NC,OR]
+RewriteCond %{HTTP_USER_AGENT} ^findlinks.*$ [NC,OR]
+RewriteCond %{HTTP_USER_AGENT} ^cfetch.*$ [NC]
+RewriteRule ^.*$ - [F]</pre>
+<p>
+První podmínka RewriteCond testuje, zda je v query stringu parametr <tt>od</tt>. 
+Pokud je, testuje se další podmínka na podobu proměnné <tt>HTTP_USER_AGENT</tt>, 
+zde je však důležitý příznak OR, který je logickou spojkou nebo. Ony čtyři řádky 
+s RewriteCond tedy znamenají něco jako "pokud je tam parametr <tt>od</tt> a 
+zároveň agent začíná na <tt>Jyxobot</tt> nebo <tt>findlinks</tt> nebo <tt>cfetch</tt>". 
+Pokud tato složená podmínka platí, pošle server na jakýkoliv požadavek kód 403 - 
+zakázáno (díky již známému příznaku <tt>F</tt>). Příznak <tt>NC</tt> v <tt>
+RewriteCond</tt> vypíná rozlišování velikosti písmen.
+</p>
+
+<h3 id="oprava_ampersandu">Převádění <tt>&amp;amp;</tt> na <tt>&amp;</tt> v query 
+stringu</h3>
+<p>Někteří hloupí vyhledávací roboti (kdysi např. SeznamBot) nepřevádí html 
+entity v nalezených adresách tak, jak mají. Pokud tedy validně odělujete 
+jednotlivé parametry pomocí znaku <tt>&amp;</tt> (který se v html píše jako <tt>&amp;amp;</tt>) 
+můžete použít následující přepisovací pravidla na odchytání takto chybných 
+požadavků pro celý web na jednom místě.
+</p>
+<pre>RewriteEngine on
+<span class="rwkoment">#RewriteBase  /adresar</span>
+RewriteCond %{QUERY_STRING} ^<span class="barva01">(</span>.*<span class="barva01">)</span>&amp;amp;<span class="barva03">(</span>.*<span class="barva03">)</span>$
+RewriteRule ^<span class="barva02">(</span>.*<span class="barva02">)</span>$ <span class="barva02">$1</span>?<span class="barva01">%1</span>&amp;<span class="barva03">%2</span> [E=newqs:<span class="barva01">%1</span>&amp;<span class="barva03">%2</span>,N]
+RewriteCond %{ENV:newqs} !^$
+RewriteRule ^<span class="barva04">(</span>.*<span class="barva04">)</span>$ <span class="barva04">$1</span>?%{ENV:newqs} [R=301,L]</pre>
+<p>
+První podmínkou zkontrolujeme, zda se v query stringu vyskytuje <tt>&amp;amp;</tt>. 
+Pokud se tam najde, nahradí se správným <tt>&amp;</tt>. Přitom se udělá i to, že se 
+nový query string uloží do proměnné <tt>newqs</tt>
+díky příznaku <tt>E</tt>. Další příznak <tt>N</tt> - next round - vyvolá 
+projíždění přepisovacích pravidel znovu od začátku (pokud se ono <tt>RewriteRule</tt> 
+provádělo). Toto se bude provádět do té doby, dokud tam už žádný výskyt <tt>
+&amp;amp;</tt> nebude. Pak přijde na řadu další pomínka <tt>RewriteCond</tt>, která 
+kontroluje, zda je proměnná <tt>newqs</tt> neprázná. Pokud není prázná (tzn. byl 
+tam kdysi <tt>&amp;amp;</tt>), provede se viditelné přesměrovací pravidlo s použitím 
+opraveného query stringu uloženého do proměnné.
+</p>
+<p>
+Na příznak <tt>N</tt> dávejte veliký pozor! Nikdy ho netestujte na ostrých 
+serverech, ale jen u sebe doma a i tak hodně opatrně (ale důkladně). Nesmí se 
+vám to zacyklit. Na tento příznak se totiž nevztahuje limit na počet tajných 
+přepsání (výchozí <tt>RewriteOptions MaxRedirects=10</tt>), takže můžete zahltit 
+apache a nejspíše se z toho dostane jen jeho restartem.
+</p>
+
+<h3 id="oprava_adresy">Opravení špatně vyparsované adresy</h3>
+<p>Když se uvádí URI v běžném textu, často se za nimi vyskytují interpunkční 
+znaménka, závorky a uvozovky, které horší parsery mohou brát jako součást 
+adresy. Otestujeme, zda je požadovaná stránka dostupná a pokud není, zkusíme 
+případné divné znaky z konce odstranit.
+</p>
+<pre>RewriteEngine On
+<span class="rwkoment">#RewriteBase  /adresar</span>
+RewriteCond %{QUERY_STRING} ^<span class="barva01">(</span>.*[^\.\?\),!-"']<span class="barva01">)</span>[\.\?\),!-"']+$
+RewriteRule ^<span class="barva02">(</span>.*<span class="barva02">)</span>$ <span class="barva02">$1</span>?<span class="barva01">%1</span> [R=301,L]
+RewriteCond %{REQUEST_FILENAME} !-F
+RewriteRule ^<span class="barva04">(</span>.*[^\.\?\),!-"']<span class="barva04">)</span>([\.\?\),!-"'])+$ <span class="barva04">$1</span> [R=301,L]</pre>
+<p>
+Kotrolujeme tedy nejdříve znaky <tt>. ? ) , ! - " '</tt> na konci query stringu 
+(asi víme, že je na webu nepoužíváme a můžeme je odstranit). Pokud na konci tyto 
+podivné znaky jsou, viditelně přesměrujeme na verzi, kde budou oddělány. Další <tt>
+RewriteCond</tt> kontroluje pomocí <tt>-F</tt>, zda apache nějak najde základní 
+požadavek bez query stringu. Pokud tomu tak není, bude se provádět následující <tt>
+RewriteRule</tt>, které v případě, že jsou na konci opět zmíněné znaky, 
+viditelně přesměruje na verzi, v níž budou z konce odstraněny.
+</p>
+<p>Budeme-li mít tedy v našem adresáři soubory <tt>test</tt> a <tt>test.</tt> 
+ale nic jiného, dostaneme při požadavku na <tt>test.</tt> správně <tt>test.</tt>, 
+ale při požadavku na <tt>test..</tt>
+se všechna interpukce na konci odstraní a přesměruje nás to na <tt>test</tt> bez 
+tečky. Při žádosti o <tt>test..?querystring.</tt> se postupně provedou dvě 
+přesměrování na jejichž konci bude <tt>test?querystring</tt> - nejdříve se 
+odtranila tečka z query stringu a pak i dvě tečky ze jména souboru.
+</p>
+
+<h3 id="rozlozeni_zateze">Rozložení zátěže na více počítačů</h3>
+<p>Za jistých okolností lze pomocí Rewrite módu tajně přepisovat i na jiné 
+servery. Je však nutné k tomu mít v apachi zapnutý mod_proxy. Může se to hodit 
+například k rozhození výpočetní zátěže na více našich strojů. Pro výběr stroje 
+použijeme přepisovací mapu typu <tt>rnd</tt> (náhodnou) a to jen na soubory s 
+koncovkami
+<tt>php</tt>, <tt>pl</tt>, <tt>py</tt> a <tt>ru</tt>, kde předpokládáme vyšší 
+nároky na procesor.
+</p>
+<pre><span class="rwkoment">#prepisovaci mapa musi byt v definovana v konfiguraci apache, v .htaccess to nelze</span>
+<span class="rwkoment">#RewriteMap servery rnd:/cesta/k/mapa.txt</span>
+RewriteEngine on
+RewriteRule ^<span class="barva02">(</span>.*\.(php|pl|py|ru)<span class="barva02">)</span> http://${servery:nahodny}/<span class="barva02">$1</span> [P,L]</pre>
+<p>
+Definovat přepisovací mapu pomocí příkazu <tt>RewriteMap</tt> lze pouze v 
+konfiguraci serveru nebo v nastavení virtual hostu. My použijeme typ <tt>rnd</tt>, 
+který vybere náhodně jednu hodnotu ze seznamu ke konkrétnímu klíči. Ke shlédnutí 
+je ukázka použité <a href="http://www.jakpsatweb.cz/server/mod_rewrite/mapa.txt">přepisovací mapy</a>. Syntaxe použití mapy 
+je jednoduchá, použijeme název mapy a hodnotu, kterou hledáme (lze případně i 
+definovat hodnotu, která se má použít, pokud nebyl klíč v mapě nalezen). Příznak <tt>
+P</tt>
+říká, že chceme použít proxy modul a tím způsobem tajně přesměrovat na jiný 
+server. Tento příklad nebyl zkoušen pro nedostatečné technické zázemí, ale je 
+uváděn pro demonstraci málo známé možnosti Rewrite módu.
+</p>
+
+<h3 id="ukladani_souboru">Ukládací dialog pro známé soubory</h3>
+<p>Občas se může hodit vyvolat stahovací dialog v prohlížeči i pro soubory, 
+které umí normálně zobrazit. Můžeme pomocí <tt>RewriteRule</tt> změnit mime-type 
+souboru třeba na <tt>application/octet-stream</tt> a tak docílíme toho, že 
+přebijeme základní nastavení apache. Pokud budeme chtít soubor takto stáhnout, 
+přidáme za něj parametr <tt>stahnout</tt>.
+</p>
+<pre>RewriteEngine on
+<span class="rwkoment">#RewriteBase  /adresar</span>
+RewriteCond %{QUERY_STRING} ^stahnout$
+RewriteRule \.(jpe?g|gif|png)$ - [L,NC,T=application/octet-stream]</pre>
+<p>
+Pokud na server přijde požadavek na soubor s koncovku <tt>jpg</tt>, <tt>jpeg</tt>, <tt>
+gif</tt> nebo <tt>png</tt>
+a je přidán parametr <tt>stahnout</tt> (například <tt>obrazek.jpg?stahnout</tt>), 
+zapříčiní uvedená pravidla změnu mime-typu a tím vyvolají dialog pro stáhnutí. 
+Změnu typu vyvolá parametr <tt>T</tt>. Parametr <tt>NC</tt> vypíná rozlišování 
+velikosti písmen v <tt>RewriteRule</tt>. Koncovky, kterým chceme povolit 
+stahování je dobré vyjmenovat, aby nám díky tomuto parametru někdo nestahoval 
+třeba zdrojáky v php (pokud totiž takto změníme typ souboru, bude s ním apache 
+podle toho zacházet a nebude brát php soubor jako skript).
+</p>
+
+
+<h3 id="robots_txt">Různé <tt>robots.txt</tt> podle domény</h3>
+<p>Pokud chceme mít více domén se stejným obsahem generovaným z jednoho 
+adresáře, může nám vadit, že vyhledávací systémy poznají, že se jedná o 
+duplicity a některé věci ukazují z jiných adres, než bychom chtěli. Nachystáme 
+si tedy několik různých souborů <tt>robots.txt</tt>, kterými zakážeme pro danou 
+doménu přesně ty adresáře a soubory, které chceme (pokud možno vždy povolíme 
+určité podstránky jen na jednom serveru).
+</p>
+<pre>RewriteEngine on
+<span class="rwkoment">#RewriteBase  /adresar</span>
+RewriteRule !^robots\.txt$ - [L]
+RewriteCond _%{HTTP_HOST}_robots.txt -F
+RewriteRule ^robots\.txt$ _%{HTTP_HOST}_robots.txt [L]</pre>
+<p>
+Náš systém počítá s tím, že budou připraveny soubory vzoru <tt>
+_example.com_robots.txt</tt> 
+nebo <tt>_127.0.0.1_robots.txt</tt>. Pokud bude odpovídat host v požadavku 
+některé z nachystaných variant, podstrčí se jako <tt>robots.txt</tt> právě ona. 
+První <tt>RewriteRule</tt> máme jen pro co nejnižší zátěž serveru - pokud není 
+požadavek <tt>robots.txt</tt>, nic nepřepisuj.
+<tt>RewriteCond</tt> případně zkontroluje, zda má apache k dispozici příslušnou 
+variantu našeho vzoru, pokud ano, tak ji další příkaz tajně podstrčí.
+</p>
+
+
+<h3 id="minibb-base">Zapnutí rewrite u minibb 2.0</h3>
+<p>Následující příklad je jen trošku složitější něž ten první. Pokud používáte 
+<a href="http://www.minibb.net/">minibb</a> fórum, může se vám hodit - počínaje verzí 2.0 umí toto fórum použít 
+odkazy, které vypadají jako html soubory. Pokud na něj přecházíme z nižší verze, 
+nebo jsme jen zapomněli odkomentovat <tt>$mod_rewrite=TRUE;</tt> a chceme co 
+nejvíce používat nové adresy, použijeme takto upravená pravidla, která zaručí 
+zpětnou kompatibilitu.
+</p>
+<pre class="sirsi">RewriteEngine On
+<span class="rwkoment">#RewriteBase /adresar</span>
+
+<span class="rwkoment">#parametry na kratkou html adresu</span>
+RewriteCond %{QUERY_STRING} ^action=userinfo&amp;user=<span class="barva01">(</span>[0-9]+<span class="barva01">)</span>$
+RewriteRule ^index\.php$ user<span class="barva01">%1</span>.html? [R=301,L]
+RewriteCond %{QUERY_STRING} ^action=vtopic&amp;forum=<span class="barva01">(</span>[0-9]+<span class="barva01">)</span>$
+RewriteRule ^index\.php$ <span class="barva01">%1</span>_0.html? [R=301,L]
+RewriteCond %{QUERY_STRING} ^action=vtopic&amp;forum=<span class="barva01">(</span>[0-9]+<span class="barva01">)</span>&amp;page=<span class="barva03">(</span>[0-9]+<span class="barva03">)</span>$
+RewriteRule ^index\.php$ <span class="barva01">%1</span>_<span class="barva03">%2</span>.html? [R=301,L]
+RewriteCond %{QUERY_STRING} ^action=vthread&amp;forum=<span class="barva01">(</span>[0-9]+<span class="barva01">)</span>&amp;topic=<span class="barva03">(</span>[0-9]+<span class="barva03">)</span>$
+RewriteRule ^index\.php$ <span class="barva01">%1</span>_<span class="barva03">%2</span>_0.html? [R=301,L]
+RewriteCond %{QUERY_STRING} ^action=vthread&amp;forum=<span class="barva01">(</span>[0-9]+<span class="barva01">)</span>&amp;topic=<span class="barva03">(</span>[0-9]+<span class="barva03">)</span>&amp;page=<span class="barva05">(</span>[0-9]+<span class="barva05">)</span>$
+RewriteRule ^index\.php$ <span class="barva01">%1</span>_<span class="barva03">%2</span>_<span class="barva05">%3</span>.html? [R=301,L]
+
+<span class="rwkoment">#html adresy tajne na puvodni (pridano rw=1, aby se to necyklilo)</span>
+RewriteRule ^user<span class="barva02">(</span>[0-9]+<span class="barva02">)</span>\.html$ index.php?action=userinfo&amp;user=<span class="barva02">$1</span>&amp;rw=1  [L]
+RewriteRule ^<span class="barva02">(</span>[0-9]+<span class="barva02">)</span>_<span class="barva04">(</span>[0-9]+<span class="barva04">)</span>\.html$ index.php?action=vtopic&amp;forum=<span class="barva02">$1</span>&amp;page=<span class="barva04">$2</span>&amp;rw=1  [L]
+RewriteRule ^<span class="barva02">(</span>[0-9]+<span class="barva02">)</span>_<span class="barva04">(</span>[0-9]+<span class="barva04">)</span>_<span class="barva06">(</span>[0-9]+<span class="barva06">)</span>\.html$ index.php?action=vthread&amp;forum=<span class="barva02">$1</span>&amp;topic=<span class="barva04">$2</span>&amp;page=<span class="barva06">$3</span>&amp;rw=1  [L]</pre>
+<p>Pracuje to na stejném principu jako příklad na začátku, jen tam je prostě víc 
+vztahů. V tomto příkladě není nutný pomocný parametr <tt>rw=1</tt>, stačilo by 
+přeházet pořadí parametrů.
+</p>
+
+<h3 id="minibb-advanced">Zapnutí rewrite u minibb 2.0 s rewritemapou</h3>
+<p>Pokud umíme trochu php, tak si lze adresy v minibb upravit k obrazu svému. 
+Místo čísel pro fórum použijeme nějaký výstižný popis. Převod mezi čísly a texty 
+zvládneme pomocí <tt>RewriteMap</tt>. Vhledem k tomu, že už to bude složitější 
+použití přepisovacíh pravidel, zkusíme procházení optimalizovat a co nejméně 
+zatěžovat server přepisováním.
+</p><p>Cílem našeho přepisování budou tedy adresy typu<br>
+<tt>example.com/nas_nazev_fora</tt><br>
+<tt>example.com/nas_nazev_fora/cislovlakna</tt><br>
+pokud zapomeneme definovat vztahy mezi čísly a texty, tak typu<br>
+<tt>example.com/forum-cislo</tt><br>
+<tt>example.com/forum-cislo/cislovlakna</tt><br>
+a za to může být ještě přidáno <tt>/stranka-cislo</tt> pro případné stránkování.
+</p>
+<pre class="sirsi">RewriteEngine On
+<span class="rwkoment">#RewriteBase /adresar</span>
+
+<span class="rwkoment">#primo v konfiguraci apache (napr. pro nas virtualni server) musime uvest prepisovaci mapy</span>
+<span class="rwkoment">#RewriteMap nototext txt:/cesta/k/mapa01.map</span>
+<span class="rwkoment">#RewriteMap texttono txt:/cesta/k/mapa02.map</span>
+
+<span class="rwkoment">#urychleni prochazeni pravidel - vyskoceni co nejdriv to jde</span>
+<span class="rwkoment">#pokud je k dispocici primo soubor bez prepisovani a neni to index.php, tak neprepisuj nic</span>
+RewriteCond %{REQUEST_FILENAME} !index\.php
+RewriteCond %{REQUEST_FILENAME} -f
+RewriteRule .* - [L]
+<span class="rwkoment">#pokud je na zacatku nastaveny nas parametr rw, tak pro index.php take vyskoc</span>
+RewriteCond %{QUERY_STRING} ^rw=1
+RewriteRule ^index\.php$ - [L]
+<span class="rwkoment">#pokud je to index.php, tak preskoc 7 nasledujich pravidel RewriteRule</span>
+RewriteRule ^index\.php$ - [S=7]
+<span class="rwkoment">#konec urychlovani</span>
+
+<span class="rwkoment">#jinak pokracujeme</span>
+
+<span class="rwkoment">#pokud uz mame k foru s cislem popisek v rewrite mape, tak presmerovani</span>
+RewriteCond %{REQUEST_FILENAME} .*forum-<span class="barva01">(</span>[0-9]+<span class="barva01">)</span>(/.*)?
+RewriteCond ${nototext:<span class="barva01">%1</span>|notfound} !=notfound
+RewriteRule ^forum-<span class="barva02">(</span>[0-9]+<span class="barva02">)</span><span class="barva04">(</span>/.*<span class="barva04">)</span>?$ ${nototext:<span class="barva02">$1</span>}<span class="barva04">$2</span> [R=301,L]
+
+<span class="rwkoment">#jestli je na konci stranka-x, hod x do promenne pro pozdejsi pouziti</span>
+RewriteRule /stranka-<span class="barva02">(</span>[0-9]+<span class="barva02">)</span>$ - [E=stranka:&amp;page=<span class="barva02">$1</span>]
+<span class="rwkoment">#nase adresy tajne na puvodni (pridano rw=1 aby se to necyklilo a umeli jsme rychle vypadnout)</span>
+RewriteRule ^forum-<span class="barva02">(</span>[0-9]+<span class="barva02">)</span>(/stranka-[0-9]+)?$ index.php?rw=1&amp;action=vtopic&amp;forum=<span class="barva02">$1</span>%{ENV:stranka} [L,QSA]
+RewriteRule ^forum-<span class="barva02">(</span>[0-9]+<span class="barva02">)</span>/<span class="barva04">(</span>[0-9]+<span class="barva04">)</span>(/stranka-[0-9]+)?$ index.php?rw=1&amp;action=vthread&amp;forum=<span class="barva02">$1</span>&amp;topic=<span class="barva04">$2</span>%{ENV:stranka} [L,QSA]
+RewriteRule ^<span class="barva02">(</span>[^/\.-]+<span class="barva02">)</span>(/stranka-[0-9]+)?$ index.php?rw=1&amp;action=vtopic&amp;forum=${texttono:<span class="barva02">$1</span>}%{ENV:stranka} [L,QSA]
+RewriteRule ^<span class="barva02">(</span>[^/\.-]+<span class="barva02">)</span>/<span class="barva04">(</span>[0-9]+<span class="barva04">)</span>(/stranka-[0-9]+)?$ index.php?rw=1&amp;action=vthread&amp;forum=${texttono:<span class="barva02">$1</span>}&amp;topic=<span class="barva04">$2</span>%{ENV:stranka} [L,QSA]
+RewriteRule ^user-<span class="barva02">(</span>[0-9]+<span class="barva02">)</span>\.html$ index.php?rw=1&amp;action=userinfo&amp;user=<span class="barva02">$1</span> [L]
+
+<span class="rwkoment">#kategorie/cislo_threadu</span>
+<span class="rwkoment">#parametry na kratkou html adresu - pro zpetnou kompatibilitu</span>
+RewriteCond %{QUERY_STRING} ^action=userinfo&amp;user=<span class="barva01">(</span>[0-9]+<span class="barva01">)</span>$
+RewriteRule ^index\.php$ user-<span class="barva01">%1</span>.html? [R=301,L]
+RewriteCond %{QUERY_STRING} ^action=vtopic&amp;forum=<span class="barva01">(</span>[0-9]+<span class="barva01">)</span>(&amp;sortBy=0)?(&amp;page=0)?$
+RewriteRule ^index\.php$ ${nototext:<span class="barva01">%1</span>|forum-<span class="barva01">%1</span>}? [R=301,L]
+RewriteCond %{QUERY_STRING} ^action=vtopic&amp;forum=<span class="barva01">(</span>[0-9]+<span class="barva01">)</span>(&amp;sortBy=0)?&amp;page=<span class="barva05">(</span>[0-9]+<span class="barva05">)</span>$
+RewriteRule ^index\.php$ ${nototext:<span class="barva01">%1</span>|forum-<span class="barva01">%1</span>}/stranka-<span class="barva05">%3</span>? [R=301,L]
+RewriteCond %{QUERY_STRING} ^action=vthread&amp;forum=<span class="barva01">(</span>[0-9]+<span class="barva01">)</span>&amp;topic=<span class="barva03">(</span>[0-9]+<span class="barva03">)</span>(&amp;sortBy=0)?(&amp;page=0)?$
+RewriteRule ^index\.php$ ${nototext:<span class="barva01">%1</span>|forum-<span class="barva01">%1</span>}/<span class="barva03">%2</span>? [R=301,L]
+RewriteCond %{QUERY_STRING} ^action=vthread&amp;forum=<span class="barva01">(</span>[0-9]+<span class="barva01">)</span>&amp;topic=<span class="barva03">(</span>[0-9]+<span class="barva03">)</span>&amp;page=<span class="barva05">(</span>[0-9]+<span class="barva05">)</span>$
+RewriteRule ^index\.php$ ${nototext:<span class="barva01">%1</span>|forum-<span class="barva01">%1</span>}/<span class="barva03">%2</span>/stranka-<span class="barva05">%3</span>? [R=301,L]</pre>
+<p>
+První dvě podmínky <tt>RewriteCond</tt> nám otestují, zda požadovaný soubor není <tt>
+index.php</tt> a zároveň takový soubor opravdu existuje na serveru. Pokud obě 
+podmínky platí, přestane se přepisovat díky
+<tt>RewriteRule</tt> s nic neměnící pomlčkou a příznakem <tt>L</tt>. Nyní 
+testujeme, zda je v query stringu nastavený parametr <tt>rw=1</tt>. Pokud tomu 
+tak je a žádaným souborem je <tt>index.php</tt>, také ukončíme všechno 
+přepisování. Posledním testem pro optimalizaci pravidel je opět test, zda je na 
+server požadavek o index.php, v kladném případě přeskočíme kontrolu náledujích 7 
+pravidel <tt>RewriteRule</tt> pomocí příznaku <tt>S</tt>.
+</p>
+<p>
+Nyní testujeme, zda není požadavek na adresu typu <tt>forum-cislo</tt> a zda 
+náhodou už pro toto číslo nemáme definovaný v přepisovací mapě textový popis. 
+Syntaxe pro vycucnutí hodnoty z mapy je <tt>
+${nazev_mapy:hledana_hodnota|hodnota_pokud_se_hledana_nenajde}</tt>. Otestujeme 
+tedy, zda výsledná hodnota není ta, kterou použijeme jako výchozí za znakem <tt>
+|</tt>. Pokud tedy už máme pro ono číslo textový popis definovaný, viditelně 
+přesměrujeme na novou adresu.
+</p>
+<p>Následuje tajné přepisování našich zvolených adres na příslušné parametry 
+minibb. Nejprve otestujeme, zda je na konci adresy <tt>stranka-cislo</tt>. Pokud 
+je, uložíme do proměnné <tt>stranka</tt> řetezec, který se používá pro 
+stránkování v minibb fóru. Dalších 5 pravidel přepisuje možné vzory adres na 
+správné parametry. Přidáváme zde případné stránkování uložené do proměnné <tt>
+stranka</tt> a dále přidáme parametr <tt>rw=1</tt>, který nám umožní rychlejší 
+opuštění znovuprocházení přepisovacích pravidel a zamezí tak cyklení.
+</p>
+<p>
+Poslední sada pravidel nám přesměruje z kdysi používaných adres běžných v tomto 
+fóru na nové typy adres. Asi je už jasné, že výsledek <tt>
+${nototext:%1|forum-%1}</tt> bude buď textový popis fóra (pokud máme ono číslo 
+definované v přepisovací mapě nototext) nebo <tt>forum-cislo</tt> (pokud v mapě 
+ono číslo definované není).
+</p>
+<p>
+Jak již bylo v zmíněno, přepisovací mapy lze definovat pouze v konfiguraci 
+serveru nebo virtual hostu. Ještě ukázka těch použitých přepisovacíh map - <tt><a href="http://www.jakpsatweb.cz/server/mod_rewrite/mapa01.map">
+mapa01.map</a></tt> a <tt><a href="http://www.jakpsatweb.cz/server/mod_rewrite/mapa02.map">mapa02.map</a></tt> 
+- jedná se o standardní typ mapy <tt>txt</tt>.
+</p>
+	<p>
+&nbsp;</p>
+	<p>
+Autorem textu je Petr Neuman</p>
+
+	
+	<p>&nbsp;</p>
+	
+
+<!--XXXwebbot bot="Include" U-Include="adsense-dole-zluta.html" TAG="BODY" -->
+
+
+<h3>Reklama</h3>
+<p><a href="http://www.webhosting-c4.cz/adv/jw1">
+<img src="mod-rewrite-priklady_soubory/c4-01.gif" alt="www.c4.cz, hosting za 1.200 Kč na rok s doménou v ceně" border="0" height="60" width="468"></a></p>
+<p>&nbsp;</p>
+
+<p>&nbsp;</p>
+
+</div>
+
+<div id="navigace">
+	
+
+<h3>Předchozí:</h3>
+	<p><a id="prev" href="http://www.jakpsatweb.cz/server/mod-rewrite.html">Mod_rewrite, úvodní návod</a></p>
+	<h3>Vizte též:</h3>
+	<ul>
+		<li><a href="http://www.jakpsatweb.cz/server/htaccess.html">Použití souboru .htaccess</a></li>
+		<li><a href="http://www.jakpsatweb.cz/presmerovani.html">Přesměrování stránky, různé 
+		možnosti</a></li>
+	</ul>
+	<h3>Použité materiály a doporučené čtení:</h3>
+<p>
+<a href="http://httpd.apache.org/docs/2.0/mod/mod_rewrite.html">Popis modulu mod_rewrite</a> 
+(anglicky)</p>
+	<p>
+<a href="http://httpd.apache.org/docs/2.0/misc/rewriteguide.html">Příručka mod_rewrite</a> 
+(anglicky)</p>
+	
+	
+
+
+<script type="text/javascript"><!--
+google_ad_client = "pub-4372514035999321";
+google_ad_width = 125;
+google_ad_height = 125;
+google_ad_format = "125x125_as";
+google_ad_type = "text";
+//2006-12-16: jpw vpravo, ostatni jpw
+google_ad_channel = "2626615486+9426052476";
+google_color_border = "FFFFEE";
+google_color_bg = "FFFFEE";
+google_color_link = "0000FF";
+google_color_text = "000000";
+google_color_url = "000080";
+//--></script>
+<script type="text/javascript" src="mod-rewrite-priklady_soubory/show_ads.js">
+</script><iframe name="google_ads_frame" src="mod-rewrite-priklady_soubory/ads.htm" marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" frameborder="0" height="125" scrolling="no" width="125"></iframe>
+
+
+</div>
+
+
+
+<div id="hlavicka">
+
+
+	<div id="logo">
+		<a href="http://www.jakpsatweb.cz/index.html" id="logoa" accesskey="1">
+		<img src="mod-rewrite-priklady_soubory/jakpw.gif" alt="Jak psát web" height="88" width="131"></a>
+	</div>
+
+	<div id="slogan">
+		o tvorbě, údržbě a zlepšování internetových stránek
+	</div>
+
+
+<div id="hledani">
+	<form action="http://www.google.com/custom">
+		<p>
+			<input name="cx" value="008997274925841959410:atrkgfnhjvc" type="hidden">	
+			<input name="cof" value="LH:;CX:Jak%20ps%C3%A1t%20web;LW:0;FORID:1;S:http://www.jakpsatweb.cz;L:http://www.jakpsatweb.cz/images/jakpw-100.gif;LP:1" type="hidden">
+			<input name="hl" value="cs" type="hidden">
+			<input name="ie" value="iso-8859-2" type="hidden">
+			<input name="client" value="pub-4372514035999321" type="hidden">
+			<input name="channel" value="8759767026" type="hidden">
+			<input name="q" class="text" size="12" type="text">
+			<input name="sa" class="submit" value="Hledat" type="submit">
+		</p>
+	</form>
+
+</div>
+<div id="ouska">
+		<a class="zak" href="http://www.jakpsatweb.cz/index.html">Návody</a>
+		<a class="html" href="http://www.jakpsatweb.cz/html/index.html">HTML</a>
+		<a class="css" href="http://www.jakpsatweb.cz/css/index.html">CSS</a>
+		<a class="js" href="http://www.jakpsatweb.cz/javascript/index.html">JavaScript</a>
+		<a class="clanky" href="http://www.jakpsatweb.cz/clanky/index.html">Články</a>
+		<a class="ost" href="http://www.jakpsatweb.cz/navigace/ostatni.html">Ostatní</a>
+	</div>
+	
+<div id="prouzek">
+		
+			
+
+<p><a href="http://www.jakpsatweb.cz/enc/encyklopedie.html">Encyklopedie</a>
+<a href="http://www.jakpsatweb.cz/frontpage/index.html">FrontPage</a>
+<a href="http://www.jakpsatweb.cz/reklama/index.html">Reklama</a> 
+<a href="http://www.jakpsatweb.cz/php/index.html">PHP</a>
+<a href="http://www.jakpsatweb.cz/server/index.html" id="sel">Server</a>
+
+</p></div>
+</div>
+
+
+<div id="hrasek"><a href="http://www.jakpsatweb.cz/index.html">Jak psát web</a> <b>&gt;</b>  <a href="http://www.jakpsatweb.cz/navigace/ostatni.html">Ostatní</a> <b>&gt;</b>  <a href="http://www.jakpsatweb.cz/server/index.html">Server</a> <b>&gt;</b> Mod_rewrite - příklady</div>
+
+<script type="text/javascript" src="mod-rewrite-priklady_soubory/patka.js"></script><div id="prevnexttop" class="panel"> <a href="http://www.jakpsatweb.cz/server/mod-rewrite.html" title="Předchozí: Mod_rewrite, úvodní návod">&lt;</a> <a href="http://www.jakpsatweb.cz/server/index.html" title="Obsah podsekce Server">^</a></div><div id="prevnextbottom" class="panel"> <a href="http://www.jakpsatweb.cz/server/mod-rewrite.html" title="Předchozí: Mod_rewrite, úvodní návod">&lt;</a> <a href="http://www.jakpsatweb.cz/server/index.html" title="Obsah podsekce Server">^</a></div><div id="wherenext"><a href="#navigace" onclick="navigaciDolu(); return false;">Kam dál?</a></div>
+
+<p class="patka-global"><a href="http://www.jakpsatweb.cz/">Jak psát web</a> píše Yuhů, 
+Dušan Janovský. <a href="http://www.jakpsatweb.cz/kontakt.html">Kontakt</a>. 
+<a href="http://www.jakpsatweb.cz/archiv/pristupnost.html">Prohlášení o přístupnosti</a>. Poslední aktualizace
+26. dubna 2008.
+
+</p>
+
+<script src="mod-rewrite-priklady_soubory/my-urchin.js" type="text/javascript"></script>
+
+
+
+
+
+<div style="position: absolute; left: 0px; top: 0px; z-index: 1000000000 ! important; visibility: hidden; opacity: 1;" id="linkalert-box"><img src="mod-rewrite-priklady_soubory/none-icon.png" id="linkalert-icon-1"></div></body></html>

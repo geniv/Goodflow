@@ -1,0 +1,121 @@
+<!doctype html public "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=Windows-1250">
+<title>Sbírka dotazů str. 11</title>
+<link rel='stylesheet' style='text/css' href='../function.css'>
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr>
+	<td style="background-image: url(../images/bghead.jpg);
+		background-position: right;
+		background-repeat: no-repeat;">
+	<table width="100%" border="0" cellpadding="0" cellspacing="0"
+		style="background-image:none">
+	<tr>
+		<td style="background-image:none" height="46"
+			width="15%"><img src="../images/title-cz.gif"
+			width="255" height="33"
+			alt="602SQL-Úplná dokumentace"
+			title="602SQL - Úplná dokumentace"
+			border="0"></td>
+		<td width="33%" align="right"><a href="../xml/html/top.html"><img class="floatno"
+			src="../images/index.gif"
+			width="15" height="16"
+			alt="Index" title="Zpět na obsah"
+			border="0" vspace="2"></a> &nbsp;
+			 </td>
+	</tr>
+	</table>
+	</td>
+</tr>
+</table><table class="navigace" border="0" width="100%"  bgcolor="#FFFFBF"><tr> <td
+width="20" align="center"><img class="floatno" src="../images/prev.gif"
+width="15" height="13" alt="&lt;&shy;" title="Předcházející téma"
+border="0"></td><td width="25%"><a
+href="HE_SQL2_SELECTS10.htm">Strana 10 (subdotaz x JOIN)</a></td> <td width="25%"
+align="right"><img class="floatno" src="../images/up.gif" width="13"
+height="15" alt="Nahoru" title="O jednu úroveň výš" border="0"
+align="middle"></td><td width="25%"><a href="HE_SQL2_SELECTS.htm">Sbírka příkladů SQL dotazů</a></td>
+<td width="25%" align="right"><a
+href="HE_SQL2_SELECTS12.htm">Strana 12 (UNION)</a></td><td width="20"
+align="center"><img class="floatno" src="../images/next.gif" width="15"
+height="13" alt="&shy;&gt;" title="Následující téma" border="0"></td>
+</tr></table>
+
+
+<h1><a name="he_sql2_selects11"></a>Sbírka dotazů – str. 11</h1>
+
+<p><b>Příklad 19</b></p>
+
+<p><b>Zadání:</b> Vypište názvy firem (a případně částku), které mají alespoň jednu fakturu za více než 5000,- Kč.</p>
+
+<p><b>Popis řešení:</b>  V tomto příkladu ukážeme použití subdotazu v části SELECT. Subdotaz pro každé číslo faktury vrátí jméno firmy. Toto jméno lze použít ve výčtu sloupců dotazu.</p>
+
+<p><b>SQL: </b></p>
+
+<pre><code>  SELECT DISTINCT (SELECT nazev
+                   FROM Firmy
+                   WHERE Firmy.cislo=Faktury.firma) AS Nazev
+  FROM Faktury
+  WHERE castka &gt; 5000</code></pre>
+
+<p><b>Poznámky: </b></p>
+
+<p><b>a)</b> Sloupec Nazev odpovědi není samozřejmě editovatelný.</p>
+
+<p><b>b)</b> Stejného výsledku (s možností editace odpovědi) lze dosáhnout takto (Příkl_19a):</p>
+
+<pre><code>  SELECT Firmy.nazev 
+  FROM Firmy
+  WHERE Firmy.cislo =ANY (SELECT Faktury.firma
+                          FROM Faktury
+                          WHERE castka &gt; 5000
+    AND Faktury.firma=Firmy.cislo)</code></pre>
+
+<p><b>c)</b> Stejného výsledku lze dosáhnout i bez subdotazů, pomocí JOINu, např. takto (Příkl_19b):</p>
+
+<pre><code>  SELECT DISTINCT Firmy.nazev 
+  FROM Faktury,Firmy
+  WHERE (castka &gt; 5000)
+    AND (Firmy.cislo=Faktury.firma)</code></pre>
+
+<p><b>d)</b> Stejného výsledku lze dosáhnout také takto (Příkl_19c):</p>
+
+<pre><code>  SELECT DISTINCT Firmy.nazev 
+  FROM Firmy, (SELECT firma,castka
+               FROM Faktury
+               WHERE castka &gt; 5000)
+  WHERE Faktury.firma=Firmy.cislo</code></pre>
+
+
+<br>
+<p><b>Zadání: </b>Pokud by nám ve stejném příkladě stačil jen počet firem, je třeba použít funkce COUNT. Otázkou zůstává umístění klauzule DISTINCT:</p>
+
+<pre><code>  SELECT DISTINCT COUNT(Firmy.nazev) </code></pre>
+
+<p>nedá správný výsledek, je třeba před DISTINCT předřadit COUNT, tj. počítat jen unikátní firmy (Příkl_19d):</p>
+
+<pre><code>  SELECT COUNT (DISTINCT Firmy.nazev) 
+  FROM Faktury,Firmy
+  WHERE (castka &gt; 5000)
+    AND (Firmy.cislo=Faktury.firma)</code></pre>
+
+
+
+<table class="navigace" border="0" width="100%"  bgcolor="#FFFFBF"><tr> <td
+width="20" align="center"><img class="floatno" src="../images/prev.gif"
+width="15" height="13" alt="&lt;&shy;" title="Předcházející téma"
+border="0"></td><td width="25%"><a
+href="HE_SQL2_SELECTS10.htm">Strana 10 (subdotaz x JOIN)</a></td> <td width="25%"
+align="right"><img class="floatno" src="../images/up.gif" width="13"
+height="15" alt="Nahoru" title="O jednu úroveň výš" border="0"
+align="middle"></td><td width="25%"><a href="HE_SQL2_SELECTS.htm">Sbírka příkladů SQL dotazů</a></td>
+<td width="25%" align="right"><a
+href="HE_SQL2_SELECTS12.htm">Strana 12 (UNION)</a></td><td width="20"
+align="center"><img class="floatno" src="../images/next.gif" width="15"
+height="13" alt="&shy;&gt;" title="Následující téma" border="0"></td>
+</tr></table>
+</body>
+</html>

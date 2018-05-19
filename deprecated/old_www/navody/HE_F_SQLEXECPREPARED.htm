@@ -1,0 +1,75 @@
+<!doctype html public "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=Windows-1250">
+<title>Funkce SQL_exec_prepared</title>
+<link rel='stylesheet' style='text/css' href='../function.css'>
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000">
+
+
+
+<h2 class=function>SQL_exec_prepared</h2>
+<img src='../images/cpp.gif' width='44' height='16' border='0' alt='c/c++' align='middle' hspace='2'><img src='../images/pascal.gif' width='44' height='16' border='0' alt='pascal' align='middle' hspace='2'>
+
+
+<br><br>
+<div class='typ'>BOOL <b>[cd_]SQL_exec_prepared</b>([cdp_t cdp], uns32 handle, uns32 * results, int * count);<br>
+function <b>[cd_]SQL_exec_prepared</b>([cdp : cdp_t]; handle : uns32; var results : uns32; var count : integer) : Boolean;
+</div>
+
+
+<p><b>Parametry</b></p>
+
+<table border=1 cols=2>
+
+<tr valign="top">
+<td width=13%><i>handle</i></td>
+<td width=87%>handle (číslo) SQL požadavku získané funkcí <b><code>SQL_prepare</code></b></td>
+</tr>
+
+<tr valign="top">
+<td width=13%><i>results</i></td>
+<td width=87%>pole čísel, do nichž se zapíše informace o výsledku operace; pole musí mít svou první složku před zavoláním inicializovanou hodnotou nula</td>
+</tr>
+
+<tr valign="top">
+<td width=13%><i>count</i></td>
+<td width=87%>počet  SQL příkazů - výstupní parametr</td>
+</tr>
+
+<tr valign="top">
+<td width=13%>[<i>cdp </i></td>
+<td width=87%><a href="HE_EXTCD.htm">kontextová proměnná</a> klienta]  </td>
+</tr>
+</table><br>
+
+<p><b>Od verze:</b></p>
+
+<p>5.1</p>
+
+<p><b>Popis </b></p>
+
+<p>Funkce provede dříve <a href="HE_SQL2_PRIPRAVAPRIKAZU.htm">připravený příkaz</a>, jehož <i>handle</i> dostane jako parametr.</p>
+
+<p>Při volání funkce z vnějšího jazyka je nutné uvést výstupní parametr <i>results</i>. Tímto parametrem je pole 32-bitových celých čísel bez znaménka. Pole musí obsahovat nejméně tolik složek, kolik příkazů jazyka SQL je zadáno v&nbsp;parametru <i>statement</i> funkce <code>SQL_prepare</code>. Parametr <i>results</i> slouží k získání informací o výsledku provádění příkazu. Má relevantní hodnotu pouze v případě, že funkce skončila úspěšně. Pokud byl proveden příkaz <a href="HE_SQL2_UPDATE.htm">UPDATE</a>, <a href="HE_SQL2_DELETE.htm">DELETE</a> nebo <a href="HE_SQL2_INSERT.htm">INSERT</a>, hodnotou příslušného prvku pole je počet zpracovaných záznamů. Pokud byl proveden <a href="HE_SQL2_DOTAZY.htm">dotazový výraz SELECT</a> (není SQL příkaz, lze ho však zde použít pro otevření dotazu), pak ve spodních dvou bajtech prvku pole je číslo otevřeného kurzoru a s otevřeným kurzorem je možné dále pracovat (stejně jako by byl otevřen pomocí funkce <a href="HE_F_OPENCURSORDIRECT.htm"><code>Open_cursor_direct</code></a>). Otevřený kurzor se zavírá pomocí funkce <a href="HE_F_CLOSECURSOR.htm"><code>Close_cursor</code></a>.</p>
+
+<p>Počet provedených SQL příkazů je zapsán do výstupní proměnné <i>count</i>.</p>
+
+<p><b>Hodnota funkce </b></p>
+
+<p>Funkce vrací TRUE při chybě.</p>
+
+<p><b>Viz</b></p>
+
+<ul class='viz'>
+<li><a href="HE_F_SQLEXECUTE.htm">SQL_execute</a> </li>
+<li><a href="HE_F_SQLPREPARE.htm">SQL_prepare</a> </li>
+<li><a href="HE_F_SQLDROP.htm">SQL_drop</a> </li>
+<li><a href="HE_F_SQLHOSTEXECUTE.htm">SQL_host_execute</a> </li>
+<li><a href="../xml/html/f_sql_host_prepare.html">SQL_host_prepare</a></li>
+</ul>
+
+</body>
+</html>

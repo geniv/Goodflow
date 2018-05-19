@@ -1,0 +1,253 @@
+<!doctype html public "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=Windows-1250">
+<title>Funkce Move_data</title>
+<link rel='stylesheet' style='text/css' href='../function.css'>
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000">
+
+
+
+<h2 class=function>Move_data</h2>
+<img src='../images/cpp.gif' width='44' height='16' border='0' alt='c/c++' align='middle' hspace='2'><img src='../images/pascal.gif' width='44' height='16' border='0' alt='pascal' align='middle' hspace='2'>
+
+
+<br><br>
+<div class='typ'>BOOL <b>Move_data</b>(cdp_t cdp, tobjnum move_descr_obj, const char * inpname, tobjnum inpobj, const char * outname, int inpformat, int outformat, int inpcode, int outcode, BOOL silent);<br>
+function <b>Move_data</b>(cdp : cdp_t;  move_descr_obj : tobjnum; inpname : PChar;  inpobj : tobjnum;  outname : PChar; inpformat, outformat, inpcode, outcode: Integer;  silent : Boolean) : Boolean;<br>
+
+</div>
+
+
+<p><b>Parametry</b></p>
+
+<table border=1 cols=2>
+
+<tr valign="top">
+<td width=24%><i>move_descr_obj</i> </td>
+<td width=76%>implicitní návrh přenosu</td>
+</tr>
+
+<tr valign="top">
+<td width=24%><i>inpname </i></td>
+<td width=76%>jméno vstupního souboru, tabulky nebo dotazu</td>
+</tr>
+
+<tr valign="top">
+<td width=24%><i>inpobj</i> </td>
+<td width=76%>číslo otevřeného kurzoru nebo objektu ve 602SQL</td>
+</tr>
+
+<tr valign="top">
+<td width=24%><i>outname </i></td>
+<td width=76%>jméno výstupního souboru, tabulky nebo dotazu</td>
+</tr>
+
+<tr valign="top">
+<td width=24%><i>inpformat </i></td>
+<td width=76%>vstupní formát dat</td>
+</tr>
+
+<tr valign="top">
+<td width=24%><i>outformat </i></td>
+<td width=76%>výstupní formát dat</td>
+</tr>
+
+<tr valign="top">
+<td width=24%><i>inpcode </i></td>
+<td width=76%>kódování češtiny ve vstupním souboru</td>
+</tr>
+
+<tr valign="top">
+<td width=24%><i>outcode </i></td>
+<td width=76%>kódování češtiny ve výstupním souboru</td>
+</tr>
+
+<tr valign="top">
+<td width=24%><i>silent </i></td>
+<td width=76%>určení<i>,</i> zda se mají generovat chybová hlášení na obrazovku.</td>
+</tr>
+
+<tr valign="top">
+<td width=24%><i>cdp </i></td>
+<td width=76%><a href="HE_EXTCD.htm">kontextová proměnná</a> klienta  </td>
+</tr>
+</table><br>
+
+<p><b>Od verze:</b></p>
+
+<p>5.0, změna kódování ve verzi 9.0 </p>
+
+<p><b>Popis </b></p>
+
+<p>Funkce <b><code>Move_data</code></b> provádí přenos dat. Lze jí nahradit všechny předchozí funkce pro exporty a importy dat. Od verze 9.5 existuje ještě obecnější funkce <a href="../xml/html/f_data_transport.html"><code>Data_transport</code></a>, která zahrnuje i ODBC přenosy.</p>
+
+<p>Pokud <i>move_descr_obj </i> je -1, pak se vytvoří implicitní návrh přenosu na základě ostatních parametrů, jinak se přečte návrh přenosu z databáze a pozmění se podle hodnot ostatních parametrů. Číslo popisu lze získat funkcí <a href="HE_F_FINDOBJECT.htm"><code>Find_object</code></a>.</p>
+
+<p>Zdroj a cíl dat jsou popsány svým formátem (<i>inpformat, outformat</i>), a podle svého formátu (v parametrech <i>inpname, outname</i>) také jménem souboru (např. FAKTURY.DBF, PENALE.CSV apod. ) nebo jménem tabulky či dotazu, případně číslem otevřeného kurzoru nebo objektu ve 602SQL (<i>inpobj</i>). Kódováním češtiny ve vstupním a výstupním souboru se zadá v parametrech <i>inpcode </i>a<i> outcode</i>. Data uložená v databázi mají vždy kód 0. Pokud některý parametr nechcete zadat, uveďte pro číselný parametr hodnotu -1, pro řetězcový parametr prázdný řetězec. </p>
+
+<p>Parametr <i>silent</i> říká, zda se mají generovat chybová hlášení na obrazovku, včetně varování při přepsání již existujícího souboru (<i>silent</i>=TRUE) či nikoliv (<i>silent</i>=FALSE).</p>
+
+<p>Soubor, z něhož se mají číst (nebo do něhož se mají zapisovat) data nesmí být jiným procesem otevřen.</p>
+
+<p>Je-li tato funkce zavolána uvnitř transakce, bude tato transakce ukončena. Efekt funkce nelze odvolat pomocí <b><code>Roll_back.</code></b></p>
+
+<p>Přenos dat lze nastavovat i ručně pomocí návrháře přenosů. </p>
+
+<p>Formát se zadává těmito konstantami:</p>
+
+<table border=1 cols=3>
+
+<tr valign="top">
+<td width=36%>
+<code>IMPEXP_FORMAT_WINBASE</code>
+</td>
+<td width=5%>0</td>
+<td width=59%>soubor ve vnitřním formátu<b> </b>602SQL (TDT)</td>
+</tr>
+
+<tr valign="top">
+<td width=36%>
+<code>IMPEXP_FORMAT_TEXT_COLUMNS</code>
+</td>
+<td width=5%>1</td>
+<td width=59%>textový soubor ve sloupcovém formátu</td>
+</tr>
+
+<tr valign="top">
+<td width=36%>
+<code>IMPEXP_FORMAT_TEXT_CSV </code>
+</td>
+<td width=5%>2</td>
+<td width=59%>textový soubor ve formátu CSV</td>
+</tr>
+
+<tr valign="top">
+<td width=36%>
+<code>IMPEXP_FORMAT_DBASE</code>
+</td>
+<td width=5%>3</td>
+<td width=59%>soubor ve formátu dBase IV (DBF)</td>
+</tr>
+
+<tr valign="top">
+<td width=36%>
+<code>IMPEXP_FORMAT_FOXPRO </code>
+</td>
+<td width=5%>4</td>
+<td width=59%>soubor ve formátu FoxPro 2.0 (DBF)</td>
+</tr>
+
+<!--<tr valign="top">
+<td width=36%>
+<code>IMPEXP_FORMAT_ODBC</code>
+</td>
+<td width=5%>5</td>
+<td width=59%>tabulka připojena přes ODBC</td>
+</tr>-->
+
+<tr valign="top">
+<td width=36%>
+<code>IMPEXP_FORMAT_CURSOR </code>
+</td>
+<td width=5%>6</td>
+<td width=59%>pevný kurzor ve 602SQL (pouze pro vstup)</td>
+</tr>
+
+<tr valign="top">
+<td width=36%>
+<code>IMPEXP_FORMAT_TABLE </code>
+</td>
+<td width=5%>10</td>
+<td width=59%>tabulka ve 602SQL<b> </b>(pro vstup také proměnný kurzor)</td>
+</tr>
+
+<tr valign="top">
+<td width=36%>
+<code>IMPEXP_FORMAT_TABLE_REIND </code>
+</td>
+<td width=5%>11</td>
+<td width=59%>tabulka ve 602SQL, indexy se mění až po přenosu</td>
+</tr>
+</table><br>
+
+<p>Při exportu z proměnného kurzoru (10) lze použít pouze vnitřní formát 602SQL (0). </p>
+
+<p>Při importu z vnitřního formátu (0) do tabulky ve 602SQL (10,11) nelze vytvořit novou tabulku, použít existující lze.</p>
+
+<p>Kódování se zadává těmito konstantami:</p>
+
+<table border=1 cols=2>
+
+<tr valign="top">
+<td width=8%><strong>hodnota</strong>  </td>
+<td width=46%>od verze <strong>9.0</strong></td>
+<td width=46%>do verze <strong>8.1</strong></td>
+</tr>
+
+<tr valign="top">
+<td>0  </td>
+<td>Windows cp1250</td>
+<td>Windows cp1250</td>
+</tr>
+
+<tr valign="top">
+<td width=8%>1 </td>
+<td>Windows cp1252</td>
+<td>Kód Kamenických, KEYBCS2;</td>
+</tr>
+
+<tr valign="top">
+<td width=8%>2  </td>
+<td>ASCII</td>
+<td>Kód KOI8-CS;</td>
+</tr>
+
+<tr valign="top">
+<td width=8%>3  </td>
+<td>ISO 8859-2</td>
+<td>Kód LATIN 2 použitý v Text602;</td>
+</tr>
+
+<tr valign="top">
+<td width=8%>4  </td>
+<td>DOS cp852 (LATIN 2);</td>
+<td>DOS cp852 (LATIN 2);</td>
+</tr>
+
+<tr valign="top">
+<td width=8%>5  </td>
+<td>ISO 8859-1</td>
+<td>Kód Windows ANSI (Windows 3.0)</td>
+</tr>
+
+
+<tr valign="top">
+<td width=8%>6  </td>
+<td>UTF-8</td>
+<td>- N/A -</td>
+</tr>
+
+<tr valign="top">
+<td width=8%>7  </td>
+<td>UCS-2</td>
+<td>- N/A -</td>
+</tr>
+
+<tr valign="top">
+<td width=8%>8  </td>
+<td>UCS-4</td>
+<td>- N/A -</td>
+</tr>
+
+</table><br>
+
+<p><b>Hodnota funkce </b></p>
+
+<p>Funkce vrací FALSE při chybě.</p>
+
+
+</body>
+</html>

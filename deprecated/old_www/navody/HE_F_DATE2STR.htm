@@ -1,0 +1,105 @@
+<!doctype html public "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=Windows-1250">
+<title>Funkce Date2str</title>
+<link rel='stylesheet' style='text/css' href='../function.css'>
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000">
+
+
+
+<h2 class=function>Date2str</h2>
+<img src='../images/sql.gif' width='44' height='16' border='0' alt='sql' align='middle' hspace='2'>
+
+
+<br><br>
+<div class='typ'>FUNCTION <b>Date2str</b>(IN dt DATE, IN prez SMALLINT) RETURNS CHAR();
+</div>
+
+
+<p><b>Parametry</b></p>
+
+<table border=1 cols=2 frame=box rules=all width=500>
+
+<tr valign="top">
+<td width=23%><i>dt</i></td>
+<td width=77%>hodnota, která se má konvertovat</td>
+</tr>
+
+<tr valign="top">
+<td width=23%><i>prez</i></td>
+<td width=77%>způsob konverze</td>
+</tr>
+</table><br>
+
+<p><b>Popis</b></p>
+
+<p>Funkce <b><code>Date2str</code></b> převede hodnotu zadanou prvním parametrem na řetězec znaků. Při konverzi se použije </p>
+
+<p>hodnota parametru <i>prez</i> takto:</p>
+
+<table border=1 cols=2 frame=box rules=all >
+
+<tr valign="top">
+<td><b>Hodnota</b></td>
+<td><b>Význam</b></td>
+</tr>
+
+<tr valign="top">
+<td>0</td>
+<td>zápis data bude obsahovat pouze den a měsíc zapsaný číslicí, bez roku (<code>30.2.</code>);</td>
+</tr>
+
+<tr valign="top">
+<td>1</td>
+<td>zápis data bude obsahovat den, měsíc zapsaný číslicí a rok (<code>30.2.2004</code>);</td>
+</tr>
+
+<!--
+<tr valign="top">
+<td>2</td>
+<td>zápis data bude obsahovat pouze den a měsíc zapsaný slovem, bez roku (<code>30.únor</code>);</td>
+</tr>
+
+<tr valign="top">
+<td>3</td>
+<td>zápis data bude obsahovat den, měsíc zapsaný slovem a rok (<code>30.únor 2004</code>);</td>
+</tr>
+
+<tr valign="top">
+<td>4</td>
+<td>zápis data bude v&nbsp;dlouhém formátu převzatém z Windows nebo ve formátu, který vrací Linux;</td>
+</tr>
+
+<tr valign="top">
+<td>5</td>
+<td>zápis data bude v&nbsp;krátkém formátu převzatém z Windows, pro Linux stejné jako 4;</td>
+</tr>
+-->
+<tr valign="top">
+<td>99</td>
+<td>zápis data bude odpovídat 602SQL syntaxi literálu v SQL; bude obsahovat den, měsíc zapsaný číslicí a rok (<code>30.2.2004</code>).</td>
+</tr>
+
+</table><br>
+
+<p><b>Hodnota funkce</b></p>
+
+<p>Funkce vrací textový zápis data <i>dt</i>.</p>
+
+<p><b>Viz</b></p>
+
+<ul class='viz'>
+ <li><a href="HE_F_INT2STR.htm">Int2str</a> </li>
+ <li><a href="HE_F_STR2INT.htm">Str2int</a> </li>
+ <li><a href="HE_F_REAL2STR.htm">Real2str</a> </li>
+ <li><a href="HE_F_STR2REAL.htm">Str2real</a> </li>
+ <li><a href="HE_F_STR2DATE.htm">Str2date</a> </li>
+ <li><a href="HE_F_STR2TIME.htm">Str2time</a> </li>
+ <li><a href="HE_F_TIME2STR.htm">Time2str</a></li>
+</ul>
+
+</body>
+</html>

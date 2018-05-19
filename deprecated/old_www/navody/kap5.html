@@ -1,0 +1,109 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head>
+<meta http-equiv="Content-Type" content="text/html; charset=Windows-1250"><title>5. Pohledy</title>
+
+
+	
+    <link rel="STYLESHEET" type="text/css" href="kap5_soubory/main.css">
+	<style type="text/css"><!--:hover { font-weight: bold;         color: red }
+--></style></head><body alink="Blue" background="kap5_soubory/pozadi.jpg" vlink="Blue">
+<a name="k"></a>
+<a href="http://www.cs.vsb.cz/amalka/tomica/sql/kap4.html"><img src="kap5_soubory/prev.gif" alt="4. Systémový katalog"></a>
+<a href="http://www.cs.vsb.cz/amalka/tomica/sql/kap6.html"><img src="kap5_soubory/next.gif" alt="6. Ochrana dat proti neoprávněnému přístupu"></a>
+<a href="http://www.cs.vsb.cz/amalka/tomica/sql/index.html"><img src="kap5_soubory/toc.gif" alt="Obsah"></a>
+<hr color="Blue" size="1">
+<h1>5. Pohledy</h1>
+<dt><a href="#k1">5.1 Aktualizace pohledů</a></dt>
+<p>Pohledy jsou virtuální relace implementující externí schémata. Každý
+pohled umožňuje vidět aplikaci uživatelskýma očima. Uvažujme např.
+uživatele-knihovníka, kterého zajímají pouze pražští čtenáři (zasílá
+jim např. seznam přírůstků). Pohled vyjadřující tento fakt lze zapsat
+následovně:</p>
+<pre>CREATE VIEW Prazak
+    AS SELECT cislo,jmeno,adresa
+       FROM Ctenar
+       WHERE adresa LIKE '%PRAHA%'</pre>
+<p>Jiným pohledem by byla např. STATISTIKA definovaná jako</p>
+<pre>CREATE VIEW Statistika (cislo,pocet)
+    AS SELECT cislo, COUNT(id_v )
+       FROM Vypujcka
+       GROUP BY cislo</pre>
+<p>Příkaz pro vytvoření pohledu je dán kombinací definice schématu
+virtuální relace a zobrazení specifikujícího, jak se prvky této relace
+odvodí z prvků jiných relací.</p>
+<pre>CREATE VIEW jméno-pohledu [(v jméno-atrl[,v jméno-atr2]...)]
+    AS SELECT [DISTINCT] {* jméno-atrl[,jméno-atr2]...}
+       FROM jméno-rel l [,jméno-rel2]...
+       [WHERE podmínkal]
+	   [GROUP BY o jméno-atrl[,o-jméno-atr2]...
+	   [HAVING podmínka2]]&gt;
+	   [ENABLE UPDATES]</pre>
+<p class="BEZ">kde poslední klauzule příkazu označuje, že je možné vkládat nebo měnit prvky pohledu.</p>
+<p>Narozdíl od případu, kdy se definuje relace a "naplní" fyzicky daty,
+v případě pohledu STATISTIKA se do katalogu uloží schéma pohledu. tj.
+schéma specifikované relace spolu se zobrazením, které definuje pohled
+nad základními relacemi. Atributy pohledu se definují stejně jako
+atributy jiných tabulek. Jména se bud' dědí ze zdrojových relací
+pohledu, nebo se specifikují explicitně, dochází-li ke dvojznačnostem,
+nebo když jméno atributu neexistuje (při použití agregační funkce či
+aritmetického výrazu). Podobně se dědí typ atributu.</p>
+<p>Jazyk SQL neklade žádná omezení na tvorbu pohledů, omezení vznikají
+v jednotlivých SŘBD (např. v INFORMIXu nesmí být za AS použito UNION).
+Pohledy lze rušit příkazem DROP VIEW. Např.</p>
+<pre>DROP VIEW Prazak</pre>
+<p>zajistí odstranění definice pohledu Prazak z katalogu. Zruší-li se základní relace Ctenar. zruší se Prazak automaticky.</p>
+<p>Příkaz SELECT lze nyní rozšířit i na pohledy. Při vyhodnocení dotazu
+se zobrazení popisující pohled zkombinuje s podmínkami v dotazu.
+Existující implementace SQL však obvykle neumožňují stoprocentní
+použití SQL pro výběr nad pohledy.</p>
+<p>
+</p><h2><a name="k1"></a>5.1 Aktualizace pohledů</h2>
+<a href="#k"><img src="kap5_soubory/toc.gif" alt="Obsah 5. kapitoly"></a>
+<p>Skutečným problémem je aktualizace pohledů. Ne na všech pohledech
+lze totiž použít aktualizační operace. Uvědomme si, že v případě
+aktualizace základních relací žádné problémy nevznikají. Virtuálně se
+pohledy aktualizují automaticky, tak jak se aktualizují základní
+relace, nad kterými jsou pohledy definovány.</p>
+<p>Uvažujme nejprve případ, kdy pohled vznikne omezením jedné relace. Jsou možné tři typy takových omezení:</p>
+<dt><b>projektivní</b> (omezuje sloupce),</dt>
+<dt><b>selektivní</b> (omezuje řádky),</dt>
+<dt><b>agregační</b> (atribut je definován agregační funkcí).</dt>
+<p>Zachovává-li projektivní omezení primární klíč, pak je dovolena
+jakákoli aktualizace. Do tabulky pohledu lze např. vložit další n-tici,
+což implikuje vložení jisté n-tice do základu relace. Problémem však
+může být, když je třeba vložit prázdnou hodnotu, přičemž daný atribut v
+základní relaci byl definován jako NOT NULL.</p>
+<p>Jestliže projektivní omezení nezachovává primární klíč, nemusí být
+aktualizace "dobře", definovány. Také projekce na pouze neklíčové
+atributy relací, které jsou dobře navrženu ,jsou např. v 3.NF [Po92]),
+zřejmě nevedou ke smysluplným pohledům.</p>
+<p>Protože selektivní omezení zachovává primární klíč vždy, neposkytuje
+tento případ nic zajímavého k řešení. Agregační omezení (viz např.
+pohled STATISTIKA) nevedou pohledům, které by mohly být smysluplně
+aktualizovány.</p>
+<p>Uvažujme nyní pohledy, které vzniknou spojením dvou nebo více
+relací. Ve většině případu opět nevede aktualizace takového pohledu k
+jednoznačně (a smysluplně) definovaným aktualizacím základních relací.</p>
+<p>Problémy však mohou vzniknout i v na první pohled jasných případech
+s jednou základní relací. Např. Prazak je pohled, který vznikl selekcí
+prvků relace Ctenar. Provedeme-li na něj aktualizaci adresy např.
+použití operace INSERT tak, že nebude nová adresa pražská. nezmění se
+pohled, nýbrž pouze základní relace. Zabránit tomuto patologickému
+případu lze v SQL tím, že se v definici pohledu použije klauzule WITH
+CHECK OPTION, která po aktivaci kontroluje, zda aktualizací nebyla
+narušena podmínka v definici pohledu.</p>
+<p>Aktualizace pohledů je složitá i teoreticky. Současné SŘBD s SQL se
+jí vyhýbají tím. že připouštějí pouze omezené možností pro aktualizaci
+pohledů. V DB2 nebo v dBASE IV je aktualizace možná jen na projektivním
+a/nebo selektivním omezení základních relaci. Standard SQL specifikuje
+tzv. aktualizovatelné pohledy, které jsou založeny na projektivním a
+selektivním omezení jedné relace, přičemž je zakázáno použít DISTINCT,
+GROUP BY' a hnízděný SELECT blok.</p>
+<p>Schémata relací a definice pohledů lze kombinovat do schématu
+databáze příkazem CREATE SCHEMA (viz. kap 1), po němž následují
+schémata relací a pohledů.</p>
+<hr color="Blue" size="1">
+<a href="http://www.cs.vsb.cz/amalka/tomica/sql/kap4.html"><img src="kap5_soubory/prev.gif" alt="4. Systémový katalog" align="left"></a>
+<a href="http://www.cs.vsb.cz/amalka/tomica/sql/kap6.html"><img src="kap5_soubory/next.gif" alt="6. Ochrana dat proti neoprávněnému přístupu" align="left"></a>
+<a href="http://www.cs.vsb.cz/amalka/tomica/sql/index.html"><img src="kap5_soubory/toc.gif" alt="Obsah" align="left"></a>
+</body></html>

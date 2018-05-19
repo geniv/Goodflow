@@ -1,0 +1,74 @@
+<!doctype html public "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=Windows-1250">
+<title>Funkce Read_record</title>
+<link rel='stylesheet' style='text/css' href='../function.css'>
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000">
+
+
+
+<h2 class=function>Read_record</h2>
+<img src='../images/cpp.gif' width='44' height='16' border='0' alt='c/c++' align='middle' hspace='2'><img src='../images/pascal.gif' width='44' height='16' border='0' alt='pascal' align='middle' hspace='2'>
+
+
+<br><br>
+<div class='typ'>BOOL <b>[cd_]Read_record</b>([cdp_t cdp], tcurstab curs,  trecnum position, void * buf,  uns16 datasize)<br>
+function <b>[cd_]Read_record</b>([cdp : cdp_t]; curs : tcurstab;  position : trecnum; var buffer; datasize : uns16) : Boolean;
+</div>
+
+
+<p><b>Parametry</b></p>
+
+<table border=1 cols=2 frame=box rules=all width=480>
+
+<tr valign="top">
+<td width=14%><i>curs</i> </td>
+<td width=86%>číslo tabulky nebo číslo otevřeného kurzoru - viz <a href="HE_KYPAR.htm">podrobnosti</a></td>
+</tr>
+
+<tr valign="top">
+<td width=14%><i>position</i> </td>
+<td width=86%>číslo záznamu</td>
+</tr>
+
+<tr valign="top">
+<td width=14%><i>buffer</i> </td>
+<td width=86%>buffer pro data </td>
+</tr>
+
+<tr valign="top">
+<td width=14%><i>datasize</i> </td>
+<td width=86%>velikost dat v bajtech </td>
+</tr>
+
+<tr valign="top">
+<td width=14%>[<i>cdp </i></td>
+<td width=86%><a href="HE_EXTCD.htm">kontextová proměnná</a> klienta]  </td>
+</tr>
+</table><br>
+
+<p><b>Popis </b></p>
+
+<p>Funkce přečte celý záznam z tabulky zadané svým číslem (nalezeným funkcí <b><code>Find_object</code></b>) nebo kurzoru (otevřeného funkcí <b><code>Open_cursor</code></b> nebo <b><code>Open_cursor_direct</code></b>). </p>
+
+<p>Funkce přečte ze záznamu s číslem <i>position</i> v tabulce nebo kurzoru <i>curs</i> všechny sloupce. Hodnoty těchto sloupců zapíše do proměnné <i>buffer</i> bezprostředně za sebou. Jejich celková velikost musí být <i>datasize</i>.</p>
+
+<p>Hodnoty sloupců jsou načteny do <i>buffer</i> v tom pořadí, v němž jsou definovány v tabulce nebo kurzoru <i>curs</i>. Funkce nepracuje se sloupcem DELETED, s&nbsp;hodnotami multiatributů ani sloupců proměnné velikosti. Pro ně se v <i>buffer</i> nevynechává žádné místo.</p>
+
+<p>V parametru <i>buffer</i> musí být pro každý čtený sloupec typu řetězec o jeden bajt více, než činí maximální délka řetězce. <!--Pro sloupec typu <b>Autorizace</b> musí být rezervováno dvanáct bajtů pro ID uživatele.--></p>
+
+<!--<p>V klientském programovacím jazyce nahrazuje tuto funkci přímé přiřazení mezi záznamem v databázi a proměnnou typu záznam.</p>-->
+
+<p><b>Hodnota funkce </b></p>
+
+<p>Funkce vrací při úspěchu FALSE, při neúspěchu TRUE.</p>
+
+<p><b>Viz</b></p>
+
+<ul class='viz'><li><a href="HE_F_READ_E.htm">Read</a> <li><a href="HE_F_WRITE_E.htm">Write</a> <li><a href="HE_F_WRITERECORD.htm">Write_record</a> <li><a href="HE_F_FINDOBJECT.htm">Find_object</a> <li><a href="HE_F_OPENCURSOR_E.htm">Open_cursor</a> <li><a href="HE_F_OPENCURSORDIRECT.htm">Open_cursor_direct</a></ul>
+
+</body>
+</html>

@@ -1,0 +1,81 @@
+<!doctype html public "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=Windows-1250">
+<title>Funkce Fulltext_create</title>
+<link rel='stylesheet' style='text/css' href='../function.css'>
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000">
+
+
+
+<h2 class=function>Fulltext_create</h2>
+<img src='../images/sql.gif' width='44' height='16' border='0' alt='sql' align='middle' hspace='2'>
+
+
+<br><br>
+<div class='typ'>FUNCTION <b>Fulltext_create</b>(IN ft_label CHAR(52), IN params CHAR(255)) RETURNS BOOLEAN;
+</div>
+
+
+<p><b>Parametry:</b></p>
+
+<table border=1 cols=2 frame=box rules=all width=440>
+
+<tr valign="top">
+<td width=24%><i>ft_label </i></td>
+<td width=76%> označení fulltextového systému;</td>
+</tr>
+
+<tr valign="top">
+<td width=24%><i>params </i></td>
+<td width=76%> parametry fulltextového systému</td>
+</tr>
+</table><br>
+
+<p><b>Od verze:</b></p>
+
+<p>7.0</p>
+
+<p><b>Popis:</b></p>
+
+<p>Zastaralá funkce, nahrazena od verze 9.5 SQL příkazem <a href="../xml/html/fulltext_create.html">CREATE FULLTEXT</a>.</p>
+
+<p>Funkce vytvoří na SQL serveru nový fulltextový systém. Parametr <i>ft_label</i> určuje aplikaci, v niž bude fulltextový systém vytvořen, a případný identifikátor sloužící k rozlišení fulltextových systému v rámci jedné aplikace.</p>
+
+<p>Parametry fulltextového systému se zadávají jako řetězec znaků obsahující jeden nebo více zápisů ve tvaru <i>klíč=hodnota</i> oddělených středníkem. Jsou definovány významy těchto klíčů:</p>
+
+<p><b><i>basic_form</i></b>=0, pokud systém má rozlišovat tvary slov, nebo 1, pokud systém má považovat všechny tvary za stejné slovo;</p>
+
+<p><b><i>language</i></b>=kód jazyka (0=čeština, 1=slovenština, 2=němčina, 3=americká angličtina, 4=britská angličtina, 5=polština, 6=maďarština, 7=francouzština);</p>
+
+<p><b><i>weighted</i></b>=0, pokud všechny výskyty slov v&nbsp;dokumentu mají stejnou váhu, nebo 1, pokud se rozlišují váhy výskytu slova v dokumentu.</p>
+
+<p>Defaultní parametry zadané prázdným řetězcem odpovídající nastavení "<code>basic_form=1;language=0;weighted=0</code>" vytvoří fulltextový systém pro češtinu, sledující základní tvar slova a nerozlišující mezi váhami výskytu slova v&nbsp;dokumentu.</p>
+
+<p><b>Hodnota funkce</b></p>
+
+<p>Funkce vrací TRUE při úspěchu, FALSE při chybě.</p>
+
+<p><b>Příklady:</b></p>
+
+<p><code>CALL Fulltext_create("", "")</code> vytvoří nový fulltextový systém s prázdným identifikátorem s defaultními parametry v běžné aplikaci. </p>
+
+<p><code>CALL Fulltext_create("SPISOVNA.DOPISY", "basic_form=1;language=0;weighted=0")</code> - vytvoří nový fulltextový systém DOPISY v aplikaci SPISOVNA. </p>
+
+<p><code>CALL Fulltext_create("SPISOVNA", "")</code> - vytvoří nový fulltextový systém s prázdným identifikátorem v aplikaci SPISOVNA. </p>
+
+<p><code>CALL Fulltext_create(".ROZHODNUTI", "")</code> vytvoří nový fulltextový systém ROZHODNUTI v otevřené aplikaci</p>
+
+<p><b>Viz</b></p>
+
+<ul class='viz'>
+ <li><a href="../xml/html/fulltext.html">Fulltextové nástroje ve 602SQL</a> </li>
+ <li><a href="../xml/html/fulltext_doctab.html">Označování a uložení dokumentů ve fulltextových systémech</a> </li>
+ <li><a href="../xml/html/fulltext_search.html">Fulltextové vyhledávání dokumentů</a></li>
+ <li><a href="HEJ_F_FULLTEXTDESTROY.htm">Fulltext_destroy</a> </li>
+</ul>
+
+</body>
+</html>

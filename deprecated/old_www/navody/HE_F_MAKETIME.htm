@@ -1,0 +1,74 @@
+<!doctype html public "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=Windows-1250">
+<title>Funkce Make_time</title>
+<link rel='stylesheet' style='text/css' href='../function.css'>
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000">
+
+
+
+<h2 class=function>Make_time</h2>
+<img src='../images/cpp.gif' width='44' height='16' border='0' alt='c/c++' align='middle' hspace='2'><img src='../images/pascal.gif' width='44' height='16' border='0' alt='pascal' align='middle' hspace='2'><img src='../images/sql.gif' width='44' height='16' border='0' alt='sql' align='middle' hspace='2'>
+
+
+<br><br>
+<div class='typ'>uns32 <b>Make_time</b>(int hours, int minutes, int seconds, int sec1000);<br>
+function <b>Make_time</b>(hours, minutes, seconds, sec1000 : integer) uns32;<br>
+FUNCTION <b>Make_time</b>(IN hours INT, IN minutes INT, IN seconds INT, IN sec1000 INT) RETURNS TIME;
+</div>
+
+
+<p><b>Parametry</b></p>
+
+<table border=1 cols=2 frame=box rules=all width=400>
+
+<tr valign="top">
+<td width=23%><i>hours </i></td>
+<td width=77%>počet hodin</td>
+</tr>
+
+<tr valign="top">
+<td width=23%><i>minutes </i></td>
+<td width=77%>počet minut</td>
+</tr>
+
+<tr valign="top">
+<td width=23%><i>seconds </i></td>
+<td width=77%>počet sekund</td>
+</tr>
+
+<tr valign="top">
+<td width=23%><i>sec1000 </i></td>
+<td width=77%>počet tisícin sekundy</td>
+</tr>
+</table><br>
+
+<p><b>Popis </b></p>
+
+<p>Funkce<b><code> Make_time</code></b> vytváří údaj o čase ze 4 složek: hodin, minut, sekund a setin sekundy. Povolený rozsah pro hodiny je 0 až 23, pro minuty a sekundy 0 až 59, pro tisíciny 0 až 999.</p>
+
+<p><b>Hodnota funkce </b></p>
+
+<p>Funkce vrací vytvořený údaj o čase ve vnitřním formátu 602SQL. Nelze-li čas vytvořit (např. 25:00), vrátí NONETIME (NULL v SQL).</p>
+
+<p><b>Viz</b></p>
+
+<ul class='viz'>
+ <li><a href="HE_F_MAKEDATE.htm">Make_date</a> </li>
+ <li><a href="HE_F_DAY.htm">Day</a> </li>
+ <li><a href="HE_F_MONTH.htm">Month</a> </li>
+ <li><a href="HE_F_YEAR.htm">Year</a> </li>
+ <li><a href="HE_F_TODAY.htm">Today</a> </li>
+ <li><a href="HE_F_HOURS.htm">Hours</a> </li>
+ <li><a href="HE_F_MINUTES.htm">Minutes</a> </li>
+ <li><a href="HE_F_SECONDS.htm">Seconds</a> </li>
+ <li><a href="HE_F_SEC1000.htm">Sec1000</a> </li>
+ <li><a href="HE_F_NOW.htm">Now</a></li>
+ <li><a href="HE_F_DATETIME2TIMESTAMP.htm">datetime2timestamp</a> </li>
+</ul>
+
+</body>
+</html>

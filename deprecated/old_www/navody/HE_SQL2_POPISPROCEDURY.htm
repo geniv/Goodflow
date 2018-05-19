@@ -1,0 +1,133 @@
+<!doctype html public "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=Windows-1250">
+<title>Syntaxe rutiny v SQL</title>
+<link rel='stylesheet' style='text/css' href='../function.css'>
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr>
+	<td style="background-image: url(../images/bghead.jpg);
+		background-position: right;
+		background-repeat: no-repeat;">
+	<table width="100%" border="0" cellpadding="0" cellspacing="0"
+		style="background-image:none">
+	<tr>
+		<td style="background-image:none" height="46"
+			width="15%"><img src="../images/title-cz.gif"
+			width="255" height="33"
+			alt="602SQL-Úplná dokumentace"
+			title="602SQL - Úplná dokumentace"
+			border="0"></td>
+		<td width="33%" align="right"><a href="../xml/html/top.html"><img class="floatno"
+			src="../images/index.gif"
+			width="15" height="16"
+			alt="Index" title="Zpět na obsah"
+			border="0" vspace="2"></a> &nbsp;
+			 </td>
+	</tr>
+	</table>
+	</td>
+</tr>
+</table><table class="navigace" border="0" width="100%"  bgcolor="#FFFFBF">
+		  <tr>
+					 <td width="20" align="center">&nbsp;</td>
+					 <td width="25%">&nbsp;</td>
+					 <td width="25%"
+align="right"><img class="floatno" src="../images/up.gif" width="13"
+height="15" alt="Nahoru" title="O jednu úroveň výš" border="0"
+align="middle"></td><td width="25%"><a href="HE_SQL2_STOREDPROCEDURE.htm">Rutiny uložené na serveru</a></td>
+<td width="25%" align="right"><a
+href="HE_SQL2_CREATEPROCEDURE.htm">Vytvoření rutiny (CREATE PROCEDURE | FUNCTION)</a></td><td width="20"
+align="center"><img class="floatno" src="../images/next.gif" width="15"
+height="13" alt="&shy;&gt;" title="Následující téma" border="0"></td>
+</tr></table>
+
+
+
+
+
+<h1><a name="he_sql2_popisprocedury"></a>Syntaxe popisu rutiny (SQL)</h1>
+
+<pre><code>popis_rutiny ::= { popis_procedury | popis_funkce };
+popis_procedury ::= PROCEDURE [schéma.]jméno ([ formální_parametr {, formální_parametr }… ]) ; tělo
+popis_funkce ::= FUNCTION jméno ([ formální_parametr {, formální_parametr }… ]) RETURNS typ; tělo
+formální_parametr ::= [ mód_parametru ] [ jméno ] typ [ DEFAULT výraz ]
+mód_parametru  ::= IN | OUT | INOUT
+tělo ::= příkaz | EXTERNAL NAME  označení_externí_rutiny</code></pre>
+
+<p>Každá rutina má svoje jméno, pomocí něhož se volá. Dále rutina obsahuje výčet formálních parametrů, jimž se při volání rutiny přiřadí skutečné parametry. Po zavolání rutiny se provede její <i>tělo</i> -<a href="HE_SQL2_PRIKAZY.htm">jednoduchý</a> nebo <a href="HE_SQL2_SLOZENYPRIKAZ.htm">složený příkaz</a>.</p>
+
+<p>Je-li v těle rutiny v rámci složeného příkazu zavolán příkaz <a href="HE_SQL2_LEAVE.htm">LEAVE</a>, je možné jako návěští použít jméno rutiny.</p>
+
+<p><i>Mód parametru</i> určuje způsob předávání hodnoty parametru na začátku a konci provádění rutiny. Pokud tělo neobsahuje specifikaci EXTERNAL, pak platí tato pravidla: Při zahájení provádění rutiny se hodnoty skutečných parametrů s módy IN (vstupní parametr) a INOUT (vstupně-výstupní parametry) zkopírují do formálních parametrů. Po skončení provádění rutiny se hodnoty formálních parametrů s módy OUT (výstupní parametry) a INOUT zkopírují (zpět) do skutečných parametrů. Pokud mód není uveden, pak se v&nbsp;případě funkce předpokládá IN, v&nbsp;případě procedury se odvodí ze zacházení s&nbsp;formálním parametrem v&nbsp;těle procedury takto: parametry, jejichž hodnota se čte, mají mód IN, parametry, do nichž se zapisuje, mód OUT, a parametry, jejichž hodnota se čte i přepisuje, mód INOUT.</p>
+
+<p>Pokud při volání rutiny není některý parametr uveden, pak příslušný formální parametr bude mít hodnotu <i>výrazu</i> uvedeného za DEFAULT. Není-li takový výraz uveden, bude hodnota parametru NULL. Je-li mód takového parametru OUT nebo INOUT, nezapíše se při ukončení rutiny hodnota formálního parametru nikam.</p>
+
+<p><i>Jméno</i> parametru lze ve specifikaci <i>formálního parametru </i>vynechat. Na takový parametr se však nelze v&nbsp;těle odvolávat. Vynechání jména má proto smysl pouze u externích rutin.</p>
+
+<p>Rutina, v&nbsp;jejímž těle je specifikováno EXTERNAL, je implementována v&nbsp;externí knihovně DLL (resp. so na Linuxu). <i>Označení externí rutin</i><i>y</i> je řetězec znaků ve tvaru<code> ‘jméno_funkce@jméno_knihovny’</code>. Ve jméně knihovny lze uvést cestu - pokud cesta uvedena není, hledá se podle pravidel operačního systému (proměnná PATH). Pokud u jména knihovny chybí přípona, doplní se ve Windows <code>.DLL</code> a na Linuxu <code>.so</code>. Díky tomu je možné psát jeden kód pro obě prostředí - stejná externí funkce se najde v obou prostředích.</p>
+
+<p>Pokud knihovna není nalezena nebo pokud v&nbsp;knihovně není nalezena funkce uvedeného jména, nastane chybový <a href="../xml/html/handlingcategories.html">sqlstate</a> 38001 (SQ_EXT_ROUT_NOT_AVAIL) resp. W0224 (LIBRARY_NOT_FOUND). Pokud není knihovna v <a href="../xml/html/dllfolders.html">adresáři</a>, ze kterého je povoleno spouštět knihovny, nastane chyba W0223 (LIBRARY_ACCESS_DISABLED).</p>
+
+<p>Pro předávání parametru do externích rutin platí přísná pravidla definující vztah mezi formálními parametry uvedenými v&nbsp;deklaraci a parametry volaných rutin vytvořených v&nbsp;externím jazyce. Viz <a href="HE_SQL2_EXTERNIRUTINY.htm">Volání externích rutin a předávání parametrů</a>.</p>
+
+<p><b>Rozšíření jazyka SQL proti normě</b>
+
+<ul>
+	<li>Ve 602SQL funkce smějí mít parametry s&nbsp;<i>módem</i> IN, OUT nebo INOUT, zatímco SQL 3 povoluje pouze <i>mód</i> IN.</li>
+</ul>
+
+<p><b>Příklad použití</b>: (z aplikace Knihovna)</p>
+
+<pre><code>PROCEDURE CancelRes(IN lim INT);
+BEGIN
+
+  DECLARE PROCEDURE CheckResBook(code CHAR(8));  // pomocná lokální procedura
+  BEGIN
+    DECLARE pocet INT;
+    SELECT COUNT(co) INTO pocet               // kolikrát je daná kniha rezervována?
+    FROM Rezervace
+    WHERE Rezervace.co = code;
+
+    IF pocet = 1 THEN                        // pouze jednou, pak odstraň označení
+      UPDATE Knihy
+      SET Knihy.rezervovana = FALSE
+      WHERE Knihy.kod = code;
+    END IF;
+  END;
+
+  FOR radek AS pomc SENSITIVE CURSOR FOR        // pro všechny rezervace po limitu proveď
+    SELECT * 
+    FROM Rezervace
+    WHERE CURRENT_DATE - Rezervace.dat_rez &gt; lim
+  DO BEGIN
+      CALL CheckResBook(radek.co);      // změň příznak Rezervovano v tabulce Knihy
+      DELETE WHERE CURRENT OF pomc;     // smaž záznam v tab. Rezervace
+    END;
+  END FOR;
+END</code></pre>
+
+<p><b>Viz</b></p>
+
+<ul class='viz'><li><a href="HE_SQL2_CREATEPROCEDURE.htm">CREATE PROCEDURE</a> <li><a href="HE_SQL2_CREATEPROCEDURE.htm">CREATE FUNCTION</a> <li><a href="HE_SQL2_ALTERPROCEDURE.htm">ALTER PROCEDURE</a> <li><a href="HE_SQL2_ALTERPROCEDURE.htm">ALTER FUNCTION</a> <li><a href="HE_SQL2_DROPPROCEDURE.htm">DROP PROCEDURE</a> <li><a href="HE_SQL2_DROPPROCEDURE.htm">DROP FUNCTION</a></ul>
+
+
+
+<table class="navigace" border="0" width="100%"  bgcolor="#FFFFBF">
+		  <tr>
+					 <td width="20" align="center">&nbsp;</td>
+					 <td width="25%">&nbsp;</td>
+					 <td width="25%"
+align="right"><img class="floatno" src="../images/up.gif" width="13"
+height="15" alt="Nahoru" title="O jednu úroveň výš" border="0"
+align="middle"></td><td width="25%"><a href="HE_SQL2_STOREDPROCEDURE.htm">Rutiny uložené na serveru</a></td>
+<td width="25%" align="right"><a
+href="HE_SQL2_CREATEPROCEDURE.htm">Vytvoření rutiny (CREATE PROCEDURE | FUNCTION)</a></td><td width="20"
+align="center"><img class="floatno" src="../images/next.gif" width="15"
+height="13" alt="&shy;&gt;" title="Následující téma" border="0"></td>
+</tr></table>
+
+</body>
+</html>

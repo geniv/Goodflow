@@ -1,0 +1,103 @@
+<!doctype html public "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=Windows-1250">
+<title>Dotazy v SQL</title>
+<link rel='stylesheet' style='text/css' href='../function.css'>
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr>
+	<td style="background-image: url(../images/bghead.jpg);
+		background-position: right;
+		background-repeat: no-repeat;">
+	<table width="100%" border="0" cellpadding="0" cellspacing="0"
+		style="background-image:none">
+	<tr>
+		<td style="background-image:none" height="46"
+			width="15%"><img src="../images/title-cz.gif"
+			width="255" height="33"
+			alt="602SQL-Úplná dokumentace"
+			title="602SQL - Úplná dokumentace"
+			border="0"></td>
+		<td width="33%" align="right"><a href="../xml/html/top.html"><img class="floatno"
+			src="../images/index.gif"
+			width="15" height="16"
+			alt="Index" title="Zpět na obsah"
+			border="0" vspace="2"></a> &nbsp;
+			 </td>
+	</tr>
+	</table>
+	</td>
+</tr>
+</table><table class="navigace" border="0" width="100%"  bgcolor="#FFFFBF"><tr> <td
+width="20" align="center"><img class="floatno" src="../images/prev.gif"
+width="15" height="13" alt="&lt;&shy;" title="Předcházející téma"
+border="0"></td><td width="25%"><a
+href="HE_SQL2_PODMINKA.htm">Podmínky a predikáty</a></td> <td width="25%"
+align="right"><img class="floatno" src="../images/up.gif" width="13"
+height="15" alt="Nahoru" title="O jednu úroveň výš" border="0"
+align="middle"></td><td width="25%"><a href="HE_SQL2_JAZYKSQL.htm">Jazyk SQL a jeho implementace</a></td>
+<td width="25%" align="right"><a
+href="HE_SQL2_PRIKAZY.htm">SQL příkazy</a></td><td width="20"
+align="center"><img class="floatno" src="../images/next.gif" width="15"
+height="13" alt="&shy;&gt;" title="Následující téma" border="0"></td>
+</tr></table>
+
+
+
+
+<h1><a name="he_sql2_dotazy"></a>Dotazy v SQL (SELECT)</h1>
+<p>Dotazy slouží v SQL k nalezení v databázi nebo vypočtení množiny řádků, které odpovídají zadaným kritériím. Tuto množinu nazýváme odpovědí na dotaz. Pokud každý řádek obsahuje jedinou hodnotu (jediný sloupec), hovoříme o <i>skalárním dotazu</i>.</p>
+
+<p>Nejznámější a nejpoužívanější forma dotazu se zapisuje ve tvaru SELECT...FROM...WHERE... .Tento tvar dotazu je popsán v sekci <a href="HE_SQL2_SPECIFIKACEDOTAZU.htm">specifikace dotazu</a>. 602SQL v souladu s SQL 2 umožňuje vytvářet složitější dotazové konstrukce spojováním jednodušších dotazů pomocí operátorů UNION, INTERSECT a EXCEPT. Tyto konstrukce se jmenují <a href="HE_SQL2_DOTAZOVYVYRAZ.htm">dotazové výrazy</a>.</p>
+
+<p>Ve funkci tabulky lze v dotazu použít nejen tabulku nebo odpověď na dotaz uložený v databázi (VIEW), také libovolný dotaz uzavřený v kulatých závorkách (<a href="HE_SQL2_SUBDOTAZ.htm">subdotaz</a>) nebo spojení dvou tabulek pomocí některého druhu operace JOIN. Tyto možnosti popisuje sekce <a href="HE_SQL2_ZOBECNENATABULKA.htm">zobecněná tabulka</a>.</p>
+
+<p>Dotaz není sám o sobě příkazem, dá se však použít v řadě příkazů, např. <a href="HE_SQL2_INSERT.htm">INSERT</a>, <a href="HE_SQL2_DEKLARACEKURZORU.htm">DECLARE CURSOR</a>, <a href="HE_SQL2_CREATEVIEW.htm">CREATE VIEW</a>. Je třeba rozlišovat mezi dotazem a <a href="HE_SQL2_SELECTINTO.htm">příkazem SELECT INTO</a>, který má podobnou syntaxi, ale slouží k přečtení jednoho řádku odpovědi na dotaz do proměnných.</p>
+
+<p>Je-li definice dotazu syntakticky špatně, dojde již při překladu ke <a href="../xml/html/comperrors.html">kompilační chybě</a>. Po úspěšném překladu probíhá <a href="../xml/html/optiminfo.html">optimalizace</a> způsobu vyhodnocení.</p>
+
+<p>Reakce serveru na případ, kdy uživatel nemá oprávnění číst některý sloupec odpovědi, lze nastavit pomocí <a href="../xml/html/sqloptions.html">příznaku kompatibility</a> SQLOPT_RD_PRIVIL_VIOL. Jak se má server zachovat v případě, že v tabulkách, z nichž se konstruují dotazy, existují záznamová práva (a tedy nikoliv pouze globální práva pro sloupce), lze nastavit <a href="../xml/html/sqloptions.html">příznakem kompatibility</a> SQLOPT_GLOBAL_REF_RIGHTS. Více na stránce <a href="../xml/html/sqlrights.html">Kontrola práv při provádění SQL příkazů</a> </p>
+
+<p><b>Viz</b></p>
+
+<ul class='viz'>
+ <li><a href="HE_SQL2_SELECTS.htm">Sbírka dotazů</a> </li>
+ <li><a href="../xml/html/des_query.html">Interaktivní návrhář dotazů</a></li>
+ <li><a href="../xml/html/fulltext_search.html">Fulltextové vyhledávání dokumentů</a></li>
+</ul>
+
+
+
+<p class="subs">Seznam subsekcí:
+<ul class="subs">
+
+<li><a href="HE_SQL2_ZOBECNENATABULKA.htm">Zobecněná tabulka</a>
+
+<li><a href="HE_SQL2_SPECIFIKACEDOTAZU.htm">Specifikace dotazu</a>
+
+<li><a href="HE_SQL2_DOTAZOVYVYRAZ.htm">Dotazový výraz</a>
+
+<li><a href="../xml/html/limit.html">Výběr úseku záznamů</a>
+
+<li><a href="HE_SQL2_SUBDOTAZ.htm">Subdotazy</a>
+
+<li><a href="../xml/html/query_insdeledit.html">Operace nad daty z dotazu</a>
+
+</ul>
+<table class="navigace" border="0" width="100%"  bgcolor="#FFFFBF"><tr> <td
+width="20" align="center"><img class="floatno" src="../images/prev.gif"
+width="15" height="13" alt="&lt;&shy;" title="Předcházející téma"
+border="0"></td><td width="25%"><a
+href="HE_SQL2_PODMINKA.htm">Podmínky a predikáty</a></td> <td width="25%"
+align="right"><img class="floatno" src="../images/up.gif" width="13"
+height="15" alt="Nahoru" title="O jednu úroveň výš" border="0"
+align="middle"></td><td width="25%"><a href="HE_SQL2_JAZYKSQL.htm">Jazyk SQL a jeho implementace</a></td>
+<td width="25%" align="right"><a
+href="HE_SQL2_PRIKAZY.htm">SQL příkazy</a></td><td width="20"
+align="center"><img class="floatno" src="../images/next.gif" width="15"
+height="13" alt="&shy;&gt;" title="Následující téma" border="0"></td>
+</tr></table>
+</body>
+</html>

@@ -1,0 +1,186 @@
+<!doctype html public "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=Windows-1250">
+<title>Profily pošty SMTP/POP3</title>
+<link rel='stylesheet' style='text/css' href='../function.css'>
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr>
+	<td style="background-image: url(../images/bghead.jpg);
+		background-position: right;
+		background-repeat: no-repeat;">
+	<table width="100%" border="0" cellpadding="0" cellspacing="0"
+		style="background-image:none">
+	<tr>
+		<td style="background-image:none" height="46"
+			width="15%"><img src="../images/title-cz.gif"
+			width="255" height="33"
+			alt="602SQL-Úplná dokumentace"
+			title="602SQL - Úplná dokumentace"
+			border="0"></td>
+		<td width="33%" align="right"><a href="../xml/html/top.html"><img class="floatno"
+			src="../images/index.gif"
+			width="15" height="16"
+			alt="Index" title="Zpět na obsah"
+			border="0" vspace="2"></a> &nbsp;
+			 </td>
+	</tr>
+	</table>
+	</td>
+</tr>
+</table><table class="navigace" border="0" width="100%"  bgcolor="#FFFFBF">
+		  <tr>
+					 <td width="20" align="center">&nbsp;</td>
+					 <td width="25%">&nbsp;</td>
+					 <td width="25%"
+align="right"><img class="floatno" src="../images/up.gif" width="13"
+height="15" alt="Nahoru" title="O jednu úroveň výš" border="0"
+align="middle"></td><td width="25%"><a href="HE_MAILPROFILES.htm">Profily poštovních parametrů</a></td>
+<td width="25%" align="right"><a
+href="HE_MAILPROFMAIL602.htm">Mail602</a></td><td width="20"
+align="center"><img class="floatno" src="../images/next.gif" width="15"
+height="13" alt="&shy;&gt;" title="Následující téma" border="0"></td>
+</tr></table>
+
+
+
+
+
+<h1><a name="he_mailprofsmtp"></a>Profil pošty SMTP/POP3</h1>
+
+<p>Parametry profilu se pro SQL server nastavují na Řídicím panelu, sekce <strong>Lokální nastavení / Poštovní profily</strong>.</p>
+
+<table border=1 cols=3>
+
+<tr valign="top">
+<td width=15%><b>Parametr v registrech</b></p>
+</td>
+<td width=14%><b>Dialog z Řídicího panelu</b></td>
+<td width=71%><b>Popis</b></td>
+</tr>
+
+<tr valign="top">
+<td width=15%><code>SMTPServer</code></td>
+<td width=14%><code>SMTP server</code></td>
+<td width=71%>Jméno nebo IP adresa SMTP serveru</td>
+</tr>
+
+<tr valign="top">
+<td width=15%><code>MyAddress</code></td>
+<td width=14%><code>E-mail adresa</code></td>
+<td width=71%>Poštovní adresa, která bude v zásilkách uvedena jako adresa odesílatele</td>
+</tr>
+
+<tr valign="top">
+<td width=15%><code>POP3Server</code></td>
+<td width=14%><code>POP3 server</code></td>
+<td width=71%>Jméno nebo IP adresa POP3 serveru</td>
+</tr>
+
+<tr valign="top">
+<td width=15%><code>UserName</code></td>
+<td width=14%><code>Jméno</code></td>
+<td width=71%>Jméno uživatele poštovní schránky protokolu POP3</td>
+</tr>
+
+<tr valign="top">
+<td width=15%><code>Password *)</code></td>
+<td width=14%><code>Heslo</code></td>
+<td width=71%>Heslo uživatele poštovní schránky protokolu POP3
+<p>*) v registrech je v zašifrované formě pod jiným klíčem</p>
+</td>
+</tr>
+
+<tr valign="top">
+<td width=15%><code>SMTPUserName</code></td>
+<td width=14%><code>Jméno</code></td>
+<td width=71%>Jméno uživatele pro SMTP autentizaci</td>
+</tr>
+
+<tr valign="top">
+<td width=15%><code>SMTPPassword *)</code></td>
+<td width=14%><code>Heslo</code></td>
+<td width=71%>Heslo pro SMTP autentizaci
+<p>*) v registrech je v zašifrované formě pod jiným klíčem</p>
+</td>
+</tr>
+
+<tr valign="top">
+<td width=15%><code>DialConn</code></td>
+<td width=14%><code>Telefonní spojení</code></td>
+<td width=71%>Jméno telefonního připojení (ze složky Telefonické připojení sítě) - pouze Windows</td>
+</tr>
+
+<tr valign="top">
+<td width=15%><code>DialUserName</code></td>
+<td width=14%><code>Jméno</code></td>
+<td width=71%>Jméno uživatele telefonního připojení k Internetu - pouze Windows</td>
+</tr>
+
+<tr valign="top">
+<td width=15%><code> - N/A -</code></td>
+<td width=14%><code>Heslo</code></td>
+<td width=71%>Heslo uživatele telefonního připojení k Internetu - pouze Windows</td>
+</tr>
+
+<tr valign="top">
+<td width=15%><code>FilePath</code></td>
+<td width=14%><code>Cesta</code></td>
+<td width=71%>Seznam adresářů (s absolutními cestami v syntaxi daného OS) oddělených středníkem, ze kterých lze připojit soubor k zásilce (a tudíž odeslat). Pokud se aplikace pokusí odeslat soubor z jiné složky, než je v seznamu, bude požadavek odmítnut. Jestliže parametr není specifikován, nebo obsahuje-li prázdný řetězec, bude  možné odeslat libovolný soubor. Jde o to, že SQL server zpravidla běží s velkými přístupovými právy a je třeba neprivilegovaným uživatelům databáze zabránit v neoprávněnému přístupu k souborům.
+<p>Příklad (Windows): <code>D:\wbdata;D:\wbdata\temp</code></p>
+<p>Příklad (Linux): <code>/var/wbdata;/var/wbdata/temp</code></p>
+</td>
+</tr>
+
+<tr valign="top">
+<td width=15%><code>InBoxAppl</code></td>
+<td width=14%><code>Aplikace pro tabulky</code></td>
+<td width=71%>Název aplikace, v níž se budou hledat / vytvářet <a href="HE_MAILTABLES.htm">pracovní tabulky</a> pro příjem pošty</td>
+</tr>
+
+<tr valign="top">
+<td width=15%><code>InBoxMessages</code></td>
+<td width=14%><code>Tabulka pro zásilky</code></td>
+<td width=71%>Jméno pracovní tabulky pro ukládání informací o došlých zásilkách</td>
+</tr>
+
+<tr valign="top">
+<td width=15%><code>InBoxFiles</code></td>
+<td width=14%><code>Tabulka pro přílohy</code></td>
+<td width=71%>Jméno pracovní tabulky pro ukládání informací o připojených souborech</td>
+</tr>
+
+</table><br>
+
+<p>V dialogu pro intraktivní nastavení je navíc combo <strong>Autentizace</strong>, které stanoví, jak se chápe nastavení SMTP autentizace pomocí dvojice parametrů <code>SMTPUsername</code> a <code>SMTPPassword</code>: 
+<ul>
+<li><strong>SMTP server nevyžaduje autentizaci</strong> - parametry <code>SMTPUsername</code> a <code>SMTPPassword</code> budou prázdné;</li>
+<li><strong>Pro autentizaci se použije jméno a heslo pro POP3</strong> - parametry <code>SMTPUsername</code> a <code>SMTPPassword</code> budou obsahovat hodnoty z <code>Username</code> a <code>Password</code></li>
+<li><strong>Pro autentizaci se použije odlišné jméno a heslo</strong> - parametry <code>SMTPUsername</code> a <code>SMTPPassword</code> je třeba zadat.</li>
+</ul>
+</p>
+
+<p>Parametry <code>SMTPServer</code> a <code>MyAddress</code> jsou povinné pro odesílání pošty. Parametry <code>POP3Server</code>, <code>UserName</code> a <code>Password</code> jsou povinné pro příjem pošty (vybírání POP3 schránky). Parametry <code>DialConn</code><b> </b>a <code>DialUserName</code> jsou nutné pouze pokud je počítač připojen k Internetu pomocí vytáčené linky (Windows). Řídicí konzole umožňuje do profilu uložit heslo pro přístup k POP3 schránce v zašifrované podobě (pro odesílání pošty není heslo potřeba) a případně heslo pro telefonní přístup k Internetu. Pro LINUX se případné heslo pro POP3 přístup zadává v čitelné podobě a je na správci systému, aby nastavil vhodná přístupová práva k souboru obsahujícímu popis profilů.</p>
+<p>Parametry <code>InBox...</code> mají význam tehdy, vyžaduje-li provoz aplikace, aby pracovní tabulky pro příjem pošty byly odlišné od implicitních <code>_INBOXMSGS</code> a <code>_INBOXFILES</code> v systémové aplikaci <code>_SYSEXT</code>. Lze je zadat pouze pomocí funkce <a href="HE_F_MAILSETPROFILEPROP.htm"><code>MailSetProfileProp</code></a>.</p>
+<p>Vyžaduje-li SMTP server autorizaci odesílatele (obrana proti spamům), použije se jméno a heslo zadané v <code>UserName</code> a <code>Password</code>, není-li tato dvojice zadána přímo v klíčích <code>SMTPUserName</code> a <code>SMTPPassword</code>. </p>
+
+
+
+<table class="navigace" border="0" width="100%"  bgcolor="#FFFFBF">
+		  <tr>
+					 <td width="20" align="center">&nbsp;</td>
+					 <td width="25%">&nbsp;</td>
+					 <td width="25%"
+align="right"><img class="floatno" src="../images/up.gif" width="13"
+height="15" alt="Nahoru" title="O jednu úroveň výš" border="0"
+align="middle"></td><td width="25%"><a href="HE_MAILPROFILES.htm">Profily poštovních parametrů</a></td>
+<td width="25%" align="right"><a
+href="HE_MAILPROFMAIL602.htm">Mail602</a></td><td width="20"
+align="center"><img class="floatno" src="../images/next.gif" width="15"
+height="13" alt="&shy;&gt;" title="Následující téma" border="0"></td>
+</tr></table>
+
+</body>
+</html>

@@ -1,0 +1,89 @@
+<!doctype html public "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=Windows-1250">
+<title>Funkce Set_transaction_isolation_level</title>
+<link rel='stylesheet' style='text/css' href='../function.css'>
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000">
+
+
+
+<h2 class=function>Set_transaction_isolation_level</h2>
+<img src='../images/cpp.gif' width='44' height='16' border='0' alt='c/c++' align='middle' hspace='2'><img src='../images/pascal.gif' width='44' height='16' border='0' alt='pascal' align='middle' hspace='2'>
+
+
+<br><br>
+<div class='typ'>BOOL <b>[cd_]Set_transaction_isolation_level</b>([cdp_t cdp,] t_isolation level);<br>
+function <b>[cd_]Set_transaction_isolation_level</b>([cdp : cdp_t;] level : integer) : Boolean;<br>
+
+</div>
+
+
+<p><b>Parametry</b></p>
+
+<table border=1 cols=2 frame=box rules=all width=440>
+
+<tr valign="top">
+<td width=16%>[<i>cdp </i></td>
+<td width=84%><a href="HE_EXTCD.htm">kontextová proměnná</a> klienta]  </td>
+</tr>
+
+<tr valign="top">
+<td width=16%><i>level </i></td>
+<td width=84%>úroveň izolace transakce</td>
+</tr>
+</table><br>
+
+<p><b>Od verze:</b></p>
+
+<p>6.0</p>
+
+<p><b>Popis </b></p>
+
+<p>Funkce nastaví úroveň izolace probíhající transakce a všech následujících implicitních transakcí. Bez zavolání této funkce je nastavena hodnota READ_COMMITTED (= 1). Více o <a href="HE_SQL2_IZOLACETRANSAKCI.htm">izolaci transakcí</a> se dozvíte ve stránkách nápovědy k jazyku SQL. Funkce odpovídá SQL příkazu <a href="HE_SQL2_SETTRANSACTION.htm">SET TRANSACTION</a>.</p>
+
+<p>Parametr <i>level</i> může nabýt následujících hodnot:</p>
+
+<table border=1 cols=2 frame=box rules=all width=200>
+
+<tr valign="top">
+<td width=75%>READ_UNCOMMITTED </td>
+<td width=25%>N/A</td>
+</tr>
+
+<tr valign="top">
+<td width=75%>READ_COMMITTED </td>
+<td width=25%>1</td>
+</tr>
+
+<tr valign="top">
+<td width=75%>REPEATABLE_READ </td>
+<td width=25%>N/A</td>
+</tr>
+
+<tr valign="top">
+<td width=75%>SERIALIZABLE</td>
+<td width=25%>3</td>
+</tr>
+</table><br>
+
+<p>Takto nastavené vlastností transakce nejen pro nejbližší transakci, nýbrž až do příštího nastavení vlastností transakce touto funkcí.</p>
+
+<p>Použití transakcí z klientského jazyka je velmi omezené.</p>
+
+<p><b>Hodnota funkce</b></p>
+
+<p>Funkce vrací TRUE při chybě</p>
+
+<p><b>Viz</b></p>
+
+<ul class='viz'>
+<li><a href="HE_F_STARTTRANSACTION.htm">Start_transaction</a> </li>
+<li><a href="HE_F_ROLLBACK.htm">Roll_back</a> </li>
+<li><a href="HE_F_COMMIT.htm">Commit</a></li>
+</ul>
+
+</body>
+</html>

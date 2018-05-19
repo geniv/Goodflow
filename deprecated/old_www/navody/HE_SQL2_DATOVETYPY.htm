@@ -1,0 +1,285 @@
+<!doctype html public "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=Windows-1250">
+<title>Datové typy v SQL</title>
+<link rel='stylesheet' style='text/css' href='../function.css'>
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr>
+	<td style="background-image: url(../images/bghead.jpg);
+		background-position: right;
+		background-repeat: no-repeat;">
+	<table width="100%" border="0" cellpadding="0" cellspacing="0"
+		style="background-image:none">
+	<tr>
+		<td style="background-image:none" height="46"
+			width="15%"><img src="../images/title-cz.gif"
+			width="255" height="33"
+			alt="602SQL-Úplná dokumentace"
+			title="602SQL - Úplná dokumentace"
+			border="0"></td>
+		<td width="33%" align="right"><a href="../xml/html/top.html"><img class="floatno"
+			src="../images/index.gif"
+			width="15" height="16"
+			alt="Index" title="Zpět na obsah"
+			border="0" vspace="2"></a> &nbsp;
+			 </td>
+	</tr>
+	</table>
+	</td>
+</tr>
+</table><table class="navigace" border="0" width="100%"  bgcolor="#FFFFBF"><tr> <td
+width="20" align="center"><img class="floatno" src="../images/prev.gif"
+width="15" height="13" alt="&lt;&shy;" title="Předcházející téma"
+border="0"></td><td width="25%"><a
+href="HE_SQL2_ELEMENTY.htm">Lexikální elementy</a></td> <td width="25%"
+align="right"><img class="floatno" src="../images/up.gif" width="13"
+height="15" alt="Nahoru" title="O jednu úroveň výš" border="0"
+align="middle"></td><td width="25%"><a href="HE_SQL2_JAZYKSQL.htm">Jazyk SQL a jeho implementace</a></td>
+<td width="25%" align="right"><a
+href="../xml/html/sqltables.html">Databázové tabulky</a></td><td width="20"
+align="center"><img class="floatno" src="../images/next.gif" width="15"
+height="13" alt="&shy;&gt;" title="Následující téma" border="0"></td>
+</tr></table>
+
+
+
+
+<h1><a name="he_sql2_datovetypy"></a>Datové typy (SQL)</h1>
+
+<p>Datový typ určuje množinu možných hodnot pro sloupec tabulky, proměnnou, parametr rutiny nebo hodnotu funkce. 602SQL disponuje těmito typy:</p>
+
+<pre><code>typ ::= řetězec_znaků [jazyk_a_kódování] | binární_objekt | řetězec_bitů | přesný_číselný_typ 
+    | přibližný_číselný_typ | BOOLEAN | DATE | TIME [WITH TIME ZONE] | TIMESTAMP [WITH TIME ZONE] 
+    | identifikátor_domény
+řetězec_znaků ::= CHAR [( délka )] | CHAR VARYING ( délka ) | VARCHAR ( délka ) | NCHAR [( délka )] 
+    | NCHAR VARYING ( délka ) | CLOB [( délka )] | NCLOB [( délka )]
+binární_objekt ::= BLOB [( délka )]
+řetězec_bitů ::= BINARY ( délka ) | VARBINARY ( délka ) | BIT [( délka )] | BIT VARYING ( délka )
+přesný_číselný_typ ::= INTEGER | SMALLINT | TINYINT | BIGINT | DECIMAL [( přesnost [, decim ] )] 
+    | NUMERIC [( přesnost [, decim ] )]
+přibližný_číselný_typ ::= REAL | DOUBLE PRECISION | FLOAT [( přesnost )]</code></pre>
+
+<p>Ve výše uvedených pravidlech lze beze změny významu místo INTEGER psát INT, místo DECIMAL psát DEC, místo CHAR psát CHARACTER, místo NCHAR psát NATIONAL CHAR nebo NATIONAL CHARACTER, místo CLOB psát CHAR LARGE OBJECT nebo CHARACTER LARGE OBJECT a místo BLOB psát BINARY LARGE OBJECT.</p>
+
+<p>Kvůli kompatibilitě s ODBC lze místo CLOB psát také LONG VARCHAR a místo BLOB psát LONG VARBINARY, místo BIT VARYING psát VARBINARY.</p>
+
+<p>Typům jazyka SQL odpovídají "fyzické" datové typy, které používá klientský program, pokud ze serveru čte data nebo předává svá data na server. Níže uvedená tabulka definuje vzájemnou souvislost obou množin typů. Ve třetím sloupci jsou uvedeny konstanty používané pro označení fyzických typů.</p>
+
+<table cols=4 border=1>
+
+<tr valign="top">
+<td><b>Popis typu v SQL</b></td>
+<td><b>fyzická reprezentace</b></td>
+<td><b>označení</b></td>
+<td><b>číslo</b></td>
+</tr>
+
+<tr valign="top">
+<td><b>CHAR</b></td>
+<td>jeden znak</td>
+<td><code>ATT_CHAR</code></td>
+<td>2</td>
+</tr>
+
+<tr valign="top">
+<td><b>CHAR(<i>n</i>)</b>, CHAR VARYING(<i>n</i>), VARCHAR(<i>n</i>), pro <i>n</i>&lt;=4090</td>
+<td>řetězec znaků délky nejvýše <i>n</i></td>
+<td><code>ATT_STRING</code></td>
+<td>7</td>
+</tr>
+
+<tr valign="top">
+<td><b>NCHAR(<i>n</i>)</b>, NCHAR VARYING(<i>n</i>), pro <i>n</i>&lt;=4090</td>
+<td>řetězec znaků v Unicode délky nejvýše <i>n</i></td>
+<td><code>ATT_STRING</code></td>
+<td>7</td>
+</tr>
+
+<tr valign="top">
+<td><b>CLOB</b>, CLOB(<i>n</i>)</td>
+<td>řetězec znaků proměnné neomezené délky</td>
+<td><code>ATT_TEXT</code></td>
+<td>20</td>
+</tr>
+
+<tr valign="top">
+<td><b>NCLOB</b>, NCLOB(<i>n</i>)</td>
+<td>řetězec znaků v Unicode proměnné neomezené délky</td>
+<td><code>ATT_TEXT</code></td>
+<td>20</td>
+</tr>
+
+<tr valign="top">
+<td><b>BLOB</b>, BLOB(<i>n</i>)</td>
+<td>posloupnost bajtů proměnné neomezené délky</td>
+<td><code>ATT_NOSPEC</code></td>
+<td>21</td>
+</tr>
+
+<tr valign="top">
+<td><b>BINARY(<i>n</i>)</b> pro n&lt;=4090</td>
+<td>posloupnost <i>n</i> bajtů</td>
+<td><code>ATT_BINARY</code></td>
+<td>10</td>
+</tr>
+
+<tr valign="top">
+<td>BIT, BIT(1), <b>BOOLEAN</b></td>
+<td>booleovské hodnoty TRUE, FALSE nebo UNKNOWN</td>
+<td><code>ATT_BOOLEAN</code></td>
+<td>1</td>
+</tr>
+
+<tr valign="top">
+<td>BIT(<i>n</i>), BIT VARYING(<i>n</i>) pro 1&lt;<i>n</i>&lt;=8*4090</td>
+<td>posloupnost (<i>n</i>-1) / 8 + 1 bajtů</td>
+<td><code>ATT_BINARY</code></td>
+<td>10</td>
+</tr>
+
+<tr valign="top">
+<td><b>INTEGER</b></td>
+<td>4-bajtové celé číslo</td>
+<td><code>ATT_INT32</code></td>
+<td>4</td>
+</tr>
+
+<tr valign="top">
+<td><b>SMALLINT</b></td>
+<td>2-bajtové celé číslo</td>
+<td><code>ATT_INT16</code></td>
+<td>3</td>
+</tr>
+
+<tr valign="top">
+<td><b>TINYINT</b></td>
+<td>1-bajtové celé číslo</td>
+<td><code>ATT_INT8</code></td>
+<td>45</td>
+</tr>
+
+<tr valign="top">
+<td><b>BIGINT</b></td>
+<td>8-bajtové celé číslo</td>
+<td><code>ATT_INT64</code></td>
+<td>46</td>
+</tr>
+
+<tr valign="top">
+<td><b>DECIMAL(<i>n, d</i>), NUMERIC(<i>n, d</i>)</b> pro <i>n</i> &lt;= 2</td>
+<td>1-bajtové číslo se scale <em>d</em></td>
+<td><code>ATT_INT8</code></td>
+<td>45</td>
+</tr>
+
+<tr valign="top">
+<td><b>DECIMAL(<i>n, d</i>), NUMERIC(<i>n, d</i>)</b> pro 2 &lt; <i>n</i> &lt;= 4</td>
+<td>2-bajtové číslo se scale <em>d</em></td>
+<td><code>ATT_INT16</code></td>
+<td>3</td>
+</tr>
+
+<tr valign="top">
+<td><b>DECIMAL(<i>n, d</i>), NUMERIC(<i>n, d</i>)</b> pro 4 &lt; <i>n</i> &lt;= 9</td>
+<td>4-bajtové číslo se scale <em>d</em></td>
+<td><code>ATT_INT32</code></td>
+<td>4</td>
+</tr>
+
+<tr valign="top">
+<td><b>DECIMAL(<i>n, d</i>), NUMERIC(<i>n, d</i>) </b>pro <i>n</i> &gt; 9</td>
+<td>8-bajtové číslo se scale <em>d</em></td>
+<td><code>ATT_INT64</code></td>
+<td>46</td>
+</tr>
+
+<tr valign="top">
+<td><b>REAL</b>, DOUBLE PRECISION, FLOAT, FLOAT(<i>n</i>)</td>
+<td>8-bajtové reálné číslo</td>
+<td><code>ATT_FLOAT</code></td>
+<td>6</td>
+</tr>
+
+<tr valign="top">
+<td><b>DATE</b></td>
+<td>datum zakódované v 4-bajtovém čísle</td>
+<td><code>ATT_DATE</code></td>
+<td>11</td>
+</tr>
+
+<tr valign="top">
+<td><b>TIME, TIME WITH TIME ZONE</b></td>
+<td>čas zakódovaný v 4-bajtovém čísle</td>
+<td><code>ATT_TIME</code></td>
+<td>12</td>
+</tr>
+
+<tr valign="top">
+<td><b>TIMESTAMP, TIMESTAMP WITH TIME ZONE</b></td>
+<td>datum a čas zakódované v 4-bajtovém čísle</td>
+<td><code>ATT_TIMESTAMP</code></td>
+<td>13</td>
+</tr>
+
+</table><br>
+
+<p>Do všech typů patří zvláštní hodnota NULL. Pro typu BOOLEAN je tato hodnota totožná s hodnotou UNKNOWN. Pro řetězce znaků a typ BLOB je totožná s řetězcem nulové délky. Pro binární řetězce pevné délky je totožná s řetězcem obsahujícím pouze nuly. Pro ostatní typy je tato hodnota různá od všech hodnot specifikovaných pro tento typ v tabulce.</p>
+
+<p><b>Odchylky od Intermediate level směrem k Entry level</b>
+
+<ul>
+	<li>Není implementován typ INTERVAL, je však do značné míry nahrazen celočíselným typem INTEGER.</li>
+	<li>Typ řetězec znaků nemůže obsahovat specifikaci CHARACTER SET, informace o znakové sadě je obsažena v klauzuli <em>jazyk_a_kódování</em>.</li>
+</ul>
+
+<p><b>Odchylky od Intermediate level směrem k Full level nebo k SQL 3</b>
+
+<ul>
+	<li>Lze používat také typy BIT a BIT VARYING patřící do Full SQL. Tyto typy však již nejsou součástí SQL 2003. Zápis BIT nebo BIT(1) označuje typ BOOLEAN. Zápisy BIT(<em>n</em>), BIT VARYING(<em>n</em>) a VARBINARY(<em>n</em>) pro <em>n</em>&gt;1 označují typ BINARY pevné délky (<em>n</em>-1)/8+1 bajtů.</li>
+	<li>Lze používat také typy CLOB, BLOB a BOOLEAN patřící do SQL 3.</li>
+</ul>
+
+<p><b>Implementací definované vlastnosti SQL ve 602SQL</b>
+
+<ul>
+    <li>Znakové řetězce se vždy chovají jako řetězce proměnné délky. Pokud mají zadanou pevnou délku, chápe se jako maximální délka a řetězce se <em>nedoplňují</em> zprava mezerami na plnou délku.</li>
+	<li>Typ TIME má přesnost jednu tisícinu sekundy, typ TIMESTAMP má přesnost jednu sekundu. V literálech lze čas specifikovat s vyšší přesností, ta se však neuplatní. Typ TIMESTAMP zaznamenává data od 1.1.1900 do 18.8.2033. Typy obsahující klauzuli WITH TIME ZONE jsou vnitřně uloženy v UTC a při konverzi na řetězec znaků obsahují lokální čas a označení lokální časové zóny.</li>
+	<li>Typ INTEGER má rozsah -2147483647 až +2147483647, typ SMALLINT má rozsah -32767 až 32767, typ TINYINT má rozsah -127 až 127, typ BIGINT má rozsah -2^63-1 až 2^63-1 (cca +/-9223372036854775000).</li>
+	<li>Typy REAL, FLOAT a DOUBLE PRECISION mají stejnou přesnost cca 15 míst a rozsah 1e308 až 1e-308. Hodnota případného parametru <i>přesnost</i> se ignoruje.</li>
+	<li>U typů BLOB, CLOB a NCLOB nehraje konkrétní hodnota délky uvedené v popisu typu žádnou roli. </li>
+	<li>Rozlišení <a href="../xml/html/collate.html">jazyka a kódování</a> (8bit) řetězcových typů pomocí COLLATE.</li>
+    <li>Typy NCHAR a NCLOB používají kódování UCS-2.</li>
+</ul>
+
+<p><strong>Požadavky na operační systém</strong></p>
+<p>Na Windows existuje plná podpora pro řetězce v Unicode a 8bitové řetězce v jiném než Windows kódování pouze pro verze 2000, XP a novější. Na Linuxu závisí podpora znakových sad na konfiguraci operačního systému - znakové sady ISO zpravidla jsou podporovány, kódové stránky z Windows obvykle nejsou.</p>
+
+
+
+
+<p class="subs">Seznam subsekcí:
+<ul class="subs">
+
+<li><a href="../xml/html/collate.html">Rozlišení jazyka u znakových řetězců</a>
+
+<li><a href="../xml/html/domains.html">Domény</a>
+
+</ul>
+<table class="navigace" border="0" width="100%"  bgcolor="#FFFFBF"><tr> <td
+width="20" align="center"><img class="floatno" src="../images/prev.gif"
+width="15" height="13" alt="&lt;&shy;" title="Předcházející téma"
+border="0"></td><td width="25%"><a
+href="HE_SQL2_ELEMENTY.htm">Lexikální elementy</a></td> <td width="25%"
+align="right"><img class="floatno" src="../images/up.gif" width="13"
+height="15" alt="Nahoru" title="O jednu úroveň výš" border="0"
+align="middle"></td><td width="25%"><a href="HE_SQL2_JAZYKSQL.htm">Jazyk SQL a jeho implementace</a></td>
+<td width="25%" align="right"><a
+href="../xml/html/sqltables.html">Databázové tabulky</a></td><td width="20"
+align="center"><img class="floatno" src="../images/next.gif" width="15"
+height="13" alt="&shy;&gt;" title="Následující téma" border="0"></td>
+</tr></table>
+</body>
+</html>

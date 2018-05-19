@@ -1,0 +1,78 @@
+<!doctype html public "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=Windows-1250">
+<title>Funkce Database_integrity</title>
+<link rel='stylesheet' style='text/css' href='../function.css'>
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000">
+
+
+
+<h2 class=function>Database_integrity</h2>
+<img src='../images/cpp.gif' width='44' height='16' border='0' alt='c/c++' align='middle' hspace='2'><img src='../images/pascal.gif' width='44' height='16' border='0' alt='pascal' align='middle' hspace='2'>
+
+
+<br><br>
+<div class='typ'>BOOL <b>[cd_]Database_integrity</b>([cdp_t cdp], BOOL repair, uns32 * lost_blocks, uns32 * lost_dheap, uns32 * nonex_blocks, uns32 * cross_link, uns32 * damaged_tabdef);<br>
+function <b>[cd_]Database_integrity</b>([cdp : cdp_t]; repair : Boolean; var lost_blocks, lost_dheap, nonex_blocks, cross_link, damaged_tabdef : uns32) : Boolean;
+</div>
+
+
+<p><b>Parametry</b></p>
+
+<table border=1 cols=2 frame=box rules=all width=440>
+
+<tr valign="top">
+<td width=28%><i>repair </i></td>
+<td width=72%>způsob práce;</td>
+</tr>
+
+<tr valign="top">
+<td width=28%><i>lost_blocks </i></td>
+<td width=72%>ztracené bloky;</td>
+</tr>
+
+<tr valign="top">
+<td width=28%><i>lost_dheap </i></td>
+<td width=72%>ztracené kusy diskové paměti;</td>
+</tr>
+
+<tr valign="top">
+<td width=28%><i>nonex_blocks </i></td>
+<td width=72%>neexistující bloky;</td>
+</tr>
+
+<tr valign="top">
+<td width=28%><i>cross_link </i></td>
+<td width=72%>dvojnásobné použití diskové paměti;</td>
+</tr>
+
+<tr valign="top">
+<td width=28%><i>damaged_tabdef </i></td>
+<td width=72%>zničená definice tabulky</td>
+</tr>
+
+<tr valign="top">
+<td width=28%>[<i>cdp </i></td>
+<td width=72%><a href="HE_EXTCD.htm">kontextová proměnná</a> klienta]  </td>
+</tr>
+</table><br>
+
+<p><b>Popis</b></p>
+
+<p>Funkce umožňuje nalézt, příp. opravit chyby konzistence databázového souboru. Změny v provádění této operace z uživatelského rozhraní od verze 9 nejsou v této funkci zahrnuty.</p>
+
+<p>Funkci lze volat pouze v&nbsp;situaci, kdy na server není přihlášen žádný jiný uživatel. Při zavolání funkce nesmí být otevřen žádný kurzor.</p>
+
+<p>Parametr <i>repair</i> určuje způsob provedení: hodnota TRUE znamená nalézt, opravit a informovat, hodnota FALSE pouze nalézt a informovat. Které chyby se budou hledat ovlivňuje šestice následujících parametrů: je-li parametr proměnná, chyba se bude hledat (resp. opravovat) a do proměnné se zapíše počet výskytů chyby, má-li parametr hodnotu NIL, chyba se nebude hledat (ani opravovat).</p>
+
+<p>Více o této operaci naleznete na stránce <a href="../xml/html/konzistence.html">Kontrola konzistence databáze</a>.</p>
+
+<p><b>Hodnota funkce</b></p>
+
+<p>Funkce při chybě vrátí TRUE, při úspěchu FALSE. Častou příčinou nezdaru může být jiný uživatel přihlášený v&nbsp;téže době do databáze. V&nbsp;takovém případě nastane chyba NOT_LOCKED (136).</p>
+
+</body>
+</html>

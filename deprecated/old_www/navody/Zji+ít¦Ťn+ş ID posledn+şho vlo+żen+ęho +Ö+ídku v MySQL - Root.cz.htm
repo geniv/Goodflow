@@ -1,0 +1,874 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="cs" lang="cs"><head>
+
+
+	<meta http-equiv="Content-language" content="cs">
+	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-2"><title>Zjištění ID posledního vloženého řádku v MySQL - Root.cz</title>
+	
+	<link rel="stylesheet" type="text/css" href="Zji%C5%A1t%C4%9Bn%C3%AD%20ID%20posledn%C3%ADho%20vlo%C5%BEen%C3%A9ho%20%C5%99%C3%A1dku%20v%20MySQL%20-%20Root.cz_soubory/ro_global.css" media="screen,projection">
+	<link rel="stylesheet" type="text/css" href="Zji%C5%A1t%C4%9Bn%C3%AD%20ID%20posledn%C3%ADho%20vlo%C5%BEen%C3%A9ho%20%C5%99%C3%A1dku%20v%20MySQL%20-%20Root.cz_soubory/ro_global_print.css" media="print">
+	<link rel="stylesheet" type="text/css" href="Zji%C5%A1t%C4%9Bn%C3%AD%20ID%20posledn%C3%ADho%20vlo%C5%BEen%C3%A9ho%20%C5%99%C3%A1dku%20v%20MySQL%20-%20Root.cz_soubory/ro_other.css" media="screen,projection">
+	<link rel="stylesheet" type="text/css" href="Zji%C5%A1t%C4%9Bn%C3%AD%20ID%20posledn%C3%ADho%20vlo%C5%BEen%C3%A9ho%20%C5%99%C3%A1dku%20v%20MySQL%20-%20Root.cz_soubory/ro_other_print.css" media="print">
+<meta name="description" content="Denní zpravodajství ze světa Linuxu, Unixu, otevřeného software (Open Source) a svobodného software (Free Software). Tipy, triky, tutoriály, novinky a recenze.">	<meta name="copyright" content="Copyright Internet Info, s.r.o.">
+	<meta name="author" content="HTML code: Adam Hauner; e-mail: hauner@iinfo.cz">
+	<meta name="robots" content="index,follow">
+	<meta name="DC.Identifier" content="(SCHEME=ISSN) 12128309">
+	<link rel="SHORTCUT ICON" href="http://i.iinfo.cz/r2/favicon.ico" type="image/x-icon">
+	<link rel="alternate" title="Root RSS - články" href="http://rss.root.cz/clanky/" type="application/rss+xml">
+	<link rel="alternate" title="Root RSS - zprávičky" href="http://rss.root.cz/zpravicky/" type="application/rss+xml">
+	<link rel="alternate" title="Root RSS - diskusní fóra" href="http://rss.root.cz/diskuse/" type="application/rss+xml">
+	<link rel="alternate" title="Root RSS - knihy" href="http://rss.root.cz/knihy/" type="application/rss+xml">
+	<link rel="alternate" title="Root RSS - blogy" href="http://rss.root.cz/blogy/" type="application/rss+xml">
+	<link rel="alternate" title="Root RSS - wiki" href="http://rss.root.cz/wiki/" type="application/rss+xml">
+	<script language="JavaScript" src="Zji%C5%A1t%C4%9Bn%C3%AD%20ID%20posledn%C3%ADho%20vlo%C5%BEen%C3%A9ho%20%C5%99%C3%A1dku%20v%20MySQL%20-%20Root.cz_soubory/ro_rating.js" type="text/javascript"></script>
+	<script language="JavaScript" src="Zji%C5%A1t%C4%9Bn%C3%AD%20ID%20posledn%C3%ADho%20vlo%C5%BEen%C3%A9ho%20%C5%99%C3%A1dku%20v%20MySQL%20-%20Root.cz_soubory/ro_opinions.js" type="text/javascript"></script>
+	<script language="JavaScript" src="Zji%C5%A1t%C4%9Bn%C3%AD%20ID%20posledn%C3%ADho%20vlo%C5%BEen%C3%A9ho%20%C5%99%C3%A1dku%20v%20MySQL%20-%20Root.cz_soubory/ro_global.js" type="text/javascript"></script></head><body class="body" id="www-root-cz">
+<div id="sefa">
+    <div>
+	<a href="http://www.iinfo.cz/" title="Internet Info, s.r.o."><img src="Zji%C5%A1t%C4%9Bn%C3%AD%20ID%20posledn%C3%ADho%20vlo%C5%BEen%C3%A9ho%20%C5%99%C3%A1dku%20v%20MySQL%20-%20Root.cz_soubory/iilogo-mini.gif" alt="Internet Info, s.r.o." height="21" width="75"></a>
+        <span>			
+	    <a href="http://www.lupa.cz/" title="Lupa: server o českém Internetu">Lupa</a>
+	    <a href="http://www.root.cz/" title="Root: informace nejen ze světa Linuxu">Root</a>
+	    <a href="http://www.mesec.cz/" title="Měšec: server o osobních financích">Měšec</a>
+	    <a href="http://www.podnikatel.cz/" title="Podnikatel: informace pro váš business a podnikání">Podnikatel</a>
+		<a href="http://www.digizone.cz/" title="DigiZone: vše o digitálním vysílání">DigiZone</a>
+	    <a href="http://navrcholu.cz/" title="Navrcholu: měření a vyhodnocování návštěvnosti www stránek">Navrcholu</a>
+	    <a href="http://www.slunecnice.cz/" title="Slunečnice: server freeware a shareware">Slunečnice</a>
+	    <a href="http://www.jagg.cz/" title="Jagg: ukládejte a sdílete své oblíbené odkazy">Jagg</a>
+	    <a href="http://www.woko.cz/" title="Woko: pamatuje si za vás">Woko</a>
+   	    <a href="http://www.dobryweb.cz/" title="Dobrý web: Váš pomocník pro úspěch na Internetu">Dobrý web</a>
+	    <a href="http://www.computer.cz/" title="Computer.cz: váš dodavatel hardware">Computer.cz</a>
+	    <strong>SK</strong>: <a href="http://www.mojelinky.sk/" title="MojeLinky: uchovávajte a zdieľajte svoje obľubené odkazy">MojeLinky</a>
+	</span>
+    </div>
+</div>
+	
+<div class="page">
+<div style="display: none;" class="ad" id="ad-ahead">
+<div class="ad-marker">Reklama</div>
+<div class="ad-ad ad-holder-r">
+<script language="JavaScript" type="text/javascript" src="Zji%C5%A1t%C4%9Bn%C3%AD%20ID%20posledn%C3%ADho%20vlo%C5%BEen%C3%A9ho%20%C5%99%C3%A1dku%20v%20MySQL%20-%20Root.cz_soubory/adx.js"></script>
+<script language="JavaScript" type="text/javascript">
+<!--
+if (!document.phpAds_used) document.phpAds_used = ',';
+phpAds_random = new String (Math.random()); phpAds_random = phpAds_random.substring(2,11);
+document.write ("<" + "script language='JavaScript' type='text/javascript' src='");
+document.write ("http://k.iinfo.cz/adjs.php?n=" + phpAds_random);
+document.write ("&amp;what=zone:260");
+document.write ("&amp;exclude=" + document.phpAds_used);
+if (document.referer)
+document.write ("&amp;referer=" + escape(document.referer));
+document.write ("'><" + "/script>");
+//-->
+</script><script language="JavaScript" type="text/javascript" src="Zji%C5%A1t%C4%9Bn%C3%AD%20ID%20posledn%C3%ADho%20vlo%C5%BEen%C3%A9ho%20%C5%99%C3%A1dku%20v%20MySQL%20-%20Root.cz_soubory/adjs_007.js"></script><script language="javascript" type="text/javascript">
+var el = document.getElementById("ad-ahead");
+if (el) { el.style.display = "none"; }
+</script>
+<div id="beacon_1021" style="position: absolute; left: 0px; top: 0px; visibility: hidden;"><img src="Zji%C5%A1t%C4%9Bn%C3%AD%20ID%20posledn%C3%ADho%20vlo%C5%BEen%C3%A9ho%20%C5%99%C3%A1dku%20v%20MySQL%20-%20Root.cz_soubory/adlog_006.gif" alt="" style="width: 0px; height: 0px;" height="0" width="0"></div><noscript><a href='http://k.iinfo.cz/adclick.php?n=ab479b50' target='_blank'><img
+	src='http://k.iinfo.cz/adview.php?what=zone:260&amp;n=ab479b50' border='0' alt='' /></a></noscript>
+</div>
+</div>
+
+<div id="usr-login">
+	<a href="http://www.root.cz/prihlasit/?us_ref=http%3A%2F%2Fwww.root.cz%2Fdiskuse%2F2388%2F" title="Přihlášení k uživatelskému systému">Přihlásit</a>
+	<a href="http://us.root.cz/registrovat/?us_ref=http%3A%2F%2Fwww.root.cz%2Fdiskuse%2F2388%2F" title="Zaregistrujte se a získejte přístup k řadě dalších funkcí a vylepšení">Registrace</a>
+<a href="http://www.root.cz/styl/classic/?kam_vratit=http%3A%2F%2Fwww.root.cz%2Fdiskuse%2F2388%2F"><img src="Zji%C5%A1t%C4%9Bn%C3%AD%20ID%20posledn%C3%ADho%20vlo%C5%BEen%C3%A9ho%20%C5%99%C3%A1dku%20v%20MySQL%20-%20Root.cz_soubory/ss.gif" alt="Styl vzhledu" title="Změna stylu vzhledu"></a>
+</div>
+
+<div id="head" class="rev">
+	<div class="strip-1">
+		<div id="kshx"></div>
+		<a href="http://www.root.cz/" title="Návrat na titulní stránku serveru" id="head-logo">Root.cz<span><!-- --></span></a>
+		<div class="cb"><!-- --></div>
+	</div>
+<div style="display: none;" class="ad" id="ad-banner-top">
+<div class="ad-marker">Reklama</div>
+<div class="ad-ad ad-holder-r">
+<script language="JavaScript" type="text/javascript" src="Zji%C5%A1t%C4%9Bn%C3%AD%20ID%20posledn%C3%ADho%20vlo%C5%BEen%C3%A9ho%20%C5%99%C3%A1dku%20v%20MySQL%20-%20Root.cz_soubory/adx.js"></script>
+<script language="JavaScript" type="text/javascript">
+<!--
+if (!document.phpAds_used) document.phpAds_used = ',';
+phpAds_random = new String (Math.random()); phpAds_random = phpAds_random.substring(2,11);
+document.write ("<" + "script language='JavaScript' type='text/javascript' src='");
+document.write ("http://k.iinfo.cz/adjs.php?n=" + phpAds_random);
+document.write ("&amp;what=zone:266");
+document.write ("&amp;exclude=" + document.phpAds_used);
+if (document.referer)
+document.write ("&amp;referer=" + escape(document.referer));
+document.write ("'><" + "/script>");
+//-->
+</script><script language="JavaScript" type="text/javascript" src="Zji%C5%A1t%C4%9Bn%C3%AD%20ID%20posledn%C3%ADho%20vlo%C5%BEen%C3%A9ho%20%C5%99%C3%A1dku%20v%20MySQL%20-%20Root.cz_soubory/adjs_010.js"></script><script language="javascript" type="text/javascript">
+var el = document.getElementById("ad-banner-top");
+if (el) { el.style.display = "none"; }
+</script>
+<div id="beacon_1022" style="position: absolute; left: 0px; top: 0px; visibility: hidden;"><img src="Zji%C5%A1t%C4%9Bn%C3%AD%20ID%20posledn%C3%ADho%20vlo%C5%BEen%C3%A9ho%20%C5%99%C3%A1dku%20v%20MySQL%20-%20Root.cz_soubory/adlog_005.gif" alt="" style="width: 0px; height: 0px;" height="0" width="0"></div><noscript><a href='http://k.iinfo.cz/adclick.php?n=aa2d7019' target='_blank'><img
+	src='http://k.iinfo.cz/adview.php?what=zone:266&amp;n=aa2d7019' border='0' alt='' /></a></noscript>
+</div>
+</div>
+	<div class="strip-2">
+		<div id="head-sections">
+			<ul>
+				<li><a href="http://www.root.cz/clanky/">Články</a></li>
+				<li><a href="http://www.root.cz/zpravicky/">Zprávičky</a></li> 
+				<li><a href="http://www.root.cz/diskuse/">Diskuse</a></li>
+				<li><a href="http://blog.root.cz/">Blogy</a></li>
+				<li><a href="http://knihy.root.cz/">Knihy</a></li>
+				<li><a href="http://man.root.cz/">Manuály</a></li>
+				<li><a href="http://wiki.root.cz/">Wiki</a></li>
+				<li><a href="http://www.root.cz/texty/zaklady-linuxu/">Jak na Linux</a></li>
+				<li><a href="http://www.root.cz/texty/akademie-root-cz/">Školení</a></li>
+				<li><a href="http://jabber.root.cz/">Jabber server</a></li>
+				<li><a href="http://www.root.cz/texty/butik/">Butik</a></li>
+				<li id="jbp"><a href="http://r.iinfo.cz/?f=ro-jbp&amp;u=http://www.root.cz/jobpilot/">Jobpilot</a></li>
+			</ul>
+		</div>
+		</div>
+	<hr>
+</div>
+<div id="p-discussion" class="cont">
+<div class="main"><div class="main-cnt">
+
+<div class="path">
+	<a href="http://www.root.cz/" title="Návrat na titulní stránku">Root.cz</a>
+ &gt; <a href="http://www.root.cz/diskuse/">Diskuse</a> &gt; <span>Zjištění ID posledního...</span></div>
+<!-- google_ad_section_start -->
+
+	<h1><span>Zjištění ID posledního vloženého řádku v MySQL</span></h1>
+
+	<div class="info">
+		Datum 18. 10. 2007 13:39		<br>
+		Vložil 			<a href="http://www.root.cz/uzivatel/23785/">Luděk Janča</a>  
+<br>
+Nálepky:
+<a href="http://www.root.cz/diskuse/n/mysql/" title="">MySQL</a>			</div>
+
+	<div class="discus">Vždycky, když chci zjistit ID naposledy vloženého řádku, dostanu zpět pouze:<br>
+<br>
+Resource id #7<br>
+<br>
+Zjišťuji to tímto způsobem:<br>
+<br>
+mysql_query("INSERT INTO ..... ");<br>
+$query = mysql_query("SELECT LAST_INSERT_ID();");<br>
+<br>
+Nevíte co dělám špatně? V příkazovém řádku mysql mi to funguje, ale pořád se mi nedaří to skloubit s PHP.</div>
+
+	<div class="op-aq" id="respond"><div class="op-aq-cnt"><a href="http://www.root.cz/diskuse/2388/pridat/">Odpovědět</a></div></div>
+
+
+
+<div class="op-view">
+<script language="JavaScript" type="text/javascript">
+	var o_url='http://www.root.cz/opinions_uncover.php4?o[%%OPINION_ID%%]=on';
+	var o_new_status_html = '<i>Nový<\/i>';
+	var o_unreaded_status_html = '<i>Nepřečtený<\/i>';
+	var o_rating_value_html = '';
+	var o_thread = '(<a href="%%THREAD_ID%%\/vlakno/#o%%OPINION_ID%%">celé vlákno<\/a>)'
+</script>
+<div style="margin-left: 0px;"><div id="o164973"><div class="op-one op-qg">
+
+<div class="op-h op-uncover">
+
+
+	<span>Datum:</span>	<em>18. 10. 2007 14:18</em>
+
+
+	<span id="o164973s"><i>Nový</i>
+</span>
+	<br>
+	<span>Vložil:</span>
+	<em>tyctor <small>(neregistrovaný)</small></em><br>
+	<span>Titulek:</span>
+	<strong><a href="http://www.root.cz/diskuse/2388/164973/">pozri si co vracia funckia mysql_query</a></strong>
+	<span id="o164973t" class="op-h-t">
+(<a href="http://www.root.cz/diskuse/2388/164973/vlakno/#o164973">celé vlákno</a>)	</span><br>
+</div>
+	<div class="op-t"><a href="http://cz.php.net/manual/en/function.mysql-query.php" rel="nofollow">http://cz.php.net/manual/en/function.mysql-query.php</a></div>
+	<div class="op-aq"><div class="op-aq-cnt">
+		<a href="http://www.root.cz/diskuse/2388/164973/odpovedet/">Odpovědět</a>
+		<span id="rx0o164973"></span>
+<span id="rf0o164973"><span class="op-qs">Ohodnoťte: <span id="rfi0o164973o1"><img title="To snad ne..." alt="Palec dolu" src="Zji%C5%A1t%C4%9Bn%C3%AD%20ID%20posledn%C3%ADho%20vlo%C5%BEen%C3%A9ho%20%C5%99%C3%A1dku%20v%20MySQL%20-%20Root.cz_soubory/thumb-dn.png" height="18" width="18"></span><span id="rfi0o164973o10"><img title="Výborně!" alt="Palec nahoru" src="Zji%C5%A1t%C4%9Bn%C3%AD%20ID%20posledn%C3%ADho%20vlo%C5%BEen%C3%A9ho%20%C5%99%C3%A1dku%20v%20MySQL%20-%20Root.cz_soubory/thumb-up.png" height="18" width="18"></span></span></span><script type="text/javascript">rogrf(0,164973);</script>	</div></div>
+</div>
+</div></div><div style="margin-left: 20px;"><div id="o164982"><div class="op-one op-qg">
+
+<div class="op-h op-uncover">
+
+	<div class="avatar">
+		<span><a href="http://www.root.cz/redakce/co-je-aura/" title="Co to je?">aura</a>:<br><strong>87</strong></span>
+<a href="http://www.root.cz/uzivatel/23785/" title="Uživatelský profil"><img src="Zji%C5%A1t%C4%9Bn%C3%AD%20ID%20posledn%C3%ADho%20vlo%C5%BEen%C3%A9ho%20%C5%99%C3%A1dku%20v%20MySQL%20-%20Root.cz_soubory/avatar-default.gif" alt="Joelp .0" height="50" width="50"></a>	</div>
+
+	<span>Datum:</span>	<em>18. 10. 2007 15:07</em>
+
+
+	<span id="o164982s"><i>Nový</i>
+</span>
+	<br>
+	<span>Vložil:</span>
+	<em><a href="http://www.root.cz/uzivatel/23785/">Joelp .0</a></em><br>
+	<span>Titulek:</span>
+	<strong><a href="http://www.root.cz/diskuse/2388/164982/">Re: pozri si co vracia funckia mysql_query</a></strong>
+	<span id="o164982t" class="op-h-t">
+(<a href="http://www.root.cz/diskuse/2388/164973/vlakno/#o164982">celé vlákno</a>)	</span><br>
+</div>
+	<div class="op-t">Že se jedná o identifikátor jsem už zjistil taky, ale pořád se mi nedaří z toho nic dostat.</div>
+	<div class="op-aq"><div class="op-aq-cnt">
+		<a href="http://www.root.cz/diskuse/2388/164982/odpovedet/">Odpovědět</a>
+		<span id="rx0o164982"></span>
+<span id="rf0o164982"><span class="op-qs">Ohodnoťte: <span id="rfi0o164982o1"><img title="To snad ne..." alt="Palec dolu" src="Zji%C5%A1t%C4%9Bn%C3%AD%20ID%20posledn%C3%ADho%20vlo%C5%BEen%C3%A9ho%20%C5%99%C3%A1dku%20v%20MySQL%20-%20Root.cz_soubory/thumb-dn.png" height="18" width="18"></span><span id="rfi0o164982o10"><img title="Výborně!" alt="Palec nahoru" src="Zji%C5%A1t%C4%9Bn%C3%AD%20ID%20posledn%C3%ADho%20vlo%C5%BEen%C3%A9ho%20%C5%99%C3%A1dku%20v%20MySQL%20-%20Root.cz_soubory/thumb-up.png" height="18" width="18"></span></span></span><script type="text/javascript">rogrf(0,164982);</script>	</div></div>
+</div>
+</div></div><div style="margin-left: 20px;"><div id="o164984"><div class="op-one op-qg">
+
+<div class="op-h op-uncover">
+
+	<div class="avatar">
+		<span><a href="http://www.root.cz/redakce/co-je-aura/" title="Co to je?">aura</a>:<br><strong>87</strong></span>
+<a href="http://www.root.cz/uzivatel/23785/" title="Uživatelský profil"><img src="Zji%C5%A1t%C4%9Bn%C3%AD%20ID%20posledn%C3%ADho%20vlo%C5%BEen%C3%A9ho%20%C5%99%C3%A1dku%20v%20MySQL%20-%20Root.cz_soubory/avatar-default.gif" alt="Joelp .0" height="50" width="50"></a>	</div>
+
+	<span>Datum:</span>	<em>18. 10. 2007 15:11</em>
+
+
+	<span id="o164984s"><i>Nový</i>
+</span>
+	<br>
+	<span>Vložil:</span>
+	<em><a href="http://www.root.cz/uzivatel/23785/">Joelp .0</a></em><br>
+	<span>Titulek:</span>
+	<strong><a href="http://www.root.cz/diskuse/2388/164984/">Re: pozri si co vracia funckia mysql_query</a></strong>
+	<span id="o164984t" class="op-h-t">
+(<a href="http://www.root.cz/diskuse/2388/164973/vlakno/#o164984">celé vlákno</a>)	</span><br>
+</div>
+	<div class="op-t">Tak jsem to již vyřešil, měl jsem tam chybu. V zápisu SQL.</div>
+	<div class="op-aq"><div class="op-aq-cnt">
+		<a href="http://www.root.cz/diskuse/2388/164984/odpovedet/">Odpovědět</a>
+		<span id="rx0o164984"></span>
+<span id="rf0o164984"><span class="op-qs">Ohodnoťte: <span id="rfi0o164984o1"><img title="To snad ne..." alt="Palec dolu" src="Zji%C5%A1t%C4%9Bn%C3%AD%20ID%20posledn%C3%ADho%20vlo%C5%BEen%C3%A9ho%20%C5%99%C3%A1dku%20v%20MySQL%20-%20Root.cz_soubory/thumb-dn.png" height="18" width="18"></span><span id="rfi0o164984o10"><img title="Výborně!" alt="Palec nahoru" src="Zji%C5%A1t%C4%9Bn%C3%AD%20ID%20posledn%C3%ADho%20vlo%C5%BEen%C3%A9ho%20%C5%99%C3%A1dku%20v%20MySQL%20-%20Root.cz_soubory/thumb-up.png" height="18" width="18"></span></span></span><script type="text/javascript">rogrf(0,164984);</script>	</div></div>
+</div>
+</div></div><div style="margin-left: 0px;"><div id="o165002"><div class="op-one op-qg">
+
+<div class="op-h op-uncover">
+
+
+	<span>Datum:</span>	<em>18. 10. 2007 16:05</em>
+
+
+	<span id="o165002s"><i>Nový</i>
+</span>
+	<br>
+	<span>Vložil:</span>
+	<em>uživatel si přál zůstat v anonymitě</em><br>
+	<span>Titulek:</span>
+	<strong><a href="http://www.root.cz/diskuse/2388/165002/">mysql_insert_id</a></strong>
+	<span id="o165002t" class="op-h-t">
+(<a href="http://www.root.cz/diskuse/2388/165002/vlakno/#o165002">celé vlákno</a>)	</span><br>
+</div>
+	<div class="op-t">pro zjisteni id posledniho vlozeneho radku se pouziva mysql_insert_id</div>
+	<div class="op-aq"><div class="op-aq-cnt">
+		<a href="http://www.root.cz/diskuse/2388/165002/odpovedet/">Odpovědět</a>
+		<span id="rx0o165002"></span>
+<span id="rf0o165002"><span class="op-qs">Ohodnoťte: <span id="rfi0o165002o1"><img title="To snad ne..." alt="Palec dolu" src="Zji%C5%A1t%C4%9Bn%C3%AD%20ID%20posledn%C3%ADho%20vlo%C5%BEen%C3%A9ho%20%C5%99%C3%A1dku%20v%20MySQL%20-%20Root.cz_soubory/thumb-dn.png" height="18" width="18"></span><span id="rfi0o165002o10"><img title="Výborně!" alt="Palec nahoru" src="Zji%C5%A1t%C4%9Bn%C3%AD%20ID%20posledn%C3%ADho%20vlo%C5%BEen%C3%A9ho%20%C5%99%C3%A1dku%20v%20MySQL%20-%20Root.cz_soubory/thumb-up.png" height="18" width="18"></span></span></span><script type="text/javascript">rogrf(0,165002);</script>	</div></div>
+</div>
+</div></div><div style="margin-left: 20px;"><div id="o165024"><div class="op-one op-qg">
+
+<div class="op-h op-uncover">
+
+	<div class="avatar">
+		<span><a href="http://www.root.cz/redakce/co-je-aura/" title="Co to je?">aura</a>:<br><strong>87</strong></span>
+<a href="http://www.root.cz/uzivatel/23785/" title="Uživatelský profil"><img src="Zji%C5%A1t%C4%9Bn%C3%AD%20ID%20posledn%C3%ADho%20vlo%C5%BEen%C3%A9ho%20%C5%99%C3%A1dku%20v%20MySQL%20-%20Root.cz_soubory/avatar-default.gif" alt="Joelp .0" height="50" width="50"></a>	</div>
+
+	<span>Datum:</span>	<em>18. 10. 2007 17:15</em>
+
+
+	<span id="o165024s"><i>Nový</i>
+</span>
+	<br>
+	<span>Vložil:</span>
+	<em><a href="http://www.root.cz/uzivatel/23785/">Joelp .0</a></em><br>
+	<span>Titulek:</span>
+	<strong><a href="http://www.root.cz/diskuse/2388/165024/">Re: mysql_insert_id</a></strong>
+	<span id="o165024t" class="op-h-t">
+(<a href="http://www.root.cz/diskuse/2388/165002/vlakno/#o165024">celé vlákno</a>)	</span><br>
+</div>
+	<div class="op-t">Jenže to mi nevrátí zaručeně správný výsledek. viz. <a href="http://cz.php.net/manual/cs/function.mysql-insert-id.php" rel="nofollow">http://cz.php.net/manual/cs/function.mysql-insert-id.php</a></div>
+	<div class="op-aq"><div class="op-aq-cnt">
+		<a href="http://www.root.cz/diskuse/2388/165024/odpovedet/">Odpovědět</a>
+		<span id="rx0o165024"></span>
+<span id="rf0o165024"><span class="op-qs">Ohodnoťte: <span id="rfi0o165024o1"><img title="To snad ne..." alt="Palec dolu" src="Zji%C5%A1t%C4%9Bn%C3%AD%20ID%20posledn%C3%ADho%20vlo%C5%BEen%C3%A9ho%20%C5%99%C3%A1dku%20v%20MySQL%20-%20Root.cz_soubory/thumb-dn.png" height="18" width="18"></span><span id="rfi0o165024o10"><img title="Výborně!" alt="Palec nahoru" src="Zji%C5%A1t%C4%9Bn%C3%AD%20ID%20posledn%C3%ADho%20vlo%C5%BEen%C3%A9ho%20%C5%99%C3%A1dku%20v%20MySQL%20-%20Root.cz_soubory/thumb-up.png" height="18" width="18"></span></span></span><script type="text/javascript">rogrf(0,165024);</script>	</div></div>
+</div>
+</div></div><div style="margin-left: 0px;"><div id="o182322"><div class="op-one op-qg">
+
+<div class="op-h op-uncover">
+
+
+	<span>Datum:</span>	<em>24. 1. 15:36</em>
+
+
+	<span id="o182322s"><i>Nový</i>
+</span>
+	<br>
+	<span>Vložil:</span>
+	<em>Butchis <small>(neregistrovaný)</small></em><br>
+	<span>Titulek:</span>
+	<strong><a href="http://www.root.cz/diskuse/2388/182322/">Re: Zjištění ID posledního vloženého řádku v MySQL</a></strong>
+	<span id="o182322t" class="op-h-t">
+	</span><br>
+</div>
+	<div class="op-t">Kdyz zadas Mysql_DB_Query() vraci nejaky vysledek v tvem pripade Resource id #7<br>
+pak staci jen nacist do pole pres Mysql_Fetch_Array()<br>
+<br>
+//treba takhle:<br>
+<br>
+$query=mysql_query("SELECT LAST_INSERT_ID();");<br>
+$resource=mysql_fetch_array($query);<br>
+print_r ($resource);</div>
+	<div class="op-aq"><div class="op-aq-cnt">
+		<a href="http://www.root.cz/diskuse/2388/182322/odpovedet/">Odpovědět</a>
+		<span id="rx0o182322"></span>
+<span id="rf0o182322"><span class="op-qs">Ohodnoťte: <span id="rfi0o182322o1"><img title="To snad ne..." alt="Palec dolu" src="Zji%C5%A1t%C4%9Bn%C3%AD%20ID%20posledn%C3%ADho%20vlo%C5%BEen%C3%A9ho%20%C5%99%C3%A1dku%20v%20MySQL%20-%20Root.cz_soubory/thumb-dn.png" height="18" width="18"></span><span id="rfi0o182322o10"><img title="Výborně!" alt="Palec nahoru" src="Zji%C5%A1t%C4%9Bn%C3%AD%20ID%20posledn%C3%ADho%20vlo%C5%BEen%C3%A9ho%20%C5%99%C3%A1dku%20v%20MySQL%20-%20Root.cz_soubory/thumb-up.png" height="18" width="18"></span></span></span><script type="text/javascript">rogrf(0,182322);</script>	</div></div>
+</div>
+</div></div><div style="margin-left: 0px;"><div id="o201839"><div class="op-one op-qg">
+
+<div class="op-h op-uncover">
+
+	<div class="avatar">
+		<span><a href="http://www.root.cz/redakce/co-je-aura/" title="Co to je?">aura</a>:<br><strong>0</strong></span>
+<a href="http://www.root.cz/uzivatel/104015/" title="Uživatelský profil"><img src="Zji%C5%A1t%C4%9Bn%C3%AD%20ID%20posledn%C3%ADho%20vlo%C5%BEen%C3%A9ho%20%C5%99%C3%A1dku%20v%20MySQL%20-%20Root.cz_soubory/avatar-default.gif" alt="Michal Kočárek" height="50" width="50"></a>	</div>
+
+	<span>Datum:</span>	<em>5. 5. 11:21</em>
+
+
+	<span id="o201839s"><i>Nový</i>
+</span>
+	<br>
+	<span>Vložil:</span>
+	<em><a href="http://www.root.cz/uzivatel/104015/">Michal Kočárek</a></em><br>
+	<span>Titulek:</span>
+	<strong><a href="http://www.root.cz/diskuse/2388/201839/">RE: Zjištění ID posledního vloženého řádku v MySQL</a></strong>
+	<span id="o201839t" class="op-h-t">
+	</span><br>
+</div>
+	<div class="op-t">1. A má být za SELECT LAST_INSERT_ID() středník? Mám pocit, že některé MySQL to nepoberou.<br>
+2. mysql_query vrací resource, kterým se pohybuje pomocí
+mysql_fetch_array (a podobných - viz manuál). Tyto funkce vrací pole s
+buňkami pro každý řádek, který je ve výsledku. Tedy:<br>
+<br>
+$q = mysql_query('SELECT LAST_INSERT_ID()');<br>
+if ($q === false) stala_se_chyba();<br>
+<br>
+$row = mysql_fetch_row($q);<br>
+if ($row === false) stala_se_chyba();<br>
+<br>
+$last_insert_id = $row[0]; // Může být číslo nebo NULL, pokud není žádné last_insert_id.<br>
+<br>
+@mysql_free_result($q);</div>
+	<div class="op-aq"><div class="op-aq-cnt">
+		<a href="http://www.root.cz/diskuse/2388/201839/odpovedet/">Odpovědět</a>
+		<span id="rx0o201839"></span>
+<span id="rf0o201839"><span class="op-qs">Ohodnoťte: <span id="rfi0o201839o1"><img title="To snad ne..." alt="Palec dolu" src="Zji%C5%A1t%C4%9Bn%C3%AD%20ID%20posledn%C3%ADho%20vlo%C5%BEen%C3%A9ho%20%C5%99%C3%A1dku%20v%20MySQL%20-%20Root.cz_soubory/thumb-dn.png" height="18" width="18"></span><span id="rfi0o201839o10"><img title="Výborně!" alt="Palec nahoru" src="Zji%C5%A1t%C4%9Bn%C3%AD%20ID%20posledn%C3%ADho%20vlo%C5%BEen%C3%A9ho%20%C5%99%C3%A1dku%20v%20MySQL%20-%20Root.cz_soubory/thumb-up.png" height="18" width="18"></span></span></span><script type="text/javascript">rogrf(0,201839);</script>	</div></div>
+</div>
+</div></div><div style="margin-left: 0px;"><div id="o201901"><div class="op-one op-qg">
+
+<div class="op-h op-uncover">
+
+	<div class="avatar">
+		<span><a href="http://www.root.cz/redakce/co-je-aura/" title="Co to je?">aura</a>:<br><strong>87</strong></span>
+<a href="http://www.root.cz/uzivatel/23785/" title="Uživatelský profil"><img src="Zji%C5%A1t%C4%9Bn%C3%AD%20ID%20posledn%C3%ADho%20vlo%C5%BEen%C3%A9ho%20%C5%99%C3%A1dku%20v%20MySQL%20-%20Root.cz_soubory/avatar-default.gif" alt="Joelp" height="50" width="50"></a>	</div>
+
+	<span>Datum:</span>	<em>5. 5. 14:56</em>
+
+
+	<span id="o201901s"><i>Nový</i>
+</span>
+	<br>
+	<span>Vložil:</span>
+	<em><a href="http://www.root.cz/uzivatel/23785/">Joelp</a></em><br>
+	<span>Titulek:</span>
+	<strong><a href="http://www.root.cz/diskuse/2388/201901/">Re: Zjištění ID posledního vloženého řádku v MySQL</a></strong>
+	<span id="o201901t" class="op-h-t">
+	</span><br>
+</div>
+	<div class="op-t">Vyřešil jsem to už dávno, ale vidím, že sem stále někdo přispívá, tak vložím i řešení:<br>
+<br>
+<br>
+mysql_query("start transaction;");<br>
+mysql_query("SET NAMES 'utf8'") or die ('Could not set Charset');<br>
+<br>
+mysql_query($sql); //$sql obsahuje sql dotaz<br>
+<br>
+//pro nazornost jsem to trochu rozlozil<br>
+$sql2 = mysql_query("SELECT LAST_INSERT_ID()");<br>
+$result = mysql_fetch_array($sql2);  //Array ( [0] =&gt; 7155 [LAST_INSERT_ID()] =&gt; 7155 )<br>
+$id = $result[0];<br>
+<br>
+mysql_query($sql3); //dalsi sql dotazy<br>
+<br>
+mysql_query("commit;");</div>
+	<div class="op-aq"><div class="op-aq-cnt">
+		<a href="http://www.root.cz/diskuse/2388/201901/odpovedet/">Odpovědět</a>
+		<span id="rx0o201901"></span>
+<span id="rf0o201901"><span class="op-qs">Ohodnoťte: <span id="rfi0o201901o1"><img title="To snad ne..." alt="Palec dolu" src="Zji%C5%A1t%C4%9Bn%C3%AD%20ID%20posledn%C3%ADho%20vlo%C5%BEen%C3%A9ho%20%C5%99%C3%A1dku%20v%20MySQL%20-%20Root.cz_soubory/thumb-dn.png" height="18" width="18"></span><span id="rfi0o201901o10"><img title="Výborně!" alt="Palec nahoru" src="Zji%C5%A1t%C4%9Bn%C3%AD%20ID%20posledn%C3%ADho%20vlo%C5%BEen%C3%A9ho%20%C5%99%C3%A1dku%20v%20MySQL%20-%20Root.cz_soubory/thumb-up.png" height="18" width="18"></span></span></span><script type="text/javascript">rogrf(0,201901);</script>	</div></div>
+</div>
+</div></div></div>
+
+<div class="op-sub">
+<h3 id="opinions-subscribe"><span>Sledování názorů</span></h3>
+<div class="op-sub-c">
+	<p>Zasílání upozornění na nové názory je dostupné jen registrovaným uživatelům.</p>
+	<p>Prosím, <a href="http://www.root.cz/prihlasit/?us_ref=http%3A%2F%2Fwww.root.cz%2Fdiskuse%2F2388%2F">přihlaste se</a> a nebo se <a href="http://us.root.cz/registrovat/?us_ref=http%3A%2F%2Fwww.root.cz%2Fdiskuse%2F2388%2F">zaregistrujte</a>. </p>
+</div>
+</div>
+	
+	<div class="links">
+<div id="links-left">
+<a href="http://www.jagg.cz/" onclick="window.open('http://www.jagg.cz/bookmarks.php?action=add&address='+encodeURIComponent(location.href)+'&title='+encodeURIComponent(document.title), 'Jagg','toolbar=no,width=750,height=450'); return false;"><img src="Zji%C5%A1t%C4%9Bn%C3%AD%20ID%20posledn%C3%ADho%20vlo%C5%BEen%C3%A9ho%20%C5%99%C3%A1dku%20v%20MySQL%20-%20Root.cz_soubory/jaggni-to.gif" alt="Jaggni to!" title="Klikněte zde a přidáte tuto stránku do svých záložek na Jagg.cz" height="15" width="80"></a>
+<a href="http://del.icio.us/post" onclick="window.open('http://del.icio.us/post?v=4&noui&jump=close&url='+encodeURIComponent(location.href)+'&title='+encodeURIComponent(document.title), 'delicious','toolbar=no,width=750,height=450'); return false;"><img src="Zji%C5%A1t%C4%9Bn%C3%AD%20ID%20posledn%C3%ADho%20vlo%C5%BEen%C3%A9ho%20%C5%99%C3%A1dku%20v%20MySQL%20-%20Root.cz_soubory/delicious.png" alt="Del.icio.us" height="15" width="80"></a>
+</div>
+		<div id="links-right">
+<span onclick="if(confirm('Moderní prohlížeče vytisknou stránku s využitím stylů zvlášť připravených pro tisk.\n\n Chcete vytisknout aktuální stránku?')) window.print();" class="link-print"><img src="Zji%C5%A1t%C4%9Bn%C3%AD%20ID%20posledn%C3%ADho%20vlo%C5%BEen%C3%A9ho%20%C5%99%C3%A1dku%20v%20MySQL%20-%20Root.cz_soubory/tisk.gif" alt="Tiskni" title="Tiskni" height="15" width="15"></span> 
+ 
+<span class="link-recommend"> <a href="http://www.root.cz/diskuse/2388/doporucit/"><img src="Zji%C5%A1t%C4%9Bn%C3%AD%20ID%20posledn%C3%ADho%20vlo%C5%BEen%C3%A9ho%20%C5%99%C3%A1dku%20v%20MySQL%20-%20Root.cz_soubory/doporuc.gif" alt="Doporuč" title="Doporuč článek přátelům" height="15" width="25"></a></span> 
+		</div>
+	</div>
+
+<div style="display: none;" class="ad" id="ad-article-300x300">
+<div class="ad-marker">Reklama</div>
+<div class="ad-ad ad-holder-tr">
+<script language="JavaScript" type="text/javascript" src="Zji%C5%A1t%C4%9Bn%C3%AD%20ID%20posledn%C3%ADho%20vlo%C5%BEen%C3%A9ho%20%C5%99%C3%A1dku%20v%20MySQL%20-%20Root.cz_soubory/adx.js"></script>
+<script language="JavaScript" type="text/javascript">
+<!--
+if (!document.phpAds_used) document.phpAds_used = ',';
+phpAds_random = new String (Math.random()); phpAds_random = phpAds_random.substring(2,11);
+document.write ("<" + "script language='JavaScript' type='text/javascript' src='");
+document.write ("http://k.iinfo.cz/adjs.php?n=" + phpAds_random);
+document.write ("&amp;what=zone:259");
+document.write ("&amp;exclude=" + document.phpAds_used);
+if (document.referer)
+document.write ("&amp;referer=" + escape(document.referer));
+document.write ("'><" + "/script>");
+//-->
+</script><script language="JavaScript" type="text/javascript" src="Zji%C5%A1t%C4%9Bn%C3%AD%20ID%20posledn%C3%ADho%20vlo%C5%BEen%C3%A9ho%20%C5%99%C3%A1dku%20v%20MySQL%20-%20Root.cz_soubory/adjs_008.js"></script><script language="javascript" type="text/javascript">
+var el = document.getElementById("ad-article-300x300");
+if (el) { el.style.display = "none"; }
+</script>
+<div id="beacon_1020" style="position: absolute; left: 0px; top: 0px; visibility: hidden;"><img src="Zji%C5%A1t%C4%9Bn%C3%AD%20ID%20posledn%C3%ADho%20vlo%C5%BEen%C3%A9ho%20%C5%99%C3%A1dku%20v%20MySQL%20-%20Root.cz_soubory/adlog.gif" alt="" style="width: 0px; height: 0px;" height="0" width="0"></div><noscript><a href='http://k.iinfo.cz/adclick.php?n=aa2288de' target='_blank'><img
+	src='http://k.iinfo.cz/adview.php?what=zone:259&amp;n=aa2288de' border='0' alt='' /></a></noscript>
+</div>
+</div>
+<div id="as-di-300x250" class="ad-sense">
+
+<script type="text/javascript"><!--
+google_ad_client = "pub-4771975420977819";
+google_alternate_color = "eeeeee";
+google_ad_width = 300;
+google_ad_height = 250;
+google_ad_format = "300x250_as";
+google_ad_type = "text";
+//2007-02-25: ro-diskuse-300x250
+google_ad_channel = "7431013999";
+google_color_border = "EEEEEE";
+google_color_bg = "EEEEEE";
+google_color_link = "CC6600";
+google_color_text = "000000";
+google_color_url = "666666";
+//--></script>
+<script type="text/javascript" src="Zji%C5%A1t%C4%9Bn%C3%AD%20ID%20posledn%C3%ADho%20vlo%C5%BEen%C3%A9ho%20%C5%99%C3%A1dku%20v%20MySQL%20-%20Root.cz_soubory/show_ads.js">
+</script><iframe name="google_ads_frame" src="Zji%C5%A1t%C4%9Bn%C3%AD%20ID%20posledn%C3%ADho%20vlo%C5%BEen%C3%A9ho%20%C5%99%C3%A1dku%20v%20MySQL%20-%20Root.cz_soubory/ads.htm" marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" frameborder="0" height="250" scrolling="no" width="300"></iframe>
+
+</div>
+
+	<div class="cb"></div>
+
+<div class="op-list">
+<h3 id="opinions-list"><span>Přehled názorů</span></h3>
+<div class="op-qc">
+<span>Nastavení kvality:</span>
+<a href="http://www.root.cz/diskuse/2388/">Vlastní</a>
+<a href="http://www.root.cz/diskuse/2388/vse/">Vše</a>
+<a href="http://www.root.cz/diskuse/2388/q2/">2</a>
+<a href="http://www.root.cz/diskuse/2388/q3/">3</a>
+<a href="http://www.root.cz/diskuse/2388/q4/">4</a>
+<a href="http://www.root.cz/diskuse/2388/q5/">5</a>
+<a href="http://www.root.cz/diskuse/2388/q6/">6</a>
+<a href="http://www.root.cz/diskuse/2388/q7/">7</a>
+<a href="http://www.root.cz/diskuse/2388/q8/">8</a>
+<a href="http://www.root.cz/diskuse/2388/q9/" class="last">9</a>
+</div>
+<form action="./" method="get" class="op-list-c">
+<table>
+<col class="dn-p" align="center" width="4%">
+<col width="55%">
+<col width="24%">
+<col width="17%">
+<tbody>
+<tr class="op-qg op-tb">
+	<td class="dn-p"><input name="o[164973]" type="checkbox"></td>
+	<th><a href="http://www.root.cz/diskuse/2388/164973/">pozri si co vracia funckia mysql_query</a></th>
+	<td class="op-au">tyctor</td>
+	<td class="op-dt">18. 10. 2007 14:18	</td>
+</tr>
+<tr class="op-qg">
+	<td class="dn-p"><input name="o[164982]" type="checkbox"></td>
+	<th><img src="Zji%C5%A1t%C4%9Bn%C3%AD%20ID%20posledn%C3%ADho%20vlo%C5%BEen%C3%A9ho%20%C5%99%C3%A1dku%20v%20MySQL%20-%20Root.cz_soubory/t.gif" alt="&#9500;" align="left" height="21" width="9">&nbsp;<a href="http://www.root.cz/diskuse/2388/164982/">Re: pozri si co vracia funckia mysql_query</a></th>
+	<td class="op-au">Joelp .0</td>
+	<td class="op-dt">18. 10. 2007 15:07	</td>
+</tr>
+<tr class="op-qg">
+	<td class="dn-p"><input name="o[164984]" type="checkbox"></td>
+	<th><img src="Zji%C5%A1t%C4%9Bn%C3%AD%20ID%20posledn%C3%ADho%20vlo%C5%BEen%C3%A9ho%20%C5%99%C3%A1dku%20v%20MySQL%20-%20Root.cz_soubory/l.gif" alt="&#9492;" align="left" height="21" width="9">&nbsp;<a href="http://www.root.cz/diskuse/2388/164984/">Re: pozri si co vracia funckia mysql_query</a></th>
+	<td class="op-au">Joelp .0</td>
+	<td class="op-dt">18. 10. 2007 15:11	</td>
+</tr>
+<tr class="op-qg op-tb">
+	<td class="dn-p"><input name="o[165002]" type="checkbox"></td>
+	<th><a href="http://www.root.cz/diskuse/2388/165002/">mysql_insert_id</a></th>
+	<td class="op-au">anonymní uživatel</td>
+	<td class="op-dt">18. 10. 2007 16:05	</td>
+</tr>
+<tr class="op-qg">
+	<td class="dn-p"><input name="o[165024]" type="checkbox"></td>
+	<th><img src="Zji%C5%A1t%C4%9Bn%C3%AD%20ID%20posledn%C3%ADho%20vlo%C5%BEen%C3%A9ho%20%C5%99%C3%A1dku%20v%20MySQL%20-%20Root.cz_soubory/l.gif" alt="&#9492;" align="left" height="21" width="9">&nbsp;<a href="http://www.root.cz/diskuse/2388/165024/">Re: mysql_insert_id</a></th>
+	<td class="op-au">Joelp .0</td>
+	<td class="op-dt">18. 10. 2007 17:15	</td>
+</tr>
+<tr class="op-qg op-tb">
+	<td class="dn-p"><input name="o[182322]" type="checkbox"></td>
+	<th><a href="http://www.root.cz/diskuse/2388/182322/">Re: Zjištění ID posledního vloženého řádku v MySQL</a></th>
+	<td class="op-au">Butchis</td>
+	<td class="op-dt">24. 1. 15:36	</td>
+</tr>
+<tr class="op-qg op-tb">
+	<td class="dn-p"><input name="o[201839]" type="checkbox"></td>
+	<th><a href="http://www.root.cz/diskuse/2388/201839/">RE: Zjištění ID posledního vloženého řádku v MySQL</a></th>
+	<td class="op-au">Michal Kočárek</td>
+	<td class="op-dt">5. 5. 11:21	</td>
+</tr>
+<tr class="op-qg op-tb">
+	<td class="dn-p"><input name="o[201901]" type="checkbox"></td>
+	<th><a href="http://www.root.cz/diskuse/2388/201901/">Re: Zjištění ID posledního vloženého řádku v MySQL</a></th>
+	<td class="op-au">Joelp</td>
+	<td class="op-dt">5. 5. 14:56	</td>
+</tr>
+</tbody>
+</table>
+<div class="but-area">
+	<input name="show" src="Zji%C5%A1t%C4%9Bn%C3%AD%20ID%20posledn%C3%ADho%20vlo%C5%BEen%C3%A9ho%20%C5%99%C3%A1dku%20v%20MySQL%20-%20Root.cz_soubory/cs-b-showmarked.gif" alt="Zobrazit označené" class="but-img cs-b-showmarked" type="image"><a href="http://www.root.cz/diskuse/2388/"><img src="Zji%C5%A1t%C4%9Bn%C3%AD%20ID%20posledn%C3%ADho%20vlo%C5%BEen%C3%A9ho%20%C5%99%C3%A1dku%20v%20MySQL%20-%20Root.cz_soubory/cs-b-showquality.gif" alt="Zobrazit kvalitní" class="but-img cs-b-showquality"></a><a href="http://www.root.cz/diskuse/2388/vse/"><img src="Zji%C5%A1t%C4%9Bn%C3%AD%20ID%20posledn%C3%ADho%20vlo%C5%BEen%C3%A9ho%20%C5%99%C3%A1dku%20v%20MySQL%20-%20Root.cz_soubory/cs-b-showall.gif" alt="Zobrazit vše" class="but-img cs-b-showall"></a><a href="http://www.root.cz/diskuse/2388/pridat/"><img src="Zji%C5%A1t%C4%9Bn%C3%AD%20ID%20posledn%C3%ADho%20vlo%C5%BEen%C3%A9ho%20%C5%99%C3%A1dku%20v%20MySQL%20-%20Root.cz_soubory/cs-b-add.gif" alt="Přidat" class="but-img cs-b-add"></a>
+</div>
+</form>
+</div>
+	<!-- google_ad_section_end -->
+
+</div></div>
+
+<div class="side">
+	<h2>Další informace</h2>
+
+<div class="sbox"><div class="sbox-cnt">
+<h3><a href="http://www.root.cz/vyhledavani/" title="Rozšířené vyhledávání">Vyhledávání</a></h3>
+<form method="get" action="/vyhledavani/" class="rev">
+<div>
+<input size="14" maxlength="255" name="qs" value="" class="input" type="text">
+<input name="search" value="Hledej" class="submit" type="submit">
+<input name="kde[vsude]" value="1" type="hidden">
+<a href="http://www.root.cz/vyhledavani/" title="Rozšířené vyhledávání">Rozšířené</a>
+</div>
+</form>
+</div></div>
+
+	<h3><a href="http://www.root.cz/diskuse/n/" title="Nálepky">Nálepky</a></h3>
+	<div class="box tagcloud">
+		<a href="http://www.root.cz/diskuse/n/acer/" title="Obsahuje 7 diskusí." class="size1">Acer</a> 
+		<a href="http://www.root.cz/diskuse/n/apache/" title="Obsahuje 25 diskusí." class="size2">Apache</a> 
+		<a href="http://www.root.cz/diskuse/n/ati/" title="Obsahuje 19 diskusí." class="size2">ATI</a> 
+		<a href="http://www.root.cz/diskuse/n/debian/" title="Obsahuje 45 diskusí." class="size4">Debian</a> 
+		<a href="http://www.root.cz/diskuse/n/fedora/" title="Obsahuje 14 diskusí." class="size2">Fedora</a> 
+		<a href="http://www.root.cz/diskuse/n/firefox/" title="Obsahuje 16 diskusí." class="size2">Firefox</a> 
+		<a href="http://www.root.cz/diskuse/n/freebsd/" title="Obsahuje 12 diskusí." class="size1">FreeBSD</a> 
+		<a href="http://www.root.cz/diskuse/n/gentoo/" title="Obsahuje 11 diskusí." class="size1">Gentoo</a> 
+		<a href="http://www.root.cz/diskuse/n/gnome/" title="Obsahuje 18 diskusí." class="size2">Gnome</a> 
+		<a href="http://www.root.cz/diskuse/n/java/" title="Obsahuje 8 diskusí." class="size1">Java</a> 
+		<a href="http://www.root.cz/diskuse/n/kde/" title="Obsahuje 15 diskusí." class="size2">KDE</a> 
+		<a href="http://www.root.cz/diskuse/n/linux/" title="Obsahuje 7 diskusí." class="size1">Linux</a> 
+		<a href="http://www.root.cz/diskuse/n/mail/" title="Obsahuje 11 diskusí." class="size1">mail</a> 
+		<a href="http://www.root.cz/diskuse/n/mandriva/" title="Obsahuje 7 diskusí." class="size1">Mandriva</a> 
+		<a href="http://www.root.cz/diskuse/n/mysql/" title="Obsahuje 14 diskusí." class="size2">MySQL</a> 
+		<a href="http://www.root.cz/diskuse/n/notebook/" title="Obsahuje 14 diskusí." class="size2">notebook</a> 
+		<a href="http://www.root.cz/diskuse/n/nvidia/" title="Obsahuje 13 diskusí." class="size2">nvidia</a> 
+		<a href="http://www.root.cz/diskuse/n/perl/" title="Obsahuje 10 diskusí." class="size1">Perl</a> 
+		<a href="http://www.root.cz/diskuse/n/php/" title="Obsahuje 22 diskuse." class="size2">PHP</a> 
+		<a href="http://www.root.cz/diskuse/n/postfix/" title="Obsahuje 9 diskusí." class="size1">postfix</a> 
+		<a href="http://www.root.cz/diskuse/n/programovani/" title="Obsahuje 9 diskusí." class="size1">programování</a> 
+		<a href="http://www.root.cz/diskuse/n/samba/" title="Obsahuje 6 diskusí." class="size1">Samba</a> 
+		<a href="http://www.root.cz/diskuse/n/server/" title="Obsahuje 9 diskusí." class="size1">server</a> 
+		<a href="http://www.root.cz/diskuse/n/sit/" title="Obsahuje 32 diskuse." class="size3">síť</a> 
+		<a href="http://www.root.cz/diskuse/n/ssh/" title="Obsahuje 9 diskusí." class="size1">SSH</a> 
+		<a href="http://www.root.cz/diskuse/n/tv/" title="Obsahuje 6 diskusí." class="size1">tv</a> 
+		<a href="http://www.root.cz/diskuse/n/ubuntu/" title="Obsahuje 35 diskusí." class="size3">Ubuntu</a> 
+		<a href="http://www.root.cz/diskuse/n/usb/" title="Obsahuje 16 diskusí." class="size2">usb</a> 
+		<a href="http://www.root.cz/diskuse/n/wifi/" title="Obsahuje 10 diskusí." class="size1">WiFi</a> 
+		<a href="http://www.root.cz/diskuse/n/windows/" title="Obsahuje 20 diskusí." class="size2">windows</a> 
+	</div>
+
+<div class="box ad" id="ad-training">
+<h3>Reklama</h3>
+<div class="ad-ad box-cnt ad-textbox">
+
+<div>
+<script language="JavaScript" type="text/javascript" src="Zji%C5%A1t%C4%9Bn%C3%AD%20ID%20posledn%C3%ADho%20vlo%C5%BEen%C3%A9ho%20%C5%99%C3%A1dku%20v%20MySQL%20-%20Root.cz_soubory/adx.js"></script>
+<script language="JavaScript" type="text/javascript">
+<!--
+if (!document.phpAds_used) document.phpAds_used = ',';
+phpAds_random = new String (Math.random()); phpAds_random = phpAds_random.substring(2,11);
+document.write ("<" + "script language='JavaScript' type='text/javascript' src='");
+document.write ("http://k.iinfo.cz/adjs.php?n=" + phpAds_random);
+document.write ("&amp;what=zone:271");
+document.write ("&amp;exclude=" + document.phpAds_used);
+if (document.referer)
+document.write ("&amp;referer=" + escape(document.referer));
+document.write ("'><" + "/script>");
+//-->
+</script><script language="JavaScript" type="text/javascript" src="Zji%C5%A1t%C4%9Bn%C3%AD%20ID%20posledn%C3%ADho%20vlo%C5%BEen%C3%A9ho%20%C5%99%C3%A1dku%20v%20MySQL%20-%20Root.cz_soubory/adjs_004.js"></script><a target="_blank" href="http://k.iinfo.cz/adclick.php?bannerid=3798&amp;zoneid=271&amp;source=&amp;dest=http%3A%2F%2Fgdecz.hit.gemius.pl%2Fhitredir%2Fid%3DnG5Ae0RWa9hIIky2XbqukZXj.h6dIC__HCr9lpFOsTb.p7%2Fstparam%3Dyfpoonllwg%2Furl%3Dwww.upc-internet.cz%2F%3Froot&amp;ismap=">
+
+<img src="Zji%C5%A1t%C4%9Bn%C3%AD%20ID%20posledn%C3%ADho%20vlo%C5%BEen%C3%A9ho%20%C5%99%C3%A1dku%20v%20MySQL%20-%20Root.cz_soubory/upc_internet_180x60.gif" height="60" width="180"></a><br>
+
+Nenechte se omezovat s UPC Internet<br>
+Objednejte nyní vysokorychlostní internet a máte 6 měsíců s 50% slevou!
+Žádné limity dat, žádné další poplatky za telefon! Modem zapůjčíme zdarma a
+profesionální instalaci provedeme za 1 Kč!<br>
+Více informací <a target="_blank" href="http://k.iinfo.cz/adclick.php?bannerid=3798&amp;zoneid=271&amp;source=&amp;dest=http%3A%2F%2Fgdecz.hit.gemius.pl%2Fhitredir%2Fid%3DnG5Ae0RWa9hIIky2XbqukZXj.h6dIC__HCr9lpFOsTb.p7%2Fstparam%3Dyfpoonllwg%2Furl%3Dwww.upc-internet.cz%2F%3Froot&amp;ismap=">zde.</a>
+
+
+
+<!-- (c) 2000-2008 Gemius SA ver 1.4 Zobrazení: Root , Text box -->
+<script language="javascript1.2" type="text/javascript">
+//<![CDATA[
+_gde_lfiilqrgxl = new Image(1,1);
+_gde_lfiilqrgxl.src='http://gdecz.hit.gemius.pl/_'+(new Date()).getTime()+'/redot.gif?id=nG5Ae0RWa9hIIky2XbqukZXj.h6dIC__HCr9lpFOsTb.p7/stparam=lfiilqrgxl';
+//]]>
+</script>
+<div id="beacon_3798" style="position: absolute; left: 0px; top: 0px; visibility: hidden;"><img src="Zji%C5%A1t%C4%9Bn%C3%AD%20ID%20posledn%C3%ADho%20vlo%C5%BEen%C3%A9ho%20%C5%99%C3%A1dku%20v%20MySQL%20-%20Root.cz_soubory/adlog_004.gif" alt="" style="width: 0px; height: 0px;" height="0" width="0"></div><noscript><a href='http://k.iinfo.cz/adclick.php?n=affb9f17' target='_blank'><img
+	src='http://k.iinfo.cz/adview.php?what=zone:271&amp;n=affb9f17' border='0' alt='' /></a></noscript>
+
+	</div>
+
+</div>
+</div>
+<div class="box ad" id="ad-textbox-1">
+<h3>Reklama</h3>
+<div class="ad-ad box-cnt ad-textbox">
+<script language="JavaScript" type="text/javascript" src="Zji%C5%A1t%C4%9Bn%C3%AD%20ID%20posledn%C3%ADho%20vlo%C5%BEen%C3%A9ho%20%C5%99%C3%A1dku%20v%20MySQL%20-%20Root.cz_soubory/adx.js"></script>
+<script language="JavaScript" type="text/javascript">
+<!--
+if (!document.phpAds_used) document.phpAds_used = ',';
+phpAds_random = new String (Math.random()); phpAds_random = phpAds_random.substring(2,11);
+document.write ("<" + "script language='JavaScript' type='text/javascript' src='");
+document.write ("http://k.iinfo.cz/adjs.php?n=" + phpAds_random);
+document.write ("&amp;what=zone:269");
+document.write ("&amp;exclude=" + document.phpAds_used);
+if (document.referer)
+document.write ("&amp;referer=" + escape(document.referer));
+document.write ("'><" + "/script>");
+//-->
+</script><script language="JavaScript" type="text/javascript" src="Zji%C5%A1t%C4%9Bn%C3%AD%20ID%20posledn%C3%ADho%20vlo%C5%BEen%C3%A9ho%20%C5%99%C3%A1dku%20v%20MySQL%20-%20Root.cz_soubory/adjs_005.js"></script><strong>Průvodce finančními produkty</strong><br>
+Potřebujete životní pojištění, spořící účet nebo hypoteční úvěr?
+Nevyznáte se v platebních kartách ani v investičních produktech? <br>
+Nová služba serveru Měšec.cz <a target="_blank" href="http://k.iinfo.cz/adclick.php?bannerid=3686&amp;zoneid=269&amp;source=&amp;dest=http%3A%2F%2Fprodej.mesec.cz%2F&amp;ismap=">vám poradí</a>, jak a kde sjednat optimální finanční produkt přímo vám na míru. <div id="beacon_3686" style="position: absolute; left: 0px; top: 0px; visibility: hidden;"><img src="Zji%C5%A1t%C4%9Bn%C3%AD%20ID%20posledn%C3%ADho%20vlo%C5%BEen%C3%A9ho%20%C5%99%C3%A1dku%20v%20MySQL%20-%20Root.cz_soubory/adlog_009.gif" alt="" style="width: 0px; height: 0px;" height="0" width="0"></div><noscript><a href='http://k.iinfo.cz/adclick.php?n=a459905a' target='_blank'><img
+	src='http://k.iinfo.cz/adview.php?what=zone:269&amp;n=a459905a' border='0' alt='' /></a></noscript>
+</div>
+</div>
+<div style="display: none;" class="box ad" id="ad-textbox-2-5">
+<h3>Reklama</h3>
+<div class="ad-ad box-cnt ad-textbox">
+<script language="JavaScript" type="text/javascript" src="Zji%C5%A1t%C4%9Bn%C3%AD%20ID%20posledn%C3%ADho%20vlo%C5%BEen%C3%A9ho%20%C5%99%C3%A1dku%20v%20MySQL%20-%20Root.cz_soubory/adx.js"></script>
+<script language="JavaScript" type="text/javascript">
+<!--
+if (!document.phpAds_used) document.phpAds_used = ',';
+phpAds_random = new String (Math.random()); phpAds_random = phpAds_random.substring(2,11);
+document.write ("<" + "script language='JavaScript' type='text/javascript' src='");
+document.write ("http://k.iinfo.cz/adjs.php?n=" + phpAds_random);
+document.write ("&amp;what=zone:394");
+document.write ("&amp;exclude=" + document.phpAds_used);
+if (document.referer)
+document.write ("&amp;referer=" + escape(document.referer));
+document.write ("'><" + "/script>");
+//-->
+</script><script language="JavaScript" type="text/javascript" src="Zji%C5%A1t%C4%9Bn%C3%AD%20ID%20posledn%C3%ADho%20vlo%C5%BEen%C3%A9ho%20%C5%99%C3%A1dku%20v%20MySQL%20-%20Root.cz_soubory/adjs_009.js"></script><script language="javascript" type="text/javascript">
+var el = document.getElementById("ad-textbox-2-5");
+if (el) { el.style.display = "none"; }
+</script><div id="beacon_1992" style="position: absolute; left: 0px; top: 0px; visibility: hidden;"><img src="Zji%C5%A1t%C4%9Bn%C3%AD%20ID%20posledn%C3%ADho%20vlo%C5%BEen%C3%A9ho%20%C5%99%C3%A1dku%20v%20MySQL%20-%20Root.cz_soubory/adlog_007.gif" alt="" style="width: 0px; height: 0px;" height="0" width="0"></div><noscript><a href='http://k.iinfo.cz/adclick.php?n=a459905a' target='_blank'><img
+	src='http://k.iinfo.cz/adview.php?what=zone:394&amp;n=a459905a' border='0' alt='' /></a></noscript>
+</div>
+</div>
+<div style="display: none;" class="box ad" id="ad-textbox-3">
+<h3>Reklama</h3>
+<div class="ad-ad box-cnt ad-textbox">
+<script language="JavaScript" type="text/javascript" src="Zji%C5%A1t%C4%9Bn%C3%AD%20ID%20posledn%C3%ADho%20vlo%C5%BEen%C3%A9ho%20%C5%99%C3%A1dku%20v%20MySQL%20-%20Root.cz_soubory/adx.js"></script>
+<script language="JavaScript" type="text/javascript">
+<!--
+if (!document.phpAds_used) document.phpAds_used = ',';
+phpAds_random = new String (Math.random()); phpAds_random = phpAds_random.substring(2,11);
+document.write ("<" + "script language='JavaScript' type='text/javascript' src='");
+document.write ("http://k.iinfo.cz/adjs.php?n=" + phpAds_random);
+document.write ("&amp;what=zone:392");
+document.write ("&amp;exclude=" + document.phpAds_used);
+if (document.referer)
+document.write ("&amp;referer=" + escape(document.referer));
+document.write ("'><" + "/script>");
+//-->
+</script><script language="JavaScript" type="text/javascript" src="Zji%C5%A1t%C4%9Bn%C3%AD%20ID%20posledn%C3%ADho%20vlo%C5%BEen%C3%A9ho%20%C5%99%C3%A1dku%20v%20MySQL%20-%20Root.cz_soubory/adjs_002.js"></script><script language="javascript" type="text/javascript">
+var el = document.getElementById("ad-textbox-3");
+if (el) { el.style.display = "none"; }
+</script><div id="beacon_1346" style="position: absolute; left: 0px; top: 0px; visibility: hidden;"><img src="Zji%C5%A1t%C4%9Bn%C3%AD%20ID%20posledn%C3%ADho%20vlo%C5%BEen%C3%A9ho%20%C5%99%C3%A1dku%20v%20MySQL%20-%20Root.cz_soubory/adlog_003.gif" alt="" style="width: 0px; height: 0px;" height="0" width="0"></div><noscript><a href='http://k.iinfo.cz/adclick.php?n=a459905a' target='_blank'><img
+	src='http://k.iinfo.cz/adview.php?what=zone:392&amp;n=a459905a' border='0' alt='' /></a></noscript>
+</div>
+</div>
+<div class="ad" id="ad-200x200">
+<div class="ad-marker">Reklama</div>
+<div class="ad-ad ad-holder-tr">
+<script language="JavaScript" type="text/javascript" src="Zji%C5%A1t%C4%9Bn%C3%AD%20ID%20posledn%C3%ADho%20vlo%C5%BEen%C3%A9ho%20%C5%99%C3%A1dku%20v%20MySQL%20-%20Root.cz_soubory/adx.js"></script>
+<script language="JavaScript" type="text/javascript">
+<!--
+if (!document.phpAds_used) document.phpAds_used = ',';
+phpAds_random = new String (Math.random());
+phpAds_random = phpAds_random.substring(2,11);
+document.write ("<" + "script language='JavaScript' type='text/javascript' src='");
+document.write ("http://k.iinfo.cz/adjs.php?n=" + phpAds_random);
+document.write ("&amp;what=zone:262");
+document.write ("&amp;exclude=" + document.phpAds_used);
+if (document.referer)
+document.write ("&amp;referer=" + escape(document.referer));
+document.write ("'><" + "/script>");
+//-->
+</script><script language="JavaScript" type="text/javascript" src="Zji%C5%A1t%C4%9Bn%C3%AD%20ID%20posledn%C3%ADho%20vlo%C5%BEen%C3%A9ho%20%C5%99%C3%A1dku%20v%20MySQL%20-%20Root.cz_soubory/adjs_003.js"></script><a href="http://k.iinfo.cz/adclick.php?bannerid=3734&amp;zoneid=262&amp;source=&amp;dest=http%3A%2F%2Fwww.digizone.cz%2Ftexty%2Fodborna-konference-digimedia-2008%2F" target="_blank"><img src="Zji%C5%A1t%C4%9Bn%C3%AD%20ID%20posledn%C3%ADho%20vlo%C5%BEen%C3%A9ho%20%C5%99%C3%A1dku%20v%20MySQL%20-%20Root.cz_soubory/adimage.gif" alt="" title="" border="0" height="125" width="125"></a><div id="beacon_3734" style="position: absolute; left: 0px; top: 0px; visibility: hidden;"><img src="Zji%C5%A1t%C4%9Bn%C3%AD%20ID%20posledn%C3%ADho%20vlo%C5%BEen%C3%A9ho%20%C5%99%C3%A1dku%20v%20MySQL%20-%20Root.cz_soubory/adlog_002.gif" alt="" style="width: 0px; height: 0px;" height="0" width="0"></div><noscript><a href='http://k.iinfo.cz/adclick.php?n=a0b93936' target='_blank'><img
+	src='http://k.iinfo.cz/adview.php?what=zone:262&amp;n=a0b93936' border='0' alt='' /></a></noscript>
+</div>
+</div>
+<div style="display: none;" class="box ad" id="ad-textbox-2">
+<h3>Reklama</h3>
+<div class="ad-ad box-cnt ad-textbox">
+<script language="JavaScript" type="text/javascript" src="Zji%C5%A1t%C4%9Bn%C3%AD%20ID%20posledn%C3%ADho%20vlo%C5%BEen%C3%A9ho%20%C5%99%C3%A1dku%20v%20MySQL%20-%20Root.cz_soubory/adx.js"></script>
+<script language="JavaScript" type="text/javascript">
+<!--
+if (!document.phpAds_used) document.phpAds_used = ',';
+phpAds_random = new String (Math.random()); phpAds_random = phpAds_random.substring(2,11);
+document.write ("<" + "script language='JavaScript' type='text/javascript' src='");
+document.write ("http://k.iinfo.cz/adjs.php?n=" + phpAds_random);
+document.write ("&amp;what=zone:270");
+document.write ("&amp;exclude=" + document.phpAds_used);
+if (document.referer)
+document.write ("&amp;referer=" + escape(document.referer));
+document.write ("'><" + "/script>");
+//-->
+</script><script language="JavaScript" type="text/javascript" src="Zji%C5%A1t%C4%9Bn%C3%AD%20ID%20posledn%C3%ADho%20vlo%C5%BEen%C3%A9ho%20%C5%99%C3%A1dku%20v%20MySQL%20-%20Root.cz_soubory/adjs.js"></script><script language="javascript" type="text/javascript">
+var el = document.getElementById("ad-textbox-2");
+if (el) { el.style.display = "none"; }
+</script>
+<div id="beacon_1025" style="position: absolute; left: 0px; top: 0px; visibility: hidden;"><img src="Zji%C5%A1t%C4%9Bn%C3%AD%20ID%20posledn%C3%ADho%20vlo%C5%BEen%C3%A9ho%20%C5%99%C3%A1dku%20v%20MySQL%20-%20Root.cz_soubory/adlog_010.gif" alt="" style="width: 0px; height: 0px;" height="0" width="0"></div><noscript><a href='http://k.iinfo.cz/adclick.php?n=ac01974c' target='_blank'><img
+	src='http://k.iinfo.cz/adview.php?what=zone:270&amp;n=ac01974c' border='0' alt='' /></a></noscript>
+</div>
+</div>
+<div style="display: none;" class="box ad" id="ad-textbox-med">
+<h3>Reklama</h3>
+<div class="ad-ad box-cnt ad-textbox">
+<script language="JavaScript" type="text/javascript" src="Zji%C5%A1t%C4%9Bn%C3%AD%20ID%20posledn%C3%ADho%20vlo%C5%BEen%C3%A9ho%20%C5%99%C3%A1dku%20v%20MySQL%20-%20Root.cz_soubory/adx.js"></script>
+<script language="JavaScript" type="text/javascript">
+<!--
+   if (!document.phpAds_used) document.phpAds_used = ',';
+   phpAds_random = new String (Math.random()); phpAds_random = phpAds_random.substring(2,11);
+   
+   document.write ("<" + "script language='JavaScript' type='text/javascript' src='");
+   document.write ("http://k.iinfo.cz/adjs.php?n=" + phpAds_random);
+   document.write ("&amp;what=zone:285");
+   document.write ("&amp;exclude=" + document.phpAds_used);
+   if (document.referrer)
+      document.write ("&amp;referer=" + escape(document.referrer));
+   document.write ("'><" + "/script>");
+//-->
+</script><script language="JavaScript" type="text/javascript" src="Zji%C5%A1t%C4%9Bn%C3%AD%20ID%20posledn%C3%ADho%20vlo%C5%BEen%C3%A9ho%20%C5%99%C3%A1dku%20v%20MySQL%20-%20Root.cz_soubory/adjs_006.js"></script><script language="javascript" type="text/javascript">
+var el = document.getElementById("ad-textbox-med");
+if (el) { el.style.display = "none"; }
+</script><div id="beacon_1195" style="position: absolute; left: 0px; top: 0px; visibility: hidden;"><img src="Zji%C5%A1t%C4%9Bn%C3%AD%20ID%20posledn%C3%ADho%20vlo%C5%BEen%C3%A9ho%20%C5%99%C3%A1dku%20v%20MySQL%20-%20Root.cz_soubory/adlog_008.gif" alt="" style="width: 0px; height: 0px;" height="0" width="0"></div><noscript><a
+href='http://k.iinfo.cz/adclick.php?n=a377cee7' target='_top'><img
+src='http://k.iinfo.cz/adview.php?what=zone:285&amp;n=a377cee7'
+border='0' alt='' /></a></noscript>
+</div>
+</div>
+<div class="box">
+<h3>Vyzkoušejte na Root.cz</h3>
+<div class="box-cnt">
+	<ul>
+		<li><a href="http://www.root.cz/uzivatel/">Uživatelský profil</a></li>
+		<li><a href="http://www.root.cz/diskuse/">Diskusní fóra</a></li>
+		<li><a href="http://www.root.cz/r/">Rubriky</a>,
+			<a href="http://www.root.cz/n/">Nálepky</a>,
+			<a href="http://www.root.cz/serialy/">Seriály</a></li>
+		<li><a href="http://www.root.cz/slovnicek/">Slovníček pojmů</a></li>
+		<li><a href="http://tutorialy.root.cz/">Tutoriály</a>, <a href="http://knihy.root.cz/">Knihy</a></li>
+		<li><a href="http://www.root.cz/jinde/">Píšou jinde</a>, <a href="http://www.root.cz/texty/kalendar-akci/">Kalendář akcí</a></li>
+		<li><a href="http://www.root.cz/hlidac/">Hlídač</a></li>
+		<li><a href="http://www.root.cz/newsletter/">Novinky e-mailem (Newsletter)</a></li>
+		<li><a href="http://www.root.cz/texty/butik/">Butik &#8211; trička, mikiny, tanga</a></li>
+		<li><a href="http://www.root.cz/redakce/exporty/#sidebar">Postranní lišta do Mozilly</a></li>
+		<li><a href="http://www.iinfo.cz/projekty/root/reklama-root/">Reklama na Root.cz</a></li>
+	</ul>
+</div>
+</div>
+
+<div id="as-sb-160x600" class="ad-sense">
+<script type="text/javascript"><!--
+google_ad_client = "pub-4771975420977819";
+google_alternate_color = "cccccc";
+google_ad_width = 160;
+google_ad_height = 600;
+google_ad_format = "160x600_as";
+google_ad_type = "text";
+//2007-01-31: ro - sidebar - 160x600
+google_ad_channel = "3012629080";
+google_color_border = "CCCCCC";
+google_color_bg = "CCCCCC";
+google_color_link = "000000";
+google_color_text = "000000";
+google_color_url = "000000";
+//--></script>
+<script type="text/javascript" src="Zji%C5%A1t%C4%9Bn%C3%AD%20ID%20posledn%C3%ADho%20vlo%C5%BEen%C3%A9ho%20%C5%99%C3%A1dku%20v%20MySQL%20-%20Root.cz_soubory/show_ads.js">
+</script><iframe name="google_ads_frame" src="Zji%C5%A1t%C4%9Bn%C3%AD%20ID%20posledn%C3%ADho%20vlo%C5%BEen%C3%A9ho%20%C5%99%C3%A1dku%20v%20MySQL%20-%20Root.cz_soubory/ads_002.htm" marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" frameborder="0" height="600" scrolling="no" width="160"></iframe>
+</div>
+
+</div>
+<div class="cb"><!-- --></div>
+</div>
+<div class="colophon">
+	<hr>
+	<a href="http://www.iinfo.cz/"><img src="Zji%C5%A1t%C4%9Bn%C3%AD%20ID%20posledn%C3%ADho%20vlo%C5%BEen%C3%A9ho%20%C5%99%C3%A1dku%20v%20MySQL%20-%20Root.cz_soubory/logo-iinfo.gif" alt="Internet Info" title="Internet Info - provozovatel" border="" height="42" width="150"></a>
+	<div><strong>Root.cz</strong> (www.root.cz),
+		informace nejen ze světa Linuxu. ISSN 1212-8309</div>
+	<div class="colophon-2"><small>
+		Copyright &#169; 1998&#8211;2008		<a href="http://www.iinfo.cz/">Internet Info, s.r.o.</a> Všechna práva vyhrazena.
+		Powered by  <a href="http://www.root.cz/">Linux</a>.<br>
+
+		<span>
+		<a href="http://www.root.cz/redakce/kontakt/" title="Kontakty na provozovatele, kontaktní formulář">Kontakt</a> |
+		<a href="http://www.iinfo.cz/projekty/root/reklama-root/" title="Reklamní možnosti serveru, ceník reklamy">Reklama</a> |
+		<a href="http://www.root.cz/redakce/podminky-uzivani/" title="Podmínky užívání serveru Root.cz, autorská práva atd.">Podmínky užívání</a> |
+		<a href="http://www.root.cz/redakce/podpora/" title="Líbí se vám server Root.cz? Vyjádřete mu svou podporu umístěním ikonky na své stránky.">Podpořte Root.cz</a> |
+		<a href="http://www.root.cz/redakce/exporty/" title="Exporty syndikovaného obsahu">RSS exporty</a> | 
+		tip: <a href="http://www.a-prague.com/" title="Accommodation in Prague Hotels and
+				Apartments">Prague Hotels</a>
+		</span>
+	</small></div>
+</div>
+<div id="webstats">
+	<script src="Zji%C5%A1t%C4%9Bn%C3%AD%20ID%20posledn%C3%ADho%20vlo%C5%BEen%C3%A9ho%20%C5%99%C3%A1dku%20v%20MySQL%20-%20Root.cz_soubory/code.js" type="text/javascript"></script><a href="http://navrcholu.cz/Statistika/14/"><img src="Zji%C5%A1t%C4%9Bn%C3%AD%20ID%20posledn%C3%ADho%20vlo%C5%BEen%C3%A9ho%20%C5%99%C3%A1dku%20v%20MySQL%20-%20Root.cz_soubory/hit.gif" alt="" style="border: medium none ;" height="1" width="1"></a><noscript><div><img
+		src="http://c1.navrcholu.cz/hit?site=14;t=t1x1;ref=;jss=0" width="1" height="1" alt="" /></div></noscript>
+	<!-- NetMonitor Audience Ostatni -->
+	<script language="javascript" type="text/javascript">
+		<!--
+			gemius_identifier = new String('d1zrQktRrA.1DMJeqrR6CpchXkFId4eUZ8HsOjyaf07.v7');
+			gemius_href= new String(document.location);
+			if (document.referrer) { gemius_ref = new String(document.referrer); } else { gemius_ref = ""; }
+			if(typeof(Error)!='undefined') eval("try { if (typeof(top.document.referrer)=='string') { gemius_ref = top.document.referrer } } catch(gemius_ex) {}");
+			iname = new String('id='+gemius_identifier+';ref='+escape(gemius_ref.substring(0,299))+';href='+escape(gemius_href.substring(0,299))+';');
+			document.write('<div style="position: absolute; left:-500px; top:-500px;"><iframe src="http://spir.hit.gemius.pl/gemiusaudience.html" name="'+iname+'" width="1" height="1" frameborder="0" scrolling="no"><\/iframe><\/div>');
+		//-->
+	</script><div style="position: absolute; left: -500px; top: -500px;"><iframe src="Zji%C5%A1t%C4%9Bn%C3%AD%20ID%20posledn%C3%ADho%20vlo%C5%BEen%C3%A9ho%20%C5%99%C3%A1dku%20v%20MySQL%20-%20Root.cz_soubory/gemiusaudience.htm" name="id=d1zrQktRrA.1DMJeqrR6CpchXkFId4eUZ8HsOjyaf07.v7;ref=http%3A//www.google.cz/search%3Fhl%3Dcs%26rlz%3D1G1GGLQ_CSCZ277%26q%3DLAST_INSERT_ID%26btnG%3DHledat%26lr%3Dlang_cs;href=http%3A//www.root.cz/diskuse/2388/;" frameborder="0" height="1" scrolling="no" width="1"></iframe></div>
+</div></div>
+
+<div style="position: absolute; left: 1150px; top: 44px; z-index: 1000000000 ! important; visibility: hidden; opacity: 1; width: 0px;" id="linkalert-box"><img style="width: 0px;" src="Zji%C5%A1t%C4%9Bn%C3%AD%20ID%20posledn%C3%ADho%20vlo%C5%BEen%C3%A9ho%20%C5%99%C3%A1dku%20v%20MySQL%20-%20Root.cz_soubory/none-icon.png" id="linkalert-icon-1"></div></body></html>

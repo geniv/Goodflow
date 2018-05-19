@@ -1,0 +1,157 @@
+<!doctype html public "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=Windows-1250">
+<title>Subdotazy v SQL</title>
+<link rel='stylesheet' style='text/css' href='../function.css'>
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr>
+	<td style="background-image: url(../images/bghead.jpg);
+		background-position: right;
+		background-repeat: no-repeat;">
+	<table width="100%" border="0" cellpadding="0" cellspacing="0"
+		style="background-image:none">
+	<tr>
+		<td style="background-image:none" height="46"
+			width="15%"><img src="../images/title-cz.gif"
+			width="255" height="33"
+			alt="602SQL-Úplná dokumentace"
+			title="602SQL - Úplná dokumentace"
+			border="0"></td>
+		<td width="33%" align="right"><a href="../xml/html/top.html"><img class="floatno"
+			src="../images/index.gif"
+			width="15" height="16"
+			alt="Index" title="Zpět na obsah"
+			border="0" vspace="2"></a> &nbsp;
+			 </td>
+	</tr>
+	</table>
+	</td>
+</tr>
+</table><table class="navigace" border="0" width="100%"  bgcolor="#FFFFBF"><tr> <td
+width="20" align="center"><img class="floatno" src="../images/prev.gif"
+width="15" height="13" alt="&lt;&shy;" title="Předcházející téma"
+border="0"></td><td width="25%"><a
+href="../xml/html/limit.html">Výběr úseku záznamů</a></td> <td width="25%"
+align="right"><img class="floatno" src="../images/up.gif" width="13"
+height="15" alt="Nahoru" title="O jednu úroveň výš" border="0"
+align="middle"></td><td width="25%"><a href="HE_SQL2_DOTAZY.htm">Dotazy</a></td>
+<td width="25%" align="right"><a
+href="../xml/html/query_insdeledit.html">Operace nad daty z dotazu</a></td><td width="20"
+align="center"><img class="floatno" src="../images/next.gif" width="15"
+height="13" alt="&shy;&gt;" title="Následující téma" border="0"></td>
+</tr></table>
+
+
+
+
+<h1>Subdotazy</h1>
+
+<p>SQL umožňuje, aby součást <i>obecného <a href="HE_SQL2_VYRAZY.htm">výrazu</a></i> resp. <a href="HE_SQL2_ZOBECNENATABULKA.htm"><i>zobecněné tabulky</i></a> tvořil další <a href="HE_SQL2_DOTAZOVYVYRAZ.htm"><i>dotazový výraz</i></a>, nazývaný zde zjednodušeně <b>subdotaz</b>. Subdotaz musí být uzavřen v kulatých závorkách. Jako subdotaz může stát kompletní dotazový výraz včetně dalších vnořených subdotazů. Uvnitř subdotazů lze použít i klauzuli LIMIT (obvykle spolu s ORDER BY).
+</p>
+
+<p>Subdotazy lze rozlišovat podle různých kritérií. Např. podle počtu řádků a sloupců se rozlišují na tři druhy: 
+
+<ul type=A>
+	<li>subdotaz, jehož odpověď obsahuje <b>právě jeden</b> <b>řádek a jeden sloupec</b> - odpověď stojí ve funkci výrazu v části SELECT nebo ve výrazu v podmínce (v části WHERE); </li>
+
+<p><b>Příklad 1:</b></p>
+
+<p>Vybrat firmy, které mají faktury za více než 10000 Kč (subdotaz v podmínce)</p>
+
+<pre><code>SELECT A.nazev
+FROM Firmy A
+WHERE 10000 &lt; <b>(SELECT SUM(B.castka)</b>
+<b>              FROM FAKTURY B</b>
+<b>              WHERE A.cislo=B.firma)</b></code></pre>
+
+<p><b>Příklad 2:</b></p>
+
+<p>Vybrat faktury, které jsou větší než průměrné (subdotaz v podmínce)</p>
+
+<pre><code>SELECT *
+FROM Faktury
+WHERE castka &gt; <b>(SELECT AVG(castka) FROM Faktury)</b></code></pre>
+
+<p><b>Příklad 3:</b></p>
+
+<p>Vybrat firmy, které mají alespoň jednu fakturu větší než 5000 (subdotaz jakožto výraz)</p>
+
+<pre><code>SELECT DISTINCT <b>(SELECT nazev</b>
+<b>                 FROM Firmy</b>
+<b>                 WHERE Firmy.cislo=Faktury.firma)</b> AS Nazev
+FROM Faktury
+WHERE castka &gt; 5000</code></pre>
+
+	<li>subdotaz, jehož odpověď obsahuje <b>nula nebo více řádků a jeden sloupec</b> (tzv. skalární subdotaz), pro porovnávání se použijí speciální predikáty <a href="HE_SQL2_IN.htm">IN</a>, <a href="HE_SQL2_ZOBECNENEPOROVNAVANI.htm">ALL</a>, <a href="HE_SQL2_ZOBECNENEPOROVNAVANI.htm">ANY</a>.</li>
+
+<p><b>Příklad 4:</b></p>
+<p>Vybrat faktury firem z Prahy (subdotaz v podmínce)</p>
+
+<pre><code>SELECT Faktury.cislo,Faktury.firma
+FROM Faktury
+WHERE firma IN <b>(SELECT cislo</b>
+<b>                FROM Firmy</b>
+<b>                WHERE mesto LIKE 'Praha%')</b></code></pre>
+
+<p><b>Příklad 5:</b></p>
+<p>Vybrat ty zaměstnance, kteří mají plat větší než všichni zaměstnanci z Prahy (subdotaz v podmínce)</p>
+
+<pre><code>SELECT TAB1.jmeno,TAB1.plat
+FROM Lidi TAB1
+WHERE plat &gt; ALL <b>(SELECT plat</b>
+<b>                  FROM Lidi </b>
+<b>                  WHERE adresa LIKE 'Praha%')</b></code></pre>
+
+	<li>subdotaz, jehož odpověď obsahuje <b>nula nebo více řádků a jeden nebo více sloupců</b>, pro porovnávání v podmínce se použijí speciální predikáty <a href="HE_SQL2_EXISTS.htm">EXISTS</a> a <a href="HE_SQL2_UNIQUE.htm">UNIQUE</a>. Subdotaz také může nahrazovat tabulku v části FROM.</li>
+
+<p><b>Příklad 6:</b></p>
+<p>Vyberte firmy, které nemají žádné faktury (subdotaz v podmínce)</p>
+
+<pre><code>SELECT nazev
+FROM Firmy F
+WHERE NOT EXISTS <b>(SELECT * FROM Faktury A</b>
+<b>                  WHERE A.nazev=F.nazev)</b></code></pre>
+
+<p><b>Příklad 7:</b></p>
+<p>Vyberte firmy, které mají faktury za více než 10000,- Kč (subdotaz ve FROM)</p>
+
+<pre><code>SELECT nazev, suma
+FROM Firmy A JOIN <b>(SELECT firma,SUM(castka) AS suma
+                   FROM Faktury B
+                   GROUP BY B.firma)</b>
+           ON (A.cislo=B.firma)
+WHERE 10000 < suma</code></pre>
+
+</ul>
+<p>Jak je vidět z příkladů, subdotaz v dotazovém výrazu může být použit v části SELECT, FROM i WHERE. Použití subdotazů není omezeno jen na dotazové výrazy, ale jako výraz může být využit v mnoha jiných konstrukcích, jako např.:
+
+<pre>IF EXISTS <strong>(SELECT admin_enabled FROM System 
+           WHERE (admin_name=usr)AND(admin_password=pwd)AND(admin_enabled IS TRUE))</strong> 
+  THEN ...
+</pre>  
+ </p>
+
+<p>Často se používá ještě jedno dělení subdotazů: ty, které se vyhodnotí jednou (jako příklady 2 nebo 4) a ty, které se vyhodnocují opakovaně (nazývané také <em>Correlated Subqueries</em>, jako příklady 1 nebo 3)
+</p>
+
+  
+
+
+<table class="navigace" border="0" width="100%"  bgcolor="#FFFFBF"><tr> <td
+width="20" align="center"><img class="floatno" src="../images/prev.gif"
+width="15" height="13" alt="&lt;&shy;" title="Předcházející téma"
+border="0"></td><td width="25%"><a
+href="../xml/html/limit.html">Výběr úseku záznamů</a></td> <td width="25%"
+align="right"><img class="floatno" src="../images/up.gif" width="13"
+height="15" alt="Nahoru" title="O jednu úroveň výš" border="0"
+align="middle"></td><td width="25%"><a href="HE_SQL2_DOTAZY.htm">Dotazy</a></td>
+<td width="25%" align="right"><a
+href="../xml/html/query_insdeledit.html">Operace nad daty z dotazu</a></td><td width="20"
+align="center"><img class="floatno" src="../images/next.gif" width="15"
+height="13" alt="&shy;&gt;" title="Následující téma" border="0"></td>
+</tr></table>
+</body>
+</html>

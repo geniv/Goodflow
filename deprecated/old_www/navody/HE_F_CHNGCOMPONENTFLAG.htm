@@ -1,0 +1,65 @@
+<!doctype html public "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=Windows-1250">
+<title>Procedura Chng_component_flag</title>
+<link rel='stylesheet' style='text/css' href='../function.css'>
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000">
+
+
+
+<h2 class=function>Chng_component_flag</h2><img src='../images/cpp.gif' width='44' height='16' border='0' alt='c/c++' align='middle' hspace='2'><img src='../images/pascal.gif' width='44' height='16' border='0' alt='pascal' align='middle' hspace='2'>
+
+
+<br><br>
+<div class='typ'>BOOL <b>Chng_component_flag</b>(cdp_t cdp, tcateg cat, const char * name, int mask, int setbit);<br>
+function <b>Chng_component_flag</b>(cdp : cdp_t;  cat : tcateg;  var name : PChar;   mask, setbit : integer) : Boolean;
+</div>
+
+
+<p><b>Parametry</b></p>
+
+<table border=1 cols=2 frame=box rules=all width=383>
+
+<tr valign="top">
+<td width=23%><i>cat</i></td>
+<td width=77%>kategorie objektu pro nějž se příznaky nastavují</td>
+</tr>
+
+<tr valign="top">
+<td width=23%><i>name</i></td>
+<td width=77%><i> </i>jméno objektu pro nějž se příznaky nastavují</td>
+</tr>
+
+<tr valign="top">
+<td width=23%><i>mask</i></td>
+<td width=77%>bity, které se mají nastavovat </td>
+</tr>
+
+<tr valign="top">
+<td width=23%><i>setbit</i></td>
+<td width=77%>hodnota nastavovaných bitů</td>
+</tr>
+
+<tr valign="top">
+<td width=23%>[<i>cdp </i></td>
+<td width=77%><a href="HE_EXTCD.htm">kontextová proměnná</a> klienta]  </td>
+</tr>
+</table><br>
+
+<p><b>Od verze:</b></p>
+
+<p>5.0</p>
+
+<p><b>Popis</b></p>
+
+<p>Funkce <b><code>Chng_component_flag</code></b> nastaví příznaky pro objekt kategorie <i>cat </i>jménem <i>name</i>.  Nastaví ty bity, které mají hodnotu 1 v parametru <i>mask</i> na tu hodnotu, kterou mají v&nbsp;parametru <i>setbit</i>. Lze nastavovat, zda se objekt má exportovat při exportu aplikace (bit 64), zda se mají exportovat data z tabulky (bit 16) a zda objekt je startovním objektem aplikace (bit 16). </p>
+
+<p><b>Hodnota funkce </b></p>
+
+<p>Funkce vrací při chybě TRUE.</p>
+
+</body>
+</html>

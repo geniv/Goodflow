@@ -1,0 +1,46 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head>
+<meta http-equiv="Content-Type" content="text/html; charset=Windows-1250"><title>6. Ochrana dat proti neoprávněnému přístupu</title>
+
+
+	
+	<link rel="STYLESHEET" type="text/css" href="kap6_soubory/main.css">
+	<style type="text/css"><!--:hover { font-weight: bold;         color: red }
+--></style></head><body alink="Blue" background="kap6_soubory/pozadi.jpg" vlink="Blue">
+<a href="http://www.cs.vsb.cz/amalka/tomica/sql/kap5.html"><img src="kap6_soubory/prev.gif" alt="5. Pohledy"></a>
+<a href="http://www.cs.vsb.cz/amalka/tomica/sql/kap7.html"><img src="kap6_soubory/next.gif" alt="7. Integritní omezení v SQL"></a>
+<a href="http://www.cs.vsb.cz/amalka/tomica/sql/index.html"><img src="kap6_soubory/toc.gif" alt="Obsah"></a>
+<hr color="Blue" size="1">
+<h1>6. Ochrana dat proti neoprávněnému přístupu</h1>
+<p>Víceuživatelský přístup současných SŘBD přinesl problém zadávání
+práv uživatelů nebo přístup k relacím v databázi. Obvykle ten, kdo
+vytváří schémata relací, je zároveň vlastníkem odpovídajících relací, a
+další osoba nemá do těchto relací přístup. Vlastník databáze či častěji
+správce dat, by měl mít k dispozici prostředky pro povolení přístupu
+jednotlivým uživatelům databáze, a to do úrovně jednotlivých operací s
+databází (výběru. aktualizace). Odpovídající příkaz má tvar</p>
+<pre>GRANT {ALL | { DELETE | INSERT | SELECT | UPDATE
+   [( jméno-atrl[ , jméno-atr2 ]... )]} ... }
+   ON jméno-relace
+   TO {PUPLIC u-identifikátor1[,u-identifikátor2]…} .</pre>
+<p>Příkazy se dobře uplatní, když k jedné relaci je požadován různý přístup od několika uživatelů.</p>
+<p>Např. aktualizaci atributu zeme_vydani lze povolit pracovnici knihovny příkazem</p>
+<pre>GRANT UPDATE (zeme_vydani)
+ON Exemplar TO Jitka</pre>
+<p>Zpřístupnění seznamu čtenářů je dáno pomocí</p>
+<pre>GRANT SELECT
+ON Ctenar
+TO PUBLIC</pre>
+<p>V jemnosti definice uživatelských práv (angl. granulity) je možno
+jít až na prvky relaci. Využije se pro to kombinace definice pohledu
+(umožní výběr pouze potřebných n-tic) a příkazu GRANT. Např. pro
+knihovníka Nováka s úkolem pracovat pouze s pražskými uživateli
+využijeme pohled Prazak a definici</p>
+<pre>GRANT ALL
+ON Prazak TO Novák</pre>
+<p>Zrušení daného práva přístupu se provádí příkazem REVOKE se zadáním požadavku podobně jako u GRANT.</p>
+<hr color="Blue" size="1">
+<a href="http://www.cs.vsb.cz/amalka/tomica/sql/kap5.html"><img src="kap6_soubory/prev.gif" alt="5. Pohledy"></a>
+<a href="http://www.cs.vsb.cz/amalka/tomica/sql/kap7.html"><img src="kap6_soubory/next.gif" alt="7. Integritní omezení v SQL"></a>
+<a href="http://www.cs.vsb.cz/amalka/tomica/sql/index.html"><img src="kap6_soubory/toc.gif" alt="Obsah"></a>
+</body></html>

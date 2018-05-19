@@ -1,0 +1,153 @@
+<!doctype html public "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=Windows-1250">
+<title>Transakce a body návratu v SQL</title>
+<link rel='stylesheet' style='text/css' href='../function.css'>
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr>
+	<td style="background-image: url(../images/bghead.jpg);
+		background-position: right;
+		background-repeat: no-repeat;">
+	<table width="100%" border="0" cellpadding="0" cellspacing="0"
+		style="background-image:none">
+	<tr>
+		<td style="background-image:none" height="46"
+			width="15%"><img src="../images/title-cz.gif"
+			width="255" height="33"
+			alt="602SQL-Úplná dokumentace"
+			title="602SQL - Úplná dokumentace"
+			border="0"></td>
+		<td width="33%" align="right"><a href="../xml/html/top.html"><img class="floatno"
+			src="../images/index.gif"
+			width="15" height="16"
+			alt="Index" title="Zpět na obsah"
+			border="0" vspace="2"></a> &nbsp;
+			 </td>
+	</tr>
+	</table>
+	</td>
+</tr>
+</table><table class="navigace" border="0" width="100%"  bgcolor="#FFFFBF"><tr> <td
+width="20" align="center"><img class="floatno" src="../images/prev.gif"
+width="15" height="13" alt="&lt;&shy;" title="Předcházející téma"
+border="0"></td><td width="25%"><a
+href="HE_SQL2_KURZORY.htm">Kurzory v SQL</a></td> <td width="25%"
+align="right"><img class="floatno" src="../images/up.gif" width="13"
+height="15" alt="Nahoru" title="O jednu úroveň výš" border="0"
+align="middle"></td><td width="25%"><a href="HE_SQL2_JAZYKSQL.htm">Jazyk SQL a jeho implementace</a></td>
+<td width="25%" align="right"><a
+href="../xml/html/errorsexceptions.html">Chyby a výjimky</a></td><td width="20"
+align="center"><img class="floatno" src="../images/next.gif" width="15"
+height="13" alt="&shy;&gt;" title="Následující téma" border="0"></td>
+</tr></table>
+
+
+
+
+<h1><a name="he_sql2_transakce"></a>Transakce (SQL)</h1>
+
+<p>Transakce spojují provádění operací s databází do nedělitelných (atomických) celků. Operace sdružené do transakce mohou být jako celek:
+<ul><li>buď <em>potvrzeny</em> (<em>commit</em>) a teprve tím se jejich efekt stane jako celek viditelný pro ostatní klienty (viz <a href="HE_SQL2_IZOLACETRANSAKCI.htm">izolace transakcí</a>), </li>
+<li>anebo <em>odvolány</em> (<em>rollback</em>) a tím jejich jakýkoliv efekt na databázi zmizí.</li>
+</ul>
+Transakce se používají tam, kde skupina operací v databází spolu úzce souvisí a potřebujeme se vyhnout situaci, že se část z nich provede a část ne. Typickým příkladem je převádění peněz z účtu na účet: je potřeba současně převáděnou částku z jednoho účtu odečíst a na druhý přičíst.</p>
+
+<p>Po zahájení transakce se změny ukládají do interního transakčního logu, který je zpočátku v operační paměti a při větších transakcích se odkládá na disk do souboru <code>transact.fil</code>. Až do commitu jsou tedy v databázi uložené hodnoty z doby před zahájením transakce. Jedním z důsledků zapnutého jištění transakcí (viz <a href="../xml/html/ochrtrans.html">Ochrana transakcemi a jištěním transakcí</a>) je to, že veškerý transakční obsah se ukládá na disk, aby nedošlo ke ztrátě dat při vypnutí serveru (transakce se dokončí při dalším spuštění).
+</p>
+
+<h2>Řízení transakcí při posílání příkazů z klienta</h2>
+
+<p>Po připojení se klienta na server se každý příkaz (ovlivňující data) provádí jako samostatná transakce. Pokud proběhne úspěšně, je potvrzen, při chybě je odvolán. Těmto transakcím říkáme <em>implicitní</em> (tento režim se také nazývá <em>autocommit</em>).</p>
+
+<p>Provede-li klient SQL příkaz START TRANSACTION nebo zavolá-li API funkci <a href="HE_F_STARTTRANSACTION.htm"><code>Start_transaction</code></a>, otevře tím <em>explicitní</em> transakci, která sdruží provádění následujících příkazů. Tuto transakci pak klient buď potvrdí SQL příkazem COMMIT nebo API funkcí <a href="HE_F_COMMIT.htm"><code>Commit</code></a>, anebo odvolá SQL příkazem ROLLBACK nebo API funkcí <a href="HE_F_ROLLBACK.htm"><code>Roll_back</code></a>. Po potvrzení nebo odvolání transakce se zpracování příkazů vrací do režimu, v němž je každý příkaz prováděn v samostatné transakci, až do případného otevření další explicitní transakce.</p>
+
+<h3>Chyba v explicitní transakci</h3>
+
+<p>Pokud během provádění příkazů v explicitní transakci dojde k <a href="../xml/html/errortransaction.html">závažné chybě</a>, nastane <em>implicitní rollback</em>. V závislosti na nastavení <a href="../xml/html/sqloptions.html">příznaku kompatibility</a> SQLOPT_ERROR_STOPS_TRANS je buď transakce odvolána ihned anebo trvá až do explicitního ukončení a je odvolána až při něm.</p> 
+
+<p>V prvním případě je transakce chybou automaticky odvolána a zpracování příkazů vrací do režimu, v němž je každý příkaz prováděn v samostatné transakci. Klient proto nesmí pokračovat v posílání zbylých příkazů nedokončené původní transakce, protože by se provedly v samostatných transakcích (a tudíž nebudou odvolány).</p>
+
+<p>V druhém případě klient může chybu ignorovat a je zaručeno, že i zbylé příkazy budou odvolány. SQL příkaz COMMIT nebo API funkce <code>Commit</code> provedené po chybě odvolají a ukončí chybnou transakci.</p>
+
+<p>Implicitní rollback způsobí také volání funkce klientského API <code>cd_Break_user</code> a <code>cd_disconnect</code>.</p>
+
+<h3>Vynucené ukončení explicitní transakce</h3>
+
+<p>Existují některé speciální akce, které vždy provedou potvrzení explicitní transakce (<em>implicitní commit</em>) bez ohledu na původní členění transakce. Jedná se o takové akce, které by nešlo případně odvolat. Patří mezi ně volání funkcí klientského API <code>Delete_all_records</code>, <code>Free_deleted</code>, <code>Backup_database_file</code>, <code>Compact_table</code>, <code>Compact_database</code>, <code>Database_integrity</code>, <code>Move_data</code>, <code>Login</code>, <code>Logout</code> a <code>Set_property_value</code> pro vlastnost <code>SERVER_KEY</code>. Commit se provede také před nebo po provedení SQL příkazů DROP TABLE, ALTER TABLE, CREATE INDEX, DROP INDEX, DROP SCHEMA, ALTER DOMAIN, CREATE SEQUENCE, ALTER SEQUENCE, CREATE FULLTEXT, DROP FULLTEXT, ALTER FULLTEXT, RENAME. Commit se provádí také při volání funkcí pro příjem pošty, které pracují se systémovými tabulkami (<code>MailBoxLoad</code>, <code>MailBoxGetFilInfo</code>, <code>MailBoxGetMsgEx</code>, <code>MailBoxGetMsg</code>, <code>MailBoxSaveFileDBs</code>, <code>MailBoxSaveFileDBr</code>).</p>
+
+<h3>Transakce ve vývojovém prostředí</h3>
+
+<p>Interaktivní práce s vývojovým klientem zahrnuje v mnoha akcích ukončování transakcí např. při otevření aplikace, používání návrhářů apod. Při běžné práci také dochází ke (skrytým) chybám, které odvolají případnou transakci. I když je možné pomocí SQL konzole otevřít explicitní transakci pro vývojového klienta, nelze to doporučit, protože uživatel nemá kontrolu nad jejím ukončením.</p>
+
+
+<h2>Řízení transakcí v procedurách prováděných na serveru</h2>
+
+<p>Spustí-li klient <a href="HE_SQL2_STOREDPROCEDURE.htm">proceduru</a> na serveru, probíhá celá operace v jedné (implicitní) transakci. To platí i o akcích vyvolaných v důsledku provádění příkazů, například o provádění triggerů nebo akcí aktivní referenční integrity.</p>
+
+<p>Pokud má být tato posloupnost akcí rozčleněna do více (implicitních) transakcí, je třeba do ní zařadit příkaz COMMIT. Tím se potvrdí předchozí transakce a automaticky zahájí nová. </p>
+
+<p><em>Explicitními</em> transakcemi lze přesněji řídit atomicitu akcí. Explicitní transakce může trvat přes hranici procedury. Explicitní transakce nelze používat v <a href="HE_SQL2_TRIGGERY.htm">triggerech</a>.</p>
+
+<h2>Další vlastnosti transakcí</h2>
+
+<p>Rollback neumožňuje odvolat přiřazení hodnoty lokální proměnné ani efekt provedených externích rutin (například odeslání dopisu, zápis do logu).</p>
+
+<p>Transakce nelze vnořovat do sebe. Vnoření transakcí vyvolá chybu.</p>
+
+<p>Pro účely ladění může být výhodné <a href="../xml/html/tracelog.html">trasovat</a> vyvolání implicitních rollbacků z důvodu chyby (situace <code>TRACE_IMPL_ROLLBACK</code>).</p>
+
+<p>Použití transakcí také úzce souvisí se <a href="../xml/html/ochrtrans.html">zajištěním databáze</a> proti porušení integrity.</p>
+
+<p>Informace o transakcích a jejich ovlivnění chybami poskytují klientské funkce <a href="../xml/html/f_Transaction_open.html"><code>Transaction_open</code></a> a <a href="../xml/html/f_Rolled_back.html"><code>Rolled_back</code></a>. Stav transakce libovolného vlákna lze zjistit  pomocí systémového dotazu <a href="../xml/html/_iv_logged_users.html"><code>_iv_logged_users</code></a>, sloupec <code>Transaction_open</code>. </p>
+
+<h2>Body návratu</h2>
+<p>Kromě transakcí existuje ještě jeden mechanismus dovolující odvolat skupinu provedených příkazů a vrátit se do stavu před jejich provedením. Tímto mechanismem jsou body návratu (savepoints).</p>
+
+<p>Pomocí příkazu SAVEPOINT lze uvnitř transakce vytvořit bod návratu. Po provedení dalších příkazů lze se pak příkazem ROLLBACK TO SAVEPOINT vrátit k tomu stavu databáze, který byl v okamžiku provedení příkazu SAVEPOINT (a neukončit transakci). </p>
+<br>
+<p><b>Odchylky od Intermediate level směrem k Full level nebo k SQL 3</b>
+
+<ul>
+	<li>Transakční příkazy jsou implementovány dle úrovně SQL 3.</li>
+</ul>
+
+
+
+<p class="subs">Seznam subsekcí:
+<ul class="subs">
+
+<li><a href="HE_SQL2_IZOLACETRANSAKCI.htm">Izolace transakcí</a>
+
+<li><a href="../xml/html/lockizol.html">Problémy při kombinaci explicitního zamykání záznamů a izolace transakcí</a>
+
+<li><a href="HE_SQL2_STARTTRANSACTION.htm">Příkaz START TRANSACTION</a>
+
+<li><a href="HE_SQL2_COMMIT.htm">Příkaz COMMIT</a>
+
+<li><a href="HE_SQL2_ROLLBACK.htm">Příkaz ROLLBACK</a>
+
+<li><a href="HE_SQL2_SETTRANSACTION.htm">Příkaz SET TRANSACTION</a>
+
+<li><a href="HE_SQL2_SAVEPOINT.htm">Příkaz SAVEPOINT</a>
+
+<li><a href="HE_SQL2_RELEASESAVEPOINT.htm">Příkaz RELEASE SAVEPOINT</a>
+
+</ul>
+<table class="navigace" border="0" width="100%"  bgcolor="#FFFFBF"><tr> <td
+width="20" align="center"><img class="floatno" src="../images/prev.gif"
+width="15" height="13" alt="&lt;&shy;" title="Předcházející téma"
+border="0"></td><td width="25%"><a
+href="HE_SQL2_KURZORY.htm">Kurzory v SQL</a></td> <td width="25%"
+align="right"><img class="floatno" src="../images/up.gif" width="13"
+height="15" alt="Nahoru" title="O jednu úroveň výš" border="0"
+align="middle"></td><td width="25%"><a href="HE_SQL2_JAZYKSQL.htm">Jazyk SQL a jeho implementace</a></td>
+<td width="25%" align="right"><a
+href="../xml/html/errorsexceptions.html">Chyby a výjimky</a></td><td width="20"
+align="center"><img class="floatno" src="../images/next.gif" width="15"
+height="13" alt="&shy;&gt;" title="Následující téma" border="0"></td>
+</tr></table>
+</body>
+</html>

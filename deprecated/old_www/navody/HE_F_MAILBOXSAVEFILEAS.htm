@@ -1,0 +1,85 @@
+<!doctype html public "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=Windows-1250">
+<title>Funkce MailBoxSaveFileAs</title>
+<link rel='stylesheet' style='text/css' href='../function.css'>
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000">
+
+
+
+<h2 class=function>MailBoxSaveFileAs</h2>
+<img src='../images/cpp.gif' width='44' height='16' border='0' alt='c/c++' align='middle' hspace='2'><img src='../images/pascal.gif' width='44' height='16' border='0' alt='pascal' align='middle' hspace='2'><img src='../images/sql.gif' width='44' height='16' border='0' alt='sql' align='middle' hspace='2'>
+
+
+<br><br>
+<div class='typ'>
+DWORD <b>MailBoxSaveFileAs</b>(DWORD mailbox, DWORD id, DWORD fileidx, char *filename, char *destpath);<br>
+function <b>MailBoxSaveFileAs</b>(mailbox : integer; id : integer; fileidx : integer; var filename : string;  var destpath : string) : integer;<br>
+FUNCTION <strong>MailBoxSaveFileAs</strong>(IN mailbox INT, IN id INT, IN fileidx INT, INOUT filename CHAR(255), IN destpath CHAR(255)) RETURNS INT;
+</div>
+
+
+<p><b>Parametry</b></p>
+
+<table border=1 cols=2 frame=box >
+
+<tr valign="top">
+<td width=12%><i>mailbox </i></td>
+<td width=88%>handle poštovní schránky</td>
+</tr>
+
+<tr valign="top">
+<td width=12%><i>id </i></td>
+<td width=88%>identifikátor zásilky</td>
+</tr>
+
+<tr valign="top">
+<td width=12%><i>fileidx</i></td>
+<td width=88%>pořadové číslo souboru z&nbsp;přílohy (počínaje od 0), má význam pouze pokud není zadáno jméno souboru z&nbsp;přílohy</td>
+</tr>
+
+<tr valign="top">
+<td width=12%><i>filename</i></td>
+<td width=88%>jméno souboru z&nbsp;přílohy, je-li zadán parametr <i>fileidx</i>, má hodnotu NIL (NULL) nebo prázdný řetězec</td>
+</tr>
+
+<tr valign="top">
+<td width=12%><i>destpath</i></td>
+<td width=88%>cesta (včetně jména souboru), kam se má soubor z&nbsp;přílohy uložit</td>
+</tr>
+</table><br>
+
+<p><b>Od verze</b></p>
+
+<p>6.0f</p>
+
+<p><b>Popis</b></p>
+
+<p>Uloží připojený soubor vybrané poštovní zásilky na disk. </p>
+
+<p>Načtení souborů připojených k&nbsp;zásilce může být provedeno dvěma způsoby. Jednak lze pomocí funkcí <b><code>MailBoxLoad</code></b> a <b><code>MailBoxGetFilInfo</code></b> získat seznam připojených souborů a informace o nich (jméno, datum apod.) a na disk uložit pouze vybrané soubory. Pokud potřebujeme získat všechny soubory a na jejich jménech nezáleží, lze v&nbsp;funkci <b><code>MailBoxSaveFileAs</code></b> volat v cyklu s&nbsp;parametrem <i>fileidx</i> rovným 0 až počet připojených souborů–1. Jestliže počet připojených souborů není předem znám, lze funkci volat dokud nevrátí chybu <code>MAIL_NO_MORE_FILES</code>.</p>
+
+<p>Adresář obsažený v parametru <i>destpath</i> musí existovat.</p>
+
+<p><b>Příklad</b></p>
+
+<p><a href="HE_MAILEXAMRECEIVE.htm">Příklad příjmu zásilky</a> </p>
+
+<p><b>Hodnota funkce</b></p>
+
+<p>Funkce vrací nulu v případě úspěchu a  číslo chyby v případě neúspěchu. <a href="HE_MAILERRORS.htm">Číslo chyby</a> lze zjistit také pomocí <b><code>Sz_error</code></b> nebo <b><code>Signalize</code></b>.</p>
+
+<p><b>Viz</b></p>
+
+<ul class='viz'>
+ <li><a href="HE_F_MAILOPENINBOX.htm">MailOpenInBox</a> </li>
+ <li><a href="HE_F_MAILBOXLOAD.htm">MailBoxLoad</a> </li>
+ <li><a href="HE_F_MAILBOXGETMSGEX.htm">MailBoxGetMsgEx</a> </li>
+ <li><a href="HE_F_MAILBOXGETFILINFO.htm">MailBoxGetFilInfo</a> </li>
+</ul>
+
+</body>
+</html>

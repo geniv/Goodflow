@@ -1,0 +1,801 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head>
+
+
+
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1250">
+<meta http-equiv="Cache-control" content="no-cache">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
+<meta name="Description" content="Programování v Delphi.">
+<meta name="keywords" content="delphi,programování,softvare,citáty,kytara,nagios,mysql,microsoft,freebsd,comptia,ecdl,certifikace,
+  konfigurace,hosting"><title>MilanC Development</title>
+
+
+
+<link rel="stylesheet" type="text/css" href="mysql.php_soubory/styles.css">
+<link rel="alternate" title="RSS - Novinky" href="http://milanc.chavlsiny.net/rss.xml" type="application/rss+xml">
+
+<script type="text/javascript" src="mysql.php_soubory/functions.js"></script>
+  
+<style>
+.bbt_w {color:green !important; text-decoration:underline !important; padding-bottom: 1px; border-bottom: 1px solid green !important;}
+.bbt_w:hover {color:green !important; text-decoration:underline !important; padding-bottom: 0px; border-bottom: 2px solid green !important;}
+.bbt_w:visited {color:green !important; text-decoration:underline !important; padding-bottom: 1px; border-bottom: 1px solid green !important;}
+</style><script charset="windows-1250" type="text/javascript" src="mysql.php_soubory/a_002.js"></script></head><body>
+
+<!-- ZAHLAVI -->
+<table bgcolor="#2f306f" border="0" cellpadding="0" cellspacing="0" width="100%">
+  <tbody><tr>
+    <td align="left" nowrap="nowrap" width="760"><img src="mysql.php_soubory/logo.gif" height="85" width="730"></td>
+    <td align="left">&nbsp;</td>
+  </tr>
+  <tr>
+    <td colspan="2" align="left" bgcolor="#1f1f47" width="100%">
+      <table border="0" cellpadding="0" cellspacing="0" width="100%">
+        <tbody><tr>
+          <td width="8">&nbsp;</td>
+          <td nowrap="nowrap">
+            <font class="header">
+              <a href="http://milanc.chvalsiny.net/profile.php">něco o mně</a> | 
+              <a href="http://milanc.chvalsiny.net/guestbook.php">guestbook</a> | 
+              <a href="http://milanc.chvalsiny.net/download.php">download</a> | 
+              <script>contact("cizek.milan","seznam.cz");</script><a href="mailto:cizek.milan@seznam.cz">napište mi</a>
+            </font>
+          </td>
+          <td align="right" nowrap="nowrap">
+            <script language="JavaScript1.2">
+
+              var delay=10000
+              var fcontent=new Array()
+              fcontent[0]="pátek 30.května 2008, vítám vás na mé homepage"
+              fcontent[1]="dnes má svátek Kamila, zítra Laura"
+              fcontent[2]="poslední aktualizace této stránky 27.února 2008"
+              fcontent[3]="tyto stránky si v tento okamžik čtete pouze Vy"
+
+              var ie4=document.all&&!document.getElementById
+              var ns4=document.layers
+              var DOM2=document.getElementById
+              var faderdelay=0
+              var index=0
+
+              if (DOM2) faderdelay=2000
+
+              function changecontent()
+                {
+                  if (index>=fcontent.length)
+                  index=0
+                  if (DOM2) { document.getElementById("fscroller").style.color="rgb(255,255,255)"
+                              document.getElementById("fscroller").innerHTML=fcontent[index]
+                              colorfade()
+                            }
+
+                  else if (ie4) document.all.fscroller.innerHTML=begintag+fcontent[index]+closetag
+                  else if (ns4) { document.fscrollerns.document.fscrollerns_sub.document.write(fcontent[index])
+                                  document.fscrollerns.document.fscrollerns_sub.document.close()
+                                }
+
+                  index++
+                  setTimeout("changecontent()",delay+faderdelay)
+                }
+
+              frame=2;
+              hex=25;  // Initial color value.
+
+              function colorfade()
+                {	         	
+                  if(frame>0) {	hex+=12;
+                                document.getElementById("fscroller").style.color="rgb("+hex+","+hex+","+hex+")";
+                                frame--;
+                                setTimeout("colorfade()",20);	
+                              }
+                  else { document.getElementById("fscroller").style.color="rgb(255,255,255)";
+                         frame=20;
+                         hex=0
+                       }
+                }
+
+              if (ie4||DOM2) document.write('<font class="header"><div id="fscroller"></div></font>')
+              window.onload=changecontent
+
+            </script><font class="header"><div style="color: rgb(255, 255, 255);" id="fscroller"><font>tyto stránky si v tento okamžik čtete pouze Vy</font></div></font>
+          </td>
+          <td width="6">&nbsp;</td>
+        </tr>
+      </tbody></table>
+    </td>
+  </tr>
+</tbody></table>
+<br>
+<!-- END ZAHLAVI -->
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+  <tbody><tr>
+    <td align="left" bgcolor="#484880" nowrap="nowrap" valign="top" width="150">
+      
+<!-- LEVE MENU -->
+      <table border="0" cellpadding="0" cellspacing="0" width="150">
+        <tbody><tr class="leftmenu_sec">
+          <td align="center" background="mysql.php_soubory/menu_back.gif" bgcolor="#3b3b59" height="20" width="100%">N A B Í D K A</td>
+        </tr>
+        <tr>
+          <td align="center" bgcolor="#484880" valign="top" width="100%">
+            <table border="0" cellpadding="1" cellspacing="0" width="150">
+              <tbody><tr>
+                <!-- SEPARATOR --><td height="5" width="100%"></td>
+              </tr>
+              <tr class="leftmenu">
+                <td width="100%"><!-- MENU SEKCE 1 -->
+                  <a href="http://milanc.chvalsiny.net/index.php"><img src="mysql.php_soubory/menu_page.gif" align="absmiddle" border="0" height="16" hspace="4" width="16">Úvodní stránka</a><br>
+                </td>
+              </tr>
+              <tr>
+                <!-- SEPARATOR --><td height="5" width="100%"></td>
+              </tr>
+              <tr class="leftmenu">
+                <td width="100%">
+                  &nbsp;&nbsp;<a href="http://milanc.chvalsiny.net/povoden.php"><img src="mysql.php_soubory/menu_page.gif" align="absmiddle" border="0" height="16" hspace="4" width="16">Povodeň 2002</a><br>
+                </td>
+              </tr>
+              <tr class="leftmenu">
+                <td width="100%">
+                  &nbsp;&nbsp;<a href="http://milanc.chvalsiny.net/citaty.php"><img src="mysql.php_soubory/menu_page.gif" align="absmiddle" border="0" height="16" hspace="4" width="16">Sbírka citátů</a><br>
+                </td>
+              </tr>
+              <tr class="leftmenu">
+                <td width="100%">
+                  &nbsp;&nbsp;<a href="http://milanc.chvalsiny.net/mysql.php"><img src="mysql.php_soubory/menu_page.gif" align="absmiddle" border="0" height="16" hspace="4" width="16">MySQL - prakticky</a><br>
+                </td>
+              </tr>
+              <tr class="leftmenu">
+                <td width="100%">
+                  &nbsp;&nbsp;<a href="http://milanc.chvalsiny.net/apache.php"><img src="mysql.php_soubory/menu_page.gif" align="absmiddle" border="0" height="16" hspace="4" width="16">Jak na Apache</a><br>
+                </td>
+              </tr>
+              <tr class="leftmenu">
+                <td width="100%">
+                  &nbsp;&nbsp;<a href="http://milanc.chvalsiny.net/hratky.php"><img src="mysql.php_soubory/menu_page.gif" align="absmiddle" border="0" height="16" hspace="4" width="16">Program. hrátky</a><br>
+                </td>
+              </tr>
+              <tr class="leftmenu">
+                <td width="100%">
+                  &nbsp;&nbsp;<a href="http://milanc.chvalsiny.net/kolo.php"><img src="mysql.php_soubory/menu_page.gif" align="absmiddle" border="0" height="16" hspace="4" width="16">Kolo</a><br>
+                </td>
+              </tr>
+              <tr class="leftmenu">
+                <td width="100%">
+                  &nbsp;&nbsp;<a href="http://milanc.chvalsiny.net/kytara.php"><img src="mysql.php_soubory/menu_page.gif" align="absmiddle" border="0" height="16" hspace="4" width="16">Kytara/Guittar</a><br>
+                </td>
+              </tr>
+              <tr class="leftmenu">
+                <td width="100%">
+                  &nbsp;&nbsp;<a href="http://milanc.chvalsiny.net/literatura.php"><img src="mysql.php_soubory/menu_page.gif" align="absmiddle" border="0" height="16" hspace="4" width="16">Má literatura</a><br>
+                </td>
+              </tr>
+              <tr class="leftmenu">
+                <td width="100%">
+                  &nbsp;&nbsp;<a href="http://milanc.chvalsiny.net/tvorbatexty.php"><img src="mysql.php_soubory/menu_page.gif" align="absmiddle" border="0" height="16" hspace="4" width="16">Výplody JÁ</a><br>
+                </td>
+              </tr>
+
+<!--
+              <tr class="leftmenu">
+                <td width="100%">
+                  &nbsp;&nbsp;<a href="ulohy.php"><img hspace="4" src="images/menu_page.gif" align="absMiddle" border="0" width="16" height="16">Pro chvíle volna</a><br>
+                </td>
+              </tr>
+              <tr class="leftmenu">
+                <td width="100%">
+                  &nbsp;&nbsp;<a href="rubikovak.php"><img hspace="4" src="images/menu_page.gif" align="absMiddle" border="0" width="16" height="16">Rubikova kostka</a><br>
+                </td>
+              </tr>
+-->
+              <tr class="leftmenu">
+                <td width="100%">
+                  &nbsp;&nbsp;<a href="http://milanc.chvalsiny.net/phpproxy.php"><img src="mysql.php_soubory/menu_folder.gif" align="absmiddle" border="0" height="16" hspace="4" width="16">SMART PHP Proxy</a><br>
+                </td>
+              </tr>
+              <tr class="leftmenu">
+                <td width="100%">
+                  &nbsp;&nbsp;<a href="http://milanc.chvalsiny.net/rs_historie.php"><img src="mysql.php_soubory/menu_folder.gif" align="absmiddle" border="0" height="16" hspace="4" width="16">Robot Surfer</a><br>
+                </td>
+              </tr>
+              <tr class="leftmenu">
+                <td width="100%">
+                  &nbsp;&nbsp;<a href="http://milanc.chvalsiny.net/seti@home.php"><img src="mysql.php_soubory/menu_folder.gif" align="absmiddle" border="0" height="16" hspace="4" width="16">Dobrovolná účast</a><br>
+                </td>
+              </tr>
+              <tr class="leftmenu">
+                <td width="100%">
+                  &nbsp;&nbsp;<a href="http://milanc.chvalsiny.net/ps_arteterapie.php"><img src="mysql.php_soubory/menu_folder.gif" align="absmiddle" border="0" height="16" hspace="4" width="16">Psychologie</a><br>
+                </td>
+              </tr>
+              <tr>
+                <!-- SEPARATOR --><td height="5" width="100%"></td>
+              </tr>
+              <tr class="leftmenu">
+                <td width="100%">
+                  &nbsp;&nbsp;<a href="http://milanc.chvalsiny.net/download/Cizek%20Milan.asc"><img src="mysql.php_soubory/menu_page.gif" align="absmiddle" border="0" height="16" hspace="4" width="16">Veřejný PGP klíč</a><br>
+                </td>
+              </tr>
+            </tbody></table>
+
+            <table border="0" cellpadding="0" cellspacing="0" width="130">
+              <tbody><tr>
+                <!-- SEPARATOR --><td height="50" width="100%"></td>
+              </tr>
+              <tr>
+                <td width="100%">
+                  <a href="javascript:siteToFavorites()"><img src="mysql.php_soubory/koblibenym.gif" alt="přidat stránku k oblíbeným" border="0" height="15" width="130"></a>
+                </td>
+              </tr>
+              <tr>
+                <td width="100%">
+                  <a href="javascript:siteAsHomepage()"><img src="mysql.php_soubory/homepage.gif" alt="nastavit stránku jako domovskou" border="0" height="15" width="130"></a>
+                </td>
+              </tr>
+              <tr>
+                <!-- SEPARATOR --><td height="6" width="100%"></td>
+              </tr>
+            </tbody></table>
+
+            <script language="JavaScript">
+              NS4 = (document.layers) ? 1 : 0;
+              IE4 = (document.all) ? 1 : 0;
+
+              function siteToFavorites()
+              {
+                if (IE4 && !NS4)
+		  window.external.AddFavorite("http://sweb.cz/cizek.milan/","MilanC Development");
+	        else
+		  alert('Tato služba vyžaduje alespon\n Internet Explorer 5.0');
+              }
+
+              function siteAsHomepage()
+              {
+                if (IE4 && !NS4)
+	          { document.body.style.behavior='url(#default#homepage)';
+                    document.body.setHomePage('http://sweb.cz/cizek.milan');  }
+                else
+                  window.alert('Tato služba vyžaduje alespon\n Internet Explorer 5.0');
+              }
+            </script>
+
+          </td>
+        </tr>
+      </tbody></table>
+
+      <!-- ANKETA -->
+      <table border="0" cellpadding="0" cellspacing="0" width="150">
+        <tbody><tr>
+          <!-- BLACK SEPARATOR --><td bgcolor="#000000" height="3" width="100%"></td>
+        </tr>
+        <tr class="leftmenu_sec">
+          <td align="center" background="mysql.php_soubory/menu_back.gif" bgcolor="#3b3b59" height="20" width="100%">A N K E T A</td>
+        </tr>
+        <tr>
+          <!-- SEPARATOR --><td bgcolor="#484880" height="8" width="100%"></td>
+        </tr>
+        <tr>
+          <td align="center" bgcolor="#484880" width="100%">
+            <table border="0" cellpadding="0" cellspacing="0" width="130">
+              <tbody><tr class="anketa">
+                <td colspan="2" align="center" valign="top" width="100%">Máte rádi Vánoce?<br>(celkem hlasů: 538)</td>
+              </tr>
+              <tr>
+                <td colspan="2" height="6" width="100%"></td>
+              </tr>
+              <tr width="100%" class="anketa" align="left" height="18" valign="bottom">
+                <td><a href="http://milanc.chvalsiny.net/others/anketa.php?id=&amp;odpoved=1">Těším se na ně</a></td>
+                <td align="right">21%</td>
+              </tr>
+              <tr width="100%" lign="left">
+                <td colspan="2"><img src="mysql.php_soubory/ank_mvalec.gif" height="7" width="35"><img src="mysql.php_soubory/ank_vypln.gif" height="7" width="94"></td>
+              </tr>
+              <tr width="100%" class="anketa" align="left" height="18" valign="bottom">
+                <td><a href="http://milanc.chvalsiny.net/others/anketa.php?id=&amp;odpoved=2">Nevadí mi</a></td>
+                <td align="right">20%</td>
+              </tr>
+              <tr width="100%" lign="left">
+                <td colspan="2"><img src="mysql.php_soubory/ank_mvalec.gif" height="7" width="33"><img src="mysql.php_soubory/ank_vypln.gif" height="7" width="96"></td>
+              </tr>
+              <tr width="100%" class="anketa" align="left" height="18" valign="bottom">
+                <td><a href="http://milanc.chvalsiny.net/others/anketa.php?id=&amp;odpoved=3">Umím je přežít</a></td>
+                <td align="right">20%</td>
+              </tr>
+              <tr width="100%" lign="left">
+                <td colspan="2"><img src="mysql.php_soubory/ank_mvalec.gif" height="7" width="33"><img src="mysql.php_soubory/ank_vypln.gif" height="7" width="96"></td>
+              </tr>
+              <tr width="100%" class="anketa" align="left" height="18" valign="bottom">
+                <td><a href="http://milanc.chvalsiny.net/others/anketa.php?id=&amp;odpoved=4">Je to trápení</a></td>
+                <td align="right">20%</td>
+              </tr>
+              <tr width="100%" lign="left">
+                <td colspan="2"><img src="mysql.php_soubory/ank_mvalec.gif" height="7" width="33"><img src="mysql.php_soubory/ank_vypln.gif" height="7" width="96"></td>
+              </tr>
+              <tr width="100%" class="anketa" align="left" height="18" valign="bottom">
+                <td><a href="http://milanc.chvalsiny.net/others/anketa.php?id=&amp;odpoved=5">Zrušil bych je</a></td>
+                <td align="right">19%</td>
+              </tr>
+              <tr width="100%" lign="left">
+                <td colspan="2"><img src="mysql.php_soubory/ank_mvalec.gif" height="7" width="33"><img src="mysql.php_soubory/ank_vypln.gif" height="7" width="96"></td>
+              </tr>
+              </tbody></table>
+          </td>
+        </tr>
+        <tr>
+          <!-- SEPARATOR --><td bgcolor="#484880" height="12" width="100%"></td>
+        </tr>
+      </tbody></table>
+
+      <!-- MAIL LIST -->
+      <table border="0" cellpadding="0" cellspacing="0" width="150">
+        <tbody><tr>
+          <!-- BLACK SEPARATOR --><td bgcolor="#000000" height="3" width="100%"></td>
+        </tr>
+        <tr class="leftmenu_sec">
+          <td align="center" background="mysql.php_soubory/menu_back.gif" bgcolor="#3b3b59" height="20" width="100%">M A I L - L I S T</td>
+        </tr>
+        <tr>
+          <!-- SEPARATOR --><td bgcolor="#484880" height="10" width="100%"></td>
+        </tr>
+        <tr>
+          <td align="center" bgcolor="#484880" width="100%">
+            <table border="0" cellpadding="0" cellspacing="0" width="130">
+              <form method="post" action="others/maillist.php"></form>
+              <tbody><tr>
+                <td colspan="2" width="100%">
+                  <input class="EMA-Input" onfocus="if (this.value=='jmeno@adresa.cz') {this.value=''}" value="jmeno@adresa.cz" name="mail">
+                </td>
+              </tr>
+              <tr>
+                <td align="left" width="50%">
+                  <input name="mail_subsc" alt="přihlásit" src="mysql.php_soubory/prihlasit.gif" height="15" type="image" vspace="3" width="64">
+                </td>
+                <td align="right" width="50%">
+                  <input name="mail_unsub" alt="odhlásit" src="mysql.php_soubory/odhlasit.gif" height="15" type="image" vspace="3" width="64">
+                </td>
+              </tr>
+              <tr class="leftmenu">
+                <td colspan="2" align="center" width="100%">Počet odběratelů: 16</td>
+              </tr>
+              
+            </tbody></table>
+          </td>
+        </tr>
+        <tr>
+          <!-- SEPARATOR --><td bgcolor="#484880" height="8" width="100%"></td>
+        </tr>
+      </tbody></table>
+
+      <!-- SETI -->
+      <table border="0" cellpadding="0" cellspacing="0" width="150">
+        <tbody><tr>
+          <!-- BLACK SEPARATOR --><td bgcolor="#000000" height="3" width="100%"></td>
+        </tr>
+        <tr class="leftmenu_sec">
+          <td align="center" background="mysql.php_soubory/menu_back.gif" bgcolor="#3b3b59" height="20" width="100%">S E T I @ H O M E</td>
+        </tr>
+        <tr>
+          <!-- SEPARATOR --><td bgcolor="#484880" height="8" width="100%"></td>
+        </tr>
+        <tr class="anketa">
+          <td align="center" bgcolor="#484880" width="100%">
+Odeslané jednotky: 21143<br>
+Aktuální pořadí: 11200<br>
+Všech uživatelů: 5436301<br>
+CPU time: 13.681 years<br>
+Délka účasti: 5.608 years<br>
+Pozice v TOP: 0.206%
+          </td>
+        </tr>
+        <tr>
+          <!-- SEPARATOR --><td bgcolor="#484880" height="12" width="100%"></td>
+        </tr>
+      </tbody></table>
+
+      <!-- RESOURCES -->
+      <table border="0" cellpadding="0" cellspacing="0" width="150">
+        <tbody><tr>
+          <!-- BLACK SEPARATOR --><td bgcolor="#000000" height="3" width="100%"></td>
+        </tr>
+        <tr class="leftmenu_sec">
+          <td align="center" background="mysql.php_soubory/menu_back.gif" bgcolor="#3b3b59" height="20" width="100%">P R O J E K T Y</td>
+        </tr>
+        <tr>
+          <!-- SEPARATOR --><td bgcolor="#484880" height="8" width="100%"></td>
+        </tr>
+        <tr>
+          <td align="center" width="100%">
+            <a href="http://www.trafficshaper.cz/">
+              <img src="mysql.php_soubory/btn_shaper.png" alt="Limiter datových toků přímo na míru" border="0" vspace="2"></a><br>
+            <a href="http://www.chvalsiny.net/">
+              <img src="mysql.php_soubory/btn_chvalsiny.gif" alt="Amateur Wireless Network" border="0" vspace="2"></a><br>
+            <a href="http://www.psychologia.sk/">
+              <img src="mysql.php_soubory/btn_psychologia.gif" alt="diskusní fóra psychologia.sk" border="0" vspace="2"></a><br>
+          </td>
+        </tr>
+        <tr>
+          <!-- SEPARATOR --><td height="4" width="100%"></td>
+        </tr>
+      </tbody></table>
+
+      <!-- REKLAMA -->
+      <table border="0" cellpadding="0" cellspacing="0" width="150">
+        <tbody><tr>
+          <!-- BLACK SEPARATOR --><td bgcolor="#000000" height="3" width="100%"></td>
+        </tr>
+        <tr class="leftmenu_sec">
+          <td align="center" background="mysql.php_soubory/menu_back.gif" bgcolor="#3b3b59" height="20" width="100%">R E K L A M A</td>
+        </tr>
+        <tr>
+          <!-- SEPARATOR --><td bgcolor="#484880" height="10" width="100%"></td>
+        </tr>
+        <tr>
+          <td align="center" width="100%">
+            
+<!-- BBSTART: ad2.billboard.cz kod 1.1 - SERVER: MilanC Development(491), SEKCE: Programování(1), POZICE: (2), TYPBANNERU: Square Button(2), OKRAJ: ano, POPIS: ne. -->
+<script language="JavaScript" type="text/javascript">
+<!--
+var bbs=screen,bbn=navigator,bbh;bbh='&ubl='+bbn.browserLanguage+'&ucc='+bbn.cpuClass+'&ucd='+bbs.colorDepth+'&uce='+bbn.cookieEnabled+'&udx='+bbs.deviceXDPI+'&udy='+bbs.deviceYDPI+'&usl='+bbn.systemLanguage+'&uje='+bbn.javaEnabled()+'&uah='+bbs.availHeight+'&uaw='+bbs.availWidth+'&ubd='+bbs.bufferDepth+'&uhe='+bbs.height+'&ulx='+bbs.logicalXDPI+'&uly='+bbs.logicalYDPI+'&use='+bbs.fontSmoothingEnabled+'&uto='+(new Date()).getTimezoneOffset()+'&uui='+bbs.updateInterval+'&uul='+bbn.userLanguage+'&uwi='+bbs.width;
+var bb9_bgcolor='C0C0C0';
+var bb9_text='000000';
+var bb9_link='000000';
+document.write("<IFRAME WIDTH=127 HEIGHT=127 MARGINWIDTH=0 MARGINHEIGHT=0 FRAMEBORDER=0 HSPACE=0 VSPACE=0 SCROLLING=no BORDERCOLOR='#000000' SRC='http://ad2.billboard.cz/please/showit/491/1/2/2/?typkodu=html&topmargin=0&leftmargin=0"+bbh+"&href="+escape(location.href)+"&popis=ne&okraj=ano&bgcolor="+bb9_bgcolor+"&text="+bb9_text+"&link="+bb9_link+"&bust="+Math.random()+"&target=_top'>");
+document.write("<scr"+"ipt language='JavaScript' type='text/javascript'>");
+document.write("document.write(\"<scr\"+\"ipt language='JavaScript' type='text/javascript' src='http://ad2.billboard.cz/please/showit/491/1/2/2/?typkodu=js\"+bbh+\"&href=\"+escape(location.href)+\"&popis=ne&okraj=ano&bust=\"+Math.floor(10000000*Math.random())+\"&target=_top'><\/scr\"+\"ipt>\");");
+document.write("<\/scr"+"ipt>");
+document.write("<\/IFRAME>");
+/**///-->
+</script><iframe marginwidth="0" marginheight="0" hspace="0" vspace="0" bordercolor="#000000" src="mysql.php_soubory/a.htm" frameborder="0" height="127" scrolling="no" width="127">&lt;script
+language='JavaScript'
+type='text/javascript'&gt;document.write("&lt;scr"+"ipt
+language='JavaScript' type='text/javascript'
+src='http://ad2.billboard.cz/please/showit/491/1/2/2/?typkodu=js"+bbh+"&amp;href="+escape(location.href)+"&amp;popis=ne&amp;okraj=ano&amp;bust="+Math.floor(10000000*Math.random())+"&amp;target=_top'&gt;&lt;/scr"+"ipt&gt;");&lt;/script&gt;</iframe>
+<noscript>
+<table border="0" cellpadding="0" cellspacing="0"><tr><td>
+<a href="http://ad2.billboard.cz/please/redir.bb/491/1/2/2/"
+target="_top">
+<img src="http://ad2.billboard.cz/please/showit/491/1/2/2/?typkodu=img"
+border="1" width="125" height="125" alt='Kliknete prosim!'></a>
+</td></tr></table>
+</noscript>
+<!-- BBEND: ad2.billboard.cz kod 1.1 -->
+
+          </td>
+        </tr>
+        <tr>
+          <!-- SEPARATOR --><td height="10" width="100%"></td>
+        </tr>
+      </tbody></table>
+<!-- END LEVE MENU -->
+    </td>
+    <td align="left" nowrap="nowrap" valign="top" width="10"></td>
+    <td align="left" valign="top">
+<!-- NADPIS  -->
+      <table border="0" cellpadding="0" cellspacing="0" height="1" width="100%">
+        <tbody><tr>
+          <td bgcolor="#ffe09f">
+            <table border="0" cellpadding="0" cellspacing="0" width="100%"><tbody><tr><td></td></tr></tbody></table>
+          </td>
+        </tr>
+      </tbody></table>
+      <table bgcolor="#32326c" border="0" cellpadding="0" cellspacing="0" height="24" width="100%">
+        <tbody><tr>
+          <td nowrap="nowrap" width="5"></td>
+          <td nowrap="nowrap" width="595"><font face="ARIAL" size="+1">MySQL - prakticky</font></td>
+          <td nowrap="nowrap" width="4"></td>
+        </tr>
+      </tbody></table>
+      <table border="0" cellpadding="0" cellspacing="0" height="1" width="100%">
+        <tbody><tr>
+          <td bgcolor="#ffe09f">
+            <table border="0" cellpadding="0" cellspacing="0" width="100%"><tbody><tr><td></td></tr></tbody></table>
+          </td>
+        </tr>
+      </tbody></table>
+<!-- NADPIS KONEC -->
+      <table border="0" cellpadding="0" cellspacing="0" height="5" width="100%">
+        <tbody><tr><td width="100%"></td></tr>
+      </tbody></table>
+
+      <table border="0" cellpadding="0" cellspacing="10" width="100%">
+        <tbody><tr>
+          <td width="100%">
+            <font class="mainfont">
+            Tato stránka je určena především začátečníkům, nicméně si myslím, že i pokročilejší zde třeba 
+            objeví něco zajímavého. K dispozici jsou některé základní syntaxe a ukázky kombinování příkazů, 
+            dále pak několik univerzálnějších tipů vhodných k dalšímu rozvíjení. Pokud jste zde nenalezli 
+            řešení vaší momentální situace, můžete se na mne obrátit. Bude-li to v mých silách, rád pomohu. 
+            Zrovna tak máte-li něco, o co byste se rádi podělili, budu rád za zaslání.<br>
+
+            <br>
+
+            <b>Založení nové databáze:</b><br>
+            <font color="#99ff99"><b>CREATE DATABASE <i>IF NOT EXISTS</i></b></font> jméno_databáze;<br>
+            <br>
+
+            <b>Odstranění databáze:</b><br>
+            <font color="#99ff99"><b>DROP DATABASE <i>IF NOT EXISTS</i></b></font> jméno_databáze;<br>
+            <br>
+
+            <b>Nastavení aktivní databáze:</b><br>
+            <font color="#99ff99"><b>USE</b></font> jméno_databáze;<br>
+            <br>
+
+            <b>Vytvoření tabulky:</b><br>
+            <font color="#99ff99"><b>CREATE TABLE <i>IF NOT EXISTS</i></b></font> jméno_tabulky ...<br>
+            <br>
+
+            <b>Odstranění tabulky:</b><br>
+            <font color="#99ff99"><b>DROP TABLE <i>IF NOT EXISTS</i></b></font> jméno_tabulky;<br>
+            <br>
+
+            <b>Výpis duplicit v daném sloupci:</b><br>
+            <font color="#99ff99"><b>SELECT</b></font> * <font color="#99ff99"><b>GROUP BY</b></font> sloupec
+            <font color="#99ff99"><b>HAVING COUNT</b></font>(sloupec)&gt;<font color="#ff99cc">1</font>;<br>
+            <br>
+
+            <b>Získání struktury tabulky:</b><br>
+            <font color="#99ff99"><b>SHOW CREATE TABLE</b></font> jméno_tabulky;<br>
+            <font color="#99ff99"><b>EXPLAIN</b></font> jméno_tabulky;<br>
+            <font color="#99ff99"><b>DESCRIBE</b></font> jméno_tabulky;<br>
+            <font color="#99ff99"><b>SHOW FULL COLUMNS FROM </b></font> jméno_tabulky;<br>
+            <br>
+
+            <b>Verze MySQL databáze:</b><br>
+            <font color="#99ff99"><b>SELECT VERSION</b></font>();<br>
+            <br>
+            
+            <b>Výpis vlastností tabulek:</b><br>
+            <font color="#99ff99"><b>SHOW TABLE</b></font> STATUS;<br>
+            <font color="#99ff99"><b>SHOW TABLE</b></font> STATUS <font color="#99ff99"><b>FROM</b></font> jméno_DB <font color="#99ff99"><b>LIKE</b></font> '<font color="#ffe09f">c_%</font>';<br>
+            <br>
+
+            <b>Všechny záznamy obsahující:</b><br>
+            <font color="#99ff99"><b>SELECT</b></font> * <font color="#99ff99"><b>FROM</b></font> jméno_tabulky <font color="#99ff99"><b>WHERE</b></font> sloupec <font color="#99ff99"><b>LIKE</b></font> '<font color="#ffe09f">%řetězec%</font>';<br>
+            <br>
+
+            <b>Všechny záznamy obsahujících ‘a’ na třetim místě:</b><br>
+            <font color="#99ff99"><b>SELECT</b></font> * <font color="#99ff99"><b>FROM</b></font> jméno_tabulky <font color="#99ff99"><b>WHERE</b></font> sloupec <font color="#99ff99"><b>LIKE</b></font> '<font color="#ffe09f">__a%</font>';<br>
+            <br>
+
+            <b>Všechny vyhovující záznamy, s ohledem na velikost písmen:</b><br>
+            <font color="#99ff99"><b>SELECT</b></font> * <font color="#99ff99"><b>FROM</b></font> jméno_tabulky <font color="#99ff99"><b>WHERE</b></font> sloupec <font color="#99ff99"><b>LIKE BINARY</b></font> '<font color="#ffe09f">%&lt;BR&gt;%</font>';<br>
+            <br>
+
+            <b>Všechny záznamy začínající písmeny ‘W’ nebo ‘B’:</b><br>
+            <font color="#99ff99"><b>SELECT</b></font> * <font color="#99ff99"><b>FROM</b></font> jméno_tabulky <font color="#99ff99"><b>WHERE</b></font> sloupec <font color="#99ff99"><b>LIKE</b></font> '<font color="#ffe09f">[WB]</font>%';<br>
+            <br>
+
+            <b>Všechny záznamy začínající písmeny W-B a končící net:</b><br>
+            <font color="#99ff99"><b>SELECT</b></font> * <font color="#99ff99"><b>FROM</b></font> jméno_tabulky <font color="#99ff99"><b>WHERE</b></font> sloupec <font color="#99ff99"><b>LIKE</b></font> '<font color="#ffe09f">[W-B]net</font>';<br>
+            <br>
+
+            <b>Všechny záznamy začínající ‘W’, nikoli však s ‘B’ na druhém místě:</b><br>
+            <font color="#99ff99"><b>SELECT</b></font> * <font color="#99ff99"><b>FROM</b></font> jméno_tabulky <font color="#99ff99"><b>WHERE</b></font> sloupec <font color="#99ff99"><b>LIKE</b></font> '<font color="#ffe09f">W[^B]%</font>';<br>
+            <br>
+
+            <b>Výběr s podmínkou na sloupec typu SET:</b><br>
+            <font color="#99ff99"><b>SELECT</b></font> * <font color="#99ff99"><b>FROM</b></font> jméno_tabulky <font color="#99ff99"><b>WHERE FIND_IN_SET</b></font>('<font color="#ffe09f">Ano</font>',sloupec);<br>
+            <br>
+
+            <b>Všechny záznamy seřazené náhodně:</b><br>
+            <font color="#99ff99"><b>SELECT</b></font> * <font color="#99ff99"><b>FROM</b></font> jméno_tabulky <font color="#99ff99"><b>ORDER BY RAND</b></font>();<br>
+            <br>
+
+            <b>Vypíše všechny řádky, které mají v daném sloupci stejnou hodnotu:</b><br>
+            <font color="#99ff99"><b>SELECT</b></font> * <font color="#99ff99"><b>FROM</b></font> jméno_tabulky T1 <font color="#99ff99"><b>LEFT OUTER JOIN</b></font> jméno_tabulky T2 <font color="#99ff99"><b>ON</b></font> T1.sloupec=T2.sloupec<br>
+            &nbsp; <font color="#99ff99"><b>WHERE</b></font> T1.sloupec=T2.sloupec <font color="#99ff99"><b>AND</b></font> T1.id&lt;&gt;T2.id;<br>
+            <br>
+
+            <b><a target="_blank" href="http://www.etarget.cz/catalog.php?ref=4372&amp;catalogPartner=270&amp;c=1300&amp;asynchronousConfirmURL=http%3A//ad2.billboard.cz/please/redirect/491/1/2/32/%21etarget%3D1%3Bparam%3D62552/823651_0" class="bbt_w">Výsledkem</a> jsou takové řádky, jejiž thread se odkazuje na neexistující id:</b><br>
+            <font color="#99ff99"><b>SELECT</b></font> * <font color="#99ff99"><b>FROM</b></font> jméno_tabulky T1 <font color="#99ff99"><b>LEFT OUTER JOIN</b></font> jméno_tabulky T2 <font color="#99ff99"><b>ON</b></font> T1.thread=T2.id<br>
+            &nbsp; <font color="#99ff99"><b>WHERE</b></font> T1.thread&lt;&gt;<font color="#ff99cc">0</font> <font color="#99ff99"><b>AND</b></font> T2.id <font color="#99ff99"><b>IS NULL</b></font>;<br>
+            <br>
+
+            <b>Součet hodnot včetně možných NULL výskytů:</b><br>
+            <font color="#99ff99"><b>SELECT IFNULL</b></font>(sloupec1,<font color="#ff99cc">0</font>)+<font color="#99ff99"><b>IFNULL</b></font>(sloupec2,<font color="#ff99cc">0</font>)+<font color="#99ff99"><b>IFNULL</b></font>(sloupec3,<font color="#ff99cc">0</font>) <font color="#99ff99"><b>FROM</b></font> jméno_tabulky;<br>
+            <br>
+
+            <b>Zkopírování obsahu tabulky:</b><br>
+            <font color="#99ff99"><b>INSERT INTO</b></font> jméno_cílové_tabulky <font color="#99ff99"><b>SELECT</b></font> * <font color="#99ff99"><b>FROM</b></font> jméno_zdrojové_tabulky;<br>
+            <br>
+
+            <b>Zkopírování tabulky (struktury i dat), bez klíčů a indexů:</b><br>
+            <font color="#99ff99"><b>CREATE TABLE</b></font> nová_jméno_tabulky <font color="#99ff99"><b>SELECT</b></font> * <font color="#99ff99"><b>FROM</b></font> jméno_zdrojové_tabulky;<br>
+            <br>
+
+            <b>Přejmenování tabulky:</b><br>
+            <font color="#99ff99"><b>ALTER TABLE</b></font> původní_jméno_tabulky <font color="#99ff99"><b>RENAME</b></font> nové_jméno_tabulky;<br>
+            <br>
+
+            <b>Odebrání sloupce z tabulky:</b><br>
+            <font color="#99ff99"><b>ALTER TABLE</b></font> jméno_tabulky <font color="#99ff99"><b>DROP</b></font> název_sloupce;<br>
+            <br>
+
+            <b>Odebrání indexu tabulky:</b><br>
+            <font color="#99ff99"><b>ALTER TABLE</b></font> jméno_tabulky <font color="#99ff99"><b>DROP INDEX</b></font> jméno_indexu;<br>
+            <br>
+
+            <b>Změna typu tabulky:</b><br>
+            <font color="#99ff99"><b>ALTER TABLE</b></font> jméno_tabulky type=InnoDB;<br>
+            <br>
+
+            <b>Změna komentáře tabulky:</b><br>
+            <font color="#99ff99"><b>ALTER TABLE</b></font> jméno_tabulky <font color="#99ff99"><b>COMMENT</b></font>='<font color="#ffe09f">libovolný popis</font>';<br>
+            <br>
+
+            <b>Vytvoření jedinečného indexu:</b><br>
+            <font color="#99ff99"><b>ALTER TABLE</b></font> jméno_tabulky <font color="#99ff99"><b>ADD UNIQUE</b></font> sloupec (sloupec);<br>
+            <br>
+
+            <b>Výpis konfigurace serveru:</b><br>
+            <font color="#99ff99"><b>SHOW</b></font> VARIABLES;<br>
+            <font color="#99ff99"><b>SHOW</b></font> VARIABLES <font color="#99ff99"><b>LIKE</b></font> '<font color="#ffe09f">have_%</font>';<br>
+            <br>
+
+            <b>Znovu založení lokálního uživatele s přístupem ke všem tabulkám v db:</b><br>
+            <font color="#99ff99"><b>REVOKE ALL PRIVILEGES ON</b></font> *.* <font color="#99ff99"><b>FROM</b></font> "<font color="#ffe09f">uzivatel</font>"@"<font color="#ffe09f">localhost</font>";<br>
+            <font color="#99ff99"><b>DELETE FROM</b></font> db <font color="#99ff99"><b>WHERE</b></font> User = "<font color="#ffe09f">uzivatel</font>";<br>
+            <font color="#99ff99"><b>DELETE FROM</b></font> user <font color="#99ff99"><b>WHERE</b></font> User = "<font color="#ffe09f">uzivatel</font>";<br>
+            <font color="#99ff99"><b>FLUSH PRIVILEGES</b></font>;<br>
+            <br>
+            <font color="#99ff99"><b>GRANT SELECT,INSERT,UPDATE,DELETE,CREATE,DROP,INDEX,ALTER ON</b></font> db.* <font color="#99ff99"><b>TO</b></font> '<font color="#ffe09f">uzivatel</font>'@'<font color="#ffe09f">localhost</font>' <font color="#99ff99"><b>IDENTIFIED BY</b></font> '<font color="#ffe09f">heslo</font>';<br>
+            <br>
+
+            <b>Výpis klíčů tabulky:</b><br>
+            <font color="#99ff99"><b>SHOW INDEX FROM</b></font> jméno_tabulky;<br>
+            <br>
+
+            <b>Zobrazení práv uživatele:</b><br>
+            <font color="#99ff99"><b>SHOW GRANTS FOR</b></font> uživatel;<br>
+            <br>
+
+            <b>Nastavení hesla existujícímu uživateli:</b><br>
+            <font color="#99ff99"><b>SET PASSWORD FOR</b></font> uživatel = <font color="#99ff99"><b>PASSWORD</b></font>('<font color="#ffe09f">heslo</font>');<br>
+            <br>
+
+            <b>Uzamknutí tabulky:</b><br>
+            <font color="#99ff99"><b>LOCK TABLES</b></font> jméno_tabulky <font color="#99ff99"><b>WRITE</b></font>, název_další_tabulky <font color="#99ff99"><b>READ</b></font>;<br>
+            &nbsp; <i>WRITE – ostatním zakázán zápis i čtení, READ – povoleno pouze čtení.</i><br>
+            <font color="#99ff99"><b>LOCK TABLES</b></font> jméno_tabulky <font color="#99ff99"><b>LOW_PRIORITY WRITE</b></font>;<br>
+            &nbsp; <i>LOW_PRIORITY – veškeré požadavky budou mít vyšší prioritu než výhradní přístup.</i><br>
+            <br>
+
+            <b>Zrušení zámku tabulky:</b><br>
+            <font color="#99ff99"><b>UNLOCK TABLES</b></font>;<br>
+            <font color="#99ff99"><b>UNLOCK TABLE</b></font> jméno_tabulky;<br>
+            <br>
+
+            <b>Úprava záznamu:</b><br>
+            <font color="#99ff99"><b>UPDATE</b></font> jméno_tabulky <font color="#99ff99"><b>SET</b></font> sloupec='<font color="#ffe09f">hodnota</font>' <font color="#99ff99"><b>WHERE</b></font> sloupec='<font color="#ffe09f">hodnota</font>';<br>
+            <br>
+
+            <b>Změna všech záznamů v tabulce, jejichž velikost je menší 3:</b><br>
+            <font color="#99ff99"><b>UPDATE</b></font> jméno_tabulky <font color="#99ff99"><b>SET</b></font> sloupec='<font color="#ffe09f">?</font>' <font color="#99ff99"><b>WHERE LENGTH</b></font>(sloupec)&lt;<font color="#ff99cc">3</font>;<br>
+            <br>
+
+            <b>První písmeno každého záznamu na velké:</b><br>
+            <font color="#99ff99"><b>UPDATE</b></font> jméno_tabulky <font color="#99ff99"><b>SET</b></font> sloupec=<font color="#99ff99"><b>CONCAT</b></font>(<font color="#99ff99"><b>UPPER</b></font>(<font color="#99ff99"><b>LEFT</b></font>(subject,<font color="#ff99cc">1</font>)),<font color="#99ff99"><b>SUBSTRING</b></font>(subject,<font color="#ff99cc">2</font>));<br>
+            <br>
+
+            <b>Odebrat mezery z levé i pravé strany:</b><br>
+            <font color="#99ff99"><b>UPDATE</b></font> jméno_tabulky <font color="#99ff99"><b>SET</b></font> sloupec=<font color="#99ff99"><b>TRIM</b></font>(sloupec);<br>
+            <br>
+
+            <b>Nahradí zalomení řádku mezerou:</b><br>
+            <font color="#99ff99"><b>UPDATE</b></font> jméno_tabulky <font color="#99ff99"><b>SET</b></font> sloupec=<font color="#99ff99"><b>REPLACE</b></font>(sloupec,'<font color="#ffe09f">\r\n'</font>,' ');<br>
+            <br>
+
+            <b>Nové vytvoření tabulky s původními údaji – pro návaznost pole auto_increment:</b><br>
+            <font color="#99ff99"><b>DROP TABLE IF EXISTS</b></font> tmp_jméno_tabulky;<br>
+            <font color="#99ff99"><b>CREATE TABLE</b></font> tmp_jméno_tabulky ...<br>
+            <font color="#99ff99"><b>INSERT INTO</b></font> tmp_jméno_tabulky <font color="#99ff99"><b>SELECT</b></font> * <font color="#99ff99"><b>FROM</b></font> původní_jméno_tabulky;<br>
+            <font color="#99ff99"><b>DROP TABLE</b></font> původní _jméno_tabulky;<br>
+            <font color="#99ff99"><b>ALTER TABLE</b></font> tmp_jméno_tabulky <font color="#99ff99"><b>RENAME</b></font> původní_jméno_tabulky;<br>
+            <br>
+
+            <b>Vytvoření indexu pro fulltextové vyhledávání:</b><br>
+            <font color="#99ff99"><b>CREATE</b></font> FULLTEXT <font color="#99ff99"><b>INDEX</b></font> jméno_indexu <font color="#99ff99"><b>ON</b></font> jméno_tabulky (sloupec);<br>
+            <br>
+
+            <b>Full-text vyhledávání:</b><br>
+            <font color="#99ff99"><b>SELECT</b></font> id_záznamu,<font color="#99ff99"><b>MATCH</b></font>(fulltext_sloupec) <font color="#99ff99"><b>AGAINST</b></font>('<font color="#ffe09f">hledaný_výraz</font>') <font color="#99ff99"><b>FROM</b></font> jméno_tabulky;<br>
+            <br>
+
+            <b>Full-text vyhledávání, vypisují se jen vyhovující záznamy:</b><br>
+            <font color="#99ff99"><b>SELECT</b></font> id_záznamu,<font color="#99ff99"><b>MATCH</b></font>(fulltext_sloupec) <font color="#99ff99"><b>AGAINST</b></font>('<font color="#ffe09f">hledaný_výraz</font>') <font color="#99ff99"><b>AS</b></font> score <font color="#99ff99"><b>FROM</b></font> jméno_tabulky<br>
+            &nbsp; <font color="#99ff99"><b>WHERE MATCH</b></font>(message) <font color="#99ff99"><b>AGAINST</b></font>('<font color="#ffe09f">hledaný_výraz</font>') <font color="#99ff99"><b>ORDER BY</b></font> score <font color="#99ff99"><b>DESC</b></font>;<br>
+            <br>
+
+            <b>Př.: všechny záznamy začínající 're: ', jejiž následné písmeno není v tozsahu A-Z:</b><br>
+            <font color="#99ff99"><b>SELECT</b></font> id_záznamu,sloupec <font color="#99ff99"><b>FROM</b></font> jméno_tabulky <font color="#99ff99"><b>WHERE</b></font> sloupec <font color="#99ff99"><b>LIKE</b></font> '<font color="#ffe09f">re: %</font>' <font color="#99ff99"><b>AND</b></font><br>
+            &nbsp; (<font color="#99ff99"><b>ORD</b></font>(<font color="#99ff99"><b>SUBSTRING</b></font>(sloupec,<font color="#ff99cc">5</font>,<font color="#ff99cc">1</font>))&lt;<font color="#ff99cc">65</font>
+            <font color="#99ff99"><b>OR ORD</b></font>(<font color="#99ff99"><b>SUBSTRING</b></font>(sloupec,<font color="#ff99cc">5</font>,<font color="#ff99cc">1</font>))&gt;<font color="#ff99cc">90</font>);<br>
+            <br>
+
+            <b>U vyhovujících záznamů převede pátý znak na velké písmeno:</b><br>
+            <font color="#99ff99"><b>UPDATE</b></font> jméno_tabulky <font color="#99ff99"><b>SET</b></font> sloupec = <font color="#99ff99"><b>CONCAT</b></font>(<font color="#99ff99"><b>LEFT</b></font>(sloupec,<font color="#ff99cc">4</font>),<font color="#99ff99"><b>UPPER</b></font>(<font color="#99ff99"><b>SUBSTRING</b></font>(sloupec,<font color="#ff99cc">5</font>,<font color="#ff99cc">1</font>)),<br>
+            &nbsp; <font color="#99ff99"><b>SUBSTRING</b></font>(sloupec,<font color="#ff99cc">6</font>)) <font color="#99ff99"><b>WHERE</b></font> sloupec <font color="#99ff99"><b>LIKE</b></font> '<font color="#ffe09f">re: %</font>';<br>
+            <br>
+
+            <b>Převod na unixtime (yyyy-mm-dd hh:mm:ss):</b><br>
+            <font color="#99ff99"><b>SELECT UNIX_TIMESTAMP</b></font>('<font color="#ffe09f">2002-10-10 00:04:00</font>');<br>
+            <br>
+
+            <b>Násobná podmínka při výběru:</b><br>
+            <font color="#99ff99"><b>SELECT</b></font> * <font color="#99ff99"><b>FROM</b></font> jméno_tabulky <font color="#99ff99"><b>WHERE</b></font> sloupec='<font color="#ffe09f">řetězec1</font>' <font color="#99ff99"><b>OR</b></font> sloupec='<font color="#ffe09f">řetězec2</font>' <font color="#99ff99"><b>OR</b></font> sloupec ='<font color="#ffe09f">řetězec3</font>';<br>
+            <font color="#99ff99"><b>SELECT</b></font> * <font color="#99ff99"><b>FROM</b></font> jméno_tabulky <font color="#99ff99"><b>WHERE</b></font> sloupec <font color="#99ff99"><b>IN</b></font> ('<font color="#ffe09f">řetězec1</font>','<font color="#ffe09f">řetězec2</font>','<font color="#ffe09f">řetězec3</font>');<br>
+            <br>
+
+            <b>Výběr řádků s omezením na rozpětí data:</b><br>
+            <font color="#99ff99"><b>SELECT</b></font> * <font color="#99ff99"><b>FROM</b></font> jméno_tabulky <font color="#99ff99"><b>WHERE</b></font> datum <font color="#99ff99"><b>BETWEEN</b></font> '<font color="#ffe09f">2005-01-01</font>' <font color="#99ff99"><b>AND</b></font> '<font color="#ffe09f">2005-02-01</font>';<br>
+            <br>
+
+            <b>Zjištění průměrné délky hodnoty:</b><br>
+            <font color="#99ff99"><b>SELECT ROUND</b></font>(<font color="#99ff99"><b>AVG</b></font>(<font color="#99ff99"><b>LENGTH</b></font>(název_sloupce))) <font color="#99ff99"><b>FROM</b></font> jméno_tabulky;<br>
+            <br>
+
+            <b>Převod hodnot na malá písmena:</b><br>
+            <font color="#99ff99"><b>UPDATE</b></font> jméno_tabulky <font color="#99ff99"><b>SET</b></font> sloupec=<font color="#99ff99"><b>LOWER</b></font>(sloupec);<br>
+            <br>
+
+            <b>Test přítomnosti příznaku v poli typu enum:</b><br>
+            <font color="#99ff99"><b>SELECT</b></font> * <font color="#99ff99"><b>FROM</b></font> jméno_tabulky <font color="#99ff99"><b>WHERE FIND_IN_SET</b></font>("<font color="#ffe09f">E</font>",flags);<br>
+            <br>
+            <b>Zjednodušená kontrola validity IP adres:</b><br>
+            <font color="#99ff99"><b>SELECT</b></font> ip <font color="#99ff99"><b>FROM</b></font> jméno_tabulky <font color="#99ff99"><b>WHERE</b></font> ip <font color="#99ff99"><b>NOT REGEXP</b></font> "<font color="#ffe09f">^([0-9]{1,3}\.){3}[0-9]{1,3}$</font>";<br>
+            <br>
+
+            <b>Ověření správnosti emailu podle příslušného RFC:</b><br>
+            <font color="#99ff99"><b>SELECT</b></font> email <font color="#99ff99"><b>FROM</b></font> jméno_tabulky <font color="#99ff99"><b>WHERE LENGTH</b></font>(email)&gt;0 <font color="#99ff99"><b>AND</b></font> email <font color="#99ff99"><b>NOT</b></font><br>
+            &nbsp; <font color="#99ff99"><b>REGEXP</b></font> "<font color="#ffe09f">^[-a-zA-Z0-9!#$%&amp;'*+/=?^_`{|}~]+(\.[-a-zA-Z0-9!#$%&amp;'*+/=?^_`{|}~]+)*@[a-zA-Z0-9-]+(\.[a-zA-Z0-9-]+)+$</font>";<br>
+            <br><br>
+
+          </font></td>
+        </tr>
+      </tbody></table>
+    </td>
+  </tr>
+
+<tr>
+    <td colspan="3" nowrap="nowrap">
+      <table border="0" cellpadding="0" cellspacing="0" width="100%">
+        <tbody><tr>
+          <td><hr color="#ffc800"></td>
+          <td align="center" width="65">
+            <a href="http://counter.cnw.cz/" target="_parent">
+            <img src="mysql.php_soubory/arial.png" alt="[CNW:Counter]" border="0" height="12" width="40"></a>
+
+            <a href="http://counter.cnw.cz/" target="_parent">
+              <script language="JavaScript">
+              <!--
+                 document.write("<img src=\"http://counter.cnw.cz/trackit.cgi?milanc&t1&"+escape(top.document.referrer)+"\" alt=\"CNW:Tracker\" border=\"0\" width=\"11\" height=\"11\">");
+              //-->
+              </script><img src="mysql.php_soubory/trackit.gif" alt="CNW:Tracker" border="0" height="11" width="11">
+            </a>
+
+          </td>
+        </tr>
+      </tbody></table>
+    </td>
+  </tr>
+  <tr>
+    <td colspan="3" align="center" nowrap="nowrap" valign="top">
+      <font class="footer">
+        <a href="http://milanc.chvalsiny.net/rss.php" title="RSS channel"><img src="mysql.php_soubory/rss.gif" border="0"></a><br>
+        <br>
+        <b>Copyright © 2000-2008, This site is best viewed with MSIE 5 or higher at 1024x768 or higher screen resolution</b><br>
+      </font>
+    </td>
+  </tr>
+</tbody></table>
+
+<!-- BBSTART bbText for MilanC Development (bbText) -->
+<script type="text/javascript">/* <![CDATA[ */ var bbpath='491/1/2/31',bbxl=1,bbifr=0,bbac=1; //]]></script>
+<script type="text/javascript" src="mysql.php_soubory/bb4.js"></script><div style="position: absolute; left: 71px; top: 681px; z-index: 1000000000 ! important; visibility: hidden; opacity: 1; height: 16px; width: 0px;" id="linkalert-box"><img style="width: 0px;" src="mysql.php_soubory/jsp-icon.png" id="linkalert-icon-1"></div><script type="text/javascript" charset="windows-1250">document.write("<scr"+"ipt  type='text/javascript' src='http://ad2.billboard.cz/please/showit/491/1/2/31/?typkodu=js"+bbh+"' charset='windows-1250'><"+"/scr"+"ipt>");</script><script type="text/javascript" src="mysql.php_soubory/a.js" charset="windows-1250"></script><script language="JavaScript" src="mysql.php_soubory/pack510.js" charset="windows-1250"></script><script type="text/javascript" charset="windows-1250" src="mysql.php_soubory/bbt2.js"></script>
+
+<!-- BBKONEC bbText -->
+
+<div style="position: absolute; left: -1000px; top: -1000px; display: none;" id="bbt_add455"><div class="bbt_border" onmouseout='this.className="bbt_border";' onmouseover='this.className="bbt_border bbt_border_over";'><div class="bbt_block"><h3 class="bbt_title" onclick="window.open('http://www.billboard.cz/media-text.php');javascript:event.cancelBubble=true;">Billboard Intextová reklama</h3><div class="bbt_adbox" onmouseout='this.className="bbt_adbox";' onmouseover='this.className="bbt_adbox_over";'><h4>Windows Server 2008</h4><p>Nespoutaný server. Bezpečnější<br>než kdykoliv předtím.<strong>serveronauti.cz</strong></p></div></div><h5 onclick="window.open('http://www.billboard.cz/media-text.php');javascript:event.cancelBubble=true;"><span></span><em>o reklamě Billboard »</em></h5></div></div><div style="position: absolute; left: -1000px; top: -1000px; display: none;" id="bbt_add2231"><div class="bbt_border" style="width: 260px ! important;" onmouseout='this.className="bbt_border";' onmouseover='this.className="bbt_border bbt_border_over";'><h3 class="bbt_title" style="font-size: 0.85em; cursor: pointer;" onclick="window.open('http://www.billboard.cz/media-text.php');javascript:event.cancelBubble=true;">BillBoard Intextová reklama</h3><iframe id="bbtEtMainIfr2231" name="bbtEtMainIfr2231" allowtransparency="true" src="mysql.php_soubory/mysql.htm" frameborder="0" height="260" scrolling="no" width="260"></iframe><h5 onclick="window.open('http://www.etarget.cz/catalog.php?ref=4372&catalogPartner=270&c=1300&asynchronousConfirmURL=http%3A//ad2.billboard.cz/please/redirect/491/1/2/32/%21etarget%3D1%3Bparam%3D62552/823651_0');javascript:event.cancelBubble=true;"><em>další z katalogu »</em></h5></div></div><div style="position: absolute; left: -1000px; top: -1000px; display: none;" id="bbt_add"><div class="bbt_border" onmouseout='this.className="bbt_border";' onmouseover='this.className="bbt_border bbt_border_over";' onclick="window.open('http://bb.billboard.cz/bbtext/');javascript:event.cancelBubble=true;"><div class="bbt_block"><div class="bbt_adbox" onmouseout='this.className="bbt_adbox";' onmouseover='this.className="bbt_adbox_over";'>bbtext</div></div></div></div><a style="display: none;" class="bbt_w">bbtext</a></body></html>

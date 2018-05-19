@@ -1,0 +1,129 @@
+<!doctype html public "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=Windows-1250">
+<title>Funkce _sqp_trace</title>
+<link rel='stylesheet' style='text/css' href='../function.css'>
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000">
+
+
+
+<h2 class=function>_sqp_trace</h2>
+<img src='../images/sql.gif' width='44' height='16' border='0' alt='sql' align='middle' hspace='2'>
+
+
+<br><br>
+<div class='typ'>function <b>_sqp_trace</b>(IN situation INTEGER, IN username CHAR(31), IN objectname CHAR(63), IN logname CHAR(31), IN kontext_extent INTEGER) RETURNS BOOLEAN;
+</div>
+
+
+<p><b>Parametry</b></p>
+
+<table border=1 cols=2>
+
+<tr valign="top">
+<td width=20%><i>situation </i></td>
+<td width=80%> číslo situace, jejíž logování se má ovlivnit</td>
+</tr>
+
+<tr valign="top">
+<td width=20%><i>username </i></td>
+<td width=80%> jméno uživatele, jehož akce se mají logovat, je-li prázdné, míní se všichni uživatele</td>
+</tr>
+
+<tr valign="top">
+<td width=20%><i>objectname </i></td>
+<td width=80%> jméno tabulky, k níž se vztahuje požadavek na logování</td>
+</tr>
+
+<tr valign="top">
+<td width=20%><i>logname </i></td>
+<td width=80%> jméno logu, do něhož se loguje, je-li prázdné, míní se standardní log</td>
+</tr>
+
+<tr valign="top">
+<td width=20%><i>kontext_extent </i></td>
+<td width=80%> určuje rozsah informací v logu, případně vypíná logování</td>
+</tr>
+</table><br>
+
+<p><b>Od verze</b></p>
+
+<p>7.0</p>
+
+<p><b>Popis</b></p>
+
+<p>Funkce zařadí nový požadavek na logování určité situace nebo změní či zruší platný požadavek na logování.</p>
+
+<p>Čísla situací v parametru <i>situation</i> jsou označena konstantami popsanými <a href="../xml/html/tracelog.html">zde</a>.</p>
+
+<p>Pro situace vztahující se k manipulaci s daty v tabulkách uvádí parametr <i>objectname</i> jméno tabulky, které se logování týká. Jméno lze prefixovat jménem schématu (aplikace), pokud prefix není uveden, míní se právě vybrané schéma. Tabulka musí existovat již během volání této funkce.</p>
+
+<p>Pokud je jméno logu <i>logname</i> neprázdné, pak musí označovat již existující log, například vytvořený dřívějším voláním funkce <a href="HEJ_F_SQP_DEFINE_LOG.htm"><code>_sqp_define_log</code></a>.</p>
+
+<p>Parametr <i>username</i> musí označovat existující uživatelské jméno. Nelze v něm použít jméno uživatele, který bude teprve založen.</p>
+
+<p>Hodnoty parametru <i>kontext_extent</i> určují míru vypisovaných informací o kontextu, v němž situace nastala. Existují tři stupně kontextu:
+
+<ul>
+	<li>0 - logování se neprovádí - tato hodnota ruší dříve zadaný požadavek na logování;</li>
+	<li>1 - zpráva bez kontextu;</li>
+	<li>2 - zpráva obsahující nejbližší kontext situace;</li>
+	<li>3 - zpráva obsahující údaje o všech rekurzivně zanořených kontextech, v nichž situace nastala.</li>
+</ul>
+
+<p>Kontext větší než 1 má smysl zejména při logování uživatelských chyb, SQL příkazů a manipulací s tabulkou. Nastavením kontextu 0 se logování vypíná.</p>
+
+<p>Nastavení může provádět jen Provozní správce databáze, požadavek na trasování čtení a zápisu dat jen Bezpečnostní správce databáze - viz <a href="../xml/html/admins.html">Administrování SQL serveru</a>.</p>
+
+<p><b>Persistence požadavků</b></p>
+
+<p>Po vypnutí a opětovném zapnutí serveru se zachovají pouze požadavky na logování do základního logu serveru, bez vazby na jméno uživatele nebo jméno tabulky.</p>
+
+<p><b>Hodnota funkce</b></p>
+
+<p>Funkce vrací TRUE, pokud úspěšně zařadila nebo zrušila zadaný požadavek na logování. Vrací FALSE při chybě, která může být způsobena zadáním jména neexistujícího uživatele nebo objektu.</p>
+
+<p><b>Příklad:</b></p>
+
+<p>V proceduře _ON_SERVER_START můžete pro vývoj aplikací zapnout podrobné trasování do zvláštního logu, do něhož má přístup jen správce, a nastavení běžného logu např. takto:</p>
+
+<pre><code>PROCEDURE _ON_SERVER_START();
+BEGIN
+  CALL Log_write("nastaven debuglog");
+
+  CALL _sqp_define_log('debuglog','c:\pom\debuglog.log','%d %t %s %a %u %m');
+  CALL _sqp_trace(TRACE_SERVER_FAILURE, '', '', 'debuglog', 3);
+  CALL _sqp_trace(TRACE_START_STOP,     '', '', 'debuglog', 3);
+  CALL _sqp_trace(TRACE_LOGIN,          '', '', 'debuglog', 3);
+  CALL _sqp_trace(TRACE_SERVER_INFO,    '', '', 'debuglog', 3);
+  CALL _sqp_trace(TRACE_USER_ERROR,     '', '', 'debuglog', 3);
+  CALL _sqp_trace(TRACE_SQL,            '', '', 'debuglog', 3);
+  CALL _sqp_trace(TRACE_CURSOR,         '', '', 'debuglog', 3);
+  CALL _sqp_trace(TRACE_LOG_WRITE,      '', '', 'debuglog', 3);
+  CALL _sqp_trace(TRACE_PROCEDURE_CALL, '', '', 'debuglog', 3);
+  CALL _sqp_trace(TRACE_TRIGGER_EXEC,   '', '', 'debuglog', 3);
+
+  CALL Log_write("nastaven běžný log");
+  CALL _sqp_trace(TRACE_SERVER_FAILURE, '', '', '', 1);
+  CALL _sqp_trace(TRACE_START_STOP,     '', '', '', 1);
+  CALL _sqp_trace(TRACE_USER_ERROR,     '', '', '', 1);
+  CALL _sqp_trace(TRACE_LOG_WRITE,      '', '', '', 1);
+  CALL _sqp_trace(TRACE_REPLICATION,    '', '', '', 0);
+  CALL _sqp_trace(TRACE_DIRECT_IP,      '', '', '', 0);
+  CALL _sqp_trace(TRACE_REPLIC_MAIL,    '', '', '', 0);
+  CALL _sqp_trace(TRACE_REPLIC_COPY,    '', '', '', 0);
+  CALL _sqp_trace(TRACE_REPL_CONFLICT,  '', '', '', 0);
+END</code></pre>
+
+<p><b>Viz</b></p>
+
+<ul class='viz'>
+ <li><a href="../xml/html/_iv_recent_log.html"><code>_iv_recent_log</code></a></li>
+ <li><a href="../xml/html/_iv_pending_log_reqs.html"><code>_iv_pending_log_reqs</code></a></li>
+</ul>
+
+</body>
+</html>

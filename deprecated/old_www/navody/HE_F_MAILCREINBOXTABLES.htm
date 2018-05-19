@@ -1,0 +1,59 @@
+<!doctype html public "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=Windows-1250">
+<title>Funkce MailCreInBoxTables</title>
+<link rel='stylesheet' style='text/css' href='../function.css'>
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000">
+
+
+
+<h2 class=function>MailCreInBoxTables</h2>
+<img src='../images/sql.gif' width='44' height='16' border='0' alt='sql' align='middle' hspace='2'>
+
+
+<br><br>
+<div class='typ'>FUNCTION <b>MailCreInBoxTables</b>(IN profile CHAR(63)) RETURNS INT;
+</div>
+
+
+<p><b>Parametry</b></p>
+
+<table border=1 cols=2 frame=box rules=all width=480>
+
+<tr valign="top">
+<td width=19%><i>profile </i></td>
+<td width=81%>jméno <a href="HE_MAILPROFILES.htm">poštovního profilu</a> definovaného v 602SQL</td>
+</tr>
+</table><br>
+
+<p><b>Od verze</b></p>
+
+<p>8.1</p>
+
+<p><b>Popis</b></p>
+
+<p>Funkce vytvoří dvojici <a href="HE_MAILTABLES.htm">pracovních tabulek</a>, které jsou nezbytné pro práci s došlou poštou. Je-li parametr <em>profile</em> NULL, vytvoří se tabulky jménem _INBOXMSGS a _INBOXFILES v systémové aplikaci _SYSEXT (tato aplikace se v případě potřeby vytvoří). Je-li <em>profile</em> jméno existujícího profilu,  tabulka pro ukládání informací o zásilkách se pojmenuje podle parametru profilu <code>InBoxMessages</code>, tabulka pro ukládání informací o připojených souborech podle parametru profilu <code>InBoxFiles</code>, oboje v aplikaci podle parametru profilu <code>InBoxAppl</code>.</p>
+
+<p>I bez volání této funkce se tabulky vytvoří při prvním pokusu o otevření schránky.</p>
+
+<p>Pokud tabulky již existují, funkce neprovede nic. Jsou-li tabulky ve starém formátu (vytvořeny ve verzi starší než 7.0d), upraví se na současdný formát. </p>
+
+<p>Hlavní význam funkce je umožnit šířit aplikaci na počítač se standardní instalací (tedy bez tabulek pro příjem pošty). Složitější aplikace využívající serverové poštovní API vyžadují přítomnost těchto tabulek již při překladu uložených procedur.  </p>
+
+<p>Jména a umístění tabulek lze získat pomocí funkce <a href="HE_F_MAILGETINBOXINFO.htm"><code>MailGetInBoxInfo</code></a>.</p>
+
+<p><b>Hodnota funkce</b></p>
+
+<p>Funkce vrací nulu v případě úspěchu a číslo chyby v případě neúspěchu.</p>
+
+<p><b>Viz</b></p>
+
+<ul class='viz'>
+ <li><a href="HE_F_MAILOPENINBOX.htm">MailOpenInBox</a> </li>
+</ul>
+
+</body>
+</html>

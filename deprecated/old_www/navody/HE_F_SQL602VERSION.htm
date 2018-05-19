@@ -1,0 +1,64 @@
+<!doctype html public "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=Windows-1250">
+<title>Funkce SQL602_version</title>
+<link rel='stylesheet' style='text/css' href='../function.css'>
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000">
+
+
+
+<h2 class=function>SQL602_version</h2>
+<img src='../images/cpp.gif' width='44' height='16' border='0' alt='c/c++' align='middle' hspace='2'><img src='../images/pascal.gif' width='44' height='16' border='0' alt='pascal' align='middle' hspace='2'><img src='../images/sql.gif' width='44' height='16' border='0' alt='sql' align='middle' hspace='2'>
+
+
+<br><br>
+<div class='typ'>sig32 <b>[cd_]SQL602_version</b>([cdp_t cdp]);<br>
+function <b>[cd_]SQL602_version </b>([cdp : cdp_t]) : sig32;<br>
+FUNCTION <b>SQL602_version</b> RETURNS INT<b>;</b>
+</div>
+
+
+<p><b>Parametry</b></p>
+
+<table border=1 cols=2 frame=box rules=all width=400>
+
+<tr valign="top">
+<td width=19%>[<i>cdp </i></td>
+<td width=81%><a href="HE_EXTCD.htm">kontextová proměnná</a> klienta]  </td>
+</tr>
+</table><br>
+
+<p><b>Popis </b></p>
+
+<p>Funkce <b><code>SQL602_version </code></b>vrací číslo verze 602SQL. V horním slově je hlavní číslo verze, ve spodním vedlejší číslo.</p>
+
+<p><b>Hodnota funkce </b></p>
+
+<p>Funkce vrací číslo verze 602SQL.</p>
+
+<p><b>Příklad v SQL:</b></p>
+
+<pre><code>FUNCTION `srv_version`() RETURNS CHAR(10);
+*****************************************************
+BEGIN
+  DECLARE i INT;
+  DECLARE vers CHAR(10);
+  SET i = <strong>SQL602_version</strong>;
+  SET vers = Int2str(i div 65536)||'.'||Int2str(i mod 65536);
+  SET i = SQL602_build;
+  SET vers = vers||'.'||Int2str(i div 65536)||'.'||Int2str(i mod 65536);
+  RETURN vers;
+END
+</code></pre>
+
+<p><b>Viz</b></p>
+
+<ul class='viz'>
+ <li><a href="HE_F_SQL602BUILD.htm">SQL602_build</a> </li>
+</ul>
+
+</body>
+</html>

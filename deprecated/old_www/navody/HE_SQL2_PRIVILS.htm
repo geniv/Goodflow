@@ -1,0 +1,154 @@
+<!doctype html public "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=Windows-1250">
+<title>Zjišťování práv z jazyka SQL</title>
+<link rel='stylesheet' style='text/css' href='../function.css'>
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr>
+	<td style="background-image: url(../images/bghead.jpg);
+		background-position: right;
+		background-repeat: no-repeat;">
+	<table width="100%" border="0" cellpadding="0" cellspacing="0"
+		style="background-image:none">
+	<tr>
+		<td style="background-image:none" height="46"
+			width="15%"><img src="../images/title-cz.gif"
+			width="255" height="33"
+			alt="602SQL-Úplná dokumentace"
+			title="602SQL - Úplná dokumentace"
+			border="0"></td>
+		<td width="33%" align="right"><a href="../xml/html/top.html"><img class="floatno"
+			src="../images/index.gif"
+			width="15" height="16"
+			alt="Index" title="Zpět na obsah"
+			border="0" vspace="2"></a> &nbsp;
+			 </td>
+	</tr>
+	</table>
+	</td>
+</tr>
+</table><table class="navigace" border="0" width="100%"  bgcolor="#FFFFBF"><tr> <td
+width="20" align="center"><img class="floatno" src="../images/prev.gif"
+width="15" height="13" alt="&lt;&shy;" title="Předcházející téma"
+border="0"></td><td width="25%"><a
+href="HE_SQL2_PRAVA.htm">Práva a subjekty práva v SQL</a></td> <td width="25%"
+align="right"><img class="floatno" src="../images/up.gif" width="13"
+height="15" alt="Nahoru" title="O jednu úroveň výš" border="0"
+align="middle"></td><td width="25%"><a href="HE_SQL2_PRAVA.htm">Práva a subjekty práva v SQL</a></td>
+<td width="25%" align="right">&nbsp;</td>
+<td width="20" align="center">&nbsp;</td>
+</tr></table>
+
+
+
+
+
+<h1><a name="he_sql2_privils"></a>Zjišťování práv z jazyka SQL</h1>
+
+<p>Pro zjištění <a href="HE_SQL2_PRAVA.htm">práv</a> zadaného <a href="../xml/html/userinfo.html">subjektu práva</a> k zadané tabulce nebo záznamům tabulky se využívá pětice predikátů <code>has_select_privil</code> (pro právo číst), <code>has_update_privil</code> (pro právo přepisovat), <code>has_delete_privil</code> (pro právo mazat záznamy), <code>has_insert_privil</code> (pro právo vkládat záznamy) a <code>has_grant_privil</code> (pro právo poskytovat své právo dalším subjektům).</p>
+
+<p>Právo číst a právo přepisovat se zjišťuje pro každý sloupec zvlášť, ostatní práva pro celou tabulku najednou.</p>
+
+<p>Predikáty se užívají jako součást <a href="HE_SQL2_DOTAZOVYVYRAZ.htm">dotazového výrazu</a> SELECT: výběr tabulky ve FROM určuje, pro jakou tabulku se práva zjišťují, podmínka ve WHERE stanoví, u jakých záznamů se práva zjišťují (má-li tabulka povolena záznamová práva).</p>
+
+<p>Predikáty mají následující formát:</p>
+
+<pre><code>privil_predikáty ::= predikáty_pro_sloupce | predikáty pro tabulku
+predikáty_pro_sloupce ::= { has_select_privil | has_update_privil } 
+	( sloupec, druh [, jméno_subjektu, kategorie_subjektu ] )
+predikáty_pro_tabulku ::= { has_delete_privil | has_insert_privil | has_grant_privil } 
+	( druh [, jméno_subjektu, kategorie_subjektu ] )
+druh ::= {0 | 1 | 2}
+kategorie_subjektu ::= { CATEG_USER | CATEG_GROUP | CATEG_ROLE }</code></pre>
+
+<p><b>Popis</b></p>
+
+<p>U <i>predikátů_pro_sloupce</i> se musí určit vždy jeden <i>sloupec</i> uvedený v části SELECT dotazového výrazu, pro nějž se právo zjišťuje. U ostatních predikátů (delete, insert a grant) se neuvádí, protože tato práva se definují pro tabulku jako celek.</p>
+
+<p>Podle hodnoty <i>druh</i> se rozlišuje, jaké právo se zjišťuje:</p>
+
+<table border=1 cols=2>
+
+<tr valign="top">
+<td width=11%><b>druh</b></td>
+<td width=89%><b>význam</b></td>
+</tr>
+
+<tr valign="top">
+<td width=11%>0</td>
+<td width=89%>práva přidělená záznamu (nejde pro insert a pro tabulky bez záznamových práv)</td>
+</tr>
+
+<tr valign="top">
+<td width=11%>1</td>
+<td width=89%>práva přidělená tabulce</td>
+</tr>
+
+<tr valign="top">
+<td width=11%>2</td>
+<td width=89%>efektivní práva</td>
+</tr>
+</table><br>
+
+<p>U predikátů je možné uvést dvojici parametrů <i>jméno_subjektu</i> a <i>kategorie_subjektu</i>. Je-li tato dvojice uvedena, zjišťuje se právo tohoto subjektu, není-li uvedena, uvažuje se přihlášený uživatel kladoucí dotaz. Při vyhodnocování se nekontroluje existence zadaného subjektu práva - neexistující subjekt práva nemá přidělena. </p>
+
+<p>Efektivní práva v&nbsp;sobě zahrnují práva získaná náležením uživatele do skupin a obsazením do rolí. Nejsou zde zahrnuta zvláštní práva, která uživatel má při <a href="../xml/html/admin_mode.html">provádění procedur a vyhodnocování dotazů</a>, pro něž je nastaven administrátorský režim provozování.</p>
+
+<p><b>Použití:</b></p>
+
+<p>vždy jako součást dotazového výrazu SELECT:
+
+<ul>
+	<li>v klauzuli SELECT pro zjištění práv:</li>
+</ul>
+
+<pre><code>SELECT has_select_privil(a,2,'anonymous',CATEG_USER, has_select_privil(b,2,'anonymous',CATEG_USER)
+FROM PrivTab</code></pre>
+
+<p>Vypsat práva ke čtení anonymního uživatele ke dvěma sloupcům tabulky</p>
+
+<pre><code>SELECT has_delete_privil(2,'everybody', CATEG_GROUP) INTO lze_smazat
+FROM PrivTab
+WHERE a=1;</code></pre>
+
+<p>Předat do proměnné typu BIT příznak, má-li každý právo smazat vybraný záznam</p>
+
+<ul>
+	<li>v podmínce WHERE</li>
+</ul>
+
+<pre><code>SELECT *
+FROM PrivTab
+WHERE has_select_privil(b,2,'junior_user',CATEG_ROLE)</code></pre>
+
+<p>Vypsat jen ty záznamy, u kterých má role JUNIOR_USER právo číst sloupec B</p>
+
+<p><b>Editace práv</b></p>
+
+<p>K nastavení práv (přidání nebo odebrání) pro zadaný subjekt k tabulce nebo k záznamům tabulky se používá dvojice SQL příkazů <a href="HE_SQL2_GRANT.htm"><code>GRANT</code></a> a <a href="HE_SQL2_REVOKE.htm"><code>REVOKE</code></a>.</p>
+
+<p><b>Viz</b></p>
+
+<ul class='viz'>
+ <li><a href="../xml/html/sqlrights.html">Kontrola práv při provádění SQL příkazů</a> </li>
+</ul>
+
+
+
+<table class="navigace" border="0" width="100%"  bgcolor="#FFFFBF"><tr> <td
+width="20" align="center"><img class="floatno" src="../images/prev.gif"
+width="15" height="13" alt="&lt;&shy;" title="Předcházející téma"
+border="0"></td><td width="25%"><a
+href="HE_SQL2_PRAVA.htm">Práva a subjekty práva v SQL</a></td> <td width="25%"
+align="right"><img class="floatno" src="../images/up.gif" width="13"
+height="15" alt="Nahoru" title="O jednu úroveň výš" border="0"
+align="middle"></td><td width="25%"><a href="HE_SQL2_PRAVA.htm">Práva a subjekty práva v SQL</a></td>
+<td width="25%" align="right">&nbsp;</td>
+<td width="20" align="center">&nbsp;</td>
+</tr></table>
+
+</body>
+</html>

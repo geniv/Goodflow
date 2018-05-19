@@ -1,0 +1,60 @@
+<!doctype html public "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=Windows-1250">
+<title>Funkce User_in_group</title>
+<link rel='stylesheet' style='text/css' href='../function.css'>
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000">
+
+
+
+<h2 class=function>User_in_group</h2>
+<img src='../images/cpp.gif' width='44' height='16' border='0' alt='c/c++' align='middle' hspace='2'><img src='../images/pascal.gif' width='44' height='16' border='0' alt='pascal' align='middle' hspace='2'>
+
+
+<br><br>
+<div class='typ'>BOOL <b>User_in_group</b>(tobjnum user, tobjnum group, BOOL * state)<br>
+function <b>User_in_group</b>(user, group : tobjnum; var state : Boolean) : Boolean;
+</div>
+
+
+<p><b>Parametry</b></p>
+
+<table border=1 cols=2 frame=box rules=all width=402>
+
+<tr valign="top">
+<td width=22%><i>user</i> </td>
+<td width=78%>číslo uživatele</td>
+</tr>
+
+<tr valign="top">
+<td width=22%><i>group</i> </td>
+<td width=78%>číslo skupiny</td>
+</tr>
+
+<tr valign="top">
+<td width=22%><i>state</i> </td>
+<td width=78%>výstupní parametr: stav náležení uživatele do skupiny</td>
+</tr>
+</table><br>
+
+<p><b>Popis </b></p>
+
+<p>Funkce je od verze 5.0 zastaralá, je nahrazena obecnější funkcí <b><code>GetSet_group_role</code></b>.</p>
+
+<p>Funkce <b><code>User_in_group</code></b> zjišťuje, zda uživatel  <i>user</i> je členem skupiny  <i>group</i>. Do parametru  <i>state</i> zapíše TRUE, pokud je, FALSE, pokud není.</p>
+
+<p>Číslo uživatele a číslo skupiny vrátí funkce <b><code>Find_object</code></b> s parametrem <code>CATEG_USER </code>resp <code>CATEG_GROUP</code>.</p>
+
+<p><b>Hodnota funkce </b></p>
+
+<p>Funkce vrací FALSE při úspěchu, TRUE při chybě.</p>
+
+<p><b>Viz</b></p>
+
+<ul class='viz'><li><a href="HE_F_USERTOGROUP.htm">User_to_group</a> <li><a href="HE_F_INSERTOBJECT.htm">Insert_object</a> <li><a href="HE_F_FINDOBJECT.htm">Find_object</a> <li><a href="HE_F_GETSETGROUPROLE.htm">GetSet_group_role</a></ul>
+
+</body>
+</html>

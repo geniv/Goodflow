@@ -1,0 +1,103 @@
+<!doctype html public "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=Windows-1250">
+<title>Funkce Enum_attributes_ex</title>
+<link rel='stylesheet' style='text/css' href='../function.css'>
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000">
+
+
+
+<h2 class=function>Enum_attributes_ex</h2>
+<img src='../images/cpp.gif' width='44' height='16' border='0' alt='c/c++' align='middle' hspace='2'><img src='../images/pascal.gif' width='44' height='16' border='0' alt='pascal' align='middle' hspace='2'>
+
+
+<br><br>
+<div class='typ'>BOOL <b>[cd_]Enum_attributes_ex</b>([cdp_t cdp], tcurstab curs,  enum_attr_ex * callback, void * param);<br>
+function <b>[cd_]Enum_attributes_ex</b>([cdp : cdp_t]; curs : tcurstab, callback : enum_attr_ex;  user_data : Pointer) : Boolean;
+</div>
+
+
+<p><b>Parametry</b></p>
+
+<table border=1 cols=2 frame=box rules=all width=478>
+
+<tr valign="top">
+<td width=18%><i>curs </i></td>
+<td width=82%>číslo tabulky nebo otevřeného kurzoru</td>
+</tr>
+
+<tr valign="top">
+<td width=18%><i>callback </i></td>
+<td width=82%>funkce, která bude zavolána pro každý sloupec </td>
+</tr>
+
+<tr valign="top">
+<td width=18%><i>user_data</i></td>
+<td width=82%>parametr předaný <i>callbacku</i></td>
+</tr>
+
+<tr valign="top">
+<td width=18%>[<i>cdp </i></td>
+<td width=82%><a href="HE_EXTCD.htm">kontextová proměnná</a> klienta]  </td>
+</tr>
+</table><br>
+
+<p><b>Od verze</b></p>
+
+<p>8.0</p>
+
+<p><b>Popis </b></p>
+
+<p>Funkce <b><code>Enum_attributes_ex</code></b> projde po řadě všechny sloupce v tabulce nebo kurzoru <i>curs</i> a pro každý z nich zavolá funkci <i>callback</i>. Procházení začíná sloupcem s číslem 1 (včetně případných skrytých sloupců). Jako parametr <i>callback</i> je nutno zavolat instanci funkce typu <i>enum_attr_ex</i> definovaného takto:</p>
+
+<pre><code>typedef BOOL (_stdcall enum_attr_ex)(char * attrname, uns8 attrtype, uns8 attrmult, t_specif attrspecif, void * user_data);
+type enum_attr = enum_attr_ex(attrname : PChar;  attrtype, attrmult : uns8;  attrspecif : t_specif;  user_data : Pointer) : Boolean;  stdcall;</code></pre>
+
+<p>Funkce <i>callback</i> musí mít rozhraní _<i>stdcall</i>.</p>
+
+<p>Parametry, které jsou předány funkci <i>callback</i>, jsou významově shodné se stejně pojmenovanými parametry funkce <b><code>Attribute_info_ex</code></b>. Parametr <i>user_data</i> předaný do funkce <b><code>Enum_attributes_ex</code></b> bude beze změny předán do funkce <i>callback.</i> Pokud funkce <i>callback</i> vrátí hodnotu FALSE, procházení sloupců se ukončí a tato funkce již nebude více volána. Nechcete-li přerušit procházení sloupců, musí funkce <i>callback</i> vracet TRUE.</p>
+
+<p>Zjistit názvy a typy sloupců v tabulce lze také systémovým dotazem <a href="../xml/html/_iv_table_columns.html"><code>_IV_TABLE_COLUMNS</code></a>.</p>
+
+<p><b>Hodnota funkce </b></p>
+
+<p>Funkce <b><code>Enum_attributes_ex</code></b> vrátí TRUE, pokud tabulka nebo kurzor <i>curs</i> byl nalezen a funkce <i>callback</i> zavolána alespoň jednou. Funkce <b><code>Enum_attributes_ex</code></b> vrátí FALSE, pokud tabulka nebo kurzor zadaná parametrem <i>curs</i> neexistuje.</p>
+
+<p><b>Příklad</b></p>
+
+<p>vypsání jmen sloupců záznamu v konzolovém klientovi pro Linux:</p>
+
+<pre><code>...
+else if (((int)rec_all &gt; 0) &amp;&amp; (disp_mode == 1))
+  {
+    if (disp_attrname)
+    {
+      <b>cd_Enum_attributes_ex</b>(cdp, cursor, Disp_Attrname1, NULL);
+      printf("\n");
+...</code></pre>
+
+<p>funkce, která se volá pro každý sloupec kurzoru:</p>
+
+<pre><code>int Disp_Attrname1( char * attrname, uns8 attrtype, uns8 attrmult, t_specif attrspecif, void * unused)
+{
+  attr_count++;
+  if (strncmp(attrname,"_W5_",4))
+  {
+    if (disp_attrname)
+    {
+      printf("%s ", attrname);
+    }
+    printf(", ");
+  }
+  return TRUE;
+}</code></pre>
+
+<p><b>Viz</b></p>
+
+<ul class='viz'><li><a href="HE_F_ATTRIBUTEINFOEX.htm">Attribute_info_ex</a> <li><a href="HE_F_ENUMATTRIBUTES.htm">Enum_attributes</a></ul>
+
+</body>
+</html>

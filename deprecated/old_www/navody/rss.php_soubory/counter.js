@@ -1,0 +1,1 @@
+document.write ('<img src="http://toplist.cz/dot.asp?id=123500&amp;http='+escape(document.referrer)+'&amp;wi='+escape(window.screen.width)+'&he='+escape(window.screen.height)+'&amp;cd='+escape(window.screen.colorDepth)+'&amp;t='+escape(document.title)+'" width="1" height="1" border="0" />');

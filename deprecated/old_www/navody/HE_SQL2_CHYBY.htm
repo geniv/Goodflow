@@ -1,0 +1,170 @@
+<!doctype html public "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=Windows-1250">
+<title>Chyby a jejich ošetřování v SQL</title>
+<link rel='stylesheet' style='text/css' href='../function.css'>
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000">
+
+<h1><a name="he_sql2_chyby"></a>Chyby a jejich ošetřování v SQL</h1>
+
+<p>Norma SQL předepisuje, že chybové stavy a varování mají být označovány pomocí tzv. <i>sqlstates</i>, což jsou řetězce pěti znaků složené z&nbsp;číslic a velkých písmen latinské abecedy. Norma pro řadu chyb předepisuje, který <i>sqlstate</i> má při jejich výskytu nastat. Mimo to ponechává prostor pro <i>sqlstates</i> definované implementací.</p>
+
+<p>Ve 602SQL jsou chyby označovány číslem. Některé z&nbsp;těchto chyb odpovídají některému <i>sqlstate</i>, jiné jsou specifické po 602SQL. Vzhledem k&nbsp;tomu, že pro většinu syntaktických chyb a všechny chyby z&nbsp;nedostatku práv existuje jediný <i>sqlstate</i>, poskytují čísla chyb 602SQL detailnější rozlišení.</p>
+
+<p>Na <i>sqlstates </i>se v&nbsp;příkazech SQL odvolávají deklarace výjimek a handlerů. Chcete-li zachytit a zpracovat určitou chybu, musíte znát její <i>sqlstate</i>. Níže uvedená tabulka specifikuje <i>sqlstates</i> odpovídající jeden k&nbsp;jedné chybám 602SQL. Ostatní (implementací definované) chyby se vyjadřují pomocí <i>sqlstate</i> ve tvaru ”W<i>abcd</i>”, kde <i>abcd</i> je čtyřmístné číslo chyby, doplněné v&nbsp;případě potřeby zleva nulami. Například chybě 171(deadlock) odpovídá <i>sqlstate</i> W0171. Pomocí těchto výjimek NELZE odchytit i chyby při kompilaci vloženého SQL příkazu volaného pomocí <a href="HE_F_SQLEXECUTE.htm"><code>SQL_execute</code></a>.</p>
+
+<p>Od verze 7 jsou v jazyce zavedeny <a href="../xml/html/sysvars.html">systémové proměnné</a>   <code>sqlstate</code> typu CHAR pro zjištění hodnoty sqlstate a <code>sqlcode</code> typu INT ve významu čísla chyby 602SQL. Lze je využít v handlerech pro podrobnější ošetření nebo logování chybových stavů.</p>
+
+<p>Podrobnější rozdělení všech chyb do kategorií podle možnosti reakce na jejich výskyt lze nalézt <a href="../xml/html/errorexceptions.html">zde</a>.</p>
+
+<table cols=3 >
+
+<tr valign="top">
+<td width=63%><b>Název<i> sqlstate</i></b></td>
+<td width=18%><b>číslo chyby ve 602</b><b>SQL</b></td>
+<td width=19%><b><i>sqlstate</i></b></td>
+</tr>
+
+<tr valign="top">
+<td width=63%>Kurzor nelze nastavit na neexistující záznam</td>
+<td width=18%>139</td>
+<td width=19%>02000</td>
+</tr>
+
+<tr valign="top">
+<td width=63%>Porušeno omezení tabulky (NOT NULL nebo UNIQUE nebo CHECK nebo referenční integrita)</td>
+<td width=18%>160,172,174,
+<p>175</p>
+</td>
+<td width=19%>40002</td>
+</tr>
+
+<tr valign="top">
+<td width=63%>Neplatný stav kurzoru</td>
+<td width=18%>196</td>
+<td width=19%>24000</td>
+</tr>
+
+<tr valign="top">
+<td width=63%>Neplatné označení savepointu</td>
+<td width=18%>197</td>
+<td width=19%>3B001</td>
+</tr>
+
+<tr valign="top">
+<td width=63%>Překročen limit na počet savepointů</td>
+<td width=18%>198</td>
+<td width=19%>3B002</td>
+</tr>
+
+<tr valign="top">
+<td width=63%>Transakce je již zahájena</td>
+<td width=18%>199</td>
+<td width=19%>25001</td>
+</tr>
+
+<tr valign="top">
+<td width=63%>Nedovolené ukončení transakce v&nbsp;atomickém příkazu</td>
+<td width=18%>200</td>
+<td width=19%>2D000</td>
+</tr>
+
+<tr valign="top">
+<td width=63%>Tato transakce nesmí modifikovat data</td>
+<td width=18%>201</td>
+<td width=19%>25006</td>
+</tr>
+
+<tr valign="top">
+<td width=63%>Číselná hodnota mimo povolený rozsah</td>
+<td width=18%>202</td>
+<td width=19%>22003</td>
+</tr>
+
+<tr valign="top">
+<td width=63%>Nepřípustný znak znemožňuje konverzi typu</td>
+<td width=18%>203</td>
+<td width=19%>22018</td>
+</tr>
+
+<tr valign="top">
+<td width=63%>Řetězec znaků je příliš dlouhý</td>
+<td width=18%>204</td>
+<td width=19%>22001</td>
+</tr>
+
+<tr valign="top">
+<td width=63%>Dělení nulou</td>
+<td width=18%>205</td>
+<td width=19%>22012</td>
+</tr>
+
+<tr valign="top">
+<td width=63%>Odpověď obsahuje jiný počet záznamů než jeden</td>
+<td width=18%>206</td>
+<td width=19%>21000</td>
+</tr>
+
+<tr valign="top">
+<td width=63%>Chyba v&nbsp;určení znaku ESCAPE</td>
+<td width=18%>207</td>
+<td width=19%>22019</td>
+</tr>
+
+<tr valign="top">
+<td width=63%>Příkaz CASE neobsahuje vhodnou větev</td>
+<td width=18%>208</td>
+<td width=19%>20000</td>
+</tr>
+
+<tr valign="top">
+<td width=63%>Uživatelem definovaná výjimka není ošetřena</td>
+<td width=18%>209</td>
+<td width=19%>45000</td>
+</tr>
+
+<tr valign="top">
+<td width=63%>Příkaz RESIGNAL použit mimo ošetření výjimky</td>
+<td width=18%>210</td>
+<td width=19%>0K000</td>
+</tr>
+
+<tr valign="top">
+<td width=63%>Externí rutina nebo knihovna nebyla nalezena</td>
+<td width=18%>211</td>
+<td width=19%>38001</td>
+</tr>
+
+<tr valign="top">
+<td width=63%>Ve funkci nebyl proveden příkaz RETURN</td>
+<td width=18%>212</td>
+<td width=19%>2F001</td>
+</tr>
+
+<tr valign="top">
+<td width=63%>Chyba v akci spuštěné triggerem</td>
+<td width=18%>214</td>
+<td width=19%>09000</td>
+</tr>
+
+<tr valign="top">
+<td width=63%>Kurzor tohoto jména neexistuje</td>
+<td width=18%>217</td>
+<td width=19%>34000</td>
+</tr>
+</table><br>
+
+<p><b>Příklad použití proměnné sqlstate:</b></p>
+
+<p>Obecný handler pro všechny chyby</p>
+
+<pre><code>DECLARE CONTINUE HANDLER FOR SQLEXCEPTION
+  BEGIN
+    CALL log_write("Procedura ... - "||<b>sqlstate</b>||' '||Int2str(<b>sqlcode</b>));
+  END;</code></pre>
+
+</body>
+</html>

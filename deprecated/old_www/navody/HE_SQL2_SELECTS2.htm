@@ -1,0 +1,116 @@
+<!doctype html public "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=Windows-1250">
+<title>Sbírka dotazů str. 2</title>
+<link rel='stylesheet' style='text/css' href='../function.css'>
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr>
+	<td style="background-image: url(../images/bghead.jpg);
+		background-position: right;
+		background-repeat: no-repeat;">
+	<table width="100%" border="0" cellpadding="0" cellspacing="0"
+		style="background-image:none">
+	<tr>
+		<td style="background-image:none" height="46"
+			width="15%"><img src="../images/title-cz.gif"
+			width="255" height="33"
+			alt="602SQL-Úplná dokumentace"
+			title="602SQL - Úplná dokumentace"
+			border="0"></td>
+		<td width="33%" align="right"><a href="../xml/html/top.html"><img class="floatno"
+			src="../images/index.gif"
+			width="15" height="16"
+			alt="Index" title="Zpět na obsah"
+			border="0" vspace="2"></a> &nbsp;
+			 </td>
+	</tr>
+	</table>
+	</td>
+</tr>
+</table><table class="navigace" border="0" width="100%"  bgcolor="#FFFFBF">
+		  <tr>
+					 <td width="20" align="center">&nbsp;</td>
+					 <td width="25%">&nbsp;</td>
+					 <td width="25%"
+align="right"><img class="floatno" src="../images/up.gif" width="13"
+height="15" alt="Nahoru" title="O jednu úroveň výš" border="0"
+align="middle"></td><td width="25%"><a href="HE_SQL2_SELECTS.htm">Sbírka příkladů SQL dotazů</a></td>
+<td width="25%" align="right"><a
+href="HE_SQL2_SELECTS3.htm">Strana 3 (JOIN, COUNT, GROUP BY)</a></td><td width="20"
+align="center"><img class="floatno" src="../images/next.gif" width="15"
+height="13" alt="&shy;&gt;" title="Následující téma" border="0"></td>
+</tr></table>
+
+
+
+<h1><a name="he_sql2_selects2"></a>Sbírka dotazů – str. 2</h1>
+
+<p><b>Příklad 1</b></p>
+
+<p><b>Zadání:</b> Vyberte všechny platné záznamy z&nbsp;tabulky FIRMY.</p>
+
+<p><b>SQL:</b> </p>
+
+<pre><code>  SELECT *
+  FROM Firmy</code></pre>
+
+<p><b>Příklad 2</b></p>
+
+<p><b>Zadání:</b> Vypište názvy firem (z tabulky FIRMY) a setřiďte je podle názvu.</p>
+
+<p><b>SQL:</b> </p>
+
+<pre><code>  SELECT Firmy.nazev
+  FROM Firmy
+  ORDER BY Firmy.nazev
+</code></pre>
+
+<p><b>Poznámky:</b> </p>
+
+<p><b>a)</b> Povšimněte si, je možné zapisovat názvy sloupců ve tvaru <i>Jméno_tabulky.Jméno_sloupce</i>. Je to z&nbsp;toho důvodu, že při použití více tabulek se mohou vyskytnout dva sloupce stejného jména. V&nbsp;našem případě je možné dotaz zapsat i jako:</p>
+
+<pre><code>  SELECT nazev
+  FROM Firmy
+  ORDER BY nazev</code></pre>
+
+<p><b>b) </b>v části ORDER BY se mohou použít jen sloupce použité v části SELECT</p>
+
+<p><b>Příklad 3</b></p>
+
+<p><b>Zadání:</b> Vypište názvy firem z&nbsp;ČR a jméno jejich odpovědného pracovníka.</p>
+
+<p><b>SQL:</b> </p>
+
+<pre><code>  SELECT Firmy.nazev, Firmy.pracovnik
+  FROM Firmy
+  WHERE (Firmy.stat='CR')</code></pre>
+
+<p><b>Poznámky: </b></p>
+
+<p><b>a)</b> Výčet sloupců za slovem SELECT se odděluje čárkami.</p>
+
+<p><b>b)</b> Podmínka v&nbsp;části WHERE se v&nbsp;textové podobě dává do kulatých závorek. V&nbsp;takto jednoduchém výrazu to není nutné, ve složitějších případech mohou chybějící závorky způsobit potíže. </p>
+
+<p><b>c)</b> V&nbsp;podmínce WHERE se mohou vyskytovat i sloupce nepoužité v&nbsp;části SELECT.</p>
+
+
+
+<table class="navigace" border="0" width="100%"  bgcolor="#FFFFBF">
+		  <tr>
+					 <td width="20" align="center">&nbsp;</td>
+					 <td width="25%">&nbsp;</td>
+					 <td width="25%"
+align="right"><img class="floatno" src="../images/up.gif" width="13"
+height="15" alt="Nahoru" title="O jednu úroveň výš" border="0"
+align="middle"></td><td width="25%"><a href="HE_SQL2_SELECTS.htm">Sbírka příkladů SQL dotazů</a></td>
+<td width="25%" align="right"><a
+href="HE_SQL2_SELECTS3.htm">Strana 3 (JOIN, COUNT, GROUP BY)</a></td><td width="20"
+align="center"><img class="floatno" src="../images/next.gif" width="15"
+height="13" alt="&shy;&gt;" title="Následující téma" border="0"></td>
+</tr></table>
+
+</body>
+</html>

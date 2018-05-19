@@ -1,0 +1,64 @@
+<!doctype html public "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=Windows-1250">
+<title>Funkce link_kernel</title>
+<link rel='stylesheet' style='text/css' href='../function.css'>
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000">
+
+
+
+<h2 class=function>link_kernel</h2>
+<img src='../images/cpp.gif' width='44' height='16' border='0' alt='c/c++' align='middle' hspace='2'><img src='../images/pascal.gif' width='44' height='16' border='0' alt='pascal' align='middle' hspace='2'>
+
+
+<br><br>
+<div class='typ'>int <b>link_kernel</b>(const char * path; int display);<br>
+function <b>link_kernel</b>(path : PChar;  display : integer) : integer;
+</div>
+
+
+<p><b>Parametry</b></p>
+
+<table border=1 cols=2 frame=box rules=all width=449>
+
+<tr valign="top">
+<td width=19%><i>path</i></td>
+<td width=81%>jméno databáze nebo serveru, k&nbsp;němuž se klient připojuje </td>
+</tr>
+
+<tr valign="top">
+<td width=19%><i>display</i></td>
+<td width=81%>zobrazení okna serveru </td>
+</tr>
+</table><br>
+
+<p><b>Popis </b></p>
+
+<p>Tato funkce naváže spojení s&nbsp;databázovým serverem. Volba serveru závisí na parametru <i>path.</i> Toto jméno databáze nebo serveru, k&nbsp;němuž se klient připojuje, musí být registrováno v&nbsp;registrační databázi.</p>
+
+<p>Funkce <b><code>link_kernel</code></b> se musí se volat předtím, než se pokusíte poprvé obrátit na server.</p>
+
+<p>Parametr <i>display</i> se uplatní pouze tehdy, pokud se v důsledku provedení této funkce spouští lokální server. Zajistí se, že tento parametr server předá svému hlavnímu oknu při prvním volání Win API funkce <b><code>ShowWindow</code></b>. Doporučujeme použít hodnotu SW_MINIMIZE definovanou v hlavičkovém souboru windows.h .</p>
+
+<p>Je-li parametr <i>display</i> roven -1,  funkce nespustí lokální server (server buď již musí na lokálním počítači běžet nebo se hledá v síti).</p>
+
+<p>Od verze  7.0 je možno dvojici funkcí <code>link_kernel</code> a <code>interf_init</code> nahradit jedinou funkci <a href="../xml/html/f_cd_connect.html"><code>connect</code></a>.</p>
+
+<p>Použití - viz <a href="../xml/html/extstartstop.html">kostra aplikace</a> v externím jazyce</p>
+
+<p><b>Hodnota funkce </b></p>
+
+<p>Funkce vrací některou z <a href="../xml/html/kse_errors.html">konstant KSE_...</a>. Konstanta KSE_OK má nulovou hodnotu a znamená provedení funkce bez chyby. Ostatní konstanty označují různé druhy chyb.</p>
+
+<p><b>Viz</b></p>
+
+<ul class='viz'>
+ <li><a href="HE_F_CDPINIT.htm">cdp_init</a> </li>
+ <li><a href="HE_F_INTERFINIT.htm">interf_init</a></li>
+</ul>
+
+</body>
+</html>

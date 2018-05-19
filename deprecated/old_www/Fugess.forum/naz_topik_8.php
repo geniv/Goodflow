@@ -1,0 +1,1 @@
+--TPK--SMD blikaè øízený procesorem ATtiny12--TPK--Fugess--TPK--64516415111111454611251150211--TPK--0--TPK--true--TPK--2--TPK--42--TPK--SMD Blikaè - pájení horkým vzduchem--TPK--Fugess--TPK--64516415111111454611251150211--TPK--0--TPK--true--TPK--3--TPK--33--TPK--Oboustrannì bìžící svìtlo--TPK--Fugess--TPK--64516415111111454611251150211--TPK--0--TPK--true--TPK--0--TPK--28

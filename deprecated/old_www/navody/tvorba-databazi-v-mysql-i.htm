@@ -1,0 +1,2085 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0//EN" "http://www.w3.org/TR/REC-html40/strict.dtd">
+<html lang="cs"><head>
+
+
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>Tvorba databází v MySQL - I</title>
+    
+    <link rel="stylesheet" type="text/css" href="tvorba-databazi-v-mysql-i_soubory/styles.css"><!--[if IE]>
+       <link href="/msie.css" type="text/css" rel="stylesheet">
+    <![endif]--><!--[if IE 7]>
+       <link href="/msie7.css" type="text/css" rel="stylesheet">
+    <![endif]--><!--[if lt IE 7]>
+       <link href="/msie6.css" type="text/css" rel="stylesheet">
+    <![endif]-->
+    
+    
+    
+    <link rel="icon" href="http://www.abclinuxu.cz/images/site2/favicon.png" type="image/png">
+        <link rel="alternate" title="RSS zdroj aktuální sekce" href="http://www.abclinuxu.cz/auto/abc.rss" type="application/rss+xml">
+    <meta name="keywords" content="linux,abclinuxu,hardware,software,ovladače,diskuse,nápověda,rada,pomoc" lang="cs">
+    <meta name="keywords" content="linux,hardware,software,drivers,forum,help,faq,advice" lang="en">
+    <script type="text/javascript">
+    	Page = new Object();
+        	Page.relationID = 19642;
+    </script>
+    <script type="text/javascript" src="tvorba-databazi-v-mysql-i_soubory/impact.js"></script>
+    <script type="text/javascript" src="tvorba-databazi-v-mysql-i_soubory/scripts.js"></script>
+    <script src="tvorba-databazi-v-mysql-i_soubory/prototype.js" type="text/javascript"></script></head><body id="www-abclinuxu-cz">
+
+<!-- (C)2005 Gemius SA - gemiusAudience / Ostatni -->
+<script type="text/javascript"><!--
+
+gemius_identifier = new String('nAibwgxfLImzY0xcXtikzGaDTM3ZI5CjEvS.n4fTUsn.g7');
+
+gemius_href=new String(document.location);
+if (document.referrer) { gemius_ref = new String(document.referrer); } else { gemius_ref = ""; }
+if(typeof(Error)!='undefined') eval("try { if (typeof(top.document.referrer)=='string') { gemius_ref = top.document.referrer } } catch(gemius_ex) {}");
+iname = new String('id='+gemius_identifier+';ref='+escape(gemius_ref.substring(0,299))+';href='+escape(gemius_href.substring(0,299))+';');
+document.write('<div style="position:absolute; left:-500px; top:-500px;"><iframe src="http://spir.hit.gemius.pl/gemiusaudience.html" name="'+iname+'" width="1" height="1" frameborder="0" scrolling="no"><\/iframe><\/div>');
+//-->
+</script><div style="position: absolute; left: -500px; top: -500px;"><iframe src="tvorba-databazi-v-mysql-i_soubory/gemiusaudience.htm" name="id=nAibwgxfLImzY0xcXtikzGaDTM3ZI5CjEvS.n4fTUsn.g7;ref=http%3A//www.abclinuxu.cz/clanky/navody/tvorba-databazi-v-mysql-iv;href=http%3A//www.abclinuxu.cz/clanky/navody/tvorba-databazi-v-mysql-i;" frameborder="0" height="1" scrolling="no" width="1"></iframe></div>
+<!-- Impact AS - kód pro stránku 20 (Clanek) -->
+<script type="text/javascript">
+	//<![CDATA[
+	IM_frame_stranka = 20;
+	document.write('<img src="http://sf.impact.as/if/imcount.php?pg='+IM_frame_stranka+'&ref='+escape(this.location.href)+'&rnd='+Math.random()+'" width="1" height="1" border="0" alt="" style="display: none;" />');
+	//]]>
+</script><img src="tvorba-databazi-v-mysql-i_soubory/imcount.png" alt="" style="display: none;" border="0" height="1" width="1">
+<div class="sflista">
+     <div class="ri">
+    	<a href="http://www.stickfish.cz/" title="Guarantee business interface.">
+	<img src="tvorba-databazi-v-mysql-i_soubory/sf.gif" alt="Guarantee business interface."> stickfish.cz</a>
+     </div>
+     <div class="le">
+        <a href="http://www.abclinuxu.cz/" title="Linux na stříbrném podnose.">
+	<img src="tvorba-databazi-v-mysql-i_soubory/ab.gif" alt="abclinuxu.cz"> abclinuxu.cz</a>
+        <a href="http://www.itbiz.cz/" title="IT business.">
+    	<img src="tvorba-databazi-v-mysql-i_soubory/ib.gif" alt="itbiz.cz"> ITBiz</a>
+        <a href="http://www.abchost.cz/" title="Dedikované servery za optimální ceny.">
+    	<img src="tvorba-databazi-v-mysql-i_soubory/ah.gif" alt="abchost.cz"> AbcHost</a>
+        <a href="http://www.64bit.cz/" title="Servery a pracovní stanice Sun.">
+	<img src="tvorba-databazi-v-mysql-i_soubory/64.gif" alt="64bit.cz"> 64bit</a>
+        <a href="http://www.abcprace.cz/" title="Spojujeme lidi s prací v IT!">
+    	<img src="tvorba-databazi-v-mysql-i_soubory/pr.gif" alt="abcprace.cz"> AbcPráce</a>
+        <a href="http://www.unixshop.cz/" title="RISC bez rizika!">
+    	<img src="tvorba-databazi-v-mysql-i_soubory/ux.gif" alt="unixshop.cz"> unixshop</a>
+     </div>
+    <div class="cistic"></div>
+</div>
+<!-- BBmedia one2many Pozice: Abclinuxu.cz(681) / zbytek webu(2) / leaderboard 750x_(2) / PR clánek(6) -->
+<div id="bmone2n-681.2.2.6">
+<noscript><div style='display:inline'><a
+href='http://adarbo2.bbmedia.cz/please/redirect/681/2/2/6/'><img
+src='http://adarbo2.bbmedia.cz/please/showit/681/2/2/6/?typkodu=img'
+width='0' height='0' style='border-width:0' alt='' /></a></div></noscript>
+</div>
+<div id="zh-kont">
+  <div id="zh-text" class="zh-box">
+<div id="zh-tema">
+<img class="zh-iko" src="tvorba-databazi-v-mysql-i_soubory/64.gif" alt="64bit.cz logo">
+<a href="http://www.64bit.cz/sun-fire-x2100-m2-s-dual-core-opteronem-1210-1-8-ghz/43/product.html">Sun Fire X2100 M2 s dual-core Opteronem 1210 1,8 GHz</a> <br>
+<a href="http://www.64bit.cz/sun-fire-x2100-m2-s-dual-core-opteronem-1210-1-8-ghz/43/product.html">
+<img src="tvorba-databazi-v-mysql-i_soubory/detailni-pohled-na-server-sun-fire-x2100-m2.txt" alt="fotka sun fire" border="0" height="17" width="160"></a>
+jen 18&nbsp;475&nbsp;Kč.
+</div><div id="zh-ad">
+     <img class="zh-iko" src="tvorba-databazi-v-mysql-i_soubory/ab.gif" alt="abclinuxu.cz logo">
+        Kvízy: <b><a href="http://www.abclinuxu.cz/hry/kvizy/znate-gentoo">Znáte Gentoo?</a></b>, <a href="http://www.abclinuxu.cz/hry/kvizy/co-bylo-driv">Co bylo dřív?</a>, <a href="http://www.abclinuxu.cz/hry/kvizy/vyvojari-jadra">Vývojáři jádra</a>, <a href="http://www.abclinuxu.cz/hry/kvizy/doplnte">Doplňte...</a>, <a href="http://www.abclinuxu.cz/hry/kvizy/straslive-html-tagy">Strašlivé HTML tagy</a>.
+</div><!-- StartCode: adarbo2.bbmedia.cz 3.1 Abclinuxu.cz(681) / zbytek webu(2) / hypertext horni - Stickfish(10) / PR article(6) -->
+<script language="JavaScript" type="text/javascript" charset="windows-1250">
+/* <![CDATA[ */
+var bbs=screen,bbn=navigator,bbh;bbh='&ubl='+bbn.browserLanguage+'&ucc='+bbn.cpuClass+'&ucd='+bbs.colorDepth+'&uce='+bbn.cookieEnabled+'&udx='+bbs.deviceXDPI+'&udy='+bbs.deviceYDPI+'&usl='+bbn.systemLanguage+'&uje='+bbn.javaEnabled()+'&uah='+bbs.availHeight+'&uaw='+bbs.availWidth+'&ubd='+bbs.bufferDepth+'&uhe='+bbs.height+'&ulx='+bbs.logicalXDPI+'&uly='+bbs.logicalYDPI+'&use='+bbs.fontSmoothingEnabled+'&uto='+(new Date()).getTimezoneOffset()+'&uti='+(new Date()).getTime()+'&uui='+bbs.updateInterval+'&uul='+bbn.userLanguage+'&uwi='+bbs.width;
+document.write("<scr"+"ipt  language='JavaScript' charset='windows-1250' type='text/javascript' src='http://adarbo2.bbmedia.cz/please/showit/681/2/10/6/?typkodu=js"+bbh+"&alttext=0&border=0&bust="+Math.random()+"&target=_blank'><"+"\/scr"+"ipt>");
+/* ]]> */
+</script><script language="JavaScript" charset="windows-1250" type="text/javascript" src="tvorba-databazi-v-mysql-i_soubory/a.js"></script>
+<noscript>
+<a href="http://adarbo2.bbmedia.cz/please/redirect/681/2/10/6/"
+target="_blank"><img
+src="http://adarbo2.bbmedia.cz/please/showit/681/2/10/6/?typkodu=img"
+border='0' alt='' /></a>
+</noscript>
+<!-- EndCode: adarbo2.bbmedia.cz 3.1 -->  </div>
+  <div id="zh-logo" class="zh-box"><a href="http://www.abclinuxu.cz/"></a></div>
+  <div id="zh-hledani" class="zh-box">
+    <form action="/hledani" method="get">
+     <div>
+      <input class="text" name="dotaz" type="text">
+      <input class="button" value="Hledej" type="submit">
+     </div>
+    </form>
+    <a href="http://www.abclinuxu.cz/hledani?action=toAdvanced">Rozšířené hledání</a>
+  </div>
+</div>
+<div class="cistic"></div>
+
+<div id="menu-wrap">
+<b style="background: transparent none repeat scroll 0%; font-size: 0px; display: block; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial;">
+ <b class="roh1"></b><b class="roh2"></b>
+</b>
+<div class="menu-kont">
+
+<ul style="display: table;" class="menu" id="menu">
+<li><a href="http://www.abclinuxu.cz/poradna">Poradna</a></li>
+<li><a href="http://www.abclinuxu.cz/faq">FAQ</a></li>
+<li><a href="http://www.abclinuxu.cz/hardware">Hardware</a>
+  <ul>
+    <li><a href="http://www.abclinuxu.cz/hardware/procesory">Procesory</a></li>
+    <li><a href="http://www.abclinuxu.cz/hardware/pridavne-karty">Přídavné karty</a></li>
+    <li><a href="http://www.abclinuxu.cz/hardware/pripojeni-na-sit">Připojení na síť</a></li>
+    <li><a href="http://www.abclinuxu.cz/hardware/prislusenstvi">Příslušenství</a></li>
+    <li><a href="http://www.abclinuxu.cz/hardware/sestavy">Sestavy</a></li>
+    <li><a href="http://www.abclinuxu.cz/hardware/ukladani-dat">Ukládání dat</a></li>
+    <li><a href="http://www.abclinuxu.cz/hardware/vstupni-zarizeni">Vstupní zařízení</a></li>
+    <li><a href="http://www.abclinuxu.cz/hardware/vystupni-zarizeni">Výstupní zařízení</a></li>
+    <li><a href="http://www.abclinuxu.cz/hardware/zakladni-desky">Základní desky</a></li>
+  </ul></li>
+<li><a href="http://www.abclinuxu.cz/software">Software</a>
+  <ul>
+    <li><a href="http://www.abclinuxu.cz/software/alternativy">Alternativy k aplikacím</a></li>
+    <li><a href="http://www.abclinuxu.cz/software/bezpecnost">Bezpečnost</a></li>
+    <li><a href="http://www.abclinuxu.cz/software/grafika">Grafika</a></li>
+    <li><a href="http://www.abclinuxu.cz/software/hobby">Hobby</a></li>
+    <li><a href="http://www.abclinuxu.cz/software/hry">Hry</a></li>
+    <li><a href="http://www.abclinuxu.cz/software/internet">Internet</a></li>
+    <li><a href="http://www.abclinuxu.cz/software/kancelar">Kancelář</a></li>
+    <li><a href="http://www.abclinuxu.cz/software/multimedia">Multimédia</a></li>
+    <li><a href="http://www.abclinuxu.cz/software/nastroje">Nástroje</a></li>
+    <li><a href="http://www.abclinuxu.cz/software/pracovni-prostredi">Pracovní prostředí</a></li>
+    <li><a href="http://www.abclinuxu.cz/software/programovani">Programování</a></li>
+    <li><a href="http://www.abclinuxu.cz/software/server">Server</a></li>
+    <li><a href="http://www.abclinuxu.cz/software/soubory">Soubory</a></li>
+    <li><a href="http://www.abclinuxu.cz/software/system">Systém</a></li>
+    <li><a href="http://www.abclinuxu.cz/software/vzdelavani">Vzdělávání</a></li>
+    <li><a href="http://www.abclinuxu.cz/software/veda">Věda</a></li>
+    <li><a href="http://www.abclinuxu.cz/software/zebricky">Žebříčky</a></li>
+  </ul></li>
+<li><a href="http://www.abclinuxu.cz/clanky">Články</a>
+  <ul>
+    <li><a href="http://www.abclinuxu.cz/clanky/bezpecnost">Bezpečnost</a></li>
+    <li><a href="http://www.abclinuxu.cz/clanky/hardware">Hardware</a></li>
+    <li><a href="http://www.abclinuxu.cz/clanky/hry-a-zabava">Hry a zábava</a></li>
+    <li><a href="http://www.abclinuxu.cz/clanky/jaderne-noviny">Jaderné noviny</a></li>
+    <li><a href="http://www.abclinuxu.cz/clanky/multimedia">Multimédia</a></li>
+    <li><a href="http://www.abclinuxu.cz/clanky/navody">Návody</a></li>
+    <li><a href="http://www.abclinuxu.cz/clanky/novinky">Novinky</a></li>
+    <li><a href="http://www.abclinuxu.cz/clanky/programovani">Programování</a></li>
+    <li><a href="http://www.abclinuxu.cz/clanky/recenze">Recenze</a></li>
+    <li><a href="http://www.abclinuxu.cz/clanky/rozhovory">Rozhovory</a></li>
+    <li><a href="http://www.abclinuxu.cz/clanky/ruzne">Různé</a></li>
+    <li><a href="http://www.abclinuxu.cz/clanky/site">Sítě</a></li>
+    <li><a href="http://www.abclinuxu.cz/clanky/system">Systém</a></li>
+    <li><a href="http://www.abclinuxu.cz/clanky/tipy">Tipy a triky</a></li>
+    <li><a href="http://www.abclinuxu.cz/clanky/pr" style="border-width: 3px;">Tiskové zprávy</a></li>
+    <li><a href="http://www.abclinuxu.cz/serialy">Seriály</a></li>
+    <li><a href="http://www.abclinuxu.cz/download/abicko.jsp">PDF</a></li>
+  </ul></li>
+<li><a href="http://www.abclinuxu.cz/ucebnice">Učebnice</a>
+  <ul>
+    <li><a href="http://www.abclinuxu.cz/ucebnice/uvod">Úvod</a></li>
+    <li><a href="http://www.abclinuxu.cz/ucebnice/obsah">Obsah</a></li>
+    <li><a href="http://www.abclinuxu.cz/ucebnice/historie">Historie Linuxu</a></li>
+    <li><a href="http://www.abclinuxu.cz/ucebnice/zaklady">Základy Linuxu</a></li>
+    <li><a href="http://www.abclinuxu.cz/ucebnice/prehled-prikazu">Přehled příkazů</a></li>
+  </ul></li>
+<li><a href="http://www.abclinuxu.cz/blog">Blogy</a>
+  <ul>
+    <li><a href="http://www.abclinuxu.cz/blog/vyber">Výběr (linuxové)</a></li>
+    <li><a href="http://www.abclinuxu.cz/blog/souhrn">Stručný souhrn</a></li>
+    <li><a href="http://www.abclinuxu.cz/blogy">Seznam blogů</a></li>
+  </ul></li>
+<li><a href="http://www.abclinuxu.cz/desktopy">Desktopy</a></li>
+<li><a href="http://www.abclinuxu.cz/hry">Hry</a></li>
+<li><a href="http://www.abclinuxu.cz/slovnik">Slovník</a></li>
+<li><a href="http://www.abclinuxu.cz/kdo-je">Kdo je</a></li>
+<li><a href="http://www.abclinuxu.cz/bazar">Bazar</a></li>
+<li><a href="http://www.abclinuxu.cz/ovladace">Ovladače</a></li>
+<li><a href="http://www.abclinuxu.cz/">Portál</a>
+  <ul>
+        <li><a href="http://www.abclinuxu.cz/clanky/novinky/pojdte-psat-pro-abclinuxu.cz">Jak se stát autorem</a></li>
+    <li><a href="http://www.abclinuxu.cz/clanky/show/44049">Náš tým</a></li>
+    <li><a href="http://www.abclinuxu.cz/doc/propagace">Propagace</a></li>
+    <li><a href="mailto:info@stickfish.cz">Inzerce</a></li>
+    <li><a href="http://www.abclinuxu.cz/doc/portal/rss-a-jine-pristupy">RSS a PDA</a></li>
+    <li><a href="http://bugzilla.abclinuxu.cz/" rel="nofollow">Hlášení chyb a námětů</a></li>
+    <li><a href="http://www.abclinuxu.cz/pozadavky">Vzkazy správcům (28)</a></li>
+    <li><a href="http://www.abclinuxu.cz/projekty/zdrojaky">Zdrojové kódy</a></li>
+    <li><a href="javascript:addSidebar();">Přidej sidebar</a></li>
+    <li><a href="javascript:addBookmark();">Přidej mezi oblíbené</a></li>
+    <li><a href="javascript:setHomepage();">Nastav jako domácí stránku</a></li>
+  </ul></li>
+<li><a href="http://www.abcprace.cz/">Práce</a></li>
+</ul>
+
+</div>
+</div>
+<!--[if IE]><br style="font-size:0"><![endif]-->
+
+    <div class="obal">
+
+        <div class="hl">
+        <div class="hl_vpravo">
+                <a href="http://www.abclinuxu.cz/Profile?action=login">Přihlášení</a> |
+                <a href="http://www.abclinuxu.cz/EditUser?action=register">Registrace</a>
+        </div>
+        <div class="hl_vlevo">&nbsp;</div>
+        </div>
+
+        <div id="ls_prepinac" title="Skrýt sloupec" onclick="prepni_sloupec()">×</div>
+
+        <div class="obal_ls" id="ls">
+        <div class="s">
+<!-- BBmedia one2many Pozice: Abclinuxu.cz(681) / zbytek webu(2) / banner 250x125(1) / PR clanek(6) -->
+<div class="s_reklama vip-banner">
+<div id="bmone2n-681.2.1.6">
+<noscript><div style='display:inline'><a
+href='http://adarbo2.bbmedia.cz/please/redirect/681/2/1/6/'><img
+src='http://adarbo2.bbmedia.cz/please/showit/681/2/1/6/?typkodu=img'
+width='0' height='0' style='border-width:0' alt='' /></a></div></noscript>
+</div>
+</div><div id="ibm-vip">
+<div class="s_nadpis" style="background: black none repeat scroll 0%; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial;">
+   <a class="s_nadpis-pravy-odkaz" rel="nofollow" href="http://adarbo2.bbmedia.cz/please/redirect/712/2/1/6/?param=19488/26014_0_http://web.ogilvyinteractive.cz/idccz/logindex.php?kampId=945&amp;odkazId=2466&amp;refId=39&amp;redirect=https%3A%2F%2Fjobs3.netmedia1.com%2Fcp%2Fsearch_results.jsp%3Fcountry_id%3D13+"><img style="margin-top: 1px;" src="tvorba-databazi-v-mysql-i_soubory/ibm-logo-white-37.png" alt="IBM logo" height="15" width="37"></a>
+   <a href="http://adarbo2.bbmedia.cz/please/redirect/712/2/1/6/?param=19488/26014_0_http://web.ogilvyinteractive.cz/idccz/logindex.php?kampId=945&amp;odkazId=2466&amp;refId=39&amp;redirect=https%3A%2F%2Fjobs3.netmedia1.com%2Fcp%2Fsearch_results.jsp%3Fcountry_id%3D13+">&nbsp; &nbsp; Pracujte pro IBM</a>
+</div>
+<div class="s_sekce">
+<img style="float: right;" src="tvorba-databazi-v-mysql-i_soubory/a_002.gif" alt="" border="0">
+<ul>
+<li><a href="http://adarbo2.bbmedia.cz/please/redirect/712/2/1/6/?param=19488/26101_0_http://web.ogilvyinteractive.cz/idccz/logindex.php?kampId=949&amp;odkazId=2494&amp;refId=39&amp;redirect=http%3A%2F%2Fwww.abclinuxu.cz%2Fibm%2Fsap-basis-support-specialist">SAP Basis Support Specialist</a></li>
+<li><a href="http://adarbo2.bbmedia.cz/please/redirect/712/2/1/6/?param=19488/26102_0_http://web.ogilvyinteractive.cz/idccz/logindex.php?kampId=950&amp;odkazId=2495&amp;refId=39&amp;redirect=http%3A%2F%2Fwww.abclinuxu.cz%2Fibm%2F-1st-line-services-delivery-manager">1st Line Services Delivery Manager</a></li>
+<li><a href="http://adarbo2.bbmedia.cz/please/redirect/712/2/1/6/?param=19488/26103_0_http://web.ogilvyinteractive.cz/idccz/logindex.php?kampId=951&amp;odkazId=2496&amp;refId=39&amp;redirect=http%3A%2F%2Fwww.abclinuxu.cz%2Fibm%2Fhelpdesk-job-customer-support">Helpdesk job - Customer Support</a></li>
+<li><a href="http://adarbo2.bbmedia.cz/please/redirect/712/2/1/6/?param=19488/26104_0_http://web.ogilvyinteractive.cz/idccz/logindex.php?kampId=952&amp;odkazId=2497&amp;refId=39&amp;redirect=http%3A%2F%2Fwww.abclinuxu.cz%2Fibm%2Funix-systems-administrator">Unix Systems Administrator</a></li>
+</ul>
+</div>
+</div>
+            <!-- ANKETA -->
+
+                <div class="s_nadpis">
+                   <a class="s_nadpis-pravy-odkaz" href="http://www.abclinuxu.cz/pozadavky?categoryPosition=0">navrhněte&nbsp;»</a>
+                   <a href="http://www.abclinuxu.cz/ankety">Anketa</a>
+                </div>
+                <div class="s_sekce">
+                    <form action="/EditPoll/224905" method="post">
+                     <div class="ank-otazka">Jste LinkedIn (nebo něco podobného)?</div>
+                        <div class="ank-odpov">
+                          <label><input name="voteId" value="0" type="radio">ano</label>&nbsp;(<span title="287">14%</span>)<br>
+                          <div class="ank-sloup-okraj" style="width: 14px;">
+                            <div class="ank-sloup"></div>
+                          </div>
+                        </div>
+                        <div class="ank-odpov">
+                          <label><input name="voteId" value="1" type="radio">ne</label>&nbsp;(<span title="149">7%</span>)<br>
+                          <div class="ank-sloup-okraj" style="width: 7px;">
+                            <div class="ank-sloup"></div>
+                          </div>
+                        </div>
+                        <div class="ank-odpov">
+                          <label><input name="voteId" value="2" type="radio">ne a nebudu</label>&nbsp;(<span title="122">6%</span>)<br>
+                          <div class="ank-sloup-okraj" style="width: 6px;">
+                            <div class="ank-sloup"></div>
+                          </div>
+                        </div>
+                        <div class="ank-odpov">
+                          <label><input name="voteId" value="3" type="radio">co prosím?</label>&nbsp;(<span title="1543">73%</span>)<br>
+                          <div class="ank-sloup-okraj" style="width: 73px;">
+                            <div class="ank-sloup"></div>
+                          </div>
+                        </div>
+                     <div>
+                      <input name="submit" class="button" value="Hlasuj" alt="Hlasuj" type="submit">
+                        Celkem 2101 hlasů
+                      <input name="url" value="/ankety/jste-linkedin" type="hidden">
+                      <input name="action" value="vote" type="hidden">
+                     </div>
+                    </form>
+                </div>
+                <div>&nbsp;<a href="http://www.abclinuxu.cz/ankety/jste-linkedin" title="Jste LinkedIn (nebo něco podobného)?">Komentářů:</a>
+                     66, poslední
+                     dnes 18:17
+<!-- advertisement position anketa is not active -->                </div>
+
+            <!-- ZPRÁVIČKY -->
+            <div class="s_nadpis">
+                <a class="s_nadpis-pravy-odkaz" href="http://www.abclinuxu.cz/zpravicky/edit?action=add">napište »</a>
+                <a href="http://www.abclinuxu.cz/zpravicky" title="zprávičky">Zprávičky</a>
+            </div>
+
+<!-- BBmedia one2many Pozice: Abclinuxu.cz(681) / zbytek webu(2) / hypertext 250x100(7) / PR clánek(6) -->
+<div id="bmone2n-681.2.7.6">
+<noscript><div style='display:inline'><a
+href='http://adarbo2.bbmedia.cz/please/redirect/681/2/7/6/'><img
+src='http://adarbo2.bbmedia.cz/please/showit/681/2/7/6/?typkodu=img'
+width='0' height='0' style='border-width:0' alt='' /></a></div></noscript>
+</div><hr style="display: none;" id="arbo-cara">
+            <div class="s_sekce">
+                <div class="ls_zpr">
+    <span>dnes 13:29 | Nová verze</span>
+    <p>Vyšel <a href="http://www.abclinuxu.cz/software/internet/www/mozilla-firefox">Mozilla Firefox</a> <a href="http://www.mozilla.com/en-US/firefox/3.0rc1/releasenotes/">3.0 RC1</a>.
+Jde o další krok kupředu k vydání Firefoxu 3.0, který bude oproti
+předchozím verzím obsahovat významná vylepšení téměř ve všech
+oblastech. Uživatele Linuxu potěší například použití nativního GTK+
+tématu. Konečně také funguje navazování stahování souborů (i po
+ukončení prohlížeče).</p>
+    <span><a href="http://www.abclinuxu.cz/lide/dwatzke">David Watzke</a>
+    | <a href="http://www.abclinuxu.cz/zpravicky/mozilla-firefox-3.0-rc1" title="poslední&nbsp;dnes 20:06">Komentářů: 24</a></span>
+                    <hr>
+    <span>dnes 13:14 | Zajímavý článek</span>
+    <p><a href="http://www.freesoftwaremagazine.com/columns/2008_google_summer_code_21_projects_im_excited_about">Andrew Min ve svém blogu na Free Software Magazine píše</a> o několika zajímavých projektech <a href="http://code.google.com/soc/2008/">Google SoC 2008</a>. Mezi ně patří <a href="http://wiki.debian.org/SummerOfCode2008/Aptitude-gtk">GTK+ rozhraní pro Aptitude</a>, <a href="http://code.google.com/soc/2008/gimp/appinfo.html?csaid=645C8B60767929AF">vyhledávání v menu GIMPu</a>, <a href="http://code.google.com/soc/2008/audacity/appinfo.html?csaid=79ADE474DB81DF7B">import (a možná i export) souborů do Audacity přes FFmpeg</a>, <a href="http://code.google.com/soc/2008/abisource/appinfo.html?csaid=95CBBB1BFC34DF5E">plugin pro export OOXML pro AbiWord</a>, <a href="http://code.google.com/soc/2008/kde/appinfo.html?csaid=F16B9339F86C1ABA">Plasma widgety na spořiči obrazovky</a> a další.</p>
+    <span><a href="http://www.abclinuxu.cz/lide/dwatzke">David Watzke</a>
+    | <a href="http://www.abclinuxu.cz/zpravicky/zajimave-projekty-na-google-summer-of-code-2008" title="poslední&nbsp;dnes 20:04">Komentářů: 6</a></span>
+                    <hr>
+<div class="textad" style="border-width: 2px;">
+<p style="text-align: center;">
+<img src="tvorba-databazi-v-mysql-i_soubory/arch-linux-new-24x24.png" alt="arch linux minilogo" height="24" width="24">
+<img src="tvorba-databazi-v-mysql-i_soubory/debian-logo-24x24.png" alt="debian gnu/linux minilogo" height="24" width="24">
+<img src="tvorba-databazi-v-mysql-i_soubory/fedora-core-logo-24x24.png" alt="fedora core minilogo" height="24" width="24">
+<img src="tvorba-databazi-v-mysql-i_soubory/gentoo-logo-24x24.png" alt="gentoo minilogo" height="24" width="24">
+<img src="tvorba-databazi-v-mysql-i_soubory/mandriva-logo-32x24.png" alt="mandriva minilogo" height="24" width="32">
+</p>
+<p>Hlasujte v devátém ročníku tradiční <a href="http://www.abclinuxu.cz/clanky/ruzne/anketa-o-distribuci-2008" title="Anketa o distribuci 2008"><b>ankety o&nbsp;nejoblíbenější distribuci</b></a>.</p>
+<div style="text-align: center;">
+<img src="tvorba-databazi-v-mysql-i_soubory/opensuse-logo-40x24.png" alt="opensuse minilogo" height="24" width="40">
+<img src="tvorba-databazi-v-mysql-i_soubory/red-hat-logo-24x24.png" alt="red hat minilogo" height="24" width="24">
+<img src="tvorba-databazi-v-mysql-i_soubory/slackware-logo-24x24.png" alt="slackware minilogo" height="24" width="24">
+<img src="tvorba-databazi-v-mysql-i_soubory/ubuntu-logo-24x24.png" alt="ubuntu minilogo" height="24" width="24">
+</div>
+</div>    <span>dnes 12:32 | IT novinky</span>
+    <p>Nakladatelství <a href="http://knihy.cpress.cz/">CPress</a> vydalo knihu <a href="http://knihy.cpress.cz/knihy/pocitacova-literatura/linux/jadro-systemu-linux-kompletni-pruvodce-programatora/">Jádro systému Linux: Kompletní průvodce programátora</a>, jejímž autorem je <a href="http://www.abclinuxu.cz/lide/luk">Lukáš Jelínek</a>.</p>
+    <span><a href="http://www.abclinuxu.cz/lide/stranger">Milan Horák</a>
+    | <a href="http://www.abclinuxu.cz/zpravicky/kompletni-pruvodce-jaderneho-programatora" title="poslední&nbsp;dnes 20:14">Komentářů: 13</a></span>
+                    <hr>
+    <span>dnes 00:29 | Zajímavý článek</span>
+    <p>Ve středu The Perl Foundation <a href="http://news.perlfoundation.org/2008/05/tpf_receives_large_donation_in.html">obdržela dar 200,000 US$</a> na rozvoj jazyka <a href="http://perl6.cz/wiki/Perl_6">Perl 6</a>. Peníze daroval Ian Hague, spoluzakladatel <a href="http://www.fbird.com/">Firebird Management LLC</a>.
+Přibližně polovina z peněz půjde na podporu vývojářů (granty a
+podobně). Druhá polovina bude použita na rozvoj nadace a její
+schopnosti získávat další prostředky pro rozvoj Perlu 6.</p>
+    <span><a href="http://www.abclinuxu.cz/lide/rootmj">mj41</a>
+    | <a href="http://www.abclinuxu.cz/zpravicky/dar-200-000-us-na-rozvoj-perlu-6" title="poslední&nbsp;dnes 16:18">Komentářů: 3</a></span>
+                    <hr>
+<!-- BBmedia one2many Pozice: Abclinuxu.cz(681) / zbytek webu(2) / skyscraper 120x600(6) / PR clánek(6) -->
+<div id="bmone2n-681.2.6.6" style="margin: 0pt auto; width: 120px;">
+<noscript><div style='display:inline'><a
+href='http://adarbo2.bbmedia.cz/please/redirect/681/2/6/6/'><img
+src='http://adarbo2.bbmedia.cz/please/showit/681/2/6/6/?typkodu=img'
+width='0' height='0' style='border-width:0' alt='' /></a></div></noscript>
+<div id="bmone2t-681.2.6.6" style="display: block;"><script type="text/javascript">/* <![CDATA[ */ bmone2n.makeAd('681.2.6.6'); /* ]]> */</script><script language="JavaScript">if (typeof(_bmad)!='object') _bmad=new Array();_bmix=_bmad.length;_bmad[_bmix]=new Object();_bmad[_bmix].Redir='http://adarbo2.bbmedia.cz/please/redirect/681/2/6/6/!uwi=1440;uhe=900;uce=1;param=19889/26425_1_?';_bmad[_bmix].Height=600;_bmad[_bmix].Width=120;_bmad[_bmix].Flash='http://adarbo2.bbmedia.cz/logos/b19889_1.swf';_bmad[_bmix].Target='_top';_bmad[_bmix].Banner='http://adarbo2.bbmedia.cz/logos/b19889.gif';_bmad[_bmix].Wmode='';_bmad[_bmix].FlashVer=8;_bmad[_bmix].Param='';_bmad[_bmix].Embed='';_bmad[_bmix].Swf='';_bmad[_bmix].Object='';document.write('<scr'+'ipt language=JavaScript src=http://adarbo2.bbmedia.cz/bb/bb_flash3.js ></'+'scr'+'ipt>');</script><script language="JavaScript" src="tvorba-databazi-v-mysql-i_soubory/bb_flash3.js"></script><a style="left: 120px ! important; top: 0px ! important;" title="Klepněte zde pro blokování tohoto objektu pomocí Adblock Plus" class="abp-objtab-007666727618833258 visible ontop" href="http://adarbo2.bbmedia.cz/logos/b19889_1.swf?clickTag=http%3A//adarbo2.bbmedia.cz/please/redirect/681/2/6/6/%21uwi%3D1440%3Buhe%3D900%3Buce%3D1%3Bparam%3D19889/26425_1_%3F&amp;clickthru=http%3A//adarbo2.bbmedia.cz/please/redirect/681/2/6/6/%21uwi%3D1440%3Buhe%3D900%3Buce%3D1%3Bparam%3D19889/26425_1_%3F&amp;clickTarget=_top"></a><object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" height="600" width="120"><param name="movie" value="http://adarbo2.bbmedia.cz/logos/b19889_1.swf?clickTag=http%3A//adarbo2.bbmedia.cz/please/redirect/681/2/6/6/%21uwi%3D1440%3Buhe%3D900%3Buce%3D1%3Bparam%3D19889/26425_1_%3F&amp;clickthru=http%3A//adarbo2.bbmedia.cz/please/redirect/681/2/6/6/%21uwi%3D1440%3Buhe%3D900%3Buce%3D1%3Bparam%3D19889/26425_1_%3F&amp;clickTarget=_top"><param name="allowScriptAccess" value="always"><param name="wmode" value="opaque"><embed src="tvorba-databazi-v-mysql-i_soubory/b19889_1.swf" quality="high" type="application/x-shockwave-flash" wmode="opaque" allowscriptaccess="always" height="600" width="120"></object></div></div><!-- advertisement position arbo-double-sky is not active --><!-- BBmedia one2many Pozice: Abclinuxu.cz(681) / zbytek webu(2) / hypertext 250x100 - Stickfish(9) / PR clanek(6) -->
+<!-- HowTo: Place this code into the html page there the ad should appear. -->
+<div id="bmone2n-681.2.9.6">
+<noscript><div style='display:inline'><a
+href='http://adarbo2.bbmedia.cz/please/redirect/681/2/9/6/'><img
+src='http://adarbo2.bbmedia.cz/please/showit/681/2/9/6/?typkodu=img'
+width='0' height='0' style='border-width:0' alt='' /></a></div></noscript>
+</div>    <span>včera 20:48 | Nová verze</span>
+    <p>Vyšel <a href="http://wiki.rpath.com/wiki/rPath_Linux:rPath_Linux_2">rPath Linux 2</a>.
+Je menší než 1. verze, přináší aktualizovaný software, používá zavaděč
+syslinux a novinkou jsou také bezpečnostní opatření (stack protector a
+FORTIFY_SOURCE=2). <a href="http://lwn.net/Articles/282770/">Informuje LWN.net</a>.</p>
+    <span><a href="http://www.abclinuxu.cz/lide/dwatzke">David Watzke</a>
+    | <a href="http://www.abclinuxu.cz/zpravicky/rpath-linux-2" title="">Komentářů: 0</a></span>
+                    <hr>
+    <span>včera 19:11 | Zajímavý článek</span>
+    <p>Vývojář Gentoo, Bryan Østergaard (kloeri), ve svém blogu <a href="http://kloeri.livejournal.com/4623.html">píše</a> o tom, že před pár dny došlo k <a href="http://www.abclinuxu.cz/clanky/ruzne/distribucni-novinky-3-2008#obnova-gentoo-foundation">obnovení</a> společnosti <a href="http://www.nmprc.state.nm.us/cgi-bin/prcdtl.cgi?2463313+GENTOO+FOUNDATION+INC">Gentoo Foundation, Inc</a>.
+V druhé části zápisku mluví o menší krizi v radě Gentoo, která byla
+způsobena nízkou účastí jejích členů na včerejším setkání (přišli 2 ze
+7, přičemž je dle <a href="http://www.gentoo.org/proj/en/glep/glep-0039.html">GLEP 39</a>
+nutná alespoň 50% účast, tedy 4 lidé). Rada se tímto v podstatě
+zneplatnila a přestože se tomu někteří snaží vyhnout, zřejmě dojde k
+novým volbám.</p>
+    <span><a href="http://www.abclinuxu.cz/lide/dwatzke">David Watzke</a>
+    | <a href="http://www.abclinuxu.cz/zpravicky/gentoo-foundation-byla-obnovena" title="poslední&nbsp;dnes 14:38">Komentářů: 8</a></span>
+                    <hr>
+    <span>včera 18:38 | Zajímavý článek</span>
+    <p>Na Phoronix.com vyšel <a href="http://www.phoronix.com/scan.php?page=article&amp;item=nouveau_39&amp;num=1">Nouveau Companion 39</a>. Vývojáři svobodného ovladače <a href="http://www.abclinuxu.cz/slovnik/nouveau">Nouveau</a>
+pro nVIDIA GPU zde mluví o tom, čeho dosáhli během posledních pár
+týdnů: o rozšíření podpory GeForce 8 (NV50), XvMC implementaci pro <a href="http://www.abclinuxu.cz/zpravicky/gallium3d-novy-model-grafickych-ovladacu-pro-x">Gallium3D</a> a dalším odložení zařazení MMioTrace do Linuxu.</p>
+    <span><a href="http://www.abclinuxu.cz/lide/dwatzke">David Watzke</a>
+    | <a href="http://www.abclinuxu.cz/zpravicky/nouveau-companion-39" title="poslední&nbsp;dnes 09:50">Komentářů: 7</a></span>
+                    <hr>
+    <span>včera 17:42 | Nová verze</span>
+    <p>Vyšlo <a href="http://www.opensuse.org/">openSUSE</a> 11.0 Beta 3 (<a href="http://lists.opensuse.org/opensuse-announce/2008-05/msg00010.html">oznámení</a>, <a href="http://software.opensuse.org/developer">stažení</a>). Od verze <a href="http://www.abclinuxu.cz/zpravicky/opensuse-11.0-beta-2">11.0 Beta 2</a>
+bylo opraveno přes 700 chyb, dále byl přidán (další) nový artwork a
+několik aktualizací. Významného vylepšení se dočkal live instalátor.
+Přesto již bylo objeveno několik chyb, z nichž ty nejotravnější jsou
+vypsány <a href="http://en.opensuse.org/Bugs:Most_Annoying_Bugs_11.0_dev#openSUSE_11.0_Beta3">na opensuse.org</a>.</p>
+    <span><a href="http://www.abclinuxu.cz/lide/dwatzke">David Watzke</a>
+    | <a href="http://www.abclinuxu.cz/zpravicky/opensuse-11.0-beta-3" title="poslední&nbsp;dnes 19:05">Komentářů: 20</a></span>
+                    <hr>
+    <span>včera 11:49 | Zajímavý článek</span>
+    <p>Nabídka softwaru na službě <a href="http://www.cnr.com/">Click 'N Run</a> (od Linspire) se dále rozšiřuje. Další novinkou se stal komerční produkt Transgaming <a href="http://www.abclinuxu.cz/software/system/emulatory/cedega">Cedega</a> 6.0. Podporovanými distribucemi jsou Linspire, Freespire, Ubuntu a různé deriváty. <a href="http://www.desktoplinux.com/news/NS2959596345.html">Čtěte DesktopLinux.com</a>.</p>
+    <span><a href="http://www.abclinuxu.cz/lide/LubosD">Luboš Doležel (Doli)</a>
+    | <a href="http://www.abclinuxu.cz/zpravicky/click-n-run-se-rozsiruje-nabizi-cedegu" title="poslední&nbsp;dnes 17:00">Komentářů: 18</a></span>
+                    <hr>
+    <span>včera 11:41 | Nasazení Linuxu</span>
+    <p>Evropská
+větev newyorské burzy nasazuje Red Hat Enterprise Linux a Red Hat
+Network. Linux zde bude obstarávat běh kriticky důležitých komponent.
+Důvodem této volby je vyšší flexibilita, odstranění vazby na jediného
+prodejce, finanční úspory a schopnost systému snášet vysokou zátěž. <a href="http://www.desktoplinux.com/news/NS7320882318.html">Podrobnosti na DesktopLinux.com</a>.</p>
+    <span><a href="http://www.abclinuxu.cz/lide/LubosD">Luboš Doležel (Doli)</a>
+    | <a href="http://www.abclinuxu.cz/zpravicky/evropska-vetev-newyorske-burzy-voli-rhel" title="poslední&nbsp;dnes 09:26">Komentářů: 6</a></span>
+                    <hr>
+                </div>
+                <div class="s_odkaz">
+                    <a href="http://www.abclinuxu.cz/zpravicky">Centrum</a> |
+                    <a href="http://www.abclinuxu.cz/zpravicky/edit?action=add" rel="nofollow">Napsat</a> |
+                    <a href="http://www.abclinuxu.cz/History?type=news&amp;from=10&amp;count=15">Starší</a>
+                </div>
+            </div>
+
+<!-- abcprace.cz -->
+<div class="s_nadpis">
+   <a href="http://www.abcprace.cz/" title="Spojujeme lidi s prací v IT.">Pracovní nabídky</a>
+</div>
+
+<div class="s_sekce">
+   <ul><li><a href="http://www.abcprace.cz/perspektiva-cz-s-r-o/junior-sw-engineer-sw-systemy-pro-embedded-zarizeni">Junior SW Engineer - SW systémy pro embedded zařízení</a></li>
+<li><a href="http://www.abcprace.cz/perspektiva-cz-s-r-o/analytik-systemove-integrace-i-pro-absolventy">Analytik - systémové integrace (i pro absolventy)</a></li>
+<li><a href="http://www.abcprace.cz/fv-cz/php-programator-hpp">PHP programátor HPP</a></li>
+<li><a href="http://www.abcprace.cz/stickfish-s-r-o/koordinator-eshopu-64bit-cz-a-abchost-cz">Koordinátor eshopů 64bit.cz a AbcHost.cz</a></li>
+<li><a href="http://www.abcprace.cz/perspektiva-cz-s-r-o/senior-linux-support-specialist">Senior Linux Support Specialist</a></li>
+<li><a href="http://www.abcprace.cz/perspektiva-cz-s-r-o/hr-manager-atraktivni-nabidka">HR Manager - atraktivní nabídka!</a></li>
+<li><a href="http://www.abcprace.cz/perspektiva-cz-s-r-o/spravce-aplikacnich-serveru-a-monitorovacich-nastroju">Správce aplikačních serverů a monitorovacích nástrojů</a></li>
+<li><a href="http://www.abcprace.cz/sysgo-s-r-o/tester-a-verifikator-k-du-rtos">Tester a verifikátor kódu RTOS</a></li>
+<li><a href="http://www.abcprace.cz/cvo-technology-recruitment/administrator-web-aplikaci-linux-1">Administrátor web aplikací (linux)</a></li>
+<li><a href="http://www.abcprace.cz/stickfish-s-r-o/junior-account-manager">Junior Account Manager</a></li>
+</ul></div>
+                    <!-- ROZCESTNÍK -->
+                    <div class="s_nadpis">Rozcestník</div>
+                    <div class="s_sekce">
+                        <div class="rozc">
+                                <a class="server" href="http://www.abclinuxu.cz/" rel="nofollow">AbcLinuxu</a><br>
+                                <ul>
+                                    <li><a href="http://www.abclinuxu.cz/clanky/novinky/udalo-se-v-tydnu-20-2008" rel="nofollow">Událo se v týdnu 20/2008</a></li>
+                                    <li><a href="http://www.abclinuxu.cz/clanky/rozhovory/charles-simonyi-2-programmers-at-work" rel="nofollow">Charles Simonyi - 2 (Programmers at Work)</a></li>
+                                </ul>
+                                <a class="server" href="http://www.itbiz.cz/" rel="nofollow">ITBIZ.cz</a><br>
+                                <ul>
+                                    <li><a href="http://itbiz.cz/linux-platforma-mobil" rel="nofollow">LiMo: nová linuxová platforma pro mobilní telefony</a></li>
+                                    <li><a href="http://itbiz.cz/hacker-prodej-ebay" rel="nofollow">Cracker se pokusil prodat na eBay laptop s návodem, jak cracknout OS Vista</a></li>
+                                </ul>
+                                <a class="server" href="http://www.linuxsoft.cz/" rel="nofollow">Linuxsoft</a><br>
+                                <ul>
+                                    <li><a href="http://www.linuxsoft.cz/article.php?id_article=1542" rel="nofollow">Perl (68) - Projekt - zobrazení zápasů</a></li>
+                                    <li><a href="http://www.linuxsoft.cz/article.php?id_article=1541" rel="nofollow">Perl (67) - Projekt - dokončujeme modul</a></li>
+                                </ul>
+                        </div>
+                    </div>
+
+<div class="s_nadpis">Doporučujeme</div>
+<div class="s_sekce">
+  <ul>
+    <li><a href="http://www.linux.cz/" rel="nofollow">linux.cz</a></li>
+    <li><a href="http://www.64bit.cz/">64bit.cz</a></li>
+  </ul>
+</div>
+<div class="s_nadpis">Placené odkazy</div>
+<div class="s_sekce">
+  <ul>
+    <li><a href="http://www.aaaautobrno.cz/" title="Prověřená ojetá auta a vozy">Autobazar AAA Auto Brno</a></li>
+    <li><a href="http://www.e-pocasi.cz/">e-pocasi.cz</a></li>
+    <li><a href="http://www.krasnyusmev.cz/beleni-zubu-white-pearl/">Bělení zubů</a></li>
+  </ul>
+</div>
+        </div> <!-- s -->
+        </div> <!-- obal_ls -->
+
+
+        <div class="st" id="st"><a name="obsah"></a>
+
+<div id="ibm-cl">
+<table style="width: 99%;"><tbody><tr>
+<td>
+<img src="tvorba-databazi-v-mysql-i_soubory/a.gif" alt="" border="0">
+<b>REKLAMA:</b> Představte si organizaci, kterou nic neomezuje. Společnost,
+která stála za revolucí ve způsobu naší komunikace a podnikání. Jsme IBM,
+největší IT firma na světě. Vytvořili jsme kulturu, kde se daří jednotlivcům
+a kde máte možnost uspět takoví, jací jste. <a href="http://adarbo2.bbmedia.cz/please/redirect/712/2/1/6/?param=19488/26017_0_http://web.ogilvyinteractive.cz/ibmcz/logindex.php?kampId=942&amp;odkazId=2463&amp;refId=39&amp;redirect=http%3A%2F%2Fwww.ibm.com%2Fcz%2Fdelivery_center">Pracujte pro IBM.</a>
+</td>
+<td style="width: 80px;">
+<img src="tvorba-databazi-v-mysql-i_soubory/ibm-logo-white-80.png" alt="IBM logo" height="32" width="80">
+</td>
+</tr></tbody></table>
+</div>
+          <div class="pwd-box">
+            <div class="do-zalozek">
+                <a href="http://www.abclinuxu.cz/auto/abc.rss"><img src="tvorba-databazi-v-mysql-i_soubory/feed16.png" border="0" height="16" width="16"></a>
+            </div>
+            <div class="pwd">
+              <a href="http://www.abclinuxu.cz/">AbcLinuxu</a>:/
+                <a href="http://www.abclinuxu.cz/clanky">Články</a>
+                 / 
+                <a href="http://www.abclinuxu.cz/clanky/navody">Návody</a>
+                 / 
+                <a href="http://www.abclinuxu.cz/clanky/navody/tvorba-databazi-v-mysql-i">Tvorba databází v MySQL - I</a>
+                
+            </div>
+          </div>
+
+            <div class="tag-box">
+              <a href="http://www.abclinuxu.cz/stitky">Štítky</a>:
+              <span id="prirazeneStitky">
+                    <a href="http://www.abclinuxu.cz/stitky/databaze" title="Zobrazit objekty, které mají přiřazen štítek „databáze“.">databáze</a>, 
+                    <a href="http://www.abclinuxu.cz/stitky/kde" title="Zobrazit objekty, které mají přiřazen štítek „KDE“.">KDE</a>, 
+                    <a href="http://www.abclinuxu.cz/stitky/microsoft" title="Zobrazit objekty, které mají přiřazen štítek „Microsoft“.">Microsoft</a>, 
+                    <a href="http://www.abclinuxu.cz/stitky/mysql" title="Zobrazit objekty, které mají přiřazen štítek „MySQL“.">MySQL</a>, 
+                    <a href="http://www.abclinuxu.cz/stitky/postgresql" title="Zobrazit objekty, které mají přiřazen štítek „PostgreSQL“.">PostgreSQL</a>
+              </span>
+            <button class="editTags">Upravit</button></div>
+
+
+
+
+<h1>Tvorba databází v MySQL - I</h1>
+
+<p class="meta-vypis">
+    20. 3. 2003 |
+        <a href="http://www.abclinuxu.cz/autori/david-hauzar">David Hauzar</a>
+</p>
+
+
+
+    <div class="cl_perex">První část podrobného seriálu o MySQL. Základní pojmy, návrh databáze.</div>
+
+<!-- BBmedia one2many Position: Abclinuxu.cz(681) / zbytek webu(2) / big square 250x250(3) / PR article(6) -->
+<div class="arbo-sq"><div id="bmone2n-681.2.3.6">
+<noscript><div style='display:inline'><a
+href='http://adarbo2.bbmedia.cz/please/redirect/681/2/3/6/'><img
+src='http://adarbo2.bbmedia.cz/please/showit/681/2/3/6/?typkodu=img'
+width='0' height='0' style='border-width:0' alt='' /></a></div></noscript>
+<div id="bmone2t-681.2.3.6" style="display: block;"><script type="text/javascript">/* <![CDATA[ */ bmone2n.makeAd('681.2.3.6'); /* ]]> */</script><script language="JavaScript">if (typeof(_bmad)!='object') _bmad=new Array();_bmix=_bmad.length;_bmad[_bmix]=new Object();_bmad[_bmix].Redir='http://adarbo2.bbmedia.cz/please/redirect/681/2/3/6/!uwi=1440;uhe=900;uce=1;param=19474/25989_1_?';_bmad[_bmix].Height=250;_bmad[_bmix].Width=250;_bmad[_bmix].Flash='http://adarbo2.bbmedia.cz/logos/b19474_3.swf';_bmad[_bmix].Target='_top';_bmad[_bmix].Banner='http://adarbo2.bbmedia.cz/logos/b19474.gif';_bmad[_bmix].Wmode='';_bmad[_bmix].FlashVer=8;_bmad[_bmix].Param='';_bmad[_bmix].Embed='';_bmad[_bmix].Swf='';_bmad[_bmix].Object='';document.write('<scr'+'ipt language=JavaScript src=http://adarbo2.bbmedia.cz/bb/bb_flash3.js ></'+'scr'+'ipt>');</script><script language="JavaScript" src="tvorba-databazi-v-mysql-i_soubory/bb_flash3.js"></script><a style="left: 250px ! important; top: 0px ! important;" title="Klepněte zde pro blokování tohoto objektu pomocí Adblock Plus" class="abp-objtab-007666727618833258 visible ontop" href="http://adarbo2.bbmedia.cz/logos/b19474_3.swf?clickTag=http%3A//adarbo2.bbmedia.cz/please/redirect/681/2/3/6/%21uwi%3D1440%3Buhe%3D900%3Buce%3D1%3Bparam%3D19474/25989_1_%3F&amp;clickthru=http%3A//adarbo2.bbmedia.cz/please/redirect/681/2/3/6/%21uwi%3D1440%3Buhe%3D900%3Buce%3D1%3Bparam%3D19474/25989_1_%3F&amp;clickTarget=_top"></a><object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" height="250" width="250"><param name="movie" value="http://adarbo2.bbmedia.cz/logos/b19474_3.swf?clickTag=http%3A//adarbo2.bbmedia.cz/please/redirect/681/2/3/6/%21uwi%3D1440%3Buhe%3D900%3Buce%3D1%3Bparam%3D19474/25989_1_%3F&amp;clickthru=http%3A//adarbo2.bbmedia.cz/please/redirect/681/2/3/6/%21uwi%3D1440%3Buhe%3D900%3Buce%3D1%3Bparam%3D19474/25989_1_%3F&amp;clickTarget=_top"><param name="allowScriptAccess" value="always"><param name="wmode" value="opaque"><embed src="tvorba-databazi-v-mysql-i_soubory/b19474_3.swf" quality="high" type="application/x-shockwave-flash" wmode="opaque" allowscriptaccess="always" height="250" width="250"></object></div></div></div>
+<p>V tomto seriálu se dozvíte to nejdůležitější, co budete potřebovat
+k tvorbě dobře strukturovaných databází i jejich správě v MySQL. Ve
+výkladu je počítáno i s úplnými začátečníky. MySQL jsem vybral,
+protože je v podstatě zadarmo (pro podrobnější informace si přečtěte
+licenční ujednání na <a href="http://www.mysql.com/" target="_blank">
+domovské adrese MySQL</a>), je velmi rychlý a jeho správa je poměrně
+jednoduchá. Navíc pokud budete v budoucnu nuceni naučit se pracovat s
+jiným relačním databázovým systémem, znalosti získané studiem a
+používáním MySQL snadno využijete.</p>
+
+<h1>Základní pojmy</h1>
+
+<h2>Databázový systém</h2>
+
+<p>Databázový systém se skládá z programu pro práci s databázemi a
+celé řady podpůrných programů. Databázový systém obstarává přístup
+k datům. Mezi nejznámější databázové systémy patří např. Oracle9i,
+Microsoft SQL Server nebo PostgreSQL.</p>
+
+<h2>Jazyk SQL</h2>
+
+<p>Jazyk SQL je dotazovací jazyk, který se používá k manipulaci s 
+daty v databázích.</p>
+
+<h2>Databáze</h2>
+
+<p>Databáze v sobě uchovává strukturovaná data. Se strukturovanými
+daty se pracuje mnohem lépe, než s daty uloženými např. v souborech.
+Databázový systém vám navíc poskytne řadu funkcí pro manipulaci s
+daty.</p>
+
+<h2>Tabulky (objekty)</h2>
+
+<p>Databáze se skládá z tabulek (objektů). V tabulkách jsou uloženy
+informace, které spolu nějakým způsobem souvisí. Například v tabulce
+<code>Hudebni_Alba</code> budou informace o hudebních albech.</p>
+
+<h2>Sloupce (pole)</h2>
+
+<p>Ve sloupcích jsou popsány vlastnosti objektu. <code>Objekt
+Hudebni_Alba </code>může mít sloupce 
+<code>Autor,  Nazev_Alba, Cena</code>.</p>
+
+<h2>Záznamy (řádky)</h2>
+
+<p>Záznamy jsou už konkrétní data uložená v databázi. Záznam v
+tabulce <code>Hudebni_Alba </code>by mohl vypadat třeba takto:</p>
+ 
+<p><code>Doors, L. A. Woman, 450</code>  nebo
+<code>Queen, The Game, 600</code>.</p>
+
+<p align="center"><img src="tvorba-databazi-v-mysql-i_soubory/tabulka.gif" alt="Tabulka (objekt)" height="179" width="500"></p>
+
+<h2>Primární klíč</h2>
+
+<p>Primární klíč je sloupec, který jednoznačně identifikuje záznam.
+To znamená, že tento sloupec musí být u každého záznamu jiný. </p>
+
+<p>Pokud by jste tedy v databázi chtěli mít alba o stejné ceně, 
+nemohl by primární klíč být sloupec <code>Cena.</code> Za
+předpokladu, že by žádná skupina neměla album se stejným jménem 
+jako jakékoli album jakékoli jiné skupiny,  mohl by primární klíč být
+sloupec <code>Jmeno_Alba</code>. To ale vždy nemůžeme předpokládat, 
+proto si vytvoříme nový sloupec <code>ID_Alba</code>. Ten bude muset
+mít vždy jinou hodnotu. Nejjednodušší je vkládat do tohoto sloupce 
+číslo, které bude u každého dalšího záznamu o jedna větší, než u
+předchozího.(jak na to se dozvíte v některém z dalších dílů)</p>
+
+<p>Primární klíč se používá k vytváření relací mezi tabulkami.</p>
+
+<h1>Relační databáze</h1>    
+
+<p>Relační databáze se skládá z více objektů (tabulek). Některé z 
+nich spolu mohou souviset - tvořit relaci. Máme-li například objekty
+<code>Hudebni_Alba(ID_Alba, Autor, Nazev_Alba, Cena), 
+Objednavky(ID_Objednavky, Datum_Objednavky, Mnozstvi, Produkt)</code>
+objekty <code>Hudebni_Alba</code> a <code>Objednavky </code>spolu
+mohou souviset - sloupec <code>Proudukt</code> může být 
+<code>Hudebni_Album</code>.</p>
+
+<p>Rozlišujeme několik typů relací.</p>
+
+<h2>Relace 1:1</h2>
+
+<p>Mějme objekty <code>Objednavky </code>a 
+<code>Transakce(ID_Transakce,
+Datum_Transakce, Dopravce, Datum_odeslani)</code>. Tyto objekty spolu 
+mohou vytvořit relaci 1:1. Každá objednávka může souviset pouze s
+jednou transakcí a každá transakce může souviset pouze s jednou 
+objednávkou.</p>
+
+<p>Relaci 1:1 mezi tabulkami vytvoříme tak, že do jednoho z objektů
+přidáme primární klíč souvisejícího objektu a ten označíme jako
+jedinečný(tj. v objektu do kterého vložím primární klíč souvisejícího
+objektu nebudou smět být záznamy se stejným primárním klíčem
+souvisejícího objektu).</p>
+
+<p>Když je primární klíč nějakého objektu přidán do souvisejícího objektu,
+v souvisejícím objektu mu říkáme cizí klíč. To, zda-li přidáme v našem 
+případě do objektu<code>Objenavky</code> primární klíč objektu
+<code>Transakce</code> nebo naopak záleží na nás. My vložíme primární klíč 
+objektu <code>Objednavky </code>do objektu <code>Transakce</code>.
+Objekt <code>Transakce </code>tedy bude vypadat takto 
+<code>Transakce(ID_Transakce, ID_Objednavky Datum_Transakce, Dopravce,
+Datum_Odeslani)</code>. Sloupec <code>ID_Objednavky </code>bude v objektu 
+<code>Objednavky </code>primární klíč, kdežto v objektu
+<code>Transakce</code> to bude cizí klíč. Cizí klíč je vrelaci 1:1 
+jedinečný.</p>
+
+<p align="center"><img src="tvorba-databazi-v-mysql-i_soubory/relace_11_skut.gif" alt="Relace 1:1 ve skutečnosti" height="102" width="500"></p>
+
+<p align="center"><img src="tvorba-databazi-v-mysql-i_soubory/relace_11.gif" alt="Relace 1:1" height="253" width="256"></p>
+
+<h2>Relace 1:N</h2>
+
+<p>Mějme objekty <code>Objednavky</code> a <code>Zakaznici(ID_Zakaznika,
+Jmeno, Adresa, Mesto, PSC)</code>. Mezi objekty <code>Objednavky</code> a
+<code>Zakaznici</code> je relace 1:N. Jeden zákazník může mít více
+objednávek, ale každá objednávka přísluší pouze jednomu zákazníku.</p>
+
+<p>Při relaci 1:1 byly oba objekty rovnocenné. V relaci 1:N je jeden
+objekt primární a druhý s ním související. Primární objekt obsahuje 
+záznamy, jejichž jeden záznam odpovídá mnoha záznamům souvisejícího
+objektu. Relaci 1:N vytvoříme tak, že do souvisejícího objektu vložíme 
+primární klíč primárního objektu. Primární klíč primárního objektu ale
+nebude v souvisejícím objektu jedinečný. Související objekt bude tedy 
+obsahovat svůj primární klíč, který bude jedinečný, a cizí klíč, který bude
+moci obsahovat i duplicitní hodnoty.</p>
+
+<p>V našem případě bude primární objekt objekt <code>Zakaznici </code>a 
+související objekt bude objekt <code>Objednavky</code>. Objekt
+<code>Objednavky</code> bude tedy vypadat takto:</p>
+
+<p> 
+<code>Objednavky(ID_Objednavky, ID_Zakaznika, Datum_Objednavky, Mnozstvi,
+Produkt)</code>.</p>
+
+<p>Sloupec <code>ID_Zakaznika</code> nebude v objektu Objednavky označen jako jedinečný. Kdyby byl cizí klíč jedinečný, vytvořili bychom relaci 1:1!</p>
+
+<p align="center"><img src="tvorba-databazi-v-mysql-i_soubory/relace_1N.gif" alt="Relace 1:N" height="253" width="249"></p>
+
+<h2>Relace M:N</h2>
+
+<p>Relace M:N by mohla vzniknout mezi objekty <code>Objednavky</code> a
+<code>Hudebni_Alba</code>. Jedno hudební album může být ve více 
+objednávkách a jedna objednávka může obsahovat více hudebních alb.</p>
+
+<p>Relaci M:N si můžeme představit jako dvě relace 1:N. Potřebujeme,
+aby oba dva objekty byly primární. Abychom toho dosáhli, musíme vytvořit 
+nový objekt <code>Rozpis_Objednavek</code> a vytvořit relaci 1:N mezi
+objekty <code>Objednavky</code> a <code>Rozpis_Objednavek</code> a dále mezi 
+objekty <code>Hudebni_Alba</code> a <code>Rozpis_Objednavek</code>, kde
+objekty <code>Objednavky</code> a <code>Hudebni_Alba</code> budou primární 
+objekty. Objekt <code>Rozpis_Objednavek</code> bude tedy obsahovat
+sloupce <code>Rozpis_Objednavek(ID_Rozpisu_Objednavek, ID_Objednavky,
+ID_Alba)</code>, kde <code>ID_Rozpisu_Objednavek</code> bude primární klíč
+a <code>ID_Objednavky,ID_Alba</code> budou cizí klíče, které budou moci 
+obsahovat duplicitní hodnoty.</p>
+
+<p align="center"><img src="tvorba-databazi-v-mysql-i_soubory/relace_MN.gif" alt="Relace M:N" height="252" width="250"></p>
+
+<p align="center"><img src="tvorba-databazi-v-mysql-i_soubory/relace_MN_realizace.gif" alt="Realizace relace M:N" height="247" width="365"></p>
+
+<h1>Normalizace databáze</h1>
+
+<p>Normalizace databáze je v podstatě souhrn pravidel, které nám
+pomáhají vytvářet správné objekty, které obsahují správná pole. Normalizace
+také usnadňuje pochopení vzájemných vazeb (relací) mezi objekty.</p>
+
+<p>Existují 3 běžně používané stupně normalizace. Jsou uspořádány
+vzestupně podle úrovně uspořádání. </p>
+
+<h2>První normalizovaná forma (1NF)</h2>
+
+<p>Pravidlo 1NF říká, že všechny objekty obsahující opakující se
+sloupce je třeba rozdělit do nových objektů.</p>
+
+<p>V nerelační databázi bychom vytvořili objekt <code>Zakaznici</code>,
+který by obsahoval veškerá data týkající se zákazníků. Objekt
+<code>Zakaznici</code> by mohl vypadat třeba takto:</p>
+
+<p>
+<code>Zakaznici(ID_Zakaznika, Jmeno, Adresa, Mesto, PSC, Produkt_Cena, 
+Produkt_Nazev, Produkt_Cena, Produkt_Nazev2, Produkt_Cena2,
+Objednavka_Datum, Objednavka_Mnozstvi, Dodavatel_Nazev)</code>.</p>
+
+<p>Sloupce vztahující se k produktům budou zcela jistě obsahovat duplicitní 
+hodnoty. Proto podle pravidla 1NF musíme objekt <code>Zakaznici</code>
+rozbít a sloupce s duplicitními položkami umístit do samostatného objektu. 
+Nový objekt nazveme <code>Produkty</code>. Mezi objekty
+<code>Zakaznici</code> a <code>Produkty</code> vytvoříme relaci
+1:N, kde zákazníci bude primární objekt. </p><p>Objekty normalizované na úroveň 1NF budou tedy vypadat takto:</p>
+
+<p><code>
+Zakaznici(ID_Zakaznika, Jmeno, Adresa, Mesto, PSC, Objednavka_Datum, 
+Objednavka_Mnozstvi, Dodavatel_Nazev)<br>
+Produkty(ID_Produktu, ID_Zakaznika, Produkt_Nazev, Produkt_Cena)
+</code></p>
+
+<p>Nyní, když je databáze normalizovaná na úroveň 1NF, je mnohem snažší
+jak vyhledávání informací v databázi, tak přidávání nových položek do
+databáze.</p>
+
+<h2>Druhá normalizovaná forma (2NF)</h2>
+
+<p>Pravidlo 2NF říká, že všechny objekty obsahující sloupce s duplicitními
+položkami, které mezi sebou vytvářejí částečné závislosti, je třeba 
+rozdělit do objektů nových, v nichž bude každý záznam uložen pouze jednou.
+</p>
+
+<p>Každý záznam v objektu <code>Zakaznici </code>obsahuje informace o
+objednávce. Jestliže si zákazníci budou objednávat pouze jeden druh zboží,
+bude vše vpořádku. Jestliže si ale objednají více druhů zboží, bude se 
+muset pro každý druh objednaného zboží vytvořit nový záznam v objektu
+<code>Zakaznici</code>. Lepší by bylo vytvořit nový objekt 
+<code>Objednavky</code> a mezi objekty <code>Produkty</code> a
+<code>Objednavky</code> vytvořit relaci M:N. K tomu ale potřebujeme 
+vytvořit nový objekt <code>Rozpis_Objednavek</code>.</p>
+
+<p>Objekty budou tedy vypadat takto:</p>
+
+<p><code>
+Zakaznici(ID_Zakaznika, Jmeno, Adresa, Mesto, PSC),<br>
+Objednavky(ID_Zakaznika, ID_Objednavky, Objednavka_Datum, 
+Objednavka_Mnozstvi, Dodavatel_Nazev),<br>
+Rozpis_Objednavek(ID_Rozpisu, ID_Pruduktu, ID_Objednavky),<br>
+Produkty(ID_Produktu, Produkt_Nazev, Produkt_Cena)
+</code>.</p>
+
+<p>A to už je něco jiného. Nyní jsme se můžeme doslova kochat výhodami
+relační databáze. Můžeme do databáze přidávat zákazníky, bez toho, aby to 
+mělo negativní dopad na ostatní objekty.</p>
+
+<h2>Třetí normalizovaná forma (3NF)</h2>
+
+<p>Pravidlo třetí normalizované formy vyžaduje důsledné odstranění a
+oddělení veškerých dat, která nejsou v přímém vztahu s daným objektem.</p>
+
+<p>Objekt <code>Objednavky</code> obsahuje sloupec 
+<code>Dodavatel_Nazev</code>. Tento sloupec ale přímo nesouvisí s daným
+objektem <code>Objednavky</code> (nepopisuje žádnou jeho vlastnost). Podle 
+pravidel 3NF je nutné tento sloupec vyčlenit do nového objektu. Vytvoříme
+proto nový objekt <code>Dodavatele</code> a mezi objekty 
+<code>Objednavky</code> a <code>Dodavatele</code> vytvoříme relaci 1:1.</p>
+
+<p>Objekty naší databáze normalizované na úroveň 3NF budou vypadat takto:</p>
+
+<p><code>
+Zakaznici(ID_Zakaznika, Jmeno, Adresa, Mesto, PSC),<br>
+Objednavky(ID_Zakaznika, ID_Objednavky, Objednavka_Datum, Objednavka_Mnozstvi),<br>
+Dodavatele(ID_Dodavatele, ID_Objednavky),<br>
+Rozpis_Objednavek(ID_Rozpisu, ID_Pruduktu, ID_Objednavky),<br>
+Produkty(ID_Produktu, Produkt_Nazev, Produkt_Cena)
+</code>.</p>
+
+<p>Nyní naše databáze vyhovuje pravidlům 3NF. Tento typ normalizace
+poskytuje maximální pružnost (stejně jako 2NF) a navíc předchází vzniku
+logických chyb. Každý sloupec objektu přímo souvisí s daným objektem a je 
+proto jednoznačně identifikován primárním klíčem daného objektu.</p>
+
+<h2>Kam až normalizovat?</h2>
+
+<p>To záleží na konkrétní databázi. Normalizace je tu proto, aby udělala
+databázi přehlednější, lépe rozšiřitelnou a výkonnější. Je proto zbytečné
+normalizovat, když normalizace nepřinese zvýšení přehlednosti,
+rozšiřitelnosti nebo výkonu. Zbytečně velký počet objektů může naopak
+udělat databázi nepřehlednou.</p>
+
+<p>Jako příklad zbytečné normalizace uvedu toto: Máme objekt
+<code>Zakaznici(ID_Zakaznika, Jmeno, Adresa1, Adresa2)</code>. Podle
+pravidel 1NF bychom měli informace o adrese z objektu
+<code>Zakaznici</code> odstranit, vytvořit nový objekt <code>Adresy</code>
+a mezi těmito objekty vytvořit relaci M:N - 1 zákazník může mít více adres
+a 1 adresa může příslušet více zákazníkům (spolubydlící). Musíme tedy
+vytvořit nový objekt Rozpis_Adres.</p>
+
+<p>Objekty by vypadaly takto:</p>
+
+<p><code>
+Zakaznici(ID_Zakaznika, Jmeno)<br>
+Rozpis_Adres(ID_Rozpisu_Adres, ID_Zakaznika, ID_Adresy)<br>
+Adresy(ID_Adresy)
+</code>.</p>
+
+<p>Teď databáze odpovídá standardům normalizace, ale kde je
+přehlednost?</p>
+
+<h1>Návrh databáze</h1>
+
+<p>Proces návrhu databáze se skládá z následujících kroků.</p>
+
+<h2>Definice aplikačního procesu</h2>
+
+<p>Definice aplikačního procesu je posloupnost kroků, které vedou ke
+splnění určitého cíle.</p>
+
+<p>Například Aplikační proces internetového obchodu by mohl vypadat takto:</p>
+
+<p><code>Zákazník si vybere produkty, které si u vás chce zakoupit -&gt; bude 
+ověřeno, zda je uživatel přihlášen, jestliže ne, musí se přihlásit
+popřípadě zaregistrovat -&gt; bude odeslána zpráva,která bude obsahovat 
+zákazníkovu objednávku -&gt; pracovníci expedice zabalí objednávku, ověří
+adresu příjemce a poštou odešlou objednávku zákazníkovi</code></p>
+
+<h2>Definice aplikačních objektů</h2>
+
+<p>Aplikační objekty obsahují informace, které chcete v databázi uchovávat.
+Většinou obsahují klíčové informace, které jsou pro uskutečnění dané
+operace nezbytné. Aplikační objekt je například produkt nebo zákazník. Dále 
+musímevytvořit sloupce objektů.</p>
+
+<h2>Definice aplikačních pravidel (aplikační logiky)</h2>
+
+<p>Aplikační pravidla jsou pravidla, kterými se koncová aplikace
+bude řídit.</p>
+
+<p>Uvedu několik příkladů:</p>
+
+<ul>
+<li>Internetový obchod musí uživatelům umožňovat vyhledávání produktů</li>
+<li>Uživatelům by mělo být umožněno zobrazení všech jejich transakcí</li> 
+<li>Nelze vykonávat záporné transakce</li>
+<li>Vždy, když objednávka vyhovuje požadavkům zpracování, mělo by dojít k
+odeslání objednávky...</li>
+</ul>
+
+<p>Rozlišujeme dva typy aplikačních pravidel. Předpokládaná aplikační
+pravidla a platná aplikační pravidla. Předpokládané aplikační pravidlo by
+mohlo být, že každý zákazník má jméno, nebo že má adresu. Platné pravidlo
+je pravidlo vynucené konkrétní implementací. Tak například, že objednávka
+může obsahovat víc produktů.</p>
+
+
+<h2>Modelování databáze</h2>
+
+<p>Modelování databáze je nakreslení si všech objektů a jejich sloupců.
+Dále by jste měli stanovit datové typy sloupců a stanovit, zda-li budou
+jednotlivé sloupce v databázi vyžadovaná.</p>
+
+<h2>Normalizace databáze a vytvoření relací mezi objekty</h2>
+
+<p>Tyto dvě činnosti mezi sebou do značné míry souvisí. Na normalizaci
+by jste měli myslet už při modelování databáze, ale často se vám může stát,
+že při vytváření relací zjistíte, že vaše databáze není dostatečně 
+normalizovaná.</p>
+
+<p>Při vytváření relací musíte nejprve určit, jestli mezi objekty existuje
+nějaký vztah a pak určit jaký.</p>
+
+<h1>Závěr</h1><p>Tak a to je všechno. V prvním díle jste se naučili základní databázové
+pojmy, víte, co to jsou relační databáze, umíte normalizovat a měli by jste
+být schopni správně strukturovanou databázi vymodelovat.</p>
+
+<p>Příští díl bude podstatně méně teoretický. Napřed si v rychlosti
+připomeneme výhody MySQL a dále se naučíte MySQL používat.</p>
+
+&nbsp; &nbsp; 
+&nbsp; &nbsp; <div class="rating">
+      <h3>Hodnocení:
+          <span title="Hlasů: 107">39 %</span>
+        </h3>
+        <div class="stupnice">
+          <div class="rtut" style="width: 30px;"></div>
+        </div>
+      
+        <div class="hlasy">
+&nbsp; &nbsp; &nbsp; &nbsp; 
+           <a href="http://www.abclinuxu.cz/clanky/rating/19642?action=rate&amp;rvalue=0&amp;return=true" rel="nofollow">špatné</a>
+           •
+           <a href="http://www.abclinuxu.cz/clanky/rating/19642?action=rate&amp;rvalue=3&amp;return=true" rel="nofollow">dobré</a>
+&nbsp; &nbsp; &nbsp; &nbsp; 
+        </div>
+        <iframe name="rating" class="rating_iframe" frameborder="0" height="20" scrolling="no"></iframe>
+    </div>
+
+
+
+ <table class="cl-serial">
+  <tbody><tr class="hlav">
+    <th colspan="2">Seriál <a href="http://www.abclinuxu.cz/serialy/tvorba-databazi-v-mysql">Tvorba databází v MySQL</a> (dílů: 6)</th>
+  </tr>
+  <tr class="dil">
+    <td>první díl</td>
+    <td>poslední díl</td>
+  </tr>
+  <tr>
+    <td><a href="http://www.abclinuxu.cz/clanky/navody/tvorba-databazi-v-mysql-i">Tvorba databází v MySQL - I</a></td>
+    <td><a href="http://www.abclinuxu.cz/clanky/navody/tvorba-databazi-v-mysql-vi">Tvorba databází v MySQL - VI</a></td>
+  </tr>
+  <tr class="dil">
+    <td>« předchozí díl</td>
+    <td>následující díl »</td>
+  </tr>
+  <tr>
+    <td>•</td>
+    <td><a href="http://www.abclinuxu.cz/clanky/navody/tvorba-databazi-v-mysql-ii">Tvorba databází v MySQL - II</a></td>
+  </tr>
+ </tbody></table>
+
+<div class="cl_perex souvisejici">
+        <h3>Související články</h3>
+            <a href="http://www.abclinuxu.cz/serialy/sprava-databazi-v-mysql">Seriál: Správa databází v MySQL</a> <br>
+            <a href="http://www.abclinuxu.cz/clanky/navody/prakticky-navod-k-pgsql">Praktický návod k PgSQL</a> <br>
+        <h3>Další články z této rubriky</h3>
+            <a href="http://www.abclinuxu.cz/clanky/navody/gentoo-ebuild-7-eapi-1-qa-kontroly-binarni-balicky">Gentoo ebuild - 7 (EAPI 1, QA kontroly, binární balíčky)</a><br>
+            <a href="http://www.abclinuxu.cz/clanky/navody/gentoo-ebuild-6-zavislosti-sloty-restrikce">Gentoo ebuild - 6 (závislosti, sloty, restrikce)</a><br>
+            <a href="http://www.abclinuxu.cz/clanky/navody/inkscape-6-vizitka">Inkscape - 6 (vizitka)</a><br>
+            <a href="http://www.abclinuxu.cz/clanky/navody/gentoo-linux-portage-overlay">Gentoo Linux - Portage Overlay</a><br>
+            <a href="http://www.abclinuxu.cz/clanky/navody/smarty-sablonovaci-system-6-vestavene-funkce-3">Smarty, šablonovací systém - 6 (vestavěné funkce - 3)</a><br>
+</div>
+
+<p><b>Nástroje</b>: <a rel="nofollow" href="http://www.abclinuxu.cz/clanky/show/19642?varianta=print">Tisk</a>,
+<a rel="nofollow" href="http://www.abclinuxu.cz/clanky/show/19642?varianta=print&amp;noDiz">Tisk bez diskuse</a>
+</p>
+
+
+<!-- empty -->
+    <h3>Komentáře</h3>
+    <div class="ds_toolbox">
+     <b>Nástroje:</b>
+         <a href="http://www.abclinuxu.cz/clanky/EditMonitor/19979?action=toggle" rel="nofollow">Sleduj</a>
+           <span title="Počet lidí, kteří sledují tuto diskusi">(0)</span>
+           <a class="info" href="#">?<span class="tooltip">Zašle každý nový komentář emailem na vaši adresu</span></a>,
+         <a href="http://www.abclinuxu.cz/clanky/show/19979?varianta=print" rel="nofollow">Tisk</a>
+    </div>
+
+    <p>
+            <a href="http://www.abclinuxu.cz/clanky/EditDiscussion?action=add&amp;dizId=5028&amp;threadId=0&amp;rid=19979" rel="nofollow">
+                Vložit další komentář
+            </a>
+    </p>
+
+      <div class="ds_hlavicka" id="14435">
+        20.3.2003 09:05
+            kamenac
+        <br>
+            <a onclick="schovej_vlakno(14435)" id="comment14435_toggle2" class="ds_control_sbalit2" title="Schová nebo rozbalí celé vlákno">Rozbalit</a>
+        Formular
+            <div id="comment14435_controls">
+                
+                <a href="http://www.abclinuxu.cz/clanky/EditDiscussion/19979?action=add&amp;dizId=5028&amp;threadId=14435">Odpovědět</a> |
+                <a href="http://www.abclinuxu.cz/clanky/EditRequest/19979?action=comment&amp;threadId=14435" title="Žádost o přesun diskuse, stížnost na komentář">Admin</a> |
+                <a href="#14435" title="Přímá adresa na tento komentář">Link</a> |
+                
+                <a href="http://www.abclinuxu.cz/EditUser?action=toBlacklist&amp;bName=kamenac&amp;url=/clanky/show/19979#14435" title="Přidá autora na seznam blokovaných uživatelů">Blokovat</a> |
+                <a onclick="schovej_vlakno(14435)" id="comment14435_toggle1" title="Schová nebo rozbalí celé vlákno" class="ds_control_sbalit3">Sbalit</a>
+            </div>
+    </div>
+    <div id="comment14435">
+            <div class="ds_text">
+Clanek je dobry, jen me zarazily ony "normovane formulare". Vznikly
+patrne otrockym prekladem z "normal form" (cesky casto opet mylne
+prekladane jako "normalni forma").<br>
+Spravny preklad je "prvni normalizovana forma".
+            </div>
+            
+        <div class="ds_odsazeni">
+      <div class="ds_hlavicka" id="14451">
+        20.3.2003 12:15
+<a href="http://www.abclinuxu.cz/lide/kratky">Robert Krátký</a>             | skóre: 91
+             | blog: <a href="http://www.abclinuxu.cz/blog/Robert">Robertův bloček</a>
+             | Praha
+<br>
+            <a onclick="schovej_vlakno(14451)" id="comment14451_toggle2" class="ds_control_sbalit2" title="Schová nebo rozbalí celé vlákno">Rozbalit</a>
+        Formular
+            <div id="comment14451_controls">
+                
+                <a href="http://www.abclinuxu.cz/clanky/EditDiscussion/19979?action=add&amp;dizId=5028&amp;threadId=14451">Odpovědět</a> |
+                <a href="http://www.abclinuxu.cz/clanky/EditRequest/19979?action=comment&amp;threadId=14451" title="Žádost o přesun diskuse, stížnost na komentář">Admin</a> |
+                <a href="#14451" title="Přímá adresa na tento komentář">Link</a> |
+                <a href="#14435" title="Odkaz na komentář o jednu úroveň výše">Výše</a> |
+                <a href="http://www.abclinuxu.cz/EditUser?action=toBlacklist&amp;bUid=2121&amp;url=/clanky/show/19979#14451" title="Přidá autora na seznam blokovaných uživatelů">Blokovat</a> |
+                <a onclick="schovej_vlakno(14451)" id="comment14451_toggle1" title="Schová nebo rozbalí celé vlákno" class="ds_control_sbalit3">Sbalit</a>
+            </div>
+    </div>
+    <div id="comment14451" class="ds_text_user2121">
+            <div class="ds_text">
+                moje chyba: autor me na tuto svou chybu upozornil, ale ve shonu jsem ji zapomnel opravit.
+            </div>
+            
+        <div class="ds_odsazeni">
+        </div>
+    </div>
+        </div>
+    </div>
+      <div class="ds_hlavicka" id="14436">
+        20.3.2003 09:17
+            Kocour_easy
+        <br>
+            <a onclick="schovej_vlakno(14436)" id="comment14436_toggle2" class="ds_control_sbalit2" title="Schová nebo rozbalí celé vlákno">Rozbalit</a>
+        Dodatky
+            <div id="comment14436_controls">
+                
+                <a href="http://www.abclinuxu.cz/clanky/EditDiscussion/19979?action=add&amp;dizId=5028&amp;threadId=14436">Odpovědět</a> |
+                <a href="http://www.abclinuxu.cz/clanky/EditRequest/19979?action=comment&amp;threadId=14436" title="Žádost o přesun diskuse, stížnost na komentář">Admin</a> |
+                <a href="#14436" title="Přímá adresa na tento komentář">Link</a> |
+                
+                <a href="http://www.abclinuxu.cz/EditUser?action=toBlacklist&amp;bName=Kocour_easy&amp;url=/clanky/show/19979#14436" title="Přidá autora na seznam blokovaných uživatelů">Blokovat</a> |
+                <a onclick="schovej_vlakno(14436)" id="comment14436_toggle1" title="Schová nebo rozbalí celé vlákno" class="ds_control_sbalit3">Sbalit</a>
+            </div>
+    </div>
+    <div id="comment14436">
+            <div class="ds_text">
+Celkem dobre,ale:
+1."Se strukturovanými daty se pracuje mnohem lépe, než s daty uloženými
+např. v souborech", to mam chapat jako, ze Databaze uklada data nekam
+do prostoru??
+2.Proc by nemohl byt primarni klic duplicitni???
+Dik </div>
+            
+        <div class="ds_odsazeni">
+      <div class="ds_hlavicka" id="14437">
+        20.3.2003 09:44
+            Radek
+        <br>
+            <a onclick="schovej_vlakno(14437)" id="comment14437_toggle2" class="ds_control_sbalit2" title="Schová nebo rozbalí celé vlákno">Rozbalit</a>
+        Re: Dodatky
+            <div id="comment14437_controls">
+                
+                <a href="http://www.abclinuxu.cz/clanky/EditDiscussion/19979?action=add&amp;dizId=5028&amp;threadId=14437">Odpovědět</a> |
+                <a href="http://www.abclinuxu.cz/clanky/EditRequest/19979?action=comment&amp;threadId=14437" title="Žádost o přesun diskuse, stížnost na komentář">Admin</a> |
+                <a href="#14437" title="Přímá adresa na tento komentář">Link</a> |
+                <a href="#14436" title="Odkaz na komentář o jednu úroveň výše">Výše</a> |
+                <a href="http://www.abclinuxu.cz/EditUser?action=toBlacklist&amp;bName=Radek&amp;url=/clanky/show/19979#14437" title="Přidá autora na seznam blokovaných uživatelů">Blokovat</a> |
+                <a onclick="schovej_vlakno(14437)" id="comment14437_toggle1" title="Schová nebo rozbalí celé vlákno" class="ds_control_sbalit3">Sbalit</a>
+            </div>
+    </div>
+    <div id="comment14437">
+            <div class="ds_text">
+ad 1. At uz databaze uklada data kam chce, smysl je prave v tom, ze to
+nas pri praci s daty v databazi nemusi zajimat a mohu s daty pracovat
+skutecne tak, jako by byly ulozeny nekde v prostoru <img src="tvorba-databazi-v-mysql-i_soubory/usmev.gif" alt=":-)" class="emo">
+<p>
+ad 2. Lepe receno hodnota primarniho klice nemuze byt duplicitni. Tato
+hodnota totiz slouzi k tomu, aby jednoznacne identifikovala prave jeden
+radek v tabulce. Primarni klic muze byt tvoren i kombinaci vice
+sloupcu. Relacni model nezna jiny zpusob, jak jednoznacne identifikovat
+jeden radek tabulky. Proto to tak musi byt a databaze hlida, ze je tato
+vlastnost splnena. </p></div>
+            
+        <div class="ds_odsazeni">
+        </div>
+    </div>
+      <div class="ds_hlavicka" id="14438">
+        20.3.2003 09:49
+            xyz
+        <br>
+            <a onclick="schovej_vlakno(14438)" id="comment14438_toggle2" class="ds_control_sbalit2" title="Schová nebo rozbalí celé vlákno">Rozbalit</a>
+        Dodatky
+            <div id="comment14438_controls">
+                
+                <a href="http://www.abclinuxu.cz/clanky/EditDiscussion/19979?action=add&amp;dizId=5028&amp;threadId=14438">Odpovědět</a> |
+                <a href="http://www.abclinuxu.cz/clanky/EditRequest/19979?action=comment&amp;threadId=14438" title="Žádost o přesun diskuse, stížnost na komentář">Admin</a> |
+                <a href="#14438" title="Přímá adresa na tento komentář">Link</a> |
+                <a href="#14436" title="Odkaz na komentář o jednu úroveň výše">Výše</a> |
+                <a href="http://www.abclinuxu.cz/EditUser?action=toBlacklist&amp;bName=xyz&amp;url=/clanky/show/19979#14438" title="Přidá autora na seznam blokovaných uživatelů">Blokovat</a> |
+                <a onclick="schovej_vlakno(14438)" id="comment14438_toggle1" title="Schová nebo rozbalí celé vlákno" class="ds_control_sbalit3">Sbalit</a>
+            </div>
+    </div>
+    <div id="comment14438">
+            <div class="ds_text">
+1. Nie databaza si to tiez uklada do suborov na FS, ale nie ako bezny
+textovy subor, alebo podobne.
+MySQL ako aj ostatne databazy to storuje ako binarne data.
+Napr: oracle to ma tak, vytvoris si tablespace s nejakou velkostou,
+tento tablespace je vacsinou na zaciatku jeden subor (datafile ulozeny
+na disku). Samozrejme tablespace sa moze mat viacej data files. No a v
+tablespace sa sklada este z mensich logickych jednotiek tzv. data
+segemnts a tie sa skladaju este z mensich, co su extenty (extents),
+ktore sa postupne tvoria ako sa plni databaza a tvoria sa podla
+pravidiel, ktore si vies nadefinovat.
+No a ked sme sa dostali uz sem, tak spomeniem, ze extenty sa skladaju z
+blokov alebo presnejsie z data blocks.
+2. primarny kluc je nieco, co sluzi na jednoznacnu identifikaciu
+zaznamu a z tohto dovodu, nemoze a nesmie byt duplicitny! </div>
+            
+        <div class="ds_odsazeni">
+      <div class="ds_hlavicka" id="14950">
+        27.11.2004 14:46
+            t0rN
+        <br>
+            <a onclick="schovej_vlakno(14950)" id="comment14950_toggle2" class="ds_control_sbalit2" title="Schová nebo rozbalí celé vlákno">Rozbalit</a>
+        Re: Dodatky
+            <div id="comment14950_controls">
+                
+                <a href="http://www.abclinuxu.cz/clanky/EditDiscussion/19979?action=add&amp;dizId=5028&amp;threadId=14950">Odpovědět</a> |
+                <a href="http://www.abclinuxu.cz/clanky/EditRequest/19979?action=comment&amp;threadId=14950" title="Žádost o přesun diskuse, stížnost na komentář">Admin</a> |
+                <a href="#14950" title="Přímá adresa na tento komentář">Link</a> |
+                <a href="#14438" title="Odkaz na komentář o jednu úroveň výše">Výše</a> |
+                <a href="http://www.abclinuxu.cz/EditUser?action=toBlacklist&amp;bName=t0rN&amp;url=/clanky/show/19979#14950" title="Přidá autora na seznam blokovaných uživatelů">Blokovat</a> |
+                <a onclick="schovej_vlakno(14950)" id="comment14950_toggle1" title="Schová nebo rozbalí celé vlákno" class="ds_control_sbalit3">Sbalit</a>
+            </div>
+    </div>
+    <div id="comment14950">
+            <div class="ds_text">
+                mluv česky, sakra, jsi na českym serveru!!!
+            </div>
+            
+        <div class="ds_odsazeni">
+      <div class="ds_hlavicka" id="14951">
+        29.11.2004 15:05
+            d.f.h
+        <br>
+            <a onclick="schovej_vlakno(14951)" id="comment14951_toggle2" class="ds_control_sbalit2" title="Schová nebo rozbalí celé vlákno">Rozbalit</a>
+        Re: Dodatky
+            <div id="comment14951_controls">
+                
+                <a href="http://www.abclinuxu.cz/clanky/EditDiscussion/19979?action=add&amp;dizId=5028&amp;threadId=14951">Odpovědět</a> |
+                <a href="http://www.abclinuxu.cz/clanky/EditRequest/19979?action=comment&amp;threadId=14951" title="Žádost o přesun diskuse, stížnost na komentář">Admin</a> |
+                <a href="#14951" title="Přímá adresa na tento komentář">Link</a> |
+                <a href="#14950" title="Odkaz na komentář o jednu úroveň výše">Výše</a> |
+                <a href="http://www.abclinuxu.cz/EditUser?action=toBlacklist&amp;bName=d.f.h&amp;url=/clanky/show/19979#14951" title="Přidá autora na seznam blokovaných uživatelů">Blokovat</a> |
+                <a onclick="schovej_vlakno(14951)" id="comment14951_toggle1" title="Schová nebo rozbalí celé vlákno" class="ds_control_sbalit3">Sbalit</a>
+            </div>
+    </div>
+    <div id="comment14951">
+            <div class="ds_text">
+                t0rN&gt; zabij se, ty nadhero!
+            </div>
+            
+        <div class="ds_odsazeni">
+        </div>
+    </div>
+      <div class="ds_hlavicka" id="14952">
+        20.4.2007 13:43
+            Santa Klaus
+        <br>
+            <a onclick="schovej_vlakno(14952)" id="comment14952_toggle2" class="ds_control_sbalit2" title="Schová nebo rozbalí celé vlákno">Rozbalit</a>
+        Re: Dodatky
+            <div id="comment14952_controls">
+                
+                <a href="http://www.abclinuxu.cz/clanky/EditDiscussion/19979?action=add&amp;dizId=5028&amp;threadId=14952">Odpovědět</a> |
+                <a href="http://www.abclinuxu.cz/clanky/EditRequest/19979?action=comment&amp;threadId=14952" title="Žádost o přesun diskuse, stížnost na komentář">Admin</a> |
+                <a href="#14952" title="Přímá adresa na tento komentář">Link</a> |
+                <a href="#14950" title="Odkaz na komentář o jednu úroveň výše">Výše</a> |
+                <a href="http://www.abclinuxu.cz/EditUser?action=toBlacklist&amp;bName=Santa%20Klaus&amp;url=/clanky/show/19979#14952" title="Přidá autora na seznam blokovaných uživatelů">Blokovat</a> |
+                <a onclick="schovej_vlakno(14952)" id="comment14952_toggle1" title="Schová nebo rozbalí celé vlákno" class="ds_control_sbalit3">Sbalit</a>
+            </div>
+    </div>
+    <div id="comment14952">
+            <div class="ds_text">
+                Sa nepotentuj ty pepik!!!
+            </div>
+            
+        <div class="ds_odsazeni">
+        </div>
+    </div>
+        </div>
+    </div>
+        </div>
+    </div>
+      <div class="ds_hlavicka" id="14439">
+        20.3.2003 09:51
+<a href="http://www.abclinuxu.cz/lide/reggae">Richard Gavenda</a>             | skóre: 18
+            
+             | Třinec
+<br>
+            <a onclick="schovej_vlakno(14439)" id="comment14439_toggle2" class="ds_control_sbalit2" title="Schová nebo rozbalí celé vlákno">Rozbalit</a>
+        Dodatky
+            <div id="comment14439_controls">
+                
+                <a href="http://www.abclinuxu.cz/clanky/EditDiscussion/19979?action=add&amp;dizId=5028&amp;threadId=14439">Odpovědět</a> |
+                <a href="http://www.abclinuxu.cz/clanky/EditRequest/19979?action=comment&amp;threadId=14439" title="Žádost o přesun diskuse, stížnost na komentář">Admin</a> |
+                <a href="#14439" title="Přímá adresa na tento komentář">Link</a> |
+                <a href="#14436" title="Odkaz na komentář o jednu úroveň výše">Výše</a> |
+                <a href="http://www.abclinuxu.cz/EditUser?action=toBlacklist&amp;bUid=509&amp;url=/clanky/show/19979#14439" title="Přidá autora na seznam blokovaných uživatelů">Blokovat</a> |
+                <a onclick="schovej_vlakno(14439)" id="comment14439_toggle1" title="Schová nebo rozbalí celé vlákno" class="ds_control_sbalit3">Sbalit</a>
+            </div>
+    </div>
+    <div id="comment14439" class="ds_text_user509">
+            <div class="ds_text">
+Primární klíč je tu od toho, aby jednoznačně identifikoval záznam.
+Pokud by byl duplicitní, jak pak neleznu záznam se kterým se má
+pracovat?<br>
+Autorovi: skvělý článek, doufám, že kvalita zůstane i v dalších dílech.
+            </div>
+            
+        <div class="ds_odsazeni">
+        </div>
+    </div>
+        </div>
+    </div>
+      <div class="ds_hlavicka" id="14452">
+        20.3.2003 12:19
+            rat
+        <br>
+            <a onclick="schovej_vlakno(14452)" id="comment14452_toggle2" class="ds_control_sbalit2" title="Schová nebo rozbalí celé vlákno">Rozbalit</a>
+        priklad s adresou
+            <div id="comment14452_controls">
+                
+                <a href="http://www.abclinuxu.cz/clanky/EditDiscussion/19979?action=add&amp;dizId=5028&amp;threadId=14452">Odpovědět</a> |
+                <a href="http://www.abclinuxu.cz/clanky/EditRequest/19979?action=comment&amp;threadId=14452" title="Žádost o přesun diskuse, stížnost na komentář">Admin</a> |
+                <a href="#14452" title="Přímá adresa na tento komentář">Link</a> |
+                
+                <a href="http://www.abclinuxu.cz/EditUser?action=toBlacklist&amp;bName=rat&amp;url=/clanky/show/19979#14452" title="Přidá autora na seznam blokovaných uživatelů">Blokovat</a> |
+                <a onclick="schovej_vlakno(14452)" id="comment14452_toggle1" title="Schová nebo rozbalí celé vlákno" class="ds_control_sbalit3">Sbalit</a>
+            </div>
+    </div>
+    <div id="comment14452">
+            <div class="ds_text">
+jen k tomu prikladu s adresou - nejde jen o prehlednost (ta je navic
+subjektivni), ale i o schopnost reprezentovat data. v tomto konkretnim
+pripade pred normalizaci "neexistuje" (mysleny) objekt adresa, nedokazu
+ho popsat pokud na te adrese nekdo z me databaze nesidli a ani pak neni
+nezavisly. to nemusi ale muze vadit, casto se to ukaze az po nejake
+dobe a musi se to nejak zaprasit, cimz jde prehlednost zcela do haje.
+takze doporucuju nehledat v konkretnich pripadech duvody "proc
+normalizovat", ale naopak "proc nenormalizovat". </div>
+            
+        <div class="ds_odsazeni">
+        </div>
+    </div>
+      <div class="ds_hlavicka" id="14454">
+        20.3.2003 12:49
+<a href="http://www.abclinuxu.cz/lide/hassmanm">met</a>             | skóre: 8
+            
+             | Praha
+<br>
+            <a onclick="schovej_vlakno(14454)" id="comment14454_toggle2" class="ds_control_sbalit2" title="Schová nebo rozbalí celé vlákno">Rozbalit</a>
+        dojde i na php ci perl
+            <div id="comment14454_controls">
+                
+                <a href="http://www.abclinuxu.cz/clanky/EditDiscussion/19979?action=add&amp;dizId=5028&amp;threadId=14454">Odpovědět</a> |
+                <a href="http://www.abclinuxu.cz/clanky/EditRequest/19979?action=comment&amp;threadId=14454" title="Žádost o přesun diskuse, stížnost na komentář">Admin</a> |
+                <a href="#14454" title="Přímá adresa na tento komentář">Link</a> |
+                
+                <a href="http://www.abclinuxu.cz/EditUser?action=toBlacklist&amp;bUid=1646&amp;url=/clanky/show/19979#14454" title="Přidá autora na seznam blokovaných uživatelů">Blokovat</a> |
+                <a onclick="schovej_vlakno(14454)" id="comment14454_toggle1" title="Schová nebo rozbalí celé vlákno" class="ds_control_sbalit3">Sbalit</a>
+            </div>
+    </div>
+    <div id="comment14454" class="ds_text_user1646">
+            <div class="ds_text">
+                Pekny clanek, doufam, ze casem dojde i k tomu jak pracovat s MySQL z PHP ci Perlu.
+            </div>
+            
+        <div class="ds_odsazeni">
+        </div>
+    </div>
+      <div class="ds_hlavicka" id="14489">
+        20.3.2003 17:31
+            Tomáš Hofman
+        <br>
+            <a onclick="schovej_vlakno(14489)" id="comment14489_toggle2" class="ds_control_sbalit2" title="Schová nebo rozbalí celé vlákno">Rozbalit</a>
+        MySQL... uz zase?
+            <div id="comment14489_controls">
+                
+                <a href="http://www.abclinuxu.cz/clanky/EditDiscussion/19979?action=add&amp;dizId=5028&amp;threadId=14489">Odpovědět</a> |
+                <a href="http://www.abclinuxu.cz/clanky/EditRequest/19979?action=comment&amp;threadId=14489" title="Žádost o přesun diskuse, stížnost na komentář">Admin</a> |
+                <a href="#14489" title="Přímá adresa na tento komentář">Link</a> |
+                
+                <a href="http://www.abclinuxu.cz/EditUser?action=toBlacklist&amp;bName=Tom%C3%A1%C5%A1%20Hofman&amp;url=/clanky/show/19979#14489" title="Přidá autora na seznam blokovaných uživatelů">Blokovat</a> |
+                <a onclick="schovej_vlakno(14489)" id="comment14489_toggle1" title="Schová nebo rozbalí celé vlákno" class="ds_control_sbalit3">Sbalit</a>
+            </div>
+    </div>
+    <div id="comment14489">
+            <div class="ds_text">
+Ne, ze bych proti MySQL neco mel (jako, ze mam :), ale zacina to
+vypadat na hegemonii jednoho (navic pomerne spatneho db serveru), proc
+taky nekdo nenapise neco o PostgreSQL? Navic podle toho co jsem precetl
+to neni o MySQL, ale o SQL (ze by skryta reklama? ale to snad ne...). </div>
+            
+        <div class="ds_odsazeni">
+      <div class="ds_hlavicka" id="14493">
+        20.3.2003 17:53
+            Jan Kubik
+        <br>
+            <a onclick="schovej_vlakno(14493)" id="comment14493_toggle2" class="ds_control_sbalit2" title="Schová nebo rozbalí celé vlákno">Rozbalit</a>
+        MySQL... uz zase?
+            <div id="comment14493_controls">
+                
+                <a href="http://www.abclinuxu.cz/clanky/EditDiscussion/19979?action=add&amp;dizId=5028&amp;threadId=14493">Odpovědět</a> |
+                <a href="http://www.abclinuxu.cz/clanky/EditRequest/19979?action=comment&amp;threadId=14493" title="Žádost o přesun diskuse, stížnost na komentář">Admin</a> |
+                <a href="#14493" title="Přímá adresa na tento komentář">Link</a> |
+                <a href="#14489" title="Odkaz na komentář o jednu úroveň výše">Výše</a> |
+                <a href="http://www.abclinuxu.cz/EditUser?action=toBlacklist&amp;bName=Jan%20Kubik&amp;url=/clanky/show/19979#14493" title="Přidá autora na seznam blokovaných uživatelů">Blokovat</a> |
+                <a onclick="schovej_vlakno(14493)" id="comment14493_toggle1" title="Schová nebo rozbalí celé vlákno" class="ds_control_sbalit3">Sbalit</a>
+            </div>
+    </div>
+    <div id="comment14493">
+            <div class="ds_text">
+                pan asi necetl zakladni dila ceskeho guru Karla Zaka na rooto a jinych zdrojich. Stydte se.
+            </div>
+            
+        <div class="ds_odsazeni">
+      <div class="ds_hlavicka" id="14948">
+        27.3.2003 21:10
+<a href="http://www.abclinuxu.cz/lide/tomaash">theo</a>             | skóre: 15
+            
+             | Roznov ... hadej ktery?
+<br>
+            <a onclick="schovej_vlakno(14948)" id="comment14948_toggle2" class="ds_control_sbalit2" title="Schová nebo rozbalí celé vlákno">Rozbalit</a>
+        MySQL... uz zase?
+            <div id="comment14948_controls">
+                
+                <a href="http://www.abclinuxu.cz/clanky/EditDiscussion/19979?action=add&amp;dizId=5028&amp;threadId=14948">Odpovědět</a> |
+                <a href="http://www.abclinuxu.cz/clanky/EditRequest/19979?action=comment&amp;threadId=14948" title="Žádost o přesun diskuse, stížnost na komentář">Admin</a> |
+                <a href="#14948" title="Přímá adresa na tento komentář">Link</a> |
+                <a href="#14493" title="Odkaz na komentář o jednu úroveň výše">Výše</a> |
+                <a href="http://www.abclinuxu.cz/EditUser?action=toBlacklist&amp;bUid=1485&amp;url=/clanky/show/19979#14948" title="Přidá autora na seznam blokovaných uživatelů">Blokovat</a> |
+                <a onclick="schovej_vlakno(14948)" id="comment14948_toggle1" title="Schová nebo rozbalí celé vlákno" class="ds_control_sbalit3">Sbalit</a>
+            </div>
+    </div>
+    <div id="comment14948" class="ds_text_user1485">
+            <div class="ds_text">
+                cesky guru Karel Zak mi neni prilis znamy takze mi neni jasna souvislost. Stydet se nemam za co.
+            </div>
+            <div class="signature">I come to see with eyes unclouded by hate.
+-- <a href="http://ashitaka.cz/" rel="nofollow">Ashitaka</a></div>
+        <div class="ds_odsazeni">
+        </div>
+    </div>
+        </div>
+    </div>
+      <div class="ds_hlavicka" id="14495">
+        20.3.2003 18:01
+<a href="http://www.abclinuxu.cz/lide/kratky">Robert Krátký</a>             | skóre: 91
+             | blog: <a href="http://www.abclinuxu.cz/blog/Robert">Robertův bloček</a>
+             | Praha
+<br>
+            <a onclick="schovej_vlakno(14495)" id="comment14495_toggle2" class="ds_control_sbalit2" title="Schová nebo rozbalí celé vlákno">Rozbalit</a>
+        MySQL... uz zase?
+            <div id="comment14495_controls">
+                
+                <a href="http://www.abclinuxu.cz/clanky/EditDiscussion/19979?action=add&amp;dizId=5028&amp;threadId=14495">Odpovědět</a> |
+                <a href="http://www.abclinuxu.cz/clanky/EditRequest/19979?action=comment&amp;threadId=14495" title="Žádost o přesun diskuse, stížnost na komentář">Admin</a> |
+                <a href="#14495" title="Přímá adresa na tento komentář">Link</a> |
+                <a href="#14489" title="Odkaz na komentář o jednu úroveň výše">Výše</a> |
+                <a href="http://www.abclinuxu.cz/EditUser?action=toBlacklist&amp;bUid=2121&amp;url=/clanky/show/19979#14495" title="Přidá autora na seznam blokovaných uživatelů">Blokovat</a> |
+                <a onclick="schovej_vlakno(14495)" id="comment14495_toggle1" title="Schová nebo rozbalí celé vlákno" class="ds_control_sbalit3">Sbalit</a>
+            </div>
+    </div>
+    <div id="comment14495" class="ds_text_user2121">
+            <div class="ds_text">
+                Clanek o PgSQL se uz mam "na stole". Vyjde doufam pristi tyden. Pak si muzete zaflamovat <img src="tvorba-databazi-v-mysql-i_soubory/usmev.gif" alt=":-)" class="emo">.
+            </div>
+            
+        <div class="ds_odsazeni">
+      <div class="ds_hlavicka" id="14503">
+                <img src="tvorba-databazi-v-mysql-i_soubory/1561.gif" id="comment14503_avatar" alt="avatar" class="ds_avatar">
+        20.3.2003 20:05
+<a href="http://www.abclinuxu.cz/lide/tsunami">Zdeněk Burda</a>             | skóre: 61
+             | blog: <a href="http://www.abclinuxu.cz/blog/zdenduv_blog">Zdendův blog</a>
+             | Srch
+<br>
+            <a onclick="schovej_vlakno(14503)" id="comment14503_toggle2" class="ds_control_sbalit2" title="Schová nebo rozbalí celé vlákno">Rozbalit</a>
+        MySQL... uz zase?
+            <div id="comment14503_controls">
+                
+                <a href="http://www.abclinuxu.cz/clanky/EditDiscussion/19979?action=add&amp;dizId=5028&amp;threadId=14503">Odpovědět</a> |
+                <a href="http://www.abclinuxu.cz/clanky/EditRequest/19979?action=comment&amp;threadId=14503" title="Žádost o přesun diskuse, stížnost na komentář">Admin</a> |
+                <a href="#14503" title="Přímá adresa na tento komentář">Link</a> |
+                <a href="#14495" title="Odkaz na komentář o jednu úroveň výše">Výše</a> |
+                <a href="http://www.abclinuxu.cz/EditUser?action=toBlacklist&amp;bUid=1561&amp;url=/clanky/show/19979#14503" title="Přidá autora na seznam blokovaných uživatelů">Blokovat</a> |
+                <a onclick="schovej_vlakno(14503)" id="comment14503_toggle1" title="Schová nebo rozbalí celé vlákno" class="ds_control_sbalit3">Sbalit</a>
+            </div>
+    </div>
+    <div id="comment14503" class="ds_text_user1561">
+            <div class="ds_text">
+                Uz se tesiiim
+            </div>
+            <div class="signature">--
+Nezdar není hanbou, hanbou je strach z pokusu.
+<a href="http://www.zdenda.com/" rel="nofollow">Zdendova domácí stránka</a></div>
+        <div class="ds_odsazeni">
+      <div class="ds_hlavicka" id="14507">
+        20.3.2003 20:51
+            buffery
+        <br>
+            <a onclick="schovej_vlakno(14507)" id="comment14507_toggle2" class="ds_control_sbalit2" title="Schová nebo rozbalí celé vlákno">Rozbalit</a>
+        MySQL... uz zase?
+            <div id="comment14507_controls">
+                
+                <a href="http://www.abclinuxu.cz/clanky/EditDiscussion/19979?action=add&amp;dizId=5028&amp;threadId=14507">Odpovědět</a> |
+                <a href="http://www.abclinuxu.cz/clanky/EditRequest/19979?action=comment&amp;threadId=14507" title="Žádost o přesun diskuse, stížnost na komentář">Admin</a> |
+                <a href="#14507" title="Přímá adresa na tento komentář">Link</a> |
+                <a href="#14503" title="Odkaz na komentář o jednu úroveň výše">Výše</a> |
+                <a href="http://www.abclinuxu.cz/EditUser?action=toBlacklist&amp;bName=buffery&amp;url=/clanky/show/19979#14507" title="Přidá autora na seznam blokovaných uživatelů">Blokovat</a> |
+                <a onclick="schovej_vlakno(14507)" id="comment14507_toggle1" title="Schová nebo rozbalí celé vlákno" class="ds_control_sbalit3">Sbalit</a>
+            </div>
+    </div>
+    <div id="comment14507">
+            <div class="ds_text">
+                Ja taky<img src="tvorba-databazi-v-mysql-i_soubory/usmev.gif" alt=":-)" class="emo">
+            </div>
+            
+        <div class="ds_odsazeni">
+        </div>
+    </div>
+        </div>
+    </div>
+        </div>
+    </div>
+      <div class="ds_hlavicka" id="14515">
+        21.3.2003 00:24
+            pavel 'goldenfish' kysilka
+        <br>
+            <a onclick="schovej_vlakno(14515)" id="comment14515_toggle2" class="ds_control_sbalit2" title="Schová nebo rozbalí celé vlákno">Rozbalit</a>
+        MySQL... uz zase?
+            <div id="comment14515_controls">
+                
+                <a href="http://www.abclinuxu.cz/clanky/EditDiscussion/19979?action=add&amp;dizId=5028&amp;threadId=14515">Odpovědět</a> |
+                <a href="http://www.abclinuxu.cz/clanky/EditRequest/19979?action=comment&amp;threadId=14515" title="Žádost o přesun diskuse, stížnost na komentář">Admin</a> |
+                <a href="#14515" title="Přímá adresa na tento komentář">Link</a> |
+                <a href="#14489" title="Odkaz na komentář o jednu úroveň výše">Výše</a> |
+                <a href="http://www.abclinuxu.cz/EditUser?action=toBlacklist&amp;bName=pavel%20%27goldenfish%27%20kysilka&amp;url=/clanky/show/19979#14515" title="Přidá autora na seznam blokovaných uživatelů">Blokovat</a> |
+                <a onclick="schovej_vlakno(14515)" id="comment14515_toggle1" title="Schová nebo rozbalí celé vlákno" class="ds_control_sbalit3">Sbalit</a>
+            </div>
+    </div>
+    <div id="comment14515">
+            <div class="ds_text">
+                vydrzte, urcite neco vyjde.
+            </div>
+            
+        <div class="ds_odsazeni">
+        </div>
+    </div>
+      <div class="ds_hlavicka" id="14540">
+        21.3.2003 14:18
+            xyz
+        <br>
+            <a onclick="schovej_vlakno(14540)" id="comment14540_toggle2" class="ds_control_sbalit2" title="Schová nebo rozbalí celé vlákno">Rozbalit</a>
+        MySQL... uz zase?
+            <div id="comment14540_controls">
+                
+                <a href="http://www.abclinuxu.cz/clanky/EditDiscussion/19979?action=add&amp;dizId=5028&amp;threadId=14540">Odpovědět</a> |
+                <a href="http://www.abclinuxu.cz/clanky/EditRequest/19979?action=comment&amp;threadId=14540" title="Žádost o přesun diskuse, stížnost na komentář">Admin</a> |
+                <a href="#14540" title="Přímá adresa na tento komentář">Link</a> |
+                <a href="#14489" title="Odkaz na komentář o jednu úroveň výše">Výše</a> |
+                <a href="http://www.abclinuxu.cz/EditUser?action=toBlacklist&amp;bName=xyz&amp;url=/clanky/show/19979#14540" title="Přidá autora na seznam blokovaných uživatelů">Blokovat</a> |
+                <a onclick="schovej_vlakno(14540)" id="comment14540_toggle1" title="Schová nebo rozbalí celé vlákno" class="ds_control_sbalit3">Sbalit</a>
+            </div>
+    </div>
+    <div id="comment14540">
+            <div class="ds_text">
+Odkaz pre T. Hofmana
+Podla coho sudis, ze MySQL nie je dobra databaza?
+My sme pouzivali PostgreSQL, problemy zacali byt cca u 1GB databazy.
+Momentalne pouzivame MySQL a momentalna velkost DB je nieco cez 3G a
+doposial sme nenarazili na ziadny problem s rychlostou.
+FUD1. MySQL nema transakcie - MA! dokonca pouziva dva typy transakcnych
+databaz BDB (na tejto je zalozene aj postgre), InnoDB (je rychlejsia a
+ma kopec vymozenosti oproti BDB).
+FUD2. MySQL sa nehodi na vacsie projekty, NASA vymenilo Oracle za MySQL
+na vsetkych weboch. MySQL pouziva aj Yahoo.
+FUD3. MySQL nepozna subselecty - pozna, 4.1.0, mam ju skompilovanu a
+ide to super!
+MySQL nema trigre, ani stored procedury - ano nema, stored procedury sa
+chystaju a dokonca budu moct byt aj v roznych jazykoch na zaciatok to
+budu dva nativny (nieco ako PL/SQL alebo postgre bastard PSQL) a PHP,
+pretoze do MySQL sa integruje ZEnd Engine a neskor to bude C, Perl.
+Trigre autori nechcu kvoli rychlosti, ale postupom casu aj tak budu
+donuteny.
+BTW: na pseudo stored procedury existuju patche do MySQL.
+FUD4. Z Postgre sa jednoduchsie prechadza na oracle - skusali ste napr.
+uz migrovat vase stored procedury <img src="tvorba-databazi-v-mysql-i_soubory/usmev.gif" alt=":-)" class="emo">
+Na zaver len dodam, ze "milujem" ludi, ktory si niekde nieco precitaju
+alebo vypocuju na prednaske a zacnu sirit FUD. Pri tom tito ludia ani
+netusia, co to je full table scan, prip. rollback segment, redo log
+alebo aky je rozdiel medzi B-tree indexom a bitmapovym indexom a co a
+kedy pouzit.
+MySQL je velmi dobry a rychly SQL server a vrele ho doporucujem.
+Neexistuje najlepsi ani "unbreakable" SQL server, kazdy je na nieco
+dobry, len je potrebne poznat ich prednosti a slabiny a podla toho
+postupovat pri vybere pre nejaky projekt. </div>
+            
+        <div class="ds_odsazeni">
+      <div class="ds_hlavicka" id="14590">
+        22.3.2003 17:49
+            Pavel 'Goldenfish' Kysilka
+        <br>
+            <a onclick="schovej_vlakno(14590)" id="comment14590_toggle2" class="ds_control_sbalit2" title="Schová nebo rozbalí celé vlákno">Rozbalit</a>
+        MySQL... uz zase?
+            <div id="comment14590_controls">
+                
+                <a href="http://www.abclinuxu.cz/clanky/EditDiscussion/19979?action=add&amp;dizId=5028&amp;threadId=14590">Odpovědět</a> |
+                <a href="http://www.abclinuxu.cz/clanky/EditRequest/19979?action=comment&amp;threadId=14590" title="Žádost o přesun diskuse, stížnost na komentář">Admin</a> |
+                <a href="#14590" title="Přímá adresa na tento komentář">Link</a> |
+                <a href="#14540" title="Odkaz na komentář o jednu úroveň výše">Výše</a> |
+                <a href="http://www.abclinuxu.cz/EditUser?action=toBlacklist&amp;bName=Pavel%20%27Goldenfish%27%20Kysilka&amp;url=/clanky/show/19979#14590" title="Přidá autora na seznam blokovaných uživatelů">Blokovat</a> |
+                <a onclick="schovej_vlakno(14590)" id="comment14590_toggle1" title="Schová nebo rozbalí celé vlákno" class="ds_control_sbalit3">Sbalit</a>
+            </div>
+    </div>
+    <div id="comment14590">
+            <div class="ds_text">
+                zdravim,<br>
+a pridam si do flame.<br>
+1) rychlost je sice hezka vec, ale pokud dana database nema nejake featury, tak si je potom muzete 
+ doprogramovavat a jako programator si to opravdu hodite.a o prenositelnosti na dalsi projekty si muzete nechat zdat.<br>
+2)subselecty - nevim, jak vy, ale ja bych si nedal na server versi databasoveho serveru, ktera neni poradne ozkousena.<br>
+3) funkce a trigery - pokud je znate, tak tam se da teprve rici, ze
+umite neco s databasemi.a v tom je sila pouziti databasi. ne v tom, ze
+umite udelat SELECT A INSERT.tento bod nemyslim nejak spatne.<br>
+4)pokud je database pomala pri urcitem mnozstvi dat, 
+ tak se to vyplati mozna si dat do database nejaka testovaci data.menit potom uz databasovy server je pozde.<br>
+5) taky jsem se domnival, ze mysql je to nejlepsi, pred pul rokem jsem zmenil nazor.
+ale zalezi to od projektu.<br>
+zatim goldenfish
+            </div>
+            
+        <div class="ds_odsazeni">
+        </div>
+    </div>
+      <div class="ds_hlavicka" id="14949">
+        27.3.2003 21:15
+<a href="http://www.abclinuxu.cz/lide/tomaash">theo</a>             | skóre: 15
+            
+             | Roznov ... hadej ktery?
+<br>
+            <a onclick="schovej_vlakno(14949)" id="comment14949_toggle2" class="ds_control_sbalit2" title="Schová nebo rozbalí celé vlákno">Rozbalit</a>
+        MySQL... uz zase?
+            <div id="comment14949_controls">
+                
+                <a href="http://www.abclinuxu.cz/clanky/EditDiscussion/19979?action=add&amp;dizId=5028&amp;threadId=14949">Odpovědět</a> |
+                <a href="http://www.abclinuxu.cz/clanky/EditRequest/19979?action=comment&amp;threadId=14949" title="Žádost o přesun diskuse, stížnost na komentář">Admin</a> |
+                <a href="#14949" title="Přímá adresa na tento komentář">Link</a> |
+                <a href="#14540" title="Odkaz na komentář o jednu úroveň výše">Výše</a> |
+                <a href="http://www.abclinuxu.cz/EditUser?action=toBlacklist&amp;bUid=1485&amp;url=/clanky/show/19979#14949" title="Přidá autora na seznam blokovaných uživatelů">Blokovat</a> |
+                <a onclick="schovej_vlakno(14949)" id="comment14949_toggle1" title="Schová nebo rozbalí celé vlákno" class="ds_control_sbalit3">Sbalit</a>
+            </div>
+    </div>
+    <div id="comment14949" class="ds_text_user1485">
+            <div class="ds_text">
+Co treba View? V MySQL planovane nekde ve verzi 5.?.? Co relacni
+integrita? Co zabezpeceni integrity dat (uznavam, ze ani PostgreSQL
+tohle nema dotazene do konce, ale kdyz uz jste nekousl ten Oracle :).
+Je mi uprimne jedno co pouzivate vy, ale zaujalo me to, ze clanek
+popisujici SQL ma v nazvu MySQL... </div>
+            <div class="signature">I come to see with eyes unclouded by hate.
+-- <a href="http://ashitaka.cz/" rel="nofollow">Ashitaka</a></div>
+        <div class="ds_odsazeni">
+        </div>
+    </div>
+        </div>
+    </div>
+        </div>
+    </div>
+      <div class="ds_hlavicka" id="14524">
+        21.3.2003 08:53
+            Michal
+        <br>
+            <a onclick="schovej_vlakno(14524)" id="comment14524_toggle2" class="ds_control_sbalit2" title="Schová nebo rozbalí celé vlákno">Rozbalit</a>
+        Laicky dotaz
+            <div id="comment14524_controls">
+                
+                <a href="http://www.abclinuxu.cz/clanky/EditDiscussion/19979?action=add&amp;dizId=5028&amp;threadId=14524">Odpovědět</a> |
+                <a href="http://www.abclinuxu.cz/clanky/EditRequest/19979?action=comment&amp;threadId=14524" title="Žádost o přesun diskuse, stížnost na komentář">Admin</a> |
+                <a href="#14524" title="Přímá adresa na tento komentář">Link</a> |
+                
+                <a href="http://www.abclinuxu.cz/EditUser?action=toBlacklist&amp;bName=Michal&amp;url=/clanky/show/19979#14524" title="Přidá autora na seznam blokovaných uživatelů">Blokovat</a> |
+                <a onclick="schovej_vlakno(14524)" id="comment14524_toggle1" title="Schová nebo rozbalí celé vlákno" class="ds_control_sbalit3">Sbalit</a>
+            </div>
+    </div>
+    <div id="comment14524">
+            <div class="ds_text">
+Dobry den,
+Mam dve laicke otazky. Mozna jsem plne nepochopil ty vazby, ale u
+finalniho prikladu (3NF) nemohu vycist vazbu na zakaznika. Cekal bych,
+ze v nejake jine tabulce (produkty, objednavky ?) bude uveden klic
+ID_Zakaznika. A druhy dotaz. Chapu spravne, ze se u tabulky Dodavatele
+meni Dodavatel_Nazev na ID_Dodavatele ?
+Dekuji moc,
+michal </div>
+            
+        <div class="ds_odsazeni">
+      <div class="ds_hlavicka" id="14542">
+        21.3.2003 14:56
+<a href="http://www.abclinuxu.cz/lide/hauzar">David Hauzar</a>             | skóre: 26
+            
+             | Vimperk
+<br>
+            <a onclick="schovej_vlakno(14542)" id="comment14542_toggle2" class="ds_control_sbalit2" title="Schová nebo rozbalí celé vlákno">Rozbalit</a>
+        Re: Laicky dotaz
+            <div id="comment14542_controls">
+                
+                <a href="http://www.abclinuxu.cz/clanky/EditDiscussion/19979?action=add&amp;dizId=5028&amp;threadId=14542">Odpovědět</a> |
+                <a href="http://www.abclinuxu.cz/clanky/EditRequest/19979?action=comment&amp;threadId=14542" title="Žádost o přesun diskuse, stížnost na komentář">Admin</a> |
+                <a href="#14542" title="Přímá adresa na tento komentář">Link</a> |
+                <a href="#14524" title="Odkaz na komentář o jednu úroveň výše">Výše</a> |
+                <a href="http://www.abclinuxu.cz/EditUser?action=toBlacklist&amp;bUid=2459&amp;url=/clanky/show/19979#14542" title="Přidá autora na seznam blokovaných uživatelů">Blokovat</a> |
+                <a onclick="schovej_vlakno(14542)" id="comment14542_toggle1" title="Schová nebo rozbalí celé vlákno" class="ds_control_sbalit3">Sbalit</a>
+            </div>
+    </div>
+    <div id="comment14542" class="ds_text_user2459">
+            <div class="ds_text">
+Diky za objeveni chyby.
+1. V prikladu u 2NF i 3NF vazba na objekt Zakaznici skutecne chyby.
+Objekt Objednavky by mel obsahovat sloupec ID_Zakaznika.
+2.Kdyz bychom predpokladali, ze v databazi nebudou dodavatele se
+stejnym nazvem, mohl by se sloupec Nazev_Dodavatele "zmenit" v primarni
+klic nove vycleneneho objektu Dodavatele (tj.v ID_Dodavatele). Pokud
+bychom toto nemohli predpokladat, museli bychom v objektu Dodavatele
+vytvorit novy sloupec Nazev_Dodavatele (sloupec ID_Dodavatele by pak
+obsahoval treba nejake u kazdeho zaznamu jine cislo).
+U prikladu k Kam az normalizovat chyby v objektu Adresy sloupec Adresa
+(kdyz bychom predpokladali, ze v databazi nemohou mit 2 zakaznici
+stejnou adresu, mohl by sloupec ID_Adresy obsahovat adresu a mohlo by
+to zustat i tak, jak to je - situace je podobna jako u sloupce
+ID_Dodavatele). </div>
+            
+        <div class="ds_odsazeni">
+        </div>
+    </div>
+        </div>
+    </div>
+      <div class="ds_hlavicka" id="14551">
+        21.3.2003 18:25
+<a href="http://www.abclinuxu.cz/lide/hauzar">David Hauzar</a>             | skóre: 26
+            
+             | Vimperk
+<br>
+            <a onclick="schovej_vlakno(14551)" id="comment14551_toggle2" class="ds_control_sbalit2" title="Schová nebo rozbalí celé vlákno">Rozbalit</a>
+        Chyba v prikladu u Kam az normalizovat
+            <div id="comment14551_controls">
+                
+                <a href="http://www.abclinuxu.cz/clanky/EditDiscussion/19979?action=add&amp;dizId=5028&amp;threadId=14551">Odpovědět</a> |
+                <a href="http://www.abclinuxu.cz/clanky/EditRequest/19979?action=comment&amp;threadId=14551" title="Žádost o přesun diskuse, stížnost na komentář">Admin</a> |
+                <a href="#14551" title="Přímá adresa na tento komentář">Link</a> |
+                
+                <a href="http://www.abclinuxu.cz/EditUser?action=toBlacklist&amp;bUid=2459&amp;url=/clanky/show/19979#14551" title="Přidá autora na seznam blokovaných uživatelů">Blokovat</a> |
+                <a onclick="schovej_vlakno(14551)" id="comment14551_toggle1" title="Schová nebo rozbalí celé vlákno" class="ds_control_sbalit3">Sbalit</a>
+            </div>
+    </div>
+    <div id="comment14551" class="ds_text_user2459">
+            <div class="ds_text">
+Mezi objektem Zakaznici a Adresy by mela byt relace M:N, protoze 1
+zakaznik muze mit 2 adresy, ale i 1 adresa muze prisluset vice
+zakaznikum (spolubydlici).
+Objekty tedy budou vypadat takto:
+Zakaznici(ID_Zakaznika, Jmeno)
+Rozpis_Adres(ID_Rozpisu_Objednavek, ID_Zakaznika, ID_Adresy)
+Adresy(ID_Adresy)
+Ve sloupci ID_Adresy bude ulozena adresa. (V tomto pripade nemusime
+vytvaret zadny novy sloupec Adresa, protoze adresa v sloupci ID_Adresy
+bude vzdy jina) </div>
+            
+        <div class="ds_odsazeni">
+      <div class="ds_hlavicka" id="14553">
+        21.3.2003 20:03
+            Michal
+        <br>
+            <a onclick="schovej_vlakno(14553)" id="comment14553_toggle2" class="ds_control_sbalit2" title="Schová nebo rozbalí celé vlákno">Rozbalit</a>
+        Chyba v prikladu Kam az normalizovat
+            <div id="comment14553_controls">
+                
+                <a href="http://www.abclinuxu.cz/clanky/EditDiscussion/19979?action=add&amp;dizId=5028&amp;threadId=14553">Odpovědět</a> |
+                <a href="http://www.abclinuxu.cz/clanky/EditRequest/19979?action=comment&amp;threadId=14553" title="Žádost o přesun diskuse, stížnost na komentář">Admin</a> |
+                <a href="#14553" title="Přímá adresa na tento komentář">Link</a> |
+                <a href="#14551" title="Odkaz na komentář o jednu úroveň výše">Výše</a> |
+                <a href="http://www.abclinuxu.cz/EditUser?action=toBlacklist&amp;bName=Michal&amp;url=/clanky/show/19979#14553" title="Přidá autora na seznam blokovaných uživatelů">Blokovat</a> |
+                <a onclick="schovej_vlakno(14553)" id="comment14553_toggle1" title="Schová nebo rozbalí celé vlákno" class="ds_control_sbalit3">Sbalit</a>
+            </div>
+    </div>
+    <div id="comment14553">
+            <div class="ds_text">
+                Diky. Uz mi to zacina davat smysl ;)
+
+m.
+
+P.S. Tesim se na dalsi dily.
+            </div>
+            
+        <div class="ds_odsazeni">
+        </div>
+    </div>
+      <div class="ds_hlavicka" id="14583">
+        22.3.2003 14:51
+<a href="http://www.abclinuxu.cz/lide/hauzar">David Hauzar</a>             | skóre: 26
+            
+             | Vimperk
+<br>
+            <a onclick="schovej_vlakno(14583)" id="comment14583_toggle2" class="ds_control_sbalit2" title="Schová nebo rozbalí celé vlákno">Rozbalit</a>
+        RE: Chyba v prikladu u Kam az normalizovat
+            <div id="comment14583_controls">
+                
+                <a href="http://www.abclinuxu.cz/clanky/EditDiscussion/19979?action=add&amp;dizId=5028&amp;threadId=14583">Odpovědět</a> |
+                <a href="http://www.abclinuxu.cz/clanky/EditRequest/19979?action=comment&amp;threadId=14583" title="Žádost o přesun diskuse, stížnost na komentář">Admin</a> |
+                <a href="#14583" title="Přímá adresa na tento komentář">Link</a> |
+                <a href="#14551" title="Odkaz na komentář o jednu úroveň výše">Výše</a> |
+                <a href="http://www.abclinuxu.cz/EditUser?action=toBlacklist&amp;bUid=2459&amp;url=/clanky/show/19979#14583" title="Přidá autora na seznam blokovaných uživatelů">Blokovat</a> |
+                <a onclick="schovej_vlakno(14583)" id="comment14583_toggle1" title="Schová nebo rozbalí celé vlákno" class="ds_control_sbalit3">Sbalit</a>
+            </div>
+    </div>
+    <div id="comment14583" class="ds_text_user2459">
+            <div class="ds_text">
+                oops
+
+udelal jsem dalsi chybu...
+
+v popisu objektu Rozpis_Adres ma byt samozrejme misto ID_Rozpisu_Objednavek ID_Rozpisu_Adres
+            </div>
+            
+        <div class="ds_odsazeni">
+      <div class="ds_hlavicka" id="14593">
+        22.3.2003 19:12
+<a href="http://www.abclinuxu.cz/lide/rodier">vit novotny</a>            
+            
+            
+<br>
+            <a onclick="schovej_vlakno(14593)" id="comment14593_toggle2" class="ds_control_sbalit2" title="Schová nebo rozbalí celé vlákno">Rozbalit</a>
+        RE: Chyba v prikladu u Kam az normalizovat
+            <div id="comment14593_controls">
+                
+                <a href="http://www.abclinuxu.cz/clanky/EditDiscussion/19979?action=add&amp;dizId=5028&amp;threadId=14593">Odpovědět</a> |
+                <a href="http://www.abclinuxu.cz/clanky/EditRequest/19979?action=comment&amp;threadId=14593" title="Žádost o přesun diskuse, stížnost na komentář">Admin</a> |
+                <a href="#14593" title="Přímá adresa na tento komentář">Link</a> |
+                <a href="#14583" title="Odkaz na komentář o jednu úroveň výše">Výše</a> |
+                <a href="http://www.abclinuxu.cz/EditUser?action=toBlacklist&amp;bUid=2473&amp;url=/clanky/show/19979#14593" title="Přidá autora na seznam blokovaných uživatelů">Blokovat</a> |
+                <a onclick="schovej_vlakno(14593)" id="comment14593_toggle1" title="Schová nebo rozbalí celé vlákno" class="ds_control_sbalit3">Sbalit</a>
+            </div>
+    </div>
+    <div id="comment14593" class="ds_text_user2473">
+            <div class="ds_text">
+zajimalo by mne zda lze mysql vyuzit bez znalosti programovacich
+jazyku.. zda lze nejak volat data z mysql do html..treba
+ze bych mel html stranku a zni bych si cucal mysql data ? pokud ne asi
+nema smysl se tu zabejvat jen (my)sql a rovnou by to chtelo vzit od
+podlahy i s nejakym tim programovanim aby clovek potom rovnou mohl neco
+zkusit udelat.. a ne znat jen 1/2 nutneho.. ..ja bych radeji kdyby tu
+byla poradna vyuka php v cestine pro zacatecniky nebo programovani C
+pod linux pro zacatecniky. </div>
+            
+        <div class="ds_odsazeni">
+      <div class="ds_hlavicka" id="14599">
+        22.3.2003 20:24
+<a href="http://www.abclinuxu.cz/lide/hauzar">David Hauzar</a>             | skóre: 26
+            
+             | Vimperk
+<br>
+            <a onclick="schovej_vlakno(14599)" id="comment14599_toggle2" class="ds_control_sbalit2" title="Schová nebo rozbalí celé vlákno">Rozbalit</a>
+        RE: Chyba v prikladu u Kam az normalizovat
+            <div id="comment14599_controls">
+                
+                <a href="http://www.abclinuxu.cz/clanky/EditDiscussion/19979?action=add&amp;dizId=5028&amp;threadId=14599">Odpovědět</a> |
+                <a href="http://www.abclinuxu.cz/clanky/EditRequest/19979?action=comment&amp;threadId=14599" title="Žádost o přesun diskuse, stížnost na komentář">Admin</a> |
+                <a href="#14599" title="Přímá adresa na tento komentář">Link</a> |
+                <a href="#14593" title="Odkaz na komentář o jednu úroveň výše">Výše</a> |
+                <a href="http://www.abclinuxu.cz/EditUser?action=toBlacklist&amp;bUid=2459&amp;url=/clanky/show/19979#14599" title="Přidá autora na seznam blokovaných uživatelů">Blokovat</a> |
+                <a onclick="schovej_vlakno(14599)" id="comment14599_toggle1" title="Schová nebo rozbalí celé vlákno" class="ds_control_sbalit3">Sbalit</a>
+            </div>
+    </div>
+    <div id="comment14599" class="ds_text_user2459">
+            <div class="ds_text">
+Pro programovani www stranek php bez znalosti programovani vyuzit
+nemuzes. K databazi se potrebujes pripojit a pak ji sdelit, jaka data
+od ni chces. Databaze ti vrati data a ty musis jejich vkladani do html
+nejak ridit.
+Vse se dela pomoci programovaciho jazyku.
+Pro rychle nauceni doporucuji PHP. Literatury v cestine o PHP je mraky
+- pro zacatecniky vrele doporucuji: Ucebnice zakladu PHP4 od Grady -
+ani neni draha - stoji 200 KC.
+Rekl bych, ze poradna vyuka php pro zacatecniky tady nikdy nebude,
+protoze to je dost rozsahle a kvalitni literatury v cestine je hodne.
+Jeden z duvodu, proc jsem napsal tenhle serial je, ze v literature o
+php je mysql vetsinou probrano jen hodne povrchne a aktualnich,
+strucnych, prehlednych, v cestine napsanych knih o MySQL neni mnoho. </div>
+            
+        <div class="ds_odsazeni">
+      <div class="ds_hlavicka" id="14613">
+        23.3.2003 09:52
+            Frank
+        <br>
+            <a onclick="schovej_vlakno(14613)" id="comment14613_toggle2" class="ds_control_sbalit2" title="Schová nebo rozbalí celé vlákno">Rozbalit</a>
+        Knihy o mysql
+            <div id="comment14613_controls">
+                
+                <a href="http://www.abclinuxu.cz/clanky/EditDiscussion/19979?action=add&amp;dizId=5028&amp;threadId=14613">Odpovědět</a> |
+                <a href="http://www.abclinuxu.cz/clanky/EditRequest/19979?action=comment&amp;threadId=14613" title="Žádost o přesun diskuse, stížnost na komentář">Admin</a> |
+                <a href="#14613" title="Přímá adresa na tento komentář">Link</a> |
+                <a href="#14599" title="Odkaz na komentář o jednu úroveň výše">Výše</a> |
+                <a href="http://www.abclinuxu.cz/EditUser?action=toBlacklist&amp;bName=Frank&amp;url=/clanky/show/19979#14613" title="Přidá autora na seznam blokovaných uživatelů">Blokovat</a> |
+                <a onclick="schovej_vlakno(14613)" id="comment14613_toggle1" title="Schová nebo rozbalí celé vlákno" class="ds_control_sbalit3">Sbalit</a>
+            </div>
+    </div>
+    <div id="comment14613">
+            <div class="ds_text">
+Mám doma knihu Naučte se MySQL za 21 dní, a přijde mi hodně dobrá. Též
+mám rád knihu PHP tvorba interaktivních internetových aplikací -
+podrobný průvodce (J. Kosek).
+Pak se můžete mrknout i do PHP a MySQL - rozvoj webových aplikací (Luke
+Welling, Laura Thomson) nebo do PHP a MySQL (Hugh E. Williams, David
+Lane). Kvalitních knih v češtině je spousta, stručné sice nejsou (to je
+spíš úloha on-line úvodů a tutoriálů), ale není se co divit. Pokročilý
+uživatel stručnou referenci nepotřebuje a začátečníkovi je IMHO k
+ničemu. </div>
+            
+        <div class="ds_odsazeni">
+        </div>
+    </div>
+        </div>
+    </div>
+        </div>
+    </div>
+        </div>
+    </div>
+        </div>
+    </div>
+      <div class="ds_hlavicka" id="14602">
+        22.3.2003 22:35
+            Jan Kubik
+        <br>
+            <a onclick="schovej_vlakno(14602)" id="comment14602_toggle2" class="ds_control_sbalit2" title="Schová nebo rozbalí celé vlákno">Rozbalit</a>
+        o nesmyslnosti SQL - pro autora
+            <div id="comment14602_controls">
+                
+                <a href="http://www.abclinuxu.cz/clanky/EditDiscussion/19979?action=add&amp;dizId=5028&amp;threadId=14602">Odpovědět</a> |
+                <a href="http://www.abclinuxu.cz/clanky/EditRequest/19979?action=comment&amp;threadId=14602" title="Žádost o přesun diskuse, stížnost na komentář">Admin</a> |
+                <a href="#14602" title="Přímá adresa na tento komentář">Link</a> |
+                
+                <a href="http://www.abclinuxu.cz/EditUser?action=toBlacklist&amp;bName=Jan%20Kubik&amp;url=/clanky/show/19979#14602" title="Přidá autora na seznam blokovaných uživatelů">Blokovat</a> |
+                <a onclick="schovej_vlakno(14602)" id="comment14602_toggle1" title="Schová nebo rozbalí celé vlákno" class="ds_control_sbalit3">Sbalit</a>
+            </div>
+    </div>
+    <div id="comment14602">
+            <div class="ds_text">
+Mam malou prosbu na autora, jestli by nebylo mozno v pristim dile take
+napsat, proc vubec SQL, co jsou nevyhody, jake existuji alternativy. Do
+jakych slepych ulicek se napr. zenou projekty, stavici na SQL. Nekdy
+mam takovy pocit, ze cela programatorska obec akceptuje SQL jako neco
+od Boha - asi jako kdyz se myslelo, ze Zeme je placata.
+Povazoval bych za spravne, nez se dalsi generace vrhnou do diskuzi o
+tom, jestli je subselect potreba ci ne, si udelat jasno, jestli je ta
+SQL potreba - a jestlize ano, v cem nas omezuje.
+Dekuji </div>
+            
+        <div class="ds_odsazeni">
+      <div class="ds_hlavicka" id="14747">
+        25.3.2003 12:46
+            Pavel Stehule
+        <br>
+            <a onclick="schovej_vlakno(14747)" id="comment14747_toggle2" class="ds_control_sbalit2" title="Schová nebo rozbalí celé vlákno">Rozbalit</a>
+        o nesmyslnosti SQL - pro autora
+            <div id="comment14747_controls">
+                
+                <a href="http://www.abclinuxu.cz/clanky/EditDiscussion/19979?action=add&amp;dizId=5028&amp;threadId=14747">Odpovědět</a> |
+                <a href="http://www.abclinuxu.cz/clanky/EditRequest/19979?action=comment&amp;threadId=14747" title="Žádost o přesun diskuse, stížnost na komentář">Admin</a> |
+                <a href="#14747" title="Přímá adresa na tento komentář">Link</a> |
+                <a href="#14602" title="Odkaz na komentář o jednu úroveň výše">Výše</a> |
+                <a href="http://www.abclinuxu.cz/EditUser?action=toBlacklist&amp;bName=Pavel%20Stehule&amp;url=/clanky/show/19979#14747" title="Přidá autora na seznam blokovaných uživatelů">Blokovat</a> |
+                <a onclick="schovej_vlakno(14747)" id="comment14747_toggle1" title="Schová nebo rozbalí celé vlákno" class="ds_control_sbalit3">Sbalit</a>
+            </div>
+    </div>
+    <div id="comment14747">
+            <div class="ds_text">
+Ac nejsem autor, dovolim si odpovedet. Jsem totiz jeden z tech, kteri
+do programatorske obce busi nazor, ze SQL je dar od boha (i kdyz mi
+chvili trvalo, nez jsem se SQL naucil pouzivat, a jeste dyl nez jsem se
+s nim nejak dusevne smiril). Duvody proc pouzivat SQL jsou podle mne
+dva: a) radikalne se zjednodusi program, resp "zasmodrchanost" se
+presune do SQL, b) davam prostor k optimalizaci provedeni dotazu tim,
+ze problem popisi pomoci SELECTU. Musel bych znat velice dobre
+konkretni system abych navrhnul aplikaci, ktera bude stejne efektivni
+jako zoptimalizovane SQL. Kdysi jsem kvuli tomu odmital programovat v
+MS Accessu, kdy misto programovani se provadela jakasi alchimie. Krome
+jineho si mohu dotaz odzkouset nanecisto mimo programovanou aplikaci.
+Dale citelnost SQL dotazu je vetsi nez citelnost ISAM aplikaci (i kdyz
+jde asi o zvyk). Nevyhoda mi prijde jedina, ve vyjmecnych pripadech
+mohou byt reseni nezalozene na SQL databazich mnohem rychlejsi. viz
+rychlost ruznych malych systemu zalozenych na Foxce. Navic znalost SQL
+se vyplati i proskolenym uzivatelum, kteri at nemusi programovat jsou
+sto vyzobat z bazi potrebna data a nemusi kvuli tomu otravovat
+programatory, kteri se mohou venovat bohulibejsi praci, jako je psani
+nejapnych clanku pro internet:-&gt;. Co se tyce funkcionality, pro
+relacni databaze nevim o nicem co by neslo resit skrze SQL+ulozene
+procedury. Diskuze o tom, zdali db podporuje vnorene selecty, triggery
+atd je jen o tom, ze s temito vymozenostmi mohu napsat aplikaci o fous
+jednodussi, kratsi a pravdepodobne i robustnejsi a spolehlivejsi.
+Moznosti databaze maji samosebou dopad na navrh aplikace. Pokud
+databaze neumoznuje triggery, pak mam tenkou db vrstvu a mnohem
+slozitejsi aplikacni vrstvu (a nemusim tolik rozumet databazim). S
+triggrama a ostatnima paradickama napisi aplikaci skorem jenom na
+urovni databaze a vsechno ostatni je vlastne jen uzivatelsky interface.
+Velice silne a rychle generovani reportu je napriklad databaze
+generujici XML, ke kteremu se pripoji jen CCS a cele se to posle
+klientovi. Aplikaci mohu napsat i v tom nejpomalejsim skriptovacim
+jazyku a neovlivnim tim nijak vykon.
+Debata SQL ano ci ne uz dneska je pase. Pripomina to casy, kdy se
+diskutovalo o tom, zda-li je lepsi FORTRAN nebo strukturovane jazyky.
+NESQL databaze budou existovat stale (pro zvlastni pripady), ale bude
+to jen zlomek pouzivani db. Navic SQL nebo jazyky na nem zalozene
+celkem dobre integruji pristup k datovym zdrojum. Skrze SQL mohu
+odesilat filtrovat a cist maily, sledovat a monitorovat konfiguraci
+pocitace (WMI), dohledavat soubory, vyhledavat fultextove (FileNET)
+atd.
+Pavel </div>
+            
+        <div class="ds_odsazeni">
+        </div>
+    </div>
+        </div>
+    </div>
+      <div class="ds_hlavicka" id="14801">
+        26.3.2003 02:46
+            Jiri Matejka
+        <br>
+            <a onclick="schovej_vlakno(14801)" id="comment14801_toggle2" class="ds_control_sbalit2" title="Schová nebo rozbalí celé vlákno">Rozbalit</a>
+        Originalní článek???...
+            <div id="comment14801_controls">
+                
+                <a href="http://www.abclinuxu.cz/clanky/EditDiscussion/19979?action=add&amp;dizId=5028&amp;threadId=14801">Odpovědět</a> |
+                <a href="http://www.abclinuxu.cz/clanky/EditRequest/19979?action=comment&amp;threadId=14801" title="Žádost o přesun diskuse, stížnost na komentář">Admin</a> |
+                <a href="#14801" title="Přímá adresa na tento komentář">Link</a> |
+                
+                <a href="http://www.abclinuxu.cz/EditUser?action=toBlacklist&amp;bName=Jiri%20Matejka&amp;url=/clanky/show/19979#14801" title="Přidá autora na seznam blokovaných uživatelů">Blokovat</a> |
+                <a onclick="schovej_vlakno(14801)" id="comment14801_toggle1" title="Schová nebo rozbalí celé vlákno" class="ds_control_sbalit3">Sbalit</a>
+            </div>
+    </div>
+    <div id="comment14801">
+            <div class="ds_text">
+Zdravim, rad bych se dozvedel proc jsou casti clanku temer shodne s
+texty z knihy Naucte se MySQL za 21 dni (vydal cPress, autor Mark
+Maslakowski)?<br>
+Napriklad cely blok o normalizeci databaze vcetne prikladovych tabulek
+s nazvy sloupcu jsou identicke a texty trochu poupraveny a nektere
+nadpisy odstavcu uplne stejne...<br>
+Nikde ale nevidim, ze by tato kniha byla napsana jako zdroj ze ktereho se cerpalo...<br>
+Muze autor dat odpoved?<br>
+Diky
+            </div>
+            
+        <div class="ds_odsazeni">
+      <div class="ds_hlavicka" id="14936">
+        27.3.2003 18:45
+<a href="http://www.abclinuxu.cz/lide/hauzar">David Hauzar</a>             | skóre: 26
+            
+             | Vimperk
+<br>
+            <a onclick="schovej_vlakno(14936)" id="comment14936_toggle2" class="ds_control_sbalit2" title="Schová nebo rozbalí celé vlákno">Rozbalit</a>
+        Originalní článek???...
+            <div id="comment14936_controls">
+                
+                <a href="http://www.abclinuxu.cz/clanky/EditDiscussion/19979?action=add&amp;dizId=5028&amp;threadId=14936">Odpovědět</a> |
+                <a href="http://www.abclinuxu.cz/clanky/EditRequest/19979?action=comment&amp;threadId=14936" title="Žádost o přesun diskuse, stížnost na komentář">Admin</a> |
+                <a href="#14936" title="Přímá adresa na tento komentář">Link</a> |
+                <a href="#14801" title="Odkaz na komentář o jednu úroveň výše">Výše</a> |
+                <a href="http://www.abclinuxu.cz/EditUser?action=toBlacklist&amp;bUid=2459&amp;url=/clanky/show/19979#14936" title="Přidá autora na seznam blokovaných uživatelů">Blokovat</a> |
+                <a onclick="schovej_vlakno(14936)" id="comment14936_toggle1" title="Schová nebo rozbalí celé vlákno" class="ds_control_sbalit3">Sbalit</a>
+            </div>
+    </div>
+    <div id="comment14936" class="ds_text_user2459">
+            <div class="ds_text">
+                <p>Zdroje
+ze kterych jsem pri psani tohoto prvniho dilu cerpal: Naucte se MySQL
+za 21 dni, clanek (a jeho komentare) Modelovani databazi ze serveru
+root.cz, okrajove jeste i z PHP pokrocile programovani pro world wide
+web.</p>
+ 
+<p>Jinak na tom, ze jsem pouzil stejnou definici normalizovanych forem,
+nevidim nic spatneho. Tech definic normalizovanych norem je sice vice,
+vsechny jsou ale obdoby originalni anglicke.</p>  
+ 
+<p>Cely dil je zalozen na vytvareni databaze internetoveho obchodu.
+Neni to zrovna originalini reseni (priklad tvorby internetoveho obchodu
+se dnes vyskytuje temer ve vsech knihah o PHP nebo MySQL), nicmene
+databaze internetoveho obchodu je prakticky a pro lidi snadno
+predstavitelny priklad).<br>
+Priklad k normalizaci databaze je vytvoren tak, ze se do jednoho
+objektu z databaze internetoveho obchodu "nacpou" vsechny sloupce z
+ostatnich objektu (pro prehlednost jsem vybral jen nektere z nich) a
+objekt se pak pomoci normalizacnich pravidel rozklada. Vim, ze stejne
+je to provedeno i v MySQL za 21 dni, toto je ale nejlepsi reseni.
+(samozrejme bych mohl vymyslet na normalizaci priklad nesouvisejici z
+databazi internetoveho obchodu. Vzhledem k tomu, ze vyuzivam priklad
+internetoveho obchodu v predchozi casti, nebylo by to tak vhodne).</p> 
+ 
+<p>Nadpisy odstavcu: Odstavec pojednavajici o prvni normalizovane forme
+se ve vetsine literatury jmenuje Prvni normalizovana forma atd.</p> 
+ 
+<p>PS: Procital jste si uz manual o MySQL? Jiste (by) jste si vsiml, ze
+v MySQL za 21 dni jsou nektere nadpisy odstavcu identicke a nektere
+texty temer stejne jako v manualu. Vetsinou totiz nema smysl vymyslet
+nove definice, popisy funkci apod.</p>
+            </div>
+            
+        <div class="ds_odsazeni">
+        </div>
+    </div>
+        </div>
+    </div>
+
+        <p>
+            <a href="http://www.abclinuxu.cz/clanky/EditDiscussion?action=add&amp;threadId=0&amp;dizId=5028&amp;rid=19979" rel="nofollow">
+            Založit nové vlákno</a> •
+            <a href="#www-abclinuxu-cz">Nahoru</a>
+        </p>
+
+	</div>
+
+    	<div class="dl">
+		<div class="dl_vlevo">ISSN 1214-1267 &nbsp; Powered by
+			<a href="http://sun.cz/" rel="nofollow"><img style="margin-bottom: -3px;" src="tvorba-databazi-v-mysql-i_soubory/sun14.png" alt="Powered by Sun" height="14" width="38"></a></div>
+		<div class="dl_vpravo"><a href="http://www.abclinuxu.cz/doc/podminky-pouziti">Podmínky použití</a> | <a href="http://www.abclinuxu.cz/doc/osobni-udaje">Osobní údaje</a></div>
+		© 1999-2007 <a href="http://www.stickfish.cz/">Stickfish s.r.o.</a> Všechna práva vyhrazena.
+	</div>
+
+	</div> <!-- obal -->
+
+<!-- BBmedia one2many code -->
+<!-- HowTo: All the ad codes must be above this code! -->
+<!-- HowTo: It is good idea to place this code just below the last ad code. -->
+<script type="text/javascript" src="tvorba-databazi-v-mysql-i_soubory/bb_codesnif.js"></script>
+<script type="text/javascript" src="tvorba-databazi-v-mysql-i_soubory/bb_one2n.js"></script>
+<script type="text/javascript" src="tvorba-databazi-v-mysql-i_soubory/bb_one2n_002.js" charset="windows-1250"></script>
+<script type="text/javascript" src="tvorba-databazi-v-mysql-i_soubory/bb_one2n_003.js" charset="windows-1250"></script>
+<script type="text/javascript">/* <![CDATA[ */ 
+bmone2n.addPosition('681.2.3.6','','','','arbo-cara','display:none');
+bmone2n.addPosition('681.2.5.6','');
+bmone2n.addPosition('681.2.7.6','','this','margin: 0px auto','arbo-cara','display:none');
+bmone2n.addPosition('681.2.2.6','','this','width:750px;height:100px;margin: 0px auto');
+bmone2n.addPosition('681.2.6.6','');
+bmone2n.addPosition('681.2.9.6','');<!-- hypertext c. 2 -->
+bmone2n.addPosition('681.2.10.6','');<!-- zahlavi, vedle loga -->
+bmone2n.addPosition('681.3.2.6','');<!-- textbox, clanky -->
+bmone2n.addPosition('681.2.1.6','');<!-- vip -->
+bmone2n.getAd('adarbo2.bbmedia.cz');
+ /* ]]> */</script><script language="JavaScript" type="text/javascript" charset="windows-1250" src="tvorba-databazi-v-mysql-i_soubory/a_002.js"></script>
+
+<div id="bmone2t-681.2.5.6" style="display: none;"><script type="text/javascript">/* <![CDATA[ */ bmone2n.makeAd('681.2.5.6'); /* ]]> */</script></div>
+<div id="bmone2t-681.2.7.6" style="display: none;"><script type="text/javascript">/* <![CDATA[ */ bmone2n.makeAd('681.2.7.6'); /* ]]> */</script></div>
+<div id="bmone2t-681.2.2.6" style="display: none;"><script type="text/javascript">/* <![CDATA[ */ bmone2n.makeAd('681.2.2.6'); /* ]]> */</script></div>
+
+<div id="bmone2t-681.2.9.6" style="display: none;"><script type="text/javascript">/* <![CDATA[ */ bmone2n.makeAd('681.2.9.6'); /* ]]> */</script></div><!-- hypertext c. 2 -->
+<div id="bmone2t-681.2.10.6" style="display: none;"><script type="text/javascript">/* <![CDATA[ */ bmone2n.makeAd('681.1.10.6'); /* ]]> */</script></div><!-- zahlavi, vedle loga -->
+<div id="bmone2t-681.3.2.6" style="display: none;"><script type="text/javascript">/* <![CDATA[ */ bmone2n.makeAd('681.3.2.6'); /* ]]> */</script></div><!-- textbox, clanky -->
+<div id="bmone2t-681.2.1.6" style="display: none;"><script type="text/javascript">/* <![CDATA[ */ bmone2n.makeAd('681.2.1.6'); /* ]]> */</script></div><!-- vip -->
+<script type="text/javascript">/* <![CDATA[ */ bmone2n.moveAd(); /* ]]> */</script>
+<!-- impact: reklamy -->
+<!-- IMpact - zobrazení reklamy -->
+<script type="text/javascript">
+	//<![CDATA[
+	IM_init();
+	//]]>
+</script><script src="tvorba-databazi-v-mysql-i_soubory/imshow.htm" type="text/javascript" charset="windows-1250"></script>
+<script src="tvorba-databazi-v-mysql-i_soubory/urchin.js" type="text/javascript">
+</script>
+<script type="text/javascript">
+_uacct = "UA-3151434-1";
+urchinTracker();
+</script><div style="position: absolute; left: 917px; top: 164px; z-index: 1000000000; visibility: hidden; opacity: 1; width: 0px;" id="linkalert-box"><img style="width: 0px;" src="tvorba-databazi-v-mysql-i_soubory/none-icon.png" id="linkalert-icon-1"></div></body></html>

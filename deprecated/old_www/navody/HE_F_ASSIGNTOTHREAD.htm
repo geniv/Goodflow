@@ -1,0 +1,52 @@
+<!doctype html public "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=Windows-1250">
+<title>Funkce assign_to_thread</title>
+<link rel='stylesheet' style='text/css' href='../function.css'>
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000">
+
+
+
+<h2 class=function>assign_to_thread</h2>
+<img src='../images/cpp.gif' width='44' height='16' border='0' alt='c/c++' align='middle' hspace='2'><img src='../images/pascal.gif' width='44' height='16' border='0' alt='pascal' align='middle' hspace='2'>
+
+
+<br><br>
+<div class='typ'>void <b>cd_assign_to_thread</b>(cdp_t cdp);<br>
+procedure <b>cd_assign_to_thread</b>(cdp : cdp_t);
+</div>
+
+
+<p><b>Parametry</b></p>
+
+<table border=1 cols=2 frame=box rules=all width=421>
+
+<tr valign="top">
+<td width=21%><i>cdp </i></td>
+<td width=79%><a href="HE_EXTCD.htm">kontextová proměnná</a> klienta  </td>
+</tr>
+</table><br>
+
+<p><b>Od verze:</b></p>
+
+<p>7.0b</p>
+
+<p><b>Popis </b></p>
+
+<p>Funkce <b><code>assign_to_thread</code></b> umožňuje provoz aplikací, které mají více vláken přistupujících k databází a jedno vlákno může používat spojení vytvořené jiným vláknem. V takovém případě vlákno musí před započetím práce s databází zavolat tuto funkci. Po ukončení práce, zejména však předtím, než začne využívat jiné spojení na databázi, vlákno musí zavolat funkci <a href="HE_F_UNASSIGN.htm"><code>unassign</code></a>.</p>
+
+<p>Výše uvedené pravidlo platí bez ohledu na to, zda aplikace vytvoří pouze jedno spojení na databázi nebo více.</p>
+
+<p>Každému spojení na databázový server přísluší jedna <a href="HE_EXTCD.htm">kontextová proměnná cd</a>, na níž odkazuje ukazatel cdp. Tyto funkce se volají na kontextovou proměnnou, na níž úspěšně proběhla funkce <a href="..\xml\html\f_cd_connect.html"><code>connect</code></a>. Volají se před provedením <a href="..\xml\html\f_cd_disconnect.html"><code>disconnect</code></a>.</p>
+
+<p>V době, kdy jedno vlákno používá některé spojení na databázi, nesmí se stejným spojením pracovat jiné vlákno. O dodržení této podmínky se musí postarat aplikace.</p>
+
+<p><b>Viz</b></p>
+
+<ul class='viz'><li><a href="HE_F_UNASSIGN.htm">unassign</a></ul>
+
+</body>
+</html>

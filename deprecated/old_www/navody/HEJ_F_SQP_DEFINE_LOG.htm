@@ -1,0 +1,130 @@
+<!doctype html public "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=Windows-1250">
+<title>Funkce _sqp_define_log</title>
+<link rel='stylesheet' style='text/css' href='../function.css'>
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000">
+
+
+
+<h2 class=function>_sqp_define_log</h2>
+<img src='../images/sql.gif' width='44' height='16' border='0' alt='sql' align='middle' hspace='2'>
+
+
+<br><br>
+<div class='typ'>FUNCTION <b>_sqp_define_log</b>(IN logname CHAR(31), IN pathname CHAR(256), IN format(50)) RETURNS BOOLEAN;
+</div>
+
+
+<p><b>Parametry</b></p>
+
+<table border=1 cols=2 frame=box rules=all width=480>
+
+<tr valign="top">
+<td width=28%><i>logname </i></td>
+<td width=72%> jméno logu, velikost písmen se ignoruje</td>
+</tr>
+
+<tr valign="top">
+<td width=28%><i>pathname </i></td>
+<td width=72%> jméno souboru, do něhož se bude log zapisovat</td>
+</tr>
+
+<tr valign="top">
+<td width=28%><i>format </i></td>
+<td width=72%> formát řádky v logu</td>
+</tr>
+</table><br>
+
+<p><b>Od verze</b></p>
+
+<p>7.0, upraveno v 10.0</p>
+
+<p><b>Popis</b></p>
+
+<p>Funkce vytvoří nový log a přidělí mu jméno <i>logname</i>, které lze využívat ve funkci <a href="HEJ_F_SQP_TRACE.htm"><code>_sqp_trace</code></a> pro nastavení <a href="../xml/html/tracelog.html">logování</a> činnosti SQL serveru. Log se zapisuje do souboru zadaného parametrem <i>pathname</i>. Pokud je <i>pathname</i> prázdné, soubor se vytvoří ve stejném adresáři jako základní log serveru, pod jménem <i>logname</i> a s&nbsp;příponou <code>txt</code>. Pokud zadaný soubor již existuje, bude se log zapisovat na jeho konec. </p>
+
+<p>Základní log serveru (označovaný prázdným jménem) je definován automaticky při startu serveru a není třeba pro něj tuto funkci volat.</p>
+
+<p>Funkci je možné také použít ke změně formátu již existujícího logu (včetně základního). V tom případě se neuvádí (ignoruje) cesta <i>pathname</i>.</p>
+
+<p>Založení či změnu formátu logu může provádět jen Provozní správce databáze - viz <a href="../xml/html/admins.html">Administrování SQL serveru</a>.</p>
+
+<p>Pokud je parametr <i>format</i> prázdný, pak se log vytváří ve standardním formátu. Odlišný formát lze zadat tak, že se v&nbsp;parametru <i>format</i> uvede formátovací řetězec znaků podle pravidel pro funkce <code>sprinf</code> jazyka C, v&nbsp;němž se místa, do nichž mají být doplněny proměnné informace, označí takto:</p>
+
+<pre><code>%d - datum, den a měsíc
+%D - datum, den, měsíc a rok
+%t - čas, hodina a minuta
+%T - čas, hodina, minuta a sekunda
+%s - označení situace (jedno písmeno) 
+%u - jméno uživatele nebo služebního procesu 
+%c - číslo klienta
+%e – unikátní číslo session (spojení klienta se serverem)
+%a – jméno otevřeného schématu
+%m - text hlášení </code></pre>
+
+<p>Podrobnosti a význam jednotlivých parametrů naleznete <a href="../xml/html/tracelog.html">zde</a> a <a href="../xml/html/_iv_logged_users.html">zde</a>. </p>
+<p>Například standardnímu formátu logu odpovídá formát "<code>%d %T %s %u %m</code>". Ve formátovacím řetězci lze uvést nejvýše 10 takových parametrů, délka formátovacího řetězce je nejvýše 50 znaků.</p>
+
+<p>Lze předepsat implicitní formát, tedy ten, který má základní log po spuštění serveru a ostatní logy vytořené s prázdným formátem. Zadá se to v registru pod příslušnou databází, jako hodnotu <strong>DefaultLogFormat</strong>.</p>
+
+<p><b>Hodnota funkce</b></p>
+
+<p>Funkce vrátí TRUE pokud uspěje. Vrací FALSE při chybě, která může být způsobena tím, že se nepodaří vytvořit či otevřít soubor na zadaném místě, nebo nedostatkem paměti.</p>
+
+<p><b>Viz</b></p>
+
+<ul class='viz'>
+ <li><a href="../xml/html/_iv_recent_log.html"><code>_iv_recent_log</code></a></li>
+ <li><a href="../xml/html/_iv_pending_log_reqs.html"><code>_iv_pending_log_reqs</code></a></li>
+ <li><a href="../xml/html/_iv_logged_users.html"><code>_iv_logged_users</code></a></li>
+</ul>
+
+<br>
+<p><b>Příklad:</b></p>
+
+<p>1. Zapněte při startu serveru zápis SQL příkazů a logování klientů do pomocného logu DEBUGLOG:</p>. 
+
+<pre><code>PROCEDURE _ON_SERVER_START();
+BEGIN
+  CALL _sqp_define_log('debuglog','c:\pom\debuglog.log','%d %t %s %a %u %m');
+ 
+  CALL _sqp_trace(TRACE_LOGIN, '', '', 'debuglog', 3);
+  CALL _sqp_trace(TRACE_SQL,   '', '', 'debuglog', 3);
+  CALL _sqp_trace(TRACE_USER_ERROR,   '', '', 'debuglog', 3);
+  CALL _sqp_trace(TRACE_USER_WARNING,   '', '', 'debuglog', 3);
+// atd..  
+END</code></pre>
+
+<p>2. Formát vhodný pro import do tabulky (pro následnou analýzu pomocí filtrování a třídění pomocí SQL serveru):</p>
+<pre><code>  CALL _sqp_define_log('debuglog','c:\sql_logy\debuglog.log','%D#%T#%s#%a#%u#%c#%e#%m#');
+</code></pre>
+<p>odpovídající tabulka má tvar:</p>
+<pre><code>CREATE TABLE `LOG_TABLE` (
+`DT` DATE ,
+`TM` TIME ,
+`SITUAT` CHAR(1) COLLATE CSSTRING  ,
+`APL` CHAR(31) COLLATE CSSTRING  ,
+`USR` CHAR(31) COLLATE CSSTRING  ,
+`CLNUM` SMALLINT ,
+`SESS` INTEGER ,
+`MESS` CHAR(255) COLLATE CSSTRING  ,
+`CONTX` LONG VARCHAR COLLATE CSSTRING  )</code></pre>
+<p>odpovídající přenos (import dat z formátu CSV):</p>
+<pre><code>* 3"C:\temp\dlog.log" 0"":"":"Log_table" 0 0""
+* "1" 0  0"DT" 0  0 0 0
+* "2" 0  0"TM" 0  0 0 0
+* "3" 0  0"SITUAT" 0  0 0 0
+* "4" 0  0"APL" 0  0 0 0
+* "5" 0  0"USR" 0  0 0 0
+* "6" 0  0"CLNUM" 0  0 0 0
+* "7" 0  0"SESS" 0  0 0 0
+* "8" 0  0"MESS" 0  0 0 0
+* "9" 0  0"CONTX" 0  0 0 0
++ 0 35 34 1 0 0"DD.MM.CCYY","hh:mm:ss","DD.MM.CCYY h.mm.ss","False,True", 46
+</code></pre>
+</body>
+</html>

@@ -1,0 +1,60 @@
+<!doctype html public "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=Windows-1250">
+<title>Funkce MailOpenInBox</title>
+<link rel='stylesheet' style='text/css' href='../function.css'>
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000">
+
+
+
+<h2 class=function>MailOpenInBox</h2>
+<img src='../images/cpp.gif' width='44' height='16' border='0' alt='c/c++' align='middle' hspace='2'><img src='../images/pascal.gif' width='44' height='16' border='0' alt='pascal' align='middle' hspace='2'><img src='../images/sql.gif' width='44' height='16' border='0' alt='sql' align='middle' hspace='2'>
+
+
+<br><br>
+<div class='typ'>DWORD <b>MailOpenInBox</b>(DWORD *mailbox);<br>
+function <b>MailOpenInBox</b>(var mailbox : integer) : integer;<br>
+FUNCTION <strong>MailOpenInBox</strong>(OUT mailbox INT) RETURNS INT;
+</div>
+
+
+<p><b>Parametry</b></p>
+
+<table border=1 cols=2 frame=box rules=all width=440>
+
+<tr valign="top">
+<td width=24%><i>mailbox</i></td>
+<td width=76%>výstupní parametr, handle poštovní schránky</td>
+</tr>
+</table><br>
+
+<p><b>Od verze</b></p>
+
+<p>6.0f</p>
+
+<p><b>Popis:</b></p>
+
+<p>Otevře poštovní schránku (v <a href="HE_MAILPROFILES.htm">profilu</a> zvoleného) <a href="HE_MAIL.htm">poštovního systému</a> a do výstupního parametru <i>mailbox</i> předá handle této schránky, který bude vstupním parametrem ostatních funkcí pracujících se schránkou.</p>
+
+<p>V jednom okamžiku může s poštovní schránkou pracovat pouze jedno vlákno. Pokus o přístup k otevřené schránce z jiného vlákna skončí chybou č. 520 (MAIL_BOX_LOCKED).</p>
+
+<p><b>Hodnota funkce:</b></p>
+
+<p>Funkce vrací nulu v případě úspěchu a  číslo chyby v případě neúspěchu. <a href="HE_MAILERRORS.htm">Číslo chyby</a> lze zjistit také pomocí <b><code>Sz_error</code></b> nebo <b><code>Signalize</code></b>.</p>
+
+<p><b>Příklad</b></p>
+
+<p><a href="HE_MAILEXAMRECEIVE.htm">Příklad příjmu zásilky</a> </p>
+
+<p><b>Viz</b></p>
+
+<ul class='viz'>
+ <li><a href="HE_F_MAILBOXLOAD.htm">MailBoxLoad</a> </li>
+ <li><a href="HE_F_MAILCLOSEINBOX.htm">MailCloseInBox</a> </li>
+</ul>
+
+</body>
+</html>

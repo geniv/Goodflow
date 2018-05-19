@@ -1,0 +1,65 @@
+<!doctype html public "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=Windows-1250">
+<title>Funkce client_number</title>
+<link rel='stylesheet' style='text/css' href='../function.css'>
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000">
+
+
+
+<h2 class=function>client_number</h2>
+<img src='../images/pascal.gif' width='44' height='16' border='0' alt='pascal' align='middle' hspace='2'>
+<img src='../images/sql.gif' width='44' height='16' border='0' alt='sql' align='middle' hspace='2'>
+
+
+<br><br>
+<div class='typ'>
+<strong>cd_Client_number</strong>(cdp : cdp_t) : sig32;<br>
+FUNCTION <b>client_number</b> RETURNS INT <br>
+</div>
+
+<p><b>Parametry</b></p>
+
+<table border=1 cols=2 frame=box rules=all width=480>
+
+<tr valign="top">
+<td width=16%><i>cdp </i></td>
+<td width=84%><a href="HE_EXTCD.htm">kontextová proměnná</a> klienta  </td>
+</tr>
+</table><br>
+
+<p><b>Od verze:</b></p>
+
+<p>6.0, doplnění v 8.1</p>
+
+<p><b>Popis </b></p>
+
+<p>Každý klient získá při připojení k serveru určité unikátní číslo, neměnné po dobu přihlášení. Při novém připojení může být totéž číslo přiděleno jinému klientovi.</p>
+
+<p>Funkce <b><code>client_number</code></b> vrací toto číslo pro klienta, který ji zavolal. Funkce umožňuje rozlišovat různé klienty.</p>
+
+<p><b>Hodnota funkce</b></p>
+
+<p>Funkce vrací číslo připojení.</p>
+
+<p><b>Příklad:</b></p>
+
+<p>se všemi právě vloženými záznamy proveď proceduru...</p>
+
+<pre><code>INSERT INTO TabPom (cislo, id, datum) VALUES (<b>client_number</b>, idx,dtx);
+...
+
+FOR radek AS curinserted INSENSITIVE CURSOR FOR
+  SELECT id 
+  FROM TabPom
+  WHERE cislo = <b>client_number</b>
+DO BEGIN
+  CALL PomProc(radek.id);
+END;
+...</code></pre>
+
+</body>
+</html>

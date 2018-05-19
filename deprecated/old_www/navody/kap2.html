@@ -1,0 +1,235 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html><head>
+<meta http-equiv="Content-Type" content="text/html; charset=Windows-1250"><title>2. Definice dat v SQL</title>
+
+
+	
+	<link rel="STYLESHEET" type="text/css" href="kap2_soubory/main.css">
+	<style type="text/css"><!--:hover { font-weight: bold;         color: red }
+--></style></head><body alink="Blue" background="kap2_soubory/pozadi.jpg" vlink="Blue">
+<a href="http://www.cs.vsb.cz/amalka/tomica/sql/kap1.html"><img src="kap2_soubory/prev.gif" alt="1. Úvod do SQL"></a>
+<a href="http://www.cs.vsb.cz/amalka/tomica/sql/kap3.html"><img src="kap2_soubory/next.gif" alt="3. Manipulace dat v SQL"></a>
+<a href="http://www.cs.vsb.cz/amalka/tomica/sql/index.html"><img src="kap2_soubory/toc.gif" alt="Obsah"></a>
+<hr color="Blue" size="1">
+<h1>2. Definice dat v SQL</h1>
+<p>Jazyk DDL obsahuje klíčová slova pro definici, modifikaci a rušení
+typu entity i typu vazby. Dále obsahuje seznam datových typů a datových
+struktur pro definici typu atributu. </p>
+<center><h3>Přehled klíčových slov DDL</h3></center>
+<table align="center" border="1" cellpadding="1" cellspacing="1">
+  <tbody>
+  <tr bgcolor="Lime">
+    <th>SQL</th>
+    <th>význam</th>
+  </tr>
+  <tr>
+    <td>ADD</td>
+    <td>přidej</td>
+  </tr>
+  <tr>
+    <td>AND</td>
+    <td>a</td>
+  </tr>
+  <tr>
+    <td>ALTER</td>
+    <td>obměň</td>
+  </tr>
+  <tr>
+    <td>BETWEEN</td>
+    <td>mezi</td>
+  </tr>
+  <tr>
+    <td>CHAR</td>
+    <td>znakový řetězec</td>
+  </tr>
+  <tr>
+    <td>CHECK</td>
+    <td>ověř, zda</td>
+  </tr>
+  <tr>
+    <td>COLUMN</td>
+    <td>sloupec</td>
+  </tr>
+  <tr>
+    <td>CREATE</td>
+    <td>vytvoř</td>
+  </tr>
+  <tr>
+    <td>DATE</td>
+    <td>datum</td>
+  </tr>
+  <tr>
+    <td>DROP</td>
+    <td>zruš</td>
+  </tr>
+  <tr>
+    <td>IN</td>
+    <td>je prvkem množiny</td>
+  </tr>
+  <tr>
+    <td>INDEX</td>
+    <td>indexový soubor</td>
+  </tr>
+  <tr>
+    <td>INTEGER</td>
+    <td>celé číslo</td>
+  </tr>
+  <tr>
+    <td>LOGICAL</td>
+    <td>logická hodnota</td>
+  </tr>
+  <tr>
+    <td>NOT</td>
+    <td>ne</td>
+  </tr>
+  <tr>
+    <td>NULL</td>
+    <td>nic (prázdnota)</td>
+  </tr>
+  <tr>
+    <td>REAL</td>
+    <td>reálné číslo</td>
+  </tr>
+  <tr>
+    <td>RENAME</td>
+    <td>přejmenování</td>
+  </tr>
+  <tr>
+    <td>TABLE</td>
+    <td>tabulka</td>
+  </tr>
+  <tr>
+    <td>UNIQUE</td>
+    <td>unikátní (jedinečný)</td>
+  </tr>
+</tbody></table>
+<p class="BEZ"><i>DDL - <b>D</b>ata <b>D</b>efinition <b>L</b>anguage</i></p>
+<font color="Fuchsia"><dt>Pro následující příklady platí tyto pravidla :</dt></font>
+<ul type="disc">
+<li><font color="Fuchsia">klíčová slova velkým tiskacím př. <b>SELECT </b></font>
+</li><li><font color="Fuchsia">názvy tabulek mají první znak velkým ostatní malým písmem př. <b>Kniha</b> </font>
+</li><li><font color="Fuchsia">názvy atributů jsou psány malým písmem př. <b>cena</b></font>
+</li></ul>
+
+<br> 
+<p>Schéma je autorizováno příkazem</p>  
+<pre>CREATE SCHEMA AUTHORIZATION c-identifikátor</pre> 
+<p>kde c-identifikátor je jméno jednoznačně identifikující schéma
+databáze. Uživatelská databáze může být (na rozdíl od běžných konvencí)
+formována více databázovými schématy. </p>
+<p>Deklarací např. </p>
+<pre>CREATE SCHEMA AUTHORIZATION Knihovna</pre> 
+<p>lze název KNIHOVNA použít v tečkové notaci pro odkazy na tabulky
+nebo pohledy ze schématu.
+Deklarace relačního datového typu ve své jednoduchostí (jde o relace v
+1.NF) odpovídá popisu obyčejné dvourozměrné tabulky s označenými
+sloupci. </p>
+<p class="BEZ"><i>Poznámka:</i> Připomeňme zde, že řada systémů SQL
+"umí" pracovat i s relacemi, které porušují 1.NF v tom. že dovolují
+vícehodnotové atributy. Jde o případ, kdy relace není definována pomocí
+SQL. Systém si s ní poradí tak, že ji před použitím jakoby dočasně
+normalizuje do 1.NF. </p>
+<p>Pro práci se schématy základních relací jsou nejčastěji k dispozici
+tři příkazy - CREATE TABLE, ALTER TABLE, DROP TABLE, které po řadě
+vedou k vytvoření, změně a zrušení relace. </p>
+<p>Pro relace lze definovat index příkazem CREATE INDEX. Příkazům pro
+definici virtuálních relací (pohledů) je věnována zvláštní kapitola. </p>
+<p>SQL umožňuje definovat některé užitečné typy atributů (délky čísel platí pro DB2, obecně závisí na použitém hardware). </p>
+<p>
+</p><dt><b>INTEGER</b> celé číslo se znaménkem ve 4 bytech,</dt>
+<dt><b>SMALLINT</b> celé číslo se znaménkem ve 2 bytech,</dt> 
+<dt><b>DECIMAL(p,q)</b> pakované dekadické číslo s p ciframi, (p
+&lt;=15), a předpokládanou desetinnou čárkou q cifer zprava (0=&lt; q
+&lt; p). Je-li q = 0, vynechává se.</dt> 
+<dt><b>FLOAT</b> reálné číslo se znaménkem v 8 bytech (mantisa je
+tvořena 14 hexadecimálními číslicemi, obecně je typ parametrizován
+požadovanou přesností),</dt> 
+<dt><b>CHAR(n)</b> řetězec znaků délky n,</dt> 
+<dt><b>VARCHAR(n)</b> řetězec znaků maximální délky n. </dt><p></p>
+<p>Ve standardu jsou ještě <b>NUMERIC, REAL, DOUBLE PRECISION</b>.
+Kromě těchto typů dat se používají i další (nestandardní), jako např.
+MONEY, DATE apod. Budeme-li používat konstanty typu DATE, budou ve
+tvaru známém z INFORMIXu, tj. mm/dd/rr. Řetězce znaků i konstanty typu
+DATE budeme uzavírat do závorek '´ . </p>
+<p>Pomocí NOT NULL se indikuje neprázdnost hodnoty definovaného
+atributu pro každou n-tici dané relace. V opačném případě mohou být
+hodnoty prázdné (skutečné nuly či mezery nejsou prázdné hodnoty). Ty,
+jak víme, se sice v původní verzi RMD nevyskytují, nicméně pro praxi
+jsou velmi užitečné - interpretují se jako neznámé nebo nedefinované
+hodnoty. Specifikace NOT NULL je zvlášť vhodná pro simulaci primárního
+klíče, který v některých implementacích není přímo podporován. </p>
+<p>Jednoznačné hodnoty atributu lze definovat kvalifikací jeho datového typu označovanou UNIQUE. </p>
+<p>Podle definice RMD ani zde definice relace nepředpokládá žádné
+uspořádání n-tic relace. V SQL lze uspořádání předepsat pouze pro
+výstup relace získané jako výsledek nějakého dotazu. </p>
+<p>Relaci lze definovat příkazem </p>
+<pre>CREATE TABLE [c-identifikátor]jméno-relace 
+             (jméno-atrl typ-atrl [NOT NULL [UNIQUE]] 
+             [,jméno-atr2 typ-atr2 [NOT NULL [UNIQUE]]]... 
+             [,UNIQUE seznam-atr])</pre> 
+<p>kde [ ] značí 0¸I výskytů, ... značí opakování 0 nebo vícekrát předchozí syntaktické jednotky.
+Jméno relace může být rozšířeno o předponu autorizace, tj. vlastně jméno schématu (nebo
+vlastníka schématu). Skupina atributů může být definovaná globálně jako jednoznačná zadáním
+UNIQUE (supluje částečně pojem primárního klíče). </p>
+<p>Pro relaci VÝPŮJČKA lze příkaz CREATE TABLE použít takto: </p>
+<pre>CREATE TABLE Vypujcka
+     (id_v CHAR(3) NOT NULL, 
+     cislo CHAR(3) NOT NULL, 
+     d_zpet CHAR(6))</pre> 
+<p>Po vyvolání tohoto příkazu se vytvoří prázdná relace VYPUJCKA a
+schéma relace se zaznamená do systémového katalogu. Vlastní data se do
+relace vkládají pomocí příkazu INSERT (po jedné n-tici) nebo nějakým
+hromadně orientovaným způsobem (v závislosti na daném SŘBD). </p>
+<p>Definovat lokálně atribut jako jednoznačný znamená vlastně definovat klíč relace. To se však
+obvykle oproti standardu v řadě systémů zajišťuje ne pomocí UNIQUE v definici atributu.
+ale pomocí CREATE UNIQUE INDEX (viz dále).</p> 
+<p>Již vytvořenou relaci můžeme změnit příkazem ALTER. Chceme-li např. v relaci ČTENÁŘ
+sledovat i jeho prioritu, lze odpovídající změny schématu relace docílit příkazem </p>
+<pre>ALTER TABLE Ctenar ADD COLUMN priorita NUMERIC</pre> 
+<p>Fyzicky se ovšem neprovede žádná reorganizace, informace se pouze uloží v systémovém
+katalogu (v DB2 není v ALTER dovoleno použít NOT NULL). Řádek relace, tj. obvykle záznam
+na disku, je fyzicky měněn až po použití UPDATE příkazu. Odstranění relace
+z databáze (tj. odstranění jejího popisu ze systémového katalogu) se provede příkazem DROP.
+Zjistíme-li např., že rezervace se nebudou v knihovně provádět, stačí napsat </p>
+<pre>DROP TABLE Rezervace</pre> 
+<p>Je zřejmé, že v takovém případě se zruší i případně již vytvořené soubory indexů nebo
+pohledy, v jejichž definicích se dané relace vyskytují. </p>
+<p>Požadavek na vytvoření indexů se realizuje příkazem CREATE INDEX. Index lze definovat
+pro jeden atribut i pro kombinaci atributů. Pro schéma jedné relace lze zadat libovolné potřebné
+množství indexů. Pouze jeden z nich může být definován jako CLUSTER; záznamy
+v primárním souboru jsou pak uspořádány podle tohoto atributu (nebo těchto atributů) a leží
+fyzicky za sebou. Tato varianta má ovšem omezené použití, protože s přibývajícími n-ticemi
+se chování struktury zhoršuje (srovnej s ukládáním záznamů do oblasti přetečení u sekvenčních
+souborů). </p>
+<p>Např. k relaci Ctenar lze vytvořit složený index - nazveme ho Ja - (jmeno,adresa)
+příkazem </p>
+<pre>CREATE INDEX Ja ON Ctenar
+     (jmeno,adresa)</pre>
+<p>Není-li explicitně vyznačeno jinak (DESC), předpokládá se, že hodnoty v indexu
+jsou uspořádány vzestupně (ASC). Index lze také zadat jako UNIQUE, což znamená, že jde
+o primární index v běžné terminologii souborů dat (UNIQUE v kombinaci s CLUSTER vlastně
+vede ke koncepci index sekvenčního souboru). </p>
+<p>Definice indexu má tvar </p>
+<pre>CREATE [UNIQUE] INDEX jméno-indexu 
+ON jméno-základní-relace (jméno-atr [uspořádání] 
+[,jméno-atr [uspořádání]]...) 
+[CLUSTER]</pre>
+<p>Index lze zrušit příkazem DROP. Existoval-li např. index podle atributu ISBN se jménem IS
+pro relaci KNIHA, stačí napsat </p>
+<pre>DROP INDEX IS</pre>
+<p>Je zřejmé, že v rámci relačního schématu databáze musí být jména
+indexů různá. Mezi definiční příkazy řadíme ještě příkazy pro vytváření
+a rušení pohledů (CREATE VIEW, DR(&gt;P VIEW). Protože využívají
+konstruktů pro výběr dat, zmíníme se o nich až v
+kapitole 4. </p>
+<p>Indexy jsou většinou implementovány pomocí B-stromů (viz [Po91],
+[Po92]), které tvoří de facto standard řešení v současné relační
+technologii.</p>
+<p>U vytvořené relace můžeme přejmenovat název tabulky nebo názvy sloupců pomocí příkazu RENAME.</p>
+<pre>RENAME TABLE tabulka_stará TO tabulka_nová</pre>
+<pre>RENAME COLUMN tabulka.sloupec_starý TO tabulka.sloupec_nová</pre>
+<hr color="Blue" size="1">
+<a href="http://www.cs.vsb.cz/amalka/tomica/sql/kap1.html"><img src="kap2_soubory/prev.gif" alt="1. Úvod do SQL" align="left"></a>
+<a href="http://www.cs.vsb.cz/amalka/tomica/sql/kap3.html"><img src="kap2_soubory/next.gif" alt="3. Manipulace dat v SQL" align="left"></a>
+<a href="http://www.cs.vsb.cz/amalka/tomica/sql/index.html"><img src="kap2_soubory/toc.gif" alt="Obsah" align="left"></a>
+<div style="position: absolute; left: 0px; top: 0px; z-index: 1000000000 ! important; visibility: hidden; opacity: 1;" id="linkalert-box"><img src="kap2_soubory/none-icon.png" id="linkalert-icon-1"></div></body></html>

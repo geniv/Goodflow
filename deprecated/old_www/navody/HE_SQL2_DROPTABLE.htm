@@ -1,0 +1,95 @@
+<!doctype html public "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=Windows-1250">
+<title>Příkaz DROP TABLE (SQL)</title>
+<link rel='stylesheet' style='text/css' href='../function.css'>
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr>
+	<td style="background-image: url(../images/bghead.jpg);
+		background-position: right;
+		background-repeat: no-repeat;">
+	<table width="100%" border="0" cellpadding="0" cellspacing="0"
+		style="background-image:none">
+	<tr>
+		<td style="background-image:none" height="46"
+			width="15%"><img src="../images/title-cz.gif"
+			width="255" height="33"
+			alt="602SQL-Úplná dokumentace"
+			title="602SQL - Úplná dokumentace"
+			border="0"></td>
+		<td width="33%" align="right"><a href="../xml/html/top.html"><img class="floatno"
+			src="../images/index.gif"
+			width="15" height="16"
+			alt="Index" title="Zpět na obsah"
+			border="0" vspace="2"></a> &nbsp;
+			 </td>
+	</tr>
+	</table>
+	</td>
+</tr>
+</table><table class="navigace" border="0" width="100%"  bgcolor="#FFFFBF"><tr> <td
+width="20" align="center"><img class="floatno" src="../images/prev.gif"
+width="15" height="13" alt="&lt;&shy;" title="Předcházející téma"
+border="0"></td><td width="25%"><a
+href="../xml/html/sql_alter_table.html">Příkaz ALTER TABLE - změna tabulky</a></td> <td width="25%"
+align="right"><img class="floatno" src="../images/up.gif" width="13"
+height="15" alt="Nahoru" title="O jednu úroveň výš" border="0"
+align="middle"></td><td width="25%"><a href="../xml/html/sqltables.html">Databázové tabulky</a></td>
+<td width="25%" align="right">&nbsp;</td>
+<td width="20" align="center">&nbsp;</td>
+</tr></table>
+
+
+
+
+
+<h1><a name="he_sql2_droptable"></a>Příkaz DROP TABLE (SQL)</h1>
+
+<pre><code>příkaz_DROP_TABLE ::= DROP [ IF EXISTS ] TABLE [schema.]jméno_tabulky [ způsob ]
+způsob ::= CASCADE | RESTRICT</code></pre>
+
+<p><b>Popis</b></p>
+
+<p><a href="HE_SQL2_PRIKAZY.htm">Příkaz</a> DROP TABLE zruší zadanou tabulku.</p>
+
+<p>Pokud zadaná tabulka ve schématu neexistuje, pak je-li použita klauzule IF EXISTS, příkaz neprovede žádnou akci, v opačném případě dojde k chybě - nastane chybový <a href="../xml/html/handlingcategories.html">sqlstate</a> W0137 (OBJECT_DOES_NOT_EXIST).</p> 
+
+<p>Příkaz nelze použít na <a href="../xml/html/sql_declaretable.html">dočasnou tabulku</a>.</p>
+
+<p>Je-li použit způsob CASCADE, zruší se i všechny podřízené tabulky v&nbsp;rámci referenční integrity. Použije-li se způsob RESTRICT, tabulku se nepodaří smazat, je-li na ní závislá jiná tabulka v&nbsp;rámci referenční integrity (chybový <a href="../xml/html/handlingcategories.html">sqlstate</a> W0162 (REFERENCED_BY_OTHER_TABLE)).</p>
+
+<p>Je-li tabulka prefixována jménem aplikace (na stejném serveru), tabulka se hledá v uvedené aplikaci (schématu).</p>
+
+<p>Příkaz DROP TABLE vykoná implicitní commit před i po provedení. Příkaz nelze odvolat.</p>
+
+<p>Při rušení tabulky se neprovádějí DELETE <a href="HE_SQL2_TRIGGERY.htm">triggery</a> na jednotlivé rušené záznamy. </p>
+
+<p><b>Odlišnosti od normy</b>
+
+<ul>
+	<li>použití CASCADE nezpůsobí odstranění dotazů (VIEW) ani jiných objektů schématu, které závisí na této tabulce </li>
+</ul>
+
+<p><b>Příklad použití:</b></p>
+
+<pre><code>DROP TABLE Zamestnan</code></pre>
+
+
+
+<table class="navigace" border="0" width="100%"  bgcolor="#FFFFBF"><tr> <td
+width="20" align="center"><img class="floatno" src="../images/prev.gif"
+width="15" height="13" alt="&lt;&shy;" title="Předcházející téma"
+border="0"></td><td width="25%"><a
+href="../xml/html/sql_alter_table.html">Příkaz ALTER TABLE - změna tabulky</a></td> <td width="25%"
+align="right"><img class="floatno" src="../images/up.gif" width="13"
+height="15" alt="Nahoru" title="O jednu úroveň výš" border="0"
+align="middle"></td><td width="25%"><a href="../xml/html/sqltables.html">Databázové tabulky</a></td>
+<td width="25%" align="right">&nbsp;</td>
+<td width="20" align="center">&nbsp;</td>
+</tr></table>
+
+</body>
+</html>

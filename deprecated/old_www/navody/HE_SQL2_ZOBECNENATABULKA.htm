@@ -1,0 +1,136 @@
+<!doctype html public "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=Windows-1250">
+<title>Zobecněná tabulka (SQL)</title>
+<link rel='stylesheet' style='text/css' href='../function.css'>
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr>
+	<td style="background-image: url(../images/bghead.jpg);
+		background-position: right;
+		background-repeat: no-repeat;">
+	<table width="100%" border="0" cellpadding="0" cellspacing="0"
+		style="background-image:none">
+	<tr>
+		<td style="background-image:none" height="46"
+			width="15%"><img src="../images/title-cz.gif"
+			width="255" height="33"
+			alt="602SQL-Úplná dokumentace"
+			title="602SQL - Úplná dokumentace"
+			border="0"></td>
+		<td width="33%" align="right"><a href="../xml/html/top.html"><img class="floatno"
+			src="../images/index.gif"
+			width="15" height="16"
+			alt="Index" title="Zpět na obsah"
+			border="0" vspace="2"></a> &nbsp;
+			 </td>
+	</tr>
+	</table>
+	</td>
+</tr>
+</table><table class="navigace" border="0" width="100%"  bgcolor="#FFFFBF">
+		  <tr>
+					 <td width="20" align="center">&nbsp;</td>
+					 <td width="25%">&nbsp;</td>
+					 <td width="25%"
+align="right"><img class="floatno" src="../images/up.gif" width="13"
+height="15" alt="Nahoru" title="O jednu úroveň výš" border="0"
+align="middle"></td><td width="25%"><a href="HE_SQL2_DOTAZY.htm">Dotazy</a></td>
+<td width="25%" align="right"><a
+href="HE_SQL2_SPECIFIKACEDOTAZU.htm">Specifikace dotazu</a></td><td width="20"
+align="center"><img class="floatno" src="../images/next.gif" width="15"
+height="13" alt="&shy;&gt;" title="Následující téma" border="0"></td>
+</tr></table>
+
+
+
+
+
+<h1><a name="he_sql2_zobecnenatabulka"></a>Zobecněná tabulka (SQL)</h1>
+
+<pre><code>zobecněná tabulka ::= { identifikátor_tabulky [ specifikace_indexu ] 
+    | identifikátor_uloženého_dotazu | systémový_dotaz | ( dotazový_výraz ) | join }
+    [ přejmenování ]
+specifikace_indexu ::= INDEX jméno_indexu
+join ::= zobecněná_tabulka druh_joinu zobecněná_tabulka [ specifikace_joinu ]
+druh_joinu ::= CROSS JOIN | [ NATURAL ] [ INNER | { LEFT | RIGHT | FULL } [ OUTER ] ] JOIN 
+specifikace_joinu ::= ON podmínka | USING ( název_sloupce { , název_sloupce }…)
+přejmenování ::= [ AS ] jméno [( jméno_sloupce { , jméno_sloupce }…)]</code></pre>
+
+<p>Pojem<i> zobecněná tabulka</i> definuje, které objekty mohou v&nbsp;jazyce SQL plnit funkci tabulky. Kromě skutečné <a href="../xml/html/sqltables.html">tabulky</a> nebo <a href="HE_SQL2_DOTAZY.htm">dotazu</a> uloženého v&nbsp;databázi (v SQL terminologii <a href="HE_SQL2_CREATEVIEW.htm">VIEW</a>) a <a href="../xml/html/_iv_.html"> systémových dotazů </a> to může být i <a href="HE_SQL2_DOTAZOVYVYRAZ.htm">dotazový výraz</a> v&nbsp;závorkách (tj. <a href="HE_SQL2_SUBDOTAZ.htm">subdotaz</a>) nebo <i>join.</i></p>
+
+<p>Pojem <i>join</i> vyjadřuje vytvoření spojených záznamů ze dvou tabulek zřetězením hodnot sloupců z&nbsp;jednoho záznamu první tabulky a jednoho záznamu druhé tabulky. <i>Druh joinu</i> a <i>specifikace joinu</i> určují, který záznam s&nbsp;kterým se takto spojí:
+
+<ul>
+	<li>CROSS JOIN znamená spojení každého záznamu s&nbsp;každým. V praxi se příliš nepoužívá, výsledkem je většinou příliš velká množina záznamů.</li>
+	<li>NATURAL znamená, že obě zobecněné tabulky musí mít sloupec stejného jména. Spojí se ty dvojice záznamů, které mají v&nbsp;tomto sloupci stejnou hodnotu. <i>Specifikace joinu</i> pak nesmí být uvedena.</li>
+	<li><i>specifikace joinu</i> ve tvaru ON <i>podmínka</i> znamená, že se spojí dvojice záznamů, pro něž je splněna zadaná <i>podmínka</i>. Podrobnosti o jejím sestavení viz <a href="HE_SQL2_PODMINKA.htm">podmínka</a>.</li>
+	<li><i>specifikace joinu</i> ve tvaru USING ( <i>název_sloupce</i> { , <i>název_sloupce</i> }…) znamená, že se spojí ty dvojice záznamů, ve kterých jsou ve všech uvedených sloupcích stejné hodnoty. Sloupce zadaných názvů musí existovat v&nbsp;obou tabulkách. Jde tedy o zobecnění varianty NATURAL.</li>
+	<li>není-li uvedena specifikace joinu ani NATURAL, spojuje se každý záznam s&nbsp;každým.</li>
+	<li>LEFT [ OUTER ] JOIN znamená, že každý záznam první tabulky se musí spojit s&nbsp;některým (alespoň jedním) záznamem druhé tabulky. Není-li v&nbsp;druhé tabulce nalezen žádný záznam vyhovující podmínkám spojení, pak se záznam z&nbsp;první tabulky spojí s&nbsp;hodnotami NULL.</li>
+	<li>RIGHT [ OUTER ] JOIN znamená, že každý záznam druhé tabulky se musí spojit s&nbsp;některým (alespoň jedním) záznamem první tabulky. Není-li v&nbsp;první tabulce nalezen žádný záznam vyhovující podmínkám spojení, pak se záznam z&nbsp;druhé tabulky spojí s&nbsp;hodnotami NULL.</li>
+	<li>FULL [ OUTER ] JOIN znamená, že každý záznam z&nbsp;každé tabulky se musí spojit s&nbsp;některým (alespoň jedním) záznamem protější tabulky. Není-li v&nbsp;protější tabulce nalezen žádný záznam vyhovující podmínkám spojení, pak se záznam spojí s&nbsp;hodnotami NULL.</li>
+	<li>INNER JOIN nebo JOIN znamená spojení těch záznamů, které vyhoví <i>specifikaci joinu</i>.</li>
+</ul>
+
+<p><i>Specifikace indexu</i> u jména tabulky vnutí použití konkrétního indexu bez ohledu na volbu optimalizátoru.</p>
+
+<p>Případné <i>přejmenování</i> na konci <i>zobecněné tabulky</i> dovoluje zadat <i>jméno</i>, jimž se bude možno na tuto tabulku dále odkazovat, a případně také <i>jména sloupců</i> této tabulky. Počet uvedených <i>jmen sloupců</i> musí být stejný jako počet sloupců v&nbsp;zobecněné tabulce.</p>
+
+<p><b>Odchylky od Intermediate level směrem k&nbsp;Full level nebo k&nbsp;SQL 3</b>
+
+<ul>
+	<li>Použití dotazového výrazu v&nbsp;závorkách ve funkci zobecněné tabulky patří do Full level.</li>
+</ul>
+
+<p><b>Rozšíření jazyka SQL proti normě</b>
+
+<ul>
+	<li>Použití specifikace indexu je rozšířením 602SQL.</li>
+</ul>
+
+<p><b>Příklad</b> použití dotazových výrazů a joinů na místě zobecněné tabulky (z aplikace eSupport - zjednodušeno):</p>
+
+<pre><code>SELECT *
+FROM Kb_topics 
+   LEFT OUTER JOIN 
+     (SELECT topic_id,un_reports+un_answers AS unanswered 
+      FROM (SELECT topic_id,Count(*) AS un_reports 
+            FROM Kb_reports WHERE all_answer_count=0 GROUP BY topic_id
+           ) 
+         JOIN 
+           (SELECT Kb_reports.topic_id,Count(*) AS un_answers 
+            FROM Kb_reports JOIN Kb_answers ON (Kb_reports.id=Kb_answers.report_id) 
+            WHERE (NOT EXISTS(SELECT * 
+                              FROM Kb_answers answ 
+                              WHERE Kb_answers.id=answ.question_id)) 
+            GROUP BY Kb_reports.topic_id
+            ) 
+         USING (topic_id)) 
+      ON (Kb_topics.id=topic_id) 
+ORDER BY Kb_topics.pos</code></pre>
+
+<p><b>Viz</b></p>
+
+<ul class='viz'><li><a href="HE_SQL2_SELECTS.htm">Sbírka dotazů</a> </ul>
+
+
+
+<table class="navigace" border="0" width="100%"  bgcolor="#FFFFBF">
+		  <tr>
+					 <td width="20" align="center">&nbsp;</td>
+					 <td width="25%">&nbsp;</td>
+					 <td width="25%"
+align="right"><img class="floatno" src="../images/up.gif" width="13"
+height="15" alt="Nahoru" title="O jednu úroveň výš" border="0"
+align="middle"></td><td width="25%"><a href="HE_SQL2_DOTAZY.htm">Dotazy</a></td>
+<td width="25%" align="right"><a
+href="HE_SQL2_SPECIFIKACEDOTAZU.htm">Specifikace dotazu</a></td><td width="20"
+align="center"><img class="floatno" src="../images/next.gif" width="15"
+height="13" alt="&shy;&gt;" title="Následující téma" border="0"></td>
+</tr></table>
+
+</body>
+</html>

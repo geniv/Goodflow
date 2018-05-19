@@ -1,0 +1,88 @@
+<!doctype html public "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=Windows-1250">
+<title>Příkaz ROLLBACK v SQL</title>
+<link rel='stylesheet' style='text/css' href='../function.css'>
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr>
+	<td style="background-image: url(../images/bghead.jpg);
+		background-position: right;
+		background-repeat: no-repeat;">
+	<table width="100%" border="0" cellpadding="0" cellspacing="0"
+		style="background-image:none">
+	<tr>
+		<td style="background-image:none" height="46"
+			width="15%"><img src="../images/title-cz.gif"
+			width="255" height="33"
+			alt="602SQL-Úplná dokumentace"
+			title="602SQL - Úplná dokumentace"
+			border="0"></td>
+		<td width="33%" align="right"><a href="../xml/html/top.html"><img class="floatno"
+			src="../images/index.gif"
+			width="15" height="16"
+			alt="Index" title="Zpět na obsah"
+			border="0" vspace="2"></a> &nbsp;
+			 </td>
+	</tr>
+	</table>
+	</td>
+</tr>
+</table><table class="navigace" border="0" width="100%"  bgcolor="#FFFFBF"><tr> <td
+width="20" align="center"><img class="floatno" src="../images/prev.gif"
+width="15" height="13" alt="&lt;&shy;" title="Předcházející téma"
+border="0"></td><td width="25%"><a
+href="HE_SQL2_COMMIT.htm">Příkaz COMMIT</a></td> <td width="25%"
+align="right"><img class="floatno" src="../images/up.gif" width="13"
+height="15" alt="Nahoru" title="O jednu úroveň výš" border="0"
+align="middle"></td><td width="25%"><a href="HE_SQL2_TRANSAKCE.htm">Transakce a body návratu</a></td>
+<td width="25%" align="right"><a
+href="HE_SQL2_SETTRANSACTION.htm">Příkaz SET TRANSACTION</a></td><td width="20"
+align="center"><img class="floatno" src="../images/next.gif" width="15"
+height="13" alt="&shy;&gt;" title="Následující téma" border="0"></td>
+</tr></table>
+
+
+
+
+<h1><a name="he_sql2_rollback"></a>Příkaz ROLLBACK (SQL)</h1>
+
+<pre><code>příkaz_ROLLBACK ::= ROLLBACK [ WORK ] [ AND [ NO ] CHAIN ] [ TO SAVEPOINT bod_návratu ] ;</code></pre>
+
+<p><a href="HE_SQL2_PRIKAZY.htm">Příkaz</a> ROLLBACK má jeden ze dvou významů v&nbsp;závislosti na tom, zda je v&nbsp;něm uveden <i>bod návratu</i>:
+
+<ul>
+	<li>Bez <i>bodu návratu</i> ukončuje právě probíhající transakci a ruší všechny změny v&nbsp;databázi, které byly v&nbsp;této <a href="HE_SQL2_TRANSAKCE.htm">transakci</a> provedeny. Zároveň odstraní <a href="../xml/html/waiting.html">dočasné zámky</a>, které byly na záznamech během provádění transakce umístěny.</li>
+
+	<li>S&nbsp;<i>bodem návratu</i> vrací databázi do stavu, v&nbsp;níž byla v&nbsp;okamžiku vytvoření tohoto bodu návratu příkazem <a href="HE_SQL2_SAVEPOINT.htm">SAVEPOINT</a>. Přitom však neodstraní žádné dočasné zámky, které byly na záznamech umístěny.</li>
+</ul>
+
+<p>Provedení příkazu ROLLBACK nemá vliv na hodnoty proměnných a na akce provedené v&nbsp;transakci mimo databázi.</p>
+
+<p>Příkaz ROLLBACK bez <i>bodu návratu</i> zruší všechny body návratu vytvořené v&nbsp;transakci. Příkaz ROLLBACK s <i>bodem návratu</i> zruší všechny body návratu vytvořené po vytvoření tohoto <i>bodu návratu</i> (uvedený <i>bod návratu</i> však zůstane zachován).</p>
+
+<p>Upřesnění WORK je zde pouze pro zachování kompatibility a nemá žádný efekt.</p>
+
+<p>Je-li uvedeno AND CHAIN, po ukončení transakce bude zahájena transakce nová se stejnými vlastnostmi jako dosavadní transakce. AND CHAIN se vylučuje s&nbsp;uvedením <i>bodu návratu</i>.</p>
+
+<p>Je-li uvnitř atomického složeného příkazu nebo triggeru proveden příkaz ROLLBACK bez <i>bodu návratu</i>, nastane chybový <a href="../xml/html/handlingcategories.html">sqlstate</a> 2D000. Je-li uvnitř atomického složeného příkazu proveden příkaz ROLLBACK s&nbsp;<i>bodem návratu</i> vytvořeným před vstupem do tohoto složeného příkazu nebo s&nbsp;nedefinovaným bodem návratu, nastane chybový <a href="../xml/html/handlingcategories.html">sqlstate</a> 3B001.</p>
+
+
+
+<table class="navigace" border="0" width="100%"  bgcolor="#FFFFBF"><tr> <td
+width="20" align="center"><img class="floatno" src="../images/prev.gif"
+width="15" height="13" alt="&lt;&shy;" title="Předcházející téma"
+border="0"></td><td width="25%"><a
+href="HE_SQL2_COMMIT.htm">Příkaz COMMIT</a></td> <td width="25%"
+align="right"><img class="floatno" src="../images/up.gif" width="13"
+height="15" alt="Nahoru" title="O jednu úroveň výš" border="0"
+align="middle"></td><td width="25%"><a href="HE_SQL2_TRANSAKCE.htm">Transakce a body návratu</a></td>
+<td width="25%" align="right"><a
+href="HE_SQL2_SETTRANSACTION.htm">Příkaz SET TRANSACTION</a></td><td width="20"
+align="center"><img class="floatno" src="../images/next.gif" width="15"
+height="13" alt="&shy;&gt;" title="Následující téma" border="0"></td>
+</tr></table>
+</body>
+</html>

@@ -1,0 +1,50 @@
+<!doctype html public "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=Windows-1250">
+<title>Funkce Current_application</title>
+<link rel='stylesheet' style='text/css' href='../function.css'>
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000">
+
+
+
+<h2 class=function>Current_application</h2>
+<img src='../images/sql.gif' width='44' height='16' border='0' alt='sql' align='middle' hspace='2'>
+
+
+<br><br>
+<div class='typ'>FUNCTION <b>Current_application</b> RETURNS CHAR(31)
+</div>
+
+
+<p><b>Popis </b></p>
+
+<p>Funkce slouží k určení jména otevřené aplikace. </p>
+
+<p><b>Hodnota funkce </b></p>
+
+<p>Funkce vrací jméno aktuální otevřené <a href="../xml/html/apliktop.html">aplikace</a> (schématu) v délce max. 31 znaků.</p>
+<p>Binární identifikaci otevřené aplikace vrací funkce <ident>Schema_uuid</ident>.</p>
+<p>Při přístupu přes ODBC driver funkce vrací jméno aplikace uvedené v nastavení ODBC zdroje dat, což nemusí být vždy aplikace aktuální. Proto je jistější tuto funkci při přístupu přes ODBC nepoužívat.</p>
+
+<p><b>Příklad:</b></p>
+
+<p>Vybrat dotazem tabulky otevřené aplikace</p>
+
+<pre><code>SELECT Tabtab.tab_name
+FROM Objtab, Tabtab
+WHERE Objtab.apl_uuid=Tabtab.apl_uuid
+ AND Objtab.obj_name=Current_application</code></pre>
+
+ <p><b>Viz</b></p>
+
+<ul class='viz'>
+ <li><a href="../xml/html/f_local_schema_name.html">Local_schema_name</a> </li>
+ <li><a href="../xml/html/f_schema_uuid.html">Schema_uuid</a> </li>
+</ul>
+
+ 
+</body>
+</html>

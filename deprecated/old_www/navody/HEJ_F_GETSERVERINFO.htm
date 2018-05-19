@@ -1,0 +1,334 @@
+<!doctype html public "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=Windows-1250">
+<title>Funkce Get_server_info</title>
+<link rel='stylesheet' style='text/css' href='../function.css'>
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000">
+
+
+
+<h2 class=function>Get_server_info </h2>
+<img src='../images/cpp.gif' width='44' height='16' border='0' alt='c/c++' align='middle' hspace='2'><img src='../images/pascal.gif' width='44' height='16' border='0' alt='pascal' align='middle' hspace='2'><img src='../images/sql.gif' width='44' height='16' border='0' alt='sql' align='middle' hspace='2'>
+
+
+<br><br>
+<div class='typ'>
+BOOL WINAPI <b>[cd_]Get_server_info</b>(cdp_t cdp, int info_type, void * buffer, unsigned buffer_size);<br>
+function <b>[cd_]Get_server_info</b>(cdp : cdp_t;  info_type : integer;  var buffer;  buffer_size : integer) : Boolean;<br>
+function <b>Get_server_info</b>(IN info_type INT) returns INT;
+</div>
+
+
+<p><b>Parametry</b></p>
+
+<table border=1 cols=2 frame=box rules=all width=430>
+
+<tr valign="top">
+<td width=18%><i>info_type</i></td>
+<td width=82%>číslo požadované informace</td>
+</tr>
+
+<tr valign="top">
+<td width=18%><i>buffer</i></td>
+<td width=82%>proměnná pro vrácení dat</td>
+</tr>
+
+<tr valign="top">
+<td width=18%><i>buffer_size</i></td>
+<td width=82%>velikost prostoru v&nbsp;<i>buffer</i> v bajtech</td>
+</tr>
+
+<tr valign="top">
+<td width=18%><i>cdp </i></td>
+<td width=82%><a href="HE_EXTCD.htm">kontextová proměnná</a> klienta</td>
+</tr>
+</table><br>
+
+<p><b>Od verze</b></p>
+
+<p>7.0, doplněno 8.0, 8.1, 9.5</p>
+
+<p><b>Hodnota funkce</b></p>
+
+<p>Funkce volaná klientem vrací FALSE v&nbsp;případě úspěchu, TRUE při chybě. Funkce volaná z SQL vrací přímo požadovaná data.</p>
+
+<p><b>Popis</b></p>
+
+<p>Funkce získá z&nbsp;SQL serveru informaci označenou parametrem <i>info_type</i>, resp. jejím číslem. Je-li volaná klientem, zapíše informaci do proměnné <i>buffer</i>. Je-li <i>buffer_size</i> příliš malé na požadovanou informaci, dojde k&nbsp;chybě. V jazyce SQL lze funkci volat pouze pro zjištění číselných hodnot (nemůže např. vrátit jméno serveru).</p>
+
+<table border="1">
+
+<tr valign="top">
+<td><b><i>info_type</i></b></td>
+<td><b>číslo</b></td>
+<td><b>druh informace</b></td>
+</tr>
+
+<tr valign="top">
+<td><code>OP_GI_SERVER_PLATFORM</code></td>
+<td>0</td>
+<td>platforma SQL serveru (0-Windows, 2-Linux)</td>
+</tr>
+
+<tr valign="top">
+<td><code>OP_GI_LICS_CLIENT</code></td>
+<td>2</td>
+<td>počet klientských licencí</td>
+</tr>
+
+<tr valign="top">
+<td><code>OP_GI_INST_KEY</code></td>
+<td>6</td>
+<td>instalační klíč serveru (vrací řetězec, nelze v SQL)</td>
+</tr>
+
+<tr valign="top">
+<td><code>OP_GI_SERVER_LIC</code></td>
+<td>7</td>
+<td>licenční číslo serveru (vrací řetězec, nelze v SQL)</td>
+</tr>
+
+<tr valign="top">
+<td><code>OP_GI_TRIAL_ADD_ON</code></td>
+<td>8</td>
+<td>přidány dočasné testovací add-on licence (0 nebo 1)</td>
+</tr>
+
+<tr valign="top">
+<td><code>OP_GI_VERSION_1</code></td>
+<td>10</td>
+<td>první část čísla verze serveru</td>
+</tr>
+
+<tr valign="top">
+<td><code>OP_GI_VERSION_2</code></td>
+<td>11</td>
+<td>druhá část čísla verze serveru</td>
+</tr>
+
+<tr valign="top">
+<td><code>OP_GI_VERSION_3</code></td>
+<td>12</td>
+<td>třetí část čísla verze serveru </td>
+</tr>
+
+<tr valign="top">
+<td><code>OP_GI_VERSION_4</code></td>
+<td>13</td>
+<td>čtvrtá část čísla verze serveru (měsíc a den)</td>
+</tr>
+
+<tr valign="top">
+<td><code>OP_GI_PID</code></td>
+<td>14</td>
+<td>číslo procesu SQL serveru v prostředí operačního systému</td>
+</tr>
+
+<tr valign="top">
+<td><code>OP_GI_SERVER_NAME</code></td>
+<td>15</td>
+<td>jméno serveru (vrací řetězec, nelze v SQL)</td>
+</tr>
+
+<tr valign="top">
+<td><code>OP_GI_DISK_SPACE</code></td>
+<td>16</td>
+<td>volné místo na disku s databázovým souborem</td>
+</tr>
+
+<tr valign="top">
+<td><code>OP_GI_CLUSTER_SIZE</code></td>
+<td>17</td>
+<td>velikost clusteru v databázovém souboru</td>
+</tr>
+
+<tr valign="top">
+<td><code>OP_GI_LICS_USING</code></td>
+<td>18</td>
+<td>počet licencí využitých připojenými klienty</td>
+</tr>
+
+<tr valign="top">
+<td><code>OP_GI_OWNED_CURSORS</code></td>
+<td>19</td>
+<td>počet kurzorů otevřených klientem</td>
+</tr>
+
+<tr valign="top">
+<td><code>OP_GI_FIXED_PAGES</code></td>
+<td>20</td>
+<td>počet fixovaných diskových stránek</td>
+</tr>
+
+<tr valign="top">
+<td><code>OP_GI_FIXES_ON_PAGES</code></td>
+<td>21</td>
+<td>počet fixací na diskových stránkách</td>
+</tr>
+
+<tr valign="top">
+<td><code>OP_GI_FRAMES</code></td>
+<td>22</td>
+<td>počet rámů pro diskové stránky</td>
+</tr>
+
+<tr valign="top">
+<td><code>OP_GI_FREE_CLUSTERS</code></td>
+<td>23</td>
+<td>počet nevyužitých clusterů v databázovém souboru</td>
+</tr>
+
+<tr valign="top">
+<td><code>OP_GI_USED_MEMORY</code></td>
+<td>24</td>
+<td>pracovní paměť (v bajtech) využívaná serverem </td>
+</tr>
+
+<tr valign="top">
+<td><code>OP_GI_TRIAL_REM_DAYS</code></td>
+<td>25</td>
+<td>zbývající počet dnů platnosti TRIAL licence</td>
+</tr>
+
+<tr valign="top">
+<td><code>OP_GI_INSTALLED_TABLES</code></td>
+<td>30</td>
+<td>počet instalovaných tabulek</td>
+</tr>
+
+<tr valign="top">
+<td><code>OP_GI_LOCKED_TABLES</code></td>
+<td>31</td>
+<td>počet držených tabulek</td>
+</tr>
+
+<tr valign="top">
+<td><code>OP_GI_TABLE_LOCKS</code></td>
+<td>32</td>
+<td>počet držáků tabulek</td>
+</tr>
+
+<tr valign="top">
+<td><code>OP_GI_TEMP_TABLES</code></td>
+<td>33</td>
+<td>počet dočasných tabulek</td>
+</tr>
+
+<tr valign="top">
+<td><code>OP_GI_OPEN_CURSORS</code></td>
+<td>34</td>
+<td>počet všech otevřených kurzorů</td>
+</tr>
+
+<tr valign="top">
+<td><code>OP_GI_PAGE_LOCKS</code></td>
+<td>35</td>
+<td>počet zámků na celých diskových stránkách</td>
+</tr>
+
+<tr valign="top">
+<td><code>OP_GI_LOGIN_LOCKS</code></td>
+<td>36</td>
+<td>počet zámků, kterými je zamčen server (0=není zamčen, >0 je zamčen)</td>
+</tr>
+
+<tr valign="top">
+<td><code>OP_GI_CLIENT_NUMBER</code></td>
+<td>37</td>
+<td>číslo klienta, který volá tuto funkci, viz funkci <a href="HE_F_CLIENTNUMBER.htm">client_number</a></td>
+</tr>
+
+
+<tr valign="top">
+<td><code>OP_GI_BACKGROUD_OPER</code></td>
+<td>38</td>
+<td>příznak, jsou-li <a href="../xml/html/workers.html">povoleny procesy na pozadí</a>; 1=povoleny, 0=nepovoleny</td>
+</tr>
+
+<tr valign="top">
+<td><code>OP_GI_SYS_CHARSET</code></td>
+<td>39</td>
+<td>systémový jazyk (sada znaků) serveru; tabulka s kódy je <a href="../xml/html/collate.html">zde</a></td>
+</tr>
+
+<tr valign="top">
+<td><code>OP_GI_MINIMAL_CLIENT_VERSION</code></td>
+<td>40</td>
+<td>minimální verze klienta, která je vyžadována serverem, aby nedošlo při připojení k <a href="../xml/html/kse_errors.html">chybě</a> <code>KSE_CLIENT_SERVER_INCOMP<code></td>
+</tr>
+
+<tr valign="top">
+<td><code>OP_GI_SERVER_UPTIME</code></td>
+<td>41</td>
+<td>doba (ve vteřinách) od spuštění SQL serveru</td>
+</tr>
+
+<tr valign="top">
+<td><code>OP_GI_PROFILING_ALL</code></td>
+<td>42</td>
+<td>příznak, je-li zapnuto <a href="../xml/html/profile.html">profilování</a> všech vláken; 1=zapnuto, 0=vypnuto</td>
+</tr>
+
+<tr valign="top">
+<td><code>OP_GI_PROFILING_LINES</code></td>
+<td>43</td>
+<td>příznak, je-li zapnuto <a href="../xml/html/profile.html">profilování</a> řádků rutin; 1=zapnuto, 0=vypnuto</td>
+</tr>
+
+<tr valign="top">
+<td><code>OP_GI_SERVER_HOSTNAME</code></td>
+<td>44</td>
+<td>IP hostname SQL serveru</td>
+</tr>
+
+<tr valign="top">
+<td><code>OP_GI_HTTP_RUNNING</code></td>
+<td>45</td>
+<td>příznak, je-li na serveru aktivní <a href="../xml/html/httptunnel.html">HTTP tunelování</a> síťové komunikace; 1=zapnuto, 0=vypnuto</td>
+</tr>
+
+<tr valign="top">
+<td><code>OP_GI_WEB_RUNNING</code></td>
+<td>46</td>
+<td>(od verze 10) příznak, je-li na serveru aktivní <a href="../xml/html/webaccess.html">emulace webserveru</a>; 1=zapnuto, 0=vypnuto</td>
+</tr>
+
+<tr valign="top">
+<td><code>OP_GI_NET_RUNNING</code></td>
+<td>47</td>
+<td>příznak zapnutí síťového protokolu TCP/IP na serveru ; 1=zapnuto, 0=vypnuto</td>
+</tr>
+<tr valign="top">
+<td><code>OP_GI_IPC_RUNNING</code></td>
+<td>48</td>
+<td>pouze na Windows; příznak zapnutí protokolu IPC (interní meziprocesorová komunikace) na serveru, ; 1=zapnuto, 0=vypnuto</td>
+</tr>
+<tr valign="top">
+<td><code>OP_GI_BACKING_UP</code></td>
+<td>49</td>
+<td>indikace, probíhá-li <a href="../xml/html/backup.html">zálohování</a> databázového souboru: 0=neprobíhá záloha, 1=neblokující záloha, 2=blokující záloha</td>
+</tr>
+
+
+</table><br>
+
+<p><b>Příklad:</b></p>
+
+<p>Použití v SQL proceduře:</p>
+
+<pre><code>PROCEDURE `PLATFORM`(  );
+BEGIN
+  IF Get_server_info(0) = 0 THEN
+    CALL Log_write("Windows");
+    // volání procedury pro Windows
+  ELSE
+    CALL Log_write("Linux");
+    // volání odlišné procedury pro Linux
+  END IF;
+END</code></pre>
+
+</body>
+</html>

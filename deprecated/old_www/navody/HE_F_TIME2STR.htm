@@ -1,0 +1,96 @@
+<!doctype html public "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=Windows-1250">
+<title>Funkce Time2str</title>
+<link rel='stylesheet' style='text/css' href='../function.css'>
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000">
+
+
+
+<h2 class=function>Time2str</h2>
+<img src='../images/sql.gif' width='44' height='16' border='0' alt='sql' align='middle' hspace='2'>
+
+
+<br><br>
+<div class='typ'>FUNCTION <b>Time2str</b>(IN tm TIME, IN prez SMALLINT) RETURNS CHAR(n);
+</div>
+
+
+<p><b>Parametry</b></p>
+
+<table border=1 cols=2 frame=box rules=all width=383>
+
+<tr valign="top">
+<td width=23%><i>tm </i></td>
+<td width=77%>hodnota, která se má konvertovat</td>
+</tr>
+
+<tr valign="top">
+<td width=23%><i>prez </i></td>
+<td width=77%>způsob konverze</td>
+</tr>
+</table><br>
+
+<p><b>Popis</b></p>
+
+<p>Funkce <b><code>Time2str</code></b> převede hodnotu zadanou prvním parametrem na řetězec znaků. Při konverzi se použije hodnota parametru <i>prez</i> takto:</p>
+
+<table border=1 cols=2>
+
+<tr valign="top">
+<td><b>Hodnota</b></td>
+<td><b>Význam</b></td>
+</tr>
+
+<tr valign="top">
+<td>0  </td>
+<td>zápis času bude obsahovat pouze hodiny a minuty;</td>
+</tr>
+
+<tr valign="top">
+<td>1  </td>
+<td>zápis času bude obsahovat hodiny, minuty a sekundy;</td>
+</tr>
+
+<tr valign="top">
+<td>2  </td>
+<td>zápis času bude obsahovat hodiny, minuty, sekundy a tisíciny sekundy;</td>
+</tr>
+<!--
+<tr valign="top">
+<td>3  </td>
+<td>zápis času bude ve formátu operačního systému;</td>
+</tr>
+-->
+<tr valign="top">
+<td>99 </td>
+<td>zápis času bude odpovídat 602SQL syntaxi literálu v SQL; zápis bude obsahovat hodiny, minuty,  sekundy a tisíciny sekundy.</td>
+</tr>
+
+</table><br>
+
+<p><b>Hodnota funkce</b></p>
+
+<p>Funkce vrací textový zápis času <i>tm</i>.</p>
+
+<p><b>Příklad:</b></p>
+
+<pre>SET str = <b>Time2str</b>(CURRENT_TIME, 1);</pre>
+
+<p><b>Viz</b></p>
+
+<ul class='viz'>
+ <li><a href="HE_F_INT2STR.htm">Int2str</a> </li>
+ <li><a href="HE_F_STR2INT.htm">Str2int</a> </li>
+ <li><a href="HE_F_REAL2STR.htm">Real2str</a> </li>
+ <li><a href="HE_F_STR2REAL.htm">Str2real</a> </li>
+ <li><a href="HE_F_STR2DATE.htm">Str2date</a> </li>
+ <li><a href="HE_F_DATE2STR.htm">Date2str</a> </li>
+ <li><a href="HE_F_STR2TIME.htm">Str2time</a></li>
+</ul>
+
+</body>
+</html>

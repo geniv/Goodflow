@@ -1,0 +1,60 @@
+<!doctype html public "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=Windows-1250">
+<title>Funkce Compact_database</title>
+<link rel='stylesheet' style='text/css' href='../function.css'>
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000">
+
+
+
+<h2 class=function>Compact_database</h2>
+<img src='../images/cpp.gif' width='44' height='16' border='0' alt='c/c++' align='middle' hspace='2'><img src='../images/pascal.gif' width='44' height='16' border='0' alt='pascal' align='middle' hspace='2'>
+
+
+<br><br>
+<div class='typ'>BOOL <b>[cd_]Compact_database</b> ([cdp_t cdp,] int margin);<br>
+function <b>[cd_]Compact_database</b> ([cdp : cdp_t;] margin : integer) : Boolean<br>
+
+</div>
+
+
+<p><b>Parametry</b></p>
+
+<table border=1 cols=2 frame=box rules=all width=440>
+
+<tr valign="top">
+<td width=17%><i>margin</i></td>
+<td width=83%>počet volných bloků (clusterů)</td>
+</tr>
+
+<tr valign="top">
+<td width=17%>[<i>cdp </i></td>
+<td width=83%><a href="HE_EXTCD.htm">Kontextová proměnná</a> klienta]  </td>
+</tr>
+</table><br>
+
+<p><b>Od verze</b></p>
+
+<p>5.1</p>
+
+<p><b>Popis</b></p>
+
+<p>Funkce provede zkompaktnění databáze. Tato akce přemístí bloky dat v databázovém souboru tak, aby mezi nimi nebylo zbytečné volné místo (např. po odstraněné aplikaci apod.) a tím výrazně zmenší velikost souboru. </p>
+
+<p>Funkce neprovádí zkompaktnění tabulek - k tomu slouží funkce <a href="HE_F_COMPACTTABLE.htm"><code>Compact_table</code></a>.</p>
+
+<p>Pomocí parametru <i>margin</i> lze stanovit, kolik bloků (clusterů) v databázovém souboru má zbýt po skončení operace prázdných - připravených pro ukládání dat bez nutnosti měnit velikost souboru. <!--Význam tohoto parametru je stejný jako údaj na stránce <code>Nástroje / Úpravy databázového souboru</code> Řídicí konzole serveru. Z tohoto místa lze vyvolat zkompaktnění intraktivně.-->
+</p>
+
+<p>Touto funkcí nemůže být databázový soubor zvětšen, pouze zmenšen. Zvětšení souboru se provádí funkcí <a href="HE_F_GETSETFILSIZE.htm"><code>GetSet_fil_size</code></a> nebo <a href="HE_F_GETSETFILBLOCKS.htm"><code>GetSet_fil_blocks</code></a>.</p>
+
+<p>Funkci lze volat pouze v&nbsp;situaci, kdy na server není přihlášen žádný jiný uživatel (ani systémové vlákno nebo detached SQL procedura). Při zavolání funkce nesmí být otevřen žádný kurzor. V opačném případě dojde k chybě NOT_LOCKED (136). Akci smí provést jen Provozní správce (CONFIG_ADMIN), jinak dojde k chybě NO_RIGHTS (129 - Nemáte právo provést tuto akci).</p>
+
+<p>Akce může trvat delší dobu.</p>
+
+
+</body>
+</html>

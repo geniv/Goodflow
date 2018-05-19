@@ -1,0 +1,110 @@
+<!doctype html public "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=Windows-1250">
+<title>Způsoby použití jazyka SQL</title>
+<link rel='stylesheet' style='text/css' href='../function.css'>
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr>
+	<td style="background-image: url(../images/bghead.jpg);
+		background-position: right;
+		background-repeat: no-repeat;">
+	<table width="100%" border="0" cellpadding="0" cellspacing="0"
+		style="background-image:none">
+	<tr>
+		<td style="background-image:none" height="46"
+			width="15%"><img src="../images/title-cz.gif"
+			width="255" height="33"
+			alt="602SQL-Úplná dokumentace"
+			title="602SQL - Úplná dokumentace"
+			border="0"></td>
+		<td width="33%" align="right"><a href="../xml/html/top.html"><img class="floatno"
+			src="../images/index.gif"
+			width="15" height="16"
+			alt="Index" title="Zpět na obsah"
+			border="0" vspace="2"></a> &nbsp;
+			 </td>
+	</tr>
+	</table>
+	</td>
+</tr>
+</table><table class="navigace" border="0" width="100%"  bgcolor="#FFFFBF"><tr> <td
+width="20" align="center"><img class="floatno" src="../images/prev.gif"
+width="15" height="13" alt="&lt;&shy;" title="Předcházející téma"
+border="0"></td><td width="25%"><a
+href="HE_SQL2_POPISSYNTAXE.htm">Popis syntaxe jazyka SQL</a></td> <td width="25%"
+align="right"><img class="floatno" src="../images/up.gif" width="13"
+height="15" alt="Nahoru" title="O jednu úroveň výš" border="0"
+align="middle"></td><td width="25%"><a href="HE_SQL2_JAZYKSQL.htm">Jazyk SQL a jeho implementace</a></td>
+<td width="25%" align="right"><a
+href="HE_SQL2_ELEMENTY.htm">Lexikální elementy</a></td><td width="20"
+align="center"><img class="floatno" src="../images/next.gif" width="15"
+height="13" alt="&shy;&gt;" title="Následující téma" border="0"></td>
+</tr></table>
+
+
+
+
+<h1><a name="he_sql2_pouziti"></a>Způsoby použití jazyka SQL</h1>
+
+<p>Jazyk SQL je základním nástrojem pro manipulaci s daty uloženými v databázi pod správou 602SQL. Příkaz v SQL se může na server dostat těmito cestami:
+
+<ul>
+	<li>příkazy mohou být součástí <a href="HE_SQL2_STOREDPROCEDURE.htm">uložených procedur</a> či <a href="HE_SQL2_TRIGGERY.htm">triggerů</a> na serveru;</li>
+	<li>příkazy lze zadávat z programů v externím programovacím jazyce C/C++ nebo Pascal/Delphi pomocí funkce <a href="HE_F_SQLEXECUTE.htm"><code>SQL_execute</code></a>, a dalších; </li>
+    <li>v <a href="../xml/html/cdkmain.html">rozhraní CDK</a> pro Delphi je pro zadání SQL příkazu existuje komponenta <a href="../xml/html/TSQL602Statement.html"><code>TSQL602Statement</code></a></li>
+	<li>v <a href="../xml/html/dotnettop.html">prostředí ADO.NET</a> lze SQL příkazy zadávat pomocí třídy <a href="../xml/html/SQL602Command.html"><code>SQL602Command</code></a></li>
+    <li>z <a href="../xml/html/php_modul_basics.html">PHP modulu</a> lze příkazy provádět pomocí funkce <a href="../xml/html/wb_exec.html"><code>wb_exec</code></a> resp. <a href="../xml/html/wb_psql_execute.html"><code>wb_psql_execute</code></a>.</li>
+	<li>klient připojený na server přes rozhraní ODBC, SDBC nebo JDBC má nástroje za zadávání příkazů SQL v API příslušného driveru;</li>
+</ul>
+
+<p>Chcete-li provádět stejné příkazy opakovaně (například nad různými daty), lze příkaz několika způsoby parametrizovat:
+
+<ul>
+	<li>uložené procedury mohou  mít vstupní a výstupní parametry, jejichž hodnoty se předávají při volání procedury;</li>
+	<li>v SQL příkazech zasílaných klientem lze oddělit přípravu příkazu k provedení a vlastní provádění pomocí funkcí <a href="HE_F_SQLPREPARE.htm"><code>SQL_prepare</code></a> a <a href="HE_F_SQLEXECPREPARED.htm"><code>SQL_exec_prepared</code></a>;</li>
+	<li>příkazy mohou obsahovat odkazy na vybrané proměnné klienta popsané ve struktuře předané funkci <a href="HE_F_SQLHOSTEXECUTE.htm"><code>SQL_host_execute</code></a> nebo, je-li oddělena příprava a provedení příkazu, jsou proměnné popsány při volání <a href="../xml/html/f_sql_host_prepare.html"><code>SQL_host_prepare</code></a> a příkaz je proveden funkcí <a href="HE_F_SQLEXECPREPARED.htm"><code>SQL_exec_prepared</code></a>;</li>
+	<li>příkazy předávané přes rozhraní ODBC nebo z <a href="../xml/html/php_psql.html">PHP modulu</a> mohou obsahovat tzv. <i>dynamické parametry</i>.</li>
+</ul>
+
+<p>Při vývoji aplikací lze navíc používat k zadávání SQL příkazů tyto cesty:
+
+<ul>
+	<li>Příkazy lze zapsat přímo pomocí <a href="../xml/html/sqlconsole.html">okna <strong>SQL Console</strong></a> v klientském vývojovém prostředí. Příkazy budou ihned provedeny a v <a href="../xml/html/output.html">okně <strong>Output</strong></a> se objeví informace o úspěchu či neúspěchu, dotazový výraz SELECT se vyhodnotí a výsledek se otevře ve zvláštním okně.</li>
+	<li>Procedury uložené na serveru lze zavolat přímo z klientského vývojového prostředí a přitom jim předat vstupní parametry a zobrazit výstupní parametry.</li>
+<!--	<li>SQL příkazy také pro vybraný cizí ODBC zdroje dat lze zadat pomocí konzole otevřené z řídicího panelu tlačítkem <b>SQL příkaz</b>. Bude-li příkaz proveden, na stavovém řádku se objeví nápis <b>Provedeno</b>, vyskytne-li se chyba, objeví se zpráva s popisem chyby vrácená ODBC driverem. SQL příkazy lze zasílat ODBC zdoji dat i přímo funkcí <a href="../xml/html/f_odbc_exec_direct.html"><code>ODBC_exec_direct</code></a>.</li>-->
+    <li>Na Linuxu lze k zadání příkazu použít textovou konzoli <a href="../xml/html/linuxclient.html"><code>602cli10</code></a>.</li>
+</ul>
+
+<p>Příkazy, které vznikají <i>dynamicky</i> za běhu programu, lze provádět pouze pomocí funkcí <a href="HE_F_SQLEXECUTE.htm"><code>SQL_execute</code></a>, <a href="HE_F_SQLPREPARE.htm"><code>SQL_prepare</code></a>, <a href="HE_F_SQLEXECPREPARED.htm"><code>SQL_exec_prepared</code></a>, <a href="HE_F_SQLHOSTEXECUTE.htm"><code>SQL_host_execute</code></a> a <a href="../xml/html/f_sql_host_prepare.html"><code>SQL_host_prepare</code></a> a jejich ekvivalentů pro CDK a PHP. Funkci <a href="HE_F_SQLEXECUTE.htm"><code>SQL_execute</code></a> lze k tomuto účelu využít i uvnitř procedur uložených na serveru.</p>
+
+
+
+
+<p class="subs">Seznam subsekcí:
+<ul class="subs">
+
+<li><a href="HE_SQL2_PROMENNEJAZYKA.htm">Proměnné klientských aplikací v příkazech SQL (Embedded SQL)</a>
+
+<li><a href="HE_SQL2_PRIPRAVAPRIKAZU.htm">Příprava a provádění příkazů SQL</a>
+
+<li><a href="../xml/html/dynsql.html">Dynamické SQL příkazy uvnitř uložených procedur</a>
+
+</ul>
+<table class="navigace" border="0" width="100%"  bgcolor="#FFFFBF"><tr> <td
+width="20" align="center"><img class="floatno" src="../images/prev.gif"
+width="15" height="13" alt="&lt;&shy;" title="Předcházející téma"
+border="0"></td><td width="25%"><a
+href="HE_SQL2_POPISSYNTAXE.htm">Popis syntaxe jazyka SQL</a></td> <td width="25%"
+align="right"><img class="floatno" src="../images/up.gif" width="13"
+height="15" alt="Nahoru" title="O jednu úroveň výš" border="0"
+align="middle"></td><td width="25%"><a href="HE_SQL2_JAZYKSQL.htm">Jazyk SQL a jeho implementace</a></td>
+<td width="25%" align="right"><a
+href="HE_SQL2_ELEMENTY.htm">Lexikální elementy</a></td><td width="20"
+align="center"><img class="floatno" src="../images/next.gif" width="15"
+height="13" alt="&shy;&gt;" title="Následující téma" border="0"></td>
+</tr></table>
+</body>
+</html>

@@ -1,0 +1,45 @@
+#zobrazovani souboru
+#Options -Indexes
+
+#error page 400
+#ErrorDocument 400 /error_page.html
+
+#error page 401
+#ErrorDocument 401 /error_page.html
+
+#error page 403
+#ErrorDocument 403 /error_page.html
+
+#error page 404
+#ErrorDocument 404 /error_page.html
+
+#error page 500
+#ErrorDocument 500 /error_page.html
+
+#zapinani php5 na klenotu 1/2
+#AddHandler php5-cgi .php
+
+#zapinani php5 na klenotu 2/2
+#Action php5-cgi /php5cgi/php
+
+#http aturizace pro klenot server
+
+
+#zapinani rewrite
+RewriteEngine on
+
+#
+#RewriteBase /
+
+#pravidla pro menu
+RewriteRule ^([a-zA-Z0-9-\_]+)/?$ ?action=$1
+
+#prepis pro menu2
+RewriteRule ^([a-zA-Z0-9-\_]+)/([a-zA-Z0-9-\_]+)/?/?$ ?action=$1&sekce=$2 [L]
+
+#nastaveni na http autorzaci
+#RewriteCond %{HTTP:Authorization} !^$
+
+#prepis http autorizace na klenotu
+#RewriteRule .* - [E=REMOTE_USER:%{HTTP:Authorization},L]
+

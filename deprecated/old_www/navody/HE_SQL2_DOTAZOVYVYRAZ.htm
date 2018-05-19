@@ -1,0 +1,148 @@
+<!doctype html public "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=Windows-1250">
+<title>Dotazový výraz v SQL</title>
+<link rel='stylesheet' style='text/css' href='../function.css'>
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr>
+	<td style="background-image: url(../images/bghead.jpg);
+		background-position: right;
+		background-repeat: no-repeat;">
+	<table width="100%" border="0" cellpadding="0" cellspacing="0"
+		style="background-image:none">
+	<tr>
+		<td style="background-image:none" height="46"
+			width="15%"><img src="../images/title-cz.gif"
+			width="255" height="33"
+			alt="602SQL-Úplná dokumentace"
+			title="602SQL - Úplná dokumentace"
+			border="0"></td>
+		<td width="33%" align="right"><a href="../xml/html/top.html"><img class="floatno"
+			src="../images/index.gif"
+			width="15" height="16"
+			alt="Index" title="Zpět na obsah"
+			border="0" vspace="2"></a> &nbsp;
+			 </td>
+	</tr>
+	</table>
+	</td>
+</tr>
+</table><table class="navigace" border="0" width="100%"  bgcolor="#FFFFBF"><tr> <td
+width="20" align="center"><img class="floatno" src="../images/prev.gif"
+width="15" height="13" alt="&lt;&shy;" title="Předcházející téma"
+border="0"></td><td width="25%"><a
+href="HE_SQL2_SPECIFIKACEDOTAZU.htm">Specifikace dotazu</a></td> <td width="25%"
+align="right"><img class="floatno" src="../images/up.gif" width="13"
+height="15" alt="Nahoru" title="O jednu úroveň výš" border="0"
+align="middle"></td><td width="25%"><a href="HE_SQL2_DOTAZY.htm">Dotazy</a></td>
+<td width="25%" align="right"><a
+href="../xml/html/limit.html">Výběr úseku záznamů</a></td><td width="20"
+align="center"><img class="floatno" src="../images/next.gif" width="15"
+height="13" alt="&shy;&gt;" title="Následující téma" border="0"></td>
+</tr></table>
+
+
+
+
+<h1><a name="he_sql2_dotazovyvyraz"></a>Dotazový výraz (SQL)</h1>
+
+<pre><code>dotazový_výraz ::= { dotazový_term | dotazový_výraz { UNION | EXCEPT } [ ALL ] 
+    [ corresponding ] dotazový_term } [ třídění ] [ výběr ]
+dotazový_term ::= specifikace_dotazu | dotazový_term INTERSECT [ ALL ] [&nbsp;corresponding ] 
+    specifikace_dotazu
+corresponding ::= CORRESPONDING [ BY ( jméno_sloupce {, jméno_sloupce }… )]
+třídění ::= ORDER BY výraz [ ASC | DESC ] {, výraz [ASC | DESC ] }… 
+výběr ::= LIMIT [ offset , ] count
+</code></pre>
+
+<p><i>Dotazový výraz</i> umožňuje povést nad výsledkem <a href="HE_SQL2_SPECIFIKACEDOTAZU.htm"><i>specifikace dotazu</i></a> operace relační algebry UNION, INTERSECT a EXCEPT a výsledek setřídit a omezit.</p>
+
+<p>Operace UNION znamená sjednocení množin záznamů, operace EXCEPT rozdíl, operace INTERSECT průnik. Pokud není uvedeno ALL, pak každý záznam bude ve výsledku nejvýše jednou. Uvedení ALL výrazně zrychluje vyhodnocení dotazu.</p>
+
+<p>Oba operandy množinové operace musí mít stejný počet sloupců a <a href="HE_SQL2_DATOVETYPY.htm">typy</a> odpovídajících si sloupců jsou stejné. V případě EXCEPT a INTERSECT se předpokládá, že v obou operandech existují stejné záznamy (které tvoří průnik nebo jsou vyloučeny z rozdílu).</p>
+
+<p>Pomocí specifikace <i>corresponding</i> lze zadat množinu sloupců ve výsledku operace:
+
+<ul>
+	<li>Pokud CORRESPONDING není uvedeno, pak se pouze očekává, že oba operandy mají stejný počet sloupců a typy odpovídajících si sloupců jsou stejné. Tytéž sloupce budou i ve výsledku.</li>
+
+	<li>Pokud v&nbsp;<i>corresponding</i> není uvedeno BY, pak ve výsledku budou pouze ty sloupce, které se v&nbsp;obou operandech jmenují stejné. Očekává se, že jsou i stejného typu a že alespoň jedna taková dvojice sloupců existuje.</li>
+
+	<li>Pokud v&nbsp;<i>corresponding</i> je uvedeno BY, pak ve výsledku budou sloupce, jejichž <i>jména</i> následují za BY. Očekává se, že všechny tyto sloupce existují v&nbsp;obou operandech a že jsou stejného typu.</li>
+</ul>
+
+<p>Výsledek <i>dotazového výrazu</i> se třídí podle hodnot <i>výrazů</i>, přičemž DESC znamená sestupné třídění, ASC nebo nic vzestupné. Pokud některý <i>výraz</i> má na dvou záznamech stejnou hodnotu, o pořadí záznamů rozhodné další <i>výraz</i>. Pokud je pro třídění použit index <a href="../xml/html/indexnotnull.html">obsahující hodnoty NULL</a> nebo není pro třídění použit index, jsou hodnoty NULL považovány za menší než všechny ostatní hodnoty. Pokud je pro třídění použit index neobsahující hodnoty NULL, do odpovědi se záznamy s NULL hodnotou <i>výrazu</i> nezahrnou.</p>
+<p><i>Výrazy</i> obsažené v klauzuli ORDER BY smějí obsahovat pouze jména sloupců <i>specifikace dotazu</i> (po případném přejmenování), nikoli jakákoliv jména sloupců z tabulek použitých v&nbsp;<i>dotazovém výrazu</i> (ale nepoužitých za SELECT ... ). </p>
+
+<p>Z&nbsp;výsledku <i>dotazového výrazu</i> lze dále vybrat úsek záznamů pomocí <a href="../xml/html/limit.html">klauzule LIMIT</a>.</p>
+
+<p><b>Rozšíření jazyka SQL proti normě</b>
+
+<ul>
+	<li>Klauzule ORDER BY na tomto místě je rozšířením 602SQL.</li>
+
+	<li>Klauzule LIMIT je rozšířením 602SQL</li>
+</ul>
+
+<p><b>Odchylky od Intermediate level směrem k&nbsp;Full level nebo k&nbsp;SQL 3</b>
+
+<ul>
+	<li>Operace UNION, EXCEPT a INTERSECT je možno použít i v subdotazech</li>
+</ul>
+
+<p><b>Příklady použití:</b></p>
+
+<p>Seznam firem, které již objednaly (mají alespoň jednu fakturu):</p>
+
+<pre><code>SELECT F.cislo_firmy,F.nazev
+FROM Firmy F
+WHERE EXISTS (
+    SELECT * 
+    FROM Fakt_hlav H
+    WHERE F.cislo_firmy=H.cislo_firmy)</code></pre>
+
+<p>Seznam firem, které dosud neobjednaly:</p>
+
+<pre><code>SELECT F.cislo_firmy,F.nazev
+FROM Firmy F
+EXCEPT
+SELECT F.cislo_firmy,F.nazev
+FROM Firmy F
+WHERE EXISTS (
+    SELECT * 
+    FROM Fakt_hlav H
+    WHERE F.cislo_firmy=H.cislo_firmy)</code></pre>
+
+<p>Vybrat firmu s maximálním obratem:</p>
+
+<pre><code>SELECT SUM(Faktury.castka) AS suma,Firmy.nazev
+FROM Firmy, Faktury
+WHERE Faktury.firma=Firmy.cislo
+GROUP BY Firmy.nazev
+ORDER BY suma DESC
+LIMIT 1</code></pre>
+
+<p><b>Viz</b></p>
+
+<ul class='viz'><li><a href="HE_SQL2_SELECTS.htm">Sbírka dotazů</a> </ul>
+
+
+
+<table class="navigace" border="0" width="100%"  bgcolor="#FFFFBF"><tr> <td
+width="20" align="center"><img class="floatno" src="../images/prev.gif"
+width="15" height="13" alt="&lt;&shy;" title="Předcházející téma"
+border="0"></td><td width="25%"><a
+href="HE_SQL2_SPECIFIKACEDOTAZU.htm">Specifikace dotazu</a></td> <td width="25%"
+align="right"><img class="floatno" src="../images/up.gif" width="13"
+height="15" alt="Nahoru" title="O jednu úroveň výš" border="0"
+align="middle"></td><td width="25%"><a href="HE_SQL2_DOTAZY.htm">Dotazy</a></td>
+<td width="25%" align="right"><a
+href="../xml/html/limit.html">Výběr úseku záznamů</a></td><td width="20"
+align="center"><img class="floatno" src="../images/next.gif" width="15"
+height="13" alt="&shy;&gt;" title="Následující téma" border="0"></td>
+</tr></table>
+</body>
+</html>

@@ -1,0 +1,142 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=windows-1250"></head><body>
+
+
+<p>Tento článek bude užitečný především těm, kdo mají na internetu své
+fotogalerie, nebo se chystají něco podobného naprogramovat. Ostatně
+návod na jednu variantu obrázkové galerie máte přímo zde na Webtipu. O
+co jde? Každého, kdo si bude chtít umístit na internet své obrázky,
+potká situace, kdy si bude muset vytvořit z oněch obrázků náhledy
+(zmenšeniny). O tom, že to je pracná záležitost se tu nemá cenu
+rozepisovat. Proto také vznikla řada programů, které mají tvorbu
+náhledů usnadnit. Jako jeden příklad za všechny mohu uvést například
+program ACDSee, který je mimo jiné výborný prohlížeč obrázků. Někdo by
+teď mohl předhodit otázku: "Je možné obrázky zmenšovat pomocí PHP?"
+Samozřejmě. A o tom dnešní článek bude. Jeden můj kolega tu před časem
+podobnou situaci se zmenšováním obrázků probíral. Jeho skript fungoval
+tak, že z obrázků uložených v adresáři udělal zmenšeniny, které potom
+uložil do jiného adresáře. Stručné a jednoduché. Já jsem tento proces
+obohatil ještě o pár maličkostí, které doufám přijdou některým vhod.
+Před samotným zmenšováním se vám otevře formulář, kde si budete moci
+navolit některé podmínky, jako například vytvoření progresivních
+(prokládaných) náhledů, zobrazení výsledných obrázků po ukončení běhu
+skriptu nebo si budete moci nastavit i požadovanou kvalitu obrázků.
+Princip pak zůstává stejný.</p>
+<p>Začnu tedy skriptem. Celý php kód jsem rozdělil na dvě části - část,
+která se provede po odeslání formuláře a má za účel zjistit hlavní
+proměnné, jež pak předá funkci, no a samotnou funkci, která obrázky
+zmenšuje. Toto je část první:</p>
+<table valign="top" style="border: 1px solid black;" align="center" cellpadding="2" cellspacing="0" height="1" width="100%"><tbody><tr bgcolor="#dddddd"><td>
+if ($resize == "OK"):<br>
+	set_time_limit(60);<br>
+DL("php_gd.dll");						<span style="color: blue;">//načtení DLL knihovny pro práci s obrázky</span><br>
+	include "conf.php";<br>
+	$dp = OpenDir($cur_dir);					<span style="color: blue;">//nastaveni adresare - vraci ukazatel $dp</span><br>
+	$i = 0;<br>
+	$soubor[$i] = ReadDir($dp);<br>
+	while ($soubor[$i] == true):					<span style="color: blue;">//vypis vsech souboru v nastavenem adresari</span><br>
+		$pis = ReadDir($dp);<br>
+		$i++;<br>
+		$soubor[$i] = $pis;					<span style="color: blue;">//$soubor[2] je prvnim souborem v adresari</span><br>
+	endwhile;					<span style="color: blue;">//zachována promenna $i, ktera je pocet souboru +2</span><br>
+	CloseDir($dp);<br>
+	<br>
+	for ($y=2; $y&lt;=$i-1; $y++):<br>
+		$size[$y] = GetImageSize($cur_dir."/".$soubor[$y]);<br>
+		$width = $size[$y][0];<br>
+		$height = $size[$y][1];<br>
+<br>
+		if ($new_width &lt;= $new_height):<br>
+			$widthto = $new_width;<br>
+			$ratio = $width/$widthto;<br>
+			$heightto = Ceil($height/$ratio);<br>
+		else:<br>
+			$heightto = $new_height;<br>
+			$ratio2 = $height/$heightto;<br>
+			$widthto = Ceil($width/$ratio2);<br>
+		endif;<br>
+		$outfile = Str_Replace(" ", "_", $soubor[$y]);<br>
+		$outfile = strtr($outfile, "áčďěéíňřšťůúýžüäëö", "acdeeinrstuuyzuaeo");<br>
+		$outfile = StrToLower($outfile);<br>
+		resize($soubor[$y], "small_".$outfile, $widthto, $heightto, $quality, $show, $interlace);<br>
+	endfor;<br>
+endif;
+</td></tr><tr></tr></tbody></table>
+<p>Funguje to tak, že po odeslání formuláře se načte potřebná DLL knihovna a nezbytné proměnné ze souboru <b>conf.php</b>
+- jsou vlastně jen 2 - určení adresáře s originálními obrázky a
+adresáře, kam se uloží náhledy. Následuje cyklus, ve kterém se do pole <b>$soubor</b>
+uloží názvy souborů obrázků. V dalším cyklu se zjistí originální
+velikosti obrázků v pixelech a porovnají se uživatelem zadané hodnoty,
+podle kterých se obrázky zmenší buď na výšku, nebo na šířku. Ještě
+nahradíme některé nebezpečné znaky v názvech souborů a můžeme
+přistoupit k funkci, která obrázky zmenší. Tady je:</p>
+<table valign="top" style="border: 1px solid black;" align="center" cellpadding="2" cellspacing="0" height="1" width="100%"><tbody><tr bgcolor="#dddddd"><td>
+function resize($cur_file, $copy_file, $widthto, $heightto, $quality, $show, $interlace)<br>
+{<br>
+include "conf.php";<br>
+$ssize=GetImageSize($cur_dir."/".$cur_file);<br>
+$end = Explode(".", $cur_file);<br>
+<span style="color: red;">if ((strtolower($end[1]) == "jpg") || (strtolower($end[1]) == "jpeg")):</span><br>
+&nbsp;	$fp = imagecreatefromjpeg ($cur_dir."/".$cur_file);<br>
+&nbsp;	$fx = imagecreate ($widthto,$heightto-1);<br>
+&nbsp;	imagecopyresized ($fx,$fp,0,0,0,0,$widthto,$heightto,$ssize[0],$ssize[1]);<br>
+<span style="color: blue;">&nbsp;	if ($interlace == "on"): ImageInterlace($fx , 1); endif;</span><br>
+&nbsp;	imageJPEG ($fx, $copy_file, $quality);<br>
+&nbsp;	Copy($copy_file, $copy_dir."/".$copy_file);<br>
+&nbsp;	unlink($copy_file);<br>
+&nbsp;	ImageDestroy($fp);<br>
+&nbsp;	ImageDestroy($fx);<br>
+&nbsp;	$kilo = Round(FileSize($copy_dir."/".$copy_file)/1024, 2);<br>
+&nbsp; echo "&lt;div align=\"center\"&gt;&lt;b&gt;".$cur_file." =&gt;
+".$copy_file."&lt;/b&gt;&lt;br&gt;&lt;b&gt;".$widthto." X ".$heightto."
+px ; ".$kilo." Kb&lt;/b&gt;&lt;br&gt;&lt;/div&gt;";<br>
+<span style="color: blue;">&nbsp; if ($show == "on"): echo "&lt;div
+align=\"center\"&gt;&lt;img
+src=\"resized/".$copy_file."\"&gt;&lt;br&gt;&lt;br&gt;&lt;/div&gt;";
+endif;</span><br>
+<span style="color: red;">elseif (strtolower($end[1]) == "png"):	</span><br>
+&nbsp;	If ( @$fp = imagecreatefrompng ($cur_dir."/".$cur_file) ):<br>
+&nbsp;		$fx = imagecreate ($widthto,$heightto-1);<br>
+&nbsp;		imagecopyresized ($fx,$fp,0,0,0,0,$widthto,$heightto,$ssize[0],$ssize[1]);<br>
+&nbsp;		if ($interlace == "on"): ImageInterlace($fx , 1); endif;<br>
+&nbsp;		imagePNG ($fx, $copy_file, $quality);<br>
+&nbsp;		Copy($copy_file, $copy_dir."/".$copy_file);<br>
+&nbsp;		unlink($copy_file);<br>
+&nbsp;		ImageDestroy($fp);<br>
+&nbsp;		ImageDestroy($fx);<br>
+&nbsp;		$kilo = Round(FileSize($copy_dir."/".$copy_file)/1024, 2);<br>
+&nbsp; echo "&lt;div align=\"center\"&gt;&lt;b&gt;".$cur_file." =&gt;
+".$copy_file."&lt;/b&gt;&lt;br&gt;&lt;b&gt;".$widthto." X ".$heightto."
+px ; ".$kilo." Kb&lt;/b&gt;&lt;br&gt;&lt;/div&gt;";<br>
+&nbsp; if ($show == "on"): echo "&lt;div align=\"center\"&gt;&lt;img
+src=\"resized/".$copy_file."\"&gt;&lt;br&gt;&lt;br&gt;&lt;/div&gt;";
+endif;<br>
+&nbsp;	else:<br>
+&nbsp; echo "&lt;div align=\"center\" style=\"color: red;\"&gt;Your
+version of GD library doesn't support PNG images.&lt;br&gt;Image
+&lt;b&gt;".$cur_file."&lt;/b&gt; wasn't resized.
+Sorry.&lt;br&gt;&lt;br&gt;&lt;/div&gt;";<br>
+&nbsp;	endif;<br>
+endif;<br>
+}
+</td></tr><tr></tr></tbody></table>
+<p>Jak vidíte, funkce je rozdělená na 2 části - jedna pro obrázky ve
+formátu PNG a druhá pro JPG. Podpora GIFů byla v PHP odebrána, tak
+proto tu o gifech nic není. Typ obrázku zjistíme podle přípony, kde se
+pomocí funkce Explode oddělí název od přípony (separátor bude logicky
+tečka). Dále je už skript vcelku jednoduchý. Pomocí dvou image-funkcí
+(imagecreatefromjpeg() a imagecopyresized()) daný obrázek zmenšíme a
+dále pak pokud je zvoleno vytvoření progresívních obrázků, využijeme
+funkci ImageInterlace() a obrázky převedeme. Kvalitu obrázku nastavíme
+ve funkci imageJPEG() nebo imagePNG(). Následuje už jen zkopírování
+obrázků do požadovaného adresáře, uvolnění paměti pomocí ImageDestroy()
+a vypsání informací na obrazovku. Pokud si uživatel zvolí zobrazení
+zmenšených obrázků, tak je vyhodíme na obrazovku spolu s informacemi.
+Tímto je jeden cyklus hotov a může se přistoupit ke zmenšení případných
+dalších obrázků.</p>
+<p>Myslím, že celý skript je vcelku přehledně sestavený, tak by jeho
+pochopení a používání nemělo dělat problémy. Komplikace by mohly nastat
+v případě, kdy byste neměli správnou knihovnu pro práci s PNG a JPG
+obrázky. To vám nezbude nic jiného, než si příslušné soubory stáhnout z
+internetu. V tomto článku je to všechno. Máte-li zájem o zdrojáky - <a href="http://www.webtip.cz/images/inteli_ir.zip">JSOU ZDE</a>. Příště chystám další specialitu - zápis copyrightů na originální obrázky. ;) Víc neprozradím...nechte se překvapit.</p>
+
+</body></html>

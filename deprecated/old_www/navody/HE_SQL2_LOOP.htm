@@ -1,0 +1,122 @@
+<!doctype html public "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=Windows-1250">
+<title>Příkaz LOOP v SQL</title>
+<link rel='stylesheet' style='text/css' href='../function.css'>
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr>
+	<td style="background-image: url(../images/bghead.jpg);
+		background-position: right;
+		background-repeat: no-repeat;">
+	<table width="100%" border="0" cellpadding="0" cellspacing="0"
+		style="background-image:none">
+	<tr>
+		<td style="background-image:none" height="46"
+			width="15%"><img src="../images/title-cz.gif"
+			width="255" height="33"
+			alt="602SQL-Úplná dokumentace"
+			title="602SQL - Úplná dokumentace"
+			border="0"></td>
+		<td width="33%" align="right"><a href="../xml/html/top.html"><img class="floatno"
+			src="../images/index.gif"
+			width="15" height="16"
+			alt="Index" title="Zpět na obsah"
+			border="0" vspace="2"></a> &nbsp;
+			 </td>
+	</tr>
+	</table>
+	</td>
+</tr>
+</table><table class="navigace" border="0" width="100%"  bgcolor="#FFFFBF"><tr> <td
+width="20" align="center"><img class="floatno" src="../images/prev.gif"
+width="15" height="13" alt="&lt;&shy;" title="Předcházející téma"
+border="0"></td><td width="25%"><a
+href="HE_SQL2_CASE.htm">Příkaz CASE</a></td> <td width="25%"
+align="right"><img class="floatno" src="../images/up.gif" width="13"
+height="15" alt="Nahoru" title="O jednu úroveň výš" border="0"
+align="middle"></td><td width="25%"><a href="HE_SQL2_RIDICIPRIKAZY.htm">Řídící příkazy</a></td>
+<td width="25%" align="right"><a
+href="HE_SQL2_WHILE.htm">Příkaz WHILE</a></td><td width="20"
+align="center"><img class="floatno" src="../images/next.gif" width="15"
+height="13" alt="&shy;&gt;" title="Následující téma" border="0"></td>
+</tr></table>
+
+
+
+
+<h1><a name="he_sql2_loop"></a>Příkaz LOOP (SQL)</h1>
+
+<pre><code>příkaz_LOOP ::= [ návěští : ] LOOP příkaz … END LOOP [ návěští ];</code></pre>
+
+<p><a href="HE_SQL2_PRIKAZY.htm"><i>Příkazy</i></a> (resp. <a href="HE_SQL2_SLOZENYPRIKAZ.htm">složené příkazy</a>) obsažené v příkazu LOOP se provádějí opakovaně, dokud se neprovede příkaz <a href="HE_SQL2_LEAVE.htm">LEAVE</a> nebo dokud nedojde k chybě.</p>
+
+<p>Je-li uvedeno koncové <i>návěští</i>, pak musí být uvedeno také stejné počáteční <i>návěští</i>. Uvnitř příkazu LOOP nesmí být žádný příkaz označen stejným návěštím.</p>
+
+<p>Velmi časté použití nachází LOOP při procházení záznamů kurzoru otevřeného příkazem <a href="HE_SQL2_OPEN.htm">OPEN</a> (prakticky jediná možnost, jak lze tyto záznamy projít). K průchodu všemi záznamy kurzoru lze také použít příkaz <a href="HE_SQL2_FOR.htm">FOR</a>.</p>
+
+<br><p><b>Příklad použití:</b></p>
+
+<p>do tabulky vložit 10 záznamů a vzestupně je očíslovat </p>
+
+<pre><code>BEGIN ATOMIC 
+  DECLARE i INT;      
+  SET i = 1; 
+  <b>label: LOOP </b>INSERT INTO Tab3 (cislo) VALUES (i); 
+     IF i &gt;= 10 THEN <b>LEAVE label</b>; END IF; 
+     SET i = i + 1; 
+  <b>END LOOP label</b>; 
+END;
+</code></pre>
+
+<p><b>Příklad použití č. 2:</b></p>
+
+<p>použití LOOP při procházení kurzoru:</p>
+
+<pre><code>PROCEDURE ZmenaCeniku();
+BEGIN 
+  DECLARE err_notfound BIT DEFAULT FALSE;
+  DECLARE CONTINUE HANDLER FOR NOT FOUND 
+    BEGIN SET err_notfound=TRUE;  END;
+  DECLARE curcen SENSITIVE CURSOR FOR 
+    SELECT cislo_pol, cena
+    FROM Cenik
+  FOR UPDATE; 
+  DECLARE Polozka CHAR(20); 
+  DECLARE Cena NUMERIC(14,2); 
+
+  OPEN curcen; 
+<b>  LabelLoop: LOOP </b>
+     FETCH NEXT FROM curcen INTO Polozka, Cena; 
+     IF err_notfound IS TRUE THEN <b>LEAVE LabelLoop</b>; END IF; 
+     CASE SUBSTRING(Polozka FROM 1 FOR 1)
+       WHEN "X" THEN 
+         UPDATE SET Cena = Cena*0.9 WHERE CURRENT OF curcen;
+       WHEN "A" THEN 
+         UPDATE SET Cena = Cena*2 WHERE CURRENT OF curcen;
+       ELSE
+         DELETE WHERE CURRENT OF curcen;
+     END CASE; 
+  <b>END LOOP LabelLoop</b>; 
+  CLOSE curcen; 
+END;</code></pre>
+
+
+
+<table class="navigace" border="0" width="100%"  bgcolor="#FFFFBF"><tr> <td
+width="20" align="center"><img class="floatno" src="../images/prev.gif"
+width="15" height="13" alt="&lt;&shy;" title="Předcházející téma"
+border="0"></td><td width="25%"><a
+href="HE_SQL2_CASE.htm">Příkaz CASE</a></td> <td width="25%"
+align="right"><img class="floatno" src="../images/up.gif" width="13"
+height="15" alt="Nahoru" title="O jednu úroveň výš" border="0"
+align="middle"></td><td width="25%"><a href="HE_SQL2_RIDICIPRIKAZY.htm">Řídící příkazy</a></td>
+<td width="25%" align="right"><a
+href="HE_SQL2_WHILE.htm">Příkaz WHILE</a></td><td width="20"
+align="center"><img class="floatno" src="../images/next.gif" width="15"
+height="13" alt="&shy;&gt;" title="Následující téma" border="0"></td>
+</tr></table>
+</body>
+</html>

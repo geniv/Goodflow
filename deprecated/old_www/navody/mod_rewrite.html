@@ -1,0 +1,202 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="cs" lang="cs"><head>
+
+
+
+<meta name="generator" content="PPWIZARD version 99.231 on OS/2, FREE tool for OS/2, Windows, DOS and UNIX by Dennis Bareis (http://www.labyrinth.net.au/~dbareis/ppwizard.htm)">
+
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1250">
+<meta http-equiv="Content-language" content="cs">
+<meta http-equiv="expires" content="1">
+<meta http-equiv="pragma" content="no-cache">
+<meta name="author" content="Lukáš Oborský">
+<meta name="copyright" content="PROKOP software s.r.o. - specialista na internet a WWW">
+<meta name="robots" content="ALL,FOLLOW"><title>Mod_rewrite pro lepší odkazy</title>
+
+<meta name="keywords" content="bookmarklet,bookmarklety,favelet,favelety,javascript">
+<meta name="description" content="V tomto článku se dozvíte, co je to mod_rewrite a jak pomocí něj můžete vylepšit odkazy na vaší webové stránce tak, aby byly srozumitelnější pro návštěvníky a vstřícnější k vyhledavačům.">
+<meta name="icbm" content="49.98743, 14.67578">
+<meta name="dc.title" content="Sova v síti">
+<meta name="dc.language" content="cs">
+<meta name="geo.country" content="CZ">
+<link rel="start" href="http://www.sovavsiti.cz/">
+<style media="all" type="text/css">@import "../css2.css";</style>
+<script src="mod_rewrite_soubory/master.js" type="text/javascript"></script></head><body id="sovavsiti-cz">
+<p class="reader"><a href="#top">Přeskoč navigaci</a></p>
+<div id="page">
+<!-- Header begins -->
+<div id="header">
+<a href="http://www.sovavsiti.cz/"><img src="mod_rewrite_soubory/head2.gif" id="toplogo" alt="Sova v síti"></a>
+<div id="htitle">Sova&nbsp;v&nbsp;síti</div>
+<div id="hsubtitle">Články, rady a novinky pro webmastery, webdesignéry a informační architekty</div>
+</div>
+<div id="headerline"></div>
+<div id="topmenu">
+<ul>
+<li><a href="http://www.sovavsiti.cz/" title="Úvodní stránka Sovy v síti">Úvod</a></li>
+<li><a href="http://www.sovavsiti.cz/weblog/" title="Novinky a aktuální odkazy pro webmastery, webdesignéry a majitele webových stránek.">Weblog</a></li>
+<li><a href="http://www.sovavsiti.cz/archiv.html" title="Archiv článků a starších vydání Sovy v síti">Archiv</a></li>
+<li><a href="http://www.sovavsiti.cz/reg.html" title="Jak si přihlásit a odhlásit odběr Sovy v síti">Registrace</a></li>
+<li><a href="http://www.sovavsiti.cz/nastroje/" title="Nástroje pro webmastery, webdesignéry a majitele webových stránek.">Nástroje</a></li>
+<li><a href="http://www.sovavsiti.cz/odkazy.html" title="Užitečné odkazy pro webmastery">Odkazy</a></li>
+<li><a href="http://www.sovavsiti.cz/sluzby.html" title="Nabídka bezplatných i placených služeb pro webmastery">Služby</a></li>
+<li><a href="http://www.sovavsiti.cz/spoluprace.html" title="Autorská spolupráce, výměna odkazů, reklama v Sově, atd.">Spolupráce</a></li>
+</ul>
+<form method="get" action="http://jyxo.cz/search.php" id="search">
+<div>
+<input name="look" value="sova" type="hidden">
+<input name="stem" value="on" type="hidden">
+<label for="sstr"><strong>Hledej:</strong></label>
+<input name="s" size="15" id="sstr" class="inputfield" type="text">
+<fieldset>
+<legend>Kde hledat</legend>
+<div><input name="d" value="cz@sovavsiti.cz" id="searchinsova" checked="checked" type="radio"> <label for="searchinsova">v Sově</label></div>
+<div><input name="d" value="cz" id="searchincz" type="radio"> <label for="searchincz">všude</label></div>
+</fieldset>
+<input value="Hledej" class="button" type="submit">
+</div>
+</form>
+<p>Zde hledá <a href="http://jyxo.cz/">Jyxo</a>.</p>
+<div class="centered"><a href="http://jyxo.cz/"><img src="mod_rewrite_soubory/jyxo.gif" alt="Jyxo"></a></div>
+</div>
+<div id="maincontent">
+<h1><a name="top"></a>Mod_rewrite pro lepší odkazy</h1>
+<p><small>Lukáš Oborský, vydáno/aktualizováno: 21.7.2003/02.08.2003</small></p>
+<div class="articlecontent"><p>V tomto článku se dozvíte, co je to
+mod_rewrite a&nbsp;jak pomocí něj můžete vylepšit odkazy na vaší webové
+stránce tak, aby byly srozumitelnější pro návštěvníky
+a&nbsp;vstřícnější k&nbsp;vyhledavačům.</p> <p>Jedním z nejpoužívanějších webových serverů je <a href="http://www.apache.org/">Apache</a>. Je napsán s&nbsp;důrazem na otevřenost, což umožňuje přidávat rozšiřující funkce neboli krátce moduly. <a href="http://modules.apache.org/">Modulů pro Apache</a>
+je celá řada, nás však dnes bude zajímat pouze jediný&nbsp;-
+mod_rewrite. Umí jen jednu věc, ale zato geniálně&nbsp;- překládat
+adresy. Číhá na serveru na každou požadovanou stránku, zkontroluje její
+adresu podle seznamu svých pravidel a&nbsp;pokud požadovaná adresa
+v&nbsp;seznamu je, aplikuje na ni konkrétní přepisovací pravidlo.</p> <h2>Proč používat mod_rewrite</h2> <p>Než vám povím, jak se mod_rewrite aktivuje a&nbsp;konfiguruje, krátce zmíním, s&nbsp;jakými typickými problémy vám může pomoci.</p> <ul> <li>Vaše stránky se přesunuly na nové adresy a&nbsp;vy na ně chcete návštěvníky přesměrovat.</li> <li>Vaše
+stránky mají příliš složité adresy. Nelze si je zapamatovat, špatně se
+posílají emailem, nevyjadřují obsah stránky, ani strukturu webu.</li> <li>Dynamické stránky obsahují v&nbsp;adresách parametry a&nbsp;vyhledavače je neochotně indexují.</li> <li>Chcete, aby adresy stránek byly nezávislé na použité technologii a&nbsp;potřebujete se tedy zbavit koncovek html, php, apod.</li> </ul> <h2>Praktický příklad použití mod_rewrite</h2> <p>Konkrétní
+příklad je desetkrát lepší než obecné povídání. Proto vám ukážu, jak
+jsem dva typické problémy řešil pomocí mod_rewrite přímo na našem
+weblogu <a href="http://weblog.oborsky.cz/">Letem světem</a>.</p> <h3>Jak mod_rewrite aktivovat</h3> <p>Nejprve
+si ale musíme ukázat, jak se podpora mod_rewrite vůbec zapíná.
+V&nbsp;příslušném adresáři, pro který se mají pravidla uplatňovat,
+vytvořte soubor .htaccess a&nbsp;do něj vložte následující řádku:</p> <code>RewriteEngine on</code> <p>Od
+té chvíle bude pro daný adresář mod_rewrite aktivní. Zatím ale nic
+nedělá, protože ještě nejsou vytvořena žádná pravidla. Nuže pojďme se
+podívat, jaké problémy vyřešíme.</p> <h3>Přesun stránek do domény třetího řádu</h3> <p>Prvním
+problémem weblogu byla zdvojená adresa. Původně weblog sídlil na adrese
+www.oborsky.cz/weblog, ale později jsem z&nbsp;adresáře weblog udělal
+doménu třetí úrovně, takže nová adresa je weblog.oborsky.cz. Jak jsem
+ale zjistil ze statistik, přes novou adresu stále chodilo méně lidí než
+přes starou. To by ani tak nevadilo, protože obě byly funkční, ale
+Google trpěl schizofrenií a&nbsp;rozděloval svůj PageRank mezi obě
+přístupové cesty.</p> <p>Po pár dnech přemýšlení mne napadlo, že
+nejlepší by bylo na staré adrese vracet návratový kód HTTP 301, který
+signalizuje trvale přesunuté stránky a zároveň automaticky přesměruje
+na novou adresu. Tomu rozumí i&nbsp;Google a&nbsp;měl by oba PageRanky
+sečíst. Jak ale podstrčit kód 301 v&nbsp;případě přístupu přes starou
+adresu, když vše leželo stále v&nbsp;jednom adresáři? Snadno,
+vložíme-li do .htaccess následující dvě řádky:</p> <code class="codesample"> </code><div>RewriteCond&nbsp; %{HTTP_HOST}&nbsp; ^www\.oborsky\.cz</div> <div>RewriteRule&nbsp; ^index\.php$&nbsp; http://weblog.oborsky.cz/index.php [L,R=301,QSA]</div>  <p>Co ty dvě řádky znamenají? První, <code>RewriteCond</code>,
+určuje, za jakých podmínek se má pravidlo aplikovat. V&nbsp;tomto
+případě soubor .htaccess leží v&nbsp;adresáři weblog a&nbsp;proto se
+použije pouze v&nbsp;případě, že do tohoto adresáře míří požadavek
+návštěvníka. Prvním řádkem určíme, že následující pravidlo se použije
+pouze, když adresa bude začínat www.oborsky.cz. Půjdeme-li na weblog
+novou cestou, přes weblog.oborsky.cz, pravidlo se neaplikuje.</p> <p>Obsahem
+druhého řádku je samotné pravidlo přepisu adresy. První část obsahuje
+standardní vstupní stránku weblogu, index.php. Pro zápis je použito
+regulárních výrazů, pokud s&nbsp;nimi nejste úplní kamarádi, nastudujte
+patřičnou literaturu (např. <a href="http://www.root.cz/clanek/1490">Regulární výrazy v&nbsp;příkladech</a> od <cite>Lukáše Zapletala</cite> na <cite>Root.cz</cite>). Druhá část pravidla obsahuje cílovou podobu adresy, v&nbsp;našem případě tu samou stránku zpřístupněnou přes novou adresu.</p> <p>Následují parametry pravidla v&nbsp;hranatých závorkách. <code>L</code>&nbsp;znamená, že pravidla nehodláme řetězit, <code>R</code>&nbsp;indikuje fyzické přesměrování včetně příslušného návratového kódu HTTP. Skupina <code>QSA</code>
+pak říká, že případné předávané proměnné (tedy vše za otazníkem
+v&nbsp;adrese stránky) mají být do cílové adresy vloženy taky.
+Vyzkoušíme, prima, funguje to.</p> <h3>Jak udělat z dynamické adresy statickou</h3> <p>Druhý
+problém, který jsem řešil, byl snažší. Nelíbily se mi totiž adresy
+jednotlivých spotů weblogu. Adresa vypadala např. takto:</p> <code>http://weblog.oborsky.cz/index.php?p=1234567&amp;c=1</code> <p>Ukáži
+vám, jak pomocí jednoduchého pravidla mod_rewrite vytvoříte nové
+odkazy, které budou mít mnohem přívětivější podobu, třeba tuto:</p> <code>http://weblog.oborsky.cz/spot1234567.html</code> <p>Kromě
+toho, že je druhá adresa srozumitelnější a&nbsp;vyhledavače ji raději
+a&nbsp;častěji indexují, hovoří pro ni ještě jeden důvod. Weblog je
+nyní založen na PHP. Ale pokud někdy v&nbsp;budoucnu přejdu na jiný
+systém, třeba .NET, změní se adresa stránky na index.aspx
+a&nbsp;veškeré odkazy z&nbsp;jiných serverů přijdou vniveč. Pokud ale
+budu skutečnou adresu maskovat pod virtuální html stránku, odkazy budou
+fungovat vždy a&nbsp;všude.</p> <p>Jak bude tedy pravidlo vypadat?</p> <code class="codesample"> </code><div>RewriteCond&nbsp; %{HTTP_HOST}&nbsp; ^weblog\.oborsky\.cz</div> <div>RewriteRule&nbsp; ^spot(.*)\.html$&nbsp; http://weblog.oborsky.cz/index.php?p=$1&amp;c=1 [L,QSA]</div>  <p>První
+řádek je vám už z&nbsp;předchozího případu jasný. Co říká ten druhý?
+Pokud někdo požaduje stránku na adrese začínající písmeny <kbd>spot</kbd> s&nbsp;koncovkou <kbd>html</kbd>, má se mu místo toho podstrčit adresa vedoucí na skutečný článek. Díky tomuto pravidlu nemusí stránky s&nbsp;příponou <kbd>html</kbd> vůbec existovat! Mod_rewrite totiž přemění adresu dřív, než Apache začne zjišťovat, zda stránka existuje.</p> <p>Vidíme také, že z hranatých závorek vypadlo písmeno <code>R</code>
+pro přesměrování. To způsobí, že místo klasického přesměrování se
+browseru pouze podsune obsah cílové stránky, aniž by se na ni skutečně
+přešlo. V&nbsp;adresním řádku prohlížeče proto nadále uvidíte <code>spot1234567.html</code>.</p> <p>Na
+dvou praktických příkladech jsem vám ukázal, k&nbsp;čemu můžete
+mod_rewrite použít. Samozřejmě není možné celou problematiku probrat na
+pár řádcích. Proto berte tento text spíše jako motivaci k&nbsp;dalšímu
+samostudiu. Pro začátek nabízím výborný dvojdílný seriál <a href="http://www.root.cz/clanek/542">Což si tak trochu zapřepisovat?</a> od <cite>Michala Krause</cite>, který vyšel před dvěma lety v&nbsp;<cite>Root.cz</cite>. Kupodivu se dodnes jiný článek v&nbsp;češtině k dané tématice neobjevil.</p> <p>Přeji
+vám úspěšné bádání a&nbsp;hodně štěstí při přepisování. V&nbsp;případě
+jakýchkoliv dotazů k&nbsp;tématu mě můžete kontaktovat emailem nebo na
+ICQ 45441092. Viva mod_rewrite.</p> <h3>Odkazy</h3> <ul> <li><a href="http://httpd.apache.org/docs/mod/mod_rewrite.html">Mod-rewrite v dokumentaci Apache&nbsp;1.x</a></li> <li><a href="http://httpd.apache.org/docs-2.0/mod/mod_rewrite.html">Mod-rewrite v dokumentaci Apache&nbsp;2.x</a></li> <li><a href="http://httpd.apache.org/docs/misc/rewriteguide.html">Průvodce k přepisování URL</a></li> <li><a href="http://httpd.apache.org/docs/mod/mod_alias.html">Dokumentace souvisejícího modulu mod_alias</a></li> <li><a href="http://www.jakpsatweb.cz/server/mod-rewrite.html">Praktický návod na mod_rewrite od Dušana Janovského</a></li> <li><a href="http://google.com/search?q=url+rewriting+iis">Přepisování URL pro Windows IIS</a> (via Google)</li> </ul> © 2003 Lukáš Oborský, <a href="mailto:lukas@oborsky.cz">lukas@oborsky.cz</a> <h3>Poznámky Sovy v síti</h3> <ol> <li>V
+článku popsaný postup předpokládá, že máte na serveru k&nbsp;dispozici
+mod_rewrite možnost měnit nastavení Apache přes .htaccess.
+V&nbsp;případě sdíleného hostingu tomu tak být nemusí.</li> <li>V uvedeném postupu není ošetřen případ, kdy uživatel zadá URL bez úvodního www (tj. např. jen oborsky.cz).</li> </ol> <hr> <h3>O autorovi</h3> <p>Lukáš Oborský, alias Lukin, je zakladatelem a&nbsp;hlavním přispěvatelem weblogu <a href="http://weblog.oborsky.cz/">Letem světem</a>, ve kterém denně naleznete užitečné rady, odkazy a&nbsp;aktuality týkající se webdesignu a&nbsp;tvorby webových stránek.</p></div>
+</div>
+<div id="sidebar">
+<div class="sidebox">
+<h2><a name="regform">Registrace zdarma</a></h2>
+<p>Líbí se vám tento článek? Zajistěte si odběr Sovy v síti zdarma přímo do vaší emailové schránky.</p>
+<form action="http://www.prokopsw.cz/app/nl/subscribe.asp" method="post" onsubmit="return checkSubscribeForm(this)">
+<div><input name="txtNlId" value="2" type="hidden"></div>
+<p><label for="txtEamil">Váš email:</label></p>
+<p><input id="txtEamil" name="txtEmail" value="Váš@email" size="10" class="inputfield" onfocus="this.select();" type="text"></p>
+<p><input name="cmdSubscribe" value="Zaregistrovat" class="button" type="submit"></p>
+</form>
+<p><a href="http://www.sovavsiti.cz/reg.html">Další informace...</a></p>
+</div>
+<div class="sidebox">
+<h2>Diskuse, komentáře</h2>
+<p>Chcete se vyjádřit k tomuto článku? Zajímají nás vaše názory. <a href="http://www.sovavsiti.cz/feedback.html">Napište nám</a>!</p>
+</div>
+<div class="sidebox">
+<h2>Doporučte článek</h2>
+<p>Líbí se vám tento článek? Je pro vás náš e-zin užitečný? <a href="http://www.sovavsiti.cz/recommend.html">Doporučte Sovu přátelům</a>!</p>
+</div>
+<div class="centered">
+<img src="mod_rewrite_soubory/a.gif" alt="" height="1" width="1">
+<iframe src="mod_rewrite_soubory/code.htm" marginwidth="0" marginheight="0" style="border-style: none;" frameborder="0" height="1" scrolling="no" width="1"></iframe>
+<!-- Google Analytics start -->
+<script src="mod_rewrite_soubory/urchin.js" type="text/javascript">
+</script>
+<script type="text/javascript">
+_uacct = "UA-1129578-1";
+urchinTracker();
+</script>
+<!-- Google Analytics end -->
+<p><a href="http://www.toplist.cz/cgi-bin/toplist.asp?kat=32"><img src="mod_rewrite_soubory/count.gif" alt="TOPlist" style="border: 0pt none ;" height="60" width="88"></a></p>
+<p>Ctíme standardy <a href="http://www.w3c.org/">W3C</a>:</p>
+<div class="w3cb"><a href="http://validator.w3.org/check/referer"><span class="w3c">W3C</span> <span class="spec">XHTML 1.0</span></a></div>
+<div class="w3cb"><a href="http://jigsaw.w3.org/css-validator/check/referer"><span class="w3c">W3C</span> <span class="spec">CSS</span></a></div>
+<p>Nemáte cestu kolem? <a class="geourl" href="http://geourl.org/near/?p=http://www.sovavsiti.cz/weblog/" title="Sousedé v okolí">GeoURL</a></p>
+</div>
+</div>
+<ul id="bottommenu">
+<li><a href="#top"><img src="mod_rewrite_soubory/au.gif" alt="Začátek stránky" class="arrow" title="Zpět na začátek stránky"></a></li>
+</ul>
+<!-- Footer begins -->
+<div id="footer">
+Sovu v síti vydává Marek Prokop za přispění spol.&nbsp;<a href="http://www.prokopsw.cz/">PROKOP software</a>. Email:&nbsp;<a href="mailto:redakce@sovavsiti.cz">redakce@sovavsiti.cz</a>, ISSN&nbsp;1213-9076,
+<a class="xmlbutton" href="http://www.sovavsiti.cz/weblog/index.rss" type="application/rss+xml" title="RDF (Resource Description Framework) Site Sumary kanál weblogu Sovy v síti">&nbsp;RSS&nbsp;</a>
+</div>
+<!-- Footer ends -->
+</div>
+<p class="nostyle">Tato stránka je přístupná <strong>libovolným prohlížečem</strong>,
+nejlépe však vypadá v prohlížeči, který podporuje HTML&nbsp;4.0
+a&nbsp;CSS&nbsp;2 (Internet Explorer od verze&nbsp;5, Mozilla, Opera
+a&nbsp;další). Pokud čtete tuto zprávu, váš prohlížeč zřejmě dostatečně
+nepodporuje CSS. Stránku sice vidíte bez pokročilejšího formátování,
+avšak veškerý <strong>obsah je plně přístupný</strong> i&nbsp;pro vás.</p>
+<script type="text/javascript">
+<!--
+document.write("<img src=\"http://www.prokopsw.cz/app/log/alog.asp?id=sovavs&amp;r=" + escape(top.document.referrer) + "\" width=\"1\" height=\"1\" border=\"0\" alt=\"\">");
+//-->
+</script><img src="mod_rewrite_soubory/alog.htm" alt="" border="0" height="1" width="1">
+<noscript><div><img src="http://www.prokopsw.cz/app/log/alog.asp?id=sovavs" width="1" height="1" alt="" /></div></noscript>
+<script src="mod_rewrite_soubory/code.js" type="text/javascript"></script><a href="http://navrcholu.cz/Statistika/50/"><img src="mod_rewrite_soubory/hit.gif" alt="" style="border: medium none ;" height="1" width="1"></a>
+<noscript><div><img
+src="http://c1.navrcholu.cz/hit?site=50;flver=-1;jsup=-1;csup=-1;ref=;cdepth=-1;screenx=-1;winx=-1;jssup=0"
+width="1" height="1" alt="" /></div></noscript>
+<div style="position: absolute; left: 0px; top: 0px; z-index: 1000000000; visibility: hidden; opacity: 1;" id="linkalert-box"><img src="mod_rewrite_soubory/none-icon.png" id="linkalert-icon-1"></div></body></html>

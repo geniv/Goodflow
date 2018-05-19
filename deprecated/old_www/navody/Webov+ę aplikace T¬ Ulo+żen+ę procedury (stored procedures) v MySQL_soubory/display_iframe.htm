@@ -1,0 +1,57 @@
+var cc_postId = 975953;
+var cc_blogId = 5818;
+var cc_nodeId = null;
+var CC_THEME = 1;
+var CC_NO_LOGO = 1;
+var CC_3D = 1;
+var icons = {
+
+  1: { comments: 7},
+  2: { comments: 0},
+  3: { comments: 0},
+  7: { comments: 0},
+  8: { comments: 0},
+  9: { comments: 0}
+
+};var ccHasCommented = {
+  status : false,
+  id : 0
+};
+function VSK_Tunnel(){this.queue=[];}VSK_Tunnel.prototype.send=function(url){if(!document.body)return;var iframe=document.createElement('iframe');iframe.style.position='absolute';iframe.style.left='-1000px';iframe.style.top='-1000px';iframe.b.onload=function(){document.body.removeChild(this);};iframe.dock(document.body);};VSK_Tunnel.prototype.request=function(url,ondone,sync){var script_loaded=function(script){script.parentNode.removeChild(script);if(ondone&&ondone.exec)ondone.exec();};var head=document.getElementsByTagName('head')[0];var script=document.createElement('script');script.type='text/javascript';script.onreadstatechange=function(){if(this.readyState=='complete')script_loaded(this);};script.onload=function(){script_loaded(this);};script.src=url;if(!sync)head.appendChild(script);else {if(/Apple/.test(navigator.vendor))script.appendChild(document.createTextNode(' '));else script.text=' ';head.appendChild(script);}};
+Tunnel = new VSK_Tunnel();
+if(typeof CC_I == 'undefined')
+  CC_I = 0;
+function cc_add_widget(postId, blogId, icons, hasCommented, nodeId) {
+  var x, n = (typeof nodeId == 'undefined' || nodeId === null);
+  if(n) {
+    document.write(
+      '<div id="cc_'+CC_I+'_prep_node"></div>'
+    );
+    x = CC_I;
+  } else
+    x = nodeId;
+  var d = document.getElementById('cc_'+x+'_prep_node');
+  if(n) {
+    d._cc = {
+      postId : postId,
+      blogId : blogId,
+      icons : icons,
+      hasCommented : hasCommented,
+      i : CC_I
+    };
+  } else {
+    cc_select_theme(CC_THEME);
+    cc_build_widget(d, x, postId, blogId, icons, hasCommented);
+  }
+  CC_I++;
+}
+
+if(typeof CC_LOADING == 'undefined') {
+  Tunnel.request('http://green.postreach.com/javascripts/ccjs/ccjs7_cz.js', null, true);
+}
+window.CC_LOADING = true;
+/******************************************************************************
+ * Add widget to page
+ */
+
+cc_add_widget(cc_postId, cc_blogId, icons, ccHasCommented, cc_nodeId);

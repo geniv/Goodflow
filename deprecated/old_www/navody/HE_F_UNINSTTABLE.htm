@@ -1,0 +1,46 @@
+<!doctype html public "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=Windows-1250">
+<title>Funkce Uninst_table</title>
+<link rel='stylesheet' style='text/css' href='../function.css'>
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000">
+
+
+
+<h2 class=function>Uninst_table</h2>
+<img src='../images/cpp.gif' width='44' height='16' border='0' alt='c/c++' align='middle' hspace='2'><img src='../images/pascal.gif' width='44' height='16' border='0' alt='pascal' align='middle' hspace='2'>
+
+
+<br><br>
+<div class='typ'>BOOL <b>Uninst_table</b>(ttablenum table);<br>
+function <b>Uninst_table</b>(table : ttablenum) : Boolean;
+</div>
+
+
+<p><b>Parametry</b></p>
+
+<table border=1 cols=2 frame=box rules=all width=402>
+
+<tr valign="top">
+<td width=19%><i>table </i></td>
+<td width=81%>číslo tabulky</td>
+</tr>
+</table><br>
+
+<p><b>Popis</b></p>
+
+<p>Funkce sdělí serveru, že program nebude v&nbsp;nejbližší době pracovat s&nbsp;tabulkou <i>table</i>. Server tuto informaci využije k&nbsp;tomu, aby uvolnil paměť využívanou pro přístup k&nbsp;této tabulce.</p>
+
+<p>Pokud parametr  table má hodnotu -1, pak server uvolní paměť vztahující se ke všem tabulkám.</p>
+
+<p>Od verze serveru 5.1 lze sice používáním této funkce nepatrně vylepšit využití paměti serveru, nicméně i bez ní server bude pracovat správně a nebezpečí ubývání paměti nehrozí.</p>
+
+<p><b>Hodnota funkce</b></p>
+
+<p>Funkce vrací při úspěchu FALSE, při neúspěchu TRUE.</p>
+
+</body>
+</html>

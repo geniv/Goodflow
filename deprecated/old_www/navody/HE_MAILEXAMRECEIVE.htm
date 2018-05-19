@@ -1,0 +1,185 @@
+<!doctype html public "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=Windows-1250">
+<title>Příklad příjmu zásilky</title>
+<link rel='stylesheet' style='text/css' href='../function.css'>
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr>
+	<td style="background-image: url(../images/bghead.jpg);
+		background-position: right;
+		background-repeat: no-repeat;">
+	<table width="100%" border="0" cellpadding="0" cellspacing="0"
+		style="background-image:none">
+	<tr>
+		<td style="background-image:none" height="46"
+			width="15%"><img src="../images/title-cz.gif"
+			width="255" height="33"
+			alt="602SQL-Úplná dokumentace"
+			title="602SQL - Úplná dokumentace"
+			border="0"></td>
+		<td width="33%" align="right"><a href="../xml/html/top.html"><img class="floatno"
+			src="../images/index.gif"
+			width="15" height="16"
+			alt="Index" title="Zpět na obsah"
+			border="0" vspace="2"></a> &nbsp;
+			 </td>
+	</tr>
+	</table>
+	</td>
+</tr>
+</table><table class="navigace" border="0" width="100%"  bgcolor="#FFFFBF">
+		  <tr>
+					 <td width="20" align="center">&nbsp;</td>
+					 <td width="25%">&nbsp;</td>
+					 <td width="25%"
+align="right"><img class="floatno" src="../images/up.gif" width="13"
+height="15" alt="Nahoru" title="O jednu úroveň výš" border="0"
+align="middle"></td><td width="25%"><a href="HE_MAILRECEIVE.htm">Příjímání zásilek</a></td>
+<td width="25%" align="right"><a
+href="HE_MAILTABLES.htm">Struktura systémových tabulek pro došlé zásilky</a></td><td width="20"
+align="center"><img class="floatno" src="../images/next.gif" width="15"
+height="13" alt="&shy;&gt;" title="Následující téma" border="0"></td>
+</tr></table>
+
+
+
+<h1><a name="he_mailexxamreceive"></a>Příklad příjmu zásilky</h1>
+<!--
+<h2>Příklad v jazyku klienta :</h2>
+
+<pre><code>var cnt1, cnt2  : trecnum;
+    j,i,err     : integer;
+    id_zas,lsize: integer;
+    curs1,curs2 : cursor;
+    box         : integer;
+    query1,query2  : string[120];
+    fname       : string[255];
+
+begin
+err := <b>InitWBMail</b>("winbase", nil); // inicializace
+   if err = 0 then begin
+     err := <b>MailOpenInBox</b>(box);     // otevření schránky
+     if err = 0 then begin
+       <b>MailBoxLoad</b>(box,0);     // načtení informací (pouze seznam)
+       query1 := "SELECT * FROM _Sysext._Inboxmsgs WHERE subject=""Data""";
+// vybrání těch zásilek, které mají daný subject
+       if not Open_SQL_Cursor(curs1, query1) then begin  
+         Rec_cnt(curs1, cnt1);
+         for j := 0 to cnt1 - 1 do begin
+            id_zas := curs1[j].id;   // identifikátor j-té zásilky
+            <b>MailBoxGetMsg</b>(box,id_zas); //získání textu j-tého dopisu
+            lsize := curs1[j].size;
+            if lsize &gt; 0 then begin
+// ... práce s textem dopisů
+            end;
+// získání informací o připojených souborech j-té zásilky
+            <b>MailBoxGetFilInfo</b>(box,id_zas); 
+            query2 := "SELECT * FROM _Sysext._Inboxfiles WHERE id="+Int2str(id_zas);
+            if not Open_SQL_cursor(curs2, query2) then begin
+               Rec_cnt(curs2,cnt2);
+               for i := 0 to cnt2 - 1 do begin
+// získání informací o připojených souborech j-té zásilky
+                 fname := curs2[i].name;    
+// oříznutí cesty (platí pouze pro Windows)
+                 while SubStr("\",fname) do 
+                   StrDelete(fname,1,StrPos("\",fname));  
+// vytvoření jména souboru pro uložení
+                 fname := "D:\tempdir\wbdata\"+fname;
+// uložení souboru
+                 err := <b>MailBoxSaveFileAs</b>(box,id_zas,i,nil,fname); 
+                 if err &gt; 0 then Signalize;
+               end;
+               Close_cursor(curs2);
+            end;
+// vymazání zásilky ze schránky i z databáze
+            <b>MailBoxDeleteMsg</b>(box,id_zas,TRUE); 
+         end;
+         Close_cursor(curs1);
+       end;
+       <b>MailCloseInBox</b>(box); // zavřít schránku
+     end else Signalize;    // chyba při otevření schránky
+     <b>CloseWBMail</b>;       // ukončit komunikaci
+  end else Signalize;   // chyba při inicializaci
+end.
+</code></pre>
+-->
+<h2>Příklad v jazyce SQL serveru (Windows):</h2>
+
+<p>(funkce pro spolupráci s poštou nevyvolají <a href="../xml/html/errorsexceptions.html">výjimku</a> - nelze zachytit <a href="HE_SQL2_DEKLARACEHANDLERU.htm">handlerem</a>)</p>
+
+<pre><code>PROCEDURE `PrijmiMail`();
+BEGIN
+   DECLARE err,i  INT;
+   DECLARE box    INT;
+   DECLARE id_zas,lsize INT;
+   DECLARE fname  CHAR(255);
+   SET err = <b>InitWBMail</b>('sql602test','');
+   IF err = 0 THEN BEGIN
+     SET err = <b>MailOpenInBox</b>(box);
+     IF err = 0 THEN BEGIN
+       CALL <b>MailBoxLoad</b>(box,3);
+       FOR Zas AS CURSOR FOR
+         SELECT * FROM _Sysext._Inboxmsgs WHERE Subject='Data'
+       DO 
+       BEGIN
+          SET id_zas = Zas.id;
+          CALL <b>MailBoxGetMsg</b>(box,id_zas);
+          SET lsize = Zas.size;
+          IF lsize &gt; 0 THEN
+// ... práce s textem dopisů
+          END IF;
+          CALL <b>MailBoxGetFilInfo</b>(box,id_zas);            
+          SET i = 0;
+          FOR ZasFil AS CURSOR FOR
+            SELECT * FROM _Sysext._Inboxfiles WHERE id=id_zas
+          DO 
+          BEGIN
+            SET fname = ZasFil.name;
+            WHILE POSITION('\' IN fname)&gt;0 DO 
+               CALL StrDelete(fname,1,POSITION('\' IN fname));  
+            END WHILE;
+            SET fname = 'D:\tempdir\wbdata\'||fname;
+            SET Err = <b>MailBoxSaveFileAs</b>(box,id_zas,i,'',fname);
+            IF Err &gt; 0 THEN
+              CALL Log_write('Chyba při ukládání souboru '+int2str(Err));
+            END IF;
+            SET i = i+1;
+          END;
+          END FOR;
+          CALL <b>MailBoxDeleteMsg</b>(box,Zas.id,FALSE);
+       END;
+       END FOR;
+       CALL <b>MailCloseInBox</b>(box);
+     END; ELSE 
+       CALL Log_write('Chyba při otevírání schránky '+int2str(Err)); 
+     END IF;
+     CALL <b>CloseWBMail</b>();
+   END; ELSE 
+     CALL Log_write('Chyba při inicializaci '+int2str(Err)); 
+   END IF;
+END
+</code></pre>
+
+<strong>Poznámky:</strong>
+<p>Procedura nepůjde přeložit, pokud neexistují <a href="HE_MAILTABLES.htm">tabulky pro příjem pošty</a>. Tabulky lze vytvořit např. pomocí funkce <code><a href="HE_F_MAILCREINBOXTABLES.htm">MailCreInBoXTables</a></code>.</p>
+
+
+<table class="navigace" border="0" width="100%"  bgcolor="#FFFFBF">
+		  <tr>
+					 <td width="20" align="center">&nbsp;</td>
+					 <td width="25%">&nbsp;</td>
+					 <td width="25%"
+align="right"><img class="floatno" src="../images/up.gif" width="13"
+height="15" alt="Nahoru" title="O jednu úroveň výš" border="0"
+align="middle"></td><td width="25%"><a href="HE_MAILRECEIVE.htm">Příjímání zásilek</a></td>
+<td width="25%" align="right"><a
+href="HE_MAILTABLES.htm">Struktura systémových tabulek pro došlé zásilky</a></td><td width="20"
+align="center"><img class="floatno" src="../images/next.gif" width="15"
+height="13" alt="&shy;&gt;" title="Následující téma" border="0"></td>
+</tr></table>
+
+</body>
+</html>

@@ -1,0 +1,61 @@
+<!doctype html public "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=Windows-1250">
+<title>Funkce SQL_drop</title>
+<link rel='stylesheet' style='text/css' href='../function.css'>
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000">
+
+
+
+<h2 class=function>SQL_drop</h2>
+<img src='../images/cpp.gif' width='44' height='16' border='0' alt='c/c++' align='middle' hspace='2'><img src='../images/pascal.gif' width='44' height='16' border='0' alt='pascal' align='middle' hspace='2'>
+
+
+<br><br>
+<div class='typ'>BOOL <b>[cd_]SQL_drop</b>([cdp_t cdp], uns32 handle);<br>
+function <b>[cd_]SQL_drop</b>([cdp : cdp_t]; handle : uns32) : Boolean;<br>
+
+</div>
+
+
+<p><b>Parametry</b></p>
+
+<table border=1 cols=2>
+
+<tr valign="top">
+<td width=18%><i>handle</i></td>
+<td width=82%>handle (číslo) SQL požadavku získané funkcí <strong><code>SQL_prepare</code></strong></td>
+</tr>
+
+<tr valign="top">
+<td width=18%>[<i>cdp </i></td>
+<td width=82%><a href="HE_EXTCD.htm">kontextová proměnná</a> klienta]  </td>
+</tr>
+</table><br>
+
+<p><b>Od verze:</b></p>
+
+<p>5.1</p>
+
+<p><b>Popis </b></p>
+
+<p>Funkce zruší dříve <a href="HE_SQL2_PRIPRAVAPRIKAZU.htm">připravený příkaz</a>, jehož <i>handle</i> dostane jako parametr. Připravené příkazy by měly být rušeny, jakmile nejsou potřeba, aby byly uvolněny jimi blokované zdroje.</p>
+
+<p><b>Hodnota funkce </b></p>
+
+<p>Funkce vrací TRUE při chybě.</p>
+
+<p><b>Viz</b></p>
+
+<ul class='viz'>
+<li><a href="HE_F_SQLEXECUTE.htm">SQL_execute</a> 
+<li><a href="HE_F_SQLPREPARE.htm">SQL_prepare</a> 
+<li><a href="HE_F_SQLEXECPREPARED.htm">SQL_exec_prepared</a> 
+<li><a href="HE_F_SQLHOSTEXECUTE.htm">SQL_host_execute</a>
+</ul>
+
+</body>
+</html>

@@ -1,0 +1,55 @@
+<!doctype html public "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=Windows-1250">
+<title>Funkce Am_I_security_admin</title>
+<link rel='stylesheet' style='text/css' href='../function.css'>
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000">
+
+
+
+<h2 class=function>Am_I_security_admin</h2>
+<img src='../images/cpp.gif' width='44' height='16' border='0' alt='c/c++' align='middle' hspace='2'><img src='../images/pascal.gif' width='44' height='16' border='0' alt='pascal' align='middle' hspace='2'>
+
+
+<br><br>
+<div class='typ'>BOOL <b>cd_Am_I_security_admin</b>(cdp_t cdp);<br>
+function <b>cd_Am_I_security_admin</b>(cdp : cdp_t) : Boolean;
+</div>
+
+
+<p><b>Parametry</b></p>
+
+<table border=1 cols=2>
+
+<tr valign="top">
+<td width=23%><i>cdp </i></td>
+<td width=77%><a href="HE_EXTCD.htm">kontextová proměnná</a> klienta  </td>
+</tr>
+</table><br>
+
+<p><b>Od verze</b></p>
+
+<p>8.0</p>
+
+<p><b>Popis </b></p>
+
+<p>Funkce<b> </b>slouží k&nbsp;určení, je-li přihlášený uživatel členem skupiny SECURITY_ADMIN (je-li <a href="../xml/html/admins.html">bezpečnostním správcem</a> databáze). Lze ji použít např. v&nbsp;podmínkách viditelnosti složek pohledů a položek menu, které mají být běžnému uživateli zakázané či skryté. V klientském jazyce se nepředpokládá její použití.</p>
+
+<p>Pro zjištění náležení do skupiny či role lze použít obecnou klientskou funkci <a href="HE_F_GETSETGROUPROLE.htm"><code>GetSet_group_role</code></a> nebo SQL funkci <a href="../xml/html/f_get_membership.html"><code>Get_membership</code></a>.</p>
+
+<p><b>Hodnota funkce </b></p>
+
+<p>Funkce vrací TRUE, je-li uživatel správce databáze,  FALSE, není-li tomu tak.</p>
+
+<p><b>Viz</b></p>
+
+<ul class='viz'>
+ <li><a href="HE_F_AMICONFIGADMIN.htm">Am_I_config_admin</a> </li>
+ <li><a href="HE_F_AMIDBADMIN.htm">Am_I_db_admin</a></li>
+</ul>
+
+</body>
+</html>

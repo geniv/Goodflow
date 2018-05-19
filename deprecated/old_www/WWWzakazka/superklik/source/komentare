@@ -1,0 +1,462 @@
+/*
+    $posindex = 0;
+    for ($i = 0; $i < $pocet; $i++)
+    {
+      $hledat = array("\"", //uvozovka
+                      "\n",
+                      "\n\n",
+                      "\n\n\n",
+                      "\n\n\n\n",
+                      "\n\n\n\n\n", //5 enter
+                      "„",  //specialni uvozovky
+                      "“");
+
+      $nahradit = array("&quot;",
+                        "",
+                        "",
+                        "",
+                        "",
+                        "", //5 enter
+                        "&quot;",
+                        "&quot;");
+
+      if (strpos($xml->item[$i]->title, "VIDEO:") !== false)  //prvni obsah video
+      {
+        $posindex++;
+      }
+
+      if (strpos($xml->item[$i + $posindex]->title, "VIDEO:") !== false)  //dalsi vyskyt slova video
+      {
+        $posindex++;
+      }
+
+      $text = str_replace($hledat, $nahradit, $xml->item[$i + $posindex]->description);
+      $reducetitle = $title = $xml->item[$i + $posindex]->title;
+      //reducetitle - vymislet chrreji!!!
+
+      $obr = "";
+      //$reducetitle = substr($title, 0, 75)."...";
+      if ($i == 0)
+      {
+        $link = $xml->item[$i + $posindex]->link;
+        $f = 1;
+        $c = 2;
+        $source = $this->OpenUrl($link, $f, $c, $r, $a, $cf, $pd);  //nacteni do promenne
+
+        $a = explode("{$xml->item[$i + $posindex]->title}", $source);
+        if (strpos($adresa, "sport") !== false)  //kdyz je sport
+        {
+          $b = explode("<img src=\"", $a[1]);//$a[2]
+          $c = explode("\" alt=\"", $b[3]);
+        }
+          else
+        {
+          $b = explode("<img src=\"", $a[2]);
+          $c = explode("\" alt=\"", $b[1]);
+        }
+
+        if (strpos($c[0], "http:") !== false)
+        {
+          $obr = "<img src=\"{$c[0]}\" style=\"width: 65px; height: 45px; border: 1px solid #b43b00;\" alt=\"{$title}\" />";
+          //$highobr = "<img src='{$c[0]}' style='width: 105px; height: 85px; border: 1px solid #b43b00;' alt='{$xml->item[$i + $posindex]->title}' />";
+          //$reducetitle = substr($title, 0, 55)."...";
+        }
+      }
+
+//VlozitText('{$title} {$text}');
+      $result .=
+      "
+        <p>
+          {$obr}
+          <a href=\"#\" onclick=\"ZpbrazitZpravu(); return false;\">{$reducetitle}</a>
+        </p>
+      ";
+    }
+*/
+
+    /*
+
+        if (!Empty($_SESSION["SLOGIN"]))
+        {
+          if (!Empty($_SESSION["SGO"]) &&
+              $_SESSION["SGO"]) //je-li spravne prihlasen
+          {
+            $result = $full;
+          }
+            else
+          {
+            $result = $demo;
+          }
+        }
+          else
+        {
+          if (!$_SESSION["SGO"])  //je-li spatne prihlaseni
+          {
+            $result = $demo;
+          }
+            else
+          {
+            $result =
+
+          }
+        }
+
+<div id=\"setvalce\">
+<form method=\"post\">
+  <fieldset>
+    otoček b1:<input type=\"text\" name=\"ot1\" value=\"".(!Empty($_POST["ot1"]) ? $_POST["ot1"] : "1")."\" /><br />
+    otoček b2:<input type=\"text\" name=\"ot2\" value=\"".(!Empty($_POST["ot2"]) ? $_POST["ot2"] : "2")."\" /><br />
+    otoček b3:<input type=\"text\" name=\"ot3\" value=\"".(!Empty($_POST["ot3"]) ? $_POST["ot3"] : "3")."\" /><br />
+    end img b1:<input type=\"text\" name=\"k1\" value=\"".(!Empty($_POST["k1"]) ? $_POST["k1"] : "1")."\" /><br />
+    end img b2:<input type=\"text\" name=\"k2\" value=\"".(!Empty($_POST["k2"]) ? $_POST["k2"] : "1")."\" /><br />
+    end img b3:<input type=\"text\" name=\"k3\" value=\"".(!Empty($_POST["k3"]) ? $_POST["k3"] : "1")."\" /><br />
+    jmeno:<input type=\"text\" name=\"jmeno\" value=\"".(!Empty($_POST["jmeno"]) ? $_POST["jmeno"] : "jurkix")."\" /><br />
+    počet img:<input type=\"text\" name=\"poc\" value=\"".(!Empty($_POST["poc"]) ? $_POST["poc"] : "9")."\" /><br />
+    <input type=\"submit\" value=\"uložit\" />
+  </fieldset>
+</form>
+</div>
+    */
+
+
+    $oprava =
+    "klikni, byla prodleva interneru a nekde se neco opozdilo.. <input type=\"button\" name=\"tlacitko\" value=\"refes\" onclick=\"Buben('orig');\" />";
+
+ /*
+                    <p>
+                      Jana Nováková - Liberec
+                    </p>
+                    <p>
+                      František Dobrota - Brno
+                    </p>
+                    <p>
+                      Pavel Liška - Karviná
+                    </p>
+                    <p>
+                      Martin Gajdoš - Hodonín
+                    </p>
+                    <p>
+                      Stanislav Březina - Praha
+                    </p>
+    */
+/*
+
+//kurva skrypt
+
+
+    <p>
+                    Nejnovější zprávy: Internet Explorer 6 ZKRACHOVAL, webdesignéři oslavujte !!
+                  </p>
+
+                  <span class=\"linka_zpravy\"></span>
+
+                  <p>
+                    Další nejnovější zprávy: K snídani jsem měl rohlíky se salámem
+                  </p>
+
+
+
+            <div class=\"preload\"></div>
+            <div class=\"prihlasenkdo_a_odhlasit\">
+              <p>
+                uživatel: <strong>{$_COOKIE["SUPER_JMENO"]}</strong>
+              </p>
+              <p>
+                <a href=\"?action=logoff\" title=\"odhlásit\">odhlásit</a>
+              </p>
+            </div>
+            <!-- uzivatel: [tvuj_login] -->
+            {$prih} <!-- hlaska odhlaseno, prihlaseno, chyba apod. -->
+
+            {$menu} <!-- menu_[prava] vklada php s menu pro kazde prava zvlast -->
+            {$obsah} <!-- obsah z odkazu v menu -->
+
+
+
+
+
+<!--php generovani cisel-->
+<form method=\"post\">
+  <fieldset>
+    <input type=\"text\" name=\"buben1\" value=\"".(!Empty($_POST["buben1"]) ? $_POST["buben1"] : "27.5")."\" /><br />
+    <input type=\"text\" name=\"buben2\" value=\"".(!Empty($_POST["buben2"]) ? $_POST["buben2"] : "49.5")."\" /><br />
+    <input type=\"text\" name=\"buben3\" value=\"".(!Empty($_POST["buben3"]) ? $_POST["buben3"] : "72")."\" /><br />
+    <input type=\"submit\" value=\"potvrdit\" />
+  </fieldset>
+</form>
+
+<!--vlozeni flash Headeru-->
+  <div id=\"flash_header\">
+    <span class=\"flash_eror\">Pokud se vám animace nezobrazí stáhněte si prosím <a href=\"http://www.adobe.com/shockwave/download/download.cgi?P1_Prod_Version=ShockwaveFlash;promoid=BIOW\" target=\"_blank\" >Flash Plug-In</a></span>
+  </div>
+
+  <script type=\"text/javascript\">
+    var so=new SWFObject(\"pokus_automat.swf\",\"logo_new_web\",\"710\",\"500\",\"8\",\"#000\");
+    so.addVariable(\"otoceni1\", \"{$_POST["buben1"]}\");
+    so.addVariable(\"otoceni2\", \"{$_POST["buben2"]}\");
+    so.addVariable(\"otoceni3\", \"{$_POST["buben3"]}\");
+    so.addVariable(\"limit\", \"1\");
+    so.write(\"flash_header\");
+  </script>
+
+<!--konec flash Headeru-->
+
+            {$this->var->chyba} <!-- globalni chyba -->
+            <div class=\"vygenerovano\">
+              {$this->var->main->KonecCas()} <!-- vygenerovano za -->
+            </div>
+
+
+
+
+
+
+
+*/
+    /* $_COOKIE["SESSID"]
+     * $_SERVER["HTTP_USER_AGENT"]
+     * $_SERVER["HTTP_ACCEPT_CHARSET"]
+     * $_SERVER["REMOTE_ADDR"]
+     * date("Y-m-d H:i:s", $_SERVER["REQUEST_TIME"])
+     */
+//******************************************************************************
+  function VypocetDelky($text)
+  {
+    $delka = array ("A" => 7,
+                    "a" => 7,
+                    //"á" => 7,
+                    "B" => 7,
+                    "b" => 7,
+                    "C" => 7,
+                    "c" => 7,
+                    //"č" => 7,
+                    "D" => 7,
+                    "d" => 7,
+                    //"ď" => 7,
+                    "E" => 7,
+                    "e" => 6,
+                    //"ě" => 6,
+                    //"é" => 6,
+                    "F" => 7,
+                    "f" => 6,
+                    "G" => 7,
+                    "g" => 7,
+                    "H" => 7,
+                    "h" => 7,
+                    "I" => 5,
+                    //"Í" => 7,
+                    "i" => 1,
+                    //"í" => 2,
+                    "J" => 6,
+                    "j" => 3,
+                    "K" => 6,
+                    "k" => 6,
+                    "L" => 6,
+                    "l" => 1,
+                    "M" => 9,
+                    "m" => 9,
+                    "N" => 7,
+                    "n" => 6,
+                    "O" => 8,
+                    "o" => 6,
+                    "P" => 6,
+                    "p" => 6,
+                    "Q" => 8,
+                    "q" => 6,
+                    "R" => 7,
+                    "r" => 4,
+                    //"ř" => 4,
+                    "S" => 7,
+                    "s" => 5,
+                    "T" => 7,
+                    "t" => 4,
+                    "U" => 7,
+                    "u" => 6,
+                    "V" => 8,
+                    "v" => 6,
+                    "W" => 8,
+                    "w" => 9,
+                    "X" => 7,
+                    "x" => 7,
+                    "Y" => 7,
+                    "y" => 7,
+                    "Z" => 7,
+                    "z" => 7,
+                    " " => 7,
+                    ":" => 1,
+                    "," => 2,
+                    "„" => 4,
+                    "“" => 4,);
+
+    $len = 0;
+    for ($i = 0; $i < strlen($text); $i++)
+    {
+      $len += ($delka[$text[$i]] != NULL ? $delka[$text[$i]] : 5);
+    }
+
+    return $len;
+  }
+//******************************************************************************
+/*
+  function TypniDelku($text, $max)
+  { //max pixelu
+    //TypniDelku
+    //$delka = $this->VypocetDelky($text);
+    $poc = strlen($text);
+    //$del = $this->VypocetDelky(substr($text, 0, $poc-12));
+
+    $i = 0;
+    do
+    {
+      $poc = $this->VypocetDelky(substr($text, 0, $poc - $i));
+      echo "$poc >= $max<br/>";
+      $i++;
+    }
+    while ($poc >= $max);
+
+
+    echo "++<br>";
+
+    return $poc;
+  }
+*/
+/*
+
+    if ($res = @$this->var->mysqli->query("SELECT login, heslo FROM uzivatel WHERE
+                                          login='$jmeno' AND
+                                          heslo='$heslo';"))
+    {
+      $result = ($res->num_rows == 1 ? true : false);
+    }
+      else
+    {
+      $this->var->main->ErrorMsg($this->var->mysqli->error);  //chyba do globalni promenne
+    }
+*/
+
+/*
+ function open_page($url,$f=1,$c=2,$r=0,$a=0,$cf=0,$pd=""){
+ global $oldheader;
+ $url = str_replace("http://","",$url);
+ if (preg_match("#/#","$url")){
+  $page = $url;
+  $url = @explode("/",$url);
+  $url = $url[0];
+  $page = str_replace($url,"",$page);
+  if (!$page || $page == ""){
+   $page = "/";
+  }
+  $ip = gethostbyname($url);
+ }else{
+  $ip = gethostbyname($url);
+  $page = "/";
+ }
+ $open = fsockopen($ip, 80, $errno, $errstr, 60);
+ if ($pd){
+  $send = "POST $page HTTP/1.0\r\n";
+ }else{
+  $send = "GET $page HTTP/1.0\r\n";
+ }
+ $send .= "Host: $url\r\n";
+ if ($r){
+  $send .= "Referer: $r\r\n";
+ }else{
+  if ($_SERVER['HTTP_REFERER']){
+   $send .= "Referer: {$_SERVER['HTTP_REFERER']}\r\n";
+  }
+ }
+ if ($cf){
+  if (@file_exists($cf)){
+   $cookie = urldecode(@file_get_contents($cf));
+   if ($cookie){
+    $send .= "Cookie: $cookie\r\n";
+    $add = @fopen($cf,'w');
+    fwrite($add,"");
+    fclose($add);
+   }
+  }
+ }
+ $send .= "Accept-Language: en-us, en;q=0.50\r\n";
+ if ($a){
+  $send .= "User-Agent: $a\r\n";
+ }else{
+  $send .= "User-Agent: {$_SERVER['HTTP_USER_AGENT']}\r\n";
+ }
+ if ($pd){
+  $send .= "Content-Type: application/x-www-form-urlencoded\r\n";
+  $send .= "Content-Length: " .strlen($pd) ."\r\n\r\n";
+  $send .= $pd;
+ }else{
+  $send .= "Connection: Close\r\n\r\n";
+ }
+ fputs($open, $send);
+ while (!feof($open)) {
+  $return .= fgets($open, 4096);
+ }
+ fclose($open);
+ $return = @explode("\r\n\r\n",$return,2);
+ $header = $return[0];
+ if ($cf){
+  if (preg_match("/Set\-Cookie\: /i","$header")){
+   $cookie = @explode("Set-Cookie: ",$header,2);
+   $cookie = $cookie[1];
+   $cookie = explode("\r",$cookie);
+   $cookie = $cookie[0];
+   $cookie = str_replace("path=/","",$cookie[0]);
+   $add = @fopen($cf,'a');
+   fwrite($add,$cookie,strlen($read));
+   fclose($add);
+  }
+ }
+ if ($oldheader){
+  $header = "$oldheader<br /><br />\n$header";
+ }
+ $header = str_replace("\n","<br />",$header);
+ if ($return[1]){
+  $body = $return[1];
+ }else{
+  $body = "";
+ }
+ if ($c === 2){
+  if ($body){
+   $return = $body;
+  }else{
+   $return = $header;
+  }
+ }
+ if ($c === 1){
+  $return = $header;
+ }
+ if ($c === 3){
+  $return = "$header$body";
+ }
+ if ($f){
+  if (preg_match("/Location\:/","$header")){
+   $url = @explode("Location: ",$header);
+   $url = $url[1];
+   $url = @explode("\r",$url);
+   $url = $url[0];
+   $oldheader = str_replace("\r\n\r\n","",$header);
+   $l = "&#76&#111&#99&#97&#116&#105&#111&#110&#58";
+   $oldheader = str_replace("Location:",$l,$oldheader);
+   return open_page($url,$f,$c,$r,$a,$cf,$pd);
+  }else{
+   return $return;
+  }
+ }else{
+  return $return;
+ }
+}
+/////////////
+////Usage////
+/////////////
+$url = "http://www.php.net";
+$f = 1;
+$c = 2;//1 for header, 2 for body, 3 for both
+$r = NULL;
+$a = NULL;
+$cf = NULL;
+$pd = NULL;
+$page = open_page($url,$f,$c,$r,$a,$cf,$pd);
+print $page;
+ */

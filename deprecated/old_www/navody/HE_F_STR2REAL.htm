@@ -1,0 +1,67 @@
+<!doctype html public "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=Windows-1250">
+<title>Funkce Str2real</title>
+<link rel='stylesheet' style='text/css' href='../function.css'>
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000">
+
+
+
+<h2 class=function>Str2real</h2>
+<img src='../images/sql.gif' width='44' height='16' border='0' alt='sql' align='middle' hspace='2'>
+
+
+<br><br>
+<div class='typ'>FUNCTION <b>Str2real</b>(IN s CHAR(n)) RETURNS REAL
+</div>
+
+
+<p><b>Parametry</b></p>
+
+<table border=1 cols=2 frame=box rules=all width=400>
+
+<tr valign="top">
+<td width=20%><i>s</i></td>
+<td width=80%>řetězec znaků obsahující zápis čísla typu <b>Real</b></td>
+</tr>
+</table><br>
+
+<p><b>Popis</b></p>
+
+<p>Funkce <b><code>Str2real</code></b> převede zápis čísla v&nbsp;řetězci <i>s</i>&nbsp;na hodnotu typu <b>Real</b> a vrátí ji. Prázdný řetězec se převede na hodnotu NONEREAL (NULL v SQL). V jazyce SQL slouží stejnému účelu také obecná SQL funkce <a href="HE_SQL2_CAST.htm">CAST</a>.</p>
+<p>Konvertovaný řetězec může být v desetinném nebo semilogaritmickém tvaru, s oddělovači desetinného místa a tisíců podle národního (lokálního) nastavení (locales na Linuxu) nebo s desetinnou tečkou a mezerou jako oddělovačem tisíců.</p>
+
+<p><b>Hodnota funkce</b></p>
+
+<p>Funkce vrátí reálnou hodnotu, pokud řetězec obsahuje konvertovatelný zápis čísla typu <b>Real</b>. Jinak funkce vrátí NULL.</p>
+
+<p><b>Příklady konvertovatelných řetězců</b></p>
+<pre>SET str = '1.234';
+SET str = '-100';
+SET str = '1 234,567'; // v lokálním nastavení Windows CZ
+SET str = '1.2e5';
+SET str = '1.'</pre>
+<p><b>Příklady nezkonvertovatelných řetězců</b></p>
+<pre>SET str := '1.234Kč';
+SET str ='10,-';
+SET str = '$100';
+SET str ='1$10';</pre>
+
+<p><b>Viz</b></p>
+
+<ul class='viz'>
+ <li><a href="HE_F_INT2STR.htm">Int2str</a> </li>
+ <li><a href="HE_F_STR2INT.htm">Str2int</a> </li>
+ <li><a href="HE_F_REAL2STR.htm">Real2str</a> </li>
+ <li><a href="HE_F_BIGINT2STR.htm">Bigint2str</a> </li>
+ <li><a href="HE_F_STR2BIGINT.htm">Str2bigint</a> </li>
+ <li><a href="HE_F_STR2DATE.htm">Str2date</a> </li>
+ <li><a href="HE_F_STR2TIME.htm">Str2time</a> </li>
+ <li><a href="HE_F_TIME2STR.htm">Time2str</a></li>
+</ul>
+
+</body>
+</html>

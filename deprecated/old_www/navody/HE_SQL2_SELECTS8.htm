@@ -1,0 +1,117 @@
+<!doctype html public "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=Windows-1250">
+<title>Sbírka dotazů str. 8</title>
+<link rel='stylesheet' style='text/css' href='../function.css'>
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr>
+	<td style="background-image: url(../images/bghead.jpg);
+		background-position: right;
+		background-repeat: no-repeat;">
+	<table width="100%" border="0" cellpadding="0" cellspacing="0"
+		style="background-image:none">
+	<tr>
+		<td style="background-image:none" height="46"
+			width="15%"><img src="../images/title-cz.gif"
+			width="255" height="33"
+			alt="602SQL-Úplná dokumentace"
+			title="602SQL - Úplná dokumentace"
+			border="0"></td>
+		<td width="33%" align="right"><a href="../xml/html/top.html"><img class="floatno"
+			src="../images/index.gif"
+			width="15" height="16"
+			alt="Index" title="Zpět na obsah"
+			border="0" vspace="2"></a> &nbsp;
+			 </td>
+	</tr>
+	</table>
+	</td>
+</tr>
+</table><table class="navigace" border="0" width="100%"  bgcolor="#FFFFBF"><tr> <td
+width="20" align="center"><img class="floatno" src="../images/prev.gif"
+width="15" height="13" alt="&lt;&shy;" title="Předcházející téma"
+border="0"></td><td width="25%"><a
+href="HE_SQL2_SELECTS7.htm">Strana 7 (EXTRACT, OUTER JOIN)</a></td> <td width="25%"
+align="right"><img class="floatno" src="../images/up.gif" width="13"
+height="15" alt="Nahoru" title="O jednu úroveň výš" border="0"
+align="middle"></td><td width="25%"><a href="HE_SQL2_SELECTS.htm">Sbírka příkladů SQL dotazů</a></td>
+<td width="25%" align="right"><a
+href="HE_SQL2_SELECTS9.htm">Strana 9 (subdotaz)</a></td><td width="20"
+align="center"><img class="floatno" src="../images/next.gif" width="15"
+height="13" alt="&shy;&gt;" title="Následující téma" border="0"></td>
+</tr></table>
+
+
+<h1><a name="he_sql2_selects8"></a>Sbírka dotazů – str. 8</h1>
+
+<p><b>Příklad 15</b></p>
+
+<p><b>Zadání:</b> Vyberte firmy, které byly do databáze zapsány v měsících leden až březen včetně.</p>
+
+<p><b>SQL:</b> </p>
+
+<pre><code>  SELECT Firmy.cislo,Firmy.nazev,Firmy.pracovnik,Firmy.dat_zapisu
+  FROM Firmy
+  WHERE (Month(dat_zapisu) IN (1,2,3))</code></pre>
+
+<p><b>Poznámky:</b> </p>
+
+<p><b>a)</b> stejného cíle by šlo dosáhnout i pomocí jiných zápisů podmínky, např. </p>
+
+<pre><code>  WHERE (Month(dat_zapisu) BETWEEN 1 AND 3)</code></pre>
+
+<p>nebo</p>
+
+<pre><code>  WHERE (Month(dat_zapisu) &gt;=1 AND Month(dat_zapisu) &lt;=3)</code></pre>
+
+<p><b>b)</b> operátor IN má i druhé použití – hodnota se pomocí něho porovnává s výsledkem subdotazu. </p>
+
+<p><b>Příklad 16</b></p>
+
+<p><b>Zadání:</b> Vyberte faktury jednoho typu za více než je průměrná hodnota faktury tohoto typu.</p>
+
+<p><b>Popis řešení: </b>Rozdělíme si úlohu na dva kroky. Nejprve spočteme průměrnou hodnotu faktury:</p>
+
+<pre><code>  SELECT AVG(castka)
+  FROM Faktury
+  WHERE druh=2</code></pre>
+
+<p>Tento dotaz by bylo výhodné umístit jako součást podmínky v sekci WHERE. 602SQL takovéto použití dotazu (neboli subdotazu) v dotazu umožňuje. </p>
+
+<p><b>SQL: </b></p>
+
+<pre><code>  SELECT *
+  FROM Faktury
+  WHERE (Faktury.druh=2 AND
+    Faktury.castka  &gt; (SELECT AVG(castka)
+                       FROM Faktury
+                       WHERE druh=2))</code></pre>
+
+<p><b>Poznámky: </b></p>
+
+<p><b>a)</b> Subdotaz se vždy ohraničen kulatými závorkami.</p>
+
+<p><b>b)</b> Dotaz je editovatelný, protože agregační funkce je pouze v subdotazu.</p>
+
+<p><b>c)</b> V podobném dotazu není možné použít klauzuli HAVING (jak to umožňoval 602SQL do verze 5).</p>
+
+
+
+<table class="navigace" border="0" width="100%"  bgcolor="#FFFFBF"><tr> <td
+width="20" align="center"><img class="floatno" src="../images/prev.gif"
+width="15" height="13" alt="&lt;&shy;" title="Předcházející téma"
+border="0"></td><td width="25%"><a
+href="HE_SQL2_SELECTS7.htm">Strana 7 (EXTRACT, OUTER JOIN)</a></td> <td width="25%"
+align="right"><img class="floatno" src="../images/up.gif" width="13"
+height="15" alt="Nahoru" title="O jednu úroveň výš" border="0"
+align="middle"></td><td width="25%"><a href="HE_SQL2_SELECTS.htm">Sbírka příkladů SQL dotazů</a></td>
+<td width="25%" align="right"><a
+href="HE_SQL2_SELECTS9.htm">Strana 9 (subdotaz)</a></td><td width="20"
+align="center"><img class="floatno" src="../images/next.gif" width="15"
+height="13" alt="&shy;&gt;" title="Následující téma" border="0"></td>
+</tr></table>
+</body>
+</html>

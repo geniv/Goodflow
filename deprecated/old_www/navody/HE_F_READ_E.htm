@@ -1,0 +1,92 @@
+<!doctype html public "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=Windows-1250">
+<title>Funkce Read (ext.)</title>
+<link rel='stylesheet' style='text/css' href='../function.css'>
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000">
+
+
+
+<h2 class=function>Read</h2>
+<img src='../images/cpp.gif' width='44' height='16' border='0' alt='c/c++' align='middle' hspace='2'><img src='../images/pascal.gif' width='44' height='16' border='0' alt='pascal' align='middle' hspace='2'>
+
+
+<br><br>
+<div class='typ'>BOOL <b>[cd_]Read</b>([cdp_t cdp], tcurstab curs, trecnum position, tattrib attr, const modifrec * access, void * buffer);<br>
+function <b>[cd_]Read</b>([cdp : cdp_t]; curs : tcurstab; position : trecnum; attr : tattrib; var access; var buffer) : Boolean;
+</div>
+
+
+<p><b>Parametry</b></p>
+
+<table border=1 cols=2 frame=box rules=all width=480>
+
+<tr valign="top">
+<td width=17%><i>curs</i> </td>
+<td width=83%>číslo otevřeného kurzoru nebo číslo tabulky - viz <a href="HE_KYPAR.htm">podrobnosti</a></td>
+</tr>
+
+<tr valign="top">
+<td width=17%><i>position</i> </td>
+<td width=83%>číslo záznamu (absolutní), z něhož se čte</td>
+</tr>
+
+<tr valign="top">
+<td width=17%><i>attr</i> </td>
+<td width=83%>číslo sloupce, jehož hodnota (nebo délka) se čte</td>
+</tr>
+
+<tr valign="top">
+<td width=17%><i>access</i> </td>
+<td width=83%><a href="../xml/html/extreadwrite.html">popis přístupu</a> k údajům v uvedené pozici kurzoru</td>
+</tr>
+
+<tr valign="top">
+<td width=17%><i>buffer</i> </td>
+<td width=83%>proměnná, do níž mají být údaje načteny</td>
+</tr>
+
+<tr valign="top">
+<td width=17%>[<i>cdp </i></td>
+<td width=83%><a href="HE_EXTCD.htm">kontextová proměnná</a> klienta]  </td>
+</tr>
+</table><br>
+
+<p><b>Popis </b></p>
+
+<p>Funkce <b><code>Read</code></b> čte hodnoty z databáze. Objekt, z něhož se má číst, může být buď tabulka zadaná svým číslem (nalezeným funkcí <b><code>Find_object</code></b>) nebo otevřený kurzor (funkcí <b><code>Open_cursor</code></b> nebo <b><code>Open_cursor_direct</code></b>).</p>
+
+<p>Funkce neprovádí žádné zamykání záznamů v databázi. Může číst i data právě přepisovaná jinou aplikací. </p>
+
+<p>Pokud proměnná <i>buffer</i> není dostatečně dlouhá, může dojít k přepsání paměti a následnému zhroucení systému.</p>
+
+<p>Pokud se čte hodnota sloupce proměnné velikosti, pak funkce zapíše do proměnné <i>buffer</i> do prvních dvou bajtů délku přečteného úseku a počínaje třetím bajtem přečtená data.</p>
+
+<p>Obecnou funkci <b><code>Read</code></b> s velmi složitým parametrem <i>access</i> je výhodné v jednotlivých konkrétních případech nahradit funkcemi <b><code>Read_ind</code></b> (čtení sloupce pevné velikosti), <b><code>Read_var</code></b> (čtení sloupce proměnné velikosti), <b><code>Read_len</code></b> (čtení délky sloupce proměnné velikosti).</p>
+
+<p><b>Hodnota funkce </b></p>
+
+<p>Funkce vrací při úspěchu FALSE, při neúspěchu TRUE.</p>
+
+<p><b>Viz</b></p>
+
+<ul class='viz'>
+ <li><a href="HE_F_WRITE_E.htm">Write</a> </li>
+ <li><a href="HE_F_READIND.htm">Read_ind</a> </li>
+ <li><a href="HE_F_WRITEIND.htm">Write_ind</a> </li>
+ <li><a href="HE_F_READVAR.htm">Read_var</a> </li>
+ <li><a href="HE_F_WRITEVAR.htm">Write_var</a> </li>
+ <li><a href="HE_F_READLEN.htm">Read_len</a> </li>
+ <li><a href="HE_F_WRITELEN.htm">Write_len</a> </li>
+ <li><a href="HE_F_READRECORD.htm">Read_record</a> </li>
+ <li><a href="HE_F_WRITERECORD.htm">Write_record</a> </li>
+ <li><a href="HE_F_FINDOBJECT.htm">Find_object</a> </li>
+ <li><a href="HE_F_OPENCURSOR_E.htm">Open_cursor</a> </li>
+ <li><a href="HE_F_OPENCURSORDIRECT.htm">Open_cursor_direct</a> </li>
+</ul>
+
+</body>
+</html>

@@ -1,0 +1,500 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head profile="http://gmpg.org/xfn/11">
+
+
+
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><title>finc weblog » MySQL</title>
+
+
+
+<meta name="generator" content="WordPress 2.3.3"><!-- leave this for stats --> 
+
+<link rel="stylesheet" href="finc%20weblog%20%C2%BB%20MySQL_soubory/style.css" type="text/css" media="screen">
+<link rel="stylesheet" href="finc%20weblog%20%C2%BB%20MySQL_soubory/print.css" type="text/css" media="print">
+<link rel="alternate" type="application/rss+xml" title="finc weblog RSS Feed" href="http://blog.irminsul.cz/feed/">
+<link rel="pingback" href="http://blog.irminsul.cz/xmlrpc.php">
+
+	<link rel="EditURI" type="application/rsd+xml" title="RSD" href="http://blog.irminsul.cz/xmlrpc.php?rsd">
+ <link rel="wlwmanifest" type="application/wlwmanifest+xml" href="http://blog.irminsul.cz/wp-includes/wlwmanifest.xml"> <link rel="stylesheet" href="finc%20weblog%20%C2%BB%20MySQL_soubory/geshi.css" type="text/css">
+<link rel="stylesheet" type="text/css" href="finc%20weblog%20%C2%BB%20MySQL_soubory/COHEN_style.css"></head><body>
+  <div id="header">
+    <div id="headerimg">
+	  <h1><a href="http://blog.irminsul.cz/">finc weblog</a></h1>
+	  <div class="description">nejen programování, databáze a linux</div>
+      <div id="search">
+		<form method="get" id="searchform" action="http://blog.irminsul.cz/">
+<div><input value="" name="s" id="s" type="text">
+<input id="searchsubmit" value="" type="submit">
+</div>
+</form>
+	  </div>
+
+	</div>
+	<div id="navi">
+		<ul id="nav">
+		  <li class="page_item"><a href="http://blog.irminsul.cz/" title="Home">Home</a></li>
+		  <li class="page_item page-item-59"><a href="http://blog.irminsul.cz/o-autorovi/" title="O autorovi">O autorovi</a></li>
+		</ul>
+	</div>
+  </div>
+  <!--/header -->
+<div id="wrapper">
+<div id="page">  <div id="content">
+  
+    
+  	  
+    <div class="post" id="post-11">
+	  <div class="entrytop"><div class="entry">
+        <h2><span class="inpost-date">Listopad 15th, 2006</span><a href="http://blog.irminsul.cz/2006/11/15/zavazna-chyba-pri-tvorbe-triggeru/" rel="bookmark" title="Permanent Link to Závažná chyba při tvorbě triggerů">Závažná chyba při tvorbě triggerů</a></h2>
+	  </div></div>
+		<div class="post-content">
+			
+<p>Původně jsem chtěl napsat článek o&nbsp;triggerech a jejich využití.
+Zjistil jsem ale nepříjemnou chybu, která bez jakýchkoli servítek smaže
+můj pracně vytvořený trigger, aniž by mi databáze cokoli zdělila.</p>
+
+<p>Jedná se o&nbsp;bug <a href="http://bugs.mysql.com/bug.php?id=18153">18153</a>&nbsp;a jeho duplikace <a href="http://bugs.mysql.com/bug.php?id=18816">18816</a>.</p>
+
+<p>Tato nepříjemná chyba mi při provedení dotazu REPAIR/OPTIMI­ZE/ALTER
+smaže trigger z&nbsp;<strong>information_sche­ma</strong>. Problém je o&nbsp;to
+horší, že použitý název je uložen v&nbsp;souboru *.TRN, který se pro změnu
+zachová! Takže nyní mám smazaný trigger a navíc nemůžu použít
+původní název triggeru. Jediné možné řešení je fyzicky smazat soubory
+*.TRN a vytvořit trigger&nbsp;znovu.</p>
+
+<p><em>Opět uvedu malý příklad:</em></p>
+
+<div class="dean_ch" style=""><span class="kw1">CREATE</span>
+<span class="kw1">DATABASE</span> stupidni_test;<br>
+<span class="kw1">CREATE</span> <span class="kw1">TABLE</span> tabulka <span class="br0">(</span><br>
+&nbsp; &nbsp;id int <span class="kw1">NOT</span> <span class="kw1">NULL</span> <span class="kw1">AUTO_INCREMENT</span>,<br>
+&nbsp; &nbsp;nazev varchar<span class="br0">(</span><span class="nu0">10</span><span class="br0">)</span> <span class="kw1">NOT</span> <span class="kw1">NULL</span>,<br>
+&nbsp; &nbsp;<span class="kw1">PRIMARY</span> <span class="kw1">KEY</span><span class="br0">(</span>id<span class="br0">)</span><br>
+<span class="br0">)</span>;<br>
+<span class="kw1">CREATE</span> <span class="kw1">TABLE</span> tabulka_zaloha
+<span class="br0">(</span><br>
+&nbsp; &nbsp;id int <span class="kw1">NOT</span> <span class="kw1">NULL</span> <span class="kw1">AUTO_INCREMENT</span>,<br>
+&nbsp; &nbsp;nazev varchar<span class="br0">(</span><span class="nu0">10</span><span class="br0">)</span> <span class="kw1">NOT</span> <span class="kw1">NULL</span>,<br>
+&nbsp; &nbsp;<span class="kw1">PRIMARY</span> <span class="kw1">KEY</span><span class="br0">(</span>id<span class="br0">)</span><br>
+<span class="br0">)</span>;</div>
+
+<p>A&nbsp;nyní si vytvořím trigger.</p>
+
+<div class="dean_ch" style="">DELIMITER $$<br>
+<span class="coMULTI">/* tento prikaz muze vyhodit chybu, pokud trigger
+existuje, zde totiz existuje dalsi bug s&nbsp;IF EXISTS */</span><br>
+<span class="kw1">DROP</span> <span class="kw1">TRIGGER</span> nefungujes$$<br>
+<br>
+<span class="kw1">CREATE</span> <span class="kw1">TRIGGER</span> nefungujes<br>
+AFTER <span class="kw1">INSERT</span> <span class="kw1">ON</span> tabulka<br>
+<span class="kw1">FOR</span> EACH ROW<br>
+BEGIN<br>
+&nbsp; <span class="kw1">INSERT</span> <span class="kw1">INTO</span> tabulka_zaloha
+<span class="br0">(</span>id, nazev<span class="br0">)</span> <span class="kw1">VALUES</span> <span class="br0">(</span>new.id, new.nazev<span class="br0">)</span>;<br>
+END$$<br>
+<br>
+DELIMITER&nbsp;;</div>
+
+<p>Vše se zdá být v&nbsp;pořádku:</p>
+
+<div class="dean_ch" style=""><span class="kw1">SHOW</span>
+TRIGGERS;</div>
+
+<p>Nyní přidám jeden sloupeček do tabulky <em>tabulka</em>.</p>
+
+<div class="dean_ch" style=""><span class="kw1">ALTER</span>
+<span class="kw1">TABLE</span> stupidni_test <span class="kw1">ADD</span> <span class="kw1">COLUMN</span> cislo int <span class="kw1">DEFAULT</span> <span class="st0">‚0‘</span> AFTER&nbsp;nazev;</div>
+
+<p>A&nbsp;trigger je pryč:</p>
+
+<div class="dean_ch" style=""><span class="kw1">SHOW</span>
+TRIGGERS;</div>
+
+<p>Vytvořím si ho znovu:</p>
+
+<div class="dean_ch" style="">DELIMITER $$<br>
+<span class="kw1">DROP</span> <span class="kw1">TRIGGER</span> nefungujes$$<br>
+<br>
+<span class="kw1">CREATE</span> <span class="kw1">TRIGGER</span> nefungujes<br>
+AFTER <span class="kw1">INSERT</span> <span class="kw1">ON</span> tabulka<br>
+<span class="kw1">FOR</span> EACH ROW<br>
+BEGIN<br>
+&nbsp; <span class="kw1">INSERT</span> <span class="kw1">INTO</span> tabulka_zaloha
+<span class="br0">(</span>id, nazev<span class="br0">)</span> <span class="kw1">VALUES</span> <span class="br0">(</span>new.id, new.nazev<span class="br0">)</span>;<br>
+END$$<br>
+<br>
+DELIMITER&nbsp;;</div>
+
+<p>Nevytvořím!</p>
+
+<div class="dean_ch" style=""><span class="kw1">TRIGGER</span>
+does <span class="kw1">NOT</span> exist<br>
+<span class="kw1">TRIGGER</span> already&nbsp;<span class="kw1">EXISTS</span></div>
+
+<p>Jediné možné řešení je nyní smazat soubor *.TRN nebo vytvořit trigger
+pod jiným názvem.</p>
+
+<p>Tímto apeluji na všechny, kteří triggery používají: <strong>zálohujte
+si je</strong>!</p>
+
+<blockquote>Přístě už se budu věnovat těm triggerům a jejich
+využití.&nbsp;;)</blockquote>
+
+<!-- by Texy2! -->		</div>
+		<div class="post-info">
+			<span class="post-cat"><a href="http://blog.irminsul.cz/category/mysql/" title="Zobrazit všechny příspěvky v 'MySQL'" rel="category tag">MySQL</a></span> <span class="post-comments"><a href="http://blog.irminsul.cz/2006/11/15/zavazna-chyba-pri-tvorbe-triggeru/#respond" title="Komentář k příspěvku 'Závažná chyba při tvorbě triggerů'">No Comments »</a></span>
+		</div>
+	</div>
+	
+	  
+    <div class="post" id="post-10">
+	  <div class="entrytop"><div class="entry">
+        <h2><span class="inpost-date">Listopad 13th, 2006</span><a href="http://blog.irminsul.cz/2006/11/13/mysql-50-dil2/" rel="bookmark" title="Permanent Link to MySQL 5.0 díl.2">MySQL 5.0 díl.2</a></h2>
+	  </div></div>
+		<div class="post-content">
+			
+<p>Typ tabulky InnoDB zvládá i&nbsp;další vlastnost a tou je tzv. transakční
+zpracování. Ve chvíli, kdy Vaše aplikace bude používat akční dotazy nad
+důležitými daty, jistě budete hledat způsob, jak tyto data co nejlépe
+ošetřit.</p>
+
+<p>K&nbsp;tomu dobře poslouží transakce. Setkal jsem se i&nbsp;s&nbsp;názory, kteří
+transakční zpracování odsuzují z&nbsp;toho či onoho důvodu. Já, jako
+člověk, který tyto věci využívá v&nbsp;praxi mohu jen podotknout, že je to
+pro mě určitá záchrana při práci s&nbsp;akčními dotazy.</p>
+
+<p>Co to je, to transakční zpracování dat? Jedná se způsob, pomocí
+kterého mohu své předešlé kroky navrátit zpět nebo je potvrdit. Série
+příkazu UPDATE, DELETE, INSERT, které jsou spuštěny při transakčním
+zpracování, se provedou tehdy, když uznám, že po změně nedojde
+k&nbsp;znehodnocení dat. Fyzicky se dané akce provedou až po úspěšném
+ukončení, do té doby jsou dočasně uloženy jen jako série příkazů,
+které čekají na ukončení. To sebou přináší i&nbsp;tu vlastnost, že
+zpracování může být v&nbsp;polovině přerušeno (např. výpadkem proudu) a
+přesto je možné dané úkony dokončit. Je jasné, že tuto vlastnost musíme
+brát s&nbsp;rezervou a neočekávat vždy spásnou pomoc od nedokončených
+transakcí. Tím mám na mysli, že se daná série příkazů již nikdy
+neprovede, nikoli, že by znehodnotila&nbsp;data.</p>
+Příkazy pro transakční zpracování jsou následující:
+<ul>
+	<li><strong>start transaction</strong>&nbsp;– spouští provedení transakčního
+	zpracování</li>
+
+	<li><strong>rollback</strong>&nbsp;– navrací veškeré změny a uvede data zpět
+	do stavu před spuštěnou transakcí</li>
+
+	<li><strong>commit</strong>&nbsp;– potvrzuje příkazy, zapisuje změny a
+	uvolňuje systémové prostředky potřebné při transakci</li>
+</ul>
+
+<p><strong>Použití transakcí</strong><br>
+Domnívám se, že je zbytečné zde vypisovat sérii nějakých akčních
+dotazu, kde na konci provedu commit či rollback. Spíše než to, je lepší
+malá ukázka v&nbsp;PHP, jak lze transakce smysluplně využít.</p>
+
+<p><em>Příklad:</em></p>
+
+<div class="dean_ch" style=""><span class="kw2">class</span>
+Error<br>
+<span class="br0">{</span><br>
+&nbsp; &nbsp; &nbsp; &nbsp; <span class="kw2">private</span> <span class="re0">$error</span> =
+<a href="http://www.php.net/array"><span class="kw3">array</span></a><span class="br0">(</span><span class="br0">)</span>;<br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp; <span class="kw2">public</span> <span class="kw2">function</span>
+__construct<span class="br0">(</span><span class="br0">)</span> <span class="br0">{</span><span class="br0">}</span><br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp; <span class="kw2">public</span> <span class="kw2">function</span>
+addError<span class="br0">(</span><span class="re0">$err</span><span class="br0">)</span><br>
+&nbsp; &nbsp; &nbsp; &nbsp; <span class="br0">{</span><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class="kw1">if</span> <span class="br0">(</span>!<a href="http://www.php.net/in_array"><span class="kw3">in_array</span></a><span class="br0">(</span><span class="re0">$e­rr</span>, <span class="re0">$this</span>-&gt;<span class="me1">error</span><span class="br0">)</span><span class="br0">)</span>
+<span class="br0">{</span><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class="re0">$this</span>-&gt;<span class="me1">error</span><span class="br0">[</span><span class="br0">]</span> =
+<span class="re0">$err</span>;<br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class="br0">}</span><br>
+&nbsp; &nbsp; &nbsp; &nbsp; <span class="br0">}</span><br>
+<br>
+&nbsp; &nbsp; &nbsp; &nbsp; <span class="kw2">public</span> <span class="kw2">function</span>
+isError<span class="br0">(</span><span class="br0">)</span><br>
+&nbsp; &nbsp; &nbsp; &nbsp; <span class="br0">{</span><br>
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span class="kw1">return</span> <span class="br0">(</span>boolean<span class="br0">)</span> <a href="http://www.php.net/count"><span class="kw3">count</span></a><span class="br0">(</span><span class="re0">$this</span>-&gt;<span class="me1">error</span><span class="br0">)</span>;<br>
+&nbsp; &nbsp; &nbsp; &nbsp; <span class="br0">}</span><br>
+<br>
+<span class="br0">}</span><br>
+<br>
+<span class="re0">$mysqli</span> = <span class="kw2">new</span> mysqli<span class="br0">(</span><span class="coMULTI">/* connect <em>/</em></span><em><span class="br0">)</span>;<br>
+<span class="re0">$error</span> = <span class="kw2">new</span> Error<span class="br0">(</span><span class="br0">)</span>;<br>
+<br>
+<span class="re0">$mysqli</span>-&gt;<span class="me1">query</span><span class="br0">(</span><span class="st0">„start transaction“</span><span class="br0">)</span>;<br>
+<br>
+<span class="re0">$query</span> = <span class="st0">„UPDATE uzivatele SET
+prijmeni = ‚Novák‘ WHERE login = ‚paveln‘“</span>;<br>
+<span class="kw1">if</span> <span class="br0">(</span><span class="re0">$mysqli</span>-&gt;<span class="me1">query</span><span class="br0">(</span><span class="re0">$query</span><span class="br0">)</span>
+=== <span class="kw2">false</span><span class="br0">)</span> <span class="br0">{</span><br>
+&nbsp; &nbsp; &nbsp; &nbsp; <span class="re0">$error</span>-&gt;<span class="me1">addError</span><span class="br0">(</span><span class="re0">$mys­qli</span>-&gt;<span class="me1">error</span><span class="br0">)</span>;<br>
+<span class="br0">}</span><br>
+<br>
+<span class="coMULTI">/</span></em><span class="coMULTI"> dalsi akcni dotazy
+*/</span><br>
+<br>
+<span class="kw1">if</span> <span class="br0">(</span>!<span class="re0">$error</span>-&gt;<span class="me1">isError</span><span class="br0">(</span><span class="br0">)</span><span class="br0">)</span> <span class="br0">{</span><br>
+&nbsp; &nbsp; &nbsp; &nbsp; <span class="re0">$mysqli</span>-&gt;<span class="me1">query</span><span class="br0">(</span><span class="st0">„commit“</span><span class="br0">)</span>;<br>
+<span class="br0">}</span> <span class="kw1">else</span> <span class="br0">{</span><br>
+&nbsp; &nbsp; &nbsp; &nbsp; <span class="re0">$mysqli</span>-&gt;<span class="me1">query</span><span class="br0">(</span><span class="st0">„rollbac­k“</span><span class="br0">)</span>;<br>
+&nbsp;<span class="br0">}</span></div>
+
+<p>Použil jsem zde záměrně vlastní jednoduchou třídu na kontrolu chyb. Je
+jasné, že příklad je pouze ilustrativní, ale potvrzení transakce mohu
+provést jedině ve chvíli, kdy jsem si jist, že to má data nijak
+neznehodnotí. Toto považuji za smysluplné použití transakčního
+zpracování, kdy pomocí nějaké vlastní aplikace budu rozhodovat, zda sérii
+příkazů zruším, či potvrdím.</p>
+
+<p>Při práci s&nbsp;tabulkami při transakčním zpracování bychom si měli dát
+pozor zejména na příkaz: TRUNCATE TABLE, který vymaže data z&nbsp;tabulky a
+nastaví auto_increment na 1.&nbsp;Po provedení takového příkazu totiž není
+možné pomocí rollback získat data&nbsp;zpět.</p>
+
+<p>Omezení existuje celá řada, k&nbsp;tomu doporučuji <a href="http://dev.mysql.com/doc/refman/5.0/en/transactional-commands.html">manuál</a>
+a prostudovat samotné transakce&nbsp;tam.</p>
+
+<p>Poslední věcí o&nbsp;které se zmíním je nastavení automatických
+transakcí. V&nbsp;souboru my.cnf nalezneme direktivu
+innodb_flush_log_­at_trx_commit, která pokud je nastavena na 1, provádí
+automaticky transakce. Toto chování se mi zdá nežádoucí a jako takové ho
+pro jistotu vypínám. Důvod proč něco takového dělám je rychlost
+aplikace. Pokud například vkládám velké množství dat, které není nijak
+zásadní pro běh aplikace a data mám zálohována, provedu úkon bez
+transakčního zpracování. Jednou ohromnou nevýhodou je totiž extrémní
+nárůst potřebných systémových prostředků.</p>
+
+<p>Transakce byste měli používat s&nbsp;rozvahou, ale také se jich nebát,
+protože sebou přináší jistý komfort při modifikaci&nbsp;dat.</p>
+
+<blockquote>V&nbsp;příštím díle se budu věnovat triggerům a důvodům, proč
+něco takového využívat.</blockquote>
+		</div>
+		<div class="post-info">
+			<span class="post-cat"><a href="http://blog.irminsul.cz/category/mysql/" title="Zobrazit všechny příspěvky v 'MySQL'" rel="category tag">MySQL</a></span> <span class="post-comments"><a href="http://blog.irminsul.cz/2006/11/13/mysql-50-dil2/#comments" title="Komentář k příspěvku 'MySQL 5.0 díl.2'">5 Comments »</a></span>
+		</div>
+	</div>
+	
+	  
+    <div class="post" id="post-9">
+	  <div class="entrytop"><div class="entry">
+        <h2><span class="inpost-date">Listopad 10th, 2006</span><a href="http://blog.irminsul.cz/2006/11/10/mysql-50-dil1/" rel="bookmark" title="Permanent Link to MySQL 5.0 díl.1">MySQL 5.0 díl.1</a></h2>
+	  </div></div>
+		<div class="post-content">
+			
+<p>Od verze 5.0&nbsp;je možné využívat nových vlastností, které nabízí
+skutečnou správu dat v&nbsp;databázi.</p>
+
+<p>Jednotlivé vlastnosti rozepíši do vlastních dílů.</p>
+
+<p>V&nbsp;prvním díle se budu věnovat referenčním integritám. Referenční
+integritu bylo možné využívat již dříve. Respektive od doby, kdy MySQL
+podporovala typ tabulky InnoDB.</p>
+Proč vůbec databáze používá tuto vlastnost? Pokud začnu pracovat s&nbsp;daty
+v&nbsp;databázi, zjistím, že některé se přímo vážou na jiné. Dříve se
+používal způsob uchování těchto vazeb v&nbsp;aplikační úrovni. Nevýhody,
+které to sebou přinášelo je hned několik:
+<ul>
+	<li>programátor musel stále mít v&nbsp;paměti, která data jsou propojena a
+	podle toho provozoval akční&nbsp;dotazy</li>
+
+	<li>při změně aplikace nad databází se znovu musely tyto vazby
+	naprogramovat</li>
+
+	<li>při provedení UPDATE se museli projít všechny vazby a upravit
+	hodnoty</li>
+
+	<li>a tak dále…</li>
+</ul>
+
+<p>Při použití referenčních integrit v&nbsp;MySQL tyto nepříjemnosti
+odpadnou.</p>
+
+<p>Jak jsem již psal na začátku, pro využití referenčních integrit
+musíte použít takový typ tabulky, který danou vlastnost podporuje. Osobně
+jsem volil nejlepší možnou variantu a to <strong>InnoDB</strong>.</p>
+
+<p><em>Lepší než další povídání bude malý příklad:</em></p>
+
+<p>Mám tabulku uživatelů a tabulku návštěvnosti. Dejme tomu, že
+u&nbsp;návštěvnosti budu uchovávat informace o&nbsp;počtu návštěv za
+každý&nbsp;den.</p>
+
+<div class="dean_ch" style=""><span class="kw1">CREATE</span>
+<span class="kw1">TABLE</span> uzivatele <span class="br0">(</span><br>
+&nbsp; login varchar<span class="br0">(</span><span class="nu0">10</span><span class="br0">)</span> <span class="kw1">NOT</span> <span class="kw1">NULL</span>,<br>
+&nbsp; heslo varchar<span class="br0">(</span><span class="nu0">255</span><span class="br0">)</span> <span class="kw1">NOT</span> <span class="kw1">NULL</span>,<br>
+&nbsp; jmeno varchar<span class="br0">(</span><span class="nu0">100</span><span class="br0">)</span> <span class="kw1">NOT</span> <span class="kw1">NULL</span>,<br>
+&nbsp; prijmeni varchar<span class="br0">(</span><span class="nu0">100</span><span class="br0">)</span> <span class="kw1">NOT</span> <span class="kw1">NULL</span>,<br>
+&nbsp; <span class="kw1">PRIMARY</span> <span class="kw1">KEY</span><span class="br0">(</span>login<span class="br0">)</span><br>
+<span class="br0">)</span>ENGINE=InnoDB;<br>
+<span class="kw1">CREATE</span> <span class="kw1">TABLE</span>
+uzivatele_nav­stevnost <span class="br0">(</span><br>
+&nbsp; uzivatel varchar<span class="br0">(</span><span class="nu0">10</span><span class="br0">)</span> <span class="kw1">NOT</span> <span class="kw1">NULL</span>,<br>
+&nbsp; datum date <span class="kw1">NOT</span> <span class="kw1">NULL</span>,<br>
+&nbsp; pocet int <span class="kw1">NOT</span> <span class="kw1">NULL</span> <span class="kw1">DEFAULT</span> <span class="st0">‚0‘</span>,<br>
+&nbsp; <span class="kw1">PRIMARY</span> <span class="kw1">KEY</span><span class="br0">(</span>uzivatel, datum<span class="br0">)</span><br>
+<span class="br0">)</span>ENGINE=InnoDB;</div>
+
+<p>Vše se zdá být v&nbsp;pořádku. Ale co se stane ve chvíli, kdy některý
+uživatel změní login? Co se stane ve chvíli, kdy některého uživatele
+smažu? Nyní mám dvě možnosti, buď v&nbsp;aplikaci budu udržovat vztah
+uzivatele:login vs. uzivatele_nav­stevnost:uziva­tel nebo použiji
+referenční integritu.</p>
+
+<div class="dean_ch" style=""><span class="kw1">ALTER</span>
+<span class="kw1">TABLE</span> uzivatele_nav­stevnost<br>
+<span class="kw1">ADD</span> CONSTRAINT fk_uzivatel_u­zivatele<br>
+<span class="kw1">FOREIGN</span> <span class="kw1">KEY</span><span class="br0">(</span>uzivatel<span class="br0">)</span> <span class="kw1">REFERENCES</span> uzivatele<span class="br0">(</span>login<span class="br0">)</span><br>
+<span class="kw1">ON</span> <span class="kw1">UPDATE</span> CASCADE <span class="kw1">ON</span> <span class="kw1">DELETE</span> RESTRICT;</div>
+
+<p>Co jsem v&nbsp;podstatě udělal? Vytvořil jsem cizí klíč v&nbsp;tabulce
+uzivatele_nav­stevnost s&nbsp;nazvem fk_uzivatel_u­zivatele. Nyní, pokud provedu
+UPDATE loginu v&nbsp;tabulce uzivatele, změní se mi login uživatele i&nbsp;v&nbsp;tabulce
+uzivatele_nav­stevnost. Pokud se pokusím smazat uživatele z&nbsp;tabulky
+uzivatele, dotaz skončí s&nbsp;chybou. Důvodem je definování DELETE RESTRICT.
+Zde je jasné, že vlastnost pro DELETE přepíši na CASCADE.</p>
+Samotný význam referenčních integrit není usnadnit práci vývojářům
+při manipulaci s&nbsp;daty, ale udržet data ve správné formě. Vlastnosti pro
+UPDATE a DELETE pro cizí klíč jsou následující:
+<ul>
+	<li>CASCADE&nbsp;– provede změny ve sloupci podle změny v&nbsp;referenčním
+	sloupci</li>
+
+	<li>RESTRICT&nbsp;– znemožní upravit či smazat data</li>
+
+	<li>SET NULL&nbsp;– při nastaveni refenečního sloupce na NULL či smazání,
+	nastaví se sloupec cizího klíče na NULL (zde samozřejmě je třeba, aby
+	cizí klíč měl možnost obsahovat&nbsp;NULL)</li>
+</ul>
+
+<p>Na předchozím příkladu jsem ukázal možnost vytvoření referenční
+integrity mezi dvěmi tabulkami, ale existuje možnost vytvoření takovéto
+integrity v&nbsp;zájmu jedné tabulky.</p>
+
+<p><em>Příklad:</em></p>
+
+<p>Budu mít tabulku zaměstnanců, která navíc obsahuje vztah
+nadřízený-podřízený.</p>
+
+<div class="dean_ch" style=""><span class="kw1">CREATE</span>
+<span class="kw1">TABLE</span> zamestnanci <span class="br0">(</span><br>
+&nbsp; osobni_cislo int <span class="kw1">NOT</span> <span class="kw1">NULL</span>,<br>
+&nbsp; jmeno varchar<span class="br0">(</span><span class="nu0">100</span><span class="br0">)</span> <span class="kw1">NOT</span> <span class="kw1">NULL</span>,<br>
+&nbsp; prijmeni varchar<span class="br0">(</span><span class="nu0">100</span><span class="br0">)</span> <span class="kw1">NOT</span> <span class="kw1">NULL</span>,<br>
+&nbsp; nadrizeny int <span class="kw1">DEFAULT</span> <span class="kw1">NULL</span>,<br>
+&nbsp; <span class="kw1">PRIMARY</span> <span class="kw1">KEY</span><span class="br0">(</span>osobni_cis­lo<span class="br0">)</span>,<br>
+&nbsp; CONSTRAINT fk_nadrizeny_za­mestnanci<br>
+&nbsp; <span class="kw1">FOREIGN</span> <span class="kw1">KEY</span><span class="br0">(</span>nadrizeny<span class="br0">)</span> <span class="kw1">REFERENCES</span> zamestnanci<span class="br0">(</span>o­sobni_cislo<span class="br0">)</span><br>
+&nbsp; <span class="kw1">ON</span> <span class="kw1">UPDATE</span> CASCADE <span class="kw1">ON</span> <span class="kw1">DELETE</span> <span class="kw1">SET</span> <span class="kw1">NULL</span><br>
+<span class="br0">)</span>ENGINE=InnoDB;</div>
+
+<p>S&nbsp;definicí referenčních integrit navíc souvisí i&nbsp;správný návrh
+databáze. K&nbsp;tomuto problému lze říci jen jedno: <strong>mít
+zkušennosti</strong>.</p>
+
+<blockquote>V&nbsp;příštím díle se budu věnovat opět typu
+<strong>InnoDB</strong> a další vlastnosti a to transakčnímu
+zpracování.</blockquote>
+		</div>
+		<div class="post-info">
+			<span class="post-cat"><a href="http://blog.irminsul.cz/category/mysql/" title="Zobrazit všechny příspěvky v 'MySQL'" rel="category tag">MySQL</a></span> <span class="post-comments"><a href="http://blog.irminsul.cz/2006/11/10/mysql-50-dil1/#respond" title="Komentář k příspěvku 'MySQL 5.0 díl.1'">No Comments »</a></span>
+		</div>
+	</div>
+	
+		
+	<div class="navigation">
+	  <span class="previous-entries"></span> <span class="next-entries"></span>
+	</div>
+	
+		
+  </div><!--/content -->
+  
+<div id="sidebar">
+<ul>
+
+  
+    
+    <li>
+      <h2 class="sidebartitle">Rubriky</h2>
+      <ul class="list-cat">
+        	<li class="cat-item cat-item-8"><a href="http://blog.irminsul.cz/category/eclipse/" title="Zobrazit všechny příspěvky zařazené do Eclipse">Eclipse</a> (2)
+</li>
+	<li class="cat-item cat-item-10"><a href="http://blog.irminsul.cz/category/java/" title="Zobrazit všechny příspěvky zařazené do Java">Java</a> (18)
+</li>
+	<li class="cat-item cat-item-7"><a href="http://blog.irminsul.cz/category/linux/" title="Zobrazit všechny příspěvky zařazené do Linux">Linux</a> (2)
+</li>
+	<li class="cat-item cat-item-6 current-cat"><a href="http://blog.irminsul.cz/category/mysql/" title="Zobrazit všechny příspěvky zařazené do MySQL">MySQL</a> (3)
+</li>
+	<li class="cat-item cat-item-9"><a href="http://blog.irminsul.cz/category/nazory/" title="Zobrazit všechny příspěvky zařazené do Názory">Názory</a> (4)
+</li>
+	<li class="cat-item cat-item-11"><a href="http://blog.irminsul.cz/category/netbeans-rcp/" title="Zobrazit všechny příspěvky zařazené do Netbeans RCP">Netbeans RCP</a> (2)
+</li>
+	<li class="cat-item cat-item-3"><a href="http://blog.irminsul.cz/category/novinky/" title="Zobrazit všechny příspěvky zařazené do Novinky">Novinky</a> (2)
+</li>
+	<li class="cat-item cat-item-5"><a href="http://blog.irminsul.cz/category/php/" title="Zobrazit všechny příspěvky zařazené do PHP">PHP</a> (10)
+</li>
+      </ul>
+    </li>
+    <li>
+      <h2 class="sidebartitle">Archivy</h2>
+      <ul class="list-archives">
+        	<li><a href="http://blog.irminsul.cz/2008/05/" title="Květen 2008">Květen 2008</a></li>
+	<li><a href="http://blog.irminsul.cz/2008/04/" title="Duben 2008">Duben 2008</a></li>
+	<li><a href="http://blog.irminsul.cz/2008/03/" title="Březen 2008">Březen 2008</a></li>
+	<li><a href="http://blog.irminsul.cz/2008/02/" title="Únor 2008">Únor 2008</a></li>
+	<li><a href="http://blog.irminsul.cz/2008/01/" title="Leden 2008">Leden 2008</a></li>
+	<li><a href="http://blog.irminsul.cz/2007/12/" title="Prosinec 2007">Prosinec 2007</a></li>
+	<li><a href="http://blog.irminsul.cz/2007/11/" title="Listopad 2007">Listopad 2007</a></li>
+	<li><a href="http://blog.irminsul.cz/2007/09/" title="Září 2007">Září 2007</a></li>
+	<li><a href="http://blog.irminsul.cz/2007/08/" title="Srpen 2007">Srpen 2007</a></li>
+	<li><a href="http://blog.irminsul.cz/2007/07/" title="Červenec 2007">Červenec 2007</a></li>
+	<li><a href="http://blog.irminsul.cz/2007/06/" title="Červen 2007">Červen 2007</a></li>
+	<li><a href="http://blog.irminsul.cz/2007/05/" title="Květen 2007">Květen 2007</a></li>
+	<li><a href="http://blog.irminsul.cz/2007/04/" title="Duben 2007">Duben 2007</a></li>
+	<li><a href="http://blog.irminsul.cz/2007/03/" title="Březen 2007">Březen 2007</a></li>
+	<li><a href="http://blog.irminsul.cz/2007/02/" title="Únor 2007">Únor 2007</a></li>
+	<li><a href="http://blog.irminsul.cz/2007/01/" title="Leden 2007">Leden 2007</a></li>
+	<li><a href="http://blog.irminsul.cz/2006/12/" title="Prosinec 2006">Prosinec 2006</a></li>
+	<li><a href="http://blog.irminsul.cz/2006/11/" title="Listopad 2006">Listopad 2006</a></li>
+      </ul>
+    </li>
+    <li>
+      <h2 class="sidebartitle">Odkazy</h2>
+      <ul class="linkcat">
+        <li><a href="http://www.sweb.cz/pichlik/" title="o Jave">Dagblog</a></li>
+<li><a href="http://blog.softeu.cz/">SoftEU Blog</a></li>
+<li><a href="http://jirablog.blogspot.com/">jirablog</a></li>
+<li><a href="http://vavru.cz/">Vlasta Vávrů</a></li>
+<li><a href="http://blog.krecan.net/">Java crumbs</a></li>
+<li><a href="http://blog.novoj.net/">Myšlenky dne otce Fura</a></li>
+      </ul>
+    </li>
+
+  
+ </ul>
+</div>
+<!--/sidebar -->
+
+  <hr class="clear">
+</div><!--/page -->
+</div><!--/wrapper -->
+
+<div id="footerbg">
+  <div id="footer">
+	
+  <hr class="clear">
+  </div>
+<!--/footer -->
+
+<div id="credits">
+	<div class="alignleft">© 2007 finc weblog | <a href="http://www.justskins.com/themes/wordpress-themes/" title="iKon Wordpress Theme">iKon Wordpress Theme</a> by <a href="http://www.realgeek.com/forums/sitemap/f-24.html" title="Windows Vista Administration">Windows Vista Administration</a> | Powered by Wordpress</div>
+
+	<div class="alignright"><a href="http://validator.w3.org/check?uri=referer" class="valid">XHTML</a> <a href="http://jigsaw.w3.org/css-validator/check?uri=referer" class="valid">CSS</a> <a href="http://blog.irminsul.cz/feed/" class="rss">RSS</a> <a href="http://www.toplist.cz/" target="_top"><img src="finc%20weblog%20%C2%BB%20MySQL_soubory/count.gif" alt="TOPlist" border="0" height="15" width="80"></a></div> 
+</div>
+  
+</div>
+<div style="position: absolute; left: 1094px; top: 598px; z-index: 1000000000 ! important; visibility: hidden; opacity: 1; width: 0px;" id="linkalert-box"><img style="width: 0px;" src="finc%20weblog%20%C2%BB%20MySQL_soubory/none-icon.png" id="linkalert-icon-1"></div></body></html>

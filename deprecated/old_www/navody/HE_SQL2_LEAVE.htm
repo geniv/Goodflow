@@ -1,0 +1,107 @@
+<!doctype html public "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=Windows-1250">
+<title>Příkaz LEAVE v SQL</title>
+<link rel='stylesheet' style='text/css' href='../function.css'>
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr>
+	<td style="background-image: url(../images/bghead.jpg);
+		background-position: right;
+		background-repeat: no-repeat;">
+	<table width="100%" border="0" cellpadding="0" cellspacing="0"
+		style="background-image:none">
+	<tr>
+		<td style="background-image:none" height="46"
+			width="15%"><img src="../images/title-cz.gif"
+			width="255" height="33"
+			alt="602SQL-Úplná dokumentace"
+			title="602SQL - Úplná dokumentace"
+			border="0"></td>
+		<td width="33%" align="right"><a href="../xml/html/top.html"><img class="floatno"
+			src="../images/index.gif"
+			width="15" height="16"
+			alt="Index" title="Zpět na obsah"
+			border="0" vspace="2"></a> &nbsp;
+			 </td>
+	</tr>
+	</table>
+	</td>
+</tr>
+</table><table class="navigace" border="0" width="100%"  bgcolor="#FFFFBF"><tr> <td
+width="20" align="center"><img class="floatno" src="../images/prev.gif"
+width="15" height="13" alt="&lt;&shy;" title="Předcházející téma"
+border="0"></td><td width="25%"><a
+href="HE_SQL2_REPEAT.htm">Příkaz REPEAT</a></td> <td width="25%"
+align="right"><img class="floatno" src="../images/up.gif" width="13"
+height="15" alt="Nahoru" title="O jednu úroveň výš" border="0"
+align="middle"></td><td width="25%"><a href="HE_SQL2_RIDICIPRIKAZY.htm">Řídící příkazy</a></td>
+<td width="25%" align="right"><a
+href="HE_SQL2_FOR.htm">Příkaz FOR</a></td><td width="20"
+align="center"><img class="floatno" src="../images/next.gif" width="15"
+height="13" alt="&shy;&gt;" title="Následující téma" border="0"></td>
+</tr></table>
+
+
+
+
+<h1><a name="he_sql2_leave"></a>Příkaz LEAVE (SQL)</h1>
+
+<pre><code>příkaz_LEAVE ::= LEAVE návěští;</code></pre>
+
+<p><a href="HE_SQL2_PRIKAZY.htm">Příkaz</a> LEAVE způsobí ukončení provádění příkazů ve <a href="HE_SQL2_SLOZENYPRIKAZ.htm">složeném příkazu</a>, příkazu <a href="HE_SQL2_LOOP.htm">LOOP</a>, <a href="HE_SQL2_REPEAT.htm">REPEAT</a>, <a href="HE_SQL2_WHILE.htm">WHILE</a> nebo <a href="HE_SQL2_FOR.htm">FOR</a> a pokračování příkazem na prvním řádku za <i>návěštím</i>.</p>
+
+<p><i>Návěští</i> musí být shodné s&nbsp;návěštím některého příkazu, v&nbsp;němž je příkaz LEAVE obsažen. Je-li příkaz LEAVE použit k ukončení složeného příkazu tvořícího tělo <a href="HE_SQL2_POPISPROCEDURY.htm">procedury</a>, je možné jak návěští použít jméno procedury.</p>
+
+<p>Jako návěští může být použito i návěští z procedury volající proceduru obsahující příkaz LEAVE. Není-li žádné <em>návěští</em> nalezeno, procedura bez chyby skončí.</p>
+
+<br><p><b>Příklad použití:</b></p>
+
+<p>Je třeba projít záznamy kurzoru; pro firmy z Prahy nedělat nic (ukončit tento průchod cyklu), při výskytu hodnoty NULL ukončit cyklus. Důležité je umístění návěští - ukončí se ten příkaz, u něhož je volané návěští.</p>
+
+<pre><code>PROCEDURE `LEAVE_POKUS`();
+BEGIN
+
+  <b>FOR_cyklus:</b> FOR radek AS c CURSOR FOR
+   SELECT * FROM Firmy
+  DO 
+   <b>tento_zaznam:</b> BEGIN
+    ... 
+    CALL Log_write('před '||radek.adresa);
+    IF radek.adresa LIKE 'Praha%' THEN <b>LEAVE tento_zaznam</b>; END IF;
+    IF radek.adresa IS NULL THEN <b>LEAVE FOR_cyklus</b>; END IF;
+    CALL Log_write('po '||radek.adresa);    
+    ... 
+  END;
+  END FOR;
+
+  CALL Log_write('...po FOR cyklu...');
+END</code></pre>
+
+<p>Vyskočení z procedury</p>
+<pre><code>PROCEDURE LEAVE_POKUS2();
+BEGIN
+...
+  IF ... THEN LAEVE LEAVE_POKUS2; END IF;
+...
+END</code></pre>
+
+
+
+<table class="navigace" border="0" width="100%"  bgcolor="#FFFFBF"><tr> <td
+width="20" align="center"><img class="floatno" src="../images/prev.gif"
+width="15" height="13" alt="&lt;&shy;" title="Předcházející téma"
+border="0"></td><td width="25%"><a
+href="HE_SQL2_REPEAT.htm">Příkaz REPEAT</a></td> <td width="25%"
+align="right"><img class="floatno" src="../images/up.gif" width="13"
+height="15" alt="Nahoru" title="O jednu úroveň výš" border="0"
+align="middle"></td><td width="25%"><a href="HE_SQL2_RIDICIPRIKAZY.htm">Řídící příkazy</a></td>
+<td width="25%" align="right"><a
+href="HE_SQL2_FOR.htm">Příkaz FOR</a></td><td width="20"
+align="center"><img class="floatno" src="../images/next.gif" width="15"
+height="13" alt="&shy;&gt;" title="Následující téma" border="0"></td>
+</tr></table>
+</body>
+</html>

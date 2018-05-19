@@ -1,0 +1,980 @@
+<html><head> 
+ 
+
+
+<link rel="SHORTCUT ICON" href="http://www.webguru.cz/favicon.ico">
+
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1250">
+
+<meta http-equiv="Cache-control" content="no-cache">
+
+<meta http-equiv="Pragma" content="no-cache">
+
+<meta http-equiv="Expires" content="0">
+
+<meta name="robots" content="ALL,FOLLOW">
+
+<meta http-equiv="Content-language" content="cs">
+
+<meta name="description" content="Informační server kompletně zaměřený na zdroje pojednávající o PHP - zajímavé články, dokumentaci, knihy, nástroje (editory, debuggery..), diskuse, hotové aplikace a další informační servery.">
+
+<meta name="keywords" content="PHP,PHP4,PHP3,MySQL,Apache,HTTP,GD,session,cookie,skripty,anotace,články,knihy,nástroje,servery,PHP/FI,www.php.net,instalace,Linux,Unix,Windows,GTK,databáze,soubory,články,info,historie,programování">
+
+<meta name="DC.Identifier" content="(SCHEME=ISSN) 12137952"><title>WEBGURU : Jednoduchý DUMP MySQL databáze</title>
+
+
+
+
+<link rel="STYLESHEET" type="text/css" href="view.php_soubory/css.css">
+<link rel="STYLESHEET" type="text/css" href="view.php_soubory/css.css"></head><body leftmargin="0" topmargin="0" marginheight="0" marginwidth="0">
+<table align="center" cellpadding="0" cellspacing="0" width="780">
+<tbody><tr>
+<td align="center" valign="top" width="25%">
+
+
+<table class="main" style="" align="center" cellpadding="3" cellspacing="0" width="780">
+
+<tbody><tr bgcolor="#3a4d7c">
+
+<td colspan="2" style="" align="left">
+
+<span class="text1"><font color="#ffffff"><strong>WEBGURU.cz doporučuje: </strong>: 
+
+<a href="http://www.php.net/" target="_blank"><font color="#ffffff">PHP.net</font></a><font color="#ffffff"> | 
+
+<a href="http://www.mysql.com/" target="_blank"><font color="#ffffff">MySQL.com</font></a><font color="#ffffff"> | 
+
+<a href="http://www.apache.org/" target="_blank"><font color="#ffffff">Apache.org</font></a><font color="#ffffff"> | 
+
+	<a href="http://www.zend.com/" target="_blank"><font color="#ffffff">Zend.com</font></a><font color="#ffffff"> | 
+
+	<a href="http://www.phpbuilder.com/" target="_blank"><font color="#ffffff">PHPBuilder.com</font></a><font color="#ffffff"> | 
+
+	<a href="http://www.phpwizard.com/" target="_blank"><font color="#ffffff">PHPWizard.com</font></a><font color="#ffffff"> | 
+
+	<a href="http://casopis.programator.cz/" target="_blank"><font color="#ffffff">Casopis.programator.cz</font></a><font color="#ffffff"> | 
+
+	<a href="http://javascript.programator.cz/" target="_blank"><font color="#ffffff">JSP</font></a>
+
+</font></font></font></font></font></font></font></font></span>
+
+<!-- NAVRCHOLU.cz -->
+
+<font color="#ffffff"><font color="#ffffff"><font color="#ffffff"><font color="#ffffff"><font color="#ffffff"><font color="#ffffff"><font color="#ffffff"><font color="#ffffff"><script language="JavaScript" type="text/javascript">
+
+<!--
+
+document.write("<IMG SRC=\"http://www.navrcholu.cz/cgi-bin/4web/nv_referer?id=32005&ref=" + escape(top.document.referrer) + "\" WIDTH=1 HEIGHT=1 ALT=\"\" BORDER=0>");
+
+// -->
+
+</script><img src="view.php_soubory/nv_referer.htm" alt="" border="0" height="1" width="1">
+
+<!-- NAVRCHOLU.cz - konec -->
+
+
+
+<script language="JavaScript">
+
+<!--
+
+document.write ('<img src="http://www.toplist.cz/count.asp?id=30130&logo=blank&http='+escape(document.referrer)+'&wi='+escape(window.screen.width)+'&he='+escape(window.screen.height)+'&cd='+escape(window.screen.colorDepth)+'" width=1 height=1 border=0 alt="TOPlist">'); 
+
+//-->
+
+</script><img src="view.php_soubory/count.gif" alt="TOPlist" border="0" height="1" width="1">
+
+<noscript><img SRC="http://www.toplist.cz/count.asp?id=30130&logo=blank" border="0" alt="TOPlist" WIDTH="1" HEIGHT="1"></noscript>
+
+<!--
+<script language="JavaScript" src="http://vc.webguru.cz/kod.js"></script>
+
+<script language="JavaScript">
+
+	Zapocitej(1,0,'c84fe2b1db096ae5aebf552d9f443f08');
+
+</script>
+//-->
+
+
+	
+
+<span class="text1"><font color="#ffffff">(online 14
+)</font></span>
+
+	</font></font></font></font></font></font></font></font></td>
+
+	</tr>	
+
+
+
+	<tr bgcolor="#4d629b">
+
+	
+
+<td align="left" width="200">
+
+<a href="http://www.webguru.cz/"><img src="view.php_soubory/logo.gif" alt="WEBGURU - informace o PHP." border="0" height="70"></a>
+
+
+
+		
+
+</td>
+
+<td align="center" bgcolor="#4a619c" width="630">
+
+<table border="0" cellpadding="0" cellspacing="0" width="10%">
+
+	<tbody><tr><td align="center">&nbsp;
+	<a class="text1" href="http://www.webguru.cz/reklama/"><font color="#ffffff" size="1">Inzerujte na WEBGURU !!!</font></a>
+
+	
+
+	</td></tr>		
+
+</tbody></table>
+
+
+
+</td>
+
+	</tr>	  
+
+<tr bgcolor="#3a4d7c">
+
+  	<td colspan="2" style="" align="left" valign="middle">
+
+	<span class="text2">
+
+	<a title="Hlavní strana WEBGURU.cz" href="http://www.webguru.cz/"><font color="#ffffff"><strong>Hlavní strana</strong></font></a><font color="#ffffff"> |
+
+	<a title="Nejúspěšnější zdroje" href="http://www.webguru.cz/servis/nejuspesnejsi.php"><font color="#ffffff">Nejúspěšnější zdroje</font></a><font color="#ffffff"> | 
+
+	<a title="Nejlépe hodnocené zdroje" href="http://www.webguru.cz/servis/nejhodnocene.php"><font color="#ffffff">Nejlépe hodnocené zdroje</font></a><font color="#ffffff"> |
+
+<img src="view.php_soubory/dir.gif" alt="" align="absmiddle" border="0" height="16" width="16"><a title="Stáhněte si některé zdroje přímo z WEBGURU" href="http://www.webguru.cz/download/"><font color="#ffffff">Download centrum</font></a> </font> | 
+
+<a title="Novinky na WEBGURU.cz" href="http://www.webguru.cz/news/"><font color="#ffffff">Novinky na WEBGURU</font></a> </font> | 
+
+<a title="Přehled prací na WEBGURU.cz" href="http://www.webguru.cz/prace/index.php"><font color="#ffffff">Přehled prací</font></a> |</font>  
+
+
+
+</span></td>		
+
+</tr>	
+
+</tbody></table>
+
+<script language="JavaScript">
+
+function favorite()
+
+{
+
+window.external.AddFavorite("http://www.webguru.cz","WEBGURU.cz - informace o PHP");
+
+}
+
+</script>
+
+<table class="main_border" align="center" border="0" cellpadding="2" cellspacing="0" width="780">
+
+	<tbody><tr bgcolor="#4a619c">
+
+		<td class="text1" style="" align="left">
+
+&nbsp;<a href="http://www.webguru.cz/" onclick="javascript:this.style.behavior='url(#default#homepage)';this.setHomePage('http://www.webguru.cz/');">
+
+<font color="#cae2f7">+ Nastavit jako homepage</font>
+
+</a>&nbsp;<a href="http://www.webguru.cz/" onclick="favorite()"><font color="#cae2f7">+ Přidat mezi oblíbené</font></a>
+
+</td>	
+
+<td style="" class="text2" align="right">
+
+<img src="view.php_soubory/webscript.gif" alt="" align="absmiddle" border="0">&nbsp;
+
+<font color="#ffffff"><a href="http://www.webguru.cz/servis/login.php" title="Přihlásit se do systému"><font color="#ffffff"><strong>Uživatel: Anonym</strong></font></a><font color="#ffffff"><strong></strong></font>
+
+
+
+</font></td>
+
+
+
+	</tr>	
+
+</tbody></table></td>
+</tr>
+
+	<tr>
+		<td class="main" valign="top">
+<table class="main_border" cellpadding="7">
+<tbody><tr>
+<td valign="top" width="780">
+<table class="nav" border="0" cellpadding="2" cellspacing="1" width="100%">
+	<tbody><tr>
+		<td class="text2"><b>
+		<strong><a href="http://www.webguru.cz/">WEBGURU</a> : 	<a href="http://www.webguru.cz/clanky/">tisk na webguru</a></strong>
+		</b></td>
+	</tr>	
+</tbody></table>
+<table border="0" cellpadding="5" cellspacing="0" width="100%">
+	<tbody><tr>
+	<td class="text2"><br>
+		<h2>Jednoduchý DUMP MySQL databáze</h2>
+	 <strong>Nedávno
+jsem narazil na problém automatické zálohy MySQL databáze. Potřeboval
+jsem napsat PHP skript, který by automaticky stáhl celou databázi -
+strukturu a data. Potřeboval jsem tento skript vytvořit kompletně v PHP
+bez použití SHELLu. Výsledky snažení jsou zde.</strong><br>
+	 <br>
+	 
+	 
+	<p>Celý
+skript je velmi jednoduchý a využívá zjednodušeného kódu populárního
+phpMyAdmina. Konkrétně jeho dvou PHP skriptů. Základem celého skriptu
+jsou dvě funkce. První z MySQL databáze vyexportuje strukturu tabulky a
+druhá pak již vyexportuje jednotlivé řádky. </p>
+
+<table cellpadding="1" cellspacing="10" width="100%"><tbody><tr><td bgcolor="#000080">
+<table class="kod" cellpadding="3" cellspacing="0" width="100%"><tbody><tr><td>
+<pre>function GetTableDef($table, $crlf)
+{
+	// MySQL &gt;= 3.23.20
+	$schema_create = "";
+	$schema_create .= "DROP TABLE IF EXISTS $table;$crlf";
+	$result = mysql_query("SHOW CREATE TABLE $table");
+	$data=mysql_fetch_array($result);
+	$schema_create .= $data[1] . ";$crlf$crlf";
+	mysql_free_result($result);
+	return $schema_create;
+} // end of the 'GetTableDef()' function
+</pre>
+</td></tr></tbody></table>
+</td></tr></tbody></table>
+
+<p>Funkci se předávají dva parametry: tabulka k exportu ($table) a znak
+použitý k ukončení řádku ($crlf). Volání můžeme provést například
+takto:
+<table cellpadding="1" cellspacing="10" width="100%"><tbody><tr><td bgcolor="#000080">
+<table class="kod" cellpadding="3" cellspacing="0" width="100%"><tbody><tr><td>
+<pre>$res = GetTableDef("users","\n");
+</pre>
+</td></tr></tbody></table>
+</td></tr></tbody></table>
+
+</p><p>Do proměné $res se uloží struktura tabulky users. Např.:</p>
+
+<table cellpadding="1" cellspacing="10" width="100%"><tbody><tr><td bgcolor="#000080">
+<table class="kod" cellpadding="3" cellspacing="0" width="100%"><tbody><tr><td>
+<pre>DROP TABLE IF EXISTS users;
+CREATE TABLE users (
+  id int(11) NOT NULL auto_increment,
+  jmeno char(40) NOT NULL default '',
+  mail char(40) NOT NULL default '',
+  user char(15) NOT NULL default '',
+  pass char(50) NOT NULL default '',
+  PRIMARY KEY  (id)
+) TYPE=MyISAM; 
+</pre>
+</td></tr></tbody></table>
+</td></tr></tbody></table>
+
+<p>Druhá funkce je již o něco složitější a slouží k exportu
+jednotlivých záznamů z tabulky. Parametry jsou stejné jako u předchozí
+funkce.</p>
+
+<table cellpadding="1" cellspacing="10" width="100%"><tbody><tr><td bgcolor="#000080">
+<table class="kod" cellpadding="3" cellspacing="0" width="100%"><tbody><tr><td>
+<pre>function GetTableContent($table,$crlf)
+{
+global $use_backquotes;
+global $rows_cnt;
+global $current_row;
+
+$schema_insert="";
+$local_query = "SELECT * FROM $table";
+$result = mysql_query($local_query);
+if ($result != FALSE) {
+	$fields_cnt = mysql_num_fields($result);
+	$rows_cnt   = mysql_num_rows($result);
+	// Checks whether the field is an integer or not
+	for ($j = 0; $j &lt; $fields_cnt; $j++) {
+	$field_set[$j] = mysql_field_name($result, $j);
+	$type          = mysql_field_type($result, $j);
+	if ($type == 'tinyint' || $type == 'smallint' || <br>$type == 'mediumint' || $type == 'int' || $type == 'bigint'  ||$type <br>== 'timestamp') {
+	$field_num[$j] = TRUE;
+	} else {
+	$field_num[$j] = FALSE;
+	}
+	} // end for
+	// Sets the scheme
+	//$schema_insert .= "INSERT INTO $table VALUES (";
+        //\x08\\x09, not required
+	$search       = array("\x00", "\x0a", "\x0d", "\x1a");
+ 	$replace      = array('\0', '\n', '\r', '\Z');
+	$current_row  = 0;
+	while ($row = mysql_fetch_row($result)) {
+	$schema_insert .= "INSERT INTO $table VALUES (";
+	$current_row++;
+	for ($j = 0; $j &lt; $fields_cnt; $j++) {
+		if (!isset($row[$j])) {
+			$values[]     = 'NULL';
+		} else if ($row[$j] == '0' || $row[$j] != '') {
+			// a number
+			if ($field_num[$j]) {
+				$values[] = $row[$j];
+			}
+			// a string
+			else {
+   $values[] = "'" . str_replace($search, $replace, $row[$j]) . "'";
+	}
+			} else {
+				$values[]     = "''";
+			} // end if
+		} // end for
+		$max=SizeOf($values);
+	for ($i=0;$i&lt;$max;$i++){
+		if ($i!=0) $schema_insert .= ", ";
+			$schema_insert .= $values[$i] ;
+		}
+		$schema_insert .= ");$crlf";
+		unset($values);
+	} // end while
+	} // end if ($result != FALSE)
+	mysql_free_result($result);
+	return $schema_insert;
+} // end of the 'GetTableContent()' function
+</pre>
+</td></tr></tbody></table>
+</td></tr></tbody></table>
+
+<p>Funkce se opět volá takto:</p>
+
+<table cellpadding="1" cellspacing="10" width="100%"><tbody><tr><td bgcolor="#000080">
+<table class="kod" cellpadding="3" cellspacing="0" width="100%"><tbody><tr><td>
+<pre>$res = GetTableContent("users","\n");
+</pre>
+</td></tr></tbody></table>
+</td></tr></tbody></table>
+
+<p>V proměné $res tentokrát budou jednotlivé inserty, např.:</p>
+
+<table cellpadding="1" cellspacing="10" width="100%"><tbody><tr><td bgcolor="#000080">
+<table class="kod" cellpadding="3" cellspacing="0" width="100%"><tbody><tr><td>
+<pre>INSERT INTO p_autor VALUES (1, 'jmeno', 'email@neco.cz', 'user', 'pass');
+</pre>
+</td></tr></tbody></table>
+</td></tr></tbody></table>
+
+<p>K ukončení řádku se vždy použije obsah proměné $crlf, v tomto
+případě tedy "\n". Zavoláním těchto funkcí tedy získáme jednu tabulku z
+databáze a to jak její strukturu, tak její obsah. Jenže mi potřebujeme
+celou db a ne jen jednu tabulku. Proto si ještě načteme jména všech
+tabulek do pole.</p>
+
+<table cellpadding="1" cellspacing="10" width="100%"><tbody><tr><td bgcolor="#000080">
+<table class="kod" cellpadding="3" cellspacing="0" width="100%"><tbody><tr><td>
+<pre>$tables=mysql_list_tables(db_name);
+$num_tables=mysql_numrows($tables);
+</pre>
+</td></tr></tbody></table>
+</td></tr></tbody></table>
+
+<p>Aby celý skript fungoval musíme pochopitelně nejdříve zavolat funkci
+pro připojení k db, proto zde již uvedu celý skript, který bude
+využívat ony dvě víše zmíněné funkce.</p>
+
+<table cellpadding="1" cellspacing="10" width="100%"><tbody><tr><td bgcolor="#000080">
+<table class="kod" cellpadding="3" cellspacing="0" width="100%"><tbody><tr><td>
+<pre>// NASTAVENI SQL //
+Define("db_name","");            // jmeno databáze
+Define("db_host","localhost");   // server
+Define("db_user","");            // uživatelské jméno
+Define("db_pass","");            // a heslo
+
+// DALSI NASTAVENI
+$file_name="backup.sql"; // jmeno souboru pro DUMP
+$crlf="\n"; // nastaveni konce radku
+
+$dump_buffer="";  // Do této proměné si postupně uložíme DUMP
+@$dbspojeni=mysql_connect(db_host,db_user,db_pass);
+if (!$dbspojeni){
+	Die("Nelze navázat spojení s SQL.");
+}
+mysql_select_db(db_name);
+$tables=mysql_list_tables(db_name);
+// Zde zjistíme počet tabulek v databázi
+$num_tables=mysql_numrows($tables);  
+$dump_buffer="#MySQL DUMP$crlf";
+
+for ($i=0;$i&lt;$num_tables;$i++){
+         // Zde zjistíme jméno i-té tabulky.
+	$table=mysql_tablename($tables,$i); 
+        // Zapíšeme informaci o jménu tabulky
+	$dump_buffer.="$crlf#Table name: $table$crlf$crlf";  
+         // Zapíšeme strukturu tabulky
+	$dump_buffer.=GetTableDef($table,"$crlf"); 
+        // Zapíšeme informaci o tom, že budou následovat INSERTy
+	$dump_buffer.="$crlf#DATA$crlf";
+        // Zapíšeme všechny INSERTy
+	$dump_buffer.=GetTableContent($table,"$crlf");  
+	$dump_buffer.="$crlf$crlf";
+}  // Celý cyklus se bude opakovat pro všechny tabulky v db
+mysql_close();
+$f=Fopen($file_name,"w");  // Otevřeme soubor pro zapsání DUMPu
+FPutS($f,$dump_buffer);  // a zapíšeme.
+FClose($f);
+// Tímto řádkem můžeme zajistit zobrazení DUMPu.
+//echo nl2br($dump_buffer);  
+</pre>
+</td></tr></tbody></table>
+</td></tr></tbody></table>
+
+<p>Je to poměrně jednoduché, že. Celý skript si můžete stáhnout <a href="http://www.webguru.cz/clanky/ukazky/mysqldump.zip">zde</a>.
+Takto napsaný skript by měl fungovat spolehlivě. Kdo zná zdrojáky
+phpMyAdmina zná zároveň původ oněch dvou funkcí. Tento skript je dobře
+použitelný právě pro automatickou zálohu db. Upozorňuji, že pro
+zálohování velký db není vhodný. Do proměné $dump_buffer by se nemělo
+dostat víc dat, než je povoleno v nastavení PHP (vlastně nemůže se
+dostat). To je možné obejít průběžným ukládáním do souboru a ne na
+konci najednou. Doufám, že Vám toto ušetří práci a hledání v diskusních
+fórech.</p>													 
+  </td>
+	</tr>
+</tbody></table>
+<hr color="#000080" size="1">
+<table class="text2" align="center" border="0" cellpadding="3" cellspacing="1" width="100%">
+<tbody><tr bgcolor="#4a619c">
+	  <td colspan="2" align="left">
+	  <span class="text2"><font color="#ffffff"><b>
+	  Další články ze stejné kategorie
+	  </b></font></span></td>
+	</tr>
+<tr>
+	  <td>
+
+	<span class="text2">
+	<li><a href="http://www.webguru.cz/clanky/view.php?id=118">Funkce: ImageTTFTextBox</a></li></span><span class="text1">, 26.05.2003
+		
+	<span class="text2">
+	<li><a href="http://www.webguru.cz/clanky/view.php?id=107">Nákupní košík (2.)</a></li></span><span class="text1">, 16.12.2002
+		
+	<span class="text2">
+	<li><a href="http://www.webguru.cz/clanky/view.php?id=106">Nákupní košík (1.)</a></li></span><span class="text1">, 11.12.2002
+		
+	<span class="text2">
+	<li><a href="http://www.webguru.cz/clanky/view.php?id=94">Generování dokumentů PDF pomocí PHP a fpdf.php (4. díl)</a></li></span><span class="text1">, 09.09.2002
+		
+	<span class="text2">
+	<li><a href="http://www.webguru.cz/clanky/view.php?id=93">Generování dokumentů PDF pomocí PHP a fpdf.php (3. díl)</a></li></span><span class="text1">, 03.09.2002
+		
+	<span class="text2">
+	<li><a href="http://www.webguru.cz/clanky/view.php?id=92">Generování dokumentů PDF pomocí PHP a fpdf.php (2. díl)</a></li></span><span class="text1">, 30.08.2002
+		
+	<span class="text2">
+	<li><a href="http://www.webguru.cz/clanky/view.php?id=91">Generování dokumentů PDF pomocí PHP a fpdf.php (1. díl)</a></li></span><span class="text1">, 27.08.2002
+		
+	<span class="text2">
+	<li><a href="http://www.webguru.cz/clanky/view.php?id=90">PHP komentované ukázky I.</a></li></span><span class="text1">, 22.08.2002
+		
+	<span class="text2">
+	<li><a href="http://www.webguru.cz/clanky/view.php?id=89">Generování XLS (Excel) souborů</a></li></span><span class="text1">, 19.08.2002
+		
+	<span class="text2">
+	<li><a href="http://www.webguru.cz/clanky/view.php?id=88">Generování archivů ZIP pomocí PHP</a></li></span><span class="text1">, 15.08.2002
+			  </span></span></span></span></span></span></span></span></span></span></td>
+</tr>
+<tr>
+<td align="right">
+<span class="text1"><a href="http://www.webguru.cz/clanky/all.php?id=4">Zobrazit všechny články v rubrice</a>
+</span></td>
+</tr>
+ 
+</tbody></table>
+
+		
+
+<hr color="#000080" size="1">
+	<table class="text2" align="center" border="0" cellpadding="3" cellspacing="1" width="100%">
+<tbody><tr bgcolor="#4a619c">
+	  <td align="left">
+	  <span class="text2"><font color="#ffffff"><b>
+	 Komentář k článku&nbsp;<strong>"Jednoduchý DUMP MySQL databáze"</strong>
+	  </b></font></span></td>
+	</tr>
+	
+	<tr bgcolor="#f4f4f4">
+	  <td class="text1" align="left">
+&nbsp; <a href="http://www.webguru.cz/clanky/komread1.php?id=77&amp;PHPSESSID=7724e6a0d0bfe1e2e79d66cf0a414fa8"><strong>RE:Je to pěkné, ale</strong></a>,&nbsp;&nbsp;<a href="mailto:noreply@anonym.cz">Anonym</a>,&nbsp;&nbsp;(08.09.2003 15:02:05)
+	  
+	  </td>
+	</tr>	
+	
+	<tr bgcolor="#f4f4f4">
+	  <td class="text1" align="left">
+&nbsp; <a href="http://www.webguru.cz/clanky/komread1.php?id=77&amp;PHPSESSID=7724e6a0d0bfe1e2e79d66cf0a414fa8"><strong>Je to pěkné, ale</strong></a>,&nbsp;&nbsp;<a href="mailto:noreply@anonym.cz">Anonym</a>,&nbsp;&nbsp;(21.09.2002 08:22:13)
+	  
+	  </td>
+	</tr>	
+	
+	<tr bgcolor="#f4f4f4">
+	  <td class="text1" align="left">
+&nbsp; <a href="http://www.webguru.cz/clanky/komread1.php?id=77&amp;PHPSESSID=7724e6a0d0bfe1e2e79d66cf0a414fa8"><strong>Také jsem to zkoušel...</strong></a>,&nbsp;&nbsp;<a href="mailto:noreply@anonym.cz">Anonym</a>,&nbsp;&nbsp;(13.07.2002 11:05:26)
+	  
+	  </td>
+	</tr>	
+	
+	<tr bgcolor="#f4f4f4">
+	  <td class="text1" align="left">
+&nbsp; <a href="http://www.webguru.cz/clanky/komread1.php?id=77&amp;PHPSESSID=7724e6a0d0bfe1e2e79d66cf0a414fa8"><strong>RE:Ano, pěkné...</strong></a>,&nbsp;&nbsp;<a href="mailto:soukupl@seznam.cz">soukupl</a>,&nbsp;&nbsp;(04.07.2002 19:14:29)
+	  
+	  </td>
+	</tr>	
+	
+	<tr bgcolor="#f4f4f4">
+	  <td class="text1" align="left">
+&nbsp; <a href="http://www.webguru.cz/clanky/komread1.php?id=77&amp;PHPSESSID=7724e6a0d0bfe1e2e79d66cf0a414fa8"><strong>Ano, pěkné...</strong></a>,&nbsp;&nbsp;<a href="mailto:noreply@anonym.cz">Anonym</a>,&nbsp;&nbsp;(04.07.2002 17:56:39)
+	  
+	  </td>
+	</tr>	
+	<tr bgcolor="#ebebeb">
+	  <td class="text1" align="center">
+	  <a href="http://www.webguru.cz/clanky/komadd.php?id=77&amp;PHPSESSID=7724e6a0d0bfe1e2e79d66cf0a414fa8">Přidejte svůj komentář.</a>
+	  </td>
+	</tr>		
+</tbody></table><table border="0" cellpadding="5" cellspacing="5" width="100%">
+	<tbody><tr>
+		<td>
+	</td>
+	</tr>	
+</tbody></table>
+ 
+
+  </td>
+
+<td class="menu" align="center" valign="top" width="185">
+		<input name="PHPSESSID" value="7724e6a0d0bfe1e2e79d66cf0a414fa8" type="hidden"><input name="login" value="true" type="hidden"><table cellpadding="0" cellspacing="0" width="192"><form name="form" action="http://www.webguru.cz/servis/login.php" method="post"></form><tbody><tr><td colspan="3" background="view.php_soubory/top.gif"><img src="view.php_soubory/top.gif" alt="" border="0"></td></tr><tr><td colspan="3" align="center" background="view.php_soubory/poz.gif"><img src="view.php_soubory/logwbg.gif" alt="" border="0"></td></tr><tr><td colspan="3" align="center" background="view.php_soubory/poz.gif"><input name="loglogin" onfocus="if (this.value=='login') {this.value=''}" value="login" type="text"></td></tr><tr><td colspan="3" align="center" background="view.php_soubory/poz.gif"><input name="logheslo" value="heslo" onfocus="if (this.value=='heslo') {this.value=''}" type="password"></td></tr><tr><td colspan="3" align="center" background="view.php_soubory/poz.gif"><input src="view.php_soubory/ok.gif" type="image"></td></tr><tr><td colspan="3" background="view.php_soubory/bot.gif"><img src="view.php_soubory/bot.gif" alt="" border="0"></td></tr>		</tbody></table>
+<hr>
+ 	  <input name="PHPSESSID" value="7724e6a0d0bfe1e2e79d66cf0a414fa8" type="hidden"><table cellpadding="0" cellspacing="" width="155"><form action="http://www.webguru.cz/moduly/sekce/search.php"></form><tbody><tr><td colspan="3" background="view.php_soubory/top.gif"><img src="view.php_soubory/top.gif" alt="" border="0"></td></tr><tr><td colspan="3" align="center" background="view.php_soubory/poz.gif"><img src="view.php_soubory/najdiwbg.gif" alt="" border="0"></td></tr><tr><td colspan="3" align="center" background="view.php_soubory/poz.gif"><input class="text1" name="hl_text" type="text"></td></tr><tr><td colspan="3" align="center" background="view.php_soubory/poz.gif"><input src="view.php_soubory/ok.gif" type="image"></td></tr><tr><td colspan="3" background="view.php_soubory/bot.gif"><img src="view.php_soubory/bot.gif" alt="" border="0"></td></tr></tbody></table>
+<hr noshade="noshade" size="1" width="100%">
+			<table border="0" cellpadding="2" cellspacing="1" width="100%">
+	<tbody><tr bgcolor="#4a619c">
+		<td class="text2" align="left">
+&nbsp;<font color="#ffffff"><strong>::&nbsp;Informace o článku</strong></font>
+        		</td>
+        	</tr>	
+        	<tr bgcolor="#eeeeee">
+        		<td class="text2">
+	Autor:&nbsp;<a href="mailto:soukupl@seznam.cz"><strong>Ladislav Soukup</strong></a>
+	Publikováno:&nbsp;<strong>28.06.2002</strong>
+	Počet čtenářů:&nbsp;<strong>4135</strong>
+	<hr>
+&nbsp;<img src="view.php_soubory/print.gif" alt="" align="absmiddle" border="0" height="11" width="15">
+	<a target="_blank" href="http://www.webguru.cz/clanky/print.php?id=77&amp;PHPSESSID=7724e6a0d0bfe1e2e79d66cf0a414fa8">
+	Vytisknout článek</a><br>
+&nbsp;<img src="view.php_soubory/mail.gif" alt="" align="absmiddle" border="0" height="11" width="15">
+	<a href="http://www.webguru.cz/clanky/mail.php?id=77&amp;PHPSESSID=7724e6a0d0bfe1e2e79d66cf0a414fa8">
+	Odeslat na email</a><br>
+&nbsp;<img src="view.php_soubory/icon38.gif" alt="" align="absmiddle" border="0" height="15" width="15">
+	<span class="text2"><a href="http://www.webguru.cz/clanky/all.php?id=4&amp;PHPSESSID=7724e6a0d0bfe1e2e79d66cf0a414fa8">Další články v kategorii</a></span><br>	
+&nbsp;<img src="view.php_soubory/authors.gif" alt="" align="absmiddle" border="0">
+	<span class="text2"><a href="http://www.webguru.cz/webguru/info.php?id=19">Další články autora</a></span>		
+
+</td>
+</tr>
+</tbody></table>
+<hr noshade="noshade" size="1" width="100%">		 		
+		
+			<table class="text2" border="0" cellpadding="2" cellspacing="1" width="100%">
+	<tbody><tr bgcolor="#4a619c">
+		<td class="text1" align="left">
+&nbsp;<font color="#ffffff"><strong>::&nbsp;Ohodnoťte článek</strong></font>
+        		</td>
+        	</tr>	
+        	<tr bgcolor="#eeeeee">
+        		<td>
+				Hodnocení: 
+				<strong><a title="Vynikající" href="http://www.webguru.cz/clanky/view.php?id=77&amp;znamka=1&amp;PHPSESSID=7724e6a0d0bfe1e2e79d66cf0a414fa8">1</a> |
+				<a title="Chvalitebný" href="http://www.webguru.cz/clanky/view.php?id=77&amp;znamka=2&amp;PHPSESSID=7724e6a0d0bfe1e2e79d66cf0a414fa8">2</a> |
+				<a title="Dobrý" href="http://www.webguru.cz/clanky/view.php?id=77&amp;znamka=3&amp;PHPSESSID=7724e6a0d0bfe1e2e79d66cf0a414fa8">3</a> |
+				<a title="Uspokojivý" href="http://www.webguru.cz/clanky/view.php?id=77&amp;znamka=4&amp;PHPSESSID=7724e6a0d0bfe1e2e79d66cf0a414fa8">4</a> |
+				<a title="Propadák" href="http://www.webguru.cz/clanky/view.php?id=77&amp;znamka=5&amp;PHPSESSID=7724e6a0d0bfe1e2e79d66cf0a414fa8">5</a></strong>
+				 				Známka: <strong>Dobrý</strong>&nbsp;
+					 (4036/1242)				
+</td>
+</tr>
+</tbody></table>
+<hr noshade="noshade" size="1" width="100%">		 
+
+		<!--<table cellpadding=2 cellspacing=1 width=192 border=0>
+<tr bgcolor="#394973">
+<td class="text2"  align="left">
+&nbsp;<font color="#FFFFFF">
+<strong>::&nbsp;Reklama</strong></font>
+</td>
+</tr>	
+<tr bgcolor="#E3E8F2">
+<td align="left" class="text2">
+<br>
+<p align="center">
+<a href="http://www.linuxsoft.cz" title="Linux Software" target="_blank">
+	<img src="http://www.webguru.cz/img/reklama/linuxsoft.png" border="0" alt="Linux Software">
+</a>
+</p>
+<p align="justify">
+Adresář Software pro Linux s více než 6000 záznamy. Každý měsíc soutěž o 
+6.000 Kč za nejvíce zadaných SW záznamů. Tutoriály PHP, html, 
+JavaScript, CSS, C/C++, Java, XML. Články s linuxovou tématikou. Linux 
+Shop.
+
+</p>
+</td>
+</tr>	
+</table>
+<hr width="192" size="1" noshade>-->
+	<table class="text2" border="0" cellpadding="2" cellspacing="1" width="192">
+	<tbody><tr bgcolor="#394973">
+		<td class="text2" align="left">
+&nbsp;<font color="#ffffff">
+<strong>::&nbsp;Zdroje informací</strong></font>
+        		</td>
+        	</tr>	
+        	<tr bgcolor="#e3e8f2">
+        		<td>
+				<img src="view.php_soubory/bodka.gif" alt="" align="absmiddle" border="0" height="13" width="16">
+		<a href="http://www.webguru.cz/clanky/">Tisk na WEBGURU</a><br>
+<img src="view.php_soubory/bodka.gif" alt="" align="absmiddle" border="0" height="13" width="16">
+<a href="http://www.webguru.cz/diskuse/">Diskusní fóra</a>
+<br>
+<img src="view.php_soubory/bodka.gif" alt="" align="absmiddle" border="0" height="13" width="16">
+<a href="http://www.webguru.cz/slovnik_pojmu/">Slovník pojmů</a> 
+</td>
+</tr>
+</tbody></table>
+<hr noshade="noshade" size="1" width="192">
+		<table class="text2" border="0" cellpadding="2" cellspacing="1" width="192">
+	<tbody><tr bgcolor="#394973">
+		<td class="text2" align="left">
+&nbsp;<font color="#ffffff">
+<strong>::&nbsp;Odkazovník</strong></font>
+        		</td>
+        	</tr>	
+       	<tr bgcolor="#e3e8f2">
+		<td>
+				<img src="view.php_soubory/bodka.gif" alt="" align="absmiddle" border="0" height="13" width="16">
+<a href="http://www.webguru.cz/obsah/anotace_clanku/">Anotace článků</a><br>
+		<img src="view.php_soubory/bodka.gif" alt="" align="absmiddle" border="0" height="13" width="16">
+		<a href="http://www.webguru.cz/obsah/dokumentace/">Dokumentace</a><br>
+		<img src="view.php_soubory/bodka.gif" alt="" align="absmiddle" border="0" height="13" width="16">
+		<a href="http://www.webguru.cz/obsah/hotove_aplikace/">Hotové aplikace</a><br>
+		<img src="view.php_soubory/bodka.gif" alt="" align="absmiddle" border="0" height="13" width="16">
+		<a href="http://www.webguru.cz/prace/index.php">Přehled prací</a><br>
+		<img src="view.php_soubory/bodka.gif" alt="" align="absmiddle" border="0" height="13" width="16">
+		<a href="http://www.webguru.cz/obsah/knihy/">Knihy</a><br>
+				<img src="view.php_soubory/bodka.gif" alt="" align="absmiddle" border="0" height="13" width="16">
+		<a href="http://www.webguru.cz/obsah/nastroje/">Nástroje</a><br>
+				<img src="view.php_soubory/bodka.gif" alt="" align="absmiddle" border="0" height="13" width="16">
+		<a href="http://www.webguru.cz/obsah/diskuse/">Diskuse</a><br>
+				<img src="view.php_soubory/bodka.gif" alt="" align="absmiddle" border="0" height="13" width="16">
+		<a href="http://www.webguru.cz/obsah/servery/">
+		Servery</a>
+		
+        		</td>
+        	</tr>	
+        </tbody></table>
+		<hr noshade="noshade" size="1" width="192">
+		<script language="JavaScript">
+function CheckEmail()
+{
+if(window.document.forms.news.tnews.value.indexOf('@')<2 || window.document.forms.news.tnews.value.indexOf('.')<1 || window.document.forms.news.tnews.value.indexOf<6 || window.document.forms.news.tnews.value=='jmeno@server.cz') {alert('Zadejte platný email!'); return false}
+return true
+}
+</script>	
+<input name="PHPSESSID" value="7724e6a0d0bfe1e2e79d66cf0a414fa8" type="hidden"><table cellpadding="0" cellspacing="0" width="192"><form onsubmit="return CheckEmail()" name="news" action="http://www.webguru.cz/servis/login.php"></form><tbody><tr><td colspan="3" background="view.php_soubory/top.gif"><img src="view.php_soubory/top.gif" alt="" border="0"></td></tr><tr><td colspan="3" align="center" background="view.php_soubory/poz.gif"><img src="view.php_soubory/newswbg.gif" alt="" border="0"></td></tr><tr><td colspan="3" align="center" background="view.php_soubory/poz.gif"><input value="jmeno@server.cz" onfocus="if (this.value=='jmeno@server.cz') {this.value=''}" name="tnews" class="text1" type="text"></td></tr><tr><td class="text1" colspan="3" align="center" background="view.php_soubory/poz.gif"><input name="akce" checked="checked" value="pri" type="radio"><font color="#ffffff">Přihlásit<input name="akce" value="od" type="radio">Odhlásit</font></td></tr><tr><td colspan="3" align="center" background="view.php_soubory/poz.gif"><input src="view.php_soubory/ok.gif" type="image"></td></tr><tr><td colspan="3" background="view.php_soubory/bot.gif"><img src="view.php_soubory/bot.gif" alt="" border="0"></td></tr></tbody></table>
+<hr noshade="noshade" size="1" width="192">
+<!--
+<TABLE width="192" cellpadding="0" cellspacing="0"><form onSubmit="return CheckEmail()" name="news" action="http://www.webguru.cz/servis/login.php"><input type="hidden" name="PHPSESSID" value="7724e6a0d0bfe1e2e79d66cf0a414fa8" /><tr><td colspan="3" background="http://www.webguru.cz/img/form/top.gif"><img src="http://www.webguru.cz/img/form/top.gif" border="0" alt=""></td></tr><tr><td colspan="3" align="center" background="http://www.webguru.cz/img/form/poz.gif"><img src="http://www.webguru.cz/img/form/newswbg.gif" border="0" alt=""></td></tr><tr><td colspan="3" align="center" background="http://www.webguru.cz/img/form/poz.gif"><input value="jmeno@server.cz" onFocus="if (this.value=='jmeno@server.cz') {this.value=''}" name="tnews" class="text1" type="text"></td></tr><tr><td class="text1" colspan="3" align="center" background="http://www.webguru.cz/img/form/poz.gif"><input type="radio" name="akce" checked value="pri"><font color="#FFFFFF">Přihlásit<input type="radio" name="akce" value="od">Odhlásit</td></tr><tr><td colspan="3" align="center" background="http://www.webguru.cz/img/form/poz.gif"><input type=image src="http://www.webguru.cz/img/form/ok.gif"></td></tr><tr><td colspan="3" background="http://www.webguru.cz/img/form/bot.gif"><img src="http://www.webguru.cz/img/form/bot.gif" border="0" alt=""></td></tr></form></table>
+<hr width=192 size=1 noshade>
+//-->
+
+		<table border="0" cellpadding="2" cellspacing="1" width="192">
+	<tbody><tr bgcolor="#394973">
+		<td class="text2" align="left">
+&nbsp;<font color="#ffffff">
+<strong>::&nbsp;PodNabídka</strong></font>
+        		</td>
+        	</tr>	
+							        	<tr bgcolor="#e3e8f2">
+		<td class="text2" align="left">
+		<img src="view.php_soubory/bodka.gif" alt="" align="absmiddle" border="0" height="13" width="16">		
+<a title="Stáhněte si některé zdroje přímo z WEBGURU" href="http://www.webguru.cz/download/index.php">Download centrum</a> <br>
+<img src="view.php_soubory/bodka.gif" alt="" align="absmiddle" border="0" height="13" width="16">		<a href="http://www.webguru.cz/servis/jakjdecas.php">Jak jde čas...</a><br>
+</td>
+        	</tr>	
+
+        </tbody></table>
+
+
+	<hr noshade="noshade" size="1" width="192">
+ 	<table border="0" cellpadding="3" cellspacing="1" width="192">
+	<tbody><tr bgcolor="#394973">
+		<td class="text2" align="left">
+&nbsp;<font color="#ffffff">
+<strong>::&nbsp;WEBGURU</strong></font>
+        		</td>
+        	</tr>	
+        	<tr bgcolor="#e3e8f2">
+		<td class="text2" align="left">
+<img src="view.php_soubory/bodka.gif" alt="" align="absmiddle" border="0" height="13" width="16">		<a href="http://www.webguru.cz/webguru/owebguru.php">O WEBGURU</a><br>
+ <img src="view.php_soubory/bodka.gif" alt="" align="absmiddle" border="0" height="13" width="16">		<a href="http://www.webguru.cz/webguru/kontakt.php">Kontakt</a><br>
+   <img src="view.php_soubory/bodka.gif" alt="" align="absmiddle" border="0" height="13" width="16">		<a href="http://www.webguru.cz/webguru/redakce.php">Redakce</a><br>
+  <img src="view.php_soubory/bodka.gif" alt="" align="absmiddle" border="0" height="13" width="16">	
+  <a href="http://www.webguru.cz/webguru/podpora.php">Podpořte WEBGURU</a><br>
+  <img src="view.php_soubory/bodka.gif" alt="" align="absmiddle" border="0" height="13" width="16">	
+  	<a href="http://www.webguru.cz/webguru/doporuceni.php">Doporučte WEBGURU</a><br>
+  <img src="view.php_soubory/bodka.gif" alt="" align="absmiddle" border="0" height="13" width="16">		<a href="http://www.webguru.cz/navstevni_kniha/">Návštěvní kniha</a><br>
+ 
+ 
+        		</td>
+        	</tr>	
+        </tbody></table>
+	<hr noshade="noshade" size="1" width="192">	<table class="text2" border="0" cellpadding="2" cellspacing="1" width="192">
+	<tbody><tr bgcolor="#394973">
+		<td class="text1" align="left">
+&nbsp;<font color="#ffffff">
+<strong>::&nbsp;Nejnovější články</strong></font>
+        		</td>
+        	</tr>	
+
+						<tr bgcolor="#e3e8f2">
+        		<td>
+<div class="ps">1. <a href="http://www.webguru.cz/clanky/view.php?id=121">PHP od začátku - 12. Output Control funkce</a></div><div class="pt">2. <a href="http://www.webguru.cz/clanky/view.php?id=120">PHP od začátku - 12. Soubory</a></div><div class="ps">3. <a href="http://www.webguru.cz/clanky/view.php?id=119">PHP od začátku - 11. MySQL</a></div><div class="pt">4. <a href="http://www.webguru.cz/clanky/view.php?id=118">Funkce: ImageTTFTextBox</a></div><div class="ps">5. <a href="http://www.webguru.cz/clanky/view.php?id=117">PHP od začátku - 10. MySQL</a></div>			
+</td>
+</tr>
+</tbody></table>
+<hr noshade="noshade" size="1" width="100%">		 
+	<table class="text2" border="0" cellpadding="2" cellspacing="1" width="192">
+	<tbody><tr bgcolor="#394973">
+		<td class="text1" align="left">
+&nbsp;<font color="#ffffff">
+<strong>::&nbsp;Nejčtenější články</strong></font>
+        		</td>
+        	</tr>	
+<tr bgcolor="#e3e8f2">
+        		<td>
+<div class="ps">1. <a href="http://www.webguru.cz/clanky/view.php?id=70">Hosting na WEBGURU.cz</a>&nbsp;(23386)<br><div class="pt">2. <a href="http://www.webguru.cz/clanky/view.php?id=119">PHP od začátku - 11. MySQL</a>&nbsp;(12961)<br><div class="ps">3. <a href="http://www.webguru.cz/clanky/view.php?id=110">Instalace PHP na Apache a IIS</a>&nbsp;(11933)<br><div class="pt">4. <a href="http://www.webguru.cz/clanky/view.php?id=117">PHP od začátku - 10. MySQL</a>&nbsp;(11800)<br><div class="ps">5. <a href="http://www.webguru.cz/clanky/view.php?id=55">PHP od začátku - 7. Formuláře</a>&nbsp;(11169)<br>			
+</div></div></div></div></div></td>
+</tr>
+</tbody></table>
+
+<hr noshade="noshade" size="1" width="100%">		<table class="text2" border="0" cellpadding="2" cellspacing="1" width="192">
+	<tbody><tr bgcolor="#394973">
+		<td class="text1" align="left">
+&nbsp;<font color="#ffffff">
+<strong>::&nbsp;WEBGURU.cz doporučuje</strong></font>
+        		</td>
+        	</tr>	
+        	        	<tr bgcolor="#e3e8f2">
+        		<td>
+<div class="ps">1. <a href="http://www.webguru.cz/clanky/view.php?id=27">Redakční systém JpoRtaL</a><br><div class="pt">2. <a href="http://www.webguru.cz/clanky/view.php?id=123">Ušetřete až 80 % datového přenosu</a><br><div class="ps">3. <a href="http://www.webguru.cz/clanky/view.php?id=27">Redakční systém JpoRtaL</a><br><div class="pt">4. <a href="http://www.webguru.cz/clanky/view.php?id=30">JpoRtaL v0.6.1</a><br><div class="ps">5. <a href="http://www.webguru.cz/clanky/view.php?id=22">Malý internetový obchod v PHP 3.díl</a><br>				
+ </div></div></div></div></div></td>
+</tr>
+</tbody></table>
+
+<hr noshade="noshade" size="1" width="100%">		
+ 	<table border="0" cellpadding="3" cellspacing="1" width="192">
+	<tbody><tr bgcolor="#394973">
+		<td class="text1" align="left">
+&nbsp;<font color="#ffffff">
+<strong>::&nbsp;Nenechte si ujít</strong></font>
+        		</td>
+        	</tr>	
+<tr bgcolor="#e3e8f2">
+		<td class="text1" align="left">
+<li class="text2"><a href="http://casopis.programator.cz/" target="_blank">Časopis Programátor</a> - časopis
+od programátorů programátorům.<br></li><li class="text2"><a href="http://www.minasite.cz/" target="_blank">MinaSite.cz</a> - vše co potřebujete vědet o PHP, WML a MySQL!<br></li><li class="text2"><a target="_blank" href="http://root.cz/">ROOT.cz</a> - denní zpravodajství ze světa
+Linuxu.<br>        		</li></td>
+        	</tr>	
+        </tbody></table>
+
+
+	<hr noshade="noshade" size="1" width="100%">
+ 	<table border="0" cellpadding="3" cellspacing="1" width="192">
+	<tbody><tr bgcolor="#394973">
+		<td class="text1" align="left">
+&nbsp;<font color="#ffffff">
+<strong>::&nbsp;Návštěvnost WEBGURU</strong></font>
+        		</td>
+        	</tr>	
+        	<tr bgcolor="#e3e8f2">
+		<td class="text1" align="center">
+<img src="view.php_soubory/count.png" alt="Návštěvníků/načtení" border="0" height="40" width="85">        		</td>
+        	</tr>	
+        </tbody></table>
+
+
+
+<center>
+		
+		</center><hr noshade="noshade" size="1" width="100%">
+ 	<table border="0" cellpadding="3" cellspacing="1" width="192">
+	<tbody><tr bgcolor="#394973">
+		<td class="text1" align="left">
+&nbsp;<font color="#ffffff">
+<strong>::&nbsp;Tip Slunečnice</strong></font>
+        		</td>
+        	</tr>	
+<tr bgcolor="#e3e8f2">
+<td class="text1" align="center">
+</td>
+</tr>	
+</tbody></table><hr noshade="noshade" size="1" width="100%">
+ 	<table border="0" cellpadding="3" cellspacing="1" width="192">
+	<tbody><tr bgcolor="#394973">
+		<td class="text1" align="left">
+&nbsp;<font color="#ffffff">
+<strong>::&nbsp;Reklama</strong></font>
+        		</td>
+        	</tr>	
+<tr bgcolor="#e3e8f2">
+<td class="text1" align="center">
+<script type="text/javascript" language="javascript">
+    //Server: WEBGURU.cz; Sekce: WEBGURU.cz; Pozice: Vpravo; Medium: Vertical  banner; Reklamni plocha: WEBGURU.cz - Vertical  banner / Vpravo;
+    ADid_adspot = 8548;
+    ADwidth = 120;
+    ADheight = 240;
+    ADdescription=0;
+    ADborder=0;
+    ADbgcolor='E3E8F2';
+
+
+    ADfwidth = ADwidth+2*ADborder;
+    ADfheight = ADheight+2*ADborder+ADdescription;
+    ADtarget = "_top";
+    ADlink = "0000FF";
+    ADrnd=Math.floor(1000000*Math.random());
+    document.write('<IFRAME WIDTH="'+ADfwidth+'" HEIGHT="'+ADfheight+'" MARGINWIDTH="0" MARGINHEIGHT="0" FRAMEBORDER="0" HSPACE="0" VSPACE="0" SCROLLING="no" BORDERCOLOR="#000000" SRC="http://adx.adrenaline.cz/adrun.dll?action=1&id='+ADid_adspot+'&target='+ADtarget+'&border='+ADborder+'&bgcolor='+ADbgcolor+'&link='+ADlink+'&ref='+escape(top.document.referrer)+'&rnd='+ADrnd+'">\n');
+    document.write('<A HREF="http://adx.adrenaline.cz/adrun.dll?action=4&id='+ADid_adspot+'" target="'+ADtarget+'">');
+    document.write('<IMG SRC="http://adx.adrenaline.cz/adrun.dll?action=3&id='+ADid_adspot+'&ref='+escape(top.document.referrer)+'&rnd='+ADrnd+'" WIDTH="'+ADwidth+'" HEIGHT="'+ADheight+'" border="'+ADborder+'">');
+    document.write('</A>');
+    document.write('</IFRAME>');
+
+</script><iframe marginwidth="0" marginheight="0" hspace="0" vspace="0" bordercolor="#000000" src="view.php_soubory/adrun.htm" frameborder="0" height="240" scrolling="no" width="120">
+&lt;A HREF="http://adx.adrenaline.cz/adrun.dll?action=4&amp;id=8548"
+target="_top"&gt;&lt;IMG
+SRC="http://adx.adrenaline.cz/adrun.dll?action=3&amp;id=8548&amp;ref=http%3A//www.google.cz/search%3Fsource%3Dig%26hl%3Dcs%26rlz%3D1G1GGLQ_CSCZ277%26q%3Ddownload+mysql+datab%25C3%25A1ze+z%25C3%25A1loha%26btnG%3DVyhledat+Googlem%26meta%3D&amp;rnd=900904"
+WIDTH="120" HEIGHT="240" border="0"&gt;&lt;/A&gt;</iframe>
+</td>
+</tr>	
+</tbody></table>
+
+
+	</td>
+	</tr>	
+</tbody></table>
+		</td>
+			</tr>	
+<tr>
+<td coldiv="2">
+<table align="center" border="1" bordercolor="#c0c0c0" cellpadding="15" cellspacing="0" width="100%">
+	<tbody><tr bgcolor="#dee3ef">
+		<td class="text1" align="center" valign="middle">
+[<a href="http://www.webguru.cz/clanky/" title="Přehled článků na WEBGURU.cz"><strong>Tisk na WEBGURU</strong></a>]&nbsp;&nbsp;[<a href="http://www.webguru.cz/diskuse/" title="Diskusní fóra na WEBGURU.cz"><strong>Diskusní fóra</strong></a>]&nbsp;&nbsp;[<a href="http://www.webguru.cz/slovnik_pojmu/" title="Slovní pojmů na WEBGURU.cz"><strong>Slovník pojmů</strong></a>]
+	</td>				
+</tr>	
+	<tr bgcolor="#dee3ef">
+		<td class="text2" align="center" valign="middle">
+<div class="text2" align="center">©&nbsp;<a href="http://www.webguru.cz/" title="(c) WEBGURU.cz 2001 - 2003"><strong>http://www.WEBGURU.cz</strong></a><br>2001-2003<br>ISSN 1213-7952<br>
+Obsah WEBGURU není možno šířit bez souhlasu redakce a autora daného článku.
+	</div></td>				
+</tr>
+<tr bgcolor="#dee3ef">
+
+		<td class="text1" align="center" valign="middle">
+
+
+
+<embed style="display: none;" src="view.php_soubory/icon_casak.htm" quality="high" bgcolor="#FFFFFF" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/shockwave/download/index.cgi?P1_Prod_Version=ShockwaveFlash" height="31" width="88">&nbsp;&nbsp;&nbsp;<a href="http://www.minasite.cz/" target="_blank"><img src="view.php_soubory/link" alt="MinaSite" style="border: 1px solid rgb(0, 0, 0);" border="0" height="31" width="88"></a>&nbsp;&nbsp;&nbsp;<a href="http://javascript.programator.cz/"><img src="view.php_soubory/jsp_icon.htm" alt="Java Script PLANET" style="border: 1px solid rgb(0, 0, 0);" border="0" height="31" width="88"></a>&nbsp;&nbsp;&nbsp;<a href="http://system.ignum.cz/banner_click.php?t=1&amp;i=108" target="_blank"><img src="view.php_soubory/b002.gif" alt="Pipni.cz" style="border: 1px solid rgb(0, 0, 0);" border="0" height="31" width="88"></a>&nbsp;&nbsp;&nbsp;<object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" codebase="http://active.macromedia.com/flash4/cabs/swflash.cab#version=4,0,0,0" id="memo" height="31" width="88">
+  <param name="movie" value="http://www.memopage.cz/images/banners/memo.swf">
+  <param name="quality" value="high">
+  <param name="bgcolor" value="#96A096">
+  <embed style="display: none;" name="memo" src="view.php_soubory/memo.htm" quality="high" bgcolor="#96A096" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/shockwave/download/index.cgi?P1_Prod_Version=ShockwaveFlash" height="31" width="88">
+  
+</object>&nbsp;&nbsp;&nbsp;<a href="http://www.soundboss.cz/" target="_blank"><img src="view.php_soubory/micro_soundboss.gif" alt="SoundBoss" style="border: 1px solid rgb(0, 0, 0);" border="0" height="31" width="88"></a>&nbsp;&nbsp;&nbsp;<a href="http://www.jaknaweb.com/" target="_blank"><img src="view.php_soubory/tvorbawww.gif" alt="JakNaWeb.com - vše pro tvorbu moderního webu - HTML,PHP,MySQL,ASP,CSS,XML,JavaScripty..." style="border: 1px solid rgb(0, 0, 0);" border="0" height="31" width="88"></a>&nbsp;&nbsp;&nbsp;
+</td>				
+
+</tr>
+
+
+
+	<tr bgcolor="#4a619c">
+
+		<td class="text2" align="center" valign="middle">
+
+		
+
+<table border="0" cellpadding="0" cellspacing="0" width="10%">
+
+	<tbody><tr><td align="center">&nbsp;
+<a class="text1" href="http://www.webguru.cz/reklama/"><font color="#ffffff" size="1">Inzerujte na WEBGURU !!!</font></a>
+
+
+
+<br>
+
+<!-- Begin Nedstat Basic code -->
+
+<!-- Title: WEBGURU.cz -->
+
+<!-- URL: http://www.webguru.cz -->
+
+<script language="JavaScript" src="view.php_soubory/basic.js">
+
+</script>
+
+<script language="JavaScript">
+
+<!--
+
+  nedstatbasic("ABf9JgpxAUdY+YEbUQ9+4aKACsYg", 0);
+
+// -->
+
+</script><a target="_blank" href="http://webstats.motigo.com/stats?ABf9JgpxAUdY+YEbUQ9+4aKACsYg"><img src="view.php_soubory/n.gif" alt="Webstats4U - Free web site statistics" border="0" height="18" width="18"></a><script language="JavaScript" type="text/javascript" src="view.php_soubory/md.js"></script><script type="text/javascript" language="javascript" src="view.php_soubory/eas.js"></script><script type="text/javascript" src="view.php_soubory/EAS_tag.js"></script><script type="text/javascript" src="view.php_soubory/eas_002.js"></script><input style="width: 0px; top: 0px; position: absolute; visibility: hidden;" id="oV6" onchange="fV8(fV1,5,true)"><div style="display: inline;" id="oV10"></div>
+
+<noscript>
+
+<a target="_blank" href="http://v1.nedstatbasic.net/stats?ABf9JgpxAUdY+YEbUQ9+4aKACsYg"><img
+
+src="http://m1.nedstatbasic.net/n?id=ABf9JgpxAUdY+YEbUQ9+4aKACsYg"
+
+border="0" nosave width="18" height="18"></a>
+
+</noscript>
+
+<!-- End Nedstat Basic code -->
+
+
+
+</td></tr>		
+
+
+
+</tbody></table>
+
+</td>				
+
+</tr>	
+
+</tbody></table></td>
+</tr>
+	
+</tbody></table>
+
+
+<div style="position: absolute; left: 987px; top: 569px; z-index: 1000000000 ! important; visibility: hidden; opacity: 1; height: 16px; width: 0px;" id="linkalert-box"><img style="width: 0px;" src="view.php_soubory/mail-icon.png" id="linkalert-icon-1"></div></body></html>

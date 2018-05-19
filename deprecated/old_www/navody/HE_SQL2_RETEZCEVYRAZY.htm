@@ -1,0 +1,98 @@
+<!doctype html public "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=Windows-1250">
+<title>Výrazy nad znakovými a binárními řetězci v SQL</title>
+<link rel='stylesheet' style='text/css' href='../function.css'>
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr>
+	<td style="background-image: url(../images/bghead.jpg);
+		background-position: right;
+		background-repeat: no-repeat;">
+	<table width="100%" border="0" cellpadding="0" cellspacing="0"
+		style="background-image:none">
+	<tr>
+		<td style="background-image:none" height="46"
+			width="15%"><img src="../images/title-cz.gif"
+			width="255" height="33"
+			alt="602SQL-Úplná dokumentace"
+			title="602SQL - Úplná dokumentace"
+			border="0"></td>
+		<td width="33%" align="right"><a href="../xml/html/top.html"><img class="floatno"
+			src="../images/index.gif"
+			width="15" height="16"
+			alt="Index" title="Zpět na obsah"
+			border="0" vspace="2"></a> &nbsp;
+			 </td>
+	</tr>
+	</table>
+	</td>
+</tr>
+</table><table class="navigace" border="0" width="100%"  bgcolor="#FFFFBF"><tr> <td
+width="20" align="center"><img class="floatno" src="../images/prev.gif"
+width="15" height="13" alt="&lt;&shy;" title="Předcházející téma"
+border="0"></td><td width="25%"><a
+href="HE_SQL2_ARITMETICKEVYRAZY.htm">Aritmetické výrazy</a></td> <td width="25%"
+align="right"><img class="floatno" src="../images/up.gif" width="13"
+height="15" alt="Nahoru" title="O jednu úroveň výš" border="0"
+align="middle"></td><td width="25%"><a href="HE_SQL2_VYRAZY.htm">Výrazy</a></td>
+<td width="25%" align="right"><a
+href="HE_SQL2_DATCASVYRAZY.htm">Výrazy nad datem a časem</a></td><td width="20"
+align="center"><img class="floatno" src="../images/next.gif" width="15"
+height="13" alt="&shy;&gt;" title="Následující téma" border="0"></td>
+</tr></table>
+
+
+
+
+<h1><a name="he_sql2_retezcevyrazy"></a>Výrazy nad znakovými a binárními řetězci (SQL)</h1>
+
+<p>Pokud oba znakové řetězce v operaci (spojování, porovnání) mají specifikovanou množinu znaků a třídění, pak musí být u obou řetězců stejná. </p>
+
+<h2>Spojování řetězců</h2>
+
+<p><a href="HE_SQL2_RETEZCE.htm">Znakové řetězce</a> lze spojovat operátorem zřetězení <code>||</code>. Je-li alespoň jeden operand zřetězení v UNICODE, pak výsledek bude také v UNICODE. Má-li alespoň jeden znakový řetězec <a href="../xml/html/collate.html">specifikovanou množinu znaků a třídění</a>, pak výsledný řetězec bude mít stejnou množinu znaků a stejné třídění. Výsledný řetězec bude mít příznak <a href="../xml/html/collate.html">ignorování velikosti písmen</a>, pokud alespoň jeden z operandů má příznak ignorování velikosti písmen. Pokud alespoň jeden z operátorů je typu CLOB nebo pokud součet maximálních délek spojovaných řetězců přesahuje maximální možnou délku řetězce, pak výsledek je typu CLOB. Jinak maximální délka spojeného řetězce je součtem maximálních délek obou operandů.</p>
+
+<p>Také <a href="HE_SQL2_RETEZCE.htm">binární řetězce</a> lze spojovat operátorem zřetězení <code>||</code>. Spojení vždy probíhá po celých bajtech. Pokud alespoň jeden z operátorů je typu BLOB nebo pokud součet délek spojovaných binárních řetězců přesahuje maximální možnou délku binárního řetězce, pak výsledek je typu BLOB. Jinak délka spojeného binárního řetězce je součtem délek obou operandů.</p>
+
+<h2>Porovnání řetězců</h2>
+<p>Pro porovnání hodnot znakových nebo binárních řetězců slouží operátory &gt;, &lt;, =, &lt;=, &gt;= a &lt;&gt;. Při porovnávání znakových řetězců se ignoruje velikost písmen, pokud alespoň jeden z operandů má příznak ignorování velikosti písmen. Má-li alespoň jeden znakový řetězec specifikovanou množinu znaků a třídění, pak se porovnává podle tohoto třídění, jinak se porovnává podle hodnot interních kódů znaků.</p>
+<br>
+<p><b>Odchylky od Intermediate level směrem k&nbsp;Entry level</b>
+
+<ul>
+	<li>Operátor zřetězení nelze použít na bitové spojení binárních řetězců.</li>
+</ul>
+
+<p><b>Implementací definované vlastnosti SQL ve 602SQL</b>
+
+<ul>
+	<li>Pro zřetězení lze alternativně použít i operátor + (plus) .</li>
+</ul>
+
+<p><b>Příklad:</b></p>
+
+<pre><code>IF res&lt;&gt;0 THEN  
+  CALL Log_write(<b>'Chyba inicializace pošty č. '||Int2str(res)</b>); 
+ELSE
+...</code></pre>
+
+
+
+<table class="navigace" border="0" width="100%"  bgcolor="#FFFFBF"><tr> <td
+width="20" align="center"><img class="floatno" src="../images/prev.gif"
+width="15" height="13" alt="&lt;&shy;" title="Předcházející téma"
+border="0"></td><td width="25%"><a
+href="HE_SQL2_ARITMETICKEVYRAZY.htm">Aritmetické výrazy</a></td> <td width="25%"
+align="right"><img class="floatno" src="../images/up.gif" width="13"
+height="15" alt="Nahoru" title="O jednu úroveň výš" border="0"
+align="middle"></td><td width="25%"><a href="HE_SQL2_VYRAZY.htm">Výrazy</a></td>
+<td width="25%" align="right"><a
+href="HE_SQL2_DATCASVYRAZY.htm">Výrazy nad datem a časem</a></td><td width="20"
+align="center"><img class="floatno" src="../images/next.gif" width="15"
+height="13" alt="&shy;&gt;" title="Následující téma" border="0"></td>
+</tr></table>
+</body>
+</html>

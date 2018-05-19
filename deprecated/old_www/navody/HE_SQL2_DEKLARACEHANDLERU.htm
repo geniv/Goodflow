@@ -1,0 +1,122 @@
+<!doctype html public "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=Windows-1250">
+<title>Deklarace handleru v SQL</title>
+<link rel='stylesheet' style='text/css' href='../function.css'>
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr>
+	<td style="background-image: url(../images/bghead.jpg);
+		background-position: right;
+		background-repeat: no-repeat;">
+	<table width="100%" border="0" cellpadding="0" cellspacing="0"
+		style="background-image:none">
+	<tr>
+		<td style="background-image:none" height="46"
+			width="15%"><img src="../images/title-cz.gif"
+			width="255" height="33"
+			alt="602SQL-Úplná dokumentace"
+			title="602SQL - Úplná dokumentace"
+			border="0"></td>
+		<td width="33%" align="right"><a href="../xml/html/top.html"><img class="floatno"
+			src="../images/index.gif"
+			width="15" height="16"
+			alt="Index" title="Zpět na obsah"
+			border="0" vspace="2"></a> &nbsp;
+			 </td>
+	</tr>
+	</table>
+	</td>
+</tr>
+</table><table class="navigace" border="0" width="100%"  bgcolor="#FFFFBF"><tr> <td
+width="20" align="center"><img class="floatno" src="../images/prev.gif"
+width="15" height="13" alt="&lt;&shy;" title="Předcházející téma"
+border="0"></td><td width="25%"><a
+href="HE_SQL2_DEKLARACEVYJIMKY.htm">Deklarace výjimky</a></td> <td width="25%"
+align="right"><img class="floatno" src="../images/up.gif" width="13"
+height="15" alt="Nahoru" title="O jednu úroveň výš" border="0"
+align="middle"></td><td width="25%"><a href="../xml/html/declare.html">Deklarace objektů v SQL</a></td>
+<td width="25%" align="right"><a
+href="HE_SQL2_DEKLARACEKURZORU.htm">Deklarace kurzoru</a></td><td width="20"
+align="center"><img class="floatno" src="../images/next.gif" width="15"
+height="13" alt="&shy;&gt;" title="Následující téma" border="0"></td>
+</tr></table>
+
+
+
+
+<h1><a name="he_sql2_deklaracehandleru"></a>Deklarace handleru (SQL)</h1>
+
+<pre><code>deklarace_handleru ::= DECLARE { CONTINUE | EXIT | REDO | UNDO } HANDLER FOR výjimka 
+    {, výjimka }… příkaz;
+výjimka ::=  identifikátor_výjimky | SQLSTATE [ VALUE ] sqlstate | SQLEXCEPTION | SQLWARNING 
+    | NOT FOUND </code></pre>
+
+<p>Touto deklarací se handler zadaný <i>příkazem</i> přiřadí ke specifikovaným <a href="../xml/html/errorsexceptions.html">výjimkám</a> nebo třídám výjimek a může se v&nbsp;rozsahu platnosti této deklarace (v tomto složeném příkazu) uplatnit při ošetření výjimky.</p>
+
+<p>Je-li v&nbsp;deklaraci handleru uveden <i>identifikátor_výjimky</i>, musí být dříve deklarován v&nbsp;<a href="HE_SQL2_DEKLARACEVYJIMKY.htm">deklaraci výjimky</a>. Handler se zavolá, pokud je tato výjimka aktivována příkazem <a href="HE_SQL2_SIGNAL.htm">SIGNAL</a>. Stejná výjimka nesmí být uvedena dvakrát ve stejných nebo různých&nbsp;deklaracích handleru ve stejném rozsahu platnosti. Je-li v&nbsp;deklaraci této výjimky uveden <a href="../xml/html/handlingcategories.html">sqlstate</a>, pak handler je přiřazen i k&nbsp;tomuto <i>sqlstate</i>.</p>
+
+<p>Je-li v&nbsp;deklaraci handleru uvedeno SQLSTATE <i>sqlstate</i>, pak handler se zavolá, kdykoli tento <i>sqlstate</i> nastane. </p>
+
+<p>Je-li v&nbsp;deklaraci handleru uvedeno slovo SQLEXCEPTION, SQLWARNING nebo NOT FOUND, handler se zavolá, nastane-li libovolná chyba kromě čtení neexistujícího záznamu v příkazu <a href="HE_SQL2_FETCH.htm">FETCH</a> (pro SQLEXCEPTION), libovolné varování (pro SQLWARNING) nebo čtení neexistujícího záznamu v příkazu FETCH (pro NOT FOUND). Výjimka <i>Čtení z neexistujícího záznamu</i> (<i>sqlstate</i> '02000') je výjimečná tím, že handler pro ní se musí deklarovat při každém použití konstrukce LOOP...FETCH...END LOOP, zřejmě z tohoto důvodu má tak výsadní postavení.</p>
+
+<p>Nastane-li při provádění SQL příkazů <a href="../xml/html/errorsexceptions.html">výjimka</a>, hledá se nejbližší handler pro tuto výjimku (nejprve v tomto složeném příkazu, poté ve vnějších složených příkazech). Je-li nějaký handler nalezen, pak v&nbsp;závislosti na druhu handleru:
+
+<ul>
+	<li>CONTINUE: provede se handler a pokračuje se v&nbsp;provádění příkazů za příkazem, který způsobil výjimku (má smysl hlavně u <a href="../xml/html/handlingcategories.html">výjimek typu</a> "<em>handlable exception condition</em>" a "<em>not found</em>");</li>
+	<li>EXIT: provede se handler a pokračuje se v&nbsp;provádění příkazů za koncem složeného příkazu, který obsahuje deklaraci handleru (má smysl hlavně u výjimek typu "<em>rollback exception condition</em>");</li>
+	<li>UNDO: provede se rollback do stavu při vstupu do složeného příkazu, poté se provede handler a pokračuje se v&nbsp;provádění příkazů za koncem složeného příkazu, který obsahuje deklaraci handleru;</li>
+	<li>REDO: provede se ROLLBACK do stavu při vstupu do složeného příkazu, poté se provede handler a pokračuje se v&nbsp;provádění příkazů od začátku složeného příkazu, který obsahuje deklaraci handleru.</li>
+</ul>
+
+<p>Handlery REDO a UNDO smějí být deklarovány pouze v&nbsp;atomickém <a href="HE_SQL2_SLOZENYPRIKAZ.htm">složeném příkazu</a>. Nelze v nich používat transakční příkazy.</p>
+
+<p><a href="../xml/html/declare.html">Globální handlery</a> SQL serveru se deklarují v proceduře <code>Module_globals</code>.</p>
+
+<p><b>Příklad použití:</b></p>
+
+<p>při průchodu kurzoru je třeba testovat existenci dalšího řádku</p>
+
+<pre><code>DECLARE CONTINUE HANDLER FOR NOT FOUND BEGIN SET err_notfound=TRUE; END;
+LabelLoop: LOOP 
+    FETCH NEXT FROM cur INTO TatoFirma, TatoHodnota; 
+    IF err_notfound IS TRUE THEN LEAVE LabelLoop; END IF;
+...</code></pre>
+
+
+<p>Pokud se nanajde zbozi v tabulce, přiřaď mu číslo -1:</p>
+<pre>...
+    BEGIN
+      DECLARE CONTINUE HANDLER FOR SQLSTATE '21000' BEGIN SET cis_zb = -1; END;
+      SELECT id_zbozi INTO cis_zb
+      FROM TZbozi WHERE ...; 
+    END;
+...</pre>	
+
+<p>V konverzní funkci může dojít k chybě 22018 (tj. nelze zkonvertovat), v takovém případě se chyba odchytí a funkce vrátí NULL.</p>
+<pre>FUNCTION `Konvertuj( IN inputChar NCLOB) ) RETURNS CLOB COLLATE CZ_ISO;
+BEGIN
+  DECLARE CONTINUE HANDLER FOR SQLSTATE '22018' BEGIN RETURN NULL; END;
+  RETURN CAST(inputChar) AS CLOB COLLATE CZ_ISO);
+END
+
+</pre>
+
+
+<table class="navigace" border="0" width="100%"  bgcolor="#FFFFBF"><tr> <td
+width="20" align="center"><img class="floatno" src="../images/prev.gif"
+width="15" height="13" alt="&lt;&shy;" title="Předcházející téma"
+border="0"></td><td width="25%"><a
+href="HE_SQL2_DEKLARACEVYJIMKY.htm">Deklarace výjimky</a></td> <td width="25%"
+align="right"><img class="floatno" src="../images/up.gif" width="13"
+height="15" alt="Nahoru" title="O jednu úroveň výš" border="0"
+align="middle"></td><td width="25%"><a href="../xml/html/declare.html">Deklarace objektů v SQL</a></td>
+<td width="25%" align="right"><a
+href="HE_SQL2_DEKLARACEKURZORU.htm">Deklarace kurzoru</a></td><td width="20"
+align="center"><img class="floatno" src="../images/next.gif" width="15"
+height="13" alt="&shy;&gt;" title="Následující téma" border="0"></td>
+</tr></table>
+</body>
+</html>

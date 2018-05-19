@@ -1,0 +1,64 @@
+<!doctype html public "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=Windows-1250">
+<title>Funkce MailBoxGetMsg</title>
+<link rel='stylesheet' style='text/css' href='../function.css'>
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000">
+
+
+
+<h2 class=function>MailBoxGetMsg</h2>
+<img src='../images/cpp.gif' width='44' height='16' border='0' alt='c/c++' align='middle' hspace='2'><img src='../images/pascal.gif' width='44' height='16' border='0' alt='pascal' align='middle' hspace='2'><img src='../images/sql.gif' width='44' height='16' border='0' alt='sql' align='middle' hspace='2'>
+
+
+<br><br>
+<div class='typ'>DWORD <b>MailBoxGetMsg</b>(DWORD mailbox, DWORD id);<br>
+function <b>MailBoxGetMsg</b>(mailbox : integer; id : integer): integer;<br>
+FUNCTION <strong>MailBoxGetMsg</strong>(IN mailbox INT, IN id INT) RETURNS INT;
+</div>
+
+
+<p><b>Parametry</b></p>
+
+<table border=1 cols=2 frame=box rules=all width=480>
+
+<tr valign="top">
+<td width=19%><i>mailbox </i></td>
+<td width=81%>handle poštovní schránky</td>
+</tr>
+
+<tr valign="top">
+<td width=19%><i>id</i> </td>
+<td width=81%>identifikátor zásilky</td>
+</tr>
+</table><br>
+
+<p><b>Od verze</b></p>
+
+<p>6.0f</p>
+
+<p><b>Popis</b></p>
+
+<p>Funkce přečte ze schránky (v <a href="HE_MAILPROFILES.htm">profilu</a> zvoleného) <a href="HE_MAIL.htm">poštovního systému</a> text dopisu včetně hlavičky vybrané zásilky a uloží jej do systémové <a href="HE_MAILTABLES.htm">tabulky</a> <code>_INBOXMSGS</code> do sloupce <code>Body</code>. Pokud je třeba oddělit text dopisu od hlavičky, použijte rozšířenou funkci <b><code>MailBoxGetMsgEx</code></b>.</p>
+
+<p><b>Hodnota funkce</b></p>
+
+<p>Funkce vrací nulu v případě úspěchu a  číslo chyby v případě neúspěchu. <a href="HE_MAILERRORS.htm">Číslo chyby</a> lze zjistit také pomocí <b><code>Sz_error</code></b> nebo <b><code>Signalize</code></b>.</p>
+
+<p><b>Příklad</b></p>
+
+<p><a href="HE_MAILEXAMRECEIVE.htm">Příklad příjmu zásilky</a> </p>
+
+<p><b>Viz</b></p>
+
+<ul class='viz'>
+ <li><a href="HE_F_MAILOPENINBOX.htm">MailOpenInBox</a> </li>
+ <li><a href="HE_F_MAILBOXLOAD.htm">MailBoxLoad</a> </li>
+ <li><a href="HE_F_MAILBOXGETMSGEX.htm">MailBoxGetMsgEx</a> </li>
+</ul>
+
+</body>
+</html>

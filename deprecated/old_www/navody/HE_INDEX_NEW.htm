@@ -1,0 +1,236 @@
+<!doctype html public "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=Windows-1250">
+<title>Slovníček základních pojmů 602SQL</title>
+<link rel='stylesheet' style='text/css' href='../function.css'>
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr>
+	<td style="background-image: url(../images/bghead.jpg);
+		background-position: right;
+		background-repeat: no-repeat;">
+	<table width="100%" border="0" cellpadding="0" cellspacing="0"
+		style="background-image:none">
+	<tr>
+		<td style="background-image:none" height="46"
+			width="15%"><img src="../images/title-cz.gif"
+			width="255" height="33"
+			alt="602SQL-Úplná dokumentace"
+			title="602SQL - Úplná dokumentace"
+			border="0"></td>
+		<td width="33%" align="right"><a href="../xml/html/top.html"><img class="floatno"
+			src="../images/index.gif"
+			width="15" height="16"
+			alt="Index" title="Zpět na obsah"
+			border="0" vspace="2"></a> &nbsp;
+			 </td>
+	</tr>
+	</table>
+	</td>
+</tr>
+</table><table class="navigace" border="0" width="100%"  bgcolor="#FFFFBF">
+		  <tr>
+					 <td width="20" align="center">&nbsp;</td>
+					 <td width="25%">&nbsp;</td>
+					 <td width="25%"
+align="right"><img class="floatno" src="../images/up.gif" width="13"
+height="15" alt="Nahoru" title="O jednu úroveň výš" border="0"
+align="middle"></td><td width="25%"><a href="../xml/html/doplnkytop.html">Doplňky</a></td>
+<td width="25%" align="right"><a
+href="../xml/html/errortop.html">Chyby a jejich kategorizace</a></td><td width="20"
+align="center"><img class="floatno" src="../images/next.gif" width="15"
+height="13" alt="&shy;&gt;" title="Následující téma" border="0"></td>
+</tr></table>
+
+
+
+<h1><a name="he_index_new"></a>Slovníček základních pojmů 602SQL</h1>
+
+
+<h2>agregační (souhrnné) funkce</h2>
+<p>Funkce COUNT, SUM, AVG, MAX a MIN, jejichž hodnoty se počítají pro skupiny záznamů a dají se použít v dotazech. </p>
+
+<h2>aplikace</h2>
+<p>Logický celek tvořený skupinou objektů, které spolu souvisejí (komponentami aplikace), a daty. 602SQL je schopna vytvořit, přejmenovat, exportovat, importovat a otevřít aplikaci. Aplikace lze logicky rozdělit na část serverovou (back-end), tvořenou objekty SQL jako tabulkami (v SQL TABLE), doménami (DOMAINS), dotazy (v SQL VIEW), uloženými procedurami a funkcemi (STORED PROCEDURE), triggery (TRIGGER) a sekvencemi (SEQUENCE) a část klientskou (front-end), tvořenou hlavně přenosy dat, diagramy apod. </p>
+<p>V rámci jedné aplikace je možné používat objekty z jiných aplikací tak, že jméno objektu se prefixuje jménem jiné aplikace a tečkou.</p>
+
+<h2>back-end</h2>
+<p>Back-end, neboli datová základna je tvořen databázovými tabulkami a daty v nich obsaženými, doménami, triggery k těmto tabulkám, dotazy a procedurami uloženými na serveru a sekvencemi;</p>
+<p>Opakem (tím, "co je v aplikaci vidět" - formuláře, menu a také klientské programy) je front-end - v této verzi se frontendová část aplikace tvoří mimo 602SQL (např. v Delphi, PHP apod.)  .</p>
+
+<h2>CDK</h2>
+<p>Sada komponent pro Delphi a Kylix zapouzdřujcí většinu potřebných programových konstrukcí. </p>
+
+<h2>databáze</h2>
+<p>Všechny aplikace spravované jedním serverem tvoří databázi. Databáze je uložena v jediném databázovém souboru jménem WB8.FIL.</p>
+
+<h2>databázový soubor WB8.FIL</h2>
+<p>Soubor operačního systému, v němž jsou uložena data patřící k databázi. Soubor FIL obsahuje vše, co patří k vývoji aplikací a provozu serveru: objekty aplikací (data systémové tabulky OBJTAB), definice tabulek včetně práv (data systémové tabulky TABTAB), uživatele, skupiny a jejich vztahy (data systémové tabulky USERTAB), ale i data z tabulek včetně indexů apod. Do souboru FIL se nezapisuje pouze rozsáhlejší transakce (soubor TRANSACT.FIL) a zálohování.</p>
+
+<h2>debugger</h2>
+<p>Prostředí pro ladění procedur, funkcí a triggerů na serveru. Umožňuje krokování, sledování a měnění hodnot proměnných, sledování zásobníku a další činnosti.</p>
+
+<h2>doména</h2>
+<p>Uživatelem definovaný datový typ spolu s případnými dalšími vlastnostmi (jako implicitní hodnota nebo integritní omezení) označený identifikátorem; back-endový objekt aplikace.</p>
+
+<h2>dotaz</h2>
+<p>Požadavek na výběr a uspořádání dat z tabulek. Dotaz lze vytvořit a uložit jako jeden z objektů 602SQL. Objekt typu dotaz je uložen v textové podobě jako dotazový výraz SELECT jazyka SQL.</p>
+
+<ul>
+<li><b>Dotaz needitovatelný</b> - dotaz, jehož odpověď obsahuje data vypočtená či jinak upravená (např. použitím agregačních funkcí). V needitovatelném dotazu nelze provádět změny.</li>
+<li><b>Dotaz editovatelný</b> - dotaz, jehož odpověď obsahuje pouze hodnoty sloupců v databázových tabulkách. Pokud v editovatelném dotazu provedete změnu, promítne se do obsahu původní tabulky.</li>
+</ul>
+
+<h2>editor</h2>
+<p>Prostředek pro psaní textových informací. Ve 602SQL používaný pro editování obsahu sloupce typu text, pro psaní zdrojových textů programů, pro prohlížení textových definic objektů apod. Do textu nevkládá žádné řídící znaky (kromě CR LF na konci řádku).</p>
+
+<h2>grid</h2>
+<p>Jednoduchý formulář ve stylu tabulek z tabulkových kalkulátorů, rychlý při prohlížení. Používá se v klientském prostředí při otevření tabulky či dotazu, umožňuje prohlížení i editaci dat.</p>
+
+<h2>index</h2>
+<p>na disku uložená datová struktura, která podstatně urychluje vyhledávání záznamů v tabulce podle hodnot určitých sloupců, setřídění obsahu tabulky nebo spojování tabulek.</p>
+
+<h2>JDBC</h2>
+<p>Universální, na OS nezávislé rozhraní pro přístup k datům; 602SQL server nabízí vlastní JDBC driver.</p>
+
+<h2>klient databáze</h2>
+<p>Každý program komunikující s&nbsp;databází pomocí standardizovaných rozhraní. Základními klienty jsou Vývojový klient - prostředí pro vývoj aplikací a ODBC/JDBC/SDBC driver, pomocí něhož mohou do databáze přistupovat externí programy. Mezi speciální klienty patří PHP Klient.</p>
+
+<h2>kurzor</h2>
+<ol type="a">
+<li>značka na obrazovce (obvykle blikající), která vyznačuje pozici v textu, kde se právě 
+provádějí změny - vkládají nebo ruší znaky;</li>
+<li>grafická značka na obrazovce spřažená s&nbsp;pohybem myši;</li>
+<li>v jazyce SQL je to fiktivní tabulka, kterou <b>602SQL</b> vytvoří jako odpověď na dotaz položený uživatelem. S&nbsp;obsahem kurzoru lze pracovat jako s&nbsp;obsahem tabulky, přitom změny prováděné v kurzoru (editovatelném) se promítnou do tabulek, z nichž data v kurzoru pocházejí.</li>
+</ol>
+
+<h2>diagram</h2>
+<p>Klientský objekt <b>602SQL</b>, který slouží k přehlednému ("grafickému") navrhování určité části aplikace. Používá se k znázornění vztahu mezi tabulkami (referenční integrity).</p>
+
+<h2>objekty</h2>
+<p>Objekty aplikací ve <b>602SQL</b> jsou: tabulky, dotazy,domény, přenosy datové i XML, role, diagramy, uložené procedury, triggery, sekvence, fulltexty, XML formuláře a stylesheety. </p>
+<p>Ve 602SQL jsou také objekty, které nepatří žádné aplikaci (systémové objekty). Mezi ně patří hlavně systémové tabulky, uživatelé a skupiny.</p>
+
+<h2>ODBC</h2>
+<p>Jedna z norem pro programové rozhraní databázového serveru. Umožňuje standardizovaný přístup klientských aplikací k SQL serverům. Server poskytující ODBC přístup (např. <b>602SQL</b>) tak činí pomocí tzv. <i>ODBC driveru</i>.</p>
+
+<h2>přípony souborů</h2>
+<p>Vyexportované objekty <b>602SQL</b> mají tyto přípony:</p>
+<p>tdf -- definice tabulky;</p>
+<p>tdt -- obsah tabulky ve vnitřním formátu;</p>
+<p>txt -- obsah tabulky v textovém formátu se záhlavím;</p>
+<p>csv -- obsah tabulky v textovém formátu CSV;</p>
+<p>crs -- definice kurzoru;</p>
+<p>pgm -- zdrojový text přenosu;</p>
+<p>xml - XML přenos (DAD)</p>
+<p>grf – definice pomocného objektu;</p>
+<p>drw – definice diagramu.</p>
+<p>psm - uložené procedury a funkce</p>
+<p>trg - triggery</p>
+<p>seq - sekvence</p>
+<p>dom - definice domény</p>
+<p>inf - fulltext</p>
+<p>fo - XML formulář</p>
+<p>sts - stylesheet</p>
+
+<p>Jiné soubory, které se mohou v souvislosti s&nbsp;<b>602SQL</b> vyskytnout:</p>
+<p>APL -- definiční soubor aplikace.</p>
+
+<h2>referenční integrita</h2>
+<p>Soubor pravidel zajišťující logickou integritu databáze. Vyjadřuje požadavek, aby určitý sloupec určité tabulky mohl nabývat pouze těch hodnot, které má jiný sloupec v některém záznamu jiné tabulky (číselníku). V obecném případě může vyjadřovat vztah mezi klíči tvořenými posloupností hodnot výrazů nad sloupci.</p>
+
+<h2>role</h2>
+<p>Subjekt práva (podobně jako uživatel či skupina uživatelů); zároveň je to objekt aplikace. Práva přidělená roli se přenášejí s aplikací.</p>
+
+<h2>SDBC</h2>
+<p>Jedna z norem pro programové rozhraní databázového serveru vytvořená pro OpenOffice.org. Umožňuje standardizovaný přístup klientských aplikací k SQL serverům. Server poskytující SBBC přístup (např. <b>602SQL</b>) tak činí pomocí tzv. <i>SDBC driveru</i>.</p>
+
+<h2>sekvence</h2>
+<p>Sekvence je objektem sloužícím ke generování posloupnosti celočíselných hodnot, zejména unikátních klíčů. Sekvence není svázána s žádnou konkrétní tabulkou, takže se dá použít k vytváření klíčů, které budou unikátní nejen v rámci tabulky, ale i v rámci skupiny tabulek. </p>
+
+<h2>server databáze</h2>
+<p>Program spravující data uložená v databázi a poskytující databázové služby klientům; jeden server je schopen obsluhovat více klientů. <b>Lokální server</b> je server běžící na stejném počítači jako klient, <b>vzdálený server</b> běží na počítači jiném.</p>
+
+<p>Ve <b>602SQL</b> existují servery pro různá prostředí - Windows SQL server  a Linux SQL server </p>
+
+<h2>schéma</h2>
+<p>SCHEMA (psáno krátce) - v jazyce SQL je synonymem pro aplikaci</p>
+
+<h2>skupiny uživatelů</h2>
+<p>Množina uživatelů; subjekt práva zjednodušující přidělování práv. Práva přidělená skupině platí pro všechny její členy.</p>
+
+<p>V každé databázi jsou standardní skupiny EVERYBODY (patří sem všichni uživatelé) a správcovské skupiny CONFIG_ADMIN, DB_ADMIN a SECURITY_ADMIN. Po instalaci je jediný standardní uživatel ANONYMOUS členem všech standardních skupin.</p>
+
+<h2>sloupec </h2>
+<p>Označení položky (pole, sloupce) v záznamu. Je určen svým jménem a typem. Typy sloupců jsou: logický, řetězec (více druhů), numerický (více druhů), datum a čas, typ text, typ obrázek, typ BLOB atd.</p>
+
+<h2>sloupce proměnné velikosti</h2>
+<p>Sloupce typu text (CLOB), obrázek a BLOB. Jejich velikost je dána až konkrétním obsahem.</p>
+
+<h2>správci databáze</h2>
+<p><b>Provozní správce</b> SQL serveru je člen standardní skupiny CONFIG_ADMIN; je to osoba (osoby), která se stará o provoz SQL serveru, provádí údržbu a nastavení.</p>
+<p><b>Bezpečnostní správce</b> SQL serveru je člen standardní skupiny SECURITY_ADMIN - má na starost zabezpečení SQL serveru (hesla uživatelů, šifrování FILu, povolení datového správce aj.).</p>
+<p><b>Datový správce</b> SQL serveru je člen standardní skupiny DB_ADMIN - má neomezený přístup ke všem datům ve všech aplikacích.</p>
+
+<h2>SQL</h2>
+<p>Standardizovaný jazyk implementovaný na serveru (na rozdíl od jazyka vnitřního u klienta), který umožňuje definování struktury databáze (např. vytváření tabulek), provádění změn v obsahu databáze (vkládání a rušení záznamů, přepisování hodnot) atd. Ve 602SQL je jazyk implementován podle normy SQL 2 (SQL 92), Intermediate level</p>
+
+<h2>subjekt práva</h2>
+<p>Subjekty práva jsou objekty databáze, jimž lze přidělovat a odebírat práva. Ve 602SQL jsou uživatelé, skupiny a role.</p>
+
+<h2>systémové tabulky</h2>
+<p>Pomocné tabulky společné všem aplikacím, do nichž server ukládá nezbytné informace (tabulka objektů v databázi, tabulka tabulek, tabulka uživatelů ad.). Není obvyklé do nich zasahovat.</p>
+
+<h2>systémové dotazy</h2>
+<p>Předdefinované dotazy pevných názvů, které umožňují získat informace o obsahu databáze, o jejím stavu apod.</p>
+
+<h2>systémové triggery</h2>
+<p>Předdefinované uložené procedury uložené v systémové aplikaci _sysext, vyvolávané různými událostmi (_on_server_start a pod.)</p>
+
+<h2>tabulka</h2>
+<p>Objekt 602SQL, do něhož se ukládají data; "řádky" tabulky tvoří záznamy, "sloupce" tabulky tvoří hodnoty databázových sloupců.</p>
+
+<h2>text</h2>
+<p>Sloupec proměnné délky, jehož obsahem je textové informace. Při editování hodnoty tohoto sloupce se vyvolá vestavěný editor.</p>
+
+<h2>transakce</h2>
+<p>Mechanismus zaručující, že se určitý sled operací provede buď vcelku nebo se neprovede vůbec a databáze zůstane ve stavu, v jakém byla před započetím transakce; vylučuje provedení pouze části požadavků a tím zajišťuje zachování konzistence databáze.</p>
+
+<h2>trigger</h2>
+<p>Trigger je nástroj, který zajišťuje automatické provedení podprogramu v jazyce SQL při vložení (INSERT TRIGGER), zrušení (DELETE TRIGGER) nebo změně záznamu (UPDATE TRIGGER) v určité tabulce. Trigger se vytváří jako objekt aplikace a je vždy svázán s konkrétní tabulkou.</p>
+
+<h2>uložená procedura</h2>
+<p>Posloupnost příkazů jazyka SQL, uložená jako objekt aplikace; provádí se na serveru a tím může značně urychlit vykonávání databázových operací. Klientská aplikace využívající uložených rutin pouze volá hotové procedury (přitom jim předává vstupní parametry a přebírá výstupní), místo aby posílala serveru zvláštní požadavek na provedení každého příkazu obsaženého v procedurách.</p>
+<p>Uložené procedury a funkce v jazyce SQL se souhrnně nazývají rutiny.</p>
+
+<h2>uživatel</h2>
+<p>Každý, kdo pracuje s <b>602SQL</b>. Uživatelé mají práva stanovená správcem databáze. V každé databázi existuje standardní anonymní uživatel, přihlašující se prázdným jménem. Tohoto uživatele jako jediného lze vyřadit ze skupiny EVERYBODY.</p>
+
+<h2>vývojové prostředí</h2>
+<p>Jeden ze standardních klientů sloužící k vývoji a provozu databázových aplikací.</p>
+
+<h2>XML</h2>
+<p>"volný" textový formát sloužící k přenosu dat mezi různými systémy; v 602SQL se používá ve více oblastech - pro import i export dat, v XML formulářích aj.</p>
+
+<h2>záznam</h2>
+<p>prvek ("řádek") databázové tabulky; je složen z jednotlivých sloupců;</p>
+
+
+<table class="navigace" border="0" width="100%"  bgcolor="#FFFFBF">
+		  <tr>
+					 <td width="20" align="center">&nbsp;</td>
+					 <td width="25%">&nbsp;</td>
+					 <td width="25%"
+align="right"><img class="floatno" src="../images/up.gif" width="13"
+height="15" alt="Nahoru" title="O jednu úroveň výš" border="0"
+align="middle"></td><td width="25%"><a href="../xml/html/doplnkytop.html">Doplňky</a></td>
+<td width="25%" align="right"><a
+href="../xml/html/errortop.html">Chyby a jejich kategorizace</a></td><td width="20"
+align="center"><img class="floatno" src="../images/next.gif" width="15"
+height="13" alt="&shy;&gt;" title="Následující téma" border="0"></td>
+</tr></table>
+
+</body>
+</html>

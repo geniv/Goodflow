@@ -1,0 +1,136 @@
+<!doctype html public "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=Windows-1250">
+<title>Rutiny uložené na serveru v SQL</title>
+<link rel='stylesheet' style='text/css' href='../function.css'>
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr>
+	<td style="background-image: url(../images/bghead.jpg);
+		background-position: right;
+		background-repeat: no-repeat;">
+	<table width="100%" border="0" cellpadding="0" cellspacing="0"
+		style="background-image:none">
+	<tr>
+		<td style="background-image:none" height="46"
+			width="15%"><img src="../images/title-cz.gif"
+			width="255" height="33"
+			alt="602SQL-Úplná dokumentace"
+			title="602SQL - Úplná dokumentace"
+			border="0"></td>
+		<td width="33%" align="right"><a href="../xml/html/top.html"><img class="floatno"
+			src="../images/index.gif"
+			width="15" height="16"
+			alt="Index" title="Zpět na obsah"
+			border="0" vspace="2"></a> &nbsp;
+			 </td>
+	</tr>
+	</table>
+	</td>
+</tr>
+</table><table class="navigace" border="0" width="100%"  bgcolor="#FFFFBF"><tr> <td
+width="20" align="center"><img class="floatno" src="../images/prev.gif"
+width="15" height="13" alt="&lt;&shy;" title="Předcházející téma"
+border="0"></td><td width="25%"><a
+href="HE_SQL2_RIDICIPRIKAZY.htm">Řídící příkazy</a></td> <td width="25%"
+align="right"><img class="floatno" src="../images/up.gif" width="13"
+height="15" alt="Nahoru" title="O jednu úroveň výš" border="0"
+align="middle"></td><td width="25%"><a href="HE_SQL2_JAZYKSQL.htm">Jazyk SQL a jeho implementace</a></td>
+<td width="25%" align="right"><a
+href="HE_SQL2_TRIGGERY.htm">Triggery</a></td><td width="20"
+align="center"><img class="floatno" src="../images/next.gif" width="15"
+height="13" alt="&shy;&gt;" title="Následující téma" border="0"></td>
+</tr></table>
+
+
+
+
+<h1><a name="he_sql2_storedprocedure"></a>Procedury a funkce uložené na serveru (SQL)</h1>
+
+<p><b>Procedury</b> a <b>funkce</b> uložené na serveru (označované souhrnně jako <b>rutiny</b>) zjednodušují tvorbu databázových aplikací a urychlují jejich běh. Klientská aplikace využívající uložených rutin pouze volá hotové rutiny (přitom jim předává vstupní parametry a přebírá výstupní), místo aby posílala serveru zvláštní požadavek na provedení každého příkazu obsaženého v rutinách.</p>
+
+<p>Je-li definice rutiny syntakticky špatně, dojde již při překladu ke <a href="../xml/html/comperrors.html">kompilační chybě</a>.</p>
+
+<p><b>Proceduru</b> lze provést tak, že se zavolá pomocí SQL příkazu <a href="HE_SQL2_CALL.htm">CALL</a>. </p>
+
+<p><b>Funkce</b> se provede, vyskytne-li se její volání jako součást <a href="HE_SQL2_VYRAZY.htm">výrazu</a>. Během provádění funkce musí být v jejím těle proveden příkaz <a href="HE_SQL2_RETURN.htm">RETURN</a>. Pokud proveden není, nastane chybový <a href="../xml/html/handlingcategories.html">sqlstate</a> 2F001 (SQ_NO_RETURN_IN_FNC).</p>
+
+<p>Rutinu lze vytvořit, modifikovat a zrušit: 
+
+<ul>
+	<li>buď interaktivně ve vývojovém prostředí 602SQL pomocí nástrojů na řídicím panelu aplikace,</li>
+	<li>nebo pomocí příkazů jazyka SQL CREATE, ALTER a DROP.</li>
+</ul>
+
+<p>V obou prostředích se rutina definuje pomocí jazyka pro psaní rutin a triggerů z SQL 3. Ve vývojovém prostředí 602SQL začíná text editované rutiny slovem PROCEDURE nebo FUNCTION, slovo CREATE nebo ALTER se neuvádí.</p>
+
+<p><b>Rozšíření jazyka SQL proti normě</b>
+
+<ul>
+	<li>Ve 602SQL lze funkci volat příkazem CALL stejně jako proceduru. Při tomto způsobu volání se hodnota funkce ignoruje a provedení příkazu RETURN se nevyžaduje - je-li proveden, nemá žádný efekt.</li>
+</ul>
+
+<p>Podrobnosti o uložených rutinách lze najít na následujících stránkách:
+
+<ul>
+	<li><a href="HE_SQL2_CALL.htm">Příkaz CALL</a> - předávání parametrů při volání rutiny</li>
+	<li><a href="HE_SQL2_POPISPROCEDURY.htm">Syntaxe rutiny </a> </li>
+	<li><a href="HE_SQL2_CREATEPROCEDURE.htm">Vytvoření </a>, <a href="HE_SQL2_ALTERPROCEDURE.htm">modifikování</a> a <a href="HE_SQL2_DROPPROCEDURE.htm">zrušení</a> rutiny</li>
+	<li>Rutiny a <a href="HE_SQL2_TRANSAKCE.htm">transakce</a></li>
+	<li><a href="../xml/html/debugger.html">Ladění rutin</a> </li>
+	<li><a href="../xml/html/profile.html">Profilování rutin</a></li>
+</ul>
+<p>Pro účely ladění může být také výhodné <a href="../xml/html/tracelog.html">trasovat</a> volání SQL procedur (situace <code>TRACE_PROCEDURE_CALL </code>).</p>
+
+<p><b>Příklad použití funkce jakožto integritního omezení v tabulce</b>:</p>
+
+<p>V tabulce je sloupec RETEZEC a klauzule <code>CHECK (KONTROLA(RETEZEC)))</code>.</p>
+
+<p>V téže aplikaci je rutina KONTROLA, která kontroluje, je-li předaný řetězec delší než 8 znaků, jestliže ne, vrátí funkce FALSE a integritní omezení není splněno:</p>
+
+<pre><code>FUNCTION `KONTROLA`(IN str CHAR(12)) RETURNS BOOLEAN;
+BEGIN
+  DECLARE pom BOOLEAN DEFAULT FALSE;
+  IF CHAR_LENGTH(str)&gt;8 THEN 
+    SET pom=TRUE; 
+  END IF;
+  RETURN pom;
+END</code></pre>
+
+
+
+<p class="subs">Seznam subsekcí:
+<ul class="subs">
+
+<li><a href="HE_SQL2_POPISPROCEDURY.htm">Popis rutiny</a>
+
+<li><a href="HE_SQL2_CREATEPROCEDURE.htm">Vytvoření rutiny (CREATE PROCEDURE | FUNCTION)</a>
+
+<li><a href="HE_SQL2_ALTERPROCEDURE.htm">Modifikování rutiny (ALTER PROCEDURE | FUNCTION)</a>
+
+<li><a href="HE_SQL2_DROPPROCEDURE.htm">Zrušení rutiny (DROP PROCEDURE | FUNCTION)</a>
+
+<li><a href="HE_SQL2_EXTERNIRUTINY.htm">Volání externích rutin a předávání parametrů</a>
+
+<li><a href="../xml/html/dllfolders.html">Určení adresářů s DLL knihovnami pro SQL server</a>
+
+<li><a href="../xml/html/extdllexample.html">Příklad volání funkcí v externí DLL na serveru</a>
+
+</ul>
+<table class="navigace" border="0" width="100%"  bgcolor="#FFFFBF"><tr> <td
+width="20" align="center"><img class="floatno" src="../images/prev.gif"
+width="15" height="13" alt="&lt;&shy;" title="Předcházející téma"
+border="0"></td><td width="25%"><a
+href="HE_SQL2_RIDICIPRIKAZY.htm">Řídící příkazy</a></td> <td width="25%"
+align="right"><img class="floatno" src="../images/up.gif" width="13"
+height="15" alt="Nahoru" title="O jednu úroveň výš" border="0"
+align="middle"></td><td width="25%"><a href="HE_SQL2_JAZYKSQL.htm">Jazyk SQL a jeho implementace</a></td>
+<td width="25%" align="right"><a
+href="HE_SQL2_TRIGGERY.htm">Triggery</a></td><td width="20"
+align="center"><img class="floatno" src="../images/next.gif" width="15"
+height="13" alt="&shy;&gt;" title="Následující téma" border="0"></td>
+</tr></table>
+</body>
+</html>

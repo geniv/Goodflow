@@ -1,0 +1,84 @@
+<!doctype html public "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=Windows-1250">
+<title>Funkce Write_lob</title>
+<link rel='stylesheet' style='text/css' href='../function.css'>
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000">
+
+
+
+<h2 class=function>Write_lob</h2>
+<img src='../images/cpp.gif' width='44' height='16' border='0' alt='c/c++' align='middle' hspace='2'><img src='../images/pascal.gif' width='44' height='16' border='0' alt='pascal' align='middle' hspace='2'>
+
+
+<br><br>
+<div class='typ'>BOOL <b>[cd_]Write_lob</b>([cdp_t cdp], tcurstab curs, trecnum position, tattrib attr, uns32 size, void * buffer);<br>
+function <b>[cd_]Write_var</b>([cdp : cdp_t]; curs : tcurstab; position : trecnum; attr : tattrib; size : uns32; var buffer) : Boolean;
+</div>
+
+
+<p><b>Parametry</b></p>
+
+<table border=1 cols=2 frame=box rules=all width=480>
+
+<tr valign="top">
+<td width=21%><i>curs</i> </td>
+<td width=79%>číslo otevřeného kurzoru nebo tabulky - viz <a href="HE_KYPAR.htm">podrobnosti</a></td>
+</tr>
+
+<tr valign="top">
+<td width=21%><i>position</i> </td>
+<td width=79%>číslo záznamu, kam se údaje mají zapsat</td>
+</tr>
+
+<tr valign="top">
+<td width=21%><i>attr </i></td>
+<td width=79%>číslo sloupce, jehož hodnota se přepisuje </td>
+</tr>
+
+<tr valign="top">
+<td width=21%><i>size </i></td>
+<td width=79%>celková délka LOBu</td>
+</tr>
+
+<tr valign="top">
+<td width=21%><i>buffer </i></td>
+<td width=79%>zapisovaná hodnota</td>
+</tr>
+
+<tr valign="top">
+<td width=21%>[<i>cdp </i></td>
+<td width=79%><a href="HE_EXTCD.htm">kontextová proměnná</a> klienta]  </td>
+</tr>
+</table><br>
+
+<p><b>Popis </b></p>
+
+<p>Funkce zapíše v tabulce, jejíž číslo <i>curs</i> bylo nalezeno pomocí funkce <b><code>Find_object</code></b>, nebo v dotazu číslo <i>curs</i> otevřeného funkcemi <b><code>Open_cursor</code></b> nebo <b><code>Open_cursor_direct</code></b>, do sloupce proměnné velikosti <i>attr</i> <i>size</i> bajtů z&nbsp;proměnné <i>buffer</i>.</p>
+<p>Funkce slouží k jednorázovému zápisu hodnoty do sloupce proměnné velikosti (BLOB, CLOB) na rozdíl od funkce <strong><code>Write_var</code></strong>, kde se zapisuje po částech.</p>
+
+<p><b>Hodnota funkce </b></p>
+
+<p>Funkce vrací při úspěchu FALSE, při neúspěchu TRUE.</p>
+
+<p><b>Viz</b></p>
+
+<ul class='viz'>
+ <li><a href="HE_F_READ_E.htm">Read</a> </li>
+ <li><a href="HE_F_WRITE_E.htm">Write</a> </li>
+ <li><a href="HE_F_READIND.htm">Read_ind</a> </li>
+ <li><a href="HE_F_READVAR.htm">Read_var</a> </li>
+ <li><a href="HE_F_READLEN.htm">Read_len</a> </li>
+ <li><a href="HE_F_WRITEIND.htm">Write_ind</a> </li>
+ <li><a href="HE_F_WRITELEN.htm">Write_len</a> </li>
+ <li><a href="HE_F_WRITEVAR.htm">Write_var</a> </li>
+ <li><a href="HE_F_FINDOBJECT.htm">Find_object</a> </li>
+ <li><a href="HE_F_OPENCURSOR_E.htm">Open_cursor</a> </li>
+ <li><a href="HE_F_OPENCURSORDIRECT.htm">Open_cursor_direct</a></li>
+</ul>
+
+</body>
+</html>

@@ -1,0 +1,82 @@
+<!doctype html public "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=Windows-1250">
+<title>LetterAddBLOBr</title>
+<link rel='stylesheet' style='text/css' href='../function.css'>
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000">
+
+
+
+<h2 class=function>LetterAddBLOBr</h2>
+<img src='../images/cpp.gif' width='44' height='16' border='0' alt='c/c++' align='middle' hspace='2'><img src='../images/pascal.gif' width='44' height='16' border='0' alt='pascal' align='middle' hspace='2'>
+
+
+<br><br>
+<div class='typ'>
+int <b>LetterAddBLOBr</b>(DWORD letter, char *fname, tcurstab table, trecnum pos, tattrib attr, uns16 index);<br>
+function <b>LetterAddBLOBr</b>(letter : integer; fname : PChar; table : tcurstab; pos : trecnum; attr : tattrib; index : short) : integer;
+</div>
+
+
+<p><b>Parametry</b></p>
+
+<table border=1 cols=2>
+
+<tr valign="top">
+<td width=8%><i>letter </i></td>
+<td width=92%>handle dopisu</td>
+</tr>
+
+<tr valign="top">
+<td width=8%><i>fname </i></td>
+<td width=92%>jméno, pod kterým se obsah BLOBU k zásilce připojí</td>
+</tr>
+
+<tr valign="top">
+<td width=8%><i>table </i></td>
+<td width=92%>číslo tabulky nebo otevřeného kurzoru</td>
+</tr>
+
+<tr valign="top">
+<td width=8%><i>pos  </i></td>
+<td width=92%>číslo záznamu</td>
+</tr>
+
+<tr valign="top">
+<td width=8%><i>attr </i></td>
+<td width=92%>číslo sloupce</td>
+</tr>
+
+<tr valign="top">
+<td width=8%><i>index  </i></td>
+<td width=92%>vždy konstanta NOINDEX</td>
+</tr>
+</table><br>
+
+<p><b>Od verze</b></p>
+
+<p>7.0d</p>
+
+<p><b>Popis</b></p>
+
+<p>Funkce připojí k vytvářené zásilce <a href="HE_MAIL.htm">elektronické pošty</a> soubor vytvořený z obsahu sloupce typu BLOB databázové tabulky. Handle dopisu vrací (zásilku vytváří) funkce <b><code>LetterCreate</code></b>.</p>
+
+<p>Pro použití v jazyce SQL existuje obdobná funkce <b><code>LetterAddBLOBs</code></b>.</p>
+
+<p><b>Hodnota funkce</b></p>
+
+<p>Funkce vrací nulu v případě úspěchu a  číslo chyby v případě neúspěchu. <a href="HE_MAILERRORS.htm">Číslo chyby</a> lze také zjistit pomocí <b><code>Sz_error</code></b> nebo <b><code>Signalize</code></b>.</p>
+
+<p><b>Viz</b></p>
+
+<ul class='viz'>
+ <li><a href="HE_F_LETTERCREATE.htm">LetterCreate</a> </li>
+ <li><a href="HE_F_LETTERADDFILE.htm">LetterAddFile</a> </li>
+ <li><a href="HE_F_LETTERADDBLOBS.htm">LetterAddBLOBs</a></li>
+</ul>
+
+</body>
+</html>

@@ -1,0 +1,64 @@
+<!doctype html public "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=Windows-1250">
+<title>Funkce Open_subcursor</title>
+<link rel='stylesheet' style='text/css' href='../function.css'>
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000">
+
+
+
+<h2 class=function>Open_subcursor</h2>
+<img src='../images/cpp.gif' width='44' height='16' border='0' alt='c/c++' align='middle' hspace='2'><img src='../images/pascal.gif' width='44' height='16' border='0' alt='pascal' align='middle' hspace='2'>
+
+
+<br><br>
+<div class='typ'>BOOL <b>[cd_]Open_subcursor</b>([cdp_t cdp], tcursnum supercurs,  const char * subcurdef, tcursnum * subcurs);<br>
+function <b>[cd_]Open_subcursor</b>([cdp : cdp_t]; supercurs : tcursnum;  subcurdef : PChar; var subcurs : tcursnum) : Boolean;
+</div>
+
+
+<p><b>Parametry</b></p>
+
+<table border=1 cols=2>
+
+<tr valign="top">
+<td width=13%><i>supercurs </i></td>
+<td width=87%>číslo otevřeného kurzoru, jehož subkurzor se otevírá </td>
+</tr>
+
+<tr valign="top">
+<td width=13%><i>subcurdef </i></td>
+<td width=87%>specifikace subkurzoru: zápis výrazu typu Boolean </td>
+</tr>
+
+<tr valign="top">
+<td width=13%><i>subcurs </i></td>
+<td width=87%>výstupní parametr: číslo otevřeného subkurzoru  - viz <a href="HE_KYPAR.htm">podrobnosti</a></td>
+</tr>
+
+<tr valign="top">
+<td width=13%>[<i>cdp </i></td>
+<td width=87%><a href="HE_EXTCD.htm">kontextová proměnná</a> klienta]  </td>
+</tr>
+</table><br>
+
+<p><b>Popis </b></p>
+
+<p>Funkce otevře subkurzor již otevřeného kurzoru <i>supercurs</i> (tj zúží množinu vybraných záznamů další podmínkou).</p>
+
+<p><b>Hodnota funkce </b></p>
+
+<p>Funkce vrací při úspěchu FALSE, při neúspěchu TRUE. K neúspěchu může dojít, pokud parametr <i>supercurs</i> neoznačuje otevřený kurzor nebo při chybě ve specifikaci subkurzoru. Příčinu chyby lze zjistit pomocí <b><code>Signalize</code></b>. Doporučujeme vždy testovat výsledek této funkce.</p>
+
+<p><b>Viz</b></p>
+
+<ul class='viz'>
+ <li><a href="HE_F_OPENCURSOR_E.htm">Open_cursor</a> </li>
+ <li><a href="HE_F_CLOSECURSOR.htm">Close_cursor</a> </li>
+</ul>
+
+</body>
+</html>

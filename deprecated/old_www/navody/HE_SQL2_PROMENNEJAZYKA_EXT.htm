@@ -1,0 +1,128 @@
+<!doctype html public "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=Windows-1250">
+<title>Proměnné z externích jazyků v příkazech SQL</title>
+<link rel='stylesheet' style='text/css' href='../function.css'>
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr>
+	<td style="background-image: url(../images/bghead.jpg);
+		background-position: right;
+		background-repeat: no-repeat;">
+	<table width="100%" border="0" cellpadding="0" cellspacing="0"
+		style="background-image:none">
+	<tr>
+		<td style="background-image:none" height="46"
+			width="15%"><img src="../images/title-cz.gif"
+			width="255" height="33"
+			alt="602SQL-Úplná dokumentace"
+			title="602SQL - Úplná dokumentace"
+			border="0"></td>
+		<td width="33%" align="right"><a href="../xml/html/top.html"><img class="floatno"
+			src="../images/index.gif"
+			width="15" height="16"
+			alt="Index" title="Zpět na obsah"
+			border="0" vspace="2"></a> &nbsp;
+			 </td>
+	</tr>
+	</table>
+	</td>
+</tr>
+</table><table class="navigace" border="0" width="100%"  bgcolor="#FFFFBF"><tr> <td
+width="20" align="center"><img class="floatno" src="../images/prev.gif"
+width="15" height="13" alt="&lt;&shy;" title="Předcházející téma"
+border="0"></td><td width="25%"><a
+href="HE_SQL2_PROMENNEJAZYKA.htm">Proměnné klientských aplikací v příkazech SQL (Embedded SQL)</a></td> <td width="25%"
+align="right"><img class="floatno" src="../images/up.gif" width="13"
+height="15" alt="Nahoru" title="O jednu úroveň výš" border="0"
+align="middle"></td><td width="25%"><a href="HE_SQL2_PROMENNEJAZYKA.htm">Proměnné klientských aplikací v příkazech SQL (Embedded SQL)</a></td>
+<td width="25%" align="right">&nbsp;</td>
+<td width="20" align="center">&nbsp;</td>
+</tr></table>
+
+
+
+
+
+<h1><a name="he_sql2_promennejazyka_ext"></a>Proměnné z externích jazyků v příkazech SQL</h1>
+
+<p>Pokud je klientská aplikace vytvořena v některém externím programovacím jazyce (C/C++, Pascal, bez využití <a href="../xml/html/cdkmain.html">CDK</a> komponent nebo <a href="../xml/html/dotnettop.html">ADO.NET</a> provideru), pak SQL příkaz obsahující klientské proměnné musí být na server poslán pomocí API funkce <a href="HE_F_SQLHOSTEXECUTE.htm"><code>SQL_host_execute</code></a> nebo <a href="../xml/html/f_sql_host_prepare.html"><code>SQL_host_prepare</code></a>, a použité proměnné musí být explicitně zpřístupněny pomocí jejího parametru <i>hostvars</i>.</p>
+
+<p>Parametrem <i>hostvars</i> je pole, jehož jednotlivé složky typu <i>t_clivar</i> popisují jednotlivé klientské proměnné použité v příkazu SQL. Počet složek pole je uveden v parametru <i>hostvars_count</i>. <i>t_clivar</i> je struktura s tímto obsahem:</p>
+
+<pre><code>struct t_clivar  // popis proměnné klienta přístupné pro SQL server
+{ tname     name;   // jméno proměnné (velká písmena)
+  t_parmode mode;   // způsob předávání hodnoty proměnné
+  int       wbtype; // typ proměnné
+  t_specif  specif; // doplňující údaje o typu
+  void *    buf;    // ukazatel na buffer s hodnotou proměnné
+  int       buflen; // délka bufferu buf
+  int       actlen; // skutečná délka hodnoty - plati pouze pro typy proměnné velikosti
+};</code></pre>
+
+<pre>type t_clivar = record
+  name : tname;      { jmeno promenne (velka pismena) }
+  mode : t_parmode;  { zpusob predavani hodnoty promenne }
+  wbtype : Integer;  { typ promenne }
+  specif : t_specif; { specificke udaje k typu (delka retezce, pocet desetinnych mist,...)}
+  buf : Pointer;     { ukazatel na buffer s hodnotou promenne }
+  buflen : Integer;  { delka bufferu buf }
+  actlen : Integer;  { skutecna delka hodnoty - plati pouze pro typy promenne velikosti }
+end;</pre>
+
+
+<p>Typy a hodnoty položek použitých v této struktuře v definovány v definičních souborech pro příslušné programovací jazyky. Pro vstupní hodnoty proměnné velikosti (BLOB, CLOB) je třeba vyplnit nejen délku bufferu pro hodnotu <i>buflen</i>, ale i skutečnou délku hodnoty <i>actlen</i>. Pro výstupní hodnoty proměnné velikosti (BLOB, CLOB) stačí vyplnit délku bufferu pro hodnotu <i>buflen</i>, zatímco skutečná délka hodnoty <i>actlen</i> se ve struktuře objeví po provedení příkazu.</p>
+
+<p>Složka <i>specif</i> obsahuje doplňující údaje o typu proměnné. Je to obsah <a href="../xml/html/t_specif.html">struktury</a> <code>t_specif</code> zapsaný jako32-bitové celé číslo. Pro znakové řetězce pevné délky je to maximální délka řetězce, charset a příznak UNICODE, pro binární řetězce pevné délky je jejich to délka, pro přesná čísla (NUMERIC) je to počet desetinných míst, v ostatních případech nula.</p>
+
+<p>Značky &lt; a &gt; udávající v SQL příkazu směr přenosu hodnoty není nutno uvádět, protože stejná informace je již obsažena ve složce <i>mode</i>. Jsou-li tyto přesto značky v SQL příkazu uvedeny, ignorují se.</p>
+
+<h2>Dynamická alokace bufferu</h2>
+
+<p>Pro výstupní hodnoty proměnné velikosti (BLOB, CLOB) nemusí být před provedeném příkazu zřejmá délka hodnoty. Může být proto obtížné předem alokovat buffer, který pojme celou vrácenou hodnotu.</p>
+
+<p>V takovém případě lze nastavit ukazatel na buffer <i>buf</i> na NULL, údaj <i>buflen</i> se pak ignoruje. Při provedení příkazu se automaticky alokuje buffer potřebné velikosti a bude vrácen v <i>buf</i>. Programátor musí poté buffer uvolnit pomocí funkce <a href="../xml/html/f_corefree.html"><ident>corefree</ident></a>.</p>
+
+<br><p><b>Příklad:</b></p>
+
+<p>Volání funkce Maxim_plat s předáním vstupního parametru a návratem hodnoty:</p>
+
+<pre><code>t_clivar vardescr[2];
+int os_cislo, max_plat;
+strcpy(vardescr[0].name, "OS_CISLO");
+vardescr[0].mode=MODE_IN;
+vardescr[0].wbtype=ATT_INT32;
+vardescr[0].specif=0;
+vardescr[0].buf=&amp;os_cislo;
+vardescr[0].buflen=sizeof(os_cislo);
+strcpy(vardescr[1].name, "MAX_PLAT");
+vardescr[1].mode=MODE_OUT;
+vardescr[1].wbtype=ATT_INT32;
+vardescr[1].specif=0;
+vardescr[1].buf=&amp;max_plat;
+vardescr[1].buflen=sizeof(max_plat);
+os_cislo = 1294;
+cd_SQL_host_execute(cdp, "SET :&gt;MAX_PLAT = MAXIM_PLAT(:&lt;OS_CISLO)", NULL, vardescr, 2);
+// vysledek je v promenne max_plat.</code></pre>
+
+
+
+
+
+
+<table class="navigace" border="0" width="100%"  bgcolor="#FFFFBF"><tr> <td
+width="20" align="center"><img class="floatno" src="../images/prev.gif"
+width="15" height="13" alt="&lt;&shy;" title="Předcházející téma"
+border="0"></td><td width="25%"><a
+href="HE_SQL2_PROMENNEJAZYKA.htm">Proměnné klientských aplikací v příkazech SQL (Embedded SQL)</a></td> <td width="25%"
+align="right"><img class="floatno" src="../images/up.gif" width="13"
+height="15" alt="Nahoru" title="O jednu úroveň výš" border="0"
+align="middle"></td><td width="25%"><a href="HE_SQL2_PROMENNEJAZYKA.htm">Proměnné klientských aplikací v příkazech SQL (Embedded SQL)</a></td>
+<td width="25%" align="right">&nbsp;</td>
+<td width="20" align="center">&nbsp;</td>
+</tr></table>
+
+</body>
+</html>

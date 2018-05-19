@@ -1,0 +1,46 @@
+<!doctype html public "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=Windows-1250">
+<title>Funkce start_package</title>
+<link rel='stylesheet' style='text/css' href='../function.css'>
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000">
+
+
+
+<h2 class=function>start_package</h2>
+<img src='../images/cpp.gif' width='44' height='16' border='0' alt='c/c++' align='middle' hspace='2'><img src='../images/pascal.gif' width='44' height='16' border='0' alt='pascal' align='middle' hspace='2'>
+
+
+<br><br>
+<div class='typ'>void <b>[cd_]start_package</b>([cdp_t cdp]);<br>
+procedure <b>[cd_]start_package </b>([cdp : cdp_t]);
+</div>
+
+
+<p><b>Parametry</b></p>
+
+<table border=1 cols=2 frame=box rules=all width=393>
+
+<tr valign="top">
+<td width=22%>[<i>cdp </i></td>
+<td width=78%><a href="HE_EXTCD.htm">kontextová proměnná</a> klienta]  </td>
+</tr>
+</table><br>
+
+<p><b>Popis </b></p>
+
+<p>Procedura způsobí, že následující požadavky na server budou ukládány do balíku, jehož odeslání serveru se zajistí až voláním procedury <b><code>send_package</code></b>. Pokud v&nbsp;okamžiku, kdy je procedura <b><code>start_package</code></b> volána, je ukládání požadavků do balíku již aktivní, neprovádí se nic.</p>
+
+<p>Za normálních podmínek se po zavolání příslušné funkce požadavek klienta předává serveru. Požadavek musí pak urazit cestu od klienta k serveru a odpověď cestu nazpět. Při provozu v síti vyžaduje každý takový požadavek zaslání zprávy z jednoho počítače na druhý a pak zpátky. To trvá určitou dobu a v některých případech může být žádoucí tuto dobu zkracovat. Proto byla zavedena možnost sdružovat požadavky do balíků.</p>
+
+<p>Pokud je sdružování aktivní, pak každý požadavek klienta se zaznamená, ale jeho odeslání se odloží. Nastřádané požadavky se odešlou najednou, až na explicitní žádost klienta procedurou  <b><code>send_package</code></b>..</p>
+
+<p><b>Viz</b></p>
+
+<ul class='viz'><li><a href="HE_F_SENDPACKAGE.htm">send_package</a></ul>
+
+</body>
+</html>

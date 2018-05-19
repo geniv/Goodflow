@@ -1,0 +1,78 @@
+<!doctype html public "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=Windows-1250">
+<title>Funkce MailSetProfileProp</title>
+<link rel='stylesheet' style='text/css' href='../function.css'>
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000">
+
+
+
+<h2 class=function>MailSetProfileProp</h2>
+<img src='../images/cpp.gif' width='44' height='16' border='0' alt='c/c++' align='middle' hspace='2'><img src='../images/pascal.gif' width='44' height='16' border='0' alt='pascal' align='middle' hspace='2'><img src='../images/sql.gif' width='44' height='16' border='0' alt='sql' align='middle' hspace='2'>
+
+
+<br><br>
+<div class='typ'>int <b>MailSetProfileProp</b>(const char *profile, const char *propname, DWORD const char *propvalue);<br>
+function <b>MailSetProfileProp</b>(profile : PChar; propname : PChar; propvalue : PChar); integer;<br>
+FUNCTION <b>MailSetProfileProp</b>(INOUT profile : CHAR(63), INOUT propname : CHAR(63), INOUT propvalue : CHAR(255)) RETURNS INT;<br>
+</div>
+
+<p><b>Parametry</b></p>
+
+<table border=1 cols=2 frame=box rules=all width=480>
+
+<tr valign="top">
+<td width=33%><i><code>profile</code></i></td>
+<td width=67%>jméno poštovního profilu</td>
+</tr>
+
+<tr valign="top">
+<td width=33%><i><code>propname</code></i></td>
+<td width=67%>jméno parametru poštovního profilu</td>
+</tr>
+
+<tr valign="top">
+<td width=33%><i><code>propvalue</code></i></td>
+<td width=67%>nová hodnota parametru poštovního profilu</td>
+</tr>
+</table><br>
+
+<p><b>Od verze</b></p>
+
+<p>8.0</p>
+
+<p><b>Popis</b></p>
+
+<p>Přidělí zadanému parametru poštovního <a href="HE_MAILPROFILES.htm">profilu</a> novou (neprázdnou) hodnotu; pokud parametr <em>propname</em> neexistuje, vytvoří jej. Standardní (trvalé) profily může modifikovat pouze provozní správce databáze, dočasný profil může měnit každý uživatel s&nbsp;výjimkou parametru <b>FilePath</b>. Heslo pro přístup k&nbsp;poště a heslo pro navázání telefonického spojení nelze pomocí této funkce měnit.</p>
+<p>Touto funkcí nelze zadat prázdnou hodnotu parametru profilu.</p>
+
+<p><b>Hodnota funkce</b></p>
+
+<p>Funkce vrací nulu v případě úspěchu a číslo chyby v případě neúspěchu. Číslo chyby lze na klientské straně zjistit také pomocí <b><code>Sz_error</code></b> nebo <b><code>Signalize</code></b>.</p>
+
+<p><b>Příklad </b></p>
+<p>nahradit v profilu zadanou odesílací adresu z pevného profilu (vlatnost <code>MyAdress</code>) jinou adresou:</p>
+<pre><code>// je trvalý profil typu SMTP?
+SET Err=MailGetProfileProp(profile,"SMTPServer",smtp_server,100); 
+// jestliže ano, uděláme nový dočasný profil se stejným SMTP serverem (a případně dalšími vlastnostmi) 
+// a nahradíme adresu 
+IF Err=0 THEN     
+  SET nova_adresa = ...;
+  CALL MailCreateProfile("_temporary",TRUE);
+  CALL MailSetProfileProp("_temporary","SMTPServer",smtp_server);
+  CALL MailSetProfileProp("_temporary","MyAddress",nova_adresa);</code></pre>
+<p><b>Viz</b></p>
+
+<ul class='viz'>
+ <li><a href="HE_F_MAILCREATEPROFILE.htm">MailCreateProfile</a> </li>
+ <li><a href="HE_F_MAILDELETEPROFILE.htm">MailDeleteProfile</a> </li>
+ <li><a href="HE_F_MAILGETPROFILEPROP.htm">MailGetProfileProp</a></li>
+ <li><a href="HE_F_INITWBMAIL.htm">InitWBMail</a></li>
+ <li><a href="HE_F_CLOSEWBMAIL.htm">CloseWBMail</a></li>
+</ul>
+
+</body>
+</html>

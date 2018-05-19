@@ -1,0 +1,135 @@
+<!doctype html public "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=Windows-1250">
+<title>Popis sekvence</title>
+<link rel='stylesheet' style='text/css' href='../function.css'>
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr>
+	<td style="background-image: url(../images/bghead.jpg);
+		background-position: right;
+		background-repeat: no-repeat;">
+	<table width="100%" border="0" cellpadding="0" cellspacing="0"
+		style="background-image:none">
+	<tr>
+		<td style="background-image:none" height="46"
+			width="15%"><img src="../images/title-cz.gif"
+			width="255" height="33"
+			alt="602SQL-Úplná dokumentace"
+			title="602SQL - Úplná dokumentace"
+			border="0"></td>
+		<td width="33%" align="right"><a href="../xml/html/top.html"><img class="floatno"
+			src="../images/index.gif"
+			width="15" height="16"
+			alt="Index" title="Zpět na obsah"
+			border="0" vspace="2"></a> &nbsp;
+			 </td>
+	</tr>
+	</table>
+	</td>
+</tr>
+</table><table class="navigace" border="0" width="100%"  bgcolor="#FFFFBF">
+		  <tr>
+					 <td width="20" align="center">&nbsp;</td>
+					 <td width="25%">&nbsp;</td>
+					 <td width="25%"
+align="right"><img class="floatno" src="../images/up.gif" width="13"
+height="15" alt="Nahoru" title="O jednu úroveň výš" border="0"
+align="middle"></td><td width="25%"><a href="HE_SQL2_SEKVENCE.htm">Sekvence</a></td>
+<td width="25%" align="right"><a
+href="HE_SQL2_CREATESEQUENCE.htm">Příkaz CREATE SEQUENCE</a></td><td width="20"
+align="center"><img class="floatno" src="../images/next.gif" width="15"
+height="13" alt="&shy;&gt;" title="Následující téma" border="0"></td>
+</tr></table>
+
+
+
+
+
+<h1><a name="he_sql2_seqpopis"></a>Syntaxe popisu sekvence (SQL)</h1>
+
+<pre><code>popis_sekvence :== SEQUENCE [schéma.]jméno_sekvence [ parametr_sekvence … ]
+parametr_sekvence :== AS typ | START WITH celé_číslo | RESTART WITH celé_číslo 
+    | INCREMENT BY celé_číslo 
+    | MAXVALUE celé_číslo | NOMAXVALUE | MINVALUE celé_číslo | NOMINVALUE 
+    | CYCLE | NOCYCLE | CACHE celé_číslo | NOCACHE | ORDER | NOORDER</code></pre>
+
+<p><i>Celé_číslo</i> je číslo v rozsahu BIGINT (64 bitový integer - tj. cca +/-9223372036854775000).</p>
+
+<p>Při vytváření nebo modifikování <a href="HE_SQL2_SEKVENCE.htm">sekvence</a> lze zadat tyto údaje:
+
+<ul>
+    <li>typ hodnot (AS);</li>
+	<li>počáteční hodnotu, od niž se generuje sekvence čísel (START WITH);</li>
+    <li>hodnotu, od které se bude pokračovat s generováním (RESTART WITH) - pouze v ALTER SEQUENCE;</li>
+	<li>krok sekvence, tedy rozdíl mezi následující a minulou hodnotou v sekvenci (INCREMENT BY);</li>
+	<li>maximum, které nelze při generování sekvence překročit (MAXVALUE);</li>
+	<li>minimum, které nelze při generování sekvence překročit (MINVALUE, týká se klesajících sekvencí);</li>
+	<li>příznak, zda sekvence má po dosažení maxima resp. minima pokračovat cyklicky (CYCLE nebo NOCYCLE, CYCLE je nevhodné pro generování unikátních klíčů);</li>
+	<li>použití vyrovnávací paměti a počet hodnot v ní (CACHE nebo NOCACHE).</li>
+</ul>
+
+<p>Se sekvencí je také spojen celočíselný údaj udávající její aktuální hodnotu, tedy hodnotu, která se získá při příštím generování hodnoty ze sekvence.</p>
+
+<p>Je-li uveden typ hodnot sekvence, musí být celočíselný. 602SQL tento typ ignoruje a vždy používá typ BIGINT. Klauzule AS je povolena pouze pro kompatibilitu se standardem SQL 2003.</p>
+
+<p>Implicitní hodnoty nezadaných parametrů při vytváření sekvence jsou START WITH 0 INCREMENT BY 1 NOMINVALUE NOMAXVALUE NOCYCLE CACHE 20. Při modifikování sekvence se parametry neuvedené v příkazu ALTER SEQUENCE zachovají z původní definice sekvence. Zachová se také hodnota, která se má vygenerovat jako příští (pokud patří do intervalu mezi maximální a minimální hodnotou). </p>
+
+<p>Krok sekvence nesmí být nulový. Je-li krok záporný, pak hodnoty v sekvenci klesají, jinak rostou. </p>
+
+<p>Maximum musí být větší než minimum a počáteční hodnota sekvence musí ležet mezi nimi. Je-li krok sekvence kladný, pak implicitní hodnota minima je 1, implicitní hodnota maxima je největší zobrazitelné kladné celé číslo a počáteční hodnota se rovná minimu. Je-li krok sekvence záporný, pak implicitní hodnoty minima je nejmenší zobrazitelné záporné celé číslo, implicitní hodnota maxima je –1 a počáteční hodnota se rovná maximu.</p>
+
+<p>Je-li pomocí parametru CYCLE nastaveno cyklické generování čísel, pak sekvence po dosažení svého maxima (nebo minima v případě klesající sekvence) automaticky vygeneruje jako další hodnotu své (zadané nebo implicitní) minimum (resp.maximum).</p>
+
+<p>Použití vyrovnávací paměti zrychluje generování hodnot v sekvenci. Při první potřebě alokovat hodnotu se naplní celá cache. Pokud některé hodnoty z cache nebudou využity, vrátí se do sekvence při ukončování serveru. Není-li server korektně ukončen v důsledku výpadku systému, hodnoty v cache budou ztraceny. </p>
+
+<p>Parametry ORDER a NOORDER se ignorují.</p>
+
+<p>Při exportu aplikace s daty se zachová současná hodnota sekvence, při exportu aplikace bez dat se sekvence zresetuje (nastaví na počáteční hodnotu).</p>
+
+<p><b>Příklad použití:</b></p>
+
+<pre><code>CREATE SEQUENCE SEQ10
+  START WITH 0
+  INCREMENT BY 10
+  NOMAXVALUE
+  NOMINVALUE
+  CACHE 5
+  NOCYCLE</code></pre>
+
+<p><b>Odlišnosti od normy</b>
+
+<ul>
+    <li>602SQL neomezuje hodnoty sekvence na typ explicitně stanovený v klauzuli AS. To je rozšíření proti normě SQL 2003.</li>
+	<li>Klauzule CACHE, NOCACHE, ORDER a NORODER jsou rozšířením proti normě SQL 2003. Umožňují kompatibilitu s databázemi Oracle</li>
+</ul>
+
+<p><b>Viz</b></p>
+<ul class='viz'>
+ <li><a href="HE_SQL2_CREATESEQUENCE.htm">CREATE SEQUENCE</a> </li>
+ <li><a href="HE_SQL2_ALTERSEQUENCE.htm">ALTER SEQUENCE</a> </li>
+ <li><a href="HE_SQL2_DROPSEQUENCE.htm">DROP SEQUENCE</a></li>
+</ul>
+
+
+
+<table class="navigace" border="0" width="100%"  bgcolor="#FFFFBF">
+		  <tr>
+					 <td width="20" align="center">&nbsp;</td>
+					 <td width="25%">&nbsp;</td>
+					 <td width="25%"
+align="right"><img class="floatno" src="../images/up.gif" width="13"
+height="15" alt="Nahoru" title="O jednu úroveň výš" border="0"
+align="middle"></td><td width="25%"><a href="HE_SQL2_SEKVENCE.htm">Sekvence</a></td>
+<td width="25%" align="right"><a
+href="HE_SQL2_CREATESEQUENCE.htm">Příkaz CREATE SEQUENCE</a></td><td width="20"
+align="center"><img class="floatno" src="../images/next.gif" width="15"
+height="13" alt="&shy;&gt;" title="Následující téma" border="0"></td>
+</tr></table>
+
+</body>
+</html>
+
+

@@ -1,0 +1,52 @@
+<!doctype html public "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=Windows-1250">
+<title>Procedura Log_write</title>
+<link rel='stylesheet' style='text/css' href='../function.css'>
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000">
+
+
+
+<h2 class=function>Log_write</h2>
+<img src='../images/cpp.gif' width='44' height='16' border='0' alt='c/c++' align='middle' hspace='2'><img src='../images/pascal.gif' width='44' height='16' border='0' alt='pascal' align='middle' hspace='2'><img src='../images/sql.gif' width='44' height='16' border='0' alt='sql' align='middle' hspace='2'>
+
+
+<br><br>
+<div class='typ'>void <b>Log_write</b>(const char * text);<br>
+procedure <b>Log_write</b> (text : PChar);<br>
+PROCEDURE <b>Log_write</b> (IN text CLOB);<br>
+
+</div>
+
+
+<p><b>Parametry</b></p>
+
+<table border=1 cols=2 frame=box rules=all width=525>
+
+<tr valign="top">
+<td width=17%>text</td>
+<td width=83%>text, který se má zapsat do logu serveru</td>
+</tr>
+</table><br>
+
+<p><b>Od verze</b></p>
+
+<p>5.1</p>
+
+<p><b>Popis</b></p>
+
+<p>Procedura vytvoří nový řádek s obsahem <i>text</i> v logu serveru.</p>
+
+<p>Log, do něhož je zápis umístěn, je určen nastavením provedeném procedurou <b><u><code>_sqp_trace</code></u></b> . Standardně se zapisuje do základního logu v&nbsp;souboru <code>wbsqllog.txt</code>, jehož aktuální obsah je zároveň vidět v&nbsp;okně serveru.</p>
+
+<p>Zápis do libovolného logu a s volitelným rozsahem kontextu provádí procedura <a href="../xml/html/f_sqp_log_write.html"><code>_sqp_log_write</code></a>.</p>
+
+<p><b>Příklad SQL</b></p>
+
+<pre><code>CALL <b>Log_write</b>("OrderHeader "||"ol_cnt="||CAST(xol_cnt AS CHAR(10)));</code></pre>
+
+</body>
+</html>

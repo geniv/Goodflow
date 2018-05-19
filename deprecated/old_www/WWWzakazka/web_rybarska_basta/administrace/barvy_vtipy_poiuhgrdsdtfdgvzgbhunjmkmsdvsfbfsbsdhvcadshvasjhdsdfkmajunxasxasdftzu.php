@@ -1,0 +1,1 @@
+<?php--x--prechod_tabulka_001--x--prechod_tabulka_002--x--prechod_tabulka_003--x--prechod_tabulka_004--x--prechod_tabulka_005--x--prechod_tabulka_006--x--prechod_tabulka_007--x--prechod_tabulka_008--x--prechod_tabulka_009--x--prechod_tabulka_010--x--prechod_tabulka_011--x--prechod_tabulka_012

@@ -1,0 +1,106 @@
+<!doctype html public "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=Windows-1250">
+<title>Příkaz ALTER SEQUENCE</title>
+<link rel='stylesheet' style='text/css' href='../function.css'>
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr>
+	<td style="background-image: url(../images/bghead.jpg);
+		background-position: right;
+		background-repeat: no-repeat;">
+	<table width="100%" border="0" cellpadding="0" cellspacing="0"
+		style="background-image:none">
+	<tr>
+		<td style="background-image:none" height="46"
+			width="15%"><img src="../images/title-cz.gif"
+			width="255" height="33"
+			alt="602SQL-Úplná dokumentace"
+			title="602SQL - Úplná dokumentace"
+			border="0"></td>
+		<td width="33%" align="right"><a href="../xml/html/top.html"><img class="floatno"
+			src="../images/index.gif"
+			width="15" height="16"
+			alt="Index" title="Zpět na obsah"
+			border="0" vspace="2"></a> &nbsp;
+			 </td>
+	</tr>
+	</table>
+	</td>
+</tr>
+</table><table class="navigace" border="0" width="100%"  bgcolor="#FFFFBF"><tr> <td
+width="20" align="center"><img class="floatno" src="../images/prev.gif"
+width="15" height="13" alt="&lt;&shy;" title="Předcházející téma"
+border="0"></td><td width="25%"><a
+href="HE_SQL2_CREATESEQUENCE.htm">Příkaz CREATE SEQUENCE</a></td> <td width="25%"
+align="right"><img class="floatno" src="../images/up.gif" width="13"
+height="15" alt="Nahoru" title="O jednu úroveň výš" border="0"
+align="middle"></td><td width="25%"><a href="HE_SQL2_SEKVENCE.htm">Sekvence</a></td>
+<td width="25%" align="right"><a
+href="HE_SQL2_DROPSEQUENCE.htm">Příkaz DROP SEQUENCE</a></td><td width="20"
+align="center"><img class="floatno" src="../images/next.gif" width="15"
+height="13" alt="&shy;&gt;" title="Následující téma" border="0"></td>
+</tr></table>
+
+
+
+
+<h1><a name="he_sql2_altersequence"></a>Příkaz ALTER SEQUENCE (SQL)</h1>
+<pre><code>příkaz_ALTER_SEQUENCE :== ALTER popis_sekvence</code></pre>
+
+<p><a href="HE_SQL2_PRIKAZY.htm">Příkaz</a> ALTER SEQUENCE modifikuje existující definici <a href="HE_SQL2_SEKVENCE.htm">sekvence</a> nebo mění příští hodnotu sekvence. Stará definice bude přepsána novou podle <a href="HE_SQL2_SEQPOPIS.htm">popisu</a>.</p>
+
+<p>Při modifikování sekvence se parametry neuvedené v příkazu ALTER SEQUENCE zachovají z původní definice sekvence.</p>
+
+<p>Sekvence po modifikaci bude pokračovat v číselné řadě jako před modifikací, s výjimkou dvou případů: je-li v příkazu uvedena mezi měněnými parametry klauzule RESTART WITH <em>nová_hodnota</em>, nastaví se jako příští hodnota sekvence <em>nová_hodnota</em>; je-li příkaz ve tvaru ALTER SEQUENCE <em>jméno</em>; (tj. bez parametrů sekvence), provede se nastavení hodnoty na počáteční hodnotu (reset sekvence).
+</p>
+
+<p>V popisu sekvence v příkazu ALTER SEQUENCE nelze použít klauzuli AS pro specifikaci typu.</p>
+
+<p>Provedení tohoto příkazu vždy ukončí otevřenou transakcí.</p>
+
+<p>Alternativně lze sekvenci modifikovat z řídicího panelu vývojového prostředí 602SQL.</p>
+
+<br>
+<p><b>Příklad:</b></p>
+
+<p>Při inicializaci změnit příští hodnotu sekvence na hodnotu o jedna větší než je maximální hodnota klíče v tabulce:</p>
+
+<pre><code>  DECLARE maxid INT;
+  SELECT MAX(id)+1 INTO maxid FROM Tab;
+
+  CALL SQL_execute('ALTER SEQUENCE seqx RESTART WITH '||Int2str(maxid));</code></pre>
+
+<p><b>Odlišnosti od normy</b>
+
+<ul>
+	<li>Jako rozšíření proti standardu SQL 2003 lze v příkazu ALTER SEQUENCE použít také klauzuli START WITH. Provedením takového příkazu se změní startovní hodnota sekvence a, pokud není uvedena klauzule RESTART WITH, nastaví se na tuto todnotu také aktuální hodnota sekvence.</li>
+</ul>
+
+  
+<p><b>Viz</b></p>
+
+<ul class='viz'>
+ <li><a href="HE_SQL2_CREATESEQUENCE.htm">CREATE SEQUENCE</a> </li>
+ <li><a href="HE_SQL2_DROPSEQUENCE.htm">DROP SEQUENCE</a></li>
+</ul>
+
+
+
+<table class="navigace" border="0" width="100%"  bgcolor="#FFFFBF"><tr> <td
+width="20" align="center"><img class="floatno" src="../images/prev.gif"
+width="15" height="13" alt="&lt;&shy;" title="Předcházející téma"
+border="0"></td><td width="25%"><a
+href="HE_SQL2_CREATESEQUENCE.htm">Příkaz CREATE SEQUENCE</a></td> <td width="25%"
+align="right"><img class="floatno" src="../images/up.gif" width="13"
+height="15" alt="Nahoru" title="O jednu úroveň výš" border="0"
+align="middle"></td><td width="25%"><a href="HE_SQL2_SEKVENCE.htm">Sekvence</a></td>
+<td width="25%" align="right"><a
+href="HE_SQL2_DROPSEQUENCE.htm">Příkaz DROP SEQUENCE</a></td><td width="20"
+align="center"><img class="floatno" src="../images/next.gif" width="15"
+height="13" alt="&shy;&gt;" title="Následující téma" border="0"></td>
+</tr></table>
+</body>
+</html>

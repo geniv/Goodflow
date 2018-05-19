@@ -1,0 +1,64 @@
+<!doctype html public "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=Windows-1250">
+<title>Funkce Fulltext_destroy</title>
+<link rel='stylesheet' style='text/css' href='../function.css'>
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000">
+
+
+
+<h2 class=function>Fulltext_destroy</h2>
+<img src='../images/sql.gif' width='44' height='16' border='0' alt='sql' align='middle' hspace='2'>
+
+
+<br><br>
+<div class='typ'>FUNCTION <b>Fulltext_destroy</b>(IN ft_label CHAR(52)) RETURNS BOOLEAN;
+</div>
+
+
+<p><b>Parametry:</b></p>
+
+<table border=1 cols=2 frame=box rules=all width=407>
+
+<tr valign="top">
+<td width=24%><i>ft_label </i></td>
+<td width=76%> označení fulltextového systému;</td>
+</tr>
+</table><br>
+
+<p><b>Od verze:</b></p>
+
+<p>7.0</p>
+
+<p><b>Popis:</b></p>
+
+<p>Zastaralá funkce, nahrazena od verze 9.5 SQL příkazem <a href="../xml/html/fulltext_drop.html">DROP FULLTEXT</a>.</p>
+
+<p>Funkce odstraní  na SQL serveru existující fulltextový systém. Parametr <i>ft_label</i> určuje aplikaci, v níž je fulltextový systém vytvořen, a případný identifikátor slouží k rozlišení fulltextových systému v rámci jedné aplikace.</p>
+
+<p>Pokud se neprovede odstranění tímto způsobem (ale pouze smazáním tabulek FTX_), zůstane v aplikaci skrytý systémový objekt, který znemožní budoucí vytvoření fulltextového systému téhož jména.</p>
+
+<p><b>Hodnota funkce</b></p>
+
+<p>Funkce vrací TRUE při úspěchu, FALSE při chybě.</p>
+
+<p><b>Příklady:</b></p>
+
+<p><code>CALL Fulltext_destroy("SPISOVNA.DOPISY")</code> </p>
+
+<p><code>CALL Fulltext_destroy("")</code> - odstraní fulltextový systém s prázdným identifikátorem v otevřené aplikaci.</p>
+
+<p><b>Viz</b></p>
+
+<ul class='viz'>
+ <li><a href="../xml/html/fulltext.html">Fulltextové nástroje ve 602SQL</a> </li>
+ <li><a href="../xml/html/fulltext_doctab.html">Označování a uložení dokumentů ve fulltextových systémech</a> </li>
+ <li><a href="../xml/html/fulltext_search.html">Fulltextové vyhledávání dokumentů</a></li>
+ <li><a href="HEJ_F_FULLTEXTCREATE.htm">Fulltext_create</a> </li>
+</ul>
+
+</body>
+</html>

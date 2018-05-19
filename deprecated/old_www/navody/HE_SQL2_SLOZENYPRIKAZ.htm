@@ -1,0 +1,96 @@
+<!doctype html public "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=Windows-1250">
+<title>Složený příkaz v SQL</title>
+<link rel='stylesheet' style='text/css' href='../function.css'>
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr>
+	<td style="background-image: url(../images/bghead.jpg);
+		background-position: right;
+		background-repeat: no-repeat;">
+	<table width="100%" border="0" cellpadding="0" cellspacing="0"
+		style="background-image:none">
+	<tr>
+		<td style="background-image:none" height="46"
+			width="15%"><img src="../images/title-cz.gif"
+			width="255" height="33"
+			alt="602SQL-Úplná dokumentace"
+			title="602SQL - Úplná dokumentace"
+			border="0"></td>
+		<td width="33%" align="right"><a href="../xml/html/top.html"><img class="floatno"
+			src="../images/index.gif"
+			width="15" height="16"
+			alt="Index" title="Zpět na obsah"
+			border="0" vspace="2"></a> &nbsp;
+			 </td>
+	</tr>
+	</table>
+	</td>
+</tr>
+</table><table class="navigace" border="0" width="100%"  bgcolor="#FFFFBF">
+		  <tr>
+					 <td width="20" align="center">&nbsp;</td>
+					 <td width="25%">&nbsp;</td>
+					 <td width="25%"
+align="right"><img class="floatno" src="../images/up.gif" width="13"
+height="15" alt="Nahoru" title="O jednu úroveň výš" border="0"
+align="middle"></td><td width="25%"><a href="HE_SQL2_RIDICIPRIKAZY.htm">Řídící příkazy</a></td>
+<td width="25%" align="right"><a
+href="HE_SQL2_SET.htm">Přiřazovací příkaz SET</a></td><td width="20"
+align="center"><img class="floatno" src="../images/next.gif" width="15"
+height="13" alt="&shy;&gt;" title="Následující téma" border="0"></td>
+</tr></table>
+
+
+
+
+
+<h1><a name="he_sql2_slozenyprikaz"></a>Složený příkaz (SQL)</h1>
+
+<pre><code>složený příkaz ::= [ návěští : ] BEGIN [ [ NOT ] ATOMIC ]
+[ deklarace_proměnných … ]
+[ deklarace_rutiny … ]
+[ deklarace_výjimky … ]
+[ deklarace_tabulky … ]
+[ deklarace_kurzoru …]
+[ deklarace_handleru …]
+[ příkaz …]
+END [ návěští ];</code></pre>
+
+<p>Složený příkaz (blok) je tvořen jedním nebo více SQL <a href="HE_SQL2_PRIKAZY.htm">příkazů</a>. Začíná klíčovým slovem BEGIN a končí slovem END. Ve složeném příkazu lze <a href="../xml/html/declare.html">deklarovat lokální objekty</a> (např. proměnné, rutiny, kurzory, tabulky), které budou existovat (pouze) po dobu provádění složeného příkazu a budou moci být využívány v&nbsp;příkazech obsažených ve složeném příkazu (včetně vnořených složených příkazů). Je-li uvnitř složeného příkazu volána procedura, lokální objekty v ní nejsou viditelné.</p>
+
+<p>Při vstupu do složeného příkazu se vytvoří lokální proměnné. Poté se po řadě provedou v něm obsažené příkazy, leda že dojde k chybě nebo je proveden příkaz <a href="HE_SQL2_LEAVE.htm">LEAVE</a>. Při opuštění složeného příkazu se uzavřou všechny otevřené lokální kurzory, zaniknou proměnné a dočasné tabulky a zruší se body návratu vytvořené během jeho provádění.</p>
+
+<p>ATOMIC označuje <em>atomický složený příkaz</em>, což znamená, že se provádí jako jeden celek a může být jako celek odvolán v&nbsp;případě chyby. Není-li uvedeno ATOMIC ani NOT ATOMIC, složený příkaz není atomický. V atomickém složeném příkazu nesmí být obsaženy ani provedeny <a href="HE_SQL2_TRANSAKCE.htm">transakční příkazy</a> COMMIT nebo ROLLBACK kromě <a href="HE_SQL2_ROLLBACK.htm">ROLLBACK TO SAVEPOINT</a> na bod návratu vytvořený uvnitř tohoto složeného příkazu. <a href="HE_SQL2_DEKLARACEHANDLERU.htm">Deklarace handleru</a> typu REDO nebo UNDO smí být obsažena pouze v&nbsp;atomickém složeném příkazu.</p>
+
+<p>Je-li uvedeno koncové <i>návěští</i>, pak musí být uvedeno také stejné počáteční <i>návěští</i>. Uvnitř složeného příkazu nesmí být žádný příkaz označen stejným návěštím.</p>
+
+<p>V deklaracích bezprostředně obsažených ve složeném příkazu se nesmí vyskytnout dvakrát stejné jméno proměnné resp. rutiny, dvakrát stejné jméno výjimky nebo dvakrát stejné jméno kurzoru.</p>
+
+<p><b>Rozšíření jazyka SQL proti normě</b>
+
+<ul>
+	<li>Deklarace <a href="HE_SQL2_STOREDPROCEDURE.htm">rutiny</a> ve složeném příkazu byla vypuštěna z posledních návrhů SQL 3, ve 602SQL je však přípustná.</li>
+</ul>
+
+
+
+<table class="navigace" border="0" width="100%"  bgcolor="#FFFFBF">
+		  <tr>
+					 <td width="20" align="center">&nbsp;</td>
+					 <td width="25%">&nbsp;</td>
+					 <td width="25%"
+align="right"><img class="floatno" src="../images/up.gif" width="13"
+height="15" alt="Nahoru" title="O jednu úroveň výš" border="0"
+align="middle"></td><td width="25%"><a href="HE_SQL2_RIDICIPRIKAZY.htm">Řídící příkazy</a></td>
+<td width="25%" align="right"><a
+href="HE_SQL2_SET.htm">Přiřazovací příkaz SET</a></td><td width="20"
+align="center"><img class="floatno" src="../images/next.gif" width="15"
+height="13" alt="&shy;&gt;" title="Následující téma" border="0"></td>
+</tr></table>
+
+</body>
+</html>

@@ -1,0 +1,135 @@
+<!doctype html public "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=Windows-1250">
+<title>Funkce Fulltext_index_doc</title>
+<link rel='stylesheet' style='text/css' href='../function.css'>
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000">
+
+
+
+<h2 class=function>Fulltext_index_doc</h2>
+<img src='../images/cpp.gif' width='44' height='16' border='0' alt='c/c++' align='middle' hspace='2'><img src='../images/pascal.gif' width='44' height='16' border='0' alt='pascal' align='middle' hspace='2'><img src='../images/sql.gif' width='44' height='16' border='0' alt='sql' align='middle' hspace='2'>
+
+
+<br><br>
+<div class='typ'>BOOL <b>cd_Fulltext_index_doc</b>(cdp_t cdp, const char * ft_label, t_docid docid, const char * filename, const char * format);<br>
+function <b>cd_Fulltext_index_doc</b>(cdp : cdp_t;  ft_label : PChar;  docid : integer;  filename, format : PChar) : Boolean;<br>
+FUNCTION <b>Fulltext_index_doc</b>(IN ft_label CHAR(52), IN docid INT, IN doc CLOB, IN format CHAR(10), IN mode INT) RETURNS BOOLEAN;
+</div>
+
+
+<p><b>Parametry:</b></p>
+
+<table border=1 cols=2>
+
+<tr valign="top">
+<td><i>ft_label </i></td>
+<td>označení fulltextového systému ve tvaru <code>schéma.fulltext</code> nebo <code>.fulltext</code> pro otevřenou aplikaci;</td>
+</tr>
+
+<tr valign="top">
+<td><i>docid </i></td>
+<td>číslo dokumentu (unikátní hodnota v rámci fulltextového systému);</td>
+</tr>
+
+<tr valign="top">
+<td><i>filename </i></td>
+<td>plné jméno souboru obsahujícího dokument (pouze na klientské straně);</td>
+</tr>
+
+<tr valign="top">
+<td><i>format </i></td>
+<td>formát dokumentu (popis niže);</td>
+</tr>
+
+<tr valign="top">
+<td><i>doc </i></td>
+<td>dokument nebo odkaz na dokument podle hodnoty paramametru <em>mode</em>;</td>
+</tr>
+
+<tr valign="top">
+<td><i>mode </i></td>
+<td>způsob předání dokumentu</td>
+</tr>
+</table><br>
+
+<p><b>Od verze:</b></p>
+
+<p>7.0</p>
+
+<p><b>Popis:</b></p>
+
+<p>Funkce uloží dokument specifikovaný parametry do fulltextového systému označeného parametrem <i>ft_label</i>. Od 602SQL verze 9.5 existuje jednodušší způsob deklarování fulltextových triggerů, nicméně tento obecný postup má stále význam ve složitějších případech.</p>
+
+<p>Je-li funkce volána na straně serveru (SQL syntax), pak lze dokument předat dvojím způsobem, přičemž způsob předání popisuje parametr <i>mode</i> takto:</p>
+
+<table border=1>
+<tr><td><strong>hodnota</strong></td><td><strong>&nbsp;&nbsp;popis</strong></td></tr>
+<tr><td width="8%">0</td><td>dokument je obsahem parametru <i>doc </i>(tj. v parametru <i>doc</i> je obsah sloupce (nebo výraz) typu CHAR nebo CLOB, resp. BLOB, je-li obsahem binární soubor);</td></tr>
+<tr><td>1</td><td>dokument je v souboru, jehož jméno je v parametru <i>doc </i>(tj. v parametru <i>doc</i> je obsah sloupce typu CHAR, který obsahuje jen plná jména souborů; soubory se musí nacházet lokálně na počítači, kde běží server při volání funkce z SQL nebo kde běží klient při volání z klientské strany);</td></tr>
+</table>
+<br>
+<p>Pomocí <i>format</i> lze zvolit, má-li se indexovat čistý text (parametr <code>TXT</code>, <code>TEXT</code> nebo <code>PLAIN</code>) nebo jiný formát (<code>RTF</code>, <code>DOC</code>, <code>HTM</code>, <code>XML</code>, <code>XLS</code>, <code>PDF</code>, <code>PPT</code> a <code>OOO</code> (OpenOffice.org formáty verze 1 i 2)) - v tomto případě se provádí dodatečná analýza textu, je-li skutečně daný formát a jaké verze (u DOC). Nepodaří-li se analýza, funkce skončí s chybou CONVERSION_NOT_SUPPORTED (<a href="../xml/html/handlingcategories.html">sqlstate</a> W0226). Je-li parametr <em>format</em> prázdný řetězec, provede se analýza textu a vybere se známý formát (nebo nastane chyba, když se formát nerozpozná). Toto je obvyklý způsob indexování různých dokumentů (např. souborů). Je-li parametr <em>format</em> <code>ZIP</code>, text se nejprve rozzipuje, najde se vhodný konvertor a provede se indexace.</p>
+
+<p>Pokud je způsob uložení dokumentu 1 (jméno souboru) a soubor se nenajde, skončí funkce chybou CONVERSION_NOT_SUPPORTED (sqlstate W0226).</p>
+
+<p>Je-li funkce volána na klientské straně (C nebo Pascal syntax), pak dokument musí být uložen v souboru, jehož plné jméno je předáno jako parametr <i>filename</i>.</p>
+
+<p>Pokud fulltextový systém již obsahuje informace o obsahu dokumentu označeného parametrem <i>docid</i>, jsou před zaindexováním předaného dokumentu vymazány. Pokud indexujete více tabulek, věnujte pozornost unikátnosti čísla dokumentu pro všechny tabulky (např. využitím jedné sekvence)!</p>
+
+<p><b>Hodnota funkce:</b></p>
+
+<p>Funkce vrací TRUE při úspěchu, FALSE při chybě.</p>
+
+<p><b>Příklad:</b></p>
+
+<p>Předpokládejme, že tabulka TXTAB obsahuje text ve sloupci TX a číslo tohoto dokumentu ve sloupci CISLO_DOC. Text je buď prostý text nebo je ve formátu RTF. Zaindexování lze pak provádět v triggeru definovaném takto:</p>
+
+<pre><code>TRIGGER txupd AFTER UPDATE ON Txtab
+REFERENCING NEW AS nove FOR EACH ROW
+BEGIN
+  IF Substring(nove.tx FROM 1 FOR 5) = '{\rtf' THEN
+    CALL <b>Fulltext_index_doc</b>('.FT_FORUM', nove.cislo_doc, nove.tx, 'rtf', 0);
+  ELSE
+    CALL <b>Fulltext_index_doc</b>('.FT_FORUM', nove.cislo_doc, nove.tx, 'txt', 0);
+  END IF;
+END</code></pre>
+
+<p>Tento trigger předpokládá, že se číslo dokumentu při operaci UPDATE nemění.</p>
+
+<p><b>Příklad:</b></p>
+
+<p>Předpokládejme, že tabulka MojeCD má mj. primární klíč Id_CD, dále sloupce Nazev a Interpret typu CHAR(250) a Poznamka typu CLOB. Všechny tyto údaje je třeba zaindexovat (při vkládání nového CD a při editaci).</p>
+
+<pre><code>TRIGGER PoVlozeniCD AFTER INSERT ON MojeCD
+REFERENCING NEW AS nove FOR EACH ROW
+BEGIN
+  CALL <b>Fulltext_index_doc</b>('.cd_ft', nove.id_CD, nove.nazev||' '||nove.interpret||' '||nove.poznamka, 'txt', 0);
+END</code></pre>
+
+<pre><code>TRIGGER PoEditaciCD AFTER UPDATE OF ANY nazev,interpret,skladby,poznamka ON MojeCD
+REFERENCING NEW AS nove FOR EACH ROW
+BEGIN
+  CALL <b>Fulltext_index_doc</b>('.cd_ft', nove.id_CD, nove.nazev||' '||nove.interpret||' '||nove.poznamka, 'txt', 0);
+END</code></pre>
+
+<pre><code>TRIGGER PredVymazanim BEFORE DELETE ON MojeCD
+REFERENCING OLD AS stare FOR EACH ROW
+BEGIN
+  CALL Fulltext_remove_doc(".cd_ft", stare.id_CD);
+END</code></pre>
+
+<p><b>Viz</b></p>
+
+<ul class='viz'>
+ <li><a href="../xml/html/fulltext.html">Fulltextové nástroje ve 602SQL</a> </li>
+ <li><a href="../xml/html/fulltext_doctab.html">Označování a uložení dokumentů ve fulltextových systémech</a> </li>
+ <li><a href="../xml/html/fulltext_search.html">Fulltextové vyhledávání dokumentů</a></li>
+ <li><a href="HEJ_F_FULLTEXTREMOVEDOC.htm">Fulltext_remove_doc</a> </li>
+</ul>
+
+</body>
+</html>

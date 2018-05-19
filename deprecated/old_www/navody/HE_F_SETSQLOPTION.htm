@@ -1,0 +1,88 @@
+<!doctype html public "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=Windows-1250">
+<title>Funkce Set_sql_option</title>
+<link rel='stylesheet' style='text/css' href='../function.css'>
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000">
+
+
+
+<h2 class=function>Set_sql_option</h2>
+<img src='../images/cpp.gif' width='44' height='16' border='0' alt='c/c++' align='middle' hspace='2'><img src='../images/pascal.gif' width='44' height='16' border='0' alt='pascal' align='middle' hspace='2'><img src='../images/sql.gif' width='44' height='16' border='0' alt='sql' align='middle' hspace='2'>
+
+
+<br><br>
+<div class='typ'>BOOL <b>[cd_]Set_sql_option</b>([cdp_t cdp,] uns32 mask, uns32 value);<br>
+function <b>[cd_]Set_sql_option</b>([cdp : cdp_t;] mask, value : uns32) : Boolean;<br>
+PROCEDURE <b>Set_sql_option</b>(IN mask INT, IN value INT);<br>
+
+</div>
+
+
+<p><b>Parametry</b></p>
+
+<table border=1 cols=2>
+
+<tr valign="top">
+<td width=15%><i>mask</i></td>
+<td width=85%>součet hodnot voleb, které se mají ovlivnit (nastavit nebo zrušit nastavení)</td>
+</tr>
+
+<tr valign="top">
+<td width=15%><i>value</i></td>
+<td width=85%>součet hodnot voleb, které se mají nastavit</td>
+</tr>
+
+<tr valign="top">
+<td width=15%>[<i>cdp </i></td>
+<td width=85%><a href="HE_EXTCD.htm">kontextová proměnná</a> klienta]  </td>
+</tr>
+</table><br>
+
+<p><b>Od verze:</b></p>
+
+<p>5.1</p>
+
+<p><b>Popis </b></p>
+
+<p>Server 602SQL umožňuje nastavit, do jaké míry se má zachovat kompatibilita se staršími verzemi oproti striktnímu dodržení norem SQL. Toto nastavení lze libovolně měnit i za běhu jedné aplikace a pro různé klienty mohou ve stejném okamžiku platit různá nastavení.</p>
+
+<p>Do parametru <i>mask</i> zapište součet hodnot <a href="../xml/html/sqloptions.html">voleb</a>, které chcete nastavovat (např. volba SQLOPT_NULLEQNULL má být nastavena, volba SQLOPT_NULLCOMP nemá být nastavena (byla nastavena již dříve a nyní to chcete zrušit): zadejte hodnotu 3(=1+2)).</p>
+
+<p>Do parametru <i>value</i> zapište pro volbu, která má být nastavena její hodnotu, pro volbu, která nemá být nastavena hodnotu nula (příklad z min. odstavce: zadejte hodnotu 1(=1+0)).</p>
+
+<p>Po připojení se nového klienta na server jsou všechny jeho volby nastaveny dle <a href="../xml/html/propserver.html">vlastnosti serveru</a> <code>DefaultSQLOptions</code>. Pokud hodnota této vlastnosti není změněna, je zapnuta ve všech volbách 602sql syntax.</p>
+
+<p>Jakožto procedura je implementováno <b><code>Set_sql_option</code></b> i na straně serveru, aby bylo možno parametry nastavovat i bez použití klientského programu. V parametrech se pak musí použít číselné hodnoty konstant. </p>
+
+<p><b>Příklad volání v SQL: </b></p>
+
+<pre><code>CALL Set_sql_option(255,0)</code></pre>
+
+<p>V prostředí SQL serveru lze aktuální nastavení také číst a měnit pomocí systémové proměnné <a href="../xml/html/sysvars.html">@@SQLOPTIONS </a>.</p>
+
+<p><b>Hodnota funkce </b></p>
+
+<p>Funkce vrací při neúspěchu TRUE;</p>
+
+<p><b>Příklad:</b></p>
+
+<p>Nastavit ALTER TABLE do režimu kompatibility s SQL2:</p>
+
+<pre><code><b>Set_sql_option</b>(128,0);</code></pre>
+
+<p>Nastavit všechny volby do režimu kompatibility se staršími verzemi serveru:</p>
+
+<pre><code><b>Set_sql_option</b>(131071, 131071);</code></pre>
+
+<p><b>Viz</b></p>
+
+<ul class='viz'>
+<li><a href="../xml/html/f_getsqloption.html">Get_sql_option</a>
+</ul>
+
+</body>
+</html>

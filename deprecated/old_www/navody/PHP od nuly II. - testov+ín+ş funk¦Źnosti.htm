@@ -1,0 +1,524 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+
+
+
+<meta name="description" content="V tomto článku se zaměřím na otestování funkčnosti a tedy i správnosti instalace podpory PHP. A jak nejlépe otestovat funkčnost než nějakým jednoduchým skriptem." lang="cs">
+<meta name="description" content="V tomto článku se zaměřím na otestování funkčnosti a tedy i správnosti instalace podpory PHP. A jak nejlépe otestovat funkčnost než nějakým jednoduchým skriptem." lang="en">
+<meta http-equiv="description" content="V tomto článku se zaměřím na otestování funkčnosti a tedy i správnosti instalace podpory PHP. A jak nejlépe otestovat funkčnost než nějakým jednoduchým skriptem.">
+<meta http-equiv="content-language" content="cs">
+<meta http-equiv="content-type" content="text/html; charset=windows-1250"><title>PHP od nuly II. - testování funkčnosti -- PC Svět</title>
+
+<link rel="stylesheet" href="PHP%20od%20nuly%20II.%20-%20testov%C3%A1n%C3%AD%20funk%C4%8Dnosti_soubory/www.css">
+<script language="javascript" type="text/javascript">
+<!--
+function getElement(e)
+{
+  if(document.all) return document.all[e];
+  else return document.getElementById(e);
+}
+
+peson = new Image(305,13);
+peson.src = "/images/1-5on.gif";
+pesoff = new Image(305,13);
+pesoff.src = "/images/1-5.gif";
+
+hledejon = new Image(20,11);
+hledejon.src = "/images/5-4on.gif";
+hledejoff = new Image(20,11);
+hledejoff.src = "/images/5-4.gif";
+
+topon = new Image(20,11);
+topon.src = "/images/7-pat-top-on.gif";
+topoff = new Image(20,11);
+topoff.src = "/images/7-pat-top-off.gif";
+
+var mnu = new Array();
+
+mnu[1] = 'komunikace:<img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/komunikace/mobily/" class="menu2">mobily</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/komunikace/site" class="menu2">sítě</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/komunikace/pripojeni" class="menu2">připojení</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11">';
+mnu[2] = 'internet:<img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/internet/webhosting/" class="menu2">webhosting</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/internet/webdesign" class="menu2">webdesign</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/internet/weby" class="menu2">weby</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11">';
+mnu[3] = 'programování:<img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/c/" class="menu2">C++</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/delphi/" class="menu2">Delphi</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/vbasic/" class="menu2">V.Basic</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/assembler/" class="menu2">Asm</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/pascal/" class="menu2">Pascal</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/java/" class="menu2">Java</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/sql/" class="menu2">SQL</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/wsh/" class="menu2">WSH</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11">';
+mnu[4] = 'web-programování:<img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/perl/" class="menu2">Perl</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/php/" class="menu2">PHP</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/asp/" class="menu2">ASP</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/javascript/" class="menu2">JavaScript</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/java/" class="menu2">Java</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/html/" class="menu2">HTML</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/sql/" class="menu2">SQL</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11">';
+mnu[5] = 'hw:<img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/hardware/motherboard/" class="menu2">desky</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/hardware/procesory/" class="menu2">procesory</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/hardware/grafika/" class="menu2">grafika</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/hardware/zvuk/" class="menu2">zvuk</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/hardware/periferie/" class="menu2">periferie</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/hardware/monitory/" class="menu2">monitory</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/hardware/mechaniky/" class="menu2">média</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/hardware/prislusenstvi/" class="menu2">přísluš.</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/hardware/testy/" class="menu2">testy</a>';
+mnu[6] = 'software:<img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/windows/" class="menu2">Windows</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/linux/" class="menu2">Linux</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/hry/" class="menu2">hry a zábava</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/software/recenze/" class="menu2">recenze</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/office/" class="menu2">MS Office</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11">';
+mnu[7] = 'bezpečnost:<img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/bezpecnost/viry/" class="menu2">Viry</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11">';
+mnu[8] = 'magazín:<img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/literatura/" class="menu2">literatura</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/magazin/akce/" class="menu2">akce</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/magazin/novinky/" class="menu2">novinky</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/magazin/tisk/" class="menu2">tiskové zprávy</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11">';
+
+function pmnu(mnu_id)
+{
+	 getElement("mnux").innerHTML = mnu[mnu_id];
+}
+// -->
+</script>
+
+<style type="text/css">
+<!--
+.mline { font-family: Tahoma, Arial, Verdana; font-size: 8pt; font-weight: bold; background-color: #444444; color: #FFFFFF }
+.mitem { cursor: hand }
+
+.mtable { font-family: Tahoma, Arial, Verdana; font-size: 8pt; border: 1px solid #000000; background-color: #EEEEEE; visibility: hidden; position: absolute }
+.mtitem { cursor: hand; background-color: #EEEEEE; color: #000000 }
+
+.mfirma { color: #DDDDDD; font-weight: none }
+.mfirma a { color: #DDDDDD; text-decoration: none }
+.mfirma a:active { color: #DDDDDD; text-decoration: none }
+.mfirma a:visited { color: #DDDDDD; text-decoration: none }
+.mfirma a:hover { color: #FFFFFF; text-decoration: underline }
+-->
+</style></head><body>
+
+
+<script language="JavaScript" type="text/javascript">
+<!--
+var intg;
+var tleft = 0;
+var PocetMenu = 0;
+var mLeft = new Array();
+
+function hidemenus(exc)
+{
+ clearInterval(intg);
+ intg = null;
+ for (id=1; id<=PocetMenu; id++){
+  document.all("mnui"+id).style.visibility = "hidden";
+  document.all("i"+id).style.color = "#FFFFFF";
+  document.all("i"+id).style.backgroundColor = "#444444";
+ }
+}
+
+function outobject()
+{
+ intg = setInterval("hidemenus(20)",400);
+}
+
+function onheader(hID)
+{
+ hidemenus(hID);
+ document.all("mnui"+hID).style.visibility = "visible";
+ document.all("i"+hID).style.color = "#000000";
+ document.all("i"+hID).style.backgroundColor = "#EEEEEE";	
+}
+
+function onobject()
+{
+ clearInterval(intg);
+ intg = null;
+}
+
+function onitem(obj)
+{
+ obj.style.color = "EEEEEE";
+ obj.style.backgroundColor = "111111";
+}
+
+function outitem(obj)
+{
+ obj.style.color = "000000";
+ obj.style.backgroundColor = "EEEEEE";
+}
+
+function setleft()
+{
+ for (i=1;i<=PocetMenu;i++) {
+  document.all("mnui"+i).style.left = mLeft[i];
+ }
+}
+
+function mAddHeader(ID,nadpis,leftpos) {
+ document.write('<td id="i'+ID+'" onmouseover="onheader('+ID+');" onmouseout="outobject();" class="mitem">&nbsp; '+nadpis+' &nbsp;</td>');
+ mLeft[ID] = leftpos;
+ if (PocetMenu < ID) PocetMenu = ID;
+}
+
+function mBeginTable(ID) {
+ document.write('<table style="z-index: 100;" width="120" id="mnui'+ID+'" border="0" cellspacing="1" cellpadding="2" class="mtable" onmouseover="onobject();" onmousemove="onobject();" onmouseout="outobject();" class="mtable">');
+}
+
+function mEndTable() {
+ document.write('</table>');
+}
+
+function mAddItem(nadpis,URL,Popis) {
+ document.write('<tr><td class="mtitem" onmouseover="onitem(this);" onmouseout="outitem(this);" onclick="window.navigate(\''+URL+'\');" title="'+Popis+'">'+nadpis+'</td></tr>');
+}
+
+if (window.clientInformation.userAgent.indexOf("MSIE") > 0 ||
+    window.clientInformation.userAgent.indexOf("pera/7.") > 0
+	)
+{
+	
+ document.write('<div align="center" style="z-index: 101; border-bottom: 1px solid white"><center><table id="ptable" border="0" cellspacing="2" cellpadding="0" class="mline" width="100%"><tr><td width="20">&nbsp;</td><td><table class="mline" cellspacing="0" cellpadding="0" border="0"><tr>');
+ mAddHeader(1,"Provozované servery",26);
+ mAddHeader(2,"DOMÉNY",156);
+ mAddHeader(3,"WEBHOSTING",257);
+ mAddHeader(4,"PŘIPOJENÍ",352);
+ mAddHeader(5,"SERVERHOSTING",452);
+ document.write('</tr></table></td><td width="120" class="mfirma"><a href="http://www.forpsi.com/">FORPSI</a></td><td width="20">&nbsp;</td></tr></table></center></div>');
+
+ mBeginTable(1);
+ mAddItem('Móda.cz','http://www.moda.cz/','Server o módě, stylu, zdraví a volném čase');
+ mAddItem('CzechWeb','http://www.czechweb.cz/','Žebříček registrátorů českých a slovenských domén, denně nové statistiky');
+ mAddItem('PC Svět','http://www.pcsvet.cz/','Počítače, programování, komunikace, Internet');
+ mAddItem('Právník.cz','http://www.pravnik.cz/','Internetový právník pro každého - úplná znění, články, poradna');
+ mAddItem('Počítadlo.cz','http://www.pocitadlo.cz/','Služba pro počítání přístupů na vaše stránky včetně podrobných statistik');
+ mAddItem('iReklama.cz','http://www.ireklama.cz/','Výměný reklamní systém pro vaše stránky');
+ mEndTable();
+
+ mBeginTable(2);
+ mAddItem('FORPSI.com - registrace domén','http://www.forpsi.com/domain/','Nejlevnější registrace domén'); 
+ mAddItem('Domény .cz','http://www.forpsi.com/domain/','Registrace domén již za 549,-Kč ročně');
+ mAddItem('Domény .com','http://www.forpsi.com/domain/','Registrace domén již za 219,-Kč ročně');
+ mEndTable();
+
+ mBeginTable(3);
+ mAddItem('FORPSI.com - homepage','http://www.forpsi.com/','FORPSI.com - homepage'); 
+ mAddItem('FORPSI.com - WEBHOSTING','http://www.forpsi.com/webhosting/','FORPSI.com - nejširší nabídka webhostingu'); 
+ mAddItem('PIDIhosting','http://www.forpsi.com/webhosting/pidi.php','Hosting pro každého'); 
+ mAddItem('PIDIhosting + mail','http://www.forpsi.com/webhosting/pidi.php','Hosting pro každého včetně mailu'); 
+ mAddItem('NORMALhosting','http://www.forpsi.com/webhosting/normal.php','Standardní hosting za rozumnou cenu');
+ mAddItem('EXCLUSIVEhosting','http://www.forpsi.com/webhosting/exclusive.php','To nejlepší pro ty nejlepší');
+ mAddItem('EMAILhosting','http://www.forpsi.com/webhosting/email.php','Hosting vašich mailů'); 
+ mEndTable();
+	
+ mBeginTable(4);
+ mAddItem('FORPSI - připojení k internetu','http://www.forpsi.com/internet/','Kompletní nabídka bezdrátového či pevného připojení k Internetu'); 
+ mAddItem('ADSL připojení','http://www.forpsi.com/internet/?page=adsl_cr_price','Připojení k Internetu telefonní linkou pomocí technologie ADSL'); 
+ mAddItem('Wi-Fi Lite','http://www.forpsi.com/internet/?page=wifi_lite_price','Nejjednodušší bezdrátové připojení technologií Wi-Fi'); 
+ mAddItem('Wi-Fi','http://www.forpsi.com/internet/?page=wifi_price','Profesionální připojení technologií Wi-Fi'); 
+ mEndTable();
+ 
+ mBeginTable(5);
+ mAddItem('FORPSI - serverhosting','http://www.forpsi.com/server/dedicated.php','SERVERHOSTING a SERVERHOUSING'); 
+ mAddItem('FORPSI - DEDICATED','http://www.forpsi.com/server/dedicated.php','Nabídka pronájmu serverů s kompletní nabídkou služeb'); 
+ mAddItem('FORPSI - Private','http://www.forpsi.com/server/private.php','Nabídka housingu vašich serverů s kompletní nabídkou služeb'); 
+ mEndTable();
+
+ setleft();
+}
+// -->
+</script>
+
+
+<table align="center" border="0" cellpadding="0" cellspacing="0" width="780">
+<tbody><tr><td width="767">
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tbody><tr>
+<td height="158" width="305">
+
+<table border="0" cellpadding="0" cellspacing="0">
+<tbody><tr><td colspan="3" height="14" width="305"><img src="PHP%20od%20nuly%20II.%20-%20testov%C3%A1n%C3%AD%20funk%C4%8Dnosti_soubory/1-1.gif" alt=""></td></tr>
+<tr><td height="11" width="253"><img src="PHP%20od%20nuly%20II.%20-%20testov%C3%A1n%C3%AD%20funk%C4%8Dnosti_soubory/1-2.gif" alt=""></td><td height="11" width="27"><a href="http://www.forpsi.com/" target="_top" onmouseover="pesoff.src=peson.src; return true" onmouseout="pesoff.src='/images/1-5.gif'; return true"><img src="PHP%20od%20nuly%20II.%20-%20testov%C3%A1n%C3%AD%20funk%C4%8Dnosti_soubory/1-3.gif" alt="" border="0"></a></td><td height="11" width="25"><img src="PHP%20od%20nuly%20II.%20-%20testov%C3%A1n%C3%AD%20funk%C4%8Dnosti_soubory/1-4.gif" alt=""></td></tr>
+<tr><td colspan="3" height="13" width="305"><img name="pesoff" src="PHP%20od%20nuly%20II.%20-%20testov%C3%A1n%C3%AD%20funk%C4%8Dnosti_soubory/1-5.gif" alt=""></td></tr>
+<tr><td colspan="3" height="120" width="305"><a href="http://www.pcsvet.cz/"><img src="PHP%20od%20nuly%20II.%20-%20testov%C3%A1n%C3%AD%20funk%C4%8Dnosti_soubory/1-6.gif" alt="" border="0"></a></td></tr>
+</tbody></table>
+
+</td>
+<td width="90">
+
+<table border="0" cellpadding="0" cellspacing="0" width="90">
+<tbody><tr><td background="PHP%20od%20nuly%20II.%20-%20testov%C3%A1n%C3%AD%20funk%C4%8Dnosti_soubory/2-1.gif" height="13" width="1"></td></tr>
+<tr><td bgcolor="white" height="145"><iframe src="PHP%20od%20nuly%20II.%20-%20testov%C3%A1n%C3%AD%20funk%C4%8Dnosti_soubory/2-2.htm" name="menu1" marginwidth="0" marginheight="0" align="middle" frameborder="0" height="100%" scrolling="auto" width="100%"></iframe></td></tr>
+</tbody></table>
+
+</td>
+<td bgcolor="white" valign="top" width="10">
+<img src="PHP%20od%20nuly%20II.%20-%20testov%C3%A1n%C3%AD%20funk%C4%8Dnosti_soubory/3.gif" alt="">
+</td>
+<td width="400">
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tbody><tr><td background="PHP%20od%20nuly%20II.%20-%20testov%C3%A1n%C3%AD%20funk%C4%8Dnosti_soubory/4-1.gif" height="8"></td></tr>
+<tr><td height="150"><iframe src="PHP%20od%20nuly%20II.%20-%20testov%C3%A1n%C3%AD%20funk%C4%8Dnosti_soubory/topinfo.htm" name="4-2" marginwidth="0" marginheight="0" align="middle" frameborder="0" height="100%" scrolling="no" width="100%"></iframe></td></tr>
+</tbody></table>
+
+</td>
+</tr>
+<tr>
+<td colspan="4" height="35" width="100%">
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tbody><tr>
+<td width="28"><img src="PHP%20od%20nuly%20II.%20-%20testov%C3%A1n%C3%AD%20funk%C4%8Dnosti_soubory/5-1.gif" alt=""></td>
+<td width="65">
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tbody><tr><td background="PHP%20od%20nuly%20II.%20-%20testov%C3%A1n%C3%AD%20funk%C4%8Dnosti_soubory/5-2.gif">&nbsp;</td></tr>
+<tr><td bgcolor="white"><form method="get" action="/misc/search.php" name="sfrm" style="margin-top: 0pt; margin-bottom: 0pt;"><input name="kde" value="1" type="hidden"><input size="10" name="co" value="hledat" onclick="value='';" style="border: 0px solid ; font-family: Verdana; font-size: 10px;" type="text"></form></td></tr>
+<tr><td><img src="PHP%20od%20nuly%20II.%20-%20testov%C3%A1n%C3%AD%20funk%C4%8Dnosti_soubory/5-3.gif" alt=""></td></tr>
+</tbody></table>
+</td>
+<td width="18"><a href="#" onclick="sfrm.submit();" onmouseover="hledejoff.src=hledejon.src; window.status='hledej';return true" onmouseout="hledejoff.src='/images/5-4.gif'; window.status='pcsvět';return true"><img name="hledejoff" src="PHP%20od%20nuly%20II.%20-%20testov%C3%A1n%C3%AD%20funk%C4%8Dnosti_soubory/5-4.gif" alt="go" border="0"></a></td>
+<td width="9"><img src="PHP%20od%20nuly%20II.%20-%20testov%C3%A1n%C3%AD%20funk%C4%8Dnosti_soubory/5-5.gif" alt=""></td>
+<td>
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tbody><tr><td align="left" background="PHP%20od%20nuly%20II.%20-%20testov%C3%A1n%C3%AD%20funk%C4%8Dnosti_soubory/5-7.gif" height="11"><img src="PHP%20od%20nuly%20II.%20-%20testov%C3%A1n%C3%AD%20funk%C4%8Dnosti_soubory/5-6.gif" alt=""></td></tr>
+<tr><td align="left" background="PHP%20od%20nuly%20II.%20-%20testov%C3%A1n%C3%AD%20funk%C4%8Dnosti_soubory/5-8.gif" height="24" valign="middle">
+<a href="http://www.pcsvet.cz/komunikace/" class="menu" onmouseover="pmnu(1);">komunikace</a>
+&nbsp;<a href="http://www.pcsvet.cz/internet/" class="menu" onmouseover="pmnu(2);">internet</a>
+&nbsp;<a href="http://www.pcsvet.cz/prog/" class="menu" onmouseover="pmnu(3);">prog.</a>
+&nbsp;<a href="http://www.pcsvet.cz/prog/" class="menu" onmouseover="pmnu(4);">web-prog.</a>
+&nbsp;<a href="http://www.pcsvet.cz/hardware/" class="menu" onmouseover="pmnu(5);">hardware</a>
+&nbsp;<a href="http://www.pcsvet.cz/software/" class="menu" onmouseover="pmnu(6);">software</a>
+&nbsp;<a href="http://www.pcsvet.cz/bezpecnost/" class="menu" onmouseover="pmnu(7);">bezpečnost</a>
+&nbsp;<a href="http://www.pcsvet.cz/magazin/" class="menu" onmouseover="pmnu(8);">magazín</a>
+&nbsp;<a href="http://www.pcsvet.cz/forum/" class="menu">disk.fórum</a>
+</td></tr>
+</tbody></table>
+</td></tr>
+</tbody></table>
+
+</td>
+</tr>
+<tr>
+<td colspan="4" background="PHP%20od%20nuly%20II.%20-%20testov%C3%A1n%C3%AD%20funk%C4%8Dnosti_soubory/6-2.gif" width="100%">
+
+<table border="0" cellpadding="0" cellspacing="0">
+<tbody><tr><td><img src="PHP%20od%20nuly%20II.%20-%20testov%C3%A1n%C3%AD%20funk%C4%8Dnosti_soubory/6-1.gif" alt=""></td>
+<td id="mnux" valign="top"></td>
+
+</tr>
+</tbody></table>
+
+</td>
+</tr>
+<tr>
+<td colspan="4" width="100%">
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tbody><tr><td background="PHP%20od%20nuly%20II.%20-%20testov%C3%A1n%C3%AD%20funk%C4%8Dnosti_soubory/7.gif" width="15">&nbsp;</td><td bgcolor="white" width="5">&nbsp;</td><td align="left" bgcolor="white" valign="top">
+<table><tbody><tr><td height="1"></td></tr></tbody></table>
+
+<p class="ndp">PHP od nuly II. - testování funkčnosti</p>
+<p>počet názorů: <b>3</b> &nbsp; poslední: 12.02.2001 09:32:28 &nbsp; <a href="http://www.pcsvet.cz/forum/forum.php?art=204" class="autor">číst názory</a> &nbsp; <a href="http://www.pcsvet.cz/forum/forum-add.php?art=204" class="autor">přidat názor</a> &nbsp; <a href="http://www.pcsvet.cz/art/article_print.php?id=204">vytisknout</a></p>
+<p>V tomto článku se zaměřím na otestování funkčnosti a tedy i
+správnosti instalace podpory PHP. A jak nejlépe otestovat funkčnost než
+nějakým jednoduchým skriptem.</p>
+<hr color="#777777" size="1">
+
+<ws-body>
+</ws-body><p>Mnoho příkladů je možné nalézt v již zmiňované knize od
+p.Koska nebo na internetu, a proto bych zde chtěl sestavit takový
+průřez několika nejjednoduššími skripty, se kterými se můžete setkat
+běžně na www stránkách.</p>
+<p>Stavbu a popisy složitějších skriptů si nechám do dalších kapitol,
+kde bych se skripty chtěl zabývat tématicky (např.login, diskusní fóra,
+knihy hostů, manipulace se soubory, atd.).</p>
+<p><b>INFORMACE O VERZI PHP</b></p>
+<p>Do prázdné stránky(kterou vytvoříme třeba v Notepadu) napíšeme toto: <br>
+<tt>
+&lt;?<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;PHPInfo();<br>
+?&gt;<br>
+</tt>
+a nazveme ji třeba <b>verze.php.</b></p>
+<p>A proč zrovna tento zápis?? Trocha teorie neuškodí ....</p>
+<p>Způsobů, jak vkládat PHP skripty do HTML stránek, je několik. V tomto skriptu jsme zvolili nejjednodušší.<br>
+a) <tt>&lt;? echo "Výpis na obrazovku č.1 - nejjednodušší syntaxe";?&gt;</tt><br>
+<br>
+b) <tt>&lt;?php echo "Výpis na obrazovku č.2 - další možnost";?&gt;</tt><br> 
+<br>
+c) <tt>&lt;SCRIPT LANGUAGE="php"&gt; <br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;echo "Výpis na obrazovku č.3 - poslední možnost";<br> 
+&lt;/SCRIPT&gt;</tt><br>
+<br>
+d) Pokud v konfiguračním souboru <b>php.ini</b> direktivou <b>asp_tags</b> povolíme používání oddělovacích značek ASP je možné používat také tyto.<br>
+<tt>&lt;% echo "Výpis na obrazovku č.4 - ASP značky";%&gt;</tt><br>
+<br>
+<tt>&lt;%= "Výpis na obrazovku č.5 - ASP značky";%&gt;</tt><br>
+<br>
+Oba tyto zápisy jsou shodné.
+</p>
+<p>Takže nyní již známe, jak vložit PHP skript do HTML stránky.</p>
+<p>Pokud stránku spustíme z IExploreru, měl by se dostavit výsledek.
+Pokud se tak nestalo, musíme hledat chybu v instalaci PHP, případně v
+nastavení MS IIS.
+</p>
+
+
+<br>
+<br>
+<hr color="#777777" size="1">
+
+<table width="100%"><tbody><tr><td valign="top">
+Autor: <b>Jiří Pergl</b>, <a href="http://www.pcsvet.cz/art/author.php?id=35">informace o autorovi</a><br>
+Rubrika: <b><a href="http://www.pcsvet.cz/php/">Programování - PHP</a></b><br>
+Čtenářů: <b>7579</b> &nbsp; &nbsp; Zobrazení: <b>8499</b><br>
+<br>
+<b>Související články:</b><br>• <a href="http://www.pcsvet.cz/art/article.php?id=191" title="Nový seriál pro začátečníky o PHP, v tomto díle něco do úvodu a postup při instalaci PHP na MS server">PHP od nuly I.</a><br><br>
+
+</td><td align="center">
+
+
+Jak hodnotíte tento článek?<br><form method="post" action="article.php?id=204"><input name="znamka" value="1" class="tlac" type="submit"> <input name="znamka" value="2" class="tlac" type="submit"> <input name="znamka" value="3" class="tlac" type="submit"> <input name="znamka" value="4" class="tlac" type="submit"> <input name="znamka" value="5" class="tlac" type="submit"><br>lepší &lt;--&gt;horší</form>
+
+</td></tr></tbody></table>
+Názory: počet: <b>3</b> &nbsp; poslední: 12.02.2001 09:32:28 &nbsp; <a href="http://www.pcsvet.cz/forum/forum.php?art=204" class="autor">číst názory</a> &nbsp; <a href="http://www.pcsvet.cz/forum/forum-add.php?art=204" class="autor">přidat názor</a> &nbsp; <a href="http://www.pcsvet.cz/art/article_print.php?id=204">vytisknout</a><p></p>
+
+<a name="inquiry"></a>
+
+<hr color="white" size="1">
+
+<div align="center"><center><table class="ftable"><tbody><tr><td align="left"><b><i>Nadpis</i></b></td><td align="left"><b><i>Autor</i></b></td><td align="left"><b><i>Datum</i></b></td></tr><tr><td align="left"><b>&lt;?php</b></td><td align="left">Koc</td><td align="left">10.02.2001 09:52:24</td></tr><tr><td align="left"><b>Re: php</b></td><td align="left"><a href="mailto:pindasoft@sirka.cz">AAA Auto Praha</a></td><td align="left">11.02.2001 19:19:09</td></tr><tr><td align="left"><b>Re: php</b></td><td align="left"><a href="mailto:jiri.pergl@ct.cz">Jiří Pergl</a></td><td align="left">12.02.2001 09:32:28</td></tr></tbody></table></center></div>
+<form method="post" action="/forum/forum-add.php?art=204&amp;reply=&amp;tema=">
+  <div align="center">
+    <table class="ftable" border="0" cellpadding="2" cellspacing="0">
+      <tbody><tr>
+        <td colspan="2" class="ftitle">Nový příspěvek</td>
+      </tr>
+      <tr>
+        <td class="fname" align="right"><b>Věc:</b></td>
+        <td class="fvalue" align="left"><input name="Nadpis" size="55" value="" type="text"></td>
+      </tr>
+      <tr>
+        <td class="fname" align="right"><b>Jméno:</b></td>
+        <td class="fvalue" align="left"><input name="Autor_Jmeno" size="30" value="" type="text"></td>
+      </tr>
+      <tr>
+        <td class="fname" align="right"><b>E-mail:</b></td>
+        <td class="fvalue" align="left"><input name="Autor_Email" size="20" value="" type="text"></td>
+      </tr>
+      <tr>
+        <td colspan="2" class="fvalue" align="left"><textarea rows="10" name="Obsah" cols="70"></textarea><br>
+		  - nepoužívejte HTML k formátování textu příspěvku<br>
+		  - nepoužívejte A HREF= pro odkazy, aktivní budou automaticky<br>
+		  - odřádkování provádějte klávesou ENTER, nikoliv tagem &lt;br&gt;</td>
+      </tr>
+      <tr>
+        <td colspan="2" class="fvalue" align="left"><input class="ftable" style="border: medium none ;" name="MailReply" value="1" type="checkbox">zasílat
+          odpovědi na můj e-mail      </td>
+</tr>
+      <tr>
+        <td colspan="2" align="center">
+          Opište text z obrázku: <input name="Kod" value="" class="f_name" size="8" type="text"> <img src="PHP%20od%20nuly%20II.%20-%20testov%C3%A1n%C3%AD%20funk%C4%8Dnosti_soubory/captcha.htm" height="50" width="200"></td>
+      </tr>
+      <tr>
+        <td colspan="2" align="center">
+          <input value="Přidat příspěvek" class="fsubmit" type="submit"></td>
+      </tr>
+    </tbody></table>
+  </div>
+  <input name="filled" value="1" type="hidden">
+</form>
+
+<br><br><br><br><br><br><br><br>
+<div align="center">
+<center>
+<table border="0">
+<tbody><tr><td>
+<iframe src="PHP%20od%20nuly%20II.%20-%20testov%C3%A1n%C3%AD%20funk%C4%8Dnosti_soubory/p-banner.htm" style="border: medium none ;" frameborder="0" height="60" scrolling="no" width="468">
+</iframe>
+<br><br>
+  <iframe name="rekl2" src="PHP%20od%20nuly%20II.%20-%20testov%C3%A1n%C3%AD%20funk%C4%8Dnosti_soubory/2.htm" marginwidth="1" marginheight="1" frameborder="0" height="62" scrolling="no" width="472"></iframe>
+</td>
+</tr>
+</tbody></table>
+</center>
+</div>
+<br><br><br>
+<center><span style="font-size: 9px;">(c) P.E.S. consulting, s.r.o.
+2000-2005. Provozovatel nezodpovídá za obsah a původ článků a
+diskuzních příspěvků, odpovědnost nesou jednotliví redaktoři a autoři.
+Informace o PC Světě <a href="http://www.pcsvet.cz/informace.php">naleznete zde</a></span></center> 
+</td>
+<td bgcolor="white" width="10"></td>
+<td align="right" bgcolor="white" valign="top" width="160">
+
+<br><center>
+<center><a href="http://www.forpsi.com/" target="_blank"><img src="PHP%20od%20nuly%20II.%20-%20testov%C3%A1n%C3%AD%20funk%C4%8Dnosti_soubory/125x125.gif" alt="FORPSI.com - webhosting, serverhosting, registrace domén, dedikované servery" border="0"></a></center>
+
+
+
+<table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td colspan="3" height="6" width="180"></td></tr><tr><td align="left" valign="top" width="15"><img src="PHP%20od%20nuly%20II.%20-%20testov%C3%A1n%C3%AD%20funk%C4%8Dnosti_soubory/7-tab-1.gif" alt=""></td><td align="left" background="PHP%20od%20nuly%20II.%20-%20testov%C3%A1n%C3%AD%20funk%C4%8Dnosti_soubory/7-tab-2.gif" valign="bottom" width="165"><font class="tab-nadpis">
+Anketa
+</font></td></tr></tbody></table>
+<table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td align="left" valign="top" width="5"><img src="PHP%20od%20nuly%20II.%20-%20testov%C3%A1n%C3%AD%20funk%C4%8Dnosti_soubory/7-tab-3.gif" alt=""></td><td align="left" width="175">
+<table class="tab" border="0" cellpadding="3" cellspacing="0"><tbody><tr><td bgcolor="white">
+</td></tr></tbody></table>
+</td></tr>
+</tbody></table>
+
+<table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td colspan="3" height="6" width="180"></td></tr><tr><td align="left" valign="top" width="15"><img src="PHP%20od%20nuly%20II.%20-%20testov%C3%A1n%C3%AD%20funk%C4%8Dnosti_soubory/7-tab-1.gif" alt=""></td><td align="left" background="PHP%20od%20nuly%20II.%20-%20testov%C3%A1n%C3%AD%20funk%C4%8Dnosti_soubory/7-tab-2.gif" valign="bottom" width="165"><font class="tab-nadpis">
+Novinky e-mailem
+</font></td></tr></tbody></table>
+<table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td align="left" valign="top" width="5"><img src="PHP%20od%20nuly%20II.%20-%20testov%C3%A1n%C3%AD%20funk%C4%8Dnosti_soubory/7-tab-3.gif" alt=""></td><td align="left" width="175">
+<table class="tab" border="0" cellpadding="3" cellspacing="0"><tbody><tr><td bgcolor="white">
+<form method="get" action="/user/register.php">
+<input name="email" size="16" value="vas@email.cz" onclick="this.value='';" type="text"><input value="ok" type="submit">
+Zasílání denního nebo týdenního přehledu nových článků
+</form>
+</td></tr></tbody></table>
+</td></tr>
+</tbody></table>
+
+<hr size="1">
+<iframe name="rekl2" src="PHP%20od%20nuly%20II.%20-%20testov%C3%A1n%C3%AD%20funk%C4%8Dnosti_soubory/3.htm" marginwidth="1" marginheight="1" align="middle" frameborder="0" height="127" scrolling="no" width="127"></iframe>
+<hr size="1">
+<br><center>
+<center><a href="http://www.forpsi.com/" target="_blank"><img src="PHP%20od%20nuly%20II.%20-%20testov%C3%A1n%C3%AD%20funk%C4%8Dnosti_soubory/125X125_evrop_dom_a_web.gif" alt="FORPSI.com - webhosting, serverhosting, registrace domén, dedikované servery" border="0"></a></center>
+
+
+<br><br>
+<a href="http://www.pravnik.cz/" target="_blank">Právník.cz - občanské, rodinné, pracovní, obchodní a jiné právo, smluvní vzory, úplná znění</a>
+
+<br><br><br><br><br>
+
+<center>
+</center>
+
+
+</center></center></td>
+
+
+</tr>
+</tbody></table>
+
+
+
+</td>
+</tr>
+
+</tbody></table>
+
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tbody><tr><td background="PHP%20od%20nuly%20II.%20-%20testov%C3%A1n%C3%AD%20funk%C4%8Dnosti_soubory/7.gif" width="15"></td><td bgcolor="white" width="150"></td><td width="68"><img src="PHP%20od%20nuly%20II.%20-%20testov%C3%A1n%C3%AD%20funk%C4%8Dnosti_soubory/7-pat-1.gif" alt=""></td><td background="PHP%20od%20nuly%20II.%20-%20testov%C3%A1n%C3%AD%20funk%C4%8Dnosti_soubory/7-pat-2.gif" bgcolor="white" valign="bottom" width="360">© 2000-2004 pcsvět.cz / <a href="mailto:pcsvet@pcsvet.cz">pcsvet@pcsvet.cz</a> / ISSN 1213-6042</td><td bgcolor="white"><a href="#top" onmouseover="topoff.src=topon.src; window.status='nahoru';return true;" onmouseout="topoff.src='/images/7-pat-top-off.gif'; window.status='pcsvět';return true;"><img name="topoff" src="PHP%20od%20nuly%20II.%20-%20testov%C3%A1n%C3%AD%20funk%C4%8Dnosti_soubory/7-pat-top-off.gif" alt="" border="0"></a></td></tr>
+</tbody></table>
+
+</td><td background="PHP%20od%20nuly%20II.%20-%20testov%C3%A1n%C3%AD%20funk%C4%8Dnosti_soubory/8-1.gif" valign="top" width="13"><img src="PHP%20od%20nuly%20II.%20-%20testov%C3%A1n%C3%AD%20funk%C4%8Dnosti_soubory/8-2.gif" alt=""></td></tr>
+</tbody></table>
+
+<!-- Počítadlo.cz  počítadlo:527  uživatel:414 -->
+<script language="JavaScript" type="text/javascript">
+<!--
+Tmp=Math.floor(1000000 * Math.random());
+//document.write("<scr" + "ipt src=\"http://cnt1.pocitadlo.cz/counter.php?poc=527&ref="+escape(top.document.referrer)+"&depth="+screen.colorDepth+"&width="+screen.width+"&height="+screen.height+"&tmp="+Tmp+"\" language=\"JavaScript\" type=\"text/javascript\"></scr" + "ipt>");
+// -->
+</script>
+<noscript>
+<img src="http://cnt1.pocitadlo.czx/counter.php?poc=527&amp;ns=1" width="1" height="1" alt="" border="0">
+</noscript>
+<!-- Počítadlo.cz konec -->
+
+<!-- NAVRCHOLU.cz -->
+<script language="JavaScript" type="text/javascript">
+<!--
+pxDepth = screen.pixelDepth;
+if (!(pxDepth > 0))
+	pxDepth = screen.colorDepth;
+if (!(pxDepth > 0))
+	pxDepth = 0; 
+document.write("<img src=\"http://hit.navrcholu.cz/hit?id=3548;n=1;screenx=" + screen.width + ";screeny=" + screen.height + ";cdepth=" + pxDepth + ";ref=" + escape(top.document.referrer) + "\" width=\"1\" height=\"1\" alt=\"\">");
+// -->
+</script><img src="PHP%20od%20nuly%20II.%20-%20testov%C3%A1n%C3%AD%20funk%C4%8Dnosti_soubory/hit" alt="" height="1" width="1">
+<noscript>
+<img src="http://hit.navrcholu.cz/hit?id=3548;n=1" width="1" height="1" alt="" border="0">
+</noscript>
+<!-- NAVRCHOLU.cz - konec -->
+
+<script src="PHP%20od%20nuly%20II.%20-%20testov%C3%A1n%C3%AD%20funk%C4%8Dnosti_soubory/urchin.js" type="text/javascript">
+</script>
+<script type="text/javascript">
+_uacct = "UA-1217921-1";
+urchinTracker();
+</script>
+
+<div style="position: absolute; left: 0px; top: 0px; z-index: 1000000000 ! important; visibility: hidden; opacity: 1;" id="linkalert-box"><img src="PHP%20od%20nuly%20II.%20-%20testov%C3%A1n%C3%AD%20funk%C4%8Dnosti_soubory/none-icon.png" id="linkalert-icon-1"></div></body></html>

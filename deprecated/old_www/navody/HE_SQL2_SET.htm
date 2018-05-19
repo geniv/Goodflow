@@ -1,0 +1,112 @@
+<!doctype html public "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=Windows-1250">
+<title>Přiřazovací příkaz SET v SQL</title>
+<link rel='stylesheet' style='text/css' href='../function.css'>
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr>
+	<td style="background-image: url(../images/bghead.jpg);
+		background-position: right;
+		background-repeat: no-repeat;">
+	<table width="100%" border="0" cellpadding="0" cellspacing="0"
+		style="background-image:none">
+	<tr>
+		<td style="background-image:none" height="46"
+			width="15%"><img src="../images/title-cz.gif"
+			width="255" height="33"
+			alt="602SQL-Úplná dokumentace"
+			title="602SQL - Úplná dokumentace"
+			border="0"></td>
+		<td width="33%" align="right"><a href="../xml/html/top.html"><img class="floatno"
+			src="../images/index.gif"
+			width="15" height="16"
+			alt="Index" title="Zpět na obsah"
+			border="0" vspace="2"></a> &nbsp;
+			 </td>
+	</tr>
+	</table>
+	</td>
+</tr>
+</table><table class="navigace" border="0" width="100%"  bgcolor="#FFFFBF"><tr> <td
+width="20" align="center"><img class="floatno" src="../images/prev.gif"
+width="15" height="13" alt="&lt;&shy;" title="Předcházející téma"
+border="0"></td><td width="25%"><a
+href="HE_SQL2_SLOZENYPRIKAZ.htm">Složený příkaz</a></td> <td width="25%"
+align="right"><img class="floatno" src="../images/up.gif" width="13"
+height="15" alt="Nahoru" title="O jednu úroveň výš" border="0"
+align="middle"></td><td width="25%"><a href="HE_SQL2_RIDICIPRIKAZY.htm">Řídící příkazy</a></td>
+<td width="25%" align="right"><a
+href="HE_SQL2_RETURN.htm">Příkaz RETURN</a></td><td width="20"
+align="center"><img class="floatno" src="../images/next.gif" width="15"
+height="13" alt="&shy;&gt;" title="Následující téma" border="0"></td>
+</tr></table>
+
+
+
+
+<h1><a name="he_sql2_set"></a>Přiřazovací příkaz SET (SQL)</h1>
+
+<pre><code>přiřazovací_příkaz ::= SET cíl_přiřazení = výraz;</code></pre>
+
+<p><a href="HE_SQL2_PRIKAZY.htm">Příkaz</a> vyčíslí hodnotu <a href="HE_SQL2_VYRAZY.htm"><em>výrazu</em></a> a přiřadí ji do <i>cíle přiřazení</i>. <i>Cílem přiřazení</i> může být lokální proměnná, parametr, proměnná klienta, dynamický parametr (ODBC API) nebo sloupec (i s&nbsp;případným indexem, znakem # nebo dvojindexem pro <a href="HE_SQL2_VYRAZSLOUPEC.htm">speciální typy</a>).</p>
+
+<p>Nejsou-li <a href="HE_SQL2_DATOVETYPY.htm">typy</a> <i>výrazu</i> a <i>cíle přiřazení</i> stejné, pak
+
+<ul>
+	<li>jsou-li oba numerické typy, dojde k&nbsp;implicitní konverzi; přitom může nastat chybový <a href="../xml/html/handlingcategories.html">sqlstate</a> 22003 (SQ_NUM_VAL_OUT_OF_RANGE), pokud hodnota <i>výrazu</i> nepatří do typu <i>cíle přiřazení</i>;</li>
+
+	<li>jsou-li oba řetězce znaků, dojde k&nbsp;implicitní konverzi; přitom může nastat chybový <a href="../xml/html/handlingcategories.html">sqlstate</a> 22001 (SQ_STRING_DATA_RIGHT_TRU), pokud je hodnota <i>výrazu</i> delší, než maximální délka <i>cíle přiřazení</i>;</li>
+
+	<li>je-li na jedné straně přiřazení typ DATE nebo TIME a na druhé straně typ TIMESTAMP, dojde k implicitní konverzi;</li>
+
+	<li>jinak nastane chyba (nekompatibilní typy) již při překladu přiřazovacího příkazu.</li>
+</ul>
+
+<p><b>Příklad:</b> přiřazení konstanty do lokální proměnné</p>
+
+<pre><code>  DECLARE EmiPath CHAR(30);
+  DECLARE TypAdr CHAR(20);
+  
+  <b>SET</b> EmiPath='p:\mail';
+  <b>SET</b> TypAdr='Internet';</code></pre>
+
+<p><b>Příklad:</b> přiřazení hodnoty výrazu do sloupce tabulky</p>
+
+<pre><code>TRIGGER DatTabControlUpd AFTER UPDATE OF dat1 ON Castab
+REFERENCING NEW AS novarad
+            OLD AS stararad
+FOR EACH ROW 
+BEGIN
+  <b>SET</b> novarad.kolikdni=CAST(Abs(novarad.dat1-stararad.dat1) AS INT);
+END</code></pre>
+
+<p><b>Příklad:</b> přiřazení hodnoty výrazu do výstupního parametru</p>
+
+<pre><code>PROCEDURE `TESTPATH`(INOUT path CHAR(250));
+// nekončí-li zadaná cesta lomítkem, přidej ho
+BEGIN
+  IF SUBSTRING(path FROM CHAR_LENGTH(path) FOR 1) &lt;&gt; '/' THEN 
+    <strong>SET</strong> path = path||'/';
+  END IF;
+END</code></pre>
+
+
+
+<table class="navigace" border="0" width="100%"  bgcolor="#FFFFBF"><tr> <td
+width="20" align="center"><img class="floatno" src="../images/prev.gif"
+width="15" height="13" alt="&lt;&shy;" title="Předcházející téma"
+border="0"></td><td width="25%"><a
+href="HE_SQL2_SLOZENYPRIKAZ.htm">Složený příkaz</a></td> <td width="25%"
+align="right"><img class="floatno" src="../images/up.gif" width="13"
+height="15" alt="Nahoru" title="O jednu úroveň výš" border="0"
+align="middle"></td><td width="25%"><a href="HE_SQL2_RIDICIPRIKAZY.htm">Řídící příkazy</a></td>
+<td width="25%" align="right"><a
+href="HE_SQL2_RETURN.htm">Příkaz RETURN</a></td><td width="20"
+align="center"><img class="floatno" src="../images/next.gif" width="15"
+height="13" alt="&shy;&gt;" title="Následující téma" border="0"></td>
+</tr></table>
+</body>
+</html>

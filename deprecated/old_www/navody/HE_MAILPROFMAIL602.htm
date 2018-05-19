@@ -1,0 +1,121 @@
+<!doctype html public "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=Windows-1250">
+<title>Profily pošty Mail602</title>
+<link rel='stylesheet' style='text/css' href='../function.css'>
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr>
+	<td style="background-image: url(../images/bghead.jpg);
+		background-position: right;
+		background-repeat: no-repeat;">
+	<table width="100%" border="0" cellpadding="0" cellspacing="0"
+		style="background-image:none">
+	<tr>
+		<td style="background-image:none" height="46"
+			width="15%"><img src="../images/title-cz.gif"
+			width="255" height="33"
+			alt="602SQL-Úplná dokumentace"
+			title="602SQL - Úplná dokumentace"
+			border="0"></td>
+		<td width="33%" align="right"><a href="../xml/html/top.html"><img class="floatno"
+			src="../images/index.gif"
+			width="15" height="16"
+			alt="Index" title="Zpět na obsah"
+			border="0" vspace="2"></a> &nbsp;
+			 </td>
+	</tr>
+	</table>
+	</td>
+</tr>
+</table><table class="navigace" border="0" width="100%"  bgcolor="#FFFFBF"><tr> <td
+width="20" align="center"><img class="floatno" src="../images/prev.gif"
+width="15" height="13" alt="&lt;&shy;" title="Předcházející téma"
+border="0"></td><td width="25%"><a
+href="HE_MAILPROFSMTP.htm">SMTP/POP3</a></td> <td width="25%"
+align="right"><img class="floatno" src="../images/up.gif" width="13"
+height="15" alt="Nahoru" title="O jednu úroveň výš" border="0"
+align="middle"></td><td width="25%"><a href="HE_MAILPROFILES.htm">Profily poštovních parametrů</a></td>
+<td width="25%" align="right"><a
+href="HE_MAILPROFMAPI.htm">MAPI</a></td><td width="20"
+align="center"><img class="floatno" src="../images/next.gif" width="15"
+height="13" alt="&shy;&gt;" title="Následující téma" border="0"></td>
+</tr></table>
+
+
+
+
+<h1><a name="he_mailprofmail602"></a>Profil pošty Mail602</h1>
+
+<p>Parametry profilu se pro SQL server nastavují na Řídicím panelu, sekce <strong>Lokální nastavení / Poštovní profily</strong>. Má smysl pouze ve Windows, kde je instalován poštovní sytsém <strong>Mail602</strong>.</p>
+
+<table border=1 cols=3>
+
+<tr valign="top">
+<td width=14%><b>Parametr v registrech</b></td>
+<td width=15%><b>Dialog z Řídicího panelu</b></td>
+<td width=71%><b>Popis</b></td>
+</tr>
+
+<tr valign="top">
+<td width=14%><code>Profile602</code></td>
+<td width=15%><code>Profil Mail602</code></td>
+<td width=71%>Jméno profilu pošty Mail602</td>
+</tr>
+
+<tr valign="top">
+<td width=14%><code>UserName</code></td>
+<td width=15%><code>ID/Jméno</code></td>
+<td width=71%>Jméno nebo ID uživatele, je nutné v případě LAN, nebo NET verze, pokud má aplikace přistupovat ke schránce jiného uživatele, než který je přihlášen k poštovnímu serveru, nebo pro přístup k POP3 schránce.</td>
+</tr>
+
+<tr valign="top">
+<td width=14%><code>FilePath</code></td>
+<td width=15%><code>Cesta</code></td>
+<td width=71%>Seznam složek (adresářů), ze kterých lze odeslat soubor, oddělených středníkem. Pokud se aplikace pokusí odeslat soubor z jiné složky, než je v seznamu, bude požadavek odmítnut. Jestliže parametr není specifikován, nebo obsahuje-li prázdný řetězec, bude  možné odeslat libovolný soubor. Jde o to, že SQL server zpravidla běží s velkými přístupovými právy a je třeba neprivilegovaným uživatelům databáze zabránit v neoprávněnému přístupu k souborům.
+<p>Příklad: <code>D:\wbdata;D:\wbdata\temp</code></p>
+</td>
+</tr>
+
+<tr valign="top">
+<td width=15%><code>InBoxAppl</code></td>
+<td width=14%><code>Aplikace pro tabulky</code></td>
+<td width=71%>Název aplikace, v níž se budou hledat / vytvářet <a href="HE_MAILTABLES.htm">pracovní tabulky</a> pro příjem pošty</td>
+</tr>
+
+<tr valign="top">
+<td width=15%><code>InBoxMessages</code></td>
+<td width=14%><code>Tabulka pro zásilky</code></td>
+<td width=71%>Jméno pracovní tabulky pro ukládání informací o došlých zásilkách</td>
+</tr>
+
+<tr valign="top">
+<td width=15%><code>InBoxFiles</code></td>
+<td width=14%><code>Tabulka pro přílohy</code></td>
+<td width=71%>Jméno pracovní tabulky pro ukládání informací o připojených souborech</td>
+</tr>
+
+</table><br>
+
+<p>Ve většině případů stačí pro inicializaci pošty Mail602 specifikovat jméno profilu Mail602. Tyto profily lze vytvářet a spravovat pomocí klienta Mail602. Je-li na počítači nainstalován LAN klient, nebo je-li nainstalován NET klient a aplikace potřebuje přistupovat k poštovní schránce jiného než implicitního uživatele, je nutné zadat jméno uživatele. </p>
+<p>Parametry <code>InBox...</code> mají význam tehdy, vyžaduje-li provoz aplikace, aby pracovní tabulky pro příjem pošty byly odlišné od implicitních <code>_INBOXMSGS</code> a <code>_INBOXFILES</code> v systémové aplikaci <code>_SYSEXT</code>. Lze je zadat pouze pomocí funkce <a href="HE_F_MAILSETPROFILEPROP.htm"><code>MailSetProfileProp</code></a>.</p>
+
+
+
+<table class="navigace" border="0" width="100%"  bgcolor="#FFFFBF"><tr> <td
+width="20" align="center"><img class="floatno" src="../images/prev.gif"
+width="15" height="13" alt="&lt;&shy;" title="Předcházející téma"
+border="0"></td><td width="25%"><a
+href="HE_MAILPROFSMTP.htm">SMTP/POP3</a></td> <td width="25%"
+align="right"><img class="floatno" src="../images/up.gif" width="13"
+height="15" alt="Nahoru" title="O jednu úroveň výš" border="0"
+align="middle"></td><td width="25%"><a href="HE_MAILPROFILES.htm">Profily poštovních parametrů</a></td>
+<td width="25%" align="right"><a
+href="HE_MAILPROFMAPI.htm">MAPI</a></td><td width="20"
+align="center"><img class="floatno" src="../images/next.gif" width="15"
+height="13" alt="&shy;&gt;" title="Následující téma" border="0"></td>
+</tr></table>
+</body>
+</html>

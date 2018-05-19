@@ -1,0 +1,282 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="cs" dir="ltr" lang="cs"><head>
+
+  
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="KEYWORDS" content="Datové modely">
+<meta name="robots" content="index,follow">
+<link rel="shortcut icon" href="http://student.cvut.cz/favicon.ico"><title>Datové modely - ČWUT</title>
+    
+    <style type="text/css" media="screen,projection">/*<![CDATA[*/ @import "/cwut/skins/cwutskin/main.css"; /*]]>*/</style>
+    <link rel="stylesheet" type="text/css" media="print" href="Datov%C3%A9_modely_soubory/commonPrint.css"><!--[if lt IE 5.5000]><style type="text/css">@import "/cwut/skins/cwutskin/IE50Fixes.css";</style><![endif]--><!--[if IE 5.5000]><style type="text/css">@import "/cwut/skins/cwutskin/IE55Fixes.css";</style><![endif]--><!--[if IE 6]><style type="text/css">@import "/cwut/skins/cwutskin/IE60Fixes.css";</style><![endif]--><!--[if IE]><script type="text/javascript" src="/cwut/skins/common/IEFixes.js"></script>
+    <meta http-equiv="imagetoolbar" content="no" /><![endif]-->
+    
+    
+    
+    
+    <script type="text/javascript" src="Datov%C3%A9_modely_soubory/index.php"></script>    <script type="text/javascript" src="Datov%C3%A9_modely_soubory/wikibits.js"></script>
+    <style type="text/css">/*<![CDATA[*/
+@import "/cwut/index.php?title=MediaWiki:Cwutskin.css&action=raw&ctype=text/css&smaxage=18000";
+@import "/cwut/index.php?title=-&action=raw&gen=css";
+/*]]>*/</style>            <script src="Datov%C3%A9_modely_soubory/urchin.js" type="text/javascript">
+    </script>
+    <script type="text/javascript">
+      _uacct = "UA-82145-1";
+       urchinTracker();
+    </script></head><body class="ns-0">
+  
+    <div id="cwutTop"> 
+    <a href="http://www.student.cvut.cz/cwut/"><img src="Datov%C3%A9_modely_soubory/cwut-logo.gif" alt="CWUT logo"></a>
+    </div>
+
+    <div class="rozcestnik">
+      <h5>SU Media:</h5>
+      <a href="http://www.student.cvut.cz/" title="Studentský informační server ČVUT">Student</a> |
+      <a href="http://strednik.su.cvut.cz/" title="Středník - časopis Studentské unie ČVUT">Středník</a> |
+      <a href="http://www.student.cvut.cz/cwut/" title="Studentův wiki průvodce po ČVUT">ČWUT</a> |
+      <a href="http://avc.sh.cvut.cz/" title="Audiovizuální centrum Silicon Hill">AVC SH</a> |
+      <a href="http://www.radioakropolis.cz/" title="Studentské rádio Akropolis">Akropolis</a> |
+      <a href="http://www.ikariera.cz/" title="Nabídky práce pro studenty">iKariéra</a> 
+    </div>    
+               
+    <div id="globalWrapper">
+      <div id="column-content">
+	<div id="content">
+	  <a name="top" id="contentTop"></a>
+	  	  <h1 class="firstHeading">Datové modely</h1>
+	  <div id="bodyContent">
+	    <h3 id="siteSub">&lt;small&gt;Z ČWUT&lt;/small&gt;</h3>
+	    <div id="contentSub"></div>
+	    	    	    <!-- start content -->
+	    <table id="toc" border="0"><tbody><tr id="toctitle"><td align="center">
+<b>Obsah</b> <script type="text/javascript">showTocToggle("zobrazit","skrýt")</script><span class="toctoggle">[<a href="javascript:toggleToc()" class="internal"><span id="showlink" style="display: none;">zobrazit</span><span id="hidelink">skrýt</span></a>]</span>
+</td></tr><tr id="tocinside"><td>
+<div class="tocline"><a href="#R.C5.AFzn.C3.A9_.C3.BArovn.C4.9B_pohledu_na_data">1 Různé úrovně pohledu na data</a><br></div>
+<div class="tocline"><a href="#Konceptu.C3.A1ln.C3.AD_datov.C3.BD_model.2C_datab.C3.A1zov.C3.A9_modely_dat">2 Konceptuální datový model, databázové modely dat</a><br></div>
+<div class="tocindent">
+<p><a href="#Konceptu.C3.A1ln.C3.AD_modelov.C3.A1n.C3.AD">2.1 Konceptuální modelování</a><br>
+<a href="#E-R_Model">2.2 E-R Model</a><br>
+</p>
+</div>
+<div class="tocline"><a href="#Fyzick.C3.BD_pohled_na_data:_z.C3.A1znam.2C_soubor.2C_tabulka.2C_index">3 Fyzický pohled na data: záznam, soubor, tabulka, index</a><br></div>
+<div class="tocline"><a href="#Techniky_ukl.C3.A1d.C3.A1n.C3.AD_a_p.C5.99.C3.ADstupu_k_z.C3.A1znam.C5.AFm">4 Techniky ukládání a přístupu k záznamům</a><br></div>
+<div class="tocline"><a href="#B-stromy">5 B-stromy</a><br></div>
+</td></tr></tbody></table>
+<div class="editsection" style="float: right; margin-left: 5px;">[<a href="http://student.cvut.cz/cwut/index.php?title=Datov%C3%A9_modely&amp;action=edit&amp;section=1" title="Datové modely">editovat</a>]</div><a name="R.C5.AFzn.C3.A9_.C3.BArovn.C4.9B_pohledu_na_data"></a><h2> Různé úrovně pohledu na data </h2>
+<ul><li> <b>Konceptuální</b> – zabývá se modelováním reality, není (snaží se nebýt) ovlivněna budoucími prostředky řešení (E-R model, Class Diagram, ...). 
+</li><li> <b>Logická</b> – vztahuje se ke konkrétnímu datovému modelu a
+používá jeho konstrukční dotazovací a manipulační prostředky (relační,
+objektová, síťová, hierarchická, XML, ...).
+</li><li> <b>Fyzická</b> – jde o fyzické uložení dat (sekvenční soubory, indexy, clustery, ...). Programátor je od ní odstíněn logickou vrstvou SŘBD.
+</li></ul>
+<div class="editsection" style="float: right; margin-left: 5px;">[<a href="http://student.cvut.cz/cwut/index.php?title=Datov%C3%A9_modely&amp;action=edit&amp;section=2" title="Datové modely">editovat</a>]</div><a name="Konceptu.C3.A1ln.C3.AD_datov.C3.BD_model.2C_datab.C3.A1zov.C3.A9_modely_dat"></a><h2> Konceptuální datový model, databázové modely dat </h2>
+<p>Databázový model je kolekce pojmů sloužících k modelování. Může být
+formální, matematická. Výsledkem databázového modelování je databázové
+schéma (popis struktury dat)
+</p>
+<ul><li> konceptuální modely (zachycují pouze vztahy a struktury dat samotných)
+<ul><li> ER model
+</li></ul>
+</li><li> databázové (=logické) modely (modely, se kterými pracuje
+databázový stroj směrem k uživateli; jsou nad nimi definovány
+dotazovací a manipulační jazyky)
+<ul><li> síťový (entity propojeny odkazy a tím vytváří graf)
+</li><li> relační
+</li><li> hierarchický - speciální případ síťového. Schéma síťové
+databáze tvoří orientovaný graf. Pokud je tento graf stromem, hovoří se
+o hierarchických databázích.
+</li><li> objektový
+</li><li> objektově relační
+</li><li> XML
+</li></ul>
+</li></ul>
+<div class="editsection" style="float: right; margin-left: 5px;">[<a href="http://student.cvut.cz/cwut/index.php?title=Datov%C3%A9_modely&amp;action=edit&amp;section=3" title="Datové modely">editovat</a>]</div><a name="Konceptu.C3.A1ln.C3.AD_modelov.C3.A1n.C3.AD"></a><h3> Konceptuální modelování </h3>
+<p>Základní znalost, jak interpretovat data, je uložena v databázovém
+schématu. Konceptuální modely jsou pokusem umožnit vytvoření popisu dat
+v databázi nezávisle na fyzickém uložení databáze. Obvykle se řeší:
+</p>
+<ul><li> struktura dat (datová analýza a návrh)
+</li><li> manipulace dat (funkční analýza a návrh)
+</li><li> specifikace IO (integritní omezení)
+</li></ul>
+<p>Čtyři základní principy konceptuálních modelů (popisují objekty a jejich vzájemné vztahy):
+</p>
+<ul><li> orientace na objekty - myslí se v objektech a nikoliv v
+identifikátorech, které je označují - vyžadována složitá struktura
+objektů
+</li><li> funkcionální podstata vztahů - do modelů se zahrnuje pojem
+atributu (E-R modely), dále funkce jako jediný základní konstrukt
+(DAPLEX, HIT), nebo systém funkcí (fragmenty v IFO)
+</li><li> ISA hierarchie - umožňuje práci s nadtypy a podtypy objektů
+</li><li> hierarchický mechanismus - pro konstrukci objektů z jiných objektů
+</li></ul>
+<div class="editsection" style="float: right; margin-left: 5px;">[<a href="http://student.cvut.cz/cwut/index.php?title=Datov%C3%A9_modely&amp;action=edit&amp;section=4" title="Datové modely">editovat</a>]</div><a name="E-R_Model"></a><h3> E-R Model </h3>
+<ol><li> identifikuje typy entit jako třídy objektů stejného typu (ZAKAZNIK, FILM, KNIHA)
+</li><li> identifikuje typy vztahům do kterých entity identifikovaných
+typů mohou vstupovat ZAKAZNIK (entita) MA_PUJCENOU (vztah)
+KNIHA(entita)
+</li><li> na základě přiměřené úrovně abstrakce přiřadí jednotlivým
+typům entit a vztahů atributy popisující blíže jejich vlastnosti JMENO
+(jméno, příjmení)
+</li><li> formuluje různá integritní omezení vyjadřující soulad s větší či menší přesností schématu s modelovanou realitou.
+</li></ol>
+<ul><li> Entita = je objekt reálného světa, který je schopen nezávislé existence a je jednoznačně odlišitelný od ostatních objektů.
+</li><li> Vztah - je vazba mezi dvěma entitami.
+</li><li> Hodnota popisovaného typu - jednoduchý datový typ
+</li><li> Atribut - funkce přiřazující entitám či vztahům hodnotu určující některou podstatnou vlastnost entity, nebo vztahu
+</li><li> Klíč = minimální množina atributů, jejichž hodnoty jednoznačně určují každou entitu
+</li><li> E-R diagram umožňuje popsat: entity (obdélníky), vztahy
+(kosočtverce), (ne)povinnost účasti ve vztahu (čárkovaná či plná čára),
+kardinalita (číslem), slabé entity (dvojitý obdélník - součástí jeho
+klíče jsou i atributy jiných entit), atributy (čárky z entit), klíčové
+atributy (jméno atributu podtrženo, příp. je na konci vyplněný
+kroužek), ISA hierarchie (vnoření entit, tedy obdélníků)
+</li></ul>
+<div class="editsection" style="float: right; margin-left: 5px;">[<a href="http://student.cvut.cz/cwut/index.php?title=Datov%C3%A9_modely&amp;action=edit&amp;section=5" title="Datové modely">editovat</a>]</div><a name="Fyzick.C3.BD_pohled_na_data:_z.C3.A1znam.2C_soubor.2C_tabulka.2C_index"></a><h2> Fyzický pohled na data: záznam, soubor, tabulka, index </h2>
+<ul><li> záznam - logická jednotka pro uložení dat
+</li><li> homogenní soubor - kolekce záznamů stejného typu
+</li><li> statická organizace souborů:
+<ul><li> hromada = nehomogenní soubor záznamů obvykle proměnné délky,
+vkládané záznamy jsou umísťovány ve vymezeném prostoru disku fyzicky za
+sebou, hledání v <i>O(N)</i>
+</li><li> sekvenční soubor = homogenní
+<ul><li> neuspořádaný řešený obvykle jako hromada
+</li><li> uspořádaný liší se, že je uspořádán dle klíče
+</li><li> aktualizované záznamy se umisťují do neuspořádaného sekvenčního souboru (soubor aktualizací)
+</li><li> po provedení operace REORGANIZACE se setřídí do nové verze primárního souboru
+</li><li> základní složitost <i>O(N)</i> lze binárním půlením zlepšit na <i>O(logN)</i>
+</li></ul>
+</li><li> index-sekvenční soubor = je tvořen primárním souborem
+(sekvenční setříděný soubor uspořádaný podle primárního klíče) s
+přídavnou víceúrovňovou strukturou index (obsahuje jen některá data z
+primárního souboru a odkaz na to, kde jsou přesně v primárním souboru -
+urychlí to vyhledávání)
+</li><li> indexovaný soubor = tvořen primárním souborem a indexy pro
+různé vyhledávací klíče. Neindexují se bloky, ale záznamy. Primární
+soubor tedy nemusí být setříděn, ani se nemusí nacházet v souvislé
+části vnější paměti.
+</li><li> bitová mapa = jde o velmi efektivní možnost indexace řádků
+tabulek relační databáze. Prostě 1 na pozici v bitovém vektoru mi říká
+že k tomu patří i ten řádek, pokud 0 tak ne. Použitelné jen pro
+atributy s dostatečně malou doménou.
+</li><li> přímý přístup = pomocí hashovací funkce se rozptyluje do adresového prostoru, např. dělením modulo prvočíslo.
+</li></ul>
+</li><li> dynamická reprezentace souborů: B+ nebo B- stromy
+</li></ul>
+<div class="editsection" style="float: right; margin-left: 5px;">[<a href="http://student.cvut.cz/cwut/index.php?title=Datov%C3%A9_modely&amp;action=edit&amp;section=6" title="Datové modely">editovat</a>]</div><a name="Techniky_ukl.C3.A1d.C3.A1n.C3.AD_a_p.C5.99.C3.ADstupu_k_z.C3.A1znam.C5.AFm"></a><h2> Techniky ukládání a přístupu k záznamům </h2>
+<p>Viz výše.
+</p>
+<div class="editsection" style="float: right; margin-left: 5px;">[<a href="http://student.cvut.cz/cwut/index.php?title=Datov%C3%A9_modely&amp;action=edit&amp;section=7" title="Datové modely">editovat</a>]</div><a name="B-stromy"></a><h2> B-stromy </h2>
+<ul><li> vhodné pro ukládání indexových souborů
+</li><li> m-ární strom
+</li><li> všechny cesty jsou stejně dlouhé
+</li><li> <b>B+</b>: data jsou pouze v listech (vnitřní uzly obsahují pouze klíče)
+</li><li> <b>B-</b>: data jsou i ve vnitřních uzlech
+</li><li> kořen má nejméně dva potomky a maximálně <i>m</i> klíčů (pak by byl zároveň listem)
+</li><li> uzly (kromě kořene a listů) mají nejméně <i>m/2</i> potomků
+</li><li> uzel má nejméně <i>m/2</i> a nejvíce <i>m - 1</i> datových záznamů (pouze klíče - seřazeny vzestupně)
+</li><li> když má uzel <i>x</i> potomků, tak musí obsahovat <i>x - 1</i>
+klíčů, které určí, do jakého podstromu se má pro jakou hodnotu klíče
+jít (tj. klíče rozdělují podstromy podle rozsahů klíčů v nich)
+</li><li> v listech bývá uložen také odkaz na následujícího bratra (další zrychlení)
+</li></ul>
+<ul><li> <b>vyhledání</b>: obdobně jako u klasického binárního
+vyhledávací stromu (projdeme pole klíčů v uzlu a když najdeme stejně
+velký nebo větší, tak sestoupíme do odpovídajícího podstromu)
+</li><li> <b>vložení</b>: Ideální je, když se nová data vejdou do správného uzlu. Pokud je uzel moc plný (má <i>m - 1</i>
+klíčů), je nezbytné ho rozdělit na dva uzly. Tato operace se provede
+tak, že se vybere prostřední klíč z tohoto potenciálně přeplněného uzlu
+a ten se přemístí do svého rodiče. Vytvoří se nový uzel, do kterého
+přesuneme všechny klíče vpravo od toho prostředního. Klíče vlevo od
+prostředního zůstávají v původním uzlu. Takto se můžeme dostat až na
+vrchol stromu - pak vytvoříme nový kořen s jediným záznamem.
+</li><li> <b>odebrání z listů</b>: Pokud je v listu dost klíčů na to,
+aby i po vymazání jednoho klíče splňoval definici B-stromu, můžeme
+rovnou daný klíč vyjmout. Pokud by po odebrání jednoho klíče již tento
+uzel nesplňoval definici B-stromu, musíme provést některé dodatečné
+změny. Pokud má sourozenecký uzel minimální počet klíčů, můžeme tyto
+dva sourozenecké uzly spojit. Pokud má sourozenecký uzel více klíčů než
+je minimální počet, můžeme z tohoto sourozeneckého uzlu jeden klíč
+přesunout, poté pak bude mít náš uzel dostatečný počet klíčů.
+</li><li> <b>odebírání z nelistů</b>: Pří mazání klíče z nelistové
+položky nejprve tento klíč najdeme, smažeme ho a na jeho místo
+přesuneme jeho prvního následovníka (jelikož víme jak jsou data ve
+stromu uložena, tak to již není problém). Musíme si samozřejmě dát
+pozor aby při odebírání nebyl v některém uzlu nedostatečný počet klíčů.
+</li><li> při přidávání položek tedy dochází ke štěpení uzlů a při odebírání položek ke slévání uzlů
+</li><li> Pokud chceme spojit dva uzly musíme v zásadě provést 2 kroky:
+<ol><li> Přesuneme všechny klíče z pravého sourozence do levého, tento pravý podstrom následně zrušime.
+</li><li> Do tohoto společného potomka následně přesuneme i klíč který je odděloval v rodiči (na ilustrativním obrázku zelený klíč <i>k</i><sub>1</sub>)
+</li></ol>
+</li></ul>
+<div class="printfooter">
+Citováno z „<a href="http://student.cvut.cz/cwut/index.php/Datov%C3%A9_modely">http://student.cvut.cz/cwut/index.php/Datov%C3%A9_modely</a>“</div>
+	    <div id="catlinks"><p class="catlinks"><a href="http://student.cvut.cz/cwut/index.php?title=Speci%C3%A1ln%C3%AD:Categories&amp;article=Datov%C3%A9_modely" title="Speciální:Categories">Kategorie</a>: <a href="http://student.cvut.cz/cwut/index.php/Kategorie:St%C3%A1tnice_FEL" title="Kategorie:Státnice FEL">Státnice FEL</a></p></div>	    <!-- end content -->
+	    <div class="visualClear"></div>
+	  </div>
+	</div>
+      </div>
+  
+      <div id="column-one">
+	<div id="p-cactions" class="portlet">
+	  <h5>Views</h5>
+	  <ul>
+	    <li id="ca-nstab-main" class="selected"><a href="http://student.cvut.cz/cwut/index.php/Datov%C3%A9_modely">Článek</a></li><li id="ca-talk" class="new"><a href="http://student.cvut.cz/cwut/index.php?title=Diskuse:Datov%C3%A9_modely&amp;action=edit">Diskuse</a></li><li id="ca-edit"><a href="http://student.cvut.cz/cwut/index.php?title=Datov%C3%A9_modely&amp;action=edit">Editovat</a></li><li id="ca-history"><a href="http://student.cvut.cz/cwut/index.php?title=Datov%C3%A9_modely&amp;action=history">Historie</a></li>	  </ul>
+	</div>
+	
+	<script type="text/javascript"> if (window.isMSIE55) fixalpha(); </script>
+	<div class="portlet" id="p-nav">
+	  <h5>Navigace</h5>
+	  <div class="pBody">
+	    <ul>
+	      	      <li id="n-mainpage"><a href="http://student.cvut.cz/cwut/index.php/Hlavn%C3%AD_strana">Hlavní strana</a></li>	      <li id="n-PruvodcePrvaka"><a href="http://student.cvut.cz/cwut/index.php/Pr%C5%AFvodce_prv%C3%A1ka">Průvodce prváka</a></li>	      <li id="n-recentchanges"><a href="http://student.cvut.cz/cwut/index.php/Speci%C3%A1ln%C3%AD:Recentchanges">Poslední změny</a></li>	      <li id="n-randompage"><a href="http://student.cvut.cz/cwut/index.php/Speci%C3%A1ln%C3%AD:Randompage">Náhodná stránka</a></li>	      <li id="n-help"><a href="http://student.cvut.cz/cwut/index.php/N%C3%A1pov%C4%9Bda:Obsah">Nápověda</a></li>	    </ul>
+	  </div>
+	</div>
+	<div id="p-search" class="portlet">
+	  <h5><label for="searchInput">Hledat</label></h5>
+	  <div class="pBody">
+	    <form name="searchform" action="/cwut/index.php/Speci%C3%A1ln%C3%AD:Search" id="searchform">
+	      <input id="searchInput" name="search" accesskey="f" value="" type="text">
+	      <input name="go" class="searchButton" id="searchGoButton" value="Jít na" type="submit">&nbsp;<input name="fulltext" class="searchButton" value="Hledat" type="submit">
+	    </form>
+	  </div>
+	</div>
+	
+	<div class="portlet" id="p-tb">
+	  <h5>Nástroje</h5>
+	  <div class="pBody">
+	    <ul>
+		  		  <li id="t-whatlinkshere"><a href="http://student.cvut.cz/cwut/index.php?title=Speci%C3%A1ln%C3%AD:Whatlinkshere&amp;target=Datov%C3%A9_modely">Odkazuje sem</a></li>
+		  		  <li id="t-recentchangeslinked"><a href="http://student.cvut.cz/cwut/index.php?title=Speci%C3%A1ln%C3%AD:Recentchangeslinked&amp;target=Datov%C3%A9_modely">Související změny</a></li>
+		  	      	      	      	      	      	      	      	      	      <li id="t-specialpages"><a href="http://student.cvut.cz/cwut/index.php/Speci%C3%A1ln%C3%AD:Specialpages">Speciální stránky</a></li>	      	    </ul>
+	  </div>
+	</div>
+	
+	<div class="portlet" id="p-personal">
+	  <h5 id="pt-userpage">Osobní nástroje</h5>
+	  <div class="pBody">
+	    <ul>
+	    <li id="pt-login"><a href="http://student.cvut.cz/cwut/index.php?title=Speci%C3%A1ln%C3%AD:Userlogin&amp;returnto=Datov%C3%A9_modely">Přihlašte se</a></li>	    </ul>
+	  </div>
+	</div>
+	
+	      </div><!-- end of the left (by default at least) column -->
+      <div class="visualClear"></div>
+      <div id="footer">
+    <div id="f-poweredbyico"><a href="http://www.mediawiki.org/"><img src="Datov%C3%A9_modely_soubory/poweredby_mediawiki_88x31.png" alt="MediaWiki"></a></div>		<ul id="f-list">
+	  <li id="f-lastmod">  Stránka byla naposledy editována v 10:57, 9. 2. 2008.</li>	  <li id="f-viewcount">Stránka byla zobrazena 3982-krát.</li>	  	  	  <li id="f-about"><a href="http://student.cvut.cz/cwut/index.php/%C4%8CWUT" title="ČWUT">O&nbsp;ČWUT</a></li>	  <li id="f-disclaimer"><a href="http://student.cvut.cz/cwut/index.php/%C4%8CWUT:Vylou%C4%8Den%C3%AD_odpov%C4%9Bdnosti" title="ČWUT:Vyloučení odpovědnosti">Vyloučení odpovědnosti</a></li>	</ul>
+      </div>
+	<div id="footer">
+      <ul id="f-list">
+      <li><a href="http://www.cvut.cz/cz/educa/grantped/studgran.html"><img src="Datov%C3%A9_modely_soubory/SGS.gif"></a></li>
+      <li><a href="http://www.student.cvut.cz/cwut/index.php/Isc_Media"><img src="Datov%C3%A9_modely_soubory/ISCM.gif"></a></li>
+      <li><a href="http://www.su.cvut.cz/"><img src="Datov%C3%A9_modely_soubory/SU.gif"></a></li>
+      <li><a href="http://www.isc.cvut.cz/"><img src="Datov%C3%A9_modely_soubory/ISC.gif"></a></li>
+      <li><a href="http://www.cvut.iaeste.cz/"><img src="Datov%C3%A9_modely_soubory/IAESTE.gif"></a></li>
+      <li><a href="http://www.stormtype.com/"><img src="Datov%C3%A9_modely_soubory/STORM.gif"></a></li>
+      </ul>
+      </div>
+
+    </div>
+    <!-- Served by hades in 0.35 secs. -->
+  <div style="position: absolute; left: 0px; top: 0px; z-index: 1000000000 ! important; visibility: hidden; opacity: 1;" id="linkalert-box"><img src="Datov%C3%A9_modely_soubory/none-icon.png" id="linkalert-icon-1"></div></body></html>

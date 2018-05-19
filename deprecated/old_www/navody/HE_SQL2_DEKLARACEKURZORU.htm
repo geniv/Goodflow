@@ -1,0 +1,97 @@
+<!doctype html public "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=Windows-1250">
+<title>Deklarace kurzoru v SQL</title>
+<link rel='stylesheet' style='text/css' href='../function.css'>
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr>
+	<td style="background-image: url(../images/bghead.jpg);
+		background-position: right;
+		background-repeat: no-repeat;">
+	<table width="100%" border="0" cellpadding="0" cellspacing="0"
+		style="background-image:none">
+	<tr>
+		<td style="background-image:none" height="46"
+			width="15%"><img src="../images/title-cz.gif"
+			width="255" height="33"
+			alt="602SQL-Úplná dokumentace"
+			title="602SQL - Úplná dokumentace"
+			border="0"></td>
+		<td width="33%" align="right"><a href="../xml/html/top.html"><img class="floatno"
+			src="../images/index.gif"
+			width="15" height="16"
+			alt="Index" title="Zpět na obsah"
+			border="0" vspace="2"></a> &nbsp;
+			 </td>
+	</tr>
+	</table>
+	</td>
+</tr>
+</table><table class="navigace" border="0" width="100%"  bgcolor="#FFFFBF"><tr> <td
+width="20" align="center"><img class="floatno" src="../images/prev.gif"
+width="15" height="13" alt="&lt;&shy;" title="Předcházející téma"
+border="0"></td><td width="25%"><a
+href="HE_SQL2_DEKLARACEHANDLERU.htm">Deklarace handleru</a></td> <td width="25%"
+align="right"><img class="floatno" src="../images/up.gif" width="13"
+height="15" alt="Nahoru" title="O jednu úroveň výš" border="0"
+align="middle"></td><td width="25%"><a href="../xml/html/declare.html">Deklarace objektů v SQL</a></td>
+<td width="25%" align="right"><a
+href="../xml/html/sql_declaretable.html">Deklarace lokální tabulky</a></td><td width="20"
+align="center"><img class="floatno" src="../images/next.gif" width="15"
+height="13" alt="&shy;&gt;" title="Následující téma" border="0"></td>
+</tr></table>
+
+
+
+
+<h1><a name="he_sql2_deklaracekurzoru"></a>Deklarace kurzoru (SQL)</h1>
+
+<pre><code>deklarace_kurzoru ::= DECLARE jméno [ INSENSITIVE | SENSITIVE ] [ SCROLL ] CURSOR 
+    FOR specifikace_kurzoru;
+specifikace_kurzoru  ::= { dotazový_výraz | TABLE jméno_tabulky } 
+    [ FOR { READ ONLY | UPDATE [ OF sloupec {, sloupec }… ] ] }</code></pre>
+
+<p>Touto deklarací se deklaruje <a href="HE_SQL2_KURZORY.htm">kurzor</a>, který lze otevřít příkazem <a href="HE_SQL2_OPEN.htm">OPEN</a>, posouvat se a číst z něj řádky příkazem <a href="HE_SQL2_FETCH.htm">FETCH</a> nebo jej používat v příkazech  <a href="HE_SQL2_UPDATECURRENT.htm">UPDATE CURRENT OF</a> a <a href="HE_SQL2_DELETECURRENT.htm">DELETE CURRENT OF</a>, a uzavřít jej příkazem <a href="HE_SQL2_CLOSE.htm">CLOSE</a>.</p>
+
+<p>Je-li uvedeno INSENSITIVE, pak změny v datech provedené prostřednictvím kurzoru se v databázi neprojeví. Kurzor bude pracovat s vlastní kopií tabulky obsahující odpověď na <i>dotazový výraz</i>, který se proto musí při otevření pomocí OPEN celý vyhodnotit. Je-li uvedeno SENSITIVE, pak se změny v datech provedené prostřednictvím kurzoru projevují v databázi (podle nastavení izolace transakcí), což je implicitní stav. SENSITIVE nesmí být uvedeno v deklaraci <a href="../xml/html/query_insdeledit.html">needitovatelného</a> kurzoru.</p>
+
+<p>Specifikace SCROLL požaduje přístup k datům v kurzoru v libovolném pořadí. Tuto vlastnost mají ve 602SQL všechny kurzory a proto se SCROLL ignoruje.</p>
+
+<p>Klauzule FOR UPDATE povoluje editaci dat (vylučuje s INSENSITIVE) a dá se použít pouze na <a href="../xml/html/query_insdeledit.html">editovatelné</a> kurzory. Klauzule FOR READ ONLY zabraňuje v editaci dat a vkládání nebo rušení záznamů pomocí tohoto kurzoru bez ohledu na senzitivitu (tyto situace se poznají již při kompilaci).</p>
+
+<p><b>Odchylky od Intermediate level směrem k Full level nebo k SQL 3</b>
+
+<ul>
+	<li>Specifikace INSENSITIVE patří do úrovně Full SQL.</li>
+	<li>Klauzuli FOR UPDATE je možno libovolně kombinovat se SCROLL a ORDER BY.</li>
+</ul>
+
+<p><b>Příklad použití:</b></p>
+
+<pre><code>DECLARE cur CURSOR FOR 
+  SELECT Firmy.adresa, CAST (SUM(Objednavky.objed) AS INT) 
+  FROM Firmy, Objednavky 
+  WHERE Objednavky.firma=Firmy.firma 
+  GROUP BY Firmy.firma 
+FOR READ ONLY;</code></pre>
+
+
+
+<table class="navigace" border="0" width="100%"  bgcolor="#FFFFBF"><tr> <td
+width="20" align="center"><img class="floatno" src="../images/prev.gif"
+width="15" height="13" alt="&lt;&shy;" title="Předcházející téma"
+border="0"></td><td width="25%"><a
+href="HE_SQL2_DEKLARACEHANDLERU.htm">Deklarace handleru</a></td> <td width="25%"
+align="right"><img class="floatno" src="../images/up.gif" width="13"
+height="15" alt="Nahoru" title="O jednu úroveň výš" border="0"
+align="middle"></td><td width="25%"><a href="../xml/html/declare.html">Deklarace objektů v SQL</a></td>
+<td width="25%" align="right"><a
+href="../xml/html/sql_declaretable.html">Deklarace lokální tabulky</a></td><td width="20"
+align="center"><img class="floatno" src="../images/next.gif" width="15"
+height="13" alt="&shy;&gt;" title="Následující téma" border="0"></td>
+</tr></table>
+</body>
+</html>

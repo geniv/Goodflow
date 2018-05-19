@@ -1,0 +1,159 @@
+<!doctype html public "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=Windows-1250">
+<title>Funkce LetterCreate</title>
+<link rel='stylesheet' style='text/css' href='../function.css'>
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000">
+
+
+
+<h2 class=function>LetterCreate</h2>
+<img src='../images/cpp.gif' width='44' height='16' border='0' alt='c/c++' align='middle' hspace='2'><img src='../images/pascal.gif' width='44' height='16' border='0' alt='pascal' align='middle' hspace='2'><img src='../images/sql.gif' width='44' height='16' border='0' alt='sql' align='middle' hspace='2'>
+
+
+<br><br>
+<div class='typ'>int <b>LetterCreate</b>(char * subj, char * msg, UINT flags, DWORD * letter);<br>
+function <b>LetterCreate</b>(subj, msg : PChar; flags : integer; var letter : integer) : integer;<br>
+FUNCTION <strong>LetterCreate</strong> (IN subj CHAR(80), IN msg CLOB, IN flags INT, OUT letter INT) RETURNS INT;
+</div>
+
+
+<p><b>Parametry</b></p>
+
+<table border=1 cols=2 width=500>
+
+<tr valign="top">
+<td width=10%><i>subj</i></td>
+<td width=90%>"věc" dopisu (objeví se v seznamu došlé pošty)</td>
+</tr>
+
+<tr valign="top">
+<td><i>msg</i></td>
+<td>text dopisu nebo cesta k textovému souboru obsahujícímu text dopisu</td>
+</tr>
+
+<tr valign="top">
+<td><i>flags</i></td>
+<td>příznaky dopisu WBL_...</td>
+</tr>
+
+<tr valign="top">
+<td><i>letter</i></td>
+<td>výstupní parametr -  handle dopisu</td>
+</tr>
+</table><br>
+
+<p><b>Popis</b></p>
+
+<p>Vytvoří novou zásilku <a href="HE_MAIL.htm">elektronické pošty</a> označenou parametrem <i>letter</i>. Tento parametr identifikuje zásilku a ostatní funkce (přidání adresáta, připojení souboru apod.) pracují s tímto identifikátorem.</p>
+
+<p>Příznaky dopisu <i>flags</i>:</p>
+
+<table border=1 cols=2 frame=box>
+
+<tr valign="top">
+<td width=28%>WBL_READRCPT   (= 1)</td>
+<td width=72%>Zásilka bude doporučená. </td>
+</tr>
+
+<tr valign="top">
+<td width=28%>WBL_DELAFTER   (= 2) </td>
+<td width=72%>Zásilka bude po odeslání smazána. MAPI implicitně odeslané zásilky neruší a ponechává je v přihrádce pošta k odeslání.</td>
+</tr>
+</table><br>
+
+<p>Následující dva příznaky specifikují prioritu zásilky. Implicitně má zásilka prioritu normální. </p>
+
+<table border=1 cols=2 frame=box>
+
+<tr valign="top">
+<td width=28%>WBL_PRILOW    ( = 4)</td>
+<td width=72%>Odeslání zásilky bude mít nízkou prioritu </td>
+</tr>
+
+<tr valign="top">
+<td width=28%>WBL_PRIHIGH    (= 8)</td>
+<td width=72%>Odeslání zásilky bude mít vysokou prioritu. Uživatel pošty Mail602 musí mít povoleno vysokou prioritu používat, jinak při odeslání zásilky dojde k chybě <code>NO_RIGHT</code> (129). </td>
+</tr>
+</table><br>
+
+<p>Následující tři příznaky specifikují citlivost zásilky. Implicitně nemá zásilka žádnou citlivost. Pošta Mail602 nastavování citlivosti zásilky nepodporuje. </p>
+
+<table border=1 cols=2 frame=box>
+
+<tr valign="top">
+<td width=28%>WBL_SENSPERS   (= 16)</td>
+<td width=72%>Zásilka bude mít "Osobní" citlivost, tzn. že zásilka neobsahuje informace týkající se pracovních záležitostí. </td>
+</tr>
+
+<tr valign="top">
+<td width=28%>WBL_SENSPRIV   (= 32)</td>
+<td width=72%>Zásilka bude mít "Soukromou" citlivost, příjemci nebude umožněno obsah zásilky před odesláním odpovědi nebo postoupením změnit. </td>
+</tr>
+
+<tr valign="top">
+<td width=28%>WBL_SENSCONF   (= 64)</td>
+<td width=72%>Zásilka bude mít "Důvěrnou" citlivost, se zásilkou by mělo zacházeno podle příslušných zásad. </td>
+</tr>
+</table>
+<p></p>
+<table border=1 cols=2 frame=box>
+<tr valign="top">
+<td width=28%>WBL_REMSENDNOW (= 128)</td>
+<td width=72%>Zásilka bude záhy po zařazení do pošty odeslána na mateřský poštovní úřad (v případě vzdáleného klienta pošty Mail602) nebo na zvolený SMTP server (v případě tohoto nastavení v profilu Mail602). </td>
+</tr>
+
+<tr valign="top">
+<td width=28%>WBL_MSGINFILE (= 256)</td>
+<td width=72%>Je-li příznak nastaven, parametrem <em>Msg</em> je jméno textového souboru, který obsahuje tělo dopisu, jinak je parametrem <em>Msg</em> přímo text dopisu. V případě těla v souboru musí být soubor v 8-bitovém kódování (pro <code>LetterCreate</code>), resp. v UCS-2 (pro <code>LetterCreateW</code>). </td>
+</tr>
+
+<tr valign="top">
+<td width=28%>WBL_BCC  (=512)</td>
+<td width=72%>obsahuje-li dopis více adresátů,  rozešlou se všem tzv. "slepé kopie" (bez uvedení ostatních adresátů) - pouze pro Mail602</td>
+</tr>
+
+<tr valign="top">
+<td width=28%>WBL_DELFAFTER (=1024)</td>
+<td width=72%>pokud nedošlo při odesílání k chybě, smaže po odeslání soubory připojené k dopisu</td>
+</tr>
+</table><br><br>
+
+<a name="createW">
+<p><b>Unicodová varianta funkce</b></p>
+<h2 class=function>LetterCreateW</h2>
+<img src='../images/sql.gif' width='44' height='16' border='0' alt='sql' align='middle' hspace='2'>
+
+<br><br>
+<div class='typ'>FUNCTION <strong>LetterCreateW</strong> (IN subj NCHAR(80), IN msg NCLOB, IN flags INT, OUT letter INT) RETURNS INT;
+</div>
+
+<p>Obecnější varianta funkce <ident>LetterCreate</ident>. Pokud není možno zajistit, aby text dopisu (a subjectu) byly v <a href="../xml/html/syscharset.html">systémovém kódování</a> serveru, použijte tuto variantu, jinak se ztratí znaky s diakritikou.</p>
+
+<br><br>
+<p><b>Hodnota funkce</b></p>
+
+<p>Funkce vrací nulu v případě úspěchu a  číslo chyby v případě neúspěchu. <a href="HE_MAILERRORS.htm">Číslo chyby</a> lze také zjistit pomocí <b><code>Sz_error</code></b> nebo <b><code>Signalize</code></b>.</p>
+
+<p><b>Příklad</b></p>
+
+<p><a href="HE_MAILEXAMSEND.htm">Příklad odeslání zásilky</a></p>
+
+<p><b>Viz</b></p>
+
+<ul class='viz'>
+ <li><a href="HE_F_INITWBMAIL.htm">InitWBMail</a> </li>
+ <li><a href="HE_F_LETTERADDADDR.htm">LetterAddAddr</a></li> 
+ <li><a href="HE_F_LETTERADDFILE.htm">LetterAddFile</a> </li>
+ <li><a href="HE_F_LETTERADDBLOBR.htm">LetterAddBLOBr</a> </li>
+ <li><a href="HE_F_LETTERADDBLOBS.htm">LetterAddBLOBs</a> </li>
+ <li><a href="HE_F_LETTERCANCEL.htm">LetterCancel</a> </li>
+ <li><a href="HE_F_LETTERSEND.htm">LetterSend</a> </li>
+ <li><a href="HE_F_CLOSEWBMAIL.htm">CloseWBMail</a> </li>
+</ul>
+
+</body>
+</html>

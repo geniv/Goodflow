@@ -1,0 +1,70 @@
+<!doctype html public "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=Windows-1250">
+<title>Funkce Find2_object</title>
+<link rel='stylesheet' style='text/css' href='../function.css'>
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000">
+
+
+
+<h2 class=function>Find2_object</h2>
+<img src='../images/cpp.gif' width='44' height='16' border='0' alt='c/c++' align='middle' hspace='2'><img src='../images/pascal.gif' width='44' height='16' border='0' alt='pascal' align='middle' hspace='2'>
+
+
+<br><br>
+<div class='typ'>BOOL <b>[cd_]Find2_object</b>([cdp_t cdp], const char * name, const uns8 *appl_id, tcateg category, tobjnum *position);<br>
+function <b>[cd_]Find2_object</b>([cdp : cdp_t]; name : PChar; var appl_id : WBUUID;  category : tcateg; var position : tobjnum) : Boolean;
+</div>
+
+
+<p><b>Parametry</b></p>
+
+<table border=1 cols=2>
+
+<tr valign="top">
+<td width=14%><i>name</i> </td>
+<td width=86%>jméno objektu;</td>
+</tr>
+
+<tr valign="top">
+<td width=14%><i>appl_id </i></td>
+<td width=86%>identifikace aplikace;</td>
+</tr>
+
+<tr valign="top">
+<td width=14%><i>category</i> </td>
+<td width=86%>kategorie objektu;</td>
+</tr>
+
+<tr valign="top">
+<td width=14%><i>position </i></td>
+<td width=86%>výstupní parametr: číslo záznamu v systémové tabulce</td>
+</tr>
+
+<tr valign="top">
+<td width=14%>[<i>cdp </i></td>
+<td width=86%><a href="HE_EXTCD.htm">kontextová proměnná</a> klienta]  </td>
+</tr>
+</table><br>
+
+<p><b>Popis</b></p>
+
+<p>Funkce<b><code> Find2_object</code></b> hledá object kategorie <i>category</i> jménem <i>name</i> v&nbsp;<a href="../xml/html/apliktop.html">aplikaci</a> jejíž identifikace je v <i>appl_id</i>. Pokud ho nalezne, vrátí v parametru <i>position</i> jeho číslo (tj. externí číslo záznamu v příslušné <a href="../xml/html/systab.html">systémové tabulce</a> - TABTAB pro tabulky, OBJTAB pro ostatní objekty, USERTAB pro uživatele  a skupiny).</p>
+
+<p>Jako parametr <i>category</i> se používají konstanty <code>CATEG_...</code>.</p>
+
+<p>Pokud <i>name</i> označuje spojovací objekt, pak funkce dokáže vrátit buď číslo spojovacího objektu, nebo rovnou číslo objektu, který je tímto spojovacím objektem připojen. Je-li parametrem  <i>category</i> sjednocení konstanty označující kategorii s&nbsp;konstantou <code>IS_LINK</code>, pak funkce vrátí ve výstupním parametru  <i>position</i> číslo spojovacího objektu. Pokud neuvedete <code>IS_LINK</code>, pak funkce vrací číslo připojeného objektu.</p>
+
+<p><b>Hodnota funkce</b></p>
+
+<p>Funkce vrací při úspěchu FALSE a číslo objektu v <i>position</i>. Při chybě vrací TRUE. Typická chyba je OBJECT_NOT_FOUND - Objekt nenalezen. Doporučujeme vždy ověřovat výsledek této funkce, a tak se vyhnout pozdější práci s&nbsp;nesmyslným číslem objektu.</p>
+
+<p><b>Viz</b></p>
+
+<ul class='viz'><li><a href="HE_F_FINDOBJECT.htm">Find_object</a> <li><a href="HE_F_FINDOBJECTBYID.htm">Find_object_by_id</a></ul>
+
+</body>
+</html>

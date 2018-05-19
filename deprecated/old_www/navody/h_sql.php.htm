@@ -1,0 +1,663 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="cs" lang="CS"><head>
+
+
+
+
+
+<meta http-equiv="content-type" content="text/html; charset=iso-8859-2">
+<meta http-equiv="content-language" content="cs"><title>HOWTO - SQL - Michal Turek</title>
+
+
+
+<meta name="description" content="Michal Turek - Osobní web">
+<meta name="robots" content="all, follow">
+<meta name="resource-type" content="document">
+
+<style type="text/css" media="all">@import "style.css";</style>
+<style type="text/css" media="print">@import "print.css";</style>
+<link href="http://woq.nipax.cz/img/p_ico.png" rel="shortcut icon" type="image/x-icon">
+<link rel="alternate" type="application/rss+xml" href="http://woq.nipax.cz/rss.xml" title="Michal Turek - Osobní web"></head><body>
+
+<div id="main">
+
+<div id="banner">
+<div><a href="http://woq.nipax.cz/">Michal Turek - Osobní web</a></div>
+</div>
+
+<h1>HOWTO - SQL</h1>
+
+
+
+<p>Kvalitní kniha o SQL: Martin Gruber: Mistrovství v SQL, SoftPress 2004</p>
+
+
+<!--
+<div class="object">
+<div class="name"></div>
+<pre>
+
+</pre>
+</div>
+-->
+
+
+<div class="object">
+<div class="name">Vytvoření tabulky</div>
+<pre>-- Vlastnosti sloupců
+-- NOT NULL
+-- DEFAULT
+-- UNIQUE
+-- PRIMARY KEY
+-- REFERENCES
+-- CHECK
+
+-- Není funkční příklad (všechno pohromadě)
+CREATE TABLE tabulka
+(
+	id INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+	jmeno VARCHAR(20) NOT NULL UNIQUE,
+	cislo INT CHECK (cislo &lt; 50),
+	mesto VARCHAR(20) DEFAULT = 'Praha' CHECK (mesto IN ('Praha', 'Brno')),
+	cizi_klic INT UNSIGNED NOT NULL REFERENCES jina_tabulka(id),
+
+	-- nebo omezeni zvlast
+	PRIMARY KEY (id),
+	UNIQUE (jmeno),
+	CHECK (cislo &lt; 50),
+	CHECK (mesto IN ('Praha', 'Brno'))
+	FOREIGN KEY (cizi_klic) REFERENCES jina_tabulka(id)
+) ENGINE=INNODB;
+</pre>
+</div>
+
+
+<div class="object">
+<div class="name">Zrušení tabulky</div>
+<pre>DROP TABLE tabulka [CASCADE CONSTRAINTS]
+</pre>
+</div>
+
+
+<div class="object">
+<div class="name">Změna struktury tabulky</div>
+<pre>ALTER TABLE tabulka ADD nový_sloupec vlastnosti_sloupce;
+ALTER TABLE tabulka ALTER COLUMN sloupec ADD DEFAULT 'implicitní_hodnota';
+ALTER TABLE tabulka ADD CONSTRAINT io | DROP CONSTRAINT io
+...
+</pre>
+</div>
+
+
+<div class="object">
+<div class="name">Přidání cizích klíčů</div>
+<pre>ALTER TABLE tabulka ADD(FOREIGN KEY(sloupec) REFERENCES jina_tabulka);
+</pre>
+</div>
+
+
+<div class="object">
+<div class="name">Zrušení tabulky</div>
+<pre>DROP TABLE tabulka
+</pre>
+</div>
+
+
+<div class="object">
+<div class="name">Spouštěné referenční akce</div>
+<pre>-- ON UPDATE
+-- ON DELETE
+
+-- CASCADE cizí klíč se změní zároveň s rodičovským
+-- SET NULL
+-- SET DEFAULT
+-- NO ACTION
+
+CREATE TABLE `sessions`
+(
+	`id_user` INT UNSIGNED NOT NULL ,
+	FOREIGN KEY ( `id_user` ) REFERENCES users ( id_user )
+			ON UPDATE CASCADE ON DELETE CASCADE
+) ENGINE=INNODB;
+</pre>
+</div>
+
+
+<div class="object">
+<div class="name">Vložení řádku</div>
+<pre>INSERT INTO tabulka (položky) VALUES (hodnoty);
+</pre>
+</div>
+
+
+<div class="object">
+<div class="name">Vkládání s využitím dat z jiné tabulky</div>
+<pre>INSERT INTO admins (id_user, id_webpage)
+	SELECT (SELECT id_user FROM users WHERE login='root'),
+		id_webpage FROM webpages;
+
+INSERT INTO dnycelkem(datum, celkem)
+	SELECT datum, SUM(hodnota)
+	FROM objednavky
+	GROUP BY datum;
+
+-- Naplnění hned při vytvoření
+CREATE TABLE kolik_kopii (rod_c CHAR(10), pocet SMALLINT)
+AS SELECT rod_c, COUNT(c_kopie) FROM vypujcky GROUP BY rod_c;
+</pre>
+</div>
+
+
+<div class="object">
+<div class="name">Smazání řádků</div>
+<pre>DELETE FROM tabulka WHERE omezení_řádků;
+</pre>
+</div>
+
+
+<div class="object">
+<div class="name">Aktualizace hodnot</div>
+<pre>UPDATE tabulka SET sloupec = hodnota WHERE omezení_řádků;
+UPDATE tabulka SET sloupec = sloupec*1.1 WHERE omezení_řádků;
+</pre>
+</div>
+
+
+<div class="object">
+<div class="name">Základní dotazy</div>
+<pre>-- Všechny sloupce
+SELECT * FROM tabulka;
+
+-- Určité sloupce
+SELECT sloupce FROM tabulka;
+
+-- Jedinečné řádky, zpomaluje!
+SELECT DISTINCT sloupce FROM tabulka;
+
+-- Omezení řádků
+-- =, &gt;, &lt;, &lt;=, &lt;=, &lt;&gt; AND, OR, NOT
+SELECT sloupce FROM tabulka WHERE podmínky;
+</pre>
+</div>
+
+
+<div class="object">
+<div class="name">Speciální operátory</div>
+<pre>-- Test více hodnot najednou
+SELECT sloupce FROM tabulka WHERE mesto = 'Praha' OR mesto = 'Brno';
+SELECT sloupce FROM tabulka WHERE mesto IN ('Praha', 'Brno');
+
+-- Rozsah, včetně okrajových hodnot
+-- První musí být menší než druhá, převádí se to na &gt;= AND &lt;=
+SELECT sloupce FROM tabulka WHERE sloupec BETWEEN 50 AND 100;
+
+-- Rozsah, bez okrajových hodnot
+SELECT sloupce FROM tabulka
+WHERE sloupec BETWEEN 50 AND 100 AND NOT sloupec IN (50, 100);
+
+-- Neúplně specifikované řetězce
+-- '_' právě jeden znak
+-- '%' nula a více znaků
+SELECT sloupce FROM tabulka WHERE retezec LIKE 'P%';
+
+-- Escape znaky
+-- hledá dvojici _/
+SELECT sloupce FROM tabulka WHERE retezec LIKE '%/_//%' ESCAPE '/';
+
+-- Výběr NULLových hodnot
+SELECT sloupce FROM tabulka WHERE sloupec IS (NOT) NULL;
+</pre>
+</div>
+
+
+<div class="object">
+<div class="name">Agregační funkce</div>
+<pre>-- COUNT(sloupec) počet vybraných řádků
+-- SUM(sloupec) součet hodnot
+-- AVG(sloupec) aritmetický průměr hodnot
+-- MAX(sloupec) maximální hodnota
+-- MIN(sloupec) minimální hodnota
+
+-- Počet řádků v tabulce
+SELECT COUNT(*) FROM tabulka;
+
+-- Počet různých hodnot ve sloupci
+-- Bez DISTINCT počet neNULLových hodnot
+SELECT COUNT(DISTINCT sloupec) FROM tabulka;
+
+-- Součet plateb za jednotlivé dny
+SELECT datum, SUM(platby) FROM tabulka GROUP BY datum;
+
+-- Počet (např. zpráv ve fóru) za jednotlivé dny
+SELECT datum, COUNT(*) FROM messages GROUP BY datum;
+
+-- Pouze dny, ve kterých byl počet zpráv větší než deset
+-- WHERE se provádí nad řádky původní tabulky
+-- HAVING nad řádky s agregovanými hodnotami
+SELECT datum, COUNT(*) FROM messages GROUP BY datum HAVING COUNT(*) &gt; 10;
+
+-- Průměr ze všech řádků, včetně NULLových
+SELECT AVG(COALESCE(cena, 0)) FROM tabulka;
+</pre>
+</div>
+
+
+<div class="object">
+<div class="name">Pojmenování výstupních sloupců, vkládání textu do výstupu</div>
+<pre>SELECT sloupec * 100 AS procentualne, '%' FROM tabulka;
+</pre>
+</div>
+
+
+<div class="object">
+<div class="name">Datum, čas, v každém SQL je to trochu jinak :-(</div>
+<pre>-- Tohle mi fungovalo v MySQL
+RRRR-MM-DD HH:MM:SS
+2004-08-28 11:27:46
+
+-- A tohle je z jiného zdroje (asi IBM cosi)
+DD/MM/RRRR HH:MM:SS
+
+-- Hodnotový výraz
+INTERVAL YEAR TO MONTH '4/11'
+
+-- 4 roky a 11 měsíců po určitém datu
+DATE '2/4/98' + INTERVAL YEAR TO MONTH '4/11'
+
+-- Interval z dvou dat (vytvoří INTERVAL DAY '2')
+DATE '2/4/98' - DATE '2/2/98'
+</pre>
+</div>
+
+
+<div class="object">
+<div class="name">Přetypování</div>
+<pre>CAST ('12/03/2001' AS DATE)
+</pre>
+</div>
+
+
+<div class="object">
+<div class="name">Podmíněné výrazy</div>
+<pre>-- Dvě možnosti, nelze je míchat
+SELECT CASE jmeno WHEN 'Bžeťa' THEN 'Bženda' ELSE jmeno END FROM tabulka;
+SELECT CASE WHEN jmeno = 'Bžeťa' THEN 'Bženda' ELSE jmeno END FROM tabulka;
+
+-- Když jsou obě hodnoty stejné, vrátí NULL
+SELECT NULLIF(jmeno, 'Bžeťa') FROM tabulka;
+
+-- Vrátí první z hodnot, která není NULLová
+-- Pokud jsou všechny NULL, vrátí NULL
+SELECT COALESCE(prijmeni, login, jmeno) FROM tabulka;
+
+-- Autoincrement ;-)
+-- Pokud nemá žádný řádek, inkrementuje se nula, jinak maximální ID
+-- Problém byl s vložením prvního řádku
+INSERT INTO tabulka (id) VALUES(1 + COALESCE(SELECT MAX(id) FROM tabulka, 0));
+</pre>
+</div>
+
+
+<div class="object">
+<div class="name">Řazení výstupu</div>
+<pre>-- ASC vzestupně (implicitní)
+-- DESC sestupně
+
+SELECT * FROM tabulka ORDER BY sloupec1 DESC, sloupec2 ASC;
+</pre>
+</div>
+
+
+<div class="object">
+<div class="name">Přirozené spojení tabulek</div>
+<pre>SELECT t1.sloupce, t2.sloupce
+FROM t1, t2
+WHERE t1.mesto = t2.mesto;
+</pre>
+</div>
+
+
+<div class="object">
+<div class="name">Speciální operátory spojení</div>
+<pre>-- CROSS JOIN křížové spojení (celý kartézský součin)
+-- NATURAL JOIN přirozené spojení (podle jména!)
+-- UNION JOIN všechny řádky z tabulky A s NULL ve sloupcích z B a naopak
+
+-- INNER JOIN vnitřní spojení (INNER je implicitní, neuvádí se)
+-- OUTER JOIN vnější spojení, obsahuje i NULL hodnoty
+-- LEFT OUTER JOIN všechny řádky z A spárované nebo nespárované s B
+-- RIGHT OUTER JOIN všechny řádky z B spárované nebo nespárované s A
+-- FULL OUTER JOIN všechny řádky z obou, nespojené části mají NULL
+
+-- Přirozené spojení (klasicky)
+SELECT sloupce FROM t1 a, t2 b WHERE a.mesto = b.mesto;
+
+-- Přirozené spojení (podle jmen sloupců)
+SELECT sloupce FROM t1 a NATURAL JOIN t2 b;
+
+-- Přirozené spojení pomocí predikátu v ON
+SELECT sloupce FROM t1 a, t2 b ON a.mesto = b.mesto WHERE podmínka;
+
+-- Přirozené spojení pomocí USING se jménem sloupce
+SELECT sloupce FROM t1 a, t2 b USING (mesto) WHERE podmínka;
+
+-- Všichni prodejci s objednávkami k určitému datu
+-- Kdyby nebylo vnější, vynechali by se prodejci, kteří neměli objednávky
+SELECT sloupce FROM prodejci NATURAL LEFT OUTER JOIN objednavky
+WHERE datum = '10/03/2000';
+</pre>
+</div>
+
+
+<div class="object">
+<div class="name">Poddotazy, vhnízďování dotazů</div>
+<pre>-- Celkový počet zpráv zaslaných do diskuze ke článku clanek.php
+SELECT count(*) FROM messages WHERE id_webpage
+	= (SELECT id_webpage FROM webpages WHERE filename = 'clanek.php');
+
+-- Poddotaz musí generovat právě jednu hodnotu
+-- Pokud jich generuje víc, musí se použít místo = operátor IN
+
+-- Korelované poddotazy: parametry z vnějšího dotazu se používají i ve vnitřním
+</pre>
+</div>
+
+
+<div class="object">
+<div class="name">Poddotazové operátory</div>
+<pre>-- EXIST true, pokud poddotaz něco nalezl
+-- ANY/SOME true, pokud se rovná některé z vrácených hodnot
+-- ALL podmínka platí pro všechny
+-- UNIQUE unikátní výstup, právě jedna výstupní hodnota
+
+-- Vybrat zakazniky, pokud je alespoň jeden z nich z Morávky
+SELECT * FROM zakaznici
+WHERE EXISTS (SELECT * FROM zakaznici WHERE city='Morávka');
+
+-- Všichni prodejci, kteří mají alespoň jednoho zákazníka ze stejného města
+-- U ANY lze použít třeba menší než, u IN ne
+SELECT * FROM prodejci WHERE city IN (SELECT city FROM zakaznici);
+SELECT * FROM prodejci WHERE city = ANY (SELECT city FROM zakaznici);
+
+-- All pomocí EXIST
+-- Najdi kino, které hraje všechna představení
+-- Najdi takové kino, pro něž neexistuje představení,
+-- které není dáváno tímto kinem
+SELECT název_k FROM Kina K
+WHERE NOT EXISTS (SELECT * FROM Představení P
+		WHERE K.název_k &lt;&gt; P.název_k);
+</pre>
+</div>
+
+
+<div class="object">
+<div class="name">Slučování dotazů</div>
+<pre>-- UNION sloučí výstup ze dvou dotazů do jednoho, automaticky vylučuje duplikáty
+-- UNION ALL nevylučuje duplikáty
+-- UNION CORRESPONDING ??? (SELECT * ... UNION CORRESPONDING SELECT * ...)
+-- INTERSECT průnik výstupu dvou dotazů
+-- EXCEPT odečte výstup druhého dotazu od prvního (někdy jako MINUS)
+
+-- Všichni prodejci a zákazníci z Morávky
+SELECT jmeno FROM prodejci WHERE city = "Morávka"
+UNION
+SELECT jmeno FROM zákazníci WHERE city = "Morávka"
+ORDER BY 1; -- sloupce nemají jména
+</pre>
+</div>
+
+
+<div class="object">
+<div class="name">Postupné dotazování</div>
+<pre>WITH
+	r1 AS SELECT nazev_k FROM program,
+	r2 AS SELECT jmeno_f FROM film WHERE herec='Bžeťa',
+	r AS SELECT * FROM r1 CROSS JOIN r2,
+	s AS (SELECT * FROM r) EXCEPT (SELECT nazev_k, jmeno_f FROM program),
+	t AS SELECT DISTINCT nazev_k FROM s
+(SELECT DISTINCT nazev_k FROM program)
+EXCEPT (SELECT * FROM t);
+</pre>
+</div>
+
+
+<div class="object">
+<div class="name">Pohledy</div>
+<pre>CREATE VIEW lidi_z_moravky AS SELECT name FROM lidi WHERE city = 'Moravka';
+-- Odteď se může lidi_z_moravky používat, jako kdyby to byla klasická tabulka
+-- Aby šlo UPDATE a INSERT, musí to být jednoznačná operace
+</pre>
+</div>
+
+
+<div class="object">
+<div class="name">Přístupová práva</div>
+<pre>-- ALTER
+-- SELECT
+-- INSERT
+-- UPDATE
+-- DELETE
+-- REFERENCES
+-- INDEX
+-- DROP
+-- ALL PRIVILEGES
+
+-- V příkladech je Bženda vlastníkem schématu (tabulek)
+
+GRANT SELECT ON tabulka TO Bžéťa;
+GRANT SELECT, UPDATE(sloupce) ON tabulka TO Bžéťa;
+GRANT SELECT ON tabulka TO PUBLIC; -- všem uživatelům
+
+-- Bžéťa bude moct taky udělovat práva
+GRANT SELECT ON tabulka TO Bžéťa WITH GRANT OPTION;
+
+-- Tohle už dělá Bžéťa
+GRANT SELECT ON Bženda.tabulka TO někdo_s_Bž_na_začátku;
+
+-- Odebrání práv Bžéťovi
+REVOKE UPDATE ON tabulka FROM Bžéťa
+</pre>
+</div>
+
+
+<div class="object">
+<div class="name">Transakce</div>
+<pre>COMMIT WORK; -- změny se stanou trvalé
+ROLLBACK WORK; -- zahození změn
+
+-- Možná se to jmenuje jinak :-(
+SET AUTOCOMMIT ON; -- zapne automatické potvrzování změn
+SET AUTOCOMMIT OFF; -- vypne
+</pre>
+</div>
+
+
+<div class="object">
+<div class="name">Funkce pro datum a čas (možná jenom MySQL)</div>
+<pre>HOUR(soupec)
+MINUTE(soupec)
+SECOND(soupec)
+DAYNAME(soupec)
+DAYOFMONTH(soupec)
+MONTHNAME(soupec)
+MONTH(soupec)
+YEAR(soupec)
+ADDDATE(sloupec, INTERVAL x typ)
+SUBDATE(sloupec, INTERVAL x typ)
+CURDATE()
+CURTIME()
+NOW()
+UNIX_TIMESTAMP(datum)
+DATE_FORMAT(sloupec, '%d.%m.%Y') -- DD.MM.YYY
+TIME_FORMAT(sloupec, '%H:%i:%s') -- HH:MM:SS
+</pre>
+</div>
+
+
+
+<div id="info">
+<div>Copyright &#169; 2001-2007 Michal Turek <span class="m">&lt;WOQ (zavináč) seznam.cz&gt;</span></div>
+<div>Valid <a href="http://validator.w3.org/check?uri=referer" class="blank" title="http://validator.w3.org/check?uri=referer">XHTML 1.0 Strict</a>, Valid <a href="http://jigsaw.w3.org/css-validator/check/referer" class="blank" title="http://jigsaw.w3.org/css-validator/check/referer">CSS</a></div>
+</div>
+
+</div><!--div id="main"-->
+
+<div id="left_sidebar">
+
+<div class="group">
+<div class="title">Obecné</div>
+<div><a href="http://woq.nipax.cz/index.php">Domů</a></div>
+<div><a href="http://woq.nipax.cz/o_info.php">Info</a></div>
+<div><a href="http://woq.nipax.cz/rss.xml">RSS</a></div>
+</div>
+
+<div class="group">
+<div class="title">Tvorba</div>
+<div><a href="http://woq.nipax.cz/o_projekty.php">Projekty (6)</a></div>
+<div><a href="http://woq.nipax.cz/o_clanky.php">Články (45)</a></div>
+<div><a href="http://woq.nipax.cz/o_preklady.php">Překlady (36)</a></div>
+<div><a href="http://woq.nipax.cz/o_programy.php">Programy (32)</a></div>
+<div><a href="http://woq.nipax.cz/o_weby.php">Web. stránky (14)</a></div>
+<div><a href="http://woq.nipax.cz/o_prezentace.php">Prezentace (9)</a></div>
+<div><a href="http://woq.nipax.cz/o_skripty.php">Skripty (12)</a></div>
+<div><a href="http://woq.nipax.cz/o_foto.php">Fotografie</a></div>
+</div>
+
+<div class="group">
+<div class="title">Howto</div>
+<div><a href="http://woq.nipax.cz/h_windows.php">MS Windows</a></div>
+<div><a href="http://woq.nipax.cz/h_linux.php">GNU/Linux</a></div>
+<div><a href="http://woq.nipax.cz/h_cpp.php">C &amp; C++</a></div>
+<div><a href="http://woq.nipax.cz/h_python.php">Python</a></div>
+<div><a href="http://woq.nipax.cz/h_java.php">Java</a></div>
+<div><a href="http://woq.nipax.cz/h_web.php">Web</a></div>
+<div><a href="http://woq.nipax.cz/h_sql.php">SQL</a></div>
+<div><a href="http://woq.nipax.cz/h_jine.php">Jiné</a></div>
+</div>
+
+<div class="group">
+<div class="title">Záložky</div>
+<div><a href="http://nehe.ceske-hry.cz/" class="blank" title="http://nehe.ceske-hry.cz/">NeHe Tutoriály</a></div>
+<div><a href="http://www.root.cz/serialy/sdl-hry-nejen-pro-linux/" class="blank" title="http://www.root.cz/serialy/sdl-hry-nejen-pro-linux/">Seriál o SDL</a></div>
+<div><a href="http://woq.nipax.cz/sem/" class="blank" title="sem/">Hra sem</a></div>
+<div><a href="http://woq.nipax.cz/borsch/" class="blank" title="borsch/">Borsch</a></div>
+</div>
+
+<div class="group">
+<div>
+<form action="p_fulltext.php" method="post" onsubmit="if(!this.najit.value || this.najit.value=='výraz ...') { alert('Byl zadán prázdný řetězec!'); this.najit.focus(); return false; }"><p>
+<input name="najit" size="12" value="výraz ..." onclick="if(this.value=='výraz ...')this.value=''" type="text"><br>
+<input value="Najít" type="submit">
+</p></form>
+</div>
+</div>
+
+</div><!--div id="left_sidebar"-->
+
+
+
+<div id="right_sidebar">
+
+<div class="group">
+<div class="title">NeHe Tutoriály</div>
+<a href="http://nehe.ceske-hry.cz/tut_00.php" title="Předmluva k NeHe Tutoriálům">00</a>
+<a href="http://nehe.ceske-hry.cz/tut_01.php" title="Vytvoření OpenGL okna ve Windows">01</a>
+<a href="http://nehe.ceske-hry.cz/tut_02.php" title="Vytváření trojúhelníků a čtyřúhelníků">02</a>
+<a href="http://nehe.ceske-hry.cz/tut_03.php" title="Barvy">03</a>
+<a href="http://nehe.ceske-hry.cz/tut_04.php" title="Rotace">04</a>
+<a href="http://nehe.ceske-hry.cz/tut_05.php" title="Pevné objekty">05</a>
+<a href="http://nehe.ceske-hry.cz/tut_06.php" title="Textury">06</a>
+<a href="http://nehe.ceske-hry.cz/tut_07.php" title="Texturové filtry, osvětlení, ovládání pomocí klávesnice">07</a>
+<a href="http://nehe.ceske-hry.cz/tut_08.php" title="Blending">08</a>
+<a href="http://nehe.ceske-hry.cz/tut_09.php" title="Pohyb bitmap ve 3D prostoru">09</a>
+<a href="http://nehe.ceske-hry.cz/tut_10.php" title="Vytvoření 3D světa a pohyb v něm">10</a>
+<a href="http://nehe.ceske-hry.cz/tut_11.php" title="Efekt vlnící se vlajky">11</a>
+<a href="http://nehe.ceske-hry.cz/tut_12.php" title="Display list">12</a>
+<a href="http://nehe.ceske-hry.cz/tut_13.php" title="Bitmapové fonty">13</a>
+<a href="http://nehe.ceske-hry.cz/tut_14.php" title="Outline fonty">14</a>
+<a href="http://nehe.ceske-hry.cz/tut_15.php" title="Mapování textur na fonty">15</a>
+<a href="http://nehe.ceske-hry.cz/tut_16.php" title="Mlha">16</a>
+<a href="http://nehe.ceske-hry.cz/tut_17.php" title="2D fonty z textur">17</a>
+<a href="http://nehe.ceske-hry.cz/tut_18.php" title="Kvadriky">18</a>
+<a href="http://nehe.ceske-hry.cz/tut_19.php" title="Částicové systémy">19</a>
+<a href="http://nehe.ceske-hry.cz/tut_20.php" title="Maskování">20</a>
+<a href="http://nehe.ceske-hry.cz/tut_21.php" title="Přímky, antialiasing, časování, pravoúhlá projekce, základní zvuky a jednoduchá herní logika">21</a>
+<a href="http://nehe.ceske-hry.cz/tut_22.php" title="Bump Mapping &amp; Multi Texturing">22</a>
+<a href="http://nehe.ceske-hry.cz/tut_23.php" title="Mapování textur na kulové kvadriky">23</a>
+<a href="http://nehe.ceske-hry.cz/tut_24.php" title="Výpis OpenGL rozšíření, ořezávací testy a textury z TGA obrázků">24</a>
+<a href="http://nehe.ceske-hry.cz/tut_25.php" title="Morfování objektů a jejich nahrávání z textového souboru">25</a>
+<a href="http://nehe.ceske-hry.cz/tut_26.php" title="Odrazy a jejich ořezávání za použití stencil bufferu">26</a>
+<a href="http://nehe.ceske-hry.cz/tut_27.php" title="Stíny">27</a>
+<a href="http://nehe.ceske-hry.cz/tut_28.php" title="Bezierovy křivky a povrchy, fullscreen fix">28</a>
+<a href="http://nehe.ceske-hry.cz/tut_29.php" title="Blitter, nahrávání .RAW textur">29</a>
+<a href="http://nehe.ceske-hry.cz/tut_30.php" title="Detekce kolizí">30</a>
+<a href="http://nehe.ceske-hry.cz/tut_31.php" title="Nahrávání a renderování modelů">31</a>
+<a href="http://nehe.ceske-hry.cz/tut_32.php" title="Picking, alfa blending, alfa testing, sorting">32</a>
+<a href="http://nehe.ceske-hry.cz/tut_33.php" title="Nahrávání komprimovaných i nekomprimovaných obrázků TGA">33</a>
+<a href="http://nehe.ceske-hry.cz/tut_34.php" title="Generování terénů a krajin za použití výškového mapování textur">34</a>
+<a href="http://nehe.ceske-hry.cz/tut_35.php" title="Přehrávání videa ve formátu AVI">35</a>
+<a href="http://nehe.ceske-hry.cz/tut_36.php" title="Radial Blur, renderování do textury">36</a>
+<a href="http://nehe.ceske-hry.cz/tut_37.php" title="Cel-Shading">37</a>
+<a href="http://nehe.ceske-hry.cz/tut_38.php" title="Nahrávání textur z resource souboru &amp; texturování trojúhelníků">38</a>
+<a href="http://nehe.ceske-hry.cz/tut_39.php" title="Úvod do fyzikálních simulací">39</a>
+<a href="http://nehe.ceske-hry.cz/tut_40.php" title="Fyzikální simulace lana">40</a>
+<a href="http://nehe.ceske-hry.cz/tut_41.php" title="Volumetrická mlha a nahrávání obrázků pomocí IPicture">41</a>
+<a href="http://nehe.ceske-hry.cz/tut_42.php" title="Více viewportů">42</a>
+<a href="http://nehe.ceske-hry.cz/tut_43.php" title="FreeType Fonty v OpenGL">43</a>
+<a href="http://nehe.ceske-hry.cz/tut_44.php" title="Čočkové efekty">44</a>
+<a href="http://nehe.ceske-hry.cz/tut_45.php" title="Vertex Buffer Object (VBO)">45</a>
+<a href="http://nehe.ceske-hry.cz/tut_46.php" title="Fullscreenový antialiasing">46</a>
+<a href="http://nehe.ceske-hry.cz/tut_47.php" title="CG vertex shader">47</a>
+<a href="http://nehe.ceske-hry.cz/tut_48.php" title="ArcBall rotace">48</a>
+</div>
+<div class="clr"></div>
+
+
+<div class="group">
+<div class="title">Seriál o SDL</div>
+<a href="http://www.root.cz/clanky/sdl-hry-nejen-pro-linux-1/" title="Úvod">01</a>
+<a href="http://www.root.cz/clanky/sdl-hry-nejen-pro-linux-2/" title="Instalace SDL">02</a>
+<a href="http://www.root.cz/clanky/sdl-hry-nejen-pro-linux-3/" title="Inicializace SDL programu">03</a>
+<a href="http://www.root.cz/clanky/sdl-hry-nejen-pro-linux-4/" title="Vytvoření okna">04</a>
+<a href="http://www.root.cz/clanky/sdl-hry-nejen-pro-linux-5/" title="Zobrazování grafiky">05</a>
+<a href="http://www.root.cz/clanky/sdl-hry-nejen-pro-linux-6/" title="Operace se surfacem">06</a>
+<a href="http://www.root.cz/clanky/sdl-hry-nejen-pro-linux-7/" title="Přímý přístup k pixelům, kurzory">07</a>
+<a href="http://www.root.cz/clanky/sdl-hry-nejen-pro-linux-8/" title="OpenGL">08</a>
+<a href="http://www.root.cz/clanky/sdl-hry-nejen-pro-linux-9/" title="Výstup textu pomocí SDL_ttf">09</a>
+<a href="http://www.root.cz/clanky/sdl-hry-nejen-pro-linux-10/" title="Komunikace se správcem oken, úvod do událostí">10</a>
+<a href="http://www.root.cz/clanky/sdl-hry-nejen-pro-linux-11/" title="Fronta událostí">11</a>
+<a href="http://www.root.cz/clanky/sdl-hry-nejen-pro-linux-12/" title="Klávesnice">12</a>
+<a href="http://www.root.cz/clanky/sdl-hry-nejen-pro-linux-13/" title="Myš">13</a>
+<a href="http://www.root.cz/clanky/sdl-hry-nejen-pro-linux-14/" title="Joystick">14</a>
+<a href="http://www.root.cz/clanky/sdl-hry-nejen-pro-linux-15/" title="Ostatní události">15</a>
+<a href="http://www.root.cz/clanky/sdl-hry-nejen-pro-linux-16/" title="Časovače a práce s časem">16</a>
+<a href="http://www.root.cz/clanky/sdl-hry-nejen-pro-linux-17/" title="Zvuky a hudba">17</a>
+<a href="http://www.root.cz/clanky/sdl-hry-nejen-pro-linux-18/" title="Konverze zvuků, knihovna SDL_sound">18</a>
+<a href="http://www.root.cz/clanky/sdl-hry-nejen-pro-linux-19/" title="Přehrávání zvuků pomocí SDL_mixer">19</a>
+<a href="http://www.root.cz/clanky/sdl-hry-nejen-pro-linux-20/" title="Hudba a efekty">20</a>
+<a href="http://www.root.cz/clanky/sdl-hry-nejen-pro-linux-21/" title="CD-ROM">21</a>
+<a href="http://www.root.cz/clanky/sdl-hry-nejen-pro-linux-22/" title="Vícevláknové programování">22</a>
+<a href="http://www.root.cz/clanky/sdl-hry-nejen-pro-linux-23/" title="SDL_RWops, SDL_Overlay + vše, na co se zapomnělo">23</a>
+<a href="http://www.root.cz/clanky/sdl-hry-nejen-pro-linux-24/" title="Obsah">24</a>
+</div>
+<div class="clr"></div>
+
+<!--[if IE ]>
+<a href="http://firefox.czilla.cz/"><img alt="Firefox - Prohlížeč, kterému můžete věřit" title="Firefox - Prohlížeč, kterému můžete věřit" style="border:none; width:180px; height:60px;" src="http://firefox.czilla.cz/img/p/cz-ff-180x60-verit.gif" /></a>
+<![endif]-->
+
+</div><!--div id="right_sidebar"-->
+
+
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script><script src="h_sql.php_soubory/ga.js" type="text/javascript"></script>
+<script type="text/javascript">
+var pageTracker = _gat._getTracker("UA-3868414-2");
+pageTracker._initData();
+pageTracker._trackPageview();
+</script>
+
+
+<div style="position: absolute; left: 1174px; top: 205px; z-index: 1000000000 ! important; visibility: hidden; opacity: 1; width: 0px;" id="linkalert-box"><img style="width: 0px;" src="h_sql.php_soubory/none-icon.png" id="linkalert-icon-1"></div></body></html>

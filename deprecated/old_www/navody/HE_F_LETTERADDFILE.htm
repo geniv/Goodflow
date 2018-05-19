@@ -1,0 +1,66 @@
+<!doctype html public "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=Windows-1250">
+<title>Funkce LetterAddFile</title>
+<link rel='stylesheet' style='text/css' href='../function.css'>
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000">
+
+
+
+<h2 class=function>LetterAddFile</h2>
+<img src='../images/cpp.gif' width='44' height='16' border='0' alt='c/c++' align='middle' hspace='2'><img src='../images/pascal.gif' width='44' height='16' border='0' alt='pascal' align='middle' hspace='2'><img src='../images/sql.gif' width='44' height='16' border='0' alt='sql' align='middle' hspace='2'>
+
+
+<br><br>
+<div class='typ'>int <b>LetterAddFile</b>(DWORD letter, char *fname);<br>
+function <b>LetterAddFile</b>(letter : integer; fname : PChar) : integer;<br>
+FUNCTION <b>LetterAddFile</b> (IN letter INT, INOUT fname CHAR(255)) RETURNS INT;
+</div>
+
+
+<p><b>Parametry</b></p>
+
+<table border=1 cols=2 frame=box rules=all width=500>
+
+<tr valign="top">
+<td width=22%><i>letter</i></td>
+<td width=78%>handle dopisu</td>
+</tr>
+
+<tr valign="top">
+<td width=22%><i>fname</i></td>
+<td width=78%>cesta k souboru, který má být připojen</td>
+</tr>
+</table><br>
+
+<p><b>Popis</b></p>
+
+<p>Funkce připojí k vytvářené zásilce <a href="HE_MAIL.htm">elektronické pošty</a> soubor. Handle dopisu vrací (zásilku vytváří) funkce <b><code>LetterCreate</code></b>.</p>
+
+<p>Soubor musí být uveden s celou cestou ve formátu daného OS (Windows, Linux). Soubor se hledá na počítači, kde byla funkce zavolána (lze volat klintem i serverem). Není-li soubor nalezen nebo nemá-li k němu server dostatek práv, vrátí funkce chybu č. 508. Na Linuxu je navíc nutné, aby adresářem, v němž je soubor umístěn, mohl server procházet (právo x).</p>
+
+<p>Je-li v <a href="HE_MAILPROFILES.htm">profilu</a> specifikován parametr <code>FilePath</code>, musí se soubor nalézat  v některém adresáři uvedeném v tomto parametru, jinak dojde k chybě č. 514.</p>
+
+<p><b>Hodnota funkce</b></p>
+
+<p>Funkce vrací nulu v případě úspěchu a  číslo chyby v případě neúspěchu. <a href="HE_MAILERRORS.htm">Číslo chyby</a> lze také zjistit pomocí <b><code>Sz_error</code></b> nebo <b><code>Signalize</code></b>.</p>
+
+<p><b>Příklad</b></p>
+
+<p><a href="HE_MAILEXAMSEND.htm">Příklad odeslání zásilky</a></p>
+
+<p><b>Viz</b></p>
+
+<ul class='viz'>
+ <li><a href="HE_F_LETTERCREATE.htm">LetterCreate</a> </li>
+ <li><a href="HE_F_LETTERADDADDR.htm">LetterAddAddr</a> </li>
+ <li><a href="HE_F_LETTERADDBLOBR.htm">LetterAddBLOBr</a> </li>
+ <li><a href="HE_F_LETTERADDBLOBS.htm">LetterAddBLOBs</a> </li>
+ <li><a href="HE_F_LETTERSEND.htm">LetterSend</a> </li>
+</ul>
+
+</body>
+</html>

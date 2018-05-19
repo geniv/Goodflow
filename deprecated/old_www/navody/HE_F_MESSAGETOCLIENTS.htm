@@ -1,0 +1,53 @@
+<!doctype html public "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=Windows-1250">
+<title>Funkce Message_to_clients</title>
+<link rel='stylesheet' style='text/css' href='../function.css'>
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000">
+
+
+
+<h2 class=function>Message_to_clients</h2>
+<img src='../images/cpp.gif' width='44' height='16' border='0' alt='c/c++' align='middle' hspace='2'><img src='../images/pascal.gif' width='44' height='16' border='0' alt='pascal' align='middle' hspace='2'><img src='../images/sql.gif' width='44' height='16' border='0' alt='sql' align='middle' hspace='2'>
+
+
+<br><br>
+<div class='typ'>BOOL <b>[cd_]Message_to_clients</b> ([cdp_t cdp,] const char * msg);<br>
+function <b>[cd_]Message_to_clients</b> ([cdp : cdp_t;] msg : PChar) : Boolean;<br>
+PROCEDURE <b>Message_to_clients</b> (IN msg CHAR(255));
+</div>
+
+
+<p><b>Parametry</b></p>
+
+<table border=1 cols=2 frame=box rules=all width=440>
+
+<tr valign="top">
+<td width=17%><i>msg</i></td>
+<td width=83%>text zprávy</td>
+</tr>
+
+<tr valign="top">
+<td width=17%>[<i>cdp </i></td>
+<td width=83%><a href="HE_EXTCD.htm">kontextová proměnná</a> klienta]  </td>
+</tr>
+</table><br>
+
+<p><b>Od verze</b></p>
+
+<p>6.0, pro SQL od 10.0</p>
+
+<p><b>Popis</b></p>
+
+<p>Funkce umožní rozeslat krátkou zprávu všem síťovým klientům připojeným ke stejnému serveru (bez ohledu na otevřenou aplikaci) jako klient, který funkci zavolal. Zpráva se v grafickém vývojovém prostředí objeví jako modální okno.</p>
+
+<p>Funkce neovlivní klienty připojené přes ODBC k tomuto serveru.</p> 
+
+<p>Má-li text zprávy obsahovat diaktritku, musí být v kódování UTF-8.</p>
+
+<p>Od verze 9 se význam snížil, neboť klient obvykle není připojen pomocí grafického vývojového prostředí, ale pomocí externího rozhraní (CDK, ODBC apod.), kde se zpráva sama neobjeví. V CDK je ovšem ve třídě <a href="../xml/html/TSQL602Connection.html"><code>TSQL602Connection</code></a> implementována událost <code>OnServerMessage</code>, která umožňuje naprogramovat zobrazení zprávy i v aplikaci napsané v Delphi.</p>
+</body>
+</html>

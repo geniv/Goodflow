@@ -1,0 +1,96 @@
+<!doctype html public "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=Windows-1250">
+<title>Funkce MailBoxGetMsgEx</title>
+<link rel='stylesheet' style='text/css' href='../function.css'>
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000">
+
+
+
+<h2 class=function>MailBoxGetMsgEx</h2>
+<img src='../images/cpp.gif' width='44' height='16' border='0' alt='c/c++' align='middle' hspace='2'><img src='../images/pascal.gif' width='44' height='16' border='0' alt='pascal' align='middle' hspace='2'><img src='../images/sql.gif' width='44' height='16' border='0' alt='sql' align='middle' hspace='2'>
+
+
+<br><br>
+<div class='typ'>DWORD <b>MailBoxGetMsgEx</b>(DWORD mailbox, DWORD id, DWORD flag);<br>
+function <b>MailBoxGetMsgEx</b>(mailbox : integer; id : integer; flag : integer): integer;<br>
+FUNCTION <strong>MailBoxGetMsgEx</strong>(IN mailbox INT, IN id INT, IN flag INT) RETURNS INT;
+</div>
+
+
+<p><b>Parametry</b></p>
+
+<table border=1 cols=2 frame=box rules=all width=480>
+
+<tr valign="top">
+<td width=19%><i>mailbox </i></td>
+<td width=81%>handle poštovní schránky</td>
+</tr>
+
+<tr valign="top">
+<td width=19%><i>id</i> </td>
+<td width=81%>identifikátor zásilky</td>
+</tr>
+
+<tr valign="top">
+<td width=19%><i>flag</i></td>
+<td width=81%>příznak rozsahu kopírování zásilky</td>
+</tr>
+</table><br>
+
+<p><b>Od verze</b></p>
+
+<p>7.0d</p>
+
+<p><b>Popis</b></p>
+
+<p>Funkce je rozšířenou variantou funkce <b><code>MailBoxGetMsg</code></b>.</p>
+
+<p>Funkce přečte ze schránky (v <a href="HE_MAILPROFILES.htm">profilu</a> zvoleného) <a href="HE_MAIL.htm">poštovního systému</a> část vybrané zásilky (podle parametru <i>flag</i>) a uloží jej do systémové <a href="HE_MAILTABLES.htm">tabulky</a> <code>_INBOXMSGS</code> do sloupce <code>Body</code> resp. <code>Header</code>. </p>
+
+<p>Rozsah zápisu lze řídit pomocí parametru <i>flag</i>. Hodnota parametru může nabývat hodnot:</p>
+
+<table border=1 cols=3 frame=box>
+
+<tr valign="top">
+<td width=18%>
+<code>MBL_BODY</code>
+</td>
+<td width=5%>1</td>
+<td width=77%>Do databáze se uloží texty dopisů včetně hlavičky <code>(sloupce <code>Body</code> a <code>Header</code>)</code></td>
+</tr>
+
+<tr valign="top">
+<td width=18%>
+<code>MBL_HDRONLY</code>
+</td>
+<td width=5%>4</td>
+<td width=77%>Do databáze se uloží jen hlavičky (sloupec <code>Header</code>) - mimo MAPI poštu</td>
+</tr>
+
+<tr valign="top">
+<td width=18%>
+<code>MBL_MSGONLY</code>
+</td>
+<td width=5%>8</td>
+<td width=77%>Do databáze se uloží jen texty dopisů (sloupec <code>Body</code>)</td>
+</tr>
+</table><br>
+
+<p><b>Hodnota funkce</b></p>
+
+<p>Funkce vrací nulu v případě úspěchu a  číslo chyby v případě neúspěchu. <a href="HE_MAILERRORS.htm">Číslo chyby</a> lze zjistit také pomocí <b><code>Sz_error</code></b> nebo <b><code>Signalize</code></b>.</p>
+
+<p><b>Viz</b></p>
+
+<ul class='viz'>
+ <li><a href="HE_F_MAILOPENINBOX.htm">MailOpenInBox</a> </li>
+ <li><a href="HE_F_MAILBOXLOAD.htm">MailBoxLoad</a> </li>
+ <li><a href="HE_F_MAILBOXGETMSG.htm">MailBoxGetMsg</a> </li>
+</ul>
+
+</body>
+</html>

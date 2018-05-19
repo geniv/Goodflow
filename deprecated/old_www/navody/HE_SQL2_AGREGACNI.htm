@@ -1,0 +1,127 @@
+<!doctype html public "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=Windows-1250">
+<title>Agregační funkce (SQL)</title>
+<link rel='stylesheet' style='text/css' href='../function.css'>
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr>
+	<td style="background-image: url(../images/bghead.jpg);
+		background-position: right;
+		background-repeat: no-repeat;">
+	<table width="100%" border="0" cellpadding="0" cellspacing="0"
+		style="background-image:none">
+	<tr>
+		<td style="background-image:none" height="46"
+			width="15%"><img src="../images/title-cz.gif"
+			width="255" height="33"
+			alt="602SQL-Úplná dokumentace"
+			title="602SQL - Úplná dokumentace"
+			border="0"></td>
+		<td width="33%" align="right"><a href="../xml/html/top.html"><img class="floatno"
+			src="../images/index.gif"
+			width="15" height="16"
+			alt="Index" title="Zpět na obsah"
+			border="0" vspace="2"></a> &nbsp;
+			 </td>
+	</tr>
+	</table>
+	</td>
+</tr>
+</table><table class="navigace" border="0" width="100%"  bgcolor="#FFFFBF"><tr> <td
+width="20" align="center"><img class="floatno" src="../images/prev.gif"
+width="15" height="13" alt="&lt;&shy;" title="Předcházející téma"
+border="0"></td><td width="25%"><a
+href="HE_SQL2_CAST.htm">CAST</a></td> <td width="25%"
+align="right"><img class="floatno" src="../images/up.gif" width="13"
+height="15" alt="Nahoru" title="O jednu úroveň výš" border="0"
+align="middle"></td><td width="25%"><a href="HE_SQL2_FUNKCESQL.htm">Funkce definované normou SQL</a></td>
+<td width="25%" align="right">&nbsp;</td>
+<td width="20" align="center">&nbsp;</td>
+</tr></table>
+
+
+
+
+
+<h1><a name="he_sql2_agregacni"></a>Agregační funkce (SQL)</h1>
+
+<pre><code>agregační_funkce ::= { COUNT | SUM | AVG | MIN | MAX </code><code>} ([ ALL | DISTINCT ] výraz) | COUNT(*)</code></pre>
+
+<p>Agregační funkce počítají nad množinou hodnot <a href="HE_SQL2_VYRAZY.htm"><i>výrazu</i></a><i> </i>v&nbsp;odpovědi na <a href="HE_SQL2_DOTAZY.htm">dotaz</a> počet hodnot (COUNT), součet (SUM), průměr (AVG), minimum (MIN) a maximum (MAX). Výpočet se provádí buď nad všemi záznamy v&nbsp;odpovědi na dotaz (pokud dotaz neobsahuje GROUP BY) nebo nad každou skupinou určenou GROUP BY. Argumentem těchto funkcí může být libovolný výraz neobsahující jinou agregační funkci - hodnota funkce se počítá z&nbsp;těch hodnot argumentů, které jsou různé od NULL. Pro funkce SUM a AVG argument musí být číselného <a href="HE_SQL2_DATOVETYPY.htm">typu</a>, pro funkce MAX a MIN buď číselného typu nebo některého z&nbsp;typů typu DATE, TIME, TIMESTAMP, BOOLEAN a řetězec znaků.</p>
+
+<p>Mimo to argumentem funkce COUNT smí být také znak *, v&nbsp;takovém případě funkce vrací počet všech hodnot, včetně těch, které se rovnají NULL. </p>
+
+<p>Pokud se před argumentem funkce uvede DISTINCT, uvažují se pouze různé hodnoty argumentů (u funkcí MAX a MIN to nemá žádný význam), pokud se uvede ALL nebo se neuvede nic, uvažují se všechny hodnoty.</p>
+
+<p>Agregační funkce se v&nbsp;dotazech používají v&nbsp;klauzuli SELECT nebo HAVING. Nelze je používat v&nbsp;klauzulích WHERE nebo GROUP BY. V&nbsp;klauzuli ORDER BY je nutno je nahradit jménem výsledného sloupce, které lze specifikovat pomocí AS v&nbsp;klauzuli SELECT.</p>
+
+<p>Pokud funkce pracují nad prázdnou množinou hodnot, pak COUNT vrací 0 a ostatní funkce vracejí NULL.</p>
+
+<p><b>Odchylky od Intermediate level směrem k&nbsp;Full level nebo k&nbsp;SQL 3</b>
+
+<ul>
+	<li>V&nbsp;argumentech agregačních funkcí lze používat DISTINCT s&nbsp;výrazem.</li>
+
+	<li>V&nbsp;argumentech agregačních funkcí lze používat odkazy na sloupce, které obsahují výsledky agregačních funkcí.</li>
+</ul>
+
+<p><b>Odchylky od Intermediate level směrem k&nbsp;Entry level</b>
+
+<ul>
+	<li>Agregační funkce nelze používat na sloupce proměnné velikosti (typu CLOB a BLOB);</li>
+</ul>
+
+<p><b>Implementací definované vlastnosti SQL ve 602SQL</b>
+
+<ul>
+	<li>Výsledek agregační funkce COUNT je typu INT, výsledek ostatních funkcí je stejného typu jako argument s&nbsp;touto výjimkou: pro funkce AVG a SUM a argument typu SMALLINT nebo TINYINT je výsledek typu INT. Například výpočet reálného průměru celých čísel vyžaduje konverzi argumentu na typu REAL, například takto <code>AVG(I + 0.0)</code>.</li>
+</ul>
+
+<p><b>Příklad použití:</b></p>
+
+<p>Spočítat faktury</p>
+
+<pre><code>SELECT <b>COUNT(cislo)</b> FROM Faktury </code></pre>
+
+<p>Vybrat faktury s hodnotou rovné minimální</p>
+
+<pre><code>SELECT *
+FROM Faktury
+WHERE castka = (SELECT <b>MIN(castka)</b> FROM faktury)</code></pre>
+
+<p>Vybrat firmy, které mají faktury za více než 10000 (tento dotaz lze zapsat efektivněji s&nbsp;využitím klauzule HAVING):</p>
+
+<pre><code>SELECT A.nazev
+FROM Firmy A
+WHERE 10000 &lt; (SELECT <b>SUM(B.castka)</b>
+              FROM Faktury B
+              WHERE A.cislo=B.firma)
+</code></pre>
+
+<p>Zjistit počet firem, které mají alespoň jednu fakturu za víc než 5000</p>
+
+<pre><code>SELECT <b>COUNT (DISTINCT Firmy.nazev)</b> 
+    FROM Faktury,Firmy
+    WHERE (castka &gt; 5000)
+      AND (Firmy.cislo=Faktury.firma)
+</code></pre>
+
+
+
+<table class="navigace" border="0" width="100%"  bgcolor="#FFFFBF"><tr> <td
+width="20" align="center"><img class="floatno" src="../images/prev.gif"
+width="15" height="13" alt="&lt;&shy;" title="Předcházející téma"
+border="0"></td><td width="25%"><a
+href="HE_SQL2_CAST.htm">CAST</a></td> <td width="25%"
+align="right"><img class="floatno" src="../images/up.gif" width="13"
+height="15" alt="Nahoru" title="O jednu úroveň výš" border="0"
+align="middle"></td><td width="25%"><a href="HE_SQL2_FUNKCESQL.htm">Funkce definované normou SQL</a></td>
+<td width="25%" align="right">&nbsp;</td>
+<td width="20" align="center">&nbsp;</td>
+</tr></table>
+
+</body>
+</html>

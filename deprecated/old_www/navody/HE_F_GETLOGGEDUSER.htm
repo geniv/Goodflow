@@ -1,0 +1,77 @@
+<!doctype html public "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=Windows-1250">
+<title>Procedura Get_logged_user</title>
+<link rel='stylesheet' style='text/css' href='../function.css'>
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000">
+
+
+
+<h2 class=function>Get_logged_user</h2>
+<img src='../images/cpp.gif' width='44' height='16' border='0' alt='c/c++' align='middle' hspace='2'><img src='../images/pascal.gif' width='44' height='16' border='0' alt='pascal' align='middle' hspace='2'>
+
+
+<br><br>
+<div class='typ'>BOOL <b>[cd_]Get_logged_user</b>([cdp_t cdp,] int index, char * username, char * applname, int * state);<br>
+function <b>[cd_]Get_logged_user</b>([cdp : cdp_t;] index : integer; username, applname : PChar;  var state : integer) : Boolean;
+</div>
+
+
+<p><b>Parametry</b></p>
+
+<table border=1 cols=2>
+
+<tr valign="top">
+<td width=17%><i>index</i></td>
+<td width=83%>pořadí (číslováno od 0)</td>
+</tr>
+
+<tr valign="top">
+<td width=17%><i>username</i></td>
+<td width=83%>výstupní parametr - jméno přihlášeného uživatele</td>
+</tr>
+
+<tr valign="top">
+<td width=17%><i>aplname</i></td>
+<td width=83%>výstupní parametr - jméno aplikace, kterou používá</td>
+</tr>
+
+<tr valign="top">
+<td width=17%><i>state</i></td>
+<td width=83%>výstupní parametr - stav uživatele </td>
+</tr>
+
+<tr valign="top">
+<td width=17%>[<i>cdp </i></td>
+<td width=83%><a href="HE_EXTCD.htm">kontextová proměnná</a> klienta]  </td>
+</tr>
+</table><br>
+
+<p><b>Od verze</b></p>
+
+<p>6.0</p>
+
+<p><b>Popis</b></p>
+
+<p>Funkce dovoluje zjistit informace o klientech připojených ke stejnému serveru jako je klient, který funkci zavolal. V novějších verzích je jednodušší číst systémový dotaz <a href="../xml/html/_iv_logged_users.html"><code>_iv_logged_users</code></a>.</p>
+
+<p>Jediným vstupním parametrem je <i>index</i>  - funkce vrátí ve výstupních parametrech informace o index-tém uživateli (logovací jméno uživatele, jeho stav a jméno aplikace, kterou má otevřenou). </p>
+
+<p>Je-li <i>index</i> větší nebo rovno počtu přihlášených klientů, bude v parametru <i>username</i> prázdný řetězec.</p>
+
+<p>Stav uživatele nabývá těchto hodnot:</p>
+
+<p>4 - server čeká na požadavek klienta (normální klidový stav);</p>
+
+<p>99 - já sám (tj. ten uživatel, který funkci zavolal);</p>
+
+<p>ostatní - server právě zpracovává požadavek klienta</p>
+
+<p><b>Hodnota funkce </b></p>
+
+<p>Funkce vrací TRUE při chybě.</p>
+</body>
+</html>

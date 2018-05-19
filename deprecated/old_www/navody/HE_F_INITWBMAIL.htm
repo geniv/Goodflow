@@ -1,0 +1,88 @@
+<!doctype html public "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=Windows-1250">
+<title>InitWBMail</title>
+<link rel='stylesheet' style='text/css' href='../function.css'>
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000">
+
+
+
+<h2 class=function>InitWBMail</h2>
+<img src='../images/cpp.gif' width='44' height='16' border='0' alt='c/c++' align='middle' hspace='2'><img src='../images/pascal.gif' width='44' height='16' border='0' alt='pascal' align='middle' hspace='2'><img src='../images/sql.gif' width='44' height='16' border='0' alt='sql' align='middle' hspace='2'>
+
+
+<br><br>
+<div class='typ'>
+int <b>InitWBMail</b>(char *profile, char *password);<br>
+function <b>InitWBMail</b>(profile, password : PChar) : integer;<br>
+FUNCTION <b>InitWBMail</b>(IN profile CHAR(63), IN password CHAR(255)) RETURNS INT; 
+</div>
+
+
+<p><b>Parametry</b></p>
+
+<table border=1 cols=2 frame=box rules=all width=480>
+
+<tr valign="top">
+<td width=27%><i>profile</i></td>
+<td width=73%>jméno profilu pro zpřístupnění pošty</td>
+</tr>
+
+<tr valign="top">
+<td width=27%><i>password</i></td>
+<td width=73%>heslo pro zpřístupnění pošty</td>
+</tr>
+</table><br>
+
+<p><b>Popis</b></p>
+
+<p>Inicializuje <a href="HE_MAIL.htm">práci s elektronickou poštou</a> z 602SQL (existuje též novější funkce <a href="HE_F_INITWBMAILEX"><code>InitWBMailEx</code></a> rozlišující heslo pro přístup k POP3 schránce a heslo pro SMTP autorizaci). Podle zadaného <a href="HE_MAILPROFILES.htm">profilu</a> se zpřístupní pošta Mail602, libovolná pošta rozhraní MAPI nebo nejčastěji obecná pošta využívající protokoly SMTP/POP3.</p>
+
+<p>Jako jméno profilu musí být použito jméno profilu již dříve definovaného funkcí <a href="HE_F_MAILCREATEPROFILE"><code>MailCreateProfile</code></a> nebo interaktivně vytvořeného na <strong>Řídicím panelu</strong>, ve složce <a href="../xml/html/thisclient.html"><strong>Lokální nastavení -&gt; Poštovní profily</strong></a>. Je-li heslo zadané v profilu (Windows), zadejte jako <i>password</i> prázdný string nebo NIL (NULL).</p>
+
+<p><b>Hodnota funkce</b></p>
+
+<p>Funkce vrací nulu v případě úspěchu a  číslo chyby v případě neúspěchu. <a href="HE_MAILERRORS.htm">Číslo chyby</a> lze zjistit pomocí <b><code>Sz_error</code></b> nebo <b><code>Signalize</code></b>.</p>
+
+<p><b>Příklad</b></p>
+
+<p><a href="HE_MAILEXAMSEND.htm">Příklad odeslání zásilky</a>, <a href="HE_MAILEXAMRECEIVE.htm">Příklad příjmu zásilky</a> </p>
+
+<p><b>Viz</b></p>
+
+<ul class='viz'>
+ <li><a href="HE_F_LETTERCREATE.htm">LetterCreate</a> </li>
+ <li><a href="HE_F_LETTERADDADDR.htm">LetterAddAddr</a> </li>
+ <li><a href="HE_F_LETTERADDFILE.htm">LetterAddFile</a> </li>
+ <li><a href="HE_F_LETTERADDBLOBR.htm">LetterAddBLOBr</a> </li>
+ <li><a href="HE_F_LETTERADDBLOBS.htm">LetterAddBLOBs</a> </li>
+ <li><a href="HE_F_LETTERCANCEL.htm">LetterCancel</a> </li>
+ <li><a href="HE_F_LETTERSEND.htm">LetterSend</a> </li>
+ <li><a href="HE_F_CLOSEWBMAIL.htm">CloseWBMail</a> </li>
+ <li><a href="HE_F_TAKEMAILTOREMOFFICE.htm">TakeMailToRemOffice</a></li>
+</ul>
+
+<ul class='viz'>
+ <li><a href="HE_F_MAILOPENINBOX.htm">MailOpenInBox</a> </li>
+ <li><a href="HE_F_MAILBOXLOAD.htm">MailBoxLoad</a> </li>
+ <li><a href="HE_F_MAILBOXGETMSG.htm">MailBoxGetMsg</a> </li>
+ <li><a href="HE_F_MAILBOXGETMSGEX.htm">MailBoxGetMsgEx</a> </li>
+ <li><a href="HE_F_MAILBOXGETFILINFO.htm">MailBoxGetFilInfo</a></li>
+ <li><a href="HE_F_MAILBOXSAVEFILEAS.htm">MailBoxSaveFileAs</a> </li>
+ <li><a href="HE_F_MAILBOXSAVEFILEDBS.htm">MailBoxSaveFileDBs</a> </li>
+ <li><a href="HE_F_MAILBOXSAVEFILEDBR.htm">MailBoxSaveFileDBr</a> </li>
+ <li><a href="HE_F_MAILCLOSEINBOX.htm">MailCloseInBox</a> </li>
+ <li><a href="HE_F_MAILGETINBOXINFO.htm">MailGetInBoxInfo</a> </li>
+ <li><a href="HE_F_MAILGETTYPE.htm">MailGetType</a></li>
+</ul>
+
+<ul class='viz'>
+ <li><a href="HE_F_MAILDIAL.htm">MailDial</a> </li>
+ <li><a href="HE_F_MAILHANGUP.htm">MailHangUp</a></li>
+</ul>
+
+</body>
+</html>

@@ -1,0 +1,705 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+
+
+
+<meta name="description" content="Nyní si ukážeme jak tuto knihu návštěv jednoduše spravovat. Administrace umožňuje editaci a mazání záznamů." lang="cs">
+<meta name="description" content="Nyní si ukážeme jak tuto knihu návštěv jednoduše spravovat. Administrace umožňuje editaci a mazání záznamů." lang="en">
+<meta http-equiv="description" content="Nyní si ukážeme jak tuto knihu návštěv jednoduše spravovat. Administrace umožňuje editaci a mazání záznamů.">
+<meta http-equiv="content-language" content="cs">
+<meta http-equiv="content-type" content="text/html; charset=windows-1250"><title>PHP+mySQL - kniha návštěv (2.) -- PC Svět</title>
+
+<link rel="stylesheet" href="PHP+mySQL%20-%20kniha%20n%C3%A1v%C5%A1t%C4%9Bv%20%282.%29_soubory/www.css">
+<script language="javascript" type="text/javascript">
+<!--
+function getElement(e)
+{
+  if(document.all) return document.all[e];
+  else return document.getElementById(e);
+}
+
+peson = new Image(305,13);
+peson.src = "/images/1-5on.gif";
+pesoff = new Image(305,13);
+pesoff.src = "/images/1-5.gif";
+
+hledejon = new Image(20,11);
+hledejon.src = "/images/5-4on.gif";
+hledejoff = new Image(20,11);
+hledejoff.src = "/images/5-4.gif";
+
+topon = new Image(20,11);
+topon.src = "/images/7-pat-top-on.gif";
+topoff = new Image(20,11);
+topoff.src = "/images/7-pat-top-off.gif";
+
+var mnu = new Array();
+
+mnu[1] = 'komunikace:<img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/komunikace/mobily/" class="menu2">mobily</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/komunikace/site" class="menu2">sítě</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/komunikace/pripojeni" class="menu2">připojení</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11">';
+mnu[2] = 'internet:<img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/internet/webhosting/" class="menu2">webhosting</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/internet/webdesign" class="menu2">webdesign</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/internet/weby" class="menu2">weby</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11">';
+mnu[3] = 'programování:<img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/c/" class="menu2">C++</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/delphi/" class="menu2">Delphi</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/vbasic/" class="menu2">V.Basic</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/assembler/" class="menu2">Asm</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/pascal/" class="menu2">Pascal</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/java/" class="menu2">Java</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/sql/" class="menu2">SQL</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/wsh/" class="menu2">WSH</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11">';
+mnu[4] = 'web-programování:<img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/perl/" class="menu2">Perl</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/php/" class="menu2">PHP</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/asp/" class="menu2">ASP</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/javascript/" class="menu2">JavaScript</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/java/" class="menu2">Java</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/html/" class="menu2">HTML</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/sql/" class="menu2">SQL</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11">';
+mnu[5] = 'hw:<img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/hardware/motherboard/" class="menu2">desky</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/hardware/procesory/" class="menu2">procesory</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/hardware/grafika/" class="menu2">grafika</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/hardware/zvuk/" class="menu2">zvuk</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/hardware/periferie/" class="menu2">periferie</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/hardware/monitory/" class="menu2">monitory</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/hardware/mechaniky/" class="menu2">média</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/hardware/prislusenstvi/" class="menu2">přísluš.</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/hardware/testy/" class="menu2">testy</a>';
+mnu[6] = 'software:<img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/windows/" class="menu2">Windows</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/linux/" class="menu2">Linux</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/hry/" class="menu2">hry a zábava</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/software/recenze/" class="menu2">recenze</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/office/" class="menu2">MS Office</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11">';
+mnu[7] = 'bezpečnost:<img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/bezpecnost/viry/" class="menu2">Viry</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11">';
+mnu[8] = 'magazín:<img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/literatura/" class="menu2">literatura</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/magazin/akce/" class="menu2">akce</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/magazin/novinky/" class="menu2">novinky</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/magazin/tisk/" class="menu2">tiskové zprávy</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11">';
+
+function pmnu(mnu_id)
+{
+	 getElement("mnux").innerHTML = mnu[mnu_id];
+}
+// -->
+</script>
+
+<style type="text/css">
+<!--
+.mline { font-family: Tahoma, Arial, Verdana; font-size: 8pt; font-weight: bold; background-color: #444444; color: #FFFFFF }
+.mitem { cursor: hand }
+
+.mtable { font-family: Tahoma, Arial, Verdana; font-size: 8pt; border: 1px solid #000000; background-color: #EEEEEE; visibility: hidden; position: absolute }
+.mtitem { cursor: hand; background-color: #EEEEEE; color: #000000 }
+
+.mfirma { color: #DDDDDD; font-weight: none }
+.mfirma a { color: #DDDDDD; text-decoration: none }
+.mfirma a:active { color: #DDDDDD; text-decoration: none }
+.mfirma a:visited { color: #DDDDDD; text-decoration: none }
+.mfirma a:hover { color: #FFFFFF; text-decoration: underline }
+-->
+</style></head><body>
+
+
+<script language="JavaScript" type="text/javascript">
+<!--
+var intg;
+var tleft = 0;
+var PocetMenu = 0;
+var mLeft = new Array();
+
+function hidemenus(exc)
+{
+ clearInterval(intg);
+ intg = null;
+ for (id=1; id<=PocetMenu; id++){
+  document.all("mnui"+id).style.visibility = "hidden";
+  document.all("i"+id).style.color = "#FFFFFF";
+  document.all("i"+id).style.backgroundColor = "#444444";
+ }
+}
+
+function outobject()
+{
+ intg = setInterval("hidemenus(20)",400);
+}
+
+function onheader(hID)
+{
+ hidemenus(hID);
+ document.all("mnui"+hID).style.visibility = "visible";
+ document.all("i"+hID).style.color = "#000000";
+ document.all("i"+hID).style.backgroundColor = "#EEEEEE";	
+}
+
+function onobject()
+{
+ clearInterval(intg);
+ intg = null;
+}
+
+function onitem(obj)
+{
+ obj.style.color = "EEEEEE";
+ obj.style.backgroundColor = "111111";
+}
+
+function outitem(obj)
+{
+ obj.style.color = "000000";
+ obj.style.backgroundColor = "EEEEEE";
+}
+
+function setleft()
+{
+ for (i=1;i<=PocetMenu;i++) {
+  document.all("mnui"+i).style.left = mLeft[i];
+ }
+}
+
+function mAddHeader(ID,nadpis,leftpos) {
+ document.write('<td id="i'+ID+'" onmouseover="onheader('+ID+');" onmouseout="outobject();" class="mitem">&nbsp; '+nadpis+' &nbsp;</td>');
+ mLeft[ID] = leftpos;
+ if (PocetMenu < ID) PocetMenu = ID;
+}
+
+function mBeginTable(ID) {
+ document.write('<table style="z-index: 100;" width="120" id="mnui'+ID+'" border="0" cellspacing="1" cellpadding="2" class="mtable" onmouseover="onobject();" onmousemove="onobject();" onmouseout="outobject();" class="mtable">');
+}
+
+function mEndTable() {
+ document.write('</table>');
+}
+
+function mAddItem(nadpis,URL,Popis) {
+ document.write('<tr><td class="mtitem" onmouseover="onitem(this);" onmouseout="outitem(this);" onclick="window.navigate(\''+URL+'\');" title="'+Popis+'">'+nadpis+'</td></tr>');
+}
+
+if (window.clientInformation.userAgent.indexOf("MSIE") > 0 ||
+    window.clientInformation.userAgent.indexOf("pera/7.") > 0
+	)
+{
+	
+ document.write('<div align="center" style="z-index: 101; border-bottom: 1px solid white"><center><table id="ptable" border="0" cellspacing="2" cellpadding="0" class="mline" width="100%"><tr><td width="20">&nbsp;</td><td><table class="mline" cellspacing="0" cellpadding="0" border="0"><tr>');
+ mAddHeader(1,"Provozované servery",26);
+ mAddHeader(2,"DOMÉNY",156);
+ mAddHeader(3,"WEBHOSTING",257);
+ mAddHeader(4,"PŘIPOJENÍ",352);
+ mAddHeader(5,"SERVERHOSTING",452);
+ document.write('</tr></table></td><td width="120" class="mfirma"><a href="http://www.forpsi.com/">FORPSI</a></td><td width="20">&nbsp;</td></tr></table></center></div>');
+
+ mBeginTable(1);
+ mAddItem('Móda.cz','http://www.moda.cz/','Server o módě, stylu, zdraví a volném čase');
+ mAddItem('CzechWeb','http://www.czechweb.cz/','Žebříček registrátorů českých a slovenských domén, denně nové statistiky');
+ mAddItem('PC Svět','http://www.pcsvet.cz/','Počítače, programování, komunikace, Internet');
+ mAddItem('Právník.cz','http://www.pravnik.cz/','Internetový právník pro každého - úplná znění, články, poradna');
+ mAddItem('Počítadlo.cz','http://www.pocitadlo.cz/','Služba pro počítání přístupů na vaše stránky včetně podrobných statistik');
+ mAddItem('iReklama.cz','http://www.ireklama.cz/','Výměný reklamní systém pro vaše stránky');
+ mEndTable();
+
+ mBeginTable(2);
+ mAddItem('FORPSI.com - registrace domén','http://www.forpsi.com/domain/','Nejlevnější registrace domén'); 
+ mAddItem('Domény .cz','http://www.forpsi.com/domain/','Registrace domén již za 549,-Kč ročně');
+ mAddItem('Domény .com','http://www.forpsi.com/domain/','Registrace domén již za 219,-Kč ročně');
+ mEndTable();
+
+ mBeginTable(3);
+ mAddItem('FORPSI.com - homepage','http://www.forpsi.com/','FORPSI.com - homepage'); 
+ mAddItem('FORPSI.com - WEBHOSTING','http://www.forpsi.com/webhosting/','FORPSI.com - nejširší nabídka webhostingu'); 
+ mAddItem('PIDIhosting','http://www.forpsi.com/webhosting/pidi.php','Hosting pro každého'); 
+ mAddItem('PIDIhosting + mail','http://www.forpsi.com/webhosting/pidi.php','Hosting pro každého včetně mailu'); 
+ mAddItem('NORMALhosting','http://www.forpsi.com/webhosting/normal.php','Standardní hosting za rozumnou cenu');
+ mAddItem('EXCLUSIVEhosting','http://www.forpsi.com/webhosting/exclusive.php','To nejlepší pro ty nejlepší');
+ mAddItem('EMAILhosting','http://www.forpsi.com/webhosting/email.php','Hosting vašich mailů'); 
+ mEndTable();
+	
+ mBeginTable(4);
+ mAddItem('FORPSI - připojení k internetu','http://www.forpsi.com/internet/','Kompletní nabídka bezdrátového či pevného připojení k Internetu'); 
+ mAddItem('ADSL připojení','http://www.forpsi.com/internet/?page=adsl_cr_price','Připojení k Internetu telefonní linkou pomocí technologie ADSL'); 
+ mAddItem('Wi-Fi Lite','http://www.forpsi.com/internet/?page=wifi_lite_price','Nejjednodušší bezdrátové připojení technologií Wi-Fi'); 
+ mAddItem('Wi-Fi','http://www.forpsi.com/internet/?page=wifi_price','Profesionální připojení technologií Wi-Fi'); 
+ mEndTable();
+ 
+ mBeginTable(5);
+ mAddItem('FORPSI - serverhosting','http://www.forpsi.com/server/dedicated.php','SERVERHOSTING a SERVERHOUSING'); 
+ mAddItem('FORPSI - DEDICATED','http://www.forpsi.com/server/dedicated.php','Nabídka pronájmu serverů s kompletní nabídkou služeb'); 
+ mAddItem('FORPSI - Private','http://www.forpsi.com/server/private.php','Nabídka housingu vašich serverů s kompletní nabídkou služeb'); 
+ mEndTable();
+
+ setleft();
+}
+// -->
+</script>
+
+
+<table align="center" border="0" cellpadding="0" cellspacing="0" width="780">
+<tbody><tr><td width="767">
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tbody><tr>
+<td height="158" width="305">
+
+<table border="0" cellpadding="0" cellspacing="0">
+<tbody><tr><td colspan="3" height="14" width="305"><img src="PHP+mySQL%20-%20kniha%20n%C3%A1v%C5%A1t%C4%9Bv%20%282.%29_soubory/1-1.gif" alt=""></td></tr>
+<tr><td height="11" width="253"><img src="PHP+mySQL%20-%20kniha%20n%C3%A1v%C5%A1t%C4%9Bv%20%282.%29_soubory/1-2.gif" alt=""></td><td height="11" width="27"><a href="http://www.forpsi.com/" target="_top" onmouseover="pesoff.src=peson.src; return true" onmouseout="pesoff.src='/images/1-5.gif'; return true"><img src="PHP+mySQL%20-%20kniha%20n%C3%A1v%C5%A1t%C4%9Bv%20%282.%29_soubory/1-3.gif" alt="" border="0"></a></td><td height="11" width="25"><img src="PHP+mySQL%20-%20kniha%20n%C3%A1v%C5%A1t%C4%9Bv%20%282.%29_soubory/1-4.gif" alt=""></td></tr>
+<tr><td colspan="3" height="13" width="305"><img name="pesoff" src="PHP+mySQL%20-%20kniha%20n%C3%A1v%C5%A1t%C4%9Bv%20%282.%29_soubory/1-5.gif" alt=""></td></tr>
+<tr><td colspan="3" height="120" width="305"><a href="http://www.pcsvet.cz/"><img src="PHP+mySQL%20-%20kniha%20n%C3%A1v%C5%A1t%C4%9Bv%20%282.%29_soubory/1-6.gif" alt="" border="0"></a></td></tr>
+</tbody></table>
+
+</td>
+<td width="90">
+
+<table border="0" cellpadding="0" cellspacing="0" width="90">
+<tbody><tr><td background="PHP+mySQL%20-%20kniha%20n%C3%A1v%C5%A1t%C4%9Bv%20(2.)_soubory/2-1.gif" height="13" width="1"></td></tr>
+<tr><td bgcolor="white" height="145"><iframe src="PHP+mySQL%20-%20kniha%20n%C3%A1v%C5%A1t%C4%9Bv%20%282.%29_soubory/2-2.htm" name="menu1" marginwidth="0" marginheight="0" align="middle" frameborder="0" height="100%" scrolling="auto" width="100%"></iframe></td></tr>
+</tbody></table>
+
+</td>
+<td bgcolor="white" valign="top" width="10">
+<img src="PHP+mySQL%20-%20kniha%20n%C3%A1v%C5%A1t%C4%9Bv%20%282.%29_soubory/3.gif" alt="">
+</td>
+<td width="400">
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tbody><tr><td background="PHP+mySQL%20-%20kniha%20n%C3%A1v%C5%A1t%C4%9Bv%20(2.)_soubory/4-1.gif" height="8"></td></tr>
+<tr><td height="150"><iframe src="PHP+mySQL%20-%20kniha%20n%C3%A1v%C5%A1t%C4%9Bv%20%282.%29_soubory/topinfo.htm" name="4-2" marginwidth="0" marginheight="0" align="middle" frameborder="0" height="100%" scrolling="no" width="100%"></iframe></td></tr>
+</tbody></table>
+
+</td>
+</tr>
+<tr>
+<td colspan="4" height="35" width="100%">
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tbody><tr>
+<td width="28"><img src="PHP+mySQL%20-%20kniha%20n%C3%A1v%C5%A1t%C4%9Bv%20%282.%29_soubory/5-1.gif" alt=""></td>
+<td width="65">
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tbody><tr><td background="PHP+mySQL%20-%20kniha%20n%C3%A1v%C5%A1t%C4%9Bv%20(2.)_soubory/5-2.gif">&nbsp;</td></tr>
+<tr><td bgcolor="white"><form method="get" action="/misc/search.php" name="sfrm" style="margin-top: 0pt; margin-bottom: 0pt;"><input name="kde" value="1" type="hidden"><input size="10" name="co" value="hledat" onclick="value='';" style="border: 0px solid ; font-family: Verdana; font-size: 10px;" type="text"></form></td></tr>
+<tr><td><img src="PHP+mySQL%20-%20kniha%20n%C3%A1v%C5%A1t%C4%9Bv%20%282.%29_soubory/5-3.gif" alt=""></td></tr>
+</tbody></table>
+</td>
+<td width="18"><a href="#" onclick="sfrm.submit();" onmouseover="hledejoff.src=hledejon.src; window.status='hledej';return true" onmouseout="hledejoff.src='/images/5-4.gif'; window.status='pcsvět';return true"><img name="hledejoff" src="PHP+mySQL%20-%20kniha%20n%C3%A1v%C5%A1t%C4%9Bv%20%282.%29_soubory/5-4.gif" alt="go" border="0"></a></td>
+<td width="9"><img src="PHP+mySQL%20-%20kniha%20n%C3%A1v%C5%A1t%C4%9Bv%20%282.%29_soubory/5-5.gif" alt=""></td>
+<td>
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tbody><tr><td align="left" background="PHP+mySQL%20-%20kniha%20n%C3%A1v%C5%A1t%C4%9Bv%20(2.)_soubory/5-7.gif" height="11"><img src="PHP+mySQL%20-%20kniha%20n%C3%A1v%C5%A1t%C4%9Bv%20%282.%29_soubory/5-6.gif" alt=""></td></tr>
+<tr><td align="left" background="PHP+mySQL%20-%20kniha%20n%C3%A1v%C5%A1t%C4%9Bv%20(2.)_soubory/5-8.gif" height="24" valign="middle">
+<a href="http://www.pcsvet.cz/komunikace/" class="menu" onmouseover="pmnu(1);">komunikace</a>
+&nbsp;<a href="http://www.pcsvet.cz/internet/" class="menu" onmouseover="pmnu(2);">internet</a>
+&nbsp;<a href="http://www.pcsvet.cz/prog/" class="menu" onmouseover="pmnu(3);">prog.</a>
+&nbsp;<a href="http://www.pcsvet.cz/prog/" class="menu" onmouseover="pmnu(4);">web-prog.</a>
+&nbsp;<a href="http://www.pcsvet.cz/hardware/" class="menu" onmouseover="pmnu(5);">hardware</a>
+&nbsp;<a href="http://www.pcsvet.cz/software/" class="menu" onmouseover="pmnu(6);">software</a>
+&nbsp;<a href="http://www.pcsvet.cz/bezpecnost/" class="menu" onmouseover="pmnu(7);">bezpečnost</a>
+&nbsp;<a href="http://www.pcsvet.cz/magazin/" class="menu" onmouseover="pmnu(8);">magazín</a>
+&nbsp;<a href="http://www.pcsvet.cz/forum/" class="menu">disk.fórum</a>
+</td></tr>
+</tbody></table>
+</td></tr>
+</tbody></table>
+
+</td>
+</tr>
+<tr>
+<td colspan="4" background="PHP+mySQL%20-%20kniha%20n%C3%A1v%C5%A1t%C4%9Bv%20(2.)_soubory/6-2.gif" width="100%">
+
+<table border="0" cellpadding="0" cellspacing="0">
+<tbody><tr><td><img src="PHP+mySQL%20-%20kniha%20n%C3%A1v%C5%A1t%C4%9Bv%20%282.%29_soubory/6-1.gif" alt=""></td>
+<td id="mnux" valign="top"></td>
+
+</tr>
+</tbody></table>
+
+</td>
+</tr>
+<tr>
+<td colspan="4" width="100%">
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tbody><tr><td background="PHP+mySQL%20-%20kniha%20n%C3%A1v%C5%A1t%C4%9Bv%20(2.)_soubory/7.gif" width="15">&nbsp;</td><td bgcolor="white" width="5">&nbsp;</td><td align="left" bgcolor="white" valign="top">
+<table><tbody><tr><td height="1"></td></tr></tbody></table>
+
+<p class="ndp">PHP+mySQL - kniha návštěv (2.)</p>
+<p>počet názorů: <b>40</b> &nbsp; poslední: 22.09.2007 09:52:51 &nbsp; <a href="http://www.pcsvet.cz/forum/forum.php?art=1024" class="autor">číst názory</a> &nbsp; <a href="http://www.pcsvet.cz/forum/forum-add.php?art=1024" class="autor">přidat názor</a> &nbsp; <a href="http://www.pcsvet.cz/art/article_print.php?id=1024">vytisknout</a></p>
+<p>Nyní si ukážeme jak tuto knihu návštěv jednoduše spravovat. Administrace umožňuje editaci a mazání záznamů.</p>
+<hr color="#777777" size="1">
+
+<ws-body>
+</ws-body><p>
+Do administrace se přihlásíme pomocí <b>login.html</b>:<br><br>
+<font face="Courier New" size="2">
+&lt;HTML&gt;
+<br>&lt;HEAD&gt;
+<br>&lt;TITLE&gt;Kniha návštěv&lt;/TITLE&gt;
+<br>&lt;/HEAD&gt;
+<br>&lt;BODY&gt;
+<br>&lt;H1 align="center"&gt;Administrace&lt;/H1&gt;
+<br>&lt;CENTER&gt;
+<br>&lt;FORM name="FUKY" method="POST" action="admin.php"&gt;
+<br>&nbsp;&nbsp;  Heslo: &lt;INPUT type="password" size="20" name="heslo"&gt;
+<br>&nbsp;&nbsp;  &lt;INPUT type="submit" value="OK"&gt;
+<br>&lt;/FORM&gt;
+<br>&lt;/CENTER&gt;
+<br>&lt;/BODY&gt;
+<br>&lt;/HTML&gt;<br>
+</font>
+<br>Administrace je uložena v souboru <b>admin.php</b>:<br><br>
+<font face="Courier New" size="2">
+&lt;?
+<br>
+<br>if ($heslo != "heslo") {
+<br>&nbsp;&nbsp;  echo "&lt;H1&gt;&lt;FONT color=\"red\"&gt;Špatné heslo!!!&lt;/FONT&gt;&lt;/H1&gt;";
+<br>&nbsp;&nbsp;  exit;
+<br>}
+<br>
+<br>$spojeni = MySQL_Connect("localhost");
+<br>if (!$spojeni) {
+<br>&nbsp;&nbsp;  echo "Nepodařilo se připojit k MySQL servru.";
+<br>&nbsp;&nbsp;  exit;
+<br>}
+<br>
+<br>$vybrana = MySQL_Select_DB("nazev_databaze");
+<br>if (!$vybrana) {
+<br>&nbsp;&nbsp;  echo "Nepodařilo se nastavit databázi jako aktivní.";
+<br>&nbsp;&nbsp;  exit;
+<br>}
+<br>
+<br>if ($edit == "ano") {
+<br>
+<br>?&gt;
+<br>
+<br>&lt;HTML&gt;
+<br>&lt;HEAD&gt;
+<br>&lt;TITLE&gt;Kniha návštěv&lt;/TITLE&gt;
+<br>&lt;/HEAD&gt;
+<br>&lt;BODY&gt;
+<br>&lt;H1 align="center"&gt;Administrace&lt;/H1&gt;
+<br>&lt;FORM name="AdmKniNav" method="POST" action="admin.php"&gt;
+<br>
+<br>&lt;?
+<br>
+<br>$vysledek = MySQL_Query("SELECT * FROM kniha WHERE ID=".$ID);
+<br>if (!$vysledek) {
+<br>&nbsp;&nbsp;  echo "Došlo k chybě při zpracování dotazu v databázi.&lt;BR&gt;\n";
+<br>&nbsp;&nbsp;  exit;
+<br>}
+<br>
+<br>$zaznam = MySQL_Fetch_Array($vysledek);
+<br>
+<br>?&gt;
+<br>
+<br>&lt;CENTER&gt;
+<br>&lt;TABLE border="0" cellpadding="0" cellspacing="0"&gt;
+<br>&nbsp;&nbsp;  &lt;TR valign="middle"&gt;
+<br>&nbsp;&nbsp;&nbsp;&nbsp;    &lt;TD align="right"&gt;
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;      Jméno či přezdívka:&amp;nbsp;
+<br>&nbsp;&nbsp;&nbsp;&nbsp;    &lt;TD align="left"&gt;
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;INPUT type="text"
+name="prezdivka" value="&lt;? echo $zaznam["prezdivka"]; ?&gt;"&gt;
+<br>&nbsp;&nbsp;  &lt;TR valign="middle"&gt;
+<br>&nbsp;&nbsp;&nbsp;&nbsp;    &lt;TD align="right"&gt;
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;      E-mail:&amp;nbsp;
+<br>&nbsp;&nbsp;&nbsp;&nbsp;    &lt;TD align="left"&gt;
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;      &lt;INPUT type="text" name="email" value="&lt;? echo $zaznam["email"]; ?&gt;"&gt;
+<br>&nbsp;&nbsp;  &lt;TR valign="middle"&gt;
+<br>&nbsp;&nbsp;&nbsp;&nbsp;    &lt;TD align="right"&gt;
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;      URL:&amp;nbsp;
+<br>&nbsp;&nbsp;&nbsp;&nbsp;    &lt;TD align="left"&gt;
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;      &lt;INPUT type="text" name="URL" value="&lt;? echo $zaznam["URL"]; ?&gt;"&gt;
+<br>&nbsp;&nbsp;  &lt;TR valign="top"&gt;
+<br>&nbsp;&nbsp;&nbsp;&nbsp;    &lt;TD align="right"&gt;
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;      Vzkaz:&amp;nbsp;
+<br>&nbsp;&nbsp;&nbsp;&nbsp;    &lt;TD align="left"&gt;
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;TEXTAREA
+name="vzkaz" rows="5" cols="20"&gt;&lt;? echo $zaznam["vzkaz"];
+?&gt;&lt;/TEXTAREA&gt;
+<br>&nbsp;&nbsp;&nbsp;&nbsp;    &lt;/TD&gt;
+<br>&nbsp;&nbsp;  &lt;/TR&gt;
+<br>&lt;/TABLE&gt;
+<br>&lt;/CENTER&gt;
+<br>
+<br>&lt;?
+<br>
+<br>echo "&lt;INPUT type=\"hidden\" name=\"heslo\" value=\"".$heslo."\"&gt;\n";
+<br>echo "&lt;INPUT type=\"hidden\" name=\"ID\" value=\"".$ID."\"&gt;\n";
+<br>echo "&lt;INPUT type=\"hidden\" name=\"edit\" value=\"ne\"&gt;\n";
+<br>echo "&lt;CENTER&gt;&lt;BR&gt;&lt;INPUT type=\"submit\" value=\"Uložit změny\"&gt;&lt;/CENTER&gt;\n";
+<br>echo "&lt;/FORM&gt;\n";
+<br>
+<br>?&gt;
+<br>
+<br>&lt;/BODY&gt;
+<br>&lt;/HTML&gt;
+<br>
+<br>&lt;?
+<br>
+<br>&nbsp;&nbsp;  exit;
+<br>
+<br>}
+<br>
+<br>if ($edit == "ne") {
+<br>
+<br>&nbsp;&nbsp; $vysledek = MySQL_Query("UPDATE kniha SET
+prezdivka='".$prezdivka."', email='".$email."', URL='".$URL."',
+vzkaz='".$vzkaz."' WHERE ID=".$ID);
+<br>&nbsp;&nbsp;  if (!$vysledek) {
+<br>&nbsp;&nbsp;&nbsp;&nbsp;    echo "Došlo k chybě při zpracování dotazu v databázi.&lt;BR&gt;\n";
+<br>&nbsp;&nbsp;&nbsp;&nbsp;    exit;
+<br>&nbsp;&nbsp;  }
+<br>
+<br>&nbsp;&nbsp;  $zprava = "Editace záznamu proběhla úspěšně!!!";
+<br>
+<br>}
+<br>
+<br>if ($smaz == "ano") {
+<br>
+<br>&nbsp;&nbsp;  for ($i = 1; $i &lt;= $smapoc; ++$i) {
+<br>&nbsp;&nbsp;&nbsp;&nbsp;    if (${"smaz".$i} != "") {
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;      $vysledek = MySQL_Query("DELETE FROM kniha WHERE ID=".${"smaz".$i});
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;      if (!$vysledek) {
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;        echo "Došlo k chybě při zpracování dotazu v databázi.&lt;BR&gt;\n";
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;        exit;
+<br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;      }
+<br>&nbsp;&nbsp;&nbsp;&nbsp;    }
+<br>&nbsp;&nbsp;  }
+<br>
+<br>&nbsp;&nbsp;  $zprava = "Záznam byl úspěšně smazán!!!";
+<br>
+<br>}
+<br>
+<br>?&gt;
+<br>
+<br>&lt;HTML&gt;
+<br>&lt;HEAD&gt;
+<br>&lt;TITLE&gt;Kniha návštěv&lt;/TITLE&gt;
+<br>&lt;/HEAD&gt;
+<br>&lt;BODY&gt;
+<br>&lt;H1 align="center"&gt;Administrace&lt;/H1&gt;
+<br>&lt;FORM name="AdmKniNav" method="POST" action="admin.php"&gt;
+<br>
+<br>&lt;?
+<br>
+<br>if ($zprava != "") {
+<br>&nbsp;&nbsp;  echo "&lt;FONT color=\"#FF0080\"&gt;".$zprava."&lt;/FONT&gt;&lt;BR&gt;&lt;BR&gt;\n";
+<br>}
+<br>
+<br>$vysledek = MySQL_Query("SELECT * FROM kniha ORDER BY ID DESC");
+<br>if (!$vysledek) {
+<br>&nbsp;&nbsp;  echo "Došlo k chybě při zpracování dotazu v databázi.&lt;BR&gt;\n";
+<br>&nbsp;&nbsp;  exit;
+<br>}
+<br>
+<br>$i = 0;
+<br>$smapoc = 0;
+<br>
+<br>while ($zaznam = MySQL_Fetch_Array($vysledek)) {
+<br>
+<br>&nbsp;&nbsp;  if ($pocet == "") {
+<br>&nbsp;&nbsp;&nbsp;&nbsp;    $pocet = 0;
+<br>&nbsp;&nbsp;  }
+<br>
+<br>&nbsp;&nbsp;  ++$i;
+<br>&nbsp;&nbsp;  $max_pocet = $pocet + 10;
+<br>&nbsp;&nbsp;  ++$smapoc;
+<br>
+<br>&nbsp;&nbsp;  if (($i &gt; $pocet) and ($i &lt;= $max_pocet)) {
+<br>&nbsp;&nbsp;&nbsp;&nbsp; echo "&lt;INPUT type=\"checkbox\"
+name=\"smaz".$smapoc."\" value=\"".$zaznam["ID"]."\"&gt; &lt;A
+href=\"admin.php?heslo=".$heslo."&amp;edit=ano&amp;ID=".$zaznam["ID"]."\"&gt;&lt;B&gt;EDIT&lt;/B&gt;&lt;/A&gt;&lt;BR&gt;\n";
+<br>&nbsp;&nbsp;&nbsp;&nbsp; echo "&lt;B&gt;Jméno: &lt;FONT
+color=\"#FF0080\"&gt;".$zaznam["prezdivka"]."&lt;/FONT&gt; nám
+zanechal(a) vzkaz ".$zaznam["datum"]."&lt;BR&gt;\n";
+<br>&nbsp;&nbsp;&nbsp;&nbsp; echo "E-mail: &lt;A href=\"mailto:
+".$zaznam["email"]."\"&gt;".$zaznam["email"]."&lt;/A&gt;&lt;BR&gt;\n";
+<br>&nbsp;&nbsp;&nbsp;&nbsp;    echo "URL: &lt;A href=\"".$zaznam["URL"]."\"&gt;".$zaznam["URL"]."&lt;/A&gt;&lt;BR&gt;&lt;/B&gt;\n";
+<br>&nbsp;&nbsp;&nbsp;&nbsp;    echo $zaznam["vzkaz"]."&lt;BR&gt;&lt;BR&gt;\n";
+<br>&nbsp;&nbsp;  }
+<br>}
+<br>
+<br>echo "&lt;INPUT type=\"hidden\" name=\"smapoc\" value=\"".$smapoc."\"&gt;\n";
+<br>echo "&lt;INPUT type=\"hidden\" name=\"heslo\" value=\"".$heslo."\"&gt;\n";
+<br>echo "&lt;INPUT type=\"hidden\" name=\"smaz\" value=\"ano\"&gt;\n";
+<br>echo "&lt;CENTER&gt;&lt;INPUT type=\"submit\" value=\"Smazat\"&gt;&lt;/CENTER&gt;\n";
+<br>echo "&lt;/FORM&gt;\n";
+<br>
+<br>$zpet = $pocet - 10;
+<br>$vpred = $pocet + 10;
+<br>
+<br>if ($pocet != 0) {
+<br>&nbsp;&nbsp; echo "&lt;A
+href=\"admin.php?heslo=".$heslo."&amp;pocet=".$zpet."\"&gt;&lt;B&gt;&amp;lt;&amp;lt;
+Předchozí&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;/B&gt;&lt;/A&gt;";
+<br>}
+<br>
+<br>if ($vpred &lt; $i) {
+<br>&nbsp;&nbsp; echo "&lt;A
+href=\"admin.php?heslo=".$heslo."&amp;pocet=".$vpred."\"&gt;&lt;B&gt;Další
+&amp;gt;&amp;gt;&lt;/B&gt;&lt;/A&gt;";
+<br>}
+<br>
+<br>?&gt;
+<br>
+<br>&lt;/BODY&gt;
+<br>&lt;/HTML&gt;</font><font face="Courier"><br>
+</font>
+<br><img src="PHP+mySQL%20-%20kniha%20n%C3%A1v%C5%A1t%C4%9Bv%20%282.%29_soubory/bodka.gif" align="absmiddle"> <a href="http://www.pcsvet.cz/download/clanky/phpgb2.zip">Stáhnout zdrojové 
+kódy (login.html, admin.php)</a></p>
+
+
+
+<br>
+<br>
+<hr color="#777777" size="1">
+
+<table width="100%"><tbody><tr><td valign="top">
+Autor: <b>Jan Fuchs</b>, <a href="http://www.pcsvet.cz/art/author.php?id=70">informace o autorovi</a><br>
+Rubrika: <b><a href="http://www.pcsvet.cz/php/">Programování - PHP</a></b><br>
+Čtenářů: <b>6581</b> &nbsp; &nbsp; Zobrazení: <b>7720</b><br>
+<br>
+<b>Související články:</b><br>• <a href="http://www.pcsvet.cz/art/article.php?id=968" title="Ukázka jak lze jednoduše vytvořit knihu návštěv za použití PHP a databáze MySQL">PHP+mySQL - kniha návštěv (1.)</a><br><br>
+
+</td><td align="center">
+
+
+Jak hodnotíte tento článek?<br><form method="post" action="article.php?id=1024"><input name="znamka" value="1" class="tlac" type="submit"> <input name="znamka" value="2" class="tlac" type="submit"> <input name="znamka" value="3" class="tlac" type="submit"> <input name="znamka" value="4" class="tlac" type="submit"> <input name="znamka" value="5" class="tlac" type="submit"><br>lepší &lt;--&gt;horší</form>
+
+</td></tr></tbody></table>
+Názory: počet: <b>40</b> &nbsp; poslední: 22.09.2007 09:52:51 &nbsp; <a href="http://www.pcsvet.cz/forum/forum.php?art=1024" class="autor">číst názory</a> &nbsp; <a href="http://www.pcsvet.cz/forum/forum-add.php?art=1024" class="autor">přidat názor</a> &nbsp; <a href="http://www.pcsvet.cz/art/article_print.php?id=1024">vytisknout</a><p></p>
+
+<a name="inquiry"></a>
+
+<hr color="white" size="1">
+
+<div align="center"><center><table class="ftable"><tbody><tr><td align="left"><b><i>Nadpis</i></b></td><td align="left"><b><i>Autor</i></b></td><td align="left"><b><i>Datum</i></b></td></tr><tr><td align="left"><b>Co to je?</b></td><td align="left"><a href="mailto:returner-56@post.cz">returner</a></td><td align="left">12.12.2001 01:39:25</td></tr><tr><td align="left">&nbsp; krankenversicherungsvergleich</td><td align="left"><a href="mailto:Jens@Godfring.net">Jens</a></td><td align="left">17.10.2005 08:19:40</td></tr><tr><td align="left"><b>připojení k databázi</b></td><td align="left"><a href="mailto:interscorpion@uletak.cz">interScorPION</a></td><td align="left">13.11.2004 15:32:52</td></tr><tr><td align="left">&nbsp; Re: připojení k databázi</td><td align="left"><a href="mailto:info@vojtam.chytrak.cz">Vojta</a></td><td align="left">01.12.2004 17:48:18</td></tr><tr><td align="left"><b>dsl flatrate</b></td><td align="left"><a href="mailto:webmaster@dsl-flatrate.tiz.net">Gerd</a></td><td align="left">04.07.2005 09:19:37</td></tr><tr><td align="left"><b>Sofortdarlehen</b></td><td align="left"><a href="mailto:John@sofortdarlehen.dot.de">John</a></td><td align="left">14.07.2005 07:41:27</td></tr><tr><td align="left">&nbsp; Re: Sofortdarlehen</td><td align="left"><a href="mailto:cuixpt2@yahoo.com">pagerank main</a></td><td align="left">20.04.2006 14:27:58</td></tr><tr><td align="left">&nbsp; Re: Sofortdarlehen</td><td align="left"><a href="mailto:ynoayn6@dmoz.org">google pr main</a></td><td align="left">20.04.2006 14:27:59</td></tr><tr><td align="left">&nbsp; Re: Sofortdarlehen</td><td align="left"><a href="mailto:nlrvdbd@mail.com">google pr main</a></td><td align="left">20.04.2006 14:28:00</td></tr><tr><td align="left">&nbsp; Re: Sofortdarlehen</td><td align="left">mftcd5k@ebay.com</td><td align="left">20.04.2006 14:28:01</td></tr><tr><td align="left"><b>partnerprogramm</b></td><td align="left"><a href="mailto:Axel@gmxz.net">Axel</a></td><td align="left">03.08.2005 12:53:17</td></tr><tr><td align="left"><b> Kfz Versicherungsvergleich</b></td><td align="left"><a href="mailto:webmaster@kfz-versicherungsvergleich.dot.de">Günni</a></td><td align="left">05.08.2005 09:32:15</td></tr><tr><td align="left"><b>Patenschaften</b></td><td align="left"><a href="mailto:Knut@Hellmann.net">Knut</a></td><td align="left">06.08.2005 05:59:40</td></tr><tr><td align="left"><b>günstige Autoversicherung</b></td><td align="left"><a href="mailto:gerke@gmx.com">Walter</a></td><td align="left">07.08.2005 02:55:15</td></tr><tr><td align="left"><b>Gratisklingelton</b></td><td align="left"><a href="mailto:webmaster@akon-lonley.tiz.net">Ron</a></td><td align="left">07.08.2005 09:59:46</td></tr><tr><td align="left"><b>Routen Planer</b></td><td align="left"><a href="mailto:Clarl@lonleye.net">Clark</a></td><td align="left">08.08.2005 08:28:51</td></tr><tr><td align="left"><b>Handy Spiele</b></td><td align="left"><a href="mailto:Michael@desda.net">Michael</a></td><td align="left">09.08.2005 09:42:44</td></tr><tr><td align="left"><b>Star Wars Klingelton</b></td><td align="left"><a href="mailto:walter@star-wars-klingelton.net.cn">Walter</a></td><td align="left">10.08.2005 05:26:40</td></tr><tr><td align="left"><b>Privatkredite</b></td><td align="left"><a href="mailto:Ronald@krems.net">Ronald</a></td><td align="left">11.08.2005 03:05:02</td></tr><tr><td align="left"><b>Tagesgeldkonto</b></td><td align="left"><a href="mailto:Jonny@ganto.net">Jonny</a></td><td align="left">05.10.2005 14:24:19</td></tr><tr><td align="left"><b>http://rutenplaner.box.de</b></td><td align="left"><a href="mailto:Jens@Godfring.net">Jens</a></td><td align="left">15.10.2005 03:39:52</td></tr><tr><td align="left"><b>http://rutenplaner.box.de</b></td><td align="left"><a href="mailto:Jens@Godfring.net">Jens</a></td><td align="left">15.10.2005 03:43:17</td></tr><tr><td align="left"><b>http://rutenplaner.box.de</b></td><td align="left"><a href="mailto:Jens@Godfring.net">Jens</a></td><td align="left">15.10.2005 03:44:47</td></tr><tr><td align="left"><b>http://online-krankenversicherungsvergleich.c...</b></td><td align="left"><a href="mailto:Jens@Godfring.net">Jens</a></td><td align="left">17.10.2005 08:17:42</td></tr><tr><td align="left"><b>Usenet Provider</b></td><td align="left"><a href="mailto:Roger@Voss.net">Roger</a></td><td align="left">28.10.2005 03:38:45</td></tr><tr><td align="left"><b>Usenet Provider</b></td><td align="left"><a href="mailto:Roger@Voss.net">Roger</a></td><td align="left">28.10.2005 03:39:52</td></tr><tr><td align="left"><b>Digitales Fernsehen</b></td><td align="left"><a href="mailto:Horst@digitv.org">Horst</a></td><td align="left">28.10.2005 08:15:04</td></tr><tr><td align="left"><b>Digitales Fernsehen</b></td><td align="left"><a href="mailto:Horst@digitv.org">Horst</a></td><td align="left">28.10.2005 08:16:21</td></tr><tr><td align="left"><b>Auto darlehen</b></td><td align="left"><a href="mailto:webmaster@auto-darlehen.at.md">Kai</a></td><td align="left">01.11.2005 03:36:04</td></tr><tr><td align="left"><b>Auto darlehen</b></td><td align="left"><a href="mailto:webmaster@auto-darlehen.at.md">Kai</a></td><td align="left">01.11.2005 03:36:36</td></tr><tr><td align="left"><b>Bankkredit</b></td><td align="left"><a href="mailto:Horst@bankkredit.at.md">Horst</a></td><td align="left">03.11.2005 03:01:13</td></tr><tr><td align="left"><b>Sofortdarlehen</b></td><td align="left"><a href="mailto:John@sofortdarlehen.at.md">John</a></td><td align="left">04.11.2005 02:03:04</td></tr><tr><td align="left"><b>Sofortdarlehen</b></td><td align="left"><a href="mailto:John@sofortdarlehen.at.md">John</a></td><td align="left">04.11.2005 02:03:06</td></tr><tr><td align="left"><b>Internetkredit</b></td><td align="left"><a href="mailto:Horst@internetkredit.at.md">Horst</a></td><td align="left">04.11.2005 08:32:06</td></tr><tr><td align="left"><b>Billigflug</b></td><td align="left"><a href="mailto:martin@rolander.org">Martin</a></td><td align="left">05.11.2005 09:45:46</td></tr><tr><td align="left"><b>dobrý den</b></td><td align="left"><a href="mailto:pr@seznam.cz">petr</a></td><td align="left">14.12.2005 10:42:34</td></tr><tr><td align="left"><b>http://www.dirare.com</b></td><td align="left"><a href="mailto:blqk7xj@altavista.com">yellow pages main</a></td><td align="left">31.05.2006 09:33:59</td></tr><tr><td align="left"><b>http://www.dirare.com</b></td><td align="left"><a href="mailto:pftx9fx@hotmail.com">online directory main</a></td><td align="left">31.05.2006 09:34:02</td></tr><tr><td align="left"><b>http://www.dirare.com</b></td><td align="left"><a href="mailto:wya000q@ebay.com">online directory main</a></td><td align="left">31.05.2006 09:34:04</td></tr><tr><td align="left"><b>CHyby</b></td><td align="left"><a href="mailto:brockljakub@seznam.cz">Jabro</a></td><td align="left">22.09.2007 09:52:51</td></tr></tbody></table></center></div>
+<form method="post" action="/forum/forum-add.php?art=1024&amp;reply=&amp;tema=">
+  <div align="center">
+    <table class="ftable" border="0" cellpadding="2" cellspacing="0">
+      <tbody><tr>
+        <td colspan="2" class="ftitle">Nový příspěvek</td>
+      </tr>
+      <tr>
+        <td class="fname" align="right"><b>Věc:</b></td>
+        <td class="fvalue" align="left"><input name="Nadpis" size="55" value="" type="text"></td>
+      </tr>
+      <tr>
+        <td class="fname" align="right"><b>Jméno:</b></td>
+        <td class="fvalue" align="left"><input name="Autor_Jmeno" size="30" value="" type="text"></td>
+      </tr>
+      <tr>
+        <td class="fname" align="right"><b>E-mail:</b></td>
+        <td class="fvalue" align="left"><input name="Autor_Email" size="20" value="" type="text"></td>
+      </tr>
+      <tr>
+        <td colspan="2" class="fvalue" align="left"><textarea rows="10" name="Obsah" cols="70"></textarea><br>
+		  - nepoužívejte HTML k formátování textu příspěvku<br>
+		  - nepoužívejte A HREF= pro odkazy, aktivní budou automaticky<br>
+		  - odřádkování provádějte klávesou ENTER, nikoliv tagem &lt;br&gt;</td>
+      </tr>
+      <tr>
+        <td colspan="2" class="fvalue" align="left"><input class="ftable" style="border: medium none ;" name="MailReply" value="1" type="checkbox">zasílat
+          odpovědi na můj e-mail      </td>
+</tr>
+      <tr>
+        <td colspan="2" align="center">
+          Opište text z obrázku: <input name="Kod" value="" class="f_name" size="8" type="text"> <img src="PHP+mySQL%20-%20kniha%20n%C3%A1v%C5%A1t%C4%9Bv%20%282.%29_soubory/captcha.htm" height="50" width="200"></td>
+      </tr>
+      <tr>
+        <td colspan="2" align="center">
+          <input value="Přidat příspěvek" class="fsubmit" type="submit"></td>
+      </tr>
+    </tbody></table>
+  </div>
+  <input name="filled" value="1" type="hidden">
+</form>
+
+<br><br><br><br><br><br><br><br>
+<div align="center">
+<center>
+<table border="0">
+<tbody><tr><td>
+<iframe src="PHP+mySQL%20-%20kniha%20n%C3%A1v%C5%A1t%C4%9Bv%20%282.%29_soubory/p-banner.htm" style="border: medium none ;" frameborder="0" height="60" scrolling="no" width="468">
+</iframe>
+<br><br>
+  <iframe name="rekl2" src="PHP+mySQL%20-%20kniha%20n%C3%A1v%C5%A1t%C4%9Bv%20%282.%29_soubory/2.htm" marginwidth="1" marginheight="1" frameborder="0" height="62" scrolling="no" width="472"></iframe>
+</td>
+</tr>
+</tbody></table>
+</center>
+</div>
+<br><br><br>
+<center><span style="font-size: 9px;">(c) P.E.S. consulting, s.r.o.
+2000-2005. Provozovatel nezodpovídá za obsah a původ článků a
+diskuzních příspěvků, odpovědnost nesou jednotliví redaktoři a autoři.
+Informace o PC Světě <a href="http://www.pcsvet.cz/informace.php">naleznete zde</a></span></center> 
+</td>
+<td bgcolor="white" width="10"></td>
+<td align="right" bgcolor="white" valign="top" width="160">
+
+<br><center>
+<center><a href="http://www.forpsi.com/" target="_blank"><img src="PHP+mySQL%20-%20kniha%20n%C3%A1v%C5%A1t%C4%9Bv%20%282.%29_soubory/125x125.gif" alt="FORPSI.com - webhosting, serverhosting, registrace domén, dedikované servery" border="0"></a></center>
+
+
+
+<table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td colspan="3" height="6" width="180"></td></tr><tr><td align="left" valign="top" width="15"><img src="PHP+mySQL%20-%20kniha%20n%C3%A1v%C5%A1t%C4%9Bv%20%282.%29_soubory/7-tab-1.gif" alt=""></td><td align="left" background="PHP+mySQL%20-%20kniha%20n%C3%A1v%C5%A1t%C4%9Bv%20(2.)_soubory/7-tab-2.gif" valign="bottom" width="165"><font class="tab-nadpis">
+Anketa
+</font></td></tr></tbody></table>
+<table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td align="left" valign="top" width="5"><img src="PHP+mySQL%20-%20kniha%20n%C3%A1v%C5%A1t%C4%9Bv%20%282.%29_soubory/7-tab-3.gif" alt=""></td><td align="left" width="175">
+<table class="tab" border="0" cellpadding="3" cellspacing="0"><tbody><tr><td bgcolor="white">
+</td></tr></tbody></table>
+</td></tr>
+</tbody></table>
+
+<table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td colspan="3" height="6" width="180"></td></tr><tr><td align="left" valign="top" width="15"><img src="PHP+mySQL%20-%20kniha%20n%C3%A1v%C5%A1t%C4%9Bv%20%282.%29_soubory/7-tab-1.gif" alt=""></td><td align="left" background="PHP+mySQL%20-%20kniha%20n%C3%A1v%C5%A1t%C4%9Bv%20(2.)_soubory/7-tab-2.gif" valign="bottom" width="165"><font class="tab-nadpis">
+Novinky e-mailem
+</font></td></tr></tbody></table>
+<table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td align="left" valign="top" width="5"><img src="PHP+mySQL%20-%20kniha%20n%C3%A1v%C5%A1t%C4%9Bv%20%282.%29_soubory/7-tab-3.gif" alt=""></td><td align="left" width="175">
+<table class="tab" border="0" cellpadding="3" cellspacing="0"><tbody><tr><td bgcolor="white">
+<form method="get" action="/user/register.php">
+<input name="email" size="16" value="vas@email.cz" onclick="this.value='';" type="text"><input value="ok" type="submit">
+Zasílání denního nebo týdenního přehledu nových článků
+</form>
+</td></tr></tbody></table>
+</td></tr>
+</tbody></table>
+
+<hr size="1">
+<iframe name="rekl2" src="PHP+mySQL%20-%20kniha%20n%C3%A1v%C5%A1t%C4%9Bv%20%282.%29_soubory/3.htm" marginwidth="1" marginheight="1" align="middle" frameborder="0" height="127" scrolling="no" width="127"></iframe>
+<hr size="1">
+<br><center>
+<center><a href="http://www.forpsi.com/" target="_blank"><img src="PHP+mySQL%20-%20kniha%20n%C3%A1v%C5%A1t%C4%9Bv%20%282.%29_soubory/125X125_evrop_dom_a_web.gif" alt="FORPSI.com - webhosting, serverhosting, registrace domén, dedikované servery" border="0"></a></center>
+
+
+<br><br>
+<a href="http://www.pravnik.cz/" target="_blank">Právník.cz - občanské, rodinné, pracovní, obchodní a jiné právo, smluvní vzory, úplná znění</a>
+
+<br><br><br><br><br>
+
+<center>
+</center>
+
+
+</center></center></td>
+
+
+</tr>
+</tbody></table>
+
+
+
+</td>
+</tr>
+
+</tbody></table>
+
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tbody><tr><td background="PHP+mySQL%20-%20kniha%20n%C3%A1v%C5%A1t%C4%9Bv%20(2.)_soubory/7.gif" width="15"></td><td bgcolor="white" width="150"></td><td width="68"><img src="PHP+mySQL%20-%20kniha%20n%C3%A1v%C5%A1t%C4%9Bv%20%282.%29_soubory/7-pat-1.gif" alt=""></td><td background="PHP+mySQL%20-%20kniha%20n%C3%A1v%C5%A1t%C4%9Bv%20(2.)_soubory/7-pat-2.gif" bgcolor="white" valign="bottom" width="360">© 2000-2004 pcsvět.cz / <a href="mailto:pcsvet@pcsvet.cz">pcsvet@pcsvet.cz</a> / ISSN 1213-6042</td><td bgcolor="white"><a href="#top" onmouseover="topoff.src=topon.src; window.status='nahoru';return true;" onmouseout="topoff.src='/images/7-pat-top-off.gif'; window.status='pcsvět';return true;"><img name="topoff" src="PHP+mySQL%20-%20kniha%20n%C3%A1v%C5%A1t%C4%9Bv%20%282.%29_soubory/7-pat-top-off.gif" alt="" border="0"></a></td></tr>
+</tbody></table>
+
+</td><td background="PHP+mySQL%20-%20kniha%20n%C3%A1v%C5%A1t%C4%9Bv%20(2.)_soubory/8-1.gif" valign="top" width="13"><img src="PHP+mySQL%20-%20kniha%20n%C3%A1v%C5%A1t%C4%9Bv%20%282.%29_soubory/8-2.gif" alt=""></td></tr>
+</tbody></table>
+
+<!-- Počítadlo.cz  počítadlo:527  uživatel:414 -->
+<script language="JavaScript" type="text/javascript">
+<!--
+Tmp=Math.floor(1000000 * Math.random());
+//document.write("<scr" + "ipt src=\"http://cnt1.pocitadlo.cz/counter.php?poc=527&ref="+escape(top.document.referrer)+"&depth="+screen.colorDepth+"&width="+screen.width+"&height="+screen.height+"&tmp="+Tmp+"\" language=\"JavaScript\" type=\"text/javascript\"></scr" + "ipt>");
+// -->
+</script>
+<noscript>
+<img src="http://cnt1.pocitadlo.czx/counter.php?poc=527&amp;ns=1" width="1" height="1" alt="" border="0">
+</noscript>
+<!-- Počítadlo.cz konec -->
+
+<!-- NAVRCHOLU.cz -->
+<script language="JavaScript" type="text/javascript">
+<!--
+pxDepth = screen.pixelDepth;
+if (!(pxDepth > 0))
+	pxDepth = screen.colorDepth;
+if (!(pxDepth > 0))
+	pxDepth = 0; 
+document.write("<img src=\"http://hit.navrcholu.cz/hit?id=3548;n=1;screenx=" + screen.width + ";screeny=" + screen.height + ";cdepth=" + pxDepth + ";ref=" + escape(top.document.referrer) + "\" width=\"1\" height=\"1\" alt=\"\">");
+// -->
+</script><img src="PHP+mySQL%20-%20kniha%20n%C3%A1v%C5%A1t%C4%9Bv%20%282.%29_soubory/hit" alt="" height="1" width="1">
+<noscript>
+<img src="http://hit.navrcholu.cz/hit?id=3548;n=1" width="1" height="1" alt="" border="0">
+</noscript>
+<!-- NAVRCHOLU.cz - konec -->
+
+<script src="PHP+mySQL%20-%20kniha%20n%C3%A1v%C5%A1t%C4%9Bv%20%282.%29_soubory/urchin.js" type="text/javascript">
+</script>
+<script type="text/javascript">
+_uacct = "UA-1217921-1";
+urchinTracker();
+</script>
+
+</body></html>

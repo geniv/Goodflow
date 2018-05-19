@@ -1,0 +1,41 @@
+<!doctype html public "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=Windows-1250">
+<title>Kompletní SELECT</title>
+<link rel='stylesheet' style='text/css' href='../function.css'>
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000">
+
+<h1>Kompletní BNF zápis příkazu SELECT</h1>
+
+<pre><code>dotazový_výraz ::= { dotazový_term | dotazový_výraz { UNION | EXCEPT } [ ALL ] 
+    [ corresponding ] dotazový_term } [ třídění ] [ výběr ]
+dotazový_term ::= specifikace_dotazu | dotazový_term INTERSECT [ ALL ] [ corresponding ] 
+    specifikace_dotazu
+corresponding ::= CORRESPONDING [ BY ( jméno_sloupce {, jméno_sloupce }… )]
+
+specifikace_dotazu ::= SELECT [ ALL | DISTINCT ] výraz [ přejmenování ] { , výraz [ přejmenování ] }… 
+FROM zobecněná tabulka { , zobecněná tabulka }… 
+[ WHERE podmínka_where ] 
+[ GROUP BY výraz_group { , výraz_group }… ]
+[ HAVING podmínka_having ]
+přejmenování ::= AS jméno
+
+zobecněná tabulka ::= { identifikátor_tabulky [ specifikace_indexu ] 
+    | identifikátor_uloženého_dotazu | systémový_dotaz | ( dotazový_výraz ) | join }
+    [ přejmenování ]
+specifikace_indexu ::= INDEX jméno_indexu
+join ::= zobecněná_tabulka druh_joinu zobecněná_tabulka [ specifikace_joinu ]
+druh_joinu ::= CROSS JOIN | [ NATURAL ] [ INNER | { LEFT | RIGHT | FULL } [ OUTER ] ] JOIN 
+specifikace_joinu ::= ON podmínka | USING ( název_sloupce { , název_sloupce }…)
+přejmenování ::= [ AS ] jméno [( jméno_sloupce { , jméno_sloupce }…)]
+
+třídění ::= ORDER BY výraz [ ASC | DESC ] {, výraz [ASC | DESC ] }… 
+výběr ::= LIMIT [ offset , ] count
+</code></pre>
+
+
+</body>
+</html>

@@ -1,0 +1,69 @@
+<!doctype html public "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=Windows-1250">
+<title>Funkce Real2str</title>
+<link rel='stylesheet' style='text/css' href='../function.css'>
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000">
+
+
+
+<h2 class=function>Real2str</h2>
+<img src='../images/sql.gif' width='44' height='16' border='0' alt='sql' align='middle' hspace='2'>
+
+
+<br><br>
+<div class='typ'>FUNCTION <b>Real2str</b>(IN r REAL, IN prez SMALLINT) RETURNS CHAR(n);
+</div>
+
+
+<p><b>Parametry</b></p>
+
+<table border=1 cols=2 frame=box rules=all width=400>
+
+<tr valign="top">
+<td width=22%><i>r</i></td>
+<td width=78%>hodnota, která se má konvertovat</td>
+</tr>
+
+<tr valign="top">
+<td width=22%><i>prez </i></td>
+<td width=78%>způsob konverze</td>
+</tr>
+</table><br>
+
+<p><b>Popis</b></p>
+
+<p>Funkce <b><code>Real2str</code></b> převede hodnotu zadanou prvním parametrem na řetězec znaků a vrátí jej. Při konverzi se použije hodnota parametru <i>prez</i> takto:</p>
+
+<ul><li>- je-li <i>prez</i> rovno 99, řetězec bude zapsán ve formě literálu v jazyce SQL; jinak</li>
+<li>- absolutní hodnota <i>prez</i> udává počet desetinných míst; </li>
+<li>- je-li <i>prez</i> kladné nebo 0, výsledek bude v semilogaritmickém tvaru; </li>
+<li>- je-li <i>prez</i> záporné, výsledek bude v desetinném tvaru. </li>
+</ul>
+
+<p>Kromě standradních formátů existuje ještě speciální tzv. <b>účetní zobrazení</b> - desetinné zobrazení, kde jsou tisíce odděleny oddělovačem nastaveným ve Windows. Účetní zobrazení má hodnotu 100+počet desetinných míst. </p>
+
+<p>Je-li konverze použita na straně serveru, je desetinným oddělovačem defaultně tečka (ve všech případech). Oddělovač lze globálně změnit pomocí <a href="../xml/html/properties.html">vlastnosti serveru</a> <b>DecimalSeparator</b>. Má-li se použít oddělovač nastavený v operačním systému pro zvolený jazyk, definujte tuto vlastnost s prázdnou hodnotu.</p>
+
+<p>Na straně serveru slouží ke konverzi také obecná funkce <a href="HE_SQL2_CAST.htm">CAST</a>.</p>
+
+<p><b>Hodnota funkce</b></p>
+
+<p>Funkce vrací řetězec znaků, který je desítkovým zápisem čísla <i>r</i>.</p>
+
+<p><b>Viz</b></p>
+
+<ul class='viz'>
+ <li><a href="HE_F_INT2STR.htm">Int2str</a> </li>
+ <li><a href="HE_F_STR2INT.htm">Str2int</a> </li>
+ <li><a href="HE_F_STR2REAL.htm">Str2real</a> </li>
+ <li><a href="HE_F_STR2DATE.htm">Str2date</a> </li>
+ <li><a href="HE_F_STR2TIME.htm">Str2time</a> </li>
+ <li><a href="HE_F_TIME2STR.htm">Time2str</a> </li>
+</ul>
+
+</body>
+</html>

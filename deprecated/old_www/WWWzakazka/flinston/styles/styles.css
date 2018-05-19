@@ -1,0 +1,671 @@
+body {
+  background: url(../obr/pozadi.png) repeat;
+  font: 17px "Courier New", "Times New Roman", serif;
+  color: #9ab877;
+}
+
+#obal_layout,
+#obal_layout #zahlavi,
+#obal_layout #obal_obsah,
+#obal_layout #zapati {
+  width: 764px;
+}
+
+#obal_layout {
+  height: auto;
+  min-height: 100%;
+  margin: 0 auto;
+  position: relative;
+  background: url(../obr/pozadi_obsah.png) repeat-y;
+}
+
+/* zahlavi s menu */
+#obal_layout #zahlavi {
+  height: 287px;
+  background: url(../obr/zahlavi.png) no-repeat 0 42px;
+  overflow: hidden;
+}
+
+#obal_layout #zahlavi #menu_zahlavi_nad {
+  height: 42px;
+  background: url(../obr/zahlavi_nad.png) no-repeat;
+}
+
+#obal_layout #zahlavi #menu_zahlavi_nad div {
+  width: auto;
+  float: right;
+  margin: 13px 35px 0 0;
+  overflow: hidden;
+}
+
+#obal_layout #zahlavi #menu_zahlavi_nad div span,
+#obal_layout #zahlavi #menu_zahlavi_nad div p {
+  width: auto;
+  float: left;
+}
+
+#obal_layout #zahlavi #menu_zahlavi_nad div span {
+  display: block;
+  margin: 0 5px;
+  color: #485a31;
+  font: 15px "Times New Roman", "Courier New", serif;
+}
+
+#obal_layout #zahlavi #menu_zahlavi_nad div p {
+  font: 14px Verdana, "Trebuchet MS", Tahoma, Arial, "Arial CE", sans-serif;
+}
+
+#obal_layout #zahlavi #menu_zahlavi_nad div p a {
+  color: #8ebd57;
+  text-decoration: none;
+}
+
+#obal_layout #zahlavi #menu_zahlavi_nad div p a:hover,
+#obal_layout #zahlavi #menu_zahlavi_nad div p.aktivni a {
+  color: #393b37;
+}
+
+#obal_layout #zahlavi #menu_zahlavi {
+  width: 358px;
+  height: 115px;
+  position: absolute;
+  top: 106px;
+  right: 0;
+  z-index: 10;
+}
+
+#obal_layout #zahlavi #menu_zahlavi p {
+  width: auto;
+  height: 115px;
+  float: left;
+}
+
+#obal_layout #zahlavi #menu_zahlavi p a {
+  display: block;
+  height: 115px;
+}
+
+#obal_layout #zahlavi #menu_zahlavi p a span {
+  display: none;
+}
+
+#obal_layout #zahlavi #menu_zahlavi .realizace_zahrad_menu a {
+  width: 126px;
+  background: url(../obr/realizace_zahrad_menu.png) no-repeat;
+}
+
+#obal_layout #zahlavi #menu_zahlavi .prodejna_menu a {
+  width: 114px;
+  background: url(../obr/prodejna_menu.png) no-repeat;
+}
+
+#obal_layout #zahlavi #menu_zahlavi .interiery_menu a {
+  width: 118px;
+  background: url(../obr/interiery_menu.png) no-repeat;
+}
+
+#obal_layout #zahlavi #menu_zahlavi .realizace_zahrad_menu a,
+#obal_layout #zahlavi #menu_zahlavi .prodejna_menu a,
+#obal_layout #zahlavi #menu_zahlavi .interiery_menu a {
+  background-position: left;
+}
+
+#obal_layout #zahlavi #menu_zahlavi .realizace_zahrad_menu a:hover,
+#obal_layout #zahlavi #menu_zahlavi .prodejna_menu a:hover,
+#obal_layout #zahlavi #menu_zahlavi .interiery_menu a:hover,
+#obal_layout #zahlavi #menu_zahlavi .aktivni a {
+  background-position: right;
+}
+
+#obal_layout #zahlavi #text_nadpis,
+#obal_layout #zahlavi h1 {
+  position: absolute;
+  left: 30px;
+  z-index: -10;
+  color: #000;
+}
+
+#obal_layout #zahlavi #text_nadpis {
+  top: 70px;
+  font: 12px Verdana, sans-serif;
+}
+
+#obal_layout #zahlavi #admin {
+  width: 13px;
+  height: 12px;
+  position: absolute;
+  top: 64px;
+  left: 56px;
+  z-index: 100;
+}
+
+#obal_layout #zahlavi #admin a {
+  display: block;
+  height: 12px;
+}
+
+#obal_layout #zahlavi h1 {
+  top: 40px;
+  font: 18px Verdana, sans-serif;
+}/* /zahlavi s menu */
+
+#obal_layout #obal_obsah {
+  min-height: 300px;
+  padding-bottom: 67px;
+  position: relative;
+}
+
+#obal_layout #obal_obsah:after { /* ukonceni obtekani (nahrada za overflow kvuli ie) */
+  content: ".";
+  display: block;
+  height: 0;
+  clear: both;
+  visibility: hidden;
+}
+
+#obal_layout #obal_obsah #obsah_sloupce {
+  width: 186px;
+  margin-left: 4px;
+  float: left;
+}
+
+#obal_layout #obal_obsah #obsah_sloupce h2 {
+  width: 154px;
+  margin-top: 6px;
+  margin-left: 14px;
+  padding-bottom: 4px;
+  font: 25px "Times New Roman", "Courier New", serif;
+  border-bottom: 1px solid #495b31;
+}
+
+#obal_layout #obal_obsah #obsah_sloupce p {
+  width: 154px;
+  height: 13px;
+  padding: 4px 0;
+  margin-left: 14px;
+  font: 11px Verdana, sans-serif;
+  color: #2a441e;
+  border-top: 1px solid #648741;
+  border-bottom: 1px solid #495b31;
+}
+
+#obal_layout #obal_obsah #obsah_sloupce p.polozka_sloupce {
+  height: 28px;
+  padding: 0;
+  font: 17px "Courier New", "Times New Roman", serif;
+}
+
+#obal_layout #obal_obsah #obsah_sloupce p.mail {
+  padding: 4px 0 7px;
+}
+
+#obal_layout #obal_obsah #obsah_sloupce p.mail a {
+  text-decoration: none;
+  font: 13px "Times New Roman", "Courier New", serif;
+  color: #1e4c1b;
+  background-color: #5e813b; /* mootools */
+}
+
+#obal_layout #obal_obsah #obsah_sloupce p.polozka_sloupce a {
+  height: 20px;
+  display: block;
+  padding: 4px 0 3px 7px;
+  text-decoration: none;
+  color: #2a441e;
+  background-color: #5e813b; /* mootools */
+}
+
+#obal_layout #obal_obsah #obsah_sloupce p.polozka_sloupce a:hover,
+#obal_layout #obal_obsah #obsah_sloupce p.aktivni a {
+  text-decoration: underline;
+  border-bottom: 1px solid #648741;
+}
+
+#obal_layout #obal_obsah #obsah_sloupce p.aktivni a {
+  color: #393b37 !important; /* mootools */
+  background-color: #587936 !important; /* mootools */
+}
+
+#obal_layout #obal_obsah #obsah_sloupce p.obrazek {
+  height: auto;
+  padding: 4px 0;
+}
+
+#obal_layout #obal_obsah #obsah_sloupce p.obrazek a.obrazek {
+  margin-left: 10px;
+}
+
+#obal_layout #obal_obsah #obsah_sloupce p.obrazek a.obrazek img {
+  border: 2px solid #1e4c1b;
+}
+
+#obal_layout #obal_obsah #obsah_sloupce p.obrazek a.obrazek:hover img {
+  border: 2px solid #393b37;
+}
+
+#obal_layout #obal_obsah #hlavni_obsah {
+  width: 570px;
+  margin-right: 2px;
+  float: right;
+}
+
+#obal_layout #obal_obsah #hlavni_obsah div h2 {
+  width: 540px;
+  margin: 4px auto 0;
+  padding: 0 1px 1px 0;
+  text-align: right;
+  font: 25px "Times New Roman", "Courier New", serif;
+  color: #1e4c1b;
+  border-bottom: 1px solid #495b31;
+}
+
+#obal_layout #obal_obsah #hlavni_obsah div h3 {
+  width: 540px;
+  margin: 0 auto;
+  padding: 8px 0 8px 1px;
+  font: 23px "Times New Roman", "Courier New", serif;
+  color: #9ab877;
+  background-color: #567d40;
+  border-top: 1px solid #648741;
+  border-bottom: 1px solid #495b31;
+}
+
+#obal_layout #obal_obsah #hlavni_obsah p {
+  width: 540px;
+  margin: 0 auto;
+  padding: 8px 0 8px 1px;
+  border-top: 1px solid #648741;
+  border-bottom: 1px solid #495b31;
+}
+
+#obal_layout #obal_obsah #hlavni_obsah p.dodatek_uvod {
+  padding: 12px 0 8px 1px;
+  border-top: none;
+}
+
+#obal_layout #obal_obsah #hlavni_obsah p a,
+#obal_layout #obal_obsah #hlavni_obsah ul li a {
+  color: #393b37;
+  text-decoration: none;
+}
+
+#obal_layout #obal_obsah #hlavni_obsah p a:hover,
+#obal_layout #obal_obsah #hlavni_obsah ul li a:hover {
+  color: #1e4c1b;
+  text-decoration: underline;
+}
+
+#obal_layout #obal_obsah #hlavni_obsah ul {
+  width: 540px;
+  margin: 0 auto;
+  padding: 8px 0 8px 1px;
+  border-top: 1px solid #648741;
+}
+
+#obal_layout #obal_obsah #hlavni_obsah ul li {
+  color: #9ab877;
+  margin-left: 25px;
+}
+
+#obal_layout #obal_obsah #hlavni_obsah ul li ul {
+  border-top: none;
+  padding: 0;
+}
+
+#obal_layout #obal_obsah #hlavni_obsah #centralni_form fieldset {
+  border: none;
+  position: relative;
+}
+
+#obal_layout #obal_obsah #hlavni_obsah #centralni_form fieldset dl {
+  overflow: hidden;
+  margin: 10px 0;
+}
+
+#obal_layout #obal_obsah #hlavni_obsah #sekce_prodejna #centralni_form fieldset dl,
+#obal_layout #obal_obsah #hlavni_obsah #sekce_prodejna #centralni_form fieldset dl dt,
+#obal_layout #obal_obsah #hlavni_obsah #sekce_prodejna #centralni_form fieldset dl dd {
+  width: auto;
+}
+
+#obal_layout #obal_obsah #hlavni_obsah #sekce_prodejna #centralni_form fieldset dl {
+  height: auto;
+  border: none;
+}
+
+#obal_layout #obal_obsah #hlavni_obsah #sekce_prodejna #centralni_form fieldset dl dt {
+  margin: 0;
+  line-height: normal;
+}
+
+#obal_layout #obal_obsah #hlavni_obsah #sekce_prodejna #centralni_form fieldset dl dd {
+  margin: 0 0 10px 0;
+}
+
+#obal_layout #obal_obsah #hlavni_obsah #centralni_form fieldset dl dt,
+#obal_layout #obal_obsah #hlavni_obsah #centralni_form fieldset dl dd,
+#obal_layout #obal_obsah #hlavni_obsah #sekce_prodejna #centralni_form fieldset dl dd {
+  width: auto;
+  float: left;
+}
+
+#obal_layout #obal_obsah #hlavni_obsah #centralni_form fieldset dl dt,
+#obal_layout #obal_obsah #hlavni_obsah #sekce_prodejna #centralni_form fieldset dl dt {
+  width: 180px;
+  padding-right: 20px;
+  font-size: 15px;
+  text-align: right;
+}
+
+#obal_layout #obal_obsah #hlavni_obsah #centralni_form fieldset dl dd,
+#obal_layout #obal_obsah #hlavni_obsah #sekce_prodejna #centralni_form fieldset dl dd {
+  width: 300px;
+  margin-bottom: 10px;
+  overflow: hidden;
+}
+
+#obal_layout #obal_obsah #hlavni_obsah #centralni_form fieldset dl dd input,
+#obal_layout #obal_obsah #hlavni_obsah #centralni_form fieldset dl dd textarea {
+  float: left;
+}
+
+#obal_layout #obal_obsah #hlavni_obsah #centralni_form fieldset dl dt label {
+  display: block;
+  height: 22px;
+  line-height: 20px;
+}
+
+#obal_layout #obal_obsah #hlavni_obsah #centralni_form fieldset dl #centralni_dd_jmeno input,
+#obal_layout #obal_obsah #hlavni_obsah #centralni_form fieldset dl #centralni_dd_prijmeni input,
+#obal_layout #obal_obsah #hlavni_obsah #centralni_form fieldset dl #centralni_dd_email input,
+#obal_layout #obal_obsah #hlavni_obsah #centralni_form fieldset dl #centralni_dd_telefon input,
+#obal_layout #obal_obsah #hlavni_obsah #centralni_form fieldset dl #centralni_dd_predmet input { /* width a height se dopocitava s paddingem */
+  width: 142px;
+  height: 18px;
+  padding: 4px 3px 0 2px;
+  font: 11px Verdana, "Trebuchet MS", sans-serif;
+  border: none;
+  background: url(../obr/input.png) no-repeat left;
+  color: #000;
+}
+
+#obal_layout #obal_obsah #hlavni_obsah #centralni_form fieldset dl dd textarea { /* width a height se dopocitava s paddingem */
+  width: 260px;
+  height: 118px;
+  padding: 3px 2px;
+  font: 11px Verdana, "Trebuchet MS", sans-serif;
+  border: none;
+  background: url(../obr/textarea.png) no-repeat left top;
+  color: #000;
+}
+
+#obal_layout #obal_obsah #hlavni_obsah #centralni_form fieldset dl #centralni_dd_jmeno input:hover,
+#obal_layout #obal_obsah #hlavni_obsah #centralni_form fieldset dl #centralni_dd_prijmeni input:hover,
+#obal_layout #obal_obsah #hlavni_obsah #centralni_form fieldset dl #centralni_dd_email input:hover,
+#obal_layout #obal_obsah #hlavni_obsah #centralni_form fieldset dl #centralni_dd_telefon input:hover,
+#obal_layout #obal_obsah #hlavni_obsah #centralni_form fieldset dl #centralni_dd_predmet input:hover,
+#obal_layout #obal_obsah #hlavni_obsah #centralni_form fieldset dl #centralni_dd_jmeno input:focus,
+#obal_layout #obal_obsah #hlavni_obsah #centralni_form fieldset dl #centralni_dd_prijmeni input:focus,
+#obal_layout #obal_obsah #hlavni_obsah #centralni_form fieldset dl #centralni_dd_email input:focus,
+#obal_layout #obal_obsah #hlavni_obsah #centralni_form fieldset dl #centralni_dd_telefon input:focus,
+#obal_layout #obal_obsah #hlavni_obsah #centralni_form fieldset dl #centralni_dd_predmet input:focus,
+#obal_layout #obal_obsah #hlavni_obsah #centralni_form fieldset dl dd textarea:hover,
+#obal_layout #obal_obsah #hlavni_obsah #centralni_form fieldset dl dd textarea:focus {
+  background-position: right;
+  outline: none; /* focus - chrome, safari */
+}
+
+#obal_layout #obal_obsah #hlavni_obsah #centralni_form fieldset dl dd span {
+  width: auto;
+  float: left;
+  line-height: 12px;
+  padding-left: 3px;
+  padding-top: 2px;
+}
+
+#obal_layout #obal_obsah #hlavni_obsah #centralni_form fieldset #centralni_form_dodatek {
+  width: auto;
+  padding: 0;
+  position: absolute;
+  top: 300px;
+  right: 110px;
+  font: 11px Verdana, "Trebuchet MS", sans-serif;
+  border: none;
+}
+
+#obal_layout #obal_obsah #hlavni_obsah #centralni_form fieldset dl #centralni_dd_odeslat {
+  width: 570px;
+}
+
+#obal_layout #obal_obsah #hlavni_obsah #centralni_form fieldset dl #centralni_dd_odeslat input {
+  width: 82px;
+  height: 22px;
+  display: block;
+  margin-left: 200px;
+  border: none;
+  background: url(../obr/submit.png) no-repeat left;
+  cursor: pointer;
+}
+
+#obal_layout #obal_obsah #hlavni_obsah #centralni_form fieldset dl #centralni_dd_odeslat input:hover {
+  background-position: right;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#obal_layout #obal_obsah #hlavni_obsah a.galerie_v_sekcich_prvni,
+#obal_layout #obal_obsah #hlavni_obsah a.galerie_v_sekcich,
+#obal_layout #obal_obsah #hlavni_obsah a.galerie_v_sekcich_posledni {
+  display: block;
+  width: 124px;
+  height: 94px;
+  float: left;
+}
+
+#obal_layout #obal_obsah #hlavni_obsah a.galerie_v_sekcich_prvni {
+  margin: 12px 20px 6px 60px;
+}
+
+#obal_layout #obal_obsah #hlavni_obsah a.galerie_v_sekcich {
+  margin: 12px 20px 6px 20px;
+}
+
+#obal_layout #obal_obsah #hlavni_obsah a.galerie_v_sekcich_posledni {
+  margin: 12px 0 6px 20px;
+}
+
+#obal_layout #obal_obsah #hlavni_obsah a.galerie_v_sekcich_prvni img,
+#obal_layout #obal_obsah #hlavni_obsah .galerie_v_sekcich img,
+#obal_layout #obal_obsah #hlavni_obsah .galerie_v_sekcich_posledni img {
+  display: block;
+  border: 2px solid #495b31;
+}
+
+#obal_layout #obal_obsah #hlavni_obsah a.galerie_v_sekcich_prvni:hover img,
+#obal_layout #obal_obsah #hlavni_obsah .galerie_v_sekcich:hover img,
+#obal_layout #obal_obsah #hlavni_obsah .galerie_v_sekcich_posledni:hover img {
+  border: 2px solid #393b37;
+}
+
+#obal_layout #obal_obsah #hlavni_obsah #sekce_realizace_zahrad ul {
+  border-bottom: 1px solid #495b31;
+}
+
+#obal_layout #obal_obsah #hlavni_obsah #sekce_prodejna dl {
+  width: 540px;
+  height: 120px;
+  margin: 0 auto;
+  overflow: hidden;
+  border-top: 1px solid #648741;
+  border-bottom: 1px solid #495b31;
+}
+
+#obal_layout #obal_obsah #hlavni_obsah #sekce_prodejna dl dt {
+  width: 390px;
+  margin-left: 3px;
+  float: left;
+  line-height: 120px;
+}
+
+#obal_layout #obal_obsah #hlavni_obsah #sekce_prodejna dl dt a {
+  color: #393b37;
+  text-decoration: none;
+}
+
+#obal_layout #obal_obsah #hlavni_obsah #sekce_prodejna dl dt a:hover {
+  color: #1e4c1b;
+  text-decoration: underline;
+}
+
+#obal_layout #obal_obsah #hlavni_obsah #sekce_prodejna dl dd {
+  width: auto;
+  margin: 10px 10px 0 0;
+  float: right;
+}
+
+#obal_layout #obal_obsah #hlavni_obsah #sekce_prodejna dl dd img {
+  display: block;
+  width: 130px;
+  height: 95px;
+  border: 2px solid #495b31;
+}
+
+#obal_layout #obal_obsah #hlavni_obsah #sekce_prodejna dl dd img:hover {
+  border: 2px solid #393b37;
+}
+
+#obal_layout #obal_obsah #hlavni_obsah ul#kontakt_firmy {
+  height: 120px;
+  padding: 0;
+  padding-left: 1px;
+  overflow: hidden;
+  border-bottom: 1px solid #495b31;
+}
+
+#obal_layout #obal_obsah #hlavni_obsah ul#kontakt_firmy li {
+  height: 120px;
+  margin: 0;
+  list-style: none;
+}
+
+#obal_layout #obal_obsah #hlavni_obsah ul#kontakt_firmy li p {
+  width: auto;
+  margin: 0;
+  padding: 0;
+  border: none;
+}
+
+#obal_layout #obal_obsah #hlavni_obsah ul#kontakt_firmy li p#nadpis_kontaktu {
+  margin: 10px 0;
+  font: 17px "Trebuchet MS", Verdana, Tahoma, Arial, "Arial CE", sans-serif;
+  font-weight: bold;
+}
+
+#obal_layout #obal_obsah #hlavni_obsah ul#kontakt_firmy li#vypis_kontaktu {
+  width: 360px;
+  float: left;
+}
+
+#obal_layout #obal_obsah #hlavni_obsah ul#kontakt_firmy li#obrazek_kontakt {
+  width: 180px;
+  float: right;
+}
+
+#obal_layout #obal_obsah #hlavni_obsah ul#kontakt_firmy li#obrazek_kontakt a {
+  display: block;
+  width: 124px;
+  height: 94px;
+  margin-top: 12px;
+  margin-left: 3px;
+}
+
+#obal_layout #obal_obsah #hlavni_obsah ul#kontakt_firmy li#obrazek_kontakt a img {
+  display: block;
+  border: 2px solid #1e4c1b;
+}
+
+#obal_layout #obal_obsah #hlavni_obsah ul#kontakt_firmy li#obrazek_kontakt a:hover img {
+  border: 2px solid #393b37;
+}
+
+#obal_layout #obal_obsah #hlavni_obsah ul.kontaktni_osoby {
+  margin: 10px auto 12px;
+  padding: 0;
+  padding-left: 1px;
+  border-top: none;
+  font-size: 15px;
+}
+
+#obal_layout #obal_obsah #hlavni_obsah ul.kontaktni_osoby li {
+  margin: 0;
+  list-style: none;
+}
+
+#obal_layout #zapati {
+  height: 67px;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  background: url(../obr/zapati.png) no-repeat;
+}
+
+#obal_layout #zapati p,
+#obal_layout #zapati p#autor a,
+#obal_layout #zapati p#stranka_vygenerovana a {
+  color: #2a441e; /* mootools */
+}
+
+#obal_layout #zapati p {
+  position: absolute;
+  font: 11px Verdana, "Trebuchet MS", sans-serif;
+  font-style: italic;
+}
+
+#obal_layout #zapati p#autor {
+  top: 20px;
+  right: 76px;
+}
+
+#obal_layout #zapati p#stranka_vygenerovana {
+  top: 36px;
+  left: 500px;
+}
+
+#obal_layout #zapati p#stranka_vygenerovana a.aktivni {
+  color: #9ab877 !important; /* mootools */
+}
+
+/* Fugess (Martin) */

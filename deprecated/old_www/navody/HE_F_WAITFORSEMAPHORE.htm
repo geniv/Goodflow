@@ -1,0 +1,66 @@
+<!doctype html public "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=Windows-1250">
+<title>Procedura Wait_for_semaphore</title>
+<link rel='stylesheet' style='text/css' href='../function.css'>
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000">
+
+
+
+<h2 class=function>Wait_for_semaphore</h2>
+<img src='../images/sql.gif' width='44' height='16' border='0' alt='sql' align='middle' hspace='2'>
+
+
+<br><br>
+<div class='typ'>FUNCTION <b>Wait_for_semaphore</b>(IN shandle INT, IN tm INT) RETURNS INT;
+</div>
+
+
+<p><b>Parametry</b></p>
+
+<table border=1 cols=2 width=400>
+
+<tr valign="top">
+<td width=22%><i>shandle</i> </td>
+<td width=78%>identifikace (handle) otevřeného semaforu</td>
+</tr>
+
+<tr valign="top">
+<td width=22%><i>tm</i></td>
+<td width=78%>počet milisekund</td>
+</tr>
+</table><br>
+
+<p><b>Od verze:</b></p>
+
+<p>6.1</p>
+
+<p><b>Popis </b></p>
+
+<p>Pokud semafor zadaný parametrem <i>shandle</i> je zvednutý, funkce ihned skončí a vrátí hodnotu 0. Pokud semafor je spuštěný, pak funkce čeká na zvednutí tohoto semaforu jiným vláknem. V <a href="../xml/html/_iv_logged_users.html">seznamu klientů</a> má čekající vlákno uvedeno stav = 8 . Toto čekání může skončit jedním ze tří způsobů:
+
+<ul>
+	<li>pokud jiné vlákno provede funkci <code>Release_semaphore</code> na stejný semafor, pak funkce skončí a vrátí 0;</li>
+	<li>pokud vyprší časový limit čekání zadaný parametrem <i>tm</i>, pak funkce skončí a vrátí hodnotu -1;</li>
+	<li>pokud dojde k ukončení SQL serveru (nebo k vynucenému ukončení z Klientského prostředí z okna <strong>Monitor</strong> nebo funkcí <a href="../xml/html/f_operation_limits.html"><code>Operation_limits</code></a>), pak funkce skončí a vrátí hodnotu -2. </li>
+</ul>
+
+<p>Časový limit čekání se zadává v milisekundách. Pokud je zadána hodnota -1, pak funkce může čekat neomezeně dlouho. </p>
+
+<p>Pokud funkce vrátí hodnotu -2, vlákno by mělo co nejdříve ukončit svoji činnost.</p>
+
+<p>Více o synchronizaci vláken - <a href="../xml/html/threads.html">podrobnosti</a>.</p>
+
+<p><b>Viz</b></p>
+
+<ul class='viz'>
+ <li><a href="HE_F_CREATESEMAPHORE.htm">Create_semaphore</a> </li>
+ <li><a href="HE_F_CLOSESEMAPHORE.htm">Close_semaphore</a> </li>
+ <li><a href="HE_F_RELEASESEMAPHORE.htm">Release_semaphore</a> </li>
+</ul>
+
+</body>
+</html>

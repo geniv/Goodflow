@@ -1,0 +1,1 @@
+Otevírácí doba: PO - NE: 11.00 - 24.00 hod.

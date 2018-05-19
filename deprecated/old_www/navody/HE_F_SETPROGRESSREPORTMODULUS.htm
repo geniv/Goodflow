@@ -1,0 +1,57 @@
+<!doctype html public "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=Windows-1250">
+<title>Funkce Set_progress_report_modulus</title>
+<link rel='stylesheet' style='text/css' href='../function.css'>
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000">
+
+
+
+<h2 class=function>Set_progress_report_modulus</h2>
+<img src='../images/cpp.gif' width='44' height='16' border='0' alt='c/c++' align='middle' hspace='2'><img src='../images/pascal.gif' width='44' height='16' border='0' alt='pascal' align='middle' hspace='2'>
+
+
+<br><br>
+<div class='typ'>BOOL <b>[cd_]Set_progress_report_modulus</b> ([cdp_t cdp,] unsigned modulus);<br>
+function <b>[cd_]Set_progress_report_modulus</b> ([cdp : cdp_t;] modulus : integer) : Boolean;
+</div>
+
+
+<p><b>Parametry</b></p>
+
+<table border=1 cols=2 frame=box rules=all width=506>
+
+<tr valign="top">
+<td width=17%><i>modulus</i></td>
+<td width=83%>četnost výpisu</td>
+</tr>
+
+<tr valign="top">
+<td width=17%>[<i>cdp </i></td>
+<td width=83%><a href="HE_EXTCD.htm">kontextová proměnná</a> klienta]  </td>
+</tr>
+</table><br>
+
+<p><b>Od verze</b></p>
+
+<p>6.0</p>
+
+<p><b>Popis</b></p>
+
+<p>SQL příkazy nad množinou záznamů (UPDATE, INSERT nebo DELETE), importy a exporty dat a další hromadné operace mohou na stavový řádek klienta průběžně vypisovat počet již zpracovaných záznamů. Funkce řídí četnost vypisování těchto čísel. Je-li <i>modulus</i> rovno 0, nevypisují se čísla žádná, je-li <i>modulus</i> rovno N, vypíše se každé N-té číslo.</p>
+
+<p>Vypisování čísel na stavovém řádku zatěžuje síťovou komunikaci mezi klientem a serverem a zpomaluje práci, přináší však uživateli informaci o postupu déle trvajících operací. Implicitní hodnota <i>modulus</i> je 1024.</p>
+
+<p>Nastavte na 0 při problémech v síťové komunikaci.</p> 
+
+<p>Interaktivně pro vývojové prostředí se provádí <a href="../xml/html/client_commpars.html">zde</a>.</p>
+
+<p><b>Hodnota funkce </b></p>
+
+<p>Funkce vrací TRUE při chybě.</p>
+
+</body>
+</html>

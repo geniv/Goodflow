@@ -1,0 +1,143 @@
+<!doctype html public "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=Windows-1250">
+<title>Výrazy v SQL</title>
+<link rel='stylesheet' style='text/css' href='../function.css'>
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr>
+	<td style="background-image: url(../images/bghead.jpg);
+		background-position: right;
+		background-repeat: no-repeat;">
+	<table width="100%" border="0" cellpadding="0" cellspacing="0"
+		style="background-image:none">
+	<tr>
+		<td style="background-image:none" height="46"
+			width="15%"><img src="../images/title-cz.gif"
+			width="255" height="33"
+			alt="602SQL-Úplná dokumentace"
+			title="602SQL - Úplná dokumentace"
+			border="0"></td>
+		<td width="33%" align="right"><a href="../xml/html/top.html"><img class="floatno"
+			src="../images/index.gif"
+			width="15" height="16"
+			alt="Index" title="Zpět na obsah"
+			border="0" vspace="2"></a> &nbsp;
+			 </td>
+	</tr>
+	</table>
+	</td>
+</tr>
+</table><table class="navigace" border="0" width="100%"  bgcolor="#FFFFBF"><tr> <td
+width="20" align="center"><img class="floatno" src="../images/prev.gif"
+width="15" height="13" alt="&lt;&shy;" title="Předcházející téma"
+border="0"></td><td width="25%"><a
+href="HE_SQL2_FUNKCE.htm">Funkce</a></td> <td width="25%"
+align="right"><img class="floatno" src="../images/up.gif" width="13"
+height="15" alt="Nahoru" title="O jednu úroveň výš" border="0"
+align="middle"></td><td width="25%"><a href="HE_SQL2_JAZYKSQL.htm">Jazyk SQL a jeho implementace</a></td>
+<td width="25%" align="right"><a
+href="HE_SQL2_PODMINKA.htm">Podmínky a predikáty</a></td><td width="20"
+align="center"><img class="floatno" src="../images/next.gif" width="15"
+height="13" alt="&shy;&gt;" title="Následující téma" border="0"></td>
+</tr></table>
+
+
+
+
+<h1><a name="he_sql2_vyrazy"></a>Výrazy (SQL)</h1>
+
+<pre><code>výraz ::= jednoduchý_výraz { operátor jednoduchý_výraz }…
+jednoduchý_výraz ::= literál            |
+                  název_sloupce         |
+                  konstanty             |
+                  subdotaz              |
+                  podmíněný_výraz_CASE  |
+                  volání_funkce         |
+                  odkaz_na_sekvenci     |
+                  proměnná_serveru      |
+                  systémové proměnné    |
+                  proměnná_klienta      |
+                  dynamický_parametr
+operátor ::=  + | - | * | / | MOD | DIV | zřetězení
+</code></pre>
+
+<p>Výrazem rozumíme takový syntakticky správný zápis, který lze vyhodnotit (lze mu přiřadit hodnotu).
+Podrobnosti o elementech jednoduchých výrazů můžete nalézt na těchto stránkách:</p>
+
+<table cols=2 width="90%">
+
+<tr valign="top">
+<td width=50%>&nbsp;&nbsp;<a href="HE_SQL2_ELEMENTY.htm">Literály</a></td>
+<td width=50%><a href="HE_SQL2_VYRAZSLOUPEC.htm">Název sloupce</a></td>
+</tr>
+
+<tr valign="top">
+<td width=50%>&nbsp;&nbsp;<a href="HE_SQL2_VYRAZCASE.htm">Podmíněný výraz CASE</a></td>
+<td width=50%><a href="HE_SQL2_SUBDOTAZ.htm">Sudbotazy</a></td>
+</tr>
+
+
+<tr valign="top">
+<td width=50%>&nbsp;&nbsp;<a href="HE_SQL2_FUNKCE.htm">Funkce v SQL</a></td>
+<td width=50%><a href="HE_SQL2_SEKVENCE.htm">Sekvence</a></td>
+</tr>
+
+<tr valign="top">
+<td width=50%>&nbsp;&nbsp;<a href="HE_SQL2_PROMENNEJAZYKA.htm">Proměnné klienta</a></td>
+<td width=50%><a href="HE_SQL2_DEKLARACEPROMENNYCH.htm">Proměnné serveru</a></td>
+</tr>
+
+<tr valign="top">
+<td width=50%>&nbsp;&nbsp;<a href="../xml/html/sysvars.html">Systémové proměnné serveru</a></td>
+<td width=50%>&nbsp;</td>
+</tr>
+</table><br>
+
+<p>Podrobnosti o operátorech a jejich použití pro různé typy můžete nalézt na těchto stránkách:</p>
+<table cols=3 width="100%">
+<tr valign="top">
+<td>&nbsp;&nbsp;<a href="HE_SQL2_ARITMETICKEVYRAZY.htm">Aritmetické výrazy nad čísly</a> </td>
+<td><a href="HE_SQL2_RETEZCEVYRAZY.htm">Výrazy nad znakovými a binárními řetězci</a> </td>
+<td><a href="HE_SQL2_DATCASVYRAZY.htm">Výrazy nad datem a časem</a> </td>
+</tr>
+</table><br>
+
+<p><em>Dynamické parametry</em> (tj. otazník, např. <code>... WHERE id=? ...</code>) se využívají pouze při přístupu přes ODBC, JDBC přes příslušné API nebo při používání tzv. <a href="../xml/html/php_psql.html">Prepared SQL funkcí</a> v PHP. </p>
+<p>Logický výraz (výraz, který lze vyhodnotit jako TRUE nebo FALSE (nebo UNKNOWN), zde nazývaný také <em>podmínka</em>) má pro svůj význam věnovanou <a href="HE_SQL2_PODMINKA.htm">samostatnou kapitolu</a>.</p>
+
+
+
+<p class="subs">Seznam subsekcí:
+<ul class="subs">
+
+<li><a href="HE_SQL2_VYRAZCASE.htm">Podmíněný výraz CASE</a>
+
+<li><a href="HE_SQL2_VYRAZSLOUPEC.htm">Název sloupce</a>
+
+<li><a href="HE_SQL2_ARITMETICKEVYRAZY.htm">Aritmetické výrazy</a>
+
+<li><a href="HE_SQL2_RETEZCEVYRAZY.htm">Výrazy nad znakovými a binárními řetězci</a>
+
+<li><a href="HE_SQL2_DATCASVYRAZY.htm">Výrazy nad datem a časem</a>
+
+<li><a href="../xml/html/rounding.html">Jak zaokrouhlovat čísla v SQL?</a>
+
+</ul>
+<table class="navigace" border="0" width="100%"  bgcolor="#FFFFBF"><tr> <td
+width="20" align="center"><img class="floatno" src="../images/prev.gif"
+width="15" height="13" alt="&lt;&shy;" title="Předcházející téma"
+border="0"></td><td width="25%"><a
+href="HE_SQL2_FUNKCE.htm">Funkce</a></td> <td width="25%"
+align="right"><img class="floatno" src="../images/up.gif" width="13"
+height="15" alt="Nahoru" title="O jednu úroveň výš" border="0"
+align="middle"></td><td width="25%"><a href="HE_SQL2_JAZYKSQL.htm">Jazyk SQL a jeho implementace</a></td>
+<td width="25%" align="right"><a
+href="HE_SQL2_PODMINKA.htm">Podmínky a predikáty</a></td><td width="20"
+align="center"><img class="floatno" src="../images/next.gif" width="15"
+height="13" alt="&shy;&gt;" title="Následující téma" border="0"></td>
+</tr></table>
+</body>
+</html>

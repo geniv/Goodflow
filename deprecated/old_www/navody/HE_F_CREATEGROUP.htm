@@ -1,0 +1,51 @@
+<!doctype html public "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=Windows-1250">
+<title>Funkce Create_group</title>
+<link rel='stylesheet' style='text/css' href='../function.css'>
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000">
+
+
+
+<h2 class=function>Create_group</h2>
+<img src='../images/cpp.gif' width='44' height='16' border='0' alt='c/c++' align='middle' hspace='2'><img src='../images/pascal.gif' width='44' height='16' border='0' alt='pascal' align='middle' hspace='2'>
+
+
+<br><br>
+<div class='typ'>
+BOOL <b>Create_group</b>(const char * name);<br>
+function <b>Create_group</b>(name : PChar) : Boolean;
+</div>
+
+
+<p><b>Parametry</b></p>
+
+<table border=1 cols=2>
+
+<tr valign="top">
+<td width=23%><i>name</i> </td>
+<td width=77%>jméno skupiny</td>
+</tr>
+</table><br>
+
+<p><b>Popis</b></p>
+
+<p>Funkce vytvoří novou skupinu. Uživatele je možné do skupiny přiřadit pomocí funkce <a href="HE_F_GETSETGROUPROLE.htm"><code>GetSet_group_role</code></a> nebo starší funkce <a href="HE_F_USERTOGROUP.htm"><code>User_to_group</code></a>. Ekvivalentním postupem je volání funkce <a href="HE_F_INSERTOBJECT.htm"><code>Insert_object</code></a> s parametrem <code>CATEG_GROUP</code>. Vytvoření role proveďte voláním funkce <code>Insert_object</code> s parametrem <code>CATEG_ROLE</code>.</p>
+
+<p>V jazyce SQL existuje obdobný příkaz <a href="HE_SQL2_CREATEGROUP.htm">CREATE GROUP</a>.</p>
+
+<p><b>Hodnota funkce </b></p>
+
+<p>Funkce vrátí FALSE při úspěchu, TRUE při chybě.</p>
+
+<p><b>Viz</b></p>
+
+<ul class='viz'>
+<li><a href="HE_F_USERINGROUP.htm">User_in_group</a> 
+
+
+</body>
+</html>

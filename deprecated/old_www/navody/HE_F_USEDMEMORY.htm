@@ -1,0 +1,57 @@
+<!doctype html public "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=Windows-1250">
+<title>Funkce Used_memory</title>
+<link rel='stylesheet' style='text/css' href='../function.css'>
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000">
+
+
+
+<h2 class=function>Used_memory</h2>
+<img src='../images/cpp.gif' width='44' height='16' border='0' alt='c/c++' align='middle' hspace='2'><img src='../images/pascal.gif' width='44' height='16' border='0' alt='pascal' align='middle' hspace='2'>
+
+
+<br><br>
+<div class='typ'>sig32 <b>[cd_]Used_memory</b>([cdp_t cdp], BOOL local);<br>
+function <b>[cd_]Used_memory</b>([cdp : cdp_t]; local : Boolean) : longint;
+</div>
+
+
+<p><b>Parametry</b></p>
+
+<table border=1 cols=2 frame=box rules=all width=400>
+
+<tr valign="top">
+<td width=23%><i>local </i></td>
+<td width=77%>rozlišení paměti klienta a serveru ;</td>
+</tr>
+
+<tr valign="top">
+<td width=23%>[<i>cdp </i></td>
+<td width=77%><a href="HE_EXTCD.htm">kontextová proměnná</a> klienta]  </td>
+</tr>
+</table><br>
+
+<p><b>Popis</b></p>
+
+<p>Funkce zjistí, kolik paměti 602SQL využívá. </p>
+
+<p>Parametr <i>local</i> udává, zda-li se zkoumá využitá paměť na serveru (FALSE) nebo na počítači klienta (TRUE). Hodnota <code>Used_memory(FALSE)</code> je totožná s údajem <strong>Paměť využívaná serverem</strong> na záložce <strong>Interní</strong> okna <strong>Monitor</strong>.</p>
+
+<p>Funkce je určena pro vývojáře složitějších aplikací jako pomůcka při ladění. Neustálý růst využívané paměti může signalizovat chybu v aplikaci, např. při práci s kurzory.</p>
+
+<p><b>Hodnota funkce</b></p>
+
+<p>Funkce vrací počet bytů využité paměti.</p>
+
+<p><b>Viz</b></p>
+
+<ul class='viz'>
+ <li><a href="HE_F_OWNEDCURSORS.htm">Owned_cursors</a></li>
+</ul>
+
+</body>
+</html>

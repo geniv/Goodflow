@@ -1,0 +1,59 @@
+<!doctype html public "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=Windows-1250">
+<title>Funkce waiting</title>
+<link rel='stylesheet' style='text/css' href='../function.css'>
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000">
+
+
+
+<h2 class=function>waiting</h2>
+<img src='../images/cpp.gif' width='44' height='16' border='0' alt='c/c++' align='middle' hspace='2'><img src='../images/pascal.gif' width='44' height='16' border='0' alt='pascal' align='middle' hspace='2'>
+
+
+<br><br>
+<div class='typ'>void <b>[cd_]waiting</b>([cdp_t cdp], sig32 timeout);<br>
+function <b>[cd_]waiting</b>([cdp : cdp_t]; timeout : sig32) : Boolean;<br>
+
+</div>
+
+
+<p><b>Parametry</b></p>
+
+<table border=1 cols=2 frame=box rules=all width=355>
+
+<tr valign="top">
+<td width=25%><i>timeout </i></td>
+<td width=75%>čas v desetinách sekundy</td>
+</tr>
+
+<tr valign="top">
+<td width=25%>[<i>cdp </i></td>
+<td width=75%><a href="HE_EXTCD.htm">kontextová proměnná</a> klienta]  </td>
+</tr>
+</table><br>
+
+<p><b>Od verze:</b></p>
+
+<p>5.0</p>
+
+<p><b>Popis </b></p>
+
+<p>Funkce <b><code>waiting</code></b> určuje, jak dlouho mají požadavky klienta čekat na uvolnění potřebných zámků na serveru. Čas se zadává v desetinách sekundy. Hodnota 0 znamená nečekat vůbec, hodnota -1 čekat neomezeně dlouho. Pokud zadaný čas vyprší a zámek není volný, skončí požadavek chybou NOT_LOCKED (S objektem někdo pracuje). </p>
+<p>Bez volání této funkce platí pro dobu čekání defaultní nastavení společné pro všechny klienty (vlastnost serveru <code>LockWaitingTimeout</code>).</p>
+
+<p><b>Hodnota funkce </b></p>
+
+<p>Funkce vrací při chybě TRUE.</p>
+
+<p><b>Viz</b></p>
+
+<ul class='viz'>
+<li><a href="../xml/html/waiting.html">Zámky a synchronizace požadavků, čekání na uvolnění zdrojů</a> 
+</ul>
+
+</body>
+</html>

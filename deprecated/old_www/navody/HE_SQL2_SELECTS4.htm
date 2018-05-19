@@ -1,0 +1,102 @@
+<!doctype html public "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=Windows-1250">
+<title>Sbírka dotazů str. 4</title>
+<link rel='stylesheet' style='text/css' href='../function.css'>
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr>
+	<td style="background-image: url(../images/bghead.jpg);
+		background-position: right;
+		background-repeat: no-repeat;">
+	<table width="100%" border="0" cellpadding="0" cellspacing="0"
+		style="background-image:none">
+	<tr>
+		<td style="background-image:none" height="46"
+			width="15%"><img src="../images/title-cz.gif"
+			width="255" height="33"
+			alt="602SQL-Úplná dokumentace"
+			title="602SQL - Úplná dokumentace"
+			border="0"></td>
+		<td width="33%" align="right"><a href="../xml/html/top.html"><img class="floatno"
+			src="../images/index.gif"
+			width="15" height="16"
+			alt="Index" title="Zpět na obsah"
+			border="0" vspace="2"></a> &nbsp;
+			 </td>
+	</tr>
+	</table>
+	</td>
+</tr>
+</table><table class="navigace" border="0" width="100%"  bgcolor="#FFFFBF"><tr> <td
+width="20" align="center"><img class="floatno" src="../images/prev.gif"
+width="15" height="13" alt="&lt;&shy;" title="Předcházející téma"
+border="0"></td><td width="25%"><a
+href="HE_SQL2_SELECTS3.htm">Strana 3 (JOIN, COUNT, GROUP BY)</a></td> <td width="25%"
+align="right"><img class="floatno" src="../images/up.gif" width="13"
+height="15" alt="Nahoru" title="O jednu úroveň výš" border="0"
+align="middle"></td><td width="25%"><a href="HE_SQL2_SELECTS.htm">Sbírka příkladů SQL dotazů</a></td>
+<td width="25%" align="right"><a
+href="HE_SQL2_SELECTS5.htm">Strana 5 (Self-join, DISTINCT)</a></td><td width="20"
+align="center"><img class="floatno" src="../images/next.gif" width="15"
+height="13" alt="&shy;&gt;" title="Následující téma" border="0"></td>
+</tr></table>
+
+
+<h1><a name="he_sql2_selects4"></a>Sbírka dotazů – str. 4</h1>
+
+<p><b>Příklad 7</b></p>
+
+<p><b>Zadání:</b> Vypište seznam odběratelů, průměrnou hodnotu jejich obratu, s&nbsp;vyloučením těch, kteří odebrali zboží pouze jednou.</p>
+
+<p><b>SQL:</b> </p>
+
+<pre><code>  SELECT Firmy.nazev, AVG(Faktury.castka),COUNT(*)
+  FROM Faktury, Firmy
+  WHERE (Faktury.firma = Firmy.cislo) AND (Firmy.status='O')
+  GROUP BY Firmy.nazev
+  HAVING COUNT(*)&gt;1</code></pre>
+
+<p><b>Poznámky:</b> </p>
+
+<p><b>a)</b> Sloupec STATUS je typu Znak (Char) a proto se musí zapisovat pouze v&nbsp;apostrofech (') a nikdy v&nbsp;uvozovkách (") jako (někdy) typ řetězec.</p>
+
+<p><b>b) </b>Všimněte si, čím se od sebe liší podmínky WHERE a HAVING. Podmínka WHERE se dá uplatnit ještě <b>před</b> sestavením skupin, zatímco podmínka HAVING se může vyhodnotit až<b> po</b> sestavení skupin.</p>
+
+<p><b>Příklad</b><b> 8</b></p>
+
+<p><b>Zadání:</b> Zjistěte průměrnou dobu zaplacení faktur odběrateli.</p>
+
+<p><b>SQL:</b> </p>
+
+<pre><code>  SELECT nazev, AVG(zaplaceno-dat1)
+  FROM Faktury, Firmy
+  WHERE Faktury.firma= Firmy.cislo
+    AND (druh=2 AND zaplaceno IS NOT NULL)
+  GROUP BY Firmy.nazev</code></pre>
+
+<p><b>Poznámky:</b> </p>
+
+<p><b>a)</b> Všimněte si, že agregační funkce může mít za parametr i výraz. </p>
+
+<p><b>b)</b> Výsledek agregační funkce bude vždy tentýž jako typ argumentu, proto je průměrný počet dnů uveden jako celé číslo.</p>
+
+
+
+<table class="navigace" border="0" width="100%"  bgcolor="#FFFFBF"><tr> <td
+width="20" align="center"><img class="floatno" src="../images/prev.gif"
+width="15" height="13" alt="&lt;&shy;" title="Předcházející téma"
+border="0"></td><td width="25%"><a
+href="HE_SQL2_SELECTS3.htm">Strana 3 (JOIN, COUNT, GROUP BY)</a></td> <td width="25%"
+align="right"><img class="floatno" src="../images/up.gif" width="13"
+height="15" alt="Nahoru" title="O jednu úroveň výš" border="0"
+align="middle"></td><td width="25%"><a href="HE_SQL2_SELECTS.htm">Sbírka příkladů SQL dotazů</a></td>
+<td width="25%" align="right"><a
+href="HE_SQL2_SELECTS5.htm">Strana 5 (Self-join, DISTINCT)</a></td><td width="20"
+align="center"><img class="floatno" src="../images/next.gif" width="15"
+height="13" alt="&shy;&gt;" title="Následující téma" border="0"></td>
+</tr></table>
+</body>
+</html>

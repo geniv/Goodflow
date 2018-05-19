@@ -1,0 +1,523 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="cs"><head>
+
+
+
+  <meta http-equiv="Content-Type" content="application/xhtml+xml; charset=iso-8859-2">
+  <meta http-equiv="Content-Language" content="cs">
+  <meta http-equiv="imagetoolbar" content="no">
+  <meta name="autosize" content="off">
+  <meta name="ICBM" content="49.679, 18.3584">
+  <meta name="DC.title" content="CrazyDog ~ Multi-web">
+  <meta name="description" content="Zábava, SMS zdarma, Flash hry, Online TV, Weblog, Články, Ubuntu Linux, Multiplayer hry, PHP scripty, Fotogalerie, Virtuální pokec">
+  <meta name="keywords" content="Flash videa,hry,hudba,Vtipné SMS,Obrázkové vtipy,Tapety,Ubuntu Linux,Free software,Torrent,PHP,JS">
+  <meta name="Author" content="all: Bronislav [CrazyDog] Filip; e-mail: crazydoga(a)gmail.com">
+  <meta name="robots" content="index,follow">
+  <meta name="googlebot" content="snippet,archive"><title>CrazyDog ~ Multi-web [Článek na téma: Zjištění operačního systému v PHP]</title>
+  
+  <link rel="stylesheet" href="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20Zji%C5%A1t%C4%9Bn%C3%AD%20opera%C4%8Dn%C3%ADho%20syst%C3%A9mu%20v%20PHP%5D_soubory/style.css" type="text/css" media="all">
+  <link rel="stylesheet" href="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20Zji%C5%A1t%C4%9Bn%C3%AD%20opera%C4%8Dn%C3%ADho%20syst%C3%A9mu%20v%20PHP%5D_soubory/tisk.css" type="text/css" media="print">
+  <link rel="shortcut icon" href="http://crazydog.cz/favicon.ico" type="image/x-icon">
+  <link rel="alternate" href="http://crazydog.cz/rss/clanky/" type="application/rss+xml" title="Články">
+  <script type="text/javascript" src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20Zji%C5%A1t%C4%9Bn%C3%AD%20opera%C4%8Dn%C3%ADho%20syst%C3%A9mu%20v%20PHP%5D_soubory/util2.js"></script>
+  <link rel="index" href="http://crazydog.cz/" title="Úvodní stránka">
+  <link rel="author" href="http://crazydog.cz/home/webmaster/" title="Kontakt">
+  <link rel="contents" href="http://crazydog.cz/home/mapa-stranek/" title="Mapa stránek">
+  <link rel="copyright" href="http://crazydog.cz/home/webmaster/#copyright" title="Autorská práva webu"><!--<link rel="search" href="/home/hledat/" title="Hledaček" />-->
+  
+  <link rel="help" href="http://crazydog.cz/home/faq/" title="FAQ"></head><body><div id="topdown"><div id="header"></div>
+<div id="levy-stin"></div>
+<div id="pravy-stin"></div>
+  <div id="horni-lista">
+  <div id="horni-lista-prechod"></div>
+  <div id="horni-lista-prava">
+    <div class="kontakt" title="Kontakt"><a href="http://crazydog.cz/home/webmaster/"></a></div>
+    <div class="napoveda" title="FAQ - Nápověda"><a href="http://crazydog.cz/home/faq/"></a></div>
+    <div class="sitemap" title="Mapa stránek"><a href="http://crazydog.cz/home/mapa-stranek/"></a></div>
+    <div class="rss" title="RSS článků"><a href="http://crazydog.cz/rss/clanky/"></a></div>
+    <div class="tisk" title="Tisknout!"><a href="javascript: window.print()"></a></div>
+  </div>
+  </div>
+  <div id="logo"><a href="http://crazydog.cz/"><span>CrazyDog ~ Multi-web</span></a></div>
+  <div class="pngnadpis"></div>
+<div id="menu"><ul>
+  <li class="aktiv"><a href="http://crazydog.cz/" accesskey="h"><span>H</span>ome</a></li>
+  <li><a href="http://crazydog.cz/blog/" accesskey="b"><span>B</span>log</a></li>
+  <li><a href="http://crazydog.cz/zabava/" accesskey="z"><span>Z</span>ábava</a></li>
+  <li><a href="http://crazydog.cz/ke-stazeni/" accesskey="k"><span>K</span>e stažení</a></li>
+  <li><a href="http://crazydog.cz/fotogalerie/" accesskey="f"><span>F</span>otogalerie</a></li>
+  <li><a href="http://crazydog.cz/ubuntu/" accesskey="u"><span>U</span>buntu</a></li>
+  <li><a href="http://crazydog.cz/pro-web/" accesskey="p"><span>P</span>ro web</a></li>
+</ul></div>
+<div id="menu-right">
+  <form method="post" action="/home/hledat/"><div>
+  <input class="search" name="search" value="" type="text">
+  <input class="tlacitko" src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20Zji%C5%A1t%C4%9Bn%C3%AD%20opera%C4%8Dn%C3%ADho%20syst%C3%A9mu%20v%20PHP%5D_soubory/search-tlacitko.jpg" type="image">
+  </div></form>
+</div>
+  
+<div id="center"><div id="center-rozek"></div>
+<!-- Hlavni obsah stranky -->
+<h1># Zjištění operačního systému v PHP</h1>
+<div class="h2pod seda">Ne, 21. říj 2007, 15:57</div>
+<div class="img60"><img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20Zji%C5%A1t%C4%9Bn%C3%AD%20opera%C4%8Dn%C3%ADho%20syst%C3%A9mu%20v%20PHP%5D_soubory/php.jpg" alt="logo"></div>
+<p>Tento jednoduchý podmínkový script vám vypíše jaký operační systém
+používá váš návštěvník. Samozřejmě lze script rozšířit i&nbsp;o zápis
+do&nbsp;databáze a&nbsp;tím vypisovat statistiky, ale teď
+k&nbsp;samotnému scriptu, který vypadá přesně takhle:
+</p><code><span class="modra">$agent</span> = <span class="modra">$_SERVER</span>[<span class="zelena">"HTTP_USER_AGENT"</span>];
+<br><strong>if</strong>(strpos(<span class="modra">$agent</span>, <span class="zelena">"Win"</span>) !== false) {
+<br><span class="seda italic">/* Windows */</span>
+<br> <strong>if</strong>(strpos(<span class="modra">$agent</span>, <span class="zelena">"Windows Vista"</span>) !== false<strong> OR </strong>strpos(<span class="modra">$agent</span>, <span class="zelena">"Windows NT 6.0"</span>) !== false) {
+<br>    <span class="modra">$os</span> = <span class="zelena">"Windows Vista"</span>;
+<br>  } <strong>else</strong>if(strpos(<span class="modra">$agent</span>, <span class="zelena">"Windows XP"</span>) !== false<strong> OR </strong>strpos(<span class="modra">$agent</span>, <span class="zelena">"Windows NT 5.1"</span>) !== false) {
+<br>    <span class="modra">$os</span> = <span class="zelena">"Windows XP"</span>;
+<br>  } <strong>else</strong>if(strpos(<span class="modra">$agent</span>, <span class="zelena">"Windows NT 5.2"</span>)) {
+<br>  	<span class="modra">$os</span> = <span class="zelena">"Windows 2003"</span>;
+<br>  } <strong>else</strong>if(strpos(<span class="modra">$agent</span>, <span class="zelena">"Windows NT 5.0"</span>) !== false<strong> OR </strong>strpos(<span class="modra">$agent</span>, <span class="zelena">"Windows 2000"</span>)) {
+<br>    <span class="modra">$os</span> = <span class="zelena">"Windows 2000"</span>;
+<br>  } <strong>else</strong>if(strpos(<span class="modra">$agent</span>, <span class="zelena">"Win 9x 4.90"</span>) !== false<strong> OR </strong>strpos(<span class="modra">$agent</span>, <span class="zelena">"Windows ME"</span>) !== false) {
+<br>    <span class="modra">$os</span> = <span class="zelena">"Windows ME"</span>;
+<br>  } <strong>else</strong>if(strpos(<span class="modra">$agent</span>, <span class="zelena">"Windows 98"</span>) !== false<strong> OR </strong>strpos(<span class="modra">$agent</span>, <span class="zelena">"Win98"</span>)<strong> OR </strong>strpos(<span class="modra">$agent</span>, <span class="zelena">"Windows 4.10"</span>) !== false) {
+<br>    <span class="modra">$os</span> = <span class="zelena">"Windows 98"</span>;
+<br>  } <strong>else</strong>if(strpos(<span class="modra">$agent</span>, <span class="zelena">"Windows 95"</span>) !== false<strong> OR </strong>strpos(<span class="modra">$agent</span>, <span class="zelena">"Win95"</span>) !== false) {
+<br>    <span class="modra">$os</span> = <span class="zelena">"Windows 95"</span>;
+<br>  } <strong>else</strong>if(strpos(<span class="modra">$agent</span>, <span class="zelena">"Windows CE"</span>) !== false) {
+<br>    <span class="modra">$os</span> = <span class="zelena">"Windows CE"</span>;
+<br>  } <strong>else</strong> {
+<br>    <span class="modra">$os</span> = <span class="zelena">"Windows"</span>;
+<br>  }
+<br><span class="seda italic">/* Mac */</span>
+<br>} <strong>else</strong>if(strpos(<span class="modra">$agent</span>, <span class="zelena">"Mac"</span>) !== false) {
+<br> <strong>if</strong>(strpos(<span class="modra">$agent</span>, <span class="zelena">"Mac OS X"</span>) !== false) {
+<br>    <span class="modra">$os</span> = <span class="zelena">"Mac OS X"</span>;
+<br>  } <strong>else</strong> {
+<br>    <span class="modra">$os</span> = <span class="zelena">"Macintosh"</span>;
+<br>  }
+<br><span class="seda italic">/* Linux */</span>
+<br>} <strong>else</strong>if(strpos(<span class="modra">$agent</span>, <span class="zelena">"Linux"</span>) !== false) {
+<br> <strong>if</strong>(strpos(<span class="modra">$agent</span>, <span class="zelena">"Ubuntu"</span>) !== false) {
+<br>    <span class="modra">$os</span> = <span class="zelena">"Ubuntu Linux"</span>;
+<br>  } <strong>else</strong>if(strpos(<span class="modra">$agent</span>, <span class="zelena">"Kubuntu"</span>) !== false) {
+<br>    <span class="modra">$os</span> = <span class="zelena">"Kubuntu Linux"</span>;
+<br>  } <strong>else</strong>if(strpos(<span class="modra">$agent</span>, <span class="zelena">"Xubuntu"</span>) !== false) {
+<br>    <span class="modra">$os</span> = <span class="zelena">"Xubuntu Linux"</span>;
+<br>  } <strong>else</strong>if(strpos(<span class="modra">$agent</span>, <span class="zelena">"Debian"</span>) !== false) {
+<br>    <span class="modra">$os</span> = <span class="zelena">"Debian Linux"</span>;
+<br>  } <strong>else</strong>if(strpos(<span class="modra">$agent</span>, <span class="zelena">"Fedora"</span>) !== false) {
+<br>    <span class="modra">$os</span> = <span class="zelena">"Fedora Core Linux"</span>;
+<br>  } <strong>else</strong>if(strpos(<span class="modra">$agent</span>, <span class="zelena">"Gentoo"</span>) !== false) {
+<br>    <span class="modra">$os</span> = <span class="zelena">"Gentoo Linxu"</span>;
+<br>  } <strong>else</strong>if(strpos(<span class="modra">$agent</span>, <span class="zelena">"SuSE"</span>) !== false<strong> OR </strong>strpos(<span class="modra">$agent</span>, <span class="zelena">"SUSE"</span>) !== false) {
+<br>    <span class="modra">$os</span> = <span class="zelena">"SuSE Linux"</span>;
+<br>  } <strong>else</strong> {
+<br>    <span class="modra">$os</span> = <span class="zelena">"Linux"</span>;
+<br>  }
+<br><span class="seda italic">/* Symbian */</span>
+<br>} <strong>else</strong>if(strpos(<span class="modra">$agent</span>, <span class="zelena">"Symbian"</span>) !== false<strong> OR </strong>strpos(<span class="modra">$agent</span>, <span class="zelena">"S60"</span>) !== false) {
+<br>  <span class="modra">$os</span> = <span class="zelena">"Symbian"</span>;
+<br>} <strong>else</strong> {
+<br>  <span class="modra">$os</span> = <span class="zelena">""</span>;
+<br>}
+<br>?&gt;</code><p>S tím, že operační systém vypíšete <code class="inline">echo $os;</code>
+a&nbsp;nebo jak jsem výše psal, můžete použit i&nbsp;zapiš
+do&nbsp;MySQL ať už pro&nbsp;statistiky nebo jen pro&nbsp;zápis
+do&nbsp;návštěvní knihy. Ať vám script slouží jen v dobrém.</p>
+<div class="text-r">
+<a href="http://crazydog.cz/home/registrovani/CrazyDog/">CrazyDog&nbsp;<img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20Zji%C5%A1t%C4%9Bn%C3%AD%20opera%C4%8Dn%C3%ADho%20syst%C3%A9mu%20v%20PHP%5D_soubory/muz.gif" alt="muž"></a> |
+<img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20Zji%C5%A1t%C4%9Bn%C3%AD%20opera%C4%8Dn%C3%ADho%20syst%C3%A9mu%20v%20PHP%5D_soubory/plus.gif" alt="+">
+<a href="http://crazydog.cz/pro-web/php-scripty/zjisteni-operacniho-systemu-v-php/znamka-1/" rel="nofollow">1</a>
+<a href="http://crazydog.cz/pro-web/php-scripty/zjisteni-operacniho-systemu-v-php/znamka-2/" rel="nofollow">2</a>
+<a href="http://crazydog.cz/pro-web/php-scripty/zjisteni-operacniho-systemu-v-php/znamka-3/" rel="nofollow">3</a>
+<a href="http://crazydog.cz/pro-web/php-scripty/zjisteni-operacniho-systemu-v-php/znamka-4/" rel="nofollow">4</a>
+<a href="http://crazydog.cz/pro-web/php-scripty/zjisteni-operacniho-systemu-v-php/znamka-5/" rel="nofollow">5</a>
+<img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20Zji%C5%A1t%C4%9Bn%C3%AD%20opera%C4%8Dn%C3%ADho%20syst%C3%A9mu%20v%20PHP%5D_soubory/minus.gif" alt="-"> |
+<span class="seda">529x</span> |
+<a href="http://crazydog.cz/pro-web/php-scripty/" title="Kategorie">PHP scripty</a> |
+<a href="http://crazydog.cz/pro-web/php-scripty/zjisteni-operacniho-systemu-v-php/#komentare">Komentářů: <strong>15</strong></a></div>
+<div class="text-r t10">
+<script type="text/javascript">
+  document.writeln('<a href="http://linkuj.cz/?id=linkuj&url='+encodeURIComponent(document.URL)+'&title='+encodeURIComponent(document.title)+'"><img src="/css/obr/linkuj.png" alt="Linkuj.cz" /></a>');
+  document.writeln('<a href="http://www.jagg.cz/bookmarks.php?action=add&address='+encodeURIComponent(document.URL)+'&title='+encodeURIComponent(document.title)+'"><img src="/css/obr/jagg.gif" alt="Jagg.cz" /></a>');
+  document.writeln('<a href="http://zalinkuj.cz/submit.php?url='+encodeURIComponent(document.URL)+'&title='+encodeURIComponent(document.title)+'"><img src="/css/obr/zalinkuj.png" alt="Jagg.cz" /></a>');
+</script><a href="http://linkuj.cz/?id=linkuj&amp;url=http%3A%2F%2Fcrazydog.cz%2Fpro-web%2Fphp-scripty%2Fzjisteni-operacniho-systemu-v-php%2F&amp;title=CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%3A%20Zji%C5%A1t%C4%9Bn%C3%AD%20opera%C4%8Dn%C3%ADho%20syst%C3%A9mu%20v%20PHP%5D"><img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20Zji%C5%A1t%C4%9Bn%C3%AD%20opera%C4%8Dn%C3%ADho%20syst%C3%A9mu%20v%20PHP%5D_soubory/linkuj.png" alt="Linkuj.cz"></a>
+<a href="http://www.jagg.cz/bookmarks.php?action=add&amp;address=http%3A%2F%2Fcrazydog.cz%2Fpro-web%2Fphp-scripty%2Fzjisteni-operacniho-systemu-v-php%2F&amp;title=CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%3A%20Zji%C5%A1t%C4%9Bn%C3%AD%20opera%C4%8Dn%C3%ADho%20syst%C3%A9mu%20v%20PHP%5D"><img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20Zji%C5%A1t%C4%9Bn%C3%AD%20opera%C4%8Dn%C3%ADho%20syst%C3%A9mu%20v%20PHP%5D_soubory/jagg.gif" alt="Jagg.cz"></a>
+<a href="http://zalinkuj.cz/submit.php?url=http%3A%2F%2Fcrazydog.cz%2Fpro-web%2Fphp-scripty%2Fzjisteni-operacniho-systemu-v-php%2F&amp;title=CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%3A%20Zji%C5%A1t%C4%9Bn%C3%AD%20opera%C4%8Dn%C3%ADho%20syst%C3%A9mu%20v%20PHP%5D"><img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20Zji%C5%A1t%C4%9Bn%C3%AD%20opera%C4%8Dn%C3%ADho%20syst%C3%A9mu%20v%20PHP%5D_soubory/zalinkuj.png" alt="Jagg.cz"></a>
+
+</div>
+<div class="komentare">
+<h2 id="komentare">Komentáře</h2>
+<div class="ram-top"></div>
+<div class="ram"><div class="ram-center"><div class="ram-leva">
+<div class="img60-book"><img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20Zji%C5%A1t%C4%9Bn%C3%AD%20opera%C4%8Dn%C3%ADho%20syst%C3%A9mu%20v%20PHP%5D_soubory/noavatar.jpg" alt="avatar"></div>
+</div><div class="ram-prava">
+<div class="ram-info-t"><div class="ram-info-l kursor" onclick="smajlik('[nick]Vitek[/nick] ')">Vitek <a href="http://www.vit-stekly.cz/"><img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20Zji%C5%A1t%C4%9Bn%C3%AD%20opera%C4%8Dn%C3%ADho%20syst%C3%A9mu%20v%20PHP%5D_soubory/web.gif" title="Web" alt="web"></a>
+</div><div class="ram-info-r">
+<span class="cislo" id="337">[337]</span></div></div><div class="ram-book-text">
+<p>Není rovnou jednoduší tohle:
+</p><p>
+</p><p>$co = $_SERVER["HTTP_USER_AGENT"];</p>
+</div><div class="ram-info"><div class="ram-info-l">
+Opera 9.23 / Windows Vista
+</div><div class="ram-info-r">Ne, 21. říj 2007, 17:21</div></div>
+</div></div></div>
+<div class="ram-bottom ram-book-t"></div>
+
+<div class="ram-top"></div>
+<div class="ram"><div class="ram-center"><div class="ram-leva">
+<div class="img60-book"><img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20Zji%C5%A1t%C4%9Bn%C3%AD%20opera%C4%8Dn%C3%ADho%20syst%C3%A9mu%20v%20PHP%5D_soubory/CrazyDog_30-1-08.jpg" alt="avatar"></div>
+</div><div class="ram-prava">
+<div class="ram-info-t"><div class="ram-info-l kursor" onclick="smajlik('{1} ')"><a href="http://crazydog.cz/home/registrovani/CrazyDog/"><img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20Zji%C5%A1t%C4%9Bn%C3%AD%20opera%C4%8Dn%C3%ADho%20syst%C3%A9mu%20v%20PHP%5D_soubory/administrator.gif" alt="" title="Administrátor"></a> 
+CrazyDog&nbsp;<img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20Zji%C5%A1t%C4%9Bn%C3%AD%20opera%C4%8Dn%C3%ADho%20syst%C3%A9mu%20v%20PHP%5D_soubory/muz.gif" alt="muž"> <a href="mailto:crazydoga%5Bzavinac%5Dgmail%5Btecka%5Dcom"><img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20Zji%C5%A1t%C4%9Bn%C3%AD%20opera%C4%8Dn%C3%ADho%20syst%C3%A9mu%20v%20PHP%5D_soubory/mail.gif" title="Email" alt="mail"></a>
+<a href="mailto:crazydoga%5Bzavinac%5Dgmail%5Btecka%5Dcom"><img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20Zji%C5%A1t%C4%9Bn%C3%AD%20opera%C4%8Dn%C3%ADho%20syst%C3%A9mu%20v%20PHP%5D_soubory/msn.gif" title="MSN" alt="msn"></a>
+</div><div class="ram-info-r">
+<span class="cislo" id="338">[338]</span></div></div><div class="ram-book-text">
+<p><strong>Vitek:</strong> Nechápu co tím chtěl básník říct. <img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20Zji%C5%A1t%C4%9Bn%C3%AD%20opera%C4%8Dn%C3%ADho%20syst%C3%A9mu%20v%20PHP%5D_soubory/12.gif" class="smiles" title="Popletený" alt="[Confused]"> </p>
+</div><div class="ram-info"><div class="ram-info-l">
+Opera 9.24 / Windows XP
+</div><div class="ram-info-r">Ne, 21. říj 2007, 17:54</div></div>
+</div></div></div>
+<div class="ram-bottom ram-book-t"></div>
+
+<div class="ram-top"></div>
+<div class="ram"><div class="ram-center"><div class="ram-leva">
+<div class="img60-book"><img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20Zji%C5%A1t%C4%9Bn%C3%AD%20opera%C4%8Dn%C3%ADho%20syst%C3%A9mu%20v%20PHP%5D_soubory/Benny_29-8-07.jpg" alt="avatar"></div>
+</div><div class="ram-prava">
+<div class="ram-info-t"><div class="ram-info-l kursor" onclick="smajlik('{30} ')"><a href="http://crazydog.cz/home/registrovani/Benny/"><img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20Zji%C5%A1t%C4%9Bn%C3%AD%20opera%C4%8Dn%C3%ADho%20syst%C3%A9mu%20v%20PHP%5D_soubory/uzivatel.gif" alt="" title="Uživatel"></a> 
+Benny&nbsp;<img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20Zji%C5%A1t%C4%9Bn%C3%AD%20opera%C4%8Dn%C3%ADho%20syst%C3%A9mu%20v%20PHP%5D_soubory/muz.gif" alt="muž"> <a href="mailto:ladik%5Btecka%5Dbenes%5Bzavinac%5Dgmail%5Btecka%5Dcom"><img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20Zji%C5%A1t%C4%9Bn%C3%AD%20opera%C4%8Dn%C3%ADho%20syst%C3%A9mu%20v%20PHP%5D_soubory/mail.gif" title="Email" alt="mail"></a>
+<a href="http://www.benny-cz.net/"><img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20Zji%C5%A1t%C4%9Bn%C3%AD%20opera%C4%8Dn%C3%ADho%20syst%C3%A9mu%20v%20PHP%5D_soubory/web.gif" alt="web"></a>
+<a href="http://www.icq.com/233286535"><img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20Zji%C5%A1t%C4%9Bn%C3%AD%20opera%C4%8Dn%C3%ADho%20syst%C3%A9mu%20v%20PHP%5D_soubory/icq.gif" alt="icq" title="ICQ"></a>
+<a href="mailto:Lada%5Btecka%5DBenes%5Bzavinac%5Dhotmail%5Btecka%5Dcom"><img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20Zji%C5%A1t%C4%9Bn%C3%AD%20opera%C4%8Dn%C3%ADho%20syst%C3%A9mu%20v%20PHP%5D_soubory/msn.gif" title="MSN" alt="msn"></a>
+</div><div class="ram-info-r">
+<span class="cislo" id="339">[339]</span></div></div><div class="ram-book-text">
+<p><strong>Vitek:</strong> Je to jednoduší, ale neukáže ti to že
+uživatel má např. &#8222;Windows Vista&#8220; ale &#8222;Windows NT 6.0&#8220; a&nbsp;to
+běžnému užvateli nic neřekne</p>
+</div><div class="ram-info"><div class="ram-info-l">
+Firefox 2.0.0.8 / Windows Vista
+</div><div class="ram-info-r">Ne, 21. říj 2007, 18:28</div></div>
+</div></div></div>
+<div class="ram-bottom ram-book-t"></div>
+
+<div class="ram-top"></div>
+<div class="ram"><div class="ram-center"><div class="ram-leva">
+<div class="img60-book"><img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20Zji%C5%A1t%C4%9Bn%C3%AD%20opera%C4%8Dn%C3%ADho%20syst%C3%A9mu%20v%20PHP%5D_soubory/CrazyDog_30-1-08.jpg" alt="avatar"></div>
+</div><div class="ram-prava">
+<div class="ram-info-t"><div class="ram-info-l kursor" onclick="smajlik('{1} ')"><a href="http://crazydog.cz/home/registrovani/CrazyDog/"><img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20Zji%C5%A1t%C4%9Bn%C3%AD%20opera%C4%8Dn%C3%ADho%20syst%C3%A9mu%20v%20PHP%5D_soubory/administrator.gif" alt="" title="Administrátor"></a> 
+CrazyDog&nbsp;<img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20Zji%C5%A1t%C4%9Bn%C3%AD%20opera%C4%8Dn%C3%ADho%20syst%C3%A9mu%20v%20PHP%5D_soubory/muz.gif" alt="muž"> <a href="mailto:crazydoga%5Bzavinac%5Dgmail%5Btecka%5Dcom"><img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20Zji%C5%A1t%C4%9Bn%C3%AD%20opera%C4%8Dn%C3%ADho%20syst%C3%A9mu%20v%20PHP%5D_soubory/mail.gif" title="Email" alt="mail"></a>
+<a href="mailto:crazydoga%5Bzavinac%5Dgmail%5Btecka%5Dcom"><img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20Zji%C5%A1t%C4%9Bn%C3%AD%20opera%C4%8Dn%C3%ADho%20syst%C3%A9mu%20v%20PHP%5D_soubory/msn.gif" title="MSN" alt="msn"></a>
+</div><div class="ram-info-r">
+<span class="cislo" id="343">[343]</span></div></div><div class="ram-book-text">
+<p><strong>Benny&nbsp;<img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20Zji%C5%A1t%C4%9Bn%C3%AD%20opera%C4%8Dn%C3%ADho%20syst%C3%A9mu%20v%20PHP%5D_soubory/muz.gif" alt="muž">:</strong> Ne jen to, ale i&nbsp;spousta dalších informaci, které většině nic neřekne.</p>
+</div><div class="ram-info"><div class="ram-info-l">
+Firefox 2.0.0.7 / Windows XP
+</div><div class="ram-info-r">Ne, 21. říj 2007, 20:18</div></div>
+</div></div></div>
+<div class="ram-bottom ram-book-t"></div>
+
+<div class="ram-top"></div>
+<div class="ram"><div class="ram-center"><div class="ram-leva">
+<div class="img60-book"><img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20Zji%C5%A1t%C4%9Bn%C3%AD%20opera%C4%8Dn%C3%ADho%20syst%C3%A9mu%20v%20PHP%5D_soubory/noavatar.jpg" alt="avatar"></div>
+</div><div class="ram-prava">
+<div class="ram-info-t"><div class="ram-info-l kursor" onclick="smajlik('[nick]Nofuj[/nick] ')">Nofuj </div><div class="ram-info-r">
+<span class="cislo" id="346">[346]</span></div></div><div class="ram-book-text">
+<p>Tohle je hnus, existuje jednoduzsi a&nbsp;cistsi reseni.</p>
+</div><div class="ram-info"><div class="ram-info-l">
+Firefox 2.0.0.8 / Linux
+</div><div class="ram-info-r">Po, 22. říj 2007, 11:04</div></div>
+</div></div></div>
+<div class="ram-bottom ram-book-t"></div>
+
+<div class="ram-top"></div>
+<div class="ram"><div class="ram-center"><div class="ram-leva">
+<div class="img60-book"><img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20Zji%C5%A1t%C4%9Bn%C3%AD%20opera%C4%8Dn%C3%ADho%20syst%C3%A9mu%20v%20PHP%5D_soubory/noavatar.jpg" alt="avatar"></div>
+</div><div class="ram-prava">
+<div class="ram-info-t"><div class="ram-info-l kursor" onclick="smajlik('[nick]cvachta[/nick] ')">cvachta </div><div class="ram-info-r">
+<span class="cislo" id="347">[347]</span></div></div><div class="ram-book-text">
+<p>Case!</p>
+</div><div class="ram-info"><div class="ram-info-l">
+Firefox 2.0.0.3 / Windows 2000
+</div><div class="ram-info-r">Po, 22. říj 2007, 11:45</div></div>
+</div></div></div>
+<div class="ram-bottom ram-book-t"></div>
+
+<div class="ram-top"></div>
+<div class="ram"><div class="ram-center"><div class="ram-leva">
+<div class="img60-book"><img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20Zji%C5%A1t%C4%9Bn%C3%AD%20opera%C4%8Dn%C3%ADho%20syst%C3%A9mu%20v%20PHP%5D_soubory/CrazyDog_30-1-08.jpg" alt="avatar"></div>
+</div><div class="ram-prava">
+<div class="ram-info-t"><div class="ram-info-l kursor" onclick="smajlik('{1} ')"><a href="http://crazydog.cz/home/registrovani/CrazyDog/"><img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20Zji%C5%A1t%C4%9Bn%C3%AD%20opera%C4%8Dn%C3%ADho%20syst%C3%A9mu%20v%20PHP%5D_soubory/administrator.gif" alt="" title="Administrátor"></a> 
+CrazyDog&nbsp;<img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20Zji%C5%A1t%C4%9Bn%C3%AD%20opera%C4%8Dn%C3%ADho%20syst%C3%A9mu%20v%20PHP%5D_soubory/muz.gif" alt="muž"> <a href="mailto:crazydoga%5Bzavinac%5Dgmail%5Btecka%5Dcom"><img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20Zji%C5%A1t%C4%9Bn%C3%AD%20opera%C4%8Dn%C3%ADho%20syst%C3%A9mu%20v%20PHP%5D_soubory/mail.gif" title="Email" alt="mail"></a>
+<a href="mailto:crazydoga%5Bzavinac%5Dgmail%5Btecka%5Dcom"><img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20Zji%C5%A1t%C4%9Bn%C3%AD%20opera%C4%8Dn%C3%ADho%20syst%C3%A9mu%20v%20PHP%5D_soubory/msn.gif" title="MSN" alt="msn"></a>
+</div><div class="ram-info-r">
+<span class="cislo" id="348">[348]</span></div></div><div class="ram-book-text">
+<p><strong>Nofuj:</strong> Tak se&nbsp;pochlub, ale tak aby fungovalo na&nbsp;všech hostincich.
+</p><p><strong>cvachta:</strong> <img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20Zji%C5%A1t%C4%9Bn%C3%AD%20opera%C4%8Dn%C3%ADho%20syst%C3%A9mu%20v%20PHP%5D_soubory/12.gif" class="smiles" title="Popletený" alt="[Confused]"> </p>
+</div><div class="ram-info"><div class="ram-info-l">
+Firefox 2.0.0.6 / Ubuntu Linux
+</div><div class="ram-info-r">Po, 22. říj 2007, 18:58</div></div>
+</div></div></div>
+<div class="ram-bottom ram-book-t"></div>
+
+<div class="ram-top"></div>
+<div class="ram"><div class="ram-center"><div class="ram-leva">
+<div class="img60-book"><img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20Zji%C5%A1t%C4%9Bn%C3%AD%20opera%C4%8Dn%C3%ADho%20syst%C3%A9mu%20v%20PHP%5D_soubory/Benny_29-8-07.jpg" alt="avatar"></div>
+</div><div class="ram-prava">
+<div class="ram-info-t"><div class="ram-info-l kursor" onclick="smajlik('{30} ')"><a href="http://crazydog.cz/home/registrovani/Benny/"><img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20Zji%C5%A1t%C4%9Bn%C3%AD%20opera%C4%8Dn%C3%ADho%20syst%C3%A9mu%20v%20PHP%5D_soubory/uzivatel.gif" alt="" title="Uživatel"></a> 
+Benny&nbsp;<img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20Zji%C5%A1t%C4%9Bn%C3%AD%20opera%C4%8Dn%C3%ADho%20syst%C3%A9mu%20v%20PHP%5D_soubory/muz.gif" alt="muž"> <a href="mailto:ladik%5Btecka%5Dbenes%5Bzavinac%5Dgmail%5Btecka%5Dcom"><img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20Zji%C5%A1t%C4%9Bn%C3%AD%20opera%C4%8Dn%C3%ADho%20syst%C3%A9mu%20v%20PHP%5D_soubory/mail.gif" title="Email" alt="mail"></a>
+<a href="http://www.benny-cz.net/"><img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20Zji%C5%A1t%C4%9Bn%C3%AD%20opera%C4%8Dn%C3%ADho%20syst%C3%A9mu%20v%20PHP%5D_soubory/web.gif" alt="web"></a>
+<a href="http://www.icq.com/233286535"><img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20Zji%C5%A1t%C4%9Bn%C3%AD%20opera%C4%8Dn%C3%ADho%20syst%C3%A9mu%20v%20PHP%5D_soubory/icq.gif" alt="icq" title="ICQ"></a>
+<a href="mailto:Lada%5Btecka%5DBenes%5Bzavinac%5Dhotmail%5Btecka%5Dcom"><img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20Zji%C5%A1t%C4%9Bn%C3%AD%20opera%C4%8Dn%C3%ADho%20syst%C3%A9mu%20v%20PHP%5D_soubory/msn.gif" title="MSN" alt="msn"></a>
+</div><div class="ram-info-r">
+<span class="cislo" id="350">[350]</span></div></div><div class="ram-book-text">
+<p><strong>Nofuj:</strong> Možná že existuje, ale pokud je někdo začátečník, tak bych řekl, že tohle je pro&nbsp;něj pro&nbsp;pochopení nejjednodužší</p>
+</div><div class="ram-info"><div class="ram-info-l">
+Firefox 2.0.0.8 / Windows Vista
+</div><div class="ram-info-r">Po, 22. říj 2007, 19:53</div></div>
+</div></div></div>
+<div class="ram-bottom ram-book-t"></div>
+
+<div class="ram-top"></div>
+<div class="ram"><div class="ram-center"><div class="ram-leva">
+<div class="img60-book"><img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20Zji%C5%A1t%C4%9Bn%C3%AD%20opera%C4%8Dn%C3%ADho%20syst%C3%A9mu%20v%20PHP%5D_soubory/noavatar.jpg" alt="avatar"></div>
+</div><div class="ram-prava">
+<div class="ram-info-t"><div class="ram-info-l kursor" onclick="smajlik('[nick]nataly[/nick] ')">nataly <a href="http://www.extragirlfriends.com/"><img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20Zji%C5%A1t%C4%9Bn%C3%AD%20opera%C4%8Dn%C3%ADho%20syst%C3%A9mu%20v%20PHP%5D_soubory/web.gif" title="Web" alt="web"></a>
+</div><div class="ram-info-r">
+<span class="cislo" id="352">[352]</span></div></div><div class="ram-book-text">
+<p>no tak nevím,vypadá to šíleně, zkusím.</p>
+</div><div class="ram-info"><div class="ram-info-l">
+MSIE 7.0 / Windows XP
+</div><div class="ram-info-r">Po, 22. říj 2007, 21:22</div></div>
+</div></div></div>
+<div class="ram-bottom ram-book-t"></div>
+
+<div class="ram-top"></div>
+<div class="ram"><div class="ram-center"><div class="ram-leva">
+<div class="img60-book"><img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20Zji%C5%A1t%C4%9Bn%C3%AD%20opera%C4%8Dn%C3%ADho%20syst%C3%A9mu%20v%20PHP%5D_soubory/noavatar.jpg" alt="avatar"></div>
+</div><div class="ram-prava">
+<div class="ram-info-t"><div class="ram-info-l kursor" onclick="smajlik('[nick]Tomass[/nick] ')">Tomass </div><div class="ram-info-r">
+<span class="cislo" id="355">[355]</span></div></div><div class="ram-book-text">
+<p><strong>nataly:</strong> co je na&nbsp;tom sialene?</p>
+</div><div class="ram-info"><div class="ram-info-l">
+Firefox 2.0.0.8 / Windows XP
+</div><div class="ram-info-r">Čt, 25. říj 2007, 16:33</div></div>
+</div></div></div>
+<div class="ram-bottom ram-book-t"></div>
+
+<div class="ram-top"></div>
+<div class="ram"><div class="ram-center"><div class="ram-leva">
+<div class="img60-book"><img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20Zji%C5%A1t%C4%9Bn%C3%AD%20opera%C4%8Dn%C3%ADho%20syst%C3%A9mu%20v%20PHP%5D_soubory/noavatar.jpg" alt="avatar"></div>
+</div><div class="ram-prava">
+<div class="ram-info-t"><div class="ram-info-l kursor" onclick="smajlik('[nick]MareX[/nick] ')">MareX </div><div class="ram-info-r">
+<span class="cislo" id="382">[382]</span></div></div><div class="ram-book-text">
+<p>Mě to přijde perfektně jednoduché. Mám něco podobného
+na&nbsp;zjištění prohlížeče a&nbsp;jeho verze, akorát jsem nevěděl, jak
+poznat třeba Win Vista , Xp apod. (myslím to "Windows 6.0 atd.), tohle
+mi pomohlo. Díky :)</p>
+</div><div class="ram-info"><div class="ram-info-l">
+Firefox 2.0.0.9 / Windows Vista
+</div><div class="ram-info-r">Ne, 04. lis 2007, 11:47</div></div>
+</div></div></div>
+<div class="ram-bottom ram-book-t"></div>
+
+<div class="ram-top"></div>
+<div class="ram"><div class="ram-center"><div class="ram-leva">
+<div class="img60-book"><img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20Zji%C5%A1t%C4%9Bn%C3%AD%20opera%C4%8Dn%C3%ADho%20syst%C3%A9mu%20v%20PHP%5D_soubory/noavatar.jpg" alt="avatar"></div>
+</div><div class="ram-prava">
+<div class="ram-info-t"><div class="ram-info-l kursor" onclick="smajlik('[nick]Blizzy[/nick] ')">Blizzy <a href="http://programy.wz.cz/"><img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20Zji%C5%A1t%C4%9Bn%C3%AD%20opera%C4%8Dn%C3%ADho%20syst%C3%A9mu%20v%20PHP%5D_soubory/web.gif" title="Web" alt="web"></a>
+</div><div class="ram-info-r">
+<span class="cislo" id="439">[439]</span></div></div><div class="ram-book-text">
+<p>Také jsem se&nbsp;něčím podobným zabýval. Zjišťoval jsem jak
+operační systém, tak i&nbsp;prohlížeč. Moje řešení si můžete
+prohlédnout zde:
+</p><p>[adresa smazána]</p>
+</div><div class="ram-info"><div class="ram-info-l">
+Opera 9.50 / Windows XP
+</div><div class="ram-info-r">Pá, 14. pro 2007, 19:22</div></div>
+</div></div></div>
+<div class="ram-bottom ram-book-t"></div>
+
+<div class="ram-top"></div>
+<div class="ram"><div class="ram-center"><div class="ram-leva">
+<div class="img60-book"><img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20Zji%C5%A1t%C4%9Bn%C3%AD%20opera%C4%8Dn%C3%ADho%20syst%C3%A9mu%20v%20PHP%5D_soubory/CrazyDog_30-1-08.jpg" alt="avatar"></div>
+</div><div class="ram-prava">
+<div class="ram-info-t"><div class="ram-info-l kursor" onclick="smajlik('{1} ')"><a href="http://crazydog.cz/home/registrovani/CrazyDog/"><img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20Zji%C5%A1t%C4%9Bn%C3%AD%20opera%C4%8Dn%C3%ADho%20syst%C3%A9mu%20v%20PHP%5D_soubory/administrator.gif" alt="" title="Administrátor"></a> 
+CrazyDog&nbsp;<img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20Zji%C5%A1t%C4%9Bn%C3%AD%20opera%C4%8Dn%C3%ADho%20syst%C3%A9mu%20v%20PHP%5D_soubory/muz.gif" alt="muž"> <a href="mailto:crazydoga%5Bzavinac%5Dgmail%5Btecka%5Dcom"><img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20Zji%C5%A1t%C4%9Bn%C3%AD%20opera%C4%8Dn%C3%ADho%20syst%C3%A9mu%20v%20PHP%5D_soubory/mail.gif" title="Email" alt="mail"></a>
+<a href="mailto:crazydoga%5Bzavinac%5Dgmail%5Btecka%5Dcom"><img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20Zji%C5%A1t%C4%9Bn%C3%AD%20opera%C4%8Dn%C3%ADho%20syst%C3%A9mu%20v%20PHP%5D_soubory/msn.gif" title="MSN" alt="msn"></a>
+</div><div class="ram-info-r">
+<span class="cislo" id="440">[440]</span></div></div><div class="ram-book-text">
+<p><strong>Blizzy:</strong> Tvoje řešení je opravdu efektivní, ale
+bohužel jsem byl nucen tvoji reklamu smazat. To je to samé jako kdyby
+jsi v&nbsp;Tescu dal reklamu na&nbsp;Kaufland, že tam je něco
+levnějšího <img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20Zji%C5%A1t%C4%9Bn%C3%AD%20opera%C4%8Dn%C3%ADho%20syst%C3%A9mu%20v%20PHP%5D_soubory/12.gif" class="smiles" title="Popletený" alt="[Confused]"> </p>
+</div><div class="ram-info"><div class="ram-info-l">
+Opera 9.24 / Windows XP
+</div><div class="ram-info-r">Pá, 14. pro 2007, 20:36</div></div>
+</div></div></div>
+<div class="ram-bottom ram-book-t"></div>
+
+<div class="ram-top"></div>
+<div class="ram"><div class="ram-center"><div class="ram-leva">
+<div class="img60-book"><img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20Zji%C5%A1t%C4%9Bn%C3%AD%20opera%C4%8Dn%C3%ADho%20syst%C3%A9mu%20v%20PHP%5D_soubory/avatar.jpg" alt="avatar"></div>
+</div><div class="ram-prava">
+<div class="ram-info-t"><div class="ram-info-l kursor" onclick="smajlik('[nick]Hemi[/nick] ')">Hemi <a href="mailto:jhemi442%5Bzavinac%5Dgmail%5Btecka%5Dcom"><img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20Zji%C5%A1t%C4%9Bn%C3%AD%20opera%C4%8Dn%C3%ADho%20syst%C3%A9mu%20v%20PHP%5D_soubory/mail.gif" title="Email" alt="mail"></a>
+</div><div class="ram-info-r">
+<span class="cislo" id="564">[564]</span></div></div><div class="ram-book-text">
+<p>Ahoj, měl bych takový menší dotaz&nbsp;&#8211; mohl bys trochu
+zaktualizovat ten skriptík? Protože na&nbsp;Ubuntu 8.04 to hlásí jenom
+Linux. Ne, že by to byl takový nepředstavitelný problém, ale když tam
+ta možnost je <img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20Zji%C5%A1t%C4%9Bn%C3%AD%20opera%C4%8Dn%C3%ADho%20syst%C3%A9mu%20v%20PHP%5D_soubory/18.gif" class="smiles" title="Stydět se" alt="[Blush]"> </p>
+</div><div class="ram-info"><div class="ram-info-l">
+Firefox 3.0 / Linux
+</div><div class="ram-info-r">St, 30. dub 2008, 20:55</div></div>
+</div></div></div>
+<div class="ram-bottom ram-book-t"></div>
+
+<div class="ram-top"></div>
+<div class="ram"><div class="ram-center"><div class="ram-leva">
+<div class="img60-book"><img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20Zji%C5%A1t%C4%9Bn%C3%AD%20opera%C4%8Dn%C3%ADho%20syst%C3%A9mu%20v%20PHP%5D_soubory/CrazyDog_30-1-08.jpg" alt="avatar"></div>
+</div><div class="ram-prava">
+<div class="ram-info-t"><div class="ram-info-l kursor" onclick="smajlik('{1} ')"><a href="http://crazydog.cz/home/registrovani/CrazyDog/"><img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20Zji%C5%A1t%C4%9Bn%C3%AD%20opera%C4%8Dn%C3%ADho%20syst%C3%A9mu%20v%20PHP%5D_soubory/administrator.gif" alt="" title="Administrátor"></a> 
+CrazyDog&nbsp;<img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20Zji%C5%A1t%C4%9Bn%C3%AD%20opera%C4%8Dn%C3%ADho%20syst%C3%A9mu%20v%20PHP%5D_soubory/muz.gif" alt="muž"> <a href="mailto:crazydoga%5Bzavinac%5Dgmail%5Btecka%5Dcom"><img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20Zji%C5%A1t%C4%9Bn%C3%AD%20opera%C4%8Dn%C3%ADho%20syst%C3%A9mu%20v%20PHP%5D_soubory/mail.gif" title="Email" alt="mail"></a>
+<a href="mailto:crazydoga%5Bzavinac%5Dgmail%5Btecka%5Dcom"><img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20Zji%C5%A1t%C4%9Bn%C3%AD%20opera%C4%8Dn%C3%ADho%20syst%C3%A9mu%20v%20PHP%5D_soubory/msn.gif" title="MSN" alt="msn"></a>
+</div><div class="ram-info-r">
+<span class="cislo" id="565">[565]</span></div></div><div class="ram-book-text">
+<p><strong>Hemi:</strong> Firefox 3 beta má User-agent:
+</p><code>Mozilla/5.0 (X11; U; Linux i686; cs-CZ; rv:1.9b5) Gecko/2008041514 Firefox/3.0b5</code><p>A
+proto nelze z&nbsp;něho zjistit přesnou distribuci Linuxu. Až bude
+finální verze Firefoxu 3, tak to zase bude fungovat. Jinak kdyby jsi
+nainstaloval do&nbsp;Ubuntu verzi 2.x, tak ta ukazuje správně.</p>
+</div><div class="ram-info"><div class="ram-info-l">
+Firefox 3.0 / Linux
+</div><div class="ram-info-r">Čt, 01. kvě 2008, 19:22</div></div>
+</div></div></div>
+<div class="ram-bottom ram-book-t"></div>
+
+<script type="text/javascript" src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20Zji%C5%A1t%C4%9Bn%C3%AD%20opera%C4%8Dn%C3%ADho%20syst%C3%A9mu%20v%20PHP%5D_soubory/formatovani.js"></script>
+<div class="mezera">&nbsp;</div>
+<form method="post" class="f_form" id="vzkaz" action="/pro-web/php-scripty/zjisteni-operacniho-systemu-v-php/#bottom">
+<div class="l w480 b5">
+<div class="l l15e"><input name="nick" class="f_input" tabindex="1" value="" maxlength="20" type="text"> - <strong>Jméno</strong></div>
+<div class="r r15e"><input accesskey="s" tabindex="5" class="f_r-tlacitko tlacitko" value=" Uložit " type="submit"></div>
+</div><div class="l w480 iebug1">
+<div class="l l15e"><input name="web_mail" class="f_input" tabindex="2" value="" maxlength="50" type="text"> - Web nebo <abbr title="Email je propojený s Gravatarem">Email</abbr></div>
+<div class="r r15e"><img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20Zji%C5%A1t%C4%9Bn%C3%AD%20opera%C4%8Dn%C3%ADho%20syst%C3%A9mu%20v%20PHP%5D_soubory/kod-knihy.png" title="Kód" class="f_kodimg" alt="Kód">
+<input tabindex="3" maxlength="4" name="kod" class="f_kod" value="Kód" onfocus="this.value='';" type="text"></div>
+</div>
+<p><textarea rows="6" cols="55" class="f_text" tabindex="4" name="text_gb"></textarea></p>
+<div class="no"><input name="odeslano" value="ano" type="hidden"></div>
+<p></p><div class="w480 l l15e" id="prvni">
+<div class="a-no l">
+<img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20Zji%C5%A1t%C4%9Bn%C3%AD%20opera%C4%8Dn%C3%ADho%20syst%C3%A9mu%20v%20PHP%5D_soubory/1.gif" onclick="smajlik('[Happy]')" class="kursor" title="Šťastný" alt="[Happy]">
+<img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20Zji%C5%A1t%C4%9Bn%C3%AD%20opera%C4%8Dn%C3%ADho%20syst%C3%A9mu%20v%20PHP%5D_soubory/2.gif" onclick="smajlik('[Sad]')" class="kursor" title="Smutný" alt="[Sad]">
+<img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20Zji%C5%A1t%C4%9Bn%C3%AD%20opera%C4%8Dn%C3%ADho%20syst%C3%A9mu%20v%20PHP%5D_soubory/3.gif" onclick="smajlik('[Applause]')" class="kursor" title="Potlesk" alt="[Applause]">
+<img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20Zji%C5%A1t%C4%9Bn%C3%AD%20opera%C4%8Dn%C3%ADho%20syst%C3%A9mu%20v%20PHP%5D_soubory/4.gif" onclick="smajlik('[Laughing]')" class="kursor" title="Smát se" alt="[Laughing]">
+<img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20Zji%C5%A1t%C4%9Bn%C3%AD%20opera%C4%8Dn%C3%ADho%20syst%C3%A9mu%20v%20PHP%5D_soubory/5.gif" onclick="smajlik('[Flirty]')" class="kursor" title="Ironický/Koketní" alt="[Flirty]">
+<img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20Zji%C5%A1t%C4%9Bn%C3%AD%20opera%C4%8Dn%C3%ADho%20syst%C3%A9mu%20v%20PHP%5D_soubory/6.gif" onclick="smajlik('[Hesitant]')" class="kursor" title="Váhající" alt="[Hesitant]">
+<img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20Zji%C5%A1t%C4%9Bn%C3%AD%20opera%C4%8Dn%C3%ADho%20syst%C3%A9mu%20v%20PHP%5D_soubory/7.gif" onclick="smajlik('[Yummy]')" class="kursor" title="Báječný vtip" alt="[Yummy]">
+<img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20Zji%C5%A1t%C4%9Bn%C3%AD%20opera%C4%8Dn%C3%ADho%20syst%C3%A9mu%20v%20PHP%5D_soubory/8.gif" onclick="smajlik('[Narky]')" class="kursor" title="Naštvaný" alt="[Narky]">
+<img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20Zji%C5%A1t%C4%9Bn%C3%AD%20opera%C4%8Dn%C3%ADho%20syst%C3%A9mu%20v%20PHP%5D_soubory/9.gif" onclick="smajlik('[Mad]')" class="kursor" title="šílený" alt="[Mad]">
+<img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20Zji%C5%A1t%C4%9Bn%C3%AD%20opera%C4%8Dn%C3%ADho%20syst%C3%A9mu%20v%20PHP%5D_soubory/10.gif" onclick="smajlik('[ROFL]')" class="kursor" title="Válet se smíchy" alt="[ROFL]">
+<img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20Zji%C5%A1t%C4%9Bn%C3%AD%20opera%C4%8Dn%C3%ADho%20syst%C3%A9mu%20v%20PHP%5D_soubory/11.gif" onclick="smajlik('[Amazed]')" class="kursor" title="Ohromený" alt="[Amazed]">
+<img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20Zji%C5%A1t%C4%9Bn%C3%AD%20opera%C4%8Dn%C3%ADho%20syst%C3%A9mu%20v%20PHP%5D_soubory/12.gif" onclick="smajlik('[Confused]')" class="kursor" title="Popletený" alt="[Confused]">
+<img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20Zji%C5%A1t%C4%9Bn%C3%AD%20opera%C4%8Dn%C3%ADho%20syst%C3%A9mu%20v%20PHP%5D_soubory/13.gif" onclick="smajlik('[Crying]')" class="kursor" title="Plač" alt="[Crying]">
+<img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20Zji%C5%A1t%C4%9Bn%C3%AD%20opera%C4%8Dn%C3%ADho%20syst%C3%A9mu%20v%20PHP%5D_soubory/14.gif" onclick="smajlik('[Fatigue]')" class="kursor" title="Únava" alt="[Fatigue]">
+<img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20Zji%C5%A1t%C4%9Bn%C3%AD%20opera%C4%8Dn%C3%ADho%20syst%C3%A9mu%20v%20PHP%5D_soubory/15.gif" onclick="smajlik('[Zorro]')" class="kursor" title="Zorro" alt="[Zorro]">
+<img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20Zji%C5%A1t%C4%9Bn%C3%AD%20opera%C4%8Dn%C3%ADho%20syst%C3%A9mu%20v%20PHP%5D_soubory/16.gif" onclick="smajlik('[Uptight]')" class="kursor" title="Podrážděný" alt="[Uptight]">
+<img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20Zji%C5%A1t%C4%9Bn%C3%AD%20opera%C4%8Dn%C3%ADho%20syst%C3%A9mu%20v%20PHP%5D_soubory/17.gif" onclick="smajlik('[LOL]')" class="kursor" title="Hlasitý smích" alt="[LOL]">
+<img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20Zji%C5%A1t%C4%9Bn%C3%AD%20opera%C4%8Dn%C3%ADho%20syst%C3%A9mu%20v%20PHP%5D_soubory/18.gif" onclick="smajlik('[Blush]')" class="kursor" title="Stydět se" alt="[Blush]">
+<img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20Zji%C5%A1t%C4%9Bn%C3%AD%20opera%C4%8Dn%C3%ADho%20syst%C3%A9mu%20v%20PHP%5D_soubory/19.gif" onclick="smajlik('[Kissing]')" class="kursor" title="Polibek" alt="[Kissing]">
+<img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20Zji%C5%A1t%C4%9Bn%C3%AD%20opera%C4%8Dn%C3%ADho%20syst%C3%A9mu%20v%20PHP%5D_soubory/20.gif" onclick="smajlik('[Ble]')" class="kursor" title="Nevolno" alt="[Ble]">
+<img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20Zji%C5%A1t%C4%9Bn%C3%AD%20opera%C4%8Dn%C3%ADho%20syst%C3%A9mu%20v%20PHP%5D_soubory/21.gif" onclick="smajlik('[Tondys]')" class="kursor" title="Tondysův smajlík" alt="[Tondys]">
+</div><div class="r r20">
+<img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20Zji%C5%A1t%C4%9Bn%C3%AD%20opera%C4%8Dn%C3%ADho%20syst%C3%A9mu%20v%20PHP%5D_soubory/sibka-dolu.gif" alt="+" onclick="zobrazit('prvni')" class="kursor" title="Formátování">
+</div></div>
+
+<div class="w480 l l15e" id="druhy" style="display: none;"><div class="a-no l">
+<img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20Zji%C5%A1t%C4%9Bn%C3%AD%20opera%C4%8Dn%C3%ADho%20syst%C3%A9mu%20v%20PHP%5D_soubory/obr.gif" class="kursor" onclick="img('Zadejte adresu k obrázku. Adresa musí začínat http://','Kde má být umístěn (left|right|center)')" title="Obrázek" alt="[obr]">
+<img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20Zji%C5%A1t%C4%9Bn%C3%AD%20opera%C4%8Dn%C3%ADho%20syst%C3%A9mu%20v%20PHP%5D_soubory/obrtext.gif" class="kursor" onclick="imgtext('Zadejte adresu k obrázku. Adresa musí začínat http://','Zadejte title pod obrázkem', 'Kde má být umístěn (left|right|center)')" title="Obrázek s textem" alt="[obrtext]">
+<img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20Zji%C5%A1t%C4%9Bn%C3%AD%20opera%C4%8Dn%C3%ADho%20syst%C3%A9mu%20v%20PHP%5D_soubory/flash.gif" class="kursor" onclick="tagy('flash','Zadejte adresu k flashu. Adresa musí začínat http://')" title="Flash" alt="[flash]">
+<img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20Zji%C5%A1t%C4%9Bn%C3%AD%20opera%C4%8Dn%C3%ADho%20syst%C3%A9mu%20v%20PHP%5D_soubory/e.gif" class="kursor" onclick="adresa('Celá adresa i s http://', 'Název')" title="Odkaz i s názvem" alt="[e]">
+<img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20Zji%C5%A1t%C4%9Bn%C3%AD%20opera%C4%8Dn%C3%ADho%20syst%C3%A9mu%20v%20PHP%5D_soubory/b.gif" class="kursor" onclick="tagy('b','Text, který chcete mít zvýrazněný TUČNĚ')" title="Tučně" alt="[b]">
+<img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20Zji%C5%A1t%C4%9Bn%C3%AD%20opera%C4%8Dn%C3%ADho%20syst%C3%A9mu%20v%20PHP%5D_soubory/i.gif" class="kursor" onclick="tagy('i','Text, který chcete mít zvýrazněný KURZÍVĚ')" title="Kurzívě" alt="[i]">
+<img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20Zji%C5%A1t%C4%9Bn%C3%AD%20opera%C4%8Dn%C3%ADho%20syst%C3%A9mu%20v%20PHP%5D_soubory/s.gif" class="kursor" onclick="tagy('s','Text, který chcete mít zvýrazněný PŘEŠKRTNUTĚ')" title="Přeškrtnuté" alt="[s]">
+<img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20Zji%C5%A1t%C4%9Bn%C3%AD%20opera%C4%8Dn%C3%ADho%20syst%C3%A9mu%20v%20PHP%5D_soubory/seznam.gif" class="kursor" onclick="smajlik('\n#-default\nText\ntext\nText\n#\n')" title="Seznam" alt="[seznam]">
+<img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20Zji%C5%A1t%C4%9Bn%C3%AD%20opera%C4%8Dn%C3%ADho%20syst%C3%A9mu%20v%20PHP%5D_soubory/cislovany-seznam.gif" class="kursor" onclick="smajlik('\n#-cisla\nText\nText\nText\n#\n')" title="Číslovaný seznam" alt="[c.seznam]">
+<img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20Zji%C5%A1t%C4%9Bn%C3%AD%20opera%C4%8Dn%C3%ADho%20syst%C3%A9mu%20v%20PHP%5D_soubory/code.gif" class="kursor" onclick="smajlik('\n[code][/code]\n')" title="Zdrojový kód" alt="[code]">
+<img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20Zji%C5%A1t%C4%9Bn%C3%AD%20opera%C4%8Dn%C3%ADho%20syst%C3%A9mu%20v%20PHP%5D_soubory/kod.gif" class="kursor" onclick="smajlik('[kod][/kod]')" title="Zdrojový kód ve větě" alt="[kod]">
+<img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20Zji%C5%A1t%C4%9Bn%C3%AD%20opera%C4%8Dn%C3%ADho%20syst%C3%A9mu%20v%20PHP%5D_soubory/cara.gif" class="kursor" onclick="smajlik('\n---\n')" title="Horizontální čára" alt="[---]">
+<img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20Zji%C5%A1t%C4%9Bn%C3%AD%20opera%C4%8Dn%C3%ADho%20syst%C3%A9mu%20v%20PHP%5D_soubory/br.gif" class="kursor" onclick="smajlik('[br]\n')" title="Odřádkování" alt="[br]">
+<img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20Zji%C5%A1t%C4%9Bn%C3%AD%20opera%C4%8Dn%C3%ADho%20syst%C3%A9mu%20v%20PHP%5D_soubory/h2.gif" class="kursor" onclick="tagy('h2','Nadpis druhé kategorie')" title="Nadpis druhé kategorie" alt="[h2]">
+<img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20Zji%C5%A1t%C4%9Bn%C3%AD%20opera%C4%8Dn%C3%ADho%20syst%C3%A9mu%20v%20PHP%5D_soubory/h3.gif" class="kursor" onclick="tagy('h3','Nadpis třetí kategorie')" title="Nadpis třetí kategorie" alt="[h3]">
+<img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20Zji%C5%A1t%C4%9Bn%C3%AD%20opera%C4%8Dn%C3%ADho%20syst%C3%A9mu%20v%20PHP%5D_soubory/abbr.gif" class="kursor" onclick="abbr('Zadejte viditelný text', 'Title textu')" title="Ustálený výraz ABBR" alt="[abbr]">
+<img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20Zji%C5%A1t%C4%9Bn%C3%AD%20opera%C4%8Dn%C3%ADho%20syst%C3%A9mu%20v%20PHP%5D_soubory/sup.gif" class="kursor" onclick="tagy('sup','Text, který chcete mít jako horní index')" title="Horní index" alt="[sup]">
+<img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20Zji%C5%A1t%C4%9Bn%C3%AD%20opera%C4%8Dn%C3%ADho%20syst%C3%A9mu%20v%20PHP%5D_soubory/sub.gif" class="kursor" onclick="tagy('sub','Text, který chcete mít jako dolní index')" title="Dolní index" alt="[sub]">
+</div><div class="r r20">
+<img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20Zji%C5%A1t%C4%9Bn%C3%AD%20opera%C4%8Dn%C3%ADho%20syst%C3%A9mu%20v%20PHP%5D_soubory/sibka-nahoru.gif" alt="-" onclick="zobrazit('druhy');" class="kursor" title="Smajlíci">
+</div></div>
+</form>
+</div>
+<!-- Konec hlavniho obsahu stranky -->
+</div>
+
+<div id="right">
+<div class="konec">
+<div id="logo-r"></div>
+  <h3>Pro web</h3>
+  <ul>
+  <li><a href="http://crazydog.cz/pro-web/"><span class="cislo">[13]</span>Všechný články</a></li>
+  <li class="t10"><a href="http://crazydog.cz/pro-web/css-triky/"><span class="cislo">[1]</span>CSS triky</a></li>
+  <li><a href="http://crazydog.cz/pro-web/javascripty/"><span class="cislo">[2]</span>JavaScripty</a></li>
+  <li><a href="http://crazydog.cz/pro-web/php-scripty/"><span class="cislo">[10]</span>PHP scripty</a></li>
+  <li class="t10"><a href="http://crazydog.cz/pro-web/uzitecne-adresy/">Užitečné adresy</a></li>
+  </ul>
+
+  <h3>Poslední komentáře</h3>
+  <ul>
+    <li><a href="http://crazydog.cz/blog/technologie/zatim-nejvetsi-plazmova-tv-o-uhlopricce-381-cm/#579" title="Zatím největší plazmová TV o úhlkopříčce 381 cm"><span class="cislo">[Blog]</span>monky</a></li>
+    <li><a href="http://crazydog.cz/blog/technologie/zatim-nejvetsi-plazmova-tv-o-uhlopricce-381-cm/#578" title="Zatím největší plazmová TV o úhlkopříčce 381 cm"><span class="cislo">[Blog]</span>CrazyDog</a></li>
+    <li><a href="http://crazydog.cz/blog/technologie/zatim-nejvetsi-plazmova-tv-o-uhlopricce-381-cm/#577" title="Zatím největší plazmová TV o úhlkopříčce 381 cm"><span class="cislo">[Blog]</span>Evca</a></li>
+    <li><a href="http://crazydog.cz/blog/technologie/zatim-nejvetsi-plazmova-tv-o-uhlopricce-381-cm/#576" title="Zatím největší plazmová TV o úhlkopříčce 381 cm"><span class="cislo">[Blog]</span>fremy</a></li>
+    <li><a href="http://crazydog.cz/blog/nezaraditelne/na-co-si-dat-pozor-pri-zaverecne-jizde/#575" title="Na co si dat pozor při závěrečné jízdě"><span class="cislo">[Blog]</span>fremy</a></li>
+  </ul>
+  <h3>Přihlášení</h3>
+  <form method="post" class="text-r bug3" action="/home/login-kontrola/">
+  <p>Jméno - <input class="nick" name="nick" value=" Váš nick" onfocus="if(this.value==this.defaultValue)this.value=''" size="12" type="text"></p>
+  <p>Heslo - <input class="heslo" name="heslo" size="12" type="password"></p>
+  <p><input value="Přihlásit" class="tlacitko" type="submit"></p>
+  <p><a href="http://crazydog.cz/home/vse-k-registraci/">Vše k registraci</a></p>
+  </form>
+    
+  <h3>Aktuální anketa</h3>
+  <div class="b5 italic"><p>Který navigační program je pro vás lepší?</p></div>
+  <ul>
+  <li><a href="http://crazydog.cz/home/anketa-c-16/104/" rel="nofollow"><span class="cislo">[33]</span>Garmin</a></li>
+  <li><a href="http://crazydog.cz/home/anketa-c-16/105/" rel="nofollow"><span class="cislo">[20]</span>TomTom</a></li>
+  <li><a href="http://crazydog.cz/home/anketa-c-16/106/" rel="nofollow"><span class="cislo">[27]</span>iGO</a></li>
+  <li><a href="http://crazydog.cz/home/anketa-c-16/107/" rel="nofollow"><span class="cislo">[12]</span>Navicore</a></li>
+  <li><a href="http://crazydog.cz/home/anketa-c-16/108/" rel="nofollow"><span class="cislo">[8]</span>Jiný</a></li>
+  <li><a href="http://crazydog.cz/home/anketa-c-16/109/" rel="nofollow"><span class="cislo">[18]</span>GPS nepoužívám</a></li>
+  </ul>
+  
+  <h3>Rychlo odkazy</h3>
+  <ul>
+  <li><a href="">Spusť CrazyPlayer</a></li>
+  </ul>
+  
+</div>
+</div>
+
+<div id="bottom-no"></div>
+<div id="bottom">
+Copyright &#169; 2007 <a href="http://crazydog.cz/home/webmaster/#copyright">CrazyDog <img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20Zji%C5%A1t%C4%9Bn%C3%AD%20opera%C4%8Dn%C3%ADho%20syst%C3%A9mu%20v%20PHP%5D_soubory/muz.gif" alt="muž"></a> | Vygenerováno za 0.139 s | &#187;<a href="http://crazydog.cz/home/statistiky/">Statistiky</a>&#171; | <a href="#topdown" onclick="javascript:pageScroll(0,0,20); return(false);">Nahoru &#8593;</a><br>
+Optimized for LCD color &amp; MSIE, Gecko and Opera Browser's | Technology XHTML, CSS, JS, PHP &amp; MySQL
+</div>
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script><script src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20Zji%C5%A1t%C4%9Bn%C3%AD%20opera%C4%8Dn%C3%ADho%20syst%C3%A9mu%20v%20PHP%5D_soubory/ga.js" type="text/javascript"></script>
+<script type="text/javascript">
+var pageTracker = _gat._getTracker("UA-3766486-1");
+pageTracker._initData();
+pageTracker._trackPageview();
+</script>
+</div><div style="position: absolute; left: 0px; top: 0px; z-index: 1000000000; visibility: hidden; opacity: 1;" id="linkalert-box"><img src="CrazyDog%20%7E%20Multi-web%20%5B%C4%8Cl%C3%A1nek%20na%20t%C3%A9ma%20%20Zji%C5%A1t%C4%9Bn%C3%AD%20opera%C4%8Dn%C3%ADho%20syst%C3%A9mu%20v%20PHP%5D_soubory/none-icon.png" id="linkalert-icon-1"></div></body></html>

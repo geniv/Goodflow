@@ -1,0 +1,1 @@
+<?php--x--Chatka--x--220Kč 1.osoba 1.noc--x--Pokoj--x--350Kč 1.osoba 1.noc

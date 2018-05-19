@@ -1,0 +1,346 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="cs" lang="cs"><head>
+
+
+
+
+	<meta http-equiv="Content-Type" content="text/html; charset=windows-1250">
+	<meta http-equiv="content-language" content="cs">
+	<meta http-equiv="content-script-type" content="text/javascript">
+	<meta http-equiv="content-style-type" content="text/css">
+	<meta name="resource-type" content="document">
+	<meta name="robots" content="index,follow">
+	<link rel="alternate" type="application/rss+xml" title="Tvorba WWW - o webdesignu, grafice a reklamě" href="http://www.tvorba-webu.cz/tvorba-webu.xml">
+	<meta name="author" content="Adaptic, s.r.o. - Internetová a mobilní řešení podle vašich potřeb; www.adaptic.cz">
+  <meta name="keywords" content="XML,Jak vyvořit RSS">
+	<meta name="description" content="Jak vytvořit www stránku: XML - Jak vyvořit RSS"><title>XML: Jak vyvořit RSS</title>
+	
+	<style media="screen, projection" type="text/css" title="screen, projection">/* <![CDATA[ */@import "../_css/screen.css";/* ]]> */</style>
+  <link rel="stylesheet" type="text/css" href="jak-na-rss.php_soubory/print.css" media="print">
+  <script type="text/javascript" src="jak-na-rss.php_soubory/all.js"></script>
+	<link rel="shortcut icon" href="http://www.tvorba-webu.cz/favicon.ico" type="image/x-icon"></head><body><div id="body-helper">
+<div id="page">
+	<div id="header"><div id="header-helper">
+		<strong><a id="logo" href="http://www.tvorba-webu.cz/">tvorba-webu.cz<span></span></a></strong><span class="nod"><br></span>
+		<a class="nod" href="#navigace">k navigaci</a>
+	</div><!--header-helper--></div><!--header-->
+	<hr>
+	<div id="content">
+   	<div id="content-helper">
+	<div id="main">
+
+<h1>Jak vyvořit RSS</h1>
+<p>
+Pokud máte server, na kterém se často objevují nové zprávy, je skvělé,
+poskytnout čtenářům RSS zdroj, aby měli o nových článcích přehled.
+Pokud používáte nějaký publikační systém nebo blogovací systém (např. <a href="http://www.elka.cz/">EasyBlog</a>),
+měli by tyto programy zároveň s novými příspěvky generovat i RSS zdroj.
+Pokud však RSS nepoužíváte, můžete si ho vyrobit sami.
+</p>
+<h2>Co je to RSS</h2>
+<p>
+RSS - Really Simple Syndication  - je soubor s příponou <em>.xml</em> a je psán v jazyce <a href="http://www.tvorba-webu.cz/xml/">XML</a>.
+RSS soubor je určen RSS čtečkám.
+</p>
+<h2>Jak na RSS</h2>
+<p>Nebudu zde vysvětlovat všechny značky, které můžete v souboru RSS
+použít, pouze vám ukážu příkla mého vlastního RSS a vysvětlím několik
+důležitých částí. RSS Tvorby webu vypadá následovně:
+</p>
+<pre>&lt;?xml version="1.0" encoding="windows-1250"?&gt;	
+&lt;rdf:RDF
+  xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+  xmlns:dc="http://purl.org/dc/elements/1.1/"
+  xmlns:sy="http://purl.org/rss/1.0/modules/syndication/"
+  xmlns:admin="http://webns.net/mvcb/"
+  xmlns:cc="http://web.resource.org/cc/"
+  xmlns="http://purl.org/rss/1.0/"&gt;
+&lt;channel rdf:about="http://www.tvorba-webu.cz/"&gt;
+&lt;title&gt;Tvorba webu&lt;/title&gt;
+&lt;link&gt;http://www.tvorba-webu.cz/&lt;/link&gt;
+&lt;description&gt;Denně o tvorbě webu&lt;/description&gt;
+&lt;dc:language&gt;cs&lt;/dc:language&gt;
+&lt;dc:date&gt;2005-03-24T01:47:00+01:00&lt;/dc:date&gt;
+
+&lt;image&gt;
+		&lt;url&gt;http://www.tvorba-webu.cz/images/logo.gif&lt;/url&gt;
+		&lt;title&gt;Tvorba webu&lt;/title&gt;
+		&lt;link&gt;http://www.tvorba-webu.cz&lt;/link&gt;
+		&lt;width&gt;254&lt;/width&gt;
+		&lt;height&gt;32&lt;/height&gt;
+		&lt;description&gt;Tvorba Webu - naučte se tvořit webové stránky&lt;/description&gt;
+&lt;/image&gt;
+
+&lt;items&gt;
+
+&lt;rdf:Seq&gt;
+		&lt;rdf:li rdf:resource="http://www.tvorba-webu.cz/javascript-expression.php3" /&gt;
+		&lt;rdf:li rdf:resource="http://www.tvorba-webu.cz/javascript-php.php3" /&gt;
+&lt;/rdf:Seq&gt;
+
+&lt;/items&gt;
+&lt;/channel&gt;
+		&lt;item rdf:about="http://www.tvorba-webu.cz/rss.php3"&gt;
+			&lt;title&gt;RSS - K čemu slouží&lt;/title&gt;
+			&lt;link&gt;http://www.tvorba-webu.cz/rss.php3&lt;/link&gt;
+			&lt;description&gt;Prostřednictvím RSS čtečky si můžete stahovat soubory RSS, díky kterým získáte informace o nových článcích na vašem oblíbeném webu.&lt;/description&gt;
+			&lt;dc:creator&gt;Šimon Grimmich&lt;/dc:creator&gt;
+			&lt;dc:date&gt;2005-02-24T16:55:00+01:00&lt;/dc:date&gt;
+		&lt;/item&gt;
+		&lt;item rdf:about="http://www.tvorba-webu.cz/javascript-expression.php3"&gt;
+			&lt;title&gt;JavaScript Expression&lt;/title&gt;
+			&lt;link&gt;http://www.tvorba-webu.cz/javascript-expression.php3&lt;/link&gt;
+			&lt;description&gt;Spojení CSS a JavaScriptu. Pomocí proměnných v JavaScriptu lze jednodušše nastavovat vlastnosti CSS. Funguje pouze v Internet Exploreru.&lt;/description&gt;
+			&lt;dc:creator&gt;Šimon Grimmich&lt;/dc:creator&gt;
+			&lt;dc:date&gt;2005-02-22T16:55:00+01:00&lt;/dc:date&gt;
+		&lt;/item&gt;
+&lt;/rdf:RDF&gt;
+</pre>
+<p>
+Nejdůležitější je první část, která obsahuje obecné informace o webu:
+</p>
+<pre>&lt;channel rdf:about="http://www.tvorba-webu.cz/"&gt;
+&lt;title&gt;Tvorba webu&lt;/title&gt;
+&lt;link&gt;http://www.tvorba-webu.cz/&lt;/link&gt;
+&lt;description&gt;Denně o tvorbě webu&lt;/description&gt;
+&lt;dc:language&gt;cs&lt;/dc:language&gt;
+&lt;dc:date&gt;2005-03-24T01:47:00+01:00&lt;/dc:date&gt;
+</pre>
+<p>
+Prvek <em>channel</em> musí obsahovat URL webu. <em>Title</em> má obdobný význam jako v dokumentu HTML, titulek webu. Prvek <em>link</em> obsahuje znovu URL zdroje. <em>Dc:language</em> obsahuje informaci o jazyku a nakonec <em>dc:date</em>
+obsahuje datum posledních změn (toto datum byste měli vždy změnit při
+aktualizaci webu obecný, formát RRRR-MM-DDTHH:MM:VV+01:00).
+Neměli byste opomenout žádný prvek, jde o zcela zásadní informace.
+</p>
+<p>
+Další část už obsahuje informace, které se budou zobrazovat čtenáři:
+</p>
+<pre>&lt;image&gt;
+		&lt;url&gt;http://www.tvorba-webu.cz/images/logo.gif&lt;/url&gt;
+		&lt;title&gt;Tvorba webu&lt;/title&gt;
+		&lt;link&gt;http://www.tvorba-webu.cz&lt;/link&gt;
+		&lt;width&gt;254&lt;/width&gt;
+		&lt;height&gt;32&lt;/height&gt;
+		&lt;description&gt;Tvorba Webu - naučte se tvořit webové stránky&lt;/description&gt;
+&lt;/image&gt;
+</pre>
+<p>
+Tato část není povinná, slouží jen pro okrasu. Jde  o obrázek (logo), který se bude zobrazovat u
+příspěvků. <em>Url</em> je absolutní adresa obrázku, <em>title</em> titulek, <em>link</em> je adresa, kam obrázek směřuje po kliknutí, <em>width</em> - šířka, <em>height</em> - výška a <em>description</em> - popis webu. 
+</p>
+<p>
+Další část obsahuje seznam adres nových příspěvků, zatím bez bližších popisů:
+</p>
+<pre>&lt;items&gt;
+&lt;rdf:Seq&gt;
+		&lt;rdf:li rdf:resource="http://www.tvorba-webu.cz/javascript-expression.php3" /&gt;
+		&lt;rdf:li rdf:resource="http://www.tvorba-webu.cz/javascript-php.php3" /&gt;
+&lt;/rdf:Seq&gt;
+&lt;/items&gt;
+</pre>
+<p>
+Tato část obsahuje libovolný počet prvků <em>rdf:li</em>, které slouží k výpisu adres všech nových článků.
+</p>
+<p>
+Poslední čáast obsahuje informace o nových článcích:
+</p>
+<pre>&lt;item rdf:about="http://www.tvorba-webu.cz/rss.php3"&gt;
+			&lt;title&gt;RSS - K čemu slouží&lt;/title&gt;
+			&lt;link&gt;http://www.tvorba-webu.cz/rss.php3&lt;/link&gt;
+			&lt;description&gt;Prostřednictvím RSS čtečky si můžete stahovat soubory RSS, díky kterým získáte informace o nových článcích na vašem oblíbeném webu.&lt;/description&gt;
+			&lt;dc:creator&gt;Šimon Grimmich&lt;/dc:creator&gt;
+			&lt;dc:date&gt;2005-02-24T16:55:00+01:00&lt;/dc:date&gt;
+&lt;/item&gt;
+</pre>
+<p>
+Poslední část obsahuje několikrát prvek <em>item</em>, který obsahuje informace o každém novém článku. <em>Title</em> - název článku, <em>link</em> - odkaz na článek, <em>description</em> - popis článku, <em>dc:creator</em> - autor článku a <em>dc:date</em> - datum vytvoření článku, opět trcohu zběsilý formát.
+</p>
+<h2>Pár rad</h2>
+<p>Popis jednotlivých článků by měl být krátký, aby ho čtečky načetli
+celý. Počet položek pro jednotlivé články by měl být tak kolem 10 a 20.
+Víc příspěvků asi nemá smysl. Nepřežeňte to a přidávejte opravdu jen
+důležité položky, aby se na Vás návštěvníci nevykašlali.
+</p>
+<p>Nakonec umístěte na každou stránku textový odkaz s textem RSS, aby
+návštěvníci mohli zjistit URL RSS zdroje. Rovněž je vhodné doplnit do
+hlavičky každého dokumentu prvek meta:
+</p>
+<pre>&lt;link rel="alternate" type="application/rss+xml" title="Tvorba WWW - o webdesignu, grafice a reklamě" href="http://www.tvorba-webu.cz/tvorba-webu.xml" /&gt;
+</pre>
+<p>
+<em>Title</em> je název webu, <em>href</em> je URL RSS zdroje. Díky tomuto mohou některé prohlížeče automaticky nabídnout odebírání zdroje. Umí to například <a href="http://firefox.czilla.cz/">Mozilla Firefox</a>, v pravém dolním rohu se objeví značka:
+</p>
+<p>
+<img src="jak-na-rss.php_soubory/firefox.gif" alt="firefox - RSS zdroj">
+</p>
+<p>
+Firefox ukládá RSS zdroje mezi záložky.
+</p>
+<br><br><br>
+<p style="border: 1px solid rgb(161, 36, 67); padding: 3px; margin-top: 10px;">
+<span style="color: rgb(161, 36, 67);">*</span> 2 GB webhosting (+ roční navýšení zdarma o 500 MB), doména zdarma, PHP, MySQL, e-maily. <a href="http://www.webhosting-c4.cz/adv/tvorba-webu" onclick="javascript:urchinTracker('C4_pod_clanky');" rel="nofollow">Více</a>...
+</p>
+
+</div><!--main-->
+	<hr>
+	<div id="navigace"><h2 class="nod">Navigace</h2></div>
+	<p id="navbar">Nacházíte se zde: &nbsp;<a href="http://www.tvorba-webu.cz/">Tvorba-Webu.cz</a> <span class="aquo">»</span> <a href="http://www.tvorba-webu.cz/xml/">XML</a> <span class="aquo">»</span> Jak vyvořit RSS</p><!--navbar-->
+
+  
+	<form id="vyhledavani" action="http://jyxo.cz/search.php?" method="get" onsubmit="return checkSearching(this);"><div>
+    	<h3 class="nod">Vyhledávání</h3>
+    	<input value="on" name="stem" type="hidden">
+<input value="cz@tvorba-webu.cz" name="d" type="hidden">
+		<label class="nod" for="hledej">Vložte text: </label><input class="txt" id="hledej" name="s" value="hledej..." onfocus="searching(this);" type="text"><input class="but" src="jak-na-rss.php_soubory/hledej.gif" alt="Hledej" title="Hledej" type="image">
+	</div></form>
+	<div><div id="menu">
+    	<h3 class="nod">Menu</h3>
+		<ul>
+			<li><a id="link1" href="http://www.tvorba-webu.cz/">Tvorba webu</a></li>
+			<li><a id="link2" href="http://www.tvorba-webu.cz/webhosting/">Webhosting</a></li>
+			<li><a id="link3" href="http://www.tvorba-webu.cz/html/">HTML<span></span></a></li>
+            <li><a id="link4" class="active" href="http://www.tvorba-webu.cz/xhtml/">XHTML<span></span></a></li>
+			<li><a id="link5" href="http://www.tvorba-webu.cz/css/">CSS<span></span></a></li>
+			<li><a id="link6" href="http://www.tvorba-webu.cz/javascript/">JavaScript<span></span></a></li>
+			<li><a id="link7" href="http://www.tvorba-webu.cz/php/">PHP<span></span></a></li>
+			<li><a id="link8" href="http://www.tvorba-webu.cz/seo/">SEO a reklama<span></span></a></li>
+			<li><a id="link9" class="last" href="http://www.tvorba-webu.cz/ostatni/">Ostatní<span></span></a></li>
+		</ul>
+	</div><!--menu--></div>
+	<div id="col-left">
+    	    
+    <div class="box">
+			<h3>Základy</h3>
+			<ul>
+<li><a href="http://www.tvorba-webu.cz/xhtml/">Základy&nbsp;XHTML</a></li>
+<li><a href="http://www.tvorba-webu.cz/xhtml/struktura_dokumentu.php">Struktura dokumentu</a></li>
+<li><a href="http://www.tvorba-webu.cz/xhtml/textove_elementy.php">Textové prvky</a></li>
+<li><a href="http://www.tvorba-webu.cz/xhtml/odkazy.php">Odkazy a záložky</a></li>
+<li><a href="http://www.tvorba-webu.cz/xhtml/obrazky.php">Obrázky</a></li>
+<li><a href="http://www.tvorba-webu.cz/xhtml/tabulky.php">Tabulky</a></li>
+<li><a href="http://www.tvorba-webu.cz/xhtml/format_tabulky.php">Formátování&nbsp;tabulek</a></li>
+<li><a href="http://www.tvorba-webu.cz/xhtml/seznamy.php">Seznamy</a></li>
+<li><a href="http://www.tvorba-webu.cz/xhtml/formulare.php">Formuláře</a></li>
+<li><a href="http://www.tvorba-webu.cz/xhtml/format_formulare.php">Formát&nbsp;formuláře</a></li>
+<li><a href="http://www.tvorba-webu.cz/xhtml/tlacitka.php">Tlačítka</a></li>
+<li><a href="http://www.tvorba-webu.cz/xhtml/ramy.php">Rámy</a></li>
+<li><a href="http://www.tvorba-webu.cz/xhtml/title.php">Title</a></li>
+<li><a href="http://www.tvorba-webu.cz/xhtml/meta.php">Meta</a></li>
+<li><a href="http://www.tvorba-webu.cz/xhtml/entity.php">Entity</a></li>
+<li><a href="http://www.tvorba-webu.cz/xhtml/url.php">URL</a></li>
+<li><a href="http://www.tvorba-webu.cz/xhtml/komentare.php">Komentáře</a></li>
+</ul>
+</div>
+
+    <div class="box">
+			<h3>XML</h3>
+			<ul>
+<li><a href="http://www.tvorba-webu.cz/xml/">Základy XML</a></li>
+<li><a href="http://www.tvorba-webu.cz/xml/jak-na-xml.php">Jak na XML</a></li>
+<li><a href="http://www.tvorba-webu.cz/xml/html-time.php">HTML+TIME</a></li>
+<li><a href="http://www.tvorba-webu.cz/xml/smil.php">SMIL</a></li>
+<li><a href="http://www.tvorba-webu.cz/xml/rss.php">Co je to RSS</a></li>
+<li><a href="http://www.tvorba-webu.cz/xml/jak-na-rss.php">Jak na RSS</a></li>
+<li><a href="http://www.tvorba-webu.cz/xml/VML-vector-markup-language.php">VML</a></li>
+<li><a href="http://www.tvorba-webu.cz/xml/xhtml.php">XHTML vs. HTML</a></li>
+</ul>
+</div>
+
+    <div class="box">
+			<h3>Multimédia</h3>
+			<ul>
+
+<li><a href="http://www.tvorba-webu.cz/xhtml/hudba.php">Hudba</a></li>
+<li><a href="http://www.tvorba-webu.cz/xhtml/video.php">Video</a></li>
+    
+    </ul>
+  
+    </div>
+  
+    	   	</div><!--col-left-->
+  
+    </div><!--content-helper-->
+    <hr>
+    <div id="col-right">
+    	<div id="seznam-levny-hosting" class="box">
+			<h3>Levný webhosting</h3>
+			<ul>
+
+			
+					<li><span>	<a href="http://www.webhosting-c4.cz/adv/tvorba-webu" onclick="javascript:urchinTracker('C4_sloupec');" rel="nofollow">Webhosting C4</a> 100 Kč/měsíc<br> doména zdarma, PHP, MySQL, <strong>2 GB</strong> prostor (roční navýšení zdarma o 500 MB!). Sám ho používám.</span></li>
+					<li><span class="jeden-radek"><a href="http://www.stable.cz/?ref=hosting" onclick="javascript:urchinTracker('ST_sloupec');" rel="nofollow">Stable</a> od <strong>68</strong> Kč/měsíc</span></li>
+					<li><span class="jeden-radek"><a href="http://www.tvorba-webu.cz/_rsrc/onebit.php" onclick="javascript:urchinTracker('OB_sloupec');" rel="nofollow">ONEbit</a> - řada programů</span></li>
+			</ul>
+		</div><!--box-->
+		<div id="seo" class="box">
+			<h3>Rozbor SEO</h3>
+			<p>Nabízím rozbor webových stránek z pohledu SEO.
+			Více v nabídce <a href="http://www.tvorba-webu.cz/seo/analyza.php">analýza SEO</a>.</p>
+		</div>
+        <!--box-->
+        <div id="pro-tvorbu-www-stranek" class="box">
+			<h3>Pro tvorbu www stránek</h3>
+            <div>
+<!-- StartKód: ad2.bbmedia.cz 3.1 Tvorba-webu(740) / Cely web(1) / Text + pic(1) / PRčlánek(7) -->
+<script type="text/javascript">
+/* <![CDATA[ */
+var bbs=screen,bbn=navigator,bbh;bbh='&ubl='+bbn.browserLanguage+'&ucc='+bbn.cpuClass+'&ucd='+bbs.colorDepth+'&uce='+bbn.cookieEnabled+'&udx='+bbs.deviceXDPI+'&udy='+bbs.deviceYDPI+'&usl='+bbn.systemLanguage+'&uje='+bbn.javaEnabled()+'&uah='+bbs.availHeight+'&uaw='+bbs.availWidth+'&ubd='+bbs.bufferDepth+'&uhe='+bbs.height+'&ulx='+bbs.logicalXDPI+'&uly='+bbs.logicalYDPI+'&use='+bbs.fontSmoothingEnabled+'&uto='+(new Date()).getTimezoneOffset()+'&uti='+(new Date()).getTime()+'&uui='+bbs.updateInterval+'&uul='+bbn.userLanguage+'&uwi='+bbs.width;
+document.write("<scr"+"ipt  language='JavaScript' charset='windows-1250' type='text/javascript' src='http://ad2.bbmedia.cz/please/showit/740/1/1/7/?typkodu=js&_idplan=47556"+bbh+"&alttext=0&border=0&bust="+Math.random()+"&target=_blank'><"+"\/scr"+"ipt>");
+/* ]]> */
+</script><script language="JavaScript" charset="windows-1250" type="text/javascript" src="jak-na-rss.php_soubory/a.js"></script><noscript><p><a
+href="http://ad2.bbmedia.cz/please/redirect/740/1/1/7/"><img
+src="http://ad2.bbmedia.cz/please/showit/740/1/1/7/?typkodu=img&amp;_idplan=47556"
+alt="" /></a></p></noscript>
+<!-- KonecKód: ad2.bbmedia.cz 3.1 -->
+
+<a href="http://ad2.bbmedia.cz/please/redirect/740/1/1/7/?param=44837/47556_1_" style="text-decoration: none ! important;"><img src="jak-na-rss.php_soubory/MS_puppy_125x125.gif" class="fl mr6" alt="VStudio"></a>
+				<p class="uppercase blue"><a href="http://ad2.bbmedia.cz/please/redirect/740/1/1/7/?param=44837/47556_1_" style="text-decoration: none ! important;">Každý vývojář umí pracovat s&nbsp;daty, vy ale tvoříte bohaté a funkcemi nabité aplikace.</a></p>
+                <p class="pod-img"><a href="http://ad2.bbmedia.cz/please/redirect/740/1/1/7/?param=44837/47556_1_" style="text-decoration: none ! important;">Mít
+ty správné nástroje pro svou práci se vyplatí. Nástroje, které fungují
+přesně tak, jak si přejete. Microsoft Visual Studio. Tipy a nástroje
+naleznete na dokazesto.cz.</a></p>
+			</div>
+        </div><!--box-->
+        <div id="zjistete-si-pagerank-a-srank" class="box">
+			<h3>Zjistěte si PageRank a S-rank</h3>
+			<p>Vložte
+si do svých stránek váš aktuální Google PageRank a S-Rank. Zcela zdarma
+tak budete vědět, jak Google váš web hodnotí. Skript získáte kliknutím
+na některou z ikonek.</p>
+            <div class="center">
+            	<a href="http://www.webhosting-domeny.info/seo/pagerank.php"><img alt="" src="jak-na-rss.php_soubory/pagerank.png" height="15" width="80"></a>
+            	<a href="http://www.webhosting-domeny.info/seo/s-rank.php"><img alt="" src="jak-na-rss.php_soubory/srank.png" height="15" width="80"></a>
+            	<a href="http://www.webhosting-domeny.info/seo/webrank.php"><img alt="" src="jak-na-rss.php_soubory/webrank.png" height="15" width="80"></a>
+			</div><!--center-->
+		</div><!--box-->
+    </div><!--col-right-->    
+	<div class="clean"></div><!--clean-->
+	</div><!--content-->
+	<hr>
+	<div id="footer-menu">
+    	<p class="fl"><a href="http://www.tvorba-webu.cz/">Úvodní stránka</a> &nbsp;|&nbsp; <a href="http://www.tvorba-webu.cz/webhosting/">Webhosting</a> &nbsp;|&nbsp; <a href="http://www.tvorba-webu.cz/html/">HTML</a> &nbsp;|&nbsp; <a href="http://www.tvorba-webu.cz/xhtml/">XHTML</a> &nbsp;|&nbsp; <a href="http://www.tvorba-webu.cz/css/">CSS</a> &nbsp;|&nbsp; <a href="http://www.tvorba-webu.cz/javascript/">JavaScript</a> &nbsp;|&nbsp; <a href="http://www.tvorba-webu.cz/php/">PHP</a> &nbsp;|&nbsp; <a href="http://www.tvorba-webu.cz/seo/">SEO a reklama</a> &nbsp;|&nbsp; <a href="http://www.tvorba-webu.cz/ostatni/">Ostatní</a></p><!--fl-->
+        <p class="fr"><!--<a href="xxx">Mapa stránek</a> &nbsp;|&nbsp; <a href="xxx">Prohlášení o přístupnosti</a>//--><script type="text/javascript" src="jak-na-rss.php_soubory/footer.js"></script> &nbsp;|&nbsp; <a href="javascript:window.print()">Tisk</a></p>
+        <div class="clean"></div>
+	</div>
+    <hr>
+	<div id="footer">
+		<p id="copyright">Copyright (c) 2003 - 2008. Tvorba-webu.cz &nbsp;|&nbsp; <a href="http://simon.grimmich.cz/">Šimon Grimmich</a>, <a href="http://www.tvorba-webu.cz/tvorba-webu.rss">RSS</a><br>Všechna práva vyhrazena</p>
+        <p id="adaptic"><a href="http://www.adaptic.cz/">Webdesign - Adaptic, s.r.o.</a></p>
+    
+        <div class="clean"><br>        <script src="jak-na-rss.php_soubory/counter.js" type="text/javascript"></script><img src="jak-na-rss.php_soubory/dot.gif" border="0" height="1" width="1">
+        Partneři: 
+        <a href="http://www.vytvarnetechniky.cz/">Ruční práce</a>, <a href="http://www.webhostings.cz/">web hosting</a>, <a href="http://www.knihkupectviknihy.cz/">Knihkupectví &amp; knihy</a>, 
+  <a href="http://www.e-pocasi.cz/">E-Počasí.cz</a>,  <a href="http://www.jaknaweb.com/" title="vše o HTML,CSS,PHP,MySQL,XML,tvorba a výroba www a web grafika">JakNaWeb.com</a>, <a href="http://hosting.blueboard.cz/" title="Poctivý hosting s osobním přístupem">Hosting BlueBoard.cz</a>, <a href="http://www.webdesign.paysoft.cz/" title="WebDesign PAY &amp; SOFT - Tvorba stránek a jejich optimalizace pro vyhledávače">WebDesign a SEO</a>, <a href="http://www.sosej.cz/" title="Sosej.cz - Moderní DOWNLOAD portál">Sosej.cz - Moderní download portál</a>, <a href="http://www.artic-studio.net/" title="Artic Studio Webdesign">Artic Studio Webdesign - tvorba www stránek</a>, <a href="http://www.websnadno.cz/?ban=tvorbawebu">WebSnadno.cz</a>, <a href="http://tvorba-webu.zdarek.com/" title="Návod jak si udělat vlastní stránky">Tvorba www stránek</a>, <a href="http://www.er.cz/" title="Doména zdarma pro web">er.cz</a>, <a href="http://pujcky.zdarek.com/" title="Inzertní portál pro nabídku i poptávku">Půjčky</a>, <a href="http://tvorba-webu.zdarek.com/php/">PHP scripty a návody</a>, <a href="http://www.grimmich.cz/satky/">šátky</a>, <a href="http://www.webhosting-domeny.info/">domény</a>, <a href="http://www.appleipod.cz/">iPod</a>, <a href="http://antikvariaty.kvalitne.cz/">antikvariáty</a>, <a href="http://www.kvalitnirecepty.cz/">Recepty</a></div><!--clean-->
+
+
+        
+	</div><!--footer-->
+</div><!--page-->
+</div><!--body-helper-->
+<script src="jak-na-rss.php_soubory/urchin.js" type="text/javascript">
+</script>
+<script type="text/javascript">
+_uacct = "UA-581379-1";
+urchinTracker();
+</script>
+<div style="position: absolute; left: 427px; top: 306px; z-index: 1000000000 ! important; visibility: hidden; opacity: 1; width: 0px;" id="linkalert-box"><img style="width: 0px;" src="jak-na-rss.php_soubory/none-icon.png" id="linkalert-icon-1"></div></body></html>

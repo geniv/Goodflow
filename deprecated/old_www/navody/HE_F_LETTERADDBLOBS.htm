@@ -1,0 +1,77 @@
+<!doctype html public "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=Windows-1250">
+<title>LetterAddBLOBs</title>
+<link rel='stylesheet' style='text/css' href='../function.css'>
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000">
+
+
+
+<h2 class=function>LetterAddBLOBs</h2>
+<img src='../images/cpp.gif' width='44' height='16' border='0' alt='c/c++' align='middle' hspace='2'><img src='../images/pascal.gif' width='44' height='16' border='0' alt='pascal' align='middle' hspace='2'><img src='../images/sql.gif' width='44' height='16' border='0' alt='sql' align='middle' hspace='2'>
+
+
+<br><br>
+<div class='typ'>int <b>LetterAddBLOBs</b>(DWORD letter, char *fname, LPCSTR table, LPCSTR attr, LPCSTR cond);<br>
+function <b>LetterAddBLOBs</b>(letter : integer; fname, table, attr, cond : PChar) : integer;<br>
+FUNCTION <b>LetterAddBLOBs</b>(IN letter INT, INOUT fname CHAR (255), INOUT table CHAR (63), INOUT attr CHAR (31), INOUT cond CHAR (4090)) RETURNS INT;
+</div>
+
+
+<p><b>Parametry</b></p>
+
+<table border=1 cols=2>
+
+<tr valign="top">
+<td width=7%><i>letter </i></td>
+<td width=93%>handle dopisu</td>
+</tr>
+
+<tr valign="top">
+<td width=7%><i>fname </i></td>
+<td width=93%>jméno, pod kterým se obsah BLOBu (CLOBu) k zásilce připojí</td>
+</tr>
+
+<tr valign="top">
+<td width=7%><i>table </i></td>
+<td width=93%>jméno tabulky, ze které se bude odesílat (obecně tam může být cokoliv, co může být v SELECTU za FROM)</td>
+</tr>
+
+<tr valign="top">
+<td width=7%><i>attr </i></td>
+<td width=93%>jméno sloupce, ze kterého se bude odesílat (musí to být sloupec proměnné délky typu CLOB nebo BLOB)</td>
+</tr>
+
+<tr valign="top">
+<td width=7%><i>cond  </i></td>
+<td width=93%>výběrová podmínka, která identifikuje záznam, ze kterého se bude odesílat (podmínka musí vybrat právě jeden záznam, jiný počet vybraných záznamů způsobí výjimku 21000 (SQ_CARDINALITY_VIOLATION))</td>
+</tr>
+</table><br>
+
+<p><b>Od verze</b></p>
+
+<p>7.0d</p>
+
+<p><b>Popis</b></p>
+
+<p>Funkce připojí k vytvářené zásilce <a href="HE_MAIL.htm">elektronické pošty</a> soubor vytvořený z obsahu sloupce typu BLOB (CLOB) databázové tabulky. Handle dopisu vrací (zásilku vytváří) funkce <b><code>LetterCreate</code></b>.</p>
+
+<p>Výběr sloupce typu BLOB je v této funkci prováděn způsobem využitelným v jazyce SQL (na rozdíl od obdobné funkce <b><code>LetterAddBOLBr</code></b>, která se více hodí pro API klientského jazyka)</p>
+
+<p><b>Hodnota funkce</b></p>
+
+<p>Funkce vrací nulu v případě úspěchu a  číslo chyby v případě neúspěchu. <a href="HE_MAILERRORS.htm">Číslo chyby</a> lze také zjistit pomocí <b><code>Sz_error</code></b> nebo <b><code>Signalize</code></b>.</p>
+
+<p><b>Viz</b></p>
+
+<ul class='viz'>
+ <li><a href="HE_F_LETTERCREATE.htm">LetterCreate</a> </li>
+ <li><a href="HE_F_LETTERADDFILE.htm">LetterAddFile</a> </li>
+ <li><a href="HE_F_LETTERADDBLOBR.htm">LetterAddBLOBr</a>  </li>
+</ul>
+
+</body>
+</html>

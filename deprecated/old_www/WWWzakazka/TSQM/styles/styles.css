@@ -1,0 +1,1330 @@
+body {
+  color: #000;
+  position: relative;
+  font: normal 12px "Trebuchet MS", Verdana, Arial, "Arial CE", sans-serif;
+  margin-top: 28px;
+}
+
+body.odsazeni_left {
+  margin-left: 200px;
+}
+
+body.odsazeni_right {
+  margin-right: 140px;
+}
+
+/* nacitaci bloky */
+.preload {
+  background: url(../obr/nacitani.gif) no-repeat;
+}
+
+.log_flex {
+  width: 48px;
+  height: 48px;
+  margin: 20px auto;
+  background: url(../obr/nacitani.gif) no-repeat;
+}
+
+.log_flex p {
+  display: none;
+}
+
+.log_flex p a {
+  color: #3c3b38;
+  font-weight: bold;
+}
+
+.log_flex p a:hover {
+  color: #51839C;
+}/* /nacitaci bloky */
+
+/* kdo je prihlasen a odhlasit */
+.prihlasen_odhlasit {
+  width: 298px;
+  height: 28px;
+  background: url(../obr/prihlasen_odhlasit.png) no-repeat;
+  position: fixed;
+  top: 0;
+  right: 0;
+  z-index: 100;
+}
+
+.prihlasen_odhlasit p {
+  margin: 5px 0 0 10px;
+  padding-bottom: 1px;
+  float: left;
+  color: white;
+}
+
+.prihlasen_odhlasit p.odhl {
+  margin: 5px 10px 0 0;
+  float: right;
+}
+
+.prihlasen_odhlasit p strong {
+  border-bottom: 1px dotted;
+}
+
+.prihlasen_odhlasit p a {
+  color: white;
+}
+
+.prihlasen_odhlasit p a:hover {
+  color: #ffa500;
+}/* /kdo je prihlasen a odhlasit */
+
+/* formular pro nastaveni jazyka */
+#jazyk {
+  position: fixed;
+  top: 27px;
+  right: 0;
+  background: url(../obr/zmena_jazyka.png) no-repeat;
+  z-index: 100;
+}
+
+#jazyk #jazykbar {
+  color: #fff;
+  height: 28px;
+  width: 26px; /* zavisi na vypocitavani dhtml */
+  text-align: center;
+  font-size: 26px;
+  line-height: 24px;
+  float: left;
+  cursor: pointer;
+}
+
+#jazyk #jazykbar:hover {
+  color: #ffa500;
+}
+
+#jazyk #nastaveni_jazyka {
+  text-align: center;
+}
+
+#jazyk #nastaveni_jazyka form {
+  width: 298px;
+}
+
+#jazyk #nastaveni_jazyka form fieldset {
+  border: none;
+  width: 260px;
+}
+
+#jazyk #nastaveni_jazyka form fieldset dl {
+  margin: 0 auto;
+  overflow: hidden;
+}
+
+#jazyk #nastaveni_jazyka form fieldset dd {
+  float: left;
+}
+
+#jazyk #nastaveni_jazyka form fieldset dd.prvni_dd {
+  margin-left: 20px;
+  padding-top: 4px;
+}
+
+#jazyk #nastaveni_jazyka form fieldset dd.druhy_dd {
+  margin-left: 1px;
+  padding-top: 1px;
+}
+
+#jazyk #nastaveni_jazyka form fieldset select,
+#jazyk #nastaveni_jazyka form fieldset input {
+  font: 11px Verdana, sans-serif;
+  padding: 2px;
+}
+
+#jazyk #nastaveni_jazyka form fieldset select {
+  width: 120px;
+}
+
+#jazyk #nastaveni_jazyka form fieldset select option {
+
+}
+
+#jazyk #nastaveni_jazyka form fieldset input {
+  width: 110px;
+}/* /formular pro nastaveni jazyka */
+
+/* drobeckova navigace */
+.drobeckova_navigace {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  float: left;
+  min-width: 10px;
+  height: 28px;
+  white-space: nowrap;
+  line-height: 26px;
+  padding-right: 10px;
+  padding-left: 10px;
+  background: url(../obr/background_drobeckova_navigace.png) no-repeat right center;
+  color: white;
+}
+
+.drobeckova_navigace a {
+  color: white;
+}
+
+.drobeckova_navigace a:hover {
+  color: #ffa500;
+}
+
+.drobeckova_navigace strong {
+
+}/* /drobeckova navigace */
+
+/* cas vygenerovano */
+.vygenerovano_czech {
+  width: 298px;
+  height: 28px;
+  background: url(../obr/stranka_vygenerovana.png) no-repeat;
+  position: fixed;
+  bottom: 0;
+  right: 0;
+}
+
+.vygenerovano_deutsch {
+  display: none;
+}
+
+.vygenerovano_czech p {
+  margin: 7px 0 0 50px;
+  padding-bottom: 1px;
+  float: left;
+  color: white;
+}/* /cas vygenerovano */
+
+
+
+
+
+
+.vypis_zamestnancu {
+  width: 600px;
+  margin: 0 auto;
+  border: 1px solid blue;
+}
+
+.vypis_zamestnancu p {
+
+}
+
+.vypis_zamestnancu p a {
+
+}
+
+.vypis_zamestnancu p a:hover {
+
+}
+
+.vypis_zamestnancu p a img {
+
+}
+
+
+
+
+
+/* centralni bocni menu */
+.menu_admin_centralni_background,
+.menu_partneri_centralni_background,
+.menu_zakaznici_centralni_background,
+.menu_zamestnanec_centralni_background,
+.menu_admin_centralni_background .bokmenu_top,
+.menu_partneri_centralni_background .bokmenu_top,
+.menu_zakaznici_centralni_background .bokmenu_top,
+.menu_zamestnanec_centralni_background .bokmenu_top,
+.menu_admin_centralni_background .bokmenu_bottom,
+.menu_partneri_centralni_background .bokmenu_bottom,
+.menu_zakaznici_centralni_background .bokmenu_bottom,
+.menu_zamestnanec_centralni_background .bokmenu_bottom {
+  width: 200px;
+}
+
+.menu_admin_centralni_background,
+.menu_partneri_centralni_background,
+.menu_zakaznici_centralni_background,
+.menu_zamestnanec_centralni_background {
+  position: fixed;
+  top: 28px;
+  left: 0;
+}
+
+.menu_admin_centralni_background div,
+.menu_partneri_centralni_background div,
+.menu_zakaznici_centralni_background div,
+.menu_zamestnanec_centralni_background div {
+  background: url(../obr/bocni_menu/bocni_menu_center.png);
+}
+
+.menu_admin_centralni_background div p,
+.menu_partneri_centralni_background div p,
+.menu_zakaznici_centralni_background div p,
+.menu_zamestnanec_centralni_background div p {
+  width: 180px;
+  margin: 0 auto 6px;
+  padding-bottom: 6px;
+  border-bottom: 1px solid #bfbfbf;
+}
+
+.menu_admin_centralni_background div p.posledni,
+.menu_partneri_centralni_background div p.posledni,
+.menu_zakaznici_centralni_background div p.posledni,
+.menu_zamestnanec_centralni_background div p.posledni {
+  margin-bottom: 0;
+  padding-bottom: 0;
+  border-bottom: none;
+}
+
+.menu_admin_centralni_background div p a,
+.menu_partneri_centralni_background div p a,
+.menu_zakaznici_centralni_background div p a,
+.menu_zamestnanec_centralni_background div p a {
+  padding-left: 10px;
+  display: block;
+  color: white;
+}
+
+.menu_admin_centralni_background div p a:hover,
+.menu_partneri_centralni_background div p a:hover,
+.menu_zakaznici_centralni_background div p a:hover,
+.menu_zamestnanec_centralni_background div p a:hover {
+  color: #ffa500;
+}
+
+.menu_admin_centralni_background .bokmenu_top,
+.menu_partneri_centralni_background .bokmenu_top,
+.menu_zakaznici_centralni_background .bokmenu_top,
+.menu_zamestnanec_centralni_background .bokmenu_top,
+.menu_admin_centralni_background .bokmenu_bottom,
+.menu_partneri_centralni_background .bokmenu_bottom,
+.menu_zakaznici_centralni_background .bokmenu_bottom,
+.menu_zamestnanec_centralni_background .bokmenu_bottom {
+  display: block;
+  height: 19px;
+}
+
+.menu_admin_centralni_background .bokmenu_top,
+.menu_partneri_centralni_background .bokmenu_top,
+.menu_zakaznici_centralni_background .bokmenu_top,
+.menu_zamestnanec_centralni_background .bokmenu_top {
+  background: url(../obr/bocni_menu/bocni_menu_top.png);
+}
+
+.menu_admin_centralni_background .bokmenu_bottom,
+.menu_partneri_centralni_background .bokmenu_bottom,
+.menu_zakaznici_centralni_background .bokmenu_bottom,
+.menu_zamestnanec_centralni_background .bokmenu_bottom {
+  background: url(../obr/bocni_menu/bocni_menu_bottom.png);
+}
+
+.prava_zvlast_menu div {
+  overflow: hidden;
+}
+
+.prava_zvlast_menu div p {
+  width: 190px;
+  height: 24px;
+  line-height: 24px;
+  color: #fff;
+}
+
+.prava_zvlast_menu div p a {
+  height: 24px;
+  padding: 0;
+  background: url(../obr/upravit_ikona_mala.png) no-repeat left center;
+}
+
+.prava_zvlast_menu div p.text_polozka_prava {
+  width: 150px;
+  margin-left: 4px;
+  float: left;
+  padding-left: 3px;
+}
+
+.prava_zvlast_menu div p.text_akce_prava {
+  width: 40px;
+  float: left;
+}
+
+.prava_zvlast_menu div p.polozka_v_zahlavi {
+  width: 130px;
+}
+
+.prava_zvlast_menu div p.akce_v_zahlavi {
+  width: 60px;
+  text-align: center;
+}
+
+/* centralni nastaveni */
+.central_menu_bok div {
+  overflow: hidden;
+}
+
+.central_menu_bok div p {
+  color: #fff;
+  line-height: 24px;
+  /* border-bottom: none; */
+}
+
+/*
+.central_menu_bok div span {
+  display: block;
+  width: 100%;
+  border-bottom: 1px solid #bfbfbf;
+  overflow: hidden;
+}*/
+
+.central_menu_bok div .text_polozka_central {
+  width: 140px;
+  margin-left: 3px;
+  padding-left: 2px;
+  float: left;
+}
+
+.central_menu_bok div .text_akce_central_upravit,
+.central_menu_bok div .text_akce_central_smazat {
+  font-size: 10px;
+  width: 24px;
+  float: left;
+  overflow: hidden;
+}
+
+.central_menu_bok div .text_akce_central_upravit a,
+.central_menu_bok div .text_akce_central_smazat a {
+  height: 24px;
+  padding: 0;
+}
+
+.central_menu_bok div .text_akce_central_upravit a {
+  background: url(../obr/upravit_ikona_mala.png) no-repeat center;
+}
+
+.central_menu_bok div .text_akce_central_smazat a {
+  background: url(../obr/smazat_ikona_mala.png) no-repeat center;
+}
+
+.central_menu_bok div .polozka_central_zahlavi {
+  width: 110px;
+}
+
+.central_menu_bok div .upravit_v_zahlavi,
+.central_menu_bok div .smazat_v_zahlavi {
+  width: 42px;
+  text-align: right;
+  margin: 0;
+}
+
+.central_menu_bok div .upravit_v_zahlavi {
+
+}
+
+.central_menu_bok div .smazat_v_zahlavi {
+  text-align: center;
+}/* /centralni nastaveni */
+
+
+
+
+
+
+/*
+smazat_ikona_mala.png
+pridat_ikona_mala.png
+upravit_ikona_mala.png
+*/
+
+
+
+
+
+
+
+
+/* /centralni bocni menu */
+
+
+
+
+
+
+
+.zpatky_jedna_uroven {
+  width: 128px;
+  height: 80px;
+  position: fixed;
+  top: 100px;
+  right: 10px;
+}
+
+.zpatky_jedna_uroven a {
+  width: 128px;
+  height: 80px;
+  display: block;
+  background: url(../obr/zpatky_jedna_uroven.png) no-repeat center;
+}
+
+.zpatky_jedna_uroven_uvod,
+.zpatky_jedna_uroven_uvod a {
+  display: none;
+}
+
+
+
+
+
+
+
+/* nastavovani prav v adminu */
+#nastaveni_prav_admin {
+  width: 800px;
+  margin: 0 auto;
+}
+
+#nastaveni_prav_admin form {
+
+}
+
+#nastaveni_prav_admin form fieldset {
+  border: none;
+}
+
+#nastaveni_prav_admin form fieldset input {
+
+}
+
+#nastaveni_prav_admin form fieldset dl {
+  margin-left: 30px;
+}
+
+#nastaveni_prav_admin form fieldset dl dt,
+#nastaveni_prav_admin form fieldset dl dd {
+  height: 20px;
+  float: left;
+  position: relative;
+}
+
+#nastaveni_prav_admin form fieldset dl dt {
+  width: 30px;
+  text-align: right;
+}
+
+#nastaveni_prav_admin form fieldset dl dd {
+  width: 600px;
+  white-space: nowrap;
+}
+
+#nastaveni_prav_admin form fieldset dl dd em {
+  width: 200px;
+  height: 20px;
+  position: absolute;
+  top: 0;
+  right: 220px;
+  display: block;
+}
+
+#nastaveni_prav_admin form fieldset dl dd a {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding-right: 24px;
+  color: #1186dc;
+}
+
+#nastaveni_prav_admin form fieldset dl dd a:hover {
+  color: #000;
+}
+
+#nastaveni_prav_admin form fieldset dl dd a span {
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  cursor: pointer;
+  display: block;
+  background-image: url(../obr/zabalene_prava.png);
+}
+
+#nastaveni_prav_admin form fieldset dl dt a {
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  top: 0;
+  left: -10px;
+  cursor: pointer;
+  display: block;
+  background-image: url(../obr/plus_rozbalene_prava.png);
+}
+
+#nastaveni_prav_admin form fieldset ul {
+  list-style: none;
+}
+
+#nastaveni_prav_admin form fieldset ul li {
+  overflow: hidden;
+  width: 100%;
+}
+
+#nastaveni_prav_admin form fieldset ul li dl {
+  padding-top: 3px;
+}
+
+#nastaveni_prav_admin form fieldset ul li dl dt {
+  padding-top: 2px;
+}
+
+#nastaveni_prav_admin form fieldset ul li dl dd {
+  padding-bottom: 2px;
+  padding-left: 6px;
+  border-bottom: 1px solid #efefef;
+}
+
+#nastaveni_prav_admin form fieldset ul li ul {
+  display: none;
+}
+
+#nastaveni_prav_admin form fieldset ul li ul li:first-child {
+  clear: both;
+}
+
+#nastaveni_prav_admin form fieldset ul li ul li {
+  width: 100%;
+}
+
+#nastaveni_prav_admin form fieldset ul li ul li dl {
+
+}
+
+#nastaveni_prav_admin form fieldset ul li ul li dl dt {
+
+}
+
+#nastaveni_prav_admin form fieldset ul li ul li dl dd {
+
+}
+
+#nastaveni_prav_admin form fieldset ul li ul.prvni_zanoreni {
+  margin-left: 40px;
+}
+
+#nastaveni_prav_admin form fieldset ul li dl dd {
+
+}
+
+#nastaveni_prav_admin form fieldset ul li dl dd a {
+
+}
+
+#nastaveni_prav_admin form fieldset ul li ul li ul {
+  display: none;
+}
+
+#nastaveni_prav_admin form fieldset ul li ul li ul li:first-child {
+  clear: both;
+}
+
+#nastaveni_prav_admin form fieldset ul li ul li ul li {
+  width: 100%;
+}
+
+#nastaveni_prav_admin form fieldset ul li ul li ul li dl {
+
+}
+
+#nastaveni_prav_admin form fieldset ul li ul li ul li dl dt {
+
+}
+
+#nastaveni_prav_admin form fieldset ul li ul li ul li dl dd {
+
+}
+
+#nastaveni_prav_admin form fieldset ul li ul li ul.druhe_zanoreni {
+  margin-left: 40px;
+}
+
+#nastaveni_prav_admin form fieldset ul li ul li ul.druhe_zanoreni a {
+
+}
+
+
+/* /nastavovani prav v adminu */
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* uvod menu czech i deutsch */
+#uvod_menu_czech,
+#uvod_menu_deutsch {
+  width: 551px;
+  height: 340px;
+  margin: 30px auto 0;
+  position: relative;
+}
+
+#uvod_menu_czech #logo,
+#uvod_menu_deutsch #logo {
+  width: 313px;
+  height: 303px;
+  position: absolute;
+  top: 16px;
+  left: 238px;
+}
+
+#uvod_menu_czech #logo p,
+#uvod_menu_deutsch #logo p {
+  width: 313px;
+  position: relative;
+}
+
+/* menu logo */
+#uvod_menu_czech #logo #menu_central_1_3,
+#uvod_menu_deutsch #logo #menu_central_1_3 {
+  height: 92px;
+  background: url(../obr/menu_central/tsqm_menu_1_3.png) no-repeat;
+}
+
+#uvod_menu_czech #logo #menu_central_2_3,
+#uvod_menu_deutsch #logo #menu_central_2_3 {
+  height: 98px;
+  background: url(../obr/menu_central/tsqm_menu_2_3.png) no-repeat;
+}
+
+#uvod_menu_czech #logo #menu_central_3_3,
+#uvod_menu_deutsch #logo #menu_central_3_3 {
+  height: 113px;
+  background: url(../obr/menu_central/tsqm_menu_3_3.png) no-repeat;
+}/* /menu logo */
+
+/* hlavni prednastaveni */
+#uvod_menu_czech p,
+#uvod_menu_deutsch p {
+  position: absolute;
+}
+
+#uvod_menu_czech p a,
+#uvod_menu_czech p a span,
+#uvod_menu_deutsch p span,
+#uvod_menu_deutsch p a,
+#uvod_menu_deutsch p a span {
+  display: block;
+}
+
+#uvod_menu_deutsch p a {
+  height: 42px;
+}
+
+#uvod_menu_czech p a .alternativa,
+#uvod_menu_czech p a .ikona,
+#uvod_menu_czech p .alternativa_noactive,
+#uvod_menu_deutsch p a .alternativa,
+#uvod_menu_deutsch p .alternativa_noactive {
+  display: none;
+}
+
+#uvod_menu_deutsch p a .polozka,
+#uvod_menu_deutsch p .polozka_noactive {
+  float: left;
+}
+
+#uvod_menu_deutsch p a .ikona,
+#uvod_menu_deutsch p .ikona_noactive {
+  width: 42px;
+  height: 42px;
+  float: right;
+}/* /hlavni prednastaveni */
+
+/* polozky v menu - czech i deutsch - active i noactive */
+#uvod_menu_czech #uvodni_strana,
+#uvod_menu_czech #uvodni_strana_noactive {
+  top: 7px;
+  left: 123px;
+}
+
+#uvod_menu_czech #uvodni_strana a,
+#uvod_menu_czech #uvodni_strana_noactive {
+  width: 159px;
+  height: 31px;
+  background: url(../obr/menu_cz/uvodni_strana.png) no-repeat;
+}
+
+#uvod_menu_czech #uvodni_strana_noactive {
+  background: url(../obr/menu_cz_noactive/uvodni_strana.png) no-repeat;
+}
+
+#uvod_menu_deutsch #uvodni_strana,
+#uvod_menu_deutsch #uvodni_strana_noactive {
+  top: 3px;
+  left: 125px;
+}
+
+#uvod_menu_deutsch #uvodni_strana a,
+#uvod_menu_deutsch #uvodni_strana_noactive {
+  width: 173px;
+}
+
+#uvod_menu_deutsch #uvodni_strana a .polozka,
+#uvod_menu_deutsch #uvodni_strana_noactive .polozka_noactive {
+  width: 124px;
+  height: 26px;
+  margin-top: 8px;
+  background: url(../obr/menu_de/uvodni_strana.png) no-repeat;
+}
+
+#uvod_menu_deutsch #uvodni_strana_noactive .polozka_noactive {
+  background: url(../obr/menu_de_noactive/uvodni_strana.png) no-repeat;
+}
+
+#uvod_menu_deutsch #uvodni_strana a .ikona {
+  background: url(../obr/menu_de/ikony/uvodni_strana.png) no-repeat;
+}
+
+#uvod_menu_deutsch #uvodni_strana_noactive .ikona_noactive {
+  background: url(../obr/menu_de_noactive/ikony/uvodni_strana.png) no-repeat;
+}
+
+#uvod_menu_czech #zamestnanci,
+#uvod_menu_czech #zamestnanci_noactive {
+  top: 47px;
+  left: 105px;
+}
+
+#uvod_menu_czech #zamestnanci a,
+#uvod_menu_czech #zamestnanci_noactive {
+  width: 148px;
+  height: 27px;
+  background: url(../obr/menu_cz/zamestnanci.png) no-repeat;
+}
+
+#uvod_menu_czech #zamestnanci_noactive {
+  background: url(../obr/menu_cz_noactive/zamestnanci.png) no-repeat;
+}
+
+#uvod_menu_deutsch #zamestnanci,
+#uvod_menu_deutsch #zamestnanci_noactive {
+  top: 39px;
+  left: 91px;
+}
+
+#uvod_menu_deutsch #zamestnanci a,
+#uvod_menu_deutsch #zamestnanci_noactive {
+  width: 180px;
+}
+
+#uvod_menu_deutsch #zamestnanci a .polozka,
+#uvod_menu_deutsch #zamestnanci_noactive .polozka_noactive {
+  width: 130px;
+  height: 26px;
+  margin-top: 8px;
+  background: url(../obr/menu_de/zamestnanci.png) no-repeat;
+}
+
+#uvod_menu_deutsch #zamestnanci_noactive .polozka_noactive {
+  background: url(../obr/menu_de_noactive/zamestnanci.png) no-repeat;
+}
+
+#uvod_menu_deutsch #zamestnanci a .ikona {
+  background: url(../obr/menu_de/ikony/zamestnanci.png) no-repeat;
+}
+
+#uvod_menu_deutsch #zamestnanci_noactive .ikona_noactive {
+  background: url(../obr/menu_de_noactive/ikony/zamestnanci.png) no-repeat;
+}
+
+#uvod_menu_czech #partneri,
+#uvod_menu_czech #partneri_noactive {
+  top: 83px;
+  left: 141px;
+}
+
+#uvod_menu_czech #partneri a,
+#uvod_menu_czech #partneri_noactive {
+  width: 93px;
+  height: 27px;
+  background: url(../obr/menu_cz/partneri.png) no-repeat;
+}
+
+#uvod_menu_czech #partneri_noactive {
+  background: url(../obr/menu_cz_noactive/partneri.png) no-repeat;
+}
+
+#uvod_menu_deutsch #partneri,
+#uvod_menu_deutsch #partneri_noactive {
+  top: 77px;
+  left: 3px;
+}
+
+#uvod_menu_deutsch #partneri a,
+#uvod_menu_deutsch #partneri_noactive {
+  width: 248px;
+}
+
+#uvod_menu_deutsch #partneri a .polozka,
+#uvod_menu_deutsch #partneri_noactive .polozka_noactive {
+  width: 198px;
+  height: 30px;
+  margin-top: 6px;
+  background: url(../obr/menu_de/partneri.png) no-repeat;
+}
+
+#uvod_menu_deutsch #partneri_noactive .polozka_noactive {
+  background: url(../obr/menu_de_noactive/partneri.png) no-repeat;
+}
+
+#uvod_menu_deutsch #partneri a .ikona {
+  background: url(../obr/menu_de/ikony/partneri.png) no-repeat;
+}
+
+#uvod_menu_deutsch #partneri_noactive .ikona_noactive {
+  background: url(../obr/menu_de_noactive/ikony/partneri.png) no-repeat;
+}
+
+#uvod_menu_czech #zakaznici,
+#uvod_menu_czech #zakaznici_noactive {
+  top: 123px;
+  left: 110px;
+}
+
+#uvod_menu_czech #zakaznici a,
+#uvod_menu_czech #zakaznici_noactive {
+  width: 111px;
+  height: 27px;
+  background: url(../obr/menu_cz/zakaznici.png) no-repeat;
+}
+
+#uvod_menu_czech #zakaznici_noactive {
+  background: url(../obr/menu_cz_noactive/zakaznici.png) no-repeat;
+}
+
+#uvod_menu_deutsch #zakaznici,
+#uvod_menu_deutsch #zakaznici_noactive {
+  top: 115px;
+  left: 97px;
+}
+
+#uvod_menu_deutsch #zakaznici a,
+#uvod_menu_deutsch #zakaznici_noactive {
+  width: 140px;
+}
+
+#uvod_menu_deutsch #zakaznici a .polozka,
+#uvod_menu_deutsch #zakaznici_noactive .polozka_noactive {
+  width: 89px;
+  height: 26px;
+  margin-top: 8px;
+  background: url(../obr/menu_de/zakaznici.png) no-repeat;
+}
+
+#uvod_menu_deutsch #zakaznici_noactive .polozka_noactive {
+  background: url(../obr/menu_de_noactive/zakaznici.png) no-repeat;
+}
+
+#uvod_menu_deutsch #zakaznici a .ikona {
+  background: url(../obr/menu_de/ikony/zakaznici.png) no-repeat;
+}
+
+#uvod_menu_deutsch #zakaznici_noactive .ikona_noactive {
+  background: url(../obr/menu_de_noactive/ikony/zakaznici.png) no-repeat;
+}
+
+#uvod_menu_czech #management,
+#uvod_menu_czech #management_noactive {
+  top: 160px;
+  left: 82px;
+}
+
+#uvod_menu_czech #management a,
+#uvod_menu_czech #management_noactive {
+  width: 137px;
+  height: 29px;
+  background: url(../obr/menu_cz/management.png) no-repeat;
+}
+
+#uvod_menu_czech #management_noactive {
+  background: url(../obr/menu_cz_noactive/management.png) no-repeat;
+}
+
+#uvod_menu_deutsch #management,
+#uvod_menu_deutsch #management_noactive {
+  top: 152px;
+  left: 34px;
+}
+
+#uvod_menu_deutsch #management a,
+#uvod_menu_deutsch #management_noactive {
+  width: 202px;
+}
+
+#uvod_menu_deutsch #management a .polozka,
+#uvod_menu_deutsch #management_noactive .polozka_noactive {
+  width: 150px;
+  height: 30px;
+  margin-top: 6px;
+  background: url(../obr/menu_de/management.png) no-repeat;
+}
+
+#uvod_menu_deutsch #management_noactive .polozka_noactive {
+  background: url(../obr/menu_de_noactive/management.png) no-repeat;
+}
+
+#uvod_menu_deutsch #management a .ikona {
+  background: url(../obr/menu_de/ikony/management.png) no-repeat;
+}
+
+#uvod_menu_deutsch #management_noactive .ikona_noactive {
+  background: url(../obr/menu_de_noactive/ikony/management.png) no-repeat;
+}
+
+#uvod_menu_czech #procesy,
+#uvod_menu_czech #procesy_noactive {
+  top: 199px;
+  left: 128px;
+}
+
+#uvod_menu_czech #procesy a,
+#uvod_menu_czech #procesy_noactive {
+  width: 92px;
+  height: 30px;
+  background: url(../obr/menu_cz/procesy.png) no-repeat;
+}
+
+#uvod_menu_czech #procesy_noactive {
+  background: url(../obr/menu_cz_noactive/procesy.png) no-repeat;
+}
+
+#uvod_menu_deutsch #procesy,
+#uvod_menu_deutsch #procesy_noactive {
+  top: 189px;
+  left: 84px;
+}
+
+#uvod_menu_deutsch #procesy a,
+#uvod_menu_deutsch #procesy_noactive {
+  width: 154px;
+}
+
+#uvod_menu_deutsch #procesy a .polozka,
+#uvod_menu_deutsch #procesy_noactive .polozka_noactive {
+  width: 103px;
+  height: 25px;
+  margin-top: 8px;
+  background: url(../obr/menu_de/procesy.png) no-repeat;
+}
+
+#uvod_menu_deutsch #procesy_noactive .polozka_noactive {
+  background: url(../obr/menu_de_noactive/procesy.png) no-repeat;
+}
+
+#uvod_menu_deutsch #procesy a .ikona {
+  background: url(../obr/menu_de/ikony/procesy.png) no-repeat;
+}
+
+#uvod_menu_deutsch #procesy_noactive .ikona_noactive {
+  background: url(../obr/menu_de_noactive/ikony/procesy.png) no-repeat;
+}
+
+#uvod_menu_czech #terminy,
+#uvod_menu_czech #terminy_noactive {
+  top: 232px;
+  left: 135px;
+}
+
+#uvod_menu_czech #terminy a,
+#uvod_menu_czech #terminy_noactive {
+  width: 93px;
+  height: 31px;
+  background: url(../obr/menu_cz/terminy.png) no-repeat;
+}
+
+#uvod_menu_czech #terminy_noactive {
+  background: url(../obr/menu_cz_noactive/terminy.png) no-repeat;
+}
+
+#uvod_menu_deutsch #terminy,
+#uvod_menu_deutsch #terminy_noactive {
+  top: 224px;
+  left: 102px;
+}
+
+#uvod_menu_deutsch #terminy a,
+#uvod_menu_deutsch #terminy_noactive {
+  width: 145px;
+}
+
+#uvod_menu_deutsch #terminy a .polozka,
+#uvod_menu_deutsch #terminy_noactive .polozka_noactive {
+  width: 95px;
+  height: 26px;
+  margin-top: 8px;
+  background: url(../obr/menu_de/terminy.png) no-repeat;
+}
+
+#uvod_menu_deutsch #terminy_noactive .polozka_noactive {
+  background: url(../obr/menu_de_noactive/terminy.png) no-repeat;
+}
+
+#uvod_menu_deutsch #terminy a .ikona {
+  background: url(../obr/menu_de/ikony/terminy.png) no-repeat;
+}
+
+#uvod_menu_deutsch #terminy_noactive .ikona_noactive {
+  background: url(../obr/menu_de_noactive/ikony/terminy.png) no-repeat;
+}
+
+#uvod_menu_czech #archiv,
+#uvod_menu_czech #archiv_noactive {
+  top: 269px;
+  left: 171px;
+}
+
+#uvod_menu_czech #archiv a,
+#uvod_menu_czech #archiv_noactive {
+  width: 77px;
+  height: 27px;
+  background: url(../obr/menu_cz/archiv.png) no-repeat;
+}
+
+#uvod_menu_czech #archiv_noactive {
+  background: url(../obr/menu_cz_noactive/archiv.png) no-repeat;
+}
+
+#uvod_menu_deutsch #archiv,
+#uvod_menu_deutsch #archiv_noactive {
+  top: 261px;
+  left: 138px;
+}
+
+#uvod_menu_deutsch #archiv a,
+#uvod_menu_deutsch #archiv_noactive {
+  width: 128px;
+}
+
+#uvod_menu_deutsch #archiv a .polozka,
+#uvod_menu_deutsch #archiv_noactive .polozka_noactive {
+  width: 78px;
+  height: 26px;
+  margin-top: 8px;
+  background: url(../obr/menu_de/archiv.png) no-repeat;
+}
+
+#uvod_menu_deutsch #archiv_noactive .polozka_noactive {
+  background: url(../obr/menu_de_noactive/archiv.png) no-repeat;
+}
+
+#uvod_menu_deutsch #archiv a .ikona {
+  background: url(../obr/menu_de/ikony/archiv.png) no-repeat;
+}
+
+#uvod_menu_deutsch #archiv_noactive .ikona_noactive {
+  background: url(../obr/menu_de_noactive/ikony/archiv.png) no-repeat;
+}
+
+#uvod_menu_czech #administrace,
+#uvod_menu_czech #administrace_noactive {
+  top: 306px;
+  left: 128px;
+}
+
+#uvod_menu_czech #administrace a,
+#uvod_menu_czech #administrace_noactive {
+  width: 150px;
+  height: 26px;
+  background: url(../obr/menu_cz/administrace.png) no-repeat;
+}
+
+#uvod_menu_czech #administrace_noactive {
+  background: url(../obr/menu_cz_noactive/administrace.png) no-repeat;
+}
+
+#uvod_menu_deutsch #administrace,
+#uvod_menu_deutsch #administrace_noactive {
+  top: 298px;
+  left: 58px;
+}
+
+#uvod_menu_deutsch #administrace a,
+#uvod_menu_deutsch #administrace_noactive {
+  width: 238px;
+}
+
+#uvod_menu_deutsch #administrace a .polozka,
+#uvod_menu_deutsch #administrace_noactive .polozka_noactive {
+  width: 188px;
+  height: 30px;
+  margin-top: 7px;
+  background: url(../obr/menu_de/administrace.png) no-repeat;
+}
+
+#uvod_menu_deutsch #administrace_noactive .polozka_noactive {
+  background: url(../obr/menu_de_noactive/administrace.png) no-repeat;
+}
+
+#uvod_menu_deutsch #administrace a .ikona {
+  background: url(../obr/menu_de/ikony/administrace.png) no-repeat;
+}
+
+#uvod_menu_deutsch #administrace_noactive .ikona_noactive {
+  background: url(../obr/menu_de_noactive/ikony/administrace.png) no-repeat;
+}/* /polozky v menu - czech i deutsch - active i noactive */
+
+/* globalni nastaveni stejnych selektoru */
+#uvod_menu_czech #uvodni_strana .alternativa_noactive,
+#uvod_menu_czech #uvodni_strana .polozka_noactive,
+#uvod_menu_czech #uvodni_strana .ikona_noactive,
+#uvod_menu_deutsch #uvodni_strana .alternativa_noactive,
+#uvod_menu_deutsch #uvodni_strana .polozka_noactive,
+#uvod_menu_deutsch #uvodni_strana .ikona_noactive,
+#uvod_menu_czech #zamestnanci .alternativa_noactive,
+#uvod_menu_czech #zamestnanci .polozka_noactive,
+#uvod_menu_czech #zamestnanci .ikona_noactive,
+#uvod_menu_deutsch #zamestnanci .alternativa_noactive,
+#uvod_menu_deutsch #zamestnanci .polozka_noactive,
+#uvod_menu_deutsch #zamestnanci .ikona_noactive,
+#uvod_menu_czech #partneri .alternativa_noactive,
+#uvod_menu_czech #partneri .polozka_noactive,
+#uvod_menu_czech #partneri .ikona_noactive,
+#uvod_menu_deutsch #partneri .alternativa_noactive,
+#uvod_menu_deutsch #partneri .polozka_noactive,
+#uvod_menu_deutsch #partneri .ikona_noactive,
+#uvod_menu_czech #zakaznici .alternativa_noactive,
+#uvod_menu_czech #zakaznici .polozka_noactive,
+#uvod_menu_czech #zakaznici .ikona_noactive,
+#uvod_menu_deutsch #zakaznici .alternativa_noactive,
+#uvod_menu_deutsch #zakaznici .polozka_noactive,
+#uvod_menu_deutsch #zakaznici .ikona_noactive,
+#uvod_menu_czech #management .alternativa_noactive,
+#uvod_menu_czech #management .polozka_noactive,
+#uvod_menu_czech #management .ikona_noactive,
+#uvod_menu_deutsch #management .alternativa_noactive,
+#uvod_menu_deutsch #management .polozka_noactive,
+#uvod_menu_deutsch #management .ikona_noactive,
+#uvod_menu_czech #procesy .alternativa_noactive,
+#uvod_menu_czech #procesy .polozka_noactive,
+#uvod_menu_czech #procesy .ikona_noactive,
+#uvod_menu_deutsch #procesy .alternativa_noactive,
+#uvod_menu_deutsch #procesy .polozka_noactive,
+#uvod_menu_deutsch #procesy .ikona_noactive,
+#uvod_menu_czech #terminy .alternativa_noactive,
+#uvod_menu_czech #terminy .polozka_noactive,
+#uvod_menu_czech #terminy .ikona_noactive,
+#uvod_menu_deutsch #terminy .alternativa_noactive,
+#uvod_menu_deutsch #terminy .polozka_noactive,
+#uvod_menu_deutsch #terminy .ikona_noactive,
+#uvod_menu_czech #archiv .alternativa_noactive,
+#uvod_menu_czech #archiv .polozka_noactive,
+#uvod_menu_czech #archiv .ikona_noactive,
+#uvod_menu_deutsch #archiv .alternativa_noactive,
+#uvod_menu_deutsch #archiv .polozka_noactive,
+#uvod_menu_deutsch #archiv .ikona_noactive,
+#uvod_menu_czech #administrace .alternativa_noactive,
+#uvod_menu_czech #administrace .polozka_noactive,
+#uvod_menu_czech #administrace .ikona_noactive,
+#uvod_menu_deutsch #administrace .alternativa_noactive,
+#uvod_menu_deutsch #administrace .polozka_noactive,
+#uvod_menu_deutsch #administrace .ikona_noactive {
+  display: none;
+}
+
+#uvod_menu_czech #uvodni_strana_noactive a,
+#uvod_menu_czech #zamestnanci_noactive a,
+#uvod_menu_czech #partneri_noactive a,
+#uvod_menu_czech #zakaznici_noactive a,
+#uvod_menu_czech #management_noactive a,
+#uvod_menu_czech #procesy_noactive a,
+#uvod_menu_czech #terminy_noactive a,
+#uvod_menu_czech #archiv_noactive a,
+#uvod_menu_czech #administrace_noactive a,
+#uvod_menu_deutsch #uvodni_strana_noactive a,
+#uvod_menu_deutsch #zamestnanci_noactive a,
+#uvod_menu_deutsch #partneri_noactive a,
+#uvod_menu_deutsch #zakaznici_noactive a,
+#uvod_menu_deutsch #management_noactive a,
+#uvod_menu_deutsch #procesy_noactive a,
+#uvod_menu_deutsch #terminy_noactive a,
+#uvod_menu_deutsch #archiv_noactive a,
+#uvod_menu_deutsch #administrace_noactive a {
+  display: none;
+}
+
+#uvod_menu_deutsch #uvodni_strana a:hover .polozka,
+#uvod_menu_deutsch #zamestnanci a:hover .polozka,
+#uvod_menu_deutsch #partneri a:hover .polozka,
+#uvod_menu_deutsch #zakaznici a:hover .polozka,
+#uvod_menu_deutsch #management a:hover .polozka,
+#uvod_menu_deutsch #procesy a:hover .polozka,
+#uvod_menu_deutsch #terminy a:hover .polozka,
+#uvod_menu_deutsch #archiv a:hover .polozka,
+#uvod_menu_deutsch #administrace a:hover .polozka {
+  background-position: right center;
+}
+
+#uvod_menu_czech #uvodni_strana a,
+#uvod_menu_czech #zamestnanci a,
+#uvod_menu_czech #partneri a,
+#uvod_menu_czech #zakaznici a,
+#uvod_menu_czech #management a,
+#uvod_menu_czech #procesy a,
+#uvod_menu_czech #terminy a,
+#uvod_menu_czech #archiv a,
+#uvod_menu_czech #administrace a,
+#uvod_menu_deutsch #uvodni_strana a .ikona,
+#uvod_menu_deutsch #zamestnanci a .ikona,
+#uvod_menu_deutsch #partneri a .ikona,
+#uvod_menu_deutsch #zakaznici a .ikona,
+#uvod_menu_deutsch #management a .ikona,
+#uvod_menu_deutsch #procesy a .ikona,
+#uvod_menu_deutsch #terminy a .ikona,
+#uvod_menu_deutsch #archiv a .ikona,
+#uvod_menu_deutsch #administrace a .ikona {
+  background-position: left center;
+}
+
+#uvod_menu_deutsch #uvodni_strana a:hover .ikona,
+#uvod_menu_deutsch #zamestnanci a:hover .ikona,
+#uvod_menu_deutsch #partneri a:hover .ikona,
+#uvod_menu_deutsch #zakaznici a:hover .ikona,
+#uvod_menu_deutsch #management a:hover .ikona,
+#uvod_menu_deutsch #procesy a:hover .ikona,
+#uvod_menu_deutsch #terminy a:hover .ikona,
+#uvod_menu_deutsch #archiv a:hover .ikona,
+#uvod_menu_deutsch #administrace a:hover .ikona {
+  background-position: -42px center;
+}
+
+#uvod_menu_czech #uvodni_strana a:hover,
+#uvod_menu_czech #zamestnanci a:hover,
+#uvod_menu_czech #partneri a:hover,
+#uvod_menu_czech #zakaznici a:hover,
+#uvod_menu_czech #management a:hover,
+#uvod_menu_czech #procesy a:hover,
+#uvod_menu_czech #terminy a:hover,
+#uvod_menu_czech #archiv a:hover,
+#uvod_menu_czech #administrace a:hover,
+#uvod_menu_deutsch #uvodni_strana a:hover .ikona:hover,
+#uvod_menu_deutsch #zamestnanci a:hover .ikona:hover,
+#uvod_menu_deutsch #partneri a:hover .ikona:hover,
+#uvod_menu_deutsch #zakaznici a:hover .ikona:hover,
+#uvod_menu_deutsch #management a:hover .ikona:hover,
+#uvod_menu_deutsch #procesy a:hover .ikona:hover,
+#uvod_menu_deutsch #terminy a:hover .ikona:hover,
+#uvod_menu_deutsch #archiv a:hover .ikona:hover,
+#uvod_menu_deutsch #administrace a:hover .ikona:hover {
+  background-position: right center;
+}/* /globalni nastaveni stejnych selektoru */
+/* /uvod menu czech i deutsch */
+
+/* Fugess (Martin) */
+

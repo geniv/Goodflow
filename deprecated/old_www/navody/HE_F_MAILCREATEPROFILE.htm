@@ -1,0 +1,72 @@
+<!doctype html public "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=Windows-1250">
+<title>Funkce MailCreateProfile</title>
+<link rel='stylesheet' style='text/css' href='../function.css'>
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000">
+
+
+
+<h2 class=function>MailCreateProfile</h2>
+<img src='../images/cpp.gif' width='44' height='16' border='0' alt='c/c++' align='middle' hspace='2'><img src='../images/pascal.gif' width='44' height='16' border='0' alt='pascal' align='middle' hspace='2'><img src='../images/sql.gif' width='44' height='16' border='0' alt='sql' align='middle' hspace='2'>
+
+
+<br><br>
+<div class='typ'>INT <b>MailCreateProfile</b>(const char *profile, BOOL temp);<br>
+function <b>MailCreateProfile</b>(profile : Pchar; temp : Boolean); integer;<br>
+FUNCTION <b>MailCreateProfile</b>(INOUT profile CHAR(63), IN temp BOOLEAN) RETURNS INT;<br>
+</div>
+
+<p><b>Parametry</b></p>
+
+<table border=1 cols=2 frame=box rules=all width=440>
+
+<tr valign="top">
+<td width=27%><i><code>profile</code></i></td>
+<td width=73%>jméno poštovního profilu</td>
+</tr>
+
+<tr valign="top">
+<td width=27%><i><code>temp</code></i></td>
+<td width=73%>příznak – dočasný profil</td>
+</tr>
+</table><br>
+
+<p><b>Od verze</b></p>
+
+<p>8.0</p>
+
+<p><b>Popis</b></p>
+
+<p>Vytvoří nový prázdný <a href="HE_MAILPROFILES.htm">poštovní profil</a>. Pokud je nastaven parametr <i><code>temp</code></i>, vytvoří se <em>dočasný</em> profil, který se nikam trvale neukládá. Dočasný profil lze použít na inicializaci pošty jako kterýkoli běžný profil, automaticky zanikne po ukončení práce s&nbsp;poštou zavoláním funkce <a href="HE_F_CLOSEWBMAIL.htm"><code>CloseWBMail</code></a>. Standardní (trvalé) profily může vytvářet pouze provozní správce databáze, dočasný profil může vytvářet každý uživatel.</p>
+
+<p><b>Hodnota funkce</b></p>
+
+<p>Funkce vrací nulu v případě úspěchu a číslo chyby v případě neúspěchu. Číslo chyby lze na klientské straně zjistit také pomocí <b><code>Sz_error</code></b> nebo <b><code>Signalize</code></b>.</p>
+
+<p><b>Příklad </b></p>
+<p>nahradit v profilu zadanou odesílací adresu z pevného profilu (vlatnost <code>MyAdress</code>) jinou adresou:</p>
+<pre><code>// je trvalý profil typu SMTP?
+SET Err=MailGetProfileProp(profile,"SMTPServer",smtp_server,100); 
+// jestliže ano, uděláme nový dočasný profil se stejným SMTP serverem (a případně dalšími vlastnostmi) 
+// a nahradíme adresu 
+IF Err=0 THEN     
+  SET nova_adresa = ...;
+  CALL MailCreateProfile("_temporary",TRUE);
+  CALL MailSetProfileProp("_temporary","SMTPServer",smtp_server);
+  CALL MailSetProfileProp("_temporary","MyAddress",nova_adresa);</code></pre>
+<p><b>Viz</b></p>
+
+<ul class='viz'>
+ <li><a href="HE_F_MAILDELETEPROFILE.htm">MailDeleteProfile</a> </li>
+ <li><a href="HE_F_MAILSETPROFILEPROP.htm">MailSetProfileProp</a> </li>
+ <li><a href="HE_F_MAILGETPROFILEPROP.htm">MailGetProfileProp</a></li>
+ <li><a href="HE_F_INITWBMAIL.htm">InitWBMail</a></li>
+ <li><a href="HE_F_CLOSEWBMAIL.htm">CloseWBMail</a></li>
+</ul>
+
+</body>
+</html>

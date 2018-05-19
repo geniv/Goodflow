@@ -1,0 +1,1498 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head id="ctl00_Head1">
+
+
+
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"><meta http-equiv="Content-Language" content="cs"><meta name="description" content="Články, diskuse, blogy a mnoho dalších informací o programování v jazyce Visual Basic .NET, o .NET frameworku obecně a o nejnovějších technologiích od Microsoftu."><meta name="author" content="Tomáš Jecha, Tomáš Herceg"><link rel="shortcut icon" href="http://www.vbnet.cz/vbnet.ico"><link rel="meta" href="http://www.vbnet.cz/pics-labels.xml" type="application/rdf xml" title="ICRA labels"><link rel="search" type="application/opensearchdescription+xml" href="http://www.vbnet.cz/vbnet-search.xml" title="VbNet.cz vyhledávání"><meta http-equiv="pics-Label" content="(pics-1.1 &quot;http://www.icra.org/pics/vocabularyv03/&quot; l gen true for     &quot;http://vbnet.cz&quot; r (n 0 s 0 v 0 l 0 oa 0 ob 0 oc 0 od 0 oe 0 of 0 og 0 oh 0 c 1) gen true for     &quot;http://www.vbnet.cz&quot; r (n 0 s 0 v 0 l 0 oa 0 ob 0 oc 0 od 0 oe 0 of 0 og 0 oh 0 c 1))"><title>VB.NET | Články - Stopařův průvodce po databázích - Díl 2. - Databázová mateřština SQL</title><link href="clanek--74-stoparuv_pruvodce_po_databazich_dil_2_databazova_materstina_sql.aspx_soubory/Style.css" type="text/css" rel="stylesheet"><meta name="robots" content="index, follow"><link rel="alternate" type="application/rss+xml" href="http://www.vbnet.cz/RSS.ashx?item=forum-thread&amp;id=806" title="Diskuse k článku: Databázová mateřština SQL"></head><body style="min-width: 950px;">
+    <form name="aspnetForm" method="post" action="Article.aspx?id=74" id="aspnetForm">
+<div>
+<input name="__EVENTTARGET" id="__EVENTTARGET" value="" type="hidden">
+<input name="__EVENTARGUMENT" id="__EVENTARGUMENT" value="" type="hidden">
+<input name="__VIEWSTATE" id="__VIEWSTATE" value="/wEPZwUPOGNhOTA5NzM2NjBlMTVhbBg5RrFxRrAqkfLgPrsVWO27CU0=" type="hidden">
+</div>
+
+<script type="text/javascript">
+//<![CDATA[
+var theForm = document.forms['aspnetForm'];
+function __doPostBack(eventTarget, eventArgument) {
+    if (!theForm.onsubmit || (theForm.onsubmit() != false)) {
+        theForm.__EVENTTARGET.value = eventTarget;
+        theForm.__EVENTARGUMENT.value = eventArgument;
+        theForm.submit();
+    }
+}
+//]]>
+</script>
+
+
+<script src="clanek--74-stoparuv_pruvodce_po_databazich_dil_2_databazova_materstina_sql.aspx_soubory/WebResource.js" type="text/javascript"></script>
+
+
+<script type="text/javascript">
+//<![CDATA[
+function getCookie(key) {      // získat hodnotu cookie
+  var cookies = document.cookie.split(';');
+  for (var i = 0; i < cookies.length; i++) {
+    while ((cookies[i].length > 0) && (cookies[i].charAt(0) == ' ')) cookies[i] = cookies[i].substring(1);
+    if (cookies[i].toLowerCase().indexOf(key.toLowerCase() + '=') == 0) 
+      return unescape(cookies[i].substring(key.length + 1));
+  }
+  return '';
+}
+function TreeViewExpandCollapse(id, imageName, listName, expandedUrl, collapsedUrl, expandedAlt, collapsedAlt) {
+  // rozbalí nebo sbalí položku menu
+  arr = getCookie('menuState').split('_');
+  if (document.getElementById(listName).style.display == 'none') {
+    document.getElementById(listName).style.display = '';
+    document.getElementById(imageName).src = expandedUrl;
+    document.getElementById(imageName).alt = expandedAlt;
+    document.getElementById(imageName).parentNode.parentNode.className = '';
+    for (var i = 0; i < arr.length; i++)
+      if (arr[i] == id) arr[i] = null;
+  } else {
+    document.getElementById(listName).style.display = 'none';
+    document.getElementById(imageName).src = collapsedUrl;
+    document.getElementById(imageName).alt = collapsedAlt;
+    document.getElementById(imageName).parentNode.parentNode.className = 'final';
+    arr[arr.length] = id;
+  }
+  document.cookie = 'menuState=' + arr.join('_');
+}
+function StarRatingSystem_mouseEn(index,unq) { StarRatingSystem_showStars(index,unq,1); }
+function StarRatingSystem_mouseLv(index,unq) { StarRatingSystem_showStars(index,unq,0); }
+function StarRatingSystem_showStars(cnt,unq,hvr) { 
+for (i=1;i<6;i++){ 
+if(i*2>cnt) { document.getElementById(unq+i).src='App_Themes/Default2/images/star_none.gif'; }
+if(i*2<=cnt && hvr==0) { document.getElementById(unq+i).src='App_Themes/Default2/images/star_full.gif'; }
+if(i*2<=cnt && hvr==1) { document.getElementById(unq+i).src='App_Themes/Default2/images/star_hover.gif'; }
+if(i*2==cnt+1) { document.getElementById(unq+i).src='App_Themes/Default2/images/star_half.gif'; } } }var __cultureInfo = '{"name":"cs-CZ","numberFormat":{"CurrencyDecimalDigits":2,"CurrencyDecimalSeparator":",","IsReadOnly":true,"CurrencyGroupSizes":[3],"NumberGroupSizes":[3],"PercentGroupSizes":[3],"CurrencyGroupSeparator":" ","CurrencySymbol":"Kč","NaNSymbol":"Není číslo","CurrencyNegativePattern":8,"NumberNegativePattern":1,"PercentPositivePattern":1,"PercentNegativePattern":1,"NegativeInfinitySymbol":"-nekonečno","NegativeSign":"-","NumberDecimalDigits":2,"NumberDecimalSeparator":",","NumberGroupSeparator":" ","CurrencyPositivePattern":3,"PositiveInfinitySymbol":"+nekonečno","PositiveSign":"+","PercentDecimalDigits":2,"PercentDecimalSeparator":",","PercentGroupSeparator":" ","PercentSymbol":"%","PerMilleSymbol":"‰","NativeDigits":["0","1","2","3","4","5","6","7","8","9"],"DigitSubstitution":1},"dateTimeFormat":{"AMDesignator":"dop.","Calendar":{"MinSupportedDateTime":"\/Date(-62135596800000)\/","MaxSupportedDateTime":"\/Date(253402297199999)\/","AlgorithmType":1,"CalendarType":1,"Eras":[1],"TwoDigitYearMax":2029,"IsReadOnly":true},"DateSeparator":".","FirstDayOfWeek":1,"CalendarWeekRule":0,"FullDateTimePattern":"d. MMMM yyyy H:mm:ss","LongDatePattern":"d. MMMM yyyy","LongTimePattern":"H:mm:ss","MonthDayPattern":"dd MMMM","PMDesignator":"odp.","RFC1123Pattern":"ddd, dd MMM yyyy HH\u0027:\u0027mm\u0027:\u0027ss \u0027GMT\u0027","ShortDatePattern":"d.M.yyyy","ShortTimePattern":"H:mm","SortableDateTimePattern":"yyyy\u0027-\u0027MM\u0027-\u0027dd\u0027T\u0027HH\u0027:\u0027mm\u0027:\u0027ss","TimeSeparator":":","UniversalSortableDateTimePattern":"yyyy\u0027-\u0027MM\u0027-\u0027dd HH\u0027:\u0027mm\u0027:\u0027ss\u0027Z\u0027","YearMonthPattern":"MMMM yyyy","AbbreviatedDayNames":["ne","po","út","st","čt","pá","so"],"ShortestDayNames":["ne","po","út","st","čt","pá","so"],"DayNames":["neděle","pondělí","úterý","středa","čtvrtek","pátek","sobota"],"AbbreviatedMonthNames":["I","II","III","IV","V","VI","VII","VIII","IX","X","XI","XII",""],"MonthNames":["leden","únor","březen","duben","květen","červen","červenec","srpen","září","říjen","listopad","prosinec",""],"IsReadOnly":true,"NativeCalendarName":"gregoriánský kalendář","AbbreviatedMonthGenitiveNames":["I","II","III","IV","V","VI","VII","VIII","IX","X","XI","XII",""],"MonthGenitiveNames":["ledna","února","března","dubna","května","června","července","srpna","září","října","listopadu","prosince",""]}}';//]]>
+</script>
+
+<script src="clanek--74-stoparuv_pruvodce_po_databazich_dil_2_databazova_materstina_sql.aspx_soubory/ScriptResource.js" type="text/javascript"></script>
+<script src="clanek--74-stoparuv_pruvodce_po_databazich_dil_2_databazova_materstina_sql.aspx_soubory/ScriptResource_002.js" type="text/javascript"></script>
+        <script type="text/javascript">
+//<![CDATA[
+Sys.WebForms.PageRequestManager._initialize('ctl00$ScriptManager1', document.getElementById('aspnetForm'));
+Sys.WebForms.PageRequestManager.getInstance()._updateControls(['tctl00$ctl10$updatePanelOpinionPool','tctl00$MainContent$Repeater1$ctl00$articleRating$UpdatePanel1','fctl00$MainContent$Repeater1$ctl00$ForumPostList1$Repeater1$ctl00$UpdatePanel1','fctl00$MainContent$Repeater1$ctl00$ForumPostList1$Repeater1$ctl01$UpdatePanel1','fctl00$MainContent$Repeater1$ctl00$ForumPostList1$Repeater1$ctl02$UpdatePanel1','fctl00$MainContent$Repeater1$ctl00$ForumPostList1$Repeater1$ctl03$UpdatePanel1','fctl00$MainContent$Repeater1$ctl00$ForumPostList1$Repeater1$ctl04$UpdatePanel1','fctl00$MainContent$Repeater1$ctl00$ForumPostList1$Repeater1$ctl05$UpdatePanel1','fctl00$MainContent$Repeater1$ctl00$ForumPostList1$Repeater1$ctl06$UpdatePanel1','fctl00$MainContent$Repeater1$ctl00$ForumPostList1$Repeater1$ctl07$UpdatePanel1','fctl00$MainContent$Repeater1$ctl00$ForumPostList1$Repeater1$ctl08$UpdatePanel1','fctl00$MainContent$Repeater1$ctl00$ForumPostList1$Repeater1$ctl09$UpdatePanel1','fctl00$MainContent$Repeater1$ctl00$ForumPostList1$Repeater1$ctl10$UpdatePanel1','fctl00$MainContent$Repeater1$ctl00$ForumPostList1$Repeater1$ctl11$UpdatePanel1','fctl00$MainContent$Repeater1$ctl00$ForumPostList1$Repeater1$ctl12$UpdatePanel1'], ['RateUseful','RateUseless','RateUseful','RateUseless','RateUseful','RateUseless','RateUseful','RateUseless','RateUseful','RateUseless','RateUseful','RateUseless','RateUseful','RateUseless','RateUseful','RateUseless','RateUseful','RateUseless','RateUseful','RateUseless','RateUseful','RateUseless','RateUseful','RateUseless','RateUseful','RateUseless','ctl00$MainContent$Repeater1$ctl00$ForumPostList1$Repeater1$ctl00$RateUseful','ctl00$MainContent$Repeater1$ctl00$ForumPostList1$Repeater1$ctl00$RateUseless','ctl00$MainContent$Repeater1$ctl00$ForumPostList1$Repeater1$ctl01$RateUseful','ctl00$MainContent$Repeater1$ctl00$ForumPostList1$Repeater1$ctl01$RateUseless','ctl00$MainContent$Repeater1$ctl00$ForumPostList1$Repeater1$ctl02$RateUseful','ctl00$MainContent$Repeater1$ctl00$ForumPostList1$Repeater1$ctl02$RateUseless','ctl00$MainContent$Repeater1$ctl00$ForumPostList1$Repeater1$ctl03$RateUseful','ctl00$MainContent$Repeater1$ctl00$ForumPostList1$Repeater1$ctl03$RateUseless','ctl00$MainContent$Repeater1$ctl00$ForumPostList1$Repeater1$ctl04$RateUseful','ctl00$MainContent$Repeater1$ctl00$ForumPostList1$Repeater1$ctl04$RateUseless','ctl00$MainContent$Repeater1$ctl00$ForumPostList1$Repeater1$ctl05$RateUseful','ctl00$MainContent$Repeater1$ctl00$ForumPostList1$Repeater1$ctl05$RateUseless','ctl00$MainContent$Repeater1$ctl00$ForumPostList1$Repeater1$ctl06$RateUseful','ctl00$MainContent$Repeater1$ctl00$ForumPostList1$Repeater1$ctl06$RateUseless','ctl00$MainContent$Repeater1$ctl00$ForumPostList1$Repeater1$ctl07$RateUseful','ctl00$MainContent$Repeater1$ctl00$ForumPostList1$Repeater1$ctl07$RateUseless','ctl00$MainContent$Repeater1$ctl00$ForumPostList1$Repeater1$ctl08$RateUseful','ctl00$MainContent$Repeater1$ctl00$ForumPostList1$Repeater1$ctl08$RateUseless','ctl00$MainContent$Repeater1$ctl00$ForumPostList1$Repeater1$ctl09$RateUseful','ctl00$MainContent$Repeater1$ctl00$ForumPostList1$Repeater1$ctl09$RateUseless','ctl00$MainContent$Repeater1$ctl00$ForumPostList1$Repeater1$ctl10$RateUseful','ctl00$MainContent$Repeater1$ctl00$ForumPostList1$Repeater1$ctl10$RateUseless','ctl00$MainContent$Repeater1$ctl00$ForumPostList1$Repeater1$ctl11$RateUseful','ctl00$MainContent$Repeater1$ctl00$ForumPostList1$Repeater1$ctl11$RateUseless','ctl00$MainContent$Repeater1$ctl00$ForumPostList1$Repeater1$ctl12$RateUseful','ctl00$MainContent$Repeater1$ctl00$ForumPostList1$Repeater1$ctl12$RateUseless'], [], 90);
+//]]>
+</script>
+
+        <div id="page_shadow">
+            <div id="page">
+                <div id="top_bnr">
+                    <div id="ln1">
+                        
+                        
+                        
+                        
+                                Nejste přihlášen |
+                                <a id="ctl00_LoginView1_HyperLink1" href="http://www.vbnet.cz/register.aspx">Zaregistrovat</a>
+                            
+                        |
+                        <a id="ctl00_LoginStatus1" href="javascript:__doPostBack('ctl00$LoginStatus1$ctl02','')">Přihlásit</a>
+                        
+                                | <a id="ctl00_LoginView4_hyperInfoCard" href="http://www.vbnet.cz/clogin.aspx?ReturnUrl=%2fclanek--74-stoparuv_pruvodce_po_databazich_dil_2_databazova_materstina_sql.aspx"><img id="ctl00_LoginView4_imgInfoCard" src="clanek--74-stoparuv_pruvodce_po_databazich_dil_2_databazova_materstina_sql.aspx_soubory/cardspace16.gif" alt="Přihlásit se pomocí technologie InfoCard" style="border-width: 0px;"></a>
+                            
+                    </div>
+                    <div id="main_menu">
+                        <a id="ctl00_HyperLinkSnippets" href="http://www.vbnet.cz/Snippets.aspx">snippety</a> | 
+                        <a id="ctl00_HyperLinkSeries" href="http://www.vbnet.cz/Series.aspx">seriály</a><br>
+                        <a id="ctl00_HyperLinkClanky" href="http://www.vbnet.cz/Articles.aspx">články</a> | 
+                        <a id="ctl00_HyperLinkBlogy" href="http://www.vbnet.cz/Blogs.aspx">blogy</a> |
+                        <a id="ctl00_HyperLinkFora" href="http://www.vbnet.cz/Forums.aspx">diskuse</a>
+                    </div>
+                </div>
+                <div id="left_menu">
+                    <div class="in">
+                        
+                        <ul>
+	<li class="final"><img src="clanek--74-stoparuv_pruvodce_po_databazich_dil_2_databazova_materstina_sql.aspx_soubory/non_expandable.gif" alt="&nbsp;">&nbsp;<a href="http://www.vbnet.cz/Default.aspx" title="">Home</a></li>
+	<li class="final"><img src="clanek--74-stoparuv_pruvodce_po_databazich_dil_2_databazova_materstina_sql.aspx_soubory/non_expandable.gif" alt="&nbsp;">&nbsp;<a href="http://www.vbnet.cz/Search.aspx" title="">Vyhledávání</a></li>
+	<li class="final"><img src="clanek--74-stoparuv_pruvodce_po_databazich_dil_2_databazova_materstina_sql.aspx_soubory/non_expandable.gif" alt="&nbsp;">&nbsp;<a href="http://www.vbnet.cz/Forums.aspx" title="">Diskusní fóra</a></li>
+	<li><a href="javascript:TreeViewExpandCollapse(3,'ctl00_TreeView1_img3','ctl00_TreeView1_node3','App_Themes/Default/images/collapsed.gif','App_Themes/Default/images/expanded.gif','+','-');"><img src="clanek--74-stoparuv_pruvodce_po_databazich_dil_2_databazova_materstina_sql.aspx_soubory/collapsed.gif" alt="+" style="border: medium none ; vertical-align: middle;" id="ctl00_TreeView1_img3"></a>&nbsp;<a href="http://www.vbnet.cz/Blogs.aspx" title="">Blogy</a>
+		<ul id="ctl00_TreeView1_node3">
+			<li class="final"><img src="clanek--74-stoparuv_pruvodce_po_databazich_dil_2_databazova_materstina_sql.aspx_soubory/non_expandable.gif" alt="&nbsp;">&nbsp;<a href="http://www.vbnet.cz/blog--tomas.aspx" title="Vývojářský blog Tomáše Hercega">Tomáš Herceg</a></li>
+			<li class="final"><img src="clanek--74-stoparuv_pruvodce_po_databazich_dil_2_databazova_materstina_sql.aspx_soubory/non_expandable.gif" alt="&nbsp;">&nbsp;<a href="http://www.vbnet.cz/blog--jechtom.aspx" title="Vývojářský blog Tomáše Jechy">Tomáš Jecha</a></li>
+			<li class="final"><img src="clanek--74-stoparuv_pruvodce_po_databazich_dil_2_databazova_materstina_sql.aspx_soubory/non_expandable.gif" alt="&nbsp;">&nbsp;<a href="http://www.vbnet.cz/blog--ctenari.aspx" title="Programy a aplikace od našich čtenářů">Od našich čtenářů</a></li>
+		</ul>
+	</li>
+	<li><a href="javascript:TreeViewExpandCollapse(7,'ctl00_TreeView1_img7','ctl00_TreeView1_node7','App_Themes/Default/images/collapsed.gif','App_Themes/Default/images/expanded.gif','+','-');"><img src="clanek--74-stoparuv_pruvodce_po_databazich_dil_2_databazova_materstina_sql.aspx_soubory/collapsed.gif" alt="+" style="border: medium none ; vertical-align: middle;" id="ctl00_TreeView1_img7"></a>&nbsp;<a href="http://www.vbnet.cz/Articles.aspx" title="">Články</a>
+		<ul id="ctl00_TreeView1_node7">
+			<li class="final"><img src="clanek--74-stoparuv_pruvodce_po_databazich_dil_2_databazova_materstina_sql.aspx_soubory/non_expandable.gif" alt="&nbsp;">&nbsp;<a href="http://www.vbnet.cz/kategorie--18.aspx" title="Vývoj webových aplikací v ASP.NET">ASP.NET</a></li>
+			<li class="final"><img src="clanek--74-stoparuv_pruvodce_po_databazich_dil_2_databazova_materstina_sql.aspx_soubory/non_expandable.gif" alt="&nbsp;">&nbsp;<a href="http://www.vbnet.cz/kategorie--1.aspx" title="Algoritmy a standardizované rychlé postupy pro řešení obecných úloh (třídění dat atd.)">Algoritmy</a></li>
+			<li class="final"><img src="clanek--74-stoparuv_pruvodce_po_databazich_dil_2_databazova_materstina_sql.aspx_soubory/non_expandable.gif" alt="&nbsp;">&nbsp;<a href="http://www.vbnet.cz/kategorie--2.aspx" title="Hotové aplikace a ukázky použití nějaké technologie">Aplikace</a></li>
+			<li class="final"><img src="clanek--74-stoparuv_pruvodce_po_databazich_dil_2_databazova_materstina_sql.aspx_soubory/non_expandable.gif" alt="&nbsp;">&nbsp;<a href="http://www.vbnet.cz/kategorie--3.aspx" title="Práce s databázemi (MS SQL 2005 a další)">Databáze</a></li>
+			<li class="final"><img src="clanek--74-stoparuv_pruvodce_po_databazich_dil_2_databazova_materstina_sql.aspx_soubory/non_expandable.gif" alt="&nbsp;">&nbsp;<a href="http://www.vbnet.cz/kategorie--4.aspx" title="Formuláře, MDI a práce s nimi">Formuláře</a></li>
+			<li><a href="javascript:TreeViewExpandCollapse(12,'ctl00_TreeView1_img12','ctl00_TreeView1_node12','App_Themes/Default/images/collapsed.gif','App_Themes/Default/images/expanded.gif','+','-');"><img src="clanek--74-stoparuv_pruvodce_po_databazich_dil_2_databazova_materstina_sql.aspx_soubory/collapsed.gif" alt="+" style="border: medium none ; vertical-align: middle;" id="ctl00_TreeView1_img12"></a>&nbsp;<a href="http://www.vbnet.cz/kategorie--5.aspx" title="Vše, co se týká grafiky, vykreslování a animací">Grafika</a>
+				<ul id="ctl00_TreeView1_node12">
+					<li class="final"><img src="clanek--74-stoparuv_pruvodce_po_databazich_dil_2_databazova_materstina_sql.aspx_soubory/non_expandable.gif" alt="&nbsp;">&nbsp;<a href="http://www.vbnet.cz/kategorie--13.aspx" title="2D a 3D zobrazení pomocí rozhraní DirectX">DirectX</a></li>
+					<li class="final"><img src="clanek--74-stoparuv_pruvodce_po_databazich_dil_2_databazova_materstina_sql.aspx_soubory/non_expandable.gif" alt="&nbsp;">&nbsp;<a href="http://www.vbnet.cz/kategorie--14.aspx" title="2D vykreslování pomocí System.Drawing">GDI+</a></li>
+					<li class="final"><img src="clanek--74-stoparuv_pruvodce_po_databazich_dil_2_databazova_materstina_sql.aspx_soubory/non_expandable.gif" alt="&nbsp;">&nbsp;<a href="http://www.vbnet.cz/kategorie--15.aspx" title="2D a 3D zobrazení s pomocí engine TrueVision 3D">TrueVision 3D</a></li>
+					<li class="final"><img src="clanek--74-stoparuv_pruvodce_po_databazich_dil_2_databazova_materstina_sql.aspx_soubory/non_expandable.gif" alt="&nbsp;">&nbsp;<a href="http://www.vbnet.cz/kategorie--16.aspx" title="Programování her pomocí XNA Frameworku">XNA</a></li>
+				</ul>
+			</li>
+			<li class="final"><img src="clanek--74-stoparuv_pruvodce_po_databazich_dil_2_databazova_materstina_sql.aspx_soubory/non_expandable.gif" alt="&nbsp;">&nbsp;<a href="http://www.vbnet.cz/kategorie--6.aspx" title="Hry a jednoduché aplikace pro pobavení">Hry</a></li>
+			<li class="final"><img src="clanek--74-stoparuv_pruvodce_po_databazich_dil_2_databazova_materstina_sql.aspx_soubory/non_expandable.gif" alt="&nbsp;">&nbsp;<a href="http://www.vbnet.cz/kategorie--7.aspx" title="Používání standardní palety komponent a tvorba vlastních komponent">Komponenty</a></li>
+			<li class="final"><img src="clanek--74-stoparuv_pruvodce_po_databazich_dil_2_databazova_materstina_sql.aspx_soubory/non_expandable.gif" alt="&nbsp;">&nbsp;<a href="http://www.vbnet.cz/kategorie--8.aspx" title="Multimédia, čili zvuk a video">Multimédia</a></li>
+			<li class="final"><img src="clanek--74-stoparuv_pruvodce_po_databazich_dil_2_databazova_materstina_sql.aspx_soubory/non_expandable.gif" alt="&nbsp;">&nbsp;<a href="http://www.vbnet.cz/kategorie--9.aspx" title="Komunikování a posílání dat po sítích a v Internetu">Sítě</a></li>
+			<li class="final"><img src="clanek--74-stoparuv_pruvodce_po_databazich_dil_2_databazova_materstina_sql.aspx_soubory/non_expandable.gif" alt="&nbsp;">&nbsp;<a href="http://www.vbnet.cz/kategorie--10.aspx" title="Práce se souborovým systémem počítače">Soubory</a></li>
+			<li class="final"><img src="clanek--74-stoparuv_pruvodce_po_databazich_dil_2_databazova_materstina_sql.aspx_soubory/non_expandable.gif" alt="&nbsp;">&nbsp;<a href="http://www.vbnet.cz/kategorie--11.aspx" title="Tipy a triky anebo co se jinam nevešlo">Tipy a triky</a></li>
+			<li class="final"><img src="clanek--74-stoparuv_pruvodce_po_databazich_dil_2_databazova_materstina_sql.aspx_soubory/non_expandable.gif" alt="&nbsp;">&nbsp;<a href="http://www.vbnet.cz/kategorie--12.aspx" title="Články a tutoriály pro úplné začátečníky">Začínáme</a></li>
+			<li class="final"><img src="clanek--74-stoparuv_pruvodce_po_databazich_dil_2_databazova_materstina_sql.aspx_soubory/non_expandable.gif" alt="&nbsp;">&nbsp;<a href="http://www.vbnet.cz/kategorie--17.aspx" title="Vše, co se týka Visual Studia">Visual Studio</a></li>
+		</ul>
+	</li>
+	<li class="final"><img src="clanek--74-stoparuv_pruvodce_po_databazich_dil_2_databazova_materstina_sql.aspx_soubory/non_expandable.gif" alt="&nbsp;">&nbsp;<a href="http://www.vbnet.cz/Contact.aspx" title="">Kontakt</a></li>
+	<li class="final"><img src="clanek--74-stoparuv_pruvodce_po_databazich_dil_2_databazova_materstina_sql.aspx_soubory/non_expandable.gif" alt="&nbsp;">&nbsp;<a href="http://www.vbnet.cz/About.aspx" title="">O webu</a></li>
+</ul>
+
+                        <br>
+                        <div id="ctl00_PanelCounter" style="text-align: center;">
+	
+                            <!--Počítadlo url="NetAgent.cz"-->
+                            <a href="http://www.netagent.cz/"><script language="JavaScript" type="text/javascript">
+                            <!--
+                            document.write ('<a href="http://www.netagent.cz" target="_top"><img src="http://www.netagent.cz/agent.php?id=2012&amp;box=1&amp;color=dark&amp;ur='+escape(document.referrer)+'&amp;rw='+escape(window.screen.width)+'&amp;rh='+escape(window.screen.height)+'&amp;cd='+escape(window.screen.colorDepth)+'&amp;pt='+escape(document.title)+'&amp;lc='+escape(document.location)+'" width="100" height="72" border="0" alt="NetAgent" /></a>');
+                            //-->
+                            </script></a><a href="http://www.netagent.cz/" target="_top"><img src="clanek--74-stoparuv_pruvodce_po_databazich_dil_2_databazova_materstina_sql.aspx_soubory/agent.png" alt="NetAgent" border="0" height="72" width="100"></a><noscript><a
+href="http://www.netagent.cz" target="_top"><img
+src="http://www.netagent.cz/agent.php?id=2012&amp;box=1&amp;color=dark"
+border="0" alt="NetAgent" width="100" height="72" /></a></noscript>
+                            <!--/Počítadlo-->
+                        
+</div>
+                    
+                        <br>&nbsp;<br>
+                        
+                        <div id="ctl00_PanelOpinions">
+	
+                        <div id="ctl00_ctl10_updatePanelOpinionPool">
+		
+        <div id="ctl00_ctl10_panelControl" style="margin: 10px 10px 10px 15px; font-size: 8.25pt;">
+			
+            <span id="ctl00_ctl10_labelQuestion">Co budete dělat o prázdninách?</span>
+            <div id="ctl00_ctl10_panelOpinions">
+				<a id="ctl00_ctl10_Opinion1" href="javascript:__doPostBack('ctl00$ctl10$Opinion1','')">Válet se a užívat si volna</a><span id="ctl00_ctl10_Bar1" title="4" style="overflow: visible; color: White; background-color: Blue; width: 9px; display: block; margin-bottom: 5px;">9%</span><a id="ctl00_ctl10_Opinion2" href="javascript:__doPostBack('ctl00$ctl10$Opinion2','')">Programovat, co jiného</a><span id="ctl00_ctl10_Bar2" title="14" style="overflow: visible; color: White; background-color: Blue; width: 31px; display: block; margin-bottom: 5px;">32%</span><a id="ctl00_ctl10_Opinion3" href="javascript:__doPostBack('ctl00$ctl10$Opinion3','')">Nemám prázdniny</a><span id="ctl00_ctl10_Bar3" title="23" style="overflow: visible; color: White; background-color: Blue; width: 52px; display: block; margin-bottom: 5px;">52%</span><a id="ctl00_ctl10_Opinion4" href="javascript:__doPostBack('ctl00$ctl10$Opinion4','')">Něco jiného</a><span id="ctl00_ctl10_Bar4" title="3" style="overflow: visible; color: White; background-color: Blue; width: 6px; display: block; margin-bottom: 5px;">7%</span>
+			</div>
+            <span id="ctl00_ctl10_labelTotalVotes">Celkem hlasů: 44</span>
+        
+		</div>
+    
+	</div>
+<p>&nbsp;</p>
+
+</div>
+                    </div>
+                </div>
+                <div id="content">
+                    
+
+    <h1 class="floating">Články</h1>
+
+    
+    
+            <div style="float: right;"><a id="ctl00_MainContent_Repeater1_ctl00_ImageLinkPrint" href="http://www.vbnet.cz/Article.aspx?show=print&amp;id=74" target="_blank"><img src="clanek--74-stoparuv_pruvodce_po_databazich_dil_2_databazova_materstina_sql.aspx_soubory/print.gif" alt="Tisk článku">&nbsp;Tisk článku</a></div>
+            <h1 style="clear: both;">Databázová mateřština SQL</h1>
+            <div style="float: right;"><a href="http://www.vbnet.cz/kategorie--3.aspx">[Zpět na kategorii]</a></div>
+            <p>
+                Datum: <strong>25. 2. 2008 0:50</strong> &nbsp; &nbsp; &nbsp; 
+                Autor: <strong>Tomáš Jecha</strong> &nbsp; &nbsp; &nbsp; 
+                Zobrazeno: <strong>2130x</strong>
+            </p>
+            
+            <p style="float: right;">Kategorie:&nbsp;<a href="http://www.vbnet.cz/kategorie--3.aspx">Databáze</a></p>
+            <p>Témata: <a href="http://www.vbnet.cz/Articles.aspx?catId=7" title="Databáze a jazyk SQL">SQL</a></p>
+            <p style="text-align: center;">Seriál: <a href="http://www.vbnet.cz/serial--7-stoparuv_pruvodce_po_databazich.aspx">Stopařův průvodce po databázích</a> - Díl 2.</p>
+            <p><em>Po
+delší odmlce přináším druhý díl seriálu o databázích řešených Microsoft
+SQL Serverem. Ukážeme si základy SQL dotazovacího jazyka, jeho
+zpracování v SQL Server Management Studiu a zároveň rozšíříme tabulky
+našeho ukázkového internetového obchodu z prvního dílu.</em></p>
+            <hr>
+            <div id="Article">
+                <h3>Co je to SQL?</h3>  <p>SQL je akronym anglického výrazu <em>Structured Query Language</em> - <em>strukturovaný dotazovací jazyk</em>.
+Jedná se o textový jazyk navržený ke správě databázových systémů.
+Rozebírat tu jeho historii a vývoj by bylo nošením dříví do lesa, o tom
+si můžete přečíst třeba na <a title="http://cs.wikipedia.org/wiki/SQL" href="http://cs.wikipedia.org/wiki/SQL">Wikipedii</a>.</p>  <h3>SQL vs T-SQL</h3>  <p>Už
+v minulém díle jsem psal, že T-SQL (Transact SQL) je rozšíření jazyka
+SQL, kterou využil Microsoft v jeho SQL Serveru, jímž se tento seriál
+zaobírá. I když bude velká část funkcí fungovat (nebo se alespoň jejich
+zápis v různých odrůdách SQL jazyku sobě podobat), tak 100%
+kompatibilní rozhodně nejsou. Ani by to nebylo možné, každý databázový
+systém totiž řeší různé problémy jinak a i jejich vývoj se ubírá jiným
+směrem. Přinejmenším nám to ale usnaďnuje přestup z jednoho systému na
+druhý a databázový vývoj to značně zjednodušuje. V mém seriálu budu ale
+využívat jen <strong>T-SQL</strong> a proto příklady třeba v MySQL (či jiných systémech) fungovat pravděpodobně nebudou.</p>  <h3>Základy SQL jazyku a orientace v něm</h3>  <p>Každý
+příkaz je složený z klíčových slov, jmen proměnných, statických hodnot
+atp. Ostatně jako ve většině normálních počítačových jazyků. Když
+nebudeme zatím brát v potaz příkazy, které přímo neovliňují data
+(například na větvení programu atp.), můžeme si rozdělit dotazy na tři
+základní skupiny:</p>  <ul>   <li><strong>Příkazy pro práci s databázovými objekty</strong> </li>    <li><strong>Příkazy pro práci s daty</strong> </li>    <li><strong>Příkazy pro dodatečné nastavování</strong> </li> </ul>  <h4></h4>  <h4>Příkazy pro práci s databázovými objekty</h4>  <p>Databázovým
+objektem rozumíme prakticky vše co definuje databázi a její chování. Od
+datových tabulek, přes uživatelská oprávnění až po samotné databáze v
+databázovém serveru. Dotazy, které s nimi pracují začínají jedním z
+těchto klíčových slov:</p>  <ul>   <li><strong>CREATE</strong> - vytvoření objektu </li>    <li><strong>ALTER</strong> - změna objektu </li>    <li><strong>DROP</strong> - smazání objektu </li> </ul>  <p>Následuje
+pak klíčové slovo označující typ objektu a ve většině případech i jeho
+jméno (takže například vytvoření tabulky začíná "<em><strong>CREATE TABLE</strong> JmenoTabulky"</em>, smazání uživatele "<em><strong>DROP USER </strong>JménoUživatele</em>" atp.).</p>  <p>Bližší
+syntaxe jednotlivých formulací si vysvětlíme později, důležité je, že
+se jedná o příkazy, které formulují chování databáze a proto je budeme
+využívat v převážné většině případů jen při jejím návrhu. Je to z toho
+důvodu, že tabulky jsou optimalizované pro co nejrychlejší čtení,
+vyhledávání atp., proto mějte na paměti, že dynamické vytváření a
+mazání třeba tabulek nemusí být nejrychlejší a pro server v běžném
+produkčním prostředí to může být dost silná káva a můžete tím dosáhnou
+značného zpomalení.</p>  <h4></h4>  <h4>Příkazy pro práci s daty</h4>  <p>Pro koncovou aplikaci je však mnohem zajímavější druhá skupina dotazů, která umožňují číst (příkaz <strong>SELECT</strong>), měnit (<strong>UPDATE</strong>), mazat (<strong>DELETE</strong>) a vkládat (<strong>INSERT</strong>) datové řádky do tabulek. Obecně se používají k práci s hotovou databází a budeme je intenzivně zkoumat již v tomto díle.</p>  <h4></h4>  <h4>Příkazy pro dodatečné nastavování</h4>  <p>Nejprve
+jsem zvažoval, zda mám tuto skupinu v tomto základním výčtu vůbec
+uvádět. Nakonec jsem se rozhodl pro především kvůli četnosti jeho
+použití a navíc se často stává řešitelem problémů z velmi nepříjemného
+soudku označeného jako "proč to tam nefunguje, když tady ano".</p>  <p>Všechny tyto příkazy začínají slovem <strong>SET </strong>a
+mění chování určitých příkazů proti jejich implicitnímu nastavení.
+Kámen úrazu je v tom, že právě ono implicitní nastavení může být v
+určitých případech ovliněno řadou věcí, které nelze obecně předvídat.
+Jedná se například o formát datumu, číslo prvního dne v týdnu, zápis
+desetinné čárky, jazyk, izolační level transakcí atp. Opět bych zatím
+vše nerozebíral do hloubky (pro nedočkavé je tu odkaz na <a title="http://msdn2.microsoft.com/en-us/library/aa259205(SQL.80).aspx" href="http://msdn2.microsoft.com/en-us/library/aa259205%28SQL.80%29.aspx">oficiální popis příkazu SET v angličtině</a>),
+zatím nám bude totiž stačit znát základní význam tohoto klíčového slova
+- modifikace nastavení určitého chování serveru v právě otevřené
+relaci. </p>  <h3>SQL jazyk a Microsoft SQL Server Management Studio</h3>  <p>Nejsem
+zastánce dlouhé teoretické průpravy. I proto si teď ukážeme jakým
+způsobem budeme příkazy na databázi testovat. Už v minulém díle jsme k
+pohodlné komunikaci používali SQL Server Management Studio (dále jen
+SSMS) a není důvod proč tohoto výborného nástroje nevyužít i k
+testování obyčejných příkazů. </p>  <p>Spustíme SSMS, přihlásíme se a začneme klepnutím na tlačítko <img alt="New Query" src="clanek--74-stoparuv_pruvodce_po_databazich_dil_2_databazova_materstina_sql.aspx_soubory/WindowsLiveWriter-DatabzovmatetinaSQL_ABB7-image_3.png" border="0" height="23" width="85"> . Zobrazí se nám nová lišta (tu si v dalším odstavci popíšeme) a okno pro zápis SQL dotazu a zobrazení následného výsledku:</p>  <p><a href="http://www.vbnet.cz/storage/WindowsLiveWriter-DatabzovmatetinaSQL_ABB7-image_5.png"><img style="border-width: 0px;" alt="Okno SSMS pro volání dotazů" src="clanek--74-stoparuv_pruvodce_po_databazich_dil_2_databazova_materstina_sql.aspx_soubory/WindowsLiveWriter-DatabzovmatetinaSQL_ABB7-image_thumb_1.png" border="0" height="265" width="373"></a> </p>  <h4>Lišta SQL dotazu</h4>  <p>První
+věc kterou si musíme uvědomit je, že dotaz voláme vždy proti jedné
+určité databázi na databázovém serveru. To, kterou lze snadno vyčíst a
+změnit pomocí rozbalovacího seznamu v liště (na obrázku je to nyní <em>eshop</em>). Na levo od ní nalezneme navíc tři ikonky (<img alt="Connect / disconnect from server" src="clanek--74-stoparuv_pruvodce_po_databazich_dil_2_databazova_materstina_sql.aspx_soubory/WindowsLiveWriter-DatabzovmatetinaSQL_ABB7-image_8.png" border="0" height="25" width="71">) sloužící k připojení, odpojení a změně databázového serveru. Napravo pak tyto tlačítka:</p>  <ul>   <li><img alt="image" src="clanek--74-stoparuv_pruvodce_po_databazich_dil_2_databazova_materstina_sql.aspx_soubory/WindowsLiveWriter-DatabzovmatetinaSQL_ABB7-image_cf446d9c-36.png" border="0" height="22" width="63">&nbsp; - spuštění dotazu proti databázi (také lze spustit pomocí <strong>F5</strong>). </li>    <li><img alt="Verifikace syntaxe" src="clanek--74-stoparuv_pruvodce_po_databazich_dil_2_databazova_materstina_sql.aspx_soubory/WindowsLiveWriter-DatabzovmatetinaSQL_ABB7-image_3472694a-a3.png" border="0" height="24" width="26">&nbsp; - verifikace syntaxe - upozorní na některé případné syntaktické chyby v kódu. </li>    <li><img alt="image" src="clanek--74-stoparuv_pruvodce_po_databazich_dil_2_databazova_materstina_sql.aspx_soubory/WindowsLiveWriter-DatabzovmatetinaSQL_ABB7-image_b2cf543c-52.png" border="0" height="26" width="25">&nbsp; - zastavit provádění dotazu (například při nekonečné smyčce). </li>    <li><img alt="image" src="clanek--74-stoparuv_pruvodce_po_databazich_dil_2_databazova_materstina_sql.aspx_soubory/WindowsLiveWriter-DatabzovmatetinaSQL_ABB7-image_ae0adf9e-e1.png" border="0" height="25" width="25">&nbsp; - spustí dotaz a zobrazí <strong>Execution Plan </strong>(o něm ale až později - jedná se o vizuální zobrazení provedených operací pro pokročilou optimalizaci dotazů). </li>    <li><img alt="Query designer" src="clanek--74-stoparuv_pruvodce_po_databazich_dil_2_databazova_materstina_sql.aspx_soubory/WindowsLiveWriter-DatabzovmatetinaSQL_ABB7-image_80ace5c9-e2.png" border="0" height="26" width="26">&nbsp;
+- návrhář dotazu - spustí vizuálního návrháře dotazu (funguje jen na
+základní čtecí příkazy SELECT) a dovolí nám pomocí něj vytvářet
+základní propojení tabulek, filtrování a řazení (o tom si v tomto
+článku také ještě povíme). </li>    <li><img alt="image" src="clanek--74-stoparuv_pruvodce_po_databazich_dil_2_databazova_materstina_sql.aspx_soubory/WindowsLiveWriter-DatabzovmatetinaSQL_ABB7-image_ad05bd26-97.png" border="0" height="26" width="26">&nbsp;
+- editor šablon - celkem nedůležitá funkce pro nahrazování šablonových
+výrazů - zmíním se o ní až bude nějaká možnost ji využít. </li>    <li><img alt="Execution plan, client statistics, SQLCMD mode" src="clanek--74-stoparuv_pruvodce_po_databazich_dil_2_databazova_materstina_sql.aspx_soubory/WindowsLiveWriter-DatabzovmatetinaSQL_ABB7-image_279e946d-49.png" border="0" height="26" width="72">&nbsp; - tyto tři dodatečné možnosti nabízejí: zahrnutí <strong>execution plan</strong> do výsledku, zahrnutí <strong>statistik spojení</strong> se serverem a povolení tzv. <strong>SQLCMD modu</strong> (režim příkazové řádky). </li>    <li></li>    <li><img alt="Result output" src="clanek--74-stoparuv_pruvodce_po_databazich_dil_2_databazova_materstina_sql.aspx_soubory/WindowsLiveWriter-DatabzovmatetinaSQL_ABB7-image_004c0603-24.png" border="0" height="24" width="73">&nbsp; - můžete si vybrat jeden ze 3 druhů výstupů: <strong>textový</strong>, <strong>do tabulky</strong> a <strong>do souboru</strong>.
+Nejedná se o nic jiného než o způsob jak se zobrazí výsledek.
+Implicitně je nastavený výstup do tabulky, což je optimální pro naše
+potřeby. </li>    <li><img alt="Formating SQL" src="clanek--74-stoparuv_pruvodce_po_databazich_dil_2_databazova_materstina_sql.aspx_soubory/WindowsLiveWriter-DatabzovmatetinaSQL_ABB7-image_d19c99f7-78.png" border="0" height="26" width="100"> - stejné jako ve Visual Studiu - zakomentování bloku kódu / odkomentování a změna odsazení. </li> </ul>  <p>Funkce tlačítek asi nebudeme dále rozebírat a podíváme se na základní příkazy, které se nám budou hodit.</p>  <h3>Základy SQL</h3>  <p>V
+prvním díle jsme vytvořili tabulku ukázkové databáze obsahující seznam
+výrobců. Tu si teď trochu rozšíříme. Jen k tomu nebudeme využívat
+vizuální návrhář, ale SQL jazyk.</p>  <p>Ať máme jistotu, že všichni
+mají stejné podmínky, tu původní nejdříve smažeme (tedy pokud jste ji
+zakládali). Využijeme na to příkaz na zrušení databázového objektu <strong>DROP</strong>, klíčové slovo označující tabulku <strong>TABLE</strong> a unikátní jméno tabulky - <strong>Companies</strong>:</p>  <pre class="code"><span style="color: blue;">DROP TABLE </span>Companies</pre>
+
+<p>Jak tabulku dotazem smazat si můžete prohlédnout na následujícím
+videu. Nejdříve v něm databázi otevírám, prohlížím přítomnost tabulky
+Companies a pak vyvolávám dotaz. Když poté dám refresh tabulek, je
+vidět, že již v databázi není (proto při druhém volání vyskočí chybová
+hláška, že takový objekt neexistuje, protože je již smazaný):</p>
+
+<p></p>
+
+<div class="wlWriterSmartContent" id="scid:5737277B-5D6D-4f48-ABFC-DD9C333F4C5D:be55e961-f7aa-4f61-b5c3-34db24f8534e" style="margin: 0px; padding: 0px; display: inline; float: none;"><div id="66f9722b-3c7f-40ba-a0d0-0070493505d7" style="margin: 0px; padding: 0px; display: inline;"><div><embed style="display: none;" src="clanek--74-stoparuv_pruvodce_po_databazich_dil_2_databazova_materstina_sql.aspx_soubory/soapbox1_1.swf" quality="high" wmode="transparent" type="application/x-shockwave-flash" pluginspage="http://macromedia.com/go/getflashplayer" flashvars="c=v&amp;v=4d5b2b6a-f7d3-458e-986a-a60b1afaeabd&amp;from=writer" height="364" width="432"></div></div></div>
+
+<p></p>
+
+<p>Ted si vytvoříme tabulku novou, rozsířenou o několik sloupců (City -
+město, kde firma podniká a Website - url adresa webu firmy). Dotaz na
+vytvoření je následující, vložte ho tedy do okna dotazu a spusťte (<em>jen si dejte pozor a nazapomeňte spustit dotaz proti naší databázi <strong>eshop </strong>- tu jsem si vytvořili v prvním díle</em>):</p>
+
+<pre class="code"><span style="color: blue;">CREATE TABLE </span>dbo<span style="color: gray;">.</span>Companies
+    <span style="color: gray;">(
+    </span>CompanyId <span style="color: blue;">int </span><span style="color: gray;">NOT NULL </span><span style="color: blue;">IDENTITY </span><span style="color: gray;">(</span>1<span style="color: gray;">, </span>1<span style="color: gray;">) </span><span style="color: blue;">PRIMARY KEY</span><span style="color: gray;">,
+    </span>CompanyName <span style="color: blue;">nvarchar</span><span style="color: gray;">(</span>100<span style="color: gray;">) NOT NULL,
+    </span>CompanyDescription <span style="color: blue;">nvarchar</span><span style="color: gray;">(</span>500<span style="color: gray;">) NULL,
+    </span>City <span style="color: blue;">nvarchar</span><span style="color: gray;">(</span>100<span style="color: gray;">) NOT NULL,
+    </span>Website <span style="color: blue;">varchar</span><span style="color: gray;">(</span>100<span style="color: gray;">) NULL
+    )</span></pre>
+<a href="http://11011.net/software/vspaste"></a>
+
+<p>Jestli se vše provedlo správně, objeví se hláška:</p>
+
+<pre class="code">Command(s) completed successfully.</pre>
+
+<h4>Vytváření jednoduchých tabulek pomocí příkazu CREATE TABLE</h4>
+
+<p>Nyní si o dotazu povíme něco bližšího. CREATE TABLE znamená, že se
+vytvoří databázový objekt typu tabulka. Následuje jméno -
+dbo.Companies. Asy bych měl vysvětlit co znamenají ty 3 písmenka <strong>dbo </strong>-
+jedná se o identifikaci databázového schématu. Pokud to nenastavíme
+jinak, bude se vždy využívat základní, které je právě pojmenované jako <strong>dbo</strong>
+(database object - databázový objekt). Toto schéma by se využilo i
+kdyby jsme ho neuvedli. Schémata obecně slouží k rozdělení databáze do
+ucelených skupin a to jak funkcionálních, tak bezpečnostních. Nám bude
+stačit zatím pouze jedno a tak se jimi teď nebudeme zaobírat.</p>
+
+<p>Další parametry příkazu jsou uzavřené v závorkách a definují sloupce
+tabulky oddělené čárkou. První je unikátní jméno sloupce (unikátní v
+rámci tabulky), následuje datový typ a přepínač <strong>NULL</strong> (sloupec může obsahovat prázdnou hodnotu) nebo <strong>NOT NULL </strong>(sloupec
+nemůže obsahovat prázdnou hodnotu). Důležité je, že databáze může
+obsahovat tzv. hodnotu NULL u všech datových typů - to například
+znamená rozdíl mezi číslem 0 a hodnotou NULL nebo prázdným textem a
+NULL.</p>
+
+<p>Dále můžeme definovat řadu doplňujících informací oddělených mezerou, uvedu několik z nich:</p>
+
+<ul>
+  <li><strong>PRIMARY KEY</strong> - v tabulce může být jen jednou - označuje klíčový sloupec (viz v příkladu sloupec CompanyId) </li>
+
+  <li><strong>IDENTITY(1,1)</strong> - automatická inkrementace klíče při vkládání nových řádků (opět v příkladu sloupec CompanyId) </li>
+
+  <li><strong>DEFAULT(<em>hodnota</em>)</strong> - máme možnost definovat defaultní hodnotu sloupce, pokud ho neurčíme při vkládání nového řádku </li>
+</ul>
+
+<p>Tímto krátkým popisem se snažím vysvětlit základ vytváření tabulek v T-SQL - bližší informace lze vyčíst na adrese <a title="http://msdn2.microsoft.com/en-us/library/ms174979.aspx" href="http://msdn2.microsoft.com/en-us/library/ms174979.aspx">http://msdn2.microsoft.com/en-us/library/ms174979.aspx</a> nebo z dalších pokračování tohoto seriálu.</p>
+
+<h4>Vkládání dat do tabulek pomocí příkazu INSERT</h4>
+
+<p>Tabulku máme vytvořenou a neměl by nyní být problém do ní pohodlně
+vložit řádky pomocí nástroje SSMS. To si klidně vyzkoušejte. Uvidíte
+mimo jiné i nutnost zadat sloupce označené jako NOT NULL, dodržování
+datových typů a automatické generování klíče do sloupce CompanyId.</p>
+
+<p>Teď je ale čas si ukázat využití příkazu <strong>INSERT</strong>. Tady je ukázkový dotaz na vložení řádku s fiktivní firmou:</p>
+
+<pre class="code"><span style="color: blue;">INSERT INTO </span>dbo<span style="color: gray;">.</span>Companies <span style="color: gray;">(</span>CompanyName<span style="color: gray;">, </span>CompanyDescription<span style="color: gray;">, </span>City<span style="color: gray;">)
+    </span><span style="color: blue;">VALUES </span><span style="color: gray;">(</span>N<span style="color: red;">'Dveřní klepátka s.r.o.'</span><span style="color: gray;">, </span>N<span style="color: red;">'Zakázková výroba dveřních klepátek a zvonků'</span><span style="color: gray;">, </span><span style="color: red;">'Brno'</span><span style="color: gray;">)
+</span></pre>
+<a href="http://11011.net/software/vspaste"></a>
+
+<p>Příkaz začíná <strong>INSERT INTO</strong> (vlož do). Následuje
+jméno tabulky a v závorce výčet sloupců, do kterých budeme dosazovat
+(oddělených čárkou). Za závorkou následuje klíčové slovo <strong>VALUES</strong> (hodnoty) a za ním v závorce výčet hodnot. Počet hodnot musí být pochopitelně stejný jako počet zadávaných sloupců.</p>
+
+<p>Při vkládání se navíc kontroluje integrita proti pravidlům
+definovaných při vytváření tabulky. Tedy například pokud nezadáte
+sloupec <strong>City</strong>, jenž je označen jako NOT NULL, zobrazí se chybová hláška:</p>
+
+<pre class="code">Cannot insert the value NULL into column 'City', table 'eshop.dbo.Companies'; column does not allow nulls. INSERT fails.</pre>
+<a href="http://11011.net/software/vspaste"></a>
+
+<p>V překladu: <em>Nelze vložit NULL hodnotu do sloupce 'City', do
+tabulky 'eshop.dbo.Companies'; sloupec nedovoluje hodnoty NULL.
+Vkládání se nezdařilo. </em>Nezadáním hodnoty se totiž automaticky vkládá hodnota NULL.</p>
+
+<p><em><strong>TIP - Zapisování řetězců: </strong>Pro zápis řetězců do SQL kódu se využívají apostrofy - znak <strong>'</strong> . Například <strong>'Ahoj'</strong>. Když chcete zapsat apostrof do textu, musíte ho zdvojit. Například <strong>'Ahoj ''kdo'' jsi?'</strong> znamená <strong>Ahoj 'kdo' jsi?</strong>. V případě, že napíšete před začátek textu velké písmeno <strong>N</strong>,
+bude se text brát jako unicode - tedy vhodné pro všechny datové typy
+jako je nvarchar, nchar atp. Ovšem není to pravidlo, je to jen
+doporučení při zápisu speciálních znaků jako písmena s diakritikou,
+které by se mohly špatně zinterpretovat atp. Tedy například:&nbsp; <strong>N'Příliš žluťoučký kůň úpěl dábelské ódy'</strong>.</em></p>
+
+<p>Aby jsme toho měli v tabulce víc, spusťte také tyto dotazy na vložení dalších řádků:</p>
+
+<pre class="code"><span style="color: blue;">INSERT INTO </span>dbo<span style="color: gray;">.</span>Companies <span style="color: gray;">(</span>CompanyName<span style="color: gray;">, </span>CompanyDescription<span style="color: gray;">, </span>Website<span style="color: gray;">, </span>City<span style="color: gray;">)
+    </span><span style="color: blue;">VALUES </span><span style="color: gray;">(</span>N<span style="color: red;">'Záchodové mísy k.s.'</span><span style="color: gray;">, </span>N<span style="color: red;">'Výroba prvotřídních mís'</span><span style="color: gray;">, NULL, </span><span style="color: red;">'Brno'</span><span style="color: gray;">)
+
+</span><span style="color: blue;">INSERT INTO </span>dbo<span style="color: gray;">.</span>Companies <span style="color: gray;">(</span>CompanyName<span style="color: gray;">, </span>CompanyDescription<span style="color: gray;">, </span>Website<span style="color: gray;">, </span>City<span style="color: gray;">)
+    </span><span style="color: blue;">VALUES </span><span style="color: gray;">(</span>N<span style="color: red;">'Windows User Group Liberec'</span><span style="color: gray;">, </span>N<span style="color: red;">'Pořádání meetingů pro odbornou veřejnost'</span><span style="color: gray;">, </span><span style="color: red;">'http://www.wug.cz'</span><span style="color: gray;">, </span><span style="color: red;">'Liberec'</span><span style="color: gray;">)
+
+</span><span style="color: blue;">INSERT INTO </span>dbo<span style="color: gray;">.</span>Companies <span style="color: gray;">(</span>CompanyName<span style="color: gray;">, </span>CompanyDescription<span style="color: gray;">, </span>Website<span style="color: gray;">, </span>City<span style="color: gray;">)
+    </span><span style="color: blue;">VALUES </span><span style="color: gray;">(</span>N<span style="color: red;">'Eviny pletky'</span><span style="color: gray;">, </span>N<span style="color: red;">'Fešné futrálky na nejrůznější věci'</span><span style="color: gray;">, </span><span style="color: red;">'http://evinypletky.ic.cz/'</span><span style="color: gray;">, </span><span style="color: red;">'Liberec'</span><span style="color: gray;">)
+
+</span><span style="color: blue;">INSERT INTO </span>dbo<span style="color: gray;">.</span>Companies <span style="color: gray;">(</span>CompanyName<span style="color: gray;">, </span>CompanyDescription<span style="color: gray;">, </span>Website<span style="color: gray;">, </span>City<span style="color: gray;">)
+    </span><span style="color: blue;">VALUES </span><span style="color: gray;">(</span>N<span style="color: red;">'Severočeská magnetárna'</span><span style="color: gray;">, </span>N<span style="color: red;">'Výroba prvotřídních magnetů'</span><span style="color: gray;">, NULL, </span><span style="color: red;">'Liberec'</span><span style="color: gray;">)
+
+</span><span style="color: blue;">INSERT INTO </span>dbo<span style="color: gray;">.</span>Companies <span style="color: gray;">(</span>CompanyName<span style="color: gray;">, </span>CompanyDescription<span style="color: gray;">, </span>Website<span style="color: gray;">, </span>City<span style="color: gray;">)
+    </span><span style="color: blue;">VALUES </span><span style="color: gray;">(</span>N<span style="color: red;">'Pražské houslárny'</span><span style="color: gray;">, </span>N<span style="color: red;">'Housle pro děti i dorost'</span><span style="color: gray;">, NULL, </span><span style="color: red;">'Praha'</span><span style="color: gray;">)</span></pre>
+
+<p><a href="http://11011.net/software/vspaste"></a>Video, kde řádky vložím a zobrazím si můžete pustit zde:</p>
+
+<p></p>
+
+<div class="wlWriterSmartContent" id="scid:5737277B-5D6D-4f48-ABFC-DD9C333F4C5D:02375836-4c88-42b2-a05d-0b7114e0e24b" style="margin: 0px; padding: 0px; display: inline;"><div id="8f9ad174-c686-4ea4-8a47-5f740f77c99a" style="margin: 0px; padding: 0px; display: inline;"><div><embed style="display: none;" src="clanek--74-stoparuv_pruvodce_po_databazich_dil_2_databazova_materstina_sql.aspx_soubory/soapbox1_1.swf" quality="high" wmode="transparent" type="application/x-shockwave-flash" pluginspage="http://macromedia.com/go/getflashplayer" flashvars="c=v&amp;v=4e48c857-84e5-401d-9e61-069a4b77f149&amp;from=writer" height="364" width="432"></div></div></div>
+
+<p></p>
+
+<p>Teď máme připravenou jednu tabulku s několika datovými řádky. Je proto čas si ukázat příkazy pro čtení dat.</p>
+
+<h4>Čtení dat pomocí příkazu SELECT</h4>
+
+<p>Příkaz <strong>SELECT </strong>slouží ke čtení dat. V prní ukázce si necháme vypsat všechny řádky z tabulky Companies:</p>
+
+<pre class="code"><span style="color: blue;">SELECT </span><span style="color: gray;">* </span><span style="color: blue;">FROM </span>dbo<span style="color: gray;">.</span>Companies</pre>
+
+<pre class="code">Výsledkem pak jest:</pre>
+
+<pre class="code"><img alt="Sada výsledků" src="clanek--74-stoparuv_pruvodce_po_databazich_dil_2_databazova_materstina_sql.aspx_soubory/WindowsLiveWriter-DatabzovmatetinaSQL_ABB7-image_c532c5d9-22.png" border="0" height="102" width="424"> </pre>
+
+<p><a href="http://11011.net/software/vspaste"></a>Začínáme slovem <strong>SELECT</strong>, pokračujeme výčtem sloupců oddělené čárkou, které chceme vypsat (hvězdička zastupuje všechny sloupce najednou). Následuje <strong>FROM </strong>a jméno zdrojové tabulky. </p>
+
+<p>Tak lze zapsat příkaz SELECT ve své základní podobě. Jeho rozšiřování si popíšeme v následujících kapitolách.</p>
+
+<h4></h4>
+
+<h4>Filtrování výsledků pomocí klíčového slova WHERE</h4>
+
+<p>Je velmi pravděpodobné, že budeme chtít sady výsledků filtrovat. Používá se k tomu převážně klíčové slovo <strong>WHERE</strong>. Chceme například zobrazit jen firmy z Liberce:</p>
+
+<pre class="code"><span style="color: blue;">SELECT </span><span style="color: gray;">* </span><span style="color: blue;">FROM </span>dbo<span style="color: gray;">.</span>Companies <span style="color: blue;">WHERE </span>City <span style="color: gray;">= </span><span style="color: red;">'Liberec'</span></pre>
+
+<p>Za WHERE se zapisuje logický výraz určující, zda bude řádek obsažen
+ve výsledku. Výrazů můžeme použít kolik uznáme za vhodné a na jejich
+spojování jsou určeny logické operátory. Například výpis firem z
+Liberce nebo Prahy :</p>
+
+<pre class="code"><span style="color: blue;">SELECT </span><span style="color: gray;">* </span><span style="color: blue;">FROM </span>dbo<span style="color: gray;">.</span>Companies <span style="color: blue;">WHERE </span>City <span style="color: gray;">= </span><span style="color: red;">'Liberec' </span><span style="color: gray;">OR </span>City <span style="color: gray;">= </span><span style="color: red;">'Praha'</span></pre>
+
+<p>Pro srovnávání jsou aplikovatelné základní operátory:</p>
+
+<ul>
+  <li><strong>=</strong> - rovná se </li>
+
+  <li><strong>&gt;</strong> - větší </li>
+
+  <li><strong>&lt; </strong>- menší </li>
+
+  <li><strong>&gt;= </strong>- větší nebo rovný </li>
+
+  <li><strong>&lt;= </strong>- menší nebo rovný </li>
+
+  <li><strong>&lt;&gt;</strong> - nerovná se </li>
+</ul>
+
+<p>Myslím, že není potřeba je vysvětlovat. Mnohem zajímavější jsou logické operátory. Těch je celá řada:</p>
+
+<ul>
+  <li><strong>AND </strong>-<em> [výraz_1] AND [výraz_2] 
+      <br></em>Musí být splněné obě logické části. </li>
+
+  <li><strong>OR </strong>- <em>[výraz_1] OR [výraz_2]</em> 
+
+    <br>Stačí aby byl splněný alespoň jeden výraz. </li>
+
+  <li><strong>NOT</strong> - <em>NOT [výraz]</em> 
+
+    <br>Neguje výsledek výrazu. </li>
+
+  <li><strong>BETWEEN</strong> -<em> [hodnota_1] BETWEEN [hodnota_2] AND [hodnota_3] 
+      <br></em>Platí
+pouze pokud bude [hodnota_1] v rozsahu [hodnota_2] a [hodnota_3]. Stává
+se výhodným například při filtrování podle rozsahu datumů nebo ceny. Je
+to ekvivalent zápisu: <br><em>([hodnota_1] &gt;= [hodnota_2] AND [hodnota_1] &lt;= [hodnota_3])</em> </li>
+
+  <li><strong>IN</strong> - <em>[hodnota_1] IN ([hodnota_2], [hodnota_3], [hodnota_4]...) 
+      <br></em>Platí v případě, že [hodnota_1] odpovídá alespoň jedné z hodnot ve výčtu v závorce. Ekvivalent zápisu: 
+
+    <br><em>([hodnota_1] = [hodnota_2] OR [hodnota_1] = [hodnota_3] OR [hodnota_1] = [hodnota_4] ...)</em> </li>
+
+  <li><strong>ALL </strong>- <em>[hodnota_1] &gt; ALL ( [dotaz] ) 
+      <br></em>Dokáže
+provést hromadné srovnání libovolným srovnávacím operátorem (v ukázce
+použit jen &gt;) se sadou výsledkou pomocí dalšího dotazu uvedeného v
+závorce. Je potřeba aby výsledek dotazu v závorce vracel pouze jeden
+sloupec, se kterým se provede srovnání. Výsledek výrazu bude pozitivní
+pouze v případě že bude srovnání se všemi řádky z dotazu pozitivní. </li>
+
+  <li><strong>ANY </strong>(popřípadě ekvivalent <strong>SOME</strong>) - <em>[hodnota_1] &gt; ALL ( SELECT Cena FROM Vyrobky ) 
+      <br></em>Prakticky to samé co dělá <strong>ALL</strong>, jen s tím rozdílem, že stačí aby srovnání proběhlo pozitivně pro kterýkoliv z řádků poddotazu ze závorky. </li>
+
+  <li><strong>EXISTS</strong> - <em>EXISTS ( [dotaz] ) 
+      <br></em>Platí tehdy, když dotaz v závorce vrací alespoň jeden řádek. </li>
+
+  <li><strong>LIKE </strong>- <em>[hodnota_1] LIKE 'wildcards_maska' 
+      <br></em>Využijte tzv. wild-cards masku pro srovnání s textovou hodnotou. Wildcard znaky jsou: <strong>% </strong>(zastupuje libovolný počet libovolných znaků)<strong>, _ </strong>(zastupuje jeden libovolný znak)<strong>,</strong>&nbsp;<strong>[</strong>abcde<strong>] </strong>(zastupuje jeden libovolný znak, který <em>je</em> ve výčtu v hranaté závorce) a <strong>[^</strong>abcde<strong>]</strong> (zastupuje jeden libovolný znak, který <em>není</em> v hranaté závorce). Lepší bude asi malá ukázka: 
+
+    <br>Pro masku <strong>'Ah%'</strong> odpovídají všechny řetězce začínající na <strong>Ah</strong>. Například: 'Ahoj', 'Ah432', 'Aha' atp. Pro <strong>'_hoj' </strong>zase všechny, které mají 4 písmena a končí <strong>hoj</strong>. Třeba: 'Ahoj', 'Xhoj', '5hoj' atp. 
+
+    <br>Klasické použití je pro vyhledávání. Například všechny firmy, jejichž jména měst začínající na <strong>L</strong> se získají dotazem: 
+
+    <pre class="code"><span style="color: blue;">SELECT </span><span style="color: gray;">* </span><span style="color: blue;">FROM </span>Companies <span style="color: blue;">WHERE </span>City <span style="color: gray;">LIKE </span><span style="color: red;">'L%'</span></pre>
+  </li>
+</ul>
+
+<h4><span style="color: red;"><font color="#000000" face="Trebuchet MS">Řazení výsledků pomocí klauzule ORDER BY</font></span></h4>
+
+<p><span style="color: red;"><font color="#000000">Celkem jednoduchá funkce je řazení. Dělá se to zapsáním klíčových slov <strong>ORDER BY </strong>na konec dotazu, které následuje jméno sloupce / sloupců podle nichž se bude řadit. Například:</font></span></p>
+
+<pre class="code"><span style="color: blue;">SELECT </span><span style="color: gray;">* </span><span style="color: blue;">FROM </span>Companies <span style="color: blue;">WHERE </span>City <span style="color: gray;">= </span><span style="color: red;">'Liberec' </span><span style="color: blue;">ORDER BY </span>CompanyName</pre>
+
+<p><a href="http://11011.net/software/vspaste"></a>Výsledek se nám seřadí podle jména firmy.</p>
+
+<p>Navíc je možné přidat další sloupce, které se využijí při shodě
+hodnot prvního řadícího sloupce. Takové se přidávají za oddělovací
+čárku.</p>
+
+<p>Další možností je určování směru řazení pro kterýkoliv ze zahrnutých sloupců. Implicitně je to od nejmenšího po největší (<strong>ASC</strong>), lze však směr obrátit slovem <strong>DESC</strong>
+zapsaným za jméno sloupce. Ukázka jest řazení firem podle jména měst a
+při shodě měst podle jména firmy od největší po nejmenší (větší se bere
+u řetězců ten s vyšší ordinální hodnotou znaků z leva do prava - řazení
+podle abecedy):</p>
+
+<pre class="code"><span style="color: blue;">SELECT </span><span style="color: gray;">* </span><span style="color: blue;">FROM </span>Companies <span style="color: blue;">ORDER BY </span>City<span style="color: gray;">, </span>CompanyName <span style="color: blue;">DESC</span></pre>
+
+<h4><span style="color: blue;"><font color="#000000" face="Trebuchet MS">Mazání řádku z tabulky pomocí DELETE</font></span></h4>
+
+<p><span style="color: blue;"><font color="#000000">Teď už umíme řádky
+vybírat a filtrovat. Mazání pracuje na podobném principu - smažou se
+řádky odpovídající kritériím. Používá se příkaz <strong>DELETE FROM </strong>(smaž z). Ukázka by měla vše vysvětlit - maže všechny z Brna:</font></span></p>
+
+<pre class="code"><span style="color: blue;">DELETE FROM </span>Companies <span style="color: blue;">WHERE </span>City <span style="color: gray;">= </span><span style="color: red;">'Brno'</span></pre>
+
+<p>V případě, že klauzuli <strong>WHERE</strong> vůbec neuvedete, smažou se všechny řádky - stejně jako u SELECTu, kde se bez WHERE vypíší také všechny. </p>
+
+<h4>Modifikace řádku pomocí UPDATE</h4>
+
+<p>Poslední příkaz, co si dnes probereme je modifikační příkaz. Začíná <strong>UPDATE</strong>, pokračuje jménem tabuly a klauzulí <strong>SET </strong>určující sloupce a jejich nové hodnoty. Na konec se uvádí podmínky změny nám již známým příkazem <strong>WHERE</strong>. Opět, když ho nezapíšete, zmodifikují se všechny řádky.</p>
+
+<p>Ukázka mluví za vše (nastavíme popis všech firem z Liberce na 'Toto je firma z Liberce!'):</p>
+
+<pre class="code"><span style="color: blue;">UPDATE </span>dbo<span style="color: gray;">.</span>Companies <span style="color: blue;">SET </span>CompanyDescription <span style="color: gray;">= </span><span style="color: red;">'Toto je firma z Liberce!' </span><span style="color: blue;">WHERE </span>City <span style="color: gray;">= </span><span style="color: red;">'Liberec'</span></pre>
+<a href="http://11011.net/software/vspaste"></a>
+
+<p>Tabulka, pak obsahuje asi nepřekvapující hodnoty:</p>
+
+<p><img alt="Updated table result set" src="clanek--74-stoparuv_pruvodce_po_databazich_dil_2_databazova_materstina_sql.aspx_soubory/WindowsLiveWriter-DatabzovmatetinaSQL_ABB7-image_dc3727bb-d8.png" border="0" height="122" width="541"> </p>
+
+<p><em><strong>TIP - Upravování řádků: </strong>Sloupců, které se mají změnit lze určit víc (třeba: <strong>UPDATE Companies SET City = 'Moskva', Website = 'http://www.adresa.ru' WHERE ...</strong>). Navíc je možné upravovat pomocí hodnoty sloupce, kterou obsahoval dříve - hezká ukázka je například inkrementace čísla - <strong>UPDATE Tabulka SET PocetPristupu = PocetPristupu + 1 WHERE ...</strong></em></p>
+
+<h4>Závěrem - WHERE a klíče tabulky</h4>
+
+<p>Klasickou ukázkou využití klíče tabulky je upravování nebo mazání
+právě jednoho určitého řádku, který je jím jednoznačně
+identifikovatelný. Jako klíč se obecně doporučuje využívat buď datový
+typ čísla nebo GUID identifikátoru. V obou případech platí, že klíčový
+sloupec se indexuje a tak je vyhledávání podle něj velmi rychlé a to je
+další důvod proč ho využívat.</p>
+
+<h3>Závěrem článku</h3>
+
+<p>Nejprve se omlouvám všem čtenářům za velké zpoždění druhého dílu
+tohoto seriálu. Bohužel jsem ho těsně před dokončením smazal při obnově
+systému. A psát jej celý znovu nepatří mezi nejzábavnější aktivity na
+nedělní podvečery :-( - resp. pondělní ráno, jak tak koukám na hodiny
+(00:48). Navíc to dnes už nevidím na nějakou pokročilou korekturu,
+takže mi zkuste odpustit případné hrubky.</p>
+
+<p>Ale článek je hotov a já budu rád za každý rozumný ohlas, či dotaz.
+A v dalším díle se podíváme na pokročilejší funkce a provazování
+tabulek. </p>
+            </div>
+            
+            <br><small><a href="#">&gt; Na začátek</a></small>
+            <p>&nbsp;</p>
+            <div style="float: left;">
+<div class="form_rating">
+    Hodnocení:<br>
+    <div id="ctl00_MainContent_Repeater1_ctl00_articleRating_UpdatePanel1">
+	
+            <input name="ctl00$MainContent$Repeater1$ctl00$articleRating$star1" id="ctl00_MainContent_Repeater1_ctl00_articleRating_star1" onmouseover='StarRatingSystem_mouseEn(2,"ctl00_MainContent_Repeater1_ctl00_articleRating_star")' onmouseout='StarRatingSystem_mouseLv(10,"ctl00_MainContent_Repeater1_ctl00_articleRating_star")' src="clanek--74-stoparuv_pruvodce_po_databazich_dil_2_databazova_materstina_sql.aspx_soubory/star_full.gif" style="border-width: 0px;" type="image">
+            <input name="ctl00$MainContent$Repeater1$ctl00$articleRating$star2" id="ctl00_MainContent_Repeater1_ctl00_articleRating_star2" onmouseover='StarRatingSystem_mouseEn(4,"ctl00_MainContent_Repeater1_ctl00_articleRating_star")' onmouseout='StarRatingSystem_mouseLv(10,"ctl00_MainContent_Repeater1_ctl00_articleRating_star")' src="clanek--74-stoparuv_pruvodce_po_databazich_dil_2_databazova_materstina_sql.aspx_soubory/star_full.gif" style="border-width: 0px;" type="image">
+            <input name="ctl00$MainContent$Repeater1$ctl00$articleRating$star3" id="ctl00_MainContent_Repeater1_ctl00_articleRating_star3" onmouseover='StarRatingSystem_mouseEn(6,"ctl00_MainContent_Repeater1_ctl00_articleRating_star")' onmouseout='StarRatingSystem_mouseLv(10,"ctl00_MainContent_Repeater1_ctl00_articleRating_star")' src="clanek--74-stoparuv_pruvodce_po_databazich_dil_2_databazova_materstina_sql.aspx_soubory/star_full.gif" style="border-width: 0px;" type="image">
+            <input name="ctl00$MainContent$Repeater1$ctl00$articleRating$star4" id="ctl00_MainContent_Repeater1_ctl00_articleRating_star4" onmouseover='StarRatingSystem_mouseEn(8,"ctl00_MainContent_Repeater1_ctl00_articleRating_star")' onmouseout='StarRatingSystem_mouseLv(10,"ctl00_MainContent_Repeater1_ctl00_articleRating_star")' src="clanek--74-stoparuv_pruvodce_po_databazich_dil_2_databazova_materstina_sql.aspx_soubory/star_full.gif" style="border-width: 0px;" type="image">
+            <input name="ctl00$MainContent$Repeater1$ctl00$articleRating$star5" id="ctl00_MainContent_Repeater1_ctl00_articleRating_star5" onmouseover='StarRatingSystem_mouseEn(10,"ctl00_MainContent_Repeater1_ctl00_articleRating_star")' onmouseout='StarRatingSystem_mouseLv(10,"ctl00_MainContent_Repeater1_ctl00_articleRating_star")' src="clanek--74-stoparuv_pruvodce_po_databazich_dil_2_databazova_materstina_sql.aspx_soubory/star_full.gif" style="border-width: 0px;" type="image">
+            <br><span id="ctl00_MainContent_Repeater1_ctl00_articleRating_lblInfo">Hlasů: 6</span>
+            <br><small><span id="ctl00_MainContent_Repeater1_ctl00_articleRating_lbl_Cnt">Zvolte své hodnocení</span></small>
+        
+</div>
+</div></div>
+            <div style="margin: 0px 10px 50px; float: left;"><div class="photo" style="background-image: url(/UserPhoto.ashx?user=jechtom&amp;theme=Default2);" onclick="javascript: location.href='/profil--jechtom.aspx';"><div class="infoRolesAdmin"></div><div class="infoRolesAuthor"></div></div></div>
+            <h3 style="text-align: left;">Tomáš Jecha</h3>
+            <p style="font-size: 9pt; margin-top: -15px;">Tomáš
+Jecha pracuje jako .NET vývojář a působí jako člen Liberecké pobočky
+WUGu starající se o přednášky pro IT veřejnost. Jeho nejoblíbenější
+programovací jazyk je Visual Basic. V současné době se zajímá především
+o technologie přicházející s .NET 3 a 3.5. Společně s Tomášem Hercegem
+napsal tento web a stará se o jeho administraci. </p>
+                        
+            <h2 style="clear: both;">Související články</h2>
+            
+            <div>
+	<table class="grid" id="ctl00_MainContent_Repeater1_ctl00_GridView1" style="border-collapse: collapse;" border="1" cellspacing="0" rules="all">
+		<tbody><tr class="gridHeader">
+			<th scope="col">Díl</th><th scope="col">Název článku</th><th scope="col">&nbsp;</th>
+		</tr><tr class="r1">
+			<td>Díl 1.</td><td>
+                            <a style="font-weight: bold;" href="http://www.vbnet.cz/clanek--60-stoparuv_pruvodce_po_databazich_dil_1_lehky_uvod_do_databazi_sql_server_pro_zacatecniky.aspx" title="První díl nového seriálu je věnován absolutním začátečníkům v této oblasti. Povíme si něco o SQL Serveru 2005, naučíme se základní práci s SQL Server Management Studiem, vytvoříme si databázi a probereme zakládání tabulek...">Lehký úvod do databází - SQL Server pro začátečníky</a>
+                        </td><td>15. 1. 2008</td>
+		</tr><tr class="r0">
+			<td>Díl 2.</td><td>
+                            <strong title="Po delší odmlce přináším druhý díl seriálu o databázích řešených Microsoft SQL Serverem. Ukážeme si základy SQL dotazovacího jazyka, jeho zpracování v SQL Server Management Studiu a zároveň rozšíříme tabulky našeho ukázkového internetového obchodu z prvního dílu.">Databázová mateřština SQL</strong>
+                        </td><td>25. 2. 2008</td>
+		</tr><tr class="r1">
+			<td>Díl 3.</td><td>
+                            <a style="font-weight: bold;" href="http://www.vbnet.cz/clanek--98-stoparuv_pruvodce_po_databazich_dil_3_cizi_klice_provazovani_sloupcu.aspx" title="V dalším díle seriálu o databázích si povíme o jednom z nejdůležitějších pilířů databázové logiky - definování vztahů mezi sloupci tabulek. Popíšu výhody i nevýhody, kód pro zavedení i zrušení a samozřejmě nezapomenu na vizuální cestu konfigurace pomocí Management Studia.">Cizí klíče - provazování sloupců</a>
+                        </td><td>27. 5. 2008</td>
+		</tr>
+	</tbody></table>
+</div>
+
+            <hr>
+            <a name="diskuse" id="diskuse"></a>
+            <div style="float: right;"><a href="http://www.vbnet.cz/RSS.ashx?item=forum-thread&amp;id=806"><img alt="RSS Feed" src="clanek--74-stoparuv_pruvodce_po_databazich_dil_2_databazova_materstina_sql.aspx_soubory/rss.gif"> RSS Feed</a>
+</div>
+            <h2>Diskuse</h2>
+            
+
+            
+            <div id="ctl00_MainContent_Repeater1_ctl00_ForumPostList1_PanelCreatePost" style="text-align: center;">
+	
+    <a id="ctl00_MainContent_Repeater1_ctl00_ForumPostList1_HyperLinkCreateNew" href="http://www.vbnet.cz/ForumPost.aspx?id=806&amp;returnUrl=clanek--74-stoparuv_pruvodce_po_databazich_dil_2_databazova_materstina_sql.aspx">Přidat nový příspěvek</a><br>&nbsp;
+
+</div>
+
+
+
+        <a id="Post4139"></a>
+        <div id="ctl00_MainContent_Repeater1_ctl00_ForumPostList1_Repeater1_ctl00_UpdatePanel1">
+	
+                <div id="ctl00_MainContent_Repeater1_ctl00_ForumPostList1_Repeater1_ctl00_PanelPost" class="forumPost" style="margin-left: 0px;">
+		
+                    <h1 id="ctl00_MainContent_Repeater1_ctl00_ForumPostList1_Repeater1_ctl00_PostHeader" style="background-color: rgb(147, 162, 180);">
+                        
+                        Jah
+                    </h1>
+                                        
+                    <div id="ctl00_MainContent_Repeater1_ctl00_ForumPostList1_Repeater1_ctl00_PanelSidebar" style="margin: 5px; float: left; width: 160px; font-size: smaller;">
+			
+                        Datum: <strong>27.2.2008 11:08</strong><br>
+                        Autor: <strong>neregistrovaný (217.196.213.131)</strong><br>
+                        Hodnocení autora: <strong><span id="ctl00_MainContent_Repeater1_ctl00_ForumPostList1_Repeater1_ctl00_AuthorRating">není</span></strong><br>
+                        Příspěvků: <strong>0</strong><br>
+                        
+                    
+		</div>
+                    <div style="padding: 5px; float: right; width: 480px;">
+                        <div id="ctl00_MainContent_Repeater1_ctl00_ForumPostList1_Repeater1_ctl00_PostTextPanel" style="font-size: 8.25pt; color: rgb(64, 64, 64);">
+			
+							Jména tabulek se píšou v jednotném čísle...
+						
+		</div>
+                        <input name="ctl00$MainContent$Repeater1$ctl00$ForumPostList1$Repeater1$ctl00$PostPath" id="ctl00_MainContent_Repeater1_ctl00_ForumPostList1_Repeater1_ctl00_PostPath" value="004139" type="hidden">
+                    </div>
+
+                    <div id="ctl00_MainContent_Repeater1_ctl00_ForumPostList1_Repeater1_ctl00_PanelCommands" style="margin: 5px; clear: both; text-align: left; font-size: smaller;">
+			
+                        <div id="ctl00_MainContent_Repeater1_ctl00_ForumPostList1_Repeater1_ctl00_EditPanel" style="float: right;">
+				
+                            &nbsp;<br>
+                            
+                            
+                            
+                            
+                            
+                            &nbsp; &nbsp; &nbsp; &nbsp;
+                            
+                            <a id="ctl00_MainContent_Repeater1_ctl00_ForumPostList1_Repeater1_ctl00_HyperLinkReply" href="http://www.vbnet.cz/ForumPost.aspx?id=806&amp;returnUrl=clanek--74-stoparuv_pruvodce_po_databazich_dil_2_databazova_materstina_sql.aspx&amp;replyTo=4139">&nbsp; &nbsp;<strong>[Odpovědět]</strong></a>
+                        
+			</div>
+
+                        
+                        &nbsp;<br>                        
+                        Hodnocení: <strong><span id="ctl00_MainContent_Repeater1_ctl00_ForumPostList1_Repeater1_ctl00_PostRating">0</span></strong>
+                        <input name="ctl00$MainContent$Repeater1$ctl00$ForumPostList1$Repeater1$ctl00$RateUseful" id="ctl00_MainContent_Repeater1_ctl00_ForumPostList1_Repeater1_ctl00_RateUseful" src="clanek--74-stoparuv_pruvodce_po_databazich_dil_2_databazova_materstina_sql.aspx_soubory/forum_rateUseful.gif" alt="Užitečný" style="border-width: 0px;" align="middle" type="image">
+                        <input name="ctl00$MainContent$Repeater1$ctl00$ForumPostList1$Repeater1$ctl00$RateUseless" id="ctl00_MainContent_Repeater1_ctl00_ForumPostList1_Repeater1_ctl00_RateUseless" src="clanek--74-stoparuv_pruvodce_po_databazich_dil_2_databazova_materstina_sql.aspx_soubory/forum_rateUseless.gif" alt="K ničemu" style="border-width: 0px;" align="middle" type="image">
+                        <span id="ctl00_MainContent_Repeater1_ctl00_ForumPostList1_Repeater1_ctl00_UpdateProgress1" style="visibility: hidden;">
+                                <img id="ctl00_MainContent_Repeater1_ctl00_ForumPostList1_Repeater1_ctl00_ImageProgress" src="clanek--74-stoparuv_pruvodce_po_databazich_dil_2_databazova_materstina_sql.aspx_soubory/loading.gif" alt="Čekejte, prosím..." style="border-width: 0px;" align="middle">
+                            </span>
+                    
+		</div>
+                
+	</div>
+            
+</div>
+    
+        <a id="Post4140"></a>
+        <div id="ctl00_MainContent_Repeater1_ctl00_ForumPostList1_Repeater1_ctl01_UpdatePanel1">
+	
+                <div id="ctl00_MainContent_Repeater1_ctl00_ForumPostList1_Repeater1_ctl01_PanelPost" class="forumPost" style="margin-left: 10px;">
+		
+                    <h1 id="ctl00_MainContent_Repeater1_ctl00_ForumPostList1_Repeater1_ctl01_PostHeader" style="background-color: rgb(147, 162, 180);">
+                        
+                        Re: Jah
+                    </h1>
+                                        
+                    <div id="ctl00_MainContent_Repeater1_ctl00_ForumPostList1_Repeater1_ctl01_PanelSidebar" style="margin: 5px; float: left; width: 160px; font-size: smaller;">
+			
+                        Datum: <strong>27.2.2008 11:25</strong><br>
+                        Autor: <strong>Tomáš Jecha</strong><br>
+                        Hodnocení autora: <strong><span id="ctl00_MainContent_Repeater1_ctl00_ForumPostList1_Repeater1_ctl01_AuthorRating">130</span></strong><br>
+                        Příspěvků: <strong>387</strong><br>
+                        <div class="photo" style="background-image: url(/UserPhoto.ashx?user=jechtom&amp;theme=Default2);" onclick="javascript: location.href='/profil--jechtom.aspx';"><div class="infoRolesAdmin"></div><div class="infoRolesAuthor"></div></div>
+                    
+		</div>
+                    <div style="padding: 5px; float: right; width: 470px;">
+                        <div id="ctl00_MainContent_Repeater1_ctl00_ForumPostList1_Repeater1_ctl01_PostTextPanel" style="font-size: 8.25pt; color: rgb(64, 64, 64);">
+			
+							Ano, měla by se tak psát. Do příštího dílu to napravím, nějak mi to uteklo. Děkuji za upozornění.
+						
+		</div>
+                        <input name="ctl00$MainContent$Repeater1$ctl00$ForumPostList1$Repeater1$ctl01$PostPath" id="ctl00_MainContent_Repeater1_ctl00_ForumPostList1_Repeater1_ctl01_PostPath" value="004139004140" type="hidden">
+                    </div>
+
+                    <div id="ctl00_MainContent_Repeater1_ctl00_ForumPostList1_Repeater1_ctl01_PanelCommands" style="margin: 5px; clear: both; text-align: left; font-size: smaller;">
+			
+                        <div id="ctl00_MainContent_Repeater1_ctl00_ForumPostList1_Repeater1_ctl01_EditPanel" style="float: right;">
+				
+                            &nbsp;<br>
+                            
+                            
+                            
+                            
+                            
+                            &nbsp; &nbsp; &nbsp; &nbsp;
+                            
+                            <a id="ctl00_MainContent_Repeater1_ctl00_ForumPostList1_Repeater1_ctl01_HyperLinkReply" href="http://www.vbnet.cz/ForumPost.aspx?id=806&amp;returnUrl=clanek--74-stoparuv_pruvodce_po_databazich_dil_2_databazova_materstina_sql.aspx&amp;replyTo=4140">&nbsp; &nbsp;<strong>[Odpovědět]</strong></a>
+                        
+			</div>
+
+                        
+                        &nbsp;<br>                        
+                        Hodnocení: <strong><span id="ctl00_MainContent_Repeater1_ctl00_ForumPostList1_Repeater1_ctl01_PostRating">0</span></strong>
+                        <input name="ctl00$MainContent$Repeater1$ctl00$ForumPostList1$Repeater1$ctl01$RateUseful" id="ctl00_MainContent_Repeater1_ctl00_ForumPostList1_Repeater1_ctl01_RateUseful" src="clanek--74-stoparuv_pruvodce_po_databazich_dil_2_databazova_materstina_sql.aspx_soubory/forum_rateUseful.gif" alt="Užitečný" style="border-width: 0px;" align="middle" type="image">
+                        <input name="ctl00$MainContent$Repeater1$ctl00$ForumPostList1$Repeater1$ctl01$RateUseless" id="ctl00_MainContent_Repeater1_ctl00_ForumPostList1_Repeater1_ctl01_RateUseless" src="clanek--74-stoparuv_pruvodce_po_databazich_dil_2_databazova_materstina_sql.aspx_soubory/forum_rateUseless.gif" alt="K ničemu" style="border-width: 0px;" align="middle" type="image">
+                        <span id="ctl00_MainContent_Repeater1_ctl00_ForumPostList1_Repeater1_ctl01_UpdateProgress1" style="visibility: hidden;">
+                                <img id="ctl00_MainContent_Repeater1_ctl00_ForumPostList1_Repeater1_ctl01_ImageProgress" src="clanek--74-stoparuv_pruvodce_po_databazich_dil_2_databazova_materstina_sql.aspx_soubory/loading.gif" alt="Čekejte, prosím..." style="border-width: 0px;" align="middle">
+                            </span>
+                    
+		</div>
+                
+	</div>
+            
+</div>
+    
+        <a id="Post4172"></a>
+        <div id="ctl00_MainContent_Repeater1_ctl00_ForumPostList1_Repeater1_ctl02_UpdatePanel1">
+	
+                <div id="ctl00_MainContent_Repeater1_ctl00_ForumPostList1_Repeater1_ctl02_PanelPost" class="forumPost" style="margin-left: 0px;">
+		
+                    <h1 id="ctl00_MainContent_Repeater1_ctl00_ForumPostList1_Repeater1_ctl02_PostHeader" style="background-color: rgb(147, 162, 180);">
+                        
+                        Super
+                    </h1>
+                                        
+                    <div id="ctl00_MainContent_Repeater1_ctl00_ForumPostList1_Repeater1_ctl02_PanelSidebar" style="margin: 5px; float: left; width: 160px; font-size: smaller;">
+			
+                        Datum: <strong>29.2.2008 17:35</strong><br>
+                        Autor: <strong>neregistrovaný (213.215.81.211)</strong><br>
+                        Hodnocení autora: <strong><span id="ctl00_MainContent_Repeater1_ctl00_ForumPostList1_Repeater1_ctl02_AuthorRating">není</span></strong><br>
+                        Příspěvků: <strong>0</strong><br>
+                        
+                    
+		</div>
+                    <div style="padding: 5px; float: right; width: 480px;">
+                        <div id="ctl00_MainContent_Repeater1_ctl00_ForumPostList1_Repeater1_ctl02_PostTextPanel" style="font-size: 8.25pt; color: rgb(64, 64, 64);">
+			
+							<strong>Výborný článok</strong>. Teším sa na pokračovanie.
+						
+		</div>
+                        <input name="ctl00$MainContent$Repeater1$ctl00$ForumPostList1$Repeater1$ctl02$PostPath" id="ctl00_MainContent_Repeater1_ctl00_ForumPostList1_Repeater1_ctl02_PostPath" value="004172" type="hidden">
+                    </div>
+
+                    <div id="ctl00_MainContent_Repeater1_ctl00_ForumPostList1_Repeater1_ctl02_PanelCommands" style="margin: 5px; clear: both; text-align: left; font-size: smaller;">
+			
+                        <div id="ctl00_MainContent_Repeater1_ctl00_ForumPostList1_Repeater1_ctl02_EditPanel" style="float: right;">
+				
+                            &nbsp;<br>
+                            
+                            
+                            
+                            
+                            
+                            &nbsp; &nbsp; &nbsp; &nbsp;
+                            
+                            <a id="ctl00_MainContent_Repeater1_ctl00_ForumPostList1_Repeater1_ctl02_HyperLinkReply" href="http://www.vbnet.cz/ForumPost.aspx?id=806&amp;returnUrl=clanek--74-stoparuv_pruvodce_po_databazich_dil_2_databazova_materstina_sql.aspx&amp;replyTo=4172">&nbsp; &nbsp;<strong>[Odpovědět]</strong></a>
+                        
+			</div>
+
+                        
+                        &nbsp;<br>                        
+                        Hodnocení: <strong><span id="ctl00_MainContent_Repeater1_ctl00_ForumPostList1_Repeater1_ctl02_PostRating">0</span></strong>
+                        <input name="ctl00$MainContent$Repeater1$ctl00$ForumPostList1$Repeater1$ctl02$RateUseful" id="ctl00_MainContent_Repeater1_ctl00_ForumPostList1_Repeater1_ctl02_RateUseful" src="clanek--74-stoparuv_pruvodce_po_databazich_dil_2_databazova_materstina_sql.aspx_soubory/forum_rateUseful.gif" alt="Užitečný" style="border-width: 0px;" align="middle" type="image">
+                        <input name="ctl00$MainContent$Repeater1$ctl00$ForumPostList1$Repeater1$ctl02$RateUseless" id="ctl00_MainContent_Repeater1_ctl00_ForumPostList1_Repeater1_ctl02_RateUseless" src="clanek--74-stoparuv_pruvodce_po_databazich_dil_2_databazova_materstina_sql.aspx_soubory/forum_rateUseless.gif" alt="K ničemu" style="border-width: 0px;" align="middle" type="image">
+                        <span id="ctl00_MainContent_Repeater1_ctl00_ForumPostList1_Repeater1_ctl02_UpdateProgress1" style="visibility: hidden;">
+                                <img id="ctl00_MainContent_Repeater1_ctl00_ForumPostList1_Repeater1_ctl02_ImageProgress" src="clanek--74-stoparuv_pruvodce_po_databazich_dil_2_databazova_materstina_sql.aspx_soubory/loading.gif" alt="Čekejte, prosím..." style="border-width: 0px;" align="middle">
+                            </span>
+                    
+		</div>
+                
+	</div>
+            
+</div>
+    
+        <a id="Post4251"></a>
+        <div id="ctl00_MainContent_Repeater1_ctl00_ForumPostList1_Repeater1_ctl03_UpdatePanel1">
+	
+                <div id="ctl00_MainContent_Repeater1_ctl00_ForumPostList1_Repeater1_ctl03_PanelPost" class="forumPost" style="margin-left: 0px;">
+		
+                    <h1 id="ctl00_MainContent_Repeater1_ctl00_ForumPostList1_Repeater1_ctl03_PostHeader" style="background-color: rgb(147, 162, 180);">
+                        
+                        problém s INSERT
+                    </h1>
+                                        
+                    <div id="ctl00_MainContent_Repeater1_ctl00_ForumPostList1_Repeater1_ctl03_PanelSidebar" style="margin: 5px; float: left; width: 160px; font-size: smaller;">
+			
+                        Datum: <strong>6.3.2008 9:46</strong><br>
+                        Autor: <strong>Zdeněk Pilný</strong><br>
+                        Hodnocení autora: <strong><span id="ctl00_MainContent_Repeater1_ctl00_ForumPostList1_Repeater1_ctl03_AuthorRating">4</span></strong><br>
+                        Příspěvků: <strong>22</strong><br>
+                        <div class="photo" style="background-image: url(/UserPhoto.ashx?user=zdenek&amp;theme=Default2);" onclick="javascript: location.href='/profil--zdenek.aspx';"></div>
+                    
+		</div>
+                    <div style="padding: 5px; float: right; width: 480px;">
+                        <div id="ctl00_MainContent_Repeater1_ctl00_ForumPostList1_Repeater1_ctl03_PostTextPanel" style="font-size: 8.25pt; color: rgb(64, 64, 64);">
+Výborně srozumitelný článek, konečně mi začíná trochu svítat. Jen mám
+problém s příkazem INSERT. Při použití přímo v kodu v části .... VALUES
+(a,b,c,d), kde a,b,c,d jsou proměnné hlásí aplikace chybu. Funguje to
+pouze při uvedení konkretních dat místo proměnných. Co s tím? </div>
+                        <input name="ctl00$MainContent$Repeater1$ctl00$ForumPostList1$Repeater1$ctl03$PostPath" id="ctl00_MainContent_Repeater1_ctl00_ForumPostList1_Repeater1_ctl03_PostPath" value="004251" type="hidden">
+                    </div>
+
+                    <div id="ctl00_MainContent_Repeater1_ctl00_ForumPostList1_Repeater1_ctl03_PanelCommands" style="margin: 5px; clear: both; text-align: left; font-size: smaller;">
+			
+                        <div id="ctl00_MainContent_Repeater1_ctl00_ForumPostList1_Repeater1_ctl03_EditPanel" style="float: right;">
+				
+                            &nbsp;<br>
+                            
+                            
+                            
+                            
+                            
+                            &nbsp; &nbsp; &nbsp; &nbsp;
+                            
+                            <a id="ctl00_MainContent_Repeater1_ctl00_ForumPostList1_Repeater1_ctl03_HyperLinkReply" href="http://www.vbnet.cz/ForumPost.aspx?id=806&amp;returnUrl=clanek--74-stoparuv_pruvodce_po_databazich_dil_2_databazova_materstina_sql.aspx&amp;replyTo=4251">&nbsp; &nbsp;<strong>[Odpovědět]</strong></a>
+                        
+			</div>
+
+                        
+                        &nbsp;<br>                        
+                        Hodnocení: <strong><span id="ctl00_MainContent_Repeater1_ctl00_ForumPostList1_Repeater1_ctl03_PostRating">0</span></strong>
+                        <input name="ctl00$MainContent$Repeater1$ctl00$ForumPostList1$Repeater1$ctl03$RateUseful" id="ctl00_MainContent_Repeater1_ctl00_ForumPostList1_Repeater1_ctl03_RateUseful" src="clanek--74-stoparuv_pruvodce_po_databazich_dil_2_databazova_materstina_sql.aspx_soubory/forum_rateUseful.gif" alt="Užitečný" style="border-width: 0px;" align="middle" type="image">
+                        <input name="ctl00$MainContent$Repeater1$ctl00$ForumPostList1$Repeater1$ctl03$RateUseless" id="ctl00_MainContent_Repeater1_ctl00_ForumPostList1_Repeater1_ctl03_RateUseless" src="clanek--74-stoparuv_pruvodce_po_databazich_dil_2_databazova_materstina_sql.aspx_soubory/forum_rateUseless.gif" alt="K ničemu" style="border-width: 0px;" align="middle" type="image">
+                        <span id="ctl00_MainContent_Repeater1_ctl00_ForumPostList1_Repeater1_ctl03_UpdateProgress1" style="visibility: hidden;">
+                                <img id="ctl00_MainContent_Repeater1_ctl00_ForumPostList1_Repeater1_ctl03_ImageProgress" src="clanek--74-stoparuv_pruvodce_po_databazich_dil_2_databazova_materstina_sql.aspx_soubory/loading.gif" alt="Čekejte, prosím..." style="border-width: 0px;" align="middle">
+                            </span>
+                    
+		</div>
+                
+	</div>
+            
+</div>
+    
+        <a id="Post4252"></a>
+        <div id="ctl00_MainContent_Repeater1_ctl00_ForumPostList1_Repeater1_ctl04_UpdatePanel1">
+	
+                <div id="ctl00_MainContent_Repeater1_ctl00_ForumPostList1_Repeater1_ctl04_PanelPost" class="forumPost" style="margin-left: 10px;">
+		
+                    <h1 id="ctl00_MainContent_Repeater1_ctl00_ForumPostList1_Repeater1_ctl04_PostHeader" style="background-color: rgb(147, 162, 180);">
+                        
+                        Re: problém s INSERT
+                    </h1>
+                                        
+                    <div id="ctl00_MainContent_Repeater1_ctl00_ForumPostList1_Repeater1_ctl04_PanelSidebar" style="margin: 5px; float: left; width: 160px; font-size: smaller;">
+			
+                        Datum: <strong>6.3.2008 10:11</strong><br>
+                        Autor: <strong>Tomáš Jecha</strong><br>
+                        Hodnocení autora: <strong><span id="ctl00_MainContent_Repeater1_ctl00_ForumPostList1_Repeater1_ctl04_AuthorRating">130</span></strong><br>
+                        Příspěvků: <strong>387</strong><br>
+                        <div class="photo" style="background-image: url(/UserPhoto.ashx?user=jechtom&amp;theme=Default2);" onclick="javascript: location.href='/profil--jechtom.aspx';"><div class="infoRolesAdmin"></div><div class="infoRolesAuthor"></div></div>
+                    
+		</div>
+                    <div style="padding: 5px; float: right; width: 470px;">
+                        <div id="ctl00_MainContent_Repeater1_ctl00_ForumPostList1_Repeater1_ctl04_PostTextPanel" style="font-size: 8.25pt; color: rgb(64, 64, 64);">
+			
+							V T-SQL se označují proměnné se zavináčem na začátku, takže <strong>VALUES (@a, @b, @c, @d)</strong>. Nejdřív je ale musíte nadefinovat na příslušný typ a přiřadit jim hodnotu. Jednoduchá ukázka:<br>
+
+<pre>
+<span class="keyword">DECLARE</span> @cislo INT
+<span class="keyword">DECLARE</span> @text NVARCHAR(50)
+
+SET @cislo = 5
+SET @text = N<span class="comment">'Tady je hodně textu!'</span>
+
+INSERT INTO tabulka VALUES (@cislo, @text)
+ 
+</pre>
+K proměnným se ale dostanu pravděpodobně v další části seriálu.
+						
+		</div>
+                        <input name="ctl00$MainContent$Repeater1$ctl00$ForumPostList1$Repeater1$ctl04$PostPath" id="ctl00_MainContent_Repeater1_ctl00_ForumPostList1_Repeater1_ctl04_PostPath" value="004251004252" type="hidden">
+                    </div>
+
+                    <div id="ctl00_MainContent_Repeater1_ctl00_ForumPostList1_Repeater1_ctl04_PanelCommands" style="margin: 5px; clear: both; text-align: left; font-size: smaller;">
+			
+                        <div id="ctl00_MainContent_Repeater1_ctl00_ForumPostList1_Repeater1_ctl04_EditPanel" style="float: right;">
+				
+                            &nbsp;<br>
+                            
+                            
+                            
+                            
+                            
+                            &nbsp; &nbsp; &nbsp; &nbsp;
+                            
+                            <a id="ctl00_MainContent_Repeater1_ctl00_ForumPostList1_Repeater1_ctl04_HyperLinkReply" href="http://www.vbnet.cz/ForumPost.aspx?id=806&amp;returnUrl=clanek--74-stoparuv_pruvodce_po_databazich_dil_2_databazova_materstina_sql.aspx&amp;replyTo=4252">&nbsp; &nbsp;<strong>[Odpovědět]</strong></a>
+                        
+			</div>
+
+                        
+                        &nbsp;<br>                        
+                        Hodnocení: <strong><span id="ctl00_MainContent_Repeater1_ctl00_ForumPostList1_Repeater1_ctl04_PostRating">1</span></strong>
+                        <input name="ctl00$MainContent$Repeater1$ctl00$ForumPostList1$Repeater1$ctl04$RateUseful" id="ctl00_MainContent_Repeater1_ctl00_ForumPostList1_Repeater1_ctl04_RateUseful" src="clanek--74-stoparuv_pruvodce_po_databazich_dil_2_databazova_materstina_sql.aspx_soubory/forum_rateUseful.gif" alt="Užitečný" style="border-width: 0px;" align="middle" type="image">
+                        <input name="ctl00$MainContent$Repeater1$ctl00$ForumPostList1$Repeater1$ctl04$RateUseless" id="ctl00_MainContent_Repeater1_ctl00_ForumPostList1_Repeater1_ctl04_RateUseless" src="clanek--74-stoparuv_pruvodce_po_databazich_dil_2_databazova_materstina_sql.aspx_soubory/forum_rateUseless.gif" alt="K ničemu" style="border-width: 0px;" align="middle" type="image">
+                        <span id="ctl00_MainContent_Repeater1_ctl00_ForumPostList1_Repeater1_ctl04_UpdateProgress1" style="visibility: hidden;">
+                                <img id="ctl00_MainContent_Repeater1_ctl00_ForumPostList1_Repeater1_ctl04_ImageProgress" src="clanek--74-stoparuv_pruvodce_po_databazich_dil_2_databazova_materstina_sql.aspx_soubory/loading.gif" alt="Čekejte, prosím..." style="border-width: 0px;" align="middle">
+                            </span>
+                    
+		</div>
+                
+	</div>
+            
+</div>
+    
+        <a id="Post4254"></a>
+        <div id="ctl00_MainContent_Repeater1_ctl00_ForumPostList1_Repeater1_ctl05_UpdatePanel1">
+	
+                <div id="ctl00_MainContent_Repeater1_ctl00_ForumPostList1_Repeater1_ctl05_PanelPost" class="forumPost" style="margin-left: 20px;">
+		
+                    <h1 id="ctl00_MainContent_Repeater1_ctl00_ForumPostList1_Repeater1_ctl05_PostHeader" style="background-color: rgb(147, 162, 180);">
+                        
+                        Re: problém s INSERT
+                    </h1>
+                                        
+                    <div id="ctl00_MainContent_Repeater1_ctl00_ForumPostList1_Repeater1_ctl05_PanelSidebar" style="margin: 5px; float: left; width: 160px; font-size: smaller;">
+			
+                        Datum: <strong>6.3.2008 12:34</strong><br>
+                        Autor: <strong>neregistrovaný (83.208.24.237)</strong><br>
+                        Hodnocení autora: <strong><span id="ctl00_MainContent_Repeater1_ctl00_ForumPostList1_Repeater1_ctl05_AuthorRating">není</span></strong><br>
+                        Příspěvků: <strong>0</strong><br>
+                        
+                    
+		</div>
+                    <div style="padding: 5px; float: right; width: 460px;">
+                        <div id="ctl00_MainContent_Repeater1_ctl00_ForumPostList1_Repeater1_ctl05_PostTextPanel" style="font-size: 8.25pt; color: rgb(64, 64, 64);">
+			
+							Počkám si raději na článek, ale rozhodně díky za nasměrování.
+						
+		</div>
+                        <input name="ctl00$MainContent$Repeater1$ctl00$ForumPostList1$Repeater1$ctl05$PostPath" id="ctl00_MainContent_Repeater1_ctl00_ForumPostList1_Repeater1_ctl05_PostPath" value="004251004252004254" type="hidden">
+                    </div>
+
+                    <div id="ctl00_MainContent_Repeater1_ctl00_ForumPostList1_Repeater1_ctl05_PanelCommands" style="margin: 5px; clear: both; text-align: left; font-size: smaller;">
+			
+                        <div id="ctl00_MainContent_Repeater1_ctl00_ForumPostList1_Repeater1_ctl05_EditPanel" style="float: right;">
+				
+                            &nbsp;<br>
+                            
+                            
+                            
+                            
+                            
+                            &nbsp; &nbsp; &nbsp; &nbsp;
+                            
+                            <a id="ctl00_MainContent_Repeater1_ctl00_ForumPostList1_Repeater1_ctl05_HyperLinkReply" href="http://www.vbnet.cz/ForumPost.aspx?id=806&amp;returnUrl=clanek--74-stoparuv_pruvodce_po_databazich_dil_2_databazova_materstina_sql.aspx&amp;replyTo=4254">&nbsp; &nbsp;<strong>[Odpovědět]</strong></a>
+                        
+			</div>
+
+                        
+                        &nbsp;<br>                        
+                        Hodnocení: <strong><span id="ctl00_MainContent_Repeater1_ctl00_ForumPostList1_Repeater1_ctl05_PostRating">0</span></strong>
+                        <input name="ctl00$MainContent$Repeater1$ctl00$ForumPostList1$Repeater1$ctl05$RateUseful" id="ctl00_MainContent_Repeater1_ctl00_ForumPostList1_Repeater1_ctl05_RateUseful" src="clanek--74-stoparuv_pruvodce_po_databazich_dil_2_databazova_materstina_sql.aspx_soubory/forum_rateUseful.gif" alt="Užitečný" style="border-width: 0px;" align="middle" type="image">
+                        <input name="ctl00$MainContent$Repeater1$ctl00$ForumPostList1$Repeater1$ctl05$RateUseless" id="ctl00_MainContent_Repeater1_ctl00_ForumPostList1_Repeater1_ctl05_RateUseless" src="clanek--74-stoparuv_pruvodce_po_databazich_dil_2_databazova_materstina_sql.aspx_soubory/forum_rateUseless.gif" alt="K ničemu" style="border-width: 0px;" align="middle" type="image">
+                        <span id="ctl00_MainContent_Repeater1_ctl00_ForumPostList1_Repeater1_ctl05_UpdateProgress1" style="visibility: hidden;">
+                                <img id="ctl00_MainContent_Repeater1_ctl00_ForumPostList1_Repeater1_ctl05_ImageProgress" src="clanek--74-stoparuv_pruvodce_po_databazich_dil_2_databazova_materstina_sql.aspx_soubory/loading.gif" alt="Čekejte, prosím..." style="border-width: 0px;" align="middle">
+                            </span>
+                    
+		</div>
+                
+	</div>
+            
+</div>
+    
+        <a id="Post4936"></a>
+        <div id="ctl00_MainContent_Repeater1_ctl00_ForumPostList1_Repeater1_ctl06_UpdatePanel1">
+	
+                <div id="ctl00_MainContent_Repeater1_ctl00_ForumPostList1_Repeater1_ctl06_PanelPost" class="forumPost" style="margin-left: 0px;">
+		
+                    <h1 id="ctl00_MainContent_Repeater1_ctl00_ForumPostList1_Repeater1_ctl06_PostHeader" style="background-color: rgb(147, 162, 180);">
+                        
+                        multi-klíče
+                    </h1>
+                                        
+                    <div id="ctl00_MainContent_Repeater1_ctl00_ForumPostList1_Repeater1_ctl06_PanelSidebar" style="margin: 5px; float: left; width: 160px; font-size: smaller;">
+			
+                        Datum: <strong>3.4.2008 11:15</strong><br>
+                        Autor: <strong>neregistrovaný (193.179.205.18)</strong><br>
+                        Hodnocení autora: <strong><span id="ctl00_MainContent_Repeater1_ctl00_ForumPostList1_Repeater1_ctl06_AuthorRating">není</span></strong><br>
+                        Příspěvků: <strong>0</strong><br>
+                        
+                    
+		</div>
+                    <div style="padding: 5px; float: right; width: 480px;">
+                        <div id="ctl00_MainContent_Repeater1_ctl00_ForumPostList1_Repeater1_ctl06_PostTextPanel" style="font-size: 8.25pt; color: rgb(64, 64, 64);">
+Jak vypadá syntaxe pro tvorbu tabulky, v níž jedinečnost řádku je dána
+např. dvěma sloupci tabulky (každý z těch sloupců tedy může mít
+duplicitní hodnoty, nicméně ve vzájemné kombinaci jsou jednoznačně
+určující pro daný řádek) - jak tedy nastavit nad tabulkou složený
+primární klíč? Dík. míra </div>
+                        <input name="ctl00$MainContent$Repeater1$ctl00$ForumPostList1$Repeater1$ctl06$PostPath" id="ctl00_MainContent_Repeater1_ctl00_ForumPostList1_Repeater1_ctl06_PostPath" value="004936" type="hidden">
+                    </div>
+
+                    <div id="ctl00_MainContent_Repeater1_ctl00_ForumPostList1_Repeater1_ctl06_PanelCommands" style="margin: 5px; clear: both; text-align: left; font-size: smaller;">
+			
+                        <div id="ctl00_MainContent_Repeater1_ctl00_ForumPostList1_Repeater1_ctl06_EditPanel" style="float: right;">
+				
+                            &nbsp;<br>
+                            
+                            
+                            
+                            
+                            
+                            &nbsp; &nbsp; &nbsp; &nbsp;
+                            
+                            <a id="ctl00_MainContent_Repeater1_ctl00_ForumPostList1_Repeater1_ctl06_HyperLinkReply" href="http://www.vbnet.cz/ForumPost.aspx?id=806&amp;returnUrl=clanek--74-stoparuv_pruvodce_po_databazich_dil_2_databazova_materstina_sql.aspx&amp;replyTo=4936">&nbsp; &nbsp;<strong>[Odpovědět]</strong></a>
+                        
+			</div>
+
+                        
+                        &nbsp;<br>                        
+                        Hodnocení: <strong><span id="ctl00_MainContent_Repeater1_ctl00_ForumPostList1_Repeater1_ctl06_PostRating">0</span></strong>
+                        <input name="ctl00$MainContent$Repeater1$ctl00$ForumPostList1$Repeater1$ctl06$RateUseful" id="ctl00_MainContent_Repeater1_ctl00_ForumPostList1_Repeater1_ctl06_RateUseful" src="clanek--74-stoparuv_pruvodce_po_databazich_dil_2_databazova_materstina_sql.aspx_soubory/forum_rateUseful.gif" alt="Užitečný" style="border-width: 0px;" align="middle" type="image">
+                        <input name="ctl00$MainContent$Repeater1$ctl00$ForumPostList1$Repeater1$ctl06$RateUseless" id="ctl00_MainContent_Repeater1_ctl00_ForumPostList1_Repeater1_ctl06_RateUseless" src="clanek--74-stoparuv_pruvodce_po_databazich_dil_2_databazova_materstina_sql.aspx_soubory/forum_rateUseless.gif" alt="K ničemu" style="border-width: 0px;" align="middle" type="image">
+                        <span id="ctl00_MainContent_Repeater1_ctl00_ForumPostList1_Repeater1_ctl06_UpdateProgress1" style="visibility: hidden;">
+                                <img id="ctl00_MainContent_Repeater1_ctl00_ForumPostList1_Repeater1_ctl06_ImageProgress" src="clanek--74-stoparuv_pruvodce_po_databazich_dil_2_databazova_materstina_sql.aspx_soubory/loading.gif" alt="Čekejte, prosím..." style="border-width: 0px;" align="middle">
+                            </span>
+                    
+		</div>
+                
+	</div>
+            
+</div>
+    
+        <a id="Post4937"></a>
+        <div id="ctl00_MainContent_Repeater1_ctl00_ForumPostList1_Repeater1_ctl07_UpdatePanel1">
+	
+                <div id="ctl00_MainContent_Repeater1_ctl00_ForumPostList1_Repeater1_ctl07_PanelPost" class="forumPost" style="margin-left: 10px;">
+		
+                    <h1 id="ctl00_MainContent_Repeater1_ctl00_ForumPostList1_Repeater1_ctl07_PostHeader" style="background-color: rgb(147, 162, 180);">
+                        
+                        Re: multi-klíče
+                    </h1>
+                                        
+                    <div id="ctl00_MainContent_Repeater1_ctl00_ForumPostList1_Repeater1_ctl07_PanelSidebar" style="margin: 5px; float: left; width: 160px; font-size: smaller;">
+			
+                        Datum: <strong>3.4.2008 11:34</strong><br>
+                        Autor: <strong>Tomáš Jecha</strong><br>
+                        Hodnocení autora: <strong><span id="ctl00_MainContent_Repeater1_ctl00_ForumPostList1_Repeater1_ctl07_AuthorRating">130</span></strong><br>
+                        Příspěvků: <strong>387</strong><br>
+                        <div class="photo" style="background-image: url(/UserPhoto.ashx?user=jechtom&amp;theme=Default2);" onclick="javascript: location.href='/profil--jechtom.aspx';"><div class="infoRolesAdmin"></div><div class="infoRolesAuthor"></div></div>
+                    
+		</div>
+                    <div style="padding: 5px; float: right; width: 470px;">
+                        <div id="ctl00_MainContent_Repeater1_ctl00_ForumPostList1_Repeater1_ctl07_PostTextPanel" style="font-size: 8.25pt; color: rgb(64, 64, 64);">
+Obávám se, že takto primární klíč vytvořit nelze. Vám jde pravděpodobně
+spíš o validaci než o klíče, není to tak? Nebo z jakého důvodu chcete
+využívat dvojici klíču? </div>
+                        <input name="ctl00$MainContent$Repeater1$ctl00$ForumPostList1$Repeater1$ctl07$PostPath" id="ctl00_MainContent_Repeater1_ctl00_ForumPostList1_Repeater1_ctl07_PostPath" value="004936004937" type="hidden">
+                    </div>
+
+                    <div id="ctl00_MainContent_Repeater1_ctl00_ForumPostList1_Repeater1_ctl07_PanelCommands" style="margin: 5px; clear: both; text-align: left; font-size: smaller;">
+			
+                        <div id="ctl00_MainContent_Repeater1_ctl00_ForumPostList1_Repeater1_ctl07_EditPanel" style="float: right;">
+				
+                            &nbsp;<br>
+                            
+                            
+                            
+                            
+                            
+                            &nbsp; &nbsp; &nbsp; &nbsp;
+                            
+                            <a id="ctl00_MainContent_Repeater1_ctl00_ForumPostList1_Repeater1_ctl07_HyperLinkReply" href="http://www.vbnet.cz/ForumPost.aspx?id=806&amp;returnUrl=clanek--74-stoparuv_pruvodce_po_databazich_dil_2_databazova_materstina_sql.aspx&amp;replyTo=4937">&nbsp; &nbsp;<strong>[Odpovědět]</strong></a>
+                        
+			</div>
+
+                        
+                        &nbsp;<br>                        
+                        Hodnocení: <strong><span id="ctl00_MainContent_Repeater1_ctl00_ForumPostList1_Repeater1_ctl07_PostRating">0</span></strong>
+                        <input name="ctl00$MainContent$Repeater1$ctl00$ForumPostList1$Repeater1$ctl07$RateUseful" id="ctl00_MainContent_Repeater1_ctl00_ForumPostList1_Repeater1_ctl07_RateUseful" src="clanek--74-stoparuv_pruvodce_po_databazich_dil_2_databazova_materstina_sql.aspx_soubory/forum_rateUseful.gif" alt="Užitečný" style="border-width: 0px;" align="middle" type="image">
+                        <input name="ctl00$MainContent$Repeater1$ctl00$ForumPostList1$Repeater1$ctl07$RateUseless" id="ctl00_MainContent_Repeater1_ctl00_ForumPostList1_Repeater1_ctl07_RateUseless" src="clanek--74-stoparuv_pruvodce_po_databazich_dil_2_databazova_materstina_sql.aspx_soubory/forum_rateUseless.gif" alt="K ničemu" style="border-width: 0px;" align="middle" type="image">
+                        <span id="ctl00_MainContent_Repeater1_ctl00_ForumPostList1_Repeater1_ctl07_UpdateProgress1" style="visibility: hidden;">
+                                <img id="ctl00_MainContent_Repeater1_ctl00_ForumPostList1_Repeater1_ctl07_ImageProgress" src="clanek--74-stoparuv_pruvodce_po_databazich_dil_2_databazova_materstina_sql.aspx_soubory/loading.gif" alt="Čekejte, prosím..." style="border-width: 0px;" align="middle">
+                            </span>
+                    
+		</div>
+                
+	</div>
+            
+</div>
+    
+        <a id="Post4939"></a>
+        <div id="ctl00_MainContent_Repeater1_ctl00_ForumPostList1_Repeater1_ctl08_UpdatePanel1">
+	
+                <div id="ctl00_MainContent_Repeater1_ctl00_ForumPostList1_Repeater1_ctl08_PanelPost" class="forumPost" style="margin-left: 20px;">
+		
+                    <h1 id="ctl00_MainContent_Repeater1_ctl00_ForumPostList1_Repeater1_ctl08_PostHeader" style="background-color: rgb(147, 162, 180);">
+                        
+                        Re: multi-klíče
+                    </h1>
+                                        
+                    <div id="ctl00_MainContent_Repeater1_ctl00_ForumPostList1_Repeater1_ctl08_PanelSidebar" style="margin: 5px; float: left; width: 160px; font-size: smaller;">
+			
+                        Datum: <strong>3.4.2008 11:59</strong><br>
+                        Autor: <strong>neregistrovaný (193.179.205.18)</strong><br>
+                        Hodnocení autora: <strong><span id="ctl00_MainContent_Repeater1_ctl00_ForumPostList1_Repeater1_ctl08_AuthorRating">není</span></strong><br>
+                        Příspěvků: <strong>0</strong><br>
+                        
+                    
+		</div>
+                    <div style="padding: 5px; float: right; width: 460px;">
+                        <div id="ctl00_MainContent_Repeater1_ctl00_ForumPostList1_Repeater1_ctl08_PostTextPanel" style="font-size: 8.25pt; color: rgb(64, 64, 64);">
+			
+							Zkusím se tedy zeptat trochu jinak. Potřebuji vytvořit databázi, která mimo jiné obsahuje tabulku s následujícími daty:<br>
+<br>
+aujd	        titlejd	au_ord	royaltyper<br>
+172-32-1176	PS3333	1	100<br>
+213-46-8915	BU1032	1	40<br>
+213-46-8915	BU2075	1	100<br>
+409-56-7008	BU1032	2	60<br>
+238-95-7766	PC1035	1	100<br>
+267-41-2394	BU1111	2	40<br>
+267-41-2394	TC7777	2	30<br>
+274-80-9391	BU7832	1	100<br>
+<br>
+<br>
+V takovéto struktuře jsou dva sloupce, aujd a titlejd, které
+jednoznačně idenfifikují daný záznam. Jak navrhnout tuto tabulku? Mohu
+definovat dva primární klíče v jedné tabulce a navíc s duplicitní
+hodnotou? Omlouvám se, s sql začínám. děkuji. míra </div>
+                        <input name="ctl00$MainContent$Repeater1$ctl00$ForumPostList1$Repeater1$ctl08$PostPath" id="ctl00_MainContent_Repeater1_ctl00_ForumPostList1_Repeater1_ctl08_PostPath" value="004936004937004939" type="hidden">
+                    </div>
+
+                    <div id="ctl00_MainContent_Repeater1_ctl00_ForumPostList1_Repeater1_ctl08_PanelCommands" style="margin: 5px; clear: both; text-align: left; font-size: smaller;">
+			
+                        <div id="ctl00_MainContent_Repeater1_ctl00_ForumPostList1_Repeater1_ctl08_EditPanel" style="float: right;">
+				
+                            &nbsp;<br>
+                            
+                            
+                            
+                            
+                            
+                            &nbsp; &nbsp; &nbsp; &nbsp;
+                            
+                            <a id="ctl00_MainContent_Repeater1_ctl00_ForumPostList1_Repeater1_ctl08_HyperLinkReply" href="http://www.vbnet.cz/ForumPost.aspx?id=806&amp;returnUrl=clanek--74-stoparuv_pruvodce_po_databazich_dil_2_databazova_materstina_sql.aspx&amp;replyTo=4939">&nbsp; &nbsp;<strong>[Odpovědět]</strong></a>
+                        
+			</div>
+
+                        
+                        &nbsp;<br>                        
+                        Hodnocení: <strong><span id="ctl00_MainContent_Repeater1_ctl00_ForumPostList1_Repeater1_ctl08_PostRating">0</span></strong>
+                        <input name="ctl00$MainContent$Repeater1$ctl00$ForumPostList1$Repeater1$ctl08$RateUseful" id="ctl00_MainContent_Repeater1_ctl00_ForumPostList1_Repeater1_ctl08_RateUseful" src="clanek--74-stoparuv_pruvodce_po_databazich_dil_2_databazova_materstina_sql.aspx_soubory/forum_rateUseful.gif" alt="Užitečný" style="border-width: 0px;" align="middle" type="image">
+                        <input name="ctl00$MainContent$Repeater1$ctl00$ForumPostList1$Repeater1$ctl08$RateUseless" id="ctl00_MainContent_Repeater1_ctl00_ForumPostList1_Repeater1_ctl08_RateUseless" src="clanek--74-stoparuv_pruvodce_po_databazich_dil_2_databazova_materstina_sql.aspx_soubory/forum_rateUseless.gif" alt="K ničemu" style="border-width: 0px;" align="middle" type="image">
+                        <span id="ctl00_MainContent_Repeater1_ctl00_ForumPostList1_Repeater1_ctl08_UpdateProgress1" style="visibility: hidden;">
+                                <img id="ctl00_MainContent_Repeater1_ctl00_ForumPostList1_Repeater1_ctl08_ImageProgress" src="clanek--74-stoparuv_pruvodce_po_databazich_dil_2_databazova_materstina_sql.aspx_soubory/loading.gif" alt="Čekejte, prosím..." style="border-width: 0px;" align="middle">
+                            </span>
+                    
+		</div>
+                
+	</div>
+            
+</div>
+    
+        <a id="Post4943"></a>
+        <div id="ctl00_MainContent_Repeater1_ctl00_ForumPostList1_Repeater1_ctl09_UpdatePanel1">
+	
+                <div id="ctl00_MainContent_Repeater1_ctl00_ForumPostList1_Repeater1_ctl09_PanelPost" class="forumPost" style="margin-left: 30px;">
+		
+                    <h1 id="ctl00_MainContent_Repeater1_ctl00_ForumPostList1_Repeater1_ctl09_PostHeader" style="background-color: rgb(147, 162, 180);">
+                        
+                        Re: multi-klíče
+                    </h1>
+                                        
+                    <div id="ctl00_MainContent_Repeater1_ctl00_ForumPostList1_Repeater1_ctl09_PanelSidebar" style="margin: 5px; float: left; width: 160px; font-size: smaller;">
+			
+                        Datum: <strong>3.4.2008 13:15</strong><br>
+                        Autor: <strong>Tomáš Jecha</strong><br>
+                        Hodnocení autora: <strong><span id="ctl00_MainContent_Repeater1_ctl00_ForumPostList1_Repeater1_ctl09_AuthorRating">130</span></strong><br>
+                        Příspěvků: <strong>387</strong><br>
+                        <div class="photo" style="background-image: url(/UserPhoto.ashx?user=jechtom&amp;theme=Default2);" onclick="javascript: location.href='/profil--jechtom.aspx';"><div class="infoRolesAdmin"></div><div class="infoRolesAuthor"></div></div>
+                    
+		</div>
+                    <div style="padding: 5px; float: right; width: 450px;">
+                        <div id="ctl00_MainContent_Repeater1_ctl00_ForumPostList1_Repeater1_ctl09_PostTextPanel" style="font-size: 8.25pt; color: rgb(64, 64, 64);">
+Tak jak to říkáte to bohužel moc nejde. Udělejte jeden sloupec který
+bude identifikovat řádek. Duplicitu musíte kontrolovat bohužel ručně
+nebo jiným způsobem (triggerem nebo uloženou procedurou) </div>
+                        <input name="ctl00$MainContent$Repeater1$ctl00$ForumPostList1$Repeater1$ctl09$PostPath" id="ctl00_MainContent_Repeater1_ctl00_ForumPostList1_Repeater1_ctl09_PostPath" value="004936004937004939004943" type="hidden">
+                    </div>
+
+                    <div id="ctl00_MainContent_Repeater1_ctl00_ForumPostList1_Repeater1_ctl09_PanelCommands" style="margin: 5px; clear: both; text-align: left; font-size: smaller;">
+			
+                        <div id="ctl00_MainContent_Repeater1_ctl00_ForumPostList1_Repeater1_ctl09_EditPanel" style="float: right;">
+				
+                            &nbsp;<br>
+                            
+                            
+                            
+                            
+                            
+                            &nbsp; &nbsp; &nbsp; &nbsp;
+                            
+                            <a id="ctl00_MainContent_Repeater1_ctl00_ForumPostList1_Repeater1_ctl09_HyperLinkReply" href="http://www.vbnet.cz/ForumPost.aspx?id=806&amp;returnUrl=clanek--74-stoparuv_pruvodce_po_databazich_dil_2_databazova_materstina_sql.aspx&amp;replyTo=4943">&nbsp; &nbsp;<strong>[Odpovědět]</strong></a>
+                        
+			</div>
+
+                        
+                        &nbsp;<br>                        
+                        Hodnocení: <strong><span id="ctl00_MainContent_Repeater1_ctl00_ForumPostList1_Repeater1_ctl09_PostRating">0</span></strong>
+                        <input name="ctl00$MainContent$Repeater1$ctl00$ForumPostList1$Repeater1$ctl09$RateUseful" id="ctl00_MainContent_Repeater1_ctl00_ForumPostList1_Repeater1_ctl09_RateUseful" src="clanek--74-stoparuv_pruvodce_po_databazich_dil_2_databazova_materstina_sql.aspx_soubory/forum_rateUseful.gif" alt="Užitečný" style="border-width: 0px;" align="middle" type="image">
+                        <input name="ctl00$MainContent$Repeater1$ctl00$ForumPostList1$Repeater1$ctl09$RateUseless" id="ctl00_MainContent_Repeater1_ctl00_ForumPostList1_Repeater1_ctl09_RateUseless" src="clanek--74-stoparuv_pruvodce_po_databazich_dil_2_databazova_materstina_sql.aspx_soubory/forum_rateUseless.gif" alt="K ničemu" style="border-width: 0px;" align="middle" type="image">
+                        <span id="ctl00_MainContent_Repeater1_ctl00_ForumPostList1_Repeater1_ctl09_UpdateProgress1" style="visibility: hidden;">
+                                <img id="ctl00_MainContent_Repeater1_ctl00_ForumPostList1_Repeater1_ctl09_ImageProgress" src="clanek--74-stoparuv_pruvodce_po_databazich_dil_2_databazova_materstina_sql.aspx_soubory/loading.gif" alt="Čekejte, prosím..." style="border-width: 0px;" align="middle">
+                            </span>
+                    
+		</div>
+                
+	</div>
+            
+</div>
+    
+        <a id="Post5323"></a>
+        <div id="ctl00_MainContent_Repeater1_ctl00_ForumPostList1_Repeater1_ctl10_UpdatePanel1">
+	
+                <div id="ctl00_MainContent_Repeater1_ctl00_ForumPostList1_Repeater1_ctl10_PanelPost" class="forumPost" style="margin-left: 0px;">
+		
+                    <h1 id="ctl00_MainContent_Repeater1_ctl00_ForumPostList1_Repeater1_ctl10_PostHeader" style="background-color: rgb(147, 162, 180);">
+                        
+                        Relace 1:1
+                    </h1>
+                                        
+                    <div id="ctl00_MainContent_Repeater1_ctl00_ForumPostList1_Repeater1_ctl10_PanelSidebar" style="margin: 5px; float: left; width: 160px; font-size: smaller;">
+			
+                        Datum: <strong>22.4.2008 17:56</strong><br>
+                        Autor: <strong>neregistrovaný (90.176.91.244)</strong><br>
+                        Hodnocení autora: <strong><span id="ctl00_MainContent_Repeater1_ctl00_ForumPostList1_Repeater1_ctl10_AuthorRating">není</span></strong><br>
+                        Příspěvků: <strong>0</strong><br>
+                        
+                    
+		</div>
+                    <div style="padding: 5px; float: right; width: 480px;">
+                        <div id="ctl00_MainContent_Repeater1_ctl00_ForumPostList1_Repeater1_ctl10_PostTextPanel" style="font-size: 8.25pt; color: rgb(64, 64, 64);">
+			
+							Ahoj, <br>
+chtěl bych se zeptat jak vytvořit v Management Studiu relaci 1:1 mezi dvěma tabulkami?<br>
+Děkukji Pavel
+						
+		</div>
+                        <input name="ctl00$MainContent$Repeater1$ctl00$ForumPostList1$Repeater1$ctl10$PostPath" id="ctl00_MainContent_Repeater1_ctl00_ForumPostList1_Repeater1_ctl10_PostPath" value="005323" type="hidden">
+                    </div>
+
+                    <div id="ctl00_MainContent_Repeater1_ctl00_ForumPostList1_Repeater1_ctl10_PanelCommands" style="margin: 5px; clear: both; text-align: left; font-size: smaller;">
+			
+                        <div id="ctl00_MainContent_Repeater1_ctl00_ForumPostList1_Repeater1_ctl10_EditPanel" style="float: right;">
+				
+                            &nbsp;<br>
+                            
+                            
+                            
+                            
+                            
+                            &nbsp; &nbsp; &nbsp; &nbsp;
+                            
+                            <a id="ctl00_MainContent_Repeater1_ctl00_ForumPostList1_Repeater1_ctl10_HyperLinkReply" href="http://www.vbnet.cz/ForumPost.aspx?id=806&amp;returnUrl=clanek--74-stoparuv_pruvodce_po_databazich_dil_2_databazova_materstina_sql.aspx&amp;replyTo=5323">&nbsp; &nbsp;<strong>[Odpovědět]</strong></a>
+                        
+			</div>
+
+                        
+                        &nbsp;<br>                        
+                        Hodnocení: <strong><span id="ctl00_MainContent_Repeater1_ctl00_ForumPostList1_Repeater1_ctl10_PostRating">0</span></strong>
+                        <input name="ctl00$MainContent$Repeater1$ctl00$ForumPostList1$Repeater1$ctl10$RateUseful" id="ctl00_MainContent_Repeater1_ctl00_ForumPostList1_Repeater1_ctl10_RateUseful" src="clanek--74-stoparuv_pruvodce_po_databazich_dil_2_databazova_materstina_sql.aspx_soubory/forum_rateUseful.gif" alt="Užitečný" style="border-width: 0px;" align="middle" type="image">
+                        <input name="ctl00$MainContent$Repeater1$ctl00$ForumPostList1$Repeater1$ctl10$RateUseless" id="ctl00_MainContent_Repeater1_ctl00_ForumPostList1_Repeater1_ctl10_RateUseless" src="clanek--74-stoparuv_pruvodce_po_databazich_dil_2_databazova_materstina_sql.aspx_soubory/forum_rateUseless.gif" alt="K ničemu" style="border-width: 0px;" align="middle" type="image">
+                        <span id="ctl00_MainContent_Repeater1_ctl00_ForumPostList1_Repeater1_ctl10_UpdateProgress1" style="visibility: hidden;">
+                                <img id="ctl00_MainContent_Repeater1_ctl00_ForumPostList1_Repeater1_ctl10_ImageProgress" src="clanek--74-stoparuv_pruvodce_po_databazich_dil_2_databazova_materstina_sql.aspx_soubory/loading.gif" alt="Čekejte, prosím..." style="border-width: 0px;" align="middle">
+                            </span>
+                    
+		</div>
+                
+	</div>
+            
+</div>
+    
+        <a id="Post5328"></a>
+        <div id="ctl00_MainContent_Repeater1_ctl00_ForumPostList1_Repeater1_ctl11_UpdatePanel1">
+	
+                <div id="ctl00_MainContent_Repeater1_ctl00_ForumPostList1_Repeater1_ctl11_PanelPost" class="forumPost" style="margin-left: 10px;">
+		
+                    <h1 id="ctl00_MainContent_Repeater1_ctl00_ForumPostList1_Repeater1_ctl11_PostHeader" style="background-color: rgb(147, 162, 180);">
+                        
+                        Re: Relace 1:1
+                    </h1>
+                                        
+                    <div id="ctl00_MainContent_Repeater1_ctl00_ForumPostList1_Repeater1_ctl11_PanelSidebar" style="margin: 5px; float: left; width: 160px; font-size: smaller;">
+			
+                        Datum: <strong>22.4.2008 19:16</strong><br>
+                        Autor: <strong>Tomáš Jecha</strong><br>
+                        Hodnocení autora: <strong><span id="ctl00_MainContent_Repeater1_ctl00_ForumPostList1_Repeater1_ctl11_AuthorRating">130</span></strong><br>
+                        Příspěvků: <strong>387</strong><br>
+                        <div class="photo" style="background-image: url(/UserPhoto.ashx?user=jechtom&amp;theme=Default2);" onclick="javascript: location.href='/profil--jechtom.aspx';"><div class="infoRolesAdmin"></div><div class="infoRolesAuthor"></div></div>
+                    
+		</div>
+                    <div style="padding: 5px; float: right; width: 470px;">
+                        <div id="ctl00_MainContent_Repeater1_ctl00_ForumPostList1_Repeater1_ctl11_PostTextPanel" style="font-size: 8.25pt; color: rgb(64, 64, 64);">
+			
+							Můžete mi přiblížit co znamená <em>relace 1:1:</em>?
+						
+		</div>
+                        <input name="ctl00$MainContent$Repeater1$ctl00$ForumPostList1$Repeater1$ctl11$PostPath" id="ctl00_MainContent_Repeater1_ctl00_ForumPostList1_Repeater1_ctl11_PostPath" value="005323005328" type="hidden">
+                    </div>
+
+                    <div id="ctl00_MainContent_Repeater1_ctl00_ForumPostList1_Repeater1_ctl11_PanelCommands" style="margin: 5px; clear: both; text-align: left; font-size: smaller;">
+			
+                        <div id="ctl00_MainContent_Repeater1_ctl00_ForumPostList1_Repeater1_ctl11_EditPanel" style="float: right;">
+				
+                            &nbsp;<br>
+                            
+                            
+                            
+                            
+                            
+                            &nbsp; &nbsp; &nbsp; &nbsp;
+                            
+                            <a id="ctl00_MainContent_Repeater1_ctl00_ForumPostList1_Repeater1_ctl11_HyperLinkReply" href="http://www.vbnet.cz/ForumPost.aspx?id=806&amp;returnUrl=clanek--74-stoparuv_pruvodce_po_databazich_dil_2_databazova_materstina_sql.aspx&amp;replyTo=5328">&nbsp; &nbsp;<strong>[Odpovědět]</strong></a>
+                        
+			</div>
+
+                        
+                        &nbsp;<br>                        
+                        Hodnocení: <strong><span id="ctl00_MainContent_Repeater1_ctl00_ForumPostList1_Repeater1_ctl11_PostRating">0</span></strong>
+                        <input name="ctl00$MainContent$Repeater1$ctl00$ForumPostList1$Repeater1$ctl11$RateUseful" id="ctl00_MainContent_Repeater1_ctl00_ForumPostList1_Repeater1_ctl11_RateUseful" src="clanek--74-stoparuv_pruvodce_po_databazich_dil_2_databazova_materstina_sql.aspx_soubory/forum_rateUseful.gif" alt="Užitečný" style="border-width: 0px;" align="middle" type="image">
+                        <input name="ctl00$MainContent$Repeater1$ctl00$ForumPostList1$Repeater1$ctl11$RateUseless" id="ctl00_MainContent_Repeater1_ctl00_ForumPostList1_Repeater1_ctl11_RateUseless" src="clanek--74-stoparuv_pruvodce_po_databazich_dil_2_databazova_materstina_sql.aspx_soubory/forum_rateUseless.gif" alt="K ničemu" style="border-width: 0px;" align="middle" type="image">
+                        <span id="ctl00_MainContent_Repeater1_ctl00_ForumPostList1_Repeater1_ctl11_UpdateProgress1" style="visibility: hidden;">
+                                <img id="ctl00_MainContent_Repeater1_ctl00_ForumPostList1_Repeater1_ctl11_ImageProgress" src="clanek--74-stoparuv_pruvodce_po_databazich_dil_2_databazova_materstina_sql.aspx_soubory/loading.gif" alt="Čekejte, prosím..." style="border-width: 0px;" align="middle">
+                            </span>
+                    
+		</div>
+                
+	</div>
+            
+</div>
+    
+        <a id="Post5331"></a>
+        <div id="ctl00_MainContent_Repeater1_ctl00_ForumPostList1_Repeater1_ctl12_UpdatePanel1">
+	
+                <div id="ctl00_MainContent_Repeater1_ctl00_ForumPostList1_Repeater1_ctl12_PanelPost" class="forumPost" style="margin-left: 20px;">
+		
+                    <h1 id="ctl00_MainContent_Repeater1_ctl00_ForumPostList1_Repeater1_ctl12_PostHeader" style="background-color: rgb(147, 162, 180);">
+                        
+                        Re: Relace 1:1
+                    </h1>
+                                        
+                    <div id="ctl00_MainContent_Repeater1_ctl00_ForumPostList1_Repeater1_ctl12_PanelSidebar" style="margin: 5px; float: left; width: 160px; font-size: smaller;">
+			
+                        Datum: <strong>22.4.2008 23:20</strong><br>
+                        Autor: <strong>neregistrovaný (90.176.91.244)</strong><br>
+                        Hodnocení autora: <strong><span id="ctl00_MainContent_Repeater1_ctl00_ForumPostList1_Repeater1_ctl12_AuthorRating">není</span></strong><br>
+                        Příspěvků: <strong>0</strong><br>
+                        
+                    
+		</div>
+                    <div style="padding: 5px; float: right; width: 460px;">
+                        <div id="ctl00_MainContent_Repeater1_ctl00_ForumPostList1_Repeater1_ctl12_PostTextPanel" style="font-size: 8.25pt; color: rgb(64, 64, 64);">
+			
+							Je tím myšlena kardinalita vztahu mezi entitami (1:1, 1:N, N:M)..<br>
+Příkladem můžou být třeba dvě tabulky Učitel a Předmět. Učitel učí
+maximálně jeden předmět. Předmět je vyučován maximálně jedním učitelem.
+Mezi tabulkami tak bude vztah 1:1. A já si právě nevím rady s
+vytvořením tohohle "<em>relationshipu</em>" v Management Studiu. 
+						
+		</div>
+                        <input name="ctl00$MainContent$Repeater1$ctl00$ForumPostList1$Repeater1$ctl12$PostPath" id="ctl00_MainContent_Repeater1_ctl00_ForumPostList1_Repeater1_ctl12_PostPath" value="005323005328005331" type="hidden">
+                    </div>
+
+                    <div id="ctl00_MainContent_Repeater1_ctl00_ForumPostList1_Repeater1_ctl12_PanelCommands" style="margin: 5px; clear: both; text-align: left; font-size: smaller;">
+			
+                        <div id="ctl00_MainContent_Repeater1_ctl00_ForumPostList1_Repeater1_ctl12_EditPanel" style="float: right;">
+				
+                            &nbsp;<br>
+                            
+                            
+                            
+                            
+                            
+                            &nbsp; &nbsp; &nbsp; &nbsp;
+                            
+                            <a id="ctl00_MainContent_Repeater1_ctl00_ForumPostList1_Repeater1_ctl12_HyperLinkReply" href="http://www.vbnet.cz/ForumPost.aspx?id=806&amp;returnUrl=clanek--74-stoparuv_pruvodce_po_databazich_dil_2_databazova_materstina_sql.aspx&amp;replyTo=5331">&nbsp; &nbsp;<strong>[Odpovědět]</strong></a>
+                        
+			</div>
+
+                        
+                        &nbsp;<br>                        
+                        Hodnocení: <strong><span id="ctl00_MainContent_Repeater1_ctl00_ForumPostList1_Repeater1_ctl12_PostRating">0</span></strong>
+                        <input name="ctl00$MainContent$Repeater1$ctl00$ForumPostList1$Repeater1$ctl12$RateUseful" id="ctl00_MainContent_Repeater1_ctl00_ForumPostList1_Repeater1_ctl12_RateUseful" src="clanek--74-stoparuv_pruvodce_po_databazich_dil_2_databazova_materstina_sql.aspx_soubory/forum_rateUseful.gif" alt="Užitečný" style="border-width: 0px;" align="middle" type="image">
+                        <input name="ctl00$MainContent$Repeater1$ctl00$ForumPostList1$Repeater1$ctl12$RateUseless" id="ctl00_MainContent_Repeater1_ctl00_ForumPostList1_Repeater1_ctl12_RateUseless" src="clanek--74-stoparuv_pruvodce_po_databazich_dil_2_databazova_materstina_sql.aspx_soubory/forum_rateUseless.gif" alt="K ničemu" style="border-width: 0px;" align="middle" type="image">
+                        <span id="ctl00_MainContent_Repeater1_ctl00_ForumPostList1_Repeater1_ctl12_UpdateProgress1" style="visibility: hidden;">
+                                <img id="ctl00_MainContent_Repeater1_ctl00_ForumPostList1_Repeater1_ctl12_ImageProgress" src="clanek--74-stoparuv_pruvodce_po_databazich_dil_2_databazova_materstina_sql.aspx_soubory/loading.gif" alt="Čekejte, prosím..." style="border-width: 0px;" align="middle">
+                            </span>
+                    
+		</div>
+                
+	</div>
+            
+</div>
+    
+            
+            
+        
+
+
+                </div>
+                                      
+                <div class="cleaner">&nbsp;</div>
+
+            </div>
+        </div>
+        <div id="page_shadow2">
+            <div id="page2">
+                <br>
+                VBNET.CZ | © 2007 <a href="http://www.herceg.cz/">Tomáš Herceg</a>, <a href="http://www.jecha.net/">Tomáš Jecha</a> | Kopírování a přejímání publikovaných článků nebo jejich částí je bez písemného svolení autorů zakázáno.
+            </div>
+        </div>
+    
+<div>
+
+	<input name="__EVENTVALIDATION" id="__EVENTVALIDATION" value="/wEWMgKqy6vPCgLh8vmTCALT4t/lCALT4ssKAtPit68HAtPiw60EAujXoJ0CAunXoJ0CAurXoJ0CAuPXoJ0CAuTXoJ0CApCP8uIOAvi3wsEJAvepmd0NApCP3okEApOhnHcC3MDf2wICkI/K2A8Ck6GIFwLcwPN7ApCPts8LAv/F+94IAvCbgNwKApCPop4HAsLllmoCrfzkEAKQj47FDALC5dKKDgKt/MixDAKQj/qTCALdzty/BwKSk7+UCgKQj6bYCALJ88+yDwKm7stpApCP0vQEAqzs8JgGAoOotpQOApCPvpsKAqzsrLkDAoOomrUKAp+6oL8EAt+/gMQHAtCVrYsGAp+6jOYJAqLf688NAo324ZgDAp+6+LQFAqLf1+8MAo329bgBDyFS5MMwGKTVSUArY9sy1xMaBOE=" type="hidden">
+</div>
+
+<script type="text/javascript">
+//<![CDATA[
+Sys.Application.initialize();
+Sys.Application.add_init(function() {
+    $create(Sys.UI._UpdateProgress, {"associatedUpdatePanelId":"ctl00_MainContent_Repeater1_ctl00_ForumPostList1_Repeater1_ctl00_UpdatePanel1","displayAfter":500,"dynamicLayout":false}, null, null, $get("ctl00_MainContent_Repeater1_ctl00_ForumPostList1_Repeater1_ctl00_UpdateProgress1"));
+});
+Sys.Application.add_init(function() {
+    $create(Sys.UI._UpdateProgress, {"associatedUpdatePanelId":"ctl00_MainContent_Repeater1_ctl00_ForumPostList1_Repeater1_ctl01_UpdatePanel1","displayAfter":500,"dynamicLayout":false}, null, null, $get("ctl00_MainContent_Repeater1_ctl00_ForumPostList1_Repeater1_ctl01_UpdateProgress1"));
+});
+Sys.Application.add_init(function() {
+    $create(Sys.UI._UpdateProgress, {"associatedUpdatePanelId":"ctl00_MainContent_Repeater1_ctl00_ForumPostList1_Repeater1_ctl02_UpdatePanel1","displayAfter":500,"dynamicLayout":false}, null, null, $get("ctl00_MainContent_Repeater1_ctl00_ForumPostList1_Repeater1_ctl02_UpdateProgress1"));
+});
+Sys.Application.add_init(function() {
+    $create(Sys.UI._UpdateProgress, {"associatedUpdatePanelId":"ctl00_MainContent_Repeater1_ctl00_ForumPostList1_Repeater1_ctl03_UpdatePanel1","displayAfter":500,"dynamicLayout":false}, null, null, $get("ctl00_MainContent_Repeater1_ctl00_ForumPostList1_Repeater1_ctl03_UpdateProgress1"));
+});
+Sys.Application.add_init(function() {
+    $create(Sys.UI._UpdateProgress, {"associatedUpdatePanelId":"ctl00_MainContent_Repeater1_ctl00_ForumPostList1_Repeater1_ctl04_UpdatePanel1","displayAfter":500,"dynamicLayout":false}, null, null, $get("ctl00_MainContent_Repeater1_ctl00_ForumPostList1_Repeater1_ctl04_UpdateProgress1"));
+});
+Sys.Application.add_init(function() {
+    $create(Sys.UI._UpdateProgress, {"associatedUpdatePanelId":"ctl00_MainContent_Repeater1_ctl00_ForumPostList1_Repeater1_ctl05_UpdatePanel1","displayAfter":500,"dynamicLayout":false}, null, null, $get("ctl00_MainContent_Repeater1_ctl00_ForumPostList1_Repeater1_ctl05_UpdateProgress1"));
+});
+Sys.Application.add_init(function() {
+    $create(Sys.UI._UpdateProgress, {"associatedUpdatePanelId":"ctl00_MainContent_Repeater1_ctl00_ForumPostList1_Repeater1_ctl06_UpdatePanel1","displayAfter":500,"dynamicLayout":false}, null, null, $get("ctl00_MainContent_Repeater1_ctl00_ForumPostList1_Repeater1_ctl06_UpdateProgress1"));
+});
+Sys.Application.add_init(function() {
+    $create(Sys.UI._UpdateProgress, {"associatedUpdatePanelId":"ctl00_MainContent_Repeater1_ctl00_ForumPostList1_Repeater1_ctl07_UpdatePanel1","displayAfter":500,"dynamicLayout":false}, null, null, $get("ctl00_MainContent_Repeater1_ctl00_ForumPostList1_Repeater1_ctl07_UpdateProgress1"));
+});
+Sys.Application.add_init(function() {
+    $create(Sys.UI._UpdateProgress, {"associatedUpdatePanelId":"ctl00_MainContent_Repeater1_ctl00_ForumPostList1_Repeater1_ctl08_UpdatePanel1","displayAfter":500,"dynamicLayout":false}, null, null, $get("ctl00_MainContent_Repeater1_ctl00_ForumPostList1_Repeater1_ctl08_UpdateProgress1"));
+});
+Sys.Application.add_init(function() {
+    $create(Sys.UI._UpdateProgress, {"associatedUpdatePanelId":"ctl00_MainContent_Repeater1_ctl00_ForumPostList1_Repeater1_ctl09_UpdatePanel1","displayAfter":500,"dynamicLayout":false}, null, null, $get("ctl00_MainContent_Repeater1_ctl00_ForumPostList1_Repeater1_ctl09_UpdateProgress1"));
+});
+Sys.Application.add_init(function() {
+    $create(Sys.UI._UpdateProgress, {"associatedUpdatePanelId":"ctl00_MainContent_Repeater1_ctl00_ForumPostList1_Repeater1_ctl10_UpdatePanel1","displayAfter":500,"dynamicLayout":false}, null, null, $get("ctl00_MainContent_Repeater1_ctl00_ForumPostList1_Repeater1_ctl10_UpdateProgress1"));
+});
+Sys.Application.add_init(function() {
+    $create(Sys.UI._UpdateProgress, {"associatedUpdatePanelId":"ctl00_MainContent_Repeater1_ctl00_ForumPostList1_Repeater1_ctl11_UpdatePanel1","displayAfter":500,"dynamicLayout":false}, null, null, $get("ctl00_MainContent_Repeater1_ctl00_ForumPostList1_Repeater1_ctl11_UpdateProgress1"));
+});
+Sys.Application.add_init(function() {
+    $create(Sys.UI._UpdateProgress, {"associatedUpdatePanelId":"ctl00_MainContent_Repeater1_ctl00_ForumPostList1_Repeater1_ctl12_UpdatePanel1","displayAfter":500,"dynamicLayout":false}, null, null, $get("ctl00_MainContent_Repeater1_ctl00_ForumPostList1_Repeater1_ctl12_UpdateProgress1"));
+});
+//]]>
+</script>
+</form>
+<div style="position: absolute; left: 666px; top: 1822px; z-index: 1000000000 ! important; visibility: hidden; opacity: 1; height: 16px; width: 16px;" id="linkalert-box"><img style="width: 16px;" src="clanek--74-stoparuv_pruvodce_po_databazich_dil_2_databazova_materstina_sql.aspx_soubory/img-icon.png" id="linkalert-icon-1"></div></body></html>

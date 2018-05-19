@@ -1,0 +1,63 @@
+<!doctype html public "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=Windows-1250">
+<title>Funkce Close_cursor</title>
+<link rel='stylesheet' style='text/css' href='../function.css'>
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000">
+
+
+
+<h2 class=function>Close_cursor</h2>
+<img src='../images/cpp.gif' width='44' height='16' border='0' alt='c/c++' align='middle' hspace='2'><img src='../images/pascal.gif' width='44' height='16' border='0' alt='pascal' align='middle' hspace='2'>
+
+
+<br><br>
+<div class='typ'>BOOL  <b>[cd_]Close_cursor</b>([cdp_t cdp], tcursnum curs);<br>
+function  <b>[cd_]Close_cursor</b>([cdp : cdp_t]; curs : tcursnum) : Boolean;
+</div>
+
+
+<p><b>Parametry</b></p>
+
+<table border=1 cols=2 frame=box rules=all width=440>
+
+<tr valign="top">
+<td width=18%><i>curs</i> </td>
+<td width=82%>otevřený kurzor (pevný nebo proměnný) </td>
+</tr>
+
+<tr valign="top">
+<td width=18%>[<i>cdp </i></td>
+<td width=82%><a href="HE_EXTCD.htm">kontextová proměnná</a> klienta]  </td>
+</tr>
+</table><br>
+
+<p><b>Popis </b></p>
+
+<p>Funkce <b><code>Close_cursor</code></b> uzavře zadaný kurzor. Tento kurzor musí být otevřený. Uzavřením znemožní čtení a zápis dat prostřednictvím tohoto kurzoru. Funkce se hodí pro uzavírání kurzorů i subkurzorů..</p>
+
+<p>Doporučuje se uzavírat kurzory, které program již nepotřebuje. Tím se uvolní část operační paměti. Počet otevřených kurzorů zjistíte pomocí funkce<b> <code>Owned_cursors</code></b>.</p>
+
+<p>Volání této funkce s parametrem -2 uzavře <i>všechny</i> kurzory, které patří volajícímu uživateli.</p>
+
+<p>Pokud není kurzor explicitně uzavřen, uzavře jej 602SQL při ukončení běhu programu.</p>
+
+<p><b>Hodnota funkce </b></p>
+
+<p>Funkce vrací hodnotu FALSE, pokud se akci podařilo úspěšně provést. V&nbsp;opačném případě vrací TRUE a povahu chyby lze zjistit voláním funkce <b><code>Signalize</code></b>.</p>
+
+<p>Funkce zavolaná s parametrem -2 vrátí TRUE, pokud uživatel neměl otevřený žádný kurzor.</p>
+
+<p><b>Viz</b></p>
+
+<ul class='viz'>
+ <li><a href="HE_F_OPENCURSOR_E.htm">Open_cursor</a> </li>
+ <li><a href="HE_F_RECCNT.htm">Rec_cnt</a> </li>
+ <li><a href="HE_F_OWNEDCURSORS.htm">Owned_cursors</a> </li>
+</ul>
+
+</body>
+</html>

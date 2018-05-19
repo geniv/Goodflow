@@ -1,0 +1,1 @@
+<?php--UDJ--Blanka Blažková--UDJ--Èechova 13--UDJ--Bøeclav 690 02--UDJ--777 / 258 005--UDJ--Kosmetika.Blazkova@seznam.cz--UDJ--www.studio-effect.ic.cz

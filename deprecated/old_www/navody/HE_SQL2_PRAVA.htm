@@ -1,0 +1,123 @@
+<!doctype html public "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=Windows-1250">
+<title>Práva a subjekty práva v SQL</title>
+<link rel='stylesheet' style='text/css' href='../function.css'>
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr>
+	<td style="background-image: url(../images/bghead.jpg);
+		background-position: right;
+		background-repeat: no-repeat;">
+	<table width="100%" border="0" cellpadding="0" cellspacing="0"
+		style="background-image:none">
+	<tr>
+		<td style="background-image:none" height="46"
+			width="15%"><img src="../images/title-cz.gif"
+			width="255" height="33"
+			alt="602SQL-Úplná dokumentace"
+			title="602SQL - Úplná dokumentace"
+			border="0"></td>
+		<td width="33%" align="right"><a href="../xml/html/top.html"><img class="floatno"
+			src="../images/index.gif"
+			width="15" height="16"
+			alt="Index" title="Zpět na obsah"
+			border="0" vspace="2"></a> &nbsp;
+			 </td>
+	</tr>
+	</table>
+	</td>
+</tr>
+</table><table class="navigace" border="0" width="100%"  bgcolor="#FFFFBF"><tr> <td
+width="20" align="center"><img class="floatno" src="../images/prev.gif"
+width="15" height="13" alt="&lt;&shy;" title="Předcházející téma"
+border="0"></td><td width="25%"><a
+href="../xml/html/sqltables.html">Databázové tabulky</a></td> <td width="25%"
+align="right"><img class="floatno" src="../images/up.gif" width="13"
+height="15" alt="Nahoru" title="O jednu úroveň výš" border="0"
+align="middle"></td><td width="25%"><a href="HE_SQL2_JAZYKSQL.htm">Jazyk SQL a jeho implementace</a></td>
+<td width="25%" align="right"><a
+href="HE_SQL2_FUNKCE.htm">Funkce</a></td><td width="20"
+align="center"><img class="floatno" src="../images/next.gif" width="15"
+height="13" alt="&shy;&gt;" title="Následující téma" border="0"></td>
+</tr></table>
+
+
+
+
+<h1><a name="he_sql2_prava"></a>Práva a subjekty práva v SQL</h1>
+<p>Z hlediska editace <a href="../xml/html/userinfo.html">subjektů práv</a> lze rozlišit tyto činnosti:
+
+<ul>
+	<li>vytváření a rušení uživatelů, skupin uživatelů a rolí;</li>
+	<li>nastavení či zjištění vztahů mezi subjekty práv;</li>
+</ul>
+
+<p>Z hlediska vztahu práv k uživateli (resp. subjektu práv) lze rozlišit tyto činnosti:
+
+<ul>
+	<li>zjištění práv zadaného subjektu práv k zadané tabulky nebo záznamům tabulky - <a href="HE_SQL2_PRIVILS.htm">podrobnosti</a>; </li>
+	<li>nastavení práv (přidání nebo odebrání) pro zadaný subjekt k tabulce nebo k záznamům tabulky - viz popis SQL příkazů <a href="HE_SQL2_GRANT.htm"><code>GRANT</code></a> a <a href="HE_SQL2_REVOKE.htm"><code>REVOKE</code></a>.</li>
+</ul>
+
+<h2>Vytváření a rušení uživatelů, skupin a rolí</h2>
+
+<p>Uživatele lze vytvořit SQL příkazem <a href="HE_SQL2_CREATEUSER.htm"><code>CREATE USER</code></a>, zrušit příkazem <a href="HE_SQL2_DROPUSER.htm"><code>DROP USER</code></a>. Nastavit přístupové heslo uživateli lze pomocí funkce <a href="HE_F_SETPASSWORD.htm"><code>Set_password</code></a>.</p>
+
+<p>Skupinu uživatelů lze vytvořit SQL příkazem <a href="HE_SQL2_CREATEGROUP.htm"><code>CREATE GROUP</code></a>, zrušit příkazem <a href="HE_SQL2_DROPGROUP.htm"><code>DROP GROUP</code></a>.</p>
+
+<p>Roli v aplikaci lze vytvořit SQL příkazem <a href="../xml/html/sql_create_role.html"><code>CREATE ROLE</code></a>, zrušit příkazem <a href="../xml/html/sql_drop_role.html"><code>DROP ROLE</code></a>.</p>
+
+<h2>Vztah mezi subjekty práv</h2>
+
+<p>Zjistit nebo změnit vztah mezi dvěma subjekty práv (např. zařadit uživatele do skupiny, obsadit skupinu do role) umožňují funkce <a href="../xml/html/f_set_membership.html"><code>Set_membership</code></a> a <a href="../xml/html/f_get_membership.html"><code>Get_membership</code></a></p>
+
+<br><p><b>Příklad:</b></p>
+
+<pre><code>PROCEDURE `INIT_SET_PRIVILS`();
+/*******************************************/
+// nastaví všem tabulkám v aplikaci práva číst, psát, vkládat a mazat záznamy 
+// pro roli Internet_user
+BEGIN
+  DECLARE sqlstr CHAR(500);
+  DECLARE CONTINUE HANDLER FOR SQLEXCEPTION
+  BEGIN
+    CALL log_write('Init_set_privils - '||sqlstate||' '||Int2str(sqlcode));
+  END;
+
+  FOR row AS INSENSITIVE CURSOR FOR
+   SELECT T2.tab_name              // seznam tabulek
+   FROM OBJTAB T1, TABTAB T2 
+   WHERE T1.APL_UUID=T2.APL_UUID
+    AND (Ord(T1.category)=CATEG_APPL) AND (t1.obj_name=CURRENT_APPLICATION)
+  DO
+    SET sqlstr = 'GRANT DELETE, INSERT, SELECT, UPDATE ON '||row.tab_name||' TO ROLE INTERNET_USER';
+    CALL SQL_execute(sqlstr);   // provést dynamicky sestavený příkaz
+  END FOR;
+END</code></pre>
+
+
+
+<p class="subs">Seznam subsekcí:
+<ul class="subs">
+
+<li><a href="HE_SQL2_PRIVILS.htm">Zjišťování práv v jazyce SQL</a>
+
+</ul>
+<table class="navigace" border="0" width="100%"  bgcolor="#FFFFBF"><tr> <td
+width="20" align="center"><img class="floatno" src="../images/prev.gif"
+width="15" height="13" alt="&lt;&shy;" title="Předcházející téma"
+border="0"></td><td width="25%"><a
+href="../xml/html/sqltables.html">Databázové tabulky</a></td> <td width="25%"
+align="right"><img class="floatno" src="../images/up.gif" width="13"
+height="15" alt="Nahoru" title="O jednu úroveň výš" border="0"
+align="middle"></td><td width="25%"><a href="HE_SQL2_JAZYKSQL.htm">Jazyk SQL a jeho implementace</a></td>
+<td width="25%" align="right"><a
+href="HE_SQL2_FUNKCE.htm">Funkce</a></td><td width="20"
+align="center"><img class="floatno" src="../images/next.gif" width="15"
+height="13" alt="&shy;&gt;" title="Následující téma" border="0"></td>
+</tr></table>
+</body>
+</html>

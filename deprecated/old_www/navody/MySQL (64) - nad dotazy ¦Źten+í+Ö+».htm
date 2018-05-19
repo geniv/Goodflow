@@ -1,0 +1,1533 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head><title>MySQL (64) - nad dotazy čtenářů - Linux Software</title>
+
+
+
+
+	
+	<meta name="description" content="Adresar software pro Linux, clanky s linuxovou tematikou, Linux CD Shop, MySQL (64) - nad dotazy čtenářů">
+	<meta name="keywords" content=" linux software, linux, MySQL (64) - nad dotazy čtenářů">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name="content-language" content="cs,czech">
+<meta name="robots" content="index,follow">
+<link rel="top" title="Linux Software" href="http://www.linuxsoft.cz/">
+<link rel="alternate" media="tty" href="http://text.linuxsoft.cz/" title="Textová verze" type="text/html">
+<link rel="alternate" media="tty" href="http://text.linuxsoft.cz/" title="Textová verze (ISO 8859-2)" type="text/html; charset=iso-8859-2">
+<link rel="alternate" title="RSS - software" href="http://linuxsoft.cz/export/linuxsoft.xml" type="application/rss+xml">
+<link rel="alternate" title="RSS - članky" href="http://linuxsoft.cz/export/linuxsoft_article_cz.xml" type="application/rss+xml">
+<link rel="alternate" title="RSS - zprávičky" href="http://linuxsoft.cz/export/linuxsoft_news_cz.xml" type="application/rss+xml">
+<link rel="alternate" title="RSS - diskuze" href="http://linuxsoft.cz/rss/diskuze.php" type="application/rss+xml">
+<link rel="shortcut icon" href="http://www.linuxsoft.cz/img/favicon.ico" type="image/x-icon" title="linuxsoft.cz">
+<link href="MySQL%20%2864%29%20-%20nad%20dotazy%20%C4%8Dten%C3%A1%C5%99%C5%AF_soubory/style.css" rel="stylesheet" type="text/css">
+<link href="MySQL%20%2864%29%20-%20nad%20dotazy%20%C4%8Dten%C3%A1%C5%99%C5%AF_soubory/eshop.css" rel="stylesheet" type="text/css">
+<link href="MySQL%20%2864%29%20-%20nad%20dotazy%20%C4%8Dten%C3%A1%C5%99%C5%AF_soubory/article.css" rel="stylesheet" type="text/css">
+<link href="http://www.linuxsoft.cz/article_print.php?id_article=1154" rel="alternate" media="print" title="Verze pro tisk">
+  <link href="http://www.linuxsoft.cz/article_list.php?id_kategorie.php=232" rel="up"></head><body>
+<table class="main" cellpadding="4" cellspacing="0">
+<tbody><tr>
+<td class="top_part">
+<a href="http://www.linuxsoft.cz/"><img src="MySQL%20%2864%29%20-%20nad%20dotazy%20%C4%8Dten%C3%A1%C5%99%C5%AF_soubory/logo.png" alt="LINUXSOFT.cz"></a>
+<a href="#left_end" title="Přeskoč levou lištu"><img src="MySQL%20%2864%29%20-%20nad%20dotazy%20%C4%8Dten%C3%A1%C5%99%C5%AF_soubory/minus.gif" alt="Přeskoč levou lištu"></a>
+</td>
+<td colspan="2" class="top_part" align="right">
+<table cellpadding="0" cellspacing="0">
+<tbody><tr>
+<td class="top_part" style="margin: 0px; padding: 0px; vertical-align: middle;">
+<form name="login_user" action="login.php" method="post">
+Uživatel: <input name="username" size="10" maxlength="50" type="text">
+Heslo: <input name="password" size="10" maxlength="50" type="password">&nbsp;
+<input name="prihlas_tlacitko" value="Přihlásit" type="submit">
+</form></td><td class="top_part" style="margin: 0px; padding: 0px; vertical-align: middle;">
+<form name="reg_user" action="user_edit.php" method="get">
+<input name="reg_tlacitko" value="Registrovat" type="submit"></form>
+</td><td class="top_part" style="margin: 0px; padding: 0px; vertical-align: middle;">&nbsp; &nbsp;<a href=""><img alt="CZ" src="MySQL%20%2864%29%20-%20nad%20dotazy%20%C4%8Dten%C3%A1%C5%99%C5%AF_soubory/flag-cz.png" height="14" width="20"></a><a href="http://www.linuxsoft.cz/en/"><img alt="UK" src="MySQL%20%2864%29%20-%20nad%20dotazy%20%C4%8Dten%C3%A1%C5%99%C5%AF_soubory/flag-uk.png" height="14" width="20"></a><a href="http://www.linuxsoft.cz/pl/"><img alt="PL" src="MySQL%20%2864%29%20-%20nad%20dotazy%20%C4%8Dten%C3%A1%C5%99%C5%AF_soubory/flag-pl.png" height="14" width="20"></a></td></tr></tbody></table>
+				</td>
+			</tr>
+			<tr>
+<td class="menu" style="max-width: 22%;" valign="top" width="22%">
+
+   <script language="Javascript" type="text/javascript" src="MySQL%20%2864%29%20-%20nad%20dotazy%20%C4%8Dten%C3%A1%C5%99%C5%AF_soubory/tree_script.js"></script>
+
+
+<div class="sub_title_gray" title="CD shop. Levné vypalované distribuce i komerční distribuce. Zboží s linuxovou tématikou.">
+				<img alt="&gt;" src="MySQL%20%2864%29%20-%20nad%20dotazy%20%C4%8Dten%C3%A1%C5%99%C5%AF_soubory/sipka2.png" height="15" width="15">
+				<a href="http://www.linuxsoft.cz/shop" class="cap_title">Linux CD Shop</a>
+			</div>
+    <ul class="shop">
+<br>
+	<li><a href="http://www.linuxsoft.cz/shop/?produkt=88441" class="category_new">balíček 10 distribucí - 500Kč</a></li>
+	<li><a href="http://www.linuxsoft.cz/shop/?produkt=91050" class="category_new">balíček 6 distribucí - 250Kč</a></li>
+	<li><a href="http://www.linuxsoft.cz/shop/?produkt=91051" class="category_new">balíček 5 BSD distribucí - 250Kč</a></li>
+<br>
+	<li><a href="http://www.linuxsoft.cz/shop/?produkt=91053" class="category_new">Mandriva 2008.1 - 100Kč</a></li>
+	<li><a href="http://www.linuxsoft.cz/shop/?produkt=91054" class="category_new">Ubuntu 8.04 LTS - 100Kč</a></li>
+	<li><a href="http://www.linuxsoft.cz/shop/?produkt=91056" class="category_new">Fedora 9 - 100Kč</a></li>
+	<li><a href="http://www.linuxsoft.cz/shop/?produkt=91037" class="category_new">Debian 4.0r3 - 300Kč</a></li>
+
+			</ul>
+
+			<div class="sub_title_gray" style="margin-bottom: 5px;" title="Kurzy Linuxu v Praze a okolí pro začátečníky i pokročilé. Individuální přístup.">
+				<img alt="&gt;" src="MySQL%20%2864%29%20-%20nad%20dotazy%20%C4%8Dten%C3%A1%C5%99%C5%AF_soubory/sipka2.png" height="15" width="15">
+				<a href="http://www.linuxsoft.cz/kurzy/" class="cap_title">Kurzy</a>
+			</div>
+
+			<ul class="shop">
+				<li><a href="http://www.linuxsoft.cz/kurzy/php.php" class="category">Kurz PHP</a></li>
+				<li><a href="http://www.linuxsoft.cz/kurzy/mysql.php" class="category">Kurz MySQL</a></li>
+				<li><a href="http://www.linuxsoft.cz/kurzy/pgsql.php" class="category">Kurz PostgreSQL</a></li>
+<!--				<li><a href="kurzy/uvod.php" class="category">Úvod do Linuxu a instalace</a></li>
+				<li><a href="kurzy/admin.php" class="category">Linux pro začínající administrátory</a></li>
+				<li><a href="kurzy/apache.php" class="category">Web server Apache</a></li>
+				<li><a href="kurzy/bind.php" class="category">DNS server BIND</a></li>
+				<li><a href="kurzy/bash.php" class="category">Základy skriptování v BASHi</a></li>
+				<li><a href="kurzy/samba.php" class="category">Konfigurace SAMBA serveru</a></li>
+				<li><a href="kurzy/postfix.php" class="category">Poštovní server Postfix</a></li>
+				<li><a href="http://www.linuxsoft.cz/article.php?id_article=654" class="category_new">6.12. a 8.12. kurzy pro začátečníky</a></li>-->
+			</ul>
+
+			<div class="sub_title_gray" style="margin-bottom: 5px;" title="Přechod na Linux, poradíme Vám při přechodu na Linux">
+				<img alt="&gt;" src="MySQL%20%2864%29%20-%20nad%20dotazy%20%C4%8Dten%C3%A1%C5%99%C5%AF_soubory/sipka2.png" height="15" width="15">
+				<a href="http://www.linuxsoft.cz/prechod_na_linux/" class="cap_title">Přechod na Linux</a>
+			</div>
+			<ul class="shop">
+				<li>
+					<a href="http://www.linuxsoft.cz/prechod_na_linux/" class="category">Poradíme vám při přechodu na Linux</a>
+				</li>
+			</ul>
+
+			<div class="sub_title_gray" style="margin-bottom: 5px;" title="Instalace Linuxu na počítače, notebooky a servery, řešení pro malé a střední firmy, správa sítí, ...">
+				<img alt="&gt;" src="MySQL%20%2864%29%20-%20nad%20dotazy%20%C4%8Dten%C3%A1%C5%99%C5%AF_soubory/sipka2.png" height="15" width="15"><a href="http://www.linuxsoft.cz/sluzby" class="cap_title"> Služby</a>
+			</div>
+			<ul class="shop">
+				<li><a href="http://www.linuxsoft.cz/sluzby/" class="category">Instalace a konfigurace Linuxu</a></li>
+				<li><a href="http://www.linuxsoft.cz/sluzby/pl.php" class="category">Komplexní linuxová řešení</a></li>
+
+				<li><a href="http://www.linuxsoft.cz/sluzby/suse.php" class="category">SUSE internet server</a></li>
+			</ul>
+
+
+  <!-- gf reklama -->
+			<div class="sub_title_gray" style="margin-bottom: 5px;">
+				<img alt="&gt;" src="MySQL%20%2864%29%20-%20nad%20dotazy%20%C4%8Dten%C3%A1%C5%99%C5%AF_soubory/sipka2.png" height="15" width="15">
+					<a href="http://www.linuxsoft.cz/reklama/" class="cap_title" title="Inzerujte s Linuxsoft.cz">Reklama a inzerce</a>
+			</div>
+  <!-- gf reklama -->
+
+
+			<div class="sub_title_gray">
+				<img alt="&gt;" src="MySQL%20%2864%29%20-%20nad%20dotazy%20%C4%8Dten%C3%A1%C5%99%C5%AF_soubory/sipka2.png" height="15" width="15">
+					<a href="http://www.linuxsoft.cz/serialy/" class="cap_title">Seriály</a>
+			</div>
+			<div class="menu">
+				<a href="http://www.linuxsoft.cz/php/" class="category"><img alt="&gt;" src="MySQL%20%2864%29%20-%20nad%20dotazy%20%C4%8Dten%C3%A1%C5%99%C5%AF_soubory/plus.png" border="0" height="9" hspace="4" width="9">PHP</a><br>
+				<a href="http://www.linuxsoft.cz/gimp/" class="category"><img alt="&gt;" src="MySQL%20%2864%29%20-%20nad%20dotazy%20%C4%8Dten%C3%A1%C5%99%C5%AF_soubory/plus.png" border="0" height="9" hspace="4" width="9">Gimp</a><br>
+				<a href="http://www.linuxsoft.cz/wifi/" class="category"><img alt="&gt;" src="MySQL%20%2864%29%20-%20nad%20dotazy%20%C4%8Dten%C3%A1%C5%99%C5%AF_soubory/plus.png" border="0" height="9" hspace="4" width="9">Začínáme s wi-fi</a><br>
+				<a href="http://www.linuxsoft.cz/article_list.php?id_kategory=173" class="category"><img alt="&gt;" src="MySQL%20%2864%29%20-%20nad%20dotazy%20%C4%8Dten%C3%A1%C5%99%C5%AF_soubory/plus.png" border="0" height="9" hspace="4" width="9">Internetové bankovnictví</a><br>
+				<a href="http://www.linuxsoft.cz/64bit/" class="category"><img alt="&gt;" src="MySQL%20%2864%29%20-%20nad%20dotazy%20%C4%8Dten%C3%A1%C5%99%C5%AF_soubory/plus.png" border="0" height="9" hspace="4" width="9">64bit Linux</a><br>
+			</div>
+                        <div class="sub_title_gray" style="margin-bottom: 5px;"><img alt="&gt;" src="MySQL%20%2864%29%20-%20nad%20dotazy%20%C4%8Dten%C3%A1%C5%99%C5%AF_soubory/sipka2.png" height="15" width="15"> <a href="http://www.linuxsoft.cz/fakta/" class="cap_title">Linux vs. Windows</a>
+			</div>
+			<div class="sub_title_gray">
+				<img alt="&gt;" src="MySQL%20%2864%29%20-%20nad%20dotazy%20%C4%8Dten%C3%A1%C5%99%C5%AF_soubory/sipka2.png" height="15" width="15"> Software&nbsp;&nbsp;(10579)
+				<span id="splusAll" class="plus" onclick="showAll('s')" title="Rozbalit/Sbalit vše">&nbsp;</span>
+			</div>
+			<div class="menu">
+				<span class="no_wrap">
+					
+					<span class="minus" id="splus1">&nbsp;</span>
+					<a class="category" href="http://www.linuxsoft.cz/sw_list.php?id_kategory=42">
+					JÁDRO [4]</a>
+				</span>
+				<br>
+				<span id="s1" class="hide">
+					
+				</span>
+				<span class="no_wrap">
+					<span id="splus2" class="plus" onclick="showMenu(2,'s')">&nbsp;</span>
+					
+					<a class="category" href="http://www.linuxsoft.cz/sw_list.php?id_kategory=5">
+					OKENNÍ MANAGERY [38]</a>
+				</span>
+				<br>
+				<span id="s2" class="hide">
+					<a href="http://www.linuxsoft.cz/sw_list.php?id_kategory=203" class="sub_category">
+						<b>okenní manažery­</b>&nbsp;
+						<span class="sub_numbers">[22]</span></a>
+						<br>
+					
+					<a href="http://www.linuxsoft.cz/sw_list.php?id_kategory=202" class="sub_category">
+						<b>desktop­</b>&nbsp;
+						<span class="sub_numbers">[16]</span></a>
+						<br>
+				</span>
+				<span class="no_wrap">
+					<span id="splus3" class="plus" onclick="showMenu(3,'s')">&nbsp;</span>
+					
+					<a class="category" href="http://www.linuxsoft.cz/sw_list.php?id_kategory=6">
+					INTERNET [1010]</a>
+				</span>
+				<br>
+				<span id="s3" class="hide">
+					<a href="http://www.linuxsoft.cz/sw_list.php?id_kategory=92" class="sub_category">
+						<b>news klienti­</b>&nbsp;
+						<span class="sub_numbers">[51]</span></a>
+						<br>
+					
+					<a href="http://www.linuxsoft.cz/sw_list.php?id_kategory=9" class="sub_category">
+						<b>FTP klienti­</b>&nbsp;
+						<span class="sub_numbers">[67]</span></a>
+						<br>
+					
+					<a href="http://www.linuxsoft.cz/sw_list.php?id_kategory=7" class="sub_category">
+						<b>prohlížeče­</b>&nbsp;
+						<span class="sub_numbers">[45]</span></a>
+						<br>
+					
+					<a href="http://www.linuxsoft.cz/sw_list.php?id_kategory=8" class="sub_category">
+						<b>e-mail klienti­</b>&nbsp;
+						<span class="sub_numbers">[97]</span></a>
+						<br>
+					
+					<a href="http://www.linuxsoft.cz/sw_list.php?id_kategory=11" class="sub_category">
+						<b>Chat­</b>&nbsp;
+						<span class="sub_numbers">[247]</span></a>
+						<br>
+					
+					<a href="http://www.linuxsoft.cz/sw_list.php?id_kategory=91" class="sub_category">
+						<b>sdílení souborů­</b>&nbsp;
+						<span class="sub_numbers">[67]</span></a>
+						<br>
+					
+					<a href="http://www.linuxsoft.cz/sw_list.php?id_kategory=90" class="sub_category">
+						<b>stahování­</b>&nbsp;
+						<span class="sub_numbers">[36]</span></a>
+						<br>
+					
+					<a href="http://www.linuxsoft.cz/sw_list.php?id_kategory=12" class="sub_category">
+						<b>ostatní­</b>&nbsp;
+						<span class="sub_numbers">[400]</span></a>
+						<br>
+				</span>
+				<span class="no_wrap">
+					<span id="splus4" class="plus" onclick="showMenu(4,'s')">&nbsp;</span>
+					
+					<a class="category" href="http://www.linuxsoft.cz/sw_list.php?id_kategory=64">
+					SÍTĚ [588]</a>
+				</span>
+				<br>
+				<span id="s4" class="hide">
+					<a href="http://www.linuxsoft.cz/sw_list.php?id_kategory=66" class="sub_category">
+						<b>WLAN­</b>&nbsp;
+						<span class="sub_numbers">[27]</span></a>
+						<br>
+					
+					<a href="http://www.linuxsoft.cz/sw_list.php?id_kategory=65" class="sub_category">
+						<b>LAN­</b>&nbsp;
+						<span class="sub_numbers">[30]</span></a>
+						<br>
+					
+					<a href="http://www.linuxsoft.cz/sw_list.php?id_kategory=67" class="sub_category">
+						<b>VPN­</b>&nbsp;
+						<span class="sub_numbers">[11]</span></a>
+						<br>
+					
+					<a href="http://www.linuxsoft.cz/sw_list.php?id_kategory=93" class="sub_category">
+						<b>monitorování­</b>&nbsp;
+						<span class="sub_numbers">[163]</span></a>
+						<br>
+					
+					<a href="http://www.linuxsoft.cz/sw_list.php?id_kategory=71" class="sub_category">
+						<b>ppp­</b>&nbsp;
+						<span class="sub_numbers">[42]</span></a>
+						<br>
+					
+					<a href="http://www.linuxsoft.cz/sw_list.php?id_kategory=121" class="sub_category">
+						<b>ostatní­</b>&nbsp;
+						<span class="sub_numbers">[294]</span></a>
+						<br>
+				</span>
+				<span class="no_wrap">
+					<span id="splus5" class="plus" onclick="showMenu(5,'s')">&nbsp;</span>
+					
+					<a class="category" href="http://www.linuxsoft.cz/sw_list.php?id_kategory=28">
+					OFFICE [440]</a>
+				</span>
+				<br>
+				<span id="s5" class="hide">
+					<a href="http://www.linuxsoft.cz/sw_list.php?id_kategory=209" class="sub_category">
+						<b>OCR­</b>&nbsp;
+						<span class="sub_numbers">[1]</span></a>
+						<br>
+					
+					<a href="http://www.linuxsoft.cz/sw_list.php?id_kategory=29" class="sub_category">
+						<b>kancelářské balíky­</b>&nbsp;
+						<span class="sub_numbers">[9]</span></a>
+						<br>
+					
+					<a href="http://www.linuxsoft.cz/sw_list.php?id_kategory=33" class="sub_category">
+						<b>faxovací programy­</b>&nbsp;
+						<span class="sub_numbers">[10]</span></a>
+						<br>
+					
+					<a href="http://www.linuxsoft.cz/sw_list.php?id_kategory=44" class="sub_category">
+						<b>prezentace­</b>&nbsp;
+						<span class="sub_numbers">[11]</span></a>
+						<br>
+					
+					<a href="http://www.linuxsoft.cz/sw_list.php?id_kategory=31" class="sub_category">
+						<b>tabulkový procesor­</b>&nbsp;
+						<span class="sub_numbers">[18]</span></a>
+						<br>
+					
+					<a href="http://www.linuxsoft.cz/sw_list.php?id_kategory=30" class="sub_category">
+						<b>textový procesor­</b>&nbsp;
+						<span class="sub_numbers">[34]</span></a>
+						<br>
+					
+					<a href="http://www.linuxsoft.cz/sw_list.php?id_kategory=32" class="sub_category">
+						<b>účetnictví­</b>&nbsp;
+						<span class="sub_numbers">[32]</span></a>
+						<br>
+					
+					<a href="http://www.linuxsoft.cz/sw_list.php?id_kategory=70" class="sub_category">
+						<b>prohlížeče PS/PDF­</b>&nbsp;
+						<span class="sub_numbers">[10]</span></a>
+						<br>
+					
+					<a href="http://www.linuxsoft.cz/sw_list.php?id_kategory=103" class="sub_category">
+						<b>PIM­</b>&nbsp;
+						<span class="sub_numbers">[79]</span></a>
+						<br>
+					
+					<a href="http://www.linuxsoft.cz/sw_list.php?id_kategory=79" class="sub_category">
+						<b>ERP &amp; CRM­</b>&nbsp;
+						<span class="sub_numbers">[39]</span></a>
+						<br>
+					
+					<a href="http://www.linuxsoft.cz/sw_list.php?id_kategory=116" class="sub_category">
+						<b>zápisník­</b>&nbsp;
+						<span class="sub_numbers">[43]</span></a>
+						<br>
+					
+					<a href="http://www.linuxsoft.cz/sw_list.php?id_kategory=104" class="sub_category">
+						<b>ostatní­</b>&nbsp;
+						<span class="sub_numbers">[154]</span></a>
+						<br>
+				</span>
+				<span class="no_wrap">
+					<span id="splus6" class="plus" onclick="showMenu(6,'s')">&nbsp;</span>
+					
+					<a class="category" href="http://www.linuxsoft.cz/sw_list.php?id_kategory=13">
+					AUDIO &amp; VIDEO [1151]</a>
+				</span>
+				<br>
+				<span id="s6" class="hide">
+					<a href="http://www.linuxsoft.cz/sw_list.php?id_kategory=135" class="sub_category">
+						<b>MP3­</b>&nbsp;
+						<span class="sub_numbers">[108]</span></a>
+						<br>
+					
+					<a href="http://www.linuxsoft.cz/sw_list.php?id_kategory=17" class="sub_category">
+						<b>editace zvuku­</b>&nbsp;
+						<span class="sub_numbers">[99]</span></a>
+						<br>
+					
+					<a href="http://www.linuxsoft.cz/sw_list.php?id_kategory=18" class="sub_category">
+						<b>video přehrávače­</b>&nbsp;
+						<span class="sub_numbers">[44]</span></a>
+						<br>
+					
+					<a href="http://www.linuxsoft.cz/sw_list.php?id_kategory=19" class="sub_category">
+						<b>video editory­</b>&nbsp;
+						<span class="sub_numbers">[36]</span></a>
+						<br>
+					
+					<a href="http://www.linuxsoft.cz/sw_list.php?id_kategory=16" class="sub_category">
+						<b>grabování­</b>&nbsp;
+						<span class="sub_numbers">[82]</span></a>
+						<br>
+					
+					<a href="http://www.linuxsoft.cz/sw_list.php?id_kategory=14" class="sub_category">
+						<b>audio přehrávače­</b>&nbsp;
+						<span class="sub_numbers">[215]</span></a>
+						<br>
+					
+					<a href="http://www.linuxsoft.cz/sw_list.php?id_kategory=94" class="sub_category">
+						<b>TV+radio­</b>&nbsp;
+						<span class="sub_numbers">[52]</span></a>
+						<br>
+					
+					<a href="http://www.linuxsoft.cz/sw_list.php?id_kategory=97" class="sub_category">
+						<b>konference­</b>&nbsp;
+						<span class="sub_numbers">[9]</span></a>
+						<br>
+					
+					<a href="http://www.linuxsoft.cz/sw_list.php?id_kategory=74" class="sub_category">
+						<b>pro hudebníky­</b>&nbsp;
+						<span class="sub_numbers">[89]</span></a>
+						<br>
+					
+					<a href="http://www.linuxsoft.cz/sw_list.php?id_kategory=98" class="sub_category">
+						<b>ostatní­</b>&nbsp;
+						<span class="sub_numbers">[399]</span></a>
+						<br>
+				</span>
+				<span class="no_wrap">
+					<span id="splus7" class="plus" onclick="showMenu(7,'s')">&nbsp;</span>
+					
+					<a class="category" href="http://www.linuxsoft.cz/sw_list.php?id_kategory=20">
+					GRAFIKA [556]</a>
+				</span>
+				<br>
+				<span id="s7" class="hide">
+					<a href="http://www.linuxsoft.cz/sw_list.php?id_kategory=137" class="sub_category">
+						<b>digital­</b>&nbsp;
+						<span class="sub_numbers">[24]</span></a>
+						<br>
+					
+					<a href="http://www.linuxsoft.cz/sw_list.php?id_kategory=130" class="sub_category">
+						<b>gimp - pluginy­</b>&nbsp;
+						<span class="sub_numbers">[50]</span></a>
+						<br>
+					
+					<a href="http://www.linuxsoft.cz/sw_list.php?id_kategory=105" class="sub_category">
+						<b>diagramy­</b>&nbsp;
+						<span class="sub_numbers">[15]</span></a>
+						<br>
+					
+					<a href="http://www.linuxsoft.cz/sw_list.php?id_kategory=45" class="sub_category">
+						<b>CAD­</b>&nbsp;
+						<span class="sub_numbers">[25]</span></a>
+						<br>
+					
+					<a href="http://www.linuxsoft.cz/sw_list.php?id_kategory=22" class="sub_category">
+						<b>editory­</b>&nbsp;
+						<span class="sub_numbers">[90]</span></a>
+						<br>
+					
+					<a href="http://www.linuxsoft.cz/sw_list.php?id_kategory=77" class="sub_category">
+						<b>3D­</b>&nbsp;
+						<span class="sub_numbers">[44]</span></a>
+						<br>
+					
+					<a href="http://www.linuxsoft.cz/sw_list.php?id_kategory=21" class="sub_category">
+						<b>prohlížeče­</b>&nbsp;
+						<span class="sub_numbers">[94]</span></a>
+						<br>
+					
+					<a href="http://www.linuxsoft.cz/sw_list.php?id_kategory=100" class="sub_category">
+						<b>foto galerie­</b>&nbsp;
+						<span class="sub_numbers">[76]</span></a>
+						<br>
+					
+					<a href="http://www.linuxsoft.cz/sw_list.php?id_kategory=73" class="sub_category">
+						<b>scanování­</b>&nbsp;
+						<span class="sub_numbers">[17]</span></a>
+						<br>
+					
+					<a href="http://www.linuxsoft.cz/sw_list.php?id_kategory=102" class="sub_category">
+						<b>konverze­</b>&nbsp;
+						<span class="sub_numbers">[32]</span></a>
+						<br>
+					
+					<a href="http://www.linuxsoft.cz/sw_list.php?id_kategory=101" class="sub_category">
+						<b>ostatní­</b>&nbsp;
+						<span class="sub_numbers">[88]</span></a>
+						<br>
+				</span>
+				<span class="no_wrap">
+					<span id="splus8" class="plus" onclick="showMenu(8,'s')">&nbsp;</span>
+					
+					<a class="category" href="http://www.linuxsoft.cz/sw_list.php?id_kategory=23">
+					HRY [1010]</a>
+				</span>
+				<br>
+				<span id="s8" class="hide">
+					<a href="http://www.linuxsoft.cz/sw_list.php?id_kategory=205" class="sub_category">
+						<b>RPG­</b>&nbsp;
+						<span class="sub_numbers">[30]</span></a>
+						<br>
+					
+					<a href="http://www.linuxsoft.cz/sw_list.php?id_kategory=138" class="sub_category">
+						<b>arkády­</b>&nbsp;
+						<span class="sub_numbers">[124]</span></a>
+						<br>
+					
+					<a href="http://www.linuxsoft.cz/sw_list.php?id_kategory=81" class="sub_category">
+						<b>logické­</b>&nbsp;
+						<span class="sub_numbers">[145]</span></a>
+						<br>
+					
+					<a href="http://www.linuxsoft.cz/sw_list.php?id_kategory=24" class="sub_category">
+						<b>akční­</b>&nbsp;
+						<span class="sub_numbers">[166]</span></a>
+						<br>
+					
+					<a href="http://www.linuxsoft.cz/sw_list.php?id_kategory=80" class="sub_category">
+						<b>deskové­</b>&nbsp;
+						<span class="sub_numbers">[139]</span></a>
+						<br>
+					
+					<a href="http://www.linuxsoft.cz/sw_list.php?id_kategory=26" class="sub_category">
+						<b>simulátory­</b>&nbsp;
+						<span class="sub_numbers">[59]</span></a>
+						<br>
+					
+					<a href="http://www.linuxsoft.cz/sw_list.php?id_kategory=25" class="sub_category">
+						<b>strategické­</b>&nbsp;
+						<span class="sub_numbers">[75]</span></a>
+						<br>
+					
+					<a href="http://www.linuxsoft.cz/sw_list.php?id_kategory=63" class="sub_category">
+						<b>šachy­</b>&nbsp;
+						<span class="sub_numbers">[38]</span></a>
+						<br>
+					
+					<a href="http://www.linuxsoft.cz/sw_list.php?id_kategory=27" class="sub_category">
+						<b>ostatní­</b>&nbsp;
+						<span class="sub_numbers">[234]</span></a>
+						<br>
+				</span>
+				<span class="no_wrap">
+					
+					<span class="minus" id="splus9">&nbsp;</span>
+					<a class="category" href="http://www.linuxsoft.cz/sw_list.php?id_kategory=120">
+					HRAČKY [10]</a>
+				</span>
+				<br>
+				<span id="s9" class="hide">
+					
+				</span>
+				<span class="no_wrap">
+					<span id="splus10" class="plus" onclick="showMenu(10,'s')">&nbsp;</span>
+					
+					<a class="category" href="http://www.linuxsoft.cz/sw_list.php?id_kategory=75">
+					VÝUKA [79]</a>
+				</span>
+				<br>
+				<span id="s10" class="hide">
+					<a href="http://www.linuxsoft.cz/sw_list.php?id_kategory=134" class="sub_category">
+						<b>jazykové­</b>&nbsp;
+						<span class="sub_numbers">[14]</span></a>
+						<br>
+					
+					<a href="http://www.linuxsoft.cz/sw_list.php?id_kategory=95" class="sub_category">
+						<b>slovníky­</b>&nbsp;
+						<span class="sub_numbers">[25]</span></a>
+						<br>
+					
+					<a href="http://www.linuxsoft.cz/sw_list.php?id_kategory=122" class="sub_category">
+						<b>ostatní­</b>&nbsp;
+						<span class="sub_numbers">[23]</span></a>
+						<br>
+				</span>
+				<span class="no_wrap">
+					<span id="splus11" class="plus" onclick="showMenu(11,'s')">&nbsp;</span>
+					
+					<a class="category" href="http://www.linuxsoft.cz/sw_list.php?id_kategory=47">
+					BEZPEČNOST [522]</a>
+				</span>
+				<br>
+				<span id="s11" class="hide">
+					<a href="http://www.linuxsoft.cz/sw_list.php?id_kategory=48" class="sub_category">
+						<b>firewall­</b>&nbsp;
+						<span class="sub_numbers">[140]</span></a>
+						<br>
+					
+					<a href="http://www.linuxsoft.cz/sw_list.php?id_kategory=49" class="sub_category">
+						<b>antivirus­</b>&nbsp;
+						<span class="sub_numbers">[49]</span></a>
+						<br>
+					
+					<a href="http://www.linuxsoft.cz/sw_list.php?id_kategory=96" class="sub_category">
+						<b>IDS­</b>&nbsp;
+						<span class="sub_numbers">[23]</span></a>
+						<br>
+					
+					<a href="http://www.linuxsoft.cz/sw_list.php?id_kategory=50" class="sub_category">
+						<b>antispam­</b>&nbsp;
+						<span class="sub_numbers">[33]</span></a>
+						<br>
+					
+					<a href="http://www.linuxsoft.cz/sw_list.php?id_kategory=123" class="sub_category">
+						<b>ostatní­</b>&nbsp;
+						<span class="sub_numbers">[214]</span></a>
+						<br>
+				</span>
+				<span class="no_wrap">
+					<span id="splus12" class="plus" onclick="showMenu(12,'s')">&nbsp;</span>
+					
+					<a class="category" href="http://www.linuxsoft.cz/sw_list.php?id_kategory=34">
+					TISK [77]</a>
+				</span>
+				<br>
+				<span id="s12" class="hide">
+					<a href="http://www.linuxsoft.cz/sw_list.php?id_kategory=106" class="sub_category">
+						<b>démoni­</b>&nbsp;
+						<span class="sub_numbers">[6]</span></a>
+						<br>
+					
+					<a href="http://www.linuxsoft.cz/sw_list.php?id_kategory=107" class="sub_category">
+						<b>ostatní­</b>&nbsp;
+						<span class="sub_numbers">[71]</span></a>
+						<br>
+				</span>
+				<span class="no_wrap">
+					<span id="splus13" class="plus" onclick="showMenu(13,'s')">&nbsp;</span>
+					
+					<a class="category" href="http://www.linuxsoft.cz/sw_list.php?id_kategory=117">
+					VĚDA [168]</a>
+				</span>
+				<br>
+				<span id="s13" class="hide">
+					<a href="http://www.linuxsoft.cz/sw_list.php?id_kategory=136" class="sub_category">
+						<b>biologie­</b>&nbsp;
+						<span class="sub_numbers">[8]</span></a>
+						<br>
+					
+					<a href="http://www.linuxsoft.cz/sw_list.php?id_kategory=133" class="sub_category">
+						<b>chemie­</b>&nbsp;
+						<span class="sub_numbers">[6]</span></a>
+						<br>
+					
+					<a href="http://www.linuxsoft.cz/sw_list.php?id_kategory=132" class="sub_category">
+						<b>geometrie­</b>&nbsp;
+						<span class="sub_numbers">[5]</span></a>
+						<br>
+					
+					<a href="http://www.linuxsoft.cz/sw_list.php?id_kategory=131" class="sub_category">
+						<b>matematika­</b>&nbsp;
+						<span class="sub_numbers">[55]</span></a>
+						<br>
+					
+					<a href="http://www.linuxsoft.cz/sw_list.php?id_kategory=119" class="sub_category">
+						<b>statistika a grafy­</b>&nbsp;
+						<span class="sub_numbers">[16]</span></a>
+						<br>
+					
+					<a href="http://www.linuxsoft.cz/sw_list.php?id_kategory=118" class="sub_category">
+						<b>astronomie­</b>&nbsp;
+						<span class="sub_numbers">[23]</span></a>
+						<br>
+					
+					<a href="http://www.linuxsoft.cz/sw_list.php?id_kategory=124" class="sub_category">
+						<b>ostatní­</b>&nbsp;
+						<span class="sub_numbers">[45]</span></a>
+						<br>
+				</span>
+				<span class="no_wrap">
+					<span id="splus14" class="plus" onclick="showMenu(14,'s')">&nbsp;</span>
+					
+					<a class="category" href="http://www.linuxsoft.cz/sw_list.php?id_kategory=35">
+					VÝVOJOVÉ NÁSTROJE [467]</a>
+				</span>
+				<br>
+				<span id="s14" class="hide">
+					<a href="http://www.linuxsoft.cz/sw_list.php?id_kategory=51" class="sub_category">
+						<b>editory­</b>&nbsp;
+						<span class="sub_numbers">[78]</span></a>
+						<br>
+					
+					<a href="http://www.linuxsoft.cz/sw_list.php?id_kategory=112" class="sub_category">
+						<b>vývojové prostředí­</b>&nbsp;
+						<span class="sub_numbers">[68]</span></a>
+						<br>
+					
+					<a href="http://www.linuxsoft.cz/sw_list.php?id_kategory=36" class="sub_category">
+						<b>html editory­</b>&nbsp;
+						<span class="sub_numbers">[25]</span></a>
+						<br>
+					
+					<a href="http://www.linuxsoft.cz/sw_list.php?id_kategory=110" class="sub_category">
+						<b>debuggery­</b>&nbsp;
+						<span class="sub_numbers">[20]</span></a>
+						<br>
+					
+					<a href="http://www.linuxsoft.cz/sw_list.php?id_kategory=109" class="sub_category">
+						<b>interpreti­</b>&nbsp;
+						<span class="sub_numbers">[15]</span></a>
+						<br>
+					
+					<a href="http://www.linuxsoft.cz/sw_list.php?id_kategory=108" class="sub_category">
+						<b>překladače­</b>&nbsp;
+						<span class="sub_numbers">[30]</span></a>
+						<br>
+					
+					<a href="http://www.linuxsoft.cz/sw_list.php?id_kategory=111" class="sub_category">
+						<b>ostatní­</b>&nbsp;
+						<span class="sub_numbers">[230]</span></a>
+						<br>
+				</span>
+				<span class="no_wrap">
+					<span id="splus15" class="plus" onclick="showMenu(15,'s')">&nbsp;</span>
+					
+					<a class="category" href="http://www.linuxsoft.cz/sw_list.php?id_kategory=37">
+					DATABÁZE [300]</a>
+				</span>
+				<br>
+				<span id="s15" class="hide">
+					<a href="http://www.linuxsoft.cz/sw_list.php?id_kategory=115" class="sub_category">
+						<b>utility­</b>&nbsp;
+						<span class="sub_numbers">[119]</span></a>
+						<br>
+					
+					<a href="http://www.linuxsoft.cz/sw_list.php?id_kategory=114" class="sub_category">
+						<b>databáze­</b>&nbsp;
+						<span class="sub_numbers">[69]</span></a>
+						<br>
+					
+					<a href="http://www.linuxsoft.cz/sw_list.php?id_kategory=113" class="sub_category">
+						<b>správa databází­</b>&nbsp;
+						<span class="sub_numbers">[32]</span></a>
+						<br>
+					
+					<a href="http://www.linuxsoft.cz/sw_list.php?id_kategory=126" class="sub_category">
+						<b>ostatní­</b>&nbsp;
+						<span class="sub_numbers">[80]</span></a>
+						<br>
+				</span>
+				<span class="no_wrap">
+					<span id="splus16" class="plus" onclick="showMenu(16,'s')">&nbsp;</span>
+					
+					<a class="category" href="http://www.linuxsoft.cz/sw_list.php?id_kategory=43">
+					EMULÁTORY [130]</a>
+				</span>
+				<br>
+				<span id="s16" class="hide">
+					<a href="http://www.linuxsoft.cz/sw_list.php?id_kategory=197" class="sub_category">
+						<b>ostatni­</b>&nbsp;
+						<span class="sub_numbers">[80]</span></a>
+						<br>
+				</span>
+				<span class="no_wrap">
+					<span id="splus17" class="plus" onclick="showMenu(17,'s')">&nbsp;</span>
+					
+					<a class="category" href="http://www.linuxsoft.cz/sw_list.php?id_kategory=69">
+					KNIHOVNY [634]</a>
+				</span>
+				<br>
+				<span id="s17" class="hide">
+					<a href="http://www.linuxsoft.cz/sw_list.php?id_kategory=88" class="sub_category">
+						<b>GUI­</b>&nbsp;
+						<span class="sub_numbers">[53]</span></a>
+						<br>
+					
+					<a href="http://www.linuxsoft.cz/sw_list.php?id_kategory=87" class="sub_category">
+						<b>grafika­</b>&nbsp;
+						<span class="sub_numbers">[45]</span></a>
+						<br>
+					
+					<a href="http://www.linuxsoft.cz/sw_list.php?id_kategory=82" class="sub_category">
+						<b>multimedia­</b>&nbsp;
+						<span class="sub_numbers">[66]</span></a>
+						<br>
+					
+					<a href="http://www.linuxsoft.cz/sw_list.php?id_kategory=125" class="sub_category">
+						<b>ostatní­</b>&nbsp;
+						<span class="sub_numbers">[446]</span></a>
+						<br>
+				</span>
+				<span class="no_wrap">
+					<span id="splus18" class="plus" onclick="showMenu(18,'s')">&nbsp;</span>
+					
+					<a class="category" href="http://www.linuxsoft.cz/sw_list.php?id_kategory=58">
+					UTILITY [3207]</a>
+				</span>
+				<br>
+				<span id="s18" class="hide">
+					<a href="http://www.linuxsoft.cz/sw_list.php?id_kategory=129" class="sub_category">
+						<b>aplety­</b>&nbsp;
+						<span class="sub_numbers">[400]</span></a>
+						<br>
+					
+					<a href="http://www.linuxsoft.cz/sw_list.php?id_kategory=40" class="sub_category">
+						<b>vypalování­</b>&nbsp;
+						<span class="sub_numbers">[81]</span></a>
+						<br>
+					
+					<a href="http://www.linuxsoft.cz/sw_list.php?id_kategory=89" class="sub_category">
+						<b>zálohování­</b>&nbsp;
+						<span class="sub_numbers">[91]</span></a>
+						<br>
+					
+					<a href="http://www.linuxsoft.cz/sw_list.php?id_kategory=39" class="sub_category">
+						<b>komprese­</b>&nbsp;
+						<span class="sub_numbers">[42]</span></a>
+						<br>
+					
+					<a href="http://www.linuxsoft.cz/sw_list.php?id_kategory=83" class="sub_category">
+						<b>monitorování­</b>&nbsp;
+						<span class="sub_numbers">[437]</span></a>
+						<br>
+					
+					<a href="http://www.linuxsoft.cz/sw_list.php?id_kategory=78" class="sub_category">
+						<b>konverze­</b>&nbsp;
+						<span class="sub_numbers">[196]</span></a>
+						<br>
+					
+					<a href="http://www.linuxsoft.cz/sw_list.php?id_kategory=60" class="sub_category">
+						<b>souborové manažery­</b>&nbsp;
+						<span class="sub_numbers">[81]</span></a>
+						<br>
+					
+					<a href="http://www.linuxsoft.cz/sw_list.php?id_kategory=59" class="sub_category">
+						<b>systémové­</b>&nbsp;
+						<span class="sub_numbers">[333]</span></a>
+						<br>
+					
+					<a href="http://www.linuxsoft.cz/sw_list.php?id_kategory=61" class="sub_category">
+						<b>zpracování textu­</b>&nbsp;
+						<span class="sub_numbers">[141]</span></a>
+						<br>
+					
+					<a href="http://www.linuxsoft.cz/sw_list.php?id_kategory=76" class="sub_category">
+						<b>servery­</b>&nbsp;
+						<span class="sub_numbers">[278]</span></a>
+						<br>
+					
+					<a href="http://www.linuxsoft.cz/sw_list.php?id_kategory=127" class="sub_category">
+						<b>ostatní­</b>&nbsp;
+						<span class="sub_numbers">[1112]</span></a>
+						<br>
+				</span>
+				<span class="no_wrap">
+					<span id="splus19" class="plus" onclick="showMenu(19,'s')">&nbsp;</span>
+					
+					<a class="category" href="http://www.linuxsoft.cz/sw_list.php?id_kategory=72">
+					MOBILNÍ [102]</a>
+				</span>
+				<br>
+				<span id="s19" class="hide">
+					<a href="http://www.linuxsoft.cz/sw_list.php?id_kategory=85" class="sub_category">
+						<b>telefony­</b>&nbsp;
+						<span class="sub_numbers">[56]</span></a>
+						<br>
+					
+					<a href="http://www.linuxsoft.cz/sw_list.php?id_kategory=84" class="sub_category">
+						<b>PDA­</b>&nbsp;
+						<span class="sub_numbers">[19]</span></a>
+						<br>
+					
+					<a href="http://www.linuxsoft.cz/sw_list.php?id_kategory=99" class="sub_category">
+						<b>bluetooth­</b>&nbsp;
+						<span class="sub_numbers">[7]</span></a>
+						<br>
+					
+					<a href="http://www.linuxsoft.cz/sw_list.php?id_kategory=128" class="sub_category">
+						<b>ostatní­</b>&nbsp;
+						<span class="sub_numbers">[19]</span></a>
+						<br>
+				</span>
+				<span class="no_wrap">
+					
+					<span class="minus" id="splus20">&nbsp;</span>
+					<a class="category" href="http://www.linuxsoft.cz/sw_list.php?id_kategory=38">
+					OSTATNÍ [86]</a>
+				</span>
+				<br>
+				<span id="s20" class="hide">
+					
+				</span>
+			</div>
+			<div class="sub_title_gray" style="margin-bottom: 5px;">
+				<img alt="&gt;" src="MySQL%20%2864%29%20-%20nad%20dotazy%20%C4%8Dten%C3%A1%C5%99%C5%AF_soubory/sipka2.png" height="15" width="15">
+				<a href="http://www.linuxsoft.cz/item_edit.php" class="cap_title" rel="nofollow">Vlož nový SW záznam</a>
+			</div>
+			<div class="sub_title_gray">
+				<img alt="&gt;" src="MySQL%20%2864%29%20-%20nad%20dotazy%20%C4%8Dten%C3%A1%C5%99%C5%AF_soubory/sipka2.png" height="15" width="15"> Distribuce&nbsp;(108)
+				<span id="dplusAll" class="plus" onclick="showAll('d')" title="Rozbalit vše">&nbsp;</span>
+			</div>
+			<div class="menu"><span id="dplus1" class="plus" onclick="showMenu(1,'d');">&nbsp; </span><a class="category" href="http://www.linuxsoft.cz/distro_list.php?id_kategory=1">DISTRIBUCE&nbsp;[108]</a><br><span id="d1" class="hide"><a href="http://www.linuxsoft.cz/distro_list.php?id_kategory=187" class="sub_category"><b>BSD­</b>&nbsp;<span class="sub_numbers">[5]</span></a><br><a href="http://www.linuxsoft.cz/distro_list.php?id_kategory=2" class="sub_category"><b>komerční­</b>&nbsp;<span class="sub_numbers">[6]</span></a><br><a href="http://www.linuxsoft.cz/distro_list.php?id_kategory=4" class="sub_category"><b>bootovatelné­</b>&nbsp;<span class="sub_numbers">[50]</span></a><br><a href="http://www.linuxsoft.cz/distro_list.php?id_kategory=3" class="sub_category"><b>nekomerční­</b>&nbsp;<span class="sub_numbers">[36]</span></a><br></span></div>
+			<div class="sub_title_gray" style="margin-bottom: 5px;">
+				<img alt="&gt;" src="MySQL%20%2864%29%20-%20nad%20dotazy%20%C4%8Dten%C3%A1%C5%99%C5%AF_soubory/sipka2.png" height="15" width="15">
+				<a href="http://www.linuxsoft.cz/distribuce_edit.php" class="cap_title" rel="nofollow">Vlož novou distribuci</a>
+			</div>
+			<div class="sub_title_gray" title="Přehled skriptů a kusů zdrojového kódu">
+				<img alt="&gt;" src="MySQL%20%2864%29%20-%20nad%20dotazy%20%C4%8Dten%C3%A1%C5%99%C5%AF_soubory/sipka2.png" height="15" width="15"> Skripty&nbsp;&nbsp;(691)
+				<span id="cplusAll" class="plus" onclick="showAll('c')" title="Rozbalit/Sbalit vše">&nbsp;</span>
+			</div>
+			<div class="menu">
+				<span class="no_wrap"><span class="minus" id="cplus1">&nbsp;</span><a class="category" href="http://www.linuxsoft.cz/script_list.php?id_kategory=158">Python [2]</a></span><br><span id="c1" class=""></span><span class="no_wrap"><span class="minus" id="cplus2">&nbsp;</span><a class="category" href="http://www.linuxsoft.cz/script_list.php?id_kategory=157">PHP [80]</a></span><br><span id="c2" class=""></span><span class="no_wrap"><span class="minus" id="cplus3">&nbsp;</span><a class="category" href="http://www.linuxsoft.cz/script_list.php?id_kategory=159">ostatni [21]</a></span><br><span id="c3" class=""></span><span class="no_wrap"><span class="minus" id="cplus4">&nbsp;</span><a class="category" href="http://www.linuxsoft.cz/script_list.php?id_kategory=153">C++ [17]</a></span><br><span id="c4" class=""></span><span class="no_wrap"><span class="minus" id="cplus5">&nbsp;</span><a class="category" href="http://www.linuxsoft.cz/script_list.php?id_kategory=189">HTML [12]</a></span><br><span id="c5" class=""></span><span class="no_wrap"><span class="minus" id="cplus6">&nbsp;</span><a class="category" href="http://www.linuxsoft.cz/script_list.php?id_kategory=155">Javascript [552]</a></span><br><span id="c6" class=""></span><span class="no_wrap"><span class="minus" id="cplus7">&nbsp;</span><a class="category" href="http://www.linuxsoft.cz/script_list.php?id_kategory=156">Perl [4]</a></span><br><span id="c7" class=""></span><span class="no_wrap"><span class="minus" id="cplus8">&nbsp;</span><a class="category" href="http://www.linuxsoft.cz/script_list.php?id_kategory=154">Java [4]</a></span><br><span id="c8" class=""></span>
+			</div>
+			<div class="sub_title_gray" style="margin-bottom: 5px;">
+				<img alt="&gt;" src="MySQL%20%2864%29%20-%20nad%20dotazy%20%C4%8Dten%C3%A1%C5%99%C5%AF_soubory/sipka2.png" height="15" width="15">
+				<a href="http://www.linuxsoft.cz/script_edit.php" class="cap_title" rel="nofollow">Vlož nový skript</a>
+			</div>
+			<div class="sub_title_gray">
+				<img alt="&gt;" src="MySQL%20%2864%29%20-%20nad%20dotazy%20%C4%8Dten%C3%A1%C5%99%C5%AF_soubory/sipka2.png" height="15" width="15">
+				<a href="http://www.linuxsoft.cz/distro_list.php" class="cap_title">Top Distribuce</a>
+			</div>
+			<table border="0" cellpadding="3" cellspacing="0" width="100%">
+				<tbody><tr class="">
+					<td align="center" width="15%">
+						<b class="bigger white">1.</b>
+					</td>
+					<td width="85%">
+						<a class="top_5" href="http://www.linuxsoft.cz/distribuce_detail.php?id_distribuce=139">Ubuntu Linux</a><br>
+						<b>Staženo:</b> 73513x<br>
+					</td>
+				</tr>
+				
+				<tr class="bg_darker">
+					<td align="center" width="15%">
+						<b class="bigger">2.</b>
+					</td>
+					<td width="85%">
+						<a class="top_5" href="http://www.linuxsoft.cz/distribuce_detail.php?id_distribuce=49">Aurox Linux</a><br>
+						<b>Staženo:</b> 37146x<br>
+					</td>
+				</tr>
+				
+				<tr class="">
+					<td align="center" width="15%">
+						<b class="bigger white">3.</b>
+					</td>
+					<td width="85%">
+						<a class="top_5" href="http://www.linuxsoft.cz/distribuce_detail.php?id_distribuce=10">DaNiX</a><br>
+						<b>Staženo:</b> 26309x<br>
+					</td>
+				</tr>
+			</tbody></table>
+			<div class="sub_title_gray">
+				<img alt="&gt;" src="MySQL%20%2864%29%20-%20nad%20dotazy%20%C4%8Dten%C3%A1%C5%99%C5%AF_soubory/sipka2.png" height="15" width="15">
+				<a href="http://www.linuxsoft.cz/sw_list.php" class="cap_title">Top Software</a>
+			</div>
+			<table border="0" cellpadding="3" cellspacing="0" width="100%">
+				<tbody><tr class="">
+					<td align="center" width="15%">
+						<b class="bigger white">1.</b>
+					</td>
+					<td width="85%">
+						<a class="top_5" href="http://www.linuxsoft.cz/sw_detail.php?id_item=37">MPlayer</a><br>
+						<b>Staženo:</b> 141033x<br>
+					</td>
+				</tr>
+				
+				<tr class="bg_darker">
+					<td align="center" width="15%">
+						<b class="bigger">2.</b>
+					</td>
+					<td width="85%">
+						<a class="top_5" href="http://www.linuxsoft.cz/sw_detail.php?id_item=104">Corel PHOTO-PAINT</a><br>
+						<b>Staženo:</b> 102133x<br>
+					</td>
+				</tr>
+				
+				<tr class="">
+					<td align="center" width="15%">
+						<b class="bigger white">3.</b>
+					</td>
+					<td width="85%">
+						<a class="top_5" href="http://www.linuxsoft.cz/sw_detail.php?id_item=127">GNOME Commander</a><br>
+						<b>Staženo:</b> 86305x<br>
+					</td>
+				</tr>
+			</tbody></table>
+			<div class="sub_title_gray">
+				<img alt="&gt;" src="MySQL%20%2864%29%20-%20nad%20dotazy%20%C4%8Dten%C3%A1%C5%99%C5%AF_soubory/sipka2.png" height="15" width="15">
+				Menu
+			</div>
+			<div class="menu">
+				<a href="http://www.linuxsoft.cz/linux_wallpapers/" class="category"><img alt="&gt;" src="MySQL%20%2864%29%20-%20nad%20dotazy%20%C4%8Dten%C3%A1%C5%99%C5%AF_soubory/plus.png" border="0" height="9" hspace="4" width="9">WALLPAPERS</a><br>
+				<!--<a href="screenshot_list.php" class="category"><img alt="&gt;" hspace="4" border="0" height="9" width="9" src="img/plus.png" />SCREENSHOTY</a><br />-->
+				<a href="http://www.linuxsoft.cz/patek/" class="category"><img alt="&gt;" src="MySQL%20%2864%29%20-%20nad%20dotazy%20%C4%8Dten%C3%A1%C5%99%C5%AF_soubory/plus.png" border="0" height="9" hspace="4" width="9">LINUXOVÝ PÁTEK</a><br>
+				<a href="http://www.linuxsoft.cz/kurzy/" class="category"><img alt="&gt;" src="MySQL%20%2864%29%20-%20nad%20dotazy%20%C4%8Dten%C3%A1%C5%99%C5%AF_soubory/plus.png" border="0" height="9" hspace="4" width="9">KURZY</a><br>
+				<a href="http://www.linuxsoft.cz/soutez.php" class="category"><img alt="&gt;" src="MySQL%20%2864%29%20-%20nad%20dotazy%20%C4%8Dten%C3%A1%C5%99%C5%AF_soubory/plus.png" border="0" height="9" hspace="4" width="9">SOUTĚŽ - SW</a><br>
+				<!--	<a href="soutez_skripty.php" class="category"><img alt="&gt;" hspace="4" border="0" height="9" width="9" src="img/plus.png" />SOUTĚŽ - SKRIPTY</a><br /> -->
+				<a href="http://www.linuxsoft.cz/index.php?part=links" class="category"><img alt="&gt;" src="MySQL%20%2864%29%20-%20nad%20dotazy%20%C4%8Dten%C3%A1%C5%99%C5%AF_soubory/plus.png" border="0" height="9" hspace="4" width="9">ODKAZY</a><br>
+				<a href="http://www.linuxsoft.cz/export/" class="category"><img alt="&gt;" src="MySQL%20%2864%29%20-%20nad%20dotazy%20%C4%8Dten%C3%A1%C5%99%C5%AF_soubory/plus.png" border="0" height="9" hspace="4" width="9">EXPORT DAT (RSS)</a><br>
+			</div>
+			<div class="sub_title_gray">
+				<img alt="&gt;" src="MySQL%20%2864%29%20-%20nad%20dotazy%20%C4%8Dten%C3%A1%C5%99%C5%AF_soubory/sipka2.png" height="15" width="15">
+				Diskuze
+			</div>
+			<div class="menu">
+				<a href="http://www.linuxsoft.cz/diskuze_list.php" class="category"><img alt="&gt;" src="MySQL%20%2864%29%20-%20nad%20dotazy%20%C4%8Dten%C3%A1%C5%99%C5%AF_soubory/plus.png" border="0" height="9" hspace="4" width="9">VŠECHNY DISKUZE</a><br>
+				<a href="http://www.linuxsoft.cz/diskuze_list.php?type_item=8" class="category"><img alt="&gt;" src="MySQL%20%2864%29%20-%20nad%20dotazy%20%C4%8Dten%C3%A1%C5%99%C5%AF_soubory/plus.png" border="0" height="9" hspace="4" width="9">DISKUZNÍ FÓRUM</a><br>
+				<a href="http://www.linuxsoft.cz/diskuze_list.php?type_item=0" class="category"><img alt="&gt;" src="MySQL%20%2864%29%20-%20nad%20dotazy%20%C4%8Dten%C3%A1%C5%99%C5%AF_soubory/plus.png" border="0" height="9" hspace="4" width="9">SOFTWARE</a><br>
+				<a href="http://www.linuxsoft.cz/diskuze_list.php?type_item=1" class="category"><img alt="&gt;" src="MySQL%20%2864%29%20-%20nad%20dotazy%20%C4%8Dten%C3%A1%C5%99%C5%AF_soubory/plus.png" border="0" height="9" hspace="4" width="9">DISTRIBUCE</a><br>
+				<a href="http://www.linuxsoft.cz/diskuze_list.php?type_item=7" class="category"><img alt="&gt;" src="MySQL%20%2864%29%20-%20nad%20dotazy%20%C4%8Dten%C3%A1%C5%99%C5%AF_soubory/plus.png" border="0" height="9" hspace="4" width="9">ZPRÁVIČKY</a><br>
+				<a href="http://www.linuxsoft.cz/diskuze_list.php?type_item=5" class="category"><img alt="&gt;" src="MySQL%20%2864%29%20-%20nad%20dotazy%20%C4%8Dten%C3%A1%C5%99%C5%AF_soubory/plus.png" border="0" height="9" hspace="4" width="9">ČLÁNKY</a><br>
+
+			</div>
+			<div class="sub_title_gray" style="margin-bottom: 5px;">
+			<a href="http://www.linuxsoft.cz/prispevek_edit.php?type_item=8" class="cap_title" rel="nofollow"><img alt="&gt;" src="MySQL%20%2864%29%20-%20nad%20dotazy%20%C4%8Dten%C3%A1%C5%99%C5%AF_soubory/sipka2.png" height="15" width="15"> Přidat příspěvek do fóra</a></div>
+			<div class="sub_title_gray">
+				<img alt="&gt;" src="MySQL%20%2864%29%20-%20nad%20dotazy%20%C4%8Dten%C3%A1%C5%99%C5%AF_soubory/sipka2.png" height="15" width="15"> Informace
+			</div>
+			<div class="menu">
+				<a href="http://www.linuxsoft.cz/index.php?part=o_nas" class="category"><img alt="&gt;" src="MySQL%20%2864%29%20-%20nad%20dotazy%20%C4%8Dten%C3%A1%C5%99%C5%AF_soubory/plus.png" border="0" height="9" hspace="4" width="9">TEAM</a><br>
+				<a href="http://www.linuxsoft.cz/index.php?part=support" class="category"><img alt="&gt;" src="MySQL%20%2864%29%20-%20nad%20dotazy%20%C4%8Dten%C3%A1%C5%99%C5%AF_soubory/plus.png" border="0" height="9" hspace="4" width="9">PODPOŘTE NÁS</a><br>
+				<a href="http://www.hucek.cz/stats/linuxsoft" class="category"><img alt="&gt;" src="MySQL%20%2864%29%20-%20nad%20dotazy%20%C4%8Dten%C3%A1%C5%99%C5%AF_soubory/plus.png" border="0" height="9" hspace="4" width="9">STATISTIKY</a><br>
+				<a href="http://www.linuxsoft.cz/index.php?part=top_ten" class="category"><img alt="&gt;" src="MySQL%20%2864%29%20-%20nad%20dotazy%20%C4%8Dten%C3%A1%C5%99%C5%AF_soubory/plus.png" border="0" height="9" hspace="4" width="9">TOP TEN</a><br>
+				<a href="http://www.linuxsoft.cz/index.php?part=blacklist" class="category"><img alt="&gt;" src="MySQL%20%2864%29%20-%20nad%20dotazy%20%C4%8Dten%C3%A1%C5%99%C5%AF_soubory/plus.png" border="0" height="9" hspace="4" width="9">BLACKLIST</a><br>
+
+<!--                                <a href="todo/" class="category"><img alt="&gt;" hspace="4" border="0" height="9" width="9" src="img/plus.png" />TODO LIST</a><br />  -->
+
+	<div class="menu">
+		<a href="http://tuxnet.linuxzone.cz/" target="_blank" class="category">
+			<img alt="&gt;" src="MySQL%20%2864%29%20-%20nad%20dotazy%20%C4%8Dten%C3%A1%C5%99%C5%AF_soubory/plus.png" border="0" height="9" hspace="4" width="9">TUXNET</a><!-- , 
+			<a href="http://vasesit.cz" target="_blank" class="category">LAM s.r.o.</a>-->
+			<!-- nefunkcni link, <a href="http://qwert.cz" target="_blank" class="category">QWERT</a>--><br>
+		<a href="http://olinuxu.cz/" class="category">
+			<img alt="&gt;" src="MySQL%20%2864%29%20-%20nad%20dotazy%20%C4%8Dten%C3%A1%C5%99%C5%AF_soubory/plus.png" border="0" height="9" hspace="4" width="9">o Linuxu</a>
+	</div>
+
+
+
+
+
+
+
+<a name="left_end" id="left_end"></a></div></td>
+
+<td class="articles" style="padding: 5px;" valign="top" width="56%">
+   
+
+
+
+
+
+
+ 
+
+ 
+
+ 
+			
+ 
+			
+
+			
+
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+
+			
+			
+			
+			 
+			
+			
+			
+			
+			
+			
+			
+			
+			
+			
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- goldenfishovo reklamy -->
+<div style="padding-top: 5px;" align="center">
+<script type="text/javascript"><!--
+google_ad_client = "pub-2817499897700765";
+google_ad_width = 468;
+google_ad_height = 60;
+google_ad_format = "468x60_as";
+google_ad_type = "text_image";
+//2007-10-20: linuxsoft.cz
+google_ad_channel = "2663956472";
+google_color_border = "000000";
+google_color_bg = "FFFFFF";
+google_color_link = "0000FF";
+google_color_text = "000000";
+google_color_url = "006600";
+//-->
+</script>
+<script type="text/javascript" src="MySQL%20%2864%29%20-%20nad%20dotazy%20%C4%8Dten%C3%A1%C5%99%C5%AF_soubory/show_ads.js">
+</script><iframe name="google_ads_frame" src="MySQL%20%2864%29%20-%20nad%20dotazy%20%C4%8Dten%C3%A1%C5%99%C5%AF_soubory/ads.htm" marginwidth="0" marginheight="0" vspace="0" hspace="0" allowtransparency="true" frameborder="0" height="60" scrolling="no" width="468"></iframe>
+</div>
+
+
+
+
+
+
+
+
+<h2><img src="MySQL%20%2864%29%20-%20nad%20dotazy%20%C4%8Dten%C3%A1%C5%99%C5%AF_soubory/sipka1.png" alt="&gt;" height="15" width="15"> MySQL (64) - nad dotazy čtenářů</h2>
+<p class="perex">Dnes trochu netradičně. Neboli, co se urodilo v mojí e-mailové schráce od doby, kdy začal vycházet seriál o MySQL.<br><br>
+<b>24.3.2006 06:00 | <a class="user_link" href="http://www.linuxsoft.cz/user_page.php?user_id=1428" title="info o autorovi">Petr Zajíc</a> | přečteno 5818×</b>
+</p>
+
+<p class="perex">Komerční sdělení:  Pořádáme <a href="http://www.linuxsoft.cz/kurzy/mysql.php">Kurzy MySQL</a></p>
+
+
+<p>Dnešní díl bude tak trochu mimo zavedené pořadí. Pokusím se totiž
+reagovat na řadu e-mailů a otázek, které se seriálu týkají a které
+stojí za to zodpovědět v samostatném článku. Budou to dotazy
+organizační, technické a rovněž nějaké autorsko-právní.<br>
+</p>
+<p>Ještě než se pustím do zodpovídání konkrétních věcí, chtěl bych
+všechny, kdo mi v souvislosti se seriálem o MySQL píší pochválit.
+Dotazy - a musím říct, že tentokrát naprosto všechny - jsou velmi
+inteligentní a fundované. Může to být tím, že s databázemi pracují
+chytří lidé, může to také znamenat, že čtenáři linuxsoftu jsou ti
+nejlepší možní, každopádně jsem skutečně za rok, kdy seriál vychází
+nezaznamenal žádný hloupý, sprostý nebo arogantní příspěvek. Takže teď
+vzhůru k tomu, na co se ptáte.<br>
+</p>
+<h2>Organizační věci</h2>
+<p>Seriál vychází jednou týdně; zatím to vypadá, že není důvod nějak to
+měnit. Redakce má filozofii vydávat jeden článek denně, a protože MySQL
+není středobodem vesmíru (ani linuxu), přijde nám to jako dobrý
+kompromis mezi extrémy. Počet dílů seriálu není předem určen,
+teoreticky se <span style="font-style: italic;">může </span>vyšplhat
+až k nějaké stovce dílů, ale nebudeme to záměrně prodlužovat. <br>
+</p>
+<p>Pokud v seriálu nějaké informace postrádáte, zkuste se svěřit v
+diskusi pod libovolným článkem. Diskuse samozřejmě pravidelně čtu a
+podle možností v nich odpovídám. Na seriál mám osnovu, nicméně je
+možné, že jsem něčemu věnoval málo prostoru nebo že jsem něco vynechal.
+MySQL je obrovské téma a budu jen rád, když mi dáte vědět, na co bych
+se ještě mohl zaměřit.<br>
+</p>
+<p>Pár dotazů přišlo k tomu, nakolik by seriál měl nebo neměl
+korespondovat s oficiální dokumentací k MySQL. Odpověď je ta, že manuál
+a seriál jsou dvě různé věci. Mám vcelku odpor k článkům, které jsou de
+facto pouhým překladem dokumentace; takže se usilovně snažím psát spíš
+z vlastní hlavy, než že bych překládal originální "návod k použití". V
+seriálu ale existuje řada odkazů na originální dokumentaci. Vím, že
+odkazuji na anglické stránky, ale pokud to s programováním a databázemi
+myslíte vážně, pak jistě alespoň trochu anglicky umíte.<br>
+</p>
+<p>Někdy chce vědět tazatel hodně věcí. Tady bych doporučil školení k
+MySQL, které linuxsoft pořádá a na které je upoutávka v záhlaví každého
+článku ze série. Jako autor neorganizuji žádná školení k MySQL (a i
+kdyby ano, nebylo by fér dělat si tady reklamu). Rovněž Vám většinou
+nebudu schopen zodpovědět dotazy, které vyžadují spoustu času nebo
+které by znamenaly nějak výrazně se podílet na Vašich projektech.<br>
+</p>
+<h2>Technické dotazy</h2>
+<p>Tady jsem vybral nejčastější dotazy technického směru - tedy na
+použití MySQL v praxi. Některé z nich jsou do jisté míry zodpovězeny v
+souvisejících dílech seriálu, takže někdy stačí jen číst v
+souvislostech. O jiných jsem moc nemluvil, takže to teď napravím.<br>
+</p>
+<h3>Dá se řadit podle rozdílu hodnot ve dvou sloupcích?</h3>
+<p>Ano, klauzule ORDER BY podporuje výrazy. Například tohle projde:</p>
+<!-- Zaza PHP kód BEGIN -->
+<div class="codes"><code><font color="#000000">create table
+rozdil(jedna int, dva int);
+<br>
+insert into rozdil (jedna, dva) values (10,5);
+<br>
+insert into rozdil (jedna, dva) values (5,1);
+<br>
+insert into rozdil (jedna, dva) values (7,3);
+<br>
+insert into rozdil (jedna, dva) values (8,8);
+<br>
+insert into rozdil (jedna, dva) values (100,1);
+<br>
+select * from rozdil order by jedna-dva;
+</font></code></div>
+<!-- Zaza PHP kód END -->
+<p><span style="font-style: italic;">Pozn.: Krajně opatrní však musíte
+být při řazení podle podílu
+sloupců. Pozor totiž na dělení nulou - to by neprošlo.<br>
+</span></p>
+<h3>Operace s daty/časem, rozdíl mezi daty, jak na to?</h3>
+<p>Tady vyjímečně dobře zafunguje <a href="http://dev.mysql.com/doc/refman/5.0/en/date-and-time-functions.html">originální
+manuál</a>. Záznamy ne starší než 3 měsíce například z tabulky pohodlně
+vyberete stylem: </p>
+<!-- Zaza PHP kód BEGIN -->
+<div class="codes"><code><font color="#000000">SELECT * FROM tabulka
+WHERE DATE_SUB(CURDATE(),INTERVAL 3 MONTH) &lt;= Datum;
+<br>
+</font></code></div>
+<!-- Zaza PHP kód END -->
+<h3>Vícenásobné spojení s tou samou tabulkou (častý dotaz!)<br>
+</h3>
+<p>V podstatě jde o to, jak v dotazu použít vícekrát odkaz na stejnou
+tabulku. Máte třeba seznam zaměstnanců a seznam úkolů. V seznamu úkolů
+je uvedeno kdo daný úkol zadal a komu ho zadal. Obě informace jsou ve
+formě cizího klíče do tabulky zaměstnanců. Příklad:</p>
+<!-- Zaza PHP kód BEGIN -->
+<div class="codes"><code><font color="#000000">create table lidi (id
+int, prijmeni varchar(50));
+<br>
+insert into lidi (id, prijmeni) values (1, 'Novák');
+<br>
+insert into lidi (id, prijmeni) values (2, 'Horák');
+<br>
+insert into lidi (id, prijmeni) values (3, 'Procházka');
+<br>
+insert into lidi (id, prijmeni) values (4, 'Jandera');
+<br>
+insert into lidi (id, prijmeni) values (5, 'Holý');
+<br>
+insert into lidi (id, prijmeni) values (6, 'Holík');
+<br>
+insert into lidi (id, prijmeni) values (7, 'Pazdera');
+<br>
+<br>
+create table ukoly (kdozadal int, komuzadal int, popis varchar (50));
+<br>
+insert into ukoly (kdozadal, komuzadal, popis) values (2,5,'Udělat
+seznam zákazníků');
+<br>
+insert into ukoly (kdozadal, komuzadal, popis) values
+(3,1,'Obtelefonovat dodavatele');
+<br>
+insert into ukoly (kdozadal, komuzadal, popis) values (4,2,'Vyřídit
+reklamaci');
+<br>
+insert into ukoly (kdozadal, komuzadal, popis) values (5,3,'Vyměnit
+uklizečku');
+<br>
+insert into ukoly (kdozadal, komuzadal, popis) values (1,4,'Jít na
+oběd');
+</font></code></div>
+<!-- Zaza PHP kód END -->
+<p>Řešení je v použití aliasů tabulky lidi a může vypadat nějak takto</p>
+<!-- Zaza PHP kód BEGIN -->
+<div class="codes"><code><font color="#000000">select
+kdozadal.prijmeni, komuzadal.prijmeni, ukoly.popis <br>
+from ukoly join <span style="font-weight: bold;">lidi as kdozadal</span>
+on ukoly.kdozadal =<span style="font-weight: bold;"> kdozadal.id</span>
+<br>
+join <span style="font-weight: bold;">lidi as komuzadal</span> on
+ukoly.komuzadal = <span style="font-weight: bold;">komuzadal.id</span>;
+<br>
+</font></code></div>
+<!-- Zaza PHP kód END -->
+<p>(klíčové prvky jsem zdůraznil kurzívou)<br>
+</p>
+<h3>Jak ukládat do MySQL "stromová" data?</h3>
+<p>Úkol je jasný - máte například zaměstnance a podřízeného
+zaměstnance. Ti tvoří strukturu, která se může rozšiřovat jak do šířky,
+tak do hloubky - tedy strom. Pracovat efektivně se stromy pomocí jazyka
+SQL je náročné. Po zralé úvaze jsem se rozhodl to do seriálu NEDAT. Pár
+odkazů jinam: <a href="http://www.root.cz/clanky/stromy/">článek na
+root</a>, <a href="http://www.abclinuxu.cz/clanky/navody/stromy-v-sql">špičkový
+článek na abclinuxu</a>. <br>
+</p>
+<p style="font-style: italic;">Pozn.: Tip pro znalé - genealogické
+stromy jsou v MySQL díky rychlému LIKE velmi výkonné.</p>
+<h3>Ukládání dat do databáze pomocí PHP (častý dotaz!)<br>
+</h3>
+<p>Otázka: Při ukládání dat pomocí PHP dojde k situaci, kdy po uložení
+a refreshi stránky se data vloží dvakrát. To mi vadí. Neexistuje na to
+nějaký trik, jak tomu zabránit?<br>
+</p>
+<p>Odpověď: Ano, existuje trik. Spočívá v tom vědět, že na linuxsoftu
+máme <a href="http://www.linuxsoft.cz/php">seriál o PHP</a> a že jeden
+z dílů to <a href="http://www.linuxsoft.cz/article.php?id_article=357">řeší</a>.<br>
+</p>
+<h3>Jak udělat dobrý návrh databáze</h3>
+<p>Bohužel tady řadu tazatelů moc nepotěším, ale upřímně řečeno funguje
+to takto:<br>
+</p>
+<ol>
+  <li>Udělejte několik špatných návrhů databáze. <br>
+  </li>
+  <li>Zjistěte, proč byly špatné</li>
+  <li>Udělejte další návrhy databáze - ty budou dobré.</li>
+</ol>
+<p>Jinými slovy: Přestože existují poučky o vývojových cyklech,
+normalizaci databází a tak dále, je třeba si uvědomit, že k dobrému
+návrhu databáze musíte mít selský rozum, špetku intuice a mraky
+zkušeností. Na něco takového neexistuje e-mailová rada.<br>
+</p>
+<h3>Existuje dobrá česká kniha o MySQL?</h3>
+<p>Znám celou řadu špatných českých knih o MySQL. Chtěl by někdo
+poradit nějakou dobrou? Jestliže ano, šup s tím do diskuse!</p>
+<h2>Autorsko-právní záležitosti</h2>
+<p>Ještě jednou děkuji všem, komu se seriál líbí. Je třeba si uvědomit,
+že jakmile je článek napsán a uveřejněn, stává se majetkem redakce
+linuxsoftu. Tudíž já jako autor už s ním nemůžu dále disponovat. Není
+například možné, abych stejný článek uveřejnil někde jinde. V
+záležitostech kolem případného použití informací z článku - jako je
+jejich přetištění - byste se měli obrátit na redakci. Následuje seznam
+otázek, na které nemůžu dát smysluplnou odpověď:<br>
+</p>
+<ul>
+  <li>Vyjde seriál vcelku? Třeba jako PDF?</li>
+  <li>Vyjde seriál i v "papírové" podobě</li>
+  <li>Plánujete uveřejnění seriálu na CD/DVD apod?</li>
+  <li>Můžu část/celý seriál přetisknout do svých materiálů/zveřejnit na
+svém webu</li>
+</ul>
+<p>Čistě pro úplnost dodávám - taky se na to někdo ptal - že informace
+z článku samozřejmě MŮŽETE použít ve svých projektech, databázích nebo
+výzkumech. K tomu seriál slouží a jsem rád, pokud si někdo díky čtení
+linuxsoftu rozšíří obzory.</p>
+<p align="right"><a href="http://www.linuxsoft.cz/article_print.php?id_article=1154" class="user_link">Verze pro tisk</a></p>
+
+
+<center>
+<script type="text/javascript"><!--
+google_ad_client = "pub-4630896191785122";
+google_ad_width = 468;
+google_ad_height = 60;
+google_ad_format = "468x60_as";
+google_ad_type = "text";
+google_ad_channel = "";
+google_color_border = "000000";
+google_color_bg = "FFFFFF";
+google_color_link = "FF6600";
+google_color_text = "000000";
+google_color_url = "006600";
+//--></script>
+<!--
+<script type="text/javascript"
+  src="http://pagead2.googlesyndication.com/pagead/show_ads.js">
+</script>
+-->
+</center> <br>
+<div class="links">
+	<a name="souvisejici"><b>Související články</b></a><br>
+	<a href="http://www.linuxsoft.cz/article.php?id_article=731">MySQL (1) - pestrý svět databází</a><br><a href="http://www.linuxsoft.cz/article.php?id_article=736">MySQL (2) - Instalujeme databázi MySQL</a><br><a href="http://www.linuxsoft.cz/article.php?id_article=738">MYSQL (3) Instalujeme MySQL podruhé</a><br><a href="http://www.linuxsoft.cz/article.php?id_article=744">MySQL (4) - něco terminologie</a><br><a href="http://www.linuxsoft.cz/article.php?id_article=751">MySQL (5) - tajuplné SQL</a><br><a href="http://www.linuxsoft.cz/article.php?id_article=760">MySQL (6) - Ukládáme řetězce</a><br><a href="http://www.linuxsoft.cz/article.php?id_article=768">MySQL (7) - hrátky s čísly</a><br><a href="http://www.linuxsoft.cz/article.php?id_article=776">MySQL (8) - Ukládání datumů</a><br><a href="http://www.linuxsoft.cz/article.php?id_article=784">MySQL (9) - Další datové typy</a><br><a href="http://www.linuxsoft.cz/article.php?id_article=786">MySQL (10) - tvorba databáze. Základy DDL</a><br><a href="http://www.linuxsoft.cz/article.php?id_article=790">MySQL (11) - vytváříme tabulky</a><br><a href="http://www.linuxsoft.cz/article.php?id_article=801">MySQL (12) - tipy k tvorbě tabulek</a><br><a href="http://www.linuxsoft.cz/article.php?id_article=809">MySQL (13) - Vkládáme data</a><br><a href="http://www.linuxsoft.cz/article.php?id_article=810">MySQL (14) - Upravujeme data</a><br><a href="http://www.linuxsoft.cz/article.php?id_article=814">MySQL (15) - Odstraňujeme data</a><br><a href="http://www.linuxsoft.cz/article.php?id_article=816">MySQL (16) - Tipy a triky k manipulaci s daty</a><br><a href="http://www.linuxsoft.cz/article.php?id_article=818">MySQL (17) - vybíráme data</a><br><a href="http://www.linuxsoft.cz/article.php?id_article=819">MySQL (18) - Filtrujeme data</a><br><a href="http://www.linuxsoft.cz/article.php?id_article=826">MySQL (19) - Řadíme data</a><br><a href="http://www.linuxsoft.cz/article.php?id_article=827">MySQL (20) - spojení více tabulek</a><br><a href="http://www.linuxsoft.cz/article.php?id_article=837">MySQL (21) - klauzule JOIN</a><br><a href="http://www.linuxsoft.cz/article.php?id_article=841">MySQL (22) - tipy a triky ke spojování tabulek</a><br><a href="http://www.linuxsoft.cz/article.php?id_article=854">MySQL (23) - relace 1:N a N:N</a><br><a href="http://www.linuxsoft.cz/article.php?id_article=864">MySQL (24) - Seskupujeme záznamy</a><br><a href="http://www.linuxsoft.cz/article.php?id_article=872">MySQL (25) - hrátky se seskupenými záznamy</a><br><a href="http://www.linuxsoft.cz/article.php?id_article=877">MySQL (26) - Poddotazy</a><br><a href="http://www.linuxsoft.cz/article.php?id_article=882">MySQL (27) - Složitější dotazy</a><br><a href="http://www.linuxsoft.cz/article.php?id_article=886">MySQL (28) - Dotazy pro pokročilé</a><br><a href="http://www.linuxsoft.cz/article.php?id_article=901">MySQL (29) - Vracení nejvyšších záznamů</a><br><a href="http://www.linuxsoft.cz/article.php?id_article=906">MySQL (30) - průběžné součty</a><br><a href="http://www.linuxsoft.cz/article.php?id_article=912">MySQL (31) - Indexy</a><br><a href="http://www.linuxsoft.cz/article.php?id_article=914">MySQL (32) - ještě k indexům</a><br><a href="http://www.linuxsoft.cz/article.php?id_article=927">MySQL (33) - Příkaz UNION</a><br><a href="http://www.linuxsoft.cz/article.php?id_article=933">MySQL (34) - větvení kódu a pivotní tabulky</a><br><a href="http://www.linuxsoft.cz/article.php?id_article=941">MySQL (35) - vestavěné funkce</a><br><a href="http://www.linuxsoft.cz/article.php?id_article=946">MySQL (36) - Regulární výrazy</a><br><a href="http://www.linuxsoft.cz/article.php?id_article=952">MySQL (37) - použití fulltextového vyhledávání</a><br><a href="http://www.linuxsoft.cz/article.php?id_article=960">MySQL (38) - Fulltext a praxe</a><br><a href="http://www.linuxsoft.cz/article.php?id_article=968">MySQL (39) - typy tabulek v MySQL</a><br><a href="http://www.linuxsoft.cz/article.php?id_article=979">MySQL (40) - další typy tabulek</a><br><a href="http://www.linuxsoft.cz/article.php?id_article=989">MySQL (41) - Transakce</a><br><a href="http://www.linuxsoft.cz/article.php?id_article=996">MySQL (42) - ještě k transakcím</a><br><a href="http://www.linuxsoft.cz/article.php?id_article=1003">MySQL (43) - Uložené procedury</a><br><a href="http://www.linuxsoft.cz/article.php?id_article=1009">MySQL (44) - parametry uložených procedur</a><br><a href="http://www.linuxsoft.cz/article.php?id_article=1010">MySQL (45) - větvení kódu uložených procedur</a><br><a href="http://www.linuxsoft.cz/article.php?id_article=1019">MySQL (46) - Triggery</a><br><a href="http://www.linuxsoft.cz/article.php?id_article=1026">MySQL (47) - Triggery a praxe</a><br><a href="http://www.linuxsoft.cz/article.php?id_article=1034">MySQL (48) - UDF</a><br><a href="http://www.linuxsoft.cz/article.php?id_article=1037">MySQL (49) - pohledy</a><br><a href="http://www.linuxsoft.cz/article.php?id_article=1050">MySQL (50) - Pohledy podruhé</a><br><a href="http://www.linuxsoft.cz/article.php?id_article=1055">MySQL (51) - Metadata</a><br><a href="http://www.linuxsoft.cz/article.php?id_article=1064">MySQL (52) - A co zálohování?</a><br><a href="http://www.linuxsoft.cz/article.php?id_article=1070">MySQL (53) - SELECT INTO OUTFILE</a><br><a href="http://www.linuxsoft.cz/article.php?id_article=1077">MySQL (54) - zálohování MySQL z webu</a><br><a href="http://www.linuxsoft.cz/article.php?id_article=1081">MySQL (55) - zálohování MySQL z pohledu správce</a><br><a href="http://www.linuxsoft.cz/article.php?id_article=1089">MySQL (56) - Obnova zálohovaných dat</a><br><a href="http://www.linuxsoft.cz/article.php?id_article=1091">MySQL (57) - Ach, ta čeština</a><br><a href="http://www.linuxsoft.cz/article.php?id_article=1104">MySQL (58) - čeština v praxi</a><br><a href="http://www.linuxsoft.cz/article.php?id_article=1108">MySQL (59) - české řazení</a><br><a href="http://www.linuxsoft.cz/article.php?id_article=1114">MySQL (60) - řádkový klient</a><br><a href="http://www.linuxsoft.cz/article.php?id_article=1126">MySQL (61) - Oprávnění</a><br><a href="http://www.linuxsoft.cz/article.php?id_article=1133">MySQL (62) - Oprávnění podruhé</a><br><a href="http://www.linuxsoft.cz/article.php?id_article=1146">MySQL (63) - jemné nastavení práv</a><br><a href="http://www.linuxsoft.cz/article.php?id_article=1173">MySQL (65) - Ladíme server</a><br><a href="http://www.linuxsoft.cz/article.php?id_article=1193">MySQL (66) - Ještě k ladění serveru</a><br><a href="http://www.linuxsoft.cz/article.php?id_article=1204">MySQL - (67)</a><br><a href="http://www.linuxsoft.cz/article.php?id_article=1216">MySQL (68) - Závěr</a><br>
+	<br>
+	<a href="http://www.linuxsoft.cz/article.php?id_article=1146">Předchozí</a>
+	<a href="http://www.linuxsoft.cz/article_list.php?id_kategory=232" style="margin-left: 2em; margin-right: 2em;">Celou kategorii (seriál)</a>
+	<a href="http://www.linuxsoft.cz/article.php?id_article=1173">Další</a>
+	
+	
+</div>
+<table align="center" width="100%">
+<tbody><tr><td style="height: 1px;">&nbsp;</td></tr>
+<tr>
+<td colspan="2" style="padding-left: 8px; padding-right: 8px;" align="center">
+<div align="left"><h2><a name="diskuze" class="black"></a>DISKUZE</h2></div>
+<!-- PAVOUK DISKUSNIHO FORA -->
+<script language="JavaScript" type="text/javascript">
+<!--
+
+function Je_Oznaceno(formular)
+{
+var oznaceno_neco;
+var element;
+oznaceno_neco = 0;
+test_oznaceno = new RegExp("^pole_oznacene.*$");
+for (var i=0;i < document.formular.elements.length;i++)   {
+	element = document.formular.elements[i];
+	if( (test_oznaceno.test(element.name)) && (element.type == "checkbox") && (element.checked) ){
+                oznaceno_neco++;
+        }
+}
+if(oznaceno_neco > 0) return(true)
+else{
+	alert("Musí být vybrán alespoň jeden příspěvek.");
+	return(false)
+}
+}
+// --></script>
+<form action="diskuze.php" name="formular" method="get" onsubmit="return Je_Oznaceno(this)" style="display: inline;">
+<!-- vypis pavouka -->
+<table style="margin: 0px 0px 1em; padding: 0px; text-indent: 0px; display: inline;" border="0" cellpadding="0" cellspacing="0">
+<tbody><tr><td style="padding-right: 2em;">
+<input name="pole_oznacene[6811]" value="6811" class="checkbox_diskuze" type="checkbox">
+</td>
+<td>
+<span style="padding-right: 1em;">Knížky které bych už nekoupil</span>
+</td>
+<td>24.3.2006 07:05</td>
+<td colspan="19" style="padding-left: 1em;">MaReK Olšavský</td>
+</tr>
+<tr><td style="padding-right: 2em;">
+<input name="pole_oznacene[6812]" value="6812" class="checkbox_diskuze" type="checkbox">
+</td>
+<td><img src="MySQL%20%2864%29%20-%20nad%20dotazy%20%C4%8Dten%C3%A1%C5%99%C5%AF_soubory/strom_l.gif" alt="L" class="symboly" border="0">
+<span style="padding-right: 1em;">Re: Knížky které bych už nekoupil</span>
+</td>
+<td>24.3.2006 07:56</td>
+<td colspan="18" style="padding-left: 1em;">Petr Zajíc</td>
+</tr>
+<tr><td style="padding-right: 2em;">
+<input name="pole_oznacene[6815]" value="6815" class="checkbox_diskuze" type="checkbox">
+</td>
+<td>
+<span style="padding-right: 1em;">SQL a stromova data</span>
+</td>
+<td>24.3.2006 14:00</td>
+<td colspan="19" style="padding-left: 1em;">Lukas Svoboda</td>
+</tr>
+</tbody></table>
+<br><br>
+
+
+<!-- </td>
+ </tr>
+</table> -->
+
+<!--<tr>
+<td colspan="2" align="center">
+<table border="0" cellpadding="5">
+<tr>-->
+<!--<td>-->
+<div style="display: inline; margin-left: 30%;">
+<input name="akce" value="2" type="hidden">
+<input name="id_vazba" value="1154" type="hidden">
+<input name="type_item" value="5" type="hidden">
+<button type="submit" name="tl_1" value="Oznacene">Zobrazit označené</button>
+</div>
+</form>
+<!--</td>
+<td>--><form action="diskuze.php" name="formular_all" method="get" style="display: inline;">
+<input name="akce" value="3" type="hidden">
+<input name="id_vazba" value="1154" type="hidden">
+<input name="type_item" value="5" type="hidden">
+<button type="submit" name="tl_2" value="Vse" style="display: inline;">Zobrazit vše</button></form><!--</td>-->
+
+<!--<td>--><!--</td>
+</tr></table>-->
+
+<!--<div align="center">-->
+<br>
+<br>
+<cite style="padding-bottom: 12px; margin-top: 2em; text-align: center;">Příspívat do diskuze mohou pouze registrovaní uživatelé.<br></cite>
+<!--</div>-->
+
+</td></tr>
+
+</tbody></table>
+
+</td>
+
+
+<td class="orange" valign="top" width="22%">
+
+<div class="sub_title_orange">
+<img alt="&gt;" src="MySQL%20%2864%29%20-%20nad%20dotazy%20%C4%8Dten%C3%A1%C5%99%C5%AF_soubory/sipka2.png" height="15" width="15">
+Vyhledávání software
+</div>
+<div class="menu" style="padding-top: 7px;" align="center">
+<form name="search_sw" action="sw_list.php" method="get">
+<input name="search_world" value="" size="20" type="text">
+<input name="tlacitko" value="Hledat" type="submit"><br>
+</form>
+</div>
+<div class="sub_title_orange">
+<img alt="&gt;" src="MySQL%20%2864%29%20-%20nad%20dotazy%20%C4%8Dten%C3%A1%C5%99%C5%AF_soubory/sipka2.png" height="15" width="15">
+Vyhledávání článků
+</div>
+<div class="menu" style="padding-top: 7px; padding-bottom: 7px;" align="center">
+<form action="article_list.php" method="get">
+<input name="search_article" value="" size="20" type="text">
+<input name="odesli" value="Hledat" type="submit"><br>
+</form>
+</div>
+<!-- <div class="sub_title_orange">
+<img alt="&gt;" src="../img/sipka2.png" height="15" width="15">
+Vyhledávání v shopu
+</div>
+<div class="menu" style="padding-top: 7px; padding-bottom: 7px;" align="center">
+<form action="/shop/?search" method="get">
+<input name="q" value="" size="20" type="text">
+<input name="search" value="Hledat" type="submit"><br>
+</form>
+</div> -->
+<div class="sub_title_orange" style="margin-bottom: 5px;">
+<img alt="&gt;" src="MySQL%20%2864%29%20-%20nad%20dotazy%20%C4%8Dten%C3%A1%C5%99%C5%AF_soubory/sipka2.png" height="15" width="15">
+<a href="http://www.linuxsoft.cz/search.php" class="cap_title" title="Rozšířené vyhledávání v článcích a software">Rozšířené vyhledávání</a>
+</div>
+
+<!--
+Actinet block
+commented by Pavel Kysilka - provozovatel linuxsoft.cz
+mail me to goldenfish a pripojit linuxsoft.cz
+-->
+<!--
+<div class="sub_title_orange">
+<img alt="&gt;" height="15" width="15" src="img/sipka2.png">
+Security News
+</div>
+-->
+
+<div class="sub_title_orange">
+<img alt="&gt;" src="MySQL%20%2864%29%20-%20nad%20dotazy%20%C4%8Dten%C3%A1%C5%99%C5%AF_soubory/sipka2.png" height="15" width="15">
+<a href="http://www.linuxsoft.cz/message_list.php" class="cap_title" title="Přehled krátkých zpráv nejen ze světa Linuxu">Linux News</a>
+</div><p class="news">
+<a href="http://www.linuxsoft.cz/message_edit.php">Přidat zprávičku</a>
+&nbsp;&nbsp;&nbsp;<a href="http://www.linuxsoft.cz/message_list.php">Více</a>
+</p>
+<p class="news"><b>30.5.2008 06:11</b> <strong>/</strong><a href="http://www.linuxsoft.cz/user_page.php?user_id=1804"><small>MaReK Olšavský</small></a><br>Novell potichu <a href="http://www.linux.com/feature/136608">uvolnil Moonlight</a>, který je OSS verzí technologie Silverlight od Microsoftu. Dostane Adobe Flash mocného konkurenta?<br><a href="http://www.linuxsoft.cz/prispevek_edit.php?predek=0&amp;id_vazba=6909&amp;type_item=7">Přidat komentář</a></p><p class="news"><b>30.5.2008 06:06</b> <strong>/</strong><a href="http://www.linuxsoft.cz/user_page.php?user_id=1804"><small>MaReK Olšavský</small></a><br>Na webu <a href="http://www.linuxjournal.com/">Linux Journalu</a> vyšel <a href="http://www.linuxjournal.com/content/give-me-3-synths-part-3">3.&nbsp;díl seriálu o softwarových syntetizátorech</a>. Inspiruje některého z&nbsp;hudebních tvůrců, aby začal využívat GNU/Linux, nebo *BSD?<br><a href="http://www.linuxsoft.cz/prispevek_edit.php?predek=0&amp;id_vazba=6908&amp;type_item=7">Přidat komentář</a></p><p class="news"><b>30.5.2008 06:03</b> <strong>/</strong><a href="http://www.linuxsoft.cz/user_page.php?user_id=1804"><small>MaReK Olšavský</small></a><br>Google <a href="http://androidcommunity.com/first-live-images-of-fullscreen-android-demo-20080528/"> předvedl mobilní platformu Andriod</a>,
+ale datum první finální verze je stále neznámé. Dá se očekávat, že
+o&nbsp;telefony na platformě Andriod bude větší zájem, než
+o&nbsp;iPhone.<br><a href="http://www.linuxsoft.cz/prispevek_edit.php?predek=0&amp;id_vazba=6907&amp;type_item=7">Přidat komentář</a></p><p class="news"><b>29.5.2008 06:20</b> <strong>/</strong><a href="http://www.linuxsoft.cz/user_page.php?user_id=1804"><small>MaReK Olšavský</small></a><br>Na webu <a href="http://www.howtoforge.com/">HowtoForge</a> vyšel článek <a href="http://www.howtoforge.com/redundant-array-of-inexpensive-disks-raid-technical-paper">popisující varianty RAIDu</a> i&nbsp;s&nbsp;návodem pro vytvoření RAID-1 pole pod GNU/Linuxem.<br><a href="http://www.linuxsoft.cz/prispevek_edit.php?predek=0&amp;id_vazba=6906&amp;type_item=7">Přidat komentář</a></p><p class="news"><b>29.5.2008 06:10</b> <strong>/</strong><a href="http://www.linuxsoft.cz/user_page.php?user_id=1804"><small>MaReK Olšavský</small></a><br>Pokud jste uživateli Wordpressu, jako já, mohl by vám pomoci <a href="http://www.linux.com/feature/135841">souhrn generátorů sitemap</a>, který vyšel na stránkách <a href="http://www.linux.com/">Linux.com</a>. Sitemap usnadňuje práci fulltextovým vyhledávačům.<br><a href="http://www.linuxsoft.cz/prispevek_edit.php?predek=0&amp;id_vazba=6905&amp;type_item=7">Přidat komentář</a></p><p class="news"><b>29.5.2008 05:59</b> <strong>/</strong><a href="http://www.linuxsoft.cz/user_page.php?user_id=1804"><small>MaReK Olšavský</small></a><br>Nejpopulárnějšími
+PDA byly donedávna výrobky s&nbsp;operačním systémem PalmOS a mezi
+příznivci Linuxu jsou dodnes velmi oblíbené. Malé připomenutí minulosti
+a <a href="http://apcmag.com/palm_readies_nextgen_web_20_os.htm">vyhlídky do budoucna Palmu</a> mohou čtenáři nalézt na webu <a href="http://apcmag.com/">APCMag</a>, kde vyšel rozhovor s&nbsp;Edem Colliganem.<br><a href="http://www.linuxsoft.cz/prispevek_edit.php?predek=0&amp;id_vazba=6904&amp;type_item=7">Přidat komentář</a></p><p class="news"><b>29.5.2008 05:51</b> <strong>/</strong><a href="http://www.linuxsoft.cz/user_page.php?user_id=1804"><small>MaReK Olšavský</small></a><br>OSS hýbe světem a je podporován i&nbsp;mnoha vládními organizacemi. <a href="http://www.theinquirer.net/gb/inquirer/news/2008/05/27/dutch-gov-releases-open-source">Nizozemská vláda uvolnila OSS nástroj</a>, který slouží k&nbsp;převodu formátů MS Office do ODF.<br><a href="http://www.linuxsoft.cz/prispevek_edit.php?predek=0&amp;id_vazba=6903&amp;type_item=7">Přidat komentář</a></p><p class="news"><b>28.5.2008 10:24</b> <strong>/</strong><a href="http://www.linuxsoft.cz/user_page.php?user_id=1804"><small>MaReK Olšavský</small></a><br>Zajímavá informace vyšla <a href="http://www.lidovky.cz/">Lidových novinách</a>, televize N@va <a href="http://www.lidovky.cz/nova-koupila-jyxo-cz-0rc-/ln-svet-techniky.asp?c=A080528_085457_ln-svet-techniky_poh">prý koupila Jyxo</a>. Bude Jyxo asimilováno, nebo bude jeho pozice významně posílena?<br><a href="http://www.linuxsoft.cz/prispevek_edit.php?predek=0&amp;id_vazba=6902&amp;type_item=7">Přidat komentář</a></p><p class="news"><b>28.5.2008 06:48</b> <strong>/</strong><a href="http://www.linuxsoft.cz/user_page.php?user_id=1804"><small>MaReK Olšavský</small></a><br>Pokud potřebujete organizovat život firmy, mohl by nástroj <a href="http://www.egroupware.org/">eGroupWare</a> být tím rozumným prostředkem. Na webu <a href="http://www.linuxjournal.com/">LinuxJournal</a>u vyšel článek věnovaný <a href="http://www.linuxjournal.com/content/managing-your-life-egroupware">organizaci života s eGroupWare</a>, který by mohl zlákat nerozhodné uživatele.<br><a href="http://www.linuxsoft.cz/prispevek_edit.php?predek=0&amp;id_vazba=6901&amp;type_item=7">Přidat komentář</a></p><p class="news"><b>28.5.2008 06:43</b> <strong>/</strong><a href="http://www.linuxsoft.cz/user_page.php?user_id=1804"><small>MaReK Olšavský</small></a><br><a href="http://www.freesoftwaremagazine.com/articles/free_software_vs_software_service">Free Software vs.&nbsp;Software jako služba</a> se věnuje tématu změny přístupu k&nbsp;software, zejména ve vztahu ke GPL.<br><a href="http://www.linuxsoft.cz/prispevek_edit.php?predek=0&amp;id_vazba=6900&amp;type_item=7">Přidat komentář</a></p>
+<div class="sub_title_orange" style="margin-top: 5px;" id="jobs">
+<img alt="&gt;" src="MySQL%20%2864%29%20-%20nad%20dotazy%20%C4%8Dten%C3%A1%C5%99%C5%AF_soubory/sipka2.png" height="15" width="15">
+<a href="http://www.linuxsoft.cz/inzerce_list.php" class="cap_title">Jobs (275)</a>
+</div>
+<p class="news">
+<a href="http://www.linuxsoft.cz/inzerce_list.php?id_inzeratu=1279"><b title="VOKSYS s.r.o. - 23.5.2008">Linuxový administrátor spol.Voksys</b></a> - Praha 5
+</p><p class="news">
+<a href="http://www.linuxsoft.cz/inzerce_list.php?id_inzeratu=1278"><b title="CLEEVIO s.r.o. - 29.4.2008">Hledáme spolupracovníka na pozici PHP programátor</b></a> - Preferujem Praha, ale lze cela CR.
+</p><p class="news">
+<a href="http://www.linuxsoft.cz/inzerce_list.php?id_inzeratu=1277"><b title="PeckaDesign, s.r.o. - 29.4.2008">PHP programátor - PeckaDesign (Brno)</b></a> - Jihomoravský
+</p><p class="news">
+<a href="http://www.linuxsoft.cz/inzerce_list.php?id_inzeratu=1276"><b title="GEM System International - 7.4.2008">Analytik/Vývojář IS</b></a> - Praha
+</p><p class="news">
+<a href="http://www.linuxsoft.cz/inzerce_list.php?id_inzeratu=1275"><b title="Jobs Consulting, s.r.o. - 18.3.2008">Operations Engineer for North America</b></a> - Brno
+</p><p class="news">
+<a href="http://www.linuxsoft.cz/inzerce_list.php?id_inzeratu=1274"><b title="Jobs Consulting, s.r.o. - 18.3.2008">Verification Engineer</b></a> - Praha
+</p><p class="news">
+<a href="http://www.linuxsoft.cz/inzerce_list.php?id_inzeratu=1273"><b title="Jobs Consulting, s.r.o. - 17.3.2008">Sustaining Engineer</b></a> - Brno/Praha
+</p>
+<p class="news">
+&nbsp;&nbsp;&nbsp;<a href="http://www.linuxsoft.cz/inzerce_list.php"><b>Více pozic</b></a>
+&nbsp;&nbsp;<a href="http://www.linuxsoft.cz/inzerce_edit.php">Zadat pozici</a>
+</p>
+
+<div class="sub_title_orange"><img alt="&gt;" src="MySQL%20%2864%29%20-%20nad%20dotazy%20%C4%8Dten%C3%A1%C5%99%C5%AF_soubory/sipka2.png" height="15" width="15"> Kalendář</div>
+
+<!--<p class="news"><b class="black">7.12.2007</b> &ndash; Praha<br>
+<a href="http://www.linuxsoft.cz/patek/">První (pivní) linuxový pátek č.&nbsp;50</a></p>-->
+
+</td></tr><tr><td class="bottom_part" colspan="3" align="center">
+ISSN 1801-3805 | <a target="_new" href="http://www.motylek.com/" title="Prague hotels" class="white">Prague hotels</a>
+ (c) 2003-2008 | 
+<span class="white">mail at linuxsoft dot cz</span> | Design: <span class="white">www.megadesign.cz</span> |
+<a href="http://text.linuxsoft.cz/" class="white">Textová verze</a> (<a href="http://text.linuxsoft.cz/8859-2/" class="white">ISO 8859-2</a>) | Podporujeme <a href="http://www.avc-cvut.cz/" class="white">AVC</a>.
+</td></tr></tbody></table><img src="MySQL%20%2864%29%20-%20nad%20dotazy%20%C4%8Dten%C3%A1%C5%99%C5%AF_soubory/a.gif" alt="" height="1" width="1"><div style="position: absolute; left: 0px; top: 0px; z-index: 1000000000 ! important; visibility: hidden; opacity: 1;" id="linkalert-box"><img src="MySQL%20%2864%29%20-%20nad%20dotazy%20%C4%8Dten%C3%A1%C5%99%C5%AF_soubory/none-icon.png" id="linkalert-icon-1"></div></body></html>

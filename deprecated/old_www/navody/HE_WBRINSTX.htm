@@ -1,0 +1,126 @@
+<!doctype html public "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=Windows-1250">
+<title>Nestandardní způsoby instalace</title>
+<link rel='stylesheet' style='text/css' href='../function.css'>
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr>
+	<td style="background-image: url(../images/bghead.jpg);
+		background-position: right;
+		background-repeat: no-repeat;">
+	<table width="100%" border="0" cellpadding="0" cellspacing="0"
+		style="background-image:none">
+	<tr>
+		<td style="background-image:none" height="46"
+			width="15%"><img src="../images/title-cz.gif"
+			width="255" height="33"
+			alt="602SQL-Úplná dokumentace"
+			title="602SQL - Úplná dokumentace"
+			border="0"></td>
+		<td width="33%" align="right"><a href="../xml/html/top.html"><img class="floatno"
+			src="../images/index.gif"
+			width="15" height="16"
+			alt="Index" title="Zpět na obsah"
+			border="0" vspace="2"></a> &nbsp;
+			 </td>
+	</tr>
+	</table>
+	</td>
+</tr>
+</table><table class="navigace" border="0" width="100%"  bgcolor="#FFFFBF"><tr> <td
+width="20" align="center"><img class="floatno" src="../images/prev.gif"
+width="15" height="13" alt="&lt;&shy;" title="Předcházející téma"
+border="0"></td><td width="25%"><a
+href="HE_WBRSETUP.htm">Parametry instalace v souboru SETUP.INI</a></td> <td width="25%"
+align="right"><img class="floatno" src="../images/up.gif" width="13"
+height="15" alt="Nahoru" title="O jednu úroveň výš" border="0"
+align="middle"></td><td width="25%"><a href="../xml/html/instalac.html">Instalace 602SQL na Windows</a></td>
+<td width="25%" align="right"><a
+href="../xml/html/clientparams.html">Parametry příkazové řádky klienta</a></td><td width="20"
+align="center"><img class="floatno" src="../images/next.gif" width="15"
+height="13" alt="&shy;&gt;" title="Následující téma" border="0"></td>
+</tr></table>
+
+
+
+
+<h1><a name="he_wbrinstx"></a>Nestandardní způsoby instalace </h1>
+
+<p><b>Instalace <a href="../xml/html/apliktop.html">aplikace</a> pomocí zkopírování databázového souboru</b></p>
+
+<p>V některých případech bývá pro vývojáře jednodušší při instalaci 602SQL včetně aplikace neprovádět import aplikace do nově vytvořeného databázového souboru, ale připravit si tento databázový soubor předem se všemi daty (a právy atd.) a pouze ho při instalaci zkopírovat.</p>
+
+<p>V tomto případě použijte <code>SETUP.INI</code> v následující podobě:</p>
+
+<pre><code>...
+[602SQL]
+Title=Instalace naší aplikace
+WelcomeTitle=Vítejte
+WelcomeText=Instalujete naší aplikaci Diář
+InstallProduct=0
+AskProduct=0
+TargetDir=c:\diar
+AskTarget=1
+ServerName=DIAR_DB
+AskDb=0
+ShortcutFolder=Diář 2000
+AskFolder=0
+ShowSummary=0
+CopyFIL=1
+CreateApplIconNum=1
+CreateApplIcon1=diar /S
+CreateApplIconCapt1=Diář 2000
+CopyFilesNum=2
+CopyFile1=diar.hlp
+CopyFile2=cti_mne.txt
+NoFinishDialog=1
+RunProgram=Notepad.exe
+RunProgramFile=cti_mne.txt
+</code></pre>
+
+<p>Předem si vytvoříte databázový soubor se jménem podle <code>ServerName</code> a umístíte ho do adresáře se <code>SETUP.INI</code> v případě instalace z CD; při CD instalaci přidáte ještě hodnotu <code>AskInsert=0</code>. Mají-li se aplikace spouštět jen v provozním režimu, přidejte ještě hodnotu <code>Rtonly=1</code>.</p>
+
+<p>Pro instalaci z disket je tento způsob nevhodný, protože se databázový soubor většinou nevejde na volnou část poslední diskety.</p>
+
+<h2>Instalace ODBC driveru 602SQL</h2>
+
+<p>Je-li třeba nainstalovat pouze 602SQL ODBC driver a připojovat se z externího programu k již existujícímu SQL serveru přes ODBC rozhraní, je to možné buď přímo z originálního CD s 602SQL nebo z upraveného instalačního programu. V tomto druhém případě je nutné do <code>SETUP.INI</code> přidat hodnotu <code>ODBCOnly=1</code>. </p>
+
+<p><code>SETUP.INI</code> může mít následující podobu</p>
+
+<pre><code>...
+[602SQL]
+TargetDir=d:\602SQL
+AskTarget=1
+ShortcutFolder=602SQL ODBC klient
+AskFolder=1
+ODBCOnly=1</code></pre>
+
+<p><b>Viz</b></p>
+
+<ul class='viz'>
+ <li><a href="HE_WBRSETUP.htm">Parametry SETUP.INI</a> </li>
+ <li><a href="HE_WBRINSTAL.htm">Instalace vlastní aplikace s klientským prostředím</a> </li>
+<!-- <li><a href="HE_CDROM.htm">Databáze umístěné na CD ROM</a></li>-->
+</ul>
+
+
+
+<table class="navigace" border="0" width="100%"  bgcolor="#FFFFBF"><tr> <td
+width="20" align="center"><img class="floatno" src="../images/prev.gif"
+width="15" height="13" alt="&lt;&shy;" title="Předcházející téma"
+border="0"></td><td width="25%"><a
+href="HE_WBRSETUP.htm">Parametry instalace v souboru SETUP.INI</a></td> <td width="25%"
+align="right"><img class="floatno" src="../images/up.gif" width="13"
+height="15" alt="Nahoru" title="O jednu úroveň výš" border="0"
+align="middle"></td><td width="25%"><a href="../xml/html/instalac.html">Instalace 602SQL na Windows</a></td>
+<td width="25%" align="right"><a
+href="../xml/html/clientparams.html">Parametry příkazové řádky klienta</a></td><td width="20"
+align="center"><img class="floatno" src="../images/next.gif" width="15"
+height="13" alt="&shy;&gt;" title="Následující téma" border="0"></td>
+</tr></table>
+</body>
+</html>

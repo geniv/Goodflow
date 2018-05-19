@@ -1,0 +1,140 @@
+<!doctype html public "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=Windows-1250">
+<title>Izolace transakcí v SQL</title>
+<link rel='stylesheet' style='text/css' href='../function.css'>
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr>
+	<td style="background-image: url(../images/bghead.jpg);
+		background-position: right;
+		background-repeat: no-repeat;">
+	<table width="100%" border="0" cellpadding="0" cellspacing="0"
+		style="background-image:none">
+	<tr>
+		<td style="background-image:none" height="46"
+			width="15%"><img src="../images/title-cz.gif"
+			width="255" height="33"
+			alt="602SQL-Úplná dokumentace"
+			title="602SQL - Úplná dokumentace"
+			border="0"></td>
+		<td width="33%" align="right"><a href="../xml/html/top.html"><img class="floatno"
+			src="../images/index.gif"
+			width="15" height="16"
+			alt="Index" title="Zpět na obsah"
+			border="0" vspace="2"></a> &nbsp;
+			 </td>
+	</tr>
+	</table>
+	</td>
+</tr>
+</table><table class="navigace" border="0" width="100%"  bgcolor="#FFFFBF">
+		  <tr>
+					 <td width="20" align="center">&nbsp;</td>
+					 <td width="25%">&nbsp;</td>
+					 <td width="25%"
+align="right"><img class="floatno" src="../images/up.gif" width="13"
+height="15" alt="Nahoru" title="O jednu úroveň výš" border="0"
+align="middle"></td><td width="25%"><a href="HE_SQL2_TRANSAKCE.htm">Transakce a body návratu</a></td>
+<td width="25%" align="right"><a
+href="../xml/html/lockizol.html">Problémy při kombinaci explicitního zamykání záznamů a izolace transakcí</a></td><td width="20"
+align="center"><img class="floatno" src="../images/next.gif" width="15"
+height="13" alt="&shy;&gt;" title="Následující téma" border="0"></td>
+</tr></table>
+
+
+
+
+
+<h1><a name="he_sql2_izolacetransakci"></a>Izolace transakcí (SQL)</h1>
+
+<p>Klient databázového serveru může nastavit stupeň izolace vlastních transakcí od <a href="HE_SQL2_TRANSAKCE.htm">transakcí</a> prováděných jinými klienty. Izolace transakcí určuje, v&nbsp;jaké míře se mohou změny v&nbsp;databázi souběžně prováděné různými klienty navzájem ovlivňovat.</p>
+
+<p>Stupně izolace transakcí jsou definovány svojí schopností bránit vzniku tří fenoménů, k&nbsp;nimž by při souběžné práci klientů A a B mohlo docházet:</p>
+
+<p>Fenomén <b>DIRTY READ</b>: Klient A provede změnu dat a prozatím neukončí transakci. Klient B přečte tato změněná data. Poté klient A odvolá svou transakci. Klient B tedy přečetl data, která nikdy nebyla potvrzena.</p>
+
+<p>Fenomén <b>NON-REPEATABLE READ</b>: Klient A přečte data a prozatím neukončí transakci. Klient B změní nebo zruší tato data a ukončí svou transakci. Klient A ve své transakci znovu čte stejná data a nenajde je.</p>
+
+<p>Fenomén <b>PHANTOM</b>: Klient A položí dotaz, přečte odpověď na něj a prozatím neukončí transakci. Klient B vloží do databáze další řádky vyhovující podmínkám v&nbsp;dotazu klienta A a ukončí svou transakci. Klient A ve své transakci znovu položí stejný dotaz a obdrží jinou odpověď.</p>
+
+<p>Jednotlivé stupně izolace transakcí jsou definovány takto:</p>
+
+<table cols=4 border=1>
+
+<tr valign="top">
+<td>Stupeň izolace / fenomén</td>
+<td><b>DIRTY READ</b></td>
+<td><b>NON-REPEATABLE READ</b></td>
+<td><b>PHANTOM</b></td>
+</tr>
+
+<tr valign="top">
+<td><b>READ UNCOMMITTED</b></td>
+<td>může nastat</td>
+<td>může nastat</td>
+<td>může nastat</td>
+</tr>
+
+<tr valign="top">
+<td><b>READ COMMITTED</b></td>
+<td>nemůže nastat</td>
+<td>může nastat</td>
+<td>může nastat</td>
+</tr>
+
+<tr valign="top">
+<td><b>REPEATABLE READ</b></td>
+<td>nemůže nastat</td>
+<td>nemůže nastat</td>
+<td>může nastat</td>
+</tr>
+
+<tr valign="top">
+<td><b>SERIALIZABLE</b></td>
+<td>nemůže nastat</td>
+<td>nemůže nastat</td>
+<td>nemůže nastat</td>
+</tr>
+</table><br>
+
+<p>Stupeň izolace SERIALIZABLE zaručuje, že souběžné transakce budou mít stejný efekt, jako by byly provedeny po sobě. Zároveň však snižuje schopnost serveru provádět akce souběžně, tudíž může snížit propustnost serveru, pokud více klientů pracuje se stejnými daty. Zároveň se velmi zvýší počty <a href="../xml/html/waiting.html">dočasných zámků</a> na přečtených datech.</p>
+
+<p>
+Pro explicitní transakce platí: 
+<ul>
+<li>stupeň izolace transakce se nastavuje pro každou transakci zvlášť;</li>
+<li>stupeň izolace lze nastavit při zahájení transakce příkazem <a href="HE_SQL2_STARTTRANSACTION.htm">START TRANSACTION</a> nebo v době mezi zahájením a ukončením transakce příkazem <a href="HE_SQL2_SETTRANSACTION.htm">SET TRANSACTION</a>;</li>
+<li>není-li stupeň izolace zvolen, použije se SERIALIZABLE.</li>
+</ul>
+Pro implicitní transakce platí:
+<ul>
+<li>pro jednotlivé implicitní transakce není jak nastavovat stupeň izolace transakce;</li>
+<li>jako stupeň izolace se použije ten stupeň, se kterým byla prováděna předchozí (explicitní či implicitní) transakce;</li>
+<li>není-li možné použít předchozí pravidlo, nastaví se při READ COMMITTED.</li>
+
+</ul></p>
+
+<p>Interně SQL server 602SQL implementuje pouze stupně izolace READ COMMITTED a SERIALIZABLE. Při nastavení READ UNCOMMITTED se vnitřně nastaví READ COMMITTED, při nastavení REPEATABLE READ se vnitřně nastaví SERIALIZABLE. Toto chování je plně v&nbsp;souladu s&nbsp;normou.</p>
+
+
+
+
+<table class="navigace" border="0" width="100%"  bgcolor="#FFFFBF">
+		  <tr>
+					 <td width="20" align="center">&nbsp;</td>
+					 <td width="25%">&nbsp;</td>
+					 <td width="25%"
+align="right"><img class="floatno" src="../images/up.gif" width="13"
+height="15" alt="Nahoru" title="O jednu úroveň výš" border="0"
+align="middle"></td><td width="25%"><a href="HE_SQL2_TRANSAKCE.htm">Transakce a body návratu</a></td>
+<td width="25%" align="right"><a
+href="../xml/html/lockizol.html">Problémy při kombinaci explicitního zamykání záznamů a izolace transakcí</a></td><td width="20"
+align="center"><img class="floatno" src="../images/next.gif" width="15"
+height="13" alt="&shy;&gt;" title="Následující téma" border="0"></td>
+</tr></table>
+
+</body>
+</html>

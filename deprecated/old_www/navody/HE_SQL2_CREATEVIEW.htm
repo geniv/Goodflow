@@ -1,0 +1,106 @@
+<!doctype html public "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=Windows-1250">
+<title>Příkaz CREATE VIEW (SQL)</title>
+<link rel='stylesheet' style='text/css' href='../function.css'>
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr>
+	<td style="background-image: url(../images/bghead.jpg);
+		background-position: right;
+		background-repeat: no-repeat;">
+	<table width="100%" border="0" cellpadding="0" cellspacing="0"
+		style="background-image:none">
+	<tr>
+		<td style="background-image:none" height="46"
+			width="15%"><img src="../images/title-cz.gif"
+			width="255" height="33"
+			alt="602SQL-Úplná dokumentace"
+			title="602SQL - Úplná dokumentace"
+			border="0"></td>
+		<td width="33%" align="right"><a href="../xml/html/top.html"><img class="floatno"
+			src="../images/index.gif"
+			width="15" height="16"
+			alt="Index" title="Zpět na obsah"
+			border="0" vspace="2"></a> &nbsp;
+			 </td>
+	</tr>
+	</table>
+	</td>
+</tr>
+</table><table class="navigace" border="0" width="100%"  bgcolor="#FFFFBF"><tr> <td
+width="20" align="center"><img class="floatno" src="../images/prev.gif"
+width="15" height="13" alt="&lt;&shy;" title="Předcházející téma"
+border="0"></td><td width="25%"><a
+href="../xml/html/sql_drop_domain.html">Příkaz DROP DOMAIN</a></td> <td width="25%"
+align="right"><img class="floatno" src="../images/up.gif" width="13"
+height="15" alt="Nahoru" title="O jednu úroveň výš" border="0"
+align="middle"></td><td width="25%"><a href="HE_SQL2_PRIKAZY.htm">SQL příkazy</a></td>
+<td width="25%" align="right"><a
+href="HE_SQL2_DROPVIEW.htm">Příkaz DROP VIEW</a></td><td width="20"
+align="center"><img class="floatno" src="../images/next.gif" width="15"
+height="13" alt="&shy;&gt;" title="Následující téma" border="0"></td>
+</tr></table>
+
+
+
+
+<h1><a name="he_sql2_createview"></a>Příkaz CREATE VIEW (SQL)</h1>
+
+<pre><code>příkaz_CREATE_VIEW ::= CREATE [ IF NOT EXISTS ] VIEW [schéma.]jméno_dotazu [ ( jméno_sloupce {, jméno_sloupce }… ) ] 
+    AS dotazový_výraz
+</code></pre>
+
+<p><b>Popis</b></p>
+
+<p><a href="HE_SQL2_PRIKAZY.htm">Příkaz</a> CREATE VIEW vytvoří pevný dotaz uložený v&nbsp;databázi (v praxi se spíše však používají klientské návrháře). Základem dotazu je <a href="HE_SQL2_DOTAZOVYVYRAZ.htm"><i>dotazový výraz</i></a>, který vybere množinu záznamů z&nbsp;jedné nebo více tabulek. Jména sloupců v&nbsp;odpovědi na <i>dotazový výraz</i> lze změnit uvedením seznamu jmen v&nbsp;závorkách před vyhrazeným slovem AS.</p>
+<p>V databázi je uložena pouze textová definice dotazu. Při každém otevření (použití) se odpověď generuje z aktuálních dat.</p>
+
+<p>Maximální délka jména dotazu je 31 znaků. Dotaz musí mít unikátní jméno v rámci schématu. Pokud dotaz zadaného jména již existuje, pak je-li použita klauzule IF NOT EXISTS, příkaz neprovede žádnou akci, v opačném případě dojde k chybě - nastatane chybový <a href="../xml/html/handlingcategories.html">sqlstate</a> 40004 (KEY_DUPLICITY).</p>
+
+<p><a href="../xml/html/query_insdeledit.html">Editovatelné</a> dotazy lze použít v SQL příkazech <a href="HE_SQL2_UPDATE.htm">UPDATE</a>, <a href="HE_SQL2_INSERT.htm">INSERT</a> a <a href="HE_SQL2_DELETE.htm">DELETE</a> místo tabulek. Také je lze použít při konstrukci <a href="HE_SQL2_DOTAZY.htm">dotazových výrazů SELECT</a> nebo příkazu <a href="HE_SQL2_SELECTINTO.htm">SELECT INTO</a>. Pevné dotazy lze v rutinách otevřít příkazem <a href="HE_SQL2_OPEN.htm">OPEN</a>, procházet a číst jeho řádky příkazem <a href="HE_SQL2_FETCH.htm">FETCH</a>, odvolávat se na jeho běžný záznam v&nbsp;příkazech <a href="HE_SQL2_UPDATECURRENT.htm">UPDATE CURRENT OF</a> a <a href="HE_SQL2_DELETECURRENT.htm">DELETE CURRENT OF</a> a nakonec jej uzavřít příkazem <a href="HE_SQL2_CLOSE.htm">CLOSE</a>.
+</p>
+
+<p><b>Odlišnosti od normy</b>
+
+<ul>
+	<li>klauzule WITH CHECK OPTION, která testuje, zda editací dotazu není porušena podmínka dotazu, není implementována </li>
+</ul>
+
+<p><b>Příklady použití:</b></p>
+
+<pre><code>CREATE VIEW Plat6000 AS
+    SELECT *
+    FROM Zamestnan
+    WHERE plat&lt;6000
+    ORDER BY prijmeni
+CREATE VIEW Platy (Suma_Platu, Nazev_Odd) AS
+    SELECT SUM(Zamestnan.plat),Oddeleni.nazev
+    FROM Zamestnan, Oddeleni
+    WHERE Oddeleni.cislo=Zamestan.oddeleni
+    GROUP BY Zamestan.oddeleni</code></pre>
+
+<p><b>Viz</b></p>
+
+<ul class='viz'><li><a href="HE_SQL2_DROPVIEW.htm">DROP VIEW</a> 
+</ul>
+
+
+
+<table class="navigace" border="0" width="100%"  bgcolor="#FFFFBF"><tr> <td
+width="20" align="center"><img class="floatno" src="../images/prev.gif"
+width="15" height="13" alt="&lt;&shy;" title="Předcházející téma"
+border="0"></td><td width="25%"><a
+href="../xml/html/sql_drop_domain.html">Příkaz DROP DOMAIN</a></td> <td width="25%"
+align="right"><img class="floatno" src="../images/up.gif" width="13"
+height="15" alt="Nahoru" title="O jednu úroveň výš" border="0"
+align="middle"></td><td width="25%"><a href="HE_SQL2_PRIKAZY.htm">SQL příkazy</a></td>
+<td width="25%" align="right"><a
+href="HE_SQL2_DROPVIEW.htm">Příkaz DROP VIEW</a></td><td width="20"
+align="center"><img class="floatno" src="../images/next.gif" width="15"
+height="13" alt="&shy;&gt;" title="Následující téma" border="0"></td>
+</tr></table>
+</body>
+</html>

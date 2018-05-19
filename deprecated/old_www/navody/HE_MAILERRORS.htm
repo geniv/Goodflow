@@ -1,0 +1,267 @@
+<!doctype html public "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=Windows-1250">
+<title>Chyby při použití elektronické pošty</title>
+<link rel='stylesheet' style='text/css' href='../function.css'>
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr>
+	<td style="background-image: url(../images/bghead.jpg);
+		background-position: right;
+		background-repeat: no-repeat;">
+	<table width="100%" border="0" cellpadding="0" cellspacing="0"
+		style="background-image:none">
+	<tr>
+		<td style="background-image:none" height="46"
+			width="15%"><img src="../images/title-cz.gif"
+			width="255" height="33"
+			alt="602SQL-Úplná dokumentace"
+			title="602SQL - Úplná dokumentace"
+			border="0"></td>
+		<td width="33%" align="right"><a href="../xml/html/top.html"><img class="floatno"
+			src="../images/index.gif"
+			width="15" height="16"
+			alt="Index" title="Zpět na obsah"
+			border="0" vspace="2"></a> &nbsp;
+			 </td>
+	</tr>
+	</table>
+	</td>
+</tr>
+</table><table class="navigace" border="0" width="100%"  bgcolor="#FFFFBF"><tr> <td
+width="20" align="center"><img class="floatno" src="../images/prev.gif"
+width="15" height="13" alt="&lt;&shy;" title="Předcházející téma"
+border="0"></td><td width="25%"><a
+href="HE_MAIL602REMOTE.htm">Vzdálený klient pošty Mail602</a></td> <td width="25%"
+align="right"><img class="floatno" src="../images/up.gif" width="13"
+height="15" alt="Nahoru" title="O jednu úroveň výš" border="0"
+align="middle"></td><td width="25%"><a href="HE_MAIL.htm">Rozhraní k elektronické poště</a></td>
+<td width="25%" align="right">&nbsp;</td>
+<td width="20" align="center">&nbsp;</td>
+</tr></table>
+
+
+
+
+
+<h1><a name="he_mailerrors"></a>Čísla chyb při práci s elektronickou poštou</h1>
+
+<p>Čísla chyb specifická pro poštovní funkce mají čísla &gt;= 500</p>
+
+<table border=1 cols=3>
+
+<tr valign="top">
+<td><code>MAIL_NOT_INITIALIZED</code></td>
+<td><code>500</code></td>
+<td>Pošta nebyla inicializována, aplikace se pokouší vytvořit zásilku nebo otevřít schránku bez toho, že by zinicializovala poštu.</td>
+</tr>
+
+<tr valign="top">
+<td><code>MAIL_ERROR </code></td>
+<td><code>501</code></td>
+<td>Neznámá (nepředvídaná) chyba pošty</td>
+</tr>
+
+<tr valign="top">
+<td><code>MAIL_NOT_REMOTE</code></td>
+<td><code>502</code></td>
+<td>Chybu vracejí funkce <b><code>TakeMailToRemOffice</code></b>, <b><code>MailDial</code></b> a <b><code>MailHangUp</code></b>, pokud byly použity pro nevhodný typ pošty - poštovní úřad není konfigurován jako vzdálený</td>
+</tr>
+
+<tr valign="top">
+<td><code>MAIL_TYPE_INVALID </code></td>
+<td><code>503</code></td>
+<td>Chybný typ zásilky, zvolená pošta nepodporuje zadaný typ zásilky.</td>
+</tr>
+
+<tr valign="top">
+<td><code>MAIL_LOGON_FAILED</code></td>
+<td><code>504</code></td>
+<td>Chyba při přihlášení, pravděpodobně chybné jméno uživatele nebo heslo.</td>
+</tr>
+
+<tr valign="top">
+<td><code>MAIL_BAD_PROFILE</code></td>
+<td><code>505</code></td>
+<td>Chybný profil, zadaný profil není registrován, nenalezen některý ze souborů <code>MAIL602*.INI</code>, nenalezen soubor <code>MAIL602.EMI</code></td>
+</tr>
+
+<tr valign="top">
+<td><code>MAIL_BAD_USERID</code></td>
+<td><code>506</code></td>
+<td>Chybné ID nebo jméno uživatele</td>
+</tr>
+
+<tr valign="top">
+<td><code>MAIL_NO_ADDRESS</code></td>
+<td><code>507</code></td>
+<td>Není zadána žádná adresa příjemce. Tato chyba se také může použít v případě, kdy SMTP server odmítl odeslat zásilku pro nedostatek oprávnění odesílatele (neautorizovaný odesílatel - ochrana proti spamům).</td>
+</tr>
+
+<tr valign="top">
+<td><code>FILE_NOT_FOUND</code></td>
+<td><code>508</code></td>
+<td>Soubor, který má být připojen k&nbsp;vytvářené zásilce nenalezen nebo server (klient) nemá dostatek práv k tomuto souboru, resp. k adresáři, v němž je umístěn.</td>
+</tr>
+
+<tr valign="top">
+<td><code>MAIL_SYSTEM_ACCOUNT </code></td>
+<td><code>509</code></td>
+<td>Server běží jako NT služba na systémový účet a nemá proto přístup k&nbsp;nějakému zdroji</td>
+</tr>
+
+<tr valign="top">
+<td><code>MAIL_DIAL_ERROR </code></td>
+<td><code>510</code></td>
+<td>Nepodařilo se navázat telefonní spojení s&nbsp;poštovním serverem nebo mateřským poštovním úřadem, obsazeno nebo špatné číslo</td>
+</tr>
+
+<tr valign="top">
+<td><code>MAIL_ALREADY_INIT</code></td>
+<td><code>511</code></td>
+<td>Pošta už byla inicializovaná s&nbsp;jinými parametry</td>
+</tr>
+
+<tr valign="top">
+<td><code>MAIL_</code></td>
+<td><code>512</code></td>
+<td>Rezervováno</td>
+</tr>
+
+<tr valign="top">
+<td><code>MAIL_PROFSTR_NOTFND</code></td>
+<td><code>513</code></td>
+<td>V profilu chybí parametr, např. aplikace se pokusila vytvořit zásilku a v&nbsp;profilu není zadána adresa SMTP serveru</td>
+</tr>
+
+<tr valign="top">
+<td><code>MAIL_INVALIDPATH</code></td>
+<td><code>514</code></td>
+<td>Soubor není povoleno odeslat, protože není v&nbsp;cestě specifikované parametrem profilu <code>Path</code></td>
+</tr>
+
+<tr valign="top">
+<td><code>MAIL_SOCK_IO_ERROR</code></td>
+<td><code>515</code></td>
+<td>Chyba čtení nebo zápisu do socketu, nebo poštovní server odmítl požadavek</td>
+</tr>
+
+<tr valign="top">
+<td><code>MAIL_UNKNOWN_SERVER</code></td>
+<td><code>516</code></td>
+<td>Nepodařilo se přeložit jméno poštovního serveru na IP adresu, neběží DNS server, nebo překlad není uveden v&nbsp;souboru HOSTS</td>
+</tr>
+
+<tr valign="top">
+<td><code>MAIL_CONNECT_FAILED</code></td>
+<td><code>517</code></td>
+<td>Nepodařilo se vytvořit nebo otevřít socket</td>
+</tr>
+
+<tr valign="top">
+<td><code>MAIL_NO_MORE_FILES</code></td>
+<td><code>518</code></td>
+<td>V zásilce už není další připojený soubor, nebo v&nbsp;zásilce není soubor zadaného jména</td>
+</tr>
+
+<tr valign="top">
+<td><code>MAIL_FILE_DELETED</code></td>
+<td><code>519</code></td>
+<td>Připojený soubor v&nbsp;zásilce není, nejspíš byl vymazán</td>
+</tr>
+
+<tr valign="top">
+<td><code>MAIL_BOX_LOCKED</code></td>
+<td><code>520</code></td>
+<td>Poštovní schránku už má otevřenou jiný klient.</td>
+</tr>
+
+<tr valign="top">
+<td><code>MAIL_MSG_NOT_FOUND</code></td>
+<td><code>521</code></td>
+<td>Zásilka už ve schránce není, nejspíš byla vymazána</td>
+</tr>
+
+<tr valign="top">
+<td><code>MAIL_UNK_MSG_FMT</code></td>
+<td><code>522</code></td>
+<td>Zásilka má neznámý formát nebo je poškozená</td>
+</tr>
+
+<tr valign="top">
+<td><code>MAIL_DLL_NOT_FOUND</code></td>
+<td><code>523</code></td>
+<td>Potřebná DLL knihovna (WM602M32.DLL, M602INET.DLL, G602RM32.DLL, RASAPI32.DLL, MAPI32.DLL) nenalezena. DLL knihovny se hledají ve stejné složce jako 602SQL, v&nbsp;aktuální složce, ve složce WINDOWS, ve složce WINDOWS\SYSTEM a&nbsp;ve složkách, které jsou uvedeny v&nbsp;proměnné prostředí PATH.  </td>
+</tr>
+
+<tr valign="top">
+<td><code>MAIL_FUNC_NOT_FOUND</code></td>
+<td><code>524</code></td>
+<td>Potřebná funkce v&nbsp;DLL knihovně nenalezena, pravděpodobně nekompatibilní verze DLL knihovny.</td>
+</tr>
+
+<tr valign="top">
+<td><code>NO_SUPPORT</code></td>
+<td><code>525</code></td>
+<td>Nepodporováno MAPI nebo 602sql server běžící jako služba nemá přístup k EMI souborům pošty Mail602</td>
+</tr>
+
+<tr valign="top">
+<td><code>MAIL_REQ_QUEUED</code></td>
+<td><code>526</code></td>
+<td>Pouze v případě vzdáleného poštovního úřadu Mail602 - zásilka neodešla, protože se nepodařilo spojit - zásilka je OK a existuje ve frontě, bude odeslána, až se naváže spojení</td>
+</tr>
+
+<tr valign="top">
+<td><code>MAIL_PROFILE_EXISTS</code></td>
+<td><code>527</code></td>
+<td>Poštovní profil už existuje - nelze vytvořit</td>
+</tr>
+</table>
+
+<p>Některé situace vzniklé v souvislosti s provozem pošty se hlásí pomocí chyb 602sql, jsou to zejména:</p>
+
+<table border=1 cols=3>
+<tr valign="top">
+<td><code>NO_RIGHT</code></td>
+<td><code>129</code></td>
+<td>Nedostatek oprávnění provést poštovní akci; může souviset jak s nastavením účtu uživatele na poštovním úřadu (např. povolení odesílat zásilky s vysokou prioritou), tak i s nastavením klienta na 602 SQL serveru (např. při práci s dočasnými profily, při zapisování do systémových tabulek při přijímání zásilky apod.)</td>
+</tr>
+
+<tr valign="top">
+<td><code>OUT_OF_APPL_MEMORY</code></td>
+<td><code>150</code></td>
+<td>Nedostatek paměti pro poštovní funkce</td>
+</tr>
+
+<tr valign="top">
+<td><code>OS_FILE_ERROR</code></td>
+<td><code>157</code></td>
+<td>Chyba při práci se souborem, málo místa na disku, chyba na disku, nedostatek přístupových práv</td>
+</tr>
+
+<tr valign="top">
+<td><code>ERROR_IN_FUNCTION_ARG</code></td>
+<td><code>180</code></td>
+<td>Chyba v parametrech předávaných funkci</td>
+</tr>
+</table><br>
+
+
+
+<table class="navigace" border="0" width="100%"  bgcolor="#FFFFBF"><tr> <td
+width="20" align="center"><img class="floatno" src="../images/prev.gif"
+width="15" height="13" alt="&lt;&shy;" title="Předcházející téma"
+border="0"></td><td width="25%"><a
+href="HE_MAIL602REMOTE.htm">Vzdálený klient pošty Mail602</a></td> <td width="25%"
+align="right"><img class="floatno" src="../images/up.gif" width="13"
+height="15" alt="Nahoru" title="O jednu úroveň výš" border="0"
+align="middle"></td><td width="25%"><a href="HE_MAIL.htm">Rozhraní k elektronické poště</a></td>
+<td width="25%" align="right">&nbsp;</td>
+<td width="20" align="center">&nbsp;</td>
+</tr></table>
+
+</body>
+</html>

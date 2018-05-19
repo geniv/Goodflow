@@ -1,0 +1,71 @@
+<!doctype html public "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=Windows-1250">
+<title>Funkce Insert</title>
+<link rel='stylesheet' style='text/css' href='../function.css'>
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000">
+
+
+
+<h2 class=function>Insert</h2>
+<img src='../images/cpp.gif' width='44' height='16' border='0' alt='c/c++' align='middle' hspace='2'><img src='../images/pascal.gif' width='44' height='16' border='0' alt='pascal' align='middle' hspace='2'>
+
+
+<br><br>
+<div class='typ'>trecnum <b>[cd_]Insert</b>([cdp_t cdp], tcurstab curs);<br>
+function <b>[cd_]Insert</b>([cdp : cdp_t]; curs : tcurstab) : trecnum;
+</div>
+
+
+<p><b>Parametry</b></p>
+
+<table border=1 cols=2 frame=box rules=all width=440>
+
+<tr valign="top">
+<td width=18%><i>curs</i> </td>
+<td width=82%>číslo tabulky nebo otevřeného kurzoru</td>
+</tr>
+
+<tr valign="top">
+<td width=18%>[<i>cdp </i></td>
+<td width=82%><a href="HE_EXTCD.htm">kontextová proměnná</a> klienta]  </td>
+</tr>
+</table><br>
+
+<p><b>Popis</b></p>
+
+<p>Funkce <b><code>Insert</code></b> přidává nový prázdný záznam k&nbsp;tabulce nebo k <a href="../xml/html/query_insdeledit.html">editovatelnému</a> kurzoru <i>curs</i>. Při vkládání se nový záznam přidá na první nalezené volné místo po smazaném a uvolněném záznamu v tabulce. <strong>Není</strong> proto zaručeno, že číslo vloženého záznamu bude větší než čísla ostatních (zrušených i nezrušených) neuvolněných záznamů v&nbsp;tabulce nebo že záznam bude vložen na konec tabulky.</p>
+
+<p>Ve funkci <b><code>Insert</code></b> nelze použít kurzor vzniklý spojením více tabulek nebo needitovatelný kurzor.</p>
+
+<p>V přidaném záznamu budou všechny sloupce mít hodnoty NULL dle svých typů nebo implicitní hodnoty definované v návrhu tabulky. Toto má význam v těch případech, kdy k editované tabulce existují <a href="HE_SQL2_TRIGGERY.htm">triggery</a> - vložení záznamu vyvolá INSERT trigger, zapsání hodnot sloupců do tohoto záznamu pak UPDATE trigger (což je odlišná logika od vložení záznamu pomocí SQL příkazu <a href="HE_SQL2_INSERT.htm">INSERT</a>). </p>
+
+<p>Je-li v definici tabulky stanoveno, že některý sloupec nesmí mít hodnotu NULL, definujte též implicitní hodnotu tohoto sloupce, nebo <b><code>Insert</code></b> a zápis do tohoto sloupce proveďte v jedné transakci. Jsou-li v tabulce definována integritní omezení, buď musí být splněna na implicitních hodnotách, anebo ještě ve stejné transakci musí být do sloupců zapsány vyhovující hodnoty.</p>
+
+<p>Je-li <i>curs</i> podřízená tabulka v referenční integritě, vede zavolání funkce <b><code>Insert</code></b> k porušení pravidel  ref. integrity. Proveďte proto<b><code> Insert</code></b> i zápis do hlídaného sloupce v jedné transakci.</p>
+
+<p>Od verze 7 je k dispozici novější funkce <a href="../xml/html/insrecex.html"><code>Insert_record_ex</code></a>, která umožňuje vložit záznam současně i s hodnotami sloupců (stejně jako INSERT v SQL).</p>
+
+<p>Efektivnějším způsobem práce s daty (vkládání, mazání, vyhledávání) je <a href="HE_SQL2_POUZITI.htm">použití jazyka SQL</a>, zvláště pak <a href="HE_SQL2_STOREDPROCEDURE.htm">uložených procedur</a>.</p>
+
+<p><b>Hodnota funkce </b></p>
+
+<p>Funkce vrací absolutní číslo přidaného záznamu. Toto číslo lze použít pro zápis do přidaného záznamu v&nbsp;tabulce resp. kurzoru <i>curs</i>.</p>
+
+<p>Kontrolujte vždy výsledek operace! Pokud se operace neprovede, vrací se hodnota -1. Povahu chyby lze pak zjistit voláním funkce <b><code>Signalize</code></b>.</p>
+
+<p><b>Viz</b></p>
+
+<ul class='viz'>
+<li><a href="HE_F_APPEND.htm">Append</a>  </li>
+<li><a href="HE_F_DELETE.htm">Delete</a> </li>
+<li><a href="HE_F_UNDELETE.htm">Undelete</a> </li>
+<li><a href="HE_F_FREEDELETED.htm">Free_deleted</a> </li>
+<li><a href="HE_F_STARTTRANSACTION.htm">Start_transaction</a> </li>
+</ul>
+
+</body>
+</html>

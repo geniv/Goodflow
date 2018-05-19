@@ -1,0 +1,3435 @@
+/*  Slovo autora:
+
+    Tyto styly jsem neoptimalizoval z důvodu nízké ceny za tento web a tudíž jsem se nestaral o zdvojování, optimalizaci selektorů atd...
+    Mám tu na starosti jiné mnohem víc placené weby na kterých mi záleží...
+    Kdyby dotyčná osoba co tento web domlouvala promyslela odměnu za vynaložený čas, tak by tento web byl z hlediska xhtml, css, php, mysql, ajax a dalších programovacích jazyků optimalizován na mistrovské úrovni (na jaké stavíme standardně všechny ostatní weby)...
+    
+    Na závěr můžu říct jedině to, že kdyby za tento web byl odpovídající plat, tak by tento web a admin taky tak vypadal ...
+    
+    S pozdravem pro všechny čumily
+    
+    Fugess (Martin)
+*/
+
+body {
+  position: relative;
+  font: 12.5px Tahoma, Verdana, "Trebuchet MS", Arial, "Arial CE", sans-serif;
+  color: #000;
+  background: url(../obr/background_fsc.jpg) repeat;
+}
+
+#zahlavi {
+  width: 746px;
+  height: 247px;
+  margin: 0 auto;
+}
+
+#zahlavi h1 {
+  margin: 120px 0 10px 30px;
+  font-size: 20px;
+  z-index: -10;
+  position: absolute;
+}
+
+#zahlavi #no_flash { /* z duvodu neodpovidajici ceny za tento web nezavedeno dukladne */
+  width: 746px;
+  height: 247px;
+  background: url(../obr/zahlavi_background_alternativa.png) no-repeat;
+}
+
+#hlavni_obal_layout {
+  width: 820px;
+  height: auto;
+  min-height: 100%;
+  margin: 0 auto;
+  position: relative;
+  background: url(../obr/hlavni_obal_layout_background.png) repeat-y center;
+}
+
+/* obsah */
+#obal_layout {
+  width: 746px;
+  margin: 0 auto;
+  padding-bottom: 67px;
+  position: relative;
+  overflow: hidden; /* skusit u zapati clear both - buguje v ie6 */
+}
+
+#bocni_sloupec {
+  width: 186px;
+  height: auto;
+  min-height: 100%;
+  float: left;
+  position: relative;
+}
+
+#bocni_sloupec #aktuality,
+#bocni_sloupec #sponzori {
+  width: 186px;
+  height: 35px;
+  border-bottom: 1px solid #fff;
+}
+
+#bocni_sloupec #sponzori {
+  margin-bottom: 13px;
+}
+
+#bocni_sloupec #aktuality p,
+#bocni_sloupec #sponzori p {
+  width: 186px;
+  height: 35px;
+}
+
+#bocni_sloupec #aktuality p a,
+#bocni_sloupec #sponzori p a {
+  display: block;
+  width: 186px;
+  height: 35px;
+  color: #fff;
+  text-decoration: none;
+  background: url(../obr/aktuality_sponzori_bocni_sloupec_background.png) no-repeat left center;
+}
+
+#bocni_sloupec #aktuality p a:hover,
+#bocni_sloupec #sponzori p a:hover {
+  background-position: right center;
+}
+
+#bocni_sloupec #aktuality p a span,
+#bocni_sloupec #sponzori p a span {
+  display: block;
+  padding-top: 13px;
+  padding-left: 19px;
+}
+
+#bocni_sloupec #aktuality p a:hover span,
+#bocni_sloupec #sponzori p a:hover span {
+  font-weight: bold;
+}
+
+#bocni_sloupec #aktuality_text {
+  width: 186px;
+  background-color: #848483;
+  padding-bottom: 5px;
+}
+
+#bocni_sloupec #sponzori_text {
+  width: 186px;
+}
+
+#bocni_sloupec #aktuality_text p {
+  color: #fff;
+}
+
+#bocni_sloupec #sponzori_text p {
+  width: 170px;
+  margin: 0 auto;
+  overflow: hidden;
+}
+
+#bocni_sloupec #sponzori_text p a {
+
+}
+
+#bocni_sloupec #sponzori_text p a.left {
+  float: left;
+}
+
+#bocni_sloupec #sponzori_text p a.right {
+  float: right;
+}
+
+#bocni_sloupec #sponzori_text p a.mirny_posun {
+  margin-top: 6px;
+}
+
+#bocni_sloupec #sponzori_text p a.posun {
+  margin-top: 10px;
+}
+
+#bocni_sloupec #sponzori_text p a img {
+  border: none;
+}
+
+#bocni_sloupec #aktuality_text p {
+  width: 154px;
+  margin: 0 auto;
+  padding-top: 5px;
+  padding-bottom: 2px;
+  padding-left: 10px;
+  border-bottom: 1px dotted black;
+  font: 11px Verdama, sans-serif;
+}
+
+#bocni_sloupec #aktuality_text p a {
+  color: #bfbfbf;
+  text-decoration: none;
+}
+
+#bocni_sloupec #aktuality_text p a:hover {
+  color: #ffffff;
+  text-decoration: underline;
+}
+
+#obsah {
+  width: 560px;
+  float: right;
+  position: relative;
+}
+
+#obsah #hledani_obsah {
+  width: 560px;
+  height: 62px;
+  background: url(../obr/hledani_obsah_background.png) no-repeat center;
+}
+
+#obsah #hledani_obsah #hledani_datum {
+  width: 120px;
+  padding: 20px 0 0 30px;
+}
+
+#obsah #hledani_obsah #forma_hledani {
+  width: 374px;
+  height: 50px;
+  position: absolute;
+  top: 0;
+  left: 168px;
+}
+
+#obsah #hledani_obsah #forma_hledani form {
+
+}
+
+#obsah #hledani_obsah #forma_hledani form fieldset {
+  width: 374px;
+  height: 50px;
+  border: none;
+}
+
+#obsah #hledani_obsah #forma_hledani form fieldset legend,
+#obsah #hledani_obsah #forma_hledani form fieldset label {
+  display: none;
+}
+
+#obsah #hledani_obsah #forma_hledani form fieldset input {
+
+}
+
+#obsah #hledani_obsah #forma_hledani form fieldset #hledani_label_input {
+  width: 259px;
+  height: 22px;
+  margin-top: 14px;
+  margin-left: 19px;
+  padding-top: 3px;
+  padding-left: 4px;
+  float: left;
+  color: #fff;
+  font-size: 12px;
+  border: none;
+  background: url(../obr/input_hledani_background.png) no-repeat;
+}
+
+#obal_layout_admin #obsah #hledani_obsah #forma_hledani form fieldset #tl_odeslat,
+#obsah #hledani_obsah #forma_hledani form fieldset #tl_odeslat_hledej {
+  width: 76px;
+  height: 29px;
+  margin-top: 11px;
+  margin-left: 4px;
+  float: left;
+  cursor: pointer;
+  border: none;
+  background: url(../obr/hledani_tlacitko_background.png) no-repeat left center;
+}
+
+#obal_layout_admin #obsah #hledani_obsah #forma_hledani form fieldset #tl_odeslat:hover,
+#obsah #hledani_obsah #forma_hledani form fieldset #tl_odeslat_hledej:hover {
+  background-position: right center;
+}/* /obsah */
+
+
+
+/* nacitaci elementy */
+#obal_layout .chyba_nenacteno,
+#obal_layout .nacitam,
+#obal_layout .nacteno,
+#obal_layout .zpracovavam,
+#obal_layout .chyba_reload,
+#obal_layout .nedostatek_udaju {
+  width: 480px;
+  height: 400px;
+  float: right;
+  margin: 30px 40px 600px 0;
+  text-align: center;
+  position: relative;
+  z-index: 1000;
+}
+
+#obal_layout .nedostatek_udaju,
+#obal_layout .chyba_nenacteno {
+  background: url(../obr/nenacteno_background.png) no-repeat center 30px;
+}
+
+#obal_layout .nacitam {
+  background: url(../obr/nacitam_background.png.png) no-repeat center 30px;
+}
+
+#obal_layout .nacteno {
+  background: url(../obr/nacteno_background.png) no-repeat center 30px;
+}
+
+#obal_layout .zpracovavam {
+  background: url(../obr/zpracovavam_background.gif) no-repeat center 30px;
+}
+
+#obal_layout .chyba_reload {
+  background: url(../obr/chyba_reload.png) no-repeat center 60px;
+}/* /nacitaci elementy */
+
+
+
+/* hledani */
+#mesg_search {
+
+}
+
+#mesg_search:hover {
+  background-color: #fff;
+  border: 1px solid #000;
+  padding: 30px;
+}/* /hledani */
+
+
+
+/* uvod */
+#obsah #uvodni_strana {
+
+}
+
+#obsah #uvodni_strana h1 {
+  margin-top: 20px;
+  font-size: 20px;
+  font-style: italic;
+  text-align: center;
+}
+
+#obsah #uvodni_strana h1 span {
+  color: #0066FF;
+}
+
+#obsah #uvodni_strana p {
+  width: 90%;
+  margin: 10px auto 20px;
+  padding-left: 10px;
+  font: 11px Verdana, sans-serif;
+  line-height: 18.7px;
+}
+
+#obsah #uvodni_strana #rozcestnik {
+  width: 90%;
+  margin: 10px auto;
+}
+
+#obsah #uvodni_strana #rozcestnik .obal_dve_polozky {
+  width: 450px;
+  margin: 0 auto;
+  padding-top: 6px;
+  border-top: 2px solid #ffa500;
+  overflow: hidden;
+}
+
+#obsah #uvodni_strana #rozcestnik .odsazeni {
+  margin-top: 10px;
+}
+
+#obsah #uvodni_strana #rozcestnik .obal_dve_polozky p {
+
+}
+
+#obsah #uvodni_strana #rozcestnik .obal_dve_polozky p.left {
+  padding-left: 15px;
+  float: left;
+}
+
+#obsah #uvodni_strana #rozcestnik .obal_dve_polozky p.right {
+  padding-right: 15px;
+  float: right;
+}
+
+#obsah #uvodni_strana #rozcestnik .obal_dve_polozky p a {
+  color: #da0989;
+  text-decoration: none;
+}
+
+#obsah #uvodni_strana #rozcestnik .obal_dve_polozky p a.tucne {
+  font-weight: bold;
+}
+
+#obsah #uvodni_strana #rozcestnik .obal_dve_polozky p a:hover {
+  color: #006699;
+  text-decoration: underline;
+}
+
+#obsah #uvodni_strana #rozcestnik .obal_dve_polozky p span {
+  display: block;
+}
+
+#obsah #uvodni_strana #rozcestnik .obal_dve_polozky #polozka_1 {
+  width: 167px;
+  margin: 0;
+  padding-right: 39px;
+  border-right: 1px solid #CDCFCD;
+}
+
+#obsah #uvodni_strana #rozcestnik .obal_dve_polozky #polozka_1 .nadpis {
+  width: 130px;
+  height: 15px;
+  margin-bottom: 8px;
+  background: url(../obr/team_moravia_b_nadpis.gif) no-repeat;
+}
+
+#obsah #uvodni_strana #rozcestnik .obal_dve_polozky #polozka_1 .obrazek {
+  width: 167px;
+  height: 63px;
+  background: url(../obr/team_moravia_b_background.jpg) no-repeat;
+}
+
+#obsah #uvodni_strana #rozcestnik .obal_dve_polozky #polozka_2 {
+  width: 170px;
+  margin: 0;
+}
+
+#obsah #uvodni_strana #rozcestnik .obal_dve_polozky #polozka_2 .nadpis {
+  width: 130px;
+  height: 15px;
+  margin-bottom: 8px;
+  background: url(../obr/solove_brusleni_nadpis.gif) no-repeat;
+}
+
+#obsah #uvodni_strana #rozcestnik .obal_dve_polozky #polozka_2 .obrazek {
+  width: 167px;
+  height: 63px;
+  background: url(../obr/solove_brusleni_background.jpg) no-repeat;
+}
+
+#obsah #uvodni_strana #rozcestnik .obal_dve_polozky #polozka_3 {
+  width: 167px;
+  margin: 0;
+  padding-right: 39px;
+  border-right: 1px solid #CDCFCD;
+}
+
+#obsah #uvodni_strana #rozcestnik .obal_dve_polozky #polozka_3 .nadpis {
+  width: 130px;
+  height: 15px;
+  margin-bottom: 8px;
+  background: url(../obr/hokejova_skola_nadpis.gif) no-repeat;
+}
+
+#obsah #uvodni_strana #rozcestnik .obal_dve_polozky #polozka_3 .obrazek {
+  width: 167px;
+  height: 63px;
+  background: url(../obr/hokejova_skola_background.jpg) no-repeat;
+}
+
+#obsah #uvodni_strana #rozcestnik .obal_dve_polozky #polozka_4 {
+  width: 170px;
+  margin: 0;
+}
+
+#obsah #uvodni_strana #rozcestnik .obal_dve_polozky #polozka_4 .nadpis {
+  width: 130px;
+  height: 15px;
+  margin-bottom: 8px;
+  background: url(../obr/kurzy_brusleni_nadpis.gif) no-repeat;
+}
+
+#obsah #uvodni_strana #rozcestnik .obal_dve_polozky #polozka_4 .obrazek {
+  width: 167px;
+  height: 63px;
+  background: url(../obr/kurzy_brusleni_background.jpg) no-repeat;
+}/* /uvod */
+
+
+
+/* team B */
+#obsah #team_b {
+  width: 500px;
+  margin: 20px auto 0;
+}
+
+#obsah #team_b h2 {
+  margin-top: 20px;
+  padding-bottom: 10px;
+  font-size: 20px;
+  font-style: italic;
+  color: #0066FF;
+}
+
+#obsah #team_b p {
+  margin-bottom: 3px;
+  padding-left: 10px;
+  font: 11px Verdana, sans-serif;
+  line-height: 18.7px;
+}
+
+#obsah #team_b .barva {
+  color: #0066FF;
+}
+
+#obsah #team_b p.odsazeni_top {
+  margin-top: 20px;
+}
+
+#obsah #team_b p.odsazeni_bottom {
+  margin-bottom: 20px;
+}
+
+#obsah #team_b table {
+  border-collapse: collapse;
+  margin: 0 auto 30px;
+}
+
+#obsah #team_b table caption {
+  display: none;
+}
+
+#obsah #team_b table tr {
+  background-color: #eff3f4;
+}
+
+#obsah #team_b table tr.lichy {
+  background-color: #e3e8ec;
+}
+
+#obsah #team_b table tr th,
+#obsah #team_b table tr td {
+  height: 20px;
+  font: 11px Verdana, sans-serif;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#obsah #team_b table tr th {
+  width: 140px;
+  padding-left: 3px;
+  font-weight: bold;
+}
+
+#obsah #team_b table tr td {
+  width: 160px;
+  padding-right: 3px;
+}
+
+#obsah #team_b table tr td.center {
+  text-align: center;
+}
+
+#obsah #team_b table tr td a {
+  color: #0066FF;
+}
+
+#obsah #team_b table tr td a:hover {
+  color: #da0989;
+}
+
+#obsah #team_b #obal_rozvrh_team_b {
+  width: 500px;
+  margin-top: 20px;
+  background: #f6f8f9 url(../obr/tabulka_nadpis_background.png) no-repeat center top;
+}
+
+#obsah #team_b #obal_rozvrh_team_b h3 {
+  line-height: 35px;
+  padding-left: 20px;
+  font-size: 16px;
+  font-weight: normal;
+}
+
+#obsah #team_b #obal_rozvrh_team_b p {
+  margin-bottom: 6px;
+  padding-left: 10px;
+  font: 11px Verdana, sans-serif;
+  line-height: 18.7px;
+}
+
+#obsah #team_b p a,
+#obsah #team_b #obal_rozvrh_team_b p a,
+#obsah #team_b #obal_ukazky_prvku p a,
+#obsah #team_b ul li a {
+  color: #006699;
+}
+
+#obsah #team_b p a:hover,
+#obsah #team_b #obal_rozvrh_team_b p a:hover,
+#obsah #team_b #obal_ukazky_prvku p a:hover,
+#obsah #team_b ul li a:hover {
+  color: #da0989;
+}
+
+#obsah #team_b #obal_rozvrh_team_b p.odsazeni_top {
+  margin-top: 20px;
+}
+
+#obsah #team_b #obal_rozvrh_team_b p.odsazeni_bottom {
+  margin-bottom: 20px;
+}
+
+#obsah #team_b #obal_rozvrh_team_b p.odsazeni_bottom_padding {
+  padding-bottom: 20px;
+}
+
+#obsah #team_b #obal_rozvrh_team_b p.odsazeni_top {
+  margin-top: 20px;
+}
+
+#obsah #team_b #obal_rozvrh_team_b p.odsazeni_bottom {
+  margin-bottom: 20px;
+}
+
+#obsah #team_b #obal_rozvrh_team_b p.odsazeni_bottom_padding {
+  padding-bottom: 20px;
+}
+
+#obsah #team_b p.mirne_odsazeni_top {
+  margin-top: 10px;
+}
+
+#obsah #team_b p.mirne_odsazeni_bottom {
+  margin-bottom: 10px;
+}
+
+#obsah #team_b ul {
+  margin-left: 40px;
+  font: 11px Verdana, sans-serif;
+  line-height: 18.7px;
+}
+
+#obsah #team_b li {
+  color: #0066FF;
+}
+
+#obsah #team_b li span {
+  color: #000;
+}
+
+#obsah #team_b #obal_ukazky_prvku {
+
+}
+
+#obsah #team_b #obal_ukazky_prvku h3,
+#obsah #team_b #obal_ukazky_prvku h4 {
+  line-height: 35px;
+  margin-top: 40px;
+  padding-left: 20px;
+  font-size: 16px;
+  font-weight: normal;
+}
+
+#obsah #team_b #obal_ukazky_prvku h4 {
+  margin-top: 20px;
+}
+
+#obsah #team_b #obal_ukazky_prvku p {
+  margin-bottom: 6px;
+  padding-left: 30px;
+  font: 11px Verdana, sans-serif;
+  line-height: 18.7px;
+}
+
+#obsah #team_b #obal_ukazky_prvku p.odsazeny {
+  position: relative;
+  top: -25px;
+  left: 160px;
+}/* /team B */
+
+
+
+/* solove brusleni */
+#obsah #solove_brusleni {
+  width: 500px;
+  margin: 20px auto 0;
+}
+
+#obsah #solove_brusleni h2 {
+  margin-top: 20px;
+  padding-bottom: 20px;
+  font-size: 20px;
+  font-style: italic;
+  color: #0066FF;
+}
+
+#obsah #solove_brusleni p {
+  margin-bottom: 3px;
+  padding-left: 10px;
+  font: 11px Verdana, sans-serif;
+  line-height: 18.7px;
+}
+
+#obsah #solove_brusleni table {
+  border-collapse: collapse;
+  margin: 0 auto 30px;
+}
+
+#obsah #solove_brusleni table caption {
+  display: none;
+}
+
+#obsah #solove_brusleni table tr {
+  background-color: #eff3f4;
+}
+
+#obsah #solove_brusleni table tr.lichy {
+  background-color: #e3e8ec;
+}
+
+#obsah #solove_brusleni table tr th,
+#obsah #solove_brusleni table tr td {
+  height: 20px;
+  font: 11px Verdana, sans-serif;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#obsah #solove_brusleni table tr th {
+  width: 140px;
+  padding-left: 3px;
+  font-weight: bold;
+}
+
+#obsah #solove_brusleni table tr td {
+  width: 160px;
+  padding-right: 3px;
+}
+
+#obsah #solove_brusleni table tr td.center {
+  text-align: center;
+}
+
+#obsah #solove_brusleni table tr td a {
+  color: #0066FF;
+}
+
+#obsah #solove_brusleni table tr td a:hover {
+  color: #da0989;
+}/* /solove brusleni */
+
+
+
+/* hokejova skola */
+#obsah #hokejova_skola {
+
+}
+
+#obsah #hokejova_skola {
+  width: 500px;
+  margin: 20px auto 0;
+}
+
+#obsah #hokejova_skola h2 {
+  margin-top: 20px;
+  padding-bottom: 10px;
+  font-size: 20px;
+  font-style: italic;
+  color: #0066FF;
+}
+
+#obsah #hokejova_skola p {
+  margin-bottom: 20px;
+  padding-left: 10px;
+  font: 11px Verdana, sans-serif;
+  line-height: 18.7px;
+}
+
+#obsah #hokejova_skola p.male_odsazeni {
+  margin-bottom: 10px;
+}
+
+#obsah #hokejova_skola table {
+  border-collapse: collapse;
+  margin: 0 auto 30px;
+}
+
+#obsah #hokejova_skola table caption {
+  display: none;
+}
+
+#obsah #hokejova_skola table tr {
+  background-color: #eff3f4;
+}
+
+#obsah #hokejova_skola table tr.lichy {
+  background-color: #e3e8ec;
+}
+
+#obsah #hokejova_skola table tr th,
+#obsah #hokejova_skola table tr td {
+  height: 20px;
+  font: 11px Verdana, sans-serif;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#obsah #hokejova_skola table tr th {
+  width: 140px;
+  padding-left: 3px;
+  font-weight: bold;
+}
+
+#obsah #hokejova_skola table tr td {
+  width: 160px;
+  padding-right: 3px;
+}
+
+#obsah #hokejova_skola table tr td.center {
+  text-align: center;
+}
+
+#obsah #hokejova_skola table tr td a {
+  color: #0066FF;
+}
+
+#obsah #hokejova_skola table tr td a:hover {
+  color: #da0989;
+}/* /hokejova skola */
+
+
+
+/* aktuality */
+#obsah #aktuality_obal_sekce {
+  width: 490px;
+  margin: 30px auto;
+}
+
+#obsah #aktuality_obal_sekce h2 {
+  margin-bottom: 20px;
+  padding-left: 10px;
+  font-size: 20px;
+  font-style: italic;
+}
+
+#obsah #aktuality_obal_sekce p {
+  margin-bottom: 5px;
+  padding-bottom: 5px;
+  overflow: hidden;
+  border-bottom: 1px solid #bfbfbf;
+}
+
+#obsah #aktuality_obal_sekce p span {
+  display: block;
+  float: left;
+}
+
+#obsah #aktuality_obal_sekce p .datum_aktuality {
+  width: 70px;
+  text-align: right;
+}
+
+#obsah #aktuality_obal_sekce p .oddelovac_aktuality {
+  width: 10px;
+  text-align: center;
+}
+
+#obsah #aktuality_obal_sekce p .text_aktuality {
+  width: 410px;
+  text-align: left;
+}/* /aktuality */
+
+
+
+/* historie */
+#obsah #historie {
+  width: 500px;
+  margin: 20px auto 0;
+  position: relative;
+}
+
+#obsah #historie .brusla {
+  display: block;
+  width: 161px;
+  height: 474px;
+  position: absolute;
+  top: -20px;
+  right: 0;
+  z-index: 10;
+  background: url(../obr/brusle_background.png) no-repeat;
+}
+
+#obsah #historie h2 {
+  padding-left: 10px;
+  font-size: 20px;
+  font-style: italic;
+}
+
+#obsah #historie p {
+  margin-bottom: 10px;
+  padding-left: 10px;
+  font: 11px Verdana, sans-serif;
+  line-height: 18.7px;
+  position: relative;
+  z-index: 20;
+}/* /historie */
+
+
+
+/* fotogalerie */
+#obsah #fotogalerie {
+  width: 500px;
+  margin: 0 auto 30px;
+}
+
+#obsah #fotogalerie #slozky_foto {
+  width: 500px;
+  margin: 10px auto 10px;
+  overflow: hidden;
+}
+
+#obsah #fotogalerie #slozky_foto p {
+  margin-bottom: 6px;
+  margin-left: 16px;
+  float: left;
+}
+
+#obsah #fotogalerie #slozky_foto p a {
+  width: 80px;
+  padding-top: 48px;
+  display: block;
+  color: #0066FF;
+  font: 10px Verdana, sans-serif;
+  text-align: center;
+  text-decoration: none;
+  background: url(../obr/slozka_foto_background.png) no-repeat center top;
+}
+
+#obsah #fotogalerie #slozky_foto p a:hover {
+  color: #da0989;
+  text-decoration: underline;
+}
+
+#obsah #fotogalerie .tri_polozky {
+  overflow: hidden;
+}
+
+#obsah #fotogalerie .oddelovac {
+  display: block;
+  width: 483px;
+  height: 29px;
+  margin-left: 5px;
+  background: url(../obr/oddelovat_lista.gif) repeat-x;
+}
+
+#obsah #fotogalerie .tri_polozky a {
+  float: left;
+  margin-left: 6px;
+  padding-right: 6px;
+  border-right: 1px solid #bfbfbf;
+}
+
+#obsah #fotogalerie .tri_polozky a.posledni {
+  border-right: none;
+}
+
+#obsah #fotogalerie .tri_polozky a img {
+  border: 1px solid #bfbfbf;
+}
+
+#obsah #fotogalerie .tri_polozky a:hover img {
+  border: 1px solid #0066FF;
+}
+
+#obsah #fotogalerie .tri_polozky a span {
+  display: none;
+}/* /fotogalerie */
+
+
+
+/* kurzy */
+#obsah #kurzy {
+  width: 500px;
+  margin: 20px auto 0;
+}
+
+#obsah #kurzy h2 {
+  font-size: 20px;
+  font-style: italic;
+}
+
+#obsah #kurzy #obal_kurzy {
+  width: 500px;
+  margin-top: 20px;
+  background: #f6f8f9 url(../obr/tabulka_nadpis_background.png) no-repeat center top;
+}
+
+#obsah #kurzy #obal_kurzy h3 {
+  line-height: 35px;
+  padding-left: 20px;
+  font-size: 16px;
+  font-weight: normal;
+}
+
+#obsah #kurzy #obal_kurzy p {
+  margin-top: 30px;
+  margin-bottom: 6px;
+  padding-left: 10px;
+  font: 11px Verdana, sans-serif;
+  line-height: 18.7px;
+}
+
+#obsah #kurzy #obal_kurzy p.prvni {
+  margin-top: 20px;
+}
+
+#obsah #kurzy #obal_kurzy p.nadpis_cena {
+  font-style: italic;
+  margin-bottom: 0;
+}
+
+#obsah #kurzy #obal_kurzy p.cena {
+  margin-top: 0;
+  margin-left: 20px;
+}
+
+#obsah #kurzy #obal_kurzy p.text_bottom {
+  margin-top: 0;
+  padding-bottom: 10px;
+}
+
+#obsah #kurzy #obal_kurzy table {
+  border-collapse: collapse;
+  margin: 0 auto;
+}
+
+#obsah #kurzy #obal_kurzy table caption {
+  display: none;
+}
+
+#obsah #kurzy #obal_kurzy table tr {
+  background-color: #eff3f4;
+}
+
+#obsah #kurzy #obal_kurzy table tr th,
+#obsah #kurzy #obal_kurzy table tr td {
+  height: 20px;
+  font: 11px Verdana, sans-serif;
+  border-right: 1px solid #e0e0e0;
+  vertical-align: middle;
+}
+
+#obsah #kurzy #obal_kurzy table tr th {
+  width: 140px;
+  font-weight: bold;
+}
+
+#obsah #kurzy #obal_kurzy table tr td {
+  width: 100px;
+  text-align: center;
+}
+
+#obsah #kurzy #obal_kurzy table tr td.posledni {
+  border-right: none;
+}
+
+#obsah #kurzy #obal_kurzy table tr.lichy {
+  background-color: #e3e8ec;
+}
+
+#obsah #kurzy #obal_zbytek_kurzy {
+  width: 500px;
+  margin-top: 40px;
+}
+
+#obsah #kurzy #obal_zbytek_kurzy h4 {
+  margin-top: 40px;
+  font-size: 14px;
+  font-weight: normal;
+}
+
+#obsah #kurzy #obal_zbytek_kurzy p {
+  padding-left: 10px;
+  font: 11px Verdana, sans-serif;
+  line-height: 18.7px;
+}
+
+#obsah #kurzy #obal_zbytek_kurzy p.vek {
+  margin-bottom: 6px;
+  padding-left: 20px;
+}
+
+#obsah #kurzy #obal_zbytek_kurzy p.text {
+  margin-top: 20px;
+  margin-bottom: 50px;
+}
+
+#obsah #kurzy #obal_zbytek_kurzy table {
+  border-collapse: collapse;
+  margin: 0 auto 50px;
+}
+
+#obsah #kurzy #obal_zbytek_kurzy table caption {
+  display: none;
+}
+
+#obsah #kurzy #obal_zbytek_kurzy table tr {
+  background-color: #eff3f4;
+}
+
+#obsah #kurzy #obal_zbytek_kurzy table tr.lichy {
+  background-color: #e3e8ec;
+}
+
+#obsah #kurzy #obal_zbytek_kurzy table tr th,
+#obsah #kurzy #obal_zbytek_kurzy table tr td {
+  height: 20px;
+  font: 11px Verdana, sans-serif;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#obsah #kurzy #obal_zbytek_kurzy table tr th {
+  width: 140px;
+  padding-left: 3px;
+  font-weight: bold;
+}
+
+#obsah #kurzy #obal_zbytek_kurzy table tr td {
+  width: 160px;
+  padding-right: 3px;
+}
+
+#obsah #kurzy #obal_zbytek_kurzy table tr td.center {
+  text-align: center;
+}
+
+#obsah #kurzy #obal_zbytek_kurzy table tr td a {
+  color: #0066FF;
+}
+
+#obsah #kurzy #obal_zbytek_kurzy table tr td a:hover {
+  color: #da0989;
+}/* /kurzy */
+
+
+
+/* kontakt */
+#obsah #kontakt {
+  width: 500px;
+  margin: 20px auto 0;
+}
+
+#obsah #kontakt h2 {
+  font-size: 20px;
+  font-style: italic;
+}
+
+#obsah #kontakt .obal_kontakt_top {
+  width: 200px;
+  padding-right: 20px;
+  float: left;
+  border-right: 1px solid #bfbfbf;
+}
+
+#obsah #kontakt p {
+  margin-bottom: 3px;
+  padding-left: 10px;
+  font: 11px Verdana, sans-serif;
+  line-height: 18.7px;
+}
+
+#obsah #kontakt p a {
+  color: #0066FF;
+}
+
+#obsah #kontakt p a:hover {
+  color: #da0989;
+}
+
+#obsah #kontakt p.prvni {
+  margin-top: 10px;
+}
+
+#obsah #kontakt .bankovni_spojeni {
+  width: 260px;
+  margin-top: 10px;
+  float: right;
+}
+
+#obsah #kontakt .bankovni_spojeni .mirne_odsazeni {
+  margin-top: 10px;
+}
+
+#obsah #kontakt .obal_kontakty {
+  width: 500px;
+  margin: 160px auto 50px;
+}
+
+#obsah #kontakt .obal_kontakty p {
+  color: #0066FF;
+}
+
+#obsah #kontakt .obal_kontakty table {
+  border-collapse: collapse;
+  margin: 0 auto 30px;
+}
+
+#obsah #kontakt .obal_kontakty table caption {
+  display: none;
+}
+
+#obsah #kontakt .obal_kontakty table tr {
+  background-color: #eff3f4;
+}
+
+#obsah #kontakt .obal_kontakty table tr.lichy {
+  background-color: #e3e8ec;
+}
+
+#obsah #kontakt .obal_kontakty table tr th,
+#obsah #kontakt .obal_kontakty table tr td {
+  height: 20px;
+  font: 11px Verdana, sans-serif;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#obsah #kontakt .obal_kontakty table tr th {
+  width: 140px;
+  padding-left: 3px;
+  font-weight: bold;
+}
+
+#obsah #kontakt .obal_kontakty table tr td {
+  width: 160px;
+  padding-right: 3px;
+}
+
+#obsah #kontakt .obal_kontakty table tr td.center {
+  text-align: center;
+}
+
+#obsah #kontakt .obal_kontakty table tr td a {
+  color: #0066FF;
+}
+
+#obsah #kontakt .obal_kontakty table tr td a:hover {
+  color: #da0989;
+}/* /kontakt */
+
+
+
+/* napiste nam */
+#obsah #napiste_nam {
+  width: 410px;
+  margin: 30px auto 60px;
+  position: relative;
+}
+
+#obsah #napiste_nam .obalka_01 {
+  display: block;
+  width: 371px;
+  height: 447px;
+  position: absolute;
+  top: -20px;
+  right: 30px;
+  z-index: 10;
+  background: url(../obr/obalka_background_001.png) no-repeat;
+}
+
+#obsah #napiste_nam .obalka_02 {
+  display: block;
+  width: 150px;
+  height: 129px;
+  position: absolute;
+  top: -40px;
+  left: -60px;
+  z-index: 10;
+  background: url(../obr/obalka_background_002.png) no-repeat;
+}
+
+#obsah #napiste_nam h2 {
+  font-size: 20px;
+  font-style: italic;
+  position: relative;
+  z-index: 20;
+}
+
+#obsah #napiste_nam p {
+  position: relative;
+  z-index: 20;
+}
+
+#obsah #napiste_nam p.text {
+  margin-top: 10px;
+  margin-left: 0;
+  font: 12px Verdana, sans-serif;
+  line-height: 18px;
+  color: #000;
+}
+
+#obsah #napiste_nam form {
+  margin-top: 30px;
+  position: relative;
+  z-index: 20;
+}
+
+#obsah #napiste_nam form fieldset {
+  border: none;
+}
+
+#obsah #napiste_nam form fieldset legend {
+  display: none;
+}
+
+#obsah #napiste_nam form fieldset label {
+  width: 130px;
+  float: left;
+  clear: both;
+  text-align: right;
+  padding-top: 2px;
+  margin-bottom: 10px;
+  white-space: nowrap;
+}
+
+#obsah #napiste_nam form fieldset #label_input_psc {
+  width: 60px;
+}
+
+#obsah #napiste_nam form fieldset #label_input_telefon {
+  width: 80px;
+}
+
+#obsah #napiste_nam form fieldset label[for=label_textarea_pozadavek] {
+  width: auto;
+  margin-top: 18px;
+  margin-bottom: 2px;
+}
+
+#obsah #napiste_nam form fieldset input {
+  float: left;
+  border: 1px solid #7f9db9;
+  margin-bottom: 2px;
+  margin-left: 6px;
+}
+
+#obsah #napiste_nam form fieldset textarea {
+  margin: 0 auto;
+  float: left;
+  clear: both;
+}
+
+#obsah #napiste_nam form fieldset #tl_odeslat_napiste {
+  width: 58px;
+  height: 20px;
+  clear: both;
+  margin: 3px 0 0 170px;
+  background: url(../obr/odeslat_background.png) no-repeat;
+  border: none;
+  cursor: pointer;
+}
+
+#obsah #napiste_nam form fieldset span {
+  margin-left: 2px;
+  float: left;
+  color: #da0989;
+}
+
+#obsah #napiste_nam p {
+  margin-left: 30px;
+  color: #da0989;
+  font-weight: bold;
+  font-size: 10px;
+}
+
+#obsah #napiste_nam p span {
+  color: #da0989;
+}/* /napiste nam */
+
+
+
+/* sponzori */
+#obsah #sponzori {
+  width: 480px;
+  margin: 0 auto;
+  position: relative;
+  overflow: hidden;
+}
+
+#obsah #sponzori .pozadi {
+  width: 520px;
+  height: 1100px;
+  margin: 20px auto;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 10;
+  background: url(../obr/sponzori_background.png) repeat-y;
+}
+
+#obsah #sponzori h2 {
+  font-size: 20px;
+  font-style: italic;
+  position: relative;
+  z-index: 20;
+}
+
+#obsah #sponzori p.text {
+  width: 480px;
+  margin: 6px 0 6px;
+  font: 11px Verdana, sans-serif;
+}
+
+#obsah #sponzori p {
+  width: 180px;
+  text-align: center;
+  position: relative;
+  z-index: 20;
+}
+
+#obsah #sponzori p.hlavni_logo {
+  width: 100%;
+}
+
+#obsah #sponzori p.hlavni_logo a {
+  margin: 0 auto;
+  display: block;
+  width: 260px;
+  height: 260px;
+}
+
+#obsah #sponzori p.loga_left {
+  margin-left: 10px;
+  float: left;
+}
+
+#obsah #sponzori p.loga_right {
+  margin-right: 10px;
+  float: right;
+}
+
+#obsah #sponzori p a {
+  text-decoration: none;
+}
+
+#obsah #sponzori p a img {
+  margin-bottom: 10px;
+  border: none;
+}/* /sponzori */
+
+
+
+/* rozvrh treninku */
+#obsah #rozvrh_treninku {
+  width: 500px;
+  margin: 20px auto 0;
+}
+
+#obsah #rozvrh_treninku h2 {
+  font-size: 20px;
+  font-style: italic;
+}
+
+#obsah #rozvrh_treninku .obal_rozvrh_treninku {
+  width: 500px;
+  margin-top: 20px;
+  background: #f6f8f9 url(../obr/tabulka_nadpis_background.png) no-repeat center top;
+}
+
+#obsah #rozvrh_treninku .obal_rozvrh_treninku h3 {
+  line-height: 35px;
+  padding-left: 20px;
+  font-size: 16px;
+  font-weight: normal;
+}
+
+#obsah #rozvrh_treninku .obal_rozvrh_treninku p {
+  padding-bottom: 20px;
+  padding-left: 10px;
+  font: 11px Verdana, sans-serif;
+  line-height: 18.7px;
+}
+
+#obsah #rozvrh_treninku .obal_rozvrh_treninku p.prvni {
+  margin-top: 20px;
+}
+
+#obsah #rozvrh_treninku .obal_rozvrh_treninku p.center {
+  text-align: center;
+}
+
+#obsah #rozvrh_treninku .obal_rozvrh_treninku table {
+  border-collapse: collapse;
+  margin: 0 auto 30px;
+}
+
+#obsah #rozvrh_treninku .obal_rozvrh_treninku table caption {
+  display: none;
+}
+
+#obsah #rozvrh_treninku .obal_rozvrh_treninku table tr {
+  background-color: #eff3f4;
+}
+
+#obsah #rozvrh_treninku .obal_rozvrh_treninku table tr th,
+#obsah #rozvrh_treninku .obal_rozvrh_treninku table tr td {
+  height: 20px;
+  font: 11px Verdana, sans-serif;
+  border-right: 1px solid #e0e0e0;
+  margin-right: 10px;
+  vertical-align: middle;
+}
+
+#obsah #rozvrh_treninku .obal_rozvrh_treninku table tr th {
+  width: 60px;
+  font-weight: bold;
+}
+
+#obsah #rozvrh_treninku .obal_rozvrh_treninku table tr th[colspan] {
+  letter-spacing: 3px;
+}
+
+#obsah #rozvrh_treninku .obal_rozvrh_treninku table tr td {
+  width: 120px;
+  text-align: center;
+}
+
+#obsah #rozvrh_treninku .obal_rozvrh_treninku table tr .posledni {
+  border-right: none;
+}
+
+#obsah #rozvrh_treninku .obal_rozvrh_treninku table tr.lichy {
+  background-color: #e3e8ec;
+}/* /rozvrh treninku */
+
+
+
+/* prehled akci */
+#obsah #prehled_akci {
+  width: 500px;
+  margin: 20px auto 0;
+}
+
+#obsah #prehled_akci h2 {
+  font-size: 20px;
+  font-style: italic;
+}
+
+#obsah #prehled_akci .obal_prehled_akci {
+  width: 500px;
+  min-height: 700px; /* provizorni */
+  margin-top: 20px;
+  padding-bottom: 30px;
+  background: #f6f8f9 url(../obr/tabulka_nadpis_background.png) no-repeat center top;
+}
+
+#obsah #prehled_akci .obal_prehled_akci {
+  width: 500px;
+  margin-top: 20px;
+  background: #f6f8f9 url(../obr/tabulka_nadpis_background.png) no-repeat center top;
+}
+
+#obsah #prehled_akci .obal_prehled_akci h3 {
+  line-height: 35px;
+  padding-left: 20px;
+  font-size: 16px;
+  font-weight: normal;
+}
+
+#obsah #prehled_akci .obal_prehled_akci p {
+  margin-top: 6px;
+  margin-bottom: 6px;
+  padding-left: 10px;
+  padding-bottom: 6px;
+  font: 11px Verdana, sans-serif;
+  line-height: 18.7px;
+  border-bottom: 1px solid #bfbfbf;
+}
+
+#obsah #prehled_akci .obal_prehled_akci p.prvni {
+  margin-top: 20px;
+}/* /prehled akci */
+
+
+
+/* forum */
+#obsah #forum {
+  width: 500px;
+  margin: 20px auto 0;
+  position: relative;
+}
+
+#obsah #forum h2 {
+  font-size: 20px;
+  font-style: italic;
+}
+
+#obsah #forum #pridat_prispevek {
+  width: 200px;
+  height: 180px;
+  float: right;
+  position: relative;
+  top: -20px;
+  background: url(../obr/background_forum_odeslat.png) no-repeat;
+}
+
+#obsah #forum #pridat_prispevek p {
+  padding-left: 30px;
+  font: 10px Verdana, sans-serif;
+  text-align: left;
+  position: relative;
+  top: -10px;
+}
+
+#obsah #forum #pridat_prispevek form {
+  margin: 6px;
+}
+
+#obsah #forum #pridat_prispevek form fieldset {
+  border: none;
+}
+
+#obsah #forum #pridat_prispevek form fieldset legend {
+  display: none;
+}
+
+#obsah #forum #pridat_prispevek form fieldset h3 {
+  line-height: 35px;
+  padding-left: 20px;
+  font-size: 14px;
+  font-weight: normal;
+}
+
+#obsah #forum #pridat_prispevek form fieldset label {
+  width: 60px;
+  margin-bottom: 3px;
+  padding-right: 6px;
+  float: left;
+  text-align: right;
+}
+
+#obsah #forum #pridat_prispevek form fieldset input {
+  width: 60px;
+  margin-bottom: 3px;
+  height: 14px;
+  padding-top: 2px;
+  float: left;
+}
+
+#obsah #forum #pridat_prispevek form fieldset textarea {
+  width: 100px;
+  height: 60px;
+  clear: both;
+}
+
+#obsah #forum #pridat_prispevek form fieldset input,
+#obsah #forum #pridat_prispevek form fieldset textarea {
+  background-color: transparent;
+  border: 1px solid #000;
+  font: 10px Verdana, sans-serif;
+  
+}
+
+#obsah #forum #pridat_prispevek form fieldset textarea:focus,
+#obsah #forum #pridat_prispevek form fieldset input:focus {
+  color: #0066FF;
+  background-color: #eff3f4;
+}
+
+#obsah #forum #pridat_prispevek form fieldset textarea:hover,
+#obsah #forum #pridat_prispevek form fieldset input:hover {
+  border-color: #0066FF;
+  background-color: #eff3f4;
+}
+
+#obsah #forum #pridat_prispevek form fieldset span {
+  float: left;
+  margin: 0 3px;
+  display: block;
+}
+
+#obsah #forum #pridat_prispevek form fieldset #tl_odeslat_prispevek {
+  width: 58px;
+  height: 20px;
+  clear: both;
+  margin-top: 2px;
+  margin-left: 66px;
+  background: url(../obr/odeslat_background.png) no-repeat;
+  border: none;
+  cursor: pointer;
+}
+
+#obsah #forum .prispevek {
+  margin-top: 20px;
+}
+
+#obsah #forum .prispevek p {
+  font: 11px Verdana, sans-serif;
+}
+
+#obsah #forum .prispevek p.datum {
+  float: left;
+  color: #848484;
+}
+
+#obsah #forum .prispevek p.oddelovac {
+  width: 12px;
+  margin-left: 2px;
+  float: left;
+  text-align: center;
+  color: #848484;
+}
+
+#obsah #forum .prispevek p.jmeno {
+  float: left;
+  text-decoration: underline;
+  color: #848484;
+}
+
+#obsah #forum .prispevek p.zprava {
+  padding-top: 16px;
+}/* /forum */
+
+
+
+/* administrace */
+#hlavni_obal_layout #zahlavi #zahlavi_admin {
+
+}
+
+#hlavni_obal_layout #zahlavi #zahlavi_admin a {
+  display: block;
+  width: 746px;
+  height: 247px;
+  background: url(../obr/zahlavi_background_alternativa.png) no-repeat;
+}
+
+#obal_layout_admin {
+  width: 746px;
+  margin: 0 auto;
+  padding-bottom: 67px;
+  position: relative;
+}
+
+#obal_layout_admin #menu_admin {
+  width: 186px;
+  height: auto;
+  min-height: 100%;
+  float: left;
+}
+
+#obal_layout_admin #menu_admin p {
+
+}
+
+#obal_layout_admin #menu_admin p a {
+  display: block;
+  height: 32px;
+  padding-left: 6px;
+  color: #fff;
+  text-decoration: none;
+  line-height: 32px;
+  border-bottom: 1px dotted #fff;
+  background: #848484 no-repeat 145px center;
+}
+
+#obal_layout_admin #menu_admin p a:hover {
+  background-color: #fff;
+  border-color: #848484;
+  color: #da0989;
+  text-decoration: underline;
+}
+
+#obal_layout_admin #menu_admin #uvod a {
+  background-image: url(../obr/menu_ikony/hlavni_strana.png);
+}
+
+#obal_layout_admin #menu_admin #historie a {
+  background-image: url(../obr/menu_ikony/historie_klubu.png);
+}
+
+#obal_layout_admin #menu_admin #fotogalerie a {
+  background-image: url(../obr/menu_ikony/fotogalerie.png);
+}
+
+#obal_layout_admin #menu_admin #rozvrh a {
+  background-image: url(../obr/menu_ikony/rozvrh_treninku.png);
+}
+
+#obal_layout_admin #menu_admin #kurzy a {
+  background-image: url(../obr/menu_ikony/kurzy_brusleni.png);
+}
+
+#obal_layout_admin #menu_admin #akce a {
+  background-image: url(../obr/menu_ikony/prehled_akci.png);
+}
+
+#obal_layout_admin #menu_admin #kontakt a {
+  background-image: url(../obr/menu_ikony/kontakt.png);
+}
+
+#obal_layout_admin #menu_admin #aktuality a {
+  background-image: url(../obr/menu_ikony/aktuality.png);
+}
+
+#obal_layout_admin #menu_admin #napiste a {
+  background-image: url(../obr/menu_ikony/napiste_nam.png);
+}
+
+#obal_layout_admin #menu_admin #forum a {
+  background-image: url(../obr/menu_ikony/forum.png);
+}
+
+#obal_layout_admin #menu_admin #team a {
+  background-image: url(../obr/menu_ikony/team_moravia_b.png);
+}
+
+#obal_layout_admin #menu_admin #odhlasit a {
+  background-image: url(../obr/menu_ikony/odhlasit.png);
+}
+
+#obal_layout_admin #menu_admin #zpet_na_stranky a {
+  background-image: url(../obr/menu_ikony/zpatky_na_stranky.png);
+}
+
+#obal_layout_admin #menu_admin p.gen {
+  height: 32px;
+  font: 11px Tahoma, sans-serif;
+  color: #000;
+  text-decoration: none;
+  text-align: center;
+  line-height: 32px;
+  border-bottom: 1px dotted #000;
+}
+
+#obal_layout_admin #obsah_admin {
+  width: 560px;
+  float: right;
+  position: relative;
+}
+
+/* uvodni strana administrace */
+#obal_layout_admin #obsah_admin #neotux {
+  width: 130px;
+  height: 160px;
+  margin: 60px auto;
+  overflow: hidden;
+}
+
+#obal_layout_admin #obsah_admin #neotux p em {
+  font-style: normal;
+  text-decoration: underline;
+}
+
+#obal_layout_admin #obsah_admin #tucnak {
+  width: 48px;
+  height: 48px;
+  display: block;
+  position: relative;
+  top: 100px;
+  left: 0;
+  background: url(../obr/admin/neotux.png) no-repeat;
+}
+
+#obal_layout_admin #obsah_admin #bublina {
+  width: 128px;
+  height: 128px;
+  padding-top: 20px;
+  overflow: hidden;
+  position: relative;
+  top: -50px;
+  left: 3px;
+  font: 10px Verdana, sans-serif;
+  text-align: center;
+  color: black;
+  background: url(../obr/admin/bublina.png) no-repeat;
+}
+
+#obal_layout_admin #obsah_admin #bublina #cas {
+  margin-right: 2px;
+}/* /uvodni strana administrace */
+
+
+
+/* centralni styly pro inputy */
+#obal_layout_admin #obsah_admin form fieldset input.label_input_url,
+#obal_layout_admin #obsah_admin form fieldset input.label_input_email,
+#obal_layout_admin #obsah_admin form fieldset input.label_input_odstavec,
+#obal_layout_admin #obsah_admin form fieldset input.label_input_upravit,
+#obal_layout_admin #obsah_admin form fieldset input.label_input_smazat,
+#obal_layout_admin #obsah_admin form fieldset input.label_input_ulozit,
+#obal_layout_admin #obsah_admin form fieldset input.label_input_pridat,
+#obal_layout_admin #obsah_admin form fieldset input.label_input_ne,
+#obal_layout_admin #obsah_admin form fieldset input.label_input_ano,
+#obal_layout_admin #obsah_admin form fieldset input.label_input_b,
+#obal_layout_admin #obsah_admin form fieldset input.label_input_i,
+#obal_layout_admin #obsah_admin form fieldset input.label_input_u {
+  cursor: pointer;
+  border: none;
+}
+
+#obal_layout_admin #obsah_admin form fieldset input.label_input_url,
+#obal_layout_admin #obsah_admin form fieldset input.label_input_email,
+#obal_layout_admin #obsah_admin form fieldset input.label_input_odstavec,
+#obal_layout_admin #obsah_admin form fieldset input.label_input_upravit,
+#obal_layout_admin #obsah_admin form fieldset input.label_input_smazat,
+#obal_layout_admin #obsah_admin form fieldset input.label_input_ulozit,
+#obal_layout_admin #obsah_admin form fieldset input.label_input_pridat,
+#obal_layout_admin #obsah_admin form fieldset input.label_input_ne,
+#obal_layout_admin #obsah_admin form fieldset input.label_input_ano {
+  width: 81px;
+  height: 29px;
+}
+
+#obal_layout_admin #obsah_admin form fieldset input.label_input_upravit,
+#obal_layout_admin #obsah_admin form fieldset input.label_input_smazat,
+#obal_layout_admin #obsah_admin form fieldset input.label_input_ulozit,
+#obal_layout_admin #obsah_admin form fieldset input.label_input_pridat {
+  display: block;
+  margin: 0 auto;
+}
+
+#obal_layout_admin #obsah_admin form fieldset input.label_input_url {
+  background: url(../obr/admin/urlodkaz_input_background.png) no-repeat;
+}
+
+#obal_layout_admin #obsah_admin form fieldset input.label_input_email {
+  background: url(../obr/admin/email_input_background.png) no-repeat;
+}
+
+#obal_layout_admin #obsah_admin form fieldset input.label_input_odstavec {
+  background: url(../obr/admin/odstavec_input_background.png) no-repeat;
+}
+
+#obal_layout_admin #obsah_admin form fieldset input.label_input_upravit {
+  background: url(../obr/admin/upravit_input_background.png) no-repeat;
+}
+
+#obal_layout_admin #obsah_admin form fieldset input.label_input_smazat {
+  background: url(../obr/admin/smazat_input_background.png) no-repeat;
+}
+
+#obal_layout_admin #obsah_admin form fieldset input.label_input_ulozit {
+  background: url(../obr/admin/ulozit_input_background.png) no-repeat;
+}
+
+#obal_layout_admin #obsah_admin form fieldset input.label_input_pridat {
+  background: url(../obr/admin/pridat_input_background.png) no-repeat;
+}
+
+#obal_layout_admin #obsah_admin form fieldset input.label_input_ne {
+  background: url(../obr/admin/ne_input_background.png) no-repeat;
+}
+
+#obal_layout_admin #obsah_admin form fieldset input.label_input_ano {
+  background: url(../obr/admin/ano_input_background.png) no-repeat;
+}
+
+#obal_layout_admin #obsah_admin form fieldset input.label_input_b,
+#obal_layout_admin #obsah_admin form fieldset input.label_input_i,
+#obal_layout_admin #obsah_admin form fieldset input.label_input_u {
+  width: 31px;
+  height: 25px;
+}
+
+#obal_layout_admin #obsah_admin form fieldset input.label_input_b {
+  background: url(../obr/admin/b_input_background.png) no-repeat;
+}
+
+#obal_layout_admin #obsah_admin form fieldset input.label_input_i {
+  background: url(../obr/admin/i_input_background.png) no-repeat;
+}
+
+#obal_layout_admin #obsah_admin form fieldset input.label_input_u {
+  background: url(../obr/admin/u_input_background.png) no-repeat;
+}/* /centralni styly pro inputy */
+
+
+
+/* centralni styly pro a hrefy */
+#obal_layout_admin #obsah_admin a.upravit_tl,
+#obal_layout_admin #obsah_admin a.smazat_tl,
+#obal_layout_admin #obsah_admin a.pridat_tl,
+#obal_layout_admin #obsah_admin a.ne_tl,
+#obal_layout_admin #obsah_admin a.ano_tl {
+  display: block;
+  width: 81px;
+  height: 29px;
+  text-decoration: none;
+}
+
+#obal_layout_admin #obsah_admin a.upravit_tl span,
+#obal_layout_admin #obsah_admin a.smazat_tl span,
+#obal_layout_admin #obsah_admin a.pridat_tl span,
+#obal_layout_admin #obsah_admin a.ne_tl span,
+#obal_layout_admin #obsah_admin a.ano_tl span {
+  display: none;
+}
+
+#obal_layout_admin #obsah_admin a.upravit_tl {
+  background: url(../obr/admin/upravit_input_background.png) no-repeat;
+}
+
+#obal_layout_admin #obsah_admin a.smazat_tl {
+  background: url(../obr/admin/smazat_input_background.png) no-repeat;
+}
+
+#obal_layout_admin #obsah_admin a.pridat_tl {
+  background: url(../obr/admin/pridat_input_background.png) no-repeat;
+}
+
+#obal_layout_admin #obsah_admin a.ne_tl {
+  background: url(../obr/admin/ne_input_background.png) no-repeat;
+}
+
+#obal_layout_admin #obsah_admin a.ano_tl {
+  background: url(../obr/admin/ano_input_background.png) no-repeat;
+}/* /centralni styly pro a hrefy */
+
+
+
+/* centralni zakladni styly adminu */
+#obal_layout_admin #obsah_admin h4 {
+  font-size: 20px;
+  font-weight: normal;
+  font-style: italic;
+  margin-bottom: 10px;
+  padding: 6px 0 6px 30px;
+  border-bottom: 2px solid #000;
+}
+
+#obal_layout_admin #obsah_admin h4 em {
+  text-decoration: underline;
+}
+
+#obal_layout_admin #obsah_admin form {
+
+}
+
+#obal_layout_admin #obsah_admin form fieldset {
+  border: none;
+}
+
+#obal_layout_admin #obsah_admin form fieldset dl {
+  width: 336px;
+  height: 29px;
+  margin: 0 auto;
+}
+
+#obal_layout_admin #obsah_admin form fieldset dd {
+  float: left;
+}
+
+#obal_layout_admin #obsah_admin form fieldset input {
+
+}
+
+#obal_layout_admin #obsah_admin form fieldset textarea {
+  width: 500px;
+  height: 100px;
+  font: 11px Verdana, sans-serif;
+  margin: 0 0 20px 26px;
+  padding: 2px;
+  border: 1px solid #000;
+}
+
+#obal_layout_admin #obsah_admin .potvrzeni {
+  height: 48px;
+  background: url(../obr/zpracovavam_background.gif) no-repeat center;
+  border-bottom: 1px solid #000;
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
+
+#obal_layout_admin #obsah_admin .potvrzeni p {
+  display: none;
+}/* /centralni zakladni styly adminu */
+
+
+
+/* hlavni strana administrace a team moravia b administrace */
+#obal_layout_admin #obsah_admin #hlavni_strana_sekce,
+#obal_layout_admin #obsah_admin #team_sekce {
+  padding-bottom: 20px;
+}/* /hlavni strana administrace a team moravia b administrace */
+
+
+
+/* historie klubu administrace */
+#obal_layout_admin #obsah_admin #historie_sekce form fieldset textarea {
+  height: 200px;
+}
+
+#obal_layout_admin #obsah_admin #historie_sekce form {
+  margin-bottom: 10px;
+  padding-bottom: 20px;
+  border-bottom: 2px solid #000;
+}
+
+#obal_layout_admin #obsah_admin #historie_sekce .pridat_polozku {
+  float: right;
+  margin: 0 30px 30px;
+}
+
+#obal_layout_admin #obsah_admin #historie_sekce .odsazeni_historie {
+  display: block;
+  margin-top: 50px;
+  margin-bottom: 10px;
+  border-bottom: 1px solid #000;
+}
+
+#obal_layout_admin #obsah_admin #historie_sekce p.polozka_historie {
+  padding: 10px 30px;
+  overflow: hidden;
+}
+
+#obal_layout_admin #obsah_admin #historie_sekce .oddelovac_historie {
+  display: block;
+  border-bottom: 1px solid #000;
+}
+
+#obal_layout_admin #obsah_admin #historie_sekce p a.upravit_tl,
+#obal_layout_admin #obsah_admin #historie_sekce p a.smazat_tl {
+  float: left;
+  margin-top: 3px;
+}
+
+#obal_layout_admin #obsah_admin #historie_sekce form.pridani_form {
+  padding-bottom: 10px;
+}
+
+#obal_layout_admin #obsah_admin #historie_sekce form.pridani_form legend {
+  display: none;
+}
+
+#obal_layout_admin #obsah_admin #historie_sekce form.pridani_form h3 {
+  font-weight: normal;
+  font-size: 15.5px;
+  margin-bottom: 10px;
+}
+
+#obal_layout_admin #obsah_admin #historie_sekce form.pridani_form fieldset {
+  width: 420px;
+  margin-left: 70px;
+}
+
+#obal_layout_admin #obsah_admin #historie_sekce form.pridani_form label {
+  display: block;
+  width: 80px;
+  margin-bottom: 3px;
+  padding-right: 3px;
+  text-align: right;
+  float: left;
+}
+
+#obal_layout_admin #obsah_admin #historie_sekce form.pridani_form input#label_input_datum,
+#obal_layout_admin #obsah_admin #historie_sekce form.pridani_form input#label_input_aktualita {
+  border: 1px solid #000;
+  float: left;
+  padding: 1px;
+  font: 11px Verdana, sans-serif;
+}
+
+#obal_layout_admin #obsah_admin #historie_sekce form.pridani_form input#label_input_datum {
+  clear: right;
+  margin-right: 160px;
+  margin-bottom: 3px;
+}
+
+#obal_layout_admin #obsah_admin #historie_sekce form.pridani_form input#label_input_aktualita {
+  width: 330px;
+}
+
+#obal_layout_admin #obsah_admin #historie_sekce form.pridani_form input#tlacitko_ok {
+  clear: both;
+}
+
+#obal_layout_admin #obsah_admin #historie_sekce #potvrzeni_smazat + form fieldset {
+  text-align: center;
+}
+
+#obal_layout_admin #obsah_admin #historie_sekce #potvrzeni_smazat p {
+  text-align: center;
+  padding: 6px 0;
+  font: 12px Verdana, sans-serif;
+}
+
+#obal_layout_admin #obsah_admin #historie_sekce #potvrzeni_smazat .prvni_odstavec {
+  padding-left: 130px;
+}/* /historie klubu administrace */
+
+
+
+/* fotogalerie administrace */
+#obal_layout_admin #obsah_admin #fotogalerie_sekce {
+  width: 500px;
+  margin: 0 auto 30px;
+}
+
+#obal_layout_admin #obsah_admin #fotogalerie_sekce .tri_polozky {
+  overflow: hidden;
+}
+
+#obal_layout_admin #obsah_admin #fotogalerie_sekce .oddelovac {
+  display: block;
+  width: 483px;
+  height: 29px;
+  margin-left: 5px;
+  background: url(../obr/oddelovat_lista.gif) repeat-x;
+}
+
+#obal_layout_admin #obsah_admin #fotogalerie_sekce .tri_polozky .polozka_foto {
+  float: left;
+  margin-left: 6px;
+  padding-right: 6px;
+  border-right: 1px solid #bfbfbf;
+}
+
+#obal_layout_admin #obsah_admin #fotogalerie_sekce .tri_polozky .posledni {
+  border-right: none;
+}
+
+#obal_layout_admin #obsah_admin #fotogalerie_sekce .tri_polozky .polozka_foto img {
+  border: 1px solid #0066FF;
+}
+
+#obal_layout_admin #obsah_admin #fotogalerie_sekce .tri_polozky .polozka_foto span {
+  display: none;
+}
+
+#obal_layout_admin #obsah_admin #fotogalerie_sekce {
+
+}
+
+#obal_layout_admin #obsah_admin #fotogalerie_sekce h3 {
+  margin: 6px 0 0 6px;
+  font: 15px normal Verdana, sans-serif;
+  float: left;
+  clear: both;
+}
+
+#obal_layout_admin #obsah_admin #fotogalerie_sekce h3 + a {
+  position: relative;
+  left: 56px;
+}
+
+#obal_layout_admin #obsah_admin #fotogalerie_sekce > p {
+  width: 490px;
+  margin: 0 auto;
+  overflow: hidden;
+  border-bottom: 1px solid #bfbfbf;
+}
+
+#obal_layout_admin #obsah_admin #fotogalerie_sekce > p.noborder {
+  border-bottom: none;
+}
+
+#obal_layout_admin #obsah_admin #fotogalerie_sekce > p strong {
+  width: 310px;
+  float: left;
+  display: block;
+  margin: 6px 0 0 10px;
+  font-family: Verdana, sans-serif;
+}
+
+#obal_layout_admin #obsah_admin #fotogalerie_sekce p a.upravit_tl,
+#obal_layout_admin #obsah_admin #fotogalerie_sekce p a.smazat_tl {
+  float: right;
+}
+
+#obal_layout_admin #obsah_admin #fotogalerie_sekce .oddelovac_foto {
+  display: block;
+  margin: 3px 0;
+  border-bottom: 1px solid #000;
+}
+
+#obal_layout_admin #obsah_admin #fotogalerie_sekce .mezera_fotogalerie {
+  margin-bottom: 20px;
+}
+
+#obal_layout_admin #obsah_admin #fotogalerie_sekce #obal_forem {
+  margin: 30px 10px;
+}
+
+#obal_layout_admin #obsah_admin #fotogalerie_sekce form.pridani_form {
+  padding-bottom: 10px;
+}
+
+#obal_layout_admin #obsah_admin #fotogalerie_sekce form.pridani_form legend {
+  display: none;
+}
+
+#obal_layout_admin #obsah_admin #fotogalerie_sekce form.pridani_form h3 {
+  width: 100%;
+  font-weight: normal;
+  font-size: 15.5px;
+  margin-bottom: 10px;
+}
+
+#obal_layout_admin #obsah_admin #fotogalerie_sekce form.pridani_form fieldset {
+  width: 420px;
+  margin-left: 70px;
+}
+
+#obal_layout_admin #obsah_admin #fotogalerie_sekce form.pridani_form label {
+  display: block;
+  width: 80px;
+  margin-bottom: 3px;
+  padding-right: 3px;
+  text-align: right;
+  float: left;
+}
+
+#obal_layout_admin #obsah_admin #fotogalerie_sekce form.pridani_form input#label_input_sekce {
+  border: 1px solid #000;
+  float: left;
+  clear: right;
+  margin-bottom: 3px;
+  padding: 1px;
+  clear: right;
+  font: 11px Verdana, sans-serif;
+}
+
+#obal_layout_admin #obsah_admin #fotogalerie_sekce form.pridani_form input#tlacitko_ok {
+  margin-left: 100px;
+  clear: both;
+}
+
+#obal_layout_admin #obsah_admin #fotogalerie_sekce form.fotky fieldset {
+  width: 500px;
+  margin-left: 70px;
+}
+
+#obal_layout_admin #obsah_admin #fotogalerie_sekce form.fotky label {
+  width: 120px;
+}
+
+#obal_layout_admin #obsah_admin #fotogalerie_sekce form.fotky label[for="nahrat_label_input"] {
+  margin-top: 3px;
+}
+
+#obal_layout_admin #obsah_admin #fotogalerie_sekce form.fotky input {
+  margin-bottom: 3px;
+}
+
+#obal_layout_admin #obsah_admin #fotogalerie_sekce form.fotky select#label_input_sekce {
+  margin-right: 100px;
+  margin-bottom: 3px;
+  width: 160px;
+}
+
+#obal_layout_admin #obsah_admin #fotogalerie_sekce form.fotky span {
+  font: 10px Verdana, sans-serif;
+  margin-left: 230px;
+}
+
+#obal_layout_admin #obsah_admin #fotogalerie_sekce form.fotky input#tlacitko_ok {
+  margin-left: 120px;
+}
+
+#obal_layout_admin #obsah_admin #fotogalerie_sekce #potvrzeni_smazat {
+
+}
+
+#obal_layout_admin #obsah_admin #fotogalerie_sekce #potvrzeni_smazat p strong {
+
+}
+
+#obal_layout_admin #obsah_admin #fotogalerie_sekce #potvrzeni_smazat + form {
+  clear: both;
+}
+
+#obal_layout_admin #obsah_admin #fotogalerie_sekce #potvrzeni_smazat + form h3 {
+
+}
+
+#obal_layout_admin #obsah_admin #fotogalerie_sekce #potvrzeni_smazat + form fieldset {
+
+}
+
+#obal_layout_admin #obsah_admin #fotogalerie_sekce #potvrzeni_smazat p {
+  text-align: center;
+  padding: 6px 0;
+  font: 12px Verdana, sans-serif;
+}
+
+#obal_layout_admin #obsah_admin #fotogalerie_sekce .tri_polozky {
+
+}
+
+#obal_layout_admin #obsah_admin #fotogalerie_sekce .tri_polozky .polozka_foto {
+  cursor: pointer;
+  position: relative;
+}
+
+#obal_layout_admin #obsah_admin #fotogalerie_sekce .tri_polozky .polozka_foto .blok_obr_panel {
+  display: none;
+}
+
+#obal_layout_admin #obsah_admin #fotogalerie_sekce .tri_polozky .polozka_foto:hover .blok_obr_panel {
+  display: block;
+  width: 152px;
+  height: 80px;
+  position: absolute;
+  top: 122px;
+  left: 0;
+  z-index: 200;
+  background: url(../obr/pruhledny_background.png) repeat;
+  text-align: center;
+  overflow: hidden;
+  cursor: default;
+}
+
+#obal_layout_admin #obsah_admin #fotogalerie_sekce .tri_polozky .polozka_foto:hover .blok_obr_panel div {
+  padding: 2px 0;
+  border-bottom: 1px solid #848484;
+}
+
+#obal_layout_admin #obsah_admin #fotogalerie_sekce .tri_polozky .polozka_foto:hover .blok_obr_panel div:hover {
+  background-color: #fff;
+}
+
+#obal_layout_admin #obsah_admin #fotogalerie_sekce .tri_polozky .polozka_foto:hover .blok_obr_panel div:hover p,
+#obal_layout_admin #obsah_admin #fotogalerie_sekce .tri_polozky .polozka_foto:hover .blok_obr_panel div:hover a {
+  color: #da0989;
+}
+
+#obal_layout_admin #obsah_admin #fotogalerie_sekce .tri_polozky .polozka_foto:hover .blok_obr_panel div p,
+#obal_layout_admin #obsah_admin #fotogalerie_sekce .tri_polozky .polozka_foto:hover .blok_obr_panel div a {
+  font: 11px Verdana, sans-serif;
+  color: #fff;
+  cursor: pointer;
+}
+
+#obal_layout_admin #obsah_admin #fotogalerie_sekce .tri_polozky .polozka_foto:hover .blok_obr_panel div p {
+  display: inline;
+}
+
+#obal_layout_admin #obsah_admin #fotogalerie_sekce .tri_polozky .polozka_foto:hover .blok_obr_panel div a:hover {
+  color: #0066ff;
+}
+
+#obal_layout_admin #obsah_admin #fotogalerie_sekce .tri_polozky .polozka_foto:hover .blok_obr_panel dl {
+  display: block;
+  padding: 1px;
+  font: 10px Verdana, sans-serif;
+  color: #fff;
+  text-align: left;
+  overflow: hidden;
+  border-bottom: 1px solid #848484;
+}
+
+#obal_layout_admin #obsah_admin #fotogalerie_sekce .tri_polozky .polozka_foto:hover .blok_obr_panel dl:hover {
+  background-color: #fff;
+}
+
+#obal_layout_admin #obsah_admin #fotogalerie_sekce .tri_polozky .polozka_foto:hover .blok_obr_panel dl dt,
+#obal_layout_admin #obsah_admin #fotogalerie_sekce .tri_polozky .polozka_foto:hover .blok_obr_panel dl dd {
+  display: inline;
+}
+
+#obal_layout_admin #obsah_admin #fotogalerie_sekce .tri_polozky .polozka_foto:hover .blok_obr_panel dl:hover dt,
+#obal_layout_admin #obsah_admin #fotogalerie_sekce .tri_polozky .polozka_foto:hover .blok_obr_panel dl:hover dd {
+  color: #000;
+}
+
+#obal_layout_admin #obsah_admin #fotogalerie_sekce .tri_polozky .polozka_foto:hover .blok_obr_panel dl dt {
+
+}
+
+#obal_layout_admin #obsah_admin #fotogalerie_sekce .tri_polozky .polozka_foto:hover .blok_obr_panel dl dd {
+
+}/* /fotogalerie administrace */
+
+
+
+/* rozvrh trennku administrace */
+#obal_layout_admin #obsah_admin #rozvrh_treninku_sekce form {
+  margin-bottom: 30px;
+  padding-bottom: 30px;
+  border-bottom: 1px solid #000;
+}
+
+#obal_layout_admin #obsah_admin #rozvrh_treninku_sekce #prvni_tabulka_obal,
+#obal_layout_admin #obsah_admin #rozvrh_treninku_sekce #druha_tabulka_obal {
+  margin: 20px 30px 0;
+  padding-top: 2px;
+  border-top: 1px solid #000;
+  border-bottom: 1px solid #000;
+  overflow: hidden;
+}
+
+#obal_layout_admin #obsah_admin #rozvrh_treninku_sekce #prvni_tabulka_obal h3,
+#obal_layout_admin #obsah_admin #rozvrh_treninku_sekce #druha_tabulka_obal h3 {
+  margin-top: 5px;
+  margin-left: 6px;
+  float: left;
+  font-weight: normal;
+  font-size: 15.5px;
+}
+
+#obal_layout_admin #obsah_admin #rozvrh_treninku_sekce #prvni_tabulka_obal a,
+#obal_layout_admin #obsah_admin #rozvrh_treninku_sekce #druha_tabulka_obal a {
+  float: right;
+}
+
+#obal_layout_admin #obsah_admin #rozvrh_treninku_sekce #prvni_tabulka_obal p,
+#obal_layout_admin #obsah_admin #rozvrh_treninku_sekce #druha_tabulka_obal p {
+  margin-top: 7px;
+  margin-right: 6px;
+  font: 11px Verdana, sans-serif;
+  float: right;
+}
+
+#obal_layout_admin #obsah_admin #rozvrh_treninku_sekce table {
+  margin: 10px auto;
+  border-top: 1px solid #000;
+  border-collapse: collapse;
+}
+
+#obal_layout_admin #obsah_admin #rozvrh_treninku_sekce table tr {
+
+}
+
+#obal_layout_admin #obsah_admin #rozvrh_treninku_sekce table tr td,
+#obal_layout_admin #obsah_admin #rozvrh_treninku_sekce table tr th {
+  padding: 2px;
+  border-bottom: 1px solid #000;
+}
+
+#obal_layout_admin #obsah_admin #rozvrh_treninku_sekce table tr td a {
+  float: left;
+}
+
+#obal_layout_admin #obsah_admin #rozvrh_treninku_sekce form.rozvrh_form {
+  padding-bottom: 10px;
+}
+
+#obal_layout_admin #obsah_admin #rozvrh_treninku_sekce form.rozvrh_form legend {
+  display: none;
+}
+
+#obal_layout_admin #obsah_admin #rozvrh_treninku_sekce form.rozvrh_form h3 {
+  width: 100%;
+  font-weight: normal;
+  font-size: 15.5px;
+  margin-bottom: 10px;
+}
+
+#obal_layout_admin #obsah_admin #rozvrh_treninku_sekce form.rozvrh_form fieldset {
+  width: 420px;
+  margin-left: 30px;
+}
+
+#obal_layout_admin #obsah_admin #rozvrh_treninku_sekce form.rozvrh_form label {
+  display: block;
+  width: 270px;
+  margin-bottom: 3px;
+  padding-right: 3px;
+  text-align: right;
+  float: left;
+}
+
+#obal_layout_admin #obsah_admin #rozvrh_treninku_sekce form.uprava_formy label {
+  width: 220px;
+}
+
+#obal_layout_admin #obsah_admin #rozvrh_treninku_sekce form.rozvrh_form input#label_input_prvni {
+  border: 1px solid #000;
+  float: left;
+  clear: right;
+  margin-bottom: 3px;
+  padding: 1px;
+  clear: right;
+  font: 11px Verdana, sans-serif;
+}
+
+#obal_layout_admin #obsah_admin #rozvrh_treninku_sekce form.rozvrh_form input#label_input_druhy {
+  border: 1px solid #000;
+  float: left;
+  clear: right;
+  margin-bottom: 3px;
+  padding: 1px;
+  clear: right;
+  font: 11px Verdana, sans-serif;
+}
+
+#obal_layout_admin #obsah_admin #rozvrh_treninku_sekce form.rozvrh_form input#label_input_treti {
+  border: 1px solid #000;
+  float: left;
+  clear: right;
+  margin-bottom: 3px;
+  padding: 1px;
+  clear: right;
+  font: 11px Verdana, sans-serif;
+}
+
+#obal_layout_admin #obsah_admin #rozvrh_treninku_sekce form.rozvrh_form input#label_input_ctvrty {
+  border: 1px solid #000;
+  float: left;
+  clear: right;
+  margin-bottom: 3px;
+  padding: 1px;
+  clear: right;
+  font: 11px Verdana, sans-serif;
+}
+
+#obal_layout_admin #obsah_admin #rozvrh_treninku_sekce form.rozvrh_form input#tlacitko_ok {
+  margin-bottom: 10px;
+  margin-left: 190px;
+  clear: both;
+}
+
+#obal_layout_admin #obsah_admin #rozvrh_treninku_sekce #potvrzeni_smazat {
+
+}
+
+#obal_layout_admin #obsah_admin #rozvrh_treninku_sekce #potvrzeni_smazat p strong {
+
+}
+
+#obal_layout_admin #obsah_admin #rozvrh_treninku_sekce #potvrzeni_smazat + form {
+  clear: both;
+}
+
+#obal_layout_admin #obsah_admin #rozvrh_treninku_sekce #potvrzeni_smazat + form h3 {
+  margin-left: 90px;
+}
+
+#obal_layout_admin #obsah_admin #rozvrh_treninku_sekce #potvrzeni_smazat + form fieldset {
+  margin-left: 0;
+}
+
+#obal_layout_admin #obsah_admin #rozvrh_treninku_sekce #potvrzeni_smazat p {
+  text-align: center;
+  padding: 6px 0;
+  font: 12px Verdana, sans-serif;
+}/* /rozvrh trennku administrace */
+
+
+
+/* kurzy brusleni administrace */
+#obal_layout_admin #obsah_admin #kurzy_brusleni_sekce p {
+  margin: 0 30px;
+}
+
+#obal_layout_admin #obsah_admin #kurzy_brusleni_sekce textarea {
+
+}
+
+#obal_layout_admin #obsah_admin #kurzy_brusleni_sekce div {
+  overflow: hidden;
+  padding-left: 10px;
+}
+
+#obal_layout_admin #obsah_admin #kurzy_brusleni_sekce div .kouzelna_trida {
+  width: 120px;
+  font: 11px Verdana, sans-serif;
+  margin: 0 auto;
+  padding: 2px;
+  border: 1px solid #000;
+}
+
+#obal_layout_admin #obsah_admin #kurzy_brusleni_sekce div .upgrade_kouzelnik {
+  width: 490px;
+  margin-left: 30px;
+}
+
+#obal_layout_admin #obsah_admin #kurzy_brusleni_sekce .obal_dvojka,
+#obal_layout_admin #obsah_admin #kurzy_brusleni_sekce .obal_ctyrka {
+  border-bottom: 1px solid #000;
+  margin-bottom: 10px;
+  padding-bottom: 10px;
+}
+/* /kurzy brusleni administrace */
+
+
+/* prehled akci administrace */
+#obal_layout_admin #obsah_admin #prehled_akci_sekce #vypis_akci {
+  margin-top: 20px;
+  padding-top: 10px;
+  border-top: 1px solid #000;
+}
+
+#obal_layout_admin #obsah_admin #prehled_akci_sekce #vypis_akci #obal_vypis_akci {
+  margin-bottom: 10px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #000;
+  overflow: hidden;
+}
+
+#obal_layout_admin #obsah_admin #prehled_akci_sekce #vypis_akci #obal_vypis_akci h3 {
+  font-weight: normal;
+  font-size: 15.5px;
+  margin-top: 6px;
+  margin-left: 30px;
+  float: left;
+}
+
+#obal_layout_admin #obsah_admin #prehled_akci_sekce #vypis_akci #obal_vypis_akci a {
+  display: block;
+  float: right;
+  margin-right: 30px;
+}
+
+#obal_layout_admin #obsah_admin #prehled_akci_sekce #vypis_akci form {
+  margin-bottom: 10px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #000;
+}
+
+#obal_layout_admin #obsah_admin #prehled_akci_sekce #vypis_akci form legend {
+  display: none;
+}
+
+#obal_layout_admin #obsah_admin #prehled_akci_sekce #vypis_akci form h3 {
+  font-weight: normal;
+  font-size: 15.5px;
+  margin: 10px 0 10px 40px;
+}
+
+#obal_layout_admin #obsah_admin #prehled_akci_sekce #vypis_akci form fieldset {
+  width: 420px;
+  margin: 0 auto;
+}
+
+#obal_layout_admin #obsah_admin #prehled_akci_sekce #vypis_akci form label {
+  display: block;
+  width: 100px;
+  margin-bottom: 6px;
+  padding-right: 3px;
+  text-align: right;
+  float: left;
+}
+
+#obal_layout_admin #obsah_admin #prehled_akci_sekce #vypis_akci form #label_input_datum {
+  border: 1px solid #000;
+  float: left;
+  clear: right;
+  margin-bottom: 6px;
+  padding: 1px;
+  clear: right;
+  font: 11px Verdana, sans-serif;
+}
+
+#obal_layout_admin #obsah_admin #prehled_akci_sekce #vypis_akci form dl {
+  clear: both;
+  margin: 0 auto;
+}
+
+#obal_layout_admin #obsah_admin #prehled_akci_sekce #vypis_akci form textarea {
+  margin: 0 auto;
+}
+
+#obal_layout_admin #obsah_admin #prehled_akci_sekce #vypis_akci form input#tlacitko_ok {
+  margin: 10px 0 0 190px;
+  clear: both;
+}
+
+#obal_layout_admin #obsah_admin #prehled_akci_sekce #potvrzeni_smazat {
+
+}
+
+#obal_layout_admin #obsah_admin #prehled_akci_sekce #potvrzeni_smazat p strong {
+
+}
+
+#obal_layout_admin #obsah_admin #prehled_akci_sekce #potvrzeni_smazat + form {
+  clear: both;
+}
+
+#obal_layout_admin #obsah_admin #prehled_akci_sekce #potvrzeni_smazat + form h3 {
+  margin: 0 0 0 90px;
+}
+
+#obal_layout_admin #obsah_admin #prehled_akci_sekce #potvrzeni_smazat + form fieldset {
+  width: 100%;
+  margin-left: 0;
+}
+
+#obal_layout_admin #obsah_admin #prehled_akci_sekce #potvrzeni_smazat p {
+  text-align: center;
+  padding: 6px 0;
+  font: 12px Verdana, sans-serif;
+}
+
+#obal_layout_admin #obsah_admin #prehled_akci_sekce .vypis_polozky_akce {
+  margin: 0 30px 10px;
+  padding-bottom: 6px;
+  font: 12px Verdana, sans-serif;
+  overflow: hidden;
+  border-bottom: 1px solid #000;
+}
+
+#obal_layout_admin #obsah_admin #prehled_akci_sekce .vypis_polozky_akce strong {
+  width: 330px;
+  margin-top: 6px;
+  float: left;
+}
+
+#obal_layout_admin #obsah_admin #prehled_akci_sekce .vypis_polozky_akce a {
+  float: right;
+
+}/* /prehled akci administrace */
+
+
+
+/* napiste nam administrace */
+#obal_layout_admin #obsah_admin #napiste_nam_sekce {
+
+}
+
+#obal_layout_admin #obsah_admin #napiste_nam_sekce table {
+  margin: 10px 30px;
+  border-top: 1px solid #000;
+}
+
+#obal_layout_admin #obsah_admin #napiste_nam_sekce table tr {
+
+}
+
+#obal_layout_admin #obsah_admin #napiste_nam_sekce table tr td {
+  padding: 2px;
+  border-bottom: 1px solid #000;
+}
+
+#obal_layout_admin #obsah_admin #napiste_nam_sekce table tr td a {
+
+}
+
+#obal_layout_admin #obsah_admin #napiste_nam_sekce form {
+  margin-bottom: 10px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #000;
+}
+
+#obal_layout_admin #obsah_admin #napiste_nam_sekce form legend {
+  display: none;
+}
+
+#obal_layout_admin #obsah_admin #napiste_nam_sekce form h3 {
+  font-weight: normal;
+  font-size: 15.5px;
+  margin: 10px 0 10px 40px;
+}
+
+#obal_layout_admin #obsah_admin #napiste_nam_sekce form fieldset {
+  width: 420px;
+  margin: 0 auto;
+}
+
+#obal_layout_admin #obsah_admin #napiste_nam_sekce form label {
+  display: block;
+  width: 100px;
+  margin-bottom: 6px;
+  padding-right: 3px;
+  text-align: right;
+  float: left;
+}
+
+#obal_layout_admin #obsah_admin #napiste_nam_sekce #potvrzeni_smazat {
+
+}
+
+#obal_layout_admin #obsah_admin #napiste_nam_sekce #potvrzeni_smazat p strong {
+
+}
+
+#obal_layout_admin #obsah_admin #napiste_nam_sekce #potvrzeni_smazat + form {
+  clear: both;
+}
+
+#obal_layout_admin #obsah_admin #napiste_nam_sekce #potvrzeni_smazat + form h3 {
+
+}
+
+#obal_layout_admin #obsah_admin #napiste_nam_sekce #potvrzeni_smazat + form fieldset {
+  width: 100%;
+  margin-left: 0;
+  text-align: center;
+}
+
+#obal_layout_admin #obsah_admin #napiste_nam_sekce #potvrzeni_smazat p {
+  text-align: center;
+  padding: 6px 0;
+  font: 12px Verdana, sans-serif;
+}/* /napiste nam administrace */
+
+
+
+/* forum administrace */
+#obal_layout_admin #obsah_admin #forum_sekce {
+
+}
+
+#obal_layout_admin #obsah_admin #forum_sekce .prispevek {
+  margin: 10px 30px;
+  overflow: hidden;
+  border-bottom: 1px solid #000;
+}
+
+#obal_layout_admin #obsah_admin #forum_sekce .prispevek p {
+  float: left;
+}
+
+#obal_layout_admin #obsah_admin #forum_sekce .prispevek .datum {
+  border-bottom: 1px solid #000;
+}
+
+#obal_layout_admin #obsah_admin #forum_sekce .prispevek .oddelovac {
+  margin-right: 3px;
+  margin-left: 3px;
+  border-bottom: 1px solid #000;
+}
+
+#obal_layout_admin #obsah_admin #forum_sekce .prispevek .jmeno {
+  clear: right;
+  border-bottom: 1px solid #000;
+}
+
+#obal_layout_admin #obsah_admin #forum_sekce .prispevek .zprava {
+  width: 80%;
+}
+
+#obal_layout_admin #obsah_admin #forum_sekce .prispevek a {
+  float: right;
+}
+
+#obal_layout_admin #obsah_admin #forum_sekce form {
+  margin-bottom: 10px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #000;
+}
+
+#obal_layout_admin #obsah_admin #forum_sekce form legend {
+  display: none;
+}
+
+#obal_layout_admin #obsah_admin #forum_sekce form h3 {
+  font-weight: normal;
+  font-size: 15.5px;
+  margin: 10px 0 10px 40px;
+}
+
+#obal_layout_admin #obsah_admin #forum_sekce form fieldset {
+  width: 420px;
+  margin: 0 auto;
+}
+
+#obal_layout_admin #obsah_admin #forum_sekce form label {
+  display: block;
+  width: 100px;
+  margin-bottom: 6px;
+  padding-right: 3px;
+  text-align: right;
+  float: left;
+}
+
+#obal_layout_admin #obsah_admin #forum_sekce #potvrzeni_smazat {
+
+}
+
+#obal_layout_admin #obsah_admin #forum_sekce #potvrzeni_smazat p strong {
+
+}
+
+#obal_layout_admin #obsah_admin #forum_sekce #potvrzeni_smazat + form {
+  clear: both;
+}
+
+#obal_layout_admin #obsah_admin #forum_sekce #potvrzeni_smazat + form h3 {
+
+}
+
+#obal_layout_admin #obsah_admin #forum_sekce #potvrzeni_smazat + form fieldset {
+  width: 100%;
+  margin-left: 0;
+  text-align: center;
+}
+
+#obal_layout_admin #obsah_admin #forum_sekce #potvrzeni_smazat p {
+  text-align: center;
+  padding: 6px 0;
+  font: 12px Verdana, sans-serif;
+}/* /forum administrace */
+
+
+
+/* aktuality administrace */
+#obal_layout_admin #obsah_admin #aktuality_sekce {
+
+}
+
+#obal_layout_admin #obsah_admin #aktuality_sekce .obal_pridat_odkaz {
+  margin: 10px 0;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #000;
+  overflow: hidden;
+}
+
+#obal_layout_admin #obsah_admin #aktuality_sekce .obal_pridat_odkaz h2 {
+  font: normal 15.5px Tahoma, sans-serif;
+  float: left;
+  margin-left: 30px;
+  margin-top: 6px;
+}
+
+#obal_layout_admin #obsah_admin #aktuality_sekce .obal_pridat_odkaz a {
+  float: right;
+  margin-right: 30px;
+}
+
+#obal_layout_admin #obsah_admin #aktuality_sekce .vypis_novinek {
+  margin: 10px 30px;
+  overflow: hidden;
+  border-bottom: 1px solid #000;
+}
+
+#obal_layout_admin #obsah_admin #aktuality_sekce .vypis_novinek .datum {
+
+}
+
+#obal_layout_admin #obsah_admin #aktuality_sekce .vypis_novinek .text {
+
+}
+
+#obal_layout_admin #obsah_admin #aktuality_sekce .vypis_novinek a {
+  float: right;
+}
+
+#obal_layout_admin #obsah_admin #aktuality_sekce .vypis_novinek p {
+  width: 60%;
+  float: left;
+}
+
+#obal_layout_admin #obsah_admin #aktuality_sekce form {
+  margin-bottom: 10px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #000;
+}
+
+#obal_layout_admin #obsah_admin #aktuality_sekce form legend {
+  display: none;
+}
+
+#obal_layout_admin #obsah_admin #aktuality_sekce form h3 {
+  font-weight: normal;
+  font-size: 15.5px;
+  margin: 10px 0 10px 40px;
+}
+
+#obal_layout_admin #obsah_admin #aktuality_sekce form fieldset {
+  width: 420px;
+  margin: 0 auto;
+}
+
+#obal_layout_admin #obsah_admin #aktuality_sekce form label {
+  display: block;
+  width: 100px;
+  margin-bottom: 6px;
+  padding-right: 3px;
+  text-align: right;
+  float: left;
+}
+
+#obal_layout_admin #obsah_admin #aktuality_sekce form #label_input_datum {
+  border: 1px solid #000;
+  float: left;
+  clear: right;
+  margin-bottom: 6px;
+  padding: 1px;
+  clear: right;
+  font: 11px Verdana, sans-serif;
+}
+
+#obal_layout_admin #obsah_admin #aktuality_sekce form dl {
+  clear: both;
+  margin: 0 auto;
+}
+
+#obal_layout_admin #obsah_admin #aktuality_sekce form textarea {
+  margin: 0 auto;
+}
+
+#obal_layout_admin #obsah_admin #aktuality_sekce form input#tlacitko_ok {
+  margin: 10px 0 0 190px;
+  clear: both;
+}
+
+#obal_layout_admin #obsah_admin #aktuality_sekce #potvrzeni_smazat {
+
+}
+
+#obal_layout_admin #obsah_admin #aktuality_sekce #potvrzeni_smazat p strong {
+
+}
+
+#obal_layout_admin #obsah_admin #aktuality_sekce #potvrzeni_smazat + form {
+  clear: both;
+}
+
+#obal_layout_admin #obsah_admin #aktuality_sekce #potvrzeni_smazat + form h3 {
+  margin: 0 0 0 130px;
+}
+
+#obal_layout_admin #obsah_admin #aktuality_sekce #potvrzeni_smazat + form fieldset {
+  width: 100%;
+  margin-left: 0;
+}
+
+#obal_layout_admin #obsah_admin #aktuality_sekce #potvrzeni_smazat p {
+  text-align: center;
+  padding: 6px 0;
+  font: 12px Verdana, sans-serif;
+}/* /aktuality administrace */
+
+
+
+/* kontakt administrace */
+#obal_layout_admin #obsah_admin #kontakt_sekce {
+
+}
+
+#obal_layout_admin #obsah_admin #kontakt_sekce form {
+  margin-bottom: 10px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #000;
+}
+
+#obal_layout_admin #obsah_admin #kontakt_sekce .obal_pridat_kontakt {
+  margin: 10px 0;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #000;
+  overflow: hidden;
+}
+
+#obal_layout_admin #obsah_admin #kontakt_sekce .obal_pridat_kontakt h2 {
+  font: normal 15.5px Tahoma, sans-serif;
+  float: left;
+  margin-left: 30px;
+  margin-top: 6px;
+}
+
+#obal_layout_admin #obsah_admin #kontakt_sekce .obal_pridat_kontakt a {
+  float: right;
+  margin-right: 30px;
+}
+
+#obal_layout_admin #obsah_admin #kontakt_sekce .oddelovac {
+  display: block;
+  width: 100%;
+  border-bottom: 1px solid #000;
+}
+
+#obal_layout_admin #obsah_admin #kontakt_sekce {
+
+}
+
+#obal_layout_admin #obsah_admin #kontakt_sekce h3 {
+  margin: 6px 0 0 6px;
+  font: 15px normal Verdana, sans-serif;
+  float: left;
+  clear: both;
+}
+
+#obal_layout_admin #obsah_admin #kontakt_sekce h3 + a {
+  position: relative;
+  left: 56px;
+}
+
+#obal_layout_admin #obsah_admin #kontakt_sekce > p {
+  width: 490px;
+  margin: 0 auto;
+  overflow: hidden;
+  border-bottom: 1px solid #bfbfbf;
+}
+
+#obal_layout_admin #obsah_admin #kontakt_sekce > p.noborder {
+  border-bottom: none;
+}
+
+#obal_layout_admin #obsah_admin #kontakt_sekce > p strong {
+  width: 310px;
+  float: left;
+  display: block;
+  margin: 6px 0 0 10px;
+  font-family: Verdana, sans-serif;
+}
+
+#obal_layout_admin #obsah_admin #kontakt_sekce p a.upravit_tl,
+#obal_layout_admin #obsah_admin #kontakt_sekce p a.smazat_tl {
+  float: right;
+}
+
+#obal_layout_admin #obsah_admin #kontakt_sekce .oddelovac_foto {
+  display: block;
+  margin: 3px 0;
+  border-bottom: 1px solid #000;
+}
+
+#obal_layout_admin #obsah_admin #kontakt_sekce .mezera_fotogalerie {
+  margin-bottom: 20px;
+}
+
+#obal_layout_admin #obsah_admin #kontakt_sekce #obal_forem {
+  margin: 30px 10px;
+}
+
+#obal_layout_admin #obsah_admin #kontakt_sekce form.pridani_form {
+  padding-bottom: 10px;
+}
+
+#obal_layout_admin #obsah_admin #kontakt_sekce form.pridani_form legend {
+  display: none;
+}
+
+#obal_layout_admin #obsah_admin #kontakt_sekce form.pridani_form h3 {
+  width: 100%;
+  font-weight: normal;
+  font-size: 15.5px;
+  margin-bottom: 10px;
+  margin-left: 50px;
+}
+
+#obal_layout_admin #obsah_admin #kontakt_sekce form.pridani_form fieldset {
+  width: 420px;
+  margin-left: 100px;
+}
+
+#obal_layout_admin #obsah_admin #kontakt_sekce form.pridani_form label {
+  display: block;
+  width: 80px;
+  margin-bottom: 3px;
+  padding-right: 3px;
+  text-align: right;
+  float: left;
+}
+
+#obal_layout_admin #obsah_admin #kontakt_sekce form.pridani_form input#label_input_alt,
+#obal_layout_admin #obsah_admin #kontakt_sekce form.pridani_form input#label_input_tel,
+#obal_layout_admin #obsah_admin #kontakt_sekce form.pridani_form input#label_input_mail,
+#obal_layout_admin #obsah_admin #kontakt_sekce form.pridani_form input#label_input_sekce {
+  border: 1px solid #000;
+  float: left;
+  clear: right;
+  margin-bottom: 3px;
+  padding: 1px;
+  clear: right;
+  font: 11px Verdana, sans-serif;
+  margin-right: 120px;
+}
+
+#obal_layout_admin #obsah_admin #kontakt_sekce form.pridani_form input#tlacitko_ok {
+  margin-left: 100px;
+  clear: both;
+}
+
+#obal_layout_admin #obsah_admin #kontakt_sekce form.fotky fieldset {
+  width: 500px;
+  margin-left: 100px;
+}
+
+#obal_layout_admin #obsah_admin #kontakt_sekce form.fotky label {
+  width: 120px;
+}
+
+#obal_layout_admin #obsah_admin #kontakt_sekce form.fotky input {
+  margin-bottom: 3px;
+}
+
+#obal_layout_admin #obsah_admin #kontakt_sekce form.fotky select#label_input_sekce {
+  margin-right: 100px;
+  margin-bottom: 3px;
+  width: 160px;
+}
+
+#obal_layout_admin #obsah_admin #kontakt_sekce form.fotky input#tlacitko_ok {
+  margin-left: 130px;
+}
+
+#obal_layout_admin #obsah_admin #kontakt_sekce #potvrzeni_smazat {
+
+}
+
+#obal_layout_admin #obsah_admin #kontakt_sekce #potvrzeni_smazat p strong {
+
+}
+
+#obal_layout_admin #obsah_admin #kontakt_sekce #potvrzeni_smazat + form {
+  clear: both;
+}
+
+#obal_layout_admin #obsah_admin #kontakt_sekce #potvrzeni_smazat + form h3 {
+
+}
+
+#obal_layout_admin #obsah_admin #kontakt_sekce #potvrzeni_smazat + form fieldset {
+
+}
+
+#obal_layout_admin #obsah_admin #kontakt_sekce #potvrzeni_smazat p {
+  text-align: center;
+  padding: 6px 0;
+  font: 12px Verdana, sans-serif;
+}
+
+#obal_layout_admin #obsah_admin #kontakt_sekce table {
+  margin: 10px auto;
+  border-top: 1px solid #bfbfbf;
+  border-collapse: collapse;
+  font: 11px Verdana, sans-serif;
+}
+
+#obal_layout_admin #obsah_admin #kontakt_sekce table caption {
+  margin: 10px auto;
+}
+
+#obal_layout_admin #obsah_admin #kontakt_sekce table tr {
+
+}
+
+#obal_layout_admin #obsah_admin #kontakt_sekce table tr td,
+#obal_layout_admin #obsah_admin #kontakt_sekce table tr th {
+  padding: 2px;
+  border-bottom: 1px solid #bfbfbf;
+}
+
+#obal_layout_admin #obsah_admin #kontakt_sekce table tr td a {
+  float: left;
+  clear: both;
+  color: #0066ff;
+}
+
+#obal_layout_admin #obsah_admin #kontakt_sekce table tr td a:hover {
+  color: #da0989;
+}/* /kontakt administrace */
+
+.neobtekat {
+  clear: both;
+}
+
+#obsah #administrace_log {
+  width: 480px;
+  margin: 30px auto;
+  padding-right: 20px;
+  position: relative;
+}
+
+#obsah #administrace_log .klic_01 {
+  display: block;
+  width: 500px;
+  height: 251px;
+  position: absolute;
+  top: -30px;
+  right: 0px;
+  z-index: 10;
+  background: url(../obr/klic_01.png) no-repeat;
+}
+
+#obsah #administrace_log .klic_02 {
+  display: block;
+  width: 439px;
+  height: 414px;
+  position: absolute;
+  top: 160px;
+  right: 0px;
+  z-index: 10;
+  background: url(../obr/klic_02.png) no-repeat;
+}
+
+#obsah #administrace_log form {
+  position: relative;
+  z-index: 20;
+}
+
+#obsah #administrace_log form fieldset {
+  border: none;
+}
+
+#obsah #administrace_log form fieldset legend {
+  display: none;
+}
+
+#obsah #administrace_log form fieldset h2 {
+  margin-bottom: 160px;
+  font-size: 20px;
+  font-style: italic;
+}
+
+#obsah #administrace_log form fieldset label,
+#obsah #administrace_log form fieldset input {
+  margin-top: 6px;
+}
+
+#obsah #administrace_log form fieldset label {
+  display: block;
+  width: 120px;
+  clear: both;
+  float: left;
+  text-align: right;
+  margin-right: 10px;
+  margin-left: 60px;
+}
+
+#obsah #administrace_log form fieldset input {
+  float: left;
+}
+
+#obsah #administrace_log form fieldset #tl_odeslat_admin {
+  position: relative;
+  bottom: 4px;
+  left: 2px;
+}/* /administrace */
+
+/* zapati */
+#zapati {
+  width: 100%;
+  height: 67px;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+}
+
+#zapati div {
+  width: 746px;
+  height: 27px;
+  margin: 0 auto;
+  position: relative;
+}
+
+#zapati div span {
+  display: block;
+  width: 560px;
+  height: 27px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  background: url(../obr/zapati_prechod_background.png) no-repeat center;
+}
+
+#zapati p {
+  width: 746px;
+  height: 40px;
+  margin: 0 auto;
+  text-align: center;
+  color: #706f6f;
+  font: 11px Verdana, sans-serif;
+  background-color: #242424;
+}
+
+#zapati p span {
+  display: block;
+  padding: 3px 0;
+}
+
+#zapati p .prvni,
+#zapati p .prvni a {
+  color: #bfbfbf;
+}
+
+#zapati p span a {
+  color: #706f6f;
+}
+
+#zapati p span a:hover {
+  color: #fff;
+}/* /zapati */
+
+/* Fugess (Martin) */
+

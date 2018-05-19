@@ -1,0 +1,407 @@
+<html><head><title>Systémový katalog</title>
+
+	
+  <meta http-equiv="Content-Type" content="text/html; charset=windows-1250"></head><body>
+<h2>ZÍSKÁVÁNÍ INFORMACÍ ZE SYSTÉMOVÉHO KATALOGU</h2>
+<a href="http://sp1.vsb.cz/DOC/Oracle8i/server.816/a76961/toc.htm" target="_blank">Seznam 
+tabulek a pohledů systémového katalogu v dokumentaci</a> 
+<p> <a href="#03">Seznam tabulek obsažených v systémovém katalogu</a> <br>
+  <a href="#02">Výpis všech uživatelů vytvořených v databázi</a> <br>
+  <a href="#01">Informace o aktuálním uživateli</a> <br>
+  <a href="#1">Systémové role uživatele a práva v těchto rolích</a> <br>
+  <a href="#2">Systémová práva uživatele</a> <br>
+  <a href="#3">Význam sloupců systémového katalogu</a> <br>
+  <a href="#4">Komentáře k tabulkám a sloupcům vytvořeným uživatelem</a> <br>
+  <a href="#5">Vypsání PUBLIC synonym</a> <br>
+  <a href="#6">Objekty vytvořené uživatelem (tabulky, zdrojové kódy...)</a> <br>
+  <a href="#6a">Výpis chyb při vytváření procedury nebo funkce</a><br>
+  <a href="#7">Vypsání integritních omezení pro tabulku</a> <br>
+  <a href="#8">Počet možných připojení k databázovému serveru a maximální počet 
+  uživatelů </a> <a name="03"></a> 
+</p><h3>Seznam tabulek obsažených v systémovém katalogu</h3>
+<li type="1">Výpis struktury tabulky DICTIONARY, která obsahuje informace o všech tabulkách,
+pohledech a synonymech obsažených v systémovém katalogu.
+<pre><font color="Blue">SQL&gt; <b>DESCRIBE dictionary</b>
+ Name                            Null?    Type
+ ------------------------------- -------- ----
+ TABLE_NAME                               VARCHAR2(30)
+ COMMENTS                                 VARCHAR2(4000)
+</font></pre>
+</li><li type="1">Výpis jmen všech tabulek a pohledů systémového katalogu
+<pre><font color="Blue">SQL&gt; <b>SELECT table_name FROM dictionary;</b>
+
+TABLE_NAME
+------------------------------
+ALL_ALL_TABLES
+ALL_ARGUMENTS
+ALL_ASSOCIATIONS
+ALL_CATALOG
+ALL_CLUSTERS
+ALL_CLUSTER_HASH_EXPRESSIONS
+ALL_COLL_TYPES
+ALL_COL_COMMENTS
+ALL_COL_PRIVS
+ALL_COL_PRIVS_MADE
+ALL_COL_PRIVS_RECD
+ALL_CONSTRAINTS
+ALL_CONS_COLUMNS
+
+
+...
+
+
+V$TYPE_SIZE
+V$VERSION
+V$WAITSTAT
+V$_LOCK
+
+851 rows selected.
+
+</font></pre>
+</li><li type="1">Výpis informací např.  z tabulky V$VERSION
+<pre><font color="Blue">
+SQL&gt; <b>SELECT  * FROM v$version;</b>
+
+BANNER
+----------------------------------------------------------------
+Oracle8i Enterprise Edition Release 8.1.6.0.0 - Production
+PL/SQL Release 8.1.6.0.0 - Production
+CORE    8.1.6.0.0       Production
+TNS for IBM/AIX RISC System/6000: Version 8.1.6.0.0 - Production
+NLSRTL Version 3.4.0.0.0 - Production
+</font></pre>
+</li><li type="1">Výpis všech tabulek, pohledů a synonym pro tabulky obsahující informace o tabulkových prostorech
+<pre><font color="Blue"><b>SQL&gt; SELECT * FROM dictionary WHERE table_name LIKE '%TABLESPACE%';</b>
+
+TABLE_NAME
+------------------------------
+COMMENTS
+-------------------------------------------------------------------------------------------
+DBA_TABLESPACES
+Description of all tablespaces
+
+USER_TABLESPACES
+Description of accessible tablespaces
+
+GV$TABLESPACE
+Synonym for GV_$TABLESPACE
+
+V$TABLESPACE
+Synonym for V_$TABLESPACE
+</font></pre>
+</li><li type="1">Výpis názvů tabulkových prostorů v databázi
+<pre><font color="Blue">SQL&gt; <b>SELECT tablespace_name FROM dba_tablespaces;</b>
+
+TABLESPACE_NAME
+------------------------------
+SYSTEM
+TOOLS
+RBS
+TEMP
+USERS
+INDX
+DRSYS
+
+7 rows selected.</font></pre>
+<a name="02"></a>
+<h3>Výpis všech uživatelů vytvořených v databázi</h3>
+<pre><font color="Blue">SQL&gt; <b>SELECT * FROM all_users</b>;
+
+USERNAME                          USER_ID CREATED
+------------------------------ ---------- --------
+SYS                                     0 27.08.99
+SYSTEM                                  5 27.08.99
+OUTLN                                  11 27.08.99
+DBSNMP                                 18 27.08.99
+ORDSYS                                 20 27.08.99
+ORDPLUGINS                             21 27.08.99
+MDSYS                                  22 27.08.99
+REP_OWNER                              36 01.09.99
+UZIV10                                 42 14.09.99
+ORAC                                   46 24.09.99
+LIPI                                   48 04.10.99
+VORVAN                                 50 18.10.99
+WEBDB                                  52 29.10.99
+SCOTT                                  54 29.10.99
+WDB2                                   56 29.10.99
+.........
+</font></pre>
+<a name="01"></a>
+<h3>Informace o jméně, id, přidělených tabulkových prostorech
+a datumu vytvoření aktuálního uživatele</h3>
+<pre><font color="Blue">SQL&gt; <b>SELECT * FROM user_users</b>;
+
+USERNAME                          USER_ID ACCOUNT_STATUS
+------------------------------ ---------- --------------------------------
+LOCK_DAT EXPIRY_D DEFAULT_TABLESPACE             TEMPORARY_TABLESPACE
+-------- -------- ------------------------------ ------------------------------
+CREATED  INITIAL_RSRC_CONSUMER_GROUP
+-------- ------------------------------
+EXTERNAL_NAME
+--------------------------------------------------------------------------------
+ORAC                                   46 OPEN
+                  USERS                          TEMP
+24.09.99 DEFAULT_CONSUMER_GROUP
+</font></pre>
+
+<a name="1"></a>
+<h3>Výpis systémových rolí a práv, která tyto role obsahují</h3>
+<pre><font color="Blue">SQL&gt; <b>SELECT * FROM user_role_privs;</b>
+
+USERNAME                       GRANTED_ROLE                   ADM DEF OS_
+------------------------------ ------------------------------ --- --- ---
+ORAC                           CONNECT                        YES YES NO
+ORAC                           RESOURCE                       YES YES NO
+</font></pre>
+<pre><font color="Blue">SQL&gt; <b>SELECT * FROM role_sys_privs;</b>
+
+ROLE                           PRIVILEGE                                ADM
+------------------------------ ---------------------------------------- ---
+CONNECT                        ALTER SESSION                            NO
+CONNECT                        CREATE CLUSTER                           NO
+CONNECT                        CREATE DATABASE LINK                     NO
+CONNECT                        CREATE SEQUENCE                          NO
+CONNECT                        CREATE SESSION                           NO
+CONNECT                        CREATE SYNONYM                           NO
+CONNECT                        CREATE TABLE                             NO
+CONNECT                        CREATE VIEW                              NO
+RESOURCE                       CREATE CLUSTER                           NO
+RESOURCE                       CREATE INDEXTYPE                         NO
+RESOURCE                       CREATE OPERATOR                          NO
+RESOURCE                       CREATE PROCEDURE                         NO
+RESOURCE                       CREATE SEQUENCE                          NO
+RESOURCE                       CREATE TABLE                             NO
+RESOURCE                       CREATE TRIGGER                           NO
+RESOURCE                       CREATE TYPE                              NO
+
+16 rows selected.</font></pre>
+<a name="2"></a>
+<h3>Výpis systémových práv a přidělení systémového práva
+CREATE PUBLIC SYNONYM</h3>
+<pre><font color="Blue">SQL&gt; <b>SELECT * FROM user_sys_privs;</b>
+
+USERNAME                       PRIVILEGE                                ADM
+------------------------------ ---------------------------------------- ---
+ORAC                           UNLIMITED TABLESPACE                     YES</font></pre>
+
+<pre><font color="Blue">SQL&gt;  CONNECT adm@sp1
+Connected.
+SQL&gt; <b>GRANT create user  TO orac;</b>
+
+Grant succeeded.
+
+SQL&gt; CONNECT orac/caro@sp1
+Connected.
+SQL&gt;  <b>SELECT * FROM user_sys_privs;</b>
+
+USERNAME                       PRIVILEGE                                ADM
+------------------------------ ---------------------------------------- ---
+ORAC                           CREATE USER                              NO
+ORAC                           UNLIMITED TABLESPACE                     YES</font></pre>
+<a name="3"></a>
+<h3>Získání informace o obsahu sloupce tabulky nebo pohledu systémového katalogu</h3>
+<pre><font color="Blue">SQL&gt; DESCRIBE dict_columns;
+ Name                            Null?    Type
+ ------------------------------- -------- ----
+ TABLE_NAME                               VARCHAR2(30)
+ COLUMN_NAME                              VARCHAR2(30)
+ COMMENTS                                 VARCHAR2(4000)
+
+SQL&gt; <b>SELECT * FROM dict_columns</b> WHERE table_name='USER_SYS_PRIVS' AND
+  2  column_name='ADMIN_OPTION';
+
+TABLE_NAME                     COLUMN_NAME
+------------------------------ ------------------------------
+COMMENTS
+--------------------------------------------------------------------------------
+USER_SYS_PRIVS                 ADMIN_OPTION
+Grant was with the ADMIN option</font></pre>
+<a name="4"></a>
+<h3>Vytvoření a vypsání komentářů pro vlastní tabulky a sloupce</h3>
+<pre><font color="Blue">SQL&gt; COMMENT ON TABLE student IS 'Informace o studentech navstevujicich cviceni Oracle';
+
+Comment created.
+
+SQL&gt; COMMENT ON TABLE cviceni IS 'Informace o vypsanych cvicenich predmetu Oracle';
+
+Comment created.
+
+SQL&gt; COMMENT ON TABLE skupina IS 'Informace o pracovnich skupinach ve cviceni Oracle';
+
+Comment created.
+
+
+SQL&gt;<b> SELECT * FROM user_tab_comments</b>
+  2  WHERE table_name IN ('CVICENI','SKUPINA','STUDENT');
+
+TABLE_NAME                     TABLE_TYPE
+------------------------------ -----------
+COMMENTS
+--------------------------------------------------------------------------------
+CVICENI                        TABLE
+Informace o vypsanych cvicenich predmetu Oracle
+
+SKUPINA                        TABLE
+Informace o pracovnich skupinach ve cviceni Oracle
+
+STUDENT                        TABLE
+Informace o studentech navstevujicich cviceni Oracle
+
+
+SQL&gt; COMMENT ON COLUMN cviceni.cislo IS 'Poradove cislo cviceni, primarni kl
+
+Comment created.
+
+SQL&gt; COMMENT ON COLUMN cviceni.den IS 'Dvojmistna zkratka dne v tydnu';
+
+Comment created.
+
+SQL&gt;  COMMENT ON COLUMN cviceni.cas IS 'Casovy interval konani cviceni';
+
+Comment created.
+
+SQL&gt; <b>SELECT * FROM user_col_comments</b> WHERE table_name='CVICENI';
+
+TABLE_NAME                     COLUMN_NAME
+------------------------------ ------------------------------
+COMMENTS
+----------------------------------------------------------------------------
+CVICENI                        CISLO
+Poradove cislo cviceni, primarni klic
+
+CVICENI                        DEN
+Dvojmistna zkratka dne v tydnu
+
+CVICENI                        CAS
+Casovy interval konani cviceni
+</font></pre>
+<a name="5"></a>
+<h3>Vypsání přístupných synonym</h3>
+<pre><font color="Blue">
+SQL&gt; CONNECT orac/caro@sp1
+SQL&gt; CREATE PUBLIC SYNONYM stud FOR student;
+SQL&gt; GRANT SELECT ON student TO PUBLIC;
+SQL&gt; CONNECT lipo@sp1
+
+SQL&gt;  <b>SELECT * FROM all_synonyms WHERE table_name IN ('STUDENT','CVICENI','SKUPINA');</b>
+
+OWNER                          SYNONYM_NAME
+------------------------------ ------------------------------
+TABLE_OWNER                    TABLE_NAME
+------------------------------ ------------------------------
+DB_LINK
+--------------------------------------------------------------------------------
+PUBLIC                         SKUPINA
+ORAC                           SKUPINA
+
+
+PUBLIC                         STUD
+ORAC                           STUDENT
+
+
+PUBLIC                         CVICENI
+ORAC                           CVICENI</font></pre>
+
+Pozn. <br>Protože pohled ALL_SYNONYMS obsahuje přes 5000 záznamů,
+má bez výběrových kritérií smysl používat tento příkaz jen v případě, že si 
+uživatel plánuje udělat delší přestávku.
+<a name="6"></a>
+<h3>Výpis informaci o objektech vytvořených uživatelem</h3>
+
+</li><li type="1">Výpis všech objektů vytvořených uživatelem
+
+<pre><font color="Blue">SQL&gt; <b>SELECT object_name,object_type FROM user_objects;</b>
+</font></pre>
+</li><li type="1">Výpis všech tabulek vytvořených uživatelem
+
+<pre><font color="Blue">SQL&gt; <b>SELECT table_name FROM user_tables;</b>
+</font></pre>
+</li><li type="1">Výpis zdrojových kódů uložených procedur a funkcí 
+  <pre><font color="Blue">SQL&gt; <b>SELECT DISTINCT name,type FROM user_source;</b>
+
+NAME                           TYPE
+------------------------------ ------------
+CHYBA                          PROCEDURE
+NAROZEN3                       PROCEDURE
+POKUTY                         FUNCTION
+VLOZIT                         PROCEDURE
+
+6 rows selected.
+
+SQL&gt; <b>SELECT text FROM user_source WHERE name='VLOZIT';</b>
+
+TEXT
+--------------------------------------------------------------------------------
+PROCEDURE vlozit(ident VARCHAR2)AS
+stud_id student.id%type;
+stud_jmeno student.jmeno%type;
+stud_prijmeni student.prijmeni%type;
+BEGIN
+SELECT id,jmeno,prijmeni  INTO stud_id,
+stud_jmeno,stud_prijmeni
+FROM student
+WHERE id=ident;
+INSERT INTO hist_stud(id,jmeno,prijmeni) VALUES (stud_id,
+stud_jmeno,stud_prijmeni);
+END;
+
+12 rows selected.
+<a name="6a"></a></font></pre>
+  <h3>Výpis chyb při vytváření procedury nebo funkce</h3>
+  <pre><font color="Blue" face=""><b>SQL&gt; SELECT * FROM user_errors ;</b>
+	WHERE name='SOUCIN';
+
+NAME                           TYPE           SEQUENCE       LINE   POSITION
+------------------------------ ------------ ---------- ---------- ----------
+TEXT
+--------------------------------------------------------------------------------
+SOUCIN                         PROCEDURE             1          5         37
+PLS-00201: identifier 'CIS' must be declared
+
+SOUCIN                         PROCEDURE             2          5          1
+PL/SQL: Statement ignored
+
+</font></pre>
+  <a name="7"></a> 
+  <h3>Zjištění názvů integritních omezení</h3>
+  <pre>COLUMN constraint_type FORMAT A3 HEADING Typ
+<font color="Blue" face=""><b>
+SELECT  constraint_name, constraint_type, search_condition, r_constraint_name
+	FROM user_constraints</b>
+	WHERE table_name = 'STUDENT';
+
+CONSTRAINT_NAME Typ SEARCH_CONDITION          R_CONSTRAINT_NAME
+--------------- --- ------------------------- ------------------------------
+SYS_C002683     P
+SYS_C002684     R                             SYS_C002681
+SYS_C002690     C   "JMENO" IS NOT NULL
+SYS_C002691     C   "PRIJMENI" IS NOT NULL
+</font></pre>
+  Vysvětlivky ke sloupci CONSTRAINT_TYPE (v záhlaví zobrazen jako “C”): 
+  <ul>
+    <li type="1"><b>P</b> PRIMARY KEY 
+    </li><li type="1"><b>U</b> UNIQUE 
+    </li><li type="1"><b>C</b> CHECK <br>
+      NOT NULL <br>
+      Rozlišení zda se jedná o CHECK nebo NOT NULL je ve sloupci SEARCH_CONDITION) 
+    </li><li type="1"><b>R</b> referenční integritní omezení 
+  </li></ul>
+  <pre><font color="Blue">SQL&gt; <b>SELECT * FROM user_cons_columns;</b></font></pre>
+  Informace o sloupcích, které podléhají některému integritnímu omezení. <a name="8"></a> 
+  <h3>Počet možných připojení k databázovému serveru a nastavení maximálního počtu 
+    uživatelů </h3>
+  <pre><font color="Blue">SQL&gt; <b>SELECT sessions_max s_max,
+   sessions_warning s_warning,
+   sessions_current s_current,
+   sessions_highwater s_high,
+   users_max
+   FROM v$license;</b>
+
+     S_MAX  S_WARNING  S_CURRENT     S_HIGH  USERS_MAX
+---------- ---------- ---------- ---------- ----------
+        50          0          5          7        120
+</font></pre>
+  Aktuální údaje o nastavení maximálního počtu připojení a max. počtu vytvořených 
+  uživatelů. 
+
+</li><div style="position: absolute; left: 0px; top: 0px; z-index: 1000000000 ! important; visibility: hidden; opacity: 1;" id="linkalert-box"><img src="katalog_soubory/none-icon.png" id="linkalert-icon-1"></div></body></html>

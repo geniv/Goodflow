@@ -1,0 +1,37 @@
+#Options -Indexes
+
+#ErrorDocument 404 error_page.html
+#ErrorDocument 403 error_page.html
+#ErrorDocument 500 error_page.html
+
+#na serveru: %{DOCUMENT_ROOT}/
+#jen pro tuto subdomunu bez prlinkovani na PHP5!!
+
+RewriteEngine On
+RewriteBase /
+
+#stranky
+RewriteRule ^mapa-stranek               index.php?action=mapa_stranek [L,QSA]
+RewriteRule ^domy-byty                  index.php?action=byty [L,QSA]
+RewriteRule ^ubytovani-rekreace         index.php?action=rekreace [L,QSA]
+RewriteRule ^nebytove-prostory-ostatni  index.php?action=ostatni [L,QSA]
+RewriteRule ^prohlaseni-o-pristupnosti  index.php?action=prohlaseni_o_pristupnosti [L,QSA]
+RewriteRule ^admin-webmasters           index.php?action=admin_webmaster [L,QSA]
+RewriteRule ^admin-moderator            index.php?action=admin_moderator [L,QSA]
+
+RewriteRule ^([a-zA-Z]*)-([a-zA-Z]*)-([a-zA-Z]*)-([a-zA-Z]*)$   index.php?action=$1&akce=$2&co=$3&cislo=$4 [QSA,L]
+RewriteRule ^([a-zA-Z]*)-([a-zA-Z]*)-([a-zA-Z]*)$               index.php?action=$1&akce=$2&co=$3 [QSA]
+RewriteRule ^([a-zA-Z]*)-([a-zA-Z]*)$                           index.php?action=$1&akce=$2 [QSA]
+RewriteRule ^([a-zA-Z]*)$                                       WWWzakazka/RSP_hostel/index.php?action=$1 [QSA]
+
+#RewriteRule ^uvod                       %{DOCUMENT_ROOT}/index.php?action=uvod [L,QSA]
+#RewriteRule ^informace                  %{DOCUMENT_ROOT}/index.php?action=informace [L,QSA]
+#RewriteRule ^rezervace                  %{DOCUMENT_ROOT}/index.php?action=rezervace [L,QSA]
+#RewriteRule ^ceny                       %{DOCUMENT_ROOT}/index.php?action=ceny [L,QSA]
+#RewriteRule ^akce                       %{DOCUMENT_ROOT}/index.php?action=akce [L,QSA]
+#RewriteRule ^sluzby                     %{DOCUMENT_ROOT}/index.php?action=sluzby [L,QSA]
+
+#RewriteRule ^mapa                       %{DOCUMENT_ROOT}/index.php?action=mapa [L,QSA]
+
+#RewriteRule ^odkazy                     %{DOCUMENT_ROOT}/index.php?action=odkazy [L,QSA]
+#RewriteRule ^dokumenty                  %{DOCUMENT_ROOT}/index.php?action=dokumenty [L,QSA]

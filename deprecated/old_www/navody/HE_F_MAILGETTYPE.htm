@@ -1,0 +1,86 @@
+<!doctype html public "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=Windows-1250">
+<title>Funkce MailGetType</title>
+<link rel='stylesheet' style='text/css' href='../function.css'>
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000">
+
+
+
+<h2 class=function>MailGetType</h2>
+<img src='../images/cpp.gif' width='44' height='16' border='0' alt='c/c++' align='middle' hspace='2'><img src='../images/pascal.gif' width='44' height='16' border='0' alt='pascal' align='middle' hspace='2'><img src='../images/sql.gif' width='44' height='16' border='0' alt='sql' align='middle' hspace='2'>
+
+
+<br><br>
+<div class='typ'>DWORD <b>MailGetType</b>();<br>
+function <b>MailGetType</b> : integer;<br>
+FUNCTION <b>MailGetType</b>() RETURNS INT;
+</div>
+
+
+<p><b>Od verze</b></p>
+
+<p>6.0f</p>
+
+<p><b>Popis:</b></p>
+
+<p>Vrací typ použité <a href="HE_MAIL.htm">elektronické pošty</a>, pokud pošta nebyla ještě <a href="HE_MAILINIT.htm">inicializována</a>, vrací 0. Výsledek může být logickým součtem těchto hodnot:</p>
+
+<table border=1 cols=4>
+
+<tr valign="top">
+<td width=16%><code>WBMT_602</code></td>
+<td width=12%><code>0x00000001</code></td>
+<td width=10%><code>1</code></td>
+<td width=62%>systém Mail602</td>
+</tr>
+
+<tr valign="top">
+<td width=16%><code>WBMT_MAPI</code></td>
+<td width=12%><code>0x00000002</code></td>
+<td width=10%><code>2</code></td>
+<td width=62%>systém rozhraní MAPI</td>
+</tr>
+
+<tr valign="top">
+<td width=16%><code>WBMT_SMTPOP3</code></td>
+<td width=12%><code>0x00000004</code></td>
+<td width=10%><code>4</code></td>
+<td width=62%>602SQL komunikuje s&nbsp;poštovním serverem přímo pomocí protokolu SMTP a POP3</td>
+</tr>
+
+<tr valign="top">
+<td width=16%><code>WBMT_602REM</code></td>
+<td width=12%><code>0x00010000</code></td>
+<td width=10%><code>65536</code></td>
+<td width=62%>Vzdálený klient Mail602</td>
+</tr>
+
+<tr valign="top">
+<td width=16%><code>WBMT_602SP3</code></td>
+<td width=12%><code>0x00020000</code></td>
+<td width=10%><code>131072</code></td>
+<td width=62%>POP3 klient Mail602</td>
+</tr>
+
+<tr valign="top">
+<td width=16%><code>WBMT_DIALUP</code></td>
+<td width=12%><code>0x00040000</code></td>
+<td width=10%><code>262144</code></td>
+<td width=62%>Pro přístup k&nbsp;poště je třeba navázat telefonní spojení</td>
+</tr>
+</table><br>
+
+<p><b>Viz</b></p>
+
+<ul class='viz'>
+ <li><a href="HE_F_MAILDIAL.htm">MailDial</a> </li>
+ <li><a href="HE_F_MAILHANGUP.htm">MailHangUp</a> </li>
+ <li><a href="HE_F_MAILGETINBOXINFO.htm">MailGetInBoxInfo</a> </li>
+</ul>
+
+</body>
+</html>

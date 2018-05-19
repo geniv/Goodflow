@@ -1,0 +1,67 @@
+<!doctype html public "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=Windows-1250">
+<title>Funkce Delete</title>
+<link rel='stylesheet' style='text/css' href='../function.css'>
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000">
+
+
+
+<h2 class=function>Delete</h2>
+<img src='../images/cpp.gif' width='44' height='16' border='0' alt='c/c++' align='middle' hspace='2'><img src='../images/pascal.gif' width='44' height='16' border='0' alt='pascal' align='middle' hspace='2'>
+
+
+<br><br>
+<div class='typ'>BOOL <b>[cd_]Delete</b>([cdp_t cdp], tcurstab curs, trecnum position);<br>
+function <b>[cd_]Delete</b>([cdp : cdp_t]; curs : tcurstab; position : trecnum) : Boolean;
+</div>
+
+
+<p><b>Parametry</b></p>
+
+<table border=1 cols=2 frame=box rules=all width=440>
+
+<tr valign="top">
+<td width=17%><i>curs</i> </td>
+<td width=83%>číslo tabulky nebo otevřeného kurzoru</td>
+</tr>
+
+<tr valign="top">
+<td width=17%><i>position</i> </td>
+<td width=83%>absolutní číslo rušeného záznamu.</td>
+</tr>
+
+<tr valign="top">
+<td width=17%>[<i>cdp </i></td>
+<td width=83%><a href="HE_EXTCD.htm">kontextová proměnná</a> klienta]  </td>
+</tr>
+</table><br>
+
+<p><b>Popis </b></p>
+
+<p>Funkce zruší záznam s&nbsp;číslem <i>position</i> v tabulce nebo v <a href="../xml/html/query_insdeledit.html">editovatelném</a> kurzoru <i>curs</i>. Provedením <b><code>Delete</code></b> se nezmění absolutní čísla ostatních záznamů. </p>
+
+<p>Zrušíte-li záznam v kurzoru vzniklém spojením více tabulek, pak je pouze odstraněn z kurzoru. Zrušíte-li záznam v kurzoru vzniklém z jediné tabulky, pak je odstraněn z kurzoru <i>a zrušen</i> v tabulce. Pokud je záznam určený parametry funkce již zrušený, server vydá varování.</p>
+
+<p>Záznam smazaný funkcí <strong><code>Delete</code></strong> lze znovu bez ztráty obsahu obnovit funkcí <strong><code>Undelete</code></strong>. Definitivně (nevratně) uvolnit zrušený záznam lze funkcí <strong><code>Free_deleted</code></strong>. </p>
+
+<p>Efektivnějším způsobem práce s daty (vkládání, mazání, vyhledávání) je <a href="HE_SQL2_POUZITI.htm">použití jazyka SQL</a>, zvláště pak <a href="HE_SQL2_STOREDPROCEDURE.htm">uložených procedur</a>.</p>
+
+<p><b>Hodnota funkce </b></p>
+
+<p>Funkce vrací hodnotu FALSE, pokud se akci podařilo úspěšně provést. V&nbsp;opačném případě vrací TRUE a povahu chyby lze zjistit voláním funkce <b><code>Signalize</code></b>.</p>
+
+<p><b>Viz</b></p>
+
+<ul class='viz'>
+<li><a href="HE_F_INSERT.htm">Insert</a> </li>
+<li><a href="HE_F_UNDELETE.htm">Undelete</a> </li>
+<li><a href="HE_F_FREEDELETED.htm">Free_deleted</a></li>
+<li><a href="HE_F_STARTTRANSACTION.htm">Start_transaction</a> </li>
+</ul>
+
+</body>
+</html>

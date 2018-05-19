@@ -1,0 +1,101 @@
+<!doctype html public "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=Windows-1250">
+<title>Funkce Create_user</title>
+<link rel='stylesheet' style='text/css' href='../function.css'>
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000">
+
+
+
+<h2 class=function>Create_user</h2>
+<img src='../images/cpp.gif' width='44' height='16' border='0' alt='c/c++' align='middle' hspace='2'><img src='../images/pascal.gif' width='44' height='16' border='0' alt='pascal' align='middle' hspace='2'>
+
+
+<br><br>
+<div class='typ'>
+BOOL <b>[cd_]Create_user</b> ([cdp_t cdp], const char * logname, const char * name1, const char * name2, const char * name3, const char * identif, const WBUUID homesrv, const char * password, tobjnum *objnum);<br>
+function <b>[cd_]Create_user</b> ([cdp : cdp_t]; logname, name1, name2, name3, identif : PChar; var homesrv : WBUUID; password string; var objnum : tobjnum) : Boolean;<br>
+
+</div>
+
+
+<p><b>Parametry</b></p>
+
+<table border=1 cols=2 frame=box rules=all width=500>
+
+<tr valign="top">
+<td width=18%><i>logname </i></td>
+<td width=82%><i> </i>logovací jméno - jméno, kterým se uživatel přihlašuje</td>
+</tr>
+
+<tr valign="top">
+<td width=18%><i>name1 </i></td>
+<td width=82%> jméno</td>
+</tr>
+
+<tr valign="top">
+<td width=18%><i>name2 </i></td>
+<td width=82%> iniciálka druhého jména</td>
+</tr>
+
+<tr valign="top">
+<td width=18%><i>name3 </i></td>
+<td width=82%> příjmení</td>
+</tr>
+
+<tr valign="top">
+<td width=18%><i>identif </i></td>
+<td width=82%><i> </i>identifikační číslo nebo kód</td>
+</tr>
+
+<tr valign="top">
+<td width=18%><i>homesrv </i></td>
+<td width=82%>domovský sever pro příjem kolujících dokumentů (od verze 9 nepoužíváno)</td>
+</tr>
+
+<tr valign="top">
+<td width=18%><i>password </i></td>
+<td width=82%>heslo</td>
+</tr>
+
+<tr valign="top">
+<td width=18%><i>objnum </i></td>
+<td width=82%> výstupní parametr - číslo uživatele</td>
+</tr>
+
+<tr valign="top">
+<td width=18%>[<i>cdp </i></td>
+<td width=82%><a href="HE_EXTCD.htm">kontextová proměnná</a> klienta]  </td>
+</tr>
+</table><br>
+
+<p><b>Od verze:</b></p>
+
+<p>5.0</p>
+
+<p><b>Popis</b></p>
+
+<p>Funkce <code><b>Create_user</b> </code>vytvoří nového <a href="../xml/html/usermanagement.html">uživatele</a>. Vstupní parametry jsou logovací jméno, pak jméno, iniciálka a příjmení, identifikační číslo, domovský server uživatele a jeho heslo. Výstupním parametrem je číslo uživatele.</p>
+
+<p>Pokud heslo není zadáno (je NULL resp. NIL), pak vytvořený uživatel bude mít prázdné heslo a při prvním přihlášení si bude muset heslo změnit.</p>
+
+<p>Povinný je pouze parametr <i>logname</i>.</p>
+
+<p>V jazyce SQL existuje obdobný příkaz <a href="HE_SQL2_CREATEUSER.htm">CREATE USER</a>.</p>
+
+<p><b>Hodnota funkce</b></p>
+
+<p>Funkce vrací při úspěchu FALSE, při neúspěchu TRUE.</p>
+
+<p><b>Viz</b></p>
+
+<ul class='viz'>
+ <li><a href="HE_F_SETPASSWORD.htm">Set_password</a> </li>
+ <li><a href="HE_F_GETSETGROUPROLE.htm">GetSet_group_role</a> </li>
+</ul>
+
+</body>
+</html>

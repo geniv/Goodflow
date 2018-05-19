@@ -1,0 +1,911 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+
+
+
+<meta name="description" content="V tomto článku se dočtete, jak za pomocí PHP a MySQL lze udělat jednoduchý
+přihlašovací systém. Tento přihlašovací systém je vybaven zabezpečením,
+který kontroluje uživateli IP a vlastní jiné zabezpečující prvky." lang="cs">
+<meta name="description" content="V tomto článku se dočtete, jak za pomocí PHP a MySQL lze udělat jednoduchý
+přihlašovací systém. Tento přihlašovací systém je vybaven zabezpečením,
+který kontroluje uživateli IP a vlastní jiné zabezpečující prvky." lang="en">
+<meta http-equiv="description" content="V tomto článku se dočtete, jak za pomocí PHP a MySQL lze udělat jednoduchý
+přihlašovací systém. Tento přihlašovací systém je vybaven zabezpečením,
+který kontroluje uživateli IP a vlastní jiné zabezpečující prvky.">
+<meta http-equiv="content-language" content="cs">
+<meta http-equiv="content-type" content="text/html; charset=windows-1250"><title>Přihlašovací systém -- PC Svět</title>
+
+<link rel="stylesheet" href="login_system_soubory/www.css">
+<script language="javascript" type="text/javascript">
+<!--
+function getElement(e)
+{
+  if(document.all) return document.all[e];
+  else return document.getElementById(e);
+}
+
+peson = new Image(305,13);
+peson.src = "/images/1-5on.gif";
+pesoff = new Image(305,13);
+pesoff.src = "/images/1-5.gif";
+
+hledejon = new Image(20,11);
+hledejon.src = "/images/5-4on.gif";
+hledejoff = new Image(20,11);
+hledejoff.src = "/images/5-4.gif";
+
+topon = new Image(20,11);
+topon.src = "/images/7-pat-top-on.gif";
+topoff = new Image(20,11);
+topoff.src = "/images/7-pat-top-off.gif";
+
+var mnu = new Array();
+
+mnu[1] = 'komunikace:<img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/komunikace/mobily/" class="menu2">mobily</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/komunikace/site" class="menu2">sítě</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/komunikace/pripojeni" class="menu2">připojení</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11">';
+mnu[2] = 'internet:<img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/internet/webhosting/" class="menu2">webhosting</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/internet/webdesign" class="menu2">webdesign</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/internet/weby" class="menu2">weby</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11">';
+mnu[3] = 'programování:<img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/c/" class="menu2">C++</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/delphi/" class="menu2">Delphi</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/vbasic/" class="menu2">V.Basic</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/assembler/" class="menu2">Asm</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/pascal/" class="menu2">Pascal</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/java/" class="menu2">Java</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/sql/" class="menu2">SQL</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/wsh/" class="menu2">WSH</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11">';
+mnu[4] = 'web-programování:<img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/perl/" class="menu2">Perl</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/php/" class="menu2">PHP</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/asp/" class="menu2">ASP</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/javascript/" class="menu2">JavaScript</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/java/" class="menu2">Java</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/html/" class="menu2">HTML</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/sql/" class="menu2">SQL</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11">';
+mnu[5] = 'hw:<img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/hardware/motherboard/" class="menu2">desky</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/hardware/procesory/" class="menu2">procesory</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/hardware/grafika/" class="menu2">grafika</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/hardware/zvuk/" class="menu2">zvuk</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/hardware/periferie/" class="menu2">periferie</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/hardware/monitory/" class="menu2">monitory</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/hardware/mechaniky/" class="menu2">média</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/hardware/prislusenstvi/" class="menu2">přísluš.</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/hardware/testy/" class="menu2">testy</a>';
+mnu[6] = 'software:<img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/windows/" class="menu2">Windows</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/linux/" class="menu2">Linux</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/hry/" class="menu2">hry a zábava</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/software/recenze/" class="menu2">recenze</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/office/" class="menu2">MS Office</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11">';
+mnu[7] = 'bezpečnost:<img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/bezpecnost/viry/" class="menu2">Viry</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11">';
+mnu[8] = 'magazín:<img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/literatura/" class="menu2">literatura</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/magazin/akce/" class="menu2">akce</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/magazin/novinky/" class="menu2">novinky</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/magazin/tisk/" class="menu2">tiskové zprávy</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11">';
+
+function pmnu(mnu_id)
+{
+	 getElement("mnux").innerHTML = mnu[mnu_id];
+}
+// -->
+</script>
+
+<style type="text/css">
+<!--
+.mline { font-family: Tahoma, Arial, Verdana; font-size: 8pt; font-weight: bold; background-color: #444444; color: #FFFFFF }
+.mitem { cursor: hand }
+
+.mtable { font-family: Tahoma, Arial, Verdana; font-size: 8pt; border: 1px solid #000000; background-color: #EEEEEE; visibility: hidden; position: absolute }
+.mtitem { cursor: hand; background-color: #EEEEEE; color: #000000 }
+
+.mfirma { color: #DDDDDD; font-weight: none }
+.mfirma a { color: #DDDDDD; text-decoration: none }
+.mfirma a:active { color: #DDDDDD; text-decoration: none }
+.mfirma a:visited { color: #DDDDDD; text-decoration: none }
+.mfirma a:hover { color: #FFFFFF; text-decoration: underline }
+-->
+</style></head><body>
+
+
+<script language="JavaScript" type="text/javascript">
+<!--
+var intg;
+var tleft = 0;
+var PocetMenu = 0;
+var mLeft = new Array();
+
+function hidemenus(exc)
+{
+ clearInterval(intg);
+ intg = null;
+ for (id=1; id<=PocetMenu; id++){
+  document.all("mnui"+id).style.visibility = "hidden";
+  document.all("i"+id).style.color = "#FFFFFF";
+  document.all("i"+id).style.backgroundColor = "#444444";
+ }
+}
+
+function outobject()
+{
+ intg = setInterval("hidemenus(20)",400);
+}
+
+function onheader(hID)
+{
+ hidemenus(hID);
+ document.all("mnui"+hID).style.visibility = "visible";
+ document.all("i"+hID).style.color = "#000000";
+ document.all("i"+hID).style.backgroundColor = "#EEEEEE";	
+}
+
+function onobject()
+{
+ clearInterval(intg);
+ intg = null;
+}
+
+function onitem(obj)
+{
+ obj.style.color = "EEEEEE";
+ obj.style.backgroundColor = "111111";
+}
+
+function outitem(obj)
+{
+ obj.style.color = "000000";
+ obj.style.backgroundColor = "EEEEEE";
+}
+
+function setleft()
+{
+ for (i=1;i<=PocetMenu;i++) {
+  document.all("mnui"+i).style.left = mLeft[i];
+ }
+}
+
+function mAddHeader(ID,nadpis,leftpos) {
+ document.write('<td id="i'+ID+'" onmouseover="onheader('+ID+');" onmouseout="outobject();" class="mitem">&nbsp; '+nadpis+' &nbsp;</td>');
+ mLeft[ID] = leftpos;
+ if (PocetMenu < ID) PocetMenu = ID;
+}
+
+function mBeginTable(ID) {
+ document.write('<table style="z-index: 100;" width="120" id="mnui'+ID+'" border="0" cellspacing="1" cellpadding="2" class="mtable" onmouseover="onobject();" onmousemove="onobject();" onmouseout="outobject();" class="mtable">');
+}
+
+function mEndTable() {
+ document.write('</table>');
+}
+
+function mAddItem(nadpis,URL,Popis) {
+ document.write('<tr><td class="mtitem" onmouseover="onitem(this);" onmouseout="outitem(this);" onclick="window.navigate(\''+URL+'\');" title="'+Popis+'">'+nadpis+'</td></tr>');
+}
+
+if (window.clientInformation.userAgent.indexOf("MSIE") > 0 ||
+    window.clientInformation.userAgent.indexOf("pera/7.") > 0
+	)
+{
+	
+ document.write('<div align="center" style="z-index: 101; border-bottom: 1px solid white"><center><table id="ptable" border="0" cellspacing="2" cellpadding="0" class="mline" width="100%"><tr><td width="20">&nbsp;</td><td><table class="mline" cellspacing="0" cellpadding="0" border="0"><tr>');
+ mAddHeader(1,"Provozované servery",26);
+ mAddHeader(2,"DOMÉNY",156);
+ mAddHeader(3,"WEBHOSTING",257);
+ mAddHeader(4,"PŘIPOJENÍ",352);
+ mAddHeader(5,"SERVERHOSTING",452);
+ document.write('</tr></table></td><td width="120" class="mfirma"><a href="http://www.forpsi.com/">FORPSI</a></td><td width="20">&nbsp;</td></tr></table></center></div>');
+
+ mBeginTable(1);
+ mAddItem('Móda.cz','http://www.moda.cz/','Server o módě, stylu, zdraví a volném čase');
+ mAddItem('CzechWeb','http://www.czechweb.cz/','Žebříček registrátorů českých a slovenských domén, denně nové statistiky');
+ mAddItem('PC Svět','http://www.pcsvet.cz/','Počítače, programování, komunikace, Internet');
+ mAddItem('Právník.cz','http://www.pravnik.cz/','Internetový právník pro každého - úplná znění, články, poradna');
+ mAddItem('Počítadlo.cz','http://www.pocitadlo.cz/','Služba pro počítání přístupů na vaše stránky včetně podrobných statistik');
+ mAddItem('iReklama.cz','http://www.ireklama.cz/','Výměný reklamní systém pro vaše stránky');
+ mEndTable();
+
+ mBeginTable(2);
+ mAddItem('FORPSI.com - registrace domén','http://www.forpsi.com/domain/','Nejlevnější registrace domén'); 
+ mAddItem('Domény .cz','http://www.forpsi.com/domain/','Registrace domén již za 549,-Kč ročně');
+ mAddItem('Domény .com','http://www.forpsi.com/domain/','Registrace domén již za 219,-Kč ročně');
+ mEndTable();
+
+ mBeginTable(3);
+ mAddItem('FORPSI.com - homepage','http://www.forpsi.com/','FORPSI.com - homepage'); 
+ mAddItem('FORPSI.com - WEBHOSTING','http://www.forpsi.com/webhosting/','FORPSI.com - nejširší nabídka webhostingu'); 
+ mAddItem('PIDIhosting','http://www.forpsi.com/webhosting/pidi.php','Hosting pro každého'); 
+ mAddItem('PIDIhosting + mail','http://www.forpsi.com/webhosting/pidi.php','Hosting pro každého včetně mailu'); 
+ mAddItem('NORMALhosting','http://www.forpsi.com/webhosting/normal.php','Standardní hosting za rozumnou cenu');
+ mAddItem('EXCLUSIVEhosting','http://www.forpsi.com/webhosting/exclusive.php','To nejlepší pro ty nejlepší');
+ mAddItem('EMAILhosting','http://www.forpsi.com/webhosting/email.php','Hosting vašich mailů'); 
+ mEndTable();
+	
+ mBeginTable(4);
+ mAddItem('FORPSI - připojení k internetu','http://www.forpsi.com/internet/','Kompletní nabídka bezdrátového či pevného připojení k Internetu'); 
+ mAddItem('ADSL připojení','http://www.forpsi.com/internet/?page=adsl_cr_price','Připojení k Internetu telefonní linkou pomocí technologie ADSL'); 
+ mAddItem('Wi-Fi Lite','http://www.forpsi.com/internet/?page=wifi_lite_price','Nejjednodušší bezdrátové připojení technologií Wi-Fi'); 
+ mAddItem('Wi-Fi','http://www.forpsi.com/internet/?page=wifi_price','Profesionální připojení technologií Wi-Fi'); 
+ mEndTable();
+ 
+ mBeginTable(5);
+ mAddItem('FORPSI - serverhosting','http://www.forpsi.com/server/dedicated.php','SERVERHOSTING a SERVERHOUSING'); 
+ mAddItem('FORPSI - DEDICATED','http://www.forpsi.com/server/dedicated.php','Nabídka pronájmu serverů s kompletní nabídkou služeb'); 
+ mAddItem('FORPSI - Private','http://www.forpsi.com/server/private.php','Nabídka housingu vašich serverů s kompletní nabídkou služeb'); 
+ mEndTable();
+
+ setleft();
+}
+// -->
+</script>
+
+
+<table align="center" border="0" cellpadding="0" cellspacing="0" width="780">
+<tbody><tr><td width="767">
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tbody><tr>
+<td height="158" width="305">
+
+<table border="0" cellpadding="0" cellspacing="0">
+<tbody><tr><td colspan="3" height="14" width="305"><img src="login_system_soubory/1-1.gif" alt=""></td></tr>
+<tr><td height="11" width="253"><img src="login_system_soubory/1-2.gif" alt=""></td><td height="11" width="27"><a href="http://www.forpsi.com/" target="_top" onmouseover="pesoff.src=peson.src; return true" onmouseout="pesoff.src='/images/1-5.gif'; return true"><img src="login_system_soubory/1-3.gif" alt="" border="0"></a></td><td height="11" width="25"><img src="login_system_soubory/1-4.gif" alt=""></td></tr>
+<tr><td colspan="3" height="13" width="305"><img name="pesoff" src="login_system_soubory/1-5.gif" alt=""></td></tr>
+<tr><td colspan="3" height="120" width="305"><a href="http://www.pcsvet.cz/"><img src="login_system_soubory/1-6.gif" alt="" border="0"></a></td></tr>
+</tbody></table>
+
+</td>
+<td width="90">
+
+<table border="0" cellpadding="0" cellspacing="0" width="90">
+<tbody><tr><td background="login_system_soubory/2-1.gif" height="13" width="1"></td></tr>
+<tr><td bgcolor="white" height="145"><iframe src="login_system_soubory/2-2.htm" name="menu1" marginwidth="0" marginheight="0" align="middle" frameborder="0" height="100%" scrolling="auto" width="100%"></iframe></td></tr>
+</tbody></table>
+
+</td>
+<td bgcolor="white" valign="top" width="10">
+<img src="login_system_soubory/3.gif" alt="">
+</td>
+<td width="400">
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tbody><tr><td background="login_system_soubory/4-1.gif" height="8"></td></tr>
+<tr><td height="150"><iframe src="login_system_soubory/topinfo.htm" name="4-2" marginwidth="0" marginheight="0" align="middle" frameborder="0" height="100%" scrolling="no" width="100%"></iframe></td></tr>
+</tbody></table>
+
+</td>
+</tr>
+<tr>
+<td colspan="4" height="35" width="100%">
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tbody><tr>
+<td width="28"><img src="login_system_soubory/5-1.gif" alt=""></td>
+<td width="65">
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tbody><tr><td background="login_system_soubory/5-2.gif">&nbsp;</td></tr>
+<tr><td bgcolor="white"><form method="get" action="/misc/search.php" name="sfrm" style="margin-top: 0pt; margin-bottom: 0pt;"><input name="kde" value="1" type="hidden"><input size="10" name="co" value="hledat" onclick="value='';" style="border: 0px solid ; font-family: Verdana; font-size: 10px;" type="text"></form></td></tr>
+<tr><td><img src="login_system_soubory/5-3.gif" alt=""></td></tr>
+</tbody></table>
+</td>
+<td width="18"><a href="#" onclick="sfrm.submit();" onmouseover="hledejoff.src=hledejon.src; window.status='hledej';return true" onmouseout="hledejoff.src='/images/5-4.gif'; window.status='pcsvět';return true"><img name="hledejoff" src="login_system_soubory/5-4.gif" alt="go" border="0"></a></td>
+<td width="9"><img src="login_system_soubory/5-5.gif" alt=""></td>
+<td>
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tbody><tr><td align="left" background="login_system_soubory/5-7.gif" height="11"><img src="login_system_soubory/5-6.gif" alt=""></td></tr>
+<tr><td align="left" background="login_system_soubory/5-8.gif" height="24" valign="middle">
+<a href="http://www.pcsvet.cz/komunikace/" class="menu" onmouseover="pmnu(1);">komunikace</a>
+&nbsp;<a href="http://www.pcsvet.cz/internet/" class="menu" onmouseover="pmnu(2);">internet</a>
+&nbsp;<a href="http://www.pcsvet.cz/prog/" class="menu" onmouseover="pmnu(3);">prog.</a>
+&nbsp;<a href="http://www.pcsvet.cz/prog/" class="menu" onmouseover="pmnu(4);">web-prog.</a>
+&nbsp;<a href="http://www.pcsvet.cz/hardware/" class="menu" onmouseover="pmnu(5);">hardware</a>
+&nbsp;<a href="http://www.pcsvet.cz/software/" class="menu" onmouseover="pmnu(6);">software</a>
+&nbsp;<a href="http://www.pcsvet.cz/bezpecnost/" class="menu" onmouseover="pmnu(7);">bezpečnost</a>
+&nbsp;<a href="http://www.pcsvet.cz/magazin/" class="menu" onmouseover="pmnu(8);">magazín</a>
+&nbsp;<a href="http://www.pcsvet.cz/forum/" class="menu">disk.fórum</a>
+</td></tr>
+</tbody></table>
+</td></tr>
+</tbody></table>
+
+</td>
+</tr>
+<tr>
+<td colspan="4" background="login_system_soubory/6-2.gif" width="100%">
+
+<table border="0" cellpadding="0" cellspacing="0">
+<tbody><tr><td><img src="login_system_soubory/6-1.gif" alt=""></td>
+<td id="mnux" valign="top"></td>
+
+</tr>
+</tbody></table>
+
+</td>
+</tr>
+<tr>
+<td colspan="4" width="100%">
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tbody><tr><td background="login_system_soubory/7.gif" width="15">&nbsp;</td><td bgcolor="white" width="5">&nbsp;</td><td align="left" bgcolor="white" valign="top">
+<table><tbody><tr><td height="1"></td></tr></tbody></table>
+
+<p class="ndp">Přihlašovací systém</p>
+<p>počet názorů: <b>80</b> &nbsp; poslední: 23.01.2008 18:51:24 &nbsp; <a href="http://www.pcsvet.cz/forum/forum.php?art=4280" class="autor">číst názory</a> &nbsp; <a href="http://www.pcsvet.cz/forum/forum-add.php?art=4280" class="autor">přidat názor</a> &nbsp; <a href="http://www.pcsvet.cz/art/article_print.php?id=4280">vytisknout</a></p>
+<p>V tomto článku se dočtete, jak za pomocí PHP a MySQL lze udělat jednoduchý
+přihlašovací systém. Tento přihlašovací systém je vybaven zabezpečením,
+který kontroluje uživateli IP a vlastní jiné zabezpečující prvky.</p>
+<hr color="#777777" size="1">
+
+<ws-body>
+</ws-body><p>Jistě jste si již možná říkali, jak předávat mezi jednotlivými stránkami
+co nejbezpečněji identifikaci přihlášeného. Jedno z řešení je použití COOKIE.
+Někteří uživatelé však mají COOKIE zakázané.
+Další řešení je předávání v URL adrese, jenže pokud předáváme login
+a heslo je to z hlediska bezpečnosti u veřejně přístupných počítačů
+nepoužitelné. Musíme to nějak lépe ochránit, takže v tomto návodu budu předávat a ověřovat
+přihlášení takto: </p>
+<ul>
+  <li>Po přihlášení a autorizaci se zaznamená čas, IP a vygeneruje se náhodný
+    kód, který se ještě zakóduje šifrovacím algoritmem MD5.</li>
+  <li>V parametrech se pak mezi stránkami předává ID uživatele a s
+    vygenerovaným náhodným a zakódovaný kódem.</li>
+  <li>Po předání parametru mezi stránkami&nbsp; se ověří IP uživatele
+    (zda se nezměnila), platnost kódu a čas od poslední načtené stránky z
+    jeho IP (pokud je větší jak 5 minut, tak se provede odhlášení).</li>
+  <li>Pokud přijde požadavek z jiné IP adresy, nebo dojde požadavek s nesprávným kódem,
+    provede se automatické odhlášení.</li>
+</ul>
+<p>Pokud návštěvník zvolí odhlásit, nemusí se prakticky bát, že mu někdo
+vnikne do registrovaného režimu pod jeho uživatelským jménem. Neříkám, že
+je to zcela bezpečné, může totiž nějaký hacker odchytnout nick a heslo při
+samotném přihlašování (při posílání nicku a hesla na server), nebo může
+mít na počítači nějaký spuštěný tajný program, který monitoruje
+klávesnici. Toto jde ještě ztížit třeba zasláním náhodného kódu uživateli
+pomocí SMS na mobil při přihlašování (není to levné řešení, ale v některých
+případech kvůli vysoké bezpečnosti se to dá udělat - příkladem jsou
+bankovní aplikace). Ještě řešením prvního případu může být ztížení,
+pokud budete komunikovat přes šifrovaný https protokol (i když možná lze
+taky prolomit), ale bohužel druhý případ neřeší. Pro informace o https se
+informujte u svého webhostingového serveru, zda jej podporuje. Pro SMS byste
+se
+museli dohodnout ještě z nějakou firmou zabývající se posíláním SMS z
+internetu (tř. <a href="http://www.message.cz/">www.message.cz</a>). Pokud byste
+byli hodně nároční, můžete si udělat vlastní systém (připojit na
+Server přes data kabel vlastní mobil a vytvořit k němu komunikační
+program). </p>
+<h3><b>Postup vytvoření aplikace přihlašovacího systému</b></h3>
+<p>Nejprve bych chtěl poznamenat, že uvedený příklad je ukázkový
+(samozřejmě funkční - PHP kódy byly testovány u mě na localhostu), takže
+neobsahuje žádné grafické prvky... S úpravou si musíte poradit už sami. </p>
+<p>Nejprve si připravte tabulku do MySQL databáze. Počítal jsem s tím, že
+na jedné MySQL databázi bude moci fungovat více stránek se samostatným přihlašovacím
+systémem. Každá tabulka musí mít jinou předponu. V ukázce jsem předponu
+pojmenoval "predpona" a tabulka bude mít samotný název
+"user" -&gt; v mém případě se tabulka bude jmenovat "predpona_user".
+Předponu si můžete změnit na jakýkoliv název, ale nezapomeňte udělat změnu
+v config.php (ten Vám ukáži níže). Samotný SQL příkaz bude vypadat
+takto:&nbsp; </p>
+<table class="kod" align="center" bgcolor="lightgrey" border="1" cellpadding="10" cellspacing="1" height="179" width="50%">
+  <tbody><tr>
+    <td height="140" width="100%">
+      CREATE
+      TABLE predpona_user(
+      <div class="syntax_indent1">
+        id int(
+        11 )
+        NOT NULL
+        auto_increment,<br>
+        jmeno varchar(
+        30 )
+        NOT NULL
+        default '',<br>
+        adresa varchar(
+        150 )
+        NOT NULL
+        default '',<br>
+        nick varchar(
+        20 )
+        NOT NULL
+        default '',<br>
+        heslo varchar(
+        25 )
+        NOT NULL
+        default '',<br>
+        mail varchar(
+        35 )
+        NOT NULL
+        default '',<br>
+        mobil varchar(
+        13 )
+        NOT NULL
+        default '',<br>
+        kod varchar(
+        100 )
+        NOT NULL
+        default '',<br>
+        ip varchar(
+        20 )
+        NOT NULL
+        default '',<br>
+        posledni_akce bigint(
+        20 )
+        NOT NULL
+        default '0',<br>
+        UNIQUE KEY
+        id(
+        id,
+        adresa )
+      </div>
+      );</td>
+  </tr>
+</tbody></table>
+<p>Protože se do MySQL bude přistupovat z více stránek a v budoucnu možná
+budete stěhovat stránky na jiný server,&nbsp; museli byste dělat změnu ve
+všech stránkách. Proto přístupové informace uložíme do 1 souboru, který
+pak příkazem include v PHP vnoříme do všech stránek. </p>
+<table class="kod" align="center" bgcolor="lightgrey" border="1" cellpadding="10" cellspacing="1" height="179" width="50%">
+  <tbody><tr>
+    <td height="1" width="100%">
+      <p align="center"><b>config.php</b></p></td>
+  </tr>
+  <tr>
+    <td height="140" width="100%">
+      &lt;?<br>
+      $MySQL_server="localhost";<br>
+      $MySQL_user="root";<br>
+      $MySQL_user_password="";<br>
+      $MySQL_db="pcsvet";<br>
+      <br>
+      $MySQL_predponatabulek="predpona";<br>
+      ?&gt;</td>
+  </tr>
+</tbody></table>
+<p>Nyní Vám předvedu registrační formulář, který obsahuje povinné a nepovinné
+položky. Pokud budou vyplněny povinné položky, provede se zapsání údajů
+do MySQL databáze. Formulář si budete moci v budoucnu rozšířit o další
+položky, za předpokladu, že musíte přidat sloupce do MySQL tabulky. Následně přidáte
+prvky do formuláře a upravíte příkaz pro přidání položek do MySQL
+databáze. Prosím pozor při překopírování PHP kódu na zalamování řádků.
+Př.:<b> echo " nějaký text ";</b>&nbsp; musí být ve výsledném
+souboru na jeden řádek (v
+tabulce může být kvůli délce rozložen na více řádků).</p>
+
+<table class="kod" align="center" bgcolor="lightgrey" border="1" cellpadding="10" cellspacing="1" height="179" width="90%">
+  <tbody><tr>
+    <td height="1" width="100%">
+      <p align="center"><b>registrace.php</b></p></td>
+  </tr>
+  <tr>
+    <td height="140" width="100%">
+      &lt;HTML&gt;<br>
+      &lt;HEAD&gt;<br>
+      &lt;META name="resource-type" content="document"&gt;<br>
+      &lt;META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=windows-1250"&gt;<br>
+      &lt;META HTTP-EQUIV="pragma" CONTENT="no-cache"&gt;<br>
+      &lt;TITLE&gt;Moje stranka - registrace&lt;/TITLE&gt;<br>
+      &lt;/HEAD&gt;<br>
+      &lt;BODY&gt;<br>
+      <br>
+      &lt;div align="center"&gt;<br>
+      &lt;FONT size="8"&gt;REGISTRACE&lt;/FONT&gt;<br>
+      &lt;br&gt;&lt;br&gt;&lt;FONT color="RED" size="-2"&gt;&lt;b&gt;Povinné údaje jsou tučně červené&lt;/b&gt;&lt;/font&gt;<br>
+      &lt;/div&gt;<br>
+      <br>
+      &lt;br&gt;<br>
+      &lt;TABLE border="1" cellspacing="1" cellpadding="1" width="75%" align="center"&gt;&lt;tr&gt;&lt;TD align="center"&gt;<br>
+      &lt;?<br>
+      include("config.php");<br>
+      $spojeni=mysql_connect($MySQL_server,$MySQL_user,$MySQL_user_password);<br>
+      $spojenidb=mysql_select_db($MySQL_db);<br>
+      if (!$spojeni)<br>
+      {<br>
+       echo"Nepodarilo se navazat spojeni se serverem.";<br>
+       exit;<br>
+       }<br>
+      <br>
+      $zob="ne";<br>
+      if($odeslano=="ano"){<br>
+      <br>
+      // test vyplnenych udaju<br>
+      if($jmeno==""){<br>
+      $zob="ano";<br>
+      echo "&lt;FONT color=\"FUCHSIA\"&gt;&lt;b&gt;Chyba: &lt;/b&gt;Nebylo vyplňeno jméno&lt;/FONT&gt;&lt;br&gt;";<br>
+      }<br>
+      <br>
+      if($nick==""){<br>
+      $zob="ano";<br>
+      echo "&lt;FONT color=\"FUCHSIA\"&gt;&lt;b&gt;Chyba: &lt;/b&gt;Nebyl zvolen nick&lt;/FONT&gt;&lt;br&gt;";<br>
+      }<br>
+      <br>
+      if($heslo1==""){<br>
+      $zob="ano";<br>
+      echo "&lt;FONT color=\"FUCHSIA\"&gt;&lt;b&gt;Chyba: &lt;/b&gt;Zvol si heslo&lt;/FONT&gt;&lt;br&gt;";<br>
+      }<br>
+      <br>
+      if($heslo1!=$heslo2){<br>
+      $zob="ano";<br>
+      echo "&lt;FONT color=\"FUCHSIA\"&gt;&lt;b&gt;Chyba: &lt;/b&gt;Hesla nejsou stejná&lt;/FONT&gt;&lt;br&gt;";<br>
+      }<br>
+      <br>
+      if($mail=="" or $mail=="@"){<br>
+      $zob="ano";<br>
+      echo "&lt;FONT color=\"FUCHSIA\"&gt;&lt;b&gt;Chyba: &lt;/b&gt;Nebyl vyplněn e-mail&lt;/FONT&gt;&lt;br&gt;";<br>
+      }
+      <br>
+      <br>
+      @$bb = MySQL_Query("SELECT * FROM ".$MySQL_predponatabulek."_user WHERE nick='$nick';");<br>
+      @$aa=MySQL_Fetch_Array($bb);<br>
+      if($aa[id]!=""){<br>
+      $zob="ano";<br>
+echo "&lt;FONT color=\"FUCHSIA\"&gt;&lt;b&gt;Chyba:
+&lt;/b&gt;Požadovaný nick již někdo používá. Zvolte si prosím jiný
+nick.&lt;/FONT&gt;&lt;br&gt;";<br>
+      }<br>
+      <br>
+      }else $zob="ano";<br>
+      <br>
+      <br>
+      if($zob=="ano"){<br>
+      <br>
+      ?&gt;<br>
+      &lt;br&gt;<br>
+      &lt;TABLE align="center"&gt;<br>
+      &lt;tr&gt;<br>
+      &lt;FORM method="post"&gt;<br>
+&lt;?echo'&lt;TD nowrap align="right"&gt;&lt;FONT
+color="RED"&gt;&lt;b&gt;Jméno a Přijmení:&lt;/b&gt;&lt;/font&gt;&lt;TD
+nowrap&gt;&lt;INPUT type="text" name="jmeno" value="'.$jmeno.'"
+maxlength="30"&gt;';<br>
+      echo'&lt;tr&gt;';<br>
+echo'&lt;TD nowrap
+align="right"&gt;&lt;FONT&gt;Adresa:&lt;/font&gt;&lt;TD
+nowrap&gt;&lt;INPUT type="text" name="adresa" value="'.$adresa.'"
+maxlength="150"&gt;';<br>
+      echo'&lt;tr&gt;';<br>
+echo'&lt;TD nowrap align="right"&gt;&lt;FONT
+color="RED"&gt;&lt;b&gt;Nick:&lt;/b&gt;&lt;/font&gt;&lt;TD
+nowrap&gt;&lt;INPUT type="text" name="nick" value="'.$nick.'"
+maxlength="20"&gt;';<br>
+      echo'&lt;tr&gt;';<br>
+echo'&lt;TD nowrap align="right"&gt;&lt;FONT
+color="RED"&gt;&lt;b&gt;Heslo:&lt;/b&gt;&lt;/font&gt;&lt;TD
+nowrap&gt;&lt;INPUT type="password" name="heslo1" maxlength="25"&gt;';<br>
+      echo'&lt;tr&gt;';<br>
+echo'&lt;TD nowrap align="right"&gt;&lt;FONT
+color="RED"&gt;&lt;b&gt;Opakuj heslo:&lt;/b&gt;&lt;/font&gt;&lt;TD
+nowrap&gt;&lt;INPUT type="password" name="heslo2" maxlength="25"&gt;';<br>
+      echo'&lt;tr&gt;';<br>
+      if($mail=="") $mail="@";<br>
+echo'&lt;TD nowrap align="right"&gt;&lt;FONT
+color="RED"&gt;&lt;b&gt;E-Mail:&lt;/b&gt;&lt;/font&gt;&lt;TD
+nowrap&gt;&lt;INPUT type="text" name="mail" value="'.$mail.'"
+maxlength="35"&gt;';<br>
+      echo'&lt;tr&gt;';<br>
+      if($mobil1=="") $mobil1="+420";<br>
+echo'&lt;TD nowrap
+align="right"&gt;&lt;FONT&gt;Mobil:&lt;/font&gt;&lt;TD
+nowrap&gt;&lt;INPUT type="text" name="mobil1" value="'.$mobil1.'"
+size="4" maxlength="4"&gt;&lt;INPUT type="text" name="mobil2"
+value="'.$mobil2.'" size="3" maxlength="3"&gt;&lt;INPUT type="text"
+name="mobil3" size="6" maxlength="6" value="'.$mobil3.'"&gt;';<br>
+      ?&gt;<br>
+      &lt;tr&gt;<br>
+      &lt;th colspan="2"&gt;&amp;nbsp;<br>
+      &lt;tr&gt;<br>
+      &lt;th colspan="2"&gt;&lt;INPUT type="submit" value="  R e g i s t r u j  "&gt;<br>
+      &lt;INPUT type="hidden" name="odeslano" value="ano"&gt;<br>
+      &lt;/FORM&gt;<br>
+      &lt;/table&gt;&lt;?}else{<br>
+      <br>
+MySQL_Query("INSERT INTO ".$MySQL_predponatabulek."_user
+VALUES('','$jmeno','$adresa','$nick','$heslo1','$mail','$mobil1$mobil2$mobil3','','','0')");<br>
+      echo MySQL_error();<br>
+      echo"&lt;FONT color=\"darkred\" size=\"+1\"&gt;Registrace dokončena&lt;/FONT&gt;";<br>
+echo"&lt;br&gt;&lt;br&gt;Poznamenejte si prosím Vámi zvolené
+uživatelské jméno a heslo na bezpečné místo(nejlépe zapamatovat). Pokud
+tyto 2 údaje zapomenete, nebudete moci se ke svému účtu přihlásit.";<br>
+echo"&lt;br&gt;&lt;br&gt;&lt;br&gt;Nyní se stačí v menu na &lt;A
+href=\"index.php\"&gt;hlavní straně&lt;/A&gt; přihlásit.";<br>
+      }?&gt;&lt;/table&gt;<br>
+      <br>
+      &lt;/body&gt;<br>
+      &lt;/html&gt;<br>
+      &lt;?MySQL_close();?&gt;</td>
+  </tr>
+</tbody></table>
+<p> Nyní Vám předvedu index.php, který bude mít vlevo na boku okénko pro přihlášení.
+Položky menu pro registrované si musíte vytvořit sami. V proměnné $prihlasen budete mít ID přihlášeného uživatele. Pokud
+uživatel nebude přihlášen bude proměnná prázdná ($prihlasen=="").
+V proměnné $url bude kód (id uživatele + náhodný kód), který musíte předávat v
+parametrech URL adresy, aby
+se zachovalo přihlášení.&nbsp;<br>
+ <br>
+ Př.: echo "&lt;A href=\"neco.php?<b>$url</b>\"&gt;Něco pro registrované&lt;/A&gt;";<br>
+nebo echo "&lt;A href=\"neco.php?nejakyparametr=neco&amp;<b>$url</b>\"&gt;Něco pro registrované&lt;/A&gt;";&nbsp;<br>
+<br>
+Pokud nebudete mít aktivované php (&lt;??&gt;), bude odkaz vypadat třeba
+takto: &lt;A href="neco.php?&lt;? echo <b>$url; </b>?&gt;"&gt;Něco pro registrované&lt;/A&gt;</p>
+
+<table class="kod" align="center" bgcolor="lightgrey" border="1" cellpadding="10" cellspacing="1" height="179" width="90%">
+  <tbody><tr>
+    <td height="1" width="100%">
+      <p align="center"><b>index.php</b></p></td>
+  </tr>
+  <tr>
+    <td height="140" width="100%">
+      &lt;?<br>
+      include("config.php");<br>
+      $spojeni=mysql_connect($MySQL_server,$MySQL_user,$MySQL_user_password);<br>
+      $spojenidb=mysql_select_db($MySQL_db);<br>
+      if (!$spojeni)<br>
+      {<br>
+       echo"Nepodarilo se navazat spojeni se serverem.";<br>
+       exit;<br>
+       }<br>
+      <br>
+      $prihlasen="";<br>
+      if($co=="logout"){<br>
+      MySQL_Query("UPDATE ".$MySQL_predponatabulek."_user SET ip='' WHERE id='$id';");<br>
+      $code="";<br>
+$error="&lt;b&gt;Nyní jste byl odhlášen.&lt;/b&gt;&lt;br&gt;Pokud
+budete chtít dále pokračovat v režimu pro registrované, musíte se znova
+přihlásit&lt;br&gt;&lt;br&gt;";<br>
+      }<br>
+      if($nick!=""){<br>
+      $bb = MySQL_Query("SELECT * FROM ".$MySQL_predponatabulek."_user WHERE nick='$nick';");<br>
+      echo MySQL_Error();<br>
+      $aa=MySQL_Fetch_Array($bb);<br>
+      <br>
+      if(($aa[heslo]==$heslo) and ($heslo!="")){<br>
+      $IP=$REMOTE_ADDR;<br>
+      MySQL_Query("UPDATE ".$MySQL_predponatabulek."_user SET ip='$IP' WHERE nick='$nick';");<br>
+      $time=time();<br>
+      MySQL_Query("UPDATE ".$MySQL_predponatabulek."_user SET posledni_akce='$time' WHERE nick='$nick';");<br>
+      $kod=MD5($time.$REMOTE_ADDR);<br>
+      MySQL_Query("UPDATE ".$MySQL_predponatabulek."_user SET kod='$kod' WHERE nick='$nick';");<br>
+      $url="id=".$aa[id]."&amp;code=".$kod;<br>
+      $prihlasen=$aa[id];<br>
+      } else {$error="Přihlášení se nepodařilo. Špatné uživatelské jméno, nebo heslo.&lt;br&gt;&lt;br&gt;";}<br>
+      }<br>
+      <br>
+      if($code!=""){<br>
+      $bb = MySQL_Query("SELECT * FROM ".$MySQL_predponatabulek."_user WHERE id='$id';");<br>
+      $aa=MySQL_Fetch_Array($bb);<br>
+      $rozdil = time() - $aa[posledni_akce];<br>
+      if($rozdil&gt;300 or $rozdil&lt;0) $povol="ne";<br>
+      if(($aa[kod]==$code)and($aa[ip]==$REMOTE_ADDR) and ($povol=="")){<br>
+      $time=time();<br>
+      MySQL_Query("UPDATE ".$MySQL_predponatabulek."_user SET posledni_akce='$time' WHERE id='$id';");<br>
+      $url="id=".$id."&amp;code=".$code;<br>
+      $prihlasen=$id;<br>
+} else {$str="";MySQL_Query("UPDATE ".$MySQL_predponatabulek."_user SET
+ip='' WHERE id='$id';"); $error="&lt;b&gt;Nejste
+přihlášen&lt;/b&gt;&lt;BR&gt;Buď nesouhlasí IP, nebo se provedlo
+automatické odhlášení, kvůli neaktivitě delší než 5 minut. Přihlaste se
+proto prosím znovu.&lt;br&gt;&lt;br&gt;";}<br>
+      }<br>
+      ?&gt;<br>
+      &lt;!-- zacatek - nejaka stranka --&gt;<br>
+      &lt;HTML&gt;<br>
+      &lt;HEAD&gt;<br>
+      &lt;META name="resource-type" content="document"&gt;<br>
+      &lt;META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=windows-1250"&gt;<br>
+      &lt;META HTTP-EQUIV="pragma" CONTENT="no-cache"&gt;<br>
+      &lt;TITLE&gt;Moje stranka&lt;/TITLE&gt;<br>
+      &lt;/HEAD&gt;<br>
+      &lt;BODY&gt;<br>
+      &lt;table&gt;<br>
+      &lt;tr&gt;&lt;TD width="150"&gt;<br>
+      &lt;!-- konec - nejaka stranka --&gt;<br>
+      <br>
+      &lt;!-- zacatek - prihlasovaci okno/okno pro registrovane --&gt;<br>
+      &lt;TABLE&gt;&lt;tr&gt;&lt;td align="center"&gt;<br>
+      &lt;?if($prihlasen==""){?&gt;<br>
+      &lt;TABLE&nbsp; width="165"&gt;&lt;tr&gt;&lt;td align="center"&gt;<br>
+      &lt;TABLE&nbsp; width="100%"&gt;&lt;tr&gt;&lt;TD align="center" width="100%"&gt;&lt;b&gt;Login&lt;/b&gt;&lt;/table&gt;<br>
+      &lt;table&gt;&lt;FORM method="post" action="index.php"&gt;<br>
+      &lt;tr&gt;&lt;td valign="top"&gt;&amp;nbsp;&lt;td valign="top"&gt;&amp;nbsp;<br>
+      &lt;tr&gt;&lt;td valign="top"&gt;Nick:&lt;td valign="top"&gt;&lt;INPUT type="text" name="nick" size="10"&gt;<br>
+      &lt;tr&gt;&lt;TD valign="top"&gt;Heslo:&lt;td  valign="top" &gt;&lt;INPUT type="password" name="heslo" size="10"&gt;<br>
+      &lt;tr&gt;&lt;th colspan="2"&gt;&lt;INPUT type="submit" value="LOGIN"&gt;<br>
+      &lt;tr&gt;&lt;th colspan="2"&gt;&lt;a href="registrace.php"&gt;&lt;FONT size="2"&gt;REGISTRACE&lt;/FONT&gt;&lt;/a&gt;<br>
+      &lt;/FORM&gt;<br>
+      &lt;/table&gt;&lt;/table&gt;<br>
+      &lt;?}else{<br>
+      $bb = MySQL_Query("SELECT * FROM ".$MySQL_predponatabulek."_user WHERE id='$prihlasen';");<br>
+      $aa=MySQL_Fetch_Array($bb);<br>
+      $kredit=$aa[kredit];<br>
+      echo'&lt;TABLE width="165"&gt;&lt;tr&gt;&lt;td align="center"&gt;';<br>
+      echo'&lt;TABLE width="100%"&gt;&lt;tr&gt;&lt;TD align="center" width="100%"&gt;&lt;b&gt;Uživatel&lt;/b&gt;&lt;/table&gt;';<br>
+      echo "&lt;table&gt;&lt;tr&gt;&lt;TD align=\"right\"&gt;&lt;b&gt;Přihlášen:&lt;/b&gt;&lt;td&gt;$aa[jmeno]&lt;/table&gt;";<br>
+      echo "&lt;A href=\"index.php?$url\"&gt;Hlavní strana&lt;/A&gt;&lt;br&gt;";<br>
+      echo "&lt;A href=\"neco.php?$url\"&gt;Něco pro registrované&lt;/A&gt;&lt;br&gt;";<br>
+      echo "&lt;A href=\"index.php?co=logout&amp;$url\"&gt;ODHLÁSIT&lt;/A&gt;";<br>
+      echo'&lt;/table&gt;';<br>
+      <br>
+      }<br>
+      ?&gt;<br>
+      &lt;/table&gt;<br>
+      &lt;!-- konec - prihlasovaci okno/okno pro registrovane --&gt;<br>
+      <br>
+      &lt;!-- zacatek - nejaka stranka --&gt;<br>
+      &lt;TD width="*"&gt;<br>
+      &lt;?<br>
+      // vypis chyb pri logoani do nejake stranky<br>
+      echo $error;<br>
+      ?&gt;<br>
+      <br>
+      &lt;/body&gt;<br>
+      &lt;/html&gt;<br>
+      &lt;!-- konec - nejaka stranka --&gt;<br>
+      &lt;?MySQL_close();?&gt;<br>
+      </td>
+  </tr>
+</tbody></table>
+<p>Index.php je včetně přihlašovacího formuláře. Tento soubor je
+tedy základem pro všechny stránky (neboť&nbsp; provede přihlášení a&nbsp;
+dál kontroluje, zda je uživatel stále přihlášen). Nemělo by chybět menu pro registrované.
+Pokud
+chcete přihlášení zachovat, musí byt odkazy tvořeny výše uvedeným způsobem.. </p>
+
+<p>Pokud budete mít jakékoliv
+dotazy, tak mi napište e-mail na adresu <a href="mailto:simi@smsbrana.net">simi@smsbrana.net</a>.&nbsp;</p>
+
+<p>Kdyby byl zájem, mohl bych vytvořit další díl, který by byl návodem,
+jak vytvořit administrační sekci, kde budete mít přehled registrovaných uživatelů, popřípadě formulář pro zaslání zapomenutého
+hesla (zde by se zadal uživatelův
+nick a na e-mail, který uvedl při registraci přijde jeho zapomenuté heslo).</p>
+
+
+<br>
+<br>
+<hr color="#777777" size="1">
+
+<table width="100%"><tbody><tr><td valign="top">
+Autor: <b>Jan Šimecký</b>, <a href="http://www.pcsvet.cz/art/author.php?id=6701">informace o autorovi</a><br>
+Rubrika: <b><a href="http://www.pcsvet.cz/php/">Programování - PHP</a></b><br>
+Čtenářů: <b>16828</b> &nbsp; &nbsp; Zobrazení: <b>22412</b><br>
+<br>
+
+
+</td><td align="center">
+
+
+Jak hodnotíte tento článek?<br><form method="post" action="article.php?id=4280"><input name="znamka" value="1" class="tlac" type="submit"> <input name="znamka" value="2" class="tlac" type="submit"> <input name="znamka" value="3" class="tlac" type="submit"> <input name="znamka" value="4" class="tlac" type="submit"> <input name="znamka" value="5" class="tlac" type="submit"><br>lepší &lt;--&gt;horší</form>
+
+</td></tr></tbody></table>
+Názory: počet: <b>80</b> &nbsp; poslední: 23.01.2008 18:51:24 &nbsp; <a href="http://www.pcsvet.cz/forum/forum.php?art=4280" class="autor">číst názory</a> &nbsp; <a href="http://www.pcsvet.cz/forum/forum-add.php?art=4280" class="autor">přidat názor</a> &nbsp; <a href="http://www.pcsvet.cz/art/article_print.php?id=4280">vytisknout</a><p></p>
+
+<a name="inquiry"></a>
+
+<hr color="white" size="1">
+
+<div align="center"><center><table class="ftable"><tbody><tr><td align="left"><b><i>Nadpis</i></b></td><td align="left"><b><i>Autor</i></b></td><td align="left"><b><i>Datum</i></b></td></tr><tr><td align="left"><b>SQL dotazy</b></td><td align="left">Krtek</td><td align="left">10.11.2003 07:54:54</td></tr><tr><td align="left">&nbsp; Re: SQL dotazy</td><td align="left"><a href="mailto:simi@smsbrana.net">Jan Simecky</a></td><td align="left">10.11.2003 13:21:16</td></tr><tr><td align="left">&nbsp; &nbsp; Prosim pomozte nefunguje mi to</td><td align="left"><a href="mailto:dark.fighter@seznam.cz">Dark Fighter</a></td><td align="left">25.09.2004 22:42:36</td></tr><tr><td align="left"><b>kontrola IP</b></td><td align="left"><a href="mailto:maglakelidze@intrak.sk">voloda</a></td><td align="left">10.11.2003 13:10:03</td></tr><tr><td align="left">&nbsp; Re: kontrola IP</td><td align="left"><a href="mailto:simi@smsbrana.net">Jan Simecky</a></td><td align="left">10.11.2003 13:21:04</td></tr><tr><td align="left">&nbsp; &nbsp; Re: kontrola IP</td><td align="left"><a href="mailto:maglakelidze@intrak.sk">voloda</a></td><td align="left">10.11.2003 14:13:44</td></tr><tr><td align="left">&nbsp; &nbsp; &nbsp; Re: kontrola IP</td><td align="left"><a href="mailto:simi@smsbrana.net">Jan Simecky</a></td><td align="left">11.11.2003 16:20:22</td></tr><tr><td align="left"><b>vezmeme to postupne :)</b></td><td align="left"><a href="mailto:jakub.podhorsky@seznam.cz">Jakub Podhorský</a></td><td align="left">10.11.2003 15:21:02</td></tr><tr><td align="left"><b>0 100 % lepsi clanek</b></td><td align="left">Tomáš Krug</td><td align="left">10.11.2003 21:52:21</td></tr><tr><td align="left"><b>Good</b></td><td align="left">HUB</td><td align="left">11.11.2003 13:44:13</td></tr><tr><td align="left">&nbsp; Re: Good</td><td align="left"><a href="mailto:jakub.podhorsky@seznam.cz">Jakub Podhorský</a></td><td align="left">11.11.2003 14:10:50</td></tr><tr><td align="left"><b>Nejak jednodusejc by to neslo?</b></td><td align="left">JA</td><td align="left">17.12.2003 16:03:44</td></tr><tr><td align="left">&nbsp; Re: Nejak jednodusejc by to neslo?</td><td align="left">odckuler</td><td align="left">18.03.2007 00:32:17</td></tr><tr><td align="left"><b>Druhý díl</b></td><td align="left"><a href="mailto:v.boch@mybox.cz">vasek</a></td><td align="left">21.12.2003 12:41:55</td></tr><tr><td align="left">&nbsp; Re: Druhý díl</td><td align="left">Jan Simecky</td><td align="left">22.12.2003 12:11:49</td></tr><tr><td align="left">&nbsp; &nbsp; Re: Druhý díl</td><td align="left"><a href="mailto:v.boch@mybox.cz">vasek</a></td><td align="left">29.12.2003 12:02:46</td></tr><tr><td align="left"><b>pole IP adresy ...</b></td><td align="left"><a href="mailto:3dfaith@post.sk">Andrej</a></td><td align="left">13.02.2004 11:45:03</td></tr><tr><td align="left"><b>Super článek!!!</b></td><td align="left"><a href="mailto:Pavlii@seznam.cz">Pavlii</a></td><td align="left">20.02.2004 07:54:54</td></tr><tr><td align="left"><b>Historie</b></td><td align="left"><a href="mailto:Pavlii@seznam.cz">Pavlii</a></td><td align="left">20.02.2004 21:28:14</td></tr><tr><td align="left">&nbsp; Re: Historie</td><td align="left"><a href="mailto:ttommass.s@seznam.cz">Tomáš</a></td><td align="left">04.01.2005 10:09:46</td></tr><tr><td align="left"><b>moje stránky</b></td><td align="left"><a href="mailto:m.vold@seznam.cz">maty</a></td><td align="left">21.02.2004 09:57:20</td></tr><tr><td align="left"><b>Najednou nezapisuje registrace do tabulky</b></td><td align="left"><a href="mailto:info@vh-obrazy.com">Venca</a></td><td align="left">07.03.2004 21:42:47</td></tr><tr><td align="left">&nbsp; Re: Najednou nezapisuje registrace do...</td><td align="left"><a href="mailto:erikrammi@zem.sk">Erik</a></td><td align="left">16.05.2004 18:26:48</td></tr><tr><td align="left">&nbsp; &nbsp; Re: Najednou nezapisuje registrace do...</td><td align="left"><a href="mailto:info@vh-obrazy.com">Venca</a></td><td align="left">16.05.2004 19:34:04</td></tr><tr><td align="left">&nbsp; &nbsp; &nbsp; Re: Najednou nezapisuje registrace do...</td><td align="left"><a href="mailto:erikrammi@zem.sk">Erik</a></td><td align="left">17.05.2004 08:06:41</td></tr><tr><td align="left"><b>Administrace</b></td><td align="left"><a href="mailto:marek-urban@seznam.cz">Marek Urban</a></td><td align="left">30.03.2004 22:03:44</td></tr><tr><td align="left"><b>Je to super!!!!</b></td><td align="left"><a href="mailto:erikrammi@zem.sk">Erik</a></td><td align="left">16.07.2004 11:27:24</td></tr><tr><td align="left">&nbsp; Re: Je to super!!!!</td><td align="left"><a href="mailto:jursaj@centrum.cz">Jura</a></td><td align="left">04.08.2004 17:31:02</td></tr><tr><td align="left">&nbsp; &nbsp; Re: Je to super!!!!</td><td align="left"><a href="mailto:echeck@atlas.cz">echeck</a></td><td align="left">08.08.2004 23:31:54</td></tr><tr><td align="left">&nbsp; &nbsp; &nbsp; Re: Je to super!!!!</td><td align="left"><a href="mailto:Pavel.Valach@atlas.cz">Pavel</a></td><td align="left">18.12.2004 18:23:54</td></tr><tr><td align="left"><b>Help !!!</b></td><td align="left"><a href="mailto:dark.fighter@atlas.cz">Dark Fighter</a></td><td align="left">27.09.2004 16:00:38</td></tr><tr><td align="left"><b>Problem</b></td><td align="left"><a href="mailto:koplot@pobox.sk">koplot</a></td><td align="left">03.02.2005 13:10:01</td></tr><tr><td align="left">&nbsp; Re: Problem</td><td align="left">koplot</td><td align="left">10.02.2005 00:25:00</td></tr><tr><td align="left">&nbsp; Re: Problem</td><td align="left"><a href="mailto:Mysrd@seznam.cz">Mysrd</a></td><td align="left">28.12.2005 13:16:47</td></tr><tr><td align="left">&nbsp; &nbsp; Re: Problem</td><td align="left"><a href="mailto:koplot@pobox.sk">koplot@pobox.sk</a></td><td align="left">28.12.2005 19:37:04</td></tr><tr><td align="left">&nbsp; &nbsp; &nbsp; Re: Problem</td><td align="left"><a href="mailto:raptorsoft@seznam.cz">rsoft</a></td><td align="left">15.11.2007 07:38:28</td></tr><tr><td align="left">&nbsp; &nbsp; &nbsp; &nbsp; Re: Problem</td><td align="left"><a href="mailto:raptorsoft@seznam.cz">rsoft</a></td><td align="left">15.11.2007 07:39:32</td></tr><tr><td align="left"><b>Poděkování</b></td><td align="left">anymouse</td><td align="left">05.02.2005 16:46:28</td></tr><tr><td align="left"><b>Jakn na další Odkazy z index.php</b></td><td align="left"><a href="mailto:thugi@centrum.cz">Thugi</a></td><td align="left">24.02.2005 22:12:48</td></tr><tr><td align="left">&nbsp; Re: Jakn na další Odkazy z index.php</td><td align="left"><a href="mailto:thugi@centrum.cz">Thugi</a></td><td align="left">24.02.2005 22:26:58</td></tr><tr><td align="left"><b>Jak na odkazy?</b></td><td align="left"><a href="mailto:vodvarik.p@post.cz">Petr</a></td><td align="left">06.03.2005 10:08:51</td></tr><tr><td align="left">&nbsp; Re: Jak na odkazy?</td><td align="left"><a href="mailto:tomas.cz@atlas.cz">Tomas_cze</a></td><td align="left">26.03.2005 11:47:38</td></tr><tr><td align="left"><b>CHYBA</b></td><td align="left"><a href="mailto:kepro@ahoj.sk">Kepro</a></td><td align="left">21.04.2005 23:56:07</td></tr><tr><td align="left"><b>Zblbnutí</b></td><td align="left"><a href="mailto:TLCS@TLCS.TLCS">TLCS</a></td><td align="left">04.06.2005 19:05:29</td></tr><tr><td align="left">&nbsp; predpona</td><td align="left"><a href="mailto:anubis.rx7@centrum.sk">anubis</a></td><td align="left">06.02.2007 22:21:06</td></tr><tr><td align="left"><b>config.php</b></td><td align="left"><a href="mailto:matejka.david@centrum.cz">David Matejka</a></td><td align="left">27.06.2005 14:42:45</td></tr><tr><td align="left"><b>uplne od zacatku</b></td><td align="left"><a href="mailto:chytilj@seznam.cz">chytilj</a></td><td align="left">30.06.2005 08:17:05</td></tr><tr><td align="left"><b>SQL pripojenie do databaze</b></td><td align="left"><a href="mailto:77gladiator77@atlas.sk">Rene</a></td><td align="left">27.08.2005 14:48:06</td></tr><tr><td align="left">&nbsp; Re: SQL pripojenie do databaze</td><td align="left"><a href="mailto:tomas.cz@atlas.cz">Tomas_cze</a></td><td align="left">30.09.2005 17:13:46</td></tr><tr><td align="left">&nbsp; &nbsp; Re: SQL pripojenie do databaze</td><td align="left"><a href="mailto:tomas.cz@atlas.cz">Tomas_cze</a></td><td align="left">30.09.2005 17:16:02</td></tr><tr><td align="left"><b>Programování Prosím pomocte!!!</b></td><td align="left"><a href="mailto:Martin.Voznik@seznam.cz">Martin</a></td><td align="left">18.10.2005 18:38:49</td></tr><tr><td align="left"><b>Dotaz</b></td><td align="left"><a href="mailto:seys@seznam.cz">SeyS</a></td><td align="left">29.10.2005 12:16:53</td></tr><tr><td align="left"><b>Prosim pomozte nefunguje mi to</b></td><td align="left"><a href="mailto:osiris@seznam.cz">osiris</a></td><td align="left">03.12.2005 19:35:16</td></tr><tr><td align="left"><b>Prosim pomozte nefunguje mi to</b></td><td align="left"><a href="mailto:osiris@seznam.cz">osiris</a></td><td align="left">03.12.2005 19:44:26</td></tr><tr><td align="left"><b>NEVIEM NAINSTALOVAT DATABAZU</b></td><td align="left"><a href="mailto:limetqa@sexi.sk">Lukas</a></td><td align="left">06.12.2005 19:41:47</td></tr><tr><td align="left"><b>obchadzanie loginu</b></td><td align="left"><a href="mailto:IIITEKIII@azet.sk">php4ewer</a></td><td align="left">07.03.2006 19:07:59</td></tr><tr><td align="left"><b>Nepřihlášený user?</b></td><td align="left"><a href="mailto:sonyc@centrum.cz">Sonyc</a></td><td align="left">01.04.2006 12:45:43</td></tr><tr><td align="left"><b>security</b></td><td align="left"><a href="mailto:tek@pobox.sk">tek</a></td><td align="left">10.05.2006 21:30:14</td></tr><tr><td align="left"><b>Dr.Eggm@n</b></td><td align="left"><a href="mailto:peter.burian@satronet.sk">Peter</a></td><td align="left">03.07.2006 13:03:32</td></tr><tr><td align="left"><b>zabezpečeni</b></td><td align="left"><a href="mailto:nakladalm@centrum.cz">Smoce</a></td><td align="left">02.08.2006 13:16:31</td></tr><tr><td align="left"><b>if($odeslano)</b></td><td align="left"><a href="mailto:gosty@centrum.sk">Gosty</a></td><td align="left">19.08.2006 12:23:06</td></tr><tr><td align="left"><b>seznam uživatelů</b></td><td align="left"><a href="mailto:tomca.tomca@centrum.cz">crash</a></td><td align="left">25.08.2006 21:47:22</td></tr><tr><td align="left"><b>Chtěl bych další díl</b></td><td align="left"><a href="mailto:jakubmichna@seznam.cz">Michna</a></td><td align="left">20.09.2006 20:02:28</td></tr><tr><td align="left"><b>Problem s připojením k databázi</b></td><td align="left"><a href="mailto:vojta.pacik@atlas.cz">Rym</a></td><td align="left">01.10.2006 19:45:38</td></tr><tr><td align="left">&nbsp; Re: Problem s připojením k databázi</td><td align="left"><a href="mailto:drakovir@centrum.cz">drakovir</a></td><td align="left">23.10.2007 08:09:29</td></tr><tr><td align="left"><b>SOSnu</b></td><td align="left"><a href="mailto:david.svara@seznam.cz">davidek.s</a></td><td align="left">07.12.2006 20:05:35</td></tr><tr><td align="left"><b>Nefunkcna registracia</b></td><td align="left"><a href="mailto:ajuso@zoznam.sk">Alex</a></td><td align="left">09.12.2006 16:27:33</td></tr><tr><td align="left"><b>No Database Selected</b></td><td align="left"><a href="mailto:lukin.kral@centrum.cz">LukasK</a></td><td align="left">30.01.2007 18:05:51</td></tr><tr><td align="left"><b>Chci další díl!!!</b></td><td align="left"><a href="mailto:warling@seznam.cz">warling</a></td><td align="left">03.02.2007 11:33:35</td></tr><tr><td align="left"><b>Co se píše do config.php</b></td><td align="left"><a href="mailto:warling@seznam.cz">warling</a></td><td align="left">11.02.2007 16:39:41</td></tr><tr><td align="left"><b>undefined variable</b></td><td align="left">Doktor</td><td align="left">03.03.2007 11:48:23</td></tr><tr><td align="left"><b>to warling</b></td><td align="left">Doktor</td><td align="left">03.03.2007 11:53:13</td></tr><tr><td align="left"><b>SQL TABULKA</b></td><td align="left"><a href="mailto:info@cs-hacked.xf.cz">michal</a></td><td align="left">06.03.2007 16:39:13</td></tr><tr><td align="left">&nbsp; Re: SQL TABULKA</td><td align="left"><a href="mailto:hlatkypeter@zoznam.sk">odckuler</a></td><td align="left">19.06.2007 19:57:38</td></tr><tr><td align="left"><b>neni lahšie</b></td><td align="left"><a href="mailto:hlatkypeter@zoznam.sk">odckuler</a></td><td align="left">18.03.2007 00:45:47</td></tr><tr><td align="left"><b>Pomoc</b></td><td align="left"><a href="mailto:davidek.s@email.cz">davidek.s</a></td><td align="left">28.08.2007 10:18:04</td></tr><tr><td align="left"><b>PROBLÉM!!!</b></td><td align="left"><a href="mailto:drakovir@centrum.cz">drakovir</a></td><td align="left">21.10.2007 18:10:21</td></tr><tr><td align="left"><b>blablabla</b></td><td align="left"><a href="mailto:drakovir@centrum.cz">drakovir</a></td><td align="left">23.10.2007 08:10:46</td></tr><tr><td align="left"><b>Problem</b></td><td align="left"><a href="mailto:michal.miklos@gmail.com">Michal Miklos</a></td><td align="left">16.01.2008 03:31:00</td></tr><tr><td align="left"><b>Druhý díl !!!!!</b></td><td align="left"><a href="mailto:davidpap@email.cz">David</a></td><td align="left">23.01.2008 18:51:24</td></tr></tbody></table></center></div>
+<form method="post" action="/forum/forum-add.php?art=4280&amp;reply=&amp;tema=">
+  <div align="center">
+    <table class="ftable" border="0" cellpadding="2" cellspacing="0">
+      <tbody><tr>
+        <td colspan="2" class="ftitle">Nový příspěvek</td>
+      </tr>
+      <tr>
+        <td class="fname" align="right"><b>Věc:</b></td>
+        <td class="fvalue" align="left"><input name="Nadpis" size="55" value="" type="text"></td>
+      </tr>
+      <tr>
+        <td class="fname" align="right"><b>Jméno:</b></td>
+        <td class="fvalue" align="left"><input name="Autor_Jmeno" size="30" value="" type="text"></td>
+      </tr>
+      <tr>
+        <td class="fname" align="right"><b>E-mail:</b></td>
+        <td class="fvalue" align="left"><input name="Autor_Email" size="20" value="" type="text"></td>
+      </tr>
+      <tr>
+        <td colspan="2" class="fvalue" align="left"><textarea rows="10" name="Obsah" cols="70"></textarea><br>
+		  - nepoužívejte HTML k formátování textu příspěvku<br>
+		  - nepoužívejte A HREF= pro odkazy, aktivní budou automaticky<br>
+		  - odřádkování provádějte klávesou ENTER, nikoliv tagem &lt;br&gt;</td>
+      </tr>
+      <tr>
+        <td colspan="2" class="fvalue" align="left"><input class="ftable" style="border: medium none ;" name="MailReply" value="1" type="checkbox">zasílat
+          odpovědi na můj e-mail      </td>
+</tr>
+      <tr>
+        <td colspan="2" align="center">
+          Opište text z obrázku: <input name="Kod" value="" class="f_name" size="8" type="text"> <img src="login_system_soubory/captcha.htm" height="50" width="200"></td>
+      </tr>
+      <tr>
+        <td colspan="2" align="center">
+          <input value="Přidat příspěvek" class="fsubmit" type="submit"></td>
+      </tr>
+    </tbody></table>
+  </div>
+  <input name="filled" value="1" type="hidden">
+</form>
+
+<br><br><br><br><br><br><br><br>
+<div align="center">
+<center>
+<table border="0">
+<tbody><tr><td>
+<iframe src="login_system_soubory/p-banner.htm" style="border: medium none ;" frameborder="0" height="60" scrolling="no" width="468">
+</iframe>
+<br><br>
+  <iframe name="rekl2" src="login_system_soubory/2.htm" marginwidth="1" marginheight="1" frameborder="0" height="62" scrolling="no" width="472"></iframe>
+</td>
+</tr>
+</tbody></table>
+</center>
+</div>
+<br><br><br>
+<center><span style="font-size: 9px;">(c) P.E.S. consulting, s.r.o.
+2000-2005. Provozovatel nezodpovídá za obsah a původ článků a
+diskuzních příspěvků, odpovědnost nesou jednotliví redaktoři a autoři.
+Informace o PC Světě <a href="http://www.pcsvet.cz/informace.php">naleznete zde</a></span></center> 
+</td>
+<td bgcolor="white" width="10"></td>
+<td align="right" bgcolor="white" valign="top" width="160">
+
+<br><center>
+<center><a href="http://www.forpsi.com/" target="_blank"><img src="login_system_soubory/125x125.gif" alt="FORPSI.com - webhosting, serverhosting, registrace domén, dedikované servery" border="0"></a></center>
+
+
+
+<table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td colspan="3" height="6" width="180"></td></tr><tr><td align="left" valign="top" width="15"><img src="login_system_soubory/7-tab-1.gif" alt=""></td><td align="left" background="login_system_soubory/7-tab-2.gif" valign="bottom" width="165"><font class="tab-nadpis">
+Anketa
+</font></td></tr></tbody></table>
+<table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td align="left" valign="top" width="5"><img src="login_system_soubory/7-tab-3.gif" alt=""></td><td align="left" width="175">
+<table class="tab" border="0" cellpadding="3" cellspacing="0"><tbody><tr><td bgcolor="white">
+</td></tr></tbody></table>
+</td></tr>
+</tbody></table>
+
+<table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td colspan="3" height="6" width="180"></td></tr><tr><td align="left" valign="top" width="15"><img src="login_system_soubory/7-tab-1.gif" alt=""></td><td align="left" background="login_system_soubory/7-tab-2.gif" valign="bottom" width="165"><font class="tab-nadpis">
+Novinky e-mailem
+</font></td></tr></tbody></table>
+<table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td align="left" valign="top" width="5"><img src="login_system_soubory/7-tab-3.gif" alt=""></td><td align="left" width="175">
+<table class="tab" border="0" cellpadding="3" cellspacing="0"><tbody><tr><td bgcolor="white">
+<form method="get" action="/user/register.php">
+<input name="email" size="16" value="vas@email.cz" onclick="this.value='';" type="text"><input value="ok" type="submit">
+Zasílání denního nebo týdenního přehledu nových článků
+</form>
+</td></tr></tbody></table>
+</td></tr>
+</tbody></table>
+
+<hr size="1">
+<iframe name="rekl2" src="login_system_soubory/3.htm" marginwidth="1" marginheight="1" align="middle" frameborder="0" height="127" scrolling="no" width="127"></iframe>
+<hr size="1">
+<br><center>
+<center><a href="http://www.forpsi.com/" target="_blank"><img src="login_system_soubory/125X125_evrop_dom_a_web.gif" alt="FORPSI.com - webhosting, serverhosting, registrace domén, dedikované servery" border="0"></a></center>
+
+
+<br><br>
+<a href="http://www.pravnik.cz/" target="_blank">Právník.cz - občanské, rodinné, pracovní, obchodní a jiné právo, smluvní vzory, úplná znění</a>
+
+<br><br><br><br><br>
+
+<center>
+</center>
+
+
+</center></center></td>
+
+
+</tr>
+</tbody></table>
+
+
+
+</td>
+</tr>
+
+</tbody></table>
+
+
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tbody><tr><td background="login_system_soubory/7.gif" width="15"></td><td bgcolor="white" width="150"></td><td width="68"><img src="login_system_soubory/7-pat-1.gif" alt=""></td><td background="login_system_soubory/7-pat-2.gif" bgcolor="white" valign="bottom" width="360">© 2000-2004 pcsvět.cz / <a href="mailto:pcsvet@pcsvet.cz">pcsvet@pcsvet.cz</a> / ISSN 1213-6042</td><td bgcolor="white"><a href="#top" onmouseover="topoff.src=topon.src; window.status='nahoru';return true;" onmouseout="topoff.src='/images/7-pat-top-off.gif'; window.status='pcsvět';return true;"><img name="topoff" src="login_system_soubory/7-pat-top-off.gif" alt="" border="0"></a></td></tr>
+</tbody></table>
+
+</td><td background="login_system_soubory/8-1.gif" valign="top" width="13"><img src="login_system_soubory/8-2.gif" alt=""></td></tr>
+</tbody></table>
+
+<!-- Počítadlo.cz  počítadlo:527  uživatel:414 -->
+<script language="JavaScript" type="text/javascript">
+<!--
+Tmp=Math.floor(1000000 * Math.random());
+//document.write("<scr" + "ipt src=\"http://cnt1.pocitadlo.cz/counter.php?poc=527&ref="+escape(top.document.referrer)+"&depth="+screen.colorDepth+"&width="+screen.width+"&height="+screen.height+"&tmp="+Tmp+"\" language=\"JavaScript\" type=\"text/javascript\"></scr" + "ipt>");
+// -->
+</script>
+<noscript>
+<img src="http://cnt1.pocitadlo.czx/counter.php?poc=527&amp;ns=1" width="1" height="1" alt="" border="0">
+</noscript>
+<!-- Počítadlo.cz konec -->
+
+<!-- NAVRCHOLU.cz -->
+<script language="JavaScript" type="text/javascript">
+<!--
+pxDepth = screen.pixelDepth;
+if (!(pxDepth > 0))
+	pxDepth = screen.colorDepth;
+if (!(pxDepth > 0))
+	pxDepth = 0; 
+document.write("<img src=\"http://hit.navrcholu.cz/hit?id=3548;n=1;screenx=" + screen.width + ";screeny=" + screen.height + ";cdepth=" + pxDepth + ";ref=" + escape(top.document.referrer) + "\" width=\"1\" height=\"1\" alt=\"\">");
+// -->
+</script><img src="login_system_soubory/hit" alt="" height="1" width="1">
+<noscript>
+<img src="http://hit.navrcholu.cz/hit?id=3548;n=1" width="1" height="1" alt="" border="0">
+</noscript>
+<!-- NAVRCHOLU.cz - konec -->
+
+<script src="login_system_soubory/urchin.js" type="text/javascript">
+</script>
+<script type="text/javascript">
+_uacct = "UA-1217921-1";
+urchinTracker();
+</script>
+
+<div style="position: absolute; left: 0px; top: 0px; z-index: 1000000000 ! important; visibility: hidden; opacity: 1;" id="linkalert-box"><img src="login_system_soubory/none-icon.png" id="linkalert-icon-1"></div></body></html>

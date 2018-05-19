@@ -1,0 +1,211 @@
+<!doctype html public "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=Windows-1250">
+<title>funkce Get_server_error_context</title>
+<link rel='stylesheet' style='text/css' href='../function.css'>
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000">
+
+
+
+<h2 class=function>Get_server_error_context</h2>
+<img src='../images/cpp.gif' width='44' height='16' border='0' alt='c/c++' align='middle' hspace='2'><img src='../images/pascal.gif' width='44' height='16' border='0' alt='pascal' align='middle' hspace='2'>
+<img src='../images/sql.gif' width='44' height='16' border='0' alt='sql' align='middle' hspace='2'>
+
+<br><br>
+<div class='typ'>BOOL <b>Get_server_error_context</b>(cdp_t cdp, int level, int * itype, int * par1, int * par2, int * par3, int * par4);<br>
+function <b>Get_server_error_context</b>(cdp : cdp_t;  level : integer;  var itype, par1, par2, par3, par4 : integer) : Boolean;<br>
+FUNCTION <b>Get_server_error_context</b> (IN level INT, OUT itype INT, OUT par1 INT, OUT par2 INT, OUT par3 INT, OUT par4 INT, OUT objname CHAR(63)) RETURNS BOOLEAN;
+</div>
+
+
+<p><b>Parametry</b></p>
+
+<table border=1 cols=2>
+
+<tr valign="top">
+<td width=27%><i>cdp </i></td>
+<td width=73%> kontextová proměnná klienta</td>
+</tr>
+
+<tr valign="top">
+<td width=27%><i>level </i></td>
+<td width=73%> hladina kontextu</td>
+</tr>
+
+<tr valign="top">
+<td width=27%><i>itype </i></td>
+<td width=73%> typ vráceného kontextu</td>
+</tr>
+
+<tr valign="top">
+<td width=27%><i>par1 </i></td>
+<td width=73%> vrácená základní část kontextu, obvykle číslo objektu, v němž došlo k chybě (absolutní číslo v systémové tabulce tabulek nebo objektů)</td>
+</tr>
+
+<tr valign="top">
+<td width=27%><i>par2 </i></td>
+<td width=73%> vrácená dodatečná součást kontextu, je-li nějaká</td>
+</tr>
+
+<tr valign="top">
+<td width=27%><i>par3 </i></td>
+<td width=73%> vrácená dodatečná součást kontextu, je-li nějaká</td>
+</tr>
+
+<tr valign="top">
+<td width=27%><i>par4 </i></td>
+<td width=73%> vrácená dodatečná součást kontextu, je-li nějaká</td>
+</tr>
+
+<tr valign="top">
+<td width=27%><i>objname </i></td>
+<td width=73%> jméno objektu z <em>par1</em> (pouze v SQL); jedná-li se o objekt s lokální deklarací (např. lokální deklarace procedury),  objeví se zde konstantní řetězec <ident>local routine</ident></td>
+</tr>
+</table><br>
+
+<p><b>Od verze</b></p>
+
+<p>7.0, SQL varianta od verze 8.1</p>
+
+<p><b>Popis</b></p>
+
+<p>Pokud je tato funkce volána po chybě, vrací informace o kontextu chyby. Podrobnosti o zjišťování detailů o poslední chybě z klientského prostředí naleznete <a href="HEJ_ERRORINFO.htm">zde</a>. Více o popisu chyb a výjimek v SQL naleznete <a href="../xml/html/errorsexceptions.html">zde</a>.</p>
+
+<p>Vstupní parametr <i>level</i> určuje hladinu kontextu chyby, pro hodnotu 0 funkce vrací nejbližší kontext, pro vyšší hodnoty vzdálenější kontext. Pokud je hodnota <i>level</i> větší nebo rovna počtu definovaných hladin kontextu, bude v&nbsp;parametru <i>itype</i> vrácena hodnota 0, což indikuje, že vyšší hladiny není třeba zkoumat.</p>
+<p>Typicky se tato funkce volá v cyklu opakovaně pro hodnoty <i>level</i> od 0 nahoru dokud nevrátí <i>itype</i> 0.</p>
+
+<p>V&nbsp;parametru <i>itype</i> se vrací druh kontextu a podle tohoto druhu se interpretují i ostatní parametry:</p>
+
+<table border=1 cols=5>
+
+<tr valign="top">
+<td width=14%><b>itype</b></td>
+<td width=20%><b>par1</b></td>
+<td width=25%><b>par2</b></td>
+<td width=20%><b>par3</b></td>
+<td width=21%><b>par4</b></td>
+</tr>
+
+<tr valign="top">
+<td width=14%>1 - tabulka</td>
+<td width=20%>číslo tabulky</td>
+<td width=25%>číslo záznamu nebo -1</td>
+<td width=20%>číslo sloupce nebo 255</td>
+<td width=21%>číslo hodnoty multiatributu nebo 65535</td>
+</tr>
+
+<tr valign="top">
+<td width=14%>2 - index</td>
+<td width=20%>číslo tabulky</td>
+<td width=25%>pořadové číslo indexu</td>
+<td width=20%>--</td>
+<td width=21%>--</td>
+</tr>
+
+<tr valign="top">
+<td width=14%>3 - procedura</td>
+<td width=20%>číslo procedury</td>
+<td width=25%>číslo řádky nebo -1</td>
+<td width=20%>--</td>
+<td width=21%>--</td>
+</tr>
+
+<tr valign="top">
+<td width=14%>4 - trigger</td>
+<td width=20%>číslo triggeru</td>
+<td width=25%>číslo řádky nebo -1</td>
+<td width=20%>--</td>
+<td width=21%>--</td>
+</tr>
+
+<tr valign="top">
+<td width=14%>5 - příkaz SQL</td>
+<td width=20%>--</td>
+<td width=25%>--</td>
+<td width=20%>--</td>
+<td width=21%>--</td>
+</tr>
+
+<tr valign="top">
+<td width=14%>6 - zámek</td>
+<td width=20%>číslo tabulky nebo -1</td>
+<td width=25%>číslo záznamu nebo stránky</td>
+<td width=20%>typ zámku</td>
+<td width=21%>blokující uživatel</td>
+</tr>
+
+<tr valign="top">
+<td width=14%>7 - kompilace</td>
+<td width=20%>--</td>
+<td width=25%>--</td>
+<td width=20%>--</td>
+<td width=21%>--</td>
+</tr>
+
+<tr valign="top">
+<td width=14%>8 - záznam</td>
+<td width=20%>číslo tabulky</td>
+<td width=25%>číslo záznamu</td>
+<td width=20%>--</td>
+<td width=21%>--</td>
+</tr>
+
+<tr valign="top">
+<td width=14%>9 - indexový klíč</td>
+<td width=20%>--</td>
+<td width=25%>--</td>
+<td width=20%>--</td>
+<td width=21%>--</td>
+</tr>
+
+<tr valign="top">
+<td width=14%>0 - konec</td>
+<td width=20%>--</td>
+<td width=25%>--</td>
+<td width=20%>--</td>
+<td width=21%>--</td>
+</tr>
+</table><br>
+
+<p>Významy parametrů, které jsou v tabulce označené --, jsou nedefinované a nemá smysl je interpretovat.</p>
+
+<p>SQL varianta funkce lze volat nejen po chybě (tj. v příslušném handleru), ale i v kterémkoliv místě rutiny. Pak funkce nezjišťuje kontext chyby, ale může simulovat např. výpis zásobníku volání procedur a triggerů v okamžiku provedení - viz příklad.  </p>
+
+<p><b>Hodnota funkce</b></p>
+
+<p>Funkce vrací FALSE v&nbsp;případě úspěchu, TRUE při chybě.</p>
+
+<p><strong>Příklad</strong></p>
+<pre>
+PROCEDURE stack();
+// vypíše stack rutin do logu
+BEGIN
+  DECLARE level,tp,p1,p2,p3,p4 INT; 
+  DECLARE rutine_name CHAR(63);
+  SET level=0;
+  cycle: LOOP
+    CALL Get_server_error_context(level, tp, p1, p2, p3, p4, rutine_name);
+    IF tp=0 THEN LEAVE cycle; END IF;  // konec
+    IF tp=3 THEN      // vypiš jméno procedury
+      CALL Log_write('Procedure '+rutine_name);
+    ELSEIF tp=4 then  // vypiš jméno triggeru
+      CALL Log_write('Trigger '+rutine_name);
+    ELSE
+      CALL Log_write('Other type '+CAST(tp AS CHAR(4)));
+    END IF;
+    SET level=level+1;
+  END LOOP;
+END</pre>
+
+<p><b>Viz</b></p>
+
+<ul class='viz'>
+ <li><a href="HEJ_F_GETERRORNUMTEXT.htm">Get_error_num_text</a> </li>
+ <li><a href="HEJ_F_GETSERVERERRORSUPPL.htm">Get_server_error_suppl</a> </li>
+</ul>
+
+</body>
+</html>

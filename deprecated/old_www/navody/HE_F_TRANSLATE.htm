@@ -1,0 +1,65 @@
+<!doctype html public "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=Windows-1250">
+<title>Funkce Translate</title>
+<link rel='stylesheet' style='text/css' href='../function.css'>
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000">
+
+
+
+<h2 class=function>Translate</h2>
+<img src='../images/cpp.gif' width='44' height='16' border='0' alt='c/c++' align='middle' hspace='2'><img src='../images/pascal.gif' width='44' height='16' border='0' alt='pascal' align='middle' hspace='2'>
+
+
+<br><br>
+<div class='typ'>BOOL <b>[cd_]Translate</b>([cdp_t cdp], tcursnum curs, trecnum crec, int tbord, trecnum * trec);<br>
+function <b>[cd_]Translate</b>([cdp : cdp_t]; var curs : tcursnum;  crec : trecnum; tbord : integer;  var trec : trecnum) : Boolean;
+</div>
+
+
+<p><b>Parametry</b></p>
+
+<table border=1 cols=2 width=540>
+
+<tr valign="top">
+<td width=19%><i>curs </i></td>
+<td width=81%>otevřený pevný nebo proměnný kurzor </td>
+</tr>
+
+<tr valign="top">
+<td width=19%><i>crec </i></td>
+<td width=81%>absolutní číslo záznamu v kurzoru <i>curs</i></td>
+</tr>
+
+<tr valign="top">
+<td width=19%><i>tbord </i></td>
+<td width=81%>pořadové číslo tabulky v kurzoru <i>curs</i> (počítáno od 0)</td>
+</tr>
+
+<tr valign="top">
+<td width=19%><i>trec </i></td>
+<td width=81%>vrací absolutní číslo záznamu v tabulce, z něhož vznikl záznam <i>crec</i></td>
+</tr>
+
+<tr valign="top">
+<td width=19%>[<i>cdp </i></td>
+<td width=81%><a href="HE_EXTCD.htm">kontextová proměnná</a> klienta]  </td>
+</tr>
+</table><br>
+
+<p><b>Popis </b></p>
+
+<p>Funkce konvertuje číslo <i>crec</i> záznamu z otevřeného editovatelného kurzoru <i>curs</i> na absolutní číslo téhož záznamu v tabulce, z níž jsou záznamy do kurzoru vybrány; <i>tbord</i> je pořadové číslo tabulky v kurzoru (v klauzuli FROM). Tabulky se číslují od nuly.</p>
+
+<p>Funkci<b><code> Translate</code></b> má smysl a lze používat pouze na editovatelné kurzory.</p>
+
+<p><b>Hodnota funkce </b></p>
+
+<p>Funkce vrací hodnotu FALSE, pokud se akci podařilo úspěšně provést. V opačném případě vrací TRUE a povahu chyby lze zjistit voláním funkce<b><code> Signalize</code></b>.</p>
+
+
+</body>
+</html>

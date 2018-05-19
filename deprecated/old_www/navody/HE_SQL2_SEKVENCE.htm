@@ -1,0 +1,132 @@
+<!doctype html public "-//W3C//DTD HTML 3.2 Final//EN">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=Windows-1250">
+<title>Sekvence (SQL)</title>
+<link rel='stylesheet' style='text/css' href='../function.css'>
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000"><table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr>
+	<td style="background-image: url(../images/bghead.jpg);
+		background-position: right;
+		background-repeat: no-repeat;">
+	<table width="100%" border="0" cellpadding="0" cellspacing="0"
+		style="background-image:none">
+	<tr>
+		<td style="background-image:none" height="46"
+			width="15%"><img src="../images/title-cz.gif"
+			width="255" height="33"
+			alt="602SQL-Úplná dokumentace"
+			title="602SQL - Úplná dokumentace"
+			border="0"></td>
+		<td width="33%" align="right"><a href="../xml/html/top.html"><img class="floatno"
+			src="../images/index.gif"
+			width="15" height="16"
+			alt="Index" title="Zpět na obsah"
+			border="0" vspace="2"></a> &nbsp;
+			 </td>
+	</tr>
+	</table>
+	</td>
+</tr>
+</table><table class="navigace" border="0" width="100%"  bgcolor="#FFFFBF"><tr> <td
+width="20" align="center"><img class="floatno" src="../images/prev.gif"
+width="15" height="13" alt="&lt;&shy;" title="Předcházející téma"
+border="0"></td><td width="25%"><a
+href="HE_SQL2_TRIGGERY.htm">Triggery</a></td> <td width="25%"
+align="right"><img class="floatno" src="../images/up.gif" width="13"
+height="15" alt="Nahoru" title="O jednu úroveň výš" border="0"
+align="middle"></td><td width="25%"><a href="HE_SQL2_JAZYKSQL.htm">Jazyk SQL a jeho implementace</a></td>
+<td width="25%" align="right"><a
+href="HE_SQL2_KURZORY.htm">Kurzory v SQL</a></td><td width="20"
+align="center"><img class="floatno" src="../images/next.gif" width="15"
+height="13" alt="&shy;&gt;" title="Následující téma" border="0"></td>
+</tr></table>
+
+
+
+
+<h1><a name="he_sql2_sekvence"></a>Sekvence (SQL)</h1>
+
+<p>Sekvence je objektem aplikace sloužícím ke generování posloupnosti celočíselných hodnot (v rozsahu 64 bitů), zejména unikátních klíčů.</p>
+
+<p>Sekvence není svázána s žádnou konkrétní tabulkou, takže se dá použít k vytváření klíčů, které budou unikátní nejen v rámci tabulky, ale i v rámci skupiny tabulek. </p>
+
+<p>Sekvence se dají vytvářet, modifikovat a rušit buď z vývojového prostředí 602SQL nebo pomocí SQL příkazů <a href="HE_SQL2_CREATESEQUENCE.htm">CREATE SEQUENCE</a>, <a href="HE_SQL2_ALTERSEQUENCE.htm">ALTER SEQUENCE</a> a <a href="HE_SQL2_DROPSEQUENCE.htm">DROP SEQUENCE</a>. Sekvence jsou v rámci aplikace označeny svým jménem. Popis syntaxe sekvence naleznete <a href="HE_SQL2_SEQPOPIS.htm">zde</a>.</p>
+
+<h2>Vlastnosti sekvencí</h2>
+
+<p>V definici sekvence lze stanovit minimální a maximální hodnotu a krok, s nimž se hodnoty generují. Je-li krok záporný, čísla se generují sestupně. Dále lze stanovit počáteční hodnotu sekvence a příznak, že se po dosažení limitní hodnoty má generování cyklicky opakovat. Je-li krajní hodnota dosažena a není-li nastaven příznak cyklického opakování, pak při generování další hodnoty nastane chybový <a href="../xml/html/handlingcategories.html">sqlstate</a> W0219 (SEQUENCE_EXHAUSTED).</p>
+
+<p>Pokud klient alokuje novou hodnotu ze sekvence a poté odvolá transakci, alokovaná hodnota se do sekvence nevrací a nebude tedy využita.</p>
+
+<p>V globální <a href="../xml/html/sysvars.html">systémové proměnné</a> @@IDENTITY lze nalézt poslední hodnotu, kterou klient získat z některé sekvence nebo z generátoru unikátních klíčů v tabulce (implicitní hodnota UNIQUE).</p>
+
+<h2>Získání hodnoty ze sekvence - způsob kompatibilní s Oracle</h2>
+
+<p>Na hodnoty generované pomocí sekvence se v SQL příkazech odkazuje pomocí <a href="HE_SQL2_VYRAZY.htm">výrazů</a>:</p>
+
+<pre><code>  jméno_sekvence.CURRVAL  
+  jméno_sekvence.NEXTVAL</code></pre>
+
+<p>NEXTVAL označuje novou hodnotu v sekvenci, CURRVAL označuje hodnotu naposled vrácenou pomocí NEXTVAL. Volání CURRVAL se nesmí použít před NEXTVAL, jinak v opačném případě nastane chybový <a href="../xml/html/handlingcategories.html">sqlstate</a> W0220 (NO_CURRENT_VAL). </p>
+
+<p>Každý klient si udržuje vlastní hodnotu CURRVAL, různí klienti mají tedy v jednom okamžiku různé hodnoty CURRVAL.</p>
+
+<h2>Získání hodnoty ze sekvence - způsob kompatibilní se standardem SQL 2003</h2>
+
+<p>Na hodnoty generované pomocí sekvence se v SQL příkazech odkazuje pomocí <a href="HE_SQL2_VYRAZY.htm">výrazu</a>:</p>
+
+<pre><code>NEXT VALUE FOR jméno_sekvence</code></pre>
+
+<p>Pokud se tento výraz vyhodnotí vícekrát v rámci jednoho elementárního příkazu (např. jednoho příkazu INSERT), vrátí opakovaně <em>stejnou</em> hodnotu. V příkazech iterujících po záznamech (UPDATE, INSERT ... SELECT) vracejí stejnou hodnotu všechna volání týkající se zpracování jednoho záznamu. </p>
+
+<h2>Získání hodnoty ze sekvence do klientské proměnné</h2>
+
+<p>Z klientského programu lze novou hodnotu generovanou v sekvenci SEQ získat do globální celočíselné proměnné VAL příkazem:
+
+<pre><code>  SET :&gt;val=SEQ.NEXTVAL</code></pre></p>
+
+<h2>Sekvence v Klientském vývojovém prostředí</h2>
+
+<p>Sekvenci lze alternativně vytvořit či modifikovat pomocí <a href="../xml/html/des_sequence.html">interaktivního návrháře</a> přístupného z <a href="../xml/html/controlpanel.html">Řídicího panelu</a> vývojového prostředí 602SQL.</p>
+<p>V <a href="../xml/html/output.html">okně <strong>Output</strong></a> vývojového prostředí 602SQL lze pomocí záložky <strong>Zdroj</strong> zobrazit popis zvolené sekvence. V komentáři před touto definicí je příští hodnota, která bude ze sekvence získána. Pokud je pro sekvenci definována vyrovnávací paměť, pak to nemusí být hodnota, kterou vrátí příští volání NEXTVAL, protože některé dosud nepoužité hodnoty mohou být ve vyrovnávací paměti.</p>
+<p>Při <a href="../xml/html/aplexp.html">exportu aplikace</a> s daty je součástí definice sekvence příští hodnota, při exportu bez dat nikoliv (příští hodnota bude rovna počáteční hodnotě).</p>
+<br/><br/>
+
+<p><b>Odlišnosti od normy</b>
+
+<ul>
+	<li>Sekvence nejsou součástí standardu SQL 92 ani SQL 3, objevují se až ve standardu SQL 2003. Před zavedením tohoto standardu sekvence existovaly v databázích Oracle a v 602SQL byly původně implementovány v (téměř) shodné podobě. V současné verzi 602SQL jsou plně podporovány obě varianty sekvencí, protože každá má svoje výhody a nevýhody.</li>
+</ul>
+
+
+
+<p class="subs">Seznam subsekcí:
+<ul class="subs">
+
+<li><a href="HE_SQL2_SEQPOPIS.htm">Popis sekvence</a>
+
+<li><a href="HE_SQL2_CREATESEQUENCE.htm">Příkaz CREATE SEQUENCE</a>
+
+<li><a href="HE_SQL2_ALTERSEQUENCE.htm">Příkaz ALTER SEQUENCE</a>
+
+<li><a href="HE_SQL2_DROPSEQUENCE.htm">Příkaz DROP SEQUENCE</a>
+
+</ul>
+<table class="navigace" border="0" width="100%"  bgcolor="#FFFFBF"><tr> <td
+width="20" align="center"><img class="floatno" src="../images/prev.gif"
+width="15" height="13" alt="&lt;&shy;" title="Předcházející téma"
+border="0"></td><td width="25%"><a
+href="HE_SQL2_TRIGGERY.htm">Triggery</a></td> <td width="25%"
+align="right"><img class="floatno" src="../images/up.gif" width="13"
+height="15" alt="Nahoru" title="O jednu úroveň výš" border="0"
+align="middle"></td><td width="25%"><a href="HE_SQL2_JAZYKSQL.htm">Jazyk SQL a jeho implementace</a></td>
+<td width="25%" align="right"><a
+href="HE_SQL2_KURZORY.htm">Kurzory v SQL</a></td><td width="20"
+align="center"><img class="floatno" src="../images/next.gif" width="15"
+height="13" alt="&shy;&gt;" title="Následující téma" border="0"></td>
+</tr></table>
+</body>
+</html>
