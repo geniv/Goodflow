@@ -1,0 +1,30 @@
+#Vše
+Options -Indexes
+ErrorDocument 400 /error_page/400.html
+ErrorDocument 401 /error_page/401.html
+ErrorDocument 403 /error_page/403.html
+ErrorDocument 404 /error_page/404.html
+ErrorDocument 500 /error_page/500.html
+ErrorDocument 503 /error_page/503.html
+RewriteEngine on
+#RewriteBase /
+RewriteRule ^(.+)-(.+)-([0-9]+)/?$ ?action=public-profile&jm=$1&pr=$2&uid=$3 [L]
+RewriteRule ^hledej/(.+)/?$ ?action=hledej&search=$1 [L]
+RewriteRule ^dokoncene-projekty/(.+)/([0-9]+)/?$ ?action=dokoncene-projekty&menu=$1&str=$2 [L]
+RewriteRule ^dokoncene-projekty/(.+)/?$ ?action=dokoncene-projekty&menu=$1 [L]
+RewriteRule ^projekty/([0-9]+)/?$ ?action=projekty&str=$1 [L]
+RewriteRule ^projekty/(.+)/?$ ?action=projekty&menu=$1 [L]
+RewriteRule ^ke-stazeni/(.+)/([0-9]+)/?$ ?action=ke-stazeni&menu=$1&str=$2 [L]
+RewriteRule ^ke-stazeni/(.+)/?$ ?action=ke-stazeni&menu=$1 [L]
+RewriteRule ^tipy/(.+)/([0-9]+)/?$ ?action=tipy&menu=$1&str=$2 [L]
+RewriteRule ^tipy/(.+)/?$ ?action=tipy&menu=$1 [L]
+RewriteRule ^pozvanky/(.+)/([0-9]+)/?$ ?action=pozvanky&menu=$1&str=$2 [L]
+RewriteRule ^pozvanky/(.+)/?$ ?action=pozvanky&menu=$1 [L]
+RewriteRule ^tiskovy-servis/(.+)/([0-9]+)/?$ ?action=tiskovy-servis&menu=$1&str=$2 [L]
+RewriteRule ^tiskovy-servis/(.+)/?$ ?action=tiskovy-servis&menu=$1 [L]
+RewriteRule ^o-nas/(.+)/?$ ?action=o-nas&menu=$1 [L]
+RewriteRule ^([a-zA-Z0-9-_]+)/([a-zA-Z0-9-_]+)/([a-zA-Z0-9-_]+)/?$ ?action=$1&sub=$2&podsub=$3 [L]
+RewriteRule ^([a-zA-Z0-9-_]+)/([a-zA-Z0-9-_]+)/?$ ?action=$1&sub=$2 [L]
+RewriteRule ^([a-zA-Z0-9-_]+)/?$ ?action=$1 [L]
+
+

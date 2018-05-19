@@ -1,0 +1,54 @@
+#zobrazovani souboru
+Options -Indexes
+
+#error page 400
+ErrorDocument 400 /error_page/400.html
+
+#error page 401
+ErrorDocument 401 /error_page/401.html
+
+#error page 403
+ErrorDocument 403 /error_page/403.html
+
+#error page 404
+ErrorDocument 404 /error_page/404.html
+
+#error page 500
+ErrorDocument 500 /error_page/500.html
+
+#error page 503
+ErrorDocument 503 /error_page/503.html
+
+#zapinani php5 na klenotu 1/2
+#AddHandler php5-cgi .php
+
+#zapinani php5 na klenotu 2/2
+#Action php5-cgi /php5cgi/php
+
+#zapinani rewrite
+RewriteEngine on
+
+#nasmerovani korenu
+#RewriteBase /
+
+#
+#RewriteRule ^rss/([a-zA-Z-\_]+)/?$ ?action=rss&sablona=$1 [L]
+
+#
+#RewriteRule ^([a-zA-Z0-9-\_]+)/([0-9]+)?$ ?action=$1&str=$2 [L]
+
+#vraci rewrite jako blok adresy, php to pak zpracuje dal
+#RewriteRule ^prvni-sekce/(.+)?$ ?action=prvni-sekce&menu=$1 [L]
+#RewriteRule ^([a-zA-Z0-9-_]+)/(.+)/?$ ?action=$1&menu=$2 [L]
+
+#RewriteRule ^polozky/([a-zA-Z0-9-_]+)/([a-zA-Z0-9-_]+)/?$ ?action=$1&a=$2&b=$3 [L]
+#RewriteRule ^polozky/(.+)/(.+)/(.+)/?$ ?action=$1&a=$2&b=$3 [L]
+
+RewriteRule ^hledani/(.+)/?$ ?action=hledani&search=$1 [L]
+
+RewriteRule ^(.+)-(.+)-([0-9]+)/?$ ?action=public-profile&jm=$1&pr=$2&uid=$3 [L]
+
+RewriteRule ^polozky/(.+)/?$ ?action=prvni-sekce&menu=$1 [L]
+
+RewriteRule ^([a-zA-Z0-9-\_]+)/?$ ?action=$1 [L]
+

@@ -1,0 +1,38 @@
+<?php
+
+/**
+ * Test: NConfigAdapterIni section.
+ *
+ * @author     David Grudl
+ * @package    Nette\Config
+ * @subpackage UnitTests
+ */
+
+
+
+require dirname(__FILE__) . '/../bootstrap.php';
+
+
+
+try {
+	$config = NConfig::fromFile('config3.ini');
+	Assert::fail('Expected exception');
+} catch (Exception $e) {
+	Assert::exception( 'InvalidStateException', "Missing parent section [scalar] in 'config3.ini'.", $e );
+}
+
+
+try {
+	$config = NConfig::fromFile('config4.ini');
+	Assert::fail('Expected exception');
+} catch (Exception $e) {
+	Assert::exception( 'InvalidStateException', "Invalid section [scalar.set] in 'config4.ini'.", $e );
+}
+
+
+try {
+	$config = NConfig::fromFile('config5.ini');
+	Assert::fail('Expected exception');
+} catch (Exception $e) {
+	Assert::exception( 'InvalidStateException', "Invalid key 'date.timezone' in section [set] in 'config5.ini'.", $e );
+}

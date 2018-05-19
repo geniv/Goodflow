@@ -1,0 +1,79 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html  xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"><head>
+<title></title>
+<meta http-equiv="content-type" content="text/html;charset=utf-8"/>
+<meta http-equiv="Content-Style-Type" content="text/css"/>
+</head>
+<body>
+<p style="margin-left:13mm; margin-right:0mm; text-indent:0mm; margin-top:4.22mm; margin-bottom:1.06mm;"><font color="#0000d2" size="4"><span style=" font-size:14pt"><b>Z&#225;sada</b></span></font></p>
+<div align="left" align="left" style="margin-left:25mm; margin-right:0mm; text-indent:0mm; margin-top:0.00mm; margin-bottom:0.00mm;"><font size="3"><span style=" font-size:12pt"><i>Programovat proti rozhran&#237; a ne proti implementaci.</i></span></font></div>
+<div align="left" align="left" style="margin-left:13mm; margin-right:0mm; text-indent:0mm; margin-top:0.00mm; margin-bottom:0.00mm;"><font size="2"><span style=" font-size:10pt"><br />
+</span></font></div>
+<p style="margin-left:13mm; margin-right:0mm; text-indent:0mm; margin-top:4.22mm; margin-bottom:1.06mm;"><font color="#0000d2" size="4"><span style=" font-size:14pt"><b>Konstrukce </b></span></font><font face="Courier" color="#0000d2" size="4"><span style=" font-size:14pt"><b>interface</b></span></font></p>
+<div align="left" align="left" style="margin-left:25mm; margin-right:0mm; text-indent:0mm; margin-top:0.00mm; margin-bottom:0.00mm;"><font size="2"><span style=" font-size:10pt">Java zavedla pro definici rozhran&#237; speci&#225;ln&#237; konstrukci </span></font><font face="Courier" size="2"><span style=" font-size:10pt">interface</span></font><font 
+size="2"><span style=" font-size:10pt">. Tato konstrukce 
+formalizuje rozhran&#237; a umo&#382;&#328;uje deklarovat v&scaron;echny pot&#345;ebn&#233; informace o signatu&#345;e, 
+ani&#382; by bylo nutn&#233; je v&#225;zat na konkr&#233;tn&#237; implementaci.</span></font></div>
+<p style="margin-left:13mm; margin-right:0mm; text-indent:0mm; margin-top:4.22mm; margin-bottom:1.06mm;"><font color="#0000d2" size="4"><span style=" font-size:14pt"><b>Signatura</b></span></font></p>
+<div align="left" align="left" style="margin-left:25mm; margin-right:0mm; text-indent:0mm; margin-top:0.00mm; margin-bottom:0.00mm;"><font size="2"><span style=" font-size:10pt">Konstrukce </span></font><font face="Courier" size="2"><span style=" font-size:10pt">interface </span></font><font size="2"><span style=" font-size:10pt">v&scaron;ak 
+neumo&#382;&#328;uje kompletn&#237; z&#225;pis signatury. Nedovoluje 
+toti&#382; z&#225;pis atribut&#367; s v&#253;jimkou statick&#253;ch konstant. Toti&#382; deklarace atribut&#367; do rozhran&#237; 
+v&#367;bec nepat&#345;&#237; a proto m&#367;&#382;eme br&#225;t </span></font><font face="Courier" size="2"><span style=" font-size:10pt">interface </span></font><font size="2"><span style=" font-size:10pt">za form&#225;ln&#237; z&#225;pis signatury t&#345;&#237;dy.</span></font></div>
+<p style="margin-left:13mm; margin-right:0mm; text-indent:0mm; margin-top:4.22mm; margin-bottom:1.06mm;"><font color="#0000d2" size="4"><span style=" font-size:14pt"><b>Kontrakt</b></span></font></p>
+<div align="left" align="left" style="margin-left:25mm; margin-right:0mm; text-indent:0mm; margin-top:0.00mm; margin-bottom:0.00mm;"><font size="2"><span style=" font-size:10pt">Kontrakt je souhrn informac&#237;, kter&#233; nejsou sou&#269;&#225;st&#237; signatury a nelze je zkontrolovat 
+p&#345;eklada&#269;em. Pro deklaraci kontraktu jsou ur&#269;eny dokumenta&#269;n&#237; koment&#225;&#345;e, kam se 
+zapisuj&#237; po&#382;adavky na dal&#353;&#237; vlastnosti t&#345;&#237;dy (plat&#237; pro Java). Kontrakt sice nejde 
+zkontrolovat p&#345;eklada&#269;em, ale jde to v&scaron;ak p&#345;i b&#283;hu programu vlo&#382;en&#237;m vhodn&#253;ch 
+kontroln&#237;ch p&#345;&#237;kaz&#367;, kter&#233; ov&#283;&#345;uj&#237; platnost po&#382;adovan&#253;ch vstupn&#237;ch a v&#253;stupn&#237;ch 
+podm&#237;nek Java m&#225; na to p&#345;&#237;kaz assert, kter&#253; lze p&#345;i b&#283;hu zap&#237;nat nebo vypnout.</span></font></div>
+<p style="margin-left:13mm; margin-right:0mm; text-indent:0mm; margin-top:4.22mm; margin-bottom:1.06mm;"><font color="#0000d2" size="4"><span style=" font-size:14pt"><b>Rozhran&#237; jako typ</b></span></font></p>
+<ul style="margin-top: 0mm; margin-bottom: 0mm; list-style-type: disk; ">
+<li style="margin-left: 72pt; margin-right: 0pt; padding-left: 0pt; font-family: Symbol;  font-size: 10pt;  color: #010101;  "><font size="2"><span dir="rtl" style=" font-size:10pt; font-family:Arial; color:#010101; font-weight:Normal; font-style:Normal; font-decoration:Normal">Kdy&#382; definujeme nov&#233; rozhran&#237;, definujeme 
+t&#237;m nov&#253; referen&#269;n&#237; typ.</span></font></li>
+<li style="margin-left: 72pt; margin-right: 0pt; padding-left: 0pt; font-family: Symbol;  font-size: 10pt;  color: #010101;  "><font size="2"><span dir="rtl" style=" font-size:10pt; font-family:Arial; color:#010101; font-weight:Normal; font-style:Normal; font-decoration:Normal">Rozhran&#237; jako typ.</span></font></li>
+<li style="margin-left: 108pt; margin-right: 0pt; padding-left: 0pt; font-family: Symbol;  font-size: 10pt;  color: #010101;  "><font size="2"><span dir="rtl" style=" font-size:10pt; font-family:Arial; color:#010101; font-weight:Normal; font-style:Normal; font-decoration:Normal">Kdy&#382; definujeme nov&#233; rozhran&#237;,</span></font></li>
+<li style="margin-left: 72pt; margin-right: 0pt; padding-left: 0pt; font-family: Symbol;  font-size: 10pt;  color: #010101;  "><font size="2"><span dir="rtl" style=" font-size:10pt; font-family:Arial; color:#010101; font-weight:Normal; font-style:Normal; font-decoration:Normal">Rozhran&#237; jako typ - rozd&#237;ln&#225; implementace</span></font></li>
+<li style="margin-left: 108pt; margin-right: 0pt; padding-left: 0pt; font-family: Symbol;  font-size: 10pt;  color: #010101;  "><font size="2"><span dir="rtl" style=" font-size:10pt; font-family:Arial; color:#010101; font-weight:Normal; font-style:Normal; font-decoration:Normal">Pokud definujeme referen&#269;n&#237; prom&#283;nnou 
+typem rozhran&#237;, mus&#237; objekt 
+toto rozhran&#237; implementovat.</span></font></li>
+</ul>
+<p style="margin-left:13mm; margin-right:0mm; text-indent:0mm; margin-top:4.22mm; margin-bottom:1.06mm;"><font color="#0000d2" size="4"><span style=" font-size:14pt"><b>Jak z&#225;sadu &quot;Programovat proti rozhran&#237;&quot; dodr&#382;ovat</b></span></font></p>
+<ul style="margin-bottom: 0mm; list-style-type: disk; ">
+<li style="margin-left: 36pt; margin-right: 0pt; padding-left: 0pt; font-family: Symbol;  font-weight: Bold;  color: #010101;  "><p style="margin-top: 0pt; margin-bottom: 3pt; "><font color="#004080" size="3"><span dir="rtl" style=" font-size:12pt; font-family:Arial; color:#004080; font-weight:Bold; font-style:Italic; font-decoration:Normal"><b><i>Z&#225;kladn&#237; 
+my&scaron;lenka</i></b></span></font></p>
+</li>
+</ul>
+<div align="left" align="left" style="margin-left:38mm; margin-right:0mm; text-indent:0mm; margin-top:0.00mm; margin-bottom:0.00mm;"><font size="2"><span style=" font-size:10pt">Prom&#283;nn&#233; nemaj&#237; b&#253;t deklarov&#225;ny jako instance konkr&#233;tn&#237;ch t&#345;&#237;d, ale jako 
+&quot;instance&quot; n&#283;jak&#233;ho datov&#233;ho typu, kter&#253; nen&#237; v&#225;z&#225;n na konkr&#233;tn&#237; 
+implementaci. Takov&#253;m typem je </span></font><font face="Courier" size="2"><span style=" font-size:10pt">interface </span></font><font size="2"><span style=" font-size:10pt">nebo abstraktn&#237; t&#345;&#237;da.</span></font></div>
+<div align="left" align="left" style="margin-left:13mm; margin-right:0mm; text-indent:0mm; margin-top:0.00mm; margin-bottom:0.00mm;">&nbsp;&nbsp;</div>
+<ul style="margin-bottom: 0mm; list-style-type: disk; ">
+<li style="margin-left: 36pt; margin-right: 0pt; padding-left: 0pt; font-family: Symbol;  font-weight: Bold;  color: #010101;  "><p style="margin-top: 0pt; margin-bottom: 3pt; "><font color="#004080" size="3"><span dir="rtl" style=" font-size:12pt; font-family:Arial; color:#004080; font-weight:Bold; font-style:Italic; font-decoration:Normal"><b><i>Zd&#367;vodn&#283;n&#237; 
+na p&#345;&#237;kladu</i></b></span></font></p>
+</li>
+</ul>
+<div align="left" align="left" style="margin-left:38mm; margin-right:0mm; text-indent:0mm; margin-top:0.00mm; margin-bottom:0.00mm;"><font size="2"><span style=" font-size:10pt">Prom&#283;nnou v </span></font><font face="Courier" size="2"><span style=" font-size:10pt">Bankomatu </span></font><font size="2"><span style=" font-size:10pt">deklarujme 
+jako rozhran&#237; </span></font><font face="Courier" size="2"><span style=" font-size:10pt">IBanka </span></font><font size="2"><span style=" font-size:10pt">a potom n&#225;s 
+nebude zaj&#237;mat jak&#225; to bude </span></font><font face="Courier" size="2"><span style=" font-size:10pt">Banka</span></font><font size="2"><span style=" font-size:10pt">. Podstatn&#233; je to, &#382;e r&#367;zn&#233; banky mus&#237; 
+implementovat stejn&#233; rozhran&#237;. T&#237;m si p&#345;iprav&#237;me p&#367;du pro budouc&#237; efektivn&#237; 
+&#250;pravy, nap&#345;&#237;klad t&#237;m, &#382;e m&#367;&#382;eme p&#345;idat jak&#233;koliv dal&scaron;&#237; banky, ani&#382; bychom 
+museli m&#283;nit k&#243;d </span></font><font face="Courier" size="2"><span style=" font-size:10pt">Bankomatu</span></font><font size="2"><span style=" font-size:10pt">.</span></font></div>
+<div align="left" align="left" style="margin-left:13mm; margin-right:0mm; text-indent:0mm; margin-top:0.00mm; margin-bottom:0.00mm;"><font size="2"><span style=" font-size:10pt"><br />
+</span></font></div>
+<p style="margin-left:13mm; margin-right:0mm; text-indent:0mm; margin-top:4.22mm; margin-bottom:1.06mm;"><font color="#0000d2" size="4"><span style=" font-size:14pt"><b>N&#225;vrh vlastn&#237;ho rozhran&#237;</b></span></font></p>
+<div align="left" align="left" style="margin-left:25mm; margin-right:0mm; text-indent:0mm; margin-top:0.00mm; margin-bottom:0.00mm;"><font size="2"><span style=" font-size:10pt">P&#345;i n&#225;vrhu mus&#237;me myslet na budouc&#237;ho u&#382;ivatele, aby se mu dob&#345;e s na&scaron;&#237;m 
+objektem pracovalo. Nemysl&#237; se t&#237;m ov&scaron;em pr&#225;ce s na&scaron;&#237;m cel&#253;m programem (tj. p&#345;es 
+u&#382;ivatelsk&#233; rozhran&#237;). Je t&#237;m my&scaron;leno rozhran&#237; na&scaron;eho zdrojov&#233;ho k&#243;du (tj. t&#345;&#237;dy nebo 
+sady t&#345;r&#237;d, pro kter&#233; se n&#283;kdy naz&#253;v&#225; API). Proto bychom vn&#283;j&scaron;&#237; rozhran&#237; na&scaron;ich 
+zdrojov&#253;ch k&#243;d&#367; m&#283;li postavit na konstrukc&#237;ch </span></font><font face="Courier" size="2"><span style=" font-size:10pt">interface</span></font><font size="2"><span style=" font-size:10pt">. Kdy&#382; pou&#382;ijeme 
+</span></font><font face="Courier" size="2"><span style=" font-size:10pt">interface</span></font><font size="2"><span style=" font-size:10pt">, umo&#382;n&#237; n&#225;m to skr&#253;t implementaci na&scaron;eho k&#243;du (programu) a t&#237;m si 
+nezablokujeme budouc&#237; vylep&scaron;en&#237; na&scaron;eho k&#243;du</span></font></div>
+<p style="margin-left:13mm; margin-right:0mm; text-indent:0mm; margin-top:4.22mm; margin-bottom:1.06mm;"><font color="#0000d2" size="4"><span style=" font-size:14pt"><b>Zm&#283;na rozhran&#237;</b></span></font></p>
+<div align="left" align="left" style="margin-left:25mm; margin-right:0mm; text-indent:0mm; margin-top:0.00mm; margin-bottom:0.00mm;"><font size="2"><span style=" font-size:10pt">Jakmile jednou zve&#345;ejn&#237;me rozhran&#237;, u&#382; ho nem&#283;li m&#283;nit proto&#382;e se dostaneme do 
+pot&#237;&#382;&#237; u v&scaron;ech klient&#367;, kter&#233; bychom museli p&#345;eprogramovat. Pokud chceme rozhran&#237; 
+doplnit mus&#237;me specifikovat nov&#233; rozhran&#237;, kter&#233; roz&scaron;&#237;&#345;&#237; p&#367;vodn&#237;. Pot&#233; se u&#382;ivatel&#233; 
+na&scaron;eho k&#243;du mus&#237; rozhodnout, </span></font><font size="1"><span style=" font-size:9pt">zda z&#367;stanou u implementace p&#367;vodn&#237;ho rozhran&#237; nebo, 
+zda p&#345;repracuj&#237; sv&#233; programy no nov&#233; rozhran&#237;.</span></font></div>
+</body>
+</html>

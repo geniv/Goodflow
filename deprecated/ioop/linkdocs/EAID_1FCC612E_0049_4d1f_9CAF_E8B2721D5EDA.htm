@@ -1,0 +1,166 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html  xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"><head>
+<title></title>
+<meta http-equiv="content-type" content="text/html;charset=utf-8"/>
+<meta http-equiv="Content-Style-Type" content="text/css"/>
+</head>
+<body>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">package cz.upce.fei.ioop.zasobnik;</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt"><br />
+</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">import cz.upce.fei.ioop.zasobnik.celacisla.StavKolekce;</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">import cz.upce.fei.ioop.zasobnik.vyjimky.ZasobnikPrazdnyException;</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">import cz.upce.fei.ioop.zasobnik.vyjimky.ZasobnikPlnyException;</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">import cz.upce.fei.ioop.zasobnik.celacisla.ZasobnikInt;</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">import org.junit.Test;</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">import static org.junit.Assert.*;</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt"><br />
+</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">public class ZasobnikIntTest {</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt"><br />
+</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160; @Test</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160; public void testVytvoreniParam() {</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160; ZasobnikInt zas = new ZasobnikInt(10);</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt"><br />
+</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160; assertEquals(0, zas.getPocetPrvku());</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160; assertEquals(10, zas.getKapacitaZasobniku());</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160; System.out.println(zas);</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160; }</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt"><br />
+</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160; @Test</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160; public void testVlozPrvek() {</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160; System.out.println(&quot;\nTest VlozPrvek&quot;);</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160; ZasobnikInt zas = new ZasobnikInt(3);</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160; System.out.println(zas);</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt"><br />
+</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160; zas.vlozPrvek(5);</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160; assertEquals(1, zas.getPocetPrvku());</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160; System.out.println(zas);</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160; zas.vlozPrvek(6);</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160; assertEquals(2, zas.getPocetPrvku());</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160; System.out.println(zas);</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160; zas.vlozPrvek(7);</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160; assertEquals(3, zas.getPocetPrvku());</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160; System.out.println(zas);</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160; try {</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160;&#160;&#160; zas.vlozPrvek(4); // ctvrty prvek uz je nad ramec kapacity</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160;&#160;&#160; fail(&quot;Nemuze dojit k vlozeni dalsiho prvku do zasobniku&quot;);</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160; } catch (ZasobnikPlnyException ex) {</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160;&#160;&#160; System.out.println(&quot;Zachycena vyjimka preteceni zasobniku&quot;);</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160;&#160;&#160; System.out.println(zas);</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160;&#160;&#160; assertTrue(true);</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160; }</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160; assertEquals(3, zas.getPocetPrvku());</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt"><br />
+</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160; try {</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160;&#160;&#160; int i= zas.odeberPrvek(); // odebirame preteceny zasobnik</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160;&#160;&#160; fail(&quot;Nemuze odebrat z preteceneho zasobniku&quot;);</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160; } catch (ZasobnikPlnyException ex) {</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160;&#160;&#160; System.out.println(&quot;Zachycena vyjimka preteceni zasobniku&quot;);</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160;&#160;&#160; System.out.println(zas);</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160;&#160;&#160; assertTrue(true);</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160; }</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt"><br />
+</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160; zas.vynuluj();</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160; System.out.println(zas);</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160; assertEquals(0, zas.getPocetPrvku());</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160; }</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt"><br />
+</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160; @Test</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160; public void testOdeberPrvek() {</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160; System.out.println(&quot;\nTest OdeberPrvek&quot;);</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160; ZasobnikInt zas = new ZasobnikInt(10);</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt"><br />
+</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160; zas.vlozPrvek(5);</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160; zas.vlozPrvek(6);</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160; zas.vlozPrvek(7);</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt"><br />
+</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160; System.out.println(zas);</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt"><br />
+</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160; assertEquals(7, zas.odeberPrvek());</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160; System.out.println(zas);</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160; assertEquals(6, zas.odeberPrvek());</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160; System.out.println(zas);</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160; assertEquals(5, zas.odeberPrvek());</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160; System.out.println(zas);</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt"><br />
+</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160; try {</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160;&#160;&#160; zas.odeberPrvek();</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160;&#160;&#160; fail(&quot;Vyjimka - zasobnik je prazdny&quot;);</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160; } catch (ZasobnikPrazdnyException ex) {</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160;&#160;&#160; System.out.println(&quot;Zachycena vyjimka podteceni zasobniku&quot;);</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160;&#160;&#160; System.out.println(zas);</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160;&#160;&#160; assertTrue(true);</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160; }</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160; System.out.println(&quot;Nulovani obsahu zasobniku&quot;);</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160; zas.vynuluj();</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160; System.out.println(zas);</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160; assertEquals(0, zas.getPocetPrvku());</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160; assertEquals(StavKolekce.PRAZDNY,zas.getStav());</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160; }</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt"><br />
+</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160; @Test</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160; public void testJePrazdny() {</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160; System.out.println(&quot;\nTest JePrazdny&quot;);</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160; ZasobnikInt zas = new ZasobnikInt(10);</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160; System.out.println(zas);</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt"><br />
+</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160; assertEquals(true, zas.jePrazdny());</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt"><br />
+</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160; zas.vlozPrvek(5);</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160; assertEquals(false, zas.jePrazdny());</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160; System.out.println(zas);</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt"><br />
+</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160; zas.vlozPrvek(6);</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160; assertEquals(false, zas.jePrazdny());</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160; System.out.println(zas);</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt"><br />
+</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160; zas.odeberPrvek();</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160; assertEquals(false, zas.jePrazdny());</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160; System.out.println(zas);</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt"><br />
+</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160; zas.odeberPrvek();</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160; assertEquals(true, zas.jePrazdny());</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160; System.out.println(zas);</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160; }</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt"><br />
+</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160; @Test</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160; public void testJePlny() {</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160; ZasobnikInt zas = new ZasobnikInt(3);</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160; assertEquals(false, zas.jePlny());</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt"><br />
+</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160; zas.vlozPrvek(5);</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160; assertEquals(false, zas.jePlny());</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt"><br />
+</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160; zas.vlozPrvek(6);</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160; assertEquals(false, zas.jePlny());</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt"><br />
+</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160; zas.vlozPrvek(5);</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160; assertEquals(true, zas.jePlny());</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160; }</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">}</span></font></div>
+<div align="left" align="left">&nbsp;&nbsp;</div>
+</body>
+</html>

@@ -1,0 +1,49 @@
+<?php
+
+/**
+ * Test: NDebug::dump() and recursive arrays.
+ *
+ * @author     David Grudl
+ * @package    Nette
+ * @subpackage UnitTests
+ */
+
+
+
+require dirname(__FILE__) . '/../bootstrap.php';
+
+
+
+NDebug::$consoleMode = TRUE;
+NDebug::$productionMode = FALSE;
+
+
+$arr = array(1, 2, 3);
+$arr[] = & $arr;
+Assert::match( 'array(4) [
+   0 => 1
+   1 => 2
+   2 => 3
+   3 => array(4) [
+      0 => 1
+      1 => 2
+      2 => 3
+      3 => array(5) [ *RECURSION* ]
+   ]
+]
+', NDebug::dump($arr, TRUE) );
+
+
+
+$arr = array('x' => 1, 'y' => 2);
+$arr[] = & $arr;
+Assert::match( 'array(3) {
+   "x" => 1
+   "y" => 2
+   0 => array(3) {
+      "x" => 1
+      "y" => 2
+      0 => array(4) { *RECURSION* }
+   }
+}
+', NDebug::dump($arr, TRUE) );

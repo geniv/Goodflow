@@ -1,0 +1,146 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html  xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"><head>
+<title></title>
+<meta http-equiv="content-type" content="text/html;charset=utf-8"/>
+<meta http-equiv="Content-Style-Type" content="text/css"/>
+</head>
+<body>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">package cz.upce.fei.ioop.kolekce.fronta.object;</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt"><br />
+</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">import cz.upce.fei.ioop.kolekce.IIteratorObject;</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">import cz.upce.fei.ioop.kolekce.IKolekceObject;</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">import cz.upce.fei.ioop.kolekce.KolekcePrazdnaException;</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">import cz.upce.fei.ioop.kolekce.KolekcePlnaException;</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">import cz.upce.fei.ioop.kolekce.StavKolekce;</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt"><br />
+</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">public class Fronta implements IKolekceObject {</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt"><br />
+</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160; private StavKolekce stav;</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160; private Object[] prvky;</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160; private int pocetPrvku;</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160; private int kapacita;</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt"><br />
+</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160; public Fronta(int kapacita) {</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160; this.kapacita = kapacita;</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160; prvky = new Object[kapacita];</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160; stav = StavKolekce.PRAZDNY;</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160; pocetPrvku = 0;</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160; vynuluj();</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160; }</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt"><br />
+</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160; public boolean jePrazdny() {</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160; return stav == StavKolekce.PRAZDNY;</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160; }</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt"><br />
+</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160; public boolean jePlny() {</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160; return stav == StavKolekce.PLNY;</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160; }</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt"><br />
+</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160; public int getPocetPrvku() {</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160; return pocetPrvku;</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160; }</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt"><br />
+</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160; public void vlozPrvek(Object prvek) {</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160; if (stav == StavKolekce.PLNY) {</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160;&#160;&#160; stav = StavKolekce.PRETECENI;</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160;&#160;&#160; throw new KolekcePlnaException();</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160; }</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160; prvky[pocetPrvku] = prvek;</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160; pocetPrvku++;</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160; if (pocetPrvku == kapacita) {</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160;&#160;&#160; stav = StavKolekce.PLNY;</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160; } else {</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160;&#160;&#160; stav = StavKolekce.NEPRAZDNY;</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160; }</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160; }</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt"><br />
+</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160; public Object odeberPrvek() {</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160; Object hodnotaOdebiranehoPrvku;</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt"><br />
+</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160; if (stav == StavKolekce.PRAZDNY) {</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160;&#160;&#160; stav = StavKolekce.PODTECENI;</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160;&#160;&#160; throw new KolekcePrazdnaException();</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160; }</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160; if (stav == StavKolekce.PRETECENI) {</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160;&#160;&#160; // nepovolime pracovat s pretecenou frontou</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160;&#160;&#160; throw new KolekcePlnaException();</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160; }</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160; hodnotaOdebiranehoPrvku = prvky[0];</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160; pocetPrvku--;</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160; if (pocetPrvku == 0) {</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160;&#160;&#160; stav = StavKolekce.PRAZDNY;</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160; } else {</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160;&#160;&#160; for (int i = 0; i &lt; pocetPrvku; i++) {</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160;&#160;&#160;&#160;&#160; prvky[i] = prvky[i + 1];</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160;&#160;&#160; }</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160; }</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160; return hodnotaOdebiranehoPrvku;</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160; }</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt"><br />
+</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160; final public void vynuluj() {</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160; pocetPrvku = 0;</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160; stav = StavKolekce.PRAZDNY;</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160; }</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt"><br />
+</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160; public StavKolekce getStav() {</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160; return stav;</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt"><br />
+</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160; }</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt"><br />
+</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160; public int getKapacita() {</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160; return prvky.length;</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160; }</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt"><br />
+</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160; @Override</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160; public String toString() {</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160; String retval = &quot;FrontaObject{&quot; + &quot; stav=&quot; + stav + &quot; 
+pocetPrvku=&quot; + pocetPrvku + &quot; kapacita=&quot; + kapacita + '}';</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160; if (stav == StavKolekce.NEPRAZDNY</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; || stav == StavKolekce.PLNY</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; || stav == StavKolekce.PRETECENI) {</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160;&#160;&#160; retval += &quot;\n Obsah fronty: &quot;;</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160;&#160;&#160; for (int i = 0; i &lt; pocetPrvku; i++) {</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160;&#160;&#160;&#160;&#160; retval += &quot; &quot; + prvky[i].toString();</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160;&#160;&#160; }</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160; }</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160; return retval;</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160; }</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt"><br />
+</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160; public IIteratorObject dejIterator() {</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160; return new IIteratorObject() {</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt"><br />
+</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160;&#160;&#160; private int i = 0;</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt"><br />
+</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160;&#160;&#160; public boolean jeDalsi() {</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160;&#160;&#160;&#160;&#160; return i &lt; pocetPrvku;</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160;&#160;&#160; }</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt"><br />
+</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160;&#160;&#160; public Object dalsi() {</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160;&#160;&#160;&#160;&#160; return prvky[i++];</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160;&#160;&#160; }</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160; };</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160; }</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">}</span></font></div>
+<div align="left" align="left">&nbsp;&nbsp;</div>
+</body>
+</html>

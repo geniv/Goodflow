@@ -1,0 +1,714 @@
+/* datovy sklad */
+/* prepinani vypisu */
+.obsah .datovy_sklad_prepinani_vypisu {
+  overflow: hidden;
+  position: absolute;
+  top: 0;
+  left: 3px;
+  width: 75px;
+  height: 24px;
+}
+
+.obsah .datovy_sklad_prepinani_vypisu a {
+  display: block;
+  width: 24px;
+  height: 24px;
+  margin-right: 1px;
+  float: left;
+}
+
+.obsah .datovy_sklad_prepinani_vypisu a.stromovy_vypis {
+  background: url(../../obr/admin/datovy_sklad_ikony/stromovy_vypis.png) no-repeat left;
+}
+
+.obsah .datovy_sklad_prepinani_vypisu a.hierarchicky_vypis {
+  background: url(../../obr/admin/datovy_sklad_ikony/hierarchicky_vypis.png) no-repeat left;
+}
+
+.obsah .datovy_sklad_prepinani_vypisu a.dlazdicovy_vypis {
+  background: url(../../obr/admin/datovy_sklad_ikony/dlazdicovy_vypis.png) no-repeat left;
+}
+
+.obsah .datovy_sklad_prepinani_vypisu a:hover,
+.obsah .datovy_sklad_prepinani_vypisu a.aktivni {
+  background-position: right;
+}/* /prepinani vypisu */
+
+/* strukturovany vypis */
+.obsah .datovy_sklad {
+  border-left: 1px dotted;
+}
+
+.datovy_sklad h3 {
+  margin-bottom: 0;
+}
+
+.datovy_sklad .datovy_sklad_slozka,
+.datovy_sklad .datovy_sklad_soubor {
+  overflow: hidden;
+  position: relative;
+}
+
+.datovy_sklad .datovy_sklad_slozka .slozka,
+.datovy_sklad .datovy_sklad_soubor .soubor {
+  height: 70px;
+  position: relative;
+  border-bottom: 1px dotted;
+  border-left: 1px dotted;
+}
+
+.datovy_sklad .datovy_sklad_slozka_koren .slozka {
+  border-left: none;
+}
+
+.datovy_sklad .datovy_sklad_slozka .slozka span,
+.datovy_sklad .datovy_sklad_soubor .soubor span {
+  display: block;
+}
+
+.datovy_sklad .datovy_sklad_soubor .soubor .ikona_souboru {
+  display: block;
+  width: 48px;
+  height: 48px;
+  position: absolute;
+  top: 10px;
+  left: 2px;
+}
+
+.datovy_sklad .datovy_sklad_soubor .soubor .ikona_souboru a {
+  display: block;
+  width: 48px;
+  height: 48px;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.datovy_sklad .datovy_sklad_soubor .soubor .ikona_souboru img {
+  display: block;
+}
+
+.datovy_sklad .datovy_sklad_slozka .slozka span.ikona_slozky {
+  width: 48px;
+  height: 48px;
+  position: absolute;
+  top: 10px;
+  left: 2px;
+}
+
+/* urceni cest k typum adresaru pro vsechny vypisy */
+.datovy_sklad .datovy_sklad_slozka .slozka span.ikona_slozky_empty,
+.datovy_sklad_hierarchie_vypis .datovy_sklad_hierarchie_obsah ul li a span.ikona_slozky_empty,
+.datovy_sklad_os_vypis .datovy_sklad_os_obsah ul li a span.ikona_slozky_empty {
+  background: url(../../obr/admin/datovy_sklad_ikony/dir_empty.png) no-repeat;
+}
+
+.datovy_sklad .datovy_sklad_slozka .slozka span.ikona_slozky_dir,
+.datovy_sklad_hierarchie_vypis .datovy_sklad_hierarchie_obsah ul li a span.ikona_slozky_dir,
+.datovy_sklad_os_vypis .datovy_sklad_os_obsah ul li a span.ikona_slozky_dir {
+  background: url(../../obr/admin/datovy_sklad_ikony/dir_dir.png) no-repeat;
+}
+
+.datovy_sklad .datovy_sklad_slozka .slozka span.ikona_slozky_koren {
+  background: url(../../obr/admin/datovy_sklad_ikony/dir_koren.png) no-repeat;
+}
+
+.datovy_sklad .datovy_sklad_slozka .slozka span.ikona_slozky_unknown,
+.datovy_sklad_hierarchie_vypis .datovy_sklad_hierarchie_obsah ul li a span.ikona_slozky_unknown,
+.datovy_sklad_os_vypis .datovy_sklad_os_obsah ul li a span.ikona_slozky_unknown {
+  background: url(../../obr/admin/datovy_sklad_ikony/dir_unknown.png) no-repeat;
+}
+
+.datovy_sklad .datovy_sklad_slozka .slozka span.ikona_slozky_document,
+.datovy_sklad_hierarchie_vypis .datovy_sklad_hierarchie_obsah ul li a span.ikona_slozky_document,
+.datovy_sklad_os_vypis .datovy_sklad_os_obsah ul li a span.ikona_slozky_document {
+  background: url(../../obr/admin/datovy_sklad_ikony/dir_document.png) no-repeat;
+}
+
+.datovy_sklad .datovy_sklad_slozka .slozka span.ikona_slozky_picture,
+.datovy_sklad_hierarchie_vypis .datovy_sklad_hierarchie_obsah ul li a span.ikona_slozky_picture,
+.datovy_sklad_os_vypis .datovy_sklad_os_obsah ul li a span.ikona_slozky_picture {
+  background: url(../../obr/admin/datovy_sklad_ikony/dir_picture.png) no-repeat;
+}
+
+.datovy_sklad .datovy_sklad_slozka .slozka span.ikona_slozky_music,
+.datovy_sklad_hierarchie_vypis .datovy_sklad_hierarchie_obsah ul li a span.ikona_slozky_music,
+.datovy_sklad_os_vypis .datovy_sklad_os_obsah ul li a span.ikona_slozky_music {
+  background: url(../../obr/admin/datovy_sklad_ikony/dir_music.png) no-repeat;
+}
+
+.datovy_sklad .datovy_sklad_slozka .slozka span.ikona_slozky_video,
+.datovy_sklad_hierarchie_vypis .datovy_sklad_hierarchie_obsah ul li a span.ikona_slozky_video,
+.datovy_sklad_os_vypis .datovy_sklad_os_obsah ul li a span.ikona_slozky_video {
+  background: url(../../obr/admin/datovy_sklad_ikony/dir_video.png) no-repeat;
+}
+
+.datovy_sklad .datovy_sklad_slozka .slozka span.ikona_slozky_archives,
+.datovy_sklad_hierarchie_vypis .datovy_sklad_hierarchie_obsah ul li a span.ikona_slozky_archives,
+.datovy_sklad_os_vypis .datovy_sklad_os_obsah ul li a span.ikona_slozky_archives {
+  background: url(../../obr/admin/datovy_sklad_ikony/dir_archives.png) no-repeat;
+}
+
+.datovy_sklad .datovy_sklad_slozka .slozka span.ikona_slozky_fonts,
+.datovy_sklad_hierarchie_vypis .datovy_sklad_hierarchie_obsah ul li a span.ikona_slozky_fonts,
+.datovy_sklad_os_vypis .datovy_sklad_os_obsah ul li a span.ikona_slozky_fonts {
+  background: url(../../obr/admin/datovy_sklad_ikony/dir_fonts.png) no-repeat;
+}
+
+.datovy_sklad .datovy_sklad_slozka .slozka span.ikona_slozky_diskimage,
+.datovy_sklad_hierarchie_vypis .datovy_sklad_hierarchie_obsah ul li a span.ikona_slozky_diskimage,
+.datovy_sklad_os_vypis .datovy_sklad_os_obsah ul li a span.ikona_slozky_diskimage {
+  background: url(../../obr/admin/datovy_sklad_ikony/dir_diskimage.png) no-repeat;
+}/* /urceni cest k typum adresaru pro vsechny vypisy */
+
+.datovy_sklad .datovy_sklad_slozka .slozka span.nazev_slozky,
+.datovy_sklad .datovy_sklad_soubor .soubor span.nazev_souboru {
+  overflow: hidden;
+  position: absolute;
+  top: 18px;
+  left: 52px;
+  margin-right: 180px;
+  font-size: 11px;
+}
+
+.datovy_sklad .datovy_sklad_slozka_koren .slozka span.nazev_slozky {
+  top: 20px;
+  font-size: 14px;
+}
+
+.datovy_sklad .datovy_sklad_slozka .slozka em,
+.datovy_sklad .datovy_sklad_soubor .soubor em {
+  display: block;
+  position: absolute;
+  top: 6px;
+  right: 0;
+  font-size: 11px;
+  font-style: normal;
+}
+
+.datovy_sklad .datovy_sklad_slozka .slozka em.odkazy_pridat {
+  top: 26px;
+}
+
+.datovy_sklad .datovy_sklad_soubor .soubor em.odkazy_relativni_absolutni {
+  top: 24px;
+}
+
+.datovy_sklad .datovy_sklad_soubor .soubor em.odkazy_relativni_absolutni label {
+  display: block;
+  margin-bottom: 1px;
+  /* margin-bottom: 2px; */
+  overflow: hidden;
+}
+
+.datovy_sklad .datovy_sklad_soubor .soubor em.odkazy_relativni_absolutni label strong {
+  display: block;
+  width: 100px;
+  float: left;
+  margin-right: 2px;
+  /* font-size: 9px; */
+  text-align: right;
+  font-weight: normal;
+  cursor: pointer;
+}
+
+.datovy_sklad .datovy_sklad_soubor .soubor em.odkazy_relativni_absolutni label strong:hover {
+  color: #000;
+}
+
+.datovy_sklad .datovy_sklad_soubor .soubor em.odkazy_relativni_absolutni label input {
+  display: block;
+  width: 90px;
+  height: 10px;
+  margin-top: 1px;
+  float: left;
+  border: 1px dotted;
+  font-size: 9px;
+}
+
+.datovy_sklad .datovy_sklad_slozka .slozka span.pocet_slozek_souboru,
+.datovy_sklad .datovy_sklad_soubor .soubor span.datum_velikost_souboru {
+  position: absolute;
+  right: 3px;
+  bottom: 3px;
+  font-size: 9px;
+}
+
+.datovy_sklad .datovy_sklad_slozka_koren .slozka span.pocet_slozek_souboru {
+  font-size: 11px;
+}/* /strukturovany vypis */
+
+/* hierarchicky a os vypis */
+.obsah .datovy_sklad_hierarchie_vypis {
+  overflow: hidden;
+}
+
+.datovy_sklad_hierarchie_vypis h3 {
+  margin-bottom: 0;
+}
+
+.datovy_sklad_hierarchie_vypis .datovy_sklad_hierarchie_panel,
+.datovy_sklad_hierarchie_vypis .datovy_sklad_hierarchie_obsah {
+  float: left;
+}
+
+.datovy_sklad_hierarchie_vypis .datovy_sklad_hierarchie_panel {
+  width: 210px;
+}
+
+.datovy_sklad_hierarchie_vypis .datovy_sklad_hierarchie_obsah {
+  width: 440px;
+}
+
+.datovy_sklad_hierarchie_vypis .datovy_sklad_hierarchie_panel ul {
+  border-right: 1px dotted;
+  border-left: 1px dotted;
+}
+
+.datovy_sklad_hierarchie_vypis .datovy_sklad_hierarchie_panel ul li {
+  min-height: 28px;
+  overflow: hidden;
+  border-bottom: 1px dotted;
+  border-left: 1px dotted;
+}
+
+.datovy_sklad_hierarchie_vypis .datovy_sklad_hierarchie_panel ul li.korenova_slozka {
+  border-left: none;
+}
+
+.datovy_sklad_hierarchie_vypis .datovy_sklad_hierarchie_panel ul li a {
+  display: block;
+  min-height: 24px;
+  margin: 2px 2px 2px 28px;
+  font-size: 11px;
+}
+
+.datovy_sklad_hierarchie_vypis .datovy_sklad_hierarchie_panel ul li.korenova_slozka a {
+  min-height: 20px;
+  margin-top: 6px;
+  margin-bottom: 0;
+}
+
+.datovy_sklad_hierarchie_vypis .datovy_sklad_hierarchie_panel ul li:hover a,
+.datovy_sklad_hierarchie_vypis .datovy_sklad_hierarchie_panel ul.aktivni li a {
+  text-decoration: none;
+  color: #7a7a7a;
+}
+
+.datovy_sklad_hierarchie_vypis .datovy_sklad_hierarchie_panel ul.aktivni li {
+  background-color: #f1f1f1;
+}
+
+.datovy_sklad_hierarchie_vypis .datovy_sklad_hierarchie_panel ul li a.ikona_slozka {
+  width: 24px;
+  height: 24px;
+  float: left;
+  margin: 2px 0 2px 2px;
+}
+
+.datovy_sklad_hierarchie_vypis .datovy_sklad_hierarchie_panel ul li a.ikona_slozky_empty {
+  background: url(../../obr/admin/datovy_sklad_ikony/dir_empty_strom.png) no-repeat;
+}
+
+.datovy_sklad_hierarchie_vypis .datovy_sklad_hierarchie_panel ul li a.ikona_slozky_dir {
+  background: url(../../obr/admin/datovy_sklad_ikony/dir_dir_strom.png) no-repeat;
+}
+
+.datovy_sklad_hierarchie_vypis .datovy_sklad_hierarchie_panel ul li a.ikona_slozky_koren {
+  background: url(../../obr/admin/datovy_sklad_ikony/dir_koren_strom.png) no-repeat;
+}
+
+.datovy_sklad_hierarchie_vypis .datovy_sklad_hierarchie_panel ul li a.ikona_slozky_unknown {
+  background: url(../../obr/admin/datovy_sklad_ikony/dir_unknown_strom.png) no-repeat;
+}
+
+.datovy_sklad_hierarchie_vypis .datovy_sklad_hierarchie_panel ul li a.ikona_slozky_document {
+  background: url(../../obr/admin/datovy_sklad_ikony/dir_document_strom.png) no-repeat;
+}
+
+.datovy_sklad_hierarchie_vypis .datovy_sklad_hierarchie_panel ul li a.ikona_slozky_picture {
+  background: url(../../obr/admin/datovy_sklad_ikony/dir_picture_strom.png) no-repeat;
+}
+
+.datovy_sklad_hierarchie_vypis .datovy_sklad_hierarchie_panel ul li a.ikona_slozky_music {
+  background: url(../../obr/admin/datovy_sklad_ikony/dir_music_strom.png) no-repeat;
+}
+
+.datovy_sklad_hierarchie_vypis .datovy_sklad_hierarchie_panel ul li a.ikona_slozky_video {
+  background: url(../../obr/admin/datovy_sklad_ikony/dir_video_strom.png) no-repeat;
+}
+
+.datovy_sklad_hierarchie_vypis .datovy_sklad_hierarchie_panel ul li a.ikona_slozky_archives {
+  background: url(../../obr/admin/datovy_sklad_ikony/dir_archives_strom.png) no-repeat;
+}
+
+.datovy_sklad_hierarchie_vypis .datovy_sklad_hierarchie_panel ul li a.ikona_slozky_fonts {
+  background: url(../../obr/admin/datovy_sklad_ikony/dir_fonts_strom.png) no-repeat;
+}
+
+.datovy_sklad_hierarchie_vypis .datovy_sklad_hierarchie_panel ul li a.ikona_slozky_diskimage {
+  background: url(../../obr/admin/datovy_sklad_ikony/dir_diskimage_strom.png) no-repeat;
+}
+
+.datovy_sklad_hierarchie_vypis .datovy_sklad_hierarchie_obsah {
+  margin: 50px 0 30px;
+  position: relative;
+}
+
+.datovy_sklad_os_vypis .datovy_sklad_os_obsah {
+  position: relative;
+}
+
+.datovy_sklad_os_vypis .datovy_sklad_os_obsah .drobeckova_navigace {
+  margin-right: 170px;
+  margin-bottom: 26px;
+  color: #000;
+  font-weight: bold;
+  font-size: 11px;
+}
+
+.datovy_sklad_os_vypis .datovy_sklad_os_obsah .drobeckova_navigace a {
+  line-height: 16px;
+  font-weight: normal;
+}
+
+.datovy_sklad_os_vypis .datovy_sklad_os_obsah .drobeckova_navigace a.aktivni {
+  color: #7a7a7a;
+}
+
+.datovy_sklad_hierarchie_vypis .datovy_sklad_hierarchie_obsah:after,
+.datovy_sklad_os_vypis .datovy_sklad_os_obsah:after {
+  content: ".";
+  display: block;
+  height: 0;
+  clear: both;
+  visibility: hidden;
+}
+
+.datovy_sklad_hierarchie_vypis .datovy_sklad_hierarchie_obsah #nahoru_uroven,
+.datovy_sklad_hierarchie_vypis .datovy_sklad_hierarchie_obsah #odkazy_ovladani_slozky,
+.datovy_sklad_os_vypis .datovy_sklad_os_obsah #nahoru_uroven,
+.datovy_sklad_os_vypis .datovy_sklad_os_obsah #odkazy_ovladani_slozky {
+  height: 32px;
+  position: absolute;
+  top: -46px;
+}
+
+.datovy_sklad_os_vypis .datovy_sklad_os_obsah #nahoru_uroven,
+.datovy_sklad_os_vypis .datovy_sklad_os_obsah #odkazy_ovladani_slozky {
+  top: 0px;
+}
+
+.datovy_sklad_hierarchie_vypis .datovy_sklad_hierarchie_obsah #nahoru_uroven,
+.datovy_sklad_os_vypis .datovy_sklad_os_obsah #nahoru_uroven {
+  display: block;
+  width: 32px;
+  left: 4px;
+  background: url(../../obr/admin/datovy_sklad_ikony/uroven_nahoru.png) no-repeat;
+}
+
+.datovy_sklad_os_vypis .datovy_sklad_os_obsah #nahoru_uroven {
+  left: auto;
+  right: 4px;
+}
+
+.datovy_sklad_hierarchie_vypis .datovy_sklad_hierarchie_obsah #odkazy_ovladani_slozky,
+.datovy_sklad_os_vypis .datovy_sklad_os_obsah #odkazy_ovladani_slozky {
+  right: 4px;
+  overflow: hidden;
+}
+
+.datovy_sklad_os_vypis .datovy_sklad_os_obsah #odkazy_ovladani_slozky {
+  right: 36px;
+}
+
+.datovy_sklad_hierarchie_vypis .datovy_sklad_hierarchie_obsah #odkazy_ovladani_slozky a,
+.datovy_sklad_os_vypis .datovy_sklad_os_obsah #odkazy_ovladani_slozky a {
+  display: block;
+  width: 32px;
+  height: 32px;
+  float: left;
+}
+
+.datovy_sklad_hierarchie_vypis .datovy_sklad_hierarchie_obsah #odkazy_ovladani_slozky a#pridat_soubor,
+.datovy_sklad_os_vypis .datovy_sklad_os_obsah #odkazy_ovladani_slozky a#pridat_soubor {
+  background: url(../../obr/admin/datovy_sklad_ikony/pridat_soubor.png) no-repeat;
+}
+
+.datovy_sklad_hierarchie_vypis .datovy_sklad_hierarchie_obsah #odkazy_ovladani_slozky a#vytvorit_slozku,
+.datovy_sklad_os_vypis .datovy_sklad_os_obsah #odkazy_ovladani_slozky a#vytvorit_slozku {
+  background: url(../../obr/admin/datovy_sklad_ikony/vytvorit_slozku.png) no-repeat;
+}
+
+.datovy_sklad_hierarchie_vypis .datovy_sklad_hierarchie_obsah #odkazy_ovladani_slozky a#upravit_slozku,
+.datovy_sklad_os_vypis .datovy_sklad_os_obsah #odkazy_ovladani_slozky a#upravit_slozku {
+  background: url(../../obr/admin/datovy_sklad_ikony/upravit_slozku.png) no-repeat;
+}
+
+.datovy_sklad_hierarchie_vypis .datovy_sklad_hierarchie_obsah #odkazy_ovladani_slozky a#smazat_slozku,
+.datovy_sklad_os_vypis .datovy_sklad_os_obsah #odkazy_ovladani_slozky a#smazat_slozku {
+  background: url(../../obr/admin/datovy_sklad_ikony/smazat_slozku.png) no-repeat;
+}
+
+.datovy_sklad_hierarchie_vypis .datovy_sklad_hierarchie_obsah ul,
+.datovy_sklad_os_vypis .datovy_sklad_os_obsah ul {
+  width: 210px;
+  min-height: 52px;
+  margin: 0 0 2px 10px;
+  float: left;
+}
+
+.datovy_sklad_os_vypis .datovy_sklad_os_obsah ul {
+  margin: 0 0 4px 8px;
+}
+
+.datovy_sklad_hierarchie_vypis .datovy_sklad_hierarchie_obsah ul.prazdna_slozka,
+.datovy_sklad_os_vypis .datovy_sklad_os_obsah ul.prazdna_slozka {
+  width: 430px;
+  line-height: 52px;
+  margin: 30px 0 2px 10px;
+  text-align: center;
+  background-color: #f1f1f1;
+}
+
+.datovy_sklad_os_vypis .datovy_sklad_os_obsah ul.prazdna_slozka {
+  width: 100%;
+  margin: 0 0 2px;
+}
+
+.datovy_sklad_hierarchie_vypis .datovy_sklad_hierarchie_obsah ul.prazdna_slozka li,
+.datovy_sklad_os_vypis .datovy_sklad_os_obsah ul.prazdna_slozka li {
+  color: #000;
+}
+
+.datovy_sklad_hierarchie_vypis .datovy_sklad_hierarchie_obsah ul li,
+.datovy_sklad_os_vypis .datovy_sklad_os_obsah ul li {
+  position: relative;
+}
+
+.datovy_sklad_hierarchie_vypis .datovy_sklad_hierarchie_obsah ul li a.odkaz_soubor,
+.datovy_sklad_hierarchie_vypis .datovy_sklad_hierarchie_obsah ul li a.odkaz_slozka,
+.datovy_sklad_os_vypis .datovy_sklad_os_obsah ul li a.odkaz_soubor,
+.datovy_sklad_os_vypis .datovy_sklad_os_obsah ul li a.odkaz_slozka {
+  display: block;
+  min-height: 52px;
+  overflow: hidden;
+  text-decoration: none;
+  border: 1px solid transparent; /* lze nastavit jakoukoliv barvu podle pozadi */
+}
+
+.datovy_sklad_hierarchie_vypis .datovy_sklad_hierarchie_obsah ul li a.nahled_obrazku,
+.datovy_sklad_os_vypis .datovy_sklad_os_obsah ul li a.nahled_obrazku {
+  display: block;
+  width: 48px;
+  height: 48px;
+  position: absolute;
+  top: 3px;
+  left: 3px;
+}
+
+.datovy_sklad_hierarchie_vypis .datovy_sklad_hierarchie_obsah ul li a.odkaz_upravit_soubor,
+.datovy_sklad_hierarchie_vypis .datovy_sklad_hierarchie_obsah ul li a.odkaz_smazat_soubor,
+.datovy_sklad_os_vypis .datovy_sklad_os_obsah ul li a.odkaz_upravit_soubor,
+.datovy_sklad_os_vypis .datovy_sklad_os_obsah ul li a.odkaz_smazat_soubor {
+  display: none;
+}
+
+.datovy_sklad_hierarchie_vypis .datovy_sklad_hierarchie_obsah ul li:hover a.odkaz_upravit_soubor,
+.datovy_sklad_hierarchie_vypis .datovy_sklad_hierarchie_obsah ul li:hover a.odkaz_smazat_soubor,
+.datovy_sklad_os_vypis .datovy_sklad_os_obsah ul li:hover a.odkaz_upravit_soubor,
+.datovy_sklad_os_vypis .datovy_sklad_os_obsah ul li:hover a.odkaz_smazat_soubor {
+  display: block;
+  width: 24px;
+  height: 24px;
+  position: absolute;
+  top: 27px;
+}
+
+.datovy_sklad_hierarchie_vypis .datovy_sklad_hierarchie_obsah ul li:hover a.odkaz_upravit_soubor,
+.datovy_sklad_os_vypis .datovy_sklad_os_obsah ul li:hover a.odkaz_upravit_soubor {
+  left: 3px;
+  background: url(../../obr/admin/datovy_sklad_ikony/upravit_soubor.png) no-repeat left;
+}
+
+.datovy_sklad_hierarchie_vypis .datovy_sklad_hierarchie_obsah ul li:hover a.odkaz_smazat_soubor,
+.datovy_sklad_os_vypis .datovy_sklad_os_obsah ul li:hover a.odkaz_smazat_soubor {
+  left: 27px;
+  background: url(../../obr/admin/datovy_sklad_ikony/smazat_soubor.png) no-repeat left;
+}
+
+.datovy_sklad_hierarchie_vypis .datovy_sklad_hierarchie_obsah ul li:hover a.odkaz_upravit_soubor:hover,
+.datovy_sklad_hierarchie_vypis .datovy_sklad_hierarchie_obsah ul li:hover a.odkaz_smazat_soubor:hover,
+.datovy_sklad_os_vypis .datovy_sklad_os_obsah ul li:hover a.odkaz_upravit_soubor:hover,
+.datovy_sklad_os_vypis .datovy_sklad_os_obsah ul li:hover a.odkaz_smazat_soubor:hover {
+  background-position: right;
+}
+
+.datovy_sklad_hierarchie_vypis .datovy_sklad_hierarchie_obsah ul li:hover a.odkaz_soubor,
+.datovy_sklad_hierarchie_vypis .datovy_sklad_hierarchie_obsah ul li:hover a.odkaz_slozka,
+.datovy_sklad_os_vypis .datovy_sklad_os_obsah ul li:hover a.odkaz_soubor,
+.datovy_sklad_os_vypis .datovy_sklad_os_obsah ul li:hover a.odkaz_slozka { /* lze nastavit cokoliv na oznacovani slozky / souboru po najeti mysi */
+  border: 1px dotted;
+  background-color: #f1f1f1;
+}
+
+.datovy_sklad_hierarchie_vypis .datovy_sklad_hierarchie_obsah ul li:hover a em,
+.datovy_sklad_os_vypis .datovy_sklad_os_obsah ul li:hover a em {
+  color: #000;
+  text-decoration: underline;
+}
+
+.datovy_sklad_hierarchie_vypis .datovy_sklad_hierarchie_obsah ul li a span,
+.datovy_sklad_hierarchie_vypis .datovy_sklad_hierarchie_obsah ul li a em,
+.datovy_sklad_hierarchie_vypis .datovy_sklad_hierarchie_obsah ul li a img,
+.datovy_sklad_os_vypis .datovy_sklad_os_obsah ul li a span,
+.datovy_sklad_os_vypis .datovy_sklad_os_obsah ul li a em,
+.datovy_sklad_os_vypis .datovy_sklad_os_obsah ul li a img {
+  display: block;
+  float: left;
+}
+
+.datovy_sklad_hierarchie_vypis .datovy_sklad_hierarchie_obsah ul li a em,
+.datovy_sklad_os_vypis .datovy_sklad_os_obsah ul li a em {
+  width: 156px;
+  float: right;
+  margin-top: 2px;
+  font-style: normal;
+}
+
+.datovy_sklad_hierarchie_vypis .datovy_sklad_hierarchie_obsah ul.soubor li a em,
+.datovy_sklad_os_vypis .datovy_sklad_os_obsah ul.soubor li a em {
+  font-size: 11px;
+}
+
+.datovy_sklad_hierarchie_vypis .datovy_sklad_hierarchie_obsah ul li a em.pocet_slozek,
+.datovy_sklad_os_vypis .datovy_sklad_os_obsah ul li a em.pocet_slozek {
+  margin-top: 3px;
+}
+
+.datovy_sklad_hierarchie_vypis .datovy_sklad_hierarchie_obsah ul.soubor li a em.pocet_slozek,
+.datovy_sklad_os_vypis .datovy_sklad_os_obsah ul.soubor li a em.pocet_slozek {
+  margin-top: 10px;
+}
+
+.datovy_sklad_hierarchie_vypis .datovy_sklad_hierarchie_obsah ul li a em.pocet_souboru,
+.datovy_sklad_os_vypis .datovy_sklad_os_obsah ul li a em.pocet_souboru {
+  margin-top: 0;
+  margin-bottom: 2px;
+}
+
+.datovy_sklad_hierarchie_vypis .datovy_sklad_hierarchie_obsah ul li a em.pocet_slozek,
+.datovy_sklad_hierarchie_vypis .datovy_sklad_hierarchie_obsah ul li a em.pocet_souboru,
+.datovy_sklad_os_vypis .datovy_sklad_os_obsah ul li a em.pocet_slozek,
+.datovy_sklad_os_vypis .datovy_sklad_os_obsah ul li a em.pocet_souboru {
+  color: #7a7a7a;
+  font-size: 11px;
+}
+
+.datovy_sklad_hierarchie_vypis .datovy_sklad_hierarchie_obsah ul.soubor li a em.pocet_slozek,
+.datovy_sklad_os_vypis .datovy_sklad_os_obsah ul.soubor li a em.pocet_slozek {
+  font-weight: bold;
+}
+
+.datovy_sklad_hierarchie_vypis .datovy_sklad_hierarchie_obsah ul.soubor li a em.pocet_slozek,
+.datovy_sklad_hierarchie_vypis .datovy_sklad_hierarchie_obsah ul.soubor li a em.pocet_souboru,
+.datovy_sklad_os_vypis .datovy_sklad_os_obsah ul.soubor li a em.pocet_slozek,
+.datovy_sklad_os_vypis .datovy_sklad_os_obsah ul.soubor li a em.pocet_souboru {
+  font-size: 9px;
+}
+
+.datovy_sklad_hierarchie_vypis .datovy_sklad_hierarchie_obsah ul li:hover a em.pocet_slozek,
+.datovy_sklad_hierarchie_vypis .datovy_sklad_hierarchie_obsah ul li:hover a em.pocet_souboru,
+.datovy_sklad_os_vypis .datovy_sklad_os_obsah ul li:hover a em.pocet_slozek,
+.datovy_sklad_os_vypis .datovy_sklad_os_obsah ul li:hover a em.pocet_souboru {
+  text-decoration: none;
+}
+
+.datovy_sklad_hierarchie_vypis .datovy_sklad_hierarchie_obsah ul li a span.ikona_slozka,
+.datovy_sklad_hierarchie_vypis .datovy_sklad_hierarchie_obsah ul li a img,
+.datovy_sklad_os_vypis .datovy_sklad_os_obsah ul li a span.ikona_slozka,
+.datovy_sklad_os_vypis .datovy_sklad_os_obsah ul li a img {
+  width: 48px;
+  height: 48px;
+  margin: 2px 2px 0;
+}/* hierarchicky a os vypis */
+
+/* pridat upravit slozku soubor */
+.datovy_sklad_add_edit_dir p,
+.datovy_sklad_add_edit_file p {
+  margin-bottom: 30px;
+  padding-left: 10px;
+}
+
+.datovy_sklad_add_edit_dir form label,
+.datovy_sklad_add_edit_file form label {
+  display: block;
+  margin-bottom: 6px;
+  overflow: hidden;
+}
+
+.datovy_sklad_add_edit_file form label em {
+  display: block;
+  padding-top: 4px;
+  font-style: normal;
+  color: #000;
+}
+
+.datovy_sklad_add_edit_dir form label span,
+.datovy_sklad_add_edit_dir form label input,
+.datovy_sklad_add_edit_file form label span,
+.datovy_sklad_add_edit_file form label input {
+  display: block;
+  float: left;
+}
+
+.datovy_sklad_add_edit_dir form label span,
+.datovy_sklad_add_edit_file form label span {
+  width: 110px;
+  margin: 0 10px;
+  padding-top: 4px;
+  text-align: right;
+}
+
+.datovy_sklad_add_edit_file form label span {
+  width: 170px;
+}
+
+.datovy_sklad_add_edit_dir form label input,
+.datovy_sklad_add_edit_file form label.submit input,
+.datovy_sklad_add_edit_file form label.nazev_souboru input {
+  width: 200px;
+  border: 1px dotted;
+  padding: 3px;
+  color: #7a7a7a;
+}
+
+.datovy_sklad_add_edit_dir form label input:focus,
+.datovy_sklad_add_edit_file form label.submit input:focus,
+.datovy_sklad_add_edit_file form label.nazev_souboru input:focus {
+  color: #000;
+  background-color: #ececec;
+}
+
+.datovy_sklad_add_edit_dir form label.submit input,
+.datovy_sklad_add_edit_file form label.submit input {
+  width: auto;
+  padding: 3px 6px;
+  margin-left: 130px;
+}
+
+.datovy_sklad_add_edit_file form label.submit input {
+  margin-left: 190px;
+}
+
+.datovy_sklad_add_edit_dir form label.submit input:hover,
+.datovy_sklad_add_edit_dir form label.submit input:focus,
+.datovy_sklad_add_edit_file form label.submit input:hover,
+.datovy_sklad_add_edit_file form label.submit input:focus {
+  text-decoration: underline;
+  color: #000;
+  cursor: pointer;
+}/* /pridat upravit slozku soubor */
+/* /datovy sklad */
+
+/* Fugess (Martin) */

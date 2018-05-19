@@ -1,0 +1,57 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html  xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"><head>
+<title></title>
+<meta http-equiv="content-type" content="text/html;charset=utf-8"/>
+<meta http-equiv="Content-Style-Type" content="text/css"/>
+</head>
+<body>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">package Koule;</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt"><br />
+</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">import org.junit.Test;</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">import static org.junit.Assert.*;</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt"><br />
+</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">public class KouleTest {</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt"><br />
+</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160; final double r = 10.0;</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160; Koule koule;</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt"><br />
+</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160; public KouleTest() {</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160;&#160;&#160;&#160;&#160; koule = new Koule();</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160;&#160;&#160;&#160;&#160; koule.setPolomer(r);</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160; }</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160; </span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160; @Test</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160; public void&#160; testObjem( ) {</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160;&#160;&#160;&#160;&#160; koule.setPolomer(r);</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160;&#160;&#160;&#160;&#160; double result = koule.objem();</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160;&#160;&#160;&#160;&#160; double expResult = (4.0 / 3.0) * Math.PI * Math.pow(r, 3);</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160;&#160;&#160;&#160;&#160; assertEquals(expResult, result, 0.1);</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160; }</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt"><br />
+</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160; @Test</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160; public void testSetPolomer() {</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160;&#160;&#160;&#160;&#160; koule.setPolomer(2 * r);</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160;&#160;&#160;&#160;&#160; double result = koule.getPolomer();</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160;&#160;&#160;&#160;&#160; double expResult = 2 * r;</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160;&#160;&#160;&#160;&#160; assertEquals(expResult, result, 0.1);</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160; }</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt"><br />
+</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160; @Test</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160; public void testGetPolomer() {</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160;&#160;&#160;&#160;&#160; Koule k = new Koule();</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160;&#160;&#160;&#160;&#160; k.setPolomer(2 * r);</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160;&#160;&#160;&#160;&#160; double result = k.getPolomer();</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160;&#160;&#160;&#160;&#160; double expResult = 2 * r;</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160;&#160;&#160;&#160;&#160; assertEquals(expResult, result, 0.1);</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160; }</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">}</span></font></div>
+<div align="left" align="left">&nbsp;&nbsp;</div>
+</body>
+</html>

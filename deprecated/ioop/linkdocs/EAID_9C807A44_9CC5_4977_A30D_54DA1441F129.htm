@@ -1,0 +1,309 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html  xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"><head>
+<title></title>
+<meta http-equiv="content-type" content="text/html;charset=utf-8"/>
+<meta http-equiv="Content-Style-Type" content="text/css"/>
+</head>
+<body>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt"><br />
+</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt"><br />
+</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">/**</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;* T&#345;&#237;da {@code Cekarna} je ur&#269;ena k prov&#225;d&#283;n&#237; algoritmu &#345;azen&#237; po&#382;adavk&#367;</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;* do fronty pro &#250;&#269;ely r&#367;zn&#253;ch &#269;ek&#225;ren jak je zn&#225;me nap&#345;&#237;klad z po&scaron;ty nebo</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;* u l&#233;ka&#345;e.</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;* </span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;* &lt;p&gt;T&#345;&#237;da {@code Cekarna} &#345;ad&#237; instance t&#345;&#237;dy {@see Listek} do fronty</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;* s algoritmem FIFO.</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;*&#160; &lt;/p&gt;</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;* &lt;p&gt;T&#345;&#237;da {@code Cekarna} d&#225;v&#225; v implementaci p&#345;ednost principu</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;* skl&#225;d&#225;n&#237; p&#345;ed ostatn&#237;mi mo&#382;n&#253;mi implementacemi jako jsou nap&#345;&#237;klad:</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;*&#160;&#160; &lt;ul&gt;</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;*&#160;&#160;&#160;&#160; &lt;li&gt;naprogramov&#225;n&#237; cel&#233;ho algoritmu do jedn&#233; t&#345;&#237;dy&lt;/li&gt;</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;*&#160;&#160;&#160;&#160; &lt;li&gt;vyu&#382;it&#237; d&#283;di&#269;nosti&lt;/li&gt;</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;*&#160;&#160; &lt;/ul&gt;</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;*&#160; &lt;/p&gt;</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;*</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;*</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;* @author </span></font><font face="Courier New" color="#000000" size="2"><span style=" font-size:10pt">Karel &Scaron;imerda</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;* @version 1.0, 11/06/10</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;* @see</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;* </span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;*/</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">public class Cekarna {</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt"><br />
+</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160; /**</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160; * </span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160; *</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160; */</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160; private IKolekce fronta;</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt"><br />
+</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">// == VNIT&#344;N&#205; T&#344;&#205;DY ====================================================</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160; /**</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160; * T&#345;&#237;da {@code Listek} slou&#382;&#237; k vytv&#225;&#345;en&#237; instanc&#237; l&#237;stku s po&#345;adov&#253;m</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160; * &#269;&#237;slem. Tento l&#237;stek je ur&#269;en ke stanoven&#237; po&#345;ad&#237; &#269;ekaj&#237;c&#237;ch osob v</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160; * &#269;ek&#225;rn&#283;. Ka&#382;d&#253; l&#237;stek dostan&#283; p&#345;i sv&#233;m vytvo&#345;en&#237; jedine&#269;n&#233; &#269;&#237;slo.</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160; * Toto &#269;&#237;slo v&scaron;ak nemus&#237; b&#253;t pou&#382;ito k &#345;azen&#237; ve front&#283;.</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160; * Zda bude pou&#382;ito k &#345;azen&#237;, nen&#237; na odpov&#283;dnosti t&#345;&#237;dy {@code Listek}.</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160; *</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160; * &lt;p&gt;T&#345;&#237;da {@code Listek} je vno&#345;enou t&#345;&#237;dou v t&#345;&#237;d&#283; Cekarna. T&#237;m jsme</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160; * spojili do jednoho souboru dv&#283; t&#345;&#237;dy, kter&#233; spolu &#250;zce souvis&#237;.</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160; * T&#237;m jsme u&scaron;et&#345;ili jeden soubor a z&#237;skali v&#283;t&scaron;&#237; p&#345;ehled o fungov&#225;n&#237;</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160; * t&#345;&#237;dy {@see Cekarna}</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160; * &lt;/p&gt;</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160; */</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160; public static class Listek implements Cloneable {</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt"><br />
+</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160; /**</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160;&#160; * Tato statick&#225; prom&#283;nn&#225; (prom&#283;nn&#225; t&#345;&#237;dy) slou&#382;&#237; k jednozna&#269;n&#233;mu</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160;&#160; * p&#345;id&#283;len&#237; identifika&#269;n&#237;ho &#269;&#237;sla nov&#233;mu objektu t&#345;&#237;dy</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160;&#160; * {@code Listek}</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160;&#160; */</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160; ... ... pocetVydanychListku = 0;</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160; /**</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160;&#160; * Tato prom&#283;nn&#225; obsahuje jednozna&#269;n&#233; &#269;&#237;slo, kter&#233; bude objektu</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160;&#160; * p&#345;id&#283;leno p&#345;i jeho vzniku.</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160;&#160; */</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160; private final ... cislo;</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt"><br />
+</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160; /**</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160;&#160; * Konstruktor &lt;code&gt;Listek()&lt;/code&gt; p&#345;i&#345;ad&#237; do prom&#283;nn&#233;</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160;&#160; * {@code cislo} jednozna&#269;nou hodnotu.</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160;&#160; */</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160; public Listek() {</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160;&#160;&#160; cislo = ...;</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160; }</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt"><br />
+</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160; /**</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160;&#160; * Metoda {@code clone()} je ve&#345;ejn&#225; a t&#237;m umo&#382;&#328;uje vytvo&#345;en&#237; kopie</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160;&#160; * instance t&#345;&#237;dy {@code Listek}.</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160;&#160; *</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160;&#160; * &lt;p&gt;</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160;&#160; * Klonov&#225;n&#237; je v&#253;znamnou metodou jak zefektivnit k&#243;d, proto&#382;e kopie</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160;&#160; * vznik&#225; bin&#225;rn&#237;m kopirov&#225;n&#237;m, kdy&#382; pou&#382;ijeme metodu</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160;&#160; * {@code clone()} ze t&#345;&#237;dy {@code Object}.</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160;&#160; *</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160;&#160; * &lt;p&gt;&lt;b&gt;Pozn&#225;mka:&lt;/b&gt; Klonov&#225;n&#237; slo&#382;it&#283;j&scaron;&#237;ch objekt&#367; v&scaron;ak ji&#382; nen&#237; tak 
+bezpe&#269;n&#233; a</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160;&#160; * jednoduch&#233;. Podrobnosti jsou uvedeny v ka&#382;d&#233; literatu&#345;e</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160;&#160; * o programovan&#237; v Java. Tj. problematika m&#283;kk&#233; a hlubok&#233; kopie.&lt;/p&gt;</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160;&#160; *</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160;&#160; * @return reference na kopii instance t&#345;&#237;dy {@code Listek}</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160;&#160; */</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160; @Override</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160; public Object clone() {</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160;&#160;&#160; try {</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160;&#160;&#160;&#160;&#160; return super. ...();</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160;&#160;&#160; } catch (CloneNotSupportedException e) {</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160;&#160;&#160;&#160;&#160; throw new Error(&quot;Chyba&quot;);</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160;&#160;&#160; }</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160; }</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt"><br />
+</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160; /**</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160;&#160; * Metoda {@code equals()} p&#345;ekr&#253;v&#225; p&#367;vodn&#237; metodu ze t&#345;&#237;dy</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160;&#160; * {@code Object}. P&#367;vodn&#237; metoda pouze porovn&#225;v&#225; reference</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160;&#160; * a proto nem&#367;&#382;e vyhodnotit, zda dva objekty jsou stejn&#233; podle</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160;&#160; * obsahu. Proto mus&#237;me v p&#345;&#237;pad&#283;, &#382;e chceme porovn&#225;vat podle</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160;&#160; * obsahu, vytvo&#345;it vlastn&#237; porovn&#225;vac&#237; metodu, kter&#225; bude</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160;&#160; * respektovat skute&#269;nou strukturu a obsah atribut&#367;.</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160;&#160; *</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160;&#160; * @param obj reference na objekt, kter&#253; chceme porovn&#225;vat</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160;&#160; *&#160; s objektem {@code this}</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160;&#160; * @return &#250;sp&#283;&scaron;nost porovn&#225;n&#237;</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160;&#160; * &lt;ul&gt;</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160;&#160; *&#160;&#160; &lt;li&gt;true - kdy&#382; se atributy {@code cislo} obou objekt&#367; rovnaj&#237;</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160;&#160; * &lt;/li&gt;</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160;&#160; *&#160;&#160; &lt;li&gt;false - kdy&#382; se atributy {@code cislo} obou objekt&#367;</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160;&#160; *&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160; nerovnaj&#237;</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160;&#160; * &lt;/li&gt;</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160;&#160; * &lt;/ul&gt;</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160;&#160; */</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160; @Override</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160; public boolean equals(Object obj) {</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160;&#160;&#160; if (.... instanceof Listek) {</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160;&#160;&#160;&#160;&#160; Listek listek = (...) obj;</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160;&#160;&#160;&#160;&#160; return this.cislo == ... .cislo;</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160;&#160;&#160; }</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160;&#160;&#160; return false;</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160; }</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt"><br />
+</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160; /**</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160;&#160; * P&#345;ekryt&#237; metody &lt;code&gt;hasCode&lt;/code&gt; slou&#382;&#237; k v&#253;po&#269;tu tzv. hash</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160;&#160; * kodu, kter&#253; mus&#237; b&#253;t stejn&#253; p&#345;i ka&#382;d&#233;m zavol&#225;n&#237; metody pokud</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160;&#160; * se nezm&#283;nil stav objektu, kter&#253; se pou&#382;&#237;v&#225; p&#345;i porovn&#225;n&#237;.</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160;&#160; * &lt;p&gt;</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160;&#160; * Pokud tuto metodu nep&#345;ekryjeme a p&#345;i p&#345;ekryt&#233; metod&#283;</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160;&#160; * {@code equals(object)} nedodr&#382;&#237;me kontrakt z t&#345;&#237;dy {@see Object}.</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160;&#160; * A proto n&#225;m nebudou spr&#225;vn&#283; fungovat ty t&#345;&#237;dy, kter&#233; se na to</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160;&#160; * spol&#233;haj&#237; jako nap&#345;&#237;klad v&scaron;echny he&scaron;ovac&#237;&#160; kolekce tj. HashMap,</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160;&#160; * HashSet a HashTable</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160;&#160; * &lt;/p&gt;</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160;&#160; * &lt;p&gt;&lt;/p&gt;</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160;&#160; * @return vrac&#237; hash k&#243;d</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160;&#160; */</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160; @Override</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160; public int hashCode() {</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160;&#160;&#160; int hash = 7;</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160;&#160;&#160; hash = 29 * hash + this.cislo;</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160;&#160;&#160; return ...;</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160; }</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt"><br />
+</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160; /**</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160;&#160; * Metoda {@code getCislo} vrac&#237; hodnotu &#269;&#237;sla l&#237;stku</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160;&#160; *</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160;&#160; * @return</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160;&#160; */</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160; public int getCislo() {</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160;&#160;&#160; return ...;</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160; }</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt"><br />
+</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160; /**</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160;&#160; * Metoda {@code toString()} sestav&#237; textov&#253; &#345;et&#283;zec se stavem</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160;&#160; * objektu</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160;&#160; *</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160;&#160; * @return reference na &#345;et&#283;zec ze stavem instance</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160;&#160; */</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160; @Override</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160; public String toString() {</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160;&#160;&#160; return &quot;\n&#160; Listek c.:&quot; + ...;</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160; }</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160; }</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">// == KONSTRUKTORY =====================================================</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt"><br />
+</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160; /**</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160; * Konstruktor {@code Cekarna ()} vytvo&#345;&#237; instanci konkr&#233;tn&#237;</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160; * &#269;ek&#225;rny se stanovenou kapacitou</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160; * (tj. po&#269;tem m&#237;st (sedadel) v &#269;ek&#225;rn&#283;).</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160; *</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160; * @param kapacita velikost (tj. po&#269;et mist) v &#269;ek&#225;rn&#283;</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160; */</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160; public Cekarna(int kapacita) {</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160; fronta = new FrontaObject(...);</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160; }</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">// == INSTAN&#268;N&#205; METODY =================================================</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt"><br />
+</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160; /**</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160; * Metoda {@code jePrazdna()} poskytuje informaci o obsazenosti &#269;ek&#225;rny</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160; *</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160; * &lt;p&gt;&lt;b&gt;Pozn&#225;mka: &lt;/b&gt; Na t&#233;to metod&#283; je vid&#283;t v&#253;hody skl&#225;d&#225;n&#237;,</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160; * proto&#382;e p&#345;ejmenov&#225;v&#225; metodu jin&#233; t&#345;&#237;dy na odpov&#237;daj&#237;c&#237; n&#225;zev&lt;/p&gt;</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160; *</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160; * @return Vrac&#237; &lt;b&gt;&lt;tt&gt;true&lt;/tt&gt;&lt;/b&gt;, kdy&#382; je &#269;ek&#225;rna pr&#225;zdn&#225;</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160; *</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160; */</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160; public boolean jePrazdna() {</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160; return ... .jePrazdny();</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160; }</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt"><br />
+</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160; /**</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160; * Metoda {@code jePlna()} poskytuje informaci o obsazenosti &#269;ek&#225;rny</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160; * @return Vrac&#237; &lt;b&gt;&lt;tt&gt;true&lt;/tt&gt;&lt;/b&gt;, kdy&#382; je &#269;ek&#225;rna pln&#225;</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160; */</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160; public boolean jePlna() {</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160; return ... .jePlny();</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160; }</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt"><br />
+</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160; /**</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160; * Metoda &lt;code&gt;getKolikCeka&lt;/code&gt;</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160; *</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160; * @return Vrac&#237; po&#269;et kolik je je&scaron;t&#283; objekt&#367; ve front&#283;</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160; */</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160; public int getKolikCeka() {</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160; return fronta. ...();</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160; }</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt"><br />
+</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160; /**</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160; * Metoda {@code vlozitListek()} vkl&#225;d&#225; do fronty kopii objektu</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160; * s listkem. </span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160; * &lt;p&gt;Vkl&#225;d&#225;me kopii z toho d&#367;vodu, &#382;e nechceme aby n&#283;kdo dal&scaron;&#237;</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160; * mohl voln&#283; p&#345;istupovat k objektu ve front&#283;.</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160; * &lt;/p&gt;</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160; *</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160; * @param listek reference na objekt s informac&#237; o listku</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160; */</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160; public void vlozListek(Listek listek) {</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160; fronta.vlozPrvek(... .clone());</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160; }</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt"><br />
+</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160; /**</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160; * Metoda &lt;code&gt;vemListek&lt;/code&gt; vyzved&#225;v&#225; prvn&#237; l&#237;stek z fronty.</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160; *</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160; * &lt;p&gt; Vrac&#237;me referenci p&#345;&#237;mo na objekt z fronty, proto&#382;e u&#382; fronta</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160; * ho vymazala ze sv&#233;ho seznamu a proto mho u&#382; nemus&#237;me klonovat.</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160; * &lt;/p&gt;</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160; * </span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160; * @return reference na objekt, kter&#253; byl vyjmut z fronty.</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160; */</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160; public Listek vemListek() {</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160; return (...) fronta.odeberPrvek();</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160; }</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt"><br />
+</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160; /**</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160; * Metoda {@code zrus ()} zru&scaron;&#237; v&scaron;echny listky ve front&#283;.</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160; */</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160; public void zrus() {</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160; fronta. ...();</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160; }</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt"><br />
+</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160; /**</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160; * Metoda {@code getStavKolekce()} vrac&#237; stav kolekce tj. v tomto</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160; * p&#345;ipad&#283; stav na&scaron;&#237; fronty.</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160; *</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160; * &lt;p&gt;&lt;b&gt;Pozn&#225;mka: &lt;/b&gt; Toto &#345;e&scaron;en&#237; nepat&#345;&#237; mezi nejlep&scaron;&#237;, proto&#382;e</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160; * t&#237;m odkr&#253;v&#225;me implementaci t&#345;&#237;dy {@code Cekarna}.</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160; * &lt;/p&gt;</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160; * &lt;p&gt;&lt;b&gt;Ot&#225;zka:&lt;/b&gt; Jak&#233; by bylo spr&#225;vn&#233; &#345;e&scaron;en&#237;?</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160; * &lt;/p&gt;</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160; *</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160; * @return Vrac&#237; stav &#269;ek&#225;rny v univer&#225;ln&#237;m k&#243;dov&#225;n&#237;</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160; */</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160; public StavKolekce getStavCekarny() {</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160; return fronta. ...();</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160; }</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt"><br />
+</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160; /**</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160; * Metoda &lt;code&gt;getKapacita&lt;/code&gt; vrac&#237; velikost &#269;ek&#225;rny</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160; *</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160; * @return Vrac&#237; hodnotu s velikost&#237; &#269;ek&#225;rny</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160; */</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160; public int getKapacita() {</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160; return fronta. ...();</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160; }</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt"><br />
+</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160; /**</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160; * Metoda {@code toString} sestav&#237; seznam l&#237;stk&#367; ve front&#283; &#269;ek&#225;rny.</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160; * </span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160; * &lt;p&gt;&lt;b&gt;Upozorn&#283;n&#237;:&lt;/b&gt; V&scaron;imn&#283;t&#283; si, &#382;e fronta se vyp&#237;&scaron;e jako</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160; * seznam l&#237;stk&#367;.&lt;/p&gt;</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160; *</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160; * @return vrac&#237; textov&#253; &#345;et&#283;zec se stavem fronty &#269;ek&#225;rny</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160; */</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160; @Override</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160; public String toString() {</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160;&#160;&#160; return &quot;Stav fronty v &#269;ek&#225;rn&#283;:\n&quot; + ...;</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">&#160; }</span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt">}</span></font></div>
+<div align="left" align="left">&nbsp;&nbsp;</div>
+</body>
+</html>

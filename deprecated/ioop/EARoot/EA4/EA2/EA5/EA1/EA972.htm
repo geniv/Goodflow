@@ -1,0 +1,26 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<!--title></title-->
+<link href="../../../../../css/ea.css" rel="stylesheet" type="text/css" />
+<script>
+function initPage(src) {
+	if(parent==this&&(this.location+"").indexOf('EARoot')!=-1)
+		document.location=(this.location+"").substring(0,(this.location+"").indexOf('EARoot'))+"index"+(this.location+"").substring((this.location+"").lastIndexOf('.'))+"?goto="+((this.location+"").substring((this.location+"").indexOf('EARoot')+7,(this.location+"").lastIndexOf('.')).replace(/\//g,':').replace(/EA/g,""));
+	else
+		parent.initPage(src);
+}
+</script>
+</head>
+<body onload="initPage(this);" class="Content">
+<div class="pageHeader"></div>
+<div class="PageBody">
+	<span class="ObjectTitle">  : </span>
+	
+	<div class="ObjectDetailsNotes">&lt;p&gt;&lt;b&gt;Implementa&#269;ní poznámka:&lt;/b&gt;&lt;br /&gt;&lt;/p&gt;&lt;p&gt;Proto&#382;e &#269;asova&#269; po&#269;íta&#269;e b&#283;&#382;í zcela asynchron&#283; vzhledem k b&#283;hu na&#353;eho programu, m&#367;&#382;e dojít ke konflikt&#367;m. Ke konflikt&#367;m m&#367;&#382;e docházet nahodile a mnohdy je jen na n&#283;kterých po&#269;íta&#269;ích. Chyba p&#345;i b&#283;hu m&#367;&#382;e vzniknout tím, &#382;e p&#345;eklada&#269; dovolí optimalizaci.&lt;br /&gt;&lt;/p&gt;&lt;p&gt;&lt;br /&gt;&lt;/p&gt;&lt;p&gt;Odstran&#283;ní problém&#367; s optimalizací:&lt;br /&gt;&lt;/p&gt;&lt;p&gt;Pomocí&#160; klí&#269;ového slova &lt;b&gt;volatile&lt;/b&gt;&lt;br /&gt;&lt;/p&gt;&lt;p&gt;&lt;br /&gt;&lt;/p&gt;&lt;p&gt;&lt;ul&gt;&lt;li&gt;Toto klí&#269;ové slovo zamezí kompilátoru Javy, aby p&#345;i kompilaci zdrojového kódu s touto prom&#283;nou mohl provést optimalizaci. &lt;/li&gt;&lt;br /&gt;&lt;/p&gt;&lt;p&gt;&lt;/ul&gt;&lt;br /&gt;&lt;/p&gt;</div>
+
+<div class="pageFooter"></div>
+ 
+</body>
+</html>

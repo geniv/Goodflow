@@ -1,0 +1,50 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html  xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"><head>
+<title></title>
+<meta http-equiv="content-type" content="text/html;charset=utf-8"/>
+<meta http-equiv="Content-Style-Type" content="text/css"/>
+</head>
+<body>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt"><b>package cz.upce.fei.ioop.soubory.file;</b></span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt"><b><br />
+</b></span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt"><b>import java.io.File;</b></span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt"><b>import java.io.FilenameFilter;</b></span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt"><b><br />
+</b></span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt"><b>public class SeznamAdresare1 {</b></span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt"><b><br />
+</b></span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt"><b>&#160; // vnitrni trida</b></span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt"><b>&#160; class DirFilter implements FilenameFilter {</b></span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt"><b>&#160;&#160;&#160; String filtr;</b></span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt"><b>&#160;&#160;&#160; public DirFilter(String filtr) {</b></span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt"><b>&#160;&#160;&#160;&#160;&#160; this.filtr = filtr;</b></span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt"><b>&#160;&#160;&#160; }</b></span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt"><b>&#160;&#160;&#160; // metoda pro zpetne volani tzv. callback</b></span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt"><b>&#160;&#160;&#160; public boolean accept(File dir, String name) {</b></span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt"><b>&#160;&#160;&#160;&#160;&#160; String f = new File(name).getName();</b></span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt"><b>&#160;&#160;&#160;&#160;&#160; return f.indexOf(filtr) != -1;</b></span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt"><b>&#160;&#160;&#160; }</b></span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt"><b>&#160; }</b></span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt"><b><br />
+</b></span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt"><b>&#160; // doda cely seznam v adresari</b></span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt"><b>&#160; public String[] getSeznam(String cestaStr) {</b></span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt"><b>&#160;&#160;&#160; File cesta = new File(cestaStr);</b></span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt"><b>&#160;&#160;&#160; String[] seznam = cesta.list();</b></span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt"><b>&#160;&#160;&#160; return seznam;</b></span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt"><b>&#160; }</b></span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt"><b><br />
+</b></span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt"><b>&#160; // doda filtrovany seznam adresare</b></span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt"><b>&#160; public String[] getSeznam(String cestaStr, String filtrStr) {</b></span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt"><b>&#160;&#160;&#160; File cesta = new File(cestaStr);</b></span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt"><b>&#160;&#160;&#160; String[] seznam = cesta.list(new DirFilter(filtrStr));</b></span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt"><b>&#160;&#160;&#160; return seznam;</b></span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt"><b>&#160; }</b></span></font></div>
+<div align="left" align="left"><font face="Courier New" size="2"><span style=" font-size:10pt"><b>}</b></span></font></div>
+<div align="left" align="left">&nbsp;&nbsp;</div>
+</body>
+</html>

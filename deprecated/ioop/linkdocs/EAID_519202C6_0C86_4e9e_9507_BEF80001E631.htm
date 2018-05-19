@@ -1,0 +1,60 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html  xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"><head>
+<title></title>
+<meta http-equiv="content-type" content="text/html;charset=utf-8"/>
+<meta http-equiv="Content-Style-Type" content="text/css"/>
+</head>
+<body>
+<p style="margin-left:0mm; margin-right:0mm; text-indent:0mm; margin-top:4.22mm; margin-bottom:1.06mm;"><font color="#0000d2" size="4"><span style=" font-size:14pt"><b>Z&#225;sada</b></span></font></p>
+<div align="left" align="left"><font size="3"><span style=" font-size:12pt"><i>Maximalizovat soudr&#382;nost (cohesion) entit (bal&#237;&#269;k&#367;, t&#345;&#237;d a metod). Ka&#382;d&#225; entita by m&#283;la 
+&#345;e&#353;it jeden konkr&#233;tn&#237; &#250;kol.</i></span></font></div>
+<div align="left" align="left"><font size="2"><span style=" font-size:10pt"><br />
+</span></font></div>
+<p style="margin-left:0mm; margin-right:0mm; text-indent:0mm; margin-top:4.22mm; margin-bottom:1.06mm;"><font color="#0000d2" size="4"><span style=" font-size:14pt"><b>O &#269;em to je?</b></span></font></p>
+<div align="left" align="left"><font size="2"><span style=" font-size:10pt">&#381;&#225;dn&#253; bal&#237;&#269;ek, &#382;&#225;dn&#225; t&#345;&#237;da, &#382;&#225;dn&#225; metoda nemaj&#237; m&#237;t na starosti n&#283;kolik v&#283;c&#237; najednou. M&#283;ly by se 
+soust&#345;edit na jeden &#250;kol.</span></font></div>
+<div align="left" align="left"><font size="2"><span style=" font-size:10pt">M&#367;&#382;eme nam&#237;tnou, &#382;e to nen&#237; mo&#382;n&#233;, proto&#382;e syst&#233;my jsou slo&#382;it&#283;j&scaron;&#237;. Nap&#345;&#237;klad Bankomat mus&#237; 
+autentizovat u&#382;ivatele, mus&#237; ov&#283;&#345;it &#250;&#269;et, mus&#237; zkontrolovat, zda m&#225; p&#345;&#237;slu&scaron;n&#233; bankovky a mus&#237; vydat 
+pen&#237;ze nebo automat na j&#237;zdenky mus&#237; zjistit jakou j&#237;zdenku m&#225; vydat, mus&#237; p&#345;evz&#237;t pen&#237;ze, mus&#237; 
+vytisknout l&#237;stek, mus&#237; vr&#225;tit pen&#237;ze na zp&#283;t.</span></font></div>
+<div align="left" align="left"><font size="2"><span style=" font-size:10pt"><br />
+</span></font></div>
+<p style="margin-left:0mm; margin-right:0mm; text-indent:0mm; margin-top:4.22mm; margin-bottom:1.06mm;"><font color="#0000d2" size="4"><span style=" font-size:14pt"><b>V &#269;em je tedy probl&#233;m?</b></span></font></p>
+<div align="left" align="left"><font size="2"><span style=" font-size:10pt">P&#345;&#237;li&scaron; brzo jsme se soust&#345;edili na detaily. Oba dva automaty maj&#237; jen jeden &#250;kol, kdy&#382; se na n&#283; d&#237;v&#225;me 
+jako na objekty:</span></font></div>
+<ul style="margin-top: 0mm; margin-bottom: 0mm; list-style-type: disk; ">
+<li><font size="2"><span style=" font-size:10pt">bankomat vydat pen&#237;ze</span></font></li>
+<li><font size="2"><span style=" font-size:10pt">j&#237;zdenkov&#253; automat prodat j&#237;zdenku</span></font></li>
+</ul>
+<div align="left" align="left"><font size="2"><span style=" font-size:10pt">Vyjmenovan&#233; detailn&#237; &#250;lohy jsou funkc&#237; podsyst&#233;m&#367; dan&#253;ch automat&#367;.</span></font></div>
+<p style="margin-left:0mm; margin-right:0mm; text-indent:0mm; margin-top:4.22mm; margin-bottom:1.06mm;"><font color="#0000d2" size="4"><span style=" font-size:14pt"><b>Jak to vy&#345;e&scaron;&#237;me?</b></span></font></p>
+<div align="left" align="left"><font size="2"><span style=" font-size:10pt">Pokud je &#269;innost jednoduch&#225; z&#367;staneme u dan&#233; metody. V p&#345;&#237;pad&#283;, &#382;e bude slo&#382;it&#283;j&scaron;&#237;, m&#367;&#382;eme po&#382;&#225;dat o 
+&quot;pomoc&quot; jin&#253; objekt, nebo takov&#253; objekt vytvo&#345;it. Potom ka&#382;d&#225; metoda a ka&#382;d&#253; objekt mus&#237; m&#237;t jedin&#253; a 
+jednoduch&#253; &#250;kol za kter&#253; budou odpov&#283;dn&#253;.</span></font></div>
+<div align="left" align="left"><font size="2"><span style=" font-size:10pt"><br />
+</span></font></div>
+<div align="left" align="left"><font size="2"><span style=" font-size:10pt">D&#367;vody na dodr&#382;ov&#225;n&#237; soudru&#382;nosti jsou</span></font></div>
+<ul style="margin-top: 0mm; margin-bottom: 0mm; list-style-type: disk; ">
+<li><font size="2"><span style=" font-size:10pt">sn&#237;&#382;en&#237; n&#225;chylnosti k chyb&#225;m</span></font></li>
+<li><font size="2"><span style=" font-size:10pt">p&#345;ipravenost programu k budouc&#237;m zm&#283;n&#225;m</span></font></li>
+</ul>
+<div align="left" align="left"><font size="2"><span style=" font-size:10pt">Kdy&#382; entity nejsou soudr&#382;n&#233; rozptyluj&#237; se r&#367;zn&#253;mi povinnostmi. Opravami m&#367;&#382;eme ovlivnit dal&scaron;&#237; &#269;innosti 
+entity. Komplikuje to testov&#225;n&#237;, proto&#382;e se mus&#237; testovat cel&#253; k&#243;d entity.</span></font></div>
+<div align="left" align="left"><font size="2"><span style=" font-size:10pt"><br />
+</span></font></div>
+<p style="margin-left:0mm; margin-right:0mm; text-indent:0mm; margin-top:4.22mm; margin-bottom:1.06mm;"><font color="#0000d2" size="4"><span style=" font-size:14pt"><b>P&#345;&#237;klad z literatury[4]</b></span></font></p>
+<div align="left" align="left"><font size="2"><span style=" font-size:10pt">T&#345;&#237;dy na kreslen&#237; grafick&#253;ch tvar&#367; (obd&#233;ln&#237;k, elipsa,...) byly dopln&#283;ny o v&#253;po&#269;et plochy a obvodu. T&#237;m se 
+staly v&#253;po&#269;ty parametr&#367; geometrick&#253;ch &#250;tvar&#367; z&#225;visl&#233; na jejich vykreslov&#225;n&#237; a naopak.</span></font></div>
+<div align="left" align="left"><font size="2"><span style=" font-size:10pt"><br />
+</span></font></div>
+<div align="left" align="left"><font size="2"><span style=" font-size:10pt">Co to znamen&#225;, kdy&#382; ka&#382;d&#225; t&#345;&#237;da a ka&#382;d&#225; metoda se soust&#345;ed&#237; na jednu v&#283;c?</span></font></div>
+<div align="left" align="left"><font size="2"><span style=" font-size:10pt">K&#243;d se potom bude skl&#225;dat z mnoha mal&#253;ch metod a v&#283;t&scaron;&#237;ho po&#269;tu t&#345;&#237;d. U&#382; v standardn&#237; knihovn&#283; Java je 
+to zcela b&#283;&#382;n&#233; v naprosto drtiv&#233;m po&#269;tu p&#345;&#237;klad&#367;.</span></font></div>
+<div align="left" align="left"><font size="2"><span style=" font-size:10pt"><br />
+</span></font></div>
+<p style="margin-left:0mm; margin-right:0mm; text-indent:0mm; margin-top:4.22mm; margin-bottom:1.06mm;"><font color="#0000d2" size="4"><span style=" font-size:14pt"><b>Obecn&#253; n&#225;zor:</b></span></font></p>
+<div align="left" align="left"><font size="2"><span style=" font-size:10pt">Dlouh&#233; metody jsou obecn&#283; pova&#382;ov&#225;ny za &scaron;patn&#283; navr&#382;en&#233;. Jsou samoz&#345;ejm&#283; p&#345;&#237;pustn&#233; v&#253;jimky, ale 
+m&#283;ly by m&#237;t p&#225;dn&#253; d&#367;vod. Obdobn&#283; to plat&#237; pro velk&#233; t&#345;&#237;dy a objemn&#233; bal&#237;&#269;ky.</span></font></div>
+</body>
+</html>

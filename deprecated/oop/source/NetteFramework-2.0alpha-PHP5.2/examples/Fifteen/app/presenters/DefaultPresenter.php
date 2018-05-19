@@ -1,0 +1,36 @@
+<?php
+
+
+
+class DefaultPresenter extends NPresenter
+{
+
+
+	public function renderDefault()
+	{
+		$this->invalidateControl('round');
+	}
+
+
+
+	/**
+	 * Fifteen game control factory.
+	 * @return mixed
+	 */
+	protected function createComponentFifteen()
+	{
+		$fifteen = new FifteenControl;
+		$fifteen->onGameOver[] = callback($this, 'gameOver');
+		$fifteen->invalidateControl();
+		return $fifteen;
+	}
+
+
+
+	public function gameOver($sender, $round)
+	{
+		$this->template->flash = 'Congratulate!';
+		$this->invalidateControl('flash');
+	}
+
+}

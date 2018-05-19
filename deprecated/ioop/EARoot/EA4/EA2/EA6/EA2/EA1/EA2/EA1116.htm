@@ -1,0 +1,26 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<!--title>Text</title-->
+<link href="../../../../../../../css/ea.css" rel="stylesheet" type="text/css" />
+<script>
+function initPage(src) {
+	if(parent==this&&(this.location+"").indexOf('EARoot')!=-1)
+		document.location=(this.location+"").substring(0,(this.location+"").indexOf('EARoot'))+"index"+(this.location+"").substring((this.location+"").lastIndexOf('.'))+"?goto="+((this.location+"").substring((this.location+"").indexOf('EARoot')+7,(this.location+"").lastIndexOf('.')).replace(/\//g,':').replace(/EA/g,""));
+	else
+		parent.initPage(src);
+}
+</script>
+</head>
+<body onload="initPage(this);" class="Content">
+<div class="pageHeader"></div>
+<div class="PageBody">
+	<span class="ObjectTitle">Text  : </span>
+	
+	<div class="ObjectDetailsNotes">&lt;p&gt;public static class Listek implements Cloneable {&lt;br /&gt;&lt;/p&gt;&lt;p&gt;&lt;br /&gt;&lt;/p&gt;&lt;p&gt;&#160;&#160;&#160; static int pocetVydanychListku = 0;&lt;br /&gt;&lt;/p&gt;&lt;p&gt;&#160;&#160;&#160; private final int cislo;&lt;br /&gt;&lt;/p&gt;&lt;p&gt;&lt;br /&gt;&lt;/p&gt;&lt;p&gt;&#160;&#160;&#160; public Listek() {&lt;br /&gt;&lt;/p&gt;&lt;p&gt;&#160;&#160;&#160;&#160;&#160; cislo = ++pocetVydanychListku;&lt;br /&gt;&lt;/p&gt;&lt;p&gt;&#160;&#160;&#160; }&lt;br /&gt;&lt;/p&gt;&lt;p&gt;&lt;br /&gt;&lt;/p&gt;&lt;p&gt;&#160;&#160;&#160; @Override&lt;br /&gt;&lt;/p&gt;&lt;p&gt;&#160;&#160;&#160; public Object clone() {&lt;br /&gt;&lt;/p&gt;&lt;p&gt;&#160;&#160;&#160;&#160;&#160; try {&lt;br /&gt;&lt;/p&gt;&lt;p&gt;&#160;&#160;&#160;&#160;&#160;&#160;&#160; return super.clone();&lt;br /&gt;&lt;/p&gt;&lt;p&gt;&#160;&#160;&#160;&#160;&#160; } catch (CloneNotSupportedException e) {&lt;br /&gt;&lt;/p&gt;&lt;p&gt;&#160;&#160;&#160;&#160;&#160;&#160;&#160; throw new Error(&quot;Chyba&quot;);&lt;br /&gt;&lt;/p&gt;&lt;p&gt;&#160;&#160;&#160;&#160;&#160; }&lt;br /&gt;&lt;/p&gt;&lt;p&gt;&#160;&#160;&#160; }&lt;br /&gt;&lt;/p&gt;&lt;p&gt;&lt;br /&gt;&lt;/p&gt;&lt;p&gt;&#160;&#160;&#160; @Override&lt;br /&gt;&lt;/p&gt;&lt;p&gt;&#160;&#160;&#160; public boolean equals(Object obj) {&lt;br /&gt;&lt;/p&gt;&lt;p&gt;&#160;&#160;&#160;&#160;&#160; if (obj instanceof Listek) {&lt;br /&gt;&lt;/p&gt;&lt;p&gt;&#160;&#160;&#160;&#160;&#160;&#160;&#160; Listek listek = (Listek) obj;&lt;br /&gt;&lt;/p&gt;&lt;p&gt;&#160;&#160;&#160;&#160;&#160;&#160;&#160; return this.cislo == listek.cislo;&lt;br /&gt;&lt;/p&gt;&lt;p&gt;&#160;&#160;&#160;&#160;&#160; }&lt;br /&gt;&lt;/p&gt;&lt;p&gt;&#160;&#160;&#160;&#160;&#160; return false;&lt;br /&gt;&lt;/p&gt;&lt;p&gt;&#160;&#160;&#160; }&lt;br /&gt;&lt;/p&gt;&lt;p&gt;&lt;br /&gt;&lt;/p&gt;&lt;p&gt; @Override&lt;br /&gt;&lt;/p&gt;&lt;p&gt;&#160;&#160;&#160; public int hashCode() {&lt;br /&gt;&lt;/p&gt;&lt;p&gt;&#160;&#160;&#160;&#160;&#160; int hash = 7;&lt;br /&gt;&lt;/p&gt;&lt;p&gt;&#160;&#160;&#160;&#160;&#160; hash = 29 * hash + this.cislo;&lt;br /&gt;&lt;/p&gt;&lt;p&gt;&#160;&#160;&#160;&#160;&#160; return hash;&lt;br /&gt;&lt;/p&gt;&lt;p&gt;&#160;&#160;&#160; }&lt;br /&gt;&lt;/p&gt;&lt;p&gt;&lt;br /&gt;&lt;/p&gt;&lt;p&gt;&#160;&#160;&#160; public int getCislo() {&lt;br /&gt;&lt;/p&gt;&lt;p&gt;&#160;&#160;&#160;&#160;&#160; return cislo;&lt;br /&gt;&lt;/p&gt;&lt;p&gt;&#160;&#160;&#160; }&lt;br /&gt;&lt;/p&gt;&lt;p&gt;&lt;br /&gt;&lt;/p&gt;&lt;p&gt;&#160;&#160;&#160; @Override&lt;br /&gt;&lt;/p&gt;&lt;p&gt;&#160;&#160;&#160; public String toString() {&lt;br /&gt;&lt;/p&gt;&lt;p&gt;&#160;&#160;&#160;&#160;&#160; return &quot;\n&#160; Listek c.:&quot; + cislo;&lt;br /&gt;&lt;/p&gt;&lt;p&gt;&#160;&#160;&#160; }&lt;br /&gt;&lt;/p&gt;&lt;p&gt;&#160; }&#160;&#160; &lt;br /&gt;&lt;/p&gt;</div>
+
+<div class="pageFooter"></div>
+ 
+</body>
+</html>

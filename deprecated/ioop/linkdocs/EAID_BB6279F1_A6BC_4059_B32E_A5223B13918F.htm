@@ -1,0 +1,48 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+          "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html  xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en"><head>
+<title></title>
+<meta http-equiv="content-type" content="text/html;charset=utf-8"/>
+<meta http-equiv="Content-Style-Type" content="text/css"/>
+</head>
+<body>
+<p style="margin-left:0mm; margin-right:0mm; text-indent:0mm; margin-top:4.22mm; margin-bottom:1.06mm;"><font color="#0000d2" size="4"><span style=" font-size:14pt"><b>Z&#225;sada</b></span></font></p>
+<div align="left" align="left"><font size="3"><span style=" font-size:12pt"><i>Neust&#225;le db&#225;t na d&#367;sledn&#233; zapouzd&#345;en&#237; a skr&#253;v&#225;n&#237; implementace.</i></span></font></div>
+<div align="left" align="left"><font color="#04064c" size="2"><span style=" font-size:10pt"><br />
+</span></font></div>
+<p style="margin-left:0mm; margin-right:0mm; text-indent:0mm; margin-top:4.22mm; margin-bottom:1.06mm;"><font color="#0000d2" size="4"><span style=" font-size:14pt"><b>Nejd&#345;&#237;v co je to implementace?</b></span></font></p>
+<div align="left" align="left"><font size="2"><span style=" font-size:10pt">Souhrn informac&#237;, kter&#233; &#345;&#237;kaj&#237; co program d&#283;l&#225;. Rozhran&#237; je souhrn informac&#237;, kter&#233; o sob&#283; t&#345;&#237;da 
+zve&#345;ej&#328;uje. Naopak implementace je souhrn informac&#237;, kter&#233; se t&#345;&#237;da sna&#382;&#237; maxim&#225;ln&#283; utajit.</span></font></div>
+<div align="left" align="left"><font size="2"><span style=" font-size:10pt"><br />
+</span></font></div>
+<div align="left" align="left"><font size="2"><span style=" font-size:10pt">Nep&#345;&#237;jemnou vlastnost&#237; rozhran&#237; je, &#382;e jakmile se jednou zve&#345;ejn&#237;, je nedotknuteln&#233;. Jakmile se n&#283;jak&#225; 
+implementa&#269;n&#237; informace stane sou&#269;&#225;st&#237; rozhran&#237;, bude sou&#269;&#225;st&#237; nav&#382;dy.</span></font></div>
+<div align="left" align="left"><font color="#04064c"><span style=" font-size:5pt"><br />
+</span></font></div>
+<div align="left" align="left"><font color="#04064c"><span style=" font-size:5pt"><br />
+</span></font></div>
+<p style="margin-left:0mm; margin-right:0mm; text-indent:0mm; margin-top:4.22mm; margin-bottom:1.06mm;"><font color="#0000d2" size="4"><span style=" font-size:14pt"><b>Terminologie nen&#237; jednotn&#225;</b></span></font></p>
+<div align="left" align="left"><font size="2"><span style=" font-size:10pt">N&#283;kte&#345;&#237; pova&#382;uj&#237; skryt&#237; implementace za sou&#269;&#225;st zapouzd&#345;en&#237;. Jin&#237; omezuj&#237; zapouzd&#345;en&#237; na samotn&#233; 
+slu&#269;ov&#225;n&#237; v&#283;c&#237; k sob&#283; (data a metody). Skr&#253;v&#225;n&#237; implementa&#269;n&#237;ch detail&#367; je sou&#269;&#225;st&#237; dob&#345;e proveden&#233;ho</span></font></div>
+<div align="left" align="left"><font size="2"><span style=" font-size:10pt">zapouzd&#345;en&#237;. My se budeme dr&#382;et toho, &#382;e zapouzd&#345;en&#237; je maxim&#225;ln&#283; mo&#382;n&#233; skryt&#237; implementa&#269;n&#237;ch 
+detail&#367; viz </span></font><a href="javascript:top.guidLink('{16257BD3-88BE-4879-9BF0-714E3CFF4426}')"><font size="2"><span style=" font-size:10pt">N&#225;vrhov&#233; vzory</span></font></a><font size="2"><span style=" font-size:10pt">)</span></font></div>
+<div align="left" align="left"><font size="2"><span style=" font-size:10pt"><br />
+</span></font></div>
+<p style="margin-left:0mm; margin-right:0mm; text-indent:0mm; margin-top:4.22mm; margin-bottom:1.06mm;"><font color="#0000d2" size="4"><span style=" font-size:14pt"><b>Co je tedy skryt&#237; implementace?</b></span></font></p>
+<div align="left" align="left"><font size="2"><span style=" font-size:10pt">Spolupracuj&#237;c&#237; programy nesm&#237; v &#382;&#225;dn&#233;m p&#345;&#237;pad&#283; zjistit co n&#225;&scaron; objekt d&#283;l&#225;, &#382;e um&#237; to, co um&#237; a jakkoliv 
+ovlivnit n&#225;&scaron; objekt. A proto zve&#345;rejnit jenom pot&#345;ebn&#233; metody, ostatn&#237; metody (pomocn&#233;) by m&#283;ly b&#253;t 
+soukrom&#233;.&#160; Vytvo&#345;it soukrom&#233; verze pro ty metody, kter&#233; by mohli potomci p&#345;ekr&#253;t a my to nechceme. To 
+plat&#237; pro v&scaron;echny metody pou&#382;it&#233; v konstruktorech - je nutn&#233; pou&#382;&#237;t soukrom&#233;ho dvojn&#237;ka.</span></font></div>
+<div align="left" align="left"><font size="2"><span style=" font-size:10pt"><br />
+</span></font></div>
+<div align="left" align="left"><font size="2"><span style=" font-size:10pt">Naru&scaron;en&#237; k&#243;d&#367; m&#367;&#382;e m&#237;t tyto p&#345;&#237;&#269;iny:</span></font></div>
+<ul style="margin-top: 0mm; margin-bottom: 0mm; list-style-type: disk; ">
+<li><font size="2"><span style=" font-size:10pt">opravdu n&#283;kdo chce &scaron;kodit,</span></font></li>
+<li><font size="2"><span style=" font-size:10pt">n&#283;kdo ud&#283;lal chybu.</span></font></li>
+</ul>
+<div align="left" align="left" style="margin-left:13mm; margin-right:0mm; text-indent:-6mm; margin-top:0.00mm; margin-bottom:0.00mm;"><font size="2"><span style=" font-size:10pt"><br />
+</span></font></div>
+<div align="left" align="left"><font size="2"><span style=" font-size:10pt">V&#253;sledek je stejn&#253; - program p&#345;estane chodit tak, jak m&#225;.</span></font></div>
+<div align="left" align="left">&nbsp;&nbsp;</div>
+</body>
+</html>

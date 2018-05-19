@@ -1,0 +1,26 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<!--title>Text</title-->
+<link href="../../../../css/ea.css" rel="stylesheet" type="text/css" />
+<script>
+function initPage(src) {
+	if(parent==this&&(this.location+"").indexOf('EARoot')!=-1)
+		document.location=(this.location+"").substring(0,(this.location+"").indexOf('EARoot'))+"index"+(this.location+"").substring((this.location+"").lastIndexOf('.'))+"?goto="+((this.location+"").substring((this.location+"").indexOf('EARoot')+7,(this.location+"").lastIndexOf('.')).replace(/\//g,':').replace(/EA/g,""));
+	else
+		parent.initPage(src);
+}
+</script>
+</head>
+<body onload="initPage(this);" class="Content">
+<div class="pageHeader"></div>
+<div class="PageBody">
+	<span class="ObjectTitle">Text  : </span>
+	
+	<div class="ObjectDetailsNotes">&lt;p&gt;&lt;font color=&quot;#004080&quot;&gt;&lt;b&gt;&lt;i&gt;Základní my&#353;lenka&lt;/i&gt;&lt;/b&gt;&lt;/font&gt;&lt;br /&gt;&lt;/p&gt;&lt;p&gt;&lt;ul&gt;&lt;li&gt;Prom&#283;nné nemají být deklarovány jako instance konkrétních t&#345;íd, ale jako &quot;instance&quot; n&#283;jakého datového typu, který není vázán na konkrétní implementaci.&lt;/li&gt;&lt;br /&gt;&lt;/p&gt;&lt;p&gt;&lt;li&gt;Takovým typem je interface nebo abstraktní t&#345;ída.&lt;/li&gt;&lt;br /&gt;&lt;/p&gt;&lt;p&gt;&lt;/ul&gt;&lt;br /&gt;&lt;/p&gt;&lt;p&gt;&lt;font color=&quot;#004080&quot;&gt;&lt;b&gt;&lt;i&gt;Zd&#367;vodn&#283;ní na p&#345;íkladu&lt;/i&gt;&lt;/b&gt;&lt;/font&gt;&lt;br /&gt;&lt;/p&gt;&lt;p&gt;&lt;ul&gt;&lt;li&gt;Prom&#283;nnou v Bankomatu deklarujme jako rozhraní IBanka a potom nás nebude zajímat jaká to bude Banka.&lt;/li&gt;&lt;br /&gt;&lt;/p&gt;&lt;p&gt;&lt;li&gt; Podstatné je to, &#382;e r&#367;zné banky musí implementovat stejné rozhraní. Tím si p&#345;ipravíme p&#367;du pro budoucí efektivní úpravy, nap&#345;íklad tím, &#382;e m&#367;&#382;eme p&#345;idat jakékoliv dal&#353;í banky, ani&#382; bychom museli m&#283;nit kód Bankomatu.&lt;/li&gt;&lt;br /&gt;&lt;/p&gt;&lt;p&gt;&lt;/ul&gt;&lt;br /&gt;&lt;/p&gt;</div>
+
+<div class="pageFooter"></div>
+ 
+</body>
+</html>

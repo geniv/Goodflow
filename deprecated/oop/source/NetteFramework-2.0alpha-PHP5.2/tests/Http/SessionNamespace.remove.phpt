@@ -1,0 +1,29 @@
+<?php
+
+/**
+ * Test: NSessionNamespace remove.
+ *
+ * @author     David Grudl
+ * @package    Nette\Web
+ * @subpackage UnitTests
+ */
+
+
+
+require dirname(__FILE__) . '/../bootstrap.php';
+
+
+
+$session = new NSession;
+$namespace = $session->getNamespace('three');
+$namespace->a = 'apple';
+$namespace->p = 'papaya';
+$namespace['c'] = 'cherry';
+
+$namespace = $session->getNamespace('three');
+Assert::same( 'a=apple&p=papaya&c=cherry', http_build_query($namespace->getIterator()) );
+
+
+// removing
+$namespace->remove();
+Assert::same( '', http_build_query($namespace->getIterator()) );

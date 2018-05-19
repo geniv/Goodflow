@@ -1,0 +1,55 @@
+<?php
+
+  namespace Modules;
+  //use Module\Cron as alias;
+
+  class Cron {
+    //trida modulu hlavni funkce
+
+    public static function __callStatic($name, $args) {
+      //
+      //var_dump($name);
+    }
+
+    public static function metoda($neco) {
+      echo ":{$neco}";
+      //var_dump(__CLASS__, __DIR__, __FILE__, __NAMESPACE__, __METHOD__, __FUNCTION__);
+//new alias;
+
+    }
+
+    public function __construct() {
+      echo "zpracovani konstruktoru cron";
+    }
+
+
+  }
+
+//new alias;
+
+//Pokus1::metoda("a tu je pokus volani tridy CRON<br />");
+
+
+/*
+  class Table_AdminLog {
+    //trida tabulky adminlog
+
+    protected static $model = array('table_name' => "adminlog",
+                                    'table_struct' => array("id" => array("integer", "unsigned", "ai", "pk"),
+                                                            "login" => array("varchar(100)"),
+                                                            "wrongpass"=> array("varchar(100)"),
+                                                            "datum"=> array("datetime"),
+                                                            "ip"=> array("varchar(50)"),
+                                                            "agent"=> array("varchar(300)"),
+                                                            "pocet"=> array("integer", "unsigned"),
+                                                            "language"=> array("varchar(100)"),
+                                                            "cookie"=> array("text"),
+                                                            "get"=> array("text"),
+                                                            ),
+                                    );
+
+    public static function getDataModel() { return self::$model; }
+  }
+*/
+
+?>

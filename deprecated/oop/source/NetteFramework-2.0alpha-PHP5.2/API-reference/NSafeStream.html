@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="generator" content="Nette Framework Apigen" />
+	<title>Class NSafeStream</title>
+
+	<script type="text/javascript" src="media/combined.js"></script>
+	<script type="text/javascript" src="allclasses.js"></script>
+	<link rel="stylesheet" type="text/css" media="all" href="media/style.css?v=2011031101" />
+	<link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+</head>
+
+<body>
+<div id="left">
+	<a href="allclasses.html">All Classes</a>
+
+	<h3>Namespaces</h3>
+	<ul>
+		<li><a href="namespace-none.html" >none</a></li>
+		<li><a href="namespace-Nette.html" class="active">Nette</a></li>
+		<li><a href="namespace-Nette.Application.html" >Nette\Application</a></li>
+		<li><a href="namespace-Nette.Caching.html" >Nette\Caching</a></li>
+		<li><a href="namespace-Nette.Config.html" >Nette\Config</a></li>
+		<li><a href="namespace-Nette.Database.html" >Nette\Database</a></li>
+		<li><a href="namespace-Nette.Drivers.html" >Nette\Drivers</a></li>
+		<li><a href="namespace-Nette.Forms.html" >Nette\Forms</a></li>
+		<li><a href="namespace-Nette.Loaders.html" >Nette\Loaders</a></li>
+		<li><a href="namespace-Nette.Mail.html" >Nette\Mail</a></li>
+		<li><a href="namespace-Nette.Reflection.html" >Nette\Reflection</a></li>
+		<li><a href="namespace-Nette.Security.html" >Nette\Security</a></li>
+		<li><a href="namespace-Nette.Selector.html" >Nette\Selector</a></li>
+		<li><a href="namespace-Nette.Templates.html" >Nette\Templates</a></li>
+		<li><a href="namespace-Nette.Web.html" >Nette\Web</a></li>
+		<li><a href="namespace-PHP.html" >PHP</a></li>
+	</ul>
+
+	<h3>Classes</h3>
+
+	<ul>
+		<li><a href="NAmbiguousServiceException.html" >NAmbiguousServiceException</a></li>
+		<li><a href="NArrayHash.html" >NArrayHash</a></li>
+		<li><a href="NArrayList.html" >NArrayList</a></li>
+		<li><a href="NArrayTools.html" >NArrayTools</a></li>
+		<li><a href="NCallback.html" >NCallback</a></li>
+		<li><a href="NCallbackFilterIterator.html" >NCallbackFilterIterator</a></li>
+		<li><a href="NClosureFix.html" >NClosureFix</a></li>
+		<li><a href="NComponent.html" >NComponent</a></li>
+		<li><a href="NComponentContainer.html" >NComponentContainer</a></li>
+		<li><a href="NConfigurator.html" >NConfigurator</a></li>
+		<li><a href="NContext.html" >NContext</a></li>
+		<li><a href="NDebug.html" >NDebug</a></li>
+		<li><a href="NDebugPanel.html" >NDebugPanel</a></li>
+		<li><a href="NEnvironment.html" >NEnvironment</a></li>
+		<li><a href="NFinder.html" >NFinder</a></li>
+		<li><a href="NFramework.html" >NFramework</a></li>
+		<li><a href="NFreezableObject.html" >NFreezableObject</a></li>
+		<li><a href="NGenericRecursiveIterator.html" >NGenericRecursiveIterator</a></li>
+		<li><a href="NImage.html" >NImage</a></li>
+		<li><a href="NInstanceFilterIterator.html" >NInstanceFilterIterator</a></li>
+		<li><a href="NJson.html" >NJson</a></li>
+		<li><a href="NJsonException.html" >NJsonException</a></li>
+		<li><a href="NMapIterator.html" >NMapIterator</a></li>
+		<li><a href="NNeon.html" >NNeon</a></li>
+		<li><a href="NNeonException.html" >NNeonException</a></li>
+		<li><a href="NObject.html" >NObject</a></li>
+		<li><a href="NObjectMixin.html" >NObjectMixin</a></li>
+		<li><a href="NPaginator.html" >NPaginator</a></li>
+		<li><a href="NRecursiveCallbackFilterIterator.html" >NRecursiveCallbackFilterIterator</a></li>
+		<li><a href="NRegexpException.html" >NRegexpException</a></li>
+		<li><a href="NSafeStream.html" class="active">NSafeStream</a></li>
+		<li><a href="NSmartCachingIterator.html" >NSmartCachingIterator</a></li>
+		<li><a href="NString.html" >NString</a></li>
+		<li><a href="NTokenizer.html" >NTokenizer</a></li>
+		<li><a href="NTokenizerException.html" >NTokenizerException</a></li>
+		<li><a href="NTools.html" >NTools</a></li>
+	</ul>
+
+	<h3>Interfaces</h3>
+
+	<ul>
+		<li><a href="IComponent.html" >IComponent</a></li>
+		<li><a href="IComponentContainer.html" >IComponentContainer</a></li>
+		<li><a href="IContext.html" >IContext</a></li>
+		<li><a href="IDebugPanel.html" >IDebugPanel</a></li>
+		<li><a href="IFreezable.html" >IFreezable</a></li>
+		<li><a href="ITranslator.html" >ITranslator</a></li>
+	</ul>
+</div>
+
+<div id="right">
+	<form action="http://www.google.com/cse" id="search" onsubmit="if(this.q.value.indexOf('more:')==-1)this.q.value+=' more:api'">
+		<input type="hidden" name="cx" value="011549293477758430224:vxofa9ufnhc" /><input type="hidden" name="ie" value="UTF-8" /><input type="text" name="q" class="text" /><input type="submit" value="Search" />
+	</form>
+
+<div id="navigation">
+	<ul>
+		<li><a href="overview.html" title="Summary of all namespaces">Overview</a></li>		<li class="active">Class</li>
+		<li><a href="elements.html">Elements</a></li>
+	</ul>
+</div>
+
+<div id="content">
+	<div id="classSummary">
+		<h1>Class NSafeStream</h1>
+		<div class="classDescription">
+
+		
+<p>Provides atomicity and isolation for thread safe file manipulation using
+stream safe://</p>
+
+<pre><span class="php-keyword2">file_put_contents</span>(<span
+class="php-quote">'safe://myfile.txt'</span>, <span
+class="php-var">$content</span>);
+
+<span class="php-var">$content</span> = <span
+class="php-keyword2">file_get_contents</span>(<span
+class="php-quote">'safe://myfile.txt'</span>);
+
+<span
+class="php-keyword2">unlink</span>(<span
+class="php-quote">'safe://myfile.txt'</span>);</pre>
+
+		</div>
+
+		<div class="classInfo">
+			<b>Final Class</b><br />
+				<b>Author:</b> David Grudl<br />
+			<b>Located at</b> <a href="source-tools.SafeStream.php.html#15">/tools/SafeStream.php</a><br />
+		</div>
+	</div>
+
+	<div id="methodSummary">
+
+		<table class="summary">
+		<caption>Method Summary</caption>
+		<tr data-order="0 register" id="_register">
+			<td align="right" width="1%"><code class="nowrap">
+				 public static
+				bool
+				
+				</code>
+			</td>
+
+			<td>
+			<a class="anchor" href="#_register">#</a>
+			<code class="nowrap">
+				<a href="source-tools.SafeStream.php.html#53" title="go to source code"><b>register</b></a>(
+			)</code>
+
+			<div class="short">
+				
+<p>Registers protocol ‚safe://‘.</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>Registers protocol ‚safe://‘.</p>
+
+
+
+
+
+
+			</div>
+			</td>
+		</tr>
+		<tr data-order="1 stream_open" id="_stream_open">
+			<td align="right" width="1%"><code class="nowrap">
+				 public 
+				bool
+				
+				</code>
+			</td>
+
+			<td>
+			<a class="anchor" href="#_stream_open">#</a>
+			<code class="nowrap">
+				<a href="source-tools.SafeStream.php.html#64" title="go to source code"><b>stream_open</b></a>(
+					string
+					<var>$path</var>, 
+					string
+					<var>$mode</var>, 
+					int
+					<var>$options</var>, 
+					string
+					<var>&amp; $opened_path</var>
+			)</code>
+
+			<div class="short">
+				
+<p>Opens file.</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>Opens file.</p>
+
+
+
+					<h4>Parameters</h4>
+					<div class="smallList">
+						<code>$path</code> string    file name with stream protocol<br />
+						<code>$mode</code> string    mode - see fopen()<br />
+						<code>$options</code> int       STREAM_USE_PATH, STREAM_REPORT_ERRORS<br />
+						<code>$opened_path</code> string    full path<br />
+					</div>
+
+					<h4>Returns</h4>
+					<div class="smallList">bool      TRUE on success or FALSE on failure</div>
+
+
+			</div>
+			</td>
+		</tr>
+		<tr data-order="1 stream_close" id="_stream_close">
+			<td align="right" width="1%"><code class="nowrap">
+				 public 
+				void
+				
+				</code>
+			</td>
+
+			<td>
+			<a class="anchor" href="#_stream_close">#</a>
+			<code class="nowrap">
+				<a href="source-tools.SafeStream.php.html#173" title="go to source code"><b>stream_close</b></a>(
+			)</code>
+
+			<div class="short">
+				
+<p>Closes file.</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>Closes file.</p>
+
+
+
+
+
+
+			</div>
+			</td>
+		</tr>
+		<tr data-order="1 stream_read" id="_stream_read">
+			<td align="right" width="1%"><code class="nowrap">
+				 public 
+				string
+				
+				</code>
+			</td>
+
+			<td>
+			<a class="anchor" href="#_stream_read">#</a>
+			<code class="nowrap">
+				<a href="source-tools.SafeStream.php.html#199" title="go to source code"><b>stream_read</b></a>(
+					int
+					<var>$length</var>
+			)</code>
+
+			<div class="short">
+				
+<p>Reads up to length bytes from the file.</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>Reads up to length bytes from the file.</p>
+
+
+
+					<h4>Parameters</h4>
+					<div class="smallList">
+						<code>$length</code> int    length<br />
+					</div>
+
+
+
+			</div>
+			</td>
+		</tr>
+		<tr data-order="1 stream_write" id="_stream_write">
+			<td align="right" width="1%"><code class="nowrap">
+				 public 
+				int
+				
+				</code>
+			</td>
+
+			<td>
+			<a class="anchor" href="#_stream_write">#</a>
+			<code class="nowrap">
+				<a href="source-tools.SafeStream.php.html#211" title="go to source code"><b>stream_write</b></a>(
+					string
+					<var>$data</var>
+			)</code>
+
+			<div class="short">
+				
+<p>Writes the string to the file.</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>Writes the string to the file.</p>
+
+
+
+					<h4>Parameters</h4>
+					<div class="smallList">
+						<code>$data</code> string    data to write<br />
+					</div>
+
+					<h4>Returns</h4>
+					<div class="smallList">int      number of bytes that were successfully stored</div>
+
+
+			</div>
+			</td>
+		</tr>
+		<tr data-order="1 stream_tell" id="_stream_tell">
+			<td align="right" width="1%"><code class="nowrap">
+				 public 
+				int
+				
+				</code>
+			</td>
+
+			<td>
+			<a class="anchor" href="#_stream_tell">#</a>
+			<code class="nowrap">
+				<a href="source-tools.SafeStream.php.html#230" title="go to source code"><b>stream_tell</b></a>(
+			)</code>
+
+			<div class="short">
+				
+<p>Returns the position of the file.</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>Returns the position of the file.</p>
+
+
+
+
+
+
+			</div>
+			</td>
+		</tr>
+		<tr data-order="1 stream_eof" id="_stream_eof">
+			<td align="right" width="1%"><code class="nowrap">
+				 public 
+				bool
+				
+				</code>
+			</td>
+
+			<td>
+			<a class="anchor" href="#_stream_eof">#</a>
+			<code class="nowrap">
+				<a href="source-tools.SafeStream.php.html#241" title="go to source code"><b>stream_eof</b></a>(
+			)</code>
+
+			<div class="short">
+				
+<p>Returns TRUE if the file pointer is at end-of-file.</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>Returns TRUE if the file pointer is at end-of-file.</p>
+
+
+
+
+
+
+			</div>
+			</td>
+		</tr>
+		<tr data-order="1 stream_seek" id="_stream_seek">
+			<td align="right" width="1%"><code class="nowrap">
+				 public 
+				int
+				
+				</code>
+			</td>
+
+			<td>
+			<a class="anchor" href="#_stream_seek">#</a>
+			<code class="nowrap">
+				<a href="source-tools.SafeStream.php.html#252" title="go to source code"><b>stream_seek</b></a>(
+					int
+					<var>$offset</var>, 
+					int
+					<var>$whence</var>
+			)</code>
+
+			<div class="short">
+				
+<p>Sets the file position indicator for the file.</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>Sets the file position indicator for the file.</p>
+
+
+
+					<h4>Parameters</h4>
+					<div class="smallList">
+						<code>$offset</code> int    position<br />
+						<code>$whence</code> int    see fseek()<br />
+					</div>
+
+					<h4>Returns</h4>
+					<div class="smallList">int   Return TRUE on success</div>
+
+
+			</div>
+			</td>
+		</tr>
+		<tr data-order="1 stream_stat" id="_stream_stat">
+			<td align="right" width="1%"><code class="nowrap">
+				 public 
+				array
+				
+				</code>
+			</td>
+
+			<td>
+			<a class="anchor" href="#_stream_stat">#</a>
+			<code class="nowrap">
+				<a href="source-tools.SafeStream.php.html#265" title="go to source code"><b>stream_stat</b></a>(
+			)</code>
+
+			<div class="short">
+				
+<p>Gets information about a file referenced by $this-&gt;tempHandle.</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>Gets information about a file referenced by $this-&gt;tempHandle.</p>
+
+
+
+
+
+
+			</div>
+			</td>
+		</tr>
+		<tr data-order="1 url_stat" id="_url_stat">
+			<td align="right" width="1%"><code class="nowrap">
+				 public 
+				array
+				
+				</code>
+			</td>
+
+			<td>
+			<a class="anchor" href="#_url_stat">#</a>
+			<code class="nowrap">
+				<a href="source-tools.SafeStream.php.html#276" title="go to source code"><b>url_stat</b></a>(
+					string
+					<var>$path</var>, 
+					int
+					<var>$flags</var>
+			)</code>
+
+			<div class="short">
+				
+<p>Gets information about a file referenced by filename.</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>Gets information about a file referenced by filename.</p>
+
+
+
+					<h4>Parameters</h4>
+					<div class="smallList">
+						<code>$path</code> string    file name<br />
+						<code>$flags</code> int       STREAM_URL_STAT_LINK, STREAM_URL_STAT_QUIET<br />
+					</div>
+
+
+
+			</div>
+			</td>
+		</tr>
+		<tr data-order="1 unlink" id="_unlink">
+			<td align="right" width="1%"><code class="nowrap">
+				 public 
+				bool
+				
+				</code>
+			</td>
+
+			<td>
+			<a class="anchor" href="#_unlink">#</a>
+			<code class="nowrap">
+				<a href="source-tools.SafeStream.php.html#291" title="go to source code"><b>unlink</b></a>(
+					string
+					<var>$path</var>
+			)</code>
+
+			<div class="short">
+				
+<p>Deletes a file.</p>
+
+			</div>
+
+			<div class="detailed">
+				
+<p>Deletes a file. On Windows unlink is not allowed till file is opened</p>
+
+
+
+					<h4>Parameters</h4>
+					<div class="smallList">
+						<code>$path</code> string    file name with stream protocol<br />
+					</div>
+
+					<h4>Returns</h4>
+					<div class="smallList">bool      TRUE on success or FALSE on failure</div>
+
+
+			</div>
+			</td>
+		</tr>
+		</table>
+	</div>
+
+
+
+	<div id="constantSummary">
+
+		<table class="summary">
+		<caption>Constant Summary</caption>
+		<tr data-order="PROTOCOL" id="PROTOCOL">
+			<td align="right" width="1%"><code><b>PROTOCOL</b></code></td>
+			<td><code><span class="php-quote">'safe'</span></code> <a href="#PROTOCOL" class="anchor">#</a></td>
+		</tr>
+		</table>
+	</div>
+
+
+
+
+</div>
+
+	<div id="footer">
+		Nette Framework documentation generated by <a href="http://github.com/nette/apigen">Apigen</a>
+	</div>
+</div>
+</body>
+</html>
