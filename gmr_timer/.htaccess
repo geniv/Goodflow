@@ -1,0 +1,31 @@
+#AuthUserFile /var/www/gfdesign.cz/timer/.htpasswd
+AuthUserFile /var/www/www/git/goodflow/gmr_timer/.htpasswd
+AuthName "GMR Timer"
+AuthType Basic
+Require valid-user
+
+# disable directory listing
+Options -Indexes
+
+<IfModule mod_rewrite.c>
+	# zapinani rewrite
+	RewriteEngine on
+
+	# nasmerovani korenu - zapinat jen na serveru!!!!
+	#RewriteBase /
+
+	# front controller
+	RewriteCond %{REQUEST_FILENAME} !-f
+	RewriteCond %{REQUEST_FILENAME} !-d
+
+	RewriteRule ^(.*)$ index.php [L]
+</IfModule>
+
+#<IfModule mod_php5.c>
+# 	php_value upload_max_filesize 40M
+#	php_value post_max_size 40M
+#	php_value upload_max_filesize 64M
+#	php_value post_max_size 64M
+#	php_value max_execution_time 60
+#	php_value max_file_uploads 30
+#</IfModule>

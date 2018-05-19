@@ -1,0 +1,892 @@
+.header-wrapper {
+    background-color: @blue2;
+    border-bottom: 1px solid darken(@blue2, 12%);
+    .navbar {
+        border: none;
+        .navbar-brand {
+            color: darken(@blue3, 20%);
+            &:hover {
+                color: darken(@blue3, 40%);
+            }
+        }
+    }
+}
+
+.content-wrapper {
+
+
+
+    .wrap_add_task {
+        padding-left: 30px;
+
+
+
+        a.add_task {
+            display: block;
+
+            margin-top: -1px;
+
+            background-color: @blue2;
+            border-color: darken(@blue2, 12%);
+            border-top: 0;
+            color: darken(@blue3, 10%);
+            .el-border-radius(0, @border-radius-base, @border-radius-base, 0);
+            &:hover {
+                background-color: darken(@blue2, 10%);
+                border-color: darken(@blue2, 20%);
+                color: #333;
+            }
+        }
+    }
+
+    label.btn {
+        font-size: 11px;
+    }
+
+
+
+    .modal-content {
+        .modal-footer {
+            margin-top: 0;
+/*
+            .btn-info {
+                background-color: @blue4;
+                &:hover {
+                    background-color: darken(@blue4, 10%);
+                }
+            }
+*/
+        }
+    }
+
+
+
+
+
+
+    .content-row {
+        margin-top: 20px;
+
+
+
+        .panel-heading {
+            h3 {
+                font-size: 18px;
+            }
+            p {
+                margin-bottom: 0;
+                a {
+                    font-size: 11px;
+/*
+                    color: darken(@blue3, 10%);
+                    background-color: lighten(@blue2, 5%);
+                    border-color: darken(@blue2, 20%);
+                    &:hover {
+                        color: darken(@blue3, 20%);
+                        background-color: darken(@blue2, 10%);
+                        border-color: darken(@blue2, 25%);
+                    }
+*/
+                }
+            }
+        }
+
+
+
+        #bezici_task {
+            // #DS-Digital(normal, normal);
+
+
+
+
+            .panel-body {
+                padding: 0;
+                p {
+                    margin-bottom: 0;
+                    &.now-projekt-time {
+                        line-height: 0.8;
+                        span {
+                            display: block;
+                            margin: 5px 5px 0 13px;
+                            font-size: 12px;
+                            em {
+                                font-style: normal;
+                                #DS-Digital(normal, normal);
+                                font-size: 30px;
+                            }
+                        }
+                        strong {
+                            display: block;
+                            margin-left: 8px;
+                            font-weight: normal;
+                            #DS-Digital(normal, normal);
+                            font-size: 100px;
+                        }
+                    }
+                    &.now-projekt-desc {
+                        display: block;
+                        margin-bottom: 15px;
+                        text-align: center;
+                        font-size: 12px;
+                        line-height: 1;
+                    }
+                }
+                hr {
+                    margin: 0 0 15px;
+                }
+                .panel-danger {
+                    margin: 15px 10px;
+                    .panel-heading {
+                        p {
+                            line-height: 1.5;
+                        }
+                    }
+                    .time-pause {
+                        padding: 0;
+
+                        p {
+                            margin-bottom: 0;
+                            &.now-projekt-time {
+                                line-height: 0.8;
+                                span {
+                                    display: block;
+                                    margin: 5px 5px 0 6px;
+                                    font-size: 12px;
+                                    em {
+                                        font-style: normal;
+                                        #DS-Digital(normal, normal);
+                                        font-size: 30px;
+                                    }
+                                }
+                                strong {
+                                    display: block;
+                                    margin-left: 5px;
+                                    font-weight: normal;
+                                    #DS-Digital(normal, normal);
+                                    font-size: 45px;
+                                }
+                            }
+                            &.now-projekt-desc {
+                                display: block;
+                                margin-bottom: 5px;
+                                text-align: center;
+                                font-size: 12px;
+                                line-height: 1;
+                            }
+                        }
+
+
+
+                    }
+                }
+            }
+/*
+            .panel-danger {
+                hr {
+                    border-color: @state-danger-border;
+                }
+            }
+*/
+
+
+            &.preload {
+                background: url(../images/ajax-loader.gif) no-repeat -1000px -1000px;
+            }
+
+        }
+
+        .panel {
+            // margin-bottom: 15px; // druha varianta
+            .panel {
+                &:last-child {
+                    margin-bottom: 5px;
+                    // margin-bottom: 0; // druha varianta
+                }
+            }
+        }
+
+        .projekt-info {
+            padding-bottom: 15px;
+            p {
+                margin-bottom: 0;
+                &.projekt-time {
+                    line-height: 0.8;
+                    span {
+                        display: block;
+                        margin: 5px 5px 0 9px;
+                        font-size: 12px;
+                        em {
+                            font-style: normal;
+                            #DS-Digital(normal, normal);
+                            font-size: 30px;
+                        }
+                    }
+                    strong {
+                        display: block;
+                        margin-left: 5px;
+                        font-weight: normal;
+                        #DS-Digital(normal, normal);
+                        font-size: 65px;
+                    }
+                }
+                &.projekt-desc {
+                    display: block;
+                    text-align: center;
+                    font-size: 12px;
+                    line-height: 1;
+                }
+            }
+        }
+        .projekt-listing {
+
+            &.projekt-listing-padd {
+                padding: 10px;
+            }
+            &.projekt-listing-nopadd {
+                padding: 0;
+            }
+
+
+
+            p {
+                margin-bottom: 0;
+                padding-left: 15px;
+                &.projekt-time {
+                    line-height: 0.8;
+                    span {
+                        display: block;
+                        margin: 5px 5px 0 20px;
+                        font-size: 12px;
+                        em {
+                            font-style: normal;
+                            #DS-Digital(normal, normal);
+                            font-size: 30px;
+                        }
+                    }
+                    strong {
+                        display: block;
+                        margin-left: 16px;
+                        font-weight: normal;
+                        #DS-Digital(normal, normal);
+                        font-size: 85px;
+                    }
+                }
+                &.projekt-desc {
+                    display: block;
+                    text-align: center;
+                    font-size: 12px;
+                    line-height: 1;
+                }
+            }
+            .time-desc {
+                margin-top: 10px;
+
+                p {
+                    padding: 5px;
+                    white-space: pre-wrap;
+                }
+
+
+            }
+
+
+
+
+
+            .input-group {
+                margin-bottom: 10px;
+                .input-group-addon {
+                    background-color: @state-success-bg;
+                    border-color: darken(@state-success-bg, 15%);
+                }
+                textarea {
+                    border-color: darken(@state-success-bg, 15%);
+                }
+            }
+            .btn-group {
+                .btn-success {
+                    background-color: @state-success-bg;
+                    border-color: darken(@state-success-bg, 15%);
+                    &:hover {
+                        background-color: darken(@state-success-bg, 10%);
+                        border-color: darken(@state-success-bg, 25%);
+                    }
+                }
+            }
+            textarea {
+                min-height: 100px;
+            }
+        }
+/*
+        .panel {
+            .panel {
+                .panel-heading {
+                    background-color: lighten(@blue2, 10%);
+                    border-color: darken(@blue2, 18%);
+                }
+            }
+        }
+
+*/
+
+
+
+// content zde
+
+
+
+
+
+
+    }
+
+
+
+    #save_info_box {
+        display: none;
+        position: fixed;
+        bottom: 3%;
+        right: 3%;
+        padding-left: 40px;
+        background: @state-info-bg url(../images/ajax-loader.gif) no-repeat 5px center;
+        font-weight: bold;
+        font-size: 11px;
+    }
+
+
+
+
+
+
+}
+
+
+
+/*
+h3 {
+    .el-transition(0.6s, @easeOutExpo);
+
+    #DS-Digital(normal, normal);
+    font-size: 100px;
+
+    &:hover {
+        background-color: red;
+    }
+
+}
+
+
+*/
+
+
+
+
+
+
+
+// 0 - 480px
+@media (max-width: @screen-xs-min) {
+
+    .col-xs-5, .col-xs-7 {
+        width: auto;
+        float: none;
+    }
+    .content-wrapper {
+        .wrap_add_task {
+            a.add_task {
+                padding: 2px 6px;
+                font-size: 11px;
+            }
+        }
+        .content-row {
+            label.btn {
+                font-size: 7px;
+            }
+            .panel-heading {
+                padding: 3px 6px;
+                h3 {
+                    font-size: 10px;
+                    font-weight: bold;
+                    line-height: 1.7;
+                }
+                p {
+                    margin-top: 2px;
+                    a {
+                        font-size: 7px;
+                    }
+                }
+            }
+            #bezici_task {
+                .panel-body {
+                    p {
+                        &.now-projekt-time {
+                            span {
+                                margin-left: 9px;
+                            }
+                            strong {
+                                font-size: 90px;
+                            }
+                        }
+                        &.now-projekt-desc {
+                            font-size: 12px;
+                        }
+                    }
+                    .panel-danger {
+                        .panel-heading {
+                            h3 {
+                                font-size: 11px;
+                                font-weight: bold;
+                                line-height: 1.7;
+                            }
+                            p {
+                                line-height: 1.6;
+                                font-size: 9px;
+                            }
+                        }
+                        .time-pause {
+                            p {
+                                &.now-projekt-time {
+                                    span {
+                                        margin-left: 5px;
+                                        font-size: 12px;
+                                        em {
+                                            font-size: 22px;
+                                        }
+                                    }
+                                    strong {
+                                        font-size: 39px;
+                                    }
+                                }
+                                &.now-projekt-desc {
+                                    margin-top: 3px;
+                                    font-size: 10px;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            .projekt-info {
+                padding-bottom: 10px;
+                .col-xs-4 {
+                    padding: 0;
+                    &:nth-child(1) {
+                        padding-left: 15px;
+                    }
+                    &:nth-child(3) {
+                        padding-right: 15px;
+                    }
+                }
+                p {
+                    &.projekt-time {
+                        span {
+                            margin-left: 5px;
+                            font-size: 11px;
+                            em {
+                                font-size: 18px;
+                            }
+                        }
+                        strong {
+                            font-size: 26px;
+                        }
+                    }
+                    &.projekt-desc {
+                        margin-top: 1px;
+                        font-size: 8px;
+                    }
+                }
+            }
+            .panel-info {
+                .panel-body {
+                    .panel-heading {
+                        h3 {
+                            font-size: 8px;
+                            line-height: 2.6;
+                        }
+                    }
+                }
+            }
+            .projekt-listing {
+                p {
+                    padding-left: 0px;
+                    &.projekt-time {
+                        span {
+                            font-size: 11px;
+                            margin-left: 6px;
+                            em {
+                                font-size: 21px;
+                            }
+                        }
+                        strong {
+                            margin-left: 6px;
+                            font-size: 34px;
+                        }
+                    }
+                    &.projekt-desc {
+                        margin-top: 2px;
+                        font-size: 11px;
+                    }
+                }
+                .time-desc {
+                    p {
+                        font-size: 11px;
+                    }
+                }
+                .btn {
+                    padding: 2px 0;
+                    font-size: 11px;
+                }
+            }
+        }
+    }
+
+}
+
+
+
+
+
+// 0 - 767px
+@media (max-width: @screen-xs-max) {
+
+
+
+
+
+}
+
+// 480px - 767px
+@media (min-width: @screen-xs-min) and (max-width: @screen-xs-max) {
+
+    .content-wrapper {
+        .wrap_add_task {
+            a.add_task {
+                padding: 2px 6px;
+                font-size: 11px;
+            }
+        }
+        .content-row {
+            label.btn {
+                font-size: 7px;
+            }
+            .panel-heading {
+                padding: 3px 6px;
+                h3 {
+                    font-size: 10px;
+                    font-weight: bold;
+                    line-height: 1.7;
+                }
+                p {
+                    margin-top: 2px;
+                    a {
+                        font-size: 7px;
+                    }
+                }
+            }
+            #bezici_task {
+                .panel-body {
+                    p {
+                        &.now-projekt-time {
+                            span {
+                                margin-left: 9px;
+                            }
+                            strong {
+                                font-size: 45px;
+                            }
+                        }
+                        &.now-projekt-desc {
+                            font-size: 11px;
+                        }
+                    }
+                    .panel-danger {
+                        .panel-heading {
+                            h3 {
+                                font-size: 11px;
+                                font-weight: bold;
+                                line-height: 1.7;
+                            }
+                            p {
+                                line-height: 1.6;
+                                font-size: 9px;
+                            }
+                        }
+                        .time-pause {
+                            p {
+                                &.now-projekt-time {
+                                    span {
+                                        margin-left: 5px;
+                                        font-size: 10px;
+                                        em {
+                                            font-size: 18px;
+                                        }
+                                    }
+                                    strong {
+                                        font-size: 19px;
+                                    }
+                                }
+                                &.now-projekt-desc {
+                                    margin-top: 3px;
+                                    font-size: 9px;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            .projekt-info {
+                padding-bottom: 10px;
+                .col-xs-4 {
+                    padding: 0;
+                    &:nth-child(1) {
+                        padding-left: 15px;
+                    }
+                    &:nth-child(3) {
+                        padding-right: 15px;
+                    }
+                }
+                p {
+                    &.projekt-time {
+                        span {
+                            margin-left: 5px;
+                            font-size: 11px;
+                            em {
+                                font-size: 18px;
+                            }
+                        }
+                        strong {
+                            font-size: 20px;
+                        }
+                    }
+                    &.projekt-desc {
+                        margin-top: 1px;
+                        font-size: 8px;
+                    }
+                }
+            }
+            .panel-info {
+                .panel-body {
+                    .panel-heading {
+                        h3 {
+                            font-size: 8px;
+                        }
+                    }
+                }
+            }
+            .projekt-listing {
+                p {
+                    padding-left: 0px;
+                    &.projekt-time {
+                        span {
+                            font-size: 11px;
+                            margin-left: 6px;
+                            em {
+                                font-size: 21px;
+                            }
+                        }
+                        strong {
+                            margin-left: 6px;
+                            font-size: 24px;
+                        }
+                    }
+                    &.projekt-desc {
+                        margin-top: 2px;
+                        font-size: 11px;
+                    }
+                }
+                .time-desc {
+                    p {
+                        font-size: 11px;
+                    }
+                }
+                .btn {
+                    padding: 2px 0;
+                    font-size: 11px;
+                }
+            }
+        }
+    }
+
+}
+
+// 480px - ?
+@media (min-width: @screen-xs-min) {
+
+}
+
+// 768px - ?
+@media (min-width: @screen-sm-min) {
+
+}
+
+// 768px - 991px
+@media (min-width: @screen-sm-min) and (max-width: @screen-sm-max) {
+
+    .content-wrapper {
+        .content-row {
+            label.btn {
+                font-size: 10px;
+            }
+            .panel-heading {
+                padding: 6px 8px;
+                h3 {
+                    font-size: 13px;
+                    font-weight: bold;
+                    line-height: 1.6;
+                }
+                p {
+                    margin-top: 1px;
+                    a {
+                        font-size: 10px;
+                    }
+                }
+            }
+            #bezici_task {
+                .panel-body {
+                    p {
+                        &.now-projekt-time {
+                            strong {
+                                font-size: 60px;
+                            }
+                        }
+                    }
+                    .panel-danger {
+                        .panel-heading {
+                            h3 {
+                                font-size: 14px;
+                                font-weight: bold;
+                                line-height: 1.2;
+                            }
+                            p {
+                                font-size: 12px;
+                            }
+                        }
+                        .time-pause {
+                            p {
+                                &.now-projekt-time {
+                                    span {
+                                        em {
+                                            font-size: 23px;
+                                        }
+                                    }
+                                    strong {
+                                        font-size: 26px;
+                                    }
+                                }
+                                &.now-projekt-desc {
+                                    font-size: 11px;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            .projekt-info {
+                p {
+                    &.projekt-time {
+                        strong {
+                            font-size: 37px;
+                        }
+                    }
+                    &.projekt-desc {
+                        font-size: 11px;
+                    }
+                }
+            }
+            .projekt-listing {
+                p {
+                    padding-left: 0px;
+                    &.projekt-time {
+                        strong {
+                            font-size: 52px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+}
+
+// 992px - ?
+@media (min-width: @screen-md-min) {
+
+}
+
+// 992px - 1199px
+@media (min-width: @screen-md-min) and (max-width: @screen-md-max) {
+
+    .content-wrapper {
+        .content-row {
+            .panel-heading {
+                padding: 8px 10px;
+                h3 {
+                    font-size: 14px;
+                    font-weight: bold;
+                    line-height: 1.5;
+                }
+            }
+            #bezici_task {
+                .panel-body {
+                    p {
+                        &.now-projekt-time {
+                            strong {
+                                font-size: 80px;
+                            }
+                        }
+                    }
+                    .panel-danger {
+                        .panel-heading {
+                            h3 {
+                                font-size: 14px;
+                                font-weight: bold;
+                                line-height: 1.2;
+                            }
+                            p {
+                                font-size: 12px;
+                            }
+                        }
+                        .time-pause {
+                            p {
+                                &.now-projekt-time {
+                                    span {
+                                        em {
+                                            font-size: 25px;
+                                        }
+                                    }
+                                    strong {
+                                        font-size: 35px;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            .projekt-info {
+                p {
+                    &.projekt-time {
+                        strong {
+                            font-size: 52px;
+                        }
+                    }
+                }
+            }
+            .projekt-listing {
+                p {
+                    padding-left: 5px;
+                    &.projekt-time {
+                        strong {
+                            font-size: 70px;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+}
+
+// 1200px - ?
+@media (min-width: @screen-lg-min) {
+
+}

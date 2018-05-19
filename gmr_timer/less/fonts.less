@@ -1,0 +1,59 @@
+@font-face {
+    font-family: 'DS-Digital-Normal';
+    src: url('../fonts/ds-digi-webfont.eot');
+    src: url('../fonts/ds-digi-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/ds-digi-webfont.woff') format('woff'),
+         url('../fonts/ds-digi-webfont.ttf') format('truetype'),
+         url('../fonts/ds-digi-webfont.svg#ds-digitalnormal') format('svg');
+}
+
+@font-face {
+    font-family: 'DS-Digital-Bold';
+    src: url('../fonts/ds-digib-webfont.eot');
+    src: url('../fonts/ds-digib-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/ds-digib-webfont.woff') format('woff'),
+         url('../fonts/ds-digib-webfont.ttf') format('truetype'),
+         url('../fonts/ds-digib-webfont.svg#ds-digitalbold') format('svg');
+}
+
+@font-face {
+    font-family: 'DS-Digital-Italic';
+    src: url('../fonts/ds-digii-webfont.eot');
+    src: url('../fonts/ds-digii-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/ds-digii-webfont.woff') format('woff'),
+         url('../fonts/ds-digii-webfont.ttf') format('truetype'),
+         url('../fonts/ds-digii-webfont.svg#ds-digitalitalic') format('svg');
+}
+
+@font-face {
+    font-family: 'DS-Digital-Bold-Italic';
+    src: url('../fonts/ds-digit-webfont.eot');
+    src: url('../fonts/ds-digit-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/ds-digit-webfont.woff') format('woff'),
+         url('../fonts/ds-digit-webfont.ttf') format('truetype'),
+         url('../fonts/ds-digit-webfont.svg#ds-digitalbold_italic') format('svg');
+}
+
+#DS-Digital (@weight, @style) when (@weight = normal) and (@style = normal)  {
+    font-family: 'DS-Digital-Normal';
+    font-weight: @weight;
+    font-style: @style;
+}
+
+#DS-Digital (@weight, @style) when (@weight = bold) and (@style = normal)  {
+    font-family: 'DS-Digital-Bold';
+    font-weight: @weight;
+    font-style: @style;
+}
+
+#DS-Digital (@weight, @style) when (@weight = normal) and (@style = italic)  {
+    font-family: 'DS-Digital-Italic';
+    font-weight: @weight;
+    font-style: @style;
+}
+
+#DS-Digital (@weight, @style) when (@weight = bold) and (@style = italic)  {
+    font-family: 'DS-Digital-Bold-Italic';
+    font-weight: @weight;
+    font-style: @style;
+}
