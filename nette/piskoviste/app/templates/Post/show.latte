@@ -1,0 +1,30 @@
+{block content}
+
+konkretni prispevek
+
+<p><a n:href="Homepage:default">← zpět5 na výpis příspěvků</a></p>
+
+
+
+<div class="date">{$post->created_at|date:'F j, Y; d.m.Y H:i:s'}</div>
+
+<h1 n:block="title">{$post->title}, (nadpis + title)</h1>
+
+<div class="post">{$post->content}</div>
+
+
+<a n:href="edit $post->id" n:if="$user->loggedIn">editovat</a>
+
+
+<h2>a tu si muzes stezovat:</h2>
+
+{control formFactory}
+
+<h2>stiznosti</h2>
+
+<div class="comments">
+    {foreach $comments as $comment}
+        <p><b><a href="mailto:{$comment->email}" n:tag-if="$comment->email">{$comment->name}</a></b> said:</p>
+        <div>{$comment->content}</div>
+    {/foreach}
+</div>

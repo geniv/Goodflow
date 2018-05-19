@@ -1,0 +1,18 @@
+{block content}
+
+hlavni stranka...
+
+<h1 n:block="title">wtf nadpis a titulek v jednom</h1>
+
+<a n:href="Post:create" n:if="$user->loggedIn">vytvor vole</a>
+{if $user->loggedIn}<a n:href="Post:create">vytvor vole (link2)</a>{/if}
+
+{foreach $posts as $post}
+<div class="post">
+    <div class="date">{$post->created_at|date:'F j, Y'}</div>
+
+    <h2><a href="{link Post:show $post->id}">{$post->title} (post prezenter; show render)</a></h2>
+
+    <div>{$post->content}</div>
+</div>
+{/foreach}

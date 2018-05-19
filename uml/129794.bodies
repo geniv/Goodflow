@@ -1,0 +1,865 @@
+class Core
+!!!136066.php!!!	sendErrorLog(inout text : )
+      if (is_array($text)) {
+        foreach ($text as $val) {
+          error_log($val);
+        }
+      } else {
+        error_log($text);
+      }
+!!!136194.php!!!	enableDebug(inout show_memory :  = false)
+      $error = error_get_last();
+      if (!empty($error)) {
+        self::sendErrorLog($error); //poslani do error logu
+        print_r($error);  //+tisk i na stdout
+        print_r(apache_request_headers());
+        print_r(apache_response_headers());
+        print_r($_SERVER);
+      }
+
+      if ($show_memory) {
+        self::sendErrorLog('*info* amount: '.self::calculateSize(memory_get_usage(true)));
+        self::sendErrorLog('*info* peak: '.self::calculateSize(memory_get_peak_usage(true)));
+        exec(sprintf('echo -n $( ps --pid %s --no-headers -o rss )', getmypid()), $out);
+        self::sendErrorLog('*info* usage: ' . self::calculateSize($out[0] * 1024));
+      }
+!!!136322.php!!!	getPartUrl(inout settings :  = array())
+      $query = self::isFill($settings, 'query');
+      $rewrite = self::isFill($settings, 'rewrite', false);
+      $link_path = self::isFill($settings, 'path', '');
+      $amp = self::isFill($settings, 'amp', '&amp;');
+      $end = (!empty($query) ?
+                  ($rewrite ? sprintf('/%s', implode($amp, $query))
+                  : sprintf('?%s', http_build_query(($rewrite ? array_values($query) : $query), NULL, $amp)))
+              : NULL);
+      return sprintf('%s%s', $link_path, $end);
+!!!136450.php!!!	getUrl(inout settings :  = array())
+      $path = dirname($_SERVER['SCRIPT_NAME']);
+      $end = self::getPartUrl($settings);
+      return sprintf('http://%s%s/%s', $_SERVER['SERVER_NAME'], ($path != '/' ? $path : ''), $end);
+!!!136578.php!!!	makeUrl(inout url : , inout settings :  = array())
+      return sprintf('%s%s', $url, self::getPartUrl($settings));
+!!!136706.php!!!	getAbsoluteUrl(inout settings : query = array()) : adress
+      $script = explode('/', $_SERVER['SCRIPT_NAME']);
+      $sourcedir = self::isFill($settings, 'sourcedir', __DIR__); //nacitani zdrojoveho adresare
+      $absolute_path = explode('/', self::getAbsoluteWebPath($sourcedir));
+      $path = implode('/', array_intersect($script, $absolute_path));
+      $end = self::getPartUrl($settings);
+      return sprintf('http://%s%s/%s', $_SERVER['SERVER_NAME'], $path, $end);
+!!!136834.php!!!	getWebPath() : cesta
+      return dirname($_SERVER['SCRIPT_FILENAME']);
+!!!136962.php!!!	getAbsoluteWebPath(inout sourcedir :  = __DIR__)
+      $script = explode('/', $_SERVER['SCRIPT_FILENAME']);  //rozdeleni script pathe
+      $dir = explode('/', $sourcedir); //rozdeleni aktualniho pathe
+      return implode('/', array_intersect($script, $dir));  //slouceni pruniku
+!!!137090.php!!!	calculateSize(inout size : size) : prevedena
+      $exp = 0;
+      $converted = 0;
+      $result = NULL;
+      //nadefinovane symboly
+      $symbol = array('b', 'kB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB');
+      //pokud je velikost > 0
+      if ($size > 0) {
+        $exp = floor(log($size) / log(1024)); //vypocet exponentu
+        $converted = ($size / pow(1024, floor($exp)));  //vypocet vysledne hodnoty
+        $result = sprintf(($exp == 0 ? '%d %s' : '%.2f %s'), $converted, $symbol[$exp]);
+      }
+      return $result;
+!!!137218.php!!!	startTime()
+      self::$worktime[0] = microtime(true); //vrati cas v mikro sec.
+!!!137346.php!!!	stopTime() : cas
+      self::$worktime[1] = microtime(true); //vrati cas v mikro sec.
+      //nadefinovane symboly
+      $symbol = array(-2 => '&mu;s', -1 => 'ms', 0 => 's');
+      //vypocet rozdilu, vysledek je v sekundach
+      $conv = round(self::$worktime[1] - self::$worktime[0], 10);
+      //vypocet exponentu
+      $exp = floor(log($conv) / log(1000));
+      //vypocet vysledne hodnoty
+      $converted = ($conv / pow(1000, floor($exp)));
+      return sprintf('%.4f %s', $converted, $symbol[$exp]);
+!!!137474.php!!!	encodeData(inout data : , inout url :  = false)
+      $result = base64_encode($data);
+      if ($url) {
+        $result = urlencode($result);
+      }
+      return $result;
+!!!137602.php!!!	decodeData(inout data : , inout url :  = false)
+      if ($url) {
+        $data = urldecode($data);
+      }
+      return base64_decode($data);
+!!!137730.php!!!	easyEncode(inout data : )
+      $base = base64_encode($data); //zakodovani do prechodneho base64
+      $pole = str_split($base);
+      $func = function($value) { return ord($value); };
+      return implode('a', array_map($func, $pole));
+!!!137858.php!!!	easyDecode(inout data : )
+      $pole = explode('a', $data);
+      $func = function($value) { return chr($value); };
+      $base = implode('', array_map($func, $pole));
+      return base64_decode($base);  //dekodovani z prechodneho base64
+!!!137986.php!!!	getSizeDir(inout path : path, inout recursive : recursive = false) : suma
+      try {
+        $sum = 0;
+        if (file_exists($path) && is_readable($path)) {
+          //rozhodnuti jakou tridu pouzit
+          if ($recursive) {
+            //pokud prochazi rekurzivne
+            $it = new RecursiveIteratorIterator(new RecursiveDirectoryIterator($path));
+          } else {
+            //pokud prochazi jen jednu slozku
+            $it = new DirectoryIterator($path);
+          }
+
+          //pruchod iterace
+          foreach ($it as $ifile) {
+            //pokud je soubor
+            if ($ifile->isFile()) {
+              $sum += $ifile->getSize();
+            }
+          }
+        }
+      } catch (UnexpectedValueException $e) {
+        echo $e;
+      }
+      return $sum;
+!!!138114.php!!!	isFill(inout array : array, inout key : key, inout default : default = '') : hodnota
+      return (!empty($array[$key]) ? $array[$key] : $default);
+!!!138242.php!!!	isNull(inout array : , inout key : , inout default :  = '')
+      return (is_array($array) && array_key_exists($key, $array) ? $array[$key] : $default);
+!!!138370.php!!!	isEmpty(inout value : , inout default :  = '')
+      return (!empty($value) ? $value : $default);
+!!!138498.php!!!	getRandomColor(inout min : , inout max : )
+      $result = NULL;
+      if (strlen($min) == strlen($max)) {
+        $_min = str_split(substr($min, 1));  //odebrani #
+        $_max = str_split(substr($max, 1));
+        switch (strlen($min)) {
+          case 3+1:
+            $res = array('#');
+            foreach ($_min as $i => $val) {
+              $res[] = dechex(rand(hexdec($val.$val), hexdec($_max[$i].$_max[$i])));
+            }
+            $result = implode('', $res);
+          break;
+
+          case 6+1:
+            $_min = array_chunk($_min, 2);  //slouceni po dvojcich
+            $_max = array_chunk($_max, 2);
+            $res = array('#');
+            foreach ($_min as $i => $val) {
+              $res[] = dechex(rand(hexdec(implode('', $val)), hexdec(implode('', $_max[$i]))));
+            }
+            $result = implode('', $res);
+          break;
+        }
+      }
+      return $result;
+!!!138626.php!!!	applyListSort(inout items : itrems, inout param : param) : pole
+      $sort = self::isFill($param, 'sort');
+
+      if (!empty($sort)) {
+        $final = array();
+        foreach ($sort as $key => $value) {
+          //pokud je klic detekovan jako vlastni razeni
+          if ($key == self::LIST_SORT_SELF && is_array($value)) {
+            $value = $key;  //prepsani value pro switch detekci
+          }
+          switch ($value) {
+            //typ dle hodnoty
+            case self::LIST_SORT_LOWER:
+              $final[0] = array_map('strtolower', $items);
+            break;
+
+            case self::LIST_SORT_MTIME:
+              $final[0] = array_map('filemtime', $items);
+            break;
+
+            case self::LIST_SORT_CTIME:
+              $final[0] = array_map('filectime', $items);
+            break;
+
+            //smer
+            case self::LIST_SORT_ASC:
+              $final[1] = SORT_ASC;
+            break;
+
+            case self::LIST_SORT_DESC:
+              $final[1] = SORT_DESC;
+            break;
+
+            //specialni
+            case self::LIST_SORT_REG:
+              $final[2] = SORT_REGULAR;
+            break;
+
+            case self::LIST_SORT_NUM:
+              $final[2] = SORT_NUMERIC;
+            break;
+
+            case self::LIST_SORT_STR:
+              $final[2] = SORT_STRING;
+            break;
+
+            //vlastni
+            case self::LIST_SORT_SELF:
+              $selforder = $sort[self::LIST_SORT_SELF];
+              $intersect = array_intersect($selforder, $items); //prunik
+              $diff = array_diff($items, $selforder); //rozdil
+              $items = array_merge($intersect, $diff);  //soucet pruniku a rozdilu
+            break;
+          }
+        }
+
+        if (!empty($final)) {
+          array_multisort(self::isFill($final, 0, $items),
+                          self::isFill($final, 1, $items),
+                          self::isFill($final, 2, $items),
+                          $items);
+        }
+      }
+      return $items;
+!!!138754.php!!!	applyListFilter(inout items : itrems, inout param : param) : pole
+      $filterp = self::isFill($param, 'filter+'); //akceptovat nebo
+      $filterm = self::isFill($param, 'filter-'); //vynechat
+
+      if (!empty($filterp) || !empty($filterm)) {
+        $res = NULL;
+        foreach ($items as $row) {
+          $info = strtolower(pathinfo($row, PATHINFO_EXTENSION));
+          //akceptovane pripony else nepodporovane pripony
+          if (!empty($filterp) && in_array($info, $filterp)) {
+            $res[] = $row;
+          } elseif (!empty($filterm) && !in_array($info, $filterm)) {
+            $res[] = $row;
+          }
+        }
+        $items = $res;
+      }
+
+      return $items;
+!!!138882.php!!!	getListDir(inout param : param) : seznam
+      try {
+        $path = self::isFill($param, 'path'); //nacteni pathu
+        $result = NULL;
+        if (file_exists($path)) {
+          $result = array();
+          $it = new DirectoryIterator($path);
+          foreach ($it as $row) {
+            if ($row->isDir() && !$row->isDot()) {
+              $result[] = $row->getFilename();
+            }
+          }
+          $result = self::applyListSort($result, $param);
+        }
+      } catch (UnexpectedValueException $e) {
+        echo $e;
+      }
+      return $result;
+!!!139010.php!!!	getListFile(inout param : param) : seznam
+      try {
+        $path = self::isFill($param, 'path'); //nacteni pathu
+        $full = self::isFill($param, 'full', false); //plna cesta
+
+        $result = NULL;
+        if (file_exists($path)) {
+          $result = array();
+          $it = new DirectoryIterator($path);
+          foreach ($it as $row) {
+            if ($row->isFile() && !$row->isDot()) {
+              if ($full) {
+                $result[] = $row->getPathname();
+              } else {
+                $result[] = $row->getFilename();
+              }
+            }
+          }
+
+          $result = self::applyListFilter($result, $param);
+          $result = self::applyListSort($result, $param);
+        }
+      } catch (UnexpectedValueException $e) {
+        echo $e;
+      }
+      return $result;
+!!!139138.php!!!	getCountListDir(inout param : )
+      try {
+        $path = self::isFill($param, 'path'); //nacteni pathu
+        $result = NULL;
+        if (file_exists($path)) {
+          $result = 0;
+          $it = new DirectoryIterator($path);
+          foreach ($it as $row) {
+            if ($row->isDir() && !$row->isDot()) {
+              $result++;
+            }
+          }
+        }
+      } catch (UnexpectedValueException $e) {
+        echo $e;
+      }
+      return $result;
+!!!139266.php!!!	getCountListFile(inout param : )
+      try {
+        $path = self::isFill($param, 'path'); //nacteni pathu
+        $onlywrite = self::isFill($param, 'onlywrite');
+
+        $result = NULL;
+        if (file_exists($path)) {
+          if ($onlywrite) {
+            $result['writable'] = 0;
+            $result['count'] = 0;
+          } else {
+            $result = 0;
+          }
+          $it = new DirectoryIterator($path);
+          foreach ($it as $row) {
+            if ($row->isFile() && !$row->isDot()) {
+              if ($onlywrite) {
+                if ($row->isWritable()) {
+                  $result['writable']++;  //pocitani jen tech ktere jsou pro zapis
+                }
+                $result['count']++; //pocitani vsech u kontoly pro zapis
+              } else {
+                $result++;  //pocitani vsech
+              }
+            }
+          }
+        }
+      } catch (UnexpectedValueException $e) {
+        echo $e;
+      }
+      return $result;
+!!!139394.php!!!	getCountListItems(inout param : )
+      try {
+        $path = self::isFill($param, 'path'); //nacteni pathu
+        $result = NULL;
+        if (file_exists($path)) {
+          $result = 0;
+          $it = new DirectoryIterator($path);
+          foreach ($it as $row) {
+            if (!$row->isDot()) {
+              $result++;
+            }
+          }
+        }
+      } catch (UnexpectedValueException $e) {
+        echo $e;
+      }
+      return $result;
+!!!139522.php!!!	getListRecursiveAll(inout param : )
+      $path = self::isFill($param, 'path'); //nacteni pathu
+      $full = self::isFill($param, 'full', false); //plna cesta
+      $onlydir = self::isFill($param, 'onlydir', false); //pouze adresare
+      $onlyfile = self::isFill($param, 'onlyfile', false); //pouze soubory
+
+      if (!$full) {
+        $lenreal = self::isFill($param, '_lengthreal', strlen($path) + 1);
+      }
+
+      $result = NULL;
+      if (file_exists($path)) {
+        $result = array();
+        $resend = array();
+        $items = scandir($path);  //nacteni aktualniho adresare
+        foreach ($items as $row) {
+          if ($row != '.' && $row != '..') {
+            $fullpath = sprintf('%s/%s', $path, $row);
+            if (!$full) {
+              $shortpath = substr($fullpath, $lenreal);
+            }
+
+            if (is_file($fullpath) && !$onlydir) {
+              $result[] = (!$full ? $shortpath : $fullpath);
+            }
+
+            if (is_dir($fullpath)) {
+              $param['path'] = $fullpath;
+              if (!$full) {
+                $param['_lengthreal'] = $lenreal;
+              }
+              $res = self::getListRecursiveAll($param); //rekurze
+              $result = array_merge($result, $res);
+
+              if (!$onlyfile) {
+                $resend[] = (!$full ? $shortpath : $fullpath);
+              }
+            }
+          }
+        }
+        $result = array_merge($result, $resend);
+      }
+
+      return $result;
+!!!139650.php!!!	getIncNameFile(inout path : , inout concat :  = '%s-%s')
+      $poc = 1;
+      if (file_exists($path)) {
+        $newpath = sprintf($concat, $path, $poc);
+        while (file_exists($newpath)) {
+          $poc++;
+          $newpath = sprintf($concat, $path, $poc);
+        }
+      } else {
+        $newpath = $path;
+      }
+      return array('path' => $newpath, 'index' => $poc);
+!!!139778.php!!!	trimMarker(inout text : , inout width : , inout trimmarker :  = '...', inout encoding :  = 'UTF-8')
+      $result = $text;
+      if ($width > 0) {
+        $result = mb_strimwidth($text, 0, $width, $trimmarker, $encoding);
+      }
+      return $result;
+!!!139906.php!!!	getUserAgent()
+      return $_SERVER['HTTP_USER_AGENT'];
+!!!140034.php!!!	isFirefox(inout agent :  = NULL)
+ //pokud by bylo zapotrebi tak by se to rozsirilo podobne jako u chrome
+      $ua = (!empty($agent) ? $agent : $_SERVER['HTTP_USER_AGENT']);
+      return (boolean) preg_match('#(Firefox|Shiretoko)/([a-zA-Z0-9\.]+)#i', $ua);
+!!!140162.php!!!	isChrome(inout agent :  = NULL, inout version :  = NULL)
+      $ua = (!empty($agent) ? $agent : $_SERVER['HTTP_USER_AGENT']);
+      //return (boolean) preg_match('#Chrome/([a-zA-Z0-9\.]+) Safari/([a-zA-Z0-9\.]+)#i', $ua);
+      $result = NULL;
+      if (!empty($version)) {
+        $b = self::getBrowser($ua);
+        $result = ($b->browser == 'Chrome' && $b->version == $version);
+      } else {
+        $result = (boolean) preg_match('#Chrome/([a-zA-Z0-9\.]+) Safari/([a-zA-Z0-9\.]+)#i', $ua);
+      }
+      return $result;
+!!!140290.php!!!	isSafari(inout agent :  = NULL)
+      $ua = (!empty($agent) ? $agent : $_SERVER['HTTP_USER_AGENT']);
+      return (boolean) preg_match('#Safari/([a-zA-Z0-9\.]+)#i', $ua);
+!!!140418.php!!!	isOpera(inout agent :  = NULL)
+      $ua = (!empty($agent) ? $agent : $_SERVER['HTTP_USER_AGENT']);
+      return (boolean) preg_match('#Opera[ /]([a-zA-Z0-9\.]+)#i', $ua);
+!!!140546.php!!!	isIExplorer(inout agent :  = NULL)
+      $ua = (!empty($agent) ? $agent : $_SERVER['HTTP_USER_AGENT']);
+      return (boolean) preg_match('#MSIE ([a-zA-Z0-9\.]+)#i', $ua);
+!!!140674.php!!!	isAndroid(inout agent :  = NULL)
+      $ua = (!empty($agent) ? $agent : $_SERVER['HTTP_USER_AGENT']);
+      return (boolean) preg_match('#Android ([a-zA-Z0-9\.]+)#i', $ua);
+!!!140802.php!!!	isiPhone(inout agent :  = NULL)
+      $ua = (!empty($agent) ? $agent : $_SERVER['HTTP_USER_AGENT']);
+      return (boolean) preg_match('/(iPhone)/i', $ua);
+!!!140930.php!!!	isiPod(inout agent :  = NULL)
+      $ua = (!empty($agent) ? $agent : $_SERVER['HTTP_USER_AGENT']);
+      return (boolean) preg_match('/(iPod)/i', $ua);
+!!!141058.php!!!	iswebOS(inout agent :  = NULL)
+      $ua = (!empty($agent) ? $agent : $_SERVER['HTTP_USER_AGENT']);
+      return (boolean) preg_match('#webOS/([a-zA-Z0-9\.]+)#i', $ua);
+!!!141186.php!!!	isLinux(inout agent :  = NULL)
+      $ua = (!empty($agent) ? $agent : $_SERVER['HTTP_USER_AGENT']);
+      return (boolean) preg_match('/(Linux)|(Android)/i', $ua);
+!!!141314.php!!!	isMac(inout agent :  = NULL)
+      $ua = (!empty($agent) ? $agent : $_SERVER['HTTP_USER_AGENT']);
+      return (boolean) preg_match('/(Mac OS)|(Mac OS X)|(Mac_PowerPC)|(Macintosh)/i', $ua);
+!!!141442.php!!!	isWindows(inout agent :  = NULL)
+      $ua = (!empty($agent) ? $agent : $_SERVER['HTTP_USER_AGENT']);
+      return (boolean) preg_match('/(Windows)/i', $ua);
+!!!141570.php!!!	isWebKit(inout agent :  = NULL)
+      $ua = (!empty($agent) ? $agent : $_SERVER['HTTP_USER_AGENT']);
+      return (boolean) preg_match('#AppleWebKit/([a-zA-Z0-9\.]+)#i', $ua);
+!!!141698.php!!!	isGecko(inout agent :  = NULL)
+      $ua = (!empty($agent) ? $agent : $_SERVER['HTTP_USER_AGENT']);
+      return (boolean) preg_match('#Gecko/([a-zA-Z0-9\.]+)#i', $ua);
+!!!141826.php!!!	implodeTitle(inout array : , inout separe :  = ' - ')
+      $result = NULL;
+      if (!empty($array)) {
+        $row = array();
+        foreach ($array as $value) {
+          if (!empty($value)) {
+            $row[] = $value;
+          }
+        }
+        $result = implode($separe, $row);
+      }
+      return $result;
+!!!141954.php!!!	getFilePermissions(inout path : , inout full :  = false)
+      $result = NULL;
+      $perms = fileperms($path);
+      if ($full) {
+        if (($perms & 0xC000) == 0xC000) {
+            // Socket
+            $info = 's';
+        } elseif (($perms & 0xA000) == 0xA000) {
+            // Symbolic Link
+            $info = 'l';
+        } elseif (($perms & 0x8000) == 0x8000) {
+            // Regular
+            $info = '-';
+        } elseif (($perms & 0x6000) == 0x6000) {
+            // Block special
+            $info = 'b';
+        } elseif (($perms & 0x4000) == 0x4000) {
+            // Directory
+            $info = 'd';
+        } elseif (($perms & 0x2000) == 0x2000) {
+            // Character special
+            $info = 'c';
+        } elseif (($perms & 0x1000) == 0x1000) {
+            // FIFO pipe
+            $info = 'p';
+        } else {
+            // Unknown
+            $info = 'u';
+        }
+        // Owner
+        $info .= (($perms & 0x0100) ? 'r' : '-');
+        $info .= (($perms & 0x0080) ? 'w' : '-');
+        $info .= (($perms & 0x0040) ?
+                    (($perms & 0x0800) ? 's' : 'x' ) :
+                    (($perms & 0x0800) ? 'S' : '-'));
+        // Group
+        $info .= (($perms & 0x0020) ? 'r' : '-');
+        $info .= (($perms & 0x0010) ? 'w' : '-');
+        $info .= (($perms & 0x0008) ?
+                    (($perms & 0x0400) ? 's' : 'x' ) :
+                    (($perms & 0x0400) ? 'S' : '-'));
+        // World
+        $info .= (($perms & 0x0004) ? 'r' : '-');
+        $info .= (($perms & 0x0002) ? 'w' : '-');
+        $info .= (($perms & 0x0001) ?
+                    (($perms & 0x0200) ? 't' : 'x' ) :
+                    (($perms & 0x0200) ? 'T' : '-'));
+        $result = $info;
+      } else {
+        $result = substr(sprintf('%o', $perms), -4);
+      }
+
+      return $result;
+!!!142082.php!!!	getFileOwner(inout path : , inout numerical :  = true)
+      $result = fileowner($path);
+      if ($numerical) {
+        $res = posix_getpwuid($result);
+        $result = $res['name'];
+      }
+      return $result;
+!!!142210.php!!!	isApacheOwner(inout path : )
+      return (posix_getgid() == fileowner($path));
+!!!142338.php!!!	isPermissionReady(inout path : )
+      return is_writable($path);
+!!!142466.php!!!	getIP() : ip
+      return self::isFill($_SERVER, 'HTTP_X_FORWARDED_FOR', $_SERVER['REMOTE_ADDR']);
+!!!142594.php!!!	getHost()
+      //return gethostname();
+      return gethostbyaddr(self::getIP());
+!!!142722.php!!!	initBrowscap(inout path :  = __DIR__)
+      if (is_null(self::$browscap)) {
+        $temp = sprintf('%s/.tmp', $path);  //slozeni cesty pro temp
+        //vytvoreni slozky tempu
+        if (!file_exists($temp)) {
+          if (!@mkdir($temp, 0777)) {
+            echo sprintf('nelze vytcorit "%s"', $temp);
+          }
+        }
+        //pokud se do tempu zapisovat
+        if (is_writable($temp)) {
+          self::$browscap = new Browscap($temp);  //vytvoreni instance od staticke promennne
+          self::$browscap->lowercase = true;  //nacte do cache a indexy z malich pismen
+          //prvotni inicializace
+          if (!file_exists(self::$browscap->cacheDir.self::$browscap->cacheFilename) ||
+              !file_exists(self::$browscap->cacheDir.self::$browscap->iniFilename)) {
+            print_r(self::$browscap->getBrowser());
+            self::setLocation('.');
+            exit(0);
+          }
+        }
+      }
+!!!142850.php!!!	getBrowser(inout user_agent :  = null, inout return_array :  = false)
+      $result = NULL;
+      if (!is_null(self::$browscap)) {
+        $result = self::$browscap->getBrowser($user_agent, $return_array);
+      }
+      return $result;
+!!!142978.php!!!	checkPHP() : bool
+      return version_compare(PHP_VERSION, self::PHPMIN, '>=');
+!!!143106.php!!!	setCharset(inout char : chat = 'UTF-8')
+      header(sprintf('Content-type: text/html; charset=%s', $char));
+!!!143234.php!!!	getHoliday(inout date : date) : string
+      try {
+                        //leden
+        $svatek = array(array('Nový rok', 'Karina', 'Radmila', 'Diana', 'Dalimil',
+                              'Tři králové', 'Vilma', 'Čestmír', 'Vladan', 'Břetislav',
+                              'Bohdana', 'Pravoslav', 'Edita', 'Radovan', 'Alice',
+                              'Ctirad', 'Drahoslav', 'Vladislav', 'Doubravka', 'Ilona',
+                              'Běla', 'Slavomír', 'Zdeněk', 'Milena', 'Miloš', 'Zora',
+                              'Ingrid', 'Otýlie', 'Zdislava', 'Robin', 'Marika'),
+                        //unor
+                        array('Hynek', 'Nela/Hromnice', 'Blažej', 'Jarmila', 'Dobromila',
+                              'Vanda', 'Veronika', 'Milada', 'Apolena', 'Mojmír',
+                              'Božena', 'Slavěna', 'Věnceslav', 'Valentýn', 'Jiřina',
+                              'Ljuba', 'Miloslava', 'Gizela', 'Patrik', 'Oldřich',
+                              'Lenka', 'Petr', 'Svatopluk', 'Matěj', 'Liliana',
+                              'Dorota', 'Alexandr', 'Lumír', 'Horymír'),
+                        //brezen
+                        array('Bedřich', 'Anežka', 'Kamil', 'Stela', 'Kazimír',
+                              'Miroslav', 'Tomáš', 'Gabriela', 'Františka', 'Viktorie',
+                              'Anděla', 'Řehoř', 'Růžena', 'Rút/Matylda', 'Ida',
+                              'Elena/Herbert', 'Vlastimil', 'Eduard', 'Josef', 'Světlana',
+                              'Radek', 'Leona', 'Ivona', 'Gabriel', 'Marián',
+                              'Emanuel', 'Dita', 'Soňa', 'Taťána', 'Arnošt',
+                              'Kvido'),
+                        //duben
+                        array('Hugo', 'Erika', 'Richard', 'Ivana', 'Miroslava',
+                              'Vendula', 'Heřman/Hermína', 'Ema', 'Dušan', 'Darja',
+                              'Izabela', 'Julius', 'Aleš', 'Vincenc', 'Anastázie',
+                              'Irena', 'Rudolf', 'Valérie', 'Rostislav', 'Marcela',
+                              'Alexandra', 'Evženie', 'Vojtěch', 'Jiří', 'Marek',
+                              'Oto', 'Jaroslav', 'Vlastislav', 'Robert', 'Blahoslav'),
+                        //kveten
+                        array('Svátek práce', 'Zikmund', 'Alexej', 'Květoslav', 'Klaudie, Květnové povstání českého lidu',
+                              'Radoslav', 'Stanisla', 'Den osvobození od fašismu', 'Ctibor', 'Blažena',
+                              'Svatava', 'Pankrác', 'Servác', 'Bonifác', 'Žofie',
+                              'Přemysl', 'Aneta', 'Nataša', 'Ivo', 'Zbyšek',
+                              'Monika', 'Emil', 'Vladimír', 'Jana', 'Viola',
+                              'Filip', 'Valdemar', 'Vilém', 'Maxmilián', 'Ferdinand',
+                              'Kamila'),
+                        //cerven
+                        array('Laura', 'Jarmil', 'Tamara', 'Dalibor', 'Dobroslav',
+                              'Norbert', 'Iveta/Slavoj', 'Medard', 'Stanislav', 'Gita',
+                              'Bruno', 'Antonie', 'Antonín', 'Roland', 'Vít',
+                              'Zbyněk', 'Adolf', 'Milan', 'Leoš', 'Květa',
+                              'Alois', 'Pavla', 'Zdeňka', 'Jan', 'Ivan',
+                              'Adriana', 'Ladislav', 'Lubomír', 'Petr a Pavel', 'Šárka'),
+                        //cervenec
+                        array('Jaroslava', 'Patricie', 'Radomír', 'Prokop', 'Den slovanských věrozvěstů Cyrila a Metoděje',
+                              'Upálení mistra Jana Husa', 'Bohuslava', 'Nora', 'Drahoslava', 'Libuše/Amálie',
+                              'Olga', 'Bořek', 'Markéta', 'Karolína', 'Jindřich',
+                              'Luboš', 'Martina', 'Drahomíra', 'Čeněk', 'Ilja',
+                              'Vítězslav', 'Magdeléna', 'Libor', 'Kristýna', 'Jakub',
+                              'Anna', 'Věroslav', 'Viktor', 'Marta', 'Bořivoj',
+                              'Ignác'),
+                        //srpen
+                        array('Oskar', 'Gustav', 'Miluše', 'Dominik', 'Kristián',
+                              'Oldřiška', 'Lada', 'Soběslav', 'Roman', 'Vavřinec',
+                              'Zuzana', 'Klára', 'Alena', 'Alan', 'Hana',
+                              'Jáchym', 'Petra', 'Helena', 'Ludvík', 'Bernard',
+                              'Johana', 'Bohuslav', 'Sandra', 'Bartoloměj', 'Radim',
+                              'Luděk', 'Otakar', 'Augustýn', 'Evelína', 'Vladěna',
+                              'Pavlína'),
+                        //zari
+                        array('Linda/Samuel', 'Adéla', 'Bronislav', 'Jindřiška', 'Boris',
+                              'Boleslav', 'Regína', 'Mariana', 'Daniela', 'Irma',
+                              'Denisa', 'Marie', 'Lubor', 'Radka', 'Jolana',
+                              'Ludmila', 'Naděžda', 'Kryštof', 'Zita', 'Oleg',
+                              'Matouš', 'Darina', 'Berta', 'Jaromír', 'Zlata',
+                              'Andrea', 'Jonáš', 'Václav, Den české státnosti', 'Michal', 'Jeroným'),
+                        //rijen
+                        array('Igor', 'Olívie', 'Bohumil', 'František', 'Eliška',
+                              'Hanuš', 'Justýna', 'Věra', 'Štefan/Sára', 'Marina',
+                              'Andrej', 'Marcel', 'Renáta', 'Agáta', 'Tereza',
+                              'Havel', 'Hedvika', 'Lukáš', 'Michaela', 'Vendelín',
+                              'Brigita', 'Sabina', 'Teodor', 'Nina', 'Beáta',
+                              'Erik', 'Šarlota/Zoe', 'Den vzniku samostatného československého státu', 'Silvie', 'Tadeáš',
+                              'Štěpánka'),
+                        //listopad
+                        array('Felix', 'Památka zesnulých', 'Hubert', 'Karel', 'Miriam',
+                              'Liběna', 'Saskie', 'Bohumír', 'Bohdan', 'Evžen',
+                              'Martin', 'Benedikt', 'Tibor', 'Sáva', 'Leopold',
+                              'Otmar', 'Mahulena, Den boje studentů za svobodu a demokracii', 'Romana', 'Alžběta', 'Nikola',
+                              'Albert', 'Cecílie', 'Klement', 'Emílie', 'Kateřina',
+                              'Artur', 'Xenie', 'René', 'Zina', 'Ondřej'),
+                        //prosinec
+                        array('Iva', 'Blanka', 'Svatoslav', 'Barbora', 'Jitka',
+                              'Mikuláš', 'Ambrož/Benjamín', 'Květoslava', 'Vratislav', 'Julie',
+                              'Dana', 'Simona', 'Lucie', 'Lýdie', 'Radana',
+                              'Albína', 'Daniel', 'Miloslav', 'Ester', 'Dagmar',
+                              'Natálie', 'Šimon', 'Vlasta', 'Adam a Eva, Štědrý den', 'Boží hod vánoční - svátek vánoční',
+                              'Štěpán - svátek vánoční', 'Žaneta', 'Bohumila', 'Judita', 'David',
+                              'Silvestr - Nový rok'));
+
+        $dat = strtotime($date);
+        if (date('Y', $dat) > 1970) {
+          return $svatek[date('n', $dat) - 1][date('j', $dat) - 1];
+        } else {
+          throw new ExceptionCore('Spatny format datumu!');
+        }
+
+      } catch (ExceptionCore $e) {
+        echo $e;
+      }
+!!!143362.php!!!	setRefresh(inout time : time, inout path : path)
+      $url = htmlspecialchars_decode($path);
+      header(sprintf('Refresh: %s; URL=%s', $time, $url));
+!!!143490.php!!!	setLocation(inout path : )
+      header(sprintf('Location: %s', $path), true, 303);
+!!!143618.php!!!	getCookie(inout name : )
+      return self::isFill($_COOKIE, $name);
+!!!143746.php!!!	setCookie(inout name : , inout value : , inout deltatime :  = 31536000)
+      setcookie($name, $value, Time() + $deltatime);
+!!!143874.php!!!	unsetCookie(inout name : , inout deltatime :  = 31536000)
+      setcookie($name, '', Time() - $deltatime);
+!!!144002.php!!!	initSession(inout name :  = NULL)
+      @session_start();  //ma tehdenci nekdy zlobit!!!
+      if (!empty($name)) {
+        session_name($name);
+      }
+!!!144130.php!!!	getSession(inout name : )
+      return self::isFill($_SESSION, $name);
+!!!144258.php!!!	setSession(inout name : , inout value : )
+      $_SESSION[$name] = $value;
+!!!144386.php!!!	getSessionId(inout id :  = NULL)
+      $result = session_id();
+      if (!empty($id)) {
+        $result = session_id($id);
+      }
+      return $result;
+!!!144514.php!!!	setRenewSessionId()
+      session_regenerate_id();
+!!!144642.php!!!	getSessionName()
+      return session_name();
+!!!144770.php!!!	getUniqId()
+      return uniqid(__DIR__, true);
+!!!144898.php!!!	getUniqText()
+      return uniqid(rand());
+!!!145026.php!!!	getSafeText(inout text : , inout pattern :  = '/[a-zA-Z0-9_\-\.\(\)]{1}/')
+      $result = NULL;
+      if (!empty($text)) {
+        $prepis = self::$alphabet;
+
+        $search = array_keys($prepis);
+        $replace = array_values($prepis);
+        $text = str_replace($search, $replace, $text);
+
+        $row = array();
+        $rozdel = str_split($text);
+        foreach ($rozdel as $pismeno) {
+          if (preg_match($pattern, $pismeno)) {
+            $row[] = $pismeno;
+          }
+        }
+        $result = implode('', $row);
+      }
+      return $result;
+!!!145154.php!!!	getInteligentRewrite(inout text : )
+      $result = NULL;
+      if (!empty($text)) {
+        $alphabet = self::$alphabet;
+
+        $search = array_keys($alphabet);
+        $replace = array_values($alphabet);
+        $safetext = str_replace($search, $replace, $text);
+
+        $char = array();
+        $index = 0;
+        $explode = str_split($safetext);
+        foreach ($explode as $letter) {
+          if (preg_match('/[a-zA-Z0-9]{1}/', $letter)) {
+            $char[] = $letter;
+          } else {
+            $char[] = '-';
+          }
+          $index++;
+        }
+
+        $safechar = implode('', $char);
+        $result = str_replace(array('--'), array(''), $safechar);
+        //separe first '-'
+        if ($result[0] == '-') {
+          $result = substr($result, 1);
+        }
+
+        //separate last '-'
+        if ($result[strlen($result) - 1] == '-') {
+          $result = substr($result, 0, -1);
+        }
+      }
+      return $result;
+!!!145282.php!!!	setSpaceNumber(inout cislo : cislo, inout desetinna : desetinne = '.', inout mezera : mezera = ' ') : int
+      return number_format($cislo, 0, $desetinna, $mezera);
+!!!145410.php!!!	sendPostData(inout url : , inout data : )
+      //pokud je dostupny cURL
+      if (extension_loaded('curl')) {
+        $c = curl_init();
+        $options = array (CURLOPT_URL => $url,
+                          CURLOPT_POST => true,
+                          CURLOPT_POSTFIELDS => $data,
+                          );
+        curl_setopt_array($c, $options);
+        curl_exec($c);
+        curl_close($c);
+        exit;
+      }
+      //var_dump($_SERVER['HTTP_HOST']);
+      //var_dump($_SERVER);
+      //print_r(apache_request_headers());
+!!!145538.php!!!	generatePath(inout path : )
+      if (is_array($path)) {
+        foreach ($path as $row) {
+          self::createPartPath($row);
+        }
+      } else {
+        self::createPartPath($path);
+      }
+!!!145666.php!!!	createPartPath(inout path : )
+      try {
+        if (!empty($path)) {
+          $pole = explode('/', $path);
+          $dir = ''; //vynulovani generovaneho nazvu slozek
+          foreach ($pole as $value) {  //prochazi kazde jeden smer slozek
+            $dir .= sprintf('%s/', $value); //scita jmeno slozky
+            if (!file_exists($dir)) {  //overuje existenci
+              if (@mkdir($dir)) { //vytvari slozky
+                chmod($dir, 0777);  //nastavi opravneni na 777
+              } else {
+                throw new ExceptionCore(sprintf('dir "%s" does not create', $dir)); //opravneni
+              }
+            }
+          }
+        }
+      } catch (ExceptionCore $e) {
+        echo $e;
+      }
+!!!145794.php!!!	getMarkupText(inout text : , inout ownpattern :  = array())
+      $patterns = array('/_([^_]+)_/' => Html::em()->setText('$1'),
+                        '/\*([^\*]+)\*/' => Html::strong()->setText('$1'),
+                        '/\\n|\\\n/' => Html::br(),
+                        );
+      if (!empty($ownpattern)) {
+        $patterns = array_merge($patterns, $ownpattern);
+      }
+      return self::getOptionalMarkup($text, $patterns);
+!!!145922.php!!!	getOptionalMarkup(inout text : , inout patterns :  = array())
+      //  '/^.../' => Html::...
+      $regex = array_keys($patterns);
+      return preg_replace($regex, $patterns, $text);
+!!!146050.php!!!	getBBCodeText(inout text : , inout ownpattern :  = array())
+      $patterns = array('/\[b\](.*?)\[\/b\]/' => Html::strong()->setText('$1'),
+                        '/\[b id=(.*?)\](.*?)\[\/b\]/' => Html::strong(array('id' => '$1'))->setText('$2'),
+                        '/\[b class=(.*?)\](.*?)\[\/b\]/' => Html::strong(array('class' => '$1'))->setText('$2'),
+                        '/\[i\](.*?)\[\/i\]/' => Html::em()->setText('$1'),
+                        '/\[i id=(.*?)\](.*?)\[\/i\]/' => Html::em(array('id' => '$1'))->setText('$2'),
+                        '/\[i class=(.*?)\](.*?)\[\/i\]/' => Html::em(array('class' => '$1'))->setText('$2'),
+                        '/\[s\](.*?)\[\/s\]/' => Html::span()->setText('$1'),
+                        '/\[s id=(.*?)\](.*?)\[\/s\]/' => Html::span(array('id' => '$1'))->setText('$2'),
+                        '/\[s class=(.*?)\](.*?)\[\/s\]/' => Html::span(array('class' => '$1'))->setText('$2'),
+                        '/\\n|\\\n/' => Html::br(),
+                        );
+      if (!empty($ownpattern)) {
+        $patterns = array_merge($patterns, $ownpattern);
+      }
+      return self::getOptionalMarkup($text, $patterns);
+!!!146178.php!!!	getSafeEmail(inout email : )
+      $result['href'] = sprintf('mailto:%s', str_replace('@', '%40', $email));
+      $result['text'] = str_replace('@', '&#064;', $email);
+      return $result;
+!!!146306.php!!!	getHttpVariable(inout method : )
+      $result = NULL;
+      switch ($method) {
+        case self::METHOD_GET:
+          $result = $_GET;
+        break;
+
+        case self::METHOD_POST:
+          $result = $_POST;
+        break;
+      }
+      return $result;
+!!!146434.php!!!	getListRangeArray(inout pole : , inout limit : , inout preserve_keys :  = false)
+      $result = array();
+      if (!empty($limit)) {
+        list($from, $length) = $limit;
+        $result = array_slice($pole, $from, $length, $preserve_keys);
+      }
+      return $result;

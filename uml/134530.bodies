@@ -1,0 +1,71 @@
+class Unique
+!!!178178.php!!!	getInstance()
+      if (is_null(self::$instance)) {
+        self::$instance = new self;
+      }
+      return self::$instance;
+!!!178306.php!!!	__callStatic(inout name : , inout args : )
+      try {
+
+        $result = NULL;
+        if ($name == 'i') { //TODO pripadne pres switch na volani method
+          if (self::$instance != NULL) {
+            $result = self::$instance;
+          } else { throw new ExceptionUnique('Nejprve je potreba zavolat: Unique::getInstance()->loadUnique(__FILE__);'); }
+        }
+
+      } catch (ExceptionUnique $e) {
+        echo $e;
+        exit(1);
+      }
+
+      return $result;
+!!!178434.php!!!	loadUnique(inout path : )
+      try {
+
+        $dir = dirname($path);
+        $name = basename($path, '.php');
+        //unikatni
+        $uniq_path = sprintf('%s/%s_%s.php', $dir, $name, self::UNIQUE_NAME);
+        if (file_exists($uniq_path)) {
+          self::$instance->unique = include_once $uniq_path;
+        } else {
+          throw new ExceptionUnique($uniq_path);
+        }
+        //duplikatni
+        $duplic_path = sprintf('%s/%s_%s.php', $dir, $name, self::DUPLIC_NAME);
+        if (file_exists($duplic_path)) {
+          self::$instance->unique = include_once $duplic_path;
+        }
+
+      } catch (ExceptionUnique $e) {
+        echo sprintf('Cesta %s neexistuje!', $e->getMessage());
+      }
+!!!178562.php!!!	getUniq(inout key : , inout array : , inout znak :  = '%%')
+      try {
+
+        $result = NULL;
+        if (!empty(self::$instance->unique)) {
+          if (array_key_exists($key, self::$instance->unique)) {
+            $vstup = self::$instance->unique[$key];
+          } else {
+            throw new ExceptionUnique(sprintf('Klic "%s" nebyl nalezen!', $key));
+          }
+        } else {
+          throw new ExceptionUnique('Unikatni nebyli doposud nacteny!');
+        }
+
+        //separace klicu z array
+        $klice = array_keys($array);
+        //uprava klicu
+        $search = preg_replace('/\w+/', sprintf('%s$0%s', $znak, $znak), $klice); //'{$znak}$0{$znak}'
+        //separace hodnot z array
+        $replace = array_values($array);
+        //nahrazeni vstupu naraz
+        $result = str_replace($search, $replace, $vstup);
+
+      } catch (ExceptionUnique $e) {
+        echo $e;
+      }
+
+      return $result;

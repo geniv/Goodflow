@@ -1,0 +1,96 @@
+format 70
+"error_page" // phpcore::error_page
+  revision 1
+  modified_by 2 "geniv"
+  // class settings
+  //class diagram settings
+  draw_all_relations default hide_attributes default hide_operations default hide_getset_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_relation_visibility default show_infonote default shadow default show_stereotype_properties default
+  //use case diagram settings
+  package_name_in_tab default show_context default auto_label_position default draw_all_relations default class_drawing_mode default shadow default show_stereotype_properties default
+  //sequence diagram settings
+  show_full_operations_definition default write_horizontally default class_drawing_mode default drawing_language default draw_all_relations default shadow default show_stereotype_properties default
+  //collaboration diagram settings
+  show_full_operations_definition default show_hierarchical_rank default write_horizontally default drawing_language default package_name_in_tab default show_context default draw_all_relations default shadow default show_stereotype_properties default
+  //object diagram settings
+   write_horizontally default package_name_in_tab default show_context default auto_label_position default draw_all_relations default shadow default show_stereotype_properties default
+  //component diagram settings
+  package_name_in_tab default show_context default auto_label_position default draw_all_relations default shadow default
+  draw_component_as_icon default show_component_req_prov default show_component_rea default show_stereotype_properties default
+  //deployment diagram settings
+  package_name_in_tab default show_context default write_horizontally default auto_label_position default draw_all_relations default shadow default
+  draw_component_as_icon default show_component_req_prov default show_component_rea default show_stereotype_properties default
+  //state diagram settings
+  package_name_in_tab default show_context default auto_label_position default write_trans_label_horizontally default show_trans_definition default draw_all_relations default shadow default
+  show_activities default region_horizontally default drawing_language default show_stereotype_properties default
+  //activity diagram settings
+  package_name_in_tab default show_context default show_opaque_action_definition default auto_label_position default write_flow_label_horizontally default draw_all_relations default shadow default
+  show_infonote default drawing_language default show_stereotype_properties default
+  
+  deploymentview 128258 "error_page"
+    //deployment diagram settings
+    package_name_in_tab default show_context default write_horizontally default auto_label_position default draw_all_relations default shadow default
+    draw_component_as_icon default show_component_req_prov default show_component_rea default show_stereotype_properties default
+    artifact 132738 "index"
+      stereotype "source"
+      php_src "<?php
+/*
+ *      index.php
+ *
+ *      Copyright 2011 server <geniv.radek@gmail.com>
+ *
+ */
+
+  //load autoload
+  require '../loader.php';
+
+  use classes\\Core,
+      classes\\Html,
+      classes\\HtmlPage,
+      classes\\Language;
+
+  //overeni jestli existuje pripojeni pro jazyky
+  if (file_exists('../classes/language.php')) {
+    Language::getInstance()->setLanguage(Config::LANG);
+    Language::getInstance()->setDefaultLanguage('cs');
+    Language::getInstance()->loadGettext('../');
+    //var_dump(Language::getInstance()->getState());
+  }
+  $status = Core::isFill($_SERVER, 'REDIRECT_STATUS');  //cislo error statusu
+  if (!empty($status)) {
+    $type = array(400 => array('short' => _('Špatná žádost'), 'long' => _('Žádost nemůže být zpracována.')),
+                  401 => array('short' => _('Neoprávněný přístup'), 'long' => _('Pro vstup do této sekce nemáte dostatečná oprávnění.')),
+                  403 => array('short' => _('Zakázáno'), 'long' => _('Vaše operace byla zakázána.')),
+                  404 => array('short' => _('Nenalezeno'), 'long' => _('Požadovaná stránka není k dispozici.')),
+                  500 => array('short' => _('Vnitřní chyba serveru'), 'long' => _('Omlouváme se, vyskytla se chyba.')),
+                  503 => array('short' => _('Služba není k dispozici'), 'long' => _('Požadovaná služba není momentálně k dispozici.')),
+                  );
+
+    $url = Core::getUrl();
+
+    $title = Core::implodeTitle(array($status, $type[$status]['short'], Config::PROJECT_NAME));
+    $page = new HtmlPage(HtmlPage::DOCTYPE_STRICT);  //DOCTYPE_STRICT DOCTYPE_HTML5
+    $page->setLanguage(Config::LANG)
+          ->setUrlPage($url)
+          ->addMeta('author', 'GoodFlow design - Tvorba webových stránek a systémů (www.gfdesign.cz)')
+          ->addMeta('copyright', 'Created by GoodFlow design')
+          ->addMeta('keywords', '')
+          ->addMeta('description', $title)
+          ->addMeta('robots', 'noindex, nofollow')
+          ->loadCSS('error.css')
+          ->setTitle($title)
+          ->setBodyId(sprintf('error_%s', $status))
+          ->addBody(Html::h1()->setText(implode(' - ', array($status, $type[$status]['short']))))
+          ->addBody(Html::p()->setText($type[$status]['long']))
+          ->addBody(Html::p()->setText(sprintf(_('Můžete se zkusit vrátit o %s.'), Html::a(array('href' => 'javascript:history.go(-1)', 'title' => _('Zpět o stránku')))->setText(_('stránku zpět klapnutím na tento odkaz')))))
+          ->addBody(Html::p()->setText(sprintf(_('Nebo můžete následovat %s'), Html::a(array('href' => Core::getUrl(array('path' => '../')), 'title' => sprintf(_('Na hlavní stranu webu %s'), Config::PROJECT_NAME)))->setText(sprintf(_('tento odkaz, který Vás zavede na hlavní stránku webu %s'), Config::PROJECT_NAME)))));
+    echo $page;
+  } else {
+    Core::setRefresh(1, Core::getUrl(array('path' => '../')));
+  }
+?>
+"
+      associated_classes
+      end
+    end
+  end
+end

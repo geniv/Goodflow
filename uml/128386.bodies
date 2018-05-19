@@ -1,0 +1,31 @@
+class Configurator
+!!!134018.php!!!	getLoadModules()
+      return static::$loadModules;
+!!!134146.php!!!	getLoadPages()
+      return static::$loadpages;
+!!!134274.php!!!	getUserVar(inout index :  = NULL)
+      $item = static::getUserVariable();
+      return Core::isFill($item, $index, $index);
+!!!134402.php!!!	s(inout method : , inout dodatek :  = NULL)
+      try {
+
+        $result = NULL;
+        $texts = static::getText();
+        if (array_key_exists($method, $texts)) {
+          if (!empty($dodatek)) {
+            if (array_key_exists($dodatek, $texts[$method])) {
+              $result = $texts[$method][$dodatek];
+            } else {
+              throw new ExceptionConfigurator(sprintf('Index textu: "%s" a s dodatkem: "%s" neexistuje!', $method, $dodatek));
+            }
+          } else {
+            $result = $texts[$method];
+          }
+        } else {
+          throw new ExceptionConfigurator(sprintf('Index textu: "%s" neexistuje!', $method));
+        }
+
+      } catch (ExceptionConfigurator $e) {
+        echo $e;
+      }
+      return $result;

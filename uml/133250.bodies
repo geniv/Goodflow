@@ -1,0 +1,59 @@
+class Notification
+!!!166018.php!!!	__construct(inout type : , inout message : )
+      $this->element = new stdClass;
+      $this->element->wait = false;
+      $this->element->args = array();
+      $this->setType($type)
+          ->setMessage($message);
+!!!166146.php!!!	__toString()
+      return $this->render();
+!!!166274.php!!!	setType(inout type : )
+      $this->element->type = $type;
+      return $this;
+!!!166402.php!!!	setMessage(inout message : )
+      $this->element->message = $message;
+      return $this;
+!!!166530.php!!!	wait(inout typ : )
+      $this->element->wait = $typ;
+      return $this;
+!!!166658.php!!!	arg(inout argument : )
+      $this->element->args[] = $argument;
+      return $this;
+!!!166786.php!!!	args(inout separate : , inout arrays : )
+      $this->element->args[] = implode($separate, $arrays);
+      return $this;
+!!!166914.php!!!	info(inout message : )
+      return new self(self::TYPE_INFO, $message);
+!!!167042.php!!!	successful(inout message : )
+      return new self(self::TYPE_SUCCESSFUL, $message);
+!!!167170.php!!!	error(inout message : )
+      if ($message instanceof Exception) {  //vyber hlasky z Exception
+        $message = $message->getMessage();
+      }
+      error_log($message);  //postovani chyby do logu (jen pro kontrolu)
+      return new self(self::TYPE_ERROR, $message);
+!!!167298.php!!!	warning(inout message : )
+      return new self(self::TYPE_WARNING, $message);
+!!!167426.php!!!	render()
+      $img = NULL;
+      if (!empty($this->element->wait)) {
+        $weburl = Administration::getWebUrl();
+        $path = sprintf($this->element->wait, Config::LANG);
+        $img = Html::elem('img')->src(sprintf('%simages/%s.gif', $weburl, $path))->alt(_('Wait please ...'));
+      }
+
+      $func = function($value) { return Html::elem('span')->setText($value); };
+      $args = array_map($func, $this->element->args); //obaleni kazde hodnoty spanem
+      if (!empty($args)) {
+        $p = Html::elem('p')->setText(vsprintf($this->element->message, $args));
+      } else {
+        $p = Html::elem('p')->insert(Html::elem('span')->class('top_align')->setText($this->element->message));
+      }
+
+      $result = Html::elem('div')
+                          ->class('notification')
+                          ->class(sprintf('notification_%s', $this->element->type))
+                          ->insert(array($p, $img))
+                          ;
+
+      return $result->render();

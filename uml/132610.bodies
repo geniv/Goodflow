@@ -1,0 +1,84 @@
+class JsonStorage
+!!!162946.php!!!	getAutoPath(inout dir : , inout class : )
+      return sprintf('%s/.%s.json', $dir, $class);
+!!!163074.php!!!	checkExtension()
+      if (!extension_loaded('json')) {
+        echo 'Missing Apache extension JSON!';
+        exit(1);
+      }
+!!!163202.php!!!	getData(inout path : , inout assoc :  = true)
+      try {
+
+        self::checkExtension();
+
+        $result = NULL;
+        if (!empty($path)) {
+          if (file_exists($path)) {
+            if (is_readable($path)) {
+              $data = file_get_contents($path);
+              $result = json_decode($data, $assoc);
+            } else {
+              throw new ExceptionJsonStorage('Path is not readable!');
+            }
+
+            //detekce chyb
+            switch (json_last_error()) {
+              case JSON_ERROR_NONE:
+              break;
+
+              case JSON_ERROR_DEPTH:
+                throw new ExceptionJsonStorage('Maximum stack depth exceeded');
+              break;
+
+              case JSON_ERROR_STATE_MISMATCH:
+                throw new ExceptionJsonStorage('Underflow or the modes mismatch');
+              break;
+
+              case JSON_ERROR_CTRL_CHAR:
+                throw new ExceptionJsonStorage('Unexpected control character found');
+              break;
+              case JSON_ERROR_SYNTAX:
+                throw new ExceptionJsonStorage('Syntax error, malformed JSON');
+              break;
+
+              case JSON_ERROR_UTF8:
+                throw new ExceptionJsonStorage('Malformed UTF-8 characters, possibly incorrectly encoded');
+              break;
+
+              default:
+                throw new ExceptionJsonStorage('Unknown error');
+              break;
+            }
+          }
+        } else {
+          throw new ExceptionJsonStorage('The path must not be empty!');
+        }
+
+      } catch (ExceptionJsonStorage $e) {
+        echo $e;
+      }
+
+      return $result;
+!!!163330.php!!!	setData(inout path : , inout data : )
+      try {
+
+        self::checkExtension();
+
+        $result = false;
+        if (!empty($path)) {
+          if (file_exists($path) && !is_writable($path)) {
+            throw new ExceptionJsonStorage('Path is not writable!');
+          }
+          $json = json_encode($data);
+          if (!$result = @file_put_contents($path, $json)) {
+            throw new ExceptionJsonStorage(sprintf('Unable to write data to "%s"', $path));
+          }
+        } else {
+          throw new ExceptionJsonStorage('The path must not be empty!');
+        }
+
+      } catch (ExceptionJsonStorage $e) {
+        echo $e;
+      }
+
+      return $result;

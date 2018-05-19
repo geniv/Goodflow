@@ -1,0 +1,154 @@
+class SqliteStorage
+!!!174338.php!!!	__construct(inout path :  = __DIR__)
+      $this->pointer = new stdClass;
+      $this->pointer->path = NULL;
+      $this->pointer->db = NULL;
+      $this->pointer->state = true;
+
+      $this->pointer->dbresult = NULL;
+      $this->pointer->dbresultfetch = NULL;
+
+      if ($this->pointer->state = is_writable(dirname($path))) {
+        $this->pointer->path = sprintf('%s.sqlite3', $path);
+        if (!$this->pointer->db = new SQLite3($this->pointer->path)) {
+          $this->pointer->state = false;
+          echo 'nepodarilo se vytvorit objekt databaze!';
+        }
+      } else {
+        echo 'nelze do pathe zapisovat!';
+      }
+!!!174466.php!!!	__destruct()
+      if (is_object($this->pointer->db)) {
+        $this->pointer->db->close();
+      }
+!!!174594.php!!!	setStructure(inout struct : )
+      //pokud je pripojena databaze a velikost souboru databaze 0 tak instaluje
+      if (!empty($this->pointer->db) && filesize($this->pointer->path) == 0) {
+        $func = function ($k ,$v) { return sprintf('%s %s', $k, $v); };
+        foreach ($struct as $name => $columns) {
+          $values = implode(','.PHP_EOL, array_map($func, array_keys($columns), $columns));
+          $create = sprintf('CREATE TABLE %s (%s);', $name, $values);
+          if (!$this->pointer->state = $this->pointer->db->exec($create)) {
+            echo 'sql dotaz instalace se nepovedl!';
+          }
+        }
+      }
+      $this->pointer->struct = $struct; //vlozeni struktury tabulky
+      return $this;
+!!!174722.php!!!	addRow(inout table : , inout data : )
+      $cols = array();
+      $val = array();
+      foreach ($data as $column => $value) {
+        $cols[] = $column;
+        $val[] = Sql::getType($this->pointer->struct[$table][$column], SQLite3::escapeString($value));
+      }
+
+      $sql = sprintf('INSERT INTO %s (%s) VALUES (%s);', $table, implode(', ', $cols), implode(', ', $val));
+      if (!$this->pointer->state = $this->pointer->db->exec($sql)) {
+        echo 'sql dotaz vlozeni radku se nezadaril!';
+        var_dump($this->pointer->db->lastErrorMsg());
+      }
+!!!174850.php!!!	getLastInsertID()
+      return $this->pointer->db->lastInsertRowID();
+!!!174978.php!!!	getCountChanges()
+      return $this->pointer->db->changes();
+!!!175106.php!!!	editRow(inout table : , inout id : , inout data : )
+      $val = array();
+      foreach ($data as $column => $value) {
+        $val[] = sprintf('%s=%s', $column, Sql::getType($this->pointer->struct[$table][$column], SQLite3::escapeString($value)));
+      }
+
+      $sql = sprintf('UPDATE %s SET %s WHERE rowid=%d;', $table, implode(','.PHP_EOL, $val), $id);
+      if (!$this->pointer->state = $this->pointer->db->exec($sql)) {
+        echo 'sql dotaz vlozeni radku se nezadaril!';
+        var_dump($this->pointer->db->lastErrorMsg());
+      }
+!!!175234.php!!!	delRow(inout table : , inout id : )
+      $sql = sprintf('DELETE FROM %s WHERE rowid=%d;', $table, $id);
+      if (!$this->pointer->state = $this->pointer->db->exec($sql)) {
+        echo 'sql dotaz vlozeni radku se nezadaril!';
+        var_dump($this->pointer->db->lastErrorMsg());
+      }
+      $this->pointer->db->exec('VACUUM;');  //provedeni vacua
+!!!175362.php!!!	loadRow(inout table : , inout id : , inout columns :  = '*')
+      $sql = sprintf('SELECT %s FROM %s WHERE rowid=%d;', $columns, $table, $id);
+      return $this->pointer->db->querySingle($sql, true);
+!!!175490.php!!!	loadRows(inout table : )
+      //nacte vybrane radky?
+!!!175618.php!!!	setIterator(inout table : , inout settings :  = array())
+      $result = NULL;
+      $sql = NULL;
+      if ($table instanceof Sql) {
+        $sql = $table->getSql();  //nacteni sql dotazu
+        $where = $table->getWhereArgs();  //nacteni hotnoty where
+        $limit = $table->getLimitArgs();  //nacteni hodnoty limitu
+        $table = $table->getTable();  //nateni nazvu tabulek
+      } else {
+        $columns = Core::isFill($settings, 'columns', '*');
+        $order = Core::isFill($settings, 'order', 'rowid ASC');
+        $where = Core::isFill($settings, 'where');
+        $limit = Core::isFill($settings, 'limit');
+      }
+
+      if (!empty($limit)) {
+        $result = $limit[1]; //druhe cislo limitu
+        $limit = vsprintf(' LIMIT %s,%s', $limit);
+      }
+
+//FIXME kurva!!! cele prekopat do PDO konektor!!!!!!!, originalni pristup je k hovnum!!!!!
+
+      if (!empty($where)) {
+        $where = sprintf(' WHERE %s', $where);
+        $result = $this->pointer->db->querySingle(sprintf('SELECT count(rowid) FROM %s%s;', $table, $where));
+      }
+//FIXME domyslet a nebo odhledat lepsi zpusob na pocitani radku!!!!! z sql dotazu!!!
+      if (empty($sql)) {
+        $sql = sprintf('SELECT rowid, %s FROM %s%s ORDER BY %s%s;', $columns, $table, $where, $order, $limit);
+      }
+
+//var_dump(sprintf('SELECT count(%s) FROM %s;', $sql, $table));
+      //!var_dump($this->pointer->db->querySingle(sprintf('SELECT count(%s) FROM %s;', $sql, $table), true));
+//FIXME PDO je reseni!!!!! pres pdo s tim ze se udela univerzalni a nebo pro jednotlive databaze?!!!
+//samozrejme efektivenejsu bude nejak jako "SqlConnector()" :)
+
+//var_dump($sql);
+      $this->pointer->dbresultobject = Core::isFill($settings, 'result_object', true); //navrat objektem
+      $this->pointer->dbresult = $this->pointer->db->query($sql);
+
+//TODO pri nastaveni vzit i nejake univerzalni id a adresovat to pres to, aby se nekrizily pruchody
+      return $result;
+!!!175746.php!!!	getResultFetch()
+      if (!is_null($this->pointer->dbresult)) {
+        $fetch = $this->pointer->dbresult->fetchArray(SQLITE3_ASSOC);
+        $this->pointer->dbresultid = $fetch['rowid'];
+        //extract od 1.indexu
+        $this->pointer->dbresultfetch = (is_array($fetch) ? ($this->pointer->dbresultobject ? (object) array_slice($fetch, 1) : array_slice($fetch, 1)) : NULL);
+      }
+!!!175874.php!!!	rewind()
+      //prvni krok v iteraci
+      //var_dump(__METHOD__);
+      $this->getResultFetch();
+!!!176002.php!!!	current()
+      //vraceni hodnoty iterace
+      //var_dump(__METHOD__);
+      return $this->pointer->dbresultfetch;
+!!!176130.php!!!	key()
+      //vraceni klice iterace
+      //var_dump(__METHOD__);
+      //return $this->pointer->dbresultfetch['rowid'];
+      return $this->pointer->dbresultid;
+!!!176258.php!!!	next()
+      //posouvani indexu iterace
+      //var_dump(__METHOD__);
+      $this->getResultFetch();
+!!!176386.php!!!	valid()
+      //overeni koncove podminky iterace
+      //var_dump(__METHOD__);
+      $res = (!is_null($this->pointer->dbresultfetch));
+      if (!$res && !is_null($this->pointer->dbresultfetch)) {
+        //uzavreni result setu
+        $this->pointer->dbresult->finalize();
+      }
+      return $res;
+!!!176514.php!!!	getCountRows()
+      //

@@ -1,0 +1,721 @@
+/*
+ * MWS Admin v2.1 - Statistic Stylesheet
+ * This file is part of MWS Admin, an Admin template build for sale at ThemeForest.
+ * All copyright to this file is hold by Mairel Theafila <maimairel@yahoo.com> a.k.a nagaemas on ThemeForest.
+ * Last Updated:
+ * December 08, 2012
+ *
+ */
+
+/* (1) Statistic Boxes
+================================================== */
+
+.mws-stat-container {
+    width: 100%;
+    margin-bottom: 24px;
+    text-align: center;
+}
+
+.mws-stat {
+    display: inline-block;
+    vertical-align: top;
+    margin: 22px 1% 8px;
+    height: 80px;
+    /*
+    cursor: pointer;
+    */
+    cursor: default;
+    text-decoration: none;
+    color: #323232;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -ms-box-sizing: border-box;
+    box-sizing: border-box;
+    background: #ffffff repeat-x left top;
+    background-image: -ms-linear-gradient(top, #ffffff, #fafafa);
+    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#ffffff), to(#fafafa));
+    background-image: -webkit-linear-gradient(top, #ffffff, #fafafa);
+    background-image: -o-linear-gradient(top, #ffffff, #fafafa);
+    background-image: -moz-linear-gradient(top, #ffffff, #fafafa);
+    background-image: linear-gradient(top, #ffffff, #fafafa);
+    border: 1px solid #cccccc;
+    -webkit-border-radius: 6px;
+    -moz-border-radius: 6px;
+    border-radius: 6px;
+}
+
+/*
+.mws-stat:hover {
+    background-color: #fafafa;
+    text-decoration: none;
+    color: #323232;
+}
+
+.mws-stat:active {
+    background-image: none;
+    -webkit-box-shadow: 0px 1px 0px rgba(255, 255, 255, 0.5);
+    -moz-box-shadow: 0px 1px 0px rgba(255, 255, 255, 0.5);
+    box-shadow: 0px 1px 0px rgba(255, 255, 255, 0.5);
+}*/
+
+.mws-stat .mws-stat-icon {
+    width: 48px;
+    height: 100%;
+    float: left;
+    display: block;
+    border-right: 1px solid #cccccc;
+    background-position: center center;
+}
+
+.mws-stat .mws-stat-content {
+    margin-left: 49px;
+    display: block;
+    text-align: left;
+    padding: 8px 20px;
+}
+
+.mws-stat .mws-stat-content .mws-stat-title {
+    font-size: 12px;
+    line-height: 18px;
+    white-space: nowrap;
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.mws-stat .mws-stat-content .mws-stat-value {
+    font-size: 32px;
+    line-height: 48px;
+    /*font-weight: bold;*/
+    display: inline-block;
+    opacity: 0;
+}
+
+.mws-stat .mws-stat-content.preloader {
+    display: block;
+    min-height: 55px;
+    background: url(../images/preloader.gif) center 35px no-repeat;
+}
+
+.mws-stat .mws-stat-content .mws-stat-value.up {
+    background: url(../images/core/report-up.png) no-repeat right center;
+    padding-right: 24px;
+}
+
+.mws-stat .mws-stat-content .mws-stat-value.down {
+    background: url(../images/core/report-down.png) no-repeat right center;
+    padding-right: 24px;
+}
+
+/* Summary
+================================================== */
+
+.mws-summary {
+    margin: 0;
+    list-style: none;
+}
+
+.mws-summary > li {
+    color: #444;
+    display: block;
+    position: relative;
+    border-bottom: 1px solid #ccc;
+    padding: 0 13px;
+}
+
+.mws-summary > li .key,
+.mws-summary > li .val {
+    padding: 10px 0;
+    line-height: 24px;
+    min-height: 24px;
+    word-wrap: break-all;
+    display: block;
+}
+
+.mws-summary > li .val-ibtn {
+    padding: 10px 0 4px;
+}
+
+.mws-summary > li .val-ibtn span.text-nowrap {
+    display: block;
+    margin-top: 2px;
+}
+
+.mws-summary > li .val-ibtn span.text-nowrap .ibutton-container {
+    cursor: default;
+}
+
+.mws-summary > li .key {
+    width: 140px;
+    margin-right: 10px;
+    float: left;
+    font-weight: bold;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.mws-summary > li .key [class*="icon-"],
+.mws-summary > li .key [class*="icol-"] {
+    font-size: 21px;
+    line-height: 21px;
+    height: 24px;
+    margin-right: 4px;
+    vertical-align: top;
+}
+
+.mws-summary > li > .val .up {
+    color: #468847;
+}
+
+.mws-summary > li > .val .down {
+    color: #b94a48;
+}
+
+.mws-summary > li .val {
+    overflow: hidden;
+    position: relative;
+}
+
+/* Vypisy - centralni nastaveni
+================================================== */
+
+div.mws-summary-2 {
+    width: 100%;
+    margin: 0;
+    padding-right: 10px;
+    position: relative;
+    overflow: hidden;
+}
+
+div.mws-summary-2 hr {
+    margin: 5px 0;
+    border-top: 1px solid #e5e5e5;
+    border-bottom: 1px solid #f6f6f6;
+}
+
+div.mws-summary-2 img {
+    display: block;
+    max-width: 100%;
+    max-height: 100%;
+}
+
+div.mws-summary-2 div.sloupec > img {
+    margin: 10px auto;
+}
+
+div.mws-summary-2 p {
+    margin: 0;
+}
+
+/* Vypisy - levy sloupec
+================================================== */
+
+div.mws-summary-2 div.levy_sloupec_s,
+div.mws-summary-2 div.levy_sloupec_m,
+div.mws-summary-2 div.levy_sloupec_l {
+    margin-right: 2%;
+    margin-left: 2%;
+    float: left;
+}
+
+div.mws-summary-2 div.h_70 {
+    height: 70px;
+}
+
+div.mws-summary-2 div.h_80 {
+    height: 80px;
+}
+
+div.mws-summary-2 div.h_120 {
+    height: 120px;
+}
+
+div.mws-summary-2 div.h_158 {
+    height: 158px;
+}
+
+div.mws-summary-2 div.levy_sloupec_obsah {
+    margin-right: 2%;
+    margin-left: 2%;
+}
+
+div.mws-summary-2 div.levy_sloupec_obsah_porovnani {
+    margin-right: 1%;
+    margin-left: 1%;
+}
+
+div.mws-summary-2 div.levy_sloupec_s {
+    width: 10%;
+}
+
+div.mws-summary-2 div.levy_sloupec_m {
+    width: 20%;
+}
+
+div.mws-summary-2 div.levy_sloupec_l {
+    width: 30%;
+}
+
+div.mws-summary-2 div.levy_sloupec_s img {
+    margin: 10px auto;
+}
+
+div.mws-summary-2 div.levy_sloupec_m img,
+div.mws-summary-2 div.levy_sloupec_l img {
+    margin: 15px auto;
+}
+
+/* Vypisy - pravy sloupec
+================================================== */
+
+div.mws-summary-2 div.obal_pravy_sloupec_s,
+div.mws-summary-2 div.obal_pravy_sloupec_m,
+div.mws-summary-2 div.obal_pravy_sloupec_l {
+    float: right;
+}
+
+div.mws-summary-2 div.obal_pravy_sloupec_s {
+    width: 86%;
+}
+
+div.mws-summary-2 div.obal_pravy_sloupec_m {
+    width: 76%;
+}
+
+div.mws-summary-2 div.obal_pravy_sloupec_l {
+    width: 66%;
+}
+
+div.mws-summary-2 div.obal_pravy_sloupec_s div.sloupec,
+div.mws-summary-2 div.obal_pravy_sloupec_m div.sloupec,
+div.mws-summary-2 div.obal_pravy_sloupec_l div.sloupec {
+    margin-bottom: 3px;
+}
+
+div.mws-summary-2 div.levy_sloupec_obsah_porovnani div.sloupec {
+    min-height: 22px;
+    margin-bottom: 5px;
+}
+
+div.mws-summary-2 div.obal_pravy_sloupec_s div.sloupec:first-of-type,
+div.mws-summary-2 div.obal_pravy_sloupec_m div.sloupec:first-of-type,
+div.mws-summary-2 div.obal_pravy_sloupec_l div.sloupec:first-of-type,
+div.mws-summary-2 div.levy_sloupec_obsah div.sloupec:first-of-type {
+    margin-top: 10px;
+}
+
+div.mws-summary-2 div.obal_pravy_sloupec_s div.sloupec.vetsi_odsazeni,
+div.mws-summary-2 div.obal_pravy_sloupec_m div.sloupec.vetsi_odsazeni,
+div.mws-summary-2 div.obal_pravy_sloupec_l div.sloupec.vetsi_odsazeni {
+    margin-top: 15px;
+}
+
+div.mws-summary-2 div.obal_pravy_sloupec_s div.sloupec:last-of-type,
+div.mws-summary-2 div.obal_pravy_sloupec_m div.sloupec:last-of-type,
+div.mws-summary-2 div.obal_pravy_sloupec_l div.sloupec:last-of-type,
+div.mws-summary-2 div.levy_sloupec_obsah div.sloupec:last-of-type {
+    margin-bottom: 10px;
+}
+
+div.mws-summary-2 div.obal_pravy_sloupec_s div.obsahovy_sloupec,
+div.mws-summary-2 div.obal_pravy_sloupec_m div.obsahovy_sloupec,
+div.mws-summary-2 div.obal_pravy_sloupec_l div.obsahovy_sloupec {
+    height: 60px;
+    margin-right: 10px;
+    overflow: hidden;
+    white-space: nowrap;
+}
+
+div.mws-summary-2 div.obal_pravy_sloupec_s div.info_blok_s,
+div.mws-summary-2 div.obal_pravy_sloupec_m div.info_blok_s,
+div.mws-summary-2 div.obal_pravy_sloupec_l div.info_blok_s,
+div.mws-summary-2 div.obal_pravy_sloupec_s div.info_blok_m,
+div.mws-summary-2 div.obal_pravy_sloupec_m div.info_blok_m,
+div.mws-summary-2 div.obal_pravy_sloupec_l div.info_blok_m,
+div.mws-summary-2 div.obal_pravy_sloupec_s div.info_blok_l,
+div.mws-summary-2 div.obal_pravy_sloupec_m div.info_blok_l,
+div.mws-summary-2 div.obal_pravy_sloupec_l div.info_blok_l,
+div.mws-summary-2 div.levy_sloupec_obsah div.sloupec {
+    height: 20px;
+    overflow: hidden;
+}
+
+div.mws-summary-2 div.levy_sloupec_obsah_porovnani div.sloupec_head {
+    height: 22px;
+}
+
+div.mws-summary-2 div.levy_sloupec_obsah_porovnani div.sloupec_flexhg {
+    height: auto;
+}
+
+div.mws-summary-2 div.obal_pravy_sloupec_s div.info_blok_s table,
+div.mws-summary-2 div.obal_pravy_sloupec_m div.info_blok_s table,
+div.mws-summary-2 div.obal_pravy_sloupec_l div.info_blok_s table,
+div.mws-summary-2 div.obal_pravy_sloupec_s div.info_blok_m table,
+div.mws-summary-2 div.obal_pravy_sloupec_m div.info_blok_m table,
+div.mws-summary-2 div.obal_pravy_sloupec_l div.info_blok_m table,
+div.mws-summary-2 div.obal_pravy_sloupec_s div.info_blok_l table,
+div.mws-summary-2 div.obal_pravy_sloupec_m div.info_blok_l table,
+div.mws-summary-2 div.obal_pravy_sloupec_l div.info_blok_l table,
+div.mws-summary-2 div.levy_sloupec_obsah div.sloupec table {
+    width: 100%;
+    border-collapse: collapse;
+    border: none;
+    table-layout: fixed;
+}
+
+div.mws-summary-2 div.obal_pravy_sloupec_s div.info_blok_s table td.key,
+div.mws-summary-2 div.obal_pravy_sloupec_m div.info_blok_s table td.key,
+div.mws-summary-2 div.obal_pravy_sloupec_l div.info_blok_s table td.key,
+div.mws-summary-2 div.obal_pravy_sloupec_s div.info_blok_m table td.key,
+div.mws-summary-2 div.obal_pravy_sloupec_m div.info_blok_m table td.key,
+div.mws-summary-2 div.obal_pravy_sloupec_l div.info_blok_m table td.key,
+div.mws-summary-2 div.obal_pravy_sloupec_s div.info_blok_l table td.key,
+div.mws-summary-2 div.obal_pravy_sloupec_m div.info_blok_l table td.key,
+div.mws-summary-2 div.obal_pravy_sloupec_l div.info_blok_l table td.key,
+div.mws-summary-2 div.obal_pravy_sloupec_s div.info_blok_s table td.val,
+div.mws-summary-2 div.obal_pravy_sloupec_m div.info_blok_s table td.val,
+div.mws-summary-2 div.obal_pravy_sloupec_l div.info_blok_s table td.val,
+div.mws-summary-2 div.obal_pravy_sloupec_s div.info_blok_m table td.val,
+div.mws-summary-2 div.obal_pravy_sloupec_m div.info_blok_m table td.val,
+div.mws-summary-2 div.obal_pravy_sloupec_l div.info_blok_m table td.val,
+div.mws-summary-2 div.obal_pravy_sloupec_s div.info_blok_l table td.val,
+div.mws-summary-2 div.obal_pravy_sloupec_m div.info_blok_l table td.val,
+div.mws-summary-2 div.obal_pravy_sloupec_l div.info_blok_l table td.val,
+div.mws-summary-2 div.levy_sloupec_obsah div.sloupec table td.val {
+    white-space: nowrap;
+}
+
+div.mws-summary-2 div.levy_sloupec_obsah_porovnani div.sloupec table td.val {
+    white-space: normal;
+}
+
+div.mws-summary-2-archiv div.levy_sloupec_obsah div.sloupec table td.val p {
+  display: inline-block;
+  margin-right: 3px;
+}
+
+div.mws-summary-2 div.obal_pravy_sloupec_s div.info_blok_s table td.key,
+div.mws-summary-2 div.obal_pravy_sloupec_m div.info_blok_s table td.key,
+div.mws-summary-2 div.obal_pravy_sloupec_l div.info_blok_s table td.key,
+div.mws-summary-2 div.obal_pravy_sloupec_s div.info_blok_m table td.key,
+div.mws-summary-2 div.obal_pravy_sloupec_m div.info_blok_m table td.key,
+div.mws-summary-2 div.obal_pravy_sloupec_l div.info_blok_m table td.key,
+div.mws-summary-2 div.obal_pravy_sloupec_s div.info_blok_l table td.key,
+div.mws-summary-2 div.obal_pravy_sloupec_m div.info_blok_l table td.key,
+div.mws-summary-2 div.obal_pravy_sloupec_l div.info_blok_l table td.key,
+div.mws-summary-2 div.levy_sloupec_obsah div.sloupec table td.key {
+    text-align: right;
+    vertical-align: top;
+}
+
+div.mws-summary-2 div.obal_pravy_sloupec_s div.info_blok_s table td.val,
+div.mws-summary-2 div.obal_pravy_sloupec_m div.info_blok_s table td.val,
+div.mws-summary-2 div.obal_pravy_sloupec_l div.info_blok_s table td.val,
+div.mws-summary-2 div.obal_pravy_sloupec_s div.info_blok_m table td.val,
+div.mws-summary-2 div.obal_pravy_sloupec_m div.info_blok_m table td.val,
+div.mws-summary-2 div.obal_pravy_sloupec_l div.info_blok_m table td.val,
+div.mws-summary-2 div.obal_pravy_sloupec_s div.info_blok_l table td.val,
+div.mws-summary-2 div.obal_pravy_sloupec_m div.info_blok_l table td.val,
+div.mws-summary-2 div.obal_pravy_sloupec_l div.info_blok_l table td.val,
+div.mws-summary-2 div.levy_sloupec_obsah div.sloupec table td.val {
+    font-style: italic;
+    padding-left: 10px;
+}
+
+div.mws-summary-2 div.levy_sloupec_obsah_porovnani div.sloupec table td.val {
+    padding-right: 10px;
+    border-right: 1px dotted #000;
+    vertical-align: top;
+}
+
+div.mws-summary-2 div.levy_sloupec_obsah_porovnani div.sloupec_flexhg .obal_stare {
+    width: 50%;
+    float: left;
+}
+
+div.mws-summary-2 div.levy_sloupec_obsah_porovnani div.sloupec_flexhg .obal_nove {
+    width: 50%;
+    float: right;
+}
+
+div.mws-summary-2 div.levy_sloupec_obsah_porovnani div.sloupec_flexhg .obal_stare div,
+div.mws-summary-2 div.levy_sloupec_obsah_porovnani div.sloupec_flexhg .obal_nove div,
+div.mws-summary-2 div.levy_sloupec_obsah_porovnani div.sloupec_flexhg .obal_oddil div {
+    margin-bottom: 5px;
+    background-color: #fff;
+    border-right: 1px dotted #000;
+}
+
+div.mws-summary-2 div.levy_sloupec_obsah_porovnani div.sloupec_flexhg .obal_stare div {
+    padding-right: 10px;
+}
+
+div.mws-summary-2 div.levy_sloupec_obsah_porovnani div.sloupec_flexhg .obal_nove div {
+    padding-left: 10px;
+    border-left: 1px dotted #000;
+    border-right: 0;
+}
+
+div.mws-summary-2 div.levy_sloupec_obsah_porovnani div.sloupec_flexhg .obal_oddil div {
+    border-right: 0;
+}
+
+div.mws-summary-2 div.levy_sloupec_obsah_porovnani div.sloupec_flexhg .obal_stare div:last-of-type,
+div.mws-summary-2 div.levy_sloupec_obsah_porovnani div.sloupec_flexhg .obal_nove div:last-of-type,
+div.mws-summary-2 div.levy_sloupec_obsah_porovnani div.sloupec_flexhg .obal_oddil div:last-of-type {
+    margin-bottom: 0;
+}
+
+div.mws-summary-2 div.levy_sloupec_obsah_porovnani div.sloupec_flexhg .obal_stare div table,
+div.mws-summary-2 div.levy_sloupec_obsah_porovnani div.sloupec_flexhg .obal_nove div table,
+div.mws-summary-2 div.levy_sloupec_obsah_porovnani div.sloupec_flexhg .obal_oddil div table {
+    width: 100%;
+    border-collapse: collapse;
+    border: none;
+    table-layout: fixed;
+}
+
+div.mws-summary-2 div.levy_sloupec_obsah_porovnani div.sloupec_flexhg .obal_stare div table th,
+div.mws-summary-2 div.levy_sloupec_obsah_porovnani div.sloupec_flexhg .obal_nove div table th,
+div.mws-summary-2 div.levy_sloupec_obsah_porovnani div.sloupec_flexhg .obal_oddil div table th {
+    padding: 3px 0 3px 30px;
+    font-weight: normal;
+    text-align: left;
+    font-style: normal;
+    font-size: 14px;
+    border-bottom: 1px dotted #000;
+}
+
+div.mws-summary-2 div.levy_sloupec_obsah_porovnani div.sloupec_flexhg .obal_stare div table:first-of-type + table td,
+div.mws-summary-2 div.levy_sloupec_obsah_porovnani div.sloupec_flexhg .obal_nove div table:first-of-type + table td,
+div.mws-summary-2 div.levy_sloupec_obsah_porovnani div.sloupec_flexhg .obal_oddil div table:first-of-type + table td {
+    padding-top: 5px;
+}
+
+div.mws-summary-2 div.levy_sloupec_obsah_porovnani div.sloupec_flexhg .obal_stare div table td,
+div.mws-summary-2 div.levy_sloupec_obsah_porovnani div.sloupec_flexhg .obal_nove div table td,
+div.mws-summary-2 div.levy_sloupec_obsah_porovnani div.sloupec_flexhg .obal_oddil div table td {
+    width: 70px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-align: right;
+    vertical-align: top;
+}
+
+div.mws-summary-2 div.levy_sloupec_obsah_porovnani div.sloupec_flexhg .obal_stare div table td a,
+div.mws-summary-2 div.levy_sloupec_obsah_porovnani div.sloupec_flexhg .obal_nove div table td a,
+div.mws-summary-2 div.levy_sloupec_obsah_porovnani div.sloupec_flexhg .obal_oddil div table td a {
+    margin-top: -2px;
+    padding: 1px 2px;
+}
+
+div.mws-summary-2 div.levy_sloupec_obsah_porovnani div.sloupec_flexhg .obal_stare div table td + td,
+div.mws-summary-2 div.levy_sloupec_obsah_porovnani div.sloupec_flexhg .obal_nove div table td + td,
+div.mws-summary-2 div.levy_sloupec_obsah_porovnani div.sloupec_flexhg .obal_oddil div table td + td {
+    width: auto;
+    padding-left: 10px;
+    vertical-align: top;
+    text-align: left;
+}
+
+div.mws-summary-2 div.levy_sloupec_obsah_porovnani div.sloupec_flexhg td.oddily {
+    border-right: 0 !important;
+}
+
+div.mws-summary-2 div.levy_sloupec_obsah_samostatny div.sloupec table td.val {
+    padding-right: 0;
+    border-right: 0;
+}
+
+div.mws-summary-2 div.levy_sloupec_obsah_porovnani div.sloupec_head table td.val span {
+    display: block;
+    font-style: normal;
+    font-size: 14px;
+    border-bottom: 1px dotted #000;
+}
+
+div.mws-summary-2 div.levy_sloupec_obsah_porovnani div.sloupec table td.val + td.val {
+    padding-left: 10px;
+    border-right: 0;
+}
+
+div.mws-summary-2 div.levy_sloupec_obsah div.sloupec table td.key {
+    width: 40px;
+}
+
+div.mws-summary-2 div.obal_pravy_sloupec_s div.info_blok_s table td.key,
+div.mws-summary-2 div.obal_pravy_sloupec_m div.info_blok_s table td.key,
+div.mws-summary-2 div.obal_pravy_sloupec_l div.info_blok_s table td.key,
+div.mws-summary-2 div.levy_sloupec_obsah div.info_blok_s table td.key {
+    width: 60px;
+}
+
+div.mws-summary-2 div.obal_pravy_sloupec_s div.info_blok_m table td.key,
+div.mws-summary-2 div.obal_pravy_sloupec_m div.info_blok_m table td.key,
+div.mws-summary-2 div.obal_pravy_sloupec_l div.info_blok_m table td.key,
+div.mws-summary-2 div.levy_sloupec_obsah div.info_blok_m table td.key {
+    width: 100px;
+}
+
+div.mws-summary-2 div.obal_pravy_sloupec_s div.info_blok_l table td.key,
+div.mws-summary-2 div.obal_pravy_sloupec_m div.info_blok_l table td.key,
+div.mws-summary-2 div.obal_pravy_sloupec_l div.info_blok_l table td.key,
+div.mws-summary-2 div.levy_sloupec_obsah div.info_blok_l table td.key {
+    width: 120px;
+}
+
+div.mws-summary-2 div.obal_pravy_sloupec_s div.ibtn_blok table td.val .ibutton-container,
+div.mws-summary-2 div.obal_pravy_sloupec_m div.ibtn_blok table td.val .ibutton-container,
+div.mws-summary-2 div.obal_pravy_sloupec_l div.ibtn_blok table td.val .ibutton-container {
+    margin-top: -1px;
+    margin-bottom: -4px;
+    font-style: normal;
+}
+
+/* Vypisy
+================================================== */
+
+.mws-summary-3 {
+    float: left;
+}
+
+.mws-summary-3-r {
+    float: right;
+}
+
+.mws-summary-3 tr td {
+    white-space: nowrap;
+}
+
+.mws-summary-3 tr td.key {
+    width: 90px;
+    text-align: right;
+}
+
+.mws-summary-3 tr td.key_s {
+    width: 60px;
+}
+
+.mws-summary-3 tr td.key_m {
+    width: 70px;
+}
+
+.mws-summary-3 tr td.key_l {
+    width: 150px;
+}
+
+.mws-summary-3 tr td.val {
+    width: 50px;
+    font-style: italic;
+}
+
+.mws-summary-3 tr td.empty {
+    width: 170px;
+    text-align: center;
+    font-style: italic;
+}
+
+/* Vypisy
+================================================== */
+
+.mws-summary-4 {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.mws-summary-4 td {
+    white-space: nowrap;
+}
+
+.mws-summary-4 td:first-of-type {
+    width: 100px;
+    text-align: center;
+}
+
+.mws-summary-4 td:nth-child(2) {
+    width: 80px;
+}
+
+.mws-summary-4 td:nth-child(2) a {
+    padding: 3px;
+    color: inherit;
+    text-decoration: underline;
+}
+
+.mws-summary-4 td:nth-child(2) a:hover {
+    color: #c5d52b;
+    text-shadow: 0 0 6px rgba(197, 213, 42, 0.5);
+    background-color: #000;
+}
+
+.mws-summary-4 td:nth-child(3) {
+    width: 900px;
+}
+
+.mws-summary-4 td:nth-child(4) {
+    width: 140px;
+    text-align: center;
+}
+
+.mws-summary-4 td:last-of-type {
+    width: 200px;
+    text-align: center;
+}
+
+/* Vypisy
+================================================== */
+
+.mws-summary-5 {
+    padding: 10px 10px 0;
+}
+
+/* (2) Flot Tooltips
+================================================== */
+
+#flotTip {
+    padding: 3px 6px !important;
+    color: #ffffff !important;
+    font-size: 11px !important;
+    text-align: center !important;
+    text-decoration: none !important;
+    background-color: #222 !important;
+    border: 1px solid #000 !important;
+    -webkit-border-radius: 3px !important;
+    -moz-border-radius: 3px !important;
+    border-radius: 3px !important;
+    -webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.15);
+    -moz-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.15);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.15);
+}
+
+/* Media Queries
+================================================== */
+
+@media only screen and (max-width: 768px) {
+
+    .mws-stat {
+        width: 100%;
+        height: 60px;
+        margin: 8px 0;
+    }
+
+    .mws-stat .mws-stat-content .mws-stat-value {
+        font-size: 21px;
+        line-height: 32px;
+    }
+
+    .mws-stat .mws-stat-content .mws-stat-title {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: block;
+    }
+}
+
+@media only screen and (max-width : 599px) {
+    .mws-stat-container {
+        margin-bottom: 16px;
+    }
+}

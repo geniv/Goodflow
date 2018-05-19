@@ -1,0 +1,470 @@
+format 70
+"phpcore" // phpcore
+  revision 1
+  modified_by 2 "geniv"
+  // class settings
+  //class diagram settings
+  draw_all_relations default hide_attributes default hide_operations default hide_getset_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_relation_visibility default show_infonote default shadow default show_stereotype_properties default
+  //use case diagram settings
+  package_name_in_tab default show_context default auto_label_position default draw_all_relations default class_drawing_mode default shadow default show_stereotype_properties default
+  //sequence diagram settings
+  show_full_operations_definition default write_horizontally default class_drawing_mode default drawing_language default draw_all_relations default shadow default show_stereotype_properties default
+  //collaboration diagram settings
+  show_full_operations_definition default show_hierarchical_rank default write_horizontally default drawing_language default package_name_in_tab default show_context default draw_all_relations default shadow default show_stereotype_properties default
+  //object diagram settings
+   write_horizontally default package_name_in_tab default show_context default auto_label_position default draw_all_relations default shadow default show_stereotype_properties default
+  //component diagram settings
+  package_name_in_tab default show_context default auto_label_position default draw_all_relations default shadow default
+  draw_component_as_icon default show_component_req_prov default show_component_rea default show_stereotype_properties default
+  //deployment diagram settings
+  package_name_in_tab default show_context default write_horizontally default auto_label_position default draw_all_relations default shadow default
+  draw_component_as_icon default show_component_req_prov default show_component_rea default show_stereotype_properties default
+  //state diagram settings
+  package_name_in_tab default show_context default auto_label_position default write_trans_label_horizontally default show_trans_definition default draw_all_relations default shadow default
+  show_activities default region_horizontally default drawing_language default show_stereotype_properties default
+  //activity diagram settings
+  package_name_in_tab default show_context default show_opaque_action_definition default auto_label_position default write_flow_label_horizontally default draw_all_relations default shadow default
+  show_infonote default drawing_language default show_stereotype_properties default
+  
+  deploymentview 128002 "phpcore"
+    //deployment diagram settings
+    package_name_in_tab default show_context default write_horizontally default auto_label_position default draw_all_relations default shadow default
+    draw_component_as_icon default show_component_req_prov default show_component_rea default show_stereotype_properties default
+    artifact 128002 "ajax"
+      stereotype "source"
+      php_src "<?php
+/*
+ *      ajax.php
+ *
+ *      Copyright 2011 geniv <geniv.radek@gmail.com>
+ *
+ */
+
+  //load autoload
+  require 'loader.php';
+
+  use classes\\Core;
+
+  try {
+    $menu = Core::isFill($_POST, 'menu'); //posilano jen pres post
+    if (!empty($menu)) {
+      if (method_exists($menu, 'getAjax')) {
+        echo $menu::getAjax();  //volani metody ajaxu dotycne tridy
+      } else { throw new ExceptionAjax('Method ajax does not exist!'); }
+    }
+  } catch (ExceptionAjax $e) {
+    echo $e;  //TODO notification???
+  }
+
+${definition}
+
+
+
+?>
+"
+      associated_classes
+	class_ref 128002 // ExceptionAjax
+      end
+    end
+
+    artifact 128130 "config"
+      stereotype "source"
+      php_src "<?php
+/*
+ *      config.php
+ *
+ *      Copyright 2011 geniv <geniv.radek@gmail.com>
+ *
+ */
+
+  use classes\\Configurator;
+
+${definition}
+
+
+
+?>
+"
+      associated_classes
+	class_ref 128258 // Config
+      end
+    end
+
+    artifact 128258 "config2"
+      stereotype "source"
+      php_src "<?php"
+      associated_classes
+      end
+    end
+
+    artifact 128386 "config3"
+      stereotype "source"
+      php_src "<?php
+/*
+ *      config.php
+ *
+ *      Copyright 2011 server <geniv.radek@gmail.com>
+ *
+ */
+
+  use classes\\Configurator;
+"
+      associated_classes
+      end
+    end
+
+    artifact 128514 "highlight"
+      stereotype "source"
+      php_src "<?php
+/*
+ *      highlight.php
+ *
+ *      Copyright 2011 server <geniv.radek@gmail.com>
+ *
+ */
+
+  require 'loader.php';
+
+  use classes\\Form;
+
+  $form = new Form;
+  $form->addTextArea('text', array('returnvalue' => true, 'placeholder' => 'kod musí začínat: <?php'))
+        ->addSubmit('tlacitko');
+
+  echo $form;
+
+  if ($form->isSubmitted()) {
+    $text = $form->getValue('text');
+    echo highlight_string($text, true);
+  }
+
+?>
+"
+      associated_classes
+      end
+    end
+
+    artifact 128642 "identify"
+      stereotype "source"
+      php_src "<?php
+/*
+ *      identify.php
+ *
+ *      Copyright 2011 server <geniv.radek@gmail.com>
+ *
+ */
+
+  exec('identify -version', $out);
+  echo nl2br(print_r($out, true));
+
+?>
+"
+      associated_classes
+      end
+    end
+
+    artifact 128770 "loader"
+      stereotype "source"
+      php_src "<?php
+${definition}
+
+
+
+  /**
+   * Autoload classes
+   *
+   * @param name string
+   */
+  function __autoload($name) {
+    try {
+
+      $file = str_replace('\\\\', '/', strtolower($name));
+      $cesta = sprintf('%s/%s.php', __DIR__, $file);
+      //var_dump($cesta);
+      //overeni existence cesty
+      if (file_exists($cesta)) {
+        require $cesta; //nejrychlejsi, chyba => kritikal
+      } else {
+        //var_dump($name, $cesta);
+        throw new ExceptionAutoload(sprintf('Class \"%s\" does not exist!', $cesta));
+      }
+
+    } catch (ExceptionAutoload $e) {
+      echo $e;
+    }
+  }
+
+  class ExceptionAutoload extends Exception {}
+
+?>
+"
+      associated_classes
+	class_ref 128514 // Autoload
+      end
+    end
+  end
+
+  classview 128002 "phpcore"
+    //class diagram settings
+    draw_all_relations default hide_attributes default hide_operations default hide_getset_operations default show_members_full_definition default show_members_visibility default show_members_stereotype default show_members_multiplicity default show_members_initialization default show_attribute_modifiers default member_max_width 0 show_parameter_dir default show_parameter_name default package_name_in_tab default class_drawing_mode default drawing_language default show_context_mode default auto_label_position default show_relation_modifiers default show_relation_visibility default show_infonote default shadow default show_stereotype_properties default
+    //collaboration diagram settings
+    show_full_operations_definition default show_hierarchical_rank default write_horizontally default drawing_language default package_name_in_tab default show_context default draw_all_relations default shadow default show_stereotype_properties default
+    //object diagram settings
+     write_horizontally default package_name_in_tab default show_context default auto_label_position default draw_all_relations default shadow default show_stereotype_properties default
+    //sequence diagram settings
+    show_full_operations_definition default write_horizontally default class_drawing_mode default drawing_language default draw_all_relations default shadow default show_stereotype_properties default
+    //state diagram settings
+    package_name_in_tab default show_context default auto_label_position default write_trans_label_horizontally default show_trans_definition default draw_all_relations default shadow default
+    show_activities default region_horizontally default drawing_language default show_stereotype_properties default
+    //class settings
+    //activity diagram settings
+    package_name_in_tab default show_context default show_opaque_action_definition default auto_label_position default write_flow_label_horizontally default draw_all_relations default shadow default
+    show_infonote default drawing_language default show_stereotype_properties default
+    class 128002 "ExceptionAjax"
+      visibility package 
+      cpp_decl ""
+      java_decl ""
+      php_decl "${comment}${final}${visibility}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      classrelation 128002 // <generalisation>
+	relation 128002 ---|>
+	  a public
+	    php "${type}"
+	    classrelation_ref 128002 // <generalisation>
+	  b parent class_ref 128130 // Exception
+      end
+    end
+
+    class 128258 "Config"
+      visibility package 
+      cpp_decl ""
+      java_decl ""
+      php_decl "${comment}${final}${visibility}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      classrelation 128130 // <generalisation>
+	relation 128130 ---|>
+	  a public
+	    php "${type}"
+	    classrelation_ref 128130 // <generalisation>
+	  b parent class_ref 128386 // Configurator
+      end
+
+      attribute 128002 "VERSION"
+	const_attribute package explicit_type ""
+	init_value " 1.67"
+	cpp_decl ""
+	java_decl ""
+	php_decl "  ${comment}${visibility}${const}${static}${var}${name}${value};
+"
+	python_decl ""
+	idl_decl ""
+      end
+
+      attribute 128130 "MINSIZEW"
+	const_attribute package explicit_type ""
+	init_value " '140'"
+	cpp_decl ""
+	java_decl ""
+	php_decl "  ${comment}${visibility}${const}${static}${var}${name}${value};
+"
+	python_decl ""
+	idl_decl ""
+      end
+
+      attribute 128258 "MINSIZEH"
+	const_attribute package explicit_type ""
+	init_value " '140'"
+	cpp_decl ""
+	java_decl ""
+	php_decl "  ${comment}${visibility}${const}${static}${var}${name}${value};
+"
+	python_decl ""
+	idl_decl ""
+	comment "W, default small size pictures, with bestfit"
+      end
+
+      attribute 128386 "MAXSIZEW"
+	const_attribute package explicit_type ""
+	init_value " '800'"
+	cpp_decl ""
+	java_decl ""
+	php_decl "  ${comment}${visibility}${const}${static}${var}${name}${value};
+"
+	python_decl ""
+	idl_decl ""
+	comment "H"
+      end
+
+      attribute 128514 "MAXSIZEH"
+	const_attribute package explicit_type ""
+	init_value " '800'"
+	cpp_decl ""
+	java_decl ""
+	php_decl "  ${comment}${visibility}${const}${static}${var}${name}${value};
+"
+	python_decl ""
+	idl_decl ""
+	comment "W, default large size pictures, with bestfit"
+      end
+
+      attribute 128642 "THUMB"
+	const_attribute package explicit_type ""
+	init_value " 'thumbnails'"
+	cpp_decl ""
+	java_decl ""
+	php_decl "  ${comment}${visibility}${const}${static}${var}${name}${value};
+"
+	python_decl ""
+	idl_decl ""
+	comment "H"
+      end
+
+      attribute 128770 "SOURCE"
+	const_attribute package explicit_type ""
+	init_value " 'gallery'"
+	cpp_decl ""
+	java_decl ""
+	php_decl "  ${comment}${visibility}${const}${static}${var}${name}${value};
+"
+	python_decl ""
+	idl_decl ""
+	comment "name directory for thumbnails"
+      end
+
+      attribute 128898 "TIME_LOGIN"
+	const_attribute package explicit_type ""
+	init_value " 1"
+	cpp_decl ""
+	java_decl ""
+	php_decl "  ${comment}${visibility}${const}${static}${var}${name}${value};
+"
+	python_decl ""
+	idl_decl ""
+	comment "path for directory galleries"
+      end
+
+      attribute 129026 "TIME_EDIT"
+	const_attribute package explicit_type ""
+	init_value " 3"
+	cpp_decl ""
+	java_decl ""
+	php_decl "  ${comment}${visibility}${const}${static}${var}${name}${value};
+"
+	python_decl ""
+	idl_decl ""
+	comment "refresh time (s), for login, create login, etc..."
+      end
+
+      attribute 129154 "TRIMMARKER_DIR"
+	const_attribute package explicit_type ""
+	init_value " 120"
+	cpp_decl ""
+	java_decl ""
+	php_decl "  ${comment}${visibility}${const}${static}${var}${name}${value};
+"
+	python_decl ""
+	idl_decl ""
+	comment "refresh time (s), for edit, delete, etc..."
+      end
+
+      attribute 129282 "TRIMMARKER_PIC"
+	const_attribute package explicit_type ""
+	init_value " 220"
+	cpp_decl ""
+	java_decl ""
+	php_decl "  ${comment}${visibility}${const}${static}${var}${name}${value};
+"
+	python_decl ""
+	idl_decl ""
+	comment "truncated string with specified width for dirs"
+      end
+
+      attribute 129410 "TRIMMARKER_LISTPIC"
+	const_attribute package explicit_type ""
+	init_value " 70"
+	cpp_decl ""
+	java_decl ""
+	php_decl "  ${comment}${visibility}${const}${static}${var}${name}${value};
+"
+	python_decl ""
+	idl_decl ""
+	comment "truncated string with specified width fot pictures"
+      end
+
+      attribute 129538 "LANG"
+	const_attribute package explicit_type ""
+	init_value " 'en'"
+	cpp_decl ""
+	java_decl ""
+	php_decl "  ${comment}${visibility}${const}${static}${var}${name}${value};
+"
+	python_decl ""
+	idl_decl ""
+	comment "truncated string with specified width fot list pictures"
+      end
+
+      attribute 129666 "loadModules"
+	class_attribute protected explicit_type ""
+	init_value " array('modules\\ModuleHome',
+                                          'modules\\ModuleDirs',
+                                          'modules\\ModulePictures',
+                                          'modules\\ModuleSettings')"
+	cpp_decl ""
+	java_decl ""
+	php_decl "  ${comment}${visibility}${const}${static}${var}${name}${value};
+"
+	python_decl ""
+	idl_decl ""
+	comment "language: cs, en (default)
+loading module for web"
+      end
+    end
+
+    class 128514 "Autoload"
+      visibility package 
+      cpp_decl ""
+      java_decl ""
+      php_decl "${comment}${final}${visibility}${abstract}class ${name}${extends}${implements} {
+${members}}
+"
+      python_2_2 python_decl ""
+      idl_decl ""
+      explicit_switch_type ""
+      
+      comment "
+     loader.php
+
+     Copyright 2011 geniv <geniv.radek@gmail.com>
+
+"
+      attribute 129794 "VERSION"
+	const_attribute package explicit_type ""
+	init_value " 1.25"
+	cpp_decl ""
+	java_decl ""
+	php_decl "  ${comment}${visibility}${const}${static}${var}${name}${value};
+"
+	python_decl ""
+	idl_decl ""
+      end
+    end
+  end
+
+  package_ref 128258 // classes
+
+  package_ref 128386 // error_page
+
+  package_ref 128514 // pages
+
+  package_ref 128642 // test
+end

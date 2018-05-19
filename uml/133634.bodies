@@ -1,0 +1,80 @@
+class SelectionTheme
+!!!169346.php!!!	getInstance()
+      if (is_null(self::$instance)) {
+        self::$instance = new self;
+      }
+      return self::$instance;
+!!!169474.php!!!	setWebPath(inout path :  = NULL)
+      try {
+
+        if (file_exists($path)) {
+          self::$instance->path = $path;
+          self::$instance->theme = Core::isEmpty(Core::getCookie(self::THEME_COOKIE), self::THEME_DEFAULT);
+        } else {
+          //TODO jestli ne tak si ji vytvori!!!!??????!!
+          throw new ExceptionSelectionTheme(sprintf(_('Dir theme "%s" does not exist!'), $path));
+        }
+
+      } catch (ExceptionSelectionTheme $e) {
+        echo $e;
+      }
+!!!169602.php!!!	loadThemes()
+      //pokud nejsou nactena temata a neni prazdna cesta
+      if (empty(self::$instance->themes) && !empty(self::$instance->path)) {
+        $path = self::$instance->path;
+
+        $themes = Core::getListDir(array('path' => $path));
+        foreach ($themes as $theme) {
+          $theme_path = sprintf('%s%s/%s.php', $path, $theme, $theme);
+          if (file_exists($theme_path)) {
+            //$array = require_once $theme_path;
+            //self::$instance->themes[$theme] = $array;
+            self::$instance->themes[$theme] = require($theme_path);
+          }
+        }
+      }
+!!!169730.php!!!	getCurrentTheme()
+      return self::$instance->theme;
+!!!169858.php!!!	setCurrentTheme(inout theme : )
+      self::$instance->theme = Core::isEmpty($theme, self::THEME_DEFAULT);
+!!!169986.php!!!	getSelectArray()
+      $result = array(self::THEME_DEFAULT => _('Default theme'));
+      if (!empty(self::$instance->themes)) {
+        $themes = self::$instance->themes;
+        foreach ($themes as $path => $values) {
+          $result[$path] = $values[self::THEME_NAME];
+        }
+        asort($result); //sezazeni podle hodnot
+      }
+      return $result;
+!!!170114.php!!!	internalControlPanel()
+      $this->loadThemes();
+      return $this->getSelectArray();
+!!!170242.php!!!	internalSetCookie(inout theme : )
+      Core::setCookie(self::THEME_COOKIE, $theme);
+!!!170370.php!!!	controlPanel()
+      $result = NULL;
+      $this->loadThemes();
+      $select = $this->getSelectArray();
+      $current = $this->getCurrentTheme();
+
+      $form = new Form;
+      $form->addSelect('theme', array('value' => $select, 'selected' => $current, 'label' => _('Available themes:')))
+            ->addSubmit(__CLASS__.'_submit', array('value' => _('Change theme')));
+
+      $result = $form;
+
+      if ($form->isSubmitted()) {
+        $result = _('Changing theme now... wait please...');
+        $this->internalSetCookie($form->theme);
+        Core::setRefresh(Config::TIME_EDIT, Core::getAbsoluteUrl());
+      }
+      return $result;
+!!!170498.php!!!	section(inout name : )
+      $result = NULL;
+      $this->loadThemes();
+      $current = $this->getCurrentTheme();
+      if ($current != self::THEME_DEFAULT) {  //defaultni tema nema tema ve slozce!
+        $result = Core::isFill(self::$instance->themes[$current], $name);
+      }
+      return $result;

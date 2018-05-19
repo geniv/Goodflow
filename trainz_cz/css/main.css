@@ -1,0 +1,1653 @@
+/*
+ * HTML5 Boilerplate
+ *
+ * What follows is the result of much research on cross-browser styling.
+ * Credit left inline and big thanks to Nicolas Gallagher, Jonathan Neal,
+ * Kroc Camen, and the H5BP dev community and team.
+ */
+
+/* ==========================================================================
+   Base styles: opinionated defaults
+   ========================================================================== */
+
+html,
+button,
+input,
+select,
+textarea {
+  color: #363636;
+}
+
+body {
+  font: 12px Arial, "Arial CE", Helvetica, "Trebuchet MS", "Gill Sans MT", "Gill Sans", Verdana, Tahoma, sans-serif;
+  line-height: 19px;
+  background-color: #ececec;
+  color: #737373;
+  position: relative;
+}
+
+@font-face{
+  font-family: 'ae10013t';
+    src: url('../fonts/ae10013t-webfont.eot');
+    src: url('../fonts/ae10013t-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/ae10013t-webfont.woff') format('woff'),
+         url('../fonts/ae10013t-webfont.ttf') format('truetype'),
+         url('../fonts/ae10013t-webfont.svg#webfont') format('svg');
+}
+
+/*
+ * Remove text-shadow in selection highlight: h5bp.com/i
+ * These selection rule sets have to be separate.
+ * Customize the background color to match your design.
+ */
+
+::-moz-selection {
+  background: #b3d4fc;
+  text-shadow: none;
+}
+
+::selection {
+  background: #b3d4fc;
+  text-shadow: none;
+}
+
+/*
+ * A better looking default horizontal rule
+ */
+
+hr {
+  display: block;
+  height: 1px;
+  border: 0;
+  border-top: 1px solid #ccc;
+  margin: 1em 0;
+  padding: 0;
+}
+
+/*
+ * Remove the gap between images and the bottom of their containers: h5bp.com/i/440
+ */
+
+img {
+  vertical-align: middle;
+}
+
+/*
+ * Remove default fieldset styles.
+ */
+
+fieldset {
+  border: 0;
+  margin: 0;
+  padding: 0;
+}
+
+/*
+ * Allow only vertical resizing of textareas.
+ */
+
+textarea {
+  resize: vertical;
+}
+
+/* ==========================================================================
+   Chrome Frame prompt
+   ========================================================================== */
+
+.chromeframe {
+  position: fixed;
+  width: 994px;
+  bottom: 30px;
+  z-index: 3000;
+  margin: 0 auto 10px;
+  padding: 10px 0;
+  background: #000;
+  background: rgba(0, 0, 0, 0.75);
+  color: #fff;
+  font-size: 20px;
+  line-height: 30px;
+  font-weight: bold;
+  text-align: center;
+}
+
+/* ==========================================================================
+   Author's custom styles
+   ========================================================================== */
+
+#body_top {
+  width: 100%;
+  height: 468px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 90;
+  background-color: #1f8baa;
+}
+
+#obal_layout {
+  width: 994px;
+  min-height: 468px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 100;
+  background: #fff url(../img/body_obsah.png) repeat-y center top;
+}
+
+/* oprava bootstrapu */
+label {
+  font-weight: normal;
+  text-align: right;
+}
+
+.help-block {
+  margin-top: 3px;
+  margin-bottom: 0;
+  font-size: 11px;
+}/* /oprava bootstrapu */
+
+/* zahlavi */
+#obal_layout header {
+  height: 83px;
+  padding: 0 7px;
+  position: relative;
+  z-index: 120;
+  overflow: hidden;
+  background-color: #1f8baa;
+}
+
+#obal_layout header h1 {
+  width: 287px;
+  height: 58px;
+  margin-top: 20px;
+  float: left;
+}
+
+#obal_layout header #trainznazev {
+  display: block;
+  height: 58px;
+  text-decoration: none;
+  text-indent: -99999px;
+  background: url(../img/trainz_nazev.png) no-repeat;
+}
+
+#obal_layout header ul {
+  margin-top: 29px;
+  margin-bottom: 0; /* oprava bootstrapu */
+  overflow: hidden;
+  float: right;
+  border-bottom: 1px solid #303c45;
+}
+
+#obal_layout header ul li {
+  float: left;
+}
+
+#obal_layout header ul li a {
+  display: block;
+  height: 40px;
+  padding: 0 10px;
+  font: 16px "ae10013t", sans-serif;
+  line-height: 41px;
+  color: #fff;
+  text-decoration: none;
+  text-transform: uppercase;
+  text-shadow: 1px 1px #295c6d;
+}
+
+#obal_layout header ul li a:hover,
+#obal_layout header ul li a.active {
+  background-color: #295c6d;
+}
+
+#obal_layout #language_change {
+  width: 87px;
+  height: 24px;
+  margin-bottom: 0; /* oprava bootstrapu */
+  overflow: hidden;
+  position: absolute;
+  top: 2px;
+  right: 7px;
+  z-index: 130;
+}
+
+#obal_layout #language_change li {
+  width: 29px;
+  height: 24px;
+  float: left;
+}
+
+#obal_layout #language_change li a {
+  display: block;
+  width: 29px;
+  height: 24px;
+  text-indent: -99999px;
+  background: url(../img/language_icon.png) no-repeat;
+}
+
+#obal_layout #language_change #langicon_cs a {
+  background-position: 0 0;
+}
+
+#obal_layout #language_change #langicon_cs a:hover,
+#obal_layout #language_change #langicon_cs a.active {
+  background-position: 0 -24px;
+}
+
+#obal_layout #language_change #langicon_en a {
+  background-position: -29px 0;
+}
+
+#obal_layout #language_change #langicon_en a:hover,
+#obal_layout #language_change #langicon_en a.active {
+  background-position: -29px -24px;
+}
+
+#obal_layout #language_change #langicon_de a {
+  background-position: -58px 0;
+}
+
+#obal_layout #language_change #langicon_de a:hover,
+#obal_layout #language_change #langicon_de a.active {
+  background-position: -58px -24px;
+}/* /zahlavi */
+
+#obal_layout #obal_obsah {
+  width: 980px;
+  margin: 0 auto;
+  padding: 15px 0;
+  position: relative;
+}
+
+#obal_layout #obal_obsah #body_obsah_top {
+  display: block;
+  width: 994px;
+  height: 385px;
+  position: absolute;
+  top: 0;
+  left: -7px;
+  z-index: 110;
+  background: #fff url(../img/body_obsah_top.png) repeat-y center top;
+}
+
+#obal_layout #obal_obsah #obsah {
+  width: 950px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 120;
+}
+
+/* obsah sekci */
+/* slideshow na uvodni strane */
+#obsah #tcz_slideshow {
+  width: 950px;
+  height: 370px;
+  position: relative;
+  overflow: hidden;
+}
+
+#obsah #tcz_slideshow #slideshow_arrows {
+  width: 65px;
+  height: 30px;
+  overflow: hidden;
+  position: absolute;
+  right: 10px;
+  bottom: 10px;
+  z-index: 500;
+  display: none;
+}
+
+#obsah #tcz_slideshow:hover #slideshow_arrows {
+  display: block;
+}
+
+#obsah #tcz_slideshow #slideshow_arrows span {
+  display: block;
+  width: 30px;
+  height: 30px;
+  float: left;
+  cursor: pointer;
+  text-indent: -99999px;
+  background: url(../img/slideshow_arrows.png) no-repeat;
+}
+
+#obsah #tcz_slideshow #slideshow_arrows span#prev {
+  background-position: left top;
+}
+
+#obsah #tcz_slideshow #slideshow_arrows span#prev:hover {
+  background-position: left bottom;
+}
+
+#obsah #tcz_slideshow #slideshow_arrows span#next {
+  margin-left: 5px;
+  background-position: right top;
+}
+
+#obsah #tcz_slideshow #slideshow_arrows span#next:hover {
+  background-position: right bottom;
+}
+
+#obsah #tcz_slideshow .cycle-paused:after {
+  color: #fff;
+  background: #000;
+  padding: 10px;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 500;
+  border-radius: 10px;
+  opacity: .7; filter: alpha(opacity=70);
+}
+
+#obsah .tcz_slideshow_cs .cycle-paused:after {
+  content: 'Pauza';
+}
+
+#obsah .tcz_slideshow_en .cycle-paused:after,
+#obsah .tcz_slideshow_de .cycle-paused:after {
+  content: 'Pause';
+}
+
+#obsah #cycle-popis-img {
+  width: 950px;
+  height: 60px;
+  border: 1px solid #eaeaea;
+  border-top: 1px solid #364048;
+  background: url(../img/cycle-popis-img.png) repeat-x;
+  line-height: 17px;
+}
+
+#obsah #cycle-popis-img span {
+  margin: 11px 10px 4px;
+  display: block;
+  color: #6e6e6e;
+}
+
+#obsah #cycle-popis-img span#cycle-popis-nazev {
+  font-size: 13px;
+}
+
+#obsah #cycle-popis-img span#cycle-popis-autor {
+  margin-top: 0px;
+  font-size: 11px;
+}/* /slideshow na uvodni strane */
+
+/* trainz 2012 banner */
+#obsah #trainz_banner {
+  display: block;
+  margin: 20px auto 25px;
+  border: 1px solid #364048;
+}/* /trainz 2012 banner */
+
+/* google reklama */
+#obsah .google_reklama {
+  width: 728px;
+  margin: 25px auto 15px;
+}/* /google reklama */
+
+#obsah .tcz_nadpisy div h2 {
+  margin: 0 0 20px;
+  padding: 10px 10px 5px 5px;
+  font: 28px "ae10013t", sans-serif;
+  line-height: 33px;
+  white-space: nowrap;
+  overflow: hidden;
+  border-bottom: 1px solid #737373;
+  background: #f7f7f7 url(../img/cycle-popis-img.png) repeat-x center bottom;
+}
+
+#obsah .tcz_nadpisy_autor div h2 {
+  margin-bottom: 0;
+}
+
+#obsah .home_row {
+  margin-top: 20px;
+}
+
+/* novinky */
+#obsah .hlavni_obal_novinky .obal_novinky {
+  margin-bottom: 25px;
+  padding-bottom: 13px;
+  overflow: hidden;
+  border-bottom: 2px dotted #cecece;
+}
+
+#obsah .hlavni_obal_novinky .obal_novinky_full {
+  margin-bottom: 10px;
+  padding-bottom: 0;
+  border-bottom: none;
+}
+
+#obsah .hlavni_obal_novinky .posledni {
+  margin-bottom: 5px;
+  border-bottom: none;
+}
+
+#obsah .hlavni_obal_novinky .obal_novinky .ikona_novinky {
+  width: 60px;
+  float: left;
+}
+
+#obsah .hlavni_obal_novinky .obal_novinky .ikona_novinky img {
+  display: block;
+}
+
+#obsah .hlavni_obal_novinky .obal_novinky .obsah_novinky,
+#obsah .hlavni_obal_novinky .obal_novinky_full .obsah_novinky {
+  width: 553px;
+  float: left;
+  margin-left: 10px;
+}
+
+#obsah .hlavni_obal_novinky .obal_novinky_full .obsah_novinky {
+  width: 880px;
+}
+
+#obsah .hlavni_obal_novinky .obal_novinky .obsah_novinky h3 {
+  margin: 5px 0 0;
+  font-size: 24px;
+  line-height: 28px;
+  color: #52616f;
+}
+
+#obsah .hlavni_obal_novinky .obal_novinky .obsah_novinky > a.btn-primary {
+  font: 11px Verdana, "Trebuchet MS", Helvetica, Arial, "Arial CE", sans-serif;
+  line-height: 14px;
+  background-color: #f4f4f4;
+  border-color: #e3e0e0;
+  color: #53595e;
+  clear: both;
+}
+
+#obsah .hlavni_obal_novinky .obal_novinky .obsah_novinky > a.btn-primary:hover {
+  background-color: #ebebeb;
+  border-color: #c8c8c8;
+}
+
+#obsah .hlavni_obal_novinky .obal_novinky .obsah_novinky span.novinky_autordatum {
+  display: block;
+  margin: 2px 0 10px;
+  font-size: 11px;
+  font-style: italic;
+  color: #aaa;
+}
+
+#obsah .hlavni_obal_novinky .obal_novinky .obsah_novinky span.novinky_autordatum em {
+  padding-right: 10px;
+  float: right;
+}
+
+#obsah .obal_download_novinky .download_novinka {
+  margin-bottom: 10px;
+  padding-bottom: 10px;
+  overflow: hidden;
+  border-bottom: 1px solid;
+}
+
+#obsah .obal_download_novinky .posledni {
+  border-bottom: none;
+}
+
+#obsah .obal_download_novinky .download_novinka a {
+  display: block;
+  overflow: hidden;
+}
+
+#obsah .obal_download_novinky .download_novinka a em,
+#obsah .obal_download_novinky .download_novinka a strong,
+#obsah .obal_download_novinky .download_novinka a span {
+  display: block;
+  width: 180px;
+  margin: 5px 0 0 10px;
+  float: left;
+  font-size: 13px;
+  color: #737373;
+}
+
+#obsah .obal_download_novinky .download_novinka a:hover em {
+  color: #000;
+}
+
+#obsah .obal_download_novinky .download_novinka a strong,
+#obsah .obal_download_novinky .download_novinka a span {
+  float: right;
+  margin: 0 6px 0 10px;
+  font-size: 11px;
+  font-style: italic;
+  color: #aaa;
+}
+
+#obsah .obal_download_novinky .download_novinka a strong {
+  margin-top: 3px;
+  font-weight: normal;
+}
+
+#obsah .obal_download_novinky .download_novinka a:hover strong,
+#obsah .obal_download_novinky .download_novinka a:hover span {
+  color: #737373;
+}
+
+#obsah .obal_download_novinky .download_novinka a img {
+  display: block;
+  width: 100px;
+  height: 75px;
+  float: left;
+  border: 1px solid #737373;
+}
+
+#obsah .obal_download_novinky .download_novinka a:hover img {
+  border-color: #000;
+}
+
+#obsah .obal_download_novinky .home_link_history {
+  width: 100%;
+}/* /novinky */
+
+/* upload a registrace */
+/* uprava popover na miru */
+#obsah .div-validate .popover {
+  max-width: 450px;
+  white-space: nowrap;
+  font-size: 11px;
+  color: #52616f;
+}
+
+.alert > ul {
+  list-style-type: disc;
+  padding-top: 10px;
+  padding-left: 30px;
+}
+
+.upload-well {
+  margin: 20px 0 10px;
+}
+
+.vypisy_top div ol li {
+  margin-bottom: 1px;
+}
+
+.vypisy_top div ol li:hover {
+  background-color: #f6f6f6;
+}
+
+.vypisy_top div ol li p {
+  display: inline-block;
+  margin-bottom: 0;
+}
+
+.vypisy_top div ol li.oddelovac {
+  margin-bottom: 10px;
+  padding-bottom: 10px;
+  border-bottom: 1px dotted;
+}
+
+.vypisy_top div ol li .konec_obtekani {
+  display: block;
+  clear: both;
+}
+
+.upload_screeny_well {
+  padding: 9px 0 0 9px;
+}
+
+.upload_screeny_well p {
+  width: 50%;
+  margin-bottom: 0;
+  padding: 0 9px 9px 0;
+  float: left;
+}
+
+.upload_screeny_well p a {
+  display: block;
+  text-align: left;
+}
+
+.upload_screeny_well p a em {
+  display: block;
+  float: left;
+  font-style: normal;
+}
+
+.upload_screeny_well p a .badge {
+  top: 0;
+}
+
+.screenshot_autor {
+  margin-bottom: 20px;
+}
+
+.screenshot_autor img {
+  display: block;
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.screenshot_autor .screenshot_popis {
+  display: block;
+  padding: 5px 10px;
+  line-height: 20px;
+  border: 1px solid #eaeaea;
+  border-top: 1px solid #364048;
+  background: url(../img/cycle-popis-img.png) repeat-x;
+  font-style: normal;
+}
+
+.screenshot_autor .screenshot_popis .social_buttony {
+  float: right;
+}
+
+.screenshot_autor .screenshot_popis .social_buttony .socialb1,
+.screenshot_autor .screenshot_popis .social_buttony .socialb2,
+.screenshot_autor .screenshot_popis .social_buttony .socialb3 {
+  float: right;
+}
+
+.screenshot_autor .screenshot_popis .social_buttony .socialb2 {
+  margin-right: 10px;
+}
+
+.screenshot_autor .screenshot_popis .social_buttony .socialb3 {
+  margin-right: -20px;
+}/* /upload a registrace */
+
+/* odkazy */
+#obsah #obal_odkazy h3 {
+  margin: 0;
+  padding: 20px 0 0 10px;
+}
+
+#obsah #obal_odkazy ul li {
+  margin: 20px 25px;
+  overflow: hidden;
+}
+
+#obsah #obal_odkazy ul li a,
+#obsah #obal_odkazy ul li a span,
+#obsah #obal_odkazy ul li a strong,
+#obsah #obal_odkazy ul li a em {
+  display: block;
+  float: left;
+}
+
+#obsah #obal_odkazy ul li a strong,
+#obsah #obal_odkazy ul li a em {
+  float: none;
+}
+
+#obsah #obal_odkazy ul li a {
+  overflow: hidden;
+  color: #737373;
+}
+
+#obsah #obal_odkazy ul li a:hover {
+  color: #000;
+  text-decoration: none;
+}
+
+#obsah #obal_odkazy ul li a span.obal_obrazek {
+  width: 160px;
+  text-align: center;
+}
+
+#obsah #obal_odkazy ul li a span img {
+  max-width: 160px;
+}
+
+#obsah #obal_odkazy ul li a:hover span img {
+  border-color: #000;
+}
+
+#obsah #obal_odkazy ul li a span strong {
+  margin: 15px 15px 10px; /* 20px 15px 10px */
+  font-size: 19px;
+}
+
+#obsah #obal_odkazy ul li a span em {
+  margin: 0 15px;
+  color: #aaa;
+}
+
+#obsah #obal_odkazy ul li a:hover span em {
+  color: #000;
+}/* /odkazy */
+
+/* download */
+/* download zahlavi a navigace */
+.drn-hl .breadcrumb {
+  margin-bottom: 15px;
+}
+
+.drn-hl .breadcrumb > li {
+  color: #999999;
+}
+
+.drn-hl .breadcrumb > li a {
+  color: #1f8baa;
+}
+
+.drn-hl .input-group .input-group-btn input {
+  height: 34px;
+}
+
+.row .clearfix .btn-xs {
+  font-size: 11px;
+}
+
+.download-row {
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
+.download-row .well {
+  margin-right: 1px;
+  margin-bottom: 0;
+  padding-top: 12px;
+  padding-right: 18px;
+}
+
+.download-row .well a.btn-block {
+  width: 288px;
+  margin-top: 7px;
+  overflow: hidden;
+}
+
+.download-row .well a.btn-lg {
+  font-size: 16px;
+  padding: 15px 0;
+}
+
+.download-row .well a.btn-default {
+  color: #808080;
+}
+
+.download-row .well a.btn-default:hover {
+  color: #515151;
+}
+
+.download-row .well a.lichy {
+  margin-right: 7px;
+}/* /download zahlavi a navigace */
+
+/* download vypis polozek */
+.download-item {
+  margin-top: 15px;
+}
+
+.download-item a.thumbnail {
+  overflow: hidden;
+}
+
+.download-item a.thumbnail span.left-block-img,
+.download-item a.thumbnail span.right-block-content {
+  display: block;
+  float: left;
+  overflow: hidden;
+}
+
+.download-item a.thumbnail span.left-block-img {
+  width: 240px;
+  height: 180px;
+}
+
+.download-item a.thumbnail span.left-block-img img.img-rounded,
+.obal_download_polozka .polozka_description .panel-body .img-rounded {
+  border-radius: 4px;
+}
+
+.download-item a.thumbnail span.right-block-content {
+  width: 680px;
+  margin-left: 10px;
+}
+
+.download-item a.thumbnail span.right-block-content strong,
+.download-item a.thumbnail span.right-block-content em {
+  display: block;
+  font: 16px Verdana, "Trebuchet MS", Helvetica, Arial, "Arial CE", sans-serif;
+  color: #808080;
+}
+
+.download-item a.thumbnail span.right-block-content strong {
+  line-height: 26px;
+  font-weight: normal;
+}
+
+.download-item a.thumbnail:hover span.right-block-content strong,
+.download-item a.thumbnail:hover span.right-block-content em {
+  color: #515151;
+}
+
+.download-item a.thumbnail span.right-block-content em {
+  font-size: 11px;
+  line-height: 22px;
+  font-style: normal;
+}
+
+.download-item a.thumbnail span.right-block-content em.description {
+  width: 680px;
+  height: 22px;
+  overflow: hidden;
+  margin-top: 3px;
+  margin-bottom: 7px;
+}
+
+.download-item a.thumbnail span.right-block-content em.description span.description_content {
+  display: block;
+  width: 680px;
+  height: 22px;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.col-lg-9 .download-item a.thumbnail span.right-block-content em.description,
+.col-lg-9 .download-item a.thumbnail span.right-block-content em.description span.description_content,
+.col-lg-9 .download-item a.thumbnail span.right-block-content {
+  width: 430px;
+}/* /download vypis polozek */
+
+/* download historie */
+.menu-history li a {
+  padding: 5px 10px;
+}
+
+.download-history {
+  margin-top: 0;
+  margin-bottom: 15px;
+}
+
+.download-history a.thumbnail span.left-block-img {
+  width: 133px;
+  height: 100px;
+}
+
+.download-history a.thumbnail span.left-block-img img.img-rounded {
+  width: 100%;
+  height: 100%;
+}
+
+.download-history a.thumbnail span.right-block-content strong {
+  margin-bottom: 3px;
+}/* /download historie */
+
+/* download vypis polozka */
+.obal_download_polozka {
+  padding-top: 5px;
+}
+
+.obal_download_polozka .polozka_description .panel-heading {
+  padding: 10px 15px 2px;
+  font-size: 11px;
+  color: #575757;
+}
+
+.obal_download_polozka .polozka_description .panel-heading p {
+  margin-bottom: 5px;
+}
+
+.obal_download_polozka .polozka_description .panel-body a.thumbnail {
+  float: left;
+}
+
+.obal_download_polozka .polozka_description .panel-body .obal_informace {
+  width: 520px;
+  margin-left: 10px;
+  padding-top: 3px;
+  overflow: hidden;
+  float: left;
+}
+
+.obal_download_polozka .polozka_description .panel-body .obal_informace p {
+  margin-bottom: 7px;
+}
+
+.obal_download_polozka .polozka_description .panel-body .obal_sdileni {
+  width: 135px;
+  float: right;
+}
+
+.obal_download_polozka .polozka_description .panel-body .obal_sdileni > .fb-like,
+.obal_download_polozka .polozka_description .panel-body .obal_sdileni > .g-tlacitko,
+.obal_download_polozka .polozka_description .panel-body .obal_sdileni > .twitter-share-button {
+  float: right;
+}
+
+.obal_download_polozka .polozka_description .panel-body .obal_sdileni > .g-tlacitko {
+  margin-right: -1px;
+}
+
+.obal_download_polozka .polozka_soubory_kuidy .panel p {
+  margin: 0;
+}
+
+.obal_download_polozka .polozka_soubory_kuidy .panel .panel-body {
+  padding-bottom: 0;
+}
+
+.obal_download_polozka .polozka_soubory_kuidy .panel .panel-body .list-group {
+  margin-bottom: 15px;
+}
+
+.obal_download_polozka .polozka_soubory_kuidy .panel .panel-body .list-group .list-group-item {
+  padding-top: 7px;
+  padding-bottom: 7px;
+}
+
+.obal_download_polozka .polozka_soubory_kuidy .panel .panel-body .list-group em {
+  font-style: normal;
+}
+
+.obal_download_polozka .polozka_soubory_kuidy .panel .panel-body .list-group .verze_kuid_item {
+  font-size: 11px;
+  line-height: 16px;
+}
+
+.obal_download_polozka .polozka_soubory_kuidy .panel .panel-body .list-group .verze_kuid_item table tr td {
+  width: 99%;
+  padding-bottom: 3px;
+  padding-left: 10px;
+  vertical-align: top;
+}
+
+.obal_download_polozka .polozka_soubory_kuidy .panel .panel-body .list-group .verze_kuid_item table tr:last-of-type td {
+  padding-bottom: 0;
+}
+
+.obal_download_polozka .polozka_soubory_kuidy .panel .panel-body .list-group .verze_kuid_item table tr td.td_kuid {
+  width: 1%;
+  padding-left: 0;
+}
+
+.obal_download_polozka .polozka_soubory_kuidy .panel-warning {
+  margin-bottom: 5px;
+}
+
+.download-alert {
+  margin-top: 15px;
+}/* /download vypis polozka */
+/* /download */
+
+/* upload */
+.upload_prihlasitse input[type="submit"],
+.upload_registrovatse input[type="submit"] {
+  height: 34px;
+}
+
+.obal_upload_sekce {
+  margin-bottom: 5px;
+}
+
+.obal_upload_sekce .well-sm .avatar-obal {
+  display: block;
+  width: 30px;
+  height: 30px;
+  position: relative;
+  float: left;
+}
+
+.obal_upload_sekce .well-sm .avatar-obal img.avatar-upload {
+  display: block;
+  max-width: 100%;
+  max-height: 100%;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  margin: auto;
+}
+
+.obal_upload_sekce .well-sm p.pull-left,
+.obal_upload_sekce .well-sm.text-center p {
+  margin: 0;
+  margin-left: 5px;
+  font-size: 15px;
+  line-height: 30px;
+  font-style: italic;
+  color: #575757;
+  text-shadow: 0 0 2px rgba(0, 0, 0, 0.1);
+}
+
+.obal_upload_sekce .well-sm.text-center {
+  margin-bottom: 0;
+}
+
+.obal_upload_sekce .well-sm.text-center p {
+  margin: 0;
+  font-size: 11px;
+  line-height: 20px;
+  color: #737373;
+}
+
+.obal_upload_sekce .obal_upload_home .well,
+.obal_upload_sekce .obal_upload_profil .well,
+.obal_upload_sekce .obal_upload_download .well,
+.obal_upload_sekce .obal_upload_slideshow .well,
+.obal_upload_sekce .obal_upload_notification .well,
+.obal_upload_sekce .obal_upload_message .well,
+.obal_upload_sekce .obal_upload_help .well {
+  padding-bottom: 0;
+}
+
+.obal_upload_sekce .obal_upload_home .well h4,
+.obal_upload_sekce .obal_upload_profil .well h4,
+.obal_upload_sekce .obal_upload_download .well h4,
+.obal_upload_sekce .obal_upload_slideshow .well h4,
+.obal_upload_sekce .obal_upload_notification .well h4,
+.obal_upload_sekce .obal_upload_message .well h4,
+.obal_upload_sekce .obal_upload_help .well h4,
+.obal_upload_sekce .obal_upload_help .well h5,
+.obal_upload_sekce .obal_upload_help .well p {
+  margin: 0;
+}
+
+.obal_upload_sekce .obal_upload_home .well .list-group,
+.obal_upload_sekce .obal_upload_profil .well .list-group,
+.obal_upload_sekce .obal_upload_download .well .list-group,
+.obal_upload_sekce .obal_upload_slideshow .well .list-group,
+.obal_upload_sekce .obal_upload_notification .well .list-group,
+.obal_upload_sekce .obal_upload_message .well .list-group,
+.obal_upload_sekce .obal_upload_help .well .list-group {
+  margin-bottom: 9px;
+}
+
+.obal_upload_sekce .obal_upload_profil .upr_pr_fr,
+.obal_upload_sekce .obal_upload_download .upr_pr_fr,
+.obal_upload_sekce .obal_upload_slideshow .upr_pr_fr,
+.obal_upload_sekce .obal_upload_message .upr_pr_fr {
+  padding: 10px 15px 9px;
+}
+
+.obal_upload_sekce .obal_upload_profil .btn-file,
+.obal_upload_sekce .obal_upload_download .btn-file,
+.obal_upload_sekce .obal_upload_slideshow .btn-file {
+  width: 400px;
+  display: inline-block;
+}
+
+.obal_upload_sekce .obal_upload_profil .posledni-form-group,
+.obal_upload_sekce .obal_upload_download .posledni-form-group,
+.obal_upload_sekce .obal_upload_slideshow .posledni-form-group,
+.obal_upload_sekce .obal_upload_message .posledni-form-group {
+  margin-bottom: 0;
+}
+
+.obal_upload_sekce .obal_upload_profil .upload_form_img {
+  overflow: hidden;
+}
+
+.obal_upload_sekce .obal_upload_profil .upload_form_img img,
+.obal_upload_sekce .obal_upload_profil .upload_form_img .btn-group {
+  display: block;
+  float: left;
+  clear: both;
+}
+
+.obal_upload_sekce .obal_upload_profil .upload_form_img .btn-group {
+  margin-top: 5px;
+}
+
+.obal_upload_sekce .obal_upload_profil .upload_form_img .btn-group .btn-check,
+.obal_upload_sekce .obal_upload_download .pridat_oddil {
+  padding: 3px 7px;
+  font-size: 11px;
+}
+
+.obal_upload_sekce .obal_upload_profil .well .list-group table,
+.obal_upload_sekce .obal_upload_slideshow .well .list-group table,
+.obal_upload_sekce .obal_upload_message .well .list-group table {
+  width: 520px;
+  margin: 9px 0;
+}
+
+.obal_upload_sekce .obal_upload_slideshow .well .list-group table,
+.obal_upload_sekce .obal_upload_message .well .list-group table {
+  width: 650px;
+  margin-top: 0;
+}
+
+.obal_upload_sekce .obal_upload_profil .well .list-group table td,
+.obal_upload_sekce .obal_upload_slideshow .well .list-group table td,
+.obal_upload_sekce .obal_upload_message .well .list-group table td {
+  width: 1%;
+  padding-right: 10px;
+  padding-bottom: 5px;
+  text-align: right;
+  vertical-align: top;
+}
+
+.obal_upload_sekce .obal_upload_message .well .list-group table td {
+  width: 8%;
+}
+
+.obal_upload_sekce .obal_upload_profil .well .list-group table td + td,
+.obal_upload_sekce .obal_upload_slideshow .well .list-group table td + td,
+.obal_upload_sekce .obal_upload_message .well .list-group table td + td {
+  width: 99%;
+  text-align: left;
+}
+
+.obal_upload_sekce .obal_upload_message .well .list-group table td + td {
+  width: 92%;
+}
+
+.obal_upload_sekce .obal_upload_profil .alert,
+.obal_upload_sekce .obal_upload_download .alert,
+.obal_upload_sekce .obal_upload_slideshow .alert,
+.obal_upload_sekce .obal_upload_notification .alert,
+.obal_upload_sekce .obal_upload_message .alert {
+  margin-bottom: 9px;
+}
+
+.obal_upload_sekce .obal_upload_notification .alert p {
+  display: inline-block;
+  margin: 0;
+  font-weight: bold;
+  vertical-align: top;
+}
+
+.obal_upload_sekce .obal_upload_download .well .list-group .list-group-item > table td {
+  width: 99%;
+  vertical-align: top;
+  text-align: right;
+}
+
+.obal_upload_sekce .obal_upload_download .well .list-group .list-group-item > table td + td {
+  width: 1%;
+  padding-left: 10px;
+  text-align: left;
+}
+
+.obal_upload_sekce .obal_upload_download .well .list-group .list-group-item > table table td {
+  width: 1%;
+  padding-bottom: 5px;
+}
+
+.obal_upload_sekce .obal_upload_download .well .list-group .list-group-item > table table td + td {
+  width: 99%;
+}
+
+.obal_upload_sekce .obal_upload_download .form-group .col-lg-2 {
+  white-space: nowrap;
+}
+
+.obal_upload_sekce .obal_upload_download .form-group .defined-150,
+.obal_upload_sekce .obal_upload_slideshow .form-group .defined-150 {
+  width: 150px;
+}
+
+.obal_upload_sekce .obal_upload_slideshow .form-group .defined-150 {
+  display: inline-block;
+}
+
+.obal_upload_sekce .obal_upload_download .form-group .defined-265 {
+  width: 265px;
+}
+
+.obal_upload_sekce .obal_upload_download .form-group .kuid_input_plain,
+.obal_upload_sekce .obal_upload_download .form-group .custom-label-2 {
+  float: left;
+  font-size: 11px;
+  line-height: 16px;
+  font-family: monospace;
+}
+
+.obal_upload_sekce .obal_upload_download .form-group .kuid_input_plain {
+  min-height: 100px;
+  height: auto;
+  margin-bottom: 3px;
+}
+
+.obal_upload_sekce .obal_upload_download .form-group .custom-label-2 {
+  margin: 7px 0 0 8px;
+  cursor: default;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+x:-o-prefocus, .obal_upload_sekce .obal_upload_download .form-group .custom-label-2 {
+  margin-top: 6px;
+}
+
+.obal_upload_sekce .obal_upload_download .form-group .custom-label-2 em {
+  font-size: 20px;
+  line-height: 1px;
+}
+
+.obal_upload_sekce .obal_upload_download .download_cdp .file_oddil .list-group .list-group-item {
+  background-color: #fafafa;
+}
+
+.obal_upload_sekce .obal_upload_download .list-group-item .addeditbtn_dwn + .help-block {
+  margin-top: 5px;
+  line-height: 12px;
+}
+
+.obal_upload_sekce .obal_upload_download .list-group-item .help-block ul {
+  margin-left: 20px;
+  list-style-type: disc;
+}
+
+.obal_upload_sekce .obal_upload_download .list-group .panel-heading,
+.obal_upload_sekce .obal_upload_slideshow .list-group .panel-heading,
+.obal_upload_sekce .obal_upload_message .list-group .panel-heading {
+  position: relative;
+  display: block;
+  margin-bottom: -1px;
+  padding: 10px 15px;
+  border: 1px solid #dddddd;
+  font-size: 18px;
+  color: #000;
+  background-color: #fafafa;
+}
+
+.obal_upload_sekce .obal_upload_message .list-group .panel-heading .btn-xs {
+  padding-top: 2px;
+}
+
+.obal_upload_sekce .obal_upload_download .list-group .panel-heading + .list-group-item {
+  background-color: #fcfcfc;
+}
+
+.obal_upload_sekce .obal_upload_download .download_cdp .file_oddil .list-group .panel-heading {
+  background: #fafafa repeat-x left bottom;
+  background-image: -ms-linear-gradient(top, #fafafa, #f0f0f0);
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#fafafa), to(#f0f0f0));
+  background-image: -webkit-linear-gradient(top, #fafafa, #f0f0f0);
+  background-image: -o-linear-gradient(top, #fafafa, #f0f0f0);
+  background-image: -moz-linear-gradient(top, #fafafa, #f0f0f0);
+  background-image: linear-gradient(top, #fafafa, #f0f0f0);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#fafafa', endColorstr='#f0f0f0', GradientType=0);
+}
+
+.obal_upload_sekce .obal_upload_download .form-group .clrb {
+  clear: both;
+}
+
+.obal_upload_sekce .obal_upload_download .form-group .clrb em {
+  font-style: normal;
+  font-weight: bold;
+}
+
+.obal_upload_sekce .obal_upload_download .form-group .control-label .text-center {
+  display: block;
+}
+
+.obal_upload_sekce .obal_upload_download .upload-select2,
+.obal_upload_sekce .obal_upload_download .upload-kuid-select2,
+.obal_upload_sekce .obal_upload_download .upload-kuid-dependency-select2,
+.obal_upload_sekce .obal_upload_message .upload-select2 {
+  width: 100%;
+}
+
+.obal_upload_sekce .obal_upload_download .result_ajax_name1 {
+  color: #bd3a43;
+}
+
+.obal_upload_sekce .obal_upload_download .result_ajax_name1 strong {
+  font-weight: normal;
+}
+
+.obal_upload_sekce .obal_upload_download .icon-ok-sign {
+  color: #6dac24;
+}
+
+.obal_upload_sekce .obal_upload_download .icon-remove-sign {
+  color: #bd3a43;
+}
+
+.obal_upload_sekce .obal_upload_download .odebrat_oddil .icon-remove-sign {
+  color: inherit;
+}
+
+.obal_upload_sekce .obal_upload_slideshow .list-group .list-group-item .progress {
+  margin-bottom: 0;
+}
+
+.obal_upload_sekce .obal_upload_slideshow .list-group .list-group-item .progress .progress-bar {
+  width: 33.33333333333333%;
+}
+
+.obal_upload_sekce .obal_upload_slideshow .list-group .list-group-item #upload-crop-parent {
+  position: relative;
+}
+
+.obal_upload_sekce .obal_upload_slideshow .list-group .list-group-item .slideshow_vypis_nahled {
+  max-width: 100%;
+}
+
+.obal_upload_sekce .obal_upload_help .well p {
+  margin-bottom: 7px;
+}
+
+.obal_upload_sekce .obal_upload_help .well p:last-of-type {
+  margin-bottom: 0;
+}
+
+.obal_upload_sekce .obal_upload_help .well a.thumbnail {
+  max-width: 70%;
+  margin: 0 auto 7px;
+}
+
+.obal_upload_sekce .obal_upload_help .well a.thumbnail img {
+  display: block;
+}/* /upload */
+
+/* strankovani */
+#obsah .hlavni_obal_novinky #obal_strankovani {
+  padding: 15px 0;
+  text-align: center;
+}
+
+#obsah .hlavni_obal_novinky #strankovani {
+  overflow: hidden;
+  display: inline-block;
+}
+
+#obsah .hlavni_obal_novinky #strankovani a,
+#obsah .hlavni_obal_novinky #strankovani span {
+  display: block;
+  float: left;
+  background: url(../img/strankovani.png) no-repeat;
+  text-decoration: none;
+}
+
+#obsah .hlavni_obal_novinky #strankovani a.prochazeni,
+#obsah .hlavni_obal_novinky #strankovani span.prochazeni {
+  width: 29px;
+  height: 28px;
+  text-indent: -99999px;
+}
+
+#obsah .hlavni_obal_novinky #strankovani a.predchozi,
+#obsah .hlavni_obal_novinky #strankovani span.predchozi {
+  margin-right: 5px;
+}
+
+#obsah .hlavni_obal_novinky #strankovani a.predchozi {
+  background-position: 0 0;
+}
+
+#obsah .hlavni_obal_novinky #strankovani span.predchozi {
+  background-position: 0 -114px;
+}
+
+#obsah .hlavni_obal_novinky #strankovani a.predchozi:hover {
+  background-position: 0 -28px;
+}
+
+#obsah .hlavni_obal_novinky #strankovani a.dalsi {
+  background-position: -29px 0;
+}
+
+#obsah .hlavni_obal_novinky #strankovani span.dalsi {
+  background-position: -29px -114px;
+}
+
+#obsah .hlavni_obal_novinky #strankovani a.dalsi:hover {
+  background-position: -29px -28px;
+}
+
+#obsah .hlavni_obal_novinky #strankovani a.strana,
+#obsah .hlavni_obal_novinky #strankovani a.strana span,
+#obsah .hlavni_obal_novinky #strankovani span.strana,
+#obsah .hlavni_obal_novinky #strankovani span.strana span {
+  height: 29px;
+}
+
+#obsah .hlavni_obal_novinky #strankovani a.strana,
+#obsah .hlavni_obal_novinky #strankovani span.strana {
+  margin: 0 11px 0 0;
+  padding: 0 5px 0 11px;
+  line-height: 29px;
+}
+
+#obsah .hlavni_obal_novinky #strankovani a.strana span,
+#obsah .hlavni_obal_novinky #strankovani span.strana span {
+  width: 6px;
+  margin: 0 -11px 0 0;
+  padding: 0;
+  float: right;
+}
+
+#obsah .hlavni_obal_novinky #strankovani a.strana {
+  background-position: 0 -56px;
+}
+
+#obsah .hlavni_obal_novinky #strankovani a.strana:hover,
+#obsah .hlavni_obal_novinky #strankovani span.strana {
+  background-position: 0 -85px;
+}
+
+#obsah .hlavni_obal_novinky #strankovani a.strana span {
+  background-position: right -56px;
+}
+
+#obsah .hlavni_obal_novinky #strankovani a.strana:hover span,
+#obsah .hlavni_obal_novinky #strankovani span.strana span {
+  background-position: right -85px;
+}
+
+#obsah .hlavni_obal_novinky #strankovani span.strana {
+  color: #53595e;
+  cursor: default;
+}/* /strankovani */
+
+/* hledani */
+.sekce_hledat .input-group {
+  margin-bottom: 20px;
+}
+
+.sekce_hledat .input-group .input-group-btn input {
+  height: 34px;
+}/* /hledani */
+/* /obsah sekci */
+
+#zapati {
+  width: 994px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 100;
+}
+
+#zapati p {
+  width: 980px;
+  margin: 0 auto;
+  padding: 10px 0;
+  text-align: center;
+  color: #b1b1b1;
+  background: #f7f7f7 url(../img/cycle-popis-img.png) repeat-x center bottom;
+}
+
+#zapati p a {
+  color: #8e8e8e;
+}
+
+/* ==========================================================================
+   Helper classes
+   ========================================================================== */
+
+/*
+ * Image replacement
+ */
+
+.ir {
+  background-color: transparent;
+  border: 0;
+  overflow: hidden;
+  /* IE 6/7 fallback */
+  *text-indent: -9999px;
+}
+
+.ir:before {
+  content: "";
+  display: block;
+  width: 0;
+  height: 150%;
+}
+
+/*
+ * Hide from both screenreaders and browsers: h5bp.com/u
+ */
+
+.hidden {
+  display: none !important;
+  visibility: hidden;
+}
+
+/*
+ * Hide only visually, but have it available for screenreaders: h5bp.com/v
+ */
+
+.visuallyhidden {
+  border: 0;
+  clip: rect(0 0 0 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+}
+
+/*
+ * Extends the .visuallyhidden class to allow the element to be focusable
+ * when navigated to via the keyboard: h5bp.com/p
+ */
+
+.visuallyhidden.focusable:active,
+.visuallyhidden.focusable:focus {
+  clip: auto;
+  height: auto;
+  margin: 0;
+  overflow: visible;
+  position: static;
+  width: auto;
+}
+
+/*
+ * Hide visually and from screenreaders, but maintain layout
+ */
+
+.invisible {
+  visibility: hidden;
+}
+
+/*
+ * Clearfix: contain floats
+ *
+ * For modern browsers
+ * 1. The space content is one way to avoid an Opera bug when the
+ *    `contenteditable` attribute is included anywhere else in the document.
+ *    Otherwise it causes space to appear at the top and bottom of elements
+ *    that receive the `clearfix` class.
+ * 2. The use of `table` rather than `block` is only necessary if using
+ *    `:before` to contain the top-margins of child elements.
+ */
+
+.clearfix:before,
+.clearfix:after {
+  content: " "; /* 1 */
+  display: table; /* 2 */
+}
+
+.clearfix:after {
+  clear: both;
+}
+
+/*
+ * For IE 6/7 only
+ * Include this rule to trigger hasLayout and contain floats.
+ */
+
+.clearfix {
+  *zoom: 1;
+}
+
+/* ==========================================================================
+   EXAMPLE Media Queries for Responsive Design.
+   These examples override the primary ('mobile first') styles.
+   Modify as content requires.
+   ========================================================================== */
+
+@media only screen and (min-width: 35em) {
+  /* Style adjustments for viewports that meet the condition */
+}
+
+@media print,
+       (-o-min-device-pixel-ratio: 5/4),
+       (-webkit-min-device-pixel-ratio: 1.25),
+       (min-resolution: 120dpi) {
+  /* Style adjustments for high resolution devices */
+}
+
+/* ==========================================================================
+   Print styles.
+   Inlined to avoid required HTTP connection: h5bp.com/r
+   ========================================================================== */
+
+@media print {
+  * {
+    background: transparent !important;
+    color: #000 !important; /* Black prints faster: h5bp.com/s */
+    box-shadow: none !important;
+    text-shadow: none !important;
+  }
+
+  a,
+  a:visited {
+    text-decoration: underline;
+  }
+
+  a[href]:after {
+    content: " (" attr(href) ")";
+  }
+
+  abbr[title]:after {
+    content: " (" attr(title) ")";
+  }
+
+  /*
+   * Don't show links for images, or javascript/internal links
+   */
+
+  .ir a:after,
+  a[href^="javascript:"]:after,
+  a[href^="#"]:after {
+    content: "";
+  }
+
+  pre,
+  blockquote {
+    border: 1px solid #999;
+    page-break-inside: avoid;
+  }
+
+  thead {
+    display: table-header-group; /* h5bp.com/t */
+  }
+
+  tr,
+  img {
+    page-break-inside: avoid;
+  }
+
+  img {
+    max-width: 100% !important;
+  }
+
+  @page {
+    margin: 0.5cm;
+  }
+
+  p,
+  h2,
+  h3 {
+    orphans: 3;
+    widows: 3;
+  }
+
+  h2,
+  h3 {
+    page-break-after: avoid;
+  }
+}

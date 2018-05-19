@@ -1,0 +1,191 @@
+class Language
+!!!163458.php!!!	__construct()
+      try {
+
+        //nemuze se vytvaret kdyz neni dostupny dotycny modul
+        if (!extension_loaded('gettext')) {
+          throw new ExceptionLanguage('Missing Apache extension Gettext!');
+        }
+
+        //odkazovani na vlastni objekt
+        $this->default_lang = self::DEFAULT_LANG;
+        $this->gettext_dir = self::GETTEXT_DIR;
+        $this->gettext_domain = self::GETTEXT_DOMAIN;
+        $this->gettext_codeset = self::GETTEXT_CODESET;
+        $this->list_language = $this->languagelist;
+        $this->language = NULL;
+        $this->status = array();
+
+      } catch (ExceptionLanguage $e) {
+        echo $e;
+        exit(1);
+      }
+!!!163842.php!!!	getInstance()
+      if (is_null(self::$instance)) {
+        self::$instance = new self;
+      }
+      return self::$instance;
+!!!163970.php!!!	getState()
+      return self::$instance->status;
+!!!164098.php!!!	loadListLanguage(inout list : )
+      try {
+
+        if (!empty($list)) {
+          self::$instance->list_language = $list;
+        } else {
+          throw new ExceptionLanguage('$list cannot be empty!');
+        }
+
+      } catch (ExceptionLanguage $e) {
+        echo $e;
+      }
+!!!164226.php!!!	getLanguage()
+      return self::$instance->language;
+!!!164354.php!!!	setLanguage(inout lang : )
+      try {
+
+        if (!empty($lang)) {
+          if (is_string($lang)) {
+            //pokud je zadavyny jazyk v poli jazyku
+            if (array_key_exists($lang, self::$instance->list_language)) {
+              self::$instance->language = $lang;
+            } else {
+              throw new ExceptionLanguage(sprintf('Language "%s" abbreviation is not available in the array of languages!', $lang));
+            }
+          } else {
+            throw new ExceptionLanguage(sprintf('Value "%s" is not valid!', $lang));
+          }
+        } else {
+          self::$instance->language = (!empty(self::$instance->default_lang) ? self::$instance->default_lang : self::DEFAULT_LANG);
+        }
+
+      } catch (ExceptionLanguage $e) {
+        echo $e;
+      }
+      return $this;
+!!!164482.php!!!	getDefaultLanguage()
+      return self::$instance->default_lang;
+!!!164610.php!!!	setDefaultLanguage(inout lang : )
+      if (!empty($lang)) {
+        self::$instance->default_lang = $lang;
+      }
+!!!164738.php!!!	getLanguageDir()
+      return self::$instance->gettext_dir;
+!!!164866.php!!!	setLanguageDir(inout dir : )
+      if (!empty($dir)) {
+        self::$instance->gettext_dir = $dir;
+      }
+!!!164994.php!!!	getLanguageDomain()
+      return self::$instance->gettext_domain;
+!!!165122.php!!!	setLanguageDomain(inout domain : )
+      if (!empty($domain)) {
+        self::$instance->gettext_domain = $domain;
+      }
+!!!165250.php!!!	getCodeset()
+      return self::$instance->gettext_codeset;
+!!!165378.php!!!	setCodeset(inout codeset : )
+      if (!empty($codeset)) {
+        self::$instance->gettext_codeset = $codeset;
+      }
+!!!165506.php!!!	setAutoCreate()
+      //pokud se meni jazyk a je neprazdny jazyk
+      if ($this->status['change'] && !empty($this->status['language'])) {
+        $po = $this->status['po_file'];
+        $dir_po = dirname($po);
+        Core::generatePath($dir_po);  //vytvoreni adresarove struktury
+
+        if (!file_exists($po)) {  //pokud neexistuje tak je vytvoren s prvotni hlavickou
+          $head = sprintf('msgid ""
+msgstr ""
+"Project-Id-Version: Project name\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: %s\n"
+"PO-Revision-Date: \n"
+"Last-Translator: nick <email@domain.com>\n"
+"Language-Team: nick <email@domain.com>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-Basepath: ../../../\n"
+"Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Poedit-SearchPath-0: .\n"', date('r'));
+
+          if (file_put_contents($po, $head)) {
+            @chmod($po, 0646);
+          }
+        }
+      }
+!!!165634.php!!!	loadGettext(inout path :  = NULL)
+      try {
+
+        $th = self::$instance;
+        $result = array('default_lang' => $th->default_lang,
+                        'language' => $th->language,
+                        'path' => $path,
+                        'list_language' => $th->list_language,
+                        'change' => ($th->default_lang != $th->language));
+        if ($th->default_lang != $th->language) {
+          $codeset = $th->gettext_codeset;
+          $language_code = $th->list_language[$th->language]; //self::$instance->list_language[self::$instance->language]
+          $full_codeset = sprintf('%s.%s', $language_code, $codeset);  //cs_CZ.UTF-8
+          $domain = $th->gettext_domain;
+          $lang_dir = $th->gettext_dir;
+
+          $po_file = sprintf('%s%s/%s/LC_MESSAGES/%s.po', $path, $lang_dir, $th->language, $domain);
+          $mo_file = sprintf('%s%s/%s/LC_MESSAGES/%s.mo', $path, $lang_dir, $th->language, $domain);
+
+          $result['po_file'] = $po_file;
+          $result['mo_file'] = $mo_file;
+
+          if (file_exists($po_file) && file_exists($mo_file)) {
+            //$result['putenv'] = putenv(sprintf('LC_MESSAGES=%s', $language_code));
+            $result['bind_textdomain_codeset'] = bind_textdomain_codeset($domain, $codeset);
+            $result['setlocale'] = setlocale(LC_MESSAGES, $full_codeset); //LC_X, cs_CZ.UTF-8
+            if (!$result['setlocale']) {
+              throw new ExceptionLanguage(sprintf('The server is missing for the language version ( $ locale -a ): "%s"!', $full_codeset));
+            }
+            $result['bindtextdomain'] = bindtextdomain($domain, sprintf('%s%s', $path, $lang_dir)); //bacha na umisteni!!!
+            $result['textdomain'] = textdomain($domain);
+          } else {
+            if (!file_exists($po_file)) {
+              throw new ExceptionLanguage(sprintf('Language file "%s" does not exist', $po_file));
+            }
+
+            if (!file_exists($mo_file)) {
+              throw new ExceptionLanguage(sprintf('Language file "%s" does not generated', $mo_file));
+            }
+          }
+        }
+
+      } catch (ExceptionLanguage $e) {
+        echo $e;
+      }
+      $th->status = $result;
+      return $th;
+!!!165762.php!!!	isChanged()
+      return $this->status['change'];
+!!!165890.php!!!	controlPanel(inout values : )
+
+      //$fr = new Form;
+      //$fr->addSelect('language', array('values' => $values));
+      //$fr->addSubmit('language_button', array('value' => _('change language')));
+//TODO pri nejake dalsi prilezitosti dodelat ovladaci panel
+/*
+      if ($fr->isSubmitted()) {
+        //var_dump($_POST);
+        //var_dump($fr->language);
+        var_dump($fr->getValues());
+        //print_r($_POST);
+        //Core::setCookie('lang', $fr->language);
+        //atd...
+
+        //!!!!!!!! dodelat akceptaci jazyku, pripadne metodu na auto nacitani pro dalsi praci
+        //kontrola odeslani, po odeslani ulozit do cookie... atd.. redirekt.. a konec
+      }
+*/
+
+      //echo $frm->getException();
+
+      return $fr;

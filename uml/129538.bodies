@@ -1,0 +1,159 @@
+class Connector
+!!!134530.php!!!	__construct(inout type : , inout path : )
+      $this->pointer = new stdClass;
+      $this->pointer->type = $type;
+      $this->pointer->path = sprintf('%s.%s', $path, $type); //jmeno souboru
+      $this->pointer->stream = array();
+      //autoindex?
+!!!134658.php!!!	__destruct()
+      $this->close();
+!!!134786.php!!!	setStructure(inout struct : )
+      $this->pointer->struct = $struct;
+      return $this;
+!!!134914.php!!!	load()
+      try {
+
+        $class = $this->storage_type[$this->pointer->type];
+        if (file_exists($this->pointer->path)) {
+          $this->pointer->stream = $class::getData($this->pointer->path);
+        } else {
+          $this->close();
+          //file_put_contents($this->pointer->path, NULL);  //vytvoreni prazdneho souboru
+          throw new ExceptionConnector('path for storage does not exist!');
+        }
+
+      } catch (ExceptionConnector $e) {
+        echo $e;
+      }
+      return $this;
+!!!135042.php!!!	close()
+      $class = $this->storage_type[$this->pointer->type];
+      if (!is_null($this->pointer->stream)) { //pokud neni NULL tak ulozi
+        $class::setData($this->pointer->path, $this->pointer->stream);
+      }
+      return $this;
+!!!135170.php!!!	save()
+      $this->close();
+      return $this;
+!!!135298.php!!!	setInternalType(inout data : )
+      $result = array();
+      foreach ($this->pointer->struct as $column => $type) {
+        $item = NULL;
+        $input = Core::isFill($data, $column);
+        switch ($type) {
+          case 'string':
+            $item = strval($input);
+          break;
+
+          case 'string_code':
+            $item = base64_encode($input);
+          break;
+
+          case 'float':
+            $item = floatval($input);
+          break;
+
+          case 'int':
+          case 'integer';
+            $item = intval($input);
+          break;
+
+          case 'bool':
+          case 'boolean':
+            $item = (boolean) $input;
+          break;
+
+          case 'array':
+            $item = (array) $input;
+          break;
+        }
+        $result[$column] = $item;
+      }
+      return $result;
+!!!135426.php!!!	addRow(inout data : )
+      $index = Core::getUniqText();
+      $this->pointer->stream[$index] = $this->setInternalType($data);
+      $this->save();
+      return $this;
+!!!135554.php!!!	loadRow(inout id : , inout columns :  = NULL)
+      try {
+
+        $result = NULL;
+        if (array_key_exists($id, $this->pointer->stream)) {
+          $loaddata = $this->pointer->stream[$id];
+          foreach ($this->pointer->struct as $column => $type) {
+            switch ($type) {
+              case 'string_code':
+                $loaddata[$column] = base64_decode($loaddata[$column]);
+              break;
+            }
+          }
+
+          //vraceni vybranych sloupcu
+          if (!empty($columns)) {
+            if (!is_array($columns)) {
+              $loaddata = $loaddata[$columns];
+            } else {
+              //TODO dodelat implementaci pri poli
+            }
+          }
+
+          $result = $loaddata;
+        } else {
+          throw new ExceptionConnector('key for load does not exist!');
+        }
+
+      } catch (ExceptionConnector $e) {
+        echo $e;
+      }
+      return $result;
+!!!135682.php!!!	editRow(inout id : , inout data : )
+      try {
+
+        if (array_key_exists($id, $this->pointer->stream)) {
+          //kvuli sifrovanemu textu se vklada primo
+          $this->pointer->stream[$id] = $this->setInternalType($data);
+          $this->save();
+        } else {
+          throw new ExceptionConnector('key for edit does not exist!');
+        }
+
+      } catch (ExceptionConnector $e) {
+        echo $e;
+      }
+      return $this;
+!!!135810.php!!!	delRow(inout id : )
+      try {
+
+        if (array_key_exists($id, $this->pointer->stream)) {
+          unset($this->pointer->stream[$id]);
+          $this->save();
+        } else {
+          throw new ExceptionConnector('key for delete does not exist!');
+        }
+
+      } catch (ExceptionConnector $e) {
+        echo $e;
+      }
+      return $this;
+!!!135938.php!!!	getListRows(inout columns :  = NULL)
+      $result = $this->pointer->stream;
+      if (!empty($columns)) {
+
+        if (!is_array($columns)) {
+          //zadany klic sahne do pole
+          foreach ($result as $key => $values) {
+            $result[$key] = $values[$columns];
+          }
+        } else {
+//FIXME vymyslet lepsi a optimalizovany algoritmus!
+          foreach ($result as $key => $values) {
+            $val = array();
+            foreach ($columns as $col) {
+              $val[$col] = $values[$col];
+            }
+            $result[$key] = $val;
+          }
+        }
+      }
+      return $result;

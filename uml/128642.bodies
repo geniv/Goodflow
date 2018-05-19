@@ -1,0 +1,230 @@
+class Administration
+!!!128002.php!!!	setPath(inout path :  = NULL, inout adminurl :  = NULL, inout weburl :  = NULL)
+      self::$path = $path;
+      self::$adminurl = $adminurl;  //url adminu
+      self::$weburl = $weburl;  //url webu
+      self::$crypt_path = sprintf('%s%s', self::$path, self::CRYPT_FILE);
+!!!128130.php!!!	getPath()
+      return self::$path;
+!!!128258.php!!!	getAdminUrl(inout with_index :  = true)
+      return self::$adminurl.($with_index ? self::ADMIN_URL : '');
+!!!128386.php!!!	getWebUrl()
+      return self::$weburl;
+!!!128514.php!!!	getGetAdress()
+      return self::$get_adress;
+!!!128642.php!!!	getModules()
+      if (empty(self::$list_modules)) {
+        $menu = Config::getLoadModules(); //nacitani moduu adminu
+        $result = array();
+        $res = array();
+        foreach ($menu as $polozka) {
+          $state = $polozka::getState();
+          if ($state) {
+            $result[$polozka::URL] = $polozka;
+          } else {
+            echo sprintf(_('Module "%s" does not redy'), $polozka);
+          }
+        }
+        self::$list_modules = $result;
+      }
+      return self::$list_modules;
+!!!128770.php!!!	setDefaultPage(inout url : )
+      self::$defpage = $url;
+!!!128898.php!!!	getCurrentAdress(inout uroven :  = 0)
+      return Core::isFill($_GET, self::$get_adress[$uroven]);
+!!!129026.php!!!	getCurrentModule()
+      $modules = self::getModules();
+      $current = self::getCurrentAdress();
+      return Core::isFill($modules, $current, $modules[self::$defpage]);
+!!!129154.php!!!	getAdminTitle()
+      $class = self::getCurrentModule();
+      return $class::getName();
+!!!129282.php!!!	getAdminSection(inout args :  = NULL)
+      $result = NULL;
+      $current = self::getCurrentAdress(1);
+
+      $class = self::getCurrentModule();
+      $section = $class::getSection();
+
+      $item = Core::isFill($section, $current);
+      if (!empty($item)) {
+        $result = vsprintf($item, (!empty($args) ? $args : ''));
+      }
+      return $result;
+!!!129410.php!!!	getLoadModules()
+      $result = NULL;
+
+      $class = self::getCurrentModule();
+      $modules = $class::getLoadModules();
+      if (!empty($modules)) {
+        $current1 = self::getCurrentAdress(1);
+        $result = Core::isFill($modules, $current1, array());
+        $all = Core::isFill($modules, '*'); //pokud je v modulech index '*' - ve vsech podmenu
+        if (!empty($all)) {
+          $result = array_merge_recursive($result, $all);
+        }
+      }
+      return $result;
+!!!129538.php!!!	getAdminMenu()
+      $item = array();
+      $adminurl = self::$adminurl.self::ADMIN_URL;
+      $current = self::getCurrentAdress();
+
+      $modules = self::getModules();
+      foreach ($modules as $url => $class) {
+        $name = $class::getName();
+        $adress = (!empty($url) ? array(self::$get_adress[0] => $url) : NULL);
+        $item[] = Html::elem('a')
+                      ->href($adminurl, $adress)
+                      ->setText($name)
+                      ->class($current == $url ? 'active' : NULL)
+                      ->title($name)
+                      ->clearBreak();
+      }
+      return implode(Html::elem('span')->setText('/')->clearBreak(), $item);
+!!!129666.php!!!	getAdminContent()
+      $current1 = self::getCurrentAdress(1);
+      $class = self::getCurrentModule();
+      return $class::getAdminContent($current1);
+!!!129794.php!!!	setSessionIndex(inout name : )
+      self::$session_index = $name;
+!!!129922.php!!!	getErrors()
+      //TODO skusit udelat tak aby z modulu chodily errory pres tento modul ven!!!
+      return self::$errors;
+!!!130050.php!!!	setErrors(inout error : )
+      $result = Notification::error($error);
+      self::$errors[] = $result;
+      return $result; //vrati instanci z Notification
+!!!130178.php!!!	getStateAdmin()
+      $current = self::getCurrentAdress();
+      $result = NULL;
+      switch ($current) {
+        default:
+          $result = (self::isLogin() ? self::STATE_ACCESS : self::STATE_DENIED);
+//TODO mozna do budoucna udelat trochu flexibilnejsi, je to tozit dost natvrdo
+
+//FIXME toto overeni prervat pres parametr a to ze Setiings
+          if (self::isOriginalAuth()) {
+            self::$errors[] = Notification::warning(_('Login and password it default. Change it hurry, please.'));
+
+            $current1 = self::getCurrentAdress(1);
+            if ($current != 'set' && $current1 != 'login') {
+              //$menu = self::getMenuTemplate();  //FIXME vyhodit a toto dost brutalne predelat!!!!
+              //$class = $menu['set']['class'];
+              $class = self::getCurrentModule();
+              //var_dump($class);
+              //Core::setRefresh(0, Core::getUrl(array('path' => self::ADMIN_URL, 'query' => $class::getLoginQuery())));  //FIXME tu vyhodit URL
+            }
+          }
+        break;
+
+        case self::$main_adress[0]: //login page
+          $result = self::STATE_LOGIN;
+        break;
+
+        case self::$main_adress[1]: //logout page
+          $result = self::STATE_LOGOUT;
+        break;
+      }
+
+      return $result;
+!!!130306.php!!!	getLoginLink()
+      self::getCryptData();
+      $result = Html::elem('a')
+                    ->href(self::$adminurl)
+                    ->setText(_('Login'));
+      return $result;
+!!!130434.php!!!	getLogoutLink()
+      $result = Html::elem('a')
+                    ->href(self::$adminurl.self::ADMIN_URL, array(self::$get_adress[0] => self::$main_adress[1]))
+                    ->setText(_('Logout'));
+      return $result;
+!!!130562.php!!!	execLogout()
+      unset($_SESSION[self::$session_index]);
+      Core::setRefresh(Config::TIME_LOGIN, self::$weburl);
+      $result = _('bye, logout!');
+      return $result;
+!!!130690.php!!!	getCryptData()
+      //zatim omezeno jen na jeden radek == 1 uzivatel
+      if (!file_exists(self::$crypt_path)) {
+        self::setDefaultCrypt();  //nastaveni defaultnich hodnot
+      }
+      $file = new Filesystem(self::$crypt_path, Filesystem::MODE_READ);
+      return explode(':', trim($file->read()));
+!!!130818.php!!!	setDefaultCrypt()
+      $file = new Filesystem(self::$crypt_path, Filesystem::MODE_WRITE);
+      $data = sprintf('%s:%s', self::DEFSET, crypt(self::DEFSET));
+      $file->write($data);
+!!!130946.php!!!	setCryptData(inout login : , inout pass : , inout oldpass :  = NULL)
+      $result = false;
+      if (file_exists(self::$crypt_path) && !empty($oldpass)) {
+        $auth = self::getCryptData();
+        $cryptoldpass = crypt($oldpass, $auth[1]);
+        if ($auth[1] == $cryptoldpass) {
+          $file = new Filesystem(self::$crypt_path, Filesystem::MODE_WRITE);
+          $data = sprintf('%s:%s', $login, crypt($pass));
+          $file->write($data);
+          $result = true;
+        } else {
+          $result = false;
+        }
+      } else {
+        echo 'Snazis se o nelegalni operaci!!';
+      }
+      return $result;
+!!!131074.php!!!	isOriginalAuth()
+      $auth = self::getCryptData();
+      //kontrola jestli neni stejny login a heslo stejne jako DEFSET
+      return (self::DEFSET == $auth[0] && crypt($auth[0], $auth[1]) == $auth[1]);
+!!!131202.php!!!	getLoginForm()
+      $result = NULL;
+//var_dump($weburl, $adminurl, self::$weburl, self::$adminurl);$weburl, $adminurlself::$adminurl
+      $adminurl = self::$adminurl.self::ADMIN_URL;
+
+      $form = new Form;
+      $form->addBackLink(_('Back to web.'), self::$weburl, array(), array('id' => 'back_link_central'))
+            ->addText('log', array('label' => _('Name')))
+            ->addRule(Form::RULE_FILLED, _('You must filled name!'));
+      $form->addPassword('pass', array('label' => _('Password')))
+            ->addRule(Form::RULE_FILLED, _('You must filled password!'));
+      $form->addSubmit('login_button', array('value' => _('Login')));
+
+      if (self::isLogin()) {
+        $form->addBackLink(_('Admin is now active.'), $adminurl, array(), array('id' => 'back_link_central'));
+      }
+
+      $result = $form;
+
+      if ($form->isSubmitted()) {
+        $values = $form->getValues();
+        $auth = self::getCryptData();
+        $_SESSION[self::$session_index] = NULL;
+
+        if ($auth[0] == $values['log'] && (crypt($values['pass'], $auth[1]) == $auth[1])) {
+          $hash = md5_file(self::$crypt_path);
+          $_SESSION[self::$session_index] = array('login' => $auth[0],
+                                                  'access' => true,
+                                                  'hash' => $hash,  //ochrana proti zamene souboru prihlasovani!
+                                                  'agent' => Core::getUserAgent(),
+                                                  );
+
+          $result = _('Login were successful.');
+          Core::setRefresh(Config::TIME_LOGIN, $adminurl);  //uspesne
+        } else {
+          $result = _('Login were failed.');
+          Core::setRefresh(Config::TIME_LOGIN, self::$weburl);  //neuspesne
+        }
+      }
+      return $result;
+!!!131330.php!!!	isLogin()
+      $result = false;
+      $session = Core::isFill($_SESSION, self::$session_index);
+      //osetreni podle md5_file a user-agenta
+      if (!empty($session)) {
+        $session = $_SESSION[self::$session_index];
+        $result = ($session['access'] &&
+                  file_exists(self::$crypt_path) &&
+                  $session['hash'] == md5_file(self::$crypt_path) &&
+                  $session['agent'] == Core::getUserAgent());
+      }
+      return $result;

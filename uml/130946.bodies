@@ -1,0 +1,897 @@
+class Form
+!!!148994.php!!!	__construct(inout settings :  = array())
+      $this->element = new stdClass;
+      $this->element->conf = new stdClass;
+      $this->element->conf->action = Core::isFill($settings, 'action');
+      $this->element->conf->method = Core::isFill($settings, 'method', self::METHOD_POST);
+      $this->element->conf->enctype = Core::isFill($settings, 'enctype', NULL);
+      $this->element->conf->form_class = Core::isFill($settings, 'form_class', NULL);
+      $this->element->conf->form_id = Core::isFill($settings, 'form_id', NULL);
+      $this->element->form = array(); //elementy
+      $this->element->before = array(); //pred formularem
+      $this->element->zan = 0;  //zanoreni formulare
+      $this->element->error = array();  //agregacni pole chyb
+      $this->element->values = NULL;  //predavani hodnot
+      $this->element->elemtype = array(); //pro sprvane vryceni hodnot
+      $this->element->submit = NULL;  //name submitu
+      $this->element->counts = array(); //pocty jednotlivych name
+      $this->element->loadvalues = array(); //nacitane data pri editaci
+      $this->element->validate = false;
+
+      $this->element->lastindex = 0;
+      $this->element->group = array();
+!!!149122.php!!!	__get(inout name : )
+      //kdyby to delalo problemy pujde to zapinat zvlast
+      return Core::isEmpty($this->getArgs($name), Core::isFill($this->element->values, $name, NULL));
+!!!149250.php!!!	__toString()
+      return $this->render();
+!!!149378.php!!!	render()
+      //print_r($this->element);
+      //var_dump($this->element->form);
+      //print_r($this->element->counts);
+
+      $row = array();
+      if (empty($this->element->group)) { //klasicke generovani
+        $func = function($value) { return $value['html']; };
+        $row = array_map($func, $this->element->form);
+      } else {  //generovani skupin
+        //pokud jsou nejake prvky pred skupinama
+        $func = function($value) { return ($value['group'] == -1  ? $value['html'] : NULL); };
+        $row = array_map($func, $this->element->form);
+        foreach ($this->element->group as $index => $group) {
+          $r = array();
+          $func = function($value, $indexgroup) { return ($value['group'] == $indexgroup ? $value['html'] : NULL); };
+          $i = array_fill(0, count($this->element->form), $index);  //vytvori pole indexu
+          $r = array_map($func, $this->element->form, $i);  //vkladani jednotlivych bloku do skupin
+
+          if (!is_null($group)) { //pokud je konkterni polozka nulova znamena to konec skupiny
+            $html = Core::isFill($group['settings'], 'html'); //nebo: container ????
+            if (!empty($html)) {  //pokud neni zadany tvar, group_name = ''
+              $row[] = $html->insert($r);
+            } else {
+              //TODO externi nastavovani: class, id, apod.
+              $row[] = self::elem('div')->insert(self::elem('span')->setText($group['name']))
+                                        ->insert($r);
+            }
+          } else {  //pokud je ukoncena skupina, pouze secte pole vystupu
+            $row = array_merge($row, $r);
+          }
+        }
+      }
+
+      $fieldset = self::elem('fieldset')->insertContent($row);
+
+      $form = self::elem('form')
+                  ->setDepth($this->element->zan)
+                  ->action($this->element->conf->action)
+                  ->method($this->element->conf->method)
+                  ->enctype($this->element->conf->enctype)
+                  ->class($this->element->conf->form_class)
+                  ->id($this->element->conf->form_id)
+                  ->insert($fieldset)
+                  ->appendBefore($this->element->before);
+
+      return $form->render();
+!!!149506.php!!!	getAction()
+      return $this->element->conf->action;
+!!!149634.php!!!	setAction(inout url : )
+ //action skript
+      $this->element->conf->action = $url;
+      return $this;
+!!!149762.php!!!	getMethod()
+      return $this->element->conf->method;
+!!!149890.php!!!	setMethod(inout method : )
+  //post/get
+      $this->element->conf->method = $method;
+      return $this;
+!!!150018.php!!!	getEnctype()
+      return $this->element->conf->enctype;
+!!!150146.php!!!	setEnctype(inout mime : )
+ //MIME_MULTIPART
+      $this->element->conf->enctype = $mime;
+      return $this;
+!!!150274.php!!!	getDepth()
+      return $this->element->zan;
+!!!150402.php!!!	setDepth(inout depth : )
+      $this->element->zan = $depth;
+      return $this;
+!!!150530.php!!!	buildLabel(inout settings : , inout element : )
+      $span = array();
+      //pokud je label vyplneny
+      $label = Core::isFill($settings, 'label', '');
+      if (!empty($label)) {
+        //mozna zamena elementu span
+        $span_elem = Core::isFill($settings, 'label_span_elem', 'span');
+        $span[] = self::elem($span_elem)->setText($label);
+      }
+
+      //pokud se ma vlozit vlastni element
+      $self_elem = Core::isFill($settings, 'self_elem');
+      if (!empty($self_elem)) {
+        //zatim to je tak ze se muze vkladat je jeden element
+        //pripadne jeden element ktery ma navkladane dovnitr dalsi prvky
+        if (is_array($self_elem)) { //pokuj je pole tak ho slouzi
+          $span = array_merge($span, $self_elem);
+        } else {
+          $span[] = $self_elem;
+        }
+      }
+
+
+      $result = self::elem('label')->class(Core::isFill($settings, 'label_class', NULL))
+                                      ->id(Core::isFill($settings, 'label_id', NULL));
+
+      $label_text = Core::isFill($settings, 'label_text');
+      if (!empty($label_text)) {
+        $result->setText($label_text);
+      }
+
+      //prenaseno pres globalni nastaveni
+      switch ($settings['_order']) {
+        case self::_O_SPAN_ELEM:  //normalni
+          $result->insertContent($span)
+                 ->insertContent($element);
+        break;
+
+        case self::_O_ELEM_SPAN:  //checkbox
+          $result->insertContent($element)
+                 ->insertContent($span);
+        break;
+      }
+      return $result;
+!!!150658.php!!!	__call(inout method : , inout parameters : )
+      try {
+        $name = Core::isFill($parameters, 0);
+
+        if (empty($name)) {
+          throw new ExceptionForm('Element name must not be empty!');
+        }
+        $settings = Core::isFill($parameters, 1);
+//FIXME striktne kontrolovat jestli 2 ruzne elementy nemaji stejny nazev, pokud nejde o multiple!!!!!
+        //$type = NULL;
+        $element = NULL;
+//TODO moznost pridavat volitelne parametry jako ze settings:, array('id' => 'back_link_central')
+
+        $returnvalue = Core::isFill($settings, 'returnvalue', false);  //zapinani vraceni hodnot primo z metody
+        //bude zpracovavat jen pri returnvalue=>true
+        $loadvalue = Core::isNull($this->element->loadvalues, $name, NULL);
+        $retval = Core::isEmpty($this->getMethodValue($name), $loadvalue);
+
+        $value = Core::isNull($settings, 'value', ($returnvalue ? $retval : NULL));  //nesmi kontrolovat pres empty!
+        $this->element->values[$name] = $value; //preneseni defaultni promennych do values
+
+        $checked = Core::isFill($settings, 'checked', ($returnvalue ? $retval : NULL)); //je haklive na typ
+        $selected = Core::isFill($settings, 'selected', ($returnvalue ? $retval : NULL));
+        $multiple = (boolean) Core::isFill($settings, 'multiple', false);
+        $multiple_name = sprintf('%s%s', $name, ($multiple ? '[]' : '')); //name pro elementy ktere podporuji multiple
+        $cols = Core::isFill($settings, 'cols', 40);
+        $rows = Core::isFill($settings, 'rows', 10);
+        $size = Core::isFill($settings, 'size', NULL);
+        $readonly = Core::isFill($settings, 'readonly', NULL);
+        $maxlength = Core::isFill($settings, 'maxlength', NULL);
+        $disabled = Core::isFill($settings, 'disabled', NULL);
+        $accesskey = Core::isFill($settings, 'accesskey', NULL);
+        $tabindex = Core::isFill($settings, 'tabindex', NULL);
+        $title = Core::isFill($settings, 'title', NULL);
+        $placeholder = Core::isFill($settings, 'placeholder', NULL);
+        $autocomplete = Core::isFill($settings, 'autocomplete', NULL);
+        $input_class = Core::isFill($settings, 'input_class', NULL);
+
+        //podminka pro problemove prohlizece
+        $oldplaceholder = (!empty($placeholder) && (Core::isIExplorer() || Core::isOpera()));
+
+        //html5
+        $min = Core::isFill($settings, 'min', 0);
+        $max = Core::isFill($settings, 'max', 10);
+        $step = Core::isFill($settings, 'step', 1);
+        $required = Core::isFill($settings, 'required', false);
+
+//var_dump($input_class);
+//var_dump($name, $multiple_name);
+
+        $settings['_order'] = self::_O_SPAN_ELEM; //defaultni poradi v labelu
+        $type = self::_T_TEXT;
+
+        //static $group = NULL;
+
+        switch ($method) {
+          case 'addText':
+            $element = self::elem('input')->type('text')
+                                          ->class($input_class)
+                                          ->name($multiple_name)
+                                          ->value($value)
+                                          ->autocomplete($autocomplete)
+                                          ->placeholder($placeholder)
+                                          ->size($size)
+                                          ->readonly($readonly)
+                                          ->maxlength($maxlength)
+                                          ->disabled($disabled)
+                                          ->accesskey($accesskey)
+                                          ->tabindex($tabindex)
+                                          ->title($title)
+                                          ->required($required);
+
+            if ($oldplaceholder) {  //pokud jsou IE nebo Opera
+              $element->onfocus(sprintf('this.value=(this.value == \'%s\' ? \'\' : this.value);', $placeholder))
+                      ->onblur(sprintf('this.value=(this.value == \'\' ? \'%s\' : this.value);', $placeholder))
+                      ->placeholder(NULL)
+                      ->required(NULL)
+                      ->value(Core::isEmpty($value, $placeholder));
+            }
+          break;
+
+          case 'addPassword':
+            $element = self::elem('input')->type('password')
+                                          ->class($input_class)
+                                          ->name($multiple_name)
+                                          ->value($value)
+                                          ->autocomplete($autocomplete)
+                                          ->size($size)
+                                          ->readonly($readonly)
+                                          ->maxlength($maxlength)
+                                          ->disabled($disabled)
+                                          ->accesskey($accesskey)
+                                          ->tabindex($tabindex)
+                                          ->title($title)
+                                          ->required($required);
+          break;
+
+          case 'addTextArea':
+            $wrap = Core::isFill($settings, 'wrap', NULL);  //soft, hard, off
+
+            $element = self::elem('textarea')->name($multiple_name)
+                                              ->class($input_class)
+                                              ->cols($cols)
+                                              ->rows($rows)
+                                              ->placeholder($placeholder)
+                                              ->readonly($readonly)
+                                              ->maxlength($maxlength)
+                                              ->disabled($disabled)
+                                              ->wrap($wrap)
+                                              ->accesskey($accesskey)
+                                              ->tabindex($tabindex)
+                                              ->title($title)
+                                              ->required($required);
+
+            if ($oldplaceholder) {  //pokud jsou IE nebo Opera
+              $element->onfocus(sprintf('this.value=(this.value == \'%s\' ? \'\' : this.value);', $placeholder))
+                      ->onblur(sprintf('this.value=(this.value == \'\' ? \'%s\' : this.value);', $placeholder))
+                      ->placeholder(NULL)
+                      ->required(NULL)
+                      ->setText(Core::isEmpty($value, $placeholder));
+            } else {
+              $element->setText($value);
+            }
+          break;
+
+          case 'addHidden':
+            $element = self::elem('input')->type('hidden')
+                                          ->class($input_class)
+                                          ->name($multiple_name)
+                                          ->value($value)
+                                          ->readonly($readonly)
+                                          ->maxlength($maxlength)
+                                          ->disabled($disabled);
+          break;
+
+          case 'addCheckbox':
+            $element = self::elem('input')->type('checkbox')
+                                          ->class($input_class)
+                                          ->name($multiple_name)
+                                          ->value($value)
+                                          ->checked($checked)
+                                          ->disabled($disabled)
+                                          ->accesskey($accesskey)
+                                          ->tabindex($tabindex)
+                                          ->title($title);
+
+            $settings['_order'] = self::_O_ELEM_SPAN;
+          break;
+
+          case 'addCheckGroup':
+            $row = array();
+            //'value' => array('k' => 'v',)
+            if (!empty($value)) {
+              foreach ($value as $key => $val) {
+                $row[] = self::elem('input')->type('checkbox')
+                                            ->class($input_class)
+                                            ->name($multiple_name)
+                                            ->value($key)
+                                            ->checked(is_array($checked) ? in_array($key, $checked) : $key == $checked);
+                $row[] = self::span()->setText($val);
+              }
+            }
+
+            $element = $row;
+          break;
+
+          case 'addSelect':
+            //rozsah 'range' => array(5, 32)
+            $range = Core::isFill($settings, 'range', NULL);
+            if (empty($value) && !empty($range)) {
+              $value = range($range[0], $range[1]);
+              $value = array_combine($value, $value);
+            }
+
+            //interval 'interval' => array('-' => 5, 'current' => date('H'), '+' => 5)
+            $interval = Core::isFill($settings, 'interval', NULL);
+            if (empty($value) && !empty($interval)) {
+              $before = array();
+              $minus = $interval['-'];
+              if (!empty($minus)) {
+                $before = range($interval['current'] - $minus, $interval['current'] - 1);
+              }
+              $center[] = $interval['current'];
+              $after = array();
+              $plus = $interval['+'];
+              if (!empty($plus)) {
+                $after = range($interval['current'] + 1, $interval['current'] + $plus);
+              }
+              $merge = array_merge($before, $center, $after);
+              $value = array_combine($merge, $merge);
+            }
+
+            //polozky value | optgroup
+            //'value' => array('k' => 'v',)
+            //'value' => array('k' => array('sk' => 'sv',),)
+            $row = array();
+            if (!empty($value)) {
+              foreach ($value as $key => $val) {
+                if (is_array($val)) {
+                  $group = self::elem('optgroup')->label($key);
+                  $r = array();
+                  foreach ($val as $k => $v) {
+                    $r[] = self::elem('option')->value((string) $k)
+                                                ->selected(is_array($selected) ? in_array($k, $selected) : $k == $selected)
+                                                ->setText($v);
+                  }
+                  $row[] = $group->insert($r);
+                } else {
+                  $row[] = self::elem('option')->value((string) $key)
+                                                ->selected(is_array($selected) ? in_array($key, $selected) : $key == $selected)
+                                                ->setText($val);
+                }
+              }
+            }
+
+            $element = self::elem('select')->name($multiple_name)
+                                            ->class($input_class)
+                                            ->multiple($multiple)
+                                            ->size($size)
+                                            ->disabled($disabled)
+                                            ->accesskey($accesskey)
+                                            ->tabindex($tabindex)
+                                            ->title($title)
+                                            ->insert($row);
+          break;
+
+          case 'addRadio':
+            $row = array(); //TODO dodelat addRadio
+            if (!empty($value)) {
+              foreach ($value as $key => $val) {
+                $row[] = self::elem('span')->setText($val);
+                $row[] = self::elem('input')->type('radio')
+                                            ->class($input_class)
+                                            ->name($multiple_name)
+                                            ->value($key)
+                                            ->checked($key == $selected);
+              }
+            }
+            $element = $row;
+          break;
+
+          case 'addImage':
+            $src = Core::isFill($settings, 'src', NULL);
+            $element = self::elem('input')->type('image')
+                                          ->class($input_class)
+                                          ->name($name)
+                                          ->value($value)
+                                          ->src($src)
+                                          ->accesskey($accesskey)
+                                          ->tabindex($tabindex)
+                                          ->title($title);
+          break;
+
+          case 'addFile':
+            $type = self::_T_FILE;
+            $accept = Core::isFill($settings, 'accept', NULL);
+            if (!empty($accept)) {
+              $accept = implode(',', $accept);
+            }
+
+            $element = self::elem('input')->type('file')
+                                          ->class($input_class)
+                                          ->accept($accept)
+                                          ->name($multiple_name)
+                                          ->multiple($multiple)
+                                          ->accesskey($accesskey)
+                                          ->tabindex($tabindex)
+                                          ->title($title)
+                                          ->required($required);
+          break;
+
+          case 'addSubmit': //odesilaci tlacitko, ve formulari bude akceptovano jen jedno!
+            $type = self::_T_SUBMIT;
+
+            $this->element->submit = $name;
+
+            $element = self::elem('input')->type('submit')
+                                          ->class($input_class)
+                                          ->name($name)
+                                          ->value($value)
+                                          ->accesskey($accesskey)
+                                          ->tabindex($tabindex)
+                                          ->title($title);
+          break;
+
+          case 'addButton':
+            $element = self::elem('input')->type('button')
+                                          ->name($name)
+                                          ->value($value)
+                                          ->accesskey($accesskey)
+                                          ->tabindex($tabindex)
+                                          ->title($title);
+          break;
+
+          case 'addReset':
+            $element = self::elem('input')->type('reset')
+                                          ->name($name)
+                                          ->value($value)
+                                          ->accesskey($accesskey)
+                                          ->tabindex($tabindex)
+                                          ->title($title);
+          break;
+
+          //html5
+          case 'addEmail':
+            $element = self::elem('input')->type('email')
+                                          ->name($name)
+                                          ->value($value)
+                                          ->required($required)
+                                          ->accesskey($accesskey)
+                                          ->tabindex($tabindex)
+                                          ->title($title);
+          break;
+
+          case 'addUrl':
+            $element = self::elem('input')->type('url')
+                                          ->name($name)
+                                          ->value($value)
+                                          ->required($required)
+                                          ->accesskey($accesskey)
+                                          ->tabindex($tabindex)
+                                          ->title($title);
+          break;
+
+          case 'addNumber':
+            $element = self::elem('input')->type('number')
+                                          ->name($name)
+                                          ->value($value)
+                                          ->min($min)
+                                          ->max($max)
+                                          ->step($step)
+                                          ->required($required)
+                                          ->accesskey($accesskey)
+                                          ->tabindex($tabindex)
+                                          ->title($title);
+          break;
+
+          case 'addRange':
+            $element = self::elem('input')->type('range')
+                                          ->name($name)
+                                          ->value($value)
+                                          ->min($min)
+                                          ->max($max)
+                                          ->step($step)
+                                          ->accesskey($accesskey)
+                                          ->tabindex($tabindex)
+                                          ->title($title);
+          break;
+
+          case 'addSearch':
+            $element = self::elem('input')->type('search')
+                                          ->name($name)
+                                          ->value($value)
+                                          ->required($required)
+                                          ->accesskey($accesskey)
+                                          ->tabindex($tabindex)
+                                          ->title($title);
+          break;
+
+          case 'addColor':
+            $element = self::elem('input')->type('color')
+                                          ->name($name)
+                                          ->value($value)
+                                          ->required($required)
+                                          ->accesskey($accesskey)
+                                          ->tabindex($tabindex)
+                                          ->title($title);
+          break;
+
+          case 'addDate':
+            $element = self::elem('input')->type('date')
+                                          ->name($name)
+                                          ->value($value)
+                                          ->required($required)
+                                          ->accesskey($accesskey)
+                                          ->tabindex($tabindex)
+                                          ->title($title);
+          break;
+
+          case 'addMonth':
+            $element = self::elem('input')->type('month')
+                                          ->name($name)
+                                          ->value($value)
+                                          ->required($required)
+                                          ->accesskey($accesskey)
+                                          ->tabindex($tabindex)
+                                          ->title($title);
+          break;
+
+          case 'addWeek':
+            $element = self::elem('input')->type('week')
+                                          ->name($name)
+                                          ->value($value)
+                                          ->required($required)
+                                          ->accesskey($accesskey)
+                                          ->tabindex($tabindex)
+                                          ->title($title);
+          break;
+
+          case 'addTime':
+            $element = self::elem('input')->type('time')
+                                          ->name($name)
+                                          ->value($value)
+                                          ->required($required)
+                                          ->accesskey($accesskey)
+                                          ->tabindex($tabindex)
+                                          ->title($title);
+          break;
+
+          case 'addDatetime':
+            $element = self::elem('input')->type('datetime')
+                                          ->name($name)
+                                          ->value($value)
+                                          ->required($required)
+                                          ->accesskey($accesskey)
+                                          ->tabindex($tabindex)
+                                          ->title($title);
+          break;
+
+          case 'addDatetimeLocal':
+            $element = self::elem('input')->type('datetime-local')
+                                          ->name($name)
+                                          ->value($value)
+                                          ->required($required)
+                                          ->accesskey($accesskey)
+                                          ->tabindex($tabindex)
+                                          ->title($title);
+          break;
+
+          default:
+            throw new ExceptionForm(sprintf('element s nazvem "%s" neexistuje nebo neni doposud implementovat!!!', $method));
+          break;
+        }
+
+        $elem = $this->buildLabel($settings, $element);
+        $this->element->form[] = array ('name' => $name,
+                                        'type' => $type,
+                                        'output' => self::TYPE_STRING,
+                                        //'method' => $method,
+                                        //'parameters' => $parameters,
+                                        'multiple' => $multiple,
+                                        'index' => Core::isFill($this->element->counts, $name, 0),
+                                        'group' => count($this->element->group) - 1,
+                                        'html' => $elem,
+                                        );
+        $this->element->lastindex = count($this->element->form) - 1;
+        $this->element->elemtype[$name] = $type;
+
+        //pokud je prazdne vlozi 1 pokud ne pricte jednicku
+        if (empty($this->element->counts[$name])) {
+          $this->element->counts[$name] = 1;
+        } else {
+          $this->element->counts[$name]++;
+        }
+
+      } catch (ExceptionForm $e) {
+        echo $e;
+      }
+      return $this;
+!!!150786.php!!!	addGroup(inout name : , inout settings :  = array())
+//TODO osetrvat pripadne duplicitni nazvy!!!! a jmeno nesmi byt prazdne?!, dodelat pridavne nastaveni!
+      $this->element->group[] = array('name' => $name, 'settings' => $settings);
+      return $this;
+!!!150914.php!!!	endGroup()
+      $this->element->group[] = NULL;
+      return $this;
+!!!151042.php!!!	addBackLink(inout text : , inout adress : , inout args :  = array(), inout settings :  = array())
+      $this->element->before[] = self::elem('a', $settings)->href($adress, $args)
+                                                            ->title($text)
+                                                            ->setText($text);
+      return $this;
+!!!151170.php!!!	addRule(inout type : , inout text :  = NULL, inout args :  = NULL)
+      $index = $this->element->lastindex;
+      $this->element->form[$index]['rule'][] = array ('type' => $type,
+                                                      'text' => $text,
+                                                      'args' => $args);
+      return $this;
+!!!151298.php!!!	setTypeVariable(inout type : )
+      $index = $this->element->lastindex;
+      $this->element->form[$index]['output'] = $type;
+      return $this;
+!!!151426.php!!!	getArgs(inout name : )
+      $source = NULL;
+
+      switch ($this->element->elemtype[$name]) {
+        case self::_T_TEXT:
+        case self::_T_SUBMIT:
+          $source = ($this->element->conf->method == self::METHOD_POST ? $_POST : $_GET);
+        break;
+
+        case self::_T_FILE:
+          //$this->element->conf->enctype ???
+          $source = $_FILES;
+        break;
+      }
+      return Core::isNull($source, $name, NULL);  //isFill
+!!!151554.php!!!	getMethodValue(inout name : )
+      $source = ($this->element->conf->method == self::METHOD_POST ? $_POST : $_GET);
+      return Core::isNull($source, $name, NULL);
+!!!151682.php!!!	applyType(inout name : , inout type : )
+      if ($type != self::TYPE_STRING) {
+        settype($this->element->values[$name], $type);
+      }
+!!!151810.php!!!	isSendet()
+      $result = false;
+      if (!empty($this->element->submit)) {
+        $submit_value = $this->getArgs($this->element->submit);
+        $result = (!empty($submit_value));
+      }
+      return $result;
+!!!151938.php!!!	setRequired(inout text : )
+      $this->addRule(self::RULE_FILLED, $text);
+      return $this;
+!!!152066.php!!!	isValid()
+      $result = false;
+      if (!$this->element->validate && $this->isSendet()) {
+        $result = true;
+        if (!empty($this->element->form)) {
+          foreach ($this->element->form as $index => $elem) { //name,type,output,multiple,index,html,rule
+            $name = $elem['name'];
+
+            //nacteni hodnoty argumentu
+            $arg = $this->getArgs($name);
+            $readarg = $arg;  //ulozeni originalni hodnoty
+            $this->element->values[$name] = $arg;
+
+            //multiple jen u textu
+            if ($elem['type'] == self::_T_TEXT && $elem['multiple'] && $this->element->counts[$name] > 1) {
+              $arg = $arg[$elem['index']];  //predani spravneho indexu, jen pro ucely kontroly
+            }
+
+            if ($elem['type'] == self::_T_FILE) {
+              if ($elem['multiple']) {
+                $arg = $arg['name'][0];
+              } else {
+                $arg = $arg['name'];
+              }
+            }
+
+            //zkontroluje jestli je neo v 0.indexu
+            if (is_array($arg)) {
+              $arg = $arg[0];
+            }
+
+//var_dump($index, $arg);
+
+            //pokud jsou zadane podminky
+            $rules = Core::isFill($elem, 'rule');
+            if (!empty($rules)) {
+              foreach ($rules as $rule) { //type,text,args
+                //rozdeleni osetreni dle podminky
+                $type = $rule['type'];
+                switch ($type) {
+                  case self::RULE_FILLED: //problem s nulou!
+                    $arg = trim($arg);  //vyhazeni mezer/tabulatoru ze zacatku,konce
+                    //pokud je textove prazdny argument
+                    if ($arg == '') {  //kontrola prazdnosti
+                      $this->addError($type, $rule['text']);
+                      $result = false;
+                    }
+                  break;
+
+                  case self::RULE_EQUAL:
+                    if ($arg != $rule['args']) {
+                      $this->addError($type, vsprintf($rule['text'], $rule['args']));
+                      $result = false;
+                    }
+                  break;
+
+                  case self::RULE_NOTEQUAL:
+                    if (is_array($rule['args'])) {
+                      if (in_array($arg, $rule['args'])) {
+                        $this->addError($type, vsprintf($rule['text'], $arg));  //vraci zamerne aktualni hodnotu
+                        $result = false;
+                      }
+                    } else {
+                      if ($arg == $rule['args']) {
+                        $this->addError($type, vsprintf($rule['text'], $rule['args']));
+                        $result = false;
+                      }
+                    }
+                  break;
+
+                  case self::RULE_NUMERIC:
+                    if (!is_numeric($arg)) {
+                      $this->addError($type, $rule['text']);
+                      $result = false;
+                    }
+                  break;
+
+/*
+                  case self::RULE_INTEGER:
+                    if (!is_int($arg)) {
+                      $this->addError($type, $rule['text']);
+                      $result = false;
+                    }
+                  break;
+
+                  case self::RULE_FLOAT:
+                    if (!is_float($arg)) {
+                      $this->addError($type, $rule['text']);
+                      $result = false;
+                    }
+                  break;
+*/
+
+                  case self::RULE_MIN_LENGTH:
+                    if (mb_strlen($arg, 'UTF-8') < $rule['args']) {
+                      $this->addError($type, vsprintf($rule['text'], $rule['args']));
+                      $result = false;
+                    }
+                  break;
+
+                  case self::RULE_MAX_LENGTH:
+                    if (mb_strlen($arg, 'UTF-8') > $rule['args']) {
+                      $this->addError($type, vsprintf($rule['text'], $rule['args']));
+                      $result = false;
+                    }
+                  break;
+
+                  case self::RULE_LENGTH:
+                    if (mb_strlen($arg, 'UTF-8') != $rule['args']) {
+                      $this->addError($type, vsprintf($rule['text'], $rule['args']));
+                      $result = false;
+                    }
+                  break;
+
+                  case self::RULE_MIN_VALUE:
+                    if ($arg < $rule['args']) {
+                      $this->addError($type, vsprintf($rule['text'], $rule['args']));
+                      $result = false;
+                    }
+                  break;
+
+                  case self::RULE_MAX_VALUE:
+                    if ($arg > $rule['args']) {
+                      $this->addError($type, vsprintf($rule['text'], $rule['args']));
+                      $result = false;
+                    }
+                  break;
+
+                  case self::RULE_RANGE:
+                    if ($arg < $rule['args'][0] || $arg > $rule['args'][1]) {
+                      $this->addError($type, vsprintf($rule['text'], $rule['args']));
+                      $result = false;
+                    }
+                  break;
+
+                  case self::RULE_EMAIL:
+                    $pattern = "/^[_a-zA-Z0-9\.\-]+@[_a-zA-Z0-9\.\-]+\.[a-zA-Z]{2,4}\$/";
+                    if (!preg_match($pattern, $arg)) {
+                      $this->addError($type, $rule['text']);
+                      $result = false;
+                    }
+                  break;
+
+                  case self::RULE_URL:
+                    $pattern = "/\b(?:(?:https?|ftp):\/\/|www\.)[-a-z0-9+&@#\/%?=~_|!:,.;]*[-a-z0-9+&@#\/%=~_|]/i";
+                    if (!preg_match($pattern, $arg)) {
+                      $this->addError($type, $rule['text']);
+                      $result = false;
+                    }
+                  break;
+
+                  case self::RULE_REGEXP:
+                    preg_match(sprintf('/%s/s', $rule['args']), $arg, $r);
+                    $podm = (!empty($r) ? $r[0] == $arg : false); //vystupni retezec musi byt stejny jako zadavany
+                    if (!$podm) {
+                      $this->addError($type, $rule['text']);
+                      $result = false;
+                    }
+                  break;
+
+                  case self::RULE_COUNT:
+                    $names = $readarg['name'];
+                    if (count($names) > $rule['args']) {
+                      $this->addError($type, vsprintf($rule['text'], $rule['args']));
+                      $result = false;
+                    }
+                  break;
+                } //end switch type
+
+              } //end foreach rule
+            } //empty rules
+            $this->applyType($name, $elem['output']);  //aplikace pretypovani
+          } //end foreach form
+        } //end empty forms
+        $this->element->validate = true;  //validace probehla
+      }
+      return $result;
+!!!152194.php!!!	isSubmitted(inout autovalidate :  = true)
+      $result = $this->isSendet();
+      if ($autovalidate) {  //pokud je autovalidace povolena, provadi i zarovben autovalidaci
+        $result = $this->isValid();
+      }
+      return $result;
+!!!152322.php!!!	getValue(inout name : )
+      $result = NULL;
+      if ($this->isSendet() && $this->element->validate) {  //vraci jen kdyz je odeslano a probehla jiz validace
+        $result = $this->element->values[$name];
+      }
+      return $result;
+!!!152450.php!!!	setValues(inout data : )
+      $this->element->loadvalues = $data;
+      return $this;
+!!!152578.php!!!	getValues(inout settings :  = array())
+      $ignore = Core::isFill($settings, 'ignore');
+      $define = Core::isFill($settings, 'define');
+
+//FIXME mit moznost osetrovat vstypu taky aby html prevadel na zastupne texty html enetit
+//kvuli XSS -> htmlentities($str, ENT_QUOTES) vicemene na textole elementy s uziv vstupem
+
+      $result = NULL;
+      if ($this->isSendet() && $this->element->validate) {  //vraci jen kdyz je odeslano a probehla jiz validace
+        $result = array();
+        foreach ($this->element->form as $index) {
+          switch ($index['type']) {
+            case self::_T_TEXT: //vypisuje vse krome submit
+            case self::_T_FILE:
+              $name = $index['name'];
+              if (empty($ignore) && empty($define)) {
+                //pokud je hodnota pole prepise se jakoby 2x zasebou
+                $result[$name] = $this->element->values[$name];
+              } else {
+                if ((!empty($ignore) ? !in_array($name, $ignore) : true) &&
+                    (!empty($define) ? in_array($name, $define) : true)) {
+                  $result[$name] = $this->element->values[$name];
+                }
+              }
+            break;
+          }
+        }
+      }
+      return $result;
+!!!152706.php!!!	isErrors()
+      return (!empty($this->element->error));
+!!!152834.php!!!	addError(inout typ : , inout zprava : )
+      $this->element->error[$typ][] = $zprava;
+!!!152962.php!!!	getErrors(inout sablona :  = NULL)
+      $result = NULL;
+      if (!empty($this->element->error)) {
+        $err = array();
+        foreach ($this->element->error as $typ => $errors) {
+          $err = array_merge($err, $errors);  //sber chyb
+        }
+        //zpracovani hodnot pri vyuziti sablony
+        if (empty($sablona)) {
+          $result = implode(self::elem('br'), $err);
+        } else {
+          foreach ($err as $error) {
+            $data = array('error' => $error);
+            $result[] = $sablona->setTemplate($data)->render();
+          }
+        }
+      }
+      return $result;

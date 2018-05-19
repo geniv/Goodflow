@@ -1,0 +1,157 @@
+class SqlConnector
+!!!171906.php!!!	__construct(inout type : , inout settings :  = NULL)
+      try {
+        $this->pointer = new stdClass;
+        $this->pointer->state = true;
+
+        $this->pointer->dbresult = NULL;
+        $this->pointer->dbresultfetch = NULL;
+        $this->pointer->dbresultobject = false;
+
+        $dsn = NULL;
+        $path = Core::isFill($settings, 'path');
+        $user = Core::isFill($settings, 'user', NULL);
+        $pass = Core::isFill($settings, 'pass', NULL);
+
+        switch ($type) {
+          case self::SQLite2:
+          case self::SQLite3:
+            $this->pointer->path = sprintf('%s.%s', $path, $type);
+            $dsn = sprintf('%s:%s', $type, $this->pointer->path);
+          break;
+
+          case self::MySQL:
+            //TODO doimplementovat...
+          break;
+        }
+
+        $this->pointer->db = new PDO($dsn, $user, $pass);
+      } catch (PDOException $e) {
+        $this->pointer->state = false;
+        echo sprintf('Connection failed: %s', $e->getMessage());
+      }
+!!!172034.php!!!	__destruct()
+      $this->pointer->db = NULL;
+!!!172162.php!!!	setStructure(inout struct : )
+      //pokud je pripojena databaze a velikost souboru databaze 0 tak instaluje
+      try {
+        if (!empty($this->pointer->db) && filesize($this->pointer->path) == 0) {
+          $func = function ($k ,$v) { return sprintf('%s %s', $k, $v); };
+          foreach ($struct as $name => $columns) {
+            $values = implode(','.PHP_EOL, array_map($func, array_keys($columns), $columns));
+            $sql = sprintf('CREATE TABLE %s (%s);', $name, $values);
+            if ($this->pointer->db->exec($sql) !== false) {
+              echo sprintf('instalovano: %s<br />'.PHP_EOL, $name);
+            }
+          }
+        }
+        $this->pointer->struct = $struct; //vlozeni struktury tabulky
+      } catch (PDOException $e) {
+        echo sprintf('Create structure failed: %s', $e->getMessage());
+      }
+      return $this;
+!!!172290.php!!!	getAvailableDrivers()
+      return PDO::getAvailableDrivers();
+!!!172418.php!!!	getLastInsertID(inout name :  = NULL)
+      return $this->pointer->db->lastInsertId($name);
+!!!172546.php!!!	beginTransaction()
+      return $this->pointer->db->beginTransaction();
+!!!172674.php!!!	inTransaction()
+      return $this->pointer->db->inTransaction();
+!!!172802.php!!!	commit()
+      $result = NULL;
+      try {
+        $result = $this->pointer->db->commit();
+      } catch (PDOException $e) {
+        $this->pointer->db->rollBack(); //pokud se nepodari odeslat
+        echo sprintf('Commit failed: %s', $e->getMessage());
+      }
+      return $result;
+!!!172930.php!!!	addRow(inout table : , inout data : )
+      $result = NULL;
+      try {
+        $keys = array_keys($data);
+        $cols = array_fill(0, count($keys), '?');
+        $val = Sql::getTransferTypes($this->pointer->struct[$table], $data);
+        $sql = sprintf('INSERT INTO %s (%s) VALUES (%s);', $table, implode(', ', $keys), implode(', ', $cols)); //implode(', ', $val)
+        $prep = $this->pointer->db->prepare($sql);
+        $prep->execute($val);
+        $result = $prep->rowCount(); //vraci pocet radku u kterych probehla zmena
+      } catch (PDOException $e) {
+        echo sprintf('Insert row failed: %s', $e->getMessage());
+      }
+      return $result;
+!!!173058.php!!!	editRow(inout table : , inout id : , inout data : )
+      $result = NULL;
+      try {
+        $keys = array_keys($data);
+        $func = function($k) { return sprintf('%s=?', $k); };
+        $values = array_map($func, $keys);
+        $val = Sql::getTransferTypes($this->pointer->struct[$table], $data);
+        $sql = sprintf('UPDATE %s SET %s WHERE rowid=%d;', $table, implode(','.PHP_EOL, $values), $id);
+        $prep = $this->pointer->db->prepare($sql);
+        $prep->execute($val);
+        $result = $prep->rowCount(); //vraci pocet radku u kterych probehla zmena
+//TODO radne otestovat upravu radku!!!!, at uz existujicich a nebo neexistujicich
+//+spatne data, spatne formaty a pokus o vlozeni vadneho dotazu
+      } catch (PDOException $e) {
+        echo sprintf('Update row failed: %s', $e->getMessage());
+      }
+      return $result;
+!!!173186.php!!!	delRow(inout table : , inout id : )
+      $result = NULL;
+      try {
+        $sql = sprintf('DELETE FROM %s WHERE rowid=%d;', $table, $id);
+        $result = $this->pointer->db->exec($sql); //vraci pocet radku u kterych probehla zmena
+        $this->pointer->db->exec('VACUUM;');
+      } catch (PDOException $e) {
+        echo sprintf('Update row failed: %s', $e->getMessage());
+      }
+      return $result;
+!!!173314.php!!!	loadRow(inout table : , inout id : , inout columns :  = '*')
+      $sql = sprintf('SELECT %s FROM %s WHERE rowid=%d;', $columns, $table, $id);
+      return $this->pointer->db->query($sql)->fetch(PDO::FETCH_OBJ);
+!!!173442.php!!!	setIterator(inout sql_object : Sql, inout settings :  = array())
+      $result = NULL;
+      $sql = NULL;
+//TODO ++napsat testy!
+
+      $sql_query = $sql_object->getSql();  //nacteni sql dotazu
+      $where_arg = $sql_object->getWhereArgs();  //nacteni hotnoty where
+
+      $result_count = Core::isNull($settings, 'result_count', false);
+
+      $this->pointer->dbresult = $this->pointer->db->prepare($sql_query);
+      $this->pointer->dbresult->execute($where_arg);
+      //vypocet poctu radku
+      if ($result_count) {
+        $result = count($this->pointer->dbresult->fetchAll());  //spocita radky
+        $this->pointer->dbresult->execute($where_arg);  //znovu provede pro navraceni dat iteraci
+      }
+
+      $this->pointer->dbresultobject = Core::isNull($settings, 'result_object', true);
+      return $result;
+!!!173570.php!!!	getResultFetch()
+      if (!is_null($this->pointer->dbresult)) {
+        //nacitani radku z databaze
+        if ($this->pointer->dbresultobject) {
+          $this->pointer->dbresultfetch = $this->pointer->dbresult->fetchObject();
+        } else {
+          $this->pointer->dbresultfetch = $this->pointer->dbresult->fetch(PDO::FETCH_ASSOC);
+        }
+      }
+!!!173698.php!!!	rewind()
+      //inicializace iterace
+      $this->getResultFetch();
+!!!173826.php!!!	current()
+      //vraceni aktualni hodnoty iterace
+      return $this->pointer->dbresultfetch;
+!!!173954.php!!!	key()
+      //vraceni klice iterace
+      return (int) $this->pointer->dbresultfetch->rowid;
+!!!174082.php!!!	next()
+      //posouvani indexu iterace
+      $this->getResultFetch();
+!!!174210.php!!!	valid()
+      //overovani koncove podminky iterace
+      return (bool) $this->pointer->dbresultfetch; //pokud nejsou data, vraci false
