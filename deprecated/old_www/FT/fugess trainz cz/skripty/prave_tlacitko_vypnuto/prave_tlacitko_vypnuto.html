@@ -1,0 +1,31 @@
+<script language=JavaScript>
+<!--
+
+/*
+Disable right mouse click Script (By Crash @ http://walk.to/crash)
+Submitted to and permission granted to Dynamicdrive.com to feature script in it's archive
+For full source code to this script and 100's more, visit 
+http://dynamicdrive.com
+*/
+
+var message="Function Disabled";
+function click(e) {
+if (document.all) {
+if (event.button==2||event.button==3) {
+alert(message);
+return false;
+}
+}
+if (document.layers) {
+if (e.which == 3) {
+alert(message);
+return false;
+}
+}
+}
+if (document.layers) {
+document.captureEvents(Event.MOUSEDOWN);
+}
+document.onmousedown=click;
+// --> 
+</script>

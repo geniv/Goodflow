@@ -1,0 +1,297 @@
+body {
+  background: #fff url(../obr/body.png) no-repeat center top;
+  font: 11px Verdana, Arial, "Arial CE", Helvetica, "Trebuchet MS", Tahoma, sans-serif;
+  color: #000;
+}
+
+#obal_layout,
+#obal_layout #zahlavi,
+#obal_layout #obal_sekce,
+#obal_layout #zapati {
+  width: 1000px;
+  border: 1px dotted #aaa;
+}
+
+#obal_layout {
+  height: auto;
+  min-height: 100%;
+  margin: 0 auto;
+  position: relative;
+  overflow: hidden;
+  background: url(../obr/obal_layout.png) repeat-y center -8px;
+}
+
+/* zahlavi */
+#obal_layout #zahlavi {
+  height: 130px;
+  position: relative;
+  background: url(../obr/zahlavi.png) no-repeat top;
+}
+
+#zahlavi h1 {
+  width: 900px;
+  height: 150px;
+  position: absolute;
+  top: 66px;
+  left: 33px;
+  /* background: url(../obr/PRELOAD.png) no-repeat; -preload */
+}
+
+#zahlavi a {
+  display: block;
+  height: 150px;
+  position: relative;
+  color: #000;
+}
+
+#zahlavi a span {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -10;
+  /* background: url(../obr/PRELOAD.png) no-repeat; -preload */
+}/* /zahlavi */
+
+#obal_layout #obal_sekce {
+  min-height: 600px;
+  margin: 0 auto;
+  padding-bottom: 90px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* menu */
+#obal_sekce #menu {
+  width: 1000px;
+  margin-bottom: 10px;
+  overflow: hidden;
+}
+
+#menu li {
+  margin-right: 3px;
+  float: left;
+}
+
+#menu li a {
+  position: relative;
+  color: #000;
+}
+
+#menu li a:hover {
+  color: #aaa;
+}
+
+#menu li a span {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -10;
+}/* /menu */
+
+/* obsah vsech sekci */
+/* centralni styly */
+#obal_sekce .obsah {
+  width: 1000px; /* width bez paddingu: 535px (zprava 20px, zleva 30px) */
+  padding: 30px 20px 0 30px;
+  position: relative;
+  z-index: 100;
+}
+
+.obsah h2 {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -10;
+  /* background: url(../obr/PRELOAD.png) no-repeat; -preload */
+}
+
+.obsah h3 {
+  font: 30px Georgia, "Times New Roman", Times, serif;
+}
+
+.obsah h3.mensi_odsazeni {
+  margin-top: 23px;
+}
+
+.obsah p.display-none,
+.obsah h3.display-none {
+  display: none;
+}
+
+.obsah a {
+  text-decoration: none;
+  font-weight: bold;
+  color: #d2342f;
+}
+
+.obsah a:hover {
+  text-decoration: underline;
+  /* color: #ff0800; */ /* nekontrastni barva */
+}/* /centralni styly */
+/* /obsah vsech sekci */
+
+/* zapati */
+#obal_layout #zapati {
+  height: 70px;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  background: url(../obr/zapati.png) no-repeat;
+}
+
+#zapati p {
+  margin-top: 30px;
+  font-size: 9px;
+  text-align: center;
+  color: #000;
+}
+
+#zapati p a {
+  color: #ae8c52;
+  font-weight: bold;
+  text-decoration: none;
+  border-bottom: 1px solid #8a7653;
+}
+
+#zapati p a:hover {
+  color: #fff;
+  border-bottom: 1px dotted #fff;
+}
+
+#zapati #vygenerovano {
+  display: none;
+}
+
+/* moo log mooslide */
+#zapati #obal_moo_ad {
+  position: absolute;
+  top: -161px;
+  right: 12px; /* vychozi hodnota */
+  width: 340px;
+  height: 160px;
+}
+
+#obal_moo_ad #odkaz_ad {
+  display: block;
+  width: 100px; /* 10px */
+  height: 16px;
+  position: absolute;
+  bottom: -16px;
+  right: -12px; /* vychozi hodnota */
+  cursor: default;
+}
+
+#obal_moo_ad .moo_log {
+  display: none;
+  width: 340px;
+  height: 160px;
+  position: relative;
+  z-index: 1000;
+  font-size: 11px;
+}
+
+#obal_moo_ad .moo_log .moo_log_zah_zap {
+  display: block;
+  width: 340px;
+  height: 25px;
+  position: relative;
+  background: url(../obr/zapati.png) no-repeat left bottom;
+  
+  background-color: #aaa;
+}
+
+#obal_moo_ad .moo_log .moo_log_zah_zap .moo_close {
+  display: block;
+  width: 20px;
+  height: 21px;
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  background: url(../obr/moo_close.png) no-repeat;
+  cursor: pointer;
+}
+
+#obal_moo_ad .moo_log .moo_log_zah_zap .prejit_odkaz {
+  display: block;
+  position: absolute;
+  top: 5px;
+  right: 6px;
+  color: #fff;
+  text-decoration: none;
+}
+
+#obal_moo_ad .moo_log .moo_log_zah_zap .prejit_odkaz:hover {
+  text-decoration: underline;
+}
+
+#obal_moo_ad .moo_log #moo_span {
+  display: block;
+  margin-bottom: 6px;
+  padding: 3px 0 6px 3px;
+  border-bottom: 1px dotted;
+}
+
+#obal_moo_ad .moo_log span #moo_cajovna:after {
+  content: "Systém ";
+}
+
+#obal_moo_ad .moo_log span strong + span:after {
+  content: " požaduje Vaše přihlášení";
+}
+
+#obal_moo_ad .moo_log div {
+  width: 310px;
+  height: 110px;
+  margin: 0 auto;
+  position: relative;
+  border-left: 1px dotted;
+  border-right: 1px dotted;
+  background: url(../obr/zahlavi.png) no-repeat -370px top;
+  background-color: #ccc;
+}
+
+#obal_moo_ad .moo_log div form span {
+  display: block;
+}
+
+#obal_moo_ad .moo_log div form label {
+  display: block;
+  margin: 10px 0 0 20px;
+  overflow: hidden;
+}
+
+#obal_moo_ad .moo_log div form label .prvni_span {
+  margin: 4px 3px 0 0;
+  float: left;
+}
+
+#obal_moo_ad .moo_log div form #ll_moo_ad span span:after {
+  content: "Login:";
+}
+
+#obal_moo_ad .moo_log div form #ll_moo_ad + label span span:after {
+  content: "Heslo:";
+}
+
+#obal_moo_ad .moo_log div form label input {
+  float: left;
+  padding: 3px;
+  background-color: #c5b179;
+  border: 1px dashed #ac9b6b;
+  font: 11px Verdana, Arial, "Arial CE", Helvetica, "Trebuchet MS", Tahoma, sans-serif;
+}
+
+#obal_moo_ad .moo_log div form .moo_log_tl {
+  display: block;
+  width: 64px;
+  height: 64px;
+  position: absolute;
+  right: 20px;
+  bottom: 10px;
+  border: none;
+  background: url(../obr/moo_log.png) no-repeat;
+  cursor: pointer;
+}/* /moo log mooslide */
+/* /zapati */
+
+/* Fugess (Martin) */

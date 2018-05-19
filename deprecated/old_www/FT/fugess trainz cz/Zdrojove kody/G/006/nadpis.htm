@@ -1,0 +1,72 @@
+<HTML>
+  <HEAD>
+    <TITLE>Nadpis v pohybu</TITLE>
+
+    <STYLE>
+      <!--
+      /* Styl pro nadpis */
+      #Heading {
+        font-size: 24pt;
+        font-weight: bold;
+        color: green;
+        visibility: hidden;
+
+        position: absolute;
+        top: 50px;
+        left: -150px;
+      }
+      -->
+    </STYLE>
+
+    <SCRIPT Language="javascript">
+    <!--
+      // Èasovaè
+      var Timer;
+      
+      // Souøadnice nadpisu
+      var LeftCoord = -50;
+      var TopCoord = 50;
+
+      // Spuštìní animace
+      function Start(){
+        // Nastavení èasovaèe, aby vždy po pìti milisekundách
+        // provedl funkci MoveHeading()
+        Timer = setInterval ("MoveHeading()", 5);
+        
+        // Zobrazení nadpisu
+        Heading.style.visibility = "visible";
+      }
+
+      // Ukonèení animace
+      function Stop(){
+        // Zastavení èasovaèe
+        clearInterval (Timer);
+      }
+
+      // Funkce pro pohyb nadpisu
+      function MoveHeading (){
+        // Zmìna X-ové souøadnice o 4 pixely
+        LeftCoord+=4;
+        
+        // Zmìna Y-ové souøadnice
+        TopCoord = 30 + 25*Math.sin (LeftCoord/20);
+        
+        // Nastavení souøadnic nadpisu
+        Heading.style.left = LeftCoord+"px";
+        Heading.style.top = TopCoord+"px";
+        
+        // Test ukonèení pohybu
+        if (LeftCoord > 230) Stop();
+      }
+    //-->
+    </SCRIPT>
+  </HEAD>
+
+  <BODY OnLoad="Start();">
+
+    <DIV Id="Heading">Toto jest NADPIS</DIV>
+    <BR><BR>
+    Toto dál je normální text stránky...
+  </BODY>
+</HTML>
+

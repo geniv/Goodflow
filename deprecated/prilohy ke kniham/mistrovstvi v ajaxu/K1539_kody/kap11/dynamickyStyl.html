@@ -1,0 +1,48 @@
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>
+      Dynamické nastavení stylu
+    </title>
+    <style id="strasidelny">
+      body {font-family: verdana; color: white; background-color: black}
+    </style>
+
+    <style id="bezny" disabled="true">
+      body {font-family: 'times new roman'; color: black; background-color: white}
+    </style>
+
+    <script language="javascript">
+      function nastavStyl(idStylu)
+      {
+        var styl;
+        for (var citac = 0; citac < document.styleSheets.length; citac++) {
+          styl = document.styleSheets[citac];
+          styl.disabled = true;
+          if (styl.id == idStylu) {
+            styl.disabled = false;
+          }
+        }
+      }
+    </script>
+
+  </head>
+
+  <body>
+    <h1>
+      Dynamické nastavení stylu
+    </h1>
+
+    <center>
+      <input type="button" value="Běžný styl" 
+        onclick="nastavStyl('bezny')">
+      <input type="button" value="Strašidelný styl" 
+        onclick="nastavStyl('strasidelny')">
+    </center>
+
+    <p>     
+      Nastavte styl stránky stisknutím tlačítka.
+    </p>
+    
+  </body>
+</html>

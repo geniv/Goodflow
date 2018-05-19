@@ -1,0 +1,772 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!-- saved from url=(0067)http://interval.cz/clanky/vytvareni-obrazkovych-grafu-pomoci-php-2/ -->
+<?xml version='1.0' encoding='windows-1250'?><HTML lang=cs xml:lang="cs" 
+xmlns="http://www.w3.org/1999/xhtml"><HEAD><TITLE>Vytváření obrázkových grafů pomocí PHP 2. -- PHP -- Vývoj aplikací -- Interval.cz</TITLE>
+<META http-equiv=Content-Type content="text/html; charset=windows-1250">
+<META http-equiv=Content-language content=cs>
+<META http-equiv=Cache-control content=no-cache>
+<META http-equiv=Pragma content=no-cache>
+<META http-equiv=Expires content=-1>
+<META content=index,follow name=robots>
+<META content=index,follow,snippet,noarchive name=googlebot>
+<META 
+content="Dnes přicházím s druhou, závěrečnou polovinou PHP skriptu pro vytváření obrázkových grafů. V poněkud rozsáhlejším článku si ukážeme,  jak načíst data z databáze a kreslit jejich křivky do grafu." 
+name=description>
+<META content="PHP, Vývoj aplikací, Interval" name=keywords>
+<META content="49.1915, 16.626" name=ICBM>
+<META content=Interval.cz name=DC.Title>
+<META content=http://interval.cz name=DC.Identifier>
+<META content="(SCHEME=ISSN) 12128651" name=DC.Identifier>
+<META content=cs name=DC.Language>
+<META http-equiv=pics-label 
+content='(pics-1.1 "http://www.icra.org/ratingsv02.html" comment "ICRAonline EN v2.0" l gen true for "http://interval.cz" r (nz 1 vz 1 lz 1 oz 1 cz 1) "http://www.rsac.org/ratingsv01.html" l gen true for "http://interval.cz" r (n 0 s 0 v 0 l 0))'>
+<META http-equiv=imagetoolbar content=no>
+<META http-equiv=MSThemeCompatible content=no>
+<META content=true name=MSSmartTagsPreventParsing><LINK 
+href="http://interval.cz/favicon.ico" type=image/x-icon 
+rel="shortcut icon"><LINK 
+title="Interval.cz -- Vytváření obrázkových grafů pomocí PHP 2. -- (diskuse, Atom 0.3)" 
+href="http://export.interval.cz/?type=atom&amp;discussion=674" 
+type=application/atom+xml rel=alternate><LINK 
+title="Interval.cz -- Vytváření obrázkových grafů pomocí PHP 2. -- (diskuse, RDF Site Summary 1.0)" 
+href="http://export.interval.cz/?type=rdf&amp;discussion=674" 
+type=application/rdf+xml rel=alternate><LINK 
+title="Interval.cz -- Vytváření obrázkových grafů pomocí PHP 2. -- (diskuse, RSS 2.0)" 
+href="http://export.interval.cz/?type=rss&amp;discussion=674" 
+type=application/rss+xml rel=alternate><LINK href="http://interval.cz" 
+rel=home><LINK href="http://interval.cz/search_ex.asp" rel=search><LINK 
+href="http://interval.cz/serialy/vytvareni-obrazkovych-grafu-pomoci-php/" 
+rel=up><LINK 
+href="http://interval.cz/clanky/vytvareni-obrazkovych-grafu-pomoci-php-1/" 
+rel=first><LINK 
+href="http://interval.cz/clanky/vytvareni-obrazkovych-grafu-pomoci-php-1/" 
+rel=prev><LINK media=all 
+href="Vytváření obrázkových grafů pomocí PHP 2_ -- PHP -- Vývoj aplikací -- Interval_cz_soubory/html4.css" 
+type=text/css rel=stylesheet><LINK media=all 
+href="Vytváření obrázkových grafů pomocí PHP 2_ -- PHP -- Vývoj aplikací -- Interval_cz_soubory/interval-display.css" 
+type=text/css rel=stylesheet><LINK media=print 
+href="Vytváření obrázkových grafů pomocí PHP 2_ -- PHP -- Vývoj aplikací -- Interval_cz_soubory/interval-print.css" 
+type=text/css rel=stylesheet>
+<META content="MSHTML 6.00.2800.1106" name=GENERATOR></HEAD>
+<BODY class="interval interval-articles" id=article-674>
+<DIV class=audits><!-- TOPList.cz -->
+<SCRIPT type=text/javascript>
+<!-- <![CDATA[
+document.write ("<a href='http://www.toplist.cz'><img src='http://www.toplist.cz/dot.asp?id=33617&amp;http="+escape(document.referrer)+"&amp;wi="+escape(window.screen.width)+"&amp;he="+escape(window.screen.height)+"&amp;cd="+escape(window.screen.colorDepth)+"&amp;t="+escape(document.title)+"' style='border: 0; width: 1px; height: 1px' alt='.' /></a>");
+//]]> -->
+</SCRIPT>
+<NOSCRIPT>
+<DIV><A href="http://www.toplist.cz/"><IMG 
+style="BORDER-RIGHT: 0px; BORDER-TOP: 0px; BORDER-LEFT: 0px; WIDTH: 1px; BORDER-BOTTOM: 0px; HEIGHT: 1px" 
+alt=. src=""></A></DIV></NOSCRIPT><!-- TOPList.cz - konec --><!-- iAudit --><IMG 
+style="BORDER-RIGHT: 0px; BORDER-TOP: 0px; BORDER-LEFT: 0px; WIDTH: 1px; BORDER-BOTTOM: 0px; HEIGHT: 1px" 
+alt=. 
+src="Vytváření obrázkových grafů pomocí PHP 2_ -- PHP -- Vývoj aplikací -- Interval_cz_soubory/dot.idot.gif"> 
+<!-- iAudit - konec --><!-- (C)2005 Gemius SA - gemiusAudience  / Ostatni -->
+<SCRIPT type=text/javascript><!--
+	
+	gemius_identifier = new String('bQzrQkrzLOWoKbJeudlKguTS7OndUMSqxutbeFviWMv.47');
+	
+	gemius_href=new String(document.location);
+	if (document.referrer) { gemius_ref = new String(document.referrer); } else { gemius_ref = ""; }
+	if(typeof(Error)!='undefined') eval("try { if (typeof(top.document.referrer)=='string') { gemius_ref = top.document.referrer } } catch(gemius_ex) {}");
+	iname = new String('id='+gemius_identifier+';ref='+escape(gemius_ref.substring(0,299))+';href='+escape(gemius_href.substring(0,299))+';');
+	document.write('<iframe src="http://spir.hit.gemius.pl/gemiusaudience.html" name="'+iname+'" width="1" height="1" frameborder="0" scrolling="no"></iframe>');
+	//-->
+	</SCRIPT>
+</DIV>
+<DIV id=advertising-leader-board><!-- StartKód: adarbo2.bbmedia.cz 3.1 Nestandard  Interval(87) / cely web(1) / leaderboard 750x100(1) / nestandard(24) -->
+<SCRIPT type=text/javascript>
+	/* <![CDATA[ */
+	var bbs=screen,bbn=navigator,bbh;bbh='&ubl='+bbn.browserLanguage+'&ucc='+bbn.cpuClass+'&ucd='+bbs.colorDepth+'&uce='+bbn.cookieEnabled+'&udx='+bbs.deviceXDPI+'&udy='+bbs.deviceYDPI+'&usl='+bbn.systemLanguage+'&uje='+bbn.javaEnabled()+'&uah='+bbs.availHeight+'&uaw='+bbs.availWidth+'&ubd='+bbs.bufferDepth+'&uhe='+bbs.height+'&ulx='+bbs.logicalXDPI+'&uly='+bbs.logicalYDPI+'&use='+bbs.fontSmoothingEnabled+'&uto='+(new Date()).getTimezoneOffset()+'&uti='+(new Date()).getTime()+'&uui='+bbs.updateInterval+'&uul='+bbn.userLanguage+'&uwi='+bbs.width;
+	document.write("<scr"+"ipt  language='JavaScript' type='text/javascript' src='http://adarbo2.bbmedia.cz/please/showit/87/1/1/24/?typkodu=non-standard"+bbh+"&alttext=0&border=0&bgcolor=FFFFFF&text=000000&link=0000FF&target=_blank&bust="+Math.random()+"'>");
+	document.write("<"+"\/scr"+"ipt>");
+	/* ]]> */
+	</SCRIPT>
+<!-- KonecKód: adarbo2.bbmedia.cz 3.1 Nestandard --></DIV>
+<DIV id=page-header>
+<DIV id=interval-logo>
+<H1 title="Interval.cz - webdesign a e-komerce denně (logo &amp; index link)"><A 
+href="http://interval.cz/">Interval.cz<SPAN></SPAN></A></H1></DIV>
+<DIV id=advertising-page-header><!-- StartKód: adarbo2.bbmedia.cz 3.1 Nestandard  Interval(87) / cely web(1) / horni468x60(2) / nestandard(24) -->
+<SCRIPT type=text/javascript>
+	/* <![CDATA[ */
+	var bbs=screen,bbn=navigator,bbh;bbh='&ubl='+bbn.browserLanguage+'&ucc='+bbn.cpuClass+'&ucd='+bbs.colorDepth+'&uce='+bbn.cookieEnabled+'&udx='+bbs.deviceXDPI+'&udy='+bbs.deviceYDPI+'&usl='+bbn.systemLanguage+'&uje='+bbn.javaEnabled()+'&uah='+bbs.availHeight+'&uaw='+bbs.availWidth+'&ubd='+bbs.bufferDepth+'&uhe='+bbs.height+'&ulx='+bbs.logicalXDPI+'&uly='+bbs.logicalYDPI+'&use='+bbs.fontSmoothingEnabled+'&uto='+(new Date()).getTimezoneOffset()+'&uti='+(new Date()).getTime()+'&uui='+bbs.updateInterval+'&uul='+bbn.userLanguage+'&uwi='+bbs.width;
+	document.write("<scr"+"ipt  type='text/javascript' src='http://adarbo2.bbmedia.cz/please/showit/87/1/2/24/?typkodu=non-standard"+bbh+"&alttext=0&border=0&bgcolor=FFFFFF&text=000000&link=0000FF&target=_top&bust="+Math.random()+"'>");
+	document.write("<"+"\/scr"+"ipt>");
+	/* ]]> */
+	</SCRIPT>
+<!-- KonecKód: adarbo2.bbmedia.cz 3.1 Nestandard --></DIV>
+<DIV class=page-maker>&nbsp;</DIV></DIV>
+<DIV id=page-topmenu>
+<H2 class=textversion>Navigace</H2><!-- cached 09-15-62-hlavni_menu_with_ascii.txt --><!-- ,Vývoj aplikací ~~ ,,PHP ~~ , -->
+<DIV id=page-mainmenu>
+<H3 class=textversion>Hlavní menu</H3>
+<UL>
+  <LI class=first><A href="http://interval.cz/">Titulka</A></LI>
+  <LI><A href="http://interval.cz/e-komerce/">E-komerce</A></LI>
+  <LI><A href="http://interval.cz/webdesign/">Webdesign</A></LI>
+  <LI class=selected><A href="http://interval.cz/vyvoj-aplikaci/">Vývoj 
+  aplikací</A></LI>
+  <LI><A href="http://interval.cz/nastroje/">Nástroje</A></LI>
+  <LI><A href="http://interval.cz/magazin/">Magazín</A></LI>
+  <LI class="right selected"><A 
+  href="http://interval.inshop.cz/">Knihkupectví</A></LI>
+  <LI class=right><A href="http://interforum.interval.cz/">Interforum</A></LI>
+  <LI class=right><A 
+href="http://interzen.interval.cz/">Interzen</A></LI></UL></DIV>
+<DIV id=page-mainmenu-maker>&nbsp;</DIV>
+<DIV id=page-mainsubmenu>
+<H3 class=textversion>Submenu</H3>
+<UL>
+  <LI><A href="http://interval.cz/vyvoj-aplikaci/j2me/">J2ME</A></LI>
+  <LI><A href="http://interval.cz/vyvoj-aplikaci/asp/">ASP</A></LI>
+  <LI><A href="http://interval.cz/vyvoj-aplikaci/net/">.NET</A></LI>
+  <LI class=selected><A 
+  href="http://interval.cz/vyvoj-aplikaci/php/">PHP</A></LI>
+  <LI><A 
+href="http://interval.cz/vyvoj-aplikaci/javascript/">JavaScript</A></LI>
+  <LI><A href="http://interval.cz/vyvoj-aplikaci/xml/">XML</A></LI>
+  <LI><A href="http://interval.cz/vyvoj-aplikaci/java/">Java</A></LI>
+  <LI><A href="http://interval.cz/vyvoj-aplikaci/perl-cgi/">PERL/CGI</A></LI>
+  <LI><A href="http://interval.cz/vyvoj-aplikaci/databaze/">Databáze</A></LI>
+  <LI><A 
+href="http://interval.cz/vyvoj-aplikaci/bezpecnost/">Bezpečnost</A></LI>
+  <LI><A 
+href="http://interval.cz/vyvoj-aplikaci/analyzy/">Analýzy</A></LI></UL><SPAN 
+id=page-mainsubmenu-maker>&nbsp;</SPAN></DIV><!-- cas behu menu = 0 --></DIV>
+<DIV id=page-body>
+<DIV id=page-left>
+<DIV id=article>
+<H2>Vytváření obrázkových grafů pomocí PHP 2.</H2>
+<P id=prepend>Dnes přicházím s druhou, závěrečnou polovinou PHP skriptu pro 
+vytváření obrázkových grafů. V poněkud rozsáhlejším článku si ukážeme, jak 
+načíst data z databáze a kreslit jejich křivky do grafu. </P>
+<DIV class="advertising-bigsquare-outer noprint">
+<DIV class=advertising-bigsquare-inner style="WIDTH: 300px"><!-- StartKód: adarbo2.bbmedia.cz 3.1 Nestandard  Interval(87) / cely web(1) / ctverec250x250(8) / nestandard(24) -->
+<SCRIPT type=text/javascript>
+	/* <![CDATA[ */
+	var bbs=screen,bbn=navigator,bbh;bbh='&ubl='+bbn.browserLanguage+'&ucc='+bbn.cpuClass+'&ucd='+bbs.colorDepth+'&uce='+bbn.cookieEnabled+'&udx='+bbs.deviceXDPI+'&udy='+bbs.deviceYDPI+'&usl='+bbn.systemLanguage+'&uje='+bbn.javaEnabled()+'&uah='+bbs.availHeight+'&uaw='+bbs.availWidth+'&ubd='+bbs.bufferDepth+'&uhe='+bbs.height+'&ulx='+bbs.logicalXDPI+'&uly='+bbs.logicalYDPI+'&use='+bbs.fontSmoothingEnabled+'&uto='+(new Date()).getTimezoneOffset()+'&uti='+(new Date()).getTime()+'&uui='+bbs.updateInterval+'&uul='+bbn.userLanguage+'&uwi='+bbs.width;
+	document.write("<scr"+"ipt  type='text/javascript' src='http://adarbo2.bbmedia.cz/please/showit/87/1/8/24/?typkodu=non-standard"+bbh+"&alttext=0&border=0&bgcolor=FFFFFF&text=000000&link=0000FF&target=_top&bust="+Math.random()+"'>");
+	document.write("<"+"\/scr"+"ipt>");
+	/* ]]> */
+	</SCRIPT>
+<!-- KonecKód: adarbo2.bbmedia.cz 3.1 Nestandard --></DIV></DIV>
+<P class=texttabulka>Minule jsme si připravili všechny potřebné hodnoty, aby 
+graf byl snadno modifikovatelný. Jak rozměrově, tak i počtem hodnot. Dnes 
+všechny připravené a vypočítané parametry použijeme. Dostáváme se totiž k 
+vlastnímu kreslení grafu.</P>
+<P class=texttabulka>
+<TABLE cellSpacing=0 cellPadding=1 width="100%" border=0>
+  <TBODY>
+  <TR>
+    <TD>
+      <TABLE cellSpacing=0 cellPadding=2 width="100%" border=0>
+        <TBODY>
+        <TR>
+          <TD class=aktuality bgColor=white><SPAN class=comment>// nejprve 
+            pošlu hlavičku obrázku</SPAN><BR>Header("Content-Type: 
+            image/gif");<BR><BR><SPAN class=comment>// vytvořím prázdný 
+            obrázek</SPAN><BR>$im = ImageCreate($sirka_obrazku, 
+            $vyska_obrazku);<BR><BR><SPAN class=comment>// nadefinuji si barvy, 
+            ktere budu potřebovat</SPAN><BR>$bila = ImageColorAllocate($im, 255, 
+            255, 255);<BR>$cerna = ImageColorAllocate($im, 0, 0, 0);<BR>$cervena 
+            = ImageColorAllocate($im, 255, 0, 0);<BR>$zelena = 
+            ImageColorAllocate($im, 0, 255, 0); 
+  </TD></TR></TBODY></TABLE></TD></TR></TBODY></TABLE></P>
+<P class=texttabulka>Zahájíme vlastní práci s grafikou. Nejprve odešleme 
+hlavičku obrázku. Protože chceme vytvořit obrázek ve formátu GIF, je zde uvedeno 
+<B>image/gif</B>. Kdybychom chtěli vytvořit obrázek PNG, museli bychom za 
+poslední lomítko místo gif napsat png, u JPG obrázku potom jpg.</P>
+<P class=texttabulka>Dále vytvoříme v paměti prázdný obrázek požadovaných 
+rozměrů. Do proměnné <B>$im</B> obdržíme jeho identifikátor, pomocí kterého dále 
+s obrázkem pracujeme. A nakonec nadefinujeme a v paletě obrázku alokujeme barvy, 
+které budeme používat. Bílou barvou nebudeme sice kreslit, ale bude použita jako 
+pozadí obrázku.</P>
+<P class=texttabulka>
+<TABLE cellSpacing=0 cellPadding=1 width="100%" border=0>
+  <TBODY>
+  <TR>
+    <TD>
+      <TABLE cellSpacing=0 cellPadding=2 width="100%" border=0>
+        <TBODY>
+        <TR>
+          <TD class=aktuality bgColor=white><SPAN class=comment>//nakreslím 
+            osu x</SPAN><BR>ImageLine($im, $bod0_x-1, 
+            $vyska_obrazku-$bod0_y,<BR>&nbsp;&nbsp;$sirka_obrazku-$pravy_okraj, 
+            $vyska_obrazku-$bod0_y, $cerna);<BR><SPAN class=comment>//nakreslím 
+            osu y</SPAN><BR>ImageLine($im, $bod0_x, $vyska_obrazku-$bod0_y+1, 
+            $bod0_x, $horni_okraj, $cerna); 
+</TD></TR></TBODY></TABLE></TD></TR></TBODY></TABLE></P>
+<P class=texttabulka>Nakreslíme osy x a y. Použijeme k tomu funkci 
+<B>$ImageLine</B>, jejímiž parametry jsou: identifikátor obrázku do nějž 
+kreslíme, x-ová souřadnice počátečního bodu, y-ová souřadnice počátečního bodu, 
+x-ová souřadnice koncového bodu, y-ová souřadnice koncového bodu a nakonec barva 
+čáry.</P>
+<P class=texttabulka>Dlužno podotknout, že počátek souřadnicového systému 
+vlastního obrázku je v levém horním rohu. A na to nesmíme při kreslení našeho 
+grafu, který má samozřejmě počátek blízko levého dolního rohu, zapomenout.</P>
+<P class=texttabulka>
+<TABLE cellSpacing=0 cellPadding=1 width="100%" border=0>
+  <TBODY>
+  <TR>
+    <TD>
+      <TABLE cellSpacing=0 cellPadding=2 width="100%" border=0>
+        <TBODY>
+        <TR>
+          <TD class=aktuality bgColor=white><SPAN class=comment>//nejprve si 
+            spočítám, kolik asi popisek osy y se mi na výšku 
+            vejde</SPAN><BR>$pocet_popisek_osy_y = round(($vyska_obrazku - 
+            $bod0_y - $horni_okraj)<BR>&nbsp;&nbsp;/ (2 * 
+            ImageFontHeight($fontsize)));<BR><SPAN class=comment>//podle toho 
+            spočítám krok osy y</SPAN><BR>$krok_hodnot_osy_y = 
+            ceil(($max-$min)/($pocet_popisek_osy_y));<BR><BR><SPAN 
+            class=comment>//vypočítám převodní koeficient osy 
+            y</SPAN><BR>$koeficient_y = floor(($vyska_obrazku - $bod0_y - 
+            $horni_okraj) / ($max - $min));<BR><BR><SPAN class=comment>// vypíši 
+            hodnoty osy y</SPAN><BR>for ($i=$min;$i&lt;=$max; 
+            $i+=$krok_hodnot_osy_y)<BR>{<BR>&nbsp;&nbsp;$pomy = $vyska_obrazku - 
+            $bod0_y - (($i-$min) * $koeficient_y);<BR>&nbsp;&nbsp;<SPAN 
+            class=comment>// ryska na ose y</SPAN><BR>&nbsp;&nbsp;ImageLine($im, 
+            $bod0_x-2, $pomy, $bod0_x+1, $pomy, 
+            $cerna);<BR><BR>&nbsp;&nbsp;<SPAN class=comment>// popiska rysky na 
+            ose y</SPAN><BR>&nbsp;&nbsp;ImageString($im, $fontsize, 0, 
+            $pomy-round(ImageFontHeight($fontsize)/2),<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;str_pad($i, 
+            $cislic_osy_y-1, " ", 
+            STR_PAD_LEFT),<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$cerna);<BR>}<BR><SPAN 
+            class=comment>// a ještě vypíši název osy 
+            y</SPAN><BR>ImageString($im, $fontsize, 0, 
+            $horni_okraj,<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;str_pad($nazev_osy_y, 
+            $cislic_osy_y-1, " ", 
+            STR_PAD_LEFT),<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$cerna); 
+          </TD></TR></TBODY></TABLE></TD></TR></TBODY></TABLE></P>
+<P class=texttabulka>Na osu y postupně vyneseme cejchování, popisky hodnot a 
+název osy. Postup je vidět v předchozí ukázce kódu. Musíme si nejprve určit, v 
+jakém intervalu osu y ocejchujeme. Dále musíme vypočítat koeficient, kterým 
+budeme násobit y-ové hodnoty grafu. Tento koeficient využijeme nejen při 
+kreslení křivek grafu, ale i teď hned při cejchování osy y. Nakonec ještě 
+vypíšeme název osy.</P>
+<P class=texttabulka>
+<TABLE cellSpacing=0 cellPadding=1 width="100%" border=0>
+  <TBODY>
+  <TR>
+    <TD>
+      <TABLE cellSpacing=0 cellPadding=2 width="100%" border=0>
+        <TBODY>
+        <TR>
+          <TD class=aktuality bgColor=white><SPAN class=comment>//vypočítám 
+            převodní koeficient osy x</SPAN><BR>$koeficient_x = 
+            floor(($sirka_obrazku - $bod0_x - $pravy_okraj) / 
+            $pocet_hodnot);<BR><BR><SPAN class=comment>//zjistím si, jak budu 
+            vypisovat popisky osy x</SPAN><BR>$pocet_popisek_osy_x = 
+            $sirka_obrazku / (ImageFontHeight($fontsize) * 2);<BR>if 
+            ($pocet_popisek_osy_x &gt; 
+            $pocet_hodnot)<BR>&nbsp;&nbsp;$interval_popisek_x = 1; <SPAN 
+            class=comment>//budu zobrazovat popisku každé hodnoty osy 
+            x</SPAN><BR>else<BR>&nbsp;&nbsp;<SPAN class=comment>//budu 
+            zobrazovat popisky pouze určitých hodnot osy 
+            x</SPAN><BR>&nbsp;&nbsp;$interval_popisek_x = ceil($pocet_hodnot / 
+            $pocet_popisek_osy_x);<BR></TD></TR></TBODY></TABLE></TD></TR></TBODY></TABLE></P>
+<P class=texttabulka>Podobným způsobem si připravíme i osu x. Zde však předem 
+víme počet hodnot, které chceme na ose x vynášet (<B>$pocet_hodnot</B>), a 
+potřebujeme zjistit, jestli se nám na šířku grafu vejdou popisky všech hodnot, 
+nebo jestli budeme některé vynechávat. Vypočítáme si vlastně krok pro osu x. Do 
+proměnné <B>$pocet_hodnot</B> si uložíme, kolikátou hodnotu na ose x budeme 
+popisovat. Pokud je to 1, jako v první větvi podmínky if, znamená to, že budeme 
+popisku tisknout u každé 1., tedy u každé hodnoty. V případě vyššího čísla, 
+např. 2, to bude pouze každá druhá popiska.</P>
+<P class=texttabulka>
+<TABLE cellSpacing=0 cellPadding=1 width="100%" border=0>
+  <TBODY>
+  <TR>
+    <TD>
+      <TABLE cellSpacing=0 cellPadding=2 width="100%" border=0>
+        <TBODY>
+        <TR>
+          <TD class=aktuality bgColor=white><SPAN class=comment>//provedu 
+            dotaz do databáze, na hodnoty grafu</SPAN><BR>@$vysledek = 
+            mysql_query("select den, muzi, zeny"<BR>&nbsp;&nbsp;." from 
+            lide"<BR>&nbsp;&nbsp;." order by den");<BR>if (!$vysledek):<BR>{ 
+            <SPAN class=comment>// mám smůlu, nepodařilo se mi získat data z 
+            tabulky</SPAN><BR>&nbsp;&nbsp;<SPAN class=comment>// vypíšu o tom do 
+            obrázku zprávu</SPAN><BR>&nbsp;&nbsp;ImageString($im, $fontsize, 
+            $bod0_x+5, 
+            $horni_okraj,<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"Nepodařilo 
+            se přečíst hodnoty grafu z 
+            tabulky",<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$cerna);<BR>}<BR>else:<BR>{ 
+          </TD></TR></TBODY></TABLE></TD></TR></TBODY></TABLE></P>
+<P class=texttabulka>Začínáme pracovat na vykreslení křivek grafu. Tomu 
+samozřejmě předchází dotaz do databáze a zjištění hodnot grafu. Pokud se mi 
+nezdaří z databáze data přečíst, mohu o tom vypsat zprávu do obrázku. Teď už to 
+jde, protože obrázek je již vytvořen.</P>
+<P class=texttabulka>
+<TABLE cellSpacing=0 cellPadding=1 width="100%" border=0>
+  <TBODY>
+  <TR>
+    <TD>
+      <TABLE cellSpacing=0 cellPadding=2 width="100%" border=0>
+        <TBODY>
+        <TR>
+          <TD class=aktuality bgColor=white>&nbsp;&nbsp;$pocet = 
+            mysql_NumRows($vysledek);<BR>&nbsp;&nbsp;if ($pocet_hodnot &gt; 
+            $pocet)<BR>&nbsp;&nbsp;&nbsp;&nbsp;$pocet_hodnot = $pocet; <SPAN 
+            class=comment>// kdyby mezitim nahodou nekdo nejaky udaj 
+            vymazal</SPAN><BR><BR>&nbsp;&nbsp;<SPAN class=comment>//vypisu prvni 
+            popisku osy x</SPAN><BR>&nbsp;&nbsp;ImageStringUp($im, $fontsize, 
+            $bod0_x-round(ImageFontHeight($fontsize)/2), 
+            $vyska_obrazku,<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;str_pad(mysql_result($vysledek, 
+            0, "den"), $cislic_osy_x-1, " ", 
+            STR_PAD_LEFT),<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$cerna);<BR><BR>&nbsp;&nbsp;$posledni_x 
+            = $bod0_x;<BR>&nbsp;&nbsp;$posl_y_zeny = $vyska_obrazku - 
+            $bod0_y<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- 
+            ((mysql_result($vysledek, 0, "zeny") - $min) * 
+            $koeficient_y);<BR>&nbsp;&nbsp;$posl_y_muzi = $vyska_obrazku - 
+            $bod0_y<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- 
+            ((mysql_result($vysledek, 0, "muzi") - $min) * $koeficient_y); 
+        </TD></TR></TBODY></TABLE></TD></TR></TBODY></TABLE></P>
+<P class=texttabulka>Podařilo se načíst data z tabulky, a my si pro kontrolu 
+zjistíme, zda se jejich počet od prvního dotazu náhodou nezměnil. Pokud by někdo 
+nějakou větu vymazal, dostali bychom hodnot méně, než očekáváme, a na konci 
+vykreslovací smyčky by došlo k chybě.</P>
+<P class=texttabulka>Pokud náhodou data mezitím přibyla, budeme přebývající 
+ignorovat, protože na ně stejně nemáme místo. Do proměnných <B>$posledni_x</B>, 
+<B>$posl_y_zeny</B> a <B>$posl_y_muzi</B> si budeme v každém kroku ukládat 
+polohy naposledy nakreslených bodů, abych z nich mohli pokračovat přímkou do 
+dalších bodů. A protže teď jsme teprve na počátku, na první hodnotě osy x, pouze 
+si do těchto proměnných uložíme hodnoty, ze kterých budeme kreslit přímky do 2. 
+bodu.</P>
+<P class=texttabulka>
+<TABLE cellSpacing=0 cellPadding=1 width="100%" border=0>
+  <TBODY>
+  <TR>
+    <TD>
+      <TABLE cellSpacing=0 cellPadding=2 width="100%" border=0>
+        <TBODY>
+        <TR>
+          <TD class=aktuality bgColor=white>&nbsp;&nbsp;$i = 
+            1;<BR>&nbsp;&nbsp;while 
+            ($i&lt;$pocet_hodnot):<BR>&nbsp;&nbsp;&nbsp;&nbsp;<SPAN 
+            class=comment>// vypočítám x polohu této hodnoty 
+            grafu</SPAN><BR>&nbsp;&nbsp;&nbsp;&nbsp;$pom_x = ($i * 
+            $koeficient_x) + $bod0_x;<BR>&nbsp;&nbsp;&nbsp;&nbsp;<SPAN 
+            class=comment>// vypočítám y polohu obou 
+            hodnot</SPAN><BR>&nbsp;&nbsp;&nbsp;&nbsp;$pom_y_zeny = 
+            $vyska_obrazku - $bod0_y<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- 
+            ((mysql_result($vysledek, $i, "zeny") - $min) * 
+            $koeficient_y);<BR>&nbsp;&nbsp;&nbsp;&nbsp;$pom_y_muzi = 
+            $vyska_obrazku - $bod0_y<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;- 
+            ((mysql_result($vysledek, $i, "muzi") - $min) * 
+            $koeficient_y);<BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;<SPAN 
+            class=comment>//nakreslím křivky od minulého k tomuto 
+            bodu</SPAN><BR>&nbsp;&nbsp;&nbsp;&nbsp;ImageLine($im, $posledni_x, 
+            $posl_y_zeny, $pom_x, $pom_y_zeny, 
+            $cervena);<BR>&nbsp;&nbsp;&nbsp;&nbsp;ImageLine($im, $posledni_x, 
+            $posl_y_muzi, $pom_x, $pom_y_muzi, 
+            $zelena);<BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;<SPAN class=comment>// 
+            vykreslím rysku na ose 
+            x</SPAN><BR>&nbsp;&nbsp;&nbsp;&nbsp;ImageLine($im, $pom_x, 
+            $vyska_obrazku - $bod0_y + 
+            2,<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$pom_x, $vyska_obrazku - 
+            $bod0_y - 2, $cerna);<BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;<SPAN 
+            class=comment>// vypíšu popisku osy 
+            x</SPAN><BR>&nbsp;&nbsp;&nbsp;&nbsp;if 
+            (round($i/$interval_popisek_x) == 
+            ($i/$interval_popisek_x))<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ImageStringUp($im, 
+            $fontsize, $pom_x - 
+            round(ImageFontHeight($fontsize)/2),<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$vyska_obrazku,<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;str_pad(mysql_result($vysledek, 
+            $i, "den"), $cislic_osy_x-1, " ", 
+            STR_PAD_LEFT),<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$cerna);<BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;<SPAN 
+            class=comment>// nastavím současné hodnoty jako 
+            minulé</SPAN><BR>&nbsp;&nbsp;&nbsp;&nbsp;$posledni_x = 
+            $pom_x;<BR>&nbsp;&nbsp;&nbsp;&nbsp;$posl_y_zeny = 
+            $pom_y_zeny;<BR>&nbsp;&nbsp;&nbsp;&nbsp;$posl_y_muzi = 
+            $pom_y_muzi;<BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;$i++;<BR>&nbsp;&nbsp;endwhile; 
+          </TD></TR></TBODY></TABLE></TD></TR></TBODY></TABLE></P>
+<P class=texttabulka>Pomocí této smyčky vykreslíme celý graf. Nejprve vypočítáme 
+pomocí koeficientů x-ovou a y-ové souřadnice kreslených bodů. Nakreslíme křivky 
+z minulých bodů do těchto bodů. Uděláme rysku na osu x. A pokud je to zrovna 
+ryska, ktará spadá do intervalu pro vypsání popisky osy x, vytiskneme i popisku 
+osy x. Nakonec uložíme současné souřadnice pro použití v příštím kroku do 
+pomocných proměnných.</P>
+<P class=texttabulka>
+<TABLE cellSpacing=0 cellPadding=1 width="100%" border=0>
+  <TBODY>
+  <TR>
+    <TD>
+      <TABLE cellSpacing=0 cellPadding=2 width="100%" border=0>
+        <TBODY>
+        <TR>
+          <TD class=aktuality bgColor=white>&nbsp;&nbsp;<SPAN 
+            class=comment>//vypíši název osy 
+            x</SPAN><BR>&nbsp;&nbsp;ImageString($im, $fontsize, $sirka_obrazku - 
+            $pravy_okraj, $vyska_obrazku-$bod0_y + 
+            5,<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$nazev_osy_x, $cerna); 
+        </TD></TR></TBODY></TABLE></TD></TR></TBODY></TABLE></P>
+<P class=texttabulka>Dokončili jsme vykreslování obou křivek grafu, a teď nám 
+zbývá vytisknout název osy x.</P>
+<P class=texttabulka>
+<TABLE cellSpacing=0 cellPadding=1 width="100%" border=0>
+  <TBODY>
+  <TR>
+    <TD>
+      <TABLE cellSpacing=0 cellPadding=2 width="100%" border=0>
+        <TBODY>
+        <TR>
+          <TD class=aktuality bgColor=white>&nbsp;&nbsp;$pom_x = 
+            $sirka_obrazku - $pravy_okraj;<BR>&nbsp;&nbsp;<SPAN 
+            class=comment>//vypíši legendu pro 
+            muže</SPAN><BR>&nbsp;&nbsp;ImageString($im, $fontsize, $pom_x + 
+            $delka_vzorku_legendy + 
+            ImageFontWidth($fontsize),<BR>&nbsp;&nbsp;&nbsp;&nbsp;$horni_okraj, 
+            $nazev_krivky_1, $cerna);<BR><BR>&nbsp;&nbsp;<SPAN 
+            class=comment>//vzorek pro legendu</SPAN><BR>&nbsp;&nbsp;$pom_y = 
+            $horni_okraj + 
+            round(ImageFontHeight($fontsize)/2);<BR>&nbsp;&nbsp;ImageLine($im, 
+            $pom_x, $pom_y, $pom_x + $delka_vzorku_legendy, $pom_y, 
+            $cervena);<BR><BR>&nbsp;&nbsp;<SPAN class=comment>//vypíši legendu 
+            pro ženy</SPAN><BR>&nbsp;&nbsp;ImageString($im, $fontsize, $pom_x + 
+            $delka_vzorku_legendy + ImageFontWidth($fontsize),<BR>&nbsp; 
+            $horni_okraj + (ImageFontHeight($fontsize) * 2), $nazev_krivky_2, 
+            $cerna);<BR><BR>&nbsp;&nbsp;$pom_y += + (ImageFontHeight($fontsize) 
+            * 2);<BR>&nbsp;&nbsp;ImageLine($im, $pom_x, $pom_y, $pom_x + 
+            $delka_vzorku_legendy, $pom_y, $zelena); 
+  </TD></TR></TBODY></TABLE></TD></TR></TBODY></TABLE></P>
+<P class=texttabulka>Aby byl graf kompletní, musíme jej opatřit legendou. 
+Vzorkem čar, které barvou odpovídají křivkám grafu, včetně popisu, které hodnoty 
+křivky této barvy představují.</P>
+<P class=texttabulka>
+<TABLE cellSpacing=0 cellPadding=1 width="100%" border=0>
+  <TBODY>
+  <TR>
+    <TD>
+      <TABLE cellSpacing=0 cellPadding=2 width="100%" border=0>
+        <TBODY>
+        <TR>
+          <TD class=aktuality 
+            bgColor=white>}<BR>endif;<BR>mysql_Close();<BR><BR>ImageGIF($im);<BR>?&gt; 
+          </TD></TR></TBODY></TABLE></TD></TR></TBODY></TABLE></P>
+<P class=texttabulka>Ukončíme větev, ve které jsme vykreslovali graf a uzavřeme 
+spojení s databází. Nakonec přichází příkaz, kterým uzavřeme obrázek a odešleme 
+jej návštěvníkovi stránky. Pracovali jsme s formátem GIF, proto příkaz 
+<B>ImageGIF</B>. Pokud bychom vytvářeli obrázek PNG, byl by zde příkaz 
+<B>ImagePNG</B>, v případě obrázku JPG pochopitelně <B>ImageJPG</B>.</P>
+<P class=texttabulka>Z libovolného HTML dokumentu teď můžeme zavolat náš skript 
+pomocí tagu IMG, a dostaneme celý graf ve formě obrázku. V tomto tagu můžeme 
+skript zavolat s parametry, kterými určíme velikost požadovaného grafu.</P>
+<P class=texttabulka>Tag pro zobrazení grafu je úplně obyčejný:</P>
+<P class=texttabulka>
+<TABLE cellSpacing=0 cellPadding=1 width="100%" border=0>
+  <TBODY>
+  <TR>
+    <TD>
+      <TABLE cellSpacing=0 cellPadding=2 width="100%" border=0>
+        <TBODY>
+        <TR>
+          <TD class=aktuality bgColor=white>&lt;IMG SRC="graf.php"&gt; 
+        </TD></TR></TBODY></TABLE></TD></TR></TBODY></TABLE></P>
+<P class=texttabulka>Pro určení velikosti požadovaného grafu můžeme zadat 
+parametry sirka a vyska:</P>
+<P class=texttabulka>
+<TABLE cellSpacing=0 cellPadding=1 width="100%" border=0>
+  <TBODY>
+  <TR>
+    <TD>
+      <TABLE cellSpacing=0 cellPadding=2 width="100%" border=0>
+        <TBODY>
+        <TR>
+          <TD class=aktuality bgColor=white>&lt;IMG 
+            SRC="graf.php?sirka=300&amp;vyska=200"&gt; 
+  </TD></TR></TBODY></TABLE></TD></TR></TBODY></TABLE></P>
+<P class=texttabulka>Pokud budeme chtít být opravdu důslední:</P>
+<P class=texttabulka>
+<TABLE cellSpacing=0 cellPadding=1 width="100%" border=0>
+  <TBODY>
+  <TR>
+    <TD>
+      <TABLE cellSpacing=0 cellPadding=2 width="100%" border=0>
+        <TBODY>
+        <TR>
+          <TD class=aktuality bgColor=white>&lt;IMG 
+            SRC="graf.php?sirka=300&amp;vyska=200" WIDTH="300" HEIGHT="200" 
+            BORDER="0" ALT="Graf"&gt; 
+</TD></TR></TBODY></TABLE></TD></TR></TBODY></TABLE></P>
+<P class=texttabulka>Skript graf.php můžeme zavolat prostým zadáním jeho URL. 
+Např. www.nasedomena.cz/graf.php. Pak se nám v prohlížeči zobrazí obrázek grafu 
+ve standardních rozměrech, tedy 600x400 bodů. Skript ale můžeme volat z nějakého 
+HTML dokumentu pomocí standardního tagu pro zobrazení obrázků - IMG. To se nám 
+samozřejmě hodí, pokud potřebujeme graf nějak okomentovat, nebo zakomponovat do 
+standardního vzhledu našeho webu.</P>
+<P class=texttabulka>Abychom mohli snadno měnit velikost obrázku z jiných HTML 
+dokumentů, naprogramovali jsme si do skriptu jednoduchou pomůcku. Kontrolujeme, 
+jestli jsou zadány nějaké hodnoty v proměnných $sirka a $vyska. Pokud ano, 
+standardní rozměry grafu se změní na tyto hodnoty. Pamatujete? A teď se 
+dostáváme k tomu, jak předat požadovanou šířku a výšku našemu skriptu. Do pole 
+SRC tagu IMG, kterým voláme náš skript, napíšeme toto: 
+"graf.php?sirka=300&amp;vyska=200". Jsou to parametry, pro které si PHP 
+automaticky vytvoří proměnné $sirka</B> a $vyska</B>, a vloží do nich hodnoty 
+300 a 200. Není nic snažšího. Možná namítnete, že velikost obrázku se přece 
+ovlivňuje pomocí height a width. Máte pravdu. Ale v žádném případě by se neměly 
+tyto parametry používat tak, že se pomocí nich zobrazí obrázek 800×600 bodů jako 
+náhled ve velikosti 150x100 bodů. Pro tyto účely bychom měli mít dvě verze 
+obrázků. Velké a jejich zmenšeniny.</P>
+<P class=texttabulka>Po Internetu bychom měli posílat a stahovat pouze nezbytně 
+nutné množství dat. Jde o rychlost a o peníze. Proto si, pokud chceme jen náhled 
+grafu, už při volání skriptu rovnou řekneme, pomocí parametrů sirka a vyska, že 
+chceme náš graf jen malý. Není nic snažšího, než udělat tento malý náhled jako 
+hypertextový odkaz (&lt;a href="...), a při kliknutí na náhled grafu se skript 
+zavolá ještě jednou, a zobrazí se v normální velikosti.</P>
+<P class=texttabulka>A to je už opravdu vše. Celý příklad si můžete <A 
+href="http://podklady.interval.cz/kislinger/priklad_graf.zip">stáhnout zde</A>. 
+Obsahuje kromě skriptu, který jsme právě probrali, také i skript pro vytvoření 
+tabulky lidé s demonstračními hodnotami. Dále je zde soubor zobraz_graf.htm, v 
+němž je ukázáno, jak zobrazit graf v HTML dokumentu, i včetně volání skriptu s 
+parametry.</P>
+<DIV id=article-author><A 
+href="http://interval.cz/autori/kislinger-michael/">Kislinger, Michael</A> 
+(28.&nbsp;6.&nbsp;2001) </DIV>
+<DIV class=refer>
+<H3><A 
+title="Vytváření obrázkových grafů pomocí PHP (úplný přehled článků seriálu)" 
+href="http://interval.cz/serialy/vytvareni-obrazkovych-grafu-pomoci-php/">Vytváření 
+obrázkových grafů pomocí PHP</A></H3>
+<P>Standardní součástí většiny aplikací pro analýzu dat bývají také grafy, které 
+dokáží potřebné informace zprostředkovat v člověku snadno pochopitelné formě. 
+Máte-li k dispozici PHP a GD, nebudou už pro vás ani grafy problémem. Tato série 
+článků již byla uzavřena, ačkoli další pokračování nelze vyloučit.</P>
+<UL>
+  <LI><STRONG>Vytváření obrázkových grafů pomocí PHP 2.</STRONG> (právě čtete)
+  <LI><A 
+  href="http://interval.cz/clanky/vytvareni-obrazkovych-grafu-pomoci-php-1/">Vytváření 
+  obrázkových grafů pomocí PHP 1.</A> (25.&nbsp;6.&nbsp;2001)</LI></UL></DIV>
+<DIV class=noprint id=article-discussion><!-- cached 674-tabulka-vytvareni-obrazkovych-grafu-pomoci-php-2.txt -->
+<DIV id=article-discussion-index>
+<FORM action=http://interval.cz/discussion-read.asp?disc=674 method=post>
+<TABLE cellSpacing=0>
+  <TBODY>
+  <TR>
+    <TH colSpan=4><A 
+      title="Vytváření obrázkových grafů pomocí PHP 2. (diskuse)" 
+      href="http://interval.cz/clanky/vytvareni-obrazkovych-grafu-pomoci-php-2/diskuse/">Vytváření 
+      obrázkových grafů pomocí PHP 2. (diskuse)</A></TH></TR>
+  <TR>
+    <TD class=checkbox><INPUT title="0 10820" type=checkbox value=1 
+      name=checkboxDISKUZE10820></TD>
+    <TD class=date>2003-01-23 12:09:35</TD>
+    <TD class=sender>tom</TD>
+    <TD class=subject>chyba s floor</TD></TR>
+  <TR>
+    <TD class=checkbox><INPUT title="0 27630" type=checkbox value=1 
+      name=checkboxDISKUZE27630></TD>
+    <TD class=date>2004-06-23 17:35:43</TD>
+    <TD class=sender>azbest</TD>
+    <TD class=subject>localhost ano webhosting nie</TD></TR>
+  <TR>
+    <TD class=checkbox><INPUT title="1 27637" type=checkbox value=1 
+      name=checkboxDISKUZE27637></TD>
+    <TD class=date>2004-06-23 22:39:40</TD>
+    <TD class=sender>Michael Kislinger</TD>
+    <TD class=subject><IMG class=line alt=. 
+      src="Vytváření obrázkových grafů pomocí PHP 2_ -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Vytváření obrázkových grafů pomocí PHP 2_ -- PHP -- Vývoj aplikací -- Interval_cz_soubory/line3.png">localhost 
+      ano webhosting nie</TD></TR>
+  <TR>
+    <TD class=checkbox><INPUT title="0 38986" type=checkbox value=1 
+      name=checkboxDISKUZE38986></TD>
+    <TD class=date>2005-08-03 16:37:48</TD>
+    <TD class=sender>Gothar</TD>
+    <TD class=subject>typ double</TD></TR>
+  <TR>
+    <TD id=foot colSpan=4><INPUT class=submit id=display_selected type=submit value="Zobrazit vybrané" name=display_selected> 
+      &nbsp; <INPUT class=submit id=display_all type=submit value="Zobrazit vše" name=display_all> 
+      &nbsp; <INPUT class=submit id=add_new type=submit value="Vložit nový" name=add_new></TD></TR></TBODY></TABLE></FORM></DIV></DIV></DIV></DIV>
+<DIV id=page-right>
+<H2 class=textversion>Pravý sloupek</H2>
+<DIV id=search>
+<H3 class=textversion>Vyhledávání</H3>
+<FORM action=http://interval.cz/search.asp method=get>
+<DIV><INPUT class=text name=co> <!--  
+<select name='cim'>
+<option value ='Google' selected='selected'>Google</option>
+<option value ='Jyxo'>Jyxo</option>
+</select>
+<input type='hidden' name='nadpis' value='1' />
+<input type='hidden' name='popis' value='1' />
+<input type='hidden' name='text' value='1' />
+<input type='hidden' name='rubrika' value='0' />
+<input type='hidden' name='autor' value='0' />
+ --><INPUT class=submit type=submit value=Najdi! name=send> </DIV></FORM><!-- <div><a href='http://interval.cz/search.asp'>Rozšířené vyhledávání</a></div> --></DIV><!-- StartKód: adarbo2.bbmedia.cz 3.1 Nestandard  Interval(87) / home page(2) / textbox(1) / nestandard(24) -->
+<SCRIPT type=text/javascript>
+	<!-- <![CDATA[
+	var bbs=screen,bbn=navigator,bbh;bbh='&ubl='+bbn.browserLanguage+'&ucc='+bbn.cpuClass+'&ucd='+bbs.colorDepth+'&uce='+bbn.cookieEnabled+'&udx='+bbs.deviceXDPI+'&udy='+bbs.deviceYDPI+'&usl='+bbn.systemLanguage+'&uje='+bbn.javaEnabled()+'&uah='+bbs.availHeight+'&uaw='+bbs.availWidth+'&ubd='+bbs.bufferDepth+'&uhe='+bbs.height+'&ulx='+bbs.logicalXDPI+'&uly='+bbs.logicalYDPI+'&use='+bbs.fontSmoothingEnabled+'&uto='+(new Date()).getTimezoneOffset()+'&uti='+(new Date()).getTime()+'&uui='+bbs.updateInterval+'&uul='+bbn.userLanguage+'&uwi='+bbs.width;
+	document.write("<scr"+"ipt  language='JavaScript' type='text/javascript' src='http://adarbo2.bbmedia.cz/please/showit/87/2/1/24/?typkodu=non-standard"+bbh+"&alttext=0&border=0&bgcolor=FFFFFF&text=000000&link=0000FF&target=_blank&bust="+Math.random()+"'>");
+	document.write("<"+"\/scr"+"ipt>");
+	//]]> -->
+	</SCRIPT>
+<!-- KonecKód: adarbo2.bbmedia.cz 3.1 Nestandard --><!-- cached 07-knizni_tip.txt -->
+<DIV class="page-right-box book">
+<H3>Knižní tip</H3>
+<DIV class=page-right-box-in>
+<DIV class=book-top>
+<H4><A href="http://interval.inshop.cz/inshop/scripts/detail.asp?kat=264">Co 
+programátory ve škole neučí</A></H4></DIV>
+<DIV class=image><A 
+href="http://interval.inshop.cz/inshop/scripts/detail.asp?kat=264"><IMG 
+title="Co programátory ve škole neučí" alt=obálka 
+src="Vytváření obrázkových grafů pomocí PHP 2_ -- PHP -- Vývoj aplikací -- Interval_cz_soubory/264.jpg"></A></DIV></DIV></DIV><!-- cached 17-nejctenejsi_clanky.txt -->
+<DIV class="page-right-box reading">
+<H3 title="Nejčtenější články za posledních 28 dnů">Nejčtenější</H3>
+<DIV class=page-right-box-in>
+<UL>
+  <LI><A href="http://interval.cz/clanky/opera-9-pokrocila-konfigurace/">Opera 9 
+  - pokročilá konfigurace</A>
+  <LI><A 
+  href="http://interval.cz/clanky/adobe-photoshop-prakticky-webdesign-jakub-krcmar/">Adobe 
+  Photoshop - praktický webdesign (Jakub Krčmář)</A>
+  <LI><A 
+  href="http://interval.cz/clanky/drupal-tvorba-vlastniho-vzhledu/">Drupal - 
+  tvorba vlastního vzhledu</A>
+  <LI><A 
+  href="http://interval.cz/clanky/pruvodce-svg-dalsi-nastroje-pro-tvorbu-svg-grafiky/">Průvodce 
+  SVG - další nástroje pro tvorbu SVG grafiky</A>
+  <LI><A 
+  href="http://interval.cz/clanky/spravy-zo-slovenskeho-internetu-8/">Správy zo 
+  slovenského internetu 8.</A></LI></UL></DIV></DIV>
+<DIV class=merak-box style="MARGIN-TOP: 1.5em; TEXT-ALIGN: center">
+<DIV id=merak-content 
+style="BORDER-RIGHT: #000000 1px solid; BORDER-TOP: #000000 1px solid; FONT-WEIGHT: bold; FONT-SIZE: 11px; BACKGROUND-IMAGE: url(http://interval.cz/__services/__include_right/merak-background.png); MARGIN: 0px auto; BORDER-LEFT: #000000 1px solid; WIDTH: 160px; BORDER-BOTTOM: #000000 1px solid; BACKGROUND-REPEAT: no-repeat; FONT-FAMILY: Verdana, Arial, sans-serif; HEIGHT: 190px; TEXT-ALIGN: left; FONT-VARIANT: small-caps">
+<H3 style="FONT-SIZE: 12px; MARGIN: 55px 0px 10px 10px; FONT-VARIANT: normal"><A 
+title="Merak Mail Server 8" 
+style="COLOR: #000000; BACKGROUND-COLOR: transparent; TEXT-DECORATION: none" 
+href="http://www.merak-mail-server.cz/">Merak Mail Server 8</A></H3>
+<DIV id=merak-proclamation style="PADDING-LEFT: 10px">Integrovaný <EM><A 
+title="Merak Mail Server 8" 
+style="COLOR: #35a0df; FONT-STYLE: normal; BACKGROUND-COLOR: transparent; TEXT-DECORATION: none" 
+href="http://www.merak-mail-server.cz/">antispam</A></EM> <BR>Snadná <EM><A 
+title="Merak Mail Server 8" 
+style="COLOR: #35a0df; FONT-STYLE: normal; BACKGROUND-COLOR: transparent; TEXT-DECORATION: none" 
+href="http://www.merak-mail-server.cz/">instalace</A></EM> <BR>Zabezpečený 
+<EM><A title="Merak Mail Server 8" 
+style="COLOR: #35a0df; FONT-STYLE: normal; BACKGROUND-COLOR: transparent; TEXT-DECORATION: none" 
+href="http://www.merak-mail-server.cz/">groupware</A></EM> </DIV></DIV></DIV>
+<DIV class="page-right-box emailserv">
+<H3>Info servis</H3>
+<DIV class=page-right-box-in>
+<UL>
+  <LI><A title="Exporty aktuálních informací ve formátech Atom, RDF a RSS" 
+  href="http://export.interval.cz/">Atom, RDF, RSS</A> 
+  <LI>Informace e-mailem: </LI></UL>
+<FORM action=prihlaseni.asp method=post>
+<DIV class=shell><INPUT class=text name=adresa></DIV>
+<DIV class=shell><INPUT class=radio type=radio CHECKED value=1 name=co>Týdenní 
+přehled článků</DIV>
+<DIV class=shell><INPUT class=radio type=radio value=2 name=co>HELP 
+konference</DIV>
+<DIV 
+class=shell><INPUT class=submit type=submit value=Přihlásit></DIV></FORM></DIV></DIV>
+<DIV class=advertising-vertical-banner-outer>
+<DIV class=advertising-vertical-banner-inner><!-- Skyscraper Right --><!-- BBSTART Interval.cz/Skyscraper Right/rolovací/Skyscraper 120x600 -->
+<SCRIPT type=text/javascript>/* <![CDATA[ */
+var bbat=0,bbbr=0,bbtt='_blank',bbpath='17877/4/2/9',bbxl=1,bbac=1;
+//]]></SCRIPT>
+
+<SCRIPT 
+src="Vytváření obrázkových grafů pomocí PHP 2_ -- PHP -- Vývoj aplikací -- Interval_cz_soubory/bb4.js" 
+type=text/javascript></SCRIPT>
+<NOSCRIPT>
+<DIV><A href="http://ad2.billboard.cz/please/redirect/17877/4/2/9/"><IMG 
+style="BORDER-RIGHT: 0px; BORDER-TOP: 0px; BORDER-LEFT: 0px; BORDER-BOTTOM: 0px" 
+height=600 alt=. 
+src="Vytváření obrázkových grafů pomocí PHP 2_ -- PHP -- Vývoj aplikací -- Interval_cz_soubory/fallback9.gif" 
+width=120></A></DIV></NOSCRIPT><!-- BBKONEC --></DIV></DIV><!-- cached 17-nejdiskutovanejsi_clanky.txt -->
+<DIV class="page-right-box cauldron">
+<H3 title="Nejdiskutovanější články za posledních 28 dnů">Diskuzní kotel</H3>
+<DIV class=page-right-box-in>
+<UL>
+  <LI><A title="(103 komentářů)" 
+  href="http://interval.cz/clanky/opera-9-pokrocila-konfigurace/">Opera 9 - 
+  pokročilá konfigurace</A>
+  <LI><A title="(4 komentářů)" 
+  href="http://interval.cz/clanky/pruvodce-svg-dalsi-nastroje-pro-tvorbu-svg-grafiky/">Průvodce 
+  SVG - další nástroje pro tvorbu SVG grafiky</A>
+  <LI><A title="(2 komentářů)" 
+  href="http://interval.cz/clanky/drupal-tvorba-vlastniho-vzhledu/">Drupal - 
+  tvorba vlastního vzhledu</A>
+  <LI><A title="(2 komentářů)" 
+  href="http://interval.cz/clanky/spravy-zo-slovenskeho-internetu-9/">Správy zo 
+  slovenského internetu 9.</A>
+  <LI><A title="(1 komentářů)" 
+  href="http://interval.cz/clanky/lokalizace-asp-net-2-x-aplikaci/">Lokalizace 
+  ASP.NET 2.x aplikací</A></LI></UL></DIV></DIV></DIV>
+<DIV class=page-maker>&nbsp;</DIV>
+<DIV class=page-maker-white>&nbsp;</DIV></DIV>
+<DIV id=advertising-page-bottom>
+<DIV id=advertising-page-bottom-left>
+<DIV><!-- Full Banner Bottom --><!-- BBSTART Interval.cz/Full Banner Bottom/rolovací/Full Banner 468x60 -->
+<SCRIPT type=text/javascript>/* <![CDATA[ */
+var bbat=0,bbbr=0,bbtt='_blank',bbpath='17877/1/2/1',bbxl=1,bbac=1;
+//]]></SCRIPT>
+
+<SCRIPT 
+src="Vytváření obrázkových grafů pomocí PHP 2_ -- PHP -- Vývoj aplikací -- Interval_cz_soubory/bb4.js" 
+type=text/javascript></SCRIPT>
+<NOSCRIPT>
+<DIV><A href="http://ad2.billboard.cz/please/redirect/17877/1/2/1/"><IMG 
+style="BORDER-RIGHT: 0px; BORDER-TOP: 0px; BORDER-LEFT: 0px; BORDER-BOTTOM: 0px" 
+height=60 alt=. 
+src="Vytváření obrázkových grafů pomocí PHP 2_ -- PHP -- Vývoj aplikací -- Interval_cz_soubory/fallback1.gif" 
+width=468></A></DIV></NOSCRIPT><!-- BBKONEC --></DIV></DIV>
+<DIV id=advertising-page-bottom-right>
+<DIV><!-- Button2 Bottom --><!-- BBSTART Interval.cz/Button2 Bottom/rolovací/Button 2 120x60 -->
+<SCRIPT type=text/javascript>/* <![CDATA[ */
+var bbat=0,bbbr=0,bbtt='_blank',bbpath='17877/2/2/6',bbxl=1,bbac=1;
+//]]></SCRIPT>
+
+<SCRIPT 
+src="Vytváření obrázkových grafů pomocí PHP 2_ -- PHP -- Vývoj aplikací -- Interval_cz_soubory/bb4.js" 
+type=text/javascript></SCRIPT>
+<NOSCRIPT>
+<DIV><A href="http://ad2.billboard.cz/please/redirect/17877/2/2/6/"><IMG 
+style="BORDER-RIGHT: 0px; BORDER-TOP: 0px; BORDER-LEFT: 0px; BORDER-BOTTOM: 0px" 
+height=60 alt=. 
+src="Vytváření obrázkových grafů pomocí PHP 2_ -- PHP -- Vývoj aplikací -- Interval_cz_soubory/fallback6.gif" 
+width=120></A></DIV></NOSCRIPT><!-- BBKONEC --></DIV></DIV>
+<DIV class=page-maker>&nbsp;</DIV></DIV>
+<DIV id=page-foot>
+<DIV id=page-foot-menu><A href="http://interval.cz/redakce-inzerce.asp">Inzerce 
+na Interval.cz</A> &nbsp;|&nbsp; <A 
+href="http://interval.cz/redakce.asp">Redakce Interval.cz</A> &nbsp;|&nbsp; <A 
+href="http://interval.cz/autori.asp">Hledáme nové autory</A> </DIV>
+<DIV id=issn><A class=noprint 
+href="http://jigsaw.w3.org/css-validator/validator?uri=http%3A%2F%2Finterval.cz%3A80%2Fclanky%2Fvytvareni-obrazkovych-grafu-pomoci-php-2%2F">.</A> 
+ISSN 1212-8651 <A class=noprint 
+href="http://validator.w3.org/check?uri=http%3A%2F%2Finterval.cz%3A80%2Fclanky%2Fvytvareni-obrazkovych-grafu-pomoci-php-2%2F&amp;charset=%28detect+automatically%29&amp;doctype=%28detect+automatically%29&amp;outline=1&amp;verbose=1">.</A> 
+</DIV>
+<DIV id=page-foot-zoner>© Zoner software, s.r.o., všechna práva vyhrazena, tento 
+server dodržuje <A href="http://interval.cz/privacy.asp">právní předpisy</A> o 
+ochraně osobních údajů. </DIV></DIV>
+<SCRIPT 
+src="Vytváření obrázkových grafů pomocí PHP 2_ -- PHP -- Vývoj aplikací -- Interval_cz_soubory/audits-footer.js" 
+type=text/javascript></SCRIPT>
+
+<SCRIPT 
+src="Vytváření obrázkových grafů pomocí PHP 2_ -- PHP -- Vývoj aplikací -- Interval_cz_soubory/urchin.js" 
+type=text/javascript>
+</SCRIPT>
+
+<SCRIPT type=text/javascript>
+_uacct = "UA-173085-1";
+
+var len = _uOsr.length;
+_uOsr[len]="seznam.cz";       _uOkw[len]="w";
+_uOsr[len+1]="centrum.cz";    _uOkw[len+1]="q";
+_uOsr[len+2]="jyxo.cz";       _uOkw[len+2]="s";
+_uOsr[len+3]="atlas.cz";      _uOkw[len+3]="q";
+_uOsr[len+4]="zoohoo.cz";     _uOkw[len+4]="q";
+_uOsr[len+5]="tiscali.cz";    _uOkw[len+5]="query";
+_uOsr[len+6]="1.cz";          _uOkw[len+6]="q";
+_uOsr[len+7]="volny.cz";      _uOkw[len+7]="search";
+
+urchinTracker();
+</SCRIPT>
+</BODY></HTML>

@@ -1,0 +1,34 @@
+<HTML>
+  <HEAD>
+    <TITLE>Vyhledavani</TITLE>
+    <SCRIPT Language="JavaScript">
+      <!--
+        // Funkce pro hledání na vašich stránkách za
+        // pomoci Altavisty
+        function AltaSearch (){
+          // Adresa vyhledávacího serveru
+          var Address = 'http://altavista.com/sites/search/web?q=%2Bhost%3A';
+          // Adresa serveru, na kterém chcete vyhledávat
+          Address = Address + 'softnov.cz+';
+          // Vyhledávaný øetìzec
+          Address = Address + document.MainForm.edSearch.value;
+          // Zbytek dotazu
+          Address = Address + '+&pg=q&kl=XX&search=Search'
+          // Otevøe se stránka s výsledky hledání
+          window.open (Address, "");
+        }
+      // -->
+    </SCRIPT>
+  </HEAD>
+
+  <BODY>
+    <B>Vyhledávání na tomto serveru</B>
+    <FORM Name="MainForm" OnSubmit="AltaSearch();">
+      Dotaz:<BR>
+      <INPUT Type="Text" Name="edSearch">
+      <INPUT Type="Submit" Value="OK">
+      <INPUT Type="Reset" Value="Smazat">
+    </FORM>
+  </BODY>
+</HTML>
+

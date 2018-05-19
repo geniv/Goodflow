@@ -1,0 +1,61 @@
+<html> 
+  <head> 
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>Stahování obrázků s využitím Ajaxu</title> 
+
+    <script language="javascript">
+
+      function ziskejData(zdrojDat, callback)
+      { 
+        var XMLHttpRequestObjekt = false; 
+
+        if (window.XMLHttpRequest) {
+          XMLHttpRequestObjekt = new XMLHttpRequest();
+        } else if (window.ActiveXObject) {
+          XMLHttpRequestObjekt = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+
+        if(XMLHttpRequestObjekt) {
+          XMLHttpRequestObjekt.open("GET", zdrojDat); 
+
+          XMLHttpRequestObjekt.onreadystatechange = function() 
+          { 
+            if (XMLHttpRequestObjekt.readyState == 4 && 
+              XMLHttpRequestObjekt.status == 200) { 
+                callback(XMLHttpRequestObjekt.responseText); 
+                delete XMLHttpRequestObjekt;
+                XMLHttpRequestObjekt = null;
+            } 
+          } 
+
+          XMLHttpRequestObjekt.send(null); 
+        }
+      }
+
+      function callback(text)
+      {
+        document.getElementById("cilovyDiv").innerHTML = 
+          "<img src= " + text + ">";
+      }
+
+    </script>
+  </head> 
+
+  <body>
+
+    <H1>Stahování obrázků s využitím Ajaxu</H1>
+
+    <form>
+      <input type="button" value="Zobrazit obrázek 1" 
+        onclick="ziskejData('nazevObrazku1.txt', callback)"> 
+      <input type="button" value="Zobrazit obrázek 2" 
+        onclick="ziskejData('nazevObrazku2.txt', callback)"> 
+    </form>
+
+    <div id="cilovyDiv">
+      <p>Načtený obrázek se zobrazí zde.</p> 
+    </div> 
+
+  </body> 
+</html>
+

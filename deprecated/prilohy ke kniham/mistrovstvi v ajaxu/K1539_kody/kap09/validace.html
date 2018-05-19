@@ -1,0 +1,88 @@
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>Validace XML</title>
+
+    <script language="javascript">
+
+      function ziskejData()
+      {
+        var XMLHttpRequestObjekt = false; 
+
+        XMLHttpRequestObjekt = new 
+          ActiveXObject("Microsoft.XMLHTTP");
+
+        if(XMLHttpRequestObjekt) {
+          XMLHttpRequestObjekt.open("GET", "udalostDtd.xml?k=2", true); 
+
+          XMLHttpRequestObjekt.onreadystatechange = function() 
+          { 
+            if (XMLHttpRequestObjekt.readyState == 4 && 
+              XMLHttpRequestObjekt.status == 200) { 
+              var xmlDokument = XMLHttpRequestObjekt.responseXML;
+
+              var parser = new ActiveXObject("MSXML2.DOMDocument");
+              parser.validateOnParse = true;
+              parser.load(XMLHttpRequestObjekt.responseXML);
+              var cil = document.getElementById("cilovyDiv");
+
+              if (parser.parseError.errorCode != 0) {
+                cil.innerText = "Chyba: " +
+                  parser.parseError.url +
+                  " řádek " + parser.parseError.line +
+                  " pozice " + parser.parseError.linepos +
+                  ".\nPříčina chyby: " + parser.parseError.srcText + 
+                  "\n" + parser.parseError.reason + 
+                  "\n" +  "Chyba číslo: " + 
+                  parser.parseError.errorCode;
+              }
+              else {
+                zobrazHosta(xmlDokument);
+              } 
+            }
+          } 
+
+          XMLHttpRequestObjekt.send(null); 
+        }
+      }
+
+      function zobrazHosta(xml)
+      {
+        var udalostiUzel, udalostUzel, lideUzel; 
+        var osobaUzel, jmenoUzel, prijmeniUzel, zobrazText;
+
+        udalostiUzel = xml.documentElement;
+        udalostUzel = udalostiUzel.firstChild;
+        lideUzel = udalostUzel.lastChild;
+        osobaUzel = lideUzel.lastChild;
+        jmenoUzel = osobaUzel.firstChild;
+        prijmeniUzel = jmenoUzel.nextSibling;
+
+        zobrazText = "Třetím hostem je " + 
+          jmenoUzel.firstChild.nodeValue + ' ' 
+          + prijmeniUzel.firstChild.nodeValue;
+
+        var cil = document.getElementById("cilovyDiv");
+        cil.innerHTML = zobrazText;
+      }
+
+    </script>
+
+  </head>
+
+  <body>
+
+    <h1>Validace XML</h1>
+
+    <form>
+      <input type="button" value="Získej třetího hosta" 
+        onclick="ziskejData()"> 
+    </form>
+
+    <div id="cilovyDiv" width="100" height="100">
+      Kdo je třetím hostem?
+    </div>
+
+  </body>
+
+</html>

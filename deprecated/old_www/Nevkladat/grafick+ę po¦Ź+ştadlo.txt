@@ -1,0 +1,99 @@
+$s_poc="pocitad_klfhcvowkjhqwpojfeiosrjvfuenbiuwhejfvuierbvziubiueqwniuwencurv.php";
+$u=fopen($s_poc,"r+");
+$pocc=fread($u,10);
+fclose($u);
+
+//rozlišení èísla an obrázek
+if($pocc<10)
+{
+$zoc="<img src=\"$pocc.bmp\">";
+}
+if($pocc>=10 and $pocc<100)
+{
+$pom1=floor($pocc/10);//desítky
+$pom2=$pocc-($pom1*10);//jednotky
+$zoc="<img src=\"$pom1.bmp\"><img src=\"$pom2.bmp\">";
+}
+if($pocc>=100 and $pocc<1000)
+{
+$pom1=floor($pocc/100);//stovky
+$pom2=floor($pocc/10)-($pom1*10);//desítky
+$pom3=$pocc-($pom2*10)-($pom1*100);//jednotky
+$zoc="<img src=\"$pom1.bmp\"><img src=\"$pom2.bmp\"><img src=\"$pom3.bmp\">";
+}
+if($pocc>=1000 and $pocc<10000)
+{
+$pom1=floor($pocc/1000);//tisíce   
+$pom2=floor(($pocc-($pom1*1000))/100);//stovky
+$pom3=floor(($pocc-($pom2*100))/10)-($pom1*100);//desítky
+$pom4=$pocc-($pom1*1000)-($pom2*100)-($pom3*10);//jednotky
+$zoc="<img src=\"$pom1.bmp\"><img src=\"$pom2.bmp\"><img src=\"$pom3.bmp\"><img src=\"$pom4.bmp\">";
+}
+if($pocc>=10000 and $pocc<100000)
+{
+$pom1=floor($pocc/10000);//deseti tisíce   
+$pom2=floor(($pocc-($pom1*10000))/1000);//tisíce
+$pom3=floor(($pocc-($pom2*1000))/100)-($pom1*100);//stovky
+$pom4=floor(($pocc-($pom3*100))/10)-($pom1*1000)-($pom2*100);//desítky
+$pom5=$pocc-($pom1*10000)-($pom2*1000)-($pom3*100)-($pom4*10);//jednotky
+$zoc="<img src=\"$pom1.bmp\"><img src=\"$pom2.bmp\"><img src=\"$pom3.bmp\"><img src=\"$pom4.bmp\"><img src=\"$pom5.bmp\">";
+}
+if($pocc>=100000 and $pocc<1000000)
+{//dopoèítat!
+$pom1=floor($pocc/100000);//sto tisíce   
+$pom2=($pom1*1000)-(($pom1*1000)-floor(($pocc-($pom1*100000))/10000));
+$pom3=(($pom1*1000)-(($pom1*10000)+($pom2*1000)-(floor(($pocc-($pom1*10000))/1000)*100)))/100;//tisíce
+
+$pom4=(($pom1*10000)+($pom2*1000)+($pom3*100))-floor(($pocc-($pom1*1000))/100)-($pom1*10000);
+
+//floor(($pocc-($pom3*100))/10)-($pom1*1000)-($pom2*100);//stovky
+
+$pom5=$pocc-($pom1*10000)-($pom2*1000)-($pom3*100)-($pom4*10);//desítky
+
+$pom6=$pocc-($pom1*100000)-($pom2*10000)-($pom3*1000)-($pom4*100)-($pom5*10);//jednotky
+$zoc="<img src=\"$pom1.bmp\"><img src=\"$pom2.bmp\"><img src=\"$pom3.bmp\"><img src=\"$pom4.bmp\"><img src=\"$pom5.bmp\"><img src=\"$pom6.bmp\">$pom4";
+}
+//absolutní minimum: 1 !!!!
+//prozatimní: maximum poèítadla je: 999999 !!!!
+
+if($pvas=="l_poc")
+{
+$prvs[9]="(otevøeno)";
+$dot_s="pocitad_klfhcvowkjhqwpojfeiosrjvfuenbiuwhejfvuierbvziubiueqwniuwencurv.php";
+$doss=fopen($dot_s,"r");
+$obsah=fread($doss,1000000);
+fclose($doss);
+}//end if nacti
+
+if($pvas=="s_poc"  and !$edttxt=="")
+{
+$prvs[9]="(uloženo)";
+$dot_s="pocitad_klfhcvowkjhqwpojfeiosrjvfuenbiuwhejfvuierbvziubiueqwniuwencurv.php";
+$doss=fopen($dot_s,"w");
+fwrite($doss,$edttxt);
+$doss=fopen($dot_s,"r");
+$obsah=fread($doss,1000000);
+fclose($doss);
+}
+else
+{
+if($pvas=="s_poc" and $edttxt==""){$obsah="";}
+}//end if uloz
+
+if(Empty($prvs[9])){$prvs[9]="";}
+
+<tr>
+<td>Poèítadlo pøístupù na stránky (min 1)</td>
+<td><a href=\"pocitad_klfhcvowkjhqwpojfeiosrjvfuenbiuwhejfvuierbvziubiueqwniuwencurv.php\" target=\"_blank\">Zobrazit</a></td>
+<td><input type=button value=\"Otevøít\" onclick=\"men.ptx1.value='$ptx1';men.ptx2.value='$ptx2';men.ptx3.value='$ptx3';men.ptx4.value='$ptx4';men.kam.value='ajdimne';men.pvas.value='l_poc';men.poslat.click();\"></td>
+<td><input type=button value=\"Uložit\" onclick=\"men.ptx1.value='$ptx1';men.ptx2.value='$ptx2';men.ptx3.value='$ptx3';men.ptx4.value='$ptx4';men.kam.value='ajdimne';men.pvas.value='s_poc';men.edttxt.value=memo.innerText;men.poslat.click();\"></td>
+<td>".$prvs[9]."</td>
+</tr>
+
+//----------poèítadlo--------------
+$s_poc="pocitad_klfhcvowkjhqwpojfeiosrjvfuenbiuwhejfvuierbvziubiueqwniuwencurv.php";
+$u=fopen($s_poc,"r+");
+$pocc=fread($u,10);
+rewind($u);
+fwrite($u,++$pocc);
+fclose($u);

@@ -1,0 +1,65 @@
+<HTML>
+  <HEAD>
+    <TITLE>Progress Bar</TITLE>
+    <SCRIPT Language="JavaScript">
+      <!--
+        // Poèet objektù SPAN
+        var ProgCount = 9;
+        // Barva, kterou se budou tyto objekty obarvovat
+        var ProgCol = 'red';
+        // Èasový interval
+        var ProgInterval = 1000;
+        var ProgPos = ProgCount;
+        // Èasovaè
+        var ProgTimer;
+
+        // Inicializace
+        function ProgInit() {
+          for (var i = 1; i <= ProgCount; i++)
+            document.getElementById('Prog'+i).style.backgroundColor =
+              'transparent';
+          ProgPos = 0;
+        }
+
+        // Ukonèení
+        function ProgStop() {
+          clearTimeout(ProgTimer);
+          ProgInit();
+        }
+
+        // Jeden krok ProgressBaru
+        function ProgUpdate() {
+          ProgPos++;
+          if (ProgPos > ProgCount)
+            ProgInit();
+          else
+           document.getElementById('Prog'+ProgPos).style.backgroundColor =
+             ProgCol;
+             
+          ProgTimer = setTimeout('ProgUpdate()',ProgInterval);
+        }
+      // -->
+    </SCRIPT>
+  </HEAD>
+
+  <BODY OnLoad="ProgUpdate();">
+    Progress bar:<BR>
+    <TABLE>
+      <TR><TD>
+      <DIV Style="padding:2px;border:solid black 1px">
+        <SPAN Id="Prog1">&nbsp;
+        </SPAN>a<SPAN Id="Prog2">&nbsp;
+        </SPAN>b<SPAN Id="Prog3">&nbsp;
+        </SPAN><SPAN Id="Prog4">&nbsp;
+        </SPAN><SPAN Id="Prog5">&nbsp;
+        </SPAN><SPAN Id="Prog6">&nbsp;
+        </SPAN><SPAN Id="Prog7">&nbsp;
+        </SPAN><SPAN Id="Prog8">&nbsp;
+        </SPAN><SPAN Id="Prog9">&nbsp;</SPAN>
+      </DIV>
+      </TD></TR>
+    </TABLE>
+  </BODY>
+</HTML>
+
+

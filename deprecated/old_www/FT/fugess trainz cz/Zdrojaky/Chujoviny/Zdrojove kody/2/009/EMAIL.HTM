@@ -1,0 +1,26 @@
+<HTML>
+  <HEAD>
+    <TITLE>Posílání emailu</TITLE>
+      <SCRIPT Language="JavaScript">
+      <!--
+        // Funkce na poslání dopisu
+        function SendMail(){
+          // Sestavení dopisu
+          S = "mailto:?subject=Dobré stránky: " + document.title;
+          S += "&body= Na této adrese se nachází výborné stránky (";
+          S +=  document.title + "), které stojí za shlédnutí. ";
+          S += "Jejich adresa je: " + location.href;
+          // Odeslání dopisu
+          location.href = S;
+        }
+      // -->
+      </SCRIPT>
+  </HEAD>
+
+  <BODY>
+    Bla bla bla ... <BR>
+    <BR>
+    <A Href="javascript:SendMail()">Doporuète tyto stránky svým známým</A>.
+  </BODY>
+</HTML>
+

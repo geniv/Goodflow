@@ -1,0 +1,55 @@
+<HTML>
+  <HEAD>
+    <TITLE>Velikost stránky</TITLE>
+    <SCRIPT Language="JavaScript">
+      <!--
+        // Funkce generující celı report o velikosttech dat
+        function PageSize(){
+          // Je prohlíeèem podporována funkce fileSize()?
+          if (document.fileSize){
+            // Zjištìní velikosti
+            var Size = document.fileSize;
+            var ImgSize = 0;
+            var S = 'Velikost textu: '+Size;
+
+            // Obsahuje dokument obrázky?
+            if (document.images.length > 0){
+              S += '\nVelikost obrázkù: ';
+              var Images = '';
+              // forcyklus pøes všechny obrázky,
+              // kterı zjišuje jejich velikosti
+
+              for (i=0; i<document.images.length; i++){
+                Images += '\n'+document.images[i].src+
+                  ' -- '+document.images[i].fileSize;
+                ImgSize += 1*document.images[i].fileSize;
+              }
+              // Pøidání informace o velikostech obrázkù
+              S += ImgSize + Images;
+            }
+            
+            // Vısledná zpráva
+            S += '\nCelková velikost stránky: '+
+              (1*Size+1*ImgSize);
+            alert (S);
+          } else {
+
+            // Zpráva pro pøípad, e prohlíeè nepodporuje
+            // funkce fileSize ()
+            alert('Tento prohlíeè neumoòuje'+
+              ' zjišovat velikost stránky.');
+          }
+        }
+      // -->
+    </SCRIPT>
+  </HEAD>
+
+  <BODY Onload="PageSize();">
+    Logo SWNetu:<BR>
+    <IMG Src="logo_swn.gif">
+    <BR>
+    Logo Centra:<BR>
+    <IMG Src="logo_centrum.gif">
+  </BODY>
+</HTML>
+

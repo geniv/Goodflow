@@ -1,0 +1,67 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>Novy vychozi PHP layout: Zdrojový soubor /var/www/phplayout/now/old_depozit_module/static_flash_gfdesign/flash_header.php</title>
+<link href="tabs.css" rel="stylesheet" type="text/css">
+<link href="doxygen.css" rel="stylesheet" type="text/css">
+</head><body>
+<!-- Generováno programem Doxygen 1.5.8 -->
+<div class="navigation" id="top">
+  <div class="tabs">
+    <ul>
+      <li><a href="index.html"><span>Hlavní&nbsp;stránka</span></a></li>
+      <li><a href="annotated.html"><span>Třídy</span></a></li>
+      <li class="current"><a href="files.html"><span>Soubory</span></a></li>
+    </ul>
+  </div>
+  <div class="tabs">
+    <ul>
+      <li><a href="files.html"><span>Seznam&nbsp;souborů</span></a></li>
+      <li><a href="globals.html"><span>Symboly&nbsp;v&nbsp;souborech</span></a></li>
+    </ul>
+  </div>
+<h1>/var/www/phplayout/now/old_depozit_module/static_flash_gfdesign/flash_header.php</h1><a href="now_2old__depozit__module_2static__flash__gfdesign_2flash__header_8php.html">Zobrazit dokumentaci tohoto souboru.</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 &lt;?php
+<a name="l00002"></a>00002 
+<a name="l00013"></a>00013 <span class="keyword">class </span><a class="code" href="classFlashHeader.html">FlashHeader</a>
+<a name="l00014"></a>00014 {
+<a name="l00015"></a>00015   <span class="keyword">private</span> <a class="code" href="classFlashHeader.html#0e67377539418076d345f40baf0938f0">$var</a>;
+<a name="l00016"></a>00016   <span class="keyword">private</span> <a class="code" href="classFlashHeader.html#02fe8d36da4e349cb1baf189fa4db307">$flash</a> = <span class="stringliteral">"header.swf"</span>;
+<a name="l00017"></a>00017 
+<a name="l00025"></a><a class="code" href="classFlashHeader.html#c133457559bc8d51a0445f1c50ce495c">00025</a>   <span class="keyword">public</span> function <a class="code" href="classFlashHeader.html#c133457559bc8d51a0445f1c50ce495c">__construct</a>(&amp;<a class="code" href="classFlashHeader.html#0e67377539418076d345f40baf0938f0">$var</a>, $index) <span class="comment">//konstruktor</span>
+<a name="l00026"></a>00026   {
+<a name="l00027"></a>00027     $this-&gt;var = <a class="code" href="classFlashHeader.html#0e67377539418076d345f40baf0938f0">$var</a>;
+<a name="l00028"></a>00028   }
+<a name="l00029"></a>00029 
+<a name="l00036"></a><a class="code" href="classFlashHeader.html#4b8717cc097c81e8930e48a50e76587f">00036</a>   <span class="keyword">public</span> function <a class="code" href="classFlashHeader.html#4b8717cc097c81e8930e48a50e76587f">Flash</a>()
+<a name="l00037"></a>00037   {
+<a name="l00038"></a>00038     <a class="code" href="Depozit_2index_8php.html#e8c46615c3b5b18e0af3ecf96f8c62d8">$web</a> = $_SERVER[<span class="stringliteral">"SERVER_NAME"</span>];
+<a name="l00039"></a>00039 
+<a name="l00040"></a>00040     <a class="code" href="_8unikatni__fukce_8php.html#e241cf0159803673d118f68d99e6342f">$result</a> =
+<a name="l00041"></a>00041     <span class="stringliteral">"&lt;div id=\"header_flash\"&gt;</span>
+<a name="l00042"></a>00042 <span class="stringliteral">            &lt;!--[if !IE]&gt; --&gt;</span>
+<a name="l00043"></a>00043 <span class="stringliteral">            &lt;object type=\"application/x-shockwave-flash\" data=\"http://{$web}/{$this-&gt;flash}\" width=\"767\" height=\"153\"&gt;</span>
+<a name="l00044"></a>00044 <span class="stringliteral">            &lt;!-- &lt;![endif]--&gt;</span>
+<a name="l00045"></a>00045 <span class="stringliteral">            &lt;!--[if IE]&gt;</span>
+<a name="l00046"></a>00046 <span class="stringliteral">            &lt;object classid=\"clsid:D27CDB6E-AE6D-11cf-96B8-444553540000\" codebase=\"http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=10,0,0,0\" width=\"767\" height=\"153\"&gt;</span>
+<a name="l00047"></a>00047 <span class="stringliteral">              &lt;param name=\"movie\" value=\"http://{$web}/{$this-&gt;flash}\" /&gt;</span>
+<a name="l00048"></a>00048 <span class="stringliteral">            &lt;!--&gt;&lt;!----&gt;</span>
+<a name="l00049"></a>00049 <span class="stringliteral">              &lt;param name=\"loop\" value=\"true\" /&gt;</span>
+<a name="l00050"></a>00050 <span class="stringliteral">              &lt;param name=\"menu\" value=\"false\" /&gt;</span>
+<a name="l00051"></a>00051 <span class="stringliteral">              &lt;param name=\"bgcolor\" value=\"#2e2e2e\" /&gt;</span>
+<a name="l00052"></a>00052 <span class="stringliteral">              &lt;param name=\"quality\" value=\"medium\" /&gt;</span>
+<a name="l00053"></a>00053 <span class="stringliteral">              &lt;param name=\"scale\" value=\"exactfit\" /&gt;</span>
+<a name="l00054"></a>00054 <span class="stringliteral">              &lt;param name=\"wmode\" value=\"transparent\" /&gt;</span>
+<a name="l00055"></a>00055 <span class="stringliteral">              &lt;!-- GF Design - Tvorba webových stránek a systémů --&gt;</span>
+<a name="l00056"></a>00056 <span class="stringliteral">            &lt;/object&gt;</span>
+<a name="l00057"></a>00057 <span class="stringliteral">            &lt;!-- &lt;![endif]--&gt;</span>
+<a name="l00058"></a>00058 <span class="stringliteral">          &lt;/div&gt;"</span>;
+<a name="l00059"></a>00059         
+<a name="l00060"></a>00060       <span class="keywordflow">return</span> <a class="code" href="_8unikatni__fukce_8php.html#e241cf0159803673d118f68d99e6342f">$result</a>;
+<a name="l00061"></a>00061     }
+<a name="l00062"></a>00062 }
+<a name="l00063"></a>00063 ?&gt;
+</pre></div></div>
+<hr size="1"><address style="text-align: right;"><small>Generováno Tue Aug 4 13:38:11 2009 pro projekt Novy vychozi PHP layout programem&nbsp;
+<a href="http://www.doxygen.org/index.html">
+<img src="doxygen.png" alt="doxygen" align="middle" border="0"></a> 1.5.8 </small></address>
+</body>
+</html>

@@ -1,0 +1,50 @@
+<HTML>
+  <HEAD>
+    <TITLE>MetaData</TITLE>
+    <META Name="AUTHOR"
+      Content="Petr Václavek">
+    <META Name="DESCRIPTION"
+      Content="Tip popisující využití metadat">
+    <META Name="KEYWORDS"
+      Content="MetaData, JavaScript, tip, trik, návod">
+    <META Name="KEYWORDS"
+      Content="Meta, JavaScript, hint, trick">
+  </HEAD>
+
+  <BODY>
+    <SCRIPT Language="javascript">
+    <!--
+      var i;
+      if (document.getElementsByName){
+        // Získání seznamu autorù
+        MArray = document.getElementsByName('AUTHOR');
+        if (MArray.length > 0){
+          document.write ('Autor: '.bold());
+          for (i=0; i<MArray.length; i++) {
+            document.write(MArray[i].content + '<br>');
+          }
+        }
+
+        // Získání kompletního popisu stránky
+        if (MArray.length > 0){
+          document.write ('Popis: '.bold());
+          MArray = document.getElementsByName('DESCRIPTION');
+          for (i=0; i<MArray.length; i++) {
+            document.write(MArray[i].content + '<br>');
+          }
+        }
+
+        // Získání seznamu klíèových slov
+        if (MArray.length > 0){
+          document.write ('Klíèová slova: '.bold());
+          MArray = document.getElementsByName('KEYWORDS');
+          for (i=0; i<MArray.length; i++) {
+            document.write(MArray[i].content + '<br>');
+          }
+        }
+      }
+    //-->
+    </SCRIPT>
+  </BODY>
+</HTML>
+

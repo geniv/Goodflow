@@ -1,0 +1,148 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<META HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=windows-1250" />
+<TITLE>jednoduchydum</TITLE>
+<style>
+<!--
+body{
+scrollbar-face-color: #000000;
+scrollbar-track-color: #000000;
+scrollbar-darkshadow-color: #000000;
+scrollbar-arrow-color: #FF0000}
+-->
+</style>
+</HEAD>
+<BODY text=silver vLink=white aLink=red link=white bgColor=black>
+<CENTER><B><I><H1>Jednoduchý dům</H1></I></B></CENTER>
+<B><CENTER><U>Tento návod obsahuje výrobu jednoduchého domu</U></CENTER></B>
+<B>
+Takže jako první musíme samozřejmě nastavit míru v metrech, jináč by nám z toho vznikla nestvůra. V customize >> units setup... označíme <U>Metric</U> a vybereme <U>Meters</U>, dáme OK. Dále v customize >> Grid and Snap Settings... označíme kolonku <U>Home Grid</U> a v Grid Spacing nastavíme hodnotu na <U>1,0m</U> a zavřeme okno. Ještě zkontrolujem jestli v customize >> Preferences... pod kolonkou <U>General</U> (která je už označená) je v <U>System Unit Scale</U> nastavená hodnota <U>1 Unit = 1,0 Meters</U>, pokud to sedí, tak dáme OK.
+</B>
+<BR><BR>
+<CENTER>V oknu Perspective si přiblížíme viditelnost na Grid = 1,0m</CENTER>
+<IMG src="jednoduchydum_soubory/A.jpg">
+<BR>
+<CENTER>V kolonce Shapes vybereme Rectangle (čtverec/obdélnik), nakreslíme odruky obdélník a potom mu nastavíme přesné rozměry, v tomto případě náš dům bude mět 9x6 m</CENTER>
+<IMG src="jednoduchydum_soubory/B.jpg">
+<BR>
+<CENTER>V kolonce Main Toolbar vybereme Select and Move a nastavíme X, Y, Z na hodnotu 0</CENTER>
+<IMG src="jednoduchydum_soubory/C.jpg">
+<BR>
+<CENTER>Dál klapneme na Edit Mesh a v podmenu označíme Polygon tak aby svítil žlutě. Potom klapneme na obdélník aby šli vidět čáry osy a v dolním menu si najdeme Extrude, tam zadáme hodnotu na 3m a potvrdíme entrem.</CENTER>
+<IMG src="jednoduchydum_soubory/D.jpg">
+<BR>
+<CENTER>A vytvoří se nám kvádr, teď si označíme vrchní stěnu (polygon) a smažeme jej tlačítkem delete, to proto, že vrchní stěna nepůjde vidět a tudíž je pro nás zbytečná.</CENTER>
+<IMG src="jednoduchydum_soubory/E.jpg">
+<BR>
+<CENTER>A takto to vypadá:</CENTER>
+<IMG src="jednoduchydum_soubory/F.jpg">
+<BR>
+<CENTER>V kolonce Shapes si vybereme linku (line) a nakreslíme si trojúhelník</CENTER>
+<IMG src="jednoduchydum_soubory/G.jpg">
+<BR>
+<CENTER>Zakončíme trojúhelník v prvním bodě a zeptá se nás to na Close Spline ?, tady dáme Ano, no a máme základ štítu.</CENTER>
+<IMG src="jednoduchydum_soubory/H.jpg">
+<BR>
+<CENTER>A teď si dáme Select and Move a označíme si náš trojúhelník, a nastavíme si X, Y, Z na hodnotu 0</CENTER>
+<IMG src="jednoduchydum_soubory/I.jpg">
+<BR>
+<CENTER>Dáme Select and Move, a v podmenu line si vybereme Vertex. Označíme si levý bod a nastavíme hodnoty na X: 3m, Y a Z: na hodnotu 0 </CENTER>
+<IMG src="jednoduchydum_soubory/J.jpg">
+<BR>
+<CENTER>Teď označíme pravý bod a nastavíme X: -3m, Y a Z: na hodnotu 0</CENTER>
+<IMG src="jednoduchydum_soubory/K.jpg">
+<BR>
+<CENTER>A nakonec si označíme vrchní bod a nastavíme hodnotu X: 0, Y: -2, Z: 0. A teď máme přesný trojúhelník, nebo-li štít</CENTER>
+<IMG src="jednoduchydum_soubory/L.jpg">
+<BR>
+<CENTER>Teď si dáme Edit Mesh, označíme Select and Rotate a otočíme štít po ose x na 90 stupňů</CENTER>
+<IMG src="jednoduchydum_soubory/M.jpg">
+<BR>
+<CENTER>A přesuneme štít na požadované hodnoty X: 0,0 , Y: 4,5 , Z: 3,0 ... tím umístníme štít tam kam ho potřebujem dát</CENTER>
+<IMG src="jednoduchydum_soubory/N.jpg">
+<BR>
+<CENTER>Dále potřebujem štít zkopírovat na druhou stranu domu, takže vybereme Select and Move a podržíme SHIFT a klapneme na štít. Vyjede nám tabulka Clone Options a tu potvrdíme OK</CENTER>
+<IMG src="jednoduchydum_soubory/O.jpg">
+<BR>
+<CENTER>Teď přesuneme štít na X: 0,0 , Y: -4,5 , Z: 3,0 a tím dostaneme druhý štít na požadované místo</CENTER>
+<IMG src="jednoduchydum_soubory/P.jpg">
+<BR>
+<CENTER>Dáme Select and Rotate a otočíme štít po ose Z o 180 stupňů</CENTER>
+<IMG src="jednoduchydum_soubory/Q.jpg">
+<BR>
+<CENTER>Najdeme si v dolním levém menu Attach List, klapneme na něj a v okně si označíme oba štíty tj. Line01 a Line02, následně dáme Attach <BR>(Attach = Spojit)</CENTER>
+<IMG src="jednoduchydum_soubory/R.jpg">
+<BR>
+<CENTER>Vše se nám změní na stejnou barvu, tu kterou měl Rectangle a to znamená že nám z toho vznikl jeden celek</CENTER>
+<IMG src="jednoduchydum_soubory/S.jpg">
+<BR>
+<CENTER>A teď střecha. V Objects si vytvoříme Box a následně na to si jej upravíme do rozměrů: délka: 9,6 ,šířka: 6,6 ,tloušťka: 0,1 a ještě dáme Width Segs na hodnotu 2 to kvůli tomu, aby jsme z toho boxu potom mohli vytvořit střechu. Nezapomeneme ji vycentrovat, se Select and Move nastavíme spodní hodnoty X, Y, Z na 0. Na otázku: "proč je tam 9,6 a 6,6" je jednoduchá odpověď: Je to kvůli přesahu střechy tzn: 30 cm z levé, z pravé, ze spodní a z vrchní strany</CENTER>
+<IMG src="jednoduchydum_soubory/T.jpg">
+<BR>
+<CENTER>Dál dáme Edit Mesh a v podmenu si vybereme Vertex, a označíme si oba dva prostřední body střechy z obou stran </CENTER>
+<IMG src="jednoduchydum_soubory/U.jpg">
+<BR>
+<CENTER>Teď dáme Select and Move a nastavíme na Z: 5,05 m, tady vidíte jak vršek střechy pěkně zapadl</CENTER>
+<IMG src="jednoduchydum_soubory/UU.jpg">
+<BR>
+<CENTER>Zůstaneme u Select and Move a u Vertexů a označíme si na pravé straně dva vrchní vertexy, které následně posuneme směrem ven na -3,4 m, a to samé i na druhé straně ale hodnoty budou plusové: 3,4 m</CENTER>
+<IMG src="jednoduchydum_soubory/UUU.jpg">
+<BR>
+<CENTER>A teď ty označené vertexy posuneme na hodnotu Z: 0 m a samozřejmě provedeme to samé i na druhé straně, tím pádem nám vznikne reálná střecha.</CENTER>
+<IMG src="jednoduchydum_soubory/V.jpg">
+<BR>
+<CENTER>Dále si označíme s Select and Move všechny boční vertexy</CENTER>
+<IMG src="jednoduchydum_soubory/VV.jpg">
+<BR>
+<CENTER>A v pohledu Front nastavíme výšku Z na 2,8 m a vídíte že nám střecha přesně zapadla, to samé uděláme i na druhé straně domu</CENTER>
+<IMG src="jednoduchydum_soubory/VVV.jpg">
+<BR>
+<CENTER>Tady vidíte jak nám střecha pěkně přesahuje</CENTER>
+<IMG src="jednoduchydum_soubory/W.jpg">
+<BR>
+<CENTER>A teď komín: V Shapes si vytvoříme Rectangle u kterého změníme rozměry: šířka: 0,4 m, délka: 0,4 m</CENTER>
+<IMG src="jednoduchydum_soubory/WW.jpg">
+<BR>
+<CENTER>Dáme Edit Mesh, v podmenu vybereme polygon, označíme budoucí komín a následně dáme Extrude na 1,5 m</CENTER>
+<IMG src="jednoduchydum_soubory/WWW.jpg">
+<BR>
+<CENTER>A potvrdíme entrem</CENTER>
+<IMG src="jednoduchydum_soubory/X.jpg">
+<BR>
+<CENTER>Teď s Select and Move nastavíme souřadnice na X: 1,6 m, Y: 3,6 m, Z: 3,6 m</CENTER>
+<IMG src="jednoduchydum_soubory/Y.jpg">
+<BR>
+<CENTER>Označíme si základní Rectangle01 a v levém dolním menu dáme Attach List a Attachujem s Rectangle02 tzn: že jsme spojily základ domu s komínem</CENTER>
+<IMG src="jednoduchydum_soubory/YY.jpg">
+<BR>
+<CENTER>A tady vidíte, že komín sedí zároveň se střechou a že jeho umístnění je vyhovující</CENTER>
+<IMG src="jednoduchydum_soubory/Z.jpg">
+<BR>
+<CENTER>Ještě musíme zrušit smooth aby střecha nebyla zaoblená, takže označíme střechu nebo-li Box01, v kolonce Edit Mesh označíme polygon a výběrem si označíme celou střechu tak jak je na obrázku</CENTER>
+<IMG src="jednoduchydum_soubory/ZZ.jpg">
+<BR>
+<CENTER>Až se nám celá střecha označí, tak si v dolním menu najedeme na Smoothing Groups a vidíme že zde jsou prázdná políčka, my potřebujeme aby v nich byla čísla. (každé políčko představuje různé zaoblení hran)</CENTER>
+<IMG src="jednoduchydum_soubory/ZZZ.jpg">
+<BR>
+<CENTER>Teď potřebujeme, aby se nám tam objevily čisla nebo-li aby jsme neměli zaoblenou střechu, a k tomu potřebujeme mít označenou střechu což už máme, no a klapneme na Clear All. Tím se nám objevily v Smoothing Groups čísla a střecha tím pádem už nemá zaoblení.</CENTER>
+<IMG src="jednoduchydum_soubory/ZZZZ.jpg">
+<BR>
+<CENTER>Ještě potřebujeme aby základy domu nebyly zaoblené, a proto budem postupovat uplně stejným způsobem: Označíme si základ domu nebo-li Rectangle01 a v Edit Mesh si zvolíme polygon, označíme si výběrem celý základ tak aby byl označený i komín, najedeme si na Smoothing Groups a zde vidíme že nám chybý jedno číslo nebo-li zaoblení.</CENTER>
+<IMG src="jednoduchydum_soubory/ZZZZZ.jpg">
+<BR>
+<CENTER>A teď uďeláme to samé co se střechou, klapneme na Clear All a v Smoothing Groups se nám objeví číslo a tím se nám dorovnaly zaoblené polygony</CENTER>
+<IMG src="jednoduchydum_soubory/ZZZZZZ.jpg">
+<BR>
+<CENTER>A tady je vidět že komín i střecha nejsou zaoblené</CENTER>
+<IMG src="jednoduchydum_soubory/ZZZZZZZ.jpg">
+<BR>
+<CENTER>Jestli by jste něčemu nerozuměli tak mě kontaktujte na emailu Fugess@centrum.cz a nebo mě napište na icq 240 720 819</CENTER>
+<CENTER>Autor: Fugess</CENTER>
+<br>
+<CENTER><I><A href="navody.htm">Zpátky do návodů</A></I></CENTER>
+</BODY>
+</HTML>
+
+
+

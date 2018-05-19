@@ -1,0 +1,108 @@
+<STYLE>.spanstyle {
+FONT-WEIGHT: bold; FONT-SIZE: 8pt; VISIBILITY: visible; FONT-FAMILY: Verdana; POSITION: absolute; TOP: -50px
+}
+</STYLE>
+
+<SCRIPT>
+
+
+
+var message="OPRAVDU PEKNY TEXT PRO VASI MYSKU !!!"
+message=message.split(" ")
+var step=8 
+var stepbasic=8
+var x,y
+var flag=0
+var xpos=new Array()
+for (i=0;i<=message.length-1;i++) {
+xpos[i]=-100
+}
+var ypos=new Array()
+for (i=0;i<=message.length-1;i++) {
+ypos[i]=-100
+}
+var spacebetweenwords=new Array()
+for (i=0;i<=message.length-1;i++) {
+spacebetweenwords[i]=stepbasic+step*message[i].length-1
+}
+var colorstep=Math.round(255/message.length-1)
+var colorrgb=new Array()
+for (i=0;i<=message.length-1;i++) {
+colorrgb[i]=i*colorstep
+}
+var wordcolor=new Array()
+for (i=0;i<=message.length-1;i++) {
+var colhex_left = Math.floor(colorrgb[i]/16)
+var colhex_right= colorrgb[i]-(colhex_left*16)
+if (colhex_left == 10) {colhex_left="A"}
+if (colhex_left == 11) {colhex_left="B"}
+if (colhex_left == 12) {colhex_left="C"}
+if (colhex_left == 13) {colhex_left="D"}
+if (colhex_left == 14) {colhex_left="E"}
+if (colhex_left == 15) {colhex_left="F"} 
+if (colhex_right == 10) {colhex_right="A"}
+if (colhex_right == 11) {colhex_right="B"}
+if (colhex_right == 12) {colhex_right="C"}
+if (colhex_right == 13) {colhex_right="D"}
+if (colhex_right == 14) {colhex_right="E"}
+if (colhex_right == 15) {colhex_right="F"} 
+wordcolor[i] =""+colhex_left+colhex_right
+}
+function handlerMM(e){
+x = (document.layers) ? e.pageX : document.body.scrollLeft+event.clientX
+y = (document.layers) ? e.pageY : document.body.scrollTop+event.clientY
+flag=1
+}
+function makesnake() {
+if (flag==1 && document.all) {
+for (i=message.length-1; i>=1; i--) {
+xpos[i]=xpos[i-1]+spacebetweenwords[i-1]
+ypos[i]=ypos[i-1]
+}
+xpos[0]=x+stepbasic
+ypos[0]=y
+
+for (i=0; i<message.length-1; i++) {
+var thisspan = eval("span"+(i)+".style")
+thisspan.posLeft=xpos[i]
+thisspan.posTop=ypos[i]
+}
+}
+else if (flag==1 && document.layers) {
+for (i=message.length-1; i>=1; i--) {
+xpos[i]=xpos[i-1]+spacebetweenwords[i-1]
+ypos[i]=ypos[i-1]
+}
+xpos[0]=x+stepbasic
+ypos[0]=y
+
+for (i=0; i<message.length-1; i++) {
+var thisspan = eval("document.span"+i)
+thisspan.left=xpos[i]
+thisspan.top=ypos[i]
+}
+}
+var timer=setTimeout("makesnake()",30)
+}
+</SCRIPT>
+
+</HEAD>
+<BODY style="OVERFLOW-Y: scroll; OVERFLOW-X: hidden; WIDTH: 100%" 
+onload=makesnake()>
+<P>
+<SCRIPT>
+<!-- Beginning of JavaScript -
+for (i=0;i<=message.length-1;i++) {
+document.write("<span id='span"+i+"' class='spanstyle'>")
+document.write("<font color='"+wordcolor[i]+wordcolor[i]+wordcolor[i]+"'>"+message[i]+"</font>")
+document.write("</span>")
+}
+
+if (document.layers){
+document.captureEvents(Event.MOUSEMOVE);
+}
+document.onmousemove = handlerMM;
+// - End of JavaScript - -->
+</SCRIPT>
+</P>
+</BODY>

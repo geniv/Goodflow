@@ -1,0 +1,89 @@
+<HTML>
+  <HEAD>
+    <TITLE>SlideShow</TITLE>
+    <SCRIPT Language="JavaScript">
+      <!--
+        actpic = 1;   // Aktualní foto
+        piccount = 5; // Celkový poèet fotek
+        interval = 1000; // Interval mezi jednotlivými snímky (1 s)
+
+        var timer;    // Èasovaè na automatické pøepínání fotek
+
+        // Nastavení aktuálního obrázku
+        function SetPic (){
+          // Nastavení obrázku
+          document.images.imgprev.src = actpic+".jpg";
+          // Nastavení èísla obrázku
+          document.slide.PicNum.value = actpic;
+        }
+
+        // Následující snímek
+        function NextPic (){
+          if (actpic == piccount) actpic = 1;
+          else actpic++;
+          SetPic();
+        }
+
+        // Pøedchozí snímek
+        function PrevPic (){
+          if (actpic == 1) actpic = piccount;
+          else actpic--;
+          SetPic();
+        }
+
+        // První snímek
+        function FirstPic (){
+          actpic = 1;
+          SetPic();
+        }
+
+        // poslední snímek
+        function LastPic (){
+          actpic = piccount;
+          SetPic();
+        }
+
+        // Spuštìní slideshow
+        function SlideShow (){
+          // Po ubìhnutí zadaného intervalu se zobrazí
+          // následující snímek
+          timer = setInterval ("NextPic();", interval);
+        }
+
+        // Zastavení slideshow
+        function StopSlideShow (){
+          clearInterval (timer);
+        }
+      // -->
+    </SCRIPT>
+  </HEAD>
+
+  <BODY>
+    <TABLE>
+      <TR>
+        <TD Align="center">
+        <IMG Name="imgprev" Src="1.jpg">
+        </TD>
+      </TR>
+      <TR>
+        <TD>
+          <A Href="#" Onclick="FirstPic();">první</A>
+          <A Href="#" Onclick="PrevPic();">pøedchozí</A>
+          <A Href="#" Onclick="NextPic();">další</A>
+          <A Href="#" Onclick="LastPic();">poslední</A>
+          <A Href="#" Onclick="SlideShow();">slideshow</A>
+          <A Href="#" Onclick="StopSlideShow();">stop</A>
+        </TD>
+      </TR>
+      <TR>
+        <TD>
+        <FORM Name="slide">
+          Zobrazovaný obrázek:
+          <INPUT Name="PicNum" Type="text" Size="10">
+        </FORM>
+        </TD>
+      </TR>
+    </TABLE>
+  </BODY>
+</HTML>
+

@@ -1,0 +1,169 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>Novy vychozi PHP layout: Zdrojový soubor /var/www/phplayout/materialy/dynamic_rss/rss.php</title>
+<link href="tabs.css" rel="stylesheet" type="text/css">
+<link href="doxygen.css" rel="stylesheet" type="text/css">
+</head><body>
+<!-- Generováno programem Doxygen 1.5.8 -->
+<div class="navigation" id="top">
+  <div class="tabs">
+    <ul>
+      <li><a href="index.html"><span>Hlavní&nbsp;stránka</span></a></li>
+      <li><a href="annotated.html"><span>Třídy</span></a></li>
+      <li class="current"><a href="files.html"><span>Soubory</span></a></li>
+    </ul>
+  </div>
+  <div class="tabs">
+    <ul>
+      <li><a href="files.html"><span>Seznam&nbsp;souborů</span></a></li>
+      <li><a href="globals.html"><span>Symboly&nbsp;v&nbsp;souborech</span></a></li>
+    </ul>
+  </div>
+<h1>/var/www/phplayout/materialy/dynamic_rss/rss.php</h1><a href="rss_8php.html">Zobrazit dokumentaci tohoto souboru.</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 &lt;?php
+<a name="l00002"></a>00002 
+<a name="l00014"></a><a class="code" href="classDynamicRSS.html">00014</a> <span class="keyword">class </span><a class="code" href="classDynamicRSS.html">DynamicRSS</a> <span class="keyword">extends</span> <a class="code" href="classDefaultModule.html">DefaultModule</a>
+<a name="l00015"></a>00015 {
+<a name="l00016"></a><a class="code" href="classDynamicRSS.html#7e321be9eee6f77fc8ab476271924723">00016</a>   <span class="keyword">private</span> <a class="code" href="classDynamicRSS.html#7e321be9eee6f77fc8ab476271924723">$var</a>, <a class="code" href="classDynamicRSS.html#f881854d91e12be3b7f930b4397d9166">$sqlite</a>, <a class="code" href="classDynamicRSS.html#f1d983d766ef580db9d9435da9f87e51">$dbname</a>, <a class="code" href="classDynamicRSS.html#1e998c47c5ec117a35fd9ce0396b49f1">$dirpath</a>, <a class="code" href="classDynamicRSS.html#cfb76d5aa4c20787c91705e7d230bde1">$absolutni_url</a>, <a class="code" href="classDynamicRSS.html#a427c48f080cde593aa3e73434cf0903">$unikatni</a>;
+<a name="l00017"></a>00017 
+<a name="l00018"></a><a class="code" href="classDynamicRSS.html#7353d9ed64f05de3d5920c48d8b58440">00018</a>   <span class="keyword">private</span> <a class="code" href="classDynamicRSS.html#7353d9ed64f05de3d5920c48d8b58440">$printurl</a> = <span class="stringliteral">"rss"</span>;  <span class="comment">//url na kterou ceka</span>
+<a name="l00019"></a>00019 
+<a name="l00020"></a>00020   <span class="comment">//data pro pripojen externi databaze</span>
+<a name="l00021"></a><a class="code" href="classDynamicRSS.html#decbbf282a46bbf108ccfc9f3a8a8f79">00021</a>   <span class="keyword">private</span> <a class="code" href="classDynamicRSS.html#decbbf282a46bbf108ccfc9f3a8a8f79">$sourcedb</a> = <span class="stringliteral">"DynamicLanguageCyklObsah"</span>; <span class="comment">//nazev hledane tridy</span>
+<a name="l00022"></a><a class="code" href="classDynamicRSS.html#9806ac8c5d661f286fa692568deee7d1">00022</a>   <span class="keyword">private</span> <a class="code" href="classDynamicRSS.html#9806ac8c5d661f286fa692568deee7d1">$sourcetable</a> = <span class="stringliteral">"cyklicky_lang_obsah"</span>;  <span class="comment">//nazev tabulky</span>
+<a name="l00023"></a><a class="code" href="classDynamicRSS.html#087f6fdc87a6241820316f49d49ecb08">00023</a>   <span class="keyword">private</span> <a class="code" href="classDynamicRSS.html#087f6fdc87a6241820316f49d49ecb08">$sourcecolumn</a> = <span class="stringliteral">"datum, text"</span>; <span class="comment">//nazev sloupcu</span>
+<a name="l00024"></a><a class="code" href="classDynamicRSS.html#669fdf9c0795fd13b4a36c5acbefb8b9">00024</a>   <span class="keyword">private</span> <a class="code" href="classDynamicRSS.html#669fdf9c0795fd13b4a36c5acbefb8b9">$sourceorder</a> = <span class="stringliteral">"ORDER BY cyklicky_lang_obsah.datum DESC"</span>;
+<a name="l00025"></a>00025 
+<a name="l00026"></a><a class="code" href="classDynamicRSS.html#732efbe32e5d4bb0655ee1d286c42587">00026</a>   <span class="keyword">private</span> <a class="code" href="classDynamicRSS.html#732efbe32e5d4bb0655ee1d286c42587">$rss_datum</a> = <span class="stringliteral">"datum"</span>; <span class="comment">//datum</span>
+<a name="l00027"></a><a class="code" href="classDynamicRSS.html#eda93757e9745afbe387de744a59b805">00027</a>   <span class="keyword">private</span> <a class="code" href="classDynamicRSS.html#eda93757e9745afbe387de744a59b805">$rss_descr</a> = <span class="stringliteral">"text"</span>;  <span class="comment">//description</span>
+<a name="l00028"></a>00028 
+<a name="l00029"></a><a class="code" href="classDynamicRSS.html#904141a82de4063009bbd6c70f094cf5">00029</a>   <span class="keyword">private</span> <a class="code" href="classDynamicRSS.html#904141a82de4063009bbd6c70f094cf5">$rss_kodovani</a> = <span class="stringliteral">"UTF-8"</span>;
+<a name="l00030"></a><a class="code" href="classDynamicRSS.html#14282171e32ee1892c030931ace9afb3">00030</a>   <span class="keyword">private</span> <a class="code" href="classDynamicRSS.html#14282171e32ee1892c030931ace9afb3">$rss_title</a> = <span class="stringliteral">"title rss"</span>;
+<a name="l00031"></a><a class="code" href="classDynamicRSS.html#dfe69929dfffc815cbf7ea0f175b17be">00031</a>   <span class="keyword">private</span> <a class="code" href="classDynamicRSS.html#dfe69929dfffc815cbf7ea0f175b17be">$rss_category</a> = <span class="stringliteral">"kategorie"</span>;
+<a name="l00032"></a><a class="code" href="classDynamicRSS.html#125cdbda75905c779e155dc84e0743df">00032</a>   <span class="keyword">private</span> <a class="code" href="classDynamicRSS.html#125cdbda75905c779e155dc84e0743df">$rss_description</a> = <span class="stringliteral">"poznamka"</span>;
+<a name="l00033"></a><a class="code" href="classDynamicRSS.html#90e8f8e73848fef2c88e41c4b0cf3dd5">00033</a>   <span class="keyword">private</span> <a class="code" href="classDynamicRSS.html#90e8f8e73848fef2c88e41c4b0cf3dd5">$rss_language</a> = <span class="stringliteral">"cs"</span>;
+<a name="l00034"></a><a class="code" href="classDynamicRSS.html#08cefef1623a20a7f2fe110e82e260c7">00034</a>   <span class="keyword">private</span> <a class="code" href="classDynamicRSS.html#08cefef1623a20a7f2fe110e82e260c7">$rss_copyright</a> = <span class="stringliteral">"(c) vytvoren (c)"</span>;
+<a name="l00035"></a><a class="code" href="classDynamicRSS.html#689c65087b45c9d39df3c43e0387165c">00035</a>   <span class="keyword">private</span> <a class="code" href="classDynamicRSS.html#689c65087b45c9d39df3c43e0387165c">$rss_managingEditor</a> = <span class="stringliteral">"rizeni@email.cz (rizeni)"</span>;
+<a name="l00036"></a><a class="code" href="classDynamicRSS.html#762e761e14c642550b80dc4d622e2de4">00036</a>   <span class="keyword">private</span> <a class="code" href="classDynamicRSS.html#762e761e14c642550b80dc4d622e2de4">$rss_webMaster</a> = <span class="stringliteral">"webmaster@email.cz (webmaster)"</span>;
+<a name="l00037"></a><a class="code" href="classDynamicRSS.html#40864990e2630ce5e4b22211e9527baa">00037</a>   <span class="keyword">private</span> <a class="code" href="classDynamicRSS.html#40864990e2630ce5e4b22211e9527baa">$rss_ttl</a> = 120;
+<a name="l00038"></a>00038 
+<a name="l00039"></a><a class="code" href="classDynamicRSS.html#34f3d42d98b398f8e83f6574752d4a38">00039</a>   <span class="keyword">private</span> <a class="code" href="classDynamicRSS.html#34f3d42d98b398f8e83f6574752d4a38">$rss_image_title</a> = <span class="stringliteral">"nadpis obrazku"</span>;
+<a name="l00040"></a><a class="code" href="classDynamicRSS.html#5ba454b4a9ff707dfb7659bcd0dde09a">00040</a>   <span class="keyword">private</span> <a class="code" href="classDynamicRSS.html#5ba454b4a9ff707dfb7659bcd0dde09a">$rss_image_link</a> = <span class="stringliteral">"http://www.kam_nas_obrazek_zavede.cz"</span>;
+<a name="l00041"></a><a class="code" href="classDynamicRSS.html#fc8eec214b7c8bcc2479ffed72b49228">00041</a>   <span class="keyword">private</span> <a class="code" href="classDynamicRSS.html#fc8eec214b7c8bcc2479ffed72b49228">$rss_image_url</a> = <span class="stringliteral">"http://www.absolutni_cesta_obrazku.cz/obr.png"</span>;
+<a name="l00042"></a>00042 
+<a name="l00043"></a><a class="code" href="classDynamicRSS.html#b3b15fdb941850496dc769ad0f2f96d5">00043</a>   <span class="keyword">private</span> <a class="code" href="classDynamicRSS.html#b3b15fdb941850496dc769ad0f2f96d5">$jazyk</a> = <span class="keyword">false</span>; <span class="comment">//povoleni ocekavat jazyk</span>
+<a name="l00044"></a>00044 
+<a name="l00052"></a><a class="code" href="classDynamicRSS.html#085ed43398fb34181f4ae14ef49c2ded">00052</a>   <span class="keyword">public</span> function <a class="code" href="classDynamicRSS.html#085ed43398fb34181f4ae14ef49c2ded">__construct</a>(&amp;<a class="code" href="classDynamicRSS.html#7e321be9eee6f77fc8ab476271924723">$var</a>, $index) <span class="comment">//konstruktor</span>
+<a name="l00053"></a>00053   {
+<a name="l00054"></a>00054     $this-&gt;var = <a class="code" href="classDynamicRSS.html#7e321be9eee6f77fc8ab476271924723">$var</a>;
+<a name="l00055"></a>00055     <a class="code" href="classDynamicRSS.html#1e998c47c5ec117a35fd9ce0396b49f1">$dirpath</a> = dirname($this-&gt;var-&gt;moduly[$index][<span class="stringliteral">"include"</span>]);
+<a name="l00056"></a>00056 
+<a name="l00057"></a>00057     <span class="comment">//includovani unikatniho obsahu</span>
+<a name="l00058"></a>00058     $this-&gt;unikatni = $this-&gt;<a class="code" href="classDefaultModule.html#f9bc13977b7099f00c4a74192ce85dce">NactiObsahSouboru</a>(<span class="stringliteral">"{$dirpath}/.unikatni_obsah.php"</span>);
+<a name="l00059"></a>00059     $this-&gt;absolutni_url = $this-&gt;var-&gt;main[0]-&gt;NactiFunkci(<span class="stringliteral">"Funkce"</span>, <span class="stringliteral">"AbsoluteUrl"</span>);
+<a name="l00060"></a>00060   }
+<a name="l00061"></a>00061 
+<a name="l00070"></a><a class="code" href="classDynamicRSS.html#a27836b9526f17859de0d8436665bc0a">00070</a>   <span class="keyword">public</span> function <a class="code" href="classDynamicRSS.html#a27836b9526f17859de0d8436665bc0a">RSSVystup</a>($tvar = 1)
+<a name="l00071"></a>00071   {
+<a name="l00072"></a>00072     $this-&gt;printurl = $this-&gt;<a class="code" href="classDefaultModule.html#f43261ee577b5bedbdaff44d21c64d38">NactiUnikatniObsah</a>($this-&gt;unikatni[<span class="stringliteral">"set_printurl_{$tvar}"</span>]);
+<a name="l00073"></a>00073     $this-&gt;sourcedb = $this-&gt;<a class="code" href="classDefaultModule.html#f43261ee577b5bedbdaff44d21c64d38">NactiUnikatniObsah</a>($this-&gt;unikatni[<span class="stringliteral">"set_sourcedb_{$tvar}"</span>]);
+<a name="l00074"></a>00074 
+<a name="l00075"></a>00075     $this-&gt;rss_datum = $this-&gt;<a class="code" href="classDefaultModule.html#f43261ee577b5bedbdaff44d21c64d38">NactiUnikatniObsah</a>($this-&gt;unikatni[<span class="stringliteral">"set_rss_datum_{$tvar}"</span>]);
+<a name="l00076"></a>00076     $this-&gt;rss_descr = $this-&gt;<a class="code" href="classDefaultModule.html#f43261ee577b5bedbdaff44d21c64d38">NactiUnikatniObsah</a>($this-&gt;unikatni[<span class="stringliteral">"set_rss_descr_{$tvar}"</span>]);
+<a name="l00077"></a>00077 
+<a name="l00078"></a>00078     $this-&gt;rss_kodovani = $this-&gt;<a class="code" href="classDefaultModule.html#f43261ee577b5bedbdaff44d21c64d38">NactiUnikatniObsah</a>($this-&gt;unikatni[<span class="stringliteral">"set_rss_kodovani_{$tvar}"</span>]);
+<a name="l00079"></a>00079     $this-&gt;rss_title = $this-&gt;<a class="code" href="classDefaultModule.html#f43261ee577b5bedbdaff44d21c64d38">NactiUnikatniObsah</a>($this-&gt;unikatni[<span class="stringliteral">"set_rss_title_{$tvar}"</span>]);
+<a name="l00080"></a>00080     $this-&gt;rss_category = $this-&gt;<a class="code" href="classDefaultModule.html#f43261ee577b5bedbdaff44d21c64d38">NactiUnikatniObsah</a>($this-&gt;unikatni[<span class="stringliteral">"set_rss_category_{$tvar}"</span>]);
+<a name="l00081"></a>00081     $this-&gt;rss_description = $this-&gt;<a class="code" href="classDefaultModule.html#f43261ee577b5bedbdaff44d21c64d38">NactiUnikatniObsah</a>($this-&gt;unikatni[<span class="stringliteral">"set_rss_description_{$tvar}"</span>]);
+<a name="l00082"></a>00082     $this-&gt;rss_language = $this-&gt;<a class="code" href="classDefaultModule.html#f43261ee577b5bedbdaff44d21c64d38">NactiUnikatniObsah</a>($this-&gt;unikatni[<span class="stringliteral">"set_rss_language_{$tvar}"</span>]);
+<a name="l00083"></a>00083     $this-&gt;rss_copyright = $this-&gt;<a class="code" href="classDefaultModule.html#f43261ee577b5bedbdaff44d21c64d38">NactiUnikatniObsah</a>($this-&gt;unikatni[<span class="stringliteral">"set_rss_copyright_{$tvar}"</span>]);
+<a name="l00084"></a>00084     $this-&gt;rss_managingEditor = $this-&gt;<a class="code" href="classDefaultModule.html#f43261ee577b5bedbdaff44d21c64d38">NactiUnikatniObsah</a>($this-&gt;unikatni[<span class="stringliteral">"set_rss_managingEditor_{$tvar}"</span>]);
+<a name="l00085"></a>00085     $this-&gt;rss_webMaster = $this-&gt;<a class="code" href="classDefaultModule.html#f43261ee577b5bedbdaff44d21c64d38">NactiUnikatniObsah</a>($this-&gt;unikatni[<span class="stringliteral">"set_rss_webMaster_{$tvar}"</span>]);
+<a name="l00086"></a>00086     $this-&gt;rss_ttl = $this-&gt;<a class="code" href="classDefaultModule.html#f43261ee577b5bedbdaff44d21c64d38">NactiUnikatniObsah</a>($this-&gt;unikatni[<span class="stringliteral">"set_rss_ttl_{$tvar}"</span>]);
+<a name="l00087"></a>00087     $this-&gt;rss_image_title = $this-&gt;<a class="code" href="classDefaultModule.html#f43261ee577b5bedbdaff44d21c64d38">NactiUnikatniObsah</a>($this-&gt;unikatni[<span class="stringliteral">"set_rss_image_title_{$tvar}"</span>]);
+<a name="l00088"></a>00088     $this-&gt;rss_image_link = $this-&gt;<a class="code" href="classDefaultModule.html#f43261ee577b5bedbdaff44d21c64d38">NactiUnikatniObsah</a>($this-&gt;unikatni[<span class="stringliteral">"set_rss_image_link_{$tvar}"</span>]);
+<a name="l00089"></a>00089     $this-&gt;rss_image_url = $this-&gt;<a class="code" href="classDefaultModule.html#f43261ee577b5bedbdaff44d21c64d38">NactiUnikatniObsah</a>($this-&gt;unikatni[<span class="stringliteral">"set_rss_image_url_{$tvar}"</span>]);
+<a name="l00090"></a>00090 
+<a name="l00091"></a>00091     $this-&gt;jazyk = $this-&gt;<a class="code" href="classDefaultModule.html#f43261ee577b5bedbdaff44d21c64d38">NactiUnikatniObsah</a>($this-&gt;unikatni[<span class="stringliteral">"set_jazyk_{$tvar}"</span>]); <span class="comment">//povoleni ocekavat jazyk</span>
+<a name="l00092"></a>00092 
+<a name="l00093"></a>00093     $index = $this-&gt;var-&gt;main[0]-&gt;NajdiIndexPodleTridy($this-&gt;sourcedb);  <span class="comment">//najde index tridy</span>
+<a name="l00094"></a>00094     <span class="keywordflow">if</span> ($index &gt;= 0)
+<a name="l00095"></a>00095     {
+<a name="l00096"></a>00096       $this-&gt;dirpath = dirname($this-&gt;var-&gt;moduly[$index][<span class="stringliteral">"include"</span>]);
+<a name="l00097"></a>00097       $this-&gt;dbname = $this-&gt;var-&gt;moduly[$index][<span class="stringliteral">"databaze"</span>];
+<a name="l00098"></a>00098 
+<a name="l00099"></a>00099       <span class="keywordflow">if</span> (!$this-&gt;sqlite = @<span class="keyword">new</span> SQLiteDatabase(<span class="stringliteral">"{$this-&gt;dirpath}/{$this-&gt;dbname}"</span>, 0777, $error))
+<a name="l00100"></a>00100       {
+<a name="l00101"></a>00101         $this-&gt;var-&gt;main[0]-&gt;ErrorMsg($error);
+<a name="l00102"></a>00102       }
+<a name="l00103"></a>00103     }
+<a name="l00104"></a>00104       <span class="keywordflow">else</span>
+<a name="l00105"></a>00105     {
+<a name="l00106"></a>00106       $this-&gt;var-&gt;main[0]-&gt;ErrorMsg(<span class="stringliteral">"Modul: '{$this-&gt;sourcedb}' nenalezen"</span>);
+<a name="l00107"></a>00107     }
+<a name="l00108"></a>00108 
+<a name="l00109"></a>00109     <span class="keywordflow">if</span> ($_GET[$this-&gt;var-&gt;get_kam] == $this-&gt;printurl)  <span class="comment">//ceka na danou adresu</span>
+<a name="l00110"></a>00110     {
+<a name="l00111"></a>00111       <span class="keywordflow">if</span> ($this-&gt;jazyk)
+<a name="l00112"></a>00112       {
+<a name="l00113"></a>00113         <a class="code" href="classDynamicRSS.html#b3b15fdb941850496dc769ad0f2f96d5">$jazyk</a> = ($this-&gt;var-&gt;htaccess ? $this-&gt;var-&gt;main[0]-&gt;NactiFunkci(<span class="stringliteral">"DynamicLanguage"</span>, <span class="stringliteral">"PrevodTextoveAdresy"</span>, $_GET[<span class="stringliteral">"jazyk"</span>]) : $_GET[<span class="stringliteral">"jazyk"</span>]);
+<a name="l00114"></a>00114       }
+<a name="l00115"></a>00115 
+<a name="l00116"></a>00116       $this-&gt;sourcequery = $this-&gt;<a class="code" href="classDefaultModule.html#f43261ee577b5bedbdaff44d21c64d38">NactiUnikatniObsah</a>($this-&gt;unikatni[<span class="stringliteral">"set_sourcequery_{$tvar}"</span>],
+<a name="l00117"></a>00117                                                     <a class="code" href="classDynamicRSS.html#b3b15fdb941850496dc769ad0f2f96d5">$jazyk</a>);
+<a name="l00118"></a>00118 
+<a name="l00119"></a>00119       $pubdate = gmdate(<span class="stringliteral">"D, d M Y H:i:s \G\M\T"</span>);
+<a name="l00120"></a>00120 
+<a name="l00121"></a>00121       <a class="code" href="_8unikatni__fukce_8php.html#e241cf0159803673d118f68d99e6342f">$result</a> = $this-&gt;<a class="code" href="classDefaultModule.html#f43261ee577b5bedbdaff44d21c64d38">NactiUnikatniObsah</a>($this-&gt;unikatni[<span class="stringliteral">"normal_rss_header_{$tvar}"</span>],
+<a name="l00122"></a>00122                                           $this-&gt;rss_kodovani,
+<a name="l00123"></a>00123                                           $this-&gt;rss_title,
+<a name="l00124"></a>00124                                           $this-&gt;absolutni_url,
+<a name="l00125"></a>00125                                           $this-&gt;rss_category,
+<a name="l00126"></a>00126                                           $this-&gt;rss_description,
+<a name="l00127"></a>00127                                           $this-&gt;rss_language,
+<a name="l00128"></a>00128                                           $this-&gt;rss_copyright,
+<a name="l00129"></a>00129                                           $this-&gt;rss_managingEditor,
+<a name="l00130"></a>00130                                           $this-&gt;rss_webMaster,
+<a name="l00131"></a>00131                                           $this-&gt;rss_ttl,
+<a name="l00132"></a>00132                                           $pubdate,
+<a name="l00133"></a>00133                                           $this-&gt;rss_image_url);
+<a name="l00134"></a>00134 
+<a name="l00135"></a>00135       <span class="keywordflow">if</span> ($res = @$this-&gt;sqlite-&gt;query($this-&gt;sourcequery, NULL, $error))
+<a name="l00136"></a>00136       {
+<a name="l00137"></a>00137         <span class="keywordflow">if</span> ($res-&gt;numRows() != 0)
+<a name="l00138"></a>00138         {
+<a name="l00139"></a>00139           $i = 0;
+<a name="l00140"></a>00140           <span class="keywordflow">while</span> ($data = $res-&gt;fetchObject())
+<a name="l00141"></a>00141           {
+<a name="l00142"></a>00142             $column_dat = $this-&gt;rss_datum;
+<a name="l00143"></a>00143             $column_des = $this-&gt;rss_descr;
+<a name="l00144"></a>00144             $title = date(<span class="stringliteral">"d.m.Y"</span>, strtotime($data-&gt;$column_dat));
+<a name="l00145"></a>00145 
+<a name="l00146"></a>00146             $dat = strtotime($data-&gt;$column_dat);
+<a name="l00147"></a>00147             $datum = date(<span class="stringliteral">"D, d M Y H:i:s \G\M\T"</span>, mktime(date(<span class="stringliteral">"H"</span>, $dat), date(<span class="stringliteral">"i"</span>, $dat), date(<span class="stringliteral">"s"</span>, $dat), date(<span class="stringliteral">"n"</span>, $dat), date(<span class="stringliteral">"j"</span>, $dat) - 1, date(<span class="stringliteral">"Y"</span>, $dat)));
+<a name="l00148"></a>00148 
+<a name="l00149"></a>00149             <a class="code" href="_8unikatni__fukce_8php.html#e241cf0159803673d118f68d99e6342f">$result</a> .= $this-&gt;<a class="code" href="classDefaultModule.html#f43261ee577b5bedbdaff44d21c64d38">NactiUnikatniObsah</a>($this-&gt;unikatni[<span class="stringliteral">"normal_rss_item_{$tvar}"</span>],
+<a name="l00150"></a>00150                                                 $title,
+<a name="l00151"></a>00151                                                 $this-&gt;absolutni_url,
+<a name="l00152"></a>00152                                                 $data-&gt;$column_des,
+<a name="l00153"></a>00153                                                 $datum,
+<a name="l00154"></a>00154                                                 $i);
+<a name="l00155"></a>00155 
+<a name="l00156"></a>00156             $i++;
+<a name="l00157"></a>00157           }
+<a name="l00158"></a>00158         }
+<a name="l00159"></a>00159       }
+<a name="l00160"></a>00160 
+<a name="l00161"></a>00161       <a class="code" href="_8unikatni__fukce_8php.html#e241cf0159803673d118f68d99e6342f">$result</a> .= $this-&gt;<a class="code" href="classDefaultModule.html#f43261ee577b5bedbdaff44d21c64d38">NactiUnikatniObsah</a>($this-&gt;unikatni[<span class="stringliteral">"normal_rss_end_{$tvar}"</span>]);
+<a name="l00162"></a>00162 
+<a name="l00163"></a>00163       echo <a class="code" href="_8unikatni__fukce_8php.html#e241cf0159803673d118f68d99e6342f">$result</a>;
+<a name="l00164"></a>00164       exit(0);
+<a name="l00165"></a>00165     }
+<a name="l00166"></a>00166   }
+<a name="l00167"></a>00167 }
+<a name="l00168"></a>00168 ?&gt;
+</pre></div></div>
+<hr size="1"><address style="text-align: right;"><small>Generováno Thu Jun 4 11:19:47 2009 pro projekt Novy vychozi PHP layout programem&nbsp;
+<a href="http://www.doxygen.org/index.html">
+<img src="doxygen.png" alt="doxygen" align="middle" border="0"></a> 1.5.8 </small></address>
+</body>
+</html>

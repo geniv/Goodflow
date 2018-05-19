@@ -1,0 +1,135 @@
+<SCRIPT>
+var textfont="Verdana"
+var textsize=12
+var textcolor="FF0000"
+
+var msg=new Array()
+msg[0]="HELLO STRANGER!"
+msg[1]="STILL GOING STRONG?"
+msg[2]="CAN YOU SMELL SPRING?"
+msg[3]="BE HAPPY DO NOT WORRY."
+
+var maxloop=50
+var step=20
+var timer
+var msglength=msg[0].length-1
+var i_mes=0
+var loopcounter=0
+var xpos=new Array()
+var ypos=new Array()
+
+for (i=0; i<=msg.length-1;i++) {
+msg[i]=msg[i]+" "
+}
+
+for (i=1; i<=msg.length-1;i++) {
+if(msg[i].length-1 >= msg[i-1].length-1) {msglength=msg[i].length-1}
+}
+
+for (i=0; i<=msglength-1;i++) {
+xpos[i]=-50
+ypos[i]=-50
+}
+
+if (document.layers) {
+if (textsize>25) {textsize=6}
+else if (textsize>20) {textsize=5}
+else if (textsize>14) {textsize=4} 
+else if (textsize>10) {textsize=3}
+else if (textsize>8) {textsize=2}
+else if (textsize<=7) {textsize=1}
+}
+
+function init() {
+if (loopcounter<=maxloop) {
+for (i=message.length-1; i>=1; i--) {
+xpos[i]=xpos[i-1]+step
+ypos[i]=ypos[i-1]
+}
+xpos[0]=220
+ypos[0]=50
+if (document.all) {
+for (i=0; i<message.length-1; i++) {
+var thisspan = eval("document.all.span"+(i)+".style")
+thisspan.posLeft=xpos[i]
+thisspan.posTop=ypos[i]
+thisspan.color=Math.random()*255*255*255+Math.random()*255*255+Math.random()*255
+}
+}
+if (document.layers) {
+for (i=0; i<message.length-1; i++) {
+var thisspan = eval("document.span"+i)
+thisspan.left=xpos[i]
+thisspan.top=ypos[i]
+}
+}
+loopcounter++
+timer=setTimeout("init()",20)
+}
+else {
+clearTimeout(timer)
+clearmessage()
+}
+}
+
+function clearmessage() {
+loopcounter=0
+if (document.all) {
+for (i=0;i<=msglength;i++) { 
+var thisspan = eval("document.all.span"+i)
+thisspan.innerHTML=" "
+var thisspan = eval("document.all.span"+(i)+".style")
+thisspan.posLeft=-5000 
+}
+}
+if (document.layers) {
+for (i=0;i<=msglength;i++) {
+var thisspan = eval("document.span"+i)
+thisspan.left=-5000
+
+}
+}
+changemessage()
+}
+
+function changemessage() {
+var messa=msg[i_mes]
+message=messa.split("")
+if (document.all) {
+for (i=0;i<=message.length-1;i++) {
+var thisspan = eval("document.all.span"+i)
+thisspan.innerHTML="<p style='font-family:"+textfont+";font-size:"+textsize+";'>"+message[i]+"</p>"
+}
+}
+if (document.layers) {
+for (i=0; i<message.length-1; i++) {
+var thisspan=eval("document.span"+i+".document")
+thisspan.write("<p><font size="+textsize+" color="+textcolor+" face="+textfont+">"+message[i]+"</font></p>")
+thisspan.clear()
+}
+}
+i_mes++ 
+if (i_mes>=msg.length) {i_mes=0}
+timer=setTimeout("init()",50)
+}
+
+// - End of JavaScript - -->
+</SCRIPT>
+
+<STYLE>.spanstyle {
+LEFT: -5000px; POSITION: absolute
+}
+</STYLE>
+
+<META content="MSHTML 5.50.4134.600" name=GENERATOR></HEAD>
+<BODY bgColor=black onload=clearmessage()>
+<SCRIPT>
+<!-- Beginning of JavaScript -
+
+for (i=0;i<=msglength;i++) {
+document.write("<span id='span"+i+"' class='spanstyle'>")
+document.write("</span>")
+}
+
+// - End of JavaScript - -->
+</SCRIPT>

@@ -1,0 +1,48 @@
+<HTML>
+  <HEAD>
+    <TITLE>Souøadnice myši</TITLE>
+    <SCRIPT Language="JavaScript">
+      <!--
+        // Jedná-li se o prohlížeè Netscape
+        if (navigator.appName == 'Netscape') {
+          // Zapnutí zachytávání událostí pohybu myši
+          document.captureEvents(Event.MOUSEMOVE);
+          // Nastavení funkce, která se má volat pøi
+          // pohybu myši
+          document.onmousemove = NNMouseMove;
+        }
+
+        // Funkce pro Netscape
+        function NNMouseMove(e) {
+          // Pokud je souøadnice myši jiná, než je zobrazená
+          // v editaèním políèku, pøepíše se
+          if (e.screenX != document.MainForm.X.value &&
+              e.screenY != document.MainForm.Y.value) {
+            document.MainForm.X.value = e.screenX;
+            document.MainForm.Y.value = e.screenY;
+          }
+        }
+
+        // Funkce pro MSIE
+        function MSMouseMove() {
+          // Pokud je souøadnice myši jiná, než je zobrazená
+          // v editaèním políèku, pøepíše se
+          if (window.event.x != document.MainForm.X.value &&
+              window.event.y != document.MainForm.Y.value) {
+            document.MainForm.X.value = window.event.x;
+            document.MainForm.Y.value = window.event.y;
+          }
+        }
+      // -->
+    </SCRIPT>
+  </HEAD>
+
+  <BODY onMousemove="MSMouseMove()">
+    <FORM Name="MainForm">
+      Souøadnice myši:<BR>
+      X: <INPUT Type="text" Name="X" Size="4">
+      Y: <INPUT Type="text" Name="Y" Size="4">
+    </FORM>
+  </BODY>
+</HTML>
+

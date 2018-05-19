@@ -1,0 +1,29 @@
+<HTML>
+  <HEAD>
+    <TITLE>Vkládání textu do editu</TITLE>
+    <SCRIPT Language="JavaScript">
+    <!--
+      // Funkce pro vložení textu S
+      function InsertText(S){
+        // Nastavení focusu na editaèní pole
+        document.frmMain.edText.focus();
+        // Vložení textu "S"
+        document.selection.createRange().text = S;
+      }
+    //-->
+    </SCRIPT>
+  </HEAD>
+  
+  <BODY>
+    <FORM Name="frmMain">
+      <TEXTAREA Name="edText" rows="5" cols="30">Sem se píše text...
+      </TEXTAREA>
+      <BR>
+      <A Href="javascript:InsertText (' :-) ')"><IMG
+         Border="0" Src="Smile1.gif"></A>
+      <A Href="javascript:InsertText (' :-( ')"><IMG
+         Border="0" Src="Smile2.gif"></A>
+    </FORM>
+  </BODY>
+</HTML>
+

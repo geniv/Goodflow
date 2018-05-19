@@ -1,0 +1,216 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>Novy vychozi PHP layout: Zdrojový soubor /var/www/phplayout/modules/static_strankovani/strankovani.php</title>
+<link href="tabs.css" rel="stylesheet" type="text/css">
+<link href="doxygen.css" rel="stylesheet" type="text/css">
+</head><body>
+<!-- Generováno programem Doxygen 1.5.8 -->
+<div class="navigation" id="top">
+  <div class="tabs">
+    <ul>
+      <li><a href="index.html"><span>Hlavní&nbsp;stránka</span></a></li>
+      <li><a href="annotated.html"><span>Třídy</span></a></li>
+      <li class="current"><a href="files.html"><span>Soubory</span></a></li>
+    </ul>
+  </div>
+  <div class="tabs">
+    <ul>
+      <li><a href="files.html"><span>Seznam&nbsp;souborů</span></a></li>
+      <li><a href="globals.html"><span>Symboly&nbsp;v&nbsp;souborech</span></a></li>
+    </ul>
+  </div>
+<h1>/var/www/phplayout/modules/static_strankovani/strankovani.php</h1><a href="modules_2static__strankovani_2strankovani_8php.html">Zobrazit dokumentaci tohoto souboru.</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 &lt;?php
+<a name="l00002"></a>00002 
+<a name="l00013"></a><a class="code" href="classStatickeStrankovani.html">00013</a> <span class="keyword">class </span><a class="code" href="classStatickeStrankovani.html">StatickeStrankovani</a> <span class="keyword">extends</span> <a class="code" href="classDefaultModule.html">DefaultModule</a>
+<a name="l00014"></a>00014 {
+<a name="l00015"></a><a class="code" href="classStatickeStrankovani.html#6931e4c778cecfa6758f7a045341f86d">00015</a>   <span class="keyword">private</span> <a class="code" href="classStatickeStrankovani.html#6931e4c778cecfa6758f7a045341f86d">$var</a>, <a class="code" href="classStatickeStrankovani.html#8e80b7e3d1948318780d85ffb3c5da60">$dirpath</a>, <a class="code" href="classStatickeStrankovani.html#d4d105a23038243d46b94415208034b9">$absolutni_url</a>, <a class="code" href="classStatickeStrankovani.html#3756be82dded0769fcaacb878f78d703">$unikatni</a>;
+<a name="l00016"></a><a class="code" href="classStatickeStrankovani.html#a52eac3c99ed939e413528f8ac8fd16e">00016</a>   <span class="keyword">private</span> <a class="code" href="classStatickeStrankovani.html#a52eac3c99ed939e413528f8ac8fd16e">$get_str</a> = <span class="stringliteral">"str"</span>;
+<a name="l00017"></a>00017 
+<a name="l00025"></a><a class="code" href="classStatickeStrankovani.html#5c05010feab5833be32f102ca8d65853">00025</a>   <span class="keyword">public</span> function <a class="code" href="classStatickeStrankovani.html#5c05010feab5833be32f102ca8d65853">__construct</a>(&amp;<a class="code" href="classStatickeStrankovani.html#6931e4c778cecfa6758f7a045341f86d">$var</a>, $index) <span class="comment">//konstruktor</span>
+<a name="l00026"></a>00026   {
+<a name="l00027"></a>00027     $this-&gt;var = <a class="code" href="classStatickeStrankovani.html#6931e4c778cecfa6758f7a045341f86d">$var</a>;
+<a name="l00028"></a>00028     $this-&gt;dirpath = dirname($this-&gt;var-&gt;moduly[$index][<span class="stringliteral">"include"</span>]);
+<a name="l00029"></a>00029 
+<a name="l00030"></a>00030     <span class="comment">//includovani unikatniho obsahu</span>
+<a name="l00031"></a>00031     $this-&gt;unikatni = $this-&gt;<a class="code" href="classDefaultModule.html#f9bc13977b7099f00c4a74192ce85dce">NactiObsahSouboru</a>(<span class="stringliteral">"{$this-&gt;dirpath}/.unikatni_obsah.php"</span>);
+<a name="l00032"></a>00032     $this-&gt;absolutni_url = $this-&gt;var-&gt;main[0]-&gt;NactiFunkci(<span class="stringliteral">"Funkce"</span>, <span class="stringliteral">"AbsoluteUrl"</span>);
+<a name="l00033"></a>00033   }
+<a name="l00034"></a>00034 
+<a name="l00048"></a><a class="code" href="classStatickeStrankovani.html#939af0d1413e49c14b11370f8b3e7ba5">00048</a>   <span class="keyword">public</span> function <a class="code" href="classStatickeStrankovani.html#939af0d1413e49c14b11370f8b3e7ba5">Strankovani</a>($na_stranku, $pocet_radku, $adresa, $typ = <span class="stringliteral">"limit"</span>, $tvar = 1)
+<a name="l00049"></a>00049   {
+<a name="l00050"></a>00050     $strana = (!Empty($_GET[$this-&gt;get_str]) ? $_GET[$this-&gt;get_str] : 1);
+<a name="l00051"></a>00051     settype($strana, <span class="stringliteral">"integer"</span>);
+<a name="l00052"></a>00052 
+<a name="l00053"></a>00053     settype($na_stranku, <span class="stringliteral">"integer"</span>);
+<a name="l00054"></a>00054     $pocetstran = ceil($pocet_radku / $na_stranku);  <span class="comment">//vypocteny pocet stran podle strankovani</span>
+<a name="l00055"></a>00055 
+<a name="l00056"></a>00056     $mezi = <span class="keyword">false</span>;
+<a name="l00057"></a>00057     <span class="keywordflow">if</span> ($pocetstran &gt; 7)
+<a name="l00058"></a>00058     {
+<a name="l00059"></a>00059       <span class="keywordflow">for</span> ($i = 0; $i &lt; 3; $i++)  <span class="comment">//prvni trojicka</span>
+<a name="l00060"></a>00060       {
+<a name="l00061"></a>00061         $poc = $i + 1;  <span class="comment">//predvipocotani poctu</span>
+<a name="l00062"></a>00062 
+<a name="l00063"></a>00063         <span class="keywordflow">if</span> ($i == 0 &amp;&amp; $strana &gt; 1)  <span class="comment">//predchozi</span>
+<a name="l00064"></a>00064         {
+<a name="l00065"></a>00065           $prev = $strana - 1;
+<a name="l00066"></a>00066           $jdi .= $this-&gt;<a class="code" href="classDefaultModule.html#f43261ee577b5bedbdaff44d21c64d38">NactiUnikatniObsah</a>($this-&gt;unikatni[<span class="stringliteral">"normal_prev_{$tvar}"</span>],
+<a name="l00067"></a>00067                                             ($this-&gt;var-&gt;htaccess ? <span class="stringliteral">"{$this-&gt;absolutni_url}{$adresa}{$prev}"</span> : <span class="stringliteral">"{$adresa}&amp;amp;str={$prev}"</span>));
+<a name="l00068"></a>00068         }
+<a name="l00069"></a>00069 
+<a name="l00070"></a>00070         <span class="keywordflow">if</span> ($poc == $strana)  <span class="comment">//detekce oznacene stranky</span>
+<a name="l00071"></a>00071         {
+<a name="l00072"></a>00072           $jdi .= $this-&gt;<a class="code" href="classDefaultModule.html#f43261ee577b5bedbdaff44d21c64d38">NactiUnikatniObsah</a>($this-&gt;unikatni[<span class="stringliteral">"normal_curr_act_{$tvar}"</span>], $poc);
+<a name="l00073"></a>00073           $aktualni = $poc;
+<a name="l00074"></a>00074         }
+<a name="l00075"></a>00075           <span class="keywordflow">else</span>
+<a name="l00076"></a>00076         {
+<a name="l00077"></a>00077           $jdi .= $this-&gt;<a class="code" href="classDefaultModule.html#f43261ee577b5bedbdaff44d21c64d38">NactiUnikatniObsah</a>($this-&gt;unikatni[<span class="stringliteral">"normal_curr_{$tvar}"</span>],
+<a name="l00078"></a>00078                                             ($this-&gt;var-&gt;htaccess ? <span class="stringliteral">"{$this-&gt;absolutni_url}{$adresa}{$poc}"</span> : <span class="stringliteral">"{$adresa}&amp;amp;str={$poc}"</span>),
+<a name="l00079"></a>00079                                             $poc);
+<a name="l00080"></a>00080         }
+<a name="l00081"></a>00081       }
+<a name="l00082"></a>00082 
+<a name="l00083"></a>00083       <span class="comment">//vypocet povoleni mezi kusu</span>
+<a name="l00084"></a>00084       <span class="keywordflow">if</span> ($strana &gt; 2 &amp;&amp; $strana &lt;= ($pocetstran - 2))
+<a name="l00085"></a>00085       {
+<a name="l00086"></a>00086         $mezi = <span class="keyword">true</span>;
+<a name="l00087"></a>00087       }
+<a name="l00088"></a>00088         <span class="keywordflow">else</span>
+<a name="l00089"></a>00089       {
+<a name="l00090"></a>00090         $jdi = substr($jdi, 0, -2).<span class="stringliteral">" "</span>; <span class="comment">//odebrani carky &lt;- carka za 3</span>
+<a name="l00091"></a>00091         $jdi .= $this-&gt;<a class="code" href="classDefaultModule.html#f43261ee577b5bedbdaff44d21c64d38">NactiUnikatniObsah</a>($this-&gt;unikatni[<span class="stringliteral">"normal_dotted_{$tvar}"</span>]);
+<a name="l00092"></a>00092       }
+<a name="l00093"></a>00093 
+<a name="l00094"></a>00094       <span class="keywordflow">for</span> ($i = $pocetstran - 3; $i &lt; $pocetstran; $i++)  <span class="comment">//posledni trojicka</span>
+<a name="l00095"></a>00095       {
+<a name="l00096"></a>00096         $poc = $i + 1;  <span class="comment">//predvipocotani poctu</span>
+<a name="l00097"></a>00097 
+<a name="l00098"></a>00098         <span class="keywordflow">if</span> ($poc == $strana)  <span class="comment">//detekce oznacene stranky</span>
+<a name="l00099"></a>00099         {
+<a name="l00100"></a>00100           $jdi .= $this-&gt;<a class="code" href="classDefaultModule.html#f43261ee577b5bedbdaff44d21c64d38">NactiUnikatniObsah</a>($this-&gt;unikatni[<span class="stringliteral">"normal_curr_act_{$tvar}"</span>], $poc);
+<a name="l00101"></a>00101           $aktualni = $poc;
+<a name="l00102"></a>00102         }
+<a name="l00103"></a>00103           <span class="keywordflow">else</span>
+<a name="l00104"></a>00104         {
+<a name="l00105"></a>00105           $jdi .= $this-&gt;<a class="code" href="classDefaultModule.html#f43261ee577b5bedbdaff44d21c64d38">NactiUnikatniObsah</a>($this-&gt;unikatni[<span class="stringliteral">"normal_curr_{$tvar}"</span>],
+<a name="l00106"></a>00106                                             ($this-&gt;var-&gt;htaccess ? <span class="stringliteral">"{$this-&gt;absolutni_url}{$adresa}{$poc}"</span> : <span class="stringliteral">"{$adresa}&amp;amp;str={$poc}"</span>),
+<a name="l00107"></a>00107                                             $poc);
+<a name="l00108"></a>00108         }
+<a name="l00109"></a>00109 
+<a name="l00110"></a>00110         <span class="keywordflow">if</span> ($poc == $pocetstran &amp;&amp; $aktualni != $poc) <span class="comment">//dalsi</span>
+<a name="l00111"></a>00111         {
+<a name="l00112"></a>00112           $jdi = substr($jdi, 0, -2); <span class="comment">//odebrani carky</span>
+<a name="l00113"></a>00113           $next = $aktualni + 1;
+<a name="l00114"></a>00114           $jdi .= $this-&gt;<a class="code" href="classDefaultModule.html#f43261ee577b5bedbdaff44d21c64d38">NactiUnikatniObsah</a>($this-&gt;unikatni[<span class="stringliteral">"normal_next_{$tvar}"</span>],
+<a name="l00115"></a>00115                                             ($this-&gt;var-&gt;htaccess ? <span class="stringliteral">"{$this-&gt;absolutni_url}{$adresa}{$next}"</span> : <span class="stringliteral">"{$adresa}&amp;amp;str={$next}"</span>));
+<a name="l00116"></a>00116         }
+<a name="l00117"></a>00117       }
+<a name="l00118"></a>00118     }
+<a name="l00119"></a>00119       <span class="keywordflow">else</span>
+<a name="l00120"></a>00120     {
+<a name="l00121"></a>00121       <span class="keywordflow">for</span> ($i = 0; $i &lt; $pocetstran; $i++)
+<a name="l00122"></a>00122       {
+<a name="l00123"></a>00123         $poc = $i + 1;  <span class="comment">//predvipocotani poctu, posun z 0 indexu</span>
+<a name="l00124"></a>00124 
+<a name="l00125"></a>00125         <span class="keywordflow">if</span> ($i == 0 &amp;&amp; $strana &gt; 1)  <span class="comment">//predchozi</span>
+<a name="l00126"></a>00126         {
+<a name="l00127"></a>00127           $prev = $strana - 1;
+<a name="l00128"></a>00128           $jdi .= $this-&gt;<a class="code" href="classDefaultModule.html#f43261ee577b5bedbdaff44d21c64d38">NactiUnikatniObsah</a>($this-&gt;unikatni[<span class="stringliteral">"normal_prev_{$tvar}"</span>],
+<a name="l00129"></a>00129                                             ($this-&gt;var-&gt;htaccess ? <span class="stringliteral">"{$this-&gt;absolutni_url}{$adresa}{$prev}"</span> : <span class="stringliteral">"{$adresa}&amp;amp;str={$prev}"</span>));
+<a name="l00130"></a>00130         }
+<a name="l00131"></a>00131 
+<a name="l00132"></a>00132         <span class="keywordflow">if</span> ($poc == $strana)  <span class="comment">//detekce oznacene stranky, $str == $strana</span>
+<a name="l00133"></a>00133         {
+<a name="l00134"></a>00134           $jdi .= $this-&gt;<a class="code" href="classDefaultModule.html#f43261ee577b5bedbdaff44d21c64d38">NactiUnikatniObsah</a>($this-&gt;unikatni[<span class="stringliteral">"normal_curr_act_{$tvar}"</span>], $poc);
+<a name="l00135"></a>00135           $aktualni = $poc;
+<a name="l00136"></a>00136         }
+<a name="l00137"></a>00137           <span class="keywordflow">else</span>
+<a name="l00138"></a>00138         {
+<a name="l00139"></a>00139           $jdi .= $this-&gt;<a class="code" href="classDefaultModule.html#f43261ee577b5bedbdaff44d21c64d38">NactiUnikatniObsah</a>($this-&gt;unikatni[<span class="stringliteral">"normal_curr_{$tvar}"</span>],
+<a name="l00140"></a>00140                                             ($this-&gt;var-&gt;htaccess ? <span class="stringliteral">"{$this-&gt;absolutni_url}{$adresa}{$poc}"</span> : <span class="stringliteral">"{$adresa}&amp;amp;str={$poc}"</span>),
+<a name="l00141"></a>00141                                             $poc);
+<a name="l00142"></a>00142         }
+<a name="l00143"></a>00143 
+<a name="l00144"></a>00144         <span class="keywordflow">if</span> ($i == ($pocetstran - 1) &amp;&amp; $aktualni != $poc) <span class="comment">//dalsi</span>
+<a name="l00145"></a>00145         {
+<a name="l00146"></a>00146           $jdi = substr($jdi, 0, -2); <span class="comment">//odebrani carky</span>
+<a name="l00147"></a>00147 
+<a name="l00148"></a>00148           $next = $aktualni + 1;
+<a name="l00149"></a>00149           $jdi .= $this-&gt;<a class="code" href="classDefaultModule.html#f43261ee577b5bedbdaff44d21c64d38">NactiUnikatniObsah</a>($this-&gt;unikatni[<span class="stringliteral">"normal_next_{$tvar}"</span>],
+<a name="l00150"></a>00150                                             ($this-&gt;var-&gt;htaccess ? <span class="stringliteral">"{$this-&gt;absolutni_url}{$adresa}{$next}"</span> : <span class="stringliteral">"{$adresa}&amp;amp;str={$next}"</span>));
+<a name="l00151"></a>00151         }
+<a name="l00152"></a>00152       }
+<a name="l00153"></a>00153     }
+<a name="l00154"></a>00154 
+<a name="l00155"></a>00155     <span class="keywordflow">if</span> ($mezi)
+<a name="l00156"></a>00156     {
+<a name="l00157"></a>00157       $prev = $strana - 1;  <span class="comment">//predchozi</span>
+<a name="l00158"></a>00158       $pred = $this-&gt;<a class="code" href="classDefaultModule.html#f43261ee577b5bedbdaff44d21c64d38">NactiUnikatniObsah</a>($this-&gt;unikatni[<span class="stringliteral">"normal_prev_{$tvar}"</span>],
+<a name="l00159"></a>00159                                         ($this-&gt;var-&gt;htaccess ? <span class="stringliteral">"{$this-&gt;absolutni_url}{$adresa}{$prev}"</span> : <span class="stringliteral">"{$adresa}&amp;amp;str={$prev}"</span>));
+<a name="l00160"></a>00160 
+<a name="l00161"></a>00161       $i = 0;
+<a name="l00162"></a>00162       $poc = $i + 1;  <span class="comment">//prvni</span>
+<a name="l00163"></a>00163       $jdi = $this-&gt;<a class="code" href="classDefaultModule.html#f43261ee577b5bedbdaff44d21c64d38">NactiUnikatniObsah</a>($this-&gt;unikatni[<span class="stringliteral">"normal_mezi_prev_{$tvar}"</span>],
+<a name="l00164"></a>00164                                       $pred,
+<a name="l00165"></a>00165                                       ($this-&gt;var-&gt;htaccess ? <span class="stringliteral">"{$this-&gt;absolutni_url}{$adresa}{$poc}"</span> : <span class="stringliteral">"{$adresa}&amp;amp;str={$poc}"</span>),
+<a name="l00166"></a>00166                                       $poc);
+<a name="l00167"></a>00167 
+<a name="l00168"></a>00168       $poc = $strana - 1;  <span class="comment">//prostredni - 1</span>
+<a name="l00169"></a>00169       $jdi .= $this-&gt;<a class="code" href="classDefaultModule.html#f43261ee577b5bedbdaff44d21c64d38">NactiUnikatniObsah</a>($this-&gt;unikatni[<span class="stringliteral">"normal_curr_{$tvar}"</span>],
+<a name="l00170"></a>00170                                         ($this-&gt;var-&gt;htaccess ? <span class="stringliteral">"{$this-&gt;absolutni_url}{$adresa}{$poc}"</span> : <span class="stringliteral">"{$adresa}&amp;amp;str={$poc}"</span>),
+<a name="l00171"></a>00171                                         $poc);
+<a name="l00172"></a>00172 
+<a name="l00173"></a>00173       $poc = $strana;  <span class="comment">//prostredni</span>
+<a name="l00174"></a>00174       $jdi .= $this-&gt;<a class="code" href="classDefaultModule.html#f43261ee577b5bedbdaff44d21c64d38">NactiUnikatniObsah</a>($this-&gt;unikatni[<span class="stringliteral">"normal_curr_act_{$tvar}"</span>], $poc);
+<a name="l00175"></a>00175 
+<a name="l00176"></a>00176       $aktualni = $strana;  <span class="comment">//prostedni clen</span>
+<a name="l00177"></a>00177 
+<a name="l00178"></a>00178       $poc = $strana + 1;  <span class="comment">//prostredni + 1</span>
+<a name="l00179"></a>00179       $jdi .= $this-&gt;<a class="code" href="classDefaultModule.html#f43261ee577b5bedbdaff44d21c64d38">NactiUnikatniObsah</a>($this-&gt;unikatni[<span class="stringliteral">"normal_mezi_prev_{$tvar}"</span>],
+<a name="l00180"></a>00180                                       <span class="stringliteral">""</span>,
+<a name="l00181"></a>00181                                       ($this-&gt;var-&gt;htaccess ? <span class="stringliteral">"{$this-&gt;absolutni_url}{$adresa}{$poc}"</span> : <span class="stringliteral">"{$adresa}&amp;amp;str={$poc}"</span>),
+<a name="l00182"></a>00182                                       $poc);
+<a name="l00183"></a>00183 
+<a name="l00184"></a>00184       $poc = $pocetstran;  <span class="comment">//posledni</span>
+<a name="l00185"></a>00185       $jdi .= $this-&gt;<a class="code" href="classDefaultModule.html#f43261ee577b5bedbdaff44d21c64d38">NactiUnikatniObsah</a>($this-&gt;unikatni[<span class="stringliteral">"normal_curr_{$tvar}"</span>],
+<a name="l00186"></a>00186                                         ($this-&gt;var-&gt;htaccess ? <span class="stringliteral">"{$this-&gt;absolutni_url}{$adresa}{$poc}"</span> : <span class="stringliteral">"{$adresa}&amp;amp;str={$poc}"</span>),
+<a name="l00187"></a>00187                                         $poc);
+<a name="l00188"></a>00188 
+<a name="l00189"></a>00189       $jdi = substr($jdi, 0, -2); <span class="comment">//odebrani carky</span>
+<a name="l00190"></a>00190 
+<a name="l00191"></a>00191       $next = $aktualni + 1;  <span class="comment">//dalsi</span>
+<a name="l00192"></a>00192       $jdi .= $this-&gt;<a class="code" href="classDefaultModule.html#f43261ee577b5bedbdaff44d21c64d38">NactiUnikatniObsah</a>($this-&gt;unikatni[<span class="stringliteral">"normal_next_{$tvar}"</span>],
+<a name="l00193"></a>00193                                         ($this-&gt;var-&gt;htaccess ? <span class="stringliteral">"{$this-&gt;absolutni_url}{$adresa}{$next}"</span> : <span class="stringliteral">"{$adresa}&amp;amp;str={$next}"</span>));
+<a name="l00194"></a>00194     }
+<a name="l00195"></a>00195 
+<a name="l00196"></a>00196     $jdi = substr($jdi, 0, -2); <span class="comment">//odebrani carky</span>
+<a name="l00197"></a>00197 
+<a name="l00198"></a>00198     <a class="code" href="_8unikatni__fukce_8php.html#e241cf0159803673d118f68d99e6342f">$result</a>[0] = $this-&gt;<a class="code" href="classDefaultModule.html#f43261ee577b5bedbdaff44d21c64d38">NactiUnikatniObsah</a>($this-&gt;unikatni[<span class="stringliteral">"normal_strankovani_{$tvar}"</span>],
+<a name="l00199"></a>00199                                           $jdi,
+<a name="l00200"></a>00200                                           $strana,
+<a name="l00201"></a>00201                                           $pocetstran);
+<a name="l00202"></a>00202 
+<a name="l00203"></a>00203     <span class="keywordflow">switch</span> ($typ)
+<a name="l00204"></a>00204     {
+<a name="l00205"></a>00205       <span class="keywordflow">case</span> <span class="stringliteral">"limit"</span>:
+<a name="l00206"></a>00206         $od = ($strana - 1) * $na_stranku;
+<a name="l00207"></a>00207         <a class="code" href="_8unikatni__fukce_8php.html#e241cf0159803673d118f68d99e6342f">$result</a>[1] = <span class="stringliteral">"LIMIT {$od}, {$na_stranku}"</span>; <span class="comment">//dodatecny dotaz do DB</span>
+<a name="l00208"></a>00208       <span class="keywordflow">break</span>;
+<a name="l00209"></a>00209 
+<a name="l00210"></a>00210       <span class="keywordflow">case</span> <span class="stringliteral">"array"</span>:
+<a name="l00211"></a>00211         <a class="code" href="_8unikatni__fukce_8php.html#e241cf0159803673d118f68d99e6342f">$result</a>[1][0] = ($strana - 1) * $na_stranku;
+<a name="l00212"></a>00212         <a class="code" href="_8unikatni__fukce_8php.html#e241cf0159803673d118f68d99e6342f">$result</a>[1][1] = (($strana - 1) * $na_stranku) + $na_stranku - 1;
+<a name="l00213"></a>00213       <span class="keywordflow">break</span>;
+<a name="l00214"></a>00214     }
+<a name="l00215"></a>00215 
+<a name="l00216"></a>00216     <span class="keywordflow">return</span> <a class="code" href="_8unikatni__fukce_8php.html#e241cf0159803673d118f68d99e6342f">$result</a>;
+<a name="l00217"></a>00217   }
+<a name="l00218"></a>00218 }
+<a name="l00219"></a>00219 ?&gt;
+</pre></div></div>
+<hr size="1"><address style="text-align: right;"><small>Generováno Tue Aug 4 13:38:11 2009 pro projekt Novy vychozi PHP layout programem&nbsp;
+<a href="http://www.doxygen.org/index.html">
+<img src="doxygen.png" alt="doxygen" align="middle" border="0"></a> 1.5.8 </small></address>
+</body>
+</html>

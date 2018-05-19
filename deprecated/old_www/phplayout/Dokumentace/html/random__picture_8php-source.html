@@ -1,0 +1,89 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>Novy vychozi PHP layout: Zdrojový soubor /var/www/phplayout/modules/random_picture/random_picture.php</title>
+<link href="tabs.css" rel="stylesheet" type="text/css">
+<link href="doxygen.css" rel="stylesheet" type="text/css">
+</head><body>
+<!-- Generováno programem Doxygen 1.5.8 -->
+<div class="navigation" id="top">
+  <div class="tabs">
+    <ul>
+      <li><a href="index.html"><span>Hlavní&nbsp;stránka</span></a></li>
+      <li><a href="annotated.html"><span>Třídy</span></a></li>
+      <li class="current"><a href="files.html"><span>Soubory</span></a></li>
+    </ul>
+  </div>
+  <div class="tabs">
+    <ul>
+      <li><a href="files.html"><span>Seznam&nbsp;souborů</span></a></li>
+      <li><a href="globals.html"><span>Symboly&nbsp;v&nbsp;souborech</span></a></li>
+    </ul>
+  </div>
+<h1>/var/www/phplayout/modules/random_picture/random_picture.php</h1><a href="random__picture_8php.html">Zobrazit dokumentaci tohoto souboru.</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 &lt;?php
+<a name="l00002"></a>00002 
+<a name="l00013"></a><a class="code" href="classRandomPicture.html">00013</a> <span class="keyword">class </span><a class="code" href="classRandomPicture.html">RandomPicture</a> <span class="keyword">extends</span> <a class="code" href="classDefaultModule.html">DefaultModule</a>
+<a name="l00014"></a>00014 {
+<a name="l00015"></a><a class="code" href="classRandomPicture.html#0edc264eff660006a2854bd4e587307d">00015</a>   <span class="keyword">private</span> <a class="code" href="classRandomPicture.html#0edc264eff660006a2854bd4e587307d">$var</a>, <a class="code" href="classRandomPicture.html#981115feba7227701f253047b967f7a0">$dirpath</a>, <a class="code" href="classRandomPicture.html#3937a654b85f57d140a07e7f4631513d">$unikatni</a>;
+<a name="l00016"></a><a class="code" href="classRandomPicture.html#50ac25a2887c3d09601b2cd6a0878011">00016</a>   <span class="keyword">private</span> <a class="code" href="classRandomPicture.html#50ac25a2887c3d09601b2cd6a0878011">$zdrojobr</a> = <span class="stringliteral">"image"</span>; <span class="comment">//zdrojova cesta obrazku</span>
+<a name="l00017"></a>00017 
+<a name="l00018"></a><a class="code" href="classRandomPicture.html#78379c9ce03a5816582b8e06afc4d5f9">00018</a>   <span class="keyword">private</span> <a class="code" href="classRandomPicture.html#78379c9ce03a5816582b8e06afc4d5f9">$obr</a> = array (array(<span class="stringliteral">"src"</span> =&gt; <span class="stringliteral">"..."</span>, <span class="comment">//nadefinovane obrazky</span>
+<a name="l00019"></a>00019                               <span class="stringliteral">"alt"</span> =&gt; <span class="stringliteral">"...."</span>,
+<a name="l00020"></a>00020                               <span class="stringliteral">"id"</span> =&gt; <span class="stringliteral">""</span>,
+<a name="l00021"></a>00021                               <span class="stringliteral">"class"</span> =&gt; <span class="stringliteral">""</span>,
+<a name="l00022"></a>00022                               <span class="stringliteral">"width"</span> =&gt; <span class="stringliteral">""</span>,
+<a name="l00023"></a>00023                               <span class="stringliteral">"height"</span> =&gt; <span class="stringliteral">""</span>,
+<a name="l00024"></a>00024                               <span class="stringliteral">"href"</span> =&gt; <span class="stringliteral">""</span>),
+<a name="l00025"></a>00025                         );
+<a name="l00026"></a>00026 
+<a name="l00034"></a><a class="code" href="classRandomPicture.html#e44a48af7ee849b4dabaee53ac89325d">00034</a>   <span class="keyword">public</span> function <a class="code" href="classRandomPicture.html#e44a48af7ee849b4dabaee53ac89325d">__construct</a>(&amp;<a class="code" href="classRandomPicture.html#0edc264eff660006a2854bd4e587307d">$var</a>, $index) <span class="comment">//konstruktor</span>
+<a name="l00035"></a>00035   {
+<a name="l00036"></a>00036     $this-&gt;var = <a class="code" href="classRandomPicture.html#0edc264eff660006a2854bd4e587307d">$var</a>;
+<a name="l00037"></a>00037     $this-&gt;dirpath = dirname($this-&gt;var-&gt;moduly[$index][<span class="stringliteral">"include"</span>]);
+<a name="l00038"></a>00038 
+<a name="l00039"></a>00039     $this-&gt;unikatni = $this-&gt;<a class="code" href="classDefaultModule.html#f9bc13977b7099f00c4a74192ce85dce">NactiObsahSouboru</a>(<span class="stringliteral">"{$this-&gt;dirpath}/.unikatni_obsah.php"</span>);
+<a name="l00040"></a>00040 
+<a name="l00041"></a>00041     $this-&gt;zdrojobr = $this-&gt;<a class="code" href="classDefaultModule.html#f43261ee577b5bedbdaff44d21c64d38">NactiUnikatniObsah</a>($this-&gt;unikatni[<span class="stringliteral">"set_zdrojobr"</span>]);
+<a name="l00042"></a>00042   }
+<a name="l00043"></a>00043 
+<a name="l00050"></a><a class="code" href="classRandomPicture.html#52b8a18c1bab98707d1e03f40e79c31d">00050</a>   <span class="keyword">public</span> function <a class="code" href="classRandomPicture.html#52b8a18c1bab98707d1e03f40e79c31d">Obrazek</a>($tvar = 1)
+<a name="l00051"></a>00051   {
+<a name="l00052"></a>00052     $this-&gt;obr = $this-&gt;<a class="code" href="classDefaultModule.html#f43261ee577b5bedbdaff44d21c64d38">NactiUnikatniObsah</a>($this-&gt;unikatni[<span class="stringliteral">"normal_set_obr_{$tvar}"</span>]);
+<a name="l00053"></a>00053 
+<a name="l00054"></a>00054     $nahoda = rand(0, count($this-&gt;obr) - 1);
+<a name="l00055"></a>00055 
+<a name="l00056"></a>00056     $path = <span class="stringliteral">"{$this-&gt;dirpath}/{$this-&gt;zdrojobr}"</span>;
+<a name="l00057"></a>00057     $cesta = (!Empty($this-&gt;obr[$nahoda][<span class="stringliteral">"src"</span>]) &amp;&amp; file_exists(<span class="stringliteral">"{$path}/{$this-&gt;obr[$nahoda]["</span>src<span class="stringliteral">"]}"</span>) ? <span class="stringliteral">" src=\"{$path}/{$this-&gt;obr[$nahoda]["</span>src<span class="stringliteral">"]}\""</span> : <span class="stringliteral">""</span>);
+<a name="l00058"></a>00058     $alt = (!Empty($this-&gt;obr[$nahoda][<span class="stringliteral">"alt"</span>]) ? <span class="stringliteral">" alt=\"{$this-&gt;obr[$nahoda]["</span>alt<span class="stringliteral">"]}\""</span> : <span class="stringliteral">""</span>);
+<a name="l00059"></a>00059     $id = (!Empty($this-&gt;obr[$nahoda][<span class="stringliteral">"id"</span>]) ? <span class="stringliteral">" id=\"{$this-&gt;obr[$nahoda]["</span><span class="keywordtype">id</span><span class="stringliteral">"]}\""</span> : <span class="stringliteral">""</span>);
+<a name="l00060"></a>00060     $class = (!Empty($this-&gt;obr[$nahoda][<span class="stringliteral">"class"</span>]) ? <span class="stringliteral">" class=\"{$this-&gt;obr[$nahoda]["</span><span class="keyword">class</span><span class="stringliteral">"]}\""</span> : <span class="stringliteral">""</span>);
+<a name="l00061"></a>00061 
+<a name="l00062"></a>00062     $width = (!Empty($this-&gt;obr[$nahoda][<span class="stringliteral">"width"</span>]) ? <span class="stringliteral">" width=\"{$this-&gt;obr[$nahoda]["</span>width<span class="stringliteral">"]}\""</span> : <span class="stringliteral">""</span>);
+<a name="l00063"></a>00063     $height = (!Empty($this-&gt;obr[$nahoda][<span class="stringliteral">"height"</span>]) ? <span class="stringliteral">" height=\"{$this-&gt;obr[$nahoda]["</span>height<span class="stringliteral">"]}\""</span> : <span class="stringliteral">""</span>);
+<a name="l00064"></a>00064 
+<a name="l00065"></a>00065     $href = (!Empty($this-&gt;obr[$nahoda][<span class="stringliteral">"href"</span>]) ? $this-&gt;<a class="code" href="classDefaultModule.html#f43261ee577b5bedbdaff44d21c64d38">NactiUnikatniObsah</a>($this-&gt;unikatni[<span class="stringliteral">"normal_href_begin_{$tvar}"</span>],
+<a name="l00066"></a>00066                                                                             <span class="stringliteral">"{$path}/{$this-&gt;obr[$nahoda]["</span>href<span class="stringliteral">"]}"</span>,
+<a name="l00067"></a>00067                                                                             $this-&gt;obr[$nahoda][<span class="stringliteral">"alt"</span>]) : <span class="stringliteral">""</span>);
+<a name="l00068"></a>00068 
+<a name="l00069"></a>00069     $href_end = (!Empty($this-&gt;obr[$nahoda][<span class="stringliteral">"href"</span>]) ? $this-&gt;<a class="code" href="classDefaultModule.html#f43261ee577b5bedbdaff44d21c64d38">NactiUnikatniObsah</a>($this-&gt;unikatni[<span class="stringliteral">"normal_href_end_{$tvar}"</span>]) : <span class="stringliteral">""</span>);
+<a name="l00070"></a>00070 
+<a name="l00071"></a>00071     <a class="code" href="_8unikatni__fukce_8php.html#e241cf0159803673d118f68d99e6342f">$result</a> = $this-&gt;<a class="code" href="classDefaultModule.html#f43261ee577b5bedbdaff44d21c64d38">NactiUnikatniObsah</a>($this-&gt;unikatni[<span class="stringliteral">"normal_vypis_obr_{$tvar}"</span>],
+<a name="l00072"></a>00072                                         $href,
+<a name="l00073"></a>00073                                         $href_end,
+<a name="l00074"></a>00074                                         $cesta,
+<a name="l00075"></a>00075                                         $alt,
+<a name="l00076"></a>00076                                         $id,
+<a name="l00077"></a>00077                                         $class,
+<a name="l00078"></a>00078                                         $width,
+<a name="l00079"></a>00079                                         $height,
+<a name="l00080"></a>00080                                         $this-&gt;obr[$nahoda][<span class="stringliteral">"alt"</span>]);
+<a name="l00081"></a>00081 
+<a name="l00082"></a>00082     <span class="keywordflow">return</span> <a class="code" href="_8unikatni__fukce_8php.html#e241cf0159803673d118f68d99e6342f">$result</a>;
+<a name="l00083"></a>00083   }
+<a name="l00084"></a>00084 }
+<a name="l00085"></a>00085 ?&gt;
+</pre></div></div>
+<hr size="1"><address style="text-align: right;"><small>Generováno Thu Jun 4 11:19:47 2009 pro projekt Novy vychozi PHP layout programem&nbsp;
+<a href="http://www.doxygen.org/index.html">
+<img src="doxygen.png" alt="doxygen" align="middle" border="0"></a> 1.5.8 </small></address>
+</body>
+</html>

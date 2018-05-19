@@ -1,0 +1,28 @@
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>
+      Dynamická změna textu
+    </title>
+
+    <script language = "JavaScript">
+      function zmenHlavicku()
+      {
+        var hlavicka = document.getElementById("hlavicka");
+        hlavicka.outerHTML = "<h3>Zde je nový text</h3>";
+      }
+    </script>
+
+  </head>
+
+  <body>
+    <center>
+      <h1 id="hlavicka" onclick="zmenHlavicku()">
+        Dynamická změna textu
+      </h1>
+
+      Klepněte na nadpis pro jeho změnu.
+    </center>
+
+  </body>
+</html>

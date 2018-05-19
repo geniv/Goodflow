@@ -1,0 +1,61 @@
+<HTML>
+  <HEAD>
+    <TITLE>Uložení pozice</TITLE>
+
+    <SCRIPT Language="JavaScript" Src=cookies.js></SCRIPT>
+
+    <SCRIPT Language="JavaScript">
+      <!--
+        // Umí prohlížeè scrollovat?
+        var ScrollEnabled = (window.scrollTo) ? 1 : 0;
+
+        // Funkce pro uložení pozice
+        function SavePos (){
+          if (!ScrollEnabled) return;
+
+          // Zjištìní pozice v dokumentu
+          X = document.body ? document.body.scrollLeft : pageXOffset;
+          Y = document.body ? document.body.scrollTop : pageYOffset;
+
+          // Zapsání pozice do cookie
+          WriteCookie ("ScrollPos", X + "_" + Y, 24*30);
+        }
+
+        // Funkce pro naètení pozice z cookie
+        function LoadPos (){
+          if (!ScrollEnabled) return;
+
+          // Zjištìní aktuální pozice v dokumentu
+          X = document.body ? document.body.scrollLeft : pageXOffset;
+          Y = document.body ? document.body.scrollTop : pageYOffset;
+
+          // Naètení hodnoty cookie
+          SPos = ReadCookie ("ScrollPos", X + "_" + Y);
+          if (!SPos) return;
+
+          // Rozdìlení øetìzce podle znaku "_"
+          Coords = SPos.split ("_");
+
+          // Vypreparování uložených souøadnic a jejich nastavení
+          if (Coords.length == 2)
+            scrollTo(parseInt(Coords[0]), parseInt(Coords[1]));
+        }
+      // -->
+    </SCRIPT>
+  </HEAD>
+
+  <BODY onLoad="LoadPos()" onUnload="SavePos()">
+    Rozsáhlý text 1...<BR><BR><BR><BR>
+    Rozsáhlý text 2...<BR><BR><BR><BR>
+    Rozsáhlý text 3...<BR><BR><BR><BR>
+    Rozsáhlý text 4...<BR><BR><BR><BR>
+    Rozsáhlý text 5...<BR><BR><BR><BR>
+    Rozsáhlý text 6...<BR><BR><BR><BR>
+    Rozsáhlý text 7...<BR><BR><BR><BR>
+    Rozsáhlý text 8...<BR><BR><BR><BR>
+    Rozsáhlý text 9...<BR><BR><BR><BR>
+    Rozsáhlý text 10...<BR><BR><BR><BR>
+    Rozsáhlý text 11...<BR><BR><BR><BR>
+  </BODY>
+</HTML>
+

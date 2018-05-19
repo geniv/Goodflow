@@ -1,0 +1,51 @@
+ <HTML>
+  <HEAD>
+    <TITLE> Seznam odkazù </TITLE>
+    <SCRIPT Language="JavaScript">
+    <!--
+      // Funkce generující seznam odkazù
+      function WriteLinks(){
+        // Poèet odkazù ve stránce
+        var LinksCount = document.links.length;
+        // Obsahuje-li stránka nìjaké odkazy
+        if (LinksCount > 0){
+          // Zapíše se hlavièka seznamu
+          document.write ('<HR><B>'+
+           'Dokument obsahuje tyto odkazy:</B><UL>');
+          // Zapíšou se jednotlivé odkazy
+          for (var i=0; i<LinksCount; i++){
+            document.write ('<LI><A Href="'+document.links[i]+
+              '">'+document.links[i]+'</A></LI>');
+          }
+          // Konec seznamu
+          document.write ('</UL>');
+        }
+      }
+    // -->
+    </SCRIPT>
+  </HEAD>
+  
+  <BODY>
+    V magazínu informaènì vyspìlých jedincù
+
+    <A Href="http://www.swnet.cz">SWNet</A>
+    naleznete dennì aktualizované webové zpravodajství ze svìta IT.
+    Pokud se zajímáte o dìní na trhu informaèních technologií,
+    doporuèil bych vám specializovaný mesíèník
+
+    <A Href="http://www.inside.cz">Inside</A>.
+
+    A nesmíme také zapomenout na klasické
+
+    <A Href="http://swn.softnov.cz">Softwarové noviny</A> -
+
+    èasopis s názorem, pøehledem a nadhledem.
+
+    <SCRIPT Language="JavaScript">
+    <!--
+      WriteLinks();
+    // -->
+    </SCRIPT>
+  </BODY>
+</HTML>
+

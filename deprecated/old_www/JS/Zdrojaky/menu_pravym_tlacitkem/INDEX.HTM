@@ -1,0 +1,201 @@
+
+<style type="text/css">
+.link{
+cursor:default;
+text-decoration:none;
+color:black;
+font-size:10pt;
+font-family:sans-serif;
+padding:5;
+}
+
+.normtext{
+color:black;
+font-size:10pt;
+font-family:sans-serif;
+font-weight:bold;
+padding:3;
+}
+
+#conmenu {
+cursor:default;
+position:absolute;
+top:0px;
+left:0px;
+visibility:hidden;
+background-color:lightgrey;
+layer-background-color:lightgrey;
+border:outset 2px;
+font-size:10pt;
+font-family:sans-serif;
+font-weight:normal;
+color:#00436e;
+width:160px;
+padding:1 2 0 2;
+}
+
+#conshadow{
+position:absolute;
+top:0px;
+left:0px;
+visibility:hidden;
+background-color:black;
+layer-background-color:black;
+}
+
+</style>
+
+
+
+
+</head>
+
+<body>
+
+
+
+
+
+
+
+
+<script language="javascript">
+
+
+var menuNormColor="lightgrey";   
+var menuHoverColor="#0084d8";  
+var menu=Array();
+menu[0]=['<center>- Java Script Planet -</center>'];
+menu[1]=['Vypiš text', 'javascript:alert(\'Java Script Planet\')', ''];
+menu[2]=['Pošli nám e-mail', 'mailto:javascript@agentury.com', ''];
+menu[3]=['Vytiskni tuto stránku', 'javascript:window.print();', ''];
+menu[4]=['Obnov stránku','javascript:history.go(0)', ''];
+menu[5]=['<center>- Odkazy -</center>'];
+menu[6]=['Java Script Planet', 'http://linux.programator.cz/projekty/javascript', '_blank'];
+menu[7]=['Hledej-najdi', 'http://www.agentury.com', '_blank'];
+menu[8]=['Trotlík', 'http://www.trotlik.com', '_blank'];
+menu[9]=['Klikni pravým tlaèítkem a menu se opìt stratí'];
+
+var disableNS4=false;
+
+ns4 = (navigator.appName.indexOf("Netscape")>=0 && document.layers)? true : false;
+ie4 = (document.all && !document.getElementById)? true : false;
+ie5 = (document.all && document.getElementById)? true : false;
+ns6 = (document.getElementById && navigator.appName.indexOf("Netscape")>=0 )? true: false;
+w3c = (document.getElementById)? true : false;
+var mx=0;
+var my=0;
+var conmenu;
+var conshadow;
+var windowloaded=false;
+var opened=false;
+
+function setc(ref,c){
+if(ns4)ref.bgColor=c;
+else ref.style.backgroundColor=c;
+}
+
+var txt='<div id="conshadow"> </div>';
+txt+='<div id="conmenu">';
+for(i=0;i<menu.length;i++){
+if(menu[i].length<3){
+txt+='<ilayer><div class="normtext">'+menu[i][0]+'</div></ilayer>';
+}else{
+txt+=(ns4)?'<ilayer width="100%" bgcolor="'+menuNormColor+'"><layer width="100%" onmouseover="setc(this,\''+menuHoverColor+'\')" onmouseout="setc(this,\''+menuNormColor+'\')">':'<div class="link" style="background-color:'+menuNormColor+'" onmouseover="setc(this,\''+menuHoverColor+'\')" onmouseout="setc(this,\''+menuNormColor+'\')">';
+txt+='<a href="'+menu[i][1]+'" target="'+menu[i][2]+'" class="link">'+menu[i][0]+'</a>';
+txt+=(ns4)?'</layer></ilayer>':'</div>';
+}}
+txt+='</div>';
+document.write(txt);
+
+function ns4trap(evt){
+if(evt.which==2||evt.which==3){
+showmenu();
+return false;
+}}
+
+function showmenu(){
+if(windowloaded){
+if(opened){
+if(ns4){
+conmenu.visibility="hide";
+conshadow.visibility="hide";
+conmenu.moveTo(0,0);
+conshadow.moveTo(0,0);
+}else{
+conmenu.style.visibility="hidden";
+conshadow.style.visibility="hidden";
+conmenu.style.left='0px';
+conmenu.style.top='0px';
+conshadow.style.left='0px';
+conshadow.style.top='0px';
+}
+opened=false;
+}else{
+opened=true;
+var wh=(ie4||ie5)?document.body.clientHeight:window.innerHeight;
+var sx=(ie4||ie5)?document.body.scrollLeft:pageXOffset;
+var sy=(ie4||ie5)?document.body.scrollTop:pageYOffset;
+if(ns4){
+conmenu.moveTo(mx,my);
+conshadow.moveTo(mx+8,my+8);
+conmenu.visibility="show";
+conshadow.visibility="show";
+}else{
+conmenu.style.left=mx+((ie4||ie5)?sx:0)+'px';
+conmenu.style.top=my+((ie4||ie5)?sy:0)+'px';
+conshadow.style.left=mx+10+((ie4||ie5)?sx:0)+'px';
+conshadow.style.top=my+10+((ie4||ie5)?sy:0)+'px';
+setTimeout('conmenu.style.visibility="visible"; conshadow.style.visibility="visible"; ',50);
+}}}}
+
+if(ns4&&!disableNS4){
+document.captureEvents(Event.MOUSEDOWN|Event.MOUSEMOVE);
+document.onmousedown=ns4trap;
+}else{
+document.oncontextmenu=function(){
+showmenu();
+return false;
+}}
+
+document.onmousemove=function(evt){
+mx=(ie4||ie5)?event.clientX:evt.pageX;
+my=(ie4||ie5)?event.clientY:evt.pageY;
+}
+
+function getidheight(id){
+if(ns4)return id.clip.height;
+if(ie4||ie5)return id.clientHeight;
+if(w3c)return id.offsetHeight;
+}
+
+function getidwidth(id){
+if(ns4)return id.clip.right-id.clip.left;
+if(ie4)return id.clientWidth;
+if(w3c)return id.offsetWidth;
+}
+
+window.onload=function(){
+  windowloaded=true;
+  conmenu=(ns4)?document.layers['conmenu']:(ie4)?document.all['conmenu']:document.getElementById('conmenu');
+  conshadow=(ns4)?document.layers['conshadow']:(ie4)?document.all['conshadow']:document.getElementById('conshadow');
+  if(ns4){
+  conshadow.clip.height=conmenu.document.height;
+  conshadow.clip.width=conmenu.document.width;
+  conmenu.clip.bottom=getidheight(conshadow);
+  }else{
+  if(ie4||ie5)conshadow.style.filter="alpha(opacity=50)";
+  if(ns6||!ie4||!ie5)conshadow.style.MozOpacity=.5;
+  conshadow.style.height=getidheight(conmenu);
+  conshadow.style.width=getidwidth(conmenu);
+}
+
+
+}
+
+window.onresize=function(){
+if(ns4)setTimeout('history.go(0)',200);
+
+}
+
+</script>

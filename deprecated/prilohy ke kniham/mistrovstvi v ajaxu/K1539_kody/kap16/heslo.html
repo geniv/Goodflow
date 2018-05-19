@@ -1,0 +1,57 @@
+<html> 
+  <head> 
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>Použití filtru pro autentizaci</title> 
+
+    <script language="javascript">
+      var XMLHttpRequestObjekt = false; 
+
+      if (window.XMLHttpRequest) {
+        XMLHttpRequestObjekt = new XMLHttpRequest();
+      } else if (window.ActiveXObject) {
+        XMLHttpRequestObjekt = new 
+          ActiveXObject("Microsoft.XMLHTTP");
+      }
+
+      function ziskejData(zdrojDat, divID) 
+      { 
+        if(XMLHttpRequestObjekt) {
+          var obj = document.getElementById(divID); 
+          XMLHttpRequestObjekt.open("POST", zdrojDat); 
+          XMLHttpRequestObjekt.setRequestHeader('Content-Type', 
+            'application/x-www-form-urlencoded'); 
+
+          XMLHttpRequestObjekt.onreadystatechange = function() 
+          { 
+            if (XMLHttpRequestObjekt.readyState == 4 && 
+              XMLHttpRequestObjekt.status == 200) { 
+                obj.innerHTML = XMLHttpRequestObjekt.responseText; 
+            } 
+          } 
+
+          XMLHttpRequestObjekt.send("heslo=" + 
+            document.getElementById("heslo").value); 
+        }
+      }
+    </script>
+  </head> 
+  
+  <body>
+
+    <H1>Použití filtru pro autentizaci</H1>
+
+    <form>
+      Zadejte heslo:
+     <input id="heslo" type="password" name="heslo">
+     <br>
+     <br>
+     <input type="button" value="Získej data"
+       onclick="ziskejData('heslo.jsp', 'cilovyDiv')">
+    </form>
+
+    <div id="cilovyDiv">
+      <p>Získaná data se zobrazí na tomto místě.</p> 
+    </div> 
+
+  </body> 
+</html>

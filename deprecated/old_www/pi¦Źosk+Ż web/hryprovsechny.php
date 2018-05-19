@@ -1,0 +1,4 @@
+Hry pro všechny
+<?
+
+?>

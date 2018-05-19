@@ -1,0 +1,74 @@
+<HTML>
+  <HEAD>
+    <TITLE>Odjezdy Tramvaje</TITLE>
+    <SCRIPT Language="JavaScript">
+      <!--
+      // Pole obsahující odjezdy tramvaje
+      Times=new Array (
+        003,
+        451,
+        526, 556,
+        621, 636, 657,
+        715, 730, 737, 755,
+        812, 828, 844,
+        901, 916, 929, 942, 954,
+        1007, 1020, 1032, 1045, 1058,
+        1110, 1123, 1136, 1148,
+        1201, 1214, 1226, 1239, 1252,
+        1304, 1317, 1330, 1342, 1355,
+        1408, 1420, 1433, 1446, 1458,
+        1511, 1524, 1536, 1549,
+        1602, 1614, 1627, 1640, 1653,
+        1708, 1729, 1749,
+        1806, 1823, 1842, 1859,
+        1916, 1934, 1951,
+        2009, 2026, 2049,
+        2120,
+        2200, 2240,
+        2321
+      );
+
+      // Funkce zobrazující, kdy jede další tramvaj
+      function ShowNextTram() {
+        // Aktuální èas
+        var Now = new Date();
+
+        // Pøevod èasu na formát, který je použit
+        // v poli odjezdù tramvaje
+        var Time = 100*Now.getHours()+Now.getMinutes();
+
+        // V této promìnné bude uložen (po probìhnutí cyklu)
+        // odjezd nejbližší tramvaje
+        var NextTime = Times[0];
+        for (var i=0;i<Times.length;i++)
+          // Vezme se první èas vìtší, než je aktuální
+          // a to bude odjezd pøíští tramvaje
+          if (Times[i]>=Time) {
+            NextTime = Times[i];
+            break;
+          }
+
+        // Údaj z pole se pøevede na èas
+        NextTime = ((NextTime - (NextTime % 100))/100)+
+          ":"+(NextTime % 100);
+
+        // Výsledek se zapíše do formuláøe
+        document.frmMain.edNextTime.value = NextTime;
+
+        // Nastaví se èasovaè na tutéž funkci, která
+        // zaktualizuje èas další tramvaje
+        // (po tøiceti sekundách)
+        setTimeout("ShowNextTram()",30000);
+      }
+      // -->
+    </SCRIPT>
+  </HEAD>
+
+  <BODY OnLoad="ShowNextTram()">
+    <FORM Name="frmMain">
+      Nejbližší tramvaj odjíždí v
+      <INPUT Name="edNextTime" Value="00:00" Size=5>
+    </FORM>
+  </BODY>
+</HTML>
+

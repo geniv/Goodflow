@@ -1,0 +1,10 @@
+TEMPLATE = app
+QT = gui core
+CONFIG += qt warn_on console release
+DESTDIR = bin
+OBJECTS_DIR = build
+MOC_DIR = build
+UI_DIR = build
+FORMS = ui/main.ui
+HEADERS = src/mainwindowimpl.h
+SOURCES = src/mainwindowimpl.cpp src/main.cpp

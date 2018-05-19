@@ -1,0 +1,65 @@
+<HTML>
+  <HEAD>
+    <TITLE> Seznam obrázkù </TITLE>
+    <SCRIPT Language="JavaScript">
+    <!--
+      // Funkce generující seznam obrázkù
+      function WritePictures(){
+        // Poèet obrázkù ve stránce
+        var PicturesCount = document.images.length;
+        // Obsahuje-li stránka alespoò jeden obrázek
+        if (PicturesCount > 0){
+          // Zapíše se hlavièka seznamu
+          document.write ('<HR><B>'+
+           'Dokument obsahuje tyto obrázky:</B><UL>');
+           
+          // Zapíše se seznam obrázkù na stránce
+          for (var i=0; i<PicturesCount; i++){
+            // Adresa obrázku, zapsaná v odkazu, který vede
+            // pøímo na daný obrázek
+            document.write ('<LI><B><A Href="' +
+              document.images[i].src + '">' +
+              document.images[i].src + '</A></B>');
+              
+            // Pokud je zadáno jméno obrázku, vypíše se v závorce
+            if (document.images[i].name != '')
+              document.write (' (' + document.images[i].name + ')');
+              
+            // miniatura obrázku
+            document.write (' ' + document.images[i].width +
+              ' x ' + document.images[i].height +
+              ' pixelù</LI>');
+            document.write (' <img src="'+
+              document.images[i].src + '" width="16">');
+          }
+          // Konec seznamu
+          document.write ('</UL>');
+        }
+      }
+    // -->
+    </SCRIPT>
+  </HEAD>
+  
+  <BODY>
+    Jsou dny vysmáté <IMG src="smile1.gif">
+    a dny. kdy vám opravdu není nejlépe
+    <img src="smile2.gif">.
+    <BR>
+    <BR>
+    Co se má provést s vyplnìným formuláøem?
+    <BR>
+    
+    <A Href=""><IMG Src="button1.gif" Border="0"
+      Name="img_odeslat"></A>
+    <A Href=""><IMG Src="button2.gif" Border="0"
+      Name="img_zrusit"></A>
+
+    <SCRIPT Language="JavaScript">
+    <!--
+      // Zapsání seznamu použitých obrázkù
+      WritePictures();
+    // -->
+    </SCRIPT>
+  </BODY>
+</HTML>
+

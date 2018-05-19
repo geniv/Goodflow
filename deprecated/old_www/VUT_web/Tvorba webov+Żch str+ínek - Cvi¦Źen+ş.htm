@@ -1,0 +1,240 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html><head>
+
+
+    <meta http-equiv="content-type" content="text/html; charset=windows-1250"><title>Tvorba webových stránek - Cvičení</title>
+    
+    <link rel="stylesheet" type="text/css" href="Tvorba%20webov%FDch%20str%E1nek%20-%20Cvi%E8en%ED_soubory/itw.css"></head><body>
+
+<h1>Tvorba webových stránek</h1>
+<div class="kontakt">
+<!-- <strong>Ing. Radek Burget, Ph.D.</strong><br/>
+<a href="mailto:burgetr@fit.vutbr.cz">burgetr@fit.vutbr.cz</a>-->
+</div>
+
+<div class="menu">
+<h2>Materiály k předmětu</h2>
+<ul>
+<li><a href="https://www.fit.vutbr.cz/study/courses/ITW/private/prednasky/">Přednášky (slajdy)</a></li>
+<li>Materiály ke cvičení</li>
+<li><a href="https://www.fit.vutbr.cz/study/courses/ITW/private/kontakt.html">Konzultace a kontakt</a></li>
+</ul>
+<hr>
+<ul>
+<li><a href="https://www.fit.vutbr.cz/study/courses/ITW/private/index.html">Úvod</a></li>
+</ul>
+</div>
+
+
+<div class="contentbox">
+
+<h2>Cvičení</h2>
+
+<p><a href="https://www.fit.vutbr.cz/study/courses/ITW/private/cviceni/plan_cviceni.html">Plán cvičení</a></p>
+
+<p>
+<a href="#c1">Cvičení 1</a>
+<a href="#c2">Cvičení 2</a>
+<a href="#c3">Cvičení 3</a>
+<a href="#c4">Cvičení 4</a>
+<a href="#c5">Cvičení 5</a>
+<a href="#c6">Cvičení 6</a>
+</p>
+
+<div class="prednaska" id="c1">
+<h3><em>Cvičení 1</em> DNS a HTTP</h3>
+<ol>
+<li>Připojte se na server <tt>merlin.fit.vutbr.cz</tt></li>
+<li>Domain Name Service (DNS)
+    <ul>
+    <li>Seznámení s programem <tt>host</tt> (příp. <tt>nslookup</tt>)</li>
+    <li>Zjistěte IP adresu serveru <tt>http://www.fbm.vutbr.cz/</tt></li>
+    <li>Zjistěte doménové jméno serveru s IP adresou <tt>193.108.106.40</tt></li>
+	<li>Jaké je skutečné jméno serveru, na kterém běží web FIT?</li>
+    </ul>
+</li>
+<li>Seznamte se s programem <tt>telnet</tt></li>
+<li>Protokol HTTP
+    <ul>
+    <li>Připojení na server <tt>www.fit.vutbr.cz</tt> na portu 80 (služba WWW)</li>
+    <li>Zadání požadavku <tt>GET / HTTP/1.0</tt> + prázdný řádek</li>
+    <li>Prohlédněte si hlavičku odpovědi</li>
+    <li>Totéž HTTP/1.1 (je třeba zadat URL hostitele)</li>
+	<li>Zkuste takto stáhnout dokument <a href="http://www.fit.vutbr.cz/links/">http://www.fit.vutbr.cz/links/</a></li>
+    <li>Zkuste jiné adresy</li>
+    </ul>
+</li>
+<li>Proxy
+	<ul>
+	<li>Připojte se k proxy serveru <tt>cache.fit.vutbr.cz</tt> port <tt>3128</tt></li>
+	<li>Ztáhněte úvodní stránku <tt>http://www.seznam.cz/</tt></li>
+	<li>Prostudujte hlavičku odpovědi</li>
+	<li>Jaký operační systém a web server používá Seznam?</li>
+	</ul>
+</li>
+<li>Seznamte se s programem <tt>wget</tt>
+	<ul>
+	<li>Stahování dokumentů</li>
+	<li>Rekurzivní stahování</li>
+	</ul>
+</li>
+<li>Dynamické stránky
+    <ul>
+    <li>Porovnejte stránky
+        <a href="https://www.fit.vutbr.cz/study/courses/ITW/private/cviceni/datum1.php">datum1.php</a>
+        a
+        <a href="https://www.fit.vutbr.cz/study/courses/ITW/private/cviceni/datum2.html">datum2.html</a>
+    </li>
+    <li>Porovnejte kód stránek</li>
+    </ul>
+</li>
+<li>Seznamte se textovými prohlížeči <tt>lynx</tt> a <tt>links</tt></li>
+</ol>
+</div>
+
+<!-- ================================================================ -->
+
+<div class="prednaska" id="c2">
+<h3><em>Cvičení 2</em> Jazyk HTML</h3>
+<ol>
+<li>Seznamte se zběžně s organizací <a href="http://www.w3.org/TR/html4/">oficiální specifikace HTML</a>, všimněte si zvláště <a href="http://www.w3.org/TR/html4/index/elements.html">seznamu elementů</a> v příloze.</li>
+<li>Zvolte si vhodný editor pro tvorbu WWW stránek
+	<ul>
+	<li>Na Linuxu např. <a href="http://kate.kde.org/">kate</a> nebo <a href="http://quanta.kdewebdev.org/">Quanta Plus</a></li>
+	<li>Ve Windows např. <a href="http://www.pspad.com/">PsPad</a></li>
+	<li>... nebo jiný podle vlastní volby, který umožňuje komfortní editaci HTML a CSS kódu (ne WYSIWYG)</li>
+	</ul>
+</li>
+<li>Vytvořte nový soubor s příponou <strong>html</strong> a v něm základní kostru HTML dokumentu. Můžete například použít kód připravené šablony <a href="https://www.fit.vutbr.cz/study/courses/ITW/private/cviceni/sablona.html">sablona.html</a>.</li>
+<li>Doplňte do hlavičky libovolný titulek stránky a zkontrolujte kódování dokumentu
+	<ul>	
+	<li>Záleží na nastavení editoru, ve windows zpravidla <tt>windows-1250</tt>, v Linuxu <tt>iso-8859-2</tt>, nebo v obou případech <tt>UTF-8</tt></li>
+	</ul>
+</li>
+<li>Vložte do dokumentu nadpis první úrovně (hlavní nadpis) libovolného obsahu. Dále vložte nadpisy druhé úrovně <strong>Menu</strong>, <strong>Obsah</strong>, <strong>Odkazy</strong> a <strong>Kontakt</strong> rozdělující dokument na takto pojmenované sekce.</li>
+<li>Zobrazte dokument ve webovém prohlížeči</li>
+<li>Do sekce <strong>Menu</strong> vložte libovolnou nabídku – odkazy
+na další (imaginární) části vytvářeného webu. Použijte nečíslovaný
+seznam s vloženými odkazy.</li>
+<li>Podobně sekce <strong>Odkazy</strong> bude obsahovat seznam odkazů
+na libovolné existující webové stránky, každá položka seznamu však bude
+kromě vlastního odkazu obsahovat i doplňující popis tvořený elementem <code>&lt;span&gt;</code> nebo jiným řádkovým elementem.</li>
+<li>Sekce <strong>Kontakt</strong> bude obsahovat definiční seznam sdělující jednotlivé údaje – např. adresa, telefon, otevírací doba apod.</li>
+<li>Sekce <strong>Obsah</strong> by měla obsahovat libovolný delší text
+(cca. 20 řádků) ve kterém budou některé úseky zvýrazněny. Text by měl
+být členěn do více odstavců, dále by se v textu měl vyskytnout <ul>
+	<li>libovolný obrázek</li>
+	<li>tabulka s nadpisem, záhlavím a některými buňkami přes více sloupců nebo řádků</li>
+	</ul>
+</li>
+<li>Vzhledem jednotlivých prvků se zatím nezabývejte.</li>
+<li>Vytvořený dokument zkontrolujte <a href="http://validator.w3.org/">validátorem</a>.</li>
+</ol>
+</div>
+
+<!-- ================================================================ -->
+
+<div class="prednaska" id="c3">
+<h3><em>Cvičení 3</em> Styl textu</h3>
+<ol>
+<li>Vyjděte z dokumentu vytvořeného v minulém cvičení.</li>
+<li>V HTML kódu uzavřete každou ze sekcí <strong>Menu</strong>, <strong>Obsah</strong>, <strong>Odkazy</strong> a <strong>Kontakt</strong> do samostatného elementu <code>&lt;div&gt;</code> (včetně nadpisu) a opatřete vhodným identifikátorem.</li>
+<li>Vytvořte prázdný stylový předpis <code>style.css</code> a přidejte odkaz na tento předpis do hlavičky HTML dokumentu.</li>
+<li>První a poslední odstavec textu označte třídou <code>shrnuti</code>. Pokud máte odstavců málo, tak nejaké přidejte.</li>
+<li>Neprovádějte žádné další změny v HTML kódu.</li>
+<li>Definujte pravidla stylu tak, aby se výsledek blížil následujícím obrázkům: <a href="https://www.fit.vutbr.cz/study/courses/ITW/private/cviceni/cv3_1.png">nadpisy, první odstavec a tabulka</a>, <a href="https://www.fit.vutbr.cz/study/courses/ITW/private/cviceni/cv3_2.png">odkazy a kontakt</a>. Vlastní fantazii se meze nekladou. Shrnutí vlastností:
+	<ul>
+	<li>Písmo dokumentu je Verdana 11pt</li>
+	<li>Nadpisy
+jsou tučným písmem Arial, nadpis H1 je centrovaný o dvojnásobné
+velikosti, nadpis H2 je kurzívou o velikosti 1.5 násobku normálního
+textu</li>
+	<li>Odstavce jsou zarovnány do bloku, hypertextové odkazy
+nejsou podtržené. První a poslední odstavec je kurzívou a zarovnaný na
+střed.</li>
+	<li>Tabulka má rámečky podle vzoru, nadpis a buňky záhlaví jsou tučné</li>
+	<li>V sekci <strong>Odkazy</strong> mají hypertextové odkazy rámeček podle vzoru, popisek je na dalším řádku (lze dosáhnout pomocí definice <code>display: block</code>) a má velikost 85% normálního textu</li>
+	<li>V sekci adresa jsou elementy <code>&lt;dt&gt;</code> tučné.</li>
+	<li>Na pozadí dokumentu je libovolný obrázek, který se neposunuje s textem.</li>
+	</ul>
+</li>
+</ol>
+</div>
+
+<!-- ================================================================ -->
+
+<div class="prednaska" id="c4">
+<h3><em>Cvičení 4</em> CSS rozložení stránky</h3>
+<ol>
+<li>Vyjděte z dokumentu vytvořeného v minulém cvičení.</li>
+<li>Neprovádějte žádné změny v HTML kódu.</li>
+<li>Pro úspěšné splnění všech požadavků bez změny kódu se doporučuje
+pracovat s prohlížečem Firefox. Internet Explorer obsahuje některé
+odchylky, ktreré budou diskutovány na přednáškách.</li>
+<li>Změňte a doplňte stylový předpis tak, aby se výsledné rozložení stránky blížilo následujícím obrázkům: <a href="https://www.fit.vutbr.cz/study/courses/ITW/private/cviceni/cv4_1.png">začátek stránky</a>, <a href="https://www.fit.vutbr.cz/study/courses/ITW/private/cviceni/cv4_2.png">posldení odstavec a kontakt</a>. Vlastní fantazii se meze nekladou. Shrnutí vlastností:
+	<ul>
+	<li>Menu
+je umístěné vlevém sloupci (např. použitím kombinace obtékání a
+okrajů). Položky menu nejsou označeny odrážkami. Po najetí myší na
+libovolný odkaz se odkaz zvýrazní, jak je naznačeno u položky <em>Služby</em> Bude zřejmě zapotřebí, aby odkazy v menu byly blokové elementy (<code>display: block</code>), aby měly správnou šířku.</li>
+	<li>Odkazy jsou vpravo nahoře vedle nadpisu</li>
+	<li>Kontakt dole je formátovaný podle vzoru (opět lze použít plovoucí prvky), nadpis sekce není viditelný</li>
+	<li>Styl tabulky dle vzoru, tabulka je zarovnaná na střed odstavců</li>
+	<li>Obrázek v textu je umístěn vpravo, je obtékaný textem zleva a má vhodný okraj.</li>
+	</ul>
+</li>
+</ol>
+</div>
+
+<!-- ================================================================ -->
+
+<div class="prednaska" id="c5">
+<h3><em>Cvičení 5</em> Generování obsahu JavaScriptem</h3>
+<ol>
+<li>Stáhněte si dokument <a href="https://www.fit.vutbr.cz/study/courses/ITW/private/cviceni/skript1.html">skript1.html</a>
+a prostudujte jeho obsah a zdrojový kód</li>
+<li>Pomocí CSS přidejte vygenerované tabulce mřížku</li>
+<li>Změňte vložený skript tak, aby první řádek a první sloupec tvořily
+záhlaví tabulky (budou tvořeny značkami <tt>&lt;th&gt;</tt> namísto
+<tt>&lt;td&gt;</tt>)</li>
+<li>Změňte skript tak, aby čísla dělitelná 10 byla barevně odlišena (pro
+změnu barvy použijte CSS)</li>
+<li>Příklad výsledku: <br><img src="Tvorba%20webov%FDch%20str%E1nek%20-%20Cvi%E8en%ED_soubory/tabulka2.png" alt="priklad tabulky"></li>
+<li>Prostudujte práci s datem v JavaScriptu. Do hlavičky dokumentu
+vložte skript generující CSS kód tak, aby tabulka měla v dopoledních
+hodinách jinou barvu podkladu než v odpoledních hodinách. Pod tabulku
+vložte aktuální čas.</li>
+<li>Volitelný úkol: prostudujte si práci s cookies v JavaScriptu a upravte skript tak, aby
+se při opakovaném novém načtení dokumentu střídaly dvě barvy pozadí tabulky (např. při prvním načtení
+zelená, při druhém červená, při třetím opět zelená, atd.)</li>
+</ol>
+</div>
+
+</div> <!-- contentbox -->
+
+<!-- ================================================================ -->
+
+<div class="prednaska" id="c6">
+<h3><em>Cvičení 6</em> Dynamické styly</h3>
+<ol>
+<li>Prostudujte si dokument <a href="https://www.fit.vutbr.cz/study/courses/ITW/private/cviceni/cv6.html">cv6.html</a>, kde se při 
+kliknutí na libovolné políčko tabulky zobrazí hodnota daného políčka.</li>
+<li>V hlavičce dokumentu implementujte funkci <code>zvyrazni(n)</code>,
+    která projde všechny buňky tabulky a podtrhne všechny násobky čísla
+    <em>n</em> v buňkách. Nástin možného řešení:
+	<ul>
+	<li>Při generování tabulky generujeme každé buňce vhodné atributy <code>id</code></li>
+	<li>Funkce postupně získává buňky tabulky pomocí volání
+		<code>getElementById()</code>
+		(<a href="https://www.fit.vutbr.cz/study/courses/ITW/private/prednasky/p08/slide0320.html">v přednáškách</a>)
+	</li>
+	<li>Podtržení nebo nepodtržení každé buňky nastavíme pomocí 
+	    změny CSS stylu elementu
+	    (opět <a href="https://www.fit.vutbr.cz/study/courses/ITW/private/prednasky/p08/slide0340.html">v přednáškách</a>)
+	    </li>
+	</ul>
+</li>
+<li>Změňtě generování tabulky tak, aby se při kliknutí na libovolné políčko
+označily všechny jeho násobky podtržením.</li>
+
+</ol></div></body></html>

@@ -1,0 +1,25 @@
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>
+      Posun textu pomocí JavaScriptu
+    </title>
+    <script language="JavaScript">
+        
+        var text = "Ahoj světe! Ahoj světe! ";
+        
+        function posun() 
+        {
+          window.status = text;
+          text = text.substring(1, text.length) + text.substring(0, 1);
+          setTimeout("posun()", 150);
+        }        
+    </script>
+  </head>
+
+  <body onload="posun()">
+    <h1>
+      Posun textu ve stavovém řádku pomocí JavaScriptu
+    </h1>
+  </body>
+</html>

@@ -1,0 +1,1 @@
+<?php--OD--images/obrazky_navody/obrazek.jpg--OD--http://hviii.htm--OD--cosi co?--OD--nìco takového....--OD--já--OD--html--OD--6.5.2007

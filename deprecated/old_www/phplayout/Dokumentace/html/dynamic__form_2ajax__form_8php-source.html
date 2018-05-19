@@ -1,0 +1,178 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>Novy vychozi PHP layout: Zdrojový soubor /var/www/phplayout/modules/dynamic_form/ajax_form.php</title>
+<link href="tabs.css" rel="stylesheet" type="text/css">
+<link href="doxygen.css" rel="stylesheet" type="text/css">
+</head><body>
+<!-- Generováno programem Doxygen 1.5.8 -->
+<div class="navigation" id="top">
+  <div class="tabs">
+    <ul>
+      <li><a href="index.html"><span>Hlavní&nbsp;stránka</span></a></li>
+      <li><a href="annotated.html"><span>Třídy</span></a></li>
+      <li class="current"><a href="files.html"><span>Soubory</span></a></li>
+    </ul>
+  </div>
+  <div class="tabs">
+    <ul>
+      <li><a href="files.html"><span>Seznam&nbsp;souborů</span></a></li>
+      <li><a href="globals.html"><span>Symboly&nbsp;v&nbsp;souborech</span></a></li>
+    </ul>
+  </div>
+<h1>/var/www/phplayout/modules/dynamic_form/ajax_form.php</h1><a href="dynamic__form_2ajax__form_8php.html">Zobrazit dokumentaci tohoto souboru.</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 &lt;?php
+<a name="l00002"></a>00002   include_once <span class="stringliteral">"../../default_modul.php"</span>;
+<a name="l00003"></a>00003   include_once <span class="stringliteral">"../../promenne.php"</span>;
+<a name="l00004"></a>00004   include_once <span class="stringliteral">"../../funkce.php"</span>;
+<a name="l00005"></a>00005 
+<a name="l00006"></a><a class="code" href="classAjax.html">00006</a> <span class="keyword">class </span><a class="code" href="classAjax.html">Ajax</a> <span class="keyword">extends</span> <a class="code" href="classDefaultModule.html">DefaultModule</a>
+<a name="l00007"></a>00007 {
+<a name="l00008"></a><a class="code" href="classAjax.html#2fc5ad8a7c97505bec861812f55c90f4">00008</a>   <span class="keyword">private</span> <a class="code" href="classAjax.html#6f97eef01767d8e691c4a87d086580d2">$unikatni</a>, <a class="code" href="classAjax.html#3344462a737770e699a6dc5e91a1fefd">$dbname</a>, <a class="code" href="classAjax.html#2fc5ad8a7c97505bec861812f55c90f4">$var</a>, <a class="code" href="classAjax.html#311c463bc75201896b0f729faf96449a">$get_id</a>, <a class="code" href="classAjax.html#13f844c87110df02d788eb0be5efc984">$get_sablona</a>, <a class="code" href="classAjax.html#e83b21d086707f89a6346ad32332e70b">$get_text</a>, <a class="code" href="classAjax.html#6c27219ebdd658115ab9d92e7a64078e">$sqlite</a>;
+<a name="l00009"></a>00009 <span class="comment">// $dirpath,</span>
+<a name="l00016"></a><a class="code" href="classAjax.html#ecc199456d7b6929d0d9d4b5f4bf51f8">00016</a> <span class="comment"></span>  <span class="keyword">public</span> function <a class="code" href="classAjax.html#ecc199456d7b6929d0d9d4b5f4bf51f8">__construct</a>()
+<a name="l00017"></a>00017   {
+<a name="l00018"></a>00018     $this-&gt;var = <span class="keyword">new</span> <a class="code" href="classPromenne.html">Promenne</a>();  <span class="comment">//vytvoreni promennych</span>
+<a name="l00019"></a>00019     $this-&gt;var-&gt;main = <span class="keyword">new</span> <a class="code" href="classFunkce.html">Funkce</a>($this-&gt;var, 0);  <span class="comment">//vytvoreni funkce</span>
+<a name="l00020"></a>00020 
+<a name="l00021"></a>00021     $this-&gt;unikatni = $this-&gt;<a class="code" href="classDefaultModule.html#f9bc13977b7099f00c4a74192ce85dce">NactiObsahSouboru</a>(<span class="stringliteral">".unikatni_obsah.php"</span>);
+<a name="l00022"></a>00022     $this-&gt;get_id = $this-&gt;<a class="code" href="classDefaultModule.html#f43261ee577b5bedbdaff44d21c64d38">NactiUnikatniObsah</a>($this-&gt;unikatni[<span class="stringliteral">"ajax_set_get_id"</span>]);
+<a name="l00023"></a>00023     $this-&gt;get_sablona = $this-&gt;<a class="code" href="classDefaultModule.html#f43261ee577b5bedbdaff44d21c64d38">NactiUnikatniObsah</a>($this-&gt;unikatni[<span class="stringliteral">"ajax_set_get_sablona"</span>]);
+<a name="l00024"></a>00024     $this-&gt;get_text = $this-&gt;<a class="code" href="classDefaultModule.html#f43261ee577b5bedbdaff44d21c64d38">NactiUnikatniObsah</a>($this-&gt;unikatni[<span class="stringliteral">"ajax_set_get_text"</span>]);
+<a name="l00025"></a>00025 
+<a name="l00026"></a>00026     echo $this-&gt;<a class="code" href="classAjax.html#14ec28dce0d6030408812127d27fd494">VyberFunkci</a>();
+<a name="l00027"></a>00027   }
+<a name="l00028"></a>00028 
+<a name="l00035"></a><a class="code" href="classAjax.html#14ec28dce0d6030408812127d27fd494">00035</a>   <span class="keyword">private</span> function <a class="code" href="classAjax.html#14ec28dce0d6030408812127d27fd494">VyberFunkci</a>()  <span class="comment">//vybere volanou funkci</span>
+<a name="l00036"></a>00036   {
+<a name="l00037"></a>00037     <span class="comment">//$action = (!Empty($_POST["action"]) ? $_POST["action"] : $_GET["action"]);</span>
+<a name="l00038"></a>00038     <span class="comment">//$web = "http://{$_SERVER["SERVER_NAME"]}{$this-&gt;var-&gt;temp}";</span>
+<a name="l00039"></a>00039     <span class="comment">//print_r($_GET);</span>
+<a name="l00040"></a>00040     <span class="comment">//print_r($_POST);</span>
+<a name="l00041"></a>00041     <span class="comment">//print_r($_SERVER);</span>
+<a name="l00042"></a>00042     <span class="comment">//print_r($_SESSION);</span>
+<a name="l00043"></a>00043 
+<a name="l00044"></a>00044     <a class="code" href="_8unikatni__fukce_8php.html#e241cf0159803673d118f68d99e6342f">$result</a> = <span class="stringliteral">""</span>;
+<a name="l00045"></a>00045 
+<a name="l00046"></a>00046     <span class="comment">//vypis pro POST</span>
+<a name="l00047"></a>00047     <span class="keywordflow">if</span> (!Empty($_POST[<span class="stringliteral">"action"</span>]))
+<a name="l00048"></a>00048     {
+<a name="l00049"></a>00049       <span class="keywordflow">switch</span> ($_POST[<span class="stringliteral">"action"</span>])
+<a name="l00050"></a>00050       {
+<a name="l00051"></a>00051         <span class="keywordflow">case</span> <span class="stringliteral">"kontrola"</span>: <span class="comment">//post</span>
+<a name="l00052"></a>00052           $id = $_POST[$this-&gt;get_id];
+<a name="l00053"></a>00053           settype($id, <span class="stringliteral">"integer"</span>);
+<a name="l00054"></a>00054           $sablona = $_POST[$this-&gt;get_sablona];
+<a name="l00055"></a>00055           settype($sablona, <span class="stringliteral">"integer"</span>);
+<a name="l00056"></a>00056           $text = $_POST[$this-&gt;get_text];
+<a name="l00057"></a>00057 
+<a name="l00058"></a>00058           $script = explode(<span class="stringliteral">"/"</span>, dirname($_SERVER[<span class="stringliteral">"SCRIPT_NAME"</span>])); <span class="comment">//vezme si cestu sama sebe a vyhleda svoje umisteni</span>
+<a name="l00059"></a>00059           $index = $this-&gt;var-&gt;main-&gt;NajdiIndexPodleCesty(implode(<span class="stringliteral">"/"</span>, array_slice($script, -2))); <span class="comment">//nalezeni prislusneho modulu</span>
+<a name="l00060"></a>00060 
+<a name="l00061"></a>00061           <span class="comment">//$this-&gt;dirpath = dirname($this-&gt;var-&gt;moduly[$index]["include"]);  //nacte dir path</span>
+<a name="l00062"></a>00062           $this-&gt;dbname = $this-&gt;var-&gt;moduly[$index][<span class="stringliteral">"databaze"</span>]; <span class="comment">//nacte db name, musis byt v te same slozce</span>
+<a name="l00063"></a>00063 
+<a name="l00064"></a>00064           $this-&gt;sqlite = <span class="keyword">new</span> SQLiteDatabase($this-&gt;dbname, 0777, $error);  <span class="comment">//pripojeni do DB</span>
+<a name="l00065"></a>00065 <span class="comment">//var_dump($index, $this-&gt;dbname, $this-&gt;sqlite, $error);</span>
+<a name="l00066"></a>00066           <span class="keywordflow">if</span> ($res = @$this-&gt;sqlite-&gt;query($this-&gt;NactiUnikatniObsah($this-&gt;unikatni[<span class="stringliteral">"ajax_kontrola_sql_dotaz"</span>], $sablona, $id), NULL, $error))
+<a name="l00067"></a>00067           {
+<a name="l00068"></a>00068             <span class="keywordflow">if</span> ($res-&gt;numRows() == 1)
+<a name="l00069"></a>00069             {
+<a name="l00070"></a>00070               $data = $res-&gt;fetchObject();
+<a name="l00071"></a>00071 
+<a name="l00072"></a>00072               <span class="keywordflow">switch</span> ($data-&gt;vstupni_typ)
+<a name="l00073"></a>00073               {
+<a name="l00074"></a>00074                 <span class="keywordflow">case</span> 0: <span class="comment">//text</span>
+<a name="l00075"></a>00075                   settype($text, <span class="stringliteral">"string"</span>);
+<a name="l00076"></a>00076 
+<a name="l00077"></a>00077                   <span class="keywordflow">if</span> ($data-&gt;min_val &gt; 0 &amp;&amp; <span class="comment">//kontrola rozsahu poctu pismen</span>
+<a name="l00078"></a>00078                       $data-&gt;max_val &gt; 0)
+<a name="l00079"></a>00079                   {
+<a name="l00080"></a>00080                     <span class="keywordflow">if</span> (strlen($text) &lt; $data-&gt;min_val ||
+<a name="l00081"></a>00081                         strlen($text) &gt; $data-&gt;max_val)
+<a name="l00082"></a>00082                     {
+<a name="l00083"></a>00083                       $text = <span class="stringliteral">""</span>;
+<a name="l00084"></a>00084                     }
+<a name="l00085"></a>00085                   }
+<a name="l00086"></a>00086                     <span class="keywordflow">else</span>
+<a name="l00087"></a>00087                   <span class="keywordflow">if</span> ($data-&gt;min_val &gt; 0)  <span class="comment">//kontrola minina</span>
+<a name="l00088"></a>00088                   {
+<a name="l00089"></a>00089                     <span class="keywordflow">if</span> (strlen($text) &lt; $data-&gt;min_val)
+<a name="l00090"></a>00090                     {
+<a name="l00091"></a>00091                       $text = <span class="stringliteral">""</span>;
+<a name="l00092"></a>00092                     }
+<a name="l00093"></a>00093                   }
+<a name="l00094"></a>00094                     <span class="keywordflow">else</span>
+<a name="l00095"></a>00095                   <span class="keywordflow">if</span> ($data-&gt;max_val &gt; 0)  <span class="comment">//kontrola maxima</span>
+<a name="l00096"></a>00096                   {
+<a name="l00097"></a>00097                     <span class="keywordflow">if</span> (strlen($text) &gt; $data-&gt;max_val)
+<a name="l00098"></a>00098                     {
+<a name="l00099"></a>00099                       $text = <span class="stringliteral">""</span>;
+<a name="l00100"></a>00100                     }
+<a name="l00101"></a>00101                   }
+<a name="l00102"></a>00102                 <span class="keywordflow">break</span>;
+<a name="l00103"></a>00103 
+<a name="l00104"></a>00104                 <span class="keywordflow">case</span> 1: <span class="comment">//integer</span>
+<a name="l00105"></a>00105                   settype($text, <span class="stringliteral">"integer"</span>);
+<a name="l00106"></a>00106 
+<a name="l00107"></a>00107                   <span class="keywordflow">if</span> ($data-&gt;min_val &gt; 0 &amp;&amp;
+<a name="l00108"></a>00108                       $data-&gt;max_val &gt; 0)
+<a name="l00109"></a>00109                   {
+<a name="l00110"></a>00110                     <span class="keywordflow">if</span> ($text &lt; $data-&gt;min_val ||  <span class="comment">//kontrola hodnoty cisel</span>
+<a name="l00111"></a>00111                         $text &gt; $data-&gt;max_val)
+<a name="l00112"></a>00112                     {
+<a name="l00113"></a>00113                       $text = <span class="stringliteral">""</span>;
+<a name="l00114"></a>00114                     }
+<a name="l00115"></a>00115                   }
+<a name="l00116"></a>00116                     <span class="keywordflow">else</span>
+<a name="l00117"></a>00117                   <span class="keywordflow">if</span> ($data-&gt;min_val &gt; 0)  <span class="comment">//kontrola minina</span>
+<a name="l00118"></a>00118                   {
+<a name="l00119"></a>00119                     <span class="keywordflow">if</span> ($text &lt; $data-&gt;min_val)
+<a name="l00120"></a>00120                     {
+<a name="l00121"></a>00121                       $text = <span class="stringliteral">""</span>;
+<a name="l00122"></a>00122                     }
+<a name="l00123"></a>00123                   }
+<a name="l00124"></a>00124                     <span class="keywordflow">else</span>
+<a name="l00125"></a>00125                   <span class="keywordflow">if</span> ($data-&gt;max_val &gt; 0)  <span class="comment">//kontrola maxima</span>
+<a name="l00126"></a>00126                   {
+<a name="l00127"></a>00127                     <span class="keywordflow">if</span> ($text &gt; $data-&gt;max_val)
+<a name="l00128"></a>00128                     {
+<a name="l00129"></a>00129                       $text = <span class="stringliteral">""</span>;
+<a name="l00130"></a>00130                     }
+<a name="l00131"></a>00131                   }
+<a name="l00132"></a>00132                 <span class="keywordflow">break</span>;
+<a name="l00133"></a>00133 
+<a name="l00134"></a>00134                 <span class="keywordflow">case</span> 2: <span class="comment">//reg_exp</span>
+<a name="l00135"></a>00135                   preg_match($data-&gt;reg_exp, $text, $ret);
+<a name="l00136"></a>00136                   $text = $ret[0];  <span class="comment">//vybere nulty index</span>
+<a name="l00137"></a>00137                 <span class="keywordflow">break</span>;
+<a name="l00138"></a>00138               }
+<a name="l00139"></a>00139 
+<a name="l00140"></a>00140               <span class="keywordflow">if</span> (!Empty($text))  <span class="comment">//kontrola prazdnosti</span>
+<a name="l00141"></a>00141               {
+<a name="l00142"></a>00142                 <a class="code" href="_8unikatni__fukce_8php.html#e241cf0159803673d118f68d99e6342f">$result</a> = $this-&gt;<a class="code" href="classDefaultModule.html#f43261ee577b5bedbdaff44d21c64d38">NactiUnikatniObsah</a>($this-&gt;unikatni[<span class="stringliteral">"ajax_dobre"</span>]);
+<a name="l00143"></a>00143               }
+<a name="l00144"></a>00144                 <span class="keywordflow">else</span>
+<a name="l00145"></a>00145               {
+<a name="l00146"></a>00146                 <a class="code" href="_8unikatni__fukce_8php.html#e241cf0159803673d118f68d99e6342f">$result</a> = $this-&gt;<a class="code" href="classDefaultModule.html#f43261ee577b5bedbdaff44d21c64d38">NactiUnikatniObsah</a>($this-&gt;unikatni[<span class="stringliteral">"ajax_spatne"</span>]);
+<a name="l00147"></a>00147               }
+<a name="l00148"></a>00148             }
+<a name="l00149"></a>00149           }
+<a name="l00150"></a>00150             <span class="keywordflow">else</span>
+<a name="l00151"></a>00151           {
+<a name="l00152"></a>00152             var_dump($error);
+<a name="l00153"></a>00153           }
+<a name="l00154"></a>00154         <span class="keywordflow">break</span>;
+<a name="l00155"></a>00155       }
+<a name="l00156"></a>00156     }
+<a name="l00157"></a>00157 
+<a name="l00158"></a>00158     <span class="keywordflow">return</span> <a class="code" href="_8unikatni__fukce_8php.html#e241cf0159803673d118f68d99e6342f">$result</a>;
+<a name="l00159"></a>00159   }
+<a name="l00160"></a>00160 }
+<a name="l00161"></a>00161   <span class="comment">//header('Content-type: text/html; charset=UTF-8');</span>
+<a name="l00162"></a><a class="code" href="dynamic__form_2ajax__form_8php.html#e8c46615c3b5b18e0af3ecf96f8c62d8">00162</a>   <a class="code" href="Depozit_2index_8php.html#e8c46615c3b5b18e0af3ecf96f8c62d8">$web</a> = <span class="keyword">new</span> <a class="code" href="classAjax.html">Ajax</a>();
+<a name="l00163"></a>00163 ?&gt;
+</pre></div></div>
+<hr size="1"><address style="text-align: right;"><small>Generováno Tue Aug 4 13:38:10 2009 pro projekt Novy vychozi PHP layout programem&nbsp;
+<a href="http://www.doxygen.org/index.html">
+<img src="doxygen.png" alt="doxygen" align="middle" border="0"></a> 1.5.8 </small></address>
+</body>
+</html>

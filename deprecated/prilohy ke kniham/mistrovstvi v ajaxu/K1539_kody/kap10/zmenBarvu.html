@@ -1,0 +1,58 @@
+<html> 
+  <head> 
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>Zvýraznění textu</title> 
+
+    <script language="javascript">
+      function ziskejData(zdrojDat, divID) 
+      { 
+        var XMLHttpRequestObjekt = false; 
+
+        if (window.XMLHttpRequest) {
+          XMLHttpRequestObjekt = new XMLHttpRequest();
+        } else if (window.ActiveXObject) {
+          XMLHttpRequestObjekt = new 
+            ActiveXObject("Microsoft.XMLHTTP");
+        }
+
+        if(XMLHttpRequestObjekt) {
+          var elem = document.getElementById("cilovyDiv"); 
+          XMLHttpRequestObjekt.open("GET", zdrojDat); 
+
+          XMLHttpRequestObjekt.onreadystatechange = function() 
+          { 
+            if (XMLHttpRequestObjekt.readyState == 4 && 
+              XMLHttpRequestObjekt.status == 200) { 
+              elem.style.color = "#FF0000";
+              elem.innerHTML = XMLHttpRequestObjekt.responseText; 
+              setTimeout(zmenBarvu, 500);
+            } 
+          } 
+
+          XMLHttpRequestObjekt.send(null); 
+        }
+      }
+
+      function zmenBarvu()
+      {
+        var cil = document.getElementById("cilovyDiv"); 
+        cil.style.color = "#000000";
+      }
+    </script>
+  </head> 
+
+  <body>
+
+    <H1>Zvýraznění textu</H1>
+
+    <form>
+      <input type="button" value="Získej text" 
+        onclick="ziskejData('zprava.txt', 'cilovyDiv')"> 
+    </form>
+
+    <div id="cilovyDiv">
+      <p>Získaná data se zobrazí na tomto místě.</p> 
+    </div> 
+
+  </body> 
+</html>

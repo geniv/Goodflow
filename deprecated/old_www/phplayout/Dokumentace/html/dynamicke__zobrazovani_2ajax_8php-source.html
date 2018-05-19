@@ -1,0 +1,73 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>Novy vychozi PHP layout: Zdrojový soubor /var/www/phplayout/modules/dynamicke_zobrazovani/ajax.php</title>
+<link href="tabs.css" rel="stylesheet" type="text/css">
+<link href="doxygen.css" rel="stylesheet" type="text/css">
+</head><body>
+<!-- Generováno programem Doxygen 1.5.8 -->
+<div class="navigation" id="top">
+  <div class="tabs">
+    <ul>
+      <li><a href="index.html"><span>Hlavní&nbsp;stránka</span></a></li>
+      <li><a href="annotated.html"><span>Třídy</span></a></li>
+      <li class="current"><a href="files.html"><span>Soubory</span></a></li>
+    </ul>
+  </div>
+  <div class="tabs">
+    <ul>
+      <li><a href="files.html"><span>Seznam&nbsp;souborů</span></a></li>
+      <li><a href="globals.html"><span>Symboly&nbsp;v&nbsp;souborech</span></a></li>
+    </ul>
+  </div>
+<h1>/var/www/phplayout/modules/dynamicke_zobrazovani/ajax.php</h1><a href="dynamicke__zobrazovani_2ajax_8php.html">Zobrazit dokumentaci tohoto souboru.</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 &lt;?php
+<a name="l00002"></a>00002   include_once <span class="stringliteral">"../../default_modul.php"</span>;
+<a name="l00003"></a>00003 
+<a name="l00004"></a>00004 <span class="keyword">class </span><a class="code" href="classAjax.html">Ajax</a> <span class="keyword">extends</span> <a class="code" href="classDefaultModule.html">DefaultModule</a>
+<a name="l00005"></a>00005 {
+<a name="l00006"></a>00006   <span class="keyword">private</span> <a class="code" href="classAjax.html#6f97eef01767d8e691c4a87d086580d2">$unikatni</a>;
+<a name="l00013"></a><a class="code" href="classAjax.html#ecc199456d7b6929d0d9d4b5f4bf51f8">00013</a>   <span class="keyword">public</span> function <a class="code" href="classAjax.html#ecc199456d7b6929d0d9d4b5f4bf51f8">__construct</a>()
+<a name="l00014"></a>00014   {
+<a name="l00015"></a>00015     $this-&gt;unikatni = $this-&gt;<a class="code" href="classDefaultModule.html#f9bc13977b7099f00c4a74192ce85dce">NactiObsahSouboru</a>(<span class="stringliteral">".unikatni_obsah.php"</span>);
+<a name="l00016"></a>00016     $this-&gt;prevod = $this-&gt;<a class="code" href="classDefaultModule.html#f43261ee577b5bedbdaff44d21c64d38">NactiUnikatniObsah</a>($this-&gt;unikatni[<span class="stringliteral">"ajax_prepis"</span>]);
+<a name="l00017"></a>00017     echo $this-&gt;<a class="code" href="classAjax.html#14ec28dce0d6030408812127d27fd494">VyberFunkci</a>();
+<a name="l00018"></a>00018   }
+<a name="l00019"></a>00019 
+<a name="l00026"></a><a class="code" href="classAjax.html#14ec28dce0d6030408812127d27fd494">00026</a>   <span class="keyword">private</span> function <a class="code" href="classAjax.html#14ec28dce0d6030408812127d27fd494">VyberFunkci</a>()  <span class="comment">//vybere volanou funkci</span>
+<a name="l00027"></a>00027   {
+<a name="l00028"></a>00028     <span class="comment">//$action = (!Empty($_POST["action"]) ? $_POST["action"] : $_GET["action"]);</span>
+<a name="l00029"></a>00029     <span class="comment">//$web = "http://{$_SERVER["SERVER_NAME"]}{$this-&gt;var-&gt;temp}";</span>
+<a name="l00030"></a>00030     <span class="comment">//print_r($_GET);</span>
+<a name="l00031"></a>00031     <span class="comment">//print_r($_POST);</span>
+<a name="l00032"></a>00032     <span class="comment">//print_r($_SESSION);</span>
+<a name="l00033"></a>00033 
+<a name="l00034"></a>00034     <a class="code" href="_8unikatni__fukce_8php.html#e241cf0159803673d118f68d99e6342f">$result</a> = <span class="stringliteral">""</span>;
+<a name="l00035"></a>00035 
+<a name="l00036"></a>00036     <span class="comment">//vypis pro POST</span>
+<a name="l00037"></a>00037     <span class="keywordflow">if</span> (!Empty($_POST[<span class="stringliteral">"action"</span>]))
+<a name="l00038"></a>00038     {
+<a name="l00039"></a>00039       <span class="keywordflow">switch</span> ($_POST[<span class="stringliteral">"action"</span>])
+<a name="l00040"></a>00040       {
+<a name="l00041"></a>00041         <span class="comment">//uzivatele</span>
+<a name="l00042"></a>00042         <span class="keywordflow">case</span> <span class="stringliteral">"prepis"</span>: <span class="comment">//post - prepis textu</span>
+<a name="l00043"></a>00043           <a class="code" href="_8unikatni__fukce_8php.html#e241cf0159803673d118f68d99e6342f">$result</a> = $this-&gt;<a class="code" href="classAjax.html#6c8d6d58bbbd0db15e80695bf3243031">PrepisTextu</a>($_POST[<span class="stringliteral">"text"</span>]);
+<a name="l00044"></a>00044         <span class="keywordflow">break</span>;
+<a name="l00045"></a>00045       }
+<a name="l00046"></a>00046     }
+<a name="l00047"></a>00047 
+<a name="l00048"></a>00048     <span class="keywordflow">return</span> <a class="code" href="_8unikatni__fukce_8php.html#e241cf0159803673d118f68d99e6342f">$result</a>;
+<a name="l00049"></a>00049   }
+<a name="l00050"></a>00050 
+<a name="l00051"></a><a class="code" href="classAjax.html#6c8d6d58bbbd0db15e80695bf3243031">00051</a>   <span class="keyword">private</span> function <a class="code" href="classAjax.html#6c8d6d58bbbd0db15e80695bf3243031">PrepisTextu</a>($text)
+<a name="l00052"></a>00052   {
+<a name="l00053"></a>00053     <span class="keywordflow">return</span> strtr($text, $this-&gt;prevod);  <span class="comment">//prevede text dle prevadecoho pole</span>
+<a name="l00054"></a>00054   }
+<a name="l00055"></a>00055 }
+<a name="l00056"></a>00056   <span class="comment">//header('Content-type: text/html; charset=UTF-8');</span>
+<a name="l00057"></a><a class="code" href="dynamicke__zobrazovani_2ajax_8php.html#e8c46615c3b5b18e0af3ecf96f8c62d8">00057</a>   <a class="code" href="Depozit_2index_8php.html#e8c46615c3b5b18e0af3ecf96f8c62d8">$web</a> = <span class="keyword">new</span> <a class="code" href="classAjax.html">Ajax</a>();
+<a name="l00058"></a>00058 ?&gt;
+</pre></div></div>
+<hr size="1"><address style="text-align: right;"><small>Generováno Tue Aug 4 13:38:10 2009 pro projekt Novy vychozi PHP layout programem&nbsp;
+<a href="http://www.doxygen.org/index.html">
+<img src="doxygen.png" alt="doxygen" align="middle" border="0"></a> 1.5.8 </small></address>
+</body>
+</html>

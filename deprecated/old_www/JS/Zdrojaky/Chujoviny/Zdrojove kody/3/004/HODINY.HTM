@@ -1,0 +1,57 @@
+<HTML>
+  <HEAD>
+    <TITLE>Grafické hodiny</TITLE>
+    <SCRIPT LANGUAGE="JavaScript">
+      <!--
+      // Vytvoøení pole obrazkù s ciframi
+      Digits = new Array(10);
+      for (var i=0; i<10; i++){
+        Digits[i] = new Image();
+        Digits[i].src = "H" + i + ".gif";
+      }
+
+      function ShowTime (){
+        // Zjistí se aktuální èas
+        var D = new Date;
+        // Z èasového údaje se zjistí poèet
+        // hodin, minut a sekund
+        var H = D.getHours();
+        var M = D.getMinutes();
+        var S = D.getSeconds();
+
+        // První cifra hodin
+        if (H>9)
+          document.imgHour1.src = Digits[Math.floor (H/10)].src
+        else
+          document.imgHour1.src = Digits[10].src;
+        // Druhá cifra hodin
+        document.imgHour2.src = Digits[H%10].src;
+
+        // Cifry minut
+        document.imgMin1.src = Digits[Math.floor (M/10)].src;
+        document.imgMin2.src = Digits[M%10].src;
+
+        // Cifry sekund
+        document.imgSec1.src = Digits[Math.floor (S/10)].src;
+        document.imgSec2.src = Digits[S%10].src;
+
+        // Aktualizace hodin se provede za sekundu
+        setTimeout ("ShowTime()", 1000);
+      }
+      // -->
+    </SCRIPT>
+  </HEAD>
+
+  <BODY  onLoad = "ShowTime()" Background="back.gif" >
+    Aktuální èas:<BR>
+    <IMG Src="Empty.gif" Name="imgHour1" Width=9 Height=15>
+    <IMG Src="Empty.gif" Name="imgHour2" Width=9 Height=15>
+    <IMG Src="Colon.gif" Name="imgColon2" Width=3 Height=15>
+    <IMG Src="Empty.gif" Name="imgMin1" Width=9 Height=15>
+    <IMG Src="Empty.gif" Name="imgMin2" Width=9 Height=15>
+    <IMG Src="Colon.gif" Name="imgColon2" Width=3 Height=15>
+    <IMG Src="Empty.gif" Name="imgSec1" Width=9 Height=15>
+    <IMG Src="Empty.gif" Name="imgSec2" Width=9 Height=15>
+  </BODY>
+</HTML>
+

@@ -1,0 +1,254 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html>
+<head>
+	<title>HTML editor</title>
+</head>
+
+<body>
+<script>
+function ukaz()
+{
+okno = window.open();
+okno.document.write(document.formular.hlavni.value);
+okno.document.close();
+}
+function telo()
+{
+pozadi=prompt("Zadejte barvu pozadí stránky (anglický název) nebo cokoliv jiného (JavaScript vygeneruje odpovídající barvu zadané hrùze :)")
+pismo=prompt("Zadejte barvu textu na vaší stránce (postupujte stejnì jakou u volby pozadí")
+odkaz=prompt("Zadejte barvu odkazu na vaší stránce (postup je stejný jako u minulých prvkù")
+odkaz_aktivni=prompt("Zadejte barvu aktivního odkazu na vaší stránce (postup je stejný jako u minulých prvkù")
+odkaz_navstiveny=prompt("Zadejte barvu již navštíveného odkazu na vaší stránce (postupujte stejnì jako u minulých prvkù")
+document.formular.hlavni.value = document.formular.hlavni.value + "<BODY BGCOLOR=" + '"' + pozadi + '"' + " TEXT=" + '"' + pismo + '"' + " LINK=" + '"' + odkaz + '"' +  " ALINK=" + '"' + odkaz_aktivni  + '"' + " VLINK=" + '"' + odkaz_navstiveny + '"' + ">"
+}
+function konec_stranky()
+{
+document.formular.hlavni.value = document.formular.hlavni.value + "</BODY></HTML>"
+}
+function odkazek()
+{
+nazev=prompt("Zadejte jméno odkazu, které se zobrazí na stránce")
+cesta=prompt("Zadejte cestu odkazu")
+document.formular.hlavni.value = document.formular.hlavni.value + "<A HREF=" + '"' + cesta + '"' + ">" + nazev + "</A>"
+}
+function obrazek()
+{
+obraz=prompt("Zadejte cestu k obrázku")
+document.formular.hlavni.value = document.formular.hlavni.value + "<IMG SRC=" + '"' + obraz + '"' + ">"
+}
+function hlavicka()
+{
+titulek=prompt("Zadejte titulek stránky")
+document.formular.hlavni.value = document.formular.hlavni.value + "<HTML><HEAD><TITLE>" + titulek + "</TITLE></HEAD>"
+}
+function napisem()
+{
+adresaem=prompt("Zadejte e-mailovou adresu")
+zobrazit=prompt("Zadejte jmeno odkazu, které se zobrazí na stránce")
+document.formular.hlavni.value = document.formular.hlavni.value + "<A HREF=mailto:" + adresaem + ">" + zobrazit + "</A>"
+}
+function velikost()
+{
+velky=prompt("Zadejte velikost, ve které se zobrazí požadovaný text")
+text=prompt("Zadejte text")
+document.formular.hlavni.value = document.formular.hlavni.value + "<FONT SIZE=" + '"' + velky + '"' + ">" + text + "</FONT>"
+}
+function tucne()
+{
+text=prompt("Zadejte text, který se zobrazí tuènì")
+document.formular.hlavni.value = document.formular.hlavni.value + "<b>" + text + "</b>"
+}
+function zkosene()
+{
+text=prompt("Zadejte text, který se zobrazí zkosenì")
+document.formular.hlavni.value = document.formular.hlavni.value + "<i>" + text + "</i>"
+}
+function podtrzene()
+{
+text=prompt("Zadejte text, který se zobrazí podtrženì")
+document.formular.hlavni.value = document.formular.hlavni.value + "<u>" + text + "</u>"
+}
+function kombinace1()
+{
+if (confirm("Má být text zobrazen tuènì? (OK=ano/Storno=ne)")) {
+tucne2="<b>"
+tucne3="</b>"
+}
+}
+function kombinace2()
+{
+if (confirm("Má být text zobrazen zkosenì? (OK=ano/Storno=ne)")) {
+zkosene2="<i>"
+zkosene3="</i>"
+}
+}
+function kombinace3()
+{
+if (confirm("Má být text zobrazen podtrženì? (OK=ano/Storno=ne)")) {
+podtrzene2="<u>"
+podtrzene3="</u>"
+}
+}
+function kombinace()
+{
+tucne2=""
+tucne3=""
+zkosene2=""
+zkosene3=""
+podtrzene2=""
+podtrzene3=""
+kombinace1()
+kombinace2()
+kombinace3()
+fontik=prompt("Zadejte font písma, kterým bude zobrazen text")
+barva=prompt("Zadejte barvu, kterou se zobrazí požadovaný text")
+velikost=prompt("Zadejte velikost požadovaného textu")
+text=prompt("Zadejte text, který se zobrazí podle vašich požadavkù")
+document.formular.hlavni.value = document.formular.hlavni.value + tucne2 + zkosene2 + podtrzene2 + "<FONT FACE=" + '"' + fontik + '"' + " COLOR=" + '"' + barva + '"' + " SIZE=" + '"' + velikost + '"' + ">" + text + "</FONT>" + podtrzene3 + zkosene3 + tucne3
+}
+function novyr()
+{
+document.formular.hlavni.value = document.formular.hlavni.value + "<BR>"
+}
+function cara()
+{
+document.formular.hlavni.value = document.formular.hlavni.value + "<HR>"
+}
+function centruj()
+{
+document.formular.hlavni.value = document.formular.hlavni.value + "<CENTER>"
+}
+function centrujk()
+{
+document.formular.hlavni.value = document.formular.hlavni.value + "</CENTER>"
+}
+function doleva()
+{
+document.formular.hlavni.value = document.formular.hlavni.value + "<DIV ALIGN=" + '"' + "left" + '"' + ">"
+}
+function dolevak()
+{
+document.formular.hlavni.value = document.formular.hlavni.value + "</DIV>"
+}
+function doprava()
+{
+document.formular.hlavni.value = document.formular.hlavni.value + "<DIV ALIGN=" + '"' + "right" + '"' + ">"
+}
+function dopravak()
+{
+document.formular.hlavni.value = document.formular.hlavni.value + "</DIV>"
+}
+function tabulka()
+{
+okraj=prompt("Jak velký okraj má mít tabulka? (v èíslech)")
+document.formular.hlavni.value = document.formular.hlavni.value + "<TABLE BORDER=" + okraj + ">"
+}
+function tabulkak()
+{
+document.formular.hlavni.value = document.formular.hlavni.value + "</TABLE>"
+}
+function tr()
+{
+document.formular.hlavni.value = document.formular.hlavni.value + "<TR>"
+}
+function trk()
+{
+document.formular.hlavni.value = document.formular.hlavni.value + "</TR>"
+}
+function th()
+{
+document.formular.hlavni.value = document.formular.hlavni.value + "<TH>"
+}
+function thk()
+{
+document.formular.hlavni.value = document.formular.hlavni.value  + "</TH>"
+}
+function td()
+{
+document.formular.hlavni.value = document.formular.hlavni.value + "<TD>"
+}
+function tdk()
+{
+document.formular.hlavni.value = document.formular.hlavni.value + "</TD>"
+}
+function formik()
+{
+jmeno=prompt("Zadejte jméno formuláøe")
+akce=prompt("Zadejte akci, která se provede pøi odeslání formuláøe")
+metoda=prompt("Zadejte metodu formuláøe (GET/POST)")
+kodovani=prompt("Zadejte styl kódování (application/x-www-form-urlencoded nebo multipart/form-data)")
+document.formular.hlavni.value = document.formular.hlavni.value + "<FORM NAME=" + '"' + jmeno + '"' + " ACTION=" + '"' + akce + '"' + " METHOD=" + metoda + " ENCTYPE=" + '"' + kodovani + '"' + ">"
+}
+function formikk()
+{
+document.formular.hlavni.value = document.formular.hlavni.value + "</FORM>"
+}
+function vloztlacitko()
+{
+jmeno=prompt("Zadejte jméno prvku")
+document.formular.hlavni.value = document.formular.hlavni.value + "<INPUT TYPE=" + '"' + "button" + '"' + " NAME=" + '"' + jmeno + '"' + ">"
+}
+function vlozradio()
+{
+jmeno=prompt("Zadejte jméno prvku")
+document.formular.hlavni.value = document.formular.hlavni.value + "<INPUT TYPE=" + '"' + "radio" + '"' + " NAME=" + '"' + jmeno + '"' + ">"
+}
+function vlozcheckbox()
+{
+jmeno=prompt("Zadejte jméno prvku")
+document.formular.hlavni.value = document.formular.hlavni.value + "<INPUT TYPE=" + '"' + "checkbox" + '"' + " NAME=" + '"' + jmeno + '"' + ">"
+}
+function vloztextarea()
+{
+jmeno=prompt("Zadejte jméno prvku")
+radky=prompt("Kolik bude mít TEXTAREA øádkù?")
+sloupce=prompt("Kolik bude mít TEXTAREA sloupcù?")
+text=prompt("Zadejte text, který bude obsažen v prvku TEXTAREA (mùže být i prázdný)")
+document.formular.hlavni.value = document.formular.hlavni.value + "<TEXTAREA ROWS=" + '"' + radky + '"' + " COLS=" + sloupce + ">" + text + "</TEXTAREA>"
+}
+function vlozheslo()
+{
+jmeno=prompt("Zadejte jméno prvku")
+document.formular.hlavni.value = document.formular.hlavni.value + "<INPUT TYPE=" + '"' + "password" + '"' + " NAME=" + '"' + jmeno + '"' + ">"
+}
+function vlozsoubor()
+{
+jmeno=prompt("Zadejte jméno prvku")
+document.formular.hlavni.value = document.formular.hlavni.value + "<INPUT TYPE=" + '"' + "file" + '"' + " NAME=" + '"' + jmeno + '"' + ">"
+}
+function vlozreset()
+{
+jmeno=prompt("Zadejte jméno prvku")
+document.formular.hlavni.value = document.formular.hlavni.value + "<INPUT TYPE=" + '"' + "reset" + '"' + " NAME=" + '"' + jmeno + '"' + ">"
+}
+function vlozsubmit()
+{
+jmeno=prompt("Zadejte jméno prvku")
+document.formular.hlavni.value = document.formular.hlavni.value + "<INPUT TYPE=" + '"' + "submit" + '"' + " NAME=" + '"' + jmeno + '"' + ">"
+}
+function vloztext()
+{
+jmeno=prompt("Zadejte jméno prvku")
+document.formular.hlavni.value = document.formular.hlavni.value + "<INPUT TYPE=" + '"' + "text" + '"' + " NAME=" + '"' + jmeno + '"' + ">"
+}
+function vlozskryty()
+{
+jmeno=prompt("Zadejte jméno prvku")
+document.formular.hlavni.value = document.formular.hlavni.value + "<INPUT TYPE=" + '"' + "hidden" + '"' + " NAME=" + '"' + jmeno + '"' + ">"
+}
+</script>
+<FORM NAME="formular">
+<b>Základní:</b><INPUT TYPE="button" VALUE="hlavicka & titulek" onClick="hlavicka()"><INPUT TYPE="button" VALUE="tìlo stránky" onClick="telo()"><INPUT TYPE="button" VALUE="odkaz" onClick="odkazek()"><INPUT TYPE="button" VALUE="Vlož obrázek" onClick="obrazek()"><INPUT TYPE="button" VALUE="Napsat E-mail" onClick="napisem()"><INPUT TYPE="button" VALUE="Ukonèení stránky" onClick="konec_stranky()"><br>
+<b>Práce s textem:</b><INPUT TYPE="button" VALUE="Kompletní" onClick="kombinace()"><INPUT TYPE="button" VALUE="Jiná velikost" onClick="velikost()"><INPUT TYPE="button" VALUE="tuènì" onClick="tucne()"><INPUT TYPE="button" VALUE="Zkosenì" onClick="zkosene()"><INPUT TYPE="button" VALUE="podtrženì" onClick="podtrzene()"><INPUT TYPE="button" VALUE="Nový øádek" onClick="novyr()"><INPUT TYPE="button" VALUE="Horizontální èára" onClick="cara()"><br>
+<b>Zarovnání:</b><INPUT TYPE="button" VALUE="zarovnej na støed" onClick="centruj()"><INPUT TYPE="button" VALUE="ukonèení" onClick="centrujk()"><INPUT TYPE="button" VALUE="zarovnej doleva" onClick="doleva()"><INPUT TYPE="button" VALUE="ukonèení" onClick="dolevak()"><INPUT TYPE="button" VALUE="zarovnej doprava" onClick="doprava()"><INPUT TYPE="button" VALUE="ukonèení" onClick="dopravak()"><br>
+<b>Tabulky:</b><INPUT TYPE="button" VALUE="Tabulka" onClick="tabulka()"><INPUT TYPE="button" VALUE="Ukonèení" onClick="tabulkak()"><INPUT TYPE="button" VALUE="Nový øádek" onClick="tr()"><INPUT TYPE="button" VALUE="Ukonèení" onClick="trk()"><INPUT TYPE="button" VALUE="Hlavièková buòka" onClick="th()"><INPUT TYPE="button" VALUE="Ukonèení" onClick="thk()"><INPUT TYPE="button" VALUE="Buòka tabulky" onClick="td()"><INPUT TYPE="button" VALUE="Ukonèení" onClick="tdk()"><br>
+<b>Formuláøe:</b><INPUT TYPE="button" VALUE="Formuláø" onClick="formik()"><INPUT TYPE="button" VALUE="ukonèení" onClick="formikk()"><INPUT TYPE="button" VALUE="tlacitko" onClick="vloztlacitko()"><INPUT TYPE="button" VALUE="radio" onClick="vlozradio()"><INPUT TYPE="button" VALUE="checkbox" onClick="vlozcheckbox()"><INPUT TYPE="button" VALUE="textarea" onClick="vloztextarea()"><INPUT TYPE="button" VALUE="heslo" onClick="vlozheslo()"><INPUT TYPE="button" VALUE="pole pro soubor" onClick="vlozsoubor()"><INPUT TYPE="button" VALUE="pole pro text" onClick="vloztext()"><INPUT TYPE="button" VALUE="reset" onClick="vlozreset()"><INPUT TYPE="button" VALUE="odeslat" onClick="vlozsubmit()"><INPUT TYPE="button" VALUE="skrytý" onClick="vlozskryty()">
+<br>
+<TEXTAREA COLS="72" ROWS="20" NAME="hlavni">
+</TEXTAREA><br>
+<INPUT TYPE="button" VALUE="Ukaž stránku" onClick="ukaz()">
+<INPUT TYPE="reset" VALUE="Vymaž obrazovku">
+</form>
+</body>
+</html>

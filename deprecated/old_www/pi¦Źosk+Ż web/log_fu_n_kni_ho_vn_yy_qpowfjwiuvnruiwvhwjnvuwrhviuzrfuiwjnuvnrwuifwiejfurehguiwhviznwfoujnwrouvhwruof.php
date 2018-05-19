@@ -1,0 +1,64 @@
+ Zamluvena kniha: <b>Matematické záhady</b> od autora: Wise Bill, syst: <i>730</i> Žadatel je: <b>E.králová</b> pod login jménem: <b>volny</b> a heslem: free, v: 18:20:37 15.03. 2007 z IP: <b>81.90.168.5</b><br>
+syst: <i>Wise Bill</i> Žadatel je: <b>hledamKN</b> pod login jménem: <b>admin</b> a heslem: knihomol, v: 18:45:44 15.03. 2007 z IP: <b>194.213.231.195</b><br>
+Zamluvena kniha: <b>Encyklopedie zvíøat</b> od autora:  , syst: <i>4</i> Žadatel je: <b>pokus</b> pod login jménem: <b>volny</b> a heslem: free, v: 18:46:53 15.03. 2007 z IP: <b>194.213.231.195</b><br>
+Zamluvena kniha: <b>Encyklopedie zvíøat</b> od autora:  , syst: <i>4</i> Žadatel je: <b>pokus</b> pod login jménem: <b>volny</b> a heslem: free, v: 18:47:03 15.03. 2007 z IP: <b>194.213.231.195</b><br>
+Zamluvena kniha: <b>Panna a rentiér</b> od autora: Šmíd Jan, syst: <i>604</i> Žadatel je: <b>aaa</b> pod login jménem: <b>volny</b> a heslem: free, v: 18:47:48 15.03. 2007 z IP: <b>194.213.231.195</b><br>
+Zamluvena kniha: <b>Encyklopedie zvíøat</b> od autora:  , syst: <i>4</i> Žadatel je: <b>as</b> pod login jménem: <b>volny</b> a heslem: free, v: 18:50:20 15.03. 2007 z IP: <b>194.213.231.195</b><br>
+Zamluvena kniha: <b>Encyklopedie zvíøat</b> od autora:  , syst: <i>4</i> Žadatel je: <b>aaa</b> pod login jménem: <b>admin</b> a heslem: knihomol, v: 18:51:46 15.03. 2007 z IP: <b>194.213.231.195</b><br>
+Zamluvena kniha: <b>Encyklopedie zvíøat</b> od autora:  , syst: <i>4</i> Žadatel je: <b>nikdoAM</b> pod login jménem: <b>admin</b> a heslem: knihomol, v: 18:51:53 15.03. 2007 z IP: <b>194.213.231.195</b><br>
+Zamluvena kniha: <b>Matematické záhady</b> od autora: Wise Bill, syst: <i>730</i> Žadatel je: <b>E.Králová</b> pod login jménem: <b>admin</b> a heslem: knihomol, v: 18:55:36 15.03. 2007 z IP: <b>194.213.231.195</b><br>
+Zamluvena kniha: <b>Encyklopedie zvíøat</b> od autora:  , syst: <i>4</i> Žadatel je: <b>pokus</b> pod login jménem: <b>volny</b> a heslem: free, v: 20:10:10 15.03. 2007 z IP: <b>194.213.231.195</b><br>
+Zamluvena kniha: <b>Encyklopedie zvíøat</b> od autora:  , syst: <i>4</i> Žadatel je: <b>pokus</b> pod login jménem: <b>volny</b> a heslem: free, v: 20:11:34 15.03. 2007 z IP: <b>194.213.231.195</b><br>
+Zamluvena kniha: <b>Encyklopedie zvíøat</b> od autora:  , syst: <i>4</i> Žadatel je: <b>nikdoAM</b> pod login jménem: <b>admin</b> a heslem: knihomol, v: 20:13:07 15.03. 2007 z IP: <b>194.213.231.195</b><br>
+Zamluvena kniha: <b>Neznalost zákona neomlouvá</b> od autora: Benátèanová, syst: <i>22</i> Žadatel je: <b>test</b> pod login jménem: <b>volny</b> a heslem: free, v: 11:23:18 17.03. 2007 z IP: <b>80.78.146.245</b><br>
+Zamluvena kniha: <b>Neznalost zákona neomlouvá</b> od autora: Benátèanová, syst: <i>22</i> Žadatel je: <b>nikdoAM</b> pod login jménem: <b>admin</b> a heslem: knihomol, v: 11:24:39 17.03. 2007 z IP: <b>80.78.146.245</b><br>
+Zamluvena kniha: <b>Lexikon populárních omylù</b> od autora: Krämer Walter, syst: <i>190</i> Žadatel je: <b>nikdoAM</b> pod login jménem: <b>admin</b> a heslem: knihomol, v: 11:26:14 17.03. 2007 z IP: <b>80.78.146.245</b><br>
+Zamluvena kniha: <b>Bráškové</b> od autora: Chaloupek, syst: <i>880</i> Žadatel je: <b>nikdoAM</b> pod login jménem: <b>admin</b> a heslem: knihomol, v: 11:26:32 17.03. 2007 z IP: <b>80.78.146.245</b><br>
+Zamluvena kniha: <b>Gabriela Dubská</b> od autora:  , syst: <i>868</i> Žadatel je: <b>nikdoAM</b> pod login jménem: <b>admin</b> a heslem: knihomol, v: 10:26:04 18.03. 2007 z IP: <b>88.146.195.50</b><br>
+Zamluvena kniha: <b>Rexík pomáhá</b> od autora:  , syst: <i>874</i> Žadatel je: <b>nikdoAM</b> pod login jménem: <b>admin</b> a heslem: knihomol, v: 10:26:19 18.03. 2007 z IP: <b>88.146.195.50</b><br>
+syst: <i>hádanka</i> Žadatel je: <b>hledamKN</b> pod login jménem: <b>admin</b> a heslem: knihomol, v: 11:05:20 18.03. 2007 z IP: <b>88.146.195.50</b><br>
+Zamluvena kniha: <b>Hádanka</b> od autora: Blyton Enid, syst: <i>754</i> Žadatel je: <b>E.Králová</b> pod login jménem: <b>admin</b> a heslem: knihomol, v: 11:06:40 18.03. 2007 z IP: <b>88.146.195.50</b><br>
+syst: <i>hádanky</i> Žadatel je: <b>hledamKN</b> pod login jménem: <b>admin</b> a heslem: knihomol, v: 11:06:59 18.03. 2007 z IP: <b>88.146.195.50</b><br>
+syst: <i>hádanka</i> Žadatel je: <b>hledamKN</b> pod login jménem: <b>admin</b> a heslem: knihomol, v: 11:07:16 18.03. 2007 z IP: <b>88.146.195.50</b><br>
+Zamluvena kniha: <b>Hádanka</b> od autora: Blyton Enid, syst: <i>754</i> Žadatel je: <b>E.Králová</b> pod login jménem: <b>admin</b> a heslem: knihomol, v: 11:07:24 18.03. 2007 z IP: <b>88.146.195.50</b><br>
+Zamluvena kniha: <b>Matematické záhady</b> od autora: Wise Bill, syst: <i>730</i> Žadatel je: <b>nikdoAM</b> pod login jménem: <b>admin</b> a heslem: knihomol, v: 11:08:51 18.03. 2007 z IP: <b>88.146.195.50</b><br>
+syst: <i>Oh</i> Žadatel je: <b>hledamKN</b> pod login jménem: <b>admin</b> a heslem: knihomol, v: 11:47:14 18.03. 2007 z IP: <b>88.146.195.50</b><br>
+syst: <i>Ledové</i> Žadatel je: <b>hledamKN</b> pod login jménem: <b>admin</b> a heslem: knihomol, v: 11:49:26 18.03. 2007 z IP: <b>88.146.195.50</b><br>
+syst: <i>Ledové</i> Žadatel je: <b>hledamKN</b> pod login jménem: <b>admin</b> a heslem: knihomol, v: 11:50:12 18.03. 2007 z IP: <b>88.146.195.50</b><br>
+Zamluvena kniha: <b>Ledové srdce</b> od autora: Kellerman, syst: <i>646</i> Žadatel je: <b>I.kloud</b> pod login jménem: <b>admin</b> a heslem: knihomol, v: 11:51:05 18.03. 2007 z IP: <b>88.146.195.50</b><br>
+Zamluvena kniha: <b>Ledové srdce</b> od autora: Kellerman, syst: <i>646</i> Žadatel je: <b>I.kloud</b> pod login jménem: <b>admin</b> a heslem: knihomol, v: 11:51:14 18.03. 2007 z IP: <b>88.146.195.50</b><br>
+syst: <i>Smrt</i> Žadatel je: <b>hledamKN</b> pod login jménem: <b>admin</b> a heslem: knihomol, v: 11:51:56 18.03. 2007 z IP: <b>88.146.195.50</b><br>
+Zamluvena kniha: <b>Smrt v sutanì</b> od autora: James P. D., syst: <i>406</i> Žadatel je: <b>I.kloud</b> pod login jménem: <b>admin</b> a heslem: knihomol, v: 11:52:42 18.03. 2007 z IP: <b>88.146.195.50</b><br>
+syst: <i>Breviáø</i> Žadatel je: <b>hledamKN</b> pod login jménem: <b>admin</b> a heslem: knihomol, v: 11:53:02 18.03. 2007 z IP: <b>88.146.195.50</b><br>
+Zamluvena kniha: <b>Breviáø fantastické ženy</b> od autora: Izzo Kim, syst: <i>388</i> Žadatel je: <b>I.kloud</b> pod login jménem: <b>admin</b> a heslem: knihomol, v: 11:53:40 18.03. 2007 z IP: <b>88.146.195.50</b><br>
+Zamluvena kniha: <b>Maska smrti</b> od autora: Case John, syst: <i>244</i> Žadatel je: <b>I.kloud</b> pod login jménem: <b>admin</b> a heslem: knihomol, v: 11:54:01 18.03. 2007 z IP: <b>88.146.195.50</b><br>
+Zamluvena kniha: <b>Smrtící svùdnost</b> od autora: Roberts Nora, syst: <i>562</i> Žadatel je: <b>I.kloud</b> pod login jménem: <b>admin</b> a heslem: knihomol, v: 11:55:10 18.03. 2007 z IP: <b>88.146.195.50</b><br>
+syst: <i>Strašidla</i> Žadatel je: <b>hledamKN</b> pod login jménem: <b>admin</b> a heslem: knihomol, v: 11:56:19 18.03. 2007 z IP: <b>88.146.195.50</b><br>
+syst: <i>duchové</i> Žadatel je: <b>hledamKN</b> pod login jménem: <b>admin</b> a heslem: knihomol, v: 11:56:33 18.03. 2007 z IP: <b>88.146.195.50</b><br>
+Zamluvena kniha: <b>Strašidla, duchové</b> od autora: Müller Ondøej, syst: <i>838</i> Žadatel je: <b>I.Kloud</b> pod login jménem: <b>admin</b> a heslem: knihomol, v: 11:56:54 18.03. 2007 z IP: <b>88.146.195.50</b><br>
+Zamluvena kniha: <b>Maska smrti</b> od autora: Case John, syst: <i>244</i> Žadatel je: <b>I.kloud</b> pod login jménem: <b>admin</b> a heslem: knihomol, v: 11:57:03 18.03. 2007 z IP: <b>88.146.195.50</b><br>
+Zamluvena kniha: <b>Breviáø fantastické ženy</b> od autora: Izzo Kim, syst: <i>388</i> Žadatel je: <b>I.kloud</b> pod login jménem: <b>admin</b> a heslem: knihomol, v: 11:57:09 18.03. 2007 z IP: <b>88.146.195.50</b><br>
+Zamluvena kniha: <b>Smrt v sutanì</b> od autora: James P. D., syst: <i>406</i> Žadatel je: <b>I.kloud</b> pod login jménem: <b>admin</b> a heslem: knihomol, v: 11:57:14 18.03. 2007 z IP: <b>88.146.195.50</b><br>
+Zamluvena kniha: <b>Smrtící svùdnost</b> od autora: Roberts Nora, syst: <i>562</i> Žadatel je: <b>I.kloud</b> pod login jménem: <b>admin</b> a heslem: knihomol, v: 11:57:21 18.03. 2007 z IP: <b>88.146.195.50</b><br>
+Zamluvena kniha: <b>Strašidla, duchové</b> od autora: Müller Ondøej, syst: <i>838</i> Žadatel je: <b>I.Kloud</b> pod login jménem: <b>admin</b> a heslem: knihomol, v: 11:57:29 18.03. 2007 z IP: <b>88.146.195.50</b><br>
+Zamluvena kniha: <b>Encyklopedie zvíøat</b> od autora:  , syst: <i>4</i> Žadatel je: <b>7</b> pod login jménem: <b>volny</b> a heslem: free, v: 13:12:07 29.03. 2007 z IP: <b>88.146.195.50</b><br>
+Zamluvena kniha: <b>Na plovárnì</b> od autora: Janoušek Jiøí, syst: <i>52</i> Žadatel je: <b>10</b> pod login jménem: <b>volny</b> a heslem: free, v: 13:14:05 29.03. 2007 z IP: <b>88.146.195.50</b><br>
+Zamluvena kniha: <b>Malé cihlové stavby</b> od autora: Swift Penny, syst: <i>142</i> Žadatel je: <b>10</b> pod login jménem: <b>volny</b> a heslem: free, v: 13:14:22 29.03. 2007 z IP: <b>88.146.195.50</b><br>
+Zamluvena kniha: <b>Vyrábíme z kùže a textilu</b> od autora: Tomeš Pavel, syst: <i>154</i> Žadatel je: <b>dana</b> pod login jménem: <b>volny</b> a heslem: free, v: 13:14:41 29.03. 2007 z IP: <b>88.146.195.50</b><br>
+Zamluvena kniha: <b>Domácí recepty</b> od autora: Franziska, syst: <i>184</i> Žadatel je: <b>marie</b> pod login jménem: <b>volny</b> a heslem: free, v: 13:15:24 29.03. 2007 z IP: <b>88.146.195.50</b><br>
+Zamluvena kniha: <b>Horké polibky</b> od autora: Hay Donna, syst: <i>370</i> Žadatel je: <b>tereza</b> pod login jménem: <b>volny</b> a heslem: free, v: 13:15:49 29.03. 2007 z IP: <b>88.146.195.50</b><br>
+Zamluvena kniha: <b>Nedìle jako stvoøená pro vraždu</b> od autora: Frýbová Zdena, syst: <i>352</i> Žadatel je: <b>honza</b> pod login jménem: <b>volny</b> a heslem: free, v: 13:16:24 29.03. 2007 z IP: <b>88.146.195.50</b><br>
+Zamluvena kniha: <b>Matematické záhady</b> od autora: Wise Bill, syst: <i>730</i> Žadatel je: <b>marie</b> pod login jménem: <b>volny</b> a heslem: free, v: 13:16:52 29.03. 2007 z IP: <b>88.146.195.50</b><br>
+Zamluvena kniha: <b>Severské pohádky</b> od autora:  , syst: <i>742</i> Žadatel je: <b>váša</b> pod login jménem: <b>volny</b> a heslem: free, v: 13:17:23 29.03. 2007 z IP: <b>88.146.195.50</b><br>
+Zamluvena kniha: <b>Zbranì SS</b> od autora: Williamson, syst: <i>178</i> Žadatel je: <b>jindøich</b> pod login jménem: <b>volny</b> a heslem: free, v: 13:17:53 29.03. 2007 z IP: <b>88.146.195.50</b><br>
+Zamluvena kniha: <b>Malování</b> od autora:  , syst: <i>10</i> Žadatel je: <b>jana</b> pod login jménem: <b>volny</b> a heslem: free, v: 13:18:13 29.03. 2007 z IP: <b>88.146.195.50</b><br>
+Zamluvena kniha: <b>Nechápu jak to bylo</b> od autora: Pearson Allison, syst: <i>508</i> Žadatel je: <b>skvelá</b> pod login jménem: <b>volny</b> a heslem: free, v: 13:19:46 29.03. 2007 z IP: <b>88.146.195.50</b><br>
+Zamluvena kniha: <b>Drobné stavby</b> od autora: Hessayon D. G., syst: <i>46</i> Žadatel je: <b>pøijdu v ne  odpoledne,tak pa 7.</b> pod login jménem: <b>volny</b> a heslem: free, v: 09:13:17 1.04. 2007 z IP: <b>88.146.195.50</b><br>
+Zamluvena kniha: <b>Audrey Hepburnová</b> od autora: Paris Barry, syst: <i>100</i> Žadatel je: <b>marcelav18po</b> pod login jménem: <b>volny</b> a heslem: free, v: 09:15:48 1.04. 2007 z IP: <b>88.146.195.50</b><br>
+Zamluvena kniha: <b>Pohádky o vílách</b> od autora: Drijverová, syst: <i>796</i> Žadatel je: <b>viktorie</b> pod login jménem: <b>volny</b> a heslem: free, v: 09:21:31 1.04. 2007 z IP: <b>88.146.195.50</b><br>
+Zamluvena kniha: <b>Osudová láska</b> od autora: Viktorová Eva, syst: <i>166</i> Žadatel je: <b>Z.RÁNO</b> pod login jménem: <b>volny</b> a heslem: free, v: 09:25:18 1.04. 2007 z IP: <b>88.146.195.50</b><br>
+Zamluvena kniha: <b>Srdce zmámené</b> od autora: Plzák Miroslav, syst: <i>106</i> Žadatel je: <b>TOMAMTAKE</b> pod login jménem: <b>volny</b> a heslem: free, v: 09:26:03 1.04. 2007 z IP: <b>88.146.195.50</b><br>
+Zamluvena kniha: <b>Police a policové stìny</b> od autora: Clausen Niels, syst: <i>28</i> Žadatel je: <b>17</b> pod login jménem: <b>admin</b> a heslem: knihomol, v: 09:31:13 1.04. 2007 z IP: <b>88.146.195.50</b><br>
+Zamluvena kniha: <b>Police a policové stìny</b> od autora: Clausen Niels, syst: <i>28</i> Žadatel je: <b>17</b> pod login jménem: <b>admin</b> a heslem: knihomol, v: 09:31:21 1.04. 2007 z IP: <b>88.146.195.50</b><br>
+Zamluvena kniha: <b>Døevo v zahradì a na terase</b> od autora: Engelhard, syst: <i>34</i> Žadatel je: <b>17</b> pod login jménem: <b>admin</b> a heslem: knihomol, v: 09:31:51 1.04. 2007 z IP: <b>88.146.195.50</b><br>
+Zamluvena kniha: <b>Døevo v zahradì a na terase</b> od autora: Engelhard, syst: <i>34</i> Žadatel je: <b>17</b> pod login jménem: <b>admin</b> a heslem: knihomol, v: 09:32:06 1.04. 2007 z IP: <b>88.146.195.50</b><br>

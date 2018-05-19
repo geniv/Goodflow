@@ -1,0 +1,21 @@
+<script>
+var pocitani=0
+textik="Ahoj lidi, jaxe máte, já jsem automatickej písaø a musím tu psát poøád dokola jenom TOHLE a už z toho mám depku!!!"
+delka=textik.length
+function pis()
+{
+if (pocitani <=delka) {
+formular.pole.value=textik.substring(0,pocitani)
+pocitani++
+setTimeout("pis()",200)
+}
+else {
+pocitani=0
+pis()
+}
+}
+</script>
+<form name="formular">
+<input type="text" size="100" id="pole">
+</form>
+<body onload="pis()">

@@ -1,0 +1,5 @@
+include("geoip.inc");
+          $handle = geoip_open("GeoIP.dat", GEOIP_MEMORY_CACHE);//GEOIP_STANDARD
+          echo geoip_country_name_by_addr($handle, "77.48.34.159");
+          echo geoip_country_code_by_addr($handle, "77.48.34.159");
+          geoip_close($handle);

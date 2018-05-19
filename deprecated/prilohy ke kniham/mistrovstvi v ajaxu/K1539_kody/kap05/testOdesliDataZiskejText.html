@@ -1,0 +1,33 @@
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>Odeslání dat a získání textu pomocí frameworku Ajax Utility Library</title>
+
+    <script type="text/javascript" src="ajaxutility.js"></script>
+
+    <script language="javascript">
+
+      function zobraz(text)
+      {
+        document.getElementById('cilovyDiv').innerHTML = text;
+      }
+
+    </script>
+  </head>
+
+  <body>
+
+    <h1>Odeslání dat a získání textu pomocí frameworku Ajax Utility Library</h1>
+
+    <form>
+      <input type="button" value="Získej text" 
+      onclick="odesliDataZiskejText('zobraz.php', 'zprava=Data pro server.', zobraz)">
+    </form>
+
+    <div id="cilovyDiv">
+      <p>Získaný text se zobrazí na tomto místě.</p> 
+    </div> 
+
+  </body>
+
+</html>

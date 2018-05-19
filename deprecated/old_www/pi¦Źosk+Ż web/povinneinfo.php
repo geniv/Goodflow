@@ -1,0 +1,4 @@
+povinné info
+<?
+
+?>

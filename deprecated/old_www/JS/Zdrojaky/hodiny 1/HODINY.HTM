@@ -1,0 +1,60 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html>
+<head>
+	<title>Hodiny</title>
+</head>
+
+<body onLoad="rozhodnuti()">
+<script>
+function rozhodnuti()
+{
+if (document.formular.sys[1].checked) { // kontrola je-li tlacitko zaskrtnute
+document.formular.cas.value = ukazcas();
+}
+else if (document.formular.sys[0].checked) {
+document.formular.cas.value = ukaz2();
+}
+setTimeout("rozhodnuti()",1000);
+}
+function sekundycisla()
+{
+var ted = new Date();
+var sekundy = ted.getSeconds()
+if (+sekundy < 10)
+return (0)
+else
+return ("")
+}
+function ukaz2()
+{
+var ted = new Date();
+var hodiny = ted.getHours();
+var minuty = ted.getMinutes();
+var sekundy = ted.getSeconds()
+var cas2ukaz = +hodiny + ":" + +minuty + ":" + sekundycisla() +sekundy
+return (cas2ukaz) 
+}
+function ukazcas()
+{
+var ted = new Date();
+var hodiny = ted.getHours();
+var minuty = ted.getMinutes();
+var sekundy = ted.getSeconds()
+var casukaz = "" + ((hodiny >12) ? hodiny -12 :hodiny)
+casukaz += ((minuty < 10) ? ":0" : ":") + minuty
+casukaz += ((sekundy < 10) ? ":0" : ":") + sekundy
+casukaz += (hodiny >= 12) ? " odpoledne" : " dopoledne"
+return (casukaz) // vrati hodnotu "casukaz"
+setTimeout("ukazcas()",1000); // obnovování po sekunde
+}
+</script>
+<center>
+<form name="formular">
+<b>24</b><input type="radio" name="sys" checked>
+<input type="text" name="cas">
+<input type="radio" name="sys"><b>12</b>
+</center>
+</form>
+</body>
+</html>

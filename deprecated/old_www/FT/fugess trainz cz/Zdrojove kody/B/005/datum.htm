@@ -1,0 +1,96 @@
+<HTML>
+  <HEAD>
+    <TITLE> Výbìr data </TITLE>
+
+    <SCRIPT Language="JavaScript">
+      <!--
+        // Poèty dní v jednotlivých mìsících
+        // Únor má pro jednoduchost vždy 29 dní 
+        Days=new Array (30,29,31,30,31,30,31,31,30,31,30,31);
+
+        // Funkce, která se spustí pøi zmìnì mìsíce
+        function onChangeMonth(){
+          // Zapamatuje se vybraný den
+          var OldSelected = document.frmCalendar.selDay.selectedIndex;
+
+          // Smažou se všechny dny v nabídce
+          document.frmCalendar.selDay.options.length = 0
+
+          var optionName;
+          var Length;
+          // Poèet dní v daném mìsící
+          var NumOfDays =
+            Days[document.frmCalendar.selMonth.selectedIndex];
+
+          // Vloží se odpovídající poèet dní do nabídky
+          for (i=1; i<=NumOfDays; i++){
+            // Vytvoøí se nová položka pro den
+            optionName = new Option(i, i, false, false);
+            Length = document.frmCalendar.selDay.length;
+            document.frmCalendar.selDay.options[Length] = optionName;
+          }
+
+          // Vybere se den, který tam pùvodnì byl vybrán
+          if (OldSelected >= document.frmCalendar.selDay.length)
+            OldSelected = document.frmCalendar.selDay.length-1;
+          document.frmCalendar.selDay.options[OldSelected].selected =
+            true;
+        }
+
+        // Funkce pro získání výsledného data
+        function GetDate(){
+          DT = new Date (
+            document.frmCalendar.selYear.options[
+              document.frmCalendar.selYear.selectedIndex
+            ].value,
+            document.frmCalendar.selMonth.options[
+              document.frmCalendar.selMonth.selectedIndex
+            ].value,
+            document.frmCalendar.selDay.options[
+              document.frmCalendar.selDay.selectedIndex
+            ].value
+          );
+          return (DT);
+        }
+      // -->
+    </SCRIPT>
+  </HEAD>
+
+  <BODY OnLoad="onChangeMonth();">
+    <FORM Name="frmCalendar" OnSubmit="return false;">
+      Zadejte datum:<BR>
+
+      <SELECT Name="selDay">
+        <OPTION Value="10" Selected>1</OPTION>
+      </SELECT>
+
+      <SELECT Name="selMonth" OnChange="onChangeMonth();">
+        <OPTION Value="1" Selected>Leden</OPTION>
+        <OPTION Value="2">Únor</OPTION>
+        <OPTION Value="3">Bøezen</OPTION>
+        <OPTION Value="4">Duben</OPTION>
+        <OPTION Value="5">Kvìten</OPTION>
+        <OPTION Value="6">Èerven</OPTION>
+        <OPTION Value="7">Èervenec</OPTION>
+        <OPTION Value="8">Srpen</OPTION>
+        <OPTION Value="9">Záøí</OPTION>
+        <OPTION Value="10">Øíjen</OPTION>
+        <OPTION Value="11">Listopad</OPTION>
+        <OPTION Value="12">Prosinec</OPTION>
+      </SELECT>
+
+      <SELECT Name="selYear">
+        <OPTION Value="2000">2000</OPTION>
+        <OPTION Value="2001">2001</OPTION>
+        <OPTION Value="2002">2002</OPTION>
+        <OPTION Value="2003" Selected>2003</OPTION>
+        <OPTION Value="2004">2004</OPTION>
+        <OPTION Value="2005">2005</OPTION>
+      </SELECT>
+
+      <INPUT Type="Button" Value="GetDate" OnClick="alert (GetDate());">
+
+    </FORM>
+  </BODY>
+</HTML>
+

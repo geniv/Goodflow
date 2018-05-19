@@ -1,0 +1,36 @@
+<HTML>
+  <HEAD>
+    <TITLE>Atributy ID a CLASS</TITLE>
+    <SCRIPT Language="JavaScript">
+      // Funkce, která nastaví tøídu HTML elementu
+      // identifikovaného dle Id a tím zmìní jeho
+      // vzhled
+      function SetClass (Element, Style){
+        document.getElementById(Element).className = Style;
+      }
+    </SCRIPT>
+  </HEAD>
+  
+  <BODY>
+    <STYLE>
+      .Style1 {
+        color: green;
+      }
+
+      .Style2 {
+        color: red;
+      }
+
+    </STYLE>
+    <P>Normální odstavec</P>
+    <P Id="Test">Toto je testovací odstavec</P>
+    <P>Normální odstavec</P>
+
+    <FORM>
+       <INPUT Type="button" Value="Zelený"
+          onclick="SetClass ('Test', 'Style1')">
+       <INPUT Type="button" Value="Èervený"
+          onclick="SetClass ('Test', 'Style2')">
+    </FORM>
+  </BODY>
+</HTML>

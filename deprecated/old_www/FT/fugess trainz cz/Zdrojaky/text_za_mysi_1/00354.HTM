@@ -1,0 +1,159 @@
+<SCRIPT>
+<!-- Beginning of JavaScript -
+
+
+
+var textfont="Verdana"
+var textsize=12
+var textcolor="FF0000"
+var letterspace=12
+var msg=new Array()
+msg[0]="You could have!"
+msg[1]="THIS ON YOUR WEBPAGE?"
+msg[2]="HOPE YOU LIKE IT?"
+msg[3]="PLEASE VISIT MY SITE."
+var maxloop=50
+var x,y
+var step=20
+var flag=0
+var timer
+var msglength=msg[0].length-1
+var i_mes=0
+var loopcounter=0
+var xpos=new Array()
+var ypos=new Array()
+for (i=0; i<=msg.length-1;i++) {
+msg[i]=msg[i]+" "
+}
+for (i=1; i<=msg.length-1;i++) {
+if(msg[i].length-1 >= msg[i-1].length-1) {msglength=msg[i].length-1}
+}
+for (i=0; i<=msglength-1;i++) {
+xpos[i]=0
+ypos[i]=0
+}
+if (document.layers) {
+if (textsize>20) {textsize=6}
+else if (textsize>20) {textsize=5}
+else if (textsize>14) {textsize=4} 
+else if (textsize>10) {textsize=3}
+else if (textsize>8) {textsize=2}
+else if (textsize<=7) {textsize=1}
+}
+function handlerMM(e){
+x = (document.layers) ? e.pageX : event.clientX
+y = (document.layers) ? e.pageY : event.clientY
+flag=1
+}
+function makesnake() {
+if (flag==1 && loopcounter<=maxloop) {
+for (i=message.length-1; i>=1; i--) {
+xpos[i]=xpos[i-1]+step
+ypos[i]=ypos[i-1]
+}
+xpos[0]=x+step
+ypos[0]=y
+if (document.all) {
+for (i=0; i<message.length-1; i++) {
+var thisspan = eval("document.all.span"+(i)+".style")
+thisspan.posLeft=xpos[i]
+thisspan.posTop=ypos[i]
+}
+}
+if (document.layers) {
+for (i=0; i<message.length-1; i++) {
+var thisspan = eval("document.span"+i)
+thisspan.left=xpos[i]
+thisspan.top=ypos[i]
+}
+}
+loopcounter++
+timer=setTimeout("makesnake()",20)
+}
+else {
+clearTimeout(timer)
+clearmessage()
+}
+}
+
+function clearmessage() {
+loopcounter=0
+if (document.all) {
+for (i=0;i<=msglength;i++) { 
+var thisspan = eval("document.all.span"+i)
+thisspan.innerHTML=" "
+var thisspan = eval("document.all.span"+(i)+".style")
+thisspan.posLeft=-5000 
+}
+}
+if (document.layers) {
+for (i=0;i<=msglength;i++) {
+var thisspan = eval("document.span"+i+".document")
+thisspan.left=-5000
+thisspan.write("<p> </p>")
+thisspan.clear()
+thisspan = eval("document.span"+i)
+}
+}
+changemessage()
+}
+
+function changemessage() {
+var messa=msg[i_mes]
+message=messa.split("")
+if (document.all) {
+for (i=0;i<=message.length-1;i++) {
+var thisspan = eval("document.all.span"+i)
+thisspan.innerHTML="<p style='font-family:"+textfont+";font-size:"+textsize+";color:"+textcolor+"'>"+message[i]+"</p>"
+}
+}
+if (document.layers) {
+for (i=0; i<message.length-1; i++) {
+var thisspan=eval("document.span"+i+".document")
+thisspan.write("<p><font size="+textsize+" color="+textcolor+" face="+textfont+">"+message[i]+"</font></p>")
+thisspan.clear()
+}
+}
+i_mes++ 
+if (i_mes>=msg.length) {i_mes=0}
+i_path=0
+timer=setTimeout("makesnake()",50)
+}
+
+// - End of JavaScript - -->
+</SCRIPT>
+
+<STYLE>.spanstyle {
+LEFT: -5000px; POSITION: absolute
+}
+.explainstyle {
+FONT-SIZE: 8pt; LEFT: 80px; WIDTH: 440px; COLOR: #ffffff; FONT-FAMILY: Verdana; POSITION: absolute; TOP: 140px
+}
+A {
+COLOR: #ff0000
+}
+A:hover {
+COLOR: #ffff00
+}
+</STYLE>
+
+<META content="MSHTML 5.50.4134.600" name=GENERATOR></HEAD>
+<BODY bgColor=#000000 onload=clearmessage()><I>
+<SCRIPT>
+<!-- Beginning of JavaScript -
+
+for (i=0;i<=msglength;i++) {
+document.write("<span id='span"+i+"' class='spanstyle'>")
+document.write("</span>")
+}
+
+if (document.layers){
+document.captureEvents(Event.MOUSEMOVE);
+}
+document.onmousemove = handlerMM;
+
+// - End of JavaScript - -->
+</SCRIPT>
+.</A>
+<DIV></DIV>
+</I></BODY>

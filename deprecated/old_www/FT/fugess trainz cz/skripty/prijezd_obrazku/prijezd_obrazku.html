@@ -1,0 +1,56 @@
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=windows-1250">
+<script language="javascript">
+<!--
+browser = (((navigator.appName == "Netscape") && (parseInt(navigator.appVersion) >= 3 )) || ((navigator.appName == "Microsoft Internet Explorer") && (parseInt(navigator.appVersion) >= 4 )))
+ie4 = ((navigator.appName == "Microsoft Internet Explorer") && (parseInt(navigator.appVersion) >= 4 ))
+ns4 = ((navigator.appName == "Netscape") && (parseInt(navigator.appVersion) >= 4 ))
+
+if (ns4) {
+    layerRef="document.layers";
+    styleRef="";
+    imageRef="document.layers[\"menu\"].document.images";
+} else {
+    layerRef="document.all";
+    styleRef=".style";
+    imageRef="document.images";
+}       
+
+function moveSaturn(which, start, finish, step, speed){  
+  if (ie4 || ns4){
+    if (start < finish){ 
+      eval(layerRef + '["' + which +'"]' + styleRef + '.top = start');
+      eval(layerRef + '["' + which +'"]' + styleRef + '.left = start');
+      start=start+step; 
+      setTimeout("moveSaturn('"+which+"',"+start+","+finish+","+step+","+speed+")",speed);
+    }     
+  }
+}
+//-->
+</script>
+
+</head>
+
+<script language="javascript">
+<!-- Different <body> tags depending on browser foodchain placement
+if ((ie4) || (ns4)){
+        document.writeln("<body bgcolor=FFFFFF text=000000 link=blue vlink=blue onload=\"moveSaturn(\'saturn\',-125,0,1,1)\">");
+        }else{
+        document.writeln("<body bgcolor=FFFFFF link=blue vlink=blue text=black>");
+        }
+//-->
+</script>
+
+<div id="saturn" style="position: absolute; left: -220; top: -220; z-index: 0">
+<script language="javascript">
+<!-- Only need to output this division if we're using IE4 or NS4
+if ((ie4) || (ns4)){
+        document.writeln("<img src=logo.gif width=181 height=161>");
+        }
+//-->
+</script>
+</div>
+
+</body>
+</html>

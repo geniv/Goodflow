@@ -1,0 +1,34 @@
+Options -Indexes
+
+ErrorDocument 404 error_page.html
+ErrorDocument 403 error_page.html
+ErrorDocument 500 error_page.html
+
+AddHandler php5-cgi .php
+Action php5-cgi /php5cgi/php
+
+#na serveru: %{DOCUMENT_ROOT}/
+
+RewriteEngine On
+
+#stranky
+RewriteRule ^uvod           %{DOCUMENT_ROOT}/index.php?action=uvod [L,QSA]
+RewriteRule ^grafika        %{DOCUMENT_ROOT}/index.php?action=grafika [L,QSA]
+RewriteRule ^nabidka        %{DOCUMENT_ROOT}/index.php?action=nabidka [L,QSA]
+RewriteRule ^kontakt        %{DOCUMENT_ROOT}/index.php?action=kontakt [L,QSA]
+RewriteRule ^administrace   %{DOCUMENT_ROOT}/index.php?action=administrace [L,QSA]
+RewriteRule ^odhlasit       %{DOCUMENT_ROOT}/index.php?action=administrace&akce=logoff [L,QSA]
+
+#administrace
+RewriteRule ^_texty               %{DOCUMENT_ROOT}/index.php?action=administrace&akce=texty [L,QSA]
+
+RewriteRule ^_novinky-(.*)-(.*)   %{DOCUMENT_ROOT}/index.php?action=administrace&akce=novinky&co=$1&cislo=$2 [L,QSA]
+RewriteRule ^_novinky-(.*)        %{DOCUMENT_ROOT}/index.php?action=administrace&akce=novinky&co=$1 [L,QSA]
+RewriteRule ^_novinky             %{DOCUMENT_ROOT}/index.php?action=administrace&akce=novinky [L,QSA]
+
+RewriteRule ^_grafika-(.*)-(.*)   %{DOCUMENT_ROOT}/index.php?action=administrace&akce=grafika&co=$1&cislo=$2 [L,QSA]
+RewriteRule ^_grafika-(.*)        %{DOCUMENT_ROOT}/index.php?action=administrace&akce=grafika&co=$1 [L,QSA]
+RewriteRule ^_grafika             %{DOCUMENT_ROOT}/index.php?action=administrace&akce=grafika [L,QSA]
+
+RewriteRule ^_kontakt-(.*)-(.*)   %{DOCUMENT_ROOT}/index.php?action=administrace&akce=kontakt&co=$1&cislo=$2 [L,QSA]
+RewriteRule ^_kontakt             %{DOCUMENT_ROOT}/index.php?action=administrace&akce=kontakt [L,QSA]

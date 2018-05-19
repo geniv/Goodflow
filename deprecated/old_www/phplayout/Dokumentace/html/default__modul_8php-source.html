@@ -1,0 +1,259 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>Novy vychozi PHP layout: Zdrojový soubor /var/www/phplayout/default_modul.php</title>
+<link href="tabs.css" rel="stylesheet" type="text/css">
+<link href="doxygen.css" rel="stylesheet" type="text/css">
+</head><body>
+<!-- Generováno programem Doxygen 1.5.8 -->
+<div class="navigation" id="top">
+  <div class="tabs">
+    <ul>
+      <li><a href="index.html"><span>Hlavní&nbsp;stránka</span></a></li>
+      <li><a href="annotated.html"><span>Třídy</span></a></li>
+      <li class="current"><a href="files.html"><span>Soubory</span></a></li>
+    </ul>
+  </div>
+  <div class="tabs">
+    <ul>
+      <li><a href="files.html"><span>Seznam&nbsp;souborů</span></a></li>
+      <li><a href="globals.html"><span>Symboly&nbsp;v&nbsp;souborech</span></a></li>
+    </ul>
+  </div>
+<h1>/var/www/phplayout/default_modul.php</h1><a href="default__modul_8php.html">Zobrazit dokumentaci tohoto souboru.</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 &lt;?php
+<a name="l00002"></a>00002 
+<a name="l00014"></a><a class="code" href="classDefaultModule.html">00014</a> <span class="keyword">class </span><a class="code" href="classDefaultModule.html">DefaultModule</a>
+<a name="l00015"></a>00015 {
+<a name="l00016"></a><a class="code" href="classDefaultModule.html#26b23ce6a6e67f75c7675e215d8ce775">00016</a>   <span class="keyword">private</span> <a class="code" href="classDefaultModule.html#26b23ce6a6e67f75c7675e215d8ce775">$adresa_menu</a>;
+<a name="l00017"></a>00017 
+<a name="l00028"></a><a class="code" href="classDefaultModule.html#f9bc13977b7099f00c4a74192ce85dce">00028</a>   <span class="keyword">public</span> function <a class="code" href="classDefaultModule.html#f9bc13977b7099f00c4a74192ce85dce">NactiObsahSouboru</a>($soubor, $once = <span class="keyword">true</span>)
+<a name="l00029"></a>00029   {
+<a name="l00030"></a>00030     <a class="code" href="_8unikatni__fukce_8php.html#e241cf0159803673d118f68d99e6342f">$result</a> = <span class="stringliteral">""</span>;
+<a name="l00031"></a>00031     <span class="keywordflow">if</span> (file_exists($soubor))
+<a name="l00032"></a>00032     {
+<a name="l00033"></a>00033       <a class="code" href="_8unikatni__fukce_8php.html#e241cf0159803673d118f68d99e6342f">$result</a> = ($once ? include_once $soubor : include $soubor);
+<a name="l00034"></a>00034     }
+<a name="l00035"></a>00035       <span class="keywordflow">else</span>
+<a name="l00036"></a>00036     {
+<a name="l00037"></a>00037       echo <span class="stringliteral">"chyba: soubor: &lt;strong&gt;{$soubor}&lt;/strong&gt; neexistuje"</span>;
+<a name="l00038"></a>00038     }
+<a name="l00039"></a>00039 
+<a name="l00040"></a>00040     <span class="keywordflow">return</span> <a class="code" href="_8unikatni__fukce_8php.html#e241cf0159803673d118f68d99e6342f">$result</a>;
+<a name="l00041"></a>00041   }
+<a name="l00042"></a>00042 
+<a name="l00057"></a><a class="code" href="classDefaultModule.html#63db9554376ce0086c7769de33e6091b">00057</a>   <span class="keyword">public</span> function <a class="code" href="classDefaultModule.html#63db9554376ce0086c7769de33e6091b">PrevodUnikatnihoTextu</a>($sekce)
+<a name="l00058"></a>00058   {
+<a name="l00059"></a>00059     $parametr = func_get_args();
+<a name="l00060"></a>00060     $pocet = func_num_args();
+<a name="l00061"></a>00061     <a class="code" href="_8unikatni__fukce_8php.html#e241cf0159803673d118f68d99e6342f">$result</a> = $sekce; <span class="comment">//vlozeni do promenne result</span>
+<a name="l00062"></a>00062 
+<a name="l00063"></a>00063     <span class="keywordflow">switch</span> (gettype(<a class="code" href="_8unikatni__fukce_8php.html#e241cf0159803673d118f68d99e6342f">$result</a>))
+<a name="l00064"></a>00064     {
+<a name="l00065"></a>00065       <span class="keywordflow">case</span> <span class="stringliteral">"integer"</span>:
+<a name="l00066"></a>00066         settype(<a class="code" href="_8unikatni__fukce_8php.html#e241cf0159803673d118f68d99e6342f">$result</a>, <span class="stringliteral">"integer"</span>);
+<a name="l00067"></a>00067       <span class="keywordflow">break</span>;
+<a name="l00068"></a>00068 
+<a name="l00069"></a>00069       <span class="keywordflow">case</span> <span class="stringliteral">"array"</span>:
+<a name="l00070"></a>00070         <span class="keywordflow">if</span> (is_array(<a class="code" href="_8unikatni__fukce_8php.html#e241cf0159803673d118f68d99e6342f">$result</a>[0])) <span class="comment">//detekce pole pro admin_menu</span>
+<a name="l00071"></a>00071         {
+<a name="l00072"></a>00072           <span class="keywordflow">for</span> ($i = 0; $i &lt; count(<a class="code" href="_8unikatni__fukce_8php.html#e241cf0159803673d118f68d99e6342f">$result</a>); $i++)
+<a name="l00073"></a>00073           {
+<a name="l00074"></a>00074             $klic = array_keys(<a class="code" href="_8unikatni__fukce_8php.html#e241cf0159803673d118f68d99e6342f">$result</a>[$i]);
+<a name="l00075"></a>00075             <span class="keywordflow">for</span> ($j = 0; $j &lt; count($klic); $j++)
+<a name="l00076"></a>00076             {
+<a name="l00077"></a>00077               <span class="keywordflow">for</span> ($k = 1; $k &lt; $pocet; $k++)
+<a name="l00078"></a>00078               {
+<a name="l00079"></a>00079                 <a class="code" href="_8unikatni__fukce_8php.html#e241cf0159803673d118f68d99e6342f">$result</a>[$i][$klic[$j]] = str_replace(<span class="stringliteral">"@@{$k}@@"</span>, $parametr[$k], <a class="code" href="_8unikatni__fukce_8php.html#e241cf0159803673d118f68d99e6342f">$result</a>[$i][$klic[$j]]);
+<a name="l00080"></a>00080               }
+<a name="l00081"></a>00081             }
+<a name="l00082"></a>00082           }
+<a name="l00083"></a>00083         }
+<a name="l00084"></a>00084           <span class="keywordflow">else</span>
+<a name="l00085"></a>00085         {
+<a name="l00086"></a>00086           $klic = array_keys(<a class="code" href="_8unikatni__fukce_8php.html#e241cf0159803673d118f68d99e6342f">$result</a>);
+<a name="l00087"></a>00087 
+<a name="l00088"></a>00088           <span class="keywordflow">for</span> ($i = 0; $i &lt; count($klic); $i++) <span class="comment">//projde klice</span>
+<a name="l00089"></a>00089           {
+<a name="l00090"></a>00090             <span class="keywordflow">for</span> ($j = 1; $j &lt; $pocet; $j++) <span class="comment">//v parametru projde parametr</span>
+<a name="l00091"></a>00091             {
+<a name="l00092"></a>00092               <a class="code" href="_8unikatni__fukce_8php.html#e241cf0159803673d118f68d99e6342f">$result</a>[$klic[$i]] = str_replace(<span class="stringliteral">"@@{$j}@@"</span>, $parametr[$j], <a class="code" href="_8unikatni__fukce_8php.html#e241cf0159803673d118f68d99e6342f">$result</a>[$klic[$i]]);
+<a name="l00093"></a>00093             }
+<a name="l00094"></a>00094           }
+<a name="l00095"></a>00095         }
+<a name="l00096"></a>00096       <span class="keywordflow">break</span>;
+<a name="l00097"></a>00097 
+<a name="l00098"></a>00098       <span class="keywordflow">case</span> <span class="stringliteral">"string"</span>:
+<a name="l00099"></a>00099         $end_index = count($parametr) - 1;  <span class="comment">//algoritmus na slouceni pole s paramerem</span>
+<a name="l00100"></a>00100         <span class="keywordflow">if</span> ($parametr[$end_index][0] === <span class="stringliteral">"array_args"</span>)
+<a name="l00101"></a>00101         {
+<a name="l00102"></a>00102           <a class="code" href="_8unikatni__fukce_8php.html#e241cf0159803673d118f68d99e6342f">$result</a> = $parametr[0];
+<a name="l00103"></a>00103           $mezi = array_slice($parametr[$end_index], 1);  <span class="comment">//odstrani: array_args</span>
+<a name="l00104"></a>00104           $mezi0 = array_slice($parametr, 1, -1); <span class="comment">//vezme text bez [0] a bez posledniho [$end_index]</span>
+<a name="l00105"></a>00105 
+<a name="l00106"></a>00106           $mezera[] = <span class="stringliteral">""</span>; <span class="comment">//vlozeni prazdne mezery</span>
+<a name="l00107"></a>00107           $parametr = array_merge($mezera, $mezi0, $mezi);  <span class="comment">//slouceni mezery, vezme pevne parametry a nakonec prida pridane parametry</span>
+<a name="l00108"></a>00108           $pocet = count($parametr);  <span class="comment">//vypocita novy pocet parametru</span>
+<a name="l00109"></a>00109         }
+<a name="l00110"></a>00110 
+<a name="l00111"></a>00111         <span class="keywordflow">for</span> ($i = 1; $i &lt; $pocet; $i++)
+<a name="l00112"></a>00112         {
+<a name="l00113"></a>00113           <a class="code" href="_8unikatni__fukce_8php.html#e241cf0159803673d118f68d99e6342f">$result</a> = str_replace(<span class="stringliteral">"@@{$i}@@"</span>, $parametr[$i], <a class="code" href="_8unikatni__fukce_8php.html#e241cf0159803673d118f68d99e6342f">$result</a>);
+<a name="l00114"></a>00114         }
+<a name="l00115"></a>00115       <span class="keywordflow">break</span>;
+<a name="l00116"></a>00116     }
+<a name="l00117"></a>00117 
+<a name="l00118"></a>00118     <span class="keywordflow">return</span> <a class="code" href="_8unikatni__fukce_8php.html#e241cf0159803673d118f68d99e6342f">$result</a>;
+<a name="l00119"></a>00119   }
+<a name="l00120"></a>00120 
+<a name="l00135"></a><a class="code" href="classDefaultModule.html#f43261ee577b5bedbdaff44d21c64d38">00135</a>   <span class="keyword">public</span> function <a class="code" href="classDefaultModule.html#f43261ee577b5bedbdaff44d21c64d38">NactiUnikatniObsah</a>($sekce)
+<a name="l00136"></a>00136   {
+<a name="l00137"></a>00137     $parametr = func_get_args();
+<a name="l00138"></a>00138     $pocet = func_num_args();
+<a name="l00139"></a>00139     <a class="code" href="_8unikatni__fukce_8php.html#e241cf0159803673d118f68d99e6342f">$result</a> = $sekce; <span class="comment">//vlozeni do promenne result</span>
+<a name="l00140"></a>00140 
+<a name="l00141"></a>00141     <span class="keywordflow">switch</span> (gettype(<a class="code" href="_8unikatni__fukce_8php.html#e241cf0159803673d118f68d99e6342f">$result</a>))
+<a name="l00142"></a>00142     {
+<a name="l00143"></a>00143       <span class="keywordflow">case</span> <span class="stringliteral">"integer"</span>:
+<a name="l00144"></a>00144         settype(<a class="code" href="_8unikatni__fukce_8php.html#e241cf0159803673d118f68d99e6342f">$result</a>, <span class="stringliteral">"integer"</span>);
+<a name="l00145"></a>00145       <span class="keywordflow">break</span>;
+<a name="l00146"></a>00146 
+<a name="l00147"></a>00147       <span class="keywordflow">case</span> <span class="stringliteral">"array"</span>:
+<a name="l00148"></a>00148         <span class="keywordflow">if</span> (is_array(<a class="code" href="_8unikatni__fukce_8php.html#e241cf0159803673d118f68d99e6342f">$result</a>[0])) <span class="comment">//detekce pole pro admin_menu</span>
+<a name="l00149"></a>00149         {
+<a name="l00150"></a>00150           <span class="keywordflow">for</span> ($i = 0; $i &lt; count(<a class="code" href="_8unikatni__fukce_8php.html#e241cf0159803673d118f68d99e6342f">$result</a>); $i++)
+<a name="l00151"></a>00151           {
+<a name="l00152"></a>00152             $klic = array_keys(<a class="code" href="_8unikatni__fukce_8php.html#e241cf0159803673d118f68d99e6342f">$result</a>[$i]);
+<a name="l00153"></a>00153             <span class="keywordflow">for</span> ($j = 0; $j &lt; count($klic); $j++)
+<a name="l00154"></a>00154             {
+<a name="l00155"></a>00155               <span class="keywordflow">for</span> ($k = 1; $k &lt; $pocet; $k++)
+<a name="l00156"></a>00156               {
+<a name="l00157"></a>00157                 <a class="code" href="_8unikatni__fukce_8php.html#e241cf0159803673d118f68d99e6342f">$result</a>[$i][$klic[$j]] = str_replace(<span class="stringliteral">"%%{$k}%%"</span>, $parametr[$k], <a class="code" href="_8unikatni__fukce_8php.html#e241cf0159803673d118f68d99e6342f">$result</a>[$i][$klic[$j]]);
+<a name="l00158"></a>00158               }
+<a name="l00159"></a>00159             }
+<a name="l00160"></a>00160           }
+<a name="l00161"></a>00161         }
+<a name="l00162"></a>00162           <span class="keywordflow">else</span>
+<a name="l00163"></a>00163         {
+<a name="l00164"></a>00164           $klic = array_keys(<a class="code" href="_8unikatni__fukce_8php.html#e241cf0159803673d118f68d99e6342f">$result</a>);
+<a name="l00165"></a>00165 
+<a name="l00166"></a>00166           <span class="keywordflow">for</span> ($i = 0; $i &lt; count($klic); $i++) <span class="comment">//projde klice</span>
+<a name="l00167"></a>00167           {
+<a name="l00168"></a>00168             <span class="keywordflow">for</span> ($j = 1; $j &lt; $pocet; $j++) <span class="comment">//v parametru projde parametr</span>
+<a name="l00169"></a>00169             {
+<a name="l00170"></a>00170               <a class="code" href="_8unikatni__fukce_8php.html#e241cf0159803673d118f68d99e6342f">$result</a>[$klic[$i]] = str_replace(<span class="stringliteral">"%%{$j}%%"</span>, $parametr[$j], <a class="code" href="_8unikatni__fukce_8php.html#e241cf0159803673d118f68d99e6342f">$result</a>[$klic[$i]]);
+<a name="l00171"></a>00171             }
+<a name="l00172"></a>00172           }
+<a name="l00173"></a>00173         }
+<a name="l00174"></a>00174       <span class="keywordflow">break</span>;
+<a name="l00175"></a>00175 
+<a name="l00176"></a>00176       <span class="keywordflow">case</span> <span class="stringliteral">"string"</span>:
+<a name="l00177"></a>00177         $end_index = count($parametr) - 1;  <span class="comment">//algoritmus na slouceni pole s paramerem</span>
+<a name="l00178"></a>00178         <span class="keywordflow">if</span> ($parametr[$end_index][0] === <span class="stringliteral">"array_args"</span>)
+<a name="l00179"></a>00179         {
+<a name="l00180"></a>00180           <a class="code" href="_8unikatni__fukce_8php.html#e241cf0159803673d118f68d99e6342f">$result</a> = $parametr[0];
+<a name="l00181"></a>00181           $mezi = array_slice($parametr[$end_index], 1);  <span class="comment">//odstrani: array_args</span>
+<a name="l00182"></a>00182           $mezi0 = array_slice($parametr, 1, -1); <span class="comment">//vezme text bez [0] a bez posledniho [$end_index]</span>
+<a name="l00183"></a>00183 
+<a name="l00184"></a>00184           $mezera[] = <span class="stringliteral">""</span>; <span class="comment">//vlozeni prazdne mezery</span>
+<a name="l00185"></a>00185           $parametr = array_merge($mezera, $mezi0, $mezi);  <span class="comment">//slouceni mezery, vezme pevne parametry a nakonec prida pridane parametry</span>
+<a name="l00186"></a>00186           $pocet = count($parametr);  <span class="comment">//vypocita novy pocet parametru</span>
+<a name="l00187"></a>00187         }
+<a name="l00188"></a>00188 
+<a name="l00189"></a>00189         <span class="keywordflow">for</span> ($i = 1; $i &lt; $pocet; $i++)
+<a name="l00190"></a>00190         {
+<a name="l00191"></a>00191           <a class="code" href="_8unikatni__fukce_8php.html#e241cf0159803673d118f68d99e6342f">$result</a> = str_replace(<span class="stringliteral">"%%{$i}%%"</span>, $parametr[$i], <a class="code" href="_8unikatni__fukce_8php.html#e241cf0159803673d118f68d99e6342f">$result</a>);
+<a name="l00192"></a>00192         }
+<a name="l00193"></a>00193       <span class="keywordflow">break</span>;
+<a name="l00194"></a>00194     }
+<a name="l00195"></a>00195 
+<a name="l00196"></a>00196     <span class="keywordflow">return</span> <a class="code" href="_8unikatni__fukce_8php.html#e241cf0159803673d118f68d99e6342f">$result</a>;
+<a name="l00197"></a>00197   }
+<a name="l00198"></a>00198 
+<a name="l00208"></a><a class="code" href="classDefaultModule.html#57cf28b8e9f064fa383fa736218001bd">00208</a>   <span class="keyword">private</span> function <a class="code" href="classDefaultModule.html#57cf28b8e9f064fa383fa736218001bd">NactiFunkci</a>($index, $funkce)
+<a name="l00209"></a>00209   {
+<a name="l00210"></a>00210     include_once <span class="stringliteral">"promenne.php"</span>;
+<a name="l00211"></a>00211     include_once <span class="stringliteral">"funkce.php"</span>;
+<a name="l00212"></a>00212     $var = <span class="keyword">new</span> <a class="code" href="classPromenne.html">Promenne</a>();
+<a name="l00213"></a>00213     $main = <span class="keyword">new</span> <a class="code" href="classFunkce.html">Funkce</a>($var, 0);
+<a name="l00214"></a>00214 
+<a name="l00215"></a>00215     $paramatr = func_get_args();
+<a name="l00216"></a>00216     $pocet = func_num_args();
+<a name="l00217"></a>00217     $argv = array();
+<a name="l00218"></a>00218     <span class="keywordflow">if</span> ($pocet &gt; 2)
+<a name="l00219"></a>00219     {
+<a name="l00220"></a>00220       <span class="keywordflow">for</span> ($i = 2, $j = 0; $i &lt; $pocet; $i++, $j++)
+<a name="l00221"></a>00221       {
+<a name="l00222"></a>00222         $argv[$j] = $paramatr[$i];  <span class="comment">//prevedeni parametru</span>
+<a name="l00223"></a>00223       }
+<a name="l00224"></a>00224     }
+<a name="l00225"></a>00225 
+<a name="l00226"></a>00226     <span class="keywordflow">if</span> (is_string($index))
+<a name="l00227"></a>00227     {
+<a name="l00228"></a>00228       $cis = -1;
+<a name="l00229"></a>00229       <span class="keywordflow">for</span> ($i = 0; $i &lt; count($var-&gt;moduly); $i++)
+<a name="l00230"></a>00230       {
+<a name="l00231"></a>00231         <span class="keywordflow">if</span> ($var-&gt;moduly[$i][<span class="stringliteral">"class"</span>] == $index)
+<a name="l00232"></a>00232         {
+<a name="l00233"></a>00233           $cis = $i;
+<a name="l00234"></a>00234           <span class="keywordflow">break</span>;
+<a name="l00235"></a>00235         }
+<a name="l00236"></a>00236       }
+<a name="l00237"></a>00237 
+<a name="l00238"></a>00238       <span class="keywordflow">if</span> ($cis == -1)
+<a name="l00239"></a>00239       {
+<a name="l00240"></a>00240         echo <span class="stringliteral">"POZOR! Nepodařilo se najít třídu s názvem: ''{$index}'' !!&lt;br /&gt;\n"</span>;
+<a name="l00241"></a>00241       }
+<a name="l00242"></a>00242         <span class="keywordflow">else</span>
+<a name="l00243"></a>00243       {
+<a name="l00244"></a>00244         $index = $cis;
+<a name="l00245"></a>00245       }
+<a name="l00246"></a>00246     }
+<a name="l00247"></a>00247 
+<a name="l00248"></a>00248     <a class="code" href="_8unikatni__fukce_8php.html#e241cf0159803673d118f68d99e6342f">$result</a> = <span class="stringliteral">""</span>;
+<a name="l00249"></a>00249     <span class="keywordflow">if</span> ($cis != -1)
+<a name="l00250"></a>00250     {
+<a name="l00251"></a>00251       <span class="keywordflow">if</span> (method_exists($var-&gt;moduly[$index][<span class="stringliteral">"class"</span>], $funkce))
+<a name="l00252"></a>00252       {
+<a name="l00253"></a>00253         <a class="code" href="_8unikatni__fukce_8php.html#e241cf0159803673d118f68d99e6342f">$result</a> = call_user_func_array(array($main, $funkce), $argv);  <span class="comment">//trida::funkce, parametry</span>
+<a name="l00254"></a>00254       }
+<a name="l00255"></a>00255         <span class="keywordflow">else</span>
+<a name="l00256"></a>00256       {
+<a name="l00257"></a>00257         <span class="keywordflow">if</span> (!Empty($var-&gt;moduly[$index][<span class="stringliteral">"class"</span>]))
+<a name="l00258"></a>00258         {
+<a name="l00259"></a>00259           echo <span class="stringliteral">"POZOR! U třídy: ''{$var-&gt;moduly[$index]["</span><span class="keyword">class</span><span class="stringliteral">"]}'' se neporařilo načíst funkci: ''{$funkce}''!&lt;br /&gt;\n"</span>;
+<a name="l00260"></a>00260         }
+<a name="l00261"></a>00261           <span class="keywordflow">else</span>
+<a name="l00262"></a>00262         {
+<a name="l00263"></a>00263           echo <span class="stringliteral">"POZOR! Nepodařilo se najít třídu o indexu:  ''{$index}''&lt;br /&gt;\n"</span>;
+<a name="l00264"></a>00264         }
+<a name="l00265"></a>00265       }
+<a name="l00266"></a>00266     }
+<a name="l00267"></a>00267 
+<a name="l00268"></a>00268     <span class="keywordflow">return</span> <a class="code" href="_8unikatni__fukce_8php.html#e241cf0159803673d118f68d99e6342f">$result</a>;
+<a name="l00269"></a>00269   }
+<a name="l00270"></a>00270 
+<a name="l00277"></a><a class="code" href="classDefaultModule.html#de138416b3a548d72b50432499895bb7">00277</a>   <span class="keyword">public</span> function <a class="code" href="classDefaultModule.html#de138416b3a548d72b50432499895bb7">NastavitAdresuMenu</a>($adresa)
+<a name="l00278"></a>00278   {
+<a name="l00279"></a>00279     $this-&gt;adresa_menu = $adresa;
+<a name="l00280"></a>00280   }
+<a name="l00281"></a>00281 
+<a name="l00288"></a><a class="code" href="classDefaultModule.html#90378f9e29a64aaf668eecc26cae9ae3">00288</a>   <span class="keyword">public</span> function <a class="code" href="classDefaultModule.html#90378f9e29a64aaf668eecc26cae9ae3">AdminTitle</a>()
+<a name="l00289"></a>00289   {
+<a name="l00290"></a>00290     <a class="code" href="_8unikatni__fukce_8php.html#e241cf0159803673d118f68d99e6342f">$result</a> = $this-&gt;<a class="code" href="classDefaultModule.html#57cf28b8e9f064fa383fa736218001bd">NactiFunkci</a>(<span class="stringliteral">"Funkce"</span>, <span class="stringliteral">"CallAdminTitle"</span>, $this-&gt;adresa_menu);
+<a name="l00291"></a>00291 
+<a name="l00292"></a>00292     <span class="keywordflow">return</span> <a class="code" href="_8unikatni__fukce_8php.html#e241cf0159803673d118f68d99e6342f">$result</a>;
+<a name="l00293"></a>00293   }
+<a name="l00294"></a>00294 
+<a name="l00301"></a><a class="code" href="classDefaultModule.html#2ec541222f52f47b37519456da723230">00301</a>   <span class="keyword">public</span> function <a class="code" href="classDefaultModule.html#2ec541222f52f47b37519456da723230">AdminMenu</a>()
+<a name="l00302"></a>00302   {
+<a name="l00303"></a>00303     <a class="code" href="_8unikatni__fukce_8php.html#e241cf0159803673d118f68d99e6342f">$result</a> = $this-&gt;<a class="code" href="classDefaultModule.html#57cf28b8e9f064fa383fa736218001bd">NactiFunkci</a>(<span class="stringliteral">"Funkce"</span>, <span class="stringliteral">"CallAdminMenu"</span>, $this-&gt;adresa_menu);
+<a name="l00304"></a>00304 
+<a name="l00305"></a>00305     <span class="keywordflow">return</span> <a class="code" href="_8unikatni__fukce_8php.html#e241cf0159803673d118f68d99e6342f">$result</a>;
+<a name="l00306"></a>00306   }
+<a name="l00307"></a>00307 }
+<a name="l00308"></a>00308 ?&gt;
+</pre></div></div>
+<hr size="1"><address style="text-align: right;"><small>Generováno Tue Aug 4 13:38:10 2009 pro projekt Novy vychozi PHP layout programem&nbsp;
+<a href="http://www.doxygen.org/index.html">
+<img src="doxygen.png" alt="doxygen" align="middle" border="0"></a> 1.5.8 </small></address>
+</body>
+</html>

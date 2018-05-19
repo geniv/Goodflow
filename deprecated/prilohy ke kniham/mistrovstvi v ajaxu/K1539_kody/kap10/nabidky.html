@@ -1,0 +1,217 @@
+<html> 
+  <head> 
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>Systém nabídek využívající Ajax</title> 
+
+    <style>
+    #nabidkaDiv1 {
+      color: #222222;
+      background-color: #FFCCFF;
+      font-weight: bold;
+      font-family: arial;
+      position: absolute; 
+      visibility: hidden;
+      cursor: hand;
+    }
+
+    #nabidkaDiv2 {
+      color: #222222;
+      background-color: #FFCCFF;
+      font-weight: bold;
+      font-family: arial;
+      position: absolute; 
+      visibility: hidden;
+      cursor: hand;
+    }
+
+    #cilovyDiv {
+      color: #9900FF;
+      font-size: 24pt;
+      font-weight: bold;
+      font-family: arial;
+    }
+
+    </style>
+
+    <script language="javascript">
+      var prvkyPole;
+
+      function ziskejData(nabidka) 
+      { 
+        var XMLHttpRequestObjekt = false; 
+ 
+        if (window.XMLHttpRequest) {
+          XMLHttpRequestObjekt = new XMLHttpRequest();
+        } else if (window.ActiveXObject) {
+          XMLHttpRequestObjekt = new 
+            ActiveXObject("Microsoft.XMLHTTP");
+        }
+
+        var zdrojDat = (nabidka == 1) ? "polozky1.txt" : "polozky2.txt";
+
+        if(XMLHttpRequestObjekt) {
+          XMLHttpRequestObjekt.open("GET", zdrojDat); 
+
+          XMLHttpRequestObjekt.onreadystatechange = function() 
+          { 
+            if (XMLHttpRequestObjekt.readyState == 4 && 
+              XMLHttpRequestObjekt.status == 200) { 
+                ukaz(nabidka, XMLHttpRequestObjekt.responseText);
+            } 
+          } 
+
+          XMLHttpRequestObjekt.send(null); 
+        }
+      }
+
+      function ukaz(nabidka, polozky) 
+      {
+        var data = "<table width = '100%'>";
+        var citac;
+        prvkyPole = polozky.split(", ");
+        var cil;
+
+        if (prvkyPole.length != 0) {
+          for (var citac = 0; citac < prvkyPole.length; 
+            citac++) {
+            var text = "zobraz(" + citac + ")";
+            data += "<tr><td " 
+              + "onclick='" + text + "'>" +
+              prvkyPole[citac] + 
+              "</td></tr>";
+          }
+        }
+
+        data += "</table>";
+
+        if(nabidka == "1"){
+          cil = document.getElementById("nabidkaDiv1");
+        }
+
+        if(nabidka == "2"){
+          cil = document.getElementById("nabidkaDiv2");
+        }
+
+        if(cil.style.visibility == "hidden"){
+          cil.innerHTML = data;
+          cil.style.visibility = "visible";
+        }
+      }
+
+      function skryj() 
+      {
+        var nabidkaDiv1 = document.getElementById("nabidkaDiv1");
+
+        if(nabidkaDiv1.style.visibility == "visible"){
+          nabidkaDiv1.innerHTML = "<div></div>";
+          nabidkaDiv1.style.visibility = "hidden";
+        }
+
+        var nabidkaDiv2 = document.getElementById("nabidkaDiv2");
+        if(nabidkaDiv2.style.visibility == "visible"){
+          nabidkaDiv2.innerHTML = "<div></div>";
+          nabidkaDiv2.style.visibility = "hidden";
+        }
+      }
+
+      function zobraz(index) 
+      {
+        var cilovyDiv = document.getElementById("cilovyDiv");
+
+        cilovyDiv.innerHTML = "Vybrali jste " 
+          + prvkyPole[index] + ".";
+      }
+
+      function zkontrolujUdalost(udalost) 
+      {
+        var e = new UdalostMysi(udalost);
+        var cil = null;
+        var obr;
+
+        obr = document.getElementById("obrazek1");
+
+        if(e.cil == obr){
+          ziskejData(1);
+        }
+
+        obr = document.getElementById("obrazek2");
+ 
+        if(e.cil == obr){
+          ziskejData(2);
+        }
+
+        cil = document.getElementById("nabidkaDiv1");
+        obr = document.getElementById("obrazek1");
+
+        if (cil.style.visibility == "visible"){
+          if(e.x < parseInt(cil.style.left) || 
+             e.y < parseInt(obr.style.top) || 
+             e.x > (parseInt(obr.style.left) 
+             + parseInt(obr.style.width)) || 
+             e.y > (parseInt(cil.style.top) 
+             + parseInt(cil.style.height))){
+            skryj();
+          }
+        }
+
+        cil = document.getElementById("nabidkaDiv2");
+        obr = document.getElementById("obrazek2");
+
+        if (cil.style.visibility == "visible"){
+          if(e.x < parseInt(cil.style.left) || 
+             e.y <  parseInt(obr.style.top) || 
+             e.x > (parseInt(obr.style.left) 
+             + parseInt(obr.style.width)) || 
+             e.y > (parseInt(cil.style.top) 
+             + parseInt(cil.style.height))){
+            skryj();
+          }
+        }
+      }
+
+      function UdalostMysi(e) 
+      {
+        if(e) {
+          this.e = e; 
+        } else {
+          this.e = window.event; 
+        }
+
+        if(e.pageX) {
+          this.x = e.pageX; 
+        } else {
+          this.x = e.clientX; 
+        }
+
+        if(e.pageY) {
+          this.y = e.pageY; 
+        } else {
+          this.y = e.clientY; 
+        }
+
+        if(e.target) {
+          this.cil = e.target; 
+        } else {
+          this.cil = e.srcElement;
+        }
+      }
+    </script>
+
+  </head> 
+
+  <body onclick="skryj()" onmousemove="zkontrolujUdalost(event)">
+
+    <H1>Systém nabídek využívající Ajax</H1>
+
+      <img id="obrazek1" src="obrazek1.jpg" 
+        style="left:30; top:50; width:200; height:40;">
+      <div id="nabidkaDiv1" style="left:30; top:100; width:100; 
+        height: 70; visibility:hidden;"><div></div></div>
+      <img id="obrazek2" style="left:270; top:50; width:200; 
+        height:40;" src="obrazek2.jpg">
+      <div id="nabidkaDiv2" style="left:270; top:100; width:100; 
+        height: 70; visibility:hidden;"><div></div></div>
+      <div id="cilovyDiv"></div>
+  </body> 
+
+</html>

@@ -1,0 +1,38 @@
+<html> 
+  <head> 
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>Získání textu pomocí frameworku Ajax Utility Library</title> 
+
+    <script type="text/javascript" src="ajaxutility.js"></script>
+
+    <script language="javascript">
+      function callbackZpravy1(text)
+      {
+        document.getElementById("cilovyDiv").innerHTML = text;
+      }
+
+      function callbackZpravy2(text)
+      {
+        document.getElementById("cilovyDiv").innerHTML = text;
+      }
+    </script>
+
+  </head> 
+
+  <body>
+
+    <H1>Získání textu pomocí frameworku Ajax Utility Library</H1>
+
+    <form>
+      <input type="button" value="Získej text 1" 
+        onclick="ziskejText('data.txt', callbackZpravy1)"> 
+      <input type="button" value="Získej text 2" 
+        onclick="ziskejText('data2.txt', callbackZpravy2)"> 
+    </form>
+
+    <div id="cilovyDiv">
+      <p>Získaný text se zobrazí na tomto místě.</p> 
+    </div> 
+
+  </body> 
+</html>

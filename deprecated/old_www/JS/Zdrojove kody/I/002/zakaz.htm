@@ -1,0 +1,42 @@
+<HTML>
+  <HEAD>
+    <TITLE>Zákaz pravého tlaèítka</TITLE>
+    <SCRIPT Language="JavaScript">
+    <!--
+      // Obsluha kliknutí myši
+      function right(e) {
+        // Vìtev pro Netscape
+        if (navigator.appName == 'Netscape' &&
+           (e.which == 3 || e.which == 2)){
+          alert ("Toto je zakázané!");
+          return false;
+        }
+        // Vìtev pro Internet Explorer
+        else if (navigator.appName == 'Microsoft Internet Explorer' &&
+           (event.button == 2 || event.button == 3)) {
+          alert("Toto je zakázané!");
+          return false;
+        }
+        return true;
+      }
+      
+      // Nastavení obsluhy události na funkci right()
+      document.onmousedown=right;
+      document.onmouseup=right;
+
+      // Zapnutí zachytávání událostí myši pro Netscape
+      if (document.layers) window.captureEvents(Event.MOUSEDOWN);
+      if (document.layers) window.captureEvents(Event.MOUSEUP);
+
+      // Nastavení obsluhy události na funkci right()
+      window.onmousedown=right;
+      window.onmouseup=right;
+    // -->
+    </SCRIPT>
+  </HEAD>
+  
+  <BODY>
+    V tomto dokumentu je zakázáno klikat pravım tlaèítkem myši!
+  </BODY>
+</HTML>
+

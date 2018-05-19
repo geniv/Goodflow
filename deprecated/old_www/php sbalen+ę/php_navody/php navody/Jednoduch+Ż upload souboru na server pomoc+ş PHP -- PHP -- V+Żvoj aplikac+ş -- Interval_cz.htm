@@ -1,0 +1,651 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!-- saved from url=(0073)http://interval.cz/clanky/jednoduchy-upload-souboru-na-server-pomoci-php/ -->
+<?xml version='1.0' encoding='windows-1250'?><HTML lang=cs xml:lang="cs" 
+xmlns="http://www.w3.org/1999/xhtml"><HEAD><TITLE>Jednoduchý upload souboru na server pomocí PHP -- PHP -- Vývoj aplikací -- Interval.cz</TITLE>
+<META http-equiv=Content-Type content="text/html; charset=windows-1250">
+<META http-equiv=Content-language content=cs>
+<META http-equiv=Cache-control content=no-cache>
+<META http-equiv=Pragma content=no-cache>
+<META http-equiv=Expires content=-1>
+<META content=index,follow name=robots>
+<META content=index,follow,snippet,noarchive name=googlebot>
+<META 
+content="Někteří z vás si psali o článek pojednávajícím o uploadu souboru na server.  V dnešním článku vám popíšu jednoduchý upload souboru do vybraného adresáře, bez  použití databáze. Úspěšný upload bude doprovázen posláním informačního e-mailu  na adresu správce serveru." 
+name=description>
+<META content="PHP, Vývoj aplikací, Interval" name=keywords>
+<META content="49.1915, 16.626" name=ICBM>
+<META content=Interval.cz name=DC.Title>
+<META content=http://interval.cz name=DC.Identifier>
+<META content="(SCHEME=ISSN) 12128651" name=DC.Identifier>
+<META content=cs name=DC.Language>
+<META http-equiv=pics-label 
+content='(pics-1.1 "http://www.icra.org/ratingsv02.html" comment "ICRAonline EN v2.0" l gen true for "http://interval.cz" r (nz 1 vz 1 lz 1 oz 1 cz 1) "http://www.rsac.org/ratingsv01.html" l gen true for "http://interval.cz" r (n 0 s 0 v 0 l 0))'>
+<META http-equiv=imagetoolbar content=no>
+<META http-equiv=MSThemeCompatible content=no>
+<META content=true name=MSSmartTagsPreventParsing><LINK 
+href="http://interval.cz/favicon.ico" type=image/x-icon 
+rel="shortcut icon"><LINK 
+title="Interval.cz -- Jednoduchý upload souboru na server pomocí PHP -- (diskuse, Atom 0.3)" 
+href="http://export.interval.cz/?type=atom&amp;discussion=725" 
+type=application/atom+xml rel=alternate><LINK 
+title="Interval.cz -- Jednoduchý upload souboru na server pomocí PHP -- (diskuse, RDF Site Summary 1.0)" 
+href="http://export.interval.cz/?type=rdf&amp;discussion=725" 
+type=application/rdf+xml rel=alternate><LINK 
+title="Interval.cz -- Jednoduchý upload souboru na server pomocí PHP -- (diskuse, RSS 2.0)" 
+href="http://export.interval.cz/?type=rss&amp;discussion=725" 
+type=application/rss+xml rel=alternate><LINK href="http://interval.cz" 
+rel=home><LINK href="http://interval.cz/search_ex.asp" rel=search><LINK 
+media=all 
+href="Jednoduchý upload souboru na server pomocí PHP -- PHP -- Vývoj aplikací -- Interval_cz_soubory/html4.css" 
+type=text/css rel=stylesheet><LINK media=all 
+href="Jednoduchý upload souboru na server pomocí PHP -- PHP -- Vývoj aplikací -- Interval_cz_soubory/interval-display.css" 
+type=text/css rel=stylesheet><LINK media=print 
+href="Jednoduchý upload souboru na server pomocí PHP -- PHP -- Vývoj aplikací -- Interval_cz_soubory/interval-print.css" 
+type=text/css rel=stylesheet>
+<META content="MSHTML 6.00.2800.1106" name=GENERATOR></HEAD>
+<BODY class="interval interval-articles" id=article-725>
+<DIV class=audits><!-- TOPList.cz -->
+<SCRIPT type=text/javascript>
+<!-- <![CDATA[
+document.write ("<a href='http://www.toplist.cz'><img src='http://www.toplist.cz/dot.asp?id=33617&amp;http="+escape(document.referrer)+"&amp;wi="+escape(window.screen.width)+"&amp;he="+escape(window.screen.height)+"&amp;cd="+escape(window.screen.colorDepth)+"&amp;t="+escape(document.title)+"' style='border: 0; width: 1px; height: 1px' alt='.' /></a>");
+//]]> -->
+</SCRIPT>
+<NOSCRIPT>
+<DIV><A href="http://www.toplist.cz/"><IMG 
+style="BORDER-RIGHT: 0px; BORDER-TOP: 0px; BORDER-LEFT: 0px; WIDTH: 1px; BORDER-BOTTOM: 0px; HEIGHT: 1px" 
+alt=. src=""></A></DIV></NOSCRIPT><!-- TOPList.cz - konec --><!-- iAudit --><IMG 
+style="BORDER-RIGHT: 0px; BORDER-TOP: 0px; BORDER-LEFT: 0px; WIDTH: 1px; BORDER-BOTTOM: 0px; HEIGHT: 1px" 
+alt=. 
+src="Jednoduchý upload souboru na server pomocí PHP -- PHP -- Vývoj aplikací -- Interval_cz_soubory/dot.idot.gif"> 
+<!-- iAudit - konec --><!-- (C)2005 Gemius SA - gemiusAudience  / Ostatni -->
+<SCRIPT type=text/javascript><!--
+	
+	gemius_identifier = new String('bQzrQkrzLOWoKbJeudlKguTS7OndUMSqxutbeFviWMv.47');
+	
+	gemius_href=new String(document.location);
+	if (document.referrer) { gemius_ref = new String(document.referrer); } else { gemius_ref = ""; }
+	if(typeof(Error)!='undefined') eval("try { if (typeof(top.document.referrer)=='string') { gemius_ref = top.document.referrer } } catch(gemius_ex) {}");
+	iname = new String('id='+gemius_identifier+';ref='+escape(gemius_ref.substring(0,299))+';href='+escape(gemius_href.substring(0,299))+';');
+	document.write('<iframe src="http://spir.hit.gemius.pl/gemiusaudience.html" name="'+iname+'" width="1" height="1" frameborder="0" scrolling="no"></iframe>');
+	//-->
+	</SCRIPT>
+</DIV>
+<DIV id=advertising-leader-board><!-- StartKód: adarbo2.bbmedia.cz 3.1 Nestandard  Interval(87) / cely web(1) / leaderboard 750x100(1) / nestandard(24) -->
+<SCRIPT type=text/javascript>
+	/* <![CDATA[ */
+	var bbs=screen,bbn=navigator,bbh;bbh='&ubl='+bbn.browserLanguage+'&ucc='+bbn.cpuClass+'&ucd='+bbs.colorDepth+'&uce='+bbn.cookieEnabled+'&udx='+bbs.deviceXDPI+'&udy='+bbs.deviceYDPI+'&usl='+bbn.systemLanguage+'&uje='+bbn.javaEnabled()+'&uah='+bbs.availHeight+'&uaw='+bbs.availWidth+'&ubd='+bbs.bufferDepth+'&uhe='+bbs.height+'&ulx='+bbs.logicalXDPI+'&uly='+bbs.logicalYDPI+'&use='+bbs.fontSmoothingEnabled+'&uto='+(new Date()).getTimezoneOffset()+'&uti='+(new Date()).getTime()+'&uui='+bbs.updateInterval+'&uul='+bbn.userLanguage+'&uwi='+bbs.width;
+	document.write("<scr"+"ipt  language='JavaScript' type='text/javascript' src='http://adarbo2.bbmedia.cz/please/showit/87/1/1/24/?typkodu=non-standard"+bbh+"&alttext=0&border=0&bgcolor=FFFFFF&text=000000&link=0000FF&target=_blank&bust="+Math.random()+"'>");
+	document.write("<"+"\/scr"+"ipt>");
+	/* ]]> */
+	</SCRIPT>
+<!-- KonecKód: adarbo2.bbmedia.cz 3.1 Nestandard --></DIV>
+<DIV id=page-header>
+<DIV id=interval-logo>
+<H1 title="Interval.cz - webdesign a e-komerce denně (logo &amp; index link)"><A 
+href="http://interval.cz/">Interval.cz<SPAN></SPAN></A></H1></DIV>
+<DIV id=advertising-page-header><!-- StartKód: adarbo2.bbmedia.cz 3.1 Nestandard  Interval(87) / cely web(1) / horni468x60(2) / nestandard(24) -->
+<SCRIPT type=text/javascript>
+	/* <![CDATA[ */
+	var bbs=screen,bbn=navigator,bbh;bbh='&ubl='+bbn.browserLanguage+'&ucc='+bbn.cpuClass+'&ucd='+bbs.colorDepth+'&uce='+bbn.cookieEnabled+'&udx='+bbs.deviceXDPI+'&udy='+bbs.deviceYDPI+'&usl='+bbn.systemLanguage+'&uje='+bbn.javaEnabled()+'&uah='+bbs.availHeight+'&uaw='+bbs.availWidth+'&ubd='+bbs.bufferDepth+'&uhe='+bbs.height+'&ulx='+bbs.logicalXDPI+'&uly='+bbs.logicalYDPI+'&use='+bbs.fontSmoothingEnabled+'&uto='+(new Date()).getTimezoneOffset()+'&uti='+(new Date()).getTime()+'&uui='+bbs.updateInterval+'&uul='+bbn.userLanguage+'&uwi='+bbs.width;
+	document.write("<scr"+"ipt  type='text/javascript' src='http://adarbo2.bbmedia.cz/please/showit/87/1/2/24/?typkodu=non-standard"+bbh+"&alttext=0&border=0&bgcolor=FFFFFF&text=000000&link=0000FF&target=_top&bust="+Math.random()+"'>");
+	document.write("<"+"\/scr"+"ipt>");
+	/* ]]> */
+	</SCRIPT>
+<!-- KonecKód: adarbo2.bbmedia.cz 3.1 Nestandard --></DIV>
+<DIV class=page-maker>&nbsp;</DIV></DIV>
+<DIV id=page-topmenu>
+<H2 class=textversion>Navigace</H2><!-- cached 09-15-62-hlavni_menu_with_ascii.txt --><!-- ,Vývoj aplikací ~~ ,,PHP ~~ , -->
+<DIV id=page-mainmenu>
+<H3 class=textversion>Hlavní menu</H3>
+<UL>
+  <LI class=first><A href="http://interval.cz/">Titulka</A></LI>
+  <LI><A href="http://interval.cz/e-komerce/">E-komerce</A></LI>
+  <LI><A href="http://interval.cz/webdesign/">Webdesign</A></LI>
+  <LI class=selected><A href="http://interval.cz/vyvoj-aplikaci/">Vývoj 
+  aplikací</A></LI>
+  <LI><A href="http://interval.cz/nastroje/">Nástroje</A></LI>
+  <LI><A href="http://interval.cz/magazin/">Magazín</A></LI>
+  <LI class="right selected"><A 
+  href="http://interval.inshop.cz/">Knihkupectví</A></LI>
+  <LI class=right><A href="http://interforum.interval.cz/">Interforum</A></LI>
+  <LI class=right><A 
+href="http://interzen.interval.cz/">Interzen</A></LI></UL></DIV>
+<DIV id=page-mainmenu-maker>&nbsp;</DIV>
+<DIV id=page-mainsubmenu>
+<H3 class=textversion>Submenu</H3>
+<UL>
+  <LI><A href="http://interval.cz/vyvoj-aplikaci/j2me/">J2ME</A></LI>
+  <LI><A href="http://interval.cz/vyvoj-aplikaci/asp/">ASP</A></LI>
+  <LI><A href="http://interval.cz/vyvoj-aplikaci/net/">.NET</A></LI>
+  <LI class=selected><A 
+  href="http://interval.cz/vyvoj-aplikaci/php/">PHP</A></LI>
+  <LI><A 
+href="http://interval.cz/vyvoj-aplikaci/javascript/">JavaScript</A></LI>
+  <LI><A href="http://interval.cz/vyvoj-aplikaci/xml/">XML</A></LI>
+  <LI><A href="http://interval.cz/vyvoj-aplikaci/java/">Java</A></LI>
+  <LI><A href="http://interval.cz/vyvoj-aplikaci/perl-cgi/">PERL/CGI</A></LI>
+  <LI><A href="http://interval.cz/vyvoj-aplikaci/databaze/">Databáze</A></LI>
+  <LI><A 
+href="http://interval.cz/vyvoj-aplikaci/bezpecnost/">Bezpečnost</A></LI>
+  <LI><A 
+href="http://interval.cz/vyvoj-aplikaci/analyzy/">Analýzy</A></LI></UL><SPAN 
+id=page-mainsubmenu-maker>&nbsp;</SPAN></DIV><!-- cas behu menu = 0 --></DIV>
+<DIV id=page-body>
+<DIV id=page-left>
+<DIV id=article>
+<H2>Jednoduchý upload souboru na server pomocí PHP</H2>
+<P id=prepend>Někteří z vás si psali o článek pojednávajícím o uploadu souboru 
+na server. V dnešním článku vám popíšu jednoduchý upload souboru do vybraného 
+adresáře, bez použití databáze. Úspěšný upload bude doprovázen posláním 
+informačního e-mailu na adresu správce serveru. </P>
+<DIV class="advertising-bigsquare-outer noprint">
+<DIV class=advertising-bigsquare-inner style="WIDTH: 300px"><!-- StartKód: adarbo2.bbmedia.cz 3.1 Nestandard  Interval(87) / cely web(1) / ctverec250x250(8) / nestandard(24) -->
+<SCRIPT type=text/javascript>
+	/* <![CDATA[ */
+	var bbs=screen,bbn=navigator,bbh;bbh='&ubl='+bbn.browserLanguage+'&ucc='+bbn.cpuClass+'&ucd='+bbs.colorDepth+'&uce='+bbn.cookieEnabled+'&udx='+bbs.deviceXDPI+'&udy='+bbs.deviceYDPI+'&usl='+bbn.systemLanguage+'&uje='+bbn.javaEnabled()+'&uah='+bbs.availHeight+'&uaw='+bbs.availWidth+'&ubd='+bbs.bufferDepth+'&uhe='+bbs.height+'&ulx='+bbs.logicalXDPI+'&uly='+bbs.logicalYDPI+'&use='+bbs.fontSmoothingEnabled+'&uto='+(new Date()).getTimezoneOffset()+'&uti='+(new Date()).getTime()+'&uui='+bbs.updateInterval+'&uul='+bbn.userLanguage+'&uwi='+bbs.width;
+	document.write("<scr"+"ipt  type='text/javascript' src='http://adarbo2.bbmedia.cz/please/showit/87/1/8/24/?typkodu=non-standard"+bbh+"&alttext=0&border=0&bgcolor=FFFFFF&text=000000&link=0000FF&target=_top&bust="+Math.random()+"'>");
+	document.write("<"+"\/scr"+"ipt>");
+	/* ]]> */
+	</SCRIPT>
+<!-- KonecKód: adarbo2.bbmedia.cz 3.1 Nestandard --></DIV></DIV>
+<P class=texttabulka><B>Úvodní formulář</B></P>
+<P class=texttabulka>Nejprve vám představím kód jednoduchého formuláře, jehož 
+prostřednictvím se bude upload souboru na server realizovat. </P>
+<P class=texttabulka>
+<TABLE cellSpacing=0 cellPadding=1 width="100%" bgColor=black border=0>
+  <TBODY>
+  <TR>
+    <TD>
+      <TABLE cellSpacing=0 cellPadding=2 width="100%" border=0>
+        <TBODY>
+        <TR>
+          <TD class=aktuality bgColor=white>&lt;FORM ACTION="upload.php" 
+            METHOD="post" ENCTYPE="multipart/form-data"&gt;<BR>&lt;INPUT 
+            TYPE="file" NAME="soubor" SIZE="30"&gt;<BR>&lt;INPUT TYPE="submit" 
+            NAME="akce" 
+      VALUE="Upload"&gt;<BR>&lt;/FORM&gt;<BR></TD></TR></TBODY></TABLE></TD></TR></TBODY></TABLE></P>
+<P class=texttabulka>Nyní uvedu pár komentářů k uvedenému formuláři. Oproti 
+běžným formulářům jsou zde nějaká rozšíření. Protože chci přenést soubor, 
+zadefinoval jsem hodnotu atributu ENCTYPE na "multipart/form-data". Standardní 
+hodnotou, jak asi víte, je totiž "application/x-www-form-urlencoded". Takové 
+kódování je ale pro náš případ nepoužitelné. Pokud je použito kódování 
+"multipart/form-data" je nutné použít pro přenost metodu POST. Pro zadání názvu 
+souboru je vstupní pole typu "file", které umožní uživateli soubor také vybrat z 
+klasického okna pro výběr souboru. </P>
+<P class=texttabulka><B>Zpracování formuláře</B></P>
+<P class=texttabulka>Po stisknutí tlačítko "Upload" je zavolán skript 
+upload.php, který nyní zpracuje požadavek. Uploadnutý soubor je dočasně 
+přístupný přes proměnnou $soubor, resp. skrze několik proměnných, které mají 
+řetězec "soubor" uveden jako prefix. Jsou to: </P>
+<UL>
+  <LI>$soubor - obsahuje jméno dočasného souboru, do kterého nám php skript 
+  soubor uložil 
+  <LI>$soubor_type - obsahuje MIME typ souboru 
+  <LI>$soubor_size - velikost uploadnutého souboru v bajtech 
+  <LI>$soubor_name - původní název souboru na uživatelském počítači </LI></UL>
+<P class=texttabulka>Nyní uvedu zdrojový soubor jednoduchého skriptu upload.php, 
+který pak následně blíže popíšu. </P>
+<P class=texttabulka>
+<TABLE cellSpacing=0 cellPadding=1 width="100%" bgColor=black border=0>
+  <TBODY>
+  <TR>
+    <TD>
+      <TABLE cellSpacing=0 cellPadding=2 width="100%" border=0>
+        <TBODY>
+        <TR>
+          <TD class=aktuality 
+            bgColor=white>&lt;HTML&gt;<BR>&lt;HEAD&gt;&lt;TITLE&gt;Upload&lt;/TITLE&gt;&lt;/HEAD&gt;<BR>&lt;BODY&gt;<BR><BR>&lt;?<BR><BR>if 
+            ($akce == "Upload") {<BR><BR>&nbsp;&nbsp;if ($soubor_type == 
+            "text/plain" or $soubor_type="text/html") 
+            {<BR>&nbsp;&nbsp;&nbsp;&nbsp;if (copy ($soubor, 
+            "data/$soubor_name")) {<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print 
+            "Soubor $soubor_name o velikosti $soubor_size bajtů 
+            <BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; byl úspěšně uploadnut na 
+            server&lt;BR&gt;";<BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;mail 
+            ("spravce@muj_server.cz", "Upload souboru $soubor_name", 
+            <BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; "Na server byl nahrán 
+            soubor 
+            /data/$soubor_name\n",<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+            "From: system@muj_server.cz\nX-web: 
+            http://www.muj_server.cz/system/upload.php"); 
+            <BR>&nbsp;&nbsp;&nbsp;&nbsp;}<BR>&nbsp;&nbsp;&nbsp;&nbsp;else 
+            {<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print "Při nahrávání 
+            souboru došlo k 
+            chybě!&lt;BR&gt;";<BR>&nbsp;&nbsp;&nbsp;&nbsp;}<BR>&nbsp;&nbsp;}<BR>&nbsp;&nbsp;else 
+            {<BR>&nbsp;&nbsp;&nbsp;&nbsp;print "Soubor není požadového MIME 
+            typu!&lt;BR&gt;";<BR>&nbsp;&nbsp;}<BR>}<BR><BR>?&gt;<BR><BR>&lt;HR 
+            SIZE="1" NOSHADE&gt;<BR><BR>Zadejte jméno souboru:<BR>&lt;FORM 
+            ACTION="upload.php" METHOD="post" 
+            ENCTYPE="multipart/form-data"&gt;<BR>&lt;INPUT TYPE="file" 
+            NAME="soubor" SIZE="30"&gt;<BR>&lt;INPUT TYPE="submit" NAME="akce" 
+            VALUE="Upload"&gt;<BR>&lt;/FORM&gt;<BR><BR>&lt;/BODY&gt;<BR>&lt;/HTML&gt;<BR><BR></TD></TR></TBODY></TABLE></TD></TR></TBODY></TABLE></P>
+<P class=texttabulka><B>Popis skriptu</B></P>
+<P class=texttabulka>Spodní část je jasná, ta zobrazí formulář pro upload 
+souboru. V první části skriptu je nejdříve dotaz, zdali bylo stisknuto tlačítko 
+"Upload" a pokud ano, provede se kontrola, zdali zadaný soubor je požadovaného 
+MIME typu. Jestliže ano, pak se provede zkopírování souboru do vyhrazeného 
+adresáře data/, pod takovým názvem, jaký byl u uživatele. Pokud kopírování 
+proběhne úspěšně, vypíše se informační hláška na obrazovku prohlížeče a po té se 
+pomocí funkce mail pošle e-mail na adresu správce serveru, že byl uploadován 
+nový soubor. </P>
+<P class=texttabulka>Funkce mail funguje jen v případě, že je správně nastaven 
+server. Nastavení lze provést v souboru php.ini (direktivy SMTP a 
+sendmail_from). V případě, že soubor nebude mít odpovídající MIME typ, vypíše se 
+hláška a soubor na server uploadován nebude.</P>
+<P class=texttabulka>Skript si můžete stáhnout <A 
+href="http://podklady.interval.cz/skrivan/upload.php">zde</A>. Otestován byl na 
+IIS 5.0 a PHP 4.0.6. Ve skriptu v argumentech funkce mail si musíte samozřejmě 
+nastavit vlastní server a svou e-mailovou adresu.</P>
+<DIV id=article-author><A 
+href="http://interval.cz/autori/skrivan-jaromir/">Skřivan, Jaromír</A> 
+(16.&nbsp;8.&nbsp;2001) 
+<DIV id=article-about-author></DIV></DIV>
+<DIV class=noprint id=article-discussion><!-- cached 725-tabulka-jednoduchy-upload-souboru-na-server-pomoci-php.txt -->
+<DIV id=article-discussion-index>
+<FORM action=http://interval.cz/discussion-read.asp?disc=725 method=post>
+<TABLE cellSpacing=0>
+  <TBODY>
+  <TR>
+    <TH colSpan=4><A 
+      title="Jednoduchý upload souboru na server pomocí PHP (diskuse)" 
+      href="http://interval.cz/clanky/jednoduchy-upload-souboru-na-server-pomoci-php/diskuse/">Jednoduchý 
+      upload souboru na server pomocí PHP (diskuse)</A></TH></TR>
+  <TR>
+    <TD class=checkbox><INPUT title="0 2700" type=checkbox value=1 
+      name=checkboxDISKUZE2700></TD>
+    <TD class=date>2001-08-17 10:24:03</TD>
+    <TD class=sender>Franta</TD>
+    <TD class=subject>mail</TD></TR>
+  <TR>
+    <TD class=checkbox><INPUT title="1 2701" type=checkbox value=1 
+      name=checkboxDISKUZE2701></TD>
+    <TD class=date>2001-08-17 11:59:08</TD>
+    <TD class=sender>Jaromír Skřivan</TD>
+    <TD class=subject><IMG class=line alt=. 
+      src="Jednoduchý upload souboru na server pomocí PHP -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Jednoduchý upload souboru na server pomocí PHP -- PHP -- Vývoj aplikací -- Interval_cz_soubory/line3.png">mail</TD></TR>
+  <TR>
+    <TD class=checkbox><INPUT title="0 2703" type=checkbox value=1 
+      name=checkboxDISKUZE2703></TD>
+    <TD class=date>2001-08-17 14:02:49</TD>
+    <TD class=sender>JS</TD>
+    <TD class=subject>prilisna jednoduchost -&gt; bezpecnostn...</TD></TR>
+  <TR>
+    <TD class=checkbox><INPUT title="1 2704" type=checkbox value=1 
+      name=checkboxDISKUZE2704></TD>
+    <TD class=date>2001-08-17 14:10:19</TD>
+    <TD class=sender>Jaromír Skřivan</TD>
+    <TD class=subject><IMG class=line alt=. 
+      src="Jednoduchý upload souboru na server pomocí PHP -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Jednoduchý upload souboru na server pomocí PHP -- PHP -- Vývoj aplikací -- Interval_cz_soubory/line3.png">prilisna 
+      jednoduchost -&gt; bezpecnost...</TD></TR>
+  <TR>
+    <TD class=checkbox><INPUT title="2 2705" type=checkbox value=1 
+      name=checkboxDISKUZE2705></TD>
+    <TD class=date>2001-08-17 14:23:16</TD>
+    <TD class=sender>JS</TD>
+    <TD class=subject><IMG class=line alt=. 
+      src="Jednoduchý upload souboru na server pomocí PHP -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Jednoduchý upload souboru na server pomocí PHP -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Jednoduchý upload souboru na server pomocí PHP -- PHP -- Vývoj aplikací -- Interval_cz_soubory/line3.png">prilisna 
+      jednoduchost -&gt; bezpecnos...</TD></TR>
+  <TR>
+    <TD class=checkbox><INPUT title="3 2706" type=checkbox value=1 
+      name=checkboxDISKUZE2706></TD>
+    <TD class=date>2001-08-17 14:32:28</TD>
+    <TD class=sender>Jaromír Skřivan</TD>
+    <TD class=subject><IMG class=line alt=. 
+      src="Jednoduchý upload souboru na server pomocí PHP -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Jednoduchý upload souboru na server pomocí PHP -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Jednoduchý upload souboru na server pomocí PHP -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Jednoduchý upload souboru na server pomocí PHP -- PHP -- Vývoj aplikací -- Interval_cz_soubory/line1.png">prilisna 
+      jednoduchost -&gt; bezpecno...</TD></TR>
+  <TR>
+    <TD class=checkbox><INPUT title="3 2716" type=checkbox value=1 
+      name=checkboxDISKUZE2716></TD>
+    <TD class=date>2001-08-21 19:58:34</TD>
+    <TD class=sender>48764654</TD>
+    <TD class=subject><IMG class=line alt=. 
+      src="Jednoduchý upload souboru na server pomocí PHP -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Jednoduchý upload souboru na server pomocí PHP -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Jednoduchý upload souboru na server pomocí PHP -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Jednoduchý upload souboru na server pomocí PHP -- PHP -- Vývoj aplikací -- Interval_cz_soubory/line3.png">prilisna 
+      jednoduchost -&gt; bezpecno...</TD></TR>
+  <TR>
+    <TD class=checkbox><INPUT title="0 2707" type=checkbox value=1 
+      name=checkboxDISKUZE2707></TD>
+    <TD class=date>2001-08-18 16:56:18</TD>
+    <TD class=sender>Robo</TD>
+    <TD class=subject>2 uploady naraz</TD></TR>
+  <TR>
+    <TD class=checkbox><INPUT title="1 2709" type=checkbox value=1 
+      name=checkboxDISKUZE2709></TD>
+    <TD class=date>2001-08-20 11:49:48</TD>
+    <TD class=sender>Jaromír Skřivan</TD>
+    <TD class=subject><IMG class=line alt=. 
+      src="Jednoduchý upload souboru na server pomocí PHP -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Jednoduchý upload souboru na server pomocí PHP -- PHP -- Vývoj aplikací -- Interval_cz_soubory/line3.png">2 
+      uploady naraz</TD></TR>
+  <TR>
+    <TD class=checkbox><INPUT title="0 2778" type=checkbox value=1 
+      name=checkboxDISKUZE2778></TD>
+    <TD class=date>2001-09-03 10:14:44</TD>
+    <TD class=sender>Jiří Procházka</TD>
+    <TD class=subject>Na Czechii nefunguje</TD></TR>
+  <TR>
+    <TD class=checkbox><INPUT title="1 2790" type=checkbox value=1 
+      name=checkboxDISKUZE2790></TD>
+    <TD class=date>2001-09-04 11:10:34</TD>
+    <TD class=sender>Petr Kotala</TD>
+    <TD class=subject><IMG class=line alt=. 
+      src="Jednoduchý upload souboru na server pomocí PHP -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Jednoduchý upload souboru na server pomocí PHP -- PHP -- Vývoj aplikací -- Interval_cz_soubory/line3.png">Na 
+      Czechii nefunguje</TD></TR>
+  <TR>
+    <TD class=checkbox><INPUT title="2 6120" type=checkbox value=1 
+      name=checkboxDISKUZE6120></TD>
+    <TD class=date>2002-07-02 21:49:37</TD>
+    <TD class=sender>Jiri Nemec</TD>
+    <TD class=subject><IMG class=line alt=. 
+      src="Jednoduchý upload souboru na server pomocí PHP -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Jednoduchý upload souboru na server pomocí PHP -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Jednoduchý upload souboru na server pomocí PHP -- PHP -- Vývoj aplikací -- Interval_cz_soubory/line3.png">Na 
+      Czechii nefunguje</TD></TR>
+  <TR>
+    <TD class=checkbox><INPUT title="0 3015" type=checkbox value=1 
+      name=checkboxDISKUZE3015></TD>
+    <TD class=date>2001-10-04 14:34:19</TD>
+    <TD class=sender>ivan bares</TD>
+    <TD class=subject>SKRIPT NEJDE STAHNOUT1</TD></TR>
+  <TR>
+    <TD class=checkbox><INPUT title="0 3038" type=checkbox value=1 
+      name=checkboxDISKUZE3038></TD>
+    <TD class=date>2001-10-10 09:10:16</TD>
+    <TD class=sender>Stanislav Vacek</TD>
+    <TD class=subject>Promenna $soubor</TD></TR>
+  <TR>
+    <TD class=checkbox><INPUT title="0 5765" type=checkbox value=1 
+      name=checkboxDISKUZE5765></TD>
+    <TD class=date>2002-06-11 07:21:33</TD>
+    <TD class=sender>Kamil Možíš</TD>
+    <TD class=subject>SAFE MODE</TD></TR>
+  <TR>
+    <TD class=checkbox><INPUT title="1 25886" type=checkbox value=1 
+      name=checkboxDISKUZE25886></TD>
+    <TD class=date>2004-04-22 14:52:33</TD>
+    <TD class=sender>Stenlycup</TD>
+    <TD class=subject><IMG class=line alt=. 
+      src="Jednoduchý upload souboru na server pomocí PHP -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Jednoduchý upload souboru na server pomocí PHP -- PHP -- Vývoj aplikací -- Interval_cz_soubory/line1.png">SAFE 
+      MODE</TD></TR>
+  <TR>
+    <TD class=checkbox><INPUT title="1 41261" type=checkbox value=1 
+      name=checkboxDISKUZE41261></TD>
+    <TD class=date>2005-11-05 10:27:52</TD>
+    <TD class=sender>mickey</TD>
+    <TD class=subject><IMG class=line alt=. 
+      src="Jednoduchý upload souboru na server pomocí PHP -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Jednoduchý upload souboru na server pomocí PHP -- PHP -- Vývoj aplikací -- Interval_cz_soubory/line3.png">UPLOAD 
+      NEFUNGUJE</TD></TR>
+  <TR>
+    <TD class=checkbox><INPUT title="0 7454" type=checkbox value=1 
+      name=checkboxDISKUZE7454></TD>
+    <TD class=date>2002-08-30 13:42:40</TD>
+    <TD class=sender>Standa Vacek</TD>
+    <TD class=subject>Permission Denied</TD></TR>
+  <TR>
+    <TD class=checkbox><INPUT title="1 43096" type=checkbox value=1 
+      name=checkboxDISKUZE43096></TD>
+    <TD class=date>2006-03-02 18:00:32</TD>
+    <TD class=sender>Gmvasek</TD>
+    <TD class=subject><IMG class=line alt=. 
+      src="Jednoduchý upload souboru na server pomocí PHP -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Jednoduchý upload souboru na server pomocí PHP -- PHP -- Vývoj aplikací -- Interval_cz_soubory/line3.png">Permission 
+      Denied</TD></TR>
+  <TR>
+    <TD class=checkbox><INPUT title="0 8921" type=checkbox value=1 
+      name=checkboxDISKUZE8921></TD>
+    <TD class=date>2002-11-09 09:48:25</TD>
+    <TD class=sender>Faust</TD>
+    <TD class=subject>:-((</TD></TR>
+  <TR>
+    <TD class=checkbox><INPUT title="0 25124" type=checkbox value=1 
+      name=checkboxDISKUZE25124></TD>
+    <TD class=date>2004-03-30 19:39:00</TD>
+    <TD class=sender>Firen the Phoenix</TD>
+    <TD class=subject>A co databáze?</TD></TR>
+  <TR>
+    <TD class=checkbox><INPUT title="0 37038" type=checkbox value=1 
+      name=checkboxDISKUZE37038></TD>
+    <TD class=date>2005-05-16 19:36:32</TD>
+    <TD class=sender>Firen the Phoenix</TD>
+    <TD class=subject>if ($soubor_type=...)</TD></TR>
+  <TR>
+    <TD class=checkbox><INPUT title="0 42026" type=checkbox value=1 
+      name=checkboxDISKUZE42026></TD>
+    <TD class=date>2006-01-06 12:00:07</TD>
+    <TD class=sender>Petr</TD>
+    <TD class=subject>nechteji se mi odesilat ostatni promenn...</TD></TR>
+  <TR>
+    <TD class=checkbox><INPUT title="0 44576" type=checkbox value=1 
+      name=checkboxDISKUZE44576></TD>
+    <TD class=date>2006-06-03 19:49:17</TD>
+    <TD class=sender>Adam</TD>
+    <TD class=subject>chyba!!</TD></TR>
+  <TR>
+    <TD class=checkbox><INPUT title="0 44577" type=checkbox value=1 
+      name=checkboxDISKUZE44577></TD>
+    <TD class=date>2006-06-03 20:31:59</TD>
+    <TD class=sender>Adam</TD>
+    <TD class=subject>Nejde mi to</TD></TR>
+  <TR>
+    <TD id=foot colSpan=4><INPUT class=submit id=display_selected type=submit value="Zobrazit vybrané" name=display_selected> 
+      &nbsp; <INPUT class=submit id=display_all type=submit value="Zobrazit vše" name=display_all> 
+      &nbsp; <INPUT class=submit id=add_new type=submit value="Vložit nový" name=add_new></TD></TR></TBODY></TABLE></FORM></DIV></DIV></DIV></DIV>
+<DIV id=page-right>
+<H2 class=textversion>Pravý sloupek</H2>
+<DIV id=search>
+<H3 class=textversion>Vyhledávání</H3>
+<FORM action=http://interval.cz/search.asp method=get>
+<DIV><INPUT class=text name=co> <!--  
+<select name='cim'>
+<option value ='Google' selected='selected'>Google</option>
+<option value ='Jyxo'>Jyxo</option>
+</select>
+<input type='hidden' name='nadpis' value='1' />
+<input type='hidden' name='popis' value='1' />
+<input type='hidden' name='text' value='1' />
+<input type='hidden' name='rubrika' value='0' />
+<input type='hidden' name='autor' value='0' />
+ --><INPUT class=submit type=submit value=Najdi! name=send> </DIV></FORM><!-- <div><a href='http://interval.cz/search.asp'>Rozšířené vyhledávání</a></div> --></DIV><!-- StartKód: adarbo2.bbmedia.cz 3.1 Nestandard  Interval(87) / home page(2) / textbox(1) / nestandard(24) -->
+<SCRIPT type=text/javascript>
+	<!-- <![CDATA[
+	var bbs=screen,bbn=navigator,bbh;bbh='&ubl='+bbn.browserLanguage+'&ucc='+bbn.cpuClass+'&ucd='+bbs.colorDepth+'&uce='+bbn.cookieEnabled+'&udx='+bbs.deviceXDPI+'&udy='+bbs.deviceYDPI+'&usl='+bbn.systemLanguage+'&uje='+bbn.javaEnabled()+'&uah='+bbs.availHeight+'&uaw='+bbs.availWidth+'&ubd='+bbs.bufferDepth+'&uhe='+bbs.height+'&ulx='+bbs.logicalXDPI+'&uly='+bbs.logicalYDPI+'&use='+bbs.fontSmoothingEnabled+'&uto='+(new Date()).getTimezoneOffset()+'&uti='+(new Date()).getTime()+'&uui='+bbs.updateInterval+'&uul='+bbn.userLanguage+'&uwi='+bbs.width;
+	document.write("<scr"+"ipt  language='JavaScript' type='text/javascript' src='http://adarbo2.bbmedia.cz/please/showit/87/2/1/24/?typkodu=non-standard"+bbh+"&alttext=0&border=0&bgcolor=FFFFFF&text=000000&link=0000FF&target=_blank&bust="+Math.random()+"'>");
+	document.write("<"+"\/scr"+"ipt>");
+	//]]> -->
+	</SCRIPT>
+<!-- KonecKód: adarbo2.bbmedia.cz 3.1 Nestandard --><!-- cached 08-knizni_tip.txt -->
+<DIV class="page-right-box book">
+<H3>Knižní tip</H3>
+<DIV class=page-right-box-in>
+<DIV class=book-top>
+<H4><A href="http://interval.inshop.cz/inshop/scripts/detail.asp?kat=120">Adobe 
+Photoshop: retuš, vylepšování a úpravy fotografií</A></H4></DIV>
+<DIV class=image><A 
+href="http://interval.inshop.cz/inshop/scripts/detail.asp?kat=120"><IMG 
+title="Adobe Photoshop: retuš, vylepšování a úpravy fotografií" alt=obálka 
+src="Jednoduchý upload souboru na server pomocí PHP -- PHP -- Vývoj aplikací -- Interval_cz_soubory/K0624.jpg"></A></DIV></DIV></DIV><!-- cached 17-nejctenejsi_clanky.txt -->
+<DIV class="page-right-box reading">
+<H3 title="Nejčtenější články za posledních 28 dnů">Nejčtenější</H3>
+<DIV class=page-right-box-in>
+<UL>
+  <LI><A href="http://interval.cz/clanky/opera-9-pokrocila-konfigurace/">Opera 9 
+  - pokročilá konfigurace</A>
+  <LI><A 
+  href="http://interval.cz/clanky/adobe-photoshop-prakticky-webdesign-jakub-krcmar/">Adobe 
+  Photoshop - praktický webdesign (Jakub Krčmář)</A>
+  <LI><A 
+  href="http://interval.cz/clanky/drupal-tvorba-vlastniho-vzhledu/">Drupal - 
+  tvorba vlastního vzhledu</A>
+  <LI><A 
+  href="http://interval.cz/clanky/pruvodce-svg-dalsi-nastroje-pro-tvorbu-svg-grafiky/">Průvodce 
+  SVG - další nástroje pro tvorbu SVG grafiky</A>
+  <LI><A 
+  href="http://interval.cz/clanky/spravy-zo-slovenskeho-internetu-8/">Správy zo 
+  slovenského internetu 8.</A></LI></UL></DIV></DIV>
+<DIV class=merak-box style="MARGIN-TOP: 1.5em; TEXT-ALIGN: center">
+<DIV id=merak-content 
+style="BORDER-RIGHT: #000000 1px solid; BORDER-TOP: #000000 1px solid; FONT-WEIGHT: bold; FONT-SIZE: 11px; BACKGROUND-IMAGE: url(http://interval.cz/__services/__include_right/merak-background.png); MARGIN: 0px auto; BORDER-LEFT: #000000 1px solid; WIDTH: 160px; BORDER-BOTTOM: #000000 1px solid; BACKGROUND-REPEAT: no-repeat; FONT-FAMILY: Verdana, Arial, sans-serif; HEIGHT: 190px; TEXT-ALIGN: left; FONT-VARIANT: small-caps">
+<H3 style="FONT-SIZE: 12px; MARGIN: 55px 0px 10px 10px; FONT-VARIANT: normal"><A 
+title="Merak Mail Server 8" 
+style="COLOR: #000000; BACKGROUND-COLOR: transparent; TEXT-DECORATION: none" 
+href="http://www.merak-mail-server.cz/">Merak Mail Server 8</A></H3>
+<DIV id=merak-proclamation style="PADDING-LEFT: 10px">Integrovaný <EM><A 
+title="Merak Mail Server 8" 
+style="COLOR: #35a0df; FONT-STYLE: normal; BACKGROUND-COLOR: transparent; TEXT-DECORATION: none" 
+href="http://www.merak-mail-server.cz/">antispam</A></EM> <BR>Snadná <EM><A 
+title="Merak Mail Server 8" 
+style="COLOR: #35a0df; FONT-STYLE: normal; BACKGROUND-COLOR: transparent; TEXT-DECORATION: none" 
+href="http://www.merak-mail-server.cz/">instalace</A></EM> <BR>Zabezpečený 
+<EM><A title="Merak Mail Server 8" 
+style="COLOR: #35a0df; FONT-STYLE: normal; BACKGROUND-COLOR: transparent; TEXT-DECORATION: none" 
+href="http://www.merak-mail-server.cz/">groupware</A></EM> </DIV></DIV></DIV>
+<DIV class="page-right-box emailserv">
+<H3>Info servis</H3>
+<DIV class=page-right-box-in>
+<UL>
+  <LI><A title="Exporty aktuálních informací ve formátech Atom, RDF a RSS" 
+  href="http://export.interval.cz/">Atom, RDF, RSS</A> 
+  <LI>Informace e-mailem: </LI></UL>
+<FORM action=prihlaseni.asp method=post>
+<DIV class=shell><INPUT class=text name=adresa></DIV>
+<DIV class=shell><INPUT class=radio type=radio CHECKED value=1 name=co>Týdenní 
+přehled článků</DIV>
+<DIV class=shell><INPUT class=radio type=radio value=2 name=co>HELP 
+konference</DIV>
+<DIV 
+class=shell><INPUT class=submit type=submit value=Přihlásit></DIV></FORM></DIV></DIV>
+<DIV class=advertising-vertical-banner-outer>
+<DIV class=advertising-vertical-banner-inner><!-- Skyscraper Right --><!-- BBSTART Interval.cz/Skyscraper Right/rolovací/Skyscraper 120x600 -->
+<SCRIPT type=text/javascript>/* <![CDATA[ */
+var bbat=0,bbbr=0,bbtt='_blank',bbpath='17877/4/2/9',bbxl=1,bbac=1;
+//]]></SCRIPT>
+
+<SCRIPT 
+src="Jednoduchý upload souboru na server pomocí PHP -- PHP -- Vývoj aplikací -- Interval_cz_soubory/bb4.js" 
+type=text/javascript></SCRIPT>
+<NOSCRIPT>
+<DIV><A href="http://ad2.billboard.cz/please/redirect/17877/4/2/9/"><IMG 
+style="BORDER-RIGHT: 0px; BORDER-TOP: 0px; BORDER-LEFT: 0px; BORDER-BOTTOM: 0px" 
+height=600 alt=. 
+src="Jednoduchý upload souboru na server pomocí PHP -- PHP -- Vývoj aplikací -- Interval_cz_soubory/fallback9.gif" 
+width=120></A></DIV></NOSCRIPT><!-- BBKONEC --></DIV></DIV><!-- cached 17-nejdiskutovanejsi_clanky.txt -->
+<DIV class="page-right-box cauldron">
+<H3 title="Nejdiskutovanější články za posledních 28 dnů">Diskuzní kotel</H3>
+<DIV class=page-right-box-in>
+<UL>
+  <LI><A title="(103 komentářů)" 
+  href="http://interval.cz/clanky/opera-9-pokrocila-konfigurace/">Opera 9 - 
+  pokročilá konfigurace</A>
+  <LI><A title="(4 komentářů)" 
+  href="http://interval.cz/clanky/pruvodce-svg-dalsi-nastroje-pro-tvorbu-svg-grafiky/">Průvodce 
+  SVG - další nástroje pro tvorbu SVG grafiky</A>
+  <LI><A title="(2 komentářů)" 
+  href="http://interval.cz/clanky/drupal-tvorba-vlastniho-vzhledu/">Drupal - 
+  tvorba vlastního vzhledu</A>
+  <LI><A title="(2 komentářů)" 
+  href="http://interval.cz/clanky/spravy-zo-slovenskeho-internetu-9/">Správy zo 
+  slovenského internetu 9.</A>
+  <LI><A title="(1 komentářů)" 
+  href="http://interval.cz/clanky/lokalizace-asp-net-2-x-aplikaci/">Lokalizace 
+  ASP.NET 2.x aplikací</A></LI></UL></DIV></DIV></DIV>
+<DIV class=page-maker>&nbsp;</DIV>
+<DIV class=page-maker-white>&nbsp;</DIV></DIV>
+<DIV id=advertising-page-bottom>
+<DIV id=advertising-page-bottom-left>
+<DIV><!-- Full Banner Bottom --><!-- BBSTART Interval.cz/Full Banner Bottom/rolovací/Full Banner 468x60 -->
+<SCRIPT type=text/javascript>/* <![CDATA[ */
+var bbat=0,bbbr=0,bbtt='_blank',bbpath='17877/1/2/1',bbxl=1,bbac=1;
+//]]></SCRIPT>
+
+<SCRIPT 
+src="Jednoduchý upload souboru na server pomocí PHP -- PHP -- Vývoj aplikací -- Interval_cz_soubory/bb4.js" 
+type=text/javascript></SCRIPT>
+<NOSCRIPT>
+<DIV><A href="http://ad2.billboard.cz/please/redirect/17877/1/2/1/"><IMG 
+style="BORDER-RIGHT: 0px; BORDER-TOP: 0px; BORDER-LEFT: 0px; BORDER-BOTTOM: 0px" 
+height=60 alt=. 
+src="Jednoduchý upload souboru na server pomocí PHP -- PHP -- Vývoj aplikací -- Interval_cz_soubory/fallback1.gif" 
+width=468></A></DIV></NOSCRIPT><!-- BBKONEC --></DIV></DIV>
+<DIV id=advertising-page-bottom-right>
+<DIV><!-- Button2 Bottom --><!-- BBSTART Interval.cz/Button2 Bottom/rolovací/Button 2 120x60 -->
+<SCRIPT type=text/javascript>/* <![CDATA[ */
+var bbat=0,bbbr=0,bbtt='_blank',bbpath='17877/2/2/6',bbxl=1,bbac=1;
+//]]></SCRIPT>
+
+<SCRIPT 
+src="Jednoduchý upload souboru na server pomocí PHP -- PHP -- Vývoj aplikací -- Interval_cz_soubory/bb4.js" 
+type=text/javascript></SCRIPT>
+<NOSCRIPT>
+<DIV><A href="http://ad2.billboard.cz/please/redirect/17877/2/2/6/"><IMG 
+style="BORDER-RIGHT: 0px; BORDER-TOP: 0px; BORDER-LEFT: 0px; BORDER-BOTTOM: 0px" 
+height=60 alt=. 
+src="Jednoduchý upload souboru na server pomocí PHP -- PHP -- Vývoj aplikací -- Interval_cz_soubory/fallback6.gif" 
+width=120></A></DIV></NOSCRIPT><!-- BBKONEC --></DIV></DIV>
+<DIV class=page-maker>&nbsp;</DIV></DIV>
+<DIV id=page-foot>
+<DIV id=page-foot-menu><A href="http://interval.cz/redakce-inzerce.asp">Inzerce 
+na Interval.cz</A> &nbsp;|&nbsp; <A 
+href="http://interval.cz/redakce.asp">Redakce Interval.cz</A> &nbsp;|&nbsp; <A 
+href="http://interval.cz/autori.asp">Hledáme nové autory</A> </DIV>
+<DIV id=issn><A class=noprint 
+href="http://jigsaw.w3.org/css-validator/validator?uri=http%3A%2F%2Finterval.cz%3A80%2Fclanky%2Fjednoduchy-upload-souboru-na-server-pomoci-php%2F">.</A> 
+ISSN 1212-8651 <A class=noprint 
+href="http://validator.w3.org/check?uri=http%3A%2F%2Finterval.cz%3A80%2Fclanky%2Fjednoduchy-upload-souboru-na-server-pomoci-php%2F&amp;charset=%28detect+automatically%29&amp;doctype=%28detect+automatically%29&amp;outline=1&amp;verbose=1">.</A> 
+</DIV>
+<DIV id=page-foot-zoner>© Zoner software, s.r.o., všechna práva vyhrazena, tento 
+server dodržuje <A href="http://interval.cz/privacy.asp">právní předpisy</A> o 
+ochraně osobních údajů. </DIV></DIV>
+<SCRIPT 
+src="Jednoduchý upload souboru na server pomocí PHP -- PHP -- Vývoj aplikací -- Interval_cz_soubory/audits-footer.js" 
+type=text/javascript></SCRIPT>
+
+<SCRIPT 
+src="Jednoduchý upload souboru na server pomocí PHP -- PHP -- Vývoj aplikací -- Interval_cz_soubory/urchin.js" 
+type=text/javascript>
+</SCRIPT>
+
+<SCRIPT type=text/javascript>
+_uacct = "UA-173085-1";
+
+var len = _uOsr.length;
+_uOsr[len]="seznam.cz";       _uOkw[len]="w";
+_uOsr[len+1]="centrum.cz";    _uOkw[len+1]="q";
+_uOsr[len+2]="jyxo.cz";       _uOkw[len+2]="s";
+_uOsr[len+3]="atlas.cz";      _uOkw[len+3]="q";
+_uOsr[len+4]="zoohoo.cz";     _uOkw[len+4]="q";
+_uOsr[len+5]="tiscali.cz";    _uOkw[len+5]="query";
+_uOsr[len+6]="1.cz";          _uOkw[len+6]="q";
+_uOsr[len+7]="volny.cz";      _uOkw[len+7]="search";
+
+urchinTracker();
+</SCRIPT>
+</BODY></HTML>

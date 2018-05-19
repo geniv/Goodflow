@@ -1,0 +1,34 @@
+<HTML>
+  <HEAD>
+    <TITLE> Rozcestník </TITLE>
+    <SCRIPT Language="JavaScript">
+      <!--
+        function PreLoad (){
+          // Pole obrázkù libovolné délky
+          ImArray = new Array(PreLoad.arguments.length);
+
+          for(var i=0; i<PreLoad.arguments.length; i++){
+            // Pro každý obrázek se vytvoøí objekt Image
+            ImArray[i] = new Image();
+            // a nastaví se mu pøíslušný soubor s obrázkem
+            ImArray[i].src = PreLoad.arguments[i];
+          }
+        }
+      // -->
+    </SCRIPT>
+  </HEAD>
+
+  <BODY onload="PreLoad ('softnov2.gif', 'inside2.gif')">
+    <H3>Rozcestník</H3>
+    <A href="http://www.inside.cz/"
+      onmouseover="Img1.src='inside2.gif'"
+      onmouseout="Img1.src='inside1.gif'"
+    ><IMG src="inside1.gif" name="Img1" border="0"></A>
+    <BR>
+    <A href="http://swn.softnov.cz/"
+      onmouseover="Img2.src='softnov2.gif'"
+      onmouseout="Img2.src='softnov1.gif'"
+    ><IMG src="softnov1.gif" name="Img2" border="0"></A>
+  </BODY>
+</HTML>
+

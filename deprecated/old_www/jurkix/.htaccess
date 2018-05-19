@@ -1,0 +1,18 @@
+Options -Indexes
+
+ErrorDocument 404 error_page.html
+ErrorDocument 403 error_page.html
+ErrorDocument 500 error_page.html
+
+#AddHandler php5-cgi .php
+#Action php5-cgi /php5cgi/php
+
+#na serveru: %{DOCUMENT_ROOT}/
+
+#RewriteEngine On
+
+#stranky
+#RewriteRule ^([a-zA-Z]*)-([a-zA-Z]*)-([a-zA-Z]*)-([a-zA-Z]*)   index.php?action=$1&akce=$2&co=$3&cislo=$4 [QSA,L]
+#RewriteRule ^([a-zA-Z]*)-([a-zA-Z]*)-([a-zA-Z]*)               index.php?action=$1&akce=$2&co=$3 [QSA]
+#RewriteRule ^([a-zA-Z]*)-([a-zA-Z]*)                           index.php?action=$1&akce=$2 [QSA]
+#RewriteRule ^([a-zA-Z]*)                                       index.php?action=$1 [QSA]

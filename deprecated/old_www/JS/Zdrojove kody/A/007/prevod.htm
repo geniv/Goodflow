@@ -1,0 +1,33 @@
+<HTML>
+  <HEAD>
+    <TITLE>Pøevod mezi soustavami</TITLE>
+    <SCRIPT Language="JavaScript">
+      <!--
+        // Funkce na pøevod z desítkové soustavy
+        //   Base - cílová soustava
+        //   Val - pøevádìná hodnota
+        function Convert(Base, Val){
+          // Oba parametry se pøevedou na èíslo
+          IntBase = parseInt (Base);
+          IntVal = parseInt (Val);
+          // Vrátí se pøevedená hodnota
+          return IntVal.toString (IntBase);
+        }
+      // -->
+    </SCRIPT>
+  </HEAD>
+  <BODY>
+    <FORM Name="frmConvert">
+      Hodnota:<BR>
+      <INPUT Name="edValue" Type="Text" Size="10"><BR>
+      Základ:<BR>
+      <INPUT Name="edBase" Type="Text" Size="3"><BR>
+      <INPUT Name="btOk" Type="Button" Value="Pøeveï"
+        OnClick="edResult.value=Convert(edBase.value,edValue.value);">
+        <BR>Výsledek:<BR>
+      <INPUT Name="edResult" Type="Text" Size="20"><BR>
+    </FORM>
+  </BODY>
+</HTML>
+
+

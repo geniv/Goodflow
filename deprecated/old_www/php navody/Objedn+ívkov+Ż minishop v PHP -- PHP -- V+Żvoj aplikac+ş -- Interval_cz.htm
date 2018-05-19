@@ -1,0 +1,689 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!-- saved from url=(0054)http://interval.cz/clanky/objednavkovy-minishop-v-php/ -->
+<?xml version='1.0' encoding='windows-1250'?><HTML lang=cs xml:lang="cs" 
+xmlns="http://www.w3.org/1999/xhtml"><HEAD><TITLE>Objednávkový minishop v PHP -- PHP -- Vývoj aplikací -- Interval.cz</TITLE>
+<META http-equiv=Content-Type content="text/html; charset=windows-1250">
+<META http-equiv=Content-language content=cs>
+<META http-equiv=Cache-control content=no-cache>
+<META http-equiv=Pragma content=no-cache>
+<META http-equiv=Expires content=-1>
+<META content=index,follow name=robots>
+<META content=index,follow,snippet,noarchive name=googlebot>
+<META 
+content="Začít něco prodávat pomocí své stránky můžeme s minimem příprav téměř ihned. Jednou z možností je hromadit objednávky v mailu a zboží rozesílat na dobírku. Tentokrát se ale dobírce vyhneme tak, že necháme zákazníka zaplatit předem a zboží mu doručíme poštou nebo jinak až po doručení platby na náš účet. Ušetříme tím za vyšší poštovné, které je pro prodávání drobností omezující položkou." 
+name=description>
+<META content="PHP, Vývoj aplikací, Interval" name=keywords>
+<META content="49.1915, 16.626" name=ICBM>
+<META content=Interval.cz name=DC.Title>
+<META content=http://interval.cz name=DC.Identifier>
+<META content="(SCHEME=ISSN) 12128651" name=DC.Identifier>
+<META content=cs name=DC.Language>
+<META http-equiv=pics-label 
+content='(pics-1.1 "http://www.icra.org/ratingsv02.html" comment "ICRAonline EN v2.0" l gen true for "http://interval.cz" r (nz 1 vz 1 lz 1 oz 1 cz 1) "http://www.rsac.org/ratingsv01.html" l gen true for "http://interval.cz" r (n 0 s 0 v 0 l 0))'>
+<META http-equiv=imagetoolbar content=no>
+<META http-equiv=MSThemeCompatible content=no>
+<META content=true name=MSSmartTagsPreventParsing><LINK 
+href="http://interval.cz/favicon.ico" type=image/x-icon 
+rel="shortcut icon"><LINK 
+title="Interval.cz -- Objednávkový minishop v PHP -- (diskuse, Atom 0.3)" 
+href="http://export.interval.cz/?type=atom&amp;discussion=1809" 
+type=application/atom+xml rel=alternate><LINK 
+title="Interval.cz -- Objednávkový minishop v PHP -- (diskuse, RDF Site Summary 1.0)" 
+href="http://export.interval.cz/?type=rdf&amp;discussion=1809" 
+type=application/rdf+xml rel=alternate><LINK 
+title="Interval.cz -- Objednávkový minishop v PHP -- (diskuse, RSS 2.0)" 
+href="http://export.interval.cz/?type=rss&amp;discussion=1809" 
+type=application/rss+xml rel=alternate><LINK href="http://interval.cz" 
+rel=home><LINK href="http://interval.cz/search_ex.asp" rel=search><LINK 
+media=all 
+href="Objednávkový minishop v PHP -- PHP -- Vývoj aplikací -- Interval_cz_soubory/html4.css" 
+type=text/css rel=stylesheet><LINK media=all 
+href="Objednávkový minishop v PHP -- PHP -- Vývoj aplikací -- Interval_cz_soubory/interval-display.css" 
+type=text/css rel=stylesheet><LINK media=print 
+href="Objednávkový minishop v PHP -- PHP -- Vývoj aplikací -- Interval_cz_soubory/interval-print.css" 
+type=text/css rel=stylesheet>
+<META content="MSHTML 6.00.2800.1106" name=GENERATOR></HEAD>
+<BODY class="interval interval-articles" id=article-1809>
+<DIV class=audits><!-- TOPList.cz -->
+<SCRIPT type=text/javascript>
+<!-- <![CDATA[
+document.write ("<a href='http://www.toplist.cz'><img src='http://www.toplist.cz/dot.asp?id=33617&amp;http="+escape(document.referrer)+"&amp;wi="+escape(window.screen.width)+"&amp;he="+escape(window.screen.height)+"&amp;cd="+escape(window.screen.colorDepth)+"&amp;t="+escape(document.title)+"' style='border: 0; width: 1px; height: 1px' alt='.' /></a>");
+//]]> -->
+</SCRIPT>
+<NOSCRIPT>
+<DIV><A href="http://www.toplist.cz/"><IMG 
+style="BORDER-RIGHT: 0px; BORDER-TOP: 0px; BORDER-LEFT: 0px; WIDTH: 1px; BORDER-BOTTOM: 0px; HEIGHT: 1px" 
+alt=. src=""></A></DIV></NOSCRIPT><!-- TOPList.cz - konec --><!-- iAudit --><IMG 
+style="BORDER-RIGHT: 0px; BORDER-TOP: 0px; BORDER-LEFT: 0px; WIDTH: 1px; BORDER-BOTTOM: 0px; HEIGHT: 1px" 
+alt=. 
+src="Objednávkový minishop v PHP -- PHP -- Vývoj aplikací -- Interval_cz_soubory/dot.idot.gif"> 
+<!-- iAudit - konec --><!-- (C)2005 Gemius SA - gemiusAudience  / Ostatni -->
+<SCRIPT type=text/javascript><!--
+	
+	gemius_identifier = new String('bQzrQkrzLOWoKbJeudlKguTS7OndUMSqxutbeFviWMv.47');
+	
+	gemius_href=new String(document.location);
+	if (document.referrer) { gemius_ref = new String(document.referrer); } else { gemius_ref = ""; }
+	if(typeof(Error)!='undefined') eval("try { if (typeof(top.document.referrer)=='string') { gemius_ref = top.document.referrer } } catch(gemius_ex) {}");
+	iname = new String('id='+gemius_identifier+';ref='+escape(gemius_ref.substring(0,299))+';href='+escape(gemius_href.substring(0,299))+';');
+	document.write('<iframe src="http://spir.hit.gemius.pl/gemiusaudience.html" name="'+iname+'" width="1" height="1" frameborder="0" scrolling="no"></iframe>');
+	//-->
+	</SCRIPT>
+</DIV>
+<DIV id=advertising-leader-board><!-- StartKód: adarbo2.bbmedia.cz 3.1 Nestandard  Interval(87) / cely web(1) / leaderboard 750x100(1) / nestandard(24) -->
+<SCRIPT type=text/javascript>
+	/* <![CDATA[ */
+	var bbs=screen,bbn=navigator,bbh;bbh='&ubl='+bbn.browserLanguage+'&ucc='+bbn.cpuClass+'&ucd='+bbs.colorDepth+'&uce='+bbn.cookieEnabled+'&udx='+bbs.deviceXDPI+'&udy='+bbs.deviceYDPI+'&usl='+bbn.systemLanguage+'&uje='+bbn.javaEnabled()+'&uah='+bbs.availHeight+'&uaw='+bbs.availWidth+'&ubd='+bbs.bufferDepth+'&uhe='+bbs.height+'&ulx='+bbs.logicalXDPI+'&uly='+bbs.logicalYDPI+'&use='+bbs.fontSmoothingEnabled+'&uto='+(new Date()).getTimezoneOffset()+'&uti='+(new Date()).getTime()+'&uui='+bbs.updateInterval+'&uul='+bbn.userLanguage+'&uwi='+bbs.width;
+	document.write("<scr"+"ipt  language='JavaScript' type='text/javascript' src='http://adarbo2.bbmedia.cz/please/showit/87/1/1/24/?typkodu=non-standard"+bbh+"&alttext=0&border=0&bgcolor=FFFFFF&text=000000&link=0000FF&target=_blank&bust="+Math.random()+"'>");
+	document.write("<"+"\/scr"+"ipt>");
+	/* ]]> */
+	</SCRIPT>
+<!-- KonecKód: adarbo2.bbmedia.cz 3.1 Nestandard --></DIV>
+<DIV id=page-header>
+<DIV id=interval-logo>
+<H1 title="Interval.cz - webdesign a e-komerce denně (logo &amp; index link)"><A 
+href="http://interval.cz/">Interval.cz<SPAN></SPAN></A></H1></DIV>
+<DIV id=advertising-page-header><!-- StartKód: adarbo2.bbmedia.cz 3.1 Nestandard  Interval(87) / cely web(1) / horni468x60(2) / nestandard(24) -->
+<SCRIPT type=text/javascript>
+	/* <![CDATA[ */
+	var bbs=screen,bbn=navigator,bbh;bbh='&ubl='+bbn.browserLanguage+'&ucc='+bbn.cpuClass+'&ucd='+bbs.colorDepth+'&uce='+bbn.cookieEnabled+'&udx='+bbs.deviceXDPI+'&udy='+bbs.deviceYDPI+'&usl='+bbn.systemLanguage+'&uje='+bbn.javaEnabled()+'&uah='+bbs.availHeight+'&uaw='+bbs.availWidth+'&ubd='+bbs.bufferDepth+'&uhe='+bbs.height+'&ulx='+bbs.logicalXDPI+'&uly='+bbs.logicalYDPI+'&use='+bbs.fontSmoothingEnabled+'&uto='+(new Date()).getTimezoneOffset()+'&uti='+(new Date()).getTime()+'&uui='+bbs.updateInterval+'&uul='+bbn.userLanguage+'&uwi='+bbs.width;
+	document.write("<scr"+"ipt  type='text/javascript' src='http://adarbo2.bbmedia.cz/please/showit/87/1/2/24/?typkodu=non-standard"+bbh+"&alttext=0&border=0&bgcolor=FFFFFF&text=000000&link=0000FF&target=_top&bust="+Math.random()+"'>");
+	document.write("<"+"\/scr"+"ipt>");
+	/* ]]> */
+	</SCRIPT>
+<!-- KonecKód: adarbo2.bbmedia.cz 3.1 Nestandard --></DIV>
+<DIV class=page-maker>&nbsp;</DIV></DIV>
+<DIV id=page-topmenu>
+<H2 class=textversion>Navigace</H2><!-- cached 09-15-62-hlavni_menu_with_ascii.txt --><!-- ,Vývoj aplikací ~~ ,,PHP ~~ , -->
+<DIV id=page-mainmenu>
+<H3 class=textversion>Hlavní menu</H3>
+<UL>
+  <LI class=first><A href="http://interval.cz/">Titulka</A></LI>
+  <LI><A href="http://interval.cz/e-komerce/">E-komerce</A></LI>
+  <LI><A href="http://interval.cz/webdesign/">Webdesign</A></LI>
+  <LI class=selected><A href="http://interval.cz/vyvoj-aplikaci/">Vývoj 
+  aplikací</A></LI>
+  <LI><A href="http://interval.cz/nastroje/">Nástroje</A></LI>
+  <LI><A href="http://interval.cz/magazin/">Magazín</A></LI>
+  <LI class="right selected"><A 
+  href="http://interval.inshop.cz/">Knihkupectví</A></LI>
+  <LI class=right><A href="http://interforum.interval.cz/">Interforum</A></LI>
+  <LI class=right><A 
+href="http://interzen.interval.cz/">Interzen</A></LI></UL></DIV>
+<DIV id=page-mainmenu-maker>&nbsp;</DIV>
+<DIV id=page-mainsubmenu>
+<H3 class=textversion>Submenu</H3>
+<UL>
+  <LI><A href="http://interval.cz/vyvoj-aplikaci/j2me/">J2ME</A></LI>
+  <LI><A href="http://interval.cz/vyvoj-aplikaci/asp/">ASP</A></LI>
+  <LI><A href="http://interval.cz/vyvoj-aplikaci/net/">.NET</A></LI>
+  <LI class=selected><A 
+  href="http://interval.cz/vyvoj-aplikaci/php/">PHP</A></LI>
+  <LI><A 
+href="http://interval.cz/vyvoj-aplikaci/javascript/">JavaScript</A></LI>
+  <LI><A href="http://interval.cz/vyvoj-aplikaci/xml/">XML</A></LI>
+  <LI><A href="http://interval.cz/vyvoj-aplikaci/java/">Java</A></LI>
+  <LI><A href="http://interval.cz/vyvoj-aplikaci/perl-cgi/">PERL/CGI</A></LI>
+  <LI><A href="http://interval.cz/vyvoj-aplikaci/databaze/">Databáze</A></LI>
+  <LI><A 
+href="http://interval.cz/vyvoj-aplikaci/bezpecnost/">Bezpečnost</A></LI>
+  <LI><A 
+href="http://interval.cz/vyvoj-aplikaci/analyzy/">Analýzy</A></LI></UL><SPAN 
+id=page-mainsubmenu-maker>&nbsp;</SPAN></DIV><!-- cas behu menu = 0 --></DIV>
+<DIV id=page-body>
+<DIV id=page-left>
+<DIV id=article>
+<H2>Objednávkový minishop v PHP</H2>
+<P id=prepend>Začít něco prodávat pomocí své stránky můžeme s&nbsp;minimem 
+příprav téměř ihned. Jednou z&nbsp;možností je hromadit objednávky v&nbsp;mailu 
+a&nbsp;zboží rozesílat na dobírku. Tentokrát se ale dobírce vyhneme tak, že 
+necháme zákazníka zaplatit předem a&nbsp;zboží mu doručíme poštou nebo jinak až 
+po doručení platby na náš účet. Ušetříme tím za vyšší poštovné, které je pro 
+prodávání drobností omezující položkou. </P>
+<DIV class="advertising-bigsquare-outer noprint">
+<DIV class=advertising-bigsquare-inner style="WIDTH: 300px"><!-- StartKód: adarbo2.bbmedia.cz 3.1 Nestandard  Interval(87) / cely web(1) / ctverec250x250(8) / nestandard(24) -->
+<SCRIPT type=text/javascript>
+	/* <![CDATA[ */
+	var bbs=screen,bbn=navigator,bbh;bbh='&ubl='+bbn.browserLanguage+'&ucc='+bbn.cpuClass+'&ucd='+bbs.colorDepth+'&uce='+bbn.cookieEnabled+'&udx='+bbs.deviceXDPI+'&udy='+bbs.deviceYDPI+'&usl='+bbn.systemLanguage+'&uje='+bbn.javaEnabled()+'&uah='+bbs.availHeight+'&uaw='+bbs.availWidth+'&ubd='+bbs.bufferDepth+'&uhe='+bbs.height+'&ulx='+bbs.logicalXDPI+'&uly='+bbs.logicalYDPI+'&use='+bbs.fontSmoothingEnabled+'&uto='+(new Date()).getTimezoneOffset()+'&uti='+(new Date()).getTime()+'&uui='+bbs.updateInterval+'&uul='+bbn.userLanguage+'&uwi='+bbs.width;
+	document.write("<scr"+"ipt  type='text/javascript' src='http://adarbo2.bbmedia.cz/please/showit/87/1/8/24/?typkodu=non-standard"+bbh+"&alttext=0&border=0&bgcolor=FFFFFF&text=000000&link=0000FF&target=_top&bust="+Math.random()+"'>");
+	document.write("<"+"\/scr"+"ipt>");
+	/* ]]> */
+	</SCRIPT>
+<!-- KonecKód: adarbo2.bbmedia.cz 3.1 Nestandard --></DIV></DIV>
+<P>Dobírce se sice vyhneme, ovšem z důvodu platby předem se tento systém hodí 
+tam, kde máme určitou komunitu, která věří, že jim po zaplacení nepošleme 
+zabalenou cihlu, nebo tam, kde třeba naši předchozí zákazníci dobře referují o 
+naší službě. Prostě tam, kde o nás zákazníci alespoň něco vědí a důvěřují nám. 
+Je to daň za laciné řešení, ovšem pokud máme například server pro chovatele 
+králíků, kteří se pak většinou znají z našeho diskusního fóra, a chceme jim 
+nabídnout k objednání hrníček s logem nebo tričko, je nejspíš zbytečné budovat 
+robustní e-shop.</P>
+<P>Základem úspěšnosti našeho e-shopu je snadnost použití, žádné komplikované 
+"Pokud si chcete objednat, napište na bla bla bla...". Tento obchod bude opravdu 
+jednoduchý, a tak si vystačí i bez databáze. Objednávky nám budou chodit mailem 
+a pokud s nimi nebudeme pracovat přímo v poštovním programu, ručně si je z 
+poštovního programu přeneseme do nějaké zvláštní složky (například z Outlook 
+Expressu je lze ukládat jako soubory *.eml nebo i *.txt).</P>
+<DIV class=list>
+<UL>
+  <LI>Zákazník si vybere zboží, zvolí počet kusů, vyplní kontaktní údaje (adresu 
+  pro doručení a svůj email) a objedná. 
+  <LI>Při objednání mu systém zobrazí instrukce, jak má dále postupovat při 
+  placení. 
+  <LI>Na náš e-mail a na ten, který zadal, bude odeslána objednávka s údaji o 
+  objednaném zboží, počtu kusů, celkové ceně, číslu účtu a variabilním symbolu 
+  pro platbu. 
+  <LI>Jakmile na náš účet dorazí platba od zákazníka (poznáme podle variabilního 
+  symbolu a částky, která nám došla v objednávce), pošleme zákazníkovi zboží. 
+  </LI></UL></DIV>
+<P>Podívejte se na ukázkun objednávky zaslané e-mailem (údaje zákazníka jsou 
+smyšlené):</P>
+<DIV class=sample>Tričko Králíci.cz<BR><BR>Objednal: Petr Plšek<BR>Adresa: 
+Pampelišková 812, Pohořelice 691 23<BR>Email: <A 
+href="mailto:33333333@seznam.cz">mailto:33333333@seznam.cz</A><BR><BR>Počet 
+kusů: 1&nbsp;&nbsp;&nbsp; Cena: 289,- Kč<BR>Uvedenou částku zašlete na účet 
+152153154/0600<BR>Variabilní symbol: 0210302104<BR><BR>Potreboval bych jej do 
+25.11.2002. Dekuji moc.<BR><BR><BR>Zasláno z e-shopu na http://www.kralici.cz/ 
+</DIV>
+<P>V zaslaném e-mailu vidíme jak my, tak zákazník, jaké zboží si objednal, kolik 
+kusů a kam má zboží zaplatit. Na konci je ještě vidět poznámka, kterou náš 
+minishop umožňuje připojit. To je dostatečné pro uskutečnění obchodu. Zákazník 
+ví, jak a kolik má zaplatit, my víme, komu po obdržení platby zboží poslat.</P>
+<P>Aby byla objednávka zboží opravdu snadná a neodrazovala zákazníka, připravíme 
+si "chytrý" formulář, který <A 
+title="Halamíček Jarmil: Automatické přepočítávání cen ve formuláři" 
+href="http://interval.cz/clanek.asp?article=639">bude sám počítat cenu</A> podle 
+počtu kusů, případně je možné zahrnout i nějaký algoritmus na počítání 
+množstevní slevy. Zároveň doplníme <A 
+title="Halamíček Jarmil: Univerzální skript pro kontrolu formulářů" 
+href="http://interval.cz/clanek.asp?article=584">kontrolu</A>, zda jsou vyplněny 
+všechny povinné údaje. Můžete se také podívat na <A 
+href="http://php.podklady.interval.cz/ruzicka/minishop/shop.php">ukázku simulace 
+minishopu</A> (odesílání mailu je zakomentováno, objednávka se pouze zobrazuje). 
+Samozřejmě si můžete <A 
+href="http://podklady.interval.cz/ruzicka/197/minishop.zip">stáhnout</A> i 
+hotový zdrojový kód.</P>
+<DIV class=sample>&lt;script type="text/javascript"&gt;<BR>&lt;!--<BR>function 
+Recount(theform)<BR>{<BR>&nbsp; var celkcena = 0&nbsp;<BR>&nbsp; var floop = 
+true&nbsp;<BR>&nbsp; for( var i=1; floop; i++ )<BR>&nbsp;{<BR>&nbsp;&nbsp;&nbsp; 
+kusu = eval("theform.ks" + i )<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+if(kusu)<BR>&nbsp;&nbsp;&nbsp;&nbsp; 
+{<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if( isNaN(parseInt(kusu.value)) 
+)<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+{<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; kusu.value = 
+""<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+}<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+else<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+{<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; kusu.value = 
+parseInt(kusu.value)<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+celkcena += (279 * kusu.value + 
+10)<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+}<BR>&nbsp;&nbsp;&nbsp;&nbsp; }<BR>&nbsp;&nbsp;&nbsp;&nbsp; 
+else<BR>&nbsp;&nbsp;&nbsp;&nbsp; {<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; floop 
+= false<BR>&nbsp;&nbsp;&nbsp;&nbsp; }<BR>&nbsp; }<BR>&nbsp; theform.cena.value = 
+celkcena<BR>}&nbsp;<BR><BR>function Validate(theForm)<BR>{<BR>&nbsp; for(var 
+i=0; i&lt;theForm.length; i++ )<BR>&nbsp; {<BR>&nbsp;&nbsp;&nbsp; 
+with(theForm.elements[i])<BR>&nbsp;&nbsp;&nbsp; 
+{&nbsp;<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if( type=="text" 
+)<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+{<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; if( 
+value.length==0)<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+{<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; alert('Zadejte 
+potřebné údaje!');<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+focus();<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; return 
+false;&nbsp;<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+}<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; }<BR>&nbsp;&nbsp;&nbsp; }<BR>&nbsp; 
+}<BR>&nbsp; return true;<BR>}&nbsp;<BR>// 
+--&gt;<BR>&lt;/script&gt;<BR><BR>&lt;form method="POST" action="ordtshirt.php" 
+name="tshirt" onsubmit="return Validate(this)"&gt;<BR>Jméno a Příjmení: 
+&lt;input type="text" name="adr_name" size="40" /&gt;&lt;br /&gt;<BR>Adresa 
+(ulice, město, psč):&lt;br /&gt;<BR>&lt;input type="text" name="adr_loc" 
+size="50" /&gt;&lt;br /&gt;<BR>počet triček<BR>&lt;select name="ks1" 
+onchange="Recount(this.form)"&gt;<BR>&nbsp; &lt;option value="1" 
+selected&gt;1<BR>&nbsp; &lt;option value="2"&gt;2<BR>&nbsp; &lt;option 
+value="3"&gt;3<BR>&nbsp; &lt;option value="4"&gt;4<BR>&nbsp; &lt;option 
+value="5"&gt;5<BR>&nbsp; &lt;option value="6"&gt;6<BR>&nbsp; &lt;option 
+value="7"&gt;7<BR>&nbsp; &lt;option value="8"&gt;8<BR>&nbsp; &lt;option 
+value="9"&gt;9<BR>&nbsp; &lt;option value="10"&gt;10<BR>&nbsp; &lt;option 
+value="20"&gt;20<BR>&nbsp; &lt;option value="30"&gt;30<BR>&nbsp; &lt;/select&gt; 
+&amp;nbsp;&amp;nbsp;cena &lt;input type="text" id="cena" size="7" value="289" 
+readonly&gt; Kč &amp;nbsp; velikost XL&lt;br /&gt;<BR>email: &lt;input 
+type="text" name="from" size="22"&gt; &lt;input type="checkbox" name="t_copy" 
+value="1" checked&gt;zaslat kopii&lt;br /&gt;<BR>poznámka:&lt;br/ 
+&gt;&lt;textarea name="commt" rows="4" cols="42"&gt;&lt;/textarea&gt;&lt;br 
+/&gt;<BR>&lt;input type="submit" value=" Objednat " /&gt;<BR>&lt;input 
+type="submit" name="printord" value="Objednat a vytisknout" 
+/&gt;<BR>&lt;/form&gt;<BR>&lt;ul&gt;<BR>&lt;li&gt;Platba (konečná cena včetně 
+DPH a poštovného) se provádí po objednání na účet číslo 
+&lt;b&gt;153154155/0600&lt;/b&gt; (GECB).&lt;/li&gt;<BR>&lt;li&gt;Po odeslání 
+objednávky systém sdělí veškeré potřebné údaje pro 
+zaplacení.&lt;/li&gt;<BR>&lt;li&gt;Jako variabilní symbol použijte pouze číslo, 
+které Vám náš obchod automaticky přidělí!&lt;/li&gt;<BR>&lt;li&gt;Při objednání 
+více triček je cena každého dalšího již jen 
+279,-&amp;nbsp;Kč.&lt;/li&gt;<BR>&lt;li&gt;V případě jakýchkoli nejasností 
+napište na &lt;a 
+href="mailto:tshirts@kralici.cz"&gt;tshirts@kralici.cz&lt;/a&gt;.&lt;/li&gt;<BR>&lt;li&gt;&lt;b&gt;Dodací 
+lhůta je 14 dní od obdržení platby na 
+účet.&lt;/b&gt;&lt;/li&gt;<BR>&lt;li&gt;&lt;b&gt;Vyplňujte prosím své údaje 
+pečlivě, zejména adresu!&lt;/b&gt;&lt;/li&gt;<BR>&lt;li&gt;Trička zasíláme 
+prozatím pouze v rámci České republiky.&lt;/li&gt;<BR>&lt;li&gt;Pokud byste 
+chtěl(a) zaplatit a vyzvednout tričko osobně v Brně nebo Praze, napište to 
+společně se svým telefonním číslem do poznámky - ozveme se Vám a domluvíme 
+termín předání. Peníze pak není třeba zasílat.&lt;/li&gt;<BR>&lt;/ul&gt; </DIV>
+<P>Zákazník si může ve formuláři zvolit, zda chce zaslat kopii objednávky, ve 
+výchozím stavu je tato volba zatržená. Objednání je možné dvěma tlačítky, při 
+volbě druhým z nich se po objednání rovnou nabídne objednávka k vytištění. Na 
+konci formuláře je ještě připojena nápověda, aby zákazník věděl, "do čeho jde". 
+Pole formuláře jsou doplněny o <EM>VCard name</EM>, pokud má zákazník aktivní 
+volbu autocomplete a má vyplněn svůj profil, budou se mu do políček nabízet <A 
+title="Růžička Pavel: Profil uživatele a autocomplete II" 
+href="http://interval.cz/clanek.asp?article=1802">údaje z jeho profilu</A>.</P>
+<P>Odeslaný formulář nám zpracuje jednoduchý skript – v podstatě jen zformátuje 
+zadané údaje do mailu a ten odešle, případně nabídne objednávku k vytištění.</P>
+<DIV class=sample>&lt;h2&gt;Tricko Králíci.cz 
+objednáno&lt;/h2&gt;<BR>&lt;?php<BR>$cena=(279*$_POST['ks1'])+10; // vypočítat 
+cenu<BR>$var_symb=date('ymdHi');&nbsp; // vypočítat variabilní 
+symbol<BR>function CZMail($to, $subjc, $text, $froma)<BR>{ // funkce pro 
+posílání e-mailu s češtinou<BR>$headers = "MIME-Version: 
+1.0\n".<BR>"Content-Type: text/plain; 
+charset=\"iso-8859-2\"\n".<BR>"Content-Transfer-Encoding: none\n".<BR>"From: 
+$froma\n".<BR>"Reply-To: $froma\n";<BR>Mail($to, $subjc, $text, $headers); // 
+poslat mail objednávky s potřebnými hlavičkami<BR>}<BR>$tord_body="Tricko 
+Králíci.cz\n\nObjednal: ".$_POST['adr_name']."\nAdresa: 
+".$_POST['adr_loc']."\nEmail: ".$_POST['from']."\n\nPocet kusu: 
+".$_POST['ks1']." Cena: ".$_POST['cena'].",- Kc\n";<BR>$tord_body.="Uvedenou 
+cástku zašli na úcet 1521531254/0600\n";<BR>$tord_body.="Variabilní symbol: 
+$var_symb\n\n".$_POST['commt']."\n\n\nZasláno z e-shopu na 
+http://www.kralici.cz/";<BR>$where_mail="tshirts@kralici.cz"; // adresa pro 
+příjem objednávek<BR>if ($_POST['t_copy']=="1") // zaslat kopii objednávky na 
+mail zákazníka<BR>&nbsp; $where_mail.=" ".$_POST['from'];<BR>CZMail($where_mail, 
+"Tricko Kralici.cz $var_symb", $tord_body, $_POST['from']); // připravit mail k 
+odeslání<BR>// opsat objednávku na obrazovku<BR>echo "Objednal: 
+".$_POST['adr_name']."&amp;nbsp;&amp;nbsp;[".$_POST['from']."]&lt;br 
+/&gt;\n";<BR>echo "Adresa: ".$_POST['adr_loc']."&lt;br /&gt;\n";<BR>echo "Počet 
+kusů: ".$_POST['ks1']."&amp;nbsp;&amp;nbsp;&amp;nbsp;Cena: $cena,- Kč&lt;br 
+/&gt;\n";<BR>echo "&lt;b&gt;Var. symbol:&lt;/b&gt; $var_symb&lt;br /&gt;&lt;br 
+/&gt;\n";<BR>if ($_POST¨['t_copy']=="1")<BR>&nbsp; echo "Kopie objednávky byla 
+zaslána na Váš email&lt;br /&gt;\n";<BR>echo 
+"&lt;p&gt;&lt;b&gt;&lt;big&gt;Zašlete uvedenou částku $cena,-Kč na úcet 
+152153154/0600 (GECB), jako variabilní symbol použijte 
+$var_symb.&lt;/big&gt;&lt;/b&gt;&lt;/p&gt;";<BR>echo 
+"&lt;ul&gt;&lt;li&gt;&lt;b&gt;Po obdržení platby bude nejdéle do 14 dnů 
+objednané zboží zasláno na Vaši 
+adresu.&lt;/b&gt;&lt;/li&gt;&lt;li&gt;&lt;b&gt;Děkujeme za Váš nákup 
+:)&lt;/b&gt;&lt;/li&gt;&lt;/ul&gt;";<BR>?&gt;<BR>&lt;script 
+type="text/javascript"&gt;<BR>&lt;!--<BR>function printWindow()<BR>{ // otevřít 
+okno pro zobrazení objednávky k vytištění<BR>&nbsp; window.open('','print', 
+'toolbar=no,menubar=no,location=no,directories=no,<BR>scrollbars=yes,resizable=yes,status=yes,width=600,height=440');<BR>}<BR>// 
+--&gt;<BR>&lt;/script&gt;<BR>&lt;!-- skrytý formulář pro tisk --&gt;<BR>&lt;form 
+name="prt1" id="prt1" action="shop3.php" method="post" target="print" 
+onsubmit="printWindow()"&gt;<BR>&lt;input type="hidden" id="adr_name" 
+name="adr_name" value="&lt;?php echo $_POST['adr_name'] ?&gt;" 
+/&gt;<BR>&lt;input type="hidden" id="adr_loc" name="adr_loc" value="&lt;?php 
+echo $_POST['adr_loc'] ?&gt;" /&gt;<BR>&lt;input type="hidden" id="from" 
+name="from" value="&lt;?php echo $_POST['from'] ?&gt;" /&gt;<BR>&lt;input 
+type="hidden" id="ks1" name="ks1" value="&lt;?php echo $_POST['ks1'] ?&gt;" 
+/&gt;<BR>&lt;input type="hidden" id="cena" name="cena" value="&lt;?php echo 
+$cena ?&gt;" /&gt;<BR>&lt;input type="hidden" id="var_symb" name="var_symb" 
+value="&lt;?php echo $var_symb ?&gt;" /&gt;<BR>&lt;input type="hidden" 
+id="commt" name="commt" value="&lt;?php echo $_POST['commt'] ?&gt;" 
+/&gt;<BR>&lt;input type="submit" value="Tisk objednávky" 
+/&gt;<BR>&lt;/form&gt;<BR><BR>&lt;?php if (isset($_POST['printord'])) { 
+?&gt;<BR>&lt;script 
+type="text/javascript"&gt;<BR>&lt;!--<BR>printWindow();<BR>self.document.forms.prt1.submit(); 
+// vyvolá odeslání formuláře s údaji pro tisk<BR>// 
+--&gt;<BR>&lt;/script&gt;<BR>&lt;?php } ?&gt; </DIV>
+<P>Skript vypočítá cenu (podle počtu kusů) a určí variabilní symbol, který je 
+vytvořen jako aktuální datum a čas. Dále je připraven e-mail objednávky k 
+odeslání. Pokud zákazník ponechal zatrženo odesílání kopie na svůj e-mail, je 
+jeho adresa přidána k adrese, na kterou se následně e-mail pošle. K odeslání je 
+použita funkce, která nastaví správné hlavičky, aby bylo vše doručeno správně 
+česky. </P>
+<P>Po odeslání e-mailu následuje opsání objednávky na obrazovku. Na konci 
+skriptu je potom formulář se skrytými položkami, který nám podrží informace 
+objednávky pro předání do dalšího okna, které je určeno pro tisk objednávky. 
+Tisk může zákazník vyvolat kdykoli stiskem tlačítka ve formuláři. Pokud kliknul 
+ve formuláři objednávky na "Objednat a vytisknout", pak se formulář odešle sám, 
+čímž rovnou vyskočí nové okno pro tisk. Toto okno pro tisk se otevírá dopředu 
+ještě před odesláním formuláře JavaScriptem, aby bylo možné nastavit vlastnosti 
+(velikost a potlačení menu a adresního řádku prohlížeče).</P>
+<P>Posledním doplňkem je už jen krátký skript, který zobrazí objednávku pro tisk 
+a je-li to možné, přímo vyvolá dialog pro tisk:</P>
+<DIV class=sample>&lt;h2&gt;&lt;b&gt;Objednávka 
+zboží&lt;/b&gt;&lt;/h2&gt;<BR>&lt;p&gt;<BR>&lt;table width="500" border="1" 
+cellpadding="5" cellspacing="0" 
+bordercolor="#000000"&gt;<BR>&lt;tr&gt;<BR>&lt;td align="right" 
+nowrap&gt;&lt;b&gt;&lt;i&gt;Objednal&lt;/i&gt;&lt;/b&gt;&lt;/td&gt;<BR>&lt;td&gt;&lt;?php 
+echo $_POST['adr_name'] ?&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;[&lt;?php echo 
+$_POST['from'] ?&gt;]&lt;/td&gt;<BR>&lt;/tr&gt;<BR>&lt;tr&gt;<BR>&lt;td 
+align="right" 
+nowrap&gt;&lt;b&gt;&lt;i&gt;Adresa&lt;/i&gt;&lt;/b&gt;&lt;/td&gt;<BR>&lt;td&gt;&lt;?php 
+echo $_POST['adr_loc'] ?&gt;&lt;/td&gt;<BR>&lt;/tr&gt;<BR>&lt;tr&gt;<BR>&lt;td 
+align="right" 
+nowrap&gt;&lt;b&gt;&lt;i&gt;Kusů&lt;/i&gt;&lt;/b&gt;&lt;/td&gt;<BR>&lt;td&gt;&lt;?php 
+echo $_POST['ks1'] ?&gt;&lt;/td&gt;<BR>&lt;/tr&gt;<BR>&lt;tr&gt;<BR>&lt;td 
+align="right" 
+nowrap&gt;&lt;b&gt;&lt;i&gt;Cena&lt;/i&gt;&lt;/b&gt;&lt;/td&gt;<BR>&lt;td&gt;&lt;?php 
+echo $_POST['cena'] ?&gt;&lt;/td&gt;<BR>&lt;/tr&gt;<BR>&lt;tr&gt;<BR>&lt;td 
+align="right" nowrap&gt;&lt;b&gt;&lt;i&gt;Var. 
+symbol&lt;/i&gt;&lt;/b&gt;&lt;/td&gt;<BR>&lt;td&gt;&lt;?php echo 
+$_POST['var_symb'] ?&gt;&lt;/td&gt;<BR>&lt;/tr&gt;<BR>&lt;tr&gt;<BR>&lt;td 
+align="right" valign="top" 
+nowrap&gt;&lt;b&gt;&lt;i&gt;Poznámka&lt;/i&gt;&lt;/b&gt;&lt;/td&gt;<BR>&lt;td&gt;&lt;?php 
+echo $_POST['commt'] ?&gt;&lt;/td&gt;<BR>&lt;/tr&gt;<BR>&lt;tr&gt;<BR>&lt;td 
+colspan="2"&gt;<BR>&lt;ul&gt;<BR>&lt;li&gt;&lt;b&gt;Po obdržení platby bude 
+nejdéle do 14 dnů objednané zboží<BR>zasláno na Vaši 
+adresu&lt;/b&gt;&lt;/li&gt;<BR>&lt;/ul&gt;<BR>&lt;/td&gt;<BR>&lt;/tr&gt;<BR>&lt;/table&gt;<BR><BR>&lt;ul&gt;<BR>&lt;li&gt;Zašlete 
+uvedenou částku &lt;?php echo $_POST['cena'] ?&gt;,-Kč na účet 152153154/0600 
+(GECB), jako variabilní symbol použijte &lt;?php echo $_POST['var_symb'] 
+?&gt;&lt;/li&gt;<BR>&lt;li&gt;Děkujeme za Váš nákup 
+:)&lt;/li&gt;<BR>&lt;/ul&gt;<BR>&lt;script 
+type="text/javascript"&gt;<BR>&lt;!--<BR>window.focus()<BR>if 
+(window.print)<BR>&nbsp; window.print()<BR>else<BR>&nbsp; alert('Pro vytisknutí 
+stiskněte CTRL-P!')<BR>// --&gt;<BR>&lt;/script&gt; </DIV>
+<P>Pro skutečné nasazení je potřeba si pozměnit všechny vyznačené údaje. Hodilo 
+by se je mít přednastavené v nějaké proměnné, což jsem pro přehlednost a 
+názornost vynechal. Je zřejmé, že se tento princip nehodí pro obchod s desítkami 
+položek zboží. Pro několik druhů zboží si však skripty lehce upravíme a můžeme 
+mít jednoduchý e-shop prakticky zdarma i na freehostingu.</P>
+<DIV id=article-author><A 
+href="http://interval.cz/autori/ruzicka-pavel/">Růžička, Pavel</A> 
+(25.&nbsp;12.&nbsp;2002) 
+<DIV id=article-about-author>(spolupracovník redakce magazínu 
+Interval.cz)</DIV></DIV>
+<DIV class=noprint id=article-discussion><!-- cached 1809-tabulka-objednavkovy-minishop-v-php.txt -->
+<DIV id=article-discussion-index>
+<FORM action=http://interval.cz/discussion-read.asp?disc=1809 method=post>
+<TABLE cellSpacing=0>
+  <TBODY>
+  <TR>
+    <TH colSpan=4><A title="Objednávkový minishop v PHP (diskuse)" 
+      href="http://interval.cz/clanky/objednavkovy-minishop-v-php/diskuse/">Objednávkový 
+      minishop v PHP (diskuse)</A></TH></TR>
+  <TR>
+    <TD class=checkbox><INPUT title="0 10099" type=checkbox value=1 
+      name=checkboxDISKUZE10099></TD>
+    <TD class=date>2002-12-29 23:34:40</TD>
+    <TD class=sender>Roman Striš</TD>
+    <TD class=subject>A na dobírku?</TD></TR>
+  <TR>
+    <TD class=checkbox><INPUT title="1 10100" type=checkbox value=1 
+      name=checkboxDISKUZE10100></TD>
+    <TD class=date>2002-12-30 00:10:18</TD>
+    <TD class=sender>Jméno a příjmení</TD>
+    <TD class=subject><IMG class=line alt=. 
+      src="Objednávkový minishop v PHP -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Objednávkový minishop v PHP -- PHP -- Vývoj aplikací -- Interval_cz_soubory/line1.png">A 
+      na dobírku?</TD></TR>
+  <TR>
+    <TD class=checkbox><INPUT title="2 10105" type=checkbox value=1 
+      name=checkboxDISKUZE10105></TD>
+    <TD class=date>2002-12-30 18:10:08</TD>
+    <TD class=sender>Roman Striš</TD>
+    <TD class=subject><IMG class=line alt=. 
+      src="Objednávkový minishop v PHP -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Objednávkový minishop v PHP -- PHP -- Vývoj aplikací -- Interval_cz_soubory/line2.png"><IMG 
+      class=line alt=. 
+      src="Objednávkový minishop v PHP -- PHP -- Vývoj aplikací -- Interval_cz_soubory/line3.png">A 
+      na dobírku?</TD></TR>
+  <TR>
+    <TD class=checkbox><INPUT title="0 11454" type=checkbox value=1 
+      name=checkboxDISKUZE11454></TD>
+    <TD class=date>2003-02-24 10:40:47</TD>
+    <TD class=sender>ElLumiro</TD>
+    <TD class=subject>Neposila mi to mail ?:o(</TD></TR>
+  <TR>
+    <TD class=checkbox><INPUT title="1 11472" type=checkbox value=1 
+      name=checkboxDISKUZE11472></TD>
+    <TD class=date>2003-02-25 10:40:15</TD>
+    <TD class=sender>Jméno Příjmení</TD>
+    <TD class=subject><IMG class=line alt=. 
+      src="Objednávkový minishop v PHP -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Objednávkový minishop v PHP -- PHP -- Vývoj aplikací -- Interval_cz_soubory/line1.png">Neposila 
+      mi to mail ?:o(</TD></TR>
+  <TR>
+    <TD class=checkbox><INPUT title="2 30405" type=checkbox value=1 
+      name=checkboxDISKUZE30405></TD>
+    <TD class=date>2004-09-27 13:05:46</TD>
+    <TD class=sender>Jméno a příjmení</TD>
+    <TD class=subject><IMG class=line alt=. 
+      src="Objednávkový minishop v PHP -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Objednávkový minishop v PHP -- PHP -- Vývoj aplikací -- Interval_cz_soubory/line2.png"><IMG 
+      class=line alt=. 
+      src="Objednávkový minishop v PHP -- PHP -- Vývoj aplikací -- Interval_cz_soubory/line3.png">Neposila 
+      mi to mail ?:o(</TD></TR>
+  <TR>
+    <TD class=checkbox><INPUT title="1 34700" type=checkbox value=1 
+      name=checkboxDISKUZE34700></TD>
+    <TD class=date>2005-02-01 07:10:29</TD>
+    <TD class=sender>Tomas Pavlatka</TD>
+    <TD class=subject><IMG class=line alt=. 
+      src="Objednávkový minishop v PHP -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Objednávkový minishop v PHP -- PHP -- Vývoj aplikací -- Interval_cz_soubory/line3.png">Neposila 
+      mi to mail ?:o(</TD></TR>
+  <TR>
+    <TD class=checkbox><INPUT title="2 35865" type=checkbox value=1 
+      name=checkboxDISKUZE35865></TD>
+    <TD class=date>2005-03-19 10:26:49</TD>
+    <TD class=sender>DarkMen</TD>
+    <TD class=subject><IMG class=line alt=. 
+      src="Objednávkový minishop v PHP -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Objednávkový minishop v PHP -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Objednávkový minishop v PHP -- PHP -- Vývoj aplikací -- Interval_cz_soubory/line3.png">Neposila 
+      mi to mail ?:o(</TD></TR>
+  <TR>
+    <TD class=checkbox><INPUT title="3 40778" type=checkbox value=1 
+      name=checkboxDISKUZE40778></TD>
+    <TD class=date>2005-10-06 22:55:37</TD>
+    <TD class=sender>andrej</TD>
+    <TD class=subject><IMG class=line alt=. 
+      src="Objednávkový minishop v PHP -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Objednávkový minishop v PHP -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Objednávkový minishop v PHP -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Objednávkový minishop v PHP -- PHP -- Vývoj aplikací -- Interval_cz_soubory/line3.png">Neposila 
+      mi to mail ?:o(</TD></TR>
+  <TR>
+    <TD id=foot colSpan=4><INPUT class=submit id=display_selected type=submit value="Zobrazit vybrané" name=display_selected> 
+      &nbsp; <INPUT class=submit id=display_all type=submit value="Zobrazit vše" name=display_all> 
+      &nbsp; <INPUT class=submit id=add_new type=submit value="Vložit nový" name=add_new></TD></TR></TBODY></TABLE></FORM></DIV></DIV></DIV></DIV>
+<DIV id=page-right>
+<H2 class=textversion>Pravý sloupek</H2>
+<DIV id=search>
+<H3 class=textversion>Vyhledávání</H3>
+<FORM action=http://interval.cz/search.asp method=get>
+<DIV><INPUT class=text name=co> <!--  
+<select name='cim'>
+<option value ='Google' selected='selected'>Google</option>
+<option value ='Jyxo'>Jyxo</option>
+</select>
+<input type='hidden' name='nadpis' value='1' />
+<input type='hidden' name='popis' value='1' />
+<input type='hidden' name='text' value='1' />
+<input type='hidden' name='rubrika' value='0' />
+<input type='hidden' name='autor' value='0' />
+ --><INPUT class=submit type=submit value=Najdi! name=send> </DIV></FORM><!-- <div><a href='http://interval.cz/search.asp'>Rozšířené vyhledávání</a></div> --></DIV><!-- StartKód: adarbo2.bbmedia.cz 3.1 Nestandard  Interval(87) / home page(2) / textbox(1) / nestandard(24) -->
+<SCRIPT type=text/javascript>
+	<!-- <![CDATA[
+	var bbs=screen,bbn=navigator,bbh;bbh='&ubl='+bbn.browserLanguage+'&ucc='+bbn.cpuClass+'&ucd='+bbs.colorDepth+'&uce='+bbn.cookieEnabled+'&udx='+bbs.deviceXDPI+'&udy='+bbs.deviceYDPI+'&usl='+bbn.systemLanguage+'&uje='+bbn.javaEnabled()+'&uah='+bbs.availHeight+'&uaw='+bbs.availWidth+'&ubd='+bbs.bufferDepth+'&uhe='+bbs.height+'&ulx='+bbs.logicalXDPI+'&uly='+bbs.logicalYDPI+'&use='+bbs.fontSmoothingEnabled+'&uto='+(new Date()).getTimezoneOffset()+'&uti='+(new Date()).getTime()+'&uui='+bbs.updateInterval+'&uul='+bbn.userLanguage+'&uwi='+bbs.width;
+	document.write("<scr"+"ipt  language='JavaScript' type='text/javascript' src='http://adarbo2.bbmedia.cz/please/showit/87/2/1/24/?typkodu=non-standard"+bbh+"&alttext=0&border=0&bgcolor=FFFFFF&text=000000&link=0000FF&target=_blank&bust="+Math.random()+"'>");
+	document.write("<"+"\/scr"+"ipt>");
+	//]]> -->
+	</SCRIPT>
+<!-- KonecKód: adarbo2.bbmedia.cz 3.1 Nestandard --><!-- cached 16-knizni_tip.txt -->
+<DIV class="page-right-box book">
+<H3>Knižní tip</H3>
+<DIV class=page-right-box-in>
+<DIV class=book-top>
+<H4><A 
+href="http://interval.inshop.cz/inshop/scripts/detail.asp?kat=096">Microsoft 
+FrontPage 2000 CZ na první pokus</A></H4></DIV>
+<DIV class=image><A 
+href="http://interval.inshop.cz/inshop/scripts/detail.asp?kat=096"><IMG 
+title="Microsoft FrontPage 2000 CZ na první pokus" alt=obálka 
+src="Objednávkový minishop v PHP -- PHP -- Vývoj aplikací -- Interval_cz_soubory/K0272.jpg"></A></DIV></DIV></DIV><!-- cached 17-nejctenejsi_clanky.txt -->
+<DIV class="page-right-box reading">
+<H3 title="Nejčtenější články za posledních 28 dnů">Nejčtenější</H3>
+<DIV class=page-right-box-in>
+<UL>
+  <LI><A href="http://interval.cz/clanky/opera-9-pokrocila-konfigurace/">Opera 9 
+  - pokročilá konfigurace</A>
+  <LI><A 
+  href="http://interval.cz/clanky/adobe-photoshop-prakticky-webdesign-jakub-krcmar/">Adobe 
+  Photoshop - praktický webdesign (Jakub Krčmář)</A>
+  <LI><A 
+  href="http://interval.cz/clanky/drupal-tvorba-vlastniho-vzhledu/">Drupal - 
+  tvorba vlastního vzhledu</A>
+  <LI><A 
+  href="http://interval.cz/clanky/pruvodce-svg-dalsi-nastroje-pro-tvorbu-svg-grafiky/">Průvodce 
+  SVG - další nástroje pro tvorbu SVG grafiky</A>
+  <LI><A 
+  href="http://interval.cz/clanky/spravy-zo-slovenskeho-internetu-8/">Správy zo 
+  slovenského internetu 8.</A></LI></UL></DIV></DIV>
+<DIV class=merak-box style="MARGIN-TOP: 1.5em; TEXT-ALIGN: center">
+<DIV id=merak-content 
+style="BORDER-RIGHT: #000000 1px solid; BORDER-TOP: #000000 1px solid; FONT-WEIGHT: bold; FONT-SIZE: 11px; BACKGROUND-IMAGE: url(http://interval.cz/__services/__include_right/merak-background.png); MARGIN: 0px auto; BORDER-LEFT: #000000 1px solid; WIDTH: 160px; BORDER-BOTTOM: #000000 1px solid; BACKGROUND-REPEAT: no-repeat; FONT-FAMILY: Verdana, Arial, sans-serif; HEIGHT: 190px; TEXT-ALIGN: left; FONT-VARIANT: small-caps">
+<H3 style="FONT-SIZE: 12px; MARGIN: 55px 0px 10px 10px; FONT-VARIANT: normal"><A 
+title="Merak Mail Server 8" 
+style="COLOR: #000000; BACKGROUND-COLOR: transparent; TEXT-DECORATION: none" 
+href="http://www.merak-mail-server.cz/">Merak Mail Server 8</A></H3>
+<DIV id=merak-proclamation style="PADDING-LEFT: 10px">Integrovaný <EM><A 
+title="Merak Mail Server 8" 
+style="COLOR: #35a0df; FONT-STYLE: normal; BACKGROUND-COLOR: transparent; TEXT-DECORATION: none" 
+href="http://www.merak-mail-server.cz/">antispam</A></EM> <BR>Snadná <EM><A 
+title="Merak Mail Server 8" 
+style="COLOR: #35a0df; FONT-STYLE: normal; BACKGROUND-COLOR: transparent; TEXT-DECORATION: none" 
+href="http://www.merak-mail-server.cz/">instalace</A></EM> <BR>Zabezpečený 
+<EM><A title="Merak Mail Server 8" 
+style="COLOR: #35a0df; FONT-STYLE: normal; BACKGROUND-COLOR: transparent; TEXT-DECORATION: none" 
+href="http://www.merak-mail-server.cz/">groupware</A></EM> </DIV></DIV></DIV>
+<DIV class="page-right-box emailserv">
+<H3>Info servis</H3>
+<DIV class=page-right-box-in>
+<UL>
+  <LI><A title="Exporty aktuálních informací ve formátech Atom, RDF a RSS" 
+  href="http://export.interval.cz/">Atom, RDF, RSS</A> 
+  <LI>Informace e-mailem: </LI></UL>
+<FORM action=prihlaseni.asp method=post>
+<DIV class=shell><INPUT class=text name=adresa></DIV>
+<DIV class=shell><INPUT class=radio type=radio CHECKED value=1 name=co>Týdenní 
+přehled článků</DIV>
+<DIV class=shell><INPUT class=radio type=radio value=2 name=co>HELP 
+konference</DIV>
+<DIV 
+class=shell><INPUT class=submit type=submit value=Přihlásit></DIV></FORM></DIV></DIV>
+<DIV class=advertising-vertical-banner-outer>
+<DIV class=advertising-vertical-banner-inner><!-- Skyscraper Right --><!-- BBSTART Interval.cz/Skyscraper Right/rolovací/Skyscraper 120x600 -->
+<SCRIPT type=text/javascript>/* <![CDATA[ */
+var bbat=0,bbbr=0,bbtt='_blank',bbpath='17877/4/2/9',bbxl=1,bbac=1;
+//]]></SCRIPT>
+
+<SCRIPT 
+src="Objednávkový minishop v PHP -- PHP -- Vývoj aplikací -- Interval_cz_soubory/bb4.js" 
+type=text/javascript></SCRIPT>
+<NOSCRIPT>
+<DIV><A href="http://ad2.billboard.cz/please/redirect/17877/4/2/9/"><IMG 
+style="BORDER-RIGHT: 0px; BORDER-TOP: 0px; BORDER-LEFT: 0px; BORDER-BOTTOM: 0px" 
+height=600 alt=. 
+src="Objednávkový minishop v PHP -- PHP -- Vývoj aplikací -- Interval_cz_soubory/fallback9.gif" 
+width=120></A></DIV></NOSCRIPT><!-- BBKONEC --></DIV></DIV><!-- cached 17-nejdiskutovanejsi_clanky.txt -->
+<DIV class="page-right-box cauldron">
+<H3 title="Nejdiskutovanější články za posledních 28 dnů">Diskuzní kotel</H3>
+<DIV class=page-right-box-in>
+<UL>
+  <LI><A title="(103 komentářů)" 
+  href="http://interval.cz/clanky/opera-9-pokrocila-konfigurace/">Opera 9 - 
+  pokročilá konfigurace</A>
+  <LI><A title="(4 komentářů)" 
+  href="http://interval.cz/clanky/pruvodce-svg-dalsi-nastroje-pro-tvorbu-svg-grafiky/">Průvodce 
+  SVG - další nástroje pro tvorbu SVG grafiky</A>
+  <LI><A title="(2 komentářů)" 
+  href="http://interval.cz/clanky/drupal-tvorba-vlastniho-vzhledu/">Drupal - 
+  tvorba vlastního vzhledu</A>
+  <LI><A title="(2 komentářů)" 
+  href="http://interval.cz/clanky/spravy-zo-slovenskeho-internetu-9/">Správy zo 
+  slovenského internetu 9.</A>
+  <LI><A title="(1 komentářů)" 
+  href="http://interval.cz/clanky/lokalizace-asp-net-2-x-aplikaci/">Lokalizace 
+  ASP.NET 2.x aplikací</A></LI></UL></DIV></DIV></DIV>
+<DIV class=page-maker>&nbsp;</DIV>
+<DIV class=page-maker-white>&nbsp;</DIV></DIV>
+<DIV id=advertising-page-bottom>
+<DIV id=advertising-page-bottom-left>
+<DIV><!-- Full Banner Bottom --><!-- BBSTART Interval.cz/Full Banner Bottom/rolovací/Full Banner 468x60 -->
+<SCRIPT type=text/javascript>/* <![CDATA[ */
+var bbat=0,bbbr=0,bbtt='_blank',bbpath='17877/1/2/1',bbxl=1,bbac=1;
+//]]></SCRIPT>
+
+<SCRIPT 
+src="Objednávkový minishop v PHP -- PHP -- Vývoj aplikací -- Interval_cz_soubory/bb4.js" 
+type=text/javascript></SCRIPT>
+<NOSCRIPT>
+<DIV><A href="http://ad2.billboard.cz/please/redirect/17877/1/2/1/"><IMG 
+style="BORDER-RIGHT: 0px; BORDER-TOP: 0px; BORDER-LEFT: 0px; BORDER-BOTTOM: 0px" 
+height=60 alt=. 
+src="Objednávkový minishop v PHP -- PHP -- Vývoj aplikací -- Interval_cz_soubory/fallback1.gif" 
+width=468></A></DIV></NOSCRIPT><!-- BBKONEC --></DIV></DIV>
+<DIV id=advertising-page-bottom-right>
+<DIV><!-- Button2 Bottom --><!-- BBSTART Interval.cz/Button2 Bottom/rolovací/Button 2 120x60 -->
+<SCRIPT type=text/javascript>/* <![CDATA[ */
+var bbat=0,bbbr=0,bbtt='_blank',bbpath='17877/2/2/6',bbxl=1,bbac=1;
+//]]></SCRIPT>
+
+<SCRIPT 
+src="Objednávkový minishop v PHP -- PHP -- Vývoj aplikací -- Interval_cz_soubory/bb4.js" 
+type=text/javascript></SCRIPT>
+<NOSCRIPT>
+<DIV><A href="http://ad2.billboard.cz/please/redirect/17877/2/2/6/"><IMG 
+style="BORDER-RIGHT: 0px; BORDER-TOP: 0px; BORDER-LEFT: 0px; BORDER-BOTTOM: 0px" 
+height=60 alt=. 
+src="Objednávkový minishop v PHP -- PHP -- Vývoj aplikací -- Interval_cz_soubory/fallback6.gif" 
+width=120></A></DIV></NOSCRIPT><!-- BBKONEC --></DIV></DIV>
+<DIV class=page-maker>&nbsp;</DIV></DIV>
+<DIV id=page-foot>
+<DIV id=page-foot-menu><A href="http://interval.cz/redakce-inzerce.asp">Inzerce 
+na Interval.cz</A> &nbsp;|&nbsp; <A 
+href="http://interval.cz/redakce.asp">Redakce Interval.cz</A> &nbsp;|&nbsp; <A 
+href="http://interval.cz/autori.asp">Hledáme nové autory</A> </DIV>
+<DIV id=issn><A class=noprint 
+href="http://jigsaw.w3.org/css-validator/validator?uri=http%3A%2F%2Finterval.cz%3A80%2Fclanky%2Fobjednavkovy-minishop-v-php%2F">.</A> 
+ISSN 1212-8651 <A class=noprint 
+href="http://validator.w3.org/check?uri=http%3A%2F%2Finterval.cz%3A80%2Fclanky%2Fobjednavkovy-minishop-v-php%2F&amp;charset=%28detect+automatically%29&amp;doctype=%28detect+automatically%29&amp;outline=1&amp;verbose=1">.</A> 
+</DIV>
+<DIV id=page-foot-zoner>© Zoner software, s.r.o., všechna práva vyhrazena, tento 
+server dodržuje <A href="http://interval.cz/privacy.asp">právní předpisy</A> o 
+ochraně osobních údajů. </DIV></DIV>
+<SCRIPT 
+src="Objednávkový minishop v PHP -- PHP -- Vývoj aplikací -- Interval_cz_soubory/audits-footer.js" 
+type=text/javascript></SCRIPT>
+
+<SCRIPT 
+src="Objednávkový minishop v PHP -- PHP -- Vývoj aplikací -- Interval_cz_soubory/urchin.js" 
+type=text/javascript>
+</SCRIPT>
+
+<SCRIPT type=text/javascript>
+_uacct = "UA-173085-1";
+
+var len = _uOsr.length;
+_uOsr[len]="seznam.cz";       _uOkw[len]="w";
+_uOsr[len+1]="centrum.cz";    _uOkw[len+1]="q";
+_uOsr[len+2]="jyxo.cz";       _uOkw[len+2]="s";
+_uOsr[len+3]="atlas.cz";      _uOkw[len+3]="q";
+_uOsr[len+4]="zoohoo.cz";     _uOkw[len+4]="q";
+_uOsr[len+5]="tiscali.cz";    _uOkw[len+5]="query";
+_uOsr[len+6]="1.cz";          _uOkw[len+6]="q";
+_uOsr[len+7]="volny.cz";      _uOkw[len+7]="search";
+
+urchinTracker();
+</SCRIPT>
+</BODY></HTML>

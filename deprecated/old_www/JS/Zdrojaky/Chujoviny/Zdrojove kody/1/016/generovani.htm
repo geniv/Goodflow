@@ -1,0 +1,41 @@
+<HTML>
+  <HEAD>
+    <TITLE> Generování stránky </TITLE>
+    <SCRIPT LANGUAGE="JavaScript">
+    <!--
+      // Vytvoøení nového okna prohlížeèe
+      var NewWin = window.open('about:blank','NewWindow',
+        'width=400,height=200');
+      // S dokumentem v novém oknì provedeme následující:
+      with (NewWin.document){
+        // Otevøení dokumentu pro zápis
+        open();
+        // Zpíšeme do nìj vygenerovaný obsah
+        write ('<HTML>');
+        // Hlavièka s názvem okna
+        write ('<HEAD>');
+        write ('<TITLE>Reklama</TITLE>');
+        write ('</HEAD>');
+        write ('<BODY>');
+        // Nadpis
+        write ('<H3 align=center>Reklama</H3>');
+        // Oddìlující èára
+        write ('<HR>');
+        // Obrázek
+        write ('<IMG Src="reklama.gif">');
+        // Odøádkování a aktuální datum a èas
+        write ('<BR>Aktuální datum a èas: '+new (Date));
+        write ('</BODY>');
+        write ('<HTML>');
+
+        // Ukonèení zápisu a zavøení dokumentu
+        close();
+      }
+    // -->
+    </SCRIPT>
+  </HEAD>
+  <BODY>
+    Bla bla bla...
+  </BODY>
+</HTML>
+

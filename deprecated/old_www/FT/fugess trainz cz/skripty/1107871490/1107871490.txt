@@ -1,0 +1,143 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html>
+<head>
+<meta name="keywords" content="SPLASH, INTRO, PAGE, JAVASCRIPT, JAVASCRIPTS, SCRIPTS, DHTML, DYNAMIC, HTML, CODE, CODING, PROGRAMMING, PROGRAMMER, DEVELOPMENT, LINKS, EFFECT, EFFECTS, COOL, SCREEN, SCREENS, AWESOME, TOOLTIP, RHUCKO1, RICHARD, HUCKO, RHUCKO">
+<meta name="description" content="Links with Growing ToolTips - Internet Explorer 5+, Netscape 7+, Mozilla 1.2+ ToolTip follows cursor in IE, ToolTip Displays Under Links in Gecko-Based Browsers (Netscape, Mozilla). Category: Miscellaneous, JavaScript DHTML Effects - www.DynamicScripts.TK">
+<title>Links with growing ToolTips By Richard Hucko</title>
+<script language="JavaScript" type="text/javascript">
+<!-- Richard Hucko's Dynamic ToolTip Links, 2004 www.DynamicScripts.tk
+
+// - *** Edit Script in Body Section of Document . . . ***
+
+var HUCKO;var RICHARD;var DHTML=ALink=URLS=new Array();var toggle=true;
+var DynamicResizer=DynamicFSResizer=0;
+var OFFSET=10; // - OFFSET form cursor
+var WIDTH=200; // - Max width
+var MaxFS=20; // - Max Font Size
+var AMT=5; // - Amount to add each cycle when resizing
+var TIMEOUT=30; // - Number in Milliseconds for timeout
+var T; // - Timer
+window.onload=setXY;
+window.document.onmousemove=followMOUSE;
+
+function setXY()
+{
+  if(navigator.appName=="Netscape")document.captureEvents(Event.MOUSEMOVE);
+	setVars();
+}
+function setVars()
+{
+   RICHARD=document.getElementById('DISPLAY');
+}
+function followMOUSE(e)
+{ // - RHUCKO1 (Richard Hucko) 
+  RICHARD.style.left=(navigator.appName=="Netscape")?e.PageX:event.clientX+OFFSET;
+	RICHARD.style.top=(navigator.appName=="Netscape")?e.PageY:event.clientY+OFFSET;
+}
+function creatDHTML(SCRIPTING) // - Show ToolTip
+{
+  RICHARD.innerHTML=DHTML[SCRIPTING];
+	RICHARD.className="Alt";
+	RICHARD.style.visibility="visible";
+	toggle=true;
+	EFFECT();
+}
+function DynamicHTML()// - Hide ToolTip
+{
+  RICHARD.style.visibility="hidden";
+	DynamicFSResizer=0;DynamicResizer=0;
+	toggle=false;
+	clearTimeout(T);
+}
+function EFFECT()
+{
+  if(toggle)
+	{
+	 if(DynamicResizer<WIDTH)
+	 {
+	   with(RICHARD.style)
+		 {
+		   width=DynamicResizer;
+			 fontSize=DynamicFSResizer;
+		 }
+		 if(DynamicFSResizer<=MaxFS)DynamicFSResizer++;
+		 DynamicResizer+=AMT;
+	 }
+	}
+ T=setTimeout("EFFECT();",TIMEOUT);
+}
+function /* Kaneohe */ HAWAII()/* Richard */{HUCKO="http://DynamicScripts.tk";/* 2004 */location.href=HUCKO;/* Richard Hucko *, Kaneohe, Hawaii - * www.DynamicScripts.tk */}//- Dynamic HTML, Dynamic Scripts, JavaScript Effects, and More - www.DynamicScripts.tk */
+//-->
+</script>
+<style type="text/css">
+<!--
+body {
+		   background-color:darkblue;
+			 color:white;
+			 z-index:0;
+		 }
+a.LINKS {
+				  color:#00ff00;
+					background-color:#000;
+					border:1 groove #00ff00;
+					font-weight:900;
+					z-index:0;
+					
+				}
+a.LINKS:hover {
+							  color:#fff;
+							}
+span.Alt {
+				 	 width:0px;
+				 	 position:absolute;
+				   color:#00ff00;
+					 background-color:black;
+					 border:3 groove #00ff00;
+					 visibility:hidden;
+					 z-index:1;
+				 }
+-->
+</style>
+</head>
+<body>
+
+
+<tt style="color:white;background-color:transparent;z-index:0;border:0;visibility:visible;" id="header" onmousedown="HAWAII()" name="TwriterText">Dynamic HTML Effect Created By Richard Hucko - www.DynamicScripts.tk<br />Distributed By JavaScripts.com</tt>
+<br /><br />
+
+
+
+
+
+  <div id="JavaScripts" name="Dynamic">
+	  <span id="Dynamic" name="JavaScripts">
+		  <script language="JavaScript" type="text/javascript">
+			<!--
+			/* - ALink, DHTML, URLS should all have the same number of entries */
+			// - Edit variable Below ( ie.  <variable>=["<item 1>","<item 2>","<item 3>","<item 4>","<item 5>","<item 6>"];  )
+			
+			//- START MODIFICATIONS
+			 ALink=["One","Two","Three","Four","Five"]; // - Link Lables
+			 DHTML=["This is a discription of item number one ...","A Description of Item TWO Goes HERE ...","Item Number Three's Description goes here . . .","Number Four and still Strong . . .","Dynamic Scripts Rule!!!"]; // - ToolTips
+			 URLS=["http://JavaScripts.com","http://earthwebdeveloper.com","http://webdeveloper.earthweb.com","http://javascript.internet.com","http://javascript.com"]; // - Web Address (URL)
+			// - END MODIFICATIONS 
+			 
+			 if(DHTML.length<ALink.length)DHTML.length=ALink.length;
+			 for(var scripts=0;scripts<ALink.length;scripts++)
+			  document.write('<a href="'+URLS[scripts]+'" class="LINKS" onmouseover="creatDHTML('+scripts+')" onmouseout="DynamicHTML()">'+ALink[scripts]+'</a><b style="visibility:hidden;">_</b>');
+			 if(navigator.appName=="Netscape")document.write("<br />");
+			//-->
+			</script>			
+			<span id="DISPLAY" style="visibility:hidden;position:absolute">Dynamic HTML Scripts, Web Development, FREE JavaScript Effects, Splash Intro Pages, Dynamic Links, DHTML Scripting, FORUMS, JavaScripts, Developed by Richard Hucko, Richard Hucko lives in Kaneohe Hawaii. He writes JavaScript Effects many which are featured FREE of charge at www.DynamicScripts.tk - check out Richard's site www.DynamicScripts.tk DYNAMIC CODING, CROSS-BROWSER JAVASCRIPT, Cross Browser Scripts, DHTML Scripts</span>
+		</span>
+	</div>
+	
+	
+	
+	
+	
+	
+	
+</body>
+</html>

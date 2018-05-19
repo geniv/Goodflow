@@ -1,0 +1,90 @@
+<HTML>
+  <HEAD>
+    <TITLE>Vlastní menu</TITLE>
+
+    <STYLE Type="text/css">
+      /* Styl pro kontejner obsahující jednotlivé nabídky */
+      .Menu {
+        background-color: silver;
+        border-width: 1px;
+        border-style: solid;
+        border-color: black;
+        position: absolute;
+        visibility: hidden;
+      }
+
+      /* Styl pro položky nabídky */
+      .MenuItem, .MenuItem:visited {
+        padding-top: 20px;
+        margin-top: 20px;
+        text-decoration: none;
+        font-weight: bold;
+        font-size: 11px;
+        color: black;
+      }
+
+      /* Styl pro nabídku nad kterou se pohybuje myš */
+      .MenuItem:hover {
+        color: red;
+      }
+    </STYLE>
+
+    <SCRIPT Language="JavaScript">
+      <!--
+      document.onclick=Context;
+      document.onkeydown=ContextKey;
+
+      // Funkce na zobrazení/schování menu
+      function ShowMenu(Show) {
+        if (Show) {
+          MyMenu.style.pixelLeft=window.event.clientX;
+          MyMenu.style.pixelTop=window.event.clientY;
+          MyMenu.style.visibility = "visible";
+        } else {
+          MyMenu.style.visibility = "hidden";
+        }
+      }
+
+      function Context() {
+        if (MyMenu.style.visibility == "visible") {
+          ShowMenu (false);
+        }
+      }
+
+      function ContextKey() {
+        Key = window.event.keyCode;
+        Vis = MyMenu.style.visibility;
+        if ((Vis == "visible") && (Key == 27))
+          ShowMenu (false);
+      }
+      // -->
+    </SCRIPT>
+  </HEAD>
+
+  <BODY OnContextMenu="ShowMenu(true);return false;">
+    Kliknìte pravým tlaèítkem myši...
+    <DIV ID="MyMenu" Class="Menu">
+       <TABLE Border="0" Style="width: 100px;">
+         <TR>
+           <TD Align="center">Moje menu</TD>
+         </TR>
+         <TR>
+           <TD><HR></TD>
+         </TR>
+         <TR>
+           <TD>
+             <A Class="MenuItem"
+                Href="http://www.swnet.cz">SWNet</A>
+           </TD>
+         </TR>
+         <TR>
+           <TD>
+             <A Class="MenuItem"
+                Href="http://swn.softnov.cz">SWNoviny</A>
+           </TD>
+         </TR>
+       </TABLE>
+    </DIV>
+  </BODY>
+</HTML>
+

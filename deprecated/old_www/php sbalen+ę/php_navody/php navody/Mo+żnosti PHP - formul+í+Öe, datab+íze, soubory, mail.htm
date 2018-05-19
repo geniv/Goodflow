@@ -1,0 +1,363 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3c.org/TR/1999/REC-html401-19991224/loose.dtd">
+<!-- saved from url=(0046)http://www.jakpsatweb.cz/php/moznosti-php.html -->
+<HTML><HEAD><TITLE>Možnosti PHP - formuláře, databáze, soubory, mail</TITLE>
+<META http-equiv=Content-Language content=cs>
+<META http-equiv=Content-Type content="text/html; charset=iso-8859-2">
+<META content="php, mail, databáze, heslo, include, proměnná" name=keywords>
+<META content="Co všechno se dá dělat s PHP. Velmi povrchní namlsání." 
+name=description><LINK 
+href="Možnosti PHP - formuláře, databáze, soubory, mail_soubory/jpw.css" 
+rel=stylesheet>
+<META content="MSHTML 6.00.2800.1106" name=GENERATOR></HEAD>
+<BODY class=ost>
+<DIV id=text>
+<H1>Možnosti PHP</H1>
+<P class=podtitul>letmý nástin pro začátečníky</P>
+<P class=zalozka><A 
+href="http://www.jakpsatweb.cz/php/moznosti-php.html#zapis">Snadný zápis PHP</A> 
+- <A href="http://www.jakpsatweb.cz/php/moznosti-php.html#formulare">Zpracování 
+formulářů</A> - <A 
+href="http://www.jakpsatweb.cz/php/moznosti-php.html#databaze">Spolupráce s 
+databázemi</A> - <A 
+href="http://www.jakpsatweb.cz/php/moznosti-php.html#include">Vkládání 
+souborů</A> - <A 
+href="http://www.jakpsatweb.cz/php/moznosti-php.html#mail">Odesílání mailů</A> - 
+<A href="http://www.jakpsatweb.cz/php/moznosti-php.html#kombinace">Kombinace 
+formulářů, databáze a pošty</A> - <A 
+href="http://www.jakpsatweb.cz/php/moznosti-php.html#dalsi">A další...</A></P>
+<P>Pokud máte <A 
+href="http://www.jakpsatweb.cz/php/jak-zacit.html">nainstalovaná PHP na serveru 
+nebo u sebe</A>, můžete testovat. Co to všechno dokáže:&nbsp;</P>
+<H2><A name=zapis></A>Snadný zápis PHP</H2>
+<P>PHP skripty jsou programy běžící na serveru. Píšou se podobně jako normální 
+HTML, jenom občas obsahují &lt;? kousek PHP kódu ?&gt;, který je serverem při 
+odesílání vyhodnocován.&nbsp;</P>
+<P>Takže kdo umí <A href="http://www.jakpsatweb.cz/html/index.html">HTML</A> a 
+je zvyklý v něm psát stránky, může si nyní vyšperkovat stránku nějakým PHP 
+příkazem. Prostě napíše znaky <FONT color=#ff0000>&lt;?</FONT> , vloží PHP kód, 
+uzavře to znaky <FONT color=#ff0000>?&gt;</FONT> a je hotovo.</P>
+<H3>Příklad</H3>
+<P class=code>&lt;body&gt;<BR>&lt;p&gt;Úplně normální text&nbsp;<BR><FONT 
+color=#ff0000>&lt;?</FONT> <FONT color=#008000>echo</FONT> "s kouskem textu, 
+který napsalo PHP" <FONT color=#ff0000>?&gt;</FONT><BR>.&lt;/p&gt;</P>
+<P>Pravděpodobně nejpoužívanějším PHP příkazem je <FONT 
+color=#008000>echo</FONT>, který něco vypíše do výstupu stránky. Výsledek 
+příkladu po zpracování serverem: </P>
+<P class=code>&lt;body&gt;<BR>&lt;p&gt;Úplně normální text&nbsp;s kouskem textu, 
+který napsalo PHP.&lt;/p&gt;</P>
+<P>Proměnné začínají znakem dolaru, příkazy se ukončují středníkem. Zápis jazyka 
+PHP je podobný jazykům C, Java nebo Perl.</P>
+<H2><A name=formulare></A>Zpracování formulářů</H2>
+<P>Začínající autory stránek vždycky mrzí, že zajištění funkčnosti formulářů 
+není žádná sranda. Jakmile ale pochopíte <A 
+href="http://www.jakpsatweb.cz/formulare.html">základy formulářů</A> (včetně 
+způsobu, kterým předávají data přes adresu), zpracování v PHP bude relativně 
+snadné.&nbsp;</P>
+<H3>Příklad</H3>
+<P>Budu mít dva soubory</P>
+<OL>
+  <LI><B>formular1.html</B> s jedním vstupním polem (úplně obyčejné HTML) 
+  <LI><B>zpracovani_formulare1.php</B> </LI></OL>
+<P><B>Soubor formular1.html</B> (Vypisuji bez hlaviček.)<B>:</B></P>
+<BLOCKQUOTE>
+  <P class=code>&lt;body&gt;<BR>&lt;form method="GET" action="<FONT 
+  color=#008000>zpracovani_formulare1.php</FONT>" &gt;<BR>&lt;p&gt;Zadejte 
+  oblíbené jídlo:&nbsp;<BR>&lt;input type="text" name="<FONT 
+  color=#ff0000>jidlo</FONT>" size="20"&gt;&nbsp;<BR>&lt;input type="submit" 
+  value="Odeslat"&gt;&lt;/p&gt;<BR>&lt;/form&gt;<BR>&lt;/body&gt;</P></BLOCKQUOTE>
+<P><B>A soubor <FONT color=#008000>zpracovani_formulare1.php</FONT>:</B></P>
+<BLOCKQUOTE>
+  <P class=code>&lt;body&gt;<BR>&lt;H1&gt;Zpracování 
+  formuláře&lt;/h1&gt;<BR>&lt;p&gt;Výborně! Zajdeme si někdy na čaj a k tomu si 
+  dáme&nbsp;<BR><FONT color=#800000>&lt;?</FONT> echo <FONT 
+  color=#ff0000>$jidlo</FONT> <FONT 
+  color=#800000>?&gt;</FONT>!<BR>&lt;/body&gt;</P></BLOCKQUOTE>
+<P>Příklad si můžete <A 
+href="http://www.jakpsatweb.cz/php/priklady/formular1.html">zobrazit</A> (pozn.: 
+pokud mi na serveru neběží PéHáPka, nebude to fungovat).</P>
+<P>Všimněte si prosím těchto věcí:</P>
+<OL>
+  <LI>Formulář má nastavenou <FONT color=#008000>action na jméno</FONT> php 
+  souboru, který to bude zpracovávat.&nbsp; 
+  <LI>Ten PHP soubor obsahuje jak obyčejné HTML (&lt;p&gt;Výborně...), tak PHP 
+  kód oddělený <FONT color=#800000>znaky &lt;?</FONT> a <FONT 
+  color=#800000>?&gt;</FONT>. Vše, co je mezi nimi, je PHP program, který server 
+  vyhodnocuje (to je to echo $jidlo). 
+  <LI>Formulář obsahoval vstupní pole (&lt;input&gt;) se jménem <FONT 
+  color=#ff0000>name="jidlo"</FONT>. PHP skript přebírající formulář si 
+  <B>automaticky založí proměnnou </B><FONT color=#ff0000><B>$jidlo</B></FONT>, 
+  obecně $jméno_pole. (Ten dolar $ je pro PHP označení, že jde o proměnnou.) 
+  Hodnotou proměnné $jmeno je to, co zadal uživatel do formuláře (před 
+  odesláním). </LI></OL>
+<P>PHP příkaz echo pak už jenom vypíše hodnotu proměnné a celé to odešle 
+prohlížeči. Samozřejmě se s tou proměnnou dají dělat i úpravy, např. zjistit, 
+zda není prázdná atd.; PHP má celou řadu příkazů.&nbsp;</P>
+<H3>Modernější přístup</H3>
+<P>V PHP od verze 4 je třeba proměnné z formuláře zapisovat složitěji: 
+$_GET["jidlo"] nebo $_POST["jidlo"]. Zápis $jidlo le dá se povolit v php.ini 
+parametrem register_globals = on, ale moc se to nedoporučuje, protože pak může 
+hodnotu neošetřené proměnné teoreticky podstrčit nějaký útočník.</P>
+<P>Tolik jenom drobný nástin o zpracování formulářů v PHP.&nbsp;</P>
+<H2><A name=include></A>Vkládání souborů</H2>
+<P>Kdo někdy dělá stránky se složitější navigací a designem, tomu v HTML velmi 
+chybí značka, která by do určitého místa kódu vložila jiný soubor. PHP to umí. 
+Na dané místo se napíše&nbsp;</P>
+<P class=code>&lt;? <FONT color=#ff0000>include</FONT> "cesta/jmeno_souboru"; 
+?&gt;</P>
+<P>a je hotovo. Při odesílání souboru klientovi tam server vloží obsah toho 
+souboru.</P>
+<P>Nejčastěji se to používá právě na vkládání různých záhlaví, zápatí, 
+navigačních sloupců atp. Dá se ale vložit i jiný PHP skript, což má různé 
+výhody, zejména se tak načítají uživatelské PHP knihovny. </P>
+<H2><A name=databaze></A>Spolupráce s databázemi</H2>
+<P>Databáze musí běžet na serveru. Je to program, který umí ukládat informace do 
+tabulek, rychle je třídit, filtrovat a poskytovat jiným programům -- třeba 
+modulu PHP.&nbsp;Je to hlavní zbraň PHP skriptů.&nbsp;</P>
+<P>Převážná většina pořádných internetových serverů nějakým způsobem pracuje s 
+databází.&nbsp;</P>
+<P>Databází existuje hodně druhů, například MS Acces, PostgreSQL, MySQL atd. 
+Jako databáze se dá dokonce využít například tabulka Excelu (není to ale 
+praktické). Nejoblíbenější mezi programátory PHP je patrně databáze MySQL, 
+protože je rychlá, existuje pro všechny platformy a je zadarmo.&nbsp;</P>
+<P>Ke každé databázi přistupuje PHP pomocí jiných funkcí. Naštěstí jsou si ty 
+funkce pro různé databáze dost podobné; většina autorů navíc pracuje pouze s 
+jednou databází, takže jim stačí naučit se jednu sadu funkcí. Také už existují 
+univerzální rozhraní (např. ODBC).</P>
+<P>Přímo k databázi se přistupuje pomocí jazyka SQL. Je to jazyk relativně 
+jednoduchý a standardní. Příkazy SQL se píší jako parametry určitých PHP funkcí. 
+Pak už vlastně soubor obsahuje tři jazyky: HTML, PHP a SQL. Naštěstí to není 
+takový zmatek, protože SQL příkazy jsou krátké.</P>
+<P><IMG height=229 alt="Schéma spolupráce PHP s databází" 
+src="Možnosti PHP - formuláře, databáze, soubory, mail_soubory/php_data_skript.gif" 
+width=431 border=0></P>
+<H3>Příklad návrhu databáze</H3>
+<P>Tak třeba internetový zpravodajský server má články uložené v databázi 
+"noviny", jejíž hlavní tabulka se jmenuje <FONT color=#008000>clanky</FONT> a 
+může mít tuto strukturu:</P>
+<TABLE cellSpacing=0 cellPadding=6 border=1>
+  <CAPTION>Tabulka clanky</CAPTION>
+  <TBODY>
+  <TR>
+    <TH>id</TH>
+    <TH>titulek</TH>
+    <TH>uvod</TH>
+    <TH>clanek</TH>
+    <TH>rubrika</TH>
+    <TH>autor</TH>
+    <TH>datum</TH></TR>
+  <TR>
+    <TD>1</TD>
+    <TD>Pes nepřítelem</TD>
+    <TD>Kdysi jsme referovali o zvláštním vztahu koček a psů. Dnes další 
+      informace.</TD>
+    <TD>Proč se psi bojí koček? Protože je žerou. Ale ne všechny...</TD>
+    <TD>Zvířata</TD>
+    <TD>Ajči</TD>
+    <TD>2001-11-29</TD></TR>
+  <TR>
+    <TD>2</TD>
+    <TD>Proč mám T-mobile</TD>
+    <TD>Jaká kritéria u mě vedla při výběru operátora? </TD>
+    <TD>Protože T-mobile inzeruje v Respektu...</TD>
+    <TD>Komunikace</TD>
+    <TD>Yuhů</TD>
+    <TD>2001-11-30</TD></TR></TBODY></TABLE>
+<P>Tato tabulka může být v praxi velmi velká. (Nebudu zde vysvětlovat, jak se 
+tvoří.) Není nikde vidět, jen je uložena v databázi. Pomocí PHP a SQL se z ní 
+ale dají tahat data.</P>
+<P>Následující kód je strašidelný. Nebojte se ho. V praxi se jenom <B>kopíruje a 
+mění</B> se údaje. V příkladu předpokládám, že moje databáze je MySQL.</P>
+<P>V první fázi příkladu se navazuje spojení s databází. Ta obvykle sídlí na 
+tomtéž počítači (<FONT color=#800000>localhost</FONT>), ale může teoreticky 
+sídlit i jinde (např. na webzdarma se udává adresa mysql.webzdarma.cz). Zadává 
+se <FONT color=#800000>jméno a heslo</FONT>, přidělené správcem, vybírá se 
+databáze (noviny).&nbsp;</P>
+<P>Následuje <FONT color=#ff0000>zápis SQL příkazu</FONT>. V něm se říká, že se 
+mají vybrat všechna pole (to je ta hvězdička) z tabulky <FONT 
+color=#008000>clanky</FONT> a seřadit podle data (order by <FONT 
+color=#ff00ff>datum</FONT>). Získaná data se načtou do proměnné 
+$vysledek.&nbsp;</P>
+<P class=code>&lt;h1&gt;Výpis článků&lt;/h1&gt;<BR>&lt;?<BR>$spojeni = 
+"mysql_connect(<FONT color=#800000>localhost,\"jmeno\",\"heslo\"</FONT> 
+)";<BR>mysql_select_db(noviny, $spojeni);<BR>$vysledek = 
+mysql_query(&nbsp;<BR>"<FONT color=#ff0000>select * from </FONT><FONT 
+color=#008000>clanky</FONT><FONT color=#ff0000> order by </FONT><FONT 
+color=#ff00ff>datum</FONT>",&nbsp;<BR>$spojeni);<FONT color=#999><BR>/* Konec 
+přímé práce s databází. */</FONT><BR><BR><FONT color=#999>/* Cyklem procházím 
+řádky výsledku a vytahuju z něj hodnoty do nového pole $zaznam*/</FONT><BR>while 
+($zaznam = mysql_fetch_array($vysledek) ):&nbsp;<BR>echo "&lt;p&gt;&lt;a 
+href='vypisclanku.php?id=";<BR>echo $zaznam["<FONT 
+color=#ff00ff>id</FONT>"];&nbsp;<BR>echo "'&gt;";<BR>echo $zaznam["<FONT 
+color=#ff00ff>titulek</FONT>"];<BR>echo "&lt;br&gt; ";&nbsp;<BR>echo 
+$zaznam["<FONT color=#ff00ff>uvod</FONT>"];<BR>echo "&lt;br&gt;";<BR>echo 
+"Autor: ";<BR>echo $zaznam["<FONT color=#ff00ff>autor</FONT>"];<BR>echo 
+"&lt;/p&gt;";<BR>endwhile;<BR>?&gt;</P>
+<P>Podívejte se na <A 
+href="http://www.jakpsatweb.cz/php/priklady/clanky.html">nefunkční 
+simulaci</A>.&nbsp;</P>
+<P>Druhá část příkladu pouze tahá záznamy z proměnné $vysledek, dělá z ní pole 
+$zaznam, výstup obaluje HTML tagy &lt;br&gt;, &lt;a&gt; a &lt;p&gt;. Pokud 
+nerozumíte této části, pusťte ji z hlavy, stačí, když ji budete měnit podle 
+potřeby. Jediné, co je tam důležité, jsou <FONT color=#ff00ff>jména polí, 
+odpovídající záhlaví tabulky</FONT> v databázi.</P>
+<H3>Možnosti SQL </H3>
+<P>Hlavní věc je ten <FONT color=#ff0000>SQL dotaz</FONT>. V příkladu vypadal 
+takto:</P>
+<P class=code><FONT color=#ff0000>select * from </FONT><FONT 
+color=#008000>clanky</FONT><FONT color=#ff0000> order by </FONT><FONT 
+color=#ff00ff>datum</FONT></P>
+<P>Jeho modifikací lze například:&nbsp;</P>
+<UL>
+  <LI>omezit výstupy pomocí podmínky -- where (například chci články jenom z 
+  rubriky komunikace: <CODE>select * from clanky </CODE><I><CODE>where 
+  rubrika=komunikace</CODE></I>) 
+  <LI>i složitěji (<CODE>select titulek, autor from clanky where 
+  rubrika=komunikace and not autor=Ajči</CODE>) 
+  <LI>kombinovat výstupy z různých tabulek (např. k autorovi může v jiné tabulce 
+  najít jeho mail) 
+  <LI><A href="http://www.jakpsatweb.cz/php/priklady/pridavani.html">přidat 
+  záznamy</A> = řádky tabulky (<CODE>insert into clanky values(3, 'Historie 
+  potopy','Úvod...'</CODE> atd.)) 
+  <LI>smazat záznamy (např. <CODE>delete from noviny where id=2</CODE>) 
+  <LI>modifikovat záznamy (<CODE>update clanky set autor='Dušan Janovský' where 
+  id=2</CODE>) </LI></UL>
+<P>Jistě jste si všimli, že SQL je taková angličtina. Příručky o SQL se dají 
+najít na webu. Pomocí SQL se dají i tvořit databáze a nastavovat práva, ale to 
+se už většinou nedělá prostřednictvím PHP, ale v konzoli (jak v konzoli <A 
+href="http://www.jakpsatweb.cz/php/mysql-zacatky.html">vytvořit mysql 
+databázi</A> a tabulku) nebo přes PHPMyAdmin.&nbsp;</P>
+<H2><A name=mail></A>Odesílání mailů</H2>
+<P>Jazyk PHP obsahuje funkci <FONT color=#ff0000>mail()</FONT>. Skript, který 
+tuto funkci obsahuje, dělá dvě věci:&nbsp;</P>
+<OL>
+  <LI>odešle mail podle zadaných parametrů 
+  <LI>vygeneruje <FONT color=#008000>HTML výstup</FONT> jako jiný normální php 
+  skript, většinou je tam napsáno, že zpráva je odeslána (není podmínkou).&nbsp; 
+  </LI></OL>
+<H3>Příklad</H3>
+<P class=code>&lt;h1&gt;Odesílání zprávy&lt;/h1&gt;<BR>&lt;?&nbsp;<BR><FONT 
+color=#ff0000>mail(</FONT>"tiangcemin@china.gov", "Svobodu Tibetu", "Chinese go 
+home!"<FONT color=#ff0000>)</FONT>;<BR><FONT color=#008000>echo "&lt;p&gt;Zpráva 
+byla odeslána&lt;/p&gt;"</FONT><BR>?&gt;</P>
+<P>Tento skript by na adresu pana Tiang Ce Mina měl odeslat zprávu s předmětem 
+Svobodu Tibetu, v textu mailu pak bude anglická výzva pro odchod. (Parametry se 
+častěji předávají pomocí proměnných.)&nbsp;</P>
+<H3>Záludnosti</H3>
+<P>Správně by měl příklad vypadat jinak. Ne vždy se totiž mail podaří opravdu 
+odeslat. V praxi se funkce mail obaluje příkazem if() a výstupem je hlášení o 
+úspěchu, nebo neúspěchu. Zkráceně:<BR><CODE>if( mail(parametry))&nbsp;<BR>echo 
+"úspěch"&nbsp;<BR>else echo "neúspěch";</CODE></P>
+<P>Čím může být způsobeno neúspěšné odesílání?&nbsp;</P>
+<OL>
+  <LI>funkce mail() je zakázaná (zejména na free serverech) 
+  <LI>je špatně nastavený smtp server (v php.ini na win-serverech) 
+  <LI>nebo prostě blbne mail démon nebo je přetížená síť </LI></OL>
+<H2><A name=kombinace></A>Kombinace formulářů, databáze a pošty</H2>
+<P>Většině velkých internetových aplikací stačí ke štěstí formuláře, databáze a 
+email. Například internetové noviny:&nbsp;</P>
+<OL>
+  <LI>Články se vkládají přes formuláře do databáze. Většinou mají autoři dána 
+  svá hesla. PHP se jednoduše do databáze podívá, zda heslo odpovídá, pak nechá 
+  autora článek vložit.&nbsp; 
+  <LI>Hlavní stránka generuje výstupy z databáze. Do ní se dají (do dalších 
+  tabulek) vkládat též komentáře (opět pomocí formulářů).&nbsp; 
+  <LI>Prohledávání, třídění a aktualizaci článků lze dělat pomocí jednoduchých 
+  SQL příkazů, zabudovaných do jednoduchých PHP skriptů, všechno může být 
+  zaheslováno. 
+  <LI>Čtenáři si mohou pomocí formuláře objednat zasílání novinek do pošty. PHP 
+  odešle napřed potvrzovací mail s odkazem na php skript, který objednávku 
+  potvrdí (odkaz obvykle obsahuje nějaký neuhádnutelný řetězec).&nbsp;Emailová 
+  adresa se po potvrzení zapíše do databáze. Jednou za čas se to spustí 
+  odesílání novinek, které vygeneruje databáze a pošle všem registrovaným do 
+  mailu.&nbsp; </LI></OL>
+<P>A tak dále, možnosti jsou téměř neomezené. Podobně to chodí v internetových 
+katalozích a obchodech.</P>
+<H2><A name=dalsi></A>A další...</H2>
+<P>Bez nadsázky se dá říci, že že PHP umí, na co si vzpomenete. (Leda za vás 
+nikdy nebude myslet.) Musím ještě zmínit</P>
+<UL>
+  <LI>zápis do souborů 
+  <LI>stahování a upload souborů pomocí FTP 
+  <LI>zápis a čtení cookies (malé soubory u klienta) 
+  <LI>čtení pošty (spolupráce s POP3) 
+  <LI>možnost odeslání přesných HTTP hlaviček 
+  <LI>regulární výrazy, objekty, kreslení obrázků 
+  <LI>atd. </LI></UL>
+<P>Pokud byste se chtěli psaní PHP věnovat vážně, pořiďte si knihu <A 
+href="http://www.kosek.cz/php/">PHP</A> od Jiřího Koska. Je skvělá, je v ní 
+skoro všechno a funguje to.</P>
+<H3>ASP -- varianta k PHP</H3>
+<P>Všechny výhody PHP, které jsem popsal na této stránce, by se daly přičíst i 
+jazyku ASP - <B>Active Server Pages</B> od Microsoftu. Umí skoro totéž co PHP, 
+ale má horší přenositelnost mezi platformami (zjednodušeně řečeno funguje pouze 
+na Win-serverech, kterých je menšina). S ASP pracuje méně lidí a mám pocit, že 
+jsou i namyšlenější, takže se problémy v ASP nedají s nikým pořádně 
+konzultovat.</P>
+<P>&nbsp;</P>
+<H3>Reklama</H3>
+<P><B><A href="http://www.webhosting-c4.cz/adv/jakpsatweb/ostatni">Webhosting 
+C4</A></B><BR>1 GB, PHP, MySQL, administrační systém, 1.200 Kč na rok s doménou 
+v ceně. <BR><SPAN class=visibleurl><A 
+href="http://www.webhosting-c4.cz/adv/jakpsatweb/ostatni">http://www.webhosting-c4.cz/adv/jakpsatweb/ostatni</A></P></DIV>
+<DIV id=navigace>
+<P>Předchozí: <A id=prev href="http://www.jakpsatweb.cz/php/jak-zacit.html">Jak 
+začít s PHP, zejména instalace</A></P>
+<H3>Vizte též</H3>
+<UL>
+  <LI><A href="http://www.jakpsatweb.cz/programovani.html">Programování 
+  stránek</A>, 
+  <LI><A href="http://www.jakpsatweb.cz/formular-mail.html">Formulář na mail</A> 
+
+  <LI><A href="http://www.jakpsatweb.cz/include.html">Skládání stránek z 
+  kousků</A> </LI></UL></DIV>
+<DIV id=hlavicka>
+<DIV id=logo><A id=logoa accessKey=1 
+href="http://www.jakpsatweb.cz/index.html"><IMG height=88 alt="Jak psát web" 
+src="Možnosti PHP - formuláře, databáze, soubory, mail_soubory/jakpw.gif" 
+width=131></A> </DIV>
+<DIV id=slogan>o tvorbě, údržbě a zlepšování internetových stránek </DIV>
+<DIV id=hledani>
+<FORM action=http://search.atomz.com/search/>
+<P><INPUT type=hidden value=00062d0d-sp00000000 name=sp-a> <INPUT type=hidden 
+value=0 name=sp-advanced> <INPUT type=hidden value=1 name=sp-w-control> <INPUT 
+class=text size=12 name=sp-q> <INPUT class=submit type=submit value=Hledat> 
+</P></FORM></DIV>
+<DIV id=ouska><A class=zak href="http://www.jakpsatweb.cz/index.html">Návody</A> 
+<A class=html href="http://www.jakpsatweb.cz/html/index.html">HTML</A> <A 
+class=css href="http://www.jakpsatweb.cz/css/index.html">CSS</A> <A class=js 
+href="http://www.jakpsatweb.cz/javascript/index.html">JavaScript</A> <A 
+class=clanky href="http://www.jakpsatweb.cz/clanky/index.html">Články</A> <A 
+class=ost href="http://www.jakpsatweb.cz/navigace/ostatni.html">Ostatní</A> 
+</DIV>
+<DIV id=prouzek>
+<P><A href="http://www.jakpsatweb.cz/enc/encyklopedie.html">Encyklopedie</A> <A 
+href="http://www.jakpsatweb.cz/frontpage/index.html">FrontPage</A> <A 
+href="http://www.jakpsatweb.cz/reklama/index.html">Reklama</A> <A id=sel 
+href="http://www.jakpsatweb.cz/php/index.html">PHP</A> <A 
+href="http://www.jakpsatweb.cz/server/index.html">Server</A> </P></DIV></DIV>
+<DIV id=hrasek></DIV>
+<SCRIPT src="Možnosti PHP - formuláře, databáze, soubory, mail_soubory/patka.js" 
+type=text/javascript></SCRIPT>
+
+<P class=patka-global><A href="http://www.jakpsatweb.cz/">Jak psát web</A> píše 
+Yuhů, Dušan Janovský. <A 
+href="http://www.jakpsatweb.cz/kontakt.html">Kontakt</A>. <A 
+href="http://www.jakpsatweb.cz/archiv/pristupnost.html">Prohlášení o 
+přístupnosti</A>. Poslední aktualizace 27. srpna 2006.</P>
+<SCRIPT 
+src="Možnosti PHP - formuláře, databáze, soubory, mail_soubory/my-urchin.js" 
+type=text/javascript>
+
+</body>
+
+</html>
+<!--webbot bot="Include" i-checksum="59523" endspan -->
+
+
+
+</body>
+
+<!-- #EndTemplate -->
+
+</html></SCRIPT>
+</SPAN></BODY></HTML>

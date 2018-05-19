@@ -1,0 +1,37 @@
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>
+      Použití metody createTextRange
+    </title>
+
+    <script langauge="JavaScript">
+      function nahradText()
+      {
+        var usek = document.body.createTextRange();
+        var div = document.getElementById("div1");
+        usek.moveToElementText(div); 
+        usek.pasteHTML("Zde je nový text.");
+      }
+    </script>
+  </head>
+
+  <body>
+    <center>
+      <h1>
+        Použití metody createTextRange
+      </h1>
+    </center>
+
+    <input type="button" value="Stiskni mě" 
+      onclick="nahradText()">
+
+    <br>
+    <br>
+
+    <div id="div1">
+      Stiskněte tlačítko pro nahrazení tohoto textu.
+    </div>
+
+  </body>
+</html>

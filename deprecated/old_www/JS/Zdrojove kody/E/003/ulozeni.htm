@@ -1,0 +1,58 @@
+<HTML>
+  <HEAD>
+    <TITLE>Uložení barev</TITLE>
+
+    <SCRIPT Language="JavaScript" Src="cookies.js">
+    </SCRIPT>
+
+    <SCRIPT Language="JavaScript">
+      <!--
+      // Funkce pro nastavení barev
+      function ReadData (){
+        // Nastaví se text v editaèních polí formuláøe
+        // a zároveò i barvy textu a pozadí
+        document.fgColor =
+          document.frmCookie.edText.value =
+          ReadCookie ('text', 'black');
+        document.bgColor =
+          document.frmCookie.edBack.value =
+          ReadCookie ('back', 'white');
+      }
+
+      // Zápis nastavení do cookie, v pøípadì, že byla zadána nìjaká barva
+      function WriteData (){
+        if (document.frmCookie.edBack.value != '')
+          WriteCookie ('back', document.frmCookie.edBack.value, 24*30);
+        if (document.frmCookie.edText.value != '')
+          WriteCookie ('text', document.frmCookie.edText.value, 24*30);
+      }
+      // -->
+    </SCRIPT>
+  </HEAD>
+
+  <BODY Onload="ReadData();">
+    <FORM Name="frmCookie">
+      <TABLE>
+      <TR>
+        <TD Colspan="2">Zapište barvy textu a pozadí.<BR>
+            (green, blue, ... pøípadne hexidecimálnì: #123456)</TD>
+      </TR>
+      <TR>
+        <TD>Barva textu:</TD>
+        <TD><INPUT Name="edText" Type="text" Size="10"></TD>
+      </TR>
+      <TR>
+        <TD>Barva pozadí:</TD>
+        <TD><INPUT Name="edBack" Type="text" Size="10"></TD>
+      </TR>
+      <TR>
+        <TD Colspan="2" Align="center">
+          <INPUT Name="btOK" Type="submit" Value="  Nastav Barvy  "
+            Onclick="WriteData();">
+        </TD>
+      </TR>
+      </TABLE>
+    </FORM>
+  </BODY>
+</HTML>
+

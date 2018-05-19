@@ -1,0 +1,13 @@
+CREATE TABLE registrace( 
+id int( 11 ) NOT NULL auto_increment,
+jmeno varchar( 30 ) NOT NULL default '',
+adresa varchar( 150 ) NOT NULL default '',
+nick varchar( 20 ) NOT NULL default '',
+heslo varchar( 25 ) NOT NULL default '',
+mail varchar( 35 ) NOT NULL default '',
+mobil varchar( 13 ) NOT NULL default '',
+kod varchar( 100 ) NOT NULL default '',
+ip varchar( 20 ) NOT NULL default '',
+posledni_akce bigint( 20 ) NOT NULL default '0',
+UNIQUE KEY id( id, adresa ) 
+);

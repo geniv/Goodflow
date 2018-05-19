@@ -1,0 +1,552 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head>
+  <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+  <meta name="generator" content="PSPad editor, www.pspad.com"><title>Databáze - obsah</title></head>
+
+  <body>
+  <pre>  CREATE TABLE alba (
+  id int(11) NOT NULL auto_increment,
+  nazev varchar(50) NOT NULL default '',
+  PRIMARY KEY  (id),
+  UNIQUE KEY nazev (nazev)
+) TYPE=MyISAM;
+
+INSERT INTO alba VALUES (1, 'HODINA USMÍŘENÍ (1991)');
+INSERT INTO alba VALUES (2, 'TU NEDĚLI PO RÁNU (1992)');
+INSERT INTO alba VALUES (3, 'ŽALMAN &amp; SPOL. + JANTAROVÁ ZEMĚ (1993)');
+INSERT INTO alba VALUES (4, 'PÍSNĚ SEBRANÉ POD STOLEM (1993)');
+INSERT INTO alba VALUES (5, 'POTLACH V MÉ DUŠI (1994)');
+INSERT INTO alba VALUES (6, 'POCESTNÝ DO SEDMÉHO NEBE (1995)');
+INSERT INTO alba VALUES (7, 'ŽIVĚ NA MORAVĚ (1996)');
+INSERT INTO alba VALUES (8, 'SBOHEM ROMANTIKO (1997)');
+INSERT INTO alba VALUES (9, 'LÁSKA A SMRT (1998)');
+INSERT INTO alba VALUES (10, 'VE ZNAMENÍ RYB (2000)');
+INSERT INTO alba VALUES (11, '... V ROCE JEDNA (2001)');
+INSERT INTO alba VALUES (12, 'ŽALMAN (2002)');
+INSERT INTO alba VALUES (13, 'NÁPIS NA ŠTÍTU DOMU (2004)');
+INSERT INTO alba VALUES (14, 'Testovací album');
+INSERT INTO alba VALUES (15, 'Testovací album č. 2');
+
+CREATE TABLE koncerty (
+  id int(11) NOT NULL auto_increment,
+  datum date NOT NULL default '0000-00-00',
+  cas time NOT NULL default '00:00:00',
+  misto varchar(50) NOT NULL default '',
+  PRIMARY KEY  (id),
+  UNIQUE KEY datum (datum)
+) TYPE=MyISAM;
+
+INSERT INTO koncerty VALUES (1, '2004-12-05', '19:00:00', 'Liberec');
+INSERT INTO koncerty VALUES (2, '2004-12-11', '19:00:00', 'Liberec');
+INSERT INTO koncerty VALUES (3, '2004-12-13', '19:00:00', 'Liberec');
+INSERT INTO koncerty VALUES (4, '2005-01-01', '20:00:00', 'Praha');
+INSERT INTO koncerty VALUES (5, '2010-10-10', '21:30:00', 'New York ;-)))');
+
+CREATE TABLE obsahyalb (
+  id int(11) NOT NULL auto_increment,
+  album int(11) NOT NULL default '0',
+  pisen int(11) NOT NULL default '0',
+  PRIMARY KEY  (id),
+  UNIQUE KEY album (album,pisen)
+) TYPE=MyISAM;
+
+INSERT INTO obsahyalb VALUES (1, 1, 1);
+INSERT INTO obsahyalb VALUES (2, 1, 2);
+INSERT INTO obsahyalb VALUES (3, 1, 3);
+INSERT INTO obsahyalb VALUES (4, 1, 4);
+INSERT INTO obsahyalb VALUES (5, 1, 5);
+INSERT INTO obsahyalb VALUES (6, 1, 6);
+INSERT INTO obsahyalb VALUES (7, 1, 7);
+INSERT INTO obsahyalb VALUES (8, 1, 8);
+INSERT INTO obsahyalb VALUES (9, 1, 9);
+INSERT INTO obsahyalb VALUES (10, 1, 10);
+INSERT INTO obsahyalb VALUES (11, 1, 11);
+INSERT INTO obsahyalb VALUES (12, 1, 12);
+INSERT INTO obsahyalb VALUES (13, 1, 13);
+INSERT INTO obsahyalb VALUES (14, 1, 14);
+INSERT INTO obsahyalb VALUES (15, 2, 15);
+INSERT INTO obsahyalb VALUES (16, 2, 16);
+INSERT INTO obsahyalb VALUES (17, 2, 17);
+INSERT INTO obsahyalb VALUES (18, 2, 18);
+INSERT INTO obsahyalb VALUES (19, 2, 19);
+INSERT INTO obsahyalb VALUES (20, 2, 20);
+INSERT INTO obsahyalb VALUES (21, 2, 21);
+INSERT INTO obsahyalb VALUES (22, 2, 22);
+INSERT INTO obsahyalb VALUES (23, 2, 23);
+INSERT INTO obsahyalb VALUES (24, 2, 24);
+INSERT INTO obsahyalb VALUES (25, 2, 25);
+INSERT INTO obsahyalb VALUES (26, 2, 26);
+INSERT INTO obsahyalb VALUES (27, 2, 27);
+INSERT INTO obsahyalb VALUES (28, 2, 28);
+INSERT INTO obsahyalb VALUES (29, 2, 29);
+INSERT INTO obsahyalb VALUES (30, 2, 30);
+INSERT INTO obsahyalb VALUES (31, 2, 31);
+INSERT INTO obsahyalb VALUES (32, 2, 32);
+INSERT INTO obsahyalb VALUES (33, 3, 33);
+INSERT INTO obsahyalb VALUES (34, 3, 34);
+INSERT INTO obsahyalb VALUES (35, 3, 35);
+INSERT INTO obsahyalb VALUES (36, 3, 36);
+INSERT INTO obsahyalb VALUES (37, 3, 37);
+INSERT INTO obsahyalb VALUES (38, 3, 38);
+INSERT INTO obsahyalb VALUES (39, 3, 39);
+INSERT INTO obsahyalb VALUES (40, 3, 40);
+INSERT INTO obsahyalb VALUES (41, 3, 41);
+INSERT INTO obsahyalb VALUES (42, 3, 42);
+INSERT INTO obsahyalb VALUES (43, 3, 43);
+INSERT INTO obsahyalb VALUES (44, 3, 44);
+INSERT INTO obsahyalb VALUES (45, 3, 45);
+INSERT INTO obsahyalb VALUES (46, 3, 46);
+INSERT INTO obsahyalb VALUES (47, 3, 47);
+INSERT INTO obsahyalb VALUES (48, 3, 48);
+INSERT INTO obsahyalb VALUES (49, 3, 49);
+INSERT INTO obsahyalb VALUES (50, 3, 50);
+INSERT INTO obsahyalb VALUES (51, 3, 51);
+INSERT INTO obsahyalb VALUES (52, 3, 52);
+INSERT INTO obsahyalb VALUES (53, 3, 53);
+INSERT INTO obsahyalb VALUES (54, 3, 54);
+INSERT INTO obsahyalb VALUES (55, 3, 55);
+INSERT INTO obsahyalb VALUES (56, 3, 56);
+INSERT INTO obsahyalb VALUES (57, 3, 57);
+INSERT INTO obsahyalb VALUES (58, 3, 58);
+INSERT INTO obsahyalb VALUES (59, 4, 59);
+INSERT INTO obsahyalb VALUES (60, 4, 60);
+INSERT INTO obsahyalb VALUES (61, 4, 61);
+INSERT INTO obsahyalb VALUES (62, 4, 62);
+INSERT INTO obsahyalb VALUES (63, 4, 63);
+INSERT INTO obsahyalb VALUES (64, 4, 64);
+INSERT INTO obsahyalb VALUES (65, 4, 65);
+INSERT INTO obsahyalb VALUES (66, 4, 66);
+INSERT INTO obsahyalb VALUES (67, 4, 67);
+INSERT INTO obsahyalb VALUES (68, 4, 68);
+INSERT INTO obsahyalb VALUES (69, 4, 69);
+INSERT INTO obsahyalb VALUES (70, 4, 70);
+INSERT INTO obsahyalb VALUES (71, 4, 71);
+INSERT INTO obsahyalb VALUES (72, 4, 72);
+INSERT INTO obsahyalb VALUES (73, 4, 73);
+INSERT INTO obsahyalb VALUES (74, 4, 74);
+INSERT INTO obsahyalb VALUES (75, 5, 75);
+INSERT INTO obsahyalb VALUES (76, 5, 76);
+INSERT INTO obsahyalb VALUES (77, 5, 77);
+INSERT INTO obsahyalb VALUES (78, 5, 78);
+INSERT INTO obsahyalb VALUES (79, 5, 79);
+INSERT INTO obsahyalb VALUES (80, 5, 80);
+INSERT INTO obsahyalb VALUES (81, 5, 81);
+INSERT INTO obsahyalb VALUES (82, 5, 82);
+INSERT INTO obsahyalb VALUES (83, 5, 83);
+INSERT INTO obsahyalb VALUES (84, 5, 84);
+INSERT INTO obsahyalb VALUES (85, 5, 85);
+INSERT INTO obsahyalb VALUES (86, 5, 86);
+INSERT INTO obsahyalb VALUES (87, 5, 87);
+INSERT INTO obsahyalb VALUES (88, 5, 88);
+INSERT INTO obsahyalb VALUES (89, 5, 89);
+INSERT INTO obsahyalb VALUES (90, 5, 90);
+INSERT INTO obsahyalb VALUES (91, 5, 91);
+INSERT INTO obsahyalb VALUES (92, 5, 92);
+INSERT INTO obsahyalb VALUES (93, 6, 93);
+INSERT INTO obsahyalb VALUES (94, 6, 94);
+INSERT INTO obsahyalb VALUES (95, 6, 95);
+INSERT INTO obsahyalb VALUES (96, 6, 96);
+INSERT INTO obsahyalb VALUES (97, 6, 97);
+INSERT INTO obsahyalb VALUES (98, 6, 98);
+INSERT INTO obsahyalb VALUES (99, 6, 99);
+INSERT INTO obsahyalb VALUES (100, 6, 100);
+INSERT INTO obsahyalb VALUES (101, 6, 101);
+INSERT INTO obsahyalb VALUES (102, 6, 102);
+INSERT INTO obsahyalb VALUES (103, 6, 103);
+INSERT INTO obsahyalb VALUES (104, 6, 104);
+INSERT INTO obsahyalb VALUES (105, 6, 105);
+INSERT INTO obsahyalb VALUES (106, 6, 106);
+INSERT INTO obsahyalb VALUES (107, 7, 107);
+INSERT INTO obsahyalb VALUES (108, 7, 13);
+INSERT INTO obsahyalb VALUES (109, 7, 65);
+INSERT INTO obsahyalb VALUES (110, 7, 7);
+INSERT INTO obsahyalb VALUES (111, 7, 108);
+INSERT INTO obsahyalb VALUES (112, 7, 56);
+INSERT INTO obsahyalb VALUES (113, 7, 63);
+INSERT INTO obsahyalb VALUES (114, 7, 109);
+INSERT INTO obsahyalb VALUES (115, 7, 47);
+INSERT INTO obsahyalb VALUES (116, 7, 110);
+INSERT INTO obsahyalb VALUES (117, 7, 30);
+INSERT INTO obsahyalb VALUES (118, 7, 111);
+INSERT INTO obsahyalb VALUES (119, 7, 42);
+INSERT INTO obsahyalb VALUES (120, 7, 96);
+INSERT INTO obsahyalb VALUES (121, 7, 4);
+INSERT INTO obsahyalb VALUES (122, 7, 38);
+INSERT INTO obsahyalb VALUES (123, 7, 112);
+INSERT INTO obsahyalb VALUES (124, 7, 113);
+INSERT INTO obsahyalb VALUES (125, 8, 114);
+INSERT INTO obsahyalb VALUES (126, 8, 115);
+INSERT INTO obsahyalb VALUES (127, 8, 116);
+INSERT INTO obsahyalb VALUES (128, 8, 117);
+INSERT INTO obsahyalb VALUES (129, 8, 118);
+INSERT INTO obsahyalb VALUES (130, 8, 119);
+INSERT INTO obsahyalb VALUES (131, 8, 120);
+INSERT INTO obsahyalb VALUES (132, 8, 121);
+INSERT INTO obsahyalb VALUES (133, 8, 122);
+INSERT INTO obsahyalb VALUES (134, 8, 123);
+INSERT INTO obsahyalb VALUES (135, 8, 124);
+INSERT INTO obsahyalb VALUES (136, 8, 125);
+INSERT INTO obsahyalb VALUES (137, 8, 126);
+INSERT INTO obsahyalb VALUES (138, 8, 127);
+INSERT INTO obsahyalb VALUES (139, 9, 128);
+INSERT INTO obsahyalb VALUES (140, 9, 129);
+INSERT INTO obsahyalb VALUES (141, 9, 130);
+INSERT INTO obsahyalb VALUES (142, 9, 131);
+INSERT INTO obsahyalb VALUES (143, 9, 132);
+INSERT INTO obsahyalb VALUES (144, 9, 133);
+INSERT INTO obsahyalb VALUES (145, 9, 134);
+INSERT INTO obsahyalb VALUES (146, 9, 135);
+INSERT INTO obsahyalb VALUES (147, 9, 136);
+INSERT INTO obsahyalb VALUES (148, 9, 137);
+INSERT INTO obsahyalb VALUES (149, 9, 138);
+INSERT INTO obsahyalb VALUES (150, 9, 139);
+INSERT INTO obsahyalb VALUES (151, 9, 140);
+INSERT INTO obsahyalb VALUES (152, 9, 141);
+INSERT INTO obsahyalb VALUES (153, 9, 142);
+INSERT INTO obsahyalb VALUES (154, 9, 143);
+INSERT INTO obsahyalb VALUES (155, 9, 144);
+INSERT INTO obsahyalb VALUES (156, 9, 145);
+INSERT INTO obsahyalb VALUES (157, 9, 146);
+INSERT INTO obsahyalb VALUES (158, 9, 147);
+INSERT INTO obsahyalb VALUES (159, 9, 148);
+INSERT INTO obsahyalb VALUES (160, 10, 43);
+INSERT INTO obsahyalb VALUES (161, 10, 42);
+INSERT INTO obsahyalb VALUES (162, 10, 74);
+INSERT INTO obsahyalb VALUES (163, 10, 56);
+INSERT INTO obsahyalb VALUES (164, 10, 32);
+INSERT INTO obsahyalb VALUES (165, 10, 35);
+INSERT INTO obsahyalb VALUES (166, 10, 105);
+INSERT INTO obsahyalb VALUES (167, 10, 55);
+INSERT INTO obsahyalb VALUES (168, 10, 41);
+INSERT INTO obsahyalb VALUES (169, 10, 100);
+INSERT INTO obsahyalb VALUES (170, 10, 12);
+INSERT INTO obsahyalb VALUES (171, 10, 46);
+INSERT INTO obsahyalb VALUES (172, 10, 112);
+INSERT INTO obsahyalb VALUES (173, 10, 13);
+INSERT INTO obsahyalb VALUES (174, 10, 40);
+INSERT INTO obsahyalb VALUES (175, 10, 6);
+INSERT INTO obsahyalb VALUES (176, 10, 45);
+INSERT INTO obsahyalb VALUES (177, 10, 9);
+INSERT INTO obsahyalb VALUES (178, 10, 51);
+INSERT INTO obsahyalb VALUES (179, 10, 106);
+INSERT INTO obsahyalb VALUES (180, 10, 50);
+INSERT INTO obsahyalb VALUES (181, 10, 38);
+INSERT INTO obsahyalb VALUES (182, 10, 58);
+INSERT INTO obsahyalb VALUES (183, 11, 149);
+INSERT INTO obsahyalb VALUES (184, 11, 150);
+INSERT INTO obsahyalb VALUES (185, 11, 151);
+INSERT INTO obsahyalb VALUES (186, 11, 152);
+INSERT INTO obsahyalb VALUES (187, 11, 153);
+INSERT INTO obsahyalb VALUES (188, 11, 154);
+INSERT INTO obsahyalb VALUES (189, 11, 155);
+INSERT INTO obsahyalb VALUES (190, 11, 156);
+INSERT INTO obsahyalb VALUES (191, 11, 157);
+INSERT INTO obsahyalb VALUES (192, 11, 158);
+INSERT INTO obsahyalb VALUES (193, 11, 159);
+INSERT INTO obsahyalb VALUES (194, 11, 160);
+INSERT INTO obsahyalb VALUES (195, 11, 161);
+INSERT INTO obsahyalb VALUES (196, 11, 107);
+INSERT INTO obsahyalb VALUES (197, 12, 162);
+INSERT INTO obsahyalb VALUES (198, 12, 163);
+INSERT INTO obsahyalb VALUES (199, 12, 164);
+INSERT INTO obsahyalb VALUES (200, 12, 165);
+INSERT INTO obsahyalb VALUES (201, 12, 166);
+INSERT INTO obsahyalb VALUES (202, 12, 167);
+INSERT INTO obsahyalb VALUES (203, 12, 168);
+INSERT INTO obsahyalb VALUES (204, 12, 169);
+INSERT INTO obsahyalb VALUES (205, 12, 170);
+INSERT INTO obsahyalb VALUES (206, 12, 171);
+INSERT INTO obsahyalb VALUES (207, 12, 189);
+INSERT INTO obsahyalb VALUES (208, 12, 172);
+INSERT INTO obsahyalb VALUES (209, 12, 26);
+INSERT INTO obsahyalb VALUES (210, 12, 173);
+INSERT INTO obsahyalb VALUES (211, 12, 15);
+INSERT INTO obsahyalb VALUES (212, 12, 16);
+INSERT INTO obsahyalb VALUES (213, 12, 21);
+INSERT INTO obsahyalb VALUES (214, 12, 30);
+INSERT INTO obsahyalb VALUES (215, 12, 24);
+INSERT INTO obsahyalb VALUES (216, 12, 139);
+INSERT INTO obsahyalb VALUES (217, 12, 138);
+INSERT INTO obsahyalb VALUES (218, 12, 135);
+INSERT INTO obsahyalb VALUES (219, 12, 128);
+INSERT INTO obsahyalb VALUES (220, 12, 32);
+INSERT INTO obsahyalb VALUES (221, 12, 111);
+INSERT INTO obsahyalb VALUES (222, 12, 62);
+INSERT INTO obsahyalb VALUES (223, 12, 92);
+INSERT INTO obsahyalb VALUES (224, 12, 174);
+INSERT INTO obsahyalb VALUES (225, 12, 39);
+INSERT INTO obsahyalb VALUES (226, 12, 42);
+INSERT INTO obsahyalb VALUES (227, 12, 43);
+INSERT INTO obsahyalb VALUES (228, 12, 38);
+INSERT INTO obsahyalb VALUES (229, 12, 36);
+INSERT INTO obsahyalb VALUES (230, 12, 112);
+INSERT INTO obsahyalb VALUES (231, 12, 68);
+INSERT INTO obsahyalb VALUES (232, 12, 70);
+INSERT INTO obsahyalb VALUES (233, 12, 67);
+INSERT INTO obsahyalb VALUES (234, 12, 59);
+INSERT INTO obsahyalb VALUES (235, 12, 175);
+INSERT INTO obsahyalb VALUES (236, 12, 105);
+INSERT INTO obsahyalb VALUES (237, 12, 110);
+INSERT INTO obsahyalb VALUES (238, 12, 124);
+INSERT INTO obsahyalb VALUES (239, 12, 100);
+INSERT INTO obsahyalb VALUES (240, 12, 56);
+INSERT INTO obsahyalb VALUES (241, 12, 6);
+INSERT INTO obsahyalb VALUES (242, 12, 106);
+INSERT INTO obsahyalb VALUES (243, 12, 13);
+INSERT INTO obsahyalb VALUES (244, 12, 74);
+INSERT INTO obsahyalb VALUES (245, 13, 176);
+INSERT INTO obsahyalb VALUES (246, 13, 177);
+INSERT INTO obsahyalb VALUES (247, 13, 178);
+INSERT INTO obsahyalb VALUES (248, 13, 179);
+INSERT INTO obsahyalb VALUES (249, 13, 180);
+INSERT INTO obsahyalb VALUES (250, 13, 181);
+INSERT INTO obsahyalb VALUES (251, 13, 182);
+INSERT INTO obsahyalb VALUES (252, 13, 183);
+INSERT INTO obsahyalb VALUES (253, 13, 184);
+INSERT INTO obsahyalb VALUES (254, 13, 185);
+INSERT INTO obsahyalb VALUES (255, 13, 186);
+INSERT INTO obsahyalb VALUES (256, 13, 187);
+INSERT INTO obsahyalb VALUES (257, 13, 188);
+INSERT INTO obsahyalb VALUES (258, 14, 190);
+INSERT INTO obsahyalb VALUES (259, 14, 191);
+INSERT INTO obsahyalb VALUES (260, 14, 192);
+INSERT INTO obsahyalb VALUES (261, 14, 56);
+INSERT INTO obsahyalb VALUES (262, 15, 193);
+INSERT INTO obsahyalb VALUES (263, 15, 194);
+
+CREATE TABLE pisne (
+  id int(11) NOT NULL auto_increment,
+  nazev varchar(50) NOT NULL default '',
+  PRIMARY KEY  (id),
+  UNIQUE KEY nazev (nazev)
+) TYPE=MyISAM;
+
+INSERT INTO pisne VALUES (1, 'Bývalá zem');
+INSERT INTO pisne VALUES (2, 'Venkovan');
+INSERT INTO pisne VALUES (3, 'Dopis');
+INSERT INTO pisne VALUES (4, 'Po noci přijde noc');
+INSERT INTO pisne VALUES (5, 'Ty já (Dida)');
+INSERT INTO pisne VALUES (6, 'Nechte mi blues');
+INSERT INTO pisne VALUES (7, 'Píseň o tom, že zas bude líp');
+INSERT INTO pisne VALUES (8, 'Červený dvůr');
+INSERT INTO pisne VALUES (9, 'Krajina');
+INSERT INTO pisne VALUES (10, 'Betonové město');
+INSERT INTO pisne VALUES (11, 'Slepí ptáci');
+INSERT INTO pisne VALUES (12, 'Sejdeme se v pánu');
+INSERT INTO pisne VALUES (13, 'Hodina usmíření');
+INSERT INTO pisne VALUES (14, 'Ještě jednou');
+INSERT INTO pisne VALUES (15, 'Tu neděli po ránu');
+INSERT INTO pisne VALUES (16, 'Teče voda teče');
+INSERT INTO pisne VALUES (17, 'Objel syneček');
+INSERT INTO pisne VALUES (18, 'Ztracená krása');
+INSERT INTO pisne VALUES (19, 'Byl jest jeden');
+INSERT INTO pisne VALUES (20, 'Kdyby mě tak bylo');
+INSERT INTO pisne VALUES (21, 'Ve zvonkách');
+INSERT INTO pisne VALUES (22, 'Nešťastný Matěj');
+INSERT INTO pisne VALUES (23, 'Loučení loučení');
+INSERT INTO pisne VALUES (24, 'Kdyby tady byla taková panenka');
+INSERT INTO pisne VALUES (25, 'Padly vody');
+INSERT INTO pisne VALUES (26, 'Záblatský louky');
+INSERT INTO pisne VALUES (27, 'Jeden kupec');
+INSERT INTO pisne VALUES (28, 'Zabitý Francouz');
+INSERT INTO pisne VALUES (29, 'Aby nás pán bůh miloval');
+INSERT INTO pisne VALUES (30, 'V tej klášterskej hospodě');
+INSERT INTO pisne VALUES (31, 'Já milou mám');
+INSERT INTO pisne VALUES (32, 'Svatá Kateřina');
+INSERT INTO pisne VALUES (33, 'Tak jsme vandrovali');
+INSERT INTO pisne VALUES (34, 'Vracím se domů');
+INSERT INTO pisne VALUES (35, 'Prázdný schránky');
+INSERT INTO pisne VALUES (36, 'Kdo ti zpívá');
+INSERT INTO pisne VALUES (37, 'Píseň pro čaroděje');
+INSERT INTO pisne VALUES (38, 'Jdem zpátky do lesů');
+INSERT INTO pisne VALUES (39, 'Kytky stále ještě voní');
+INSERT INTO pisne VALUES (40, 'Přijela jsem v cadillacu');
+INSERT INTO pisne VALUES (41, 'Nelituj');
+INSERT INTO pisne VALUES (42, 'Rána v trávě');
+INSERT INTO pisne VALUES (43, 'Všech vandráků múza');
+INSERT INTO pisne VALUES (44, 'Zvon dál tu zní');
+INSERT INTO pisne VALUES (45, 'Blues opuštěnýho vlaku');
+INSERT INTO pisne VALUES (46, 'Padlý anděl');
+INSERT INTO pisne VALUES (47, 'Náhradní víkend');
+INSERT INTO pisne VALUES (48, 'P.S.');
+INSERT INTO pisne VALUES (49, 'Já neumírám s modrou planetou');
+INSERT INTO pisne VALUES (50, 'Sej lásku po lidech');
+INSERT INTO pisne VALUES (51, 'Nikdo se nesmál');
+INSERT INTO pisne VALUES (52, 'Já, písnička');
+INSERT INTO pisne VALUES (53, 'Mys Horn');
+INSERT INTO pisne VALUES (54, 'Na červený listině');
+INSERT INTO pisne VALUES (55, 'Všechny cesty začínají k ránu');
+INSERT INTO pisne VALUES (56, 'Jantarová země');
+INSERT INTO pisne VALUES (57, 'Za ruku mě vem');
+INSERT INTO pisne VALUES (58, 'Na rozloučenou');
+INSERT INTO pisne VALUES (59, 'Dálnice č. 5');
+INSERT INTO pisne VALUES (60, 'Venkovanka');
+INSERT INTO pisne VALUES (61, 'Stráň za tratí');
+INSERT INTO pisne VALUES (62, 'Dej mi tón');
+INSERT INTO pisne VALUES (63, 'Zvedni pravici s plnou sklenicí');
+INSERT INTO pisne VALUES (64, 'Poslední klekání');
+INSERT INTO pisne VALUES (65, 'Tam na Picadilly');
+INSERT INTO pisne VALUES (66, 'Tulácká ukolébavka');
+INSERT INTO pisne VALUES (67, 'Ho ho Watanay');
+INSERT INTO pisne VALUES (68, 'Má lady je víno');
+INSERT INTO pisne VALUES (69, 'Oprava trati');
+INSERT INTO pisne VALUES (70, 'Barevný šál');
+INSERT INTO pisne VALUES (71, 'Vězeňská trilogie');
+INSERT INTO pisne VALUES (72, 'Otče náš');
+INSERT INTO pisne VALUES (73, 'Glory Mississippi');
+INSERT INTO pisne VALUES (74, 'Divokej horskej tymián');
+INSERT INTO pisne VALUES (75, 'Píseň posledního vagónu');
+INSERT INTO pisne VALUES (76, 'Padá soumrak bledý');
+INSERT INTO pisne VALUES (77, 'Ztracený ráj');
+INSERT INTO pisne VALUES (78, 'Virginie');
+INSERT INTO pisne VALUES (79, 'Hawaja');
+INSERT INTO pisne VALUES (80, 'Kovbojská balada');
+INSERT INTO pisne VALUES (81, 'Drsnej chlap');
+INSERT INTO pisne VALUES (82, 'Hvězda spadla');
+INSERT INTO pisne VALUES (83, 'K nebeským horám');
+INSERT INTO pisne VALUES (84, 'Věznice v pustinách');
+INSERT INTO pisne VALUES (85, 'Zmoklej oheň');
+INSERT INTO pisne VALUES (86, 'Mám tady stát');
+INSERT INTO pisne VALUES (87, 'Šerif jménem Hej');
+INSERT INTO pisne VALUES (88, 'Greenhorn');
+INSERT INTO pisne VALUES (89, 'Romantika');
+INSERT INTO pisne VALUES (90, 'Song uhlíře');
+INSERT INTO pisne VALUES (91, 'Návraty');
+INSERT INTO pisne VALUES (92, 'Kouřovej signál');
+INSERT INTO pisne VALUES (93, 'Pocestný do sedmého nebe');
+INSERT INTO pisne VALUES (94, 'Klukovský blues');
+INSERT INTO pisne VALUES (95, 'Město bílejch vran');
+INSERT INTO pisne VALUES (96, 'Jsme to svět bláznů');
+INSERT INTO pisne VALUES (97, 'Doba dravců');
+INSERT INTO pisne VALUES (98, 'Bludný kámen');
+INSERT INTO pisne VALUES (99, 'Malůvky');
+INSERT INTO pisne VALUES (100, 'Sen o Berenice');
+INSERT INTO pisne VALUES (101, 'Na poslední stránce');
+INSERT INTO pisne VALUES (102, 'Už na cestu zvykám koně');
+INSERT INTO pisne VALUES (103, 'V kraji planých šípků');
+INSERT INTO pisne VALUES (104, 'Stanice "Dej Bůh Štěstí"');
+INSERT INTO pisne VALUES (105, 'Já bych se v kočárku vozil');
+INSERT INTO pisne VALUES (106, 'Až se někdy');
+INSERT INTO pisne VALUES (107, 'Budějický zvony');
+INSERT INTO pisne VALUES (108, 'Severní vítr');
+INSERT INTO pisne VALUES (109, 'Jedenkrát');
+INSERT INTO pisne VALUES (110, 'Labutí křik');
+INSERT INTO pisne VALUES (111, 'Nezacházej slunce');
+INSERT INTO pisne VALUES (112, 'Píseň malých pěšáků');
+INSERT INTO pisne VALUES (113, 'Vzhůru do oblak');
+INSERT INTO pisne VALUES (114, 'Sbohem romantiko');
+INSERT INTO pisne VALUES (115, 'Skřivánek');
+INSERT INTO pisne VALUES (116, 'Třikrát hádej');
+INSERT INTO pisne VALUES (117, 'Výplata');
+INSERT INTO pisne VALUES (118, 'Občas to zvládám');
+INSERT INTO pisne VALUES (119, 'Nad čajem');
+INSERT INTO pisne VALUES (120, 'Záviš');
+INSERT INTO pisne VALUES (121, 'Co nás napadá');
+INSERT INTO pisne VALUES (122, 'Píšťalko keltská');
+INSERT INTO pisne VALUES (123, 'Holka z muk');
+INSERT INTO pisne VALUES (124, 'Kóta 8000');
+INSERT INTO pisne VALUES (125, 'Každou noc');
+INSERT INTO pisne VALUES (126, 'Taneček na konci');
+INSERT INTO pisne VALUES (127, 'V březnu čtyřicet šest');
+INSERT INTO pisne VALUES (128, 'Darebná');
+INSERT INTO pisne VALUES (129, 'Vojanda');
+INSERT INTO pisne VALUES (130, 'Zamykej maměnko');
+INSERT INTO pisne VALUES (131, 'Třikrát');
+INSERT INTO pisne VALUES (132, 'Krátká a dlouhá');
+INSERT INTO pisne VALUES (133, 'Teče voda všecka');
+INSERT INTO pisne VALUES (134, 'Svítej bože svítej');
+INSERT INTO pisne VALUES (135, 'Má panenko');
+INSERT INTO pisne VALUES (136, 'Bledušenka');
+INSERT INTO pisne VALUES (137, 'Na tom dole');
+INSERT INTO pisne VALUES (138, 'Košilenka');
+INSERT INTO pisne VALUES (139, 'Byla svatba byla');
+INSERT INTO pisne VALUES (140, 'Sluníčko zachodí');
+INSERT INTO pisne VALUES (141, 'Cukrářka');
+INSERT INTO pisne VALUES (142, 'Co se tam bělá');
+INSERT INTO pisne VALUES (143, 'Hrdina');
+INSERT INTO pisne VALUES (144, 'Hlavěnka');
+INSERT INTO pisne VALUES (145, 'Posekaná hlava');
+INSERT INTO pisne VALUES (146, 'V tej lomnickej věži');
+INSERT INTO pisne VALUES (147, 'Pravá ručka');
+INSERT INTO pisne VALUES (148, 'Na vrbenským krchově');
+INSERT INTO pisne VALUES (149, 'Damián (Highland Stream)');
+INSERT INTO pisne VALUES (150, 'Nechte žít malý zvířátka');
+INSERT INTO pisne VALUES (151, 'Tři přání');
+INSERT INTO pisne VALUES (152, 'Dobře mi');
+INSERT INTO pisne VALUES (153, 'Pod křížkem');
+INSERT INTO pisne VALUES (154, 'Je půl');
+INSERT INTO pisne VALUES (155, 'Slunko, vstávej');
+INSERT INTO pisne VALUES (156, 'Tak už to bývá');
+INSERT INTO pisne VALUES (157, 'Ukolébavka');
+INSERT INTO pisne VALUES (158, 'Noc byla mladá');
+INSERT INTO pisne VALUES (159, 'Spanilé jízdy');
+INSERT INTO pisne VALUES (160, 'Ty hudečku');
+INSERT INTO pisne VALUES (161, 'Spěchám odejít');
+INSERT INTO pisne VALUES (162, 'Vstávej má panenko');
+INSERT INTO pisne VALUES (163, 'Vy hvězdičky');
+INSERT INTO pisne VALUES (164, 'Ach ty holka má');
+INSERT INTO pisne VALUES (165, 'Okolo zlatý stoky');
+INSERT INTO pisne VALUES (166, 'Borovanský zvony');
+INSERT INTO pisne VALUES (167, 'Vychází zachází denice');
+INSERT INTO pisne VALUES (168, 'Když jsem šel okolo');
+INSERT INTO pisne VALUES (169, 'V klášteře koníčky kšírujou');
+INSERT INTO pisne VALUES (170, 'Čí je to políčko');
+INSERT INTO pisne VALUES (171, 'Jedeme cestičkou ouzkou');
+INSERT INTO pisne VALUES (172, 'Už sluníčko z hory vyšlo');
+INSERT INTO pisne VALUES (173, 'Kdyby mně tak bylo');
+INSERT INTO pisne VALUES (174, 'Čekalas mne');
+INSERT INTO pisne VALUES (175, 'V jesličkách');
+INSERT INTO pisne VALUES (176, 'Nápis na štítu domu');
+INSERT INTO pisne VALUES (177, 'Do jedné řeky...');
+INSERT INTO pisne VALUES (178, 'Můj život je vítr');
+INSERT INTO pisne VALUES (179, 'Svatý koně z Arranu');
+INSERT INTO pisne VALUES (180, 'Krásnou Pálavou');
+INSERT INTO pisne VALUES (181, 'Avalon');
+INSERT INTO pisne VALUES (182, 'V pravou chvíli');
+INSERT INTO pisne VALUES (183, 'Saan');
+INSERT INTO pisne VALUES (184, 'Dívka jménem Žil');
+INSERT INTO pisne VALUES (185, 'Never more');
+INSERT INTO pisne VALUES (186, 'Tak rád bych šel');
+INSERT INTO pisne VALUES (187, 'Nebeský penzion');
+INSERT INTO pisne VALUES (188, 'Křtiny');
+INSERT INTO pisne VALUES (189, 'Bošilecký zvony');
+INSERT INTO pisne VALUES (190, 'První testovací píseň');
+INSERT INTO pisne VALUES (191, 'Druhá testovací píseň');
+INSERT INTO pisne VALUES (192, 'Třetí destovací píseň');
+INSERT INTO pisne VALUES (193, 'píseň 1');
+INSERT INTO pisne VALUES (194, 'píseň 2');
+
+CREATE TABLE texty (
+  id int(11) NOT NULL auto_increment,
+  pisen int(11) NOT NULL default '0',
+  textpisne text NOT NULL,
+  PRIMARY KEY  (id),
+  UNIQUE KEY pisen (pisen)
+) TYPE=MyISAM;
+
+INSERT INTO texty VALUES (1, 9, 'Krajina\n1. Ani nevíš, jak tvé horké pusy bolí, 
+\n   krajino, krajino, \n   tváře tvé jsou jedna brázda polí, 
+\n   krajino, má krajino, \n   lišák měsíc ten se před nahotou schovává, 
+\n   a já zůstal s tebou jak strom bez větví, \n   krajino. 
+\n\nR: Král se projel s družinou a nad tebou krajino, \n   jak nad holkou nevinnou zůstal stát, 
+\n   písně deštěm ohraný na kamenný varhany, \n   zpíváš pozůstalým, co hledají majestát. 
+\n \n2. Slyším lesy, jak se rány seker bojí, \n   krajino, krajino, 
+\n   vidím louky, jak si černý kytky strojí, \n   krajino, má krajino, 
+\n   možná z nebe pro tebe pošlou velkej vůz, \n   jako zvíře padáš k nohám člověka, 
+\n   krajino. \n \nR: \n   Krajino, krajino, \n   smutná neveselá, 
+\n   kéž mi to pán bůh dá, \n   abys promluvila. \n');
+
+CREATE TABLE uzivatele (
+  id int(11) NOT NULL auto_increment,
+  prezdivka varchar(50) NOT NULL default '',
+  email varchar(50) NOT NULL default '',
+  heslo varchar(10) NOT NULL default '',
+  jeadmin tinyint(4) NOT NULL default '0',
+  pripomenuto datetime default NULL,
+  registracedokoncena tinyint(4) NOT NULL default '0',
+  jeblokovan tinyint(4) NOT NULL default '0',
+  PRIMARY KEY  (id)
+) TYPE=MyISAM;
+        
+  </pre>
+  </body></html>

@@ -1,0 +1,26 @@
+
+<%
+PocitadloSoubor = "pocitadlo.txt"
+set fsOBJ = Server.CreateObject("Scripting.FileSystemObject")
+
+If fsOBJ.FileExist (PocitadloSoubor) Then
+
+   set fsSOUB = fsOBJ.OpenTexFile (PocitadloSoubor. 1)
+   pocatecni Hodnota = fsSOUB.ReadAll
+   set fsSOUB = Nothing
+Else
+   set fsSOUB = fsOBJ.CreateTextfile (PocitadloSoubor)
+   PocatecniHodnota = 0
+   fsSOUB.Write PocatecniHodnota
+   set fsSOUB = Nothing
+End If
+
+AktualniHodnota = PocatecniHodnota + 1
+Response.Write <h1> & AktualniHodnota & </h1>
+
+set fsSOUB = fsOBJ.OpenTextFile (PocitadloSoubor, 2)
+fsSOUB.Write AktualniHodnota
+set fsSOUB = Nothing
+
+set fsOBJ = Nothing
+%>

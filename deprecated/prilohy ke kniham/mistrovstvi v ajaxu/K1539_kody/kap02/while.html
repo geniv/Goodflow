@@ -1,0 +1,47 @@
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>Použití cyklu while</title>
+
+    <script language="javascript">
+      function zobrazZpravu() 
+      {
+        var citac = 0, zakaznici = new Array(8);
+
+        zakaznici[0] = "Aneta";
+        zakaznici[1] = "Michal";
+        zakaznici[2] = "Martin";
+        zakaznici[3] = "Libor";
+        zakaznici[4] = "Jan";
+        zakaznici[5] = "Monika";
+        zakaznici[6] = "Jakub";
+        zakaznici[7] = "Tomáš";
+
+        while(zakaznici[citac] != "Monika" && citac < zakaznici.length - 1) {
+          citac++;
+        }
+
+
+        if(citac < zakaznici.length - 1){
+          document.getElementById('cilovyDiv').innerHTML = 
+          "Našel jsou Moniku, index " + citac;
+        }
+        else {
+          document.getElementById('cilovyDiv').innerHTML = 
+          "Nenašel jsem Moniku";
+        }
+      }
+    </script>
+
+  </head> 
+
+  <body onload="zobrazZpravu()">
+
+    <h1>Použití cyklu while</h1>
+
+    <div id="cilovyDiv">
+    </div>
+
+    </body>
+</html>
+

@@ -1,0 +1,1189 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!-- saved from url=(0064)http://interval.cz/clanky/tvorba-pristupnych-dynamickych-odkazu/ -->
+<?xml version='1.0' encoding='windows-1250'?><HTML lang=cs xml:lang="cs" 
+xmlns="http://www.w3.org/1999/xhtml"><HEAD><TITLE>Tvorba přístupných dynamických odkazů -- PHP -- Vývoj aplikací -- Interval.cz</TITLE>
+<META http-equiv=Content-Type content="text/html; charset=windows-1250">
+<META http-equiv=Content-language content=cs>
+<META http-equiv=Cache-control content=no-cache>
+<META http-equiv=Pragma content=no-cache>
+<META http-equiv=Expires content=-1>
+<META content=index,follow name=robots>
+<META content=index,follow,snippet,noarchive name=googlebot>
+<META 
+content="Určitě často při tvorbě webových aplikací používáte odkazy s mnoha doplňujícími parametry. V tomto článku si ukážeme, jak si tvorbu takových odkazů zjednodušit. Také si ukážeme způsob, jak obejít nepříjemné chování některých vyhledávačů, které obvykle ignorují část URL za otazníkem, čímž vaše stránky znevýhodňují." 
+name=description>
+<META content="PHP, Vývoj aplikací, Interval" name=keywords>
+<META content="49.1915, 16.626" name=ICBM>
+<META content=Interval.cz name=DC.Title>
+<META content=http://interval.cz name=DC.Identifier>
+<META content="(SCHEME=ISSN) 12128651" name=DC.Identifier>
+<META content=cs name=DC.Language>
+<META http-equiv=pics-label 
+content='(pics-1.1 "http://www.icra.org/ratingsv02.html" comment "ICRAonline EN v2.0" l gen true for "http://interval.cz" r (nz 1 vz 1 lz 1 oz 1 cz 1) "http://www.rsac.org/ratingsv01.html" l gen true for "http://interval.cz" r (n 0 s 0 v 0 l 0))'>
+<META http-equiv=imagetoolbar content=no>
+<META http-equiv=MSThemeCompatible content=no>
+<META content=true name=MSSmartTagsPreventParsing><LINK 
+href="http://interval.cz/favicon.ico" type=image/x-icon 
+rel="shortcut icon"><LINK 
+title="Interval.cz -- Tvorba přístupných dynamických odkazů -- (diskuse, Atom 0.3)" 
+href="http://export.interval.cz/?type=atom&amp;discussion=1832" 
+type=application/atom+xml rel=alternate><LINK 
+title="Interval.cz -- Tvorba přístupných dynamických odkazů -- (diskuse, RDF Site Summary 1.0)" 
+href="http://export.interval.cz/?type=rdf&amp;discussion=1832" 
+type=application/rdf+xml rel=alternate><LINK 
+title="Interval.cz -- Tvorba přístupných dynamických odkazů -- (diskuse, RSS 2.0)" 
+href="http://export.interval.cz/?type=rss&amp;discussion=1832" 
+type=application/rss+xml rel=alternate><LINK href="http://interval.cz" 
+rel=home><LINK href="http://interval.cz/search_ex.asp" rel=search><LINK 
+media=all 
+href="Tvorba přístupných dynamických odkazů -- PHP -- Vývoj aplikací -- Interval_cz_soubory/html4.css" 
+type=text/css rel=stylesheet><LINK media=all 
+href="Tvorba přístupných dynamických odkazů -- PHP -- Vývoj aplikací -- Interval_cz_soubory/interval-display.css" 
+type=text/css rel=stylesheet><LINK media=print 
+href="Tvorba přístupných dynamických odkazů -- PHP -- Vývoj aplikací -- Interval_cz_soubory/interval-print.css" 
+type=text/css rel=stylesheet>
+<META content="MSHTML 6.00.2800.1106" name=GENERATOR></HEAD>
+<BODY class="interval interval-articles" id=article-1832>
+<DIV class=audits><!-- TOPList.cz -->
+<SCRIPT type=text/javascript>
+<!-- <![CDATA[
+document.write ("<a href='http://www.toplist.cz'><img src='http://www.toplist.cz/dot.asp?id=33617&amp;http="+escape(document.referrer)+"&amp;wi="+escape(window.screen.width)+"&amp;he="+escape(window.screen.height)+"&amp;cd="+escape(window.screen.colorDepth)+"&amp;t="+escape(document.title)+"' style='border: 0; width: 1px; height: 1px' alt='.' /></a>");
+//]]> -->
+</SCRIPT>
+<NOSCRIPT>
+<DIV><A href="http://www.toplist.cz/"><IMG 
+style="BORDER-RIGHT: 0px; BORDER-TOP: 0px; BORDER-LEFT: 0px; WIDTH: 1px; BORDER-BOTTOM: 0px; HEIGHT: 1px" 
+alt=. 
+src="Tvorba přístupných dynamických odkazů -- PHP -- Vývoj aplikací -- Interval_cz_soubory/dot.gif"></A></DIV></NOSCRIPT><!-- TOPList.cz - konec --><!-- iAudit --><IMG 
+style="BORDER-RIGHT: 0px; BORDER-TOP: 0px; BORDER-LEFT: 0px; WIDTH: 1px; BORDER-BOTTOM: 0px; HEIGHT: 1px" 
+alt=. 
+src="Tvorba přístupných dynamických odkazů -- PHP -- Vývoj aplikací -- Interval_cz_soubory/dot.idot.gif"> 
+<!-- iAudit - konec --><!-- (C)2005 Gemius SA - gemiusAudience  / Ostatni -->
+<SCRIPT type=text/javascript><!--
+	
+	gemius_identifier = new String('bQzrQkrzLOWoKbJeudlKguTS7OndUMSqxutbeFviWMv.47');
+	
+	gemius_href=new String(document.location);
+	if (document.referrer) { gemius_ref = new String(document.referrer); } else { gemius_ref = ""; }
+	if(typeof(Error)!='undefined') eval("try { if (typeof(top.document.referrer)=='string') { gemius_ref = top.document.referrer } } catch(gemius_ex) {}");
+	iname = new String('id='+gemius_identifier+';ref='+escape(gemius_ref.substring(0,299))+';href='+escape(gemius_href.substring(0,299))+';');
+	document.write('<iframe src="http://spir.hit.gemius.pl/gemiusaudience.html" name="'+iname+'" width="1" height="1" frameborder="0" scrolling="no"></iframe>');
+	//-->
+	</SCRIPT>
+</DIV>
+<DIV id=advertising-leader-board><!-- StartKód: adarbo2.bbmedia.cz 3.1 Nestandard  Interval(87) / cely web(1) / leaderboard 750x100(1) / nestandard(24) -->
+<SCRIPT type=text/javascript>
+	/* <![CDATA[ */
+	var bbs=screen,bbn=navigator,bbh;bbh='&ubl='+bbn.browserLanguage+'&ucc='+bbn.cpuClass+'&ucd='+bbs.colorDepth+'&uce='+bbn.cookieEnabled+'&udx='+bbs.deviceXDPI+'&udy='+bbs.deviceYDPI+'&usl='+bbn.systemLanguage+'&uje='+bbn.javaEnabled()+'&uah='+bbs.availHeight+'&uaw='+bbs.availWidth+'&ubd='+bbs.bufferDepth+'&uhe='+bbs.height+'&ulx='+bbs.logicalXDPI+'&uly='+bbs.logicalYDPI+'&use='+bbs.fontSmoothingEnabled+'&uto='+(new Date()).getTimezoneOffset()+'&uti='+(new Date()).getTime()+'&uui='+bbs.updateInterval+'&uul='+bbn.userLanguage+'&uwi='+bbs.width;
+	document.write("<scr"+"ipt  language='JavaScript' type='text/javascript' src='http://adarbo2.bbmedia.cz/please/showit/87/1/1/24/?typkodu=non-standard"+bbh+"&alttext=0&border=0&bgcolor=FFFFFF&text=000000&link=0000FF&target=_blank&bust="+Math.random()+"'>");
+	document.write("<"+"\/scr"+"ipt>");
+	/* ]]> */
+	</SCRIPT>
+<!-- KonecKód: adarbo2.bbmedia.cz 3.1 Nestandard --></DIV>
+<DIV id=page-header>
+<DIV id=interval-logo>
+<H1 title="Interval.cz - webdesign a e-komerce denně (logo &amp; index link)"><A 
+href="http://interval.cz/">Interval.cz<SPAN></SPAN></A></H1></DIV>
+<DIV id=advertising-page-header><!-- StartKód: adarbo2.bbmedia.cz 3.1 Nestandard  Interval(87) / cely web(1) / horni468x60(2) / nestandard(24) -->
+<SCRIPT type=text/javascript>
+	/* <![CDATA[ */
+	var bbs=screen,bbn=navigator,bbh;bbh='&ubl='+bbn.browserLanguage+'&ucc='+bbn.cpuClass+'&ucd='+bbs.colorDepth+'&uce='+bbn.cookieEnabled+'&udx='+bbs.deviceXDPI+'&udy='+bbs.deviceYDPI+'&usl='+bbn.systemLanguage+'&uje='+bbn.javaEnabled()+'&uah='+bbs.availHeight+'&uaw='+bbs.availWidth+'&ubd='+bbs.bufferDepth+'&uhe='+bbs.height+'&ulx='+bbs.logicalXDPI+'&uly='+bbs.logicalYDPI+'&use='+bbs.fontSmoothingEnabled+'&uto='+(new Date()).getTimezoneOffset()+'&uti='+(new Date()).getTime()+'&uui='+bbs.updateInterval+'&uul='+bbn.userLanguage+'&uwi='+bbs.width;
+	document.write("<scr"+"ipt  type='text/javascript' src='http://adarbo2.bbmedia.cz/please/showit/87/1/2/24/?typkodu=non-standard"+bbh+"&alttext=0&border=0&bgcolor=FFFFFF&text=000000&link=0000FF&target=_top&bust="+Math.random()+"'>");
+	document.write("<"+"\/scr"+"ipt>");
+	/* ]]> */
+	</SCRIPT>
+<!-- KonecKód: adarbo2.bbmedia.cz 3.1 Nestandard --></DIV>
+<DIV class=page-maker>&nbsp;</DIV></DIV>
+<DIV id=page-topmenu>
+<H2 class=textversion>Navigace</H2><!-- cached 09-15-62-hlavni_menu_with_ascii.txt --><!-- ,Vývoj aplikací ~~ ,,PHP ~~ , -->
+<DIV id=page-mainmenu>
+<H3 class=textversion>Hlavní menu</H3>
+<UL>
+  <LI class=first><A href="http://interval.cz/">Titulka</A></LI>
+  <LI><A href="http://interval.cz/e-komerce/">E-komerce</A></LI>
+  <LI><A href="http://interval.cz/webdesign/">Webdesign</A></LI>
+  <LI class=selected><A href="http://interval.cz/vyvoj-aplikaci/">Vývoj 
+  aplikací</A></LI>
+  <LI><A href="http://interval.cz/nastroje/">Nástroje</A></LI>
+  <LI><A href="http://interval.cz/magazin/">Magazín</A></LI>
+  <LI class="right selected"><A 
+  href="http://interval.inshop.cz/">Knihkupectví</A></LI>
+  <LI class=right><A href="http://interforum.interval.cz/">Interforum</A></LI>
+  <LI class=right><A 
+href="http://interzen.interval.cz/">Interzen</A></LI></UL></DIV>
+<DIV id=page-mainmenu-maker>&nbsp;</DIV>
+<DIV id=page-mainsubmenu>
+<H3 class=textversion>Submenu</H3>
+<UL>
+  <LI><A href="http://interval.cz/vyvoj-aplikaci/j2me/">J2ME</A></LI>
+  <LI><A href="http://interval.cz/vyvoj-aplikaci/asp/">ASP</A></LI>
+  <LI><A href="http://interval.cz/vyvoj-aplikaci/net/">.NET</A></LI>
+  <LI class=selected><A 
+  href="http://interval.cz/vyvoj-aplikaci/php/">PHP</A></LI>
+  <LI><A 
+href="http://interval.cz/vyvoj-aplikaci/javascript/">JavaScript</A></LI>
+  <LI><A href="http://interval.cz/vyvoj-aplikaci/xml/">XML</A></LI>
+  <LI><A href="http://interval.cz/vyvoj-aplikaci/java/">Java</A></LI>
+  <LI><A href="http://interval.cz/vyvoj-aplikaci/perl-cgi/">PERL/CGI</A></LI>
+  <LI><A href="http://interval.cz/vyvoj-aplikaci/databaze/">Databáze</A></LI>
+  <LI><A 
+href="http://interval.cz/vyvoj-aplikaci/bezpecnost/">Bezpečnost</A></LI>
+  <LI><A 
+href="http://interval.cz/vyvoj-aplikaci/analyzy/">Analýzy</A></LI></UL><SPAN 
+id=page-mainsubmenu-maker>&nbsp;</SPAN></DIV><!-- cas behu menu = 0,015625 --></DIV>
+<DIV id=page-body>
+<DIV id=page-left>
+<DIV id=article>
+<H2>Tvorba přístupných dynamických odkazů</H2>
+<P id=prepend>Určitě často při tvorbě webových aplikací používáte odkazy s mnoha 
+doplňujícími parametry. V&nbsp;tomto článku si ukážeme, jak si tvorbu takových 
+odkazů zjednodušit. Také si ukážeme způsob, jak obejít nepříjemné chování 
+některých vyhledávačů, které obvykle ignorují část URL za otazníkem, čímž vaše 
+stránky znevýhodňují.</P>
+<DIV class="advertising-bigsquare-outer noprint">
+<DIV class=advertising-bigsquare-inner style="WIDTH: 300px"><!-- StartKód: adarbo2.bbmedia.cz 3.1 Nestandard  Interval(87) / cely web(1) / ctverec250x250(8) / nestandard(24) -->
+<SCRIPT type=text/javascript>
+	/* <![CDATA[ */
+	var bbs=screen,bbn=navigator,bbh;bbh='&ubl='+bbn.browserLanguage+'&ucc='+bbn.cpuClass+'&ucd='+bbs.colorDepth+'&uce='+bbn.cookieEnabled+'&udx='+bbs.deviceXDPI+'&udy='+bbs.deviceYDPI+'&usl='+bbn.systemLanguage+'&uje='+bbn.javaEnabled()+'&uah='+bbs.availHeight+'&uaw='+bbs.availWidth+'&ubd='+bbs.bufferDepth+'&uhe='+bbs.height+'&ulx='+bbs.logicalXDPI+'&uly='+bbs.logicalYDPI+'&use='+bbs.fontSmoothingEnabled+'&uto='+(new Date()).getTimezoneOffset()+'&uti='+(new Date()).getTime()+'&uui='+bbs.updateInterval+'&uul='+bbn.userLanguage+'&uwi='+bbs.width;
+	document.write("<scr"+"ipt  type='text/javascript' src='http://adarbo2.bbmedia.cz/please/showit/87/1/8/24/?typkodu=non-standard"+bbh+"&alttext=0&border=0&bgcolor=FFFFFF&text=000000&link=0000FF&target=_top&bust="+Math.random()+"'>");
+	document.write("<"+"\/scr"+"ipt>");
+	/* ]]> */
+	</SCRIPT>
+<!-- KonecKód: adarbo2.bbmedia.cz 3.1 Nestandard --></DIV></DIV>
+<H3>Jak na odkazy?</H3>
+<P>Pro tento účel použijeme jednoduchou třídu <SAMP>tUrl</SAMP> (ke stažení v <A 
+href="http://podklady.interval.cz/peprnicek/213/url.class.zip">archivu</A>), 
+která bude mít tyto základní funkce:</P>
+<DIV class=list>
+<UL>
+  <LI>Vytvoří <ACRONYM title="část url za otazníkem">QUERY_STRING</ACRONYM> z 
+  parametrů zadaných v asociativním poli. 
+  <LI>Do QUERY_STRING přidá "globální proměnné" (může to být například 
+  identifikátor session SID). 
+  <LI>Pokud hodnoty parametrů obsahují <ACRONYM 
+  title="znak mezery, +, =, ?, písmena s diakritikou...">nebezpečné 
+  znaky</ACRONYM>, které nemohou být obsaženy v url, převede je na escape 
+  sekvence. </LI></UL></DIV>
+<P>Nejprve jednoduchá ukázka:</P>
+<DIV class=sample>&lt;?php<BR><SPAN class=comment># vloží soubor s 
+třídou</SPAN><BR>include 'url.class.php';<BR><SPAN class=comment># vytvoří 
+instanci třídy</SPAN><BR>$url = new tUrl;<BR><SPAN class=comment># nastaví jméno 
+skriptu</SPAN><BR>$url-&gt;script_name = 'index.php';<BR><SPAN class=comment># 
+nastaví globální proměnné</SPAN><BR>$url-&gt;globals['uzivatel'] = 
+'franta';<BR><BR><SPAN class=comment>#samotná tvorba odkazů</SPAN><BR>$href = 
+$url-&gt;create(<BR>&nbsp;&nbsp;array(<BR>&nbsp;&nbsp;&nbsp;&nbsp;'akce' =&gt; 
+'ukaž ceník',<BR>&nbsp;&nbsp;&nbsp;&nbsp;'kategorie' =&gt; 
+1<BR>&nbsp;&nbsp;)<BR>);<BR><SPAN class=comment># promenna $href obsahuje 
+řetězec</SPAN><BR><SPAN class=comment># 
+index.php?uzivatel=franta&amp;amp;akce=uka%9E+cen%EDk&amp;amp;kategorie=1</SPAN><BR>?&gt;<BR>&lt;a 
+href="&lt;?php echo $href;?&gt;"&gt;Odkaz&lt;/a&gt;&nbsp;&nbsp; </DIV>
+<P>Třída <SAMP>tUrl</SAMP> bude mít jednu metodu a několik proměnných.</P>
+<H4>Metody</H4>
+<DIV class=list>
+<DL>
+  <DT>create(array promenne, [string skript]) 
+  <DD>Vytvoří url tím, že spoji cestu ke skriptu, název skriptu a parametry s 
+  globálními parametry. První parametr je asociativní pole. Index pole určuje 
+  jméno proměnné a jeho hodnota hodnotu proměnné:<BR>
+  <DIV class=sample>$url = new tUrl;<BR>$param = array(<BR>&nbsp;&nbsp;'a' =&gt; 
+  123,<BR>&nbsp;&nbsp;'text' =&gt; 'Hello :)');<BR>echo $url-&gt;create($param); 
+  </DIV>Výstup bude vypadat přibližně takto: 
+  <SAMP>?a=123&amp;amp;amp;text=Hello+%3A%29</SAMP>. </DD></DL></DIV>
+<H4>Proměnné</H4>
+<DIV class=list>
+<DL>
+  <DT>globals[] 
+  <DD>Globální parametry, které se přidávají ke každé url. Můžete zde zadat 
+  například uživatelské id, skin webu nebo, pokud jej používáte, session 
+  identifikátor SID. 
+  <DT>argument_separator 
+  <DD>Definuje oddělovač parametrů url, standardně je nastaven na 
+  <SAMP>&amp;amp;</SAMP>. 
+  <DT>argument_associate 
+  <DD>Definuje řetezec, který v url odděluje název proměnné a její hodnotu, 
+  standardně je nastaven na <SAMP>=</SAMP>. 
+  <DT>question 
+  <DD>Definuje řetezec, který v url odděluje název skriptu a jeho parametry, 
+  standardně je nastaven na <SAMP>?</SAMP>. 
+  <DT>script_name 
+  <DD>Obsahuje jméno výchozího skriptu. 
+  <DT>script_path 
+  <DD>Obsahuje cestu ke skriptu/skriptům. Toto je potřeba hlavně v případě, kdy 
+  používáte pro přenos proměnných způsob 
+  <SAMP>http://www.server.cz/skript.php/promenna/hodnota/promenna2 ...</SAMP> 
+  </DD></DL></DIV>
+<H3>Jak na vyhledávače?</H3>
+<P>Některé fulltextové vyhledávače ignorují v url část za otazníkem. Pokud tedy 
+máte celý web ovládaný jedním skriptem, při troše štěstí zaindexují pouze 
+vstupní stránku <SAMP>index.php</SAMP>, ale už se nazaindexuje 
+<SAMP>index.php?ukaz=clanek&amp;id=123</SAMP>, protože ten bude vyhledávač 
+považovat za <SAMP>index.php</SAMP>. Jedním ze způsobů, jak toto obejít, je 
+oddělení parametrů skriptu lomítkem <SAMP>/</SAMP>, takže odkaz bude vypadat 
+takto: <SAMP>index.php/ukaz/clanek/id/123</SAMP>. Toto by už měl zaindexovat 
+každý vyhledávač.</P>
+<H4>Jak vytvořit takový odkaz?</H4>
+<P>Pokud použijete pro tvorbu odkazů třídu <SAMP>tUrl</SAMP>, stačí přidat 
+několik řádků kódu:</P>
+<DIV class=sample>$url = new tUrl;<BR><SPAN class=comment># nahradí "&amp;amp;" 
+znakem "/"&nbsp;&nbsp;</SPAN><BR>$url-&gt;argument_separator='/' <BR><SPAN 
+class=comment># nahradí "=" znakem 
+"/"&nbsp;&nbsp;</SPAN><BR>$url-&gt;argument_associate='/'<BR><SPAN 
+class=comment># nahradí "?" znakem 
+"/"&nbsp;&nbsp;</SPAN><BR>$url-&gt;question='/'<BR><SPAN class=comment># nastaví 
+název skriptu </SPAN><BR>$url-&gt;script_name='index.php'<BR><BR>$param = 
+array(<BR>&nbsp;&nbsp;'a' =&gt; 123,<BR>&nbsp;&nbsp;'text' =&gt; 'Hello 
+:)');<BR>echo $url-&gt;create($param); </DIV>
+<P>Výstup bude vypadat takto: 
+<SAMP>index.php/a/123/text/Hello+%3A%29</SAMP>.</P>
+<H4>Dekódování proměnných</H4>
+<P>Pokud zavoláte skript tímto odkazem, nebudou předány proměnné klasickým 
+způsobem, ale budou předány vcelku, v proměnné 
+<SAMP>$_SERVER['PATH_INFO']</SAMP>. Abyste mohli proměnné normálně používat, 
+stačí zavolat funkci <SAMP>importPathInfoVars()</SAMP>, která je ve stejném 
+souboru jako třída tUrl. Po zavolání funkce převede PATH_INFO do pole $_REQUEST 
+tak, jako by se parametry předávaly normálním způsobem.</P>
+<DIV class=refer>
+<H3>Související články</H3>
+<UL>
+  <LI><A title="Marek, Ondra: Jak se dostat na Yahoo!, Google a PPC vyhledávače" 
+  href="http://interval.cz/clanek.asp?article=1189">Jak se dostat na Yahoo!, 
+  Google a PPC vyhledávače</A> 
+  <LI><A title="Málek, Vilém: Neviditelný web a jiné pohádky" 
+  href="http://interval.cz/clanek.asp?article=1621">Neviditelný web a jiné 
+  pohádky</A> 
+  <LI><A 
+  title="Prokop, Marek: Optimalizace stránek pro vyhledávací a indexovací služby" 
+  href="http://interval.cz/clanek.asp?article=727">Optimalizace stránek pro 
+  vyhledávací a indexovací služby</A> 
+  <LI><A 
+  title="Kučera, Miroslav: Způsoby propagace webových stránek – vyhledávací servery" 
+  href="http://interval.cz/clanek.asp?article=14">Způsoby propagace webových 
+  stránek – vyhledávací servery</A> </LI></UL></DIV>
+<DIV id=article-author><A 
+href="http://interval.cz/autori/peprnicek-vit/">Peprníček, Vít</A> 
+(2.&nbsp;1.&nbsp;2003) </DIV>
+<DIV class=noprint id=article-discussion><!-- cached 1832-tabulka-tvorba-pristupnych-dynamickych-odkazu.txt -->
+<DIV id=article-discussion-index>
+<FORM action=http://interval.cz/discussion-read.asp?disc=1832 method=post>
+<TABLE cellSpacing=0>
+  <TBODY>
+  <TR>
+    <TH colSpan=4><A title="Tvorba přístupných dynamických odkazů (diskuse)" 
+      href="http://interval.cz/clanky/tvorba-pristupnych-dynamickych-odkazu/diskuse/">Tvorba 
+      přístupných dynamických odkazů (diskuse)</A></TH></TR>
+  <TR>
+    <TD class=checkbox><INPUT title="0 10129" type=checkbox value=1 
+      name=checkboxDISKUZE10129></TD>
+    <TD class=date>2003-01-02 01:53:29</TD>
+    <TD class=sender>Marek Prokop</TD>
+    <TD class=subject>Vyhledavače</TD></TR>
+  <TR>
+    <TD class=checkbox><INPUT title="0 10131" type=checkbox value=1 
+      name=checkboxDISKUZE10131></TD>
+    <TD class=date>2003-01-02 06:33:05</TD>
+    <TD class=sender>Jiří Sekera</TD>
+    <TD class=subject>Proč to dělat jednoduše, když to jde sl...</TD></TR>
+  <TR>
+    <TD class=checkbox><INPUT title="1 10134" type=checkbox value=1 
+      name=checkboxDISKUZE10134></TD>
+    <TD class=date>2003-01-02 08:58:31</TD>
+    <TD class=sender>Michal Kubeček</TD>
+    <TD class=subject><IMG class=line alt=. 
+      src="Tvorba přístupných dynamických odkazů -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Tvorba přístupných dynamických odkazů -- PHP -- Vývoj aplikací -- Interval_cz_soubory/line1.png">Proč 
+      to dělat jednoduše, když to jde s...</TD></TR>
+  <TR>
+    <TD class=checkbox><INPUT title="2 10188" type=checkbox value=1 
+      name=checkboxDISKUZE10188></TD>
+    <TD class=date>2003-01-03 15:28:52</TD>
+    <TD class=sender>Jiří Sekera</TD>
+    <TD class=subject><IMG class=line alt=. 
+      src="Tvorba přístupných dynamických odkazů -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Tvorba přístupných dynamických odkazů -- PHP -- Vývoj aplikací -- Interval_cz_soubory/line2.png"><IMG 
+      class=line alt=. 
+      src="Tvorba přístupných dynamických odkazů -- PHP -- Vývoj aplikací -- Interval_cz_soubory/line1.png">Proč 
+      to dělat jednoduše, když to jde...</TD></TR>
+  <TR>
+    <TD class=checkbox><INPUT title="3 10190" type=checkbox value=1 
+      name=checkboxDISKUZE10190></TD>
+    <TD class=date>2003-01-03 16:44:47</TD>
+    <TD class=sender>Michal Kubeček</TD>
+    <TD class=subject><IMG class=line alt=. 
+      src="Tvorba přístupných dynamických odkazů -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Tvorba přístupných dynamických odkazů -- PHP -- Vývoj aplikací -- Interval_cz_soubory/line2.png"><IMG 
+      class=line alt=. 
+      src="Tvorba přístupných dynamických odkazů -- PHP -- Vývoj aplikací -- Interval_cz_soubory/line2.png"><IMG 
+      class=line alt=. 
+      src="Tvorba přístupných dynamických odkazů -- PHP -- Vývoj aplikací -- Interval_cz_soubory/line1.png">Proč 
+      to dělat jednoduše, když to jde...</TD></TR>
+  <TR>
+    <TD class=checkbox><INPUT title="3 10191" type=checkbox value=1 
+      name=checkboxDISKUZE10191></TD>
+    <TD class=date>2003-01-03 17:11:21</TD>
+    <TD class=sender>Vit Peprnicek</TD>
+    <TD class=subject><IMG class=line alt=. 
+      src="Tvorba přístupných dynamických odkazů -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Tvorba přístupných dynamických odkazů -- PHP -- Vývoj aplikací -- Interval_cz_soubory/line2.png"><IMG 
+      class=line alt=. 
+      src="Tvorba přístupných dynamických odkazů -- PHP -- Vývoj aplikací -- Interval_cz_soubory/line2.png"><IMG 
+      class=line alt=. 
+      src="Tvorba přístupných dynamických odkazů -- PHP -- Vývoj aplikací -- Interval_cz_soubory/line3.png">Proč 
+      to dělat jednoduše, když to jde...</TD></TR>
+  <TR>
+    <TD class=checkbox><INPUT title="4 10193" type=checkbox value=1 
+      name=checkboxDISKUZE10193></TD>
+    <TD class=date>2003-01-03 19:15:15</TD>
+    <TD class=sender>Jiří Sekera</TD>
+    <TD class=subject><IMG class=line alt=. 
+      src="Tvorba přístupných dynamických odkazů -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Tvorba přístupných dynamických odkazů -- PHP -- Vývoj aplikací -- Interval_cz_soubory/line2.png"><IMG 
+      class=line alt=. 
+      src="Tvorba přístupných dynamických odkazů -- PHP -- Vývoj aplikací -- Interval_cz_soubory/line2.png"><IMG 
+      class=line alt=. 
+      src="Tvorba přístupných dynamických odkazů -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Tvorba přístupných dynamických odkazů -- PHP -- Vývoj aplikací -- Interval_cz_soubory/line1.png">Proč 
+      to dělat jednoduše, když to jd...</TD></TR>
+  <TR>
+    <TD class=checkbox><INPUT title="5 10200" type=checkbox value=1 
+      name=checkboxDISKUZE10200></TD>
+    <TD class=date>2003-01-03 21:00:14</TD>
+    <TD class=sender>Vit Peprnicek</TD>
+    <TD class=subject><IMG class=line alt=. 
+      src="Tvorba přístupných dynamických odkazů -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Tvorba přístupných dynamických odkazů -- PHP -- Vývoj aplikací -- Interval_cz_soubory/line2.png"><IMG 
+      class=line alt=. 
+      src="Tvorba přístupných dynamických odkazů -- PHP -- Vývoj aplikací -- Interval_cz_soubory/line2.png"><IMG 
+      class=line alt=. 
+      src="Tvorba přístupných dynamických odkazů -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Tvorba přístupných dynamických odkazů -- PHP -- Vývoj aplikací -- Interval_cz_soubory/line2.png"><IMG 
+      class=line alt=. 
+      src="Tvorba přístupných dynamických odkazů -- PHP -- Vývoj aplikací -- Interval_cz_soubory/line3.png">Proč 
+      to dělat jednoduše, když to j...</TD></TR>
+  <TR>
+    <TD class=checkbox><INPUT title="4 10194" type=checkbox value=1 
+      name=checkboxDISKUZE10194></TD>
+    <TD class=date>2003-01-03 20:10:34</TD>
+    <TD class=sender>Michal Kubeček</TD>
+    <TD class=subject><IMG class=line alt=. 
+      src="Tvorba přístupných dynamických odkazů -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Tvorba přístupných dynamických odkazů -- PHP -- Vývoj aplikací -- Interval_cz_soubory/line2.png"><IMG 
+      class=line alt=. 
+      src="Tvorba přístupných dynamických odkazů -- PHP -- Vývoj aplikací -- Interval_cz_soubory/line2.png"><IMG 
+      class=line alt=. 
+      src="Tvorba přístupných dynamických odkazů -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Tvorba přístupných dynamických odkazů -- PHP -- Vývoj aplikací -- Interval_cz_soubory/line3.png">Proč 
+      to dělat jednoduše, když to jd...</TD></TR>
+  <TR>
+    <TD class=checkbox><INPUT title="1 10147" type=checkbox value=1 
+      name=checkboxDISKUZE10147></TD>
+    <TD class=date>2003-01-02 12:24:50</TD>
+    <TD class=sender>Jméno a příjmení</TD>
+    <TD class=subject><IMG class=line alt=. 
+      src="Tvorba přístupných dynamických odkazů -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Tvorba přístupných dynamických odkazů -- PHP -- Vývoj aplikací -- Interval_cz_soubory/line1.png">Proč 
+      to dělat jednoduše, když to jde s...</TD></TR>
+  <TR>
+    <TD class=checkbox><INPUT title="2 10157" type=checkbox value=1 
+      name=checkboxDISKUZE10157></TD>
+    <TD class=date>2003-01-02 23:12:17</TD>
+    <TD class=sender>jakub</TD>
+    <TD class=subject><IMG class=line alt=. 
+      src="Tvorba přístupných dynamických odkazů -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Tvorba přístupných dynamických odkazů -- PHP -- Vývoj aplikací -- Interval_cz_soubory/line2.png"><IMG 
+      class=line alt=. 
+      src="Tvorba přístupných dynamických odkazů -- PHP -- Vývoj aplikací -- Interval_cz_soubory/line1.png">Proč 
+      to dělat jednoduše, když to jde...</TD></TR>
+  <TR>
+    <TD class=checkbox><INPUT title="3 10172" type=checkbox value=1 
+      name=checkboxDISKUZE10172></TD>
+    <TD class=date>2003-01-03 10:22:07</TD>
+    <TD class=sender>Vit Peprnicek</TD>
+    <TD class=subject><IMG class=line alt=. 
+      src="Tvorba přístupných dynamických odkazů -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Tvorba přístupných dynamických odkazů -- PHP -- Vývoj aplikací -- Interval_cz_soubory/line2.png"><IMG 
+      class=line alt=. 
+      src="Tvorba přístupných dynamických odkazů -- PHP -- Vývoj aplikací -- Interval_cz_soubory/line2.png"><IMG 
+      class=line alt=. 
+      src="Tvorba přístupných dynamických odkazů -- PHP -- Vývoj aplikací -- Interval_cz_soubory/line3.png">Proč 
+      to dělat jednoduše, když to jde...</TD></TR>
+  <TR>
+    <TD class=checkbox><INPUT title="4 10198" type=checkbox value=1 
+      name=checkboxDISKUZE10198></TD>
+    <TD class=date>2003-01-03 20:52:29</TD>
+    <TD class=sender>jakub</TD>
+    <TD class=subject><IMG class=line alt=. 
+      src="Tvorba přístupných dynamických odkazů -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Tvorba přístupných dynamických odkazů -- PHP -- Vývoj aplikací -- Interval_cz_soubory/line2.png"><IMG 
+      class=line alt=. 
+      src="Tvorba přístupných dynamických odkazů -- PHP -- Vývoj aplikací -- Interval_cz_soubory/line2.png"><IMG 
+      class=line alt=. 
+      src="Tvorba přístupných dynamických odkazů -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Tvorba přístupných dynamických odkazů -- PHP -- Vývoj aplikací -- Interval_cz_soubory/line3.png">Proč 
+      to dělat jednoduše, když to jd...</TD></TR>
+  <TR>
+    <TD class=checkbox><INPUT title="2 22308" type=checkbox value=1 
+      name=checkboxDISKUZE22308></TD>
+    <TD class=date>2003-12-23 03:19:55</TD>
+    <TD class=sender>Marek Vidtman</TD>
+    <TD class=subject><IMG class=line alt=. 
+      src="Tvorba přístupných dynamických odkazů -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Tvorba přístupných dynamických odkazů -- PHP -- Vývoj aplikací -- Interval_cz_soubory/line2.png"><IMG 
+      class=line alt=. 
+      src="Tvorba přístupných dynamických odkazů -- PHP -- Vývoj aplikací -- Interval_cz_soubory/line3.png">Proč 
+      to dělat jednoduše, když to jde...</TD></TR>
+  <TR>
+    <TD class=checkbox><INPUT title="1 10151" type=checkbox value=1 
+      name=checkboxDISKUZE10151></TD>
+    <TD class=date>2003-01-02 15:38:32</TD>
+    <TD class=sender>Roman Pichlík</TD>
+    <TD class=subject><IMG class=line alt=. 
+      src="Tvorba přístupných dynamických odkazů -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Tvorba přístupných dynamických odkazů -- PHP -- Vývoj aplikací -- Interval_cz_soubory/line1.png">Proč 
+      to dělat jednoduše, když to jde s...</TD></TR>
+  <TR>
+    <TD class=checkbox><INPUT title="2 10152" type=checkbox value=1 
+      name=checkboxDISKUZE10152></TD>
+    <TD class=date>2003-01-02 16:53:29</TD>
+    <TD class=sender>Ondrej Ivanic</TD>
+    <TD class=subject><IMG class=line alt=. 
+      src="Tvorba přístupných dynamických odkazů -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Tvorba přístupných dynamických odkazů -- PHP -- Vývoj aplikací -- Interval_cz_soubory/line2.png"><IMG 
+      class=line alt=. 
+      src="Tvorba přístupných dynamických odkazů -- PHP -- Vývoj aplikací -- Interval_cz_soubory/line3.png">Proč 
+      to dělat jednoduše, když to jde...</TD></TR>
+  <TR>
+    <TD class=checkbox><INPUT title="3 10166" type=checkbox value=1 
+      name=checkboxDISKUZE10166></TD>
+    <TD class=date>2003-01-03 07:15:18</TD>
+    <TD class=sender>Roman Pichlík</TD>
+    <TD class=subject><IMG class=line alt=. 
+      src="Tvorba přístupných dynamických odkazů -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Tvorba přístupných dynamických odkazů -- PHP -- Vývoj aplikací -- Interval_cz_soubory/line2.png"><IMG 
+      class=line alt=. 
+      src="Tvorba přístupných dynamických odkazů -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Tvorba přístupných dynamických odkazů -- PHP -- Vývoj aplikací -- Interval_cz_soubory/line3.png">Proč 
+      to dělat jednoduše, když to jde...</TD></TR>
+  <TR>
+    <TD class=checkbox><INPUT title="0 10132" type=checkbox value=1 
+      name=checkboxDISKUZE10132></TD>
+    <TD class=date>2003-01-02 08:36:54</TD>
+    <TD class=sender>Lachtan</TD>
+    <TD class=subject>index.php?</TD></TR>
+  <TR>
+    <TD class=checkbox><INPUT title="1 10133" type=checkbox value=1 
+      name=checkboxDISKUZE10133></TD>
+    <TD class=date>2003-01-02 08:54:02</TD>
+    <TD class=sender>Jméno a příjmení</TD>
+    <TD class=subject><IMG class=line alt=. 
+      src="Tvorba přístupných dynamických odkazů -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Tvorba přístupných dynamických odkazů -- PHP -- Vývoj aplikací -- Interval_cz_soubory/line1.png">index.php?</TD></TR>
+  <TR>
+    <TD class=checkbox><INPUT title="2 10135" type=checkbox value=1 
+      name=checkboxDISKUZE10135></TD>
+    <TD class=date>2003-01-02 09:00:00</TD>
+    <TD class=sender>Michal Kubeček</TD>
+    <TD class=subject><IMG class=line alt=. 
+      src="Tvorba přístupných dynamických odkazů -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Tvorba přístupných dynamických odkazů -- PHP -- Vývoj aplikací -- Interval_cz_soubory/line2.png"><IMG 
+      class=line alt=. 
+      src="Tvorba přístupných dynamických odkazů -- PHP -- Vývoj aplikací -- Interval_cz_soubory/line1.png">index.php?</TD></TR>
+  <TR>
+    <TD class=checkbox><INPUT title="2 10136" type=checkbox value=1 
+      name=checkboxDISKUZE10136></TD>
+    <TD class=date>2003-01-02 09:01:24</TD>
+    <TD class=sender>Lachtan</TD>
+    <TD class=subject><IMG class=line alt=. 
+      src="Tvorba přístupných dynamických odkazů -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Tvorba přístupných dynamických odkazů -- PHP -- Vývoj aplikací -- Interval_cz_soubory/line2.png"><IMG 
+      class=line alt=. 
+      src="Tvorba přístupných dynamických odkazů -- PHP -- Vývoj aplikací -- Interval_cz_soubory/line3.png">index.php?</TD></TR>
+  <TR>
+    <TD class=checkbox><INPUT title="3 10138" type=checkbox value=1 
+      name=checkboxDISKUZE10138></TD>
+    <TD class=date>2003-01-02 09:27:31</TD>
+    <TD class=sender>Michal Kubeček</TD>
+    <TD class=subject><IMG class=line alt=. 
+      src="Tvorba přístupných dynamických odkazů -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Tvorba přístupných dynamických odkazů -- PHP -- Vývoj aplikací -- Interval_cz_soubory/line2.png"><IMG 
+      class=line alt=. 
+      src="Tvorba přístupných dynamických odkazů -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Tvorba přístupných dynamických odkazů -- PHP -- Vývoj aplikací -- Interval_cz_soubory/line3.png">index.php?</TD></TR>
+  <TR>
+    <TD class=checkbox><INPUT title="0 10137" type=checkbox value=1 
+      name=checkboxDISKUZE10137></TD>
+    <TD class=date>2003-01-02 09:14:16</TD>
+    <TD class=sender>Michal Kubeček</TD>
+    <TD class=subject>vyhledávače</TD></TR>
+  <TR>
+    <TD class=checkbox><INPUT title="1 10148" type=checkbox value=1 
+      name=checkboxDISKUZE10148></TD>
+    <TD class=date>2003-01-02 12:48:40</TD>
+    <TD class=sender>Ondrej Ivanic</TD>
+    <TD class=subject><IMG class=line alt=. 
+      src="Tvorba přístupných dynamických odkazů -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Tvorba přístupných dynamických odkazů -- PHP -- Vývoj aplikací -- Interval_cz_soubory/line1.png">vyhledávače</TD></TR>
+  <TR>
+    <TD class=checkbox><INPUT title="2 10153" type=checkbox value=1 
+      name=checkboxDISKUZE10153></TD>
+    <TD class=date>2003-01-02 19:04:23</TD>
+    <TD class=sender>Michal Kubeček</TD>
+    <TD class=subject><IMG class=line alt=. 
+      src="Tvorba přístupných dynamických odkazů -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Tvorba přístupných dynamických odkazů -- PHP -- Vývoj aplikací -- Interval_cz_soubory/line2.png"><IMG 
+      class=line alt=. 
+      src="Tvorba přístupných dynamických odkazů -- PHP -- Vývoj aplikací -- Interval_cz_soubory/line3.png">vyhledávače</TD></TR>
+  <TR>
+    <TD class=checkbox><INPUT title="3 10156" type=checkbox value=1 
+      name=checkboxDISKUZE10156></TD>
+    <TD class=date>2003-01-02 19:37:21</TD>
+    <TD class=sender>Ondrej Ivanic</TD>
+    <TD class=subject><IMG class=line alt=. 
+      src="Tvorba přístupných dynamických odkazů -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Tvorba přístupných dynamických odkazů -- PHP -- Vývoj aplikací -- Interval_cz_soubory/line2.png"><IMG 
+      class=line alt=. 
+      src="Tvorba přístupných dynamických odkazů -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Tvorba přístupných dynamických odkazů -- PHP -- Vývoj aplikací -- Interval_cz_soubory/line3.png">vyhledávače</TD></TR>
+  <TR>
+    <TD class=checkbox><INPUT title="4 10158" type=checkbox value=1 
+      name=checkboxDISKUZE10158></TD>
+    <TD class=date>2003-01-02 23:23:22</TD>
+    <TD class=sender>jakub</TD>
+    <TD class=subject><IMG class=line alt=. 
+      src="Tvorba přístupných dynamických odkazů -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Tvorba přístupných dynamických odkazů -- PHP -- Vývoj aplikací -- Interval_cz_soubory/line2.png"><IMG 
+      class=line alt=. 
+      src="Tvorba přístupných dynamických odkazů -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Tvorba přístupných dynamických odkazů -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Tvorba přístupných dynamických odkazů -- PHP -- Vývoj aplikací -- Interval_cz_soubory/line3.png">vyhledávače</TD></TR>
+  <TR>
+    <TD class=checkbox><INPUT title="5 10160" type=checkbox value=1 
+      name=checkboxDISKUZE10160></TD>
+    <TD class=date>2003-01-03 00:22:56</TD>
+    <TD class=sender>jakub</TD>
+    <TD class=subject><IMG class=line alt=. 
+      src="Tvorba přístupných dynamických odkazů -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Tvorba přístupných dynamických odkazů -- PHP -- Vývoj aplikací -- Interval_cz_soubory/line2.png"><IMG 
+      class=line alt=. 
+      src="Tvorba přístupných dynamických odkazů -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Tvorba přístupných dynamických odkazů -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Tvorba přístupných dynamických odkazů -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Tvorba přístupných dynamických odkazů -- PHP -- Vývoj aplikací -- Interval_cz_soubory/line3.png">vyhledávače</TD></TR>
+  <TR>
+    <TD class=checkbox><INPUT title="6 10161" type=checkbox value=1 
+      name=checkboxDISKUZE10161></TD>
+    <TD class=date>2003-01-03 00:51:04</TD>
+    <TD class=sender>Michal Kubeček</TD>
+    <TD class=subject><IMG class=line alt=. 
+      src="Tvorba přístupných dynamických odkazů -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Tvorba přístupných dynamických odkazů -- PHP -- Vývoj aplikací -- Interval_cz_soubory/line2.png"><IMG 
+      class=line alt=. 
+      src="Tvorba přístupných dynamických odkazů -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Tvorba přístupných dynamických odkazů -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Tvorba přístupných dynamických odkazů -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Tvorba přístupných dynamických odkazů -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Tvorba přístupných dynamických odkazů -- PHP -- Vývoj aplikací -- Interval_cz_soubory/line1.png">vyhledávače</TD></TR>
+  <TR>
+    <TD class=checkbox><INPUT title="7 10170" type=checkbox value=1 
+      name=checkboxDISKUZE10170></TD>
+    <TD class=date>2003-01-03 09:51:01</TD>
+    <TD class=sender>Ondrej Ivanic</TD>
+    <TD class=subject><IMG class=line alt=. 
+      src="Tvorba přístupných dynamických odkazů -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Tvorba přístupných dynamických odkazů -- PHP -- Vývoj aplikací -- Interval_cz_soubory/line2.png"><IMG 
+      class=line alt=. 
+      src="Tvorba přístupných dynamických odkazů -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Tvorba přístupných dynamických odkazů -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Tvorba přístupných dynamických odkazů -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Tvorba přístupných dynamických odkazů -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Tvorba přístupných dynamických odkazů -- PHP -- Vývoj aplikací -- Interval_cz_soubory/line2.png"><IMG 
+      class=line alt=. 
+      src="Tvorba přístupných dynamických odkazů -- PHP -- Vývoj aplikací -- Interval_cz_soubory/line1.png">vyhledávače</TD></TR>
+  <TR>
+    <TD class=checkbox><INPUT title="7 10185" type=checkbox value=1 
+      name=checkboxDISKUZE10185></TD>
+    <TD class=date>2003-01-03 14:47:08</TD>
+    <TD class=sender>jakub</TD>
+    <TD class=subject><IMG class=line alt=. 
+      src="Tvorba přístupných dynamických odkazů -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Tvorba přístupných dynamických odkazů -- PHP -- Vývoj aplikací -- Interval_cz_soubory/line2.png"><IMG 
+      class=line alt=. 
+      src="Tvorba přístupných dynamických odkazů -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Tvorba přístupných dynamických odkazů -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Tvorba přístupných dynamických odkazů -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Tvorba přístupných dynamických odkazů -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Tvorba přístupných dynamických odkazů -- PHP -- Vývoj aplikací -- Interval_cz_soubory/line2.png"><IMG 
+      class=line alt=. 
+      src="Tvorba přístupných dynamických odkazů -- PHP -- Vývoj aplikací -- Interval_cz_soubory/line3.png">vyhledávače</TD></TR>
+  <TR>
+    <TD class=checkbox><INPUT title="8 10187" type=checkbox value=1 
+      name=checkboxDISKUZE10187></TD>
+    <TD class=date>2003-01-03 15:09:54</TD>
+    <TD class=sender>Michal Kubeček</TD>
+    <TD class=subject><IMG class=line alt=. 
+      src="Tvorba přístupných dynamických odkazů -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Tvorba přístupných dynamických odkazů -- PHP -- Vývoj aplikací -- Interval_cz_soubory/line2.png"><IMG 
+      class=line alt=. 
+      src="Tvorba přístupných dynamických odkazů -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Tvorba přístupných dynamických odkazů -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Tvorba přístupných dynamických odkazů -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Tvorba přístupných dynamických odkazů -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Tvorba přístupných dynamických odkazů -- PHP -- Vývoj aplikací -- Interval_cz_soubory/line2.png"><IMG 
+      class=line alt=. 
+      src="Tvorba přístupných dynamických odkazů -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Tvorba přístupných dynamických odkazů -- PHP -- Vývoj aplikací -- Interval_cz_soubory/line3.png">vyhledávače</TD></TR>
+  <TR>
+    <TD class=checkbox><INPUT title="9 10196" type=checkbox value=1 
+      name=checkboxDISKUZE10196></TD>
+    <TD class=date>2003-01-03 20:42:05</TD>
+    <TD class=sender>jakub</TD>
+    <TD class=subject><IMG class=line alt=. 
+      src="Tvorba přístupných dynamických odkazů -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Tvorba přístupných dynamických odkazů -- PHP -- Vývoj aplikací -- Interval_cz_soubory/line2.png"><IMG 
+      class=line alt=. 
+      src="Tvorba přístupných dynamických odkazů -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Tvorba přístupných dynamických odkazů -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Tvorba přístupných dynamických odkazů -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Tvorba přístupných dynamických odkazů -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Tvorba přístupných dynamických odkazů -- PHP -- Vývoj aplikací -- Interval_cz_soubory/line2.png"><IMG 
+      class=line alt=. 
+      src="Tvorba přístupných dynamických odkazů -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Tvorba přístupných dynamických odkazů -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Tvorba přístupných dynamických odkazů -- PHP -- Vývoj aplikací -- Interval_cz_soubory/line3.png">vyhledávače</TD></TR>
+  <TR>
+    <TD class=checkbox><INPUT title="10 10197" type=checkbox value=1 
+      name=checkboxDISKUZE10197></TD>
+    <TD class=date>2003-01-03 20:51:11</TD>
+    <TD class=sender>Michal Kubeček</TD>
+    <TD class=subject><IMG class=line alt=. 
+      src="Tvorba přístupných dynamických odkazů -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Tvorba přístupných dynamických odkazů -- PHP -- Vývoj aplikací -- Interval_cz_soubory/line2.png"><IMG 
+      class=line alt=. 
+      src="Tvorba přístupných dynamických odkazů -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Tvorba přístupných dynamických odkazů -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Tvorba přístupných dynamických odkazů -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Tvorba přístupných dynamických odkazů -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Tvorba přístupných dynamických odkazů -- PHP -- Vývoj aplikací -- Interval_cz_soubory/line2.png"><IMG 
+      class=line alt=. 
+      src="Tvorba přístupných dynamických odkazů -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Tvorba přístupných dynamických odkazů -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Tvorba přístupných dynamických odkazů -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Tvorba přístupných dynamických odkazů -- PHP -- Vývoj aplikací -- Interval_cz_soubory/line1.png">vyhledávače</TD></TR>
+  <TR>
+    <TD class=checkbox><INPUT title="11 10206" type=checkbox value=1 
+      name=checkboxDISKUZE10206></TD>
+    <TD class=date>2003-01-04 01:32:44</TD>
+    <TD class=sender>jakub</TD>
+    <TD class=subject><IMG class=line alt=. 
+      src="Tvorba přístupných dynamických odkazů -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Tvorba přístupných dynamických odkazů -- PHP -- Vývoj aplikací -- Interval_cz_soubory/line2.png"><IMG 
+      class=line alt=. 
+      src="Tvorba přístupných dynamických odkazů -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Tvorba přístupných dynamických odkazů -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Tvorba přístupných dynamických odkazů -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Tvorba přístupných dynamických odkazů -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Tvorba přístupných dynamických odkazů -- PHP -- Vývoj aplikací -- Interval_cz_soubory/line2.png"><IMG 
+      class=line alt=. 
+      src="Tvorba přístupných dynamických odkazů -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Tvorba přístupných dynamických odkazů -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Tvorba přístupných dynamických odkazů -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Tvorba přístupných dynamických odkazů -- PHP -- Vývoj aplikací -- Interval_cz_soubory/line2.png"><IMG 
+      class=line alt=. 
+      src="Tvorba přístupných dynamických odkazů -- PHP -- Vývoj aplikací -- Interval_cz_soubory/line3.png">vyhledávače</TD></TR>
+  <TR>
+    <TD class=checkbox><INPUT title="10 10199" type=checkbox value=1 
+      name=checkboxDISKUZE10199></TD>
+    <TD class=date>2003-01-03 20:52:55</TD>
+    <TD class=sender>Vit Peprnicek</TD>
+    <TD class=subject><IMG class=line alt=. 
+      src="Tvorba přístupných dynamických odkazů -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Tvorba přístupných dynamických odkazů -- PHP -- Vývoj aplikací -- Interval_cz_soubory/line2.png"><IMG 
+      class=line alt=. 
+      src="Tvorba přístupných dynamických odkazů -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Tvorba přístupných dynamických odkazů -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Tvorba přístupných dynamických odkazů -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Tvorba přístupných dynamických odkazů -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Tvorba přístupných dynamických odkazů -- PHP -- Vývoj aplikací -- Interval_cz_soubory/line2.png"><IMG 
+      class=line alt=. 
+      src="Tvorba přístupných dynamických odkazů -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Tvorba přístupných dynamických odkazů -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Tvorba přístupných dynamických odkazů -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Tvorba přístupných dynamických odkazů -- PHP -- Vývoj aplikací -- Interval_cz_soubory/line3.png">vyhledávače</TD></TR>
+  <TR>
+    <TD class=checkbox><INPUT title="11 10207" type=checkbox value=1 
+      name=checkboxDISKUZE10207></TD>
+    <TD class=date>2003-01-04 01:36:53</TD>
+    <TD class=sender>jakub</TD>
+    <TD class=subject><IMG class=line alt=. 
+      src="Tvorba přístupných dynamických odkazů -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Tvorba přístupných dynamických odkazů -- PHP -- Vývoj aplikací -- Interval_cz_soubory/line2.png"><IMG 
+      class=line alt=. 
+      src="Tvorba přístupných dynamických odkazů -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Tvorba přístupných dynamických odkazů -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Tvorba přístupných dynamických odkazů -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Tvorba přístupných dynamických odkazů -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Tvorba přístupných dynamických odkazů -- PHP -- Vývoj aplikací -- Interval_cz_soubory/line2.png"><IMG 
+      class=line alt=. 
+      src="Tvorba přístupných dynamických odkazů -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Tvorba přístupných dynamických odkazů -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Tvorba přístupných dynamických odkazů -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Tvorba přístupných dynamických odkazů -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Tvorba přístupných dynamických odkazů -- PHP -- Vývoj aplikací -- Interval_cz_soubory/line3.png">vyhledávače</TD></TR>
+  <TR>
+    <TD class=checkbox><INPUT title="6 10164" type=checkbox value=1 
+      name=checkboxDISKUZE10164></TD>
+    <TD class=date>2003-01-03 02:30:15</TD>
+    <TD class=sender>Jan Brašna</TD>
+    <TD class=subject><IMG class=line alt=. 
+      src="Tvorba přístupných dynamických odkazů -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Tvorba přístupných dynamických odkazů -- PHP -- Vývoj aplikací -- Interval_cz_soubory/line2.png"><IMG 
+      class=line alt=. 
+      src="Tvorba přístupných dynamických odkazů -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Tvorba přístupných dynamických odkazů -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Tvorba přístupných dynamických odkazů -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Tvorba přístupných dynamických odkazů -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Tvorba přístupných dynamických odkazů -- PHP -- Vývoj aplikací -- Interval_cz_soubory/line3.png">vyhledávače</TD></TR>
+  <TR>
+    <TD class=checkbox><INPUT title="7 10186" type=checkbox value=1 
+      name=checkboxDISKUZE10186></TD>
+    <TD class=date>2003-01-03 14:49:16</TD>
+    <TD class=sender>jakub</TD>
+    <TD class=subject><IMG class=line alt=. 
+      src="Tvorba přístupných dynamických odkazů -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Tvorba přístupných dynamických odkazů -- PHP -- Vývoj aplikací -- Interval_cz_soubory/line2.png"><IMG 
+      class=line alt=. 
+      src="Tvorba přístupných dynamických odkazů -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Tvorba přístupných dynamických odkazů -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Tvorba přístupných dynamických odkazů -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Tvorba přístupných dynamických odkazů -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Tvorba přístupných dynamických odkazů -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Tvorba přístupných dynamických odkazů -- PHP -- Vývoj aplikací -- Interval_cz_soubory/line3.png">vyhledávače</TD></TR>
+  <TR>
+    <TD class=checkbox><INPUT title="1 22995" type=checkbox value=1 
+      name=checkboxDISKUZE22995></TD>
+    <TD class=date>2004-01-22 21:48:15</TD>
+    <TD class=sender>Egothor team</TD>
+    <TD class=subject><IMG class=line alt=. 
+      src="Tvorba přístupných dynamických odkazů -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Tvorba přístupných dynamických odkazů -- PHP -- Vývoj aplikací -- Interval_cz_soubory/line3.png">vyhledávače</TD></TR>
+  <TR>
+    <TD class=checkbox><INPUT title="0 10201" type=checkbox value=1 
+      name=checkboxDISKUZE10201></TD>
+    <TD class=date>2003-01-03 22:50:04</TD>
+    <TD class=sender>Michal Krutohlav</TD>
+    <TD class=subject>Pekne, ale ma to jeden VELKY hacik</TD></TR>
+  <TR>
+    <TD class=checkbox><INPUT title="1 10202" type=checkbox value=1 
+      name=checkboxDISKUZE10202></TD>
+    <TD class=date>2003-01-03 22:56:11</TD>
+    <TD class=sender>Michal Krutohlav</TD>
+    <TD class=subject><IMG class=line alt=. 
+      src="Tvorba přístupných dynamických odkazů -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Tvorba přístupných dynamických odkazů -- PHP -- Vývoj aplikací -- Interval_cz_soubory/line1.png">Pekne, 
+      ale ma to jeden VELKY hacik</TD></TR>
+  <TR>
+    <TD class=checkbox><INPUT title="2 10208" type=checkbox value=1 
+      name=checkboxDISKUZE10208></TD>
+    <TD class=date>2003-01-04 01:42:15</TD>
+    <TD class=sender>jakub</TD>
+    <TD class=subject><IMG class=line alt=. 
+      src="Tvorba přístupných dynamických odkazů -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Tvorba přístupných dynamických odkazů -- PHP -- Vývoj aplikací -- Interval_cz_soubory/line2.png"><IMG 
+      class=line alt=. 
+      src="Tvorba přístupných dynamických odkazů -- PHP -- Vývoj aplikací -- Interval_cz_soubory/line3.png">Pekne, 
+      ale ma to jeden VELKY hacik</TD></TR>
+  <TR>
+    <TD class=checkbox><INPUT title="3 10213" type=checkbox value=1 
+      name=checkboxDISKUZE10213></TD>
+    <TD class=date>2003-01-04 16:15:18</TD>
+    <TD class=sender>Michal Krutohlav</TD>
+    <TD class=subject><IMG class=line alt=. 
+      src="Tvorba přístupných dynamických odkazů -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Tvorba přístupných dynamických odkazů -- PHP -- Vývoj aplikací -- Interval_cz_soubory/line2.png"><IMG 
+      class=line alt=. 
+      src="Tvorba přístupných dynamických odkazů -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Tvorba přístupných dynamických odkazů -- PHP -- Vývoj aplikací -- Interval_cz_soubory/line3.png">Pekne, 
+      ale ma to jeden VELKY hacik</TD></TR>
+  <TR>
+    <TD class=checkbox><INPUT title="4 10216" type=checkbox value=1 
+      name=checkboxDISKUZE10216></TD>
+    <TD class=date>2003-01-04 18:28:52</TD>
+    <TD class=sender>jakub</TD>
+    <TD class=subject><IMG class=line alt=. 
+      src="Tvorba přístupných dynamických odkazů -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Tvorba přístupných dynamických odkazů -- PHP -- Vývoj aplikací -- Interval_cz_soubory/line2.png"><IMG 
+      class=line alt=. 
+      src="Tvorba přístupných dynamických odkazů -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Tvorba přístupných dynamických odkazů -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Tvorba přístupných dynamických odkazů -- PHP -- Vývoj aplikací -- Interval_cz_soubory/line3.png">Pekne, 
+      ale ma to jeden VELKY hacik</TD></TR>
+  <TR>
+    <TD class=checkbox><INPUT title="5 10223" type=checkbox value=1 
+      name=checkboxDISKUZE10223></TD>
+    <TD class=date>2003-01-04 22:16:07</TD>
+    <TD class=sender>Michal Krutohlav</TD>
+    <TD class=subject><IMG class=line alt=. 
+      src="Tvorba přístupných dynamických odkazů -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Tvorba přístupných dynamických odkazů -- PHP -- Vývoj aplikací -- Interval_cz_soubory/line2.png"><IMG 
+      class=line alt=. 
+      src="Tvorba přístupných dynamických odkazů -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Tvorba přístupných dynamických odkazů -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Tvorba přístupných dynamických odkazů -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Tvorba přístupných dynamických odkazů -- PHP -- Vývoj aplikací -- Interval_cz_soubory/line3.png">Pekne, 
+      ale ma to jeden VELKY hacik</TD></TR>
+  <TR>
+    <TD class=checkbox><INPUT title="6 10224" type=checkbox value=1 
+      name=checkboxDISKUZE10224></TD>
+    <TD class=date>2003-01-05 00:44:00</TD>
+    <TD class=sender>jakub</TD>
+    <TD class=subject><IMG class=line alt=. 
+      src="Tvorba přístupných dynamických odkazů -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Tvorba přístupných dynamických odkazů -- PHP -- Vývoj aplikací -- Interval_cz_soubory/line2.png"><IMG 
+      class=line alt=. 
+      src="Tvorba přístupných dynamických odkazů -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Tvorba přístupných dynamických odkazů -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Tvorba přístupných dynamických odkazů -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Tvorba přístupných dynamických odkazů -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Tvorba přístupných dynamických odkazů -- PHP -- Vývoj aplikací -- Interval_cz_soubory/line3.png">Pekne, 
+      ale ma to jeden VELKY haci...</TD></TR>
+  <TR>
+    <TD class=checkbox><INPUT title="1 10217" type=checkbox value=1 
+      name=checkboxDISKUZE10217></TD>
+    <TD class=date>2003-01-04 18:58:31</TD>
+    <TD class=sender>Vit Peprnicek</TD>
+    <TD class=subject><IMG class=line alt=. 
+      src="Tvorba přístupných dynamických odkazů -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Tvorba přístupných dynamických odkazů -- PHP -- Vývoj aplikací -- Interval_cz_soubory/line3.png">Pekne, 
+      ale ma to jeden VELKY hacik</TD></TR>
+  <TR>
+    <TD class=checkbox><INPUT title="0 18209" type=checkbox value=1 
+      name=checkboxDISKUZE18209></TD>
+    <TD class=date>2003-09-10 17:51:20</TD>
+    <TD class=sender>Yira</TD>
+    <TD class=subject>Ruseni SERVER_PATH</TD></TR>
+  <TR>
+    <TD class=checkbox><INPUT title="0 37828" type=checkbox value=1 
+      name=checkboxDISKUZE37828></TD>
+    <TD class=date>2005-06-16 13:20:31</TD>
+    <TD class=sender>Jakub Šlambora</TD>
+    <TD class=subject>Jak ve Windows?</TD></TR>
+  <TR>
+    <TD id=foot colSpan=4><INPUT class=submit id=display_selected type=submit value="Zobrazit vybrané" name=display_selected> 
+      &nbsp; <INPUT class=submit id=display_all type=submit value="Zobrazit vše" name=display_all> 
+      &nbsp; <INPUT class=submit id=add_new type=submit value="Vložit nový" name=add_new></TD></TR></TBODY></TABLE></FORM></DIV></DIV></DIV></DIV>
+<DIV id=page-right>
+<H2 class=textversion>Pravý sloupek</H2>
+<DIV id=search>
+<H3 class=textversion>Vyhledávání</H3>
+<FORM action=http://interval.cz/search.asp method=get>
+<DIV><INPUT class=text name=co> <!--  
+<select name='cim'>
+<option value ='Google' selected='selected'>Google</option>
+<option value ='Jyxo'>Jyxo</option>
+</select>
+<input type='hidden' name='nadpis' value='1' />
+<input type='hidden' name='popis' value='1' />
+<input type='hidden' name='text' value='1' />
+<input type='hidden' name='rubrika' value='0' />
+<input type='hidden' name='autor' value='0' />
+ --><INPUT class=submit type=submit value=Najdi! name=send> </DIV></FORM><!-- <div><a href='http://interval.cz/search.asp'>Rozšířené vyhledávání</a></div> --></DIV><!-- StartKód: adarbo2.bbmedia.cz 3.1 Nestandard  Interval(87) / home page(2) / textbox(1) / nestandard(24) -->
+<SCRIPT type=text/javascript>
+	<!-- <![CDATA[
+	var bbs=screen,bbn=navigator,bbh;bbh='&ubl='+bbn.browserLanguage+'&ucc='+bbn.cpuClass+'&ucd='+bbs.colorDepth+'&uce='+bbn.cookieEnabled+'&udx='+bbs.deviceXDPI+'&udy='+bbs.deviceYDPI+'&usl='+bbn.systemLanguage+'&uje='+bbn.javaEnabled()+'&uah='+bbs.availHeight+'&uaw='+bbs.availWidth+'&ubd='+bbs.bufferDepth+'&uhe='+bbs.height+'&ulx='+bbs.logicalXDPI+'&uly='+bbs.logicalYDPI+'&use='+bbs.fontSmoothingEnabled+'&uto='+(new Date()).getTimezoneOffset()+'&uti='+(new Date()).getTime()+'&uui='+bbs.updateInterval+'&uul='+bbn.userLanguage+'&uwi='+bbs.width;
+	document.write("<scr"+"ipt  language='JavaScript' type='text/javascript' src='http://adarbo2.bbmedia.cz/please/showit/87/2/1/24/?typkodu=non-standard"+bbh+"&alttext=0&border=0&bgcolor=FFFFFF&text=000000&link=0000FF&target=_blank&bust="+Math.random()+"'>");
+	document.write("<"+"\/scr"+"ipt>");
+	//]]> -->
+	</SCRIPT>
+<!-- KonecKód: adarbo2.bbmedia.cz 3.1 Nestandard --><!-- cached 12-knizni_tip.txt -->
+<DIV class="page-right-box book">
+<H3>Knižní tip</H3>
+<DIV class=page-right-box-in>
+<DIV class=book-top>
+<H4><A 
+href="http://interval.inshop.cz/inshop/scripts/detail.asp?kat=080">Microsoft 
+Access 2002, uživatelská příručka</A></H4></DIV>
+<DIV class=image><A 
+href="http://interval.inshop.cz/inshop/scripts/detail.asp?kat=080"><IMG 
+title="Microsoft Access 2002, uživatelská příručka" alt=obálka 
+src="Tvorba přístupných dynamických odkazů -- PHP -- Vývoj aplikací -- Interval_cz_soubory/K0571.jpg"></A></DIV></DIV></DIV><!-- cached 17-nejctenejsi_clanky.txt -->
+<DIV class="page-right-box reading">
+<H3 title="Nejčtenější články za posledních 28 dnů">Nejčtenější</H3>
+<DIV class=page-right-box-in>
+<UL>
+  <LI><A href="http://interval.cz/clanky/opera-9-pokrocila-konfigurace/">Opera 9 
+  - pokročilá konfigurace</A>
+  <LI><A 
+  href="http://interval.cz/clanky/adobe-photoshop-prakticky-webdesign-jakub-krcmar/">Adobe 
+  Photoshop - praktický webdesign (Jakub Krčmář)</A>
+  <LI><A 
+  href="http://interval.cz/clanky/drupal-tvorba-vlastniho-vzhledu/">Drupal - 
+  tvorba vlastního vzhledu</A>
+  <LI><A 
+  href="http://interval.cz/clanky/pruvodce-svg-dalsi-nastroje-pro-tvorbu-svg-grafiky/">Průvodce 
+  SVG - další nástroje pro tvorbu SVG grafiky</A>
+  <LI><A 
+  href="http://interval.cz/clanky/spravy-zo-slovenskeho-internetu-8/">Správy zo 
+  slovenského internetu 8.</A></LI></UL></DIV></DIV>
+<DIV class=merak-box style="MARGIN-TOP: 1.5em; TEXT-ALIGN: center">
+<DIV id=merak-content 
+style="BORDER-RIGHT: #000000 1px solid; BORDER-TOP: #000000 1px solid; FONT-WEIGHT: bold; FONT-SIZE: 11px; BACKGROUND-IMAGE: url(http://interval.cz/__services/__include_right/merak-background.png); MARGIN: 0px auto; BORDER-LEFT: #000000 1px solid; WIDTH: 160px; BORDER-BOTTOM: #000000 1px solid; BACKGROUND-REPEAT: no-repeat; FONT-FAMILY: Verdana, Arial, sans-serif; HEIGHT: 190px; TEXT-ALIGN: left; FONT-VARIANT: small-caps">
+<H3 style="FONT-SIZE: 12px; MARGIN: 55px 0px 10px 10px; FONT-VARIANT: normal"><A 
+title="Merak Mail Server 8" 
+style="COLOR: #000000; BACKGROUND-COLOR: transparent; TEXT-DECORATION: none" 
+href="http://www.merak-mail-server.cz/">Merak Mail Server 8</A></H3>
+<DIV id=merak-proclamation style="PADDING-LEFT: 10px">Integrovaný <EM><A 
+title="Merak Mail Server 8" 
+style="COLOR: #35a0df; FONT-STYLE: normal; BACKGROUND-COLOR: transparent; TEXT-DECORATION: none" 
+href="http://www.merak-mail-server.cz/">antispam</A></EM> <BR>Snadná <EM><A 
+title="Merak Mail Server 8" 
+style="COLOR: #35a0df; FONT-STYLE: normal; BACKGROUND-COLOR: transparent; TEXT-DECORATION: none" 
+href="http://www.merak-mail-server.cz/">instalace</A></EM> <BR>Zabezpečený 
+<EM><A title="Merak Mail Server 8" 
+style="COLOR: #35a0df; FONT-STYLE: normal; BACKGROUND-COLOR: transparent; TEXT-DECORATION: none" 
+href="http://www.merak-mail-server.cz/">groupware</A></EM> </DIV></DIV></DIV>
+<DIV class="page-right-box emailserv">
+<H3>Info servis</H3>
+<DIV class=page-right-box-in>
+<UL>
+  <LI><A title="Exporty aktuálních informací ve formátech Atom, RDF a RSS" 
+  href="http://export.interval.cz/">Atom, RDF, RSS</A> 
+  <LI>Informace e-mailem: </LI></UL>
+<FORM action=prihlaseni.asp method=post>
+<DIV class=shell><INPUT class=text name=adresa></DIV>
+<DIV class=shell><INPUT class=radio type=radio CHECKED value=1 name=co>Týdenní 
+přehled článků</DIV>
+<DIV class=shell><INPUT class=radio type=radio value=2 name=co>HELP 
+konference</DIV>
+<DIV 
+class=shell><INPUT class=submit type=submit value=Přihlásit></DIV></FORM></DIV></DIV>
+<DIV class=advertising-vertical-banner-outer>
+<DIV class=advertising-vertical-banner-inner><!-- Skyscraper Right --><!-- BBSTART Interval.cz/Skyscraper Right/rolovací/Skyscraper 120x600 -->
+<SCRIPT type=text/javascript>/* <![CDATA[ */
+var bbat=0,bbbr=0,bbtt='_blank',bbpath='17877/4/2/9',bbxl=1,bbac=1;
+//]]></SCRIPT>
+
+<SCRIPT 
+src="Tvorba přístupných dynamických odkazů -- PHP -- Vývoj aplikací -- Interval_cz_soubory/bb4.js" 
+type=text/javascript></SCRIPT>
+<NOSCRIPT>
+<DIV><A href="http://ad2.billboard.cz/please/redirect/17877/4/2/9/"><IMG 
+style="BORDER-RIGHT: 0px; BORDER-TOP: 0px; BORDER-LEFT: 0px; BORDER-BOTTOM: 0px" 
+height=600 alt=. 
+src="Tvorba přístupných dynamických odkazů -- PHP -- Vývoj aplikací -- Interval_cz_soubory/fallback9.gif" 
+width=120></A></DIV></NOSCRIPT><!-- BBKONEC --></DIV></DIV><!-- cached 17-nejdiskutovanejsi_clanky.txt -->
+<DIV class="page-right-box cauldron">
+<H3 title="Nejdiskutovanější články za posledních 28 dnů">Diskuzní kotel</H3>
+<DIV class=page-right-box-in>
+<UL>
+  <LI><A title="(103 komentářů)" 
+  href="http://interval.cz/clanky/opera-9-pokrocila-konfigurace/">Opera 9 - 
+  pokročilá konfigurace</A>
+  <LI><A title="(4 komentářů)" 
+  href="http://interval.cz/clanky/pruvodce-svg-dalsi-nastroje-pro-tvorbu-svg-grafiky/">Průvodce 
+  SVG - další nástroje pro tvorbu SVG grafiky</A>
+  <LI><A title="(2 komentářů)" 
+  href="http://interval.cz/clanky/drupal-tvorba-vlastniho-vzhledu/">Drupal - 
+  tvorba vlastního vzhledu</A>
+  <LI><A title="(2 komentářů)" 
+  href="http://interval.cz/clanky/spravy-zo-slovenskeho-internetu-9/">Správy zo 
+  slovenského internetu 9.</A>
+  <LI><A title="(1 komentářů)" 
+  href="http://interval.cz/clanky/lokalizace-asp-net-2-x-aplikaci/">Lokalizace 
+  ASP.NET 2.x aplikací</A></LI></UL></DIV></DIV></DIV>
+<DIV class=page-maker>&nbsp;</DIV>
+<DIV class=page-maker-white>&nbsp;</DIV></DIV>
+<DIV id=advertising-page-bottom>
+<DIV id=advertising-page-bottom-left>
+<DIV><!-- Full Banner Bottom --><!-- BBSTART Interval.cz/Full Banner Bottom/rolovací/Full Banner 468x60 -->
+<SCRIPT type=text/javascript>/* <![CDATA[ */
+var bbat=0,bbbr=0,bbtt='_blank',bbpath='17877/1/2/1',bbxl=1,bbac=1;
+//]]></SCRIPT>
+
+<SCRIPT 
+src="Tvorba přístupných dynamických odkazů -- PHP -- Vývoj aplikací -- Interval_cz_soubory/bb4.js" 
+type=text/javascript></SCRIPT>
+<NOSCRIPT>
+<DIV><A href="http://ad2.billboard.cz/please/redirect/17877/1/2/1/"><IMG 
+style="BORDER-RIGHT: 0px; BORDER-TOP: 0px; BORDER-LEFT: 0px; BORDER-BOTTOM: 0px" 
+height=60 alt=. 
+src="Tvorba přístupných dynamických odkazů -- PHP -- Vývoj aplikací -- Interval_cz_soubory/fallback1.gif" 
+width=468></A></DIV></NOSCRIPT><!-- BBKONEC --></DIV></DIV>
+<DIV id=advertising-page-bottom-right>
+<DIV><!-- Button2 Bottom --><!-- BBSTART Interval.cz/Button2 Bottom/rolovací/Button 2 120x60 -->
+<SCRIPT type=text/javascript>/* <![CDATA[ */
+var bbat=0,bbbr=0,bbtt='_blank',bbpath='17877/2/2/6',bbxl=1,bbac=1;
+//]]></SCRIPT>
+
+<SCRIPT 
+src="Tvorba přístupných dynamických odkazů -- PHP -- Vývoj aplikací -- Interval_cz_soubory/bb4.js" 
+type=text/javascript></SCRIPT>
+<NOSCRIPT>
+<DIV><A href="http://ad2.billboard.cz/please/redirect/17877/2/2/6/"><IMG 
+style="BORDER-RIGHT: 0px; BORDER-TOP: 0px; BORDER-LEFT: 0px; BORDER-BOTTOM: 0px" 
+height=60 alt=. 
+src="Tvorba přístupných dynamických odkazů -- PHP -- Vývoj aplikací -- Interval_cz_soubory/fallback6.gif" 
+width=120></A></DIV></NOSCRIPT><!-- BBKONEC --></DIV></DIV>
+<DIV class=page-maker>&nbsp;</DIV></DIV>
+<DIV id=page-foot>
+<DIV id=page-foot-menu><A href="http://interval.cz/redakce-inzerce.asp">Inzerce 
+na Interval.cz</A> &nbsp;|&nbsp; <A 
+href="http://interval.cz/redakce.asp">Redakce Interval.cz</A> &nbsp;|&nbsp; <A 
+href="http://interval.cz/autori.asp">Hledáme nové autory</A> </DIV>
+<DIV id=issn><A class=noprint 
+href="http://jigsaw.w3.org/css-validator/validator?uri=http%3A%2F%2Finterval.cz%3A80%2Fclanky%2Ftvorba-pristupnych-dynamickych-odkazu%2F">.</A> 
+ISSN 1212-8651 <A class=noprint 
+href="http://validator.w3.org/check?uri=http%3A%2F%2Finterval.cz%3A80%2Fclanky%2Ftvorba-pristupnych-dynamickych-odkazu%2F&amp;charset=%28detect+automatically%29&amp;doctype=%28detect+automatically%29&amp;outline=1&amp;verbose=1">.</A> 
+</DIV>
+<DIV id=page-foot-zoner>© Zoner software, s.r.o., všechna práva vyhrazena, tento 
+server dodržuje <A href="http://interval.cz/privacy.asp">právní předpisy</A> o 
+ochraně osobních údajů. </DIV></DIV>
+<SCRIPT 
+src="Tvorba přístupných dynamických odkazů -- PHP -- Vývoj aplikací -- Interval_cz_soubory/audits-footer.js" 
+type=text/javascript></SCRIPT>
+
+<SCRIPT 
+src="Tvorba přístupných dynamických odkazů -- PHP -- Vývoj aplikací -- Interval_cz_soubory/urchin.js" 
+type=text/javascript>
+</SCRIPT>
+
+<SCRIPT type=text/javascript>
+_uacct = "UA-173085-1";
+
+var len = _uOsr.length;
+_uOsr[len]="seznam.cz";       _uOkw[len]="w";
+_uOsr[len+1]="centrum.cz";    _uOkw[len+1]="q";
+_uOsr[len+2]="jyxo.cz";       _uOkw[len+2]="s";
+_uOsr[len+3]="atlas.cz";      _uOkw[len+3]="q";
+_uOsr[len+4]="zoohoo.cz";     _uOkw[len+4]="q";
+_uOsr[len+5]="tiscali.cz";    _uOkw[len+5]="query";
+_uOsr[len+6]="1.cz";          _uOkw[len+6]="q";
+_uOsr[len+7]="volny.cz";      _uOkw[len+7]="search";
+
+urchinTracker();
+</SCRIPT>
+</BODY></HTML>

@@ -1,0 +1,49 @@
+<html> 
+  <head> 
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>Zabezpečení v Ajaxu</title> 
+
+    <script language="javascript">
+      var XMLHttpRequestObjekt = false; 
+
+      if (window.XMLHttpRequest) {
+        XMLHttpRequestObjekt = new XMLHttpRequest();
+      } else if (window.ActiveXObject) {
+        XMLHttpRequestObjekt = new ActiveXObject("Microsoft.XMLHTTP");
+      }
+
+      function ziskejData(zdrojDat, divID) 
+      { 
+        if(XMLHttpRequestObjekt) {
+          var obj = document.getElementById(divID); 
+          XMLHttpRequestObjekt.open("GET", zdrojDat); 
+
+          XMLHttpRequestObjekt.onreadystatechange = function() 
+          { 
+            if (XMLHttpRequestObjekt.readyState == 4 && 
+              XMLHttpRequestObjekt.status == 200) { 
+                obj.innerHTML = XMLHttpRequestObjekt.responseText; 
+            } 
+          } 
+
+          XMLHttpRequestObjekt.send(null); 
+        }
+      }
+    </script>
+  </head> 
+
+  <body>
+
+    <H1>Zabezpečení v Ajaxu</H1>
+
+    <form>
+      <input type="button" value="Získej data" 
+        onclick="ziskejData('data/data.txt', 'cilovyDiv')"> 
+    </form>
+
+    <div id="cilovyDiv">
+      <p>Získaná data se zobrazí na tomto místě.</p> 
+    </div> 
+
+  </body> 
+</html>

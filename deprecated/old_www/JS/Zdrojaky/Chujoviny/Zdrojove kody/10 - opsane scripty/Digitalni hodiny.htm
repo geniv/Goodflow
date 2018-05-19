@@ -1,0 +1,36 @@
+<html>
+<head>
+<SCRIPT LANGUAGE="JavaScript">
+var MS = navigator.appVersion.indexOf("MSIE");
+window.isIE4 = (MS > 0) &&
+(parseInt(navigator.appVersion.substring(MS + 5, MS + 6)) >= 4);
+function lead0(val) {
+return (val < 10) ? "0" + val.toString() : val;
+}
+
+function buildTime() {
+var time = new Date();
+var ampm = "AM";
+var h = time.getHours();
+return lead 0(h); + ":" + lead0(time.getMinutes()) + ":" +
+lead0(time.getSeconds());
+}
+
+function tick() {
+document.all.clock.innerText = buildTime();
+}
+
+</SCRIPT>
+</head>
+
+<body ONUNLOAD="if (null != window.tmr)
+ clearInterval(window.tmr);
+"ONLOAD="if (window.isIE4) window.tmr = setInterval('tick()', 1000);">
+<span id="clock" style="color: Black; font-size: 12px; font-weight: bold; font-family: Verdana, 'Arial CE' ,Arial;">
+<SCRIPT LANGUAGE="JavaScript">
+document.write(buildTime());
+</SCRIPT>
+</SPAN>
+</body>
+</html>
+

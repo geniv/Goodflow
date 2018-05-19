@@ -1,0 +1,50 @@
+<HTML>
+  <HEAD>
+    <TITLE> Menu </TITLE>
+    <SCRIPT Language="JavaScript">
+      // Popisky položek nabídky
+      var MenuCaptions=new Array (
+        '-- Nevybráno --',
+        'SWNet',
+        'Softwarové noviny',
+        'Inside'
+      );
+
+      // Cílové adresy jednotlivých položek
+      var MenuUrls=new Array (
+        '',
+        'http://www.swnet.cz',
+        'http://swn.softnov.cz',
+        'http://www.inside.cz'
+      );
+
+      // Obsluha výbìru
+      function MenuClick (Menu){
+        var Idx = Menu.selectedIndex;
+        // Pokud nebyla vybrána žádná rozumná položka,
+        // nic se nestane
+        if (Idx <= 0) return;
+        // Pøesmìruje prohlížeè na zvolenou cílovou stránku
+        window.location.href = MenuUrls[Idx];
+      }
+    </SCRIPT>
+  </HEAD>
+
+  <BODY>
+    <FORM Name="MainForm">
+      Vyberte si z nabídky:
+      <SELECT Name="Menu"
+        OnChange="MenuClick(document.MainForm.Menu)">');
+        <SCRIPT Language="JavaScript">
+          <!--
+          // Zápis položek do HTML stránky
+          for (var i = 0; i < MenuCaptions.length; i++)
+            document.write ("<OPTION>" +MenuCaptions[i]+
+                            "</OPTION>");
+          // -->
+        </SCRIPT>
+      </SELECT>
+    </FORM>
+  </BODY>
+</HTML>
+

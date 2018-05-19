@@ -1,0 +1,40 @@
+#zobrazovani souboru
+Options -Indexes
+
+#error page 400
+#ErrorDocument 400 /error_page/400.html
+
+#error page 401
+#ErrorDocument 401 /error_page/401.html
+
+#error page 403
+#ErrorDocument 403 /error_page/403.html
+
+#error page 404
+#ErrorDocument 404 /error_page/404.html
+
+#error page 500
+#ErrorDocument 500 /error_page/500.html
+
+#error page 503
+#ErrorDocument 503 /error_page/503.html
+
+#ErrorDocument 400 /www/svn/goodflow_tokenizer/error_page/index.php
+#ErrorDocument 401 /www/svn/goodflow_tokenizer/error_page/index.php
+#ErrorDocument 403 /www/svn/goodflow_tokenizer/error_page/index.php
+#ErrorDocument 404 /www/svn/goodflow_tokenizer/error_page/index.php
+#ErrorDocument 500 /www/svn/goodflow_tokenizer/error_page/index.php
+#ErrorDocument 503 /www/svn/goodflow_tokenizer/error_page/index.php
+
+#zapinani rewrite
+RewriteEngine on
+
+#nasmerovani korenu - zapinat jen na serveru!!!!
+#RewriteBase /
+
+RewriteRule ^([a-zA-Z0-9-\_\/]+)/?$ index.php?action=$1 [L]
+
+#RewriteRule ^([0-9]+)/?$ index.php?page=$1 [L]
+#RewriteRule ^([a-zA-Z-\_]+)/?$ index.php?action=$1 [L]
+#RewriteRule ^([a-zA-Z-\_]+)/([0-9]+)/?$ index.php?action=$1&page=$2 [L]
+#RewriteRule ^([a-zA-Z-\_]+)/([a-zA-Z0-9-\_\=]+)/?$ index.php?action=$1&id=$2 [L]

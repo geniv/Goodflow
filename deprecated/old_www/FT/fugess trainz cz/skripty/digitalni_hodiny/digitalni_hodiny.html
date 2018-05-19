@@ -1,0 +1,94 @@
+<html>
+<head>
+<title>Digitalni Hodiny</title>
+<meta http-equiv="content-type" content="text/html; charset=windows-1250">
+</head>
+
+<body onload="go()" bgcolor="#000000">
+
+<p align="center">
+<script language="JavaScript">
+<!--
+img = new Array()
+for(var i=0; i <= 14; i++) {
+	img[i] = new Image()
+}
+img[1].src = "dg0.gif"
+img[2].src = "dg1.gif"
+img[3].src = "dg2.gif"
+img[4].src = "dg3.gif"
+img[5].src = "dg4.gif"
+img[6].src = "dg5.gif"
+img[7].src = "dg6.gif"
+img[8].src = "dg7.gif"
+img[9].src = "dg8.gif"
+img[10].src = "dg9.gif"
+img[11].src = "dgon.gif"
+img[12].src = "dgoff.gif"
+img[13].src = "dgam.gif"
+img[14].src = "dgpm.gif"
+var base = "dg"
+var space = "dgbl.gif"
+
+var per = false
+function stop() {
+	document.one.src = space
+	document.two.src = space
+	document.three.src = space
+	document.four.src = space
+	document.five.src = space
+	document.six.src = space
+	per = false
+}
+function pause() {
+	per = false
+}
+
+function go() {
+	per = true
+	start()
+}
+function start() {
+	if(per == true) {
+		var now = new Date()
+		var hours = now.getHours();
+	    var ampm = (hours < 12) ? "am" : "pm"
+		hours = (hours > 12) ? (hours - 12) + "" : hours + ""
+		hours = (hours == "0") ? "12" : hours
+		hours = (hours < 10) ? "0" + hours : hours + ""
+		var minutes = now.getMinutes();
+		minutes = (minutes < 10) ? "0" + minutes : minutes + ""
+		var seconds = now.getSeconds();
+		seconds = (seconds < 10) ? "0" + seconds : seconds + ""
+		document.one.src = (hours.charAt(0)=="0") ? space : add(hours.charAt(0))
+		document.two.src = add(hours.charAt(1))
+		document.three.src = (now.getSeconds() % 2) ? add("on") : add("off")
+		document.four.src = add(minutes.charAt(0))
+		document.five.src = add(minutes.charAt(1))
+		document.six.src = add(ampm)
+		setTimeout("start()",1000)
+	}
+}
+function add(it) {
+	return "dg" + it + ".gif"
+}
+
+// -->
+</script>
+
+<div align="center">
+<table cellspacing="0" cellpadding="0" border="0" bgcolor="black" frame="void" rules="none">
+<tr>
+    <td><img src="space.gif" alt="Čas" width="16" height="21" name="one"></td>
+    <td><img src="space.gif" alt="Čas" width="16" height="21" name="two"></td>
+    <td><img src="space.gif" alt="Čas" width="14" height="21" name="three"></td>
+    <td><img src="space.gif" alt="Čas" width="16" height="21" name="four"></td>
+    <td><img src="space.gif" alt="Čas" width="16" height="21" name="five"></td>
+    <td><img src="space.gif" alt="Čas" width="16" height="21" name="six"></td>
+</tr>
+</table>
+</div>
+</p>
+
+</body>
+</html>

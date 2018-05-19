@@ -1,0 +1,47 @@
+<HTML>
+  <HEAD>
+    <TITLE>Vícenásobná volba</TITLE>
+    <SCRIPT Language="JavaScript">
+      <!--
+      // Zobrazí seznam zvolených položek
+      function ShowSelected(Sel) {
+        // Pokud je vybraná alespoò jedna volba
+        if (Sel.selectedIndex > -1){
+          // Sestaví se øetìzec obsahující všechny zvolené položky
+          var S='';
+          for (i=0; i<Sel.options.length;i++)
+            // Je-li položka vybraná, pøidá se do seznamu
+            if (Sel.options[i].selected){
+              if (S != '') S += ', '
+              S += Sel.options[i].text;
+            }
+          // Zobrazení seznamu zvolených položek
+          alert (S);
+        }
+        else
+          alert ('Nebyla vybrána žádná položka!')
+      }
+      // -->
+    </SCRIPT>
+  </HEAD>
+
+  <BODY>
+    <FORM Name="frmMain">
+      Vyberte si nìkolik položek:<BR>
+      <BR>
+      <SELECT Name="selMain" Multiple Size=6>
+      <OPTION Value="Item0">Položka 0</OPTION>
+      <OPTION Value="Item1">Položka 1</OPTION>
+      <OPTION Value="Item2">Položka 2</OPTION>
+      <OPTION Value="Item3">Položka 3</OPTION>
+      <OPTION Value="Item4">Položka 4</OPTION>
+      <OPTION Value="Item5">Položka 5</OPTION>
+      </SELECT>
+      <BR>
+      <BR>
+      <INPUT Type="button" Value="Zobraz vybrané položky"
+        onClick="ShowSelected(document.frmMain.selMain)">
+    </FORM>
+  </BODY>
+</HTML>
+

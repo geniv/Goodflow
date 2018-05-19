@@ -1,0 +1,1118 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>Novy vychozi PHP layout: Zdrojový soubor /var/www/phplayout/modules/dynamic_form/dynamicky_formular.php</title>
+<link href="tabs.css" rel="stylesheet" type="text/css">
+<link href="doxygen.css" rel="stylesheet" type="text/css">
+</head><body>
+<!-- Generováno programem Doxygen 1.5.8 -->
+<div class="navigation" id="top">
+  <div class="tabs">
+    <ul>
+      <li><a href="index.html"><span>Hlavní&nbsp;stránka</span></a></li>
+      <li><a href="annotated.html"><span>Třídy</span></a></li>
+      <li class="current"><a href="files.html"><span>Soubory</span></a></li>
+    </ul>
+  </div>
+  <div class="tabs">
+    <ul>
+      <li><a href="files.html"><span>Seznam&nbsp;souborů</span></a></li>
+      <li><a href="globals.html"><span>Symboly&nbsp;v&nbsp;souborech</span></a></li>
+    </ul>
+  </div>
+<h1>/var/www/phplayout/modules/dynamic_form/dynamicky_formular.php</h1><a href="modules_2dynamic__form_2dynamicky__formular_8php.html">Zobrazit dokumentaci tohoto souboru.</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 &lt;?php
+<a name="l00002"></a>00002 
+<a name="l00014"></a><a class="code" href="classDynamicForm.html">00014</a> <span class="keyword">class </span><a class="code" href="classDynamicForm.html">DynamicForm</a> <span class="keyword">extends</span> <a class="code" href="classDefaultModule.html">DefaultModule</a>
+<a name="l00015"></a>00015 {
+<a name="l00016"></a><a class="code" href="classDynamicForm.html#cd4f9f0c371251514e86236ba79a84e1">00016</a>   <span class="keyword">private</span> <a class="code" href="classDynamicForm.html#cd4f9f0c371251514e86236ba79a84e1">$var</a>, <a class="code" href="classDynamicForm.html#826728fca55225a483535d2ee27a91a1">$sqlite</a>, <a class="code" href="classDynamicForm.html#70ff6cb79808619e88e0840b947a7d1a">$dbname</a>, <a class="code" href="classDynamicForm.html#b382486ab6fdf4c0d32fada1e037ed0c">$dirpath</a>, <a class="code" href="classDynamicForm.html#4522832cb8602e66f5152250dd740fb3">$debug_lokal</a>, <a class="code" href="classDynamicForm.html#f78df9caf074d63a22d606cb07b49d35">$absolutni_url</a>, <a class="code" href="classDynamicForm.html#8c47151707b4349b2e02d87bb2845d8d">$captchakod</a>, <a class="code" href="classDynamicForm.html#705fa8f11b4956a34560744343a72dec">$unikatni</a>;
+<a name="l00017"></a><a class="code" href="classDynamicForm.html#04130b2a1afd6f84e1fc5bca57ea97d6">00017</a>   <span class="keyword">private</span> <a class="code" href="classDynamicForm.html#04130b2a1afd6f84e1fc5bca57ea97d6">$idmodul</a> = <span class="stringliteral">"dynform"</span>;
+<a name="l00018"></a><a class="code" href="classDynamicForm.html#c1a8854c9c04d9f163ba6ec5a972a0f1">00018</a>   <span class="keyword">private</span> <a class="code" href="classDynamicForm.html#c1a8854c9c04d9f163ba6ec5a972a0f1">$znakpovinne</a> = <span class="stringliteral">"\n          &lt;span&gt;*&lt;/span&gt;"</span>; <span class="comment">//povinne</span>
+<a name="l00019"></a><a class="code" href="classDynamicForm.html#42a6fe76e59a815102dc7d5b5dabc7fa">00019</a>   <span class="keyword">private</span> <a class="code" href="classDynamicForm.html#42a6fe76e59a815102dc7d5b5dabc7fa">$hlavicka</a> = <span class="stringliteral">"Content-type: text/html; charset=UTF-8"</span>;
+<a name="l00020"></a>00020 
+<a name="l00021"></a><a class="code" href="classDynamicForm.html#be1235e37597477ba817c4757645ca6a">00021</a>   <span class="keyword">private</span> <a class="code" href="classDynamicForm.html#be1235e37597477ba817c4757645ca6a">$input</a> = array (<span class="stringliteral">"text"</span>     =&gt; <span class="stringliteral">"textové pole"</span>,  <span class="comment">//Xx - nazev, value</span>
+<a name="l00022"></a>00022 
+<a name="l00023"></a>00023                           <span class="stringliteral">"checkbox"</span> =&gt; <span class="stringliteral">"zaškrkávací políčko"</span>,  <span class="comment">//Xx - nazev, checked</span>
+<a name="l00024"></a>00024 
+<a name="l00025"></a>00025                           <span class="stringliteral">"submit"</span>   =&gt; <span class="stringliteral">"odesílací tlačítko - 1x"</span>, <span class="comment">//1x - value</span>
+<a name="l00026"></a>00026                           <span class="stringliteral">"reset"</span>    =&gt; <span class="stringliteral">"resetovací tlačítko - 1x"</span>,  <span class="comment">//1x - value</span>
+<a name="l00027"></a>00027 
+<a name="l00028"></a>00028                           <span class="stringliteral">"captcha"</span>  =&gt; <span class="stringliteral">"captcha kod - 1x"</span>,  <span class="comment">//1x - ?</span>
+<a name="l00029"></a>00029                           );
+<a name="l00030"></a>00030 
+<a name="l00031"></a><a class="code" href="classDynamicForm.html#aa67e007f9a82c93fff763ee3d9f4e70">00031</a>   <span class="keyword">private</span> <a class="code" href="classDynamicForm.html#aa67e007f9a82c93fff763ee3d9f4e70">$vstupni_typ</a> = array (<span class="stringliteral">"text"</span>, <span class="comment">//kontrola - min poc, max poc</span>
+<a name="l00032"></a>00032                                 <span class="stringliteral">"integer"</span>,  <span class="comment">//kontrola - min val, max val</span>
+<a name="l00033"></a>00033                                 <span class="stringliteral">"reg_exp"</span>); <span class="comment">//regularni vyraz</span>
+<a name="l00034"></a>00034 
+<a name="l00042"></a><a class="code" href="classDynamicForm.html#e8ba4c84c10502c5f348076900628eb4">00042</a>   <span class="keyword">public</span> function <a class="code" href="classDynamicForm.html#e8ba4c84c10502c5f348076900628eb4">__construct</a>(&amp;<a class="code" href="classDynamicForm.html#cd4f9f0c371251514e86236ba79a84e1">$var</a>, $index) <span class="comment">//konstruktor</span>
+<a name="l00043"></a>00043   {
+<a name="l00044"></a>00044     $this-&gt;var = <a class="code" href="classDynamicForm.html#cd4f9f0c371251514e86236ba79a84e1">$var</a>;
+<a name="l00045"></a>00045     $this-&gt;dirpath = dirname($this-&gt;var-&gt;moduly[$index][<span class="stringliteral">"include"</span>]);
+<a name="l00046"></a>00046     $this-&gt;dbname = $this-&gt;var-&gt;moduly[$index][<span class="stringliteral">"databaze"</span>];
+<a name="l00047"></a>00047 
+<a name="l00048"></a>00048     $this-&gt;debug_lokal = <span class="keyword">false</span>;  <span class="comment">//lokalni zapinani debug modu</span>
+<a name="l00049"></a>00049 
+<a name="l00050"></a>00050     <span class="comment">//includovani unikatniho obsahu</span>
+<a name="l00051"></a>00051     $this-&gt;unikatni = $this-&gt;<a class="code" href="classDefaultModule.html#f9bc13977b7099f00c4a74192ce85dce">NactiObsahSouboru</a>(<span class="stringliteral">"{$this-&gt;dirpath}/.unikatni_obsah.php"</span>);
+<a name="l00052"></a>00052     $this-&gt;absolutni_url = $this-&gt;var-&gt;main[0]-&gt;NactiFunkci(<span class="stringliteral">"Funkce"</span>, <span class="stringliteral">"AbsoluteUrl"</span>);
+<a name="l00053"></a>00053 
+<a name="l00054"></a>00054     $this-&gt;znakpovinne = $this-&gt;<a class="code" href="classDefaultModule.html#f43261ee577b5bedbdaff44d21c64d38">NactiUnikatniObsah</a>($this-&gt;unikatni[<span class="stringliteral">"set_znakpovinne"</span>]);
+<a name="l00055"></a>00055     $this-&gt;input = $this-&gt;<a class="code" href="classDefaultModule.html#f43261ee577b5bedbdaff44d21c64d38">NactiUnikatniObsah</a>($this-&gt;unikatni[<span class="stringliteral">"set_input"</span>]);
+<a name="l00056"></a>00056     $this-&gt;hlavicka = $this-&gt;<a class="code" href="classDefaultModule.html#f43261ee577b5bedbdaff44d21c64d38">NactiUnikatniObsah</a>($this-&gt;unikatni[<span class="stringliteral">"set_hlavicka"</span>]);
+<a name="l00057"></a>00057 
+<a name="l00058"></a>00058     <span class="keywordflow">if</span> (!$this-&gt;sqlite = @<span class="keyword">new</span> SQLiteDatabase(<span class="stringliteral">"{$this-&gt;dirpath}/{$this-&gt;dbname}"</span>, 0777, $error))
+<a name="l00059"></a>00059     {
+<a name="l00060"></a>00060       $this-&gt;var-&gt;main[0]-&gt;ErrorMsg($error);
+<a name="l00061"></a>00061     }
+<a name="l00062"></a>00062 
+<a name="l00063"></a>00063     $this-&gt;<a class="code" href="classDynamicForm.html#09a4a73603f2a30d743c3131ac7f7945">Instalace</a>();
+<a name="l00064"></a>00064 
+<a name="l00065"></a>00065     $this-&gt;<a class="code" href="classDefaultModule.html#de138416b3a548d72b50432499895bb7">NastavitAdresuMenu</a>($this-&gt;<a class="code" href="classDefaultModule.html#f43261ee577b5bedbdaff44d21c64d38">NactiUnikatniObsah</a>($this-&gt;unikatni[<span class="stringliteral">"admin_menu"</span>], $this-&gt;idmodul));
+<a name="l00066"></a>00066   }
+<a name="l00067"></a>00067 
+<a name="l00073"></a><a class="code" href="classDynamicForm.html#09a4a73603f2a30d743c3131ac7f7945">00073</a>   <span class="keyword">private</span> function <a class="code" href="classDynamicForm.html#09a4a73603f2a30d743c3131ac7f7945">Instalace</a>()
+<a name="l00074"></a>00074   {
+<a name="l00075"></a>00075     <span class="keywordflow">if</span> (filesize(<span class="stringliteral">"{$this-&gt;dirpath}/{$this-&gt;dbname}"</span>) == 0)
+<a name="l00076"></a>00076     {
+<a name="l00077"></a>00077       <span class="keywordflow">if</span> (!@$this-&gt;sqlite-&gt;queryExec(<span class="stringliteral">"CREATE TABLE formular (</span>
+<a name="l00078"></a>00078 <span class="stringliteral">                                      id INTEGER UNSIGNED AUTO_INCREMENT PRIMARY KEY,</span>
+<a name="l00079"></a>00079 <span class="stringliteral">                                      adresa TEXT,</span>
+<a name="l00080"></a>00080 <span class="stringliteral">                                      nazev VARCHAR(200),</span>
+<a name="l00081"></a>00081 <span class="stringliteral">                                      predmet VARCHAR(200),</span>
+<a name="l00082"></a>00082 <span class="stringliteral">                                      email VARCHAR(100),</span>
+<a name="l00083"></a>00083 <span class="stringliteral">                                      textemail TEXT,</span>
+<a name="l00084"></a>00084 <span class="stringliteral">                                      dodatek TEXT,</span>
+<a name="l00085"></a>00085 <span class="stringliteral">                                      oznameni BOOL,</span>
+<a name="l00086"></a>00086 <span class="stringliteral">                                      predmetoznameni VARCHAR(200),</span>
+<a name="l00087"></a>00087 <span class="stringliteral">                                      textemailoznameni TEXT,</span>
+<a name="l00088"></a>00088 <span class="stringliteral">                                      zdrojovyemail VARCHAR(100),</span>
+<a name="l00089"></a>00089 <span class="stringliteral">                                      odesilateladmin VARCHAR(100),</span>
+<a name="l00090"></a>00090 <span class="stringliteral">                                      odesilateluzivatel VARCHAR(100));</span>
+<a name="l00091"></a>00091 <span class="stringliteral"></span>
+<a name="l00092"></a>00092 <span class="stringliteral">                                      CREATE TABLE prvek (</span>
+<a name="l00093"></a>00093 <span class="stringliteral">                                      id INTEGER UNSIGNED AUTO_INCREMENT PRIMARY KEY,</span>
+<a name="l00094"></a>00094 <span class="stringliteral">                                      formular INTEGER UNSIGNED,</span>
+<a name="l00095"></a>00095 <span class="stringliteral">                                      nazev VARCHAR(200),</span>
+<a name="l00096"></a>00096 <span class="stringliteral">                                      typ INTEGER UNSIGNED,</span>
+<a name="l00097"></a>00097 <span class="stringliteral">                                      value VARCHAR(200),</span>
+<a name="l00098"></a>00098 <span class="stringliteral">                                      readonly BOOL,</span>
+<a name="l00099"></a>00099 <span class="stringliteral">                                      disabled BOOL,</span>
+<a name="l00100"></a>00100 <span class="stringliteral">                                      povinne BOOL,</span>
+<a name="l00101"></a>00101 <span class="stringliteral">                                      reg_exp VARCHAR(500),</span>
+<a name="l00102"></a>00102 <span class="stringliteral">                                      vstupni_typ INTEGER UNSIGNED,</span>
+<a name="l00103"></a>00103 <span class="stringliteral">                                      min_val INTEGER UNSIGNED,</span>
+<a name="l00104"></a>00104 <span class="stringliteral">                                      max_val INTEGER UNSIGNED,</span>
+<a name="l00105"></a>00105 <span class="stringliteral">                                      poradi INTEGER UNSIGNED);</span>
+<a name="l00106"></a>00106 <span class="stringliteral">                                      "</span>, $error))
+<a name="l00107"></a>00107       {
+<a name="l00108"></a>00108         $this-&gt;var-&gt;main[0]-&gt;ErrorMsg($error);
+<a name="l00109"></a>00109       }
+<a name="l00110"></a>00110     }
+<a name="l00111"></a>00111   }
+<a name="l00112"></a>00112 
+<a name="l00126"></a><a class="code" href="classDynamicForm.html#968bd8ea8fa170487c2b09878dc6a8b1">00126</a>   <span class="keyword">public</span> function <a class="code" href="classDynamicForm.html#968bd8ea8fa170487c2b09878dc6a8b1">Formular</a>($adr = NULL, $tvar = 1)
+<a name="l00127"></a>00127   {
+<a name="l00128"></a>00128     <span class="keywordflow">if</span> (!Empty($adr))
+<a name="l00129"></a>00129     {
+<a name="l00130"></a>00130       $adresa = $adr;
+<a name="l00131"></a>00131     }
+<a name="l00132"></a>00132       <span class="keywordflow">else</span>
+<a name="l00133"></a>00133     {
+<a name="l00134"></a>00134       $adresa = stripslashes(htmlspecialchars($_SERVER[<span class="stringliteral">"QUERY_STRING"</span>], ENT_QUOTES));
+<a name="l00135"></a>00135     }
+<a name="l00136"></a>00136 
+<a name="l00137"></a>00137     $typ = array_keys($this-&gt;input);  <span class="comment">//nazvy prvku</span>
+<a name="l00138"></a>00138 
+<a name="l00139"></a>00139     <span class="comment">//vypis formulare</span>
+<a name="l00140"></a>00140     <a class="code" href="_8unikatni__fukce_8php.html#e241cf0159803673d118f68d99e6342f">$result</a> = <span class="stringliteral">""</span>;
+<a name="l00141"></a>00141     <span class="keywordflow">if</span> ($res = @$this-&gt;sqlite-&gt;query(<span class="stringliteral">"SELECT id, adresa, nazev, predmet, email, textemail, dodatek, oznameni, predmetoznameni, textemailoznameni, zdrojovyemail, odesilateladmin, odesilateluzivatel FROM formular WHERE adresa='{$adresa}';"</span>, NULL, $error))
+<a name="l00142"></a>00142     {
+<a name="l00143"></a>00143       $poc_prvku = $res-&gt;numRows();
+<a name="l00144"></a>00144       <span class="keywordflow">if</span> ($res-&gt;numRows() == 1)
+<a name="l00145"></a>00145       {
+<a name="l00146"></a>00146         <span class="keywordflow">while</span> ($data = $res-&gt;fetchObject())
+<a name="l00147"></a>00147         {
+<a name="l00148"></a>00148           <span class="comment">//vypis prvku</span>
+<a name="l00149"></a>00149           <span class="keywordflow">if</span> ($res1 = @$this-&gt;sqlite-&gt;query(<span class="stringliteral">"SELECT</span>
+<a name="l00150"></a>00150 <span class="stringliteral">                                            id,</span>
+<a name="l00151"></a>00151 <span class="stringliteral">                                            formular,</span>
+<a name="l00152"></a>00152 <span class="stringliteral">                                            nazev,</span>
+<a name="l00153"></a>00153 <span class="stringliteral">                                            typ,</span>
+<a name="l00154"></a>00154 <span class="stringliteral">                                            value,</span>
+<a name="l00155"></a>00155 <span class="stringliteral">                                            readonly,</span>
+<a name="l00156"></a>00156 <span class="stringliteral">                                            disabled,</span>
+<a name="l00157"></a>00157 <span class="stringliteral">                                            povinne,</span>
+<a name="l00158"></a>00158 <span class="stringliteral">                                            reg_exp,</span>
+<a name="l00159"></a>00159 <span class="stringliteral">                                            vstupni_typ,</span>
+<a name="l00160"></a>00160 <span class="stringliteral">                                            min_val,</span>
+<a name="l00161"></a>00161 <span class="stringliteral">                                            max_val,</span>
+<a name="l00162"></a>00162 <span class="stringliteral">                                            poradi</span>
+<a name="l00163"></a>00163 <span class="stringliteral">                                            FROM prvek</span>
+<a name="l00164"></a>00164 <span class="stringliteral">                                            WHERE prvek.formular={$data-&gt;id}</span>
+<a name="l00165"></a>00165 <span class="stringliteral">                                            ORDER BY poradi ASC;"</span>, NULL, $error))
+<a name="l00166"></a>00166           {
+<a name="l00167"></a>00167             $pocetelem = $res1-&gt;numRows();
+<a name="l00168"></a>00168             <span class="keywordflow">if</span> ($res1-&gt;numRows() != 0)
+<a name="l00169"></a>00169             {
+<a name="l00170"></a>00170               $i = 0;
+<a name="l00171"></a>00171               $vypis = array(<span class="stringliteral">"array_args"</span>,
+<a name="l00172"></a>00172                             $this-&gt;absolutni_url,
+<a name="l00173"></a>00173                             $this-&gt;dirpath);
+<a name="l00174"></a>00174 
+<a name="l00175"></a>00175               <span class="keywordflow">while</span> ($data1 = $res1-&gt;fetchObject())
+<a name="l00176"></a>00176               {
+<a name="l00177"></a>00177                 $podminka[$i][<span class="stringliteral">"id"</span>] = $data1-&gt;id;
+<a name="l00178"></a>00178                 $podminka[$i][<span class="stringliteral">"name"</span>] = <span class="stringliteral">"elem_{$data1-&gt;id}"</span>; <span class="comment">//jmeno elementu</span>
+<a name="l00179"></a>00179                 $podminka[$i][<span class="stringliteral">"nazev"</span>] = $data1-&gt;nazev; <span class="comment">//popis elementu</span>
+<a name="l00180"></a>00180                 $podminka[$i][<span class="stringliteral">"blok"</span>] = $data1-&gt;value; <span class="comment">//jmeno elementu</span>
+<a name="l00181"></a>00181                 $podminka[$i][<span class="stringliteral">"typ"</span>] = $typ[$data1-&gt;typ];  <span class="comment">//textove oznaceni typu</span>
+<a name="l00182"></a>00182                 $podminka[$i][<span class="stringliteral">"povinne"</span>] = $data1-&gt;povinne;  <span class="comment">//bool vyraz povinne</span>
+<a name="l00183"></a>00183                 $podminka[$i][<span class="stringliteral">"vstup"</span>] = $this-&gt;vstupni_typ[$data1-&gt;vstupni_typ];  <span class="comment">//typ vstupu</span>
+<a name="l00184"></a>00184                 $podminka[$i][<span class="stringliteral">"reg_exp"</span>] = $data1-&gt;reg_exp;  <span class="comment">//regularni vyraz</span>
+<a name="l00185"></a>00185                 $podminka[$i][<span class="stringliteral">"min"</span>] = $data-&gt;min_val;  <span class="comment">//minimalni pocet</span>
+<a name="l00186"></a>00186                 $podminka[$i][<span class="stringliteral">"max"</span>] = $data-&gt;max_val;  <span class="comment">//maximalni pocet</span>
+<a name="l00187"></a>00187                 $podminka[$i][<span class="stringliteral">"chyba"</span>] = <span class="stringliteral">""</span>;  <span class="comment">//text chyby</span>
+<a name="l00188"></a>00188                 $podminka[$i][<span class="stringliteral">"chyba_form"</span>] = <span class="stringliteral">""</span>; <span class="comment">//hidden chyby pro znovu naplneni</span>
+<a name="l00189"></a>00189 
+<a name="l00190"></a>00190                 <span class="keywordflow">switch</span> ($typ[$data1-&gt;typ])
+<a name="l00191"></a>00191                 {
+<a name="l00192"></a>00192                   <span class="keywordflow">case</span> <span class="stringliteral">"text"</span>:  <span class="comment">//pro text</span>
+<a name="l00193"></a>00193                     $vypis[] = $data1-&gt;id;
+<a name="l00194"></a>00194                     $vypis[] = <span class="stringliteral">" name=\"elem_{$data1-&gt;id}\""</span>; <span class="comment">//zvazit ajax konrolu!</span>
+<a name="l00195"></a>00195                     $vypis[] = $data1-&gt;nazev;
+<a name="l00196"></a>00196                     $vypis[] = (!Empty($_POST[<span class="stringliteral">"elem_{$data1-&gt;id}"</span>]) ? $_POST[<span class="stringliteral">"elem_{$data1-&gt;id}"</span>] : $data1-&gt;value); <span class="comment">//pri chybnem vyplneni, funkce jen na oko</span>
+<a name="l00197"></a>00197                     $podminka[$i][<span class="stringliteral">"chyba_form"</span>] = $this-&gt;<a class="code" href="classDefaultModule.html#f43261ee577b5bedbdaff44d21c64d38">NactiUnikatniObsah</a>($this-&gt;unikatni[<span class="stringliteral">"normal_error_hidden_{$tvar}"</span>], $data1-&gt;id, $_POST[<span class="stringliteral">"elem_{$data1-&gt;id}"</span>]);
+<a name="l00198"></a>00198                     <span class="comment">//$vypis[] = " onfocus=\"if(this.value == '{$data1-&gt;value}'){this.value='';}\" onblur=\"if(this.value == ''){this.value='{$data1-&gt;value}';}\"";</span>
+<a name="l00199"></a>00199                     $vypis[] = <span class="stringliteral">" onfocus=\"this.value=(this.value == '{$data1-&gt;value}' ? '' : this.value);\" onblur=\"this.value=(this.value == '' ? '{$data1-&gt;value}' : this.value);\""</span>;
+<a name="l00200"></a>00200                     $vypis[] = ($data1-&gt;readonly ? <span class="stringliteral">" readonly=\"readonly\""</span> : <span class="stringliteral">""</span>);
+<a name="l00201"></a>00201                     $vypis[] = ($data1-&gt;disabled ? <span class="stringliteral">" disabled=\"disabled\""</span> : <span class="stringliteral">""</span>);
+<a name="l00202"></a>00202                     $vypis[] = ($data1-&gt;povinne ? $this-&gt;znakpovinne : <span class="stringliteral">""</span>);
+<a name="l00203"></a>00203                   <span class="keywordflow">break</span>;
+<a name="l00204"></a>00204 
+<a name="l00205"></a>00205                   <span class="keywordflow">case</span> <span class="stringliteral">"checkbox"</span>:  <span class="comment">//pro checkbox</span>
+<a name="l00206"></a>00206                     $vypis[] = $data1-&gt;id;
+<a name="l00207"></a>00207                     $vypis[] = <span class="stringliteral">" name=\"elem_{$data1-&gt;id}\""</span>;
+<a name="l00208"></a>00208                     $vypis[] = $data1-&gt;nazev;
+<a name="l00209"></a>00209                     <span class="comment">//$vypis[] = $data1-&gt;value; //je tu jako skupina</span>
+<a name="l00210"></a>00210                     <span class="comment">//$vypis[] = " onfocus=\"if(this.value == '{$data1-&gt;value}'){this.value='';}\" onblur=\"if(this.value == ''){this.value='{$data1-&gt;value}';}\"";</span>
+<a name="l00211"></a>00211                     <span class="comment">//$vypis[] = " onfocus=\"this.value=(this.value == '{$data1-&gt;value}' ? '' : '');\" onblur=\"this.value=(this.value == '' ? '{$data1-&gt;value}' : '');\"";</span>
+<a name="l00212"></a>00212                     <span class="comment">//$vypis[] = ($data1-&gt;readonly ? " readonly=\"readonly\"" : "");</span>
+<a name="l00213"></a>00213                     $vypis[] = ($data1-&gt;disabled ? <span class="stringliteral">" disabled=\"disabled\""</span> : <span class="stringliteral">""</span>);
+<a name="l00214"></a>00214                     $vypis[] = ($data1-&gt;povinne ? $this-&gt;znakpovinne : <span class="stringliteral">""</span>);
+<a name="l00215"></a>00215                   <span class="keywordflow">break</span>;
+<a name="l00216"></a>00216 
+<a name="l00217"></a>00217                   <span class="keywordflow">case</span> <span class="stringliteral">"submit"</span>:  <span class="comment">//pro submit</span>
+<a name="l00218"></a>00218                     $vypis[] = $data1-&gt;id;
+<a name="l00219"></a>00219                     $vypis[] = <span class="stringliteral">" name=\"elem_{$data1-&gt;id}\""</span>;
+<a name="l00220"></a>00220                     <span class="comment">//$vypis[] = $data1-&gt;nazev;</span>
+<a name="l00221"></a>00221                     $vypis[] = $data1-&gt;value;
+<a name="l00222"></a>00222                     <span class="comment">//$vypis[] = " onfocus=\"if(this.value == '{$data1-&gt;value}'){this.value='';}\" onblur=\"if(this.value == ''){this.value='{$data1-&gt;value}';}\"";</span>
+<a name="l00223"></a>00223                     <span class="comment">//$vypis[] = " onfocus=\"this.value=(this.value == '{$data1-&gt;value}' ? '' : '');\" onblur=\"this.value=(this.value == '' ? '{$data1-&gt;value}' : '');\"";</span>
+<a name="l00224"></a>00224                     <span class="comment">//$vypis[] = ($data1-&gt;readonly ? " readonly=\"readonly\"" : "");   &gt;&gt; !Empty($_POST["elem_{$data1-&gt;id}"])    $captcha_kod == $_SESSION["slovo_{$this-&gt;captchakod[$adresa]["id"]}_vysledek"]</span>
+<a name="l00225"></a>00225                     $vypis[] = ($data1-&gt;disabled || !Empty($_POST[<span class="stringliteral">"elem_{$data1-&gt;id}"</span>]) ? <span class="stringliteral">" disabled=\"disabled\""</span> : <span class="stringliteral">""</span>);  <span class="comment">//osetreni do zadani spravneho captcha kodu</span>
+<a name="l00226"></a>00226                     $vypis[] = ($data1-&gt;disabled || !Empty($_POST[<span class="stringliteral">"elem_{$data1-&gt;id}"</span>]) ? <span class="stringliteral">"_disabled"</span> : <span class="stringliteral">""</span>);
+<a name="l00227"></a>00227                     $vypis[] = ($data1-&gt;povinne ? $this-&gt;znakpovinne : <span class="stringliteral">""</span>);
+<a name="l00228"></a>00228                   <span class="keywordflow">break</span>;
+<a name="l00229"></a>00229 
+<a name="l00230"></a>00230                   <span class="keywordflow">case</span> <span class="stringliteral">"reset"</span>:  <span class="comment">//pro reset</span>
+<a name="l00231"></a>00231                     $vypis[] = $data1-&gt;id;
+<a name="l00232"></a>00232                     $vypis[] = <span class="stringliteral">" name=\"elem_{$data1-&gt;id}\""</span>;
+<a name="l00233"></a>00233                     <span class="comment">//$vypis[] = $data1-&gt;nazev;</span>
+<a name="l00234"></a>00234                     $vypis[] = $data1-&gt;value;
+<a name="l00235"></a>00235                     <span class="comment">//$vypis[] = " onfocus=\"if(this.value == '{$data1-&gt;value}'){this.value='';}\" onblur=\"if(this.value == ''){this.value='{$data1-&gt;value}';}\"";</span>
+<a name="l00236"></a>00236                     <span class="comment">//$vypis[] = " onfocus=\"this.value=(this.value == '{$data1-&gt;value}' ? '' : '');\" onblur=\"this.value=(this.value == '' ? '{$data1-&gt;value}' : '');\"";</span>
+<a name="l00237"></a>00237                     <span class="comment">//$vypis[] = ($data1-&gt;readonly ? " readonly=\"readonly\"" : "");</span>
+<a name="l00238"></a>00238                     $vypis[] = ($data1-&gt;disabled ? <span class="stringliteral">" disabled=\"disabled\""</span> : <span class="stringliteral">""</span>);
+<a name="l00239"></a>00239                     $vypis[] = ($data1-&gt;povinne ? $this-&gt;znakpovinne : <span class="stringliteral">""</span>);
+<a name="l00240"></a>00240                   <span class="keywordflow">break</span>;
+<a name="l00241"></a>00241 
+<a name="l00242"></a>00242                   <span class="keywordflow">case</span> <span class="stringliteral">"captcha"</span>:  <span class="comment">//pro captcha</span>
+<a name="l00243"></a>00243                     $vypis[] = $data1-&gt;id;
+<a name="l00244"></a>00244                     $vypis[] = <span class="stringliteral">" name=\"elem_{$data1-&gt;id}\""</span>;
+<a name="l00245"></a>00245 
+<a name="l00246"></a>00246                     <span class="comment">//sam si nacte captchu</span>
+<a name="l00247"></a>00247                     $slovo = $this-&gt;var-&gt;main[0]-&gt;NactiFunkci(<span class="stringliteral">"CaptchaCode"</span>, <span class="stringliteral">"GenerujNahodneSlovo"</span>, $data1-&gt;value); <span class="comment">//pro id 1</span>
+<a name="l00248"></a>00248                     $captcha = $this-&gt;var-&gt;main[0]-&gt;NactiFunkci(<span class="stringliteral">"CaptchaCode"</span>, <span class="stringliteral">"CaptchaKod"</span>, $data1-&gt;value, $slovo);  <span class="comment">//pro id 1 se slovem</span>
+<a name="l00249"></a>00249 
+<a name="l00250"></a>00250                     $slovo = (is_array($slovo) ? $slovo[1] : $slovo);
+<a name="l00251"></a>00251 
+<a name="l00252"></a>00252                     $this-&gt;captchakod[$adresa][<span class="stringliteral">"id"</span>] = $data1-&gt;value;
+<a name="l00253"></a>00253                     $this-&gt;captchakod[$adresa][<span class="stringliteral">"captcha"</span>] = $captcha;
+<a name="l00254"></a>00254                     $this-&gt;captchakod[$adresa][<span class="stringliteral">"slovo"</span>] = $slovo;
+<a name="l00255"></a>00255                     <span class="comment">//$vypis[] = $data1-&gt;nazev;</span>
+<a name="l00256"></a>00256                     <span class="comment">//$vypis[] = $data1-&gt;value;</span>
+<a name="l00257"></a>00257                     <span class="comment">//$vypis[] = " onfocus=\"if(this.value == '{$data1-&gt;value}'){this.value='';}\" onblur=\"if(this.value == ''){this.value='{$data1-&gt;value}';}\"";</span>
+<a name="l00258"></a>00258                     <span class="comment">//$vypis[] = " onfocus=\"this.value=(this.value == '{$data1-&gt;value}' ? '' : '');\" onblur=\"this.value=(this.value == '' ? '{$data1-&gt;value}' : '');\"";</span>
+<a name="l00259"></a>00259                     <span class="comment">//$vypis[] = ($data1-&gt;readonly ? " readonly=\"readonly\"" : "");</span>
+<a name="l00260"></a>00260                     <span class="comment">//$vypis[] = ($data1-&gt;disabled ? " disabled=\"disabled\"" : "");</span>
+<a name="l00261"></a>00261                     $vypis[] = $data1-&gt;value; <span class="comment">//id</span>
+<a name="l00262"></a>00262                     $vypis[] = $captcha;
+<a name="l00263"></a>00263                     $vypis[] = $slovo;
+<a name="l00264"></a>00264                     <span class="comment">//$captcha_kod = $_POST["elem_{$data1-&gt;id}"];</span>
+<a name="l00265"></a>00265                     $vypis[] = ($data1-&gt;povinne ? $this-&gt;znakpovinne : <span class="stringliteral">""</span>);
+<a name="l00266"></a>00266                   <span class="keywordflow">break</span>;
+<a name="l00267"></a>00267                 }
+<a name="l00268"></a>00268 
+<a name="l00269"></a>00269                 $i++;
+<a name="l00270"></a>00270               } <span class="comment">//end while res1</span>
+<a name="l00271"></a>00271 
+<a name="l00272"></a>00272               $vypis[] = $data-&gt;dodatek;
+<a name="l00273"></a>00273 
+<a name="l00274"></a>00274               <a class="code" href="_8unikatni__fukce_8php.html#e241cf0159803673d118f68d99e6342f">$result</a> .= $this-&gt;<a class="code" href="classDefaultModule.html#f43261ee577b5bedbdaff44d21c64d38">NactiUnikatniObsah</a>($this-&gt;unikatni[<span class="stringliteral">"normal_vypis_form_{$tvar}"</span>], $vypis);
+<a name="l00275"></a>00275 
+<a name="l00276"></a>00276               $poc = 0;
+<a name="l00277"></a>00277               $check = <span class="keyword">true</span>;
+<a name="l00278"></a>00278               $vystup = <span class="stringliteral">""</span>;
+<a name="l00279"></a>00279               <span class="keywordflow">for</span> ($i = 0; $i &lt; $pocetelem; $i++) <span class="comment">//kontrola vyplneni a spravnosti dat</span>
+<a name="l00280"></a>00280               {
+<a name="l00281"></a>00281                 $zpost = $_POST[$podminka[$i][<span class="stringliteral">"name"</span>]]; <span class="comment">//vezme si hodnotu z postu podle nazvu elementu</span>
+<a name="l00282"></a>00282 
+<a name="l00283"></a>00283                 <span class="comment">//jmeno pro error hlasku</span>
+<a name="l00284"></a>00284                 $error_nazev = ($podminka[$i][<span class="stringliteral">"nazev"</span>][strlen($podminka[$i][<span class="stringliteral">"nazev"</span>]) - 1] == <span class="stringliteral">":"</span> ? substr($podminka[$i][<span class="stringliteral">"nazev"</span>], 0, -1) : $podminka[$i][<span class="stringliteral">"nazev"</span>]);
+<a name="l00285"></a>00285 
+<a name="l00286"></a>00286                 <span class="keywordflow">switch</span> ($podminka[$i][<span class="stringliteral">"typ"</span>]) <span class="comment">//rozliseni kontroly podle typu</span>
+<a name="l00287"></a>00287                 {
+<a name="l00288"></a>00288                   <span class="keywordflow">case</span> <span class="stringliteral">"text"</span>:  <span class="comment">//konrola pro text</span>
+<a name="l00289"></a>00289                     <span class="keywordflow">switch</span> ($podminka[$i][<span class="stringliteral">"vstup"</span>])
+<a name="l00290"></a>00290                     {
+<a name="l00291"></a>00291                       <span class="keywordflow">case</span> <span class="stringliteral">"text"</span>:  <span class="comment">//konvert textu</span>
+<a name="l00292"></a>00292                         settype($zpost, <span class="stringliteral">"string"</span>);
+<a name="l00293"></a>00293 
+<a name="l00294"></a>00294                         <span class="keywordflow">if</span> ($podminka[$i][<span class="stringliteral">"blok"</span>] == $zpost)  <span class="comment">//znacknuto bez rozmyslu</span>
+<a name="l00295"></a>00295                         {
+<a name="l00296"></a>00296                           $zpost = <span class="stringliteral">""</span>;
+<a name="l00297"></a>00297                           $podminka[$i][<span class="stringliteral">"chyba"</span>] = ($podminka[$i][<span class="stringliteral">"povinne"</span>] ? $this-&gt;<a class="code" href="classDefaultModule.html#f43261ee577b5bedbdaff44d21c64d38">NactiUnikatniObsah</a>($this-&gt;unikatni[<span class="stringliteral">"normal_error_empty_{$tvar}"</span>], $error_nazev) : <span class="stringliteral">""</span>);
+<a name="l00298"></a>00298                         }
+<a name="l00299"></a>00299                           <span class="keywordflow">else</span>
+<a name="l00300"></a>00300                         <span class="keywordflow">if</span> ($podminka[$i][<span class="stringliteral">"min"</span>] &gt; 0 &amp;&amp; <span class="comment">//kontrola rozsahu poctu pismen</span>
+<a name="l00301"></a>00301                             $podminka[$i][<span class="stringliteral">"max"</span>] &gt; 0)
+<a name="l00302"></a>00302                         {
+<a name="l00303"></a>00303                           <span class="keywordflow">if</span> (strlen($zpost) &lt; $podminka[$i][<span class="stringliteral">"min"</span>] ||
+<a name="l00304"></a>00304                               strlen($zpost) &gt; $podminka[$i][<span class="stringliteral">"max"</span>])
+<a name="l00305"></a>00305                           {
+<a name="l00306"></a>00306                             $zpost = <span class="stringliteral">""</span>;
+<a name="l00307"></a>00307                             $podminka[$i][<span class="stringliteral">"chyba"</span>] = $this-&gt;<a class="code" href="classDefaultModule.html#f43261ee577b5bedbdaff44d21c64d38">NactiUnikatniObsah</a>($this-&gt;unikatni[<span class="stringliteral">"normal_error_min_max_{$tvar}"</span>], $error_nazev);
+<a name="l00308"></a>00308                           }
+<a name="l00309"></a>00309                         }
+<a name="l00310"></a>00310                           <span class="keywordflow">else</span>
+<a name="l00311"></a>00311                         <span class="keywordflow">if</span> ($podminka[$i][<span class="stringliteral">"min"</span>] &gt; 0)  <span class="comment">//kontrola minina</span>
+<a name="l00312"></a>00312                         {
+<a name="l00313"></a>00313                           <span class="keywordflow">if</span> (strlen($zpost) &lt; $podminka[$i][<span class="stringliteral">"min"</span>])
+<a name="l00314"></a>00314                           {
+<a name="l00315"></a>00315                             $zpost = <span class="stringliteral">""</span>;
+<a name="l00316"></a>00316                             $podminka[$i][<span class="stringliteral">"chyba"</span>] = $this-&gt;<a class="code" href="classDefaultModule.html#f43261ee577b5bedbdaff44d21c64d38">NactiUnikatniObsah</a>($this-&gt;unikatni[<span class="stringliteral">"normal_error_min_{$tvar}"</span>], $error_nazev);
+<a name="l00317"></a>00317                           }
+<a name="l00318"></a>00318                         }
+<a name="l00319"></a>00319                           <span class="keywordflow">else</span>
+<a name="l00320"></a>00320                         <span class="keywordflow">if</span> ($podminka[$i][<span class="stringliteral">"max"</span>] &gt; 0)  <span class="comment">//kontrola maxima</span>
+<a name="l00321"></a>00321                         {
+<a name="l00322"></a>00322                           <span class="keywordflow">if</span> (strlen($zpost) &gt; $podminka[$i][<span class="stringliteral">"max"</span>])
+<a name="l00323"></a>00323                           {
+<a name="l00324"></a>00324                             $zpost = <span class="stringliteral">""</span>;
+<a name="l00325"></a>00325                             $podminka[$i][<span class="stringliteral">"chyba"</span>] = $this-&gt;<a class="code" href="classDefaultModule.html#f43261ee577b5bedbdaff44d21c64d38">NactiUnikatniObsah</a>($this-&gt;unikatni[<span class="stringliteral">"normal_error_max_{$tvar}"</span>], $error_nazev);
+<a name="l00326"></a>00326                           }
+<a name="l00327"></a>00327                         }
+<a name="l00328"></a>00328                       <span class="keywordflow">break</span>;
+<a name="l00329"></a>00329 
+<a name="l00330"></a>00330                       <span class="keywordflow">case</span> <span class="stringliteral">"integer"</span>: <span class="comment">//kontrola cisla</span>
+<a name="l00331"></a>00331                         settype($zpost, <span class="stringliteral">"integer"</span>);
+<a name="l00332"></a>00332 
+<a name="l00333"></a>00333                         <span class="keywordflow">if</span> ($podminka[$i][<span class="stringliteral">"blok"</span>] == $zpost)  <span class="comment">//znacknuto bez rozmyslu</span>
+<a name="l00334"></a>00334                         {
+<a name="l00335"></a>00335                           $zpost = <span class="stringliteral">""</span>;
+<a name="l00336"></a>00336                           $podminka[$i][<span class="stringliteral">"chyba"</span>] = ($podminka[$i][<span class="stringliteral">"povinne"</span>] ? $this-&gt;<a class="code" href="classDefaultModule.html#f43261ee577b5bedbdaff44d21c64d38">NactiUnikatniObsah</a>($this-&gt;unikatni[<span class="stringliteral">"normal_error_empty_{$tvar}"</span>], $error_nazev) : <span class="stringliteral">""</span>);
+<a name="l00337"></a>00337                         }
+<a name="l00338"></a>00338                           <span class="keywordflow">else</span>
+<a name="l00339"></a>00339                         <span class="keywordflow">if</span> ($podminka[$i][<span class="stringliteral">"min"</span>] &gt; 0 &amp;&amp;
+<a name="l00340"></a>00340                             $podminka[$i][<span class="stringliteral">"max"</span>] &gt; 0)
+<a name="l00341"></a>00341                         {
+<a name="l00342"></a>00342                           <span class="keywordflow">if</span> ($zpost &lt; $podminka[$i][<span class="stringliteral">"min"</span>] ||  <span class="comment">//kontrola hodnoty cisel</span>
+<a name="l00343"></a>00343                               $zpost &gt; $podminka[$i][<span class="stringliteral">"max"</span>])
+<a name="l00344"></a>00344                           {
+<a name="l00345"></a>00345                             $zpost = <span class="stringliteral">""</span>;
+<a name="l00346"></a>00346                             $podminka[$i][<span class="stringliteral">"chyba"</span>] = $this-&gt;<a class="code" href="classDefaultModule.html#f43261ee577b5bedbdaff44d21c64d38">NactiUnikatniObsah</a>($this-&gt;unikatni[<span class="stringliteral">"normal_error_min_max_{$tvar}"</span>], $error_nazev);
+<a name="l00347"></a>00347                           }
+<a name="l00348"></a>00348                         }
+<a name="l00349"></a>00349                           <span class="keywordflow">else</span>
+<a name="l00350"></a>00350                         <span class="keywordflow">if</span> ($podminka[$i][<span class="stringliteral">"min"</span>] &gt; 0)  <span class="comment">//kontrola minina</span>
+<a name="l00351"></a>00351                         {
+<a name="l00352"></a>00352                           <span class="keywordflow">if</span> ($zpost &lt; $podminka[$i][<span class="stringliteral">"min"</span>])
+<a name="l00353"></a>00353                           {
+<a name="l00354"></a>00354                             $zpost = <span class="stringliteral">""</span>;
+<a name="l00355"></a>00355                             $podminka[$i][<span class="stringliteral">"chyba"</span>] = $this-&gt;<a class="code" href="classDefaultModule.html#f43261ee577b5bedbdaff44d21c64d38">NactiUnikatniObsah</a>($this-&gt;unikatni[<span class="stringliteral">"normal_error_min_{$tvar}"</span>], $error_nazev);
+<a name="l00356"></a>00356                           }
+<a name="l00357"></a>00357                         }
+<a name="l00358"></a>00358                           <span class="keywordflow">else</span>
+<a name="l00359"></a>00359                         <span class="keywordflow">if</span> ($podminka[$i][<span class="stringliteral">"max"</span>] &gt; 0)  <span class="comment">//kontrola maxima</span>
+<a name="l00360"></a>00360                         {
+<a name="l00361"></a>00361                           <span class="keywordflow">if</span> ($zpost &gt; $podminka[$i][<span class="stringliteral">"max"</span>])
+<a name="l00362"></a>00362                           {
+<a name="l00363"></a>00363                             $zpost = <span class="stringliteral">""</span>;
+<a name="l00364"></a>00364                             $podminka[$i][<span class="stringliteral">"chyba"</span>] = $this-&gt;<a class="code" href="classDefaultModule.html#f43261ee577b5bedbdaff44d21c64d38">NactiUnikatniObsah</a>($this-&gt;unikatni[<span class="stringliteral">"normal_error_max_{$tvar}"</span>], $error_nazev);
+<a name="l00365"></a>00365                           }
+<a name="l00366"></a>00366                         }
+<a name="l00367"></a>00367                       <span class="keywordflow">break</span>;
+<a name="l00368"></a>00368 
+<a name="l00369"></a>00369                       <span class="keywordflow">case</span> <span class="stringliteral">"reg_exp"</span>: <span class="comment">//konrola reg_exp</span>
+<a name="l00370"></a>00370                         <span class="keywordflow">if</span> ($podminka[$i][<span class="stringliteral">"blok"</span>] == $zpost)  <span class="comment">//znacknuto bez rozmyslu</span>
+<a name="l00371"></a>00371                         {
+<a name="l00372"></a>00372                           $zpost = <span class="stringliteral">""</span>;
+<a name="l00373"></a>00373                           $podminka[$i][<span class="stringliteral">"chyba"</span>] = ($podminka[$i][<span class="stringliteral">"povinne"</span>] ? $this-&gt;<a class="code" href="classDefaultModule.html#f43261ee577b5bedbdaff44d21c64d38">NactiUnikatniObsah</a>($this-&gt;unikatni[<span class="stringliteral">"normal_error_empty_{$tvar}"</span>], $error_nazev) : <span class="stringliteral">""</span>);
+<a name="l00374"></a>00374                           <span class="keywordflow">break</span>;
+<a name="l00375"></a>00375                         }
+<a name="l00376"></a>00376                           <span class="keywordflow">else</span>
+<a name="l00377"></a>00377                         {
+<a name="l00378"></a>00378                           preg_match($podminka[$i][<span class="stringliteral">"reg_exp"</span>], $zpost, $ret);
+<a name="l00379"></a>00379                           $zpost = $ret[0];  <span class="comment">//vybere nulty index</span>
+<a name="l00380"></a>00380 
+<a name="l00381"></a>00381                           <span class="keywordflow">if</span> (Empty($zpost))
+<a name="l00382"></a>00382                           {
+<a name="l00383"></a>00383                             $podminka[$i][<span class="stringliteral">"chyba"</span>] = $this-&gt;<a class="code" href="classDefaultModule.html#f43261ee577b5bedbdaff44d21c64d38">NactiUnikatniObsah</a>($this-&gt;unikatni[<span class="stringliteral">"normal_error_reg_exp_{$tvar}"</span>], $error_nazev);
+<a name="l00384"></a>00384                           }
+<a name="l00385"></a>00385                         }
+<a name="l00386"></a>00386                       <span class="keywordflow">break</span>;
+<a name="l00387"></a>00387                     }
+<a name="l00388"></a>00388 
+<a name="l00389"></a>00389                     <span class="keywordflow">if</span> (Empty($zpost) &amp;&amp; $podminka[$i][<span class="stringliteral">"povinne"</span>])
+<a name="l00390"></a>00390                     {
+<a name="l00391"></a>00391                       $check = <span class="keyword">false</span>;
+<a name="l00392"></a>00392                     }
+<a name="l00393"></a>00393                       <span class="keywordflow">else</span>
+<a name="l00394"></a>00394                     {
+<a name="l00395"></a>00395                       $poc++;
+<a name="l00396"></a>00396                       $vystup[] = $podminka[$i][<span class="stringliteral">"nazev"</span>];
+<a name="l00397"></a>00397                       $vystup[] = $zpost;
+<a name="l00398"></a>00398                     }
+<a name="l00399"></a>00399                   <span class="keywordflow">break</span>;
+<a name="l00400"></a>00400 
+<a name="l00401"></a>00401                   <span class="keywordflow">case</span> <span class="stringliteral">"captcha"</span>: <span class="comment">//kontrola captcha kodu</span>
+<a name="l00402"></a>00402                     $pridavek = (is_array($_SESSION[<span class="stringliteral">"slovo_{$this-&gt;captchakod[$sablona]["</span><span class="keywordtype">id</span><span class="stringliteral">"]}"</span>]) ? <span class="stringliteral">"_solve"</span> : <span class="stringliteral">""</span>);
+<a name="l00403"></a>00403 
+<a name="l00404"></a>00404                     <span class="keywordflow">if</span> (count($_POST) == 0 || $zpost != $_SESSION[<span class="stringliteral">"slovo_{$this-&gt;captchakod[$adresa]["</span><span class="keywordtype">id</span><span class="stringliteral">"]}{$pridavek}_vysledek"</span>])
+<a name="l00405"></a>00405                     {
+<a name="l00406"></a>00406                       $_SESSION[<span class="stringliteral">"slovo_{$this-&gt;captchakod[$adresa]["</span><span class="keywordtype">id</span><span class="stringliteral">"]}{$pridavek}_vysledek"</span>] = $_SESSION[<span class="stringliteral">"slovo_{$this-&gt;captchakod[$adresa]["</span><span class="keywordtype">id</span><span class="stringliteral">"]}{$pridavek}"</span>];
+<a name="l00407"></a>00407                     }
+<a name="l00408"></a>00408 
+<a name="l00409"></a>00409                     <span class="keywordflow">if</span> (Empty($zpost) &amp;&amp; $podminka[$i][<span class="stringliteral">"povinne"</span>])
+<a name="l00410"></a>00410                     {
+<a name="l00411"></a>00411                       $check = <span class="keyword">false</span>;
+<a name="l00412"></a>00412                       $podminka[$i][<span class="stringliteral">"chyba"</span>] = $this-&gt;<a class="code" href="classDefaultModule.html#f43261ee577b5bedbdaff44d21c64d38">NactiUnikatniObsah</a>($this-&gt;unikatni[<span class="stringliteral">"normal_error_empty_captcha_{$tvar}"</span>]);  <span class="comment">//prazdna</span>
+<a name="l00413"></a>00413                     }
+<a name="l00414"></a>00414                       <span class="keywordflow">else</span>
+<a name="l00415"></a>00415                     {
+<a name="l00416"></a>00416                       <span class="keywordflow">if</span> ($zpost == $_SESSION[<span class="stringliteral">"slovo_{$this-&gt;captchakod[$adresa]["</span><span class="keywordtype">id</span><span class="stringliteral">"]}{$pridavek}_vysledek"</span>])  <span class="comment">//turinguv stroj rozliseni cloveka</span>
+<a name="l00417"></a>00417                       {
+<a name="l00418"></a>00418                         $poc++;
+<a name="l00419"></a>00419                       }
+<a name="l00420"></a>00420                         <span class="keywordflow">else</span>
+<a name="l00421"></a>00421                       {
+<a name="l00422"></a>00422                         $check = <span class="keyword">false</span>;
+<a name="l00423"></a>00423                         $podminka[$i][<span class="stringliteral">"chyba"</span>] = $this-&gt;<a class="code" href="classDefaultModule.html#f43261ee577b5bedbdaff44d21c64d38">NactiUnikatniObsah</a>($this-&gt;unikatni[<span class="stringliteral">"normal_error_wrong_captcha_{$tvar}"</span>]);  <span class="comment">//spatne</span>
+<a name="l00424"></a>00424                       }
+<a name="l00425"></a>00425                     }
+<a name="l00426"></a>00426                   <span class="keywordflow">break</span>;
+<a name="l00427"></a>00427 
+<a name="l00428"></a>00428                   <span class="keywordflow">case</span> <span class="stringliteral">"checkbox"</span>:  <span class="comment">//kontrola checkboxu</span>
+<a name="l00429"></a>00429                     <span class="keywordflow">if</span> (Empty($zpost) &amp;&amp; $podminka[$i][<span class="stringliteral">"povinne"</span>])
+<a name="l00430"></a>00430                     {
+<a name="l00431"></a>00431                       $check = <span class="keyword">false</span>;
+<a name="l00432"></a>00432                       $podminka[$i][<span class="stringliteral">"chyba"</span>] = $this-&gt;<a class="code" href="classDefaultModule.html#f43261ee577b5bedbdaff44d21c64d38">NactiUnikatniObsah</a>($this-&gt;unikatni[<span class="stringliteral">"normal_checked_error_{$tvar}"</span>], $error_nazev);
+<a name="l00433"></a>00433                     }
+<a name="l00434"></a>00434                       <span class="keywordflow">else</span>
+<a name="l00435"></a>00435                     {
+<a name="l00436"></a>00436                       $poc++;
+<a name="l00437"></a>00437                       $vystup[] = $zpost;
+<a name="l00438"></a>00438                     }
+<a name="l00439"></a>00439                   <span class="keywordflow">break</span>;
+<a name="l00440"></a>00440 
+<a name="l00441"></a>00441                   <span class="keywordflow">default</span>:  <span class="comment">//kontrola defaultnich hodnot bez ukladani obsahu: submit, reset</span>
+<a name="l00442"></a>00442                     <span class="keywordflow">if</span> (Empty($zpost) &amp;&amp; $podminka[$i][<span class="stringliteral">"povinne"</span>])
+<a name="l00443"></a>00443                     {
+<a name="l00444"></a>00444                       $check = <span class="keyword">false</span>;
+<a name="l00445"></a>00445                       $podminka[$i][<span class="stringliteral">"chyba"</span>] = $this-&gt;<a class="code" href="classDefaultModule.html#f43261ee577b5bedbdaff44d21c64d38">NactiUnikatniObsah</a>($this-&gt;unikatni[<span class="stringliteral">"normal_error_unkown_{$tvar}"</span>], $error_nazev);
+<a name="l00446"></a>00446                     }
+<a name="l00447"></a>00447                       <span class="keywordflow">else</span>
+<a name="l00448"></a>00448                     {
+<a name="l00449"></a>00449                       $poc++;
+<a name="l00450"></a>00450                     }
+<a name="l00451"></a>00451                   <span class="keywordflow">break</span>;
+<a name="l00452"></a>00452                 } <span class="comment">//end switch</span>
+<a name="l00453"></a>00453               } <span class="comment">//end for</span>
+<a name="l00454"></a>00454 
+<a name="l00455"></a>00455               <span class="keywordflow">if</span> ($this-&gt;var-&gt;debug_mod &amp;&amp; $this-&gt;debug_lokal)  <span class="comment">//debug mode</span>
+<a name="l00456"></a>00456               {
+<a name="l00457"></a>00457                 var_dump(sprintf(<span class="stringliteral">"check: %d, poc: %d, pocelem: %d, poc==pocelem: %d"</span>, $check, $poc, $pocetelem, $poc == $pocetelem));
+<a name="l00458"></a>00458               }
+<a name="l00459"></a>00459 
+<a name="l00460"></a>00460               <span class="keywordflow">if</span> ($check &amp;&amp;
+<a name="l00461"></a>00461                   $poc == $pocetelem &amp;&amp;
+<a name="l00462"></a>00462                   count($_POST) &gt; 1)
+<a name="l00463"></a>00463               {
+<a name="l00464"></a>00464                 $adminemail = array(<span class="stringliteral">"array_args"</span>,
+<a name="l00465"></a>00465                                     $this-&gt;absolutni_url,
+<a name="l00466"></a>00466                                     $_SERVER[<span class="stringliteral">"REMOTE_ADDR"</span>],
+<a name="l00467"></a>00467                                     gethostbyaddr($_SERVER[<span class="stringliteral">"REMOTE_ADDR"</span>]),
+<a name="l00468"></a>00468                                     $this-&gt;var-&gt;main[0]-&gt;NactiFunkci(<span class="stringliteral">"Funkce"</span>, <span class="stringliteral">"TypOS"</span>, $_SERVER[<span class="stringliteral">"HTTP_USER_AGENT"</span>]),
+<a name="l00469"></a>00469                                     $this-&gt;var-&gt;main[0]-&gt;NactiFunkci(<span class="stringliteral">"Funkce"</span>, <span class="stringliteral">"TypBrowseru"</span>, $_SERVER[<span class="stringliteral">"HTTP_USER_AGENT"</span>]),
+<a name="l00470"></a>00470                                     date($this-&gt;<a class="code" href="classDefaultModule.html#f43261ee577b5bedbdaff44d21c64d38">NactiUnikatniObsah</a>($this-&gt;unikatni[<span class="stringliteral">"normal_datum_admin_email_{$tvar}"</span>])));
+<a name="l00471"></a>00471 
+<a name="l00472"></a>00472                 <span class="comment">//je-li vyplneny odesilatel na tvrdo pouzije odesilatele, jinak bere z inputu zdrojoveho emailu</span>
+<a name="l00473"></a>00473                 $header = $this-&gt;<a class="code" href="classDefaultModule.html#f43261ee577b5bedbdaff44d21c64d38">NactiUnikatniObsah</a>($this-&gt;unikatni[<span class="stringliteral">"normal_email_header_{$tvar}"</span>],  <span class="comment">//hlavička</span>
+<a name="l00474"></a>00474                                                     $this-&gt;hlavicka,
+<a name="l00475"></a>00475                                                     (!Empty($data-&gt;odesilateladmin) ? htmlspecialchars_decode(html_entity_decode($data-&gt;odesilateladmin)) : $_POST[$data-&gt;zdrojovyemail]));
+<a name="l00476"></a>00476 
+<a name="l00477"></a>00477                 <span class="keywordflow">if</span> ($this-&gt;var-&gt;debug_mod &amp;&amp; $this-&gt;debug_lokal)  <span class="comment">//debug mode</span>
+<a name="l00478"></a>00478                 {
+<a name="l00479"></a>00479                   var_dump($header, $this-&gt;<a class="code" href="classDefaultModule.html#63db9554376ce0086c7769de33e6091b">PrevodUnikatnihoTextu</a>($data-&gt;textemail, array_merge($adminemail, $vystup)));
+<a name="l00480"></a>00480                 }
+<a name="l00481"></a>00481 
+<a name="l00482"></a>00482                 <span class="comment">//prepis symbolickych promennych, format: @@XX@@</span>
+<a name="l00483"></a>00483                 <span class="keywordflow">if</span> (@mail($data-&gt;email, $this-&gt;OsetreniTextu($data-&gt;predmet), $this-&gt;<a class="code" href="classDefaultModule.html#63db9554376ce0086c7769de33e6091b">PrevodUnikatnihoTextu</a>(htmlspecialchars_decode(html_entity_decode($data-&gt;textemail)), array_merge($adminemail, $vystup)), $header))  <span class="comment">//odeslani adminovy</span>
+<a name="l00484"></a>00484                 {
+<a name="l00485"></a>00485                   $em1 = $this-&gt;<a class="code" href="classDefaultModule.html#f43261ee577b5bedbdaff44d21c64d38">NactiUnikatniObsah</a>($this-&gt;unikatni[<span class="stringliteral">"normal_email_send_true_{$tvar}"</span>]);
+<a name="l00486"></a>00486                 }
+<a name="l00487"></a>00487                   <span class="keywordflow">else</span>
+<a name="l00488"></a>00488                 {
+<a name="l00489"></a>00489                   $em1 = $this-&gt;<a class="code" href="classDefaultModule.html#f43261ee577b5bedbdaff44d21c64d38">NactiUnikatniObsah</a>($this-&gt;unikatni[<span class="stringliteral">"normal_email_send_false_{$tvar}"</span>]);
+<a name="l00490"></a>00490                 }
+<a name="l00491"></a>00491 
+<a name="l00492"></a>00492                 <span class="comment">//oznamovaci email</span>
+<a name="l00493"></a>00493                 <span class="keywordflow">if</span> ($data-&gt;oznameni &amp;&amp; !Empty($data-&gt;zdrojovyemail))
+<a name="l00494"></a>00494                 {
+<a name="l00495"></a>00495                   $header2 = $this-&gt;<a class="code" href="classDefaultModule.html#f43261ee577b5bedbdaff44d21c64d38">NactiUnikatniObsah</a>($this-&gt;unikatni[<span class="stringliteral">"normal_email_header_{$tvar}"</span>],  <span class="comment">//hlavička</span>
+<a name="l00496"></a>00496                                                       $this-&gt;hlavicka,
+<a name="l00497"></a>00497                                                       htmlspecialchars_decode(html_entity_decode($data-&gt;odesilateluzivatel)));
+<a name="l00498"></a>00498 
+<a name="l00499"></a>00499                   $useremail = array(<span class="stringliteral">"array_args"</span>,
+<a name="l00500"></a>00500                                     $this-&gt;absolutni_url);
+<a name="l00501"></a>00501 
+<a name="l00502"></a>00502                   <span class="keywordflow">if</span> ($this-&gt;var-&gt;debug_mod &amp;&amp; $this-&gt;debug_lokal)  <span class="comment">//debug mode</span>
+<a name="l00503"></a>00503                   {
+<a name="l00504"></a>00504                     var_dump($header2, $this-&gt;<a class="code" href="classDefaultModule.html#63db9554376ce0086c7769de33e6091b">PrevodUnikatnihoTextu</a>($data-&gt;textemailoznameni, array_merge($useremail, $vystup)));
+<a name="l00505"></a>00505                   }
+<a name="l00506"></a>00506 
+<a name="l00507"></a>00507                   <span class="comment">//odeslani, format: @@XX@@</span>
+<a name="l00508"></a>00508                   <span class="keywordflow">if</span> (@mail($_POST[$data-&gt;zdrojovyemail], $this-&gt;OsetreniTextu($data-&gt;predmetoznameni), htmlspecialchars_decode(html_entity_decode($this-&gt;<a class="code" href="classDefaultModule.html#63db9554376ce0086c7769de33e6091b">PrevodUnikatnihoTextu</a>($data-&gt;textemailoznameni)), array_merge($useremail, $vystup)), $header2))
+<a name="l00509"></a>00509                   {
+<a name="l00510"></a>00510                     $em2 = $this-&gt;<a class="code" href="classDefaultModule.html#f43261ee577b5bedbdaff44d21c64d38">NactiUnikatniObsah</a>($this-&gt;unikatni[<span class="stringliteral">"normal_email_send2_true_{$tvar}"</span>]);
+<a name="l00511"></a>00511                   }
+<a name="l00512"></a>00512                     <span class="keywordflow">else</span>
+<a name="l00513"></a>00513                   {
+<a name="l00514"></a>00514                     $em2 = $this-&gt;<a class="code" href="classDefaultModule.html#f43261ee577b5bedbdaff44d21c64d38">NactiUnikatniObsah</a>($this-&gt;unikatni[<span class="stringliteral">"normal_email_send2_false_{$tvar}"</span>]);
+<a name="l00515"></a>00515                   }
+<a name="l00516"></a>00516                 }
+<a name="l00517"></a>00517 
+<a name="l00518"></a>00518                 <a class="code" href="_8unikatni__fukce_8php.html#e241cf0159803673d118f68d99e6342f">$result</a> .= $this-&gt;<a class="code" href="classDefaultModule.html#f43261ee577b5bedbdaff44d21c64d38">NactiUnikatniObsah</a>($this-&gt;unikatni[<span class="stringliteral">"normal_email_send_complet_{$tvar}"</span>],
+<a name="l00519"></a>00519                                                     $em1,
+<a name="l00520"></a>00520                                                     $em2,
+<a name="l00521"></a>00521                                                     <span class="stringliteral">"{$this-&gt;absolutni_url}{$_GET[$this-&gt;var-&gt;get_kam]}"</span>);
+<a name="l00522"></a>00522               }
+<a name="l00523"></a>00523                 <span class="keywordflow">else</span>
+<a name="l00524"></a>00524               {
+<a name="l00525"></a>00525                 <span class="keywordflow">if</span> (count($_POST) &gt; 1)
+<a name="l00526"></a>00526                 {
+<a name="l00527"></a>00527                   $chyba = <span class="stringliteral">""</span>;
+<a name="l00528"></a>00528                   $chyba_form = <span class="stringliteral">""</span>;
+<a name="l00529"></a>00529                   <span class="keywordflow">for</span> ($i = 0; $i &lt; $pocetelem; $i++)
+<a name="l00530"></a>00530                   {
+<a name="l00531"></a>00531                     $chyba .= $podminka[$i][<span class="stringliteral">"chyba"</span>];
+<a name="l00532"></a>00532                     $chyba_form .= $podminka[$i][<span class="stringliteral">"chyba_form"</span>];
+<a name="l00533"></a>00533                   }
+<a name="l00534"></a>00534 
+<a name="l00535"></a>00535                   <span class="keywordflow">if</span> (Empty($_POST[<span class="stringliteral">"error_tlacitko"</span>]))
+<a name="l00536"></a>00536                   {
+<a name="l00537"></a>00537                     $error_button = $this-&gt;<a class="code" href="classDefaultModule.html#f43261ee577b5bedbdaff44d21c64d38">NactiUnikatniObsah</a>($this-&gt;unikatni[<span class="stringliteral">"normal_error_button_{$tvar}"</span>]);
+<a name="l00538"></a>00538                   }
+<a name="l00539"></a>00539 
+<a name="l00540"></a>00540                   <a class="code" href="_8unikatni__fukce_8php.html#e241cf0159803673d118f68d99e6342f">$result</a> .= $this-&gt;<a class="code" href="classDefaultModule.html#f43261ee577b5bedbdaff44d21c64d38">NactiUnikatniObsah</a>($this-&gt;unikatni[<span class="stringliteral">"normal_error_end_{$tvar}"</span>],
+<a name="l00541"></a>00541                                                       $chyba,
+<a name="l00542"></a>00542                                                       $chyba_form,
+<a name="l00543"></a>00543                                                       $error_button,
+<a name="l00544"></a>00544                                                       <span class="stringliteral">"{$this-&gt;absolutni_url}{$_GET[$this-&gt;var-&gt;get_kam]}"</span>);
+<a name="l00545"></a>00545                 }
+<a name="l00546"></a>00546               } <span class="comment">//end fail data</span>
+<a name="l00547"></a>00547             }
+<a name="l00548"></a>00548           }
+<a name="l00549"></a>00549             <span class="keywordflow">else</span>
+<a name="l00550"></a>00550           {
+<a name="l00551"></a>00551             $this-&gt;var-&gt;main[0]-&gt;ErrorMsg($error);
+<a name="l00552"></a>00552           }
+<a name="l00553"></a>00553         } <span class="comment">//end while res</span>
+<a name="l00554"></a>00554       } <span class="comment">//num rows</span>
+<a name="l00555"></a>00555         <span class="keywordflow">else</span>
+<a name="l00556"></a>00556       {
+<a name="l00557"></a>00557         <a class="code" href="_8unikatni__fukce_8php.html#e241cf0159803673d118f68d99e6342f">$result</a> = <span class="stringliteral">""</span>;
+<a name="l00558"></a>00558       }
+<a name="l00559"></a>00559     }
+<a name="l00560"></a>00560       <span class="keywordflow">else</span>
+<a name="l00561"></a>00561     {
+<a name="l00562"></a>00562       $this-&gt;var-&gt;main[0]-&gt;ErrorMsg($error);
+<a name="l00563"></a>00563     }
+<a name="l00564"></a>00564 
+<a name="l00565"></a>00565     <span class="keywordflow">return</span> <a class="code" href="_8unikatni__fukce_8php.html#e241cf0159803673d118f68d99e6342f">$result</a>;
+<a name="l00566"></a>00566   }
+<a name="l00567"></a>00567 
+<a name="l00574"></a><a class="code" href="classDynamicForm.html#a243bbbb0716a84a8e313d220fc8b386">00574</a>   <span class="keyword">public</span> function <a class="code" href="classDynamicForm.html#a243bbbb0716a84a8e313d220fc8b386">AdminObsah</a>()
+<a name="l00575"></a>00575   {
+<a name="l00576"></a>00576     <span class="keywordflow">if</span> ($_GET[$this-&gt;var-&gt;get_kam] == $this-&gt;var-&gt;adresaadminu &amp;&amp;
+<a name="l00577"></a>00577         $this-&gt;var-&gt;aktivniadmin)
+<a name="l00578"></a>00578     {
+<a name="l00579"></a>00579       <span class="keywordflow">switch</span> ($_GET[$this-&gt;var-&gt;get_idmodul])
+<a name="l00580"></a>00580       {
+<a name="l00581"></a>00581         <span class="keywordflow">case</span> $this-&gt;idmodul:  <span class="comment">//id modul</span>
+<a name="l00582"></a>00582           <a class="code" href="_8unikatni__fukce_8php.html#e241cf0159803673d118f68d99e6342f">$result</a> = $this-&gt;<a class="code" href="classDynamicForm.html#47359775e53d1a674e9988b0dc22bc5b">AdministraceFormulare</a>();
+<a name="l00583"></a>00583         <span class="keywordflow">break</span>;
+<a name="l00584"></a>00584       }
+<a name="l00585"></a>00585     }
+<a name="l00586"></a>00586 
+<a name="l00587"></a>00587     <span class="keywordflow">return</span> <a class="code" href="_8unikatni__fukce_8php.html#e241cf0159803673d118f68d99e6342f">$result</a>;
+<a name="l00588"></a>00588   }
+<a name="l00589"></a>00589 
+<a name="l00597"></a><a class="code" href="classDynamicForm.html#cab01cb55c78db6297b08959f44f302a">00597</a>   <span class="keyword">private</span> function <a class="code" href="classDynamicForm.html#cab01cb55c78db6297b08959f44f302a">VyberVstupu</a>($id = NULL, $adresa = NULL)
+<a name="l00598"></a>00598   {
+<a name="l00599"></a>00599     $typ = $this-&gt;vstupni_typ;
+<a name="l00600"></a>00600 
+<a name="l00601"></a>00601     <a class="code" href="_8unikatni__fukce_8php.html#e241cf0159803673d118f68d99e6342f">$result</a> = $this-&gt;<a class="code" href="classDefaultModule.html#f43261ee577b5bedbdaff44d21c64d38">NactiUnikatniObsah</a>($this-&gt;unikatni[<span class="stringliteral">"admin_vstupni_typ_select_begin"</span>], $adresa);
+<a name="l00602"></a>00602     <span class="keywordflow">for</span> ($i = 0; $i &lt; count($typ); $i++)
+<a name="l00603"></a>00603     {
+<a name="l00604"></a>00604       <a class="code" href="_8unikatni__fukce_8php.html#e241cf0159803673d118f68d99e6342f">$result</a> .= $this-&gt;<a class="code" href="classDefaultModule.html#f43261ee577b5bedbdaff44d21c64d38">NactiUnikatniObsah</a>($this-&gt;unikatni[<span class="stringliteral">"admin_vstupni_typ_select"</span>],
+<a name="l00605"></a>00605                                           $i,
+<a name="l00606"></a>00606                                           ($id == $i ? <span class="stringliteral">" selected=\"selected\""</span> : <span class="stringliteral">""</span>),
+<a name="l00607"></a>00607                                           $typ[$i]);
+<a name="l00608"></a>00608       ;
+<a name="l00609"></a>00609     }
+<a name="l00610"></a>00610     <a class="code" href="_8unikatni__fukce_8php.html#e241cf0159803673d118f68d99e6342f">$result</a> .= $this-&gt;<a class="code" href="classDefaultModule.html#f43261ee577b5bedbdaff44d21c64d38">NactiUnikatniObsah</a>($this-&gt;unikatni[<span class="stringliteral">"admin_vstupni_typ_select_end"</span>]);
+<a name="l00611"></a>00611 
+<a name="l00612"></a>00612     <span class="keywordflow">return</span> <a class="code" href="_8unikatni__fukce_8php.html#e241cf0159803673d118f68d99e6342f">$result</a>;
+<a name="l00613"></a>00613   }
+<a name="l00614"></a>00614 
+<a name="l00622"></a><a class="code" href="classDynamicForm.html#60f11d17c3618c7e402e95477a172306">00622</a>   <span class="keyword">private</span> function <a class="code" href="classDynamicForm.html#60f11d17c3618c7e402e95477a172306">VyberTypu</a>($id = NULL, $adresa = NULL)
+<a name="l00623"></a>00623   {
+<a name="l00624"></a>00624     $typ = array_keys($this-&gt;input);
+<a name="l00625"></a>00625 
+<a name="l00626"></a>00626     <a class="code" href="_8unikatni__fukce_8php.html#e241cf0159803673d118f68d99e6342f">$result</a> = $this-&gt;<a class="code" href="classDefaultModule.html#f43261ee577b5bedbdaff44d21c64d38">NactiUnikatniObsah</a>($this-&gt;unikatni[<span class="stringliteral">"admin_typ_select_begin"</span>], $adresa);
+<a name="l00627"></a>00627 
+<a name="l00628"></a>00628     <span class="keywordflow">for</span> ($i = 0; $i &lt; count($typ); $i++)
+<a name="l00629"></a>00629     {
+<a name="l00630"></a>00630       <a class="code" href="_8unikatni__fukce_8php.html#e241cf0159803673d118f68d99e6342f">$result</a> .= $this-&gt;<a class="code" href="classDefaultModule.html#f43261ee577b5bedbdaff44d21c64d38">NactiUnikatniObsah</a>($this-&gt;unikatni[<span class="stringliteral">"admin_typ_select"</span>],
+<a name="l00631"></a>00631                                           $i,
+<a name="l00632"></a>00632                                           ($id == $i ? <span class="stringliteral">" selected=\"selected\""</span> : <span class="stringliteral">""</span>),
+<a name="l00633"></a>00633                                           $typ[$i],
+<a name="l00634"></a>00634                                           $this-&gt;input[$typ[$i]]);
+<a name="l00635"></a>00635     }
+<a name="l00636"></a>00636     <a class="code" href="_8unikatni__fukce_8php.html#e241cf0159803673d118f68d99e6342f">$result</a> .= $this-&gt;<a class="code" href="classDefaultModule.html#f43261ee577b5bedbdaff44d21c64d38">NactiUnikatniObsah</a>($this-&gt;unikatni[<span class="stringliteral">"admin_typ_select_end"</span>]);
+<a name="l00637"></a>00637 
+<a name="l00638"></a>00638     <span class="keywordflow">return</span> <a class="code" href="_8unikatni__fukce_8php.html#e241cf0159803673d118f68d99e6342f">$result</a>;
+<a name="l00639"></a>00639   }
+<a name="l00640"></a>00640 
+<a name="l00648"></a><a class="code" href="classDynamicForm.html#018b5b0009bc2f002541efcfbc6f8b0b">00648</a>   <span class="keyword">private</span> function <a class="code" href="classDynamicForm.html#018b5b0009bc2f002541efcfbc6f8b0b">VyberSekce</a>($id = NULL)
+<a name="l00649"></a>00649   {
+<a name="l00650"></a>00650     <a class="code" href="_8unikatni__fukce_8php.html#e241cf0159803673d118f68d99e6342f">$result</a> = <span class="stringliteral">""</span>;
+<a name="l00651"></a>00651     <span class="keywordflow">if</span> ($res = @$this-&gt;sqlite-&gt;query(<span class="stringliteral">"SELECT id, adresa FROM formular ORDER BY LOWER(nazev) ASC;"</span>, NULL, $error))
+<a name="l00652"></a>00652     {
+<a name="l00653"></a>00653       <span class="keywordflow">if</span> ($res-&gt;numRows() != 0)
+<a name="l00654"></a>00654       {
+<a name="l00655"></a>00655         <a class="code" href="_8unikatni__fukce_8php.html#e241cf0159803673d118f68d99e6342f">$result</a> = $this-&gt;<a class="code" href="classDefaultModule.html#f43261ee577b5bedbdaff44d21c64d38">NactiUnikatniObsah</a>($this-&gt;unikatni[<span class="stringliteral">"admin_formular_select_begin"</span>]);
+<a name="l00656"></a>00656         <span class="keywordflow">while</span> ($data = $res-&gt;fetchObject())
+<a name="l00657"></a>00657         {
+<a name="l00658"></a>00658           <a class="code" href="_8unikatni__fukce_8php.html#e241cf0159803673d118f68d99e6342f">$result</a> .= $this-&gt;<a class="code" href="classDefaultModule.html#f43261ee577b5bedbdaff44d21c64d38">NactiUnikatniObsah</a>($this-&gt;unikatni[<span class="stringliteral">"admin_formular_select"</span>],
+<a name="l00659"></a>00659                                               $data-&gt;id,
+<a name="l00660"></a>00660                                               (!Empty($id) &amp;&amp; $id == $data-&gt;id ? <span class="stringliteral">" selected=\"selected\""</span> : <span class="stringliteral">""</span>),
+<a name="l00661"></a>00661                                               $data-&gt;adresa);
+<a name="l00662"></a>00662         }
+<a name="l00663"></a>00663         <a class="code" href="_8unikatni__fukce_8php.html#e241cf0159803673d118f68d99e6342f">$result</a> .= $this-&gt;<a class="code" href="classDefaultModule.html#f43261ee577b5bedbdaff44d21c64d38">NactiUnikatniObsah</a>($this-&gt;unikatni[<span class="stringliteral">"admin_formular_select_end"</span>]);
+<a name="l00664"></a>00664       }
+<a name="l00665"></a>00665         <span class="keywordflow">else</span>
+<a name="l00666"></a>00666       {
+<a name="l00667"></a>00667         <a class="code" href="_8unikatni__fukce_8php.html#e241cf0159803673d118f68d99e6342f">$result</a> = $this-&gt;<a class="code" href="classDefaultModule.html#f43261ee577b5bedbdaff44d21c64d38">NactiUnikatniObsah</a>($this-&gt;unikatni[<span class="stringliteral">"admin_formular_select_null"</span>]);
+<a name="l00668"></a>00668       }
+<a name="l00669"></a>00669     }
+<a name="l00670"></a>00670       <span class="keywordflow">else</span>
+<a name="l00671"></a>00671     {
+<a name="l00672"></a>00672       $this-&gt;var-&gt;main[0]-&gt;ErrorMsg($error);
+<a name="l00673"></a>00673     }
+<a name="l00674"></a>00674 
+<a name="l00675"></a>00675     <span class="keywordflow">return</span> <a class="code" href="_8unikatni__fukce_8php.html#e241cf0159803673d118f68d99e6342f">$result</a>;
+<a name="l00676"></a>00676   }
+<a name="l00677"></a>00677 
+<a name="l00686"></a><a class="code" href="classDynamicForm.html#ccd052e8c4b325e698aefc334fd3f504">00686</a>   <span class="keyword">private</span> function <a class="code" href="classDynamicForm.html#ccd052e8c4b325e698aefc334fd3f504">PocetRadku</a>($formular, $inc = 0)
+<a name="l00687"></a>00687   {
+<a name="l00688"></a>00688     settype($formular, <span class="stringliteral">"integer"</span>);
+<a name="l00689"></a>00689     settype($inc, <span class="stringliteral">"integer"</span>);
+<a name="l00690"></a>00690 
+<a name="l00691"></a>00691     <a class="code" href="_8unikatni__fukce_8php.html#e241cf0159803673d118f68d99e6342f">$result</a> = 0;
+<a name="l00692"></a>00692     <span class="keywordflow">if</span> ($res = @$this-&gt;sqlite-&gt;query(<span class="stringliteral">"SELECT COUNT(id) as pocet FROM prvek WHERE formular={$formular};"</span>, NULL, $error))
+<a name="l00693"></a>00693     {
+<a name="l00694"></a>00694       <span class="keywordflow">if</span> ($res-&gt;numRows() == 1)
+<a name="l00695"></a>00695       {
+<a name="l00696"></a>00696         <a class="code" href="_8unikatni__fukce_8php.html#e241cf0159803673d118f68d99e6342f">$result</a> = $res-&gt;fetchObject()-&gt;pocet + $inc;
+<a name="l00697"></a>00697       }
+<a name="l00698"></a>00698     }
+<a name="l00699"></a>00699       <span class="keywordflow">else</span>
+<a name="l00700"></a>00700     {
+<a name="l00701"></a>00701       $this-&gt;var-&gt;main[0]-&gt;ErrorMsg($error);
+<a name="l00702"></a>00702     }
+<a name="l00703"></a>00703 
+<a name="l00704"></a>00704     <span class="keywordflow">return</span> <a class="code" href="_8unikatni__fukce_8php.html#e241cf0159803673d118f68d99e6342f">$result</a>;
+<a name="l00705"></a>00705   }
+<a name="l00706"></a>00706 
+<a name="l00713"></a><a class="code" href="classDynamicForm.html#47359775e53d1a674e9988b0dc22bc5b">00713</a>   <span class="keyword">private</span> function <a class="code" href="classDynamicForm.html#47359775e53d1a674e9988b0dc22bc5b">AdministraceFormulare</a>()
+<a name="l00714"></a>00714   {
+<a name="l00715"></a>00715     <a class="code" href="_8unikatni__fukce_8php.html#e241cf0159803673d118f68d99e6342f">$result</a> = $this-&gt;<a class="code" href="classDefaultModule.html#f43261ee577b5bedbdaff44d21c64d38">NactiUnikatniObsah</a>($this-&gt;unikatni[<span class="stringliteral">"admin_obsah"</span>],
+<a name="l00716"></a>00716                                         <span class="stringliteral">"?{$this-&gt;var-&gt;get_kam}={$this-&gt;var-&gt;adresaadminu}&amp;amp;{$this-&gt;var-&gt;get_idmodul}={$this-&gt;idmodul}&amp;amp;co=addform"</span>,
+<a name="l00717"></a>00717                                         <span class="stringliteral">"?{$this-&gt;var-&gt;get_kam}={$this-&gt;var-&gt;adresaadminu}&amp;amp;{$this-&gt;var-&gt;get_idmodul}={$this-&gt;idmodul}&amp;amp;co=test_rv"</span>,
+<a name="l00718"></a>00718                                         $this-&gt;<a class="code" href="classDynamicForm.html#7e1d64987e220c825e89e284ead53a9a">AdminVypisForm</a>());
+<a name="l00719"></a>00719 
+<a name="l00720"></a>00720     $co = $_GET[<span class="stringliteral">"co"</span>];
+<a name="l00721"></a>00721 
+<a name="l00722"></a>00722     <span class="keywordflow">if</span> (!Empty($co))
+<a name="l00723"></a>00723     {
+<a name="l00724"></a>00724       <span class="keywordflow">switch</span> ($co)
+<a name="l00725"></a>00725       {
+<a name="l00726"></a>00726         <span class="keywordflow">case</span> <span class="stringliteral">"test_rv"</span>:
+<a name="l00727"></a>00727           $vstup = stripslashes(htmlspecialchars($_POST[<span class="stringliteral">"vstup"</span>], ENT_QUOTES));
+<a name="l00728"></a>00728           <span class="comment">//prepinani podle webu/lokalu</span>
+<a name="l00729"></a>00729           $reg_exp = (!in_array($_SERVER[<span class="stringliteral">"REMOTE_ADDR"</span>], $this-&gt;var-&gt;ipblok) ? $_POST[<span class="stringliteral">"reg_exp"</span>] : stripslashes(htmlspecialchars($_POST[<span class="stringliteral">"reg_exp"</span>], ENT_QUOTES)));
+<a name="l00730"></a>00730 
+<a name="l00731"></a>00731           <a class="code" href="_8unikatni__fukce_8php.html#e241cf0159803673d118f68d99e6342f">$result</a> = $this-&gt;<a class="code" href="classDefaultModule.html#f43261ee577b5bedbdaff44d21c64d38">NactiUnikatniObsah</a>($this-&gt;unikatni[<span class="stringliteral">"admin_test_rv"</span>],
+<a name="l00732"></a>00732                                               $vstup,
+<a name="l00733"></a>00733                                               $reg_exp);
+<a name="l00734"></a>00734 
+<a name="l00735"></a>00735           <span class="keywordflow">if</span> (!Empty($_POST[<span class="stringliteral">"tlacitko"</span>]) &amp;&amp;
+<a name="l00736"></a>00736               !Empty($vstup) &amp;&amp;
+<a name="l00737"></a>00737               !Empty($reg_exp))
+<a name="l00738"></a>00738           {
+<a name="l00739"></a>00739             preg_match($reg_exp, $vstup, $ret);
+<a name="l00740"></a>00740             <a class="code" href="_8unikatni__fukce_8php.html#e241cf0159803673d118f68d99e6342f">$result</a> .= (!Empty($ret[0]) ? $this-&gt;<a class="code" href="classDefaultModule.html#f43261ee577b5bedbdaff44d21c64d38">NactiUnikatniObsah</a>($this-&gt;unikatni[<span class="stringliteral">"admin_test_rv_out"</span>], $ret[0]) : <span class="stringliteral">"NULL"</span>);  <span class="comment">//vybere nulty index</span>
+<a name="l00741"></a>00741           }
+<a name="l00742"></a>00742         <span class="keywordflow">break</span>;
+<a name="l00743"></a>00743 
+<a name="l00744"></a>00744         <span class="keywordflow">case</span> <span class="stringliteral">"addform"</span>: <span class="comment">//pridavani formulare</span>
+<a name="l00745"></a>00745           <a class="code" href="_8unikatni__fukce_8php.html#e241cf0159803673d118f68d99e6342f">$result</a> = $this-&gt;<a class="code" href="classDefaultModule.html#f43261ee577b5bedbdaff44d21c64d38">NactiUnikatniObsah</a>($this-&gt;unikatni[<span class="stringliteral">"admin_add_form"</span>]); <span class="comment">//vlozit moznosti captcha kodu</span>
+<a name="l00746"></a>00746 
+<a name="l00747"></a>00747           $adresa = stripslashes(htmlspecialchars($_POST[<span class="stringliteral">"adresa"</span>], ENT_QUOTES));
+<a name="l00748"></a>00748           $nazev = stripslashes(htmlspecialchars($_POST[<span class="stringliteral">"nazev"</span>], ENT_QUOTES));
+<a name="l00749"></a>00749           $predmet = stripslashes(htmlspecialchars($_POST[<span class="stringliteral">"predmet"</span>], ENT_QUOTES));
+<a name="l00750"></a>00750           $email = $this-&gt;var-&gt;main[0]-&gt;NactiFunkci(<span class="stringliteral">"Funkce"</span>, <span class="stringliteral">"KontrolaEmailu"</span>, $_POST[<span class="stringliteral">"email"</span>]);  <span class="comment">//kontrola emailu</span>
+<a name="l00751"></a>00751           $textemail = stripslashes(htmlspecialchars($_POST[<span class="stringliteral">"textemail"</span>], ENT_QUOTES));
+<a name="l00752"></a>00752           $dodatek = stripslashes(htmlspecialchars($_POST[<span class="stringliteral">"dodatek"</span>], ENT_QUOTES));
+<a name="l00753"></a>00753           $oznameni = (!Empty($_POST[<span class="stringliteral">"oznameni"</span>]) ? 1 : 0);
+<a name="l00754"></a>00754           $predmetoznameni = stripslashes(htmlspecialchars($_POST[<span class="stringliteral">"predmetoznameni"</span>], ENT_QUOTES));
+<a name="l00755"></a>00755           $textemailoznameni = stripslashes(htmlspecialchars($_POST[<span class="stringliteral">"textemailoznameni"</span>], ENT_QUOTES));
+<a name="l00756"></a>00756           $zdrojovyemail = stripslashes(htmlspecialchars($_POST[<span class="stringliteral">"zdrojovyemail"</span>], ENT_QUOTES));
+<a name="l00757"></a>00757           $odesilateladmin = stripslashes(htmlspecialchars($_POST[<span class="stringliteral">"odesilateladmin"</span>], ENT_QUOTES)); <span class="comment">//from</span>
+<a name="l00758"></a>00758           $odesilateluzivatel = stripslashes(htmlspecialchars($_POST[<span class="stringliteral">"odesilateluzivatel"</span>], ENT_QUOTES)); <span class="comment">//from</span>
+<a name="l00759"></a>00759           $from = ($_POST[<span class="stringliteral">"odesilatel"</span>] == <span class="stringliteral">"true"</span> ? $odesilateladmin : $zdrojovyemail);
+<a name="l00760"></a>00760 
+<a name="l00761"></a>00761           <span class="keywordflow">if</span> (!Empty($_POST[<span class="stringliteral">"tlacitko"</span>]) &amp;&amp;
+<a name="l00762"></a>00762               !Empty($adresa) &amp;&amp;
+<a name="l00763"></a>00763               !Empty($predmet) &amp;&amp;
+<a name="l00764"></a>00764               !Empty($email) &amp;&amp;
+<a name="l00765"></a>00765               !Empty($textemail) &amp;&amp;
+<a name="l00766"></a>00766               !Empty($from) &amp;&amp;
+<a name="l00767"></a>00767               ($oznameni ? (!Empty($odesilateluzivatel) ? <span class="keyword">true</span> : <span class="keyword">false</span>) : <span class="keyword">true</span>))
+<a name="l00768"></a>00768           {
+<a name="l00769"></a>00769             <span class="keywordflow">if</span> (@$this-&gt;sqlite-&gt;queryExec(<span class="stringliteral">"INSERT INTO formular (id, adresa, nazev, predmet, email, textemail, dodatek, oznameni, predmetoznameni, textemailoznameni, zdrojovyemail, odesilateladmin, odesilateluzivatel) VALUES</span>
+<a name="l00770"></a>00770 <span class="stringliteral">                                          (NULL, '{$adresa}', '{$nazev}', '{$predmet}', '{$email}', '{$textemail}', '{$dodatek}', {$oznameni}, '{$predmetoznameni}', '{$textemailoznameni}', '{$zdrojovyemail}', '{$odesilateladmin}', '{$odesilateluzivatel}');"</span>, $error))
+<a name="l00771"></a>00771             {
+<a name="l00772"></a>00772               <a class="code" href="_8unikatni__fukce_8php.html#e241cf0159803673d118f68d99e6342f">$result</a> = $this-&gt;<a class="code" href="classDefaultModule.html#f43261ee577b5bedbdaff44d21c64d38">NactiUnikatniObsah</a>($this-&gt;unikatni[<span class="stringliteral">"admin_add_form_hlaska"</span>], $adresa);
+<a name="l00773"></a>00773 
+<a name="l00774"></a>00774               $this-&gt;var-&gt;main[0]-&gt;AutoClick(1, <span class="stringliteral">"?{$this-&gt;var-&gt;get_kam}={$this-&gt;var-&gt;adresaadminu}&amp;{$this-&gt;var-&gt;get_idmodul}={$this-&gt;idmodul}"</span>);  <span class="comment">//auto kliknuti</span>
+<a name="l00775"></a>00775             }
+<a name="l00776"></a>00776               <span class="keywordflow">else</span>
+<a name="l00777"></a>00777             {
+<a name="l00778"></a>00778               $this-&gt;var-&gt;main[0]-&gt;ErrorMsg($error);
+<a name="l00779"></a>00779             }
+<a name="l00780"></a>00780           }
+<a name="l00781"></a>00781         <span class="keywordflow">break</span>;
+<a name="l00782"></a>00782 
+<a name="l00783"></a>00783         <span class="keywordflow">case</span> <span class="stringliteral">"editform"</span>:  <span class="comment">//editace formulare</span>
+<a name="l00784"></a>00784           $id = $_GET[<span class="stringliteral">"id"</span>];  <span class="comment">//cislo sekce</span>
+<a name="l00785"></a>00785           settype($id, <span class="stringliteral">"integer"</span>);
+<a name="l00786"></a>00786 
+<a name="l00787"></a>00787           <span class="keywordflow">if</span> ($res = @$this-&gt;sqlite-&gt;query(<span class="stringliteral">"SELECT adresa, nazev, predmet, email, textemail, dodatek, oznameni, predmetoznameni, textemailoznameni, zdrojovyemail, odesilateladmin, odesilateluzivatel FROM formular WHERE id={$id};"</span>, NULL, $error))
+<a name="l00788"></a>00788           {
+<a name="l00789"></a>00789             <span class="keywordflow">if</span> ($res-&gt;numRows() == 1)
+<a name="l00790"></a>00790             {
+<a name="l00791"></a>00791               $data = $res-&gt;fetchObject();
+<a name="l00792"></a>00792 
+<a name="l00793"></a>00793               <a class="code" href="_8unikatni__fukce_8php.html#e241cf0159803673d118f68d99e6342f">$result</a> = $this-&gt;<a class="code" href="classDefaultModule.html#f43261ee577b5bedbdaff44d21c64d38">NactiUnikatniObsah</a>($this-&gt;unikatni[<span class="stringliteral">"admin_edit_form"</span>],
+<a name="l00794"></a>00794                                                   $data-&gt;adresa,
+<a name="l00795"></a>00795                                                   $data-&gt;nazev,
+<a name="l00796"></a>00796                                                   $data-&gt;predmet,
+<a name="l00797"></a>00797                                                   (!Empty($data-&gt;odesilateladmin) ? <span class="stringliteral">" checked=\"checked\""</span> : <span class="stringliteral">""</span>),
+<a name="l00798"></a>00798                                                   $data-&gt;odesilateladmin,
+<a name="l00799"></a>00799                                                   (!Empty($data-&gt;zdrojovyemail) ? <span class="stringliteral">" checked=\"checked\""</span> : <span class="stringliteral">""</span>),
+<a name="l00800"></a>00800                                                   $data-&gt;zdrojovyemail,
+<a name="l00801"></a>00801                                                   $data-&gt;email,
+<a name="l00802"></a>00802                                                   $data-&gt;textemail,
+<a name="l00803"></a>00803                                                   $data-&gt;dodatek,
+<a name="l00804"></a>00804                                                   ($data-&gt;oznameni ? <span class="stringliteral">" checked=\"checked\""</span> : <span class="stringliteral">""</span>),
+<a name="l00805"></a>00805                                                   $data-&gt;predmetoznameni,
+<a name="l00806"></a>00806                                                   $data-&gt;odesilateluzivatel,
+<a name="l00807"></a>00807                                                   $data-&gt;textemailoznameni,
+<a name="l00808"></a>00808                                                   (Empty($data-&gt;odesilateladmin) ? <span class="stringliteral">"CheckOdeslatelFlexible();"</span> : <span class="stringliteral">"CheckOdeslatelSolid();"</span>),
+<a name="l00809"></a>00809                                                   ($data-&gt;oznameni ? <span class="stringliteral">"CheckOznameni(true);"</span> : <span class="stringliteral">"CheckOznameni(false);"</span>));
+<a name="l00810"></a>00810 
+<a name="l00811"></a>00811               $adresa = stripslashes(htmlspecialchars($_POST[<span class="stringliteral">"adresa"</span>], ENT_QUOTES));
+<a name="l00812"></a>00812               $nazev = stripslashes(htmlspecialchars($_POST[<span class="stringliteral">"nazev"</span>], ENT_QUOTES));
+<a name="l00813"></a>00813               $predmet = stripslashes(htmlspecialchars($_POST[<span class="stringliteral">"predmet"</span>], ENT_QUOTES));
+<a name="l00814"></a>00814               $email = $this-&gt;var-&gt;main[0]-&gt;NactiFunkci(<span class="stringliteral">"Funkce"</span>, <span class="stringliteral">"KontrolaEmailu"</span>, $_POST[<span class="stringliteral">"email"</span>]);  <span class="comment">//kontrola emailu</span>
+<a name="l00815"></a>00815               $textemail = stripslashes(htmlspecialchars($_POST[<span class="stringliteral">"textemail"</span>], ENT_QUOTES));
+<a name="l00816"></a>00816               $dodatek = stripslashes(htmlspecialchars($_POST[<span class="stringliteral">"dodatek"</span>], ENT_QUOTES));
+<a name="l00817"></a>00817               $oznameni = (!Empty($_POST[<span class="stringliteral">"oznameni"</span>]) ? 1 : 0);
+<a name="l00818"></a>00818               $predmetoznameni = stripslashes(htmlspecialchars($_POST[<span class="stringliteral">"predmetoznameni"</span>], ENT_QUOTES));
+<a name="l00819"></a>00819               $textemailoznameni = stripslashes(htmlspecialchars($_POST[<span class="stringliteral">"textemailoznameni"</span>], ENT_QUOTES));
+<a name="l00820"></a>00820               $zdrojovyemail = stripslashes(htmlspecialchars($_POST[<span class="stringliteral">"zdrojovyemail"</span>], ENT_QUOTES));
+<a name="l00821"></a>00821               $odesilateladmin = stripslashes(htmlspecialchars($_POST[<span class="stringliteral">"odesilateladmin"</span>], ENT_QUOTES));
+<a name="l00822"></a>00822               $odesilateluzivatel = stripslashes(htmlspecialchars($_POST[<span class="stringliteral">"odesilateluzivatel"</span>], ENT_QUOTES));
+<a name="l00823"></a>00823               $from = ($_POST[<span class="stringliteral">"odesilatel"</span>] == <span class="stringliteral">"true"</span> ? $odesilateladmin : $zdrojovyemail);
+<a name="l00824"></a>00824 
+<a name="l00825"></a>00825               <span class="keywordflow">if</span> (!Empty($_POST[<span class="stringliteral">"tlacitko"</span>]) &amp;&amp;
+<a name="l00826"></a>00826                   !Empty($adresa) &amp;&amp;
+<a name="l00827"></a>00827                   !Empty($predmet) &amp;&amp;
+<a name="l00828"></a>00828                   !Empty($email) &amp;&amp;
+<a name="l00829"></a>00829                   !Empty($textemail) &amp;&amp;
+<a name="l00830"></a>00830                   !Empty($from) &amp;&amp;
+<a name="l00831"></a>00831                   ($oznameni ? (!Empty($odesilateluzivatel) ? <span class="keyword">true</span> : <span class="keyword">false</span>) : <span class="keyword">true</span>) &amp;&amp;
+<a name="l00832"></a>00832                   $id != 0)
+<a name="l00833"></a>00833               {
+<a name="l00834"></a>00834                 <span class="keywordflow">if</span> (@$this-&gt;sqlite-&gt;queryExec (<span class="stringliteral">"UPDATE formular SET adresa='{$adresa}',</span>
+<a name="l00835"></a>00835 <span class="stringliteral">                                                                    nazev='{$nazev}',</span>
+<a name="l00836"></a>00836 <span class="stringliteral">                                                                    predmet='{$predmet}',</span>
+<a name="l00837"></a>00837 <span class="stringliteral">                                                                    email='{$email}',</span>
+<a name="l00838"></a>00838 <span class="stringliteral">                                                                    textemail='{$textemail}',</span>
+<a name="l00839"></a>00839 <span class="stringliteral">                                                                    dodatek='{$dodatek}',</span>
+<a name="l00840"></a>00840 <span class="stringliteral">                                                                    oznameni={$oznameni},</span>
+<a name="l00841"></a>00841 <span class="stringliteral">                                                                    predmetoznameni='{$predmetoznameni}',</span>
+<a name="l00842"></a>00842 <span class="stringliteral">                                                                    textemailoznameni='{$textemailoznameni}',</span>
+<a name="l00843"></a>00843 <span class="stringliteral">                                                                    zdrojovyemail='{$zdrojovyemail}',</span>
+<a name="l00844"></a>00844 <span class="stringliteral">                                                                    odesilateladmin='{$odesilateladmin}',</span>
+<a name="l00845"></a>00845 <span class="stringliteral">                                                                    odesilateluzivatel='{$odesilateluzivatel}'</span>
+<a name="l00846"></a>00846 <span class="stringliteral">                                                                    WHERE id={$id};</span>
+<a name="l00847"></a>00847 <span class="stringliteral">                                                                    "</span>, $error))
+<a name="l00848"></a>00848                 {
+<a name="l00849"></a>00849                   <a class="code" href="_8unikatni__fukce_8php.html#e241cf0159803673d118f68d99e6342f">$result</a> = $this-&gt;<a class="code" href="classDefaultModule.html#f43261ee577b5bedbdaff44d21c64d38">NactiUnikatniObsah</a>($this-&gt;unikatni[<span class="stringliteral">"admin_edit_form_hlaska"</span>], $adresa);
+<a name="l00850"></a>00850 
+<a name="l00851"></a>00851                   $this-&gt;var-&gt;main[0]-&gt;AutoClick(1, <span class="stringliteral">"?{$this-&gt;var-&gt;get_kam}={$this-&gt;var-&gt;adresaadminu}&amp;{$this-&gt;var-&gt;get_idmodul}={$this-&gt;idmodul}"</span>);  <span class="comment">//auto kliknuti</span>
+<a name="l00852"></a>00852                 }
+<a name="l00853"></a>00853                   <span class="keywordflow">else</span>
+<a name="l00854"></a>00854                 {
+<a name="l00855"></a>00855                   $this-&gt;var-&gt;main[0]-&gt;ErrorMsg($error);
+<a name="l00856"></a>00856                 }
+<a name="l00857"></a>00857               }
+<a name="l00858"></a>00858             }
+<a name="l00859"></a>00859           }
+<a name="l00860"></a>00860             <span class="keywordflow">else</span>
+<a name="l00861"></a>00861           {
+<a name="l00862"></a>00862             $this-&gt;var-&gt;main[0]-&gt;ErrorMsg($error);
+<a name="l00863"></a>00863           }
+<a name="l00864"></a>00864         <span class="keywordflow">break</span>;
+<a name="l00865"></a>00865 
+<a name="l00866"></a>00866         <span class="keywordflow">case</span> <span class="stringliteral">"delform"</span>: <span class="comment">//mazani formulare</span>
+<a name="l00867"></a>00867           $id = $_GET[<span class="stringliteral">"id"</span>];  <span class="comment">//cislo sekce</span>
+<a name="l00868"></a>00868           settype($id, <span class="stringliteral">"integer"</span>);
+<a name="l00869"></a>00869 
+<a name="l00870"></a>00870           <span class="keywordflow">if</span> ($res = @$this-&gt;sqlite-&gt;query(<span class="stringliteral">"SELECT adresa FROM formular WHERE id={$id};"</span>, NULL, $error))
+<a name="l00871"></a>00871           {
+<a name="l00872"></a>00872             <span class="keywordflow">if</span> ($res-&gt;numRows() == 1)
+<a name="l00873"></a>00873             {
+<a name="l00874"></a>00874               $data = $res-&gt;fetchObject();
+<a name="l00875"></a>00875 
+<a name="l00876"></a>00876               <span class="keywordflow">if</span> (@$this-&gt;sqlite-&gt;queryExec (<span class="stringliteral">"DELETE FROM formular WHERE id={$id};</span>
+<a name="l00877"></a>00877 <span class="stringliteral">                                              DELETE FROM prvek WHERE formular={$id};"</span>, $error)) <span class="comment">//provedeni dotazu</span>
+<a name="l00878"></a>00878               {
+<a name="l00879"></a>00879                 <a class="code" href="_8unikatni__fukce_8php.html#e241cf0159803673d118f68d99e6342f">$result</a> = $this-&gt;<a class="code" href="classDefaultModule.html#f43261ee577b5bedbdaff44d21c64d38">NactiUnikatniObsah</a>($this-&gt;unikatni[<span class="stringliteral">"admin_del_form_hlaska"</span>], $data-&gt;adresa);
+<a name="l00880"></a>00880 
+<a name="l00881"></a>00881                 $this-&gt;var-&gt;main[0]-&gt;AutoClick(1, <span class="stringliteral">"?{$this-&gt;var-&gt;get_kam}={$this-&gt;var-&gt;adresaadminu}&amp;{$this-&gt;var-&gt;get_idmodul}={$this-&gt;idmodul}"</span>);  <span class="comment">//auto kliknuti</span>
+<a name="l00882"></a>00882               }
+<a name="l00883"></a>00883                 <span class="keywordflow">else</span>
+<a name="l00884"></a>00884               {
+<a name="l00885"></a>00885                 $this-&gt;var-&gt;main[0]-&gt;ErrorMsg($error);
+<a name="l00886"></a>00886               }
+<a name="l00887"></a>00887             }
+<a name="l00888"></a>00888           }
+<a name="l00889"></a>00889             <span class="keywordflow">else</span>
+<a name="l00890"></a>00890           {
+<a name="l00891"></a>00891             $this-&gt;var-&gt;main[0]-&gt;ErrorMsg($error);
+<a name="l00892"></a>00892           }
+<a name="l00893"></a>00893         <span class="keywordflow">break</span>;
+<a name="l00894"></a>00894 
+<a name="l00895"></a>00895         <span class="keywordflow">case</span> <span class="stringliteral">"addelem"</span>: <span class="comment">//pridavani elementu</span>
+<a name="l00896"></a>00896           $form = $_GET[<span class="stringliteral">"form"</span>];  <span class="comment">//cislo formulare</span>
+<a name="l00897"></a>00897           settype($form, <span class="stringliteral">"integer"</span>);
+<a name="l00898"></a>00898 
+<a name="l00899"></a>00899           $type = $_GET[<span class="stringliteral">"typ"</span>];
+<a name="l00900"></a>00900           settype($type, <span class="stringliteral">"integer"</span>);
+<a name="l00901"></a>00901           $vstup = $_GET[<span class="stringliteral">"vstupni_typ"</span>];
+<a name="l00902"></a>00902           settype($vstup, <span class="stringliteral">"integer"</span>);
+<a name="l00903"></a>00903 
+<a name="l00904"></a>00904           <span class="comment">//$num_input = array_values($this-&gt;input);  //navrat dane hodnoty radku</span>
+<a name="l00905"></a>00905 
+<a name="l00906"></a>00906           $jmeno_typu = array_keys($this-&gt;input);
+<a name="l00907"></a>00907           $aktualni_typ = $jmeno_typu[$type];
+<a name="l00908"></a>00908 
+<a name="l00909"></a>00909           $zobr_nazev = ($aktualni_typ == <span class="stringliteral">"text"</span> || $aktualni_typ == <span class="stringliteral">"checkbox"</span> || $aktualni_typ == <span class="stringliteral">"radio"</span>);
+<a name="l00910"></a>00910           $zobr_value = ($aktualni_typ == <span class="stringliteral">"text"</span> || $aktualni_typ == <span class="stringliteral">"submit"</span> || $aktualni_typ == <span class="stringliteral">"reset"</span>);
+<a name="l00911"></a>00911           $zobr_disabled = ($aktualni_typ == <span class="stringliteral">"text"</span>|| $aktualni_typ == <span class="stringliteral">"checkbox"</span> || $aktualni_typ == <span class="stringliteral">"radio"</span> || $aktualni_typ == <span class="stringliteral">"submit"</span> || $aktualni_typ == <span class="stringliteral">"reset"</span>);
+<a name="l00912"></a>00912           $zobr_vstup = ($aktualni_typ == <span class="stringliteral">"text"</span>);
+<a name="l00913"></a>00913           $zobr_captcha = ($aktualni_typ == <span class="stringliteral">"captcha"</span>);
+<a name="l00914"></a>00914 
+<a name="l00915"></a>00915           <a class="code" href="_8unikatni__fukce_8php.html#e241cf0159803673d118f68d99e6342f">$result</a> = $this-&gt;<a class="code" href="classDefaultModule.html#f43261ee577b5bedbdaff44d21c64d38">NactiUnikatniObsah</a>($this-&gt;unikatni[<span class="stringliteral">"admin_add_elem"</span>],
+<a name="l00916"></a>00916                                               $this-&gt;<a class="code" href="classDynamicForm.html#018b5b0009bc2f002541efcfbc6f8b0b">VyberSekce</a>($form),
+<a name="l00917"></a>00917                                               $this-&gt;<a class="code" href="classDynamicForm.html#60f11d17c3618c7e402e95477a172306">VyberTypu</a>($type, <span class="stringliteral">"?{$this-&gt;var-&gt;get_kam}={$this-&gt;var-&gt;adresaadminu}&amp;amp;{$this-&gt;var-&gt;get_idmodul}={$this-&gt;idmodul}&amp;amp;co=addelem&amp;amp;form={$form}&amp;amp;vstup={$vstup}"</span>),
+<a name="l00918"></a>00918                                               ($zobr_nazev ? $this-&gt;<a class="code" href="classDefaultModule.html#f43261ee577b5bedbdaff44d21c64d38">NactiUnikatniObsah</a>($this-&gt;unikatni[<span class="stringliteral">"admin_addedit_elem_nazev"</span>], <span class="stringliteral">""</span>) : <span class="stringliteral">""</span>),
+<a name="l00919"></a>00919                                               ($zobr_value ? $this-&gt;<a class="code" href="classDefaultModule.html#f43261ee577b5bedbdaff44d21c64d38">NactiUnikatniObsah</a>($this-&gt;unikatni[<span class="stringliteral">"admin_addedit_elem_value"</span>], <span class="stringliteral">""</span>) : <span class="stringliteral">""</span>),
+<a name="l00920"></a>00920                                               ($zobr_captcha ? $this-&gt;<a class="code" href="classDefaultModule.html#f43261ee577b5bedbdaff44d21c64d38">NactiUnikatniObsah</a>($this-&gt;unikatni[<span class="stringliteral">"admin_addedit_elem_captcha"</span>], <span class="stringliteral">""</span>) : <span class="stringliteral">""</span>),
+<a name="l00921"></a>00921                                               ($zobr_vstup ? $this-&gt;<a class="code" href="classDefaultModule.html#f43261ee577b5bedbdaff44d21c64d38">NactiUnikatniObsah</a>($this-&gt;unikatni[<span class="stringliteral">"admin_addedit_elem_readonly"</span>], <span class="stringliteral">""</span>) : <span class="stringliteral">""</span>),
+<a name="l00922"></a>00922                                               ($zobr_disabled ? $this-&gt;<a class="code" href="classDefaultModule.html#f43261ee577b5bedbdaff44d21c64d38">NactiUnikatniObsah</a>($this-&gt;unikatni[<span class="stringliteral">"admin_addedit_elem_disabled"</span>], <span class="stringliteral">""</span>) : <span class="stringliteral">""</span>),
+<a name="l00923"></a>00923                                               ($zobr_vstup ? $this-&gt;<a class="code" href="classDefaultModule.html#f43261ee577b5bedbdaff44d21c64d38">NactiUnikatniObsah</a>($this-&gt;unikatni[<span class="stringliteral">"admin_addedit_elem_vstupni_typ"</span>], $this-&gt;<a class="code" href="classDynamicForm.html#cab01cb55c78db6297b08959f44f302a">VyberVstupu</a>($vstup, <span class="stringliteral">"?{$this-&gt;var-&gt;get_kam}={$this-&gt;var-&gt;adresaadminu}&amp;amp;{$this-&gt;var-&gt;get_idmodul}={$this-&gt;idmodul}&amp;amp;co=addelem&amp;amp;form={$form}&amp;amp;typ={$type}"</span>)) : <span class="stringliteral">""</span>),
+<a name="l00924"></a>00924                                               ($zobr_vstup &amp;&amp; $vstup == 2 ? $this-&gt;<a class="code" href="classDefaultModule.html#f43261ee577b5bedbdaff44d21c64d38">NactiUnikatniObsah</a>($this-&gt;unikatni[<span class="stringliteral">"admin_addedit_elem_reg_exp"</span>], <span class="stringliteral">""</span>) : <span class="stringliteral">""</span>),
+<a name="l00925"></a>00925                                               ($zobr_vstup &amp;&amp; $vstup &gt;= 0 &amp;&amp; $vstup &lt;= 1 ? $this-&gt;<a class="code" href="classDefaultModule.html#f43261ee577b5bedbdaff44d21c64d38">NactiUnikatniObsah</a>($this-&gt;unikatni[<span class="stringliteral">"admin_addedit_elem_minmax_val"</span>], 0, 0) : <span class="stringliteral">""</span>),
+<a name="l00926"></a>00926                                               $this-&gt;<a class="code" href="classDynamicForm.html#ccd052e8c4b325e698aefc334fd3f504">PocetRadku</a>($form, 1));
+<a name="l00927"></a>00927 
+<a name="l00928"></a>00928           $formular = stripslashes(htmlspecialchars($_POST[<span class="stringliteral">"formular"</span>], ENT_QUOTES));
+<a name="l00929"></a>00929           settype($formular, <span class="stringliteral">"integer"</span>);
+<a name="l00930"></a>00930           $typ = stripslashes(htmlspecialchars($_POST[<span class="stringliteral">"typ"</span>], ENT_QUOTES));
+<a name="l00931"></a>00931           settype($typ, <span class="stringliteral">"integer"</span>);
+<a name="l00932"></a>00932           $nazev = stripslashes(htmlspecialchars($_POST[<span class="stringliteral">"nazev"</span>], ENT_QUOTES));
+<a name="l00933"></a>00933           $value = stripslashes(htmlspecialchars($_POST[<span class="stringliteral">"value"</span>], ENT_QUOTES));
+<a name="l00934"></a>00934           $readonly = (!Empty($_POST[<span class="stringliteral">"readonly"</span>]) ? 1 : 0);
+<a name="l00935"></a>00935           $disabled = (!Empty($_POST[<span class="stringliteral">"disabled"</span>]) ? 1 : 0);
+<a name="l00936"></a>00936           $povinne = (!Empty($_POST[<span class="stringliteral">"povinne"</span>]) ? 1 : 0);
+<a name="l00937"></a>00937           <a class="code" href="classDynamicForm.html#aa67e007f9a82c93fff763ee3d9f4e70">$vstupni_typ</a> = stripslashes(htmlspecialchars($_POST[<span class="stringliteral">"vstupni_typ"</span>], ENT_QUOTES));
+<a name="l00938"></a>00938           settype(<a class="code" href="classDynamicForm.html#aa67e007f9a82c93fff763ee3d9f4e70">$vstupni_typ</a>, <span class="stringliteral">"integer"</span>);
+<a name="l00939"></a>00939           $reg_exp = (!in_array($_SERVER[<span class="stringliteral">"REMOTE_ADDR"</span>], $this-&gt;var-&gt;ipblok) ? $_POST[<span class="stringliteral">"reg_exp"</span>] : stripslashes(htmlspecialchars($_POST[<span class="stringliteral">"reg_exp"</span>], ENT_QUOTES)));
+<a name="l00940"></a>00940           $min_val = stripslashes(htmlspecialchars($_POST[<span class="stringliteral">"min_val"</span>], ENT_QUOTES));
+<a name="l00941"></a>00941           settype($min_val, <span class="stringliteral">"integer"</span>);
+<a name="l00942"></a>00942           $max_val = stripslashes(htmlspecialchars($_POST[<span class="stringliteral">"max_val"</span>], ENT_QUOTES));
+<a name="l00943"></a>00943           settype($max_val, <span class="stringliteral">"integer"</span>);
+<a name="l00944"></a>00944           $poradi = stripslashes(htmlspecialchars($_POST[<span class="stringliteral">"poradi"</span>], ENT_QUOTES));
+<a name="l00945"></a>00945           settype($poradi, <span class="stringliteral">"integer"</span>);
+<a name="l00946"></a>00946 
+<a name="l00947"></a>00947           <span class="keywordflow">if</span> (!Empty($_POST[<span class="stringliteral">"tlacitko"</span>]) &amp;&amp;
+<a name="l00948"></a>00948               !Empty($formular) &amp;&amp;
+<a name="l00949"></a>00949               !Empty($poradi) &amp;&amp;
+<a name="l00950"></a>00950               $poradi &gt; 0)
+<a name="l00951"></a>00951           {
+<a name="l00952"></a>00952             <span class="keywordflow">if</span> (@$this-&gt;sqlite-&gt;queryExec(<span class="stringliteral">"INSERT INTO prvek (id, formular, nazev, typ, value, readonly, disabled, povinne, reg_exp, vstupni_typ, min_val, max_val, poradi) VALUES</span>
+<a name="l00953"></a>00953 <span class="stringliteral">                                          (NULL, {$formular}, '{$nazev}', {$typ}, '{$value}', {$readonly}, {$disabled}, {$povinne}, '{$reg_exp}', {$vstupni_typ}, {$min_val}, {$max_val}, {$poradi});"</span>, $error))
+<a name="l00954"></a>00954             {
+<a name="l00955"></a>00955               <a class="code" href="_8unikatni__fukce_8php.html#e241cf0159803673d118f68d99e6342f">$result</a> = $this-&gt;<a class="code" href="classDefaultModule.html#f43261ee577b5bedbdaff44d21c64d38">NactiUnikatniObsah</a>($this-&gt;unikatni[<span class="stringliteral">"admin_add_elem_hlaska"</span>], $nazev);
+<a name="l00956"></a>00956 
+<a name="l00957"></a>00957               $this-&gt;var-&gt;main[0]-&gt;AutoClick(1, <span class="stringliteral">"?{$this-&gt;var-&gt;get_kam}={$this-&gt;var-&gt;adresaadminu}&amp;{$this-&gt;var-&gt;get_idmodul}={$this-&gt;idmodul}"</span>);  <span class="comment">//auto kliknuti</span>
+<a name="l00958"></a>00958             }
+<a name="l00959"></a>00959               <span class="keywordflow">else</span>
+<a name="l00960"></a>00960             {
+<a name="l00961"></a>00961               $this-&gt;var-&gt;main[0]-&gt;ErrorMsg($error);
+<a name="l00962"></a>00962             }
+<a name="l00963"></a>00963           }
+<a name="l00964"></a>00964         <span class="keywordflow">break</span>;
+<a name="l00965"></a>00965 
+<a name="l00966"></a>00966         <span class="keywordflow">case</span> <span class="stringliteral">"editelem"</span>:  <span class="comment">//editace elementu</span>
+<a name="l00967"></a>00967           $id = $_GET[<span class="stringliteral">"id"</span>];  <span class="comment">//cislo sekce</span>
+<a name="l00968"></a>00968           settype($id, <span class="stringliteral">"integer"</span>);
+<a name="l00969"></a>00969 
+<a name="l00970"></a>00970           $type = $_GET[<span class="stringliteral">"typ"</span>];
+<a name="l00971"></a>00971           settype($type, <span class="stringliteral">"integer"</span>);
+<a name="l00972"></a>00972           $vstup = $_GET[<span class="stringliteral">"vstupni_typ"</span>];
+<a name="l00973"></a>00973           settype($vstup, <span class="stringliteral">"integer"</span>);
+<a name="l00974"></a>00974 
+<a name="l00975"></a>00975           <span class="keywordflow">if</span> ($res = @$this-&gt;sqlite-&gt;query(<span class="stringliteral">"SELECT id, formular, nazev, typ, value, readonly, disabled, povinne, reg_exp, vstupni_typ, min_val, max_val, poradi FROM prvek WHERE id={$id};"</span>, NULL, $error))
+<a name="l00976"></a>00976           {
+<a name="l00977"></a>00977             <span class="keywordflow">if</span> ($res-&gt;numRows() == 1)
+<a name="l00978"></a>00978             {
+<a name="l00979"></a>00979               $data = $res-&gt;fetchObject();
+<a name="l00980"></a>00980 
+<a name="l00981"></a>00981               $type_1 = (isset($_GET[<span class="stringliteral">"typ"</span>]) ? $type : $data-&gt;typ);
+<a name="l00982"></a>00982               $vstup_1 = (isset($_GET[<span class="stringliteral">"vstupni_typ"</span>]) ? $vstup : $data-&gt;vstupni_typ);
+<a name="l00983"></a>00983 
+<a name="l00984"></a>00984               $jmeno_typu = array_keys($this-&gt;input);
+<a name="l00985"></a>00985               $aktualni_typ = $jmeno_typu[$type_1];
+<a name="l00986"></a>00986 
+<a name="l00987"></a>00987               $zobr_nazev = ($aktualni_typ == <span class="stringliteral">"text"</span> || $aktualni_typ == <span class="stringliteral">"checkbox"</span> || $aktualni_typ == <span class="stringliteral">"radio"</span>);
+<a name="l00988"></a>00988               $zobr_value = ($aktualni_typ == <span class="stringliteral">"text"</span> || $aktualni_typ == <span class="stringliteral">"submit"</span> || $aktualni_typ == <span class="stringliteral">"reset"</span>);
+<a name="l00989"></a>00989               $zobr_disabled = ($aktualni_typ == <span class="stringliteral">"text"</span>|| $aktualni_typ == <span class="stringliteral">"checkbox"</span> || $aktualni_typ == <span class="stringliteral">"radio"</span> || $aktualni_typ == <span class="stringliteral">"submit"</span> || $aktualni_typ == <span class="stringliteral">"reset"</span>);
+<a name="l00990"></a>00990               $zobr_vstup = ($aktualni_typ == <span class="stringliteral">"text"</span>);
+<a name="l00991"></a>00991               $zobr_captcha = ($aktualni_typ == <span class="stringliteral">"captcha"</span>);
+<a name="l00992"></a>00992 
+<a name="l00993"></a>00993               <a class="code" href="_8unikatni__fukce_8php.html#e241cf0159803673d118f68d99e6342f">$result</a> = $this-&gt;<a class="code" href="classDefaultModule.html#f43261ee577b5bedbdaff44d21c64d38">NactiUnikatniObsah</a>($this-&gt;unikatni[<span class="stringliteral">"admin_edit_elem"</span>],
+<a name="l00994"></a>00994                                                   $this-&gt;<a class="code" href="classDynamicForm.html#018b5b0009bc2f002541efcfbc6f8b0b">VyberSekce</a>($data-&gt;formular),
+<a name="l00995"></a>00995                                                   $this-&gt;VyberTypu($type_1, <span class="stringliteral">"?{$this-&gt;var-&gt;get_kam}={$this-&gt;var-&gt;adresaadminu}&amp;amp;{$this-&gt;var-&gt;get_idmodul}={$this-&gt;idmodul}&amp;amp;co=editelem&amp;amp;vstup={$vstup_1}&amp;amp;id={$id}"</span>),
+<a name="l00996"></a>00996                                                   ($zobr_nazev ? $this-&gt;<a class="code" href="classDefaultModule.html#f43261ee577b5bedbdaff44d21c64d38">NactiUnikatniObsah</a>($this-&gt;unikatni[<span class="stringliteral">"admin_addedit_elem_nazev"</span>], $data-&gt;nazev) : <span class="stringliteral">""</span>),
+<a name="l00997"></a>00997                                                   ($zobr_value ? $this-&gt;<a class="code" href="classDefaultModule.html#f43261ee577b5bedbdaff44d21c64d38">NactiUnikatniObsah</a>($this-&gt;unikatni[<span class="stringliteral">"admin_addedit_elem_value"</span>], $data-&gt;value) : <span class="stringliteral">""</span>),
+<a name="l00998"></a>00998                                                   ($zobr_captcha ? $this-&gt;<a class="code" href="classDefaultModule.html#f43261ee577b5bedbdaff44d21c64d38">NactiUnikatniObsah</a>($this-&gt;unikatni[<span class="stringliteral">"admin_addedit_elem_captcha"</span>], $data-&gt;value) : <span class="stringliteral">""</span>),
+<a name="l00999"></a>00999                                                   ($zobr_vstup ? $this-&gt;<a class="code" href="classDefaultModule.html#f43261ee577b5bedbdaff44d21c64d38">NactiUnikatniObsah</a>($this-&gt;unikatni[<span class="stringliteral">"admin_addedit_elem_readonly"</span>], ($data-&gt;readonly ? <span class="stringliteral">" checked=\"checked\""</span> : <span class="stringliteral">""</span>)) : <span class="stringliteral">""</span>),
+<a name="l01000"></a>01000                                                   ($zobr_disabled ? $this-&gt;<a class="code" href="classDefaultModule.html#f43261ee577b5bedbdaff44d21c64d38">NactiUnikatniObsah</a>($this-&gt;unikatni[<span class="stringliteral">"admin_addedit_elem_disabled"</span>], ($data-&gt;disabled ? <span class="stringliteral">" checked=\"checked\""</span> : <span class="stringliteral">""</span>)) : <span class="stringliteral">""</span>),
+<a name="l01001"></a>01001                                                   ($data-&gt;povinne ? <span class="stringliteral">" checked=\"checked\""</span> : <span class="stringliteral">""</span>),
+<a name="l01002"></a>01002                                                   ($zobr_vstup ? $this-&gt;<a class="code" href="classDefaultModule.html#f43261ee577b5bedbdaff44d21c64d38">NactiUnikatniObsah</a>($this-&gt;unikatni[<span class="stringliteral">"admin_addedit_elem_vstupni_typ"</span>], $this-&gt;<a class="code" href="classDynamicForm.html#cab01cb55c78db6297b08959f44f302a">VyberVstupu</a>($vstup_1, <span class="stringliteral">"?{$this-&gt;var-&gt;get_kam}={$this-&gt;var-&gt;adresaadminu}&amp;amp;{$this-&gt;var-&gt;get_idmodul}={$this-&gt;idmodul}&amp;amp;co=editelem&amp;amp;typ={$type_1}&amp;amp;id={$id}"</span>)) : <span class="stringliteral">""</span>),
+<a name="l01003"></a>01003                                                   ($zobr_vstup &amp;&amp; $vstup_1 == 2 ? $this-&gt;<a class="code" href="classDefaultModule.html#f43261ee577b5bedbdaff44d21c64d38">NactiUnikatniObsah</a>($this-&gt;unikatni[<span class="stringliteral">"admin_addedit_elem_reg_exp"</span>], $data-&gt;reg_exp) : <span class="stringliteral">""</span>),
+<a name="l01004"></a>01004                                                   ($zobr_vstup &amp;&amp; $vstup_1 &gt;= 0 &amp;&amp; $vstup_1 &lt;= 1 ? $this-&gt;<a class="code" href="classDefaultModule.html#f43261ee577b5bedbdaff44d21c64d38">NactiUnikatniObsah</a>($this-&gt;unikatni[<span class="stringliteral">"admin_addedit_elem_minmax_val"</span>], $data-&gt;min_val, $data-&gt;max_val) : <span class="stringliteral">""</span>),
+<a name="l01005"></a>01005                                                   $data-&gt;poradi);
+<a name="l01006"></a>01006 
+<a name="l01007"></a>01007               $formular = stripslashes(htmlspecialchars($_POST[<span class="stringliteral">"formular"</span>], ENT_QUOTES));
+<a name="l01008"></a>01008               settype($formular, <span class="stringliteral">"integer"</span>);
+<a name="l01009"></a>01009               $typ = stripslashes(htmlspecialchars($_POST[<span class="stringliteral">"typ"</span>], ENT_QUOTES));
+<a name="l01010"></a>01010               settype($typ, <span class="stringliteral">"integer"</span>);
+<a name="l01011"></a>01011               $nazev = stripslashes(htmlspecialchars($_POST[<span class="stringliteral">"nazev"</span>], ENT_QUOTES));
+<a name="l01012"></a>01012               $value = stripslashes(htmlspecialchars($_POST[<span class="stringliteral">"value"</span>], ENT_QUOTES));
+<a name="l01013"></a>01013               $readonly = (!Empty($_POST[<span class="stringliteral">"readonly"</span>]) ? 1 : 0);
+<a name="l01014"></a>01014               $disabled = (!Empty($_POST[<span class="stringliteral">"disabled"</span>]) ? 1 : 0);
+<a name="l01015"></a>01015               $povinne = (!Empty($_POST[<span class="stringliteral">"povinne"</span>]) ? 1 : 0);
+<a name="l01016"></a>01016               <a class="code" href="classDynamicForm.html#aa67e007f9a82c93fff763ee3d9f4e70">$vstupni_typ</a> = stripslashes(htmlspecialchars($_POST[<span class="stringliteral">"vstupni_typ"</span>], ENT_QUOTES));
+<a name="l01017"></a>01017               settype(<a class="code" href="classDynamicForm.html#aa67e007f9a82c93fff763ee3d9f4e70">$vstupni_typ</a>, <span class="stringliteral">"integer"</span>);
+<a name="l01018"></a>01018               $reg_exp = (!in_array($_SERVER[<span class="stringliteral">"REMOTE_ADDR"</span>], $this-&gt;var-&gt;ipblok) ? $_POST[<span class="stringliteral">"reg_exp"</span>] : stripslashes(htmlspecialchars($_POST[<span class="stringliteral">"reg_exp"</span>], ENT_QUOTES)));
+<a name="l01019"></a>01019               $min_val = stripslashes(htmlspecialchars($_POST[<span class="stringliteral">"min_val"</span>], ENT_QUOTES));
+<a name="l01020"></a>01020               settype($min_val, <span class="stringliteral">"integer"</span>);
+<a name="l01021"></a>01021               $max_val = stripslashes(htmlspecialchars($_POST[<span class="stringliteral">"max_val"</span>], ENT_QUOTES));
+<a name="l01022"></a>01022               settype($max_val, <span class="stringliteral">"integer"</span>);
+<a name="l01023"></a>01023               $poradi = stripslashes(htmlspecialchars($_POST[<span class="stringliteral">"poradi"</span>], ENT_QUOTES));
+<a name="l01024"></a>01024               settype($poradi, <span class="stringliteral">"integer"</span>);
+<a name="l01025"></a>01025 
+<a name="l01026"></a>01026               <span class="keywordflow">if</span> (!Empty($_POST[<span class="stringliteral">"tlacitko"</span>]) &amp;&amp;
+<a name="l01027"></a>01027                   !Empty($formular) &amp;&amp;
+<a name="l01028"></a>01028                   !Empty($poradi) &amp;&amp;
+<a name="l01029"></a>01029                   $poradi &gt; 0 &amp;&amp;
+<a name="l01030"></a>01030                   $id != 0)
+<a name="l01031"></a>01031               {
+<a name="l01032"></a>01032                 <span class="keywordflow">if</span> (@$this-&gt;sqlite-&gt;queryExec(<span class="stringliteral">"UPDATE prvek SET formular={$formular},</span>
+<a name="l01033"></a>01033 <span class="stringliteral">                                                                nazev='{$nazev}',</span>
+<a name="l01034"></a>01034 <span class="stringliteral">                                                                typ={$typ},</span>
+<a name="l01035"></a>01035 <span class="stringliteral">                                                                value='{$value}{$src}',</span>
+<a name="l01036"></a>01036 <span class="stringliteral">                                                                readonly={$readonly},</span>
+<a name="l01037"></a>01037 <span class="stringliteral">                                                                disabled={$disabled},</span>
+<a name="l01038"></a>01038 <span class="stringliteral">                                                                povinne={$povinne},</span>
+<a name="l01039"></a>01039 <span class="stringliteral">                                                                reg_exp='{$reg_exp}',</span>
+<a name="l01040"></a>01040 <span class="stringliteral">                                                                vstupni_typ={$vstupni_typ},</span>
+<a name="l01041"></a>01041 <span class="stringliteral">                                                                min_val={$min_val},</span>
+<a name="l01042"></a>01042 <span class="stringliteral">                                                                max_val={$max_val},</span>
+<a name="l01043"></a>01043 <span class="stringliteral">                                                                poradi={$poradi}</span>
+<a name="l01044"></a>01044 <span class="stringliteral">                                                                WHERE id={$id};"</span>, $error))
+<a name="l01045"></a>01045                 {
+<a name="l01046"></a>01046                   <a class="code" href="_8unikatni__fukce_8php.html#e241cf0159803673d118f68d99e6342f">$result</a> = $this-&gt;<a class="code" href="classDefaultModule.html#f43261ee577b5bedbdaff44d21c64d38">NactiUnikatniObsah</a>($this-&gt;unikatni[<span class="stringliteral">"admin_edit_elem_hlaska"</span>],
+<a name="l01047"></a>01047                                                       $nazev);
+<a name="l01048"></a>01048 
+<a name="l01049"></a>01049                   $this-&gt;var-&gt;main[0]-&gt;AutoClick(1, <span class="stringliteral">"?{$this-&gt;var-&gt;get_kam}={$this-&gt;var-&gt;adresaadminu}&amp;{$this-&gt;var-&gt;get_idmodul}={$this-&gt;idmodul}"</span>);  <span class="comment">//auto kliknuti</span>
+<a name="l01050"></a>01050                 }
+<a name="l01051"></a>01051                   <span class="keywordflow">else</span>
+<a name="l01052"></a>01052                 {
+<a name="l01053"></a>01053                   $this-&gt;var-&gt;main[0]-&gt;ErrorMsg($error);
+<a name="l01054"></a>01054                 }
+<a name="l01055"></a>01055               }
+<a name="l01056"></a>01056             }
+<a name="l01057"></a>01057           }
+<a name="l01058"></a>01058             <span class="keywordflow">else</span>
+<a name="l01059"></a>01059           {
+<a name="l01060"></a>01060             $this-&gt;var-&gt;main[0]-&gt;ErrorMsg($error);
+<a name="l01061"></a>01061           }
+<a name="l01062"></a>01062         <span class="keywordflow">break</span>;
+<a name="l01063"></a>01063 
+<a name="l01064"></a>01064         <span class="keywordflow">case</span> <span class="stringliteral">"delelem"</span>: <span class="comment">//mazani elementu</span>
+<a name="l01065"></a>01065           $id = $_GET[<span class="stringliteral">"id"</span>];  <span class="comment">//cislo sekce</span>
+<a name="l01066"></a>01066           settype($id, <span class="stringliteral">"integer"</span>);
+<a name="l01067"></a>01067 
+<a name="l01068"></a>01068           <span class="keywordflow">if</span> ($res = @$this-&gt;sqlite-&gt;query(<span class="stringliteral">"SELECT nazev FROM prvek WHERE id={$id};"</span>, NULL, $error))
+<a name="l01069"></a>01069           {
+<a name="l01070"></a>01070             <span class="keywordflow">if</span> ($res-&gt;numRows() == 1)
+<a name="l01071"></a>01071             {
+<a name="l01072"></a>01072               $data = $res-&gt;fetchObject();
+<a name="l01073"></a>01073 
+<a name="l01074"></a>01074               <span class="keywordflow">if</span> (@$this-&gt;sqlite-&gt;queryExec(<span class="stringliteral">"DELETE FROM prvek WHERE id={$id};"</span>, $error)) <span class="comment">//provedeni dotazu</span>
+<a name="l01075"></a>01075               {
+<a name="l01076"></a>01076                 <a class="code" href="_8unikatni__fukce_8php.html#e241cf0159803673d118f68d99e6342f">$result</a> = $this-&gt;<a class="code" href="classDefaultModule.html#f43261ee577b5bedbdaff44d21c64d38">NactiUnikatniObsah</a>($this-&gt;unikatni[<span class="stringliteral">"admin_del_elem_hlaska"</span>],
+<a name="l01077"></a>01077                                                     $data-&gt;nazev);
+<a name="l01078"></a>01078 
+<a name="l01079"></a>01079                 $this-&gt;var-&gt;main[0]-&gt;AutoClick(1, <span class="stringliteral">"?{$this-&gt;var-&gt;get_kam}={$this-&gt;var-&gt;adresaadminu}&amp;{$this-&gt;var-&gt;get_idmodul}={$this-&gt;idmodul}"</span>);  <span class="comment">//auto kliknuti</span>
+<a name="l01080"></a>01080               }
+<a name="l01081"></a>01081                 <span class="keywordflow">else</span>
+<a name="l01082"></a>01082               {
+<a name="l01083"></a>01083                 $this-&gt;var-&gt;main[0]-&gt;ErrorMsg($error);
+<a name="l01084"></a>01084               }
+<a name="l01085"></a>01085             }
+<a name="l01086"></a>01086           }
+<a name="l01087"></a>01087             <span class="keywordflow">else</span>
+<a name="l01088"></a>01088           {
+<a name="l01089"></a>01089             $this-&gt;var-&gt;main[0]-&gt;ErrorMsg($error);
+<a name="l01090"></a>01090           }
+<a name="l01091"></a>01091         <span class="keywordflow">break</span>;
+<a name="l01092"></a>01092       }
+<a name="l01093"></a>01093     }
+<a name="l01094"></a>01094 
+<a name="l01095"></a>01095     <span class="keywordflow">return</span> <a class="code" href="_8unikatni__fukce_8php.html#e241cf0159803673d118f68d99e6342f">$result</a>;
+<a name="l01096"></a>01096   }
+<a name="l01097"></a>01097 
+<a name="l01105"></a><a class="code" href="classDynamicForm.html#097c35453a129d876bd81d0324105885">01105</a>   <span class="keyword">private</span> function <a class="code" href="classDynamicForm.html#097c35453a129d876bd81d0324105885">OsetreniTextu</a>($text)
+<a name="l01106"></a>01106   {
+<a name="l01107"></a>01107     $prevod = $this-&gt;<a class="code" href="classDefaultModule.html#f43261ee577b5bedbdaff44d21c64d38">NactiUnikatniObsah</a>($this-&gt;unikatni[<span class="stringliteral">"set_prevod"</span>]);
+<a name="l01108"></a>01108 
+<a name="l01109"></a>01109     <span class="keywordflow">return</span> strtr($text, $prevod);  <span class="comment">//prevede text dle prevadecoho pole</span>
+<a name="l01110"></a>01110   }
+<a name="l01111"></a>01111 
+<a name="l01118"></a><a class="code" href="classDynamicForm.html#7e1d64987e220c825e89e284ead53a9a">01118</a>   <span class="keyword">private</span> function <a class="code" href="classDynamicForm.html#7e1d64987e220c825e89e284ead53a9a">AdminVypisForm</a>()
+<a name="l01119"></a>01119   {
+<a name="l01120"></a>01120     $typ = array_keys($this-&gt;input);
+<a name="l01121"></a>01121 
+<a name="l01122"></a>01122     <a class="code" href="_8unikatni__fukce_8php.html#e241cf0159803673d118f68d99e6342f">$result</a> = <span class="stringliteral">""</span>;
+<a name="l01123"></a>01123     <span class="comment">//vypis formulare</span>
+<a name="l01124"></a>01124     <span class="keywordflow">if</span> ($res = @$this-&gt;sqlite-&gt;query(<span class="stringliteral">"SELECT id, adresa, nazev, predmet, email, textemail FROM formular ORDER BY LOWER(nazev) ASC;"</span>, NULL, $error))
+<a name="l01125"></a>01125     {
+<a name="l01126"></a>01126       <span class="keywordflow">if</span> ($res-&gt;numRows() != 0)
+<a name="l01127"></a>01127       {
+<a name="l01128"></a>01128         <span class="keywordflow">while</span> ($data = $res-&gt;fetchObject())
+<a name="l01129"></a>01129         {
+<a name="l01130"></a>01130           <a class="code" href="_8unikatni__fukce_8php.html#e241cf0159803673d118f68d99e6342f">$result</a> .= $this-&gt;<a class="code" href="classDefaultModule.html#f43261ee577b5bedbdaff44d21c64d38">NactiUnikatniObsah</a>($this-&gt;unikatni[<span class="stringliteral">"admin_vypis_obsah_begin_form"</span>],
+<a name="l01131"></a>01131                                               $data-&gt;nazev,
+<a name="l01132"></a>01132                                               $data-&gt;adresa,
+<a name="l01133"></a>01133                                               $data-&gt;predmet,
+<a name="l01134"></a>01134                                               $data-&gt;email,
+<a name="l01135"></a>01135                                               $data-&gt;textemail,
+<a name="l01136"></a>01136                                               <span class="stringliteral">"?{$this-&gt;var-&gt;get_kam}={$this-&gt;var-&gt;adresaadminu}&amp;amp;{$this-&gt;var-&gt;get_idmodul}={$this-&gt;idmodul}&amp;amp;co=addelem&amp;amp;form={$data-&gt;id}"</span>,
+<a name="l01137"></a>01137                                               <span class="stringliteral">"?{$this-&gt;var-&gt;get_kam}={$this-&gt;var-&gt;adresaadminu}&amp;amp;{$this-&gt;var-&gt;get_idmodul}={$this-&gt;idmodul}&amp;amp;co=editform&amp;amp;id={$data-&gt;id}"</span>,
+<a name="l01138"></a>01138                                               <span class="stringliteral">"?{$this-&gt;var-&gt;get_kam}={$this-&gt;var-&gt;adresaadminu}&amp;amp;{$this-&gt;var-&gt;get_idmodul}={$this-&gt;idmodul}&amp;amp;co=delform&amp;amp;id={$data-&gt;id}"</span>);
+<a name="l01139"></a>01139 
+<a name="l01140"></a>01140           <span class="comment">//vypis prvku</span>
+<a name="l01141"></a>01141           <span class="keywordflow">if</span> ($res1 = @$this-&gt;sqlite-&gt;query(<span class="stringliteral">"SELECT id,</span>
+<a name="l01142"></a>01142 <span class="stringliteral">                                            nazev,</span>
+<a name="l01143"></a>01143 <span class="stringliteral">                                            typ,</span>
+<a name="l01144"></a>01144 <span class="stringliteral">                                            value, poradi</span>
+<a name="l01145"></a>01145 <span class="stringliteral">                                            FROM prvek</span>
+<a name="l01146"></a>01146 <span class="stringliteral">                                            WHERE prvek.formular={$data-&gt;id}</span>
+<a name="l01147"></a>01147 <span class="stringliteral">                                            ORDER BY poradi ASC;"</span>, NULL, $error))
+<a name="l01148"></a>01148           {
+<a name="l01149"></a>01149             <span class="keywordflow">if</span> ($res1-&gt;numRows() != 0)
+<a name="l01150"></a>01150             {
+<a name="l01151"></a>01151               <span class="keywordflow">while</span> ($data1 = $res1-&gt;fetchObject())
+<a name="l01152"></a>01152               {
+<a name="l01153"></a>01153                 <a class="code" href="_8unikatni__fukce_8php.html#e241cf0159803673d118f68d99e6342f">$result</a> .= $this-&gt;<a class="code" href="classDefaultModule.html#f43261ee577b5bedbdaff44d21c64d38">NactiUnikatniObsah</a>($this-&gt;unikatni[<span class="stringliteral">"admin_vypis_obsah_elem"</span>],
+<a name="l01154"></a>01154                                                     $data1-&gt;nazev,
+<a name="l01155"></a>01155                                                     $data1-&gt;id,
+<a name="l01156"></a>01156                                                     $typ[$data1-&gt;typ],
+<a name="l01157"></a>01157                                                     $data1-&gt;value,
+<a name="l01158"></a>01158                                                     $data1-&gt;poradi,
+<a name="l01159"></a>01159                                                     <span class="stringliteral">"?{$this-&gt;var-&gt;get_kam}={$this-&gt;var-&gt;adresaadminu}&amp;amp;{$this-&gt;var-&gt;get_idmodul}={$this-&gt;idmodul}&amp;amp;co=editelem&amp;amp;id={$data1-&gt;id}"</span>,
+<a name="l01160"></a>01160                                                     <span class="stringliteral">"?{$this-&gt;var-&gt;get_kam}={$this-&gt;var-&gt;adresaadminu}&amp;amp;{$this-&gt;var-&gt;get_idmodul}={$this-&gt;idmodul}&amp;amp;co=delelem&amp;amp;id={$data1-&gt;id}"</span>);
+<a name="l01161"></a>01161               }
+<a name="l01162"></a>01162             }
+<a name="l01163"></a>01163           }
+<a name="l01164"></a>01164             <span class="keywordflow">else</span>
+<a name="l01165"></a>01165           {
+<a name="l01166"></a>01166             $this-&gt;var-&gt;main[0]-&gt;ErrorMsg($error);
+<a name="l01167"></a>01167           }
+<a name="l01168"></a>01168 
+<a name="l01169"></a>01169           <a class="code" href="_8unikatni__fukce_8php.html#e241cf0159803673d118f68d99e6342f">$result</a> .= $this-&gt;<a class="code" href="classDefaultModule.html#f43261ee577b5bedbdaff44d21c64d38">NactiUnikatniObsah</a>($this-&gt;unikatni[<span class="stringliteral">"admin_vypis_obsah_end_form"</span>]);
+<a name="l01170"></a>01170         }
+<a name="l01171"></a>01171       }
+<a name="l01172"></a>01172     }
+<a name="l01173"></a>01173       <span class="keywordflow">else</span>
+<a name="l01174"></a>01174     {
+<a name="l01175"></a>01175       $this-&gt;var-&gt;main[0]-&gt;ErrorMsg($error);
+<a name="l01176"></a>01176     }
+<a name="l01177"></a>01177 
+<a name="l01178"></a>01178     <span class="keywordflow">return</span> <a class="code" href="_8unikatni__fukce_8php.html#e241cf0159803673d118f68d99e6342f">$result</a>;
+<a name="l01179"></a>01179   }
+<a name="l01180"></a>01180 }
+<a name="l01181"></a>01181 ?&gt;
+</pre></div></div>
+<hr size="1"><address style="text-align: right;"><small>Generováno Tue Aug 4 13:38:10 2009 pro projekt Novy vychozi PHP layout programem&nbsp;
+<a href="http://www.doxygen.org/index.html">
+<img src="doxygen.png" alt="doxygen" align="middle" border="0"></a> 1.5.8 </small></address>
+</body>
+</html>

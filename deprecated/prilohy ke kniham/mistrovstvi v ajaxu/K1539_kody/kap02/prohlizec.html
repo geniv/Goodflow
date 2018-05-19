@@ -1,0 +1,30 @@
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>Získání informací o prohlížeči</title>
+    
+    <script language="javascript">
+      function zobrazZpravu()
+      {
+        var text = "Váš prohlížeč je " + navigator.appName; 
+        text += "<br><br>";
+        text += "Verze vašeho prohlížeče je " +     
+          navigator.appVersion; 
+        text += "<br><br>";
+        text += "Zde jsou doplňující informace: " + 
+          navigator.userAgent;
+        document.getElementById("cilovyDiv").innerHTML = text;
+      }
+    </script>
+  </head>
+
+  <body onload="zobrazZpravu()">
+
+    <h1>Získání informací o prohlížeči</h1>
+
+    <div id="cilovyDiv">
+    </div>
+      
+  </body>
+</html>
+

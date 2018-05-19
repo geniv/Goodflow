@@ -1,0 +1,35 @@
+<HTML>
+  <HEAD>
+    <TITLE>Více rámù jednou ranou</TITLE>
+      <script Language="JavaScript">
+        <!--
+        // Funkce nastaví libovolnı poèet rámù
+        // protoe má libovolnı poèet argumentù
+        function SetFrame (){
+          // Forcyklus pøes všechny argumenty
+          for (i=0; i<arguments.length; i+=2){
+            // Pokud je k dispozici dvojice argumentù
+            if (i+1<arguments.length){
+              // Tak naète do pøíslušného rámu (i-tı parametr)
+              // pøíslušnou stránku (i+1 parametr)
+              eval ('parent.'+arguments[i]+
+                '.document.location.href = "'+
+                arguments[i+1]+'";');
+            }
+          }
+        }
+        // -->
+      </SCRIPT>
+  </HEAD>
+
+  <BODY>
+    <A Href="javascript:SetFrame ('Frame1',
+      'http://www.seznam.cz')">Otevøít Seznam</A><BR>
+    <A Href="javascript:SetFrame (
+      'Frame1', 'http://www.seznam.cz',
+      'Frame2', 'http://www.centrum.cz',
+      'Frame3', 'http://swnet.cz'
+      )">Otevøít Seznam, Centrum a SWNet</A>
+  </BODY>
+</HTML>
+

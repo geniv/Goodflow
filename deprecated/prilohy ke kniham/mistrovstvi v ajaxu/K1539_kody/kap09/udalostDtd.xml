@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<!DOCTYPE události [
+<!ELEMENT události (událost*)>
+<!ELEMENT událost (událost_název, událost_číslo, předmět, datum, lidé*)>
+<!ELEMENT událost_název (#PCDATA)>
+<!ELEMENT událost_číslo (#PCDATA)>
+<!ELEMENT předmět (#PCDATA)>
+<!ELEMENT datum (#PCDATA)>
+<!ELEMENT jméno (#PCDATA)>
+<!ELEMENT příjmení (#PCDATA)>
+<!ELEMENT lidé (osoba*)>
+<!ELEMENT osoba (jméno,příjmení)>
+<!ATTLIST událost
+    typ CDATA #IMPLIED>
+<!ATTLIST osoba
+    účast CDATA #IMPLIED>
+]>
+<události>
+  <událost typ="shromáždění">
+    <událost_název>Udílení cen</událost_název>
+    <událost_číslo>3</událost_číslo>
+    <předmět>Ceny</předmět>
+    <datum>5.5.2007</datum>
+    <lidé>
+      <osoba účast="přítomen">
+        <jméno>Jan</jméno>
+        <příjmení>Novák</příjmení>
+      </osoba>
+      <osoba účast="nepřítomen">
+        <jméno>Tomáš</jméno>
+        <příjmení>Vorel</příjmení>
+      </osoba>
+      <osoba účast="přítomen">
+        <jméno>Marie</jméno>
+        <příjmení>Chladná</příjmení>
+      </osoba>
+    </lidé>
+  </událost>
+</události>

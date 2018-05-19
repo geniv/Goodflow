@@ -1,0 +1,25 @@
+# pekna url
+#RewriteEngine on
+#RewriteBase /
+#RewriteCond %{QUERY_STRING} ^article=([^&]+)$
+#RewriteRule ^article\.php$ %1.html? [R=301,L]
+#RewriteRule ^([^/]+)\.html article.php?rw=1&article=$1 [L,QSA]
+
+# stranky s chybovymi hlaseniami pre chyby 403, 404
+ErrorDocument 403 /files/error_403.php
+ErrorDocument 404 /files/error_404.php
+
+# nastavenie vychodzej stranky adresara
+DirectoryIndex index.php
+
+#Prevedenie &amp; na & v query stringu
+RewriteCond %{QUERY_STRING} ^(.*)&amp;(.*)$
+RewriteRule ^(.*)$ $1?%1&%2 [E=newqs:%1&%2,N]
+RewriteCond %{ENV:newqs} !^$
+RewriteRule ^(.*)$ $1?%{ENV:newqs} [R=301,L]
+
+#Opravenie zle vyparsovanej adresy
+RewriteCond %{QUERY_STRING} ^(.*[^\.\?\),!-"'])[\.\?\),!-"']+$
+RewriteRule ^(.*)$ $1?%1 [R=301,L]
+RewriteCond %{REQUEST_FILENAME} !-F
+RewriteRule ^(.*[^\.\?\),!-"'])([\.\?\),!-"'])+$ $1 [R=301,L]

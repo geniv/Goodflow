@@ -1,0 +1,66 @@
+<html> 
+  <head> 
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>Časový limit</title> 
+
+    <script language="javascript">
+      function ziskejData(zdrojDat, divID) 
+      { 
+        var XMLHttpRequestObjekt = false; 
+  
+        if (window.XMLHttpRequest) {
+          XMLHttpRequestObjekt = new XMLHttpRequest();
+        } else if (window.ActiveXObject) {
+          XMLHttpRequestObjekt = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+
+        if(XMLHttpRequestObjekt) {
+          var obj = document.getElementById(divID); 
+          XMLHttpRequestObjekt.open("GET", zdrojDat); 
+
+          var nastaveno = false;
+          var odpovezeno = false;
+
+          XMLHttpRequestObjekt.onreadystatechange = function() 
+          { 
+            if (XMLHttpRequestObjekt.readyState == 1) { 
+              if(!nastaveno){
+                window.setTimeout(function(){
+                  if(!odpovezeno){
+                    alert("Časový limit vypršel.");
+                    XMLHttpRequestObjekt.abort();
+                  }
+                },
+                1000);
+                nastaveno = true;
+              }
+            } 
+
+            if (XMLHttpRequestObjekt.readyState == 4 && 
+              XMLHttpRequestObjekt.status == 200) { 
+                odpovezeno = true;
+                obj.innerHTML = XMLHttpRequestObjekt.responseText; 
+            } 
+          } 
+
+          XMLHttpRequestObjekt.send(null); 
+        }
+      }
+    </script>
+  </head> 
+
+  <body>
+
+    <H1>Časový limit</H1>
+
+    <form>
+      <input type="button" value="Získej zprávu" 
+        onclick="ziskejData('data.txt', 'cilovyDiv')"> 
+    </form>
+
+    <div id="cilovyDiv">
+      <p>Získaný text se zobrazí na tomto místě.</p> 
+    </div> 
+
+  </body> 
+</html>

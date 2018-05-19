@@ -1,0 +1,118 @@
+<HTML><head>
+
+ <SEQUENCE order="Text1, Text2, Text3, Text4, Text5, Text6, Text7" speed="20"
+type="auto" increments=10>
+<SCRIPT LANGUAGE="JavaScript">
+var slideShow = new Object();
+function initSequence(s) {
+var sTemp = s.sequences[s.currentSequence];
+if (null != sTemp) {
+s.sequencer = new Array();
+s.sequencer = sTemp.getAttribute("order").split(", ");
+for (var intLoop=0; intLoop < s.sequencer.length;
+intLoop++)
+if (null != document.all[s.sequencer[intLoop]]) {
+var el = document.all[s.sequencer[intLoop]];
+el.initTop = el.style.posTop;
+el.initLeft = el.style.posLeft;
+} 
+s.speed = (null == sTemp.getAttribute("speed")) ?
+20 : sTemp.getAttribute("speed");
+s.type = ("auto" == sTemp.getAttribute("type"));
+s.increments =
+(null == sTemp.getAttribute("increments")) ?
+15 : sTemp.getAttribute("increments");
+s.inc = 0;
+s.position = -1;
+}
+else {
+s.position = null;
+if (document.onclick == doFly)
+document.onclick = new Function();
+}
+}
+
+function nextSequence(s) {
+if (null != s.position) {
+s.position++
+if (s.position < s.sequencer.length) {
+s.inc = 0;
+if (s.type) 
+window.setTimeout("doFly();", s.speed)
+else 
+document.onclick = doFly;
+}
+else {
+s.currentSequence++;
+initSequence(s);
+nextSequence(s);
+}
+}
+else {
+s.position = null;
+if (document.onclick == doFly)
+document.onclick = null;
+}
+}
+
+function slide() {
+slideShow.sequences = document.all.tags("SEQUENCE");
+slideShow.sequencer = new Array();
+if (0 < slideShow.sequences.length) {
+slideShow.currentSequence = 0;
+initSequence(slideShow); 
+nextSequence(slideShow); 
+}
+}
+function doFly() {
+var dt, dl;
+var el =
+document.all[slideShow.sequencer[slideShow.position]];
+document.onclick = null; 
+slideShow.inc++;
+dt = el.initTop / slideShow.increments;
+dl = el.initLeft / slideShow.increments;
+el.style.posTop = el.style.posTop - dt;
+el.style.posLeft = el.style.posLeft - dl;
+if (slideShow.inc < slideShow.increments) 
+window.setTimeout("doFly();", slideShow.speed)
+else {
+el.style.top = 0;
+el.style.left = 0;
+nextSequence(slideShow);
+}
+}
+</SCRIPT>
+<STYLE TYPE="text/css">
+BODY {color:white; BACKGROUND: black url('img001.gif'); }
+DIV {position:relative; width:100%; font-size:13pt;
+height:40px}
+H1 {text-align:center; font-size:18pt}
+</STYLE>
+</head>
+
+<BODY ONLOAD="slide();">
+
+
+<p align="center"><font size="4" color="#00FF00">
+<DIV ID="Text1" STYLE="top:0px; left:-500px; color:red">
+<p align="center"><a href="http://www.redbox.cz/"><font color="#FF0000">
+www.redbox.cz</font></a></DIV>
+<DIV ID="Text2" STYLE="top:0px; left:-500px; color:blue">
+<p align="center"><a href="http://www.navrcholu.cz/">www.navrcholu.cz</a></DIV>
+<DIV ID="Text3" STYLE="top:0px; left:-500px; color:yellow">
+<p align="center"><a href="http://www.atlas.cz/"><font color="#FFFF00">www.atlas.cz</font></a></DIV>
+<DIV ID="Text4" STYLE="top:0px; left:-500px; color:red">
+<p align="center"><a href="http://www.quick.cz/"><font color="#FF0000">
+www.quick.cz</font></a></DIV>
+<DIV ID="Text5" STYLE="top:0px; left:-500px; color:blue">
+<p align="center"><a href="http://www.centrum.cz/">www.centrum.cz</a></DIV>
+<DIV ID="Text6" STYLE="top:0px; left:-500px; color:yellow">
+<p align="center"><a href="http://www.alenka.cz/"><font color="#FFFF00">
+www.alenka.cz</font></a></DIV>
+</font><font size="4" color="#0000FF">
+<DIV ID="Text7" STYLE="top:0px; left:-500px">
+<p align="center"><a href="http://www.google.com/">www.google.com</a></DIV>
+</font>
+</BODY> 
+</HTML>

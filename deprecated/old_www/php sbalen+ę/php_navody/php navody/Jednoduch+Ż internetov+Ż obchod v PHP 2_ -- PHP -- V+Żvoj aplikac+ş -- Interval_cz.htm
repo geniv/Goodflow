@@ -1,0 +1,646 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!-- saved from url=(0064)http://interval.cz/clanky/jednoduchy-internetovy-obchod-v-php-2/ -->
+<?xml version='1.0' encoding='windows-1250'?><HTML lang=cs xml:lang="cs" 
+xmlns="http://www.w3.org/1999/xhtml"><HEAD><TITLE>Jednoduchý internetový obchod v PHP 2. -- PHP -- Vývoj aplikací -- Interval.cz</TITLE>
+<META http-equiv=Content-Type content="text/html; charset=windows-1250">
+<META http-equiv=Content-language content=cs>
+<META http-equiv=Cache-control content=no-cache>
+<META http-equiv=Pragma content=no-cache>
+<META http-equiv=Expires content=-1>
+<META content=index,follow name=robots>
+<META content=index,follow,snippet,noarchive name=googlebot>
+<META 
+content="V dalším díle svého seriálu o jednoduchém internetovém obchodě v PHP vám ukáži způsob, jak zákazníkům umožnit výběr zboží z databáze nabízeného sortimentu, buď zadáním klíčového slova nebo podle skupiny zboží. Tématika tohoto dílu předpokládá zvládnutí obsahu dílu prvního, tj. vytvoření tabulky v mySQL, zaplnění tabulky daty a práce s touto tabulkou pomocí základních příkazů PHP." 
+name=description>
+<META content="PHP, Vývoj aplikací, Interval" name=keywords>
+<META content="49.1915, 16.626" name=ICBM>
+<META content=Interval.cz name=DC.Title>
+<META content=http://interval.cz name=DC.Identifier>
+<META content="(SCHEME=ISSN) 12128651" name=DC.Identifier>
+<META content=cs name=DC.Language>
+<META http-equiv=pics-label 
+content='(pics-1.1 "http://www.icra.org/ratingsv02.html" comment "ICRAonline EN v2.0" l gen true for "http://interval.cz" r (nz 1 vz 1 lz 1 oz 1 cz 1) "http://www.rsac.org/ratingsv01.html" l gen true for "http://interval.cz" r (n 0 s 0 v 0 l 0))'>
+<META http-equiv=imagetoolbar content=no>
+<META http-equiv=MSThemeCompatible content=no>
+<META content=true name=MSSmartTagsPreventParsing><LINK 
+href="http://interval.cz/favicon.ico" type=image/x-icon 
+rel="shortcut icon"><LINK 
+title="Interval.cz -- Jednoduchý internetový obchod v PHP 2. -- (diskuse, Atom 0.3)" 
+href="http://export.interval.cz/?type=atom&amp;discussion=829" 
+type=application/atom+xml rel=alternate><LINK 
+title="Interval.cz -- Jednoduchý internetový obchod v PHP 2. -- (diskuse, RDF Site Summary 1.0)" 
+href="http://export.interval.cz/?type=rdf&amp;discussion=829" 
+type=application/rdf+xml rel=alternate><LINK 
+title="Interval.cz -- Jednoduchý internetový obchod v PHP 2. -- (diskuse, RSS 2.0)" 
+href="http://export.interval.cz/?type=rss&amp;discussion=829" 
+type=application/rss+xml rel=alternate><LINK href="http://interval.cz" 
+rel=home><LINK href="http://interval.cz/search_ex.asp" rel=search><LINK 
+href="http://interval.cz/serialy/jednoduchy-internetovy-obchod-v-php/" 
+rel=up><LINK 
+href="http://interval.cz/clanky/jednoduchy-internetovy-obchod-v-php-1/" 
+rel=first><LINK 
+href="http://interval.cz/clanky/jednoduchy-internetovy-obchod-v-php-5/" 
+rel=last><LINK 
+href="http://interval.cz/clanky/jednoduchy-internetovy-obchod-v-php-1/" 
+rel=prev><LINK 
+href="http://interval.cz/clanky/jednoduchy-internetovy-obchod-v-php-3/" 
+rel=next><LINK media=all 
+href="Jednoduchý internetový obchod v PHP 2_ -- PHP -- Vývoj aplikací -- Interval_cz_soubory/html4.css" 
+type=text/css rel=stylesheet><LINK media=all 
+href="Jednoduchý internetový obchod v PHP 2_ -- PHP -- Vývoj aplikací -- Interval_cz_soubory/interval-display.css" 
+type=text/css rel=stylesheet><LINK media=print 
+href="Jednoduchý internetový obchod v PHP 2_ -- PHP -- Vývoj aplikací -- Interval_cz_soubory/interval-print.css" 
+type=text/css rel=stylesheet>
+<META content="MSHTML 6.00.2800.1106" name=GENERATOR></HEAD>
+<BODY class="interval interval-articles" id=article-829>
+<DIV class=audits><!-- TOPList.cz -->
+<SCRIPT type=text/javascript>
+<!-- <![CDATA[
+document.write ("<a href='http://www.toplist.cz'><img src='http://www.toplist.cz/dot.asp?id=33617&amp;http="+escape(document.referrer)+"&amp;wi="+escape(window.screen.width)+"&amp;he="+escape(window.screen.height)+"&amp;cd="+escape(window.screen.colorDepth)+"&amp;t="+escape(document.title)+"' style='border: 0; width: 1px; height: 1px' alt='.' /></a>");
+//]]> -->
+</SCRIPT>
+<NOSCRIPT>
+<DIV><A href="http://www.toplist.cz/"><IMG 
+style="BORDER-RIGHT: 0px; BORDER-TOP: 0px; BORDER-LEFT: 0px; WIDTH: 1px; BORDER-BOTTOM: 0px; HEIGHT: 1px" 
+alt=. src=""></A></DIV></NOSCRIPT><!-- TOPList.cz - konec --><!-- iAudit --><IMG 
+style="BORDER-RIGHT: 0px; BORDER-TOP: 0px; BORDER-LEFT: 0px; WIDTH: 1px; BORDER-BOTTOM: 0px; HEIGHT: 1px" 
+alt=. 
+src="Jednoduchý internetový obchod v PHP 2_ -- PHP -- Vývoj aplikací -- Interval_cz_soubory/dot.idot.gif"> 
+<!-- iAudit - konec --><!-- (C)2005 Gemius SA - gemiusAudience  / Ostatni -->
+<SCRIPT type=text/javascript><!--
+	
+	gemius_identifier = new String('bQzrQkrzLOWoKbJeudlKguTS7OndUMSqxutbeFviWMv.47');
+	
+	gemius_href=new String(document.location);
+	if (document.referrer) { gemius_ref = new String(document.referrer); } else { gemius_ref = ""; }
+	if(typeof(Error)!='undefined') eval("try { if (typeof(top.document.referrer)=='string') { gemius_ref = top.document.referrer } } catch(gemius_ex) {}");
+	iname = new String('id='+gemius_identifier+';ref='+escape(gemius_ref.substring(0,299))+';href='+escape(gemius_href.substring(0,299))+';');
+	document.write('<iframe src="http://spir.hit.gemius.pl/gemiusaudience.html" name="'+iname+'" width="1" height="1" frameborder="0" scrolling="no"></iframe>');
+	//-->
+	</SCRIPT>
+</DIV>
+<DIV id=advertising-leader-board><!-- StartKód: adarbo2.bbmedia.cz 3.1 Nestandard  Interval(87) / cely web(1) / leaderboard 750x100(1) / nestandard(24) -->
+<SCRIPT type=text/javascript>
+	/* <![CDATA[ */
+	var bbs=screen,bbn=navigator,bbh;bbh='&ubl='+bbn.browserLanguage+'&ucc='+bbn.cpuClass+'&ucd='+bbs.colorDepth+'&uce='+bbn.cookieEnabled+'&udx='+bbs.deviceXDPI+'&udy='+bbs.deviceYDPI+'&usl='+bbn.systemLanguage+'&uje='+bbn.javaEnabled()+'&uah='+bbs.availHeight+'&uaw='+bbs.availWidth+'&ubd='+bbs.bufferDepth+'&uhe='+bbs.height+'&ulx='+bbs.logicalXDPI+'&uly='+bbs.logicalYDPI+'&use='+bbs.fontSmoothingEnabled+'&uto='+(new Date()).getTimezoneOffset()+'&uti='+(new Date()).getTime()+'&uui='+bbs.updateInterval+'&uul='+bbn.userLanguage+'&uwi='+bbs.width;
+	document.write("<scr"+"ipt  language='JavaScript' type='text/javascript' src='http://adarbo2.bbmedia.cz/please/showit/87/1/1/24/?typkodu=non-standard"+bbh+"&alttext=0&border=0&bgcolor=FFFFFF&text=000000&link=0000FF&target=_blank&bust="+Math.random()+"'>");
+	document.write("<"+"\/scr"+"ipt>");
+	/* ]]> */
+	</SCRIPT>
+<!-- KonecKód: adarbo2.bbmedia.cz 3.1 Nestandard --></DIV>
+<DIV id=page-header>
+<DIV id=interval-logo>
+<H1 title="Interval.cz - webdesign a e-komerce denně (logo &amp; index link)"><A 
+href="http://interval.cz/">Interval.cz<SPAN></SPAN></A></H1></DIV>
+<DIV id=advertising-page-header><!-- StartKód: adarbo2.bbmedia.cz 3.1 Nestandard  Interval(87) / cely web(1) / horni468x60(2) / nestandard(24) -->
+<SCRIPT type=text/javascript>
+	/* <![CDATA[ */
+	var bbs=screen,bbn=navigator,bbh;bbh='&ubl='+bbn.browserLanguage+'&ucc='+bbn.cpuClass+'&ucd='+bbs.colorDepth+'&uce='+bbn.cookieEnabled+'&udx='+bbs.deviceXDPI+'&udy='+bbs.deviceYDPI+'&usl='+bbn.systemLanguage+'&uje='+bbn.javaEnabled()+'&uah='+bbs.availHeight+'&uaw='+bbs.availWidth+'&ubd='+bbs.bufferDepth+'&uhe='+bbs.height+'&ulx='+bbs.logicalXDPI+'&uly='+bbs.logicalYDPI+'&use='+bbs.fontSmoothingEnabled+'&uto='+(new Date()).getTimezoneOffset()+'&uti='+(new Date()).getTime()+'&uui='+bbs.updateInterval+'&uul='+bbn.userLanguage+'&uwi='+bbs.width;
+	document.write("<scr"+"ipt  type='text/javascript' src='http://adarbo2.bbmedia.cz/please/showit/87/1/2/24/?typkodu=non-standard"+bbh+"&alttext=0&border=0&bgcolor=FFFFFF&text=000000&link=0000FF&target=_top&bust="+Math.random()+"'>");
+	document.write("<"+"\/scr"+"ipt>");
+	/* ]]> */
+	</SCRIPT>
+<!-- KonecKód: adarbo2.bbmedia.cz 3.1 Nestandard --></DIV>
+<DIV class=page-maker>&nbsp;</DIV></DIV>
+<DIV id=page-topmenu>
+<H2 class=textversion>Navigace</H2><!-- cached 09-15-62-hlavni_menu_with_ascii.txt --><!-- ,Vývoj aplikací ~~ ,,PHP ~~ , -->
+<DIV id=page-mainmenu>
+<H3 class=textversion>Hlavní menu</H3>
+<UL>
+  <LI class=first><A href="http://interval.cz/">Titulka</A></LI>
+  <LI><A href="http://interval.cz/e-komerce/">E-komerce</A></LI>
+  <LI><A href="http://interval.cz/webdesign/">Webdesign</A></LI>
+  <LI class=selected><A href="http://interval.cz/vyvoj-aplikaci/">Vývoj 
+  aplikací</A></LI>
+  <LI><A href="http://interval.cz/nastroje/">Nástroje</A></LI>
+  <LI><A href="http://interval.cz/magazin/">Magazín</A></LI>
+  <LI class="right selected"><A 
+  href="http://interval.inshop.cz/">Knihkupectví</A></LI>
+  <LI class=right><A href="http://interforum.interval.cz/">Interforum</A></LI>
+  <LI class=right><A 
+href="http://interzen.interval.cz/">Interzen</A></LI></UL></DIV>
+<DIV id=page-mainmenu-maker>&nbsp;</DIV>
+<DIV id=page-mainsubmenu>
+<H3 class=textversion>Submenu</H3>
+<UL>
+  <LI><A href="http://interval.cz/vyvoj-aplikaci/j2me/">J2ME</A></LI>
+  <LI><A href="http://interval.cz/vyvoj-aplikaci/asp/">ASP</A></LI>
+  <LI><A href="http://interval.cz/vyvoj-aplikaci/net/">.NET</A></LI>
+  <LI class=selected><A 
+  href="http://interval.cz/vyvoj-aplikaci/php/">PHP</A></LI>
+  <LI><A 
+href="http://interval.cz/vyvoj-aplikaci/javascript/">JavaScript</A></LI>
+  <LI><A href="http://interval.cz/vyvoj-aplikaci/xml/">XML</A></LI>
+  <LI><A href="http://interval.cz/vyvoj-aplikaci/java/">Java</A></LI>
+  <LI><A href="http://interval.cz/vyvoj-aplikaci/perl-cgi/">PERL/CGI</A></LI>
+  <LI><A href="http://interval.cz/vyvoj-aplikaci/databaze/">Databáze</A></LI>
+  <LI><A 
+href="http://interval.cz/vyvoj-aplikaci/bezpecnost/">Bezpečnost</A></LI>
+  <LI><A 
+href="http://interval.cz/vyvoj-aplikaci/analyzy/">Analýzy</A></LI></UL><SPAN 
+id=page-mainsubmenu-maker>&nbsp;</SPAN></DIV><!-- cas behu menu = 0 --></DIV>
+<DIV id=page-body>
+<DIV id=page-left>
+<DIV id=article>
+<H2>Jednoduchý internetový obchod v PHP 2.</H2>
+<P id=prepend>V dalším díle svého seriálu o jednoduchém internetovém obchodě v 
+PHP vám ukáži způsob, jak zákazníkům umožnit výběr zboží z databáze nabízeného 
+sortimentu, buď zadáním klíčového slova nebo podle skupiny zboží. Tématika 
+tohoto dílu předpokládá zvládnutí obsahu dílu prvního, tj. vytvoření tabulky v 
+mySQL, zaplnění tabulky daty a práce s touto tabulkou pomocí základních příkazů 
+PHP. </P>
+<DIV class="advertising-bigsquare-outer noprint">
+<DIV class=advertising-bigsquare-inner style="WIDTH: 300px"><!-- StartKód: adarbo2.bbmedia.cz 3.1 Nestandard  Interval(87) / cely web(1) / ctverec250x250(8) / nestandard(24) -->
+<SCRIPT type=text/javascript>
+	/* <![CDATA[ */
+	var bbs=screen,bbn=navigator,bbh;bbh='&ubl='+bbn.browserLanguage+'&ucc='+bbn.cpuClass+'&ucd='+bbs.colorDepth+'&uce='+bbn.cookieEnabled+'&udx='+bbs.deviceXDPI+'&udy='+bbs.deviceYDPI+'&usl='+bbn.systemLanguage+'&uje='+bbn.javaEnabled()+'&uah='+bbs.availHeight+'&uaw='+bbs.availWidth+'&ubd='+bbs.bufferDepth+'&uhe='+bbs.height+'&ulx='+bbs.logicalXDPI+'&uly='+bbs.logicalYDPI+'&use='+bbs.fontSmoothingEnabled+'&uto='+(new Date()).getTimezoneOffset()+'&uti='+(new Date()).getTime()+'&uui='+bbs.updateInterval+'&uul='+bbn.userLanguage+'&uwi='+bbs.width;
+	document.write("<scr"+"ipt  type='text/javascript' src='http://adarbo2.bbmedia.cz/please/showit/87/1/8/24/?typkodu=non-standard"+bbh+"&alttext=0&border=0&bgcolor=FFFFFF&text=000000&link=0000FF&target=_top&bust="+Math.random()+"'>");
+	document.write("<"+"\/scr"+"ipt>");
+	/* ]]> */
+	</SCRIPT>
+<!-- KonecKód: adarbo2.bbmedia.cz 3.1 Nestandard --></DIV></DIV>
+<P class=texttabulka><B>Výběr záznamů z tabulky mySQL - vyhledání zboží podle 
+skupiny nebo klíčového slova</B></P>
+<P class=texttabulka>Skript PHP, který si nazvu select.php, vašim zákazníkům 
+umožní vyhledat v dané tabulce databáze mySQL jakýkoliv záznam nebo množinu 
+záznamů (tj. výrobků nabízených v internetovém obchodě) zadáním řetězce do 
+textového pole formuláře (proměnná $klic) nebo kliknutím na odkaz označující 
+libovolnou skupinu zboží (proměnná $skupina). Pracovat budu s fiktivní databází 
+"obchod", ve které jsem si vytvořil tabulku "vyrobky" s textovými poli 
+"skupina", "nazev" a "popis". Bližší informace o této tabulce naleznete v prvním 
+díle seriálu.</P>
+<P class=texttabulka>Nejdříve si nadefinuji styl odkazů, který zákazníkovi 
+usnadní orientaci - tj. při najetí myši na odkaz se tento změní dle naší 
+definice stylu. Mohu rovněž definovat vzhled již navštívených odkazů. Definice 
+stylu může vypadat např. takto:</P>
+<P class=texttabulka>
+<TABLE cellSpacing=0 cellPadding=1 width="100%" border=0>
+  <TBODY>
+  <TR>
+    <TD>
+      <TABLE cellSpacing=0 cellPadding=2 width="100%" border=0>
+        <TBODY>
+        <TR>
+          <TD class=aktuality bgColor=white>&lt;style 
+            type="text/css"&gt;<BR>&lt;!--<BR>.odkaz {font-size:small; 
+            font-weight:800; font-family: Times New Roman CE, Times CE, Times 
+            New Roman, Times, serif;}<BR>A:link { text-decoration: underline; 
+            color:#663300}<BR>A:visited { text-decoration: underline; 
+            color:#663300}<BR>A:hover { text-decoration: underline; color: red 
+            }<BR>--&gt;<BR>&lt;/style&gt; 
+</TD></TR></TBODY></TABLE></TD></TR></TBODY></TABLE></P>
+<P class=texttabulka>Aby byl skript funkční, musím mít v tabulce "vyrobky" již 
+načtené záznamy (opět odkazuji na první díl tohoto seriálu), tj. údaje o zboží 
+nabízeném v internetovém obchodě. Předpokládám, že v poli "skupina" je vždy 
+jméno skupiny, pod který daný výrobek (záznam) spadá (bez české diakritiky a 
+mezer mezi slovy), v poli "nazev" je jméno a charakteristika výrobku, které se 
+objeví zákazníkovi jako výstup v prohlížeči a v poli "popis" jsou klíčová slova, 
+o kterých si myslím, že by je zákazník mohl uvést při pokusu najít daný záznam. 
+Abych byl konkrétnější - předpokládám např. internetový obchod s potravinami. 
+Záznamy v tabulce "vyrobky" potom mohou v jednotlivých polích vypadat takto:</P>
+<P class=texttabulka>
+<TABLE cellSpacing=0 cellPadding=1 width="100%" border=0>
+  <TBODY>
+  <TR>
+    <TD>
+      <TABLE cellSpacing=0 cellPadding=2 width="100%" border=0>
+        <TBODY>
+        <TR>
+          <TD class=aktuality bgColor=white>1. záznam<BR>pole "skupina": 
+            maso<BR>pole "nazev": zmražené kuřecí drůbky, 750g<BR>pole "popis": 
+            drůbež, kuře, polévka, mražené polotovary<BR>n. záznam<BR>pole 
+            "skupina": mlecnevyrobky<BR>pole "nazev": Hermelín, pikantní<BR>pole 
+            "popis": sýry, sýr, plíseň, plísňový, král sýrů 
+    </TD></TR></TBODY></TABLE></TD></TR></TBODY></TABLE></P>
+<P class=texttabulka>Skript select.php bude potom vypadat takto:</P>
+<P class=texttabulka>
+<TABLE cellSpacing=0 cellPadding=1 width="100%" border=0>
+  <TBODY>
+  <TR>
+    <TD>
+      <TABLE cellSpacing=0 cellPadding=2 width="100%" border=0>
+        <TBODY>
+        <TR>
+          <TD class=aktuality bgColor=white>&lt;form action="select.php" 
+            method="post"&gt;<BR>&lt;input type="text" 
+            name="klic"&gt;<BR>&lt;input type="image" name="vyber" src="cesta k 
+            obrázku" alt="Vyhledat" border="0"&gt;<BR>&lt;/form&gt; 
+        </TD></TR></TBODY></TABLE></TD></TR></TBODY></TABLE></P>
+<P class=texttabulka>Nadefinuji si jednoduchý formulář (mohu použít normální 
+html kód), pomocí kterého si zákazník může vybrat zboží zadáním klíčového slova. 
+Odešle-li zákazník textový řetězec (tj. klíčové slovo) z elementu "klic" 
+formuláře, dostane skript select.php k dispozici proměnnou $klic s hodnotou 
+odpovídající zadanému textovému řetězci.</P>
+<P class=texttabulka>
+<TABLE cellSpacing=0 cellPadding=1 width="100%" border=0>
+  <TBODY>
+  <TR>
+    <TD>
+      <TABLE cellSpacing=0 cellPadding=2 width="100%" border=0>
+        <TBODY>
+        <TR>
+          <TD class=aktuality bgColor=white>&lt;?<BR>if 
+            (!IsSet($skupina))<BR>$skupina="";<BR>if 
+            (!IsSet($klic))<BR>$klic="";<BR>if(($Skupina= ="")&amp;&amp;($klic= 
+            ="")):<BR>echo "&lt;div align='center'&gt;Zde bude např. 
+            reklama.&lt;/div&gt;";<BR>echo 
+            "&lt;/body&gt;&lt;/html&gt;";<BR>die();<BR>endif; 
+      </TD></TR></TBODY></TABLE></TD></TR></TBODY></TABLE></P>
+<P class=texttabulka>Těmito příkazy se vyhnu hlášení chyby v případech, že není 
+definována proměnná $skupina, resp. $klic. Pokud se zákazník rozhodne vyhledat 
+zboží podle skupiny, zůstala by nedefinována proměnná $klic. Pokud zákazník bude 
+hledat zboží podle klíčového slova, vypsalo by se chybové hlášení pro proměnnou 
+$skupina. Jestliže není definována žádná z těchto proměnných (např. při prvním 
+načtení skriptu) a jejich hodnota je tedy prázdný řetězec, vygeneruji příkazem 
+echo libovolný kód html, který skript zobrazí jako normální html stránku a 
+funkcí die() skript ukončím.</P>
+<P class=texttabulka>
+<TABLE cellSpacing=0 cellPadding=1 width="100%" border=0>
+  <TBODY>
+  <TR>
+    <TD>
+      <TABLE cellSpacing=0 cellPadding=2 width="100%" border=0>
+        <TBODY>
+        <TR>
+          <TD class=aktuality 
+            bgColor=white>$styl=Array("class='odkaz'",....,"class='odkaz'");<BR></TD></TR></TBODY></TABLE></TD></TR></TBODY></TABLE></P>
+<P class=texttabulka>Inicializace pole. Proměnné $styl přiřadím pole. Počet 
+prvků pole odpovídá počtu skupin zboží, resp. počtu odkazů na tyto skupiny. Všem 
+prvkům pole přiřadím textový řetězec, který v jazyce html přiřadí odkazu styl, 
+jak jsem si jej definoval výše (v tomto případě class='odkaz'). Nezapomeňte, že 
+indexování prvků pole začíná od nuly.</P>
+<P class=texttabulka>
+<TABLE cellSpacing=0 cellPadding=1 width="100%" border=0>
+  <TBODY>
+  <TR>
+    <TD>
+      <TABLE cellSpacing=0 cellPadding=2 width="100%" border=0>
+        <TBODY>
+        <TR>
+          <TD class=aktuality bgColor=white>if ($skupina= 
+            ="maso")<BR>$styl[0]="style='color:red;'";<BR>elseif ($skupina= 
+            ="mlecnevyrobky")<BR>$styl[1]="style='color:red;'";<BR>elseif 
+            ($skupina= 
+        ="kategorie#n")<BR>$styl[n-1]="style='color:red;'";<BR></TD></TR></TBODY></TABLE></TD></TR></TBODY></TABLE></P>
+<P class=texttabulka>Příkazem if-elseif přiřadím v závislosti na hodnotě 
+proměnné $skupina jednotlivým prvkům pole styl odlišný od definovaného 
+stylu.</P>
+<P class=texttabulka>
+<TABLE cellSpacing=0 cellPadding=1 width="100%" border=0>
+  <TBODY>
+  <TR>
+    <TD>
+      <TABLE cellSpacing=0 cellPadding=2 width="100%" border=0>
+        <TBODY>
+        <TR>
+          <TD class=aktuality bgColor=white>echo "&lt;a 
+            href='select.php?skupina=maso' ".$styl[0]." title=''&gt;masné 
+            výrobky&lt;/a&gt;<BR>&lt;a href='select.php?skupina=mlecnevyrobky' 
+            ".$styl[1]." title=''&gt;mléčné výrobky&lt;/a&gt;<BR>&lt;a 
+            href='select.php?skupina=skupina#n' ".$styl[n-1]." 
+            title=''&gt;fiktivní skupina&lt;/a&gt;"; 
+  </TD></TR></TBODY></TABLE></TD></TR></TBODY></TABLE></P>
+<P class=texttabulka>Pokud tedy ve skriptu select.php zákazník klikne např. na 
+odkaz "masné výrobky", který odkazuje zpět na tentýž skript, avšak s již 
+definovanou proměnnou $skupina ($skupina=maso), získá nultý prvek pole proměnné 
+$styl hodnotu podle příkazu if-elseif (tj. style='color:red;'). Ostatní prvky 
+pole proměnné $styl si ponechají svou inicializovanou hodnotu (tj. 
+class='odkaz'). V prohlížeči se tak vždy aktuální odkaz (tj. ten, který odpovídá 
+vybrané množině záznamů) zobrazí jinak (v tomto případě červenou barvou) než 
+odkazy ostatní.</P>
+<P class=texttabulka>Nyní mi zbývá určit, co skript select.php s proměnnou 
+$skupina, případně s $klic udělá, aby skutečně došlo k výběru správných dat z 
+naší tabulky "vyrobky". Opět vše vysvětlím na jednotlivých částech skriptu.</P>
+<P class=texttabulka>
+<TABLE cellSpacing=0 cellPadding=1 width="100%" border=0>
+  <TBODY>
+  <TR>
+    <TD>
+      <TABLE cellSpacing=0 cellPadding=2 width="100%" border=0>
+        <TBODY>
+        <TR>
+          <TD class=aktuality bgColor=white>&lt;? do {<BR>$spojeni = 
+            MySQL_Connect("localhost", "root", "password");<BR>if 
+            (!$spojeni):<BR>echo "Nezdařilo se připojení k 
+            databázi.";<BR>break;<BR>endif; 
+</TD></TR></TBODY></TABLE></TD></TR></TBODY></TABLE></P>
+<P class=texttabulka>Část skriptu, která komunikuje s databází mySQL, uzavřu do 
+cyklu do-while. Kombinace tohoto cyklu s příkazem break mi v případě poruchy 
+komunikace s databází umožní, jako např. zde, kdykoliv připojení k databázi 
+ukončit a vypsat hlášení o chybě.</P>
+<P class=texttabulka>
+<TABLE cellSpacing=0 cellPadding=1 width="100%" border=0>
+  <TBODY>
+  <TR>
+    <TD>
+      <TABLE cellSpacing=0 cellPadding=2 width="100%" border=0>
+        <TBODY>
+        <TR>
+          <TD class=aktuality bgColor=white>$vybrat_dtb = 
+            MySQL_Select_DB("obchod");<BR>if($klic!=""):<BR>/* funkce AddSlashes 
+            převede případné kolizní hodnoty zadané do pole klic na bezpečné 
+            */<BR>$podminka = "WHERE popis LIKE '%".AddSlashes($klic)."%' OR 
+            nazev LIKE '%".AddSlashes($klic)."%'";<BR>else:<BR>$podminka = 
+            "WHERE skupina='$skupina'";<BR>endif;<BR>$vysledek = 
+            Mysql_query("SELECT nazev from vyrobky 
+            $podminka");<BR>if(!$vysledek):<BR>echo "Došlo k poruše v komunikaci 
+            s 
+  databází!\n";<BR>break;<BR>endif;<BR></TD></TR></TBODY></TABLE></TD></TR></TBODY></TABLE></P>
+<P class=texttabulka>Těmito několika málo příkazy provedu výběr pole "nazev" 
+všech záznamů z tabulky "vyrobky", které odpovídají zadané skupině nebo 
+klíčovému slovu. Podstatná je proměnná $podminka, která upřesňuje klauzuli 
+WHERE. Pokud proměnná $klic není prázdný řetězec (tj. zákazník se rozhodl vybrat 
+zboží podle klíčového slova), získá $podminka tvar "WHERE popis LIKE '%klíčové 
+slovo%' OR nazev LIKE '%klíčové slovo%'. Proměnné $vysledek tedy bude přiřazen 
+výběr všech záznamů tabulky "vyrobky", jejichž hodnoty pole "popis" (tj. můj 
+soupis klíčových slov pro daný záznam) nebo pole "nazev" (tj. název výrobku, 
+který chci mít jako výstup z tabulky do prohlížeče) budou v sobě obsahovat 
+textový řetězec (klíčové slovo) zadaný zákazníkem do textového pole formuláře. V 
+případě, že proměnná $klic je prázdný řetězec, předpokládám, že zákazník si 
+zboží vybírá podle skupiny. Potom proměnná $podminka získává tvar "WHERE skupina 
+= 'proměnná $skupina předaná skriptu kliknutím na příslušnou skupinu zboží'. 
+Proměnné $vysledek bude přiřazen výběr všech záznamů tabulky "vyrobky", jejichž 
+hodnota pole "skupina" odpovídá hodnotě proměnné $skupina.</P>
+<P class=texttabulka>
+<TABLE cellSpacing=0 cellPadding=1 width="100%" border=0>
+  <TBODY>
+  <TR>
+    <TD>
+      <TABLE cellSpacing=0 cellPadding=2 width="100%" border=0>
+        <TBODY>
+        <TR>
+          <TD class=aktuality bgColor=white>if((Mysql_Num_Rows($vysledek)= 
+            =0)&amp;&amp;($klic!="")):<BR>echo "Vámi zadanému klíčovému slovu 
+            neodpovídá žádný záznam.";<BR>break;<BR>endif;<BR>} 
+            while(false);<BR>MySQL_Close($spojeni);<BR>?&gt; 
+    </TD></TR></TBODY></TABLE></TD></TR></TBODY></TABLE></P>
+<P class=texttabulka>Na závěr musím do skriptu přidat ještě jednu eventualitu. 
+Nastane v případě, že zákazník zadá klíčové slovo, kterému v naší tabulce 
+neodpovídá žádný záznam. Skript select.php to pozná tak, že počet výsledných 
+řádků odpovídá nule (tj. Mysql_Num_Rows($vysledek) = =0) a současně proměnná 
+$klic není prázdný textový řetězec. Potom dojde k vypsání chybového hlášení.</P>
+<P class=texttabulka>V dalším díle svého seriálu bych se chtěl věnovat, pokud 
+vás tedy druhé pokračování dostatečně zaujalo a nažhavilo, problematice 
+zobrazování vybraných záznamů z tabulky, jejich přidávání do nákupního košíku a 
+vzájemné komunikaci skriptů PHP řešících zobrazování vybraných záznamů z tabulky 
+a zobrazování záznamů přidaných do nákupního košíku.</P>
+<DIV id=article-author><A href="http://interval.cz/autori/marek-ondra/">Marek, 
+Ondra</A> (30.&nbsp;11.&nbsp;2001) </DIV>
+<DIV class=refer>
+<H3><A 
+title="Jednoduchý internetový obchod v PHP (úplný přehled článků seriálu)" 
+href="http://interval.cz/serialy/jednoduchy-internetovy-obchod-v-php/">Jednoduchý 
+internetový obchod v PHP</A></H3>
+<P>Internetové obchody jsou hitem současnosti. Postupně vás provedeme všemy 
+úskalími tvorby jedné takové aplikace. Hotové skripty jsou vám k dispozici k 
+okamžitému použití. Tato série článků již byla uzavřena, ačkoli další 
+pokračování nelze vyloučit.</P>
+<UL>
+  <LI><A 
+  href="http://interval.cz/clanky/jednoduchy-internetovy-obchod-v-php-5/">Jednoduchý 
+  internetový obchod v PHP 5.</A> (20.&nbsp;3.&nbsp;2002)
+  <LI><A 
+  href="http://interval.cz/clanky/jednoduchy-internetovy-obchod-v-php-4/">Jednoduchý 
+  internetový obchod v PHP 4.</A> (21.&nbsp;1.&nbsp;2002)
+  <LI><A 
+  href="http://interval.cz/clanky/jednoduchy-internetovy-obchod-v-php-3/">Jednoduchý 
+  internetový obchod v PHP 3.</A> (27.&nbsp;12.&nbsp;2001)
+  <LI><STRONG>Jednoduchý internetový obchod v PHP 2.</STRONG> (právě čtete)
+  <LI><A 
+  href="http://interval.cz/clanky/jednoduchy-internetovy-obchod-v-php-1/">Jednoduchý 
+  internetový obchod v PHP 1.</A> (9.&nbsp;11.&nbsp;2001)</LI></UL></DIV>
+<DIV class=noprint id=article-discussion><!-- cached 829-tabulka-jednoduchy-internetovy-obchod-v-php-2.txt -->
+<DIV id=article-discussion-index>
+<FORM action=http://interval.cz/discussion-read.asp?disc=829 method=post>
+<TABLE cellSpacing=0>
+  <TBODY>
+  <TR>
+    <TH colSpan=4><A title="Jednoduchý internetový obchod v PHP 2. (diskuse)" 
+      href="http://interval.cz/clanky/jednoduchy-internetovy-obchod-v-php-2/diskuse/">Jednoduchý 
+      internetový obchod v PHP 2. (diskuse)</A></TH></TR>
+  <TR>
+    <TD class=checkbox><INPUT title="0 3280" type=checkbox value=1 
+      name=checkboxDISKUZE3280></TD>
+    <TD class=date>2001-11-30 13:09:21</TD>
+    <TD class=sender>Glivický David</TD>
+    <TD class=subject>On-line platby</TD></TR>
+  <TR>
+    <TD class=checkbox><INPUT title="1 3281" type=checkbox value=1 
+      name=checkboxDISKUZE3281></TD>
+    <TD class=date>2001-11-30 14:13:28</TD>
+    <TD class=sender>Ondra Marek</TD>
+    <TD class=subject><IMG class=line alt=. 
+      src="Jednoduchý internetový obchod v PHP 2_ -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Jednoduchý internetový obchod v PHP 2_ -- PHP -- Vývoj aplikací -- Interval_cz_soubory/line1.png">On-line 
+      platby</TD></TR>
+  <TR>
+    <TD class=checkbox><INPUT title="1 3325" type=checkbox value=1 
+      name=checkboxDISKUZE3325></TD>
+    <TD class=date>2001-12-07 15:54:46</TD>
+    <TD class=sender>Pavel Král</TD>
+    <TD class=subject><IMG class=line alt=. 
+      src="Jednoduchý internetový obchod v PHP 2_ -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Jednoduchý internetový obchod v PHP 2_ -- PHP -- Vývoj aplikací -- Interval_cz_soubory/line3.png">On-line 
+      platby</TD></TR>
+  <TR>
+    <TD class=checkbox><INPUT title="0 3362" type=checkbox value=1 
+      name=checkboxDISKUZE3362></TD>
+    <TD class=date>2001-12-14 15:47:10</TD>
+    <TD class=sender>Joe</TD>
+    <TD class=subject>Pokračování seriálu</TD></TR>
+  <TR>
+    <TD id=foot colSpan=4><INPUT class=submit id=display_selected type=submit value="Zobrazit vybrané" name=display_selected> 
+      &nbsp; <INPUT class=submit id=display_all type=submit value="Zobrazit vše" name=display_all> 
+      &nbsp; <INPUT class=submit id=add_new type=submit value="Vložit nový" name=add_new></TD></TR></TBODY></TABLE></FORM></DIV></DIV></DIV></DIV>
+<DIV id=page-right>
+<H2 class=textversion>Pravý sloupek</H2>
+<DIV id=search>
+<H3 class=textversion>Vyhledávání</H3>
+<FORM action=http://interval.cz/search.asp method=get>
+<DIV><INPUT class=text name=co> <!--  
+<select name='cim'>
+<option value ='Google' selected='selected'>Google</option>
+<option value ='Jyxo'>Jyxo</option>
+</select>
+<input type='hidden' name='nadpis' value='1' />
+<input type='hidden' name='popis' value='1' />
+<input type='hidden' name='text' value='1' />
+<input type='hidden' name='rubrika' value='0' />
+<input type='hidden' name='autor' value='0' />
+ --><INPUT class=submit type=submit value=Najdi! name=send> </DIV></FORM><!-- <div><a href='http://interval.cz/search.asp'>Rozšířené vyhledávání</a></div> --></DIV><!-- StartKód: adarbo2.bbmedia.cz 3.1 Nestandard  Interval(87) / home page(2) / textbox(1) / nestandard(24) -->
+<SCRIPT type=text/javascript>
+	<!-- <![CDATA[
+	var bbs=screen,bbn=navigator,bbh;bbh='&ubl='+bbn.browserLanguage+'&ucc='+bbn.cpuClass+'&ucd='+bbs.colorDepth+'&uce='+bbn.cookieEnabled+'&udx='+bbs.deviceXDPI+'&udy='+bbs.deviceYDPI+'&usl='+bbn.systemLanguage+'&uje='+bbn.javaEnabled()+'&uah='+bbs.availHeight+'&uaw='+bbs.availWidth+'&ubd='+bbs.bufferDepth+'&uhe='+bbs.height+'&ulx='+bbs.logicalXDPI+'&uly='+bbs.logicalYDPI+'&use='+bbs.fontSmoothingEnabled+'&uto='+(new Date()).getTimezoneOffset()+'&uti='+(new Date()).getTime()+'&uui='+bbs.updateInterval+'&uul='+bbn.userLanguage+'&uwi='+bbs.width;
+	document.write("<scr"+"ipt  language='JavaScript' type='text/javascript' src='http://adarbo2.bbmedia.cz/please/showit/87/2/1/24/?typkodu=non-standard"+bbh+"&alttext=0&border=0&bgcolor=FFFFFF&text=000000&link=0000FF&target=_blank&bust="+Math.random()+"'>");
+	document.write("<"+"\/scr"+"ipt>");
+	//]]> -->
+	</SCRIPT>
+<!-- KonecKód: adarbo2.bbmedia.cz 3.1 Nestandard --><!-- cached 06-knizni_tip.txt -->
+<DIV class="page-right-box book">
+<H3>Knižní tip</H3>
+<DIV class=page-right-box-in>
+<DIV class=book-top>
+<H4><A 
+href="http://interval.inshop.cz/inshop/scripts/detail.asp?kat=045">IPv6</A></H4></DIV>
+<DIV class=image><A 
+href="http://interval.inshop.cz/inshop/scripts/detail.asp?kat=045"><IMG 
+title=IPv6 alt=obálka 
+src="Jednoduchý internetový obchod v PHP 2_ -- PHP -- Vývoj aplikací -- Interval_cz_soubory/ipv6.gif"></A></DIV></DIV></DIV><!-- cached 17-nejctenejsi_clanky.txt -->
+<DIV class="page-right-box reading">
+<H3 title="Nejčtenější články za posledních 28 dnů">Nejčtenější</H3>
+<DIV class=page-right-box-in>
+<UL>
+  <LI><A href="http://interval.cz/clanky/opera-9-pokrocila-konfigurace/">Opera 9 
+  - pokročilá konfigurace</A>
+  <LI><A 
+  href="http://interval.cz/clanky/adobe-photoshop-prakticky-webdesign-jakub-krcmar/">Adobe 
+  Photoshop - praktický webdesign (Jakub Krčmář)</A>
+  <LI><A 
+  href="http://interval.cz/clanky/drupal-tvorba-vlastniho-vzhledu/">Drupal - 
+  tvorba vlastního vzhledu</A>
+  <LI><A 
+  href="http://interval.cz/clanky/pruvodce-svg-dalsi-nastroje-pro-tvorbu-svg-grafiky/">Průvodce 
+  SVG - další nástroje pro tvorbu SVG grafiky</A>
+  <LI><A 
+  href="http://interval.cz/clanky/spravy-zo-slovenskeho-internetu-8/">Správy zo 
+  slovenského internetu 8.</A></LI></UL></DIV></DIV>
+<DIV class=merak-box style="MARGIN-TOP: 1.5em; TEXT-ALIGN: center">
+<DIV id=merak-content 
+style="BORDER-RIGHT: #000000 1px solid; BORDER-TOP: #000000 1px solid; FONT-WEIGHT: bold; FONT-SIZE: 11px; BACKGROUND-IMAGE: url(http://interval.cz/__services/__include_right/merak-background.png); MARGIN: 0px auto; BORDER-LEFT: #000000 1px solid; WIDTH: 160px; BORDER-BOTTOM: #000000 1px solid; BACKGROUND-REPEAT: no-repeat; FONT-FAMILY: Verdana, Arial, sans-serif; HEIGHT: 190px; TEXT-ALIGN: left; FONT-VARIANT: small-caps">
+<H3 style="FONT-SIZE: 12px; MARGIN: 55px 0px 10px 10px; FONT-VARIANT: normal"><A 
+title="Merak Mail Server 8" 
+style="COLOR: #000000; BACKGROUND-COLOR: transparent; TEXT-DECORATION: none" 
+href="http://www.merak-mail-server.cz/">Merak Mail Server 8</A></H3>
+<DIV id=merak-proclamation style="PADDING-LEFT: 10px">Integrovaný <EM><A 
+title="Merak Mail Server 8" 
+style="COLOR: #35a0df; FONT-STYLE: normal; BACKGROUND-COLOR: transparent; TEXT-DECORATION: none" 
+href="http://www.merak-mail-server.cz/">antispam</A></EM> <BR>Snadná <EM><A 
+title="Merak Mail Server 8" 
+style="COLOR: #35a0df; FONT-STYLE: normal; BACKGROUND-COLOR: transparent; TEXT-DECORATION: none" 
+href="http://www.merak-mail-server.cz/">instalace</A></EM> <BR>Zabezpečený 
+<EM><A title="Merak Mail Server 8" 
+style="COLOR: #35a0df; FONT-STYLE: normal; BACKGROUND-COLOR: transparent; TEXT-DECORATION: none" 
+href="http://www.merak-mail-server.cz/">groupware</A></EM> </DIV></DIV></DIV>
+<DIV class="page-right-box emailserv">
+<H3>Info servis</H3>
+<DIV class=page-right-box-in>
+<UL>
+  <LI><A title="Exporty aktuálních informací ve formátech Atom, RDF a RSS" 
+  href="http://export.interval.cz/">Atom, RDF, RSS</A> 
+  <LI>Informace e-mailem: </LI></UL>
+<FORM action=prihlaseni.asp method=post>
+<DIV class=shell><INPUT class=text name=adresa></DIV>
+<DIV class=shell><INPUT class=radio type=radio CHECKED value=1 name=co>Týdenní 
+přehled článků</DIV>
+<DIV class=shell><INPUT class=radio type=radio value=2 name=co>HELP 
+konference</DIV>
+<DIV 
+class=shell><INPUT class=submit type=submit value=Přihlásit></DIV></FORM></DIV></DIV>
+<DIV class=advertising-vertical-banner-outer>
+<DIV class=advertising-vertical-banner-inner><!-- Skyscraper Right --><!-- BBSTART Interval.cz/Skyscraper Right/rolovací/Skyscraper 120x600 -->
+<SCRIPT type=text/javascript>/* <![CDATA[ */
+var bbat=0,bbbr=0,bbtt='_blank',bbpath='17877/4/2/9',bbxl=1,bbac=1;
+//]]></SCRIPT>
+
+<SCRIPT 
+src="Jednoduchý internetový obchod v PHP 2_ -- PHP -- Vývoj aplikací -- Interval_cz_soubory/bb4.js" 
+type=text/javascript></SCRIPT>
+<NOSCRIPT>
+<DIV><A href="http://ad2.billboard.cz/please/redirect/17877/4/2/9/"><IMG 
+style="BORDER-RIGHT: 0px; BORDER-TOP: 0px; BORDER-LEFT: 0px; BORDER-BOTTOM: 0px" 
+height=600 alt=. 
+src="Jednoduchý internetový obchod v PHP 2_ -- PHP -- Vývoj aplikací -- Interval_cz_soubory/fallback9.gif" 
+width=120></A></DIV></NOSCRIPT><!-- BBKONEC --></DIV></DIV><!-- cached 17-nejdiskutovanejsi_clanky.txt -->
+<DIV class="page-right-box cauldron">
+<H3 title="Nejdiskutovanější články za posledních 28 dnů">Diskuzní kotel</H3>
+<DIV class=page-right-box-in>
+<UL>
+  <LI><A title="(103 komentářů)" 
+  href="http://interval.cz/clanky/opera-9-pokrocila-konfigurace/">Opera 9 - 
+  pokročilá konfigurace</A>
+  <LI><A title="(4 komentářů)" 
+  href="http://interval.cz/clanky/pruvodce-svg-dalsi-nastroje-pro-tvorbu-svg-grafiky/">Průvodce 
+  SVG - další nástroje pro tvorbu SVG grafiky</A>
+  <LI><A title="(2 komentářů)" 
+  href="http://interval.cz/clanky/drupal-tvorba-vlastniho-vzhledu/">Drupal - 
+  tvorba vlastního vzhledu</A>
+  <LI><A title="(2 komentářů)" 
+  href="http://interval.cz/clanky/spravy-zo-slovenskeho-internetu-9/">Správy zo 
+  slovenského internetu 9.</A>
+  <LI><A title="(1 komentářů)" 
+  href="http://interval.cz/clanky/lokalizace-asp-net-2-x-aplikaci/">Lokalizace 
+  ASP.NET 2.x aplikací</A></LI></UL></DIV></DIV></DIV>
+<DIV class=page-maker>&nbsp;</DIV>
+<DIV class=page-maker-white>&nbsp;</DIV></DIV>
+<DIV id=advertising-page-bottom>
+<DIV id=advertising-page-bottom-left>
+<DIV><!-- Full Banner Bottom --><!-- BBSTART Interval.cz/Full Banner Bottom/rolovací/Full Banner 468x60 -->
+<SCRIPT type=text/javascript>/* <![CDATA[ */
+var bbat=0,bbbr=0,bbtt='_blank',bbpath='17877/1/2/1',bbxl=1,bbac=1;
+//]]></SCRIPT>
+
+<SCRIPT 
+src="Jednoduchý internetový obchod v PHP 2_ -- PHP -- Vývoj aplikací -- Interval_cz_soubory/bb4.js" 
+type=text/javascript></SCRIPT>
+<NOSCRIPT>
+<DIV><A href="http://ad2.billboard.cz/please/redirect/17877/1/2/1/"><IMG 
+style="BORDER-RIGHT: 0px; BORDER-TOP: 0px; BORDER-LEFT: 0px; BORDER-BOTTOM: 0px" 
+height=60 alt=. 
+src="Jednoduchý internetový obchod v PHP 2_ -- PHP -- Vývoj aplikací -- Interval_cz_soubory/fallback1.gif" 
+width=468></A></DIV></NOSCRIPT><!-- BBKONEC --></DIV></DIV>
+<DIV id=advertising-page-bottom-right>
+<DIV><!-- Button2 Bottom --><!-- BBSTART Interval.cz/Button2 Bottom/rolovací/Button 2 120x60 -->
+<SCRIPT type=text/javascript>/* <![CDATA[ */
+var bbat=0,bbbr=0,bbtt='_blank',bbpath='17877/2/2/6',bbxl=1,bbac=1;
+//]]></SCRIPT>
+
+<SCRIPT 
+src="Jednoduchý internetový obchod v PHP 2_ -- PHP -- Vývoj aplikací -- Interval_cz_soubory/bb4.js" 
+type=text/javascript></SCRIPT>
+<NOSCRIPT>
+<DIV><A href="http://ad2.billboard.cz/please/redirect/17877/2/2/6/"><IMG 
+style="BORDER-RIGHT: 0px; BORDER-TOP: 0px; BORDER-LEFT: 0px; BORDER-BOTTOM: 0px" 
+height=60 alt=. 
+src="Jednoduchý internetový obchod v PHP 2_ -- PHP -- Vývoj aplikací -- Interval_cz_soubory/fallback6.gif" 
+width=120></A></DIV></NOSCRIPT><!-- BBKONEC --></DIV></DIV>
+<DIV class=page-maker>&nbsp;</DIV></DIV>
+<DIV id=page-foot>
+<DIV id=page-foot-menu><A href="http://interval.cz/redakce-inzerce.asp">Inzerce 
+na Interval.cz</A> &nbsp;|&nbsp; <A 
+href="http://interval.cz/redakce.asp">Redakce Interval.cz</A> &nbsp;|&nbsp; <A 
+href="http://interval.cz/autori.asp">Hledáme nové autory</A> </DIV>
+<DIV id=issn><A class=noprint 
+href="http://jigsaw.w3.org/css-validator/validator?uri=http%3A%2F%2Finterval.cz%3A80%2Fclanky%2Fjednoduchy-internetovy-obchod-v-php-2%2F">.</A> 
+ISSN 1212-8651 <A class=noprint 
+href="http://validator.w3.org/check?uri=http%3A%2F%2Finterval.cz%3A80%2Fclanky%2Fjednoduchy-internetovy-obchod-v-php-2%2F&amp;charset=%28detect+automatically%29&amp;doctype=%28detect+automatically%29&amp;outline=1&amp;verbose=1">.</A> 
+</DIV>
+<DIV id=page-foot-zoner>© Zoner software, s.r.o., všechna práva vyhrazena, tento 
+server dodržuje <A href="http://interval.cz/privacy.asp">právní předpisy</A> o 
+ochraně osobních údajů. </DIV></DIV>
+<SCRIPT 
+src="Jednoduchý internetový obchod v PHP 2_ -- PHP -- Vývoj aplikací -- Interval_cz_soubory/audits-footer.js" 
+type=text/javascript></SCRIPT>
+
+<SCRIPT 
+src="Jednoduchý internetový obchod v PHP 2_ -- PHP -- Vývoj aplikací -- Interval_cz_soubory/urchin.js" 
+type=text/javascript>
+</SCRIPT>
+
+<SCRIPT type=text/javascript>
+_uacct = "UA-173085-1";
+
+var len = _uOsr.length;
+_uOsr[len]="seznam.cz";       _uOkw[len]="w";
+_uOsr[len+1]="centrum.cz";    _uOkw[len+1]="q";
+_uOsr[len+2]="jyxo.cz";       _uOkw[len+2]="s";
+_uOsr[len+3]="atlas.cz";      _uOkw[len+3]="q";
+_uOsr[len+4]="zoohoo.cz";     _uOkw[len+4]="q";
+_uOsr[len+5]="tiscali.cz";    _uOkw[len+5]="query";
+_uOsr[len+6]="1.cz";          _uOkw[len+6]="q";
+_uOsr[len+7]="volny.cz";      _uOkw[len+7]="search";
+
+urchinTracker();
+</SCRIPT>
+</BODY></HTML>

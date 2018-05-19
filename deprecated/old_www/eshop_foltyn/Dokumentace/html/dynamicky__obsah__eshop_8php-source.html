@@ -1,0 +1,1949 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>Eshop postaveny na PHP layoutu: Zdrojový soubor /var/www/eshop_foltyn/modules/dynamicky_obsah_eshop_foltyn/dynamicky_obsah_eshop.php</title>
+<link href="doxygen.css" rel="stylesheet" type="text/css">
+<link href="tabs.css" rel="stylesheet" type="text/css">
+</head><body>
+<!-- Generováno programem Doxygen 1.5.5 -->
+<div class="navigation" id="top">
+  <div class="tabs">
+    <ul>
+      <li><a href="index.html"><span>Hlavní&nbsp;stránka</span></a></li>
+      <li><a href="annotated.html"><span>Třídy</span></a></li>
+      <li class="current"><a href="files.html"><span>Soubory</span></a></li>
+    </ul>
+  </div>
+<h1>/var/www/eshop_foltyn/modules/dynamicky_obsah_eshop_foltyn/dynamicky_obsah_eshop.php</h1><a href="dynamicky__obsah__eshop_8php.html">Zobrazit dokumentaci tohoto souboru.</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 &lt;?php
+<a name="l00002"></a>00002 
+<a name="l00021"></a><a class="code" href="classDynamicObsahEshop.html">00021</a> <span class="keyword">class </span><a class="code" href="classDynamicObsahEshop.html">DynamicObsahEshop</a>
+<a name="l00022"></a>00022 {
+<a name="l00023"></a><a class="code" href="classDynamicObsahEshop.html#b6c786b30b1bd3715fc0e7cd4ee8a235">00023</a>   <span class="keyword">private</span> <a class="code" href="classDynamicObsahEshop.html#b6c786b30b1bd3715fc0e7cd4ee8a235">$var</a>;
+<a name="l00024"></a><a class="code" href="classDynamicObsahEshop.html#71b51d778afda419aa2ca58d14246d43">00024</a>   <span class="keyword">private</span> <a class="code" href="classDynamicObsahEshop.html#71b51d778afda419aa2ca58d14246d43">$sqlite</a>;
+<a name="l00025"></a><a class="code" href="classDynamicObsahEshop.html#baf0c1feab245ddd321e84d69a0279ed">00025</a>   <span class="keyword">private</span> <a class="code" href="classDynamicObsahEshop.html#baf0c1feab245ddd321e84d69a0279ed">$dbname</a>;<span class="comment">// = ".dbdynobsaheshop.sqlite2";</span>
+<a name="l00026"></a><a class="code" href="classDynamicObsahEshop.html#cb6db26d3e893912bb045149f5e26be0">00026</a>   <span class="keyword">private</span> <a class="code" href="classDynamicObsahEshop.html#cb6db26d3e893912bb045149f5e26be0">$idmodul</a> = <span class="stringliteral">"dynobsaheshop"</span>;  <span class="comment">//id pro rozliseni modulu v adminu</span>
+<a name="l00027"></a><a class="code" href="classDynamicObsahEshop.html#4e900bf452d688da2c18f9ee8dd6f833">00027</a>   <span class="keyword">private</span> <a class="code" href="classDynamicObsahEshop.html#4e900bf452d688da2c18f9ee8dd6f833">$pathcest</a> = <span class="stringliteral">"picture"</span>;
+<a name="l00028"></a><a class="code" href="classDynamicObsahEshop.html#a44f3e7183bfb3d323455ba13567a606">00028</a>   <span class="keyword">private</span> <a class="code" href="classDynamicObsahEshop.html#a44f3e7183bfb3d323455ba13567a606">$dirpath</a>;
+<a name="l00029"></a><a class="code" href="classDynamicObsahEshop.html#c41b98e9c8821461f1b4139e046b5e87">00029</a>   <span class="keyword">private</span> <a class="code" href="classDynamicObsahEshop.html#c41b98e9c8821461f1b4139e046b5e87">$minidir</a> = <span class="stringliteral">"mini"</span>;  <span class="comment">//adresar miniatur</span>
+<a name="l00030"></a><a class="code" href="classDynamicObsahEshop.html#df8499db95a4e95a89436cca77e2758a">00030</a>   <span class="keyword">private</span> <a class="code" href="classDynamicObsahEshop.html#df8499db95a4e95a89436cca77e2758a">$fulldir</a> = <span class="stringliteral">"full"</span>;  <span class="comment">//adresar full obrazku</span>
+<a name="l00031"></a><a class="code" href="classDynamicObsahEshop.html#9d1f8c4f70021fafd4c8c01ca2c9d55f">00031</a>   <span class="keyword">private</span> <a class="code" href="classDynamicObsahEshop.html#9d1f8c4f70021fafd4c8c01ca2c9d55f">$oddtit</a> = <span class="stringliteral">"/"</span>;  <span class="comment">//odelovaci znak v title</span>
+<a name="l00032"></a>00032 
+<a name="l00033"></a><a class="code" href="classDynamicObsahEshop.html#e270b174d286ccefad21a2926160a564">00033</a>   <span class="keyword">private</span> <a class="code" href="classDynamicObsahEshop.html#e270b174d286ccefad21a2926160a564">$expuser</a> = 30;  <span class="comment">//dni expirace uzivatele</span>
+<a name="l00034"></a>00034 
+<a name="l00035"></a><a class="code" href="classDynamicObsahEshop.html#cbc4609582f48e92c937d7de5dc65055">00035</a>   <span class="keyword">private</span> <a class="code" href="classDynamicObsahEshop.html#cbc4609582f48e92c937d7de5dc65055">$defdph</a> = 19; <span class="comment">//% dph</span>
+<a name="l00036"></a><a class="code" href="classDynamicObsahEshop.html#63be83bf4f48fd7094da15f78ba2eedc">00036</a>   <span class="keyword">private</span> <a class="code" href="classDynamicObsahEshop.html#63be83bf4f48fd7094da15f78ba2eedc">$defhmo</a> = <span class="stringliteral">"kg"</span>; <span class="comment">//jednotka vahy</span>
+<a name="l00037"></a><a class="code" href="classDynamicObsahEshop.html#5bc1c1db2ea07eb3d3765dc14459a06e">00037</a>   <span class="keyword">private</span> <a class="code" href="classDynamicObsahEshop.html#5bc1c1db2ea07eb3d3765dc14459a06e">$defmen</a> = <span class="stringliteral">"Kč"</span>; <span class="comment">//jednotka meny</span>
+<a name="l00038"></a><a class="code" href="classDynamicObsahEshop.html#076fb36108baa60a8e723fe0a51f23e9">00038</a>   <span class="keyword">private</span> <a class="code" href="classDynamicObsahEshop.html#076fb36108baa60a8e723fe0a51f23e9">$pocet_sloupcu</a> = 3; <span class="comment">//pocet sloupcu</span>
+<a name="l00039"></a><a class="code" href="classDynamicObsahEshop.html#c2e9f8cf535b35d64a3f6350a9a80419">00039</a>   <span class="keyword">private</span> <a class="code" href="classDynamicObsahEshop.html#c2e9f8cf535b35d64a3f6350a9a80419">$strankovani</a> = 2; <span class="comment">//pocet radku</span>
+<a name="l00040"></a>00040 
+<a name="l00041"></a><a class="code" href="classDynamicObsahEshop.html#62c31d92af72e88afb03220dce9ab3ad">00041</a>   <span class="keyword">private</span> <a class="code" href="classDynamicObsahEshop.html#62c31d92af72e88afb03220dce9ab3ad">$prijemce_objednavky</a> = <span class="stringliteral">"email@email.cz"</span>;  <span class="comment">//seznam mailu odesilatelu</span>
+<a name="l00042"></a><a class="code" href="classDynamicObsahEshop.html#08563a4ff0ad8354dac9baffda2ab0ac">00042</a>   <span class="keyword">private</span> <a class="code" href="classDynamicObsahEshop.html#08563a4ff0ad8354dac9baffda2ab0ac">$predmet</a> = <span class="stringliteral">"Zprava z XYZ.cz"</span>; <span class="comment">//predmet emailu</span>
+<a name="l00043"></a><a class="code" href="classDynamicObsahEshop.html#2cd02c2a7ed8a852e3420c2e477d4d64">00043</a>   <span class="keyword">private</span> <a class="code" href="classDynamicObsahEshop.html#2cd02c2a7ed8a852e3420c2e477d4d64">$odeslano</a> = <span class="stringliteral">"Odesláno ke zpracování, ..., košík byl vyprázdněn!"</span>; <span class="comment">//hlaska pri uspesnem odeslani</span>
+<a name="l00044"></a>00044 
+<a name="l00045"></a><a class="code" href="classDynamicObsahEshop.html#9882c35bec0d29cd819b6dbd5f7b8f09">00045</a>   <span class="keyword">private</span> <a class="code" href="classDynamicObsahEshop.html#9882c35bec0d29cd819b6dbd5f7b8f09">$hlavicka_emaliu</a> = <span class="stringliteral">"Content-type: text/html; charset=UTF-8"</span>;
+<a name="l00046"></a>00046 
+<a name="l00047"></a><a class="code" href="classDynamicObsahEshop.html#c486599abf7b6d498910e720d9728c40">00047</a>   <span class="keyword">private</span> <a class="code" href="classDynamicObsahEshop.html#c486599abf7b6d498910e720d9728c40">$dodani</a> = array(array(<span class="stringliteral">"zpusob"</span> =&gt; <span class="stringliteral">"Pošta"</span>,
+<a name="l00048"></a>00048                                 <span class="stringliteral">"cena"</span> =&gt; <span class="stringliteral">"100"</span>),
+<a name="l00049"></a>00049 
+<a name="l00050"></a>00050                           array(<span class="stringliteral">"zpusob"</span> =&gt; <span class="stringliteral">"Osobní odběr"</span>,
+<a name="l00051"></a>00051                                 <span class="stringliteral">"cena"</span> =&gt; <span class="stringliteral">"0"</span>),
+<a name="l00052"></a>00052                           );
+<a name="l00053"></a>00053 
+<a name="l00054"></a><a class="code" href="classDynamicObsahEshop.html#8059ffde9a88fa2dad63478c9c25b72a">00054</a>   <span class="keyword">private</span> <a class="code" href="classDynamicObsahEshop.html#8059ffde9a88fa2dad63478c9c25b72a">$max_h_nahled</a> = 135;  <span class="comment">//px - vyska nahledu</span>
+<a name="l00055"></a><a class="code" href="classDynamicObsahEshop.html#a41578bdc5b84d860436b6afa805c0e8">00055</a>   <span class="keyword">private</span> <a class="code" href="classDynamicObsahEshop.html#a41578bdc5b84d860436b6afa805c0e8">$max_h_obrazek</a> = 400; <span class="comment">//px - vyska obrazku</span>
+<a name="l00056"></a><a class="code" href="classDynamicObsahEshop.html#1164b6bd1a35ef6a6575ee94c94da2d5">00056</a>   <span class="keyword">private</span> <a class="code" href="classDynamicObsahEshop.html#1164b6bd1a35ef6a6575ee94c94da2d5">$max_size</a> = 3; <span class="comment">//max 3MB upload obrazku</span>
+<a name="l00057"></a>00057 
+<a name="l00058"></a><a class="code" href="classDynamicObsahEshop.html#16c8ee28d208fe10348bc4fe3067b252">00058</a>   <span class="keyword">private</span> <a class="code" href="classDynamicObsahEshop.html#16c8ee28d208fe10348bc4fe3067b252">$sub_polozka</a> = <span class="stringliteral">"pol"</span>;
+<a name="l00059"></a><a class="code" href="classDynamicObsahEshop.html#5e7766549910004a3ae291b9b446576c">00059</a>   <span class="keyword">private</span> <a class="code" href="classDynamicObsahEshop.html#5e7766549910004a3ae291b9b446576c">$sub_buy</a> = <span class="stringliteral">"buy"</span>;
+<a name="l00060"></a>00060 
+<a name="l00061"></a><a class="code" href="classDynamicObsahEshop.html#9e26033c2147193fc4e3c743fd444299">00061</a>   <span class="keyword">private</span> <a class="code" href="classDynamicObsahEshop.html#9e26033c2147193fc4e3c743fd444299">$defsort</a> = <span class="stringliteral">"a_cena"</span>;  <span class="comment">//defaultni hodnoty pri vypisu</span>
+<a name="l00062"></a><a class="code" href="classDynamicObsahEshop.html#aab92e986fed143e90d13980695f1184">00062</a>   <span class="keyword">private</span> <a class="code" href="classDynamicObsahEshop.html#aab92e986fed143e90d13980695f1184">$defview</a> = <span class="stringliteral">"obr"</span>;
+<a name="l00063"></a>00063 
+<a name="l00064"></a><a class="code" href="classDynamicObsahEshop.html#5f218daa048d1380102bf8a6a67cf0f8">00064</a>   <span class="keyword">private</span> <a class="code" href="classDynamicObsahEshop.html#5f218daa048d1380102bf8a6a67cf0f8">$razeni</a> = array(<span class="stringliteral">"a_cena"</span> =&gt; <span class="stringliteral">"cena ASC"</span>,
+<a name="l00065"></a>00065                           <span class="stringliteral">"de_cena"</span> =&gt; <span class="stringliteral">"cena DESC"</span>,
+<a name="l00066"></a>00066                           <span class="stringliteral">"a_nazev"</span> =&gt; <span class="stringliteral">"nazev ASC"</span>,
+<a name="l00067"></a>00067                           <span class="stringliteral">"de_nazev"</span> =&gt; <span class="stringliteral">"nazev DESC"</span>,
+<a name="l00068"></a>00068                           <span class="stringliteral">"a_datum"</span> =&gt; <span class="stringliteral">"publikace ASC"</span>,
+<a name="l00069"></a>00069                           <span class="stringliteral">"de_deatum"</span> =&gt; <span class="stringliteral">"publikace DESC"</span>,
+<a name="l00070"></a>00070                           );
+<a name="l00071"></a>00071 
+<a name="l00072"></a><a class="code" href="classDynamicObsahEshop.html#9e3a5aa36e6ab0c182128aca1960afae">00072</a>   <span class="keyword">private</span> <a class="code" href="classDynamicObsahEshop.html#9e3a5aa36e6ab0c182128aca1960afae">$zobrazeni</a> = array (<span class="stringliteral">"obr"</span> =&gt; <span class="stringliteral">"zobr1"</span>,
+<a name="l00073"></a>00073                               <span class="stringliteral">"tab"</span> =&gt; <span class="stringliteral">"zobr2"</span>,
+<a name="l00074"></a>00074                               <span class="stringliteral">"fas"</span> =&gt; <span class="stringliteral">"zobr3"</span>,
+<a name="l00075"></a>00075                               );
+<a name="l00076"></a>00076 
+<a name="l00077"></a><a class="code" href="classDynamicObsahEshop.html#36504e69c688bc2aca0afc559b4e4acb">00077</a>   <span class="keyword">private</span> <a class="code" href="classDynamicObsahEshop.html#36504e69c688bc2aca0afc559b4e4acb">$textpodminek</a> = <span class="comment">//text obchodnich podminek</span>
+<a name="l00078"></a>00078           <span class="stringliteral">"toto je text obchodních podminak a</span>
+<a name="l00079"></a>00079 <span class="stringliteral">          musíte s němi souhlasit!</span>
+<a name="l00080"></a>00080 <span class="stringliteral">          "</span>;
+<a name="l00081"></a>00081 
+<a name="l00089"></a><a class="code" href="classDynamicObsahEshop.html#e73c1330bf98c0586cd0184c3af4330d">00089</a>   <span class="keyword">public</span> function <a class="code" href="classDynamicObsahEshop.html#e73c1330bf98c0586cd0184c3af4330d">__construct</a>(&amp;<a class="code" href="classDynamicObsahEshop.html#b6c786b30b1bd3715fc0e7cd4ee8a235">$var</a>, $index) <span class="comment">//konstruktor</span>
+<a name="l00090"></a>00090   {
+<a name="l00091"></a>00091     $this-&gt;var = <a class="code" href="classDynamicObsahEshop.html#b6c786b30b1bd3715fc0e7cd4ee8a235">$var</a>;
+<a name="l00092"></a>00092     $this-&gt;dirpath = dirname($this-&gt;var-&gt;moduly[$index][<span class="stringliteral">"include"</span>]);
+<a name="l00093"></a>00093     $this-&gt;dbname = $this-&gt;var-&gt;moduly[$index][<span class="stringliteral">"databaze"</span>];
+<a name="l00094"></a>00094 
+<a name="l00095"></a>00095     <span class="keywordflow">if</span> (!$this-&gt;sqlite = @<span class="keyword">new</span> SQLiteDatabase(<span class="stringliteral">"{$this-&gt;dirpath}/{$this-&gt;dbname}"</span>, 0777, $error))
+<a name="l00096"></a>00096     {
+<a name="l00097"></a>00097       $this-&gt;var-&gt;main[0]-&gt;ErrorMsg($error);
+<a name="l00098"></a>00098     }
+<a name="l00099"></a>00099 
+<a name="l00100"></a>00100     $this-&gt;<a class="code" href="classDynamicObsahEshop.html#84760762d85553b944c79f14ba406d92">Instalace</a>(); <span class="comment">//instalace DB</span>
+<a name="l00101"></a>00101     $this-&gt;<a class="code" href="classDynamicObsahEshop.html#f994c495e50fe4a5577794bc46525662">StartSession</a>();  <span class="comment">//start Session</span>
+<a name="l00102"></a>00102   }
+<a name="l00103"></a>00103 
+<a name="l00110"></a><a class="code" href="classDynamicObsahEshop.html#708cf390647890def68fb99e22a7683d">00110</a>   <span class="keyword">public</span> function <a class="code" href="classDynamicObsahEshop.html#708cf390647890def68fb99e22a7683d">AdminMenu</a>()
+<a name="l00111"></a>00111   {
+<a name="l00112"></a>00112     $result =
+<a name="l00113"></a>00113     <span class="stringliteral">"&lt;a href=\"?{$this-&gt;var-&gt;get_kam}={$this-&gt;var-&gt;adresaadminu}&amp;amp;{$this-&gt;var-&gt;get_idmodul}={$this-&gt;idmodul}\" title=\"\"&gt;administrace dynamickeho eshop obsahu&lt;/a&gt;&lt;br /&gt;"</span>;
+<a name="l00114"></a>00114 
+<a name="l00115"></a>00115     <span class="keywordflow">return</span> $result;
+<a name="l00116"></a>00116   }
+<a name="l00117"></a>00117 
+<a name="l00124"></a><a class="code" href="classDynamicObsahEshop.html#c1c6f3d4799afc21564e67d7421cc826">00124</a>   <span class="keyword">public</span> function <a class="code" href="classDynamicObsahEshop.html#c1c6f3d4799afc21564e67d7421cc826">AdminObsah</a>()
+<a name="l00125"></a>00125   {
+<a name="l00126"></a>00126     <span class="keywordflow">if</span> ($_GET[$this-&gt;var-&gt;get_kam] == $this-&gt;var-&gt;adresaadminu &amp;&amp;
+<a name="l00127"></a>00127         $this-&gt;var-&gt;aktivniadmin)
+<a name="l00128"></a>00128     {
+<a name="l00129"></a>00129       <span class="keywordflow">switch</span> ($_GET[$this-&gt;var-&gt;get_idmodul])
+<a name="l00130"></a>00130       {
+<a name="l00131"></a>00131         <span class="keywordflow">case</span> $this-&gt;idmodul:  <span class="comment">//id modul</span>
+<a name="l00132"></a>00132           $result = $this-&gt;<a class="code" href="classDynamicObsahEshop.html#177f6a46bfedd40939adc2cbf183b58f">AdministraceEshopObsahu</a>();
+<a name="l00133"></a>00133         <span class="keywordflow">break</span>;
+<a name="l00134"></a>00134       }
+<a name="l00135"></a>00135     }
+<a name="l00136"></a>00136 
+<a name="l00137"></a>00137     <span class="keywordflow">return</span> $result;
+<a name="l00138"></a>00138   }
+<a name="l00139"></a>00139 
+<a name="l00147"></a><a class="code" href="classDynamicObsahEshop.html#612b51b465c537ca2ab1bced7c9dd985">00147</a>   <span class="keyword">private</span> function <a class="code" href="classDynamicObsahEshop.html#612b51b465c537ca2ab1bced7c9dd985">ValiditaAdresy</a>($adresa)
+<a name="l00148"></a>00148   {
+<a name="l00149"></a>00149     $adr = explode(<span class="stringliteral">"-"</span>, $adresa);
+<a name="l00150"></a>00150 
+<a name="l00151"></a>00151     $result = <span class="stringliteral">""</span>;
+<a name="l00152"></a>00152     <span class="keywordflow">for</span> ($i = 0; $i &lt; count($adr); $i++)
+<a name="l00153"></a>00153     {
+<a name="l00154"></a>00154       settype($adr[$i], <span class="stringliteral">"integer"</span>);
+<a name="l00155"></a>00155       $result .= <span class="stringliteral">"{$adr[$i]}-"</span>;
+<a name="l00156"></a>00156     }
+<a name="l00157"></a>00157     $result = substr($result, 0, -1);
+<a name="l00158"></a>00158 
+<a name="l00159"></a>00159     <span class="keywordflow">return</span> $result;
+<a name="l00160"></a>00160   }
+<a name="l00161"></a>00161 
+<a name="l00167"></a><a class="code" href="classDynamicObsahEshop.html#84760762d85553b944c79f14ba406d92">00167</a>   <span class="keyword">private</span> function <a class="code" href="classDynamicObsahEshop.html#84760762d85553b944c79f14ba406d92">Instalace</a>()
+<a name="l00168"></a>00168   {
+<a name="l00169"></a>00169     <span class="keywordflow">if</span> (filesize(<span class="stringliteral">"{$this-&gt;dirpath}/{$this-&gt;dbname}"</span>) == 0)
+<a name="l00170"></a>00170     {
+<a name="l00171"></a>00171       <span class="keywordflow">if</span> (!@$this-&gt;sqlite-&gt;queryExec(<span class="stringliteral">"CREATE TABLE obsah_eshop (</span>
+<a name="l00172"></a>00172 <span class="stringliteral">                                      id INTEGER UNSIGNED AUTO_INCREMENT PRIMARY KEY,</span>
+<a name="l00173"></a>00173 <span class="stringliteral">                                      adresa TEXT,</span>
+<a name="l00174"></a>00174 <span class="stringliteral">                                      nazev TEXT,</span>
+<a name="l00175"></a>00175 <span class="stringliteral">                                      vyrobce VARCHAR(200),</span>
+<a name="l00176"></a>00176 <span class="stringliteral">                                      popis TEXT,</span>
+<a name="l00177"></a>00177 <span class="stringliteral">                                      publikace DATE,</span>
+<a name="l00178"></a>00178 <span class="stringliteral">                                      kod VARCHAR(50),</span>
+<a name="l00179"></a>00179 <span class="stringliteral">                                      hmotnost FLOAT,</span>
+<a name="l00180"></a>00180 <span class="stringliteral">                                      dph FLOAT,</span>
+<a name="l00181"></a>00181 <span class="stringliteral">                                      cena FLOAT,</span>
+<a name="l00182"></a>00182 <span class="stringliteral">                                      obrazek VARCHAR(200),</span>
+<a name="l00183"></a>00183 <span class="stringliteral">                                      skladem INTEGER UNSIGNED);</span>
+<a name="l00184"></a>00184 <span class="stringliteral"></span>
+<a name="l00185"></a>00185 <span class="stringliteral">                                      CREATE TABLE kosik (</span>
+<a name="l00186"></a>00186 <span class="stringliteral">                                      id INTEGER UNSIGNED AUTO_INCREMENT PRIMARY KEY,</span>
+<a name="l00187"></a>00187 <span class="stringliteral">                                      zakaznik INTEGER UNSIGNED,</span>
+<a name="l00188"></a>00188 <span class="stringliteral">                                      zbozi INTEGER UNSIGNED,</span>
+<a name="l00189"></a>00189 <span class="stringliteral">                                      pocet INTEGER UNSIGNED);</span>
+<a name="l00190"></a>00190 <span class="stringliteral"></span>
+<a name="l00191"></a>00191 <span class="stringliteral">                                      CREATE TABLE zakaznik (</span>
+<a name="l00192"></a>00192 <span class="stringliteral">                                      id INTEGER UNSIGNED AUTO_INCREMENT PRIMARY KEY,</span>
+<a name="l00193"></a>00193 <span class="stringliteral">                                      session VARCHAR(100),</span>
+<a name="l00194"></a>00194 <span class="stringliteral">                                      expirace DATETIME,</span>
+<a name="l00195"></a>00195 <span class="stringliteral">                                      doprava INTEGER UNSIGNED);</span>
+<a name="l00196"></a>00196 <span class="stringliteral">                                      "</span>, $error))
+<a name="l00197"></a>00197       {
+<a name="l00198"></a>00198         $this-&gt;var-&gt;main[0]-&gt;ErrorMsg($error);
+<a name="l00199"></a>00199       }
+<a name="l00200"></a>00200     }
+<a name="l00201"></a>00201   }
+<a name="l00202"></a>00202 
+<a name="l00209"></a><a class="code" href="classDynamicObsahEshop.html#99d44049328f274be9c8c1bcbf245c89">00209</a>   <span class="keyword">private</span> function <a class="code" href="classDynamicObsahEshop.html#99d44049328f274be9c8c1bcbf245c89">PrvniPolozka</a>()
+<a name="l00210"></a>00210   {
+<a name="l00211"></a>00211     <span class="keywordflow">if</span> ($res = @$this-&gt;sqlite-&gt;query(<span class="stringliteral">"SELECT adresa FROM obsah_eshop ORDER BY LOWER(adresa) ASC LIMIT 0,1;"</span>, NULL, $error))
+<a name="l00212"></a>00212     {
+<a name="l00213"></a>00213       <span class="keywordflow">if</span> ($res-&gt;numRows() == 1)
+<a name="l00214"></a>00214       {
+<a name="l00215"></a>00215         $result = $res-&gt;fetchObject()-&gt;adresa;
+<a name="l00216"></a>00216       }
+<a name="l00217"></a>00217     }
+<a name="l00218"></a>00218       <span class="keywordflow">else</span>
+<a name="l00219"></a>00219     {
+<a name="l00220"></a>00220       $this-&gt;var-&gt;main[0]-&gt;ErrorMsg($error);
+<a name="l00221"></a>00221     }
+<a name="l00222"></a>00222 
+<a name="l00223"></a>00223     <span class="keywordflow">return</span> $result;
+<a name="l00224"></a>00224   }
+<a name="l00225"></a>00225 
+<a name="l00232"></a><a class="code" href="classDynamicObsahEshop.html#ccc1ae59548e550c6341e8f2e994fea7">00232</a>   <span class="keyword">public</span> function <a class="code" href="classDynamicObsahEshop.html#ccc1ae59548e550c6341e8f2e994fea7">ObsahEshop</a>()
+<a name="l00233"></a>00233   {
+<a name="l00234"></a>00234     $adresa = (!Empty($_GET[$this-&gt;var-&gt;get_kam]) ? $this-&gt;<a class="code" href="classDynamicObsahEshop.html#612b51b465c537ca2ab1bced7c9dd985">ValiditaAdresy</a>($_GET[$this-&gt;var-&gt;get_kam]) : $this-&gt;<a class="code" href="classDynamicObsahEshop.html#99d44049328f274be9c8c1bcbf245c89">PrvniPolozka</a>());
+<a name="l00235"></a>00235 
+<a name="l00236"></a>00236     <span class="keywordflow">if</span> (!Empty($_GET[$this-&gt;sub_polozka]))  <span class="comment">//rozkliknuta polozka</span>
+<a name="l00237"></a>00237     {
+<a name="l00238"></a>00238       $id = $_GET[$this-&gt;sub_polozka];
+<a name="l00239"></a>00239       settype($id, <span class="stringliteral">"integer"</span>);
+<a name="l00240"></a>00240       <span class="keywordflow">if</span> ($res = @$this-&gt;sqlite-&gt;query(<span class="stringliteral">"SELECT id, adresa, nazev, vyrobce, popis, publikace,</span>
+<a name="l00241"></a>00241 <span class="stringliteral">                                        kod, hmotnost, dph, cena, skladem, obrazek</span>
+<a name="l00242"></a>00242 <span class="stringliteral">                                        FROM obsah_eshop WHERE id='{$id}';"</span>, NULL, $error))
+<a name="l00243"></a>00243       {
+<a name="l00244"></a>00244         <span class="keywordflow">if</span> ($res-&gt;numRows() == 1)
+<a name="l00245"></a>00245         {
+<a name="l00246"></a>00246           $data = $res-&gt;fetchObject();  <span class="comment">//pripadne prepisovac specialni syntaxe a v editoru ajax zobrazovani</span>
+<a name="l00247"></a>00247           $publikace = date(<span class="stringliteral">"d.m. Y"</span>, strtotime($data-&gt;publikace));
+<a name="l00248"></a>00248 
+<a name="l00249"></a>00249           $result =
+<a name="l00250"></a>00250           <span class="stringliteral">"</span>
+<a name="l00251"></a>00251 <span class="stringliteral">            &lt;h4&gt;název: {$data-&gt;nazev}&lt;/h4&gt;</span>
+<a name="l00252"></a>00252 <span class="stringliteral">            &lt;p&gt;</span>
+<a name="l00253"></a>00253 <span class="stringliteral">              &lt;a href=\"?{$this-&gt;var-&gt;get_kam}={$data-&gt;adresa}&amp;amp;{$this-&gt;sub_polozka}={$data-&gt;id}&amp;amp;{$this-&gt;sub_buy}=add\"&gt;hodit do košíku&lt;/a&gt;&lt;br /&gt;</span>
+<a name="l00254"></a>00254 <span class="stringliteral">              vyrobce: {$data-&gt;vyrobce}&lt;br /&gt;</span>
+<a name="l00255"></a>00255 <span class="stringliteral">              popis: {$data-&gt;popis}&lt;br /&gt;</span>
+<a name="l00256"></a>00256 <span class="stringliteral">              publikace: {$publikace}&lt;br /&gt;</span>
+<a name="l00257"></a>00257 <span class="stringliteral">              kod: {$data-&gt;kod}&lt;br /&gt;</span>
+<a name="l00258"></a>00258 <span class="stringliteral">              hmotnost: {$data-&gt;hmotnost} {$this-&gt;defhmo}&lt;br /&gt;</span>
+<a name="l00259"></a>00259 <span class="stringliteral">              dph: {$data-&gt;dph}&lt;br /&gt;</span>
+<a name="l00260"></a>00260 <span class="stringliteral">              cena: {$data-&gt;cena} {$this-&gt;defmen}&lt;br /&gt;</span>
+<a name="l00261"></a>00261 <span class="stringliteral">              &lt;img src=\"{$this-&gt;dirpath}/{$this-&gt;pathcest}/{$this-&gt;minidir}/{$data-&gt;obrazek}\" alt=\"{$data-&gt;nazev}\" /&gt;&lt;br /&gt;</span>
+<a name="l00262"></a>00262 <span class="stringliteral">              &lt;img src=\"{$this-&gt;dirpath}/{$this-&gt;pathcest}/{$this-&gt;fulldir}/{$data-&gt;obrazek}\" alt=\"{$data-&gt;nazev}\" /&gt;&lt;br /&gt;</span>
+<a name="l00263"></a>00263 <span class="stringliteral">              skladem: {$data-&gt;skladem}</span>
+<a name="l00264"></a>00264 <span class="stringliteral">            &lt;/p&gt;</span>
+<a name="l00265"></a>00265 <span class="stringliteral">          "</span>;
+<a name="l00266"></a>00266         }
+<a name="l00267"></a>00267       }
+<a name="l00268"></a>00268         <span class="keywordflow">else</span>
+<a name="l00269"></a>00269       {
+<a name="l00270"></a>00270         $this-&gt;var-&gt;main[0]-&gt;ErrorMsg($error);
+<a name="l00271"></a>00271       }
+<a name="l00272"></a>00272     }
+<a name="l00273"></a>00273       <span class="keywordflow">else</span>
+<a name="l00274"></a>00274     {
+<a name="l00275"></a>00275       $sort = (!Empty($_GET[<span class="stringliteral">"sort"</span>]) &amp;&amp; in_array($this-&gt;razeni[$_GET[<span class="stringliteral">"sort"</span>]], $this-&gt;razeni) ? $_GET[<span class="stringliteral">"sort"</span>] : $this-&gt;defsort);
+<a name="l00276"></a>00276       $view = (!Empty($_GET[<span class="stringliteral">"view"</span>]) &amp;&amp; in_array($this-&gt;zobrazeni[$_GET[<span class="stringliteral">"view"</span>]], $this-&gt;zobrazeni) ? $_GET[<span class="stringliteral">"view"</span>] : $this-&gt;defview);
+<a name="l00277"></a>00277       $str = $_GET[<span class="stringliteral">"str"</span>];
+<a name="l00278"></a>00278       settype($str, <span class="stringliteral">"integer"</span>);
+<a name="l00279"></a>00279 
+<a name="l00280"></a>00280       $stankovani = $this-&gt;<a class="code" href="classDynamicObsahEshop.html#a220533424188bce90987cdb211f4a7d">Strankovani</a>($str, <span class="stringliteral">"?{$this-&gt;var-&gt;get_kam}={$_GET[$this-&gt;var-&gt;get_kam]}&amp;amp;sort={$sort}&amp;amp;view={$view}"</span>, $limit);
+<a name="l00281"></a>00281 
+<a name="l00282"></a>00282       $result =  <span class="comment">//hlavni vypis polozek, lze radit a prepinat zobrazeni</span>
+<a name="l00283"></a>00283       <span class="stringliteral">"řadit podle:</span>
+<a name="l00284"></a>00284 <span class="stringliteral">      "</span>.($sort == <span class="stringliteral">"a_cena"</span> ?
+<a name="l00285"></a>00285       <span class="stringliteral">"&lt;a href=\"?{$this-&gt;var-&gt;get_kam}={$_GET[$this-&gt;var-&gt;get_kam]}&amp;amp;sort=de_cena&amp;amp;view={$view}&amp;amp;str={$str}\"&gt;ceny DESC&lt;/a&gt;"</span> :
+<a name="l00286"></a>00286       <span class="stringliteral">"&lt;a href=\"?{$this-&gt;var-&gt;get_kam}={$_GET[$this-&gt;var-&gt;get_kam]}&amp;amp;sort=a_cena&amp;amp;view={$view}&amp;amp;str={$str}\"&gt;ceny ASC&lt;/a&gt;"</span>).<span class="stringliteral">"</span>
+<a name="l00287"></a>00287 <span class="stringliteral"></span>
+<a name="l00288"></a>00288 <span class="stringliteral">      "</span>.($sort == <span class="stringliteral">"a_nazev"</span> ?
+<a name="l00289"></a>00289       <span class="stringliteral">"&lt;a href=\"?{$this-&gt;var-&gt;get_kam}={$_GET[$this-&gt;var-&gt;get_kam]}&amp;amp;sort=de_nazev&amp;amp;view={$view}&amp;amp;str={$str}\"&gt;název DESC&lt;/a&gt;"</span> :
+<a name="l00290"></a>00290       <span class="stringliteral">"&lt;a href=\"?{$this-&gt;var-&gt;get_kam}={$_GET[$this-&gt;var-&gt;get_kam]}&amp;amp;sort=a_nazev&amp;amp;view={$view}&amp;amp;str={$str}\"&gt;název ASC&lt;/a&gt;"</span>).<span class="stringliteral">"</span>
+<a name="l00291"></a>00291 <span class="stringliteral"></span>
+<a name="l00292"></a>00292 <span class="stringliteral">      "</span>.($sort == <span class="stringliteral">"a_datum"</span> ?
+<a name="l00293"></a>00293       <span class="stringliteral">"&lt;a href=\"?{$this-&gt;var-&gt;get_kam}={$_GET[$this-&gt;var-&gt;get_kam]}&amp;amp;sort=de_datum&amp;amp;view={$view}&amp;amp;str={$str}\"&gt;datum DESC&lt;/a&gt;"</span> :
+<a name="l00294"></a>00294       <span class="stringliteral">"&lt;a href=\"?{$this-&gt;var-&gt;get_kam}={$_GET[$this-&gt;var-&gt;get_kam]}&amp;amp;sort=a_datum&amp;amp;view={$view}&amp;amp;str={$str}\"&gt;datum ASC&lt;/a&gt;"</span>).<span class="stringliteral">"</span>
+<a name="l00295"></a>00295 <span class="stringliteral"></span>
+<a name="l00296"></a>00296 <span class="stringliteral">      zobrazení:</span>
+<a name="l00297"></a>00297 <span class="stringliteral">      "</span>.($view == <span class="stringliteral">"obr"</span> ? <span class="stringliteral">"s obrázky"</span> : <span class="stringliteral">"&lt;a href=\"?{$this-&gt;var-&gt;get_kam}={$_GET[$this-&gt;var-&gt;get_kam]}&amp;amp;sort={$sort}&amp;amp;view=obr&amp;amp;str={$str}\"&gt;s obrázky&lt;/a&gt;"</span>).<span class="stringliteral">"</span>
+<a name="l00298"></a>00298 <span class="stringliteral">      "</span>.($view == <span class="stringliteral">"tab"</span> ? <span class="stringliteral">"tabulkový"</span> : <span class="stringliteral">"&lt;a href=\"?{$this-&gt;var-&gt;get_kam}={$_GET[$this-&gt;var-&gt;get_kam]}&amp;amp;sort={$sort}&amp;amp;view=tab&amp;amp;str={$str}\"&gt;tabulkový&lt;/a&gt;"</span>).<span class="stringliteral">"</span>
+<a name="l00299"></a>00299 <span class="stringliteral">      "</span>.($view == <span class="stringliteral">"fas"</span> ? <span class="stringliteral">"rychlí"</span> : <span class="stringliteral">"&lt;a href=\"?{$this-&gt;var-&gt;get_kam}={$_GET[$this-&gt;var-&gt;get_kam]}&amp;amp;sort={$sort}&amp;amp;view=fas&amp;amp;str={$str}\"&gt;rychlí&lt;/a&gt;"</span>).<span class="stringliteral">"</span>
+<a name="l00300"></a>00300 <span class="stringliteral"></span>
+<a name="l00301"></a>00301 <span class="stringliteral">      &lt;br /&gt;&lt;br /&gt;</span>
+<a name="l00302"></a>00302 <span class="stringliteral">      {$stankovani}</span>
+<a name="l00303"></a>00303 <span class="stringliteral">      &lt;br /&gt;</span>
+<a name="l00304"></a>00304 <span class="stringliteral">      "</span>;
+<a name="l00305"></a>00305 <span class="comment">//?{$this-&gt;var-&gt;get_kam}={$_GET[$this-&gt;var-&gt;get_kam]}&amp;amp;sort={$_GET["sort"]}&amp;amp;view={$_GET["view"]}&amp;amp;str={$_GET["str"]}</span>
+<a name="l00306"></a>00306       <span class="keywordflow">if</span> ($res = @$this-&gt;sqlite-&gt;query(<span class="stringliteral">"SELECT id, adresa, nazev, vyrobce, popis, publikace,</span>
+<a name="l00307"></a>00307 <span class="stringliteral">                                        kod, hmotnost, dph, cena, skladem, obrazek</span>
+<a name="l00308"></a>00308 <span class="stringliteral">                                        FROM obsah_eshop WHERE adresa='{$adresa}'</span>
+<a name="l00309"></a>00309 <span class="stringliteral">                                        ORDER BY {$this-&gt;razeni[$sort]},</span>
+<a name="l00310"></a>00310 <span class="stringliteral">                                        id ASC</span>
+<a name="l00311"></a>00311 <span class="stringliteral">                                        {$limit};"</span>, NULL, $error))
+<a name="l00312"></a>00312       {
+<a name="l00313"></a>00313         <span class="keywordflow">if</span> ($res-&gt;numRows() != 0)
+<a name="l00314"></a>00314         {
+<a name="l00315"></a>00315           $i = 0;
+<a name="l00316"></a>00316           <span class="keywordflow">while</span> ($data = $res-&gt;fetchObject()) <span class="comment">//pripadne prepisovac specialni syntaxe a v editoru ajax zobrazovani</span>
+<a name="l00317"></a>00317           {
+<a name="l00318"></a>00318             $publikace = date(<span class="stringliteral">"d.m. Y"</span>, strtotime($data-&gt;publikace));
+<a name="l00319"></a>00319 
+<a name="l00320"></a>00320             <span class="keywordflow">switch</span> ($this-&gt;zobrazeni[$view])  <span class="comment">//volba zobrazeni</span>
+<a name="l00321"></a>00321             {
+<a name="l00322"></a>00322               <span class="keywordflow">case</span> <span class="stringliteral">"zobr1"</span>: <span class="comment">//obrazky</span>
+<a name="l00323"></a>00323                 $result .=
+<a name="l00324"></a>00324                 <span class="stringliteral">"</span>
+<a name="l00325"></a>00325 <span class="stringliteral">                "</span>.($i &gt; 0 &amp;&amp; ($i % $this-&gt;pocet_sloupcu) == 0 ? <span class="stringliteral">"&lt;hr&gt;"</span> : <span class="stringliteral">""</span>).<span class="stringliteral">"</span>
+<a name="l00326"></a>00326 <span class="stringliteral">                  &lt;h4&gt;název: {$data-&gt;nazev}&lt;/h4&gt;</span>
+<a name="l00327"></a>00327 <span class="stringliteral">                  &lt;p&gt;</span>
+<a name="l00328"></a>00328 <span class="stringliteral">                    +++&lt;a href=\"?{$this-&gt;var-&gt;get_kam}={$data-&gt;adresa}&amp;amp;{$this-&gt;sub_polozka}={$data-&gt;id}&amp;amp;{$this-&gt;sub_buy}=add\"&gt;hodit do košíku&lt;/a&gt;+++&lt;br /&gt;</span>
+<a name="l00329"></a>00329 <span class="stringliteral">                    &lt;a href=\"?{$this-&gt;var-&gt;get_kam}={$data-&gt;adresa}&amp;amp;{$this-&gt;sub_polozka}={$data-&gt;id}\" title=\"\"&gt;</span>
+<a name="l00330"></a>00330 <span class="stringliteral">                    vyrobce: {$data-&gt;vyrobce}&lt;br /&gt;</span>
+<a name="l00331"></a>00331 <span class="stringliteral">                    popis: {$data-&gt;popis}&lt;br /&gt;</span>
+<a name="l00332"></a>00332 <span class="stringliteral">                    publikace: {$publikace}&lt;br /&gt;</span>
+<a name="l00333"></a>00333 <span class="stringliteral">                    kod: {$data-&gt;kod}&lt;br /&gt;</span>
+<a name="l00334"></a>00334 <span class="stringliteral">                    hmotnost: {$data-&gt;hmotnost} {$this-&gt;defhmo}&lt;br /&gt;</span>
+<a name="l00335"></a>00335 <span class="stringliteral">                    dph: {$data-&gt;dph}&lt;br /&gt;</span>
+<a name="l00336"></a>00336 <span class="stringliteral">                    cena: {$data-&gt;cena} {$this-&gt;defmen}&lt;br /&gt;</span>
+<a name="l00337"></a>00337 <span class="stringliteral">                    &lt;img src=\"{$this-&gt;dirpath}/{$this-&gt;pathcest}/{$this-&gt;minidir}/{$data-&gt;obrazek}\" alt=\"{$data-&gt;nazev}\" /&gt;&lt;br /&gt;</span>
+<a name="l00338"></a>00338 <span class="stringliteral">                    skladem: {$data-&gt;skladem}</span>
+<a name="l00339"></a>00339 <span class="stringliteral">                    &lt;/a&gt;</span>
+<a name="l00340"></a>00340 <span class="stringliteral">                  &lt;/p&gt;</span>
+<a name="l00341"></a>00341 <span class="stringliteral">                  &lt;br /&gt;</span>
+<a name="l00342"></a>00342 <span class="stringliteral">                "</span>;
+<a name="l00343"></a>00343                 $i++;
+<a name="l00344"></a>00344               <span class="keywordflow">break</span>;
+<a name="l00345"></a>00345 
+<a name="l00346"></a>00346               <span class="keywordflow">case</span> <span class="stringliteral">"zobr2"</span>: <span class="comment">//tabulka</span>
+<a name="l00347"></a>00347                 $result .=
+<a name="l00348"></a>00348                 <span class="stringliteral">"</span>
+<a name="l00349"></a>00349 <span class="stringliteral">                "</span>.($i &gt; 0 &amp;&amp; ($i % $this-&gt;pocet_sloupcu) == 0 ? <span class="stringliteral">"&lt;hr&gt;"</span> : <span class="stringliteral">""</span>).<span class="stringliteral">"</span>
+<a name="l00350"></a>00350 <span class="stringliteral">                  &lt;p&gt;</span>
+<a name="l00351"></a>00351 <span class="stringliteral">                    +++&lt;a href=\"?{$this-&gt;var-&gt;get_kam}={$data-&gt;adresa}&amp;amp;{$this-&gt;sub_polozka}={$data-&gt;id}&amp;amp;{$this-&gt;sub_buy}=add\"&gt;hodit do košíku&lt;/a&gt;+++&lt;br /&gt;</span>
+<a name="l00352"></a>00352 <span class="stringliteral">                    &lt;a href=\"?{$this-&gt;var-&gt;get_kam}={$data-&gt;adresa}&amp;amp;{$this-&gt;sub_polozka}={$data-&gt;id}\" title=\"\"&gt;</span>
+<a name="l00353"></a>00353 <span class="stringliteral">                      název: {$data-&gt;nazev}</span>
+<a name="l00354"></a>00354 <span class="stringliteral">                    &lt;/a&gt;</span>
+<a name="l00355"></a>00355 <span class="stringliteral">                    vyrobce: {$data-&gt;vyrobce}&lt;br /&gt;</span>
+<a name="l00356"></a>00356 <span class="stringliteral">                    popis: {$data-&gt;popis}&lt;br /&gt;</span>
+<a name="l00357"></a>00357 <span class="stringliteral">                    publikace: {$publikace}&lt;br /&gt;</span>
+<a name="l00358"></a>00358 <span class="stringliteral">                    cena (bez dph): {$data-&gt;cena} {$this-&gt;defmen}&lt;br /&gt;</span>
+<a name="l00359"></a>00359 <span class="stringliteral">                    skladem: {$data-&gt;skladem}</span>
+<a name="l00360"></a>00360 <span class="stringliteral">                  &lt;/p&gt;</span>
+<a name="l00361"></a>00361 <span class="stringliteral">                  &lt;br /&gt;</span>
+<a name="l00362"></a>00362 <span class="stringliteral">                "</span>;
+<a name="l00363"></a>00363                 $i++;
+<a name="l00364"></a>00364               <span class="keywordflow">break</span>;
+<a name="l00365"></a>00365 
+<a name="l00366"></a>00366               <span class="keywordflow">case</span> <span class="stringliteral">"zobr3"</span>: <span class="comment">//rychle</span>
+<a name="l00367"></a>00367                 $result .=
+<a name="l00368"></a>00368                 <span class="stringliteral">"</span>
+<a name="l00369"></a>00369 <span class="stringliteral">                "</span>.($i &gt; 0 &amp;&amp; ($i % $this-&gt;pocet_sloupcu) == 0 ? <span class="stringliteral">"&lt;hr&gt;"</span> : <span class="stringliteral">""</span>).<span class="stringliteral">"</span>
+<a name="l00370"></a>00370 <span class="stringliteral">                  &lt;p&gt;</span>
+<a name="l00371"></a>00371 <span class="stringliteral">                    +++&lt;a href=\"?{$this-&gt;var-&gt;get_kam}={$data-&gt;adresa}&amp;amp;{$this-&gt;sub_polozka}={$data-&gt;id}&amp;amp;{$this-&gt;sub_buy}=add\"&gt;hodit do košíku&lt;/a&gt;+++&lt;br /&gt;</span>
+<a name="l00372"></a>00372 <span class="stringliteral">                    &lt;a href=\"?{$this-&gt;var-&gt;get_kam}={$data-&gt;adresa}&amp;amp;{$this-&gt;sub_polozka}={$data-&gt;id}\" title=\"\"&gt;</span>
+<a name="l00373"></a>00373 <span class="stringliteral">                      název: {$data-&gt;nazev}</span>
+<a name="l00374"></a>00374 <span class="stringliteral">                    &lt;/a&gt;</span>
+<a name="l00375"></a>00375 <span class="stringliteral">                    vyrobce: {$data-&gt;vyrobce}&lt;br /&gt;</span>
+<a name="l00376"></a>00376 <span class="stringliteral">                    cena (bez dph): {$data-&gt;cena} {$this-&gt;defmen}&lt;br /&gt;</span>
+<a name="l00377"></a>00377 <span class="stringliteral">                    skladem: {$data-&gt;skladem}</span>
+<a name="l00378"></a>00378 <span class="stringliteral">                  &lt;/p&gt;</span>
+<a name="l00379"></a>00379 <span class="stringliteral">                  &lt;br /&gt;</span>
+<a name="l00380"></a>00380 <span class="stringliteral">                "</span>;
+<a name="l00381"></a>00381                 $i++;
+<a name="l00382"></a>00382               <span class="keywordflow">break</span>;
+<a name="l00383"></a>00383             } <span class="comment">//konec - volba zobrazeni</span>
+<a name="l00384"></a>00384           }
+<a name="l00385"></a>00385         }
+<a name="l00386"></a>00386           <span class="keywordflow">else</span>
+<a name="l00387"></a>00387         {
+<a name="l00388"></a>00388           $result = <span class="stringliteral">"&lt;h6&gt;Zadaná stránka neexistuje!&lt;/h6&gt;"</span>;
+<a name="l00389"></a>00389         }
+<a name="l00390"></a>00390       }
+<a name="l00391"></a>00391         <span class="keywordflow">else</span>
+<a name="l00392"></a>00392       {
+<a name="l00393"></a>00393         $this-&gt;var-&gt;main[0]-&gt;ErrorMsg($error);
+<a name="l00394"></a>00394       }
+<a name="l00395"></a>00395     }
+<a name="l00396"></a>00396 
+<a name="l00397"></a>00397     <span class="keywordflow">if</span> (!Empty($_GET[$this-&gt;sub_buy])) <span class="comment">//pridani polozky do kosiku, kdyz je neprazdny priznak kosiku</span>
+<a name="l00398"></a>00398     {
+<a name="l00399"></a>00399       <span class="keywordflow">switch</span> ($_GET[$this-&gt;sub_buy])
+<a name="l00400"></a>00400       {
+<a name="l00401"></a>00401         <span class="keywordflow">case</span> <span class="stringliteral">"show"</span>:  <span class="comment">//vypis kosiku</span>
+<a name="l00402"></a>00402           $result = $this-&gt;<a class="code" href="classDynamicObsahEshop.html#8a05990209e21b92003cbe2872180c9c">NakupniKosik</a>();
+<a name="l00403"></a>00403         <span class="keywordflow">break</span>;
+<a name="l00404"></a>00404 
+<a name="l00405"></a>00405         <span class="keywordflow">case</span> <span class="stringliteral">"add"</span>: <span class="comment">//pridani polozky do kosiku</span>
+<a name="l00406"></a>00406           $result = $this-&gt;<a class="code" href="classDynamicObsahEshop.html#d4291c41e6b890a772a327f897b084a4">PridejPolozku</a>();
+<a name="l00407"></a>00407         <span class="keywordflow">break</span>;
+<a name="l00408"></a>00408 
+<a name="l00409"></a>00409         <span class="keywordflow">case</span> <span class="stringliteral">"krok"</span>: <span class="comment">//krok objednavky</span>
+<a name="l00410"></a>00410           $result =
+<a name="l00411"></a>00411           <span class="stringliteral">"soupis objednávky&lt;br /&gt;</span>
+<a name="l00412"></a>00412 <span class="stringliteral"></span>
+<a name="l00413"></a>00413 <span class="stringliteral">          {$this-&gt;SoupisObjedvavky()}</span>
+<a name="l00414"></a>00414 <span class="stringliteral"></span>
+<a name="l00415"></a>00415 <span class="stringliteral">          &lt;form method=\"post\"&gt;</span>
+<a name="l00416"></a>00416 <span class="stringliteral">            &lt;fieldset&gt;</span>
+<a name="l00417"></a>00417 <span class="stringliteral">              jméno: &lt;input type=\"text\" name=\"jmeno\" /&gt;&lt;br /&gt;</span>
+<a name="l00418"></a>00418 <span class="stringliteral">              ulice: &lt;input type=\"text\" name=\"ulice\" /&gt;&lt;br /&gt;</span>
+<a name="l00419"></a>00419 <span class="stringliteral">              město: &lt;input type=\"text\" name=\"mesto\" /&gt;&lt;br /&gt;</span>
+<a name="l00420"></a>00420 <span class="stringliteral">              psč: &lt;input type=\"text\" name=\"psc\" /&gt;&lt;br /&gt;</span>
+<a name="l00421"></a>00421 <span class="stringliteral">              email: &lt;input type=\"text\" name=\"email\" value=\"@\" /&gt;&lt;br /&gt;</span>
+<a name="l00422"></a>00422 <span class="stringliteral">              &lt;input type=\"submit\" name=\"tlacitko\" value=\"k potvrzení obednávky\" /&gt;</span>
+<a name="l00423"></a>00423 <span class="stringliteral">            &lt;/fieldset&gt;</span>
+<a name="l00424"></a>00424 <span class="stringliteral">          &lt;/form&gt;</span>
+<a name="l00425"></a>00425 <span class="stringliteral"></span>
+<a name="l00426"></a>00426 <span class="stringliteral">          &lt;&lt;&lt; &lt;a href=\"?{$this-&gt;sub_buy}=show\"&gt;zpět do košíku&lt;/a&gt;"</span>;
+<a name="l00427"></a>00427 
+<a name="l00428"></a>00428           $jmeno = $_POST[<span class="stringliteral">"jmeno"</span>];
+<a name="l00429"></a>00429           $ulice = $_POST[<span class="stringliteral">"ulice"</span>];
+<a name="l00430"></a>00430           $mesto = $_POST[<span class="stringliteral">"mesto"</span>];
+<a name="l00431"></a>00431           $psc = $_POST[<span class="stringliteral">"psc"</span>];
+<a name="l00432"></a>00432           $email = $_POST[<span class="stringliteral">"email"</span>];
+<a name="l00433"></a>00433 
+<a name="l00434"></a>00434           <span class="keywordflow">if</span> (!Empty($jmeno) &amp;&amp;
+<a name="l00435"></a>00435               !Empty($ulice) &amp;&amp;
+<a name="l00436"></a>00436               !Empty($mesto) &amp;&amp;
+<a name="l00437"></a>00437               !Empty($psc) &amp;&amp;
+<a name="l00438"></a>00438               !Empty($email))
+<a name="l00439"></a>00439           {
+<a name="l00440"></a>00440 
+<a name="l00441"></a>00441             $result =
+<a name="l00442"></a>00442             <span class="stringliteral">"potvrzení objednávky&lt;br /&gt;</span>
+<a name="l00443"></a>00443 <span class="stringliteral"></span>
+<a name="l00444"></a>00444 <span class="stringliteral">            {$this-&gt;SoupisObjedvavky()}</span>
+<a name="l00445"></a>00445 <span class="stringliteral"></span>
+<a name="l00446"></a>00446 <span class="stringliteral">          &lt;form method=\"post\"&gt;</span>
+<a name="l00447"></a>00447 <span class="stringliteral">            &lt;fieldset&gt;</span>
+<a name="l00448"></a>00448 <span class="stringliteral">              jméno: {$jmeno}&lt;br /&gt;</span>
+<a name="l00449"></a>00449 <span class="stringliteral">              ulice: {$ulice}&lt;br /&gt;</span>
+<a name="l00450"></a>00450 <span class="stringliteral">              město: {$mesto}&lt;br /&gt;</span>
+<a name="l00451"></a>00451 <span class="stringliteral">              psč: {$psc}&lt;br /&gt;</span>
+<a name="l00452"></a>00452 <span class="stringliteral">              email: {$email}&lt;br /&gt;</span>
+<a name="l00453"></a>00453 <span class="stringliteral"></span>
+<a name="l00454"></a>00454 <span class="stringliteral">              &lt;input type=\"hidden\" name=\"jmeno\" value=\"{$jmeno}\" /&gt;</span>
+<a name="l00455"></a>00455 <span class="stringliteral">              &lt;input type=\"hidden\" name=\"ulice\" value=\"{$ulice}\" /&gt;</span>
+<a name="l00456"></a>00456 <span class="stringliteral">              &lt;input type=\"hidden\" name=\"mesto\" value=\"{$mesto}\" /&gt;</span>
+<a name="l00457"></a>00457 <span class="stringliteral">              &lt;input type=\"hidden\" name=\"psc\" value=\"{$psc}\" /&gt;</span>
+<a name="l00458"></a>00458 <span class="stringliteral">              &lt;input type=\"hidden\" name=\"email\" value=\"{$email}\" /&gt;</span>
+<a name="l00459"></a>00459 <span class="stringliteral">              &lt;input type=\"submit\" name=\"tlacitko1\" value=\"k odsouhlasení objednávky\" /&gt;</span>
+<a name="l00460"></a>00460 <span class="stringliteral">            &lt;/fieldset&gt;</span>
+<a name="l00461"></a>00461 <span class="stringliteral">          &lt;/form&gt;</span>
+<a name="l00462"></a>00462 <span class="stringliteral"></span>
+<a name="l00463"></a>00463 <span class="stringliteral">          &lt;&lt;&lt; {$this-&gt;var-&gt;main[0]-&gt;OdkazZpet("</span>Zpět na soupis objednávky<span class="stringliteral">")}</span>
+<a name="l00464"></a>00464 <span class="stringliteral">            "</span>;
+<a name="l00465"></a>00465 
+<a name="l00466"></a>00466             <span class="keywordflow">if</span> (!Empty($_POST[<span class="stringliteral">"tlacitko1"</span>]))
+<a name="l00467"></a>00467             {
+<a name="l00468"></a>00468               $result =
+<a name="l00469"></a>00469               <span class="stringliteral">"</span>
+<a name="l00470"></a>00470 <span class="stringliteral">          &lt;form method=\"post\"&gt;</span>
+<a name="l00471"></a>00471 <span class="stringliteral">            &lt;fieldset&gt;</span>
+<a name="l00472"></a>00472 <span class="stringliteral">              &lt;input type=\"hidden\" name=\"jmeno\" value=\"{$jmeno}\" /&gt;</span>
+<a name="l00473"></a>00473 <span class="stringliteral">              &lt;input type=\"hidden\" name=\"ulice\" value=\"{$ulice}\" /&gt;</span>
+<a name="l00474"></a>00474 <span class="stringliteral">              &lt;input type=\"hidden\" name=\"mesto\" value=\"{$mesto}\" /&gt;</span>
+<a name="l00475"></a>00475 <span class="stringliteral">              &lt;input type=\"hidden\" name=\"psc\" value=\"{$psc}\" /&gt;</span>
+<a name="l00476"></a>00476 <span class="stringliteral">              &lt;input type=\"hidden\" name=\"email\" value=\"{$email}\" /&gt;</span>
+<a name="l00477"></a>00477 <span class="stringliteral">              &lt;input type=\"hidden\" name=\"tlacitko1\" value=\"...\" /&gt;</span>
+<a name="l00478"></a>00478 <span class="stringliteral">              &lt;p&gt;</span>
+<a name="l00479"></a>00479 <span class="stringliteral">                {$this-&gt;textpodminek}</span>
+<a name="l00480"></a>00480 <span class="stringliteral">              &lt;/p&gt;</span>
+<a name="l00481"></a>00481 <span class="stringliteral">              &lt;input type=\"checkbox\" name=\"souhlas\" value=\"true\" /&gt; souhlasíte, jestli jo tak odškrkněte&lt;br /&gt;</span>
+<a name="l00482"></a>00482 <span class="stringliteral">              &lt;input type=\"submit\" name=\"tlacitko2\" value=\"odeslat objednávku\" /&gt;</span>
+<a name="l00483"></a>00483 <span class="stringliteral">            &lt;/fieldset&gt;</span>
+<a name="l00484"></a>00484 <span class="stringliteral">          &lt;/form&gt;</span>
+<a name="l00485"></a>00485 <span class="stringliteral"></span>
+<a name="l00486"></a>00486 <span class="stringliteral">          &lt;&lt;&lt; {$this-&gt;var-&gt;main[0]-&gt;OdkazZpet("</span>Zpět na potvrzení objednávky<span class="stringliteral">")}</span>
+<a name="l00487"></a>00487 <span class="stringliteral">              "</span>;
+<a name="l00488"></a>00488 
+<a name="l00489"></a>00489               <span class="keywordflow">if</span> (!Empty($_POST[<span class="stringliteral">"tlacitko2"</span>]) &amp;&amp;
+<a name="l00490"></a>00490                   $_POST[<span class="stringliteral">"souhlas"</span>] == <span class="stringliteral">"true"</span>)
+<a name="l00491"></a>00491               {
+<a name="l00492"></a>00492                 $result = $this-&gt;<a class="code" href="classDynamicObsahEshop.html#70c60c5593f92d4db9affc4960a1e5d0">OdeslatObjednavku</a>($jmeno, $ulice, $mesto, $psc, $email);
+<a name="l00493"></a>00493               }
+<a name="l00494"></a>00494             }
+<a name="l00495"></a>00495           }
+<a name="l00496"></a>00496         <span class="keywordflow">break</span>;
+<a name="l00497"></a>00497       }
+<a name="l00498"></a>00498     }
+<a name="l00499"></a>00499 
+<a name="l00500"></a>00500     <span class="keywordflow">if</span> (!Empty($_GET[<span class="stringliteral">"tlacitko"</span>]))
+<a name="l00501"></a>00501     {
+<a name="l00502"></a>00502       $nazev = $_GET[<span class="stringliteral">"nazev"</span>];
+<a name="l00503"></a>00503       $result = <span class="stringliteral">""</span>;
+<a name="l00504"></a>00504       <span class="keywordflow">if</span> ($res = @$this-&gt;sqlite-&gt;query(<span class="stringliteral">"SELECT id, adresa, nazev, vyrobce, popis, publikace,</span>
+<a name="l00505"></a>00505 <span class="stringliteral">                                        kod, hmotnost, dph, cena, skladem, obrazek</span>
+<a name="l00506"></a>00506 <span class="stringliteral">                                        FROM obsah_eshop WHERE</span>
+<a name="l00507"></a>00507 <span class="stringliteral">                                        nazev LIKE(\"%{$nazev}%\") OR</span>
+<a name="l00508"></a>00508 <span class="stringliteral">                                        vyrobce LIKE(\"%{$nazev}%\") OR</span>
+<a name="l00509"></a>00509 <span class="stringliteral">                                        popis LIKE(\"%{$nazev}%\");"</span>, NULL, $error))
+<a name="l00510"></a>00510       {
+<a name="l00511"></a>00511         <span class="keywordflow">if</span> ($res-&gt;numRows() != 0)
+<a name="l00512"></a>00512         {
+<a name="l00513"></a>00513           <span class="keywordflow">while</span> ($data = $res-&gt;fetchObject())
+<a name="l00514"></a>00514           {
+<a name="l00515"></a>00515             $publikace = date(<span class="stringliteral">"d.m. Y"</span>, strtotime($data-&gt;publikace));
+<a name="l00516"></a>00516 
+<a name="l00517"></a>00517             $result .=
+<a name="l00518"></a>00518             <span class="stringliteral">"</span>
+<a name="l00519"></a>00519 <span class="stringliteral">              &lt;h4&gt;název: {$data-&gt;nazev}&lt;/h4&gt;</span>
+<a name="l00520"></a>00520 <span class="stringliteral">              &lt;p&gt;</span>
+<a name="l00521"></a>00521 <span class="stringliteral">                &lt;a href=\"?{$this-&gt;var-&gt;get_kam}={$data-&gt;adresa}&amp;amp;{$this-&gt;sub_polozka}={$data-&gt;id}&amp;amp;{$this-&gt;sub_buy}=add\"&gt;hodit do košíku&lt;/a&gt;&lt;br /&gt;</span>
+<a name="l00522"></a>00522 <span class="stringliteral">                vyrobce: {$data-&gt;vyrobce}&lt;br /&gt;</span>
+<a name="l00523"></a>00523 <span class="stringliteral">                popis: {$data-&gt;popis}&lt;br /&gt;</span>
+<a name="l00524"></a>00524 <span class="stringliteral">                publikace: {$publikace}&lt;br /&gt;</span>
+<a name="l00525"></a>00525 <span class="stringliteral">                kod: {$data-&gt;kod}&lt;br /&gt;</span>
+<a name="l00526"></a>00526 <span class="stringliteral">                hmotnost: {$data-&gt;hmotnost} {$this-&gt;defhmo}&lt;br /&gt;</span>
+<a name="l00527"></a>00527 <span class="stringliteral">                dph: {$data-&gt;dph}&lt;br /&gt;</span>
+<a name="l00528"></a>00528 <span class="stringliteral">                cena: {$data-&gt;cena} {$this-&gt;defmen}&lt;br /&gt;</span>
+<a name="l00529"></a>00529 <span class="stringliteral">                &lt;img src=\"{$this-&gt;dirpath}/{$this-&gt;pathcest}/{$this-&gt;minidir}/{$data-&gt;obrazek}\" alt=\"{$data-&gt;nazev}\" /&gt;&lt;br /&gt;</span>
+<a name="l00530"></a>00530 <span class="stringliteral">                skladem: {$data-&gt;skladem}</span>
+<a name="l00531"></a>00531 <span class="stringliteral">              &lt;/p&gt;&lt;br /&gt;</span>
+<a name="l00532"></a>00532 <span class="stringliteral">            "</span>;
+<a name="l00533"></a>00533           }
+<a name="l00534"></a>00534         }
+<a name="l00535"></a>00535           <span class="keywordflow">else</span>
+<a name="l00536"></a>00536         {
+<a name="l00537"></a>00537           $result = <span class="stringliteral">"&lt;strong&gt;žádný výsledek&lt;/strong&gt;"</span>;
+<a name="l00538"></a>00538         }
+<a name="l00539"></a>00539       }
+<a name="l00540"></a>00540         <span class="keywordflow">else</span>
+<a name="l00541"></a>00541       {
+<a name="l00542"></a>00542         $this-&gt;var-&gt;main[0]-&gt;ErrorMsg($error);
+<a name="l00543"></a>00543       }
+<a name="l00544"></a>00544     }
+<a name="l00545"></a>00545 
+<a name="l00546"></a>00546     <span class="keywordflow">return</span> $result;
+<a name="l00547"></a>00547   }
+<a name="l00548"></a>00548 
+<a name="l00555"></a><a class="code" href="classDynamicObsahEshop.html#3f2e6af575927178dc45e7855e846296">00555</a>   <span class="keyword">public</span> function <a class="code" href="classDynamicObsahEshop.html#3f2e6af575927178dc45e7855e846296">Title</a>()
+<a name="l00556"></a>00556   {
+<a name="l00557"></a>00557     <span class="keywordflow">if</span> (!Empty($_GET[$this-&gt;sub_polozka]))
+<a name="l00558"></a>00558     {
+<a name="l00559"></a>00559       $result = <span class="stringliteral">" {$this-&gt;oddtit} {$this-&gt;NazevPodleId($_GET[$this-&gt;sub_polozka])}"</span>;
+<a name="l00560"></a>00560     }
+<a name="l00561"></a>00561 
+<a name="l00562"></a>00562     <span class="keywordflow">if</span> (!Empty($_GET[$this-&gt;sub_buy]))
+<a name="l00563"></a>00563     {
+<a name="l00564"></a>00564       <span class="keywordflow">switch</span> ($_GET[$this-&gt;sub_buy])
+<a name="l00565"></a>00565       {
+<a name="l00566"></a>00566         <span class="keywordflow">case</span> <span class="stringliteral">"show"</span>:
+<a name="l00567"></a>00567           $result = <span class="stringliteral">"košík"</span>;
+<a name="l00568"></a>00568         <span class="keywordflow">break</span>;
+<a name="l00569"></a>00569 
+<a name="l00570"></a>00570         <span class="keywordflow">case</span> <span class="stringliteral">"add"</span>:
+<a name="l00571"></a>00571           $result = <span class="stringliteral">"přidání položky"</span>;
+<a name="l00572"></a>00572         <span class="keywordflow">break</span>;
+<a name="l00573"></a>00573 
+<a name="l00574"></a>00574         <span class="keywordflow">case</span> <span class="stringliteral">"krok"</span>:
+<a name="l00575"></a>00575           $result = <span class="stringliteral">"průvodce objednávkou"</span>;
+<a name="l00576"></a>00576         <span class="keywordflow">break</span>;
+<a name="l00577"></a>00577       }
+<a name="l00578"></a>00578     }
+<a name="l00579"></a>00579 
+<a name="l00580"></a>00580     <span class="keywordflow">return</span> $result;
+<a name="l00581"></a>00581   }
+<a name="l00582"></a>00582 
+<a name="l00583"></a><a class="code" href="classDynamicObsahEshop.html#7a449176fd12f28bdd077f5a24328258">00583</a>   <span class="keyword">private</span> function <a class="code" href="classDynamicObsahEshop.html#7a449176fd12f28bdd077f5a24328258">NazevPodleId</a>($id)
+<a name="l00584"></a>00584   {
+<a name="l00585"></a>00585     settype($id, <span class="stringliteral">"integer"</span>);
+<a name="l00586"></a>00586     <span class="keywordflow">if</span> ($res = @$this-&gt;sqlite-&gt;query(<span class="stringliteral">"SELECT nazev</span>
+<a name="l00587"></a>00587 <span class="stringliteral">                                      FROM obsah_eshop WHERE</span>
+<a name="l00588"></a>00588 <span class="stringliteral">                                      id={$id};"</span>, NULL, $error))
+<a name="l00589"></a>00589     {
+<a name="l00590"></a>00590       <span class="keywordflow">if</span> ($res-&gt;numRows() == 1)
+<a name="l00591"></a>00591       {
+<a name="l00592"></a>00592         $result = $res-&gt;fetchObject()-&gt;nazev;
+<a name="l00593"></a>00593       }
+<a name="l00594"></a>00594     }
+<a name="l00595"></a>00595       <span class="keywordflow">else</span>
+<a name="l00596"></a>00596     {
+<a name="l00597"></a>00597       $this-&gt;var-&gt;main[0]-&gt;ErrorMsg($error);
+<a name="l00598"></a>00598     }
+<a name="l00599"></a>00599 
+<a name="l00600"></a>00600     <span class="keywordflow">return</span> $result;
+<a name="l00601"></a>00601   }
+<a name="l00602"></a>00602 
+<a name="l00609"></a><a class="code" href="classDynamicObsahEshop.html#b73c1238e9e042153890e79a626c7a0d">00609</a>   <span class="keyword">public</span> function <a class="code" href="classDynamicObsahEshop.html#b73c1238e9e042153890e79a626c7a0d">InfoKosik</a>()
+<a name="l00610"></a>00610   {
+<a name="l00611"></a>00611     $uzivatel = $this-&gt;<a class="code" href="classDynamicObsahEshop.html#f307462fc21191ae9867c4b1f74a2545">IdUzivatele</a>();
+<a name="l00612"></a>00612     <span class="keywordflow">if</span> ($this-&gt;<a class="code" href="classDynamicObsahEshop.html#088450175cbf872952a51eb301a9155e">ExistujeUzivatel</a>(session_id()) &amp;&amp;
+<a name="l00613"></a>00613         $this-&gt;<a class="code" href="classDynamicObsahEshop.html#1afcc86e44bf989a78be22b56082eccd">PocetPolozekKosiku</a>($uzivatel) != 0)
+<a name="l00614"></a>00614     {
+<a name="l00615"></a>00615       <span class="keywordflow">if</span> ($res = @$this-&gt;sqlite-&gt;query(<span class="stringliteral">"SELECT COUNT(kosik.id) as pocet,</span>
+<a name="l00616"></a>00616 <span class="stringliteral">                                        sum(obsah_eshop.cena * kosik.pocet) as cena</span>
+<a name="l00617"></a>00617 <span class="stringliteral">                                        FROM kosik, obsah_eshop</span>
+<a name="l00618"></a>00618 <span class="stringliteral">                                        WHERE kosik.zakaznik={$uzivatel} AND</span>
+<a name="l00619"></a>00619 <span class="stringliteral">                                        obsah_eshop.id=kosik.zbozi;"</span>, NULL, $error))
+<a name="l00620"></a>00620       {
+<a name="l00621"></a>00621         <span class="keywordflow">if</span> ($res-&gt;numRows() == 1)
+<a name="l00622"></a>00622         {
+<a name="l00623"></a>00623           $data = $res-&gt;fetchObject();
+<a name="l00624"></a>00624           $cenadoprava = $this-&gt;dodani[$this-&gt;<a class="code" href="classDynamicObsahEshop.html#e209dc3baf8e856ef3f0d0b0c6ef7335">IdDopravy</a>($uzivatel)][<span class="stringliteral">"cena"</span>];
+<a name="l00625"></a>00625           $cena = floor(((($data-&gt;cena + $cenadoprava) / 100) * $this-&gt;defdph) + ($data-&gt;cena + $cenadoprava));
+<a name="l00626"></a>00626 
+<a name="l00627"></a>00627           $result =
+<a name="l00628"></a>00628           <span class="stringliteral">"</span>
+<a name="l00629"></a>00629 <span class="stringliteral">            &lt;a href=\"?{$this-&gt;sub_buy}=show\"&gt;V košíku&lt;/a&gt; máte {$data-&gt;pocet} položek za: {$cena} {$this-&gt;defmen}</span>
+<a name="l00630"></a>00630 <span class="stringliteral">          "</span>;
+<a name="l00631"></a>00631         }
+<a name="l00632"></a>00632       }
+<a name="l00633"></a>00633         <span class="keywordflow">else</span>
+<a name="l00634"></a>00634       {
+<a name="l00635"></a>00635         $this-&gt;var-&gt;main[0]-&gt;ErrorMsg($error);
+<a name="l00636"></a>00636       }
+<a name="l00637"></a>00637     }
+<a name="l00638"></a>00638       <span class="keywordflow">else</span>
+<a name="l00639"></a>00639     {
+<a name="l00640"></a>00640       $result = <span class="stringliteral">"&lt;strong&gt;košík neni při nulovém počtu k dispozici&lt;/strong&gt;"</span>;
+<a name="l00641"></a>00641     }
+<a name="l00642"></a>00642 
+<a name="l00643"></a>00643     <span class="keywordflow">return</span> $result;
+<a name="l00644"></a>00644   }
+<a name="l00645"></a>00645 
+<a name="l00652"></a><a class="code" href="classDynamicObsahEshop.html#8a05990209e21b92003cbe2872180c9c">00652</a>   <span class="keyword">public</span> function <a class="code" href="classDynamicObsahEshop.html#8a05990209e21b92003cbe2872180c9c">NakupniKosik</a>()
+<a name="l00653"></a>00653   {
+<a name="l00654"></a>00654     $uzivatel = $this-&gt;<a class="code" href="classDynamicObsahEshop.html#f307462fc21191ae9867c4b1f74a2545">IdUzivatele</a>();
+<a name="l00655"></a>00655 
+<a name="l00656"></a>00656     <span class="keywordflow">if</span> ($this-&gt;<a class="code" href="classDynamicObsahEshop.html#088450175cbf872952a51eb301a9155e">ExistujeUzivatel</a>(session_id()) &amp;&amp;
+<a name="l00657"></a>00657         $this-&gt;<a class="code" href="classDynamicObsahEshop.html#1afcc86e44bf989a78be22b56082eccd">PocetPolozekKosiku</a>($uzivatel) != 0)
+<a name="l00658"></a>00658     {
+<a name="l00659"></a>00659       $result =
+<a name="l00660"></a>00660       <span class="stringliteral">"&lt;form method=\"post\"&gt;</span>
+<a name="l00661"></a>00661 <span class="stringliteral">            &lt;fieldset&gt;"</span>;
+<a name="l00662"></a>00662       <span class="keywordflow">if</span> ($res = @$this-&gt;sqlite-&gt;query(<span class="stringliteral">"SELECT</span>
+<a name="l00663"></a>00663 <span class="stringliteral">                                        kosik.id as id,</span>
+<a name="l00664"></a>00664 <span class="stringliteral">                                        obsah_eshop.nazev as zbozi,</span>
+<a name="l00665"></a>00665 <span class="stringliteral">                                        obsah_eshop.cena as cena,</span>
+<a name="l00666"></a>00666 <span class="stringliteral">                                        obsah_eshop.dph as dph,</span>
+<a name="l00667"></a>00667 <span class="stringliteral">                                        kosik.pocet as pocet</span>
+<a name="l00668"></a>00668 <span class="stringliteral">                                        FROM kosik, obsah_eshop</span>
+<a name="l00669"></a>00669 <span class="stringliteral">                                        WHERE kosik.zakaznik={$uzivatel} AND</span>
+<a name="l00670"></a>00670 <span class="stringliteral">                                        obsah_eshop.id=kosik.zbozi;"</span>, NULL, $error))
+<a name="l00671"></a>00671       {
+<a name="l00672"></a>00672         <span class="keywordflow">if</span> ($res-&gt;numRows() != 0)
+<a name="l00673"></a>00673         {
+<a name="l00674"></a>00674           $sumsoucet = 0;
+<a name="l00675"></a>00675           <span class="keywordflow">while</span> ($data = $res-&gt;fetchObject())
+<a name="l00676"></a>00676           {
+<a name="l00677"></a>00677             $soucet = floor($data-&gt;cena * $data-&gt;pocet);
+<a name="l00678"></a>00678             $cenarow = (($soucet / 100) * $data-&gt;dph) + $soucet;
+<a name="l00679"></a>00679             $sumsoucet += ($data-&gt;cena * $data-&gt;pocet);
+<a name="l00680"></a>00680 
+<a name="l00681"></a>00681             $pocet[$data-&gt;id] = $data-&gt;pocet;
+<a name="l00682"></a>00682 
+<a name="l00683"></a>00683             $result .=
+<a name="l00684"></a>00684             <span class="stringliteral">"</span>
+<a name="l00685"></a>00685 <span class="stringliteral">              nazev: {$data-&gt;zbozi}&lt;br /&gt;</span>
+<a name="l00686"></a>00686 <span class="stringliteral">              cena bez dph: {$data-&gt;cena} {$this-&gt;defmen}&lt;br /&gt;</span>
+<a name="l00687"></a>00687 <span class="stringliteral">              dph: {$data-&gt;dph} %&lt;br /&gt;</span>
+<a name="l00688"></a>00688 <span class="stringliteral">              počet: &lt;input type=\"text\" value=\"{$data-&gt;pocet}\" size=\"2\" name=\"poc_{$data-&gt;id}\" /&gt;x&lt;br /&gt;</span>
+<a name="l00689"></a>00689 <span class="stringliteral">              součet ceny bez dph: {$soucet} {$this-&gt;defmen}&lt;br /&gt;</span>
+<a name="l00690"></a>00690 <span class="stringliteral">              cena řádku s dph: {$cenarow} {$this-&gt;defmen}&lt;br /&gt;&lt;br /&gt;</span>
+<a name="l00691"></a>00691 <span class="stringliteral">            "</span>;
+<a name="l00692"></a>00692           }
+<a name="l00693"></a>00693 
+<a name="l00694"></a>00694           $doprava = $this-&gt;<a class="code" href="classDynamicObsahEshop.html#e209dc3baf8e856ef3f0d0b0c6ef7335">IdDopravy</a>($uzivatel);
+<a name="l00695"></a>00695           $cenadoprava = $this-&gt;dodani[$doprava][<span class="stringliteral">"cena"</span>];
+<a name="l00696"></a>00696           $celkem = floor(((($sumsoucet + $cenadoprava) / 100) * $this-&gt;defdph) + ($sumsoucet + $cenadoprava));
+<a name="l00697"></a>00697 
+<a name="l00698"></a>00698           $result .=
+<a name="l00699"></a>00699           <span class="stringliteral">"</span>
+<a name="l00700"></a>00700 <span class="stringliteral">            celkový součet bez dph: {$sumsoucet} {$this-&gt;defmen}&lt;br /&gt;</span>
+<a name="l00701"></a>00701 <span class="stringliteral">            doprava: {$this-&gt;VypisDopravySelect($doprava)} {$cenadoprava} {$this-&gt;defmen}&lt;br /&gt;</span>
+<a name="l00702"></a>00702 <span class="stringliteral">            celková cena se vším všudy (s dph {$this-&gt;defdph} %): &lt;strong&gt;{$celkem} {$this-&gt;defmen}&lt;/strong&gt;&lt;br /&gt;</span>
+<a name="l00703"></a>00703 <span class="stringliteral">            &lt;br /&gt;</span>
+<a name="l00704"></a>00704 <span class="stringliteral">            &lt;input type=\"submit\" value=\"ulož data\" name=\"tlacitko\"&gt;</span>
+<a name="l00705"></a>00705 <span class="stringliteral">            &lt;/fieldset&gt;</span>
+<a name="l00706"></a>00706 <span class="stringliteral">            &lt;/form&gt;</span>
+<a name="l00707"></a>00707 <span class="stringliteral">            &lt;br /&gt;&lt;br /&gt;</span>
+<a name="l00708"></a>00708 <span class="stringliteral">            &lt;a href=\"?{$this-&gt;sub_buy}=krok\"&gt;k soupisu objednávky&lt;/a&gt; &gt;&gt;&gt;</span>
+<a name="l00709"></a>00709 <span class="stringliteral">            &lt;br /&gt;&lt;br /&gt;</span>
+<a name="l00710"></a>00710 <span class="stringliteral">          "</span>;
+<a name="l00711"></a>00711         }
+<a name="l00712"></a>00712       }
+<a name="l00713"></a>00713         <span class="keywordflow">else</span>
+<a name="l00714"></a>00714       {
+<a name="l00715"></a>00715         $this-&gt;var-&gt;main[0]-&gt;ErrorMsg($error);
+<a name="l00716"></a>00716       }
+<a name="l00717"></a>00717 
+<a name="l00718"></a>00718       <span class="keywordflow">if</span> (!Empty($_POST[<span class="stringliteral">"tlacitko"</span>]))
+<a name="l00719"></a>00719       {
+<a name="l00720"></a>00720         $key = array_keys($pocet);  <span class="comment">//ziskani hodnot ID</span>
+<a name="l00721"></a>00721         <span class="keywordflow">for</span> ($i = 0; $i &lt; count($pocet); $i++)
+<a name="l00722"></a>00722         {
+<a name="l00723"></a>00723           $newpocet = explode(<span class="stringliteral">"_"</span>, $_POST[<span class="stringliteral">"poc_{$key[$i]}"</span>]);
+<a name="l00724"></a>00724           $this-&gt;<a class="code" href="classDynamicObsahEshop.html#299616a3173ccde9cfeb7ea9a86b8da6">ZmenMnozstviPolozky</a>($key[$i], $newpocet[0]);
+<a name="l00725"></a>00725         }
+<a name="l00726"></a>00726 
+<a name="l00727"></a>00727         $doprava = $_POST[<span class="stringliteral">"doprava"</span>];
+<a name="l00728"></a>00728         <span class="keywordflow">if</span> (!@$this-&gt;sqlite-&gt;queryExec(<span class="stringliteral">"UPDATE zakaznik SET doprava={$doprava} WHERE id={$uzivatel};"</span>, $error))
+<a name="l00729"></a>00729         {
+<a name="l00730"></a>00730           $this-&gt;var-&gt;main[0]-&gt;ErrorMsg($error);
+<a name="l00731"></a>00731         }
+<a name="l00732"></a>00732 
+<a name="l00733"></a>00733         $result =
+<a name="l00734"></a>00734         <span class="stringliteral">"uloženo.."</span>;
+<a name="l00735"></a>00735 
+<a name="l00736"></a>00736         $this-&gt;var-&gt;main[0]-&gt;AutoClick(1, <span class="stringliteral">"?{$this-&gt;sub_buy}=show"</span>);  <span class="comment">//auto kliknuti</span>
+<a name="l00737"></a>00737       }
+<a name="l00738"></a>00738 
+<a name="l00739"></a>00739     }
+<a name="l00740"></a>00740       <span class="keywordflow">else</span>
+<a name="l00741"></a>00741     {
+<a name="l00742"></a>00742       $result = <span class="stringliteral">"není k dispozici vypis košíku"</span>;
+<a name="l00743"></a>00743     }
+<a name="l00744"></a>00744 
+<a name="l00745"></a>00745     <span class="keywordflow">return</span> $result;
+<a name="l00746"></a>00746   }
+<a name="l00747"></a>00747 
+<a name="l00754"></a><a class="code" href="classDynamicObsahEshop.html#b5d33b990a8c8d8f68c32b0899a2458d">00754</a>   <span class="keyword">public</span> function <a class="code" href="classDynamicObsahEshop.html#b5d33b990a8c8d8f68c32b0899a2458d">VyhledatPolozku</a>()
+<a name="l00755"></a>00755   {
+<a name="l00756"></a>00756     $hlaska = <span class="stringliteral">"Zadejte výraz pro vyhledání"</span>;
+<a name="l00757"></a>00757     $result =
+<a name="l00758"></a>00758     <span class="stringliteral">"</span>
+<a name="l00759"></a>00759 <span class="stringliteral">    &lt;form method=\"get\"&gt;</span>
+<a name="l00760"></a>00760 <span class="stringliteral">      &lt;fieldset&gt;</span>
+<a name="l00761"></a>00761 <span class="stringliteral">        &lt;input type=\"text\" name=\"nazev\" value=\"{$hlaska}\" onfocus=\"if(this.value == '{$hlaska}'){this.value='';}\" onblur=\"if(this.value == ''){this.value='{$hlaska}';}\" /&gt;&lt;br /&gt;</span>
+<a name="l00762"></a>00762 <span class="stringliteral">        &lt;input type=\"submit\" name=\"tlacitko\" value=\"Hledej\" /&gt;</span>
+<a name="l00763"></a>00763 <span class="stringliteral">      &lt;/fieldset&gt;</span>
+<a name="l00764"></a>00764 <span class="stringliteral">    &lt;/form&gt;</span>
+<a name="l00765"></a>00765 <span class="stringliteral">    "</span>;
+<a name="l00766"></a>00766 
+<a name="l00767"></a>00767     <span class="keywordflow">return</span> $result;
+<a name="l00768"></a>00768   }
+<a name="l00769"></a>00769 
+<a name="l00781"></a><a class="code" href="classDynamicObsahEshop.html#70c60c5593f92d4db9affc4960a1e5d0">00781</a>   <span class="keyword">private</span> function <a class="code" href="classDynamicObsahEshop.html#70c60c5593f92d4db9affc4960a1e5d0">OdeslatObjednavku</a>($jmeno, $ulice, $mesto, $psc, $email)
+<a name="l00782"></a>00782   {
+<a name="l00783"></a>00783     <span class="keywordflow">if</span> ($this-&gt;<a class="code" href="classDynamicObsahEshop.html#088450175cbf872952a51eb301a9155e">ExistujeUzivatel</a>(session_id()))
+<a name="l00784"></a>00784     {
+<a name="l00785"></a>00785       $id = $this-&gt;<a class="code" href="classDynamicObsahEshop.html#f307462fc21191ae9867c4b1f74a2545">IdUzivatele</a>();
+<a name="l00786"></a>00786 
+<a name="l00787"></a>00787       $result = <span class="stringliteral">""</span>;
+<a name="l00788"></a>00788       <span class="keywordflow">if</span> ($res = @$this-&gt;sqlite-&gt;query(<span class="stringliteral">"SELECT</span>
+<a name="l00789"></a>00789 <span class="stringliteral">                                        kosik.id as id,</span>
+<a name="l00790"></a>00790 <span class="stringliteral">                                        obsah_eshop.nazev as zbozi,</span>
+<a name="l00791"></a>00791 <span class="stringliteral">                                        obsah_eshop.cena as cena,</span>
+<a name="l00792"></a>00792 <span class="stringliteral">                                        obsah_eshop.dph as dph,</span>
+<a name="l00793"></a>00793 <span class="stringliteral">                                        kosik.pocet as pocet</span>
+<a name="l00794"></a>00794 <span class="stringliteral">                                        FROM kosik, obsah_eshop</span>
+<a name="l00795"></a>00795 <span class="stringliteral">                                        WHERE kosik.zakaznik={$id} AND</span>
+<a name="l00796"></a>00796 <span class="stringliteral">                                        obsah_eshop.id=kosik.zbozi;"</span>, NULL, $error))
+<a name="l00797"></a>00797       {
+<a name="l00798"></a>00798         <span class="keywordflow">if</span> ($res-&gt;numRows() != 0)
+<a name="l00799"></a>00799         {
+<a name="l00800"></a>00800           $sumsoucet = 0;
+<a name="l00801"></a>00801           <span class="keywordflow">while</span> ($data = $res-&gt;fetchObject())
+<a name="l00802"></a>00802           {
+<a name="l00803"></a>00803             $soucet = floor($data-&gt;cena * $data-&gt;pocet);
+<a name="l00804"></a>00804             $cenarow = (($soucet / 100) * $data-&gt;dph) + $soucet;
+<a name="l00805"></a>00805             $sumsoucet += ($data-&gt;cena * $data-&gt;pocet);
+<a name="l00806"></a>00806 
+<a name="l00807"></a>00807             $result .=
+<a name="l00808"></a>00808             <span class="stringliteral">"</span>
+<a name="l00809"></a>00809 <span class="stringliteral">              nazev: {$data-&gt;zbozi}&lt;br /&gt;</span>
+<a name="l00810"></a>00810 <span class="stringliteral">              cena bez dph: {$data-&gt;cena} {$this-&gt;defmen}&lt;br /&gt;</span>
+<a name="l00811"></a>00811 <span class="stringliteral">              dph: {$data-&gt;dph} %&lt;br /&gt;</span>
+<a name="l00812"></a>00812 <span class="stringliteral">              počet: {$data-&gt;pocet} x&lt;br /&gt;</span>
+<a name="l00813"></a>00813 <span class="stringliteral">              součet jednoho typu: {$soucet} {$this-&gt;defmen}&lt;br /&gt;</span>
+<a name="l00814"></a>00814 <span class="stringliteral">              cena řádku s dph: {$cenarow} {$this-&gt;defmen}&lt;br /&gt;&lt;br /&gt;</span>
+<a name="l00815"></a>00815 <span class="stringliteral">            "</span>;
+<a name="l00816"></a>00816           }
+<a name="l00817"></a>00817 
+<a name="l00818"></a>00818           $doprava = $this-&gt;<a class="code" href="classDynamicObsahEshop.html#e209dc3baf8e856ef3f0d0b0c6ef7335">IdDopravy</a>($id);
+<a name="l00819"></a>00819 
+<a name="l00820"></a>00820           $cenadoprava = $this-&gt;dodani[$doprava][<span class="stringliteral">"cena"</span>];
+<a name="l00821"></a>00821           $celkem = floor(((($sumsoucet + $cenadoprava) / 100) * $this-&gt;defdph) + ($sumsoucet + $cenadoprava));
+<a name="l00822"></a>00822 
+<a name="l00823"></a>00823           $result .=
+<a name="l00824"></a>00824           <span class="stringliteral">"</span>
+<a name="l00825"></a>00825 <span class="stringliteral">            celkový součet bez dph: {$sumsoucet} {$this-&gt;defmen}&lt;br /&gt;</span>
+<a name="l00826"></a>00826 <span class="stringliteral">            doprava: {$this-&gt;dodani[$doprava]["</span>zpusob<span class="stringliteral">"]} {$cenadoprava} {$this-&gt;defmen}&lt;br /&gt;</span>
+<a name="l00827"></a>00827 <span class="stringliteral">            celková cena se vším všudy (s dph {$this-&gt;defdph} %): {$celkem} {$this-&gt;defmen}&lt;br /&gt;&lt;br /&gt;</span>
+<a name="l00828"></a>00828 <span class="stringliteral"></span>
+<a name="l00829"></a>00829 <span class="stringliteral">            odeslat na adresu:&lt;br /&gt;</span>
+<a name="l00830"></a>00830 <span class="stringliteral"></span>
+<a name="l00831"></a>00831 <span class="stringliteral">            jméno: &lt;strong&gt;{$jmeno}&lt;/strong&gt;&lt;br /&gt;</span>
+<a name="l00832"></a>00832 <span class="stringliteral">            ulice: &lt;strong&gt;{$ulice}&lt;/strong&gt;&lt;br /&gt;</span>
+<a name="l00833"></a>00833 <span class="stringliteral">            město: &lt;strong&gt;{$mesto}&lt;/strong&gt;&lt;br /&gt;</span>
+<a name="l00834"></a>00834 <span class="stringliteral">            psč: &lt;strong&gt;{$psc}&lt;/strong&gt;&lt;br /&gt;</span>
+<a name="l00835"></a>00835 <span class="stringliteral">            &lt;br /&gt;</span>
+<a name="l00836"></a>00836 <span class="stringliteral">            email uživatele: {$email}</span>
+<a name="l00837"></a>00837 <span class="stringliteral">          "</span>;
+<a name="l00838"></a>00838         }
+<a name="l00839"></a>00839       }
+<a name="l00840"></a>00840         <span class="keywordflow">else</span>
+<a name="l00841"></a>00841       {
+<a name="l00842"></a>00842         $this-&gt;var-&gt;main[0]-&gt;ErrorMsg($error);
+<a name="l00843"></a>00843       }
+<a name="l00844"></a>00844 
+<a name="l00845"></a>00845       $header = <span class="stringliteral">"{$this-&gt;hlavicka_emaliu}\nFrom: {$email}\n"</span>;  <span class="comment">//hlavicka</span>
+<a name="l00846"></a>00846       <a class="code" href="classDynamicObsahEshop.html#08563a4ff0ad8354dac9baffda2ab0ac">$predmet</a> = $this-&gt;predmet;
+<a name="l00847"></a>00847 
+<a name="l00848"></a>00848       $info = <span class="stringliteral">""</span>;
+<a name="l00849"></a>00849       <span class="keywordflow">if</span> (mail($this-&gt;prijemce_objednavky, <a class="code" href="classDynamicObsahEshop.html#08563a4ff0ad8354dac9baffda2ab0ac">$predmet</a>, $result, $header))
+<a name="l00850"></a>00850       {
+<a name="l00851"></a>00851         <span class="keywordflow">if</span> (mail($email, <a class="code" href="classDynamicObsahEshop.html#08563a4ff0ad8354dac9baffda2ab0ac">$predmet</a>, $result, $header))
+<a name="l00852"></a>00852         {
+<a name="l00853"></a>00853           $info = $this-&gt;odeslano;  <span class="comment">//kdyz se emal uspesne odesle</span>
+<a name="l00854"></a>00854 
+<a name="l00855"></a>00855           <span class="comment">//vyprazdneni kosku</span>
+<a name="l00856"></a>00856           <span class="keywordflow">if</span> (!@$this-&gt;sqlite-&gt;queryExec(<span class="stringliteral">"DELETE FROM kosik WHERE zakaznik={$id};"</span>, $error))
+<a name="l00857"></a>00857           {
+<a name="l00858"></a>00858             $this-&gt;var-&gt;main[0]-&gt;ErrorMsg($error);
+<a name="l00859"></a>00859           }
+<a name="l00860"></a>00860         }
+<a name="l00861"></a>00861       }
+<a name="l00862"></a>00862         <span class="keywordflow">else</span>
+<a name="l00863"></a>00863       {
+<a name="l00864"></a>00864         $this-&gt;var-&gt;main[0]-&gt;ErrorMsg(<span class="stringliteral">"E-mail nebyl odeslán."</span>);
+<a name="l00865"></a>00865       }
+<a name="l00866"></a>00866     }
+<a name="l00867"></a>00867 
+<a name="l00868"></a>00868     <span class="keywordflow">return</span> $info;
+<a name="l00869"></a>00869   }
+<a name="l00870"></a>00870 
+<a name="l00877"></a><a class="code" href="classDynamicObsahEshop.html#155cd1bbb4b1421f675d5124f787419b">00877</a>   <span class="keyword">private</span> function <a class="code" href="classDynamicObsahEshop.html#155cd1bbb4b1421f675d5124f787419b">SoupisObjedvavky</a>()
+<a name="l00878"></a>00878   {
+<a name="l00879"></a>00879     <span class="keywordflow">if</span> ($this-&gt;<a class="code" href="classDynamicObsahEshop.html#088450175cbf872952a51eb301a9155e">ExistujeUzivatel</a>(session_id()))
+<a name="l00880"></a>00880     {
+<a name="l00881"></a>00881       $id = $this-&gt;<a class="code" href="classDynamicObsahEshop.html#f307462fc21191ae9867c4b1f74a2545">IdUzivatele</a>();
+<a name="l00882"></a>00882 
+<a name="l00883"></a>00883       $result = <span class="stringliteral">""</span>;
+<a name="l00884"></a>00884       <span class="keywordflow">if</span> ($res = @$this-&gt;sqlite-&gt;query(<span class="stringliteral">"SELECT</span>
+<a name="l00885"></a>00885 <span class="stringliteral">                                        kosik.id as id,</span>
+<a name="l00886"></a>00886 <span class="stringliteral">                                        obsah_eshop.nazev as zbozi,</span>
+<a name="l00887"></a>00887 <span class="stringliteral">                                        obsah_eshop.cena as cena,</span>
+<a name="l00888"></a>00888 <span class="stringliteral">                                        obsah_eshop.dph as dph,</span>
+<a name="l00889"></a>00889 <span class="stringliteral">                                        kosik.pocet as pocet</span>
+<a name="l00890"></a>00890 <span class="stringliteral">                                        FROM kosik, obsah_eshop</span>
+<a name="l00891"></a>00891 <span class="stringliteral">                                        WHERE kosik.zakaznik={$id} AND</span>
+<a name="l00892"></a>00892 <span class="stringliteral">                                        obsah_eshop.id=kosik.zbozi;"</span>, NULL, $error))
+<a name="l00893"></a>00893       {
+<a name="l00894"></a>00894         <span class="keywordflow">if</span> ($res-&gt;numRows() != 0)
+<a name="l00895"></a>00895         {
+<a name="l00896"></a>00896           $sumsoucet = 0;
+<a name="l00897"></a>00897           <span class="keywordflow">while</span> ($data = $res-&gt;fetchObject())
+<a name="l00898"></a>00898           {
+<a name="l00899"></a>00899             $soucet = floor($data-&gt;cena * $data-&gt;pocet);
+<a name="l00900"></a>00900             $cenarow = (($soucet / 100) * $data-&gt;dph) + $soucet;
+<a name="l00901"></a>00901             $sumsoucet += ($data-&gt;cena * $data-&gt;pocet);
+<a name="l00902"></a>00902 
+<a name="l00903"></a>00903             $result .=  <span class="comment">//id: {$data-&gt;id}&lt;br /&gt;</span>
+<a name="l00904"></a>00904             <span class="stringliteral">"</span>
+<a name="l00905"></a>00905 <span class="stringliteral">              nazev: {$data-&gt;zbozi}&lt;br /&gt;</span>
+<a name="l00906"></a>00906 <span class="stringliteral">              cena bez dph: {$data-&gt;cena} {$this-&gt;defmen}&lt;br /&gt;</span>
+<a name="l00907"></a>00907 <span class="stringliteral">              dph: {$data-&gt;dph} %&lt;br /&gt;</span>
+<a name="l00908"></a>00908 <span class="stringliteral">              počet: {$data-&gt;pocet} x&lt;br /&gt;</span>
+<a name="l00909"></a>00909 <span class="stringliteral">              součet jednoho typu: {$soucet} {$this-&gt;defmen}&lt;br /&gt;</span>
+<a name="l00910"></a>00910 <span class="stringliteral">              cena řádku s dph: {$cenarow} {$this-&gt;defmen}&lt;br /&gt;&lt;br /&gt;</span>
+<a name="l00911"></a>00911 <span class="stringliteral">            "</span>;
+<a name="l00912"></a>00912           }
+<a name="l00913"></a>00913 
+<a name="l00914"></a>00914           $doprava = $this-&gt;<a class="code" href="classDynamicObsahEshop.html#e209dc3baf8e856ef3f0d0b0c6ef7335">IdDopravy</a>($id);
+<a name="l00915"></a>00915 
+<a name="l00916"></a>00916           $cenadoprava = $this-&gt;dodani[$doprava][<span class="stringliteral">"cena"</span>];
+<a name="l00917"></a>00917           $celkem = floor(((($sumsoucet + $cenadoprava) / 100) * $this-&gt;defdph) + ($sumsoucet + $cenadoprava));
+<a name="l00918"></a>00918 
+<a name="l00919"></a>00919           $result .=
+<a name="l00920"></a>00920           <span class="stringliteral">"</span>
+<a name="l00921"></a>00921 <span class="stringliteral">            celkový součet bez dph: {$sumsoucet} {$this-&gt;defmen}&lt;br /&gt;</span>
+<a name="l00922"></a>00922 <span class="stringliteral">            doprava: {$this-&gt;dodani[$doprava]["</span>zpusob<span class="stringliteral">"]} {$cenadoprava} {$this-&gt;defmen}&lt;br /&gt;</span>
+<a name="l00923"></a>00923 <span class="stringliteral">            celková cena se vším všudy (s dph {$this-&gt;defdph} %): {$celkem} {$this-&gt;defmen}&lt;br /&gt;&lt;br /&gt;</span>
+<a name="l00924"></a>00924 <span class="stringliteral">          "</span>;
+<a name="l00925"></a>00925         }
+<a name="l00926"></a>00926           <span class="keywordflow">else</span>
+<a name="l00927"></a>00927         {
+<a name="l00928"></a>00928           $result .= <span class="stringliteral">"&lt;strong&gt;uživatel nemá nic vybrané&lt;/strong&gt;"</span>;
+<a name="l00929"></a>00929         }
+<a name="l00930"></a>00930       }
+<a name="l00931"></a>00931         <span class="keywordflow">else</span>
+<a name="l00932"></a>00932       {
+<a name="l00933"></a>00933         $this-&gt;var-&gt;main[0]-&gt;ErrorMsg($error);
+<a name="l00934"></a>00934       }
+<a name="l00935"></a>00935     }
+<a name="l00936"></a>00936 
+<a name="l00937"></a>00937     <span class="keywordflow">return</span> $result;
+<a name="l00938"></a>00938   }
+<a name="l00939"></a>00939 
+<a name="l00946"></a><a class="code" href="classDynamicObsahEshop.html#d4291c41e6b890a772a327f897b084a4">00946</a>   <span class="keyword">private</span> function <a class="code" href="classDynamicObsahEshop.html#d4291c41e6b890a772a327f897b084a4">PridejPolozku</a>()
+<a name="l00947"></a>00947   {
+<a name="l00948"></a>00948     $id = $_GET[<span class="stringliteral">"{$this-&gt;sub_polozka}"</span>];
+<a name="l00949"></a>00949     settype($id, <span class="stringliteral">"integer"</span>);
+<a name="l00950"></a>00950 
+<a name="l00951"></a>00951     <span class="keywordflow">if</span> ($res = @$this-&gt;sqlite-&gt;query(<span class="stringliteral">"SELECT id, adresa, nazev, vyrobce, popis, publikace,</span>
+<a name="l00952"></a>00952 <span class="stringliteral">                                      kod, hmotnost, dph, cena, skladem, obrazek</span>
+<a name="l00953"></a>00953 <span class="stringliteral">                                      FROM obsah_eshop WHERE id='{$id}';"</span>, NULL, $error))
+<a name="l00954"></a>00954     {
+<a name="l00955"></a>00955       <span class="keywordflow">if</span> ($res-&gt;numRows() == 1)
+<a name="l00956"></a>00956       {
+<a name="l00957"></a>00957         $data = $res-&gt;fetchObject();  <span class="comment">//pripadne prepisovac specialni syntaxe a v editoru ajax zobrazovani</span>
+<a name="l00958"></a>00958 
+<a name="l00959"></a>00959         $result = <span class="stringliteral">"přídáno do košíku: {$data-&gt;nazev}"</span>;
+<a name="l00960"></a>00960 
+<a name="l00961"></a>00961         $this-&gt;<a class="code" href="classDynamicObsahEshop.html#a3d7f7f751a28b44466b3fd0a82914bc">PridejPolozkuDoKosiku</a>($data-&gt;<span class="keywordtype">id</span>);
+<a name="l00962"></a>00962 
+<a name="l00963"></a>00963         $this-&gt;var-&gt;main[0]-&gt;AutoClick(5, <span class="stringliteral">"?{$this-&gt;var-&gt;get_kam}={$data-&gt;adresa}&amp;{$this-&gt;sub_polozka}={$data-&gt;id}"</span>);  <span class="comment">//auto kliknuti</span>
+<a name="l00964"></a>00964       }
+<a name="l00965"></a>00965     }
+<a name="l00966"></a>00966       <span class="keywordflow">else</span>
+<a name="l00967"></a>00967     {
+<a name="l00968"></a>00968       $this-&gt;var-&gt;main[0]-&gt;ErrorMsg($error);
+<a name="l00969"></a>00969     }
+<a name="l00970"></a>00970 
+<a name="l00971"></a>00971     <span class="keywordflow">return</span> $result;
+<a name="l00972"></a>00972   }
+<a name="l00973"></a>00973 
+<a name="l00979"></a><a class="code" href="classDynamicObsahEshop.html#f994c495e50fe4a5577794bc46525662">00979</a>   <span class="keyword">private</span> function <a class="code" href="classDynamicObsahEshop.html#f994c495e50fe4a5577794bc46525662">StartSession</a>() <span class="comment">//aktvuje session promenne</span>
+<a name="l00980"></a>00980   {
+<a name="l00981"></a>00981     session_name(<span class="stringliteral">"SSID"</span>); <span class="comment">//nastaveni jmena session</span>
+<a name="l00982"></a>00982 
+<a name="l00983"></a>00983     session_start();
+<a name="l00984"></a>00984   }
+<a name="l00985"></a>00985 
+<a name="l00993"></a><a class="code" href="classDynamicObsahEshop.html#088450175cbf872952a51eb301a9155e">00993</a>   <span class="keyword">private</span> function <a class="code" href="classDynamicObsahEshop.html#088450175cbf872952a51eb301a9155e">ExistujeUzivatel</a>($ssid)
+<a name="l00994"></a>00994   {
+<a name="l00995"></a>00995     <span class="keywordflow">if</span> ($res = @$this-&gt;sqlite-&gt;query(<span class="stringliteral">"SELECT id FROM zakaznik WHERE session='{$ssid}';"</span>, NULL, $error))
+<a name="l00996"></a>00996     {
+<a name="l00997"></a>00997       $result = ($res-&gt;numRows() == 1 ? <span class="keyword">true</span> : <span class="keyword">false</span>);
+<a name="l00998"></a>00998     }
+<a name="l00999"></a>00999       <span class="keywordflow">else</span>
+<a name="l01000"></a>01000     {
+<a name="l01001"></a>01001       $this-&gt;var-&gt;main[0]-&gt;ErrorMsg($error);
+<a name="l01002"></a>01002     }
+<a name="l01003"></a>01003 
+<a name="l01004"></a>01004     <span class="keywordflow">return</span> $result;
+<a name="l01005"></a>01005   }
+<a name="l01006"></a>01006 
+<a name="l01012"></a><a class="code" href="classDynamicObsahEshop.html#132b27450da3a43981d141bc80040eb9">01012</a>   <span class="keyword">private</span> function <a class="code" href="classDynamicObsahEshop.html#132b27450da3a43981d141bc80040eb9">InicializujUzivatele</a>()
+<a name="l01013"></a>01013   {
+<a name="l01014"></a>01014     $ssid = session_id();
+<a name="l01015"></a>01015 
+<a name="l01016"></a>01016     <span class="keywordflow">if</span> (!$this-&gt;<a class="code" href="classDynamicObsahEshop.html#088450175cbf872952a51eb301a9155e">ExistujeUzivatel</a>($ssid))
+<a name="l01017"></a>01017     {
+<a name="l01018"></a>01018       <span class="keywordflow">if</span> (!@$this-&gt;sqlite-&gt;queryExec(<span class="stringliteral">"INSERT INTO zakaznik (id, session, expirace, doprava) VALUES</span>
+<a name="l01019"></a>01019 <span class="stringliteral">                                      (NULL, '{$ssid}', strftime('%Y-%m-%d %H:%M:%S', 'now'), 0);</span>
+<a name="l01020"></a>01020 <span class="stringliteral">                                      "</span>, $error))
+<a name="l01021"></a>01021       {
+<a name="l01022"></a>01022         $this-&gt;var-&gt;main[0]-&gt;ErrorMsg($error);
+<a name="l01023"></a>01023       }
+<a name="l01024"></a>01024     }
+<a name="l01025"></a>01025   }
+<a name="l01026"></a>01026 
+<a name="l01033"></a><a class="code" href="classDynamicObsahEshop.html#f307462fc21191ae9867c4b1f74a2545">01033</a>   <span class="keyword">private</span> function <a class="code" href="classDynamicObsahEshop.html#f307462fc21191ae9867c4b1f74a2545">IdUzivatele</a>()
+<a name="l01034"></a>01034   {
+<a name="l01035"></a>01035     $ssid = session_id();
+<a name="l01036"></a>01036     $result = 0;
+<a name="l01037"></a>01037 
+<a name="l01038"></a>01038     <span class="keywordflow">if</span> ($res = @$this-&gt;sqlite-&gt;query(<span class="stringliteral">"SELECT id</span>
+<a name="l01039"></a>01039 <span class="stringliteral">                                      FROM zakaznik</span>
+<a name="l01040"></a>01040 <span class="stringliteral">                                      WHERE session='{$ssid}';"</span>, NULL, $error))
+<a name="l01041"></a>01041     {
+<a name="l01042"></a>01042       <span class="keywordflow">if</span> ($res-&gt;numRows() == 1)
+<a name="l01043"></a>01043       {
+<a name="l01044"></a>01044         $result = $res-&gt;fetchObject()-&gt;id;
+<a name="l01045"></a>01045       }
+<a name="l01046"></a>01046     }
+<a name="l01047"></a>01047       <span class="keywordflow">else</span>
+<a name="l01048"></a>01048     {
+<a name="l01049"></a>01049       $this-&gt;var-&gt;main[0]-&gt;ErrorMsg($error);
+<a name="l01050"></a>01050     }
+<a name="l01051"></a>01051 
+<a name="l01052"></a>01052     <span class="keywordflow">return</span> $result;
+<a name="l01053"></a>01053   }
+<a name="l01054"></a>01054 
+<a name="l01062"></a><a class="code" href="classDynamicObsahEshop.html#772b7491bb69ea2633a9af1c1856967f">01062</a>   <span class="keyword">private</span> function <a class="code" href="classDynamicObsahEshop.html#772b7491bb69ea2633a9af1c1856967f">ExistujePolozka</a>($id)
+<a name="l01063"></a>01063   {
+<a name="l01064"></a>01064     settype($id, <span class="stringliteral">"integer"</span>);
+<a name="l01065"></a>01065     $user = $this-&gt;<a class="code" href="classDynamicObsahEshop.html#f307462fc21191ae9867c4b1f74a2545">IdUzivatele</a>();
+<a name="l01066"></a>01066 
+<a name="l01067"></a>01067     <span class="keywordflow">if</span> ($res = @$this-&gt;sqlite-&gt;query(<span class="stringliteral">"SELECT id FROM kosik WHERE zbozi={$id} AND zakaznik={$user};"</span>, NULL, $error))
+<a name="l01068"></a>01068     {
+<a name="l01069"></a>01069       $result = ($res-&gt;numRows() == 1 ? <span class="keyword">true</span> : <span class="keyword">false</span>);
+<a name="l01070"></a>01070     }
+<a name="l01071"></a>01071       <span class="keywordflow">else</span>
+<a name="l01072"></a>01072     {
+<a name="l01073"></a>01073       $this-&gt;var-&gt;main[0]-&gt;ErrorMsg($error);
+<a name="l01074"></a>01074     }
+<a name="l01075"></a>01075 
+<a name="l01076"></a>01076     <span class="keywordflow">return</span> $result;
+<a name="l01077"></a>01077   }
+<a name="l01078"></a>01078 
+<a name="l01085"></a><a class="code" href="classDynamicObsahEshop.html#fb60fcb6ff7619fb1eb58fe9b13c310c">01085</a>   <span class="keyword">private</span> function <a class="code" href="classDynamicObsahEshop.html#fb60fcb6ff7619fb1eb58fe9b13c310c">PridejMnozstviPolozky</a>($id)
+<a name="l01086"></a>01086   {
+<a name="l01087"></a>01087     <span class="keywordflow">if</span> ($this-&gt;<a class="code" href="classDynamicObsahEshop.html#088450175cbf872952a51eb301a9155e">ExistujeUzivatel</a>(session_id()))
+<a name="l01088"></a>01088     {
+<a name="l01089"></a>01089       settype($id, <span class="stringliteral">"integer"</span>);
+<a name="l01090"></a>01090       $user = $this-&gt;<a class="code" href="classDynamicObsahEshop.html#f307462fc21191ae9867c4b1f74a2545">IdUzivatele</a>();
+<a name="l01091"></a>01091 
+<a name="l01092"></a>01092       <span class="keywordflow">if</span> ($res = @$this-&gt;sqlite-&gt;query(<span class="stringliteral">"SELECT id, pocet FROM kosik WHERE zbozi={$id} AND zakaznik={$user};"</span>, NULL, $error))
+<a name="l01093"></a>01093       {
+<a name="l01094"></a>01094         <span class="keywordflow">if</span> ($res-&gt;numRows() == 1)
+<a name="l01095"></a>01095         {
+<a name="l01096"></a>01096           $data = $res-&gt;fetchObject();
+<a name="l01097"></a>01097           $idkosik = $data-&gt;id;
+<a name="l01098"></a>01098           $pocet = $data-&gt;pocet;
+<a name="l01099"></a>01099         }
+<a name="l01100"></a>01100       }
+<a name="l01101"></a>01101         <span class="keywordflow">else</span>
+<a name="l01102"></a>01102       {
+<a name="l01103"></a>01103         $this-&gt;var-&gt;main[0]-&gt;ErrorMsg($error);
+<a name="l01104"></a>01104       }
+<a name="l01105"></a>01105 
+<a name="l01106"></a>01106       $pocet += 1;  <span class="comment">//inkrementace</span>
+<a name="l01107"></a>01107 
+<a name="l01108"></a>01108       <span class="keywordflow">if</span> (!@$this-&gt;sqlite-&gt;queryExec(<span class="stringliteral">"UPDATE kosik SET pocet={$pocet} WHERE id={$idkosik};"</span>, $error))
+<a name="l01109"></a>01109       {
+<a name="l01110"></a>01110         $this-&gt;var-&gt;main[0]-&gt;ErrorMsg($error);
+<a name="l01111"></a>01111       }
+<a name="l01112"></a>01112     }
+<a name="l01113"></a>01113   }
+<a name="l01114"></a>01114 
+<a name="l01122"></a><a class="code" href="classDynamicObsahEshop.html#299616a3173ccde9cfeb7ea9a86b8da6">01122</a>   <span class="keyword">private</span> function <a class="code" href="classDynamicObsahEshop.html#299616a3173ccde9cfeb7ea9a86b8da6">ZmenMnozstviPolozky</a>($id, $pocet)
+<a name="l01123"></a>01123   {
+<a name="l01124"></a>01124     <span class="keywordflow">if</span> ($this-&gt;<a class="code" href="classDynamicObsahEshop.html#088450175cbf872952a51eb301a9155e">ExistujeUzivatel</a>(session_id()))
+<a name="l01125"></a>01125     {
+<a name="l01126"></a>01126       settype($id, <span class="stringliteral">"integer"</span>);
+<a name="l01127"></a>01127       settype($pocet, <span class="stringliteral">"integer"</span>);
+<a name="l01128"></a>01128 
+<a name="l01129"></a>01129       <span class="keywordflow">if</span> ($pocet == 0)
+<a name="l01130"></a>01130       {
+<a name="l01131"></a>01131         <span class="keywordflow">if</span> (!@$this-&gt;sqlite-&gt;queryExec(<span class="stringliteral">"DELETE FROM kosik WHERE id={$id};"</span>, $error))
+<a name="l01132"></a>01132         {
+<a name="l01133"></a>01133           $this-&gt;var-&gt;main[0]-&gt;ErrorMsg($error);
+<a name="l01134"></a>01134         }
+<a name="l01135"></a>01135       }
+<a name="l01136"></a>01136         <span class="keywordflow">else</span>
+<a name="l01137"></a>01137       {
+<a name="l01138"></a>01138         <span class="keywordflow">if</span> (!@$this-&gt;sqlite-&gt;queryExec(<span class="stringliteral">"UPDATE kosik SET pocet={$pocet} WHERE id={$id};"</span>, $error))
+<a name="l01139"></a>01139         {
+<a name="l01140"></a>01140           $this-&gt;var-&gt;main[0]-&gt;ErrorMsg($error);
+<a name="l01141"></a>01141         }
+<a name="l01142"></a>01142       }
+<a name="l01143"></a>01143 
+<a name="l01144"></a>01144     }
+<a name="l01145"></a>01145   }
+<a name="l01146"></a>01146 
+<a name="l01153"></a><a class="code" href="classDynamicObsahEshop.html#a3d7f7f751a28b44466b3fd0a82914bc">01153</a>   <span class="keyword">private</span> function <a class="code" href="classDynamicObsahEshop.html#a3d7f7f751a28b44466b3fd0a82914bc">PridejPolozkuDoKosiku</a>($id)
+<a name="l01154"></a>01154   {
+<a name="l01155"></a>01155     settype($id, <span class="stringliteral">"integer"</span>);
+<a name="l01156"></a>01156     $this-&gt;<a class="code" href="classDynamicObsahEshop.html#132b27450da3a43981d141bc80040eb9">InicializujUzivatele</a>();  <span class="comment">//inicializece</span>
+<a name="l01157"></a>01157 
+<a name="l01158"></a>01158     $uzivatel = $this-&gt;<a class="code" href="classDynamicObsahEshop.html#f307462fc21191ae9867c4b1f74a2545">IdUzivatele</a>();
+<a name="l01159"></a>01159 
+<a name="l01160"></a>01160     $ssid = session_id();
+<a name="l01161"></a>01161 
+<a name="l01162"></a>01162     <span class="keywordflow">if</span> (!$this-&gt;<a class="code" href="classDynamicObsahEshop.html#772b7491bb69ea2633a9af1c1856967f">ExistujePolozka</a>($id))
+<a name="l01163"></a>01163     {
+<a name="l01164"></a>01164       <span class="keywordflow">if</span> (!@$this-&gt;sqlite-&gt;queryExec(<span class="stringliteral">"INSERT INTO kosik (id, zakaznik, zbozi, pocet) VALUES</span>
+<a name="l01165"></a>01165 <span class="stringliteral">                                      (NULL, {$uzivatel}, {$id}, 1);</span>
+<a name="l01166"></a>01166 <span class="stringliteral">                                      "</span>, $error))
+<a name="l01167"></a>01167       {
+<a name="l01168"></a>01168         $this-&gt;var-&gt;main[0]-&gt;ErrorMsg($error);
+<a name="l01169"></a>01169       }
+<a name="l01170"></a>01170     }
+<a name="l01171"></a>01171       <span class="keywordflow">else</span>
+<a name="l01172"></a>01172     {
+<a name="l01173"></a>01173       $this-&gt;<a class="code" href="classDynamicObsahEshop.html#fb60fcb6ff7619fb1eb58fe9b13c310c">PridejMnozstviPolozky</a>($id);
+<a name="l01174"></a>01174     }
+<a name="l01175"></a>01175   }
+<a name="l01176"></a>01176 
+<a name="l01183"></a><a class="code" href="classDynamicObsahEshop.html#1afcc86e44bf989a78be22b56082eccd">01183</a>   <span class="keyword">private</span> function <a class="code" href="classDynamicObsahEshop.html#1afcc86e44bf989a78be22b56082eccd">PocetPolozekKosiku</a>($id)
+<a name="l01184"></a>01184   {
+<a name="l01185"></a>01185     settype($id, <span class="stringliteral">"integer"</span>);
+<a name="l01186"></a>01186 
+<a name="l01187"></a>01187     <span class="keywordflow">if</span> ($res = @$this-&gt;sqlite-&gt;query(<span class="stringliteral">"SELECT id</span>
+<a name="l01188"></a>01188 <span class="stringliteral">                                      FROM kosik</span>
+<a name="l01189"></a>01189 <span class="stringliteral">                                      WHERE zakaznik={$id};"</span>, NULL, $error))
+<a name="l01190"></a>01190     {
+<a name="l01191"></a>01191       $result = $res-&gt;numRows();
+<a name="l01192"></a>01192     }
+<a name="l01193"></a>01193       <span class="keywordflow">else</span>
+<a name="l01194"></a>01194     {
+<a name="l01195"></a>01195       $this-&gt;var-&gt;main[0]-&gt;ErrorMsg($error);
+<a name="l01196"></a>01196     }
+<a name="l01197"></a>01197 
+<a name="l01198"></a>01198     <span class="keywordflow">return</span> $result;
+<a name="l01199"></a>01199   }
+<a name="l01200"></a>01200 
+<a name="l01207"></a><a class="code" href="classDynamicObsahEshop.html#3dc2518d46fd2b128402cfc0cdb44ed5">01207</a>   <span class="keyword">private</span> function <a class="code" href="classDynamicObsahEshop.html#3dc2518d46fd2b128402cfc0cdb44ed5">VypisUzivatelu</a>()
+<a name="l01208"></a>01208   {
+<a name="l01209"></a>01209     $result =
+<a name="l01210"></a>01210     <span class="stringliteral">"</span>
+<a name="l01211"></a>01211 <span class="stringliteral">    &lt;a href=\"?{$this-&gt;var-&gt;get_kam}={$this-&gt;var-&gt;adresaadminu}&amp;amp;{$this-&gt;var-&gt;get_idmodul}={$this-&gt;idmodul}\" title=\"\"&gt;administrace dynamickeho eshop obsahu&lt;/a&gt;&lt;br /&gt;</span>
+<a name="l01212"></a>01212 <span class="stringliteral">    výpis uživatelů:&lt;br /&gt;&lt;br /&gt;</span>
+<a name="l01213"></a>01213 <span class="stringliteral">    "</span>;
+<a name="l01214"></a>01214 <span class="comment">/*</span>
+<a name="l01215"></a>01215 <span class="comment">                                      SELECT zakaznik.id as id,</span>
+<a name="l01216"></a>01216 <span class="comment">                                      zakaznik.session as session,</span>
+<a name="l01217"></a>01217 <span class="comment">                                      zakaznik.expirace as expirace,</span>
+<a name="l01218"></a>01218 <span class="comment">                                      count(kosik.id) as pocet,</span>
+<a name="l01219"></a>01219 <span class="comment">                                      sum(obsah_eshop.cena * kosik.pocet) as cena,</span>
+<a name="l01220"></a>01220 <span class="comment">                                      zakaznik.doprava as doprava</span>
+<a name="l01221"></a>01221 <span class="comment">                                      FROM zakaznik, kosik, obsah_eshop</span>
+<a name="l01222"></a>01222 <span class="comment">                                      WHERE</span>
+<a name="l01223"></a>01223 <span class="comment">                                      kosik.zakaznik=zakaznik.id AND</span>
+<a name="l01224"></a>01224 <span class="comment">                                      kosik.zbozi=obsah_eshop.id</span>
+<a name="l01225"></a>01225 <span class="comment">                                      GROUP BY zakaznik.session</span>
+<a name="l01226"></a>01226 <span class="comment">                                      ORDER BY zakaznik.id ASC;</span>
+<a name="l01227"></a>01227 <span class="comment">*/</span>
+<a name="l01228"></a>01228 
+<a name="l01229"></a>01229     <span class="keywordflow">if</span> ($res = @$this-&gt;sqlite-&gt;query(<span class="stringliteral">"SELECT id,</span>
+<a name="l01230"></a>01230 <span class="stringliteral">                                      session,</span>
+<a name="l01231"></a>01231 <span class="stringliteral">                                      expirace</span>
+<a name="l01232"></a>01232 <span class="stringliteral">                                      FROM zakaznik</span>
+<a name="l01233"></a>01233 <span class="stringliteral">                                      ORDER BY zakaznik.id ASC;"</span>, NULL, $error))
+<a name="l01234"></a>01234     {
+<a name="l01235"></a>01235       <span class="keywordflow">if</span> ($res-&gt;numRows() != 0)
+<a name="l01236"></a>01236       {
+<a name="l01237"></a>01237         <span class="keywordflow">while</span> ($data = $res-&gt;fetchObject()) <span class="comment">//pripadne prepisovac specialni syntaxe a v editoru ajax zobrazovani</span>
+<a name="l01238"></a>01238         {
+<a name="l01239"></a>01239           <span class="comment">//$expirace = date("d.m. Y", strtotime($data-&gt;expirace));</span>
+<a name="l01240"></a>01240           $dat = strtotime($data-&gt;expirace);
+<a name="l01241"></a>01241           $datum = date(<span class="stringliteral">"Y-m-d"</span>, mktime(date(<span class="stringliteral">"H"</span>, $dat), date(<span class="stringliteral">"i"</span>, $dat), date(<span class="stringliteral">"s"</span>, $dat), date(<span class="stringliteral">"n"</span>, $dat), date(<span class="stringliteral">"j"</span>, $dat) + $this-&gt;expuser, date(<span class="stringliteral">"Y"</span>, $dat)));  <span class="comment">//expirace</span>
+<a name="l01242"></a>01242           $expdate = date(<span class="stringliteral">"d.m. Y"</span>, strtotime($datum)); <span class="comment">//uprava data do pekneho formatu</span>
+<a name="l01243"></a>01243 
+<a name="l01244"></a>01244           $cenadoprava = $this-&gt;dodani[$data-&gt;doprava][<span class="stringliteral">"cena"</span>];
+<a name="l01245"></a>01245           $celkem = floor((($data-&gt;cena + $cenadoprava) / 100) * $this-&gt;defdph) + ($data-&gt;cena + $cenadoprava);
+<a name="l01246"></a>01246 
+<a name="l01247"></a>01247           $result .=
+<a name="l01248"></a>01248           <span class="stringliteral">"</span>
+<a name="l01249"></a>01249 <span class="stringliteral">            &lt;a href=\"?{$this-&gt;var-&gt;get_kam}={$this-&gt;var-&gt;adresaadminu}&amp;amp;{$this-&gt;var-&gt;get_idmodul}={$this-&gt;idmodul}&amp;amp;co=infouser&amp;amp;id={$data-&gt;id}\"&gt;{$data-&gt;session}&lt;/a&gt;&lt;br /&gt;</span>
+<a name="l01250"></a>01250 <span class="stringliteral">            &lt;a href=\"?{$this-&gt;var-&gt;get_kam}={$this-&gt;var-&gt;adresaadminu}&amp;amp;{$this-&gt;var-&gt;get_idmodul}={$this-&gt;idmodul}&amp;amp;co=clearbuy&amp;amp;id={$data-&gt;id}\"</span>
+<a name="l01251"></a>01251 <span class="stringliteral">              onclick=\"return confirm('Opravdu vyprázdnit košík: \'{$data-&gt;session}\' ?');\"&gt;vyprazdni mu košík&lt;/a&gt;</span>
+<a name="l01252"></a>01252 <span class="stringliteral">              vyprší dne: {$expdate}</span>
+<a name="l01253"></a>01253 <span class="stringliteral">            &lt;br /&gt;&lt;br /&gt;</span>
+<a name="l01254"></a>01254 <span class="stringliteral">          "</span>;
+<a name="l01255"></a>01255 
+<a name="l01256"></a>01256           <span class="keywordflow">if</span> (date(<span class="stringliteral">"Y-m-d"</span>) &gt; $datum) <span class="comment">//smaze po necnosti N dni</span>
+<a name="l01257"></a>01257           {
+<a name="l01258"></a>01258             <span class="keywordflow">if</span> (!@$this-&gt;sqlite-&gt;queryExec(<span class="stringliteral">"DELETE FROM zakaznik WHERE id={$data-&gt;id};</span>
+<a name="l01259"></a>01259 <span class="stringliteral">                                            DELETE FROM kosik WHERE zakaznik={$data-&gt;id};"</span>, $error))
+<a name="l01260"></a>01260             {
+<a name="l01261"></a>01261               $this-&gt;var-&gt;main[0]-&gt;ErrorMsg($error);
+<a name="l01262"></a>01262             }
+<a name="l01263"></a>01263           }
+<a name="l01264"></a>01264         }
+<a name="l01265"></a>01265       }
+<a name="l01266"></a>01266         <span class="keywordflow">else</span>
+<a name="l01267"></a>01267       {
+<a name="l01268"></a>01268         $result .= <span class="stringliteral">"&lt;strong&gt;žádní uživatelé&lt;/strong&gt;"</span>;
+<a name="l01269"></a>01269       }
+<a name="l01270"></a>01270     }
+<a name="l01271"></a>01271       <span class="keywordflow">else</span>
+<a name="l01272"></a>01272     {
+<a name="l01273"></a>01273       $this-&gt;var-&gt;main[0]-&gt;ErrorMsg($error);
+<a name="l01274"></a>01274     }
+<a name="l01275"></a>01275 
+<a name="l01276"></a>01276     <span class="keywordflow">return</span> $result;
+<a name="l01277"></a>01277   }
+<a name="l01278"></a>01278 
+<a name="l01286"></a><a class="code" href="classDynamicObsahEshop.html#e209dc3baf8e856ef3f0d0b0c6ef7335">01286</a>   <span class="keyword">private</span> function <a class="code" href="classDynamicObsahEshop.html#e209dc3baf8e856ef3f0d0b0c6ef7335">IdDopravy</a>($id)
+<a name="l01287"></a>01287   {
+<a name="l01288"></a>01288     settype($id, <span class="stringliteral">"integer"</span>);
+<a name="l01289"></a>01289     <span class="keywordflow">if</span> ($res = @$this-&gt;sqlite-&gt;query(<span class="stringliteral">"SELECT doprava</span>
+<a name="l01290"></a>01290 <span class="stringliteral">                                      FROM zakaznik</span>
+<a name="l01291"></a>01291 <span class="stringliteral">                                      WHERE id={$id};"</span>, NULL, $error))
+<a name="l01292"></a>01292     {
+<a name="l01293"></a>01293       <span class="keywordflow">if</span> ($res-&gt;numRows() == 1)
+<a name="l01294"></a>01294       {
+<a name="l01295"></a>01295         $result = $res-&gt;fetchObject()-&gt;doprava;
+<a name="l01296"></a>01296       }
+<a name="l01297"></a>01297     }
+<a name="l01298"></a>01298       <span class="keywordflow">else</span>
+<a name="l01299"></a>01299     {
+<a name="l01300"></a>01300       $this-&gt;var-&gt;main[0]-&gt;ErrorMsg($error);
+<a name="l01301"></a>01301     }
+<a name="l01302"></a>01302 
+<a name="l01303"></a>01303     <span class="keywordflow">return</span> $result;
+<a name="l01304"></a>01304   }
+<a name="l01305"></a>01305 
+<a name="l01312"></a><a class="code" href="classDynamicObsahEshop.html#f3dec5b74e937dd72a1d60c298e29029">01312</a>   <span class="keyword">private</span> function <a class="code" href="classDynamicObsahEshop.html#f3dec5b74e937dd72a1d60c298e29029">VypisDopravySelect</a>($id)
+<a name="l01313"></a>01313   {
+<a name="l01314"></a>01314     settype($id, <span class="stringliteral">"integer"</span>);
+<a name="l01315"></a>01315 
+<a name="l01316"></a>01316     $result =
+<a name="l01317"></a>01317     <span class="stringliteral">"&lt;select name=\"doprava\"&gt;"</span>;
+<a name="l01318"></a>01318     <span class="keywordflow">for</span> ($i = 0; $i &lt; count($this-&gt;dodani); $i++)
+<a name="l01319"></a>01319     {
+<a name="l01320"></a>01320       $result .=
+<a name="l01321"></a>01321       <span class="stringliteral">"</span>
+<a name="l01322"></a>01322 <span class="stringliteral">        &lt;option value=\"{$i}\""</span>.($id == $i ? <span class="stringliteral">" selected=\"selected\""</span> : <span class="stringliteral">""</span>).<span class="stringliteral">"&gt;{$this-&gt;dodani[$i]["</span>zpusob<span class="stringliteral">"]}&lt;/option&gt;</span>
+<a name="l01323"></a>01323 <span class="stringliteral">      "</span>;
+<a name="l01324"></a>01324     }
+<a name="l01325"></a>01325     $result .=
+<a name="l01326"></a>01326     <span class="stringliteral">"&lt;/select&gt;"</span>;
+<a name="l01327"></a>01327 
+<a name="l01328"></a>01328     <span class="keywordflow">return</span> $result;
+<a name="l01329"></a>01329   }
+<a name="l01330"></a>01330 
+<a name="l01338"></a><a class="code" href="classDynamicObsahEshop.html#5c88c2a69710f1e7476bb2329cf39a4b">01338</a>   <span class="keyword">public</span> function <a class="code" href="classDynamicObsahEshop.html#5c88c2a69710f1e7476bb2329cf39a4b">PridejSmazStranku</a>($cesta)
+<a name="l01339"></a>01339   {
+<a name="l01340"></a>01340     $result = <span class="stringliteral">"&lt;a href=\"?{$this-&gt;var-&gt;get_kam}={$this-&gt;var-&gt;adresaadminu}&amp;amp;{$this-&gt;var-&gt;get_idmodul}={$this-&gt;idmodul}&amp;amp;co=add&amp;amp;adresa={$cesta}\"&gt;Přidej obsah&lt;/a&gt;"</span>;
+<a name="l01341"></a>01341 
+<a name="l01342"></a>01342     <span class="keywordflow">return</span> $result;
+<a name="l01343"></a>01343   }
+<a name="l01344"></a>01344 
+<a name="l01350"></a><a class="code" href="classDynamicObsahEshop.html#f6e6c4ff349f03d5f23be9cdbc2ac1cf">01350</a>   <span class="keyword">private</span> function <a class="code" href="classDynamicObsahEshop.html#f6e6c4ff349f03d5f23be9cdbc2ac1cf">SynchronizaceSouboruDB</a>()
+<a name="l01351"></a>01351   {
+<a name="l01352"></a>01352     <span class="keywordflow">if</span> ($res = @$this-&gt;sqlite-&gt;query(<span class="stringliteral">"SELECT obrazek FROM obsah_eshop"</span>, NULL, $error))
+<a name="l01353"></a>01353     {
+<a name="l01354"></a>01354       <span class="keywordflow">if</span> ($res-&gt;numRows() != 0)
+<a name="l01355"></a>01355       {
+<a name="l01356"></a>01356         $i = 0;
+<a name="l01357"></a>01357         <span class="keywordflow">while</span> ($data = $res-&gt;fetchObject()) <span class="comment">//pripadne prepisovac specialni syntaxe a v editoru ajax zobrazovani</span>
+<a name="l01358"></a>01358         {
+<a name="l01359"></a>01359           $databaze[$i] = $data-&gt;obrazek;
+<a name="l01360"></a>01360           $i++; <span class="comment">//inkrementace</span>
+<a name="l01361"></a>01361         }
+<a name="l01362"></a>01362       }
+<a name="l01363"></a>01363     }
+<a name="l01364"></a>01364       <span class="keywordflow">else</span>
+<a name="l01365"></a>01365     {
+<a name="l01366"></a>01366       $this-&gt;var-&gt;main[0]-&gt;ErrorMsg($error);
+<a name="l01367"></a>01367     }
+<a name="l01368"></a>01368 
+<a name="l01369"></a>01369     $j = 0;
+<a name="l01370"></a>01370     $cesta = <span class="stringliteral">"{$this-&gt;dirpath}/{$this-&gt;pathcest}/{$this-&gt;minidir}"</span>;  <span class="comment">//projiti miniatur</span>
+<a name="l01371"></a>01371     $handle = opendir($cesta);
+<a name="l01372"></a>01372     <span class="keywordflow">while</span>($soub = readdir($handle))
+<a name="l01373"></a>01373     {
+<a name="l01374"></a>01374       <span class="keywordflow">if</span> ($soub != <span class="stringliteral">"."</span> &amp;&amp; $soub != <span class="stringliteral">".."</span> &amp;&amp; filetype(<span class="stringliteral">"{$cesta}/{$soub}"</span>) == <span class="stringliteral">"file"</span>)
+<a name="l01375"></a>01375       {
+<a name="l01376"></a>01376         $mini[$j] = $soub;  <span class="comment">//nacitani souboru</span>
+<a name="l01377"></a>01377         $j++;
+<a name="l01378"></a>01378       }
+<a name="l01379"></a>01379     }
+<a name="l01380"></a>01380     closedir($handle);
+<a name="l01381"></a>01381 
+<a name="l01382"></a>01382     $j = 0;
+<a name="l01383"></a>01383     $cesta = <span class="stringliteral">"{$this-&gt;dirpath}/{$this-&gt;pathcest}/{$this-&gt;fulldir}"</span>;  <span class="comment">//projiti plnych velikosti</span>
+<a name="l01384"></a>01384     $handle = opendir($cesta);
+<a name="l01385"></a>01385     <span class="keywordflow">while</span>($soub = readdir($handle))
+<a name="l01386"></a>01386     {
+<a name="l01387"></a>01387       <span class="keywordflow">if</span> ($soub != <span class="stringliteral">"."</span> &amp;&amp; $soub != <span class="stringliteral">".."</span> &amp;&amp; filetype(<span class="stringliteral">"{$cesta}/{$soub}"</span>) == <span class="stringliteral">"file"</span>)
+<a name="l01388"></a>01388       {
+<a name="l01389"></a>01389         $full[$j] = $soub;  <span class="comment">//nacitani souboru</span>
+<a name="l01390"></a>01390         $j++;
+<a name="l01391"></a>01391       }
+<a name="l01392"></a>01392     }
+<a name="l01393"></a>01393     closedir($handle);
+<a name="l01394"></a>01394 
+<a name="l01395"></a>01395     $pocet1 = 0;
+<a name="l01396"></a>01396     <span class="keywordflow">if</span> (count($databaze) != 0 &amp;&amp;  <span class="comment">//mini</span>
+<a name="l01397"></a>01397         count($mini) != 0)
+<a name="l01398"></a>01398     {
+<a name="l01399"></a>01399       $diff = array_diff($mini, $databaze); <span class="comment">//vyhozeni rozdilu</span>
+<a name="l01400"></a>01400       $diff = array_values($diff);  <span class="comment">//oprava indexu</span>
+<a name="l01401"></a>01401       $pocet1 = count($diff);
+<a name="l01402"></a>01402 
+<a name="l01403"></a>01403       <span class="keywordflow">for</span> ($i = 0; $i &lt; $pocet1; $i++)
+<a name="l01404"></a>01404       {
+<a name="l01405"></a>01405         chmod(<span class="stringliteral">"{$this-&gt;dirpath}/{$this-&gt;pathcest}/{$this-&gt;minidir}/{$diff[$i]}"</span>, 0777);
+<a name="l01406"></a>01406         unlink(<span class="stringliteral">"{$this-&gt;dirpath}/{$this-&gt;pathcest}/{$this-&gt;minidir}/{$diff[$i]}"</span>);
+<a name="l01407"></a>01407       }
+<a name="l01408"></a>01408     }
+<a name="l01409"></a>01409 
+<a name="l01410"></a>01410     $pocet2 = 0;
+<a name="l01411"></a>01411     <span class="keywordflow">if</span> (count($databaze) != 0 &amp;&amp;  <span class="comment">//full</span>
+<a name="l01412"></a>01412         count($full) != 0)
+<a name="l01413"></a>01413     {
+<a name="l01414"></a>01414       $diff = array_diff($full, $databaze); <span class="comment">//vyhozeni rozdilu</span>
+<a name="l01415"></a>01415       $diff = array_values($diff);  <span class="comment">//oprava indexu</span>
+<a name="l01416"></a>01416       $pocet2 = count($diff);
+<a name="l01417"></a>01417 
+<a name="l01418"></a>01418       <span class="keywordflow">for</span> ($i = 0; $i &lt; $pocet2; $i++)
+<a name="l01419"></a>01419       {
+<a name="l01420"></a>01420         chmod(<span class="stringliteral">"{$this-&gt;dirpath}/{$this-&gt;pathcest}/{$this-&gt;fulldir}/{$diff[$i]}"</span>, 0777);
+<a name="l01421"></a>01421         unlink(<span class="stringliteral">"{$this-&gt;dirpath}/{$this-&gt;pathcest}/{$this-&gt;fulldir}/{$diff[$i]}"</span>);
+<a name="l01422"></a>01422       }
+<a name="l01423"></a>01423     }
+<a name="l01424"></a>01424 
+<a name="l01425"></a>01425     $result = $pocet1 + $pocet2;
+<a name="l01426"></a>01426 
+<a name="l01427"></a>01427     <span class="keywordflow">return</span> $result;
+<a name="l01428"></a>01428   }
+<a name="l01429"></a>01429 
+<a name="l01436"></a><a class="code" href="classDynamicObsahEshop.html#595931762a25faf2d2f0a8123ceac9d5">01436</a>   <span class="keyword">public</span> function <a class="code" href="classDynamicObsahEshop.html#595931762a25faf2d2f0a8123ceac9d5">SmazStranku</a>($cesta)
+<a name="l01437"></a>01437   {
+<a name="l01438"></a>01438     $cesta = $this-&gt;<a class="code" href="classDynamicObsahEshop.html#612b51b465c537ca2ab1bced7c9dd985">ValiditaAdresy</a>($cesta);
+<a name="l01439"></a>01439 
+<a name="l01440"></a>01440     <span class="keywordflow">if</span> ($res = @$this-&gt;sqlite-&gt;query(<span class="stringliteral">"SELECT obrazek</span>
+<a name="l01441"></a>01441 <span class="stringliteral">                                      FROM obsah_eshop WHERE adresa='{$cesta}';"</span>, NULL, $error))
+<a name="l01442"></a>01442     {
+<a name="l01443"></a>01443       <span class="keywordflow">if</span> ($res-&gt;numRows() != 0)
+<a name="l01444"></a>01444       {
+<a name="l01445"></a>01445         <span class="keywordflow">while</span> ($data = $res-&gt;fetchObject()) <span class="comment">//pripadne prepisovac specialni syntaxe a v editoru ajax zobrazovani</span>
+<a name="l01446"></a>01446         {
+<a name="l01447"></a>01447           <span class="keywordflow">if</span> (file_exists(<span class="stringliteral">"{$this-&gt;dirpath}/{$this-&gt;pathcest}/{$this-&gt;minidir}/{$data-&gt;obrazek}"</span>))
+<a name="l01448"></a>01448           {
+<a name="l01449"></a>01449             chmod(<span class="stringliteral">"{$this-&gt;dirpath}/{$this-&gt;pathcest}/{$this-&gt;minidir}/{$data-&gt;obrazek}"</span>, 0777);
+<a name="l01450"></a>01450             @unlink(<span class="stringliteral">"{$this-&gt;dirpath}/{$this-&gt;pathcest}/{$this-&gt;minidir}/{$data-&gt;obrazek}"</span>);
+<a name="l01451"></a>01451           }
+<a name="l01452"></a>01452 
+<a name="l01453"></a>01453           <span class="keywordflow">if</span> (file_exists(<span class="stringliteral">"{$this-&gt;dirpath}/{$this-&gt;pathcest}/{$this-&gt;fulldir}/{$data-&gt;obrazek}"</span>))
+<a name="l01454"></a>01454           {
+<a name="l01455"></a>01455             chmod(<span class="stringliteral">"{$this-&gt;dirpath}/{$this-&gt;pathcest}/{$this-&gt;fulldir}/{$data-&gt;obrazek}"</span>, 0777);
+<a name="l01456"></a>01456             @unlink(<span class="stringliteral">"{$this-&gt;dirpath}/{$this-&gt;pathcest}/{$this-&gt;fulldir}/{$data-&gt;obrazek}"</span>);
+<a name="l01457"></a>01457           }
+<a name="l01458"></a>01458         }
+<a name="l01459"></a>01459 
+<a name="l01460"></a>01460         <span class="keywordflow">if</span> (!@$this-&gt;sqlite-&gt;queryExec(<span class="stringliteral">"DELETE FROM obsah_eshop WHERE adresa='{$cesta}';"</span>, $error)) <span class="comment">//provedeni dotazu</span>
+<a name="l01461"></a>01461         {
+<a name="l01462"></a>01462           $this-&gt;var-&gt;main[0]-&gt;ErrorMsg($error);
+<a name="l01463"></a>01463         }
+<a name="l01464"></a>01464       }
+<a name="l01465"></a>01465     }
+<a name="l01466"></a>01466       <span class="keywordflow">else</span>
+<a name="l01467"></a>01467     {
+<a name="l01468"></a>01468       $this-&gt;var-&gt;main[0]-&gt;ErrorMsg($error);
+<a name="l01469"></a>01469     }
+<a name="l01470"></a>01470   }
+<a name="l01471"></a>01471 
+<a name="l01479"></a><a class="code" href="classDynamicObsahEshop.html#72549221855c561b3de66ed4a5ab8167">01479</a>   <span class="keyword">private</span> function <a class="code" href="classDynamicObsahEshop.html#72549221855c561b3de66ed4a5ab8167">ExistujeOdkaz</a>($cesta)
+<a name="l01480"></a>01480   {
+<a name="l01481"></a>01481     $adresa = $this-&gt;<a class="code" href="classDynamicObsahEshop.html#612b51b465c537ca2ab1bced7c9dd985">ValiditaAdresy</a>($cesta);
+<a name="l01482"></a>01482 
+<a name="l01483"></a>01483     <span class="keywordflow">if</span> ($res = @$this-&gt;sqlite-&gt;query(<span class="stringliteral">"SELECT id FROM obsah_eshop WHERE adresa='{$adresa}';"</span>, NULL, $error))
+<a name="l01484"></a>01484     {
+<a name="l01485"></a>01485       $result = ($res-&gt;numRows() == 1 ? <span class="keyword">true</span> : <span class="keyword">false</span>);
+<a name="l01486"></a>01486     }
+<a name="l01487"></a>01487       <span class="keywordflow">else</span>
+<a name="l01488"></a>01488     {
+<a name="l01489"></a>01489       $this-&gt;var-&gt;main[0]-&gt;ErrorMsg($error);
+<a name="l01490"></a>01490     }
+<a name="l01491"></a>01491 
+<a name="l01492"></a>01492     <span class="keywordflow">return</span> $result;
+<a name="l01493"></a>01493   }
+<a name="l01494"></a>01494 
+<a name="l01502"></a><a class="code" href="classDynamicObsahEshop.html#9bd8689a293372087bbaad40385f2a8f">01502</a>   <span class="keyword">private</span> function <a class="code" href="classDynamicObsahEshop.html#9bd8689a293372087bbaad40385f2a8f">VytvorJmenoObrazku</a>($adresa)
+<a name="l01503"></a>01503   {
+<a name="l01504"></a>01504     $nahoda = <span class="stringliteral">""</span>;
+<a name="l01505"></a>01505     <span class="keywordflow">for</span> ($i = 0; $i &lt; 5; $i++)
+<a name="l01506"></a>01506     {
+<a name="l01507"></a>01507       $nahoda .= rand(10, 5000);
+<a name="l01508"></a>01508     }
+<a name="l01509"></a>01509 
+<a name="l01510"></a>01510     $result = <span class="stringliteral">"{$adresa}_{$nahoda}"</span>;
+<a name="l01511"></a>01511 
+<a name="l01512"></a>01512     <span class="keywordflow">return</span> $result;
+<a name="l01513"></a>01513   }
+<a name="l01514"></a>01514 
+<a name="l01521"></a><a class="code" href="classDynamicObsahEshop.html#c2d4fbfc54830ed92534c5fbbbd4878a">01521</a>   <span class="keyword">private</span> function <a class="code" href="classDynamicObsahEshop.html#c2d4fbfc54830ed92534c5fbbbd4878a">ZpracujObrazek</a>($adresa, $tmp, &amp;$obrazek)
+<a name="l01522"></a>01522   {
+<a name="l01523"></a>01523     list($old_w, $old_h) = getimagesize($tmp[<span class="stringliteral">"tmp_name"</span>]);
+<a name="l01524"></a>01524 
+<a name="l01525"></a>01525     <span class="keywordflow">if</span> ($old_h &lt;= $this-&gt;max_h_nahled)  <span class="comment">//je-li mensi tak se zanecha</span>
+<a name="l01526"></a>01526     {
+<a name="l01527"></a>01527       $new_w = $old_w;
+<a name="l01528"></a>01528       $new_h = $old_h;
+<a name="l01529"></a>01529     }
+<a name="l01530"></a>01530       <span class="keywordflow">else</span>
+<a name="l01531"></a>01531     {
+<a name="l01532"></a>01532       $new_w = round($old_w / ($old_h / $this-&gt;max_h_nahled)); <span class="comment">//vypocet sirky</span>
+<a name="l01533"></a>01533       $new_h = $this-&gt;max_h_nahled;
+<a name="l01534"></a>01534     }
+<a name="l01535"></a>01535 
+<a name="l01536"></a>01536     <span class="keywordflow">if</span> ($old_h &lt;= $this-&gt;max_h_obrazek)  <span class="comment">//je-li mensi tak se zanecha</span>
+<a name="l01537"></a>01537     {
+<a name="l01538"></a>01538       $new_w_obr = $old_w;
+<a name="l01539"></a>01539       $new_h_obr = $old_h;
+<a name="l01540"></a>01540     }
+<a name="l01541"></a>01541       <span class="keywordflow">else</span>
+<a name="l01542"></a>01542     {
+<a name="l01543"></a>01543       $new_w_obr = round($old_w / ($old_h / $this-&gt;max_h_obrazek)); <span class="comment">//vypocet sirky</span>
+<a name="l01544"></a>01544       $new_h_obr = $this-&gt;max_h_obrazek;
+<a name="l01545"></a>01545     }
+<a name="l01546"></a>01546 
+<a name="l01547"></a>01547     <span class="keywordflow">if</span> ($tmp[<span class="stringliteral">"size"</span>] &lt; (1024 * 1024 * $this-&gt;max_size))
+<a name="l01548"></a>01548     {
+<a name="l01549"></a>01549       $nazev = $this-&gt;<a class="code" href="classDynamicObsahEshop.html#9bd8689a293372087bbaad40385f2a8f">VytvorJmenoObrazku</a>($adresa);
+<a name="l01550"></a>01550 
+<a name="l01551"></a>01551       <span class="keywordflow">switch</span> ($tmp[<span class="stringliteral">"type"</span>])
+<a name="l01552"></a>01552       {
+<a name="l01553"></a>01553         <span class="keywordflow">case</span> <span class="stringliteral">"image/jpeg"</span>:
+<a name="l01554"></a>01554           $img_old = imagecreatefromjpeg($tmp[<span class="stringliteral">"tmp_name"</span>]);
+<a name="l01555"></a>01555 
+<a name="l01556"></a>01556           $img_new = imagecreatetruecolor($new_w, $new_h);
+<a name="l01557"></a>01557           imagecopyresampled($img_new, $img_old, 0, 0, 0, 0, $new_w, $new_h, $old_w, $old_h);
+<a name="l01558"></a>01558           imagejpeg($img_new, <span class="stringliteral">"{$this-&gt;dirpath}/{$this-&gt;pathcest}/{$this-&gt;minidir}/{$nazev}.jpg"</span>, 100);
+<a name="l01559"></a>01559           imagedestroy($img_new);
+<a name="l01560"></a>01560 
+<a name="l01561"></a>01561           $img_new = imagecreatetruecolor($new_w_obr, $new_h_obr);
+<a name="l01562"></a>01562           imagecopyresampled($img_new, $img_old, 0, 0, 0, 0, $new_w_obr, $new_h_obr, $old_w, $old_h);
+<a name="l01563"></a>01563           imagejpeg($img_new, <span class="stringliteral">"{$this-&gt;dirpath}/{$this-&gt;pathcest}/{$this-&gt;fulldir}/{$nazev}.jpg"</span>, 100);
+<a name="l01564"></a>01564           imagedestroy($img_new);
+<a name="l01565"></a>01565 
+<a name="l01566"></a>01566           $result = <span class="keyword">true</span>;
+<a name="l01567"></a>01567           $pripona = <span class="stringliteral">"jpg"</span>;
+<a name="l01568"></a>01568         <span class="keywordflow">break</span>;
+<a name="l01569"></a>01569 
+<a name="l01570"></a>01570         <span class="keywordflow">case</span> <span class="stringliteral">"image/png"</span>:
+<a name="l01571"></a>01571           $img_old = imagecreatefrompng($tmp[<span class="stringliteral">"tmp_name"</span>]);
+<a name="l01572"></a>01572 
+<a name="l01573"></a>01573           $img_new = imagecreatetruecolor($new_w, $new_h);
+<a name="l01574"></a>01574           imagecopyresampled($img_new, $img_old, 0, 0, 0, 0, $new_w, $new_h, $old_w, $old_h);
+<a name="l01575"></a>01575           imagepng($img_new, <span class="stringliteral">"{$this-&gt;dirpath}/{$this-&gt;pathcest}/{$this-&gt;minidir}/{$nazev}.png"</span>);
+<a name="l01576"></a>01576           imagedestroy($img_new);
+<a name="l01577"></a>01577 
+<a name="l01578"></a>01578           $img_new = imagecreatetruecolor($new_w_obr, $new_h_obr);
+<a name="l01579"></a>01579           imagecopyresampled($img_new, $img_old, 0, 0, 0, 0, $new_w_obr, $new_h_obr, $old_w, $old_h);
+<a name="l01580"></a>01580           imagepng($img_new, <span class="stringliteral">"{$this-&gt;dirpath}/{$this-&gt;pathcest}/{$this-&gt;fulldir}/{$nazev}.png"</span>);
+<a name="l01581"></a>01581           imagedestroy($img_new);
+<a name="l01582"></a>01582 
+<a name="l01583"></a>01583           $result = <span class="keyword">true</span>;
+<a name="l01584"></a>01584           $pripona = <span class="stringliteral">"png"</span>;
+<a name="l01585"></a>01585         <span class="keywordflow">break</span>;
+<a name="l01586"></a>01586 
+<a name="l01587"></a>01587         <span class="keywordflow">default</span>:
+<a name="l01588"></a>01588           $result = <span class="keyword">false</span>;
+<a name="l01589"></a>01589         <span class="keywordflow">break</span>;
+<a name="l01590"></a>01590       }
+<a name="l01591"></a>01591     }
+<a name="l01592"></a>01592       <span class="keywordflow">else</span>
+<a name="l01593"></a>01593     {
+<a name="l01594"></a>01594       $result = <span class="keyword">false</span>;
+<a name="l01595"></a>01595     }
+<a name="l01596"></a>01596 
+<a name="l01597"></a>01597     $obrazek = <span class="stringliteral">"{$nazev}.{$pripona}"</span>;
+<a name="l01598"></a>01598 
+<a name="l01599"></a>01599     <span class="keywordflow">return</span> $result;
+<a name="l01600"></a>01600   }
+<a name="l01601"></a>01601 
+<a name="l01608"></a><a class="code" href="classDynamicObsahEshop.html#28fd2bb1ae6490ddd4920a123c94e7c7">01608</a>   <span class="keyword">private</span> function <a class="code" href="classDynamicObsahEshop.html#28fd2bb1ae6490ddd4920a123c94e7c7">PocetUzvatelu</a>()
+<a name="l01609"></a>01609   {
+<a name="l01610"></a>01610     $result = 0;
+<a name="l01611"></a>01611     <span class="keywordflow">if</span> ($res = @$this-&gt;sqlite-&gt;query(<span class="stringliteral">"SELECT id</span>
+<a name="l01612"></a>01612 <span class="stringliteral">                                      FROM zakaznik;"</span>, NULL, $error))
+<a name="l01613"></a>01613     {
+<a name="l01614"></a>01614       $result = $res-&gt;numRows();
+<a name="l01615"></a>01615     }
+<a name="l01616"></a>01616       <span class="keywordflow">else</span>
+<a name="l01617"></a>01617     {
+<a name="l01618"></a>01618       $this-&gt;var-&gt;main[0]-&gt;ErrorMsg($error);
+<a name="l01619"></a>01619     }
+<a name="l01620"></a>01620 
+<a name="l01621"></a>01621     <span class="keywordflow">return</span> $result;
+<a name="l01622"></a>01622   }
+<a name="l01623"></a>01623 
+<a name="l01630"></a><a class="code" href="classDynamicObsahEshop.html#4dd97cae613de481aa86bad20af9a6e2">01630</a>   <span class="keyword">private</span> function <a class="code" href="classDynamicObsahEshop.html#4dd97cae613de481aa86bad20af9a6e2">VypisSkupiny</a>()
+<a name="l01631"></a>01631   {
+<a name="l01632"></a>01632     $result =
+<a name="l01633"></a>01633     <span class="stringliteral">"skupiny již přidaných stránek:&lt;br /&gt;"</span>;
+<a name="l01634"></a>01634     <span class="keywordflow">if</span> ($res = @$this-&gt;sqlite-&gt;query(<span class="stringliteral">"SELECT</span>
+<a name="l01635"></a>01635 <span class="stringliteral">                                      adresa,</span>
+<a name="l01636"></a>01636 <span class="stringliteral">                                      count(adresa) as poc</span>
+<a name="l01637"></a>01637 <span class="stringliteral">                                      FROM obsah_eshop</span>
+<a name="l01638"></a>01638 <span class="stringliteral">                                      GROUP BY adresa</span>
+<a name="l01639"></a>01639 <span class="stringliteral">                                      ORDER BY LOWER(adresa) ASC;"</span>, NULL, $error))
+<a name="l01640"></a>01640     {
+<a name="l01641"></a>01641       <span class="keywordflow">if</span> ($res-&gt;numRows() != 0)
+<a name="l01642"></a>01642       {
+<a name="l01643"></a>01643         <span class="keywordflow">while</span> ($data = $res-&gt;fetchObject()) <span class="comment">//pripadne prepisovac specialni syntaxe a v editoru ajax zobrazovani</span>
+<a name="l01644"></a>01644         {
+<a name="l01645"></a>01645           $adr = explode(<span class="stringliteral">"-"</span>, $data-&gt;adresa);
+<a name="l01646"></a>01646           $nazev = $this-&gt;var-&gt;main[0]-&gt;NactiFunkci(1, <span class="stringliteral">"NazevPodleAdresy"</span>, $adr[count($adr) - 1]);
+<a name="l01647"></a>01647 
+<a name="l01648"></a>01648           $result .=
+<a name="l01649"></a>01649           <span class="stringliteral">"</span>
+<a name="l01650"></a>01650 <span class="stringliteral">            &lt;strong&gt;{$nazev}&lt;/strong&gt; '{$data-&gt;adresa}' ({$data-&gt;poc}x)</span>
+<a name="l01651"></a>01651 <span class="stringliteral">            &lt;a href=\"?{$this-&gt;var-&gt;get_kam}={$this-&gt;var-&gt;adresaadminu}&amp;amp;{$this-&gt;var-&gt;get_idmodul}={$this-&gt;idmodul}&amp;amp;co=add&amp;amp;adresa={$data-&gt;adresa}\"&gt;Přidej obsah&lt;/a&gt;</span>
+<a name="l01652"></a>01652 <span class="stringliteral">            &lt;a href=\"?{$this-&gt;var-&gt;get_kam}={$this-&gt;var-&gt;adresaadminu}&amp;amp;{$this-&gt;var-&gt;get_idmodul}={$this-&gt;idmodul}&amp;amp;co=delgrup&amp;amp;grup={$data-&gt;adresa}\" title=\"\" onclick=\"return confirm('Opravdu smazat skupnu adres: \'{$data-&gt;adresa}\' ?');\"&gt;smazat skupinu&lt;/a&gt;&lt;br /&gt;</span>
+<a name="l01653"></a>01653 <span class="stringliteral">          "</span>;
+<a name="l01654"></a>01654         }
+<a name="l01655"></a>01655       }
+<a name="l01656"></a>01656         <span class="keywordflow">else</span>
+<a name="l01657"></a>01657       {
+<a name="l01658"></a>01658         $result = <span class="stringliteral">"žádné skupiny"</span>;
+<a name="l01659"></a>01659       }
+<a name="l01660"></a>01660     }
+<a name="l01661"></a>01661       <span class="keywordflow">else</span>
+<a name="l01662"></a>01662     {
+<a name="l01663"></a>01663       $this-&gt;var-&gt;main[0]-&gt;ErrorMsg($error);
+<a name="l01664"></a>01664     }
+<a name="l01665"></a>01665 
+<a name="l01666"></a>01666     <span class="keywordflow">return</span> $result;
+<a name="l01667"></a>01667   }
+<a name="l01668"></a>01668 
+<a name="l01675"></a><a class="code" href="classDynamicObsahEshop.html#177f6a46bfedd40939adc2cbf183b58f">01675</a>   <span class="keyword">private</span> function <a class="code" href="classDynamicObsahEshop.html#177f6a46bfedd40939adc2cbf183b58f">AdministraceEshopObsahu</a>()
+<a name="l01676"></a>01676   {
+<a name="l01677"></a>01677     $result =
+<a name="l01678"></a>01678     <span class="stringliteral">"administrace dynamickeho eshop obsahu&lt;br /&gt;</span>
+<a name="l01679"></a>01679 <span class="stringliteral">    &lt;a href=\"?{$this-&gt;var-&gt;get_kam}={$this-&gt;var-&gt;adresaadminu}&amp;amp;{$this-&gt;var-&gt;get_idmodul}={$this-&gt;idmodul}&amp;amp;co=showuser\"&gt;vypis uživatelů&lt;/a&gt; ({$this-&gt;PocetUzvatelu()})&lt;br /&gt;</span>
+<a name="l01680"></a>01680 <span class="stringliteral">    {$this-&gt;VypisSkupiny()}</span>
+<a name="l01681"></a>01681 <span class="stringliteral">    {$this-&gt;AdminVypisEshopObsahu()}&lt;br /&gt;"</span>;
+<a name="l01682"></a>01682 
+<a name="l01683"></a>01683     $co = $_GET[<span class="stringliteral">"co"</span>];
+<a name="l01684"></a>01684 
+<a name="l01685"></a>01685     <span class="keywordflow">if</span> (!Empty($co))
+<a name="l01686"></a>01686     {
+<a name="l01687"></a>01687       <span class="keywordflow">switch</span> ($co)
+<a name="l01688"></a>01688       {
+<a name="l01689"></a>01689         <span class="keywordflow">case</span> <span class="stringliteral">"add"</span>: <span class="comment">//pridavani</span>
+<a name="l01690"></a>01690           $result =
+<a name="l01691"></a>01691           <span class="stringliteral">"</span>
+<a name="l01692"></a>01692 <span class="stringliteral">          &lt;form method=\"post\" enctype=\"multipart/form-data\"&gt;</span>
+<a name="l01693"></a>01693 <span class="stringliteral">            &lt;fieldset&gt;</span>
+<a name="l01694"></a>01694 <span class="stringliteral">              název: &lt;textarea name=\"nazev\"&gt;&lt;/textarea&gt;* &lt;br /&gt;</span>
+<a name="l01695"></a>01695 <span class="stringliteral">              výrobce: &lt;input type=\"input\" name=\"vyrobce\" /&gt; &lt;br /&gt;</span>
+<a name="l01696"></a>01696 <span class="stringliteral">              popis: &lt;textarea name=\"popis\"&gt;&lt;/textarea&gt;* &lt;br /&gt;</span>
+<a name="l01697"></a>01697 <span class="stringliteral">              publikace: &lt;input type=\"input\" name=\"publikace\" value=\""</span>.date(<span class="stringliteral">"j.n. Y"</span>).<span class="stringliteral">"\" /&gt; &lt;br /&gt;</span>
+<a name="l01698"></a>01698 <span class="stringliteral">              kód: &lt;input type=\"input\" name=\"kod\" /&gt; &lt;br /&gt;</span>
+<a name="l01699"></a>01699 <span class="stringliteral">              hmotnost: &lt;input type=\"input\" name=\"hmotnost\" /&gt; {$this-&gt;defhmo}&lt;br /&gt;</span>
+<a name="l01700"></a>01700 <span class="stringliteral">              dph: &lt;input type=\"input\" name=\"dph\" value=\"{$this-&gt;defdph}\" /&gt; %&lt;br /&gt;</span>
+<a name="l01701"></a>01701 <span class="stringliteral">              cena: &lt;input type=\"input\" name=\"cena\" /&gt; {$this-&gt;defmen}&lt;br /&gt;</span>
+<a name="l01702"></a>01702 <span class="stringliteral">              obrázek: &lt;input type=\"file\" name=\"obrazek\" /&gt; &lt;br /&gt;</span>
+<a name="l01703"></a>01703 <span class="stringliteral">              skladem: &lt;input type=\"input\" name=\"skladem\" /&gt; ks&lt;br /&gt;</span>
+<a name="l01704"></a>01704 <span class="stringliteral">              &lt;input type=\"submit\" name=\"tlacitko\" value=\"Přidat\" /&gt;</span>
+<a name="l01705"></a>01705 <span class="stringliteral">            &lt;/fieldset&gt;</span>
+<a name="l01706"></a>01706 <span class="stringliteral">          &lt;/form&gt;</span>
+<a name="l01707"></a>01707 <span class="stringliteral">          "</span>;
+<a name="l01708"></a>01708 
+<a name="l01709"></a>01709           $nazev = stripslashes(htmlspecialchars($_POST[<span class="stringliteral">"nazev"</span>], ENT_QUOTES));
+<a name="l01710"></a>01710           $vyrobce = stripslashes(htmlspecialchars($_POST[<span class="stringliteral">"vyrobce"</span>], ENT_QUOTES));
+<a name="l01711"></a>01711           $popis = stripslashes(htmlspecialchars($_POST[<span class="stringliteral">"popis"</span>], ENT_QUOTES));
+<a name="l01712"></a>01712           $publikace = date(<span class="stringliteral">"Y-m-d H:i:s"</span>, strtotime($_POST[<span class="stringliteral">"publikace"</span>]));
+<a name="l01713"></a>01713           $kod = stripslashes(htmlspecialchars($_POST[<span class="stringliteral">"kod"</span>], ENT_QUOTES));
+<a name="l01714"></a>01714           $hmotnost = $_POST[<span class="stringliteral">"hmotnost"</span>];
+<a name="l01715"></a>01715           settype($hmotnost, <span class="stringliteral">"float"</span>);
+<a name="l01716"></a>01716 
+<a name="l01717"></a>01717           $dph = $_POST[<span class="stringliteral">"dph"</span>];
+<a name="l01718"></a>01718           settype($dph, <span class="stringliteral">"float"</span>);
+<a name="l01719"></a>01719 
+<a name="l01720"></a>01720           $cena = $_POST[<span class="stringliteral">"cena"</span>];
+<a name="l01721"></a>01721           settype($cena, <span class="stringliteral">"float"</span>);
+<a name="l01722"></a>01722 
+<a name="l01723"></a>01723           $skladem = $_POST[<span class="stringliteral">"skladem"</span>];
+<a name="l01724"></a>01724           settype($skladem, <span class="stringliteral">"integer"</span>);
+<a name="l01725"></a>01725 
+<a name="l01726"></a>01726           $adresa = stripslashes(htmlspecialchars($_GET[<span class="stringliteral">"adresa"</span>], ENT_QUOTES));
+<a name="l01727"></a>01727 
+<a name="l01728"></a>01728           <span class="keywordflow">if</span> (!Empty($_FILES[<span class="stringliteral">"obrazek"</span>][<span class="stringliteral">"tmp_name"</span>]))
+<a name="l01729"></a>01729           {
+<a name="l01730"></a>01730             $this-&gt;<a class="code" href="classDynamicObsahEshop.html#c2d4fbfc54830ed92534c5fbbbd4878a">ZpracujObrazek</a>($adresa, $_FILES[<span class="stringliteral">"obrazek"</span>], $obrazek);
+<a name="l01731"></a>01731           }
+<a name="l01732"></a>01732             <span class="keywordflow">else</span>
+<a name="l01733"></a>01733           {
+<a name="l01734"></a>01734             $obrazek = NULL;
+<a name="l01735"></a>01735           }
+<a name="l01736"></a>01736 
+<a name="l01737"></a>01737           <span class="keywordflow">if</span> (!Empty($_POST[<span class="stringliteral">"tlacitko"</span>]) &amp;&amp;
+<a name="l01738"></a>01738               !Empty($nazev) &amp;&amp;
+<a name="l01739"></a>01739               !Empty($popis))
+<a name="l01740"></a>01740           {
+<a name="l01741"></a>01741             <span class="keywordflow">if</span> (@$this-&gt;sqlite-&gt;queryExec(<span class="stringliteral">"INSERT INTO obsah_eshop (id, adresa, nazev, vyrobce, popis, publikace, kod, hmotnost, dph, cena, obrazek, skladem) VALUES</span>
+<a name="l01742"></a>01742 <span class="stringliteral">                                          (NULL, '{$adresa}', '{$nazev}', '{$vyrobce}', '{$popis}', '{$publikace}', '{$kod}', {$hmotnost}, {$dph}, {$cena}, '{$obrazek}', {$skladem});</span>
+<a name="l01743"></a>01743 <span class="stringliteral">                                          "</span>, $error))
+<a name="l01744"></a>01744             {
+<a name="l01745"></a>01745               $result =
+<a name="l01746"></a>01746               <span class="stringliteral">"</span>
+<a name="l01747"></a>01747 <span class="stringliteral">                přídán obsah: {$nazev} do adresy: {$adresa}</span>
+<a name="l01748"></a>01748 <span class="stringliteral">              "</span>;
+<a name="l01749"></a>01749             }
+<a name="l01750"></a>01750               <span class="keywordflow">else</span>
+<a name="l01751"></a>01751             {
+<a name="l01752"></a>01752               $this-&gt;var-&gt;main[0]-&gt;ErrorMsg($error);
+<a name="l01753"></a>01753             }
+<a name="l01754"></a>01754 
+<a name="l01755"></a>01755             $this-&gt;var-&gt;main[0]-&gt;AutoClick(1, <span class="stringliteral">"?{$this-&gt;var-&gt;get_kam}={$this-&gt;var-&gt;adresaadminu}&amp;{$this-&gt;var-&gt;get_idmodul}={$this-&gt;idmodul}"</span>);  <span class="comment">//auto kliknuti</span>
+<a name="l01756"></a>01756           }
+<a name="l01757"></a>01757         <span class="keywordflow">break</span>;
+<a name="l01758"></a>01758 
+<a name="l01759"></a>01759         <span class="keywordflow">case</span> <span class="stringliteral">"edit"</span>:  <span class="comment">//uprava</span>
+<a name="l01760"></a>01760           $id = $_GET[<span class="stringliteral">"id"</span>];  <span class="comment">//cislo sekce</span>
+<a name="l01761"></a>01761           settype($id, <span class="stringliteral">"integer"</span>);
+<a name="l01762"></a>01762 
+<a name="l01763"></a>01763           <span class="keywordflow">if</span> ($res = @$this-&gt;sqlite-&gt;query(<span class="stringliteral">"SELECT adresa, nazev, vyrobce, popis, publikace, kod, hmotnost, dph, cena, obrazek, skladem FROM obsah_eshop WHERE id={$id};"</span>, NULL, $error))
+<a name="l01764"></a>01764           {
+<a name="l01765"></a>01765             <span class="keywordflow">if</span> ($res-&gt;numRows() == 1)
+<a name="l01766"></a>01766             {
+<a name="l01767"></a>01767               $data = $res-&gt;fetchObject();
+<a name="l01768"></a>01768 
+<a name="l01769"></a>01769               $result =
+<a name="l01770"></a>01770               <span class="stringliteral">"</span>
+<a name="l01771"></a>01771 <span class="stringliteral">              &lt;form method=\"post\" enctype=\"multipart/form-data\"&gt;</span>
+<a name="l01772"></a>01772 <span class="stringliteral">                &lt;fieldset&gt;</span>
+<a name="l01773"></a>01773 <span class="stringliteral">                  název: &lt;textarea name=\"nazev\"&gt;{$data-&gt;nazev}&lt;/textarea&gt;* &lt;br /&gt; &lt;br /&gt;</span>
+<a name="l01774"></a>01774 <span class="stringliteral">                  výrobce: &lt;input type=\"input\" name=\"vyrobce\" value=\"{$data-&gt;vyrobce}\" /&gt; &lt;br /&gt;</span>
+<a name="l01775"></a>01775 <span class="stringliteral">                  popis: &lt;textarea name=\"popis\"&gt;{$data-&gt;popis}&lt;/textarea&gt;* &lt;br /&gt;</span>
+<a name="l01776"></a>01776 <span class="stringliteral">                  publikace: &lt;input type=\"input\" name=\"publikace\" value=\"{$data-&gt;publikace}\" /&gt; &lt;br /&gt;</span>
+<a name="l01777"></a>01777 <span class="stringliteral">                  kód: &lt;input type=\"input\" name=\"kod\" value=\"{$data-&gt;kod}\" /&gt; &lt;br /&gt;</span>
+<a name="l01778"></a>01778 <span class="stringliteral">                  hmotnost: &lt;input type=\"input\" name=\"hmotnost\" value=\"{$data-&gt;hmotnost}\" /&gt; {$this-&gt;defhmo}&lt;br /&gt;</span>
+<a name="l01779"></a>01779 <span class="stringliteral">                  dph: &lt;input type=\"input\" name=\"dph\" value=\"{$data-&gt;dph}\" /&gt; %&lt;br /&gt;</span>
+<a name="l01780"></a>01780 <span class="stringliteral">                  cena: &lt;input type=\"input\" name=\"cena\" value=\"{$data-&gt;cena}\" /&gt; {$this-&gt;defmen}&lt;br /&gt;</span>
+<a name="l01781"></a>01781 <span class="stringliteral">                  &lt;img src=\"{$this-&gt;dirpath}/{$this-&gt;pathcest}/{$this-&gt;minidir}/{$data-&gt;obrazek}\" alt=\"{$data-&gt;nazev}\" /&gt;&lt;br /&gt;</span>
+<a name="l01782"></a>01782 <span class="stringliteral">                  obrázek: &lt;input type=\"file\" name=\"obrazek\" /&gt; &lt;br /&gt;</span>
+<a name="l01783"></a>01783 <span class="stringliteral">                  skladem: &lt;input type=\"input\" name=\"skladem\" value=\"{$data-&gt;skladem}\" /&gt; &lt;br /&gt;</span>
+<a name="l01784"></a>01784 <span class="stringliteral">                  &lt;input type=\"submit\" name=\"tlacitko\" value=\"Upravit\" /&gt;</span>
+<a name="l01785"></a>01785 <span class="stringliteral">                &lt;/fieldset&gt;</span>
+<a name="l01786"></a>01786 <span class="stringliteral">              &lt;/form&gt;</span>
+<a name="l01787"></a>01787 <span class="stringliteral">              "</span>;
+<a name="l01788"></a>01788 
+<a name="l01789"></a>01789               $nazev = stripslashes(htmlspecialchars($_POST[<span class="stringliteral">"nazev"</span>], ENT_QUOTES));
+<a name="l01790"></a>01790               $vyrobce = stripslashes(htmlspecialchars($_POST[<span class="stringliteral">"vyrobce"</span>], ENT_QUOTES));
+<a name="l01791"></a>01791               $popis = stripslashes(htmlspecialchars($_POST[<span class="stringliteral">"popis"</span>], ENT_QUOTES));
+<a name="l01792"></a>01792               $publikace = date(<span class="stringliteral">"Y-m-d H:i:s"</span>, strtotime($_POST[<span class="stringliteral">"publikace"</span>]));
+<a name="l01793"></a>01793               $kod = stripslashes(htmlspecialchars($_POST[<span class="stringliteral">"kod"</span>], ENT_QUOTES));
+<a name="l01794"></a>01794               $hmotnost = $_POST[<span class="stringliteral">"hmotnost"</span>];
+<a name="l01795"></a>01795               settype($hmotnost, <span class="stringliteral">"float"</span>);
+<a name="l01796"></a>01796 
+<a name="l01797"></a>01797               $dph = $_POST[<span class="stringliteral">"dph"</span>];
+<a name="l01798"></a>01798               settype($dph, <span class="stringliteral">"float"</span>);
+<a name="l01799"></a>01799 
+<a name="l01800"></a>01800               $cena = $_POST[<span class="stringliteral">"cena"</span>];
+<a name="l01801"></a>01801               settype($cena, <span class="stringliteral">"float"</span>);
+<a name="l01802"></a>01802 
+<a name="l01803"></a>01803               $skladem = $_POST[<span class="stringliteral">"skladem"</span>];
+<a name="l01804"></a>01804               settype($skladem, <span class="stringliteral">"integer"</span>);
+<a name="l01805"></a>01805 
+<a name="l01806"></a>01806               <span class="keywordflow">if</span> (!Empty($_FILES[<span class="stringliteral">"obrazek"</span>][<span class="stringliteral">"tmp_name"</span>]))
+<a name="l01807"></a>01807               {
+<a name="l01808"></a>01808                 $this-&gt;<a class="code" href="classDynamicObsahEshop.html#c2d4fbfc54830ed92534c5fbbbd4878a">ZpracujObrazek</a>($data-&gt;adresa, $_FILES[<span class="stringliteral">"obrazek"</span>], $obrazek);
+<a name="l01809"></a>01809               }
+<a name="l01810"></a>01810                 <span class="keywordflow">else</span>
+<a name="l01811"></a>01811               {
+<a name="l01812"></a>01812                 $obrazek = $data-&gt;obrazek;
+<a name="l01813"></a>01813               }
+<a name="l01814"></a>01814 
+<a name="l01815"></a>01815               <span class="keywordflow">if</span> (!Empty($_POST[<span class="stringliteral">"tlacitko"</span>]) &amp;&amp;
+<a name="l01816"></a>01816                   !Empty($nazev) &amp;&amp;
+<a name="l01817"></a>01817                   !Empty($popis) &amp;&amp;
+<a name="l01818"></a>01818                   $id != 0)
+<a name="l01819"></a>01819               {
+<a name="l01820"></a>01820                 <span class="keywordflow">if</span> (@$this-&gt;sqlite-&gt;queryExec(<span class="stringliteral">"UPDATE obsah_eshop SET nazev='{$nazev}',</span>
+<a name="l01821"></a>01821 <span class="stringliteral">                                                                      vyrobce='{$vyrobce}',</span>
+<a name="l01822"></a>01822 <span class="stringliteral">                                                                      popis='{$popis}',</span>
+<a name="l01823"></a>01823 <span class="stringliteral">                                                                      publikace='{$publikace}',</span>
+<a name="l01824"></a>01824 <span class="stringliteral">                                                                      kod='{$kod}',</span>
+<a name="l01825"></a>01825 <span class="stringliteral">                                                                      hmotnost={$hmotnost},</span>
+<a name="l01826"></a>01826 <span class="stringliteral">                                                                      dph={$dph},</span>
+<a name="l01827"></a>01827 <span class="stringliteral">                                                                      cena={$cena},</span>
+<a name="l01828"></a>01828 <span class="stringliteral">                                                                      obrazek='{$obrazek}',</span>
+<a name="l01829"></a>01829 <span class="stringliteral">                                                                      skladem={$skladem}</span>
+<a name="l01830"></a>01830 <span class="stringliteral">                                                                      WHERE id={$id};"</span>, $error))
+<a name="l01831"></a>01831                 {
+<a name="l01832"></a>01832                   $result =
+<a name="l01833"></a>01833                   <span class="stringliteral">"</span>
+<a name="l01834"></a>01834 <span class="stringliteral">                    upraven: {$nazev}</span>
+<a name="l01835"></a>01835 <span class="stringliteral">                  "</span>;
+<a name="l01836"></a>01836                 }
+<a name="l01837"></a>01837                   <span class="keywordflow">else</span>
+<a name="l01838"></a>01838                 {
+<a name="l01839"></a>01839                   $this-&gt;var-&gt;main[0]-&gt;ErrorMsg($error);
+<a name="l01840"></a>01840                 }
+<a name="l01841"></a>01841 
+<a name="l01842"></a>01842                 $this-&gt;var-&gt;main[0]-&gt;AutoClick(1, <span class="stringliteral">"?{$this-&gt;var-&gt;get_kam}={$this-&gt;var-&gt;adresaadminu}&amp;{$this-&gt;var-&gt;get_idmodul}={$this-&gt;idmodul}"</span>);  <span class="comment">//auto kliknuti</span>
+<a name="l01843"></a>01843               }
+<a name="l01844"></a>01844             }
+<a name="l01845"></a>01845           }
+<a name="l01846"></a>01846             <span class="keywordflow">else</span>
+<a name="l01847"></a>01847           {
+<a name="l01848"></a>01848             $this-&gt;var-&gt;main[0]-&gt;ErrorMsg($error);
+<a name="l01849"></a>01849           }
+<a name="l01850"></a>01850         <span class="keywordflow">break</span>;
+<a name="l01851"></a>01851 
+<a name="l01852"></a>01852         <span class="keywordflow">case</span> <span class="stringliteral">"del"</span>: <span class="comment">//mazani</span>
+<a name="l01853"></a>01853           $id = $_GET[<span class="stringliteral">"id"</span>];  <span class="comment">//cislo sekce</span>
+<a name="l01854"></a>01854           settype($id, <span class="stringliteral">"integer"</span>);
+<a name="l01855"></a>01855 
+<a name="l01856"></a>01856           $syn = $this-&gt;<a class="code" href="classDynamicObsahEshop.html#f6e6c4ff349f03d5f23be9cdbc2ac1cf">SynchronizaceSouboruDB</a>();
+<a name="l01857"></a>01857 
+<a name="l01858"></a>01858           <span class="keywordflow">if</span> ($res = @$this-&gt;sqlite-&gt;query(<span class="stringliteral">"SELECT adresa, nazev, obrazek FROM obsah_eshop WHERE id={$id};"</span>, NULL, $error))
+<a name="l01859"></a>01859           {
+<a name="l01860"></a>01860             <span class="keywordflow">if</span> ($res-&gt;numRows() == 1)
+<a name="l01861"></a>01861             {
+<a name="l01862"></a>01862               $data = $res-&gt;fetchObject();
+<a name="l01863"></a>01863 
+<a name="l01864"></a>01864               <span class="keywordflow">if</span> (@$this-&gt;sqlite-&gt;queryExec(<span class="stringliteral">"DELETE FROM obsah_eshop WHERE id={$id};"</span>, $error)) <span class="comment">//provedeni dotazu</span>
+<a name="l01865"></a>01865               {
+<a name="l01866"></a>01866                 $result =
+<a name="l01867"></a>01867                 <span class="stringliteral">"</span>
+<a name="l01868"></a>01868 <span class="stringliteral">                  smazáno: '{$data-&gt;nazev}', adresa: '{$data-&gt;adresa}'.&lt;br /&gt;</span>
+<a name="l01869"></a>01869 <span class="stringliteral">                  položek navíc: {$syn}</span>
+<a name="l01870"></a>01870 <span class="stringliteral">                "</span>;
+<a name="l01871"></a>01871 
+<a name="l01872"></a>01872                 <span class="keywordflow">if</span> (file_exists(<span class="stringliteral">"{$this-&gt;dirpath}/{$this-&gt;pathcest}/{$this-&gt;minidir}/{$data-&gt;obrazek}"</span>))
+<a name="l01873"></a>01873                 {
+<a name="l01874"></a>01874                   chmod(<span class="stringliteral">"{$this-&gt;dirpath}/{$this-&gt;pathcest}/{$this-&gt;minidir}/{$data-&gt;obrazek}"</span>, 0777);
+<a name="l01875"></a>01875                   @unlink(<span class="stringliteral">"{$this-&gt;dirpath}/{$this-&gt;pathcest}/{$this-&gt;minidir}/{$data-&gt;obrazek}"</span>);
+<a name="l01876"></a>01876                 }
+<a name="l01877"></a>01877 
+<a name="l01878"></a>01878                 <span class="keywordflow">if</span> (file_exists(<span class="stringliteral">"{$this-&gt;dirpath}/{$this-&gt;pathcest}/{$this-&gt;fulldir}/{$data-&gt;obrazek}"</span>))
+<a name="l01879"></a>01879                 {
+<a name="l01880"></a>01880                   chmod(<span class="stringliteral">"{$this-&gt;dirpath}/{$this-&gt;pathcest}/{$this-&gt;fulldir}/{$data-&gt;obrazek}"</span>, 0777);
+<a name="l01881"></a>01881                   @unlink(<span class="stringliteral">"{$this-&gt;dirpath}/{$this-&gt;pathcest}/{$this-&gt;fulldir}/{$data-&gt;obrazek}"</span>);
+<a name="l01882"></a>01882                 }
+<a name="l01883"></a>01883               }
+<a name="l01884"></a>01884                 <span class="keywordflow">else</span>
+<a name="l01885"></a>01885               {
+<a name="l01886"></a>01886                 $this-&gt;var-&gt;main[0]-&gt;ErrorMsg($error);
+<a name="l01887"></a>01887               }
+<a name="l01888"></a>01888 
+<a name="l01889"></a>01889               $this-&gt;var-&gt;main[0]-&gt;AutoClick(2, <span class="stringliteral">"?{$this-&gt;var-&gt;get_kam}={$this-&gt;var-&gt;adresaadminu}&amp;{$this-&gt;var-&gt;get_idmodul}={$this-&gt;idmodul}"</span>);  <span class="comment">//auto kliknuti</span>
+<a name="l01890"></a>01890             }
+<a name="l01891"></a>01891           }
+<a name="l01892"></a>01892             <span class="keywordflow">else</span>
+<a name="l01893"></a>01893           {
+<a name="l01894"></a>01894             $this-&gt;var-&gt;main[0]-&gt;ErrorMsg($error);
+<a name="l01895"></a>01895           }
+<a name="l01896"></a>01896         <span class="keywordflow">break</span>;
+<a name="l01897"></a>01897 
+<a name="l01898"></a>01898         <span class="keywordflow">case</span> <span class="stringliteral">"delgrup"</span>:
+<a name="l01899"></a>01899           $grup = $_GET[<span class="stringliteral">"grup"</span>];  <span class="comment">//cislo skupiny</span>
+<a name="l01900"></a>01900 
+<a name="l01901"></a>01901           $syn = $this-&gt;<a class="code" href="classDynamicObsahEshop.html#f6e6c4ff349f03d5f23be9cdbc2ac1cf">SynchronizaceSouboruDB</a>();
+<a name="l01902"></a>01902 
+<a name="l01903"></a>01903           <span class="keywordflow">if</span> (@$this-&gt;sqlite-&gt;queryExec(<span class="stringliteral">"DELETE FROM obsah_eshop WHERE adresa='{$grup}';"</span>, $error)) <span class="comment">//provedeni dotazu</span>
+<a name="l01904"></a>01904           {
+<a name="l01905"></a>01905             $result =
+<a name="l01906"></a>01906             <span class="stringliteral">"</span>
+<a name="l01907"></a>01907 <span class="stringliteral">              smazána skupna adres: '{$grup}'.&lt;br /&gt;</span>
+<a name="l01908"></a>01908 <span class="stringliteral">              položky navíc: {$syn}</span>
+<a name="l01909"></a>01909 <span class="stringliteral">            "</span>;
+<a name="l01910"></a>01910           }
+<a name="l01911"></a>01911             <span class="keywordflow">else</span>
+<a name="l01912"></a>01912           {
+<a name="l01913"></a>01913             $this-&gt;var-&gt;main[0]-&gt;ErrorMsg($error);
+<a name="l01914"></a>01914           }
+<a name="l01915"></a>01915 
+<a name="l01916"></a>01916           $this-&gt;var-&gt;main[0]-&gt;AutoClick(2, <span class="stringliteral">"?{$this-&gt;var-&gt;get_kam}={$this-&gt;var-&gt;adresaadminu}&amp;{$this-&gt;var-&gt;get_idmodul}={$this-&gt;idmodul}"</span>);  <span class="comment">//auto kliknuti</span>
+<a name="l01917"></a>01917         <span class="keywordflow">break</span>;
+<a name="l01918"></a>01918 
+<a name="l01919"></a>01919         <span class="keywordflow">case</span> <span class="stringliteral">"showuser"</span>:  <span class="comment">//vypis uzivatelu</span>
+<a name="l01920"></a>01920           $result = $this-&gt;<a class="code" href="classDynamicObsahEshop.html#3dc2518d46fd2b128402cfc0cdb44ed5">VypisUzivatelu</a>();
+<a name="l01921"></a>01921         <span class="keywordflow">break</span>;
+<a name="l01922"></a>01922 
+<a name="l01923"></a>01923         <span class="keywordflow">case</span> <span class="stringliteral">"infouser"</span>:  <span class="comment">//info o uzivateli</span>
+<a name="l01924"></a>01924           $id = $_GET[<span class="stringliteral">"id"</span>];  <span class="comment">//cislo sekce</span>
+<a name="l01925"></a>01925           settype($id, <span class="stringliteral">"integer"</span>);
+<a name="l01926"></a>01926 
+<a name="l01927"></a>01927           $result =
+<a name="l01928"></a>01928           <span class="stringliteral">"</span>
+<a name="l01929"></a>01929 <span class="stringliteral">            &lt;a href=\"?{$this-&gt;var-&gt;get_kam}={$this-&gt;var-&gt;adresaadminu}&amp;amp;{$this-&gt;var-&gt;get_idmodul}={$this-&gt;idmodul}\" title=\"\"&gt;administrace dynamickeho eshop obsahu&lt;/a&gt;&lt;br /&gt;</span>
+<a name="l01930"></a>01930 <span class="stringliteral">            &lt;a href=\"?{$this-&gt;var-&gt;get_kam}={$this-&gt;var-&gt;adresaadminu}&amp;amp;{$this-&gt;var-&gt;get_idmodul}={$this-&gt;idmodul}&amp;amp;co=showuser\"&gt;vypis uživatelů&lt;/a&gt;&lt;br /&gt;</span>
+<a name="l01931"></a>01931 <span class="stringliteral">          "</span>;
+<a name="l01932"></a>01932           <span class="keywordflow">if</span> ($res = @$this-&gt;sqlite-&gt;query(<span class="stringliteral">"SELECT</span>
+<a name="l01933"></a>01933 <span class="stringliteral">                                            kosik.id as id,</span>
+<a name="l01934"></a>01934 <span class="stringliteral">                                            obsah_eshop.nazev as zbozi,</span>
+<a name="l01935"></a>01935 <span class="stringliteral">                                            obsah_eshop.cena as cena,</span>
+<a name="l01936"></a>01936 <span class="stringliteral">                                            obsah_eshop.dph as dph,</span>
+<a name="l01937"></a>01937 <span class="stringliteral">                                            kosik.pocet as pocet</span>
+<a name="l01938"></a>01938 <span class="stringliteral">                                            FROM kosik, obsah_eshop</span>
+<a name="l01939"></a>01939 <span class="stringliteral">                                            WHERE kosik.zakaznik={$id} AND</span>
+<a name="l01940"></a>01940 <span class="stringliteral">                                            obsah_eshop.id=kosik.zbozi;"</span>, NULL, $error))
+<a name="l01941"></a>01941           {
+<a name="l01942"></a>01942             <span class="keywordflow">if</span> ($res-&gt;numRows() != 0)
+<a name="l01943"></a>01943             {
+<a name="l01944"></a>01944               $sumsoucet = 0;
+<a name="l01945"></a>01945               <span class="keywordflow">while</span> ($data = $res-&gt;fetchObject())
+<a name="l01946"></a>01946               {
+<a name="l01947"></a>01947                 $soucet = floor($data-&gt;cena * $data-&gt;pocet);
+<a name="l01948"></a>01948                 $cenarow = (($soucet / 100) * $data-&gt;dph) + $soucet;
+<a name="l01949"></a>01949                 $sumsoucet += ($data-&gt;cena * $data-&gt;pocet);
+<a name="l01950"></a>01950 
+<a name="l01951"></a>01951                 $result .=  <span class="comment">//id: {$data-&gt;id}&lt;br /&gt;</span>
+<a name="l01952"></a>01952                 <span class="stringliteral">"</span>
+<a name="l01953"></a>01953 <span class="stringliteral">                  nazev: {$data-&gt;zbozi}&lt;br /&gt;</span>
+<a name="l01954"></a>01954 <span class="stringliteral">                  cena bez dph: {$data-&gt;cena} {$this-&gt;defmen}&lt;br /&gt;</span>
+<a name="l01955"></a>01955 <span class="stringliteral">                  dph: {$data-&gt;dph} %&lt;br /&gt;</span>
+<a name="l01956"></a>01956 <span class="stringliteral">                  počet: {$data-&gt;pocet} x&lt;br /&gt;</span>
+<a name="l01957"></a>01957 <span class="stringliteral">                  součet jednoho typu: {$soucet} {$this-&gt;defmen}&lt;br /&gt;</span>
+<a name="l01958"></a>01958 <span class="stringliteral">                  cena řádku s dph: {$cenarow} {$this-&gt;defmen}&lt;br /&gt;&lt;br /&gt;</span>
+<a name="l01959"></a>01959 <span class="stringliteral">                "</span>;
+<a name="l01960"></a>01960               }
+<a name="l01961"></a>01961 
+<a name="l01962"></a>01962               $doprava = $this-&gt;<a class="code" href="classDynamicObsahEshop.html#e209dc3baf8e856ef3f0d0b0c6ef7335">IdDopravy</a>($id);
+<a name="l01963"></a>01963 
+<a name="l01964"></a>01964               $cenadoprava = $this-&gt;dodani[$doprava][<span class="stringliteral">"cena"</span>];
+<a name="l01965"></a>01965               $celkem = floor(((($sumsoucet + $cenadoprava) / 100) * $this-&gt;defdph) + ($sumsoucet + $cenadoprava));
+<a name="l01966"></a>01966 
+<a name="l01967"></a>01967               $result .=
+<a name="l01968"></a>01968               <span class="stringliteral">"</span>
+<a name="l01969"></a>01969 <span class="stringliteral">                celkový součet bez dph: {$sumsoucet} {$this-&gt;defmen}&lt;br /&gt;</span>
+<a name="l01970"></a>01970 <span class="stringliteral">                doprava: {$this-&gt;dodani[$doprava]["</span>zpusob<span class="stringliteral">"]} {$cenadoprava} {$this-&gt;defmen}&lt;br /&gt;</span>
+<a name="l01971"></a>01971 <span class="stringliteral">                celková cena se vším všudy (s dph {$this-&gt;defdph} %): {$celkem} {$this-&gt;defmen}&lt;br /&gt;</span>
+<a name="l01972"></a>01972 <span class="stringliteral">                &lt;a href=\"?{$this-&gt;var-&gt;get_kam}={$this-&gt;var-&gt;adresaadminu}&amp;amp;{$this-&gt;var-&gt;get_idmodul}={$this-&gt;idmodul}&amp;amp;co=clearbuy&amp;amp;id={$id}\"</span>
+<a name="l01973"></a>01973 <span class="stringliteral">                  onclick=\"return confirm('Opravdu vyprázdnit košík: \'{$id}\' ?');\"&gt;vyprazdni mu košík&lt;/a&gt;</span>
+<a name="l01974"></a>01974 <span class="stringliteral">              "</span>;
+<a name="l01975"></a>01975             }
+<a name="l01976"></a>01976               <span class="keywordflow">else</span>
+<a name="l01977"></a>01977             {
+<a name="l01978"></a>01978               $result .= <span class="stringliteral">"&lt;strong&gt;uživatel nemá nic vybrané&lt;/strong&gt;"</span>;
+<a name="l01979"></a>01979             }
+<a name="l01980"></a>01980           }
+<a name="l01981"></a>01981             <span class="keywordflow">else</span>
+<a name="l01982"></a>01982           {
+<a name="l01983"></a>01983             $this-&gt;var-&gt;main[0]-&gt;ErrorMsg($error);
+<a name="l01984"></a>01984           }
+<a name="l01985"></a>01985         <span class="keywordflow">break</span>;
+<a name="l01986"></a>01986 
+<a name="l01987"></a>01987         <span class="keywordflow">case</span> <span class="stringliteral">"clearbuy"</span>:  <span class="comment">//vyprazdneni kosku daneho uzivatele</span>
+<a name="l01988"></a>01988           $id = $_GET[<span class="stringliteral">"id"</span>];  <span class="comment">//cislo sekce</span>
+<a name="l01989"></a>01989           settype($id, <span class="stringliteral">"integer"</span>);
+<a name="l01990"></a>01990 
+<a name="l01991"></a>01991           <span class="keywordflow">if</span> (!@$this-&gt;sqlite-&gt;queryExec(<span class="stringliteral">"DELETE FROM kosik WHERE zakaznik={$id};"</span>, $error))
+<a name="l01992"></a>01992           {
+<a name="l01993"></a>01993             $this-&gt;var-&gt;main[0]-&gt;ErrorMsg($error);
+<a name="l01994"></a>01994           }
+<a name="l01995"></a>01995 
+<a name="l01996"></a>01996           $this-&gt;var-&gt;main[0]-&gt;AutoClick(1, <span class="stringliteral">"?{$this-&gt;var-&gt;get_kam}={$this-&gt;var-&gt;adresaadminu}&amp;{$this-&gt;var-&gt;get_idmodul}={$this-&gt;idmodul}"</span>);  <span class="comment">//auto kliknuti</span>
+<a name="l01997"></a>01997         <span class="keywordflow">break</span>;
+<a name="l01998"></a>01998       }
+<a name="l01999"></a>01999     }
+<a name="l02000"></a>02000 
+<a name="l02001"></a>02001     <span class="keywordflow">return</span> $result;
+<a name="l02002"></a>02002   }
+<a name="l02003"></a>02003 
+<a name="l02010"></a><a class="code" href="classDynamicObsahEshop.html#7aa96f91ffe785a1f05b50c3e9a86315">02010</a>   <span class="keyword">private</span> function <a class="code" href="classDynamicObsahEshop.html#7aa96f91ffe785a1f05b50c3e9a86315">AdminVypisEshopObsahu</a>()
+<a name="l02011"></a>02011   {
+<a name="l02012"></a>02012     $result = <span class="stringliteral">""</span>;
+<a name="l02013"></a>02013     <span class="keywordflow">if</span> ($res = @$this-&gt;sqlite-&gt;query(<span class="stringliteral">"SELECT id, adresa, nazev, popis FROM obsah_eshop ORDER BY adresa ASC;"</span>, NULL, $error))
+<a name="l02014"></a>02014     {
+<a name="l02015"></a>02015       <span class="keywordflow">if</span> ($res-&gt;numRows() != 0)
+<a name="l02016"></a>02016       {
+<a name="l02017"></a>02017         <span class="keywordflow">while</span> ($data = $res-&gt;fetchObject())
+<a name="l02018"></a>02018         {
+<a name="l02019"></a>02019           $result .=
+<a name="l02020"></a>02020           <span class="stringliteral">"</span>
+<a name="l02021"></a>02021 <span class="stringliteral">            &lt;h6&gt;{$data-&gt;nazev} [{$data-&gt;adresa}]&lt;/h6&gt;</span>
+<a name="l02022"></a>02022 <span class="stringliteral">            &lt;p&gt;</span>
+<a name="l02023"></a>02023 <span class="stringliteral">              {$data-&gt;popis}&lt;br /&gt;</span>
+<a name="l02024"></a>02024 <span class="stringliteral">              &lt;a href=\"?{$this-&gt;var-&gt;get_kam}={$this-&gt;var-&gt;adresaadminu}&amp;amp;{$this-&gt;var-&gt;get_idmodul}={$this-&gt;idmodul}&amp;amp;co=edit&amp;amp;id={$data-&gt;id}\" title=\"\"&gt;uprav položku&lt;/a&gt;&lt;br /&gt;</span>
+<a name="l02025"></a>02025 <span class="stringliteral">              &lt;a href=\"?{$this-&gt;var-&gt;get_kam}={$this-&gt;var-&gt;adresaadminu}&amp;amp;{$this-&gt;var-&gt;get_idmodul}={$this-&gt;idmodul}&amp;amp;co=del&amp;amp;id={$data-&gt;id}\" title=\"\" onclick=\"return confirm('Opravdu smazat: \'{$data-&gt;nazev}\', adresa: \'{$data-&gt;adresa}\' ?');\"&gt;smazat položku&lt;/a&gt;</span>
+<a name="l02026"></a>02026 <span class="stringliteral">            &lt;/p&gt;</span>
+<a name="l02027"></a>02027 <span class="stringliteral">            &lt;br /&gt;</span>
+<a name="l02028"></a>02028 <span class="stringliteral">          "</span>;
+<a name="l02029"></a>02029         }
+<a name="l02030"></a>02030       }
+<a name="l02031"></a>02031     }
+<a name="l02032"></a>02032       <span class="keywordflow">else</span>
+<a name="l02033"></a>02033     {
+<a name="l02034"></a>02034       $this-&gt;var-&gt;main[0]-&gt;ErrorMsg($error);
+<a name="l02035"></a>02035     }
+<a name="l02036"></a>02036 
+<a name="l02037"></a>02037     <span class="keywordflow">return</span> $result;
+<a name="l02038"></a>02038   }
+<a name="l02039"></a>02039 
+<a name="l02046"></a><a class="code" href="classDynamicObsahEshop.html#d3c104ef71903a529c185d7458187690">02046</a>   <span class="keyword">private</span> function <a class="code" href="classDynamicObsahEshop.html#d3c104ef71903a529c185d7458187690">PocetPolozekObsahu</a>()
+<a name="l02047"></a>02047   {
+<a name="l02048"></a>02048     $result = 0;
+<a name="l02049"></a>02049     <span class="keywordflow">if</span> ($res = @$this-&gt;sqlite-&gt;query(<span class="stringliteral">"SELECT id FROM obsah_eshop;"</span>, NULL, $error))
+<a name="l02050"></a>02050     {
+<a name="l02051"></a>02051       $result = $res-&gt;numRows();
+<a name="l02052"></a>02052     }
+<a name="l02053"></a>02053       <span class="keywordflow">else</span>
+<a name="l02054"></a>02054     {
+<a name="l02055"></a>02055       $this-&gt;var-&gt;main[0]-&gt;ErrorMsg($error);
+<a name="l02056"></a>02056     }
+<a name="l02057"></a>02057 
+<a name="l02058"></a>02058     <span class="keywordflow">return</span> $result;
+<a name="l02059"></a>02059   }
+<a name="l02060"></a>02060 
+<a name="l02068"></a><a class="code" href="classDynamicObsahEshop.html#a220533424188bce90987cdb211f4a7d">02068</a>   <span class="keyword">private</span> function <a class="code" href="classDynamicObsahEshop.html#a220533424188bce90987cdb211f4a7d">Strankovani</a>($strana, $adresa, &amp;$limit)
+<a name="l02069"></a>02069   {
+<a name="l02070"></a>02070     $pocet = $this-&gt;<a class="code" href="classDynamicObsahEshop.html#d3c104ef71903a529c185d7458187690">PocetPolozekObsahu</a>();  <span class="comment">//pocet radku taulky</span>
+<a name="l02071"></a>02071     $pocetstran = ceil($pocet / ($this-&gt;strankovani * $this-&gt;pocet_sloupcu));  <span class="comment">//vypocteny pocet stran podle strankovani</span>
+<a name="l02072"></a>02072 
+<a name="l02073"></a>02073     settype($strana, <span class="stringliteral">"integer"</span>);
+<a name="l02074"></a>02074 
+<a name="l02075"></a>02075     $mezai = <span class="keyword">false</span>;
+<a name="l02076"></a>02076     <span class="keywordflow">if</span> ($pocetstran &gt; 7)
+<a name="l02077"></a>02077     {
+<a name="l02078"></a>02078       <span class="keywordflow">for</span> ($i = 0; $i &lt; 3; $i++)
+<a name="l02079"></a>02079       {
+<a name="l02080"></a>02080         $str = $i * ($this-&gt;strankovani * $this-&gt;pocet_sloupcu); <span class="comment">//stranka do DB</span>
+<a name="l02081"></a>02081         $poc = $i + 1;  <span class="comment">//predvipocotani poctu</span>
+<a name="l02082"></a>02082 
+<a name="l02083"></a>02083         <span class="keywordflow">if</span> ($str == $strana)  <span class="comment">//detekce oznacene stranky</span>
+<a name="l02084"></a>02084         {
+<a name="l02085"></a>02085           $jdi .= <span class="stringliteral">"{$poc}, "</span>;
+<a name="l02086"></a>02086           $aktualni = $poc;
+<a name="l02087"></a>02087         }
+<a name="l02088"></a>02088           <span class="keywordflow">else</span>
+<a name="l02089"></a>02089         {
+<a name="l02090"></a>02090           $jdi .= <span class="stringliteral">"&lt;a href=\"{$adresa}&amp;amp;str={$str}\" title=\"\"&gt;{$poc}&lt;/a&gt;, "</span>;
+<a name="l02091"></a>02091         }
+<a name="l02092"></a>02092       }
+<a name="l02093"></a>02093 
+<a name="l02094"></a>02094       <span class="keywordflow">if</span> (($strana / ($this-&gt;strankovani * $this-&gt;pocet_sloupcu)) &gt;= 2 &amp;&amp; ($strana / ($this-&gt;strankovani * $this-&gt;pocet_sloupcu)) &lt;= ($pocetstran - 3))
+<a name="l02095"></a>02095       {
+<a name="l02096"></a>02096         $mezi = <span class="keyword">true</span>;
+<a name="l02097"></a>02097       }
+<a name="l02098"></a>02098         <span class="keywordflow">else</span>
+<a name="l02099"></a>02099       {
+<a name="l02100"></a>02100         $jdi .= <span class="stringliteral">"..., "</span>;
+<a name="l02101"></a>02101       }
+<a name="l02102"></a>02102 
+<a name="l02103"></a>02103       <span class="keywordflow">for</span> ($i = $pocetstran - 3; $i &lt; $pocetstran; $i++)
+<a name="l02104"></a>02104       {
+<a name="l02105"></a>02105         $str = $i * ($this-&gt;strankovani * $this-&gt;pocet_sloupcu); <span class="comment">//stranka do DB</span>
+<a name="l02106"></a>02106         $poc = $i + 1;  <span class="comment">//predvipocotani poctu</span>
+<a name="l02107"></a>02107 
+<a name="l02108"></a>02108         <span class="keywordflow">if</span> ($str == $strana)  <span class="comment">//detekce oznacene stranky</span>
+<a name="l02109"></a>02109         {
+<a name="l02110"></a>02110           $jdi .= <span class="stringliteral">"{$poc}, "</span>;
+<a name="l02111"></a>02111           $aktualni = $poc;
+<a name="l02112"></a>02112         }
+<a name="l02113"></a>02113           <span class="keywordflow">else</span>
+<a name="l02114"></a>02114         {
+<a name="l02115"></a>02115           $jdi .= <span class="stringliteral">"&lt;a href=\"{$adresa}&amp;amp;str={$str}\" title=\"\"&gt;{$poc}&lt;/a&gt;, "</span>;
+<a name="l02116"></a>02116         }
+<a name="l02117"></a>02117       }
+<a name="l02118"></a>02118     }
+<a name="l02119"></a>02119       <span class="keywordflow">else</span>
+<a name="l02120"></a>02120     {
+<a name="l02121"></a>02121       <span class="keywordflow">for</span> ($i = 0; $i &lt; $pocetstran; $i++)
+<a name="l02122"></a>02122       {
+<a name="l02123"></a>02123         $str = $i * ($this-&gt;strankovani * $this-&gt;pocet_sloupcu); <span class="comment">//stranka do DB</span>
+<a name="l02124"></a>02124         $poc = $i + 1;  <span class="comment">//predvipocotani poctu</span>
+<a name="l02125"></a>02125 
+<a name="l02126"></a>02126         <span class="keywordflow">if</span> ($str == $strana)  <span class="comment">//detekce oznacene stranky</span>
+<a name="l02127"></a>02127         {
+<a name="l02128"></a>02128           $jdi .= <span class="stringliteral">"{$poc}, "</span>;
+<a name="l02129"></a>02129           $aktualni = $poc;
+<a name="l02130"></a>02130         }
+<a name="l02131"></a>02131           <span class="keywordflow">else</span>
+<a name="l02132"></a>02132         {
+<a name="l02133"></a>02133           $jdi .= <span class="stringliteral">"&lt;a href=\"{$adresa}&amp;amp;str={$str}\" title=\"\"&gt;{$poc}&lt;/a&gt;, "</span>;
+<a name="l02134"></a>02134         }
+<a name="l02135"></a>02135       }
+<a name="l02136"></a>02136     }
+<a name="l02137"></a>02137 
+<a name="l02138"></a>02138     <span class="keywordflow">if</span> ($mezi)
+<a name="l02139"></a>02139     {
+<a name="l02140"></a>02140       $i = 0;
+<a name="l02141"></a>02141       $str = $i * ($this-&gt;strankovani * $this-&gt;pocet_sloupcu); <span class="comment">//stranka do DB</span>
+<a name="l02142"></a>02142       $poc = $i + 1;  <span class="comment">//predvipocotani poctu</span>
+<a name="l02143"></a>02143       $jdi = <span class="stringliteral">"&lt;a href=\"{$adresa}&amp;amp;str={$str}\" title=\"\"&gt;{$poc}&lt;/a&gt;, ..., "</span>;
+<a name="l02144"></a>02144 
+<a name="l02145"></a>02145       $i = ($strana / ($this-&gt;strankovani * $this-&gt;pocet_sloupcu)) - 1;
+<a name="l02146"></a>02146       $str = $i * ($this-&gt;strankovani * $this-&gt;pocet_sloupcu); <span class="comment">//stranka do DB</span>
+<a name="l02147"></a>02147       $poc = $i + 1;  <span class="comment">//predvipocotani poctu</span>
+<a name="l02148"></a>02148       $jdi .= <span class="stringliteral">"&lt;a href=\"{$adresa}&amp;amp;str={$str}\" title=\"\"&gt;{$poc}&lt;/a&gt;, "</span>;
+<a name="l02149"></a>02149 
+<a name="l02150"></a>02150       $i = ($strana / ($this-&gt;strankovani * $this-&gt;pocet_sloupcu));
+<a name="l02151"></a>02151       $str = $i * ($this-&gt;strankovani * $this-&gt;pocet_sloupcu); <span class="comment">//stranka do DB</span>
+<a name="l02152"></a>02152       $poc = $i + 1;  <span class="comment">//predvipocotani poctu</span>
+<a name="l02153"></a>02153       $jdi .= <span class="stringliteral">"{$poc}&lt;/a&gt;, "</span>;
+<a name="l02154"></a>02154 
+<a name="l02155"></a>02155       $aktualni = $poc;
+<a name="l02156"></a>02156 
+<a name="l02157"></a>02157       $i = ($strana / ($this-&gt;strankovani * $this-&gt;pocet_sloupcu)) + 1;
+<a name="l02158"></a>02158       $str = $i * ($this-&gt;strankovani * $this-&gt;pocet_sloupcu); <span class="comment">//stranka do DB</span>
+<a name="l02159"></a>02159       $poc = $i + 1;  <span class="comment">//predvipocotani poctu</span>
+<a name="l02160"></a>02160       $jdi .= <span class="stringliteral">"&lt;a href=\"{$adresa}&amp;amp;str={$str}\" title=\"\"&gt;{$poc}&lt;/a&gt;, ..., "</span>;
+<a name="l02161"></a>02161 
+<a name="l02162"></a>02162       $i = $pocetstran - 1;
+<a name="l02163"></a>02163       $str = $i * ($this-&gt;strankovani * $this-&gt;pocet_sloupcu); <span class="comment">//stranka do DB</span>
+<a name="l02164"></a>02164       $poc = $i + 1;  <span class="comment">//predvipocotani poctu</span>
+<a name="l02165"></a>02165       $jdi .= <span class="stringliteral">"&lt;a href=\"{$adresa}&amp;amp;str={$str}\" title=\"\"&gt;{$poc}&lt;/a&gt;, "</span>;
+<a name="l02166"></a>02166     }
+<a name="l02167"></a>02167 
+<a name="l02168"></a>02168     $jdi = substr($jdi, 0, -2); <span class="comment">//odebrani carky</span>
+<a name="l02169"></a>02169 
+<a name="l02170"></a>02170     $limit = <span class="stringliteral">"LIMIT {$strana}, "</span>.($this-&gt;strankovani * $this-&gt;pocet_sloupcu); <span class="comment">//dodatecny dotaz do DB</span>
+<a name="l02171"></a>02171 
+<a name="l02172"></a>02172     $result =
+<a name="l02173"></a>02173     <span class="stringliteral">"</span>
+<a name="l02174"></a>02174 <span class="stringliteral">    &lt;div id=\"strankovani\"&gt;</span>
+<a name="l02175"></a>02175 <span class="stringliteral">      {$jdi}</span>
+<a name="l02176"></a>02176 <span class="stringliteral">      &lt;p id=\"vpravo\"&gt;</span>
+<a name="l02177"></a>02177 <span class="stringliteral">        Strana: {$aktualni} z {$pocetstran}</span>
+<a name="l02178"></a>02178 <span class="stringliteral">      &lt;/p&gt;</span>
+<a name="l02179"></a>02179 <span class="stringliteral">    &lt;/div&gt;</span>
+<a name="l02180"></a>02180 <span class="stringliteral">    "</span>;
+<a name="l02181"></a>02181 
+<a name="l02182"></a>02182     <span class="keywordflow">return</span> $result;
+<a name="l02183"></a>02183   }
+<a name="l02184"></a>02184 }
+<a name="l02185"></a>02185 ?&gt;
+</pre></div></div>
+<hr size="1"><address style="text-align: right;"><small>Generováno Wed Apr 1 23:40:35 2009 pro projekt Eshop postaveny na PHP layoutu programem&nbsp;
+<a href="http://www.doxygen.org/index.html">
+<img src="doxygen.png" alt="doxygen" align="middle" border="0"></a> 1.5.5 </small></address>
+</body>
+</html>

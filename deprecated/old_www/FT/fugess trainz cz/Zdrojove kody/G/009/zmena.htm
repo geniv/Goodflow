@@ -1,0 +1,29 @@
+<HTML>
+  <HEAD>
+    <TITLE>Zmìna obsahu prvku</TITLE>
+    <SCRIPT Language="JavaScript">
+      <!--
+        function ChangeIt(ElemID, NewStr) {
+          if (document.all) {
+            document.all[ElemID].innerHTML = NewStr;
+          } else if (document.layers){
+            with (document[ElemID].document) {
+              open();
+              write(NewStr);
+              close();
+            }
+          }
+        }
+      // -->
+    </SCRIPT>
+  </HEAD>
+  
+  <BODY>
+    Náhodné èíslo:
+    <SPAN Id="Test" Style="position: absolute;">0</SPAN>
+    <BR><BR>
+    <A Href="JavaScript:ChangeIt ('Test', Math.round (Math.random()*100))">
+      Generuj nové</A>
+  </BODY>
+</HTML>
+

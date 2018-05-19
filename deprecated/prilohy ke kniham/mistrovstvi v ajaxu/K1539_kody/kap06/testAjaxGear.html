@@ -1,0 +1,43 @@
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>Test frameworku AjaxGear</title>
+
+    <script language="JavaScript" src="AjaxGear.Core.js"></script> 
+
+    <script language="javascript">
+
+      var ajax;
+
+      function pouzijAjaxGear()
+      {
+        ajax = new AjaxGear.Ajax();
+        ajax.setMethod("GET");
+        ajax.setPagePath("ajaxGear.txt");
+        ajax.onRequestComplete = callback;
+        ajax.startRequest();
+      }
+
+      function callback() 
+      {
+        document.getElementById("cilovyDiv").innerHTML 
+          = ajax.getResponseText(); 
+      }
+
+    </script>
+  </head>
+
+  <body>
+    <h1>Test frameworku AjaxGear</h1>
+
+    <form>
+      <input type="button" value="Získej text" 
+        onclick="pouzijAjaxGear()"> 
+    </form>
+
+    <div id="cilovyDiv">
+      <p>Získaná data se zobrazí na tomto místě.</p> 
+    </div> 
+
+  </body>
+</html>

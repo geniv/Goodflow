@@ -1,0 +1,35 @@
+<HTML>
+  <HEAD>
+  <TITLE>Statusbar</TITLE>
+    <SCRIPT Language="JavaScript">
+    <!--
+      // Základní hláška, která se zobrazuje v pøípadì,
+      // e se Statusbar nevyuívá
+      defaultStatus =
+       'SWNet - MAGAZÍN INFORMAÈNÌ VYSPÌLİCH JEDINCÙ';
+
+      // Funkce nastavující text ve Statusbaru
+      // parametrem je odkaz
+      function SetStatus(Link){
+        // Pokud je to odkaz na stejném serveru
+        if (Link.hostname == location.hostname){
+          status = 'SWNet ('+Link.pathname+')';
+        } else {
+          // Pokud vede odkaz mimo lokální server
+          status = 'SWNet --> '+Link.href;
+        }
+      }
+    // -->
+    </SCRIPT>
+  </HEAD>
+
+  <BODY>
+    <A Href="http://www.inside.cz"
+       onMouseOver = "SetStatus(this); return true">
+       Trendy a strategie na èeském trhu IT</A><BR>
+    <A Href="http://swnet.cz/varime.php"
+       onMouseOver = "SetStatus(this); return true">
+       Moje oblíbená kuchaøka</A>
+  </BODY>
+</HTML>
+

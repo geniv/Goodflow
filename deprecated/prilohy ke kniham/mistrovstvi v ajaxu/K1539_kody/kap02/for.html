@@ -1,0 +1,32 @@
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>Použití cyklu for</title>
+
+    <script language="javascript">
+      function zobrazZpravu() 
+      {
+        var citac;
+        var celkem = 0;
+
+        for(citac = 1; citac <= 1000; citac++) {
+          celkem += citac;
+        }
+
+        document.getElementById('cilovyDiv').innerHTML = 
+          "Součet čísel 1 až 1000 je " + celkem;
+      }
+    </script>
+
+  </head> 
+
+  <body onload="zobrazZpravu()">
+
+    <h1>Použití cyklu for</h1>
+
+    <div id="cilovyDiv">
+    </div>
+
+    </body>
+</html>
+

@@ -1,0 +1,577 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!-- saved from url=(0098)http://interval.cz/clanky/jednoduchy-online-chat-v-php-a-javascripte-zobrazenie-online-uzivatelov/ -->
+<?xml version='1.0' encoding='windows-1250'?><HTML lang=cs xml:lang="cs" 
+xmlns="http://www.w3.org/1999/xhtml"><HEAD><TITLE>Jednoduchý online chat v PHP a JavaScripte - zobrazenie online užívateľov -- PHP -- Vývoj aplikací -- Interval.cz</TITLE>
+<META http-equiv=Content-Type content="text/html; charset=windows-1250">
+<META http-equiv=Content-language content=cs>
+<META http-equiv=Cache-control content=no-cache>
+<META http-equiv=Pragma content=no-cache>
+<META http-equiv=Expires content=-1>
+<META content=index,follow name=robots>
+<META content=index,follow,snippet,noarchive name=googlebot>
+<META 
+content='Naposledy sme si ošetrili vstupy, dnes si ukážeme, ako pracuje minule spomenutá funkcia OnLineForm, ktorá nám vráti mená online chatujúcich oddelených znakom ">".' 
+name=description>
+<META content="PHP, Vývoj aplikací, Interval" name=keywords>
+<META content="49.1915, 16.626" name=ICBM>
+<META content=Interval.cz name=DC.Title>
+<META content=http://interval.cz name=DC.Identifier>
+<META content="(SCHEME=ISSN) 12128651" name=DC.Identifier>
+<META content=cs name=DC.Language>
+<META http-equiv=pics-label 
+content='(pics-1.1 "http://www.icra.org/ratingsv02.html" comment "ICRAonline EN v2.0" l gen true for "http://interval.cz" r (nz 1 vz 1 lz 1 oz 1 cz 1) "http://www.rsac.org/ratingsv01.html" l gen true for "http://interval.cz" r (n 0 s 0 v 0 l 0))'>
+<META http-equiv=imagetoolbar content=no>
+<META http-equiv=MSThemeCompatible content=no>
+<META content=true name=MSSmartTagsPreventParsing><LINK 
+href="http://interval.cz/favicon.ico" type=image/x-icon 
+rel="shortcut icon"><LINK 
+title="Interval.cz -- Jednoduchý online chat v PHP a JavaScripte - zobrazenie online užívateľov -- (diskuse, Atom 0.3)" 
+href="http://export.interval.cz/?type=atom&amp;discussion=804" 
+type=application/atom+xml rel=alternate><LINK 
+title="Interval.cz -- Jednoduchý online chat v PHP a JavaScripte - zobrazenie online užívateľov -- (diskuse, RDF Site Summary 1.0)" 
+href="http://export.interval.cz/?type=rdf&amp;discussion=804" 
+type=application/rdf+xml rel=alternate><LINK 
+title="Interval.cz -- Jednoduchý online chat v PHP a JavaScripte - zobrazenie online užívateľov -- (diskuse, RSS 2.0)" 
+href="http://export.interval.cz/?type=rss&amp;discussion=804" 
+type=application/rss+xml rel=alternate><LINK href="http://interval.cz" 
+rel=home><LINK href="http://interval.cz/search_ex.asp" rel=search><LINK 
+href="http://interval.cz/serialy/jednoduchy-online-chat-v-php-a-javascripte/" 
+rel=up><LINK 
+href="http://interval.cz/clanky/jednoduchy-online-chat-v-php-a-javascripte-uvod/" 
+rel=first><LINK 
+href="http://interval.cz/clanky/jednoduchy-online-chat-v-php-a-javascripte-ramec-head/" 
+rel=last><LINK 
+href="http://interval.cz/clanky/jednoduchy-online-chat-v-php-a-javascripte-rozsirenie-aplikacie/" 
+rel=prev><LINK 
+href="http://interval.cz/clanky/jednoduchy-online-chat-v-php-a-javascripte-ramec-head/" 
+rel=next><LINK media=all 
+href="Jednoduchý online chat v PHP a JavaScripte - zobrazenie online užívateľov -- PHP -- Vývoj aplikací -- Interval_cz_soubory/html4.css" 
+type=text/css rel=stylesheet><LINK media=all 
+href="Jednoduchý online chat v PHP a JavaScripte - zobrazenie online užívateľov -- PHP -- Vývoj aplikací -- Interval_cz_soubory/interval-display.css" 
+type=text/css rel=stylesheet><LINK media=print 
+href="Jednoduchý online chat v PHP a JavaScripte - zobrazenie online užívateľov -- PHP -- Vývoj aplikací -- Interval_cz_soubory/interval-print.css" 
+type=text/css rel=stylesheet>
+<META content="MSHTML 6.00.2800.1106" name=GENERATOR></HEAD>
+<BODY class="interval interval-articles" id=article-804>
+<DIV class=audits><!-- TOPList.cz -->
+<SCRIPT type=text/javascript>
+<!-- <![CDATA[
+document.write ("<a href='http://www.toplist.cz'><img src='http://www.toplist.cz/dot.asp?id=33617&amp;http="+escape(document.referrer)+"&amp;wi="+escape(window.screen.width)+"&amp;he="+escape(window.screen.height)+"&amp;cd="+escape(window.screen.colorDepth)+"&amp;t="+escape(document.title)+"' style='border: 0; width: 1px; height: 1px' alt='.' /></a>");
+//]]> -->
+</SCRIPT>
+<NOSCRIPT>
+<DIV><A href="http://www.toplist.cz/"><IMG 
+style="BORDER-RIGHT: 0px; BORDER-TOP: 0px; BORDER-LEFT: 0px; WIDTH: 1px; BORDER-BOTTOM: 0px; HEIGHT: 1px" 
+alt=. src=""></A></DIV></NOSCRIPT><!-- TOPList.cz - konec --><!-- iAudit --><IMG 
+style="BORDER-RIGHT: 0px; BORDER-TOP: 0px; BORDER-LEFT: 0px; WIDTH: 1px; BORDER-BOTTOM: 0px; HEIGHT: 1px" 
+alt=. 
+src="Jednoduchý online chat v PHP a JavaScripte - zobrazenie online užívateľov -- PHP -- Vývoj aplikací -- Interval_cz_soubory/dot.idot.gif"> 
+<!-- iAudit - konec --><!-- (C)2005 Gemius SA - gemiusAudience  / Ostatni -->
+<SCRIPT type=text/javascript><!--
+	
+	gemius_identifier = new String('bQzrQkrzLOWoKbJeudlKguTS7OndUMSqxutbeFviWMv.47');
+	
+	gemius_href=new String(document.location);
+	if (document.referrer) { gemius_ref = new String(document.referrer); } else { gemius_ref = ""; }
+	if(typeof(Error)!='undefined') eval("try { if (typeof(top.document.referrer)=='string') { gemius_ref = top.document.referrer } } catch(gemius_ex) {}");
+	iname = new String('id='+gemius_identifier+';ref='+escape(gemius_ref.substring(0,299))+';href='+escape(gemius_href.substring(0,299))+';');
+	document.write('<iframe src="http://spir.hit.gemius.pl/gemiusaudience.html" name="'+iname+'" width="1" height="1" frameborder="0" scrolling="no"></iframe>');
+	//-->
+	</SCRIPT>
+</DIV>
+<DIV id=advertising-leader-board><!-- StartKód: adarbo2.bbmedia.cz 3.1 Nestandard  Interval(87) / cely web(1) / leaderboard 750x100(1) / nestandard(24) -->
+<SCRIPT type=text/javascript>
+	/* <![CDATA[ */
+	var bbs=screen,bbn=navigator,bbh;bbh='&ubl='+bbn.browserLanguage+'&ucc='+bbn.cpuClass+'&ucd='+bbs.colorDepth+'&uce='+bbn.cookieEnabled+'&udx='+bbs.deviceXDPI+'&udy='+bbs.deviceYDPI+'&usl='+bbn.systemLanguage+'&uje='+bbn.javaEnabled()+'&uah='+bbs.availHeight+'&uaw='+bbs.availWidth+'&ubd='+bbs.bufferDepth+'&uhe='+bbs.height+'&ulx='+bbs.logicalXDPI+'&uly='+bbs.logicalYDPI+'&use='+bbs.fontSmoothingEnabled+'&uto='+(new Date()).getTimezoneOffset()+'&uti='+(new Date()).getTime()+'&uui='+bbs.updateInterval+'&uul='+bbn.userLanguage+'&uwi='+bbs.width;
+	document.write("<scr"+"ipt  language='JavaScript' type='text/javascript' src='http://adarbo2.bbmedia.cz/please/showit/87/1/1/24/?typkodu=non-standard"+bbh+"&alttext=0&border=0&bgcolor=FFFFFF&text=000000&link=0000FF&target=_blank&bust="+Math.random()+"'>");
+	document.write("<"+"\/scr"+"ipt>");
+	/* ]]> */
+	</SCRIPT>
+<!-- KonecKód: adarbo2.bbmedia.cz 3.1 Nestandard --></DIV>
+<DIV id=page-header>
+<DIV id=interval-logo>
+<H1 title="Interval.cz - webdesign a e-komerce denně (logo &amp; index link)"><A 
+href="http://interval.cz/">Interval.cz<SPAN></SPAN></A></H1></DIV>
+<DIV id=advertising-page-header><!-- StartKód: adarbo2.bbmedia.cz 3.1 Nestandard  Interval(87) / cely web(1) / horni468x60(2) / nestandard(24) -->
+<SCRIPT type=text/javascript>
+	/* <![CDATA[ */
+	var bbs=screen,bbn=navigator,bbh;bbh='&ubl='+bbn.browserLanguage+'&ucc='+bbn.cpuClass+'&ucd='+bbs.colorDepth+'&uce='+bbn.cookieEnabled+'&udx='+bbs.deviceXDPI+'&udy='+bbs.deviceYDPI+'&usl='+bbn.systemLanguage+'&uje='+bbn.javaEnabled()+'&uah='+bbs.availHeight+'&uaw='+bbs.availWidth+'&ubd='+bbs.bufferDepth+'&uhe='+bbs.height+'&ulx='+bbs.logicalXDPI+'&uly='+bbs.logicalYDPI+'&use='+bbs.fontSmoothingEnabled+'&uto='+(new Date()).getTimezoneOffset()+'&uti='+(new Date()).getTime()+'&uui='+bbs.updateInterval+'&uul='+bbn.userLanguage+'&uwi='+bbs.width;
+	document.write("<scr"+"ipt  type='text/javascript' src='http://adarbo2.bbmedia.cz/please/showit/87/1/2/24/?typkodu=non-standard"+bbh+"&alttext=0&border=0&bgcolor=FFFFFF&text=000000&link=0000FF&target=_top&bust="+Math.random()+"'>");
+	document.write("<"+"\/scr"+"ipt>");
+	/* ]]> */
+	</SCRIPT>
+<!-- KonecKód: adarbo2.bbmedia.cz 3.1 Nestandard --></DIV>
+<DIV class=page-maker>&nbsp;</DIV></DIV>
+<DIV id=page-topmenu>
+<H2 class=textversion>Navigace</H2><!-- cached 09-15-62-hlavni_menu_with_ascii.txt --><!-- ,Vývoj aplikací ~~ ,,PHP ~~ , -->
+<DIV id=page-mainmenu>
+<H3 class=textversion>Hlavní menu</H3>
+<UL>
+  <LI class=first><A href="http://interval.cz/">Titulka</A></LI>
+  <LI><A href="http://interval.cz/e-komerce/">E-komerce</A></LI>
+  <LI><A href="http://interval.cz/webdesign/">Webdesign</A></LI>
+  <LI class=selected><A href="http://interval.cz/vyvoj-aplikaci/">Vývoj 
+  aplikací</A></LI>
+  <LI><A href="http://interval.cz/nastroje/">Nástroje</A></LI>
+  <LI><A href="http://interval.cz/magazin/">Magazín</A></LI>
+  <LI class="right selected"><A 
+  href="http://interval.inshop.cz/">Knihkupectví</A></LI>
+  <LI class=right><A href="http://interforum.interval.cz/">Interforum</A></LI>
+  <LI class=right><A 
+href="http://interzen.interval.cz/">Interzen</A></LI></UL></DIV>
+<DIV id=page-mainmenu-maker>&nbsp;</DIV>
+<DIV id=page-mainsubmenu>
+<H3 class=textversion>Submenu</H3>
+<UL>
+  <LI><A href="http://interval.cz/vyvoj-aplikaci/j2me/">J2ME</A></LI>
+  <LI><A href="http://interval.cz/vyvoj-aplikaci/asp/">ASP</A></LI>
+  <LI><A href="http://interval.cz/vyvoj-aplikaci/net/">.NET</A></LI>
+  <LI class=selected><A 
+  href="http://interval.cz/vyvoj-aplikaci/php/">PHP</A></LI>
+  <LI><A 
+href="http://interval.cz/vyvoj-aplikaci/javascript/">JavaScript</A></LI>
+  <LI><A href="http://interval.cz/vyvoj-aplikaci/xml/">XML</A></LI>
+  <LI><A href="http://interval.cz/vyvoj-aplikaci/java/">Java</A></LI>
+  <LI><A href="http://interval.cz/vyvoj-aplikaci/perl-cgi/">PERL/CGI</A></LI>
+  <LI><A href="http://interval.cz/vyvoj-aplikaci/databaze/">Databáze</A></LI>
+  <LI><A 
+href="http://interval.cz/vyvoj-aplikaci/bezpecnost/">Bezpečnost</A></LI>
+  <LI><A 
+href="http://interval.cz/vyvoj-aplikaci/analyzy/">Analýzy</A></LI></UL><SPAN 
+id=page-mainsubmenu-maker>&nbsp;</SPAN></DIV><!-- cas behu menu = 0 --></DIV>
+<DIV id=page-body>
+<DIV id=page-left>
+<DIV id=article>
+<H2>Jednoduchý online chat v PHP a JavaScripte - zobrazenie online 
+užívateľov</H2>
+<P id=prepend>Naposledy sme si ošetrili vstupy, dnes si ukážeme, ako pracuje 
+minule spomenutá funkcia OnLineForm, ktorá nám vráti mená online chatujúcich 
+oddelených znakom "&gt;".</P>
+<DIV class="advertising-bigsquare-outer noprint">
+<DIV class=advertising-bigsquare-inner style="WIDTH: 300px"><!-- StartKód: adarbo2.bbmedia.cz 3.1 Nestandard  Interval(87) / cely web(1) / ctverec250x250(8) / nestandard(24) -->
+<SCRIPT type=text/javascript>
+	/* <![CDATA[ */
+	var bbs=screen,bbn=navigator,bbh;bbh='&ubl='+bbn.browserLanguage+'&ucc='+bbn.cpuClass+'&ucd='+bbs.colorDepth+'&uce='+bbn.cookieEnabled+'&udx='+bbs.deviceXDPI+'&udy='+bbs.deviceYDPI+'&usl='+bbn.systemLanguage+'&uje='+bbn.javaEnabled()+'&uah='+bbs.availHeight+'&uaw='+bbs.availWidth+'&ubd='+bbs.bufferDepth+'&uhe='+bbs.height+'&ulx='+bbs.logicalXDPI+'&uly='+bbs.logicalYDPI+'&use='+bbs.fontSmoothingEnabled+'&uto='+(new Date()).getTimezoneOffset()+'&uti='+(new Date()).getTime()+'&uui='+bbs.updateInterval+'&uul='+bbn.userLanguage+'&uwi='+bbs.width;
+	document.write("<scr"+"ipt  type='text/javascript' src='http://adarbo2.bbmedia.cz/please/showit/87/1/8/24/?typkodu=non-standard"+bbh+"&alttext=0&border=0&bgcolor=FFFFFF&text=000000&link=0000FF&target=_top&bust="+Math.random()+"'>");
+	document.write("<"+"\/scr"+"ipt>");
+	/* ]]> */
+	</SCRIPT>
+<!-- KonecKód: adarbo2.bbmedia.cz 3.1 Nestandard --></DIV></DIV>
+<P class=texttabulka>Funkcia OnLineForm očakáva štyri parametre: $meno, $sprava, 
+$odhlasit, $dvojnik. Prvé tri sú myslím jasné, $dvojnik je negovaná hodnota 
+premennej $chatar, čo znamená, že ak je $chatar prázdny reťazec, $dvojnik je 
+pravdivá hodnota. Pozrime sa teraz na to, čo sa stane po tom, ako vyhovujú 
+všetky vstupy: </P>
+<P class=texttabulka>
+<TABLE cellSpacing=0 cellPadding=1 width="100%" border=0>
+  <TBODY>
+  <TR>
+    <TD>
+      <TABLE cellSpacing=0 cellPadding=2 width="100%" border=0>
+        <TBODY>
+        <TR>
+          <TD class=aktuality bgColor=white><SPAN class=comment>// vstupy su 
+            ok</SPAN><BR>else {<BR>&nbsp;&nbsp;<SPAN class=comment>// vrati 
+            retazec s online chatujucimi</SPAN><BR>&nbsp;&nbsp;$new_online = 
+            OnLineForm($meno,$sprava,$odhlasit,!$chatar);<BR><BR>&nbsp;&nbsp;<SPAN 
+            class=comment>// ak $chatar=="" kontroluj 
+            dvojnika</SPAN><BR>&nbsp;&nbsp;if(!$chatar){<BR>&nbsp;&nbsp;&nbsp;&nbsp;<SPAN 
+            class=comment>// obsahuje vrateny retazec dvojnika 
+            ?</SPAN><BR>&nbsp;&nbsp;&nbsp;&nbsp;if( 
+            StrStr($new_online,"&gt;".$meno) 
+            ){<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;JSAlert("Meno ".$meno." už 
+            existuje 
+            !");<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$meno="";<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<BR>&nbsp;&nbsp;&nbsp;&nbsp;<SPAN 
+            class=comment>// neobsahuje, preto ho pridaj do retazca online 
+            chatujucich</SPAN><BR>&nbsp;&nbsp;&nbsp;&nbsp;else<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$new_online 
+            .= 
+            "&gt;".$meno;<BR>&nbsp;&nbsp;&nbsp;&nbsp;}<BR><BR>&nbsp;&nbsp;<SPAN 
+            class=comment>// $meno sa 
+            odhlasil</SPAN><BR>&nbsp;&nbsp;if($odhlasit)<BR>&nbsp;&nbsp;&nbsp;&nbsp;$meno="";<BR><BR>&nbsp;&nbsp;<SPAN 
+            class=comment>// ak nastala zmena v online chatujucich, obnov ramec 
+            online</SPAN><BR>&nbsp;&nbsp;if($old_online != 
+            $new_online)<BR>&nbsp;&nbsp;&nbsp;&nbsp;JSFrameReload("online","online.php");<BR><BR>&nbsp;&nbsp;<SPAN 
+            class=comment>// ak bola pridana sprava, obnov ramec 
+            show</SPAN><BR>&nbsp;&nbsp;if($sprava || $old_online != 
+            $new_online)<BR>&nbsp;&nbsp;&nbsp;&nbsp;JSFrameReload("show","show.php");<BR>&nbsp;&nbsp;}<BR></TD></TR></TBODY></TABLE></TD></TR></TBODY></TABLE></P>
+<P class=texttabulka>Stručne povedané, ak ide užívateľ prvý krát (to vieme podľa 
+prázdnej premennej $chatar) napísať svoje meno a správu, urobíme kontrolu, či 
+takéto meno už nechatuje. Ako som už povedal, funkcia vráti reťazec online 
+chatujúcich oddelených znakom "&gt;", nič nám teda nebráni zistiť, či vrátený 
+reťazec neobsahuje $meno. Ak áno (užívateľ s takýmto menom už existuje), 
+vypíšeme o tom správu a nastavíme $meno na prázdny reťazec, ako keď sme na chat 
+prišli prvý krát. Inak pridáme $meno do reťazca online chatujúcich, pretože na 
+základe zmeny $new_online oproti $old_online budeme obnovovať rámec online. </P>
+<P class=texttabulka>V súbore function.php sú definované dve funkcie, ktoré 
+generujú JavaScript kód: </P>
+<P class=texttabulka>
+<TABLE cellSpacing=0 cellPadding=1 width="100%" border=0>
+  <TBODY>
+  <TR>
+    <TD>
+      <TABLE cellSpacing=0 cellPadding=2 width="100%" border=0>
+        <TBODY>
+        <TR>
+          <TD class=aktuality bgColor=white><SPAN class=comment>// JavaScript 
+            - do ramca $frame nacitaj dokument s $url</SPAN><BR>function 
+            JSFrameReload($frame,$url){<BR>&nbsp;&nbsp;echo "&lt;script 
+            language='JavaScript'&gt;\n";<BR>&nbsp;&nbsp;echo 
+            "parent.frames.".$frame.".location = 
+            '".$url."'\n";<BR>&nbsp;&nbsp;echo 
+            "&lt;/script&gt;\n";<BR>&nbsp;&nbsp;}<BR><BR><SPAN class=comment>// 
+            JavaScript - okno alert</SPAN><BR>function 
+            JSAlert($s){<BR>&nbsp;&nbsp;echo "&lt;script 
+            language='JavaScript'&gt;\n";<BR>&nbsp;&nbsp;echo 
+            "alert('".$s."')\n";<BR>&nbsp;&nbsp;echo 
+            "&lt;/script&gt;\n";<BR>&nbsp;&nbsp;} 
+  </TD></TR></TBODY></TABLE></TD></TR></TBODY></TABLE></P>
+<P class=texttabulka>Okrem týchto funkcií je tu definovaná funkcia na 
+premenovanie súborov, ktorá sa používa predtým, ako ideme so súborom pracovať: 
+</P>
+<P class=texttabulka>
+<TABLE cellSpacing=0 cellPadding=1 width="100%" border=0>
+  <TBODY>
+  <TR>
+    <TD>
+      <TABLE cellSpacing=0 cellPadding=2 width="100%" border=0>
+        <TBODY>
+        <TR>
+          <TD class=aktuality bgColor=white>function 
+            Premenuj($oldName,$newName){<BR>&nbsp;&nbsp;while(&nbsp;&nbsp;!($r = 
+            @ReName($oldName,$newName))&nbsp;&nbsp;);<BR>&nbsp;&nbsp;} 
+        </TD></TR></TBODY></TABLE></TD></TR></TBODY></TABLE></P>
+<P class=texttabulka>Pred funkciu Rename() vložíme znak @, ktorý zabráni výpisu 
+chybových správ, pretože to, že sa súbor nedá premenovať, môže byť spôsobené 
+tým, že so súborom práve pracuje iný užívateľ. V praxi sa tento cyklus vykoná 
+pravdepodobne iba raz, pretože práca so súbormi nie je časovo náročná. </P>
+<P class=texttabulka>Funkcia OnLineForm pracuje nasledovne: do premennej 
+$doteraz si uložíme počet sekúnd od 1.1.1970, premenujeme si oba súbory, čím 
+dáme ostatým navedomie, že s nimi pracujeme práve my. Načítame obsah celého 
+súboru online užívateľov do poľa, kde každý prvok poľa bude obsahovať jeden 
+riadok zo súboru. Potom otvoríme oba súbory a postupne pomocou cyklu while 
+prejdeme všetkými prvkami poľa. </P>
+<P class=texttabulka>
+<TABLE cellSpacing=0 cellPadding=1 width="100%" border=0>
+  <TBODY>
+  <TR>
+    <TD>
+      <TABLE cellSpacing=0 cellPadding=2 width="100%" border=0>
+        <TBODY>
+        <TR>
+          <TD class=aktuality bgColor=white>function 
+            OnLineForm($meno,$sprava,$odhlasit,$dvojnik){<BR>&nbsp;&nbsp;$doteraz 
+            = 
+            Date("U");<BR><BR>&nbsp;&nbsp;Premenuj(ONLINE_OLDNAME,ONLINE_NEWNAME);<BR>&nbsp;&nbsp;Premenuj(SHOW_OLDNAME,SHOW_NEWNAME);<BR><BR>&nbsp;&nbsp;$pole 
+            = File(ONLINE_NEWNAME);<BR><BR>&nbsp;&nbsp;$fp_online = 
+            FOpen(ONLINE_NEWNAME,"w");<BR>&nbsp;&nbsp;$fp_show = 
+            FOpen(SHOW_NEWNAME,"a");<BR><BR><SPAN class=comment>// while cyklus 
+            zaciatok</SPAN><BR>&nbsp;&nbsp;while(list($riadok,$retazec) = 
+            each($pole)){<BR>&nbsp;&nbsp;&nbsp;&nbsp;$nick = 
+            StrTok($retazec,"&gt;");<BR>&nbsp;&nbsp;&nbsp;&nbsp;$idle = 
+            StrTok("\n");<BR></TD></TR></TBODY></TABLE></TD></TR></TBODY></TABLE></P>
+<P class=texttabulka>Do $nick si uložíme meno chatujúceho a do $idle počet 
+sekúnd od 1.1.1970 do času pridania poslednej správy. Potom na základe 
+niekoľkých podmienok zapisujeme do oboch súborov potrebné údaje. Myslím, že po 
+zhliadnutí zdrojového kódu bude princíp spracovania jasný. </P>
+<P class=texttabulka>
+<TABLE cellSpacing=0 cellPadding=1 width="100%" border=0>
+  <TBODY>
+  <TR>
+    <TD>
+      <TABLE cellSpacing=0 cellPadding=2 width="100%" border=0>
+        <TBODY>
+        <TR>
+          <TD class=aktuality 
+            bgColor=white>&nbsp;&nbsp;&nbsp;&nbsp;if($nick==$meno){<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if($dvojnik){<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;FPutS($fp_online,$retazec);<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$online_users 
+            .= 
+            "&gt;".$nick;<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;else 
+            if($odhlasit){<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if($sprava)<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;FPutS($fp_show,sprintf(FORMAT,$meno,$sprava));<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;FPutS($fp_show,sprintf(FORMAT,"Chat 
+            II","&lt;b style='color: Red'&gt;$meno sa odhlásil(a) z 
+            chatu&lt;/b&gt;"));<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;else 
+            if($sprava){<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;FPutS($fp_show,sprintf(FORMAT,$meno,$sprava));<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;FPutS($fp_online,$nick."&gt;".$doteraz."\n");<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$online_users 
+            .= 
+            "&gt;".$nick;<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<BR>&nbsp;&nbsp;&nbsp;&nbsp;<SPAN 
+            class=comment>// 
+            ++++++++++++++++++++++++++++++++++++++++++++++++++++++++</SPAN><BR>&nbsp;&nbsp;&nbsp;&nbsp;else 
+            if($doteraz - $idle &gt; 
+            AUTO_LOGOUT_TIMER)<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;FPutS($fp_show,sprintf(FORMAT,"Chat 
+            II","&lt;b style='color: Orange'&gt;$nick bol(a) automaticky 
+            odhlásený(á) z 
+            chatu&lt;/b&gt;"));<BR>&nbsp;&nbsp;&nbsp;&nbsp;else{<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;FPutS($fp_online,$retazec);<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$online_users 
+            .= 
+            "&gt;".$nick;<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<BR>&nbsp;&nbsp;&nbsp;&nbsp;<SPAN 
+            class=comment>// 
+            ++++++++++++++++++++++++++++++++++++++++++++++++++++++++</SPAN><BR>&nbsp;&nbsp;&nbsp;&nbsp;}<BR><SPAN 
+            class=comment>// while cyklus koniec</SPAN> 
+  </TD></TR></TBODY></TABLE></TD></TR></TBODY></TABLE></P>
+<P class=texttabulka>Po ukončení cyklu, teda prekontrolovaní všetkých riadkov 
+súboru online, nasledujúcou podmienkou prekontrolujeme, či nie je potrebné 
+prihlásiť nového užívateľa na chat: </P>
+<P class=texttabulka>
+<TABLE cellSpacing=0 cellPadding=1 width="100%" border=0>
+  <TBODY>
+  <TR>
+    <TD>
+      <TABLE cellSpacing=0 cellPadding=2 width="100%" border=0>
+        <TBODY>
+        <TR>
+          <TD class=aktuality 
+            bgColor=white>if(StrStr($online_users,"&gt;".$meno) == false 
+            &amp;&amp; (!$odhlasit || $dvojnik)) 
+  </TD></TR></TBODY></TABLE></TD></TR></TBODY></TABLE></P>
+<P class=texttabulka>Pridaný bude vtedy, ak sa $meno nenachádza medzi online 
+chatujúcimi a ešte musí byť splnená jedna z týchto dvoch podmienok: $meno sa 
+nechce odhlásiť, alebo sa robí kontrola, či existuje dvojník. Nakoniec súbory 
+zatvoríme, premenujeme na pôvodné a vrátime zoznam práve online chatujúcich. 
+Funkcia nám teda: 
+<UL class=texttabulka type=disc>
+  <LI>zabezpečuje kontrolu, či nepridáva novú správu dvojník 
+  <LI>odhlásenie užívateľa 
+  <LI>pridanie novej správy 
+  <LI>automatické odhlásenie užívateľa 
+  <LI>pridanie nového užívateľa (&amp; správy) </LI></UL>
+<P></P>
+<P class=texttabulka>Táto funkcia sa však spustí iba vtedy, ak vyhovujú vstupné 
+hodnoty a odošle sa formulár. To by bol viac menej statický chat, preto, ako v 
+prvom článku o jednoduchom chate sa každých HEAD_RELOAD_TIMER sekúnd obnoví 
+rámec head, v ktorom pracuje skript head.php, ktorý sa stará o automatické 
+odstránenie starých užívateľov. O tom si však povieme až v ďalšom pokračovaní. 
+Pozorný čitateľ možno postrehol, že pri porovnávaní premenných $meno a $nick 
+rozlišujeme veľkosti písmen, preto sa na chate môžu objaviť napr. mená 
+"Barborka" aj "BARBORKA". Kto má niečo proti, nech nahradí toto porovnávanie 
+funkciou StrCaseCmp(), ktorá nie je citlivá na veľkosť písmen. Taktiež bude 
+potrebná zmena funkcie StrStr() na StrIStr(). </P>
+<P class=texttabulka>Pre tých, ktorý nevedia, o čom som tu dnes písal, je tu <A 
+href="http://jednoduchychat2.webzdarma.cz/index.php">odkaz na ukážku.</A> </P>
+<DIV id=article-author><A href="http://interval.cz/autori/kubis-michal/">Kubiš, 
+Michal</A> (30.&nbsp;10.&nbsp;2001) </DIV>
+<DIV class=refer>
+<H3><A 
+title="Jednoduchý online chat v PHP a JavaScripte (úplný přehled článků seriálu)" 
+href="http://interval.cz/serialy/jednoduchy-online-chat-v-php-a-javascripte/">Jednoduchý 
+online chat v PHP a JavaScripte</A></H3>
+<P>Kouzlo okamžité komunikace si můžete vychutnat prostřednictvím chatu. Tato 
+základní web-based aplikace vám předvede, co internet umí, a naučí to i vás. 
+Tato série článků již byla uzavřena, ačkoli další pokračování nelze 
+vyloučit.</P>
+<UL>
+  <LI><A 
+  href="http://interval.cz/clanky/jednoduchy-online-chat-v-php-a-javascripte-ramec-head/">Jednoduchý 
+  online chat v PHP a JavaScripte - rámec head</A> (1.&nbsp;11.&nbsp;2001)
+  <LI><STRONG>Jednoduchý online chat v PHP a JavaScripte - zobrazenie online 
+  užívateľov</STRONG> (právě čtete)
+  <LI><A 
+  href="http://interval.cz/clanky/jednoduchy-online-chat-v-php-a-javascripte-rozsirenie-aplikacie/">Jednoduchý 
+  online chat v PHP a JavaScripte - rozšírenie aplikácie</A> 
+  (26.&nbsp;10.&nbsp;2001)
+  <LI><A 
+  href="http://interval.cz/clanky/jednoduchy-online-chat-v-php-a-javascripte-uvod/">Jednoduchý 
+  online chat v PHP a JavaScripte - úvod</A> 
+(24.&nbsp;8.&nbsp;2001)</LI></UL></DIV>
+<DIV class=noprint id=article-discussion><!-- cached 804-tabulka-jednoduchy-online-chat-v-php-a-javascripte-zobrazenie-online-uzivatelov.txt -->
+<DIV id=article-discussion-index>
+<FORM action=http://interval.cz/discussion-read.asp?disc=804 method=post>
+<TABLE cellSpacing=0>
+  <TBODY>
+  <TR>
+    <TH colSpan=4><A 
+      title="Jednoduchý online chat v PHP a JavaScripte - zobra ... (diskuse)" 
+      href="http://interval.cz/clanky/jednoduchy-online-chat-v-php-a-javascripte-zobrazenie-online-uzivatelov/diskuse/">Jednoduchý 
+      online chat v PHP a JavaScripte - zobra ... (diskuse)</A></TH></TR>
+  <TR>
+    <TD class=checkbox>&nbsp;</TD>
+    <TD class=date>&nbsp;</TD>
+    <TD class=sender>&nbsp;</TD>
+    <TD class=subject>&nbsp;</TD></TR>
+  <TR>
+    <TD id=foot colSpan=4><INPUT class=submit id=add_new type=submit value="Vložit nový" name=add_new></TD></TR></TBODY></TABLE></FORM></DIV></DIV></DIV></DIV>
+<DIV id=page-right>
+<H2 class=textversion>Pravý sloupek</H2>
+<DIV id=search>
+<H3 class=textversion>Vyhledávání</H3>
+<FORM action=http://interval.cz/search.asp method=get>
+<DIV><INPUT class=text name=co> <!--  
+<select name='cim'>
+<option value ='Google' selected='selected'>Google</option>
+<option value ='Jyxo'>Jyxo</option>
+</select>
+<input type='hidden' name='nadpis' value='1' />
+<input type='hidden' name='popis' value='1' />
+<input type='hidden' name='text' value='1' />
+<input type='hidden' name='rubrika' value='0' />
+<input type='hidden' name='autor' value='0' />
+ --><INPUT class=submit type=submit value=Najdi! name=send> </DIV></FORM><!-- <div><a href='http://interval.cz/search.asp'>Rozšířené vyhledávání</a></div> --></DIV><!-- StartKód: adarbo2.bbmedia.cz 3.1 Nestandard  Interval(87) / home page(2) / textbox(1) / nestandard(24) -->
+<SCRIPT type=text/javascript>
+	<!-- <![CDATA[
+	var bbs=screen,bbn=navigator,bbh;bbh='&ubl='+bbn.browserLanguage+'&ucc='+bbn.cpuClass+'&ucd='+bbs.colorDepth+'&uce='+bbn.cookieEnabled+'&udx='+bbs.deviceXDPI+'&udy='+bbs.deviceYDPI+'&usl='+bbn.systemLanguage+'&uje='+bbn.javaEnabled()+'&uah='+bbs.availHeight+'&uaw='+bbs.availWidth+'&ubd='+bbs.bufferDepth+'&uhe='+bbs.height+'&ulx='+bbs.logicalXDPI+'&uly='+bbs.logicalYDPI+'&use='+bbs.fontSmoothingEnabled+'&uto='+(new Date()).getTimezoneOffset()+'&uti='+(new Date()).getTime()+'&uui='+bbs.updateInterval+'&uul='+bbn.userLanguage+'&uwi='+bbs.width;
+	document.write("<scr"+"ipt  language='JavaScript' type='text/javascript' src='http://adarbo2.bbmedia.cz/please/showit/87/2/1/24/?typkodu=non-standard"+bbh+"&alttext=0&border=0&bgcolor=FFFFFF&text=000000&link=0000FF&target=_blank&bust="+Math.random()+"'>");
+	document.write("<"+"\/scr"+"ipt>");
+	//]]> -->
+	</SCRIPT>
+<!-- KonecKód: adarbo2.bbmedia.cz 3.1 Nestandard --><!-- cached 07-knizni_tip.txt -->
+<DIV class="page-right-box book">
+<H3>Knižní tip</H3>
+<DIV class=page-right-box-in>
+<DIV class=book-top>
+<H4><A href="http://interval.inshop.cz/inshop/scripts/detail.asp?kat=264">Co 
+programátory ve škole neučí</A></H4></DIV>
+<DIV class=image><A 
+href="http://interval.inshop.cz/inshop/scripts/detail.asp?kat=264"><IMG 
+title="Co programátory ve škole neučí" alt=obálka 
+src="Jednoduchý online chat v PHP a JavaScripte - zobrazenie online užívateľov -- PHP -- Vývoj aplikací -- Interval_cz_soubory/264.jpg"></A></DIV></DIV></DIV><!-- cached 17-nejctenejsi_clanky.txt -->
+<DIV class="page-right-box reading">
+<H3 title="Nejčtenější články za posledních 28 dnů">Nejčtenější</H3>
+<DIV class=page-right-box-in>
+<UL>
+  <LI><A href="http://interval.cz/clanky/opera-9-pokrocila-konfigurace/">Opera 9 
+  - pokročilá konfigurace</A>
+  <LI><A 
+  href="http://interval.cz/clanky/adobe-photoshop-prakticky-webdesign-jakub-krcmar/">Adobe 
+  Photoshop - praktický webdesign (Jakub Krčmář)</A>
+  <LI><A 
+  href="http://interval.cz/clanky/drupal-tvorba-vlastniho-vzhledu/">Drupal - 
+  tvorba vlastního vzhledu</A>
+  <LI><A 
+  href="http://interval.cz/clanky/pruvodce-svg-dalsi-nastroje-pro-tvorbu-svg-grafiky/">Průvodce 
+  SVG - další nástroje pro tvorbu SVG grafiky</A>
+  <LI><A 
+  href="http://interval.cz/clanky/spravy-zo-slovenskeho-internetu-8/">Správy zo 
+  slovenského internetu 8.</A></LI></UL></DIV></DIV>
+<DIV class=merak-box style="MARGIN-TOP: 1.5em; TEXT-ALIGN: center">
+<DIV id=merak-content 
+style="BORDER-RIGHT: #000000 1px solid; BORDER-TOP: #000000 1px solid; FONT-WEIGHT: bold; FONT-SIZE: 11px; BACKGROUND-IMAGE: url(http://interval.cz/__services/__include_right/merak-background.png); MARGIN: 0px auto; BORDER-LEFT: #000000 1px solid; WIDTH: 160px; BORDER-BOTTOM: #000000 1px solid; BACKGROUND-REPEAT: no-repeat; FONT-FAMILY: Verdana, Arial, sans-serif; HEIGHT: 190px; TEXT-ALIGN: left; FONT-VARIANT: small-caps">
+<H3 style="FONT-SIZE: 12px; MARGIN: 55px 0px 10px 10px; FONT-VARIANT: normal"><A 
+title="Merak Mail Server 8" 
+style="COLOR: #000000; BACKGROUND-COLOR: transparent; TEXT-DECORATION: none" 
+href="http://www.merak-mail-server.cz/">Merak Mail Server 8</A></H3>
+<DIV id=merak-proclamation style="PADDING-LEFT: 10px">Integrovaný <EM><A 
+title="Merak Mail Server 8" 
+style="COLOR: #35a0df; FONT-STYLE: normal; BACKGROUND-COLOR: transparent; TEXT-DECORATION: none" 
+href="http://www.merak-mail-server.cz/">antispam</A></EM> <BR>Snadná <EM><A 
+title="Merak Mail Server 8" 
+style="COLOR: #35a0df; FONT-STYLE: normal; BACKGROUND-COLOR: transparent; TEXT-DECORATION: none" 
+href="http://www.merak-mail-server.cz/">instalace</A></EM> <BR>Zabezpečený 
+<EM><A title="Merak Mail Server 8" 
+style="COLOR: #35a0df; FONT-STYLE: normal; BACKGROUND-COLOR: transparent; TEXT-DECORATION: none" 
+href="http://www.merak-mail-server.cz/">groupware</A></EM> </DIV></DIV></DIV>
+<DIV class="page-right-box emailserv">
+<H3>Info servis</H3>
+<DIV class=page-right-box-in>
+<UL>
+  <LI><A title="Exporty aktuálních informací ve formátech Atom, RDF a RSS" 
+  href="http://export.interval.cz/">Atom, RDF, RSS</A> 
+  <LI>Informace e-mailem: </LI></UL>
+<FORM action=prihlaseni.asp method=post>
+<DIV class=shell><INPUT class=text name=adresa></DIV>
+<DIV class=shell><INPUT class=radio type=radio CHECKED value=1 name=co>Týdenní 
+přehled článků</DIV>
+<DIV class=shell><INPUT class=radio type=radio value=2 name=co>HELP 
+konference</DIV>
+<DIV 
+class=shell><INPUT class=submit type=submit value=Přihlásit></DIV></FORM></DIV></DIV>
+<DIV class=advertising-vertical-banner-outer>
+<DIV class=advertising-vertical-banner-inner><!-- Skyscraper Right --><!-- BBSTART Interval.cz/Skyscraper Right/rolovací/Skyscraper 120x600 -->
+<SCRIPT type=text/javascript>/* <![CDATA[ */
+var bbat=0,bbbr=0,bbtt='_blank',bbpath='17877/4/2/9',bbxl=1,bbac=1;
+//]]></SCRIPT>
+
+<SCRIPT 
+src="Jednoduchý online chat v PHP a JavaScripte - zobrazenie online užívateľov -- PHP -- Vývoj aplikací -- Interval_cz_soubory/bb4.js" 
+type=text/javascript></SCRIPT>
+<NOSCRIPT>
+<DIV><A href="http://ad2.billboard.cz/please/redirect/17877/4/2/9/"><IMG 
+style="BORDER-RIGHT: 0px; BORDER-TOP: 0px; BORDER-LEFT: 0px; BORDER-BOTTOM: 0px" 
+height=600 alt=. 
+src="Jednoduchý online chat v PHP a JavaScripte - zobrazenie online užívateľov -- PHP -- Vývoj aplikací -- Interval_cz_soubory/fallback9.gif" 
+width=120></A></DIV></NOSCRIPT><!-- BBKONEC --></DIV></DIV><!-- cached 17-nejdiskutovanejsi_clanky.txt -->
+<DIV class="page-right-box cauldron">
+<H3 title="Nejdiskutovanější články za posledních 28 dnů">Diskuzní kotel</H3>
+<DIV class=page-right-box-in>
+<UL>
+  <LI><A title="(103 komentářů)" 
+  href="http://interval.cz/clanky/opera-9-pokrocila-konfigurace/">Opera 9 - 
+  pokročilá konfigurace</A>
+  <LI><A title="(4 komentářů)" 
+  href="http://interval.cz/clanky/pruvodce-svg-dalsi-nastroje-pro-tvorbu-svg-grafiky/">Průvodce 
+  SVG - další nástroje pro tvorbu SVG grafiky</A>
+  <LI><A title="(2 komentářů)" 
+  href="http://interval.cz/clanky/drupal-tvorba-vlastniho-vzhledu/">Drupal - 
+  tvorba vlastního vzhledu</A>
+  <LI><A title="(2 komentářů)" 
+  href="http://interval.cz/clanky/spravy-zo-slovenskeho-internetu-9/">Správy zo 
+  slovenského internetu 9.</A>
+  <LI><A title="(1 komentářů)" 
+  href="http://interval.cz/clanky/lokalizace-asp-net-2-x-aplikaci/">Lokalizace 
+  ASP.NET 2.x aplikací</A></LI></UL></DIV></DIV></DIV>
+<DIV class=page-maker>&nbsp;</DIV>
+<DIV class=page-maker-white>&nbsp;</DIV></DIV>
+<DIV id=advertising-page-bottom>
+<DIV id=advertising-page-bottom-left>
+<DIV><!-- Full Banner Bottom --><!-- BBSTART Interval.cz/Full Banner Bottom/rolovací/Full Banner 468x60 -->
+<SCRIPT type=text/javascript>/* <![CDATA[ */
+var bbat=0,bbbr=0,bbtt='_blank',bbpath='17877/1/2/1',bbxl=1,bbac=1;
+//]]></SCRIPT>
+
+<SCRIPT 
+src="Jednoduchý online chat v PHP a JavaScripte - zobrazenie online užívateľov -- PHP -- Vývoj aplikací -- Interval_cz_soubory/bb4.js" 
+type=text/javascript></SCRIPT>
+<NOSCRIPT>
+<DIV><A href="http://ad2.billboard.cz/please/redirect/17877/1/2/1/"><IMG 
+style="BORDER-RIGHT: 0px; BORDER-TOP: 0px; BORDER-LEFT: 0px; BORDER-BOTTOM: 0px" 
+height=60 alt=. 
+src="Jednoduchý online chat v PHP a JavaScripte - zobrazenie online užívateľov -- PHP -- Vývoj aplikací -- Interval_cz_soubory/fallback1.gif" 
+width=468></A></DIV></NOSCRIPT><!-- BBKONEC --></DIV></DIV>
+<DIV id=advertising-page-bottom-right>
+<DIV><!-- Button2 Bottom --><!-- BBSTART Interval.cz/Button2 Bottom/rolovací/Button 2 120x60 -->
+<SCRIPT type=text/javascript>/* <![CDATA[ */
+var bbat=0,bbbr=0,bbtt='_blank',bbpath='17877/2/2/6',bbxl=1,bbac=1;
+//]]></SCRIPT>
+
+<SCRIPT 
+src="Jednoduchý online chat v PHP a JavaScripte - zobrazenie online užívateľov -- PHP -- Vývoj aplikací -- Interval_cz_soubory/bb4.js" 
+type=text/javascript></SCRIPT>
+<NOSCRIPT>
+<DIV><A href="http://ad2.billboard.cz/please/redirect/17877/2/2/6/"><IMG 
+style="BORDER-RIGHT: 0px; BORDER-TOP: 0px; BORDER-LEFT: 0px; BORDER-BOTTOM: 0px" 
+height=60 alt=. 
+src="Jednoduchý online chat v PHP a JavaScripte - zobrazenie online užívateľov -- PHP -- Vývoj aplikací -- Interval_cz_soubory/fallback6.gif" 
+width=120></A></DIV></NOSCRIPT><!-- BBKONEC --></DIV></DIV>
+<DIV class=page-maker>&nbsp;</DIV></DIV>
+<DIV id=page-foot>
+<DIV id=page-foot-menu><A href="http://interval.cz/redakce-inzerce.asp">Inzerce 
+na Interval.cz</A> &nbsp;|&nbsp; <A 
+href="http://interval.cz/redakce.asp">Redakce Interval.cz</A> &nbsp;|&nbsp; <A 
+href="http://interval.cz/autori.asp">Hledáme nové autory</A> </DIV>
+<DIV id=issn><A class=noprint 
+href="http://jigsaw.w3.org/css-validator/validator?uri=http%3A%2F%2Finterval.cz%3A80%2Fclanky%2Fjednoduchy-online-chat-v-php-a-javascripte-zobrazenie-online-uzivatelov%2F">.</A> 
+ISSN 1212-8651 <A class=noprint 
+href="http://validator.w3.org/check?uri=http%3A%2F%2Finterval.cz%3A80%2Fclanky%2Fjednoduchy-online-chat-v-php-a-javascripte-zobrazenie-online-uzivatelov%2F&amp;charset=%28detect+automatically%29&amp;doctype=%28detect+automatically%29&amp;outline=1&amp;verbose=1">.</A> 
+</DIV>
+<DIV id=page-foot-zoner>© Zoner software, s.r.o., všechna práva vyhrazena, tento 
+server dodržuje <A href="http://interval.cz/privacy.asp">právní předpisy</A> o 
+ochraně osobních údajů. </DIV></DIV>
+<SCRIPT 
+src="Jednoduchý online chat v PHP a JavaScripte - zobrazenie online užívateľov -- PHP -- Vývoj aplikací -- Interval_cz_soubory/audits-footer.js" 
+type=text/javascript></SCRIPT>
+
+<SCRIPT 
+src="Jednoduchý online chat v PHP a JavaScripte - zobrazenie online užívateľov -- PHP -- Vývoj aplikací -- Interval_cz_soubory/urchin.js" 
+type=text/javascript>
+</SCRIPT>
+
+<SCRIPT type=text/javascript>
+_uacct = "UA-173085-1";
+
+var len = _uOsr.length;
+_uOsr[len]="seznam.cz";       _uOkw[len]="w";
+_uOsr[len+1]="centrum.cz";    _uOkw[len+1]="q";
+_uOsr[len+2]="jyxo.cz";       _uOkw[len+2]="s";
+_uOsr[len+3]="atlas.cz";      _uOkw[len+3]="q";
+_uOsr[len+4]="zoohoo.cz";     _uOkw[len+4]="q";
+_uOsr[len+5]="tiscali.cz";    _uOkw[len+5]="query";
+_uOsr[len+6]="1.cz";          _uOkw[len+6]="q";
+_uOsr[len+7]="volny.cz";      _uOkw[len+7]="search";
+
+urchinTracker();
+</SCRIPT>
+</BODY></HTML>

@@ -1,0 +1,21 @@
+<SCRIPT TYPE="text/vbscript">
+<!--
+    Dim TimeOut
+
+    Document.Write "<center><H1 ID=""h1_Time"">10...</H1></center>"
+    TimeOut = 10
+    SetTimeout "Tick()", 1000
+
+    Function Tick()
+        TimeOut = TimeOut - 1
+        If TimeOut = 0 Then
+            h1_Time.InnerHtml = _
+"<A HREF=""http://www.sweb.cz/hho"">http://www.sweb.cz/hho</A>"
+            Window.Location.Href = "http://www.sweb.cz/hho"
+        Else
+            h1_Time.InnerText = TimeOut & "..."
+            SetTimeout "Tick()", 1000
+        End If
+    End Function
+-->
+</SCRIPT>

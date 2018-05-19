@@ -1,0 +1,537 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!-- saved from url=(0054)http://interval.cz/clanky/pocet-stazeni-pod-kontrolou/ -->
+<?xml version='1.0' encoding='windows-1250'?><HTML lang=cs xml:lang="cs" 
+xmlns="http://www.w3.org/1999/xhtml"><HEAD><TITLE>Počet stažení pod kontrolou -- PHP -- Vývoj aplikací -- Interval.cz</TITLE>
+<META http-equiv=Content-Type content="text/html; charset=windows-1250">
+<META http-equiv=Content-language content=cs>
+<META http-equiv=Cache-control content=no-cache>
+<META http-equiv=Pragma content=no-cache>
+<META http-equiv=Expires content=-1>
+<META content=index,follow name=robots>
+<META content=index,follow,snippet,noarchive name=googlebot>
+<META 
+content="Někdy potřebujeme znát počet stažení souboru (nebo alespoň klepnutí na odkaz). Jednou z možností je nenabízet soubor ke stažení přímo, ale odkazovat na skript, který nejprve započte jeden přístup (zvýší počítadlo stažení) a teprve poté přesměruje na soubor ke stažení." 
+name=description>
+<META content="PHP, Vývoj aplikací, Interval" name=keywords>
+<META content="49.1915, 16.626" name=ICBM>
+<META content=Interval.cz name=DC.Title>
+<META content=http://interval.cz name=DC.Identifier>
+<META content="(SCHEME=ISSN) 12128651" name=DC.Identifier>
+<META content=cs name=DC.Language>
+<META http-equiv=pics-label 
+content='(pics-1.1 "http://www.icra.org/ratingsv02.html" comment "ICRAonline EN v2.0" l gen true for "http://interval.cz" r (nz 1 vz 1 lz 1 oz 1 cz 1) "http://www.rsac.org/ratingsv01.html" l gen true for "http://interval.cz" r (n 0 s 0 v 0 l 0))'>
+<META http-equiv=imagetoolbar content=no>
+<META http-equiv=MSThemeCompatible content=no>
+<META content=true name=MSSmartTagsPreventParsing><LINK 
+href="http://interval.cz/favicon.ico" type=image/x-icon 
+rel="shortcut icon"><LINK 
+title="Interval.cz -- Počet stažení pod kontrolou -- (diskuse, Atom 0.3)" 
+href="http://export.interval.cz/?type=atom&amp;discussion=1013" 
+type=application/atom+xml rel=alternate><LINK 
+title="Interval.cz -- Počet stažení pod kontrolou -- (diskuse, RDF Site Summary 1.0)" 
+href="http://export.interval.cz/?type=rdf&amp;discussion=1013" 
+type=application/rdf+xml rel=alternate><LINK 
+title="Interval.cz -- Počet stažení pod kontrolou -- (diskuse, RSS 2.0)" 
+href="http://export.interval.cz/?type=rss&amp;discussion=1013" 
+type=application/rss+xml rel=alternate><LINK href="http://interval.cz" 
+rel=home><LINK href="http://interval.cz/search_ex.asp" rel=search><LINK 
+media=all 
+href="Počet stažení pod kontrolou -- PHP -- Vývoj aplikací -- Interval_cz_soubory/html4.css" 
+type=text/css rel=stylesheet><LINK media=all 
+href="Počet stažení pod kontrolou -- PHP -- Vývoj aplikací -- Interval_cz_soubory/interval-display.css" 
+type=text/css rel=stylesheet><LINK media=print 
+href="Počet stažení pod kontrolou -- PHP -- Vývoj aplikací -- Interval_cz_soubory/interval-print.css" 
+type=text/css rel=stylesheet>
+<META content="MSHTML 6.00.2800.1106" name=GENERATOR></HEAD>
+<BODY class="interval interval-articles" id=article-1013>
+<DIV class=audits><!-- TOPList.cz -->
+<SCRIPT type=text/javascript>
+<!-- <![CDATA[
+document.write ("<a href='http://www.toplist.cz'><img src='http://www.toplist.cz/dot.asp?id=33617&amp;http="+escape(document.referrer)+"&amp;wi="+escape(window.screen.width)+"&amp;he="+escape(window.screen.height)+"&amp;cd="+escape(window.screen.colorDepth)+"&amp;t="+escape(document.title)+"' style='border: 0; width: 1px; height: 1px' alt='.' /></a>");
+//]]> -->
+</SCRIPT>
+<NOSCRIPT>
+<DIV><A href="http://www.toplist.cz/"><IMG 
+style="BORDER-RIGHT: 0px; BORDER-TOP: 0px; BORDER-LEFT: 0px; WIDTH: 1px; BORDER-BOTTOM: 0px; HEIGHT: 1px" 
+alt=. 
+src="Počet stažení pod kontrolou -- PHP -- Vývoj aplikací -- Interval_cz_soubory/dot.gif"></A></DIV></NOSCRIPT><!-- TOPList.cz - konec --><!-- iAudit --><IMG 
+style="BORDER-RIGHT: 0px; BORDER-TOP: 0px; BORDER-LEFT: 0px; WIDTH: 1px; BORDER-BOTTOM: 0px; HEIGHT: 1px" 
+alt=. 
+src="Počet stažení pod kontrolou -- PHP -- Vývoj aplikací -- Interval_cz_soubory/dot.idot.gif"> 
+<!-- iAudit - konec --><!-- (C)2005 Gemius SA - gemiusAudience  / Ostatni -->
+<SCRIPT type=text/javascript><!--
+	
+	gemius_identifier = new String('bQzrQkrzLOWoKbJeudlKguTS7OndUMSqxutbeFviWMv.47');
+	
+	gemius_href=new String(document.location);
+	if (document.referrer) { gemius_ref = new String(document.referrer); } else { gemius_ref = ""; }
+	if(typeof(Error)!='undefined') eval("try { if (typeof(top.document.referrer)=='string') { gemius_ref = top.document.referrer } } catch(gemius_ex) {}");
+	iname = new String('id='+gemius_identifier+';ref='+escape(gemius_ref.substring(0,299))+';href='+escape(gemius_href.substring(0,299))+';');
+	document.write('<iframe src="http://spir.hit.gemius.pl/gemiusaudience.html" name="'+iname+'" width="1" height="1" frameborder="0" scrolling="no"></iframe>');
+	//-->
+	</SCRIPT>
+</DIV>
+<DIV id=advertising-leader-board><!-- StartKód: adarbo2.bbmedia.cz 3.1 Nestandard  Interval(87) / cely web(1) / leaderboard 750x100(1) / nestandard(24) -->
+<SCRIPT type=text/javascript>
+	/* <![CDATA[ */
+	var bbs=screen,bbn=navigator,bbh;bbh='&ubl='+bbn.browserLanguage+'&ucc='+bbn.cpuClass+'&ucd='+bbs.colorDepth+'&uce='+bbn.cookieEnabled+'&udx='+bbs.deviceXDPI+'&udy='+bbs.deviceYDPI+'&usl='+bbn.systemLanguage+'&uje='+bbn.javaEnabled()+'&uah='+bbs.availHeight+'&uaw='+bbs.availWidth+'&ubd='+bbs.bufferDepth+'&uhe='+bbs.height+'&ulx='+bbs.logicalXDPI+'&uly='+bbs.logicalYDPI+'&use='+bbs.fontSmoothingEnabled+'&uto='+(new Date()).getTimezoneOffset()+'&uti='+(new Date()).getTime()+'&uui='+bbs.updateInterval+'&uul='+bbn.userLanguage+'&uwi='+bbs.width;
+	document.write("<scr"+"ipt  language='JavaScript' type='text/javascript' src='http://adarbo2.bbmedia.cz/please/showit/87/1/1/24/?typkodu=non-standard"+bbh+"&alttext=0&border=0&bgcolor=FFFFFF&text=000000&link=0000FF&target=_blank&bust="+Math.random()+"'>");
+	document.write("<"+"\/scr"+"ipt>");
+	/* ]]> */
+	</SCRIPT>
+<!-- KonecKód: adarbo2.bbmedia.cz 3.1 Nestandard --></DIV>
+<DIV id=page-header>
+<DIV id=interval-logo>
+<H1 title="Interval.cz - webdesign a e-komerce denně (logo &amp; index link)"><A 
+href="http://interval.cz/">Interval.cz<SPAN></SPAN></A></H1></DIV>
+<DIV id=advertising-page-header><!-- StartKód: adarbo2.bbmedia.cz 3.1 Nestandard  Interval(87) / cely web(1) / horni468x60(2) / nestandard(24) -->
+<SCRIPT type=text/javascript>
+	/* <![CDATA[ */
+	var bbs=screen,bbn=navigator,bbh;bbh='&ubl='+bbn.browserLanguage+'&ucc='+bbn.cpuClass+'&ucd='+bbs.colorDepth+'&uce='+bbn.cookieEnabled+'&udx='+bbs.deviceXDPI+'&udy='+bbs.deviceYDPI+'&usl='+bbn.systemLanguage+'&uje='+bbn.javaEnabled()+'&uah='+bbs.availHeight+'&uaw='+bbs.availWidth+'&ubd='+bbs.bufferDepth+'&uhe='+bbs.height+'&ulx='+bbs.logicalXDPI+'&uly='+bbs.logicalYDPI+'&use='+bbs.fontSmoothingEnabled+'&uto='+(new Date()).getTimezoneOffset()+'&uti='+(new Date()).getTime()+'&uui='+bbs.updateInterval+'&uul='+bbn.userLanguage+'&uwi='+bbs.width;
+	document.write("<scr"+"ipt  type='text/javascript' src='http://adarbo2.bbmedia.cz/please/showit/87/1/2/24/?typkodu=non-standard"+bbh+"&alttext=0&border=0&bgcolor=FFFFFF&text=000000&link=0000FF&target=_top&bust="+Math.random()+"'>");
+	document.write("<"+"\/scr"+"ipt>");
+	/* ]]> */
+	</SCRIPT>
+<!-- KonecKód: adarbo2.bbmedia.cz 3.1 Nestandard --></DIV>
+<DIV class=page-maker>&nbsp;</DIV></DIV>
+<DIV id=page-topmenu>
+<H2 class=textversion>Navigace</H2><!-- cached 09-15-62-hlavni_menu_with_ascii.txt --><!-- ,Vývoj aplikací ~~ ,,PHP ~~ , -->
+<DIV id=page-mainmenu>
+<H3 class=textversion>Hlavní menu</H3>
+<UL>
+  <LI class=first><A href="http://interval.cz/">Titulka</A></LI>
+  <LI><A href="http://interval.cz/e-komerce/">E-komerce</A></LI>
+  <LI><A href="http://interval.cz/webdesign/">Webdesign</A></LI>
+  <LI class=selected><A href="http://interval.cz/vyvoj-aplikaci/">Vývoj 
+  aplikací</A></LI>
+  <LI><A href="http://interval.cz/nastroje/">Nástroje</A></LI>
+  <LI><A href="http://interval.cz/magazin/">Magazín</A></LI>
+  <LI class="right selected"><A 
+  href="http://interval.inshop.cz/">Knihkupectví</A></LI>
+  <LI class=right><A href="http://interforum.interval.cz/">Interforum</A></LI>
+  <LI class=right><A 
+href="http://interzen.interval.cz/">Interzen</A></LI></UL></DIV>
+<DIV id=page-mainmenu-maker>&nbsp;</DIV>
+<DIV id=page-mainsubmenu>
+<H3 class=textversion>Submenu</H3>
+<UL>
+  <LI><A href="http://interval.cz/vyvoj-aplikaci/j2me/">J2ME</A></LI>
+  <LI><A href="http://interval.cz/vyvoj-aplikaci/asp/">ASP</A></LI>
+  <LI><A href="http://interval.cz/vyvoj-aplikaci/net/">.NET</A></LI>
+  <LI class=selected><A 
+  href="http://interval.cz/vyvoj-aplikaci/php/">PHP</A></LI>
+  <LI><A 
+href="http://interval.cz/vyvoj-aplikaci/javascript/">JavaScript</A></LI>
+  <LI><A href="http://interval.cz/vyvoj-aplikaci/xml/">XML</A></LI>
+  <LI><A href="http://interval.cz/vyvoj-aplikaci/java/">Java</A></LI>
+  <LI><A href="http://interval.cz/vyvoj-aplikaci/perl-cgi/">PERL/CGI</A></LI>
+  <LI><A href="http://interval.cz/vyvoj-aplikaci/databaze/">Databáze</A></LI>
+  <LI><A 
+href="http://interval.cz/vyvoj-aplikaci/bezpecnost/">Bezpečnost</A></LI>
+  <LI><A 
+href="http://interval.cz/vyvoj-aplikaci/analyzy/">Analýzy</A></LI></UL><SPAN 
+id=page-mainsubmenu-maker>&nbsp;</SPAN></DIV><!-- cas behu menu = 0 --></DIV>
+<DIV id=page-body>
+<DIV id=page-left>
+<DIV id=article>
+<H2>Počet stažení pod kontrolou</H2>
+<P id=prepend>Někdy potřebujeme znát počet stažení souboru (nebo alespoň 
+klepnutí na odkaz). Jednou z možností je nenabízet soubor ke stažení přímo, ale 
+odkazovat na skript, který nejprve započte jeden přístup (zvýší počítadlo 
+stažení) a teprve poté přesměruje na soubor ke stažení. </P>
+<DIV class="advertising-bigsquare-outer noprint">
+<DIV class=advertising-bigsquare-inner style="WIDTH: 300px"><!-- StartKód: adarbo2.bbmedia.cz 3.1 Nestandard  Interval(87) / cely web(1) / ctverec250x250(8) / nestandard(24) -->
+<SCRIPT type=text/javascript>
+	/* <![CDATA[ */
+	var bbs=screen,bbn=navigator,bbh;bbh='&ubl='+bbn.browserLanguage+'&ucc='+bbn.cpuClass+'&ucd='+bbs.colorDepth+'&uce='+bbn.cookieEnabled+'&udx='+bbs.deviceXDPI+'&udy='+bbs.deviceYDPI+'&usl='+bbn.systemLanguage+'&uje='+bbn.javaEnabled()+'&uah='+bbs.availHeight+'&uaw='+bbs.availWidth+'&ubd='+bbs.bufferDepth+'&uhe='+bbs.height+'&ulx='+bbs.logicalXDPI+'&uly='+bbs.logicalYDPI+'&use='+bbs.fontSmoothingEnabled+'&uto='+(new Date()).getTimezoneOffset()+'&uti='+(new Date()).getTime()+'&uui='+bbs.updateInterval+'&uul='+bbn.userLanguage+'&uwi='+bbs.width;
+	document.write("<scr"+"ipt  type='text/javascript' src='http://adarbo2.bbmedia.cz/please/showit/87/1/8/24/?typkodu=non-standard"+bbh+"&alttext=0&border=0&bgcolor=FFFFFF&text=000000&link=0000FF&target=_top&bust="+Math.random()+"'>");
+	document.write("<"+"\/scr"+"ipt>");
+	/* ]]> */
+	</SCRIPT>
+<!-- KonecKód: adarbo2.bbmedia.cz 3.1 Nestandard --></DIV></DIV>
+<P>Řada prohlížečů po přesměrování na soubor ke stažení zahájí stahování, ale 
+neukáže adresu, odkud se ve skutečnosti stahuje. Pokud do skriptu doplníte 
+kontrolu, zda je skript volán z patřičné stránky, poslouží vám to zároveň jako 
+jednoduchá ochrana, aby mohl kdokoli jiný na své stránce odkazovat na váš soubor 
+ke stažení. Pokud někdo takový odkaz umístí na svou stránku, místo souboru ke 
+stažení je prohlížeč přesměrován na vaši hlavní stránku. 
+<P>Stahování souboru by bylo možné vyřešit i jinak, než prostým přesměrováním - 
+soubor by posílal sám skript s odesláním vhodných hlaviček. Toto se však hodí 
+pro vyloženě malé soubory (malé obrázky apod.). Pro velké soubory o velikosti 
+několika megabajtů je to nevhodné - zpravidla by doba povolená k běhu skriptu 
+vypršela dříve, než si klient soubor stáhne.</P>
+<P>Nejprve si v databázi vytvořte tabulku - v ní pak můžete mít nadefinováno ke 
+stažení souborů kolik chcete. Tabulka s názvem DLOADS bude mít sloupce ID typu 
+<I>shortint</I> s volbou <STRONG>auto_increment</STRONG>, <I>loaded</I> typu 
+<STRONG>integer</STRONG> a <I>path</I> typu <STRONG>varchar(255)</STRONG>. Pokud 
+chcete nabízet ke stažení soubory různých typů a z různých adresářů, je nutné 
+následující skript upravit. Ten počítá se stahováním souborů stejného typu z 
+téže složky. Do řádku tabulky pak vkládáte pouze do sloupce LOADED 0 a do 
+sloupce PATH jméno souboru včetně přípony. 
+<P>Položka ID se naplní sama na číslo o jedna vyšší, než je poslední vložený 
+soubor ke stažení. Hodnotu ID pak použijete v parametru odkazu na skript pro 
+stažení souboru. Jelikož používáte prosté přesměrování na soubor ke stažení, 
+nemůžete pomocí odeslání vhodných hlaviček sdělit prohlížeči, jak se souborem 
+naložit. 
+<P>Abyste se vyhnuli u klienta namísto zahájení stahování souboru spuštění 
+nějaké aplikace (např. přehrávače záznamů v případě souborů mp3), přejmenujte 
+soubor ke stažení tak, že změníte příponu na nějakou "exotickou" a při stahování 
+souboru upozorníte klienta na nutnost přejmenování po ukončení stahování. Pokud 
+naopak chcete, aby se klientovi řádně spustila jeho přidružená aplikace (např. 
+Windows Media Player, WinAmp, Word nebo Acrobat Reader), důsledně dodržíte 
+správnou příponu souboru určeného ke stažení a informační hlášení o přejmenování 
+souboru nepoužijete.</P>
+<P class=texttabulka>Skript <I>download.php</I>:</P>
+<P class=texttabulka>
+<TABLE cellSpacing=0 cellPadding=1 width="100%" border=0>
+  <TBODY>
+  <TR>
+    <TD>
+      <TABLE cellSpacing=0 cellPadding=2 width="100%" border=0>
+        <TBODY>
+        <TR>
+          <TD class=aktuality 
+            bgColor=#ebf1f9>&lt;?PHP<BR>$path="music/";&nbsp; <SPAN 
+            class=comment>// cesta k adresáři se soubory ke 
+            stažení</SPAN><BR>$location="http://$HTTP_HOST/";&nbsp; <SPAN 
+            class=comment>// adresa pro přesměrování na hlavní 
+            stránku</SPAN><BR>if (isset($dl) &amp;&amp; 
+            ERegI("$HTTP_HOST",$HTTP_REFERER)) {&nbsp; <SPAN class=comment>// 
+            otestuj, zda je zadán parametr požadovaného souboru a skript je 
+            volán ze správné stránky</SPAN><BR>&nbsp; require("opendb.php"); 
+            <SPAN class=comment>// připoj se k databázi</SPAN><BR>&nbsp; 
+            $dl=AddSlashes(Chop($dl)); <SPAN class=comment>// ošetři případné 
+            nebezpečné znaky parametru dl</SPAN><BR>&nbsp; $result = 
+            @mysql_query("select path from dloads where id=$dl"); <BR>&nbsp; 
+            $data = mysql_fetch_row($result);<BR>&nbsp; if (!empty($data[0])) 
+            {&nbsp; <SPAN class=comment>// otestuj, zda pro zadaný parametr byla 
+            v databázi nějaká data</SPAN><BR>&nbsp;&nbsp;&nbsp; 
+            @mysql_query("update dloads set loaded=loaded+1 where 
+            id=$dl");&nbsp; <SPAN class=comment>// zvyš počet stažení o 
+            1</SPAN><BR>&nbsp;&nbsp;&nbsp; 
+            $location="http://$HTTP_HOST/$path$data[0]";&nbsp; <SPAN 
+            class=comment>// nastav adresu pro přesměrování na soubor ke 
+            stažení</SPAN><BR>&nbsp; }<BR>}<BR>Header("Location: $location"); 
+            <SPAN class=comment>// přesměruj prohlížeč</SPAN><BR>exit; <SPAN 
+            class=comment>// ukonči skript</SPAN><BR>?&gt; 
+    </TD></TR></TBODY></TABLE></TD></TR></TBODY></TABLE></P>
+<P>Upozorňuji, že součástí ukázkového skriptu není soubor <I>opendb.php</I>, 
+který zajišťuje připojení k databázi pomocí PHP funkcí 
+<STRONG>mysql_connect</STRONG> a <STRONG>mysql_select_db</STRONG>. Jejich 
+použití je k vidění například v článku <A 
+href="http://interval.cz/clanek.asp?article=812">Jednoduchý internetový obchod v 
+PHP, 1. díl</A>. Na některých serverech není obsah proměnné $HTTP_REFERER 
+korektní. Pokud se skript chová divně, zkuste vynechat v podmínce testování této 
+proměnné - ochrana proti "zcizení" odkazu pak ovšem nebude funkční.</P>
+<P>Do stránky pak vložte odkaz na soubor ke stažení. Součástí odkazu je parametr 
+<STRONG>dl</STRONG> určující číslem soubor ke stažení a také ukázka 
+vyskakovacího upozornění o nutnosti přejmenování souboru:</P>
+<P class=texttabulka>
+<TABLE cellSpacing=0 cellPadding=1 width="100%" border=0>
+  <TBODY>
+  <TR>
+    <TD>
+      <TABLE cellSpacing=0 cellPadding=2 width="100%" border=0>
+        <TBODY>
+        <TR>
+          <TD class=aktuality bgColor=#ebf1f9>&lt;a href="download.php?dl=1" 
+            onclick="alert('Po stažení změn příponu souboru na [*.mp3].\nOdkaz 
+            je chráněn proti umístění na cizí servery.');"&gt;Skladba 
+            1&lt;/a&gt; </TD></TR></TBODY></TABLE></TD></TR></TBODY></TABLE></P>
+<P class=texttabulka>Nechcete-li použít změněné přípony souboru, pak v odkazu 
+pro stažení souboru vynechejte celý parametr OnClick. Tabulku databáze lze 
+rozšířit o popisek souboru ke stažení a vytvořit skript, který automaticky 
+vygeneruje stránku se všemi soubory ke stažení, s komentářem a s počtem 
+dosavadních stažení.</P>
+<DIV id=article-author><A 
+href="http://interval.cz/autori/ruzicka-pavel/">Růžička, Pavel</A> 
+(10.&nbsp;3.&nbsp;2002) 
+<DIV id=article-about-author>(spolupracovník redakce magazínu 
+Interval.cz)</DIV></DIV>
+<DIV class=noprint id=article-discussion><!-- cached 1013-tabulka-pocet-stazeni-pod-kontrolou.txt -->
+<DIV id=article-discussion-index>
+<FORM action=http://interval.cz/discussion-read.asp?disc=1013 method=post>
+<TABLE cellSpacing=0>
+  <TBODY>
+  <TR>
+    <TH colSpan=4><A title="Počet stažení pod kontrolou (diskuse)" 
+      href="http://interval.cz/clanky/pocet-stazeni-pod-kontrolou/diskuse/">Počet 
+      stažení pod kontrolou (diskuse)</A></TH></TR>
+  <TR>
+    <TD class=checkbox><INPUT title="0 4557" type=checkbox value=1 
+      name=checkboxDISKUZE4557></TD>
+    <TD class=date>2002-03-10 12:48:22</TD>
+    <TD class=sender>Roman Slavicinsky</TD>
+    <TD class=subject>Pohled z praxe</TD></TR>
+  <TR>
+    <TD class=checkbox><INPUT title="0 4563" type=checkbox value=1 
+      name=checkboxDISKUZE4563></TD>
+    <TD class=date>2002-03-11 06:42:54</TD>
+    <TD class=sender>Sly</TD>
+    <TD class=subject>Bez databaze</TD></TR>
+  <TR>
+    <TD class=checkbox><INPUT title="1 4566" type=checkbox value=1 
+      name=checkboxDISKUZE4566></TD>
+    <TD class=date>2002-03-11 09:45:39</TD>
+    <TD class=sender>Petr Študent, delphi-miniGuru</TD>
+    <TD class=subject><IMG class=line alt=. 
+      src="Počet stažení pod kontrolou -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Počet stažení pod kontrolou -- PHP -- Vývoj aplikací -- Interval_cz_soubory/line3.png">Bez 
+      databaze</TD></TR>
+  <TR>
+    <TD class=checkbox><INPUT title="0 4568" type=checkbox value=1 
+      name=checkboxDISKUZE4568></TD>
+    <TD class=date>2002-03-11 11:59:50</TD>
+    <TD class=sender>mEN</TD>
+    <TD class=subject>NULL values</TD></TR>
+  <TR>
+    <TD class=checkbox><INPUT title="0 4620" type=checkbox value=1 
+      name=checkboxDISKUZE4620></TD>
+    <TD class=date>2002-03-15 16:31:28</TD>
+    <TD class=sender>Švestka Štefan</TD>
+    <TD class=subject>Výborný článek</TD></TR>
+  <TR>
+    <TD class=checkbox><INPUT title="1 4621" type=checkbox value=1 
+      name=checkboxDISKUZE4621></TD>
+    <TD class=date>2002-03-15 18:01:37</TD>
+    <TD class=sender>Pavel Růžička</TD>
+    <TD class=subject><IMG class=line alt=. 
+      src="Počet stažení pod kontrolou -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Počet stažení pod kontrolou -- PHP -- Vývoj aplikací -- Interval_cz_soubory/line3.png">Výborný 
+      článek</TD></TR>
+  <TR>
+    <TD class=checkbox><INPUT title="0 4950" type=checkbox value=1 
+      name=checkboxDISKUZE4950></TD>
+    <TD class=date>2002-04-10 14:05:12</TD>
+    <TD class=sender>mat</TD>
+    <TD class=subject>download</TD></TR>
+  <TR>
+    <TD class=checkbox><INPUT title="0 29833" type=checkbox value=1 
+      name=checkboxDISKUZE29833></TD>
+    <TD class=date>2004-09-06 11:21:13</TD>
+    <TD class=sender>pete</TD>
+    <TD class=subject>stavovy radek</TD></TR>
+  <TR>
+    <TD class=checkbox><INPUT title="0 30982" type=checkbox value=1 
+      name=checkboxDISKUZE30982></TD>
+    <TD class=date>2004-10-12 15:52:36</TD>
+    <TD class=sender>peto</TD>
+    <TD class=subject>hmm?</TD></TR>
+  <TR>
+    <TD class=checkbox><INPUT title="0 36255" type=checkbox value=1 
+      name=checkboxDISKUZE36255></TD>
+    <TD class=date>2005-04-05 21:49:05</TD>
+    <TD class=sender>Pavel</TD>
+    <TD class=subject>Vzdalene spustení skriptu</TD></TR>
+  <TR>
+    <TD class=checkbox><INPUT title="0 36267" type=checkbox value=1 
+      name=checkboxDISKUZE36267></TD>
+    <TD class=date>2005-04-06 17:46:21</TD>
+    <TD class=sender>gully</TD>
+    <TD class=subject>Nejede na webu</TD></TR>
+  <TR>
+    <TD class=checkbox><INPUT title="1 45773" type=checkbox value=1 
+      name=checkboxDISKUZE45773></TD>
+    <TD class=date>2006-08-22 10:19:38</TD>
+    <TD class=sender>simon</TD>
+    <TD class=subject><IMG class=line alt=. 
+      src="Počet stažení pod kontrolou -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Počet stažení pod kontrolou -- PHP -- Vývoj aplikací -- Interval_cz_soubory/line3.png">Nejede 
+      na webu</TD></TR>
+  <TR>
+    <TD id=foot colSpan=4><INPUT class=submit id=display_selected type=submit value="Zobrazit vybrané" name=display_selected> 
+      &nbsp; <INPUT class=submit id=display_all type=submit value="Zobrazit vše" name=display_all> 
+      &nbsp; <INPUT class=submit id=add_new type=submit value="Vložit nový" name=add_new></TD></TR></TBODY></TABLE></FORM></DIV></DIV></DIV></DIV>
+<DIV id=page-right>
+<H2 class=textversion>Pravý sloupek</H2>
+<DIV id=search>
+<H3 class=textversion>Vyhledávání</H3>
+<FORM action=http://interval.cz/search.asp method=get>
+<DIV><INPUT class=text name=co> <!--  
+<select name='cim'>
+<option value ='Google' selected='selected'>Google</option>
+<option value ='Jyxo'>Jyxo</option>
+</select>
+<input type='hidden' name='nadpis' value='1' />
+<input type='hidden' name='popis' value='1' />
+<input type='hidden' name='text' value='1' />
+<input type='hidden' name='rubrika' value='0' />
+<input type='hidden' name='autor' value='0' />
+ --><INPUT class=submit type=submit value=Najdi! name=send> </DIV></FORM><!-- <div><a href='http://interval.cz/search.asp'>Rozšířené vyhledávání</a></div> --></DIV><!-- StartKód: adarbo2.bbmedia.cz 3.1 Nestandard  Interval(87) / home page(2) / textbox(1) / nestandard(24) -->
+<SCRIPT type=text/javascript>
+	<!-- <![CDATA[
+	var bbs=screen,bbn=navigator,bbh;bbh='&ubl='+bbn.browserLanguage+'&ucc='+bbn.cpuClass+'&ucd='+bbs.colorDepth+'&uce='+bbn.cookieEnabled+'&udx='+bbs.deviceXDPI+'&udy='+bbs.deviceYDPI+'&usl='+bbn.systemLanguage+'&uje='+bbn.javaEnabled()+'&uah='+bbs.availHeight+'&uaw='+bbs.availWidth+'&ubd='+bbs.bufferDepth+'&uhe='+bbs.height+'&ulx='+bbs.logicalXDPI+'&uly='+bbs.logicalYDPI+'&use='+bbs.fontSmoothingEnabled+'&uto='+(new Date()).getTimezoneOffset()+'&uti='+(new Date()).getTime()+'&uui='+bbs.updateInterval+'&uul='+bbn.userLanguage+'&uwi='+bbs.width;
+	document.write("<scr"+"ipt  language='JavaScript' type='text/javascript' src='http://adarbo2.bbmedia.cz/please/showit/87/2/1/24/?typkodu=non-standard"+bbh+"&alttext=0&border=0&bgcolor=FFFFFF&text=000000&link=0000FF&target=_blank&bust="+Math.random()+"'>");
+	document.write("<"+"\/scr"+"ipt>");
+	//]]> -->
+	</SCRIPT>
+<!-- KonecKód: adarbo2.bbmedia.cz 3.1 Nestandard --><!-- cached 06-knizni_tip.txt -->
+<DIV class="page-right-box book">
+<H3>Knižní tip</H3>
+<DIV class=page-right-box-in>
+<DIV class=book-top>
+<H4><A 
+href="http://interval.inshop.cz/inshop/scripts/detail.asp?kat=045">IPv6</A></H4></DIV>
+<DIV class=image><A 
+href="http://interval.inshop.cz/inshop/scripts/detail.asp?kat=045"><IMG 
+title=IPv6 alt=obálka 
+src="Počet stažení pod kontrolou -- PHP -- Vývoj aplikací -- Interval_cz_soubory/ipv6.gif"></A></DIV></DIV></DIV><!-- cached 17-nejctenejsi_clanky.txt -->
+<DIV class="page-right-box reading">
+<H3 title="Nejčtenější články za posledních 28 dnů">Nejčtenější</H3>
+<DIV class=page-right-box-in>
+<UL>
+  <LI><A href="http://interval.cz/clanky/opera-9-pokrocila-konfigurace/">Opera 9 
+  - pokročilá konfigurace</A>
+  <LI><A 
+  href="http://interval.cz/clanky/adobe-photoshop-prakticky-webdesign-jakub-krcmar/">Adobe 
+  Photoshop - praktický webdesign (Jakub Krčmář)</A>
+  <LI><A 
+  href="http://interval.cz/clanky/drupal-tvorba-vlastniho-vzhledu/">Drupal - 
+  tvorba vlastního vzhledu</A>
+  <LI><A 
+  href="http://interval.cz/clanky/pruvodce-svg-dalsi-nastroje-pro-tvorbu-svg-grafiky/">Průvodce 
+  SVG - další nástroje pro tvorbu SVG grafiky</A>
+  <LI><A 
+  href="http://interval.cz/clanky/spravy-zo-slovenskeho-internetu-8/">Správy zo 
+  slovenského internetu 8.</A></LI></UL></DIV></DIV>
+<DIV class=merak-box style="MARGIN-TOP: 1.5em; TEXT-ALIGN: center">
+<DIV id=merak-content 
+style="BORDER-RIGHT: #000000 1px solid; BORDER-TOP: #000000 1px solid; FONT-WEIGHT: bold; FONT-SIZE: 11px; BACKGROUND-IMAGE: url(http://interval.cz/__services/__include_right/merak-background.png); MARGIN: 0px auto; BORDER-LEFT: #000000 1px solid; WIDTH: 160px; BORDER-BOTTOM: #000000 1px solid; BACKGROUND-REPEAT: no-repeat; FONT-FAMILY: Verdana, Arial, sans-serif; HEIGHT: 190px; TEXT-ALIGN: left; FONT-VARIANT: small-caps">
+<H3 style="FONT-SIZE: 12px; MARGIN: 55px 0px 10px 10px; FONT-VARIANT: normal"><A 
+title="Merak Mail Server 8" 
+style="COLOR: #000000; BACKGROUND-COLOR: transparent; TEXT-DECORATION: none" 
+href="http://www.merak-mail-server.cz/">Merak Mail Server 8</A></H3>
+<DIV id=merak-proclamation style="PADDING-LEFT: 10px">Integrovaný <EM><A 
+title="Merak Mail Server 8" 
+style="COLOR: #35a0df; FONT-STYLE: normal; BACKGROUND-COLOR: transparent; TEXT-DECORATION: none" 
+href="http://www.merak-mail-server.cz/">antispam</A></EM> <BR>Snadná <EM><A 
+title="Merak Mail Server 8" 
+style="COLOR: #35a0df; FONT-STYLE: normal; BACKGROUND-COLOR: transparent; TEXT-DECORATION: none" 
+href="http://www.merak-mail-server.cz/">instalace</A></EM> <BR>Zabezpečený 
+<EM><A title="Merak Mail Server 8" 
+style="COLOR: #35a0df; FONT-STYLE: normal; BACKGROUND-COLOR: transparent; TEXT-DECORATION: none" 
+href="http://www.merak-mail-server.cz/">groupware</A></EM> </DIV></DIV></DIV>
+<DIV class="page-right-box emailserv">
+<H3>Info servis</H3>
+<DIV class=page-right-box-in>
+<UL>
+  <LI><A title="Exporty aktuálních informací ve formátech Atom, RDF a RSS" 
+  href="http://export.interval.cz/">Atom, RDF, RSS</A> 
+  <LI>Informace e-mailem: </LI></UL>
+<FORM action=prihlaseni.asp method=post>
+<DIV class=shell><INPUT class=text name=adresa></DIV>
+<DIV class=shell><INPUT class=radio type=radio CHECKED value=1 name=co>Týdenní 
+přehled článků</DIV>
+<DIV class=shell><INPUT class=radio type=radio value=2 name=co>HELP 
+konference</DIV>
+<DIV 
+class=shell><INPUT class=submit type=submit value=Přihlásit></DIV></FORM></DIV></DIV>
+<DIV class=advertising-vertical-banner-outer>
+<DIV class=advertising-vertical-banner-inner><!-- Skyscraper Right --><!-- BBSTART Interval.cz/Skyscraper Right/rolovací/Skyscraper 120x600 -->
+<SCRIPT type=text/javascript>/* <![CDATA[ */
+var bbat=0,bbbr=0,bbtt='_blank',bbpath='17877/4/2/9',bbxl=1,bbac=1;
+//]]></SCRIPT>
+
+<SCRIPT 
+src="Počet stažení pod kontrolou -- PHP -- Vývoj aplikací -- Interval_cz_soubory/bb4.js" 
+type=text/javascript></SCRIPT>
+<NOSCRIPT>
+<DIV><A href="http://ad2.billboard.cz/please/redirect/17877/4/2/9/"><IMG 
+style="BORDER-RIGHT: 0px; BORDER-TOP: 0px; BORDER-LEFT: 0px; BORDER-BOTTOM: 0px" 
+height=600 alt=. 
+src="Počet stažení pod kontrolou -- PHP -- Vývoj aplikací -- Interval_cz_soubory/fallback9.gif" 
+width=120></A></DIV></NOSCRIPT><!-- BBKONEC --></DIV></DIV><!-- cached 17-nejdiskutovanejsi_clanky.txt -->
+<DIV class="page-right-box cauldron">
+<H3 title="Nejdiskutovanější články za posledních 28 dnů">Diskuzní kotel</H3>
+<DIV class=page-right-box-in>
+<UL>
+  <LI><A title="(103 komentářů)" 
+  href="http://interval.cz/clanky/opera-9-pokrocila-konfigurace/">Opera 9 - 
+  pokročilá konfigurace</A>
+  <LI><A title="(4 komentářů)" 
+  href="http://interval.cz/clanky/pruvodce-svg-dalsi-nastroje-pro-tvorbu-svg-grafiky/">Průvodce 
+  SVG - další nástroje pro tvorbu SVG grafiky</A>
+  <LI><A title="(2 komentářů)" 
+  href="http://interval.cz/clanky/drupal-tvorba-vlastniho-vzhledu/">Drupal - 
+  tvorba vlastního vzhledu</A>
+  <LI><A title="(2 komentářů)" 
+  href="http://interval.cz/clanky/spravy-zo-slovenskeho-internetu-9/">Správy zo 
+  slovenského internetu 9.</A>
+  <LI><A title="(1 komentářů)" 
+  href="http://interval.cz/clanky/lokalizace-asp-net-2-x-aplikaci/">Lokalizace 
+  ASP.NET 2.x aplikací</A></LI></UL></DIV></DIV></DIV>
+<DIV class=page-maker>&nbsp;</DIV>
+<DIV class=page-maker-white>&nbsp;</DIV></DIV>
+<DIV id=advertising-page-bottom>
+<DIV id=advertising-page-bottom-left>
+<DIV><!-- Full Banner Bottom --><!-- BBSTART Interval.cz/Full Banner Bottom/rolovací/Full Banner 468x60 -->
+<SCRIPT type=text/javascript>/* <![CDATA[ */
+var bbat=0,bbbr=0,bbtt='_blank',bbpath='17877/1/2/1',bbxl=1,bbac=1;
+//]]></SCRIPT>
+
+<SCRIPT 
+src="Počet stažení pod kontrolou -- PHP -- Vývoj aplikací -- Interval_cz_soubory/bb4.js" 
+type=text/javascript></SCRIPT>
+<NOSCRIPT>
+<DIV><A href="http://ad2.billboard.cz/please/redirect/17877/1/2/1/"><IMG 
+style="BORDER-RIGHT: 0px; BORDER-TOP: 0px; BORDER-LEFT: 0px; BORDER-BOTTOM: 0px" 
+height=60 alt=. 
+src="Počet stažení pod kontrolou -- PHP -- Vývoj aplikací -- Interval_cz_soubory/fallback1.gif" 
+width=468></A></DIV></NOSCRIPT><!-- BBKONEC --></DIV></DIV>
+<DIV id=advertising-page-bottom-right>
+<DIV><!-- Button2 Bottom --><!-- BBSTART Interval.cz/Button2 Bottom/rolovací/Button 2 120x60 -->
+<SCRIPT type=text/javascript>/* <![CDATA[ */
+var bbat=0,bbbr=0,bbtt='_blank',bbpath='17877/2/2/6',bbxl=1,bbac=1;
+//]]></SCRIPT>
+
+<SCRIPT 
+src="Počet stažení pod kontrolou -- PHP -- Vývoj aplikací -- Interval_cz_soubory/bb4.js" 
+type=text/javascript></SCRIPT>
+<NOSCRIPT>
+<DIV><A href="http://ad2.billboard.cz/please/redirect/17877/2/2/6/"><IMG 
+style="BORDER-RIGHT: 0px; BORDER-TOP: 0px; BORDER-LEFT: 0px; BORDER-BOTTOM: 0px" 
+height=60 alt=. 
+src="Počet stažení pod kontrolou -- PHP -- Vývoj aplikací -- Interval_cz_soubory/fallback6.gif" 
+width=120></A></DIV></NOSCRIPT><!-- BBKONEC --></DIV></DIV>
+<DIV class=page-maker>&nbsp;</DIV></DIV>
+<DIV id=page-foot>
+<DIV id=page-foot-menu><A href="http://interval.cz/redakce-inzerce.asp">Inzerce 
+na Interval.cz</A> &nbsp;|&nbsp; <A 
+href="http://interval.cz/redakce.asp">Redakce Interval.cz</A> &nbsp;|&nbsp; <A 
+href="http://interval.cz/autori.asp">Hledáme nové autory</A> </DIV>
+<DIV id=issn><A class=noprint 
+href="http://jigsaw.w3.org/css-validator/validator?uri=http%3A%2F%2Finterval.cz%3A80%2Fclanky%2Fpocet-stazeni-pod-kontrolou%2F">.</A> 
+ISSN 1212-8651 <A class=noprint 
+href="http://validator.w3.org/check?uri=http%3A%2F%2Finterval.cz%3A80%2Fclanky%2Fpocet-stazeni-pod-kontrolou%2F&amp;charset=%28detect+automatically%29&amp;doctype=%28detect+automatically%29&amp;outline=1&amp;verbose=1">.</A> 
+</DIV>
+<DIV id=page-foot-zoner>© Zoner software, s.r.o., všechna práva vyhrazena, tento 
+server dodržuje <A href="http://interval.cz/privacy.asp">právní předpisy</A> o 
+ochraně osobních údajů. </DIV></DIV>
+<SCRIPT 
+src="Počet stažení pod kontrolou -- PHP -- Vývoj aplikací -- Interval_cz_soubory/audits-footer.js" 
+type=text/javascript></SCRIPT>
+
+<SCRIPT 
+src="Počet stažení pod kontrolou -- PHP -- Vývoj aplikací -- Interval_cz_soubory/urchin.js" 
+type=text/javascript>
+</SCRIPT>
+
+<SCRIPT type=text/javascript>
+_uacct = "UA-173085-1";
+
+var len = _uOsr.length;
+_uOsr[len]="seznam.cz";       _uOkw[len]="w";
+_uOsr[len+1]="centrum.cz";    _uOkw[len+1]="q";
+_uOsr[len+2]="jyxo.cz";       _uOkw[len+2]="s";
+_uOsr[len+3]="atlas.cz";      _uOkw[len+3]="q";
+_uOsr[len+4]="zoohoo.cz";     _uOkw[len+4]="q";
+_uOsr[len+5]="tiscali.cz";    _uOkw[len+5]="query";
+_uOsr[len+6]="1.cz";          _uOkw[len+6]="q";
+_uOsr[len+7]="volny.cz";      _uOkw[len+7]="search";
+
+urchinTracker();
+</SCRIPT>
+</BODY></HTML>

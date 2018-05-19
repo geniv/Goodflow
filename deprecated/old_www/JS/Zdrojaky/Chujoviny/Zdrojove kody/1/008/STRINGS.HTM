@@ -1,0 +1,93 @@
+<HTML>
+  <HEAD>
+    <TITLE> Práce s øetìzci v JavaScriptu </TITLE>
+
+  </HEAD>
+
+  <BODY>
+    <SCRIPT Language="JavaScript">
+    <!--
+      // Vìta se kterou se bude pracovat
+      var Veta = 'Máma mele maso, Ema má mísu';
+      document.write ('<B>Vìta se kterou se bude pracovat</B><BR>');
+      document.write (Veta+'<BR><BR>');
+
+      // Délka øetìzce
+      document.write ('<B>Délka øetìzce</B><BR>');
+      document.write ('Délka øetìzce "'+Veta+'" je: '+Veta.length+' znakù<BR>');
+
+      // Znaky v øetìzci
+      document.write ('<BR><B>Znaky v øetìzci</B><BR>');
+      document.write ('První znák v øetìzci je: '+Veta.charAt(0)+'<BR>');
+      document.write ('Poslední znák v øetìzci je: '+Veta.charAt(Veta.length-1)+'<BR>');
+      document.write ('Unicode kód prvního znáku v øetìzci je: '+Veta.charCodeAt(0)+'<BR>');
+
+      // Spojování øetìzcù
+      document.write ('<BR><B>Spojování øetìzcù</B><BR>');
+      var Veta2 = "";
+      document.write ('Veta2.concat ("Ó"," my", " se", " máme."): '+ Veta2.concat ("Ó"," my", " se", " máme.")+'<BR>');
+      document.write ('Stejné je: "Ó"+" my"+" se"+" máme.": '+"Ó"+" my"+" se"+" máme."+'<BR>');
+
+      // Rozdìlování øetìzcù
+      document.write ('<BR><B>Rozdìlování øetìzcù</B><BR>');
+      document.write ('Veta.slice (2,11): '+Veta.slice (2,12)+'<BR>');
+      document.write ('Veta.slice (20): '+Veta.slice (20)+'<BR>');
+      document.write ('Veta.slice (16,-5): '+Veta.slice (16,-5)+'<BR><BR>');
+
+      document.write ('Veta.substring (2,11): '+Veta.substring (2,12)+'<BR>');
+      document.write ('Veta.substring (20): '+Veta.substring (20)+'<BR><BR>');
+
+      document.write ('Veta.substr (2,11): '+Veta.substr (2,10)+'<BR>');
+      document.write ('Veta.substr (20): '+Veta.substr (20)+'<BR><BR>');
+
+      var Slova = Veta.split(' ');
+      document.write ('Po aplikaci funkce split se veta rozpadne na slova:<BR>')
+      for (var i=0; i<Slova.length; i++)
+        document.write (Slova[i]+'<BR>');
+      
+      // Vyhledávání v øetìzci
+      document.write ('<BR><B>Vyhledávání v øetìzci</B><BR>');
+      document.write ('Veta.indexOf ("ma"): '+Veta.indexOf ("ma")+'<BR>');
+      document.write ('Veta.indexOf ("ma, 3"): '+Veta.indexOf ("ma", 3)+'<BR>');
+      document.write ('Veta.indexOf ("tata"): '+Veta.indexOf ("tata")+'<BR><BR>');
+
+      document.write ('Veta.lastIndexOf ("ma"): '+Veta.lastIndexOf ("ma")+'<BR>');
+      document.write ('Veta.lastIndexOf ("ma, 16"): '+Veta.lastIndexOf ("ma", 16)+'<BR>');
+      document.write ('Veta.lastIndexOf ("tata"): '+Veta.lastIndexOf ("tata")+'<BR><BR>');
+      
+      // Pøíklad vyhledá podøetìzec "ema" bez ohledu na velikost písmen
+      document.write ('Veta.search (/ema/i): '+Veta.search (/ema/i)+'<BR>');
+
+      // Níže uvedený pøíklad vyhledá ve Vete všechny výskyty "ma"
+      var Result = Veta.match (/ma/g);
+      // Výsledky (podøetìzce odpovídající reg. výrazu) jsou v poli Result
+      document.write ('Poèet výsledkù hledání Veta.match (/ma/g): '+Result.length+'<BR>');
+      document.write ('První výsledek: '+Result[0]+'<BR>');
+
+      // Náhrada èásti øetìzce
+      document.write ('<BR><B>Náhrada èásti øetìzce</B><BR>');
+      // Následující skript vymìní první výskyt podøetìzce "Ema" za "Jana"
+      document.write ("Veta.replace ('Ema', 'Jana'): " + Veta.replace ('Ema', 'Jana')+'<BR>');
+      // Tento skript vymìní všechna písmena "m" za "j"
+      document.write ("Veta.replace (/m/gi, 'j'): "+Veta.replace (/m/gi, 'j')+'<BR>');
+
+
+      // Zmìna velikosti písmen
+      document.write ('<BR><B>Zmìna velikosti písmen</B><BR>');
+      document.write ('Veta.toLowerCase (): '+Veta.toLowerCase ()+'<BR>');
+      document.write ('Veta.toUpperCase (): '+Veta.toUpperCase ()+'<BR>');
+
+      // Porovnávání
+      document.write ('<BR><B>Porovnávání</B><BR>');
+      document.write ('"Kamil" < "Katka": '+("Kamil" < "Katka")+'<BR>');
+      document.write ('"Kamil".localeCompare("Katka"): '+"Kamil".localeCompare("Katka")+'<BR>');
+
+      // HTML formátování øetìzcù
+      document.write ('<BR><B>HTML formátování øetìzcù</B><BR>');
+      document.write ('Veta.small().fontcolor("red").bold(): '+ Veta.small().fontcolor("red").bold());
+    // -->
+    </SCRIPT>
+  </BODY>
+</HTML>
+
+

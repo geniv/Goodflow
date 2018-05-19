@@ -1,0 +1,641 @@
+<?php
+
+/**
+ *
+ * Blok multilanguage obsahu
+ *
+ * public funkce:\n
+ * construct: DynamicEshopMenu - hlavni konstruktor tridy\n
+ * LangObsah() - hlavni vypis obsahu, podle adresy a nebo podle daneho parametru\n
+ * AdminObsah() - obsah adminu\n
+ *
+ */
+
+class DynamicLanguageObsah extends DefaultModule
+{
+  private $var, $sqlite, $dbname, $dirpath, $unikatni;
+  private $idmodul = "langobsah";
+  private $vypis_chybu = false;
+  private $povolit_pridani = true;
+
+/**
+ *
+ * Konstruktor menu
+ *
+ * @param var pruchodova struktura
+ * @param index prideleny index pri generovani
+ */
+  public function __construct(&$var, $index) //konstruktor
+  {
+    $this->var = $var;
+    $this->dirpath = dirname($this->var->moduly[$index]["include"]);
+    $this->dbname = $this->var->moduly[$index]["databaze"];
+
+    //includovani unikatniho obsahu
+    $this->unikatni = $this->NactiObsahSouboru("{$this->dirpath}/.unikatni_obsah.php");
+
+    $this->povolit_pridani = $this->NactiUnikatniObsah($this->unikatni["set_povolit_pridani"]);
+    $this->vypis_chybu = $this->NactiUnikatniObsah($this->unikatni["set_vypis_chybu"]);
+
+    if (!$this->sqlite = @new SQLiteDatabase("{$this->dirpath}/{$this->dbname}", 0777, $error))
+    {
+      $this->var->main[0]->ErrorMsg($error);
+    }
+
+    $this->Instalace();
+
+    $this->NastavitAdresuMenu($this->RozsiritAdminMenu($this->NactiUnikatniObsah($this->unikatni["admin_menu"], $this->idmodul)));
+  }
+
+/**
+ *
+ * Instalace SQLite databaze
+ *
+ */
+  private function Instalace()
+  {
+    if (filesize("{$this->dirpath}/{$this->dbname}") == 0)
+    {
+      if (!@$this->sqlite->queryExec("CREATE TABLE dynamicky_lang_obsah (
+                                      id INTEGER UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+                                      adresa TEXT,
+                                      jazyk INTEGER UNSIGNED,
+                                      text TEXT,
+                                      skupina INTEGER UNSIGNED);
+
+                                      CREATE TABLE gtk_skupina (
+                                      id INTEGER UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+                                      nazev VARCHAR(200),
+                                      popisek TEXT,
+                                      href_id VARCHAR(200),
+                                      href_class VARCHAR(200),
+                                      href_akce VARCHAR(500),
+                                      zobrazit BOOL);
+                                      ", $error))
+      {
+        $this->var->main[0]->ErrorMsg($error);
+      }
+    }
+  }
+
+/**
+ *
+ * Rozsireni menu adminu o dane skupiny z teto sekce
+ *
+ * @param adresa pole adres adminmenu
+ * @return rozsirene pole adres adminmenu o sekce z tohoto modulu
+ */
+  private function RozsiritAdminMenu($adresa)
+  {
+    $i = count($adresa);
+    if ($res = @$this->sqlite->query("SELECT id, nazev, href_id, href_class, href_akce, zobrazit FROM gtk_skupina;", NULL, $error))
+    {
+      if ($res->numRows() != 0)
+      {
+        while ($data = $res->fetchObject())
+        {
+          $adresa[$i]["main_href"] = "{$this->idmodul}__{$data->id}";
+          $adresa[$i]["odkaz"] = $this->NactiUnikatniObsah($this->unikatni["admin_tvar_menu_odkaz"], $data->nazev);
+          $adresa[$i]["title"] = $this->NactiUnikatniObsah($this->unikatni["admin_tvar_menu_title"], $data->nazev);
+          $adresa[$i]["id"] = $data->href_id;
+          $adresa[$i]["class"] = $data->href_class;
+          $adresa[$i]["akce"] = $data->href_akce;
+          $adresa[$i]["zobrazit"] = $data->zobrazit;
+          $i++;
+        }
+      }
+    }
+      else
+    {
+      $this->var->main[0]->ErrorMsg($error);
+    }
+
+    return $adresa;
+  }
+
+/**
+ *
+ * Navraceni samotneho textu dle dane adresy a zvoleneho jazyku
+ *
+ * pouziti: <strong>$text = $this->var->main[0]->NactiFunkci("DynamicLanguageObsah", "LangObsah", "neco_nekde");</strong>
+ *
+ * @param adr vstupni adresa, bez ni se bere adresa ze $_SERVER["QUERY_STRING"]
+ * @return vystupni text
+ */
+  public function LangObsah($adr = NULL)
+  {
+    if (!Empty($adr))
+    {
+      $adresa = $adr;
+    }
+      else
+    {
+      $adresa = stripslashes(htmlspecialchars($_SERVER["QUERY_STRING"], ENT_QUOTES));
+    }
+
+    $jazyk = $this->var->main[0]->NactiFunkci("DynamicLanguage", "ZvolenyJazyk");
+
+    $result = "";
+    if ($res = @$this->sqlite->query("SELECT text FROM dynamicky_lang_obsah WHERE adresa='{$adresa}' AND jazyk={$jazyk};", NULL, $error))
+    {
+      if ($res->numRows() == 1)
+      {
+        $result = htmlspecialchars_decode(html_entity_decode($res->fetchObject()->text, ENT_QUOTES));
+      }
+        else
+      {
+        if ($this->vypis_chybu)
+        {
+          $result = $this->NactiUnikatniObsah($this->unikatni["normal_vypis_null"]);
+        }
+      }
+    }
+      else
+    {
+      $this->var->main[0]->ErrorMsg($error);
+    }
+
+    return $result;
+  }
+
+/**
+ *
+ * Vypise obsah skupiny, univerzelni vypis
+ *
+ * @param id id dane skupiny
+ * @return obsah skupny s odkazy
+ */
+  private function VypisObsahSkupny($id)
+  {
+    settype($id, "integer");
+
+    if ($res = @$this->sqlite->query("SELECT nazev, popisek FROM gtk_skupina WHERE id={$id};", NULL, $error))
+    {
+      if ($res->numRows() == 1)
+      {
+        $data = $res->fetchObject();
+
+        $result = $this->NactiUnikatniObsah($this->unikatni["admin_vypis_obsahu_skupiny"],
+                                            $data->nazev,
+                                            $data->popisek,
+                                            $this->VypisSkupiny($id));
+      }
+    }
+      else
+    {
+      $this->var->main[0]->ErrorMsg($error);
+    }
+
+    return $result;
+  }
+
+/**
+ *
+ * Vypis zdruzenych odkazu (ve skupine) podle adresy
+ *
+ * @param skupina cislo skupiny
+ * @return vypis odkazu na upravu obsahu
+ */
+  private function VypisSkupiny($skupina)
+  {
+    settype($skupina, "integer");
+
+    if ($res = @$this->sqlite->query("SELECT id, adresa FROM dynamicky_lang_obsah WHERE skupina={$skupina};", NULL, $error))
+    {
+      if ($res->numRows() != 0)
+      {
+        while($data = $res->fetchObject())
+        {
+          $result .= $this->NactiUnikatniObsah($this->unikatni["admin_vypis_edit_link_skupina"],
+                                              "?{$this->var->get_kam}={$this->var->adresaadminu}&amp;{$this->var->get_idmodul}={$this->idmodul}&amp;co=editobsah&amp;id={$data->id}&amp;ret={$_GET[$this->var->get_idmodul]}",
+                                              $data->adresa);
+        }
+      }
+    }
+      else
+    {
+      $this->var->main[0]->ErrorMsg($error);
+    }
+
+    return $result;
+  }
+
+/**
+ *
+ * Obsah adminu
+ *
+ * @return obsah adminu
+ */
+  public function AdminObsah()
+  {
+    if ($_GET[$this->var->get_kam] == $this->var->adresaadminu &&
+        $this->var->aktivniadmin)
+    {
+      $adr = explode("__", $_GET[$this->var->get_idmodul]); //rozdeleni adresy
+      switch ($adr[0])
+      {
+        case $this->idmodul:  //id modul
+          $result = (!Empty($adr[1]) ? $this->VypisObsahSkupny($adr[1]) : $this->AdministraceObsahu());
+        break;
+      }
+    }
+
+    return $result;
+  }
+
+
+/**
+ *
+ * Overuje existenci skupiny
+ *
+ * @param nazev nazev skupiny
+ * @return true/false - existuje / neexistuje
+ */
+  private function ExistujeSkupina($nazev)
+  {
+    if (!Empty($nazev))
+    {
+      if ($res = @$this->sqlite->query("SELECT id FROM gtk_skupina WHERE nazev='{$nazev}';", NULL, $error))
+      {
+        $result = ($res->numRows() == 1 ? true : false);
+      }
+        else
+      {
+        $this->var->main[0]->ErrorMsg($error);
+      }
+    }
+
+    return $result;
+  }
+
+/**
+ *
+ * select pro vyber skupin
+ *
+ * @param id nepovinne urcuje oznacene id polozky
+ * @return vyber skupin
+ */
+  private function SeznamSkupin($id = NULL)
+  {
+    $result = "";
+    if ($res = @$this->sqlite->query("SELECT id, nazev
+                                      FROM gtk_skupina;", NULL, $error))
+    {
+      if ($res->numRows() != 0)
+      {
+        $result = $this->NactiUnikatniObsah($this->unikatni["admin_seznam_skupin_begin"]);
+        while ($data = $res->fetchObject())
+        {
+          $result .= $this->NactiUnikatniObsah($this->unikatni["admin_seznam_skupin"],
+          $data->id,
+          (!Empty($id) && $id == $data->id ? " selected=\"selected\"" : ""),
+          $data->nazev);
+        }
+        $result .= $this->NactiUnikatniObsah($this->unikatni["admin_seznam_skupin_end"]);
+      }
+        else
+      {
+        $result = $this->NactiUnikatniObsah($this->unikatni["admin_seznam_skupin_null"]);
+      }
+    }
+      else
+    {
+      $this->var->main[0]->ErrorMsg($error);
+    }
+
+    return $result;
+  }
+
+/**
+ *
+ * Interne volana funkce pro zobrazovani administrace dynamickeho menu
+ *
+ * @return adminstracni formular v html
+ */
+  private function AdministraceObsahu()
+  {
+    $result = $this->NactiUnikatniObsah($this->unikatni["admin_obsah"],
+                                        ($this->povolit_pridani ? $this->NactiUnikatniObsah($this->unikatni["admin_obsah_add_link"],
+                                                                                            "?{$this->var->get_kam}={$this->var->adresaadminu}&amp;{$this->var->get_idmodul}={$this->idmodul}&amp;co=addobsah",
+                                                                                            "?{$this->var->get_kam}={$this->var->adresaadminu}&amp;{$this->var->get_idmodul}={$this->idmodul}&amp;co=addgroup") : ""),
+                                        $this->AdminVypisObsah());
+
+    $co = $_GET["co"];
+
+    if (!Empty($co))
+    {
+      switch ($co)
+      {
+        case "addobsah": //pridavani obsahu
+          $result = $this->NactiUnikatniObsah($this->unikatni["admin_addobsah"],
+                                              $this->var->main[0]->NactiFunkci("DynamicLanguage", "VyberJazyka"),
+                                              $_GET["adresa"],
+                                              $this->SeznamSkupin($_GET["group"]));
+
+          $adresa = stripslashes(htmlspecialchars($_POST["adresa"], ENT_QUOTES));
+          $text = stripslashes(htmlspecialchars($_POST["text"], ENT_QUOTES));
+          $jazyk = $_POST["jazyk"];
+          settype($jazyk, "integer");
+          $skupina = $_POST["skupina"];
+          settype($skupina, "integer");
+
+          if (!Empty($_POST["tlacitko"]) &&
+              !Empty($adresa) &&
+              !Empty($jazyk) &&
+              !Empty($text) &&
+              $skupina != 0 &&
+              $this->povolit_pridani)
+          {
+            if (@$this->sqlite->queryExec("INSERT INTO dynamicky_lang_obsah (id, adresa, jazyk, text, skupina) VALUES
+                                          (NULL, '{$adresa}', {$jazyk}, '{$text}', {$skupina});", $error))
+            {
+              $result = $this->NactiUnikatniObsah($this->unikatni["admin_addobsah_hlaska"],
+                                                  $adresa,
+                                                  $this->var->main[0]->NactiFunkci("DynamicLanguage", "JazykPodleId", $jazyk));
+            }
+              else
+            {
+              $this->var->main[0]->ErrorMsg($error);
+            }
+
+            $this->var->main[0]->AutoClick(1, "?{$this->var->get_kam}={$this->var->adresaadminu}&{$this->var->get_idmodul}={$this->idmodul}");  //auto kliknuti
+          }
+        break;
+
+        case "editobsah":  //editace obsahu
+          $id = $_GET["id"];  //cislo sekce
+          settype($id, "integer");
+
+          if ($res = @$this->sqlite->query("SELECT adresa, jazyk, text, skupina FROM dynamicky_lang_obsah WHERE id={$id};", NULL, $error))
+          {
+            if ($res->numRows() == 1)
+            {
+              $data = $res->fetchObject();
+
+              $result = $this->NactiUnikatniObsah($this->unikatni["admin_editobsah"],
+                                                  $data->adresa,
+                                                  $data->text,
+                                                  $this->var->main[0]->NactiFunkci("DynamicLanguage", "VyberJazyka", $data->jazyk),
+                                                  $this->SeznamSkupin($data->skupina));
+
+              $adresa = stripslashes(htmlspecialchars($_POST["adresa"], ENT_QUOTES));
+              $text = stripslashes(htmlspecialchars($_POST["text"], ENT_QUOTES));
+              $jazyk = $_POST["jazyk"];
+              settype($jazyk, "integer");
+              $skupina = $_POST["skupina"];
+              settype($skupina, "integer");
+
+              if (!Empty($_POST["tlacitko"]) &&
+                  !Empty($adresa) &&
+                  !Empty($jazyk) &&
+                  !Empty($text) &&
+                  $skupina != 0 &&
+                  $id != 0)
+              {
+                if (@$this->sqlite->queryExec ("UPDATE dynamicky_lang_obsah SET adresa='{$adresa}',
+                                                                                jazyk={$jazyk},
+                                                                                text='{$text}',
+                                                                                skupina={$skupina}
+                                                                                WHERE id={$id};", $error))
+                {
+                  $result = $this->NactiUnikatniObsah($this->unikatni["admin_editobsah_hlaska"], $adresa);
+                }
+                  else
+                {
+                  $this->var->main[0]->ErrorMsg($error);
+                }
+
+                $ret = $_GET["ret"];
+                if (!Empty($ret)) //pokud je nastavena vraceci adresa
+                {
+                  $this->var->main[0]->AutoClick(1, "?{$this->var->get_kam}={$this->var->adresaadminu}&{$this->var->get_idmodul}={$ret}");  //auto kliknuti
+                }
+                  else
+                {
+                  $this->var->main[0]->AutoClick(1, "?{$this->var->get_kam}={$this->var->adresaadminu}&{$this->var->get_idmodul}={$this->idmodul}");  //auto kliknuti
+                }
+              }
+            }
+          }
+            else
+          {
+            $this->var->main[0]->ErrorMsg($error);
+          }
+        break;
+
+        case "delobsah": //rekurzivni mazani obsahu
+          $id = $_GET["id"];  //cislo sekce
+          settype($id, "integer");
+          $id = ($this->povolit_pridani ? $id : 0); //zakaz odmazani
+
+          if ($res = @$this->sqlite->query("SELECT adresa FROM dynamicky_lang_obsah WHERE id={$id};", NULL, $error))
+          {
+            if ($res->numRows() == 1)
+            {
+              $data = $res->fetchObject();
+
+              if (@$this->sqlite->queryExec("DELETE FROM dynamicky_lang_obsah WHERE id={$id};", $error)) //provedeni dotazu
+              {
+                $result = $this->NactiUnikatniObsah($this->unikatni["admin_delobsah_hlaska"], $data->adresa);
+              }
+                else
+              {
+                $this->var->main[0]->ErrorMsg($error);
+              }
+
+              $this->var->main[0]->AutoClick(1, "?{$this->var->get_kam}={$this->var->adresaadminu}&{$this->var->get_idmodul}={$this->idmodul}");  //auto kliknuti
+            }
+          }
+            else
+          {
+            $this->var->main[0]->ErrorMsg($error);
+          }
+        break;
+
+        case "addgroup": //pridavani skupiny
+          $result = $this->NactiUnikatniObsah($this->unikatni["admin_addgroup"]);
+
+          $nazev = stripslashes(htmlspecialchars($_POST["nazev"], ENT_QUOTES));
+          $popisek = stripslashes(htmlspecialchars($_POST["popisek"], ENT_QUOTES));
+          $href_id = stripslashes(htmlspecialchars($_POST["href_id"], ENT_QUOTES));
+          $href_class = stripslashes(htmlspecialchars($_POST["href_class"], ENT_QUOTES));
+          $href_akce = stripslashes(htmlspecialchars($_POST["href_akce"], ENT_QUOTES));
+          $zobrazit = (!Empty($_POST["zobrazit"]) ? 1 : 0);
+
+          if (!Empty($_POST["tlacitko"]) &&
+              !Empty($nazev) &&
+              !$this->ExistujeSkupina($nazev) &&
+              $this->povolit_pridani)
+          {
+            if (@$this->sqlite->queryExec("INSERT INTO gtk_skupina (id, nazev, popisek, href_id, href_class, href_akce, zobrazit) VALUES
+                                          (NULL, '{$nazev}', '{$popisek}', '{$href_id}', '{$href_class}', '{$href_akce}', {$zobrazit});", $error))
+            {
+              $result = $this->NactiUnikatniObsah($this->unikatni["admin_addgroup_hlaska"], $nazev);
+            }
+              else
+            {
+              $this->var->main[0]->ErrorMsg($error);
+            }
+
+            $this->var->main[0]->AutoClick(1, "?{$this->var->get_kam}={$this->var->adresaadminu}&{$this->var->get_idmodul}={$this->idmodul}");  //auto kliknuti
+          }
+        break;
+
+        case "editgroup":  //uprava skupiny
+          $id = $_GET["id"];  //cislo sekce
+          settype($id, "integer");
+
+          if ($res = @$this->sqlite->query("SELECT nazev, popisek, href_id, href_class, href_akce, zobrazit FROM gtk_skupina WHERE id={$id};", NULL, $error))
+          {
+            if ($res->numRows() == 1)
+            {
+              $data = $res->fetchObject();
+
+              $result = $this->NactiUnikatniObsah($this->unikatni["admin_editgroup"],
+                                                  $data->nazev,
+                                                  $data->popisek,
+                                                  $data->href_id,
+                                                  $data->href_class,
+                                                  $data->href_akce,
+                                                  ($data->zobrazit ? " checked=\"checked\"" : ""));
+
+              $nazev = stripslashes(htmlspecialchars($_POST["nazev"], ENT_QUOTES));
+              $popisek = stripslashes(htmlspecialchars($_POST["popisek"], ENT_QUOTES));
+              $href_id = stripslashes(htmlspecialchars($_POST["href_id"], ENT_QUOTES));
+              $href_class = stripslashes(htmlspecialchars($_POST["href_class"], ENT_QUOTES));
+              $href_akce = stripslashes(htmlspecialchars($_POST["href_akce"], ENT_QUOTES));
+              $zobrazit = (!Empty($_POST["zobrazit"]) ? 1 : 0);
+
+              if (!Empty($_POST["tlacitko"]) &&
+                  !Empty($nazev) &&
+                  $id != 0)
+              {
+                if (@$this->sqlite->queryExec("UPDATE gtk_skupina SET nazev='{$nazev}',
+                                                                      popisek='{$popisek}',
+                                                                      href_id='{$href_id}',
+                                                                      href_class='{$href_class}',
+                                                                      href_akce='{$href_akce}',
+                                                                      zobrazit={$zobrazit}
+                                                                      WHERE id={$id};", $error))
+                {
+                  $result = $this->NactiUnikatniObsah($this->unikatni["admin_editgroup_hlaska"], $nazev);
+                }
+                  else
+                {
+                  $this->var->main[0]->ErrorMsg($error);
+                }
+
+                $ret = $_GET["ret"];
+                if (!Empty($ret)) //pokud je nastavena vraceci adresa
+                {
+                  $this->var->main[0]->AutoClick(1, "?{$this->var->get_kam}={$this->var->adresaadminu}&{$this->var->get_idmodul}={$ret}");  //auto kliknuti
+                }
+                  else
+                {
+                  $this->var->main[0]->AutoClick(1, "?{$this->var->get_kam}={$this->var->adresaadminu}&{$this->var->get_idmodul}={$this->idmodul}");  //auto kliknuti
+                }
+              }
+            }
+          }
+            else
+          {
+            $this->var->main[0]->ErrorMsg($error);
+          }
+        break;
+
+        case "delgroup": //mazani podle id skupny
+          $id = $_GET["id"];  //cislo sekce
+          settype($id, "integer");
+          $id = ($this->povolit_pridani ? $id : 0); //zakaz odmazani
+
+          if ($res = @$this->sqlite->query("SELECT nazev FROM gtk_skupina WHERE id={$id};", NULL, $error))
+          {
+            if ($res->numRows() == 1)
+            {
+              $data = $res->fetchObject();
+
+              if (@$this->sqlite->queryExec("DELETE FROM gtk_skupina WHERE id={$id};
+                                            DELETE FROM dynamicky_lang_obsah WHERE skupina={$id};", $error)) //provedeni dotazu
+              {
+                $result = $this->NactiUnikatniObsah($this->unikatni["admin_delgroup_hlaska"], $data->nazev);
+              }
+                else
+              {
+                $this->var->main[0]->ErrorMsg($error);
+              }
+
+              $this->var->main[0]->AutoClick(1, "?{$this->var->get_kam}={$this->var->adresaadminu}&{$this->var->get_idmodul}={$this->idmodul}");  //auto kliknuti
+            }
+          }
+            else
+          {
+            $this->var->main[0]->ErrorMsg($error);
+          }
+        break;
+      }
+    }
+
+    return $result;
+  }
+
+/**
+ *
+ * Vypis administrace menu
+ *
+ * @return vypis menu v html
+ */
+  private function AdminVypisObsah()
+  {
+    $result = "";
+    if ($res = @$this->sqlite->query("SELECT id, nazev, popisek FROM gtk_skupina ORDER BY nazev ASC;", NULL, $error))
+    {
+      if ($res->numRows() != 0)
+      {
+        while ($data = $res->fetchObject())
+        {
+          $result .= $this->NactiUnikatniObsah($this->unikatni["admin_vypis_skupina"],
+                                              $data->id,
+                                              $data->nazev,
+                                              $data->popisek,
+                                              "?{$this->var->get_kam}={$this->var->adresaadminu}&amp;{$this->var->get_idmodul}={$this->idmodul}&amp;co=editgroup&amp;id={$data->id}",
+                                              ($this->povolit_pridani ? $this->NactiUnikatniObsah($this->unikatni["admin_vypis_skupina_del_link"],
+                                                                                                  "?{$this->var->get_kam}={$this->var->adresaadminu}&amp;{$this->var->get_idmodul}={$this->idmodul}&amp;co=delgroup&amp;id={$data->id}",
+                                                                                                  $data->nazev) : ""),
+                                              "?{$this->var->get_kam}={$this->var->adresaadminu}&amp;{$this->var->get_idmodul}={$this->idmodul}&amp;co=addobsah&amp;group={$data->id}");
+
+          if ($res1 = @$this->sqlite->query("SELECT id, adresa, jazyk, text FROM dynamicky_lang_obsah WHERE skupina={$data->id} ORDER BY LOWER(adresa) ASC, jazyk ASC;", NULL, $error))
+          {
+            if ($res1->numRows() != 0)
+            {
+              while ($data1 = $res1->fetchObject())
+              {
+                $result .= $this->NactiUnikatniObsah($this->unikatni["admin_vypis_obsah"],
+                                                    $data1->id,
+                                                    $data1->adresa,
+                                                    $data1->text,
+                                                    $this->var->main[0]->NactiFunkci("DynamicLanguage", "ZkratkaPodleId", $data1->jazyk),
+                                                    "?{$this->var->get_kam}={$this->var->adresaadminu}&amp;{$this->var->get_idmodul}={$this->idmodul}&amp;co=editobsah&amp;id={$data1->id}",
+                                                    ($this->povolit_pridani ? $this->NactiUnikatniObsah($this->unikatni["admin_vypis_del_link"],
+                                                                                                        "?{$this->var->get_kam}={$this->var->adresaadminu}&amp;{$this->var->get_idmodul}={$this->idmodul}&amp;co=delobsah&amp;id={$data1->id}",
+                                                                                                        $data1->adresa) : ""));
+              }
+            }
+          }
+            else
+          {
+            $this->var->main[0]->ErrorMsg($error);
+          }
+
+          $result .= $this->NactiUnikatniObsah($this->unikatni["admin_vypis_skupina_end"]);
+        }
+      }
+    }
+      else
+    {
+      $this->var->main[0]->ErrorMsg($error);
+    }
+
+    return $result;
+  }
+}
+?>

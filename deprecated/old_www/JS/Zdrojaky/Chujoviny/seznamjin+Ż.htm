@@ -1,0 +1,45 @@
+<HTML>
+  <HEAD>
+    <TITLE>Vysvìtlivky</TITLE>
+    
+    <STYLE>
+       .Desc_off {display: none}
+       .Desc_on  {display: on}
+       SPAN      {font-weight: bold; color: red;
+                  cursor: hand}
+       DIV       {font-style: italic; font-size: x-small;
+                  margin-left: 20px}
+    </STYLE>
+    
+    <SCRIPT Language="JavaScript">
+      <!--
+        function ShowDescr (Desc){
+          if (Desc.className == "Desc_off")
+            Desc.className = "Desc_on";
+          else Desc.className = "Desc_off"
+        }
+      // -->
+    </SCRIPT>
+  </HEAD>
+  
+  <BODY>
+    <SPAN OnClick="ShowDescr(Desc1);">Položka 1</SPAN>
+    <DIV Class="Desc_off" Id="Desc1">
+      Podrobný popis, co se nachází pod položkou èíslo 1. <BR>
+      Mùže být i na nìkolik øádek... <BR>
+      Tøeba na tøi.
+    </DIV>
+    <BR>
+
+    <SPAN OnClick="ShowDescr(Desc2);">Položka 2</SPAN>
+    <DIV Class="Desc_off" Id="Desc2">
+      Další položka....
+    </DIV>
+    <BR>
+    <SPAN OnClick="ShowDescr(Desc3);">Položka 3</SPAN>
+    <DIV Class="Desc_off" Id="Desc3">
+      Poslední položka....
+    </DIV>
+  </BODY>
+</HTML>
+

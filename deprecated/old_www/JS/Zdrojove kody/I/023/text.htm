@@ -1,0 +1,46 @@
+<HTML>
+  <HEAD>
+    <TITLE> Textový dokument </TITLE>
+    <SCRIPT LANGUAGE="JavaScript">
+    <!--
+      // Vytvoøení nového okna, kam se bude zapisovat dokument
+      var DbgWin = window.open('about:blank','DebugWindow','');
+
+      // Promìná udávající, zda je dokument již otevøen
+      var Opened = false;
+
+      // Funkce vrací aktuální èas
+      function Time (){
+        var Now = new Date;
+          return (Now.toLocaleString());
+      }
+
+      // Funkce pro zápis do nového okna DbgWin
+      // Message je øetìzec, který se bude zapisovat
+      function Dbg (Message){
+        // Zkontroluje se, zda je již dokument otevøen
+        if (!Opened){
+          // Pokud není, tak se otevøe a nastaví se typ na
+          // text/plain
+          DbgWin.document.open('text/plain');
+          // Nastaví se, že je dokument již otevøen
+          Opened = true;
+        }
+
+        // Zpráva se zapíše do dokumentu
+        DbgWin.document.writeln (Message);
+      }
+    // -->
+    </SCRIPT>
+  </HEAD>
+  <BODY OnLoad="Dbg('Dokument naèten: '+Time())"
+        OnUnLoad="Dbg('Dokument zavøen: '+Time())">
+    <FORM>
+      <INPUT Type="button" Value="Test1" Name="Test1"
+         onClick="Dbg('Zmáèknuto tlaèítko:    Test1    '+Time());">
+      <INPUT Type="button" Value="Test2" Name="Test2"
+         onClick="Dbg('Zmáèknuto tlaèítko:    Test2    '+Time());">
+    </FORM>
+  </BODY>
+</HTML>
+

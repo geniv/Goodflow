@@ -1,0 +1,858 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!-- saved from url=(0048)http://interval.cz/clanky/php-jednoducha-anketa/ -->
+<?xml version='1.0' encoding='windows-1250'?><HTML lang=cs xml:lang="cs" 
+xmlns="http://www.w3.org/1999/xhtml"><HEAD><TITLE>PHP - jednoduchá anketa -- PHP -- Vývoj aplikací -- Interval.cz</TITLE>
+<META http-equiv=Content-Type content="text/html; charset=windows-1250">
+<META http-equiv=Content-language content=cs>
+<META http-equiv=Cache-control content=no-cache>
+<META http-equiv=Pragma content=no-cache>
+<META http-equiv=Expires content=-1>
+<META content=index,follow name=robots>
+<META content=index,follow,snippet,noarchive name=googlebot>
+<META 
+content="V minulém díle jsem sice slíbil on-line test, ale nakonec jsem se rozhodl, že v tomto díle ukážu, jak udělat něco podobného - jednoduchou anketu (známkování tohoto seriálu) včetně statistiky dosavadních známek. Anketa také obsahuje jednoduchý mechanismus, jak alespoň zčásti zabránit opakovanému hodnocení." 
+name=description>
+<META content="PHP, Vývoj aplikací, Interval" name=keywords>
+<META content="49.1915, 16.626" name=ICBM>
+<META content=Interval.cz name=DC.Title>
+<META content=http://interval.cz name=DC.Identifier>
+<META content="(SCHEME=ISSN) 12128651" name=DC.Identifier>
+<META content=cs name=DC.Language>
+<META http-equiv=pics-label 
+content='(pics-1.1 "http://www.icra.org/ratingsv02.html" comment "ICRAonline EN v2.0" l gen true for "http://interval.cz" r (nz 1 vz 1 lz 1 oz 1 cz 1) "http://www.rsac.org/ratingsv01.html" l gen true for "http://interval.cz" r (n 0 s 0 v 0 l 0))'>
+<META http-equiv=imagetoolbar content=no>
+<META http-equiv=MSThemeCompatible content=no>
+<META content=true name=MSSmartTagsPreventParsing><LINK 
+href="http://interval.cz/favicon.ico" type=image/x-icon 
+rel="shortcut icon"><LINK 
+title="Interval.cz -- PHP - jednoduchá anketa -- (diskuse, Atom 0.3)" 
+href="http://export.interval.cz/?type=atom&amp;discussion=285" 
+type=application/atom+xml rel=alternate><LINK 
+title="Interval.cz -- PHP - jednoduchá anketa -- (diskuse, RDF Site Summary 1.0)" 
+href="http://export.interval.cz/?type=rdf&amp;discussion=285" 
+type=application/rdf+xml rel=alternate><LINK 
+title="Interval.cz -- PHP - jednoduchá anketa -- (diskuse, RSS 2.0)" 
+href="http://export.interval.cz/?type=rss&amp;discussion=285" 
+type=application/rss+xml rel=alternate><LINK href="http://interval.cz" 
+rel=home><LINK href="http://interval.cz/search_ex.asp" rel=search><LINK 
+href="http://interval.cz/serialy/php-uvod-do-jazyka/" rel=up><LINK 
+href="http://interval.cz/clanky/vsechno-co-jste-chteli-vedet-o-php/" 
+rel=first><LINK 
+href="http://interval.cz/clanky/php-prace-s-retezci-v-php-podruhe/" 
+rel=last><LINK href="http://interval.cz/clanky/php-manipulace-se-soubory/" 
+rel=prev><LINK 
+href="http://interval.cz/clanky/php-jak-pracovat-s-datem-a-casem/" 
+rel=next><LINK media=all 
+href="PHP - jednoduchá anketa -- PHP -- Vývoj aplikací -- Interval_cz_soubory/html4.css" 
+type=text/css rel=stylesheet><LINK media=all 
+href="PHP - jednoduchá anketa -- PHP -- Vývoj aplikací -- Interval_cz_soubory/interval-display.css" 
+type=text/css rel=stylesheet><LINK media=print 
+href="PHP - jednoduchá anketa -- PHP -- Vývoj aplikací -- Interval_cz_soubory/interval-print.css" 
+type=text/css rel=stylesheet>
+<META content="MSHTML 6.00.2800.1106" name=GENERATOR></HEAD>
+<BODY class="interval interval-articles" id=article-285>
+<DIV class=audits><!-- TOPList.cz -->
+<SCRIPT type=text/javascript>
+<!-- <![CDATA[
+document.write ("<a href='http://www.toplist.cz'><img src='http://www.toplist.cz/dot.asp?id=33617&amp;http="+escape(document.referrer)+"&amp;wi="+escape(window.screen.width)+"&amp;he="+escape(window.screen.height)+"&amp;cd="+escape(window.screen.colorDepth)+"&amp;t="+escape(document.title)+"' style='border: 0; width: 1px; height: 1px' alt='.' /></a>");
+//]]> -->
+</SCRIPT>
+<NOSCRIPT>
+<DIV><A href="http://www.toplist.cz/"><IMG 
+style="BORDER-RIGHT: 0px; BORDER-TOP: 0px; BORDER-LEFT: 0px; WIDTH: 1px; BORDER-BOTTOM: 0px; HEIGHT: 1px" 
+alt=. src=""></A></DIV></NOSCRIPT><!-- TOPList.cz - konec --><!-- iAudit --><IMG 
+style="BORDER-RIGHT: 0px; BORDER-TOP: 0px; BORDER-LEFT: 0px; WIDTH: 1px; BORDER-BOTTOM: 0px; HEIGHT: 1px" 
+alt=. 
+src="PHP - jednoduchá anketa -- PHP -- Vývoj aplikací -- Interval_cz_soubory/dot.idot.gif"> 
+<!-- iAudit - konec --><!-- (C)2005 Gemius SA - gemiusAudience  / Ostatni -->
+<SCRIPT type=text/javascript><!--
+	
+	gemius_identifier = new String('bQzrQkrzLOWoKbJeudlKguTS7OndUMSqxutbeFviWMv.47');
+	
+	gemius_href=new String(document.location);
+	if (document.referrer) { gemius_ref = new String(document.referrer); } else { gemius_ref = ""; }
+	if(typeof(Error)!='undefined') eval("try { if (typeof(top.document.referrer)=='string') { gemius_ref = top.document.referrer } } catch(gemius_ex) {}");
+	iname = new String('id='+gemius_identifier+';ref='+escape(gemius_ref.substring(0,299))+';href='+escape(gemius_href.substring(0,299))+';');
+	document.write('<iframe src="http://spir.hit.gemius.pl/gemiusaudience.html" name="'+iname+'" width="1" height="1" frameborder="0" scrolling="no"></iframe>');
+	//-->
+	</SCRIPT>
+</DIV>
+<DIV id=advertising-leader-board><!-- StartKód: adarbo2.bbmedia.cz 3.1 Nestandard  Interval(87) / cely web(1) / leaderboard 750x100(1) / nestandard(24) -->
+<SCRIPT type=text/javascript>
+	/* <![CDATA[ */
+	var bbs=screen,bbn=navigator,bbh;bbh='&ubl='+bbn.browserLanguage+'&ucc='+bbn.cpuClass+'&ucd='+bbs.colorDepth+'&uce='+bbn.cookieEnabled+'&udx='+bbs.deviceXDPI+'&udy='+bbs.deviceYDPI+'&usl='+bbn.systemLanguage+'&uje='+bbn.javaEnabled()+'&uah='+bbs.availHeight+'&uaw='+bbs.availWidth+'&ubd='+bbs.bufferDepth+'&uhe='+bbs.height+'&ulx='+bbs.logicalXDPI+'&uly='+bbs.logicalYDPI+'&use='+bbs.fontSmoothingEnabled+'&uto='+(new Date()).getTimezoneOffset()+'&uti='+(new Date()).getTime()+'&uui='+bbs.updateInterval+'&uul='+bbn.userLanguage+'&uwi='+bbs.width;
+	document.write("<scr"+"ipt  language='JavaScript' type='text/javascript' src='http://adarbo2.bbmedia.cz/please/showit/87/1/1/24/?typkodu=non-standard"+bbh+"&alttext=0&border=0&bgcolor=FFFFFF&text=000000&link=0000FF&target=_blank&bust="+Math.random()+"'>");
+	document.write("<"+"\/scr"+"ipt>");
+	/* ]]> */
+	</SCRIPT>
+<!-- KonecKód: adarbo2.bbmedia.cz 3.1 Nestandard --></DIV>
+<DIV id=page-header>
+<DIV id=interval-logo>
+<H1 title="Interval.cz - webdesign a e-komerce denně (logo &amp; index link)"><A 
+href="http://interval.cz/">Interval.cz<SPAN></SPAN></A></H1></DIV>
+<DIV id=advertising-page-header><!-- StartKód: adarbo2.bbmedia.cz 3.1 Nestandard  Interval(87) / cely web(1) / horni468x60(2) / nestandard(24) -->
+<SCRIPT type=text/javascript>
+	/* <![CDATA[ */
+	var bbs=screen,bbn=navigator,bbh;bbh='&ubl='+bbn.browserLanguage+'&ucc='+bbn.cpuClass+'&ucd='+bbs.colorDepth+'&uce='+bbn.cookieEnabled+'&udx='+bbs.deviceXDPI+'&udy='+bbs.deviceYDPI+'&usl='+bbn.systemLanguage+'&uje='+bbn.javaEnabled()+'&uah='+bbs.availHeight+'&uaw='+bbs.availWidth+'&ubd='+bbs.bufferDepth+'&uhe='+bbs.height+'&ulx='+bbs.logicalXDPI+'&uly='+bbs.logicalYDPI+'&use='+bbs.fontSmoothingEnabled+'&uto='+(new Date()).getTimezoneOffset()+'&uti='+(new Date()).getTime()+'&uui='+bbs.updateInterval+'&uul='+bbn.userLanguage+'&uwi='+bbs.width;
+	document.write("<scr"+"ipt  type='text/javascript' src='http://adarbo2.bbmedia.cz/please/showit/87/1/2/24/?typkodu=non-standard"+bbh+"&alttext=0&border=0&bgcolor=FFFFFF&text=000000&link=0000FF&target=_top&bust="+Math.random()+"'>");
+	document.write("<"+"\/scr"+"ipt>");
+	/* ]]> */
+	</SCRIPT>
+<!-- KonecKód: adarbo2.bbmedia.cz 3.1 Nestandard --></DIV>
+<DIV class=page-maker>&nbsp;</DIV></DIV>
+<DIV id=page-topmenu>
+<H2 class=textversion>Navigace</H2><!-- cached 09-15-62-hlavni_menu_with_ascii.txt --><!-- ,Vývoj aplikací ~~ ,,PHP ~~ , -->
+<DIV id=page-mainmenu>
+<H3 class=textversion>Hlavní menu</H3>
+<UL>
+  <LI class=first><A href="http://interval.cz/">Titulka</A></LI>
+  <LI><A href="http://interval.cz/e-komerce/">E-komerce</A></LI>
+  <LI><A href="http://interval.cz/webdesign/">Webdesign</A></LI>
+  <LI class=selected><A href="http://interval.cz/vyvoj-aplikaci/">Vývoj 
+  aplikací</A></LI>
+  <LI><A href="http://interval.cz/nastroje/">Nástroje</A></LI>
+  <LI><A href="http://interval.cz/magazin/">Magazín</A></LI>
+  <LI class="right selected"><A 
+  href="http://interval.inshop.cz/">Knihkupectví</A></LI>
+  <LI class=right><A href="http://interforum.interval.cz/">Interforum</A></LI>
+  <LI class=right><A 
+href="http://interzen.interval.cz/">Interzen</A></LI></UL></DIV>
+<DIV id=page-mainmenu-maker>&nbsp;</DIV>
+<DIV id=page-mainsubmenu>
+<H3 class=textversion>Submenu</H3>
+<UL>
+  <LI><A href="http://interval.cz/vyvoj-aplikaci/j2me/">J2ME</A></LI>
+  <LI><A href="http://interval.cz/vyvoj-aplikaci/asp/">ASP</A></LI>
+  <LI><A href="http://interval.cz/vyvoj-aplikaci/net/">.NET</A></LI>
+  <LI class=selected><A 
+  href="http://interval.cz/vyvoj-aplikaci/php/">PHP</A></LI>
+  <LI><A 
+href="http://interval.cz/vyvoj-aplikaci/javascript/">JavaScript</A></LI>
+  <LI><A href="http://interval.cz/vyvoj-aplikaci/xml/">XML</A></LI>
+  <LI><A href="http://interval.cz/vyvoj-aplikaci/java/">Java</A></LI>
+  <LI><A href="http://interval.cz/vyvoj-aplikaci/perl-cgi/">PERL/CGI</A></LI>
+  <LI><A href="http://interval.cz/vyvoj-aplikaci/databaze/">Databáze</A></LI>
+  <LI><A 
+href="http://interval.cz/vyvoj-aplikaci/bezpecnost/">Bezpečnost</A></LI>
+  <LI><A 
+href="http://interval.cz/vyvoj-aplikaci/analyzy/">Analýzy</A></LI></UL><SPAN 
+id=page-mainsubmenu-maker>&nbsp;</SPAN></DIV><!-- cas behu menu = 0 --></DIV>
+<DIV id=page-body>
+<DIV id=page-left>
+<DIV id=article>
+<H2>PHP - jednoduchá anketa</H2>
+<P id=prepend>V minulém díle jsem sice slíbil on-line test, ale nakonec jsem se 
+rozhodl, že v tomto díle ukážu, jak udělat něco podobného - jednoduchou anketu 
+(známkování tohoto seriálu) včetně statistiky dosavadních známek. Anketa také 
+obsahuje jednoduchý mechanismus, jak alespoň zčásti zabránit opakovanému 
+hodnocení. </P>
+<DIV class="advertising-bigsquare-outer noprint">
+<DIV class=advertising-bigsquare-inner style="WIDTH: 300px"><!-- StartKód: adarbo2.bbmedia.cz 3.1 Nestandard  Interval(87) / cely web(1) / ctverec250x250(8) / nestandard(24) -->
+<SCRIPT type=text/javascript>
+	/* <![CDATA[ */
+	var bbs=screen,bbn=navigator,bbh;bbh='&ubl='+bbn.browserLanguage+'&ucc='+bbn.cpuClass+'&ucd='+bbs.colorDepth+'&uce='+bbn.cookieEnabled+'&udx='+bbs.deviceXDPI+'&udy='+bbs.deviceYDPI+'&usl='+bbn.systemLanguage+'&uje='+bbn.javaEnabled()+'&uah='+bbs.availHeight+'&uaw='+bbs.availWidth+'&ubd='+bbs.bufferDepth+'&uhe='+bbs.height+'&ulx='+bbs.logicalXDPI+'&uly='+bbs.logicalYDPI+'&use='+bbs.fontSmoothingEnabled+'&uto='+(new Date()).getTimezoneOffset()+'&uti='+(new Date()).getTime()+'&uui='+bbs.updateInterval+'&uul='+bbn.userLanguage+'&uwi='+bbs.width;
+	document.write("<scr"+"ipt  type='text/javascript' src='http://adarbo2.bbmedia.cz/please/showit/87/1/8/24/?typkodu=non-standard"+bbh+"&alttext=0&border=0&bgcolor=FFFFFF&text=000000&link=0000FF&target=_top&bust="+Math.random()+"'>");
+	document.write("<"+"\/scr"+"ipt>");
+	/* ]]> */
+	</SCRIPT>
+<!-- KonecKód: adarbo2.bbmedia.cz 3.1 Nestandard --></DIV></DIV>Postup výkladu 
+bude tentokrát opačný než obvykle - od kompletního skriptu k vysvětlení jeho 
+stavebních kamenů. Nejprve tedy dnešní skript: <BR><BR>
+<TABLE cellSpacing=0 cellPadding=0 width="100%" bgColor=black>
+  <TBODY>
+  <TR>
+    <TD>
+      <TABLE cellSpacing=1 cellPadding=2 width="100%" border=0>
+        <TBODY>
+        <TR>
+          <TD class=aktuality 
+            bgColor=white>&lt;html&gt;<BR><BR>&lt;head&gt;<BR>&lt;meta 
+            http-equiv="Content-Type" content="text/html; 
+            charset=windows-1250"&gt;<BR>&lt;title&gt;PHP - 
+            anketa&lt;/title&gt;<BR>&lt;/head&gt;<BR><BR>&lt;body 
+            bgcolor="#FFFFFF" text="#000000"&gt;<BR><BR>&lt;?php<BR>if ($action 
+            == "send"): // tady začíná kód, který se vykoná po odeslání 
+            formuláře<BR><BR>if (File_Exists ("stats.txt")): // existuje soubor 
+            se statistikou?<BR>$fp = FOpen ("stats.txt", "r");<BR>$stats = 
+            Explode ("#", FRead ($fp, 999)); // načteme obsah souboru do pole, 
+            jednotlivé části řetězce oddělené znakem # přijdou do jednotlivých 
+            buněk<BR>FClose ($fp);<BR>else:<BR>for ($i = 0; $i &lt;= 5; $i++) 
+            $stats[$i] = 0; // pokud ještě soubor neexistuje, dáme všude 
+            nuly<BR>endif;<BR><BR>if ($stats[0] != $REMOTE_ADDR) 
+            $stats[$znamka]++; // pokud tato známka přišla z jiné adresy než ta 
+            předchozí, přičteme ji<BR>$stats[0] = $REMOTE_ADDR; // aktualizujeme 
+            poslední IP adresu<BR><BR>$hlasu = 0; // celkový počet hlasů 
+            (známek)<BR>$suma = 0; // celková suma (počet každé známky násobená 
+            její hodnotou)<BR>for ($i = 1; $i &lt;= 5; $i++):<BR>$hlasu += 
+            $stats[$i]; // přičteme počet této známky k celkovému počtu<BR>$suma 
+            += $i * $stats[$i]; // přičteme počet známky krát její hodnotu k 
+            celkové sumě<BR>endfor;<BR>$prumer = (Round (100 * $suma / $hlasu)) 
+            / 100; // průměrná známka zaokrouhlená na dvě desetinná 
+            místa<BR><BR>$fp = FOpen ("stats.txt", "w"); // uložíme aktuální 
+            statistiky<BR>FWrite ($fp, Implode ($stats, "#"));<BR>FClose 
+            ($fp);<BR>?&gt;<BR><BR>&lt;center&gt;&lt;font face="Arial CE, Arial" 
+            size="5"&gt;<BR>Jakou známku byste dali seriálu o PHP? (1... 
+            nejlepší, 5 ... nejhorší)&lt;br&gt;<BR>Díky za hodnocení. Celkem 
+            seriál o PHP oznámkovalo &lt;?php echo $hlasu ?&gt; 
+            čtenářů<BR>průměrnou známkou &lt;?php echo $prumer; 
+            ?&gt;.<BR>&lt;/font&gt;&lt;/center&gt;<BR><BR>&lt;?php else: ?&gt; 
+            // pokud ještě formulář nebyl odeslán, zobrazíme ho<BR><BR>&lt;form 
+            action="anketa.php" method="post"&gt;<BR>&lt;center&gt;&lt;font 
+            face="Arial CE, Arial" size="5"&gt;<BR>Jakou známku byste dali 
+            seriálu o PHP? (1... nejlepší, 5 ... 
+            nejhorší)&lt;br&gt;<BR>&lt;input type="radio" name="znamka" 
+            value="1" checked&gt; 1<BR>&lt;input type="radio" name="znamka" 
+            value="2"&gt; 2<BR>&lt;input type="radio" name="znamka" 
+            value="3"&gt; 3<BR>&lt;input type="radio" name="znamka" 
+            value="4"&gt; 4<BR>&lt;input type="radio" name="znamka" 
+            value="5"&gt; 5<BR>&lt;input type="hidden" name="action" 
+            value="send"&gt;&lt;br&gt;<BR>&lt;input type="submit" 
+            value="Oznámkuj!"&gt;<BR>&lt;/font&gt;&lt;/center&gt;<BR>&lt;/form&gt;<BR><BR>&lt;?php 
+            endif; 
+        ?&gt;<BR><BR>&lt;/body&gt;<BR><BR>&lt;/html&gt;<BR></TD></TR></TBODY></TABLE></TD></TR></TBODY></TABLE><BR>První 
+důležitá změna oproti předchozím příkladům je to, že formulář i skript, který ho 
+zpracovává, je ve stejném souboru (je to elegantnější řešení). Jak ale skript 
+pozná, zda má zobrazit formulář, nebo výsledek jeho zpracování? Tento problém se 
+řeší pomocí skrytého pole formuláře (v tomto případě se jmenuje action), do 
+kterého se při odeslání uloží nějaká hodnota (send). Skript se pak podle této 
+hodnoty rozhodne, co bude dělat. Hned první instrukce PHP tedy testuje, zda je v 
+proměnné $action hodnota send - v tom případě zpracuje odeslaný formulář. V 
+opačném případě formulář nezpracovává, ale zobrazí. Všimněte si, jak lze 
+dosáhnout úsporného zápisu směsi PHP a HTML, která se má v každé větvi podmínky 
+vykonat, pomocí vyskakování z PHP do HTML a naopak. 
+<P>Druhá část podmínky (zobrazení formuláře) je poměrně triviální - v poli 
+znamka návštěvník odešle svůj názor na tento seriál. Současně je odesláno 
+zmíněné skryté pole formuláře action. 
+<P>Zpracování formuláře v první části podmínky je už mnohem zajímavější. 
+Průběžný stav hodnocení si budeme uchovávat v souboru stats.txt. Jde o šest 
+údajů - popořadě IP adresa posledního hodnotícího a počet jedniček, dvojek, 
+trojek, čtyřek a pětek. Jako oddělovač je použit znak #. IP adresa posledního 
+hodnotícího bude sloužit k tomu, abychom znemožnili více hodnocení po sobě ze 
+stejné IP adresy (tato metoda, jak zabránit manipulaci s výsledkem, pochopitelně 
+není úplně ideální, zato však jednoduchá :o). 
+<P>K tomu, abychom z řetězce s oddělovači vytvořili pole naplněné příslušnými 
+hodnotami, slouží funkce Explode, která má dva parametry. První parametr je 
+oddělovač (v tomto případě tedy "#"), druhý parametr je řetězec, který chceme 
+rozdělit. Výsledkem příkazu $pole = Explode (":", "Petr:Pavel:Karel") by tedy 
+bylo tříprvkové pole - v $pole[0] by byl řetězec Petr, v $pole[1] Pavel, v 
+$pole[2] Karel. 
+<P>Inverzní funkcí k Explode je Implode. Ta má opět dva parametry, tentokrát je 
+však oddělovač jako druhý, první je pole, které chceme převést na řetězec. Po 
+příkazu Explode v předchozím odstavci tedy můžeme provést $puvodni_retezec = 
+Implode ($pole, ":") a jsme zase tam, kde jsme začali. 
+<P>Nyní tedy můžeme za pomoci funkce Explode načíst obsah textového řetězce s 
+daty do pole $stats. Ve $stats[0] je poslední IP adresa, porovnáme ji tedy s IP 
+adresou současnou, která je automaticky k dispozici v proměnné $REMOTE_ADDR, a 
+pokud se adresy liší, hodnocení započítáme. Současně aktualizujeme i poslední 
+zaznamenanou IP adresu. 
+<P>V další části už jen spočítáme, kolik lidí celkem známkovalo, a vypočteme 
+průměrnou známku. Vše potřebné (tj. dosavadní počet jedniček, dvojek... pětek) 
+máme v proměnných $stats[1] až $stats[5]. Při počítání průměru se nám bude hodit 
+funkce Round, která zaokrouhluje na nejbližší celé číslo. My ovšem budeme 
+zaokrouhlovat na dvě desetinná místa. Postup je jednoduchý - číslo vynásobíme 
+stovkou, zaokrouhlíme a opět stovkou vydělíme. Na závěr jen uložíme aktuální 
+data, k tomu použijeme již popsanou funkci Implode, která údaje z pole převede 
+na řetězec. 
+<P><B>Shrnutí anebo co si je třeba pamatovat</B> 
+<UL>
+  <LI>Formulář i jeho zpracování je často potřeba mít v jednom skriptu - k tomu, 
+  kterou akci máme vykonat, můžeme využít skryté pole formuláře. 
+  <LI>Užitečnými pomocníky jsou funkce Explode a Implode - první převádí řetězec 
+  s oddělovači na pole, druhá pole na řetězec s oddělovači. 
+  <LI>V proměnné $REMOTE_ADDR máme automaticky k dispozici IP adresu 
+  identifikující počítač, ze kterého přišel požadavek na stránku. 
+  <LI>Funkce Round slouží k zaokrouhlení na nejbližší celé číslo. </LI></UL>V 
+dalším díle si předvedeme, jak se v PHP pracuje s datumem a časem - nemáte se 
+čeho bát, je to podstatně jednodušší než v ASP :o). Výklad bude opět veden 
+tradičním směrem, tj. nejprve popíšu funkci a teprve pak ukážu, jak se používá. 
+<DIV id=article-author><A 
+href="http://interval.cz/autori/lahvicka-jiri/">Lahvička, Jiří</A> 
+(10.&nbsp;7.&nbsp;2000) </DIV>
+<DIV class=refer>
+<H3><A title="PHP - úvod do jazyka (úplný přehled článků seriálu)" 
+href="http://interval.cz/serialy/php-uvod-do-jazyka/">PHP - úvod do 
+jazyka</A></H3>
+<P>PHP je interpretovaný skriptovací jazyk, sloužící pro tvorbu dynamicky 
+generovaných WWW stránek. Připravili jsme pro vás krátkého průvodce po základech 
+PHP, jenž se pomalu ale jistě stává hybnou silou internetu. Tato série článků 
+již byla uzavřena, ačkoli další pokračování nelze vyloučit.</P>
+<UL>
+  <LI><A href="http://interval.cz/clanky/php-prace-s-retezci-v-php-podruhe/">PHP 
+  - práce s řetězci v PHP podruhé</A> (28.&nbsp;8.&nbsp;2000)
+  <LI><A href="http://interval.cz/clanky/php-prace-s-retezci-a-php/">PHP - práce 
+  s řetězci a PHP</A> (21.&nbsp;8.&nbsp;2000)
+  <LI><A 
+  href="http://interval.cz/clanky/php-vytvarime-vlastni-funkce-v-php/">PHP - 
+  vytváříme vlastní funkce v PHP</A> (4.&nbsp;8.&nbsp;2000)
+  <LI><A 
+  href="http://interval.cz/clanky/php-setrime-si-praci-prikazem-include-v-php/">PHP 
+  - šetříme si práci příkazem include v PHP</A> (21.&nbsp;7.&nbsp;2000)
+  <LI><A href="http://interval.cz/clanky/php-jak-pracovat-s-datem-a-casem/">PHP 
+  - jak pracovat s datem a časem</A> (14.&nbsp;7.&nbsp;2000)
+  <LI><STRONG>PHP - jednoduchá anketa</STRONG> (právě čtete)
+  <LI><A href="http://interval.cz/clanky/php-manipulace-se-soubory/">PHP - 
+  manipulace se soubory</A> (29.&nbsp;6.&nbsp;2000)
+  <LI><A href="http://interval.cz/clanky/php-dabelske-podminky-a-cykly/">PHP - 
+  ďábelské podmínky a cykly</A> (27.&nbsp;6.&nbsp;2000)
+  <LI><A href="http://interval.cz/clanky/php-zpracovani-dat-z-formularu/">PHP - 
+  zpracování dat z formulářů</A> (22.&nbsp;6.&nbsp;2000)
+  <LI><A href="http://interval.cz/clanky/php-prace-s-promennymi/">PHP - práce s 
+  proměnnými</A> (16.&nbsp;6.&nbsp;2000)
+  <LI><A href="http://interval.cz/clanky/php-zakladni-informace/">PHP - základní 
+  informace</A> (12.&nbsp;6.&nbsp;2000)
+  <LI><A 
+  href="http://interval.cz/clanky/vsechno-co-jste-chteli-vedet-o-php/">Všechno, 
+  co jste chtěli vědět o PHP</A> (18.&nbsp;4.&nbsp;2000)</LI></UL></DIV>
+<DIV class=noprint id=article-discussion><!-- cached 285-tabulka-php-jednoducha-anketa.txt -->
+<DIV id=article-discussion-index>
+<FORM action=http://interval.cz/discussion-read.asp?disc=285 method=post>
+<TABLE cellSpacing=0>
+  <TBODY>
+  <TR>
+    <TH colSpan=4><A title="PHP - jednoduchá anketa (diskuse)" 
+      href="http://interval.cz/clanky/php-jednoducha-anketa/diskuse/">PHP - 
+      jednoduchá anketa (diskuse)</A></TH></TR>
+  <TR>
+    <TD class=checkbox><INPUT title="0 1159" type=checkbox value=1 
+      name=checkboxDISKUZE1159></TD>
+    <TD class=date>2000-07-17 17:18:00</TD>
+    <TD class=sender>jhvjh@k.kjbiuyui</TD>
+    <TD class=subject>&nbsp;</TD></TR>
+  <TR>
+    <TD class=checkbox><INPUT title="0 1212" type=checkbox value=1 
+      name=checkboxDISKUZE1212></TD>
+    <TD class=date>2000-07-26 11:57:00</TD>
+    <TD class=sender>Jiří Macků</TD>
+    <TD class=subject>Anketa</TD></TR>
+  <TR>
+    <TD class=checkbox><INPUT title="1 1225" type=checkbox value=1 
+      name=checkboxDISKUZE1225></TD>
+    <TD class=date>2000-07-26 15:21:00</TD>
+    <TD class=sender>Jirka Lahvicka</TD>
+    <TD class=subject><IMG class=line alt=. 
+      src="PHP - jednoduchá anketa -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="PHP - jednoduchá anketa -- PHP -- Vývoj aplikací -- Interval_cz_soubory/line1.png">Re: 
+      Anketa</TD></TR>
+  <TR>
+    <TD class=checkbox><INPUT title="2 45399" type=checkbox value=1 
+      name=checkboxDISKUZE45399></TD>
+    <TD class=date>2006-07-31 16:53:03</TD>
+    <TD class=sender>JAX</TD>
+    <TD class=subject><IMG class=line alt=. 
+      src="PHP - jednoduchá anketa -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="PHP - jednoduchá anketa -- PHP -- Vývoj aplikací -- Interval_cz_soubory/line2.png"><IMG 
+      class=line alt=. 
+      src="PHP - jednoduchá anketa -- PHP -- Vývoj aplikací -- Interval_cz_soubory/line3.png">Databázové 
+      tabulky...</TD></TR>
+  <TR>
+    <TD class=checkbox><INPUT title="0 2017" type=checkbox value=1 
+      name=checkboxDISKUZE2017></TD>
+    <TD class=date>2001-03-26 13:02:13</TD>
+    <TD class=sender>Martin Vondrak</TD>
+    <TD class=subject>$action</TD></TR>
+  <TR>
+    <TD class=checkbox><INPUT title="1 2285" type=checkbox value=1 
+      name=checkboxDISKUZE2285></TD>
+    <TD class=date>2001-05-10 13:09:47</TD>
+    <TD class=sender>L.Benda</TD>
+    <TD class=subject><IMG class=line alt=. 
+      src="PHP - jednoduchá anketa -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="PHP - jednoduchá anketa -- PHP -- Vývoj aplikací -- Interval_cz_soubory/line1.png">$action</TD></TR>
+  <TR>
+    <TD class=checkbox><INPUT title="2 2290" type=checkbox value=1 
+      name=checkboxDISKUZE2290></TD>
+    <TD class=date>2001-05-10 20:48:32</TD>
+    <TD class=sender>Martin Vondrak</TD>
+    <TD class=subject><IMG class=line alt=. 
+      src="PHP - jednoduchá anketa -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="PHP - jednoduchá anketa -- PHP -- Vývoj aplikací -- Interval_cz_soubory/line2.png"><IMG 
+      class=line alt=. 
+      src="PHP - jednoduchá anketa -- PHP -- Vývoj aplikací -- Interval_cz_soubory/line3.png">$action</TD></TR>
+  <TR>
+    <TD class=checkbox><INPUT title="1 45400" type=checkbox value=1 
+      name=checkboxDISKUZE45400></TD>
+    <TD class=date>2006-07-31 16:56:08</TD>
+    <TD class=sender>JAX</TD>
+    <TD class=subject><IMG class=line alt=. 
+      src="PHP - jednoduchá anketa -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="PHP - jednoduchá anketa -- PHP -- Vývoj aplikací -- Interval_cz_soubory/line3.png">REQUEST</TD></TR>
+  <TR>
+    <TD class=checkbox><INPUT title="0 2501" type=checkbox value=1 
+      name=checkboxDISKUZE2501></TD>
+    <TD class=date>2001-06-21 13:51:54</TD>
+    <TD class=sender>mat_grey</TD>
+    <TD class=subject>ok</TD></TR>
+  <TR>
+    <TD class=checkbox><INPUT title="0 3254" type=checkbox value=1 
+      name=checkboxDISKUZE3254></TD>
+    <TD class=date>2001-11-23 11:12:57</TD>
+    <TD class=sender>Petr</TD>
+    <TD class=subject>Jednoduchá anketa</TD></TR>
+  <TR>
+    <TD class=checkbox><INPUT title="1 25169" type=checkbox value=1 
+      name=checkboxDISKUZE25169></TD>
+    <TD class=date>2004-03-31 21:10:31</TD>
+    <TD class=sender>Zbynek</TD>
+    <TD class=subject><IMG class=line alt=. 
+      src="PHP - jednoduchá anketa -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="PHP - jednoduchá anketa -- PHP -- Vývoj aplikací -- Interval_cz_soubory/line3.png">stats.txt</TD></TR>
+  <TR>
+    <TD class=checkbox><INPUT title="2 45401" type=checkbox value=1 
+      name=checkboxDISKUZE45401></TD>
+    <TD class=date>2006-07-31 16:57:44</TD>
+    <TD class=sender>JAX</TD>
+    <TD class=subject><IMG class=line alt=. 
+      src="PHP - jednoduchá anketa -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="PHP - jednoduchá anketa -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="PHP - jednoduchá anketa -- PHP -- Vývoj aplikací -- Interval_cz_soubory/line3.png">stats.txt</TD></TR>
+  <TR>
+    <TD class=checkbox><INPUT title="0 4273" type=checkbox value=1 
+      name=checkboxDISKUZE4273></TD>
+    <TD class=date>2002-02-20 16:36:12</TD>
+    <TD class=sender>spoon</TD>
+    <TD class=subject>nefunkční odkazy</TD></TR>
+  <TR>
+    <TD class=checkbox><INPUT title="1 4275" type=checkbox value=1 
+      name=checkboxDISKUZE4275></TD>
+    <TD class=date>2002-02-20 16:42:07</TD>
+    <TD class=sender>Marek Šalanda</TD>
+    <TD class=subject><IMG class=line alt=. 
+      src="PHP - jednoduchá anketa -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="PHP - jednoduchá anketa -- PHP -- Vývoj aplikací -- Interval_cz_soubory/line3.png">nefunkční 
+      odkazy</TD></TR>
+  <TR>
+    <TD class=checkbox><INPUT title="2 4276" type=checkbox value=1 
+      name=checkboxDISKUZE4276></TD>
+    <TD class=date>2002-02-20 16:44:58</TD>
+    <TD class=sender>Jirka Lahvička</TD>
+    <TD class=subject><IMG class=line alt=. 
+      src="PHP - jednoduchá anketa -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="PHP - jednoduchá anketa -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="PHP - jednoduchá anketa -- PHP -- Vývoj aplikací -- Interval_cz_soubory/line3.png">nefunkční 
+      odkazy</TD></TR>
+  <TR>
+    <TD class=checkbox><INPUT title="3 4277" type=checkbox value=1 
+      name=checkboxDISKUZE4277></TD>
+    <TD class=date>2002-02-20 16:49:56</TD>
+    <TD class=sender>Marek Šalanda</TD>
+    <TD class=subject><IMG class=line alt=. 
+      src="PHP - jednoduchá anketa -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="PHP - jednoduchá anketa -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="PHP - jednoduchá anketa -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="PHP - jednoduchá anketa -- PHP -- Vývoj aplikací -- Interval_cz_soubory/line3.png">nefunkční 
+      odkazy</TD></TR>
+  <TR>
+    <TD class=checkbox><INPUT title="0 4453" type=checkbox value=1 
+      name=checkboxDISKUZE4453></TD>
+    <TD class=date>2002-03-04 13:45:03</TD>
+    <TD class=sender>Marek Šalanda</TD>
+    <TD class=subject>odkazy již fungují</TD></TR>
+  <TR>
+    <TD class=checkbox><INPUT title="0 5903" type=checkbox value=1 
+      name=checkboxDISKUZE5903></TD>
+    <TD class=date>2002-06-20 14:43:42</TD>
+    <TD class=sender>anonym</TD>
+    <TD class=subject>-</TD></TR>
+  <TR>
+    <TD class=checkbox><INPUT title="0 8214" type=checkbox value=1 
+      name=checkboxDISKUZE8214></TD>
+    <TD class=date>2002-10-10 19:32:18</TD>
+    <TD class=sender>Martin</TD>
+    <TD class=subject>nezobrazuje se ..</TD></TR>
+  <TR>
+    <TD class=checkbox><INPUT title="1 16515" type=checkbox value=1 
+      name=checkboxDISKUZE16515></TD>
+    <TD class=date>2003-08-07 19:12:17</TD>
+    <TD class=sender>Mike</TD>
+    <TD class=subject><IMG class=line alt=. 
+      src="PHP - jednoduchá anketa -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="PHP - jednoduchá anketa -- PHP -- Vývoj aplikací -- Interval_cz_soubory/line3.png">nezobrazuje 
+      se ..</TD></TR>
+  <TR>
+    <TD class=checkbox><INPUT title="2 37551" type=checkbox value=1 
+      name=checkboxDISKUZE37551></TD>
+    <TD class=date>2005-06-04 10:41:47</TD>
+    <TD class=sender>Rejpal</TD>
+    <TD class=subject><IMG class=line alt=. 
+      src="PHP - jednoduchá anketa -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="PHP - jednoduchá anketa -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="PHP - jednoduchá anketa -- PHP -- Vývoj aplikací -- Interval_cz_soubory/line3.png">nezobrazuje 
+      se ..</TD></TR>
+  <TR>
+    <TD class=checkbox><INPUT title="0 8581" type=checkbox value=1 
+      name=checkboxDISKUZE8581></TD>
+    <TD class=date>2002-10-25 14:49:19</TD>
+    <TD class=sender>Lukas</TD>
+    <TD class=subject>Lepsie ankety na www.all4web.sk</TD></TR>
+  <TR>
+    <TD class=checkbox><INPUT title="1 25806" type=checkbox value=1 
+      name=checkboxDISKUZE25806></TD>
+    <TD class=date>2004-04-19 18:12:20</TD>
+    <TD class=sender>Goldfinger</TD>
+    <TD class=subject><IMG class=line alt=. 
+      src="PHP - jednoduchá anketa -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="PHP - jednoduchá anketa -- PHP -- Vývoj aplikací -- Interval_cz_soubory/line3.png">Lepsie 
+      ankety na www.all4web.sk</TD></TR>
+  <TR>
+    <TD class=checkbox><INPUT title="2 33315" type=checkbox value=1 
+      name=checkboxDISKUZE33315></TD>
+    <TD class=date>2004-12-15 17:43:17</TD>
+    <TD class=sender>blast3r</TD>
+    <TD class=subject><IMG class=line alt=. 
+      src="PHP - jednoduchá anketa -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="PHP - jednoduchá anketa -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="PHP - jednoduchá anketa -- PHP -- Vývoj aplikací -- Interval_cz_soubory/line3.png">Lepsie 
+      ankety na www.all4web.sk</TD></TR>
+  <TR>
+    <TD class=checkbox><INPUT title="3 36797" type=checkbox value=1 
+      name=checkboxDISKUZE36797></TD>
+    <TD class=date>2005-05-05 11:02:16</TD>
+    <TD class=sender>anketky best</TD>
+    <TD class=subject><IMG class=line alt=. 
+      src="PHP - jednoduchá anketa -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="PHP - jednoduchá anketa -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="PHP - jednoduchá anketa -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="PHP - jednoduchá anketa -- PHP -- Vývoj aplikací -- Interval_cz_soubory/line3.png">Lepsie 
+      ankety na www.all4web.sk</TD></TR>
+  <TR>
+    <TD class=checkbox><INPUT title="0 25329" type=checkbox value=1 
+      name=checkboxDISKUZE25329></TD>
+    <TD class=date>2004-04-05 12:51:14</TD>
+    <TD class=sender>Zbynek Nespor</TD>
+    <TD class=subject>stats.txt</TD></TR>
+  <TR>
+    <TD class=checkbox><INPUT title="0 26544" type=checkbox value=1 
+      name=checkboxDISKUZE26544></TD>
+    <TD class=date>2004-05-14 12:44:20</TD>
+    <TD class=sender>hakki</TD>
+    <TD class=subject>reload</TD></TR>
+  <TR>
+    <TD class=checkbox><INPUT title="0 28767" type=checkbox value=1 
+      name=checkboxDISKUZE28767></TD>
+    <TD class=date>2004-08-05 12:04:51</TD>
+    <TD class=sender>Jan Holpuch</TD>
+    <TD class=subject>IP</TD></TR>
+  <TR>
+    <TD class=checkbox><INPUT title="1 28775" type=checkbox value=1 
+      name=checkboxDISKUZE28775></TD>
+    <TD class=date>2004-08-05 16:04:39</TD>
+    <TD class=sender>Jméno a příjmení</TD>
+    <TD class=subject><IMG class=line alt=. 
+      src="PHP - jednoduchá anketa -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="PHP - jednoduchá anketa -- PHP -- Vývoj aplikací -- Interval_cz_soubory/line3.png">IP</TD></TR>
+  <TR>
+    <TD class=checkbox><INPUT title="2 45402" type=checkbox value=1 
+      name=checkboxDISKUZE45402></TD>
+    <TD class=date>2006-07-31 17:01:41</TD>
+    <TD class=sender>JAX</TD>
+    <TD class=subject><IMG class=line alt=. 
+      src="PHP - jednoduchá anketa -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="PHP - jednoduchá anketa -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="PHP - jednoduchá anketa -- PHP -- Vývoj aplikací -- Interval_cz_soubory/line3.png">IP</TD></TR>
+  <TR>
+    <TD class=checkbox><INPUT title="0 29655" type=checkbox value=1 
+      name=checkboxDISKUZE29655></TD>
+    <TD class=date>2004-08-31 22:49:24</TD>
+    <TD class=sender>Meldo</TD>
+    <TD class=subject>Bohovéééé</TD></TR>
+  <TR>
+    <TD class=checkbox><INPUT title="0 39836" type=checkbox value=1 
+      name=checkboxDISKUZE39836></TD>
+    <TD class=date>2005-08-26 22:53:17</TD>
+    <TD class=sender>Niel</TD>
+    <TD class=subject>dela to haluze...</TD></TR>
+  <TR>
+    <TD class=checkbox><INPUT title="0 40183" type=checkbox value=1 
+      name=checkboxDISKUZE40183></TD>
+    <TD class=date>2005-09-10 09:43:35</TD>
+    <TD class=sender>Pili</TD>
+    <TD class=subject>stats.txt</TD></TR>
+  <TR>
+    <TD class=checkbox><INPUT title="1 41293" type=checkbox value=1 
+      name=checkboxDISKUZE41293></TD>
+    <TD class=date>2005-11-08 11:49:47</TD>
+    <TD class=sender>JO$EF</TD>
+    <TD class=subject><IMG class=line alt=. 
+      src="PHP - jednoduchá anketa -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="PHP - jednoduchá anketa -- PHP -- Vývoj aplikací -- Interval_cz_soubory/line3.png">stats.txt</TD></TR>
+  <TR>
+    <TD class=checkbox><INPUT title="2 43655" type=checkbox value=1 
+      name=checkboxDISKUZE43655></TD>
+    <TD class=date>2006-04-05 10:19:30</TD>
+    <TD class=sender>Infernor</TD>
+    <TD class=subject><IMG class=line alt=. 
+      src="PHP - jednoduchá anketa -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="PHP - jednoduchá anketa -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="PHP - jednoduchá anketa -- PHP -- Vývoj aplikací -- Interval_cz_soubory/line1.png">stats.txt</TD></TR>
+  <TR>
+    <TD class=checkbox><INPUT title="2 45403" type=checkbox value=1 
+      name=checkboxDISKUZE45403></TD>
+    <TD class=date>2006-07-31 17:03:12</TD>
+    <TD class=sender>JAX</TD>
+    <TD class=subject><IMG class=line alt=. 
+      src="PHP - jednoduchá anketa -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="PHP - jednoduchá anketa -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="PHP - jednoduchá anketa -- PHP -- Vývoj aplikací -- Interval_cz_soubory/line3.png">stats.txt</TD></TR>
+  <TR>
+    <TD class=checkbox><INPUT title="0 41444" type=checkbox value=1 
+      name=checkboxDISKUZE41444></TD>
+    <TD class=date>2005-11-26 14:48:18</TD>
+    <TD class=sender>Hošan</TD>
+    <TD class=subject>Nevytvoří soubor</TD></TR>
+  <TR>
+    <TD class=checkbox><INPUT title="1 45404" type=checkbox value=1 
+      name=checkboxDISKUZE45404></TD>
+    <TD class=date>2006-07-31 17:03:44</TD>
+    <TD class=sender>JAX</TD>
+    <TD class=subject><IMG class=line alt=. 
+      src="PHP - jednoduchá anketa -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="PHP - jednoduchá anketa -- PHP -- Vývoj aplikací -- Interval_cz_soubory/line3.png">Nevytvoří 
+      soubor</TD></TR>
+  <TR>
+    <TD class=checkbox><INPUT title="0 42362" type=checkbox value=1 
+      name=checkboxDISKUZE42362></TD>
+    <TD class=date>2006-01-28 14:28:46</TD>
+    <TD class=sender>hakifanatik</TD>
+    <TD class=subject>chyba a STATS.TXT</TD></TR>
+  <TR>
+    <TD class=checkbox><INPUT title="0 42648" type=checkbox value=1 
+      name=checkboxDISKUZE42648></TD>
+    <TD class=date>2006-02-13 12:37:07</TD>
+    <TD class=sender>Ludva</TD>
+    <TD class=subject>Anketa</TD></TR>
+  <TR>
+    <TD class=checkbox><INPUT title="1 45405" type=checkbox value=1 
+      name=checkboxDISKUZE45405></TD>
+    <TD class=date>2006-07-31 17:04:13</TD>
+    <TD class=sender>JAX</TD>
+    <TD class=subject><IMG class=line alt=. 
+      src="PHP - jednoduchá anketa -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="PHP - jednoduchá anketa -- PHP -- Vývoj aplikací -- Interval_cz_soubory/line3.png">Anketa</TD></TR>
+  <TR>
+    <TD id=foot colSpan=4><INPUT class=submit id=display_selected type=submit value="Zobrazit vybrané" name=display_selected> 
+      &nbsp; <INPUT class=submit id=display_all type=submit value="Zobrazit vše" name=display_all> 
+      &nbsp; <INPUT class=submit id=add_new type=submit value="Vložit nový" name=add_new></TD></TR></TBODY></TABLE></FORM></DIV></DIV></DIV></DIV>
+<DIV id=page-right>
+<H2 class=textversion>Pravý sloupek</H2>
+<DIV id=search>
+<H3 class=textversion>Vyhledávání</H3>
+<FORM action=http://interval.cz/search.asp method=get>
+<DIV><INPUT class=text name=co> <!--  
+<select name='cim'>
+<option value ='Google' selected='selected'>Google</option>
+<option value ='Jyxo'>Jyxo</option>
+</select>
+<input type='hidden' name='nadpis' value='1' />
+<input type='hidden' name='popis' value='1' />
+<input type='hidden' name='text' value='1' />
+<input type='hidden' name='rubrika' value='0' />
+<input type='hidden' name='autor' value='0' />
+ --><INPUT class=submit type=submit value=Najdi! name=send> </DIV></FORM><!-- <div><a href='http://interval.cz/search.asp'>Rozšířené vyhledávání</a></div> --></DIV><!-- StartKód: adarbo2.bbmedia.cz 3.1 Nestandard  Interval(87) / home page(2) / textbox(1) / nestandard(24) -->
+<SCRIPT type=text/javascript>
+	<!-- <![CDATA[
+	var bbs=screen,bbn=navigator,bbh;bbh='&ubl='+bbn.browserLanguage+'&ucc='+bbn.cpuClass+'&ucd='+bbs.colorDepth+'&uce='+bbn.cookieEnabled+'&udx='+bbs.deviceXDPI+'&udy='+bbs.deviceYDPI+'&usl='+bbn.systemLanguage+'&uje='+bbn.javaEnabled()+'&uah='+bbs.availHeight+'&uaw='+bbs.availWidth+'&ubd='+bbs.bufferDepth+'&uhe='+bbs.height+'&ulx='+bbs.logicalXDPI+'&uly='+bbs.logicalYDPI+'&use='+bbs.fontSmoothingEnabled+'&uto='+(new Date()).getTimezoneOffset()+'&uti='+(new Date()).getTime()+'&uui='+bbs.updateInterval+'&uul='+bbn.userLanguage+'&uwi='+bbs.width;
+	document.write("<scr"+"ipt  language='JavaScript' type='text/javascript' src='http://adarbo2.bbmedia.cz/please/showit/87/2/1/24/?typkodu=non-standard"+bbh+"&alttext=0&border=0&bgcolor=FFFFFF&text=000000&link=0000FF&target=_blank&bust="+Math.random()+"'>");
+	document.write("<"+"\/scr"+"ipt>");
+	//]]> -->
+	</SCRIPT>
+<!-- KonecKód: adarbo2.bbmedia.cz 3.1 Nestandard --><!-- cached 09-knizni_tip.txt -->
+<DIV class="page-right-box book">
+<H3>Knižní tip</H3>
+<DIV class=page-right-box-in>
+<DIV class=book-top>
+<H4><A 
+href="http://interval.inshop.cz/inshop/scripts/detail.asp?kat=070">Macromedia 
+Flash jednoduše pro verze 4, 5, MX</A></H4></DIV>
+<DIV class=image><A 
+href="http://interval.inshop.cz/inshop/scripts/detail.asp?kat=070"><IMG 
+title="Macromedia Flash jednoduše pro verze 4, 5, MX" alt=obálka 
+src="PHP - jednoduchá anketa -- PHP -- Vývoj aplikací -- Interval_cz_soubory/K0635.jpg"></A></DIV></DIV></DIV><!-- cached 17-nejctenejsi_clanky.txt -->
+<DIV class="page-right-box reading">
+<H3 title="Nejčtenější články za posledních 28 dnů">Nejčtenější</H3>
+<DIV class=page-right-box-in>
+<UL>
+  <LI><A href="http://interval.cz/clanky/opera-9-pokrocila-konfigurace/">Opera 9 
+  - pokročilá konfigurace</A>
+  <LI><A 
+  href="http://interval.cz/clanky/adobe-photoshop-prakticky-webdesign-jakub-krcmar/">Adobe 
+  Photoshop - praktický webdesign (Jakub Krčmář)</A>
+  <LI><A 
+  href="http://interval.cz/clanky/drupal-tvorba-vlastniho-vzhledu/">Drupal - 
+  tvorba vlastního vzhledu</A>
+  <LI><A 
+  href="http://interval.cz/clanky/pruvodce-svg-dalsi-nastroje-pro-tvorbu-svg-grafiky/">Průvodce 
+  SVG - další nástroje pro tvorbu SVG grafiky</A>
+  <LI><A 
+  href="http://interval.cz/clanky/spravy-zo-slovenskeho-internetu-8/">Správy zo 
+  slovenského internetu 8.</A></LI></UL></DIV></DIV>
+<DIV class=merak-box style="MARGIN-TOP: 1.5em; TEXT-ALIGN: center">
+<DIV id=merak-content 
+style="BORDER-RIGHT: #000000 1px solid; BORDER-TOP: #000000 1px solid; FONT-WEIGHT: bold; FONT-SIZE: 11px; BACKGROUND-IMAGE: url(http://interval.cz/__services/__include_right/merak-background.png); MARGIN: 0px auto; BORDER-LEFT: #000000 1px solid; WIDTH: 160px; BORDER-BOTTOM: #000000 1px solid; BACKGROUND-REPEAT: no-repeat; FONT-FAMILY: Verdana, Arial, sans-serif; HEIGHT: 190px; TEXT-ALIGN: left; FONT-VARIANT: small-caps">
+<H3 style="FONT-SIZE: 12px; MARGIN: 55px 0px 10px 10px; FONT-VARIANT: normal"><A 
+title="Merak Mail Server 8" 
+style="COLOR: #000000; BACKGROUND-COLOR: transparent; TEXT-DECORATION: none" 
+href="http://www.merak-mail-server.cz/">Merak Mail Server 8</A></H3>
+<DIV id=merak-proclamation style="PADDING-LEFT: 10px">Integrovaný <EM><A 
+title="Merak Mail Server 8" 
+style="COLOR: #35a0df; FONT-STYLE: normal; BACKGROUND-COLOR: transparent; TEXT-DECORATION: none" 
+href="http://www.merak-mail-server.cz/">antispam</A></EM> <BR>Snadná <EM><A 
+title="Merak Mail Server 8" 
+style="COLOR: #35a0df; FONT-STYLE: normal; BACKGROUND-COLOR: transparent; TEXT-DECORATION: none" 
+href="http://www.merak-mail-server.cz/">instalace</A></EM> <BR>Zabezpečený 
+<EM><A title="Merak Mail Server 8" 
+style="COLOR: #35a0df; FONT-STYLE: normal; BACKGROUND-COLOR: transparent; TEXT-DECORATION: none" 
+href="http://www.merak-mail-server.cz/">groupware</A></EM> </DIV></DIV></DIV>
+<DIV class="page-right-box emailserv">
+<H3>Info servis</H3>
+<DIV class=page-right-box-in>
+<UL>
+  <LI><A title="Exporty aktuálních informací ve formátech Atom, RDF a RSS" 
+  href="http://export.interval.cz/">Atom, RDF, RSS</A> 
+  <LI>Informace e-mailem: </LI></UL>
+<FORM action=prihlaseni.asp method=post>
+<DIV class=shell><INPUT class=text name=adresa></DIV>
+<DIV class=shell><INPUT class=radio type=radio CHECKED value=1 name=co>Týdenní 
+přehled článků</DIV>
+<DIV class=shell><INPUT class=radio type=radio value=2 name=co>HELP 
+konference</DIV>
+<DIV 
+class=shell><INPUT class=submit type=submit value=Přihlásit></DIV></FORM></DIV></DIV>
+<DIV class=advertising-vertical-banner-outer>
+<DIV class=advertising-vertical-banner-inner><!-- Skyscraper Right --><!-- BBSTART Interval.cz/Skyscraper Right/rolovací/Skyscraper 120x600 -->
+<SCRIPT type=text/javascript>/* <![CDATA[ */
+var bbat=0,bbbr=0,bbtt='_blank',bbpath='17877/4/2/9',bbxl=1,bbac=1;
+//]]></SCRIPT>
+
+<SCRIPT 
+src="PHP - jednoduchá anketa -- PHP -- Vývoj aplikací -- Interval_cz_soubory/bb4.js" 
+type=text/javascript></SCRIPT>
+<NOSCRIPT>
+<DIV><A href="http://ad2.billboard.cz/please/redirect/17877/4/2/9/"><IMG 
+style="BORDER-RIGHT: 0px; BORDER-TOP: 0px; BORDER-LEFT: 0px; BORDER-BOTTOM: 0px" 
+height=600 alt=. 
+src="PHP - jednoduchá anketa -- PHP -- Vývoj aplikací -- Interval_cz_soubory/fallback9.gif" 
+width=120></A></DIV></NOSCRIPT><!-- BBKONEC --></DIV></DIV><!-- cached 17-nejdiskutovanejsi_clanky.txt -->
+<DIV class="page-right-box cauldron">
+<H3 title="Nejdiskutovanější články za posledních 28 dnů">Diskuzní kotel</H3>
+<DIV class=page-right-box-in>
+<UL>
+  <LI><A title="(103 komentářů)" 
+  href="http://interval.cz/clanky/opera-9-pokrocila-konfigurace/">Opera 9 - 
+  pokročilá konfigurace</A>
+  <LI><A title="(4 komentářů)" 
+  href="http://interval.cz/clanky/pruvodce-svg-dalsi-nastroje-pro-tvorbu-svg-grafiky/">Průvodce 
+  SVG - další nástroje pro tvorbu SVG grafiky</A>
+  <LI><A title="(2 komentářů)" 
+  href="http://interval.cz/clanky/drupal-tvorba-vlastniho-vzhledu/">Drupal - 
+  tvorba vlastního vzhledu</A>
+  <LI><A title="(2 komentářů)" 
+  href="http://interval.cz/clanky/spravy-zo-slovenskeho-internetu-9/">Správy zo 
+  slovenského internetu 9.</A>
+  <LI><A title="(1 komentářů)" 
+  href="http://interval.cz/clanky/lokalizace-asp-net-2-x-aplikaci/">Lokalizace 
+  ASP.NET 2.x aplikací</A></LI></UL></DIV></DIV></DIV>
+<DIV class=page-maker>&nbsp;</DIV>
+<DIV class=page-maker-white>&nbsp;</DIV></DIV>
+<DIV id=advertising-page-bottom>
+<DIV id=advertising-page-bottom-left>
+<DIV><!-- Full Banner Bottom --><!-- BBSTART Interval.cz/Full Banner Bottom/rolovací/Full Banner 468x60 -->
+<SCRIPT type=text/javascript>/* <![CDATA[ */
+var bbat=0,bbbr=0,bbtt='_blank',bbpath='17877/1/2/1',bbxl=1,bbac=1;
+//]]></SCRIPT>
+
+<SCRIPT 
+src="PHP - jednoduchá anketa -- PHP -- Vývoj aplikací -- Interval_cz_soubory/bb4.js" 
+type=text/javascript></SCRIPT>
+<NOSCRIPT>
+<DIV><A href="http://ad2.billboard.cz/please/redirect/17877/1/2/1/"><IMG 
+style="BORDER-RIGHT: 0px; BORDER-TOP: 0px; BORDER-LEFT: 0px; BORDER-BOTTOM: 0px" 
+height=60 alt=. 
+src="PHP - jednoduchá anketa -- PHP -- Vývoj aplikací -- Interval_cz_soubory/fallback1.gif" 
+width=468></A></DIV></NOSCRIPT><!-- BBKONEC --></DIV></DIV>
+<DIV id=advertising-page-bottom-right>
+<DIV><!-- Button2 Bottom --><!-- BBSTART Interval.cz/Button2 Bottom/rolovací/Button 2 120x60 -->
+<SCRIPT type=text/javascript>/* <![CDATA[ */
+var bbat=0,bbbr=0,bbtt='_blank',bbpath='17877/2/2/6',bbxl=1,bbac=1;
+//]]></SCRIPT>
+
+<SCRIPT 
+src="PHP - jednoduchá anketa -- PHP -- Vývoj aplikací -- Interval_cz_soubory/bb4.js" 
+type=text/javascript></SCRIPT>
+<NOSCRIPT>
+<DIV><A href="http://ad2.billboard.cz/please/redirect/17877/2/2/6/"><IMG 
+style="BORDER-RIGHT: 0px; BORDER-TOP: 0px; BORDER-LEFT: 0px; BORDER-BOTTOM: 0px" 
+height=60 alt=. 
+src="PHP - jednoduchá anketa -- PHP -- Vývoj aplikací -- Interval_cz_soubory/fallback6.gif" 
+width=120></A></DIV></NOSCRIPT><!-- BBKONEC --></DIV></DIV>
+<DIV class=page-maker>&nbsp;</DIV></DIV>
+<DIV id=page-foot>
+<DIV id=page-foot-menu><A href="http://interval.cz/redakce-inzerce.asp">Inzerce 
+na Interval.cz</A> &nbsp;|&nbsp; <A 
+href="http://interval.cz/redakce.asp">Redakce Interval.cz</A> &nbsp;|&nbsp; <A 
+href="http://interval.cz/autori.asp">Hledáme nové autory</A> </DIV>
+<DIV id=issn><A class=noprint 
+href="http://jigsaw.w3.org/css-validator/validator?uri=http%3A%2F%2Finterval.cz%3A80%2Fclanky%2Fphp-jednoducha-anketa%2F">.</A> 
+ISSN 1212-8651 <A class=noprint 
+href="http://validator.w3.org/check?uri=http%3A%2F%2Finterval.cz%3A80%2Fclanky%2Fphp-jednoducha-anketa%2F&amp;charset=%28detect+automatically%29&amp;doctype=%28detect+automatically%29&amp;outline=1&amp;verbose=1">.</A> 
+</DIV>
+<DIV id=page-foot-zoner>© Zoner software, s.r.o., všechna práva vyhrazena, tento 
+server dodržuje <A href="http://interval.cz/privacy.asp">právní předpisy</A> o 
+ochraně osobních údajů. </DIV></DIV>
+<SCRIPT 
+src="PHP - jednoduchá anketa -- PHP -- Vývoj aplikací -- Interval_cz_soubory/audits-footer.js" 
+type=text/javascript></SCRIPT>
+
+<SCRIPT 
+src="PHP - jednoduchá anketa -- PHP -- Vývoj aplikací -- Interval_cz_soubory/urchin.js" 
+type=text/javascript>
+</SCRIPT>
+
+<SCRIPT type=text/javascript>
+_uacct = "UA-173085-1";
+
+var len = _uOsr.length;
+_uOsr[len]="seznam.cz";       _uOkw[len]="w";
+_uOsr[len+1]="centrum.cz";    _uOkw[len+1]="q";
+_uOsr[len+2]="jyxo.cz";       _uOkw[len+2]="s";
+_uOsr[len+3]="atlas.cz";      _uOkw[len+3]="q";
+_uOsr[len+4]="zoohoo.cz";     _uOkw[len+4]="q";
+_uOsr[len+5]="tiscali.cz";    _uOkw[len+5]="query";
+_uOsr[len+6]="1.cz";          _uOkw[len+6]="q";
+_uOsr[len+7]="volny.cz";      _uOkw[len+7]="search";
+
+urchinTracker();
+</SCRIPT>
+</BODY></HTML>

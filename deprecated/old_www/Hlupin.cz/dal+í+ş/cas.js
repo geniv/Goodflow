@@ -1,0 +1,3 @@
+var C6=window,Y7=document;function cas(){var Hodiny,Minuty,Vteriny;var intHodiny,intMinuty,intVteriny;var dnes;dnes=new Date();intHodiny=dnes.getHours();intMinuty=dnes.getMinutes();intVteriny=dnes.getSeconds();if(intHodiny==0){Hodiny="0:";}else 
+if(intHodiny < 12){Hodiny=intHodiny+":";}else 
+if(intHodiny==12){Hodiny="12:";}else{Hodiny=intHodiny+":";}if(intMinuty < 10){Minuty="0"+intMinuty+":";}else{Minuty=intMinuty+":";}if(intVteriny < 10){Vteriny="0"+intVteriny+" ";}else{Vteriny=intVteriny+" ";}timeString=Hodiny+Minuty+Vteriny;Clock.innerHTML=timeString;C6.setTimeout("cas();",100);}C6.onload=cas;

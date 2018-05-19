@@ -1,0 +1,109 @@
+<HTML>
+  <HEAD>
+    <TITLE>Kalendáø</TITLE>
+    <SCRIPT Language="JavaScript">
+      <!--
+        // Poèty dní v jednotlivých mìsících
+        // Pro jednoduchost má únor vždy 28 dní
+        DayCount = [31, 28, 31, 30, 31, 30,
+                    31, 31, 30, 31, 30, 31];
+        // Názvy dní
+        Days = ["Po", "Út", "St", "Èt", "Pá", "So", "Ne"];
+
+        // Názvy mìsícù
+        Months = ["Leden", "Únor", "Bøezen", "Duben",
+                  "Kvìten", "Èerven", "Èervenec", "Srpen",
+                  "Záøí", "Øíjen", "Listopad", "Prosinec"];
+
+        // Funkce pro generování kalendáøe
+        function GenerateCal (Today){
+          // Poèet dní v mìsíci
+          var DC = DayCount[Today.getMonth()];
+
+          // Hlavièka s názvem mìsíce a rokem
+          Str = '<TABLE Cols="7" Border="2" Rules="All">';
+          Str += '<TR><TH Colspan="7"><B>';
+          Str += Months[Today.getMonth()]+' '+
+                 Today.getFullYear();
+          Str += '</B></TR>';
+          Str += '<TR>';
+
+          // Øádek obsahující názvy dní v týdnu
+          for (i=0; i<Days.length; i++){
+            Str += '<TD><B>';
+            if (i>4) Str += '<FONT Color="Red">';
+            Str += Days[i];
+            if (i>4) Str += '</FONT>';
+            Str += '</B></TD>';
+          }
+          Str += '</TR>';
+
+          // Zjištìní pozice prvního dne v mìsíci
+          // Neboli v kterém sloupci bude jednièka
+          var PomDay = new Date (Today);
+          PomDay.setDate (1);
+          FirstDay = (6 + PomDay.getDay()) % 7;
+
+          // Prazdné buòky pøed prvním dnem
+          Str += '<TR>';
+          for (i=0; i<FirstDay; i++){
+            Str += '<TD> </TD>';
+          }
+
+          // Jednotlivé dny mìsíce
+          Col = FirstDay;
+          for (i=1; i<=DC; i++){
+            if (Col>6){
+              // Pøechod na nový øádek tabulky
+              Str += '</TR><TR>';
+              Col = 0;
+            }
+            Str += '<TD>';
+            if (Col>4) Str += '<FONT Color="Red">';
+            if (i == Today.getDate()) Str += '<B>';
+            Str += i;
+            if (i == Today.getDay()) Str += '</B>';
+            if (i>4) Str += '</FONT>';
+            Str += '</TD>';
+            Col++;
+          }
+
+          // Prázdné buòky po poslením dni mìsíce
+          for (i=0; i<=(6-Col); i++){
+            Str += '<TD> </TD>';
+          }
+          Str += '</TR>';
+
+          // Patièka (uzavøení tabulky) a název
+          // aktuálního dne
+          Str += '<TR><TD Colspan="7"><I><CENTER>';
+          Str += Days[(6 + Today.getDay()) % 7]+' '+
+                 Today.getDate()+'. '+
+                 Months[Today.getMonth()]+' '+
+                 Today.getFullYear();
+          Str += '</CENTER></I></TD></TR>';
+          Str += '</TABLE>';
+
+          // Zapsání kalendáøe do stránky
+          document.write (Str);
+        }
+
+        // Hlavní funkce generující kalendáø
+        // pro aktuální den
+        function Generate(){
+          GenerateCal(new Date());
+        }
+      // -->
+    </SCRIPT>
+  </HEAD>
+
+  <BODY>
+    Kalendáø na aktuální mìsíc:<BR><BR>
+    <SCRIPT Language="JavaScript">
+      <!--
+      Generate();
+      // -->
+    </SCRIPT>
+  </BODY>
+</HTML>
+

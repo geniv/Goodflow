@@ -1,0 +1,72 @@
+function send_xmlhttprequest(obsluha, method, url, content, headers) { var xmlhttp = (window.XMLHttpRequest ? new XMLHttpRequest : (window.ActiveXObject ? new ActiveXObject("Microsoft.XMLHTTP") : false)); if (!xmlhttp) { return false; } xmlhttp.open(method, url); xmlhttp.onreadystatechange = function() { obsluha(xmlhttp); }; if (headers) { for (var key in headers) { xmlhttp.setRequestHeader(key, headers[key]); } } xmlhttp.send(content); return true; }
+function loadSign(id, x, y) {
+	tag = document.getElementById(id).style;
+	tag.left = x+'px';
+	tag.top = y+'px';
+}
+function startMove(elem) {
+	movingObject = elem;
+	defX = parseInt(elem.style.left);
+	defY = parseInt(elem.style.top);
+	startX = X_pos;
+	startY = Y_pos;
+	//alert(1000-defX);
+}
+function savePosition(elem) {
+	movingObject = false;
+	save(parseInt(elem.style.left), parseInt(elem.style.top));
+}
+
+function nothing(a) {
+	//alert(a.responseXML);
+}
+
+function hide() {
+	document.getElementById('signs').style.display = 'none';
+}
+function show() {
+	document.getElementById('signs').style.display = 'block';
+}
+function Trace_mouse(evnt) {
+  if (is_DHTML && (navigator.userAgent.indexOf("Opera")== -1)) {
+    if (evnt.pageX){
+      X_pos=evnt.pageX;
+      Y_pos=evnt.pageY;
+    }
+  }
+  else{
+  	if (document.documentElement && document.documentElement.scrollTop) {
+		X_pos=(event.clientX + document.documentElement.scrollLeft);
+    	Y_pos=(event.clientY + document.documentElement.scrollTop);
+	} else {
+    	X_pos=(event.clientX + document.body.scrollLeft);
+    	Y_pos=(event.clientY + document.body.scrollTop);
+	}
+  }
+  
+  if(movingObject) {
+  	x = defX + (X_pos - startX);
+	y = defY + (Y_pos - startY);
+	if(x<0) x=0;
+	if(y<0) y=0;
+	if(x>640) x=640;
+	if(y>640) y=640;
+  	movingObject.style.left = x+'px';
+	movingObject.style.top = y+'px';
+  }
+}
+
+var is_DHTML=window.Event?true:false;
+var Y_pos = 1;
+var X_pos = 1;
+var movingObject = false;
+var defX = 0;
+var defY = 0;
+var startX = 0;
+var startY = 0;
+var disabled = false;
+
+if (is_DHTML) {
+  document.captureEvents(Event.MOUSEMOVE | Event.KEYUP);
+}
+document.onmousemove = Trace_mouse;

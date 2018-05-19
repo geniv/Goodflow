@@ -1,0 +1,38 @@
+<HTML>
+  <HEAD>
+    <TITLE> Vylepšení formuláøových tlaèítek Submit a Reset </TITLE>
+    <SCRIPT Language="JavaScript">
+    <!--
+      // Pøíznak indikující, zda byl formuláø již odeslán
+      var FormSend=false;
+      // Funkce pro kontrolu odeslání
+
+      function CheckSend (){
+        if (FormSend){
+          // Formuláø již byl jednou odeslán
+          alert ('Tento formuláø byl již odeslán!');
+          return (false);
+        } else {
+          // Pokud nebyl odeslán, nastaví se pøíznak a
+          // data se odešlou
+          FormSend = true;
+          return (true);
+        }
+      }
+    // -->
+    </SCRIPT>
+  </HEAD>
+  <BODY>
+    Vyplòte prosím následujicí formuláø:
+    <FORM Name="frmMain" Enctype="text/plain" Method="post"
+      Action="mailto:somebody@somewhere.cz"
+      OnReset="return confirm ('Vymazat obsah formuláøe?')"
+      OnSubmit="return CheckSend();">
+      Co vás zajímá?<BR>
+      <TEXTAREA Name="Letter" Rows="12" Cols="70"></TEXTAREA><BR>
+      <INPUT Type="submit" Name="btSend" Value="Odeslat">
+      <INPUT Type="reset" Name="btReset" Value="Zrušit">
+    </FORM>
+  </BODY>
+</HTML>
+

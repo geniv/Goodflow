@@ -1,0 +1,59 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1250">
+<title>HODINY</title>
+</head>
+<body>
+<br>
+<br>
+<img src="0.gif" name=h1 width="15" height="20"><img src="0.gif" name=h2 width="15" height="20"><img src="2dots.gif" width="15" height="20"><img src="0.gif" name=m1 width="15" height="20"><img src="0.gif" name=m2 width="15" height="20"><img src="2dots.gif" width="15" height="20"><img src="0.gif" name=s1 width="15" height="20"><img src="0.gif" name=s2 width="15" height="20">
+<script language="javascript">
+var TimerID=null;
+var imagesPath="";
+
+var oHours=null;
+var oMinutes=null;
+
+var cHours=null;
+var cMinutes=null;
+var cSeconds=null;
+//preload
+ClockImages=Array(10);
+
+if (document.images){
+	for (i=0;i<10;i++){
+		ClockImages[i]=new Image();
+		ClockImages[i].src=imagesPath+i+".gif";
+	}
+}
+
+function ShowClock(){
+	if (document.images){
+		cDate=new Date();
+		temp=cDate.getHours();
+		cHours=(temp>9)? ""+temp:"0"+temp;
+		temp=cDate.getMinutes();
+		cMinutes=(temp>9)? ""+temp:"0"+temp;
+		temp=cDate.getSeconds();
+		cSeconds=(temp>9)? ""+temp:"0"+temp;
+		if (cHours!=oHours){
+			document.images["h1"].src=imagesPath+cHours.substring(0,1)+".gif";
+			document.images["h2"].src=imagesPath+cHours.substring(1,2)+".gif";
+		}
+		if (cMinutes!=oMinutes){
+			document.images["m1"].src=imagesPath+cMinutes.substring(0,1)+".gif";
+			document.images["m2"].src=imagesPath+cMinutes.substring(1,2)+".gif";
+		}
+		document.images["s1"].src=imagesPath+cSeconds.substring(0,1)+".gif";
+		document.images["s2"].src=imagesPath+cSeconds.substring(1,2)+".gif";
+
+		oHours=cHours;
+		oMinutes=cMinutes;
+		TimerID=setTimeout("ShowClock()",1000);
+	}
+}
+window.onload=ShowClock;
+</script>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<HTML>
+  <HEAD>
+    <TITLE>Povolení zakázání editu</TITLE>
+    <SCRIPT LANGUAGE="JavaScript">
+      <!--
+        // Funkce pro zakázání pole pro Netscape
+        function DisableField (){
+          this.blur();
+        }
+      // -->
+    </SCRIPT>
+  </HEAD>
+
+  <BODY>
+    <FORM Name="MainForm">
+
+      <INPUT Name="TextField" Type="text" VALUE="text" Size="10">
+      <BR>
+
+      Netscape Navigator:
+      <INPUT Type="button"
+        onClick="document.MainForm.TextField.onFocus = DisableField;"
+        Value="Zakaž editaci">
+      <INPUT Type="button"
+        onClick="document.MainForm.TextField.onFocus = null;"
+        Value="Povol editaci">
+      <BR>
+
+      Internet Explorer:
+      <INPUT Type="button"
+        onClick="document.MainForm.TextField.disabled = true;"
+        Value="Zakaž editaci">
+      <INPUT Type="button"
+        onClick="document.MainForm.TextField.disabled = false;"
+        Value="Povol editaci">
+    </FORM>
+  </BODY>
+</HTML>
+

@@ -1,0 +1,53 @@
+
+<SCRIPT language=javaScript>
+<!-- 
+var message = new Array()
+message[0]="Hi Web Builder."
+message[1]="Do not stare at the screen."
+message[2]="Go out and enjoy life instead!"
+var pause=20
+var standstill=2000
+var max_space=30
+var space=" "
+var i_substring=0
+var i_message=0
+var i_space=max_space
+var all_space=" "
+var content=""
+function reducespace() {
+	all_space=" "
+	for (i=0;i<i_space;i++) {
+		all_space+=" "
+	}
+	for (i=0;i<message[i_message].length-1;i++) {
+		var thisletter=message[i_message].substring(i,i+1)
+		thisletter=thisletter+all_space
+		content+=thisletter
+	}
+	showmessage()
+}
+function showmessage() {
+	window.status=content
+	i_space--
+	if (i_space>=0) {
+		content=""
+		var timer=setTimeout("reducespace()", pause)
+	}
+	else {
+		clearTimeout(timer)
+		i_space=max_space
+		var timer=setTimeout("changemessage()", standstill)
+	}
+}
+function changemessage() {
+	i_message++
+	if (i_message>message.length-1) {
+		i_message=0
+	}
+	reducespace()
+}
+
+ -->
+</SCRIPT>
+<BODY onload=reducespace()>
+

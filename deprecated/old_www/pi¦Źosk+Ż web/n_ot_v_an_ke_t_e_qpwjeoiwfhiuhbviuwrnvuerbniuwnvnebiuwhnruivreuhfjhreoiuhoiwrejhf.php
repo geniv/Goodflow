@@ -1,0 +1,1 @@
+--od--<font color=blue><b>ano</b></font>--od--<font color=blue><b>spíše ano</b></font>--od--<font color=blue><b>spíše ne</b></font>--od--<font color=blue><b>ne</b></font>

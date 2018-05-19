@@ -1,0 +1,66 @@
+<HTML>
+  <HEAD>
+    <TITLE>Fotogalerie</TITLE>
+    <SCRIPT Language="JavaScript">
+      <!--
+      // Hlavní funkce zobrazující obrázek
+      function ShowFoto (Img, W, H){
+        // Zjistí rozlišení monitoru (velikost obrazovky)
+        var Browser = navigator.appName;
+        var Version = parseInt(navigator.appVersion);
+        if ((Browser == "Netscape" & Version >= 4) ||
+            (Browser == "Microsoft Internet Explorer" & Version >= 4)){
+          ScrH = screen.height;
+          ScrW = screen.width;
+        } else {
+          ScrH = 0;
+          ScrW = 0;
+        }
+
+        // Vypoèítání správné velikosti a souøadnic pozice nového okna
+        var BorderW = 1;
+        W += 2*BorderW;
+        H += 2*BorderW;
+
+        var Position;
+        if ((ScrH > 0) && (ScrW > 0))
+          Position = ",left="+(ScrW - W)/2+",top="+(ScrH-H)/2;
+        else
+          Position = "";
+
+        // Vytvoøení nového okna
+        var NewWin = window.open("", "Fotografie",
+          "toolbar=no,location=no,width="+W+",height="+H+
+          ",directories=no,status=no,menubar=no,"+
+          "resizable=no,scrollbars=no"+
+          Position);
+
+        // Naplnìní - zapsání zdrojového kódu nového okna
+        with (NewWin.document){
+          write("<HTML><HEAD><TITLE>Foto - kliknutím zavøete"+
+                "</TITLE></HEAD>");
+          write('<BODY BgColor="black" Text="white"'+
+                ' TopMargin="0" LeftMargin="0">');
+          write('<A Href="javascript:close();"><IMG Src="'+Img+
+                '" HSpace="'+BorderW+'" VSpace="'+BorderW+'" Border="0"></A>');
+          write("</BODY></HTML>");
+          close();
+        }
+      }
+      // -->
+    </SCRIPT>
+  </HEAD>
+
+  <BODY>
+    <H3>FotoGalerie</H3>
+    <A Href="javascript:ShowFoto ('big1.jpg', 204, 300);"><IMG
+       Src="small1.jpg" Border="0"></A>
+
+    <A Href="javascript:ShowFoto ('big2.jpg', 500, 300);"><IMG
+       Src="small2.jpg" Border="0"></A>
+
+    <A Href="javascript:ShowFoto ('big3.jpg', 500, 300);"><IMG
+       Src="small3.jpg" Border="0"></A>
+  </BODY>
+</HTML>
+

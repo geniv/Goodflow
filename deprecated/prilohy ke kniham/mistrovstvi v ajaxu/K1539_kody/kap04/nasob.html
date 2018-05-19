@@ -1,0 +1,37 @@
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>Konverze textu na objekt JavaScriptu</title>
+
+    <script language="javascript">
+    function preved()
+    {
+      var text = "{funkce: 'nasob', operand1: 2, operand2: 3};";
+      var objekt;
+      eval('objekt = '+ text);
+      eval(objekt.funkce + '(' + objekt.operand1 + ',' + objekt.operand2 + ');');
+    }
+
+    function nasob(operand1, operand2)
+    {
+      var vysledek = operand1 * operand2;
+      var cilovyDiv = document.getElementById("cilovyDiv");
+      cilovyDiv.innerHTML = operand1 + " x " + operand2 + " = " + vysledek;
+    }
+    
+    </script>
+  </head>
+
+  <body>
+  
+  <h1>Konverze textu na objekt JavaScriptu</h1>
+  
+  <form>
+    <input type="button" value="Vytvořit objekt z textu" 
+      onclick="preved()">
+  </form>
+  
+  <div id="cilovyDiv"></div>
+  
+  </body>
+</html>

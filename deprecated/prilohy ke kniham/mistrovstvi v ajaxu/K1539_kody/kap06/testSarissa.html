@@ -1,0 +1,46 @@
+<html> 
+  <head> 
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>Test frameworku Sarissa</title> 
+
+    <script src="sarissa.js"></script>
+    <script src="sarissa_ieemu_xpath.js">
+    
+    </script>
+
+    <script language="javascript">
+
+      function pouzijSarissa() 
+      { 
+        var domDokument = Sarissa.getDomDocument();
+        domDokument.async = true; 
+
+        domDokument.onreadystatechange = function () 
+        {
+          if (domDokument.readyState == 4) { 
+            var element = domDokument.selectSingleNode("//data");
+            document.getElementById("cilovyDiv").innerHTML =
+              Sarissa.serialize(element);
+          }
+        }
+
+        domDokument.load("sarissa.xml");
+      }
+    </script>
+  </head> 
+
+  <body>
+
+    <H1>Test frameworku Sarissa</H1>
+
+    <form>
+      <input type="button" value="Získej XML" 
+        onclick="pouzijSarissa()"> 
+    </form>
+
+    <div id="cilovyDiv">
+      <p>Získaná data se zobrazí na tomto místě.</p> 
+    </div> 
+
+  </body> 
+</html>

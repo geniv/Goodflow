@@ -1,0 +1,62 @@
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=windows-1250">
+</head>
+
+<script language="JScript">
+
+var text = "HHO page";
+var pismen = text.length;
+var ZLEVA = 50;
+var SHORA = 50;
+var PUV_VELIKOST = 100;
+var KON_VELIKOST = 15;
+
+function ZobrazP( jake, x, y, vel ) {
+	if( vel>KON_VELIKOST ) {
+		eval( 'pismeno' + unescape(jake) + '.style.left=' + unescape( x - vel/2 ) );
+		eval( 'pismeno' + unescape(jake) + '.style.top=' + unescape( y - vel/2 ) );
+		eval( 'pismeno' + unescape(jake) + '.style.fontSize="' + unescape(vel) + 'pt";' );	
+		vel-=10;
+		setTimeout( "ZobrazP( " + unescape(jake) + "," + unescape(x) + "," + unescape(y) + "," + unescape(vel) + ")" , 40 );
+	}	
+}
+
+function ZobrazPismeno( jake ) {
+	eval( 'pismeno' + unescape(jake) + '.style.visibility="visible";' );
+	ZobrazP( jake, ZLEVA+jake*KON_VELIKOST, SHORA, PUV_VELIKOST );
+}
+
+
+function main() {
+	var cas=0;
+	for(var i=0; i<pismen; i++)	if( text.charAt(i)!=" ") setTimeout( "ZobrazPismeno( " + unescape(i) + ")", 550*cas++ );
+}
+
+function MysPres() {
+	if (window.event.srcElement.tagName == "SPAN" ) {
+        window.event.srcElement.style.color="#FF0000";
+	}	
+}
+function MysVen() {
+	if (window.event.srcElement.tagName == "SPAN" ) {
+        window.event.srcElement.style.color="#0000FF";
+	}	
+}
+
+</script>
+
+<body onLoad="main()" onmouseover="MysPres()" onmouseout="MysVen()" link="#0000FF" bgcolor="#FFFFFF" alink="#0000FF" vlink="#0000FF">
+
+<a href="http://www.sweb.cz/hho">
+<script language="JScript">
+for(var i=0; i<pismen; i++) {
+	document.write( "<span id=pismeno" + unescape(i) + ' style="visibility:hidden;font-family:Courier New;position:absolute;width:' + unescape(PUV_VELIKOST) + 'px;">' );
+	document.write( text.charAt(i) );
+	document.write( "</span>" );
+}	
+</script>
+</a>
+
+</body>
+</html>

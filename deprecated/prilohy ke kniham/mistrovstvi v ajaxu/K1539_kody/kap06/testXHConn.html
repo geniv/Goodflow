@@ -1,0 +1,43 @@
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>Test frameworku XHConn</title>
+
+    <script src="XHConn.js"></script>
+
+    <script language="javascript">
+
+      function pouzijXHConn()
+      {
+        var xhconnObjekt = new XHConn();
+
+        if (!xhconnObjekt) {
+          alert("Nepodařilo se vytvořit objekt XHConn.");
+        }
+
+        xhconnObjekt.connect("xhconn.txt", "GET", "", callback);
+      }
+
+      function callback(XMLHttpRequestObjekt) 
+      {
+        document.getElementById("cilovyDiv").innerHTML 
+          = XMLHttpRequestObjekt.responseText; 
+      }
+
+    </script>
+  </head>
+
+  <body>
+    <h1>Test frameworku XHConn</h1>
+
+    <form>
+      <input type="button" value="Získej text" 
+        onclick="pouzijXHConn()"> 
+    </form>
+
+    <div id="cilovyDiv">
+      <p>Získaná data se zobrazí na tomto místě.</p> 
+    </div> 
+
+  </body>
+</html>

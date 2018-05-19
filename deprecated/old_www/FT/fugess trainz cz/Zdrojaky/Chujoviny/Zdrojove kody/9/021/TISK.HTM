@@ -1,0 +1,40 @@
+<HTML>
+  <HEAD>
+    <TITLE>Tisk</TITLE>
+    <SCRIPT Language="JavaScript">
+    <!--
+      // Test, zda je prohlížeè MSIE verze 5 a vyšší
+      function IsIE5(){
+        // Verze prohlížeèe
+        Version=navigator.appVersion;
+        // První cifra èísla verze
+        VersionNumBegin = Version.charAt(Version.indexOf('MSIE')+5);
+
+        if ((navigator.appName=='Microsoft Internet Explorer') &&
+            (VersionNumBegin >= 5)) return (true);
+        else
+          return (false);
+      }
+    // -->
+    </SCRIPT>
+  </HEAD>
+  
+  <BODY>
+    Bla bla bla
+
+    <SCRIPT Language="JavaScript">
+      <!--
+        // Jedná-li se o prohlížeè MSIE 5 a vyšší
+        if (IsIE5()){
+          // Pøidá se do kódu stránky tlaèítko pro tisk
+          document.write ('<FORM><HR>');
+          document.write ('<INPUT TYPE="button" VALUE="Vytisknout"'+
+                          'onClick="window.print();">');
+          document.write ('</FORM>');
+        }
+      // -->
+    </SCRIPT>
+  </BODY>
+</HTML>
+
+

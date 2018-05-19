@@ -1,0 +1,57 @@
+<HTML>
+  <HEAD>
+    <TITLE>Vyhledávací centrála</TITLE>
+    <SCRIPT Language="JavaScript">
+      <!--
+        // Vyhledávací funkce
+        function SearchIt (){
+          // Adresa vyhledávacího stroje vèetnì parametrù
+          // (ta se získá ze seznamu)
+          var SearchURL =
+            document.frmMain.lbxSearches.options
+            [document.frmMain.lbxSearches.selectedIndex].value;
+
+          // Adresa se rozdìlí na dva podøetìzce podle znaku "%s"
+          var PomStr = SearchURL.split ('%s');
+
+          // Ve výsledné adrese bude øetìzec "%s" nahrazen hledaným
+          // slovem (èi výrazem)
+          SearchURL =
+            PomStr[0] +
+            document.frmMain.edSearch.value +
+            PomStr[1];
+
+          // Nakonec se otevøe nové okno a do nìj se naète
+          // výsledná stránka (tedy výsledek hledání)
+          window.open (SearchURL, 'NewWinName');
+        }
+      // -->
+    </SCRIPT>
+  </HEAD>
+  
+  <BODY>
+    <B>Vyhledávácí centrála</B>
+    <FORM Name="frmMain">
+      <INPUT Type="Text" Name="edSearch"
+             Length=30 Value="Hledaný výraz"
+             OnFocus="select();">
+      <SELECT Name="lbxSearches">
+        <OPTION
+         Value="http://search.seznam.cz/cgi/hledej.cgi?string=%s&co=seznam"
+         >Seznam</OPTION>
+        <OPTION
+         Value="http://www.redbox.cz/search.php3?srch=%s&source=fulltextcesko"
+         >RedBox</OPTION>
+        <OPTION
+         Value="http://www.cddb.com/php/search1.php3?f=artist&f=disc&q=%s"
+         >CDDB</OPTION>
+        <OPTION
+         Value="http://msn.atlas.cz/search.asp?searchtext=%s"
+         >Atlas</OPTION>
+      </SELECT>
+      <INPUT Type="Button" Name="btSearch" Value="Hledej"
+      OnClick="SearchIt ();">
+    </FORM>
+  </BODY>
+</HTML>
+

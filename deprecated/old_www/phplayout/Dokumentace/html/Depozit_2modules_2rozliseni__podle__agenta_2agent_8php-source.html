@@ -1,0 +1,187 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>Novy vychozi PHP layout: Zdrojový soubor /var/www/phplayout/Depozit/modules/rozliseni_podle_agenta/agent.php</title>
+<link href="doxygen.css" rel="stylesheet" type="text/css">
+<link href="tabs.css" rel="stylesheet" type="text/css">
+</head><body>
+<!-- Generováno programem Doxygen 1.5.5 -->
+<div class="navigation" id="top">
+  <div class="tabs">
+    <ul>
+      <li><a href="index.html"><span>Hlavní&nbsp;stránka</span></a></li>
+      <li><a href="annotated.html"><span>Třídy</span></a></li>
+      <li class="current"><a href="files.html"><span>Soubory</span></a></li>
+    </ul>
+  </div>
+<h1>/var/www/phplayout/Depozit/modules/rozliseni_podle_agenta/agent.php</h1><a href="Depozit_2modules_2rozliseni__podle__agenta_2agent_8php.html">Zobrazit dokumentaci tohoto souboru.</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 &lt;?php
+<a name="l00002"></a>00002 
+<a name="l00014"></a><a class="code" href="classRozliseniPodleAgenta.html">00014</a> <span class="keyword">class </span><a class="code" href="classRozliseniPodleAgenta.html">RozliseniPodleAgenta</a>
+<a name="l00015"></a>00015 {
+<a name="l00016"></a><a class="code" href="classRozliseniPodleAgenta.html#853986a8fc3d430d00ae88846330c3a3">00016</a>   <span class="keyword">private</span> <a class="code" href="classRozliseniPodleAgenta.html#853986a8fc3d430d00ae88846330c3a3">$var</a>;
+<a name="l00017"></a>00017 
+<a name="l00025"></a><a class="code" href="classRozliseniPodleAgenta.html#32d7d5eb1e319e2094ba0fb38c8e54bc">00025</a>   <span class="keyword">public</span> function <a class="code" href="classRozliseniPodleAgenta.html#32d7d5eb1e319e2094ba0fb38c8e54bc">__construct</a>(&amp;<a class="code" href="classRozliseniPodleAgenta.html#853986a8fc3d430d00ae88846330c3a3">$var</a>, $index) <span class="comment">//konstruktor</span>
+<a name="l00026"></a>00026   {
+<a name="l00027"></a>00027     $this-&gt;var = <a class="code" href="classRozliseniPodleAgenta.html#853986a8fc3d430d00ae88846330c3a3">$var</a>;
+<a name="l00028"></a>00028   }
+<a name="l00029"></a>00029 
+<a name="l00036"></a><a class="code" href="classRozliseniPodleAgenta.html#82ab683227ea8f2a90de3b2801c6e8be">00036</a>   <span class="keyword">public</span> function <a class="code" href="classRozliseniPodleAgenta.html#82ab683227ea8f2a90de3b2801c6e8be">RozlisOS</a>()
+<a name="l00037"></a>00037   {
+<a name="l00038"></a>00038     $OSList = array(<span class="stringliteral">"Windows 3.11"</span> =&gt; <span class="stringliteral">"/Win16/i"</span>,
+<a name="l00039"></a>00039                     <span class="stringliteral">"Windows 95"</span> =&gt; <span class="stringliteral">"/(Windows.95)|(Win95)/i"</span>,
+<a name="l00040"></a>00040                     <span class="stringliteral">"Windows 98"</span> =&gt; <span class="stringliteral">"/(Windows.98)|(Win98)/i"</span>,
+<a name="l00041"></a>00041                     <span class="stringliteral">"Windows 2000"</span> =&gt; <span class="stringliteral">"/(Windows NT 5\.0)|(Windows 2000)/i"</span>,
+<a name="l00042"></a>00042                     <span class="stringliteral">"Windows XP"</span> =&gt; <span class="stringliteral">"/(Windows NT 5\.1)|(Windows XP)/i"</span>,
+<a name="l00043"></a>00043                     <span class="stringliteral">"Windows XP x64"</span> =&gt; <span class="stringliteral">"/((Windows NT 5\.2).*(Win64))|((Win64).*(Windows NT 5\.2))/i"</span>,
+<a name="l00044"></a>00044                     <span class="stringliteral">"Windows Server 2003"</span> =&gt; <span class="stringliteral">"/Windows NT 5\.2/i"</span>,
+<a name="l00045"></a>00045                     <span class="stringliteral">"Windows Vista"</span> =&gt; <span class="stringliteral">"/Windows NT 6\.0/i"</span>,
+<a name="l00046"></a>00046                     <span class="stringliteral">"Windows 7"</span> =&gt; <span class="stringliteral">"/Windows NT 7\.0/i"</span>,
+<a name="l00047"></a>00047                     <span class="stringliteral">"Windows NT 4.0"</span> =&gt; <span class="stringliteral">"/(Windows NT 4\.0)|(WinNT4\.0)|(WinNT)|(Windows NT)/i"</span>,
+<a name="l00048"></a>00048                     <span class="stringliteral">"Windows ME"</span> =&gt; <span class="stringliteral">"/(Windows ME)|(Win 9x 4\.90)/i"</span>,
+<a name="l00049"></a>00049                     <span class="stringliteral">"Microsoft PocketPC"</span> =&gt; <span class="stringliteral">"/((Windows CE).*(PPC))|((PPC).*(Windows CE))/i"</span>,
+<a name="l00050"></a>00050                     <span class="stringliteral">"Microsoft Smartphone"</span> =&gt; <span class="stringliteral">"/((Windows CE).*(smartphone))|((smartphone).*(Windows CE))/i"</span>,
+<a name="l00051"></a>00051                     <span class="stringliteral">"Windows CE"</span> =&gt; <span class="stringliteral">"/Windows CE/i"</span>,
+<a name="l00052"></a>00052                     <span class="stringliteral">"Mandrake Linux"</span> =&gt; <span class="stringliteral">"/((Linux).*(Mandrake))|((Mandrake).*(Linux))/i"</span>,
+<a name="l00053"></a>00053                     <span class="stringliteral">"Mandriva Linux"</span> =&gt; <span class="stringliteral">"/((Linux).*(Mandriva))|((Mandriva).*(Linux))/i"</span>,
+<a name="l00054"></a>00054                     <span class="stringliteral">"SuSE Linux"</span> =&gt; <span class="stringliteral">"/((Linux).*(SuSE))|((SuSE).*(Linux))/i"</span>,
+<a name="l00055"></a>00055                     <span class="stringliteral">"Novell Linux"</span> =&gt; <span class="stringliteral">"/((Linux).*(Novell))|((Novell).*(Linux))/i"</span>,
+<a name="l00056"></a>00056                     <span class="stringliteral">"Kubuntu Linux"</span> =&gt; <span class="stringliteral">"/((Linux).*(Kubuntu))|((Kubuntu).*(Linux))/i"</span>,
+<a name="l00057"></a>00057                     <span class="stringliteral">"Xubuntu Linux"</span> =&gt; <span class="stringliteral">"/((Linux).*(Xubuntu))|((Xubuntu).*(Linux))/i"</span>,
+<a name="l00058"></a>00058                     <span class="stringliteral">"Edubuntu Linux"</span> =&gt; <span class="stringliteral">"/((Linux).*(Edubuntu))|((Edubuntu).*(Linux))/i"</span>,
+<a name="l00059"></a>00059                     <span class="stringliteral">"Ubuntu Linux"</span> =&gt; <span class="stringliteral">"/((Linux).*(Ubuntu))|((Ubuntu).*(Linux))/i"</span>,
+<a name="l00060"></a>00060                     <span class="stringliteral">"Debian GNU/Linux"</span> =&gt; <span class="stringliteral">"/((Linux).*(Debian))|((Debian).*(Linux))/i"</span>,
+<a name="l00061"></a>00061                     <span class="stringliteral">"RedHat Linux"</span> =&gt; <span class="stringliteral">"/((Linux).*(Red ?Hat))|((Red ?Hat).*(Linux))/i"</span>,
+<a name="l00062"></a>00062                     <span class="stringliteral">"Gentoo Linux"</span> =&gt; <span class="stringliteral">"/((Linux).*(Gentoo))|((Gentoo).*(Linux))/i"</span>,
+<a name="l00063"></a>00063                     <span class="stringliteral">"Fedora Linux"</span> =&gt; <span class="stringliteral">"/((Linux).*(Fedora))|((Fedora).*(Linux))/i"</span>,
+<a name="l00064"></a>00064                     <span class="stringliteral">"MEPIS Linux"</span> =&gt; <span class="stringliteral">"/((Linux).*(MEPIS))|((MEPIS).*(Linux))/i"</span>,
+<a name="l00065"></a>00065                     <span class="stringliteral">"Knoppix Linux"</span> =&gt; <span class="stringliteral">"/((Linux).*(Knoppix))|((Knoppix).*(Linux))/i"</span>,
+<a name="l00066"></a>00066                     <span class="stringliteral">"Slackware Linux"</span> =&gt; <span class="stringliteral">"/((Linux).*(Slackware))|((Slackware).*(Linux))/i"</span>,
+<a name="l00067"></a>00067                     <span class="stringliteral">"Xandros Linux"</span> =&gt; <span class="stringliteral">"/((Linux).*(Xandros))|((Xandros).*(Linux))/i"</span>,
+<a name="l00068"></a>00068                     <span class="stringliteral">"Kanotix Linux"</span> =&gt; <span class="stringliteral">"/((Linux).*(Kanotix))|((Kanotix).*(Linux))/i"</span>,
+<a name="l00069"></a>00069                     <span class="stringliteral">"Linux"</span> =&gt; <span class="stringliteral">"/(Linux)|(X11)/i"</span>,
+<a name="l00070"></a>00070                     <span class="stringliteral">"FreeBSD"</span> =&gt; <span class="stringliteral">"/Free/i"</span>,
+<a name="l00071"></a>00071                     <span class="stringliteral">"OpenBSD"</span> =&gt; <span class="stringliteral">"/OpenBSD/i"</span>,
+<a name="l00072"></a>00072                     <span class="stringliteral">"NetBSD"</span> =&gt; <span class="stringliteral">"/NetBSD/i"</span>,
+<a name="l00073"></a>00073                     <span class="stringliteral">"SGI IRIX"</span> =&gt; <span class="stringliteral">"/IRIX/i"</span>,
+<a name="l00074"></a>00074                     <span class="stringliteral">"Sun OS"</span> =&gt; <span class="stringliteral">"/SunOS/i"</span>,
+<a name="l00075"></a>00075                     <span class="stringliteral">"QNX"</span> =&gt; <span class="stringliteral">"/QNX/i"</span>,
+<a name="l00076"></a>00076                     <span class="stringliteral">"BeOS"</span> =&gt; <span class="stringliteral">"/BeOS/i"</span>,
+<a name="l00077"></a>00077                     <span class="stringliteral">"Mac OS X Leopard"</span> =&gt; <span class="stringliteral">"/(Mac OS).*(Leopard)/i"</span>,
+<a name="l00078"></a>00078                     <span class="stringliteral">"Mac OS X"</span> =&gt; <span class="stringliteral">"/(Mac OS X)/i"</span>,
+<a name="l00079"></a>00079                     <span class="stringliteral">"Mac OS"</span> =&gt; <span class="stringliteral">"/(Mac_PowerPC)|(Macintosh)/i"</span>,
+<a name="l00080"></a>00080                     <span class="stringliteral">"OS/2"</span> =&gt; <span class="stringliteral">"#OS/2#i"</span>,
+<a name="l00081"></a>00081                     <span class="stringliteral">"Qtopia"</span> =&gt; <span class="stringliteral">"/QtEmbedded/i"</span>,
+<a name="l00082"></a>00082                     <span class="stringliteral">"Sharp Zaurus \\1"</span> =&gt; <span class="stringliteral">"/Zaurus ([a-zA-Z0-9\.]+)/i"</span>,
+<a name="l00083"></a>00083                     <span class="stringliteral">"Zaurus"</span> =&gt; <span class="stringliteral">"/Zaurus/i"</span>,
+<a name="l00084"></a>00084                     <span class="stringliteral">"Symbian OS"</span> =&gt; <span class="stringliteral">"/Symbian/i"</span>,
+<a name="l00085"></a>00085                     <span class="stringliteral">"Sony Clie"</span> =&gt; <span class="stringliteral">"#PalmOS/sony/model#i"</span>,
+<a name="l00086"></a>00086                     <span class="stringliteral">"Series \\1"</span> =&gt; <span class="stringliteral">"/Series ([0-9]+)/i"</span>,
+<a name="l00087"></a>00087                     <span class="stringliteral">"Nokia \\1"</span> =&gt; <span class="stringliteral">"/Nokia ([0-9]+)/i"</span>,
+<a name="l00088"></a>00088                     <span class="stringliteral">"Siemens \\1"</span> =&gt; <span class="stringliteral">"/SIE-([a-zA-Z0-9]+)/i"</span>,
+<a name="l00089"></a>00089                     <span class="stringliteral">"Dopod \\1"</span> =&gt; <span class="stringliteral">"/dopod([a-zA-Z0-9]+)/i"</span>,
+<a name="l00090"></a>00090                     <span class="stringliteral">"O2 XDA \\1"</span> =&gt; <span class="stringliteral">"/o2 xda ([a-zA-Z0-9 ]+);/i"</span>,
+<a name="l00091"></a>00091                     <span class="stringliteral">"Samsung \\1"</span> =&gt; <span class="stringliteral">"/SEC-([a-zA-Z0-9]+)/i"</span>,
+<a name="l00092"></a>00092                     <span class="stringliteral">"SonyEricsson \\1"</span> =&gt; <span class="stringliteral">"/SonyEricsson ?([a-zA-Z0-9]+)/i"</span>,
+<a name="l00093"></a>00093                     <span class="stringliteral">"Nintendo Wii"</span> =&gt; <span class="stringliteral">"/Wii/i"</span>,
+<a name="l00094"></a>00094                     <span class="stringliteral">"Bot"</span> =&gt; <span class="stringliteral">"/(crawler)|(Mediapartners-Google)|(Jyxobot)|(morfeo.centrum.cz)|(Gigabot)|(ASAP-LynxViewer)|(ASAP-Web-Sniffer)|(EARTHCOM.info)|(Mozdex)|(SeznamBot)|(Speedy Spider)|(Yahoo! Slurp)|(ZACATEK_CZ_BOT)|(www.yacy.net)|(Googlebot)|(Openbot)|(MSNBot)|(del.icio.us-thumbnails)|(Exabot)|(findlinks)|(Bot,Robot,Spider)/i"</span>,
+<a name="l00095"></a>00095                     <span class="stringliteral">"Neznámý"</span> =&gt; <span class="stringliteral">"/(.*)/"</span>);
+<a name="l00096"></a>00096 
+<a name="l00097"></a>00097     $agent = $_SERVER[<span class="stringliteral">"HTTP_USER_AGENT"</span>];
+<a name="l00098"></a>00098     <span class="keywordflow">foreach</span>($OSList as $os =&gt; $regexp)
+<a name="l00099"></a>00099     {
+<a name="l00100"></a>00100       preg_match($regexp, $agent, $matches);
+<a name="l00101"></a>00101       <span class="keywordflow">if</span> (!Empty($matches))
+<a name="l00102"></a>00102       {
+<a name="l00103"></a>00103         <span class="keywordflow">for</span> ($i = 0; $i &lt;= count($matches); $i++)
+<a name="l00104"></a>00104         {
+<a name="l00105"></a>00105           $os = str_replace(<span class="stringliteral">"\\{$i}"</span>, $matches[$i], $os);
+<a name="l00106"></a>00106         }
+<a name="l00107"></a>00107         <span class="keywordflow">break</span>;
+<a name="l00108"></a>00108       }
+<a name="l00109"></a>00109     }
+<a name="l00110"></a>00110 
+<a name="l00111"></a>00111     <span class="keywordflow">return</span> trim($os);
+<a name="l00112"></a>00112   }
+<a name="l00113"></a>00113 
+<a name="l00120"></a><a class="code" href="classRozliseniPodleAgenta.html#d29ec614cf40fec921dfd687bf477265">00120</a>   <span class="keyword">public</span> function <a class="code" href="classRozliseniPodleAgenta.html#d29ec614cf40fec921dfd687bf477265">RozlisBrowser</a>()
+<a name="l00121"></a>00121   {
+<a name="l00122"></a>00122     $BrowserList = array (<span class="stringliteral">"Internet Explorer \\1"</span> =&gt; <span class="stringliteral">"#MSIE ([a-zA-Z0-9\.]+)#i"</span>,
+<a name="l00123"></a>00123                           <span class="stringliteral">"Mozilla Firefox \\2"</span> =&gt; <span class="stringliteral">"#(Firefox|Phoenix|Firebird)/([a-zA-Z0-9\.]+)#i"</span>,
+<a name="l00124"></a>00124                           <span class="stringliteral">"Opera \\1"</span> =&gt; <span class="stringliteral">"#Opera[ /]([a-zA-Z0-9\.]+)#i"</span>,
+<a name="l00125"></a>00125                           <span class="stringliteral">"Netscape \\1"</span> =&gt; <span class="stringliteral">"#Netscape[0-9]?/([a-zA-Z0-9\.]+)#i"</span>,
+<a name="l00126"></a>00126                           <span class="stringliteral">"Safari \\1"</span> =&gt; <span class="stringliteral">"#Safari/([a-zA-Z0-9\.]+)#i"</span>,
+<a name="l00127"></a>00127                           <span class="stringliteral">"Flock \\1"</span> =&gt; <span class="stringliteral">"#Flock/([a-zA-Z0-9\.]+)#i"</span>,
+<a name="l00128"></a>00128                           <span class="stringliteral">"Epiphany \\1"</span> =&gt; <span class="stringliteral">"#Epiphany/([a-zA-Z0-9\.]+)#i"</span>,
+<a name="l00129"></a>00129                           <span class="stringliteral">"Konqueror \\1"</span> =&gt; <span class="stringliteral">"#Konqueror/([a-zA-Z0-9\.]+)#i"</span>,
+<a name="l00130"></a>00130                           <span class="stringliteral">"Maxthon \\1"</span> =&gt; <span class="stringliteral">"#Maxthon ?([a-zA-Z0-9\.]+)?#i"</span>,
+<a name="l00131"></a>00131                           <span class="stringliteral">"K-Meleon \\1"</span> =&gt; <span class="stringliteral">"#K-Meleon/([a-zA-Z0-9\.]+)#i"</span>,
+<a name="l00132"></a>00132                           <span class="stringliteral">"Lynx \\1"</span> =&gt; <span class="stringliteral">"#Lynx/([a-zA-Z0-9\.]+)#i"</span>,
+<a name="l00133"></a>00133                           <span class="stringliteral">"Links \\1"</span> =&gt; <span class="stringliteral">"#Links .{2}([a-zA-Z0-9\.]+)#i"</span>,
+<a name="l00134"></a>00134                           <span class="stringliteral">"ELinks \\3"</span> =&gt; <span class="stringliteral">"#ELinks([/ ]|(.{2}))([a-zA-Z0-9\.]+)#i"</span>,
+<a name="l00135"></a>00135                           <span class="stringliteral">"Debian IceWeasel \\1"</span> =&gt; <span class="stringliteral">"#(iceweasel)/([a-zA-Z0-9\.]+)#i"</span>,
+<a name="l00136"></a>00136                           <span class="stringliteral">"Mozilla SeaMonkey \\1"</span> =&gt; <span class="stringliteral">"#(SeaMonkey)/([a-zA-Z0-9\.]+)#i"</span>,
+<a name="l00137"></a>00137                           <span class="stringliteral">"OmniWeb"</span> =&gt; <span class="stringliteral">"#OmniWeb#i"</span>,
+<a name="l00138"></a>00138                           <span class="stringliteral">"Mozilla \\1"</span> =&gt; <span class="stringliteral">"#^Mozilla/5\.0.*rv:([a-zA-Z0-9\.]+).*#i"</span>,
+<a name="l00139"></a>00139                           <span class="stringliteral">"Netscape Navigator \\1"</span> =&gt; <span class="stringliteral">"#^Mozilla/([a-zA-Z0-9\.]+)#i"</span>,
+<a name="l00140"></a>00140                           <span class="stringliteral">"PHP"</span> =&gt; <span class="stringliteral">"/PHP/i"</span>,
+<a name="l00141"></a>00141                           <span class="stringliteral">"SymbianOS \\1"</span> =&gt; <span class="stringliteral">"#symbianos/([a-zA-Z0-9\.]+)#i"</span>,
+<a name="l00142"></a>00142                           <span class="stringliteral">"Avant Browser"</span> =&gt; <span class="stringliteral">"/avantbrowser\.com/i"</span>,
+<a name="l00143"></a>00143                           <span class="stringliteral">"Camino \\1"</span> =&gt; <span class="stringliteral">"#(Camino|Chimera)[ /]([a-zA-Z0-9\.]+)#i"</span>,
+<a name="l00144"></a>00144                           <span class="stringliteral">"Anonymouse"</span> =&gt; <span class="stringliteral">"/anonymouse/i"</span>,
+<a name="l00145"></a>00145                           <span class="stringliteral">"Danger HipTop"</span> =&gt; <span class="stringliteral">"/danger hiptop/i"</span>,
+<a name="l00146"></a>00146                           <span class="stringliteral">"W3M \\1"</span> =&gt; <span class="stringliteral">"#w3m/([a-zA-Z0-9\.]+)#i"</span>,
+<a name="l00147"></a>00147                           <span class="stringliteral">"Shiira \\1"</span> =&gt; <span class="stringliteral">"#Shiira[ /]([a-zA-Z0-9\.]+)#i"</span>,
+<a name="l00148"></a>00148                           <span class="stringliteral">"Dillo \\1"</span> =&gt; <span class="stringliteral">"#Dillo[ /]([a-zA-Z0-9\.]+)#i"</span>,
+<a name="l00149"></a>00149                           <span class="stringliteral">"Openwave UP.Browser \\1"</span> =&gt; <span class="stringliteral">"#UP.Browser/([a-zA-Z0-9\.]+)#i"</span>,
+<a name="l00150"></a>00150                           <span class="stringliteral">"DoCoMo \\1"</span> =&gt; <span class="stringliteral">"#DoCoMo/(([a-zA-Z0-9\.]+)[/ ]([a-zA-Z0-9\.]+))#i"</span>,
+<a name="l00151"></a>00151                           <span class="stringliteral">"Unbranded Firefox \\1"</span> =&gt; <span class="stringliteral">"#(bonecho)/([a-zA-Z0-9\.]+)#i"</span>,
+<a name="l00152"></a>00152                           <span class="stringliteral">"Kazehakase \\1"</span> =&gt; <span class="stringliteral">"#Kazehakase/([a-zA-Z0-9\.]+)#i"</span>,
+<a name="l00153"></a>00153                           <span class="stringliteral">"Minimo \\1"</span> =&gt; <span class="stringliteral">"#Minimo/([a-zA-Z0-9\.]+)#i"</span>,
+<a name="l00154"></a>00154                           <span class="stringliteral">"MultiZilla \\1"</span> =&gt; <span class="stringliteral">"#MultiZilla/([a-zA-Z0-9\.]+)#i"</span>,
+<a name="l00155"></a>00155                           <span class="stringliteral">"Sony PSP \\2"</span> =&gt; <span class="stringliteral">"/PSP \(PlayStation Portable\)\; ([a-zA-Z0-9\.]+)/i"</span>,
+<a name="l00156"></a>00156                           <span class="stringliteral">"Galeon \\1"</span> =&gt; <span class="stringliteral">"#Galeon/([a-zA-Z0-9\.]+)#i"</span>,
+<a name="l00157"></a>00157                           <span class="stringliteral">"iCab \\1"</span> =&gt; <span class="stringliteral">"#iCab/([a-zA-Z0-9\.]+)#i"</span>,
+<a name="l00158"></a>00158                           <span class="stringliteral">"NetPositive \\1"</span> =&gt; <span class="stringliteral">"#NetPositive/([a-zA-Z0-9\.]+)#i"</span>,
+<a name="l00159"></a>00159                           <span class="stringliteral">"NetNewsWire \\1"</span> =&gt; <span class="stringliteral">"#NetNewsWire/([a-zA-Z0-9\.]+)#i"</span>,
+<a name="l00160"></a>00160                           <span class="stringliteral">"Opera Mini \\1"</span> =&gt; <span class="stringliteral">"#opera mini/([a-zA-Z0-9]+)#i"</span>,
+<a name="l00161"></a>00161                           <span class="stringliteral">"WebPro \\2"</span> =&gt; <span class="stringliteral">"#WebPro(/([a-zA-Z0-9\.]+))?#i"</span>,
+<a name="l00162"></a>00162                           <span class="stringliteral">"Netfront \\1"</span> =&gt; <span class="stringliteral">"#Netfront/([a-zA-Z0-9\.]+)#i"</span>,
+<a name="l00163"></a>00163                           <span class="stringliteral">"Xiino \\1"</span> =&gt; <span class="stringliteral">"#Xiino/([a-zA-Z0-9\.]+)#i"</span>,
+<a name="l00164"></a>00164                           <span class="stringliteral">"Blackberry \\1"</span> =&gt; <span class="stringliteral">"#Blackberry([0-9]+)?#i"</span>,
+<a name="l00165"></a>00165                           <span class="stringliteral">"Orange SPV \\1"</span> =&gt; <span class="stringliteral">"#SPV ([0-9a-zA-Z\.]+)#i"</span>,
+<a name="l00166"></a>00166                           <span class="stringliteral">"LG \\1"</span> =&gt; <span class="stringliteral">"#LGE-([a-zA-Z0-9]+)#i"</span>,
+<a name="l00167"></a>00167                           <span class="stringliteral">"Motorola \\1"</span> =&gt; <span class="stringliteral">"#MOT-([a-zA-Z0-9]+)#i"</span>,
+<a name="l00168"></a>00168                           <span class="stringliteral">"Nokia \\1"</span> =&gt; <span class="stringliteral">"#Nokia ?([0-9]+)#i"</span>,
+<a name="l00169"></a>00169                           <span class="stringliteral">"Nokia N-Gage"</span> =&gt; <span class="stringliteral">"#NokiaN-Gage#i"</span>,
+<a name="l00170"></a>00170                           <span class="stringliteral">"Blazer \\1"</span> =&gt; <span class="stringliteral">"#Blazer[ /]?([a-zA-Z0-9\.]*)#i"</span>,
+<a name="l00171"></a>00171                           <span class="stringliteral">"Siemens \\1"</span> =&gt; <span class="stringliteral">"#SIE-([a-zA-Z0-9]+)#i"</span>,
+<a name="l00172"></a>00172                           <span class="stringliteral">"Samsung \\4"</span> =&gt; <span class="stringliteral">"#((SEC-)|(SAMSUNG-))((S.H-[a-zA-Z0-9]+)|([a-zA-Z0-9]+))#i"</span>,
+<a name="l00173"></a>00173                           <span class="stringliteral">"SonyEricsson \\1"</span> =&gt; <span class="stringliteral">"#SonyEricsson ?([a-zA-Z0-9]+)#i"</span>,
+<a name="l00174"></a>00174                           <span class="stringliteral">"J2ME/MIDP Browser"</span> =&gt; <span class="stringliteral">"#(j2me|midp)#i"</span>,
+<a name="l00175"></a>00175                           <span class="stringliteral">"Neznámý"</span> =&gt; <span class="stringliteral">"/(.*)/"</span>);
+<a name="l00176"></a>00176 
+<a name="l00177"></a>00177     $agent = $_SERVER[<span class="stringliteral">"HTTP_USER_AGENT"</span>];
+<a name="l00178"></a>00178     <span class="keywordflow">foreach</span>($BrowserList as $browser =&gt; $regexp)
+<a name="l00179"></a>00179     {
+<a name="l00180"></a>00180       <span class="keywordflow">if</span> (preg_match($regexp, $agent, $matches))
+<a name="l00181"></a>00181       {
+<a name="l00182"></a>00182         <span class="keywordflow">if</span> (!Empty($matches))
+<a name="l00183"></a>00183         {
+<a name="l00184"></a>00184           <span class="keywordflow">for</span> ($i = 0; $i &lt;= count($matches); $i++)
+<a name="l00185"></a>00185           {
+<a name="l00186"></a>00186             $browser = str_replace(<span class="stringliteral">"\\{$i}"</span>, $matches[$i], $browser);
+<a name="l00187"></a>00187           }
+<a name="l00188"></a>00188         }
+<a name="l00189"></a>00189         <span class="keywordflow">break</span>;
+<a name="l00190"></a>00190       }
+<a name="l00191"></a>00191     }
+<a name="l00192"></a>00192 
+<a name="l00193"></a>00193     <span class="keywordflow">return</span> trim($browser);
+<a name="l00194"></a>00194   }
+<a name="l00195"></a>00195 }
+<a name="l00196"></a>00196 ?&gt;
+</pre></div></div>
+<hr size="1"><address style="text-align: right;"><small>Generováno Sun Mar 22 02:51:23 2009 pro projekt Novy vychozi PHP layout programem&nbsp;
+<a href="http://www.doxygen.org/index.html">
+<img src="doxygen.png" alt="doxygen" align="middle" border="0"></a> 1.5.5 </small></address>
+</body>
+</html>

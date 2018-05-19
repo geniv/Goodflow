@@ -1,0 +1,1174 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!-- saved from url=(0043)http://www.pcsvet.cz/art/article.php?id=552 -->
+<HTML><HEAD><TITLE>PHP - diskuze (1.) -- PC SvÏt</TITLE>
+<META lang=cs 
+content="Toto je prvnÌ Ë·st, ve kterÈ v·m uk·ûi jednu z moûnostÌ, jak udÏlat diskuzi pomocÌ PHP a bez pouûitÌ SQL. Ve druhÈ Ë·sti bude vysvÏtleno, jak spravovat tuto diskuzi (tj. mazat nevhodnÈ p¯ÌspÏvky). Nejd¯Ìve v·m vysvÏtlÌm cel˝ princip tÈto diskuze, pak funk" 
+name=description>
+<META lang=en 
+content="Toto je prvnÌ Ë·st, ve kterÈ v·m uk·ûi jednu z moûnostÌ, jak udÏlat diskuzi pomocÌ PHP a bez pouûitÌ SQL. Ve druhÈ Ë·sti bude vysvÏtleno, jak spravovat tuto diskuzi (tj. mazat nevhodnÈ p¯ÌspÏvky). Nejd¯Ìve v·m vysvÏtlÌm cel˝ princip tÈto diskuze, pak funk" 
+name=description>
+<META http-equiv=description 
+content="Toto je prvnÌ Ë·st, ve kterÈ v·m uk·ûi jednu z moûnostÌ, jak udÏlat diskuzi pomocÌ PHP a bez pouûitÌ SQL. Ve druhÈ Ë·sti bude vysvÏtleno, jak spravovat tuto diskuzi (tj. mazat nevhodnÈ p¯ÌspÏvky). Nejd¯Ìve v·m vysvÏtlÌm cel˝ princip tÈto diskuze, pak funk">
+<META http-equiv=content-language content=cs>
+<META http-equiv=content-type content="text/html; charset=windows-1250"><LINK 
+href="PHP - diskuze (1_) -- PC SvÏt_soubory/www.css" rel=stylesheet>
+<SCRIPT language=javascript type=text/javascript>
+<!--
+function getElement(e)
+{
+  if(document.all) return document.all[e];
+  else return document.getElementById(e);
+}
+
+peson = new Image(305,13);
+peson.src = "/images/1-5on.gif";
+pesoff = new Image(305,13);
+pesoff.src = "/images/1-5.gif";
+
+hledejon = new Image(20,11);
+hledejon.src = "/images/5-4on.gif";
+hledejoff = new Image(20,11);
+hledejoff.src = "/images/5-4.gif";
+
+topon = new Image(20,11);
+topon.src = "/images/7-pat-top-on.gif";
+topoff = new Image(20,11);
+topoff.src = "/images/7-pat-top-off.gif";
+
+var mnu = new Array();
+
+mnu[1] = 'komunikace:<img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/komunikace/mobily/" class="menu2">mobily</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/komunikace/site" class="menu2">sÌtÏ</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/komunikace/pripojeni" class="menu2">p¯ipojenÌ</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11">';
+mnu[2] = 'internet:<img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/internet/webhosting/" class="menu2">webhosting</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/internet/webdesign" class="menu2">webdesign</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/internet/weby" class="menu2">weby</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11">';
+mnu[3] = 'programov·nÌ:<img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/c/" class="menu2">C++</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/delphi/" class="menu2">Delphi</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/vbasic/" class="menu2">V.Basic</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/assembler/" class="menu2">Asm</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/pascal/" class="menu2">Pascal</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/java/" class="menu2">Java</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/sql/" class="menu2">SQL</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/wsh/" class="menu2">WSH</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11">';
+mnu[4] = 'web-programov·nÌ:<img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/perl/" class="menu2">Perl</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/php/" class="menu2">PHP</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/asp/" class="menu2">ASP</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/javascript/" class="menu2">JavaScript</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/java/" class="menu2">Java</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/html/" class="menu2">HTML</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/sql/" class="menu2">SQL</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11">';
+mnu[5] = 'hw:<img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/hardware/motherboard/" class="menu2">desky</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/hardware/procesory/" class="menu2">procesory</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/hardware/grafika/" class="menu2">grafika</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/hardware/zvuk/" class="menu2">zvuk</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/hardware/periferie/" class="menu2">periferie</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/hardware/monitory/" class="menu2">monitory</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/hardware/mechaniky/" class="menu2">mÈdia</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/hardware/prislusenstvi/" class="menu2">p¯Ìsluö.</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/hardware/testy/" class="menu2">testy</a>';
+mnu[6] = 'software:<img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/windows/" class="menu2">Windows</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/linux/" class="menu2">Linux</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/hry/" class="menu2">hry a z·bava</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/software/recenze/" class="menu2">recenze</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/office/" class="menu2">MS Office</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11">';
+mnu[7] = 'bezpeËnost:<img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/bezpecnost/viry/" class="menu2">Viry</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11">';
+mnu[8] = 'magazÌn:<img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/literatura/" class="menu2">literatura</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/magazin/akce/" class="menu2">akce</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/magazin/novinky/" class="menu2">novinky</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/magazin/tisk/" class="menu2">tiskovÈ zpr·vy</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11">';
+
+function pmnu(mnu_id)
+{
+	 getElement("mnux").innerHTML = mnu[mnu_id];
+}
+// -->
+</SCRIPT>
+
+<META content="MSHTML 6.00.2800.1106" name=GENERATOR></HEAD>
+<BODY>
+<STYLE type=text/css>.mline {
+	FONT-WEIGHT: bold; FONT-SIZE: 8pt; COLOR: #ffffff; FONT-FAMILY: Tahoma, Arial, Verdana; BACKGROUND-COLOR: #444444
+}
+.mitem {
+	CURSOR: hand
+}
+.mtable {
+	BORDER-RIGHT: #000000 1px solid; BORDER-TOP: #000000 1px solid; FONT-SIZE: 8pt; VISIBILITY: hidden; BORDER-LEFT: #000000 1px solid; BORDER-BOTTOM: #000000 1px solid; FONT-FAMILY: Tahoma, Arial, Verdana; POSITION: absolute; BACKGROUND-COLOR: #eeeeee
+}
+.mtitem {
+	CURSOR: hand; COLOR: #000000; BACKGROUND-COLOR: #eeeeee
+}
+.mfirma {
+	COLOR: #dddddd
+}
+.mfirma A {
+	COLOR: #dddddd; TEXT-DECORATION: none
+}
+.mfirma A:active {
+	COLOR: #dddddd; TEXT-DECORATION: none
+}
+.mfirma A:visited {
+	COLOR: #dddddd; TEXT-DECORATION: none
+}
+.mfirma A:hover {
+	COLOR: #ffffff; TEXT-DECORATION: underline
+}
+</STYLE>
+
+<SCRIPT language=JavaScript type=text/javascript>
+<!--
+var intg;
+var tleft = 0;
+var PocetMenu = 0;
+var mLeft = new Array();
+
+function hidemenus(exc)
+{
+ clearInterval(intg);
+ intg = null;
+ for (id=1; id<=PocetMenu; id++){
+  document.all("mnui"+id).style.visibility = "hidden";
+  document.all("i"+id).style.color = "#FFFFFF";
+  document.all("i"+id).style.backgroundColor = "#444444";
+ }
+}
+
+function outobject()
+{
+ intg = setInterval("hidemenus(20)",400);
+}
+
+function onheader(hID)
+{
+ hidemenus(hID);
+ document.all("mnui"+hID).style.visibility = "visible";
+ document.all("i"+hID).style.color = "#000000";
+ document.all("i"+hID).style.backgroundColor = "#EEEEEE";	
+}
+
+function onobject()
+{
+ clearInterval(intg);
+ intg = null;
+}
+
+function onitem(obj)
+{
+ obj.style.color = "EEEEEE";
+ obj.style.backgroundColor = "111111";
+}
+
+function outitem(obj)
+{
+ obj.style.color = "000000";
+ obj.style.backgroundColor = "EEEEEE";
+}
+
+function setleft()
+{
+ for (i=1;i<=PocetMenu;i++) {
+  document.all("mnui"+i).style.left = mLeft[i];
+ }
+}
+
+function mAddHeader(ID,nadpis,leftpos) {
+ document.write('<td id="i'+ID+'" onmouseover="onheader('+ID+');" onmouseout="outobject();" class="mitem">&nbsp; '+nadpis+' &nbsp;</td>');
+ mLeft[ID] = leftpos;
+ if (PocetMenu < ID) PocetMenu = ID;
+}
+
+function mBeginTable(ID) {
+ document.write('<table style="z-index: 100;" width="120" id="mnui'+ID+'" border="0" cellspacing="1" cellpadding="2" class="mtable" onmouseover="onobject();" onmousemove="onobject();" onmouseout="outobject();" class="mtable">');
+}
+
+function mEndTable() {
+ document.write('</table>');
+}
+
+function mAddItem(nadpis,URL,Popis) {
+ document.write('<tr><td class="mtitem" onmouseover="onitem(this);" onmouseout="outitem(this);" onclick="window.navigate(\''+URL+'\');" title="'+Popis+'">'+nadpis+'</td></tr>');
+}
+
+if (window.clientInformation.userAgent.indexOf("MSIE") > 0 ||
+    window.clientInformation.userAgent.indexOf("pera/7.") > 0
+	)
+{
+	
+ document.write('<div align="center" style="z-index: 101; border-bottom: 1px solid white"><center><table id="ptable" border="0" cellspacing="2" cellpadding="0" class="mline" width="100%"><tr><td width="20">&nbsp;</td><td><table class="mline" cellspacing="0" cellpadding="0" border="0"><tr>');
+ mAddHeader(1,"ProvozovanÈ servery",26);
+ mAddHeader(2,"DOM…NY",156);
+ mAddHeader(3,"WEBHOSTING",257);
+ mAddHeader(4,"PÿIPOJENÕ",352);
+ mAddHeader(5,"SERVERHOSTING",452);
+ document.write('</tr></table></td><td width="120" class="mfirma"><a href="http://www.forpsi.com/">FORPSI</a></td><td width="20">&nbsp;</td></tr></table></center></div>');
+
+ mBeginTable(1);
+ mAddItem('MÛda.cz','http://www.moda.cz/','Server o mÛdÏ, stylu, zdravÌ a volnÈm Ëase');
+ mAddItem('CzechWeb','http://www.czechweb.cz/','éeb¯ÌËek registr·tor˘ Ëesk˝ch a slovensk˝ch domÈn, dennÏ novÈ statistiky');
+ mAddItem('PC SvÏt','http://www.pcsvet.cz/','PoËÌtaËe, programov·nÌ, komunikace, Internet');
+ mAddItem('Pr·vnÌk.cz','http://www.pravnik.cz/','Internetov˝ pr·vnÌk pro kaûdÈho - ˙pln· znÏnÌ, Ël·nky, poradna');
+ mAddItem('PoËÌtadlo.cz','http://www.pocitadlo.cz/','Sluûba pro poËÌt·nÌ p¯Ìstup˘ na vaöe str·nky vËetnÏ podrobn˝ch statistik');
+ mAddItem('iReklama.cz','http://www.ireklama.cz/','V˝mÏn˝ reklamnÌ systÈm pro vaöe str·nky');
+ mEndTable();
+
+ mBeginTable(2);
+ mAddItem('FORPSI.com - registrace domÈn','http://www.forpsi.com/domain/','NejlevnÏjöÌ registrace domÈn'); 
+ mAddItem('DomÈny .cz','http://www.forpsi.com/domain/','Registrace domÈn jiû za 549,-KË roËnÏ');
+ mAddItem('DomÈny .com','http://www.forpsi.com/domain/','Registrace domÈn jiû za 219,-KË roËnÏ');
+ mEndTable();
+
+ mBeginTable(3);
+ mAddItem('FORPSI.com - homepage','http://www.forpsi.com/','FORPSI.com - homepage'); 
+ mAddItem('FORPSI.com - WEBHOSTING','http://www.forpsi.com/webhosting/','FORPSI.com - nejöiröÌ nabÌdka webhostingu'); 
+ mAddItem('PIDIhosting','http://www.forpsi.com/webhosting/pidi.php','Hosting pro kaûdÈho'); 
+ mAddItem('PIDIhosting + mail','http://www.forpsi.com/webhosting/pidi.php','Hosting pro kaûdÈho vËetnÏ mailu'); 
+ mAddItem('NORMALhosting','http://www.forpsi.com/webhosting/normal.php','StandardnÌ hosting za rozumnou cenu');
+ mAddItem('EXCLUSIVEhosting','http://www.forpsi.com/webhosting/exclusive.php','To nejlepöÌ pro ty nejlepöÌ');
+ mAddItem('EMAILhosting','http://www.forpsi.com/webhosting/email.php','Hosting vaöich mail˘'); 
+ mEndTable();
+	
+ mBeginTable(4);
+ mAddItem('FORPSI - p¯ipojenÌ k internetu','http://www.forpsi.com/internet/','KompletnÌ nabÌdka bezdr·tovÈho Ëi pevnÈho p¯ipojenÌ k Internetu'); 
+ mAddItem('ADSL p¯ipojenÌ','http://www.forpsi.com/internet/?page=adsl_cr_price','P¯ipojenÌ k Internetu telefonnÌ linkou pomocÌ technologie ADSL'); 
+ mAddItem('Wi-Fi Lite','http://www.forpsi.com/internet/?page=wifi_lite_price','NejjednoduööÌ bezdr·tovÈ p¯ipojenÌ technologiÌ Wi-Fi'); 
+ mAddItem('Wi-Fi','http://www.forpsi.com/internet/?page=wifi_price','Profesion·lnÌ p¯ipojenÌ technologiÌ Wi-Fi'); 
+ mEndTable();
+ 
+ mBeginTable(5);
+ mAddItem('FORPSI - serverhosting','http://www.forpsi.com/server/dedicated.php','SERVERHOSTING a SERVERHOUSING'); 
+ mAddItem('FORPSI - DEDICATED','http://www.forpsi.com/server/dedicated.php','NabÌdka pron·jmu server˘ s kompletnÌ nabÌdkou sluûeb'); 
+ mAddItem('FORPSI - Private','http://www.forpsi.com/server/private.php','NabÌdka housingu vaöich server˘ s kompletnÌ nabÌdkou sluûeb'); 
+ mEndTable();
+
+ setleft();
+}
+// -->
+</SCRIPT>
+
+<TABLE cellSpacing=0 cellPadding=0 width=780 align=center border=0>
+  <TBODY>
+  <TR>
+    <TD width=767>
+      <TABLE cellSpacing=0 cellPadding=0 width="100%" border=0>
+        <TBODY>
+        <TR>
+          <TD width=305 height=158>
+            <TABLE cellSpacing=0 cellPadding=0 border=0>
+              <TBODY>
+              <TR>
+                <TD width=305 colSpan=3 height=14><IMG alt="" 
+                  src="PHP - diskuze (1_) -- PC SvÏt_soubory/1-1.gif"></TD></TR>
+              <TR>
+                <TD width=253 height=11><IMG alt="" 
+                  src="PHP - diskuze (1_) -- PC SvÏt_soubory/1-2.gif"></TD>
+                <TD width=27 height=11><A 
+                  onmouseover="pesoff.src=peson.src; return true" 
+                  onmouseout="pesoff.src='/images/1-5.gif'; return true" 
+                  href="http://www.forpsi.com/" target=_top><IMG alt="" 
+                  src="PHP - diskuze (1_) -- PC SvÏt_soubory/1-3.gif" 
+                  border=0></A></TD>
+                <TD width=25 height=11><IMG alt="" 
+                  src="PHP - diskuze (1_) -- PC SvÏt_soubory/1-4.gif"></TD></TR>
+              <TR>
+                <TD width=305 colSpan=3 height=13><IMG alt="" 
+                  src="PHP - diskuze (1_) -- PC SvÏt_soubory/1-5.gif" 
+                  name=pesoff></TD></TR>
+              <TR>
+                <TD width=305 colSpan=3 height=120><A 
+                  href="http://www.pcsvet.cz/"><IMG alt="" 
+                  src="PHP - diskuze (1_) -- PC SvÏt_soubory/1-6.gif" 
+                  border=0></A></TD></TR></TBODY></TABLE></TD>
+          <TD width=90>
+            <TABLE cellSpacing=0 cellPadding=0 width=90 border=0>
+              <TBODY>
+              <TR>
+                <TD width=1 
+                background="PHP - diskuze (1_) -- PC SvÏt_soubory/2-1.gif" 
+                height=13></TD></TR>
+              <TR>
+                <TD bgColor=white height=145><IFRAME name=menu1 align=middle 
+                  marginWidth=0 marginHeight=0 
+                  src="PHP - diskuze (1_) -- PC SvÏt_soubory/2-2.htm" 
+                  frameBorder=0 width="100%" 
+              height="100%"></IFRAME></TD></TR></TBODY></TABLE></TD>
+          <TD vAlign=top width=10 bgColor=white><IMG alt="" 
+            src="PHP - diskuze (1_) -- PC SvÏt_soubory/3.gif"> </TD>
+          <TD width=400>
+            <TABLE cellSpacing=0 cellPadding=0 width="100%" border=0>
+              <TBODY>
+              <TR>
+                <TD background="PHP - diskuze (1_) -- PC SvÏt_soubory/4-1.gif" 
+                height=8></TD></TR>
+              <TR>
+                <TD height=150><IFRAME name=4-2 align=middle marginWidth=0 
+                  marginHeight=0 
+                  src="PHP - diskuze (1_) -- PC SvÏt_soubory/topinfo.htm" 
+                  frameBorder=0 width="100%" scrolling=no 
+                height="100%"></IFRAME></TD></TR></TBODY></TABLE></TD></TR>
+        <TR>
+          <TD width="100%" colSpan=4 height=35>
+            <TABLE cellSpacing=0 cellPadding=0 width="100%" border=0>
+              <TBODY>
+              <TR>
+                <TD width=28><IMG alt="" 
+                  src="PHP - diskuze (1_) -- PC SvÏt_soubory/5-1.gif"></TD>
+                <TD width=65>
+                  <TABLE cellSpacing=0 cellPadding=0 width="100%" border=0>
+                    <TBODY>
+                    <TR>
+                      <TD 
+                      background="PHP - diskuze (1_) -- PC SvÏt_soubory/5-2.gif">&nbsp;</TD></TR>
+                    <TR>
+                      <TD bgColor=white>
+                        <FORM style="MARGIN-TOP: 0px; MARGIN-BOTTOM: 0px" 
+                        name=sfrm action=/misc/search.php method=get><INPUT 
+                        type=hidden value=1 name=kde><INPUT 
+                        style="BORDER-RIGHT: 0px solid; BORDER-TOP: 0px solid; FONT-SIZE: 10px; BORDER-LEFT: 0px solid; BORDER-BOTTOM: 0px solid; FONT-FAMILY: Verdana" 
+                        onclick="value='';" size=10 value=hledat 
+                      name=co></FORM></TD></TR>
+                    <TR>
+                      <TD><IMG alt="" 
+                        src="PHP - diskuze (1_) -- PC SvÏt_soubory/5-3.gif"></TD></TR></TBODY></TABLE></TD>
+                <TD width=18><A 
+                  onmouseover="hledejoff.src=hledejon.src; window.status='hledej';return true" 
+                  onclick=sfrm.submit(); 
+                  onmouseout="hledejoff.src='/images/5-4.gif'; window.status='pcsvÏt';return true" 
+                  href="http://www.pcsvet.cz/art/article.php?id=552#"><IMG 
+                  alt=go src="PHP - diskuze (1_) -- PC SvÏt_soubory/5-4.gif" 
+                  border=0 name=hledejoff></A></TD>
+                <TD width=9><IMG alt="" 
+                  src="PHP - diskuze (1_) -- PC SvÏt_soubory/5-5.gif"></TD>
+                <TD>
+                  <TABLE cellSpacing=0 cellPadding=0 width="100%" border=0>
+                    <TBODY>
+                    <TR>
+                      <TD align=left 
+                      background="PHP - diskuze (1_) -- PC SvÏt_soubory/5-7.gif" 
+                      height=11><IMG alt="" 
+                        src="PHP - diskuze (1_) -- PC SvÏt_soubory/5-6.gif"></TD></TR>
+                    <TR>
+                      <TD vAlign=center align=left 
+                      background="PHP - diskuze (1_) -- PC SvÏt_soubory/5-8.gif" 
+                      height=24><A class=menu onmouseover=pmnu(1); 
+                        href="http://www.pcsvet.cz/komunikace/">komunikace</A> 
+                        &nbsp;<A class=menu onmouseover=pmnu(2); 
+                        href="http://www.pcsvet.cz/internet/">internet</A> 
+                        &nbsp;<A class=menu onmouseover=pmnu(3); 
+                        href="http://www.pcsvet.cz/prog/">prog.</A> &nbsp;<A 
+                        class=menu onmouseover=pmnu(4); 
+                        href="http://www.pcsvet.cz/prog/">web-prog.</A> &nbsp;<A 
+                        class=menu onmouseover=pmnu(5); 
+                        href="http://www.pcsvet.cz/hardware/">hardware</A> 
+                        &nbsp;<A class=menu onmouseover=pmnu(6); 
+                        href="http://www.pcsvet.cz/software/">software</A> 
+                        &nbsp;<A class=menu onmouseover=pmnu(7); 
+                        href="http://www.pcsvet.cz/bezpecnost/">bezpeËnost</A> 
+                        &nbsp;<A class=menu onmouseover=pmnu(8); 
+                        href="http://www.pcsvet.cz/magazin/">magazÌn</A> 
+                        &nbsp;<A class=menu 
+                        href="http://www.pcsvet.cz/forum/">disk.fÛrum</A> 
+                    </TD></TR></TBODY></TABLE></TD></TR></TBODY></TABLE></TD></TR>
+        <TR>
+          <TD width="100%" 
+          background="PHP - diskuze (1_) -- PC SvÏt_soubory/6-2.gif" 
+            colSpan=4><TABLE cellSpacing=0 cellPadding=0 border=0>
+              <TBODY>
+              <TR>
+                <TD><IMG alt="" 
+                  src="PHP - diskuze (1_) -- PC SvÏt_soubory/6-1.gif"></TD>
+                <TD id=mnux vAlign=top></TD></TR></TBODY></TABLE></TD></TR>
+        <TR>
+          <TD width="100%" colSpan=4>
+            <TABLE cellSpacing=0 cellPadding=0 width="100%" border=0>
+              <TBODY>
+              <TR>
+                <TD width=15 
+                background="PHP - diskuze (1_) -- PC SvÏt_soubory/7.gif">&nbsp;</TD>
+                <TD width=5 bgColor=white>&nbsp;</TD>
+                <TD vAlign=top align=left bgColor=white>
+                  <TABLE>
+                    <TBODY>
+                    <TR>
+                      <TD height=1></TD></TR></TBODY></TABLE>
+                  <P class=ndp>PHP - diskuze (1.)</P>
+                  <P>poËet n·zor˘: <B>40</B> &nbsp; poslednÌ: 26.07.2006 
+                  20:27:21 &nbsp; <A class=autor 
+                  href="http://www.pcsvet.cz/forum/forum.php?art=552">ËÌst 
+                  n·zory</A> &nbsp; <A class=autor 
+                  href="http://www.pcsvet.cz/forum/forum-add.php?art=552">p¯idat 
+                  n·zor</A> &nbsp; <A 
+                  href="http://www.pcsvet.cz/art/article_print.php?id=552">vytisknout</A></P>
+                  <P>Toto je prvnÌ Ë·st, ve kterÈ v·m uk·ûi jednu z moûnostÌ, 
+                  jak udÏlat diskuzi pomocÌ PHP a bez pouûitÌ SQL. Ve druhÈ 
+                  Ë·sti bude vysvÏtleno, jak spravovat tuto diskuzi (tj. mazat 
+                  nevhodnÈ p¯ÌspÏvky). Nejd¯Ìve v·m vysvÏtlÌm cel˝ princip tÈto 
+                  diskuze, pak funk</P>
+                  <HR color=#777777 SIZE=1>
+                  <WS-BODY>
+                  <P><U><B>Princip</B><BR></U><BR>Co vöechno se stane p¯i 
+                  p¯id·nÌ novÈho tÈmatu?<BR>Otev¯e se soubor <B>pocet.dat</B>, 
+                  p¯eËte se z nÏho ËÌslo reprezentujÌcÌ poËet tÈmat, k tomuto 
+                  ËÌslu se p¯iËte 1 a novÈ ËÌslo se uloûÌ opÏt do souboru 
+                  <B>pocet.dat</B>. Jednotliv· tÈmata se ukl·dajÌ do soubor˘, 
+                  n·zvy soubor˘ jsou <B>temaN.dat</B>. <B>N</B> je ËÌslo tÈmatu 
+                  (prvnÌ tÈma je uloûeno v souboru <B>tema1.dat</B> atd.). 
+                  Vöechny informace (autor, e-mail, text tÈmatu atd.) se 
+                  ukl·dajÌ do tÏchto soubor˘ ve speci·lnÌm tvaru.<BR><BR>Jak 
+                  vypad· nap¯. prvnÌ p¯idanÈ tÈma?<BR><BR>%1<BR>&nbsp;N·zev 
+                  tÈmatu;autor;e-mail;datum<BR>&nbsp;Tohle je text prvnÌho 
+                  tÈmatu.<BR><BR>Kaûd˝ p¯ÌspÏvek zaËÌn· znakem procento a za nÌm 
+                  se nach·zÌ po¯adovÈ ËÌslo p¯ÌspÏvku. Znak procento je vûdy na 
+                  zaË·tku ¯·dku, na dalöÌm ¯·dku jsou informace (autor, jeho 
+                  e.mail atd.) oddÏlenÈ st¯ednÌkem. A na zb˝vajÌcÌch ¯·dcÌch je 
+                  text tÈmatu. Kaûd˝ ¯·dek, kter˝ nereprezentuje ËÌslo 
+                  p¯ÌspÏvku, zaËÌn· mezerou, to proto kdyby nÏkdo n·hodou 
+                  zaËÌnal znakem procento. Informace oddÏlenÈ st¯ednÌkem jsou 
+                  p¯ed uloûenÌm zkontrolov·ny a kdyby se v nich n·hodou 
+                  vyskytnul st¯ednÌk, tak je ihned nahrazen Ë·rkou. Vöechny 
+                  informace, kterÈ zad·v· autor p¯ÌspÏvku, jsou zform·tov·ny 
+                  jeötÏ tak, aby nikdo nemohl zadat dlouhÈ slovo (nap¯. nÏkolik 
+                  desÌtek znak˘), to by naruöilo vzhled str·nky a proto kdyû 
+                  nÏkdo zad· takhle dlouhÈ slovo, tak se toto slovo zobrazÌ, ale 
+                  je rozdÏleno mezerami na nÏkolik Ë·stÌ a tak nem˘ûe zbyteËnÏ 
+                  rozt·hnout str·nku.<BR><BR>Data uloûen· v souborech neobsahujÌ 
+                  û·dnÈ HTML tagy, nejsou nijak zform·tovan·, a to je velice 
+                  v˝hodnÈ, protoûe je m˘ûu zobrazit jak chci, nap¯. vytvo¯Ìm 
+                  tabulku p¯esnÏ podle m˝ch p¯edstav a do nÌ vloûÌm data ze 
+                  souboru. Kdyû uû se mi to tak nebude lÌbit tak m˘ûu data 
+                  zobrazit jakkoliv jinak a nemusÌm v˘bec zasahovat do dat v 
+                  souborech.<BR><BR><B><U>VysvÏtlenÌ p¯Ìkaz˘ a 
+                  funkcÌ</U></B><BR><BR><B>List(...)</B><BR>slouûÌ k nastavenÌ 
+                  promÏnn˝ch podle hodnot obsaûen˝ch v 
+                  poli.<BR><BR>Pÿ.<BR>Chceme-li nap¯. z pole $pole, kterÈ m· t¯i 
+                  prvky, naËÌst jeho prvky do promÏnn˝ch $pr1, $pr2, $pr3 
+                  udÏl·me to takhle:<BR>List($pr1, $pr2, $pr3) = 
+                  $pole;<BR><BR><B>Explode(separ·tor, ¯etÏzec)</B><BR>rozdÏlÌ 
+                  <B>¯etÏzec</B> na Ë·sti, v˝sledek tÈto funkce je pole ¯etÏzc˘, 
+                  kterÈ jsou obsaûeny v <B>¯etÏzci</B> a oddÏleny 
+                  <B>separ·torem</B>.<BR><BR><B>StrPos(¯etezec, hledan˝ 
+                  text)</B><BR>funkce vracÌ pozici <B>hledanÈho textu</B> v 
+                  <B>¯etezci</B>. Pokud <B>¯etÏzec</B> <B>hledan˝ text</B> 
+                  neobsahuje vracÌ funkce hodnotu false. 
+                  <BR><BR><B>StrLen(¯etÏzec)</B><BR>vr·tÌ dÈlku <B>¯etÏzce</B> 
+                  ve znacÌch. <BR><BR><B>StrTr(¯etÏzec, p˘vodnÌ, 
+                  novÈ)</B><BR>funkce v <B>¯etÏzci</B> p¯evede vöechny znaky 
+                  obsaûenÈ v ¯etÏzci <B>p˘vodnÌ</B> na odpovÌdajÌcÌ znaky z 
+                  ¯etÏzce <B>novÈ</B>. <BR><BR><B>ChMod(soubor, pr·va)</B><BR>u 
+                  <B>souboru</B> zmÏnÌ p¯Ìstupov· pr·va na <B>pr·va</B>. NesmÌme 
+                  zapomenout, ûe zatÌmco unixov˝ p¯Ìkaz chmod povaûuje 
+                  <B>pr·va</B> za osmiËkovÈ ËÌslo, funkce ChMod() oËek·v· 
+                  norm·lnÌ ËÌslo. V PHP lze zad·vat osmiËkovÈ konstanty tak, ûe 
+                  jim p¯ed¯adÌme znak "0". Jestliûe se povede pr·va u 
+                  <B>souboru</B> nastavit, vracÌ funkce hodnotu true. 
+                  <BR><BR><B><U>ZdrojovÈ kÛdy</U></B><BR><BR>Diskuze se skl·d· 
+                  ze t¯Ì soubor˘ (new.html, diskuze.php, pocet.dat) ostatnÌ 
+                  soubory si vytv·¯Ì jiû samotn˝ script.<BR><BR><B><I>Soubor 
+                  pocet.dat</I></B><BR><BR>Do tohoto souboru se uloûÌ hodnota 0 
+                  nic vÌc, pak uû s nÌm pracuje jen PHP. Jeho pr·va se musÌ po 
+                  nahr·nÌ na server nastavit tak, aby z nÏho mohl kdokoliv ËÌst 
+                  a ukl·dat do nÏj novÈ hodnoty.<BR><BR><I><B>Soubor 
+                  new.html</B><BR></I><BR><FONT 
+                  style="FONT-SIZE: 9pt; FONT-FAMILY: Courier New">&lt;HTML&gt;<BR>&lt;HEAD&gt;<BR>&lt;TITLE&gt;Diskuze&lt;/TITLE&gt;<BR>&lt;SCRIPT 
+                  language="JavaScript"&gt;<BR>function kontrola(jmeno) 
+                  {<BR>&nbsp;&nbsp;&nbsp;&nbsp;if (jmeno.length &gt;= 3 ) 
+                  {<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;FUKY.submit();<BR>&nbsp;&nbsp;&nbsp;&nbsp;}<BR>&nbsp;&nbsp;&nbsp;&nbsp;else 
+                  {<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;window.alert("VyplÚte 
+                  prosÌm povinn˝ ˙daj jmÈno Ëi 
+                  p¯ezdÌvka!!!");<BR>&nbsp;&nbsp;&nbsp;&nbsp;}<BR>}<BR>&lt;/SCRIPT&gt;<BR>&lt;/HEAD&gt;<BR>&lt;BODY&gt;<BR><BR>&lt;CENTER&gt;<BR><BR>&lt;TABLE 
+                  border="0" cellpadding="1" cellspacing="1" align="center" 
+                  width="100%"&gt;<BR>&lt;TR 
+                  valign="top"&gt;<BR>&lt;TD&gt;<BR>&lt;H1&gt;&lt;CENTER&gt;Diskuze 
+                  - PHP - p¯idat novÈ 
+                  tÈma&lt;/CENTER&gt;&lt;/H1&gt;<BR>&lt;/TD&gt;<BR>&lt;/TR&gt;<BR>&lt;/TABLE&gt;<BR><BR>&lt;TABLE 
+                  class="panel" border="0" cellpadding="1" cellspacing="1" 
+                  align="center" width="100%"&gt;<BR>&lt;TR&gt;<BR>&lt;TD NOWRAP 
+                  align="center"&gt;<BR>&lt;A HREF="diskuze.php?show"&gt;&lt;IMG 
+                  SRC="../../index/seznam.gif" border="0" height="20" 
+                  width="20"&gt;&lt;B&gt; Seznam tÈmat 
+                  &lt;/B&gt;&lt;/A&gt;<BR>&lt;/TD&gt;<BR>&lt;/TR&gt;<BR>&lt;/TABLE&gt;<BR><BR>&lt;FORM 
+                  name="FUKY" method="POST" 
+                  action="diskuze.php"&gt;<BR>&lt;TABLE 
+                  border="0"&gt;<BR><BR>&lt;TR valign="top"&gt;<BR>&lt;TD 
+                  align="right"&gt;<BR>&lt;B&gt;JmÈno Ëi 
+                  p¯ezdÌvka:&lt;/B&gt;<BR>&lt;TD align="left"&gt;<BR>&lt;INPUT 
+                  class="male" type="text" size="30" 
+                  name="autor"&gt;&lt;BR&gt;<BR><BR>&lt;TR 
+                  valign="top"&gt;<BR>&lt;TD 
+                  align="right"&gt;<BR>&lt;B&gt;E-mail:&lt;/B&gt;<BR>&lt;TD 
+                  align="left"&gt;<BR>&lt;INPUT class="male" type="text" 
+                  size="30" name="email" value="@"&gt;&lt;BR&gt;<BR><BR>&lt;TR 
+                  valign="top"&gt;<BR>&lt;TD 
+                  align="right"&gt;<BR>&lt;B&gt;TÈma:&lt;/B&gt;<BR>&lt;TD 
+                  align="left"&gt;<BR>&lt;INPUT class="male" type="text" 
+                  size="30" name="tema"&gt;&lt;BR&gt;<BR><BR>&lt;TR 
+                  valign="top"&gt;<BR>&lt;TD 
+                  align="right"&gt;<BR>&lt;B&gt;Text:&lt;/B&gt;<BR>&lt;TD 
+                  align="left"&gt;<BR>&lt;TEXTAREA class="male" cols="32" 
+                  rows="7" 
+                  name="text"&gt;&lt;/TEXTAREA&gt;&lt;BR&gt;<BR><BR>&lt;TR 
+                  valign="top"&gt;<BR>&lt;TD colspan="2" 
+                  align="center"&gt;<BR>&lt;INPUT class="male" VALUE="P¯idat" 
+                  TYPE="button" 
+                  onClick="kontrola(FUKY.autor.value);"&gt;<BR><BR>&lt;/TD&gt;<BR>&lt;/TR&gt;<BR>&lt;/TABLE&gt;<BR>&lt;/FORM&gt;<BR><BR>&lt;TABLE 
+                  class="panel" border="0" cellpadding="1" cellspacing="1" 
+                  align="center" width="100%"&gt;<BR>&lt;TR&gt;<BR>&lt;TD NOWRAP 
+                  align="center"&gt;<BR>&lt;A HREF="diskuze.php?show"&gt;&lt;IMG 
+                  SRC="../../index/seznam.gif" border="0" height="20" 
+                  width="20"&gt;&lt;B&gt; Seznam tÈmat 
+                  &lt;/B&gt;&lt;/A&gt;<BR>&lt;/TD&gt;<BR>&lt;/TR&gt;<BR>&lt;/TABLE&gt;<BR><BR>&lt;/CENTER&gt;<BR><BR>&lt;/BODY&gt;<BR>&lt;/HTML&gt;</FONT><BR><BR><BR><I><B>Soubor 
+                  diskuze.php</B></I> </P>
+                  <P><FONT 
+                  style="FONT-SIZE: 9pt; FONT-FAMILY: Courier New">&lt;? 
+                  <BR><BR>&nbsp;&nbsp;if ($QUERY_STRING == "show") { <BR>?&gt; 
+                  <BR><BR>&lt;HTML&gt; <BR>&lt;HEAD&gt; 
+                  <BR>&lt;TITLE&gt;Diskuze&lt;/TITLE&gt; <BR>&lt;META 
+                  NAME="author" CONTENT="Jan Fuchs"&gt; <BR>&lt;LINK 
+                  href="../../index/default.css" rel=stylesheet 
+                  type=text/css&gt; <BR>&lt;/HEAD&gt; <BR>&lt;BODY 
+                  background="../../index/pozadi.gif"&gt; <BR>&lt;TABLE 
+                  border="0" cellpadding="1" cellspacing="1" align="center" 
+                  width="100%"&gt; <BR>&lt;TR valign="top"&gt; <BR>&lt;TD&gt; 
+                  <BR>&lt;H1 align="center"&gt;Diskuze - PHP - seznam 
+                  tÈmat&lt;/H1&gt; <BR>&lt;/TD&gt; <BR>&lt;/TR&gt; 
+                  <BR>&lt;/TABLE&gt; <BR><BR>&lt;TABLE class="panel" border="0" 
+                  cellpadding="1" cellspacing="1" align="center" 
+                  width="100%"&gt; <BR>&lt;TR&gt; <BR>&lt;TD NOWRAP 
+                  align="center"&gt; <BR>&lt;A HREF="new.php"&gt;&lt;IMG 
+                  SRC="../../index/pridat.gif" border="0" height="20" 
+                  width="20"&gt;&lt;B&gt; P¯idat novÈ tÈma do diskuze 
+                  &lt;/B&gt;&lt;/A&gt; <BR>&lt;/TD&gt; <BR>&lt;/TR&gt; 
+                  <BR>&lt;/TABLE&gt;&lt;BR&gt; <BR><BR>&lt;TABLE border="0" 
+                  class="diskuze" width="100%"&gt; <BR>&lt;TR&gt; 
+                  <BR>&lt;TD&gt;&lt;B&gt;TÈma&lt;/B&gt; 
+                  <BR>&lt;TD&gt;&lt;B&gt;Autor&lt;/B&gt; 
+                  <BR>&lt;TD&gt;&lt;B&gt;Vloûeno&lt;/B&gt; <BR>&lt;? 
+                  <BR><BR>&nbsp;&nbsp;$fp = FOpen("./pocet.dat", "r"); 
+                  <BR>&nbsp;&nbsp;$pocet = FGetS($fp, 10); 
+                  <BR>&nbsp;&nbsp;FClose($fp); <BR><BR>//TENTO CYKLUS VYTV¡ÿÕ 
+                  TABULKU SE SEZNAMEM T…MAT <BR>&nbsp;&nbsp;for ($i = $pocet; $i 
+                  &gt; 0; --$i) { <BR>&nbsp;&nbsp;&nbsp;&nbsp;$fp = 
+                  FOpen("./tema".$i.".dat", "r"); 
+                  <BR>&nbsp;&nbsp;&nbsp;&nbsp;$soubor = 
+                  File("./tema".$i.".dat"); 
+                  <BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;List($tema, $autor, $email, 
+                  $datum) = Explode(";", $soubor[1]); 
+                  <BR>&nbsp;&nbsp;&nbsp;&nbsp;$data .= "&lt;TR 
+                  class=\"distema\"&gt;&lt;TD NOWRAP&gt;&amp;nbsp;&lt;B&gt;&lt;A 
+                  HREF=\"./diskuze.php?id=".$i."\"&gt;".$tema."&lt;/A&gt;&lt;/B&gt;&lt;TD 
+                  NOWRAP&gt;&amp;nbsp;&lt;B&gt;&lt;A HREF=\"mailto: 
+                  ".$email."\"&gt;".$autor."&lt;/A&gt;&lt;/B&gt;&lt;TD 
+                  NOWRAP&gt;&amp;nbsp;&lt;B&gt;".$datum."&lt;/B&gt;"; 
+                  <BR><BR>&nbsp;&nbsp;&nbsp;&nbsp;for ($a = 2; $a &lt; 
+                  Count($soubor); ++$a) { 
+                  <BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$radek = $soubor[$a]; 
+                  <BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if ($radek[0] == "%") 
+                  { 
+                  <BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;List($tema, 
+                  $autor, $email, $datum) = Explode(";", $soubor[++$a]); 
+                  <BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$data .= 
+                  "&lt;TR&gt;&lt;TD NOWRAP&gt;&amp;nbsp;".$tema."&lt;TD 
+                  NOWRAP&gt;&amp;nbsp;&lt;A HREF=\"mailto: 
+                  ".$email."\"&gt;".$autor."&lt;/A&gt;&lt;TD 
+                  NOWRAP&gt;&amp;nbsp;".$datum."&lt;TD&gt;"; 
+                  <BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} 
+                  <BR>&nbsp;&nbsp;&nbsp;&nbsp;} <BR>&nbsp;&nbsp;} 
+                  <BR><BR>&nbsp;&nbsp;echo $data; <BR><BR>?&gt; <BR>&lt;/TD&gt; 
+                  <BR>&lt;/TR&gt; <BR>&lt;/TABLE&gt; <BR>&lt;BR&gt; 
+                  <BR>&lt;TABLE class="panel" border="0" cellpadding="1" 
+                  cellspacing="1" align="center" width="100%"&gt; <BR>&lt;TR&gt; 
+                  <BR>&lt;TD NOWRAP align="center"&gt; <BR>&lt;A 
+                  HREF="new.php"&gt;&lt;IMG SRC="../../index/pridat.gif" 
+                  border="0" height="20" width="20"&gt;&lt;B&gt; P¯idat novÈ 
+                  tÈma do diskuze &lt;/B&gt;&lt;/A&gt; <BR>&lt;/TD&gt; 
+                  <BR>&lt;/TR&gt; <BR>&lt;/TABLE&gt; <BR>&lt;/BODY&gt; 
+                  <BR>&lt;/HTML&gt; <BR><BR>&lt;? <BR>&nbsp;&nbsp;exit; <BR>} 
+                  <BR><BR>if (($id != "") &amp;&amp; ($autor != "") &amp;&amp; 
+                  ($tema != "") &amp;&amp; ($text != "")) { 
+                  <BR><BR>&nbsp;&nbsp;$fp = FOpen("./tema".$id.".dat", "r"); 
+                  <BR>&nbsp;&nbsp;$soubor = File("./tema".$id.".dat"); 
+                  <BR><BR>//CYKLUS ZJIäçUJE KOLIK PÿÕSPÃVKŸ OBSAHUJE DAN… T…MA 
+                  <BR>&nbsp;&nbsp;for ($i = 0; $i &lt; Count($soubor); ++$i) { 
+                  <BR>&nbsp;&nbsp;&nbsp;&nbsp;$radek = $soubor[$i]; 
+                  <BR>&nbsp;&nbsp;&nbsp;&nbsp;if ($radek[0] == "%") { 
+                  <BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;++$cislo; 
+                  <BR>&nbsp;&nbsp;&nbsp;&nbsp;} <BR>&nbsp;&nbsp;} 
+                  <BR><BR>&nbsp;&nbsp;++$cislo; <BR>&nbsp;&nbsp;$beztext = ""; 
+                  <BR><BR>//CYKLUS, KTER› ROZDÃLUJE NEKONE»N¡ SLOVA MEZERAMI 
+                  <BR>&nbsp;&nbsp;for ($a = 0; ;$a = $a + 20) { 
+                  <BR>&nbsp;&nbsp;&nbsp;&nbsp;$pomtext = ""; 
+                  <BR>&nbsp;&nbsp;&nbsp;&nbsp;for ($i = $a; $i &lt; ($a + 20); 
+                  ++$i) { <BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if ($i &gt; 
+                  StrLen($text)) { <BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;break 
+                  2; <BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} 
+                  <BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$pomtext .= $text[$i]; 
+                  <BR>&nbsp;&nbsp;&nbsp;&nbsp;} <BR>&nbsp;&nbsp;&nbsp;&nbsp;if 
+                  (StrPos($pomtext, " ")) { 
+                  <BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$beztext .= $pomtext; 
+                  <BR>&nbsp;&nbsp;&nbsp;&nbsp;} <BR>&nbsp;&nbsp;&nbsp;&nbsp;else 
+                  { <BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$beztext .= 
+                  $pomtext." "; <BR>&nbsp;&nbsp;&nbsp;&nbsp;} <BR>&nbsp;&nbsp;} 
+                  <BR><BR>&nbsp;&nbsp;if (StrPos($pomtext, " ")) { 
+                  <BR>&nbsp;&nbsp;&nbsp;&nbsp;$beztext .= $pomtext; 
+                  <BR>&nbsp;&nbsp;} <BR>&nbsp;&nbsp;else { 
+                  <BR>&nbsp;&nbsp;&nbsp;&nbsp;$beztext .= $pomtext." "; 
+                  <BR>&nbsp;&nbsp;} <BR><BR>//Z PROMÃN… TEMA, AUTOR, EMAIL SI 
+                  VEZME JEN PRVNÕCH 30 ZNAKŸ <BR>&nbsp;&nbsp;for ($i = 0; $i 
+                  &lt;= 30; ++$i) { <BR>&nbsp;&nbsp;&nbsp;&nbsp;if ($i &lt;= 
+                  StrLen($tema)) $beztema .= $tema[$i]; 
+                  <BR>&nbsp;&nbsp;&nbsp;&nbsp;if ($i &lt;= StrLen($autor)) 
+                  $bezautor .= $autor[$i]; <BR>&nbsp;&nbsp;&nbsp;&nbsp;if ($i 
+                  &lt;= StrLen($email)) $bezemail .= $email[$i]; 
+                  <BR>&nbsp;&nbsp;} <BR><BR>//ULOéÕ DO PROMÃN… DATA VE SPR¡VN…M 
+                  FORM¡TU <BR>&nbsp;&nbsp;$data = "\n%".$cislo."\n"; 
+                  <BR>&nbsp;&nbsp;$data .= " ".StrTr($beztema, "&lt;&gt;;"," 
+                  ,").";".StrTr($bezautor, "&lt;&gt;;"," 
+                  ,").";".StrTr($bezemail, "&lt;&gt;;"," ,").";".Date("d.m. Y v 
+                  H:i")."\n"; <BR>&nbsp;&nbsp;$data .= " 
+                  ".HTMLSpecialChars($beztext)."\n"; <BR><BR>&nbsp;&nbsp;$fp = 
+                  FOpen("./tema".$id.".dat", "a"); <BR>&nbsp;&nbsp;FPutS($fp, 
+                  $data); <BR>&nbsp;&nbsp;FClose($fp); 
+                  <BR><BR>&nbsp;&nbsp;Header("Location: ./diskuze.php?id=$id"); 
+                  <BR><BR>exit; <BR><BR>} <BR><BR>if (($autor != "") &amp;&amp; 
+                  ($tema != "") &amp;&amp; ($text != "")) { 
+                  <BR><BR>&nbsp;&nbsp;$fp = FOpen("./pocet.dat", "r+"); 
+                  <BR>&nbsp;&nbsp;$pocet = FGetS($fp, 10); 
+                  <BR>&nbsp;&nbsp;FSeek($fp, 0); <BR>&nbsp;&nbsp;++$pocet; 
+                  <BR>&nbsp;&nbsp;FPutS($fp, $pocet); 
+                  <BR>&nbsp;&nbsp;FClose($fp); <BR><BR>&nbsp;&nbsp;$beztext = 
+                  ""; <BR><BR>&nbsp;&nbsp;for ($a = 0; ;$a = $a + 20) { 
+                  <BR>&nbsp;&nbsp;&nbsp;&nbsp;$pomtext = ""; 
+                  <BR>&nbsp;&nbsp;&nbsp;&nbsp;for ($i = $a; $i &lt; ($a + 20); 
+                  ++$i) { <BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;if ($i &gt; 
+                  StrLen($text)) { 
+                  <BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;break 2; 
+                  <BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} 
+                  <BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$pomtext .= $text[$i]; 
+                  <BR>&nbsp;&nbsp;&nbsp;&nbsp;} <BR>&nbsp;&nbsp;&nbsp;&nbsp;if 
+                  (StrPos($pomtext, " ")) { 
+                  <BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$beztext .= $pomtext; 
+                  <BR>&nbsp;&nbsp;&nbsp;&nbsp;} <BR>&nbsp;&nbsp;&nbsp;&nbsp;else 
+                  { <BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$beztext .= 
+                  $pomtext." "; <BR>&nbsp;&nbsp;&nbsp;&nbsp;} <BR>&nbsp;&nbsp;} 
+                  <BR><BR>&nbsp;&nbsp;if (StrPos($pomtext, " ")) { 
+                  <BR>&nbsp;&nbsp;&nbsp;&nbsp;$beztext .= $pomtext; 
+                  <BR>&nbsp;&nbsp;} <BR>&nbsp;&nbsp;else { 
+                  <BR>&nbsp;&nbsp;&nbsp;&nbsp;$beztext .= $pomtext." "; 
+                  <BR>&nbsp;&nbsp;} <BR><BR>&nbsp;&nbsp;for ($i = 0; $i &lt;= 
+                  30; ++$i) { <BR>&nbsp;&nbsp;&nbsp;&nbsp;if ($i &lt;= 
+                  StrLen($tema)) $beztema .= $tema[$i]; 
+                  <BR>&nbsp;&nbsp;&nbsp;&nbsp;if ($i &lt;= StrLen($autor)) 
+                  $bezautor .= $autor[$i]; <BR>&nbsp;&nbsp;&nbsp;&nbsp;if ($i 
+                  &lt;= StrLen($email)) $bezemail .= $email[$i]; 
+                  <BR>&nbsp;&nbsp;} <BR><BR>&nbsp;&nbsp;$data = "%1\n"; 
+                  <BR>&nbsp;&nbsp;$data .= " ".StrTr($beztema, "&lt;&gt;;"," 
+                  ,").";".StrTr($bezautor, "&lt;&gt;;"," 
+                  ,").";".StrTr($bezemail, "&lt;&gt;;"," ,").";".Date("d.m. Y v 
+                  H:i")."\n"; <BR>&nbsp;&nbsp;$data .= " 
+                  ".HTMLSpecialChars($beztext)."\n"; <BR><BR>&nbsp;&nbsp;$fp = 
+                  FOpen("./tema".$pocet.".dat", "w"); <BR>&nbsp;&nbsp;FPutS($fp, 
+                  $data); <BR>&nbsp;&nbsp;FClose($fp); 
+                  <BR>&nbsp;&nbsp;ChMod("./tema".$pocet.".dat", 0777); 
+                  <BR><BR>&nbsp;&nbsp;Header("Location: ./diskuze.php?show"); 
+                  <BR><BR>&nbsp;&nbsp;exit; <BR>} <BR><BR>if (($id != "") 
+                  &amp;&amp; ($tema != "")) { <BR><BR>?&gt; <BR><BR>&lt;HTML&gt; 
+                  <BR>&lt;HEAD&gt; <BR>&lt;TITLE&gt;Diskuze&lt;/TITLE&gt; 
+                  <BR>&lt;META NAME="author" CONTENT="Jan Fuchs"&gt; 
+                  <BR>&lt;LINK href="../../index/default.css" rel=stylesheet 
+                  type=text/css&gt; <BR>&lt;SCRIPT language="JavaScript"&gt; 
+                  <BR>function kontrola(jmeno) { <BR>&nbsp;&nbsp;&nbsp;&nbsp;if 
+                  (jmeno.length &gt;= 3 ) { 
+                  <BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;FUKY.submit(); 
+                  <BR>&nbsp;&nbsp;&nbsp;&nbsp;} <BR>&nbsp;&nbsp;&nbsp;&nbsp;else 
+                  { 
+                  <BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;window.alert("VyplÚte 
+                  prosÌm povinn˝ ˙daj jmÈno Ëi p¯ezdÌvka!!!"); 
+                  <BR>&nbsp;&nbsp;&nbsp;&nbsp;} <BR>} <BR>&lt;/SCRIPT&gt; 
+                  <BR>&lt;/HEAD&gt; <BR>&lt;BODY 
+                  background="../../index/pozadi.gif"&gt; <BR><BR>&lt;TABLE 
+                  border="0" cellpadding="1" cellspacing="1" align="center" 
+                  width="100%"&gt; <BR>&lt;TR valign="top"&gt; <BR>&lt;TD&gt; 
+                  <BR>&lt;H1 align="center"&gt;Diskuze - PHP - 
+                  odpovÏdÏt&lt;/H1&gt; <BR>&lt;/TD&gt; <BR>&lt;/TR&gt; 
+                  <BR>&lt;/TABLE&gt; <BR><BR>&lt;TABLE class="panel" border="0" 
+                  cellpadding="1" cellspacing="1" align="center" 
+                  width="100%"&gt; <BR>&lt;TR&gt; <BR>&lt;TD NOWRAP 
+                  align="center"&gt; <BR>&lt;A HREF="new.php"&gt;&lt;IMG 
+                  SRC="../../index/pridat.gif" border="0" height="20" 
+                  width="20"&gt;&lt;B&gt; P¯idat novÈ tÈma do diskuze 
+                  &lt;/B&gt;&lt;/A&gt; <BR>&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;A 
+                  HREF="diskuze.php?show"&gt;&lt;IMG 
+                  SRC="../../index/seznam.gif" border="0" height="20" 
+                  width="20"&gt;&lt;B&gt; Seznam tÈmat &lt;/B&gt;&lt;/A&gt; 
+                  <BR>&lt;/TD&gt; <BR>&lt;/TR&gt; <BR>&lt;/TABLE&gt;&lt;BR&gt; 
+                  <BR><BR>&lt;FORM name="FUKY" method="POST" 
+                  action="diskuze.php"&gt; <BR>&lt;INPUT type="hidden" name="id" 
+                  value="&lt;? echo $id; ?&gt;"&gt; <BR>&lt;TABLE border="0" 
+                  class="diskuze" align="center"&gt; <BR><BR>&lt;TR 
+                  valign="top"&gt; <BR>&lt;TD align="right"&gt; 
+                  <BR>&lt;B&gt;JmÈno Ëi p¯ezdÌvka:&lt;/B&gt; <BR>&lt;TD 
+                  align="left"&gt; <BR>&lt;INPUT class="male" type="text" 
+                  size="30" name="autor"&gt;&lt;BR&gt; <BR><BR>&lt;TR 
+                  valign="top"&gt; <BR>&lt;TD align="right"&gt; 
+                  <BR>&lt;B&gt;E-mail:&lt;/B&gt; <BR>&lt;TD align="left"&gt; 
+                  <BR>&lt;INPUT class="male" type="text" size="30" name="email" 
+                  value="@"&gt;&lt;BR&gt; <BR><BR>&lt;TR valign="top"&gt; 
+                  <BR>&lt;TD align="right"&gt; <BR>&lt;B&gt;TÈma:&lt;/B&gt; 
+                  <BR>&lt;TD align="left"&gt; <BR>&lt;INPUT class="male" 
+                  type="text" size="30" name="tema" value="Re: &lt;? echo $tema; 
+                  ?&gt;"&gt;&lt;BR&gt; <BR><BR>&lt;TR valign="top"&gt; 
+                  <BR>&lt;TD align="right"&gt; <BR>&lt;B&gt;Text:&lt;/B&gt; 
+                  <BR>&lt;TD align="left"&gt; <BR>&lt;TEXTAREA class="male" 
+                  cols="32" rows="7" name="text"&gt;&lt;/TEXTAREA&gt;&lt;BR&gt; 
+                  <BR><BR>&lt;TR valign="top"&gt; <BR>&lt;TD colspan="2" 
+                  align="center"&gt; <BR>&lt;INPUT class="male" VALUE="P¯idat" 
+                  TYPE="button" onClick="kontrola(FUKY.autor.value);"&gt; 
+                  <BR><BR>&lt;/TD&gt; <BR>&lt;/TR&gt; <BR>&lt;/TABLE&gt; 
+                  <BR>&lt;/FORM&gt; <BR><BR>&lt;TABLE class="panel" border="0" 
+                  cellpadding="1" cellspacing="1" align="center" 
+                  width="100%"&gt; <BR>&lt;TR&gt; <BR>&lt;TD NOWRAP 
+                  align="center"&gt; <BR>&lt;A HREF="new.php"&gt;&lt;IMG 
+                  SRC="../../index/pridat.gif" border="0" height="20" 
+                  width="20"&gt;&lt;B&gt; P¯idat novÈ tÈma do diskuze 
+                  &lt;/B&gt;&lt;/A&gt; <BR>&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;A 
+                  HREF="diskuze.php?show"&gt;&lt;IMG 
+                  SRC="../../index/seznam.gif" border="0" height="20" 
+                  width="20"&gt;&lt;B&gt; Seznam tÈmat &lt;/B&gt;&lt;/A&gt; 
+                  <BR>&lt;/TD&gt; <BR>&lt;/TR&gt; <BR>&lt;/TABLE&gt; 
+                  <BR>&lt;/BODY&gt; <BR>&lt;/HTML&gt; <BR><BR>&lt;? 
+                  <BR><BR>exit; <BR><BR>} <BR><BR>if ($id != "") { <BR>?&gt; 
+                  <BR><BR>&lt;HTML&gt; <BR>&lt;HEAD&gt; 
+                  <BR>&lt;TITLE&gt;Diskuze&lt;/TITLE&gt; <BR>&lt;META 
+                  NAME="author" CONTENT="Jan Fuchs"&gt; <BR>&lt;LINK 
+                  href="../../index/default.css" rel=stylesheet 
+                  type=text/css&gt; <BR>&lt;/HEAD&gt; <BR>&lt;BODY 
+                  background="../../index/pozadi.gif"&gt; <BR><BR>&lt;TABLE 
+                  border="0" cellpadding="1" cellspacing="1" align="center" 
+                  width="100%"&gt; <BR>&lt;TR valign="top"&gt; <BR>&lt;TD&gt; 
+                  <BR>&lt;H1 align="center"&gt;Diskuze - PHP&lt;/H1&gt; 
+                  <BR>&lt;/TD&gt; <BR>&lt;/TR&gt; <BR>&lt;/TABLE&gt; 
+                  <BR><BR>&lt;TABLE class="panel" border="0" cellpadding="1" 
+                  cellspacing="1" align="center" width="100%"&gt; <BR>&lt;TR&gt; 
+                  <BR>&lt;TD NOWRAP align="center"&gt; <BR>&lt;A 
+                  HREF="new.php"&gt;&lt;IMG SRC="../../index/pridat.gif" 
+                  border="0" height="20" width="20"&gt;&lt;B&gt; P¯idat novÈ 
+                  tÈma do diskuze &lt;/B&gt;&lt;/A&gt; 
+                  <BR>&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;A 
+                  HREF="diskuze.php?show"&gt;&lt;IMG 
+                  SRC="../../index/seznam.gif" border="0" height="20" 
+                  width="20"&gt;&lt;B&gt; Seznam tÈmat &lt;/B&gt;&lt;/A&gt; 
+                  <BR>&lt;/TD&gt; <BR>&lt;/TR&gt; <BR>&lt;/TABLE&gt;&lt;BR&gt; 
+                  <BR>&lt;TABLE border="0" class="diskuze" width="100%"&gt; 
+                  <BR>&lt;? <BR><BR>&nbsp;&nbsp;$fp = FOpen("./tema".$id.".dat", 
+                  "r"); <BR>&nbsp;&nbsp;$soubor = File("./tema".$id.".dat"); 
+                  <BR>&nbsp;&nbsp;FClose($fp); <BR><BR>&nbsp;&nbsp;List($tema, 
+                  $autor, $email, $datum) = Explode(";", $soubor[1]); 
+                  <BR>&nbsp;&nbsp;$data .= "&lt;TR class=\"distema\"&gt;&lt;TD 
+                  NOWRAP&gt;&amp;nbsp;&lt;B&gt;".$tema."&lt;/B&gt;&lt;TD 
+                  NOWRAP&gt;&amp;nbsp;&lt;B&gt;&lt;A HREF=\"mailto: 
+                  ".$email."\"&gt;".$autor."&lt;/A&gt;&lt;/B&gt;&lt;TD 
+                  NOWRAP&gt;&amp;nbsp;&lt;B&gt;".$datum."&lt;/B&gt;&lt;TD 
+                  NOWRAP&gt;&amp;nbsp;&lt;B&gt;&lt;A 
+                  HREF=\"diskuze.php?id=".$id."&amp;tema=".$tema."\"&gt;odpovÏdÏt&lt;/A&gt;&lt;/B&gt;"; 
+                  <BR><BR>&nbsp;&nbsp;$radek = $soubor[2]; 
+                  <BR><BR>&nbsp;&nbsp;for ($a = 3; (($radek[0] != "%") 
+                  &amp;&amp; ($a &lt; Count($soubor))); ++$a) { 
+                  <BR>&nbsp;&nbsp;&nbsp;&nbsp;$text .= $radek; 
+                  <BR>&nbsp;&nbsp;&nbsp;&nbsp;$radek = $soubor[$a]; 
+                  <BR>&nbsp;&nbsp;} <BR><BR>&nbsp;&nbsp;$data .= 
+                  "&lt;TR&gt;&lt;TD colspan=\"3\"&gt;".$text; 
+                  <BR>&nbsp;&nbsp;--$a; <BR><BR>&nbsp;&nbsp;for ($i = $a; $i 
+                  &lt; Count($soubor); ++$i) { 
+                  <BR>&nbsp;&nbsp;&nbsp;&nbsp;$radek = $soubor[$i]; 
+                  <BR>&nbsp;&nbsp;&nbsp;&nbsp;$text = ""; 
+                  <BR>&nbsp;&nbsp;&nbsp;&nbsp;if ($radek[0] == "%") { 
+                  <BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;List($tema, $autor, 
+                  $email, $datum) = Explode(";", $soubor[++$i]); 
+                  <BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$data .= "&lt;TR 
+                  class=\"disre\"&gt;&lt;TD NOWRAP&gt;&amp;nbsp;".$tema."&lt;TD 
+                  NOWRAP&gt;&amp;nbsp;&lt;A HREF=\"mailto: 
+                  ".$email."\"&gt;".$autor."&lt;/A&gt;&lt;TD 
+                  NOWRAP&gt;&amp;nbsp;".$datum."&lt;TD NOWRAP&gt;&amp;nbsp;&lt;A 
+                  HREF=\"diskuze.php?id=".$id."&amp;tema=".$tema."\"&gt;odpovÏdÏt&lt;/A&gt;"; 
+                  <BR>&nbsp;&nbsp;&nbsp;&nbsp;} <BR>&nbsp;&nbsp;&nbsp;&nbsp;else 
+                  { <BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;while (($radek[0] != 
+                  "%") &amp;&amp; ($i &lt; Count($soubor))) { 
+                  <BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$text .= 
+                  $radek; 
+                  <BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;$radek = 
+                  $soubor[++$i]; <BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} 
+                  <BR>&nbsp;&nbsp;&nbsp;&nbsp;--$i; 
+                  <BR>&nbsp;&nbsp;&nbsp;&nbsp;$data .= "&lt;TR&gt;&lt;TD 
+                  colspan=\"3\"&gt;".$text; <BR>&nbsp;&nbsp;&nbsp;&nbsp;} 
+                  <BR>&nbsp;&nbsp;} <BR><BR>&nbsp;&nbsp;echo $data; <BR>?&gt; 
+                  <BR>&lt;/TD&gt; <BR>&lt;/TR&gt; <BR>&lt;/TABLE&gt; 
+                  <BR>&lt;BR&gt; <BR>&lt;TABLE class="panel" border="0" 
+                  cellpadding="1" cellspacing="1" align="center" 
+                  width="100%"&gt; <BR>&lt;TR&gt; <BR>&lt;TD NOWRAP 
+                  align="center"&gt; <BR>&lt;A HREF="new.php"&gt;&lt;IMG 
+                  SRC="../../index/pridat.gif" border="0" height="20" 
+                  width="20"&gt;&lt;B&gt; P¯idat novÈ tÈma do diskuze 
+                  &lt;/B&gt;&lt;/A&gt; <BR>&amp;nbsp;&amp;nbsp;&amp;nbsp;&lt;A 
+                  HREF="diskuze.php?show"&gt;&lt;IMG 
+                  SRC="../../index/seznam.gif" border="0" height="20" 
+                  width="20"&gt;&lt;B&gt; Seznam tÈmat &lt;/B&gt;&lt;/A&gt; 
+                  <BR>&lt;/TD&gt; <BR>&lt;/TR&gt; <BR>&lt;/TABLE&gt; 
+                  <BR>&lt;/BODY&gt; <BR>&lt;/HTML&gt; <BR><BR>&lt;? 
+                  <BR>&nbsp;&nbsp;exit; <BR>} <BR>?&gt;</FONT><BR><BR>A to je 
+                  vöechno, ale jeötÏ nesmÌte zapomenout nastavit pr·va adres·¯e, 
+                  ve kterÈm budete mÌt uloûenÈ datovÈ soubory tak, aby v nÏm 
+                  mohlo PHP s tÏmito soubory cokoliv dÏlat (tj. p¯ejmenov·vat, 
+                  vytv·¯et, mazat). Tuto diskuzi si opÏt m˘ûete vyzkouöet v 
+                  provozu na mÈm webu. </P></WS-BODY><BR><BR>
+                  <HR color=#777777 SIZE=1>
+
+                  <TABLE width="100%">
+                    <TBODY>
+                    <TR>
+                      <TD vAlign=top>Autor: <B>Jan Fuchs</B>, <A 
+                        href="http://www.pcsvet.cz/art/author.php?id=70">informace 
+                        o autorovi</A><BR>Rubrika: <B><A 
+                        href="http://www.pcsvet.cz/php/">Programov·nÌ - 
+                        PHP</A></B><BR>»ten·¯˘: <B>8586</B> &nbsp; &nbsp; 
+                        ZobrazenÌ: <B>10470</B><BR><BR><B>SouvisejÌcÌ 
+                        Ël·nky:</B><BR>ï <A 
+                        title="V tÈto druhÈ a z·roveÚ poslednÌ Ë·sti si uk·ûeme, jak diskuzi spravovat." 
+                        href="http://www.pcsvet.cz/art/article.php?id=553">PHP - 
+                        diskuze (2.)</A><BR><BR></TD>
+                      <TD align=middle>Jak hodnotÌte tento Ël·nek?<BR>
+                        <FORM action=article.php?id=552 method=post><INPUT class=tlac type=submit value=1 name=znamka> 
+<INPUT class=tlac type=submit value=2 name=znamka> <INPUT class=tlac type=submit value=3 name=znamka> <INPUT class=tlac type=submit value=4 name=znamka> <INPUT class=tlac type=submit value=5 name=znamka><BR>lepöÌ 
+                        &lt;--&gt;horöÌ</FORM></TD></TR></TBODY></TABLE>N·zory: poËet: 
+                  <B>40</B> &nbsp; poslednÌ: 26.07.2006 20:27:21 &nbsp; <A 
+                  class=autor 
+                  href="http://www.pcsvet.cz/forum/forum.php?art=552">ËÌst 
+                  n·zory</A> &nbsp; <A class=autor 
+                  href="http://www.pcsvet.cz/forum/forum-add.php?art=552">p¯idat 
+                  n·zor</A> &nbsp; <A 
+                  href="http://www.pcsvet.cz/art/article_print.php?id=552">vytisknout</A>
+                  <P></P><A name=inquiry></A>
+                  <HR color=white SIZE=1>
+
+                  <DIV align=center>
+                  <CENTER>
+                  <TABLE class=ftable>
+                    <TBODY>
+                    <TR>
+                      <TD align=left><B><I>Nadpis</I></B></TD>
+                      <TD align=left><B><I>Autor</I></B></TD>
+                      <TD align=left><B><I>Datum</I></B></TD></TR>
+                    <TR>
+                      <TD align=left><B>p¯Ìklad</B></TD>
+                      <TD align=left><A 
+                        href="mailto:martan@centrum.cz">Martin</A></TD>
+                      <TD align=left>10.07.2001 07:59:04</TD></TR>
+                    <TR>
+                      <TD align=left>&nbsp; Re: p¯Ìklad</TD>
+                      <TD align=left>nii</TD>
+                      <TD align=left>28.09.2005 11:52:42</TD></TR>
+                    <TR>
+                      <TD align=left><B>NechybÌ tam n·hodou jeden 
+                      soubor?</B></TD>
+                      <TD align=left><A 
+                        href="mailto:jan.bazil@worldonline.cz">Honza</A></TD>
+                      <TD align=left>15.07.2001 18:36:53</TD></TR>
+                    <TR>
+                      <TD align=left><B>Re: NechybÌ tam n·hodou jeden 
+                        soubor?</B></TD>
+                      <TD align=left><A href="mailto:jan.fuchs@atlas.cz">Jan 
+                        Fuchs</A></TD>
+                      <TD align=left>15.07.2001 18:58:28</TD></TR>
+                    <TR>
+                      <TD align=left>&nbsp; Re: NechybÌ tam n·hodou jeden 
+                        soubor?</TD>
+                      <TD align=left>niki</TD>
+                      <TD align=left>27.09.2005 20:53:12</TD></TR>
+                    <TR>
+                      <TD align=left><B>chyba</B></TD>
+                      <TD align=left><A 
+                        href="mailto:martin.kopecky@matrixpro.cz">MarKo</A></TD>
+                      <TD align=left>02.08.2001 10:44:14</TD></TR>
+                    <TR>
+                      <TD align=left>&nbsp; Re: chyba</TD>
+                      <TD align=left>niki</TD>
+                      <TD align=left>27.09.2005 20:51:48</TD></TR>
+                    <TR>
+                      <TD align=left><B>Re: chyba</B></TD>
+                      <TD align=left><A href="mailto:jan.fuchs@atlas.cz">Jan 
+                        Fuchs</A></TD>
+                      <TD align=left>02.08.2001 19:57:27</TD></TR>
+                    <TR>
+                      <TD align=left><B>ChybnÈ ËÌslov·nÌ</B></TD>
+                      <TD align=left><A 
+                        href="mailto:jan.bazil@worldonline.cz">Honza B</A></TD>
+                      <TD align=left>03.08.2001 19:46:22</TD></TR>
+                    <TR>
+                      <TD align=left><B>Proste nebeha! :-(</B></TD>
+                      <TD align=left><A 
+                        href="mailto:admin@zsuprkova.pvtnet.cz">RaV</A></TD>
+                      <TD align=left>07.09.2001 13:21:13</TD></TR>
+                    <TR>
+                      <TD align=left><B>wet</B></TD>
+                      <TD align=left><A 
+                      href="mailto:mikal@e-mail.cz">ert</A></TD>
+                      <TD align=left>23.06.2003 19:33:51</TD></TR>
+                    <TR>
+                      <TD align=left><B>hjgh</B></TD>
+                      <TD align=left><A href="mailto:hjg@ddd.bb">ghjgh</A></TD>
+                      <TD align=left>15.09.2003 16:10:58</TD></TR>
+                    <TR>
+                      <TD align=left><B>dotaz</B></TD>
+                      <TD align=left><A 
+                        href="mailto:deus-ex-machina@seznam.cz">deus-ex-machina</A></TD>
+                      <TD align=left>31.10.2003 12:01:18</TD></TR>
+                    <TR>
+                      <TD align=left><B>Vyborna vec</B></TD>
+                      <TD align=left><A 
+                      href="mailto:m.sk8@seznam.cz">Pifik</A></TD>
+                      <TD align=left>13.11.2003 11:27:11</TD></TR>
+                    <TR>
+                      <TD align=left><B>Nejde to!!!!</B></TD>
+                      <TD align=left><A 
+                        href="mailto:lukas.janku@centrum.cz">DJLJ</A></TD>
+                      <TD align=left>23.12.2003 22:25:36</TD></TR>
+                    <TR>
+                      <TD align=left><B>TakÈ mi to nefunguje</B></TD>
+                      <TD align=left><A href="mailto:hora@inform.cz">Tom·ö 
+                        Hora</A></TD>
+                      <TD align=left>27.01.2004 14:13:15</TD></TR>
+                    <TR>
+                      <TD align=left>&nbsp; Re: TakÈ mi to nefunguje</TD>
+                      <TD align=left><A 
+                        href="mailto:fuky@sunstel.asu.cas.cz">Jan Fuchs</A></TD>
+                      <TD align=left>17.08.2005 18:37:50</TD></TR>
+                    <TR>
+                      <TD align=left><B>V˝pis z datab·ze</B></TD>
+                      <TD align=left><A href="mailto:pekriz@volny.cz">Petr 
+                        K</A></TD>
+                      <TD align=left>02.02.2004 17:46:44</TD></TR>
+                    <TR>
+                      <TD align=left><B>3g5t</B></TD>
+                      <TD align=left><A 
+href="mailto:ggg@dew.com">g55555</A></TD>
+                      <TD align=left>07.02.2004 12:10:03</TD></TR>
+                    <TR>
+                      <TD align=left><B>Diskuze</B></TD>
+                      <TD align=left><A 
+                        href="mailto:kovac@mbox.catr.cz">fuk</A></TD>
+                      <TD align=left>22.02.2004 16:32:16</TD></TR>
+                    <TR>
+                      <TD align=left><B>aaa</B></TD>
+                      <TD align=left>aaa</TD>
+                      <TD align=left>26.02.2004 11:26:48</TD></TR>
+                    <TR>
+                      <TD align=left><B>haha</B></TD>
+                      <TD align=left><A 
+href="mailto:haha@haha.ha">hahaa</A></TD>
+                      <TD align=left>05.04.2004 12:16:33</TD></TR>
+                    <TR>
+                      <TD align=left><B>je to na hovno!</B></TD>
+                      <TD align=left><A 
+                        href="mailto:honza.limburak@seznam.cz">honza</A></TD>
+                      <TD align=left>23.04.2004 16:41:43</TD></TR>
+                    <TR>
+                      <TD align=left><B>PHP Diskuze</B></TD>
+                      <TD align=left><A 
+                        href="mailto:tachys@tachys.wz.cz">tachys</A></TD>
+                      <TD align=left>13.07.2004 20:41:15</TD></TR>
+                    <TR>
+                      <TD align=left><B>skuska</B></TD>
+                      <TD align=left><A 
+                      href="mailto:krokus@szm.sk">herbert</A></TD>
+                      <TD align=left>10.08.2004 19:16:36</TD></TR>
+                    <TR>
+                      <TD align=left><B>co to asi udela</B></TD>
+                      <TD align=left>zdenda</TD>
+                      <TD align=left>15.10.2004 13:28:55</TD></TR>
+                    <TR>
+                      <TD align=left><B>noivy</B></TD>
+                      <TD align=left><A 
+                      href="mailto:namam@seznam.cz">tom</A></TD>
+                      <TD align=left>22.10.2004 18:43:51</TD></TR>
+                    <TR>
+                      <TD align=left><B>Jede to :-)</B></TD>
+                      <TD align=left><A 
+                        href="mailto:kajdaq@centrum.cz">Kajda</A></TD>
+                      <TD align=left>19.01.2005 17:19:20</TD></TR>
+                    <TR>
+                      <TD align=left><B>VylepöenÌ... ???</B></TD>
+                      <TD align=left><A 
+                      href="mailto:pekriz@volny.cz">-PFK-</A></TD>
+                      <TD align=left>31.01.2005 17:32:20</TD></TR>
+                    <TR>
+                      <TD align=left><B>xcv</B></TD>
+                      <TD align=left>c</TD>
+                      <TD align=left>28.02.2005 19:04:36</TD></TR>
+                    <TR>
+                      <TD align=left><B>dfsdfsd</B></TD>
+                      <TD align=left>sdf</TD>
+                      <TD align=left>08.03.2005 21:22:19</TD></TR>
+                    <TR>
+                      <TD align=left><B>ProsÌm pomoc...</B></TD>
+                      <TD align=left><A 
+                        href="mailto:OndrejSnehota@seznam.cz">SnÏho</A></TD>
+                      <TD align=left>31.05.2005 23:04:18</TD></TR>
+                    <TR>
+                      <TD align=left><B>NezobrazujÌ se mi p¯idanÈ 
+                      p¯ÌspÏvky</B></TD>
+                      <TD align=left><A 
+                      href="mailto:rosi@avemar.cz">Rosi</A></TD>
+                      <TD align=left>15.08.2005 11:40:06</TD></TR>
+                    <TR>
+                      <TD align=left><B>vdfv</B></TD>
+                      <TD align=left><A 
+                      href="mailto:klokasd@asd.sk">fddf</A></TD>
+                      <TD align=left>01.09.2005 13:00:39</TD></TR>
+                    <TR>
+                      <TD align=left><B>PlÌÌÌÌs helm mÌÌÌÌÌÌÌÌ!!!!</B></TD>
+                      <TD align=left><A 
+                        href="mailto:labilie@seznam.cz">-Labil-</A></TD>
+                      <TD align=left>07.09.2005 20:41:20</TD></TR>
+                    <TR>
+                      <TD align=left><B>Diskuze PHP -prostÏ to nejde</B></TD>
+                      <TD align=left><A href="mailto:imaxx@centrum.cz">Michal 
+                        Nov·k</A></TD>
+                      <TD align=left>11.09.2005 15:39:19</TD></TR>
+                    <TR>
+                      <TD align=left><B>proste to nejde!!</B></TD>
+                      <TD align=left>nii</TD>
+                      <TD align=left>28.09.2005 11:51:41</TD></TR>
+                    <TR>
+                      <TD align=left><B>Co tohle</B></TD>
+                      <TD align=left>Pavel</TD>
+                      <TD align=left>27.03.2006 13:54:49</TD></TR>
+                    <TR>
+                      <TD align=left><B>ÿekl bych</B></TD>
+                      <TD align=left>Pavel</TD>
+                      <TD align=left>27.03.2006 13:56:15</TD></TR>
+                    <TR>
+                      <TD align=left><B>ZKOUäKA</B></TD>
+                      <TD align=left>bari</TD>
+                      <TD align=left>26.07.2006 
+                  20:27:21</TD></TR></TBODY></TABLE></CENTER></DIV>
+                  <FORM action=/forum/forum-add.php?art=552&amp;reply=&amp;tema= 
+                  method=post>
+                  <DIV align=center>
+                  <TABLE class=ftable cellSpacing=0 cellPadding=2 border=0>
+                    <TBODY>
+                    <TR>
+                      <TD class=ftitle colSpan=2>Nov˝ p¯ÌspÏvek</TD></TR>
+                    <TR>
+                      <TD class=fname align=right><B>VÏc:</B></TD>
+                      <TD class=fvalue align=left><INPUT size=55 
+                      name=Nadpis></TD></TR>
+                    <TR>
+                      <TD class=fname align=right><B>JmÈno:</B></TD>
+                      <TD class=fvalue align=left><INPUT size=30 
+                        name=Autor_Jmeno></TD></TR>
+                    <TR>
+                      <TD class=fname align=right><B>E-mail:</B></TD>
+                      <TD class=fvalue align=left><INPUT 
+                    name=Autor_Email></TD></TR>
+                    <TR>
+                      <TD class=fvalue align=left colSpan=2><TEXTAREA name=Obsah rows=10 cols=70></TEXTAREA><BR>- 
+                        nepouûÌvejte HTML k form·tov·nÌ textu p¯ÌspÏvku<BR>- 
+                        nepouûÌvejte A HREF= pro odkazy, aktivnÌ budou 
+                        automaticky<BR>- od¯·dkov·nÌ prov·dÏjte kl·vesou ENTER, 
+                        nikoliv tagem &lt;br&gt;</TD></TR>
+                    <TR>
+                      <TD class=fvalue align=left colSpan=2><INPUT 
+                        class=ftable 
+                        style="BORDER-RIGHT: medium none; BORDER-TOP: medium none; BORDER-LEFT: medium none; BORDER-BOTTOM: medium none" 
+                        type=checkbox value=1 name=MailReply>zasÌlat odpovÏdi na 
+                        m˘j e-mail </TD></TR>
+                    <TR>
+                      <TD align=middle colSpan=2><INPUT class=fsubmit type=submit value="P¯idat p¯ÌspÏvek"></TD></TR></TBODY></TABLE></DIV><INPUT 
+                  type=hidden value=1 name=filled> 
+                  </FORM><BR><BR><BR><BR><BR><BR><BR><BR>
+                  <DIV align=center>
+                  <CENTER>
+                  <TABLE border=0>
+                    <TBODY>
+                    <TR>
+                      <TD><IFRAME name=rekl2 marginWidth=1 marginHeight=1 
+                        src="PHP - diskuze (1_) -- PC SvÏt_soubory/2.htm" 
+                        frameBorder=0 width=472 scrolling=no 
+                      height=62></IFRAME></TD></TR></TBODY></TABLE></CENTER></DIV><BR><BR><BR>
+                  <CENTER><SPAN style="FONT-SIZE: 9px">(c) P.E.S. consulting, 
+                  s.r.o. 2000-2005. Provozovatel nezodpovÌd· za obsah a p˘vod 
+                  Ël·nk˘ a diskuznÌch p¯ÌspÏvk˘, odpovÏdnost nesou jednotlivÌ 
+                  redakto¯i a auto¯i. Informace o PC SvÏtÏ <A 
+                  href="http://www.pcsvet.cz/informace.php">naleznete 
+                  zde</A></SPAN></CENTER></TD>
+                <TD width=10 bgColor=white></TD>
+                <TD vAlign=top align=right width=160 bgColor=white><BR>
+                  <CENTER>
+                  <CENTER><A href="http://www.forpsi.com/" target=_blank><IMG 
+                  src="PHP - diskuze (1_) -- PC SvÏt_soubory/125x125.gif" 
+                  border=0></A></CENTER>
+                  <TABLE cellSpacing=0 cellPadding=0 border=0>
+                    <TBODY>
+                    <TR>
+                      <TD width=180 colSpan=3 height=6></TD></TR>
+                    <TR>
+                      <TD vAlign=top align=left width=15><IMG alt="" 
+                        src="PHP - diskuze (1_) -- PC SvÏt_soubory/7-tab-1.gif"></TD>
+                      <TD vAlign=bottom align=left width=165 
+                      background="PHP - diskuze (1_) -- PC SvÏt_soubory/7-tab-2.gif"><FONT 
+                        class=tab-nadpis>Anketa </FONT></TD></TR></TBODY></TABLE>
+                  <TABLE cellSpacing=0 cellPadding=0 border=0>
+                    <TBODY>
+                    <TR>
+                      <TD vAlign=top align=left width=5><IMG alt="" 
+                        src="PHP - diskuze (1_) -- PC SvÏt_soubory/7-tab-3.gif"></TD>
+                      <TD align=left width=175>
+                        <TABLE class=tab cellSpacing=0 cellPadding=3 border=0>
+                          <TBODY>
+                          <TR>
+                            <TD 
+                    bgColor=white></TD></TR></TBODY></TABLE></TD></TR></TBODY></TABLE>
+                  <TABLE cellSpacing=0 cellPadding=0 border=0>
+                    <TBODY>
+                    <TR>
+                      <TD width=180 colSpan=3 height=6></TD></TR>
+                    <TR>
+                      <TD vAlign=top align=left width=15><IMG alt="" 
+                        src="PHP - diskuze (1_) -- PC SvÏt_soubory/7-tab-1.gif"></TD>
+                      <TD vAlign=bottom align=left width=165 
+                      background="PHP - diskuze (1_) -- PC SvÏt_soubory/7-tab-2.gif"><FONT 
+                        class=tab-nadpis>Novinky e-mailem 
+                  </FONT></TD></TR></TBODY></TABLE>
+                  <TABLE cellSpacing=0 cellPadding=0 border=0>
+                    <TBODY>
+                    <TR>
+                      <TD vAlign=top align=left width=5><IMG alt="" 
+                        src="PHP - diskuze (1_) -- PC SvÏt_soubory/7-tab-3.gif"></TD>
+                      <TD align=left width=175>
+                        <TABLE class=tab cellSpacing=0 cellPadding=3 border=0>
+                          <TBODY>
+                          <TR>
+                            <TD bgColor=white>
+                              <FORM action=/user/register.php method=get><INPUT 
+                              onclick="this.value='';" size=16 
+                              value=vas@email.cz name=email><INPUT type=submit value=ok> ZasÌl·nÌ 
+                              dennÌho nebo t˝dennÌho p¯ehledu nov˝ch Ël·nk˘ 
+                              </FORM></TD></TR></TBODY></TABLE></TD></TR></TBODY></TABLE>
+                  <HR SIZE=1>
+                  <IFRAME name=rekl2 align=center marginWidth=1 marginHeight=1 
+                  src="PHP - diskuze (1_) -- PC SvÏt_soubory/3.htm" 
+                  frameBorder=0 width=127 scrolling=no height=127></IFRAME>
+                  <HR SIZE=1>
+                  <BR>
+                  <CENTER>
+                  <CENTER><A href="http://www.forpsi.com/" target=_blank><IMG 
+                  src="PHP - diskuze (1_) -- PC SvÏt_soubory/125X125_evrop_dom_a_web.gif" 
+                  border=0></A></CENTER><BR><BR><BR><BR><BR>
+                  <CENTER></CENTER></CENTER></CENTER></TD></TR></TBODY></TABLE></TD></TR></TBODY></TABLE>
+      <TABLE cellSpacing=0 cellPadding=0 width="100%" border=0>
+        <TBODY>
+        <TR>
+          <TD width=15 
+          background="PHP - diskuze (1_) -- PC SvÏt_soubory/7.gif"></TD>
+          <TD width=150 bgColor=white></TD>
+          <TD width=68><IMG alt="" 
+            src="PHP - diskuze (1_) -- PC SvÏt_soubory/7-pat-1.gif"></TD>
+          <TD vAlign=bottom width=360 
+          background="PHP - diskuze (1_) -- PC SvÏt_soubory/7-pat-2.gif" 
+          bgColor=white>© 2000-2004 pcsvÏt.cz / <A 
+            href="mailto:pcsvet@pcsvet.cz">pcsvet@pcsvet.cz</A> / ISSN 
+          1213-6042</TD>
+          <TD bgColor=white><A 
+            onmouseover="topoff.src=topon.src; window.status='nahoru';return true;" 
+            onmouseout="topoff.src='/images/7-pat-top-off.gif'; window.status='pcsvÏt';return true;" 
+            href="http://www.pcsvet.cz/art/article.php?id=552#top"><IMG alt="" 
+            src="PHP - diskuze (1_) -- PC SvÏt_soubory/7-pat-top-off.gif" 
+            border=0 name=topoff></A></TD></TR></TBODY></TABLE></TD>
+    <TD vAlign=top width=13 
+    background="PHP - diskuze (1_) -- PC SvÏt_soubory/8-1.gif"><IMG alt="" 
+      src="PHP - diskuze (1_) -- PC SvÏt_soubory/8-2.gif"></TD></TR></TBODY></TABLE><!-- PoËÌtadlo.cz  poËÌtadlo:527  uûivatel:414 -->
+<SCRIPT language=JavaScript type=text/javascript>
+<!--
+Tmp=Math.floor(1000000 * Math.random());
+//document.write("<scr" + "ipt src=\"http://cnt1.pocitadlo.cz/counter.php?poc=527&ref="+escape(top.document.referrer)+"&depth="+screen.colorDepth+"&width="+screen.width+"&height="+screen.height+"&tmp="+Tmp+"\" language=\"JavaScript\" type=\"text/javascript\"></scr" + "ipt>");
+// -->
+</SCRIPT>
+<NOSCRIPT><IMG height=1 alt="" src="" width=1 border=0> </NOSCRIPT><!-- PoËÌtadlo.cz konec --><!-- NAVRCHOLU.cz -->
+<SCRIPT language=JavaScript type=text/javascript>
+<!--
+pxDepth = screen.pixelDepth;
+if (!(pxDepth > 0))
+	pxDepth = screen.colorDepth;
+if (!(pxDepth > 0))
+	pxDepth = 0; 
+document.write("<img src=\"http://hit.navrcholu.cz/hit?id=3548;n=1;screenx=" + screen.width + ";screeny=" + screen.height + ";cdepth=" + pxDepth + ";ref=" + escape(top.document.referrer) + "\" width=\"1\" height=\"1\" alt=\"\">");
+// -->
+</SCRIPT>
+<NOSCRIPT><IMG height=1 alt="" src="" width=1 border=0> </NOSCRIPT><!-- NAVRCHOLU.cz - konec --></BODY></HTML>

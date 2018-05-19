@@ -1,0 +1,108 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>Novy vychozi PHP layout: Zdrojový soubor /var/www/phplayout/modules/static_menu/menu.php</title>
+<link href="doxygen.css" rel="stylesheet" type="text/css">
+<link href="tabs.css" rel="stylesheet" type="text/css">
+</head><body>
+<!-- Generováno programem Doxygen 1.5.5 -->
+<div class="navigation" id="top">
+  <div class="tabs">
+    <ul>
+      <li><a href="index.html"><span>Hlavní&nbsp;stránka</span></a></li>
+      <li><a href="annotated.html"><span>Třídy</span></a></li>
+      <li class="current"><a href="files.html"><span>Soubory</span></a></li>
+    </ul>
+  </div>
+<h1>/var/www/phplayout/modules/static_menu/menu.php</h1><a href="menu_8php.html">Zobrazit dokumentaci tohoto souboru.</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 &lt;?php
+<a name="l00002"></a>00002 
+<a name="l00007"></a><a class="code" href="classMenu.html">00007</a> <span class="keyword">class </span><a class="code" href="classMenu.html">Menu</a>
+<a name="l00008"></a>00008 {
+<a name="l00009"></a><a class="code" href="classMenu.html#3438149a20468f56fb68ee5c5e01be84">00009</a>   <span class="keyword">public</span> <a class="code" href="classMenu.html#3438149a20468f56fb68ee5c5e01be84">$var</a>;
+<a name="l00010"></a>00010 
+<a name="l00018"></a><a class="code" href="classMenu.html#f1ff29ec0e27bf6f6f0417d1ac96ce3f">00018</a>   <span class="keyword">private</span> <a class="code" href="classMenu.html#f1ff29ec0e27bf6f6f0417d1ac96ce3f">$Toznacovat</a> = array (<span class="stringliteral">"oz_none"</span>,
+<a name="l00019"></a>00019                               <span class="stringliteral">"oz_class"</span>,
+<a name="l00020"></a>00020                               <span class="stringliteral">"oz_odkaz"</span>,
+<a name="l00021"></a>00021                               <span class="stringliteral">"oz_id"</span>);
+<a name="l00022"></a>00022 
+<a name="l00026"></a><a class="code" href="classMenu.html#8ecf3ccb89882a4b4d74a708e9248bf2">00026</a>   <span class="keyword">private</span> <a class="code" href="classMenu.html#8ecf3ccb89882a4b4d74a708e9248bf2">$oznacovat</a> = <span class="stringliteral">"oz_none"</span>;
+<a name="l00030"></a><a class="code" href="classMenu.html#b7110fa53447ae1c9f7b40361623def2">00030</a>   <span class="keyword">private</span> <a class="code" href="classMenu.html#b7110fa53447ae1c9f7b40361623def2">$oznac_odkazu_L</a> = <span class="stringliteral">"["</span>;
+<a name="l00034"></a><a class="code" href="classMenu.html#7f2c7f92b50ac41703fcfd882bf38c23">00034</a>   <span class="keyword">private</span> <a class="code" href="classMenu.html#7f2c7f92b50ac41703fcfd882bf38c23">$oznac_odkazu_P</a> = <span class="stringliteral">"]"</span>;
+<a name="l00038"></a><a class="code" href="classMenu.html#7b61d88595193070736f8e28f9789688">00038</a>   <span class="keyword">private</span> <a class="code" href="classMenu.html#7b61d88595193070736f8e28f9789688">$oznac_class</a> = <span class="stringliteral">"_neco"</span>;
+<a name="l00042"></a><a class="code" href="classMenu.html#12355f6d2d02e2163225798f641df8e3">00042</a>   <span class="keyword">private</span> <a class="code" href="classMenu.html#12355f6d2d02e2163225798f641df8e3">$oznac_id</a> = <span class="stringliteral">"_neco2"</span>;
+<a name="l00043"></a>00043 
+<a name="l00053"></a><a class="code" href="classMenu.html#6c4990f07ec52031bef33e9f05f1b9c8">00053</a>   <span class="keyword">private</span> <a class="code" href="classMenu.html#6c4990f07ec52031bef33e9f05f1b9c8">$menu</a> = array(array(<span class="stringliteral">"main_href"</span> =&gt; <span class="stringliteral">"hu1"</span>, <span class="comment">//uvedeni</span>
+<a name="l00054"></a>00054                               <span class="stringliteral">"href"</span> =&gt; <span class="stringliteral">""</span>, <span class="comment">//prvni sub odkaz bez &amp;AMP</span>
+<a name="l00055"></a>00055                               <span class="stringliteral">"odkaz"</span> =&gt; <span class="stringliteral">"odkaz 1"</span>,
+<a name="l00056"></a>00056                               <span class="stringliteral">"title"</span> =&gt; <span class="stringliteral">""</span>,
+<a name="l00057"></a>00057                               <span class="stringliteral">"id"</span> =&gt; <span class="stringliteral">""</span>,
+<a name="l00058"></a>00058                               <span class="stringliteral">"class"</span> =&gt; <span class="stringliteral">""</span>,
+<a name="l00059"></a>00059                               <span class="stringliteral">"akce"</span> =&gt; <span class="stringliteral">""</span>),
+<a name="l00060"></a>00060 
+<a name="l00061"></a>00061                         array(<span class="stringliteral">"main_href"</span> =&gt; <span class="stringliteral">"hu2"</span>,
+<a name="l00062"></a>00062                               <span class="stringliteral">"href"</span> =&gt; <span class="stringliteral">""</span>,
+<a name="l00063"></a>00063                               <span class="stringliteral">"odkaz"</span> =&gt; <span class="stringliteral">"odkaz 2"</span>,
+<a name="l00064"></a>00064                               <span class="stringliteral">"title"</span> =&gt; <span class="stringliteral">""</span>,
+<a name="l00065"></a>00065                               <span class="stringliteral">"id"</span> =&gt; <span class="stringliteral">""</span>,
+<a name="l00066"></a>00066                               <span class="stringliteral">"class"</span> =&gt; <span class="stringliteral">""</span>,
+<a name="l00067"></a>00067                               <span class="stringliteral">"akce"</span> =&gt; <span class="stringliteral">""</span>),
+<a name="l00068"></a>00068 
+<a name="l00069"></a>00069                         array(<span class="stringliteral">"main_href"</span> =&gt; <span class="stringliteral">"hu3"</span>,
+<a name="l00070"></a>00070                               <span class="stringliteral">"href"</span> =&gt; <span class="stringliteral">""</span>,
+<a name="l00071"></a>00071                               <span class="stringliteral">"odkaz"</span> =&gt; <span class="stringliteral">"odkaz 3"</span>,
+<a name="l00072"></a>00072                               <span class="stringliteral">"title"</span> =&gt; <span class="stringliteral">""</span>,
+<a name="l00073"></a>00073                               <span class="stringliteral">"id"</span> =&gt; <span class="stringliteral">""</span>,
+<a name="l00074"></a>00074                               <span class="stringliteral">"class"</span> =&gt; <span class="stringliteral">""</span>,
+<a name="l00075"></a>00075                               <span class="stringliteral">"akce"</span> =&gt; <span class="stringliteral">""</span>),
+<a name="l00076"></a>00076 
+<a name="l00077"></a>00077                         array(<span class="stringliteral">"main_href"</span> =&gt; <span class="stringliteral">"hu4"</span>,
+<a name="l00078"></a>00078                               <span class="stringliteral">"href"</span> =&gt; <span class="stringliteral">""</span>,
+<a name="l00079"></a>00079                               <span class="stringliteral">"odkaz"</span> =&gt; <span class="stringliteral">"odkaz 4"</span>,
+<a name="l00080"></a>00080                               <span class="stringliteral">"title"</span> =&gt; <span class="stringliteral">""</span>,
+<a name="l00081"></a>00081                               <span class="stringliteral">"id"</span> =&gt; <span class="stringliteral">""</span>,
+<a name="l00082"></a>00082                               <span class="stringliteral">"class"</span> =&gt; <span class="stringliteral">""</span>,
+<a name="l00083"></a>00083                               <span class="stringliteral">"akce"</span> =&gt; <span class="stringliteral">""</span>),
+<a name="l00084"></a>00084 
+<a name="l00085"></a>00085                         array(<span class="stringliteral">"main_href"</span> =&gt; <span class="stringliteral">""</span>,
+<a name="l00086"></a>00086                               <span class="stringliteral">"href"</span> =&gt; <span class="stringliteral">""</span>,
+<a name="l00087"></a>00087                               <span class="stringliteral">"odkaz"</span> =&gt; <span class="stringliteral">"uvod?"</span>,
+<a name="l00088"></a>00088                               <span class="stringliteral">"title"</span> =&gt; <span class="stringliteral">""</span>,
+<a name="l00089"></a>00089                               <span class="stringliteral">"id"</span> =&gt; <span class="stringliteral">""</span>,
+<a name="l00090"></a>00090                               <span class="stringliteral">"class"</span> =&gt; <span class="stringliteral">""</span>,
+<a name="l00091"></a>00091                               <span class="stringliteral">"akce"</span> =&gt; <span class="stringliteral">""</span>),
+<a name="l00092"></a>00092                         );
+<a name="l00093"></a>00093 
+<a name="l00101"></a><a class="code" href="classMenu.html#f895dfe9aff81ae6568a48d2fdc3cb64">00101</a>   <span class="keyword">public</span> function <a class="code" href="classMenu.html#f895dfe9aff81ae6568a48d2fdc3cb64">__construct</a>(&amp;<a class="code" href="classMenu.html#3438149a20468f56fb68ee5c5e01be84">$var</a>, $index) <span class="comment">//konstruktor</span>
+<a name="l00102"></a>00102   {
+<a name="l00103"></a>00103     $this-&gt;var = <a class="code" href="classMenu.html#3438149a20468f56fb68ee5c5e01be84">$var</a>;
+<a name="l00104"></a>00104   }
+<a name="l00105"></a>00105 
+<a name="l00112"></a><a class="code" href="classMenu.html#d466dd83355124a6ed958430450bfe94">00112</a>   <span class="keyword">public</span> function <a class="code" href="classMenu.html#d466dd83355124a6ed958430450bfe94">Menu</a>()
+<a name="l00113"></a>00113   {
+<a name="l00114"></a>00114     <span class="keywordflow">for</span> ($i = 0; $i &lt; count($this-&gt;menu); $i++)
+<a name="l00115"></a>00115     {
+<a name="l00116"></a>00116       $ozn_odkaz_l = ($this-&gt;oznacovat == <span class="stringliteral">"oz_odkaz"</span> &amp;&amp; $this-&gt;var-&gt;kam == $this-&gt;menu[$i][<span class="stringliteral">"main_href"</span>] ? $this-&gt;oznac_odkazu_L : <span class="stringliteral">""</span>);
+<a name="l00117"></a>00117       $ozn_odkaz_p = ($this-&gt;oznacovat == <span class="stringliteral">"oz_odkaz"</span> &amp;&amp; $this-&gt;var-&gt;kam == $this-&gt;menu[$i][<span class="stringliteral">"main_href"</span>] ? $this-&gt;oznac_odkazu_P : <span class="stringliteral">""</span>);
+<a name="l00118"></a>00118       $ozn_class = ($this-&gt;oznacovat == <span class="stringliteral">"oz_class"</span> &amp;&amp; $this-&gt;var-&gt;kam == $this-&gt;menu[$i][<span class="stringliteral">"main_href"</span>] ? $this-&gt;oznac_class : <span class="stringliteral">""</span>);
+<a name="l00119"></a>00119       $ozn_id = ($this-&gt;oznacovat == <span class="stringliteral">"oz_id"</span> &amp;&amp; $this-&gt;var-&gt;kam == $this-&gt;menu[$i][<span class="stringliteral">"main_href"</span>] ? $this-&gt;oznac_id : <span class="stringliteral">""</span>);
+<a name="l00120"></a>00120 
+<a name="l00121"></a>00121       $mainhref = (!Empty($this-&gt;menu[$i][<span class="stringliteral">"main_href"</span>]) ? <span class="stringliteral">"?{$this-&gt;var-&gt;get_kam_menu}={$this-&gt;menu[$i]["</span>main_href<span class="stringliteral">"]}"</span> : <span class="stringliteral">"./"</span>);
+<a name="l00122"></a>00122       $href = (!Empty($this-&gt;menu[$i][<span class="stringliteral">"href"</span>]) ? <span class="stringliteral">"&amp;amp;{$this-&gt;menu[$i]["</span>href<span class="stringliteral">"]}"</span> : <span class="stringliteral">""</span>);
+<a name="l00123"></a>00123       $title = (!Empty($this-&gt;menu[$i][<span class="stringliteral">"title"</span>]) ? <span class="stringliteral">" title=\"{$this-&gt;menu[$i]["</span>title<span class="stringliteral">"]}\""</span> : <span class="stringliteral">""</span>);
+<a name="l00124"></a>00124       $id = (!Empty($this-&gt;menu[$i][<span class="stringliteral">"id"</span>]) ? <span class="stringliteral">" id=\"{$this-&gt;menu[$i]["</span><span class="keywordtype">id</span><span class="stringliteral">"]}{$ozn_id}\""</span> : <span class="stringliteral">""</span>);
+<a name="l00125"></a>00125       $class = (!Empty($this-&gt;menu[$i][<span class="stringliteral">"class"</span>]) ? <span class="stringliteral">" class=\"{$this-&gt;menu[$i]["</span><span class="keyword">class</span><span class="stringliteral">"]}{$ozn_class}\""</span> : <span class="stringliteral">""</span>);
+<a name="l00126"></a>00126       $akce = (!Empty($this-&gt;menu[$i][<span class="stringliteral">"akce"</span>]) ? <span class="stringliteral">" {$this-&gt;menu[$i]["</span>akce<span class="stringliteral">"]}"</span> : <span class="stringliteral">""</span>);
+<a name="l00127"></a>00127 
+<a name="l00128"></a>00128       <a class="code" href="hu1_8php.html#e241cf0159803673d118f68d99e6342f">$result</a> .=
+<a name="l00129"></a>00129        <span class="stringliteral">"            &lt;a href=\"{$mainhref}{$href}\"{$title}{$id}{$class}{$akce}&gt;{$ozn_odkaz_l}{$this-&gt;menu[$i]["</span>odkaz<span class="stringliteral">"]}{$ozn_odkaz_p}&lt;/a&gt;\n"</span>;
+<a name="l00130"></a>00130     }
+<a name="l00131"></a>00131 
+<a name="l00132"></a>00132     <span class="keywordflow">return</span> <a class="code" href="hu1_8php.html#e241cf0159803673d118f68d99e6342f">$result</a>;
+<a name="l00133"></a>00133   }
+<a name="l00134"></a>00134 }
+<a name="l00135"></a>00135 ?&gt;
+</pre></div></div>
+<hr size="1"><address style="text-align: right;"><small>Generováno Tue Feb 17 22:50:25 2009 pro projekt Novy vychozi PHP layout programem&nbsp;
+<a href="http://www.doxygen.org/index.html">
+<img src="doxygen.png" alt="doxygen" align="middle" border="0"></a> 1.5.5 </small></address>
+</body>
+</html>

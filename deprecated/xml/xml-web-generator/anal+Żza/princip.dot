@@ -1,0 +1,20 @@
+digraph princip {
+    rankdir=LR
+
+    gen		[label="Generátor\n(Ant: build.xml)" shape="box"]
+    xml		[label="Texty v XML"]
+    xhtml	[label="XHTML web"]
+    xslt	[label="XSLT šablony"]
+
+    atom	[label="Atom"]
+    rss		[label="RSS"]
+    sitemap	[label="sitemap.xml"]
+
+    xml -> gen;
+    xslt -> gen;
+
+    gen -> xhtml;
+    gen -> atom;
+    gen -> rss;
+    gen -> sitemap;
+}

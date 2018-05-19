@@ -1,0 +1,29 @@
+#zobrazovani souboru
+Options -Indexes
+
+#error page 400
+ErrorDocument 400 /error_page/400.html
+
+#error page 401
+ErrorDocument 401 /error_page/401.html
+
+#error page 403
+ErrorDocument 403 /error_page/403.html
+
+#error page 404
+ErrorDocument 404 /error_page/404.html
+
+#error page 500
+ErrorDocument 500 /error_page/500.html
+
+#error page 503
+ErrorDocument 503 /error_page/503.html
+
+#zapinani rewrite
+RewriteEngine on
+
+#nasmerovani korenu - zapinat jen na serveru!!!!
+#RewriteBase /
+
+RewriteRule ^([a-zA-Z0-9-\_]+)/?$ index.php?action=$1 [L]
+

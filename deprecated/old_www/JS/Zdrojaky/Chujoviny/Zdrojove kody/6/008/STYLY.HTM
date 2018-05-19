@@ -1,0 +1,46 @@
+<HTML>
+  <HEAD>
+    <TITLE>Styly podle prohlížeèe</TITLE>
+    <SCRIPT Language="javascript">
+    <!--
+      // Zjištìní typu prohlížeèe a vložení odkazu
+      // na pøíslušný soubor s definicí stylù
+
+      // MSIE 4
+      if (document.all && !document.getElementById)
+        document.write('<LINK Rel="stylesheet" Href="ie4.css" '
+          + 'Type="text/css">');
+
+      // MSIE 5
+      else if (document.all && document.getElementById)
+        document.write('<LINK Rel="stylesheet" Href="ie5.css" '
+          + 'Type="text/css">');
+
+      // NN 4
+      else if (document.layers)
+        document.write('<LINK Rel="stylesheet" Href="nn4.css" '
+          + 'Type="text/css">');
+
+      // NN 6
+      else if ((document.getElementById && !document.all))
+        document.write('<LINK Rel="stylesheet" Href="nn6.css" '
+          + 'Type="text/css">');
+
+      // Ostatní
+      else
+        document.write('<LINK Rel="stylesheet" Href="other.css" '
+          + 'Type="text/css">');
+    //-->
+    </SCRIPT>
+  </HEAD>
+
+  <BODY>
+    <H1>Toto je nadpis</H1>
+    <P>Toto je text v odstavci. Je trochu delší, ale tak už to
+       v knihách bývá. Myslím, že délka je již dostateèná.<BR>
+       Zkuste si tuto stránku zobrazit v rùzných prohlížeèích.
+       V každém by mìla vypadat úplnì jinak.
+    </P>
+  </BODY>
+</HTML>
+

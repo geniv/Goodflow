@@ -1,0 +1,33 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+
+<html>
+<head>
+	<title>Untitled</title>
+</head>
+
+<body onload="pis()" bgcolor="black" text="yellow">
+<script>
+var pocitani=0
+textik="Ahoj lidi, jaxe máte, já jsem automatickej písaø a musím tu psát poøád dokola jenom TOHLE a už z toho mám depku!!!"
+delka=textik.length
+function pis()
+{
+if (pocitani <=delka) {
+pole.innerText=textik.substring(0,pocitani)
+pocitani++
+setTimeout("pis()",200)
+}
+else {
+pocitani=0
+pis()
+}
+}
+</script>
+<font face="verdana">
+<b>
+<span id="pole" style="position:absolute; left:10cm; top:3cm; width:400px; height:200px; z-index:1"> 
+</b>
+</font>
+</span>
+</body>
+</html>

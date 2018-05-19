@@ -1,0 +1,269 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<HEAD>
+<TITLE> Ultimate Script - powered by Influenzae</TITLE>
+<STYLE>
+A:link { TEXT-DECORATION: none}
+A:hover {COLOR: #ff9A31; TEXT-DECORATION: none}
+A:visited {TEXT-DECORATION: none}
+.blue {COLOR: #00498C; FONT-FAMILY: Arial; FONT-SIZE: 8pt; TEXT-DECORATION: none}
+.blue10 {COLOR: #00498C; FONT-FAMILY: Arial; FONT-SIZE: 10pt; TEXT-DECORATION: none}
+.white10 {COLOR: #ffffff; FONT-FAMILY: Arial; FONT-SIZE: 10pt; LINE-HEIGHT: 16px; TEXT-DECORATION: none}
+</STYLE>
+<SCRIPT language="Javascript1.2">
+
+/*
+	==============================================
+	|				U.L.T.I.M.A.T.E				 |
+	|					v070502					 |
+	==============================================
+	|			Powered by Influenzae			 |
+	|		For Microsoft Internet Explorer	     |
+	==============================================
+*/
+
+// Main function
+function Ultimate(Utype,Umsgs,Ucursor,Uwidth,Uheight,Ubgcolor,Ubackground,Uspeed,Udelay,Ufirst) {
+		
+	document.writeln('<span id="Ubox" style="position:relative;width:'+Uwidth+';height:'+Uheight+';overflow:hiden;background-color:'+Ubgcolor+' ;background-image:url('+Ubackground+')">')
+	document.writeln('<div style="position:absolute;width:'+Uwidth+';height:'+Uheight+';clip:rect(0 '+Uwidth+' '+Uheight+' 0);left:0;top:0">')
+	
+	if (Utype==0) {
+		document.writeln('<div id="Utxt" style="position:absolute;width:'+Uwidth+';left:0;top:'+Uheight+';">')
+		document.write(Umsgs[Ufirst]);
+		Uscroll(Utxt,Umsgs,Uheight,Uspeed,Udelay,Ufirst);
+	}
+	if (Utype==1) {
+		document.writeln('<div id="Utxt"  style="position:absolute;width:'+Uwidth+';left:'+Uwidth+';top:0;">')
+		document.write(Umsgs[Ufirst]);
+		Uside(Utxt,Umsgs,Uwidth,Uspeed,Udelay,Ufirst);
+	}
+	if (Utype==2) {
+		document.writeln('<div id="Utxt"  style="position:absolute;width:'+Uwidth+';left:'+(Uwidth*-1)+';top:0;">')
+		document.write(Umsgs[Ufirst]);
+		Ureverseside(Utxt,Umsgs,Uwidth,Uspeed,Udelay,Ufirst,false);
+	}
+	if (Utype==3) {
+		document.writeln('<div id="Utxt"  style="position:absolute;width:'+Uwidth+';left:0;top:0;overflow:hiden;background-color:'+Ubgcolor+' ;">')
+		document.write(Umsgs[Ufirst]);
+		document.writeln('</div>')
+		document.writeln('<div id="Umask"  style="position:absolute;width:'+Uwidth+';left:0;top:0;overflow:hiden;background-color:'+Ubgcolor+' ;">')
+		document.write(Ucursor);
+		Utouch(Utxt,Umask,Umsgs,Ucursor,Uwidth,Uspeed,Udelay,Ufirst,1,false);
+	}
+	document.writeln('</div>')
+	document.writeln('</div>')
+	document.writeln('</span>')
+}
+
+// Moves
+function Uscroll(IDdiv,Umsgs,Uheight,Uspeed,Udelay,Ufirst){
+	ttxt=eval(IDdiv);
+	Ustep=eval(Ufirst);
+	if (ttxt.style.pixelTop>0&&ttxt.style.pixelTop<=5){
+	ttxt.style.pixelTop=0;
+	setTimeout("Uscroll(ttxt,Umsgs,Uheight,Uspeed,Udelay,Ustep)",Udelay);
+	return
+	}
+	else {
+		if (ttxt.style.pixelTop>=ttxt.offsetHeight*-1){
+		ttxt.style.pixelTop-=5
+		setTimeout("Uscroll(ttxt,Umsgs,Uheight,Uspeed,Udelay,Ustep)",Uspeed);
+		return
+		}
+		else {
+		ttxt.style.pixelTop=Uheight;
+		if (Ustep>=Umsgs.length-1)
+			Ustep=0
+			else		
+			Ustep++;
+		ttxt.innerHTML=Umsgs[Ustep];
+		Uscroll(ttxt,Umsgs,Uheight,Uspeed,Udelay,Ustep);
+		}
+	}
+}
+
+function Uside(IDdiv,Umsgs,Uwidth,Uspeed,Udelay,Ufirst){
+	ttxt=eval(IDdiv);
+	Ustep=eval(Ufirst);
+	if (ttxt.style.pixelLeft>0&&ttxt.style.pixelLeft<=5){
+	ttxt.style.pixelLeft=0;
+	setTimeout("Uside(ttxt,Umsgs,Uwidth,Uspeed,Udelay,Ustep)",Udelay);
+	return
+	}
+	else {
+		if (ttxt.style.pixelLeft>=ttxt.offsetWidth*-1){
+		ttxt.style.pixelLeft-=5
+		setTimeout("Uside(ttxt,Umsgs,Uwidth,Uspeed,Udelay,Ustep)",Uspeed);
+		return
+		}
+		else {
+		ttxt.style.pixelLeft=Uwidth;
+		if (Ustep>=Umsgs.length-1)
+			Ustep=0
+			else		
+			Ustep++;
+		ttxt.innerHTML=Umsgs[Ustep];
+		Uside(ttxt,Umsgs,Uwidth,Uspeed,Udelay,Ustep);
+		}
+	}
+}
+
+function Ureverseside(IDdiv,Umsgs,Uwidth,Uspeed,Udelay,Ufirst,stop){
+	ttxt=eval(IDdiv);
+	Ustep=eval(Ufirst);
+	if (ttxt.style.pixelLeft>0&&ttxt.style.pixelLeft<=5&&(!stop)) {
+	setTimeout("Ureverseside(ttxt,Umsgs,Uwidth,Uspeed,Udelay,Ustep,true)",Udelay);
+	return
+	}
+	else {
+		if (ttxt.style.pixelLeft<ttxt.offsetWidth){
+		ttxt.style.pixelLeft+=5;
+		setTimeout("Ureverseside(ttxt,Umsgs,Uwidth,Uspeed,Udelay,Ustep)",Uspeed);
+		return
+		}
+		else {
+		ttxt.style.pixelLeft=Uwidth*-1;
+		if (Ustep>=Umsgs.length-1)
+			Ustep=0
+			else		
+			Ustep++;
+		ttxt.innerHTML=Umsgs[Ustep];
+		Ureverseside(ttxt,Umsgs,Uwidth,Uspeed,Udelay,Ustep);
+		}
+	}
+}
+
+function Utouch(IDdiv,IDmask,Umsgs,Ucursor,Uwidth,Uspeed,Udelay,Ufirst,Ufirstsens,stop){
+	ttxt=eval(IDdiv);
+	tmask=eval(IDmask);
+	Ustep=eval(Ufirst);
+	Usens=eval(Ufirstsens);
+	if (tmask.style.pixelLeft>Uwidth){
+	tmask.style.pixelLeft=Uwidth;
+	setTimeout("Utouch(ttxt,tmask,Umsgs,Ucursor,Uwidth,Uspeed,Udelay,Ustep,-1)",Udelay);
+	return
+	}
+	else if (tmask.style.pixelLeft>=-5&&tmask.style.pixelLeft<0&&(!stop)){
+	tmask.style.pixelLeft=-5;
+	if (Ustep>=Umsgs.length-1)
+			Ustep=0
+			else		
+			Ustep++;
+	ttxt.innerHTML=Umsgs[Ustep];
+	setTimeout("Utouch(ttxt,tmask,Umsgs,Ucursor,Uwidth,Uspeed,Udelay,Ustep,1,true)",Udelay);
+	return
+	}
+	else {
+		tmask.style.pixelLeft+=(5*Usens);
+		setTimeout("Utouch(ttxt,tmask,Umsgs,Ucursor,Uwidth,Uspeed,Udelay,Ustep,Usens)",Uspeed);
+		return
+	}
+}
+/*
+	==============================================
+	|				U.L.T.I.M.A.T.E				 |
+	|					v070502					 |
+	==============================================
+	|			Powered by Influenzae			 |
+	==============================================
+*/
+
+</SCRIPT>
+</HEAD>
+
+<BODY>
+<SCRIPT language="Javascript1.2">
+/* 	
+	==============================================
+	|				U.L.T.I.M.A.T.E				 |
+	|					v070502					 |
+	==============================================
+	|			Powered by Influenzae			 |
+	|		For Microsoft Internet Explorer	     |
+	==============================================
+
+	Scrolling, moving, and so more...
+	
+	==============================================
+
+	*/
+</SCRIPT>
+<BR>
+<TABLE border=1 cellspacing=0 cellpadding=0 width=75% bordercolor='#00498C' align=center>
+<tr>
+<TD align=center>
+<SPAN class=blue10> U.L.T.I.M.A.T.E released 070502 </SPAN>
+</TD>
+</TR>
+</TABLE>
+<BR>
+<TABLE border=0 cellspacing=0 cellpadding=0 width=75% align=center>
+<tr>
+<TD align=center>
+<SPAN class=blue>You can make a lot of animations with the same extra simple free JavaScript function...</SPAN>
+</TD></TR>
+<TD align=center>
+<SPAN class=blue10>The Ultimate one !!</SPAN>
+</TD></TR>
+</TABLE>
+<br><br>
+<TABLE border=1 cellspacing=0 cellpadding=0 align=center bordercolor='#00498C'>
+<tr>
+<TD align=left>
+<SCRIPT language="Javascript1.2">
+// Utype
+//  0 -> vertical scrolling
+//  1 -> horizontal scrolling from left
+//	2 -> horizontal scrolling from right
+//  3 -> with cursor
+var Utype=0;
+// cursor for Utype 3, for example: "|" or "_" 
+var Ucursor="<SPAN class=blue> | </SPAN>";
+// Box dimensions
+var Uwidth=150;
+var Uheight=100;
+// Background color
+var Ubgcolor="#FFFFFF";
+// Background Image, if no, put ''
+var Ubackground='';
+// Speed
+var Uspeed=30;
+// stopping time (News), put 0 else
+var Udelay=2000;
+// first index of array to start
+var Ufirst=0;
+// Array of messages
+var Umsgs=new Array()
+Umsgs[0]="<SPAN class=blue> > Ultimate Script for IE !</SPAN>";
+Umsgs[1]="<SPAN class=blue> > Vertical Scrolling for News</SPAN>";
+Umsgs[2]="<A HREF='http://www.javascripts.com' class=blue> > With links too !</A>";
+Umsgs[3]="<A HREF='http://www.javascriptsource.com' class=blue> > Ultra Simple !</A>";
+Umsgs[4]="<SPAN class=blue> > Come Back Soon!</SPAN>";
+// The function
+Ultimate(Utype,Umsgs,Ucursor,Uwidth,Uheight,Ubgcolor,Ubackground,Uspeed,Udelay,Ufirst);
+// That's it !
+</SCRIPT>
+</TD>
+</TR>
+</TABLE>
+<SCRIPT language="Javascript1.2">
+/* 	
+	==============================================
+	|				U.L.T.I.M.A.T.E				 |
+	|					v070502					 |
+	==============================================
+	|			Powered by Influenzae			 |
+	|		For Microsoft Internet Explorer	     |
+	==============================================
+
+	Scrolling, moving, and so more...
+	
+	==============================================
+
+	You must first include file "ultimate.js",
+	then you are...
+*/
+</SCRIPT>
+</BODY>
+</HTML>

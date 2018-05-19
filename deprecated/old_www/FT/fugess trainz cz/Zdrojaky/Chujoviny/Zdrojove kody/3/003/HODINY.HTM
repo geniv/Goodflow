@@ -1,0 +1,37 @@
+<HTML>
+  <HEAD>
+    <TITLE> Hodiny </TITLE>
+    <SCRIPT Language="JavaScript">
+      <!--
+      function ShowTime(){
+        // Zjistí se aktuální èas
+        var D = new Date;
+        // Z èasového údaje se zjistí poèet
+        // hodin, minut a sekund
+        var H = D.getHours();
+        var M = D.getMinutes();
+        var S = D.getSeconds();
+
+        // Vytvoøí se øetìzec obsahující celý èas
+        // U minut a sekund se pøidají pøípadné
+        // uvozující nuly (pokud jich je ménì jak 10)
+        var StrTime = H + ":" +
+          (M<10 ? "0"+M : M) + ":" +
+          (S<10 ? "0"+S : S);
+        // Nastaví se hodnota formuláøového prvku
+        document.frmClock.btClock.value = StrTime;
+        // Aktualizace hodin se provede za sekundu
+        setTimeout ("ShowTime()", 1000);
+      }
+      // -->
+    </SCRIPT>
+  </HEAD>
+
+  <BODY OnLoad="ShowTime();">
+    <FORM Name="frmClock">
+      Aktualní èas<BR>
+      <INPUT Type=Button Name="btClock" Value="00:00:00">
+    </FORM>
+  </BODY>
+</HTML>
+

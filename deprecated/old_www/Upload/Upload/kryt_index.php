@@ -1,0 +1,3 @@
+<?
+  print "baf! lekl ses?";
+?>

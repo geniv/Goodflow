@@ -1,0 +1,24 @@
+#Options -Indexes
+
+#AddHandler php5-cgi .php
+#Action php5-cgi /php5cgi/php
+
+ErrorDocument 400 /error_page.html
+ErrorDocument 401 /error_page.html
+ErrorDocument 403 /error_page.html
+ErrorDocument 404 /error_page.html
+ErrorDocument 500 /error_page.html
+
+#na serveru: %{DOCUMENT_ROOT}/
+#jen pro tuto subdomunu bez prlinkovani na PHP5!!
+
+RewriteEngine On
+RewriteBase /
+
+#stranky
+RewriteRule ^cenik          %{DOCUMENT_ROOT}/index.php?action=cenik [L,QSA]
+RewriteRule ^kontakt        %{DOCUMENT_ROOT}/index.php?action=kontakt [L,QSA]
+RewriteRule ^sit            %{DOCUMENT_ROOT}/index.php?action=sit [L,QSA]
+RewriteRule ^autodoprava    %{DOCUMENT_ROOT}/index.php?action=form_doprava [L,QSA]
+RewriteRule ^satelitni-tv   %{DOCUMENT_ROOT}/index.php?action=form_satelity [L,QSA]
+RewriteRule ^rss            %{DOCUMENT_ROOT}/rss.php [L,QSA]

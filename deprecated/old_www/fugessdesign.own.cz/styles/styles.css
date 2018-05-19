@@ -1,0 +1,202 @@
+/*---------------- centralni nastaveni ----------------*/
+body {
+  background-repeat: repeat-x; /* opakovani pozadi ve vsech sekcich (krome hlavniho indexu) */
+  font-family: Verdana, 'Trebuchet MS', sans-serif;
+  font-size: 14px;
+}
+
+* {
+  color: white; /* centralni nastaveni barvy */
+}
+/*-----------------------------------------------------*/
+
+/*---------------- elementy bez obalu -----------------*/
+#zahlavi, #zapati {
+  width: 900px;
+  margin: 0 auto;
+  padding: 0;
+  background-repeat: no-repeat;
+  overflow: hidden;
+}
+
+#zahlavi {
+  height: 130px;
+}
+
+#zapati {
+  height: 60px;
+}
+/*-----------------------------------------------------*/
+
+/*------------- obal s elementy v nem -----------------*/
+#obal {
+  width: 900px;
+  min-height: 600px;
+  margin: 0 auto;
+  padding: 0;
+  overflow: hidden;
+  background-repeat: repeat-y;
+}
+
+#levysloupec, #obsah {
+  margin: 0;
+  padding: 10px 0 0;
+}
+
+#levysloupec {
+  width: 200px;
+  float: left;
+  text-align: center;
+}
+
+#obsah {
+  width: 700px;
+  float: right;
+}
+/*-----------------------------------------------------*/
+
+/*-------- definovani elementu leveho sloupce ---------*/
+#prednacteni {
+  background-image: url(../obr/pozadi_odkaz_fd.png); /* prednacteni pozadi na pseudotride v menu */
+}
+
+#levysloupec div {
+  width: 200px;
+  height: 21px;
+}
+
+#levysloupec div p a {
+  text-decoration: none;
+  font-size: 11px;
+}
+
+#levysloupec div:hover {
+  background: url(../obr/pozadi_odkaz_fd.png) no-repeat; /* [png] img po najeti na odkazy v menu [nepodpora IE6 kvuli pseudotride na elementu div] */ 
+}
+
+#levysloupec div:hover a {
+  border-bottom: 1px dotted; /* podtrzeni odkazu - menu */
+}
+
+#levysloupec > p a img {
+  border: 1px solid black; /* barva img ramecku pred najetim */
+}
+
+#levysloupec > p a img:hover {
+  border: 1px dotted white; /* barva img ramecku po najeti */
+}
+
+#levysloupec > p {
+  font-size: 11px;
+}
+
+#levysloupec #barvatext1 { 
+  margin-top: 130px; /* text: Chcete jinou barvu ? */
+  margin-bottom: 3px;
+}
+
+#levysloupec #barvatext2 {
+  margin-bottom: 10px; /* text: Vyberte si ! */
+}
+/*-----------------------------------------------------*/
+
+/*----------- definovani elementu v obsahu ------------*/
+#levysloupec, #obsah {
+  padding-bottom: 20px; /* odsazeni spodniho okraje kvuli height: auto pro IE6 */
+}
+
+#obsah #nadpis {
+  margin-bottom: 6px;
+  padding-left: 60px;
+  font-size: 17px;
+}
+
+#obsah #podnadpis {
+  padding: 0 0 12px 80px;
+  font-size: 11px;
+}
+
+#obsah #nadpisodstavce {
+  padding: 0 0 2px 20px;
+  font-size: 11px;
+  font-style: italic;
+  text-decoration: underline;
+}
+
+/* ovladani celeho odstavce */
+#obsah #odstavec {
+  padding: 0 60px 0 20px;
+  font-size: 11px;
+  line-height: 13px;
+}
+
+#obsah .text_odstavec {
+  margin: 7px 0 7px;
+  padding: 0 60px 0 20px;
+  font-size: 11px;
+  line-height: 13px;
+}
+
+#obsah p.text_odstavec:first-letter {
+  margin-left: 10px;
+}
+
+#obsah p em.html, #obsah p em.css, #obsah p em.w3c, #obsah p em.xhtml {
+  border-bottom: 1px dotted;
+  cursor: help;
+}/* konec ovladani celeho odstavce */
+
+#obsah #podpis {
+  padding: 10px 0 0 30px;
+  font-size: 11px;
+  font-style: italic;
+}
+
+#obsah ul {
+  margin-top: 14px;
+}
+
+#obsah ul li {
+  padding-left: 100px;
+  font-size: 12px;
+  line-height: 20px;
+}
+/*-----------------------------------------------------*/
+
+/*----------- definovani elementu v zapati ------------*/
+#zapati #vygenerovani {
+  margin: 41px 0 3px 22px;
+  padding: 0;
+  position: relative;
+  float: left;
+  font-size: 10px;
+}
+
+#zapati #valid {
+  width: 176px;
+  margin: 12px 20px 0 0;
+  float: right;
+}
+
+#zapati #valid p {
+  margin: 0;
+  padding: 0;
+  font-size: 12px;
+  text-align: center;
+}
+
+#zapati #valid #css, #zapati #valid #xhtml {
+  width: 88px;
+  height: 31px;
+}
+
+#zapati #valid #css {
+  float: left;
+}
+
+#zapati #valid #xhtml {
+  float: right;
+}
+/*-----------------------------------------------------*/
+
+/* Fugess (Martin) */

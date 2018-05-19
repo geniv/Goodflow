@@ -1,0 +1,54 @@
+<html> 
+  <head> 
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>Zobrazení komentáře</title> 
+
+    <script language="javascript">
+      var XMLHttpRequestObjekt = false; 
+
+      if (window.XMLHttpRequest) {
+        XMLHttpRequestObjekt = new XMLHttpRequest();
+      } else if (window.ActiveXObject) {
+        XMLHttpRequestObjekt = new ActiveXObject("Microsoft.XMLHTTP");
+      }
+
+      function ziskejData(zdrojDat, divID) 
+      { 
+        if(XMLHttpRequestObjekt) {
+          var obj = document.getElementById(divID); 
+          XMLHttpRequestObjekt.open("GET", zdrojDat + "?text=" + 
+            escape(document.getElementById("text").value)); 
+
+          XMLHttpRequestObjekt.onreadystatechange = function() 
+          { 
+            if (XMLHttpRequestObjekt.readyState == 4 && 
+              XMLHttpRequestObjekt.status == 200) { 
+                obj.innerHTML = XMLHttpRequestObjekt.responseText; 
+            } 
+          } 
+
+          XMLHttpRequestObjekt.send(null); 
+        }
+      }
+    </script>
+  </head> 
+
+  <body>
+
+    <H1>Zobrazení komentáře</H1>
+
+    <form>
+      Zadejte komentář:
+      <input id="text" type="text" name="text"> 
+      <br>
+      <br>
+      <input type="button" value="Zobrazit komentář" 
+        onclick="ziskejData('komentar.jsp', 'cilovyDiv')"> 
+    </form>
+
+    <div id="cilovyDiv">
+      <p>Získaná data se zobrazí na tomto místě.</p> 
+    </div> 
+
+  </body> 
+</html>

@@ -1,0 +1,108 @@
+This applet can simulate water wavings over any GIF or JPG image.
+Remember that are needed both AnWater.class , Lware.class and anfy.class.
+You must upload these 3 .class files and insert the <applet> tag on your
+html document to add this applet to your page.
+This applet is fully parametrized, so you can generate all kinds of waters
+you want. Here an example of what you have to write in the html (the
+things anfter the ; are comments with min-max values acceptet):
+
+
+<applet code="AnWater.class" width=150 height=132> ; Name, Width, Height
+<param name=credits value="Applet by Fabio Ciucci (www.anfiteatro.it/java.html)">
+<param name=regcode value="NO">         ; Register code (if you have it)
+<param name=reglink value="NO">         ; URL where go optionally when clicked
+<param name=regnewframe value="YES">    ; Reglink opened in new frame?
+<param name=regframename value="_blank"> ; Name of new frame for reglink
+<param name=statusmsg value="Water applet">  ; Statusbar message
+<param name=image value="imfad1.gif">   ; Image to load
+<param name=res value="1">              ; resolution (1 .. 8)
+<param name=light value="YES">          ; Light effects ("YES" or "NO")
+<param name=autodesign value="YES">     ; Auto design ("YES" or "NO")
+<param name=density value="4">          ; Density of fluid (2 .. 6)
+<param name=fishnum value="0">          ; Number of fishes (0 .. 2)
+<param name=cross value="NO">           ; Cross effect ("YES" or "NO")
+<param name=crossfactor value="30">     ; Factor of cross effect
+<param name=rainsize value="0">         ; Size of circular rain (0 = OFF)
+<param name=rainfactor value="10">      ; Circular rain factor
+<param name=srainsize value="0">        ; Size of square rain (0 = OFF)
+<param name=srainfactor value="10">     ; Square rain factor
+<param name=textscroll value="waterscr.txt"> ; File for scrolltext or "NO"
+<param name=textoffset value="140">          ; Txtscroll y offset
+<param name=textspeed value="1">          ; Txtscroll speed
+<param name=textfont value="Arial">       ; Txtscroll font name
+<param name=textbold value="NO">          ; Txtscroll bold ("YES" or "NO")
+<param name=textsize value="24">          ; Txtscroll font size
+<param name=textshadow value="YES">       ; Txtscroll shadow ("YES" or "NO")
+<param name=TextColR value="200">         ; Txtscroll color (red component)
+<param name=TextColG value="255">         ; Txtscroll color (green component)
+<param name=TextColB value="190">         ; Txtscroll color (blue component)
+<param name=TextSColR value="20">         ; Txtscroll shadow col. (red c.)
+<param name=TextSColG value="20">         ; Txtscroll shadow col. (green c.)
+<param name=TextSColB value="50">         ; Txtscroll shadow col. (blue c.)
+<param name=TextJumpAmp value="0">        ; Txtscroll jump aplitude
+<param name=TextJumpSpd value="0">        ; Txtscroll jump speed
+<param name=TextSineAmp value="0">        ; Txtscroll sineshape amplitude        
+<param name=TextSineSpd value="0">        ; Txtscroll sineshape movement
+<param name=TextSineAngle value="0">      ; Txtscroll sineangle / pixel  
+<param name=memdelay value="1000">        ; Memory deallocation delay
+<param name=priority value="3">           ; Task priority (1..10)
+<param name=MinSYNC value="10">           ; Min. milliseconds/frame for sync
+Sorry, your browser doesn't suppor Java.  ; Message for no java browsers.
+</applet>                                 ; End of applet tag
+
+                             ---------
+
+
+Here detailed instructions about how to change parameters:
+
+
+The credits parameter can't be changed otherwise the applet will not work.
+
+To activate the reg parameters read the shareware registration notes.
+In the "regcode" parameter you have to place the registration code you
+purchase from the author. If it is correct and the applet is run from the
+registered domain name, you can use "reglink" parameter, where you can specify
+an URL where bring user when the applet is clicked.
+If you set to "YES" regnewframe, you can specify a frame where load the
+reglink:
+
+"_blank"  : To load the link in a new blank unnamed browser window.
+"_self"   : To load the link into the same window the applet occupies.
+"_parent" : To load the link into the immediate FRAMESET parent.
+"_top"    : To load the link into the top body of the window.
+
+Otherwise the frame name, for example "myframe1".
+
+The GIF/JPG image can be of any size. If res=1, remember to place the exact
+size of image in "width" and "height" tags. If res=2, place double values,
+if res=3 triple values etc.
+In fact, res is a sort of zoomer.
+
+You can enable or disable the light shade calculation with "light" parameter.
+The effects without light calculations is faster, but less realistic.
+
+If you set to "YES" the "autodesign" parameter, an automatic slideshow of the
+effects will be executed, and next parameters are ignored.
+
+If you set to "NO" the autodesign, you have to configure effects manually:
+
+The "density" parameter (2 .. 6) controls the density if fluid. Lower values
+mean more fluid liquid, so waves dead fast. Higher walues cause a slower
+decadence of the waves.
+
+You can insert up to 2 fishes, with "fishnum" parameter.
+
+Other effects are: cross, rain and srain.
+
+Set the parameter "cross" to YES to activate this strange effect.
+The "crossfactor" parameter works as "timer" between one cross and another.
+Setting "crossfactor" to 0, a new cross will appear every frame.
+Higher values mean more distance between one cross and another.
+
+The "rainsize" will determine a circular rain. If it is set to zero, no
+rain. Values higher or equals to 1 will generate rain.
+To control it use "rainfactor" as seen for "crossfactor".
+
+The "srainsize" and "srainfactor" parameters works same as "rainsize" and
+"rainfactor", but generates square rain.
+You can enable more than one effect at the same time.

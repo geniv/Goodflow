@@ -1,0 +1,63 @@
+<HTML>
+  <HEAD>
+    <TITLE>Dvourozmìrné pole</TITLE>
+    <SCRIPT Language="javascript">
+      <!--
+        // Funkce generující ètvercové dvourozmìrné pole
+        // velikosti Dim x Dim
+        function New2DArray (Dim){
+          // Vytvoøí se hlavní pole, které bude mít místo
+          // normálních prvkù dalsí pole
+          var A = new Array (Dim);
+          for (var i=0; i<Dim; i++){
+            A[i] = new Array (Dim);
+          }
+          return (A);
+        }
+
+        // Do pole se zapíše násobilka
+        function Nasobilka (A){
+          // Forcyklus pøes všechny øádky
+          for (var i=0; i<A.length; i++){
+            // Forcyklus pro všechny prvky v øádku
+            for (var j=0; j<A[i].length; j++)
+              A[i][j] = (i+1)*(j+1);
+          }
+        }
+
+        // Výpis pole
+        function Vypis (A){
+          // Aby bylo pole pøehledné, je vypsáno uvnitø
+          // tagu PRE a navíc, pokud je vypisované èíslo
+          // menší než 10 doplní se o úvodní mezeru
+          document.write ('<PRE>');
+          for (var i=0; i<A.length; i++){
+            for (var j=0; j<A[i].length; j++){
+              if (A[i][j] < 10) document.write (' ');
+              document.write (A[i][j]+'  ');
+            }
+            document.write ('<BR>');
+          }
+          document.write ('</PRE>');
+        }
+
+        // Vytvoøí se nové pole
+        NewArray = New2DArray (10);
+        // Naplní se malou násobilkou
+        Nasobilka (NewArray);
+      // -->
+    </SCRIPT>
+  </HEAD>
+
+  <BODY>
+    A takto vypadá malá násobilka:
+    <SCRIPT Language="javascript">
+      <!--
+        // Vypsání pole
+        Vypis (NewArray);
+      // -->
+    </SCRIPT>
+
+  </BODY>
+</HTML>
+

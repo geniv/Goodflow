@@ -1,0 +1,48 @@
+<HEAD>
+<SCRIPT LANGUAGE="JavaScript">
+<!-- Begin
+var max=0;
+function textlist() {
+max=textlist.arguments.length;
+for (i=0; i<max; i++)
+this[i]=textlist.arguments[i];
+}
+tl = new textlist( 
+"H & H  online  ",
+"stahnìte si Freewareové hry a programy  ",
+"a nìkolik skriptù na vaše stránky",
+"Lord_likvid , Mister XXX",
+"http://hh.misto.cz"
+);
+
+var x = 0; pos = 0;
+var l = tl[0].length;
+function textticker() {
+document.tickform.tickfield.value = tl[x].substring(0, pos) + "_";
+if(pos++ == l) {
+pos = 0; 
+setTimeout("textticker()", 2000); 
+if(++x == max) x = 0; 
+l = tl[x].length;
+} else
+setTimeout("textticker()", 50);
+}
+//  End -->
+</script>
+</HEAD>
+
+<!-- STEP TWO: Insert the onLoad event handler into your BODY tag  -->
+
+<BODY OnLoad="textticker()">
+
+<!-- STEP THREE: Copy this code into the BODY of your HTML document  -->
+
+<center>
+<form name=tickform>
+<textarea name=tickfield rows=3 cols=38 style="background-color: rgb(0,0,0); color: rgb(255,255,255); cursor: default; font-family: Arial; font-size: 12px" wrap=virtual>The news will appear here when the page has finished loading.</textarea>
+</form>
+</center>
+
+<p>&nbsp;<p>
+
+<!-- Script Size:  1.89 KB -->

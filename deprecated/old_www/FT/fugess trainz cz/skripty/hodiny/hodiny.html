@@ -1,0 +1,78 @@
+<html>
+<head>
+<title>digitalni hodiny</title>
+<meta http-equiv="content-type" content="text/html; charset=windows-1250">
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000">
+
+<p  align="center">
+<script language="VBScript">
+
+<!--
+
+Dim lFlag
+
+Sub Window_OnLoad()
+	Label1.Caption=Time()
+	IeTimer1.Enabled=true
+   lFlag = True
+End Sub
+
+Sub IeTimer1_Timer()
+	Label1.Caption=Time()
+End Sub
+
+Sub Label1_MouseDown(Button, Shift, X, Y)
+	Select Case Button	
+		Case 1 'left button
+			If lFlag Then 
+				Label1.Caption=Date()
+				IeTimer1.Enabled=False
+              lFlag = False
+				XYZ = SetTimeout("Window_OnLoad",2000,"VBscript")
+			Else
+				Label1.Caption=Time()
+              lFlag = True
+				IeTimer1.Enabled=True
+			End If
+		Case 2 'right button
+			Select Case Label1.Forecolor
+				Case 65280:   Label1.ForeColor=255:      Exit Sub
+				Case 255:     Label1.ForeColor=16776960: Exit Sub
+				Case 16776960:Label1.ForeColor=16711935: Exit Sub
+				Case 16711935:Label1.ForeColor= 16777215:Exit Sub
+				Case 16777215:Label1.ForeColor=65280:    Exit Sub
+			End select
+		End Select
+End Sub
+
+-->
+
+</script>
+
+<object id="Label1" classid="CLSID:978C9E23-D4B0-11CE-BF2D-00AA003F40D0" align="baseline" border="0" width="136" height="27" style="TOP:0pt;LEFT:0pt;WIDTH:102pt;HEIGHT:20pt;ZINDEX:0;">
+      <param name="ForeColor" value="65280">
+      <param name="BackColor" value="0">
+      <param name="Size" value="3598;706">
+      <param name="MousePointer" value="14">
+      <param name="BorderColor" value="65280">
+      <param name="SpecialEffect" value="6">
+      <param name="FontName" value="Arial">
+      <param name="FontEffects" value="1073741825">
+      <param name="FontHeight" value="280">
+      <param name="FontCharSet" value="0">
+      <param name="FontPitchAndFamily" value="2">
+      <param name="ParagraphAlign" value="3">
+      <param name="FontWeight" value="700">
+</object>
+
+<object id="IeTimer1" classid="CLSID:59CCB4A0-727D-11CF-AC36-00AA00A47DD2" align="baseline" border="0" width="14" height="14" style="TOP:25pt;LEFT:-1pt;WIDTH:1pt;HEIGHT:1pt;ZINDEX:1;">
+      <param name="_ExtentX" value="26">
+      <param name="_ExtentY" value="26">
+      <param name="Interval" value="1000">
+</object>
+</p>
+
+</body>
+</html>

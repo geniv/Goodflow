@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="ISO-8859-2"?>
+
+<!DOCTYPE web-app
+    PUBLIC "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
+    "http://java.sun.com/j2ee/dtds/web-app_2_3.dtd">
+
+<web-app>
+
+  <filter>
+    <filter-name>Sledování</filter-name>
+    <filter-class>SledovaniFiltr</filter-class>
+  </filter>
+
+  <filter>
+    <filter-name>Autentizace</filter-name>
+    <filter-class>HesloFiltr</filter-class>
+  </filter>
+
+  <filter>
+    <filter-name>Čas</filter-name>
+    <filter-class>CasFilter</filter-class>
+  </filter>
+
+  <filter-mapping>
+    <filter-name>Sledování</filter-name>
+    <url-pattern>/sledovani.jsp</url-pattern>
+  </filter-mapping>
+
+  <filter-mapping>
+    <filter-name>Autentizace</filter-name>
+    <url-pattern>/heslo.jsp</url-pattern>
+  </filter-mapping>
+
+  <filter-mapping>
+    <filter-name>Čas</filter-name>
+    <url-pattern>/cas.jsp</url-pattern>
+  </filter-mapping>
+
+  <servlet>
+    <servlet-name>Řadič</servlet-name>
+    <servlet-class>Radic</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>Řadič</servlet-name>
+    <url-pattern>/Radic</url-pattern>
+  </servlet-mapping>
+
+</web-app>

@@ -1,0 +1,47 @@
+<HTML>
+  <HEAD>
+    <TITLE>Roztøesené tlaèítko</TITLE>
+    <SCRIPT Language="JavaScript">
+      <!--
+        var TID;
+
+        // Funkce pro zastavení roztøeseného tlaèítka
+        function StopScroll (){
+          // Vypnutí timeru
+          clearTimeout(TID);
+        }
+        
+        // Funkce, která bude posouvat obsah dokumentu
+        // do všech stran
+        function RoundScroll (){
+          scrollBy (4, 0);
+          scrollBy (-4, 0);
+          scrollBy (0, 4);
+          scrollBy (0, -4);
+
+          // Aktivace timeru
+          TID = setTimeout('RoundScroll()',10);
+        }
+      // -->
+    </SCRIPT>
+  </HEAD>
+  
+  <BODY>
+    <FORM>
+      <PRE><FONT Color="white">
+          Dlouhý text, který nejde vidìt a hlavnì se nezalamuje
+      </FONT></PRE>
+      Najedete-li na tlaèítko myší, roztøese se celý dokument
+      <INPUT Type="button" Value="Roztøesený dokument"
+        OnMouseOver="RoundScroll();"
+        OnMouseOut="StopScroll();">
+      <BR>
+      <BR>
+      <BR>
+      <BR>
+      <BR>
+      <BR>
+    </FORM>
+  </BODY>
+</HTML>
+

@@ -1,0 +1,30 @@
+<HTML>
+  <HEAD>
+    <TITLE> Vstupní stránka </TITLE>
+    <SCRIPT language="JavaScript">
+      <!-- Ukryti pro starsi prohlizece
+      // Funkce pro kontrolu hesla
+      function CheckPasswd(){
+        // Nezadal-li stránku, bude vyhozen
+        if (document.fPassword.edPassword.value == ''){
+          window.location.href = "faultpage.htm";
+        } else // jinak se pkusí zobrazit tajnou stránku
+          window.location.href = document.fPassword.edPassword.value + ".htm";
+        return false;
+      }
+      // -->
+    </SCRIPT>
+  </HEAD>
+
+  <BODY>
+    <FORM name="fPassword" onsubmit="return CheckPasswd()">
+      <DIV align=center>
+      <HR>
+      Zadejte heslo: <INPUT type="password"
+        name="edPassword" value="" size=8>
+      <HR>
+      </DIV>
+    </FORM>
+  </BODY>
+</HTML>
+

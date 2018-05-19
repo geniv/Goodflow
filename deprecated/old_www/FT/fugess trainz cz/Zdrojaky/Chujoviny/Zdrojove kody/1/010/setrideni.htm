@@ -1,0 +1,47 @@
+<HTML>
+<HEAD>
+  <TITLE>Tøídìní</TITLE>
+  <SCRIPT Language="JavaScript">
+    <!--
+      Ar = new Array (
+        'Ferda (18)', 'Franta (95)', 'Anèa (35)',
+        'Hanèa (5)', 'Matìj (16)', 'Milouš (65)',
+        'Pepík (32)', 'Honzík (2)',
+        'Rumprcimprcampr (198)');
+
+      // Funkce na vypsání obsahu pole
+      function WriteArray (AName, A){
+        document.write (AName.bold()+'<BR>');
+        for (i=0; i<A.length; i++)
+          document.write (i+' - '+A[i]+'<BR>');
+        document.write ('<BR>');
+      }
+
+      // Porovnávací funkce
+      function AgeSortProc(S1, S2){
+        return (
+          parseInt (S1.split ('(')[1]) -
+          parseInt (S2.split ('(')[1])
+        )
+      }
+    // -->
+  </SCRIPT>
+</HEAD>
+<BODY>
+  <SCRIPT Language="JavaScript">
+    <!--
+      // Vypsání pole
+      WriteArray ('Pùvodní pole:', Ar);
+      // Setøídìní vestavìnou funkcí
+      Ar.sort();
+      // Vypsání pole
+      WriteArray ('Abecednì setøídíné pole:', Ar);
+      // Setøídìní vlastní funkcí
+      Ar.sort(AgeSortProc);
+      // Vypsání pole
+      WriteArray ('Pole setøídìné podle vìku:', Ar);
+    // -->
+  </SCRIPT>
+</BODY>
+</HTML>
+

@@ -1,0 +1,16 @@
+ Zamluvena kniha: <b>Matematické záhady</b> od autora: Wise Bill, syst: <i>730</i> Žadatel je: <b>E.králová</b> pod login jménem: <b>volny</b> a heslem: free, v: 18:20:37 15.03. 2007 z IP: <b>81.90.168.5</b><br>
+syst: <i>Wise Bill</i> Žadatel je: <b>hledamKN</b> pod login jménem: <b>admin</b> a heslem: knihomol, v: 18:45:44 15.03. 2007 z IP: <b>194.213.231.195</b><br>
+Zamluvena kniha: <b>Encyklopedie zvíøat</b> od autora:  , syst: <i>4</i> Žadatel je: <b>pokus</b> pod login jménem: <b>volny</b> a heslem: free, v: 18:46:53 15.03. 2007 z IP: <b>194.213.231.195</b><br>
+Zamluvena kniha: <b>Encyklopedie zvíøat</b> od autora:  , syst: <i>4</i> Žadatel je: <b>pokus</b> pod login jménem: <b>volny</b> a heslem: free, v: 18:47:03 15.03. 2007 z IP: <b>194.213.231.195</b><br>
+Zamluvena kniha: <b>Panna a rentiér</b> od autora: Šmíd Jan, syst: <i>604</i> Žadatel je: <b>aaa</b> pod login jménem: <b>volny</b> a heslem: free, v: 18:47:48 15.03. 2007 z IP: <b>194.213.231.195</b><br>
+Zamluvena kniha: <b>Encyklopedie zvíøat</b> od autora:  , syst: <i>4</i> Žadatel je: <b>as</b> pod login jménem: <b>volny</b> a heslem: free, v: 18:50:20 15.03. 2007 z IP: <b>194.213.231.195</b><br>
+Zamluvena kniha: <b>Encyklopedie zvíøat</b> od autora:  , syst: <i>4</i> Žadatel je: <b>aaa</b> pod login jménem: <b>admin</b> a heslem: knihomol, v: 18:51:46 15.03. 2007 z IP: <b>194.213.231.195</b><br>
+Zamluvena kniha: <b>Encyklopedie zvíøat</b> od autora:  , syst: <i>4</i> Žadatel je: <b>nikdoAM</b> pod login jménem: <b>admin</b> a heslem: knihomol, v: 18:51:53 15.03. 2007 z IP: <b>194.213.231.195</b><br>
+Zamluvena kniha: <b>Matematické záhady</b> od autora: Wise Bill, syst: <i>730</i> Žadatel je: <b>E.Králová</b> pod login jménem: <b>admin</b> a heslem: knihomol, v: 18:55:36 15.03. 2007 z IP: <b>194.213.231.195</b><br>
+Zamluvena kniha: <b>Encyklopedie zvíøat</b> od autora:  , syst: <i>4</i> Žadatel je: <b>pokus</b> pod login jménem: <b>volny</b> a heslem: free, v: 20:10:10 15.03. 2007 z IP: <b>194.213.231.195</b><br>
+Zamluvena kniha: <b>Encyklopedie zvíøat</b> od autora:  , syst: <i>4</i> Žadatel je: <b>pokus</b> pod login jménem: <b>volny</b> a heslem: free, v: 20:11:34 15.03. 2007 z IP: <b>194.213.231.195</b><br>
+Zamluvena kniha: <b>Encyklopedie zvíøat</b> od autora:  , syst: <i>4</i> Žadatel je: <b>nikdoAM</b> pod login jménem: <b>admin</b> a heslem: knihomol, v: 20:13:07 15.03. 2007 z IP: <b>194.213.231.195</b><br>
+Zamluvena kniha: <b>Neznalost zákona neomlouvá</b> od autora: Benátèanová, syst: <i>22</i> Žadatel je: <b>test</b> pod login jménem: <b>volny</b> a heslem: free, v: 11:23:18 17.03. 2007 z IP: <b>80.78.146.245</b><br>
+Zamluvena kniha: <b>Neznalost zákona neomlouvá</b> od autora: Benátèanová, syst: <i>22</i> Žadatel je: <b>nikdoAM</b> pod login jménem: <b>admin</b> a heslem: knihomol, v: 11:24:39 17.03. 2007 z IP: <b>80.78.146.245</b><br>
+Zamluvena kniha: <b>Lexikon populárních omylù</b> od autora: Krämer Walter, syst: <i>190</i> Žadatel je: <b>nikdoAM</b> pod login jménem: <b>admin</b> a heslem: knihomol, v: 11:26:14 17.03. 2007 z IP: <b>80.78.146.245</b><br>
+Zamluvena kniha: <b>Bráškové</b> od autora: Chaloupek, syst: <i>880</i> Žadatel je: <b>nikdoAM</b> pod login jménem: <b>admin</b> a heslem: knihomol, v: 11:26:32 17.03. 2007 z IP: <b>80.78.146.245</b><br>

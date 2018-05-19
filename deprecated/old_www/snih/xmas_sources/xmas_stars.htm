@@ -1,0 +1,92 @@
+<html>
+
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1250">
+<script language="JavaScript">
+<!-------------
+
+
+// Vraci nahodne cislo x, kde 0<=x<num
+function randNum (num) {
+var rnd1 = Math.round( (num-1) * Math.random() )
+    return rnd1;
+}
+
+
+// Hvezdy
+var items = [ "star1.gif", "star2.gif", "star3.gif", "star4.gif"];
+var itemsCount=30;
+var screenLeft = 50;
+var screenTop = 50;
+var screenWidth = screen.availWidth - 150;
+var screenHeight = screen.availHeight - 180;
+var moveamountY = 0;
+var moveamountX = 0;
+var randomizeX = 2;
+var randomizeY = 2;
+var fCycleX = true;
+var fCycleY = true;
+var fRandomXwhenYCycles = false;
+var fRandomYwhenXCycles = false;
+var fCycleImages = true;
+var speed = 200;
+
+
+var i;
+var Xs = new Array();
+var Ys = new Array();
+var Is = new Array();
+
+function Animate() {
+var y;
+    for(i=0; i<itemsCount; i++ ) {
+
+        Ys[i] += moveamountY + ( randNum(2) ? (1) : (-1) ) * randNum(randomizeY);
+        Xs[i] += moveamountX + ( randNum(2) ? (1) : (-1) ) * randNum(randomizeX);
+
+        if( Xs[i] > screenLeft + screenWidth )  {
+            Xs[i] = fCycleX ? screenLeft : screenLeft + screenWidth;
+            Ys[i] = fRandomYwhenXCycles ? screenTop + randNum(screenHeight) : Ys[i];
+        }
+        if( Ys[i] > screenTop + screenHeight )  {
+            Ys[i] = fCycleY ? screenTop : screenTop + screenHeight;
+            Xs[i] = fRandomXwhenYCycles ? screenLeft+ randNum(screenWidth) : Xs[i];
+        }
+        if (fCycleImages) {
+            Is[i]++;
+            if(Is[i]>=items.length) Is[i]=0;
+            document.getElementById('animitem'+i).src = items[ Is[i] ];
+        }
+
+        document.getElementById('animitem'+i).style.top = Ys[i];
+        document.getElementById('animitem'+i).style.left = Xs[i];
+    }
+}
+
+
+//-------------->
+</script>
+
+<title>Hvězdičky</title>
+</head>
+
+<body bgcolor="black" text="#FFFFFF">
+
+<h2 align="left">Hvězdičky</h2>
+
+<script language="JavaScript"><!-------------
+
+if(document.getElementById) {
+   for(i=0; i<itemsCount; i++ ) {
+       Xs[i] = screenLeft + randNum(screenWidth);
+       Ys[i] = screenTop + randNum(screenHeight);
+       Is[i] = randNum(items.length);
+       document.write('<img ID="animitem'+i+'" STYLE="position:absolute; left:'+Xs[i]+'; top:'+Ys[i]+'" src="'+ items[Is[i]] +'">');
+   }
+   setInterval("Animate()",speed);
+}
+
+//-----------></script>
+
+</body>
+</html>

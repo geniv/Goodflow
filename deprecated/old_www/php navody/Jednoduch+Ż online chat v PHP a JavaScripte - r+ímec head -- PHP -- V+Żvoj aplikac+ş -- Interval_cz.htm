@@ -1,0 +1,791 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!-- saved from url=(0080)http://interval.cz/clanky/jednoduchy-online-chat-v-php-a-javascripte-ramec-head/ -->
+<?xml version='1.0' encoding='windows-1250'?><HTML lang=cs xml:lang="cs" 
+xmlns="http://www.w3.org/1999/xhtml"><HEAD><TITLE>Jednoduchý online chat v PHP a JavaScripte - rámec head -- PHP -- Vývoj aplikací -- Interval.cz</TITLE>
+<META http-equiv=Content-Type content="text/html; charset=windows-1250">
+<META http-equiv=Content-language content=cs>
+<META http-equiv=Cache-control content=no-cache>
+<META http-equiv=Pragma content=no-cache>
+<META http-equiv=Expires content=-1>
+<META content=index,follow name=robots>
+<META content=index,follow,snippet,noarchive name=googlebot>
+<META 
+content="V poslednom pokračovaní si rozoberieme rámec head a ukážeme si ako sa vypisujú odkazy v rámci show a online prihlásený v rámci online. Nájdete tu aj odkaz na zdrojové súbory." 
+name=description>
+<META content="PHP, Vývoj aplikací, Interval" name=keywords>
+<META content="49.1915, 16.626" name=ICBM>
+<META content=Interval.cz name=DC.Title>
+<META content=http://interval.cz name=DC.Identifier>
+<META content="(SCHEME=ISSN) 12128651" name=DC.Identifier>
+<META content=cs name=DC.Language>
+<META http-equiv=pics-label 
+content='(pics-1.1 "http://www.icra.org/ratingsv02.html" comment "ICRAonline EN v2.0" l gen true for "http://interval.cz" r (nz 1 vz 1 lz 1 oz 1 cz 1) "http://www.rsac.org/ratingsv01.html" l gen true for "http://interval.cz" r (n 0 s 0 v 0 l 0))'>
+<META http-equiv=imagetoolbar content=no>
+<META http-equiv=MSThemeCompatible content=no>
+<META content=true name=MSSmartTagsPreventParsing><LINK 
+href="http://interval.cz/favicon.ico" type=image/x-icon 
+rel="shortcut icon"><LINK 
+title="Interval.cz -- Jednoduchý online chat v PHP a JavaScripte - rámec head -- (diskuse, Atom 0.3)" 
+href="http://export.interval.cz/?type=atom&amp;discussion=805" 
+type=application/atom+xml rel=alternate><LINK 
+title="Interval.cz -- Jednoduchý online chat v PHP a JavaScripte - rámec head -- (diskuse, RDF Site Summary 1.0)" 
+href="http://export.interval.cz/?type=rdf&amp;discussion=805" 
+type=application/rdf+xml rel=alternate><LINK 
+title="Interval.cz -- Jednoduchý online chat v PHP a JavaScripte - rámec head -- (diskuse, RSS 2.0)" 
+href="http://export.interval.cz/?type=rss&amp;discussion=805" 
+type=application/rss+xml rel=alternate><LINK href="http://interval.cz" 
+rel=home><LINK href="http://interval.cz/search_ex.asp" rel=search><LINK 
+href="http://interval.cz/serialy/jednoduchy-online-chat-v-php-a-javascripte/" 
+rel=up><LINK 
+href="http://interval.cz/clanky/jednoduchy-online-chat-v-php-a-javascripte-uvod/" 
+rel=first><LINK 
+href="http://interval.cz/clanky/jednoduchy-online-chat-v-php-a-javascripte-zobrazenie-online-uzivatelov/" 
+rel=prev><LINK media=all 
+href="Jednoduchý online chat v PHP a JavaScripte - rámec head -- PHP -- Vývoj aplikací -- Interval_cz_soubory/html4.css" 
+type=text/css rel=stylesheet><LINK media=all 
+href="Jednoduchý online chat v PHP a JavaScripte - rámec head -- PHP -- Vývoj aplikací -- Interval_cz_soubory/interval-display.css" 
+type=text/css rel=stylesheet><LINK media=print 
+href="Jednoduchý online chat v PHP a JavaScripte - rámec head -- PHP -- Vývoj aplikací -- Interval_cz_soubory/interval-print.css" 
+type=text/css rel=stylesheet>
+<META content="MSHTML 6.00.2800.1106" name=GENERATOR></HEAD>
+<BODY class="interval interval-articles" id=article-805>
+<DIV class=audits><!-- TOPList.cz -->
+<SCRIPT type=text/javascript>
+<!-- <![CDATA[
+document.write ("<a href='http://www.toplist.cz'><img src='http://www.toplist.cz/dot.asp?id=33617&amp;http="+escape(document.referrer)+"&amp;wi="+escape(window.screen.width)+"&amp;he="+escape(window.screen.height)+"&amp;cd="+escape(window.screen.colorDepth)+"&amp;t="+escape(document.title)+"' style='border: 0; width: 1px; height: 1px' alt='.' /></a>");
+//]]> -->
+</SCRIPT>
+<NOSCRIPT>
+<DIV><A href="http://www.toplist.cz/"><IMG 
+style="BORDER-RIGHT: 0px; BORDER-TOP: 0px; BORDER-LEFT: 0px; WIDTH: 1px; BORDER-BOTTOM: 0px; HEIGHT: 1px" 
+alt=. src=""></A></DIV></NOSCRIPT><!-- TOPList.cz - konec --><!-- iAudit --><IMG 
+style="BORDER-RIGHT: 0px; BORDER-TOP: 0px; BORDER-LEFT: 0px; WIDTH: 1px; BORDER-BOTTOM: 0px; HEIGHT: 1px" 
+alt=. 
+src="Jednoduchý online chat v PHP a JavaScripte - rámec head -- PHP -- Vývoj aplikací -- Interval_cz_soubory/dot.idot.gif"> 
+<!-- iAudit - konec --><!-- (C)2005 Gemius SA - gemiusAudience  / Ostatni -->
+<SCRIPT type=text/javascript><!--
+	
+	gemius_identifier = new String('bQzrQkrzLOWoKbJeudlKguTS7OndUMSqxutbeFviWMv.47');
+	
+	gemius_href=new String(document.location);
+	if (document.referrer) { gemius_ref = new String(document.referrer); } else { gemius_ref = ""; }
+	if(typeof(Error)!='undefined') eval("try { if (typeof(top.document.referrer)=='string') { gemius_ref = top.document.referrer } } catch(gemius_ex) {}");
+	iname = new String('id='+gemius_identifier+';ref='+escape(gemius_ref.substring(0,299))+';href='+escape(gemius_href.substring(0,299))+';');
+	document.write('<iframe src="http://spir.hit.gemius.pl/gemiusaudience.html" name="'+iname+'" width="1" height="1" frameborder="0" scrolling="no"></iframe>');
+	//-->
+	</SCRIPT>
+</DIV>
+<DIV id=advertising-leader-board><!-- StartKód: adarbo2.bbmedia.cz 3.1 Nestandard  Interval(87) / cely web(1) / leaderboard 750x100(1) / nestandard(24) -->
+<SCRIPT type=text/javascript>
+	/* <![CDATA[ */
+	var bbs=screen,bbn=navigator,bbh;bbh='&ubl='+bbn.browserLanguage+'&ucc='+bbn.cpuClass+'&ucd='+bbs.colorDepth+'&uce='+bbn.cookieEnabled+'&udx='+bbs.deviceXDPI+'&udy='+bbs.deviceYDPI+'&usl='+bbn.systemLanguage+'&uje='+bbn.javaEnabled()+'&uah='+bbs.availHeight+'&uaw='+bbs.availWidth+'&ubd='+bbs.bufferDepth+'&uhe='+bbs.height+'&ulx='+bbs.logicalXDPI+'&uly='+bbs.logicalYDPI+'&use='+bbs.fontSmoothingEnabled+'&uto='+(new Date()).getTimezoneOffset()+'&uti='+(new Date()).getTime()+'&uui='+bbs.updateInterval+'&uul='+bbn.userLanguage+'&uwi='+bbs.width;
+	document.write("<scr"+"ipt  language='JavaScript' type='text/javascript' src='http://adarbo2.bbmedia.cz/please/showit/87/1/1/24/?typkodu=non-standard"+bbh+"&alttext=0&border=0&bgcolor=FFFFFF&text=000000&link=0000FF&target=_blank&bust="+Math.random()+"'>");
+	document.write("<"+"\/scr"+"ipt>");
+	/* ]]> */
+	</SCRIPT>
+<!-- KonecKód: adarbo2.bbmedia.cz 3.1 Nestandard --></DIV>
+<DIV id=page-header>
+<DIV id=interval-logo>
+<H1 title="Interval.cz - webdesign a e-komerce denně (logo &amp; index link)"><A 
+href="http://interval.cz/">Interval.cz<SPAN></SPAN></A></H1></DIV>
+<DIV id=advertising-page-header><!-- StartKód: adarbo2.bbmedia.cz 3.1 Nestandard  Interval(87) / cely web(1) / horni468x60(2) / nestandard(24) -->
+<SCRIPT type=text/javascript>
+	/* <![CDATA[ */
+	var bbs=screen,bbn=navigator,bbh;bbh='&ubl='+bbn.browserLanguage+'&ucc='+bbn.cpuClass+'&ucd='+bbs.colorDepth+'&uce='+bbn.cookieEnabled+'&udx='+bbs.deviceXDPI+'&udy='+bbs.deviceYDPI+'&usl='+bbn.systemLanguage+'&uje='+bbn.javaEnabled()+'&uah='+bbs.availHeight+'&uaw='+bbs.availWidth+'&ubd='+bbs.bufferDepth+'&uhe='+bbs.height+'&ulx='+bbs.logicalXDPI+'&uly='+bbs.logicalYDPI+'&use='+bbs.fontSmoothingEnabled+'&uto='+(new Date()).getTimezoneOffset()+'&uti='+(new Date()).getTime()+'&uui='+bbs.updateInterval+'&uul='+bbn.userLanguage+'&uwi='+bbs.width;
+	document.write("<scr"+"ipt  type='text/javascript' src='http://adarbo2.bbmedia.cz/please/showit/87/1/2/24/?typkodu=non-standard"+bbh+"&alttext=0&border=0&bgcolor=FFFFFF&text=000000&link=0000FF&target=_top&bust="+Math.random()+"'>");
+	document.write("<"+"\/scr"+"ipt>");
+	/* ]]> */
+	</SCRIPT>
+<!-- KonecKód: adarbo2.bbmedia.cz 3.1 Nestandard --></DIV>
+<DIV class=page-maker>&nbsp;</DIV></DIV>
+<DIV id=page-topmenu>
+<H2 class=textversion>Navigace</H2><!-- cached 09-15-62-hlavni_menu_with_ascii.txt --><!-- ,Vývoj aplikací ~~ ,,PHP ~~ , -->
+<DIV id=page-mainmenu>
+<H3 class=textversion>Hlavní menu</H3>
+<UL>
+  <LI class=first><A href="http://interval.cz/">Titulka</A></LI>
+  <LI><A href="http://interval.cz/e-komerce/">E-komerce</A></LI>
+  <LI><A href="http://interval.cz/webdesign/">Webdesign</A></LI>
+  <LI class=selected><A href="http://interval.cz/vyvoj-aplikaci/">Vývoj 
+  aplikací</A></LI>
+  <LI><A href="http://interval.cz/nastroje/">Nástroje</A></LI>
+  <LI><A href="http://interval.cz/magazin/">Magazín</A></LI>
+  <LI class="right selected"><A 
+  href="http://interval.inshop.cz/">Knihkupectví</A></LI>
+  <LI class=right><A href="http://interforum.interval.cz/">Interforum</A></LI>
+  <LI class=right><A 
+href="http://interzen.interval.cz/">Interzen</A></LI></UL></DIV>
+<DIV id=page-mainmenu-maker>&nbsp;</DIV>
+<DIV id=page-mainsubmenu>
+<H3 class=textversion>Submenu</H3>
+<UL>
+  <LI><A href="http://interval.cz/vyvoj-aplikaci/j2me/">J2ME</A></LI>
+  <LI><A href="http://interval.cz/vyvoj-aplikaci/asp/">ASP</A></LI>
+  <LI><A href="http://interval.cz/vyvoj-aplikaci/net/">.NET</A></LI>
+  <LI class=selected><A 
+  href="http://interval.cz/vyvoj-aplikaci/php/">PHP</A></LI>
+  <LI><A 
+href="http://interval.cz/vyvoj-aplikaci/javascript/">JavaScript</A></LI>
+  <LI><A href="http://interval.cz/vyvoj-aplikaci/xml/">XML</A></LI>
+  <LI><A href="http://interval.cz/vyvoj-aplikaci/java/">Java</A></LI>
+  <LI><A href="http://interval.cz/vyvoj-aplikaci/perl-cgi/">PERL/CGI</A></LI>
+  <LI><A href="http://interval.cz/vyvoj-aplikaci/databaze/">Databáze</A></LI>
+  <LI><A 
+href="http://interval.cz/vyvoj-aplikaci/bezpecnost/">Bezpečnost</A></LI>
+  <LI><A 
+href="http://interval.cz/vyvoj-aplikaci/analyzy/">Analýzy</A></LI></UL><SPAN 
+id=page-mainsubmenu-maker>&nbsp;</SPAN></DIV><!-- cas behu menu = 0 --></DIV>
+<DIV id=page-body>
+<DIV id=page-left>
+<DIV id=article>
+<H2>Jednoduchý online chat v PHP a JavaScripte - rámec head</H2>
+<P id=prepend>V poslednom pokračovaní si rozoberieme rámec head a ukážeme si ako 
+sa vypisujú odkazy v rámci show a online prihlásený v rámci online. Nájdete tu 
+aj odkaz na zdrojové súbory.</P>
+<DIV class="advertising-bigsquare-outer noprint">
+<DIV class=advertising-bigsquare-inner style="WIDTH: 300px"><!-- StartKód: adarbo2.bbmedia.cz 3.1 Nestandard  Interval(87) / cely web(1) / ctverec250x250(8) / nestandard(24) -->
+<SCRIPT type=text/javascript>
+	/* <![CDATA[ */
+	var bbs=screen,bbn=navigator,bbh;bbh='&ubl='+bbn.browserLanguage+'&ucc='+bbn.cpuClass+'&ucd='+bbs.colorDepth+'&uce='+bbn.cookieEnabled+'&udx='+bbs.deviceXDPI+'&udy='+bbs.deviceYDPI+'&usl='+bbn.systemLanguage+'&uje='+bbn.javaEnabled()+'&uah='+bbs.availHeight+'&uaw='+bbs.availWidth+'&ubd='+bbs.bufferDepth+'&uhe='+bbs.height+'&ulx='+bbs.logicalXDPI+'&uly='+bbs.logicalYDPI+'&use='+bbs.fontSmoothingEnabled+'&uto='+(new Date()).getTimezoneOffset()+'&uti='+(new Date()).getTime()+'&uui='+bbs.updateInterval+'&uul='+bbn.userLanguage+'&uwi='+bbs.width;
+	document.write("<scr"+"ipt  type='text/javascript' src='http://adarbo2.bbmedia.cz/please/showit/87/1/8/24/?typkodu=non-standard"+bbh+"&alttext=0&border=0&bgcolor=FFFFFF&text=000000&link=0000FF&target=_top&bust="+Math.random()+"'>");
+	document.write("<"+"\/scr"+"ipt>");
+	/* ]]> */
+	</SCRIPT>
+<!-- KonecKód: adarbo2.bbmedia.cz 3.1 Nestandard --></DIV></DIV>
+<P class=texttabulka>V rámci head sa každých HEAD_RELOAD_TIMER sekúnd spustí 
+nasledovný skript, pričom funkcia OnLineHead() vráti opäť reťazec online 
+prihlásených oddelených znakom "&gt;". </P>
+<P class=texttabulka>
+<TABLE cellSpacing=0 cellPadding=1 width="100%" border=0>
+  <TBODY>
+  <TR>
+    <TD>
+      <TABLE cellSpacing=0 cellPadding=2 width="100%" border=0>
+        <TBODY>
+        <TR>
+          <TD class=aktuality bgColor=white><SPAN class=comment>// ak nastala 
+            zmena v online uzivateloch - obnov ramec online</SPAN><BR>if( 
+            $old_online != ($new_online = OnLineHead()) 
+            )<BR>&nbsp;&nbsp;JSFrameReload("online","online.php");<BR><BR><SPAN 
+            class=comment>// ak $meno nie je prazdne a nenachadza sa v online 
+            uzivateloch,<BR>// obnov ramec form (tym sa $meno nastavi na prazdny 
+            retazec)</SPAN><BR>if($meno &amp;&amp; 
+            !StrStr($new_online,"&gt;".$meno))<BR>&nbsp;&nbsp;JSFrameReload("form","form.php");<BR><BR><SPAN 
+            class=comment>// zisti velkost suboru s odkazmi</SPAN><BR>do 
+            {<BR>&nbsp;&nbsp;ClearStatCache();<BR>&nbsp;&nbsp;} while( 
+            ($new_size = @FileSize(SHOW_OLDNAME)) === false );<BR><BR><SPAN 
+            class=comment>// ak pribudol novy odkaz - obnov ramec 
+            show</SPAN><BR>if($new_size != 
+            $old_size)<BR>&nbsp;&nbsp;JSFrameReload("show","show.php"); 
+        </TD></TR></TBODY></TABLE></TD></TR></TBODY></TABLE></P>
+<P class=texttabulka>Funkcia OnLineHead() okrem vrátenia reťazca, odstráni zo 
+súboru s online prihlásenými starých užívateľov, ktorý už viac ako 
+AUTO_LOGOUT_TIMER sekúnd nepridali novú správu. Tak ako pri premenovávaní 
+súborov, aj tu sa snažíme zistiť veľkosť súboru v cykle s ošetrením výpisu 
+chybových správ funkcie FileSize(). Ak sa veľkosť nepodarilo zistiť (niekto so 
+súborom pracuje) funkcia vráti false, čo pri automatickom pretypovaní PHP môže 
+byť to isté, ako súbor s nulovou veľkosťou. Preto, vrátenú hodnotu FileSize() 
+porovnáme pomocou operátora === (3 rovná sa), čo bude pravda iba ak sú hodnoty 
+rovnaké a rovnakého typu. </P>
+<P class=texttabulka>Odpočítavanie zabezpečuje jednoduchý JavaScript, ktorý po 
+uplynutí HEAD_RELOAD_TIMER sekúnd obnoví rámec head s nasledovnými parametrami, 
+predanými v URL. </P>
+<P class=texttabulka>
+<TABLE cellSpacing=0 cellPadding=1 width="100%" border=0>
+  <TBODY>
+  <TR>
+    <TD>
+      <TABLE cellSpacing=0 cellPadding=2 width="100%" border=0>
+        <TBODY>
+        <TR>
+          <TD class=aktuality bgColor=white>parent.frames.head.location = 
+            <BR>"head.php?old_size=<B>&lt;?echo 
+            $new_size?&gt;</B>&amp;old_online=<B>&lt;?echo 
+            $new_online?&gt;</B>&amp;meno=" 
+            +<BR>parent.frames.form.document.form.chatar.value 
+      </TD></TR></TBODY></TABLE></TD></TR></TBODY></TABLE></P>
+<P class=texttabulka>Teda s veľkosťou súboru s odkazmi (aby sme vedeli, kedy 
+obnoviť rámec show), reťazcom online prihlásených pred časom HEAD_RELOAD_TIMER 
+(aby sme vedeli, kedy obnoviť rámec online) a našim menom, ktoré je prihlásené, 
+čo vieme podľa naplneného inputu chatar v rámci form. Hodnotu inputu chatar 
+získame pomocou JavaScriptu. Najskôr sa pomocou objektov dostaneme do rámca form 
+(parent.frames.form) a potom získame hodnotu inputu chatar z formulára form 
+(document.form.chatar.value). Po spustení skriptu head.php kontrolujeme, či sa 
+takto získané meno nachádza vo vrátenej hodnote funkcie OnLineHead(). Ak sa tam 
+nenachádza, znamená to, že toto meno bolo automaticky odhlásené z online 
+chatujúcich. Musíme teda zabezpečiť obnovenie rámca form, pretože takéto meno už 
+nie je medzi online. </P>
+<P class=texttabulka>Počas chatovania môže nastať prípad, že niekto odošle 
+formulár a kým príde odpoveď zo serveru nemusí byť rámec form ešte kompletne 
+načítaný, teda nemusí existovať formulár a ani hodnota chatar. Preto je v rámci 
+head JavaScriptová funkcia Timer() ošetrená, aby čakala na to dokiaľ neexistuje 
+objekt parent.frames.form.document.form. Ak tento prípad nastane, vo formulári 
+rámca head sa na tento čas objaví znak "w". </P>
+<P class=texttabulka>Výpis odkazov v rámci head je takmer rovnaký, ako v prvom 
+jednoduchom chate. Pribudla tu jedine možnosť zobrazovať odkazy na stránke v 
+opačnom poradí, teda nový odkaz sa objaví hore. V zdrojovom kóde je 
+prednastavený výpis, že nové odkazy sa zobrazujú dole. Ak by to niekomu 
+nevyhovovalo, stačí dať do poznámok funkciu FPassThru(), a odstrániť poznámky /* 
+... */. </P>
+<P class=texttabulka>
+<TABLE cellSpacing=0 cellPadding=1 width="100%" border=0>
+  <TBODY>
+  <TR>
+    <TD>
+      <TABLE cellSpacing=0 cellPadding=2 width="100%" border=0>
+        <TBODY>
+        <TR>
+          <TD class=aktuality bgColor=white><SPAN class=comment>// vypis 
+            suboru od aktualnej pozicie &amp; zatvor 
+            subor</SPAN><BR>FPassThru($fp);<BR><BR><SPAN class=comment>/*<BR>// 
+            opacny vypis SHOW<BR>if($velkost_suboru &gt;= 
+            POCETODKAZ_MAX_BYTE)<BR>&nbsp;&nbsp;$pocet_odkazov = 
+            POCETODKAZ_MAX;<BR>else<BR>&nbsp;&nbsp;$pocet_odkazov = 
+            $velkost_suboru / JEDENODKAZ_MAX_BYTE;<BR><BR>for($i=0 ; 
+            $i&lt;$pocet_odkazov ; $i++)<BR>&nbsp;&nbsp;$pole[$i] = 
+            FGetS($fp,JEDENODKAZ_MAX_BYTE+1);<BR>FClose($fp);<BR><BR>for($i=POCETODKAZ_MAX-1 
+            ; $i&gt;=0 ; $i--)<BR>&nbsp;&nbsp;$s .= $pole[$i];<BR><BR>echo 
+            $s;<BR>*/</SPAN> </TD></TR></TBODY></TABLE></TD></TR></TBODY></TABLE></P>
+<P class=texttabulka>Výpis online užívateľov do rámca online je podobný ako pri 
+funkciách OnLine... Do rámca reklama.php si pridáme formulár na zobrazenie 
+odkazov od ... do. Formulár sa nikdy neodošle, iba po stlačení buttonu sa vykoná 
+funkcia Zobraz(), ktorá prekontroluj či vstupy od ... do vyhovujú a otvorí 
+pomocou JavaScriptu nové okno, kde zobrazíme odkazy od ... do. Toto zabezpečuje 
+skript zobraz.php (nie sú ošetrené parametre predávané cez URL). </P>
+<P class=texttabulka>
+<TABLE cellSpacing=0 cellPadding=1 width="100%" border=0>
+  <TBODY>
+  <TR>
+    <TD>
+      <TABLE cellSpacing=0 cellPadding=2 width="100%" border=0>
+        <TBODY>
+        <TR>
+          <TD class=aktuality bgColor=white>while( ($fp = 
+            @FOpen(SHOW_OLDNAME,"r")) == false 
+            );<BR><BR>FSeek($fp,$od*JEDENODKAZ_MAX_BYTE);<BR><BR>echo 
+            FRead($fp,$do*JEDENODKAZ_MAX_BYTE - $od*JEDENODKAZ_MAX_BYTE); 
+            <BR>FClose($fp); </TD></TR></TBODY></TABLE></TD></TR></TBODY></TABLE></P>
+<P class=texttabulka>Dúfam, že skript vám pobeží bez problémov, pretože i po 
+absolvovaní mnohých skúšok ešte stále môže nastať nepredvídateľná udalosť. 
+Skript napríklad nemá obmedzenie na počet naraz prihlásených užívateľov. Ďalšie 
+vylepšenia sú už len na vás, úloha, ktorú som si dal ja, bola doplniť prvý chat 
+o zoznam online prihlásených bez databázy a zabrániť prihláseniu sa dvoch 
+rovnakých mien, a to bez zložitých identifikácií užívateľa. Odskúšaný bol v IE 
+5.5, NN6, Mozilla 0.9, Opera 5.12. Zdrojové súbory (zip) sú <A 
+href="http://podklady.interval.cz/kubis/jednoduchychat2.zip">k stiahnutiu 
+tu.</A> A dnes už naposledy <A 
+href="http://jednoduchychat2.webzdarma.cz/index.php">odkaz na ukážku chatu.</A> 
+</P>
+<DIV id=article-author><A href="http://interval.cz/autori/kubis-michal/">Kubiš, 
+Michal</A> (1.&nbsp;11.&nbsp;2001) </DIV>
+<DIV class=refer>
+<H3><A 
+title="Jednoduchý online chat v PHP a JavaScripte (úplný přehled článků seriálu)" 
+href="http://interval.cz/serialy/jednoduchy-online-chat-v-php-a-javascripte/">Jednoduchý 
+online chat v PHP a JavaScripte</A></H3>
+<P>Kouzlo okamžité komunikace si můžete vychutnat prostřednictvím chatu. Tato 
+základní web-based aplikace vám předvede, co internet umí, a naučí to i vás. 
+Tato série článků již byla uzavřena, ačkoli další pokračování nelze 
+vyloučit.</P>
+<UL>
+  <LI><STRONG>Jednoduchý online chat v PHP a JavaScripte - rámec head</STRONG> 
+  (právě čtete)
+  <LI><A 
+  href="http://interval.cz/clanky/jednoduchy-online-chat-v-php-a-javascripte-zobrazenie-online-uzivatelov/">Jednoduchý 
+  online chat v PHP a JavaScripte - zobrazenie online užívateľov</A> 
+  (30.&nbsp;10.&nbsp;2001)
+  <LI><A 
+  href="http://interval.cz/clanky/jednoduchy-online-chat-v-php-a-javascripte-rozsirenie-aplikacie/">Jednoduchý 
+  online chat v PHP a JavaScripte - rozšírenie aplikácie</A> 
+  (26.&nbsp;10.&nbsp;2001)
+  <LI><A 
+  href="http://interval.cz/clanky/jednoduchy-online-chat-v-php-a-javascripte-uvod/">Jednoduchý 
+  online chat v PHP a JavaScripte - úvod</A> 
+(24.&nbsp;8.&nbsp;2001)</LI></UL></DIV>
+<DIV class=noprint id=article-discussion><!-- cached 805-tabulka-jednoduchy-online-chat-v-php-a-javascripte-ramec-head.txt -->
+<DIV id=article-discussion-index>
+<FORM action=http://interval.cz/discussion-read.asp?disc=805 method=post>
+<TABLE cellSpacing=0>
+  <TBODY>
+  <TR>
+    <TH colSpan=4><A 
+      title="Jednoduchý online chat v PHP a JavaScripte - rámec ... (diskuse)" 
+      href="http://interval.cz/clanky/jednoduchy-online-chat-v-php-a-javascripte-ramec-head/diskuse/">Jednoduchý 
+      online chat v PHP a JavaScripte - rámec ... (diskuse)</A></TH></TR>
+  <TR>
+    <TD class=checkbox><INPUT title="0 3127" type=checkbox value=1 
+      name=checkboxDISKUZE3127></TD>
+    <TD class=date>2001-11-01 23:31:17</TD>
+    <TD class=sender>ivan bares</TD>
+    <TD class=subject>!chat je stejne nepouzitelny!</TD></TR>
+  <TR>
+    <TD class=checkbox><INPUT title="0 3128" type=checkbox value=1 
+      name=checkboxDISKUZE3128></TD>
+    <TD class=date>2001-11-01 23:31:17</TD>
+    <TD class=sender>ivan bares</TD>
+    <TD class=subject>!chat je stejne nepouzitelny!</TD></TR>
+  <TR>
+    <TD class=checkbox><INPUT title="1 3129" type=checkbox value=1 
+      name=checkboxDISKUZE3129></TD>
+    <TD class=date>2001-11-02 09:22:48</TD>
+    <TD class=sender>Michal Kubis</TD>
+    <TD class=subject><IMG class=line alt=. 
+      src="Jednoduchý online chat v PHP a JavaScripte - rámec head -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Jednoduchý online chat v PHP a JavaScripte - rámec head -- PHP -- Vývoj aplikací -- Interval_cz_soubory/line1.png">!chat 
+      je stejne nepouzitelny!</TD></TR>
+  <TR>
+    <TD class=checkbox><INPUT title="2 3130" type=checkbox value=1 
+      name=checkboxDISKUZE3130></TD>
+    <TD class=date>2001-11-02 13:08:52</TD>
+    <TD class=sender>vlczaak</TD>
+    <TD class=subject><IMG class=line alt=. 
+      src="Jednoduchý online chat v PHP a JavaScripte - rámec head -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Jednoduchý online chat v PHP a JavaScripte - rámec head -- PHP -- Vývoj aplikací -- Interval_cz_soubory/line2.png"><IMG 
+      class=line alt=. 
+      src="Jednoduchý online chat v PHP a JavaScripte - rámec head -- PHP -- Vývoj aplikací -- Interval_cz_soubory/line3.png">!chat 
+      je stejne nepouzitelny!</TD></TR>
+  <TR>
+    <TD class=checkbox><INPUT title="1 3136" type=checkbox value=1 
+      name=checkboxDISKUZE3136></TD>
+    <TD class=date>2001-11-03 16:23:54</TD>
+    <TD class=sender>Kyle Simmons</TD>
+    <TD class=subject><IMG class=line alt=. 
+      src="Jednoduchý online chat v PHP a JavaScripte - rámec head -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Jednoduchý online chat v PHP a JavaScripte - rámec head -- PHP -- Vývoj aplikací -- Interval_cz_soubory/line1.png">!chat 
+      je stejne nepouzitelny!</TD></TR>
+  <TR>
+    <TD class=checkbox><INPUT title="1 3283" type=checkbox value=1 
+      name=checkboxDISKUZE3283></TD>
+    <TD class=date>2001-12-01 12:07:33</TD>
+    <TD class=sender>Michal</TD>
+    <TD class=subject><IMG class=line alt=. 
+      src="Jednoduchý online chat v PHP a JavaScripte - rámec head -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Jednoduchý online chat v PHP a JavaScripte - rámec head -- PHP -- Vývoj aplikací -- Interval_cz_soubory/line3.png">!chat 
+      je stejne nepouzitelny!</TD></TR>
+  <TR>
+    <TD class=checkbox><INPUT title="0 3244" type=checkbox value=1 
+      name=checkboxDISKUZE3244></TD>
+    <TD class=date>2001-11-19 13:38:50</TD>
+    <TD class=sender>Tomas</TD>
+    <TD class=subject>Rada</TD></TR>
+  <TR>
+    <TD class=checkbox><INPUT title="1 3245" type=checkbox value=1 
+      name=checkboxDISKUZE3245></TD>
+    <TD class=date>2001-11-19 13:58:05</TD>
+    <TD class=sender>Michal Kubis</TD>
+    <TD class=subject><IMG class=line alt=. 
+      src="Jednoduchý online chat v PHP a JavaScripte - rámec head -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Jednoduchý online chat v PHP a JavaScripte - rámec head -- PHP -- Vývoj aplikací -- Interval_cz_soubory/line3.png">Rada</TD></TR>
+  <TR>
+    <TD class=checkbox><INPUT title="0 3587" type=checkbox value=1 
+      name=checkboxDISKUZE3587></TD>
+    <TD class=date>2002-01-09 13:51:37</TD>
+    <TD class=sender>Ladik Varga</TD>
+    <TD class=subject>Pomoc pri hostovani na webzdarma.</TD></TR>
+  <TR>
+    <TD class=checkbox><INPUT title="1 3588" type=checkbox value=1 
+      name=checkboxDISKUZE3588></TD>
+    <TD class=date>2002-01-09 14:13:32</TD>
+    <TD class=sender>Michal Kubis</TD>
+    <TD class=subject><IMG class=line alt=. 
+      src="Jednoduchý online chat v PHP a JavaScripte - rámec head -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Jednoduchý online chat v PHP a JavaScripte - rámec head -- PHP -- Vývoj aplikací -- Interval_cz_soubory/line3.png">Pomoc 
+      pri hostovani na webzdarma.</TD></TR>
+  <TR>
+    <TD class=checkbox><INPUT title="2 3618" type=checkbox value=1 
+      name=checkboxDISKUZE3618></TD>
+    <TD class=date>2002-01-10 14:20:24</TD>
+    <TD class=sender>Ladik Varga</TD>
+    <TD class=subject><IMG class=line alt=. 
+      src="Jednoduchý online chat v PHP a JavaScripte - rámec head -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Jednoduchý online chat v PHP a JavaScripte - rámec head -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Jednoduchý online chat v PHP a JavaScripte - rámec head -- PHP -- Vývoj aplikací -- Interval_cz_soubory/line3.png">Pomoc 
+      pri hostovani na webzdarma.</TD></TR>
+  <TR>
+    <TD class=checkbox><INPUT title="3 3620" type=checkbox value=1 
+      name=checkboxDISKUZE3620></TD>
+    <TD class=date>2002-01-10 15:27:09</TD>
+    <TD class=sender>Michal Kubis</TD>
+    <TD class=subject><IMG class=line alt=. 
+      src="Jednoduchý online chat v PHP a JavaScripte - rámec head -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Jednoduchý online chat v PHP a JavaScripte - rámec head -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Jednoduchý online chat v PHP a JavaScripte - rámec head -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Jednoduchý online chat v PHP a JavaScripte - rámec head -- PHP -- Vývoj aplikací -- Interval_cz_soubory/line3.png">Pomoc 
+      pri hostovani na webzdarma.</TD></TR>
+  <TR>
+    <TD class=checkbox><INPUT title="0 3930" type=checkbox value=1 
+      name=checkboxDISKUZE3930></TD>
+    <TD class=date>2002-01-29 20:02:22</TD>
+    <TD class=sender>Ladislav Varga</TD>
+    <TD class=subject>Obcas se stava ye odpocitavadlo zmizi.</TD></TR>
+  <TR>
+    <TD class=checkbox><INPUT title="1 3934" type=checkbox value=1 
+      name=checkboxDISKUZE3934></TD>
+    <TD class=date>2002-01-30 08:11:05</TD>
+    <TD class=sender>Michal Kubis</TD>
+    <TD class=subject><IMG class=line alt=. 
+      src="Jednoduchý online chat v PHP a JavaScripte - rámec head -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Jednoduchý online chat v PHP a JavaScripte - rámec head -- PHP -- Vývoj aplikací -- Interval_cz_soubory/line3.png">Obcas 
+      se stava ye odpocitavadlo zmizi.</TD></TR>
+  <TR>
+    <TD class=checkbox><INPUT title="2 34171" type=checkbox value=1 
+      name=checkboxDISKUZE34171></TD>
+    <TD class=date>2005-01-14 16:36:53</TD>
+    <TD class=sender>Tomas</TD>
+    <TD class=subject><IMG class=line alt=. 
+      src="Jednoduchý online chat v PHP a JavaScripte - rámec head -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Jednoduchý online chat v PHP a JavaScripte - rámec head -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Jednoduchý online chat v PHP a JavaScripte - rámec head -- PHP -- Vývoj aplikací -- Interval_cz_soubory/line3.png">Obcas 
+      se stava ye odpocitavadlo zmizi...</TD></TR>
+  <TR>
+    <TD class=checkbox><INPUT title="0 4786" type=checkbox value=1 
+      name=checkboxDISKUZE4786></TD>
+    <TD class=date>2002-03-27 15:47:27</TD>
+    <TD class=sender>Tomáš</TD>
+    <TD class=subject>celkový kolaps</TD></TR>
+  <TR>
+    <TD class=checkbox><INPUT title="1 4792" type=checkbox value=1 
+      name=checkboxDISKUZE4792></TD>
+    <TD class=date>2002-03-27 21:23:46</TD>
+    <TD class=sender>LAdislav VArga</TD>
+    <TD class=subject><IMG class=line alt=. 
+      src="Jednoduchý online chat v PHP a JavaScripte - rámec head -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Jednoduchý online chat v PHP a JavaScripte - rámec head -- PHP -- Vývoj aplikací -- Interval_cz_soubory/line3.png">celkový 
+      kolaps</TD></TR>
+  <TR>
+    <TD class=checkbox><INPUT title="0 27412" type=checkbox value=1 
+      name=checkboxDISKUZE27412></TD>
+    <TD class=date>2004-06-15 21:15:03</TD>
+    <TD class=sender>sdasdas</TD>
+    <TD class=subject>sdfsdf</TD></TR>
+  <TR>
+    <TD class=checkbox><INPUT title="0 30494" type=checkbox value=1 
+      name=checkboxDISKUZE30494></TD>
+    <TD class=date>2004-09-30 17:30:47</TD>
+    <TD class=sender>Martin Repka</TD>
+    <TD class=subject>PHP chat-refresh</TD></TR>
+  <TR>
+    <TD class=checkbox><INPUT title="1 30502" type=checkbox value=1 
+      name=checkboxDISKUZE30502></TD>
+    <TD class=date>2004-09-30 22:33:37</TD>
+    <TD class=sender>Vilém Málek</TD>
+    <TD class=subject><IMG class=line alt=. 
+      src="Jednoduchý online chat v PHP a JavaScripte - rámec head -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Jednoduchý online chat v PHP a JavaScripte - rámec head -- PHP -- Vývoj aplikací -- Interval_cz_soubory/line3.png">PHP 
+      chat-refresh</TD></TR>
+  <TR>
+    <TD class=checkbox><INPUT title="2 30926" type=checkbox value=1 
+      name=checkboxDISKUZE30926></TD>
+    <TD class=date>2004-10-12 07:45:31</TD>
+    <TD class=sender>progman</TD>
+    <TD class=subject><IMG class=line alt=. 
+      src="Jednoduchý online chat v PHP a JavaScripte - rámec head -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Jednoduchý online chat v PHP a JavaScripte - rámec head -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Jednoduchý online chat v PHP a JavaScripte - rámec head -- PHP -- Vývoj aplikací -- Interval_cz_soubory/line1.png">Rozsirenie</TD></TR>
+  <TR>
+    <TD class=checkbox><INPUT title="2 31706" type=checkbox value=1 
+      name=checkboxDISKUZE31706></TD>
+    <TD class=date>2004-10-27 16:56:49</TD>
+    <TD class=sender>Jméno a příjmení</TD>
+    <TD class=subject><IMG class=line alt=. 
+      src="Jednoduchý online chat v PHP a JavaScripte - rámec head -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Jednoduchý online chat v PHP a JavaScripte - rámec head -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Jednoduchý online chat v PHP a JavaScripte - rámec head -- PHP -- Vývoj aplikací -- Interval_cz_soubory/line3.png">PHP 
+      chat-refresh</TD></TR>
+  <TR>
+    <TD class=checkbox><INPUT title="3 31712" type=checkbox value=1 
+      name=checkboxDISKUZE31712></TD>
+    <TD class=date>2004-10-27 18:54:45</TD>
+    <TD class=sender>Vilém Málek</TD>
+    <TD class=subject><IMG class=line alt=. 
+      src="Jednoduchý online chat v PHP a JavaScripte - rámec head -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Jednoduchý online chat v PHP a JavaScripte - rámec head -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Jednoduchý online chat v PHP a JavaScripte - rámec head -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Jednoduchý online chat v PHP a JavaScripte - rámec head -- PHP -- Vývoj aplikací -- Interval_cz_soubory/line3.png">PHP 
+      chat-refresh</TD></TR>
+  <TR>
+    <TD class=checkbox><INPUT title="4 41413" type=checkbox value=1 
+      name=checkboxDISKUZE41413></TD>
+    <TD class=date>2005-11-21 20:22:13</TD>
+    <TD class=sender>Cucholapka</TD>
+    <TD class=subject><IMG class=line alt=. 
+      src="Jednoduchý online chat v PHP a JavaScripte - rámec head -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Jednoduchý online chat v PHP a JavaScripte - rámec head -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Jednoduchý online chat v PHP a JavaScripte - rámec head -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Jednoduchý online chat v PHP a JavaScripte - rámec head -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Jednoduchý online chat v PHP a JavaScripte - rámec head -- PHP -- Vývoj aplikací -- Interval_cz_soubory/line3.png">PHP 
+      chat-refresh</TD></TR>
+  <TR>
+    <TD class=checkbox><INPUT title="5 41414" type=checkbox value=1 
+      name=checkboxDISKUZE41414></TD>
+    <TD class=date>2005-11-21 20:24:31</TD>
+    <TD class=sender>Cucholapka</TD>
+    <TD class=subject><IMG class=line alt=. 
+      src="Jednoduchý online chat v PHP a JavaScripte - rámec head -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Jednoduchý online chat v PHP a JavaScripte - rámec head -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Jednoduchý online chat v PHP a JavaScripte - rámec head -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Jednoduchý online chat v PHP a JavaScripte - rámec head -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Jednoduchý online chat v PHP a JavaScripte - rámec head -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Jednoduchý online chat v PHP a JavaScripte - rámec head -- PHP -- Vývoj aplikací -- Interval_cz_soubory/line3.png">PHP 
+      chat-refresh</TD></TR>
+  <TR>
+    <TD class=checkbox><INPUT title="0 41313" type=checkbox value=1 
+      name=checkboxDISKUZE41313></TD>
+    <TD class=date>2005-11-09 18:08:13</TD>
+    <TD class=sender>peta</TD>
+    <TD class=subject>chat upraven pro smajliky...</TD></TR>
+  <TR>
+    <TD class=checkbox><INPUT title="1 44741" type=checkbox value=1 
+      name=checkboxDISKUZE44741></TD>
+    <TD class=date>2006-06-18 03:25:17</TD>
+    <TD class=sender>pixo</TD>
+    <TD class=subject><IMG class=line alt=. 
+      src="Jednoduchý online chat v PHP a JavaScripte - rámec head -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Jednoduchý online chat v PHP a JavaScripte - rámec head -- PHP -- Vývoj aplikací -- Interval_cz_soubory/line3.png">chat 
+      upraven pro smajliky...</TD></TR>
+  <TR>
+    <TD class=checkbox><INPUT title="0 42269" type=checkbox value=1 
+      name=checkboxDISKUZE42269></TD>
+    <TD class=date>2006-01-23 16:29:06</TD>
+    <TD class=sender>dsadasd</TD>
+    <TD class=subject>Prosim o pomoc</TD></TR>
+  <TR>
+    <TD class=checkbox><INPUT title="0 43594" type=checkbox value=1 
+      name=checkboxDISKUZE43594></TD>
+    <TD class=date>2006-03-31 20:08:03</TD>
+    <TD class=sender>podnebem</TD>
+    <TD class=subject>Dost dobrý ale....</TD></TR>
+  <TR>
+    <TD class=checkbox><INPUT title="0 44870" type=checkbox value=1 
+      name=checkboxDISKUZE44870></TD>
+    <TD class=date>2006-06-26 11:39:56</TD>
+    <TD class=sender>honza</TD>
+    <TD class=subject>pomoc</TD></TR>
+  <TR>
+    <TD id=foot colSpan=4><INPUT class=submit id=display_selected type=submit value="Zobrazit vybrané" name=display_selected> 
+      &nbsp; <INPUT class=submit id=display_all type=submit value="Zobrazit vše" name=display_all> 
+      &nbsp; <INPUT class=submit id=add_new type=submit value="Vložit nový" name=add_new></TD></TR></TBODY></TABLE></FORM></DIV></DIV></DIV></DIV>
+<DIV id=page-right>
+<H2 class=textversion>Pravý sloupek</H2>
+<DIV id=search>
+<H3 class=textversion>Vyhledávání</H3>
+<FORM action=http://interval.cz/search.asp method=get>
+<DIV><INPUT class=text name=co> <!--  
+<select name='cim'>
+<option value ='Google' selected='selected'>Google</option>
+<option value ='Jyxo'>Jyxo</option>
+</select>
+<input type='hidden' name='nadpis' value='1' />
+<input type='hidden' name='popis' value='1' />
+<input type='hidden' name='text' value='1' />
+<input type='hidden' name='rubrika' value='0' />
+<input type='hidden' name='autor' value='0' />
+ --><INPUT class=submit type=submit value=Najdi! name=send> </DIV></FORM><!-- <div><a href='http://interval.cz/search.asp'>Rozšířené vyhledávání</a></div> --></DIV><!-- StartKód: adarbo2.bbmedia.cz 3.1 Nestandard  Interval(87) / home page(2) / textbox(1) / nestandard(24) -->
+<SCRIPT type=text/javascript>
+	<!-- <![CDATA[
+	var bbs=screen,bbn=navigator,bbh;bbh='&ubl='+bbn.browserLanguage+'&ucc='+bbn.cpuClass+'&ucd='+bbs.colorDepth+'&uce='+bbn.cookieEnabled+'&udx='+bbs.deviceXDPI+'&udy='+bbs.deviceYDPI+'&usl='+bbn.systemLanguage+'&uje='+bbn.javaEnabled()+'&uah='+bbs.availHeight+'&uaw='+bbs.availWidth+'&ubd='+bbs.bufferDepth+'&uhe='+bbs.height+'&ulx='+bbs.logicalXDPI+'&uly='+bbs.logicalYDPI+'&use='+bbs.fontSmoothingEnabled+'&uto='+(new Date()).getTimezoneOffset()+'&uti='+(new Date()).getTime()+'&uui='+bbs.updateInterval+'&uul='+bbn.userLanguage+'&uwi='+bbs.width;
+	document.write("<scr"+"ipt  language='JavaScript' type='text/javascript' src='http://adarbo2.bbmedia.cz/please/showit/87/2/1/24/?typkodu=non-standard"+bbh+"&alttext=0&border=0&bgcolor=FFFFFF&text=000000&link=0000FF&target=_blank&bust="+Math.random()+"'>");
+	document.write("<"+"\/scr"+"ipt>");
+	//]]> -->
+	</SCRIPT>
+<!-- KonecKód: adarbo2.bbmedia.cz 3.1 Nestandard -->
+<DIV class="page-right-box book">
+<H3>Knižní tip</H3>
+<DIV class=page-right-box-in>
+<DIV class=book-top>
+<H4><A 
+href="http://interval.inshop.cz/inshop/scripts/detail.asp?kat=070">Macromedia 
+Flash jednoduše pro verze 4, 5, MX</A></H4></DIV>
+<DIV class=image><A 
+href="http://interval.inshop.cz/inshop/scripts/detail.asp?kat=070"><IMG 
+title="Macromedia Flash jednoduše pro verze 4, 5, MX" alt=obálka 
+src="Jednoduchý online chat v PHP a JavaScripte - rámec head -- PHP -- Vývoj aplikací -- Interval_cz_soubory/K0635.jpg"></A></DIV></DIV></DIV><!-- cached 17-nejctenejsi_clanky.txt -->
+<DIV class="page-right-box reading">
+<H3 title="Nejčtenější články za posledních 28 dnů">Nejčtenější</H3>
+<DIV class=page-right-box-in>
+<UL>
+  <LI><A href="http://interval.cz/clanky/opera-9-pokrocila-konfigurace/">Opera 9 
+  - pokročilá konfigurace</A>
+  <LI><A 
+  href="http://interval.cz/clanky/adobe-photoshop-prakticky-webdesign-jakub-krcmar/">Adobe 
+  Photoshop - praktický webdesign (Jakub Krčmář)</A>
+  <LI><A 
+  href="http://interval.cz/clanky/drupal-tvorba-vlastniho-vzhledu/">Drupal - 
+  tvorba vlastního vzhledu</A>
+  <LI><A 
+  href="http://interval.cz/clanky/pruvodce-svg-dalsi-nastroje-pro-tvorbu-svg-grafiky/">Průvodce 
+  SVG - další nástroje pro tvorbu SVG grafiky</A>
+  <LI><A 
+  href="http://interval.cz/clanky/spravy-zo-slovenskeho-internetu-8/">Správy zo 
+  slovenského internetu 8.</A></LI></UL></DIV></DIV>
+<DIV class=merak-box style="MARGIN-TOP: 1.5em; TEXT-ALIGN: center">
+<DIV id=merak-content 
+style="BORDER-RIGHT: #000000 1px solid; BORDER-TOP: #000000 1px solid; FONT-WEIGHT: bold; FONT-SIZE: 11px; BACKGROUND-IMAGE: url(http://interval.cz/__services/__include_right/merak-background.png); MARGIN: 0px auto; BORDER-LEFT: #000000 1px solid; WIDTH: 160px; BORDER-BOTTOM: #000000 1px solid; BACKGROUND-REPEAT: no-repeat; FONT-FAMILY: Verdana, Arial, sans-serif; HEIGHT: 190px; TEXT-ALIGN: left; FONT-VARIANT: small-caps">
+<H3 style="FONT-SIZE: 12px; MARGIN: 55px 0px 10px 10px; FONT-VARIANT: normal"><A 
+title="Merak Mail Server 8" 
+style="COLOR: #000000; BACKGROUND-COLOR: transparent; TEXT-DECORATION: none" 
+href="http://www.merak-mail-server.cz/">Merak Mail Server 8</A></H3>
+<DIV id=merak-proclamation style="PADDING-LEFT: 10px">Integrovaný <EM><A 
+title="Merak Mail Server 8" 
+style="COLOR: #35a0df; FONT-STYLE: normal; BACKGROUND-COLOR: transparent; TEXT-DECORATION: none" 
+href="http://www.merak-mail-server.cz/">antispam</A></EM> <BR>Snadná <EM><A 
+title="Merak Mail Server 8" 
+style="COLOR: #35a0df; FONT-STYLE: normal; BACKGROUND-COLOR: transparent; TEXT-DECORATION: none" 
+href="http://www.merak-mail-server.cz/">instalace</A></EM> <BR>Zabezpečený 
+<EM><A title="Merak Mail Server 8" 
+style="COLOR: #35a0df; FONT-STYLE: normal; BACKGROUND-COLOR: transparent; TEXT-DECORATION: none" 
+href="http://www.merak-mail-server.cz/">groupware</A></EM> </DIV></DIV></DIV>
+<DIV class="page-right-box emailserv">
+<H3>Info servis</H3>
+<DIV class=page-right-box-in>
+<UL>
+  <LI><A title="Exporty aktuálních informací ve formátech Atom, RDF a RSS" 
+  href="http://export.interval.cz/">Atom, RDF, RSS</A> 
+  <LI>Informace e-mailem: </LI></UL>
+<FORM action=prihlaseni.asp method=post>
+<DIV class=shell><INPUT class=text name=adresa></DIV>
+<DIV class=shell><INPUT class=radio type=radio CHECKED value=1 name=co>Týdenní 
+přehled článků</DIV>
+<DIV class=shell><INPUT class=radio type=radio value=2 name=co>HELP 
+konference</DIV>
+<DIV 
+class=shell><INPUT class=submit type=submit value=Přihlásit></DIV></FORM></DIV></DIV>
+<DIV class=advertising-vertical-banner-outer>
+<DIV class=advertising-vertical-banner-inner><!-- Skyscraper Right --><!-- BBSTART Interval.cz/Skyscraper Right/rolovací/Skyscraper 120x600 -->
+<SCRIPT type=text/javascript>/* <![CDATA[ */
+var bbat=0,bbbr=0,bbtt='_blank',bbpath='17877/4/2/9',bbxl=1,bbac=1;
+//]]></SCRIPT>
+
+<SCRIPT 
+src="Jednoduchý online chat v PHP a JavaScripte - rámec head -- PHP -- Vývoj aplikací -- Interval_cz_soubory/bb4.js" 
+type=text/javascript></SCRIPT>
+<NOSCRIPT>
+<DIV><A href="http://ad2.billboard.cz/please/redirect/17877/4/2/9/"><IMG 
+style="BORDER-RIGHT: 0px; BORDER-TOP: 0px; BORDER-LEFT: 0px; BORDER-BOTTOM: 0px" 
+height=600 alt=. 
+src="Jednoduchý online chat v PHP a JavaScripte - rámec head -- PHP -- Vývoj aplikací -- Interval_cz_soubory/fallback9.gif" 
+width=120></A></DIV></NOSCRIPT><!-- BBKONEC --></DIV></DIV><!-- cached 17-nejdiskutovanejsi_clanky.txt -->
+<DIV class="page-right-box cauldron">
+<H3 title="Nejdiskutovanější články za posledních 28 dnů">Diskuzní kotel</H3>
+<DIV class=page-right-box-in>
+<UL>
+  <LI><A title="(103 komentářů)" 
+  href="http://interval.cz/clanky/opera-9-pokrocila-konfigurace/">Opera 9 - 
+  pokročilá konfigurace</A>
+  <LI><A title="(4 komentářů)" 
+  href="http://interval.cz/clanky/pruvodce-svg-dalsi-nastroje-pro-tvorbu-svg-grafiky/">Průvodce 
+  SVG - další nástroje pro tvorbu SVG grafiky</A>
+  <LI><A title="(2 komentářů)" 
+  href="http://interval.cz/clanky/drupal-tvorba-vlastniho-vzhledu/">Drupal - 
+  tvorba vlastního vzhledu</A>
+  <LI><A title="(2 komentářů)" 
+  href="http://interval.cz/clanky/spravy-zo-slovenskeho-internetu-9/">Správy zo 
+  slovenského internetu 9.</A>
+  <LI><A title="(1 komentářů)" 
+  href="http://interval.cz/clanky/lokalizace-asp-net-2-x-aplikaci/">Lokalizace 
+  ASP.NET 2.x aplikací</A></LI></UL></DIV></DIV></DIV>
+<DIV class=page-maker>&nbsp;</DIV>
+<DIV class=page-maker-white>&nbsp;</DIV></DIV>
+<DIV id=advertising-page-bottom>
+<DIV id=advertising-page-bottom-left>
+<DIV><!-- Full Banner Bottom --><!-- BBSTART Interval.cz/Full Banner Bottom/rolovací/Full Banner 468x60 -->
+<SCRIPT type=text/javascript>/* <![CDATA[ */
+var bbat=0,bbbr=0,bbtt='_blank',bbpath='17877/1/2/1',bbxl=1,bbac=1;
+//]]></SCRIPT>
+
+<SCRIPT 
+src="Jednoduchý online chat v PHP a JavaScripte - rámec head -- PHP -- Vývoj aplikací -- Interval_cz_soubory/bb4.js" 
+type=text/javascript></SCRIPT>
+<NOSCRIPT>
+<DIV><A href="http://ad2.billboard.cz/please/redirect/17877/1/2/1/"><IMG 
+style="BORDER-RIGHT: 0px; BORDER-TOP: 0px; BORDER-LEFT: 0px; BORDER-BOTTOM: 0px" 
+height=60 alt=. 
+src="Jednoduchý online chat v PHP a JavaScripte - rámec head -- PHP -- Vývoj aplikací -- Interval_cz_soubory/fallback1.gif" 
+width=468></A></DIV></NOSCRIPT><!-- BBKONEC --></DIV></DIV>
+<DIV id=advertising-page-bottom-right>
+<DIV><!-- Button2 Bottom --><!-- BBSTART Interval.cz/Button2 Bottom/rolovací/Button 2 120x60 -->
+<SCRIPT type=text/javascript>/* <![CDATA[ */
+var bbat=0,bbbr=0,bbtt='_blank',bbpath='17877/2/2/6',bbxl=1,bbac=1;
+//]]></SCRIPT>
+
+<SCRIPT 
+src="Jednoduchý online chat v PHP a JavaScripte - rámec head -- PHP -- Vývoj aplikací -- Interval_cz_soubory/bb4.js" 
+type=text/javascript></SCRIPT>
+<NOSCRIPT>
+<DIV><A href="http://ad2.billboard.cz/please/redirect/17877/2/2/6/"><IMG 
+style="BORDER-RIGHT: 0px; BORDER-TOP: 0px; BORDER-LEFT: 0px; BORDER-BOTTOM: 0px" 
+height=60 alt=. 
+src="Jednoduchý online chat v PHP a JavaScripte - rámec head -- PHP -- Vývoj aplikací -- Interval_cz_soubory/fallback6.gif" 
+width=120></A></DIV></NOSCRIPT><!-- BBKONEC --></DIV></DIV>
+<DIV class=page-maker>&nbsp;</DIV></DIV>
+<DIV id=page-foot>
+<DIV id=page-foot-menu><A href="http://interval.cz/redakce-inzerce.asp">Inzerce 
+na Interval.cz</A> &nbsp;|&nbsp; <A 
+href="http://interval.cz/redakce.asp">Redakce Interval.cz</A> &nbsp;|&nbsp; <A 
+href="http://interval.cz/autori.asp">Hledáme nové autory</A> </DIV>
+<DIV id=issn><A class=noprint 
+href="http://jigsaw.w3.org/css-validator/validator?uri=http%3A%2F%2Finterval.cz%3A80%2Fclanky%2Fjednoduchy-online-chat-v-php-a-javascripte-ramec-head%2F">.</A> 
+ISSN 1212-8651 <A class=noprint 
+href="http://validator.w3.org/check?uri=http%3A%2F%2Finterval.cz%3A80%2Fclanky%2Fjednoduchy-online-chat-v-php-a-javascripte-ramec-head%2F&amp;charset=%28detect+automatically%29&amp;doctype=%28detect+automatically%29&amp;outline=1&amp;verbose=1">.</A> 
+</DIV>
+<DIV id=page-foot-zoner>© Zoner software, s.r.o., všechna práva vyhrazena, tento 
+server dodržuje <A href="http://interval.cz/privacy.asp">právní předpisy</A> o 
+ochraně osobních údajů. </DIV></DIV>
+<SCRIPT 
+src="Jednoduchý online chat v PHP a JavaScripte - rámec head -- PHP -- Vývoj aplikací -- Interval_cz_soubory/audits-footer.js" 
+type=text/javascript></SCRIPT>
+
+<SCRIPT 
+src="Jednoduchý online chat v PHP a JavaScripte - rámec head -- PHP -- Vývoj aplikací -- Interval_cz_soubory/urchin.js" 
+type=text/javascript>
+</SCRIPT>
+
+<SCRIPT type=text/javascript>
+_uacct = "UA-173085-1";
+
+var len = _uOsr.length;
+_uOsr[len]="seznam.cz";       _uOkw[len]="w";
+_uOsr[len+1]="centrum.cz";    _uOkw[len+1]="q";
+_uOsr[len+2]="jyxo.cz";       _uOkw[len+2]="s";
+_uOsr[len+3]="atlas.cz";      _uOkw[len+3]="q";
+_uOsr[len+4]="zoohoo.cz";     _uOkw[len+4]="q";
+_uOsr[len+5]="tiscali.cz";    _uOkw[len+5]="query";
+_uOsr[len+6]="1.cz";          _uOkw[len+6]="q";
+_uOsr[len+7]="volny.cz";      _uOkw[len+7]="search";
+
+urchinTracker();
+</SCRIPT>
+</BODY></HTML>

@@ -1,0 +1,84 @@
+<HTML>
+  <HEAD>
+    <TITLE>Létající míèek</TITLE>
+  </HEAD>
+  
+  <STYLE>
+    <!--
+    /* Styl pro létající obrázek */
+    #Ball {
+      position: absolute;
+      top: 0px;
+      left: 0px;
+    }
+    -->
+  </STYLE>
+
+  <SCRIPT Language="JavaScript">
+  <!--
+
+    // Èasovaè
+    var Timer;
+    
+    // Souøadnice
+    var LeftCoord = 0;
+    var TopCoord = 0;
+    
+    // Velikost zmìny X-ové a Y-ové souøadnice
+    var LeftInc = 15;
+    var TopInc = 15;
+
+    // Velikost plochy
+    var WinH = 500;
+    var WinW = 300;
+    
+    // Velikost obrázku
+    var BallSize = 16;
+
+
+    // Spuštìní pohybu
+    function Start(){
+      Timer = setInterval ("MoveBall()", 10);
+    }
+    
+    // Zastavení pohybu
+    function Stop(){
+      clearInterval (Timer);
+    }
+    
+    // Vlastní pohyb obrázku
+    function MoveBall (){
+      // Zmìna souøadnic
+      LeftCoord += LeftInc;
+      TopCoord += TopInc;
+
+      // Nastavení nových souøadnic ve stylu
+      Ball.style.left = LeftCoord+"px";
+      Ball.style.top = TopCoord+"px";
+      
+      // Kontrola, zda není obrázek na hranici
+      // pokud je, zmìní se smìr jeho pohybu
+      if (LeftCoord+BallSize >= WinW)
+        LeftInc = -LeftInc;
+
+      if (TopCoord+BallSize >= WinH)
+        TopInc = -TopInc;
+        
+      if (LeftCoord <= 0)
+        LeftInc = -LeftInc;
+
+      if (TopCoord <= 0)
+        TopInc = -TopInc;
+    }
+  //-->
+  </SCRIPT>
+
+  <BODY OnLoad="Start();">
+
+    <IMG Id="Ball" Src="ball.gif">
+
+    <BR><BR>
+    Normální text stránky, nad kterým se pohybuje létající míèek
+  </BODY>
+</HTML>
+

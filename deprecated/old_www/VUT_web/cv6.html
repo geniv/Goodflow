@@ -1,0 +1,59 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <meta content="text/html; charset=ISO-8859-2" http-equiv="content-type">
+  <link rel="stylesheet" type="text/css" href="styles/style5.css" media="screen" />
+  <title>Skripty</title>
+  <script type="text/javascript">
+	  function zvyrazni(n)
+		{	
+			var i, vys, prvek;
+			for (i = 1; i <= 100; i++)
+			{
+				prvek = document.getElementById("nas" + i);
+				vys = Number(prvek.innerHTML);
+				if ((vys % n) == 0)
+				{
+					prvek.style.textDecoration = 'underline';
+				}
+					else
+				{
+					prvek.style.textDecoration = 'none';
+				}
+			}
+		}
+  </script>
+</head>
+<body>
+<h1>Vygenerovaná tabulka</h1>
+<table>
+<script type="text/javascript">
+	var radek, sloupec, poc = 0;
+	for (radek = 1; radek <= 10; radek++) {
+	    document.write("<tr>");
+	    for (sloupec = 1; sloupec <= 10; sloupec++) {
+	    	var hodnota = radek * sloupec;
+	    	var hl;
+	    	poc++;
+	    	
+	    	if (radek == 1 || sloupec == 1)
+	    	{
+					hlav = "th";
+					akce = "";
+				}
+					else
+				{
+					hlav = "td";
+					akce = " onClick='zvyrazni("+hodnota+");'";
+				}
+	      document.write("<" + hlav + akce + " id='nas" + poc +"'>" + hodnota + "</" + hlav + ">");
+	    }
+	    document.write("</tr>");
+	}
+</script>
+</table>
+
+<span id="pok"></span>
+
+</body>
+</html>

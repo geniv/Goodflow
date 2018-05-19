@@ -1,0 +1,2859 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html dir="ltr" xmlns="http://www.w3.org/1999/xhtml" lang="en"><head>
+
+
+	<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<meta name="generator" content="vBulletin 3.7.3">
+
+<meta name="keywords" content=" Getting Visitor's Country with PHP using Geo IP, C, C++, VC++, C#, Java, VB, SQL, PHP,website tutorials, graphics, development tutorials, database design, web programming help,seo">
+<meta name="description" content=" Getting Visitor's Country with PHP using Geo IP PHP">
+
+
+<!-- CSS Stylesheet -->
+<style type="text/css" id="vbulletin_css">
+/**
+* vBulletin 3.7.3 CSS
+* Style: 'Default Style'; Style ID: 1
+*/
+@import url("clientscript/vbulletin_css/style-eb31dabe-00001.css");
+</style>
+<link rel="stylesheet" type="text/css" href="showthread.php_soubory/vbulletin_important.css">
+
+
+<!-- / CSS Stylesheet -->
+
+<link rel="shortcut icon" href="http://www.go4expert.com/favicon.ico">
+<link rel="stylesheet" type="text/css" media="all" href="showthread.php_soubory/go4expert.css">
+<script type="text/javascript">
+var tabberOptions = {manualStartup:true};
+</script>
+<script type="text/javascript" src="showthread.php_soubory/tabber.js"></script>
+
+<script type="text/javascript" src="showthread.php_soubory/yahoo-dom-event.js"></script>
+<script type="text/javascript" src="showthread.php_soubory/connection-min.js"></script>
+<script type="text/javascript">
+<!--
+var SESSIONURL = "s=cc1e5e8178e5dcb0b6e6b05ca59c789b&";
+var SECURITYTOKEN = "guest";
+var IMGDIR_MISC = "images/misc";
+var vb_disable_ajax = parseInt("0", 10);
+// -->
+</script>
+<script type="text/javascript" src="showthread.php_soubory/vbulletin_global.js"></script>
+<script type="text/javascript" src="showthread.php_soubory/vbulletin_menu.js"></script>
+
+
+	<link rel="alternate" type="application/rss+xml" title="Go4Expert RSS Feed" href="http://www.go4expert.com/forums/external.php?type=RSS2">
+	
+		<link rel="alternate" type="application/rss+xml" title="Go4Expert - PHP - RSS Feed" href="http://www.go4expert.com/forums/external.php?type=RSS2&amp;forumids=66">
+	
+
+
+<!-- Google Ad manager -->
+<script type="text/javascript" src="showthread.php_soubory/google_service.js">
+</script>
+<script type="text/javascript">
+  GS_googleAddAdSenseService("ca-pub-7896592968727460");
+  GS_googleEnableAllServices();
+</script><script src="showthread.php_soubory/test_gam_domain.js"></script><script src="showthread.php_soubory/google_ads.js"></script>
+<script type="text/javascript">
+  GA_googleAddSlot("ca-pub-7896592968727460", "G4EF-Article-AdBox-300x250");
+</script>
+<script type="text/javascript">
+  GA_googleFetchAds();
+</script>
+<!-- / Google Ad manager -->
+	<script type="text/javascript" src="showthread.php_soubory/g4ef.js"></script>
+	<title> Getting Visitor's Country with PHP using Geo IP</title>
+	<script type="text/javascript" src="showthread.php_soubory/vbulletin_post_loader.js"></script>
+	<style type="text/css" id="vbulletin_showthread_css">
+	<!--
+	
+	#links div { white-space: nowrap; }
+	#links img { vertical-align: middle; }
+	-->
+	</style>
+</head><body onload="">
+<!-- promo bar -->
+<div id="topadbar">
+	<div id="adbar">
+<a href="http://www.mbaguys.net/" onclick="javascript:pageTracker._trackPageview ('/outbound/www.mbaguys.net');" target="_blank" rel="nofollow">Check out the education and career discussion at MBAGuys.net</a>
+	</div>
+</div>
+<!-- promo bar -->
+<div class="body">
+<!-- logo -->
+<a name="top"></a>
+<table align="center" border="0" cellpadding="0" cellspacing="0" width="100%">
+<tbody><tr>
+	<td align="left"><a href="http://www.go4expert.com/"><img title="Go4Expert" src="showthread.php_soubory/banner4thyear.jpg" alt="Go4Expert" border="0"></a></td>
+	<td id="header_middle_cell" align="center">
+<script type="text/javascript"><!--
+   e9 = new Object();
+   e9.size = "468x60";
+   e9.noAd = 1;
+//--></script>
+<script type="text/javascript" src="showthread.php_soubory/tags.js"></script><center><script type="text/javascript" src="showthread.php_soubory/j.js"></script><center><a target="_blank" href="http://a.tribalfusion.com/h.click/a3mxB436UY3GU9TG3jVGBgRAMoTWUUTr7P2bAqUarvWEU6QTUFScQZcQrIsPtvcWGY55FytotiOXaev4dMHSGvZc5mJZbmtEpTtQ60bn6Ybbe0EeMRUJATFv4WHBXnbbqQrrNUtYHj0bUtF/http://a.tribalfusion.com"><img src="showthread.php_soubory/37536.gif" border="0" height="1" width="1"></a></center></center>
+
+	</td>
+	<td id="header_right_cell" align="right">
+		<span class="smallfontheader">
+	<a href="http://www.go4expert.com/forums/search.php?do=getdaily">Today's topics</a><br>
+	<a href="http://www.go4expert.com/forums/search.php?do=process&amp;replyless=1&amp;replylimit=0&amp;forumchoice%5B%5D=10&amp;childforums=1">Unanswered topics</a><br>
+	<a href="http://www.go4expert.com/forums/showthread.php?t=168">Before you make a query</a><br>
+	<a href="http://www.go4expert.com/forums/faq.php?faq=guidelines">Rules and Guidelines</a><br>
+	<a href="http://www.go4expert.com/forums/showthread.php?t=634">Write for Us</a>
+</span>
+	</td>
+</tr>
+</tbody></table>
+<!-- /logo -->
+<!-- Icons -->
+<div class="icons">
+<a href="http://feedproxy.google.com/g4ef/" rel="nofollow" target="_blank"><img title="Go4Expert RSS Feed" src="showthread.php_soubory/rss.gif" alt="Go4Expert RSS Feed" border="0"></a>
+</div>
+<!-- / Icons -->
+<!-- Search -->
+<div id="search" class="headersearch">
+<label for="mainsearchbox"><strong>Search</strong></label>
+<form action="http://www.go4expert.com/gcsr.php" id="cse-search-box">
+    <input name="cx" value="partner-pub-7896592968727460:kxtbh3-fgml" type="hidden">
+    <input name="cof" value="FORID:10" type="hidden">
+    <input name="ie" value="ISO-8859-1" type="hidden">
+    <input style="background: rgb(255, 255, 255) url(http://www.google.com/coop/intl/en/images/google_custom_search_watermark.gif) no-repeat scroll left center; -moz-background-clip: -moz-initial; -moz-background-origin: -moz-initial; -moz-background-inline-policy: -moz-initial;" name="q" size="40" type="text">
+    <input name="sa" value="Search" type="submit">
+</form>
+<script type="text/javascript" src="showthread.php_soubory/brand.html"></script>
+&nbsp;<a href="http://www.go4expert.com/forums/search.php">Advance G4EF Search</a>
+&nbsp;<a href="http://www.go4expert.com/sitemap/">Sitemap</a>
+</div>
+<!-- /Search -->
+<!-- content table -->
+<!-- open content container -->
+
+<div align="center">
+	<div class="page" style="width: 100%; text-align: left;">
+		<div style="padding: 0px 25px;" align="left">
+
+
+
+
+
+<br>
+
+<!-- breadcrumb, login, pm info -->
+<table class="tborder" align="center" border="0" cellpadding="6" cellspacing="1" width="100%">
+<tbody><tr>
+	<td class="alt1" width="100%">
+		
+			<table border="0" cellpadding="0" cellspacing="0">
+			<tbody><tr valign="bottom">
+				<td><a href="#" onclick="history.back(1); return false;"><img title="Go Back" src="showthread.php_soubory/navbits_start.gif" alt="Go Back" border="0"></a></td>
+				<td>&nbsp;</td>
+				<td width="100%"><span class="navbar">
+				<a href="http://www.go4expert.com/">Programming and Web Development Forum</a>&nbsp;&gt;&nbsp;	
+				<a href="http://www.go4expert.com/forums/?s=cc1e5e8178e5dcb0b6e6b05ca59c789b" accesskey="1">Go4Expert</a></span> 
+	<span class="navbar">&gt; <a href="http://www.go4expert.com/forums/forumdisplay.php?s=cc1e5e8178e5dcb0b6e6b05ca59c789b&amp;f=1">Articles / Source Code</a></span>
+
+
+	<span class="navbar">&gt; <a href="http://www.go4expert.com/forums/forumdisplay.php?s=cc1e5e8178e5dcb0b6e6b05ca59c789b&amp;f=17">Web Development</a></span>
+
+
+	<span class="navbar">&gt; <a href="http://www.go4expert.com/forums/forumdisplay.php?s=cc1e5e8178e5dcb0b6e6b05ca59c789b&amp;f=66">PHP</a></span>
+
+</td>
+			</tr>
+			<tr>
+				<td class="navbar" style="font-size: 10pt; padding-top: 1px;" colspan="3"><a href="http://www.go4expert.com/forums/showthread.php?t=3511"><img title="Reload this Page" class="inlineimg" src="showthread.php_soubory/navbits_finallink_ltr.gif" alt="Reload this Page" border="0"></a> <strong>
+	 Getting Visitor's Country with PHP using Geo IP
+
+</strong></td>
+			</tr>
+			</tbody></table>
+		
+		
+		
+	</td>
+
+	<td class="alt2" style="padding: 0px;" nowrap="nowrap">
+		<!-- login form -->
+		<form action="login.php?do=login" method="post" onsubmit="md5hash(vb_login_password, vb_login_md5password, vb_login_md5password_utf, 0)">
+		<script type="text/javascript" src="showthread.php_soubory/vbulletin_md5.js"></script>
+		<table border="0" cellpadding="0" cellspacing="3">
+		<tbody><tr>
+			<td class="smallfont" style="white-space: nowrap;"><label for="navbar_username">User Name</label></td>
+			<td><input class="bginput" style="font-size: 11px;" name="vb_login_username" id="navbar_username" size="10" accesskey="u" tabindex="101" value="User Name" onfocus="if (this.value == 'User Name') this.value = '';" type="text"></td>
+			<td class="smallfont" nowrap="nowrap"><label for="cb_cookieuser_navbar"><input name="cookieuser" value="1" tabindex="103" id="cb_cookieuser_navbar" accesskey="c" type="checkbox">Remember Me?</label></td>
+		</tr>
+		<tr>
+			<td class="smallfont"><label for="navbar_password">Password</label></td>
+			<td><input class="bginput" style="font-size: 11px;" name="vb_login_password" id="navbar_password" size="10" tabindex="102" type="password"></td>
+			<td><input class="button" value="Log in" tabindex="104" title="Enter your username and password in the boxes provided to login, or click the 'register' button to create a profile for yourself." accesskey="s" type="submit"></td>
+		</tr>
+		</tbody></table>
+		<input name="s" value="cc1e5e8178e5dcb0b6e6b05ca59c789b" type="hidden">
+		<input name="securitytoken" value="guest" type="hidden">
+		<input name="do" value="login" type="hidden">
+		<input name="vb_login_md5password" type="hidden">
+		<input name="vb_login_md5password_utf" type="hidden">
+		</form>
+		<!-- / login form -->
+	</td>
+
+</tr>
+</tbody></table>
+<!-- / breadcrumb, login, pm info -->
+
+<!-- nav buttons bar -->
+<div class="tborder" style="padding: 1px; border-top-width: 0px;">
+	<table align="center" border="0" cellpadding="0" cellspacing="0" width="100%">
+	<tbody><tr align="center">
+		
+		
+			<td class="vbmenu_control"><a href="http://www.go4expert.com/forums/register.php?s=cc1e5e8178e5dcb0b6e6b05ca59c789b" rel="nofollow">Register</a></td>
+		
+		
+		<td class="vbmenu_control"><a href="http://www.go4expert.com/forums/faq.php?s=cc1e5e8178e5dcb0b6e6b05ca59c789b" accesskey="5">FAQ</a></td>
+		
+			<td class="vbmenu_control"><a href="http://www.go4expert.com/forums/memberlist.php?s=cc1e5e8178e5dcb0b6e6b05ca59c789b">Members List</a></td>
+		
+		<td class="vbmenu_control"><a href="http://www.go4expert.com/forums/calendar.php?s=cc1e5e8178e5dcb0b6e6b05ca59c789b">Calendar</a></td>
+		
+			
+				
+				<td class="vbmenu_control"><a href="http://www.go4expert.com/forums/search.php?s=cc1e5e8178e5dcb0b6e6b05ca59c789b&amp;do=getdaily" accesskey="2">Today's Posts</a></td>
+				
+				<td id="navbar_search" class="vbmenu_control"><a href="http://www.go4expert.com/forums/search.php?s=cc1e5e8178e5dcb0b6e6b05ca59c789b" accesskey="4" rel="nofollow">Search</a> </td>
+			
+			
+		
+		
+		
+		</tr>
+	</tbody></table>
+</div>
+<!-- / nav buttons bar -->
+
+
+	<div class="navbar_notice"><center>Welcome to the <strong>Go4Expert</strong> forum! To post in forum or interact with members, you will need an account.  <a href="http://www.go4expert.com/forums/register.php"><strong>Create your free account now</strong></a>.</center></div>
+
+
+
+
+
+<!-- NAVBAR POPUP MENUS -->
+
+	
+	<!-- header quick search form -->
+	<div class="vbmenu_popup" id="navbar_search_menu" style="display: none;" align="left">
+		<table border="0" cellpadding="4" cellspacing="1">
+		<tbody><tr>
+			<td class="thead">Search Forums</td>
+		</tr>
+		<tr>
+			<td class="vbmenu_option" title="nohilite">
+				<form action="search.php?do=process" method="post">
+
+					<input name="do" value="process" type="hidden">
+					<input name="quicksearch" value="1" type="hidden">
+					<input name="childforums" value="1" type="hidden">
+					<input name="exactname" value="1" type="hidden">
+					<input name="s" value="cc1e5e8178e5dcb0b6e6b05ca59c789b" type="hidden">
+					<input name="securitytoken" value="guest" type="hidden">
+					<div><input class="bginput" name="query" size="25" tabindex="1001" type="text"><input class="button" value="Go" tabindex="1004" type="submit"></div>
+					<div style="margin-top: 6px;">
+						<label for="rb_nb_sp0"><input name="showposts" value="0" id="rb_nb_sp0" tabindex="1002" checked="checked" type="radio">Show Threads</label>
+						&nbsp;
+						<label for="rb_nb_sp1"><input name="showposts" value="1" id="rb_nb_sp1" tabindex="1003" type="radio">Show Posts</label>
+					</div>
+				</form>
+			</td>
+		</tr>
+		
+		<tr>
+			<td class="vbmenu_option"><a href="http://www.go4expert.com/forums/search.php?s=cc1e5e8178e5dcb0b6e6b05ca59c789b" accesskey="4" rel="nofollow">Advanced Search</a></td>
+		</tr>
+		
+		</tbody></table>
+	</div>
+	<!-- / header quick search form -->
+	
+
+	
+<!-- / NAVBAR POPUP MENUS -->
+
+<!-- PAGENAV POPUP -->
+	<div class="vbmenu_popup" id="pagenav_menu" style="display: none; position: absolute; z-index: 50;">
+		<table border="0" cellpadding="4" cellspacing="1">
+		<tbody><tr>
+			<td class="thead" nowrap="nowrap">Go to Page...</td>
+		</tr>
+		<tr>
+			<td class="vbmenu_option" title="">
+			<form action="index.php" method="get" onsubmit="return this.gotopage()" id="pagenav_form">
+				<input class="bginput" id="pagenav_itxt" style="font-size: 11px;" size="4" type="text">
+				<input class="button" id="pagenav_ibtn" value="Go" type="button">
+			</form>
+			</td>
+		</tr>
+		</tbody></table>
+	</div>
+<!-- / PAGENAV POPUP -->
+
+
+<div align="center">		<script type="text/javascript"><!--
+		google_ad_client = "pub-7896592968727460";
+		/* go4expert-sponsor */
+		google_ad_slot = "7379614667";
+		google_ad_width = 728;
+		google_ad_height = 90;
+		//-->
+		</script>
+		<script type="text/javascript" src="showthread.php_soubory/show_ads.js">
+		</script><script src="showthread.php_soubory/expansion_embed.js"></script><script src="showthread.php_soubory/test_domain.js"></script><script>window.google_render_ad();</script><ins style="border: medium none ; margin: 0pt; padding: 0pt; display: inline-table; height: 90px; position: relative; visibility: visible; width: 728px;"><ins style="border: medium none ; margin: 0pt; padding: 0pt; display: block; height: 90px; position: relative; visibility: visible; width: 728px;"><iframe allowtransparency="true" hspace="0" id="google_ads_frame1" marginheight="0" marginwidth="0" name="google_ads_frame" src="showthread.php_soubory/ads.html" style="left: 0pt; position: absolute; top: 0pt;" vspace="0" frameborder="0" height="90" scrolling="no" width="728"></iframe></ins></ins></div><br>
+
+
+
+
+
+<a name="poststop" id="poststop"></a>
+
+<!-- controls above postbits -->
+<table style="margin-bottom: 3px;" border="0" cellpadding="0" cellspacing="0" width="100%">
+<tbody><tr valign="bottom">
+	
+		<td class="smallfont"><a href="http://www.go4expert.com/forums/newreply.php?s=cc1e5e8178e5dcb0b6e6b05ca59c789b&amp;do=newreply&amp;noquote=1&amp;p=10156" rel="nofollow"><img title="Discuss / Comment" src="showthread.php_soubory/discusscomment.gif" alt="Discuss / Comment" border="0"></a></td>
+	
+	<td>
+		<a href="javascript:%20copyToClipboard('<A%20href=http://www.go4expert.com/forums/showthread.php?t=3511>Getting%20Visitor\'s%20Country%20with%20PHP%20using%20Geo%20IP</A>')" title="Copy HTML to Clipboard"><img title="Copy HTML to Clipboard" class="inlineimg" src="showthread.php_soubory/copytoclip.gif" alt="Copy HTML to Clipboard"></a>&nbsp;
+		<a href="javascript:%20copyToClipboard('[URL=http://www.go4expert.com/forums/showthread.php?t=3511]Getting%20Visitor\'s%20Country%20with%20PHP%20using%20Geo%20IP[/URL]')" title="Copy BBCode to Clipboard"><img title="Copy BBCode to Clipboard" class="inlineimg" src="showthread.php_soubory/copytoclip.gif" alt="Copy BBCode to Clipboard"></a>&nbsp;
+		<a href="http://del.icio.us/post?url=http://www.go4expert.com/forums/showthread.php?t=3511&amp;title=Getting+Visitor%27s+Country+with+PHP+using+Geo+IP" target="_blank" title="Add to del.icio.us"><img title="Add to del.icio.us" class="inlineimg" src="showthread.php_soubory/delicious.gif" alt="Add to del.icio.us"></a>&nbsp;
+		<a href="http://www.google.com/bookmarks/mark?op=edit&amp;bkmk=http://www.go4expert.com/forums/showthread.php?t=3511&amp;title=Getting+Visitor%27s+Country+with+PHP+using+Geo+IP" target="_blank" title="Add to Google"><img title="Add to Google" class="inlineimg" src="showthread.php_soubory/google.gif" alt="Add to Google"></a>&nbsp;
+		<a href="http://www.digg.com/submit?phase=2&amp;url=http://www.go4expert.com/forums/showthread.php?t=3511&amp;title=Getting+Visitor%27s+Country+with+PHP+using+Geo+IP" target="_blank" title="Digg it"><img title="Digg it" class="inlineimg" src="showthread.php_soubory/digg.gif" alt="Digg it"></a>&nbsp;
+		<a href="http://myweb2.search.yahoo.com/myresults/bookmarklet?u=http://www.go4expert.com/forums/showthread.php?t=3511&amp;t=Getting+Visitor%27s+Country+with+PHP+using+Geo+IP" target="_blank" title="Add to Yahoo !"><img title="Add to Yahoo !" class="inlineimg" src="showthread.php_soubory/yahoo.gif" alt="Add to Yahoo !"></a>&nbsp;
+		<a href="https://favorites.live.com/quickadd.aspx?marklet=1&amp;mkt=en-us&amp;url=http://www.go4expert.com/forums/showthread.php?t%3D3511&amp;title=Getting%20Visitor%27s%20Country%20with%20PHP%20using%20Geo%20IP&amp;top=1" target="_blank" title="Add to Windows Live"><img title="Add to Windows Live" class="inlineimg" src="showthread.php_soubory/live.gif" alt="Add to Windows Live"></a>&nbsp;
+		<a href="http://www.facebook.com/share.php?u=http://www.go4expert.com/forums/showthread.php?t=3511" target="_blank" title="Add to Facebook"><img title="Add to Facebook" class="inlineimg" src="showthread.php_soubory/facebook.gif" alt="Add to Facebook"></a>&nbsp;
+		<a href="http://www.stumbleupon.com/submit?url=http://www.go4expert.com/forums/showthread.php?t=3511&amp;title=Getting+Visitor%27s+Country+with+PHP+using+Geo+IP" target="_blank" title="Add to StumbleUpon"><img title="Add to StumbleUpon" class="inlineimg" src="showthread.php_soubory/stumbleupon.gif" alt="Add to StumbleUpon"></a>&nbsp;
+	</td>
+	<td align="right"><div class="pagenav" align="right">
+<table class="tborder" border="0" cellpadding="3" cellspacing="1">
+<tbody><tr>
+	<td class="vbmenu_control" style="font-weight: normal;">Page 1 of 2</td>
+	
+	
+		<td class="alt2"><span class="smallfont" title="Showing results 1 to 10 of 17"><strong>1</strong></span></td>
+ <td class="alt1"><a class="smallfont" href="http://www.go4expert.com/forums/showthread.php?s=cc1e5e8178e5dcb0b6e6b05ca59c789b&amp;t=3511&amp;page=2" title="Show results 11 to 17 of 17">2</a></td>
+	<td class="alt1"><a class="smallfont" href="http://www.go4expert.com/forums/showthread.php?s=cc1e5e8178e5dcb0b6e6b05ca59c789b&amp;t=3511&amp;page=2" title="Next Page - Results 11 to 17 of 17">&gt;</a></td>
+	
+	<td style="cursor: pointer;" id="pagenav.33" class="vbmenu_control" title=""> <img alt="" title="" src="showthread.php_soubory/menu_open.gif" border="0"></td>
+</tr>
+</tbody></table>
+</div></td>
+</tr>
+</tbody></table>
+<!-- / controls above postbits -->
+
+<!-- toolbar -->
+<table class="tborder" style="border-bottom-width: 0px;" align="center" border="0" cellpadding="6" cellspacing="1" width="100%">
+<tbody><tr>
+	<td class="tcat" width="100%">
+		<div class="smallfont">
+		
+		&nbsp;
+		</div>
+	</td>
+	<td style="cursor: pointer;" class="vbmenu_control" id="bookmarks" nowrap="nowrap">
+		<a href="#goto_bookmarks">Bookmarks</a>
+		<script type="text/javascript"> vbmenu_register("bookmarks"); </script> <img alt="" title="" src="showthread.php_soubory/menu_open.gif" border="0">
+	</td>
+	<td style="cursor: pointer;" class="vbmenu_control" id="threadtools" nowrap="nowrap">
+		<a href="http://www.go4expert.com/forums/showthread.php?t=3511&amp;nojs=1#goto_threadtools">Article Tools</a>
+		<script type="text/javascript"> vbmenu_register("threadtools"); </script> <img alt="" title="" src="showthread.php_soubory/menu_open.gif" border="0">
+	</td>
+	
+	
+	
+	<td style="cursor: pointer;" class="vbmenu_control" id="displaymodes" nowrap="nowrap">
+		<a href="http://www.go4expert.com/forums/showthread.php?t=3511&amp;nojs=1#goto_displaymodes">Display Modes</a>
+		<script type="text/javascript"> vbmenu_register("displaymodes"); </script> <img alt="" title="" src="showthread.php_soubory/menu_open.gif" border="0">
+	</td>
+	
+
+	
+
+</tr>
+</tbody></table>
+<!-- / toolbar -->
+
+
+
+<!-- end content table -->
+
+		</div>
+	</div>
+</div>
+
+<!-- / close content container -->
+<!-- / end content table -->
+
+
+
+
+
+<!--INFOLINKS_ON-->
+<div id="posts"><!-- post #10156 -->
+
+	<!-- open content container -->
+
+<div align="center">
+	<div class="page" style="width: 100%; text-align: left;">
+		<div style="padding: 0px 25px;" align="left">
+
+	<div id="edit10156" style="padding: 0px 0px 6px;">
+	<!-- this is not the last post shown on the page -->
+
+
+
+<table class="tborder" id="post10156" align="center" border="0" cellpadding="6" cellspacing="1" width="100%">
+<tbody><tr>
+	<td class="alt1" style="padding-left: 5px;">
+		<div class="normal" style="float: right;">
+			
+		</div>
+		<!-- user info -->
+		<h1>Getting Visitor's Country with PHP using Geo IP</h1>
+		<div id="postmenu_10156">
+			
+			<a href="http://www.go4expert.com/forums/member.php?s=cc1e5e8178e5dcb0b6e6b05ca59c789b&amp;u=7282">By Mary</a>
+			<img title="Mary is offline" class="inlineimg" src="showthread.php_soubory/user_offline.gif" alt="Mary is offline" border="0">
+
+
+			<script type="text/javascript"> vbmenu_register("postmenu_10156", true); </script>
+			
+		</div>
+		<br>
+		<div class="smallfont">
+			On 21st March, 2007
+		</div>
+		<!-- / user info -->
+	</td>
+</tr>
+<tr>
+	
+	<td class="alt1" id="td_post_10156">
+		
+	<!-- message, attachments, sig -->
+
+		
+
+		
+			<!-- icon and title -->
+			<div class="smallfont">
+				<img title="Post" class="inlineimg" src="showthread.php_soubory/icon1.gif" alt="Post" border="0">
+				<strong>Getting Visitor's Country with PHP using Geo IP</strong>
+			</div>
+			<hr style="color: rgb(225, 209, 209); background-color: rgb(225, 209, 209);" size="1">
+			<!-- / icon and title -->
+		
+
+		<!-- message -->
+		<div id="post_message_10156">
+			
+		<!-- author -->
+		<div class="AuthorBox">
+			<div class="AuthorToolbox">
+				<a href="http://www.go4expert.com/forums/printthread.php?t=3511" accesskey="3"><img title="Show Printable Version" class="inlineimg" src="showthread.php_soubory/printer.gif" alt="Show Printable Version"></a>
+				<a href="http://www.go4expert.com/forums/sendmessage.php?do=sendtofriend&amp;t=3511"><img title="Email this Page" class="inlineimg" src="showthread.php_soubory/sendtofriend.gif" alt="Email this Page"></a>
+				<a href="http://www.go4expert.com/forums/subscription.php?do=addsubscription&amp;t=3511"><img title="Subscription" class="inlineimg" src="showthread.php_soubory/subscribe.gif" alt="Subscription"></a>
+				<a href="javascript:%20addToFavorites()"><img title="Add to Favorites" class="inlineimg" src="showthread.php_soubory/addtofav.gif" alt="Add to Favorites"></a>
+				<a href="javascript:%20copyToClipboard('<A%20href=http://www.go4expert.com/forums/showthread.php?t=3511>Getting%20Visitor's%20Country%20with%20PHP%20using%20Geo%20IP</A>')"><img title="Copy Getting Visitor's Country with PHP using Geo IP link" class="inlineimg" src="showthread.php_soubory/copytoclip.gif" alt="Copy Getting Visitor's Country with PHP using Geo IP link"></a>
+				
+				
+			</div>
+			<!-- Start Tabber -->  
+			<div id="tab-box"> 
+				<div class="tabberlive"><ul class="tabbernav"><li class="tabberactive"><a title="Author" href="javascript:void(null);">Author</a></li><li class=""><a title="Recent Articles" href="javascript:void(null);">Recent Articles</a></li><li class=""><a title="Similar Articles" href="javascript:void(null);">Similar Articles</a></li></ul>
+					<div title="" class="tabbertab">
+						<h3>Author</h3>
+						<h4><span style="font-weight: bold; color: rgb(0, 128, 128);">Mary</span> <span class="smallfont">( Go4Expert Member )</span></h4>
+						<p><img src="showthread.php_soubory/DefAuthor.gif" alt="" border="0"> Yet to provide details about himself</p>
+						<p><br><a href="http://my.go4expert.com/Mary/">All articles By Mary</a></p>
+						<div style="clear: both;"></div>
+					</div>
+					<div title="" class="tabbertab tabbertabhide" style="padding: 0pt;">
+						<h3>Recent Articles</h3>
+						<ul>
+
+	<li>
+ <a href="http://www.go4expert.com/forums/showthread.php?s=cc1e5e8178e5dcb0b6e6b05ca59c789b&amp;t=13769" title="I am listing tips to improve your PHP code performance. There are few whom you can call as debatable but overall the code performance will surely increase.  
+ 
+Following tips are written to save time and development cost (includes memory too) 
+ 
+If a method can be static, declare it static. Speed...">PHP Code Optimization: Do's and Don'ts</a>, Started by <strong>hurricanesoftwares</strong> in <em>PHP</em>
+</li><li>
+ <a href="http://www.go4expert.com/forums/showthread.php?s=cc1e5e8178e5dcb0b6e6b05ca59c789b&amp;t=10862" title="password.class.php 
+ 
+&lt;?php 
+/* 
+* Simple password generator 
+ 
+define ('PC_MINUS',    0x01); 
+define ('PC_CAPITAL',  0x02); 
+define ('PC_NUMBERS',  0x04); 
+define ('PC_SPACES',   0x08);">Password Creator: using bitwise operations</a>, Started by <strong>extraweb</strong> in <em>PHP</em>
+</li><li>
+ <a href="http://www.go4expert.com/forums/showthread.php?s=cc1e5e8178e5dcb0b6e6b05ca59c789b&amp;t=10762" title="This Code let you take a image search on Google easily and user-friendly. 
+You can pre-specify image properties: image name or caption, size and dimension rank of image. 
+ 
+Code Here: 
+ 
+&lt;?php 
+session_start(); 
+$_SESSION=0; 
+?&gt; 
+&lt;link href=&quot;../../client/style.css&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot;&gt;">Google Image Leecher - Php Code</a>, Started by <strong>o0darkEvil0o</strong> in <em>PHP</em>
+</li><li>
+ <a href="http://www.go4expert.com/forums/showthread.php?s=cc1e5e8178e5dcb0b6e6b05ca59c789b&amp;t=7565" title="While working with currency calculations, we often require to round a number to the nearest 10 or the nearest 50, like 407 should be 410. 
+  I've written a function which will do exactly that, it requires two parameters the number to the round, and the integer to be rounded to. The function is like...">Rounding To The Nearest Integer Specified</a>, Started by <strong>pradeep</strong> in <em>PHP</em>
+</li><li>
+ <a href="http://www.go4expert.com/forums/showthread.php?s=cc1e5e8178e5dcb0b6e6b05ca59c789b&amp;t=7259" title="The in-built array functions allow you to interact with and manipulate arrays in various ways. Arrays are essential for storing, managing, and operating on sets of variables. 
+  
+ Simple and multi-dimensional arrays are supported, and may be either user created or created by another function. There...">Useful PHP Functions To Work With Arrays</a>, Started by <strong>pradeep</strong> in <em>PHP</em>
+</li>
+
+</ul>
+						<div style="clear: both;"></div>
+					</div>
+					<div title="" class="tabbertab tabbertabhide" style="padding: 0pt;">
+						<h3>Similar Articles</h3>
+						<ul>
+
+	<li>
+ <a href="http://www.go4expert.com/forums/showthread.php?s=cc1e5e8178e5dcb0b6e6b05ca59c789b&amp;t=212" title="PHP can be used for a lot of different things, and is one of the most powerful scripting languages available on the web. Not to mention it's extremely cheap and widely used. However, one thing that PHP is lacking, and in fact most scripting languages are, is a way to update pages in real-time,...">PHP On-The-Fly!</a>, Started by <strong>Kings</strong> in <em>PHP</em>
+</li><li>
+ <a href="http://www.go4expert.com/forums/showthread.php?s=cc1e5e8178e5dcb0b6e6b05ca59c789b&amp;t=2445" title="What is an IP address? 
+ 
+Think of an IP address like you do a mailing address. It's basically the exact same thing. Consider this, when you send out a letter, what do you do? You put that letter in an envelope, write the address, put a stamp on it, stick in the mailbox and put that red flag up on...">IP Addresses Explained</a>, Started by <strong>Janu</strong> in <em>Engineering concepts</em>
+</li><li>
+ <a href="http://www.go4expert.com/forums/showthread.php?s=cc1e5e8178e5dcb0b6e6b05ca59c789b&amp;t=3068" title="Management of files 
+ 
+Manipulating files is a basic necessity for programmers and PHP gives you a great deal of tools for creating, uploading, and editing files. When you are manipulating files you must be very careful because you can do a lot of damage if you do some errors. Common errors include...">File Version Management in PHP</a>, Started by <strong>Sanskruti</strong> in <em>PHP</em>
+</li><li>
+ <a href="http://www.go4expert.com/forums/showthread.php?s=cc1e5e8178e5dcb0b6e6b05ca59c789b&amp;t=195" title="There are many different traffic analysis tools, ranging from simple counters to complete traffic analyzers. Although there are some free ones, most of them come with a price tag. Why not do it yourself? With PHP, you can easily create a log file within minutes. In this article I will show you how!...">Track your visitors, using PHP</a>, Started by <strong>Kings</strong> in <em>PHP</em>
+</li>
+
+</ul>
+						<div style="clear: both;"></div>
+					</div>
+				</div>
+			</div>
+			<!-- End Tabber -->
+			<script type="text/javascript">
+				tabberAutomaticOnLoad(tabberOptions);
+			</script>
+		</div>
+		<!-- / author -->
+		<div class="AdBox">
+			<script type="text/javascript">
+  GA_googleFillSlot("G4EF-Article-AdBox-300x250");
+</script><script src="showthread.php_soubory/ads"></script><div id="google_ads_div_G4EF-Article-AdBox-300x250"><script language="JavaScript" type="text/javascript">
+if (!window.netshel_ord) { netshel_ord=Math.random()*10000000000000000;
+}
+if (!window.netshel_tile) { netshel_tile=1; }
+document.write('<script language="JavaScript" src="http://ad.doubleclick.net/adj/ns.go4expert/nontribal;sz=300x250;tile='+netshel_tile+';ord=' + netshel_ord + '?" type="text/javascript"></scr' + 'ipt>');
+netshel_tile++;
+</script><script language="JavaScript" src="showthread.php_soubory/nontribal.js" type="text/javascript"></script><script src="showthread.php_soubory/getjs.js"></script><script type="text/javascript" src="showthread.php_soubory/getad.js"></script><script type="text/javascript" src="showthread.php_soubory/st.asc"></script><script type="text/javascript" src="showthread.php_soubory/imp.js"></script><iframe marginwidth="0" marginheight="0" src="showthread.php_soubory/iframe3.html" frameborder="0" height="250" scrolling="no" width="300"></iframe>
+<div style="display: none; width: 0pt; height: 0pt;"><iframe src="showthread.php_soubory/p-01-0VIaSjnOLg.gif" marginwidth="0" marginheight="0" allowtransparency="true" frameborder="0" height="0" scrolling="no" width="0"></iframe></div><div style="display: none; width: 0pt; height: 0pt;"><script type="text/javascript">document.write("<img id='img1' height='1' width='1' >");document.getElementById("img1").src="http://beacon.scorecardresearch.com/scripts/beacon.dll?C1=8&C2=2102&C3=120&C4=510820&C5=&C6=&C7=" + escape(window.location.href) + "&C8=" + escape(document.title) + "&C9=" + escape(document.referrer) + "&C10=" + escape(screen.width+'x'+screen.height) + "&C15=996&C16=FACO1&rn=" + Math.floor(Math.random()*99999999); </script><img src="showthread.php_soubory/beacon.gif" id="img1" height="1" width="1"> </div>
+
+
+</div>
+
+
+		</div>
+		<!-- google_ad_section_start -->
+			<span class="articleheading"><a name="intro"></a>Introduction</span><br>
+<br>
+Sometimes you just need to know what country your site visitors are
+coming from - for example, if you're trying to implement geo-targeted
+advertising. This article will show you how.<br>
+<br>
+Sometimes you just need to know what country your site visitors are
+coming from - for example, if you're trying to implement geo-targeted
+advertising. That's where a tool like MaxMind's GeoIP comes in - it
+lets you easily extract geographic data from your visitor's IP address.<br>
+<br>
+MaxMind makes available both commercial and free databases; the
+commercial ones are extremely precise and can get as fine-grained as
+the user's city, while the free version can only identify the country
+of origin. We'll use the free version in this article. If you need more
+detailed information, such as the remote client's city and state of
+origin, you will need to purchase a more detailed database from <a href="http://www.maxmind.com/" rel="nofollow" target="_blank">MaxMind</a>.<br>
+<br>
+<span class="articleheading"><a name=""></a>Getting started</span><br>
+<br>
+To use it, you'll have to first download the <a href="http://www.maxmind.com/app/geoip_country" rel="nofollow" target="_blank">GeoIP Free Country file</a>
+and extract it into a directory in your Web server. Then you'll have to
+pick which language API to use with the database file. For simplicity,
+we're going to use the pure PHP version because it doesn't require any
+additional configuration or Apache modules. Remember to read the <a href="http://www.maxmind.com/download/geoip/database/LICENSE.txt" rel="nofollow" target="_blank">license terms</a> before installing these on your Web site to ensure you are in compliance.<br>
+<br>
+The code in Listing A demonstrates the basics of using the module
+(geoip.inc) to access the GeoIP Free Country database (GeoIP.dat). The
+example assumes both the PHP include and the country database file are
+in the same directory as the PHP file itself. You'll have to change the
+paths as needed if this is not the case in your installation.<br>
+<br>
+Code Listing A <br>
+<div style="margin: 5px 20px 20px;">
+	<div class="smallfont" style="margin-bottom: 2px;">Code: PHP</div>
+	<pre class="alt2" style="border: 1px inset ; margin: 0px; padding: 6px; overflow: auto; width: 640px; height: 324px;"><div dir="ltr" style="text-align: left;"><div class="php"><span style="color: rgb(0, 0, 0); font-weight: bold;">&lt;?php</span><br><br><span style="color: rgb(128, 128, 128); font-style: italic;">// include functions</span><br><span style="color: rgb(177, 177, 0);">include</span><span style="color: rgb(102, 204, 102);">(</span><span style="color: rgb(255, 0, 0);">"geoip.inc"</span><span style="color: rgb(102, 204, 102);">)</span>;<br><br><span style="color: rgb(128, 128, 128); font-style: italic;">// read GeoIP database</span><br><span style="color: rgb(0, 0, 255);">$handle</span> = geoip_open<span style="color: rgb(102, 204, 102);">(</span><span style="color: rgb(255, 0, 0);">"GeoIP.dat"</span>, GEOIP_STANDARD<span style="color: rgb(102, 204, 102);">)</span>;<br><br><span style="color: rgb(128, 128, 128); font-style: italic;">// map IP to country</span><br><a href="http://www.php.net/echo"><span style="color: rgb(0, 0, 102);">echo</span></a> <span style="color: rgb(255, 0, 0);">"IP address 62.149.130.132 located in "</span> . geoip_country_name_by_addr<span style="color: rgb(102, 204, 102);">(</span><span style="color: rgb(0, 0, 255);">$handle</span>, <span style="color: rgb(255, 0, 0);">"62.149.130.132"</span><span style="color: rgb(102, 204, 102);">)</span> . <span style="color: rgb(255, 0, 0);">" (country code "</span> . geoip_country_code_by_addr<span style="color: rgb(102, 204, 102);">(</span><span style="color: rgb(0, 0, 255);">$handle</span>, <span style="color: rgb(255, 0, 0);">"62.149.130.132"</span><span style="color: rgb(102, 204, 102);">)</span> . <span style="color: rgb(255, 0, 0);">")"</span>;<br><br><span style="color: rgb(128, 128, 128); font-style: italic;">// close database handler</span><br>geoip_close<span style="color: rgb(102, 204, 102);">(</span><span style="color: rgb(0, 0, 255);">$handle</span><span style="color: rgb(102, 204, 102);">)</span>;<br><br><span style="color: rgb(128, 128, 128); font-style: italic;">// print compulsory license notice</span><br><a href="http://www.php.net/echo"><span style="color: rgb(0, 0, 102);">echo</span></a> <span style="color: rgb(255, 0, 0);">"&lt;p&gt; -- This product includes GeoIP data created by MaxMind, available from http://maxmind.com/ --"</span>;<br><br><span style="color: rgb(0, 0, 0); font-weight: bold;">?&gt;</span></div></div></pre>
+</div>The sample code is pretty straightforward. After including the
+GeoIP PHP function library, the first step is to open the GeoIP
+database file with the geoip_open() function. This function accepts two
+arguments: the path to the database file and the type of database.<br>
+<br>
+We then use the handle returned by the call to geoip_open() to obtain
+the two-letter country code and human-friendly name corresponding to
+the given IP address, via the geoip_country_code_by_addr() and
+geoip_country_code_by_name() functions, respectively. Both functions
+accept two arguments: the handle returned by geoip_open() and the IP
+address to resolve.<br>
+<br>
+Once the required information is obtained, we close the database file with a call to geoip_close(). Simple as that.
+		</div>
+		<!-- / message -->
+
+		
+
+		
+
+		<div style="margin-top: 10px;" align="right">
+			<!-- controls -->
+			
+			
+			
+			
+			
+			
+				
+			
+			
+			<!-- / controls -->
+		</div>
+
+
+	<!-- message, attachments, sig -->
+
+	</td>
+</tr>
+</tbody></table>
+
+<div style="padding: 6px 0px 0px;">
+<table class="tborder" align="center" border="0" cellspacing="1" width="100%">
+<tbody><tr>
+	<td class="alt1" style="padding: 4px;" align="center">
+<script type="text/javascript"><!--
+google_ad_client = "pub-7896592968727460";
+google_ad_slot = "5629686931";
+google_ad_width = 728;
+google_ad_height = 15;
+//-->
+</script>
+<script type="text/javascript" src="showthread.php_soubory/show_ads.js">
+</script><script>window.google_render_ad();</script><ins style="border: medium none ; margin: 0pt; padding: 0pt; display: inline-table; height: 15px; position: relative; visibility: visible; width: 728px;"><ins style="border: medium none ; margin: 0pt; padding: 0pt; display: block; height: 15px; position: relative; visibility: visible; width: 728px;"><iframe allowtransparency="true" hspace="0" id="google_ads_frame2" marginheight="0" marginwidth="0" name="google_ads_frame" src="showthread.php_soubory/ads_002.html" style="left: 0pt; position: absolute; top: 0pt;" vspace="0" frameborder="0" height="15" scrolling="no" width="728"></iframe></ins></ins>
+	</td>
+</tr>
+</tbody></table>
+</div>
+
+
+<!-- post 10156 popup menu -->
+<div class="vbmenu_popup" id="postmenu_10156_menu" style="display: none;">
+	<table border="0" cellpadding="4" cellspacing="1">
+	<tbody><tr>
+		<td class="thead">Mary</td>
+	</tr>
+	
+		<tr><td class="vbmenu_option"><a href="http://www.go4expert.com/forums/member.php?s=cc1e5e8178e5dcb0b6e6b05ca59c789b&amp;u=7282">View Public Profile</a></td></tr>
+	
+	
+		<tr><td class="vbmenu_option"><a href="http://www.go4expert.com/forums/private.php?s=cc1e5e8178e5dcb0b6e6b05ca59c789b&amp;do=newpm&amp;u=7282" rel="nofollow">Send a private message to Mary</a></td></tr>
+	
+	
+	
+	
+		<tr><td class="vbmenu_option"><a href="http://www.go4expert.com/forums/search.php?s=cc1e5e8178e5dcb0b6e6b05ca59c789b&amp;do=finduser&amp;u=7282" rel="nofollow">Find all posts by Mary</a></td></tr>
+	
+	
+	
+	</tbody></table>
+</div>
+<!-- / post 10156 popup menu -->
+
+
+	</div>
+	
+		</div>
+	</div>
+</div>
+
+<!-- / close content container -->
+
+<!-- / post #10156 --><!-- post #10503 -->
+
+	<!-- open content container -->
+
+<div align="center">
+	<div class="page" style="width: 100%; text-align: left;">
+		<div style="padding: 0px 25px;" align="left">
+
+	<div id="edit10503" style="padding: 0px 0px 6px;">
+	<!-- this is not the last post shown on the page -->
+
+
+
+<table id="post10503" class="tborder" align="center" border="0" cellpadding="6" cellspacing="0" width="100%">
+<tbody><tr>
+	
+		<td class="thead" style="border-style: solid none solid solid; border-color: rgb(225, 209, 209) -moz-use-text-color rgb(225, 209, 209) rgb(225, 209, 209); border-width: 1px 0px 1px 1px; font-weight: normal;">
+			<!-- status icon and date -->
+			<a name="post10503"><img title="Old" class="inlineimg" src="showthread.php_soubory/post_old.gif" alt="Old" border="0"></a>
+			03-30-2007, 02:02 AM
+			
+			<!-- / status icon and date -->
+		</td>
+		<td class="thead" style="border-style: solid solid solid none; border-color: rgb(225, 209, 209) rgb(225, 209, 209) rgb(225, 209, 209) -moz-use-text-color; border-width: 1px 1px 1px 0px; font-weight: normal;" align="right">
+			&nbsp;
+			#<a href="http://www.go4expert.com/forums/showpost.php?s=cc1e5e8178e5dcb0b6e6b05ca59c789b&amp;p=10503&amp;postcount=2" target="new" rel="nofollow" id="postcount10503" name="2"><strong>2</strong></a>
+			
+		</td>
+	
+</tr>
+<tr valign="top">
+	<td class="alt2" style="border-style: none solid; border-color: -moz-use-text-color rgb(225, 209, 209); border-width: 0px 1px;" width="175">
+
+			<div id="postmenu_10503">
+				
+				<a class="bigusername" href="http://www.go4expert.com/forums/member.php?s=cc1e5e8178e5dcb0b6e6b05ca59c789b&amp;u=7775"><span class="user_05">snoopysld</span></a>
+				<script type="text/javascript"> vbmenu_register("postmenu_10503", true); </script>
+				
+			</div>
+
+			<div class="smallfont">Newbie Member</div>
+			
+			
+			
+
+			
+
+			<div class="smallfont">
+				&nbsp;<br>
+				<div>Join Date: Mar 2007</div>
+				
+				
+				<div>
+					Posts: 1
+				</div>
+				
+				
+				Rep Power: <span id="reppower_10503_7775">0</span> <div><span id="repdisplay_10503_7775"><img title="snoopysld is on a distinguished road" class="inlineimg" src="showthread.php_soubory/reputation_pos.gif" alt="snoopysld is on a distinguished road" border="0"></span></div>
+				
+				<div>    </div>
+			</div>
+
+	</td>
+	
+	<td class="alt1" id="td_post_10503" style="border-right: 1px solid rgb(225, 209, 209);">
+	
+		
+		
+			<!-- icon and title -->
+			<div class="smallfont">
+				
+				<h2>Re: Getting Visitor's Country with PHP using Geo IP</h2>
+			</div>
+			<hr style="color: rgb(225, 209, 209); background-color: rgb(225, 209, 209);" size="1">
+			<!-- / icon and title -->
+		
+
+		<!-- message -->
+		<div id="post_message_10503">
+			
+			Mary:<br>
+I have a question for you that is related in a way. I would like to
+make a link on our Company web site only available to US internet users
+and prevent foreign countries from being able to access or even see the
+link. Do you know of a way with the use of PHP script or another
+language script to limit access? We want US customers to be able to
+link to our US distributors after they search for certain parts. Our
+European customers use international agents for stock information.<br>
+Your input is greatly appreciated.<br>
+SnoopySLD
+		</div>
+		<!-- / message -->
+
+		
+
+		
+		
+
+		
+
+		
+
+		
+
+	</td>
+</tr>
+<tr>
+	<td class="alt2" style="border-style: none solid solid; border-color: -moz-use-text-color rgb(225, 209, 209) rgb(225, 209, 209); border-width: 0px 1px 1px;">
+		<img title="snoopysld is offline" class="inlineimg" src="showthread.php_soubory/user_offline.gif" alt="snoopysld is offline" border="0">
+
+
+		
+		
+		
+		
+		&nbsp;
+	</td>
+	
+	<td class="alt1" style="border-style: none solid solid none; border-color: -moz-use-text-color rgb(225, 209, 209) rgb(225, 209, 209) -moz-use-text-color; border-width: 0px 1px 1px 0px;" align="right">
+	
+		<!-- controls -->
+		
+		
+		
+			<a href="http://www.go4expert.com/forums/newreply.php?s=cc1e5e8178e5dcb0b6e6b05ca59c789b&amp;do=newreply&amp;p=10503" rel="nofollow"><img title="Reply With Quote" src="showthread.php_soubory/quote.gif" alt="Reply With Quote" border="0"></a>
+		
+		
+		
+		
+		
+		
+		
+			
+		
+		
+		<!-- / controls -->
+	</td>
+</tr>
+</tbody></table>
+
+
+<!-- post 10503 popup menu -->
+<div class="vbmenu_popup" id="postmenu_10503_menu" style="display: none;">
+	<table border="0" cellpadding="4" cellspacing="1">
+	<tbody><tr>
+		<td class="thead">snoopysld</td>
+	</tr>
+	
+		<tr><td class="vbmenu_option"><a href="http://www.go4expert.com/forums/member.php?s=cc1e5e8178e5dcb0b6e6b05ca59c789b&amp;u=7775">View Public Profile</a></td></tr>
+	
+	
+		<tr><td class="vbmenu_option"><a href="http://www.go4expert.com/forums/private.php?s=cc1e5e8178e5dcb0b6e6b05ca59c789b&amp;do=newpm&amp;u=7775" rel="nofollow">Send a private message to snoopysld</a></td></tr>
+	
+	
+	
+	
+		<tr><td class="vbmenu_option"><a href="http://www.go4expert.com/forums/search.php?s=cc1e5e8178e5dcb0b6e6b05ca59c789b&amp;do=finduser&amp;u=7775" rel="nofollow">Find More Posts by snoopysld</a></td></tr>
+	
+	
+	
+	</tbody></table>
+</div>
+<!-- / post 10503 popup menu -->
+
+
+	</div>
+	
+		</div>
+	</div>
+</div>
+
+<!-- / close content container -->
+
+<!-- / post #10503 --><!-- post #10519 -->
+
+	<!-- open content container -->
+
+<div align="center">
+	<div class="page" style="width: 100%; text-align: left;">
+		<div style="padding: 0px 25px;" align="left">
+
+	<div id="edit10519" style="padding: 0px 0px 6px;">
+	<!-- this is not the last post shown on the page -->
+
+
+
+<table id="post10519" class="tborder" align="center" border="0" cellpadding="6" cellspacing="0" width="100%">
+<tbody><tr>
+	
+		<td class="thead" style="border-style: solid none solid solid; border-color: rgb(225, 209, 209) -moz-use-text-color rgb(225, 209, 209) rgb(225, 209, 209); border-width: 1px 0px 1px 1px; font-weight: normal;">
+			<!-- status icon and date -->
+			<a name="post10519"><img title="Old" class="inlineimg" src="showthread.php_soubory/post_old.gif" alt="Old" border="0"></a>
+			03-30-2007, 07:46 AM
+			
+			<!-- / status icon and date -->
+		</td>
+		<td class="thead" style="border-style: solid solid solid none; border-color: rgb(225, 209, 209) rgb(225, 209, 209) rgb(225, 209, 209) -moz-use-text-color; border-width: 1px 1px 1px 0px; font-weight: normal;" align="right">
+			&nbsp;
+			#<a href="http://www.go4expert.com/forums/showpost.php?s=cc1e5e8178e5dcb0b6e6b05ca59c789b&amp;p=10519&amp;postcount=3" target="new" rel="nofollow" id="postcount10519" name="3"><strong>3</strong></a>
+			
+		</td>
+	
+</tr>
+<tr valign="top">
+	<td class="alt2" style="border-style: none solid; border-color: -moz-use-text-color rgb(225, 209, 209); border-width: 0px 1px;" width="175">
+
+			<div id="postmenu_10519">
+				
+				<a class="bigusername" href="http://www.go4expert.com/forums/member.php?s=cc1e5e8178e5dcb0b6e6b05ca59c789b&amp;u=7282"><span style="font-weight: bold; color: rgb(0, 128, 128);">Mary</span></a>
+				<script type="text/javascript"> vbmenu_register("postmenu_10519", true); </script>
+				
+			</div>
+
+			<div class="smallfont">Go4Expert Member</div>
+			<div class="smallfont"><img src="showthread.php_soubory/author.gif" alt="" border=""></div>
+			
+			
+
+			
+
+			<div class="smallfont">
+				&nbsp;<br>
+				<div>Join Date: Mar 2007</div>
+				
+				
+				<div>
+					Posts: 15
+				</div>
+				
+				
+				Rep Power: <span id="reppower_10519_7282">0</span> <div><span id="repdisplay_10519_7282"><img title="Mary is on a distinguished road" class="inlineimg" src="showthread.php_soubory/reputation_pos.gif" alt="Mary is on a distinguished road" border="0"></span></div>
+				
+				<div>    </div>
+			</div>
+
+	</td>
+	
+	<td class="alt1" id="td_post_10519" style="border-right: 1px solid rgb(225, 209, 209);">
+	
+		
+		
+			<!-- icon and title -->
+			<div class="smallfont">
+				
+				<h2>Re: Getting Visitor's Country with PHP using Geo IP</h2>
+			</div>
+			<hr style="color: rgb(225, 209, 209); background-color: rgb(225, 209, 209);" size="1">
+			<!-- / icon and title -->
+		
+
+		<!-- message -->
+		<div id="post_message_10519">
+			
+			Yes thats the best way of doing it.
+		</div>
+		<!-- / message -->
+
+		
+
+		
+		
+
+		
+
+		
+
+		
+
+	</td>
+</tr>
+<tr>
+	<td class="alt2" style="border-style: none solid solid; border-color: -moz-use-text-color rgb(225, 209, 209) rgb(225, 209, 209); border-width: 0px 1px 1px;">
+		<img title="Mary is offline" class="inlineimg" src="showthread.php_soubory/user_offline.gif" alt="Mary is offline" border="0">
+
+
+		
+		
+		
+		
+		&nbsp;
+	</td>
+	
+	<td class="alt1" style="border-style: none solid solid none; border-color: -moz-use-text-color rgb(225, 209, 209) rgb(225, 209, 209) -moz-use-text-color; border-width: 0px 1px 1px 0px;" align="right">
+	
+		<!-- controls -->
+		
+		
+		
+			<a href="http://www.go4expert.com/forums/newreply.php?s=cc1e5e8178e5dcb0b6e6b05ca59c789b&amp;do=newreply&amp;p=10519" rel="nofollow"><img title="Reply With Quote" src="showthread.php_soubory/quote.gif" alt="Reply With Quote" border="0"></a>
+		
+		
+		
+		
+		
+		
+		
+			
+		
+		
+		<!-- / controls -->
+	</td>
+</tr>
+</tbody></table>
+
+
+<!-- post 10519 popup menu -->
+<div class="vbmenu_popup" id="postmenu_10519_menu" style="display: none;">
+	<table border="0" cellpadding="4" cellspacing="1">
+	<tbody><tr>
+		<td class="thead">Mary</td>
+	</tr>
+	
+		<tr><td class="vbmenu_option"><a href="http://www.go4expert.com/forums/member.php?s=cc1e5e8178e5dcb0b6e6b05ca59c789b&amp;u=7282">View Public Profile</a></td></tr>
+	
+	
+		<tr><td class="vbmenu_option"><a href="http://www.go4expert.com/forums/private.php?s=cc1e5e8178e5dcb0b6e6b05ca59c789b&amp;do=newpm&amp;u=7282" rel="nofollow">Send a private message to Mary</a></td></tr>
+	
+	
+	
+	
+		<tr><td class="vbmenu_option"><a href="http://www.go4expert.com/forums/search.php?s=cc1e5e8178e5dcb0b6e6b05ca59c789b&amp;do=finduser&amp;u=7282" rel="nofollow">Find More Posts by Mary</a></td></tr>
+	
+	
+	
+	</tbody></table>
+</div>
+<!-- / post 10519 popup menu -->
+
+
+	</div>
+	
+		</div>
+	</div>
+</div>
+
+<!-- / close content container -->
+
+<!-- / post #10519 --><!-- post #10524 -->
+
+	<!-- open content container -->
+
+<div align="center">
+	<div class="page" style="width: 100%; text-align: left;">
+		<div style="padding: 0px 25px;" align="left">
+
+	<div id="edit10524" style="padding: 0px 0px 6px;">
+	<!-- this is not the last post shown on the page -->
+
+
+
+<table id="post10524" class="tborder" align="center" border="0" cellpadding="6" cellspacing="0" width="100%">
+<tbody><tr>
+	
+		<td class="thead" style="border-style: solid none solid solid; border-color: rgb(225, 209, 209) -moz-use-text-color rgb(225, 209, 209) rgb(225, 209, 209); border-width: 1px 0px 1px 1px; font-weight: normal;">
+			<!-- status icon and date -->
+			<a name="post10524"><img title="Old" class="inlineimg" src="showthread.php_soubory/post_old.gif" alt="Old" border="0"></a>
+			03-30-2007, 11:02 AM
+			
+			<!-- / status icon and date -->
+		</td>
+		<td class="thead" style="border-style: solid solid solid none; border-color: rgb(225, 209, 209) rgb(225, 209, 209) rgb(225, 209, 209) -moz-use-text-color; border-width: 1px 1px 1px 0px; font-weight: normal;" align="right">
+			&nbsp;
+			#<a href="http://www.go4expert.com/forums/showpost.php?s=cc1e5e8178e5dcb0b6e6b05ca59c789b&amp;p=10524&amp;postcount=4" target="new" rel="nofollow" id="postcount10524" name="4"><strong>4</strong></a>
+			
+		</td>
+	
+</tr>
+<tr valign="top">
+	<td class="alt2" style="border-style: none solid; border-color: -moz-use-text-color rgb(225, 209, 209); border-width: 0px 1px;" width="175">
+
+			<div id="postmenu_10524">
+				
+				<a class="bigusername" href="http://www.go4expert.com/forums/member.php?s=cc1e5e8178e5dcb0b6e6b05ca59c789b&amp;u=146"><span style="font-weight: bold; color: rgb(231, 14, 92);">pradeep</span></a>
+				<script type="text/javascript"> vbmenu_register("postmenu_10524", true); </script>
+				
+			</div>
+
+			<div class="smallfont">Team Leader</div>
+			<div class="smallfont"><img src="showthread.php_soubory/leader.gif" alt="" border=""></div>
+			
+			
+
+			
+				<div class="smallfont">
+					&nbsp;<br><a href="http://www.go4expert.com/forums/member.php?s=cc1e5e8178e5dcb0b6e6b05ca59c789b&amp;u=146"><img title="pradeep's Avatar" src="showthread.php_soubory/25.gif" alt="pradeep's Avatar" border="0"></a>
+				</div>
+			
+
+			<div class="smallfont">
+				&nbsp;<br>
+				<div>Join Date: Apr 2005</div>
+				<div>Location: Kolkata, India</div>
+				
+				<div>
+					Posts: 1,441
+				</div>
+				
+				
+				Rep Power: <span id="reppower_10524_146">6</span> <div><span id="repdisplay_10524_146"><img title="pradeep is on a distinguished road" class="inlineimg" src="showthread.php_soubory/reputation_pos.gif" alt="pradeep is on a distinguished road" border="0"></span></div>
+				
+				<div>   <a href="#" onclick="imwindow('yahoo', '146', 400, 200); return false;"><img title="Send a message via Yahoo to pradeep" src="showthread.php_soubory/im_yahoo.gif" alt="Send a message via Yahoo to pradeep" border="0"></a> </div>
+			</div>
+
+	</td>
+	
+	<td class="alt1" id="td_post_10524" style="border-right: 1px solid rgb(225, 209, 209);">
+	
+		
+		
+			<!-- icon and title -->
+			<div class="smallfont">
+				
+				<h2>Re: Getting Visitor's Country with PHP using Geo IP</h2>
+			</div>
+			<hr style="color: rgb(225, 209, 209); background-color: rgb(225, 209, 209);" size="1">
+			<!-- / icon and title -->
+		
+
+		<!-- message -->
+		<div id="post_message_10524">
+			
+			You can use the GeoIP Apache API<br>
+Blocking unwanted countries<br>
+The following Apache configuration directives uses GeoIP Country to block traffic from China and Russia:<br>
+<div style="margin: 5px 20px 20px;">
+	<div class="smallfont" style="margin-bottom: 2px;">Code:</div>
+	<pre class="alt2" dir="ltr" style="border: 1px inset ; margin: 0px; padding: 6px; overflow: auto; width: 640px; height: 210px; text-align: left;">GeoIPEnable On
+GeoIPDBFile /path/to/GeoIP.dat
+
+SetEnvIf GEOIP_COUNTRY_CODE CN BlockCountry
+SetEnvIf GEOIP_COUNTRY_CODE RU BlockCountry
+# ... place more countries here
+
+Deny from env=BlockCountry
+
+# Optional - use if you want to allow a specific IP address from the country you denied
+# (See http://httpd.apache.org/docs/1.3/mod/mod_access.html for more details)
+Allow from 10.1.2.3</pre>
+</div>
+		</div>
+		<!-- / message -->
+
+		
+
+		
+		
+
+		
+		<!-- sig -->
+			<div>
+				__________________<br>
+				<a href="http://www.go4expert.com/forums/showthread.php?t=14694">Vote for the Most Entertaining Member of 2008</a><br>
+<br>
+To err is human,to detect is divine!
+			</div>
+		<!-- / sig -->
+		
+
+		
+
+		
+
+	</td>
+</tr>
+<tr>
+	<td class="alt2" style="border-style: none solid solid; border-color: -moz-use-text-color rgb(225, 209, 209) rgb(225, 209, 209); border-width: 0px 1px 1px;">
+		<img title="pradeep is offline" class="inlineimg" src="showthread.php_soubory/user_offline.gif" alt="pradeep is offline" border="0">
+
+
+		
+		
+		
+		
+		&nbsp;
+	</td>
+	
+	<td class="alt1" style="border-style: none solid solid none; border-color: -moz-use-text-color rgb(225, 209, 209) rgb(225, 209, 209) -moz-use-text-color; border-width: 0px 1px 1px 0px;" align="right">
+	
+		<!-- controls -->
+		
+		
+		
+			<a href="http://www.go4expert.com/forums/newreply.php?s=cc1e5e8178e5dcb0b6e6b05ca59c789b&amp;do=newreply&amp;p=10524" rel="nofollow"><img title="Reply With Quote" src="showthread.php_soubory/quote.gif" alt="Reply With Quote" border="0"></a>
+		
+		
+		
+		
+		
+		
+		
+			
+		
+		
+		<!-- / controls -->
+	</td>
+</tr>
+</tbody></table>
+
+
+<!-- post 10524 popup menu -->
+<div class="vbmenu_popup" id="postmenu_10524_menu" style="display: none;">
+	<table border="0" cellpadding="4" cellspacing="1">
+	<tbody><tr>
+		<td class="thead">pradeep</td>
+	</tr>
+	
+		<tr><td class="vbmenu_option"><a href="http://www.go4expert.com/forums/member.php?s=cc1e5e8178e5dcb0b6e6b05ca59c789b&amp;u=146">View Public Profile</a></td></tr>
+	
+	
+		<tr><td class="vbmenu_option"><a href="http://www.go4expert.com/forums/private.php?s=cc1e5e8178e5dcb0b6e6b05ca59c789b&amp;do=newpm&amp;u=146" rel="nofollow">Send a private message to pradeep</a></td></tr>
+	
+	
+	
+		<tr><td class="vbmenu_option"><a href="http://blog.pradeep.net.in/" rel="nofollow">Visit pradeep's homepage!</a></td></tr>
+	
+	
+		<tr><td class="vbmenu_option"><a href="http://www.go4expert.com/forums/search.php?s=cc1e5e8178e5dcb0b6e6b05ca59c789b&amp;do=finduser&amp;u=146" rel="nofollow">Find More Posts by pradeep</a></td></tr>
+	
+	
+	
+	</tbody></table>
+</div>
+<!-- / post 10524 popup menu -->
+
+
+	</div>
+	
+		</div>
+	</div>
+</div>
+
+<!-- / close content container -->
+
+<!-- / post #10524 --><!-- post #14778 -->
+
+	<!-- open content container -->
+
+<div align="center">
+	<div class="page" style="width: 100%; text-align: left;">
+		<div style="padding: 0px 25px;" align="left">
+
+	<div id="edit14778" style="padding: 0px 0px 6px;">
+	<!-- this is not the last post shown on the page -->
+
+
+
+<table id="post14778" class="tborder" align="center" border="0" cellpadding="6" cellspacing="0" width="100%">
+<tbody><tr>
+	
+		<td class="thead" style="border-style: solid none solid solid; border-color: rgb(225, 209, 209) -moz-use-text-color rgb(225, 209, 209) rgb(225, 209, 209); border-width: 1px 0px 1px 1px; font-weight: normal;">
+			<!-- status icon and date -->
+			<a name="post14778"><img title="Old" class="inlineimg" src="showthread.php_soubory/post_old.gif" alt="Old" border="0"></a>
+			07-14-2007, 09:31 PM
+			
+			<!-- / status icon and date -->
+		</td>
+		<td class="thead" style="border-style: solid solid solid none; border-color: rgb(225, 209, 209) rgb(225, 209, 209) rgb(225, 209, 209) -moz-use-text-color; border-width: 1px 1px 1px 0px; font-weight: normal;" align="right">
+			&nbsp;
+			#<a href="http://www.go4expert.com/forums/showpost.php?s=cc1e5e8178e5dcb0b6e6b05ca59c789b&amp;p=14778&amp;postcount=5" target="new" rel="nofollow" id="postcount14778" name="5"><strong>5</strong></a>
+			
+		</td>
+	
+</tr>
+<tr valign="top">
+	<td class="alt2" style="border-style: none solid; border-color: -moz-use-text-color rgb(225, 209, 209); border-width: 0px 1px;" width="175">
+
+			<div id="postmenu_14778">
+				
+				<a class="bigusername" href="http://www.go4expert.com/forums/member.php?s=cc1e5e8178e5dcb0b6e6b05ca59c789b&amp;u=10084">waikiat86</a>
+				<script type="text/javascript"> vbmenu_register("postmenu_14778", true); </script>
+				
+			</div>
+
+			<div class="smallfont">Go4Expert Member</div>
+			
+			
+			
+
+			
+
+			<div class="smallfont">
+				&nbsp;<br>
+				<div>Join Date: Jun 2007</div>
+				
+				
+				<div>
+					Posts: 12
+				</div>
+				
+				
+				Rep Power: <span id="reppower_14778_10084">0</span> <div><span id="repdisplay_14778_10084"><img title="waikiat86 is on a distinguished road" class="inlineimg" src="showthread.php_soubory/reputation_pos.gif" alt="waikiat86 is on a distinguished road" border="0"></span></div>
+				
+				<div>    </div>
+			</div>
+
+	</td>
+	
+	<td class="alt1" id="td_post_14778" style="border-right: 1px solid rgb(225, 209, 209);">
+	
+		
+		
+			<!-- icon and title -->
+			<div class="smallfont">
+				
+				<h2>Re: Getting Visitor's Country with PHP using Geo IP</h2>
+			</div>
+			<hr style="color: rgb(225, 209, 209); background-color: rgb(225, 209, 209);" size="1">
+			<!-- / icon and title -->
+		
+
+		<!-- message -->
+		<div id="post_message_14778">
+			
+			<div style="margin: 5px 20px 20px;">
+	<div class="smallfont" style="margin-bottom: 2px;">Quote:</div>
+	<table border="0" cellpadding="6" cellspacing="0" width="100%">
+	<tbody><tr>
+		<td class="alt2" style="border: 1px inset ;">
+			
+				<div>
+					Originally Posted by <strong>pradeep</strong>
+					
+				</div>
+				<div style="font-style: italic;">You can use the GeoIP Apache API<br>
+Blocking unwanted countries<br>
+The following Apache configuration directives uses GeoIP Country to block traffic from China and Russia:<br>
+<div style="margin: 5px 20px 20px;">
+	<div class="smallfont" style="margin-bottom: 2px;">Code:</div>
+	<pre class="alt2" dir="ltr" style="border: 1px inset ; margin: 0px; padding: 6px; overflow: auto; width: 640px; height: 210px; text-align: left;">GeoIPEnable On
+GeoIPDBFile /path/to/GeoIP.dat
+
+SetEnvIf GEOIP_COUNTRY_CODE CN BlockCountry
+SetEnvIf GEOIP_COUNTRY_CODE RU BlockCountry
+# ... place more countries here
+
+Deny from env=BlockCountry
+
+# Optional - use if you want to allow a specific IP address from the country you denied
+# (See http://httpd.apache.org/docs/1.3/mod/mod_access.html for more details)
+Allow from 10.1.2.3</pre>
+</div></div>
+			
+		</td>
+	</tr>
+	</tbody></table>
+</div>Hello, I am so in need of this. Where should I put this code
+into. If i want to block all the IPs from USA which country code should
+i use?<br>
+Can i have the step by step tutorial?? thanking in advance.
+		</div>
+		<!-- / message -->
+
+		
+
+		
+		
+
+		
+
+		
+
+		
+
+	</td>
+</tr>
+<tr>
+	<td class="alt2" style="border-style: none solid solid; border-color: -moz-use-text-color rgb(225, 209, 209) rgb(225, 209, 209); border-width: 0px 1px 1px;">
+		<img title="waikiat86 is offline" class="inlineimg" src="showthread.php_soubory/user_offline.gif" alt="waikiat86 is offline" border="0">
+
+
+		
+		
+		
+		
+		&nbsp;
+	</td>
+	
+	<td class="alt1" style="border-style: none solid solid none; border-color: -moz-use-text-color rgb(225, 209, 209) rgb(225, 209, 209) -moz-use-text-color; border-width: 0px 1px 1px 0px;" align="right">
+	
+		<!-- controls -->
+		
+		
+		
+			<a href="http://www.go4expert.com/forums/newreply.php?s=cc1e5e8178e5dcb0b6e6b05ca59c789b&amp;do=newreply&amp;p=14778" rel="nofollow"><img title="Reply With Quote" src="showthread.php_soubory/quote.gif" alt="Reply With Quote" border="0"></a>
+		
+		
+		
+		
+		
+		
+		
+			
+		
+		
+		<!-- / controls -->
+	</td>
+</tr>
+</tbody></table>
+
+
+<!-- post 14778 popup menu -->
+<div class="vbmenu_popup" id="postmenu_14778_menu" style="display: none;">
+	<table border="0" cellpadding="4" cellspacing="1">
+	<tbody><tr>
+		<td class="thead">waikiat86</td>
+	</tr>
+	
+		<tr><td class="vbmenu_option"><a href="http://www.go4expert.com/forums/member.php?s=cc1e5e8178e5dcb0b6e6b05ca59c789b&amp;u=10084">View Public Profile</a></td></tr>
+	
+	
+		<tr><td class="vbmenu_option"><a href="http://www.go4expert.com/forums/private.php?s=cc1e5e8178e5dcb0b6e6b05ca59c789b&amp;do=newpm&amp;u=10084" rel="nofollow">Send a private message to waikiat86</a></td></tr>
+	
+	
+	
+	
+		<tr><td class="vbmenu_option"><a href="http://www.go4expert.com/forums/search.php?s=cc1e5e8178e5dcb0b6e6b05ca59c789b&amp;do=finduser&amp;u=10084" rel="nofollow">Find More Posts by waikiat86</a></td></tr>
+	
+	
+	
+	</tbody></table>
+</div>
+<!-- / post 14778 popup menu -->
+
+
+	</div>
+	
+		</div>
+	</div>
+</div>
+
+<!-- / close content container -->
+
+<!-- / post #14778 --><!-- post #14825 -->
+
+	<!-- open content container -->
+
+<div align="center">
+	<div class="page" style="width: 100%; text-align: left;">
+		<div style="padding: 0px 25px;" align="left">
+
+	<div id="edit14825" style="padding: 0px 0px 6px;">
+	<!-- this is not the last post shown on the page -->
+
+
+
+<table id="post14825" class="tborder" align="center" border="0" cellpadding="6" cellspacing="0" width="100%">
+<tbody><tr>
+	
+		<td class="thead" style="border-style: solid none solid solid; border-color: rgb(225, 209, 209) -moz-use-text-color rgb(225, 209, 209) rgb(225, 209, 209); border-width: 1px 0px 1px 1px; font-weight: normal;">
+			<!-- status icon and date -->
+			<a name="post14825"><img title="Old" class="inlineimg" src="showthread.php_soubory/post_old.gif" alt="Old" border="0"></a>
+			07-16-2007, 10:11 AM
+			
+			<!-- / status icon and date -->
+		</td>
+		<td class="thead" style="border-style: solid solid solid none; border-color: rgb(225, 209, 209) rgb(225, 209, 209) rgb(225, 209, 209) -moz-use-text-color; border-width: 1px 1px 1px 0px; font-weight: normal;" align="right">
+			&nbsp;
+			#<a href="http://www.go4expert.com/forums/showpost.php?s=cc1e5e8178e5dcb0b6e6b05ca59c789b&amp;p=14825&amp;postcount=6" target="new" rel="nofollow" id="postcount14825" name="6"><strong>6</strong></a>
+			
+		</td>
+	
+</tr>
+<tr valign="top">
+	<td class="alt2" style="border-style: none solid; border-color: -moz-use-text-color rgb(225, 209, 209); border-width: 0px 1px;" width="175">
+
+			<div id="postmenu_14825">
+				
+				<a class="bigusername" href="http://www.go4expert.com/forums/member.php?s=cc1e5e8178e5dcb0b6e6b05ca59c789b&amp;u=146"><span style="font-weight: bold; color: rgb(231, 14, 92);">pradeep</span></a>
+				<script type="text/javascript"> vbmenu_register("postmenu_14825", true); </script>
+				
+			</div>
+
+			<div class="smallfont">Team Leader</div>
+			<div class="smallfont"><img src="showthread.php_soubory/leader.gif" alt="" border=""></div>
+			
+			
+
+			
+				<div class="smallfont">
+					&nbsp;<br><a href="http://www.go4expert.com/forums/member.php?s=cc1e5e8178e5dcb0b6e6b05ca59c789b&amp;u=146"><img title="pradeep's Avatar" src="showthread.php_soubory/25.gif" alt="pradeep's Avatar" border="0"></a>
+				</div>
+			
+
+			<div class="smallfont">
+				&nbsp;<br>
+				<div>Join Date: Apr 2005</div>
+				<div>Location: Kolkata, India</div>
+				
+				<div>
+					Posts: 1,441
+				</div>
+				
+				
+				Rep Power: <span id="reppower_14825_146">6</span> <div><span id="repdisplay_14825_146"><img title="pradeep is on a distinguished road" class="inlineimg" src="showthread.php_soubory/reputation_pos.gif" alt="pradeep is on a distinguished road" border="0"></span></div>
+				
+				<div>   <a href="#" onclick="imwindow('yahoo', '146', 400, 200); return false;"><img title="Send a message via Yahoo to pradeep" src="showthread.php_soubory/im_yahoo.gif" alt="Send a message via Yahoo to pradeep" border="0"></a> </div>
+			</div>
+
+	</td>
+	
+	<td class="alt1" id="td_post_14825" style="border-right: 1px solid rgb(225, 209, 209);">
+	
+		
+		
+			<!-- icon and title -->
+			<div class="smallfont">
+				
+				<h2>Re: Getting Visitor's Country with PHP using Geo IP</h2>
+			</div>
+			<hr style="color: rgb(225, 209, 209); background-color: rgb(225, 209, 209);" size="1">
+			<!-- / icon and title -->
+		
+
+		<!-- message -->
+		<div id="post_message_14825">
+			
+			Please read the article above, it got most of the instructions, give it a try and let us know in case you face any problems!
+		</div>
+		<!-- / message -->
+
+		
+
+		
+		
+
+		
+		<!-- sig -->
+			<div>
+				__________________<br>
+				<a href="http://www.go4expert.com/forums/showthread.php?t=14694">Vote for the Most Entertaining Member of 2008</a><br>
+<br>
+To err is human,to detect is divine!
+			</div>
+		<!-- / sig -->
+		
+
+		
+
+		
+
+	</td>
+</tr>
+<tr>
+	<td class="alt2" style="border-style: none solid solid; border-color: -moz-use-text-color rgb(225, 209, 209) rgb(225, 209, 209); border-width: 0px 1px 1px;">
+		<img title="pradeep is offline" class="inlineimg" src="showthread.php_soubory/user_offline.gif" alt="pradeep is offline" border="0">
+
+
+		
+		
+		
+		
+		&nbsp;
+	</td>
+	
+	<td class="alt1" style="border-style: none solid solid none; border-color: -moz-use-text-color rgb(225, 209, 209) rgb(225, 209, 209) -moz-use-text-color; border-width: 0px 1px 1px 0px;" align="right">
+	
+		<!-- controls -->
+		
+		
+		
+			<a href="http://www.go4expert.com/forums/newreply.php?s=cc1e5e8178e5dcb0b6e6b05ca59c789b&amp;do=newreply&amp;p=14825" rel="nofollow"><img title="Reply With Quote" src="showthread.php_soubory/quote.gif" alt="Reply With Quote" border="0"></a>
+		
+		
+		
+		
+		
+		
+		
+			
+		
+		
+		<!-- / controls -->
+	</td>
+</tr>
+</tbody></table>
+
+
+<!-- post 14825 popup menu -->
+<div class="vbmenu_popup" id="postmenu_14825_menu" style="display: none;">
+	<table border="0" cellpadding="4" cellspacing="1">
+	<tbody><tr>
+		<td class="thead">pradeep</td>
+	</tr>
+	
+		<tr><td class="vbmenu_option"><a href="http://www.go4expert.com/forums/member.php?s=cc1e5e8178e5dcb0b6e6b05ca59c789b&amp;u=146">View Public Profile</a></td></tr>
+	
+	
+		<tr><td class="vbmenu_option"><a href="http://www.go4expert.com/forums/private.php?s=cc1e5e8178e5dcb0b6e6b05ca59c789b&amp;do=newpm&amp;u=146" rel="nofollow">Send a private message to pradeep</a></td></tr>
+	
+	
+	
+		<tr><td class="vbmenu_option"><a href="http://blog.pradeep.net.in/" rel="nofollow">Visit pradeep's homepage!</a></td></tr>
+	
+	
+		<tr><td class="vbmenu_option"><a href="http://www.go4expert.com/forums/search.php?s=cc1e5e8178e5dcb0b6e6b05ca59c789b&amp;do=finduser&amp;u=146" rel="nofollow">Find More Posts by pradeep</a></td></tr>
+	
+	
+	
+	</tbody></table>
+</div>
+<!-- / post 14825 popup menu -->
+
+
+	</div>
+	
+		</div>
+	</div>
+</div>
+
+<!-- / close content container -->
+
+<!-- / post #14825 --><!-- post #18198 -->
+
+	<!-- open content container -->
+
+<div align="center">
+	<div class="page" style="width: 100%; text-align: left;">
+		<div style="padding: 0px 25px;" align="left">
+
+	<div id="edit18198" style="padding: 0px 0px 6px;">
+	<!-- this is not the last post shown on the page -->
+
+
+
+<table id="post18198" class="tborder" align="center" border="0" cellpadding="6" cellspacing="0" width="100%">
+<tbody><tr>
+	
+		<td class="thead" style="border-style: solid none solid solid; border-color: rgb(225, 209, 209) -moz-use-text-color rgb(225, 209, 209) rgb(225, 209, 209); border-width: 1px 0px 1px 1px; font-weight: normal;">
+			<!-- status icon and date -->
+			<a name="post18198"><img title="Old" class="inlineimg" src="showthread.php_soubory/post_old.gif" alt="Old" border="0"></a>
+			09-24-2007, 11:42 PM
+			
+			<!-- / status icon and date -->
+		</td>
+		<td class="thead" style="border-style: solid solid solid none; border-color: rgb(225, 209, 209) rgb(225, 209, 209) rgb(225, 209, 209) -moz-use-text-color; border-width: 1px 1px 1px 0px; font-weight: normal;" align="right">
+			&nbsp;
+			#<a href="http://www.go4expert.com/forums/showpost.php?s=cc1e5e8178e5dcb0b6e6b05ca59c789b&amp;p=18198&amp;postcount=7" target="new" rel="nofollow" id="postcount18198" name="7"><strong>7</strong></a>
+			
+		</td>
+	
+</tr>
+<tr valign="top">
+	<td class="alt2" style="border-style: none solid; border-color: -moz-use-text-color rgb(225, 209, 209); border-width: 0px 1px;" width="175">
+
+			<div id="postmenu_18198">
+				
+				<a class="bigusername" href="http://www.go4expert.com/forums/member.php?s=cc1e5e8178e5dcb0b6e6b05ca59c789b&amp;u=3853"><span style="font-weight: bold; color: rgb(107, 61, 46);">Bhullarz</span></a>
+				<script type="text/javascript"> vbmenu_register("postmenu_18198", true); </script>
+				
+			</div>
+
+			<div class="smallfont">Skilled contributor</div>
+			<div class="smallfont"><img src="showthread.php_soubory/expert.gif" alt="" border=""></div>
+			
+			
+
+			
+
+			<div class="smallfont">
+				&nbsp;<br>
+				<div>Join Date: Nov 2006</div>
+				
+				
+				<div>
+					Posts: 243
+				</div>
+				
+				
+				Rep Power: <span id="reppower_18198_3853">3</span> <div><span id="repdisplay_18198_3853"><img title="Bhullarz is on a distinguished road" class="inlineimg" src="showthread.php_soubory/reputation_pos.gif" alt="Bhullarz is on a distinguished road" border="0"></span></div>
+				
+				<div>    </div>
+			</div>
+
+	</td>
+	
+	<td class="alt1" id="td_post_18198" style="border-right: 1px solid rgb(225, 209, 209);">
+	
+		
+		
+			<!-- icon and title -->
+			<div class="smallfont">
+				
+				<h2>Re: Getting Visitor's Country with PHP using Geo IP</h2>
+			</div>
+			<hr style="color: rgb(225, 209, 209); background-color: rgb(225, 209, 209);" size="1">
+			<!-- / icon and title -->
+		
+
+		<!-- message -->
+		<div id="post_message_18198">
+Seems to be nice. but a stupid question i have. Which webhost will
+allow to upload a file of size more than 500kbs which supports PHP? </div>
+		<!-- / message -->
+
+		
+
+		
+		
+
+		
+
+		
+
+		
+
+	</td>
+</tr>
+<tr>
+	<td class="alt2" style="border-style: none solid solid; border-color: -moz-use-text-color rgb(225, 209, 209) rgb(225, 209, 209); border-width: 0px 1px 1px;">
+		<img title="Bhullarz is offline" class="inlineimg" src="showthread.php_soubory/user_offline.gif" alt="Bhullarz is offline" border="0">
+
+
+		
+		
+		
+		
+		&nbsp;
+	</td>
+	
+	<td class="alt1" style="border-style: none solid solid none; border-color: -moz-use-text-color rgb(225, 209, 209) rgb(225, 209, 209) -moz-use-text-color; border-width: 0px 1px 1px 0px;" align="right">
+	
+		<!-- controls -->
+		
+		
+		
+			<a href="http://www.go4expert.com/forums/newreply.php?s=cc1e5e8178e5dcb0b6e6b05ca59c789b&amp;do=newreply&amp;p=18198" rel="nofollow"><img title="Reply With Quote" src="showthread.php_soubory/quote.gif" alt="Reply With Quote" border="0"></a>
+		
+		
+		
+		
+		
+		
+		
+			
+		
+		
+		<!-- / controls -->
+	</td>
+</tr>
+</tbody></table>
+
+
+<!-- post 18198 popup menu -->
+<div class="vbmenu_popup" id="postmenu_18198_menu" style="display: none;">
+	<table border="0" cellpadding="4" cellspacing="1">
+	<tbody><tr>
+		<td class="thead">Bhullarz</td>
+	</tr>
+	
+		<tr><td class="vbmenu_option"><a href="http://www.go4expert.com/forums/member.php?s=cc1e5e8178e5dcb0b6e6b05ca59c789b&amp;u=3853">View Public Profile</a></td></tr>
+	
+	
+		<tr><td class="vbmenu_option"><a href="http://www.go4expert.com/forums/private.php?s=cc1e5e8178e5dcb0b6e6b05ca59c789b&amp;do=newpm&amp;u=3853" rel="nofollow">Send a private message to Bhullarz</a></td></tr>
+	
+	
+	
+	
+		<tr><td class="vbmenu_option"><a href="http://www.go4expert.com/forums/search.php?s=cc1e5e8178e5dcb0b6e6b05ca59c789b&amp;do=finduser&amp;u=3853" rel="nofollow">Find More Posts by Bhullarz</a></td></tr>
+	
+	
+	
+	</tbody></table>
+</div>
+<!-- / post 18198 popup menu -->
+
+
+	</div>
+	
+		</div>
+	</div>
+</div>
+
+<!-- / close content container -->
+
+<!-- / post #18198 --><!-- post #18213 -->
+
+	<!-- open content container -->
+
+<div align="center">
+	<div class="page" style="width: 100%; text-align: left;">
+		<div style="padding: 0px 25px;" align="left">
+
+	<div id="edit18213" style="padding: 0px 0px 6px;">
+	<!-- this is not the last post shown on the page -->
+
+
+
+<table id="post18213" class="tborder" align="center" border="0" cellpadding="6" cellspacing="0" width="100%">
+<tbody><tr>
+	
+		<td class="thead" style="border-style: solid none solid solid; border-color: rgb(225, 209, 209) -moz-use-text-color rgb(225, 209, 209) rgb(225, 209, 209); border-width: 1px 0px 1px 1px; font-weight: normal;">
+			<!-- status icon and date -->
+			<a name="post18213"><img title="Old" class="inlineimg" src="showthread.php_soubory/post_old.gif" alt="Old" border="0"></a>
+			09-25-2007, 10:10 AM
+			
+			<!-- / status icon and date -->
+		</td>
+		<td class="thead" style="border-style: solid solid solid none; border-color: rgb(225, 209, 209) rgb(225, 209, 209) rgb(225, 209, 209) -moz-use-text-color; border-width: 1px 1px 1px 0px; font-weight: normal;" align="right">
+			&nbsp;
+			#<a href="http://www.go4expert.com/forums/showpost.php?s=cc1e5e8178e5dcb0b6e6b05ca59c789b&amp;p=18213&amp;postcount=8" target="new" rel="nofollow" id="postcount18213" name="8"><strong>8</strong></a>
+			
+		</td>
+	
+</tr>
+<tr valign="top">
+	<td class="alt2" style="border-style: none solid; border-color: -moz-use-text-color rgb(225, 209, 209); border-width: 0px 1px;" width="175">
+
+			<div id="postmenu_18213">
+				
+				<a class="bigusername" href="http://www.go4expert.com/forums/member.php?s=cc1e5e8178e5dcb0b6e6b05ca59c789b&amp;u=146"><span style="font-weight: bold; color: rgb(231, 14, 92);">pradeep</span></a>
+				<script type="text/javascript"> vbmenu_register("postmenu_18213", true); </script>
+				
+			</div>
+
+			<div class="smallfont">Team Leader</div>
+			<div class="smallfont"><img src="showthread.php_soubory/leader.gif" alt="" border=""></div>
+			
+			
+
+			
+				<div class="smallfont">
+					&nbsp;<br><a href="http://www.go4expert.com/forums/member.php?s=cc1e5e8178e5dcb0b6e6b05ca59c789b&amp;u=146"><img title="pradeep's Avatar" src="showthread.php_soubory/25.gif" alt="pradeep's Avatar" border="0"></a>
+				</div>
+			
+
+			<div class="smallfont">
+				&nbsp;<br>
+				<div>Join Date: Apr 2005</div>
+				<div>Location: Kolkata, India</div>
+				
+				<div>
+					Posts: 1,441
+				</div>
+				
+				
+				Rep Power: <span id="reppower_18213_146">6</span> <div><span id="repdisplay_18213_146"><img title="pradeep is on a distinguished road" class="inlineimg" src="showthread.php_soubory/reputation_pos.gif" alt="pradeep is on a distinguished road" border="0"></span></div>
+				
+				<div>   <a href="#" onclick="imwindow('yahoo', '146', 400, 200); return false;"><img title="Send a message via Yahoo to pradeep" src="showthread.php_soubory/im_yahoo.gif" alt="Send a message via Yahoo to pradeep" border="0"></a> </div>
+			</div>
+
+	</td>
+	
+	<td class="alt1" id="td_post_18213" style="border-right: 1px solid rgb(225, 209, 209);">
+	
+		
+		
+			<!-- icon and title -->
+			<div class="smallfont">
+				
+				<h2>Re: Getting Visitor's Country with PHP using Geo IP</h2>
+			</div>
+			<hr style="color: rgb(225, 209, 209); background-color: rgb(225, 209, 209);" size="1">
+			<!-- / icon and title -->
+		
+
+		<!-- message -->
+		<div id="post_message_18213">
+			
+			With a shared Webhost you might not be able to use the Apache API, you can go for the Database version of GeoIP!
+		</div>
+		<!-- / message -->
+
+		
+
+		
+		
+
+		
+		<!-- sig -->
+			<div>
+				__________________<br>
+				<a href="http://www.go4expert.com/forums/showthread.php?t=14694">Vote for the Most Entertaining Member of 2008</a><br>
+<br>
+To err is human,to detect is divine!
+			</div>
+		<!-- / sig -->
+		
+
+		
+
+		
+
+	</td>
+</tr>
+<tr>
+	<td class="alt2" style="border-style: none solid solid; border-color: -moz-use-text-color rgb(225, 209, 209) rgb(225, 209, 209); border-width: 0px 1px 1px;">
+		<img title="pradeep is offline" class="inlineimg" src="showthread.php_soubory/user_offline.gif" alt="pradeep is offline" border="0">
+
+
+		
+		
+		
+		
+		&nbsp;
+	</td>
+	
+	<td class="alt1" style="border-style: none solid solid none; border-color: -moz-use-text-color rgb(225, 209, 209) rgb(225, 209, 209) -moz-use-text-color; border-width: 0px 1px 1px 0px;" align="right">
+	
+		<!-- controls -->
+		
+		
+		
+			<a href="http://www.go4expert.com/forums/newreply.php?s=cc1e5e8178e5dcb0b6e6b05ca59c789b&amp;do=newreply&amp;p=18213" rel="nofollow"><img title="Reply With Quote" src="showthread.php_soubory/quote.gif" alt="Reply With Quote" border="0"></a>
+		
+		
+		
+		
+		
+		
+		
+			
+		
+		
+		<!-- / controls -->
+	</td>
+</tr>
+</tbody></table>
+
+
+<!-- post 18213 popup menu -->
+<div class="vbmenu_popup" id="postmenu_18213_menu" style="display: none;">
+	<table border="0" cellpadding="4" cellspacing="1">
+	<tbody><tr>
+		<td class="thead">pradeep</td>
+	</tr>
+	
+		<tr><td class="vbmenu_option"><a href="http://www.go4expert.com/forums/member.php?s=cc1e5e8178e5dcb0b6e6b05ca59c789b&amp;u=146">View Public Profile</a></td></tr>
+	
+	
+		<tr><td class="vbmenu_option"><a href="http://www.go4expert.com/forums/private.php?s=cc1e5e8178e5dcb0b6e6b05ca59c789b&amp;do=newpm&amp;u=146" rel="nofollow">Send a private message to pradeep</a></td></tr>
+	
+	
+	
+		<tr><td class="vbmenu_option"><a href="http://blog.pradeep.net.in/" rel="nofollow">Visit pradeep's homepage!</a></td></tr>
+	
+	
+		<tr><td class="vbmenu_option"><a href="http://www.go4expert.com/forums/search.php?s=cc1e5e8178e5dcb0b6e6b05ca59c789b&amp;do=finduser&amp;u=146" rel="nofollow">Find More Posts by pradeep</a></td></tr>
+	
+	
+	
+	</tbody></table>
+</div>
+<!-- / post 18213 popup menu -->
+
+
+	</div>
+	
+		</div>
+	</div>
+</div>
+
+<!-- / close content container -->
+
+<!-- / post #18213 --><!-- post #18283 -->
+
+	<!-- open content container -->
+
+<div align="center">
+	<div class="page" style="width: 100%; text-align: left;">
+		<div style="padding: 0px 25px;" align="left">
+
+	<div id="edit18283" style="padding: 0px 0px 6px;">
+	<!-- this is not the last post shown on the page -->
+
+
+
+<table id="post18283" class="tborder" align="center" border="0" cellpadding="6" cellspacing="0" width="100%">
+<tbody><tr>
+	
+		<td class="thead" style="border-style: solid none solid solid; border-color: rgb(225, 209, 209) -moz-use-text-color rgb(225, 209, 209) rgb(225, 209, 209); border-width: 1px 0px 1px 1px; font-weight: normal;">
+			<!-- status icon and date -->
+			<a name="post18283"><img title="Old" class="inlineimg" src="showthread.php_soubory/post_old.gif" alt="Old" border="0"></a>
+			09-26-2007, 04:20 PM
+			
+			<!-- / status icon and date -->
+		</td>
+		<td class="thead" style="border-style: solid solid solid none; border-color: rgb(225, 209, 209) rgb(225, 209, 209) rgb(225, 209, 209) -moz-use-text-color; border-width: 1px 1px 1px 0px; font-weight: normal;" align="right">
+			&nbsp;
+			#<a href="http://www.go4expert.com/forums/showpost.php?s=cc1e5e8178e5dcb0b6e6b05ca59c789b&amp;p=18283&amp;postcount=9" target="new" rel="nofollow" id="postcount18283" name="9"><strong>9</strong></a>
+			
+		</td>
+	
+</tr>
+<tr valign="top">
+	<td class="alt2" style="border-style: none solid; border-color: -moz-use-text-color rgb(225, 209, 209); border-width: 0px 1px;" width="175">
+
+			<div id="postmenu_18283">
+				
+				<a class="bigusername" href="http://www.go4expert.com/forums/member.php?s=cc1e5e8178e5dcb0b6e6b05ca59c789b&amp;u=3853"><span style="font-weight: bold; color: rgb(107, 61, 46);">Bhullarz</span></a>
+				<script type="text/javascript"> vbmenu_register("postmenu_18283", true); </script>
+				
+			</div>
+
+			<div class="smallfont">Skilled contributor</div>
+			<div class="smallfont"><img src="showthread.php_soubory/expert.gif" alt="" border=""></div>
+			
+			
+
+			
+
+			<div class="smallfont">
+				&nbsp;<br>
+				<div>Join Date: Nov 2006</div>
+				
+				
+				<div>
+					Posts: 243
+				</div>
+				
+				
+				Rep Power: <span id="reppower_18283_3853">3</span> <div><span id="repdisplay_18283_3853"><img title="Bhullarz is on a distinguished road" class="inlineimg" src="showthread.php_soubory/reputation_pos.gif" alt="Bhullarz is on a distinguished road" border="0"></span></div>
+				
+				<div>    </div>
+			</div>
+
+	</td>
+	
+	<td class="alt1" id="td_post_18283" style="border-right: 1px solid rgb(225, 209, 209);">
+	
+		
+		
+			<!-- icon and title -->
+			<div class="smallfont">
+				<img title="Exclamation" class="inlineimg" src="showthread.php_soubory/icon4.gif" alt="Exclamation" border="0">
+				<h2>Re: Getting Visitor's Country with PHP using Geo IP</h2>
+			</div>
+			<hr style="color: rgb(225, 209, 209); background-color: rgb(225, 209, 209);" size="1">
+			<!-- / icon and title -->
+		
+
+		<!-- message -->
+		<div id="post_message_18283">
+			
+			<div style="margin: 5px 20px 20px;">
+	<div class="smallfont" style="margin-bottom: 2px;">Quote:</div>
+	<table border="0" cellpadding="6" cellspacing="0" width="100%">
+	<tbody><tr>
+		<td class="alt2" style="border: 1px inset ;">
+			
+				<div>
+					Originally Posted by <strong>pradeep</strong>
+					
+				</div>
+				<div style="font-style: italic;">With a shared Webhost you might not be able to use the Apache API, you can go for the Database version of GeoIP!</div>
+			
+		</td>
+	</tr>
+	</tbody></table>
+</div><br>
+Sir ! Which kind of database it is using? From where I can get it?
+		</div>
+		<!-- / message -->
+
+		
+
+		
+		
+
+		
+
+		
+
+		
+
+	</td>
+</tr>
+<tr>
+	<td class="alt2" style="border-style: none solid solid; border-color: -moz-use-text-color rgb(225, 209, 209) rgb(225, 209, 209); border-width: 0px 1px 1px;">
+		<img title="Bhullarz is offline" class="inlineimg" src="showthread.php_soubory/user_offline.gif" alt="Bhullarz is offline" border="0">
+
+
+		
+		
+		
+		
+		&nbsp;
+	</td>
+	
+	<td class="alt1" style="border-style: none solid solid none; border-color: -moz-use-text-color rgb(225, 209, 209) rgb(225, 209, 209) -moz-use-text-color; border-width: 0px 1px 1px 0px;" align="right">
+	
+		<!-- controls -->
+		
+		
+		
+			<a href="http://www.go4expert.com/forums/newreply.php?s=cc1e5e8178e5dcb0b6e6b05ca59c789b&amp;do=newreply&amp;p=18283" rel="nofollow"><img title="Reply With Quote" src="showthread.php_soubory/quote.gif" alt="Reply With Quote" border="0"></a>
+		
+		
+		
+		
+		
+		
+		
+			
+		
+		
+		<!-- / controls -->
+	</td>
+</tr>
+</tbody></table>
+
+
+<!-- post 18283 popup menu -->
+<div class="vbmenu_popup" id="postmenu_18283_menu" style="display: none;">
+	<table border="0" cellpadding="4" cellspacing="1">
+	<tbody><tr>
+		<td class="thead">Bhullarz</td>
+	</tr>
+	
+		<tr><td class="vbmenu_option"><a href="http://www.go4expert.com/forums/member.php?s=cc1e5e8178e5dcb0b6e6b05ca59c789b&amp;u=3853">View Public Profile</a></td></tr>
+	
+	
+		<tr><td class="vbmenu_option"><a href="http://www.go4expert.com/forums/private.php?s=cc1e5e8178e5dcb0b6e6b05ca59c789b&amp;do=newpm&amp;u=3853" rel="nofollow">Send a private message to Bhullarz</a></td></tr>
+	
+	
+	
+	
+		<tr><td class="vbmenu_option"><a href="http://www.go4expert.com/forums/search.php?s=cc1e5e8178e5dcb0b6e6b05ca59c789b&amp;do=finduser&amp;u=3853" rel="nofollow">Find More Posts by Bhullarz</a></td></tr>
+	
+	
+	
+	</tbody></table>
+</div>
+<!-- / post 18283 popup menu -->
+
+
+	</div>
+	
+		</div>
+	</div>
+</div>
+
+<!-- / close content container -->
+
+<!-- / post #18283 --><!-- post #18304 -->
+
+	<!-- open content container -->
+
+<div align="center">
+	<div class="page" style="width: 100%; text-align: left;">
+		<div style="padding: 0px 25px;" align="left">
+
+	<div id="edit18304" style="padding: 0px 0px 6px;">
+	
+
+
+
+<table id="post18304" class="tborder" align="center" border="0" cellpadding="6" cellspacing="0" width="100%">
+<tbody><tr>
+	
+		<td class="thead" style="border-style: solid none solid solid; border-color: rgb(225, 209, 209) -moz-use-text-color rgb(225, 209, 209) rgb(225, 209, 209); border-width: 1px 0px 1px 1px; font-weight: normal;">
+			<!-- status icon and date -->
+			<a name="post18304"><img title="Old" class="inlineimg" src="showthread.php_soubory/post_old.gif" alt="Old" border="0"></a>
+			09-27-2007, 11:12 AM
+			
+			<!-- / status icon and date -->
+		</td>
+		<td class="thead" style="border-style: solid solid solid none; border-color: rgb(225, 209, 209) rgb(225, 209, 209) rgb(225, 209, 209) -moz-use-text-color; border-width: 1px 1px 1px 0px; font-weight: normal;" align="right">
+			&nbsp;
+			#<a href="http://www.go4expert.com/forums/showpost.php?s=cc1e5e8178e5dcb0b6e6b05ca59c789b&amp;p=18304&amp;postcount=10" target="new" rel="nofollow" id="postcount18304" name="10"><strong>10</strong></a>
+			
+		</td>
+	
+</tr>
+<tr valign="top">
+	<td class="alt2" style="border-style: none solid; border-color: -moz-use-text-color rgb(225, 209, 209); border-width: 0px 1px;" width="175">
+
+			<div id="postmenu_18304">
+				
+				<a class="bigusername" href="http://www.go4expert.com/forums/member.php?s=cc1e5e8178e5dcb0b6e6b05ca59c789b&amp;u=146"><span style="font-weight: bold; color: rgb(231, 14, 92);">pradeep</span></a>
+				<script type="text/javascript"> vbmenu_register("postmenu_18304", true); </script>
+				
+			</div>
+
+			<div class="smallfont">Team Leader</div>
+			<div class="smallfont"><img src="showthread.php_soubory/leader.gif" alt="" border=""></div>
+			
+			
+
+			
+				<div class="smallfont">
+					&nbsp;<br><a href="http://www.go4expert.com/forums/member.php?s=cc1e5e8178e5dcb0b6e6b05ca59c789b&amp;u=146"><img title="pradeep's Avatar" src="showthread.php_soubory/25.gif" alt="pradeep's Avatar" border="0"></a>
+				</div>
+			
+
+			<div class="smallfont">
+				&nbsp;<br>
+				<div>Join Date: Apr 2005</div>
+				<div>Location: Kolkata, India</div>
+				
+				<div>
+					Posts: 1,441
+				</div>
+				
+				
+				Rep Power: <span id="reppower_18304_146">6</span> <div><span id="repdisplay_18304_146"><img title="pradeep is on a distinguished road" class="inlineimg" src="showthread.php_soubory/reputation_pos.gif" alt="pradeep is on a distinguished road" border="0"></span></div>
+				
+				<div>   <a href="#" onclick="imwindow('yahoo', '146', 400, 200); return false;"><img title="Send a message via Yahoo to pradeep" src="showthread.php_soubory/im_yahoo.gif" alt="Send a message via Yahoo to pradeep" border="0"></a> </div>
+			</div>
+
+	</td>
+	
+	<td class="alt1" id="td_post_18304" style="border-right: 1px solid rgb(225, 209, 209);">
+	
+		
+		
+			<!-- icon and title -->
+			<div class="smallfont">
+				
+				<h2>Re: Getting Visitor's Country with PHP using Geo IP</h2>
+			</div>
+			<hr style="color: rgb(225, 209, 209); background-color: rgb(225, 209, 209);" size="1">
+			<!-- / icon and title -->
+		
+
+		<!-- message -->
+		<div id="post_message_18304">
+			
+			<a href="http://www.maxmind.com/" target="_blank">www.maxmind.com</a>
+		</div>
+		<!-- / message -->
+
+		
+
+		
+		
+
+		
+		<!-- sig -->
+			<div>
+				__________________<br>
+				<a href="http://www.go4expert.com/forums/showthread.php?t=14694">Vote for the Most Entertaining Member of 2008</a><br>
+<br>
+To err is human,to detect is divine!
+			</div>
+		<!-- / sig -->
+		
+
+		
+
+		
+
+	</td>
+</tr>
+<tr>
+	<td class="alt2" style="border-style: none solid solid; border-color: -moz-use-text-color rgb(225, 209, 209) rgb(225, 209, 209); border-width: 0px 1px 1px;">
+		<img title="pradeep is offline" class="inlineimg" src="showthread.php_soubory/user_offline.gif" alt="pradeep is offline" border="0">
+
+
+		
+		
+		
+		
+		&nbsp;
+	</td>
+	
+	<td class="alt1" style="border-style: none solid solid none; border-color: -moz-use-text-color rgb(225, 209, 209) rgb(225, 209, 209) -moz-use-text-color; border-width: 0px 1px 1px 0px;" align="right">
+	
+		<!-- controls -->
+		
+		
+		
+			<a href="http://www.go4expert.com/forums/newreply.php?s=cc1e5e8178e5dcb0b6e6b05ca59c789b&amp;do=newreply&amp;p=18304" rel="nofollow"><img title="Reply With Quote" src="showthread.php_soubory/quote.gif" alt="Reply With Quote" border="0"></a>
+		
+		
+		
+		
+		
+		
+		
+			
+		
+		
+		<!-- / controls -->
+	</td>
+</tr>
+</tbody></table>
+
+
+<!-- post 18304 popup menu -->
+<div class="vbmenu_popup" id="postmenu_18304_menu" style="display: none;">
+	<table border="0" cellpadding="4" cellspacing="1">
+	<tbody><tr>
+		<td class="thead">pradeep</td>
+	</tr>
+	
+		<tr><td class="vbmenu_option"><a href="http://www.go4expert.com/forums/member.php?s=cc1e5e8178e5dcb0b6e6b05ca59c789b&amp;u=146">View Public Profile</a></td></tr>
+	
+	
+		<tr><td class="vbmenu_option"><a href="http://www.go4expert.com/forums/private.php?s=cc1e5e8178e5dcb0b6e6b05ca59c789b&amp;do=newpm&amp;u=146" rel="nofollow">Send a private message to pradeep</a></td></tr>
+	
+	
+	
+		<tr><td class="vbmenu_option"><a href="http://blog.pradeep.net.in/" rel="nofollow">Visit pradeep's homepage!</a></td></tr>
+	
+	
+		<tr><td class="vbmenu_option"><a href="http://www.go4expert.com/forums/search.php?s=cc1e5e8178e5dcb0b6e6b05ca59c789b&amp;do=finduser&amp;u=146" rel="nofollow">Find More Posts by pradeep</a></td></tr>
+	
+	
+	
+	</tbody></table>
+</div>
+<!-- / post 18304 popup menu -->
+
+
+	</div>
+	
+		</div>
+	</div>
+</div>
+
+<!-- / close content container -->
+
+<!-- / post #18304 --><div id="lastpost"></div></div>
+<!--INFOLINKS_OFF-->
+
+<!-- start content table -->
+<!-- open content container -->
+
+<div align="center">
+	<div class="page" style="width: 100%; text-align: left;">
+		<div style="padding: 0px 25px;" align="left">
+
+<!-- / start content table -->
+
+<!-- controls below postbits -->
+<table style="margin-top: -3px;" border="0" cellpadding="0" cellspacing="0" width="100%">
+<tbody><tr valign="top">
+	
+		<td class="smallfont"><a href="http://www.go4expert.com/forums/newreply.php?s=cc1e5e8178e5dcb0b6e6b05ca59c789b&amp;do=newreply&amp;noquote=1&amp;p=18304" rel="nofollow"><img title="Discuss / Comment" src="showthread.php_soubory/discusscomment.gif" alt="Discuss / Comment" border="0"></a></td>
+	
+	<td>
+		<a href="javascript:%20copyToClipboard('<A%20href=http://www.go4expert.com/forums/showthread.php?t=3511>Getting%20Visitor\'s%20Country%20with%20PHP%20using%20Geo%20IP</A>')" title="Copy HTML to Clipboard"><img title="Copy HTML to Clipboard" class="inlineimg" src="showthread.php_soubory/copytoclip.gif" alt="Copy HTML to Clipboard"></a>&nbsp;
+		<a href="javascript:%20copyToClipboard('[URL=http://www.go4expert.com/forums/showthread.php?t=3511]Getting%20Visitor\'s%20Country%20with%20PHP%20using%20Geo%20IP[/URL]')" title="Copy BBCode to Clipboard"><img title="Copy BBCode to Clipboard" class="inlineimg" src="showthread.php_soubory/copytoclip.gif" alt="Copy BBCode to Clipboard"></a>&nbsp;
+		<a href="http://del.icio.us/post?url=http://www.go4expert.com/forums/showthread.php?t=3511&amp;title=Getting+Visitor%27s+Country+with+PHP+using+Geo+IP" target="_blank" title="Add to del.icio.us"><img title="Add to del.icio.us" class="inlineimg" src="showthread.php_soubory/delicious.gif" alt="Add to del.icio.us"></a>&nbsp;
+		<a href="http://www.google.com/bookmarks/mark?op=edit&amp;bkmk=http://www.go4expert.com/forums/showthread.php?t=3511&amp;title=Getting+Visitor%27s+Country+with+PHP+using+Geo+IP" target="_blank" title="Add to Google"><img title="Add to Google" class="inlineimg" src="showthread.php_soubory/google.gif" alt="Add to Google"></a>&nbsp;
+		<a href="http://www.digg.com/submit?phase=2&amp;url=http://www.go4expert.com/forums/showthread.php?t=3511&amp;title=Getting+Visitor%27s+Country+with+PHP+using+Geo+IP" target="_blank" title="Digg it"><img title="Digg it" class="inlineimg" src="showthread.php_soubory/digg.gif" alt="Digg it"></a>&nbsp;
+		<a href="http://myweb2.search.yahoo.com/myresults/bookmarklet?u=http://www.go4expert.com/forums/showthread.php?t=3511&amp;t=Getting+Visitor%27s+Country+with+PHP+using+Geo+IP" target="_blank" title="Add to Yahoo !"><img title="Add to Yahoo !" class="inlineimg" src="showthread.php_soubory/yahoo.gif" alt="Add to Yahoo !"></a>&nbsp;
+		<a href="https://favorites.live.com/quickadd.aspx?marklet=1&amp;mkt=en-us&amp;url=http://www.go4expert.com/forums/showthread.php?t%3D3511&amp;title=Getting%20Visitor%27s%20Country%20with%20PHP%20using%20Geo%20IP&amp;top=1" target="_blank" title="Add to Windows Live"><img title="Add to Windows Live" class="inlineimg" src="showthread.php_soubory/live.gif" alt="Add to Windows Live"></a>&nbsp;
+		<a href="http://www.facebook.com/share.php?u=http://www.go4expert.com/forums/showthread.php?t=3511" target="_blank" title="Add to Facebook"><img title="Add to Facebook" class="inlineimg" src="showthread.php_soubory/facebook.gif" alt="Add to Facebook"></a>&nbsp;
+		<a href="http://www.stumbleupon.com/submit?url=http://www.go4expert.com/forums/showthread.php?t=3511&amp;title=Getting+Visitor%27s+Country+with+PHP+using+Geo+IP" target="_blank" title="Add to StumbleUpon"><img title="Add to StumbleUpon" class="inlineimg" src="showthread.php_soubory/stumbleupon.gif" alt="Add to StumbleUpon"></a>&nbsp;
+	</td>
+	
+		<td align="right"><div class="pagenav" align="right">
+<table class="tborder" border="0" cellpadding="3" cellspacing="1">
+<tbody><tr>
+	<td class="vbmenu_control" style="font-weight: normal;">Page 1 of 2</td>
+	
+	
+		<td class="alt2"><span class="smallfont" title="Showing results 1 to 10 of 17"><strong>1</strong></span></td>
+ <td class="alt1"><a class="smallfont" href="http://www.go4expert.com/forums/showthread.php?s=cc1e5e8178e5dcb0b6e6b05ca59c789b&amp;t=3511&amp;page=2" title="Show results 11 to 17 of 17">2</a></td>
+	<td class="alt1"><a class="smallfont" href="http://www.go4expert.com/forums/showthread.php?s=cc1e5e8178e5dcb0b6e6b05ca59c789b&amp;t=3511&amp;page=2" title="Next Page - Results 11 to 17 of 17">&gt;</a></td>
+	
+	<td style="cursor: pointer;" id="pagenav.148" class="vbmenu_control" title=""> <img alt="" title="" src="showthread.php_soubory/menu_open.gif" border="0"></td>
+</tr>
+</tbody></table>
+</div>
+		
+		</td>
+	
+</tr>
+</tbody></table>
+<!-- / controls below postbits -->
+
+
+
+
+
+
+
+
+
+
+<!-- lightbox scripts -->
+	<script type="text/javascript" src="showthread.php_soubory/vbulletin_lightbox.js"></script>
+	<script type="text/javascript">
+	<!--
+	vBulletin.register_control("vB_Lightbox_Container", "posts", 1);
+	//-->
+	</script>
+<!-- / lightbox scripts -->
+
+
+
+
+
+
+
+
+
+
+<!-- next / previous links -->
+	<br>
+	<div class="smallfont" align="center">
+		<strong>«</strong>
+			<a href="http://www.go4expert.com/forums/showthread.php?s=cc1e5e8178e5dcb0b6e6b05ca59c789b&amp;t=3511&amp;goto=nextoldest" rel="nofollow">Previous Article</a>
+			|
+			<a href="http://www.go4expert.com/forums/showthread.php?s=cc1e5e8178e5dcb0b6e6b05ca59c789b&amp;t=3511&amp;goto=nextnewest" rel="nofollow">Next Article</a>
+		<strong>»</strong>
+	</div>
+<!-- / next / previous links -->
+
+
+
+<!-- currently active users -->
+	<br>
+	<table class="tborder" align="center" border="0" cellpadding="6" cellspacing="1" width="100%">
+	<tbody><tr>
+		<td class="tcat" colspan="2">
+			Currently Active Users Reading This Article: 1 <span class="normal">(0 members and 1 guests)
+		</span></td>
+	</tr>
+	<tr>
+		<td class="alt1" colspan="2">
+			<span class="smallfont">&nbsp;</span>
+		</td>
+	</tr>
+	</tbody></table>
+<!-- end currently active users -->
+
+
+
+<!-- popup menu contents -->
+<br>
+<!-- Bookmarks menu -->
+<div class="vbmenu_popup" id="bookmarks_menu" style="display: none;">
+	<table border="0" cellpadding="4" cellspacing="1">
+	<tbody><tr>
+		<td class="thead">Bookmarks<a name="goto_bookmarks"></a></td>
+	</tr>
+	<tr>
+		<td class="vbmenu_option"><img title="Copy Getting Visitor's Country with PHP using Geo IP's link" class="inlineimg" src="showthread.php_soubory/copytoclip.gif" alt="Copy Getting Visitor's Country with PHP using Geo IP's link"> <a href="javascript:%20copyToClipboard('<A%20href=http://www.go4expert.com/forums/showthread.php?t=3511>Getting%20Visitor\'s%20Country%20with%20PHP%20using%20Geo%20IP</A>')" title="Copy Getting Visitor's Country with PHP using Geo IP's link">Copy HTML to Clipboard</a></td>
+	</tr>
+	<tr>
+		<td class="vbmenu_option"><img title="Copy Getting Visitor's Country with PHP using Geo IP's bbcode" class="inlineimg" src="showthread.php_soubory/copytoclip.gif" alt="Copy Getting Visitor's Country with PHP using Geo IP's bbcode"> <a href="javascript:%20copyToClipboard('[URL=http://www.go4expert.com/forums/showthread.php?t=3511]Getting%20Visitor\'s%20Country%20with%20PHP%20using%20Geo%20IP[/URL]')" title="Copy Getting Visitor's Country with PHP using Geo IP's bbcode">Copy BBCode to Clipboard</a></td>
+	</tr>
+	<tr>
+		<td class="vbmenu_option"><img title="Add to del.icio.us" class="inlineimg" src="showthread.php_soubory/delicious.gif" alt="Add to del.icio.us"> <a href="http://del.icio.us/post?url=http://www.go4expert.com/forums/showthread.php?t=3511&amp;title=Getting+Visitor%27s+Country+with+PHP+using+Geo+IP" target="_blank" title="Add to del.icio.us">Add to del.icio.us</a></td>
+	</tr>
+	<tr>
+		<td class="vbmenu_option"><img title="Add to Google" class="inlineimg" src="showthread.php_soubory/google.gif" alt="Add to Google"> <a href="http://www.google.com/bookmarks/mark?op=edit&amp;bkmk=http://www.go4expert.com/forums/showthread.php?t=3511&amp;title=Getting+Visitor%27s+Country+with+PHP+using+Geo+IP" target="_blank" title="Add to Google">Add to Google</a></td>
+	</tr>
+	<tr>
+		<td class="vbmenu_option"><img title="Digg it" class="inlineimg" src="showthread.php_soubory/digg.gif" alt="Digg it"> <a href="http://www.digg.com/submit?phase=2&amp;url=http://www.go4expert.com/forums/showthread.php?t=3511&amp;title=Getting+Visitor%27s+Country+with+PHP+using+Geo+IP" target="_blank" title="Digg it">Digg it</a></td>
+	</tr>
+	<tr>
+		<td class="vbmenu_option"><img title="Add to Yahoo !" class="inlineimg" src="showthread.php_soubory/yahoo.gif" alt="Add to Yahoo !"> <a href="http://myweb2.search.yahoo.com/myresults/bookmarklet?u=http://www.go4expert.com/forums/showthread.php?t=3511&amp;t=Getting+Visitor%27s+Country+with+PHP+using+Geo+IP" target="_blank" title="Add to Yahoo !">Add to Yahoo !</a></td>
+	</tr>
+	<tr>
+		<td class="vbmenu_option"><img title="Add to Windows Live" class="inlineimg" src="showthread.php_soubory/live.gif" alt="Add to Windows Live"> <a href="https://favorites.live.com/quickadd.aspx?marklet=1&amp;mkt=en-us&amp;url=http://www.go4expert.com/forums/showthread.php?t%3D3511&amp;title=Getting%20Visitor%27s%20Country%20with%20PHP%20using%20Geo%20IP&amp;top=1" target="_blank" title="Add to Windows Live">Add to Windows Live</a></td>
+	</tr>
+	<tr>
+		<td class="vbmenu_option"><img title="Add to Facebook" class="inlineimg" src="showthread.php_soubory/facebook.gif" alt="Add to Facebook"> <a href="http://www.facebook.com/share.php?u=http://www.go4expert.com/forums/showthread.php?t=3511" target="_blank" title="Add to Facebook">Add to Facebook</a></td>
+	</tr>
+	<tr>
+		<td class="vbmenu_option"><img title="Add to StumbleUpon" class="inlineimg" src="showthread.php_soubory/stumbleupon.gif" alt="Add to StumbleUpon"> <a href="http://www.stumbleupon.com/submit?url=http://www.go4expert.com/forums/showthread.php?t=3511&amp;title=Getting+Visitor%27s+Country+with+PHP+using+Geo+IP" target="_blank" title="Add to StumbleUpon">Add to StumbleUpon</a></td>
+	</tr>
+<!-- 
+	<tr>
+		<td class="vbmenu_option"><img class="inlineimg" src="images/buttons/addtofav.gif" alt="Add to browser favorites" /> <a href="javascript: addToFavorites()" title="Add to browser favorites">Add to browser favorites</a></td>
+	</tr>
+ -->
+	</tbody></table>
+</div>
+<!-- / Bookmarks menu -->
+
+<!-- thread tools menu -->
+<div class="vbmenu_popup" id="threadtools_menu" style="display: none;">
+<form action="postings.php?t=3511&amp;pollid=" method="post" name="threadadminform">
+	<table border="0" cellpadding="4" cellspacing="1">
+	<tbody><tr>
+		<td class="thead">Article Tools<a name="goto_threadtools"></a></td>
+	</tr>
+	<tr>
+		<td class="vbmenu_option"><img title="Show Printable Version" class="inlineimg" src="showthread.php_soubory/printer.gif" alt="Show Printable Version"> <a href="http://www.go4expert.com/forums/printthread.php?s=cc1e5e8178e5dcb0b6e6b05ca59c789b&amp;t=3511" accesskey="3" rel="nofollow">Show Printable Version</a></td>
+	</tr>
+	<tr>
+		<td class="vbmenu_option"><img title="Email this Page" class="inlineimg" src="showthread.php_soubory/sendtofriend.gif" alt="Email this Page"> <a href="http://www.go4expert.com/forums/sendmessage.php?s=cc1e5e8178e5dcb0b6e6b05ca59c789b&amp;do=sendtofriend&amp;t=3511" rel="nofollow">Email this Page</a></td>
+	</tr>
+	
+	
+	
+	</tbody></table>
+</form>
+</div>
+<!-- / thread tools menu -->
+
+<!-- **************************************************** -->
+
+<!-- thread display mode menu -->
+<div class="vbmenu_popup" id="displaymodes_menu" style="display: none;">
+	<table border="0" cellpadding="4" cellspacing="1">
+	<tbody><tr>
+		<td class="thead">Display Modes<a name="goto_displaymodes"></a></td>
+	</tr>
+	<tr>
+	
+		<td class="vbmenu_option" title="nohilite"><img title="Linear Mode" class="inlineimg" src="showthread.php_soubory/mode_linear.gif" alt="Linear Mode"> <strong>Linear Mode</strong></td>
+	
+	</tr>
+	<tr>
+	
+		<td class="vbmenu_option"><img title="Hybrid Mode" class="inlineimg" src="showthread.php_soubory/mode_hybrid.gif" alt="Hybrid Mode"> <a href="http://www.go4expert.com/forums/showthread.php?s=cc1e5e8178e5dcb0b6e6b05ca59c789b&amp;mode=hybrid&amp;t=3511">Switch to Hybrid Mode</a></td>
+	
+	</tr>
+	<tr>
+	
+		<td class="vbmenu_option"><img title="Threaded Mode" class="inlineimg" src="showthread.php_soubory/mode_threaded.gif" alt="Threaded Mode"> <a href="http://www.go4expert.com/forums/showthread.php?s=cc1e5e8178e5dcb0b6e6b05ca59c789b&amp;p=10156&amp;mode=threaded#post10156">Switch to Threaded Mode</a></td>
+	
+	</tr>
+	</tbody></table>
+</div>
+<!-- / thread display mode menu -->
+
+<!-- **************************************************** -->
+
+
+
+<!-- **************************************************** -->
+
+
+
+<!-- / popup menu contents -->
+
+
+<!-- forum rules and admin links -->
+<table align="center" border="0" cellpadding="0" cellspacing="0" width="100%">
+<tbody><tr valign="bottom">
+	<td valign="top" width="100%">
+		<table class="tborder" border="0" cellpadding="6" cellspacing="1" width="210">
+<thead>
+<tr>
+	<td class="thead">
+		<a style="float: right;" href="#top" onclick="return toggle_collapse('forumrules')"><img id="collapseimg_forumrules" src="showthread.php_soubory/collapse_thead.gif" alt="" border="0"></a>
+		Posting Rules
+	</td>
+</tr>
+</thead>
+<tbody id="collapseobj_forumrules" style="">
+<tr>
+	<td class="alt1" nowrap="nowrap"><div class="smallfont">
+		
+		<div>You <strong>may not</strong> post new threads</div>
+		<div>You <strong>may not</strong> post replies</div>
+		<div>You <strong>may not</strong> post attachments</div>
+		<div>You <strong>may not</strong> edit your posts</div>
+		<hr>
+		
+		<div><a href="http://www.go4expert.com/forums/misc.php?s=cc1e5e8178e5dcb0b6e6b05ca59c789b&amp;do=bbcode" target="_blank">BB code</a> is <strong>On</strong></div>
+		<div><a href="http://www.go4expert.com/forums/misc.php?s=cc1e5e8178e5dcb0b6e6b05ca59c789b&amp;do=showsmilies" target="_blank">Smilies</a> are <strong>On</strong></div>
+		<div><a href="http://www.go4expert.com/forums/misc.php?s=cc1e5e8178e5dcb0b6e6b05ca59c789b&amp;do=bbcode#imgcode" target="_blank">[IMG]</a> code is <strong>On</strong></div>
+		<div>HTML code is <strong>Off</strong></div>
+	</div></td>
+</tr>
+</tbody>
+</table>
+	</td>
+	<td class="smallfont" align="right">
+		<table border="0" cellpadding="0" cellspacing="0">
+		
+		<tbody><tr>
+			<td>
+			<div class="smallfont" style="text-align: left; white-space: nowrap;">
+	<form action="forumdisplay.php" method="get">
+	<input name="s" value="cc1e5e8178e5dcb0b6e6b05ca59c789b" type="hidden">
+	<input name="daysprune" value="" type="hidden">
+	<strong>Forum Jump</strong><br>
+	<select name="f" onchange="this.form.submit();">
+		<optgroup label="Site Areas">
+			<option value="cp">User Control Panel</option>
+			<option value="pm">Private Messages</option>
+			<option value="subs">Subscriptions</option>
+			<option value="wol">Who's Online</option>
+			<option value="search">Search Forums</option>
+			<option value="home">Forums Home</option>
+		</optgroup>
+		
+		<optgroup label="Forums">
+		<option value="1" class="fjdpth0"> Articles / Source Code</option>
+<option value="6" class="fjdpth1">&nbsp; &nbsp;  Programming</option>
+<option value="60" class="fjdpth2">&nbsp; &nbsp; &nbsp; &nbsp;  C-C++</option>
+<option value="63" class="fjdpth2">&nbsp; &nbsp; &nbsp; &nbsp;  Assembly language programming ( ALP )</option>
+<option value="61" class="fjdpth2">&nbsp; &nbsp; &nbsp; &nbsp;  Java</option>
+<option value="62" class="fjdpth2">&nbsp; &nbsp; &nbsp; &nbsp;  Visual Basic [VB]</option>
+<option value="65" class="fjdpth2">&nbsp; &nbsp; &nbsp; &nbsp;  MFC / Win32</option>
+<option value="82" class="fjdpth2">&nbsp; &nbsp; &nbsp; &nbsp;  C#</option>
+<option value="69" class="fjdpth2">&nbsp; &nbsp; &nbsp; &nbsp;  Perl</option>
+<option value="11" class="fjdpth1">&nbsp; &nbsp;  Database</option>
+<option value="77" class="fjdpth2">&nbsp; &nbsp; &nbsp; &nbsp;  Oracle</option>
+<option value="78" class="fjdpth2">&nbsp; &nbsp; &nbsp; &nbsp;  SQL Server</option>
+<option value="79" class="fjdpth2">&nbsp; &nbsp; &nbsp; &nbsp;  MySQL / PostGRESQL</option>
+<option value="17" class="fjdpth1">&nbsp; &nbsp;  Web Development</option>
+<option value="66" class="fjsel" selected="selected">&nbsp; &nbsp; &nbsp; &nbsp;  PHP</option>
+<option value="67" class="fjdpth2">&nbsp; &nbsp; &nbsp; &nbsp;  ASP / ASP.NET</option>
+<option value="68" class="fjdpth2">&nbsp; &nbsp; &nbsp; &nbsp;  JSP</option>
+<option value="73" class="fjdpth2">&nbsp; &nbsp; &nbsp; &nbsp;  HTML/DHTML - JavaScript/VBScript</option>
+<option value="96" class="fjdpth1">&nbsp; &nbsp;  Site Management</option>
+<option value="48" class="fjdpth2">&nbsp; &nbsp; &nbsp; &nbsp;  Marketing</option>
+<option value="19" class="fjdpth2">&nbsp; &nbsp; &nbsp; &nbsp;  Web Design</option>
+<option value="46" class="fjdpth2">&nbsp; &nbsp; &nbsp; &nbsp;  Web hosting</option>
+<option value="55" class="fjdpth1">&nbsp; &nbsp;  Ethical hacking</option>
+<option value="90" class="fjdpth1">&nbsp; &nbsp;  Game programming</option>
+<option value="12" class="fjdpth1">&nbsp; &nbsp;  Operating System</option>
+<option value="80" class="fjdpth2">&nbsp; &nbsp; &nbsp; &nbsp;  Windows</option>
+<option value="81" class="fjdpth2">&nbsp; &nbsp; &nbsp; &nbsp;  Unix / Linux</option>
+<option value="71" class="fjdpth1">&nbsp; &nbsp;  Engineering concepts</option>
+<option value="18" class="fjdpth1">&nbsp; &nbsp;  Search Engine</option>
+<option value="54" class="fjdpth1">&nbsp; &nbsp;  ShowCase - Products Review</option>
+<option value="10" class="fjdpth0"> Queries and Discussion</option>
+<option value="16" class="fjdpth1">&nbsp; &nbsp;  Programming</option>
+<option value="20" class="fjdpth2">&nbsp; &nbsp; &nbsp; &nbsp;  C-C++</option>
+<option value="23" class="fjdpth2">&nbsp; &nbsp; &nbsp; &nbsp;  Assembly language programming ( ALP )</option>
+<option value="21" class="fjdpth2">&nbsp; &nbsp; &nbsp; &nbsp;  Java</option>
+<option value="22" class="fjdpth2">&nbsp; &nbsp; &nbsp; &nbsp;  Visual Basic ( VB )</option>
+<option value="53" class="fjdpth2">&nbsp; &nbsp; &nbsp; &nbsp;  MFC / Win32</option>
+<option value="76" class="fjdpth2">&nbsp; &nbsp; &nbsp; &nbsp;  C#</option>
+<option value="29" class="fjdpth2">&nbsp; &nbsp; &nbsp; &nbsp;  Perl</option>
+<option value="24" class="fjdpth1">&nbsp; &nbsp;  Database</option>
+<option value="39" class="fjdpth2">&nbsp; &nbsp; &nbsp; &nbsp;  Oracle</option>
+<option value="40" class="fjdpth2">&nbsp; &nbsp; &nbsp; &nbsp;  SQL Server</option>
+<option value="41" class="fjdpth2">&nbsp; &nbsp; &nbsp; &nbsp;  MS Access</option>
+<option value="42" class="fjdpth2">&nbsp; &nbsp; &nbsp; &nbsp;  MySQL / PostGRESQL</option>
+<option value="25" class="fjdpth1">&nbsp; &nbsp;  Web Development</option>
+<option value="26" class="fjdpth2">&nbsp; &nbsp; &nbsp; &nbsp;  PHP</option>
+<option value="27" class="fjdpth2">&nbsp; &nbsp; &nbsp; &nbsp;  ASP / ASP.NET</option>
+<option value="28" class="fjdpth2">&nbsp; &nbsp; &nbsp; &nbsp;  JSP</option>
+<option value="30" class="fjdpth2">&nbsp; &nbsp; &nbsp; &nbsp;  HTML/DHTML/CSS -JavaScript/VBScript</option>
+<option value="97" class="fjdpth1">&nbsp; &nbsp;  Site Management</option>
+<option value="34" class="fjdpth2">&nbsp; &nbsp; &nbsp; &nbsp;  Marketing</option>
+<option value="98" class="fjdpth2">&nbsp; &nbsp; &nbsp; &nbsp;  Site Monetization</option>
+<option value="36" class="fjdpth2">&nbsp; &nbsp; &nbsp; &nbsp;  Web Design</option>
+<option value="47" class="fjdpth2">&nbsp; &nbsp; &nbsp; &nbsp;  Web hosting</option>
+<option value="89" class="fjdpth2">&nbsp; &nbsp; &nbsp; &nbsp;  Website Review</option>
+<option value="56" class="fjdpth1">&nbsp; &nbsp;  Ethical hacking</option>
+<option value="91" class="fjdpth1">&nbsp; &nbsp;  Game programming</option>
+<option value="35" class="fjdpth1">&nbsp; &nbsp;  Operating System</option>
+<option value="43" class="fjdpth2">&nbsp; &nbsp; &nbsp; &nbsp;  Windows</option>
+<option value="44" class="fjdpth2">&nbsp; &nbsp; &nbsp; &nbsp;  Unix / Linux</option>
+<option value="13" class="fjdpth1">&nbsp; &nbsp;  Jobs - Sponsored by MBAGuys.net</option>
+<option value="14" class="fjdpth2">&nbsp; &nbsp; &nbsp; &nbsp;  Job Seeker</option>
+<option value="15" class="fjdpth2">&nbsp; &nbsp; &nbsp; &nbsp;  Job Offers</option>
+<option value="87" class="fjdpth2">&nbsp; &nbsp; &nbsp; &nbsp;  Freelance marketplace</option>
+<option value="45" class="fjdpth1">&nbsp; &nbsp;  Engineering Concepts</option>
+<option value="32" class="fjdpth1">&nbsp; &nbsp;  Search Engine</option>
+<option value="33" class="fjdpth2">&nbsp; &nbsp; &nbsp; &nbsp;  Search Engine Optimization ( SEO )</option>
+<option value="38" class="fjdpth2">&nbsp; &nbsp; &nbsp; &nbsp;  Link Popularity</option>
+<option value="74" class="fjdpth2">&nbsp; &nbsp; &nbsp; &nbsp;  Google</option>
+<option value="52" class="fjdpth1">&nbsp; &nbsp;  Hardware</option>
+<option value="49" class="fjdpth0"> News</option>
+<option value="50" class="fjdpth1">&nbsp; &nbsp;  Information Technology</option>
+<option value="93" class="fjdpth1">&nbsp; &nbsp;  Announcements</option>
+<option value="84" class="fjdpth0"> Contests</option>
+<option value="85" class="fjdpth1">&nbsp; &nbsp;  Monthly Article Competition</option>
+<option value="92" class="fjdpth1">&nbsp; &nbsp;  Member Competitions</option>
+<option value="95" class="fjdpth1">&nbsp; &nbsp;  $1 Daily Competition</option>
+<option value="88" class="fjdpth1">&nbsp; &nbsp;  Code Competitions</option>
+<option value="57" class="fjdpth0"> General Chat</option>
+<option value="58" class="fjdpth1">&nbsp; &nbsp;  Introduce yourself</option>
+<option value="70" class="fjdpth1">&nbsp; &nbsp;  Chit-Chat</option>
+<option value="94" class="fjdpth2">&nbsp; &nbsp; &nbsp; &nbsp;  Your vote counts</option>
+<option value="83" class="fjdpth1">&nbsp; &nbsp;  Suggestions and Feedback</option>
+<option value="86" class="fjdpth1">&nbsp; &nbsp;  Newsletter Archive</option>
+<option value="37" class="fjdpth1">&nbsp; &nbsp;  Help n Support</option>
+
+		</optgroup>
+		
+	</select><input class="button" value="Go" type="submit">
+	</form>
+</div>
+			</td>
+		</tr>
+		</tbody></table>
+	</td>
+</tr>
+</tbody></table>
+<!-- /forum rules and admin links -->
+
+<br>
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+	<tbody><tr>
+		<td valign="top">
+			<table class="tborder" align="center" border="0" cellpadding="6" cellspacing="1" width="100%">
+<thead>
+	<tr>
+		<td class="tcat" colspan="5" width="100%">
+			<a style="float: right;" href="#top" onclick="return toggle_collapse('similarthreads')"><img id="collapseimg_similarthreads" src="showthread.php_soubory/collapse_tcat.gif" alt="" border="0"></a>
+			Similar Threads / Articles<a name="similarthreads"></a>
+		</td>
+	</tr>
+</thead>
+<tbody id="collapseobj_similarthreads" style="">
+<tr class="thead" align="center">
+	<td class="thead" width="40%">Thread</td>
+	<td class="thead" nowrap="nowrap" width="15%">Thread Starter</td>
+	<td class="thead" width="20%">Forum</td>
+	<td class="thead" width="5%">Replies</td>
+	<td class="thead" width="20%">Last Post</td>
+</tr>
+<tr>
+	<td class="alt1" align="left">
+		
+		<span class="smallfont"> <a href="http://www.go4expert.com/forums/showthread.php?s=cc1e5e8178e5dcb0b6e6b05ca59c789b&amp;t=212" title="PHP can be used for a lot of different things, and is one of the most powerful scripting languages available on the web. Not to mention it's extremely cheap and widely used. However, one thing that PHP is lacking, and in fact most scripting languages are, is a way to update pages in real-time,...">PHP On-The-Fly!</a></span>
+	</td>
+	<td class="alt2" nowrap="nowrap"><span class="smallfont">Kings</span></td>
+	<td class="alt1" nowrap="nowrap"><span class="smallfont">PHP</span></td>
+	<td class="alt2" align="center"><span class="smallfont">5</span></td>
+	<td class="alt1" align="right"><span class="smallfont">05-01-2008 <span class="time">11:28 AM</span></span></td>
+</tr>
+<tr>
+	<td class="alt1" align="left">
+		
+		<span class="smallfont"> <a href="http://www.go4expert.com/forums/showthread.php?s=cc1e5e8178e5dcb0b6e6b05ca59c789b&amp;t=2445" title="What is an IP address? 
+ 
+Think of an IP address like you do a mailing address. It's basically the exact same thing. Consider this, when you send out a letter, what do you do? You put that letter in an envelope, write the address, put a stamp on it, stick in the mailbox and put that red flag up on...">IP Addresses Explained</a></span>
+	</td>
+	<td class="alt2" nowrap="nowrap"><span class="smallfont">Janu</span></td>
+	<td class="alt1" nowrap="nowrap"><span class="smallfont">Engineering concepts</span></td>
+	<td class="alt2" align="center"><span class="smallfont">2</span></td>
+	<td class="alt1" align="right"><span class="smallfont">08-09-2007 <span class="time">11:23 AM</span></span></td>
+</tr>
+<tr>
+	<td class="alt1" align="left">
+		
+		<span class="smallfont"> <a href="http://www.go4expert.com/forums/showthread.php?s=cc1e5e8178e5dcb0b6e6b05ca59c789b&amp;t=3068" title="Management of files 
+ 
+Manipulating files is a basic necessity for programmers and PHP gives you a great deal of tools for creating, uploading, and editing files. When you are manipulating files you must be very careful because you can do a lot of damage if you do some errors. Common errors include...">File Version Management in PHP</a></span>
+	</td>
+	<td class="alt2" nowrap="nowrap"><span class="smallfont">Sanskruti</span></td>
+	<td class="alt1" nowrap="nowrap"><span class="smallfont">PHP</span></td>
+	<td class="alt2" align="center"><span class="smallfont">0</span></td>
+	<td class="alt1" align="right"><span class="smallfont">02-19-2007 <span class="time">05:39 PM</span></span></td>
+</tr>
+<tr>
+	<td class="alt1" align="left">
+		
+		<span class="smallfont"> <a href="http://www.go4expert.com/forums/showthread.php?s=cc1e5e8178e5dcb0b6e6b05ca59c789b&amp;t=195" title="There are many different traffic analysis tools, ranging from simple counters to complete traffic analyzers. Although there are some free ones, most of them come with a price tag. Why not do it yourself? With PHP, you can easily create a log file within minutes. In this article I will show you how!...">Track your visitors, using PHP</a></span>
+	</td>
+	<td class="alt2" nowrap="nowrap"><span class="smallfont">Kings</span></td>
+	<td class="alt1" nowrap="nowrap"><span class="smallfont">PHP</span></td>
+	<td class="alt2" align="center"><span class="smallfont">8</span></td>
+	<td class="alt1" align="right"><span class="smallfont">12-11-2006 <span class="time">01:53 AM</span></span></td>
+</tr>
+
+</tbody>
+</table>
+
+<br>
+		</td>
+		<td>&nbsp;</td>
+		<td align="center" valign="top" width="336">
+			<script language="JavaScript" type="text/javascript">
+if (!window.netshel_ord) { netshel_ord=Math.random()*10000000000000000;
+}
+if (!window.netshel_tile) { netshel_tile=1; }
+document.write('<script language="JavaScript" src="http://ad.doubleclick.net/adj/ns.go4expert/tribal;sz=336x280,300x600;tile='+netshel_tile+';ord=' + netshel_ord + '?" type="text/javascript"></scr' + 'ipt>');
+netshel_tile++;
+</script><script language="JavaScript" src="showthread.php_soubory/tribal.js" type="text/javascript"></script>
+<script type="text/javascript" src="showthread.php_soubory/tags.js"></script><center><script type="text/javascript" src="showthread.php_soubory/j_002.js"></script><center><a target="_blank" href="http://a.tribalfusion.com/h.click/a3myv736UY5cQ7Uc3bWGMeR6YyTt3SWrBX3bipUq3oWTBbSTvZcRcBLRravSHQ6VGfQ2UqrodEqYq6v4dMZdQVrF2mFFpdXsVHZbaXFfb1UBj0TIsRFUZbUbB4Wdn0nFYqQFBnXaFySdJ58wNBdA/http://www.smokeybear.com"><img src="showthread.php_soubory/860166.gif" border="0" height="280" width="336"></a></center></center>
+
+		</td>
+	</tr>
+</tbody></table>
+
+
+<br>
+<div class="smallfont" align="center">All times are GMT +5.5. The time now is <span class="time">12:03 AM</span>.</div>
+<br>
+
+
+		</div>
+	</div>
+</div>
+
+<!-- / close content container -->
+<!-- /content area table -->
+
+<form action="index.php" method="get">
+
+<table class="page" align="center" border="0" cellpadding="6" cellspacing="0" width="100%">
+<tbody><tr>
+	
+	
+	<td class="tfoot" align="right" width="100%">
+		<div class="smallfont">
+			<strong>
+				<a href="http://www.go4expert.com/forums/sendmessage.php?s=cc1e5e8178e5dcb0b6e6b05ca59c789b" rel="nofollow" accesskey="9">Contact Us</a> -
+				<a href="http://www.go4expert.com/">Programming and Web Development Forum</a> -
+				
+				
+				<a href="http://www.go4expert.com/sitemap/">Sitemap</a> -
+				<a href="http://www.go4expert.com/advertise.php">Advertise</a> - 
+				<a href="http://www.go4expert.com/privacy.php">Privacy Statement</a> -
+				<a href="#top" onclick="self.scrollTo(0, 0); return false;">Top</a>
+			</strong>
+		</div>
+	</td>
+</tr>
+</tbody></table>
+
+<br>
+
+<div align="center">
+	<div class="smallfont" align="center">
+	<!-- Do not remove this copyright notice -->
+	
+	<!-- Do not remove this copyright notice -->
+	</div>
+
+	<div class="smallfont" align="center">
+	<!-- Do not remove  or your scheduled tasks will cease to function -->
+	
+	<!-- Do not remove  or your scheduled tasks will cease to function -->
+
+	
+
+	<div class="copyright" align="center">Content Copyright of Users everything else Copyright © Go4Expert.com, 2004 - 2009. </div>
+
+	</div>
+</div>
+
+</form>
+
+<!-- Google Analytics -->
+<script type="text/javascript">
+var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+</script><script src="showthread.php_soubory/ga.js" type="text/javascript"></script>
+<script type="text/javascript">
+var pageTracker = _gat._getTracker("UA-1283161-1");
+pageTracker._trackPageview();
+
+</script>
+<!-- /Google Analytics -->
+
+<!-- Netshelter Analytics -->
+<script type="text/javascript" src="showthread.php_soubory/go4expert.js"></script><script type="text/javascript">_qoptions={ qacct:"p-f1jRpKGceiDVc" };</script><script type="text/javascript" src="showthread.php_soubory/quant.js"></script><script type="text/javascript" src="showthread.php_soubory/go4expert_002.js"></script>
+<!-- /Netshelter Analytics -->
+
+
+
+<script type="text/javascript">
+<!--
+	// Main vBulletin Javascript Initialization
+	vBulletin_init();
+//-->
+</script>
+</div> 
+<!-- / Body Div -->
+
+<!-- temp -->
+<div style="display: none;">
+	<!-- thread rate -->
+	
+		
+	
+	<!-- / thread rate -->
+</div>
+
+</body></html>

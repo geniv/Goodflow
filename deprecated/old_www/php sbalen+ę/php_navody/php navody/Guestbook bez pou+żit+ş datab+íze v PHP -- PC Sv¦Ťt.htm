@@ -1,0 +1,938 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!-- saved from url=(0044)http://www.pcsvet.cz/art/article.php?id=2686 -->
+<HTML><HEAD><TITLE>Guestbook bez použití databáze v PHP -- PC Svět</TITLE>
+<META lang=cs 
+content="Dnes si ukážeme, jak vytvořit guestbook bez použití databáze a navíc funkce pro práci s textovými soubory." 
+name=description>
+<META lang=en 
+content="Dnes si ukážeme, jak vytvořit guestbook bez použití databáze a navíc funkce pro práci s textovými soubory." 
+name=description>
+<META http-equiv=description 
+content="Dnes si ukážeme, jak vytvořit guestbook bez použití databáze a navíc funkce pro práci s textovými soubory.">
+<META http-equiv=content-language content=cs>
+<META http-equiv=content-type content="text/html; charset=windows-1250"><LINK 
+href="Guestbook bez použití databáze v PHP -- PC Svět_soubory/www.css" 
+rel=stylesheet>
+<SCRIPT language=javascript type=text/javascript>
+<!--
+function getElement(e)
+{
+  if(document.all) return document.all[e];
+  else return document.getElementById(e);
+}
+
+peson = new Image(305,13);
+peson.src = "/images/1-5on.gif";
+pesoff = new Image(305,13);
+pesoff.src = "/images/1-5.gif";
+
+hledejon = new Image(20,11);
+hledejon.src = "/images/5-4on.gif";
+hledejoff = new Image(20,11);
+hledejoff.src = "/images/5-4.gif";
+
+topon = new Image(20,11);
+topon.src = "/images/7-pat-top-on.gif";
+topoff = new Image(20,11);
+topoff.src = "/images/7-pat-top-off.gif";
+
+var mnu = new Array();
+
+mnu[1] = 'komunikace:<img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/komunikace/mobily/" class="menu2">mobily</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/komunikace/site" class="menu2">sítě</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/komunikace/pripojeni" class="menu2">připojení</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11">';
+mnu[2] = 'internet:<img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/internet/webhosting/" class="menu2">webhosting</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/internet/webdesign" class="menu2">webdesign</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/internet/weby" class="menu2">weby</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11">';
+mnu[3] = 'programování:<img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/c/" class="menu2">C++</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/delphi/" class="menu2">Delphi</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/vbasic/" class="menu2">V.Basic</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/assembler/" class="menu2">Asm</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/pascal/" class="menu2">Pascal</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/java/" class="menu2">Java</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/sql/" class="menu2">SQL</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/wsh/" class="menu2">WSH</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11">';
+mnu[4] = 'web-programování:<img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/perl/" class="menu2">Perl</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/php/" class="menu2">PHP</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/asp/" class="menu2">ASP</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/javascript/" class="menu2">JavaScript</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/java/" class="menu2">Java</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/html/" class="menu2">HTML</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/sql/" class="menu2">SQL</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11">';
+mnu[5] = 'hw:<img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/hardware/motherboard/" class="menu2">desky</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/hardware/procesory/" class="menu2">procesory</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/hardware/grafika/" class="menu2">grafika</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/hardware/zvuk/" class="menu2">zvuk</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/hardware/periferie/" class="menu2">periferie</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/hardware/monitory/" class="menu2">monitory</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/hardware/mechaniky/" class="menu2">média</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/hardware/prislusenstvi/" class="menu2">přísluš.</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/hardware/testy/" class="menu2">testy</a>';
+mnu[6] = 'software:<img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/windows/" class="menu2">Windows</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/linux/" class="menu2">Linux</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/hry/" class="menu2">hry a zábava</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/software/recenze/" class="menu2">recenze</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/office/" class="menu2">MS Office</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11">';
+mnu[7] = 'bezpečnost:<img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/bezpecnost/viry/" class="menu2">Viry</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11">';
+mnu[8] = 'magazín:<img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/literatura/" class="menu2">literatura</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/magazin/akce/" class="menu2">akce</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/magazin/novinky/" class="menu2">novinky</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11"><a href="http://www.pcsvet.cz/magazin/tisk/" class="menu2">tiskové zprávy</a><img src="/images/6-3a.gif" align="absmiddle" alt="" width="20" height="11">';
+
+function pmnu(mnu_id)
+{
+	 getElement("mnux").innerHTML = mnu[mnu_id];
+}
+// -->
+</SCRIPT>
+
+<META content="MSHTML 6.00.2800.1106" name=GENERATOR></HEAD>
+<BODY>
+<STYLE type=text/css>.mline {
+	FONT-WEIGHT: bold; FONT-SIZE: 8pt; COLOR: #ffffff; FONT-FAMILY: Tahoma, Arial, Verdana; BACKGROUND-COLOR: #444444
+}
+.mitem {
+	CURSOR: hand
+}
+.mtable {
+	BORDER-RIGHT: #000000 1px solid; BORDER-TOP: #000000 1px solid; FONT-SIZE: 8pt; VISIBILITY: hidden; BORDER-LEFT: #000000 1px solid; BORDER-BOTTOM: #000000 1px solid; FONT-FAMILY: Tahoma, Arial, Verdana; POSITION: absolute; BACKGROUND-COLOR: #eeeeee
+}
+.mtitem {
+	CURSOR: hand; COLOR: #000000; BACKGROUND-COLOR: #eeeeee
+}
+.mfirma {
+	COLOR: #dddddd
+}
+.mfirma A {
+	COLOR: #dddddd; TEXT-DECORATION: none
+}
+.mfirma A:active {
+	COLOR: #dddddd; TEXT-DECORATION: none
+}
+.mfirma A:visited {
+	COLOR: #dddddd; TEXT-DECORATION: none
+}
+.mfirma A:hover {
+	COLOR: #ffffff; TEXT-DECORATION: underline
+}
+</STYLE>
+
+<SCRIPT language=JavaScript type=text/javascript>
+<!--
+var intg;
+var tleft = 0;
+var PocetMenu = 0;
+var mLeft = new Array();
+
+function hidemenus(exc)
+{
+ clearInterval(intg);
+ intg = null;
+ for (id=1; id<=PocetMenu; id++){
+  document.all("mnui"+id).style.visibility = "hidden";
+  document.all("i"+id).style.color = "#FFFFFF";
+  document.all("i"+id).style.backgroundColor = "#444444";
+ }
+}
+
+function outobject()
+{
+ intg = setInterval("hidemenus(20)",400);
+}
+
+function onheader(hID)
+{
+ hidemenus(hID);
+ document.all("mnui"+hID).style.visibility = "visible";
+ document.all("i"+hID).style.color = "#000000";
+ document.all("i"+hID).style.backgroundColor = "#EEEEEE";	
+}
+
+function onobject()
+{
+ clearInterval(intg);
+ intg = null;
+}
+
+function onitem(obj)
+{
+ obj.style.color = "EEEEEE";
+ obj.style.backgroundColor = "111111";
+}
+
+function outitem(obj)
+{
+ obj.style.color = "000000";
+ obj.style.backgroundColor = "EEEEEE";
+}
+
+function setleft()
+{
+ for (i=1;i<=PocetMenu;i++) {
+  document.all("mnui"+i).style.left = mLeft[i];
+ }
+}
+
+function mAddHeader(ID,nadpis,leftpos) {
+ document.write('<td id="i'+ID+'" onmouseover="onheader('+ID+');" onmouseout="outobject();" class="mitem">&nbsp; '+nadpis+' &nbsp;</td>');
+ mLeft[ID] = leftpos;
+ if (PocetMenu < ID) PocetMenu = ID;
+}
+
+function mBeginTable(ID) {
+ document.write('<table style="z-index: 100;" width="120" id="mnui'+ID+'" border="0" cellspacing="1" cellpadding="2" class="mtable" onmouseover="onobject();" onmousemove="onobject();" onmouseout="outobject();" class="mtable">');
+}
+
+function mEndTable() {
+ document.write('</table>');
+}
+
+function mAddItem(nadpis,URL,Popis) {
+ document.write('<tr><td class="mtitem" onmouseover="onitem(this);" onmouseout="outitem(this);" onclick="window.navigate(\''+URL+'\');" title="'+Popis+'">'+nadpis+'</td></tr>');
+}
+
+if (window.clientInformation.userAgent.indexOf("MSIE") > 0 ||
+    window.clientInformation.userAgent.indexOf("pera/7.") > 0
+	)
+{
+	
+ document.write('<div align="center" style="z-index: 101; border-bottom: 1px solid white"><center><table id="ptable" border="0" cellspacing="2" cellpadding="0" class="mline" width="100%"><tr><td width="20">&nbsp;</td><td><table class="mline" cellspacing="0" cellpadding="0" border="0"><tr>');
+ mAddHeader(1,"Provozované servery",26);
+ mAddHeader(2,"DOMÉNY",156);
+ mAddHeader(3,"WEBHOSTING",257);
+ mAddHeader(4,"PŘIPOJENÍ",352);
+ mAddHeader(5,"SERVERHOSTING",452);
+ document.write('</tr></table></td><td width="120" class="mfirma"><a href="http://www.forpsi.com/">FORPSI</a></td><td width="20">&nbsp;</td></tr></table></center></div>');
+
+ mBeginTable(1);
+ mAddItem('Móda.cz','http://www.moda.cz/','Server o módě, stylu, zdraví a volném čase');
+ mAddItem('CzechWeb','http://www.czechweb.cz/','Žebříček registrátorů českých a slovenských domén, denně nové statistiky');
+ mAddItem('PC Svět','http://www.pcsvet.cz/','Počítače, programování, komunikace, Internet');
+ mAddItem('Právník.cz','http://www.pravnik.cz/','Internetový právník pro každého - úplná znění, články, poradna');
+ mAddItem('Počítadlo.cz','http://www.pocitadlo.cz/','Služba pro počítání přístupů na vaše stránky včetně podrobných statistik');
+ mAddItem('iReklama.cz','http://www.ireklama.cz/','Výměný reklamní systém pro vaše stránky');
+ mEndTable();
+
+ mBeginTable(2);
+ mAddItem('FORPSI.com - registrace domén','http://www.forpsi.com/domain/','Nejlevnější registrace domén'); 
+ mAddItem('Domény .cz','http://www.forpsi.com/domain/','Registrace domén již za 549,-Kč ročně');
+ mAddItem('Domény .com','http://www.forpsi.com/domain/','Registrace domén již za 219,-Kč ročně');
+ mEndTable();
+
+ mBeginTable(3);
+ mAddItem('FORPSI.com - homepage','http://www.forpsi.com/','FORPSI.com - homepage'); 
+ mAddItem('FORPSI.com - WEBHOSTING','http://www.forpsi.com/webhosting/','FORPSI.com - nejširší nabídka webhostingu'); 
+ mAddItem('PIDIhosting','http://www.forpsi.com/webhosting/pidi.php','Hosting pro každého'); 
+ mAddItem('PIDIhosting + mail','http://www.forpsi.com/webhosting/pidi.php','Hosting pro každého včetně mailu'); 
+ mAddItem('NORMALhosting','http://www.forpsi.com/webhosting/normal.php','Standardní hosting za rozumnou cenu');
+ mAddItem('EXCLUSIVEhosting','http://www.forpsi.com/webhosting/exclusive.php','To nejlepší pro ty nejlepší');
+ mAddItem('EMAILhosting','http://www.forpsi.com/webhosting/email.php','Hosting vašich mailů'); 
+ mEndTable();
+	
+ mBeginTable(4);
+ mAddItem('FORPSI - připojení k internetu','http://www.forpsi.com/internet/','Kompletní nabídka bezdrátového či pevného připojení k Internetu'); 
+ mAddItem('ADSL připojení','http://www.forpsi.com/internet/?page=adsl_cr_price','Připojení k Internetu telefonní linkou pomocí technologie ADSL'); 
+ mAddItem('Wi-Fi Lite','http://www.forpsi.com/internet/?page=wifi_lite_price','Nejjednodušší bezdrátové připojení technologií Wi-Fi'); 
+ mAddItem('Wi-Fi','http://www.forpsi.com/internet/?page=wifi_price','Profesionální připojení technologií Wi-Fi'); 
+ mEndTable();
+ 
+ mBeginTable(5);
+ mAddItem('FORPSI - serverhosting','http://www.forpsi.com/server/dedicated.php','SERVERHOSTING a SERVERHOUSING'); 
+ mAddItem('FORPSI - DEDICATED','http://www.forpsi.com/server/dedicated.php','Nabídka pronájmu serverů s kompletní nabídkou služeb'); 
+ mAddItem('FORPSI - Private','http://www.forpsi.com/server/private.php','Nabídka housingu vašich serverů s kompletní nabídkou služeb'); 
+ mEndTable();
+
+ setleft();
+}
+// -->
+</SCRIPT>
+
+<TABLE cellSpacing=0 cellPadding=0 width=780 align=center border=0>
+  <TBODY>
+  <TR>
+    <TD width=767>
+      <TABLE cellSpacing=0 cellPadding=0 width="100%" border=0>
+        <TBODY>
+        <TR>
+          <TD width=305 height=158>
+            <TABLE cellSpacing=0 cellPadding=0 border=0>
+              <TBODY>
+              <TR>
+                <TD width=305 colSpan=3 height=14><IMG alt="" 
+                  src="Guestbook bez použití databáze v PHP -- PC Svět_soubory/1-1.gif"></TD></TR>
+              <TR>
+                <TD width=253 height=11><IMG alt="" 
+                  src="Guestbook bez použití databáze v PHP -- PC Svět_soubory/1-2.gif"></TD>
+                <TD width=27 height=11><A 
+                  onmouseover="pesoff.src=peson.src; return true" 
+                  onmouseout="pesoff.src='/images/1-5.gif'; return true" 
+                  href="http://www.forpsi.com/" target=_top><IMG alt="" 
+                  src="Guestbook bez použití databáze v PHP -- PC Svět_soubory/1-3.gif" 
+                  border=0></A></TD>
+                <TD width=25 height=11><IMG alt="" 
+                  src="Guestbook bez použití databáze v PHP -- PC Svět_soubory/1-4.gif"></TD></TR>
+              <TR>
+                <TD width=305 colSpan=3 height=13><IMG alt="" 
+                  src="Guestbook bez použití databáze v PHP -- PC Svět_soubory/1-5.gif" 
+                  name=pesoff></TD></TR>
+              <TR>
+                <TD width=305 colSpan=3 height=120><A 
+                  href="http://www.pcsvet.cz/"><IMG alt="" 
+                  src="Guestbook bez použití databáze v PHP -- PC Svět_soubory/1-6.gif" 
+                  border=0></A></TD></TR></TBODY></TABLE></TD>
+          <TD width=90>
+            <TABLE cellSpacing=0 cellPadding=0 width=90 border=0>
+              <TBODY>
+              <TR>
+                <TD width=1 
+                background="Guestbook bez použití databáze v PHP -- PC Svět_soubory/2-1.gif" 
+                height=13></TD></TR>
+              <TR>
+                <TD bgColor=white height=145><IFRAME name=menu1 align=middle 
+                  marginWidth=0 marginHeight=0 
+                  src="Guestbook bez použití databáze v PHP -- PC Svět_soubory/2-2.htm" 
+                  frameBorder=0 width="100%" 
+              height="100%"></IFRAME></TD></TR></TBODY></TABLE></TD>
+          <TD vAlign=top width=10 bgColor=white><IMG alt="" 
+            src="Guestbook bez použití databáze v PHP -- PC Svět_soubory/3.gif"> 
+          </TD>
+          <TD width=400>
+            <TABLE cellSpacing=0 cellPadding=0 width="100%" border=0>
+              <TBODY>
+              <TR>
+                <TD 
+                background="Guestbook bez použití databáze v PHP -- PC Svět_soubory/4-1.gif" 
+                height=8></TD></TR>
+              <TR>
+                <TD height=150><IFRAME name=4-2 align=middle marginWidth=0 
+                  marginHeight=0 
+                  src="Guestbook bez použití databáze v PHP -- PC Svět_soubory/topinfo.htm" 
+                  frameBorder=0 width="100%" scrolling=no 
+                height="100%"></IFRAME></TD></TR></TBODY></TABLE></TD></TR>
+        <TR>
+          <TD width="100%" colSpan=4 height=35>
+            <TABLE cellSpacing=0 cellPadding=0 width="100%" border=0>
+              <TBODY>
+              <TR>
+                <TD width=28><IMG alt="" 
+                  src="Guestbook bez použití databáze v PHP -- PC Svět_soubory/5-1.gif"></TD>
+                <TD width=65>
+                  <TABLE cellSpacing=0 cellPadding=0 width="100%" border=0>
+                    <TBODY>
+                    <TR>
+                      <TD 
+                      background="Guestbook bez použití databáze v PHP -- PC Svět_soubory/5-2.gif">&nbsp;</TD></TR>
+                    <TR>
+                      <TD bgColor=white>
+                        <FORM style="MARGIN-TOP: 0px; MARGIN-BOTTOM: 0px" 
+                        name=sfrm action=/misc/search.php method=get><INPUT 
+                        type=hidden value=1 name=kde><INPUT 
+                        style="BORDER-RIGHT: 0px solid; BORDER-TOP: 0px solid; FONT-SIZE: 10px; BORDER-LEFT: 0px solid; BORDER-BOTTOM: 0px solid; FONT-FAMILY: Verdana" 
+                        onclick="value='';" size=10 value=hledat 
+                      name=co></FORM></TD></TR>
+                    <TR>
+                      <TD><IMG alt="" 
+                        src="Guestbook bez použití databáze v PHP -- PC Svět_soubory/5-3.gif"></TD></TR></TBODY></TABLE></TD>
+                <TD width=18><A 
+                  onmouseover="hledejoff.src=hledejon.src; window.status='hledej';return true" 
+                  onclick=sfrm.submit(); 
+                  onmouseout="hledejoff.src='/images/5-4.gif'; window.status='pcsvět';return true" 
+                  href="http://www.pcsvet.cz/art/article.php?id=2686#"><IMG 
+                  alt=go 
+                  src="Guestbook bez použití databáze v PHP -- PC Svět_soubory/5-4.gif" 
+                  border=0 name=hledejoff></A></TD>
+                <TD width=9><IMG alt="" 
+                  src="Guestbook bez použití databáze v PHP -- PC Svět_soubory/5-5.gif"></TD>
+                <TD>
+                  <TABLE cellSpacing=0 cellPadding=0 width="100%" border=0>
+                    <TBODY>
+                    <TR>
+                      <TD align=left 
+                      background="Guestbook bez použití databáze v PHP -- PC Svět_soubory/5-7.gif" 
+                      height=11><IMG alt="" 
+                        src="Guestbook bez použití databáze v PHP -- PC Svět_soubory/5-6.gif"></TD></TR>
+                    <TR>
+                      <TD vAlign=center align=left 
+                      background="Guestbook bez použití databáze v PHP -- PC Svět_soubory/5-8.gif" 
+                      height=24><A class=menu onmouseover=pmnu(1); 
+                        href="http://www.pcsvet.cz/komunikace/">komunikace</A> 
+                        &nbsp;<A class=menu onmouseover=pmnu(2); 
+                        href="http://www.pcsvet.cz/internet/">internet</A> 
+                        &nbsp;<A class=menu onmouseover=pmnu(3); 
+                        href="http://www.pcsvet.cz/prog/">prog.</A> &nbsp;<A 
+                        class=menu onmouseover=pmnu(4); 
+                        href="http://www.pcsvet.cz/prog/">web-prog.</A> &nbsp;<A 
+                        class=menu onmouseover=pmnu(5); 
+                        href="http://www.pcsvet.cz/hardware/">hardware</A> 
+                        &nbsp;<A class=menu onmouseover=pmnu(6); 
+                        href="http://www.pcsvet.cz/software/">software</A> 
+                        &nbsp;<A class=menu onmouseover=pmnu(7); 
+                        href="http://www.pcsvet.cz/bezpecnost/">bezpečnost</A> 
+                        &nbsp;<A class=menu onmouseover=pmnu(8); 
+                        href="http://www.pcsvet.cz/magazin/">magazín</A> 
+                        &nbsp;<A class=menu 
+                        href="http://www.pcsvet.cz/forum/">disk.fórum</A> 
+                    </TD></TR></TBODY></TABLE></TD></TR></TBODY></TABLE></TD></TR>
+        <TR>
+          <TD width="100%" 
+          background="Guestbook bez použití databáze v PHP -- PC Svět_soubory/6-2.gif" 
+          colSpan=4>
+            <TABLE cellSpacing=0 cellPadding=0 border=0>
+              <TBODY>
+              <TR>
+                <TD><IMG alt="" 
+                  src="Guestbook bez použití databáze v PHP -- PC Svět_soubory/6-1.gif"></TD>
+                <TD id=mnux vAlign=top></TD></TR></TBODY></TABLE></TD></TR>
+        <TR>
+          <TD width="100%" colSpan=4>
+            <TABLE cellSpacing=0 cellPadding=0 width="100%" border=0>
+              <TBODY>
+              <TR>
+                <TD width=15 
+                background="Guestbook bez použití databáze v PHP -- PC Svět_soubory/7.gif">&nbsp;</TD>
+                <TD width=5 bgColor=white>&nbsp;</TD>
+                <TD vAlign=top align=left bgColor=white>
+                  <TABLE>
+                    <TBODY>
+                    <TR>
+                      <TD height=1></TD></TR></TBODY></TABLE>
+                  <STYLE type=text/css>BODY {
+	FONT: 10px MS Sans serif
+}
+.zdrojak {
+	BORDER-RIGHT: black 1px solid; BORDER-TOP: black 1px solid; BORDER-LEFT: black 1px solid; BORDER-BOTTOM: black 1px solid; BACKGROUND-COLOR: lightyellow
+}
+</STYLE>
+
+                  <P class=ndp>Guestbook bez použití databáze v PHP</P>
+                  <P>počet názorů: <B>50</B> &nbsp; poslední: 15.08.2006 
+                  13:12:43 &nbsp; <A class=autor 
+                  href="http://www.pcsvet.cz/forum/forum.php?art=2686">číst 
+                  názory</A> &nbsp; <A class=autor 
+                  href="http://www.pcsvet.cz/forum/forum-add.php?art=2686">přidat 
+                  názor</A> &nbsp; <A 
+                  href="http://www.pcsvet.cz/art/article_print.php?id=2686">vytisknout</A></P>
+                  <P>Dnes si ukážeme, jak vytvořit guestbook bez použití 
+                  databáze a navíc funkce pro práci s textovými soubory.</P>
+                  <HR color=#777777 SIZE=1>
+                  <WS-BODY>Nejprve si vytvoříme čtyři soubory:<BR><BR>
+                  <LI>kniha.vrch 
+                  <LI>kniha.body 
+                  <LI>guest.php 
+                  <LI>kniha.kone <BR><BR>Naše kniha bude poskládána z 
+                  jednotlivých souborů. Nejprve si vysvětlíme, co který bude 
+                  obsahovat, a potom se pustíme do vysvětlení funkcí pro práci s 
+                  textovými soubory v PHP. <BR><BR>
+                  <LI>V souboru <B>kniha.vrch</B> bude začátek knihy hostů 
+                  (proto koncovka vrch). Bude obsahovat formulář pro přidání 
+                  příspěvku do knihy hostů. 
+                  <LI>Do souboru <B>kniha.body</B> se budou ukládat příspěvky ve 
+                  formátu HTML. 
+                  <LI>V souboru <B>kniha.kone</B> bude úplný konec knihy hostů 
+                  (proto koncovka kone). 
+                  <LI>Nakonec ten nejdůležitější soubor - vlastně skript - 
+                  <B>guest.php</B>. V něm se postaráme o spojení jednotlivých 
+                  souborů dohromady a o přidání příspěvku.<BR><BR>Nyní si 
+                  ukážeme funkce pro práci s textovými soubory:<BR><BR>
+                  <P class=zdrojak>&nbsp;FOpen(<B>nazev_souboru</B>, 
+                  <B>mód</B>); </P><BR><BR>Tato funkce otevře soubor, jehož 
+                  jméno se zadáva jako první parametr. Následuje parametr mód, 
+                  který určí, jak se soubor otevře. Máme tyto možnosti:<BR><BR>
+                  <LI><B>r</B> - otevře soubor pro čtení; 
+                  <LI><B>w</B> - otevře soubor pro zápis; pokud již soubor 
+                  existuje, je smazán; 
+                  <LI><B>a</B> - otevře soubor pro doplňování - zapisuje se za 
+                  konec souboru; 
+                  <LI><B>r+</B> - otevře soubor pro čtení a zápis; soubor již 
+                  musí existovat; 
+                  <LI><B>w+</B> - otevře soubor pro čtení a zápis; pokud již 
+                  soubor existuje, je smazán; 
+                  <LI><B>a+</B> - otevře soubor pro doplňování a čtení.<BR><BR>
+                  <P class=zdrojak>&nbsp;FClose(<B>fp</B>); </P><BR><BR>Tato 
+                  funkce zavře soubor, na který ukazuje platný ukazatel 
+                  <U>fp</U> (např.: jméno proměnné, jejíž hodnota je otevření 
+                  souboru funkcí FOpen).<BR><BR>
+                  <P class=zdrojak>&nbsp;FPuts(<B>fp</B>, <B>řetězec</B>, 
+                  <B>délka</B>); </P><BR><BR>Funkce vloží zapíše do souboru 
+                  <U>fp</U> řetězec <U>řetězec</U>. Pokud použijeme nepovinný 
+                  parametr délka, zapíše se pouze <U>délka</U> znaků.<BR><BR>
+                  <P class=zdrojak>&nbsp;FPassThru(<B>fp</B>); 
+                  </P><BR><BR>Zjednodušeně mohu říct, že tato funkce vypisuje 
+                  obsah souboru, na který ukazuje <U>fp</U>.<BR><BR>Nyní 
+                  detailně popíšu funkci souboru guest.php. Proměnná 
+                  $QUERY_STRING je řetězec, předaný, metodou GET, respektive to, 
+                  co je za názvem souboru v poli adresa. Například: pokud napíšu 
+                  guest.php?pridej, tak má proměnná $QUERY_STRING hodnotu 
+                  pridej. A toho taky využijeme. Nejdříve skript zjistí, zda je 
+                  hodnota proměnné pridej, a pokud ano, otevře pomocí funkce 
+                  FOpen soubor kniha.body pro doplňování, zapíše do souboru 
+                  vzkaz odeslaný formulářem a následně ho i s formulářem 
+                  zobrazí. Nakonec se soubor zavře pomocí funkce FClose. Pokud 
+                  nemá proměnná hodnotu pridej, to znamená, že jsme se z žádného 
+                  formuláře neodkázali na přidání příspěvku - v tomto případě se 
+                  otevře nejdříve soubor kniha.vrch (pro čtení), vypíše se jeho 
+                  obsah na standardní výstup (tzn.: zobrazí se v prohlížeči) a 
+                  to samé se stane s ostatními soubory. Tím poskládáme celou 
+                  stránku. Nyní si ukážeme zdrojové kódy všech skriptů. 
+                  Nezapoměňte na internetu nastavit potřebná práva (např.: 
+                  pomocí programu <A href="http://www.ghisler.com/" 
+                  target=_blank>TotalCmd</A> ), aby Vám to nepsalo chyby typu: 
+                  nemáte oprávnění k otevření souboru,...<BR><BR>Skript: 
+                  <B>kniha.body</B>:<BR><BR>Do tohoto skriptu nic nedoplňujte - 
+                  uložte ho pouze prázdný!<BR><BR>Skript: 
+                  <B>kniha.vrch</B><BR><BR>
+                  <P 
+                  class=zdrojak>&lt;HTML&gt;<BR>&lt;HEAD&gt;<BR>&lt;TITLE&gt;Guestbook&lt;/TITLE&gt;<BR>&lt;STYLE 
+                  TYPE="text/css"&gt;<BR>body {<BR>font: 12px MS Sans 
+                  serif;<BR>}<BR>&lt;/STYLE&gt;<BR>&lt;/HEAD&gt;<BR>&lt;BODY&gt;<BR>&lt;DIV 
+                  ALIGN="center"&gt;<BR>&lt;FORM NAME="guest" METHOD="POST" 
+                  ACTION="guest.php?pridej"&gt;<BR>&lt;B&gt;Jméno:&lt;/B&gt; 
+                  &nbsp;&lt;INPUT TYPE="text" NAME=jmeno SIZE="50" 
+                  style="border: 1px solid black; background-color: 
+                  #F0F0FE;"&gt;&lt;BR&gt;<BR>&lt;B&gt;E-Mail:&lt;/B&gt; 
+                  &lt;INPUT TYPE="text" NAME=email SIZE="50" style="border: 1px 
+                  solid black; background-color: 
+                  #F0F0FE;"&gt;&lt;BR&gt;<BR>&lt;BR&gt;<BR>&lt;B&gt;Vzkaz:&lt;/B&gt;&lt;BR&gt;<BR>&lt;TEXTAREA 
+                  NAME="zprava" ROWS="8" COLS="50" maxlength=500 WRAP=virtual 
+                  style="background-color: #F0F0FE; border: 1px solid 
+                  black;"&gt;&lt;/TEXTAREA&gt;&lt;BR&gt;<BR>&lt;BR&gt;&lt;BR&gt;<BR>&lt;INPUT 
+                  TYPE="submit" VALUE="Přidat" style="border: 1px solid 
+                  black;"&gt;&nbsp;&nbsp;&nbsp;<BR>&lt;INPUT TYPE="reset" 
+                  VALUE="Znovu" style="border: 1px solid 
+                  black;"&gt;<BR>&lt;/FORM&gt;&lt;HR&gt;<BR><BR></P><BR><BR>Skript: 
+                  <B>kniha.kone</B><BR><BR>
+                  <P 
+                  class=zdrojak>&lt;/BODY&gt;<BR>&lt;/HTML&gt;<BR></P><BR><BR>Skript: 
+                  <B>guest.php</B><BR><BR>
+                  <P class=zdrojak>&lt;?<BR>if ($QUERY_STRING=="pridej"): 
+                  <BR><BR>$fp = FOpen("./kniha.body", "a"); 
+                  <BR><BR><BR>FPutS($fp, "&lt;TABLE BORDER='0' CELLPADDING='2' 
+                  CELLSPACING='0' STYLE='border: 1px solid black; font: 12px MS 
+                  Sans serif;'&gt;<BR>&lt;TR&gt;&lt;TD 
+                  BGCOLOR='darkblue'&gt;&nbsp;&nbsp;&lt;FONT 
+                  COLOR='white'&gt;&lt;B&gt;$jmeno&lt;/B&gt; (&lt;A 
+                  HREF='mailto:$email'&gt;&lt;FONT 
+                  <BR>COLOR='white'&gt;&lt;B&gt;$email&lt;/B&gt;&lt;/FONT&gt;&lt;/A&gt;) 
+                  nám nechal(a) vzkaz ".<BR>Date('d.m.Y v 
+                  H:i').':&nbsp;&nbsp;&lt;/FONT&gt;&lt;BR&gt;');<BR>FPutS($fp, 
+                  "&lt;TR&gt;&lt;TD BGCOLOR='#F0F0FE' 
+                  width='500'&gt;&lt;BR&gt;\n");<BR>FPutS($fp, 
+                  "&lt;BLOCKQUOTE&gt;\n");<BR>FPutS($fp, 
+                  NL2BR(HTMLSpecialChars($zprava)));<BR>FPutS($fp, 
+                  "&lt;/BLOCKQUOTE&gt;&lt;BR&gt;&lt;/TABLE&gt;\n&lt;P&gt;\n\n");<BR><BR>FClose($fp); 
+                  <BR><BR>$fp = FOpen("./kniha.vrch", 
+                  "r");<BR>FPassThru($fp);<BR><BR>$fp = FOpen("./kniha.body", 
+                  "r");<BR>FPassThru($fp);<BR><BR>$fp = FOpen("./kniha.kone", 
+                  "r");<BR>FPassThru($fp);<BR><BR><BR>else:<BR><BR>$fp = 
+                  FOpen("./kniha.vrch", "r");<BR>FPassThru($fp);<BR><BR>$fp = 
+                  FOpen("./kniha.body", "r");<BR>FPassThru($fp);<BR><BR>$fp = 
+                  FOpen("./kniha.kone", 
+                  "r");<BR>FPassThru($fp);<BR><BR>endif;<BR>?&gt;<BR></P><BR><BR>Říkáte 
+                  si, co to znamená NL2BR(HTMLSpecialChars($zprava)));? 
+                  NL2BR(řetězec) je funkce, která nahradí konce řádků řetězce 
+                  tagy &lt;BR&gt;. Další funkce HTMLSpecialChars(řetězec) 
+                  převede speciální znaky na HTML entity. My tedy odřádkujeme 
+                  zprávu, kterou ukládáme a odstraníme z ní nebezpečné znaky. 
+                  Někdo by mohl například využít v příspěvku, který přidává 
+                  skriptování... </WS-BODY><BR><BR>
+                  <HR color=#777777 SIZE=1>
+
+                  <TABLE width="100%">
+                    <TBODY>
+                    <TR>
+                      <TD vAlign=top>Autor: <B>Jakub Honig</B>, <A 
+                        href="http://www.pcsvet.cz/art/author.php?id=501">informace 
+                        o autorovi</A><BR>Rubrika: <B><A 
+                        href="http://www.pcsvet.cz/php/">Programování - 
+                        PHP</A></B><BR>Čtenářů: <B>7680</B> &nbsp; &nbsp; 
+                        Zobrazení: <B>9991</B><BR><BR></TD>
+                      <TD align=middle>Jak hodnotíte tento článek?<BR>
+                        <FORM action=article.php?id=2686 method=post><INPUT class=tlac type=submit value=1 name=znamka> 
+<INPUT class=tlac type=submit value=2 name=znamka> <INPUT class=tlac type=submit value=3 name=znamka> <INPUT class=tlac type=submit value=4 name=znamka> <INPUT class=tlac type=submit value=5 name=znamka><BR>lepší 
+                        &lt;--&gt;horší</FORM></TD></TR></TBODY></TABLE>Názory: počet: 
+                  <B>50</B> &nbsp; poslední: 15.08.2006 13:12:43 &nbsp; <A 
+                  class=autor 
+                  href="http://www.pcsvet.cz/forum/forum.php?art=2686">číst 
+                  názory</A> &nbsp; <A class=autor 
+                  href="http://www.pcsvet.cz/forum/forum-add.php?art=2686">přidat 
+                  názor</A> &nbsp; <A 
+                  href="http://www.pcsvet.cz/art/article_print.php?id=2686">vytisknout</A>
+                  <P></P><A name=inquiry></A>
+                  <HR color=white SIZE=1>
+
+                  <DIV align=center>
+                  <CENTER>
+                  <TABLE class=ftable>
+                    <TBODY>
+                    <TR>
+                      <TD align=left><B><I>Nadpis</I></B></TD>
+                      <TD align=left><B><I>Autor</I></B></TD>
+                      <TD align=left><B><I>Datum</I></B></TD></TR>
+                    <TR>
+                      <TD align=left><B>si delate srandu, ne?</B></TD>
+                      <TD align=left>humppa</TD>
+                      <TD align=left>30.11.2002 11:27:40</TD></TR>
+                    <TR>
+                      <TD align=left>&nbsp; Re: si delate srandu, ne?</TD>
+                      <TD align=left><A href="mailto:novak05@seznam.cz">Michal 
+                        Novák</A></TD>
+                      <TD align=left>01.01.2006 15:12:01</TD></TR>
+                    <TR>
+                      <TD align=left><B>Re: si delate srandu, ne?</B></TD>
+                      <TD align=left><A 
+                      href="mailto:schee@post.cz">Zdendax</A></TD>
+                      <TD align=left>30.11.2002 15:49:35</TD></TR>
+                    <TR>
+                      <TD align=left><B>Jak mam určitý příspěvek smáznout 
+                      ?</B></TD>
+                      <TD align=left><A 
+                        href="mailto:crazy_ivan@centrum.cz">David</A></TD>
+                      <TD align=left>01.12.2002 20:54:25</TD></TR>
+                    <TR>
+                      <TD align=left><B>Re: si delate srandu, ne?</B></TD>
+                      <TD align=left><A 
+                      href="mailto:info@chaoos.sk">chaoos</A></TD>
+                      <TD align=left>03.12.2002 10:00:55</TD></TR>
+                    <TR>
+                      <TD align=left><B>Tak to hadam nie</B></TD>
+                      <TD align=left><A 
+                        href="mailto:belo82@pobox.sk">Belo82</A></TD>
+                      <TD align=left>03.12.2002 15:01:30</TD></TR>
+                    <TR>
+                      <TD align=left><B>Re: si delate srandu, ne?</B></TD>
+                      <TD align=left><A 
+                        href="mailto:pavel.plzen@seznam.cz">Quest</A></TD>
+                      <TD align=left>06.12.2002 13:22:30</TD></TR>
+                    <TR>
+                      <TD align=left><B>Pro zacatecniky</B></TD>
+                      <TD align=left>humppa</TD>
+                      <TD align=left>06.12.2002 13:30:09</TD></TR>
+                    <TR>
+                      <TD align=left><B>Re: Pro zacatecniky</B></TD>
+                      <TD align=left><A href="mailto:hoya@seznam.cz">Jakub 
+                        Honig</A></TD>
+                      <TD align=left>06.12.2002 14:08:44</TD></TR>
+                    <TR>
+                      <TD align=left><B>Re: Pro zacatecniky</B></TD>
+                      <TD align=left><A href="mailto:hoya@seznam.cz">Jakub 
+                        Honig</A></TD>
+                      <TD align=left>06.12.2002 14:08:48</TD></TR>
+                    <TR>
+                      <TD align=left><B>Proč ne bez SQL?</B></TD>
+                      <TD align=left><A 
+                        href="mailto:glurak@atlas.cz">Glurak</A></TD>
+                      <TD align=left>24.12.2002 19:44:09</TD></TR>
+                    <TR>
+                      <TD align=left><B>přidávám se</B></TD>
+                      <TD align=left><A href="mailto:varm@post.cz">v</A></TD>
+                      <TD align=left>29.12.2002 15:05:35</TD></TR>
+                    <TR>
+                      <TD align=left><B>databaze forever</B></TD>
+                      <TD align=left><A 
+                        href="mailto:jakub.podhorsky@seznam.cz">Podhy</A></TD>
+                      <TD align=left>03.01.2003 15:30:14</TD></TR>
+                    <TR>
+                      <TD align=left><B>Re: databaze forever</B></TD>
+                      <TD align=left><A href="mailto:hoya@seznam.cz">Jakub 
+                        Honig</A></TD>
+                      <TD align=left>03.01.2003 21:23:49</TD></TR>
+                    <TR>
+                      <TD align=left><B>Re: databaze forever</B></TD>
+                      <TD align=left><A 
+                        href="mailto:jakub.podhorsky@seznam.cz">Podhy</A></TD>
+                      <TD align=left>03.01.2003 21:40:14</TD></TR>
+                    <TR>
+                      <TD align=left><B>Re: si delate srandu, ne?</B></TD>
+                      <TD align=left>zd</TD>
+                      <TD align=left>17.01.2003 10:48:19</TD></TR>
+                    <TR>
+                      <TD align=left><B>Re: si delate srandu, ne?</B></TD>
+                      <TD align=left>Marek</TD>
+                      <TD align=left>22.01.2003 23:51:13</TD></TR>
+                    <TR>
+                      <TD align=left><B>chyby</B></TD>
+                      <TD align=left><A 
+                      href="mailto:nnbt@zoznam.sk">miso</A></TD>
+                      <TD align=left>25.01.2003 14:16:37</TD></TR>
+                    <TR>
+                      <TD align=left><B>Help</B></TD>
+                      <TD align=left><A href="mailto:nsfhunter@post.sk">Peter 
+                        Bakos</A></TD>
+                      <TD align=left>08.02.2003 13:47:53</TD></TR>
+                    <TR>
+                      <TD align=left>&nbsp; Re: Help</TD>
+                      <TD align=left><A href="mailto:hoya@seznam.cz">Jakub 
+                        Honig</A></TD>
+                      <TD align=left>09.02.2003 21:25:27</TD></TR>
+                    <TR>
+                      <TD align=left>&nbsp; &nbsp; Re: Help</TD>
+                      <TD align=left><A 
+                        href="mailto:David.2002@seznam.cz">Dlaha</A></TD>
+                      <TD align=left>10.07.2005 20:08:05</TD></TR>
+                    <TR>
+                      <TD align=left><B>Bez databaze...?!</B></TD>
+                      <TD align=left><A 
+                        href="mailto:vojta.vit@seznam.cz">Vojta</A></TD>
+                      <TD align=left>01.03.2003 17:27:08</TD></TR>
+                    <TR>
+                      <TD align=left><B>skuska</B></TD>
+                      <TD align=left><A 
+                      href="mailto:maxto@post.sk">maxto</A></TD>
+                      <TD align=left>21.05.2003 14:53:20</TD></TR>
+                    <TR>
+                      <TD align=left><B>gg</B></TD>
+                      <TD align=left><A href="mailto:gg@gg.gg">gg</A></TD>
+                      <TD align=left>18.04.2004 17:43:04</TD></TR>
+                    <TR>
+                      <TD align=left><B>rada</B></TD>
+                      <TD align=left><A 
+                        href="mailto:hockeypage@seznam.cz">fanatic</A></TD>
+                      <TD align=left>30.04.2004 16:06:10</TD></TR>
+                    <TR>
+                      <TD align=left>&nbsp; Re: rada</TD>
+                      <TD align=left><A href="mailto:hoya@seznam.cz">Jakub 
+                        Honig</A></TD>
+                      <TD align=left>02.05.2004 10:10:38</TD></TR>
+                    <TR>
+                      <TD align=left><B>Guestbook</B></TD>
+                      <TD align=left><A 
+                        href="mailto:rangersCZ@seznam.cz">RCZ</A></TD>
+                      <TD align=left>29.07.2004 11:13:47</TD></TR>
+                    <TR>
+                      <TD align=left><B>si delate prdel</B></TD>
+                      <TD align=left><A 
+                      href="mailto:neni@seznam.cz">nevim</A></TD>
+                      <TD align=left>01.08.2004 20:17:57</TD></TR>
+                    <TR>
+                      <TD align=left><B>...ajta:-(</B></TD>
+                      <TD align=left><A 
+                        href="mailto:worm03@seznam.cz">Davidov</A></TD>
+                      <TD align=left>19.08.2004 21:54:05</TD></TR>
+                    <TR>
+                      <TD align=left>&nbsp; Re: ...ajta:-(</TD>
+                      <TD align=left>Petr</TD>
+                      <TD align=left>10.08.2005 14:28:14</TD></TR>
+                    <TR>
+                      <TD align=left><B>nic</B></TD>
+                      <TD align=left><A 
+                      href="mailto:pepa@pepa.pepa">pepa</A></TD>
+                      <TD align=left>01.10.2004 21:08:06</TD></TR>
+                    <TR>
+                      <TD align=left><B>GBook</B></TD>
+                      <TD align=left><A 
+                        href="mailto:8-ball@tsworld.wz.cz">Colonel 8-Ball</A></TD>
+                      <TD align=left>22.03.2005 14:13:16</TD></TR>
+                    <TR>
+                      <TD align=left><B>e?</B></TD>
+                      <TD align=left>Jag</TD>
+                      <TD align=left>15.05.2005 07:52:45</TD></TR>
+                    <TR>
+                      <TD align=left><B>guestbook</B></TD>
+                      <TD align=left><A 
+                        href="mailto:rangerscz@seznam.cz">mike</A></TD>
+                      <TD align=left>26.05.2005 13:22:39</TD></TR>
+                    <TR>
+                      <TD align=left><B>Chyby v kodu</B></TD>
+                      <TD align=left><A href="mailto:hoya@seznam.cz">Jakub 
+                        Honig</A></TD>
+                      <TD align=left>10.08.2005 19:07:08</TD></TR>
+                    <TR>
+                      <TD align=left><B>Guestbook - přidává i při reload 
+                        stránky</B></TD>
+                      <TD align=left><A 
+                        href="mailto:arnoldxxx@seznam.cz">arq</A></TD>
+                      <TD align=left>09.09.2005 15:31:29</TD></TR>
+                    <TR>
+                      <TD align=left><B>Chyba stream</B></TD>
+                      <TD align=left><A 
+                        href="mailto:Peter170@gmail.com">Peter1740</A></TD>
+                      <TD align=left>03.02.2006 15:44:36</TD></TR>
+                    <TR>
+                      <TD align=left>&nbsp; Re: Chyba stream</TD>
+                      <TD align=left><A href="mailto:hoya@seznam.cz">Jakub 
+                        Honig</A></TD>
+                      <TD align=left>03.02.2006 17:43:07</TD></TR>
+                    <TR>
+                      <TD align=left><B>chyba stream</B></TD>
+                      <TD align=left><A 
+                        href="mailto:Peter170@gmail.com">Peter1740</A></TD>
+                      <TD align=left>03.02.2006 17:48:05</TD></TR>
+                    <TR>
+                      <TD align=left><B>DudaGum</B></TD>
+                      <TD align=left><A 
+                        href="mailto:DudaGum@hotmail.com">DudaGum</A></TD>
+                      <TD align=left>24.02.2006 15:36:34</TD></TR>
+                    <TR>
+                      <TD align=left><B>h?</B></TD>
+                      <TD align=left><A 
+                        href="mailto:david.latal@seznam.cz">DvD</A></TD>
+                      <TD align=left>09.03.2006 07:40:10</TD></TR>
+                    <TR>
+                      <TD align=left><B>h?</B></TD>
+                      <TD align=left><A 
+                        href="mailto:david.latal@seznam.cz">DvD</A></TD>
+                      <TD align=left>09.03.2006 07:40:21</TD></TR>
+                    <TR>
+                      <TD align=left><B>SergoMom</B></TD>
+                      <TD align=left><A 
+                        href="mailto:SergoMom@apache.org">SergoMom</A></TD>
+                      <TD align=left>15.03.2006 18:29:35</TD></TR>
+                    <TR>
+                      <TD align=left><B>Co já vím</B></TD>
+                      <TD align=left>Tvor</TD>
+                      <TD align=left>04.05.2006 16:36:49</TD></TR>
+                    <TR>
+                      <TD align=left><B>tjfxrbkhr</B></TD>
+                      <TD align=left><A 
+                        href="mailto:nqegql@reywg.com">vdxycisx</A></TD>
+                      <TD align=left>27.05.2006 02:44:22</TD></TR>
+                    <TR>
+                      <TD align=left><B>!!!</B></TD>
+                      <TD align=left><A 
+                        href="mailto:kesonlin@seznam.cz">kesonlin</A></TD>
+                      <TD align=left>28.05.2006 10:52:41</TD></TR>
+                    <TR>
+                      <TD align=left><B>Nefunguje</B></TD>
+                      <TD align=left><A 
+                      href="mailto:col8b@seznam.cz">Col8B</A></TD>
+                      <TD align=left>04.06.2006 11:03:48</TD></TR>
+                    <TR>
+                      <TD align=left>&nbsp; Re: Nefunguje</TD>
+                      <TD align=left><A href="mailto:hoya@seznam.cz">Jakub 
+                        Honig</A></TD>
+                      <TD align=left>04.06.2006 12:05:25</TD></TR>
+                    <TR>
+                      <TD align=left><B>asa</B></TD>
+                      <TD align=left><A href="mailto:a@as.sl">as</A></TD>
+                      <TD align=left>28.06.2006 03:19:21</TD></TR>
+                    <TR>
+                      <TD align=left><B>pokud již soubor existuje, je 
+                        smazán</B></TD>
+                      <TD align=left><A 
+                      href="mailto:col8b@seznam.cz">Col8B</A></TD>
+                      <TD align=left>15.08.2006 
+                  13:12:43</TD></TR></TBODY></TABLE></CENTER></DIV>
+                  <FORM 
+                  action=/forum/forum-add.php?art=2686&amp;reply=&amp;tema= 
+                  method=post>
+                  <DIV align=center>
+                  <TABLE class=ftable cellSpacing=0 cellPadding=2 border=0>
+                    <TBODY>
+                    <TR>
+                      <TD class=ftitle colSpan=2>Nový příspěvek</TD></TR>
+                    <TR>
+                      <TD class=fname align=right><B>Věc:</B></TD>
+                      <TD class=fvalue align=left><INPUT size=55 
+                      name=Nadpis></TD></TR>
+                    <TR>
+                      <TD class=fname align=right><B>Jméno:</B></TD>
+                      <TD class=fvalue align=left><INPUT size=30 
+                        name=Autor_Jmeno></TD></TR>
+                    <TR>
+                      <TD class=fname align=right><B>E-mail:</B></TD>
+                      <TD class=fvalue align=left><INPUT 
+                    name=Autor_Email></TD></TR>
+                    <TR>
+                      <TD class=fvalue align=left colSpan=2><TEXTAREA name=Obsah rows=10 cols=70></TEXTAREA><BR>- 
+                        nepoužívejte HTML k formátování textu příspěvku<BR>- 
+                        nepoužívejte A HREF= pro odkazy, aktivní budou 
+                        automaticky<BR>- odřádkování provádějte klávesou ENTER, 
+                        nikoliv tagem &lt;br&gt;</TD></TR>
+                    <TR>
+                      <TD class=fvalue align=left colSpan=2><INPUT 
+                        class=ftable 
+                        style="BORDER-RIGHT: medium none; BORDER-TOP: medium none; BORDER-LEFT: medium none; BORDER-BOTTOM: medium none" 
+                        type=checkbox value=1 name=MailReply>zasílat odpovědi na 
+                        můj e-mail </TD></TR>
+                    <TR>
+                      <TD align=middle colSpan=2><INPUT class=fsubmit type=submit value="Přidat příspěvek"></TD></TR></TBODY></TABLE></DIV><INPUT 
+                  type=hidden value=1 name=filled> 
+                  </FORM><BR><BR><BR><BR><BR><BR><BR><BR>
+                  <DIV align=center>
+                  <CENTER>
+                  <TABLE border=0>
+                    <TBODY>
+                    <TR>
+                      <TD><IFRAME name=rekl2 marginWidth=1 marginHeight=1 
+                        src="Guestbook bez použití databáze v PHP -- PC Svět_soubory/2.htm" 
+                        frameBorder=0 width=472 scrolling=no 
+                      height=62></IFRAME></TD></TR></TBODY></TABLE></CENTER></DIV><BR><BR><BR>
+                  <CENTER><SPAN style="FONT-SIZE: 9px">(c) P.E.S. consulting, 
+                  s.r.o. 2000-2005. Provozovatel nezodpovídá za obsah a původ 
+                  článků a diskuzních příspěvků, odpovědnost nesou jednotliví 
+                  redaktoři a autoři. Informace o PC Světě <A 
+                  href="http://www.pcsvet.cz/informace.php">naleznete 
+                  zde</A></SPAN></CENTER></LI></TD>
+                <TD width=10 bgColor=white></TD>
+                <TD vAlign=top align=right width=160 bgColor=white><BR>
+                  <CENTER>
+                  <CENTER><A href="http://www.forpsi.com/" target=_blank><IMG 
+                  src="Guestbook bez použití databáze v PHP -- PC Svět_soubory/125x125.gif" 
+                  border=0></A></CENTER>
+                  <TABLE cellSpacing=0 cellPadding=0 border=0>
+                    <TBODY>
+                    <TR>
+                      <TD width=180 colSpan=3 height=6></TD></TR>
+                    <TR>
+                      <TD vAlign=top align=left width=15><IMG alt="" 
+                        src="Guestbook bez použití databáze v PHP -- PC Svět_soubory/7-tab-1.gif"></TD>
+                      <TD vAlign=bottom align=left width=165 
+                      background="Guestbook bez použití databáze v PHP -- PC Svět_soubory/7-tab-2.gif"><FONT 
+                        class=tab-nadpis>Anketa </FONT></TD></TR></TBODY></TABLE>
+                  <TABLE cellSpacing=0 cellPadding=0 border=0>
+                    <TBODY>
+                    <TR>
+                      <TD vAlign=top align=left width=5><IMG alt="" 
+                        src="Guestbook bez použití databáze v PHP -- PC Svět_soubory/7-tab-3.gif"></TD>
+                      <TD align=left width=175>
+                        <TABLE class=tab cellSpacing=0 cellPadding=3 border=0>
+                          <TBODY>
+                          <TR>
+                            <TD 
+                    bgColor=white></TD></TR></TBODY></TABLE></TD></TR></TBODY></TABLE>
+                  <TABLE cellSpacing=0 cellPadding=0 border=0>
+                    <TBODY>
+                    <TR>
+                      <TD width=180 colSpan=3 height=6></TD></TR>
+                    <TR>
+                      <TD vAlign=top align=left width=15><IMG alt="" 
+                        src="Guestbook bez použití databáze v PHP -- PC Svět_soubory/7-tab-1.gif"></TD>
+                      <TD vAlign=bottom align=left width=165 
+                      background="Guestbook bez použití databáze v PHP -- PC Svět_soubory/7-tab-2.gif"><FONT 
+                        class=tab-nadpis>Novinky e-mailem 
+                  </FONT></TD></TR></TBODY></TABLE>
+                  <TABLE cellSpacing=0 cellPadding=0 border=0>
+                    <TBODY>
+                    <TR>
+                      <TD vAlign=top align=left width=5><IMG alt="" 
+                        src="Guestbook bez použití databáze v PHP -- PC Svět_soubory/7-tab-3.gif"></TD>
+                      <TD align=left width=175>
+                        <TABLE class=tab cellSpacing=0 cellPadding=3 border=0>
+                          <TBODY>
+                          <TR>
+                            <TD bgColor=white>
+                              <FORM action=/user/register.php method=get><INPUT 
+                              onclick="this.value='';" size=16 
+                              value=vas@email.cz name=email><INPUT type=submit value=ok> Zasílání 
+                              denního nebo týdenního přehledu nových článků 
+                              </FORM></TD></TR></TBODY></TABLE></TD></TR></TBODY></TABLE>
+                  <HR SIZE=1>
+                  <IFRAME name=rekl2 align=center marginWidth=1 marginHeight=1 
+                  src="Guestbook bez použití databáze v PHP -- PC Svět_soubory/3.htm" 
+                  frameBorder=0 width=127 scrolling=no height=127></IFRAME>
+                  <HR SIZE=1>
+                  <BR>
+                  <CENTER>
+                  <CENTER><A href="http://www.forpsi.com/" target=_blank><IMG 
+                  src="Guestbook bez použití databáze v PHP -- PC Svět_soubory/125X125_evrop_dom_a_web.gif" 
+                  border=0></A></CENTER><BR><BR><BR><BR><BR>
+                  <CENTER></CENTER></CENTER></CENTER></TD></TR></TBODY></TABLE></TD></TR></TBODY></TABLE>
+      <TABLE cellSpacing=0 cellPadding=0 width="100%" border=0>
+        <TBODY>
+        <TR>
+          <TD width=15 
+          background="Guestbook bez použití databáze v PHP -- PC Svět_soubory/7.gif"></TD>
+          <TD width=150 bgColor=white></TD>
+          <TD width=68><IMG alt="" 
+            src="Guestbook bez použití databáze v PHP -- PC Svět_soubory/7-pat-1.gif"></TD>
+          <TD vAlign=bottom width=360 
+          background="Guestbook bez použití databáze v PHP -- PC Svět_soubory/7-pat-2.gif" 
+          bgColor=white>© 2000-2004 pcsvět.cz / <A 
+            href="mailto:pcsvet@pcsvet.cz">pcsvet@pcsvet.cz</A> / ISSN 
+          1213-6042</TD>
+          <TD bgColor=white><A 
+            onmouseover="topoff.src=topon.src; window.status='nahoru';return true;" 
+            onmouseout="topoff.src='/images/7-pat-top-off.gif'; window.status='pcsvět';return true;" 
+            href="http://www.pcsvet.cz/art/article.php?id=2686#top"><IMG alt="" 
+            src="Guestbook bez použití databáze v PHP -- PC Svět_soubory/7-pat-top-off.gif" 
+            border=0 name=topoff></A></TD></TR></TBODY></TABLE></TD>
+    <TD vAlign=top width=13 
+    background="Guestbook bez použití databáze v PHP -- PC Svět_soubory/8-1.gif"><IMG 
+      alt="" 
+      src="Guestbook bez použití databáze v PHP -- PC Svět_soubory/8-2.gif"></TD></TR></TBODY></TABLE><!-- Počítadlo.cz  počítadlo:527  uživatel:414 -->
+<SCRIPT language=JavaScript type=text/javascript>
+<!--
+Tmp=Math.floor(1000000 * Math.random());
+//document.write("<scr" + "ipt src=\"http://cnt1.pocitadlo.cz/counter.php?poc=527&ref="+escape(top.document.referrer)+"&depth="+screen.colorDepth+"&width="+screen.width+"&height="+screen.height+"&tmp="+Tmp+"\" language=\"JavaScript\" type=\"text/javascript\"></scr" + "ipt>");
+// -->
+</SCRIPT>
+<NOSCRIPT><IMG height=1 alt="" src="" width=1 border=0> </NOSCRIPT><!-- Počítadlo.cz konec --><!-- NAVRCHOLU.cz -->
+<SCRIPT language=JavaScript type=text/javascript>
+<!--
+pxDepth = screen.pixelDepth;
+if (!(pxDepth > 0))
+	pxDepth = screen.colorDepth;
+if (!(pxDepth > 0))
+	pxDepth = 0; 
+document.write("<img src=\"http://hit.navrcholu.cz/hit?id=3548;n=1;screenx=" + screen.width + ";screeny=" + screen.height + ";cdepth=" + pxDepth + ";ref=" + escape(top.document.referrer) + "\" width=\"1\" height=\"1\" alt=\"\">");
+// -->
+</SCRIPT>
+<NOSCRIPT><IMG height=1 alt="" src="" width=1 border=0> </NOSCRIPT><!-- NAVRCHOLU.cz - konec --></BODY></HTML>

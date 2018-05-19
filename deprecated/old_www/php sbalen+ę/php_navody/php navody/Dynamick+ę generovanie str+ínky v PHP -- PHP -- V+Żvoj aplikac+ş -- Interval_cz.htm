@@ -1,0 +1,953 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!-- saved from url=(0062)http://interval.cz/clanky/dynamicke-generovanie-stranky-v-php/ -->
+<?xml version='1.0' encoding='windows-1250'?><HTML lang=cs xml:lang="cs" 
+xmlns="http://www.w3.org/1999/xhtml"><HEAD><TITLE>Dynamické generovanie stránky v PHP -- PHP -- Vývoj aplikací -- Interval.cz</TITLE>
+<META http-equiv=Content-Type content="text/html; charset=windows-1250">
+<META http-equiv=Content-language content=cs>
+<META http-equiv=Cache-control content=no-cache>
+<META http-equiv=Pragma content=no-cache>
+<META http-equiv=Expires content=-1>
+<META content=index,follow name=robots>
+<META content=index,follow,snippet,noarchive name=googlebot>
+<META 
+content="V tomto článku si vytvoríme praktickú pomôcku pre každého programátora. Ide o vygenerovanie stránky na základe premennej predávanej cez URL. Ukážka bude naprogramovaná bez databázi aj s databázou." 
+name=description>
+<META content="PHP, Vývoj aplikací, Interval" name=keywords>
+<META content="49.1915, 16.626" name=ICBM>
+<META content=Interval.cz name=DC.Title>
+<META content=http://interval.cz name=DC.Identifier>
+<META content="(SCHEME=ISSN) 12128651" name=DC.Identifier>
+<META content=cs name=DC.Language>
+<META http-equiv=pics-label 
+content='(pics-1.1 "http://www.icra.org/ratingsv02.html" comment "ICRAonline EN v2.0" l gen true for "http://interval.cz" r (nz 1 vz 1 lz 1 oz 1 cz 1) "http://www.rsac.org/ratingsv01.html" l gen true for "http://interval.cz" r (n 0 s 0 v 0 l 0))'>
+<META http-equiv=imagetoolbar content=no>
+<META http-equiv=MSThemeCompatible content=no>
+<META content=true name=MSSmartTagsPreventParsing><LINK 
+href="http://interval.cz/favicon.ico" type=image/x-icon 
+rel="shortcut icon"><LINK 
+title="Interval.cz -- Dynamické generovanie stránky v PHP -- (diskuse, Atom 0.3)" 
+href="http://export.interval.cz/?type=atom&amp;discussion=1873" 
+type=application/atom+xml rel=alternate><LINK 
+title="Interval.cz -- Dynamické generovanie stránky v PHP -- (diskuse, RDF Site Summary 1.0)" 
+href="http://export.interval.cz/?type=rdf&amp;discussion=1873" 
+type=application/rdf+xml rel=alternate><LINK 
+title="Interval.cz -- Dynamické generovanie stránky v PHP -- (diskuse, RSS 2.0)" 
+href="http://export.interval.cz/?type=rss&amp;discussion=1873" 
+type=application/rss+xml rel=alternate><LINK href="http://interval.cz" 
+rel=home><LINK href="http://interval.cz/search_ex.asp" rel=search><LINK 
+media=all 
+href="Dynamické generovanie stránky v PHP -- PHP -- Vývoj aplikací -- Interval_cz_soubory/html4.css" 
+type=text/css rel=stylesheet><LINK media=all 
+href="Dynamické generovanie stránky v PHP -- PHP -- Vývoj aplikací -- Interval_cz_soubory/interval-display.css" 
+type=text/css rel=stylesheet><LINK media=print 
+href="Dynamické generovanie stránky v PHP -- PHP -- Vývoj aplikací -- Interval_cz_soubory/interval-print.css" 
+type=text/css rel=stylesheet>
+<META content="MSHTML 6.00.2800.1106" name=GENERATOR></HEAD>
+<BODY class="interval interval-articles" id=article-1873>
+<DIV class=audits><!-- TOPList.cz -->
+<SCRIPT type=text/javascript>
+<!-- <![CDATA[
+document.write ("<a href='http://www.toplist.cz'><img src='http://www.toplist.cz/dot.asp?id=33617&amp;http="+escape(document.referrer)+"&amp;wi="+escape(window.screen.width)+"&amp;he="+escape(window.screen.height)+"&amp;cd="+escape(window.screen.colorDepth)+"&amp;t="+escape(document.title)+"' style='border: 0; width: 1px; height: 1px' alt='.' /></a>");
+//]]> -->
+</SCRIPT>
+<NOSCRIPT>
+<DIV><A href="http://www.toplist.cz/"><IMG 
+style="BORDER-RIGHT: 0px; BORDER-TOP: 0px; BORDER-LEFT: 0px; WIDTH: 1px; BORDER-BOTTOM: 0px; HEIGHT: 1px" 
+alt=. src=""></A></DIV></NOSCRIPT><!-- TOPList.cz - konec --><!-- iAudit --><IMG 
+style="BORDER-RIGHT: 0px; BORDER-TOP: 0px; BORDER-LEFT: 0px; WIDTH: 1px; BORDER-BOTTOM: 0px; HEIGHT: 1px" 
+alt=. 
+src="Dynamické generovanie stránky v PHP -- PHP -- Vývoj aplikací -- Interval_cz_soubory/dot.idot.gif"> 
+<!-- iAudit - konec --><!-- (C)2005 Gemius SA - gemiusAudience  / Ostatni -->
+<SCRIPT type=text/javascript><!--
+	
+	gemius_identifier = new String('bQzrQkrzLOWoKbJeudlKguTS7OndUMSqxutbeFviWMv.47');
+	
+	gemius_href=new String(document.location);
+	if (document.referrer) { gemius_ref = new String(document.referrer); } else { gemius_ref = ""; }
+	if(typeof(Error)!='undefined') eval("try { if (typeof(top.document.referrer)=='string') { gemius_ref = top.document.referrer } } catch(gemius_ex) {}");
+	iname = new String('id='+gemius_identifier+';ref='+escape(gemius_ref.substring(0,299))+';href='+escape(gemius_href.substring(0,299))+';');
+	document.write('<iframe src="http://spir.hit.gemius.pl/gemiusaudience.html" name="'+iname+'" width="1" height="1" frameborder="0" scrolling="no"></iframe>');
+	//-->
+	</SCRIPT>
+</DIV>
+<DIV id=advertising-leader-board><!-- StartKód: adarbo2.bbmedia.cz 3.1 Nestandard  Interval(87) / cely web(1) / leaderboard 750x100(1) / nestandard(24) -->
+<SCRIPT type=text/javascript>
+	/* <![CDATA[ */
+	var bbs=screen,bbn=navigator,bbh;bbh='&ubl='+bbn.browserLanguage+'&ucc='+bbn.cpuClass+'&ucd='+bbs.colorDepth+'&uce='+bbn.cookieEnabled+'&udx='+bbs.deviceXDPI+'&udy='+bbs.deviceYDPI+'&usl='+bbn.systemLanguage+'&uje='+bbn.javaEnabled()+'&uah='+bbs.availHeight+'&uaw='+bbs.availWidth+'&ubd='+bbs.bufferDepth+'&uhe='+bbs.height+'&ulx='+bbs.logicalXDPI+'&uly='+bbs.logicalYDPI+'&use='+bbs.fontSmoothingEnabled+'&uto='+(new Date()).getTimezoneOffset()+'&uti='+(new Date()).getTime()+'&uui='+bbs.updateInterval+'&uul='+bbn.userLanguage+'&uwi='+bbs.width;
+	document.write("<scr"+"ipt  language='JavaScript' type='text/javascript' src='http://adarbo2.bbmedia.cz/please/showit/87/1/1/24/?typkodu=non-standard"+bbh+"&alttext=0&border=0&bgcolor=FFFFFF&text=000000&link=0000FF&target=_blank&bust="+Math.random()+"'>");
+	document.write("<"+"\/scr"+"ipt>");
+	/* ]]> */
+	</SCRIPT>
+<!-- KonecKód: adarbo2.bbmedia.cz 3.1 Nestandard --></DIV>
+<DIV id=page-header>
+<DIV id=interval-logo>
+<H1 title="Interval.cz - webdesign a e-komerce denně (logo &amp; index link)"><A 
+href="http://interval.cz/">Interval.cz<SPAN></SPAN></A></H1></DIV>
+<DIV id=advertising-page-header><!-- StartKód: adarbo2.bbmedia.cz 3.1 Nestandard  Interval(87) / cely web(1) / horni468x60(2) / nestandard(24) -->
+<SCRIPT type=text/javascript>
+	/* <![CDATA[ */
+	var bbs=screen,bbn=navigator,bbh;bbh='&ubl='+bbn.browserLanguage+'&ucc='+bbn.cpuClass+'&ucd='+bbs.colorDepth+'&uce='+bbn.cookieEnabled+'&udx='+bbs.deviceXDPI+'&udy='+bbs.deviceYDPI+'&usl='+bbn.systemLanguage+'&uje='+bbn.javaEnabled()+'&uah='+bbs.availHeight+'&uaw='+bbs.availWidth+'&ubd='+bbs.bufferDepth+'&uhe='+bbs.height+'&ulx='+bbs.logicalXDPI+'&uly='+bbs.logicalYDPI+'&use='+bbs.fontSmoothingEnabled+'&uto='+(new Date()).getTimezoneOffset()+'&uti='+(new Date()).getTime()+'&uui='+bbs.updateInterval+'&uul='+bbn.userLanguage+'&uwi='+bbs.width;
+	document.write("<scr"+"ipt  type='text/javascript' src='http://adarbo2.bbmedia.cz/please/showit/87/1/2/24/?typkodu=non-standard"+bbh+"&alttext=0&border=0&bgcolor=FFFFFF&text=000000&link=0000FF&target=_top&bust="+Math.random()+"'>");
+	document.write("<"+"\/scr"+"ipt>");
+	/* ]]> */
+	</SCRIPT>
+<!-- KonecKód: adarbo2.bbmedia.cz 3.1 Nestandard --></DIV>
+<DIV class=page-maker>&nbsp;</DIV></DIV>
+<DIV id=page-topmenu>
+<H2 class=textversion>Navigace</H2><!-- cached 09-15-62-hlavni_menu_with_ascii.txt --><!-- ,Vývoj aplikací ~~ ,,PHP ~~ , -->
+<DIV id=page-mainmenu>
+<H3 class=textversion>Hlavní menu</H3>
+<UL>
+  <LI class=first><A href="http://interval.cz/">Titulka</A></LI>
+  <LI><A href="http://interval.cz/e-komerce/">E-komerce</A></LI>
+  <LI><A href="http://interval.cz/webdesign/">Webdesign</A></LI>
+  <LI class=selected><A href="http://interval.cz/vyvoj-aplikaci/">Vývoj 
+  aplikací</A></LI>
+  <LI><A href="http://interval.cz/nastroje/">Nástroje</A></LI>
+  <LI><A href="http://interval.cz/magazin/">Magazín</A></LI>
+  <LI class="right selected"><A 
+  href="http://interval.inshop.cz/">Knihkupectví</A></LI>
+  <LI class=right><A href="http://interforum.interval.cz/">Interforum</A></LI>
+  <LI class=right><A 
+href="http://interzen.interval.cz/">Interzen</A></LI></UL></DIV>
+<DIV id=page-mainmenu-maker>&nbsp;</DIV>
+<DIV id=page-mainsubmenu>
+<H3 class=textversion>Submenu</H3>
+<UL>
+  <LI><A href="http://interval.cz/vyvoj-aplikaci/j2me/">J2ME</A></LI>
+  <LI><A href="http://interval.cz/vyvoj-aplikaci/asp/">ASP</A></LI>
+  <LI><A href="http://interval.cz/vyvoj-aplikaci/net/">.NET</A></LI>
+  <LI class=selected><A 
+  href="http://interval.cz/vyvoj-aplikaci/php/">PHP</A></LI>
+  <LI><A 
+href="http://interval.cz/vyvoj-aplikaci/javascript/">JavaScript</A></LI>
+  <LI><A href="http://interval.cz/vyvoj-aplikaci/xml/">XML</A></LI>
+  <LI><A href="http://interval.cz/vyvoj-aplikaci/java/">Java</A></LI>
+  <LI><A href="http://interval.cz/vyvoj-aplikaci/perl-cgi/">PERL/CGI</A></LI>
+  <LI><A href="http://interval.cz/vyvoj-aplikaci/databaze/">Databáze</A></LI>
+  <LI><A 
+href="http://interval.cz/vyvoj-aplikaci/bezpecnost/">Bezpečnost</A></LI>
+  <LI><A 
+href="http://interval.cz/vyvoj-aplikaci/analyzy/">Analýzy</A></LI></UL><SPAN 
+id=page-mainsubmenu-maker>&nbsp;</SPAN></DIV><!-- cas behu menu = 0 --></DIV>
+<DIV id=page-body>
+<DIV id=page-left>
+<DIV id=article>
+<H2>Dynamické generovanie stránky v PHP</H2>
+<P id=prepend>V&nbsp;tomto článku si vytvoríme praktickú pomôcku pre každého 
+programátora. Ide o&nbsp;vygenerovanie stránky na základe premennej predávanej 
+cez URL. Ukážka bude naprogramovaná bez databázi aj s&nbsp;databázou. </P>
+<DIV class="advertising-bigsquare-outer noprint">
+<DIV class=advertising-bigsquare-inner style="WIDTH: 300px"><!-- StartKód: adarbo2.bbmedia.cz 3.1 Nestandard  Interval(87) / cely web(1) / ctverec250x250(8) / nestandard(24) -->
+<SCRIPT type=text/javascript>
+	/* <![CDATA[ */
+	var bbs=screen,bbn=navigator,bbh;bbh='&ubl='+bbn.browserLanguage+'&ucc='+bbn.cpuClass+'&ucd='+bbs.colorDepth+'&uce='+bbn.cookieEnabled+'&udx='+bbs.deviceXDPI+'&udy='+bbs.deviceYDPI+'&usl='+bbn.systemLanguage+'&uje='+bbn.javaEnabled()+'&uah='+bbs.availHeight+'&uaw='+bbs.availWidth+'&ubd='+bbs.bufferDepth+'&uhe='+bbs.height+'&ulx='+bbs.logicalXDPI+'&uly='+bbs.logicalYDPI+'&use='+bbs.fontSmoothingEnabled+'&uto='+(new Date()).getTimezoneOffset()+'&uti='+(new Date()).getTime()+'&uui='+bbs.updateInterval+'&uul='+bbn.userLanguage+'&uwi='+bbs.width;
+	document.write("<scr"+"ipt  type='text/javascript' src='http://adarbo2.bbmedia.cz/please/showit/87/1/8/24/?typkodu=non-standard"+bbh+"&alttext=0&border=0&bgcolor=FFFFFF&text=000000&link=0000FF&target=_top&bust="+Math.random()+"'>");
+	document.write("<"+"\/scr"+"ipt>");
+	/* ]]> */
+	</SCRIPT>
+<!-- KonecKód: adarbo2.bbmedia.cz 3.1 Nestandard --></DIV></DIV>
+<P>Takto vám pre naprogramovanie stránky postačí vlastne jedna stránka, ktorá 
+bude obsahovať všetko okrem "stredu", teda hlavnej časti stránky. Takže na 
+kompletnú stránku vám postačí vytvoriť jednu hlavnú stránku okrem časti, kde sa 
+bude generovať nejaký dokument. Toto miesto nahradí skript, ktorý už premennú v 
+našom príklade označovanú <EM>$page</EM> spracuje a vygeneruje našu stránku.</P>
+<P>Pokiaľ sa budete potrebovať dostať napríklad na stránku s formulárom pre 
+kontakt, môže odkaz na túto stránku vyzerať: 
+<SAMP>index.php?page=kontakt</SAMP>. V premenných ale nemusíte vypisovať zrovna 
+názvy. To sa oplatí hlavne pri malých stránkach. Pri väčších je niekedy lepšie v 
+premennej prenášať čísla. Teda jedno číslo = jedna stránka. Samotný obsah 
+stránky (stred) bude ukladaný v súboroch s príponou <EM>php</EM>. Tieto stránky 
+môžeme ešte zabezpečiť proti ich samotnému otvoreniu bez stránky 
+<SAMP>index.php</SAMP>. Tým dosiahnete, že sa nikto nebude pozerať do častí 
+(stredov) stránok. Pomoc je jednoduchá – vytvoríte si na začiatku každého 
+dokumentu, ktorý bude predstavovať stred stránky podmienku – v prípade, že 
+existuje premenná napríklad <EM>$kod</EM> a nesie hodnotu <EM>"5e9c"</EM>, tak 
+sa stránka vygeneruje. Túto premennú aj s hodnotou už len jednoducho vložíte ku 
+skriptu na stránke <SAMP>index.php</SAMP>. Takže stred stránky bude vyzerať asi 
+takto:</P>
+<DIV class=sample>&lt;?if(IsSet($kod) &amp;&amp; $kod == "5e9c"):?&gt;<BR><BR>// 
+samotný stred<BR><BR>&lt;?endif;?&gt; </DIV>
+<P>Teraz si vytvoríme skript, ktorý môžete použiť v prípade, že nemáte prístup k 
+databázam alebo má web tak málo podstránok, že sa do toho neoplatí zaťahovať 
+databázu. Skript potom vyzerá nasledovne:</P>
+<DIV class=sample>&lt;?<BR>&nbsp;$kod = 
+"5e9c";<BR>&nbsp;if(IsSet($_GET['page'])):<BR><BR>&nbsp;switch($page) 
+{<BR>&nbsp;&nbsp;&nbsp;case "novinky":<BR>&nbsp;&nbsp;&nbsp;$url = 
+"news.php";<BR>&nbsp;&nbsp;&nbsp;break;<BR>&nbsp;&nbsp;&nbsp;case 
+"galeria":<BR>&nbsp;&nbsp;&nbsp;$url = 
+"gallery.php";<BR>&nbsp;&nbsp;&nbsp;break;<BR>&nbsp;&nbsp;&nbsp;case 
+"kontakt":<BR>&nbsp;&nbsp;&nbsp;$url = 
+"contact.php";<BR>&nbsp;&nbsp;&nbsp;break;<BR>&nbsp;&nbsp;&nbsp;default:<BR>&nbsp;&nbsp;&nbsp;$url 
+= "home.php";<BR>&nbsp;}<BR>&nbsp;else: $url = 
+"home.php";<BR>&nbsp;endif;<BR>&nbsp;require $url;<BR>?&gt; </DIV>
+<P>Skript bez databázi je ale dosť dlhý, hlavne pri väčšom počte podstránok. V 
+takom prípade je dobre využíť verziu s databázou.</P>
+<P>Tabulka môže obsahovať množstvo informácií o stránke, napríklad dátum 
+poslednej aktualizácie, <EM>title</EM> pre dokument, popis stránky, počítadlo 
+zobrazení a iné. My si navrhneme jednoduchšiu tabulku, ktorá bude obsahovať:</P>
+<DIV class=list>
+<UL>
+  <LI>názov stránky (tiež sa dá použiť ako <EM>&lt;title&gt;</EM> dokumentu) 
+  <LI>ID číslo alebo krátky názov – toto označovanie používame v URL 
+  <LI>cestu k súboru na servery 
+  <LI>popis stránky </LI></UL></DIV>
+<P>Popis stránky sa hodí v prípadoch, keď máte na servery veľké množstvo 
+podstránok a je problém si zapamätať presný význam niektorých skriptov. Malo by 
+to zprehľadniť prácu s databázou. Návrh celej našej tabulky vyzerá takto:</P>
+<DIV class=sample>create table pages(<BR>name varchar(50) not null,<BR>id 
+varchar(20) not null,<BR>url varchar(255) not null,<BR>description 
+varchar(255),<BR>PRIMARY KEY(name,id,url)); </DIV>
+<P>Skript s použitím databázi:</P>
+<DIV class=sample>&lt;?<BR>&nbsp;$kod = "5e9c"; // napiseme bezpecnostny 
+kod<BR>&nbsp;if(IsSet($_GET['page'])): // overime, ci existuje premmenna 
+$page<BR>&nbsp;&nbsp;MySQL_Connect("localhost"); // pripojime sa k 
+databazi<BR>&nbsp;&nbsp;MySQL_Select_DB("test"); // vyberieme 
+databazu<BR>&nbsp;&nbsp;$vysledok = MySQL_Query("SELECT url FROM pages WHERE id 
+= '$_GET[page]'"); // napiseme sql 
+prikaz<BR><BR>&nbsp;&nbsp;if(MySQL_NumRows($vysledok) == 1): 
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;$url = MySQL_Result($vysledok, 0, "url"); // adresu 
+z databazi zapiseme do premennej $url<BR>&nbsp;&nbsp;else: 
+<BR>&nbsp;&nbsp;&nbsp;$url = "chyba.php"; // pokial zaznam nebol najdeny, tak do 
+premennej $url vlozime inu stranku, napr. upozornenie na 
+chybu<BR>&nbsp;&nbsp;endif;<BR><BR>&nbsp;else: <BR>&nbsp;&nbsp;$url = 
+"home.php"; // v pripade, ze neexistuje premenna $page, vlozime do $url hlavnu 
+stranku<BR>&nbsp;endif; // ukoncime prvu podmienku<BR><BR>&nbsp;require $url; // 
+vygenerujeme stranku<BR>?&gt; </DIV>
+<P>V prípade, že chcete dynamicky generovať aj <EM>&lt;title&gt;</EM> dokumentu, 
+tak jednoducho tento skript umiestnite pri začiatku dokumentu a okrem url adresy 
+vyberte z databázi aj názov. Premennú $url potom použite až tam, kde sa bude 
+generovať stránka: <SAMP>&lt;?require $url;?&gt;</SAMP>.</P>
+<P>Namiesto funkcie <EM>require()</EM> môžete použiť aj funkciu 
+<EM>include()</EM>, ktorá funguje veľmi podobne. Sú tu však drobné rozdiely, 
+ktoré dávajú výhody i nevýhody obidvom funkciám.</P>
+<P>Verím, že tento článok vám bude prospešný pri tvorbe stránok v PHP. Rozhodne 
+by mal uľahčiť prácu a urýchliť tvorbu webu.</P>
+<P>Pozn. red: Zde popisovaná metoda přináší sofistikovanější poskládání stránky 
+než potenciálně nebezpečné <A 
+title="Lahvička, Jiří: Šetříme si práci příkazem include v PHP" 
+href="http://interval.cz/clanek.asp?article=303">include</A>. Díky ochrannému 
+kódu, zabrání i mnohem bezpečněji prohlížení (spouštění) samostatných 
+includovaných souborů než postup, popisovaný v <A 
+title="Růžička, Pavel: Bezpečnost především – include v PHP" 
+href="http://interval.cz/clanek.asp?article=1304">článku</A> Pavla Růžičky.</P>
+<DIV id=article-author><A 
+href="http://interval.cz/autori/sustek-michal/">Šustek, Michal</A> 
+(18.&nbsp;1.&nbsp;2003) </DIV>
+<DIV class=noprint id=article-discussion><!-- cached 1873-tabulka-dynamicke-generovanie-stranky-v-php.txt -->
+<DIV id=article-discussion-index>
+<FORM action=http://interval.cz/discussion-read.asp?disc=1873 method=post>
+<TABLE cellSpacing=0>
+  <TBODY>
+  <TR>
+    <TH colSpan=4><A title="Dynamické generovanie stránky v PHP (diskuse)" 
+      href="http://interval.cz/clanky/dynamicke-generovanie-stranky-v-php/diskuse/">Dynamické 
+      generovanie stránky v PHP (diskuse)</A></TH></TR>
+  <TR>
+    <TD class=checkbox><INPUT title="0 10644" type=checkbox value=1 
+      name=checkboxDISKUZE10644></TD>
+    <TD class=date>2003-01-18 04:06:40</TD>
+    <TD class=sender>Ondrej Ivanic</TD>
+    <TD class=subject>case</TD></TR>
+  <TR>
+    <TD class=checkbox><INPUT title="1 10646" type=checkbox value=1 
+      name=checkboxDISKUZE10646></TD>
+    <TD class=date>2003-01-18 08:14:16</TD>
+    <TD class=sender>Jméno a příjmení</TD>
+    <TD class=subject><IMG class=line alt=. 
+      src="Dynamické generovanie stránky v PHP -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Dynamické generovanie stránky v PHP -- PHP -- Vývoj aplikací -- Interval_cz_soubory/line3.png">case</TD></TR>
+  <TR>
+    <TD class=checkbox><INPUT title="2 10649" type=checkbox value=1 
+      name=checkboxDISKUZE10649></TD>
+    <TD class=date>2003-01-18 11:48:58</TD>
+    <TD class=sender>Ondrej Ivanic</TD>
+    <TD class=subject><IMG class=line alt=. 
+      src="Dynamické generovanie stránky v PHP -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Dynamické generovanie stránky v PHP -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Dynamické generovanie stránky v PHP -- PHP -- Vývoj aplikací -- Interval_cz_soubory/line3.png">case</TD></TR>
+  <TR>
+    <TD class=checkbox><INPUT title="3 10654" type=checkbox value=1 
+      name=checkboxDISKUZE10654></TD>
+    <TD class=date>2003-01-18 16:53:24</TD>
+    <TD class=sender>Jakub Podhorský</TD>
+    <TD class=subject><IMG class=line alt=. 
+      src="Dynamické generovanie stránky v PHP -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Dynamické generovanie stránky v PHP -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Dynamické generovanie stránky v PHP -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Dynamické generovanie stránky v PHP -- PHP -- Vývoj aplikací -- Interval_cz_soubory/line1.png">case</TD></TR>
+  <TR>
+    <TD class=checkbox><INPUT title="4 10655" type=checkbox value=1 
+      name=checkboxDISKUZE10655></TD>
+    <TD class=date>2003-01-18 17:11:06</TD>
+    <TD class=sender>Ondrej Ivanic</TD>
+    <TD class=subject><IMG class=line alt=. 
+      src="Dynamické generovanie stránky v PHP -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Dynamické generovanie stránky v PHP -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Dynamické generovanie stránky v PHP -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Dynamické generovanie stránky v PHP -- PHP -- Vývoj aplikací -- Interval_cz_soubory/line2.png"><IMG 
+      class=line alt=. 
+      src="Dynamické generovanie stránky v PHP -- PHP -- Vývoj aplikací -- Interval_cz_soubory/line1.png">case</TD></TR>
+  <TR>
+    <TD class=checkbox><INPUT title="5 10659" type=checkbox value=1 
+      name=checkboxDISKUZE10659></TD>
+    <TD class=date>2003-01-18 21:45:39</TD>
+    <TD class=sender>Abraxis</TD>
+    <TD class=subject><IMG class=line alt=. 
+      src="Dynamické generovanie stránky v PHP -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Dynamické generovanie stránky v PHP -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Dynamické generovanie stránky v PHP -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Dynamické generovanie stránky v PHP -- PHP -- Vývoj aplikací -- Interval_cz_soubory/line2.png"><IMG 
+      class=line alt=. 
+      src="Dynamické generovanie stránky v PHP -- PHP -- Vývoj aplikací -- Interval_cz_soubory/line2.png"><IMG 
+      class=line alt=. 
+      src="Dynamické generovanie stránky v PHP -- PHP -- Vývoj aplikací -- Interval_cz_soubory/line1.png">case</TD></TR>
+  <TR>
+    <TD class=checkbox><INPUT title="5 10674" type=checkbox value=1 
+      name=checkboxDISKUZE10674></TD>
+    <TD class=date>2003-01-19 08:59:41</TD>
+    <TD class=sender>Vilém Málek</TD>
+    <TD class=subject><IMG class=line alt=. 
+      src="Dynamické generovanie stránky v PHP -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Dynamické generovanie stránky v PHP -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Dynamické generovanie stránky v PHP -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Dynamické generovanie stránky v PHP -- PHP -- Vývoj aplikací -- Interval_cz_soubory/line2.png"><IMG 
+      class=line alt=. 
+      src="Dynamické generovanie stránky v PHP -- PHP -- Vývoj aplikací -- Interval_cz_soubory/line2.png"><IMG 
+      class=line alt=. 
+      src="Dynamické generovanie stránky v PHP -- PHP -- Vývoj aplikací -- Interval_cz_soubory/line3.png">case</TD></TR>
+  <TR>
+    <TD class=checkbox><INPUT title="6 10677" type=checkbox value=1 
+      name=checkboxDISKUZE10677></TD>
+    <TD class=date>2003-01-19 12:08:37</TD>
+    <TD class=sender>Ondrej Ivanic</TD>
+    <TD class=subject><IMG class=line alt=. 
+      src="Dynamické generovanie stránky v PHP -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Dynamické generovanie stránky v PHP -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Dynamické generovanie stránky v PHP -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Dynamické generovanie stránky v PHP -- PHP -- Vývoj aplikací -- Interval_cz_soubory/line2.png"><IMG 
+      class=line alt=. 
+      src="Dynamické generovanie stránky v PHP -- PHP -- Vývoj aplikací -- Interval_cz_soubory/line2.png"><IMG 
+      class=line alt=. 
+      src="Dynamické generovanie stránky v PHP -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Dynamické generovanie stránky v PHP -- PHP -- Vývoj aplikací -- Interval_cz_soubory/line3.png">case</TD></TR>
+  <TR>
+    <TD class=checkbox><INPUT title="4 10732" type=checkbox value=1 
+      name=checkboxDISKUZE10732></TD>
+    <TD class=date>2003-01-20 20:04:31</TD>
+    <TD class=sender>pL79</TD>
+    <TD class=subject><IMG class=line alt=. 
+      src="Dynamické generovanie stránky v PHP -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Dynamické generovanie stránky v PHP -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Dynamické generovanie stránky v PHP -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Dynamické generovanie stránky v PHP -- PHP -- Vývoj aplikací -- Interval_cz_soubory/line2.png"><IMG 
+      class=line alt=. 
+      src="Dynamické generovanie stránky v PHP -- PHP -- Vývoj aplikací -- Interval_cz_soubory/line1.png">case 
+      sensitive</TD></TR>
+  <TR>
+    <TD class=checkbox><INPUT title="4 10849" type=checkbox value=1 
+      name=checkboxDISKUZE10849></TD>
+    <TD class=date>2003-01-24 13:06:57</TD>
+    <TD class=sender>ŠtuPe</TD>
+    <TD class=subject><IMG class=line alt=. 
+      src="Dynamické generovanie stránky v PHP -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Dynamické generovanie stránky v PHP -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Dynamické generovanie stránky v PHP -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Dynamické generovanie stránky v PHP -- PHP -- Vývoj aplikací -- Interval_cz_soubory/line2.png"><IMG 
+      class=line alt=. 
+      src="Dynamické generovanie stránky v PHP -- PHP -- Vývoj aplikací -- Interval_cz_soubory/line3.png">case-(in)sensitive 
+      (to jako reklama...</TD></TR>
+  <TR>
+    <TD class=checkbox><INPUT title="3 10785" type=checkbox value=1 
+      name=checkboxDISKUZE10785></TD>
+    <TD class=date>2003-01-22 14:06:36</TD>
+    <TD class=sender>caracho</TD>
+    <TD class=subject><IMG class=line alt=. 
+      src="Dynamické generovanie stránky v PHP -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Dynamické generovanie stránky v PHP -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Dynamické generovanie stránky v PHP -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Dynamické generovanie stránky v PHP -- PHP -- Vývoj aplikací -- Interval_cz_soubory/line3.png">case</TD></TR>
+  <TR>
+    <TD class=checkbox><INPUT title="0 10645" type=checkbox value=1 
+      name=checkboxDISKUZE10645></TD>
+    <TD class=date>2003-01-18 04:09:22</TD>
+    <TD class=sender>Ondrej Ivanic</TD>
+    <TD class=subject>php &amp; escape from HTML</TD></TR>
+  <TR>
+    <TD class=checkbox><INPUT title="1 10656" type=checkbox value=1 
+      name=checkboxDISKUZE10656></TD>
+    <TD class=date>2003-01-18 17:20:13</TD>
+    <TD class=sender>jakub</TD>
+    <TD class=subject><IMG class=line alt=. 
+      src="Dynamické generovanie stránky v PHP -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Dynamické generovanie stránky v PHP -- PHP -- Vývoj aplikací -- Interval_cz_soubory/line3.png">php 
+      &amp; escape from HTML</TD></TR>
+  <TR>
+    <TD class=checkbox><INPUT title="0 10663" type=checkbox value=1 
+      name=checkboxDISKUZE10663></TD>
+    <TD class=date>2003-01-19 00:19:39</TD>
+    <TD class=sender>Michal Kubeček</TD>
+    <TD class=subject>proč $page ?</TD></TR>
+  <TR>
+    <TD class=checkbox><INPUT title="1 17817" type=checkbox value=1 
+      name=checkboxDISKUZE17817></TD>
+    <TD class=date>2003-09-01 20:25:38</TD>
+    <TD class=sender>Hynek Horák</TD>
+    <TD class=subject><IMG class=line alt=. 
+      src="Dynamické generovanie stránky v PHP -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Dynamické generovanie stránky v PHP -- PHP -- Vývoj aplikací -- Interval_cz_soubory/line1.png">proč 
+      $page ?</TD></TR>
+  <TR>
+    <TD class=checkbox><INPUT title="1 19363" type=checkbox value=1 
+      name=checkboxDISKUZE19363></TD>
+    <TD class=date>2003-10-03 14:01:28</TD>
+    <TD class=sender>Lukas</TD>
+    <TD class=subject><IMG class=line alt=. 
+      src="Dynamické generovanie stránky v PHP -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Dynamické generovanie stránky v PHP -- PHP -- Vývoj aplikací -- Interval_cz_soubory/line3.png">proč 
+      $page ?</TD></TR>
+  <TR>
+    <TD class=checkbox><INPUT title="0 10705" type=checkbox value=1 
+      name=checkboxDISKUZE10705></TD>
+    <TD class=date>2003-01-20 10:01:48</TD>
+    <TD class=sender>kai</TD>
+    <TD class=subject>array</TD></TR>
+  <TR>
+    <TD class=checkbox><INPUT title="0 10711" type=checkbox value=1 
+      name=checkboxDISKUZE10711></TD>
+    <TD class=date>2003-01-20 13:42:28</TD>
+    <TD class=sender>Petr ZIZKA</TD>
+    <TD class=subject>Šablony</TD></TR>
+  <TR>
+    <TD class=checkbox><INPUT title="0 10721" type=checkbox value=1 
+      name=checkboxDISKUZE10721></TD>
+    <TD class=date>2003-01-20 17:23:11</TD>
+    <TD class=sender>Lucie Rut Bittnerova</TD>
+    <TD class=subject>Jak poucne...</TD></TR>
+  <TR>
+    <TD class=checkbox><INPUT title="1 36479" type=checkbox value=1 
+      name=checkboxDISKUZE36479></TD>
+    <TD class=date>2005-04-18 19:58:04</TD>
+    <TD class=sender>Jirka</TD>
+    <TD class=subject><IMG class=line alt=. 
+      src="Dynamické generovanie stránky v PHP -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Dynamické generovanie stránky v PHP -- PHP -- Vývoj aplikací -- Interval_cz_soubory/line3.png">RE: 
+      Jak poucne...</TD></TR>
+  <TR>
+    <TD class=checkbox><INPUT title="0 11326" type=checkbox value=1 
+      name=checkboxDISKUZE11326></TD>
+    <TD class=date>2003-02-19 11:31:22</TD>
+    <TD class=sender>Pavel</TD>
+    <TD class=subject>PHP a SQL7</TD></TR>
+  <TR>
+    <TD class=checkbox><INPUT title="1 11328" type=checkbox value=1 
+      name=checkboxDISKUZE11328></TD>
+    <TD class=date>2003-02-19 11:38:20</TD>
+    <TD class=sender>Petr ZIZKA</TD>
+    <TD class=subject><IMG class=line alt=. 
+      src="Dynamické generovanie stránky v PHP -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Dynamické generovanie stránky v PHP -- PHP -- Vývoj aplikací -- Interval_cz_soubory/line3.png">PHP 
+      a SQL7</TD></TR>
+  <TR>
+    <TD class=checkbox><INPUT title="2 11329" type=checkbox value=1 
+      name=checkboxDISKUZE11329></TD>
+    <TD class=date>2003-02-19 11:41:13</TD>
+    <TD class=sender>Petr ZIZKA</TD>
+    <TD class=subject><IMG class=line alt=. 
+      src="Dynamické generovanie stránky v PHP -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Dynamické generovanie stránky v PHP -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Dynamické generovanie stránky v PHP -- PHP -- Vývoj aplikací -- Interval_cz_soubory/line3.png">PHP 
+      a SQL7</TD></TR>
+  <TR>
+    <TD class=checkbox><INPUT title="0 11438" type=checkbox value=1 
+      name=checkboxDISKUZE11438></TD>
+    <TD class=date>2003-02-23 10:53:40</TD>
+    <TD class=sender>Drahomír Tichý</TD>
+    <TD class=subject>Problém...</TD></TR>
+  <TR>
+    <TD class=checkbox><INPUT title="1 11440" type=checkbox value=1 
+      name=checkboxDISKUZE11440></TD>
+    <TD class=date>2003-02-23 13:10:35</TD>
+    <TD class=sender>Autor clanku</TD>
+    <TD class=subject><IMG class=line alt=. 
+      src="Dynamické generovanie stránky v PHP -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Dynamické generovanie stránky v PHP -- PHP -- Vývoj aplikací -- Interval_cz_soubory/line1.png">Problém...</TD></TR>
+  <TR>
+    <TD class=checkbox><INPUT title="1 23720" type=checkbox value=1 
+      name=checkboxDISKUZE23720></TD>
+    <TD class=date>2004-02-19 21:08:37</TD>
+    <TD class=sender>php</TD>
+    <TD class=subject><IMG class=line alt=. 
+      src="Dynamické generovanie stránky v PHP -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Dynamické generovanie stránky v PHP -- PHP -- Vývoj aplikací -- Interval_cz_soubory/line3.png">Problém...</TD></TR>
+  <TR>
+    <TD class=checkbox><INPUT title="0 11841" type=checkbox value=1 
+      name=checkboxDISKUZE11841></TD>
+    <TD class=date>2003-03-16 20:43:07</TD>
+    <TD class=sender>Drahomír Tichý</TD>
+    <TD class=subject>Ještě dotaz...</TD></TR>
+  <TR>
+    <TD class=checkbox><INPUT title="0 14807" type=checkbox value=1 
+      name=checkboxDISKUZE14807></TD>
+    <TD class=date>2003-06-10 07:42:13</TD>
+    <TD class=sender>Patrik</TD>
+    <TD class=subject>$kod</TD></TR>
+  <TR>
+    <TD class=checkbox><INPUT title="1 14825" type=checkbox value=1 
+      name=checkboxDISKUZE14825></TD>
+    <TD class=date>2003-06-10 19:15:35</TD>
+    <TD class=sender>Autor</TD>
+    <TD class=subject><IMG class=line alt=. 
+      src="Dynamické generovanie stránky v PHP -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Dynamické generovanie stránky v PHP -- PHP -- Vývoj aplikací -- Interval_cz_soubory/line3.png">$kod</TD></TR>
+  <TR>
+    <TD class=checkbox><INPUT title="2 14844" type=checkbox value=1 
+      name=checkboxDISKUZE14844></TD>
+    <TD class=date>2003-06-11 07:51:17</TD>
+    <TD class=sender>Patrik</TD>
+    <TD class=subject><IMG class=line alt=. 
+      src="Dynamické generovanie stránky v PHP -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Dynamické generovanie stránky v PHP -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Dynamické generovanie stránky v PHP -- PHP -- Vývoj aplikací -- Interval_cz_soubory/line3.png">$kod</TD></TR>
+  <TR>
+    <TD class=checkbox><INPUT title="3 14890" type=checkbox value=1 
+      name=checkboxDISKUZE14890></TD>
+    <TD class=date>2003-06-11 19:21:38</TD>
+    <TD class=sender>Autor</TD>
+    <TD class=subject><IMG class=line alt=. 
+      src="Dynamické generovanie stránky v PHP -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Dynamické generovanie stránky v PHP -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Dynamické generovanie stránky v PHP -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Dynamické generovanie stránky v PHP -- PHP -- Vývoj aplikací -- Interval_cz_soubory/line3.png">$kod</TD></TR>
+  <TR>
+    <TD class=checkbox><INPUT title="0 16585" type=checkbox value=1 
+      name=checkboxDISKUZE16585></TD>
+    <TD class=date>2003-08-10 21:40:18</TD>
+    <TD class=sender>kennman</TD>
+    <TD class=subject>...moc složité...</TD></TR>
+  <TR>
+    <TD class=checkbox><INPUT title="1 17008" type=checkbox value=1 
+      name=checkboxDISKUZE17008></TD>
+    <TD class=date>2003-08-19 16:06:04</TD>
+    <TD class=sender>Patrik</TD>
+    <TD class=subject><IMG class=line alt=. 
+      src="Dynamické generovanie stránky v PHP -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Dynamické generovanie stránky v PHP -- PHP -- Vývoj aplikací -- Interval_cz_soubory/line1.png">...moc 
+      složité...</TD></TR>
+  <TR>
+    <TD class=checkbox><INPUT title="1 17100" type=checkbox value=1 
+      name=checkboxDISKUZE17100></TD>
+    <TD class=date>2003-08-20 21:35:55</TD>
+    <TD class=sender>samuel szabo</TD>
+    <TD class=subject><IMG class=line alt=. 
+      src="Dynamické generovanie stránky v PHP -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Dynamické generovanie stránky v PHP -- PHP -- Vývoj aplikací -- Interval_cz_soubory/line3.png">...moc 
+      složité...</TD></TR>
+  <TR>
+    <TD class=checkbox><INPUT title="2 22493" type=checkbox value=1 
+      name=checkboxDISKUZE22493></TD>
+    <TD class=date>2004-01-03 14:48:16</TD>
+    <TD class=sender>_chief</TD>
+    <TD class=subject><IMG class=line alt=. 
+      src="Dynamické generovanie stránky v PHP -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Dynamické generovanie stránky v PHP -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Dynamické generovanie stránky v PHP -- PHP -- Vývoj aplikací -- Interval_cz_soubory/line3.png">...moc 
+      složité...</TD></TR>
+  <TR>
+    <TD class=checkbox><INPUT title="3 43662" type=checkbox value=1 
+      name=checkboxDISKUZE43662></TD>
+    <TD class=date>2006-04-05 11:31:09</TD>
+    <TD class=sender>krteczek</TD>
+    <TD class=subject><IMG class=line alt=. 
+      src="Dynamické generovanie stránky v PHP -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Dynamické generovanie stránky v PHP -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Dynamické generovanie stránky v PHP -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Dynamické generovanie stránky v PHP -- PHP -- Vývoj aplikací -- Interval_cz_soubory/line3.png">...moc 
+      složité...</TD></TR>
+  <TR>
+    <TD class=checkbox><INPUT title="0 22600" type=checkbox value=1 
+      name=checkboxDISKUZE22600></TD>
+    <TD class=date>2004-01-08 17:28:54</TD>
+    <TD class=sender>Peterson</TD>
+    <TD class=subject>priklad s DB - chyba</TD></TR>
+  <TR>
+    <TD class=checkbox><INPUT title="1 23948" type=checkbox value=1 
+      name=checkboxDISKUZE23948></TD>
+    <TD class=date>2004-02-26 22:44:30</TD>
+    <TD class=sender>tomas</TD>
+    <TD class=subject><IMG class=line alt=. 
+      src="Dynamické generovanie stránky v PHP -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Dynamické generovanie stránky v PHP -- PHP -- Vývoj aplikací -- Interval_cz_soubory/line3.png">priklad 
+      s DB - chyba</TD></TR>
+  <TR>
+    <TD class=checkbox><INPUT title="2 23949" type=checkbox value=1 
+      name=checkboxDISKUZE23949></TD>
+    <TD class=date>2004-02-26 22:52:03</TD>
+    <TD class=sender>michal</TD>
+    <TD class=subject><IMG class=line alt=. 
+      src="Dynamické generovanie stránky v PHP -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Dynamické generovanie stránky v PHP -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Dynamické generovanie stránky v PHP -- PHP -- Vývoj aplikací -- Interval_cz_soubory/line3.png">priklad 
+      s DB - chyba</TD></TR>
+  <TR>
+    <TD class=checkbox><INPUT title="0 27381" type=checkbox value=1 
+      name=checkboxDISKUZE27381></TD>
+    <TD class=date>2004-06-14 18:58:50</TD>
+    <TD class=sender>Morfeus</TD>
+    <TD class=subject>Require</TD></TR>
+  <TR>
+    <TD class=checkbox><INPUT title="1 27382" type=checkbox value=1 
+      name=checkboxDISKUZE27382></TD>
+    <TD class=date>2004-06-14 19:05:01</TD>
+    <TD class=sender>Morfeus</TD>
+    <TD class=subject><IMG class=line alt=. 
+      src="Dynamické generovanie stránky v PHP -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Dynamické generovanie stránky v PHP -- PHP -- Vývoj aplikací -- Interval_cz_soubory/line3.png">Require</TD></TR>
+  <TR>
+    <TD class=checkbox><INPUT title="0 28822" type=checkbox value=1 
+      name=checkboxDISKUZE28822></TD>
+    <TD class=date>2004-08-07 17:41:32</TD>
+    <TD class=sender>error</TD>
+    <TD class=subject>...</TD></TR>
+  <TR>
+    <TD class=checkbox><INPUT title="0 28823" type=checkbox value=1 
+      name=checkboxDISKUZE28823></TD>
+    <TD class=date>2004-08-07 17:42:28</TD>
+    <TD class=sender>error</TD>
+    <TD class=subject>...</TD></TR>
+  <TR>
+    <TD class=checkbox><INPUT title="0 28824" type=checkbox value=1 
+      name=checkboxDISKUZE28824></TD>
+    <TD class=date>2004-08-07 17:47:22</TD>
+    <TD class=sender>error</TD>
+    <TD class=subject>..</TD></TR>
+  <TR>
+    <TD class=checkbox><INPUT title="0 34329" type=checkbox value=1 
+      name=checkboxDISKUZE34329></TD>
+    <TD class=date>2005-01-22 22:58:34</TD>
+    <TD class=sender>pipinko</TD>
+    <TD class=subject>a čo toto...</TD></TR>
+  <TR>
+    <TD class=checkbox><INPUT title="0 35893" type=checkbox value=1 
+      name=checkboxDISKUZE35893></TD>
+    <TD class=date>2005-03-20 19:12:24</TD>
+    <TD class=sender>Václav Prokop</TD>
+    <TD class=subject>Složitý</TD></TR>
+  <TR>
+    <TD class=checkbox><INPUT title="0 38321" type=checkbox value=1 
+      name=checkboxDISKUZE38321></TD>
+    <TD class=date>2005-07-08 15:05:40</TD>
+    <TD class=sender>Ondra</TD>
+    <TD class=subject>Adresa</TD></TR>
+  <TR>
+    <TD class=checkbox><INPUT title="1 43858" type=checkbox value=1 
+      name=checkboxDISKUZE43858></TD>
+    <TD class=date>2006-04-15 09:04:12</TD>
+    <TD class=sender>ghost</TD>
+    <TD class=subject><IMG class=line alt=. 
+      src="Dynamické generovanie stránky v PHP -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Dynamické generovanie stránky v PHP -- PHP -- Vývoj aplikací -- Interval_cz_soubory/line3.png">Adresa</TD></TR>
+  <TR>
+    <TD class=checkbox><INPUT title="0 38665" type=checkbox value=1 
+      name=checkboxDISKUZE38665></TD>
+    <TD class=date>2005-07-22 13:36:29</TD>
+    <TD class=sender>Glorfindel</TD>
+    <TD class=subject>Text v db</TD></TR>
+  <TR>
+    <TD class=checkbox><INPUT title="0 40335" type=checkbox value=1 
+      name=checkboxDISKUZE40335></TD>
+    <TD class=date>2005-09-17 19:49:57</TD>
+    <TD class=sender>Olras</TD>
+    <TD class=subject>Vygenerování title</TD></TR>
+  <TR>
+    <TD class=checkbox><INPUT title="1 42296" type=checkbox value=1 
+      name=checkboxDISKUZE42296></TD>
+    <TD class=date>2006-01-25 21:25:49</TD>
+    <TD class=sender>EiNHorn</TD>
+    <TD class=subject><IMG class=line alt=. 
+      src="Dynamické generovanie stránky v PHP -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Dynamické generovanie stránky v PHP -- PHP -- Vývoj aplikací -- Interval_cz_soubory/line3.png">Vygenerování 
+      title</TD></TR>
+  <TR>
+    <TD class=checkbox><INPUT title="2 42316" type=checkbox value=1 
+      name=checkboxDISKUZE42316></TD>
+    <TD class=date>2006-01-27 05:46:52</TD>
+    <TD class=sender>EiNHorn</TD>
+    <TD class=subject><IMG class=line alt=. 
+      src="Dynamické generovanie stránky v PHP -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Dynamické generovanie stránky v PHP -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Dynamické generovanie stránky v PHP -- PHP -- Vývoj aplikací -- Interval_cz_soubory/line3.png">Vygenerování 
+      title</TD></TR>
+  <TR>
+    <TD class=checkbox><INPUT title="3 42449" type=checkbox value=1 
+      name=checkboxDISKUZE42449></TD>
+    <TD class=date>2006-02-02 16:32:30</TD>
+    <TD class=sender>Jeremy88</TD>
+    <TD class=subject><IMG class=line alt=. 
+      src="Dynamické generovanie stránky v PHP -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Dynamické generovanie stránky v PHP -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Dynamické generovanie stránky v PHP -- PHP -- Vývoj aplikací -- Interval_cz_soubory/invisible.png"><IMG 
+      class=line alt=. 
+      src="Dynamické generovanie stránky v PHP -- PHP -- Vývoj aplikací -- Interval_cz_soubory/line3.png">Vygenerování 
+      title</TD></TR>
+  <TR>
+    <TD class=checkbox><INPUT title="0 43935" type=checkbox value=1 
+      name=checkboxDISKUZE43935></TD>
+    <TD class=date>2006-04-19 09:57:28</TD>
+    <TD class=sender>Vítek</TD>
+    <TD class=subject>ochrana středové stránky</TD></TR>
+  <TR>
+    <TD id=foot colSpan=4><INPUT class=submit id=display_selected type=submit value="Zobrazit vybrané" name=display_selected> 
+      &nbsp; <INPUT class=submit id=display_all type=submit value="Zobrazit vše" name=display_all> 
+      &nbsp; <INPUT class=submit id=add_new type=submit value="Vložit nový" name=add_new></TD></TR></TBODY></TABLE></FORM></DIV></DIV></DIV></DIV>
+<DIV id=page-right>
+<H2 class=textversion>Pravý sloupek</H2>
+<DIV id=search>
+<H3 class=textversion>Vyhledávání</H3>
+<FORM action=http://interval.cz/search.asp method=get>
+<DIV><INPUT class=text name=co> <!--  
+<select name='cim'>
+<option value ='Google' selected='selected'>Google</option>
+<option value ='Jyxo'>Jyxo</option>
+</select>
+<input type='hidden' name='nadpis' value='1' />
+<input type='hidden' name='popis' value='1' />
+<input type='hidden' name='text' value='1' />
+<input type='hidden' name='rubrika' value='0' />
+<input type='hidden' name='autor' value='0' />
+ --><INPUT class=submit type=submit value=Najdi! name=send> </DIV></FORM><!-- <div><a href='http://interval.cz/search.asp'>Rozšířené vyhledávání</a></div> --></DIV><!-- StartKód: adarbo2.bbmedia.cz 3.1 Nestandard  Interval(87) / home page(2) / textbox(1) / nestandard(24) -->
+<SCRIPT type=text/javascript>
+	<!-- <![CDATA[
+	var bbs=screen,bbn=navigator,bbh;bbh='&ubl='+bbn.browserLanguage+'&ucc='+bbn.cpuClass+'&ucd='+bbs.colorDepth+'&uce='+bbn.cookieEnabled+'&udx='+bbs.deviceXDPI+'&udy='+bbs.deviceYDPI+'&usl='+bbn.systemLanguage+'&uje='+bbn.javaEnabled()+'&uah='+bbs.availHeight+'&uaw='+bbs.availWidth+'&ubd='+bbs.bufferDepth+'&uhe='+bbs.height+'&ulx='+bbs.logicalXDPI+'&uly='+bbs.logicalYDPI+'&use='+bbs.fontSmoothingEnabled+'&uto='+(new Date()).getTimezoneOffset()+'&uti='+(new Date()).getTime()+'&uui='+bbs.updateInterval+'&uul='+bbn.userLanguage+'&uwi='+bbs.width;
+	document.write("<scr"+"ipt  language='JavaScript' type='text/javascript' src='http://adarbo2.bbmedia.cz/please/showit/87/2/1/24/?typkodu=non-standard"+bbh+"&alttext=0&border=0&bgcolor=FFFFFF&text=000000&link=0000FF&target=_blank&bust="+Math.random()+"'>");
+	document.write("<"+"\/scr"+"ipt>");
+	//]]> -->
+	</SCRIPT>
+<!-- KonecKód: adarbo2.bbmedia.cz 3.1 Nestandard --><!-- cached 11-knizni_tip.txt -->
+<DIV class="page-right-box book">
+<H3>Knižní tip</H3>
+<DIV class=page-right-box-in>
+<DIV class=book-top>
+<H4><A 
+href="http://interval.inshop.cz/inshop/scripts/detail.asp?kat=094">JavaScript, 
+kompletní průvodce, 2. aktualizované vydání</A></H4></DIV>
+<DIV class=image><A 
+href="http://interval.inshop.cz/inshop/scripts/detail.asp?kat=094"><IMG 
+title="JavaScript, kompletní průvodce, 2. aktualizované vydání" alt=obálka 
+src="Dynamické generovanie stránky v PHP -- PHP -- Vývoj aplikací -- Interval_cz_soubory/K0645.jpg"></A></DIV></DIV></DIV><!-- cached 17-nejctenejsi_clanky.txt -->
+<DIV class="page-right-box reading">
+<H3 title="Nejčtenější články za posledních 28 dnů">Nejčtenější</H3>
+<DIV class=page-right-box-in>
+<UL>
+  <LI><A href="http://interval.cz/clanky/opera-9-pokrocila-konfigurace/">Opera 9 
+  - pokročilá konfigurace</A>
+  <LI><A 
+  href="http://interval.cz/clanky/adobe-photoshop-prakticky-webdesign-jakub-krcmar/">Adobe 
+  Photoshop - praktický webdesign (Jakub Krčmář)</A>
+  <LI><A 
+  href="http://interval.cz/clanky/drupal-tvorba-vlastniho-vzhledu/">Drupal - 
+  tvorba vlastního vzhledu</A>
+  <LI><A 
+  href="http://interval.cz/clanky/pruvodce-svg-dalsi-nastroje-pro-tvorbu-svg-grafiky/">Průvodce 
+  SVG - další nástroje pro tvorbu SVG grafiky</A>
+  <LI><A 
+  href="http://interval.cz/clanky/spravy-zo-slovenskeho-internetu-8/">Správy zo 
+  slovenského internetu 8.</A></LI></UL></DIV></DIV>
+<DIV class=merak-box style="MARGIN-TOP: 1.5em; TEXT-ALIGN: center">
+<DIV id=merak-content 
+style="BORDER-RIGHT: #000000 1px solid; BORDER-TOP: #000000 1px solid; FONT-WEIGHT: bold; FONT-SIZE: 11px; BACKGROUND-IMAGE: url(http://interval.cz/__services/__include_right/merak-background.png); MARGIN: 0px auto; BORDER-LEFT: #000000 1px solid; WIDTH: 160px; BORDER-BOTTOM: #000000 1px solid; BACKGROUND-REPEAT: no-repeat; FONT-FAMILY: Verdana, Arial, sans-serif; HEIGHT: 190px; TEXT-ALIGN: left; FONT-VARIANT: small-caps">
+<H3 style="FONT-SIZE: 12px; MARGIN: 55px 0px 10px 10px; FONT-VARIANT: normal"><A 
+title="Merak Mail Server 8" 
+style="COLOR: #000000; BACKGROUND-COLOR: transparent; TEXT-DECORATION: none" 
+href="http://www.merak-mail-server.cz/">Merak Mail Server 8</A></H3>
+<DIV id=merak-proclamation style="PADDING-LEFT: 10px">Integrovaný <EM><A 
+title="Merak Mail Server 8" 
+style="COLOR: #35a0df; FONT-STYLE: normal; BACKGROUND-COLOR: transparent; TEXT-DECORATION: none" 
+href="http://www.merak-mail-server.cz/">antispam</A></EM> <BR>Snadná <EM><A 
+title="Merak Mail Server 8" 
+style="COLOR: #35a0df; FONT-STYLE: normal; BACKGROUND-COLOR: transparent; TEXT-DECORATION: none" 
+href="http://www.merak-mail-server.cz/">instalace</A></EM> <BR>Zabezpečený 
+<EM><A title="Merak Mail Server 8" 
+style="COLOR: #35a0df; FONT-STYLE: normal; BACKGROUND-COLOR: transparent; TEXT-DECORATION: none" 
+href="http://www.merak-mail-server.cz/">groupware</A></EM> </DIV></DIV></DIV>
+<DIV class="page-right-box emailserv">
+<H3>Info servis</H3>
+<DIV class=page-right-box-in>
+<UL>
+  <LI><A title="Exporty aktuálních informací ve formátech Atom, RDF a RSS" 
+  href="http://export.interval.cz/">Atom, RDF, RSS</A> 
+  <LI>Informace e-mailem: </LI></UL>
+<FORM action=prihlaseni.asp method=post>
+<DIV class=shell><INPUT class=text name=adresa></DIV>
+<DIV class=shell><INPUT class=radio type=radio CHECKED value=1 name=co>Týdenní 
+přehled článků</DIV>
+<DIV class=shell><INPUT class=radio type=radio value=2 name=co>HELP 
+konference</DIV>
+<DIV 
+class=shell><INPUT class=submit type=submit value=Přihlásit></DIV></FORM></DIV></DIV>
+<DIV class=advertising-vertical-banner-outer>
+<DIV class=advertising-vertical-banner-inner><!-- Skyscraper Right --><!-- BBSTART Interval.cz/Skyscraper Right/rolovací/Skyscraper 120x600 -->
+<SCRIPT type=text/javascript>/* <![CDATA[ */
+var bbat=0,bbbr=0,bbtt='_blank',bbpath='17877/4/2/9',bbxl=1,bbac=1;
+//]]></SCRIPT>
+
+<SCRIPT 
+src="Dynamické generovanie stránky v PHP -- PHP -- Vývoj aplikací -- Interval_cz_soubory/bb4.js" 
+type=text/javascript></SCRIPT>
+<NOSCRIPT>
+<DIV><A href="http://ad2.billboard.cz/please/redirect/17877/4/2/9/"><IMG 
+style="BORDER-RIGHT: 0px; BORDER-TOP: 0px; BORDER-LEFT: 0px; BORDER-BOTTOM: 0px" 
+height=600 alt=. 
+src="Dynamické generovanie stránky v PHP -- PHP -- Vývoj aplikací -- Interval_cz_soubory/fallback9.gif" 
+width=120></A></DIV></NOSCRIPT><!-- BBKONEC --></DIV></DIV><!-- cached 17-nejdiskutovanejsi_clanky.txt -->
+<DIV class="page-right-box cauldron">
+<H3 title="Nejdiskutovanější články za posledních 28 dnů">Diskuzní kotel</H3>
+<DIV class=page-right-box-in>
+<UL>
+  <LI><A title="(103 komentářů)" 
+  href="http://interval.cz/clanky/opera-9-pokrocila-konfigurace/">Opera 9 - 
+  pokročilá konfigurace</A>
+  <LI><A title="(4 komentářů)" 
+  href="http://interval.cz/clanky/pruvodce-svg-dalsi-nastroje-pro-tvorbu-svg-grafiky/">Průvodce 
+  SVG - další nástroje pro tvorbu SVG grafiky</A>
+  <LI><A title="(2 komentářů)" 
+  href="http://interval.cz/clanky/drupal-tvorba-vlastniho-vzhledu/">Drupal - 
+  tvorba vlastního vzhledu</A>
+  <LI><A title="(2 komentářů)" 
+  href="http://interval.cz/clanky/spravy-zo-slovenskeho-internetu-9/">Správy zo 
+  slovenského internetu 9.</A>
+  <LI><A title="(1 komentářů)" 
+  href="http://interval.cz/clanky/lokalizace-asp-net-2-x-aplikaci/">Lokalizace 
+  ASP.NET 2.x aplikací</A></LI></UL></DIV></DIV></DIV>
+<DIV class=page-maker>&nbsp;</DIV>
+<DIV class=page-maker-white>&nbsp;</DIV></DIV>
+<DIV id=advertising-page-bottom>
+<DIV id=advertising-page-bottom-left>
+<DIV><!-- Full Banner Bottom --><!-- BBSTART Interval.cz/Full Banner Bottom/rolovací/Full Banner 468x60 -->
+<SCRIPT type=text/javascript>/* <![CDATA[ */
+var bbat=0,bbbr=0,bbtt='_blank',bbpath='17877/1/2/1',bbxl=1,bbac=1;
+//]]></SCRIPT>
+
+<SCRIPT 
+src="Dynamické generovanie stránky v PHP -- PHP -- Vývoj aplikací -- Interval_cz_soubory/bb4.js" 
+type=text/javascript></SCRIPT>
+<NOSCRIPT>
+<DIV><A href="http://ad2.billboard.cz/please/redirect/17877/1/2/1/"><IMG 
+style="BORDER-RIGHT: 0px; BORDER-TOP: 0px; BORDER-LEFT: 0px; BORDER-BOTTOM: 0px" 
+height=60 alt=. 
+src="Dynamické generovanie stránky v PHP -- PHP -- Vývoj aplikací -- Interval_cz_soubory/fallback1.gif" 
+width=468></A></DIV></NOSCRIPT><!-- BBKONEC --></DIV></DIV>
+<DIV id=advertising-page-bottom-right>
+<DIV><!-- Button2 Bottom --><!-- BBSTART Interval.cz/Button2 Bottom/rolovací/Button 2 120x60 -->
+<SCRIPT type=text/javascript>/* <![CDATA[ */
+var bbat=0,bbbr=0,bbtt='_blank',bbpath='17877/2/2/6',bbxl=1,bbac=1;
+//]]></SCRIPT>
+
+<SCRIPT 
+src="Dynamické generovanie stránky v PHP -- PHP -- Vývoj aplikací -- Interval_cz_soubory/bb4.js" 
+type=text/javascript></SCRIPT>
+<NOSCRIPT>
+<DIV><A href="http://ad2.billboard.cz/please/redirect/17877/2/2/6/"><IMG 
+style="BORDER-RIGHT: 0px; BORDER-TOP: 0px; BORDER-LEFT: 0px; BORDER-BOTTOM: 0px" 
+height=60 alt=. 
+src="Dynamické generovanie stránky v PHP -- PHP -- Vývoj aplikací -- Interval_cz_soubory/fallback6.gif" 
+width=120></A></DIV></NOSCRIPT><!-- BBKONEC --></DIV></DIV>
+<DIV class=page-maker>&nbsp;</DIV></DIV>
+<DIV id=page-foot>
+<DIV id=page-foot-menu><A href="http://interval.cz/redakce-inzerce.asp">Inzerce 
+na Interval.cz</A> &nbsp;|&nbsp; <A 
+href="http://interval.cz/redakce.asp">Redakce Interval.cz</A> &nbsp;|&nbsp; <A 
+href="http://interval.cz/autori.asp">Hledáme nové autory</A> </DIV>
+<DIV id=issn><A class=noprint 
+href="http://jigsaw.w3.org/css-validator/validator?uri=http%3A%2F%2Finterval.cz%3A80%2Fclanky%2Fdynamicke-generovanie-stranky-v-php%2F">.</A> 
+ISSN 1212-8651 <A class=noprint 
+href="http://validator.w3.org/check?uri=http%3A%2F%2Finterval.cz%3A80%2Fclanky%2Fdynamicke-generovanie-stranky-v-php%2F&amp;charset=%28detect+automatically%29&amp;doctype=%28detect+automatically%29&amp;outline=1&amp;verbose=1">.</A> 
+</DIV>
+<DIV id=page-foot-zoner>© Zoner software, s.r.o., všechna práva vyhrazena, tento 
+server dodržuje <A href="http://interval.cz/privacy.asp">právní předpisy</A> o 
+ochraně osobních údajů. </DIV></DIV>
+<SCRIPT 
+src="Dynamické generovanie stránky v PHP -- PHP -- Vývoj aplikací -- Interval_cz_soubory/audits-footer.js" 
+type=text/javascript></SCRIPT>
+
+<SCRIPT 
+src="Dynamické generovanie stránky v PHP -- PHP -- Vývoj aplikací -- Interval_cz_soubory/urchin.js" 
+type=text/javascript>
+</SCRIPT>
+
+<SCRIPT type=text/javascript>
+_uacct = "UA-173085-1";
+
+var len = _uOsr.length;
+_uOsr[len]="seznam.cz";       _uOkw[len]="w";
+_uOsr[len+1]="centrum.cz";    _uOkw[len+1]="q";
+_uOsr[len+2]="jyxo.cz";       _uOkw[len+2]="s";
+_uOsr[len+3]="atlas.cz";      _uOkw[len+3]="q";
+_uOsr[len+4]="zoohoo.cz";     _uOkw[len+4]="q";
+_uOsr[len+5]="tiscali.cz";    _uOkw[len+5]="query";
+_uOsr[len+6]="1.cz";          _uOkw[len+6]="q";
+_uOsr[len+7]="volny.cz";      _uOkw[len+7]="search";
+
+urchinTracker();
+</SCRIPT>
+</BODY></HTML>

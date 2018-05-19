@@ -1,0 +1,387 @@
+<?php
+/*
+ * section.php
+ *
+ * Copyright 2013 geniv <geniv.radek@gmail.com>
+ *
+ */
+
+  namespace classes;
+
+  /**
+   * builder sekci
+   * - nejen pro admin sekce
+   * - ma blizke zavislosti na: TplForm
+   *
+   * @package unstable
+   * @author geniv
+   * @version 1.50
+   */
+  class Section {
+
+    private $table = null;
+    private $pk_id = null;
+
+    private $form = null;
+
+    private $uri_action = '$uri.action';  // adresa action
+    private $uri_id = '$uri.id';  // adresa id
+
+    private $weburl = '$weburl';
+    private $form_var = '$__form';
+
+    private $submit_button = '__tl__'; // defaultni name odesilaciho tlacitka
+
+    private $form_columns = array();
+    private $code = array();
+//TODO potreba dostylovat podle nejake kostry...?!
+    /**
+     * defaultni konstruktor
+     *
+     * @since 1.00
+     * @param
+     * @param
+     */
+    public function __construct() { //FIXME vyhodit z parametru oba parametry a dat zvlast!!
+      //TODO nazev kam?$table,
+      //TODO adresy na $url, action a id???
+      //TODO kontrola zavislosti z TPL?
+      //~ $this->table = $table;
+      //~ $this->main_id = $main_id;$main_id
+    }
+  //TODO nastavovani action/id co jde z URI
+    /**
+     * tovarni konstruktor
+     *
+     * @since 1.20
+     * @param string
+     * @param string
+     * @return Section vlastni instance
+     */
+    public static function builder() {  //$table, $main_id
+      $b = new self;//($table, $main_id);
+      return $b;
+    }
+
+    /**
+     * nastaveni manipulacni tabulk v databazi
+     *
+     * @since 1.26
+     * @param string name jmeno tabulky
+     * @param string pk_id jmeno primarniho sloupce s auto incrementem
+     * @return this
+     */
+    public function setTable($name, $pk_id) {
+      $this->table = $name;
+      $this->pk_id = $pk_id;
+      return $this;
+    }
+
+    /**
+     * nastavovani uri action a id pro adresovani
+     *
+     * @since 1.28
+     * @param string action jmeno uri pro action
+     * @param string id jmeno uri pro id
+     * @return this
+     */
+    public function setUriAddress($action, $id) {
+      $this->uri_action = $action;
+      $this->uri_id = $id;
+      return $this;
+    }
+
+    /**
+     * nastaveni web url pro dany formular
+     *
+     * @since 1.00
+     * @param string url
+     * @return this
+     */
+    public function setWeburl($url) {
+      $this->weburl = $url;
+      return $this;
+    }
+
+    /**
+     * nastaveni hlavnich uzivanych sloupcu pri vypisu a editaci
+     *
+     * @since 1.40
+     * @param array columns pole sloupcu
+     * @return this
+     */
+    public function setFormColumns($columns) {
+      $this->form_columns = $columns;
+      return $this;
+    }
+
+    /**
+     * nastaveni odesilaciho tlacitka
+     *
+     * @since 1.24
+     * @param string name nove jmeno odesilaciho tlacitka
+     * @return this
+     */
+    public function setSubmitButton($name) {
+      $this->submit_button = $name;
+      return $this;
+    }
+//TODO normalizovat nazvy!!!
+    /**
+     * nastaveni formularoveho kompilatoru
+     *
+     * @since 1.04
+     * @param string|TplForm form textovy zdrojovy kod formulare nebo instance jiz vytvoreneho formulare
+     * @param array settings pole nastaveni pro formular (pokud je formular vytvoren vnitrne)
+     * @param string form_var jmeno promenne formulare
+     * @return this
+     */
+    public function setForm($form, $settings = array(), $form_var = null) { // pro formular na sekci add/edit
+      if (is_string($form)) { //pokud je vlozeny kod udelasi vlastni instanci
+        $this->form = new TplForm($form, $settings);
+        $this->form->setSubmittedBy($this->submit_button); // kdyz se necha vytvorit zada vlastni odesilaci tlacitko
+      } else
+      if ($form instanceof TplForm) { //pokud je vlozena instance formulare
+        $this->form = $form;
+      }
+      $this->form_var = $form_var ?: $this->form_var;
+      return $this;
+    }
+
+    /**
+     * nacteni instance formularoveho kompilatoru
+     *
+     * @since 1.08
+     * @param void
+     * @return TplForm instance forumare
+     */
+    public function getForm() {
+      return $this->form;
+    }
+
+    /**
+     * prida volitelnou sekci bez vnitniho kodu
+     *
+     * @since 1.42
+     * @param array settings pole nastaveni
+     * @return this
+     */
+    public function set($settings = array()) {
+      $_url = isset($settings['url']) ? $settings['url'] : null;
+      $_code = isset($settings['code']) ? $settings['code'] : null;
+      $this->code[] = '
+  {if="isset('.$this->uri_action.') && '.$this->uri_action.'==\''.$_url.'\'"}
+    '.$_code.'
+  {/if}';
+      return $this;
+    }
+
+    /**
+     * pridani defaultni vypisovaci sekce
+     *
+     * @since 1.02
+     * @param array settings pole nastaveni
+     * @return this
+     */
+    public function setDefault($settings = array()) {
+      $cols = array_merge(array($this->pk_id), $this->form_columns);
+
+      $_url = isset($settings['url']) ? $settings['url'] : null;
+      $_order = isset($settings['order']) ? '\''.$settings['order'].'\'' : 'null';
+
+      $_add_link = isset($settings['add_link']) ? $settings['add_link'] : '<a href="'.$this->weburl.'add" class="btn btn-success btn-success13 btn-large">Přidat</a><br />';
+      $_edit_link = isset($settings['edit_link']) ? $settings['edit_link'] : '<a href="'.$this->weburl.'edit/{$value->'.$this->pk_id.'}">edit</a>';
+      $_del_link = isset($settings['del_link']) ? $settings['del_link'] : '<a href="'.$this->weburl.'del/{$value->'.$this->pk_id.'}" onclick="return confirm(\'Opravdu chceš smazat: &quot;{$value[1]}&quot; ?\')">del</a>';
+      $_row = isset($settings['row']) ? $settings['row'] : '{$value->'.implode('}, {$value->', $this->form_columns).'}';
+      $_empty = isset($settings['empty']) ? $settings['empty'] : 'žádná položka';
+
+      $_columns = isset($settings['columns']) ? $settings['columns'] : 'array(\''.implode('\', \'', $cols).'\')';
+      $_query = isset($settings['query']) ? $settings['query'] : '$db->query(\''.$this->table.'\', '.$_columns.', null, null, null, null, '.$_order.')';
+
+      $this->code[] = '
+  {if="isset('.$this->uri_action.') && '.$this->uri_action.'==\''.$_url.'\'"}
+
+
+
+
+
+  <div class="grid_8 addbtn">
+    '.$_add_link.'
+  </div>
+
+
+
+
+
+
+
+
+  <div class="mws-panel grid_8">
+    <div class="mws-panel-header">
+      <span>nazev polozky</span>
+    </div>
+    <div class="mws-panel-body no-padding">
+      <div class="mws-panel-body no-border">
+        obsah polozky
+      </div>
+      <div class="mws-button-row">
+        <a href="#" class="btn btn-primary btn-primary3 btn-small">Upravit</a>
+        <a href="#" class="btn btn-danger btn-danger28 btn-small">Smazat</a>
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+    <ul>
+
+
+    {loop="'.$_query.'"}
+
+
+
+      <li>'.$_row.' '.$_edit_link.' '.$_del_link.'</li>
+
+
+
+    {emptyloop}
+      '.$_empty.'
+    {/loop}
+
+
+    </ul>
+
+
+
+
+
+  {/if}';
+
+      return $this;
+    }
+
+    /**
+     * pridani pridavaci sekce
+     *
+     * @since 1.04
+     * @param array settings pole nastaveni
+     * @return this
+     */
+    public function add($settings = array()) {
+      $_url = isset($settings['url']) ? $settings['url'] : 'add';
+      $contents = isset($settings['contents']) ? $settings['contents'] : null;
+
+      //TODO predelat na pole!! ++ umoznit pridavat nejakym boolem a zapinat aktualni cas na added/edited/deleted -- 'putDate'(added)
+      $this->code[] = '
+  {if="isset('.$this->uri_action.') && '.$this->uri_action.'==\''.$_url.'\'"}
+    <a href="'.$this->weburl.'">back</a><br />
+    {'.$this->form_var.'->setReturnValues($_POST)->addSubmit(\''.$this->submit_button.'\', \'Přidat\')->setAutoHide()}
+    {if="'.$this->form_var.'->isSubmitted()"}
+      {if="'.$this->form_var.'->isValid()"}
+        {code}
+          $values = '.$this->form_var.'->getValues();
+          $cv = $content::init($values)->remove(\''.$this->submit_button.'\');
+          $__cont = '.var_export($contents, true).';
+          if ($__cont) {
+            $cv->put($__cont);
+          }
+        {/code}
+        {$_id = $db->insertOrThrow(\''.$this->table.'\', $cv)}
+        bylo vloženo id asi: {$_id}
+        {$core::setRefresh(2, \''.$this->weburl.'\')}
+      {else}
+        {loop="'.$this->form_var.'->getErrors()"}
+          chyba: {$value}<br />
+        {/loop}
+      {/if}
+    {/if}
+  {/if}';
+
+      return $this;
+    }
+
+    /**
+     * pridani editacni sekce
+     *
+     * @since 1.06
+     * @param array settings pole nastaveni
+     * @return this
+     */
+    public function edit($settings = array()) {
+      $_url = isset($settings['url']) ? $settings['url'] : 'edit';
+
+      //TODO opet umoznit vetsi editaci pres pole, + putDate + jak se dostat na specialni pripady formularu?
+  $this->code[] = '
+  {if="isset('.$this->uri_action.') && '.$this->uri_action.'==\''.$_url.'\' && is_numeric('.$this->uri_id.')"}
+    {$cursor = $db->query(\''.$this->table.'\', array(\''.implode('\', \'', $this->form_columns).'\'), \''.$this->pk_id.'=?\', array('.$this->uri_id.'))}
+    {$data = $cursor->getFirst()}
+    <a href="'.$this->weburl.'">back</a><br />
+    {'.$this->form_var.'->setDefaults($data)->setReturnValues($_POST)->addSubmit(\''.$this->submit_button.'\', \'Upravit\')->setAutoHide()}
+    {if="'.$this->form_var.'->isSubmitted()"}
+      {if="'.$this->form_var.'->isValid()"}
+        {$values = '.$this->form_var.'->getValues()}
+        {$rows = $db->update(\''.$this->table.'\', $content::init($values)->remove(\''.$this->submit_button.'\'), \''.$this->pk_id.'=?\', array('.$this->uri_id.'))}
+        afektovano řádku: {$rows}
+        {$core::setRefresh(2, \''.$this->weburl.'\')}
+      {else}
+        {loop="'.$this->form_var.'->getErrors()"}
+          chyba: {$value}<br />
+        {/loop}
+      {/if}
+    {/if}
+  {/if}';
+
+      return $this;
+    }
+
+    /**
+     * pridani mazaci sekce
+     *
+     * @since 1.06
+     * @param array settings pole nastaveni
+     * @return this
+     */
+    public function del($settings = array()) {
+      $_url = isset($settings['url']) ? $settings['url'] : 'del';
+
+      //TODO dostat na pole tady neni nic extra... teda pokud nebudou specialni mazaci sql dotazy
+  $this->code[] = '
+  {if="isset('.$this->uri_action.') && '.$this->uri_action.'==\''.$_url.'\' && is_numeric('.$this->uri_id.')"}
+    {$rows = $db->delete(\''.$this->table.'\', \''.$this->pk_id.'=?\', array('.$this->uri_id.'))}
+    afektovano: {$rows}, a tedy smazano...
+    {$core::setRefresh(2, \''.$this->weburl.'\')}
+  {/if}';
+
+      return $this;
+    }
+
+    //prida jazykovou podporu (1.48)
+    public function setLangSupport() {
+      return $this;
+    }
+
+    //defaultni vypisovaci sekce s podporou jazyka (1.48)
+    public function setLangDefault($settings = array()) {
+      return $this;
+    }
+
+    //pridani pridavaci sekce s podporou jazyka (1.50)
+    public function langAdd($settings = array()) {
+      $_url = isset($settings['url']) ? $settings['url'] : 'add';
+      return $this;
+    }
+
+    /**
+     * samotne renderovani obsahu, spojeni kodu do jednoho retezce ktery se predava kompilaci
+     * - TPL prikazu {compile="$section->render()"}
+     *
+     * @since 1.04
+     * @param void
+     * @return string spojeny kod na kompilaci
+     */
+    public function render() {
+      return implode(PHP_EOL, $this->code);
+    }
+  }

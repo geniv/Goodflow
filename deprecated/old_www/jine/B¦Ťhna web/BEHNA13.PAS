@@ -1,0 +1,14 @@
+program kladne; { zjisteni kladnosti cisla }
+var cis:integer;
+begin
+repeat
+writeln('Zadej nejake cislo:');
+readln(cis);
+if cis=0 then writeln('Zadali jste nulu!');
+until cis<>0;
+if cis<0 then
+ writeln('Cislo: ',cis,' je zaporne')
+else
+ writeln('Cislo: ',cis,' je kladne');
+readln;
+end.

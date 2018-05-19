@@ -1,0 +1,42 @@
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>
+      Použití metody createElement pro vytváření nových elementů
+    </title>
+
+    <script language="JavaScript">
+      function vytvor() 
+      {
+        var novyDiv, novePole, novyText;
+
+        novyDiv = document.createElement("div");
+        novyDiv.id = "novyDiv";
+
+        novePole = document.createElement("input");
+        novePole.type = "text";
+        novePole.value = "Ahoj světe!"
+
+        novyText = document.createTextNode("Zde je textové pole: ");
+
+        novyDiv.insertBefore(novyText, null);
+        novyDiv.insertBefore(novePole, null);
+
+        document.body.insertBefore(novyDiv, null);
+      }
+    </script>
+  </head>
+
+  <body>
+    <center>
+      <h1>
+        Použití metody createElement pro vytváření nových elementů
+      </h1>
+    </center>
+
+    <div id="hlavniDiv">
+      <input type="button" value="Stiskni mě" onclick="vytvor()">
+    </div>
+
+  </body>
+</html>

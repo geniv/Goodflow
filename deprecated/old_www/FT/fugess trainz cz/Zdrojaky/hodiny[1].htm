@@ -1,0 +1,22 @@
+<html>
+<head>
+<script>
+function cas(){
+date = new Date();
+with (date){
+h = getHours();
+m = getMinutes();
+s = getSeconds();
+}
+if (m<10)
+m = "0"+m;
+if (s<10)
+s = "0"+s;
+popis.innerHTML=h+":"+m+":"+s; 
+window.setTimeout("cas();",1000);
+}
+</script> 
+</head>
+<body onLoad="cas();">
+<span id="popis"></span>
+</body></html>

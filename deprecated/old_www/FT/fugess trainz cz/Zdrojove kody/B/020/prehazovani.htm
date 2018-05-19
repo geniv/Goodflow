@@ -1,0 +1,56 @@
+<HTML>
+  <HEAD>
+    <TITLE>Pøehazování</TITLE>
+    <SCRIPT Language="JavaScript">
+      <!--
+      // Funkce pro pøehození dvou položek
+      function MoveItem (It1, It2) {
+        // Index první vybrané položky
+        var Index = It1.selectedIndex;
+        // Pokud je nìjaká položka vybraná...
+        if (Index > -1) {
+          // Vytvoøí se kopie položky
+          var NewOption = new Option(
+            It1.options[Index].text,
+            It1.options[Index].value,
+            false, true
+          );
+
+          // Kopie se pøidá do druhé nabídky
+          It2.options[It2.length] = NewOption;
+          // V té první se smaže
+          It1.options[Index] = null;
+          // A jako aktivní se nastaví první položka
+          It1.selectedIndex = 0;
+        }
+      }
+      // -->
+    </SCRIPT>
+  </HEAD>
+  
+  <BODY>
+    <FORM Name="frmMain">
+    
+      <INPUT Type="button" Value="--->" onClick=
+        "MoveItem (document.frmMain.selList1, document.frmMain.selList2)">
+
+      <INPUT Type="button" Value="<---" onClick=
+        "MoveItem (document.frmMain.selList2, document.frmMain.selList1)">
+      <BR>
+      
+      <SELECT name="selList1" Size=6>
+      <OPTION Value="Item0">Položka 0</OPTION>
+      <OPTION Value="Item1">Položka 1</OPTION>
+      <OPTION Value="Item2">Položka 2</OPTION>
+      <OPTION Value="Item3">Položka 3</OPTION>
+      <OPTION Value="Item4">Položka 4</OPTION>
+      <OPTION Value="Item5">Položka 5</OPTION>
+      </SELECT>
+      
+      <SELECT Name="selList2" Size=6>
+      </SELECT>
+      
+    </FORM>
+  </BODY>
+</HTML>
+

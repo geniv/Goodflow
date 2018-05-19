@@ -1,0 +1,1117 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>Eshop postaveny na PHP layoutu: Zdrojový soubor /var/www/eshop_foltyn/funkce.php</title>
+<link href="doxygen.css" rel="stylesheet" type="text/css">
+<link href="tabs.css" rel="stylesheet" type="text/css">
+</head><body>
+<!-- Generováno programem Doxygen 1.5.5 -->
+<div class="navigation" id="top">
+  <div class="tabs">
+    <ul>
+      <li><a href="index.html"><span>Hlavní&nbsp;stránka</span></a></li>
+      <li><a href="annotated.html"><span>Třídy</span></a></li>
+      <li class="current"><a href="files.html"><span>Soubory</span></a></li>
+    </ul>
+  </div>
+<h1>/var/www/eshop_foltyn/funkce.php</h1><a href="funkce_8php.html">Zobrazit dokumentaci tohoto souboru.</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 &lt;?php
+<a name="l00002"></a>00002 
+<a name="l00034"></a><a class="code" href="classFunkce.html">00034</a> <span class="keyword">class </span><a class="code" href="classFunkce.html">Funkce</a>
+<a name="l00035"></a>00035 {
+<a name="l00036"></a><a class="code" href="classFunkce.html#779d6a431df9aae8f19b5740c9b499b4">00036</a>   <span class="keyword">private</span> <a class="code" href="classFunkce.html#779d6a431df9aae8f19b5740c9b499b4">$var</a>;
+<a name="l00037"></a><a class="code" href="classFunkce.html#0e6e074acfb123ea7d26eba2f8483ecb">00037</a>   <span class="keyword">private</span> <a class="code" href="classFunkce.html#0e6e074acfb123ea7d26eba2f8483ecb">$start</a>, <a class="code" href="classFunkce.html#e5174587f8a13f14df423df187f5394b">$konec</a>;
+<a name="l00038"></a><a class="code" href="classFunkce.html#f698f8f5233df3f35f90307f3b5f0179">00038</a>   <span class="keyword">private</span> <a class="code" href="classFunkce.html#f698f8f5233df3f35f90307f3b5f0179">$idmodul</a> = <span class="stringliteral">"funkce"</span>;
+<a name="l00039"></a><a class="code" href="classFunkce.html#806c8dbb2998a2138520479bb6c43569">00039</a>   <span class="keyword">private</span> <a class="code" href="classFunkce.html#806c8dbb2998a2138520479bb6c43569">$idzaloha</a> = <span class="stringliteral">"zaloha"</span>;
+<a name="l00040"></a><a class="code" href="classFunkce.html#c1df9b680b7abbe7a120b290b4a0ca28">00040</a>   <span class="keyword">private</span> <a class="code" href="classFunkce.html#c1df9b680b7abbe7a120b290b4a0ca28">$iddelzal</a> = <span class="stringliteral">"delzal"</span>;
+<a name="l00041"></a><a class="code" href="classFunkce.html#f671170b0e75f79c7e43b6a14ad4e2cc">00041</a>   <span class="keyword">private</span> <a class="code" href="classFunkce.html#f671170b0e75f79c7e43b6a14ad4e2cc">$idupp</a> = <span class="stringliteral">"up"</span>;
+<a name="l00045"></a><a class="code" href="classFunkce.html#3d39cda468f246b7e6841b96f433232b">00045</a>   <span class="keyword">private</span> <a class="code" href="classFunkce.html#3d39cda468f246b7e6841b96f433232b">$autozaloha</a> = <span class="keyword">true</span>;
+<a name="l00049"></a><a class="code" href="classFunkce.html#93b1d408b4221e97bd93f9d7951ecc7f">00049</a>   <span class="keyword">private</span> <a class="code" href="classFunkce.html#93b1d408b4221e97bd93f9d7951ecc7f">$zalohadir</a> = <span class="stringliteral">"db"</span>;
+<a name="l00050"></a>00050 
+<a name="l00059"></a><a class="code" href="classFunkce.html#2211555f6119a442ebd7b1c855906969">00059</a>   <span class="keyword">public</span> function <a class="code" href="classFunkce.html#2211555f6119a442ebd7b1c855906969">__construct</a>(&amp;<a class="code" href="classFunkce.html#779d6a431df9aae8f19b5740c9b499b4">$var</a>, $index) <span class="comment">//konstruktor</span>
+<a name="l00060"></a>00060   {
+<a name="l00061"></a>00061     $this-&gt;var = <a class="code" href="classFunkce.html#779d6a431df9aae8f19b5740c9b499b4">$var</a>;
+<a name="l00062"></a>00062 
+<a name="l00063"></a>00063     <span class="keywordflow">if</span> ($this-&gt;var-&gt;autoklenot)  <span class="comment">//kdyz bude IP v bloku tak jde o lokalhost tedy, o klenot se nejedna</span>
+<a name="l00064"></a>00064     {
+<a name="l00065"></a>00065       $this-&gt;var-&gt;klenot = (!in_array($_SERVER[<span class="stringliteral">"REMOTE_ADDR"</span>], $this-&gt;var-&gt;ipblok) ? <span class="keyword">true</span> : <span class="keyword">false</span>);
+<a name="l00066"></a>00066     }
+<a name="l00067"></a>00067 
+<a name="l00068"></a>00068     <span class="comment">//$this-&gt;Instalace();</span>
+<a name="l00069"></a>00069 
+<a name="l00070"></a>00070     $this-&gt;<a class="code" href="classFunkce.html#69911132bb6199619c01dfd49855aa71">Prihlasovani</a>();
+<a name="l00071"></a>00071 
+<a name="l00072"></a>00072     $this-&gt;<a class="code" href="classFunkce.html#a1aa6b1dca86c8925458c1ac99533ad3">AutoZalohovani</a>();
+<a name="l00073"></a>00073   }
+<a name="l00074"></a>00074 
+<a name="l00083"></a><a class="code" href="classFunkce.html#43fa9aee80305cdab2f741ec01eb96ed">00083</a>   <span class="keyword">public</span> function <a class="code" href="classFunkce.html#43fa9aee80305cdab2f741ec01eb96ed">NactiFunkci</a>($index, $funkce)
+<a name="l00084"></a>00084   {
+<a name="l00085"></a>00085     $paramatr = func_get_args();
+<a name="l00086"></a>00086     $pocet = func_num_args();
+<a name="l00087"></a>00087     $argv = array();
+<a name="l00088"></a>00088     <span class="keywordflow">if</span> ($pocet &gt; 2)
+<a name="l00089"></a>00089     {
+<a name="l00090"></a>00090       <span class="keywordflow">for</span> ($i = 2, $j = 0; $i &lt; $pocet; $i++, $j++)
+<a name="l00091"></a>00091       {
+<a name="l00092"></a>00092         $argv[$j] = $paramatr[$i];  <span class="comment">//prevedeni parametru</span>
+<a name="l00093"></a>00093       }
+<a name="l00094"></a>00094     }
+<a name="l00095"></a>00095 
+<a name="l00096"></a>00096     <span class="keywordflow">if</span> (is_string($index))
+<a name="l00097"></a>00097     {
+<a name="l00098"></a>00098       $cis = -1;
+<a name="l00099"></a>00099       <span class="keywordflow">for</span> ($i = 0; $i &lt; count($this-&gt;var-&gt;moduly); $i++)
+<a name="l00100"></a>00100       {
+<a name="l00101"></a>00101         <span class="keywordflow">if</span> ($this-&gt;var-&gt;moduly[$i][<span class="stringliteral">"class"</span>] == $index)
+<a name="l00102"></a>00102         {
+<a name="l00103"></a>00103           $cis = $i;
+<a name="l00104"></a>00104           <span class="keywordflow">break</span>;
+<a name="l00105"></a>00105         }
+<a name="l00106"></a>00106       }
+<a name="l00107"></a>00107 
+<a name="l00108"></a>00108       <span class="keywordflow">if</span> ($cis == -1)
+<a name="l00109"></a>00109       {
+<a name="l00110"></a>00110         $this-&gt;<a class="code" href="classFunkce.html#3d1531aa7d5ceccbc6030d14455749db">ErrorMsg</a>(<span class="stringliteral">"POZOR! Nepodařilo se najít třídu s názvem: ''{$index}'' !!"</span>);
+<a name="l00111"></a>00111       }
+<a name="l00112"></a>00112         <span class="keywordflow">else</span>
+<a name="l00113"></a>00113       {
+<a name="l00114"></a>00114         $index = $cis;
+<a name="l00115"></a>00115       }
+<a name="l00116"></a>00116     }
+<a name="l00117"></a>00117 <span class="comment">//var_dump($this-&gt;var-&gt;moduly[$index]["class"]);</span>
+<a name="l00118"></a>00118     $result = <span class="stringliteral">""</span>;
+<a name="l00119"></a>00119     <span class="keywordflow">if</span> ($cis != -1)
+<a name="l00120"></a>00120     {
+<a name="l00121"></a>00121       <span class="keywordflow">if</span> (method_exists($this-&gt;var-&gt;moduly[$index][<span class="stringliteral">"class"</span>], $funkce))
+<a name="l00122"></a>00122       {
+<a name="l00123"></a>00123         $result = call_user_func_array(array($this-&gt;var-&gt;main[$index], $funkce), $argv);  <span class="comment">//trida::funkce, parametry</span>
+<a name="l00124"></a>00124       }
+<a name="l00125"></a>00125         <span class="keywordflow">else</span>
+<a name="l00126"></a>00126       {
+<a name="l00127"></a>00127         <span class="keywordflow">if</span> (!Empty($this-&gt;var-&gt;moduly[$index][<span class="stringliteral">"class"</span>]))
+<a name="l00128"></a>00128         {
+<a name="l00129"></a>00129           $this-&gt;<a class="code" href="classFunkce.html#3d1531aa7d5ceccbc6030d14455749db">ErrorMsg</a>(<span class="stringliteral">"POZOR! U třídy: ''{$this-&gt;var-&gt;moduly[$index]["</span><span class="keyword">class</span><span class="stringliteral">"]}'' se neporařilo načíst funkci: ''{$funkce}''!"</span>);
+<a name="l00130"></a>00130         }
+<a name="l00131"></a>00131           <span class="keywordflow">else</span>
+<a name="l00132"></a>00132         {
+<a name="l00133"></a>00133           $this-&gt;<a class="code" href="classFunkce.html#3d1531aa7d5ceccbc6030d14455749db">ErrorMsg</a>(<span class="stringliteral">"POZOR! Nepodařilo se najít třídu o indexu:  ''{$index}'' "</span>);
+<a name="l00134"></a>00134         }
+<a name="l00135"></a>00135       }
+<a name="l00136"></a>00136     }
+<a name="l00137"></a>00137 
+<a name="l00138"></a>00138     <span class="keywordflow">return</span> $result;
+<a name="l00139"></a>00139   }
+<a name="l00140"></a>00140 
+<a name="l00148"></a><a class="code" href="classFunkce.html#cff95312d5b967e3b322ff2f9302e7f6">00148</a>   <span class="keyword">public</span> function <a class="code" href="classFunkce.html#cff95312d5b967e3b322ff2f9302e7f6">NajdiIndexPodleTridy</a>($trida)
+<a name="l00149"></a>00149   {
+<a name="l00150"></a>00150     $result = -1;
+<a name="l00151"></a>00151     <span class="keywordflow">for</span> ($i = 0; $i &lt; count($this-&gt;var-&gt;moduly); $i++)
+<a name="l00152"></a>00152     {
+<a name="l00153"></a>00153       <span class="keywordflow">if</span> ($this-&gt;var-&gt;moduly[$i][<span class="stringliteral">"class"</span>] == $trida)
+<a name="l00154"></a>00154       {
+<a name="l00155"></a>00155         $result = $i;
+<a name="l00156"></a>00156         <span class="keywordflow">break</span>;
+<a name="l00157"></a>00157       }
+<a name="l00158"></a>00158     }
+<a name="l00159"></a>00159 
+<a name="l00160"></a>00160     <span class="keywordflow">return</span> $result;
+<a name="l00161"></a>00161   }
+<a name="l00162"></a>00162 
+<a name="l00168"></a><a class="code" href="classFunkce.html#321f134690e9b84a22eb375f3dafeafa">00168</a>   <span class="keyword">public</span> function <a class="code" href="classFunkce.html#321f134690e9b84a22eb375f3dafeafa">InicializaceModulu</a>()
+<a name="l00169"></a>00169   {
+<a name="l00170"></a>00170     <span class="keywordflow">for</span> ($i = 1; $i &lt; count($this-&gt;var-&gt;moduly); $i++)
+<a name="l00171"></a>00171     {
+<a name="l00172"></a>00172       <span class="keywordflow">if</span> (file_exists($this-&gt;var-&gt;moduly[$i][<span class="stringliteral">"include"</span>]))
+<a name="l00173"></a>00173       {
+<a name="l00174"></a>00174         include_once <span class="stringliteral">"{$this-&gt;var-&gt;moduly[$i]["</span>include<span class="stringliteral">"]}"</span>;
+<a name="l00175"></a>00175         <span class="keywordflow">if</span> (class_exists($this-&gt;var-&gt;moduly[$i][<span class="stringliteral">"class"</span>]))
+<a name="l00176"></a>00176         {
+<a name="l00177"></a>00177           <span class="keywordflow">if</span> (method_exists($this-&gt;var-&gt;moduly[$i][<span class="stringliteral">"class"</span>], <span class="stringliteral">"__construct"</span>))
+<a name="l00178"></a>00178           {
+<a name="l00179"></a>00179             $this-&gt;var-&gt;main[$i] = <span class="keyword">new</span> $this-&gt;var-&gt;moduly[$i][<span class="stringliteral">"class"</span>]($this-&gt;var, $i);
+<a name="l00180"></a>00180           }
+<a name="l00181"></a>00181             <span class="keywordflow">else</span>
+<a name="l00182"></a>00182           {
+<a name="l00183"></a>00183             $this-&gt;<a class="code" href="classFunkce.html#3d1531aa7d5ceccbc6030d14455749db">ErrorMsg</a>(<span class="stringliteral">"POZOR! Z třídy: ''{$this-&gt;var-&gt;moduly[$i]["</span><span class="keyword">class</span><span class="stringliteral">"]}'', metoda konstruktoru neexistuje"</span>);
+<a name="l00184"></a>00184           }
+<a name="l00185"></a>00185         }
+<a name="l00186"></a>00186           <span class="keywordflow">else</span>
+<a name="l00187"></a>00187         {
+<a name="l00188"></a>00188           $this-&gt;var-&gt;main[0]-&gt;ErrorMsg(<span class="stringliteral">"POZOR! Třída:  ''{$this-&gt;var-&gt;moduly[$i]["</span><span class="keyword">class</span><span class="stringliteral">"]}'' neexistuje!!"</span>);
+<a name="l00189"></a>00189         }
+<a name="l00190"></a>00190       }
+<a name="l00191"></a>00191         <span class="keywordflow">else</span>
+<a name="l00192"></a>00192       {
+<a name="l00193"></a>00193         $this-&gt;var-&gt;main[0]-&gt;ErrorMsg(<span class="stringliteral">"POZOR! Třída:  ''{$this-&gt;var-&gt;moduly[$i]["</span><span class="keyword">class</span><span class="stringliteral">"]}'' nema svoje zastoupení v modulech"</span>);
+<a name="l00194"></a>00194       }
+<a name="l00195"></a>00195     }
+<a name="l00196"></a>00196   }
+<a name="l00197"></a>00197 
+<a name="l00204"></a><a class="code" href="classFunkce.html#01e337414104eb12e02486fcd106ef09">00204</a>   <span class="keyword">public</span> function <a class="code" href="classFunkce.html#01e337414104eb12e02486fcd106ef09">AdminMenu</a>()
+<a name="l00205"></a>00205   {
+<a name="l00206"></a>00206     $result =
+<a name="l00207"></a>00207     <span class="stringliteral">"</span>
+<a name="l00208"></a>00208 <span class="stringliteral">    &lt;a href=\"?{$this-&gt;var-&gt;get_kam}={$this-&gt;var-&gt;adresaadminu}\" title=\"uvod adminu\"&gt;uvod adminu&lt;/a&gt;&lt;br /&gt;</span>
+<a name="l00209"></a>00209 <span class="stringliteral">    &lt;a href=\"?{$this-&gt;var-&gt;get_kam}={$this-&gt;var-&gt;adresaadminu}&amp;amp;{$this-&gt;var-&gt;get_idmodul}={$this-&gt;idmodul}\" title=\"kontrola aktualizaci\"&gt;kontrola aktualizaci&lt;/a&gt;&lt;br /&gt;</span>
+<a name="l00210"></a>00210 <span class="stringliteral">    &lt;a href=\"?{$this-&gt;var-&gt;get_kam}={$this-&gt;var-&gt;adresaadminu}&amp;amp;{$this-&gt;var-&gt;get_idmodul}={$this-&gt;idmodul}{$this-&gt;idzaloha}\" title=\"zaloha DB\" onclick=\"return confirm('Opravdu zalohovat databazi??');\"&gt;zaloha DB&lt;/a&gt;&lt;br /&gt;</span>
+<a name="l00211"></a>00211 <span class="stringliteral">    "</span>;
+<a name="l00212"></a>00212 
+<a name="l00213"></a>00213     <span class="keywordflow">return</span> $result;
+<a name="l00214"></a>00214   }
+<a name="l00215"></a>00215 
+<a name="l00222"></a><a class="code" href="classFunkce.html#04bf6beb45c5d75e40bf957d76958245">00222</a>   <span class="keyword">public</span> function <a class="code" href="classFunkce.html#04bf6beb45c5d75e40bf957d76958245">AdminObsah</a>()
+<a name="l00223"></a>00223   {
+<a name="l00224"></a>00224     <span class="keywordflow">if</span> ($_GET[$this-&gt;var-&gt;get_kam] == $this-&gt;var-&gt;adresaadminu &amp;&amp;
+<a name="l00225"></a>00225         $this-&gt;var-&gt;aktivniadmin)
+<a name="l00226"></a>00226     {
+<a name="l00227"></a>00227       <span class="keywordflow">switch</span> ($_GET[$this-&gt;var-&gt;get_idmodul])
+<a name="l00228"></a>00228       {
+<a name="l00229"></a>00229         <span class="keywordflow">case</span> <span class="stringliteral">""</span>:  <span class="comment">//uvod adminu</span>
+<a name="l00230"></a>00230           $result =
+<a name="l00231"></a>00231           <span class="stringliteral">"</span>
+<a name="l00232"></a>00232 <span class="stringliteral">            obsah uvod adminu&lt;br /&gt;</span>
+<a name="l00233"></a>00233 <span class="stringliteral">            &lt;br /&gt;</span>
+<a name="l00234"></a>00234 <span class="stringliteral">            výpis záloh databaze:&lt;br /&gt;</span>
+<a name="l00235"></a>00235 <span class="stringliteral">            {$this-&gt;VypisZalohyDB()}</span>
+<a name="l00236"></a>00236 <span class="stringliteral">          "</span>;
+<a name="l00237"></a>00237         <span class="keywordflow">break</span>;
+<a name="l00238"></a>00238 
+<a name="l00239"></a>00239         <span class="keywordflow">case</span> $this-&gt;idmodul:  <span class="comment">//id modul</span>
+<a name="l00240"></a>00240           $result = $this-&gt;<a class="code" href="classFunkce.html#a11a8a16b533edf4bc5bc404e88a51f0">KontrolaAktualizace</a>();
+<a name="l00241"></a>00241         <span class="keywordflow">break</span>;
+<a name="l00242"></a>00242 
+<a name="l00243"></a>00243         <span class="keywordflow">case</span> <span class="stringliteral">"{$this-&gt;idmodul}{$this-&gt;idzaloha}"</span>: <span class="comment">//zaloha</span>
+<a name="l00244"></a>00244           $result = $this-&gt;<a class="code" href="classFunkce.html#e2222af28360a6961e5983e38b91811c">ZalohovaniSQLiteDB</a>();
+<a name="l00245"></a>00245         <span class="keywordflow">break</span>;
+<a name="l00246"></a>00246 
+<a name="l00247"></a>00247         <span class="keywordflow">case</span> <span class="stringliteral">"{$this-&gt;idmodul}{$this-&gt;iddelzal}"</span>: <span class="comment">//smazani souboru zalohy</span>
+<a name="l00248"></a>00248           $result = $this-&gt;<a class="code" href="classFunkce.html#03b7ee28259a688c366e6f06f9ac4a50">SmazatSouborZalohy</a>();
+<a name="l00249"></a>00249         <span class="keywordflow">break</span>;
+<a name="l00250"></a>00250 
+<a name="l00251"></a>00251         <span class="keywordflow">case</span> <span class="stringliteral">"{$this-&gt;idmodul}{$this-&gt;idupp}"</span>:
+<a name="l00252"></a>00252           $result = $this-&gt;<a class="code" href="classFunkce.html#7b79cdf110960b83299befbc56b79f93">UploadovatNovouVerzi</a>();
+<a name="l00253"></a>00253         <span class="keywordflow">break</span>;
+<a name="l00254"></a>00254       }
+<a name="l00255"></a>00255     }
+<a name="l00256"></a>00256 
+<a name="l00257"></a>00257     <span class="keywordflow">return</span> $result;
+<a name="l00258"></a>00258   }
+<a name="l00259"></a>00259 
+<a name="l00266"></a><a class="code" href="classFunkce.html#a11a8a16b533edf4bc5bc404e88a51f0">00266</a>   <span class="keyword">private</span> function <a class="code" href="classFunkce.html#a11a8a16b533edf4bc5bc404e88a51f0">KontrolaAktualizace</a>()
+<a name="l00267"></a>00267   {
+<a name="l00268"></a>00268     <span class="keywordflow">if</span> ($this-&gt;var-&gt;aktualizovat)
+<a name="l00269"></a>00269     {
+<a name="l00270"></a>00270       $result = <span class="stringliteral">""</span>;
+<a name="l00271"></a>00271       $moduly = $this-&gt;var-&gt;moduly;
+<a name="l00272"></a>00272 
+<a name="l00273"></a>00273       $moduly[count($moduly)] = array(<span class="stringliteral">"include"</span> =&gt; <span class="stringliteral">"promenne.php"</span>,
+<a name="l00274"></a>00274                                       <span class="stringliteral">"class"</span> =&gt; <span class="stringliteral">"Promenne"</span>,
+<a name="l00275"></a>00275                                       <span class="stringliteral">"admin"</span> =&gt; <span class="keyword">false</span>,
+<a name="l00276"></a>00276                                       <span class="stringliteral">"databaze"</span> =&gt; <span class="stringliteral">""</span>);
+<a name="l00277"></a>00277 
+<a name="l00278"></a>00278       <span class="keywordflow">for</span> ($i = 0; $i &lt; count($moduly); $i++)
+<a name="l00279"></a>00279       {
+<a name="l00280"></a>00280         $nazev = $moduly[$i][<span class="stringliteral">"class"</span>];
+<a name="l00281"></a>00281         $cesta = $moduly[$i][<span class="stringliteral">"include"</span>];
+<a name="l00282"></a>00282 
+<a name="l00283"></a>00283         $soubor = basename($cesta); <span class="comment">//soubor</span>
+<a name="l00284"></a>00284         $adresar = dirname($cesta); <span class="comment">//adresar</span>
+<a name="l00285"></a>00285         $adresar = explode(<span class="stringliteral">"/"</span>, $adresar);
+<a name="l00286"></a>00286         $adresar = (count($adresar) &gt; 1 ? $adresar[1] : <span class="stringliteral">"kořen (./)"</span>);
+<a name="l00287"></a>00287 
+<a name="l00288"></a>00288         <span class="keywordflow">if</span> (file_exists($cesta))
+<a name="l00289"></a>00289         {
+<a name="l00290"></a>00290           $velikost = $this-&gt;<a class="code" href="classFunkce.html#9ef4e94a7f9346ad4614d6023da845d1">Velikost</a>(filesize($cesta));
+<a name="l00291"></a>00291           $datum = date(<span class="stringliteral">"d.m. Y H:i:s"</span>, filemtime($cesta)); <span class="comment">//datum na webu</span>
+<a name="l00292"></a>00292         }
+<a name="l00293"></a>00293           <span class="keywordflow">else</span>
+<a name="l00294"></a>00294         {
+<a name="l00295"></a>00295           $datum = <span class="stringliteral">"Chybná cesta v konfiguraci modulu  - spatna cesta"</span>;
+<a name="l00296"></a>00296         }
+<a name="l00297"></a>00297 
+<a name="l00298"></a>00298         $zprava = $this-&gt;<a class="code" href="classFunkce.html#3c9e77b4971fd8b6ad361518f1466a3b">NactiUrl</a>(<span class="stringliteral">"{$this-&gt;var-&gt;depozitar}?check={$cesta}"</span>);  <span class="comment">//datum na depozitu s velikosti</span>
+<a name="l00299"></a>00299         $zprava_velikost = explode(<span class="stringliteral">"-_-"</span>, $zprava); <span class="comment">//rozdeleni na datum a velikost</span>
+<a name="l00300"></a>00300 
+<a name="l00301"></a>00301         $zprava_datum = $zprava_velikost[0];  <span class="comment">//vraceni datumu zpravy</span>
+<a name="l00302"></a>00302         $zprava_velikost = $zprava_velikost[1]; <span class="comment">//vraceni velikosti</span>
+<a name="l00303"></a>00303 
+<a name="l00304"></a>00304         $aktualni = <span class="stringliteral">"aktuální verze"</span>;
+<a name="l00305"></a>00305         $old = <span class="stringliteral">"novější verze na depozitu &lt;a href=\"{$this-&gt;var-&gt;depozitar}?down={$cesta}&amp;amp;source={$_SERVER["</span>SERVER_NAME<span class="stringliteral">"]}\" title=\"sosnout\"&gt;sosnout&lt;/a&gt; &lt;a href=\"?{$this-&gt;var-&gt;get_kam}={$this-&gt;var-&gt;adresaadminu}&amp;amp;{$this-&gt;var-&gt;get_idmodul}={$this-&gt;idmodul}{$this-&gt;idupp}&amp;amp;file={$cesta}\" title=\"upnout\"&gt;upnout&lt;/a&gt;"</span>;
+<a name="l00306"></a>00306         $new = <span class="stringliteral">"novější verze na tomto webu"</span>;
+<a name="l00307"></a>00307 
+<a name="l00308"></a>00308         <span class="keywordflow">if</span> (!Empty($zprava_velikost))
+<a name="l00309"></a>00309         { <span class="comment">//datumy nebo novejsi depozit a stejne velikosti</span>
+<a name="l00310"></a>00310           $info = ($datum == $zprava_datum || ($datum &lt; $zprava_datum &amp;&amp; $velikost == $zprava_velikost) ? $aktualni :
+<a name="l00311"></a>00311                   ($datum &lt; $zprava_datum ? $old :
+<a name="l00312"></a>00312                                             $new));
+<a name="l00313"></a>00313         }
+<a name="l00314"></a>00314           <span class="keywordflow">else</span>
+<a name="l00315"></a>00315         {
+<a name="l00316"></a>00316           $info = <span class="stringliteral">"Dotyčná verze neni na depozitu prozatím vložena"</span>;
+<a name="l00317"></a>00317         }
+<a name="l00318"></a>00318 
+<a name="l00319"></a>00319         $result .=
+<a name="l00320"></a>00320         <span class="stringliteral">"&lt;p&gt;</span>
+<a name="l00321"></a>00321 <span class="stringliteral">          {$nazev} ([{$adresar}] - {$soubor}) -&lt;br /&gt;&lt;strong&gt;{$datum} ({$velikost})&lt;/strong&gt; || depozit: &lt;strong&gt;{$zprava_datum} "</span>.(!Empty($zprava_velikost) ? <span class="stringliteral">"({$zprava_velikost})"</span> : <span class="stringliteral">""</span>).<span class="stringliteral">"&lt;/strong&gt; -&lt;br /&gt;{$info}</span>
+<a name="l00322"></a>00322 <span class="stringliteral">          &lt;br /&gt;</span>
+<a name="l00323"></a>00323 <span class="stringliteral">          &lt;br /&gt;</span>
+<a name="l00324"></a>00324 <span class="stringliteral">        &lt;/p&gt;"</span>;
+<a name="l00325"></a>00325       }
+<a name="l00326"></a>00326     }
+<a name="l00327"></a>00327       <span class="keywordflow">else</span>
+<a name="l00328"></a>00328     {
+<a name="l00329"></a>00329       $result = <span class="stringliteral">"Aktualizace jsou vypnuty"</span>;
+<a name="l00330"></a>00330     }
+<a name="l00331"></a>00331 
+<a name="l00332"></a>00332     <span class="keywordflow">return</span> $result;
+<a name="l00333"></a>00333   }
+<a name="l00334"></a>00334 
+<a name="l00341"></a><a class="code" href="classFunkce.html#7b79cdf110960b83299befbc56b79f93">00341</a>   <span class="keyword">private</span> function <a class="code" href="classFunkce.html#7b79cdf110960b83299befbc56b79f93">UploadovatNovouVerzi</a>()
+<a name="l00342"></a>00342   {
+<a name="l00343"></a>00343     $soubor = $_GET[<span class="stringliteral">"file"</span>];
+<a name="l00344"></a>00344     chmod($soubor, 0777);
+<a name="l00345"></a>00345     chmod(dirname($soubor), 0777);
+<a name="l00346"></a>00346 
+<a name="l00347"></a>00347     $result =
+<a name="l00348"></a>00348     <span class="stringliteral">"</span>
+<a name="l00349"></a>00349 <span class="stringliteral">    &lt;form method=\"post\" enctype=\"multipart/form-data\" onsubmit=\"return confirm('Opravdu aktualizovat tento modul: \'{$soubor}\' ??');\"&gt;</span>
+<a name="l00350"></a>00350 <span class="stringliteral">      &lt;fieldset&gt;</span>
+<a name="l00351"></a>00351 <span class="stringliteral">        modul (jen php): &lt;input type=\"file\" name=\"modul\" /&gt; &lt;br /&gt;</span>
+<a name="l00352"></a>00352 <span class="stringliteral">        &lt;input type=\"submit\" name=\"tlacitko\" value=\"Upgradovat\" /&gt;</span>
+<a name="l00353"></a>00353 <span class="stringliteral">      &lt;/fieldset&gt;</span>
+<a name="l00354"></a>00354 <span class="stringliteral">    &lt;/form&gt;</span>
+<a name="l00355"></a>00355 <span class="stringliteral">    "</span>;
+<a name="l00356"></a>00356 
+<a name="l00357"></a>00357     $koncovka = explode(<span class="stringliteral">"."</span>, $_FILES[<span class="stringliteral">"modul"</span>][<span class="stringliteral">"name"</span>]);
+<a name="l00358"></a>00358 
+<a name="l00359"></a>00359     <span class="keywordflow">if</span> (!Empty($_FILES[<span class="stringliteral">"modul"</span>][<span class="stringliteral">"tmp_name"</span>]) &amp;&amp;
+<a name="l00360"></a>00360         !Empty($_POST[<span class="stringliteral">"tlacitko"</span>]) &amp;&amp;
+<a name="l00361"></a>00361         !Empty($soubor) &amp;&amp;
+<a name="l00362"></a>00362         $_FILES[<span class="stringliteral">"modul"</span>][<span class="stringliteral">"name"</span>] == basename($soubor) &amp;&amp;
+<a name="l00363"></a>00363         $koncovka[count($koncovka) - 1] == <span class="stringliteral">"php"</span> &amp;&amp;
+<a name="l00364"></a>00364         file_exists($soubor) &amp;&amp;
+<a name="l00365"></a>00365         $soubor != <span class="stringliteral">"promenne.php"</span> &amp;&amp;
+<a name="l00366"></a>00366         $soubor != <span class="stringliteral">"index.php"</span> &amp;&amp;
+<a name="l00367"></a>00367         $soubor != <span class="stringliteral">".htaccess"</span>)
+<a name="l00368"></a>00368     {
+<a name="l00369"></a>00369       <span class="keywordflow">if</span> (move_uploaded_file($_FILES[<span class="stringliteral">"modul"</span>][<span class="stringliteral">"tmp_name"</span>], $soubor))
+<a name="l00370"></a>00370       {
+<a name="l00371"></a>00371         $result = <span class="stringliteral">"modul: ''{$soubor}'' uspěšne aktualizován"</span>;
+<a name="l00372"></a>00372         chmod($soubor, 0777);
+<a name="l00373"></a>00373 
+<a name="l00374"></a>00374         $this-&gt;var-&gt;main[0]-&gt;AutoClick(2, <span class="stringliteral">"?{$this-&gt;var-&gt;get_kam}={$this-&gt;var-&gt;adresaadminu}&amp;{$this-&gt;var-&gt;get_idmodul}={$this-&gt;idmodul}"</span>);  <span class="comment">//auto kliknuti</span>
+<a name="l00375"></a>00375       }
+<a name="l00376"></a>00376         <span class="keywordflow">else</span>
+<a name="l00377"></a>00377       {
+<a name="l00378"></a>00378         $result = <span class="stringliteral">"Nastala chyba: ''{$_FILES["</span>modul<span class="stringliteral">"]["</span>error<span class="stringliteral">"]}''"</span>;
+<a name="l00379"></a>00379       }
+<a name="l00380"></a>00380     }
+<a name="l00381"></a>00381       <span class="keywordflow">else</span>
+<a name="l00382"></a>00382     {
+<a name="l00383"></a>00383       <span class="keywordflow">if</span> (!Empty($_FILES[<span class="stringliteral">"modul"</span>][<span class="stringliteral">"tmp_name"</span>]))
+<a name="l00384"></a>00384       {
+<a name="l00385"></a>00385         <span class="keywordflow">if</span> ($koncovka[count($koncovka) - 1] == <span class="stringliteral">"php"</span>)
+<a name="l00386"></a>00386         {
+<a name="l00387"></a>00387           $result = <span class="stringliteral">"Jiná koncovka"</span>;
+<a name="l00388"></a>00388         }
+<a name="l00389"></a>00389 
+<a name="l00390"></a>00390         <span class="keywordflow">if</span> (file_exists($soubor))
+<a name="l00391"></a>00391         {
+<a name="l00392"></a>00392           $result = <span class="stringliteral">"Soubor neexistuje"</span>;
+<a name="l00393"></a>00393         }
+<a name="l00394"></a>00394 
+<a name="l00395"></a>00395         <span class="keywordflow">if</span> ($soubor != <span class="stringliteral">"promenne.php"</span> &amp;&amp;
+<a name="l00396"></a>00396             $soubor != <span class="stringliteral">".htaccess"</span>)
+<a name="l00397"></a>00397         {
+<a name="l00398"></a>00398           $result = <span class="stringliteral">"Nepřípustné soubory"</span>;
+<a name="l00399"></a>00399         }
+<a name="l00400"></a>00400 
+<a name="l00401"></a>00401         <span class="keywordflow">if</span> ($_FILES[<span class="stringliteral">"modul"</span>][<span class="stringliteral">"name"</span>] == basename($soubor))
+<a name="l00402"></a>00402         {
+<a name="l00403"></a>00403           $result = <span class="stringliteral">"Nenahráváte kompatibilní soubor"</span>;
+<a name="l00404"></a>00404         }
+<a name="l00405"></a>00405       }
+<a name="l00406"></a>00406     }
+<a name="l00407"></a>00407 
+<a name="l00408"></a>00408     <span class="keywordflow">return</span> $result;
+<a name="l00409"></a>00409   }
+<a name="l00410"></a>00410 
+<a name="l00417"></a><a class="code" href="classFunkce.html#e4b630a2127cedcdf5e6365502267b94">00417</a>   <span class="keyword">public</span> function <a class="code" href="classFunkce.html#e4b630a2127cedcdf5e6365502267b94">GenerovaniAdminMenu</a>()
+<a name="l00418"></a>00418   {
+<a name="l00419"></a>00419     $result = <span class="stringliteral">""</span>;
+<a name="l00420"></a>00420     <span class="keywordflow">for</span> ($i = 0; $i &lt; count($this-&gt;var-&gt;moduly); $i++)
+<a name="l00421"></a>00421     {
+<a name="l00422"></a>00422       $result .= ($this-&gt;var-&gt;moduly[$i][<span class="stringliteral">"admin"</span>] ? (method_exists($this-&gt;var-&gt;moduly[$i][<span class="stringliteral">"class"</span>], <span class="stringliteral">"AdminMenu"</span>) ? $this-&gt;var-&gt;main[$i]-&gt;AdminMenu() : <span class="stringliteral">"Modul menu z třídy: ''{$this-&gt;var-&gt;moduly[$i]["</span><span class="keyword">class</span><span class="stringliteral">"]}'' se nepodařilo načíst, aktualizujte jej prosím&lt;br /&gt;"</span>) : <span class="stringliteral">""</span>);
+<a name="l00423"></a>00423     }
+<a name="l00424"></a>00424 
+<a name="l00425"></a>00425     $result .= <span class="stringliteral">"&lt;a href=\"?{$this-&gt;var-&gt;get_kam}=logoff\"&gt;(log off)&lt;/a&gt;"</span>;
+<a name="l00426"></a>00426 
+<a name="l00427"></a>00427     <span class="keywordflow">return</span> $result;
+<a name="l00428"></a>00428   }
+<a name="l00429"></a>00429 
+<a name="l00436"></a><a class="code" href="classFunkce.html#5e6f0bfef1995a9753e12a1e848d5847">00436</a>   <span class="keyword">public</span> function <a class="code" href="classFunkce.html#5e6f0bfef1995a9753e12a1e848d5847">GenerovaniAdminObsah</a>()
+<a name="l00437"></a>00437   {
+<a name="l00438"></a>00438     $result = <span class="stringliteral">""</span>;
+<a name="l00439"></a>00439     <span class="keywordflow">for</span> ($i = 0; $i &lt; count($this-&gt;var-&gt;moduly); $i++)
+<a name="l00440"></a>00440     {
+<a name="l00441"></a>00441       $result .= ($this-&gt;var-&gt;moduly[$i][<span class="stringliteral">"admin"</span>] ? (method_exists($this-&gt;var-&gt;moduly[$i][<span class="stringliteral">"class"</span>], <span class="stringliteral">"AdminObsah"</span>) ? $this-&gt;var-&gt;main[$i]-&gt;AdminObsah() : <span class="stringliteral">"Modul obsahu z třídy: ''{$this-&gt;var-&gt;moduly[$i]["</span><span class="keyword">class</span><span class="stringliteral">"]}'' se nepodařilo načíst, aktualizujte jej prosím&lt;br /&gt;"</span>) : <span class="stringliteral">""</span>);
+<a name="l00442"></a>00442     }
+<a name="l00443"></a>00443 
+<a name="l00444"></a>00444     <span class="keywordflow">return</span> $result;
+<a name="l00445"></a>00445   }
+<a name="l00446"></a>00446 
+<a name="l00453"></a><a class="code" href="classFunkce.html#e2222af28360a6961e5983e38b91811c">00453</a>   <span class="keyword">private</span> function <a class="code" href="classFunkce.html#e2222af28360a6961e5983e38b91811c">ZalohovaniSQLiteDB</a>($autodown = <span class="keyword">true</span>)
+<a name="l00454"></a>00454   {
+<a name="l00455"></a>00455     $result = <span class="stringliteral">""</span>;
+<a name="l00456"></a>00456 
+<a name="l00457"></a>00457     <span class="keywordflow">if</span> (!file_exists($this-&gt;zalohadir))
+<a name="l00458"></a>00458     {
+<a name="l00459"></a>00459       mkdir($this-&gt;zalohadir, 0777);
+<a name="l00460"></a>00460     }
+<a name="l00461"></a>00461     $cil = <span class="stringliteral">"{$this-&gt;zalohadir}/zaloha_db_"</span>.date(<span class="stringliteral">"d-m-Y_H-i-s"</span>).<span class="stringliteral">".zip"</span>;
+<a name="l00462"></a>00462 
+<a name="l00463"></a>00463     $zip = <span class="keyword">new</span> ZipArchive();
+<a name="l00464"></a>00464     <span class="keywordflow">if</span> ($zip-&gt;open($cil, ZipArchive::CREATE) === <span class="keyword">true</span>)
+<a name="l00465"></a>00465     {
+<a name="l00466"></a>00466       <span class="keywordflow">for</span> ($i = 0; $i &lt; count($this-&gt;var-&gt;moduly); $i++)
+<a name="l00467"></a>00467       {
+<a name="l00468"></a>00468         <span class="keywordflow">if</span> ($this-&gt;var-&gt;moduly[$i][<span class="stringliteral">"admin"</span>])  <span class="comment">//pokud ma modul dazaba</span>
+<a name="l00469"></a>00469         {
+<a name="l00470"></a>00470           $databaze = dirname($this-&gt;var-&gt;moduly[$i][<span class="stringliteral">"include"</span>]).<span class="stringliteral">"/"</span>.$this-&gt;var-&gt;moduly[$i][<span class="stringliteral">"databaze"</span>];
+<a name="l00471"></a>00471           <span class="keywordflow">if</span> (file_exists($databaze))
+<a name="l00472"></a>00472           {
+<a name="l00473"></a>00473             $zip-&gt;addFile($databaze);  <span class="comment">//ulozi i se stejnou cestou!!</span>
+<a name="l00474"></a>00474           }
+<a name="l00475"></a>00475         }
+<a name="l00476"></a>00476       }
+<a name="l00477"></a>00477       $zip-&gt;close();
+<a name="l00478"></a>00478     }
+<a name="l00479"></a>00479 
+<a name="l00480"></a>00480     <span class="keywordflow">if</span> ($autodown)
+<a name="l00481"></a>00481     {
+<a name="l00482"></a>00482       header(<span class="stringliteral">"Content-Description: File Transfer"</span>);
+<a name="l00483"></a>00483       header(<span class="stringliteral">"Content-Type: application/force-download"</span>);
+<a name="l00484"></a>00484       header(<span class="stringliteral">"Content-Disposition: attachment; filename=\"{$cil}\""</span>);
+<a name="l00485"></a>00485       $result = readfile($cil); <span class="comment">//vybydne ke stazeni</span>
+<a name="l00486"></a>00486     }
+<a name="l00487"></a>00487 
+<a name="l00488"></a>00488     <span class="keywordflow">return</span> $result;
+<a name="l00489"></a>00489   }
+<a name="l00490"></a>00490 
+<a name="l00496"></a><a class="code" href="classFunkce.html#a1aa6b1dca86c8925458c1ac99533ad3">00496</a>   <span class="keyword">private</span> function <a class="code" href="classFunkce.html#a1aa6b1dca86c8925458c1ac99533ad3">AutoZalohovani</a>()
+<a name="l00497"></a>00497   {
+<a name="l00498"></a>00498     <span class="keywordflow">if</span> ($this-&gt;autozaloha)
+<a name="l00499"></a>00499     {
+<a name="l00500"></a>00500       $cesta = $this-&gt;zalohadir;
+<a name="l00501"></a>00501       <span class="keywordflow">if</span> (file_exists($cesta))
+<a name="l00502"></a>00502       {
+<a name="l00503"></a>00503         $handle = opendir($cesta);
+<a name="l00504"></a>00504         $i = 0;
+<a name="l00505"></a>00505         <span class="keywordflow">while</span>($soub = readdir($handle))
+<a name="l00506"></a>00506         {
+<a name="l00507"></a>00507           <span class="keywordflow">if</span> ($soub != <span class="stringliteral">"."</span> &amp;&amp; $soub != <span class="stringliteral">".."</span> &amp;&amp; filetype(<span class="stringliteral">"{$cesta}/{$soub}"</span>) == <span class="stringliteral">"file"</span>)
+<a name="l00508"></a>00508           {
+<a name="l00509"></a>00509             <span class="keywordflow">if</span> (date(<span class="stringliteral">"Y-m-d"</span>) == date(<span class="stringliteral">"Y-m-d"</span>, filemtime(<span class="stringliteral">"{$cesta}/{$soub}"</span>)))
+<a name="l00510"></a>00510             {
+<a name="l00511"></a>00511               $i++;
+<a name="l00512"></a>00512             }
+<a name="l00513"></a>00513           }
+<a name="l00514"></a>00514         }
+<a name="l00515"></a>00515         closedir($handle);
+<a name="l00516"></a>00516 
+<a name="l00517"></a>00517         <span class="keywordflow">if</span> ($i == 0)
+<a name="l00518"></a>00518         {
+<a name="l00519"></a>00519           $this-&gt;<a class="code" href="classFunkce.html#e2222af28360a6961e5983e38b91811c">ZalohovaniSQLiteDB</a>(<span class="keyword">false</span>); <span class="comment">//pri prazdne slozce</span>
+<a name="l00520"></a>00520         }
+<a name="l00521"></a>00521       }
+<a name="l00522"></a>00522         <span class="keywordflow">else</span>
+<a name="l00523"></a>00523       {
+<a name="l00524"></a>00524         mkdir($this-&gt;zalohadir, 0777);  <span class="comment">//vytvoreni a prvotni zalohovani</span>
+<a name="l00525"></a>00525         $this-&gt;<a class="code" href="classFunkce.html#e2222af28360a6961e5983e38b91811c">ZalohovaniSQLiteDB</a>(<span class="keyword">false</span>);
+<a name="l00526"></a>00526       }
+<a name="l00527"></a>00527     }
+<a name="l00528"></a>00528   }
+<a name="l00529"></a>00529 
+<a name="l00536"></a><a class="code" href="classFunkce.html#119ba054ba2aa0e03c28b1319ddbc33e">00536</a>   <span class="keyword">private</span> function <a class="code" href="classFunkce.html#119ba054ba2aa0e03c28b1319ddbc33e">VypisZalohyDB</a>()
+<a name="l00537"></a>00537   {
+<a name="l00538"></a>00538     $result = <span class="stringliteral">""</span>;
+<a name="l00539"></a>00539     $cesta = $this-&gt;zalohadir;
+<a name="l00540"></a>00540     <span class="keywordflow">if</span> (file_exists($cesta))
+<a name="l00541"></a>00541     {
+<a name="l00542"></a>00542       $handle = opendir($cesta);
+<a name="l00543"></a>00543       $i = 0;
+<a name="l00544"></a>00544       <span class="keywordflow">while</span>($soub = readdir($handle))
+<a name="l00545"></a>00545       {
+<a name="l00546"></a>00546         <span class="keywordflow">if</span> ($soub != <span class="stringliteral">"."</span> &amp;&amp; $soub != <span class="stringliteral">".."</span> &amp;&amp; filetype(<span class="stringliteral">"{$cesta}/{$soub}"</span>) == <span class="stringliteral">"file"</span>)
+<a name="l00547"></a>00547         {
+<a name="l00548"></a>00548           $soubor[$i] = $soub;
+<a name="l00549"></a>00549           $i++;
+<a name="l00550"></a>00550         }
+<a name="l00551"></a>00551       }
+<a name="l00552"></a>00552       closedir($handle);
+<a name="l00553"></a>00553 
+<a name="l00554"></a>00554       <span class="keywordflow">if</span> ($i == 0)
+<a name="l00555"></a>00555       {
+<a name="l00556"></a>00556         $result = <span class="stringliteral">"složka záloh je prázdná"</span>;
+<a name="l00557"></a>00557       }
+<a name="l00558"></a>00558         <span class="keywordflow">else</span>
+<a name="l00559"></a>00559       {
+<a name="l00560"></a>00560         rsort($soubor);
+<a name="l00561"></a>00561 
+<a name="l00562"></a>00562         <span class="keywordflow">for</span> ($i = 0; $i &lt; count($soubor); $i++)
+<a name="l00563"></a>00563         {
+<a name="l00564"></a>00564           $velikost = $this-&gt;<a class="code" href="classFunkce.html#9ef4e94a7f9346ad4614d6023da845d1">Velikost</a>(filesize(<span class="stringliteral">"{$cesta}/{$soubor[$i]}"</span>));
+<a name="l00565"></a>00565 
+<a name="l00566"></a>00566           $result .=
+<a name="l00567"></a>00567           <span class="stringliteral">"</span>
+<a name="l00568"></a>00568 <span class="stringliteral">          &lt;a href=\"{$cesta}/{$soubor[$i]}\" &gt;{$soubor[$i]}&lt;/a&gt; ({$velikost}) -</span>
+<a name="l00569"></a>00569 <span class="stringliteral">          &lt;a href=\"?{$this-&gt;var-&gt;get_kam}={$this-&gt;var-&gt;adresaadminu}&amp;amp;{$this-&gt;var-&gt;get_idmodul}={$this-&gt;idmodul}{$this-&gt;iddelzal}&amp;amp;file={$soubor[$i]}\" onclick=\"return confirm('Opravdu smazat soubor: \'{$soubor[$i]}\' ??');\"&gt;smazat&lt;/a&gt;&lt;br /&gt;</span>
+<a name="l00570"></a>00570 <span class="stringliteral">          "</span>;
+<a name="l00571"></a>00571         }
+<a name="l00572"></a>00572       }
+<a name="l00573"></a>00573     }
+<a name="l00574"></a>00574       <span class="keywordflow">else</span>
+<a name="l00575"></a>00575     {
+<a name="l00576"></a>00576       $result = <span class="stringliteral">"nenexistuje složka, musí se něco zálohovat a nebo vytvořt adresář: '{$cesta}'"</span>;
+<a name="l00577"></a>00577     }
+<a name="l00578"></a>00578 
+<a name="l00579"></a>00579     <span class="keywordflow">return</span> $result;
+<a name="l00580"></a>00580   }
+<a name="l00581"></a>00581 
+<a name="l00588"></a><a class="code" href="classFunkce.html#03b7ee28259a688c366e6f06f9ac4a50">00588</a>   <span class="keyword">private</span> function <a class="code" href="classFunkce.html#03b7ee28259a688c366e6f06f9ac4a50">SmazatSouborZalohy</a>()
+<a name="l00589"></a>00589   {
+<a name="l00590"></a>00590     $cesta = $_GET[<span class="stringliteral">"file"</span>];
+<a name="l00591"></a>00591 
+<a name="l00592"></a>00592     <span class="keywordflow">if</span> (file_exists(<span class="stringliteral">"{$this-&gt;zalohadir}/{$cesta}"</span>))
+<a name="l00593"></a>00593     {
+<a name="l00594"></a>00594       $result = (unlink(<span class="stringliteral">"{$this-&gt;zalohadir}/{$cesta}"</span>) ? <span class="stringliteral">"soubor: '{$cesta}' byl smazán"</span> : <span class="stringliteral">"něco se pokazilo"</span>);
+<a name="l00595"></a>00595 
+<a name="l00596"></a>00596       $this-&gt;var-&gt;main[0]-&gt;AutoClick(1, <span class="stringliteral">"?{$this-&gt;var-&gt;get_kam}={$this-&gt;var-&gt;adresaadminu}"</span>);  <span class="comment">//auto kliknuti</span>
+<a name="l00597"></a>00597     }
+<a name="l00598"></a>00598       <span class="keywordflow">else</span>
+<a name="l00599"></a>00599     {
+<a name="l00600"></a>00600       $result = <span class="stringliteral">"cesta neexistuje"</span>;
+<a name="l00601"></a>00601 
+<a name="l00602"></a>00602       $this-&gt;var-&gt;main[0]-&gt;AutoClick(1, <span class="stringliteral">"?{$this-&gt;var-&gt;get_kam}={$this-&gt;var-&gt;adresaadminu}"</span>);  <span class="comment">//auto kliknuti</span>
+<a name="l00603"></a>00603     }
+<a name="l00604"></a>00604 
+<a name="l00605"></a>00605     <span class="keywordflow">return</span> $result;
+<a name="l00606"></a>00606   }
+<a name="l00607"></a>00607 
+<a name="l00615"></a><a class="code" href="classFunkce.html#3c9e77b4971fd8b6ad361518f1466a3b">00615</a>   <span class="keyword">public</span> function <a class="code" href="classFunkce.html#3c9e77b4971fd8b6ad361518f1466a3b">NactiUrl</a>($url)
+<a name="l00616"></a>00616   {
+<a name="l00617"></a>00617     $url = str_replace(<span class="stringliteral">"http://"</span>, <span class="stringliteral">""</span>, $url);
+<a name="l00618"></a>00618     <span class="keywordflow">if</span> (preg_match(<span class="stringliteral">"#/#"</span>,<span class="stringliteral">"{$url}"</span>))
+<a name="l00619"></a>00619     {
+<a name="l00620"></a>00620       $page = $url;
+<a name="l00621"></a>00621       $url = @explode(<span class="stringliteral">"/"</span>,$url);
+<a name="l00622"></a>00622       $url = $url[0];
+<a name="l00623"></a>00623       $page = str_replace($url,<span class="stringliteral">""</span>,$page);
+<a name="l00624"></a>00624       <span class="keywordflow">if</span> (!$page || $page == <span class="stringliteral">""</span>)
+<a name="l00625"></a>00625       {
+<a name="l00626"></a>00626         $page = <span class="stringliteral">"/"</span>;
+<a name="l00627"></a>00627       }
+<a name="l00628"></a>00628       $ip = gethostbyname($url);
+<a name="l00629"></a>00629     }
+<a name="l00630"></a>00630       <span class="keywordflow">else</span>
+<a name="l00631"></a>00631     {
+<a name="l00632"></a>00632       $ip = gethostbyname($url);
+<a name="l00633"></a>00633       $page = <span class="stringliteral">"/"</span>;
+<a name="l00634"></a>00634     }
+<a name="l00635"></a>00635 
+<a name="l00636"></a>00636     <span class="keywordflow">if</span> ($open = @fsockopen($ip, 80, $errno, $errstr, 60))
+<a name="l00637"></a>00637     {
+<a name="l00638"></a>00638       $send .= <span class="stringliteral">"GET {$page} HTTP/1.0\r\n"</span>;
+<a name="l00639"></a>00639       $send .= <span class="stringliteral">"Host: {$url}\r\n"</span>;
+<a name="l00640"></a>00640       $send .= <span class="stringliteral">"Accept-Language: en-us, en;q=0.50\r\n"</span>;
+<a name="l00641"></a>00641       $send .= <span class="stringliteral">"User-Agent: {$_SERVER["</span>HTTP_USER_AGENT<span class="stringliteral">"]}\r\n"</span>;
+<a name="l00642"></a>00642       $send .= <span class="stringliteral">"Connection: Close\r\n\r\n"</span>;
+<a name="l00643"></a>00643 
+<a name="l00644"></a>00644       fputs($open, $send);
+<a name="l00645"></a>00645       $return = <span class="stringliteral">""</span>;
+<a name="l00646"></a>00646       <span class="keywordflow">while</span> (!feof($open))
+<a name="l00647"></a>00647       {
+<a name="l00648"></a>00648         $return .= fgets($open, 4096);
+<a name="l00649"></a>00649       }
+<a name="l00650"></a>00650       fclose($open);
+<a name="l00651"></a>00651 
+<a name="l00652"></a>00652       $ret = @explode(<span class="stringliteral">"\r\n\r\n"</span>, $return, 2);
+<a name="l00653"></a>00653       <span class="comment">//$header = $ret[0]; //header</span>
+<a name="l00654"></a>00654       $result = $ret[1]; <span class="comment">//body</span>
+<a name="l00655"></a>00655     }
+<a name="l00656"></a>00656       <span class="keywordflow">else</span>
+<a name="l00657"></a>00657     {
+<a name="l00658"></a>00658       $this-&gt;var-&gt;main-&gt;ErrorMsg(<span class="stringliteral">"připojení k portu 80, cislo: {$errno}, duvod: {$errstr}"</span>);
+<a name="l00659"></a>00659       $result = NULL;
+<a name="l00660"></a>00660     }
+<a name="l00661"></a>00661 
+<a name="l00662"></a>00662     <span class="keywordflow">return</span> $result;
+<a name="l00663"></a>00663   }
+<a name="l00664"></a>00664 
+<a name="l00674"></a><a class="code" href="classFunkce.html#e6778847571b5a016acce7e7779e0285">00674</a>   <span class="keyword">public</span> function <a class="code" href="classFunkce.html#e6778847571b5a016acce7e7779e0285">KontrolaEmailu</a>($email)
+<a name="l00675"></a>00675   {
+<a name="l00676"></a>00676     $regular = <span class="stringliteral">"/^[_a-zA-Z0-9\.\-]+@[_a-zA-Z0-9\.\-]+\.[a-zA-Z]{2,4}\$/"</span>;
+<a name="l00677"></a>00677     preg_match($regular, $email, $ret);
+<a name="l00678"></a>00678     $result = $ret[0];  <span class="comment">//vybere nulty index</span>
+<a name="l00679"></a>00679 
+<a name="l00680"></a>00680     <span class="keywordflow">return</span> $result;
+<a name="l00681"></a>00681   }
+<a name="l00682"></a>00682 
+<a name="l00692"></a><a class="code" href="classFunkce.html#89f5e0f46c85a864f457db9feb24388a">00692</a>   <span class="keyword">public</span> function <a class="code" href="classFunkce.html#89f5e0f46c85a864f457db9feb24388a">ExistenceUrl</a>($url)
+<a name="l00693"></a>00693   {
+<a name="l00694"></a>00694     <span class="keywordflow">if</span> (!in_array($_SERVER[<span class="stringliteral">"REMOTE_ADDR"</span>], $this-&gt;var-&gt;ipblok))
+<a name="l00695"></a>00695     {
+<a name="l00696"></a>00696       $a = get_headers($url);
+<a name="l00697"></a>00697       $b = explode(<span class="stringliteral">" "</span>, $a[0]);
+<a name="l00698"></a>00698 
+<a name="l00699"></a>00699       <span class="keywordflow">if</span> ($b[1] == 200) <span class="comment">//kdyz existuje je 200</span>
+<a name="l00700"></a>00700       {
+<a name="l00701"></a>00701         $result = <span class="keyword">true</span>;
+<a name="l00702"></a>00702       }
+<a name="l00703"></a>00703         <span class="keywordflow">else</span>
+<a name="l00704"></a>00704       {
+<a name="l00705"></a>00705         $result = <span class="keyword">false</span>;
+<a name="l00706"></a>00706       }
+<a name="l00707"></a>00707     }
+<a name="l00708"></a>00708       <span class="keywordflow">else</span>
+<a name="l00709"></a>00709     {
+<a name="l00710"></a>00710       $result = <span class="keyword">true</span>;
+<a name="l00711"></a>00711     }
+<a name="l00712"></a>00712 
+<a name="l00713"></a>00713     <span class="keywordflow">return</span> $result;
+<a name="l00714"></a>00714   }
+<a name="l00715"></a>00715 
+<a name="l00721"></a><a class="code" href="classFunkce.html#69911132bb6199619c01dfd49855aa71">00721</a>   <span class="keyword">private</span> function <a class="code" href="classFunkce.html#69911132bb6199619c01dfd49855aa71">Prihlasovani</a>()
+<a name="l00722"></a>00722   {
+<a name="l00723"></a>00723     <span class="keywordflow">if</span> ($this-&gt;var-&gt;klenot)  <span class="comment">//prepnuti pro ziskani dat z klenot</span>
+<a name="l00724"></a>00724     {
+<a name="l00725"></a>00725       list($_SERVER[<span class="stringliteral">"PHP_AUTH_USER"</span>], $_SERVER[<span class="stringliteral">"PHP_AUTH_PW"</span>]) = explode(<span class="stringliteral">":"</span>, base64_decode(substr($_SERVER[<span class="stringliteral">"REDIRECT_REMOTE_USER"</span>], 6)));
+<a name="l00726"></a>00726     }
+<a name="l00727"></a>00727 
+<a name="l00728"></a>00728     <span class="keywordflow">if</span> ($_GET[$this-&gt;var-&gt;get_kam] == <span class="stringliteral">"logoff"</span>)
+<a name="l00729"></a>00729     {
+<a name="l00730"></a>00730       $_SERVER[<span class="stringliteral">"PHP_AUTH_USER"</span>] = <span class="stringliteral">""</span>;
+<a name="l00731"></a>00731       $_SERVER[<span class="stringliteral">"PHP_AUTH_PW"</span>] = <span class="stringliteral">""</span>;
+<a name="l00732"></a>00732       header(<span class="stringliteral">"WWW-Authenticate: Basic realm=\"vychozi layout\""</span>);
+<a name="l00733"></a>00733       header(<span class="stringliteral">"HTTP/1.0 401 Unauthorized"</span>);
+<a name="l00734"></a>00734       $this-&gt;<a class="code" href="classFunkce.html#1a42209cf0b25a41f692ad194a4d80f9">AutoClick</a>(0, <span class="stringliteral">"./"</span>);
+<a name="l00735"></a>00735     }
+<a name="l00736"></a>00736 
+<a name="l00737"></a>00737     <span class="keywordflow">if</span> ($_GET[$this-&gt;var-&gt;get_kam] == $this-&gt;var-&gt;adresaadminu)
+<a name="l00738"></a>00738     {
+<a name="l00739"></a>00739       <span class="keywordflow">if</span> (!$this-&gt;<a class="code" href="classFunkce.html#3e5b3e0ae457dbff92757893f42e4c59">Autorizace</a>($_SERVER[<span class="stringliteral">"PHP_AUTH_USER"</span>], $_SERVER[<span class="stringliteral">"PHP_AUTH_PW"</span>]))
+<a name="l00740"></a>00740       {
+<a name="l00741"></a>00741         header(<span class="stringliteral">"WWW-Authenticate: Basic realm=\"vychozi layout\""</span>);
+<a name="l00742"></a>00742         header(<span class="stringliteral">"HTTP/1.0 401 Unauthorized"</span>);
+<a name="l00743"></a>00743 
+<a name="l00744"></a>00744         $this-&gt;var-&gt;aktivniadmin = <span class="keyword">false</span>;
+<a name="l00745"></a>00745         $this-&gt;<a class="code" href="classFunkce.html#1a42209cf0b25a41f692ad194a4d80f9">AutoClick</a>(0, <span class="stringliteral">"./"</span>);
+<a name="l00746"></a>00746       }
+<a name="l00747"></a>00747         <span class="keywordflow">else</span>
+<a name="l00748"></a>00748       {
+<a name="l00749"></a>00749         <span class="keywordflow">if</span> ($this-&gt;<a class="code" href="classFunkce.html#3e5b3e0ae457dbff92757893f42e4c59">Autorizace</a>($_SERVER[<span class="stringliteral">"PHP_AUTH_USER"</span>], $_SERVER[<span class="stringliteral">"PHP_AUTH_PW"</span>]))
+<a name="l00750"></a>00750         {
+<a name="l00751"></a>00751           $this-&gt;var-&gt;aktivniadmin = <span class="keyword">true</span>;
+<a name="l00752"></a>00752         }
+<a name="l00753"></a>00753           <span class="keywordflow">else</span>
+<a name="l00754"></a>00754         {
+<a name="l00755"></a>00755           $this-&gt;var-&gt;aktivniadmin = <span class="keyword">false</span>;
+<a name="l00756"></a>00756         }
+<a name="l00757"></a>00757       }
+<a name="l00758"></a>00758     }
+<a name="l00759"></a>00759   }
+<a name="l00760"></a>00760 
+<a name="l00769"></a><a class="code" href="classFunkce.html#3e5b3e0ae457dbff92757893f42e4c59">00769</a>   <span class="keyword">private</span> function <a class="code" href="classFunkce.html#3e5b3e0ae457dbff92757893f42e4c59">Autorizace</a>($login, $heslo)
+<a name="l00770"></a>00770   {
+<a name="l00771"></a>00771     $result = ($this-&gt;var-&gt;adminpristup[$login] == md5(md5($heslo)) ? <span class="keyword">true</span> : <span class="keyword">false</span>);
+<a name="l00772"></a>00772 
+<a name="l00773"></a>00773     <span class="keywordflow">return</span> $result;
+<a name="l00774"></a>00774   }
+<a name="l00775"></a>00775 
+<a name="l00782"></a><a class="code" href="classFunkce.html#8daeb11d1c64737611de6bca11e6c6c7">00782</a>   <span class="keyword">private</span> function <a class="code" href="classFunkce.html#8daeb11d1c64737611de6bca11e6c6c7">MeritCas</a>() <span class="comment">//funkce pro vrácení času</span>
+<a name="l00783"></a>00783   {
+<a name="l00784"></a>00784     $cas = explode(<span class="stringliteral">" "</span>, microtime());
+<a name="l00785"></a>00785     $soucet = $cas[1] + $cas[0];
+<a name="l00786"></a>00786 
+<a name="l00787"></a>00787     <span class="keywordflow">return</span> $soucet;
+<a name="l00788"></a>00788   }
+<a name="l00789"></a>00789 
+<a name="l00795"></a><a class="code" href="classFunkce.html#147580ce949ee4701ff667188251a22b">00795</a>   <span class="keyword">public</span> function <a class="code" href="classFunkce.html#147580ce949ee4701ff667188251a22b">StartCas</a>() <span class="comment">//zapis začátku</span>
+<a name="l00796"></a>00796   {
+<a name="l00797"></a>00797     $this-&gt;start = $this-&gt;<a class="code" href="classFunkce.html#8daeb11d1c64737611de6bca11e6c6c7">MeritCas</a>();
+<a name="l00798"></a>00798   }
+<a name="l00799"></a>00799 
+<a name="l00806"></a><a class="code" href="classFunkce.html#8789e5480291d6628bb0a89d620c7633">00806</a>   <span class="keyword">public</span> function <a class="code" href="classFunkce.html#8789e5480291d6628bb0a89d620c7633">KonecCas</a>()
+<a name="l00807"></a>00807   {
+<a name="l00808"></a>00808     $this-&gt;konec = $this-&gt;<a class="code" href="classFunkce.html#8daeb11d1c64737611de6bca11e6c6c7">MeritCas</a>();
+<a name="l00809"></a>00809     $cas = Abs(Round(($this-&gt;konec - $this-&gt;start) * 10000) / 10000); <span class="comment">//Abs, výpočet</span>
+<a name="l00810"></a>00810 
+<a name="l00811"></a>00811     <span class="keywordflow">return</span> $cas;
+<a name="l00812"></a>00812   }
+<a name="l00813"></a>00813 
+<a name="l00820"></a><a class="code" href="classFunkce.html#e4edd9e207bd4e4056ab5239074e96fc">00820</a>   <span class="keyword">public</span> function <a class="code" href="classFunkce.html#e4edd9e207bd4e4056ab5239074e96fc">ObsahStranek</a>()
+<a name="l00821"></a>00821   {
+<a name="l00822"></a>00822     $kam = $_GET[$this-&gt;var-&gt;get_kam];
+<a name="l00823"></a>00823 
+<a name="l00824"></a>00824     <span class="keywordflow">if</span> (!Empty($kam))
+<a name="l00825"></a>00825     {
+<a name="l00826"></a>00826       <span class="keywordflow">if</span> (file_exists(<span class="stringliteral">"{$this-&gt;var-&gt;souborymenu}/{$kam}.php"</span>))
+<a name="l00827"></a>00827       {
+<a name="l00828"></a>00828         $this-&gt;var-&gt;kam = $kam;
+<a name="l00829"></a>00829         $result = include_once <span class="stringliteral">"{$this-&gt;var-&gt;souborymenu}/{$this-&gt;var-&gt;kam}.php"</span>;
+<a name="l00830"></a>00830       }
+<a name="l00831"></a>00831         <span class="keywordflow">else</span>
+<a name="l00832"></a>00832       {
+<a name="l00833"></a>00833         $result = $this-&gt;<a class="code" href="classFunkce.html#11427802725fc5e1aaac3212eb98f8f3">KontrolaDefaultu</a>();
+<a name="l00834"></a>00834       }
+<a name="l00835"></a>00835     }
+<a name="l00836"></a>00836       <span class="keywordflow">else</span>
+<a name="l00837"></a>00837     {
+<a name="l00838"></a>00838       $result = $this-&gt;<a class="code" href="classFunkce.html#11427802725fc5e1aaac3212eb98f8f3">KontrolaDefaultu</a>();
+<a name="l00839"></a>00839     }
+<a name="l00840"></a>00840 
+<a name="l00841"></a>00841     <span class="keywordflow">if</span> ($_GET[$this-&gt;var-&gt;get_kam] == $this-&gt;var-&gt;adresaadminu &amp;&amp;
+<a name="l00842"></a>00842         $this-&gt;var-&gt;aktivniadmin)
+<a name="l00843"></a>00843     {
+<a name="l00844"></a>00844       $result = <span class="stringliteral">"admin obsahu neni - každá stránka má indivduální&lt;br /&gt;"</span>; <span class="comment">//pri zapnute adminstraci</span>
+<a name="l00845"></a>00845     }
+<a name="l00846"></a>00846 
+<a name="l00847"></a>00847     <span class="keywordflow">return</span> $result;
+<a name="l00848"></a>00848   }
+<a name="l00849"></a>00849 
+<a name="l00856"></a><a class="code" href="classFunkce.html#11427802725fc5e1aaac3212eb98f8f3">00856</a>   <span class="keyword">private</span> function <a class="code" href="classFunkce.html#11427802725fc5e1aaac3212eb98f8f3">KontrolaDefaultu</a>()
+<a name="l00857"></a>00857   {
+<a name="l00858"></a>00858     <span class="keywordflow">if</span> (file_exists(<span class="stringliteral">"{$this-&gt;var-&gt;souborymenu}/{$this-&gt;var-&gt;default}.php"</span>))
+<a name="l00859"></a>00859     {
+<a name="l00860"></a>00860       $this-&gt;var-&gt;kam = $this-&gt;var-&gt;default;
+<a name="l00861"></a>00861       $result = include_once <span class="stringliteral">"{$this-&gt;var-&gt;souborymenu}/{$this-&gt;var-&gt;kam}.php"</span>;
+<a name="l00862"></a>00862     }
+<a name="l00863"></a>00863       <span class="keywordflow">else</span>
+<a name="l00864"></a>00864     {
+<a name="l00865"></a>00865       $this-&gt;<a class="code" href="classFunkce.html#3d1531aa7d5ceccbc6030d14455749db">ErrorMsg</a>(<span class="stringliteral">"Stánka: '{$this-&gt;var-&gt;default}.php' neexistuje"</span>);
+<a name="l00866"></a>00866     }
+<a name="l00867"></a>00867 
+<a name="l00868"></a>00868     <span class="keywordflow">return</span> $result;
+<a name="l00869"></a>00869   }
+<a name="l00870"></a>00870 
+<a name="l00878"></a><a class="code" href="classFunkce.html#2dcf87d57afecaaf55bcf6233fc6e773">00878</a>   <span class="keyword">public</span> function <a class="code" href="classFunkce.html#2dcf87d57afecaaf55bcf6233fc6e773">OdkazZpet</a>($text = <span class="stringliteral">"O úroveň nazpět"</span>, $zpet = 1) <span class="comment">//vracec historie</span>
+<a name="l00879"></a>00879   {
+<a name="l00880"></a>00880     $result = <span class="stringliteral">"&lt;a href=\"javascript:history.back(-{$zpet});\"&gt;{$text}&lt;/a&gt;"</span>;
+<a name="l00881"></a>00881 
+<a name="l00882"></a>00882     <span class="keywordflow">return</span> $result;
+<a name="l00883"></a>00883   }
+<a name="l00884"></a>00884 
+<a name="l00892"></a><a class="code" href="classFunkce.html#3d1531aa7d5ceccbc6030d14455749db">00892</a>   <span class="keyword">public</span> function <a class="code" href="classFunkce.html#3d1531aa7d5ceccbc6030d14455749db">ErrorMsg</a>($chyba)  <span class="comment">//proecdura chybove hlasky</span>
+<a name="l00893"></a>00893   {
+<a name="l00894"></a>00894     $this-&gt;var-&gt;chyba =
+<a name="l00895"></a>00895     <span class="stringliteral">"</span>
+<a name="l00896"></a>00896 <span class="stringliteral">&lt;div id=\"centralni_chyba\"&gt;</span>
+<a name="l00897"></a>00897 <span class="stringliteral">  &lt;p&gt;</span>
+<a name="l00898"></a>00898 <span class="stringliteral">    Vyskytla se chyba:</span>
+<a name="l00899"></a>00899 <span class="stringliteral">  &lt;/p&gt;</span>
+<a name="l00900"></a>00900 <span class="stringliteral">  &lt;p&gt;</span>
+<a name="l00901"></a>00901 <span class="stringliteral">    &lt;strong&gt;{$chyba}&lt;/strong&gt;</span>
+<a name="l00902"></a>00902 <span class="stringliteral">  &lt;/p&gt;</span>
+<a name="l00903"></a>00903 <span class="stringliteral">  {$this-&gt;OdkazZpet()}</span>
+<a name="l00904"></a>00904 <span class="stringliteral">&lt;/div&gt;</span>
+<a name="l00905"></a>00905 <span class="stringliteral">    "</span>;
+<a name="l00906"></a>00906   }
+<a name="l00907"></a>00907 
+<a name="l00916"></a><a class="code" href="classFunkce.html#1a42209cf0b25a41f692ad194a4d80f9">00916</a>   <span class="keyword">public</span> function <a class="code" href="classFunkce.html#1a42209cf0b25a41f692ad194a4d80f9">AutoClick</a>($cas, $cesta)  <span class="comment">//auto kliknuti, procedura</span>
+<a name="l00917"></a>00917   {
+<a name="l00918"></a>00918     $this-&gt;var-&gt;meta = <span class="stringliteral">"&lt;meta http-equiv=\"refresh\" content=\"{$cas};URL={$cesta}\" /&gt;"</span>;
+<a name="l00919"></a>00919   }
+<a name="l00920"></a>00920 
+<a name="l00928"></a><a class="code" href="classFunkce.html#155ab59e21321e7d22a39bc54867d48b">00928</a>   <span class="keyword">public</span> function <a class="code" href="classFunkce.html#155ab59e21321e7d22a39bc54867d48b">TypOS</a>($agent)
+<a name="l00929"></a>00929   {
+<a name="l00930"></a>00930     $OSList = array(<span class="stringliteral">"Windows 3.11"</span> =&gt; <span class="stringliteral">"/Win16/i"</span>,
+<a name="l00931"></a>00931                     <span class="stringliteral">"Windows 95"</span> =&gt; <span class="stringliteral">"/(Windows.95)|(Win95)/i"</span>,
+<a name="l00932"></a>00932                     <span class="stringliteral">"Windows 98"</span> =&gt; <span class="stringliteral">"/(Windows.98)|(Win98)/i"</span>,
+<a name="l00933"></a>00933                     <span class="stringliteral">"Windows 2000"</span> =&gt; <span class="stringliteral">"/(Windows NT 5\.0)|(Windows 2000)/i"</span>,
+<a name="l00934"></a>00934                     <span class="stringliteral">"Windows XP"</span> =&gt; <span class="stringliteral">"/(Windows NT 5\.1)|(Windows XP)/i"</span>,
+<a name="l00935"></a>00935                     <span class="stringliteral">"Windows XP x64"</span> =&gt; <span class="stringliteral">"/((Windows NT 5\.2).*(Win64))|((Win64).*(Windows NT 5\.2))/i"</span>,
+<a name="l00936"></a>00936                     <span class="stringliteral">"Windows Server 2003"</span> =&gt; <span class="stringliteral">"/Windows NT 5\.2/i"</span>,
+<a name="l00937"></a>00937                     <span class="stringliteral">"Windows Vista"</span> =&gt; <span class="stringliteral">"/Windows NT 6\.0/i"</span>,
+<a name="l00938"></a>00938                     <span class="stringliteral">"Windows 7"</span> =&gt; <span class="stringliteral">"/Windows NT 7\.0/i"</span>,
+<a name="l00939"></a>00939                     <span class="stringliteral">"Windows NT 4.0"</span> =&gt; <span class="stringliteral">"/(Windows NT 4\.0)|(WinNT4\.0)|(WinNT)|(Windows NT)/i"</span>,
+<a name="l00940"></a>00940                     <span class="stringliteral">"Windows ME"</span> =&gt; <span class="stringliteral">"/(Windows ME)|(Win 9x 4\.90)/i"</span>,
+<a name="l00941"></a>00941                     <span class="stringliteral">"Microsoft PocketPC"</span> =&gt; <span class="stringliteral">"/((Windows CE).*(PPC))|((PPC).*(Windows CE))/i"</span>,
+<a name="l00942"></a>00942                     <span class="stringliteral">"Microsoft Smartphone"</span> =&gt; <span class="stringliteral">"/((Windows CE).*(smartphone))|((smartphone).*(Windows CE))/i"</span>,
+<a name="l00943"></a>00943                     <span class="stringliteral">"Windows CE"</span> =&gt; <span class="stringliteral">"/Windows CE/i"</span>,
+<a name="l00944"></a>00944                     <span class="stringliteral">"Mandrake Linux"</span> =&gt; <span class="stringliteral">"/((Linux).*(Mandrake))|((Mandrake).*(Linux))/i"</span>,
+<a name="l00945"></a>00945                     <span class="stringliteral">"Mandriva Linux"</span> =&gt; <span class="stringliteral">"/((Linux).*(Mandriva))|((Mandriva).*(Linux))/i"</span>,
+<a name="l00946"></a>00946                     <span class="stringliteral">"SuSE Linux"</span> =&gt; <span class="stringliteral">"/((Linux).*(SuSE))|((SuSE).*(Linux))/i"</span>,
+<a name="l00947"></a>00947                     <span class="stringliteral">"Novell Linux"</span> =&gt; <span class="stringliteral">"/((Linux).*(Novell))|((Novell).*(Linux))/i"</span>,
+<a name="l00948"></a>00948                     <span class="stringliteral">"Kubuntu Linux"</span> =&gt; <span class="stringliteral">"/((Linux).*(Kubuntu))|((Kubuntu).*(Linux))/i"</span>,
+<a name="l00949"></a>00949                     <span class="stringliteral">"Xubuntu Linux"</span> =&gt; <span class="stringliteral">"/((Linux).*(Xubuntu))|((Xubuntu).*(Linux))/i"</span>,
+<a name="l00950"></a>00950                     <span class="stringliteral">"Edubuntu Linux"</span> =&gt; <span class="stringliteral">"/((Linux).*(Edubuntu))|((Edubuntu).*(Linux))/i"</span>,
+<a name="l00951"></a>00951                     <span class="stringliteral">"Ubuntu Linux"</span> =&gt; <span class="stringliteral">"/((Linux).*(Ubuntu))|((Ubuntu).*(Linux))/i"</span>,
+<a name="l00952"></a>00952                     <span class="stringliteral">"Debian GNU/Linux"</span> =&gt; <span class="stringliteral">"/((Linux).*(Debian))|((Debian).*(Linux))/i"</span>,
+<a name="l00953"></a>00953                     <span class="stringliteral">"RedHat Linux"</span> =&gt; <span class="stringliteral">"/((Linux).*(Red ?Hat))|((Red ?Hat).*(Linux))/i"</span>,
+<a name="l00954"></a>00954                     <span class="stringliteral">"Gentoo Linux"</span> =&gt; <span class="stringliteral">"/((Linux).*(Gentoo))|((Gentoo).*(Linux))/i"</span>,
+<a name="l00955"></a>00955                     <span class="stringliteral">"Fedora Linux"</span> =&gt; <span class="stringliteral">"/((Linux).*(Fedora))|((Fedora).*(Linux))/i"</span>,
+<a name="l00956"></a>00956                     <span class="stringliteral">"MEPIS Linux"</span> =&gt; <span class="stringliteral">"/((Linux).*(MEPIS))|((MEPIS).*(Linux))/i"</span>,
+<a name="l00957"></a>00957                     <span class="stringliteral">"Knoppix Linux"</span> =&gt; <span class="stringliteral">"/((Linux).*(Knoppix))|((Knoppix).*(Linux))/i"</span>,
+<a name="l00958"></a>00958                     <span class="stringliteral">"Slackware Linux"</span> =&gt; <span class="stringliteral">"/((Linux).*(Slackware))|((Slackware).*(Linux))/i"</span>,
+<a name="l00959"></a>00959                     <span class="stringliteral">"Xandros Linux"</span> =&gt; <span class="stringliteral">"/((Linux).*(Xandros))|((Xandros).*(Linux))/i"</span>,
+<a name="l00960"></a>00960                     <span class="stringliteral">"Kanotix Linux"</span> =&gt; <span class="stringliteral">"/((Linux).*(Kanotix))|((Kanotix).*(Linux))/i"</span>,
+<a name="l00961"></a>00961                     <span class="stringliteral">"Linux"</span> =&gt; <span class="stringliteral">"/(Linux)|(X11)/i"</span>,
+<a name="l00962"></a>00962                     <span class="stringliteral">"FreeBSD"</span> =&gt; <span class="stringliteral">"/Free/i"</span>,
+<a name="l00963"></a>00963                     <span class="stringliteral">"OpenBSD"</span> =&gt; <span class="stringliteral">"/OpenBSD/i"</span>,
+<a name="l00964"></a>00964                     <span class="stringliteral">"NetBSD"</span> =&gt; <span class="stringliteral">"/NetBSD/i"</span>,
+<a name="l00965"></a>00965                     <span class="stringliteral">"SGI IRIX"</span> =&gt; <span class="stringliteral">"/IRIX/i"</span>,
+<a name="l00966"></a>00966                     <span class="stringliteral">"Sun OS"</span> =&gt; <span class="stringliteral">"/SunOS/i"</span>,
+<a name="l00967"></a>00967                     <span class="stringliteral">"QNX"</span> =&gt; <span class="stringliteral">"/QNX/i"</span>,
+<a name="l00968"></a>00968                     <span class="stringliteral">"BeOS"</span> =&gt; <span class="stringliteral">"/BeOS/i"</span>,
+<a name="l00969"></a>00969                     <span class="stringliteral">"Mac OS X Leopard"</span> =&gt; <span class="stringliteral">"/(Mac OS).*(Leopard)/i"</span>,
+<a name="l00970"></a>00970                     <span class="stringliteral">"Mac OS X"</span> =&gt; <span class="stringliteral">"/(Mac OS X)/i"</span>,
+<a name="l00971"></a>00971                     <span class="stringliteral">"Mac OS"</span> =&gt; <span class="stringliteral">"/(Mac_PowerPC)|(Macintosh)/i"</span>,
+<a name="l00972"></a>00972                     <span class="stringliteral">"OS/2"</span> =&gt; <span class="stringliteral">"#OS/2#i"</span>,
+<a name="l00973"></a>00973                     <span class="stringliteral">"Qtopia"</span> =&gt; <span class="stringliteral">"/QtEmbedded/i"</span>,
+<a name="l00974"></a>00974                     <span class="stringliteral">"Sharp Zaurus \\1"</span> =&gt; <span class="stringliteral">"/Zaurus ([a-zA-Z0-9\.]+)/i"</span>,
+<a name="l00975"></a>00975                     <span class="stringliteral">"Zaurus"</span> =&gt; <span class="stringliteral">"/Zaurus/i"</span>,
+<a name="l00976"></a>00976                     <span class="stringliteral">"Symbian OS"</span> =&gt; <span class="stringliteral">"/Symbian/i"</span>,
+<a name="l00977"></a>00977                     <span class="stringliteral">"Sony Clie"</span> =&gt; <span class="stringliteral">"#PalmOS/sony/model#i"</span>,
+<a name="l00978"></a>00978                     <span class="stringliteral">"Series \\1"</span> =&gt; <span class="stringliteral">"/Series ([0-9]+)/i"</span>,
+<a name="l00979"></a>00979                     <span class="stringliteral">"Nokia \\1"</span> =&gt; <span class="stringliteral">"/Nokia ([0-9]+)/i"</span>,
+<a name="l00980"></a>00980                     <span class="stringliteral">"Siemens \\1"</span> =&gt; <span class="stringliteral">"/SIE-([a-zA-Z0-9]+)/i"</span>,
+<a name="l00981"></a>00981                     <span class="stringliteral">"Dopod \\1"</span> =&gt; <span class="stringliteral">"/dopod([a-zA-Z0-9]+)/i"</span>,
+<a name="l00982"></a>00982                     <span class="stringliteral">"O2 XDA \\1"</span> =&gt; <span class="stringliteral">"/o2 xda ([a-zA-Z0-9 ]+);/i"</span>,
+<a name="l00983"></a>00983                     <span class="stringliteral">"Samsung \\1"</span> =&gt; <span class="stringliteral">"/SEC-([a-zA-Z0-9]+)/i"</span>,
+<a name="l00984"></a>00984                     <span class="stringliteral">"SonyEricsson \\1"</span> =&gt; <span class="stringliteral">"/SonyEricsson ?([a-zA-Z0-9]+)/i"</span>,
+<a name="l00985"></a>00985                     <span class="stringliteral">"Nintendo Wii"</span> =&gt; <span class="stringliteral">"/Wii/i"</span>,
+<a name="l00986"></a>00986                     <span class="stringliteral">"Bot"</span> =&gt; <span class="stringliteral">"/(crawler)|(Mediapartners-Google)|(Jyxobot)|(morfeo.centrum.cz)|(Gigabot)|(ASAP-LynxViewer)|(ASAP-Web-Sniffer)|(EARTHCOM.info)|(Mozdex)|(SeznamBot)|(Speedy Spider)|(Yahoo! Slurp)|(ZACATEK_CZ_BOT)|(www.yacy.net)|(Googlebot)|(Openbot)|(MSNBot)|(del.icio.us-thumbnails)|(Exabot)|(findlinks)|(Bot,Robot,Spider)/i"</span>,
+<a name="l00987"></a>00987                     <span class="stringliteral">"Neznámý"</span> =&gt; <span class="stringliteral">"/(.*)/"</span>);
+<a name="l00988"></a>00988 
+<a name="l00989"></a>00989     <span class="keywordflow">foreach</span>($OSList as $os =&gt; $regexp)
+<a name="l00990"></a>00990     {
+<a name="l00991"></a>00991       preg_match($regexp, $agent, $matches);
+<a name="l00992"></a>00992       <span class="keywordflow">if</span> (!Empty($matches))
+<a name="l00993"></a>00993       {
+<a name="l00994"></a>00994         <span class="keywordflow">for</span> ($i = 0; $i &lt;= count($matches); $i++)
+<a name="l00995"></a>00995         {
+<a name="l00996"></a>00996           $os = str_replace(<span class="stringliteral">"\\{$i}"</span>, $matches[$i], $os);
+<a name="l00997"></a>00997         }
+<a name="l00998"></a>00998         <span class="keywordflow">break</span>;
+<a name="l00999"></a>00999       }
+<a name="l01000"></a>01000     }
+<a name="l01001"></a>01001 
+<a name="l01002"></a>01002     <span class="keywordflow">return</span> trim($os);
+<a name="l01003"></a>01003   }
+<a name="l01004"></a>01004 
+<a name="l01012"></a><a class="code" href="classFunkce.html#98109aedad71de96bc201380dff36d71">01012</a>   <span class="keyword">public</span> function <a class="code" href="classFunkce.html#98109aedad71de96bc201380dff36d71">TypBrowseru</a>($agent)
+<a name="l01013"></a>01013   {
+<a name="l01014"></a>01014     $BrowserList = array (<span class="stringliteral">"Internet Explorer \\1"</span> =&gt; <span class="stringliteral">"#MSIE ([a-zA-Z0-9\.]+)#i"</span>,
+<a name="l01015"></a>01015                           <span class="stringliteral">"Mozilla Firefox \\2"</span> =&gt; <span class="stringliteral">"#(Firefox|Phoenix|Firebird)/([a-zA-Z0-9\.]+)#i"</span>,
+<a name="l01016"></a>01016                           <span class="stringliteral">"Opera \\1"</span> =&gt; <span class="stringliteral">"#Opera[ /]([a-zA-Z0-9\.]+)#i"</span>,
+<a name="l01017"></a>01017                           <span class="stringliteral">"Netscape \\1"</span> =&gt; <span class="stringliteral">"#Netscape[0-9]?/([a-zA-Z0-9\.]+)#i"</span>,
+<a name="l01018"></a>01018                           <span class="stringliteral">"Safari \\1"</span> =&gt; <span class="stringliteral">"#Safari/([a-zA-Z0-9\.]+)#i"</span>,
+<a name="l01019"></a>01019                           <span class="stringliteral">"Flock \\1"</span> =&gt; <span class="stringliteral">"#Flock/([a-zA-Z0-9\.]+)#i"</span>,
+<a name="l01020"></a>01020                           <span class="stringliteral">"Epiphany \\1"</span> =&gt; <span class="stringliteral">"#Epiphany/([a-zA-Z0-9\.]+)#i"</span>,
+<a name="l01021"></a>01021                           <span class="stringliteral">"Konqueror \\1"</span> =&gt; <span class="stringliteral">"#Konqueror/([a-zA-Z0-9\.]+)#i"</span>,
+<a name="l01022"></a>01022                           <span class="stringliteral">"Maxthon \\1"</span> =&gt; <span class="stringliteral">"#Maxthon ?([a-zA-Z0-9\.]+)?#i"</span>,
+<a name="l01023"></a>01023                           <span class="stringliteral">"K-Meleon \\1"</span> =&gt; <span class="stringliteral">"#K-Meleon/([a-zA-Z0-9\.]+)#i"</span>,
+<a name="l01024"></a>01024                           <span class="stringliteral">"Lynx \\1"</span> =&gt; <span class="stringliteral">"#Lynx/([a-zA-Z0-9\.]+)#i"</span>,
+<a name="l01025"></a>01025                           <span class="stringliteral">"Links \\1"</span> =&gt; <span class="stringliteral">"#Links .{2}([a-zA-Z0-9\.]+)#i"</span>,
+<a name="l01026"></a>01026                           <span class="stringliteral">"ELinks \\3"</span> =&gt; <span class="stringliteral">"#ELinks([/ ]|(.{2}))([a-zA-Z0-9\.]+)#i"</span>,
+<a name="l01027"></a>01027                           <span class="stringliteral">"Debian IceWeasel \\1"</span> =&gt; <span class="stringliteral">"#(iceweasel)/([a-zA-Z0-9\.]+)#i"</span>,
+<a name="l01028"></a>01028                           <span class="stringliteral">"Mozilla SeaMonkey \\1"</span> =&gt; <span class="stringliteral">"#(SeaMonkey)/([a-zA-Z0-9\.]+)#i"</span>,
+<a name="l01029"></a>01029                           <span class="stringliteral">"OmniWeb"</span> =&gt; <span class="stringliteral">"#OmniWeb#i"</span>,
+<a name="l01030"></a>01030                           <span class="stringliteral">"Mozilla \\1"</span> =&gt; <span class="stringliteral">"#^Mozilla/5\.0.*rv:([a-zA-Z0-9\.]+).*#i"</span>,
+<a name="l01031"></a>01031                           <span class="stringliteral">"Netscape Navigator \\1"</span> =&gt; <span class="stringliteral">"#^Mozilla/([a-zA-Z0-9\.]+)#i"</span>,
+<a name="l01032"></a>01032                           <span class="stringliteral">"PHP"</span> =&gt; <span class="stringliteral">"/PHP/i"</span>,
+<a name="l01033"></a>01033                           <span class="stringliteral">"SymbianOS \\1"</span> =&gt; <span class="stringliteral">"#symbianos/([a-zA-Z0-9\.]+)#i"</span>,
+<a name="l01034"></a>01034                           <span class="stringliteral">"Avant Browser"</span> =&gt; <span class="stringliteral">"/avantbrowser\.com/i"</span>,
+<a name="l01035"></a>01035                           <span class="stringliteral">"Camino \\1"</span> =&gt; <span class="stringliteral">"#(Camino|Chimera)[ /]([a-zA-Z0-9\.]+)#i"</span>,
+<a name="l01036"></a>01036                           <span class="stringliteral">"Anonymouse"</span> =&gt; <span class="stringliteral">"/anonymouse/i"</span>,
+<a name="l01037"></a>01037                           <span class="stringliteral">"Danger HipTop"</span> =&gt; <span class="stringliteral">"/danger hiptop/i"</span>,
+<a name="l01038"></a>01038                           <span class="stringliteral">"W3M \\1"</span> =&gt; <span class="stringliteral">"#w3m/([a-zA-Z0-9\.]+)#i"</span>,
+<a name="l01039"></a>01039                           <span class="stringliteral">"Shiira \\1"</span> =&gt; <span class="stringliteral">"#Shiira[ /]([a-zA-Z0-9\.]+)#i"</span>,
+<a name="l01040"></a>01040                           <span class="stringliteral">"Dillo \\1"</span> =&gt; <span class="stringliteral">"#Dillo[ /]([a-zA-Z0-9\.]+)#i"</span>,
+<a name="l01041"></a>01041                           <span class="stringliteral">"Openwave UP.Browser \\1"</span> =&gt; <span class="stringliteral">"#UP.Browser/([a-zA-Z0-9\.]+)#i"</span>,
+<a name="l01042"></a>01042                           <span class="stringliteral">"DoCoMo \\1"</span> =&gt; <span class="stringliteral">"#DoCoMo/(([a-zA-Z0-9\.]+)[/ ]([a-zA-Z0-9\.]+))#i"</span>,
+<a name="l01043"></a>01043                           <span class="stringliteral">"Unbranded Firefox \\1"</span> =&gt; <span class="stringliteral">"#(bonecho)/([a-zA-Z0-9\.]+)#i"</span>,
+<a name="l01044"></a>01044                           <span class="stringliteral">"Kazehakase \\1"</span> =&gt; <span class="stringliteral">"#Kazehakase/([a-zA-Z0-9\.]+)#i"</span>,
+<a name="l01045"></a>01045                           <span class="stringliteral">"Minimo \\1"</span> =&gt; <span class="stringliteral">"#Minimo/([a-zA-Z0-9\.]+)#i"</span>,
+<a name="l01046"></a>01046                           <span class="stringliteral">"MultiZilla \\1"</span> =&gt; <span class="stringliteral">"#MultiZilla/([a-zA-Z0-9\.]+)#i"</span>,
+<a name="l01047"></a>01047                           <span class="stringliteral">"Sony PSP \\2"</span> =&gt; <span class="stringliteral">"/PSP \(PlayStation Portable\)\; ([a-zA-Z0-9\.]+)/i"</span>,
+<a name="l01048"></a>01048                           <span class="stringliteral">"Galeon \\1"</span> =&gt; <span class="stringliteral">"#Galeon/([a-zA-Z0-9\.]+)#i"</span>,
+<a name="l01049"></a>01049                           <span class="stringliteral">"iCab \\1"</span> =&gt; <span class="stringliteral">"#iCab/([a-zA-Z0-9\.]+)#i"</span>,
+<a name="l01050"></a>01050                           <span class="stringliteral">"NetPositive \\1"</span> =&gt; <span class="stringliteral">"#NetPositive/([a-zA-Z0-9\.]+)#i"</span>,
+<a name="l01051"></a>01051                           <span class="stringliteral">"NetNewsWire \\1"</span> =&gt; <span class="stringliteral">"#NetNewsWire/([a-zA-Z0-9\.]+)#i"</span>,
+<a name="l01052"></a>01052                           <span class="stringliteral">"Opera Mini \\1"</span> =&gt; <span class="stringliteral">"#opera mini/([a-zA-Z0-9]+)#i"</span>,
+<a name="l01053"></a>01053                           <span class="stringliteral">"WebPro \\2"</span> =&gt; <span class="stringliteral">"#WebPro(/([a-zA-Z0-9\.]+))?#i"</span>,
+<a name="l01054"></a>01054                           <span class="stringliteral">"Netfront \\1"</span> =&gt; <span class="stringliteral">"#Netfront/([a-zA-Z0-9\.]+)#i"</span>,
+<a name="l01055"></a>01055                           <span class="stringliteral">"Xiino \\1"</span> =&gt; <span class="stringliteral">"#Xiino/([a-zA-Z0-9\.]+)#i"</span>,
+<a name="l01056"></a>01056                           <span class="stringliteral">"Blackberry \\1"</span> =&gt; <span class="stringliteral">"#Blackberry([0-9]+)?#i"</span>,
+<a name="l01057"></a>01057                           <span class="stringliteral">"Orange SPV \\1"</span> =&gt; <span class="stringliteral">"#SPV ([0-9a-zA-Z\.]+)#i"</span>,
+<a name="l01058"></a>01058                           <span class="stringliteral">"LG \\1"</span> =&gt; <span class="stringliteral">"#LGE-([a-zA-Z0-9]+)#i"</span>,
+<a name="l01059"></a>01059                           <span class="stringliteral">"Motorola \\1"</span> =&gt; <span class="stringliteral">"#MOT-([a-zA-Z0-9]+)#i"</span>,
+<a name="l01060"></a>01060                           <span class="stringliteral">"Nokia \\1"</span> =&gt; <span class="stringliteral">"#Nokia ?([0-9]+)#i"</span>,
+<a name="l01061"></a>01061                           <span class="stringliteral">"Nokia N-Gage"</span> =&gt; <span class="stringliteral">"#NokiaN-Gage#i"</span>,
+<a name="l01062"></a>01062                           <span class="stringliteral">"Blazer \\1"</span> =&gt; <span class="stringliteral">"#Blazer[ /]?([a-zA-Z0-9\.]*)#i"</span>,
+<a name="l01063"></a>01063                           <span class="stringliteral">"Siemens \\1"</span> =&gt; <span class="stringliteral">"#SIE-([a-zA-Z0-9]+)#i"</span>,
+<a name="l01064"></a>01064                           <span class="stringliteral">"Samsung \\4"</span> =&gt; <span class="stringliteral">"#((SEC-)|(SAMSUNG-))((S.H-[a-zA-Z0-9]+)|([a-zA-Z0-9]+))#i"</span>,
+<a name="l01065"></a>01065                           <span class="stringliteral">"SonyEricsson \\1"</span> =&gt; <span class="stringliteral">"#SonyEricsson ?([a-zA-Z0-9]+)#i"</span>,
+<a name="l01066"></a>01066                           <span class="stringliteral">"J2ME/MIDP Browser"</span> =&gt; <span class="stringliteral">"#(j2me|midp)#i"</span>,
+<a name="l01067"></a>01067                           <span class="stringliteral">"Neznámý"</span> =&gt; <span class="stringliteral">"/(.*)/"</span>);
+<a name="l01068"></a>01068 
+<a name="l01069"></a>01069     <span class="keywordflow">foreach</span>($BrowserList as $browser =&gt; $regexp)
+<a name="l01070"></a>01070     {
+<a name="l01071"></a>01071       <span class="keywordflow">if</span> (preg_match($regexp, $agent, $matches))
+<a name="l01072"></a>01072       {
+<a name="l01073"></a>01073         <span class="keywordflow">if</span> (!Empty($matches))
+<a name="l01074"></a>01074         {
+<a name="l01075"></a>01075           <span class="keywordflow">for</span> ($i = 0; $i &lt;= count($matches); $i++)
+<a name="l01076"></a>01076           {
+<a name="l01077"></a>01077             $browser = str_replace(<span class="stringliteral">"\\{$i}"</span>, $matches[$i], $browser);
+<a name="l01078"></a>01078           }
+<a name="l01079"></a>01079         }
+<a name="l01080"></a>01080         <span class="keywordflow">break</span>;
+<a name="l01081"></a>01081       }
+<a name="l01082"></a>01082     }
+<a name="l01083"></a>01083 
+<a name="l01084"></a>01084     <span class="keywordflow">return</span> trim($browser);
+<a name="l01085"></a>01085   }
+<a name="l01086"></a>01086 
+<a name="l01095"></a><a class="code" href="classFunkce.html#b252b11b424ac779dc83aa5576118d1d">01095</a>   <span class="keyword">public</span> function <a class="code" href="classFunkce.html#b252b11b424ac779dc83aa5576118d1d">DetekceLinuxu</a>()
+<a name="l01096"></a>01096   {
+<a name="l01097"></a>01097     $OSList = array(<span class="stringliteral">"Mandrake Linux"</span> =&gt; <span class="stringliteral">"/((Linux).*(Mandrake))|((Mandrake).*(Linux))/i"</span>,
+<a name="l01098"></a>01098                     <span class="stringliteral">"Mandriva Linux"</span> =&gt; <span class="stringliteral">"/((Linux).*(Mandriva))|((Mandriva).*(Linux))/i"</span>,
+<a name="l01099"></a>01099                     <span class="stringliteral">"SuSE Linux"</span> =&gt; <span class="stringliteral">"/((Linux).*(SuSE))|((SuSE).*(Linux))/i"</span>,
+<a name="l01100"></a>01100                     <span class="stringliteral">"Novell Linux"</span> =&gt; <span class="stringliteral">"/((Linux).*(Novell))|((Novell).*(Linux))/i"</span>,
+<a name="l01101"></a>01101                     <span class="stringliteral">"Kubuntu Linux"</span> =&gt; <span class="stringliteral">"/((Linux).*(Kubuntu))|((Kubuntu).*(Linux))/i"</span>,
+<a name="l01102"></a>01102                     <span class="stringliteral">"Xubuntu Linux"</span> =&gt; <span class="stringliteral">"/((Linux).*(Xubuntu))|((Xubuntu).*(Linux))/i"</span>,
+<a name="l01103"></a>01103                     <span class="stringliteral">"Edubuntu Linux"</span> =&gt; <span class="stringliteral">"/((Linux).*(Edubuntu))|((Edubuntu).*(Linux))/i"</span>,
+<a name="l01104"></a>01104                     <span class="stringliteral">"Ubuntu Linux"</span> =&gt; <span class="stringliteral">"/((Linux).*(Ubuntu))|((Ubuntu).*(Linux))/i"</span>,
+<a name="l01105"></a>01105                     <span class="stringliteral">"Debian GNU/Linux"</span> =&gt; <span class="stringliteral">"/((Linux).*(Debian))|((Debian).*(Linux))/i"</span>,
+<a name="l01106"></a>01106                     <span class="stringliteral">"RedHat Linux"</span> =&gt; <span class="stringliteral">"/((Linux).*(Red ?Hat))|((Red ?Hat).*(Linux))/i"</span>,
+<a name="l01107"></a>01107                     <span class="stringliteral">"Gentoo Linux"</span> =&gt; <span class="stringliteral">"/((Linux).*(Gentoo))|((Gentoo).*(Linux))/i"</span>,
+<a name="l01108"></a>01108                     <span class="stringliteral">"Fedora Linux"</span> =&gt; <span class="stringliteral">"/((Linux).*(Fedora))|((Fedora).*(Linux))/i"</span>,
+<a name="l01109"></a>01109                     <span class="stringliteral">"MEPIS Linux"</span> =&gt; <span class="stringliteral">"/((Linux).*(MEPIS))|((MEPIS).*(Linux))/i"</span>,
+<a name="l01110"></a>01110                     <span class="stringliteral">"Knoppix Linux"</span> =&gt; <span class="stringliteral">"/((Linux).*(Knoppix))|((Knoppix).*(Linux))/i"</span>,
+<a name="l01111"></a>01111                     <span class="stringliteral">"Slackware Linux"</span> =&gt; <span class="stringliteral">"/((Linux).*(Slackware))|((Slackware).*(Linux))/i"</span>,
+<a name="l01112"></a>01112                     <span class="stringliteral">"Xandros Linux"</span> =&gt; <span class="stringliteral">"/((Linux).*(Xandros))|((Xandros).*(Linux))/i"</span>,
+<a name="l01113"></a>01113                     <span class="stringliteral">"Kanotix Linux"</span> =&gt; <span class="stringliteral">"/((Linux).*(Kanotix))|((Kanotix).*(Linux))/i"</span>,
+<a name="l01114"></a>01114                     <span class="stringliteral">"Linux"</span> =&gt; <span class="stringliteral">"/(Linux)|(X11)/i"</span>,
+<a name="l01115"></a>01115                     <span class="stringliteral">"FreeBSD"</span> =&gt; <span class="stringliteral">"/Free/i"</span>,
+<a name="l01116"></a>01116                     <span class="stringliteral">"OpenBSD"</span> =&gt; <span class="stringliteral">"/OpenBSD/i"</span>,
+<a name="l01117"></a>01117                     <span class="stringliteral">"NetBSD"</span> =&gt; <span class="stringliteral">"/NetBSD/i"</span>,
+<a name="l01118"></a>01118                     <span class="stringliteral">"SGI IRIX"</span> =&gt; <span class="stringliteral">"/IRIX/i"</span>,
+<a name="l01119"></a>01119                     <span class="stringliteral">"Sun OS"</span> =&gt; <span class="stringliteral">"/SunOS/i"</span>,
+<a name="l01120"></a>01120                     <span class="stringliteral">"QNX"</span> =&gt; <span class="stringliteral">"/QNX/i"</span>,
+<a name="l01121"></a>01121                     <span class="stringliteral">"BeOS"</span> =&gt; <span class="stringliteral">"/BeOS/i"</span>,
+<a name="l01122"></a>01122                     <span class="stringliteral">"Mac OS X Leopard"</span> =&gt; <span class="stringliteral">"/(Mac OS).*(Leopard)/i"</span>,
+<a name="l01123"></a>01123                     <span class="stringliteral">"Mac OS X"</span> =&gt; <span class="stringliteral">"/(Mac OS X)/i"</span>,
+<a name="l01124"></a>01124                     <span class="stringliteral">"Mac OS"</span> =&gt; <span class="stringliteral">"/(Mac_PowerPC)|(Macintosh)/i"</span>,
+<a name="l01125"></a>01125                     <span class="stringliteral">"OS/2"</span> =&gt; <span class="stringliteral">"#OS/2#i"</span>,
+<a name="l01126"></a>01126                     <span class="stringliteral">"Qtopia"</span> =&gt; <span class="stringliteral">"/QtEmbedded/i"</span>,
+<a name="l01127"></a>01127                     <span class="stringliteral">""</span> =&gt; <span class="stringliteral">"/(.*)/"</span>);
+<a name="l01128"></a>01128 
+<a name="l01129"></a>01129     $agent = $_SERVER[<span class="stringliteral">"HTTP_USER_AGENT"</span>];
+<a name="l01130"></a>01130     <span class="keywordflow">foreach</span>($OSList as $os =&gt; $regexp)
+<a name="l01131"></a>01131     {
+<a name="l01132"></a>01132       preg_match($regexp, $agent, $matches);
+<a name="l01133"></a>01133       <span class="keywordflow">if</span> (!Empty($matches))
+<a name="l01134"></a>01134       {
+<a name="l01135"></a>01135         <span class="keywordflow">for</span> ($i = 0; $i &lt;= count($matches); $i++)
+<a name="l01136"></a>01136         {
+<a name="l01137"></a>01137           $os = str_replace(<span class="stringliteral">"\\{$i}"</span>, $matches[$i], $os);
+<a name="l01138"></a>01138         }
+<a name="l01139"></a>01139         <span class="keywordflow">break</span>;
+<a name="l01140"></a>01140       }
+<a name="l01141"></a>01141     }
+<a name="l01142"></a>01142 
+<a name="l01143"></a>01143     <span class="keywordflow">return</span> (!Empty($os) ? <span class="keyword">true</span> : <span class="keyword">false</span>);
+<a name="l01144"></a>01144   }
+<a name="l01145"></a>01145 
+<a name="l01151"></a><a class="code" href="classFunkce.html#2d3e5927abec4a3d3c067089e4898ac2">01151</a>   <span class="keyword">private</span> function <a class="code" href="classFunkce.html#2d3e5927abec4a3d3c067089e4898ac2">Instalace</a>()  <span class="comment">//instalace databaze</span>
+<a name="l01152"></a>01152   {
+<a name="l01153"></a>01153     <span class="comment">//</span>
+<a name="l01154"></a>01154   }
+<a name="l01155"></a>01155 
+<a name="l01165"></a><a class="code" href="classFunkce.html#9ef4e94a7f9346ad4614d6023da845d1">01165</a>   <span class="keyword">public</span> function <a class="code" href="classFunkce.html#9ef4e94a7f9346ad4614d6023da845d1">Velikost</a>($size)  <span class="comment">//vypocet velikosti souboru</span>
+<a name="l01166"></a>01166   {
+<a name="l01167"></a>01167     $symbol = array(<span class="stringliteral">"B"</span>, <span class="stringliteral">"KB"</span>, <span class="stringliteral">"MB"</span>, <span class="stringliteral">"GB"</span>, <span class="stringliteral">"TB"</span>, <span class="stringliteral">"PB"</span>, <span class="stringliteral">"EB"</span>, <span class="stringliteral">"ZB"</span>, <span class="stringliteral">"YB"</span>);
+<a name="l01168"></a>01168 
+<a name="l01169"></a>01169     $exp = 0;
+<a name="l01170"></a>01170     $converted_value = 0;
+<a name="l01171"></a>01171     <span class="keywordflow">if</span> ($size &gt; 0)
+<a name="l01172"></a>01172     {
+<a name="l01173"></a>01173       $exp = floor(log($size) / log(1024));
+<a name="l01174"></a>01174       $converted_value = ($size / pow(1024, floor($exp)));
+<a name="l01175"></a>01175     }
+<a name="l01176"></a>01176 
+<a name="l01177"></a>01177     $result = sprintf(<span class="stringliteral">"%.2f {$symbol[$exp]}"</span>, $converted_value);
+<a name="l01178"></a>01178 
+<a name="l01179"></a>01179     <span class="keywordflow">return</span> $result;
+<a name="l01180"></a>01180   }
+<a name="l01181"></a>01181 
+<a name="l01194"></a><a class="code" href="classFunkce.html#870f6c21b4376d81f680fce900535fef">01194</a>   <span class="keyword">public</span> function <a class="code" href="classFunkce.html#870f6c21b4376d81f680fce900535fef">Strankovani</a>($na_stranku, $pocet_radku, $adresa, $typ)
+<a name="l01195"></a>01195   {
+<a name="l01196"></a>01196     $strana = $_GET[<span class="stringliteral">"str"</span>];
+<a name="l01197"></a>01197     settype($strana, <span class="stringliteral">"integer"</span>);
+<a name="l01198"></a>01198 
+<a name="l01199"></a>01199     settype($na_stranku, <span class="stringliteral">"integer"</span>);
+<a name="l01200"></a>01200     $pocetstran = ceil($pocet_radku / $na_stranku);  <span class="comment">//vypocteny pocet stran podle strankovani</span>
+<a name="l01201"></a>01201 
+<a name="l01202"></a>01202     settype($strana, <span class="stringliteral">"integer"</span>);
+<a name="l01203"></a>01203     $mezai = <span class="keyword">false</span>;
+<a name="l01204"></a>01204     <span class="keywordflow">if</span> ($pocetstran &gt; 7)
+<a name="l01205"></a>01205     {
+<a name="l01206"></a>01206       <span class="keywordflow">for</span> ($i = 0; $i &lt; 3; $i++)  <span class="comment">//prvni trojicka</span>
+<a name="l01207"></a>01207       {
+<a name="l01208"></a>01208         $str = $i * $na_stranku; <span class="comment">//stranka do DB</span>
+<a name="l01209"></a>01209         $poc = $i + 1;  <span class="comment">//predvipocotani poctu</span>
+<a name="l01210"></a>01210 
+<a name="l01211"></a>01211         <span class="keywordflow">if</span> ($i == 0 &amp;&amp; $strana != 0)  <span class="comment">//predchozi</span>
+<a name="l01212"></a>01212         {
+<a name="l01213"></a>01213           $prev = $strana - $na_stranku;
+<a name="l01214"></a>01214           $jdi .= <span class="stringliteral">"&lt;a href=\"{$adresa}&amp;amp;str={$prev}\" title=\"\"&gt;předchozí&lt;/a&gt; "</span>;
+<a name="l01215"></a>01215         }
+<a name="l01216"></a>01216 
+<a name="l01217"></a>01217         <span class="keywordflow">if</span> ($str == $strana)  <span class="comment">//detekce oznacene stranky</span>
+<a name="l01218"></a>01218         {
+<a name="l01219"></a>01219           $jdi .= <span class="stringliteral">"{$poc}, "</span>;
+<a name="l01220"></a>01220           $aktualni = $poc;
+<a name="l01221"></a>01221         }
+<a name="l01222"></a>01222           <span class="keywordflow">else</span>
+<a name="l01223"></a>01223         {
+<a name="l01224"></a>01224           $jdi .= <span class="stringliteral">"&lt;a href=\"{$adresa}&amp;amp;str={$str}\" title=\"\"&gt;{$poc}&lt;/a&gt;, "</span>;
+<a name="l01225"></a>01225         }
+<a name="l01226"></a>01226       }
+<a name="l01227"></a>01227 
+<a name="l01228"></a>01228       <span class="keywordflow">if</span> (($strana / $na_stranku) &gt;= 2 &amp;&amp; ($strana / $na_stranku) &lt;= ($pocetstran - 3))
+<a name="l01229"></a>01229       {
+<a name="l01230"></a>01230         $mezi = <span class="keyword">true</span>;
+<a name="l01231"></a>01231       }
+<a name="l01232"></a>01232         <span class="keywordflow">else</span>
+<a name="l01233"></a>01233       {
+<a name="l01234"></a>01234         $jdi .= <span class="stringliteral">"..., "</span>;
+<a name="l01235"></a>01235       }
+<a name="l01236"></a>01236 
+<a name="l01237"></a>01237       <span class="keywordflow">for</span> ($i = $pocetstran - 3; $i &lt; $pocetstran; $i++)  <span class="comment">//posledni trojicka</span>
+<a name="l01238"></a>01238       {
+<a name="l01239"></a>01239         $str = $i * $na_stranku; <span class="comment">//stranka do DB</span>
+<a name="l01240"></a>01240         $poc = $i + 1;  <span class="comment">//predvipocotani poctu</span>
+<a name="l01241"></a>01241 
+<a name="l01242"></a>01242         <span class="keywordflow">if</span> ($str == $strana)  <span class="comment">//detekce oznacene stranky</span>
+<a name="l01243"></a>01243         {
+<a name="l01244"></a>01244           $jdi .= <span class="stringliteral">"{$poc}, "</span>;
+<a name="l01245"></a>01245           $aktualni = $poc;
+<a name="l01246"></a>01246         }
+<a name="l01247"></a>01247           <span class="keywordflow">else</span>
+<a name="l01248"></a>01248         {
+<a name="l01249"></a>01249           $jdi .= <span class="stringliteral">"&lt;a href=\"{$adresa}&amp;amp;str={$str}\" title=\"\"&gt;{$poc}&lt;/a&gt;, "</span>;
+<a name="l01250"></a>01250         }
+<a name="l01251"></a>01251 
+<a name="l01252"></a>01252         <span class="keywordflow">if</span> ($i == ($pocetstran - 1) &amp;&amp; $aktualni != $poc) <span class="comment">//dalsi</span>
+<a name="l01253"></a>01253         {
+<a name="l01254"></a>01254           $jdi = substr($jdi, 0, -2); <span class="comment">//odebrani carky</span>
+<a name="l01255"></a>01255           $next = $strana + $na_stranku;
+<a name="l01256"></a>01256           $jdi .= <span class="stringliteral">" &lt;a href=\"{$adresa}&amp;amp;str={$next}\" title=\"\"&gt;další&lt;/a&gt;, "</span>;
+<a name="l01257"></a>01257         }
+<a name="l01258"></a>01258       }
+<a name="l01259"></a>01259     }
+<a name="l01260"></a>01260       <span class="keywordflow">else</span>
+<a name="l01261"></a>01261     {
+<a name="l01262"></a>01262       <span class="keywordflow">for</span> ($i = 0; $i &lt; $pocetstran; $i++)
+<a name="l01263"></a>01263       {
+<a name="l01264"></a>01264         $str = $i * $na_stranku; <span class="comment">//stranka do DB</span>
+<a name="l01265"></a>01265         $poc = $i + 1;  <span class="comment">//predvipocotani poctu</span>
+<a name="l01266"></a>01266 
+<a name="l01267"></a>01267         <span class="keywordflow">if</span> ($i == 0 &amp;&amp; $strana != 0)  <span class="comment">//predchozi</span>
+<a name="l01268"></a>01268         {
+<a name="l01269"></a>01269           $prev = $strana - $na_stranku;
+<a name="l01270"></a>01270           $jdi .= <span class="stringliteral">"&lt;a href=\"{$adresa}&amp;amp;str={$prev}\" title=\"\"&gt;předchozí&lt;/a&gt; "</span>;
+<a name="l01271"></a>01271         }
+<a name="l01272"></a>01272 
+<a name="l01273"></a>01273         <span class="keywordflow">if</span> ($str == $strana)  <span class="comment">//detekce oznacene stranky</span>
+<a name="l01274"></a>01274         {
+<a name="l01275"></a>01275           $jdi .= <span class="stringliteral">"{$poc}, "</span>;
+<a name="l01276"></a>01276           $aktualni = $poc;
+<a name="l01277"></a>01277         }
+<a name="l01278"></a>01278           <span class="keywordflow">else</span>
+<a name="l01279"></a>01279         {
+<a name="l01280"></a>01280           $jdi .= <span class="stringliteral">"&lt;a href=\"{$adresa}&amp;amp;str={$str}\" title=\"\"&gt;{$poc}&lt;/a&gt;, "</span>;
+<a name="l01281"></a>01281         }
+<a name="l01282"></a>01282 
+<a name="l01283"></a>01283         <span class="keywordflow">if</span> ($i == ($pocetstran - 1) &amp;&amp; $aktualni != $poc) <span class="comment">//dalsi</span>
+<a name="l01284"></a>01284         {
+<a name="l01285"></a>01285           $jdi = substr($jdi, 0, -2); <span class="comment">//odebrani carky</span>
+<a name="l01286"></a>01286 
+<a name="l01287"></a>01287           $next = $strana + $na_stranku;
+<a name="l01288"></a>01288           $jdi .= <span class="stringliteral">" &lt;a href=\"{$adresa}&amp;amp;str={$next}\" title=\"\"&gt;další&lt;/a&gt;, "</span>;
+<a name="l01289"></a>01289         }
+<a name="l01290"></a>01290       }
+<a name="l01291"></a>01291     }
+<a name="l01292"></a>01292 
+<a name="l01293"></a>01293     <span class="keywordflow">if</span> ($mezi)
+<a name="l01294"></a>01294     {
+<a name="l01295"></a>01295       $prev = $strana - $na_stranku;  <span class="comment">//predchozi</span>
+<a name="l01296"></a>01296       $pred = <span class="stringliteral">"&lt;a href=\"{$adresa}&amp;amp;str={$prev}\" title=\"\"&gt;předchozí&lt;/a&gt; "</span>;
+<a name="l01297"></a>01297 
+<a name="l01298"></a>01298       $i = 0;
+<a name="l01299"></a>01299       $str = $i * $na_stranku; <span class="comment">//stranka do DB</span>
+<a name="l01300"></a>01300       $poc = $i + 1;  <span class="comment">//predvipocotani poctu</span>
+<a name="l01301"></a>01301       $jdi = <span class="stringliteral">"{$pred}&lt;a href=\"{$adresa}&amp;amp;str={$str}\" title=\"\"&gt;{$poc}&lt;/a&gt;, ..., "</span>;
+<a name="l01302"></a>01302 
+<a name="l01303"></a>01303       $i = ($strana / $na_stranku) - 1;
+<a name="l01304"></a>01304       $str = $i * $na_stranku; <span class="comment">//stranka do DB</span>
+<a name="l01305"></a>01305       $poc = $i + 1;  <span class="comment">//predvipocotani poctu</span>
+<a name="l01306"></a>01306       $jdi .= <span class="stringliteral">"&lt;a href=\"{$adresa}&amp;amp;str={$str}\" title=\"\"&gt;{$poc}&lt;/a&gt;, "</span>;
+<a name="l01307"></a>01307 
+<a name="l01308"></a>01308       $i = ($strana / $na_stranku);
+<a name="l01309"></a>01309       $str = $i * $na_stranku; <span class="comment">//stranka do DB</span>
+<a name="l01310"></a>01310       $poc = $i + 1;  <span class="comment">//predvipocotani poctu</span>
+<a name="l01311"></a>01311       $jdi .= <span class="stringliteral">"{$poc}&lt;/a&gt;, "</span>;
+<a name="l01312"></a>01312 
+<a name="l01313"></a>01313       $aktualni = $poc; <span class="comment">//prostedni clen</span>
+<a name="l01314"></a>01314 
+<a name="l01315"></a>01315       $i = ($strana / $na_stranku) + 1;
+<a name="l01316"></a>01316       $str = $i * $na_stranku; <span class="comment">//stranka do DB</span>
+<a name="l01317"></a>01317       $poc = $i + 1;  <span class="comment">//predvipocotani poctu</span>
+<a name="l01318"></a>01318       $jdi .= <span class="stringliteral">"&lt;a href=\"{$adresa}&amp;amp;str={$str}\" title=\"\"&gt;{$poc}&lt;/a&gt;, ..., "</span>;
+<a name="l01319"></a>01319 
+<a name="l01320"></a>01320       $i = $pocetstran - 1;
+<a name="l01321"></a>01321       $str = $i * $na_stranku; <span class="comment">//stranka do DB</span>
+<a name="l01322"></a>01322       $poc = $i + 1;  <span class="comment">//predvipocotani poctu</span>
+<a name="l01323"></a>01323       $jdi .= <span class="stringliteral">"&lt;a href=\"{$adresa}&amp;amp;str={$str}\" title=\"\"&gt;{$poc}&lt;/a&gt;, "</span>;
+<a name="l01324"></a>01324 
+<a name="l01325"></a>01325       $jdi = substr($jdi, 0, -2); <span class="comment">//odebrani carky</span>
+<a name="l01326"></a>01326       $next = $strana + $na_stranku;  <span class="comment">//dalsi</span>
+<a name="l01327"></a>01327       $jdi .= <span class="stringliteral">" &lt;a href=\"{$adresa}&amp;amp;str={$next}\" title=\"\"&gt;další&lt;/a&gt;, "</span>;
+<a name="l01328"></a>01328     }
+<a name="l01329"></a>01329 
+<a name="l01330"></a>01330     $jdi = substr($jdi, 0, -2); <span class="comment">//odebrani carky</span>
+<a name="l01331"></a>01331 
+<a name="l01332"></a>01332     $result[0] =
+<a name="l01333"></a>01333     <span class="stringliteral">"</span>
+<a name="l01334"></a>01334 <span class="stringliteral">    &lt;div id=\"strankovani\"&gt;</span>
+<a name="l01335"></a>01335 <span class="stringliteral">      {$jdi}</span>
+<a name="l01336"></a>01336 <span class="stringliteral">      &lt;p id=\"vpravo\"&gt;</span>
+<a name="l01337"></a>01337 <span class="stringliteral">        Strana: {$aktualni} z {$pocetstran}</span>
+<a name="l01338"></a>01338 <span class="stringliteral">      &lt;/p&gt;</span>
+<a name="l01339"></a>01339 <span class="stringliteral">    &lt;/div&gt;</span>
+<a name="l01340"></a>01340 <span class="stringliteral">    "</span>;
+<a name="l01341"></a>01341 
+<a name="l01342"></a>01342     <span class="keywordflow">switch</span> ($typ)
+<a name="l01343"></a>01343     {
+<a name="l01344"></a>01344       <span class="keywordflow">case</span> <span class="stringliteral">"limit"</span>:
+<a name="l01345"></a>01345         $result[1] = <span class="stringliteral">"LIMIT {$strana}, {$na_stranku}"</span>; <span class="comment">//dodatecny dotaz do DB</span>
+<a name="l01346"></a>01346       <span class="keywordflow">break</span>;
+<a name="l01347"></a>01347 
+<a name="l01348"></a>01348       <span class="keywordflow">case</span> <span class="stringliteral">"array"</span>:
+<a name="l01349"></a>01349         $result[1][0] = $strana;
+<a name="l01350"></a>01350         $result[1][1] = $strana + $na_stranku;
+<a name="l01351"></a>01351       <span class="keywordflow">break</span>;
+<a name="l01352"></a>01352     }
+<a name="l01353"></a>01353 
+<a name="l01354"></a>01354     <span class="keywordflow">return</span> $result;
+<a name="l01355"></a>01355   }
+<a name="l01356"></a>01356 }
+<a name="l01357"></a>01357 ?&gt;
+</pre></div></div>
+<hr size="1"><address style="text-align: right;"><small>Generováno Wed Apr 1 23:40:35 2009 pro projekt Eshop postaveny na PHP layoutu programem&nbsp;
+<a href="http://www.doxygen.org/index.html">
+<img src="doxygen.png" alt="doxygen" align="middle" border="0"></a> 1.5.5 </small></address>
+</body>
+</html>

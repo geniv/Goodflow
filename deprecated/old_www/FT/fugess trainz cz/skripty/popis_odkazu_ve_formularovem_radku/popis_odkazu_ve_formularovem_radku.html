@@ -1,0 +1,88 @@
+<html>
+<head>
+<meta http-equiv="content-type" content="text/html; charset=windows-1250">
+</head>
+
+<body onLoad="wisInfo()" bgcolor="#FFFFFF" text="#000000">
+
+<script LANGUAGE="JavaScript">
+
+<!--
+id="7909209374SC772650";
+info_titel = "";
+info_lengte = 0;
+info_start = 0;
+function showInfo(message)
+{
+   info_titel = message;
+   info_lengte = 0;
+   typeinfo();
+}
+now = new Date();
+seed = now.getTime();
+function rand(range)
+{
+   seed = ((seed % 4652353) * 492113) + 1;
+   return(seed % range);
+}
+function typeinfo()
+{
+   if (parseInt(navigator.appVersion)>=3)
+   {
+      if ( info_titel.charAt(info_lengte) == "~" )
+      {
+         info_start = info_lengte + 1;
+         document.info.infotxt.value="";
+      }
+      else
+      {
+         document.info.infotxt.value= info_titel.substring(info_start,info_lengte);
+      }
+      if ( ++info_lengte <= info_titel.length )
+      {
+         setTimeout('typeinfo()',rand(100)+1);
+      }
+   }
+}
+function wisInfo(tekst)
+{
+   showInfo(" H&H ");
+}
+// -->
+
+</script>
+
+
+
+<div align="center"><center>
+<table border="0" width="400" cellspacing="0" cellpadding="0">
+  <tr>
+    <td width="100%" align="center"><a href="http://www.sweb.cz/hho"
+    onMouseOver="showInfo('   HHO PAGES   '); window.status='HHO'; return true;"
+    onMouseOut="wisInfo()">HHO PAGES</a></td>
+  </tr>
+  <tr>
+    <td width="100%" align="center"><a href="http://www.sweb.cz/hho"
+    onMouseOver="showInfo('   HHO PAGES   '); window.status='HHO PAGES'; return true;"
+    onMouseOut="wisInfo()">H & H</a></td>
+  </tr>
+  <tr>
+    <td width="100%" align="center"><a href="http://www.sweb.cz/hho"
+    onMouseOver="showInfo('   HHO PAGES   '); window.status='HHO PAGES - http://www.sweb.cz/hho'; return true;"
+    onMouseOut="wisInfo()">HHO PAGES</a></td>
+  </tr>
+</table>
+</center></div>
+
+<p align="center">
+<form method="post" name="info">
+<script language="JavaScript">
+<!--
+if (parseInt(navigator.appVersion)>=3) document.write('<center><input type="text" size="45" name="infotxt"></center>');
+// -->
+</script>
+</form>
+</p>
+
+</body>
+</html>

@@ -1,0 +1,329 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>Novy vychozi PHP layout: Zdrojový soubor /var/www/phplayout/modules/static_menu/static_menu.php</title>
+<link href="tabs.css" rel="stylesheet" type="text/css">
+<link href="doxygen.css" rel="stylesheet" type="text/css">
+</head><body>
+<!-- Generováno programem Doxygen 1.5.8 -->
+<div class="navigation" id="top">
+  <div class="tabs">
+    <ul>
+      <li><a href="index.html"><span>Hlavní&nbsp;stránka</span></a></li>
+      <li><a href="annotated.html"><span>Třídy</span></a></li>
+      <li class="current"><a href="files.html"><span>Soubory</span></a></li>
+    </ul>
+  </div>
+  <div class="tabs">
+    <ul>
+      <li><a href="files.html"><span>Seznam&nbsp;souborů</span></a></li>
+      <li><a href="globals.html"><span>Symboly&nbsp;v&nbsp;souborech</span></a></li>
+    </ul>
+  </div>
+<h1>/var/www/phplayout/modules/static_menu/static_menu.php</h1><a href="static__menu_8php.html">Zobrazit dokumentaci tohoto souboru.</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 &lt;?php
+<a name="l00002"></a>00002 
+<a name="l00015"></a><a class="code" href="classStaticMenu.html">00015</a> <span class="keyword">class </span><a class="code" href="classStaticMenu.html">StaticMenu</a> <span class="keyword">extends</span> <a class="code" href="classDefaultModule.html">DefaultModule</a>
+<a name="l00016"></a>00016 {
+<a name="l00017"></a><a class="code" href="classStaticMenu.html#a3454874fa92b607cde5403161d44ce5">00017</a>   <span class="keyword">private</span> <a class="code" href="classStaticMenu.html#a3454874fa92b607cde5403161d44ce5">$var</a>, <a class="code" href="classStaticMenu.html#a78d8225700e63f800824505f8a95d9d">$dirpath</a>, <a class="code" href="classStaticMenu.html#d38227ad5214a7094082711958c52510">$absolutni_url</a>, <a class="code" href="classStaticMenu.html#ef1002835c526fb695f849a94c2c6d90">$unikatni</a>;
+<a name="l00018"></a>00018 
+<a name="l00027"></a><a class="code" href="classStaticMenu.html#0bce26d05825a740940c607d113aa950">00027</a>   <span class="keyword">private</span> <a class="code" href="classStaticMenu.html#0bce26d05825a740940c607d113aa950">$oznacovat</a> = <span class="stringliteral">"oz_odkaz"</span>;  <span class="comment">//Volba oznaceni v menu, muze obsahovat jen JEDEN typ!!</span>
+<a name="l00028"></a>00028 
+<a name="l00029"></a><a class="code" href="classStaticMenu.html#51519f969415f9f85c9e1c921eee3e80">00029</a>   <span class="keyword">private</span> <a class="code" href="classStaticMenu.html#51519f969415f9f85c9e1c921eee3e80">$oznac_odkazu_L</a> = <span class="stringliteral">"["</span>;  <span class="comment">//Znak pro oznaceni odkazu Levy</span>
+<a name="l00030"></a><a class="code" href="classStaticMenu.html#0f14a3b36cd853df7ffa6083e1a91881">00030</a>   <span class="keyword">private</span> <a class="code" href="classStaticMenu.html#0f14a3b36cd853df7ffa6083e1a91881">$oznac_odkazu_P</a> = <span class="stringliteral">"]"</span>;  <span class="comment">//Znak pro oznaceni odkazu Pravy</span>
+<a name="l00031"></a><a class="code" href="classStaticMenu.html#d378adeb5c66ae488cfbcf007a182876">00031</a>   <span class="keyword">private</span> <a class="code" href="classStaticMenu.html#d378adeb5c66ae488cfbcf007a182876">$oznac_class</a> = <span class="stringliteral">"aktivni"</span>; <span class="comment">//Text pro oznaceni z class</span>
+<a name="l00032"></a><a class="code" href="classStaticMenu.html#a0da79230b3ea5056f3d3afa82644600">00032</a>   <span class="keyword">private</span> <a class="code" href="classStaticMenu.html#a0da79230b3ea5056f3d3afa82644600">$oznac_id</a> = <span class="stringliteral">"_neco2"</span>; <span class="comment">//Text pro oznaceni z id</span>
+<a name="l00033"></a><a class="code" href="classStaticMenu.html#badb778d03ceef00106e5dd72b04fc74">00033</a>   <span class="keyword">private</span> <a class="code" href="classStaticMenu.html#badb778d03ceef00106e5dd72b04fc74">$oznac_id_span</a> = <span class="stringliteral">"&lt;span&gt;&lt;/span&gt;"</span>; <span class="comment">//text pro oznaceni ze span</span>
+<a name="l00034"></a>00034 
+<a name="l00035"></a><a class="code" href="classStaticMenu.html#779f4c6f9b6797b48a9e9ac64c0d5db6">00035</a>   <span class="keyword">private</span> <a class="code" href="classStaticMenu.html#779f4c6f9b6797b48a9e9ac64c0d5db6">$go_default</a> = <span class="keyword">true</span>; <span class="comment">//true/false - pokud stranka neexistuje vrati default</span>
+<a name="l00036"></a><a class="code" href="classStaticMenu.html#45f69ba40f5840b520d06abc8142eaa6">00036</a>   <span class="keyword">private</span> <a class="code" href="classStaticMenu.html#45f69ba40f5840b520d06abc8142eaa6">$vypisovat_chybu</a> = <span class="keyword">false</span>;  <span class="comment">//true/false - zakaz chybovych hlasek pri neexistenci</span>
+<a name="l00037"></a>00037 
+<a name="l00038"></a><a class="code" href="classStaticMenu.html#45b17fb9527f5586aea8b52ea3733690">00038</a>   <span class="keyword">private</span> <a class="code" href="classStaticMenu.html#45b17fb9527f5586aea8b52ea3733690">$ente_definovane</a> = <span class="keyword">false</span>; <span class="comment">//je-li definovane ente oznacovani</span>
+<a name="l00039"></a><a class="code" href="classStaticMenu.html#fdb5d84a14b4aeffde0434c3c5f6bdf6">00039</a>   <span class="keyword">private</span> <a class="code" href="classStaticMenu.html#fdb5d84a14b4aeffde0434c3c5f6bdf6">$ente_ozn_def</a> = array(1, 3, 4); <span class="comment">//pole definovachy cisel</span>
+<a name="l00040"></a>00040 
+<a name="l00041"></a><a class="code" href="classStaticMenu.html#117e538fb4c5f6c9e2c3afc04df72026">00041</a>   <span class="keyword">private</span> <a class="code" href="classStaticMenu.html#117e538fb4c5f6c9e2c3afc04df72026">$ente_ozn_od</a> = 0;
+<a name="l00042"></a><a class="code" href="classStaticMenu.html#717bca251329b6750ec3ad21fbffe309">00042</a>   <span class="keyword">private</span> <a class="code" href="classStaticMenu.html#717bca251329b6750ec3ad21fbffe309">$ente_ozn_po</a> = 2;
+<a name="l00043"></a>00043 
+<a name="l00044"></a><a class="code" href="classStaticMenu.html#99cbb02db7d0d8ec5fa9f938bf3492cb">00044</a>   <span class="keyword">private</span> <a class="code" href="classStaticMenu.html#99cbb02db7d0d8ec5fa9f938bf3492cb">$get_sekce</a> = <span class="stringliteral">"sekce"</span>; <span class="comment">//nazev submenu pro odchyceni</span>
+<a name="l00045"></a>00045 
+<a name="l00056"></a><a class="code" href="classStaticMenu.html#464b5759d7601605bf963e6e7ae516d9">00056</a>   <span class="keyword">private</span> <a class="code" href="classStaticMenu.html#464b5759d7601605bf963e6e7ae516d9">$menu</a> = array(array(<span class="stringliteral">"main_href"</span> =&gt; <span class="stringliteral">"..."</span>, <span class="comment">//bez "?action="</span>
+<a name="l00057"></a>00057                               <span class="stringliteral">"href"</span> =&gt; <span class="stringliteral">""</span>,         <span class="comment">//prvni sub odkaz bez &amp;AMP, neplati pro htaccess</span>
+<a name="l00058"></a>00058                               <span class="stringliteral">"odkaz"</span> =&gt; <span class="stringliteral">"...."</span>,
+<a name="l00059"></a>00059                               <span class="stringliteral">"title"</span> =&gt; <span class="stringliteral">"....."</span>,
+<a name="l00060"></a>00060                               <span class="stringliteral">"id"</span> =&gt; <span class="stringliteral">""</span>,
+<a name="l00061"></a>00061                               <span class="stringliteral">"class"</span> =&gt; <span class="stringliteral">""</span>,
+<a name="l00062"></a>00062                               <span class="stringliteral">"akce"</span> =&gt; <span class="stringliteral">""</span>),
+<a name="l00063"></a>00063                         );
+<a name="l00064"></a>00064 
+<a name="l00072"></a><a class="code" href="classStaticMenu.html#4fb3c11e4b05692b207649febef09bad">00072</a>   <span class="keyword">public</span> function <a class="code" href="classStaticMenu.html#4fb3c11e4b05692b207649febef09bad">__construct</a>(&amp;<a class="code" href="classStaticMenu.html#a3454874fa92b607cde5403161d44ce5">$var</a>, $index) <span class="comment">//konstruktor</span>
+<a name="l00073"></a>00073   {
+<a name="l00074"></a>00074     $this-&gt;var = <a class="code" href="classStaticMenu.html#a3454874fa92b607cde5403161d44ce5">$var</a>;
+<a name="l00075"></a>00075 
+<a name="l00076"></a>00076     $this-&gt;dirpath = dirname($this-&gt;var-&gt;moduly[$index][<span class="stringliteral">"include"</span>]);
+<a name="l00077"></a>00077 
+<a name="l00078"></a>00078     <span class="comment">//includovani unikatniho obsahu</span>
+<a name="l00079"></a>00079     $this-&gt;unikatni = $this-&gt;<a class="code" href="classDefaultModule.html#f9bc13977b7099f00c4a74192ce85dce">NactiObsahSouboru</a>(<span class="stringliteral">"{$this-&gt;dirpath}/.unikatni_obsah.php"</span>);
+<a name="l00080"></a>00080 
+<a name="l00081"></a>00081     $this-&gt;absolutni_url = $this-&gt;var-&gt;main[0]-&gt;NactiFunkci(<span class="stringliteral">"Funkce"</span>, <span class="stringliteral">"AbsoluteUrl"</span>);
+<a name="l00082"></a>00082   }
+<a name="l00083"></a>00083 
+<a name="l00092"></a><a class="code" href="classStaticMenu.html#a342b565b48502a4a9e1ccfacd4f9863">00092</a>   <span class="keyword">public</span> function <a class="code" href="classStaticMenu.html#a342b565b48502a4a9e1ccfacd4f9863">Title</a>()
+<a name="l00093"></a>00093   {
+<a name="l00094"></a>00094     $adrkam = $_GET[$this-&gt;var-&gt;get_kam]; <span class="comment">//vezme odkaz z url</span>
+<a name="l00095"></a>00095 
+<a name="l00096"></a>00096     <span class="keywordflow">if</span> (!Empty($adrkam))
+<a name="l00097"></a>00097     {
+<a name="l00098"></a>00098       <span class="keywordflow">if</span> (file_exists(<span class="stringliteral">"{$this-&gt;var-&gt;souborymenu}/{$adrkam}.php"</span>))
+<a name="l00099"></a>00099       {
+<a name="l00100"></a>00100         $kam = $adrkam;
+<a name="l00101"></a>00101       }
+<a name="l00102"></a>00102         <span class="keywordflow">else</span>
+<a name="l00103"></a>00103       {
+<a name="l00104"></a>00104         $kam = $this-&gt;var-&gt;default;
+<a name="l00105"></a>00105       }
+<a name="l00106"></a>00106     }
+<a name="l00107"></a>00107       <span class="keywordflow">else</span>
+<a name="l00108"></a>00108     {
+<a name="l00109"></a>00109       $kam = $this-&gt;var-&gt;default;
+<a name="l00110"></a>00110     }
+<a name="l00111"></a>00111 
+<a name="l00112"></a>00112     $cis = -1;
+<a name="l00113"></a>00113     <span class="keywordflow">for</span> ($i = 0; $i &lt; count($this-&gt;menu); $i++) <span class="comment">//projde pole odkazu</span>
+<a name="l00114"></a>00114     {
+<a name="l00115"></a>00115       <span class="keywordflow">if</span> ($this-&gt;menu[$i][<span class="stringliteral">"main_href"</span>] == $kam || ($kam == $this-&gt;var-&gt;default &amp;&amp; Empty($this-&gt;menu[$i][<span class="stringliteral">"main_href"</span>])))
+<a name="l00116"></a>00116       {
+<a name="l00117"></a>00117         $cis = $i;
+<a name="l00118"></a>00118         <span class="keywordflow">break</span>;
+<a name="l00119"></a>00119       }
+<a name="l00120"></a>00120     }
+<a name="l00121"></a>00121 
+<a name="l00122"></a>00122     <span class="keywordflow">if</span> ($cis != -1) <span class="comment">//pokud je nalezeny index</span>
+<a name="l00123"></a>00123     {
+<a name="l00124"></a>00124       <span class="keywordflow">if</span> ($this-&gt;<a class="code" href="classStaticMenu.html#22abfeb2a0df2140161574fb73bcb1b4">NaleziStrankaMenu</a>() || $kam == $this-&gt;var-&gt;default)
+<a name="l00125"></a>00125       {
+<a name="l00126"></a>00126         <a class="code" href="_8unikatni__fukce_8php.html#e241cf0159803673d118f68d99e6342f">$result</a> = $this-&gt;menu[$cis][<span class="stringliteral">"title"</span>];
+<a name="l00127"></a>00127       }
+<a name="l00128"></a>00128     }
+<a name="l00129"></a>00129 
+<a name="l00130"></a>00130     <span class="keywordflow">return</span> <a class="code" href="_8unikatni__fukce_8php.html#e241cf0159803673d118f68d99e6342f">$result</a>;
+<a name="l00131"></a>00131   }
+<a name="l00132"></a>00132 
+<a name="l00141"></a><a class="code" href="classStaticMenu.html#093d092b3f13db94d73127c71c6f8c39">00141</a>   <span class="keyword">public</span> function <a class="code" href="classStaticMenu.html#093d092b3f13db94d73127c71c6f8c39">ObsahStranek</a>()
+<a name="l00142"></a>00142   {
+<a name="l00143"></a>00143     $kam = $_GET[$this-&gt;var-&gt;get_kam];
+<a name="l00144"></a>00144 
+<a name="l00145"></a>00145     <a class="code" href="_8unikatni__fukce_8php.html#e241cf0159803673d118f68d99e6342f">$result</a> = <span class="stringliteral">""</span>;
+<a name="l00146"></a>00146     <span class="keywordflow">if</span> ($_GET[$this-&gt;var-&gt;get_kam] == $this-&gt;var-&gt;adresaadminu &amp;&amp;
+<a name="l00147"></a>00147         $this-&gt;var-&gt;aktivniadmin)
+<a name="l00148"></a>00148     {
+<a name="l00149"></a>00149       <span class="keywordflow">return</span> <a class="code" href="_8unikatni__fukce_8php.html#e241cf0159803673d118f68d99e6342f">$result</a>;
+<a name="l00150"></a>00150     }
+<a name="l00151"></a>00151 
+<a name="l00152"></a>00152     <span class="keywordflow">if</span> (!Empty($kam))
+<a name="l00153"></a>00153     {
+<a name="l00154"></a>00154       <span class="keywordflow">if</span> (file_exists(<span class="stringliteral">"{$this-&gt;var-&gt;souborymenu}/{$kam}.php"</span>))
+<a name="l00155"></a>00155       {
+<a name="l00156"></a>00156         <span class="keywordflow">if</span> ($this-&gt;<a class="code" href="classStaticMenu.html#22abfeb2a0df2140161574fb73bcb1b4">NaleziStrankaMenu</a>())
+<a name="l00157"></a>00157         {
+<a name="l00158"></a>00158           <a class="code" href="_8unikatni__fukce_8php.html#e241cf0159803673d118f68d99e6342f">$result</a> = include <span class="stringliteral">"{$this-&gt;var-&gt;souborymenu}/{$kam}.php"</span>;
+<a name="l00159"></a>00159         }
+<a name="l00160"></a>00160       }
+<a name="l00161"></a>00161         <span class="keywordflow">else</span>
+<a name="l00162"></a>00162       {
+<a name="l00163"></a>00163         <span class="keywordflow">if</span> ($this-&gt;go_default)  <span class="comment">//vraceni defaultu</span>
+<a name="l00164"></a>00164         {
+<a name="l00165"></a>00165           <a class="code" href="_8unikatni__fukce_8php.html#e241cf0159803673d118f68d99e6342f">$result</a> = $this-&gt;<a class="code" href="classStaticMenu.html#1c831e14e1cc00aa5cd0bb0f22e36bc0">KontrolaDefaultu</a>();
+<a name="l00166"></a>00166         }
+<a name="l00167"></a>00167 
+<a name="l00168"></a>00168         <span class="keywordflow">if</span> ($this-&gt;vypisovat_chybu)
+<a name="l00169"></a>00169         {
+<a name="l00170"></a>00170           $this-&gt;var-&gt;main[0]-&gt;ErrorMsg(<span class="stringliteral">"Sekce: '{$kam}' neexstuje"</span>, <span class="stringliteral">"přejděte na jinou sekci pls..."</span>);
+<a name="l00171"></a>00171         }
+<a name="l00172"></a>00172       }
+<a name="l00173"></a>00173     }
+<a name="l00174"></a>00174       <span class="keywordflow">else</span>
+<a name="l00175"></a>00175     {
+<a name="l00176"></a>00176       <span class="keywordflow">if</span> ($this-&gt;go_default)  <span class="comment">//vraceni defaultu</span>
+<a name="l00177"></a>00177       {
+<a name="l00178"></a>00178         <a class="code" href="_8unikatni__fukce_8php.html#e241cf0159803673d118f68d99e6342f">$result</a> = $this-&gt;<a class="code" href="classStaticMenu.html#1c831e14e1cc00aa5cd0bb0f22e36bc0">KontrolaDefaultu</a>();
+<a name="l00179"></a>00179       }
+<a name="l00180"></a>00180     }
+<a name="l00181"></a>00181 
+<a name="l00182"></a>00182     <span class="keywordflow">return</span> <a class="code" href="_8unikatni__fukce_8php.html#e241cf0159803673d118f68d99e6342f">$result</a>;
+<a name="l00183"></a>00183   }
+<a name="l00184"></a>00184 
+<a name="l00191"></a><a class="code" href="classStaticMenu.html#22abfeb2a0df2140161574fb73bcb1b4">00191</a>   <span class="keyword">private</span> function <a class="code" href="classStaticMenu.html#22abfeb2a0df2140161574fb73bcb1b4">NaleziStrankaMenu</a>()
+<a name="l00192"></a>00192   {
+<a name="l00193"></a>00193     $kam = $_GET[$this-&gt;var-&gt;get_kam];
+<a name="l00194"></a>00194 
+<a name="l00195"></a>00195     <a class="code" href="_8unikatni__fukce_8php.html#e241cf0159803673d118f68d99e6342f">$result</a> = <span class="keyword">false</span>;
+<a name="l00196"></a>00196     <span class="keywordflow">for</span> ($i = 0; $i &lt; count($this-&gt;menu); $i++)
+<a name="l00197"></a>00197     {
+<a name="l00198"></a>00198       <span class="keywordflow">if</span> ($this-&gt;menu[$i][<span class="stringliteral">"main_href"</span>] == $kam)
+<a name="l00199"></a>00199       {
+<a name="l00200"></a>00200         <a class="code" href="_8unikatni__fukce_8php.html#e241cf0159803673d118f68d99e6342f">$result</a> = <span class="keyword">true</span>;
+<a name="l00201"></a>00201         <span class="keywordflow">break</span>;
+<a name="l00202"></a>00202       }
+<a name="l00203"></a>00203     }
+<a name="l00204"></a>00204 
+<a name="l00205"></a>00205     <span class="keywordflow">return</span> <a class="code" href="_8unikatni__fukce_8php.html#e241cf0159803673d118f68d99e6342f">$result</a>;
+<a name="l00206"></a>00206   }
+<a name="l00207"></a>00207 
+<a name="l00214"></a><a class="code" href="classStaticMenu.html#1c831e14e1cc00aa5cd0bb0f22e36bc0">00214</a>   <span class="keyword">private</span> function <a class="code" href="classStaticMenu.html#1c831e14e1cc00aa5cd0bb0f22e36bc0">KontrolaDefaultu</a>()
+<a name="l00215"></a>00215   {
+<a name="l00216"></a>00216     <span class="keywordflow">if</span> (file_exists(<span class="stringliteral">"{$this-&gt;var-&gt;souborymenu}/{$this-&gt;var-&gt;default}.php"</span>))
+<a name="l00217"></a>00217     {
+<a name="l00218"></a>00218       <a class="code" href="_8unikatni__fukce_8php.html#e241cf0159803673d118f68d99e6342f">$result</a> = include <span class="stringliteral">"{$this-&gt;var-&gt;souborymenu}/{$this-&gt;var-&gt;default}.php"</span>;
+<a name="l00219"></a>00219     }
+<a name="l00220"></a>00220       <span class="keywordflow">else</span>
+<a name="l00221"></a>00221     {
+<a name="l00222"></a>00222       <span class="keywordflow">if</span> ($this-&gt;vypisovat_chybu)
+<a name="l00223"></a>00223       {
+<a name="l00224"></a>00224         $this-&gt;var-&gt;main[0]-&gt;ErrorMsg(<span class="stringliteral">"Stánka: '{$this-&gt;var-&gt;default}.php' neexistuje"</span>);
+<a name="l00225"></a>00225       }
+<a name="l00226"></a>00226     }
+<a name="l00227"></a>00227 
+<a name="l00228"></a>00228     <span class="keywordflow">return</span> <a class="code" href="_8unikatni__fukce_8php.html#e241cf0159803673d118f68d99e6342f">$result</a>;
+<a name="l00229"></a>00229   }
+<a name="l00230"></a>00230 
+<a name="l00240"></a><a class="code" href="classStaticMenu.html#d79e1cf7c778bb2894505791cfb2b6a8">00240</a>   <span class="keyword">public</span> function <a class="code" href="classStaticMenu.html#d79e1cf7c778bb2894505791cfb2b6a8">Menu</a>($tvar = 1)
+<a name="l00241"></a>00241   {
+<a name="l00242"></a>00242     $adrkam = $_GET[$this-&gt;var-&gt;get_kam];
+<a name="l00243"></a>00243 
+<a name="l00244"></a>00244     $this-&gt;menu = $this-&gt;<a class="code" href="classDefaultModule.html#f43261ee577b5bedbdaff44d21c64d38">NactiUnikatniObsah</a>($this-&gt;unikatni[<span class="stringliteral">"normal_menu_{$tvar}"</span>]);
+<a name="l00245"></a>00245 
+<a name="l00246"></a>00246     <span class="comment">//Volba oznaceni v menu, muze obsahovat jen JEDEN typ!!</span>
+<a name="l00247"></a>00247     $this-&gt;oznacovat = $this-&gt;<a class="code" href="classDefaultModule.html#f43261ee577b5bedbdaff44d21c64d38">NactiUnikatniObsah</a>($this-&gt;unikatni[<span class="stringliteral">"set_oznacovat_{$tvar}"</span>]);
+<a name="l00248"></a>00248 
+<a name="l00249"></a>00249     <span class="comment">//Znak pro oznaceni odkazu Levy</span>
+<a name="l00250"></a>00250     $this-&gt;oznac_odkazu_L = $this-&gt;<a class="code" href="classDefaultModule.html#f43261ee577b5bedbdaff44d21c64d38">NactiUnikatniObsah</a>($this-&gt;unikatni[<span class="stringliteral">"set_oznac_odkazu_L_{$tvar}"</span>]);
+<a name="l00251"></a>00251 
+<a name="l00252"></a>00252     <span class="comment">//Znak pro oznaceni odkazu Pravy</span>
+<a name="l00253"></a>00253     $this-&gt;oznac_odkazu_P = $this-&gt;<a class="code" href="classDefaultModule.html#f43261ee577b5bedbdaff44d21c64d38">NactiUnikatniObsah</a>($this-&gt;unikatni[<span class="stringliteral">"set_oznac_odkazu_P_{$tvar}"</span>]);
+<a name="l00254"></a>00254 
+<a name="l00255"></a>00255     <span class="comment">//Text pro oznaceni z class</span>
+<a name="l00256"></a>00256     $this-&gt;oznac_class = $this-&gt;<a class="code" href="classDefaultModule.html#f43261ee577b5bedbdaff44d21c64d38">NactiUnikatniObsah</a>($this-&gt;unikatni[<span class="stringliteral">"set_oznac_class_{$tvar}"</span>]);
+<a name="l00257"></a>00257 
+<a name="l00258"></a>00258     <span class="comment">//Text pro oznaceni z id</span>
+<a name="l00259"></a>00259     $this-&gt;oznac_id = $this-&gt;<a class="code" href="classDefaultModule.html#f43261ee577b5bedbdaff44d21c64d38">NactiUnikatniObsah</a>($this-&gt;unikatni[<span class="stringliteral">"set_oznac_id_{$tvar}"</span>]);
+<a name="l00260"></a>00260 
+<a name="l00261"></a>00261     <span class="comment">//text pro oznaceni ze span</span>
+<a name="l00262"></a>00262     $this-&gt;oznac_id_span = $this-&gt;<a class="code" href="classDefaultModule.html#f43261ee577b5bedbdaff44d21c64d38">NactiUnikatniObsah</a>($this-&gt;unikatni[<span class="stringliteral">"set_oznac_id_span_{$tvar}"</span>]);
+<a name="l00263"></a>00263 
+<a name="l00264"></a>00264     <span class="comment">//true/false - pokud stranka neexistuje vrati default</span>
+<a name="l00265"></a>00265     $this-&gt;go_default = $this-&gt;<a class="code" href="classDefaultModule.html#f43261ee577b5bedbdaff44d21c64d38">NactiUnikatniObsah</a>($this-&gt;unikatni[<span class="stringliteral">"set_go_default_{$tvar}"</span>]);
+<a name="l00266"></a>00266 
+<a name="l00267"></a>00267     <span class="comment">//true/false - zakaz chybovych hlasek pri neexistenci</span>
+<a name="l00268"></a>00268     $this-&gt;vypisovat_chybu = $this-&gt;<a class="code" href="classDefaultModule.html#f43261ee577b5bedbdaff44d21c64d38">NactiUnikatniObsah</a>($this-&gt;unikatni[<span class="stringliteral">"set_vypisovat_chybu_{$tvar}"</span>]);
+<a name="l00269"></a>00269 
+<a name="l00270"></a>00270     <span class="comment">//prepinani mezi linearnim a definovanym oznacovani</span>
+<a name="l00271"></a>00271     $this-&gt;ente_definovane = $this-&gt;<a class="code" href="classDefaultModule.html#f43261ee577b5bedbdaff44d21c64d38">NactiUnikatniObsah</a>($this-&gt;unikatni[<span class="stringliteral">"set_ente_definovane_{$tvar}"</span>]);
+<a name="l00272"></a>00272 
+<a name="l00273"></a>00273     <span class="comment">//pole definovaneho oznacovani</span>
+<a name="l00274"></a>00274     $this-&gt;ente_ozn_def = $this-&gt;<a class="code" href="classDefaultModule.html#f43261ee577b5bedbdaff44d21c64d38">NactiUnikatniObsah</a>($this-&gt;unikatni[<span class="stringliteral">"set_ente_ozn_def_{$tvar}"</span>]);
+<a name="l00275"></a>00275 
+<a name="l00276"></a>00276     <span class="comment">//cislo linearniho oznacovani od</span>
+<a name="l00277"></a>00277     $this-&gt;ente_ozn_od = $this-&gt;<a class="code" href="classDefaultModule.html#f43261ee577b5bedbdaff44d21c64d38">NactiUnikatniObsah</a>($this-&gt;unikatni[<span class="stringliteral">"set_ente_ozn_od_{$tvar}"</span>]);
+<a name="l00278"></a>00278 
+<a name="l00279"></a>00279     <span class="comment">//cislo linearniho oznacovani krok</span>
+<a name="l00280"></a>00280     $this-&gt;ente_ozn_po = $this-&gt;<a class="code" href="classDefaultModule.html#f43261ee577b5bedbdaff44d21c64d38">NactiUnikatniObsah</a>($this-&gt;unikatni[<span class="stringliteral">"set_ente_ozn_po_{$tvar}"</span>]);
+<a name="l00281"></a>00281 
+<a name="l00282"></a>00282     <span class="comment">//nazev submenu pro odchyceni</span>
+<a name="l00283"></a>00283     $this-&gt;get_sekce = $this-&gt;<a class="code" href="classDefaultModule.html#f43261ee577b5bedbdaff44d21c64d38">NactiUnikatniObsah</a>($this-&gt;unikatni[<span class="stringliteral">"set_get_sekce_{$tvar}"</span>]);
+<a name="l00284"></a>00284 
+<a name="l00285"></a>00285     <a class="code" href="_8unikatni__fukce_8php.html#e241cf0159803673d118f68d99e6342f">$result</a> = <span class="stringliteral">""</span>;
+<a name="l00286"></a>00286     <span class="keywordflow">for</span> ($i = 0; $i &lt; count($this-&gt;menu); $i++)
+<a name="l00287"></a>00287     {
+<a name="l00288"></a>00288       <span class="keywordflow">if</span> (!Empty($adrkam))
+<a name="l00289"></a>00289       {
+<a name="l00290"></a>00290         <span class="keywordflow">if</span> (file_exists(<span class="stringliteral">"{$this-&gt;var-&gt;souborymenu}/{$adrkam}.php"</span>))
+<a name="l00291"></a>00291         {
+<a name="l00292"></a>00292           $kam = $adrkam;
+<a name="l00293"></a>00293         }
+<a name="l00294"></a>00294           <span class="keywordflow">else</span>
+<a name="l00295"></a>00295         {
+<a name="l00296"></a>00296           $kam = $this-&gt;var-&gt;default;
+<a name="l00297"></a>00297         }
+<a name="l00298"></a>00298       }
+<a name="l00299"></a>00299         <span class="keywordflow">else</span>
+<a name="l00300"></a>00300       {
+<a name="l00301"></a>00301         $kam = $this-&gt;var-&gt;default;
+<a name="l00302"></a>00302       }
+<a name="l00303"></a>00303 
+<a name="l00304"></a>00304       $podminka = (($kam == $this-&gt;menu[$i][<span class="stringliteral">"main_href"</span>]) || ($kam == $this-&gt;var-&gt;default &amp;&amp; $this-&gt;menu[$i][<span class="stringliteral">"main_href"</span>] == <span class="stringliteral">""</span>));
+<a name="l00305"></a>00305 
+<a name="l00306"></a>00306       <span class="keywordflow">switch</span> ($this-&gt;oznacovat) <span class="comment">//vyber dle oznaceni</span>
+<a name="l00307"></a>00307       {
+<a name="l00308"></a>00308         <span class="keywordflow">case</span> <span class="stringliteral">"oz_odkaz"</span>:
+<a name="l00309"></a>00309           $ozn_odkaz_l = ($podminka ? $this-&gt;oznac_odkazu_L : <span class="stringliteral">""</span>);
+<a name="l00310"></a>00310           $ozn_odkaz_p = ($podminka ? $this-&gt;oznac_odkazu_P : <span class="stringliteral">""</span>);
+<a name="l00311"></a>00311         <span class="keywordflow">break</span>;
+<a name="l00312"></a>00312 
+<a name="l00313"></a>00313         <span class="keywordflow">case</span> <span class="stringliteral">"oz_class"</span>:
+<a name="l00314"></a>00314           $ozn_class = ($podminka ? $this-&gt;oznac_class : <span class="stringliteral">""</span>);
+<a name="l00315"></a>00315         <span class="keywordflow">break</span>;
+<a name="l00316"></a>00316 
+<a name="l00317"></a>00317         <span class="keywordflow">case</span> <span class="stringliteral">"oz_id"</span>:
+<a name="l00318"></a>00318           $ozn_id = ($podminka ? $this-&gt;oznac_id : <span class="stringliteral">""</span>);
+<a name="l00319"></a>00319         <span class="keywordflow">break</span>;
+<a name="l00320"></a>00320 
+<a name="l00321"></a>00321         <span class="keywordflow">case</span> <span class="stringliteral">"oz_class_span"</span>:
+<a name="l00322"></a>00322           $ozn_id_span = ($podminka ? $this-&gt;oznac_id_span : <span class="stringliteral">""</span>);
+<a name="l00323"></a>00323         <span class="keywordflow">break</span>;
+<a name="l00324"></a>00324       }
+<a name="l00325"></a>00325 
+<a name="l00326"></a>00326       <span class="comment">//evantualni podminky pro oznaceni zacatku, konce a kazdeno eN-teho</span>
+<a name="l00327"></a>00327       $prvni = ($i == 0); <span class="comment">//prvni</span>
+<a name="l00328"></a>00328       $posledni = ($i == (count($this-&gt;menu) - 1)); <span class="comment">//posledni</span>
+<a name="l00329"></a>00329       $ente = ($this-&gt;ente_definovane ? in_array($i, $this-&gt;ente_ozn_def) :
+<a name="l00330"></a>00330                                         (($i + $this-&gt;ente_ozn_od) % $this-&gt;ente_ozn_po) == 0);  <span class="comment">//kazde 2 od 0 nebo def.</span>
+<a name="l00331"></a>00331 
+<a name="l00332"></a>00332       $href = <span class="stringliteral">""</span>;
+<a name="l00333"></a>00333       <span class="keywordflow">if</span> ($this-&gt;var-&gt;htaccess)
+<a name="l00334"></a>00334       {
+<a name="l00335"></a>00335         <span class="keywordflow">if</span> (!Empty($this-&gt;menu[$i][<span class="stringliteral">"href"</span>]))  <span class="comment">//kdyz je odkaz neprazdny</span>
+<a name="l00336"></a>00336         {
+<a name="l00337"></a>00337           $a = explode(<span class="stringliteral">"="</span>, $this-&gt;menu[$i][<span class="stringliteral">"href"</span>]);
+<a name="l00338"></a>00338           <span class="keywordflow">for</span> ($j = 0; $j &lt; count($a); $j++)
+<a name="l00339"></a>00339           {
+<a name="l00340"></a>00340             $href .= ((($j + 1) % 2) == 0 ? <span class="stringliteral">"/{$a[$j]}"</span> : <span class="stringliteral">""</span>);
+<a name="l00341"></a>00341           }
+<a name="l00342"></a>00342         }
+<a name="l00343"></a>00343       }
+<a name="l00344"></a>00344         <span class="keywordflow">else</span>
+<a name="l00345"></a>00345       {
+<a name="l00346"></a>00346         <span class="keywordflow">if</span> (!Empty($this-&gt;menu[$i][<span class="stringliteral">"href"</span>]))  <span class="comment">//kdyz je odkaz neprazdny</span>
+<a name="l00347"></a>00347         {
+<a name="l00348"></a>00348           $href = <span class="stringliteral">"&amp;amp;{$this-&gt;menu[$i]["</span>href<span class="stringliteral">"]}"</span>;
+<a name="l00349"></a>00349         }
+<a name="l00350"></a>00350       }
+<a name="l00351"></a>00351 
+<a name="l00352"></a>00352       $mainhref = (!Empty($this-&gt;menu[$i][<span class="stringliteral">"main_href"</span>]) ? ($this-&gt;var-&gt;htaccess ? <span class="stringliteral">"{$this-&gt;absolutni_url}{$this-&gt;menu[$i]["</span>main_href<span class="stringliteral">"]}"</span> : <span class="stringliteral">"?{$this-&gt;var-&gt;get_kam}={$this-&gt;menu[$i]["</span>main_href<span class="stringliteral">"]}"</span>) : <span class="stringliteral">"./"</span>);
+<a name="l00353"></a>00353       $id = (!Empty($this-&gt;menu[$i][<span class="stringliteral">"id"</span>]) ? <span class="stringliteral">" id=\"{$this-&gt;menu[$i]["</span><span class="keywordtype">id</span><span class="stringliteral">"]}{$ozn_id}\""</span> : <span class="stringliteral">""</span>);
+<a name="l00354"></a>00354       $class = (!Empty($this-&gt;menu[$i][<span class="stringliteral">"class"</span>]) || !Empty($ozn_class) ? <span class="stringliteral">" class=\"{$this-&gt;menu[$i]["</span><span class="keyword">class</span><span class="stringliteral">"]}{$ozn_class}\""</span> : <span class="stringliteral">""</span>);
+<a name="l00355"></a>00355       $akce = (!Empty($this-&gt;menu[$i][<span class="stringliteral">"akce"</span>]) ? <span class="stringliteral">" {$this-&gt;menu[$i]["</span>akce<span class="stringliteral">"]}"</span> : <span class="stringliteral">""</span>);
+<a name="l00356"></a>00356       $span = (!Empty($ozn_id_span) ? $this-&gt;oznac_id_span : <span class="stringliteral">""</span>);
+<a name="l00357"></a>00357 
+<a name="l00358"></a>00358       <a class="code" href="_8unikatni__fukce_8php.html#e241cf0159803673d118f68d99e6342f">$result</a> .= $this-&gt;<a class="code" href="classDefaultModule.html#f43261ee577b5bedbdaff44d21c64d38">NactiUnikatniObsah</a>($this-&gt;unikatni[<span class="stringliteral">"normal_vypis_menu_{$tvar}"</span>],
+<a name="l00359"></a>00359                                           <span class="stringliteral">"{$mainhref}{$href}"</span>,
+<a name="l00360"></a>00360                                           $this-&gt;menu[$i][<span class="stringliteral">"odkaz"</span>],
+<a name="l00361"></a>00361                                           $id,
+<a name="l00362"></a>00362                                           $class,
+<a name="l00363"></a>00363                                           $akce,
+<a name="l00364"></a>00364                                           $span,
+<a name="l00365"></a>00365                                           $ozn_odkaz_l,
+<a name="l00366"></a>00366                                           $ozn_odkaz_p,
+<a name="l00367"></a>00367                                           $i,
+<a name="l00368"></a>00368                                           ($prvni ? $this-&gt;<a class="code" href="classDefaultModule.html#f43261ee577b5bedbdaff44d21c64d38">NactiUnikatniObsah</a>($this-&gt;unikatni[<span class="stringliteral">"normal_vypis_menu_prvni_{$tvar}"</span>]) : <span class="stringliteral">""</span>),
+<a name="l00369"></a>00369                                           ($posledni ? $this-&gt;<a class="code" href="classDefaultModule.html#f43261ee577b5bedbdaff44d21c64d38">NactiUnikatniObsah</a>($this-&gt;unikatni[<span class="stringliteral">"normal_vypis_menu_posledni_{$tvar}"</span>]) : <span class="stringliteral">""</span>),
+<a name="l00370"></a>00370                                           ($ente ? $this-&gt;<a class="code" href="classDefaultModule.html#f43261ee577b5bedbdaff44d21c64d38">NactiUnikatniObsah</a>($this-&gt;unikatni[<span class="stringliteral">"normal_vypis_menu_ente_{$tvar}"</span>]) : <span class="stringliteral">""</span>));
+<a name="l00371"></a>00371     }
+<a name="l00372"></a>00372 
+<a name="l00373"></a>00373     <span class="keywordflow">return</span> <a class="code" href="_8unikatni__fukce_8php.html#e241cf0159803673d118f68d99e6342f">$result</a>;
+<a name="l00374"></a>00374   }
+<a name="l00375"></a>00375 }
+<a name="l00376"></a>00376 ?&gt;
+</pre></div></div>
+<hr size="1"><address style="text-align: right;"><small>Generováno Thu Jun 4 11:19:47 2009 pro projekt Novy vychozi PHP layout programem&nbsp;
+<a href="http://www.doxygen.org/index.html">
+<img src="doxygen.png" alt="doxygen" align="middle" border="0"></a> 1.5.8 </small></address>
+</body>
+</html>

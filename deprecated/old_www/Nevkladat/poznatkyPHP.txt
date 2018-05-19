@@ -1,0 +1,471 @@
+$_POST
+$_GET
+$SERVER
+
+<?php ... ?>
+<? ... ?>
+echo "ahoj $plat"; - vypíše text
+print "ahoj";
+$.. promìnná - z formy html jméno vstupu
+
+<?echo Date("G:i")?> vypíše èas
+
+<?
+echo 
+"První øádek
+Druhý øádek";
+?>
+
+<?
+echo "Dnes je hezky ", 
+"Zítra bude ošklivo...", 
+"pozítøí bude taky ošklivo...", 
+" jak bude v pondìlí mì nezajímá...";
+?>
+
+<? echo "Tohle bude první øádek\n
+Tohle bude druhý øádek\n
+Tohle dáme nakonec"?>
+
+komentáøe:
+//  (1.ø)
+#   (1.ø)
+/*  */
+
+\n    Nový øádek
+\"    Uvozovky
+\r    Návrat vozíku
+\t    Tabulátor
+\\    Zpìtné lomítko
+\$    Dolar
+ 
+<?echo "Klidnì si spojím úvod "."se závìrem"?>
+
+Logický typ
+ Boolean
+ uchovává hodnotu "pravda" nebo "nepravda". Zapisuje se jako TRUE a FALSE (na velikosti nezáleží, mùžete tøeba i jako tRUE a fALSE 
+Celoèíselný typ
+ Integer
+ uchovává celá kladná i záporná èísla (a nulu) od nìjakých -2 biliónù po + 2 bilióny. 
+Desetinné èíslo
+ Float nebo Real
+ uchovává desetinná èísla. S pøesností obyèejnì na 14 desetinných míst a rozsahem, z nìhož by se nám asi zamotala hlava - èíslo, které zaèíná jednièkou a mùže mít 308 nul. 
+Øetìzec
+ String
+ uchovává texty neboli øetìzce. Øetìzec je znak nebo sada znakù, v PHP prakticky neomezené délky. 
+
+<?
+//logický typ
+$mam_malo_penez = TRUE;
+//celoèíselný typ
+$plat = 10000;
+//desetinné èíslo
+$disketa = 3.5;
+//øetìzec
+$prohlaseni = "Právì se vracím z pražského hradu! ...";
+echo $mam_malo_penez."<BR>";
+echo $plat."<BR>";
+echo $disketa."<BR>";
+echo $prohlaseni."<BR>";
+?>
+
+<?
+$fronta[1]="Petr";
+$fronta[2]="Pavel";
+$fronta[3]="Maruška";
+$fronta[4]="Eva";
+$fronta[5]="LinuxSoft tým";
+?>
+
+<?
+//[øádek] [sloupec] (zleva odspodu)
+$figura[1][1]="bílá vìž";
+$figura[1][2]="bílý jezdec";
+//...atd...
+$figura[2][8]="bílý pìšec";
+//...atd...
+$figura[8][7]="èerný jezdec";
+$figura[8][8]="èerná vìž";
+?>
+
+<?
+$fronta[]="Petr";
+$fronta[]="Pavel";
+$fronta[]="Maruška";
+$fronta[]="Eva";
+$fronta[]="LinuxSoft tým";
+?>
+
+<?$fronta=Array("Petr", "Pavel", "Maruška", "Eva", "LinuxSoft tým");?>
+
+<?php
+$array = array(1, 1, 1, 1,  1, 8 => 1,  4 => 1, 19, 3 => 13);
+print_r($array);
+?>
+
+$fronta=Array(1=>"Petr", "Pavel", "Maruška", "Eva", "LinuxSoft tým"); 
+
+<?php
+$prvni_kvartal = array(1 => 'leden', 'únor', 'bøezen');
+print_r($prvni_kvartal);
+?> 
+
+$dnesnidatum = Date("r");
+
+<?
+// mohu pøiøadit postupnì
+$kapsa1="prázdná"; $kapsa2="prázdná";
+// nebo $kapsa1 a hned taky $kapsa2
+$kapsa2=($kapsa1="prázdná");
+// závorky ale mùžu vynechat
+$kapsa2=$kapsa1="prázdná";
+echo "Jedna kapsa ".$kapsa1." a druhá kapsa taky ".$kapsa2;
+?>
+
+<?
+$bajtu = 0;
+$bajtu = $bajtu + 100;
+$bajtu = $bajtu * 2;
+$bajtu = $bajtu / 4;
+echo $bajtu;
+?>
+
+<?
+$bajtu = 0;
+$bajtu += 100;
+$bajtu *= 2;
+$bajtu /= 4;
+echo $bajtu;
+?>
+
+<?
+$pokoju=2;
+++$pokoju;
+echo $pokoju;
+?>
+
+<?
+$muj_string="Pepa";
+$muj_integer=2;
+$muj_float=3.5;
+$muj_boolean=FALSE;
+
+settype($muj_string, "boolean");
+
+<?
+$jazyk="PHP";
+$verze=4;
+$verzejazyka=$verze;
+echo $verzejazyka;
+?>
+
+<?
+define ("BROWSER", "Firefox 1.0");
+define ("OS", "GNU/Linux");
+echo "Váš browser je ".BROWSER." a Váš systém je ".OS;
+?>
+
+and
+ Logický souèin
+ Jsou obì hodnoty pravdivé
+ 
+or
+ Logický souèet
+ Je alespoò jedna hodnota pravdivá
+ 
+xor
+ Exkluzivní OR
+ Je právì jedna hodnota pravdivá
+ 
+!
+ Negace
+ True když bylo False a naopak
+ 
+&&
+ Logický souèin
+ Jsou obì hodnoty pravdivé 
+||
+ Logický souèet
+ Je alespoò jedna hodnota pravdivá 
+
+<?
+$muj_integer=5;
+$muj_float = 5.0;
+echo $muj_integer==$muj_float; //to je pravda
+echo $muj_integer===$muj_float; //tohle pravda není
+?>
+
+<?
+$pristup_odepren = TRUE;
+if ($pristup_odepren) echo "Na tuto stránku se nemùžete dostat bez autorizace";
+?>
+
+<?
+$pristup_odepren = FALSE;
+if ($pristup_odepren)
+  {
+  echo "Na tuto stránku se nemùžete dostat bez autorizace <BR>";
+  echo "Vaše IP adresa byla zaznamenána do protokolu.";
+  }
+else
+  {
+  echo "Vítejte na této stránce<BR>";
+  echo $pocetnavstev++;
+  }
+?>
+
+<?
+switch ($browser)
+{
+  case "Mozilla":
+    echo "Výbornì !!!";
+    break;
+  case "Konqueror":
+    echo "Dobøe .";
+    break;
+  case "Explorer":
+    echo ";-(";
+    break;
+  default:
+    echo "Nepodaøilo se zjistit Váš browser";
+}
+?>
+
+<?
+switch ($browser):
+  case "Mozilla":
+    echo "Výbornì !!!";
+    break;
+  case "Konqueror":
+    echo "Dobøe .";
+    break;
+  case "Explorer":
+    echo ";-(";
+    break;
+  default:
+    echo "Nepodaøilo se zjistit Váš browser";
+endswitch;
+?>
+
+<?
+$i=1;
+while ($i<=10)
+{
+    echo "<TR><TD>".$i."</TD><TD>".$i*$i."</TD></TR>\n";
+    $i++;
+}
+?>
+
+<TABLE>
+<TR><TD>Èíslo</TD><TD>Druhá mocnina</TD></TR>
+<?
+$i=1;
+while ($i<=10):
+    echo "<TR><TD>".$i."</TD><TD>".$i*$i."</TD></TR>\n";
+    $i++;
+endwhile;
+?>
+</TABLE>
+
+<?
+for ($i=1; $i<=10; $i++) echo "<TR><TD>".$i."</TD><TD>".$i*$i."</TD></TR>";
+?>
+
+<?
+for ($i=1; $i<=10; $i++):
+  echo "<TR><TD>".$i."</TD>";
+  echo "<TD>".$i*$i."</TD></TR>";
+endfor;
+?>
+
+<?
+function dvaplusdva()
+{
+  return 2+2;
+}
+?>
+
+<?
+function Hlaska ()
+{
+  global $VracetUpovidaneHlasky;
+  if ($VracetUpovidaneHlasky)
+    echo "Já jsem velmi upovídaná hláška.";
+  else
+    echo "Hláška";
+}
+$VracetUpovidaneHlasky = TRUE; Hlaska();
+?>
+
+<?
+$uzivatel="Petr";
+$server="Linuxsoft";
+echo "Uživatel ".$uzivatel." je vítán na serveru ".$server."!<BR>";
+echo "Uživatel $uzivatel je vítán na serveru $server!<BR>";
+?>
+
+ <TD width=20% valign="top">
+      <?require "21_left.php"?>
+    </TD>
+    <TD width=60% valign="top">
+      <?include "21_middle.php"?>
+    </TD>
+    <TD width=20% valign="top">
+      <?include "21_right.php"?>
+
+<?
+  echo (integer) ereg("Petr", "Petr je borec");
+  echo (integer) ereg("Petr", "Je doma Petr?");
+  echo (integer) ereg("Petr", "Honza, Petr a Pavel");
+  echo (integer) ereg("Petr", "Franta je taky borec");
+?>
+             POST - je soukromé
+<form method="get" action="zpracuj.php"> 
+  Pøíjmení: <input name="prijmeni"> 
+  <input type="Submit" name="odesli"> 
+</form>
+
+<? 
+  echo "Právì mi pøišel formuláø. Uživatel tam jistì zadal nìjaké pøíjmení!<BR>\n"; 
+  echo "Á, je to <B>".$_REQUEST["prijmeni"]."</B>"; 
+?> 
+
+<?
+mail("nekdo@server.cz", "Velmi dùležitý pøedmìt", "Vážení pøátelé, ...");
+?> 
+
+mail("rasmus@lerdorf.on.ca", "Mùj pøedmìt", "Øádek 1\nØádek 2\nØádek 3");
+
+header ("Location: http://www.php.net");¨- smìrování v php
+
+$HTTP_USER_AGENT
+$REMOTE_ADDR
+PHP_OS
+PHP_VERSION
+
+javascript:history.go(-1)
+
+define ("NAZEV_SOUBORU", "pocitadlo.txt"); 
+if (file_exists(NAZEV_SOUBORU)) 
+{ 
+  $soubor=fopen(NAZEV_SOUBORU, "r+"); //otevøení
+  $stav=fread($soubor, 10); //co, delka
+} 
+else 
+{ 
+  $soubor=fopen(NAZEV_SOUBORU, "w"); //zapíše
+  $stav=0; //nastaví
+} 
+rewind($soubor); //vrátí na zaèátek
+fwrite($soubor,++$stav,10); //co, text,delka 
+fclose($soubor); //zavøee
+echo "<br>";
+echo "Již máme zaznamenáno $stav pøístupù!!!"; 
+
+<?
+if(Empty($kam))
+{
+require "uvod.php";
+}
+else
+{
+require "{$kam}.php";
+}
+?>
+
+<?
+if(($od!="")&&($pred!="")&&($textik!=""))
+{  
+$mej="fugess@trainz.cz";
+//$mej="geniv@centrum.cz";
+//mail($mej,$pred,"Od: ".$od."; \nZpráva: ".$textik."; \nIP: ".$REMOTE_ADDR." \nProhlížeè: ".$HTTP_USER_AGENT." \nVerze OS: ".PHP_OS." \nVerze PHP: ".PHP_VERSION);
+print "<center><h1>Odesláno!</h1></center>";
+print "<body onload='javascript:history.go(-1);' bgcolor=#A8ACB8></body>";
+} 
+else
+{
+print "<body bgcolor=#A8ACB8>";
+print "<h2><b><center>Neúplné ùdaje!!</b></center></h2><br><br><br>";
+if($od==""){print "<center>Prázdný odesilatel zprávy</center>";}
+if($pred==""){print "<center>Prázdný pøedmìt zprávy</center>";}
+if($textik==""){print "<center>Prázdný text zprávy</center>";}
+print "<br><br><br><br>";
+print "<center><h3 onclick='javascript:history.go(-1);' style='cursor:hand;'>Zpìt</h3></center></body>";
+}
+?>
+
+setcookie ("TestCookie", "Zkušební hodnota");
+setcookie ("TestCookie", $value,time()+3600);  /* vyprší za hodinu */
+
+echo $TestCookie;
+echo $HTTP_COOKIE_VARS["TestCookie"];
+
+<?
+if(!Empty($pric))
+{
+$pric++;
+if($pric>5)
+{
+$tp="img";
+$odk="location.href='uvod.php';";
+}
+else
+{
+$tp="input type=submit";
+$odk="";
+}
+}
+else
+{
+$pric=1;
+}
+?>
+
+<form>
+<<? print $tp; ?> value="klikni" onclick="<? print $odk; ?>">
+<input type=text name=pric value="<? print $pric; ?>">
+</form>
+
+<input type=image name=texi>
+print "kliknuto na: ".$texi_x.", ".$texi_y;
+
+<HTML>
+<HEAD><TITLE>Upload</TITLE></HEAD>
+<BODY>
+
+<?
+
+if ($akce == "Upload") {
+
+  if ($soubor_type == "text/plain" or $soubor_type="text/html") {
+    if (copy ($soubor,$soubor_name)) {  //zdroj,kam
+      print "Soubor $soubor_name o velikosti $soubor_size bajtù 
+       byl úspìšnì uploadnut na server<BR>";
+/*
+      mail ("spravce@muj_server.cz", "Upload souboru $soubor_name", 
+       "Na server byl nahrán soubor /data/$soubor_name\n",
+       "From: system@muj_server.cz\nX-web: http://www.muj_server.cz/system/upload.php"); 
+*/ 
+    }
+    else {
+      print "Pøi nahrávání souboru došlo k chybì!<BR>";
+    }
+  }
+  else {
+    print "Soubor není požadového MIME typu!<BR>";
+  }
+}
+
+?>
+
+
+<HR SIZE="1" NOSHADE>
+
+Zadejte jméno souboru:
+<FORM METHOD="post" ENCTYPE="multipart/form-data">
+<INPUT TYPE="file" NAME="soubor" SIZE="30">
+<INPUT TYPE="submit" NAME="akce" VALUE="Upload">
+</FORM>
+
+</BODY>
+</HTML>

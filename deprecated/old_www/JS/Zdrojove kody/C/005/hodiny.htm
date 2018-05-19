@@ -1,0 +1,54 @@
+<HTML>
+  <HEAD>
+    <TITLE> Binární hodiny </TITLE>
+    <SCRIPT Language="JavaScript">
+      <!--
+        // Pøevod z desítkové do dvojkové soustavy
+        function DecToBin (Value, Count){
+          Bin = '';
+          while (Value > 0) {
+            Bin = (Value % 2)+ '' + Bin;
+            Value = Value>>>1;
+          }
+
+          // Doplnìní výsledku o nuly do
+          // potøebné délky - Count
+          for (i=Bin.length; i<Count; i++){
+            Bin = '0' + Bin;
+          }
+
+          return (Bin);
+        }
+
+        function ShowTime(){
+          // Zjistí se aktuální èas
+          var D = new Date;
+          // Z èasového údaje se zjistí poèet
+          // hodin, minut a sekund
+          var H = D.getHours();
+          var M = D.getMinutes();
+          var S = D.getSeconds();
+
+          // Vytvoøí se øetìzec obsahující celý èas
+          // Jednotlivé údaje se pøevedou do dvojkové soustavy
+          var StrTime = DecToBin (H, 5) + ":" +
+            DecToBin (M, 6) + ":" +
+            DecToBin (S, 6);
+
+          // Nastaví se hodnota formuláøového prvku
+          document.frmClock.btClock.value = StrTime;
+          // Aktualizace hodin se provede za sekundu
+          setTimeout ("ShowTime()", 1000);
+        }
+      // -->
+    </SCRIPT>
+  </HEAD>
+
+  <BODY OnLoad="ShowTime();">
+    <FORM Name="frmClock">
+      Aktualní èas<BR>
+      <INPUT Type=Button Name="btClock" Value="00000:000000:000000">
+    </FORM>
+  </BODY>
+</HTML>
+

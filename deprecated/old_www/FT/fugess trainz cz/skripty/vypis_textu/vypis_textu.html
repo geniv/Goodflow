@@ -1,0 +1,119 @@
+
+<BODY>
+
+<p id='anima' style="position:absolute;font-size:20;background-color:white;">
+</font>
+</p>
+<br>
+<br>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!-- Begin
+text = "welcome.na.HHO.stránkách!..naleznete.tu.hbigh/4odnì.zajímavých.vìcí."
+word = text.split('.')
+i = -1;           //letter count
+j = 0;            //which word in array is to be spelled
+start = 0;      //variable to hold cycles of the blink
+scount = 0;  //variable to hold cycles of the mispell
+function checkIt() {
+with(document.all.anima) {
+if(innerText.charAt(innerText.length-1) == "_") {
+innerText = innerText.substring(0, innerText.length - 1);
+return true;
+}
+else {
+innerText = innerText + "_";
+return false;
+      }
+   }
+}
+function blinkfor(count, timing) {
+with(document.all.anima) {
+if(start < count) {
+if(checkIt()) {
+start++;
+}
+mistake = 'blinkfor('+count+','+timing+')';
+setTimeout('eval(mistake)', timing);
+}
+else {
+start = 0;
+i++;
+call_It();
+      }
+   }
+}
+function mispell(offset,correction) {
+with(document.all.anima) {
+if(scount < offset) {
+if(!checkIt()) {
+innerText = innerText.substring(0, innerText.length-2) + "_";
+scount++;
+}
+mistake = 'mispell(' + offset + ', "' + correction + '")';
+setTimeout("eval(mistake)", 150);
+}
+else {
+if(correction == '' && scount == offset ) {
+i = i - offset;
+scount++;
+}
+if(offset > 0) {
+if(checkIt()) {
+innerText += correction.charAt(correction.length - offset) + "_";
+offset--;
+}
+mistake = 'mispell(' + offset + ',"' + correction + '")';
+setTimeout("eval(mistake)", 150);
+}
+else {
+scount = 0;
+j++;
+innerText = innerText.substring(0, innerText.length - 1);
+call_It();
+         }
+      }
+   }
+}
+function spellit(string) {
+with(document.all.anima) {
+if(i <= string.length) {
+if(string.charAt(i) == '/') {
+NumErrs = string.charAt(i + 1);
+NewLets = string.substring(i + 2, i + NumErrs);
+mispell(NumErrs,NewLets);
+}
+else if(i <= string.length - 1) {
+i++;
+innerText = string.substring(0,i) + "_";
+mistake = 'spellit("' + string + '")';
+setTimeout("eval(mistake)", 150);
+}
+else {
+innerText = string.substring(0, i);
+j++;
+call_It();
+         }
+      }
+   }
+}
+function call_It() {
+with(document.all) {
+if(i == -1){
+blinkfor(4, 150);
+}
+else if(j <= word.length - 1) {
+spellit(anima.innerText + " " + word[j]);
+} 
+else {
+blinkfor(100,230);
+      }
+   }
+}
+if(document.all) {
+call_It();
+}
+//  End -->
+</script>
+
+<p>&nbsp;<p>

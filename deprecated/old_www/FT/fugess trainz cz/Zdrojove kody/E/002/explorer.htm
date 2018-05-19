@@ -1,0 +1,72 @@
+<HTML>
+  <HEAD>
+    <TITLE> Sušenky </TITLE>
+    <SCRIPT Language="JavaScript" Src="cookies.js">
+    </SCRIPT>
+  </HEAD>
+
+  <BODY>
+    <FORM Name="frmCookie">
+      <TABLE Width="100%">
+        <TR><TD Colspan="2"><B>Zápis</B></TD></TR>
+
+        <TR>
+          <TD>Název:</TD>
+          <TD><INPUT Type="text" Size="20" Name="edName"></TD>
+        </TR>
+
+        <TR>
+          <TD>Hodnota:</TD>
+          <TD><INPUT Type="text" Size="40" Name="edValue"></TD>
+        </TR>
+
+
+        <TR>
+          <TD>Platnost [hod]:</TD>
+          <TD><INPUT Type="text" Size="4" Name="edExpire"></TD>
+        </TR>
+
+        <TR>
+          <TD>Cesta:</TD>
+          <TD><INPUT Type="text" Size="20" Name="edPath"></TD>
+        </TR>
+
+        <TR>
+          <TD>Doména:</TD>
+          <TD><INPUT Type="text" Size="20" Name="edDomain"></TD>
+        </TR>
+
+        <TR>
+          <TD></TD>
+          <TD><INPUT Type="checkbox"
+             Name="chbxSecure">Zabezpeèená</TD>
+        </TR>
+
+        <TR>
+        <TD><INPUT Type="button" Value="Zapiš cookie"
+          onClick="WriteCookie (edName.value, edValue.value,
+          edExpire.value, edPath.value, edDomain.value,
+          chbxSecure.checked);">
+        </TD>
+        </TR>
+
+        <TR><TD Colspan="2"><B><BR>ètení</B></TD></TR>
+
+        <TR>
+          <TD>Název:</TD>
+          <TD><INPUT Type="text" Size="20" Name="edReadName"></TD>
+        </TR>
+
+        <TR>
+          <TD><INPUT Type="button" Value="Pøeèti cookie"
+            onClick="alert (ReadCookie(edReadName.value,
+            'Záznam nenalezen!'));">
+          <INPUT Type="button" Value="Všechny cookie"
+            onClick="alert (document.cookie);"></TD>
+        </TR>
+
+      </TABLE>
+    </FORM>
+  </BODY>
+</HTML>
+

@@ -1,0 +1,48 @@
+<HTML>
+  <HEAD>
+    <TITLE>Metody objektu Array</TITLE>
+    <SCRIPT Language="JavaScript">
+      <!--
+        // Definice pole
+        Ar1 = new Array (
+          'Ferda (18)', 'Franta (95)',
+          'Matìj (16)', 'Milouš (65)', 'Pepík (32)', 'Honzík (2)',
+          'Rumprcimprcampr (198)');
+        Ar2 = new Array (
+          'Anèa (35)', 'Hanèa (5)');
+
+        // Výpis pole
+        function WriteArray (AName, A){
+          document.write (AName.bold()+'<BR>');
+          for (i=0; i<A.length; i++)
+            document.write (i+' - '+A[i]+'<BR>');
+          document.write ('<BR>');
+        }
+      // -->
+    </SCRIPT>
+  </HEAD>
+  <BODY>
+    <SCRIPT Language="JavaScript">
+      <!--
+        // Výpis pùvodních polí
+        WriteArray ('Pùvodní pole Ar1:', Ar1);
+        WriteArray ('Pùvodní pole Ar2:', Ar2);
+        
+        // Vytvoøení nového pole
+        var Ar3 = new Array ();
+        
+        // Spojení dvou polí
+        Ar3 = Ar3.concat (Ar1, Ar2);
+        WriteArray ('Spojení polí (concat)', Ar3);
+
+        // Výøez pole
+        WriteArray ('Výsek pole (slice)', Ar3.slice (2,4));
+        
+        // Odstranìní a pøidání prvkù zároveò
+        Ar3.splice (0,1, 'Mikeš (2)');
+        WriteArray ('Odstranìní a pøidání pole (splice)',Ar3);
+      // -->
+    </SCRIPT>
+  </BODY>
+</HTML>
+

@@ -1,0 +1,59 @@
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>Odeslání dat a získání dokumentu XML pomocí frameworku Ajax Utility Library</title>
+
+    <script type="text/javascript" src="ajaxutility.js"></script>
+
+    <script language="javascript">
+      var menu;
+
+      function ziskejMenu(xmlDokument)
+      {
+        menu = xmlDokument.getElementsByTagName("polozkamenu");
+        vypisMenu();
+      }
+
+      function vypisMenu()
+      {
+        var citac;
+        var prvekSelect = document.getElementById('seznamPolozek');
+
+        for (citac = 0; citac < menu.length; citac++ )
+        {
+            prvekSelect.options[citac] = new 
+               Option(menu[citac].firstChild.data);
+        }
+      }
+    
+      function vyberPolozku()
+      {
+        document.getElementById('cilovyDiv').innerHTML = 
+          "Vybrali jste " + menu[document.getElementById           
+            ('seznamPolozek').selectedIndex].firstChild.data;
+      }
+
+    </script>
+  </head>
+
+  <body>
+
+    <h1>Odeslání dat a získání dokumentu XML pomocí frameworku Ajax Utility Library</h1>
+
+    <form>
+      <select size="1" id="seznamPolozek" onchange="vyberPolozku()">
+        <option>Vyberte položku menu</option>
+      </select>
+      <br>
+      <br>
+      <input type="button" value="Získej menu 1" 
+        onclick="odesliDataZiskejXml('menu.php', 'menu=1', ziskejMenu)"> 
+      <input type="button" value="Získej menu 2" 
+        onclick="odesliDataZiskejXml('menu.php', 'menu=2', ziskejMenu)"> 
+    </form>
+
+    <div id="cilovyDiv" width="100" height="100">Váš výběr se zobrazí na tomto místě.</div>
+
+  </body>
+
+</html>

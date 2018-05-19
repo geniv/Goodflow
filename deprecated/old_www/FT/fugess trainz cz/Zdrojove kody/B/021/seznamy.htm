@@ -1,0 +1,132 @@
+<HTML>
+  <HEAD>
+    <TITLE> Seznamy MASTER - DETAIL </TITLE>
+
+    <SCRIPT Language="JavaScript">
+      <!--
+        // Alba jednotlivých autorù
+        ARoxette = new Array (
+          "Pearls Of Passion",
+          "Dance Passion",
+          "Look Sharp",
+          "Joyride",
+          "Tourism",
+          "Unplugged",
+          "Crash! Boom! Bang!",
+          "Don't Bore Us-Get To The Chorus!",
+          "Rarities",
+          "Baladas En Espanol",
+          "Pearls Of Passion",
+          "Have A Nice Day",
+          "Room Service"
+        );
+
+        ANightwish = new Array (
+          "Angels Fall First",
+          "Century Child",
+          "From Wishes To Eternity",
+          "Oceanborn",
+          "Over The Hills And Far Away",
+          "Sacrament Of Wilderness",
+          "Sleeping Sun",
+          "The Carpenter",
+          "Walking In The Air",
+          "WishMaster"
+        );
+        
+        AQueen = new Array (
+          "A Day At The Races",
+          "A Night At The Opera",
+          "Flash Gordon",
+          "Hot Space",
+          "Innuendo",
+          "Jazz",
+          "Kind Of Magic",
+          "Made In Heaven",
+          "News Of The World",
+          "Queen At The Beep",
+          "Queen",
+          "Queen II",
+          "Queen Rocks",
+          "Sheer Heart Attack",
+          "The Game",
+          "The Miracle",
+          "The Works"
+        );
+        
+        AKarelGott = new Array (
+          "Vèelka Mája",
+          "Nejvìtší hity",
+          "Nejvìtší hity po dvaceti letech",
+          "Nejvìtší hity ještì po deseti letech"
+        );
+
+        // Pole všech alb autorù - získá se tak
+        // dvourozmìrné pole
+        Albums = new Array (ARoxette, ANightwish, AQueen, AKarelGott);
+
+        // Funkce, která se aktivuje pøi zmìnì autora
+        function onChangeAuthor(){
+          // Smažou se všechny alba v druhé nabídce
+          document.frmMusic.selAlbum.options.length = 0
+
+          // Do nabídky se vloží seznam alb autora vybraného
+          // v první nabídce
+          
+          // Získá se seznam alb zvoleného autora z dvourozmìrného pole
+          var AlbArray = Albums[document.frmMusic.selAuthor.selectedIndex];
+
+          // Vložení jednotlivých alb do druhé nabídky
+          for (i=0; i<=AlbArray.length; i++){
+            // Vytvoøí se nová položka
+            optionName = new Option(AlbArray[i], i, false, false);
+            // Zaøadí se na konec nabídky
+            Length = document.frmMusic.selAlbum.length;
+            document.frmMusic.selAlbum.options[Length] = optionName;
+          }
+          // Pokud nabídka obsahuje alespoò jednu položku,
+          // oznaèí se ta první, jako zvolená
+          if (document.frmMusic.selAlbum.length > 0)
+            document.frmMusic.selAlbum.options.selectedIndex=0;
+        }
+        
+        // Funkce pro získání celého názvu vybraného alba a autora
+        function GetName (){
+          // Podmínka, která otestuje, zda bylo nìco vybráno
+          if ((document.frmMusic.selAuthor.options.selectedIndex >= 0) &&
+              (document.frmMusic.selAlbum.options.selectedIndex >= 0)){
+            // Pokud ano, poskládá z jednotlivých nabídek celý název
+            return (
+              document.frmMusic.selAuthor.options[
+                document.frmMusic.selAuthor.options.selectedIndex].text+': ' +
+              document.frmMusic.selAlbum.options[
+                document.frmMusic.selAlbum.options.selectedIndex].text
+            )
+          } else return ("Nebylo vybráno žádné album!")
+        }
+
+      // -->
+    </SCRIPT>
+  </HEAD>
+
+  <BODY OnLoad="onChangeAuthor();">
+    <FORM Name="frmMusic" OnSubmit="return false;">
+      Vyberte si své oblíbené album: <BR><BR>
+      <SELECT Name="selAuthor" OnChange="onChangeAuthor();" Size="8">
+        <OPTION Value="Roxette" Selected>Roxette</OPTION>
+        <OPTION Value="Nightwish">Nightwish</OPTION>
+        <OPTION Value="Queen">Queen</OPTION>
+        <OPTION Value="KarelGott">Karel Gott</OPTION>
+      </SELECT>
+
+      <SELECT Name="selAlbum" Size="8">
+      </SELECT>
+
+      <BR><BR>
+      <INPUT Type="Button" Name="btGetName"  Value="Vybrané album"
+        OnClick="alert (GetName());">
+
+    </FORM>
+  </BODY>
+</HTML>
+

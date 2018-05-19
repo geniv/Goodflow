@@ -1,0 +1,47 @@
+<HTML>
+  <HEAD>
+    <TITLE> Zrušení HTML formátování </TITLE>
+    <SCRIPT Language="JavaScript">
+    <!--
+      // Funkce zbaví øetìzec všech formátovacích znaèek HTML
+      function UnHtml (S){
+        // Promìnná urèující, zda je již
+        // øetìzec vyèištìn
+        Clear = false;
+
+        while (!Clear){
+          // Délka textu
+          Len = S.length;
+          // i obsahuje pozici znaku "<"
+          i = S.indexOf ("<");
+          // SS obsahuje text za t9mto znakem
+          // Pøípadnì celý øetìzec
+          SS = S.substring (i, Len);
+          // j je pozice znaku ">"
+          j = SS.indexOf (">");
+          // Pokud byl nalezen znak "<" i ">", bude
+          // všechen text mezi nimi zrušen
+          if ((i != -1) && (j != -1))
+            S = S.substring (0, i) +
+                SS.substring (j+1, SS.length);
+          else // pokud znaky nebyly nalezeny, je èištìní hotovo
+            Clear = true;
+        }
+        // Funkce vrátí výsledek
+        return (S);
+      }
+    // -->
+    </SCRIPT>
+  </HEAD>
+
+  <BODY>
+    <FORM Name="MainForm">
+      <TEXTAREA Cols="50" Rows="5" Name="Text"></TEXTAREA>
+      <BR>
+      <INPUT Type="button" Value="Zruš HTML"
+        onClick="document.MainForm.Text.value =
+          UnHtml(document.MainForm.Text.value);">
+    </FORM>
+  </BODY>
+</HTML>
+

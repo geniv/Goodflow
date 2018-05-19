@@ -1,0 +1,11 @@
+Options -Indexes
+
+RewriteEngine on
+
+#nasmerovani korenu - zapinat jen na serveru!!!!
+#RewriteBase /
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+RewriteRule ^(.*)$ index.php [L]

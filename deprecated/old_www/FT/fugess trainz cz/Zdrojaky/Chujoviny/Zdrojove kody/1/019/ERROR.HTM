@@ -1,0 +1,79 @@
+<HTML>
+  <HEAD>
+    <TITLE> Obsluha chyb </TITLE>
+    <SCRIPT Language="JavaScript">
+      <!--
+      // Poèítadlo oken s chybovými zprávami
+      var ErrWinNum=0;
+
+      // Funkce ošetøující vzniklou chybu
+      function MyError (Message, Url, Line){
+        // Zvýší se poèet oken
+        ErrWinNum++;
+
+        // Vytvoøí se nové okno (využije se poèítadlo,
+        // aby byl jeho název jedineèný)
+        var Win = window.open ('','ErrorWin'+ErrWinNum,
+          "width=480,height=240");
+
+        // zapíše se obsah novì vytvoøeného okna
+        with(Win.document){
+          open ();
+          // Hlavièka
+          write ('<HTML>');
+          write ('<HEAD>');
+          write ('<TITLE>Hlášení o chybì</TITLE>');
+          write ('</HEAD>');
+          // Tìlo
+          write ('<BODY bgcolor="silver">');
+          write ('<H2 align="center">V programu došlo k chybì</H2>');
+          write ('<HR width="100%">');
+
+          // Text bude naformátován za pomoci tabulky
+          write ('<TABLE width="90%" cols="2">');
+          write ('<TR>');
+          // Popis chyby
+          write ('<TD align="right"><B>Popis chyby:<B></TD>');
+          write ('<TD>'+Message+'</TD>');
+          write ('</TR>');
+          write ('<TR>');
+          // Øádek, kde k chybì došlo
+          write ('<TD align="right"><B>Øádek:<B></TD>');
+          write ('<TD>'+Line+'</TD>');
+          write ('</TR>');
+          write ('<TR>');
+          // Adresa stránky
+          write ('<TD align="right"><B>URL:<B></TD>');
+          write ('<TD>'+Url+'</TD>');
+          write ('</TR>');
+          write ('</TABLE>');
+          write ('<HR width="100%">');
+          write ('<TABLE align="center">');
+          // Tlaèítko OK pro zavøení stránky
+          write ('<FORM>');
+          write ('<INPUT TYPE="button" name="btOK" value="  OK  " '+
+                 'onclick="window.close();">');
+          write ('</FORM>');
+          write ('</TABLE>');
+          write ('</BODY>');
+          write ('</HTML>');
+          // Uzavøení dokumentu
+          close();
+        }
+        return true;
+      }
+
+      // Nastavení ovladaèe události onerror na vlastní funkci
+      self.onerror = MyError;
+      // -->
+    </SCRIPT>
+  </HEAD>
+  <BODY>
+    <FORM Name="Form1">
+      Zmáèknutím tlaèítka vyvoláte chybu.
+      <INPUT Type="button" Name="Button1" Value="  Test  "
+        OnClick="BlaBlaBla">
+    </FORM>
+  </BODY>
+</HTML>
+

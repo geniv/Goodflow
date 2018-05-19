@@ -1,0 +1,89 @@
+<html> 
+  <head> 
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>Připojení k aplikaci Google Suggest</title> 
+
+    <style>
+    #cilovyDiv {
+      background-color: #FFAAAA;
+      width: 40%;
+    }
+    </style>
+
+    <script language="javascript">
+      function ziskejData(zdrojDat) 
+      { 
+        var XMLHttpRequestObjekt = false; 
+
+        if (window.XMLHttpRequest) {
+          XMLHttpRequestObjekt = new XMLHttpRequest();
+        } else if (window.ActiveXObject) {
+          XMLHttpRequestObjekt = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+
+        if(XMLHttpRequestObjekt) {
+          XMLHttpRequestObjekt.open("GET", zdrojDat); 
+
+          XMLHttpRequestObjekt.onreadystatechange = function() 
+          { 
+            if (XMLHttpRequestObjekt.readyState == 4 && 
+              XMLHttpRequestObjekt.status == 200) { 
+                eval(XMLHttpRequestObjekt.responseText);
+            } 
+          } 
+
+          XMLHttpRequestObjekt.send(null); 
+        }
+      }
+
+      function pripojitKeGoogleSuggest() 
+      {
+        var vstup = document.getElementById("textovePole");
+
+        if (vstup.value) {
+          ziskejData("google.php?qu=" + vstup.value);
+        } 
+        else {
+          var cilovyDiv = document.getElementById("cilovyDiv");
+
+          cilovyDiv.innerHTML = "<div></div>";
+        }
+      }
+
+      function sendRPCDone(nepouzProm, hledanyVyraz, poleVyrazu, 
+        poleVysledku, nepouzPole) 
+      {
+        var data = "<table>";
+        var citac;
+
+        if (poleVysledku.length != 0) {
+          for (var citac = 0; citac < poleVysledku.length; citac++) {
+            data += "<tr><td>" +
+            "<a href='http://www.google.com/search?q=" + 
+            poleVyrazu[citac] + "'>" + poleVyrazu[citac] + 
+            '</a></td><td>' + poleVysledku[citac] + "</td></tr>";
+          }
+        }
+
+        data += "</table>";
+
+        var cilovyDiv = document.getElementById("cilovyDiv");
+
+        cilovyDiv.innerHTML = data;
+      }
+    </script>
+
+  </head> 
+
+  <body>
+
+    <H1>Připojení k aplikaci Google Suggest</H1>
+
+    Hledat: <input id="textovePole" type="text" 
+      name="textovePole" onkeyup="pripojitKeGoogleSuggest()">
+
+      <div id="cilovyDiv"><div></div></div>
+
+  </body> 
+
+</html>

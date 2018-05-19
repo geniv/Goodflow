@@ -1,0 +1,33 @@
+<HTML>
+  <HEAD>
+    <TITLE> Bannerová kampaò </TITLE>
+    <SCRIPT Language="JavaScript">
+      <!--
+      // Pole obsahující definici reklamního odkazu s obrázkem
+      Pics = new Array(3);
+      Pics[0] = '<A HREF="http://www.swnet.cz">'+
+        '<IMG SRC="swnet.gif" ALT="SWNet" Border=0></A>';
+      Pics[1] = '<A HREF="http://swn.softnov.cz">'+
+        '<IMG SRC="softnov.gif" ALT="Softwarové noviny" Border=0></A>';
+      Pics[2] = '<A HREF="http://www.inside.cz">'+
+        '<IMG SRC="inside.gif" ALT="Inside" Border=0></A>';
+      // -->
+    </SCRIPT>
+  </HEAD>
+
+  <BODY>
+    ...Normální text stránky...
+    <BR><BR>
+    <SCRIPT Language="JavaScript">
+      <!--
+      // Zapsání obrázku do stránky
+      document.write("<CENTER>");
+      // Náhodný výbìr obrázku
+      document.write(Pics[Math.floor(Math.random() * Pics.length)]);
+      document.write("<BR><SMALL>Spøíznìné stránky</SMALL><BR>");
+      document.write("</CENTER>");
+      // -->
+    </SCRIPT>
+  </BODY>
+</HTML>
+

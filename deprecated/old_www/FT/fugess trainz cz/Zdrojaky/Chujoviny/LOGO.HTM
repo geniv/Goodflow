@@ -1,0 +1,48 @@
+<HTML>
+  <HEAD>
+    <TITLE>Logo u myši</TITLE>
+  </HEAD>
+
+  <BODY>
+
+  <SCRIPT Language="javascript">
+  <!--
+    // Text, který bude sledovat kurzor myši
+    var str='SWNet';
+
+    if (document.all){
+      // Pokud prohlížeè podporuje kolekci document.all,
+      // zapíše se do stránky definice textu a nastaví
+      // se mu styl
+      document.write('<div id="cursortext"');
+      document.write(
+        'style="position:absolute;visibility:hidden">');
+      // Obsahem prvku bude pøedem nadefinovaný øetìzec,
+      // ale mohl by tu být napøíklad i obrázek
+      document.write(str);
+      document.write('</div>');
+    }
+
+    // Nastavení pozice loga (textu)
+    function SetPosition(){
+      if (document.all){
+        // Zobrazení loga (textu)
+        cursortext.style.visibility="visible"
+      }
+      
+      // Nastavení pozice textu na stránce podle
+      // kurzoru myši
+      cursortext.style.left=document.body.scrollLeft+
+        event.clientX+20;
+      cursortext.style.top=document.body.scrollTop+
+        event.clientY+20;
+    }
+
+    // Nastavení obsluhy události onmousemove
+    document.onmousemove=SetPosition
+  //-->
+  </SCRIPT>
+
+  </BODY>
+</HTML>
+

@@ -1,0 +1,95 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>Eshop postaveny na PHP layoutu: Zdrojový soubor /var/www/phplayout/modules/random_picture/random_picture.php</title>
+<link href="doxygen.css" rel="stylesheet" type="text/css">
+<link href="tabs.css" rel="stylesheet" type="text/css">
+</head><body>
+<!-- Generováno programem Doxygen 1.5.5 -->
+<div class="navigation" id="top">
+  <div class="tabs">
+    <ul>
+      <li><a href="index.html"><span>Hlavní&nbsp;stránka</span></a></li>
+      <li><a href="annotated.html"><span>Třídy</span></a></li>
+      <li class="current"><a href="files.html"><span>Soubory</span></a></li>
+    </ul>
+  </div>
+<h1>/var/www/phplayout/modules/random_picture/random_picture.php</h1><a href="random__picture_8php.html">Zobrazit dokumentaci tohoto souboru.</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 &lt;?php
+<a name="l00002"></a>00002 
+<a name="l00013"></a><a class="code" href="classRandomPicture.html">00013</a> <span class="keyword">class </span><a class="code" href="classRandomPicture.html">RandomPicture</a>
+<a name="l00014"></a>00014 {
+<a name="l00015"></a><a class="code" href="classRandomPicture.html#0edc264eff660006a2854bd4e587307d">00015</a>   <span class="keyword">private</span> <a class="code" href="classRandomPicture.html#0edc264eff660006a2854bd4e587307d">$var</a>;
+<a name="l00016"></a><a class="code" href="classRandomPicture.html#50ac25a2887c3d09601b2cd6a0878011">00016</a>   <span class="keyword">private</span> <a class="code" href="classRandomPicture.html#50ac25a2887c3d09601b2cd6a0878011">$zdrojobr</a> = <span class="stringliteral">"./modules/random_picture/image"</span>; <span class="comment">//zdrojova cesta obrazku</span>
+<a name="l00017"></a>00017 
+<a name="l00018"></a><a class="code" href="classRandomPicture.html#78379c9ce03a5816582b8e06afc4d5f9">00018</a>   <span class="keyword">private</span> <a class="code" href="classRandomPicture.html#78379c9ce03a5816582b8e06afc4d5f9">$obr</a> = array (array(<span class="stringliteral">"src"</span> =&gt; <span class="stringliteral">"hu1.jpg"</span>, <span class="comment">//nadefinovane obrazky</span>
+<a name="l00019"></a>00019                               <span class="stringliteral">"alt"</span> =&gt; <span class="stringliteral">""</span>,
+<a name="l00020"></a>00020                               <span class="stringliteral">"id"</span> =&gt; <span class="stringliteral">""</span>,
+<a name="l00021"></a>00021                               <span class="stringliteral">"class"</span> =&gt; <span class="stringliteral">""</span>,
+<a name="l00022"></a>00022                               <span class="stringliteral">"width"</span> =&gt; <span class="stringliteral">""</span>,
+<a name="l00023"></a>00023                               <span class="stringliteral">"height"</span> =&gt; <span class="stringliteral">""</span>,
+<a name="l00024"></a>00024                               <span class="stringliteral">"href"</span> =&gt; <span class="stringliteral">""</span>),
+<a name="l00025"></a>00025 
+<a name="l00026"></a>00026                         array(<span class="stringliteral">"src"</span> =&gt; <span class="stringliteral">"hu2.jpg"</span>,
+<a name="l00027"></a>00027                               <span class="stringliteral">"alt"</span> =&gt; <span class="stringliteral">""</span>,
+<a name="l00028"></a>00028                               <span class="stringliteral">"id"</span> =&gt; <span class="stringliteral">""</span>,
+<a name="l00029"></a>00029                               <span class="stringliteral">"class"</span> =&gt; <span class="stringliteral">""</span>,
+<a name="l00030"></a>00030                               <span class="stringliteral">"width"</span> =&gt; <span class="stringliteral">""</span>,
+<a name="l00031"></a>00031                               <span class="stringliteral">"height"</span> =&gt; <span class="stringliteral">""</span>,
+<a name="l00032"></a>00032                               <span class="stringliteral">"href"</span> =&gt; <span class="stringliteral">""</span>),
+<a name="l00033"></a>00033 
+<a name="l00034"></a>00034                         array(<span class="stringliteral">"src"</span> =&gt; <span class="stringliteral">"hu3.jpg"</span>,
+<a name="l00035"></a>00035                               <span class="stringliteral">"alt"</span> =&gt; <span class="stringliteral">""</span>,
+<a name="l00036"></a>00036                               <span class="stringliteral">"id"</span> =&gt; <span class="stringliteral">""</span>,
+<a name="l00037"></a>00037                               <span class="stringliteral">"class"</span> =&gt; <span class="stringliteral">""</span>,
+<a name="l00038"></a>00038                               <span class="stringliteral">"width"</span> =&gt; <span class="stringliteral">""</span>,
+<a name="l00039"></a>00039                               <span class="stringliteral">"height"</span> =&gt; <span class="stringliteral">""</span>,
+<a name="l00040"></a>00040                               <span class="stringliteral">"href"</span> =&gt; <span class="stringliteral">""</span>),
+<a name="l00041"></a>00041 
+<a name="l00042"></a>00042                         array(<span class="stringliteral">"src"</span> =&gt; <span class="stringliteral">"hu4.jpg"</span>,
+<a name="l00043"></a>00043                               <span class="stringliteral">"alt"</span> =&gt; <span class="stringliteral">""</span>,
+<a name="l00044"></a>00044                               <span class="stringliteral">"id"</span> =&gt; <span class="stringliteral">""</span>,
+<a name="l00045"></a>00045                               <span class="stringliteral">"class"</span> =&gt; <span class="stringliteral">""</span>,
+<a name="l00046"></a>00046                               <span class="stringliteral">"width"</span> =&gt; <span class="stringliteral">""</span>,
+<a name="l00047"></a>00047                               <span class="stringliteral">"height"</span> =&gt; <span class="stringliteral">""</span>,
+<a name="l00048"></a>00048                               <span class="stringliteral">"href"</span> =&gt; <span class="stringliteral">""</span>),
+<a name="l00049"></a>00049 
+<a name="l00050"></a>00050                         array(<span class="stringliteral">"src"</span> =&gt; <span class="stringliteral">"hu5.png"</span>,
+<a name="l00051"></a>00051                               <span class="stringliteral">"alt"</span> =&gt; <span class="stringliteral">""</span>,
+<a name="l00052"></a>00052                               <span class="stringliteral">"id"</span> =&gt; <span class="stringliteral">""</span>,
+<a name="l00053"></a>00053                               <span class="stringliteral">"class"</span> =&gt; <span class="stringliteral">""</span>,
+<a name="l00054"></a>00054                               <span class="stringliteral">"width"</span> =&gt; <span class="stringliteral">""</span>,
+<a name="l00055"></a>00055                               <span class="stringliteral">"height"</span> =&gt; <span class="stringliteral">""</span>,
+<a name="l00056"></a>00056                               <span class="stringliteral">"href"</span> =&gt; <span class="stringliteral">""</span>),
+<a name="l00057"></a>00057                         );
+<a name="l00058"></a>00058 
+<a name="l00066"></a><a class="code" href="classRandomPicture.html#e44a48af7ee849b4dabaee53ac89325d">00066</a>   <span class="keyword">public</span> function <a class="code" href="classRandomPicture.html#e44a48af7ee849b4dabaee53ac89325d">__construct</a>(&amp;<a class="code" href="classRandomPicture.html#0edc264eff660006a2854bd4e587307d">$var</a>, $index) <span class="comment">//konstruktor</span>
+<a name="l00067"></a>00067   {
+<a name="l00068"></a>00068     $this-&gt;var = <a class="code" href="classRandomPicture.html#0edc264eff660006a2854bd4e587307d">$var</a>;
+<a name="l00069"></a>00069   }
+<a name="l00070"></a>00070 
+<a name="l00077"></a><a class="code" href="classRandomPicture.html#157699010d2fee09c4e8433132a011d2">00077</a>   <span class="keyword">public</span> function <a class="code" href="classRandomPicture.html#157699010d2fee09c4e8433132a011d2">Obrazek</a>()
+<a name="l00078"></a>00078   {
+<a name="l00079"></a>00079     $nahoda = rand(0, count($this-&gt;obr) - 1);
+<a name="l00080"></a>00080     $path = <span class="stringliteral">"{$this-&gt;zdrojobr}/"</span>;
+<a name="l00081"></a>00081     $cesta = (!Empty($this-&gt;obr[$nahoda][<span class="stringliteral">"src"</span>]) &amp;&amp; file_exists(<span class="stringliteral">"{$path}{$this-&gt;obr[$nahoda]["</span>src<span class="stringliteral">"]}"</span>) ? <span class="stringliteral">" src=\"{$path}{$this-&gt;obr[$nahoda]["</span>src<span class="stringliteral">"]}\""</span> : <span class="stringliteral">""</span>);
+<a name="l00082"></a>00082     $id = (!Empty($this-&gt;obr[$nahoda][<span class="stringliteral">"id"</span>]) ? <span class="stringliteral">" id=\"{$this-&gt;obr[$nahoda]["</span><span class="keywordtype">id</span><span class="stringliteral">"]}\""</span> : <span class="stringliteral">""</span>);
+<a name="l00083"></a>00083     $class = (!Empty($this-&gt;obr[$nahoda][<span class="stringliteral">"class"</span>]) ? <span class="stringliteral">" class=\"{$this-&gt;obr[$nahoda]["</span><span class="keyword">class</span><span class="stringliteral">"]}\""</span> : <span class="stringliteral">""</span>);
+<a name="l00084"></a>00084 
+<a name="l00085"></a>00085     $width = (!Empty($this-&gt;obr[$nahoda][<span class="stringliteral">"width"</span>]) ? <span class="stringliteral">" width=\"{$this-&gt;obr[$nahoda]["</span>width<span class="stringliteral">"]}\""</span> : <span class="stringliteral">""</span>);
+<a name="l00086"></a>00086     $height = (!Empty($this-&gt;obr[$nahoda][<span class="stringliteral">"height"</span>]) ? <span class="stringliteral">" height=\"{$this-&gt;obr[$nahoda]["</span>height<span class="stringliteral">"]}\""</span> : <span class="stringliteral">""</span>);
+<a name="l00087"></a>00087 
+<a name="l00088"></a>00088     $href = (!Empty($this-&gt;obr[$nahoda][<span class="stringliteral">"href"</span>]) ? <span class="stringliteral">"&lt;a href=\"{$this-&gt;obr[$nahoda]["</span>href<span class="stringliteral">"]}\" title=\"{$this-&gt;obr[$nahoda]["</span>alt<span class="stringliteral">"]}\"&gt;"</span> : <span class="stringliteral">""</span>);
+<a name="l00089"></a>00089     $href_end = (!Empty($this-&gt;obr[$nahoda][<span class="stringliteral">"href"</span>]) ? <span class="stringliteral">"&lt;/a&gt;"</span> : <span class="stringliteral">""</span>);
+<a name="l00090"></a>00090 
+<a name="l00091"></a>00091     <a class="code" href="hu1_8php.html#e241cf0159803673d118f68d99e6342f">$result</a> =
+<a name="l00092"></a>00092     <span class="stringliteral">"{$href}&lt;img{$cesta} alt=\"{$this-&gt;obr[$nahoda]["</span>alt<span class="stringliteral">"]}\"{$id}{$class}{$width}{$height} /&gt;{$href_end}"</span>;
+<a name="l00093"></a>00093 
+<a name="l00094"></a>00094     <span class="keywordflow">return</span> <a class="code" href="hu1_8php.html#e241cf0159803673d118f68d99e6342f">$result</a>;
+<a name="l00095"></a>00095   }
+<a name="l00096"></a>00096 }
+<a name="l00097"></a>00097 ?&gt;
+</pre></div></div>
+<hr size="1"><address style="text-align: right;"><small>Generováno Tue Mar 10 12:32:26 2009 pro projekt Eshop postaveny na PHP layoutu programem&nbsp;
+<a href="http://www.doxygen.org/index.html">
+<img src="doxygen.png" alt="doxygen" align="middle" border="0"></a> 1.5.5 </small></address>
+</body>
+</html>

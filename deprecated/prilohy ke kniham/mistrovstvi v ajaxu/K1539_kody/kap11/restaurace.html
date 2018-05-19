@@ -1,0 +1,72 @@
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>
+      Restaurace využívající dynamické HTML
+    </title>
+
+    <script language="JavaScript">
+      var aktDatum = new Date();
+      var aktHodin = aktDatum.getHours();
+      document.write("<center>");
+      document.write("<h1>");
+      document.write("Vítejte v naší restauraci");
+      document.write("</h1>");
+      document.write("</center>");
+
+      if (aktHodin < 5 || aktHodin > 23){
+        document.write("<center>");
+        document.write("<h1>");
+        document.write("Je nám líto, ale máme zavřeno." );
+        document.write("</h1>");
+        document.write("</center>");
+      }
+            
+      if (aktHodin > 6 && aktHodin < 12) { 
+        document.write("<center>");                               
+        document.write("<table border>");
+        document.write("<tr><th colspan=2>Snídaně</th></tr>");       
+        document.write("<tr><td>Vajíčka</td><td>45,-</td></tr>");
+        document.write("<tr><td>Palačinky</td><td>35,-</td></tr>");           
+        document.write("<tr><td>Omeleta</td><td>30,-</td></tr>");          
+        document.write("<tr><td>Vafle</td><td>30,-</td></tr>");        
+        document.write("</table>");                               
+        document.write("</center>");                              
+        document.write("</table>");                               
+        document.write("</center>");                              
+      }
+            
+      if (aktHodin >= 12 && aktHodin < 17) { 
+        document.write("<center>");
+        document.write("<table border>");
+        document.write("<tr><th colspan=2>Oběd</th></tr>");
+        document.write("<tr><td>Kuřecí řízek</td><td>80,-</td></tr>");           
+        document.write("<tr><td>Vepřový řízek</td><td>100,-</td></tr>");
+        document.write("<tr><td>Špagety</td><td>65,-</td></tr>");
+        document.write("<tr><td>Smažený sýr</td><td>55,-</td></tr>");
+        document.write("<tr><td>Smažený květák</td><td>60,-</td></tr>");
+        document.write("</table>");                                
+        document.write("</center>");
+      }
+            
+      if (aktHodin >= 17 && aktHodin < 22) { 
+        document.write("<center>");                               
+        document.write("<table border>");
+        document.write("<tr><th colspan=2>Večeře</th></tr>");
+        document.write("<tr><td>Humr</td><td>300,-</td></tr>");           
+        document.write("<tr><td>Mořské plody</td><td>250,-</td></tr>");    
+        document.write("<tr><td>Kuřecí steak</td><td>150,-</td></tr>");        
+        document.write("<tr><td>Vepřový steak</td><td>170,-</td></tr>");          
+        document.write("<tr><td>Salát</td><td>55,-</td></tr>");           
+        document.write("<tr><td>Brambory</td><td>30,-</td></tr>");          
+        document.write("</table>");                               
+        document.write("</center>");                              
+      }
+    
+    </script>
+  </head>
+
+  <body>
+  </body>
+        
+</html>

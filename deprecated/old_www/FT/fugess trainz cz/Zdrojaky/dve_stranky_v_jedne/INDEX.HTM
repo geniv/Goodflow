@@ -1,0 +1,76 @@
+<style media="all" type="text/css">
+body {
+background: #ffffcc;
+margin: 20px 0 20px 0;
+padding: 0;
+border: 0;
+font-family: "Arial CE", "Helvetica CE", arial, helvetica, sans-serif;
+font-weight: 400;
+font-size: 12px;
+line-height: 120%; 
+color: #000;
+text-align: center;
+}
+
+a {
+font-family: "Arial CE", "Helvetica CE", arial, helvetica, sans-serif;
+font-weight: 400;
+font-size: 12px;
+line-height: 120%; 
+color: blue;
+text-align: left;
+}
+
+a:hover {
+font-family: "Arial CE", "Helvetica CE", arial, helvetica, sans-serif;
+font-weight: 400;
+font-size: 12px;
+line-height: 120%; 
+color: red;
+text-align: left;
+}
+
+.vzhled {
+margin: auto;
+background: #ffffff;
+text-align: left;
+}
+html>body .vzhled {
+}
+
+#strana1 {
+display: block;
+}
+
+#strana2 {
+display: none;
+}
+
+
+</style>
+
+<script type="text/javascript">
+
+function zmena(skryj,ukaz)
+{
+var co_bude_videt='strana'+ukaz;
+var co_bude_skryte='strana'+skryj;
+
+document.getElementById(co_bude_videt).style.display = 'block';
+document.getElementById(co_bude_skryte).style.display = 'none';
+}
+
+   
+</script>
+</head>
+<body>
+
+<div id="strana1" class="vzhled">
+<a href="#" onclick="zmena(1,2)">strana 2</a>
+<p>toto je text 1 strany, meli by to brat prohlizece IE 5 a vys, Mozilla 0.9.9, Netscape 6</p>
+</div>
+
+<div id="strana2" class="vzhled">
+<a href="#" onclick="zmena(2,1)">strana 1</a>
+<p>toto je text 2 strany</p>
+</div>

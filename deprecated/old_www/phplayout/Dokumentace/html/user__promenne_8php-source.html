@@ -1,0 +1,331 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>Novy vychozi PHP layout: Zdrojový soubor /var/www/phplayout/user_promenne.php</title>
+<link href="tabs.css" rel="stylesheet" type="text/css">
+<link href="doxygen.css" rel="stylesheet" type="text/css">
+</head><body>
+<!-- Generováno programem Doxygen 1.5.8 -->
+<div class="navigation" id="top">
+  <div class="tabs">
+    <ul>
+      <li><a href="index.html"><span>Hlavní&nbsp;stránka</span></a></li>
+      <li><a href="annotated.html"><span>Třídy</span></a></li>
+      <li class="current"><a href="files.html"><span>Soubory</span></a></li>
+    </ul>
+  </div>
+  <div class="tabs">
+    <ul>
+      <li><a href="files.html"><span>Seznam&nbsp;souborů</span></a></li>
+      <li><a href="globals.html"><span>Symboly&nbsp;v&nbsp;souborech</span></a></li>
+    </ul>
+  </div>
+<h1>/var/www/phplayout/user_promenne.php</h1><a href="user__promenne_8php.html">Zobrazit dokumentaci tohoto souboru.</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 &lt;?php
+<a name="l00002"></a>00002 
+<a name="l00007"></a>00007   include_once <span class="stringliteral">"login_promenne.php"</span>;  <span class="comment">//vlozeni unikatnich loginu</span>
+<a name="l00008"></a><a class="code" href="classUserPromenne.html">00008</a>   <span class="keyword">class </span><a class="code" href="classUserPromenne.html">UserPromenne</a> <span class="keyword">extends</span> <a class="code" href="classLoginMySQLi.html">LoginMySQLi</a>
+<a name="l00009"></a>00009   {
+<a name="l00010"></a><a class="code" href="classUserPromenne.html#072ecb8e866836432cedadb540a4de7c">00010</a>     <span class="keyword">public</span> <a class="code" href="classUserPromenne.html#072ecb8e866836432cedadb540a4de7c">$adminpristup</a> = array (<span class="stringliteral">"6342fd9364b41005acce71e244849183"</span> =&gt; <span class="stringliteral">"93f9a5d3507bbd81db94663fd09dc866"</span>, <span class="comment">//ja, hesla v MD5</span>
+<a name="l00011"></a>00011                                   <span class="stringliteral">"48acfd8edd4b6009c8257490df01c717"</span> =&gt; <span class="stringliteral">"7c8c47575b1ff8a0a34e871a33b5954f"</span>, <span class="comment">//fug</span>
+<a name="l00012"></a>00012                                   <span class="stringliteral">"06b586c247dd639a269aa3bbe70fabac"</span> =&gt; <span class="stringliteral">"2750e0d761a4d611073ae2ac3b171753"</span>, <span class="comment">//jur</span>
+<a name="l00013"></a>00013                                   <span class="stringliteral">"5cdd4a9ba64b43686b8a1a70f6448efc"</span> =&gt; <span class="stringliteral">"19d63889e06b4a8ecebcfbffdf2845b0"</span>, <span class="comment">//martin</span>
+<a name="l00014"></a>00014                                   );
+<a name="l00015"></a>00015 
+<a name="l00016"></a><a class="code" href="classUserPromenne.html#2aa9a5d4c9c7e300d075db51598dc6bb">00016</a>     <span class="keyword">public</span> <a class="code" href="classUserPromenne.html#2aa9a5d4c9c7e300d075db51598dc6bb">$admin_ozn_menu</a> = <span class="stringliteral">"odkaz"</span>;  <span class="comment">//jedna volba oznaceni</span>
+<a name="l00017"></a><a class="code" href="classUserPromenne.html#8c14b698990807bb2323f1cae1ab78c7">00017</a>     <span class="keyword">public</span> <a class="code" href="classUserPromenne.html#8c14b698990807bb2323f1cae1ab78c7">$select_admin_oznac</a> = array (<span class="stringliteral">"odkaz"</span> =&gt; <span class="stringliteral">"[|--|]"</span>,<span class="comment">// "["  "]"</span>
+<a name="l00018"></a>00018                                         <span class="stringliteral">"class"</span> =&gt; <span class="stringliteral">"aktivni"</span>,
+<a name="l00019"></a>00019                                         <span class="stringliteral">"id"</span> =&gt; <span class="stringliteral">" aktivnejsi"</span>); <span class="comment">//moznost volby oznacovani menu v adminu</span>
+<a name="l00020"></a>00020 
+<a name="l00021"></a><a class="code" href="classUserPromenne.html#1ae28354d83272e60b3b2fddf1b5dff7">00021</a>     <span class="keyword">public</span> <a class="code" href="classUserPromenne.html#1ae28354d83272e60b3b2fddf1b5dff7">$admin_expire</a> = array(0, 30, 0); <span class="comment">//expirace z adminu</span>
+<a name="l00022"></a>00022 
+<a name="l00023"></a><a class="code" href="classUserPromenne.html#549eae187269d2705972f5a6e9550ce2">00023</a>     <span class="keyword">public</span> <a class="code" href="classUserPromenne.html#549eae187269d2705972f5a6e9550ce2">$zalohovatdni</a> = 5;  <span class="comment">//pocet dni pro ponechani zalohy</span>
+<a name="l00024"></a><a class="code" href="classUserPromenne.html#65029c6fa206c7f7bd0227a70052bc5d">00024</a>     <span class="keyword">public</span> <a class="code" href="classUserPromenne.html#65029c6fa206c7f7bd0227a70052bc5d">$autozaloha</a> = <span class="keyword">true</span>;  <span class="comment">//true/false - aktualizace kazdy den</span>
+<a name="l00025"></a><a class="code" href="classUserPromenne.html#0357a56a163853a5810023c591c6b813">00025</a>     <span class="keyword">public</span> <a class="code" href="classUserPromenne.html#0357a56a163853a5810023c591c6b813">$zalohadir</a> = <span class="stringliteral">"db"</span>; <span class="comment">//adresa slozky zalohovani databazi</span>
+<a name="l00026"></a>00026 
+<a name="l00027"></a><a class="code" href="classUserPromenne.html#221ff0f869eabcfb39fb11317f2435c9">00027</a>     <span class="keyword">public</span> <a class="code" href="classUserPromenne.html#221ff0f869eabcfb39fb11317f2435c9">$nazevwebu</a> = <span class="stringliteral">"PHPLayout"</span>;  <span class="comment">//definuje nazev webu</span>
+<a name="l00028"></a>00028 
+<a name="l00029"></a><a class="code" href="classUserPromenne.html#acf0aa9e49d2d665ea5e13b2dbb6e9a6">00029</a>     <span class="keyword">public</span> <a class="code" href="classUserPromenne.html#acf0aa9e49d2d665ea5e13b2dbb6e9a6">$default</a> = <span class="stringliteral">"uvod"</span>; <span class="comment">//defaultni stranka</span>
+<a name="l00030"></a>00030 
+<a name="l00031"></a><a class="code" href="classUserPromenne.html#6be2b6da7210fa1f7b4314867ff724ce">00031</a>     <span class="keyword">public</span> <a class="code" href="classUserPromenne.html#6be2b6da7210fa1f7b4314867ff724ce">$klenot</a> = <span class="keyword">true</span>;  <span class="comment">//true/false - nastaveni jestli je domena na klenot.cz ci ne</span>
+<a name="l00032"></a><a class="code" href="classUserPromenne.html#d7f0eec12f0f47d35c7d38b3f7fb7410">00032</a>     <span class="keyword">public</span> <a class="code" href="classUserPromenne.html#d7f0eec12f0f47d35c7d38b3f7fb7410">$autoklenot</a> = <span class="keyword">true</span>;  <span class="comment">//true/false - (zapnuto / vypnuto auto zjistovani) - zjitsti podle IP jestli je soubor na webu ci nikoli</span>
+<a name="l00033"></a>00033 
+<a name="l00034"></a><a class="code" href="classUserPromenne.html#463a984beb7212371fb32fbe44e32d0f">00034</a>     <span class="keyword">public</span> <a class="code" href="classUserPromenne.html#463a984beb7212371fb32fbe44e32d0f">$aktualizovat</a> = <span class="keyword">true</span>; <span class="comment">//true/false - zapnuti aktualizaci / vypnuti aktualizaci</span>
+<a name="l00035"></a>00035 
+<a name="l00036"></a><a class="code" href="classUserPromenne.html#0dbe62bbbae0c5f4a958d708c38b1ae2">00036</a>     <span class="keyword">public</span> <a class="code" href="classUserPromenne.html#0dbe62bbbae0c5f4a958d708c38b1ae2">$htaccess</a> = <span class="keyword">true</span>;  <span class="comment">//true/false - zapinani adres pro htaccess</span>
+<a name="l00037"></a>00037 
+<a name="l00038"></a><a class="code" href="classUserPromenne.html#85b5c2c45b833322f9c6e1fafc51eab4">00038</a>     <span class="keyword">public</span> <a class="code" href="classUserPromenne.html#85b5c2c45b833322f9c6e1fafc51eab4">$debug_mod</a> = <span class="keyword">true</span>; <span class="comment">//true/false - zapina vyvojarsky rezim</span>
+<a name="l00039"></a>00039 
+<a name="l00040"></a><a class="code" href="classUserPromenne.html#99c4ac60ad31ff5385e4c88fee363653">00040</a>     <span class="keyword">public</span> <a class="code" href="classUserPromenne.html#99c4ac60ad31ff5385e4c88fee363653">$administrace</a> = <span class="keyword">true</span>;  <span class="comment">//ma-li stranka obsahovat admin sekci</span>
+<a name="l00041"></a><a class="code" href="classUserPromenne.html#e9a02fd5e0bbcb8b99fa613cb5d8e5e1">00041</a>     <span class="keyword">public</span> <a class="code" href="classUserPromenne.html#e9a02fd5e0bbcb8b99fa613cb5d8e5e1">$adresaadminu</a> = <span class="stringliteral">"\$admin"</span>;    <span class="comment">//text adresy do adminu</span>
+<a name="l00042"></a>00042 
+<a name="l00043"></a><a class="code" href="classUserPromenne.html#469ef7d6da24847d4621071057373d5d">00043</a>     <span class="keyword">public</span> <a class="code" href="classUserPromenne.html#469ef7d6da24847d4621071057373d5d">$souborymenu</a> = <span class="stringliteral">"sekce"</span>;  <span class="comment">//umisteni souboru menu</span>
+<a name="l00044"></a><a class="code" href="classUserPromenne.html#31dcc0c8009836366fd9156a6b3a7922">00044</a>     <span class="keyword">public</span> <a class="code" href="classUserPromenne.html#31dcc0c8009836366fd9156a6b3a7922">$souboryinclude</a> = <span class="stringliteral">"included"</span>;  <span class="comment">//umsteni included souboru</span>
+<a name="l00045"></a>00045 
+<a name="l00046"></a><a class="code" href="classUserPromenne.html#2a46ad762444e17508b2860c8544fba2">00046</a>     <span class="keyword">public</span> <a class="code" href="classUserPromenne.html#2a46ad762444e17508b2860c8544fba2">$get_kam</a> = <span class="stringliteral">"action"</span>;
+<a name="l00047"></a><a class="code" href="classUserPromenne.html#71f39bc6e96b32ade337db6b37ff0cc1">00047</a>     <span class="keyword">public</span> <a class="code" href="classUserPromenne.html#71f39bc6e96b32ade337db6b37ff0cc1">$get_idmodul</a> = <span class="stringliteral">"modul"</span>;
+<a name="l00048"></a><a class="code" href="classUserPromenne.html#bf8d2088be9def872e30630d359fe24a">00048</a>     <span class="keyword">public</span> <a class="code" href="classUserPromenne.html#bf8d2088be9def872e30630d359fe24a">$get_submenu</a> = <span class="stringliteral">"sub"</span>;
+<a name="l00049"></a>00049 
+<a name="l00050"></a><a class="code" href="classUserPromenne.html#a2fc321fdbfcd714dbf202d01a02cf3f">00050</a>     <span class="keyword">public</span> <a class="code" href="classUserPromenne.html#a2fc321fdbfcd714dbf202d01a02cf3f">$moduly</a> = array (array(<span class="stringliteral">"include"</span> =&gt; <span class="stringliteral">"funkce.php"</span>,  <span class="comment">//hlavni funkce musi byt implicitne 0</span>
+<a name="l00051"></a>00051                                   <span class="stringliteral">"class"</span> =&gt; <span class="stringliteral">"Funkce"</span>,
+<a name="l00052"></a>00052                                   <span class="stringliteral">"admin"</span> =&gt; <span class="keyword">true</span>,
+<a name="l00053"></a>00053                                   <span class="stringliteral">"databaze"</span> =&gt; <span class="stringliteral">""</span>,
+<a name="l00054"></a>00054                                   <span class="stringliteral">"zobrazit"</span> =&gt; <span class="keyword">true</span>,
+<a name="l00055"></a>00055                                   <span class="stringliteral">"uloziste"</span> =&gt; <span class="stringliteral">"sqlite"</span>),  <span class="comment">//"sqlite|mysqli|combine"</span>
+<a name="l00056"></a>00056 
+<a name="l00057"></a>00057                             array(<span class="stringliteral">"include"</span> =&gt; <span class="stringliteral">"modules/static_menu/static_menu.php"</span>,
+<a name="l00058"></a>00058                                   <span class="stringliteral">"class"</span> =&gt;  <span class="stringliteral">"StaticMenu"</span>,
+<a name="l00059"></a>00059                                   <span class="stringliteral">"admin"</span> =&gt; <span class="keyword">false</span>,
+<a name="l00060"></a>00060                                   <span class="stringliteral">"databaze"</span> =&gt; <span class="stringliteral">""</span>,
+<a name="l00061"></a>00061                                   <span class="stringliteral">"zobrazit"</span> =&gt; <span class="keyword">true</span>,
+<a name="l00062"></a>00062                                   <span class="stringliteral">"uloziste"</span> =&gt; <span class="stringliteral">"sqlite"</span>),
+<a name="l00063"></a>00063 
+<a name="l00064"></a>00064                             array(<span class="stringliteral">"include"</span> =&gt; <span class="stringliteral">"modules/dynamicky_obsah/dynamicky_obsah.php"</span>,
+<a name="l00065"></a>00065                                   <span class="stringliteral">"class"</span> =&gt;  <span class="stringliteral">"DynamicObsah"</span>,
+<a name="l00066"></a>00066                                   <span class="stringliteral">"admin"</span> =&gt; <span class="keyword">true</span>,
+<a name="l00067"></a>00067                                   <span class="stringliteral">"databaze"</span> =&gt; <span class="stringliteral">".dbdynobsah.sqlite2"</span>,
+<a name="l00068"></a>00068                                   <span class="stringliteral">"zobrazit"</span> =&gt; <span class="keyword">true</span>,
+<a name="l00069"></a>00069                                   <span class="stringliteral">"uloziste"</span> =&gt; <span class="stringliteral">"sqlite"</span>),
+<a name="l00070"></a>00070 
+<a name="l00071"></a>00071                             array(<span class="stringliteral">"include"</span> =&gt; <span class="stringliteral">"modules/dynamicke_eshop_menu/eshop_menu.php"</span>,
+<a name="l00072"></a>00072                                   <span class="stringliteral">"class"</span> =&gt;  <span class="stringliteral">"DynamicEshopMenu"</span>,
+<a name="l00073"></a>00073                                   <span class="stringliteral">"admin"</span> =&gt; <span class="keyword">true</span>,
+<a name="l00074"></a>00074                                   <span class="stringliteral">"databaze"</span> =&gt; <span class="stringliteral">".dbdyneshmenu.sqlite2"</span>,
+<a name="l00075"></a>00075                                   <span class="stringliteral">"zobrazit"</span> =&gt; <span class="keyword">true</span>,
+<a name="l00076"></a>00076                                   <span class="stringliteral">"uloziste"</span> =&gt; <span class="stringliteral">"sqlite"</span>),
+<a name="l00077"></a>00077 
+<a name="l00078"></a>00078                             array(<span class="stringliteral">"include"</span> =&gt; <span class="stringliteral">"modules/dynamicky_obsah_eshop/dynamicky_obsah_eshop.php"</span>,
+<a name="l00079"></a>00079                                   <span class="stringliteral">"class"</span> =&gt;  <span class="stringliteral">"DynamicObsahEshop"</span>,
+<a name="l00080"></a>00080                                   <span class="stringliteral">"admin"</span> =&gt; <span class="keyword">true</span>,
+<a name="l00081"></a>00081                                   <span class="stringliteral">"databaze"</span> =&gt; <span class="stringliteral">".dbdynobsaheshop.sqlite2"</span>,
+<a name="l00082"></a>00082                                   <span class="stringliteral">"zobrazit"</span> =&gt; <span class="keyword">true</span>,
+<a name="l00083"></a>00083                                   <span class="stringliteral">"uloziste"</span> =&gt; <span class="stringliteral">"sqlite"</span>),
+<a name="l00084"></a>00084 
+<a name="l00085"></a>00085                             array(<span class="stringliteral">"include"</span> =&gt; <span class="stringliteral">"modules/random_picture/random_picture.php"</span>,
+<a name="l00086"></a>00086                                   <span class="stringliteral">"class"</span> =&gt;  <span class="stringliteral">"RandomPicture"</span>,
+<a name="l00087"></a>00087                                   <span class="stringliteral">"admin"</span> =&gt; <span class="keyword">false</span>,
+<a name="l00088"></a>00088                                   <span class="stringliteral">"databaze"</span> =&gt; <span class="stringliteral">""</span>,
+<a name="l00089"></a>00089                                   <span class="stringliteral">"zobrazit"</span> =&gt; <span class="keyword">true</span>,
+<a name="l00090"></a>00090                                   <span class="stringliteral">"uloziste"</span> =&gt; <span class="stringliteral">"sqlite"</span>),
+<a name="l00091"></a>00091 
+<a name="l00092"></a>00092                             array(<span class="stringliteral">"include"</span> =&gt; <span class="stringliteral">"modules/rozliseni_podle_agenta/agent.php"</span>,
+<a name="l00093"></a>00093                                   <span class="stringliteral">"class"</span> =&gt;  <span class="stringliteral">"RozliseniPodleAgenta"</span>,
+<a name="l00094"></a>00094                                   <span class="stringliteral">"admin"</span> =&gt; <span class="keyword">false</span>,
+<a name="l00095"></a>00095                                   <span class="stringliteral">"databaze"</span> =&gt; <span class="stringliteral">""</span>,
+<a name="l00096"></a>00096                                   <span class="stringliteral">"zobrazit"</span> =&gt; <span class="keyword">true</span>,
+<a name="l00097"></a>00097                                   <span class="stringliteral">"uloziste"</span> =&gt; <span class="stringliteral">"sqlite"</span>),
+<a name="l00098"></a>00098 
+<a name="l00099"></a>00099                             array(<span class="stringliteral">"include"</span> =&gt; <span class="stringliteral">"modules/prepinani_podle_sekci/prepinani.php"</span>,
+<a name="l00100"></a>00100                                   <span class="stringliteral">"class"</span> =&gt;  <span class="stringliteral">"PrepinaniPodleSekci"</span>,
+<a name="l00101"></a>00101                                   <span class="stringliteral">"admin"</span> =&gt; <span class="keyword">true</span>,
+<a name="l00102"></a>00102                                   <span class="stringliteral">"databaze"</span> =&gt; <span class="stringliteral">".dbprepinanisekci.sqlite2"</span>,
+<a name="l00103"></a>00103                                   <span class="stringliteral">"zobrazit"</span> =&gt; <span class="keyword">true</span>,
+<a name="l00104"></a>00104                                   <span class="stringliteral">"uloziste"</span> =&gt; <span class="stringliteral">"sqlite"</span>),
+<a name="l00105"></a>00105 
+<a name="l00106"></a>00106                             array(<span class="stringliteral">"include"</span> =&gt; <span class="stringliteral">"modules/static_flash/flash_header.php"</span>,
+<a name="l00107"></a>00107                                   <span class="stringliteral">"class"</span> =&gt;  <span class="stringliteral">"FlashHeader"</span>,
+<a name="l00108"></a>00108                                   <span class="stringliteral">"admin"</span> =&gt; <span class="keyword">false</span>,
+<a name="l00109"></a>00109                                   <span class="stringliteral">"databaze"</span> =&gt; <span class="stringliteral">""</span>,
+<a name="l00110"></a>00110                                   <span class="stringliteral">"zobrazit"</span> =&gt; <span class="keyword">true</span>,
+<a name="l00111"></a>00111                                   <span class="stringliteral">"uloziste"</span> =&gt; <span class="stringliteral">"sqlite"</span>),
+<a name="l00112"></a>00112 
+<a name="l00113"></a>00113                             array(<span class="stringliteral">"include"</span> =&gt; <span class="stringliteral">"modules/dynamic_language/language.php"</span>,
+<a name="l00114"></a>00114                                   <span class="stringliteral">"class"</span> =&gt;  <span class="stringliteral">"DynamicLanguage"</span>,
+<a name="l00115"></a>00115                                   <span class="stringliteral">"admin"</span> =&gt; <span class="keyword">true</span>,
+<a name="l00116"></a>00116                                   <span class="stringliteral">"databaze"</span> =&gt; <span class="stringliteral">".dbdynlanguage.sqlite2"</span>,
+<a name="l00117"></a>00117                                   <span class="stringliteral">"zobrazit"</span> =&gt; <span class="keyword">true</span>,
+<a name="l00118"></a>00118                                   <span class="stringliteral">"uloziste"</span> =&gt; <span class="stringliteral">"sqlite"</span>),
+<a name="l00119"></a>00119 
+<a name="l00120"></a>00120                             array(<span class="stringliteral">"include"</span> =&gt; <span class="stringliteral">"modules/dynamic_htaccess/htaccess.php"</span>,
+<a name="l00121"></a>00121                                   <span class="stringliteral">"class"</span> =&gt;  <span class="stringliteral">"DynamicHtaccess"</span>,
+<a name="l00122"></a>00122                                   <span class="stringliteral">"admin"</span> =&gt; <span class="keyword">true</span>,
+<a name="l00123"></a>00123                                   <span class="stringliteral">"databaze"</span> =&gt; <span class="stringliteral">".dbdynhtaccess.sqlite2"</span>,
+<a name="l00124"></a>00124                                   <span class="stringliteral">"zobrazit"</span> =&gt; <span class="keyword">true</span>,
+<a name="l00125"></a>00125                                   <span class="stringliteral">"uloziste"</span> =&gt; <span class="stringliteral">"sqlite"</span>),
+<a name="l00126"></a>00126 
+<a name="l00127"></a>00127                             array(<span class="stringliteral">"include"</span> =&gt; <span class="stringliteral">"modules/dynamic_cykl_obsah/cykl_obsah.php"</span>,
+<a name="l00128"></a>00128                                   <span class="stringliteral">"class"</span> =&gt;  <span class="stringliteral">"DynamicCyklObsah"</span>,
+<a name="l00129"></a>00129                                   <span class="stringliteral">"admin"</span> =&gt; <span class="keyword">true</span>,
+<a name="l00130"></a>00130                                   <span class="stringliteral">"databaze"</span> =&gt; <span class="stringliteral">".dbdyncyklobsah.sqlite2"</span>,
+<a name="l00131"></a>00131                                   <span class="stringliteral">"zobrazit"</span> =&gt; <span class="keyword">true</span>,
+<a name="l00132"></a>00132                                   <span class="stringliteral">"uloziste"</span> =&gt; <span class="stringliteral">"sqlite"</span>),
+<a name="l00133"></a>00133 
+<a name="l00134"></a>00134                             array(<span class="stringliteral">"include"</span> =&gt; <span class="stringliteral">"modules/dynamic_picture_gallery/picture_gallery.php"</span>,
+<a name="l00135"></a>00135                                   <span class="stringliteral">"class"</span> =&gt;  <span class="stringliteral">"DynamicPictureGallery"</span>,
+<a name="l00136"></a>00136                                   <span class="stringliteral">"admin"</span> =&gt; <span class="keyword">true</span>,
+<a name="l00137"></a>00137                                   <span class="stringliteral">"databaze"</span> =&gt; <span class="stringliteral">".dbdynpicgallery.sqlite2"</span>,
+<a name="l00138"></a>00138                                   <span class="stringliteral">"zobrazit"</span> =&gt; <span class="keyword">true</span>,
+<a name="l00139"></a>00139                                   <span class="stringliteral">"uloziste"</span> =&gt; <span class="stringliteral">"sqlite"</span>),
+<a name="l00140"></a>00140 
+<a name="l00141"></a>00141                             <span class="comment">//dynamic menu se sekcemi</span>
+<a name="l00142"></a>00142                             array(<span class="stringliteral">"include"</span> =&gt; <span class="stringliteral">"modules/dynamicky_menu/dynamicky_menu.php"</span>,
+<a name="l00143"></a>00143                                   <span class="stringliteral">"class"</span> =&gt;  <span class="stringliteral">"DynamicMenu"</span>,
+<a name="l00144"></a>00144                                   <span class="stringliteral">"admin"</span> =&gt; <span class="keyword">true</span>,
+<a name="l00145"></a>00145                                   <span class="stringliteral">"databaze"</span> =&gt; <span class="stringliteral">".dbdynmenu.sqlite2"</span>,
+<a name="l00146"></a>00146                                   <span class="stringliteral">"zobrazit"</span> =&gt; <span class="keyword">true</span>,
+<a name="l00147"></a>00147                                   <span class="stringliteral">"uloziste"</span> =&gt; <span class="stringliteral">"sqlite"</span>),
+<a name="l00148"></a>00148 
+<a name="l00149"></a>00149                             <span class="comment">//dynamic menu bez sekci</span>
+<a name="l00150"></a>00150                             array(<span class="stringliteral">"include"</span> =&gt; <span class="stringliteral">"modules/dynamicky_menu_bez_skupin/dynamicky_menu.php"</span>,
+<a name="l00151"></a>00151                                   <span class="stringliteral">"class"</span> =&gt;  <span class="stringliteral">"DynamicMenuWithoutGroup"</span>,
+<a name="l00152"></a>00152                                   <span class="stringliteral">"admin"</span> =&gt; <span class="keyword">true</span>,
+<a name="l00153"></a>00153                                   <span class="stringliteral">"databaze"</span> =&gt; <span class="stringliteral">".dbdynmenuoutgrup.sqlite2"</span>,
+<a name="l00154"></a>00154                                   <span class="stringliteral">"zobrazit"</span> =&gt; <span class="keyword">true</span>,
+<a name="l00155"></a>00155                                   <span class="stringliteral">"uloziste"</span> =&gt; <span class="stringliteral">"sqlite"</span>),
+<a name="l00156"></a>00156 
+<a name="l00157"></a>00157                             array(<span class="stringliteral">"include"</span> =&gt; <span class="stringliteral">"modules/dynamic_gallery/dynamicka_galerie.php"</span>,
+<a name="l00158"></a>00158                                   <span class="stringliteral">"class"</span> =&gt;  <span class="stringliteral">"DynamicGallery"</span>,
+<a name="l00159"></a>00159                                   <span class="stringliteral">"admin"</span> =&gt; <span class="keyword">true</span>,
+<a name="l00160"></a>00160                                   <span class="stringliteral">"databaze"</span> =&gt; <span class="stringliteral">".dbdyngallery.sqlite2"</span>,
+<a name="l00161"></a>00161                                   <span class="stringliteral">"zobrazit"</span> =&gt; <span class="keyword">true</span>,
+<a name="l00162"></a>00162                                   <span class="stringliteral">"uloziste"</span> =&gt; <span class="stringliteral">"sqlite"</span>),
+<a name="l00163"></a>00163 
+<a name="l00164"></a>00164                             array(<span class="stringliteral">"include"</span> =&gt; <span class="stringliteral">"modules/datovy_sklad/datovy_sklad.php"</span>,
+<a name="l00165"></a>00165                                   <span class="stringliteral">"class"</span> =&gt;  <span class="stringliteral">"DataStorage"</span>,
+<a name="l00166"></a>00166                                   <span class="stringliteral">"admin"</span> =&gt; <span class="keyword">true</span>,
+<a name="l00167"></a>00167                                   <span class="stringliteral">"databaze"</span> =&gt; <span class="stringliteral">""</span>,
+<a name="l00168"></a>00168                                   <span class="stringliteral">"zobrazit"</span> =&gt; <span class="keyword">true</span>,
+<a name="l00169"></a>00169                                   <span class="stringliteral">"uloziste"</span> =&gt; <span class="stringliteral">"sqlite"</span>),
+<a name="l00170"></a>00170 
+<a name="l00171"></a>00171                             array(<span class="stringliteral">"include"</span> =&gt; <span class="stringliteral">"modules/dynamic_form/dynamicky_formular.php"</span>,
+<a name="l00172"></a>00172                                   <span class="stringliteral">"class"</span> =&gt;  <span class="stringliteral">"DynamicForm"</span>,
+<a name="l00173"></a>00173                                   <span class="stringliteral">"admin"</span> =&gt; <span class="keyword">true</span>,
+<a name="l00174"></a>00174                                   <span class="stringliteral">"databaze"</span> =&gt; <span class="stringliteral">".dbdynform.sqlite2"</span>,
+<a name="l00175"></a>00175                                   <span class="stringliteral">"zobrazit"</span> =&gt; <span class="keyword">true</span>,
+<a name="l00176"></a>00176                                   <span class="stringliteral">"uloziste"</span> =&gt; <span class="stringliteral">"sqlite"</span>),
+<a name="l00177"></a>00177 
+<a name="l00178"></a>00178                             array(<span class="stringliteral">"include"</span> =&gt; <span class="stringliteral">"modules/admin_databaze/admin_db.php"</span>,
+<a name="l00179"></a>00179                                   <span class="stringliteral">"class"</span> =&gt;  <span class="stringliteral">"AdministraceDatabaze"</span>,
+<a name="l00180"></a>00180                                   <span class="stringliteral">"admin"</span> =&gt; <span class="keyword">true</span>,
+<a name="l00181"></a>00181                                   <span class="stringliteral">"databaze"</span> =&gt; <span class="stringliteral">""</span>,
+<a name="l00182"></a>00182                                   <span class="stringliteral">"zobrazit"</span> =&gt; <span class="keyword">true</span>,
+<a name="l00183"></a>00183                                   <span class="stringliteral">"uloziste"</span> =&gt; <span class="stringliteral">"sqlite"</span>),
+<a name="l00184"></a>00184 
+<a name="l00185"></a>00185                             array(<span class="stringliteral">"include"</span> =&gt; <span class="stringliteral">"modules/static_strankovani/strankovani.php"</span>,
+<a name="l00186"></a>00186                                   <span class="stringliteral">"class"</span> =&gt;  <span class="stringliteral">"StatickeStrankovani"</span>,
+<a name="l00187"></a>00187                                   <span class="stringliteral">"admin"</span> =&gt; <span class="keyword">false</span>,
+<a name="l00188"></a>00188                                   <span class="stringliteral">"databaze"</span> =&gt; <span class="stringliteral">""</span>,
+<a name="l00189"></a>00189                                   <span class="stringliteral">"zobrazit"</span> =&gt; <span class="keyword">false</span>,
+<a name="l00190"></a>00190                                   <span class="stringliteral">"uloziste"</span> =&gt; <span class="stringliteral">"sqlite"</span>),
+<a name="l00191"></a>00191 
+<a name="l00192"></a>00192                             array(<span class="stringliteral">"include"</span> =&gt; <span class="stringliteral">"modules/dynamic_table/dynamicke_tabulky.php"</span>,
+<a name="l00193"></a>00193                                   <span class="stringliteral">"class"</span> =&gt;  <span class="stringliteral">"DynamicTable"</span>,
+<a name="l00194"></a>00194                                   <span class="stringliteral">"admin"</span> =&gt; <span class="keyword">true</span>,
+<a name="l00195"></a>00195                                   <span class="stringliteral">"databaze"</span> =&gt; <span class="stringliteral">".dbdyntable.sqlite2"</span>,
+<a name="l00196"></a>00196                                   <span class="stringliteral">"zobrazit"</span> =&gt; <span class="keyword">true</span>,
+<a name="l00197"></a>00197                                   <span class="stringliteral">"uloziste"</span> =&gt; <span class="stringliteral">"sqlite"</span>),
+<a name="l00198"></a>00198 
+<a name="l00199"></a>00199                             array(<span class="stringliteral">"include"</span> =&gt; <span class="stringliteral">"modules/dynamic_random_picture/dynamicka_random_galerie.php"</span>,
+<a name="l00200"></a>00200                                   <span class="stringliteral">"class"</span> =&gt;  <span class="stringliteral">"DynamicRandomGallery"</span>,
+<a name="l00201"></a>00201                                   <span class="stringliteral">"admin"</span> =&gt; <span class="keyword">true</span>,
+<a name="l00202"></a>00202                                   <span class="stringliteral">"databaze"</span> =&gt; <span class="stringliteral">".dbdynrangal.sqlite2"</span>,
+<a name="l00203"></a>00203                                   <span class="stringliteral">"zobrazit"</span> =&gt; <span class="keyword">true</span>,
+<a name="l00204"></a>00204                                   <span class="stringliteral">"uloziste"</span> =&gt; <span class="stringliteral">"sqlite"</span>),
+<a name="l00205"></a>00205 
+<a name="l00206"></a>00206                             array(<span class="stringliteral">"include"</span> =&gt; <span class="stringliteral">"modules/dynamicke_zobrazovani/dynamicke_zobrazeni.php"</span>,
+<a name="l00207"></a>00207                                   <span class="stringliteral">"class"</span> =&gt;  <span class="stringliteral">"DynamicZobrazeni"</span>,
+<a name="l00208"></a>00208                                   <span class="stringliteral">"admin"</span> =&gt; <span class="keyword">true</span>,
+<a name="l00209"></a>00209                                   <span class="stringliteral">"databaze"</span> =&gt; <span class="stringliteral">".dbdynzob.sqlite2"</span>,
+<a name="l00210"></a>00210                                   <span class="stringliteral">"zobrazit"</span> =&gt; <span class="keyword">true</span>,
+<a name="l00211"></a>00211                                   <span class="stringliteral">"uloziste"</span> =&gt; <span class="stringliteral">"sqlite"</span>),
+<a name="l00212"></a>00212 
+<a name="l00213"></a>00213                             array(<span class="stringliteral">"include"</span> =&gt; <span class="stringliteral">"modules/dynamic_drinks/dynamicke_napoje.php"</span>,
+<a name="l00214"></a>00214                                   <span class="stringliteral">"class"</span> =&gt;  <span class="stringliteral">"DynamicDrinks"</span>,
+<a name="l00215"></a>00215                                   <span class="stringliteral">"admin"</span> =&gt; <span class="keyword">true</span>,
+<a name="l00216"></a>00216                                   <span class="stringliteral">"databaze"</span> =&gt; <span class="stringliteral">".dbdyndri.sqlite2"</span>,
+<a name="l00217"></a>00217                                   <span class="stringliteral">"zobrazit"</span> =&gt; <span class="keyword">true</span>,
+<a name="l00218"></a>00218                                   <span class="stringliteral">"uloziste"</span> =&gt; <span class="stringliteral">"sqlite"</span>),
+<a name="l00219"></a>00219 
+<a name="l00220"></a>00220                             array(<span class="stringliteral">"include"</span> =&gt; <span class="stringliteral">"modules/captcha_code/captcha.php"</span>,
+<a name="l00221"></a>00221                                   <span class="stringliteral">"class"</span> =&gt;  <span class="stringliteral">"CaptchaCode"</span>,
+<a name="l00222"></a>00222                                   <span class="stringliteral">"admin"</span> =&gt; <span class="keyword">true</span>,
+<a name="l00223"></a>00223                                   <span class="stringliteral">"databaze"</span> =&gt; <span class="stringliteral">".dbcapcod.sqlite2"</span>,
+<a name="l00224"></a>00224                                   <span class="stringliteral">"zobrazit"</span> =&gt; <span class="keyword">true</span>,
+<a name="l00225"></a>00225                                   <span class="stringliteral">"uloziste"</span> =&gt; <span class="stringliteral">"sqlite"</span>),
+<a name="l00226"></a>00226 
+<a name="l00227"></a>00227                             array(<span class="stringliteral">"include"</span> =&gt; <span class="stringliteral">"modules/static_idos/idos.php"</span>,
+<a name="l00228"></a>00228                                   <span class="stringliteral">"class"</span> =&gt;  <span class="stringliteral">"StaticIdos"</span>,
+<a name="l00229"></a>00229                                   <span class="stringliteral">"admin"</span> =&gt; <span class="keyword">false</span>,
+<a name="l00230"></a>00230                                   <span class="stringliteral">"databaze"</span> =&gt; <span class="stringliteral">""</span>,
+<a name="l00231"></a>00231                                   <span class="stringliteral">"zobrazit"</span> =&gt; <span class="keyword">false</span>,
+<a name="l00232"></a>00232                                   <span class="stringliteral">"uloziste"</span> =&gt; <span class="stringliteral">"sqlite"</span>),
+<a name="l00233"></a>00233 
+<a name="l00234"></a>00234                             array(<span class="stringliteral">"include"</span> =&gt; <span class="stringliteral">"modules/dynamicka_navstevni_kniha/dynamicka_kniha.php"</span>,
+<a name="l00235"></a>00235                                   <span class="stringliteral">"class"</span> =&gt;  <span class="stringliteral">"DynamicNavstevniKniha"</span>,
+<a name="l00236"></a>00236                                   <span class="stringliteral">"admin"</span> =&gt; <span class="keyword">true</span>,
+<a name="l00237"></a>00237                                   <span class="stringliteral">"databaze"</span> =&gt; <span class="stringliteral">".dbdynkni.sqlite2"</span>,
+<a name="l00238"></a>00238                                   <span class="stringliteral">"zobrazit"</span> =&gt; <span class="keyword">true</span>,
+<a name="l00239"></a>00239                                   <span class="stringliteral">"uloziste"</span> =&gt; <span class="stringliteral">"sqlite"</span>),
+<a name="l00240"></a>00240 
+<a name="l00241"></a>00241                             array(<span class="stringliteral">"include"</span> =&gt; <span class="stringliteral">"modules/dynamic_user/dynamicky_uzivatel.php"</span>,
+<a name="l00242"></a>00242                                   <span class="stringliteral">"class"</span> =&gt;  <span class="stringliteral">"DynamicUser"</span>,
+<a name="l00243"></a>00243                                   <span class="stringliteral">"admin"</span> =&gt; <span class="keyword">true</span>,
+<a name="l00244"></a>00244                                   <span class="stringliteral">"databaze"</span> =&gt; <span class="stringliteral">".dbdynusr.sqlite2"</span>,
+<a name="l00245"></a>00245                                   <span class="stringliteral">"zobrazit"</span> =&gt; <span class="keyword">true</span>,
+<a name="l00246"></a>00246                                   <span class="stringliteral">"uloziste"</span> =&gt; <span class="stringliteral">"sqlite"</span>),
+<a name="l00247"></a>00247 
+<a name="l00248"></a>00248                             );
+<a name="l00249"></a>00249 
+<a name="l00250"></a><a class="code" href="classUserPromenne.html#83d8e9b3e96118759e8a25b1915ef10d">00250</a>     <span class="keyword">public</span> <a class="code" href="classUserPromenne.html#83d8e9b3e96118759e8a25b1915ef10d">$ipblok</a> = array (<span class="stringliteral">"127.0.1.1"</span>,  <span class="comment">//seznam blokovanych ip pri kontrole z localhostu</span>
+<a name="l00251"></a>00251                             <span class="stringliteral">"127.0.0.1"</span>,
+<a name="l00252"></a>00252                             <span class="stringliteral">"192.168.1.1"</span>,
+<a name="l00253"></a>00253                             <span class="stringliteral">"192.168.1.2"</span>,
+<a name="l00254"></a>00254                             <span class="stringliteral">"192.168.1.3"</span>,
+<a name="l00255"></a>00255                             <span class="stringliteral">"192.168.1.4"</span>,
+<a name="l00256"></a>00256                             <span class="stringliteral">"192.168.1.5"</span>,
+<a name="l00257"></a>00257                             <span class="stringliteral">"192.168.1.6"</span>,
+<a name="l00258"></a>00258                             <span class="stringliteral">"192.168.1.7"</span>,
+<a name="l00259"></a>00259                             <span class="stringliteral">"192.168.1.8"</span>,
+<a name="l00260"></a>00260                             <span class="stringliteral">"192.168.1.9"</span>,
+<a name="l00261"></a>00261                             <span class="stringliteral">"192.168.1.10"</span>,
+<a name="l00262"></a>00262                             <span class="stringliteral">"192.168.1.11"</span>,
+<a name="l00263"></a>00263                             <span class="stringliteral">"192.168.1.12"</span>,
+<a name="l00264"></a>00264                             <span class="stringliteral">"192.168.1.13"</span>,
+<a name="l00265"></a>00265                             <span class="stringliteral">"192.168.1.14"</span>,
+<a name="l00266"></a>00266                             <span class="stringliteral">"192.168.1.15"</span>,
+<a name="l00267"></a>00267                             <span class="stringliteral">"192.168.1.16"</span>,
+<a name="l00268"></a>00268                             <span class="stringliteral">"192.168.1.17"</span>,
+<a name="l00269"></a>00269                             <span class="stringliteral">"192.168.1.18"</span>,
+<a name="l00270"></a>00270                             <span class="stringliteral">"192.168.1.19"</span>,
+<a name="l00271"></a>00271                             <span class="stringliteral">"192.168.1.20"</span>,
+<a name="l00272"></a>00272                             <span class="stringliteral">"192.168.1.21"</span>,
+<a name="l00273"></a>00273                             <span class="stringliteral">"192.168.1.22"</span>,
+<a name="l00274"></a>00274                             <span class="stringliteral">"192.168.1.23"</span>,
+<a name="l00275"></a>00275                             <span class="stringliteral">"192.168.1.24"</span>,
+<a name="l00276"></a>00276                             <span class="stringliteral">"192.168.1.25"</span>,
+<a name="l00277"></a>00277                             <span class="stringliteral">"192.168.1.26"</span>,
+<a name="l00278"></a>00278                             <span class="stringliteral">"192.168.1.27"</span>,
+<a name="l00279"></a>00279                             <span class="stringliteral">"192.168.1.28"</span>,
+<a name="l00280"></a>00280                             <span class="stringliteral">"192.168.1.29"</span>,
+<a name="l00281"></a>00281                             <span class="stringliteral">"192.168.1.30"</span>,
+<a name="l00282"></a>00282                             <span class="stringliteral">"192.168.1.31"</span>,
+<a name="l00283"></a>00283                             <span class="stringliteral">"192.168.1.32"</span>,
+<a name="l00284"></a>00284                             <span class="stringliteral">"192.168.1.33"</span>,
+<a name="l00285"></a>00285                             <span class="stringliteral">"192.168.1.34"</span>,
+<a name="l00286"></a>00286                             <span class="stringliteral">"192.168.1.35"</span>,
+<a name="l00287"></a>00287                             <span class="stringliteral">"192.168.1.36"</span>,
+<a name="l00288"></a>00288                             <span class="stringliteral">"192.168.1.37"</span>,
+<a name="l00289"></a>00289                             <span class="stringliteral">"192.168.1.38"</span>,
+<a name="l00290"></a>00290                             <span class="stringliteral">"192.168.1.39"</span>,
+<a name="l00291"></a>00291                             <span class="stringliteral">"192.168.1.40"</span>,
+<a name="l00292"></a>00292                             <span class="stringliteral">"192.168.1.41"</span>,
+<a name="l00293"></a>00293                             <span class="stringliteral">"192.168.1.42"</span>,
+<a name="l00294"></a>00294                             <span class="stringliteral">"192.168.1.43"</span>,
+<a name="l00295"></a>00295                             <span class="stringliteral">"192.168.1.44"</span>,
+<a name="l00296"></a>00296                             <span class="stringliteral">"192.168.1.45"</span>,
+<a name="l00297"></a>00297                             <span class="stringliteral">"192.168.1.46"</span>,
+<a name="l00298"></a>00298                             <span class="stringliteral">"192.168.1.47"</span>,
+<a name="l00299"></a>00299                             <span class="stringliteral">"192.168.1.48"</span>,
+<a name="l00300"></a>00300                             <span class="stringliteral">"192.168.1.49"</span>,
+<a name="l00301"></a>00301                             <span class="stringliteral">"192.168.1.50"</span>,
+<a name="l00302"></a>00302                             <span class="stringliteral">"192.168.1.101"</span>,
+<a name="l00303"></a>00303                             <span class="stringliteral">"192.168.1.102"</span>,
+<a name="l00304"></a>00304                             <span class="stringliteral">"192.168.1.103"</span>,
+<a name="l00305"></a>00305                             <span class="stringliteral">"192.168.1.104"</span>,
+<a name="l00306"></a>00306                             <span class="stringliteral">"192.168.1.105"</span>);
+<a name="l00307"></a>00307   }
+<a name="l00308"></a>00308 ?&gt;
+</pre></div></div>
+<hr size="1"><address style="text-align: right;"><small>Generováno Tue Aug 4 13:38:11 2009 pro projekt Novy vychozi PHP layout programem&nbsp;
+<a href="http://www.doxygen.org/index.html">
+<img src="doxygen.png" alt="doxygen" align="middle" border="0"></a> 1.5.8 </small></address>
+</body>
+</html>

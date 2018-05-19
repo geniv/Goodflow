@@ -1,0 +1,153 @@
+<html>
+<head>
+<title>Spiral Text</title>
+<META http-equiv="Content-Type" content="text/html; charset=windows-1251">
+
+<SCRIPT language=JavaScript>
+
+arrCos = new Array(361);    /* Hold the COS lookup table for 0 to 360 deg */
+arrSin = new Array(361);    /* Hold the SIN lookup table for 0 to 360 deg */
+
+for (i=0;i<=360;i++)
+ {
+  arrSin[i]=Math.sin(i*Math.PI/180);
+  arrCos[i]=Math.cos(i*Math.PI/180);
+}
+
+function rotateleft(objID,x,y,r,deg,rinc)
+ {
+    /* objID    - the ID of the object we're gonna manipulate
+     * x        - current object x-axis
+     * y        - current object y-axis
+     * r        - current object radius
+     * deg      - current rotation around axis in degrees
+     * rinc     - by how much we'll increment the radius this time
+     */
+
+    y=r*arrSin[deg];
+    x=r*arrCos[deg];
+   
+    document.all[objID].style.pixelLeft=x;
+    document.all[objID].style.pixelTop=y+r+10;
+    
+    if (deg%60==0) r+=rinc;
+    
+    /* Has the radius reached it's maximum/minumum? If so, change the sign of the rinc
+     * so that instead of incrementing we decrement - and visa versa
+     */
+    if (r>60||r<10)
+    {
+      rinc*=-1;
+      r+=rinc;
+    }
+    
+    deg-=5;
+    if (deg<=0) deg=360;
+    setTimeout("rotateleft('"+objID+"',"+x+","+y+","+r+","+deg+","+rinc+")",10);
+}
+
+
+function rotateright(objID,x,y,r,deg,rinc)
+ {
+    /* objID    - the ID of the object we're gonna manipulate
+     * x        - current object x-axis
+     * y        - current object y-axis
+     * r        - current object radius
+     * deg      - current rotation around axis in degrees
+     * rinc     - by how much we'll increment the radius this time
+     */
+
+    y=r*arrSin[deg];
+    x=r*arrCos[deg];
+    
+    document.all[objID].style.pixelLeft=x;
+    document.all[objID].style.pixelTop=y+r+10;
+    
+    if (deg%60==0) r+=rinc;
+    
+    /* Has the radius reached it's maximum/minumum? If so, change the sign of the rinc
+     * so that instead of incrementing we decrement - and visa versa
+     */
+    if (r>60||r<10)
+    {
+      rinc*=-1;
+      r+=rinc;
+    }
+    
+    deg+=5;
+    if (deg>=360) deg=0;
+    setTimeout("rotateright('"+objID+"',"+x+","+y+","+r+","+deg+","+rinc+")",10);
+}
+
+function doit()
+ {
+// not need in tnis script ---------------------
+    document.all.button.style.visibility='hidden';
+    document.all.mysite.style.visibility='visible';
+//-----------------------------------------------
+    x=0;          /* initial x-axis position  */
+    y=0;          /* initial y-axis position  */
+    r=20;         /* initial radius           */
+    deg=0;        /* initial rotation around axis (in degrees) */
+    rinc=1;       /* radius increment         */
+
+    /* Begin rotating each phrase with possible offsets to the initial values */
+    rotateright("obj2", x, y, r, deg, rinc);
+    rotateleft("obj1", x, y, r, 360, rinc);
+}
+
+</SCRIPT>
+
+<STYLE>
+.rotateOBJ 
+ {
+    position:relative;
+    font-family:Times New Roman;
+    text-align:center;
+    font-size:20pt;
+    width:100%;
+    font-weight:bold;
+    font-style: italic;
+    color:Silver;
+    filter:Glow(Color=Black, Strength=5) Shadow(Color=Gray, Direction=135);
+ }
+ 
+#button
+ {
+    visibility:visible;
+ } 
+
+#mysite
+ {
+    visibility:hidden;
+    width:100%;
+    color:Silver;
+    filter:Glow(Color=Black, Strength=5) Shadow(Color=Gray, Direction=135);
+ } 
+</STYLE>
+
+
+</head>
+<body bgcolor="#737994" text="#FFFFFF" link="#FF0000" topmargin="0" leftmargin="0" vlink="#FF0000" alink="#FF0000">
+
+<table border="0" width="100%">
+  <tr>
+    <td width="50%" valign="middle" align="center">
+    <SPAN class=rotateOBJ id=obj1>pica na levo</SPAN>
+    </td>
+    <td width="50%" valign="middle" align="center">
+    <SPAN class=rotateOBJ id=obj2>pica na pravo</SPAN>
+    </td>
+  </tr>
+</table>
+
+<form>
+  <p align="center"><input type="button" value="Click to spiral text" name="Button" id="button" onclick="doit()"></p>
+</form>
+<br><br><br><br><br><br>
+<br><br><br><br><br><br>
+
+<font size="6"><p align="center" id="mysite"><a href="http://javascript.internet.com">JSS Free JavaScripts</a></p></font>
+
+</body>
+</html>

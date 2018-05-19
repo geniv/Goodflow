@@ -1,0 +1,148 @@
+
+<HTML>
+<head>
+<title>Colorful</title>
+<STYLE>
+<!--.nu {text-decoration: none; font-family: arial;}
+    A:link {text-decoration: underline; color: orange}
+    A:visited {text-decoration: underline; color: orange}
+    A:hover {text-decoration: underline; color: white}
+ -->
+</STYLE>
+<script language="JavaScript">
+<!-- Hide the script from old browsers --
+function MakeArray(n){   
+	this.length=n;   
+	for(var i=1; i<=n; i++) this[i]=i-1;   
+		return this
+	}
+	hex=new MakeArray(16);
+	hex[11]="A"; 
+	hex[12]="B"; 
+	hex[13]="C"; 
+	hex[14]="D"; 
+	hex[15]="E"; 
+	hex[16]="F";
+
+function ToHex(x){              
+	// Changes a int to hex (in the range 0 to 255)   
+	var high=x/16;   
+	var s=high+"";               
+	//1   
+	s=s.substring(0,2);          
+	//2 the combination of these are the same as the trunc function   
+	high=parseInt(s,10);         
+	//3   
+	var left=hex[high+1];        
+	// left part of the hex-value   
+	var low=x-high*16;           
+	// calculate the rest of the values   
+	s=low+"";                    
+	//1   
+	s=s.substring(0,2);          
+	//2 the combination of these are the same as the trunc function   
+	low=parseInt(s,10);          
+	//3   
+	var right=hex[low+1];        
+	// right part of the hex-value   
+	var string=left+""+right;    
+	// add the high and low together   
+	return string;
+}
+
+function fadein(text){   
+	text=text.substring(3,text.length-4);        
+	// gets rid of the HTML-comment-tags   
+	color_d1=255;                                
+	color_d1b=255;
+	color_d1c=255;
+	// any value in 'begin' 0 to 255   
+	mul=color_d1/text.length;   
+	for(i=0;i<text.length;i++){      
+		color_d1=mul*i; 
+		color_d1b=255-mul*i;
+		color_d1c=255*Math.sin(i/(text.length/3));
+
+		// some other things you can try>> "=255-mul*i" to fade out, "=mul*i" to fade in, or try "255*Math.sin(i/(text.length/3))"      
+		color_h1=ToHex(color_d1);      
+		color_d2=mul*i;      
+		color_h2=ToHex(color_d2);      
+		//1b
+		color_h1b=ToHex(color_d1b);      
+		color_d2b=mul*i;      
+		color_h2b=ToHex(color_d2b);      
+		//1c
+		color_h1c=ToHex(color_d1c);      
+		color_d2c=mul*i;      
+		color_h2c=ToHex(color_d2c);      
+
+		document.write("<FONT COLOR='#FF"+color_h1+color_h2+"'>"+text.substring(i,i+1)+'</FONT>');   
+
+	}
+	document.write('<p>');
+	for(i=0;i<text.length;i++){      
+		color_d1=mul*i; 
+		color_d1b=255-mul*i;
+		color_d1c=255*Math.sin(i/(text.length/3));
+
+		// some other things you can try>> "=255-mul*i" to fade out, "=mul*i" to fade in, or try "255*Math.sin(i/(text.length/3))"      
+		color_h1=ToHex(color_d1);      
+		color_d2=mul*i;      
+		color_h2=ToHex(color_d2);      
+		//1b
+		color_h1b=ToHex(color_d1b);      
+		color_d2b=mul*i;      
+		color_h2b=ToHex(color_d2b);      
+		//1c
+		color_h1c=ToHex(color_d1c);      
+		color_d2c=mul*i;      
+		color_h2c=ToHex(color_d2c);      
+
+		document.write("<FONT COLOR='#FF"+color_h1c+color_h2c+"'>"+text.substring(i,i+1)+'</FONT>');   
+
+	}
+	document.write('<p>');
+	for(i=0;i<text.length;i++){      
+		color_d1=mul*i; 
+		color_d1b=255-mul*i;
+		color_d1c=255*Math.sin(i/(text.length/3));
+
+		// some other things you can try>> "=255-mul*i" to fade out, "=mul*i" to fade in, or try "255*Math.sin(i/(text.length/3))"      
+		color_h1=ToHex(color_d1);      
+		color_d2=mul*i;      
+		color_h2=ToHex(color_d2);      
+		//1b
+		color_h1b=ToHex(color_d1b);      
+		color_d2b=mul*i;      
+		color_h2b=ToHex(color_d2b);      
+		//1c
+		color_h1c=ToHex(color_d1c);      
+		color_d2c=mul*i;      
+		color_h2c=ToHex(color_d2c);      
+
+		document.write("<FONT COLOR='#FF"+color_h1b+color_h2b+"'>"+text.substring(i,i+1)+'</FONT>');   
+
+	}
+
+}
+// --End Hiding Here -->
+</script>
+</head>
+<BODY bgcolor="#FFFFFF" link="#FFA500" vlink="#FFA500" alink="#00FF95" topmargin="0" leftmargin="0" marginwidth="0" marginheight="0">
+<center>
+<P>
+
+<SCRIPT LANGUAGE="JavaScript">
+<!--   
+{
+	fadein("-->TAK JAK SE VAM LIBI DUHA ?<!__");
+}
+//-->
+</SCRIPT>
+</center>
+<p>
+
+<CENTER><P>
+	<script language="JavaScript" src="footer.js"></script>
+</BODY>
+</HTML>

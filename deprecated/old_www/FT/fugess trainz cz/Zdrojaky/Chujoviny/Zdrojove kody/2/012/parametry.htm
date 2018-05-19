@@ -1,0 +1,35 @@
+<HTML>
+  <HEAD>
+    <TITLE>Zadání parametrù</TITLE>
+    <SCRIPT Language="JavaScript" Src="parametry.js"></SCRIPT>
+
+    <SCRIPT Language="JavaScript">
+      <!--
+        // Funkce pro pøedání obsahu editaèních polí
+        // do další stránky parametry2.htm
+        function SendParams (){
+          document.location = EncodeString ('parametry2.htm',
+            document.MainForm.edParam1.value,
+            document.MainForm.edParam2.value,
+            document.MainForm.edParam3.value);
+        }
+      // -->
+    </SCRIPT>
+
+  </HEAD>
+
+  <BODY>
+    <FORM name="MainForm">
+      Argument 1:
+      <INPUT Name="edParam1" Type="Text" Value="Text 1"><BR>
+      Argument 2:
+      <INPUT Name="edParam2" Type="Text" Value="Text 2"><BR>
+      Argument 3:
+      <INPUT Name="edParam3" Type="Text" Value="Text 3"><BR>
+      <INPUT Name="btOK" Type="Button" Value="Odešli parametry"
+        OnClick="SendParams();">
+    </FORM>
+
+  </BODY>
+</HTML>
+

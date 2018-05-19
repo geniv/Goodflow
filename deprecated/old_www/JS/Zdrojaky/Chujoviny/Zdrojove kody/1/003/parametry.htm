@@ -1,0 +1,49 @@
+<HTML>
+  <HEAD>
+    <TITLE>Volání hodnotnou nebo odkazem</TITLE>
+    <SCRIPT Language="javascript">
+      <!--
+        // Funkce pro výpis hodnot
+        function Vypis (Cislo, Retezec, Objekt, Pole){
+          // Vytvoøí øetìzec s názvy a hodnotami
+          var S = 'Èíslo: ' + Cislo;
+          S += '\nØetìzec: ' + Retezec;
+          S += '\nObjekt.jazyk: ' + Objekt.jazyk;
+          S += '\nPole[0]: ' + Pole[0];
+
+          // Zobrazí názvy a hodnoty
+          alert (S);
+        }
+
+        // Funkce pro nastavení parametrù jednotlivých typù
+        function Nastav (Cislo, Retezec, Objekt, Pole){
+          Cislo++;
+          Retezec += ' - pøidáno - ';
+          Objekt.jazyk = 'JavaScript';
+          Pole[0] = 1000;
+        }
+
+        // Deklarace promìnných jednotlivých typù
+        var Cislo = 10;
+        var Retezec = 'TEXT';
+        var Objekt = new Object();
+        Objekt.jazyk = 'rodný';
+        var Pole = new Array(5);
+        Pole[0] = 99;
+
+        // Vypsání výchozích hodnot
+        Vypis (Cislo, Retezec, Objekt, Pole);
+
+        // Zmìna hodnot ve funkci
+        Nastav (Cislo, Retezec, Objekt, Pole);
+
+        // Vypsání výsledných hodnot
+        Vypis (Cislo, Retezec, Objekt, Pole);
+      // -->
+    </SCRIPT>
+  </HEAD>
+
+  <BODY>
+  </BODY>
+</HTML>
+

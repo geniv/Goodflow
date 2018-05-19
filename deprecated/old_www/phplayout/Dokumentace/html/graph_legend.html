@@ -1,0 +1,85 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>Novy vychozi PHP layout: Vysvětlivky ke grafu</title>
+<link href="tabs.css" rel="stylesheet" type="text/css">
+<link href="doxygen.css" rel="stylesheet" type="text/css">
+</head><body>
+<!-- Generováno programem Doxygen 1.5.8 -->
+<div class="navigation" id="top">
+  <div class="tabs">
+    <ul>
+      <li><a href="index.html"><span>Hlavní&nbsp;stránka</span></a></li>
+      <li><a href="annotated.html"><span>Třídy</span></a></li>
+      <li><a href="files.html"><span>Soubory</span></a></li>
+    </ul>
+  </div>
+</div>
+<div class="contents">
+<h1>Vysvětlivky ke grafu</h1>Zde naleznete vysvětlení, jak mají být interpretovány grafy, které byly generovány programem doxygen.<p>
+Uvažujte následující příklad: <div class="fragment"><pre class="fragment"><span class="comment">/*! Neviditelná třída, která se v grafu nezobrazuje, protože došlo k ořezání grafu. */</span>
+<span class="keyword">class </span>Invisible { };
+<span class="comment"></span>
+<span class="comment">/*! Třída, u které došlo k ořezání grafu. Vztah dědičnosti je skryt. */</span>
+<span class="keyword">class </span>Truncated : <span class="keyword">public</span> Invisible { };
+<span class="comment"></span>
+<span class="comment">/*! Bázová třída děděná veřejně (public inheritance). */</span>
+<span class="keyword">class </span>PublicBase : <span class="keyword">public</span> Truncated { };
+<span class="comment"></span>
+<span class="comment">/*! Bázová třída, použitá pro chráněné dědění (protected inheritance). */</span>
+<span class="keyword">class </span>ProtectedBase { };
+<span class="comment"></span>
+<span class="comment">/*! Bázová třída, využitá pro privátní dědění (private inheritance). */</span>
+<span class="keyword">class </span>PrivateBase { };
+
+<span class="comment">/* Třída, která není dokumentována komentáři programu doxygen. */</span>
+<span class="keyword">class </span>Undocumented { };
+<span class="comment"></span>
+<span class="comment">/*! Šablona třídy. */</span>
+<span class="keyword">template</span>&lt;<span class="keyword">class</span> T&gt; <span class="keyword">class </span>Templ { };
+<span class="comment"></span>
+<span class="comment">/*! Třída, která je využívána třídou Inherited. */</span>
+<span class="keyword">class </span>Used { };
+<span class="comment"></span>
+<span class="comment">/*! Odvozená třída, která různým způsobem dědí z více bázových tříd. */</span>
+<span class="keyword">class </span>Inherited : <span class="keyword">public</span> PublicBase,
+                  <span class="keyword">protected</span> ProtectedBase,
+                  <span class="keyword">private</span> PrivateBase,
+                  <span class="keyword">public</span> Undocumented,
+                  <span class="keyword">public</span> Templ&lt;int&gt;
+{
+  <span class="keyword">private</span>:
+    Used *m_usedClass;
+};
+</pre></div> Pokud je položka <code>MAX_DOT_GRAPH_HEIGHT</code> konfiguračního souboru nastavena na hodnotu 200, bude vygenerován následující graf:<p>
+<center><div align="center">
+<img src="graph_legend.png" alt="graph_legend.png">
+</div>
+</center> <p>
+Bloky (tj. uzly) v uvedeném grafu mají následující význam: <ul>
+<li>
+Černě vyplněný obdélník reprezentuje strukturu nebo třídu, pro kterou byl graf generován. </li>
+<li>
+Obdélník s černým obrysem označuje dokumentovanou strukturu nebo třídu. </li>
+<li>
+Obdélník s šedým obrysem označuje nedokumentovanou strukturu nebo třídu. </li>
+<li>
+Obdélník s červeným obrysem označuje dokumentovanou strukturu nebo třídu, pro kterou nejsou zobrazeny všechny vztahy dědičnosti nebo obsažení. Graf je ořezán v případě, kdy jej není možné umístit do vymezeného prostoru. </li>
+</ul>
+Šipky (tj. hrany grafu) mají následující význam: <ul>
+<li>
+Tmavě modrá šipka se používá pro označení vztahu veřejné dědičnosti (public) mezi dvěma třídami. </li>
+<li>
+Tmavě zelená šipka označuje vztah chráněné dědičnosti (protected). </li>
+<li>
+Tmavě červená šipka označuje vztah privátní dědičnosti (private). </li>
+<li>
+Purpurová šipka kreslená čárkovaně se používá v případě, kdy je třída obsažena v jiné třídě, nebo kdy je používána jinou třídou. Je označena identifikátorem jedné nebo více proměných, přes které je třída nebo struktura zpřístupněna. </li>
+<li>
+Žlutá šipka kreslená čárkovaně vyjadřuje vztah mezi instancí šablony a šablonou třídy, na základě které byla instance šablony vytvořena. V popisu šipky jsou uvedeny příslušné parametry šablony. </li>
+</ul>
+</div>
+<hr size="1"><address style="text-align: right;"><small>Generováno Tue Aug 4 13:38:12 2009 pro projekt Novy vychozi PHP layout programem&nbsp;
+<a href="http://www.doxygen.org/index.html">
+<img src="doxygen.png" alt="doxygen" align="middle" border="0"></a> 1.5.8 </small></address>
+</body>
+</html>

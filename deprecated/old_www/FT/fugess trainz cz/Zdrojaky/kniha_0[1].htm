@@ -1,0 +1,216 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+  <head>
+    <title>
+      Návštěvní kniha (guestbook)    </title>
+        <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-2">
+        <meta http-equiv="cache-control" content="no-cache" >
+<style type="text/css"> <!--
+#posty {text-align: left; }
+.treklama { border-bottom: #000000 1px solid; padding: 5px; margin-top: 3px; margin-bottom: 5px; width: 468px; margin-left: auto; margin-right: auto;  text-align: left; }
+.treklama a { text-decoration: underline; }
+.treklama a:hover { text-decoration: none; }
+body { text-align: center; background-image: url(http://); background-repeat: repeat; background-attachment: scroll; background-color: #FFFFFF; margin: 0px; padding: 0px; font-family: Tahoma, Arial, sans-serif; font-size: 11px; color: #000000; scrollbar-face-color: #FFFFFF; scrollbar-3dlight-color: #000000; scrollbar-track-color: #FFFFFF; scrollbar-shadow-color: #000000; scrollbar-darkshadow-color: #FFFFFF; scrollbar-highlight-color: #FFFFFF; scrollbar-arrow-color: #000000; }
+td, body {font-family: Tahoma, Arial, sans-serif; font-size: 11px; color: #000000; }
+.cstyl {  font-family: Tahoma, Arial, sans-serif; font-size: 11px; color: #000000;  background-color:  #FFFFFF; border-width: 1px;} a {color: #000000; }
+.mini {font-size: 9px; }
+.tlacitko {background-color: #FFFFFF; border: 1px solid #000000; font-family: Tahoma, Arial, sans-serif; color: #000000; }
+.flat { font-family: Tahoma, Arial, sans-serif; color: #000000; border: 1px solid #000000; background-color: #FFFFFF; }
+.mazani {font-family: tahoma, arial; font-size: 10px; color: #3B5569; }
+#uvodnik { width: 468px; margin-left: auto; margin-right: auto; }
+#kniha_formular { margin-left: auto; margin-right: auto;  width: 468px; }
+#posty {width: 468px; margin-left: auto; margin-right: auto; }
+.prispevek {border-top: #000000 solid 1px; padding: 1px 0px 2px 0px; margin: 2px 0px 0px 0px; }
+p { padding: 0px; margin: 5px 0px 4px 0px; }
+.najmeno {width: 323px; height: 18px; float: left; margin: 0px; padding: 0px; }
+.najmeno-odpoved { line-height: 1.8; float: left; }
+.nadatum {width: 145px; height: 18px; float: left; clear: right; margin: 0px; padding: 0px; text-align: right; font-size: 9px; color: #000000; }
+.nadatum-odpoved {width: 145px; height: 18px; float: right; margin: 11px 0px 0px 0px; padding: 0px; text-align: right; font-size: 9px; color: #000000; }
+.naurl {margin: 0px; padding: 0px 0px 4px 0px; font-size: 9px; clear: both; }
+.navzkaz {margin: 0px; padding: 0px; color: #000000; clear: both; line-height: 1.4; }
+h2 {font-size: 11px; margin: 5px 0px 0px 20px; padding: 0px; font-weight: bold; }
+.odpovedni {color: #FFFFFF; margin: 2px 0px 0px 20px; padding: 0px; line-height: 1.4; clear: both; }
+#pridatvzkaz { margin-left: auto; margin-right: auto; width: 468px; text-align: left; margin-bottom: 5px; }
+#helpokno { z-index: 1; display: none; position: absolute; width: 300px; border: 1px solid #000000; background: #FFFFFF; text-align: left; padding: 5px; }
+.helpnadpis { border: 1px solid #000000; background: #FFFFFF; font-weight: bold; padding: 3px; margin: 0px; }
+#delokno { position: absolute; display: none; width: 230px; border: 1px solid #000000; background: #FFFFFF; text-align: left; padding: 5px; font-size: 11px; }
+#delokno td { font-size: 11px; }
+.row { clear: both; text-align: left; margin: 5px; }
+.row label { width: 50px; margin: 0px 5px 0px 0px; float: left; text-align: right; }
+.smajl { width: 12px; height: 12px; margin: 2px 1px 0px 1px }
+-->
+</style>
+
+
+
+
+<script type="text/javascript" src="./kniha_0.js"></script>
+
+<script type="text/javascript">
+	function kontrola(){
+	   if(document.ff.t1.value=="" || document.ff.t4.value==""){alert("Je nutno vyplnit JMENO a VZKAZ!");document.ff.t1.focus();return false;} 
+	}
+    function zobrazform(){
+       if(document.getElementById){
+            elm=document.getElementById('kniha_formular')
+            elm.style.display="block";
+            elm=document.getElementById('pridatvzkaz')
+            elm.style.display="none";    
+                   }
+    }
+    
+ 
+    
+</script>
+
+
+</head>
+<body>
+  <div id="helpokno">
+            <img style="cursor:pointer; float:right;margin: 4px;" title="Zavřít/close" onclick="zavriokno('helpokno');" src="gr/se.gif" width="16" height="14" align="middle" alt="" >
+
+            <h2 class="helpnadpis">Nápověda pro psaní příspěvků.</h2>
+         
+           <p> [b]<b>Tlusté písmo</b>[/b] </p> <p> [i]<i>Kurzíva</i>[/i] </p> <p> [*red]červená barva[/*] </p> <p> [*#FF0000]červená barva[/*] </p> <p>Slovo začínající na http:// se automaticky změní na odkaz</p><p> [url http://www.blueboard.cz]popisek[/url] </p>      
+  </div>
+  <div id="delokno">
+
+    <form name="delform" method="post" action="kniha_0.php?id=60610">
+      <h2 class="helpnadpis">Smazání příspěvku</h2>
+          <p>
+           Zadejte login a heslo, jaké používáte pro vstup na BlueBoard.cz          </p>
+        <table border="0">
+            <tr>
+              <td  >
+               Login:
+              </td>
+              <td >
+                <input name="del1" type="text" class="flat" id="del1" size="15" >
+              </td>
+            </tr>
+            <tr>
+              <td>
+                Heslo:
+              </td>
+              <td>
+                <input name="del2" type="password" class="flat" id="del2" size="15" >
+    
+              </td>
+            </tr>
+            <tr>
+              <td  colspan="2">
+                <input name="iodpoved" type="checkbox"  id="iodpoved" value="ano" > Smazat jen odpověď tohoto příspěvku              </td>
+            </tr>
+            <tr  >
+              <td colspan="2" style="text-align: center;padding-top: 10px;">
+                <input name="delsub" type="submit" class="tlacitko" id="delsub" value="Smazat" >
+                <input name="delzavri" onclick="zavriokno('delokno')" type="button" class="tlacitko" id="delzavri" value="Storno" >
+                <input type="hidden" name="delkniha" >
+                <input type="hidden" name="delidprispevku" >            </td>
+            </tr>
+        </table>
+    </form>
+  </div>
+                  <div style="margin: 5px 0px 5px 0px;">
+            
+<a href="http://www.aukro.cz/ap/count.php?fs_cat=0&amp;fs_id=163956&amp;fs_type=164&amp;fs_ui=2463356&amp;fs_co=56&amp;fs_dest=1" target="_top">
+<img src="http://www.aukro.cz/ap/show.php?type=164&amp;bid=163956&amp;apu=2463356&amp;w=468&amp;h=60&amp;co=56" alt="" border="0" width="468" height="60"></a>
+</div>
+                <div id="uvodnik">
+            </div>
+ <form  name="ff" method="post" action="kniha_0.php?id=60610"> 
+  <div id="kniha_formular"  >
+    <input name="odpovida" type="hidden" value="" >
+    <input type="hidden" name="hesl" value="" >
+    <input type="hidden" name="refer" value="" >
+    <input type="hidden" name="kod_knihy" value="ciedqonmux" >
+    <div class="row">
+        <label for="t1"> <strong>Jméno</strong></label>
+        <input   name="t1"  type="text" class="cstyl"  id="t1"  onkeypress="zjistinick(this.value)"  onkeyup="zjistinick(this.value)"  onblur="zjistinick(this.value)" onchange="zjistinick(this.value)"   style="width: 350px;"       maxlength="50" >
+    </div>
+    <div class="row"></div>    <div class="row" id="theslo" style="display: none;">
+        <label for="t_heslo"><strong>Heslo</strong></label>
+        <input class="cstyl" type="password" name="t_heslo" id="t_heslo" size="15" maxlength="50" >
+    </div>
+    <div class="row">
+         <label for="t2"> <strong>E-mail</strong></label> 
+         <input  class="cstyl" type="text" name="t2" id="t2" style="width: 350px;" maxlength="50" >
+    </div>
+    <div class="row">
+         <label for="t3"> <strong>Home</strong></label> 
+          <input class="cstyl" type="text" id="t3" name="t3" style="width: 350px;" value="http://" maxlength="50" >
+    </div>   
+     <div class="row">
+            <label for="t4"><strong> Vzkaz </strong></label>
+            <textarea id="t4" class="cstyl"  onselect="storeCaret(this);" onclick="storeCaret(this);" onkeyup="storeCaret(this);"  name="t4" style="width: 350px;height:61px; float: left" rows="4" cols="50"></textarea>
+            <!--<div style="width: 19px;float: left;">
+                <img style="margin:1px 0px 1px 2px;" src="gr/kniha-tlacitko-b.gif" alt="Tučné písmo" title="Tučné písmo" />
+                <img  style="margin:1px 0px 1px 2px;" src="gr/kniha-tlacitko-i.gif" alt="Tučné písmo" title="Tučné písmo" />
+                <img  style="margin:1px 0px 1px 2px;" src="gr/kniha-tlacitko-url.gif" alt="Tučné písmo" title="Tučné písmo" />
+            </div>
+            -->
+    </div>
+        <div class="row">
+            <label>&nbsp;</label>
+            <input style="cursor: pointer;" onclick=" return kontrola(ff)" class="cstyl" type="submit" name="akce" value="   Odeslat   " >
+            <span title="Help" onclick="zobrazokno(event,'helpokno','','')" style="cursor: pointer; font-size:10px">[?]</span>
+    </div>
+</div> <!-- formular  -->   
+
+
+    <div id="posty">
+	  
+  
+
+<input type="hidden" name="posice" value="0" >
+<input type="hidden" name="pid" value="" >
+</form>
+<div style="clear: both;">
+       </div>
+
+<script language="JavaScript" type="text/javascript">
+<!--
+
+ 	function grabObject (id) {
+		//var view = eval(id);
+		var view = document.getElementById(id);
+		return view;
+	}
+	function show_hide(id) {
+		var hdn_div = document.getElementById('theslo');
+		if (window.opera)
+		  hdn_div.style.display = 'table-row';
+		else if (navigator.appName!='Microsoft Internet Explorer')
+		  hdn_div.style.display = 'table-row';
+		else
+		 hdn_div.style.display = 'block';
+	}
+	 
+	function show_hide_hide() {
+		var th=grabObject ('theslo');
+	 	th.style.display = 'none';
+
+	}
+	 
+ 
+ function zjistinick(xx)
+ { 	
+	var re = new RegExp("^[ \f\n\r\t]{1,}|[ \f\n\r\t]{1,}$", "g");
+    newString = xx.replace(re, "");
+    if ((newString.toUpperCase()=='ADMIN') && xx!='') show_hide();
+	else show_hide_hide();
+ }
+
+ 
+
+   
+
+
+
+//-->
+ </script>
+ 
+
+ 
+</body>
+</html>

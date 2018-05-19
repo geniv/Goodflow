@@ -1,0 +1,860 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>Novy vychozi PHP layout: Zdrojový soubor /var/www/phplayout/now/dynamic_gallery_flinston/dynamicka_galerie.php</title>
+<link href="tabs.css" rel="stylesheet" type="text/css">
+<link href="doxygen.css" rel="stylesheet" type="text/css">
+</head><body>
+<!-- Generováno programem Doxygen 1.5.8 -->
+<div class="navigation" id="top">
+  <div class="tabs">
+    <ul>
+      <li><a href="index.html"><span>Hlavní&nbsp;stránka</span></a></li>
+      <li><a href="annotated.html"><span>Třídy</span></a></li>
+      <li class="current"><a href="files.html"><span>Soubory</span></a></li>
+    </ul>
+  </div>
+  <div class="tabs">
+    <ul>
+      <li><a href="files.html"><span>Seznam&nbsp;souborů</span></a></li>
+      <li><a href="globals.html"><span>Symboly&nbsp;v&nbsp;souborech</span></a></li>
+    </ul>
+  </div>
+<h1>/var/www/phplayout/now/dynamic_gallery_flinston/dynamicka_galerie.php</h1><a href="now_2dynamic__gallery__flinston_2dynamicka__galerie_8php.html">Zobrazit dokumentaci tohoto souboru.</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 &lt;?php
+<a name="l00002"></a>00002 
+<a name="l00014"></a>00014 <span class="keyword">class </span><a class="code" href="classDynamicGallery.html">DynamicGallery</a> <span class="keyword">extends</span> <a class="code" href="classDefaultModule.html">DefaultModule</a>
+<a name="l00015"></a>00015 {
+<a name="l00016"></a>00016   <span class="keyword">private</span> <a class="code" href="classDynamicGallery.html#5e50cc52911d21359155c52f49c6c782">$var</a>;
+<a name="l00017"></a>00017   <span class="keyword">private</span> <a class="code" href="classDynamicGallery.html#12839496e637d0701054c19c4b3f164e">$sqlite</a>;
+<a name="l00018"></a>00018   <span class="keyword">private</span> <a class="code" href="classDynamicGallery.html#c22c0a9e2d77d6240fd8eda2f64a622a">$dbname</a>;  <span class="comment">//jmeno db se ziska z promenne.php</span>
+<a name="l00019"></a>00019   <span class="keyword">private</span> <a class="code" href="classDynamicGallery.html#6013fe7f05d1e2b6d824399e2fde2324">$idmodul</a> = <span class="stringliteral">"dyngall"</span>;
+<a name="l00020"></a>00020   <span class="keyword">private</span> <a class="code" href="classDynamicGallery.html#cb803ff54af0d79312a15aff835cb413">$dirpath</a>;
+<a name="l00021"></a>00021 
+<a name="l00022"></a>00022   <span class="keyword">private</span> <a class="code" href="classDynamicGallery.html#d69ce622faef178eb64fc61b12b0d6f8">$pathpicture</a> = <span class="stringliteral">"picture"</span>;
+<a name="l00023"></a>00023   <span class="keyword">private</span> <a class="code" href="classDynamicGallery.html#c79d11cc1b1140d1ed9a7e2dc7c6ef2c">$minidir</a> = <span class="stringliteral">"mini"</span>;  <span class="comment">//adresar miniatur</span>
+<a name="l00024"></a>00024   <span class="keyword">private</span> <a class="code" href="classDynamicGallery.html#b282d766e698d318836972284f8ba484">$fulldir</a> = <span class="stringliteral">"full"</span>;  <span class="comment">//adresar full obrazku</span>
+<a name="l00025"></a>00025   <span class="keyword">private</span> <a class="code" href="classDynamicGallery.html#d849c8a513a9908673de4b7b84372287">$conffile</a> = <span class="stringliteral">".config_file"</span>;
+<a name="l00026"></a>00026 
+<a name="l00034"></a><a class="code" href="classDynamicGallery.html#62aa6fc9547d1aeddf41e27df15febd1">00034</a>   <span class="keyword">public</span> function <a class="code" href="classDynamicGallery.html#62aa6fc9547d1aeddf41e27df15febd1">__construct</a>(&amp;<a class="code" href="classDynamicGallery.html#5e50cc52911d21359155c52f49c6c782">$var</a>, $index) <span class="comment">//konstruktor</span>
+<a name="l00035"></a>00035   {
+<a name="l00036"></a>00036     $this-&gt;var = <a class="code" href="classDynamicGallery.html#5e50cc52911d21359155c52f49c6c782">$var</a>;
+<a name="l00037"></a>00037     $this-&gt;dirpath = dirname($this-&gt;var-&gt;moduly[$index][<span class="stringliteral">"include"</span>]);
+<a name="l00038"></a>00038     $this-&gt;dbname = $this-&gt;var-&gt;moduly[$index][<span class="stringliteral">"databaze"</span>];
+<a name="l00039"></a>00039 
+<a name="l00040"></a>00040     $this-&gt;conffile = <span class="stringliteral">"{$this-&gt;dirpath}/{$this-&gt;conffile}"</span>;
+<a name="l00041"></a>00041 
+<a name="l00042"></a>00042     <span class="keywordflow">if</span> (!file_exists($this-&gt;conffile))
+<a name="l00043"></a>00043     {
+<a name="l00044"></a>00044       echo <span class="stringliteral">"Nechte prosím automaticky v adminu vytvořit soubor: {$this-&gt;conffile}"</span>;
+<a name="l00045"></a>00045     }
+<a name="l00046"></a>00046 
+<a name="l00047"></a>00047     <span class="keywordflow">if</span> (!$this-&gt;sqlite = @<span class="keyword">new</span> SQLiteDatabase(<span class="stringliteral">"{$this-&gt;dirpath}/{$this-&gt;dbname}"</span>, 0777, $error))
+<a name="l00048"></a>00048     {
+<a name="l00049"></a>00049       $this-&gt;var-&gt;main[0]-&gt;ErrorMsg($error);
+<a name="l00050"></a>00050     }
+<a name="l00051"></a>00051 
+<a name="l00052"></a>00052     $this-&gt;<a class="code" href="classDynamicGallery.html#3249c77634998d8865c3b32a14ba6c51">Instalace</a>();
+<a name="l00053"></a>00053 
+<a name="l00054"></a>00054     <a class="code" href="classDefaultModule.html#26b23ce6a6e67f75c7675e215d8ce775">$adresa_menu</a> = array( array(<span class="stringliteral">"main_href"</span> =&gt; <span class="stringliteral">"{$this-&gt;idmodul}"</span>,
+<a name="l00055"></a>00055                                 <span class="stringliteral">"odkaz"</span> =&gt; <span class="stringliteral">"Dynamická galerie bez sekcí"</span>,
+<a name="l00056"></a>00056                                 <span class="stringliteral">"title"</span> =&gt; <span class="stringliteral">"Dynamická galerie bez sekcí"</span>,
+<a name="l00057"></a>00057                                 <span class="stringliteral">"id"</span> =&gt; <span class="stringliteral">""</span>,
+<a name="l00058"></a>00058                                 <span class="stringliteral">"class"</span> =&gt; <span class="stringliteral">"galerie_delsi_nazev_menu"</span>,
+<a name="l00059"></a>00059                                 <span class="stringliteral">"akce"</span> =&gt; <span class="stringliteral">""</span>),
+<a name="l00060"></a>00060                           );
+<a name="l00061"></a>00061 
+<a name="l00062"></a>00062     $this-&gt;<a class="code" href="classDefaultModule.html#de138416b3a548d72b50432499895bb7">NastavitAdresuMenu</a>(<a class="code" href="classDefaultModule.html#26b23ce6a6e67f75c7675e215d8ce775">$adresa_menu</a>);
+<a name="l00063"></a>00063   }
+<a name="l00064"></a>00064 
+<a name="l00070"></a><a class="code" href="classDynamicGallery.html#3249c77634998d8865c3b32a14ba6c51">00070</a>   <span class="keyword">private</span> function <a class="code" href="classDynamicGallery.html#3249c77634998d8865c3b32a14ba6c51">Instalace</a>()
+<a name="l00071"></a>00071   {
+<a name="l00072"></a>00072     <span class="keywordflow">if</span> (filesize(<span class="stringliteral">"{$this-&gt;dirpath}/{$this-&gt;dbname}"</span>) == 0)
+<a name="l00073"></a>00073     {
+<a name="l00074"></a>00074       <span class="keywordflow">if</span> (!@$this-&gt;sqlite-&gt;queryExec(<span class="stringliteral">"CREATE TABLE gallery (</span>
+<a name="l00075"></a>00075 <span class="stringliteral">                                      id INTEGER UNSIGNED AUTO_INCREMENT PRIMARY KEY,</span>
+<a name="l00076"></a>00076 <span class="stringliteral">                                      adresa TEXT,</span>
+<a name="l00077"></a>00077 <span class="stringliteral">                                      popisek VARCHAR(300),</span>
+<a name="l00078"></a>00078 <span class="stringliteral">                                      url VARCHAR(200),</span>
+<a name="l00079"></a>00079 <span class="stringliteral">                                      datum DATETIME,</span>
+<a name="l00080"></a>00080 <span class="stringliteral">                                      poradi INTEGER UNSIGNED);</span>
+<a name="l00081"></a>00081 <span class="stringliteral">                                      "</span>, $error))
+<a name="l00082"></a>00082       {
+<a name="l00083"></a>00083         $this-&gt;var-&gt;main[0]-&gt;ErrorMsg($error);
+<a name="l00084"></a>00084       }
+<a name="l00085"></a>00085     }
+<a name="l00086"></a>00086   }
+<a name="l00087"></a>00087 
+<a name="l00097"></a><a class="code" href="classDynamicGallery.html#1696f9c496dbdd3de4206def3576fda6">00097</a>   <span class="keyword">public</span> function <a class="code" href="classDynamicGallery.html#1696f9c496dbdd3de4206def3576fda6">Gallery</a>($adr = NULL)
+<a name="l00098"></a>00098   {
+<a name="l00099"></a>00099     <span class="keywordflow">if</span> (!Empty($adr))
+<a name="l00100"></a>00100     {
+<a name="l00101"></a>00101       $adresa = $adr;
+<a name="l00102"></a>00102     }
+<a name="l00103"></a>00103       <span class="keywordflow">else</span>
+<a name="l00104"></a>00104     {
+<a name="l00105"></a>00105       $adresa = stripslashes(htmlspecialchars($_SERVER[<span class="stringliteral">"QUERY_STRING"</span>], ENT_QUOTES));
+<a name="l00106"></a>00106     }
+<a name="l00107"></a>00107 
+<a name="l00108"></a>00108     <span class="keywordflow">switch</span> ($this-&gt;<a class="code" href="classDynamicGallery.html#3b86d084b5d5bef2ea804ed520e0ca10">ValueConfig</a>(5))
+<a name="l00109"></a>00109     {
+<a name="l00110"></a>00110       <span class="keywordflow">case</span> 1:
+<a name="l00111"></a>00111         $order = <span class="stringliteral">"gallery.datum ASC"</span>;
+<a name="l00112"></a>00112       <span class="keywordflow">break</span>;
+<a name="l00113"></a>00113 
+<a name="l00114"></a>00114       <span class="keywordflow">case</span> 2:
+<a name="l00115"></a>00115         $order = <span class="stringliteral">"gallery.datum DESC"</span>;
+<a name="l00116"></a>00116       <span class="keywordflow">break</span>;
+<a name="l00117"></a>00117 
+<a name="l00118"></a>00118       <span class="keywordflow">case</span> 3:
+<a name="l00119"></a>00119         $order = <span class="stringliteral">"poradi ASC"</span>;
+<a name="l00120"></a>00120       <span class="keywordflow">break</span>;
+<a name="l00121"></a>00121 
+<a name="l00122"></a>00122       <span class="keywordflow">case</span> 4:
+<a name="l00123"></a>00123         $order = <span class="stringliteral">"poradi DESC"</span>;
+<a name="l00124"></a>00124       <span class="keywordflow">break</span>;
+<a name="l00125"></a>00125 
+<a name="l00126"></a>00126       <span class="keywordflow">default</span>:
+<a name="l00127"></a>00127         $order = <span class="stringliteral">"gallery.datum ASC"</span>;
+<a name="l00128"></a>00128       <span class="keywordflow">break</span>;
+<a name="l00129"></a>00129     }
+<a name="l00130"></a>00130 
+<a name="l00131"></a>00131     <a class="code" href="menu__funkce_8php.html#e241cf0159803673d118f68d99e6342f">$result</a> = <span class="stringliteral">""</span>;
+<a name="l00132"></a>00132     <span class="comment">//vypis gelerie</span>
+<a name="l00133"></a>00133     <span class="keywordflow">if</span> ($res = @$this-&gt;sqlite-&gt;query(<span class="stringliteral">"SELECT popisek, url FROM gallery WHERE adresa='{$adresa}' ORDER BY {$order};"</span>, NULL, $error))
+<a name="l00134"></a>00134     {
+<a name="l00135"></a>00135       <span class="keywordflow">if</span> ($res-&gt;numRows() != 0)
+<a name="l00136"></a>00136       {
+<a name="l00137"></a>00137         <span class="keywordflow">while</span> ($data = $res-&gt;fetchObject())
+<a name="l00138"></a>00138         {
+<a name="l00139"></a>00139           <a class="code" href="menu__funkce_8php.html#e241cf0159803673d118f68d99e6342f">$result</a> .=
+<a name="l00140"></a>00140           <span class="stringliteral">"\n          &lt;p class=\"obrazek\"&gt;</span>
+<a name="l00141"></a>00141 <span class="stringliteral">            &lt;a href=\"{$this-&gt;dirpath}/{$this-&gt;pathpicture}/{$this-&gt;fulldir}/{$data-&gt;url}\" class=\"highslide obrazek\" title=\"{$data-&gt;popisek}\" onclick=\"return hs.expand(this)\"&gt;</span>
+<a name="l00142"></a>00142 <span class="stringliteral">              &lt;img src=\"{$this-&gt;dirpath}/{$this-&gt;pathpicture}/{$this-&gt;minidir}/{$data-&gt;url}\" alt=\"{$data-&gt;popisek}\" /&gt;</span>
+<a name="l00143"></a>00143 <span class="stringliteral">            &lt;/a&gt;</span>
+<a name="l00144"></a>00144 <span class="stringliteral">            &lt;span class=\"highslide-caption\"&gt;{$data-&gt;popisek}&lt;/span&gt;</span>
+<a name="l00145"></a>00145 <span class="stringliteral">          &lt;/p&gt;"</span>;
+<a name="l00146"></a>00146         }
+<a name="l00147"></a>00147       }
+<a name="l00148"></a>00148         <span class="keywordflow">else</span>
+<a name="l00149"></a>00149       {
+<a name="l00150"></a>00150         <a class="code" href="menu__funkce_8php.html#e241cf0159803673d118f68d99e6342f">$result</a> = <span class="stringliteral">""</span>;
+<a name="l00151"></a>00151       }
+<a name="l00152"></a>00152     }
+<a name="l00153"></a>00153       <span class="keywordflow">else</span>
+<a name="l00154"></a>00154     {
+<a name="l00155"></a>00155       $this-&gt;var-&gt;main[0]-&gt;ErrorMsg($error);
+<a name="l00156"></a>00156     }
+<a name="l00157"></a>00157 
+<a name="l00158"></a>00158     <span class="keywordflow">return</span> <a class="code" href="menu__funkce_8php.html#e241cf0159803673d118f68d99e6342f">$result</a>;
+<a name="l00159"></a>00159   }
+<a name="l00160"></a>00160 
+<a name="l00167"></a><a class="code" href="classDynamicGallery.html#09aaca1db0c16bd9ac52f64d61e221f8">00167</a>   <span class="keyword">public</span> function <a class="code" href="classDynamicGallery.html#09aaca1db0c16bd9ac52f64d61e221f8">AdminObsah</a>()
+<a name="l00168"></a>00168   {
+<a name="l00169"></a>00169     <span class="keywordflow">if</span> ($_GET[$this-&gt;var-&gt;get_kam] == $this-&gt;var-&gt;adresaadminu &amp;&amp;
+<a name="l00170"></a>00170         $this-&gt;var-&gt;aktivniadmin)
+<a name="l00171"></a>00171     {
+<a name="l00172"></a>00172       <span class="keywordflow">switch</span> ($_GET[$this-&gt;var-&gt;get_idmodul])
+<a name="l00173"></a>00173       {
+<a name="l00174"></a>00174         <span class="keywordflow">case</span> $this-&gt;idmodul:  <span class="comment">//id modul</span>
+<a name="l00175"></a>00175           <a class="code" href="menu__funkce_8php.html#e241cf0159803673d118f68d99e6342f">$result</a> = $this-&gt;<a class="code" href="classDynamicGallery.html#c23890bb6e34ff5fbe9d4f0186c8eb4c">AdministracePicGallery</a>();
+<a name="l00176"></a>00176         <span class="keywordflow">break</span>;
+<a name="l00177"></a>00177       }
+<a name="l00178"></a>00178     }
+<a name="l00179"></a>00179 
+<a name="l00180"></a>00180     <span class="keywordflow">return</span> <a class="code" href="menu__funkce_8php.html#e241cf0159803673d118f68d99e6342f">$result</a>;
+<a name="l00181"></a>00181   }
+<a name="l00182"></a>00182 
+<a name="l00190"></a><a class="code" href="classDynamicGallery.html#3b86d084b5d5bef2ea804ed520e0ca10">00190</a>   <span class="keyword">private</span> function <a class="code" href="classDynamicGallery.html#3b86d084b5d5bef2ea804ed520e0ca10">ValueConfig</a>($cislo)
+<a name="l00191"></a>00191   {
+<a name="l00192"></a>00192     <span class="keywordflow">if</span> (file_exists($this-&gt;conffile))
+<a name="l00193"></a>00193     {
+<a name="l00194"></a>00194       $u = fopen($this-&gt;conffile, <span class="stringliteral">"r"</span>);
+<a name="l00195"></a>00195       $data = explode(<span class="stringliteral">"-"</span>, fread($u, filesize($this-&gt;conffile)));
+<a name="l00196"></a>00196       fclose($u);
+<a name="l00197"></a>00197 
+<a name="l00198"></a>00198       <a class="code" href="menu__funkce_8php.html#e241cf0159803673d118f68d99e6342f">$result</a> = $data[$cislo];
+<a name="l00199"></a>00199     }
+<a name="l00200"></a>00200 
+<a name="l00201"></a>00201     <span class="keywordflow">return</span> <a class="code" href="menu__funkce_8php.html#e241cf0159803673d118f68d99e6342f">$result</a>;
+<a name="l00202"></a>00202   }
+<a name="l00203"></a>00203 
+<a name="l00215"></a><a class="code" href="classDynamicGallery.html#0e4b791b84cb8a668ba35ac2bc7129cb">00215</a>   <span class="keyword">private</span> function <a class="code" href="classDynamicGallery.html#0e4b791b84cb8a668ba35ac2bc7129cb">LoadConfig</a>(&amp;$w_mini, &amp;$h_mini, &amp;$w_full, &amp;$h_full, &amp;$limit, &amp;$razeni)
+<a name="l00216"></a>00216   {
+<a name="l00217"></a>00217     <span class="keywordflow">if</span> (file_exists($this-&gt;conffile))
+<a name="l00218"></a>00218     {
+<a name="l00219"></a>00219       $u = fopen($this-&gt;conffile, <span class="stringliteral">"r"</span>);
+<a name="l00220"></a>00220       $data = fread($u, filesize($this-&gt;conffile));
+<a name="l00221"></a>00221       fclose($u);
+<a name="l00222"></a>00222 
+<a name="l00223"></a>00223       $data = explode(<span class="stringliteral">"-"</span>, $data);
+<a name="l00224"></a>00224       $w_mini = $data[0];
+<a name="l00225"></a>00225       $h_mini = $data[1];
+<a name="l00226"></a>00226       $w_full = $data[2];
+<a name="l00227"></a>00227       $h_full = $data[3];
+<a name="l00228"></a>00228       $limit = $data[4];
+<a name="l00229"></a>00229       $razeni = $data[5];
+<a name="l00230"></a>00230     }
+<a name="l00231"></a>00231       <span class="keywordflow">else</span>
+<a name="l00232"></a>00232     {
+<a name="l00233"></a>00233       $u = fopen($this-&gt;conffile, <span class="stringliteral">"w"</span>);
+<a name="l00234"></a>00234       fwrite($u, <span class="stringliteral">"0-135-0-400-3-1"</span>);
+<a name="l00235"></a>00235       fclose($u);
+<a name="l00236"></a>00236 
+<a name="l00237"></a>00237       echo <span class="stringliteral">"soubor se vytvari, pro pokracovani refresujte a nebo zmente prava zapisu ve slozce"</span>;
+<a name="l00238"></a>00238     }
+<a name="l00239"></a>00239   }
+<a name="l00240"></a>00240 
+<a name="l00247"></a><a class="code" href="classDynamicGallery.html#fc1ee072f5b7a23e6aec030b6cc4a578">00247</a>   <span class="keyword">private</span> function <a class="code" href="classDynamicGallery.html#fc1ee072f5b7a23e6aec030b6cc4a578">SaveConfig</a>()
+<a name="l00248"></a>00248   {
+<a name="l00249"></a>00249     $w_mini = $_POST[<span class="stringliteral">"w_mini"</span>];
+<a name="l00250"></a>00250     settype($w_mini, <span class="stringliteral">"integer"</span>);
+<a name="l00251"></a>00251 
+<a name="l00252"></a>00252     $h_mini = $_POST[<span class="stringliteral">"h_mini"</span>];
+<a name="l00253"></a>00253     settype($h_mini, <span class="stringliteral">"integer"</span>);
+<a name="l00254"></a>00254 
+<a name="l00255"></a>00255     $w_full = $_POST[<span class="stringliteral">"w_full"</span>];
+<a name="l00256"></a>00256     settype($w_full, <span class="stringliteral">"integer"</span>);
+<a name="l00257"></a>00257 
+<a name="l00258"></a>00258     $h_full = $_POST[<span class="stringliteral">"h_full"</span>];
+<a name="l00259"></a>00259     settype($h_full, <span class="stringliteral">"integer"</span>);
+<a name="l00260"></a>00260 
+<a name="l00261"></a>00261     $limit = $_POST[<span class="stringliteral">"limit"</span>];
+<a name="l00262"></a>00262     settype($limit, <span class="stringliteral">"integer"</span>);
+<a name="l00263"></a>00263 
+<a name="l00264"></a>00264     $razeni = $_POST[<span class="stringliteral">"razeni"</span>];
+<a name="l00265"></a>00265     settype($razeni, <span class="stringliteral">"integer"</span>);
+<a name="l00266"></a>00266 
+<a name="l00267"></a>00267     $u = fopen($this-&gt;conffile, <span class="stringliteral">"w"</span>);
+<a name="l00268"></a>00268     fwrite($u, <span class="stringliteral">"{$w_mini}-{$h_mini}-{$w_full}-{$h_full}-{$limit}-{$razeni}"</span>);
+<a name="l00269"></a>00269     fclose($u);
+<a name="l00270"></a>00270 
+<a name="l00271"></a>00271     <a class="code" href="menu__funkce_8php.html#e241cf0159803673d118f68d99e6342f">$result</a> = <span class="stringliteral">"Uloženo..."</span>;
+<a name="l00272"></a>00272 
+<a name="l00273"></a>00273     <span class="keywordflow">return</span> <a class="code" href="menu__funkce_8php.html#e241cf0159803673d118f68d99e6342f">$result</a>;
+<a name="l00274"></a>00274   }
+<a name="l00275"></a>00275 
+<a name="l00282"></a><a class="code" href="classDynamicGallery.html#c23890bb6e34ff5fbe9d4f0186c8eb4c">00282</a>   <span class="keyword">private</span> function <a class="code" href="classDynamicGallery.html#c23890bb6e34ff5fbe9d4f0186c8eb4c">AdministracePicGallery</a>()
+<a name="l00283"></a>00283   {
+<a name="l00284"></a>00284     <a class="code" href="menu__funkce_8php.html#e241cf0159803673d118f68d99e6342f">$result</a> =
+<a name="l00285"></a>00285     <span class="stringliteral">"administrace dynamické obrázkové galerie bez sekcí</span>
+<a name="l00286"></a>00286 <span class="stringliteral">    &lt;br /&gt;</span>
+<a name="l00287"></a>00287 <span class="stringliteral">    &lt;a href=\"?{$this-&gt;var-&gt;get_kam}={$this-&gt;var-&gt;adresaadminu}&amp;amp;{$this-&gt;var-&gt;get_idmodul}={$this-&gt;idmodul}&amp;amp;co=add\" title=\"\"&gt;přidat obrázek&lt;/a&gt;&lt;br /&gt;</span>
+<a name="l00288"></a>00288 <span class="stringliteral">    &lt;a href=\"?{$this-&gt;var-&gt;get_kam}={$this-&gt;var-&gt;adresaadminu}&amp;amp;{$this-&gt;var-&gt;get_idmodul}={$this-&gt;idmodul}&amp;amp;co=config\" title=\"\"&gt;konfigurace galerie&lt;/a&gt;&lt;br /&gt;</span>
+<a name="l00289"></a>00289 <span class="stringliteral">    &lt;br /&gt;</span>
+<a name="l00290"></a>00290 <span class="stringliteral">    {$this-&gt;AdminVypisGallery()}</span>
+<a name="l00291"></a>00291 <span class="stringliteral">    "</span>;
+<a name="l00292"></a>00292 
+<a name="l00293"></a>00293     $co = $_GET[<span class="stringliteral">"co"</span>];
+<a name="l00294"></a>00294 
+<a name="l00295"></a>00295     <span class="keywordflow">if</span> (!Empty($co))
+<a name="l00296"></a>00296     {
+<a name="l00297"></a>00297       <span class="keywordflow">switch</span> ($co)
+<a name="l00298"></a>00298       {
+<a name="l00299"></a>00299         <span class="keywordflow">case</span> <span class="stringliteral">"config"</span>:  <span class="comment">//kofigurace galerie</span>
+<a name="l00300"></a>00300           $this-&gt;<a class="code" href="classDynamicGallery.html#0e4b791b84cb8a668ba35ac2bc7129cb">LoadConfig</a>($w_mini, $h_mini, $w_full, $h_full, $limit, $razeni);
+<a name="l00301"></a>00301 
+<a name="l00302"></a>00302           <a class="code" href="menu__funkce_8php.html#e241cf0159803673d118f68d99e6342f">$result</a> =
+<a name="l00303"></a>00303           <span class="stringliteral">"&lt;br /&gt;</span>
+<a name="l00304"></a>00304 <span class="stringliteral">          &lt;a href=\"?{$this-&gt;var-&gt;get_kam}={$this-&gt;var-&gt;adresaadminu}&amp;amp;{$this-&gt;var-&gt;get_idmodul}={$this-&gt;idmodul}\" title=\"\"&gt;zavřít konfiguraci [X]&lt;/a&gt;&lt;br /&gt;</span>
+<a name="l00305"></a>00305 <span class="stringliteral">          &lt;form method=\"post\"&gt;</span>
+<a name="l00306"></a>00306 <span class="stringliteral">            &lt;fieldset&gt;</span>
+<a name="l00307"></a>00307 <span class="stringliteral">              mini:&lt;br /&gt;</span>
+<a name="l00308"></a>00308 <span class="stringliteral">              &lt;input type=\"radio\""</span>.($w_mini != 0 ? <span class="stringliteral">" checked=\"checked\""</span> : <span class="stringliteral">""</span>).<span class="stringliteral">" name=\"mini\" onclick=\"mini_1();\"&gt;dopocitat vysku&lt;br /&gt;</span>
+<a name="l00309"></a>00309 <span class="stringliteral">              width mini: &lt;input type=\"text\" name=\"w_mini\" id=\"mini1_p1\" value=\"{$w_mini}\" /&gt; px&lt;br /&gt;</span>
+<a name="l00310"></a>00310 <span class="stringliteral">              &lt;br /&gt;</span>
+<a name="l00311"></a>00311 <span class="stringliteral">              &lt;input type=\"radio\""</span>.($h_mini != 0 ? <span class="stringliteral">" checked=\"checked\""</span> : <span class="stringliteral">""</span>).<span class="stringliteral">" name=\"mini\" onclick=\"mini_2();\"&gt;dopocitat sirku&lt;br /&gt;</span>
+<a name="l00312"></a>00312 <span class="stringliteral">              height mini: &lt;input type=\"text\" name=\"h_mini\" id=\"mini2_p1\" value=\"{$h_mini}\" /&gt; px&lt;br /&gt;</span>
+<a name="l00313"></a>00313 <span class="stringliteral">              &lt;br /&gt;</span>
+<a name="l00314"></a>00314 <span class="stringliteral">              &lt;input type=\"radio\""</span>.($w_mini != 0 &amp;&amp; $h_mini != 0 ? <span class="stringliteral">" checked=\"checked\""</span> : <span class="stringliteral">""</span>).<span class="stringliteral">" name=\"mini\" onclick=\"mini_3();\"&gt;nastaveno napevno&lt;br /&gt;</span>
+<a name="l00315"></a>00315 <span class="stringliteral">              width mini: &lt;input type=\"text\" name=\"w_mini\" id=\"mini3_p1\" value=\"{$w_mini}\" /&gt; px&lt;br /&gt;</span>
+<a name="l00316"></a>00316 <span class="stringliteral">              height mini: &lt;input type=\"text\" name=\"h_mini\" id=\"mini3_p2\" value=\"{$h_mini}\" /&gt; px&lt;br /&gt;</span>
+<a name="l00317"></a>00317 <span class="stringliteral">              &lt;br /&gt;</span>
+<a name="l00318"></a>00318 <span class="stringliteral">              &lt;br /&gt;</span>
+<a name="l00319"></a>00319 <span class="stringliteral">              full:&lt;br /&gt;</span>
+<a name="l00320"></a>00320 <span class="stringliteral">              &lt;input type=\"radio\""</span>.($w_full != 0 ? <span class="stringliteral">" checked=\"checked\""</span> : <span class="stringliteral">""</span>).<span class="stringliteral">" name=\"full\" onclick=\"full_1();\"&gt;dopocitat vysku&lt;br /&gt;</span>
+<a name="l00321"></a>00321 <span class="stringliteral">              width full: &lt;input type=\"text\" name=\"w_full\" id=\"full1_p1\" value=\"{$w_full}\" /&gt; px&lt;br /&gt;</span>
+<a name="l00322"></a>00322 <span class="stringliteral">              &lt;br /&gt;</span>
+<a name="l00323"></a>00323 <span class="stringliteral">              &lt;input type=\"radio\""</span>.($h_full != 0 ? <span class="stringliteral">" checked=\"checked\""</span> : <span class="stringliteral">""</span>).<span class="stringliteral">" name=\"full\" onclick=\"full_2();\"&gt;dopocitat sirku&lt;br /&gt;</span>
+<a name="l00324"></a>00324 <span class="stringliteral">              height full: &lt;input type=\"text\" name=\"h_full\" id=\"full2_p1\" value=\"{$h_full}\" /&gt; px&lt;br /&gt;</span>
+<a name="l00325"></a>00325 <span class="stringliteral">              &lt;br /&gt;</span>
+<a name="l00326"></a>00326 <span class="stringliteral">              &lt;input type=\"radio\""</span>.($w_full != 0 &amp;&amp; $h_full != 0 ? <span class="stringliteral">" checked=\"checked\""</span> : <span class="stringliteral">""</span>).<span class="stringliteral">" name=\"full\" onclick=\"full_3();\"&gt;nastaveno napevno&lt;br /&gt;</span>
+<a name="l00327"></a>00327 <span class="stringliteral">              width full: &lt;input type=\"text\" name=\"w_full\" id=\"full3_p1\" value=\"{$w_full}\" /&gt; px&lt;br /&gt;</span>
+<a name="l00328"></a>00328 <span class="stringliteral">              height full: &lt;input type=\"text\" name=\"h_full\" id=\"full3_p2\" value=\"{$h_full}\" /&gt; px&lt;br /&gt;</span>
+<a name="l00329"></a>00329 <span class="stringliteral">              &lt;br /&gt;</span>
+<a name="l00330"></a>00330 <span class="stringliteral">              &lt;input type=\"radio\""</span>.($w_full == 0 &amp;&amp; $h_full == 0 ? <span class="stringliteral">" checked=\"checked\""</span> : <span class="stringliteral">""</span>).<span class="stringliteral">" name=\"full\" onclick=\"full_4();\"&gt;originální velikost&lt;br /&gt;</span>
+<a name="l00331"></a>00331 <span class="stringliteral">              width full: &lt;input type=\"text\" name=\"w_full\" id=\"full4_p1\" value=\"0\" disabled /&gt; px&lt;br /&gt;</span>
+<a name="l00332"></a>00332 <span class="stringliteral">              height full: &lt;input type=\"text\" name=\"h_full\" id=\"full4_p2\" value=\"0\" disabled /&gt; px&lt;br /&gt;</span>
+<a name="l00333"></a>00333 <span class="stringliteral">              &lt;br /&gt;</span>
+<a name="l00334"></a>00334 <span class="stringliteral">              &lt;br /&gt;</span>
+<a name="l00335"></a>00335 <span class="stringliteral">              limit:&lt;br /&gt;</span>
+<a name="l00336"></a>00336 <span class="stringliteral">              &lt;input type=\"radio\""</span>.($limit != 0 ? <span class="stringliteral">" checked=\"checked\""</span> : <span class="stringliteral">""</span>).<span class="stringliteral">" name=\"lim\" onclick=\"lim_1();\"&gt;dany limit&lt;br /&gt;</span>
+<a name="l00337"></a>00337 <span class="stringliteral">              limit upload: &lt;input type=\"text\" name=\"limit\" id=\"lim_p1\" value=\"{$limit}\" /&gt; MB&lt;br /&gt;</span>
+<a name="l00338"></a>00338 <span class="stringliteral">              &lt;br /&gt;</span>
+<a name="l00339"></a>00339 <span class="stringliteral">              &lt;input type=\"radio\""</span>.($limit == 0 ? <span class="stringliteral">" checked=\"checked\""</span> : <span class="stringliteral">""</span>).<span class="stringliteral">" name=\"lim\" onclick=\"lim_2();\"&gt;neomezeny (do limitu php def.nastaveni)&lt;br /&gt;</span>
+<a name="l00340"></a>00340 <span class="stringliteral">              &lt;br /&gt;</span>
+<a name="l00341"></a>00341 <span class="stringliteral">              &lt;br /&gt;</span>
+<a name="l00342"></a>00342 <span class="stringliteral">              volba řazeni:&lt;br /&gt;</span>
+<a name="l00343"></a>00343 <span class="stringliteral">              &lt;input type=\"radio\" name=\"razeni\" value=\"1\""</span>.($razeni == 1 ? <span class="stringliteral">" checked=\"checked\""</span> : <span class="stringliteral">""</span>).<span class="stringliteral">" /&gt;datum ASC&lt;br /&gt;</span>
+<a name="l00344"></a>00344 <span class="stringliteral">              &lt;input type=\"radio\" name=\"razeni\" value=\"2\""</span>.($razeni == 2 ? <span class="stringliteral">" checked=\"checked\""</span> : <span class="stringliteral">""</span>).<span class="stringliteral">" /&gt;datum DESC&lt;br /&gt;</span>
+<a name="l00345"></a>00345 <span class="stringliteral">              &lt;input type=\"radio\" name=\"razeni\" value=\"3\""</span>.($razeni == 3 ? <span class="stringliteral">" checked=\"checked\""</span> : <span class="stringliteral">""</span>).<span class="stringliteral">" /&gt;pořadí ASC&lt;br /&gt;</span>
+<a name="l00346"></a>00346 <span class="stringliteral">              &lt;input type=\"radio\" name=\"razeni\" value=\"4\""</span>.($razeni == 4 ? <span class="stringliteral">" checked=\"checked\""</span> : <span class="stringliteral">""</span>).<span class="stringliteral">" /&gt;pořadí DESC&lt;br /&gt;</span>
+<a name="l00347"></a>00347 <span class="stringliteral">              &lt;br /&gt;</span>
+<a name="l00348"></a>00348 <span class="stringliteral">              &lt;input type=\"submit\" name=\"tlacitko\" value=\"uložit konfiguraci\" /&gt;</span>
+<a name="l00349"></a>00349 <span class="stringliteral">            &lt;/fieldset&gt;</span>
+<a name="l00350"></a>00350 <span class="stringliteral">          &lt;/form&gt;</span>
+<a name="l00351"></a>00351 <span class="stringliteral"></span>
+<a name="l00352"></a>00352 <span class="stringliteral">          &lt;script type=\"text/javascript\"&gt;</span>
+<a name="l00353"></a>00353 <span class="stringliteral">            function mini_1()</span>
+<a name="l00354"></a>00354 <span class="stringliteral">            {</span>
+<a name="l00355"></a>00355 <span class="stringliteral">              document.getElementById('mini1_p1').disabled = false;</span>
+<a name="l00356"></a>00356 <span class="stringliteral">              document.getElementById('mini2_p1').disabled = true;</span>
+<a name="l00357"></a>00357 <span class="stringliteral">              document.getElementById('mini3_p1').disabled = true;</span>
+<a name="l00358"></a>00358 <span class="stringliteral">              document.getElementById('mini3_p2').disabled = true;</span>
+<a name="l00359"></a>00359 <span class="stringliteral">            }</span>
+<a name="l00360"></a>00360 <span class="stringliteral"></span>
+<a name="l00361"></a>00361 <span class="stringliteral">            function mini_2()</span>
+<a name="l00362"></a>00362 <span class="stringliteral">            {</span>
+<a name="l00363"></a>00363 <span class="stringliteral">              document.getElementById('mini1_p1').disabled = true;</span>
+<a name="l00364"></a>00364 <span class="stringliteral">              document.getElementById('mini2_p1').disabled = false;</span>
+<a name="l00365"></a>00365 <span class="stringliteral">              document.getElementById('mini3_p1').disabled = true;</span>
+<a name="l00366"></a>00366 <span class="stringliteral">              document.getElementById('mini3_p2').disabled = true;</span>
+<a name="l00367"></a>00367 <span class="stringliteral">            }</span>
+<a name="l00368"></a>00368 <span class="stringliteral"></span>
+<a name="l00369"></a>00369 <span class="stringliteral">            function mini_3()</span>
+<a name="l00370"></a>00370 <span class="stringliteral">            {</span>
+<a name="l00371"></a>00371 <span class="stringliteral">              document.getElementById('mini1_p1').disabled = true;</span>
+<a name="l00372"></a>00372 <span class="stringliteral">              document.getElementById('mini2_p1').disabled = true;</span>
+<a name="l00373"></a>00373 <span class="stringliteral">              document.getElementById('mini3_p1').disabled = false;</span>
+<a name="l00374"></a>00374 <span class="stringliteral">              document.getElementById('mini3_p2').disabled = false;</span>
+<a name="l00375"></a>00375 <span class="stringliteral">            }</span>
+<a name="l00376"></a>00376 <span class="stringliteral"></span>
+<a name="l00377"></a>00377 <span class="stringliteral">            function full_1()</span>
+<a name="l00378"></a>00378 <span class="stringliteral">            {</span>
+<a name="l00379"></a>00379 <span class="stringliteral">              document.getElementById('full1_p1').disabled = false;</span>
+<a name="l00380"></a>00380 <span class="stringliteral">              document.getElementById('full2_p1').disabled = true;</span>
+<a name="l00381"></a>00381 <span class="stringliteral">              document.getElementById('full3_p1').disabled = true;</span>
+<a name="l00382"></a>00382 <span class="stringliteral">              document.getElementById('full3_p2').disabled = true;</span>
+<a name="l00383"></a>00383 <span class="stringliteral">            }</span>
+<a name="l00384"></a>00384 <span class="stringliteral"></span>
+<a name="l00385"></a>00385 <span class="stringliteral">            function full_2()</span>
+<a name="l00386"></a>00386 <span class="stringliteral">            {</span>
+<a name="l00387"></a>00387 <span class="stringliteral">              document.getElementById('full1_p1').disabled = true;</span>
+<a name="l00388"></a>00388 <span class="stringliteral">              document.getElementById('full2_p1').disabled = false;</span>
+<a name="l00389"></a>00389 <span class="stringliteral">              document.getElementById('full3_p1').disabled = true;</span>
+<a name="l00390"></a>00390 <span class="stringliteral">              document.getElementById('full3_p2').disabled = true;</span>
+<a name="l00391"></a>00391 <span class="stringliteral">            }</span>
+<a name="l00392"></a>00392 <span class="stringliteral"></span>
+<a name="l00393"></a>00393 <span class="stringliteral">            function full_3()</span>
+<a name="l00394"></a>00394 <span class="stringliteral">            {</span>
+<a name="l00395"></a>00395 <span class="stringliteral">              document.getElementById('full1_p1').disabled = true;</span>
+<a name="l00396"></a>00396 <span class="stringliteral">              document.getElementById('full2_p1').disabled = true;</span>
+<a name="l00397"></a>00397 <span class="stringliteral">              document.getElementById('full3_p1').disabled = false;</span>
+<a name="l00398"></a>00398 <span class="stringliteral">              document.getElementById('full3_p2').disabled = false;</span>
+<a name="l00399"></a>00399 <span class="stringliteral">            }</span>
+<a name="l00400"></a>00400 <span class="stringliteral"></span>
+<a name="l00401"></a>00401 <span class="stringliteral">            function full_4()</span>
+<a name="l00402"></a>00402 <span class="stringliteral">            {</span>
+<a name="l00403"></a>00403 <span class="stringliteral">              document.getElementById('full1_p1').disabled = true;</span>
+<a name="l00404"></a>00404 <span class="stringliteral">              document.getElementById('full2_p1').disabled = true;</span>
+<a name="l00405"></a>00405 <span class="stringliteral">              document.getElementById('full3_p1').disabled = true;</span>
+<a name="l00406"></a>00406 <span class="stringliteral">              document.getElementById('full3_p2').disabled = true;</span>
+<a name="l00407"></a>00407 <span class="stringliteral">            }</span>
+<a name="l00408"></a>00408 <span class="stringliteral"></span>
+<a name="l00409"></a>00409 <span class="stringliteral">            function lim_1()</span>
+<a name="l00410"></a>00410 <span class="stringliteral">            {</span>
+<a name="l00411"></a>00411 <span class="stringliteral">              document.getElementById('lim_p1').disabled = false;</span>
+<a name="l00412"></a>00412 <span class="stringliteral">            }</span>
+<a name="l00413"></a>00413 <span class="stringliteral"></span>
+<a name="l00414"></a>00414 <span class="stringliteral">            function lim_2()</span>
+<a name="l00415"></a>00415 <span class="stringliteral">            {</span>
+<a name="l00416"></a>00416 <span class="stringliteral">              document.getElementById('lim_p1').disabled = true;</span>
+<a name="l00417"></a>00417 <span class="stringliteral">            }</span>
+<a name="l00418"></a>00418 <span class="stringliteral"></span>
+<a name="l00419"></a>00419 <span class="stringliteral">            "</span>.($w_mini != 0 &amp;&amp; $h_mini != 0 ? <span class="stringliteral">"mini_3();"</span> : ($h_mini != 0 ? <span class="stringliteral">"mini_2();"</span> : ($w_mini != 0 ? <span class="stringliteral">"mini_1();"</span> : <span class="stringliteral">""</span>))).<span class="stringliteral">"</span>
+<a name="l00420"></a>00420 <span class="stringliteral">            "</span>.($w_full == 0 &amp;&amp; $h_full == 0 ? <span class="stringliteral">"full_4();"</span> : ($w_full != 0 &amp;&amp; $h_full != 0 ? <span class="stringliteral">"full_3();"</span> : ($h_full != 0 ? <span class="stringliteral">"full_2();"</span> : ($w_full != 0 ? <span class="stringliteral">"full_1();"</span> : <span class="stringliteral">""</span>)))).<span class="stringliteral">"</span>
+<a name="l00421"></a>00421 <span class="stringliteral">            "</span>.($limit == 0 ? <span class="stringliteral">"lim_2();"</span> : <span class="stringliteral">"lim_1();"</span>).<span class="stringliteral">"</span>
+<a name="l00422"></a>00422 <span class="stringliteral">          &lt;/script&gt;</span>
+<a name="l00423"></a>00423 <span class="stringliteral">          "</span>;
+<a name="l00424"></a>00424 
+<a name="l00425"></a>00425           <span class="keywordflow">if</span> (!Empty($_POST[<span class="stringliteral">"tlacitko"</span>]))
+<a name="l00426"></a>00426           {
+<a name="l00427"></a>00427             <a class="code" href="menu__funkce_8php.html#e241cf0159803673d118f68d99e6342f">$result</a> = $this-&gt;<a class="code" href="classDynamicGallery.html#fc1ee072f5b7a23e6aec030b6cc4a578">SaveConfig</a>();
+<a name="l00428"></a>00428 
+<a name="l00429"></a>00429             $this-&gt;var-&gt;main[0]-&gt;AutoClick(1, <span class="stringliteral">"?{$this-&gt;var-&gt;get_kam}={$this-&gt;var-&gt;adresaadminu}&amp;{$this-&gt;var-&gt;get_idmodul}={$this-&gt;idmodul}"</span>);  <span class="comment">//auto kliknuti</span>
+<a name="l00430"></a>00430           }
+<a name="l00431"></a>00431         <span class="keywordflow">break</span>;
+<a name="l00432"></a>00432 
+<a name="l00433"></a>00433         <span class="keywordflow">case</span> <span class="stringliteral">"add"</span>: <span class="comment">//pridavani obrazku</span>
+<a name="l00434"></a>00434           <a class="code" href="menu__funkce_8php.html#e241cf0159803673d118f68d99e6342f">$result</a> =
+<a name="l00435"></a>00435           <span class="stringliteral">"</span>
+<a name="l00436"></a>00436 <span class="stringliteral">          &lt;form method=\"post\" enctype=\"multipart/form-data\"&gt;</span>
+<a name="l00437"></a>00437 <span class="stringliteral">            &lt;fieldset&gt;</span>
+<a name="l00438"></a>00438 <span class="stringliteral">              adresa: &lt;input type=\"text\" name=\"adresa\" /&gt;&lt;br /&gt;</span>
+<a name="l00439"></a>00439 <span class="stringliteral">              popisek: &lt;input type=\"text\" name=\"popisek\" /&gt;&lt;br /&gt;</span>
+<a name="l00440"></a>00440 <span class="stringliteral">              obrázek: &lt;input type=\"file\" name=\"obrazek\" /&gt;&lt;br /&gt;</span>
+<a name="l00441"></a>00441 <span class="stringliteral">              datum: &lt;input type=\"text\" name=\"datum\" value=\""</span>.date(<span class="stringliteral">"j.n.Y H:i:s"</span>).<span class="stringliteral">"\" /&gt;&lt;br /&gt;</span>
+<a name="l00442"></a>00442 <span class="stringliteral">              "</span>.($this-&gt;<a class="code" href="classDynamicGallery.html#3b86d084b5d5bef2ea804ed520e0ca10">ValueConfig</a>(5) &gt; 2 ? <span class="stringliteral">"poradi: &lt;input type=\"text\" name=\"poradi\" /&gt;&lt;br /&gt;"</span> : <span class="stringliteral">""</span>).<span class="stringliteral">"</span>
+<a name="l00443"></a>00443 <span class="stringliteral">              &lt;input type=\"submit\" name=\"tlacitko\" value=\"Přidat obrazek\" /&gt;</span>
+<a name="l00444"></a>00444 <span class="stringliteral">            &lt;/fieldset&gt;</span>
+<a name="l00445"></a>00445 <span class="stringliteral">          &lt;/form&gt;</span>
+<a name="l00446"></a>00446 <span class="stringliteral">          "</span>;
+<a name="l00447"></a>00447 
+<a name="l00448"></a>00448           $adresa = stripslashes(htmlspecialchars($_POST[<span class="stringliteral">"adresa"</span>], ENT_QUOTES));
+<a name="l00449"></a>00449           $popisek = stripslashes(htmlspecialchars($_POST[<span class="stringliteral">"popisek"</span>], ENT_QUOTES));
+<a name="l00450"></a>00450           $datum = date(<span class="stringliteral">"Y-m-d H:i:s"</span>, strtotime(stripslashes(htmlspecialchars($_POST[<span class="stringliteral">"datum"</span>], ENT_QUOTES))));
+<a name="l00451"></a>00451           $poradi = stripslashes(htmlspecialchars($_POST[<span class="stringliteral">"poradi"</span>], ENT_QUOTES));
+<a name="l00452"></a>00452           settype($poradi, <span class="stringliteral">"integer"</span>);
+<a name="l00453"></a>00453 
+<a name="l00454"></a>00454           <span class="keywordflow">if</span> (!Empty($_FILES[<span class="stringliteral">"obrazek"</span>][<span class="stringliteral">"tmp_name"</span>]))
+<a name="l00455"></a>00455           {
+<a name="l00456"></a>00456             $ob = $this-&gt;<a class="code" href="classDynamicGallery.html#42d5680455b153b531066b2ed5a8c5c7">ZpracujObrazek</a>($_FILES[<span class="stringliteral">"obrazek"</span>], $url);
+<a name="l00457"></a>00457           }
+<a name="l00458"></a>00458 
+<a name="l00459"></a>00459           <span class="keywordflow">if</span> (!Empty($_POST[<span class="stringliteral">"tlacitko"</span>]) &amp;&amp;
+<a name="l00460"></a>00460               !Empty($adresa) &amp;&amp;
+<a name="l00461"></a>00461               !Empty($popisek) &amp;&amp;
+<a name="l00462"></a>00462               !Empty($datum) &amp;&amp;
+<a name="l00463"></a>00463               $ob)
+<a name="l00464"></a>00464           {
+<a name="l00465"></a>00465             <span class="keywordflow">if</span> (@$this-&gt;sqlite-&gt;queryExec(<span class="stringliteral">"INSERT INTO gallery (id, adresa, popisek, url, datum, poradi) VALUES</span>
+<a name="l00466"></a>00466 <span class="stringliteral">                                          (NULL, '{$adresa}', '{$popisek}', '{$url}', '{$datum}', {$poradi});"</span>, $error))
+<a name="l00467"></a>00467             {
+<a name="l00468"></a>00468               $navic = $this-&gt;<a class="code" href="classDynamicGallery.html#f4482a800a4604a28169bbed04bb9cc2">SyncFileWithDB</a>(); <span class="comment">//synchronizace</span>
+<a name="l00469"></a>00469 
+<a name="l00470"></a>00470               <a class="code" href="menu__funkce_8php.html#e241cf0159803673d118f68d99e6342f">$result</a> =
+<a name="l00471"></a>00471               <span class="stringliteral">"</span>
+<a name="l00472"></a>00472 <span class="stringliteral">                přídána fotka s popiskem: {$popisek}&lt;br /&gt;</span>
+<a name="l00473"></a>00473 <span class="stringliteral">                navic: {$navic}</span>
+<a name="l00474"></a>00474 <span class="stringliteral">              "</span>;
+<a name="l00475"></a>00475             }
+<a name="l00476"></a>00476               <span class="keywordflow">else</span>
+<a name="l00477"></a>00477             {
+<a name="l00478"></a>00478               $this-&gt;var-&gt;main[0]-&gt;ErrorMsg($error);
+<a name="l00479"></a>00479             }
+<a name="l00480"></a>00480 
+<a name="l00481"></a>00481             $this-&gt;var-&gt;main[0]-&gt;AutoClick(1, <span class="stringliteral">"?{$this-&gt;var-&gt;get_kam}={$this-&gt;var-&gt;adresaadminu}&amp;{$this-&gt;var-&gt;get_idmodul}={$this-&gt;idmodul}"</span>);  <span class="comment">//auto kliknuti</span>
+<a name="l00482"></a>00482           }
+<a name="l00483"></a>00483         <span class="keywordflow">break</span>;
+<a name="l00484"></a>00484 
+<a name="l00485"></a>00485         <span class="keywordflow">case</span> <span class="stringliteral">"edit"</span>:  <span class="comment">//editace skupiny</span>
+<a name="l00486"></a>00486           $id = $_GET[<span class="stringliteral">"id"</span>];  <span class="comment">//cislo sekce</span>
+<a name="l00487"></a>00487           settype($id, <span class="stringliteral">"integer"</span>);
+<a name="l00488"></a>00488 
+<a name="l00489"></a>00489           <span class="keywordflow">if</span> ($res = @$this-&gt;sqlite-&gt;query(<span class="stringliteral">"SELECT adresa, popisek, url, datum, poradi FROM gallery WHERE id={$id};"</span>, NULL, $error))
+<a name="l00490"></a>00490           {
+<a name="l00491"></a>00491             <span class="keywordflow">if</span> ($res-&gt;numRows() == 1)
+<a name="l00492"></a>00492             {
+<a name="l00493"></a>00493               $data = $res-&gt;fetchObject();
+<a name="l00494"></a>00494 
+<a name="l00495"></a>00495               <a class="code" href="menu__funkce_8php.html#e241cf0159803673d118f68d99e6342f">$result</a> =
+<a name="l00496"></a>00496               <span class="stringliteral">"</span>
+<a name="l00497"></a>00497 <span class="stringliteral">              &lt;form method=\"post\" enctype=\"multipart/form-data\"&gt;</span>
+<a name="l00498"></a>00498 <span class="stringliteral">                &lt;fieldset&gt;</span>
+<a name="l00499"></a>00499 <span class="stringliteral">                  adresa: &lt;input type=\"text\" name=\"adresa\" value=\"{$data-&gt;adresa}\" /&gt;&lt;br /&gt;</span>
+<a name="l00500"></a>00500 <span class="stringliteral">                  popisek: &lt;input type=\"text\" name=\"popisek\" value=\"{$data-&gt;popisek}\" /&gt;&lt;br /&gt;</span>
+<a name="l00501"></a>00501 <span class="stringliteral">                  &lt;img src=\"{$this-&gt;dirpath}/{$this-&gt;pathpicture}/{$this-&gt;minidir}/{$data-&gt;url}\" alt=\"{$data-&gt;popisek}\" /&gt;&lt;br /&gt;</span>
+<a name="l00502"></a>00502 <span class="stringliteral">                  obrázek: &lt;input type=\"file\" name=\"obrazek\" /&gt;&lt;br /&gt;</span>
+<a name="l00503"></a>00503 <span class="stringliteral">                  datum: &lt;input type=\"text\" name=\"datum\" value=\""</span>.date(<span class="stringliteral">"j.n.Y H:i:s"</span>, strtotime(stripslashes($data-&gt;datum))).<span class="stringliteral">"\" /&gt;&lt;br /&gt;</span>
+<a name="l00504"></a>00504 <span class="stringliteral">                  "</span>.($this-&gt;<a class="code" href="classDynamicGallery.html#3b86d084b5d5bef2ea804ed520e0ca10">ValueConfig</a>(5) &gt; 2 ? <span class="stringliteral">"poradi: &lt;input type=\"text\" name=\"poradi\" value=\"{$data-&gt;poradi}\" /&gt;&lt;br /&gt;"</span> : <span class="stringliteral">""</span>).<span class="stringliteral">"</span>
+<a name="l00505"></a>00505 <span class="stringliteral">                  &lt;input type=\"submit\" name=\"tlacitko\" value=\"Upravit obrázek\" /&gt;</span>
+<a name="l00506"></a>00506 <span class="stringliteral">                &lt;/fieldset&gt;</span>
+<a name="l00507"></a>00507 <span class="stringliteral">              &lt;/form&gt;</span>
+<a name="l00508"></a>00508 <span class="stringliteral">              "</span>;
+<a name="l00509"></a>00509 
+<a name="l00510"></a>00510               $adresa = stripslashes(htmlspecialchars($_POST[<span class="stringliteral">"adresa"</span>], ENT_QUOTES));
+<a name="l00511"></a>00511               $popisek = stripslashes(htmlspecialchars($_POST[<span class="stringliteral">"popisek"</span>], ENT_QUOTES));
+<a name="l00512"></a>00512               $datum = date(<span class="stringliteral">"Y-m-d H:i:s"</span>, strtotime(stripslashes(htmlspecialchars($_POST[<span class="stringliteral">"datum"</span>], ENT_QUOTES))));
+<a name="l00513"></a>00513               $poradi = stripslashes(htmlspecialchars($_POST[<span class="stringliteral">"poradi"</span>], ENT_QUOTES));
+<a name="l00514"></a>00514               settype($poradi, <span class="stringliteral">"integer"</span>);
+<a name="l00515"></a>00515 
+<a name="l00516"></a>00516               <span class="keywordflow">if</span> (!Empty($_FILES[<span class="stringliteral">"obrazek"</span>][<span class="stringliteral">"tmp_name"</span>]))
+<a name="l00517"></a>00517               {
+<a name="l00518"></a>00518                 $this-&gt;<a class="code" href="classDynamicGallery.html#42d5680455b153b531066b2ed5a8c5c7">ZpracujObrazek</a>($_FILES[<span class="stringliteral">"obrazek"</span>], $url);
+<a name="l00519"></a>00519               }
+<a name="l00520"></a>00520                 <span class="keywordflow">else</span>
+<a name="l00521"></a>00521               {
+<a name="l00522"></a>00522                 $url = $data-&gt;url;
+<a name="l00523"></a>00523               }
+<a name="l00524"></a>00524 
+<a name="l00525"></a>00525               <span class="keywordflow">if</span> (!Empty($_POST[<span class="stringliteral">"tlacitko"</span>]) &amp;&amp;
+<a name="l00526"></a>00526                   !Empty($adresa) &amp;&amp;
+<a name="l00527"></a>00527                   !Empty($popisek) &amp;&amp;
+<a name="l00528"></a>00528                   !Empty($datum) &amp;&amp;
+<a name="l00529"></a>00529                   $id != 0)
+<a name="l00530"></a>00530               {
+<a name="l00531"></a>00531                 <span class="keywordflow">if</span> (@$this-&gt;sqlite-&gt;queryExec(<span class="stringliteral">"UPDATE gallery SET adresa='{$adresa}',</span>
+<a name="l00532"></a>00532 <span class="stringliteral">                                                                  popisek='{$popisek}',</span>
+<a name="l00533"></a>00533 <span class="stringliteral">                                                                  url='{$url}',</span>
+<a name="l00534"></a>00534 <span class="stringliteral">                                                                  datum='{$datum}',</span>
+<a name="l00535"></a>00535 <span class="stringliteral">                                                                  poradi={$poradi}</span>
+<a name="l00536"></a>00536 <span class="stringliteral">                                                                  WHERE id={$id};"</span>, $error))
+<a name="l00537"></a>00537                 {
+<a name="l00538"></a>00538                   $navic = $this-&gt;<a class="code" href="classDynamicGallery.html#f4482a800a4604a28169bbed04bb9cc2">SyncFileWithDB</a>(); <span class="comment">//synchronizace</span>
+<a name="l00539"></a>00539 
+<a name="l00540"></a>00540                   <a class="code" href="menu__funkce_8php.html#e241cf0159803673d118f68d99e6342f">$result</a> =
+<a name="l00541"></a>00541                   <span class="stringliteral">"</span>
+<a name="l00542"></a>00542 <span class="stringliteral">                    upravena fotka s popiskem: {$popisek}&lt;br /&gt;</span>
+<a name="l00543"></a>00543 <span class="stringliteral">                    navic: {$navic}</span>
+<a name="l00544"></a>00544 <span class="stringliteral">                  "</span>;
+<a name="l00545"></a>00545                 }
+<a name="l00546"></a>00546                   <span class="keywordflow">else</span>
+<a name="l00547"></a>00547                 {
+<a name="l00548"></a>00548                   $this-&gt;var-&gt;main[0]-&gt;ErrorMsg($error);
+<a name="l00549"></a>00549                 }
+<a name="l00550"></a>00550 
+<a name="l00551"></a>00551                 $this-&gt;var-&gt;main[0]-&gt;AutoClick(1, <span class="stringliteral">"?{$this-&gt;var-&gt;get_kam}={$this-&gt;var-&gt;adresaadminu}&amp;{$this-&gt;var-&gt;get_idmodul}={$this-&gt;idmodul}"</span>);  <span class="comment">//auto kliknuti</span>
+<a name="l00552"></a>00552               }
+<a name="l00553"></a>00553             }
+<a name="l00554"></a>00554           }
+<a name="l00555"></a>00555             <span class="keywordflow">else</span>
+<a name="l00556"></a>00556           {
+<a name="l00557"></a>00557             $this-&gt;var-&gt;main[0]-&gt;ErrorMsg($error);
+<a name="l00558"></a>00558           }
+<a name="l00559"></a>00559         <span class="keywordflow">break</span>;
+<a name="l00560"></a>00560 
+<a name="l00561"></a>00561         <span class="keywordflow">case</span> <span class="stringliteral">"del"</span>: <span class="comment">//mazani skupiny</span>
+<a name="l00562"></a>00562           $id = $_GET[<span class="stringliteral">"id"</span>];  <span class="comment">//cislo sekce</span>
+<a name="l00563"></a>00563           settype($id, <span class="stringliteral">"integer"</span>);
+<a name="l00564"></a>00564 
+<a name="l00565"></a>00565           <span class="keywordflow">if</span> ($res = @$this-&gt;sqlite-&gt;query(<span class="stringliteral">"SELECT popisek, url FROM gallery WHERE id={$id};"</span>, NULL, $error))
+<a name="l00566"></a>00566           {
+<a name="l00567"></a>00567             <span class="keywordflow">if</span> ($res-&gt;numRows() == 1)
+<a name="l00568"></a>00568             {
+<a name="l00569"></a>00569               $data = $res-&gt;fetchObject();
+<a name="l00570"></a>00570 
+<a name="l00571"></a>00571               <span class="keywordflow">if</span> (@$this-&gt;sqlite-&gt;queryExec(<span class="stringliteral">"DELETE FROM gallery WHERE id={$id};"</span>, $error)) <span class="comment">//provedeni dotazu</span>
+<a name="l00572"></a>00572               {
+<a name="l00573"></a>00573                 chmod(<span class="stringliteral">"{$this-&gt;dirpath}/{$this-&gt;pathpicture}/{$this-&gt;minidir}/{$data-&gt;url}"</span>, 0777);
+<a name="l00574"></a>00574                 unlink(<span class="stringliteral">"{$this-&gt;dirpath}/{$this-&gt;pathpicture}/{$this-&gt;minidir}/{$data-&gt;url}"</span>);  <span class="comment">//odmazani fotek</span>
+<a name="l00575"></a>00575                 chmod(<span class="stringliteral">"{$this-&gt;dirpath}/{$this-&gt;pathpicture}/{$this-&gt;fulldir}/{$data-&gt;url}"</span>, 0777);
+<a name="l00576"></a>00576                 unlink(<span class="stringliteral">"{$this-&gt;dirpath}/{$this-&gt;pathpicture}/{$this-&gt;fulldir}/{$data-&gt;url}"</span>);
+<a name="l00577"></a>00577 
+<a name="l00578"></a>00578                 $navic = $this-&gt;<a class="code" href="classDynamicGallery.html#f4482a800a4604a28169bbed04bb9cc2">SyncFileWithDB</a>(); <span class="comment">//synchronizace</span>
+<a name="l00579"></a>00579 
+<a name="l00580"></a>00580                 <a class="code" href="menu__funkce_8php.html#e241cf0159803673d118f68d99e6342f">$result</a> =
+<a name="l00581"></a>00581                 <span class="stringliteral">"</span>
+<a name="l00582"></a>00582 <span class="stringliteral">                  smazána fotka s popiskem: {$data-&gt;popisek}&lt;br /&gt;</span>
+<a name="l00583"></a>00583 <span class="stringliteral">                  navic odmazano: {$navic}</span>
+<a name="l00584"></a>00584 <span class="stringliteral">                "</span>;
+<a name="l00585"></a>00585               }
+<a name="l00586"></a>00586                 <span class="keywordflow">else</span>
+<a name="l00587"></a>00587               {
+<a name="l00588"></a>00588                 $this-&gt;var-&gt;main[0]-&gt;ErrorMsg($error);
+<a name="l00589"></a>00589               }
+<a name="l00590"></a>00590 
+<a name="l00591"></a>00591               $this-&gt;var-&gt;main[0]-&gt;AutoClick(1, <span class="stringliteral">"?{$this-&gt;var-&gt;get_kam}={$this-&gt;var-&gt;adresaadminu}&amp;{$this-&gt;var-&gt;get_idmodul}={$this-&gt;idmodul}"</span>);  <span class="comment">//auto kliknuti</span>
+<a name="l00592"></a>00592             }
+<a name="l00593"></a>00593           }
+<a name="l00594"></a>00594             <span class="keywordflow">else</span>
+<a name="l00595"></a>00595           {
+<a name="l00596"></a>00596             $this-&gt;var-&gt;main[0]-&gt;ErrorMsg($error);
+<a name="l00597"></a>00597           }
+<a name="l00598"></a>00598         <span class="keywordflow">break</span>;
+<a name="l00599"></a>00599       }
+<a name="l00600"></a>00600     }
+<a name="l00601"></a>00601 
+<a name="l00602"></a>00602     <span class="keywordflow">return</span> <a class="code" href="menu__funkce_8php.html#e241cf0159803673d118f68d99e6342f">$result</a>;
+<a name="l00603"></a>00603   }
+<a name="l00604"></a>00604 
+<a name="l00610"></a><a class="code" href="classDynamicGallery.html#f4482a800a4604a28169bbed04bb9cc2">00610</a>   <span class="keyword">private</span> function <a class="code" href="classDynamicGallery.html#f4482a800a4604a28169bbed04bb9cc2">SyncFileWithDB</a>()
+<a name="l00611"></a>00611   {
+<a name="l00612"></a>00612     <span class="keywordflow">if</span> ($res = @$this-&gt;sqlite-&gt;query(<span class="stringliteral">"SELECT url FROM gallery;"</span>, NULL, $error))
+<a name="l00613"></a>00613     {
+<a name="l00614"></a>00614       <span class="keywordflow">if</span> ($res-&gt;numRows() != 0)
+<a name="l00615"></a>00615       {
+<a name="l00616"></a>00616         $i = 0;
+<a name="l00617"></a>00617         <span class="keywordflow">while</span> ($data = $res-&gt;fetchObject())
+<a name="l00618"></a>00618         {
+<a name="l00619"></a>00619           $databaze[$i] = $data-&gt;url;
+<a name="l00620"></a>00620           $i++;
+<a name="l00621"></a>00621         }
+<a name="l00622"></a>00622       }
+<a name="l00623"></a>00623     }
+<a name="l00624"></a>00624       <span class="keywordflow">else</span>
+<a name="l00625"></a>00625     {
+<a name="l00626"></a>00626       $this-&gt;var-&gt;main[0]-&gt;ErrorMsg($error);
+<a name="l00627"></a>00627     }
+<a name="l00628"></a>00628 
+<a name="l00629"></a>00629     $j = 0;
+<a name="l00630"></a>00630     <a class="code" href="funkce_8php.html#d901d3e10488968f669241e89dc9e6e2">$cesta</a> = <span class="stringliteral">"{$this-&gt;dirpath}/{$this-&gt;pathpicture}/{$this-&gt;minidir}"</span>;  <span class="comment">//projiti miniatur</span>
+<a name="l00631"></a>00631     $handle = opendir(<a class="code" href="funkce_8php.html#d901d3e10488968f669241e89dc9e6e2">$cesta</a>);
+<a name="l00632"></a>00632     <span class="keywordflow">while</span>($soub = readdir($handle))
+<a name="l00633"></a>00633     {
+<a name="l00634"></a>00634       <span class="keywordflow">if</span> ($soub != <span class="stringliteral">"."</span> &amp;&amp; $soub != <span class="stringliteral">".."</span> &amp;&amp; filetype(<span class="stringliteral">"{$cesta}/{$soub}"</span>) == <span class="stringliteral">"file"</span>)
+<a name="l00635"></a>00635       {
+<a name="l00636"></a>00636         $mini[$j] = $soub;  <span class="comment">//nacitani souboru</span>
+<a name="l00637"></a>00637         $j++;
+<a name="l00638"></a>00638       }
+<a name="l00639"></a>00639     }
+<a name="l00640"></a>00640     closedir($handle);
+<a name="l00641"></a>00641 
+<a name="l00642"></a>00642     $j = 0;
+<a name="l00643"></a>00643     <a class="code" href="funkce_8php.html#d901d3e10488968f669241e89dc9e6e2">$cesta</a> = <span class="stringliteral">"{$this-&gt;dirpath}/{$this-&gt;pathpicture}/{$this-&gt;fulldir}"</span>;  <span class="comment">//projiti plnych velikosti</span>
+<a name="l00644"></a>00644     $handle = opendir(<a class="code" href="funkce_8php.html#d901d3e10488968f669241e89dc9e6e2">$cesta</a>);
+<a name="l00645"></a>00645     <span class="keywordflow">while</span>($soub = readdir($handle))
+<a name="l00646"></a>00646     {
+<a name="l00647"></a>00647       <span class="keywordflow">if</span> ($soub != <span class="stringliteral">"."</span> &amp;&amp; $soub != <span class="stringliteral">".."</span> &amp;&amp; filetype(<span class="stringliteral">"{$cesta}/{$soub}"</span>) == <span class="stringliteral">"file"</span>)
+<a name="l00648"></a>00648       {
+<a name="l00649"></a>00649         $full[$j] = $soub;  <span class="comment">//nacitani souboru</span>
+<a name="l00650"></a>00650         $j++;
+<a name="l00651"></a>00651       }
+<a name="l00652"></a>00652     }
+<a name="l00653"></a>00653     closedir($handle);
+<a name="l00654"></a>00654 
+<a name="l00655"></a>00655     $pocet1 = 0;
+<a name="l00656"></a>00656     <span class="keywordflow">if</span> (count($databaze) != 0 &amp;&amp;  <span class="comment">//mini</span>
+<a name="l00657"></a>00657         count($mini) != 0)
+<a name="l00658"></a>00658     {
+<a name="l00659"></a>00659       $diff = array_diff($mini, $databaze); <span class="comment">//vyhozeni rozdilu</span>
+<a name="l00660"></a>00660       $diff = array_values($diff);  <span class="comment">//oprava indexu</span>
+<a name="l00661"></a>00661       $pocet1 = count($diff);
+<a name="l00662"></a>00662 
+<a name="l00663"></a>00663       <span class="keywordflow">for</span> ($i = 0; $i &lt; $pocet1; $i++)
+<a name="l00664"></a>00664       {
+<a name="l00665"></a>00665         chmod(<span class="stringliteral">"{$this-&gt;dirpath}/{$this-&gt;pathpicture}/{$this-&gt;minidir}/{$diff[$i]}"</span>, 0777);
+<a name="l00666"></a>00666         unlink(<span class="stringliteral">"{$this-&gt;dirpath}/{$this-&gt;pathpicture}/{$this-&gt;minidir}/{$diff[$i]}"</span>);
+<a name="l00667"></a>00667       }
+<a name="l00668"></a>00668     }
+<a name="l00669"></a>00669 
+<a name="l00670"></a>00670     $pocet2 = 0;
+<a name="l00671"></a>00671     <span class="keywordflow">if</span> (count($databaze) != 0 &amp;&amp;  <span class="comment">//full</span>
+<a name="l00672"></a>00672         count($full) != 0)
+<a name="l00673"></a>00673     {
+<a name="l00674"></a>00674       $diff = array_diff($full, $databaze); <span class="comment">//vyhozeni rozdilu</span>
+<a name="l00675"></a>00675       $diff = array_values($diff);  <span class="comment">//oprava indexu</span>
+<a name="l00676"></a>00676       $pocet2 = count($diff);
+<a name="l00677"></a>00677 
+<a name="l00678"></a>00678       <span class="keywordflow">for</span> ($i = 0; $i &lt; $pocet2; $i++)
+<a name="l00679"></a>00679       {
+<a name="l00680"></a>00680         chmod(<span class="stringliteral">"{$this-&gt;dirpath}/{$this-&gt;pathpicture}/{$this-&gt;fulldir}/{$diff[$i]}"</span>, 0777);
+<a name="l00681"></a>00681         unlink(<span class="stringliteral">"{$this-&gt;dirpath}/{$this-&gt;pathpicture}/{$this-&gt;fulldir}/{$diff[$i]}"</span>);
+<a name="l00682"></a>00682       }
+<a name="l00683"></a>00683     }
+<a name="l00684"></a>00684 
+<a name="l00685"></a>00685     <a class="code" href="menu__funkce_8php.html#e241cf0159803673d118f68d99e6342f">$result</a> = $pocet1 + $pocet2;
+<a name="l00686"></a>00686 
+<a name="l00687"></a>00687     <span class="keywordflow">return</span> <a class="code" href="menu__funkce_8php.html#e241cf0159803673d118f68d99e6342f">$result</a>;
+<a name="l00688"></a>00688   }
+<a name="l00689"></a>00689 
+<a name="l00698"></a><a class="code" href="classDynamicGallery.html#42d5680455b153b531066b2ed5a8c5c7">00698</a>   <span class="keyword">private</span> function <a class="code" href="classDynamicGallery.html#42d5680455b153b531066b2ed5a8c5c7">ZpracujObrazek</a>($tmp, &amp;$obrazek)
+<a name="l00699"></a>00699   {
+<a name="l00700"></a>00700     list($old_w, $old_h) = getimagesize($tmp[<span class="stringliteral">"tmp_name"</span>]);
+<a name="l00701"></a>00701     <a class="code" href="menu__funkce_8php.html#e241cf0159803673d118f68d99e6342f">$result</a> = <span class="keyword">true</span>;
+<a name="l00702"></a>00702 
+<a name="l00703"></a>00703     <span class="comment">//mini obr</span>
+<a name="l00704"></a>00704     <span class="keywordflow">if</span> ($this-&gt;<a class="code" href="classDynamicGallery.html#3b86d084b5d5bef2ea804ed520e0ca10">ValueConfig</a>(0) != 0 &amp;&amp; <span class="comment">//pevna velikost</span>
+<a name="l00705"></a>00705         $this-&gt;<a class="code" href="classDynamicGallery.html#3b86d084b5d5bef2ea804ed520e0ca10">ValueConfig</a>(1) != 0)
+<a name="l00706"></a>00706     {
+<a name="l00707"></a>00707       <span class="keywordflow">if</span> ($old_w &lt;= $this-&gt;<a class="code" href="classDynamicGallery.html#3b86d084b5d5bef2ea804ed520e0ca10">ValueConfig</a>(0) &amp;&amp;
+<a name="l00708"></a>00708           $old_h &lt;= $this-&gt;<a class="code" href="classDynamicGallery.html#3b86d084b5d5bef2ea804ed520e0ca10">ValueConfig</a>(1))
+<a name="l00709"></a>00709       {
+<a name="l00710"></a>00710         $new_w = $old_w;  <span class="comment">//zanechava</span>
+<a name="l00711"></a>00711         $new_h = $old_h;
+<a name="l00712"></a>00712       }
+<a name="l00713"></a>00713         <span class="keywordflow">else</span>
+<a name="l00714"></a>00714       {
+<a name="l00715"></a>00715         $new_w = $this-&gt;<a class="code" href="classDynamicGallery.html#3b86d084b5d5bef2ea804ed520e0ca10">ValueConfig</a>(0); <span class="comment">//zmensuje</span>
+<a name="l00716"></a>00716         $new_h = $this-&gt;<a class="code" href="classDynamicGallery.html#3b86d084b5d5bef2ea804ed520e0ca10">ValueConfig</a>(1);
+<a name="l00717"></a>00717       }
+<a name="l00718"></a>00718     }
+<a name="l00719"></a>00719       <span class="keywordflow">else</span>
+<a name="l00720"></a>00720     <span class="keywordflow">if</span> ($this-&gt;<a class="code" href="classDynamicGallery.html#3b86d084b5d5bef2ea804ed520e0ca10">ValueConfig</a>(1) == 0) <span class="comment">//auto dopocitavani vysky</span>
+<a name="l00721"></a>00721     {
+<a name="l00722"></a>00722       <span class="keywordflow">if</span> ($old_w &lt;= $this-&gt;<a class="code" href="classDynamicGallery.html#3b86d084b5d5bef2ea804ed520e0ca10">ValueConfig</a>(0))
+<a name="l00723"></a>00723       {
+<a name="l00724"></a>00724         $new_w = $old_w;  <span class="comment">//zanechava</span>
+<a name="l00725"></a>00725         $new_h = $old_h;
+<a name="l00726"></a>00726       }
+<a name="l00727"></a>00727         <span class="keywordflow">else</span>
+<a name="l00728"></a>00728       {
+<a name="l00729"></a>00729         $new_w = $this-&gt;<a class="code" href="classDynamicGallery.html#3b86d084b5d5bef2ea804ed520e0ca10">ValueConfig</a>(0); <span class="comment">//zmensuje</span>
+<a name="l00730"></a>00730         $new_h = round($old_h / ($old_w / $this-&gt;<a class="code" href="classDynamicGallery.html#3b86d084b5d5bef2ea804ed520e0ca10">ValueConfig</a>(0)));
+<a name="l00731"></a>00731       }
+<a name="l00732"></a>00732     }
+<a name="l00733"></a>00733       <span class="keywordflow">else</span>
+<a name="l00734"></a>00734     <span class="keywordflow">if</span> ($this-&gt;<a class="code" href="classDynamicGallery.html#3b86d084b5d5bef2ea804ed520e0ca10">ValueConfig</a>(0) == 0) <span class="comment">//auto dopocitavani sirky</span>
+<a name="l00735"></a>00735     {
+<a name="l00736"></a>00736       <span class="keywordflow">if</span> ($old_w &lt;= $this-&gt;<a class="code" href="classDynamicGallery.html#3b86d084b5d5bef2ea804ed520e0ca10">ValueConfig</a>(1))
+<a name="l00737"></a>00737       {
+<a name="l00738"></a>00738         $new_w = $old_w;  <span class="comment">//zanechava</span>
+<a name="l00739"></a>00739         $new_h = $old_h;
+<a name="l00740"></a>00740       }
+<a name="l00741"></a>00741         <span class="keywordflow">else</span>
+<a name="l00742"></a>00742       {
+<a name="l00743"></a>00743         $new_w = round($old_w / ($old_h / $this-&gt;<a class="code" href="classDynamicGallery.html#3b86d084b5d5bef2ea804ed520e0ca10">ValueConfig</a>(1))); <span class="comment">//zmensuje</span>
+<a name="l00744"></a>00744         $new_h = $this-&gt;<a class="code" href="classDynamicGallery.html#3b86d084b5d5bef2ea804ed520e0ca10">ValueConfig</a>(1);
+<a name="l00745"></a>00745       }
+<a name="l00746"></a>00746     }
+<a name="l00747"></a>00747       <span class="keywordflow">else</span>
+<a name="l00748"></a>00748     {
+<a name="l00749"></a>00749       <a class="code" href="menu__funkce_8php.html#e241cf0159803673d118f68d99e6342f">$result</a> = <span class="keyword">false</span>;
+<a name="l00750"></a>00750     }
+<a name="l00751"></a>00751 
+<a name="l00752"></a>00752     <span class="comment">//full obr</span>
+<a name="l00753"></a>00753     <span class="keywordflow">if</span> ($this-&gt;<a class="code" href="classDynamicGallery.html#3b86d084b5d5bef2ea804ed520e0ca10">ValueConfig</a>(2) == 0 &amp;&amp; <span class="comment">//pevna velikost</span>
+<a name="l00754"></a>00754         $this-&gt;<a class="code" href="classDynamicGallery.html#3b86d084b5d5bef2ea804ed520e0ca10">ValueConfig</a>(3) == 0)
+<a name="l00755"></a>00755     {
+<a name="l00756"></a>00756       $new_w_obr = $old_w;  <span class="comment">//zanechava</span>
+<a name="l00757"></a>00757       $new_h_obr = $old_h;
+<a name="l00758"></a>00758     }
+<a name="l00759"></a>00759       <span class="keywordflow">else</span>
+<a name="l00760"></a>00760     <span class="keywordflow">if</span> ($this-&gt;<a class="code" href="classDynamicGallery.html#3b86d084b5d5bef2ea804ed520e0ca10">ValueConfig</a>(2) != 0 &amp;&amp; <span class="comment">//pevna velikost</span>
+<a name="l00761"></a>00761         $this-&gt;<a class="code" href="classDynamicGallery.html#3b86d084b5d5bef2ea804ed520e0ca10">ValueConfig</a>(3) != 0)
+<a name="l00762"></a>00762     {
+<a name="l00763"></a>00763       <span class="keywordflow">if</span> ($old_w &lt;= $this-&gt;<a class="code" href="classDynamicGallery.html#3b86d084b5d5bef2ea804ed520e0ca10">ValueConfig</a>(2) &amp;&amp;
+<a name="l00764"></a>00764           $old_h &lt;= $this-&gt;<a class="code" href="classDynamicGallery.html#3b86d084b5d5bef2ea804ed520e0ca10">ValueConfig</a>(3))
+<a name="l00765"></a>00765       {
+<a name="l00766"></a>00766         $new_w_obr = $old_w;  <span class="comment">//zanechava</span>
+<a name="l00767"></a>00767         $new_h_obr = $old_h;
+<a name="l00768"></a>00768       }
+<a name="l00769"></a>00769         <span class="keywordflow">else</span>
+<a name="l00770"></a>00770       {
+<a name="l00771"></a>00771         $new_w_obr = $this-&gt;<a class="code" href="classDynamicGallery.html#3b86d084b5d5bef2ea804ed520e0ca10">ValueConfig</a>(2); <span class="comment">//zmensuje</span>
+<a name="l00772"></a>00772         $new_h_obr = $this-&gt;<a class="code" href="classDynamicGallery.html#3b86d084b5d5bef2ea804ed520e0ca10">ValueConfig</a>(3);
+<a name="l00773"></a>00773       }
+<a name="l00774"></a>00774     }
+<a name="l00775"></a>00775       <span class="keywordflow">else</span>
+<a name="l00776"></a>00776     <span class="keywordflow">if</span> ($this-&gt;<a class="code" href="classDynamicGallery.html#3b86d084b5d5bef2ea804ed520e0ca10">ValueConfig</a>(3) == 0) <span class="comment">//auto dopocitavani vysky</span>
+<a name="l00777"></a>00777     {
+<a name="l00778"></a>00778       <span class="keywordflow">if</span> ($old_w &lt;= $this-&gt;<a class="code" href="classDynamicGallery.html#3b86d084b5d5bef2ea804ed520e0ca10">ValueConfig</a>(2))
+<a name="l00779"></a>00779       {
+<a name="l00780"></a>00780         $new_w_obr = $old_w;  <span class="comment">//zanechava</span>
+<a name="l00781"></a>00781         $new_h_obr = $old_h;
+<a name="l00782"></a>00782       }
+<a name="l00783"></a>00783         <span class="keywordflow">else</span>
+<a name="l00784"></a>00784       {
+<a name="l00785"></a>00785         $new_w_obr = $this-&gt;<a class="code" href="classDynamicGallery.html#3b86d084b5d5bef2ea804ed520e0ca10">ValueConfig</a>(2); <span class="comment">//zmensuje</span>
+<a name="l00786"></a>00786         $new_h_obr = round($old_h / ($old_w / $this-&gt;<a class="code" href="classDynamicGallery.html#3b86d084b5d5bef2ea804ed520e0ca10">ValueConfig</a>(2)));
+<a name="l00787"></a>00787       }
+<a name="l00788"></a>00788     }
+<a name="l00789"></a>00789       <span class="keywordflow">else</span>
+<a name="l00790"></a>00790     <span class="keywordflow">if</span> ($this-&gt;<a class="code" href="classDynamicGallery.html#3b86d084b5d5bef2ea804ed520e0ca10">ValueConfig</a>(2) == 0) <span class="comment">//auto dopocitavani sirky</span>
+<a name="l00791"></a>00791     {
+<a name="l00792"></a>00792       <span class="keywordflow">if</span> ($old_w &lt;= $this-&gt;<a class="code" href="classDynamicGallery.html#3b86d084b5d5bef2ea804ed520e0ca10">ValueConfig</a>(3))
+<a name="l00793"></a>00793       {
+<a name="l00794"></a>00794         $new_w_obr = $old_w;  <span class="comment">//zanechava</span>
+<a name="l00795"></a>00795         $new_h_obr = $old_h;
+<a name="l00796"></a>00796       }
+<a name="l00797"></a>00797         <span class="keywordflow">else</span>
+<a name="l00798"></a>00798       {
+<a name="l00799"></a>00799         $new_w_obr = round($old_w / ($old_h / $this-&gt;<a class="code" href="classDynamicGallery.html#3b86d084b5d5bef2ea804ed520e0ca10">ValueConfig</a>(3))); <span class="comment">//zmensuje</span>
+<a name="l00800"></a>00800         $new_h_obr = $this-&gt;<a class="code" href="classDynamicGallery.html#3b86d084b5d5bef2ea804ed520e0ca10">ValueConfig</a>(3);
+<a name="l00801"></a>00801       }
+<a name="l00802"></a>00802     }
+<a name="l00803"></a>00803       <span class="keywordflow">else</span>
+<a name="l00804"></a>00804     {
+<a name="l00805"></a>00805       <a class="code" href="menu__funkce_8php.html#e241cf0159803673d118f68d99e6342f">$result</a> = <span class="keyword">false</span>;
+<a name="l00806"></a>00806     }
+<a name="l00807"></a>00807 
+<a name="l00808"></a>00808     <span class="keywordflow">if</span> (($this-&gt;<a class="code" href="classDynamicGallery.html#3b86d084b5d5bef2ea804ed520e0ca10">ValueConfig</a>(4) != 0 ? $tmp[<span class="stringliteral">"size"</span>] &lt; (1024 * 1024 * $this-&gt;<a class="code" href="classDynamicGallery.html#3b86d084b5d5bef2ea804ed520e0ca10">ValueConfig</a>(4)) : <span class="keyword">true</span>) &amp;&amp; <span class="comment">//je-li nastaven limit omezuje jinak pousti</span>
+<a name="l00809"></a>00809         <a class="code" href="menu__funkce_8php.html#e241cf0159803673d118f68d99e6342f">$result</a>)
+<a name="l00810"></a>00810     {
+<a name="l00811"></a>00811       $nazev = $this-&gt;<a class="code" href="classDynamicGallery.html#bf081976c5700aebbda76e2dd02940d7">VytvorJmenoObrazku</a>();
+<a name="l00812"></a>00812 
+<a name="l00813"></a>00813       <span class="keywordflow">switch</span> ($tmp[<span class="stringliteral">"type"</span>])
+<a name="l00814"></a>00814       {
+<a name="l00815"></a>00815         <span class="keywordflow">case</span> <span class="stringliteral">"image/jpeg"</span>:
+<a name="l00816"></a>00816           $img_old = imagecreatefromjpeg($tmp[<span class="stringliteral">"tmp_name"</span>]);
+<a name="l00817"></a>00817           $pripona = <span class="stringliteral">"jpg"</span>;
+<a name="l00818"></a>00818 
+<a name="l00819"></a>00819           $img_new = imagecreatetruecolor($new_w, $new_h);  <span class="comment">//mini</span>
+<a name="l00820"></a>00820           imagecopyresampled($img_new, $img_old, 0, 0, 0, 0, $new_w, $new_h, $old_w, $old_h);
+<a name="l00821"></a>00821           imagejpeg($img_new, <span class="stringliteral">"{$this-&gt;dirpath}/{$this-&gt;pathpicture}/{$this-&gt;minidir}/{$nazev}.{$pripona}"</span>, 100);
+<a name="l00822"></a>00822           imagedestroy($img_new);
+<a name="l00823"></a>00823 
+<a name="l00824"></a>00824           $img_new = imagecreatetruecolor($new_w_obr, $new_h_obr);  <span class="comment">//full</span>
+<a name="l00825"></a>00825           imagecopyresampled($img_new, $img_old, 0, 0, 0, 0, $new_w_obr, $new_h_obr, $old_w, $old_h);
+<a name="l00826"></a>00826           imagejpeg($img_new, <span class="stringliteral">"{$this-&gt;dirpath}/{$this-&gt;pathpicture}/{$this-&gt;fulldir}/{$nazev}.{$pripona}"</span>, 100);
+<a name="l00827"></a>00827           imagedestroy($img_new);
+<a name="l00828"></a>00828         <span class="keywordflow">break</span>;
+<a name="l00829"></a>00829 
+<a name="l00830"></a>00830         <span class="keywordflow">case</span> <span class="stringliteral">"image/png"</span>:
+<a name="l00831"></a>00831           $img_old = imagecreatefrompng($tmp[<span class="stringliteral">"tmp_name"</span>]);
+<a name="l00832"></a>00832           $pripona = <span class="stringliteral">"png"</span>;
+<a name="l00833"></a>00833 
+<a name="l00834"></a>00834           $img_new = imagecreatetruecolor($new_w, $new_h);  <span class="comment">//mini</span>
+<a name="l00835"></a>00835           imagecopyresampled($img_new, $img_old, 0, 0, 0, 0, $new_w, $new_h, $old_w, $old_h);
+<a name="l00836"></a>00836           imagepng($img_new, <span class="stringliteral">"{$this-&gt;dirpath}/{$this-&gt;pathpicture}/{$this-&gt;minidir}/{$nazev}.{$pripona}"</span>);
+<a name="l00837"></a>00837           imagedestroy($img_new);
+<a name="l00838"></a>00838 
+<a name="l00839"></a>00839           $img_new = imagecreatetruecolor($new_w_obr, $new_h_obr);  <span class="comment">//full</span>
+<a name="l00840"></a>00840           imagecopyresampled($img_new, $img_old, 0, 0, 0, 0, $new_w_obr, $new_h_obr, $old_w, $old_h);
+<a name="l00841"></a>00841           imagepng($img_new, <span class="stringliteral">"{$this-&gt;dirpath}/{$this-&gt;pathpicture}/{$this-&gt;fulldir}/{$nazev}.{$pripona}"</span>);
+<a name="l00842"></a>00842           imagedestroy($img_new);
+<a name="l00843"></a>00843         <span class="keywordflow">break</span>;
+<a name="l00844"></a>00844 
+<a name="l00845"></a>00845         <span class="keywordflow">default</span>:
+<a name="l00846"></a>00846           <a class="code" href="menu__funkce_8php.html#e241cf0159803673d118f68d99e6342f">$result</a> = <span class="keyword">false</span>;
+<a name="l00847"></a>00847         <span class="keywordflow">break</span>;
+<a name="l00848"></a>00848       }
+<a name="l00849"></a>00849 
+<a name="l00850"></a>00850       $obrazek = <span class="stringliteral">"{$nazev}.{$pripona}"</span>;
+<a name="l00851"></a>00851     }
+<a name="l00852"></a>00852       <span class="keywordflow">else</span>
+<a name="l00853"></a>00853     {
+<a name="l00854"></a>00854       <a class="code" href="menu__funkce_8php.html#e241cf0159803673d118f68d99e6342f">$result</a> = <span class="keyword">false</span>;
+<a name="l00855"></a>00855     }
+<a name="l00856"></a>00856 
+<a name="l00857"></a>00857     <span class="keywordflow">return</span> <a class="code" href="menu__funkce_8php.html#e241cf0159803673d118f68d99e6342f">$result</a>;
+<a name="l00858"></a>00858   }
+<a name="l00859"></a>00859 
+<a name="l00866"></a><a class="code" href="classDynamicGallery.html#bf081976c5700aebbda76e2dd02940d7">00866</a>   <span class="keyword">private</span> function <a class="code" href="classDynamicGallery.html#bf081976c5700aebbda76e2dd02940d7">VytvorJmenoObrazku</a>()
+<a name="l00867"></a>00867   {
+<a name="l00868"></a>00868     $nahoda = <span class="stringliteral">""</span>;
+<a name="l00869"></a>00869     <span class="keywordflow">for</span> ($i = 0; $i &lt; 5; $i++)
+<a name="l00870"></a>00870     {
+<a name="l00871"></a>00871       $nahoda .= rand(10, 5000);
+<a name="l00872"></a>00872     }
+<a name="l00873"></a>00873 
+<a name="l00874"></a>00874     <a class="code" href="menu__funkce_8php.html#e241cf0159803673d118f68d99e6342f">$result</a> = <span class="stringliteral">"{$nahoda}__"</span>.date(<span class="stringliteral">"j_n_Y-H_i_s"</span>);
+<a name="l00875"></a>00875 
+<a name="l00876"></a>00876     <span class="keywordflow">return</span> <a class="code" href="menu__funkce_8php.html#e241cf0159803673d118f68d99e6342f">$result</a>;
+<a name="l00877"></a>00877   }
+<a name="l00878"></a>00878 
+<a name="l00885"></a><a class="code" href="classDynamicGallery.html#3ab4e966ff1fb418f025ece13c5f4e7f">00885</a>   <span class="keyword">private</span> function <a class="code" href="classDynamicGallery.html#3ab4e966ff1fb418f025ece13c5f4e7f">AdminVypisGallery</a>()
+<a name="l00886"></a>00886   {
+<a name="l00887"></a>00887     <a class="code" href="menu__funkce_8php.html#e241cf0159803673d118f68d99e6342f">$result</a> = <span class="stringliteral">""</span>;
+<a name="l00888"></a>00888     <span class="comment">//vypis obrazku</span>
+<a name="l00889"></a>00889     <span class="keywordflow">if</span> ($res = @$this-&gt;sqlite-&gt;query(<span class="stringliteral">"SELECT id,</span>
+<a name="l00890"></a>00890 <span class="stringliteral">                                      adresa,</span>
+<a name="l00891"></a>00891 <span class="stringliteral">                                      popisek,</span>
+<a name="l00892"></a>00892 <span class="stringliteral">                                      url,</span>
+<a name="l00893"></a>00893 <span class="stringliteral">                                      datum,</span>
+<a name="l00894"></a>00894 <span class="stringliteral">                                      poradi</span>
+<a name="l00895"></a>00895 <span class="stringliteral">                                      FROM gallery</span>
+<a name="l00896"></a>00896 <span class="stringliteral">                                      ORDER BY LOWER(adresa) ASC, poradi ASC;"</span>, NULL, $error))
+<a name="l00897"></a>00897     {
+<a name="l00898"></a>00898       <span class="keywordflow">if</span> ($res-&gt;numRows() != 0)
+<a name="l00899"></a>00899       {
+<a name="l00900"></a>00900         <span class="keywordflow">while</span> ($data = $res-&gt;fetchObject())
+<a name="l00901"></a>00901         {
+<a name="l00902"></a>00902           $datum = date(<span class="stringliteral">"j.n. Y H:i:s"</span>, strtotime($data-&gt;datum));
+<a name="l00903"></a>00903 
+<a name="l00904"></a>00904           <a class="code" href="menu__funkce_8php.html#e241cf0159803673d118f68d99e6342f">$result</a> .=
+<a name="l00905"></a>00905           <span class="stringliteral">"({$data-&gt;id}) '{$datum}'</span>
+<a name="l00906"></a>00906 <span class="stringliteral">          &lt;p&gt;</span>
+<a name="l00907"></a>00907 <span class="stringliteral">            adresa: {$data-&gt;adresa}&lt;br /&gt;</span>
+<a name="l00908"></a>00908 <span class="stringliteral">            {$data-&gt;popisek}&lt;br /&gt;</span>
+<a name="l00909"></a>00909 <span class="stringliteral">            poradi: {$data-&gt;poradi}</span>
+<a name="l00910"></a>00910 <span class="stringliteral">          &lt;/p&gt;</span>
+<a name="l00911"></a>00911 <span class="stringliteral">          &lt;a href=\"{$this-&gt;dirpath}/{$this-&gt;pathpicture}/{$this-&gt;fulldir}/{$data-&gt;url}\" title=\"{$data-&gt;popisek}\"&gt;&lt;img src=\"{$this-&gt;dirpath}/{$this-&gt;pathpicture}/{$this-&gt;minidir}/{$data-&gt;url}\" alt=\"{$data-&gt;popisek}\" /&gt;&lt;/a&gt;&lt;br /&gt;</span>
+<a name="l00912"></a>00912 <span class="stringliteral">          &lt;a href=\"?{$this-&gt;var-&gt;get_kam}={$this-&gt;var-&gt;adresaadminu}&amp;amp;{$this-&gt;var-&gt;get_idmodul}={$this-&gt;idmodul}&amp;amp;co=edit&amp;amp;id={$data-&gt;id}\" title=\"\"&gt;upravit obrazek&lt;/a&gt;</span>
+<a name="l00913"></a>00913 <span class="stringliteral">          &lt;a href=\"?{$this-&gt;var-&gt;get_kam}={$this-&gt;var-&gt;adresaadminu}&amp;amp;{$this-&gt;var-&gt;get_idmodul}={$this-&gt;idmodul}&amp;amp;co=del&amp;amp;id={$data-&gt;id}\" title=\"\" onclick=\"return confirm('Opravdu smazat: \'{$data-&gt;popisek}\' ?');\"&gt;smazat obsah&lt;/a&gt; &lt;br /&gt;</span>
+<a name="l00914"></a>00914 <span class="stringliteral">          "</span>;
+<a name="l00915"></a>00915         }
+<a name="l00916"></a>00916       }
+<a name="l00917"></a>00917     }
+<a name="l00918"></a>00918       <span class="keywordflow">else</span>
+<a name="l00919"></a>00919     {
+<a name="l00920"></a>00920       $this-&gt;var-&gt;main[0]-&gt;ErrorMsg($error);
+<a name="l00921"></a>00921     }
+<a name="l00922"></a>00922 
+<a name="l00923"></a>00923     <span class="keywordflow">return</span> <a class="code" href="menu__funkce_8php.html#e241cf0159803673d118f68d99e6342f">$result</a>;
+<a name="l00924"></a>00924   }
+<a name="l00925"></a>00925 }
+<a name="l00926"></a>00926 ?&gt;
+</pre></div></div>
+<hr size="1"><address style="text-align: right;"><small>Generováno Thu May 14 01:12:34 2009 pro projekt Novy vychozi PHP layout programem&nbsp;
+<a href="http://www.doxygen.org/index.html">
+<img src="doxygen.png" alt="doxygen" align="middle" border="0"></a> 1.5.8 </small></address>
+</body>
+</html>

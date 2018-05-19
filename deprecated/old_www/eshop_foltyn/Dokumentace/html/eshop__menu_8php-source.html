@@ -1,0 +1,675 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>Eshop postaveny na PHP layoutu: Zdrojový soubor /var/www/eshop_foltyn/modules/dynamicke_eshop_menu_foltyn/eshop_menu.php</title>
+<link href="doxygen.css" rel="stylesheet" type="text/css">
+<link href="tabs.css" rel="stylesheet" type="text/css">
+</head><body>
+<!-- Generováno programem Doxygen 1.5.5 -->
+<div class="navigation" id="top">
+  <div class="tabs">
+    <ul>
+      <li><a href="index.html"><span>Hlavní&nbsp;stránka</span></a></li>
+      <li><a href="annotated.html"><span>Třídy</span></a></li>
+      <li class="current"><a href="files.html"><span>Soubory</span></a></li>
+    </ul>
+  </div>
+<h1>/var/www/eshop_foltyn/modules/dynamicke_eshop_menu_foltyn/eshop_menu.php</h1><a href="eshop__menu_8php.html">Zobrazit dokumentaci tohoto souboru.</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 &lt;?php
+<a name="l00002"></a>00002 
+<a name="l00017"></a><a class="code" href="classDynamicEshopMenu.html">00017</a> <span class="keyword">class </span><a class="code" href="classDynamicEshopMenu.html">DynamicEshopMenu</a>
+<a name="l00018"></a>00018 {
+<a name="l00019"></a><a class="code" href="classDynamicEshopMenu.html#2ca9f5cc461f6cb7735b61808d6c7867">00019</a>   <span class="keyword">private</span> <a class="code" href="classDynamicEshopMenu.html#2ca9f5cc461f6cb7735b61808d6c7867">$var</a>;
+<a name="l00020"></a><a class="code" href="classDynamicEshopMenu.html#04875f32dbd1771e973a91e3c0668476">00020</a>   <span class="keyword">private</span> <a class="code" href="classDynamicEshopMenu.html#04875f32dbd1771e973a91e3c0668476">$sqlite</a>;
+<a name="l00021"></a><a class="code" href="classDynamicEshopMenu.html#849317d6caf487f98964bfee21dc4a38">00021</a>   <span class="keyword">private</span> <a class="code" href="classDynamicEshopMenu.html#849317d6caf487f98964bfee21dc4a38">$dbname</a>;<span class="comment">// = ".dbdyneshmenu.sqlite2";</span>
+<a name="l00022"></a><a class="code" href="classDynamicEshopMenu.html#a64734fc02c40fce87a44328c59ac5a3">00022</a>   <span class="keyword">private</span> <a class="code" href="classDynamicEshopMenu.html#a64734fc02c40fce87a44328c59ac5a3">$idmodul</a> = <span class="stringliteral">"eshopmenu"</span>;
+<a name="l00023"></a><a class="code" href="classDynamicEshopMenu.html#f0a3fef07091ed2dffd82a99f502efca">00023</a>   <span class="keyword">private</span> <a class="code" href="classDynamicEshopMenu.html#f0a3fef07091ed2dffd82a99f502efca">$dirpath</a>;
+<a name="l00024"></a><a class="code" href="classDynamicEshopMenu.html#f28433effb834917f9bc45af7976822b">00024</a>   <span class="keyword">private</span> <a class="code" href="classDynamicEshopMenu.html#f28433effb834917f9bc45af7976822b">$oddtit</a> = <span class="stringliteral">"/"</span>;  <span class="comment">//odelovaci znak v title</span>
+<a name="l00025"></a>00025 
+<a name="l00026"></a><a class="code" href="classDynamicEshopMenu.html#f154acf5b4beaf19b71f645c27e9dd30">00026</a>   <span class="keyword">private</span> <a class="code" href="classDynamicEshopMenu.html#f154acf5b4beaf19b71f645c27e9dd30">$nazevblok</a> = <span class="stringliteral">"buy"</span>;
+<a name="l00027"></a><a class="code" href="classDynamicEshopMenu.html#ecea66cdcb297e61aff29302a4d5f493">00027</a>   <span class="keyword">private</span> <a class="code" href="classDynamicEshopMenu.html#ecea66cdcb297e61aff29302a4d5f493">$blokurl</a> = array (<span class="stringliteral">"show"</span>,
+<a name="l00028"></a>00028                             <span class="stringliteral">"add"</span>,
+<a name="l00029"></a>00029                             <span class="stringliteral">"krok"</span>);
+<a name="l00030"></a>00030 
+<a name="l00038"></a><a class="code" href="classDynamicEshopMenu.html#ef8c2e71bbf3fa1bbd6a17cc5946b3c1">00038</a>   <span class="keyword">public</span> function <a class="code" href="classDynamicEshopMenu.html#ef8c2e71bbf3fa1bbd6a17cc5946b3c1">__construct</a>(&amp;<a class="code" href="classDynamicEshopMenu.html#2ca9f5cc461f6cb7735b61808d6c7867">$var</a>, $index) <span class="comment">//konstruktor</span>
+<a name="l00039"></a>00039   {
+<a name="l00040"></a>00040     $this-&gt;var = <a class="code" href="classDynamicEshopMenu.html#2ca9f5cc461f6cb7735b61808d6c7867">$var</a>;
+<a name="l00041"></a>00041     $this-&gt;dirpath = dirname($this-&gt;var-&gt;moduly[$index][<span class="stringliteral">"include"</span>]);
+<a name="l00042"></a>00042     $this-&gt;dbname = $this-&gt;var-&gt;moduly[$index][<span class="stringliteral">"databaze"</span>];
+<a name="l00043"></a>00043 
+<a name="l00044"></a>00044     <span class="keywordflow">if</span> (!$this-&gt;sqlite = @<span class="keyword">new</span> SQLiteDatabase(<span class="stringliteral">"{$this-&gt;dirpath}/{$this-&gt;dbname}"</span>, 0777, $error))
+<a name="l00045"></a>00045     {
+<a name="l00046"></a>00046       $this-&gt;var-&gt;main[0]-&gt;ErrorMsg($error);
+<a name="l00047"></a>00047     }
+<a name="l00048"></a>00048 
+<a name="l00049"></a>00049     $this-&gt;<a class="code" href="classDynamicEshopMenu.html#c9a91b4bfef6178f34a5e949aed3f3ec">Instalace</a>();
+<a name="l00050"></a>00050   }
+<a name="l00051"></a>00051 
+<a name="l00057"></a><a class="code" href="classDynamicEshopMenu.html#c9a91b4bfef6178f34a5e949aed3f3ec">00057</a>   <span class="keyword">private</span> function <a class="code" href="classDynamicEshopMenu.html#c9a91b4bfef6178f34a5e949aed3f3ec">Instalace</a>()
+<a name="l00058"></a>00058   {
+<a name="l00059"></a>00059     <span class="keywordflow">if</span> (filesize(<span class="stringliteral">"{$this-&gt;dirpath}/{$this-&gt;dbname}"</span>) == 0)
+<a name="l00060"></a>00060     {
+<a name="l00061"></a>00061       <span class="keywordflow">if</span> (!@$this-&gt;sqlite-&gt;queryExec(<span class="stringliteral">"CREATE TABLE menu (</span>
+<a name="l00062"></a>00062 <span class="stringliteral">                                      id INTEGER UNSIGNED AUTO_INCREMENT PRIMARY KEY,</span>
+<a name="l00063"></a>00063 <span class="stringliteral">                                      nazev VARCHAR(200),</span>
+<a name="l00064"></a>00064 <span class="stringliteral">                                      koren INTEGER UNSIGNED,</span>
+<a name="l00065"></a>00065 <span class="stringliteral">                                      submenu TEXT,</span>
+<a name="l00066"></a>00066 <span class="stringliteral">                                      zanoreni INTEGER UNSIGNED);</span>
+<a name="l00067"></a>00067 <span class="stringliteral">                                      "</span>, $error))
+<a name="l00068"></a>00068       {
+<a name="l00069"></a>00069         $this-&gt;var-&gt;main[0]-&gt;ErrorMsg($error);
+<a name="l00070"></a>00070       }
+<a name="l00071"></a>00071     }
+<a name="l00072"></a>00072   }
+<a name="l00073"></a>00073 
+<a name="l00080"></a><a class="code" href="classDynamicEshopMenu.html#0dbe058d5e4e39006c4d87b94870a78b">00080</a>   <span class="keyword">private</span> function <a class="code" href="classDynamicEshopMenu.html#0dbe058d5e4e39006c4d87b94870a78b">ZobrazitOznaceni</a>()
+<a name="l00081"></a>00081   {
+<a name="l00082"></a>00082     $result = <span class="keyword">true</span>;
+<a name="l00083"></a>00083     <span class="keywordflow">for</span> ($i = 0; $i &lt; count($this-&gt;blokurl); $i++)
+<a name="l00084"></a>00084     {
+<a name="l00085"></a>00085       <span class="keywordflow">if</span> ($_GET[$this-&gt;nazevblok] == $this-&gt;blokurl[$i])
+<a name="l00086"></a>00086       {
+<a name="l00087"></a>00087         $result = <span class="keyword">false</span>;
+<a name="l00088"></a>00088         <span class="keywordflow">break</span>;
+<a name="l00089"></a>00089       }
+<a name="l00090"></a>00090     }
+<a name="l00091"></a>00091 
+<a name="l00092"></a>00092     <span class="keywordflow">return</span> $result;
+<a name="l00093"></a>00093   }
+<a name="l00094"></a>00094 
+<a name="l00101"></a><a class="code" href="classDynamicEshopMenu.html#a59f0f65f32e0d6db7fc77eb68b6d188">00101</a>   <span class="keyword">private</span> function <a class="code" href="classDynamicEshopMenu.html#a59f0f65f32e0d6db7fc77eb68b6d188">PrvniPolozka</a>()
+<a name="l00102"></a>00102   {
+<a name="l00103"></a>00103     <span class="keywordflow">if</span> ($res = @$this-&gt;sqlite-&gt;query(<span class="stringliteral">"SELECT id FROM menu WHERE zanoreni=0 ORDER BY LOWER(nazev) ASC LIMIT 0,1;"</span>, NULL, $error))
+<a name="l00104"></a>00104     {
+<a name="l00105"></a>00105       <span class="keywordflow">if</span> ($res-&gt;numRows() == 1)
+<a name="l00106"></a>00106       {
+<a name="l00107"></a>00107         $result = $res-&gt;fetchObject()-&gt;id;
+<a name="l00108"></a>00108       }
+<a name="l00109"></a>00109     }
+<a name="l00110"></a>00110       <span class="keywordflow">else</span>
+<a name="l00111"></a>00111     {
+<a name="l00112"></a>00112       $this-&gt;var-&gt;main[0]-&gt;ErrorMsg($error);
+<a name="l00113"></a>00113     }
+<a name="l00114"></a>00114 
+<a name="l00115"></a>00115     <span class="keywordflow">return</span> $result;
+<a name="l00116"></a>00116   }
+<a name="l00117"></a>00117 
+<a name="l00124"></a><a class="code" href="classDynamicEshopMenu.html#f2c4bbcaaeacd472e117796548423129">00124</a>   <span class="keyword">public</span> function <a class="code" href="classDynamicEshopMenu.html#f2c4bbcaaeacd472e117796548423129">Menu</a>()
+<a name="l00125"></a>00125   {
+<a name="l00126"></a>00126     $result = <span class="stringliteral">""</span>;
+<a name="l00127"></a>00127     <span class="keywordflow">if</span> ($res = @$this-&gt;sqlite-&gt;query(<span class="stringliteral">"SELECT id, nazev, submenu, zanoreni FROM menu WHERE zanoreni=0 ORDER BY LOWER(nazev) ASC;"</span>, NULL, $error))
+<a name="l00128"></a>00128     {
+<a name="l00129"></a>00129       <span class="keywordflow">if</span> ($res-&gt;numRows() != 0)
+<a name="l00130"></a>00130       {
+<a name="l00131"></a>00131         <span class="keywordflow">while</span> ($data = $res-&gt;fetchObject())
+<a name="l00132"></a>00132         {
+<a name="l00133"></a>00133           $subadresa = explode(<span class="stringliteral">"-"</span>, $_GET[$this-&gt;var-&gt;get_kam]);
+<a name="l00134"></a>00134 
+<a name="l00135"></a>00135           $oznpodm = (!Empty($_GET[$this-&gt;var-&gt;get_kam]) ? ($subadresa[0] == $data-&gt;id) : ($this-&gt;<a class="code" href="classDynamicEshopMenu.html#0dbe058d5e4e39006c4d87b94870a78b">ZobrazitOznaceni</a>() ? $this-&gt;<a class="code" href="classDynamicEshopMenu.html#a59f0f65f32e0d6db7fc77eb68b6d188">PrvniPolozka</a>() == $data-&gt;id : <span class="keyword">false</span>));
+<a name="l00136"></a>00136           $subozna = ((count($subadresa) - 1) == $data-&gt;zanoreni);
+<a name="l00137"></a>00137 
+<a name="l00138"></a>00138           $result .=
+<a name="l00139"></a>00139           <span class="stringliteral">"&lt;a href=\"?{$this-&gt;var-&gt;get_kam}={$data-&gt;id}\" title=\"{$data-&gt;nazev}\"&gt;"</span>.($oznpodm ? ($subozna ? <span class="stringliteral">"[&gt; "</span> : <span class="stringliteral">"[ "</span>) : <span class="stringliteral">""</span>).<span class="stringliteral">"{$data-&gt;nazev}"</span>.($oznpodm ? ($subozna ? <span class="stringliteral">" &lt;]"</span> : <span class="stringliteral">" ]"</span>) : <span class="stringliteral">""</span>).<span class="stringliteral">"&lt;/a&gt; - ({$data-&gt;id}, {$data-&gt;zanoreni})&lt;br /&gt;</span>
+<a name="l00140"></a>00140 <span class="stringliteral">          "</span>.($oznpodm ? $this-&gt;<a class="code" href="classDynamicEshopMenu.html#936f8a4bbef3d8c8cbe6d2ed985a0f75">RekurzivniMenu</a>($subadresa[0]) : <span class="stringliteral">""</span>).<span class="stringliteral">"</span>
+<a name="l00141"></a>00141 <span class="stringliteral">          "</span>;
+<a name="l00142"></a>00142         }
+<a name="l00143"></a>00143       }
+<a name="l00144"></a>00144     }
+<a name="l00145"></a>00145       <span class="keywordflow">else</span>
+<a name="l00146"></a>00146     {
+<a name="l00147"></a>00147       $this-&gt;var-&gt;main[0]-&gt;ErrorMsg($error);
+<a name="l00148"></a>00148     }
+<a name="l00149"></a>00149 
+<a name="l00150"></a>00150     <span class="keywordflow">return</span> $result;
+<a name="l00151"></a>00151   }
+<a name="l00152"></a>00152 
+<a name="l00159"></a><a class="code" href="classDynamicEshopMenu.html#327d9d171b6ecd192c72b3e94fa19c85">00159</a>   <span class="keyword">public</span> function <a class="code" href="classDynamicEshopMenu.html#327d9d171b6ecd192c72b3e94fa19c85">AdminMenu</a>()
+<a name="l00160"></a>00160   {
+<a name="l00161"></a>00161     $result =
+<a name="l00162"></a>00162     <span class="stringliteral">"&lt;a href=\"?{$this-&gt;var-&gt;get_kam}={$this-&gt;var-&gt;adresaadminu}&amp;amp;{$this-&gt;var-&gt;get_idmodul}={$this-&gt;idmodul}\" title=\"\"&gt;administrace dynamickeho eshop menu&lt;/a&gt;&lt;br /&gt;"</span>;
+<a name="l00163"></a>00163 
+<a name="l00164"></a>00164     <span class="keywordflow">return</span> $result;
+<a name="l00165"></a>00165   }
+<a name="l00166"></a>00166 
+<a name="l00173"></a><a class="code" href="classDynamicEshopMenu.html#d2c12f9f09e86591a3af9580d40a4729">00173</a>   <span class="keyword">public</span> function <a class="code" href="classDynamicEshopMenu.html#d2c12f9f09e86591a3af9580d40a4729">AdminObsah</a>()
+<a name="l00174"></a>00174   {
+<a name="l00175"></a>00175     <span class="keywordflow">if</span> ($_GET[$this-&gt;var-&gt;get_kam] == $this-&gt;var-&gt;adresaadminu &amp;&amp;
+<a name="l00176"></a>00176         $this-&gt;var-&gt;aktivniadmin)
+<a name="l00177"></a>00177     {
+<a name="l00178"></a>00178       <span class="keywordflow">switch</span> ($_GET[$this-&gt;var-&gt;get_idmodul])
+<a name="l00179"></a>00179       {
+<a name="l00180"></a>00180         <span class="keywordflow">case</span> $this-&gt;idmodul:  <span class="comment">//id modul</span>
+<a name="l00181"></a>00181           $result = $this-&gt;<a class="code" href="classDynamicEshopMenu.html#d75cd3ab8511f0ee348660f5a91da73b">AdministraceMenu</a>();
+<a name="l00182"></a>00182         <span class="keywordflow">break</span>;
+<a name="l00183"></a>00183       }
+<a name="l00184"></a>00184     }
+<a name="l00185"></a>00185 
+<a name="l00186"></a>00186     <span class="keywordflow">return</span> $result;
+<a name="l00187"></a>00187   }
+<a name="l00188"></a>00188 
+<a name="l00196"></a><a class="code" href="classDynamicEshopMenu.html#98293632580ddcfa52f0976624ffba93">00196</a>   <span class="keyword">public</span> function <a class="code" href="classDynamicEshopMenu.html#98293632580ddcfa52f0976624ffba93">NazevPodleAdresy</a>($id)
+<a name="l00197"></a>00197   {
+<a name="l00198"></a>00198     settype($id, <span class="stringliteral">"integer"</span>);
+<a name="l00199"></a>00199     $result = <span class="stringliteral">"žádný název neexistuje"</span>;
+<a name="l00200"></a>00200     <span class="keywordflow">if</span> ($res = @$this-&gt;sqlite-&gt;query(<span class="stringliteral">"SELECT nazev FROM menu WHERE id='{$id}';"</span>, NULL, $error))
+<a name="l00201"></a>00201     {
+<a name="l00202"></a>00202       <span class="keywordflow">if</span> ($res-&gt;numRows() == 1)
+<a name="l00203"></a>00203       {
+<a name="l00204"></a>00204         $result = $res-&gt;fetchObject()-&gt;nazev;
+<a name="l00205"></a>00205       }
+<a name="l00206"></a>00206     }
+<a name="l00207"></a>00207       <span class="keywordflow">else</span>
+<a name="l00208"></a>00208     {
+<a name="l00209"></a>00209       $this-&gt;var-&gt;main[0]-&gt;ErrorMsg($error);
+<a name="l00210"></a>00210     }
+<a name="l00211"></a>00211 
+<a name="l00212"></a>00212     <span class="keywordflow">return</span> $result;
+<a name="l00213"></a>00213   }
+<a name="l00214"></a>00214 
+<a name="l00221"></a><a class="code" href="classDynamicEshopMenu.html#521e21decf312b928e43a739a2da2449">00221</a>   <span class="keyword">public</span> function <a class="code" href="classDynamicEshopMenu.html#521e21decf312b928e43a739a2da2449">Title</a>()
+<a name="l00222"></a>00222   {
+<a name="l00223"></a>00223     $result = <span class="stringliteral">""</span>;
+<a name="l00224"></a>00224     <span class="keywordflow">if</span> ($this-&gt;<a class="code" href="classDynamicEshopMenu.html#0dbe058d5e4e39006c4d87b94870a78b">ZobrazitOznaceni</a>())
+<a name="l00225"></a>00225     {
+<a name="l00226"></a>00226       <span class="keywordflow">if</span> (Empty($_GET[$this-&gt;var-&gt;get_kam]))
+<a name="l00227"></a>00227       {
+<a name="l00228"></a>00228         $result = $this-&gt;<a class="code" href="classDynamicEshopMenu.html#98293632580ddcfa52f0976624ffba93">NazevPodleAdresy</a>($this-&gt;<a class="code" href="classDynamicEshopMenu.html#a59f0f65f32e0d6db7fc77eb68b6d188">PrvniPolozka</a>());
+<a name="l00229"></a>00229       }
+<a name="l00230"></a>00230         <span class="keywordflow">else</span>
+<a name="l00231"></a>00231       {
+<a name="l00232"></a>00232         $subadresa = explode(<span class="stringliteral">"-"</span>, $_GET[$this-&gt;var-&gt;get_kam]);
+<a name="l00233"></a>00233 
+<a name="l00234"></a>00234         <span class="keywordflow">for</span> ($i = 0; $i &lt; count($subadresa); $i++)
+<a name="l00235"></a>00235         {
+<a name="l00236"></a>00236           $result .= <span class="stringliteral">"{$this-&gt;NazevPodleAdresy($subadresa[$i])} {$this-&gt;oddtit} "</span>;
+<a name="l00237"></a>00237         }
+<a name="l00238"></a>00238         $result = substr($result, 0, -3);
+<a name="l00239"></a>00239       }
+<a name="l00240"></a>00240     }
+<a name="l00241"></a>00241 
+<a name="l00242"></a>00242     <span class="keywordflow">return</span> $result;
+<a name="l00243"></a>00243   }
+<a name="l00244"></a>00244 
+<a name="l00252"></a><a class="code" href="classDynamicEshopMenu.html#fc9894112f79723afdf319f1abfbcd93">00252</a>   <span class="keyword">private</span> function <a class="code" href="classDynamicEshopMenu.html#fc9894112f79723afdf319f1abfbcd93">NavratSubmenu</a>($id)
+<a name="l00253"></a>00253   {
+<a name="l00254"></a>00254     settype($id, <span class="stringliteral">"integer"</span>);
+<a name="l00255"></a>00255     <span class="keywordflow">if</span> ($res = @$this-&gt;sqlite-&gt;query(<span class="stringliteral">"SELECT submenu FROM menu WHERE id={$id};"</span>, NULL, $error))
+<a name="l00256"></a>00256     {
+<a name="l00257"></a>00257       <span class="keywordflow">if</span> ($res-&gt;numRows() == 1)
+<a name="l00258"></a>00258       {
+<a name="l00259"></a>00259         $result = $res-&gt;fetchObject()-&gt;submenu;
+<a name="l00260"></a>00260       }
+<a name="l00261"></a>00261     }
+<a name="l00262"></a>00262       <span class="keywordflow">else</span>
+<a name="l00263"></a>00263     {
+<a name="l00264"></a>00264       $this-&gt;var-&gt;main[0]-&gt;ErrorMsg($error);
+<a name="l00265"></a>00265     }
+<a name="l00266"></a>00266 
+<a name="l00267"></a>00267     <span class="keywordflow">return</span> $result;
+<a name="l00268"></a>00268   }
+<a name="l00269"></a>00269 
+<a name="l00277"></a><a class="code" href="classDynamicEshopMenu.html#936f8a4bbef3d8c8cbe6d2ed985a0f75">00277</a>   <span class="keyword">private</span> function <a class="code" href="classDynamicEshopMenu.html#936f8a4bbef3d8c8cbe6d2ed985a0f75">RekurzivniMenu</a>($id)
+<a name="l00278"></a>00278   {
+<a name="l00279"></a>00279     settype($id, <span class="stringliteral">"integer"</span>);
+<a name="l00280"></a>00280     $sub = explode(<span class="stringliteral">"-"</span>, $this-&gt;<a class="code" href="classDynamicEshopMenu.html#fc9894112f79723afdf319f1abfbcd93">NavratSubmenu</a>($id)); <span class="comment">//rozdeleni podmenu</span>
+<a name="l00281"></a>00281     $subadresa = explode(<span class="stringliteral">"-"</span>, $_GET[$this-&gt;var-&gt;get_kam]);  <span class="comment">//rozdeleni adresy</span>
+<a name="l00282"></a>00282 
+<a name="l00283"></a>00283     <span class="keywordflow">if</span> (!Empty($sub[0]))  <span class="comment">//je-li prni prvek v pomenu neprazdny</span>
+<a name="l00284"></a>00284     {
+<a name="l00285"></a>00285       $subwhere = <span class="stringliteral">""</span>;
+<a name="l00286"></a>00286       <span class="keywordflow">for</span> ($i = 0; $i &lt; count($sub); $i++)  <span class="comment">//vygenerovani dotazu pro vyps menu</span>
+<a name="l00287"></a>00287       {
+<a name="l00288"></a>00288         $subwhere .= <span class="stringliteral">"{$sub[$i]}, "</span>;
+<a name="l00289"></a>00289       }
+<a name="l00290"></a>00290       $subwhere = substr($subwhere, 0, -2);
+<a name="l00291"></a>00291 
+<a name="l00292"></a>00292       $result = <span class="stringliteral">""</span>;
+<a name="l00293"></a>00293       <span class="keywordflow">if</span> ($res = @$this-&gt;sqlite-&gt;query(<span class="stringliteral">"SELECT id, nazev, zanoreni FROM menu WHERE id IN ({$subwhere}) ORDER BY LOWER(nazev) ASC;"</span>, NULL, $error))
+<a name="l00294"></a>00294       {
+<a name="l00295"></a>00295         <span class="keywordflow">if</span> ($res-&gt;numRows() != 0)
+<a name="l00296"></a>00296         {
+<a name="l00297"></a>00297           <span class="keywordflow">while</span> ($data = $res-&gt;fetchObject())
+<a name="l00298"></a>00298           {
+<a name="l00299"></a>00299             $odsazeni = str_repeat(<span class="stringliteral">"---"</span>, $data-&gt;zanoreni); <span class="comment">//poctani zanoreni</span>
+<a name="l00300"></a>00300 
+<a name="l00301"></a>00301             $oznpodm = ($data-&gt;id == $subadresa[$data-&gt;zanoreni]); <span class="comment">//rekurzivni podminka</span>
+<a name="l00302"></a>00302             $subozna = ((count($subadresa) - 1) == $data-&gt;zanoreni);
+<a name="l00303"></a>00303 
+<a name="l00304"></a>00304             $rozklad = <span class="stringliteral">""</span>;
+<a name="l00305"></a>00305             <span class="keywordflow">for</span> ($i = 0; $i &lt; $data-&gt;zanoreni; $i++)  <span class="comment">//rozklad adresy</span>
+<a name="l00306"></a>00306             {
+<a name="l00307"></a>00307               $rozklad .= <span class="stringliteral">"{$subadresa[$i]}-"</span>;
+<a name="l00308"></a>00308             }
+<a name="l00309"></a>00309 
+<a name="l00310"></a>00310             $result .=
+<a name="l00311"></a>00311             <span class="stringliteral">"{$odsazeni} &lt;a href=\"?{$this-&gt;var-&gt;get_kam}={$rozklad}{$data-&gt;id}\" title=\"{$data-&gt;nazev}\"&gt;"</span>.($oznpodm ? ($subozna ? <span class="stringliteral">"[&gt; "</span> : <span class="stringliteral">"[ "</span>) : <span class="stringliteral">""</span>).<span class="stringliteral">"{$data-&gt;nazev}"</span>.($oznpodm ? ($subozna ? <span class="stringliteral">" &lt;]"</span> : <span class="stringliteral">" ]"</span>) : <span class="stringliteral">""</span>).<span class="stringliteral">"&lt;/a&gt; - ({$data-&gt;id}, {$data-&gt;zanoreni})&lt;br /&gt;</span>
+<a name="l00312"></a>00312 <span class="stringliteral">            "</span>.($oznpodm ? $this-&gt;<a class="code" href="classDynamicEshopMenu.html#936f8a4bbef3d8c8cbe6d2ed985a0f75">RekurzivniMenu</a>($subadresa[$data-&gt;zanoreni]) : <span class="stringliteral">""</span>).<span class="stringliteral">"</span>
+<a name="l00313"></a>00313 <span class="stringliteral">            "</span>;
+<a name="l00314"></a>00314           }
+<a name="l00315"></a>00315         }
+<a name="l00316"></a>00316       }
+<a name="l00317"></a>00317         <span class="keywordflow">else</span>
+<a name="l00318"></a>00318       {
+<a name="l00319"></a>00319         $this-&gt;var-&gt;main[0]-&gt;ErrorMsg($error);
+<a name="l00320"></a>00320       }
+<a name="l00321"></a>00321     }
+<a name="l00322"></a>00322 
+<a name="l00323"></a>00323     <span class="keywordflow">return</span> $result;
+<a name="l00324"></a>00324   }
+<a name="l00325"></a>00325 
+<a name="l00334"></a><a class="code" href="classDynamicEshopMenu.html#32e109a05d6966c96ebfada4ab27dbfc">00334</a>   <span class="keyword">private</span> function <a class="code" href="classDynamicEshopMenu.html#32e109a05d6966c96ebfada4ab27dbfc">ExistujePolozka</a>($nazev, $zanoreni)
+<a name="l00335"></a>00335   {
+<a name="l00336"></a>00336     settype($zanoreni, <span class="stringliteral">"integer"</span>);
+<a name="l00337"></a>00337 
+<a name="l00338"></a>00338     <span class="keywordflow">if</span> ($res = @$this-&gt;sqlite-&gt;query(<span class="stringliteral">"SELECT id FROM menu WHERE nazev='{$nazev}' AND zanoreni={$zanoreni};"</span>, NULL, $error))
+<a name="l00339"></a>00339     {
+<a name="l00340"></a>00340       $result = ($res-&gt;numRows() == 1 ? <span class="keyword">true</span> : <span class="keyword">false</span>);
+<a name="l00341"></a>00341     }
+<a name="l00342"></a>00342       <span class="keywordflow">else</span>
+<a name="l00343"></a>00343     {
+<a name="l00344"></a>00344       $this-&gt;var-&gt;main[0]-&gt;ErrorMsg($error);
+<a name="l00345"></a>00345     }
+<a name="l00346"></a>00346 
+<a name="l00347"></a>00347     <span class="keywordflow">return</span> $result;
+<a name="l00348"></a>00348   }
+<a name="l00349"></a>00349 
+<a name="l00356"></a><a class="code" href="classDynamicEshopMenu.html#d75cd3ab8511f0ee348660f5a91da73b">00356</a>   <span class="keyword">private</span> function <a class="code" href="classDynamicEshopMenu.html#d75cd3ab8511f0ee348660f5a91da73b">AdministraceMenu</a>()
+<a name="l00357"></a>00357   {
+<a name="l00358"></a>00358     $result =
+<a name="l00359"></a>00359     <span class="stringliteral">"administrace dynamickeho menu</span>
+<a name="l00360"></a>00360 <span class="stringliteral">    &lt;br /&gt;</span>
+<a name="l00361"></a>00361 <span class="stringliteral">    &lt;a href=\"?{$this-&gt;var-&gt;get_kam}={$this-&gt;var-&gt;adresaadminu}&amp;amp;{$this-&gt;var-&gt;get_idmodul}={$this-&gt;idmodul}&amp;amp;co=add&amp;amp;zanoreni=0\" title=\"\"&gt;přidat hlavni sekci&lt;/a&gt;&lt;br /&gt;</span>
+<a name="l00362"></a>00362 <span class="stringliteral">    &lt;br /&gt;</span>
+<a name="l00363"></a>00363 <span class="stringliteral">    {$this-&gt;AdminVypisMenu()}</span>
+<a name="l00364"></a>00364 <span class="stringliteral">    "</span>;
+<a name="l00365"></a>00365 
+<a name="l00366"></a>00366     $co = $_GET[<span class="stringliteral">"co"</span>];
+<a name="l00367"></a>00367 
+<a name="l00368"></a>00368     <span class="keywordflow">if</span> (!Empty($co))
+<a name="l00369"></a>00369     {
+<a name="l00370"></a>00370       <span class="keywordflow">switch</span> ($co)
+<a name="l00371"></a>00371       {
+<a name="l00372"></a>00372         <span class="keywordflow">case</span> <span class="stringliteral">"add"</span>: <span class="comment">//pridavani</span>
+<a name="l00373"></a>00373           $zanoreni = $_GET[<span class="stringliteral">"zanoreni"</span>];  <span class="comment">//cislo zanoreni</span>
+<a name="l00374"></a>00374           settype($zanoreni, <span class="stringliteral">"integer"</span>);
+<a name="l00375"></a>00375 
+<a name="l00376"></a>00376           $id = $_GET[<span class="stringliteral">"id"</span>];  <span class="comment">//cislo sekce</span>
+<a name="l00377"></a>00377           settype($id, <span class="stringliteral">"integer"</span>);
+<a name="l00378"></a>00378 
+<a name="l00379"></a>00379           $result =
+<a name="l00380"></a>00380           <span class="stringliteral">"</span>
+<a name="l00381"></a>00381 <span class="stringliteral">          &lt;form method=\"post\"&gt;</span>
+<a name="l00382"></a>00382 <span class="stringliteral">            &lt;fieldset&gt;</span>
+<a name="l00383"></a>00383 <span class="stringliteral">              &lt;input type=\"input\" name=\"nazev\" /&gt; &lt;br /&gt;</span>
+<a name="l00384"></a>00384 <span class="stringliteral">              &lt;input type=\"submit\" name=\"tlacitko\" value=\"Přidat do zanoření: {$zanoreni}\" /&gt;</span>
+<a name="l00385"></a>00385 <span class="stringliteral">            &lt;/fieldset&gt;</span>
+<a name="l00386"></a>00386 <span class="stringliteral">          &lt;/form&gt;</span>
+<a name="l00387"></a>00387 <span class="stringliteral">          "</span>;
+<a name="l00388"></a>00388 
+<a name="l00389"></a>00389           $nazev = stripslashes(htmlspecialchars($_POST[<span class="stringliteral">"nazev"</span>], ENT_QUOTES));
+<a name="l00390"></a>00390 
+<a name="l00391"></a>00391           <span class="keywordflow">if</span> (!Empty($_POST[<span class="stringliteral">"tlacitko"</span>]) &amp;&amp;
+<a name="l00392"></a>00392               !Empty($nazev) &amp;&amp;
+<a name="l00393"></a>00393               !$this-&gt;<a class="code" href="classDynamicEshopMenu.html#32e109a05d6966c96ebfada4ab27dbfc">ExistujePolozka</a>($nazev, $zanoreni))  <span class="comment">//kontola jestli neni stejny nazev na stejne urovni</span>
+<a name="l00394"></a>00394           {
+<a name="l00395"></a>00395             <span class="keywordflow">if</span> (@$this-&gt;sqlite-&gt;queryExec(<span class="stringliteral">"INSERT INTO menu (id, nazev, koren, submenu, zanoreni) VALUES</span>
+<a name="l00396"></a>00396 <span class="stringliteral">                                          (NULL, '{$nazev}', {$id}, '', {$zanoreni});"</span>, $error))
+<a name="l00397"></a>00397             {
+<a name="l00398"></a>00398               <span class="keywordflow">if</span> (!Empty($id) &amp;&amp;
+<a name="l00399"></a>00399                   $zanoreni &gt; 0)
+<a name="l00400"></a>00400               {
+<a name="l00401"></a>00401                 $this-&gt;<a class="code" href="classDynamicEshopMenu.html#c4fb522e2f912a22e2b753f1692de490">UpravSubMenu</a>($id, $this-&gt;sqlite-&gt;lastInsertRowid()); <span class="comment">//pridat do ID posledni AutoID</span>
+<a name="l00402"></a>00402               }
+<a name="l00403"></a>00403 
+<a name="l00404"></a>00404               $result =
+<a name="l00405"></a>00405               <span class="stringliteral">"</span>
+<a name="l00406"></a>00406 <span class="stringliteral">                přídán: {$nazev} do zanoření: {$zanoreni}</span>
+<a name="l00407"></a>00407 <span class="stringliteral">              "</span>;
+<a name="l00408"></a>00408             }
+<a name="l00409"></a>00409               <span class="keywordflow">else</span>
+<a name="l00410"></a>00410             {
+<a name="l00411"></a>00411               $this-&gt;var-&gt;main[0]-&gt;ErrorMsg($error);
+<a name="l00412"></a>00412             }
+<a name="l00413"></a>00413 
+<a name="l00414"></a>00414             $this-&gt;var-&gt;main[0]-&gt;AutoClick(1, <span class="stringliteral">"?{$this-&gt;var-&gt;get_kam}={$this-&gt;var-&gt;adresaadminu}&amp;{$this-&gt;var-&gt;get_idmodul}={$this-&gt;idmodul}"</span>);  <span class="comment">//auto kliknuti</span>
+<a name="l00415"></a>00415           }
+<a name="l00416"></a>00416         <span class="keywordflow">break</span>;
+<a name="l00417"></a>00417 
+<a name="l00418"></a>00418         <span class="keywordflow">case</span> <span class="stringliteral">"edit"</span>:  <span class="comment">//editace</span>
+<a name="l00419"></a>00419           $id = $_GET[<span class="stringliteral">"id"</span>];  <span class="comment">//cislo sekce</span>
+<a name="l00420"></a>00420           settype($id, <span class="stringliteral">"integer"</span>);
+<a name="l00421"></a>00421 
+<a name="l00422"></a>00422           <span class="keywordflow">if</span> ($res = @$this-&gt;sqlite-&gt;query(<span class="stringliteral">"SELECT nazev FROM menu WHERE id={$id};"</span>, NULL, $error))
+<a name="l00423"></a>00423           {
+<a name="l00424"></a>00424             <span class="keywordflow">if</span> ($res-&gt;numRows() == 1)
+<a name="l00425"></a>00425             {
+<a name="l00426"></a>00426               $data = $res-&gt;fetchObject();
+<a name="l00427"></a>00427 
+<a name="l00428"></a>00428               $result =
+<a name="l00429"></a>00429               <span class="stringliteral">"</span>
+<a name="l00430"></a>00430 <span class="stringliteral">              &lt;form method=\"post\"&gt;</span>
+<a name="l00431"></a>00431 <span class="stringliteral">                &lt;fieldset&gt;</span>
+<a name="l00432"></a>00432 <span class="stringliteral">                  &lt;input type=\"input\" name=\"nazev\" value=\"{$data-&gt;nazev}\" /&gt; &lt;br /&gt;</span>
+<a name="l00433"></a>00433 <span class="stringliteral">                  &lt;input type=\"submit\" name=\"tlacitko\" value=\"Upravit\" /&gt;</span>
+<a name="l00434"></a>00434 <span class="stringliteral">                &lt;/fieldset&gt;</span>
+<a name="l00435"></a>00435 <span class="stringliteral">              &lt;/form&gt;</span>
+<a name="l00436"></a>00436 <span class="stringliteral">              "</span>;
+<a name="l00437"></a>00437 
+<a name="l00438"></a>00438               $nazev = stripslashes(htmlspecialchars($_POST[<span class="stringliteral">"nazev"</span>], ENT_QUOTES));
+<a name="l00439"></a>00439 
+<a name="l00440"></a>00440               <span class="keywordflow">if</span> (!Empty($_POST[<span class="stringliteral">"tlacitko"</span>]) &amp;&amp;
+<a name="l00441"></a>00441                   !Empty($nazev) &amp;&amp;
+<a name="l00442"></a>00442                   $id != 0)
+<a name="l00443"></a>00443               {
+<a name="l00444"></a>00444                 <span class="keywordflow">if</span> (@$this-&gt;sqlite-&gt;queryExec(<span class="stringliteral">"UPDATE menu SET nazev='{$nazev}' WHERE id={$id};"</span>, $error))
+<a name="l00445"></a>00445                 {
+<a name="l00446"></a>00446                   $result =
+<a name="l00447"></a>00447                   <span class="stringliteral">"</span>
+<a name="l00448"></a>00448 <span class="stringliteral">                    upraven: {$nazev}</span>
+<a name="l00449"></a>00449 <span class="stringliteral">                  "</span>;
+<a name="l00450"></a>00450                 }
+<a name="l00451"></a>00451                   <span class="keywordflow">else</span>
+<a name="l00452"></a>00452                 {
+<a name="l00453"></a>00453                   $this-&gt;var-&gt;main[0]-&gt;ErrorMsg($error);
+<a name="l00454"></a>00454                 }
+<a name="l00455"></a>00455 
+<a name="l00456"></a>00456                 $this-&gt;var-&gt;main[0]-&gt;AutoClick(1, <span class="stringliteral">"?{$this-&gt;var-&gt;get_kam}={$this-&gt;var-&gt;adresaadminu}&amp;{$this-&gt;var-&gt;get_idmodul}={$this-&gt;idmodul}"</span>);  <span class="comment">//auto kliknuti</span>
+<a name="l00457"></a>00457               }
+<a name="l00458"></a>00458             }
+<a name="l00459"></a>00459           }
+<a name="l00460"></a>00460             <span class="keywordflow">else</span>
+<a name="l00461"></a>00461           {
+<a name="l00462"></a>00462             $this-&gt;var-&gt;main[0]-&gt;ErrorMsg($error);
+<a name="l00463"></a>00463           }
+<a name="l00464"></a>00464         <span class="keywordflow">break</span>;
+<a name="l00465"></a>00465 
+<a name="l00466"></a>00466         <span class="keywordflow">case</span> <span class="stringliteral">"del"</span>: <span class="comment">//rekurzivni mazani</span>
+<a name="l00467"></a>00467           $id = $_GET[<span class="stringliteral">"id"</span>];  <span class="comment">//cislo sekce</span>
+<a name="l00468"></a>00468           settype($id, <span class="stringliteral">"integer"</span>);
+<a name="l00469"></a>00469 
+<a name="l00470"></a>00470           <span class="keywordflow">if</span> ($res = @$this-&gt;sqlite-&gt;query(<span class="stringliteral">"SELECT nazev FROM menu WHERE id={$id};"</span>, NULL, $error))
+<a name="l00471"></a>00471           {
+<a name="l00472"></a>00472             <span class="keywordflow">if</span> ($res-&gt;numRows() == 1)
+<a name="l00473"></a>00473             {
+<a name="l00474"></a>00474               $data = $res-&gt;fetchObject();
+<a name="l00475"></a>00475               $smazat = explode(<span class="stringliteral">"-"</span>, <span class="stringliteral">"{$this-&gt;RekurzivniMazani($id)}{$id}"</span>);  <span class="comment">//zjisteni polozek na smazani</span>
+<a name="l00476"></a>00476 
+<a name="l00477"></a>00477               $delwhere = <span class="stringliteral">""</span>;
+<a name="l00478"></a>00478               <span class="keywordflow">for</span> ($i = 0; $i &lt; count($smazat); $i++) <span class="comment">//vygenerovani dotazu pro smazani</span>
+<a name="l00479"></a>00479               {
+<a name="l00480"></a>00480                 $delwhere .= <span class="stringliteral">"{$smazat[$i]}, "</span>;
+<a name="l00481"></a>00481               }
+<a name="l00482"></a>00482               $delwhere = substr($delwhere, 0, -2);
+<a name="l00483"></a>00483 
+<a name="l00484"></a>00484               <span class="comment">//rekurzvni vzestup zjistujici adresu</span>
+<a name="l00485"></a>00485               $this-&gt;var-&gt;main[0]-&gt;NactiFunkci(2, <span class="stringliteral">"SmazStranku"</span>, $this-&gt;<a class="code" href="classDynamicEshopMenu.html#d5e1a078437e22d4caefa2cfe2cb6325">UpravaStoupani</a>($id));<span class="comment">//zpetne propojeni pro smazani obsahu podle adresy</span>
+<a name="l00486"></a>00486 
+<a name="l00487"></a>00487               <span class="comment">//musi upravit jeste driv nez se smaze aby zjistil jaky byl koren daneho ID</span>
+<a name="l00488"></a>00488               $this-&gt;<a class="code" href="classDynamicEshopMenu.html#eb1aac896ff67253c032ff8f456db4bd">UpravSubIntegritu</a>($id);  <span class="comment">//uprav integritu v databazi menu</span>
+<a name="l00489"></a>00489 
+<a name="l00490"></a>00490               <span class="keywordflow">if</span> (@$this-&gt;sqlite-&gt;queryExec(<span class="stringliteral">"DELETE FROM menu WHERE id IN ({$delwhere});"</span>, $error)) <span class="comment">//provedeni dotazu</span>
+<a name="l00491"></a>00491               {
+<a name="l00492"></a>00492                 $result =
+<a name="l00493"></a>00493                 <span class="stringliteral">"</span>
+<a name="l00494"></a>00494 <span class="stringliteral">                  smazáno: '{$data-&gt;nazev}' a všechny podmenu!</span>
+<a name="l00495"></a>00495 <span class="stringliteral">                "</span>;
+<a name="l00496"></a>00496               }
+<a name="l00497"></a>00497                 <span class="keywordflow">else</span>
+<a name="l00498"></a>00498               {
+<a name="l00499"></a>00499                 $this-&gt;var-&gt;main[0]-&gt;ErrorMsg($error);
+<a name="l00500"></a>00500               }
+<a name="l00501"></a>00501 
+<a name="l00502"></a>00502               $this-&gt;var-&gt;main[0]-&gt;AutoClick(1, <span class="stringliteral">"?{$this-&gt;var-&gt;get_kam}={$this-&gt;var-&gt;adresaadminu}&amp;{$this-&gt;var-&gt;get_idmodul}={$this-&gt;idmodul}"</span>);  <span class="comment">//auto kliknuti</span>
+<a name="l00503"></a>00503             }
+<a name="l00504"></a>00504           }
+<a name="l00505"></a>00505             <span class="keywordflow">else</span>
+<a name="l00506"></a>00506           {
+<a name="l00507"></a>00507             $this-&gt;var-&gt;main[0]-&gt;ErrorMsg($error);
+<a name="l00508"></a>00508           }
+<a name="l00509"></a>00509         <span class="keywordflow">break</span>;
+<a name="l00510"></a>00510       }
+<a name="l00511"></a>00511     }
+<a name="l00512"></a>00512 
+<a name="l00513"></a>00513     <span class="keywordflow">return</span> $result;
+<a name="l00514"></a>00514   }
+<a name="l00515"></a>00515 
+<a name="l00523"></a><a class="code" href="classDynamicEshopMenu.html#1862116c966951a924011856abf8d150">00523</a>   <span class="keyword">private</span> function <a class="code" href="classDynamicEshopMenu.html#1862116c966951a924011856abf8d150">RekurzivniMazani</a>($id)
+<a name="l00524"></a>00524   {
+<a name="l00525"></a>00525     $sub = explode(<span class="stringliteral">"-"</span>, $this-&gt;<a class="code" href="classDynamicEshopMenu.html#fc9894112f79723afdf319f1abfbcd93">NavratSubmenu</a>($id)); <span class="comment">//rozdeleni podmenu</span>
+<a name="l00526"></a>00526 
+<a name="l00527"></a>00527     $result = <span class="stringliteral">""</span>;
+<a name="l00528"></a>00528     <span class="keywordflow">for</span> ($i = 0; $i &lt; count($sub); $i++)
+<a name="l00529"></a>00529     {
+<a name="l00530"></a>00530       <span class="keywordflow">if</span> (!Empty($sub[0]))
+<a name="l00531"></a>00531       {
+<a name="l00532"></a>00532         $result .= <span class="stringliteral">"{$sub[$i]}-"</span>.(!Empty($sub[0]) ? $this-&gt;<a class="code" href="classDynamicEshopMenu.html#1862116c966951a924011856abf8d150">RekurzivniMazani</a>($sub[$i]) : <span class="stringliteral">""</span>);
+<a name="l00533"></a>00533       }
+<a name="l00534"></a>00534     }
+<a name="l00535"></a>00535 
+<a name="l00536"></a>00536     <span class="keywordflow">return</span> $result;
+<a name="l00537"></a>00537   }
+<a name="l00538"></a>00538 
+<a name="l00546"></a><a class="code" href="classDynamicEshopMenu.html#d5e1a078437e22d4caefa2cfe2cb6325">00546</a>   <span class="keyword">private</span> function <a class="code" href="classDynamicEshopMenu.html#d5e1a078437e22d4caefa2cfe2cb6325">UpravaStoupani</a>($id)
+<a name="l00547"></a>00547   {
+<a name="l00548"></a>00548     $adresa = <span class="stringliteral">"{$id}-{$this-&gt;RekurzivniStoupani($id)}"</span>;
+<a name="l00549"></a>00549     $adresa = substr($adresa, 0, -1);
+<a name="l00550"></a>00550     $adresa = explode(<span class="stringliteral">"-"</span>, $adresa);
+<a name="l00551"></a>00551 
+<a name="l00552"></a>00552     $sub = <span class="stringliteral">""</span>;
+<a name="l00553"></a>00553     <span class="keywordflow">for</span> ($i = count($adresa) - 1; $i &gt;= 0; $i--)
+<a name="l00554"></a>00554     {
+<a name="l00555"></a>00555       $sub .= <span class="stringliteral">"{$adresa[$i]}-"</span>;
+<a name="l00556"></a>00556     }
+<a name="l00557"></a>00557     $result = substr($sub, 0, -1);
+<a name="l00558"></a>00558 
+<a name="l00559"></a>00559     <span class="keywordflow">return</span> $result;
+<a name="l00560"></a>00560   }
+<a name="l00561"></a>00561 
+<a name="l00569"></a><a class="code" href="classDynamicEshopMenu.html#8e910a3611cb2f4cb4cab33e209ec7e1">00569</a>   <span class="keyword">private</span> function <a class="code" href="classDynamicEshopMenu.html#8e910a3611cb2f4cb4cab33e209ec7e1">RekurzivniStoupani</a>($id)
+<a name="l00570"></a>00570   {
+<a name="l00571"></a>00571     settype($id, <span class="stringliteral">"integer"</span>);
+<a name="l00572"></a>00572     <span class="keywordflow">if</span> ($res = @$this-&gt;sqlite-&gt;query(<span class="stringliteral">"SELECT koren FROM menu WHERE id={$id};"</span>, NULL, $error))
+<a name="l00573"></a>00573     {
+<a name="l00574"></a>00574       <span class="keywordflow">if</span> ($res-&gt;numRows() == 1)
+<a name="l00575"></a>00575       {
+<a name="l00576"></a>00576         $adr = $res-&gt;fetchObject()-&gt;koren;
+<a name="l00577"></a>00577       }
+<a name="l00578"></a>00578     }
+<a name="l00579"></a>00579       <span class="keywordflow">else</span>
+<a name="l00580"></a>00580     {
+<a name="l00581"></a>00581       $this-&gt;var-&gt;main[0]-&gt;ErrorMsg($error);
+<a name="l00582"></a>00582     }
+<a name="l00583"></a>00583 
+<a name="l00584"></a>00584     <span class="keywordflow">if</span> (!Empty($adr))
+<a name="l00585"></a>00585     {
+<a name="l00586"></a>00586       $result .= <span class="stringliteral">"{$adr}-{$this-&gt;RekurzivniStoupani($adr)}"</span>;
+<a name="l00587"></a>00587     }
+<a name="l00588"></a>00588 
+<a name="l00589"></a>00589     <span class="keywordflow">return</span> $result;
+<a name="l00590"></a>00590   }
+<a name="l00591"></a>00591 
+<a name="l00598"></a><a class="code" href="classDynamicEshopMenu.html#64a37c77fcb8da6c2a91f63da8e90e59">00598</a>   <span class="keyword">private</span> function <a class="code" href="classDynamicEshopMenu.html#64a37c77fcb8da6c2a91f63da8e90e59">AdminVypisMenu</a>()
+<a name="l00599"></a>00599   {
+<a name="l00600"></a>00600     $result = <span class="stringliteral">""</span>;
+<a name="l00601"></a>00601     <span class="keywordflow">if</span> ($res = @$this-&gt;sqlite-&gt;query(<span class="stringliteral">"SELECT id, nazev, submenu, zanoreni FROM menu WHERE zanoreni=0 ORDER BY LOWER(nazev) ASC;"</span>, NULL, $error))
+<a name="l00602"></a>00602     {
+<a name="l00603"></a>00603       <span class="keywordflow">if</span> ($res-&gt;numRows() != 0)
+<a name="l00604"></a>00604       {
+<a name="l00605"></a>00605         <span class="keywordflow">while</span> ($data = $res-&gt;fetchObject())
+<a name="l00606"></a>00606         {
+<a name="l00607"></a>00607           $submenu = $this-&gt;<a class="code" href="classDynamicEshopMenu.html#08a3453756a745ff22fcceade10c3ec1">VykresliBlokAdminMenu</a>($data-&gt;submenu);
+<a name="l00608"></a>00608 
+<a name="l00609"></a>00609           $odsazeni = str_repeat(<span class="stringliteral">"--"</span>, $data-&gt;zanoreni);
+<a name="l00610"></a>00610 
+<a name="l00611"></a>00611           $exter_add = $this-&gt;var-&gt;main[0]-&gt;NactiFunkci(2, <span class="stringliteral">"PridejSmazStranku"</span>, $this-&gt;<a class="code" href="classDynamicEshopMenu.html#d5e1a078437e22d4caefa2cfe2cb6325">UpravaStoupani</a>($data-&gt;<span class="keywordtype">id</span>));
+<a name="l00612"></a>00612 
+<a name="l00613"></a>00613           $result .=
+<a name="l00614"></a>00614           <span class="stringliteral">"{$odsazeni} ({$data-&gt;id}) {$data-&gt;nazev} - {$data-&gt;zanoreni}</span>
+<a name="l00615"></a>00615 <span class="stringliteral">          [[{$exter_add}]]</span>
+<a name="l00616"></a>00616 <span class="stringliteral">          &lt;a href=\"?{$this-&gt;var-&gt;get_kam}={$this-&gt;var-&gt;adresaadminu}&amp;amp;{$this-&gt;var-&gt;get_idmodul}={$this-&gt;idmodul}&amp;amp;co=add&amp;amp;id={$data-&gt;id}&amp;amp;zanoreni="</span>.($data-&gt;zanoreni + 1).<span class="stringliteral">"\" title=\"\"&gt;přidat podsekci&lt;/a&gt;</span>
+<a name="l00617"></a>00617 <span class="stringliteral">          &lt;a href=\"?{$this-&gt;var-&gt;get_kam}={$this-&gt;var-&gt;adresaadminu}&amp;amp;{$this-&gt;var-&gt;get_idmodul}={$this-&gt;idmodul}&amp;amp;co=edit&amp;amp;id={$data-&gt;id}\" title=\"\"&gt;upravit sekci&lt;/a&gt;</span>
+<a name="l00618"></a>00618 <span class="stringliteral">          &lt;a href=\"?{$this-&gt;var-&gt;get_kam}={$this-&gt;var-&gt;adresaadminu}&amp;amp;{$this-&gt;var-&gt;get_idmodul}={$this-&gt;idmodul}&amp;amp;co=del&amp;amp;id={$data-&gt;id}\" title=\"\" onclick=\"return confirm('Opravdu smazat: \'{$data-&gt;nazev}\' ?');\"&gt;smazat sekci&lt;/a&gt; &lt;br /&gt;</span>
+<a name="l00619"></a>00619 <span class="stringliteral">          {$submenu}"</span>;
+<a name="l00620"></a>00620         }
+<a name="l00621"></a>00621       }
+<a name="l00622"></a>00622     }
+<a name="l00623"></a>00623       <span class="keywordflow">else</span>
+<a name="l00624"></a>00624     {
+<a name="l00625"></a>00625       $this-&gt;var-&gt;main[0]-&gt;ErrorMsg($error);
+<a name="l00626"></a>00626     }
+<a name="l00627"></a>00627 
+<a name="l00628"></a>00628     <span class="keywordflow">return</span> $result;
+<a name="l00629"></a>00629   }
+<a name="l00630"></a>00630 
+<a name="l00638"></a><a class="code" href="classDynamicEshopMenu.html#08a3453756a745ff22fcceade10c3ec1">00638</a>   <span class="keyword">private</span> function <a class="code" href="classDynamicEshopMenu.html#08a3453756a745ff22fcceade10c3ec1">VykresliBlokAdminMenu</a>($submenu)
+<a name="l00639"></a>00639   {
+<a name="l00640"></a>00640     $sub = explode(<span class="stringliteral">"-"</span>, $submenu);
+<a name="l00641"></a>00641 
+<a name="l00642"></a>00642     <span class="keywordflow">if</span> (!Empty($sub[0]))  <span class="comment">//konrola prvniho indexu, rozhodnuti dalsiho volani</span>
+<a name="l00643"></a>00643     {
+<a name="l00644"></a>00644       $subwhere = <span class="stringliteral">""</span>;
+<a name="l00645"></a>00645       <span class="keywordflow">for</span> ($i = 0; $i &lt; count($sub); $i++)
+<a name="l00646"></a>00646       {
+<a name="l00647"></a>00647         $subwhere .= <span class="stringliteral">"{$sub[$i]}, "</span>; <span class="comment">//vygenerovani dotazu</span>
+<a name="l00648"></a>00648       }
+<a name="l00649"></a>00649       $subwhere = substr($subwhere, 0, -2);
+<a name="l00650"></a>00650 
+<a name="l00651"></a>00651       $result = <span class="stringliteral">""</span>;
+<a name="l00652"></a>00652       <span class="keywordflow">if</span> ($res = @$this-&gt;sqlite-&gt;query(<span class="stringliteral">"SELECT id, nazev, submenu, zanoreni FROM menu WHERE id IN ({$subwhere}) ORDER BY LOWER(nazev) ASC;"</span>, NULL, $error))
+<a name="l00653"></a>00653       {
+<a name="l00654"></a>00654         <span class="keywordflow">if</span> ($res-&gt;numRows() != 0)
+<a name="l00655"></a>00655         {
+<a name="l00656"></a>00656           <span class="keywordflow">while</span> ($data = $res-&gt;fetchObject())
+<a name="l00657"></a>00657           {
+<a name="l00658"></a>00658             $submenu = $this-&gt;<a class="code" href="classDynamicEshopMenu.html#08a3453756a745ff22fcceade10c3ec1">VykresliBlokAdminMenu</a>($data-&gt;submenu); <span class="comment">//rekurzivni volani</span>
+<a name="l00659"></a>00659 
+<a name="l00660"></a>00660             $odsazeni = str_repeat(<span class="stringliteral">"--"</span>, $data-&gt;zanoreni);  <span class="comment">//pocet carek zanoreni</span>
+<a name="l00661"></a>00661 
+<a name="l00662"></a>00662             $exter_add = $this-&gt;var-&gt;main[0]-&gt;NactiFunkci(2, <span class="stringliteral">"PridejSmazStranku"</span>, $this-&gt;<a class="code" href="classDynamicEshopMenu.html#d5e1a078437e22d4caefa2cfe2cb6325">UpravaStoupani</a>($data-&gt;<span class="keywordtype">id</span>));
+<a name="l00663"></a>00663 
+<a name="l00664"></a>00664             $result .=
+<a name="l00665"></a>00665             <span class="stringliteral">"{$odsazeni} ({$data-&gt;id}) {$data-&gt;nazev} - {$data-&gt;zanoreni}</span>
+<a name="l00666"></a>00666 <span class="stringliteral">            [[{$exter_add}]]</span>
+<a name="l00667"></a>00667 <span class="stringliteral">            &lt;a href=\"?{$this-&gt;var-&gt;get_kam}={$this-&gt;var-&gt;adresaadminu}&amp;amp;{$this-&gt;var-&gt;get_idmodul}={$this-&gt;idmodul}&amp;amp;co=add&amp;amp;id={$data-&gt;id}&amp;amp;zanoreni="</span>.($data-&gt;zanoreni + 1).<span class="stringliteral">"\" title=\"\"&gt;přidat podsekci&lt;/a&gt;</span>
+<a name="l00668"></a>00668 <span class="stringliteral">            &lt;a href=\"?{$this-&gt;var-&gt;get_kam}={$this-&gt;var-&gt;adresaadminu}&amp;amp;{$this-&gt;var-&gt;get_idmodul}={$this-&gt;idmodul}&amp;amp;co=edit&amp;amp;id={$data-&gt;id}\" title=\"\"&gt;upravit sekci&lt;/a&gt;</span>
+<a name="l00669"></a>00669 <span class="stringliteral">            &lt;a href=\"?{$this-&gt;var-&gt;get_kam}={$this-&gt;var-&gt;adresaadminu}&amp;amp;{$this-&gt;var-&gt;get_idmodul}={$this-&gt;idmodul}&amp;amp;co=del&amp;amp;id={$data-&gt;id}\" title=\"\" onclick=\"return confirm('Opravdu smazat: \'{$data-&gt;nazev}\' ?');\"&gt;smazat sekci&lt;/a&gt; &lt;br /&gt;</span>
+<a name="l00670"></a>00670 <span class="stringliteral">            {$submenu}"</span>;
+<a name="l00671"></a>00671           }
+<a name="l00672"></a>00672         }
+<a name="l00673"></a>00673       }
+<a name="l00674"></a>00674         <span class="keywordflow">else</span>
+<a name="l00675"></a>00675       {
+<a name="l00676"></a>00676         $this-&gt;var-&gt;main[0]-&gt;ErrorMsg($error);
+<a name="l00677"></a>00677       }
+<a name="l00678"></a>00678     }
+<a name="l00679"></a>00679 
+<a name="l00680"></a>00680     <span class="keywordflow">return</span> $result;
+<a name="l00681"></a>00681   }
+<a name="l00682"></a>00682 
+<a name="l00691"></a><a class="code" href="classDynamicEshopMenu.html#c4fb522e2f912a22e2b753f1692de490">00691</a>   <span class="keyword">private</span> function <a class="code" href="classDynamicEshopMenu.html#c4fb522e2f912a22e2b753f1692de490">UpravSubMenu</a>($id, $last_id)
+<a name="l00692"></a>00692   {
+<a name="l00693"></a>00693     <span class="keywordflow">if</span> ($res = @$this-&gt;sqlite-&gt;query(<span class="stringliteral">"SELECT submenu FROM menu WHERE id={$id};"</span>, NULL, $error))
+<a name="l00694"></a>00694     {
+<a name="l00695"></a>00695       <span class="keywordflow">if</span> ($res-&gt;numRows() == 1)
+<a name="l00696"></a>00696       {
+<a name="l00697"></a>00697         $submenu = $res-&gt;fetchObject()-&gt;submenu;
+<a name="l00698"></a>00698         $submenu = (Empty($submenu) ? <span class="stringliteral">"{$last_id}"</span> : <span class="stringliteral">"{$submenu}-{$last_id}"</span>);
+<a name="l00699"></a>00699 
+<a name="l00700"></a>00700         <span class="keywordflow">if</span> (!@$this-&gt;sqlite-&gt;queryExec(<span class="stringliteral">"UPDATE menu SET submenu='{$submenu}' WHERE id={$id};"</span>, $error))
+<a name="l00701"></a>00701         {
+<a name="l00702"></a>00702           $this-&gt;var-&gt;main[0]-&gt;ErrorMsg($error);
+<a name="l00703"></a>00703         }
+<a name="l00704"></a>00704       }
+<a name="l00705"></a>00705     }
+<a name="l00706"></a>00706       <span class="keywordflow">else</span>
+<a name="l00707"></a>00707     {
+<a name="l00708"></a>00708       $this-&gt;var-&gt;main[0]-&gt;ErrorMsg($error);
+<a name="l00709"></a>00709     }
+<a name="l00710"></a>00710 
+<a name="l00711"></a>00711     <span class="keywordflow">return</span> $result;
+<a name="l00712"></a>00712   }
+<a name="l00713"></a>00713 
+<a name="l00720"></a><a class="code" href="classDynamicEshopMenu.html#eb1aac896ff67253c032ff8f456db4bd">00720</a>   <span class="keyword">private</span> function <a class="code" href="classDynamicEshopMenu.html#eb1aac896ff67253c032ff8f456db4bd">UpravSubIntegritu</a>($delid)  <span class="comment">//zmaze id ... ktere bylo pod urovni a upravi subadresu</span>
+<a name="l00721"></a>00721   {
+<a name="l00722"></a>00722     $endid = 0;
+<a name="l00723"></a>00723     settype($delid, <span class="stringliteral">"integer"</span>);
+<a name="l00724"></a>00724     <span class="comment">//zisteni korenu daneho ID, uz nevyhledava</span>
+<a name="l00725"></a>00725     <span class="keywordflow">if</span> ($res = @$this-&gt;sqlite-&gt;query(<span class="stringliteral">"SELECT koren FROM menu WHERE id={$delid};"</span>, NULL, $error))
+<a name="l00726"></a>00726     {
+<a name="l00727"></a>00727       <span class="keywordflow">if</span> ($res-&gt;numRows() == 1)
+<a name="l00728"></a>00728       {
+<a name="l00729"></a>00729         $endid = $res-&gt;fetchObject()-&gt;koren;
+<a name="l00730"></a>00730       }
+<a name="l00731"></a>00731     }
+<a name="l00732"></a>00732       <span class="keywordflow">else</span>
+<a name="l00733"></a>00733     {
+<a name="l00734"></a>00734       $this-&gt;var-&gt;main[0]-&gt;ErrorMsg($error);
+<a name="l00735"></a>00735     }
+<a name="l00736"></a>00736 
+<a name="l00737"></a>00737     settype($endid, <span class="stringliteral">"integer"</span>);
+<a name="l00738"></a>00738     <span class="comment">//nacteni submenu ktere se ma upravit</span>
+<a name="l00739"></a>00739     <span class="keywordflow">if</span> ($res = @$this-&gt;sqlite-&gt;query(<span class="stringliteral">"SELECT submenu FROM menu WHERE id={$endid};"</span>, NULL, $error))
+<a name="l00740"></a>00740     {
+<a name="l00741"></a>00741       <span class="keywordflow">if</span> ($res-&gt;numRows() == 1)
+<a name="l00742"></a>00742       {
+<a name="l00743"></a>00743         $submenu = $res-&gt;fetchObject()-&gt;submenu;
+<a name="l00744"></a>00744       }
+<a name="l00745"></a>00745     }
+<a name="l00746"></a>00746       <span class="keywordflow">else</span>
+<a name="l00747"></a>00747     {
+<a name="l00748"></a>00748       $this-&gt;var-&gt;main[0]-&gt;ErrorMsg($error);
+<a name="l00749"></a>00749     }
+<a name="l00750"></a>00750 
+<a name="l00751"></a>00751     $sub = explode(<span class="stringliteral">"-"</span>, $submenu);
+<a name="l00752"></a>00752     $newsubmenu = <span class="stringliteral">""</span>;
+<a name="l00753"></a>00753 
+<a name="l00754"></a>00754     <span class="keywordflow">if</span> (count($sub) &gt; 1)
+<a name="l00755"></a>00755     {
+<a name="l00756"></a>00756       <span class="keywordflow">for</span> ($i = 0; $i &lt; count($sub); $i++)
+<a name="l00757"></a>00757       {
+<a name="l00758"></a>00758         <span class="keywordflow">if</span> ($sub[$i] != $delid &amp;&amp; $this-&gt;<a class="code" href="classDynamicEshopMenu.html#83fd9e1ea3d87d39911b9e14edb1d1e4">ExistujeID</a>($sub[$i]))  <span class="comment">//vypise bez delid a neexistujici ID</span>
+<a name="l00759"></a>00759         {
+<a name="l00760"></a>00760           $newsubmenu .= <span class="stringliteral">"{$sub[$i]}-"</span>;
+<a name="l00761"></a>00761         }
+<a name="l00762"></a>00762       }
+<a name="l00763"></a>00763 
+<a name="l00764"></a>00764       <span class="keywordflow">if</span> (Empty($newsubmenu))
+<a name="l00765"></a>00765       {
+<a name="l00766"></a>00766         $newsubmenu = NULL;
+<a name="l00767"></a>00767       }
+<a name="l00768"></a>00768         <span class="keywordflow">else</span>
+<a name="l00769"></a>00769       {
+<a name="l00770"></a>00770         $newsubmenu = substr($newsubmenu, 0, -1);
+<a name="l00771"></a>00771       }
+<a name="l00772"></a>00772     }
+<a name="l00773"></a>00773       <span class="keywordflow">else</span>
+<a name="l00774"></a>00774     {
+<a name="l00775"></a>00775       $newsubmenu = NULL;
+<a name="l00776"></a>00776     }
+<a name="l00777"></a>00777 
+<a name="l00778"></a>00778     <span class="keywordflow">if</span> (!@$this-&gt;sqlite-&gt;queryExec(<span class="stringliteral">"UPDATE menu SET submenu='{$newsubmenu}' WHERE id={$endid};"</span>, $error))
+<a name="l00779"></a>00779     {
+<a name="l00780"></a>00780       $this-&gt;var-&gt;main[0]-&gt;ErrorMsg($error);
+<a name="l00781"></a>00781     }
+<a name="l00782"></a>00782   }
+<a name="l00783"></a>00783 
+<a name="l00791"></a><a class="code" href="classDynamicEshopMenu.html#83fd9e1ea3d87d39911b9e14edb1d1e4">00791</a>   <span class="keyword">private</span> function <a class="code" href="classDynamicEshopMenu.html#83fd9e1ea3d87d39911b9e14edb1d1e4">ExistujeID</a>($id)
+<a name="l00792"></a>00792   {
+<a name="l00793"></a>00793     settype($id, <span class="stringliteral">"integer"</span>);
+<a name="l00794"></a>00794     <span class="keywordflow">if</span> ($res = @$this-&gt;sqlite-&gt;query(<span class="stringliteral">"SELECT id FROM menu WHERE id={$id};"</span>, NULL, $error))
+<a name="l00795"></a>00795     {
+<a name="l00796"></a>00796       $result = ($res-&gt;numRows() == 1 ? <span class="keyword">true</span> : <span class="keyword">false</span>);
+<a name="l00797"></a>00797     }
+<a name="l00798"></a>00798       <span class="keywordflow">else</span>
+<a name="l00799"></a>00799     {
+<a name="l00800"></a>00800       $this-&gt;var-&gt;main[0]-&gt;ErrorMsg($error);
+<a name="l00801"></a>00801     }
+<a name="l00802"></a>00802 
+<a name="l00803"></a>00803     <span class="keywordflow">return</span> $result;
+<a name="l00804"></a>00804   }
+<a name="l00805"></a>00805 }
+<a name="l00806"></a>00806 ?&gt;
+</pre></div></div>
+<hr size="1"><address style="text-align: right;"><small>Generováno Wed Apr 1 23:40:35 2009 pro projekt Eshop postaveny na PHP layoutu programem&nbsp;
+<a href="http://www.doxygen.org/index.html">
+<img src="doxygen.png" alt="doxygen" align="middle" border="0"></a> 1.5.5 </small></address>
+</body>
+</html>

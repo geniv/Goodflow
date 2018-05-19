@@ -1,0 +1,179 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>Novy vychozi PHP layout: Zdrojový soubor /var/www/phplayout/modules/static_idos/idos.php</title>
+<link href="tabs.css" rel="stylesheet" type="text/css">
+<link href="doxygen.css" rel="stylesheet" type="text/css">
+</head><body>
+<!-- Generováno programem Doxygen 1.5.8 -->
+<div class="navigation" id="top">
+  <div class="tabs">
+    <ul>
+      <li><a href="index.html"><span>Hlavní&nbsp;stránka</span></a></li>
+      <li><a href="annotated.html"><span>Třídy</span></a></li>
+      <li class="current"><a href="files.html"><span>Soubory</span></a></li>
+    </ul>
+  </div>
+  <div class="tabs">
+    <ul>
+      <li><a href="files.html"><span>Seznam&nbsp;souborů</span></a></li>
+      <li><a href="globals.html"><span>Symboly&nbsp;v&nbsp;souborech</span></a></li>
+    </ul>
+  </div>
+<h1>/var/www/phplayout/modules/static_idos/idos.php</h1><a href="idos_8php.html">Zobrazit dokumentaci tohoto souboru.</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 &lt;?php
+<a name="l00002"></a>00002 
+<a name="l00016"></a><a class="code" href="classStaticIdos.html">00016</a> <span class="keyword">class </span><a class="code" href="classStaticIdos.html">StaticIdos</a> <span class="keyword">extends</span> <a class="code" href="classDefaultModule.html">DefaultModule</a>
+<a name="l00017"></a>00017 {
+<a name="l00018"></a><a class="code" href="classStaticIdos.html#b781bdd82548c2c0954535483f1a071f">00018</a>   <span class="keyword">private</span> <a class="code" href="classStaticIdos.html#b781bdd82548c2c0954535483f1a071f">$var</a>, <a class="code" href="classStaticIdos.html#51d2106ebfd3970ca0d6591d7dc229f6">$dirpath</a>, <a class="code" href="classStaticIdos.html#2cc2a27ff4b0137e60150ee0e8e9703c">$absolutni_url</a>, <a class="code" href="classStaticIdos.html#cb48581d0bef90b7246dfc229bac8e49">$dostupneakce</a>, <a class="code" href="classStaticIdos.html#102fc48a044d65447fe711aea51df7e7">$unikatni</a>;
+<a name="l00019"></a>00019 
+<a name="l00020"></a><a class="code" href="classStaticIdos.html#339d5d1ae512965d3b614a0968c8b90d">00020</a>   <span class="keyword">private</span> <a class="code" href="classStaticIdos.html#339d5d1ae512965d3b614a0968c8b90d">$vyhledavaciurl</a> = <span class="stringliteral">"http://www.idos.cz/%%0%%/?f=%%1%%&amp;amp;t=%%2%%&amp;amp;date=%%3%%&amp;amp;time=%%4%%&amp;amp;byarr=true&amp;amp;lng=C&amp;amp;submit=true"</span>;  <span class="comment">//dopsat dle webu</span>
+<a name="l00021"></a>00021 
+<a name="l00022"></a><a class="code" href="classStaticIdos.html#96fd1846849585383a9138c22c33988a">00022</a>   <span class="keyword">private</span> <a class="code" href="classStaticIdos.html#96fd1846849585383a9138c22c33988a">$cas</a> = <span class="stringliteral">"20:00"</span>;
+<a name="l00023"></a><a class="code" href="classStaticIdos.html#74f991643f08582e68984cfdb5f24531">00023</a>   <span class="keyword">private</span> <a class="code" href="classStaticIdos.html#74f991643f08582e68984cfdb5f24531">$cil</a> = <span class="stringliteral">"Moravská Nová Ves"</span>;
+<a name="l00024"></a>00024 
+<a name="l00025"></a><a class="code" href="classStaticIdos.html#afd077c338b30f781ee13a6c7e7e7eec">00025</a>   <span class="keyword">private</span> <a class="code" href="classStaticIdos.html#afd077c338b30f781ee13a6c7e7e7eec">$vychozi</a> = array (<span class="stringliteral">"Břeclav"</span>,
+<a name="l00026"></a>00026                             <span class="stringliteral">"..."</span>);
+<a name="l00027"></a>00027 
+<a name="l00028"></a><a class="code" href="classStaticIdos.html#af26629e537b7f84e33ae93b53ec3f7a">00028</a>   <span class="keyword">private</span> <a class="code" href="classStaticIdos.html#af26629e537b7f84e33ae93b53ec3f7a">$doprava</a> = array (<span class="stringliteral">"autobusy"</span> =&gt; <span class="stringliteral">"Bus"</span>,
+<a name="l00029"></a>00029                             <span class="stringliteral">"klic"</span> =&gt; <span class="stringliteral">"hodnota"</span>
+<a name="l00030"></a>00030                             );
+<a name="l00031"></a>00031 
+<a name="l00039"></a><a class="code" href="classStaticIdos.html#a1c43c25eb8b0f71abd3a8341a6b06e5">00039</a>   <span class="keyword">public</span> function <a class="code" href="classStaticIdos.html#a1c43c25eb8b0f71abd3a8341a6b06e5">__construct</a>(&amp;<a class="code" href="classStaticIdos.html#b781bdd82548c2c0954535483f1a071f">$var</a>, $index) <span class="comment">//konstruktor</span>
+<a name="l00040"></a>00040   {
+<a name="l00041"></a>00041     $this-&gt;var = <a class="code" href="classStaticIdos.html#b781bdd82548c2c0954535483f1a071f">$var</a>;
+<a name="l00042"></a>00042 
+<a name="l00043"></a>00043     $this-&gt;dirpath = dirname($this-&gt;var-&gt;moduly[$index][<span class="stringliteral">"include"</span>]);
+<a name="l00044"></a>00044 
+<a name="l00045"></a>00045     <span class="comment">//includovani unikatniho obsahu</span>
+<a name="l00046"></a>00046     $this-&gt;unikatni = $this-&gt;<a class="code" href="classDefaultModule.html#f9bc13977b7099f00c4a74192ce85dce">NactiObsahSouboru</a>(<span class="stringliteral">"{$this-&gt;dirpath}/.unikatni_obsah.php"</span>);
+<a name="l00047"></a>00047     $this-&gt;absolutni_url = $this-&gt;var-&gt;main[0]-&gt;NactiFunkci(<span class="stringliteral">"Funkce"</span>, <span class="stringliteral">"AbsoluteUrl"</span>);
+<a name="l00048"></a>00048 
+<a name="l00049"></a>00049     $this-&gt;vyhledavaciurl = $this-&gt;<a class="code" href="classDefaultModule.html#f43261ee577b5bedbdaff44d21c64d38">NactiUnikatniObsah</a>($this-&gt;unikatni[<span class="stringliteral">"set_vyhledavaciurl"</span>]);
+<a name="l00050"></a>00050     $this-&gt;vychozi = $this-&gt;<a class="code" href="classDefaultModule.html#f43261ee577b5bedbdaff44d21c64d38">NactiUnikatniObsah</a>($this-&gt;unikatni[<span class="stringliteral">"set_vychozi"</span>]);
+<a name="l00051"></a>00051     $this-&gt;doprava = $this-&gt;<a class="code" href="classDefaultModule.html#f43261ee577b5bedbdaff44d21c64d38">NactiUnikatniObsah</a>($this-&gt;unikatni[<span class="stringliteral">"set_doprava"</span>]);
+<a name="l00052"></a>00052   }
+<a name="l00053"></a>00053 
+<a name="l00063"></a><a class="code" href="classStaticIdos.html#72dbf3b3628730c2e9bb4b8a9712299a">00063</a>   <span class="keyword">private</span> function <a class="code" href="classStaticIdos.html#72dbf3b3628730c2e9bb4b8a9712299a">DekodujDatum</a>($datum, $oddelovac = <span class="stringliteral">" "</span>, $poradi = 1)
+<a name="l00064"></a>00064   {
+<a name="l00065"></a>00065     <a class="code" href="_8unikatni__fukce_8php.html#e241cf0159803673d118f68d99e6342f">$result</a> = <span class="stringliteral">""</span>;
+<a name="l00066"></a>00066     $dat = explode($oddelovac, $datum);
+<a name="l00067"></a>00067 
+<a name="l00068"></a>00068     <span class="keywordflow">if</span> (is_array($poradi))
+<a name="l00069"></a>00069     {
+<a name="l00070"></a>00070       <span class="keywordflow">for</span> ($i = 0; $i &lt; count($poradi); $i++)
+<a name="l00071"></a>00071       {
+<a name="l00072"></a>00072         <a class="code" href="_8unikatni__fukce_8php.html#e241cf0159803673d118f68d99e6342f">$result</a> .= $dat[$poradi[$i]];
+<a name="l00073"></a>00073       }
+<a name="l00074"></a>00074 
+<a name="l00075"></a>00075       <span class="keywordflow">if</span> (count($poradi) == 2)  <span class="comment">//pokud jsou jen 2 elementy tak prida 3 tj aktualni rok</span>
+<a name="l00076"></a>00076       {
+<a name="l00077"></a>00077         <a class="code" href="_8unikatni__fukce_8php.html#e241cf0159803673d118f68d99e6342f">$result</a> .= date(<span class="stringliteral">"Y"</span>);
+<a name="l00078"></a>00078       }
+<a name="l00079"></a>00079     }
+<a name="l00080"></a>00080       <span class="keywordflow">else</span>
+<a name="l00081"></a>00081     {
+<a name="l00082"></a>00082       <a class="code" href="_8unikatni__fukce_8php.html#e241cf0159803673d118f68d99e6342f">$result</a> = $dat[$poradi];
+<a name="l00083"></a>00083     }
+<a name="l00084"></a>00084 
+<a name="l00085"></a>00085     <span class="keywordflow">return</span> <a class="code" href="_8unikatni__fukce_8php.html#e241cf0159803673d118f68d99e6342f">$result</a>;
+<a name="l00086"></a>00086   }
+<a name="l00087"></a>00087 
+<a name="l00100"></a><a class="code" href="classStaticIdos.html#5d34d776bfc63dfd65618abb9a08b88a">00100</a>   <span class="keyword">public</span> function <a class="code" href="classStaticIdos.html#5d34d776bfc63dfd65618abb9a08b88a">NacteniAkci</a>($obsahakci, $datumpolozka = 0, $nazevpolozka = 1, $format = <span class="stringliteral">"j.n.Y"</span>, $oddelovac = <span class="stringliteral">" "</span>, $poradi)
+<a name="l00101"></a>00101   {
+<a name="l00102"></a>00102     <span class="keywordflow">if</span> (is_array($obsahakci))
+<a name="l00103"></a>00103     {
+<a name="l00104"></a>00104       <span class="keywordflow">for</span> ($i = 0; $i &lt; count($obsahakci[<span class="stringliteral">"obsah"</span>]); $i++)
+<a name="l00105"></a>00105       {
+<a name="l00106"></a>00106         $obsahpole = explode(<span class="stringliteral">"|-x-|"</span>, $obsahakci[<span class="stringliteral">"obsah"</span>][$i]);
+<a name="l00107"></a>00107 
+<a name="l00108"></a>00108         $this-&gt;dostupneakce[<span class="stringliteral">"datum"</span>][] = date($format, strtotime($this-&gt;<a class="code" href="classStaticIdos.html#72dbf3b3628730c2e9bb4b8a9712299a">DekodujDatum</a>($obsahpole[$datumpolozka], $oddelovac, $poradi)));
+<a name="l00109"></a>00109         $this-&gt;dostupneakce[<span class="stringliteral">"nazev"</span>][] = $obsahpole[$nazevpolozka];
+<a name="l00110"></a>00110       }
+<a name="l00111"></a>00111     }
+<a name="l00112"></a>00112   }
+<a name="l00113"></a>00113 
+<a name="l00120"></a><a class="code" href="classStaticIdos.html#42b46906a9f1f561a7d12cc32ffca356">00120</a>   <span class="keyword">private</span> function <a class="code" href="classStaticIdos.html#42b46906a9f1f561a7d12cc32ffca356">VyberAkce</a>()
+<a name="l00121"></a>00121   {
+<a name="l00122"></a>00122     <a class="code" href="_8unikatni__fukce_8php.html#e241cf0159803673d118f68d99e6342f">$result</a> = $this-&gt;<a class="code" href="classDefaultModule.html#f43261ee577b5bedbdaff44d21c64d38">NactiUnikatniObsah</a>($this-&gt;unikatni[<span class="stringliteral">"normal_datum_select_begin"</span>]);
+<a name="l00123"></a>00123     <span class="keywordflow">for</span> ($i = 0; $i &lt; count($this-&gt;dostupneakce[<span class="stringliteral">"nazev"</span>]); $i++)
+<a name="l00124"></a>00124     {
+<a name="l00125"></a>00125       <a class="code" href="_8unikatni__fukce_8php.html#e241cf0159803673d118f68d99e6342f">$result</a> .= $this-&gt;<a class="code" href="classDefaultModule.html#f43261ee577b5bedbdaff44d21c64d38">NactiUnikatniObsah</a>($this-&gt;unikatni[<span class="stringliteral">"normal_datum_select"</span>],
+<a name="l00126"></a>00126                                           $this-&gt;dostupneakce[<span class="stringliteral">"datum"</span>][$i],
+<a name="l00127"></a>00127                                           $this-&gt;dostupneakce[<span class="stringliteral">"nazev"</span>][$i]);
+<a name="l00128"></a>00128     }
+<a name="l00129"></a>00129     <a class="code" href="_8unikatni__fukce_8php.html#e241cf0159803673d118f68d99e6342f">$result</a> .= $this-&gt;<a class="code" href="classDefaultModule.html#f43261ee577b5bedbdaff44d21c64d38">NactiUnikatniObsah</a>($this-&gt;unikatni[<span class="stringliteral">"normal_datum_select_end"</span>]);
+<a name="l00130"></a>00130 
+<a name="l00131"></a>00131     <span class="keywordflow">return</span> <a class="code" href="_8unikatni__fukce_8php.html#e241cf0159803673d118f68d99e6342f">$result</a>;
+<a name="l00132"></a>00132   }
+<a name="l00133"></a>00133 
+<a name="l00140"></a><a class="code" href="classStaticIdos.html#3ae449aaf5456b5f21f1c3fd339a74d0">00140</a>   <span class="keyword">private</span> function <a class="code" href="classStaticIdos.html#3ae449aaf5456b5f21f1c3fd339a74d0">VyberDopravy</a>()
+<a name="l00141"></a>00141   {
+<a name="l00142"></a>00142     <a class="code" href="_8unikatni__fukce_8php.html#e241cf0159803673d118f68d99e6342f">$result</a> = $this-&gt;<a class="code" href="classDefaultModule.html#f43261ee577b5bedbdaff44d21c64d38">NactiUnikatniObsah</a>($this-&gt;unikatni[<span class="stringliteral">"normal_doprava_select_begin"</span>]);
+<a name="l00143"></a>00143     $klice = array_keys($this-&gt;doprava);
+<a name="l00144"></a>00144     <span class="keywordflow">for</span> ($i = 0; $i &lt; count($this-&gt;doprava); $i++)
+<a name="l00145"></a>00145     {
+<a name="l00146"></a>00146       <a class="code" href="_8unikatni__fukce_8php.html#e241cf0159803673d118f68d99e6342f">$result</a> .= $this-&gt;<a class="code" href="classDefaultModule.html#f43261ee577b5bedbdaff44d21c64d38">NactiUnikatniObsah</a>($this-&gt;unikatni[<span class="stringliteral">"normal_doprava_select"</span>],
+<a name="l00147"></a>00147                                           $klice[$i],
+<a name="l00148"></a>00148                                           $this-&gt;doprava[$klice[$i]]);
+<a name="l00149"></a>00149     }
+<a name="l00150"></a>00150     <a class="code" href="_8unikatni__fukce_8php.html#e241cf0159803673d118f68d99e6342f">$result</a> .= $this-&gt;<a class="code" href="classDefaultModule.html#f43261ee577b5bedbdaff44d21c64d38">NactiUnikatniObsah</a>($this-&gt;unikatni[<span class="stringliteral">"normal_doprava_select_end"</span>]);
+<a name="l00151"></a>00151 
+<a name="l00152"></a>00152     <span class="keywordflow">return</span> <a class="code" href="_8unikatni__fukce_8php.html#e241cf0159803673d118f68d99e6342f">$result</a>;
+<a name="l00153"></a>00153   }
+<a name="l00154"></a>00154 
+<a name="l00161"></a><a class="code" href="classStaticIdos.html#cae655d89748e8d47e873934397daf72">00161</a>   <span class="keyword">private</span> function <a class="code" href="classStaticIdos.html#cae655d89748e8d47e873934397daf72">VyberStartu</a>()
+<a name="l00162"></a>00162   {
+<a name="l00163"></a>00163     <a class="code" href="_8unikatni__fukce_8php.html#e241cf0159803673d118f68d99e6342f">$result</a> = $this-&gt;<a class="code" href="classDefaultModule.html#f43261ee577b5bedbdaff44d21c64d38">NactiUnikatniObsah</a>($this-&gt;unikatni[<span class="stringliteral">"normal_start_select_begin"</span>]);
+<a name="l00164"></a>00164     <span class="keywordflow">for</span> ($i = 0; $i &lt; count($this-&gt;vychozi); $i++)
+<a name="l00165"></a>00165     {
+<a name="l00166"></a>00166       <a class="code" href="_8unikatni__fukce_8php.html#e241cf0159803673d118f68d99e6342f">$result</a> .= $this-&gt;<a class="code" href="classDefaultModule.html#f43261ee577b5bedbdaff44d21c64d38">NactiUnikatniObsah</a>($this-&gt;unikatni[<span class="stringliteral">"normal_start_select"</span>],
+<a name="l00167"></a>00167                                           $this-&gt;vychozi[$i],
+<a name="l00168"></a>00168                                           $this-&gt;vychozi[$i]);
+<a name="l00169"></a>00169     }
+<a name="l00170"></a>00170     <a class="code" href="_8unikatni__fukce_8php.html#e241cf0159803673d118f68d99e6342f">$result</a> .= $this-&gt;<a class="code" href="classDefaultModule.html#f43261ee577b5bedbdaff44d21c64d38">NactiUnikatniObsah</a>($this-&gt;unikatni[<span class="stringliteral">"normal_start_select_end"</span>]);
+<a name="l00171"></a>00171 
+<a name="l00172"></a>00172     <span class="keywordflow">return</span> <a class="code" href="_8unikatni__fukce_8php.html#e241cf0159803673d118f68d99e6342f">$result</a>;
+<a name="l00173"></a>00173   }
+<a name="l00174"></a>00174 
+<a name="l00184"></a><a class="code" href="classStaticIdos.html#a4656d64e6d8f41a4658f16d7cbae9ea">00184</a>   <span class="keyword">public</span> function <a class="code" href="classStaticIdos.html#a4656d64e6d8f41a4658f16d7cbae9ea">Idos</a>($tvar = 1)
+<a name="l00185"></a>00185   {
+<a name="l00186"></a>00186     $this-&gt;cas = $this-&gt;<a class="code" href="classDefaultModule.html#f43261ee577b5bedbdaff44d21c64d38">NactiUnikatniObsah</a>($this-&gt;unikatni[<span class="stringliteral">"set_cas_{$tvar}"</span>]);
+<a name="l00187"></a>00187     $this-&gt;cil = $this-&gt;<a class="code" href="classDefaultModule.html#f43261ee577b5bedbdaff44d21c64d38">NactiUnikatniObsah</a>($this-&gt;unikatni[<span class="stringliteral">"set_cil_{$tvar}"</span>]);
+<a name="l00188"></a>00188 
+<a name="l00189"></a>00189     <a class="code" href="_8unikatni__fukce_8php.html#e241cf0159803673d118f68d99e6342f">$result</a> = $this-&gt;<a class="code" href="classDefaultModule.html#f43261ee577b5bedbdaff44d21c64d38">NactiUnikatniObsah</a>($this-&gt;unikatni[<span class="stringliteral">"normal_vypis_obsah_{$tvar}"</span>],
+<a name="l00190"></a>00190                                         $this-&gt;<a class="code" href="classStaticIdos.html#42b46906a9f1f561a7d12cc32ffca356">VyberAkce</a>(),
+<a name="l00191"></a>00191                                         $this-&gt;<a class="code" href="classStaticIdos.html#cae655d89748e8d47e873934397daf72">VyberStartu</a>(),
+<a name="l00192"></a>00192                                         $this-&gt;cil,
+<a name="l00193"></a>00193                                         $this-&gt;<a class="code" href="classStaticIdos.html#3ae449aaf5456b5f21f1c3fd339a74d0">VyberDopravy</a>(),
+<a name="l00194"></a>00194                                         $this-&gt;cas,
+<a name="l00195"></a>00195                                         <span class="stringliteral">" name=\"tlacitko\""</span>);
+<a name="l00196"></a>00196 
+<a name="l00197"></a>00197     <span class="keywordflow">if</span> (!Empty($_POST[<span class="stringliteral">"tlacitko"</span>]) &amp;&amp; <span class="comment">//pokud se splni dane podminky</span>
+<a name="l00198"></a>00198         !Empty($_POST[<span class="stringliteral">"datum"</span>]) &amp;&amp;
+<a name="l00199"></a>00199         !Empty($_POST[<span class="stringliteral">"start"</span>]) &amp;&amp;
+<a name="l00200"></a>00200         !Empty($_POST[<span class="stringliteral">"doprava"</span>]))
+<a name="l00201"></a>00201     {
+<a name="l00202"></a>00202       $vstup[] = $_POST[<span class="stringliteral">"doprava"</span>];
+<a name="l00203"></a>00203       $vstup[] = $_POST[<span class="stringliteral">"start"</span>];
+<a name="l00204"></a>00204       $vstup[] = $this-&gt;cil;
+<a name="l00205"></a>00205       $vstup[] = $_POST[<span class="stringliteral">"datum"</span>];
+<a name="l00206"></a>00206       $vstup[] = $this-&gt;cas;
+<a name="l00207"></a>00207 
+<a name="l00208"></a>00208       $redirect = $this-&gt;vyhledavaciurl;
+<a name="l00209"></a>00209       <span class="keywordflow">for</span> ($i = 0; $i &lt; 5; $i++)
+<a name="l00210"></a>00210       {
+<a name="l00211"></a>00211         $redirect = str_replace(<span class="stringliteral">"%%{$i}%%"</span>, $vstup[$i], $redirect);
+<a name="l00212"></a>00212       }
+<a name="l00213"></a>00213 
+<a name="l00214"></a>00214       $this-&gt;var-&gt;main[0]-&gt;AutoClick(1, $redirect);  <span class="comment">//auto kliknuti a vyhledani spoje</span>
+<a name="l00215"></a>00215     }
+<a name="l00216"></a>00216 
+<a name="l00217"></a>00217     <span class="keywordflow">return</span> <a class="code" href="_8unikatni__fukce_8php.html#e241cf0159803673d118f68d99e6342f">$result</a>;
+<a name="l00218"></a>00218   }
+<a name="l00219"></a>00219 }
+<a name="l00220"></a>00220 ?&gt;
+</pre></div></div>
+<hr size="1"><address style="text-align: right;"><small>Generováno Tue Aug 4 13:38:11 2009 pro projekt Novy vychozi PHP layout programem&nbsp;
+<a href="http://www.doxygen.org/index.html">
+<img src="doxygen.png" alt="doxygen" align="middle" border="0"></a> 1.5.8 </small></address>
+</body>
+</html>

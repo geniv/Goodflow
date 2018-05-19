@@ -1,0 +1,122 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>Eshop postaveny na PHP layoutu: Zdrojový soubor /var/www/eshop_foltyn/config_promenne.php</title>
+<link href="doxygen.css" rel="stylesheet" type="text/css">
+<link href="tabs.css" rel="stylesheet" type="text/css">
+</head><body>
+<!-- Generováno programem Doxygen 1.5.5 -->
+<div class="navigation" id="top">
+  <div class="tabs">
+    <ul>
+      <li><a href="index.html"><span>Hlavní&nbsp;stránka</span></a></li>
+      <li><a href="annotated.html"><span>Třídy</span></a></li>
+      <li class="current"><a href="files.html"><span>Soubory</span></a></li>
+    </ul>
+  </div>
+<h1>/var/www/eshop_foltyn/config_promenne.php</h1><a href="config__promenne_8php.html">Zobrazit dokumentaci tohoto souboru.</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 &lt;?php
+<a name="l00002"></a>00002 
+<a name="l00007"></a><a class="code" href="classConfigPromenne.html">00007</a>   <span class="keyword">class </span><a class="code" href="classConfigPromenne.html">ConfigPromenne</a>
+<a name="l00008"></a>00008   {
+<a name="l00009"></a><a class="code" href="classConfigPromenne.html#ce035d4c1118b3933f0deac70e3a995c">00009</a>     <span class="keyword">public</span> <a class="code" href="classConfigPromenne.html#ce035d4c1118b3933f0deac70e3a995c">$default</a> = <span class="stringliteral">"uvod"</span>; <span class="comment">//defaultni stranka</span>
+<a name="l00010"></a>00010 
+<a name="l00011"></a><a class="code" href="classConfigPromenne.html#ff05b83f359b5736a80d3aed05593040">00011</a>     <span class="keyword">public</span> <a class="code" href="classConfigPromenne.html#ff05b83f359b5736a80d3aed05593040">$klenot</a> = <span class="keyword">true</span>;  <span class="comment">//true/false - nastaveni jestli je domena na klenot.cz ci ne</span>
+<a name="l00012"></a><a class="code" href="classConfigPromenne.html#7c3617a5625395367083555878ab52de">00012</a>     <span class="keyword">public</span> <a class="code" href="classConfigPromenne.html#7c3617a5625395367083555878ab52de">$autoklenot</a> = <span class="keyword">true</span>;  <span class="comment">//true/false - (zapnuto / vypnuto auto zjistovani) - zjitsti podle IP jestli je soubor na webu si nikoli</span>
+<a name="l00013"></a>00013 
+<a name="l00014"></a><a class="code" href="classConfigPromenne.html#fc1c19fb8cfc5ffade22c030bc81dfbd">00014</a>     <span class="keyword">public</span> <a class="code" href="classConfigPromenne.html#fc1c19fb8cfc5ffade22c030bc81dfbd">$aktualizovat</a> = <span class="keyword">true</span>; <span class="comment">//true/false - zapnuti aktualizaci / vypnuti aktualizaci</span>
+<a name="l00015"></a>00015 
+<a name="l00016"></a><a class="code" href="classConfigPromenne.html#1598058ff4ac867f5ed000416c75f5c2">00016</a>     <span class="keyword">public</span> <a class="code" href="classConfigPromenne.html#1598058ff4ac867f5ed000416c75f5c2">$administrace</a> = <span class="keyword">true</span>;  <span class="comment">//ma-li stranka obsahovat admin sekci</span>
+<a name="l00017"></a><a class="code" href="classConfigPromenne.html#1b934d05857b88ee91fe1f2347331e6a">00017</a>     <span class="keyword">public</span> <a class="code" href="classConfigPromenne.html#1b934d05857b88ee91fe1f2347331e6a">$adresaadminu</a> = <span class="stringliteral">"\$admin"</span>;    <span class="comment">//text adresy do adminu</span>
+<a name="l00018"></a><a class="code" href="classConfigPromenne.html#8ef63b8e020de706f70ea37ac4361649">00018</a>     <span class="keyword">public</span> <a class="code" href="classConfigPromenne.html#8ef63b8e020de706f70ea37ac4361649">$aktivniadmin</a> = <span class="keyword">false</span>; <span class="comment">//je-li admin prihlasen bude true a aktvuje prvky s adminem</span>
+<a name="l00019"></a>00019 
+<a name="l00023"></a><a class="code" href="classConfigPromenne.html#0c2339a492755e7515a7049dbb4e3eb9">00023</a>     <span class="keyword">public</span> <a class="code" href="classConfigPromenne.html#0c2339a492755e7515a7049dbb4e3eb9">$adminpristup</a> = array (<span class="stringliteral">"Geniv"</span> =&gt; <span class="stringliteral">"93f9a5d3507bbd81db94663fd09dc866"</span>,  <span class="comment">//hesla v doubleMD5</span>
+<a name="l00024"></a>00024                                   <span class="stringliteral">"Fugess"</span> =&gt; <span class="stringliteral">"7c8c47575b1ff8a0a34e871a33b5954f"</span>,
+<a name="l00025"></a>00025                                   <span class="stringliteral">"jurkix"</span> =&gt; <span class="stringliteral">"2750e0d761a4d611073ae2ac3b171753"</span>
+<a name="l00026"></a>00026                                   );
+<a name="l00027"></a>00027 
+<a name="l00028"></a><a class="code" href="classConfigPromenne.html#0e3e99780f69d8cfdf84ecf32e11b193">00028</a>     <span class="keyword">public</span> <a class="code" href="classConfigPromenne.html#0e3e99780f69d8cfdf84ecf32e11b193">$souborymenu</a> = <span class="stringliteral">"./sekce"</span>;  <span class="comment">//umisteni souboru menu</span>
+<a name="l00029"></a>00029 
+<a name="l00030"></a><a class="code" href="classConfigPromenne.html#ba4821b982d51a3d103e16d8eefe66eb">00030</a>     <span class="keyword">public</span> <a class="code" href="classConfigPromenne.html#ba4821b982d51a3d103e16d8eefe66eb">$get_kam</a> = <span class="stringliteral">"action"</span>;
+<a name="l00031"></a><a class="code" href="classConfigPromenne.html#c0b5f739d12df19b71e0ec1020403290">00031</a>     <span class="keyword">public</span> <a class="code" href="classConfigPromenne.html#c0b5f739d12df19b71e0ec1020403290">$get_idmodul</a> = <span class="stringliteral">"modul"</span>;
+<a name="l00032"></a><a class="code" href="classConfigPromenne.html#4e80bd9da46ae0e3bb0366da9a21846c">00032</a>     <span class="keyword">public</span> <a class="code" href="classConfigPromenne.html#4e80bd9da46ae0e3bb0366da9a21846c">$get_submenu</a> = <span class="stringliteral">"sub"</span>;
+<a name="l00033"></a>00033 
+<a name="l00034"></a><a class="code" href="classConfigPromenne.html#3bd97f106cdaaf6d6391e2c9fed49cd8">00034</a>     <span class="keyword">public</span> <a class="code" href="classConfigPromenne.html#3bd97f106cdaaf6d6391e2c9fed49cd8">$moduly</a> = array (array(<span class="stringliteral">"include"</span> =&gt; <span class="stringliteral">"funkce.php"</span>,  <span class="comment">//hlavni funkce musi byt implicitne 0</span>
+<a name="l00035"></a>00035                                   <span class="stringliteral">"class"</span> =&gt; <span class="stringliteral">"Funkce"</span>,
+<a name="l00036"></a>00036                                   <span class="stringliteral">"admin"</span> =&gt; <span class="keyword">true</span>,
+<a name="l00037"></a>00037                                   <span class="stringliteral">"databaze"</span> =&gt; <span class="stringliteral">""</span>),
+<a name="l00038"></a>00038 
+<a name="l00039"></a>00039                             array(<span class="stringliteral">"include"</span> =&gt; <span class="stringliteral">"modules/dynamicke_eshop_menu_foltyn/eshop_menu.php"</span>,
+<a name="l00040"></a>00040                                   <span class="stringliteral">"class"</span> =&gt;  <span class="stringliteral">"DynamicEshopMenu"</span>,
+<a name="l00041"></a>00041                                   <span class="stringliteral">"admin"</span> =&gt; <span class="keyword">true</span>,
+<a name="l00042"></a>00042                                   <span class="stringliteral">"databaze"</span> =&gt; <span class="stringliteral">".dbdyneshmenu.sqlite2"</span>),
+<a name="l00043"></a>00043 
+<a name="l00044"></a>00044                             array(<span class="stringliteral">"include"</span> =&gt; <span class="stringliteral">"modules/dynamicky_obsah_eshop_foltyn/dynamicky_obsah_eshop.php"</span>,
+<a name="l00045"></a>00045                                   <span class="stringliteral">"class"</span> =&gt;  <span class="stringliteral">"DynamicObsahEshop"</span>,
+<a name="l00046"></a>00046                                   <span class="stringliteral">"admin"</span> =&gt; <span class="keyword">true</span>,
+<a name="l00047"></a>00047                                   <span class="stringliteral">"databaze"</span> =&gt; <span class="stringliteral">".dbdynobsaheshop.sqlite2"</span>),
+<a name="l00048"></a>00048                             );
+<a name="l00049"></a>00049 
+<a name="l00050"></a><a class="code" href="classConfigPromenne.html#5c3b7645e7943a6bd01abdc31393a442">00050</a>     <span class="keyword">public</span> <a class="code" href="classConfigPromenne.html#5c3b7645e7943a6bd01abdc31393a442">$ipblok</a> = array (<span class="stringliteral">"127.0.1.1"</span>,  <span class="comment">//seznam blokovanych ip pri kontrole z localhostu</span>
+<a name="l00051"></a>00051                             <span class="stringliteral">"127.0.0.1"</span>,
+<a name="l00052"></a>00052                             <span class="stringliteral">"192.168.1.1"</span>,
+<a name="l00053"></a>00053                             <span class="stringliteral">"192.168.1.2"</span>,
+<a name="l00054"></a>00054                             <span class="stringliteral">"192.168.1.3"</span>,
+<a name="l00055"></a>00055                             <span class="stringliteral">"192.168.1.4"</span>,
+<a name="l00056"></a>00056                             <span class="stringliteral">"192.168.1.5"</span>,
+<a name="l00057"></a>00057                             <span class="stringliteral">"192.168.1.6"</span>,
+<a name="l00058"></a>00058                             <span class="stringliteral">"192.168.1.7"</span>,
+<a name="l00059"></a>00059                             <span class="stringliteral">"192.168.1.8"</span>,
+<a name="l00060"></a>00060                             <span class="stringliteral">"192.168.1.9"</span>,
+<a name="l00061"></a>00061                             <span class="stringliteral">"192.168.1.10"</span>,
+<a name="l00062"></a>00062                             <span class="stringliteral">"192.168.1.11"</span>,
+<a name="l00063"></a>00063                             <span class="stringliteral">"192.168.1.12"</span>,
+<a name="l00064"></a>00064                             <span class="stringliteral">"192.168.1.13"</span>,
+<a name="l00065"></a>00065                             <span class="stringliteral">"192.168.1.14"</span>,
+<a name="l00066"></a>00066                             <span class="stringliteral">"192.168.1.15"</span>,
+<a name="l00067"></a>00067                             <span class="stringliteral">"192.168.1.16"</span>,
+<a name="l00068"></a>00068                             <span class="stringliteral">"192.168.1.17"</span>,
+<a name="l00069"></a>00069                             <span class="stringliteral">"192.168.1.18"</span>,
+<a name="l00070"></a>00070                             <span class="stringliteral">"192.168.1.19"</span>,
+<a name="l00071"></a>00071                             <span class="stringliteral">"192.168.1.20"</span>,
+<a name="l00072"></a>00072                             <span class="stringliteral">"192.168.1.21"</span>,
+<a name="l00073"></a>00073                             <span class="stringliteral">"192.168.1.22"</span>,
+<a name="l00074"></a>00074                             <span class="stringliteral">"192.168.1.23"</span>,
+<a name="l00075"></a>00075                             <span class="stringliteral">"192.168.1.24"</span>,
+<a name="l00076"></a>00076                             <span class="stringliteral">"192.168.1.25"</span>,
+<a name="l00077"></a>00077                             <span class="stringliteral">"192.168.1.26"</span>,
+<a name="l00078"></a>00078                             <span class="stringliteral">"192.168.1.27"</span>,
+<a name="l00079"></a>00079                             <span class="stringliteral">"192.168.1.28"</span>,
+<a name="l00080"></a>00080                             <span class="stringliteral">"192.168.1.29"</span>,
+<a name="l00081"></a>00081                             <span class="stringliteral">"192.168.1.30"</span>,
+<a name="l00082"></a>00082                             <span class="stringliteral">"192.168.1.31"</span>,
+<a name="l00083"></a>00083                             <span class="stringliteral">"192.168.1.32"</span>,
+<a name="l00084"></a>00084                             <span class="stringliteral">"192.168.1.33"</span>,
+<a name="l00085"></a>00085                             <span class="stringliteral">"192.168.1.34"</span>,
+<a name="l00086"></a>00086                             <span class="stringliteral">"192.168.1.35"</span>,
+<a name="l00087"></a>00087                             <span class="stringliteral">"192.168.1.36"</span>,
+<a name="l00088"></a>00088                             <span class="stringliteral">"192.168.1.37"</span>,
+<a name="l00089"></a>00089                             <span class="stringliteral">"192.168.1.38"</span>,
+<a name="l00090"></a>00090                             <span class="stringliteral">"192.168.1.39"</span>,
+<a name="l00091"></a>00091                             <span class="stringliteral">"192.168.1.40"</span>,
+<a name="l00092"></a>00092                             <span class="stringliteral">"192.168.1.41"</span>,
+<a name="l00093"></a>00093                             <span class="stringliteral">"192.168.1.42"</span>,
+<a name="l00094"></a>00094                             <span class="stringliteral">"192.168.1.43"</span>,
+<a name="l00095"></a>00095                             <span class="stringliteral">"192.168.1.44"</span>,
+<a name="l00096"></a>00096                             <span class="stringliteral">"192.168.1.45"</span>,
+<a name="l00097"></a>00097                             <span class="stringliteral">"192.168.1.46"</span>,
+<a name="l00098"></a>00098                             <span class="stringliteral">"192.168.1.47"</span>,
+<a name="l00099"></a>00099                             <span class="stringliteral">"192.168.1.48"</span>,
+<a name="l00100"></a>00100                             <span class="stringliteral">"192.168.1.49"</span>,
+<a name="l00101"></a>00101                             <span class="stringliteral">"192.168.1.50"</span>,
+<a name="l00102"></a>00102                             <span class="stringliteral">"192.168.1.101"</span>,
+<a name="l00103"></a>00103                             <span class="stringliteral">"192.168.1.102"</span>,
+<a name="l00104"></a>00104                             <span class="stringliteral">"192.168.1.103"</span>,
+<a name="l00105"></a>00105                             <span class="stringliteral">"192.168.1.104"</span>,
+<a name="l00106"></a>00106                             <span class="stringliteral">"192.168.1.105"</span>);
+<a name="l00107"></a>00107   }
+<a name="l00108"></a>00108 ?&gt;
+</pre></div></div>
+<hr size="1"><address style="text-align: right;"><small>Generováno Wed Apr 1 23:40:35 2009 pro projekt Eshop postaveny na PHP layoutu programem&nbsp;
+<a href="http://www.doxygen.org/index.html">
+<img src="doxygen.png" alt="doxygen" align="middle" border="0"></a> 1.5.5 </small></address>
+</body>
+</html>

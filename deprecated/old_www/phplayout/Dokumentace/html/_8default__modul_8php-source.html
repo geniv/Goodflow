@@ -1,0 +1,116 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+<title>Novy vychozi PHP layout: Zdrojový soubor /var/www/phplayout/included/.default_modul.php</title>
+<link href="tabs.css" rel="stylesheet" type="text/css">
+<link href="doxygen.css" rel="stylesheet" type="text/css">
+</head><body>
+<!-- Generováno programem Doxygen 1.5.8 -->
+<div class="navigation" id="top">
+  <div class="tabs">
+    <ul>
+      <li><a href="index.html"><span>Hlavní&nbsp;stránka</span></a></li>
+      <li><a href="annotated.html"><span>Třídy</span></a></li>
+      <li class="current"><a href="files.html"><span>Soubory</span></a></li>
+    </ul>
+  </div>
+  <div class="tabs">
+    <ul>
+      <li><a href="files.html"><span>Seznam&nbsp;souborů</span></a></li>
+      <li><a href="globals.html"><span>Symboly&nbsp;v&nbsp;souborech</span></a></li>
+    </ul>
+  </div>
+<h1>/var/www/phplayout/included/.default_modul.php</h1><a href="_8default__modul_8php.html">Zobrazit dokumentaci tohoto souboru.</a><div class="fragment"><pre class="fragment"><a name="l00001"></a>00001 &lt;?php
+<a name="l00002"></a>00002 
+<a name="l00014"></a><a class="code" href="classDefaultModule.html">00014</a> <span class="keyword">class </span><a class="code" href="classDefaultModule.html">DefaultModule</a>
+<a name="l00015"></a>00015 {
+<a name="l00016"></a><a class="code" href="classDefaultModule.html#26b23ce6a6e67f75c7675e215d8ce775">00016</a>   <span class="keyword">private</span> <a class="code" href="classDefaultModule.html#26b23ce6a6e67f75c7675e215d8ce775">$adresa_menu</a>;
+<a name="l00017"></a>00017 
+<a name="l00027"></a><a class="code" href="classDefaultModule.html#57cf28b8e9f064fa383fa736218001bd">00027</a>   <span class="keyword">private</span> function <a class="code" href="classDefaultModule.html#57cf28b8e9f064fa383fa736218001bd">NactiFunkci</a>($index, $funkce)
+<a name="l00028"></a>00028   {
+<a name="l00029"></a>00029     include_once <span class="stringliteral">"promenne.php"</span>;
+<a name="l00030"></a>00030     include_once <span class="stringliteral">"funkce.php"</span>;
+<a name="l00031"></a>00031     $var = <span class="keyword">new</span> <a class="code" href="classPromenne.html">Promenne</a>();
+<a name="l00032"></a>00032     $main = <span class="keyword">new</span> <a class="code" href="classFunkce.html">Funkce</a>($var, 0);
+<a name="l00033"></a>00033 
+<a name="l00034"></a>00034     $paramatr = func_get_args();
+<a name="l00035"></a>00035     $pocet = func_num_args();
+<a name="l00036"></a>00036     $argv = array();
+<a name="l00037"></a>00037     <span class="keywordflow">if</span> ($pocet &gt; 2)
+<a name="l00038"></a>00038     {
+<a name="l00039"></a>00039       <span class="keywordflow">for</span> ($i = 2, $j = 0; $i &lt; $pocet; $i++, $j++)
+<a name="l00040"></a>00040       {
+<a name="l00041"></a>00041         $argv[$j] = $paramatr[$i];  <span class="comment">//prevedeni parametru</span>
+<a name="l00042"></a>00042       }
+<a name="l00043"></a>00043     }
+<a name="l00044"></a>00044 
+<a name="l00045"></a>00045     <span class="keywordflow">if</span> (is_string($index))
+<a name="l00046"></a>00046     {
+<a name="l00047"></a>00047       $cis = -1;
+<a name="l00048"></a>00048       <span class="keywordflow">for</span> ($i = 0; $i &lt; count($var-&gt;moduly); $i++)
+<a name="l00049"></a>00049       {
+<a name="l00050"></a>00050         <span class="keywordflow">if</span> ($var-&gt;moduly[$i][<span class="stringliteral">"class"</span>] == $index)
+<a name="l00051"></a>00051         {
+<a name="l00052"></a>00052           $cis = $i;
+<a name="l00053"></a>00053           <span class="keywordflow">break</span>;
+<a name="l00054"></a>00054         }
+<a name="l00055"></a>00055       }
+<a name="l00056"></a>00056 
+<a name="l00057"></a>00057       <span class="keywordflow">if</span> ($cis == -1)
+<a name="l00058"></a>00058       {
+<a name="l00059"></a>00059         echo <span class="stringliteral">"POZOR! Nepodařilo se najít třídu s názvem: ''{$index}'' !!&lt;br /&gt;\n"</span>;
+<a name="l00060"></a>00060       }
+<a name="l00061"></a>00061         <span class="keywordflow">else</span>
+<a name="l00062"></a>00062       {
+<a name="l00063"></a>00063         $index = $cis;
+<a name="l00064"></a>00064       }
+<a name="l00065"></a>00065     }
+<a name="l00066"></a>00066 
+<a name="l00067"></a>00067     <a class="code" href="_8aktualizace__funkce_8php.html#e241cf0159803673d118f68d99e6342f">$result</a> = <span class="stringliteral">""</span>;
+<a name="l00068"></a>00068     <span class="keywordflow">if</span> ($cis != -1)
+<a name="l00069"></a>00069     {
+<a name="l00070"></a>00070       <span class="keywordflow">if</span> (method_exists($var-&gt;moduly[$index][<span class="stringliteral">"class"</span>], $funkce))
+<a name="l00071"></a>00071       {
+<a name="l00072"></a>00072         <a class="code" href="_8aktualizace__funkce_8php.html#e241cf0159803673d118f68d99e6342f">$result</a> = call_user_func_array(array($main, $funkce), $argv);  <span class="comment">//trida::funkce, parametry</span>
+<a name="l00073"></a>00073       }
+<a name="l00074"></a>00074         <span class="keywordflow">else</span>
+<a name="l00075"></a>00075       {
+<a name="l00076"></a>00076         <span class="keywordflow">if</span> (!Empty($var-&gt;moduly[$index][<span class="stringliteral">"class"</span>]))
+<a name="l00077"></a>00077         {
+<a name="l00078"></a>00078           echo <span class="stringliteral">"POZOR! U třídy: ''{$var-&gt;moduly[$index]["</span><span class="keyword">class</span><span class="stringliteral">"]}'' se neporařilo načíst funkci: ''{$funkce}''!&lt;br /&gt;\n"</span>;
+<a name="l00079"></a>00079         }
+<a name="l00080"></a>00080           <span class="keywordflow">else</span>
+<a name="l00081"></a>00081         {
+<a name="l00082"></a>00082           echo <span class="stringliteral">"POZOR! Nepodařilo se najít třídu o indexu:  ''{$index}''&lt;br /&gt;\n"</span>;
+<a name="l00083"></a>00083         }
+<a name="l00084"></a>00084       }
+<a name="l00085"></a>00085     }
+<a name="l00086"></a>00086 
+<a name="l00087"></a>00087     <span class="keywordflow">return</span> <a class="code" href="_8aktualizace__funkce_8php.html#e241cf0159803673d118f68d99e6342f">$result</a>;
+<a name="l00088"></a>00088   }
+<a name="l00089"></a>00089 
+<a name="l00096"></a><a class="code" href="classDefaultModule.html#de138416b3a548d72b50432499895bb7">00096</a>   <span class="keyword">public</span> function <a class="code" href="classDefaultModule.html#de138416b3a548d72b50432499895bb7">NastavitAdresuMenu</a>($adresa)
+<a name="l00097"></a>00097   {
+<a name="l00098"></a>00098     $this-&gt;adresa_menu = $adresa;
+<a name="l00099"></a>00099   }
+<a name="l00100"></a>00100 
+<a name="l00107"></a><a class="code" href="classDefaultModule.html#90378f9e29a64aaf668eecc26cae9ae3">00107</a>   <span class="keyword">public</span> function <a class="code" href="classDefaultModule.html#90378f9e29a64aaf668eecc26cae9ae3">AdminTitle</a>()
+<a name="l00108"></a>00108   {
+<a name="l00109"></a>00109     <a class="code" href="_8aktualizace__funkce_8php.html#e241cf0159803673d118f68d99e6342f">$result</a> = $this-&gt;<a class="code" href="classDefaultModule.html#57cf28b8e9f064fa383fa736218001bd">NactiFunkci</a>(<span class="stringliteral">"Funkce"</span>, <span class="stringliteral">"CallAdminTitle"</span>, $this-&gt;adresa_menu);
+<a name="l00110"></a>00110 
+<a name="l00111"></a>00111     <span class="keywordflow">return</span> <a class="code" href="_8aktualizace__funkce_8php.html#e241cf0159803673d118f68d99e6342f">$result</a>;
+<a name="l00112"></a>00112   }
+<a name="l00113"></a>00113 
+<a name="l00120"></a><a class="code" href="classDefaultModule.html#2ec541222f52f47b37519456da723230">00120</a>   <span class="keyword">public</span> function <a class="code" href="classDefaultModule.html#2ec541222f52f47b37519456da723230">AdminMenu</a>()
+<a name="l00121"></a>00121   {
+<a name="l00122"></a>00122     <a class="code" href="_8aktualizace__funkce_8php.html#e241cf0159803673d118f68d99e6342f">$result</a> = $this-&gt;<a class="code" href="classDefaultModule.html#57cf28b8e9f064fa383fa736218001bd">NactiFunkci</a>(<span class="stringliteral">"Funkce"</span>, <span class="stringliteral">"CallAdminMenu"</span>, $this-&gt;adresa_menu);
+<a name="l00123"></a>00123 
+<a name="l00124"></a>00124     <span class="keywordflow">return</span> <a class="code" href="_8aktualizace__funkce_8php.html#e241cf0159803673d118f68d99e6342f">$result</a>;
+<a name="l00125"></a>00125   }
+<a name="l00126"></a>00126 }
+<a name="l00127"></a>00127 ?&gt;
+</pre></div></div>
+<hr size="1"><address style="text-align: right;"><small>Generováno Mon May 18 00:03:30 2009 pro projekt Novy vychozi PHP layout programem&nbsp;
+<a href="http://www.doxygen.org/index.html">
+<img src="doxygen.png" alt="doxygen" align="middle" border="0"></a> 1.5.8 </small></address>
+</body>
+</html>

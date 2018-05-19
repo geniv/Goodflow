@@ -1,0 +1,53 @@
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>
+      Dynamická aktualizace tabulky
+    </title>
+
+    <script language="javascript">
+    function pridejRadek()
+    {
+      var tabulka1 = document.getElementById("tabulka1");
+      var novyRadek = tabulka1.insertRow(3);
+      var novaBunka = novyRadek.insertCell(0);
+      novaBunka.innerHTML = "data";
+      novaBunka = novyRadek.insertCell(1);
+      novaBunka.innerHTML = "data";
+      novaBunka = novyRadek.insertCell(2);
+      novaBunka.innerHTML = "data";
+    }
+    </script>
+  </head>
+
+  <body>
+    <center>
+      <h1>
+        Dynamická aktualizace tabulky
+      </h1> 
+
+      <table id="tabulka1" border="2">
+        <tr>
+          <td>data</td>
+          <td>data</td>
+          <td>data</td>
+        </tr>
+        <tr>
+          <td>data</td>
+          <td>data</td>
+          <td>data</td>
+        </tr>
+        <tr>
+          <td>data</td>
+          <td>data</td>
+          <td>data</td>
+        </tr>
+      </table>
+
+      <br>
+
+      <input type="button" value="Přidej řádek" onclick="pridejRadek()">
+    </center>
+
+  </body>
+</html>

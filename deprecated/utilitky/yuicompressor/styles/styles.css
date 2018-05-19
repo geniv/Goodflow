@@ -1,0 +1,284 @@
+body {
+  font: 10px Verdana, "Trebuchet MS", Tahoma, Arial, "Arial CE", sans-serif;
+  color: #000;
+}
+
+#obal_layout,
+#obal_layout #zahlavi,
+#obal_layout #obal_obsah,
+#obal_layout #zapati {
+  width: 1200px;
+}
+
+#obal_layout {
+  height: auto;
+  min-height: 100%;
+  margin: 0 auto;
+  position: relative;
+  background: url(../obr/yui_obsah.png) no-repeat 0 179px;
+}
+
+/* zahlavi s menu */
+#obal_layout #zahlavi {
+  height: 179px;
+  background: url(../obr/yui_zahlavi.png) no-repeat;
+  overflow: hidden;
+}
+
+#obal_layout #zahlavi a {
+  display: block;
+  height: 179px;
+}
+
+#obal_layout #obal_obsah {
+  min-height: 100px;
+  padding-bottom: 171px;
+  position: relative;
+  overflow: hidden;
+}
+
+form {
+  width: 540px;
+  float: right;
+  margin: 30px;
+  margin-left: 0;
+}
+
+form fieldset {
+  border: none;
+}
+
+form fieldset dl {
+  margin-top: 1px;
+  margin-bottom: 1px;
+  overflow: hidden;
+}
+
+form fieldset dl dt,
+form fieldset dl dd {
+  overflow: hidden;
+}
+
+form fieldset dl dt {
+  width: 370px;
+  margin-top: 1px;
+  float: left;
+  line-height: 20px;
+  text-align: right;
+  cursor: default;
+  border-bottom: 1px dotted #000;
+}
+
+form fieldset dl:hover dt {
+  padding-top: 0;
+  border-bottom: 1px solid #000;
+}
+
+form fieldset dl:hover dd {
+  border-top: 1px dotted #000;
+  border-bottom: 1px dotted #000;
+}
+
+form fieldset dl.input_text_border:hover dd {
+  border: none;
+}
+
+form fieldset dl dt.center {
+  text-align: center;
+  border-bottom: 1px solid #000;
+}
+
+form fieldset dl dt.full-width {
+  width: 540px;
+}
+
+form fieldset dl dt.final {
+  border-bottom: none;
+}
+
+form fieldset dl dd {
+  width: 160px;
+  height: 20px;
+  float: right;
+}
+
+form fieldset dl dd.vertical-center {
+  height: 40px;
+  line-height: 46px;
+}
+
+form fieldset dl:hover dd.vertical-center {
+  line-height: 44px;
+}
+
+form fieldset dl dd.dd_line_break {
+  line-height: 42px;
+}
+
+form fieldset dl:hover dd.dd_line_break {
+  line-height: 40px;
+}
+
+form fieldset dl dd #napoveda_compressoru,
+form fieldset dl dd #provest_kompresi,
+form fieldset dl dd #verbose-info,
+form fieldset dl dd #outfile_vystup,
+form fieldset dl dd #minify_only,
+form fieldset dl dd #preserve-semi,
+form fieldset dl dd #disable-optimizations {
+  margin-top: 4px;
+}
+
+form fieldset dl:hover dd #napoveda_compressoru,
+form fieldset dl:hover dd #provest_kompresi,
+form fieldset dl:hover dd #verbose-info,
+form fieldset dl:hover dd #outfile_vystup,
+form fieldset dl:hover dd #minify_only,
+form fieldset dl:hover dd #preserve-semi,
+form fieldset dl:hover dd #disable-optimizations {
+  margin-top: 3px;
+}
+
+form fieldset dl dt label {
+  display: block;
+  line-height: 20px;
+  cursor: pointer;
+}
+
+form fieldset dl dt label span {
+  display: block;
+}
+
+form fieldset dl dd input,
+form fieldset dl dd select {
+  font: 11px "Courier New", "Times New Roman", serif;
+  border: 1px solid #000;
+}
+
+form fieldset dl:hover dd input,
+form fieldset dl:hover dd select,
+form fieldset dl dd #line-break:focus,
+form fieldset dl dd #vystup_js:focus,
+form fieldset dl dd #vystup_css:focus,
+form fieldset dl dd #charset_nastaveni:focus,
+form fieldset dl dd #select_vybrat:focus {
+  border: 1px dotted #000;
+}
+
+form fieldset dl dd input {
+  padding: 2px;
+}
+
+form fieldset dl dd #line-break,
+form fieldset dl dd #vystup_js,
+form fieldset dl dd #vystup_css,
+form fieldset dl dd #charset_nastaveni {
+  width: 142px;
+}
+
+form fieldset dl dd #select_vybrat {
+  width: 148px;
+}
+
+form fieldset dl dt input#tl_vykonat {
+  display: block;
+  margin: 0 auto;
+  padding: 3px;
+  font: 10px Verdana, "Trebuchet MS", Tahoma, Arial, "Arial CE", sans-serif;
+}
+
+form fieldset dl dd select {
+  width: 100px;
+}
+
+form fieldset dl dd select option {
+  padding-left: 10px;
+  border-bottom: 1px dotted #000;
+}
+
+form fieldset dl dd select option.posledni {
+  border-bottom: none;
+}
+
+#vypis_kompresoru {
+  width: 1186px;
+  margin: 30px 0;
+  padding: 6px;
+  clear: both;
+  font-family: monospace;
+  font-size: 12px;
+  border: 1px dotted #000;
+}
+
+#vypis_kompresoru:hover {
+  background-color: #f7f7f7;
+}
+
+#vypis_kompresoru p {
+  margin: 10px 0;
+  font: 12px "Trebuchet MS", Verdana, Tahoma, Arial, "Arial CE", sans-serif;
+  cursor: default;
+}
+
+#vypis_kompresoru p strong {
+  font-family: monospace;
+  font-size: 12px;
+  font-weight: normal;
+  border-bottom: 1px dotted #000;
+}
+
+#vypis_kompresoru p:hover strong {
+  border-bottom: 1px solid #000;
+}
+
+.vypisy_souboru {
+  width: 306px;
+  margin: 36px 0 0 6px;
+  float: left;
+}
+
+.vypisy_souboru ul li {
+  margin-bottom: 3px;
+  margin-left: 20px;
+}
+
+.vypisy_souboru ul li.nadpis_vypisu,
+.vypisy_souboru ul li.zadny_soubor {
+  list-style-type: none;
+  text-align: center;
+  margin-left: 0;
+}
+
+.vypisy_souboru ul li.nadpis_vypisu {
+  border-bottom: 1px solid #000;
+  padding-bottom: 4px;
+}
+
+.vypisy_souboru ul li.zadny_soubor {
+  font-weight: bold;
+}
+
+#obal_layout #zapati {
+  height: 171px;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  background: url(../obr/yui_zapati.png) no-repeat;
+}
+
+#obal_layout #zapati p {
+  float: left;
+  margin: 155px 0 0 100px;
+}
+
+#obal_layout #zapati p a {
+  color: #000;
+  text-decoration: none;
+  border-bottom: 1px dotted #000;
+}
+
+#obal_layout #zapati p a:hover {
+  border-bottom: 1px solid #000;
+}
+
+/* Fugess (Martin) */

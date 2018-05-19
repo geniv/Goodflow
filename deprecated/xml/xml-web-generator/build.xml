@@ -1,0 +1,86 @@
+<project name="xhtml-web" basedir="." default="generuj">
+
+	<!-- Používané adresáře – např. zde můžete vstup a výstup nasměrovat do jiného verzovaného úložiště -->
+	<property name="vstup" value="vstup"/>
+	<property name="výstup" value="výstup"/>
+	<property name="šablona" value="šablona"/>
+	<property name="temp" value="temp"/>
+	<property name="funkce" value="${šablona}/funkce/build/classes"/>
+	
+	<property name="vstupníPřípona" value=".xml"/>
+	<property name="výstupníPřípona" value=".xhtml"/>
+	
+	<target	name="generuj" description="Vygeneruje kompletní web." depends="kompiluj-funkce,stránky,agregace">
+	</target>
+	
+	<target name="stránky" description="Vygeneruje samotné XHTML webové stránky." depends="statický-obsah">		
+		<xslt basedir="${vstup}" destdir="${výstup}" includes="*${vstupníPřípona}" extension="${výstupníPřípona}" style="${šablona}/stránka.xsl">
+			<param name="konfigurák" expression="../${vstup}/"/>		
+			<param name="podporaZaostalýchProhlížečů" expression="false"/>
+			<param name="vstupníPřípona" expression="${vstupníPřípona}"/>
+			<param name="výstupníPřípona" expression="${výstupníPřípona}"/>
+			<classpath location="/usr/share/java/saxonb-9.0.jar"/>
+			<classpath location="${funkce}"/>
+			<factory name="net.sf.saxon.TransformerFactoryImpl">
+				<attribute name="http://saxon.sf.net/feature/allow-external-functions" value="true"/>				
+			</factory>
+		</xslt>
+	</target>
+	
+	<target name="agregace" description="Vytvoří agregované výstupy: RSS, Atom, Sitemap.xml.">
+		<!-- TODO: sloučit, zjednodušit, parametrizovat -->
+	
+		<!-- Atom -->
+		<xslt in="${vstup}/web.conf" out="${výstup}/atom.xml" style="${šablona}/atom.xsl">
+			<param name="vstupníPřípona" expression="${vstupníPřípona}"/>
+			<param name="výstupníPřípona" expression="${výstupníPřípona}"/>
+			<classpath location="/usr/share/java/saxonb-9.0.jar"/>
+			<classpath location="${funkce}"/>
+			<factory name="net.sf.saxon.TransformerFactoryImpl">
+				<attribute name="http://saxon.sf.net/feature/allow-external-functions" value="true"/>				
+			</factory>
+		</xslt>
+		
+		<!-- RSS --> 
+		<xslt in="${výstup}/atom.xml" out="${výstup}/rss.xml" style="${šablona}/rss.xsl">			
+			<classpath location="/usr/share/java/saxonb-9.0.jar"/>
+			<classpath location="${funkce}"/>
+			<factory name="net.sf.saxon.TransformerFactoryImpl">
+				<attribute name="http://saxon.sf.net/feature/allow-external-functions" value="true"/>				
+			</factory>
+		</xslt>
+		
+		<!-- Sitemap.xml -->
+		<xslt in="${výstup}/atom.xml" out="${výstup}/sitemap.xml" style="${šablona}/sitemap.xsl">			
+			<classpath location="/usr/share/java/saxonb-9.0.jar"/>
+			<classpath location="${funkce}"/>
+			<factory name="net.sf.saxon.TransformerFactoryImpl">
+				<attribute name="http://saxon.sf.net/feature/allow-external-functions" value="true"/>				
+			</factory>
+		</xslt>
+		
+	</target>
+	
+	<target name="kompiluj-funkce" description="Přeloží funkce napsané v Javě.">		
+		<mkdir dir="${funkce}"/>
+		<javac
+			srcdir="${šablona}/funkce/src"
+			destdir="${funkce}"			
+			includeAntRuntime="no">
+		</javac>
+	</target>
+	
+	<target name="statický-obsah" description="Kopíruje JS, CSS, obrázky atd.">
+		<copy todir="${výstup}">
+			<fileset dir="${vstup}" excludes="*.xml,*.inc,web.conf"/>
+		</copy>
+	</target>
+	
+	<target name="čisti" description="Smaže vygenerovaný obsah.">
+		<delete includeemptydirs="true">
+			<fileset dir="${výstup}" includes="**/*"/>
+			<fileset dir="${funkce}" includes="**/*"/>
+		</delete>
+	</target>
+	
+</project>

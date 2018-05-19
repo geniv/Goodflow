@@ -1,0 +1,49 @@
+<html> 
+  <head> 
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>Získání informací o souboru</title> 
+
+    <script language="javascript">
+      function ziskejData(zdrojDat, divID) 
+      { 
+        var XMLHttpRequestObjekt = false; 
+
+        if (window.XMLHttpRequest) {
+          XMLHttpRequestObjekt = new XMLHttpRequest();
+        } else if (window.ActiveXObject) {
+          XMLHttpRequestObjekt = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+
+        if(XMLHttpRequestObjekt) {
+          var obj = document.getElementById(divID); 
+          XMLHttpRequestObjekt.open("HEAD", zdrojDat); 
+
+          XMLHttpRequestObjekt.onreadystatechange = function() 
+          { 
+            if (XMLHttpRequestObjekt.readyState == 4 && 
+              XMLHttpRequestObjekt.status == 200) { 
+                obj.innerHTML =  XMLHttpRequestObjekt.getAllResponseHeaders(); 
+            } 
+          } 
+
+          XMLHttpRequestObjekt.send(null); 
+        }
+      }
+    </script>
+  </head> 
+
+  <body>
+
+    <H1>Získání informací o souboru</H1>
+
+    <form>
+      <input type="button" value="Získej informace" 
+        onclick="ziskejData('data.txt', 'cilovyDiv')"> 
+    </form>
+
+    <div id="cilovyDiv">
+      <p>Získané informace se zobrazí na tomto místě.</p> 
+    </div> 
+
+  </body> 
+</html>

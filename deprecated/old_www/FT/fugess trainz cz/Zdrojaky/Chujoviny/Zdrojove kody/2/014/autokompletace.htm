@@ -1,0 +1,38 @@
+<HTML>
+  <HEAD>
+    <TITLE>Autokompletace</TITLE>
+    <SCRIPT Language="JavaScript">
+      <!--
+        // Funkce vypíše zda je autokompletace zapnutá èi nikoliv
+        function test(){
+          alert ('Autokompletace: ' +
+          document.MainForm.edLogin.getAttribute('autocomplete'));
+        }
+
+        // Funkce zmìní stav autokompletace
+        function ChangeAuto(){
+          if (document.MainForm.edLogin.getAttribute('autocomplete') ==
+              'off')
+            document.MainForm.edLogin.setAttribute('autocomplete', 'on');
+          else
+            document.MainForm.edLogin.setAttribute('autocomplete', 'off');
+        }
+      // -->
+    </SCRIPT>
+  </HEAD>
+
+  <BODY>
+    <FORM Name="MainForm">
+      <INPUT Type="Text" Name="edLogin" autocomplete="off">
+      <INPUT Type="Password" Name="edPass">
+      <INPUT Type="Submit" Value="OK">
+      <INPUT Type="Reset" Value="Smazat">
+      <BR>
+      <INPUT Type="Button" Value="Stav autokompletace"
+        OnClick="test();">
+      <INPUT Type="Button" Value="Zmena autokompletace"
+        OnClick="ChangeAuto();">
+    </FORM>
+  </BODY>
+</HTML>
+

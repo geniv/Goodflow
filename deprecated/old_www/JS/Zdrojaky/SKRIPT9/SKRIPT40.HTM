@@ -1,0 +1,35 @@
+<HTML><head><STYLE TYPE="text/css">
+BODY { color: white;
+background-color: black;
+text-align: center 
+}
+#napis { position: relative;
+width: 500px;
+height: 80px;
+font: bold 55px Comic Sans MS;
+filter: Light() Glow(Color=fuchsia,Strength=5)
+}
+</STYLE>
+<SCRIPT LANGUAGE="JavaScript">
+var MinX=160,MaxX=525,X1=MinX,Y=40,Step=10,Z=80; 
+function Move()
+{ 
+document.all.napis.filters.Light.moveLight(0, X1, Y, Z, true);
+X1 += Step;
+if (X1>=MaxX)Step=-Step;
+if (X1<=MinX)Step=-Step;
+setTimeout("Move()",40);
+}
+function Init()
+{
+// document.all.napis.filters.Light.addAmbient(99, 22, 200, 180);
+document.all.napis.filters.Light.addPoint(X1, Y, Z,255, 55, 55, 255); 
+setTimeout("Move()",50);
+} 
+</SCRIPT>
+</HEAD>
+<BODY onLoad="Init()">
+<DIV ID=napis>JavaScript page</DIV>
+
+</BODY>
+</HTML>

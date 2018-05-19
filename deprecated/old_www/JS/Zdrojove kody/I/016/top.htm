@@ -1,0 +1,83 @@
+<HTML>
+  <HEAD>
+    <TITLE>Auto Browser</TITLE>
+    <SCRIPT Language="JavaScript">
+      <!--
+      // Prodleva (v milisekundách) mezi pøechody
+      var PauseSize = 6000;
+      // Pole s adresami
+      var Bookmarks = new String();
+      // Identifikátor Timeru (aby se aplikace dala pozastavit)
+      var TID;
+
+      // Inicializace
+      function Init(){
+        // Vygeneruje se pole adres
+        Bookmarks = document.MainForm.memBookmarks.value.split('\n');
+        // Skoèí se na první adresu v seznamu
+        Jump (0);
+      }
+
+      // Hlavní funkce - zobrazí i-tou stránku z pole
+      function Jump(i){
+        // Naète do spodního rámce (frmBottom) i-tou stránku
+        // z pole Bookmarks[]
+        parent.frmBottom.location = Bookmarks[i];
+        // Nastaví se èasovaè na PauseSize
+        // a po uplynutí doby se opìt spustí tato funkce
+        // s náhodnì vygenerovaným indexem do pole stránek
+        TID = setTimeout(
+          'Jump(Math.floor (Math.random()*Bookmarks.length))',
+          PauseSize
+        );
+      }
+
+      // Zastavení brouzdání
+      function Stop(){
+        // Vypne se èasovaè
+        clearTimeout(TID);
+      }
+
+      // Funkce pro nastavení délky prodlevy
+      function SetPause (NewPause){
+        if (NewPause >= 1000){
+          PauseSize = NewPause;
+        } else {
+          alert ('Minimum je 1000!');
+          document.MainForm.edPause.value = PauseSize
+        }
+        return true;
+      }
+      // -->
+    </SCRIPT>
+  </HEAD>
+
+  <BODY Bgcolor="silver">
+    <FORM Name="MainForm">
+      <TABLE Border=0 Cols=2 Rows=2>
+        <TR>
+          <TD>
+            <INPUT Type="button" Value=" Start " onClick="Init()">
+            <INPUT Type="button" Value=" Stop  " onClick="Stop()">
+          </TD>
+
+          <TD Align=right>
+            Prodleva:
+            <INPUT Name="edPause" Type="text" Size=10
+              Maxlength=10 Value="6000">
+            <INPUT Type="button" Value="Nastav prodlevu"
+              onClick="SetPause(eval(document.MainForm.edPause.value));">
+          </TD>
+        </TR>
+
+        <TR>
+          <TD Colspan=2>
+            <TEXTAREA Name="memBookmarks" Rows="4"
+              Cols="80" Wrap="SOFT"></TEXTAREA>
+          </TD>
+        </TR>
+      </TABLE>
+    </FORM>
+  </BODY>
+</HTML>
+

@@ -1,0 +1,78 @@
+Ver: $Id: Readme,v 1.4 2002/04/20 19:27:36 aditus Exp $
+
+Utility directory with a few _COMPLETELY_ UNSUPPORTED utilities.
+They are only made available due to some requests.
+
+Summary
+=======
+Most of the file in this directory form the basis of the JpGraph
+documentation system soon to be released. 
+
+Directory ./misc
+----------------
+
+adjimg.php
+	Lets you adjust the contrast, brightness and saturation
+	in a image.
+	Usage:adjimg.php?file=name&[b=value][&c=value][&s=scale][&sat=saturation]	
+
+gencolorchart.php
+	Generates a color chart with all colors available in
+	JpGraph
+
+
+Directory ./jpdocgen
+--------------------
+
+jpdb.php
+	An OO interface to a MySQL database.
+
+db_jpgraph.sql
+	MySQL database scheme for documentation for jpgraph. The DB
+	is initially populated from source throught the jpgendb.php
+	program (see below).
+
+jplintphp.php
+	A very rudimentary "lint" and parser for PHP which parses 
+	a valid PHP file and extracts funtions, variables and classes.
+	It also checks for unused class variables and missing
+	'$this->' Used as a base library for extracting class and method
+	information in jpgendb.php
+
+jplintdriver.php
+	A simple driver for the parser in jplintphp.php you invoke
+	this with a URL variable 'target' which is set to the file
+	you would like to parse.
+
+jpgendoc.php
+	A "fancy" version of jplintdriver.php which applies some
+	formatting to generate a nice template to do reference
+	documentation for a PHP script file.
+
+jpgendb.php
+	Read one or several PHP file and add classes and methods
+	to database (as defined by db_jpgraph.sql)
+
+jpdbdelclass.php
+	Safely delete a class from the database. Some extra safety
+ 	features built in to avoid greaf.
+
+jpclassref.php
+	Basic framework to read information from DB and generate
+    indexed documentation. This is a framework which needs
+	a "formatter" plugin which does the actual formatting
+	of the data, see jpgenhtmldoc.php for a simple implementation
+	of a HTML formatter plugin.
+
+jpgenhtmldoc.php
+	Basic formatter plugin + driver to generate a HTML based
+	documentation from the information stored in the DB.
+
+jputils.php
+	A utility class with some static functions. 
+
+<EOF>
+
+
+
+

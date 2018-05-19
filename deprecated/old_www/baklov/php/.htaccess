@@ -1,0 +1,28 @@
+
+Options -Indexes
+
+ErrorDocument 404 /error_page.html
+ErrorDocument 403 /error_page.html
+ErrorDocument 500 /error_page.html
+
+#AddHandler php5-cgi .php
+#Action php5-cgi /php5cgi/php
+
+#na serveru: %{DOCUMENT_ROOT}/
+
+RewriteEngine On
+RewriteRule ^hlavni-strana						index.php?action=uvod [L,QSA]
+RewriteRule ^turisticke-informace-fyzicka-osoba			index.php?action=turistika-fyzicka [L,QSA]
+RewriteRule ^turisticke-informace-podnikatel			index.php?action=turistika-pravnicka [L,QSA]
+RewriteRule ^turisticke-informace					index.php?action=turistika [L,QSA]
+RewriteRule ^doprava-autem						index.php?action=doprava-auto [L,QSA]
+RewriteRule ^doprava-vlakem						index.php?action=doprava-vlak [L,QSA]
+RewriteRule ^doprava							index.php?action=doprava [L,QSA]
+RewriteRule ^poradani-akci-soukrome-akce				index.php?action=akce-soukroma [L,QSA]
+RewriteRule ^poradani-akci-firemni-akce				index.php?action=akce-firemni [L,QSA]
+RewriteRule ^poradani-akci						index.php?action=akce [L,QSA]
+RewriteRule ^okolni-pamatky						index.php?action=pamatky [L,QSA]
+RewriteRule ^kontakt							index.php?action=kontakt [L,QSA]
+RewriteRule ^mapa-stranek						index.php?action=mapa [L,QSA]
+RewriteRule ^opatreni-pro-zlepseni-on-page-a-off-page-faktoru	index.php?action=opatreni [L,QSA]
+RewriteRule ^prohlaseni-o-pristupnosti				index.php?action=prohlaseni [L,QSA]

@@ -1,0 +1,45 @@
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>Určení typu a verze prohlížeče</title>
+
+    <script language="javascript">
+    var zacatek, konec;
+
+    function zobrazZpravu()
+    {
+      if(navigator.appName == "Netscape") {
+        if(navigator.userAgent.indexOf("Firefox") > 0) {
+          zacatek = navigator.userAgent.indexOf("Firefox") + 
+          "Firefox".length + 1;
+          konec = navigator.userAgent.length;
+          document.getElementById("cilovyDiv").innerHTML = 
+            "Používáte Firefox " + 
+            navigator.userAgent.substring(zacatek, konec); 
+        }
+      }
+
+      if (navigator.appName == "Microsoft Internet Explorer") {
+        zacatek = navigator.userAgent.indexOf("MSIE ") + 
+        "MSIE ".length;
+        if(navigator.userAgent.indexOf(";", zacatek) > 0) {
+          konec = navigator.userAgent.indexOf(";", zacatek);
+        } else {
+          konec = navigator.userAgent.indexOf(")", zacatek) 
+            + 2;
+        }
+        document.getElementById("cilovyDiv").innerHTML = 
+          "Používáte Internet Explorer " + 
+          navigator.userAgent.substring(zacatek, konec); 
+      }
+    }
+    </script>
+  </head>
+
+  <body onload="zobrazZpravu()">
+    <h1>Určení typu a verze prohlížeče</h1>
+    
+    <div ID="cilovyDiv"></div>
+  </body>
+</html>
+

@@ -1,0 +1,54 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html ; charset=windows-1250">
+<SCRIPT LANGUAGE="JavaScript">
+
+function OK() {
+document.formular.field.value = "ok";
+self.close();
+}
+
+function SetToNull() {
+document.formular.field.value = "";
+}
+
+function LoadAgain() {
+if (document.formular.field.value == "") {
+now = new Date();
+b = window.open(self.location, 's'+now.getTime(), "widht=400,height=200,location=0,menubar=0,personalbar=0,status=0");
+b.focus();
+}
+}
+
+function NoKeys(e) {
+var message = "Nesnaž se použít vir se stejně natáhne ...";
+
+if (window.Event) {
+if ((e.which)  (e.modifiers & Event.CONTROL_MASK Event.META_MASK))
+alert(message);
+return false;
+}
+else if((event.altkey)  (event.shiftkey)  (event.ctrlkey)  (event.KeyCode))
+alert(message);
+return false;
+}
+
+if (window.Event) {
+document.captureEvents(Event.KEYDOWN)
+}
+document.onkeydown = Nokeys;
+</script>
+</head>
+
+<BODY onLoad="SetToNull()" onUnload="LoadAgain()">
+<br>
+<center>
+<b>Potvrďte natáhnutí viru.
+Děkuji, že používáte naši službu www.mamvpocaluvirdoprdele.cz</b>
+<form name"formulář">
+<input type=hidden name="field" value="">
+<input type=button name="accept" value=" OK " onClick="OK()">
+</form>
+</center>
+</body>
+</html>

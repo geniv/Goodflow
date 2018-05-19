@@ -1,0 +1,665 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!-- saved from url=(0093)http://interval.cz/clanky/navstevni-kniha-v-php-bez-pouziti-databaze-bezpecnostni-mechanismy/ -->
+<?xml version='1.0' encoding='windows-1250'?><HTML lang=cs xml:lang="cs" 
+xmlns="http://www.w3.org/1999/xhtml"><HEAD><TITLE>Návštěvní kniha v PHP bez použití databáze - bezpečnostní mechanismy -- PHP -- Vývoj aplikací -- Interval.cz</TITLE>
+<META http-equiv=Content-Type content="text/html; charset=windows-1250">
+<META http-equiv=Content-language content=cs>
+<META http-equiv=Cache-control content=no-cache>
+<META http-equiv=Pragma content=no-cache>
+<META http-equiv=Expires content=-1>
+<META content=index,follow name=robots>
+<META content=index,follow,snippet,noarchive name=googlebot>
+<META 
+content="V prvním díle tohoto článku jsme si ukázali, jak zapsat nové příspěvky na začátek, jak odstranit nebezpečné znaky, které by mohly narušit formátování stránky apod. Po uveřejnění článku mně přišla spousta dotazů. V zásadě se týkaly těchto dvou věcí: výpis příspěvků po 20 a zákaz zápisu do souboru. Skript na vypisování příspěvků po 20 byl přidán. Navíc byla přidána kontrola správnosti e-mailové adresy a kód, který zamezí opětovnému odeslání příspěvku po stisknutí Refresh." 
+name=description>
+<META content="PHP, Vývoj aplikací, Interval" name=keywords>
+<META content="49.1915, 16.626" name=ICBM>
+<META content=Interval.cz name=DC.Title>
+<META content=http://interval.cz name=DC.Identifier>
+<META content="(SCHEME=ISSN) 12128651" name=DC.Identifier>
+<META content=cs name=DC.Language>
+<META http-equiv=pics-label 
+content='(pics-1.1 "http://www.icra.org/ratingsv02.html" comment "ICRAonline EN v2.0" l gen true for "http://interval.cz" r (nz 1 vz 1 lz 1 oz 1 cz 1) "http://www.rsac.org/ratingsv01.html" l gen true for "http://interval.cz" r (n 0 s 0 v 0 l 0))'>
+<META http-equiv=imagetoolbar content=no>
+<META http-equiv=MSThemeCompatible content=no>
+<META content=true name=MSSmartTagsPreventParsing><LINK 
+href="http://interval.cz/favicon.ico" type=image/x-icon 
+rel="shortcut icon"><LINK 
+title="Interval.cz -- Návštěvní kniha v PHP bez použití databáze - bezpečnostní mechanismy -- (diskuse, Atom 0.3)" 
+href="http://export.interval.cz/?type=atom&amp;discussion=485" 
+type=application/atom+xml rel=alternate><LINK 
+title="Interval.cz -- Návštěvní kniha v PHP bez použití databáze - bezpečnostní mechanismy -- (diskuse, RDF Site Summary 1.0)" 
+href="http://export.interval.cz/?type=rdf&amp;discussion=485" 
+type=application/rdf+xml rel=alternate><LINK 
+title="Interval.cz -- Návštěvní kniha v PHP bez použití databáze - bezpečnostní mechanismy -- (diskuse, RSS 2.0)" 
+href="http://export.interval.cz/?type=rss&amp;discussion=485" 
+type=application/rss+xml rel=alternate><LINK href="http://interval.cz" 
+rel=home><LINK href="http://interval.cz/search_ex.asp" rel=search><LINK 
+href="http://interval.cz/serialy/navstevni-kniha-v-php-bez-pouziti-databaze/" 
+rel=up><LINK 
+href="http://interval.cz/clanky/navstevni-kniha-v-php-bez-pouziti-databaze-zaklad-aplikace/" 
+rel=first><LINK 
+href="http://interval.cz/clanky/navstevni-kniha-v-php-bez-pouziti-databaze-osetreni-textu/" 
+rel=last><LINK 
+href="http://interval.cz/clanky/navstevni-kniha-v-php-bez-pouziti-databaze-zaklad-aplikace/" 
+rel=prev><LINK 
+href="http://interval.cz/clanky/navstevni-kniha-v-php-bez-pouziti-databaze-osetreni-textu/" 
+rel=next><LINK media=all 
+href="Návštěvní kniha v PHP bez použití databáze - bezpečnostní mechanismy -- PHP -- Vývoj aplikací -- Interval_cz_soubory/html4.css" 
+type=text/css rel=stylesheet><LINK media=all 
+href="Návštěvní kniha v PHP bez použití databáze - bezpečnostní mechanismy -- PHP -- Vývoj aplikací -- Interval_cz_soubory/interval-display.css" 
+type=text/css rel=stylesheet><LINK media=print 
+href="Návštěvní kniha v PHP bez použití databáze - bezpečnostní mechanismy -- PHP -- Vývoj aplikací -- Interval_cz_soubory/interval-print.css" 
+type=text/css rel=stylesheet>
+<META content="MSHTML 6.00.2800.1106" name=GENERATOR></HEAD>
+<BODY class="interval interval-articles" id=article-485>
+<DIV class=audits><!-- TOPList.cz -->
+<SCRIPT type=text/javascript>
+<!-- <![CDATA[
+document.write ("<a href='http://www.toplist.cz'><img src='http://www.toplist.cz/dot.asp?id=33617&amp;http="+escape(document.referrer)+"&amp;wi="+escape(window.screen.width)+"&amp;he="+escape(window.screen.height)+"&amp;cd="+escape(window.screen.colorDepth)+"&amp;t="+escape(document.title)+"' style='border: 0; width: 1px; height: 1px' alt='.' /></a>");
+//]]> -->
+</SCRIPT>
+<NOSCRIPT>
+<DIV><A href="http://www.toplist.cz/"><IMG 
+style="BORDER-RIGHT: 0px; BORDER-TOP: 0px; BORDER-LEFT: 0px; WIDTH: 1px; BORDER-BOTTOM: 0px; HEIGHT: 1px" 
+alt=. src=""></A></DIV></NOSCRIPT><!-- TOPList.cz - konec --><!-- iAudit --><IMG 
+style="BORDER-RIGHT: 0px; BORDER-TOP: 0px; BORDER-LEFT: 0px; WIDTH: 1px; BORDER-BOTTOM: 0px; HEIGHT: 1px" 
+alt=. 
+src="Návštěvní kniha v PHP bez použití databáze - bezpečnostní mechanismy -- PHP -- Vývoj aplikací -- Interval_cz_soubory/dot.idot.gif"> 
+<!-- iAudit - konec --><!-- (C)2005 Gemius SA - gemiusAudience  / Ostatni -->
+<SCRIPT type=text/javascript><!--
+	
+	gemius_identifier = new String('bQzrQkrzLOWoKbJeudlKguTS7OndUMSqxutbeFviWMv.47');
+	
+	gemius_href=new String(document.location);
+	if (document.referrer) { gemius_ref = new String(document.referrer); } else { gemius_ref = ""; }
+	if(typeof(Error)!='undefined') eval("try { if (typeof(top.document.referrer)=='string') { gemius_ref = top.document.referrer } } catch(gemius_ex) {}");
+	iname = new String('id='+gemius_identifier+';ref='+escape(gemius_ref.substring(0,299))+';href='+escape(gemius_href.substring(0,299))+';');
+	document.write('<iframe src="http://spir.hit.gemius.pl/gemiusaudience.html" name="'+iname+'" width="1" height="1" frameborder="0" scrolling="no"></iframe>');
+	//-->
+	</SCRIPT>
+</DIV>
+<DIV id=advertising-leader-board><!-- StartKód: adarbo2.bbmedia.cz 3.1 Nestandard  Interval(87) / cely web(1) / leaderboard 750x100(1) / nestandard(24) -->
+<SCRIPT type=text/javascript>
+	/* <![CDATA[ */
+	var bbs=screen,bbn=navigator,bbh;bbh='&ubl='+bbn.browserLanguage+'&ucc='+bbn.cpuClass+'&ucd='+bbs.colorDepth+'&uce='+bbn.cookieEnabled+'&udx='+bbs.deviceXDPI+'&udy='+bbs.deviceYDPI+'&usl='+bbn.systemLanguage+'&uje='+bbn.javaEnabled()+'&uah='+bbs.availHeight+'&uaw='+bbs.availWidth+'&ubd='+bbs.bufferDepth+'&uhe='+bbs.height+'&ulx='+bbs.logicalXDPI+'&uly='+bbs.logicalYDPI+'&use='+bbs.fontSmoothingEnabled+'&uto='+(new Date()).getTimezoneOffset()+'&uti='+(new Date()).getTime()+'&uui='+bbs.updateInterval+'&uul='+bbn.userLanguage+'&uwi='+bbs.width;
+	document.write("<scr"+"ipt  language='JavaScript' type='text/javascript' src='http://adarbo2.bbmedia.cz/please/showit/87/1/1/24/?typkodu=non-standard"+bbh+"&alttext=0&border=0&bgcolor=FFFFFF&text=000000&link=0000FF&target=_blank&bust="+Math.random()+"'>");
+	document.write("<"+"\/scr"+"ipt>");
+	/* ]]> */
+	</SCRIPT>
+<!-- KonecKód: adarbo2.bbmedia.cz 3.1 Nestandard --></DIV>
+<DIV id=page-header>
+<DIV id=interval-logo>
+<H1 title="Interval.cz - webdesign a e-komerce denně (logo &amp; index link)"><A 
+href="http://interval.cz/">Interval.cz<SPAN></SPAN></A></H1></DIV>
+<DIV id=advertising-page-header><!-- StartKód: adarbo2.bbmedia.cz 3.1 Nestandard  Interval(87) / cely web(1) / horni468x60(2) / nestandard(24) -->
+<SCRIPT type=text/javascript>
+	/* <![CDATA[ */
+	var bbs=screen,bbn=navigator,bbh;bbh='&ubl='+bbn.browserLanguage+'&ucc='+bbn.cpuClass+'&ucd='+bbs.colorDepth+'&uce='+bbn.cookieEnabled+'&udx='+bbs.deviceXDPI+'&udy='+bbs.deviceYDPI+'&usl='+bbn.systemLanguage+'&uje='+bbn.javaEnabled()+'&uah='+bbs.availHeight+'&uaw='+bbs.availWidth+'&ubd='+bbs.bufferDepth+'&uhe='+bbs.height+'&ulx='+bbs.logicalXDPI+'&uly='+bbs.logicalYDPI+'&use='+bbs.fontSmoothingEnabled+'&uto='+(new Date()).getTimezoneOffset()+'&uti='+(new Date()).getTime()+'&uui='+bbs.updateInterval+'&uul='+bbn.userLanguage+'&uwi='+bbs.width;
+	document.write("<scr"+"ipt  type='text/javascript' src='http://adarbo2.bbmedia.cz/please/showit/87/1/2/24/?typkodu=non-standard"+bbh+"&alttext=0&border=0&bgcolor=FFFFFF&text=000000&link=0000FF&target=_top&bust="+Math.random()+"'>");
+	document.write("<"+"\/scr"+"ipt>");
+	/* ]]> */
+	</SCRIPT>
+<!-- KonecKód: adarbo2.bbmedia.cz 3.1 Nestandard --></DIV>
+<DIV class=page-maker>&nbsp;</DIV></DIV>
+<DIV id=page-topmenu>
+<H2 class=textversion>Navigace</H2><!-- cached 09-15-62-hlavni_menu_with_ascii.txt --><!-- ,Vývoj aplikací ~~ ,,PHP ~~ , -->
+<DIV id=page-mainmenu>
+<H3 class=textversion>Hlavní menu</H3>
+<UL>
+  <LI class=first><A href="http://interval.cz/">Titulka</A></LI>
+  <LI><A href="http://interval.cz/e-komerce/">E-komerce</A></LI>
+  <LI><A href="http://interval.cz/webdesign/">Webdesign</A></LI>
+  <LI class=selected><A href="http://interval.cz/vyvoj-aplikaci/">Vývoj 
+  aplikací</A></LI>
+  <LI><A href="http://interval.cz/nastroje/">Nástroje</A></LI>
+  <LI><A href="http://interval.cz/magazin/">Magazín</A></LI>
+  <LI class="right selected"><A 
+  href="http://interval.inshop.cz/">Knihkupectví</A></LI>
+  <LI class=right><A href="http://interforum.interval.cz/">Interforum</A></LI>
+  <LI class=right><A 
+href="http://interzen.interval.cz/">Interzen</A></LI></UL></DIV>
+<DIV id=page-mainmenu-maker>&nbsp;</DIV>
+<DIV id=page-mainsubmenu>
+<H3 class=textversion>Submenu</H3>
+<UL>
+  <LI><A href="http://interval.cz/vyvoj-aplikaci/j2me/">J2ME</A></LI>
+  <LI><A href="http://interval.cz/vyvoj-aplikaci/asp/">ASP</A></LI>
+  <LI><A href="http://interval.cz/vyvoj-aplikaci/net/">.NET</A></LI>
+  <LI class=selected><A 
+  href="http://interval.cz/vyvoj-aplikaci/php/">PHP</A></LI>
+  <LI><A 
+href="http://interval.cz/vyvoj-aplikaci/javascript/">JavaScript</A></LI>
+  <LI><A href="http://interval.cz/vyvoj-aplikaci/xml/">XML</A></LI>
+  <LI><A href="http://interval.cz/vyvoj-aplikaci/java/">Java</A></LI>
+  <LI><A href="http://interval.cz/vyvoj-aplikaci/perl-cgi/">PERL/CGI</A></LI>
+  <LI><A href="http://interval.cz/vyvoj-aplikaci/databaze/">Databáze</A></LI>
+  <LI><A 
+href="http://interval.cz/vyvoj-aplikaci/bezpecnost/">Bezpečnost</A></LI>
+  <LI><A 
+href="http://interval.cz/vyvoj-aplikaci/analyzy/">Analýzy</A></LI></UL><SPAN 
+id=page-mainsubmenu-maker>&nbsp;</SPAN></DIV><!-- cas behu menu = 0 --></DIV>
+<DIV id=page-body>
+<DIV id=page-left>
+<DIV id=article>
+<H2>Návštěvní kniha v PHP bez použití databáze - bezpečnostní mechanismy</H2>
+<P id=prepend>V prvním díle tohoto článku jsme si ukázali, jak zapsat nové 
+příspěvky na začátek, jak odstranit nebezpečné znaky, které by mohly narušit 
+formátování stránky apod. Po uveřejnění článku mně přišla spousta dotazů. V 
+zásadě se týkaly těchto dvou věcí: výpis příspěvků po 20 a zákaz zápisu do 
+souboru. Skript na vypisování příspěvků po 20 byl přidán. Navíc byla přidána 
+kontrola správnosti e-mailové adresy a kód, který zamezí opětovnému odeslání 
+příspěvku po stisknutí Refresh.</P>
+<DIV class="advertising-bigsquare-outer noprint">
+<DIV class=advertising-bigsquare-inner style="WIDTH: 300px"><!-- StartKód: adarbo2.bbmedia.cz 3.1 Nestandard  Interval(87) / cely web(1) / ctverec250x250(8) / nestandard(24) -->
+<SCRIPT type=text/javascript>
+	/* <![CDATA[ */
+	var bbs=screen,bbn=navigator,bbh;bbh='&ubl='+bbn.browserLanguage+'&ucc='+bbn.cpuClass+'&ucd='+bbs.colorDepth+'&uce='+bbn.cookieEnabled+'&udx='+bbs.deviceXDPI+'&udy='+bbs.deviceYDPI+'&usl='+bbn.systemLanguage+'&uje='+bbn.javaEnabled()+'&uah='+bbs.availHeight+'&uaw='+bbs.availWidth+'&ubd='+bbs.bufferDepth+'&uhe='+bbs.height+'&ulx='+bbs.logicalXDPI+'&uly='+bbs.logicalYDPI+'&use='+bbs.fontSmoothingEnabled+'&uto='+(new Date()).getTimezoneOffset()+'&uti='+(new Date()).getTime()+'&uui='+bbs.updateInterval+'&uul='+bbn.userLanguage+'&uwi='+bbs.width;
+	document.write("<scr"+"ipt  type='text/javascript' src='http://adarbo2.bbmedia.cz/please/showit/87/1/8/24/?typkodu=non-standard"+bbh+"&alttext=0&border=0&bgcolor=FFFFFF&text=000000&link=0000FF&target=_top&bust="+Math.random()+"'>");
+	document.write("<"+"\/scr"+"ipt>");
+	/* ]]> */
+	</SCRIPT>
+<!-- KonecKód: adarbo2.bbmedia.cz 3.1 Nestandard --></DIV></DIV>
+<P class=texttabulka><B>Zákaz zapisování do souborů</B></P>
+<P class=texttabulka>Když jsem napsal poprvé aplikaci "Návštěvní kniha", ani mě 
+nenapadlo, že by někde mohl být zápis zakázán. Umístil jsem ji na server 
+WebZdarma.cz - vše fungovalo - napsal jsem tedy článek. Ale ejhle, hned po jeho 
+uveřejní jsem byl zaplaven dotazy, ve kterých se psalo: "Warning: 
+fopen("book.dat","w") - Permission denied - toto se mi vypsalo po odeslání 
+příspěvku, co s tím?". V překladu tato věta znamená, že je zakázán zápis do 
+souboru "book.dat".</P>
+<P class=texttabulka>Ještě jednou jsem se podíval na WebZdarma.cz - vše 
+fungovalo. Vytvořil jsem si tedy účet na Yo.cz a Host.sk. Vyzkoušel jsem tam 
+svůj skript, ale nastala ona chyba - zápis do souboru zakázán. Teď jsem uvěřil, 
+že zápis do souboru může být skutečně zakázán. Začal jsem tedy pátrat, jak to 
+vyřešit. A našel jsem zcela prostou radu - změnit atributy souboru, tak aby byl 
+povolen i zápis.</P>
+<P class=texttabulka>Na FTP komunikaci používám Windows Commander. Je v něm i 
+funkce Změna atributů (např. IW FTPort nic takového nemá). Prázdný soubor 
+"book.dat" jsem nejprve nahrál na server, tam změnil atributy podle přiložené 
+obrázku a spustil skript znovu. Na Yo.cz i Host.sk aplikace začala fungovat. 
+Zkusil jsem to ještě na kamarádově serveru, kde byl zápis taktéž nejprve 
+zakázán, a vše fungovalo rovněž bez problémů.</P>
+<P class=texttabulka align=center><IMG height=169 
+alt="Změna atributů ve Windows Commanderu" 
+src="Návštěvní kniha v PHP bez použití databáze - bezpečnostní mechanismy -- PHP -- Vývoj aplikací -- Interval_cz_soubory/wc.jpg" 
+width=323 border=0><BR>Změna atributů ve Windows Commanderu</P>
+<P class=texttabulka><B>Kontrola správnosti e-mailové adresy</B></P>
+<P class=texttabulka>Na toto téma přišel sice pouze jeden dotaz, ale myslím, že 
+je to myšlenka velice zajímavá, proto se ji budu věnovat. Zkontrolovat platnost 
+e-mailové adresy lze dvěma způsoby. V PHP se vytvoří regulární výraz (maska), 
+který zjišťuje zda zadaná e-mailová adresa odpovídá této masce. Regulární výrazy 
+ještě nebyly na Intervalu probírány (článek mám již připraven - takže se brzy 
+dočkáte), a tak jsem použil druhý, a to rozhodně elegantnější způsob - 
+JavaScript. Obrovská výhoda je, že se nemusí požadavek odesílat na server, ale 
+kontrola probíhá v prostředí klienta.</P>
+<P class=texttabulka>Zároveň budeme kontrolovat, zda byly zadány další povinné 
+položky. JavaScriptu a konkrétně e-mailovým adresám se na Intervalu věnuje jiná 
+sekce, takže zdrojový kód nebudu vůbec rozebírat.</P>
+<P class=texttabulka>
+<TABLE cellSpacing=0 cellPadding=1 width="100%" border=0>
+  <TBODY>
+  <TR>
+    <TD>
+      <TABLE cellSpacing=0 cellPadding=2 width="100%" border=0>
+        <TBODY>
+        <TR>
+          <TD class=aktuality bgColor=white>&lt;SCRIPT 
+            LANGUAGE="JavaScript"&gt;&lt;!--<BR>function 
+            zkontroluj(formular)<BR>{<BR>if 
+            (formular.jmeno.value=="")<BR>{<BR>alert("Vaše jméno (přezdívku) 
+            musíte vyplnit!");<BR>formular.jmeno.focus();<BR>return 
+            false;<BR>}<BR>else if 
+            (formular.email.value=="")<BR>{<BR>alert("Adresu elektronické pošty 
+            musíte vyplnit!");<BR>formular.email.focus();<BR>return 
+            false;<BR>}<BR>else if 
+            (formular.popis.value=="")<BR>{<BR>alert("Text zprávy musíte 
+            vyplnit!");<BR>formular.popis.focus();<BR>return false;<BR>}<BR>else 
+            if (window.RegExp)<BR>{<BR>re = new 
+            RegExp("^[^.]+(\.[^.]+)*@([^.]+[.])+[a-z]{2,3}$");<BR>if 
+            (!re.test(formular.email.value))<BR>{<BR>alert("Zadaná adresa není 
+            správnou adresou elektronické 
+            pošty!");<BR>formular.email.focus();<BR>return 
+            false;<BR>}<BR>}<BR>else <BR>return true;<BR>}<BR>// 
+            --&gt;<BR>&lt;/SCRIPT&gt; 
+</TD></TR></TBODY></TABLE></TD></TR></TBODY></TABLE></P>
+<P class=texttabulka>Tím, že všechny údaje kontrolujeme pomocí JavaScriptu se o 
+něco zjednodušil formulář. Pozor, abychom nezapomněli u formuláře uvést 
+"onSubmit="return zkontroluj(this)". To způsobí, že po odeslání formuláře se 
+provede výše uvedený skript.</P>
+<P class=texttabulka>
+<TABLE cellSpacing=0 cellPadding=1 width="100%" border=0>
+  <TBODY>
+  <TR>
+    <TD>
+      <TABLE cellSpacing=0 cellPadding=2 width="100%" border=0>
+        <TBODY>
+        <TR>
+          <TD class=aktuality bgColor=white>&lt;table border="0" 
+            cellspacing="0" cellpadding="0" align="center"&gt;<BR>&lt;form 
+            action="insert.php3" method="post" onSubmit="return 
+            zkontroluj(this)"&gt;<BR>&lt;tr&gt;&lt;td width=120 
+            class=povinne&gt;<BR>Jméno:<BR>&lt;/td&gt;&lt;td&gt;<BR>&lt;input 
+            type="text" name="jmeno" size="30" maxlength="60" 
+            class="inputbook"&gt;<BR>&lt;/td&gt;&lt;/tr&gt;<BR>&lt;tr&gt;&lt;td 
+            width=120 
+            class=povinne&gt;<BR>E-mail:<BR>&lt;/td&gt;&lt;td&gt;<BR>&lt;input 
+            type="text" name="email" value="@" size="30" maxlength="60" 
+            class="inputbook"&gt;<BR>&lt;/td&gt;&lt;/tr&gt;<BR>&lt;tr&gt;&lt;td 
+            width=120 class=nepovinne&gt;<BR>Web (i s 
+            http://):<BR>&lt;/td&gt;&lt;td&gt;<BR>&lt;input type="text" 
+            name="web" value="http://" size="30" maxlength="60" 
+            class="inputbook"&gt;<BR>&lt;input type="hidden" name="odeslano" 
+            value="ano"&gt;<BR>&lt;/td&gt;&lt;/tr&gt;<BR>&lt;tr&gt;&lt;td 
+            valign=top width=120 class=povinne&gt;<BR>Text 
+            zprávy:<BR>&lt;/td&gt;&lt;td&gt;<BR>&lt;textarea cols="29" rows="5" 
+            class=inputbook 
+            name="popis"&gt;&lt;/textarea&gt;<BR>&lt;/td&gt;&lt;/tr&gt;<BR>&lt;tr&gt;&lt;td 
+            width=120&gt;&nbsp;&lt;/td&gt;&lt;td&gt;<BR>&lt;center&gt;&lt;input 
+            type="submit" class=bluebutton 
+            value="Odeslat"&gt;&nbsp;&nbsp;&nbsp;&lt;input type="Reset" 
+            class=bluebutton 
+            value="Vymazat"&gt;&lt;/center&gt;<BR>&lt;/td&gt;&lt;/tr&gt;&lt;/form&gt;&lt;/table&gt; 
+          </TD></TR></TBODY></TABLE></TD></TR></TBODY></TABLE></P>
+<P class=texttabulka><B>Výpis příspěvků po 20</B></P>
+<P class=texttabulka>Nejprve nastíním, jak budeme vše provádět. Podle počtu 
+uložených příspěvků (jednomu příspěvku odpovídá jeden řádek v souboru "book.dat" 
+- v minulé verzi jsme ukládali na samostatný řádek každý prvek příspěvku - to 
+musíme změnit) zjistíme kolik bude celkem stránek s příspěvky. Poté se 
+vygenerují odkazy, ve kterých budeme předávat číslo stránky, která se má 
+zobrazit.</P>
+<P class=texttabulka>Pomocí funkce "File()" načteme obsah souboru "book.dat" do 
+pole. V prvku pole s indexem [0] bude 1. řádek, s indexem [1] 2. řádek, atd. 
+Funkce "Count()" nám spočítá počet prvků pole, který vydělíme 20 a pomocí "Ceil" 
+zaokrouhlíme nahoru (např. 2,4 -&gt; 3; 1,1 -&gt; 2), a tak získáme počet 
+stran.<BR></P>
+<P class=texttabulka>
+<TABLE cellSpacing=0 cellPadding=1 width="100%" border=0>
+  <TBODY>
+  <TR>
+    <TD>
+      <TABLE cellSpacing=0 cellPadding=2 width="100%" border=0>
+        <TBODY>
+        <TR>
+          <TD class=aktuality bgColor=white>if (File_Exists 
+            ("book.dat")):<BR>echo "&lt;center&gt;&lt;font class=cas&gt;Zobrazit 
+            příspevky:&lt;br&gt;&lt;br&gt;";<BR>$prispevek = File("book.dat"); 
+            //načte obsah souboru do pole<BR>$strana = 
+            Ceil(Count($prispevek)/20); //vypočítá kolik zaberou příspěvky stran 
+            (po 20) </TD></TR></TBODY></TABLE></TD></TR></TBODY></TABLE></P>
+<P class=texttabulka>Nyní pomocí cyklu vytvoříme odkazy na jednotlivé strany s 
+příspěvky. Cyklus se nám provedete přesně tolikrát, kolik je stran. V odkazu 
+budeme předávat číslo stránky, která se má zobrazit. Navíc podle čísla stránky 
+spočítáme jaké odkazy budeme zobrazovat (např. 1-20, 21-40).</P>
+<P class=texttabulka>
+<TABLE cellSpacing=0 cellPadding=1 width="100%" border=0>
+  <TBODY>
+  <TR>
+    <TD>
+      <TABLE cellSpacing=0 cellPadding=2 width="100%" border=0>
+        <TBODY>
+        <TR>
+          <TD class=aktuality bgColor=white>for ($x=1;$x&lt;=$strana;$x++): 
+            //zobrazí tolik odkazů kolik je stran<BR>echo "&lt;a 
+            href=kniha.php3?idprispevek=$x&gt;" . ($x*20-19) . "-" . $x*20 . 
+            "&lt;/a&gt;&nbsp;&nbsp;&nbsp;"; //do každého odkazu přidá číslo 
+            strany a jaké příspěvky budou zobrazovány<BR>endfor;<BR>echo 
+            "&lt;/center&gt;";<BR>endif; 
+</TD></TR></TBODY></TABLE></TD></TR></TBODY></TABLE></P>
+<P class=texttabulka>Z celé této části uděláme funkci, protože odkazy, budeme 
+zobrazovat i v dolní části stránky. Bylo by zbytečné to psát dvakrát.</P>
+<P class=texttabulka>
+<TABLE cellSpacing=0 cellPadding=1 width="100%" border=0>
+  <TBODY>
+  <TR>
+    <TD>
+      <TABLE cellSpacing=0 cellPadding=2 width="100%" border=0>
+        <TBODY>
+        <TR>
+          <TD class=aktuality bgColor=white>function Odkaz()<BR>{<BR>if 
+            (File_Exists ("book.dat")):<BR>echo "&lt;center&gt;&lt;font 
+            class=cas&gt;Zobrazit příspevky:&lt;br&gt;&lt;br&gt;";<BR>$prispevek 
+            = File("book.dat"); //načte obsah souboru do pole<BR>$strana = 
+            Ceil(Count($prispevek)/20); //vypočítá kolik zaberou příspěvky stran 
+            (po 20)<BR>for ($x=1;$x&lt;=$strana;$x++): //zobrazí tolik odkazů 
+            kolik je stran<BR>echo "&lt;a href=kniha.php3?idprispevek=$x&gt;" . 
+            ($x*20-19) . "-" . $x*20 . "&lt;/a&gt;&nbsp;&nbsp;&nbsp;"; //do 
+            každého odkazu přidá číslo strany a jaké příspěvky budou 
+            zobrazovány<BR>endfor;<BR>echo "&lt;/center&gt;";<BR>endif;<BR>} 
+        </TD></TR></TBODY></TABLE></TD></TR></TBODY></TABLE></P>
+<P class=texttabulka>V další části budeme vypisovat příspěvky podle hodnoty 
+předané odkazem v proměnné "$idprispevek". Pokud není tato proměnná 
+zinicializována, dosadíme do ní hodnotu "1" a budeme tak zobrazovat příspěvky 
+"1-20". Spočítáme si od kolikátého do kolikátého řádku se budou příspěvky 
+zobrazovat. Např. pokud chceme zobrazovat příspěvky 21-40 (tj. stranu 2), vyjde 
+nám "$pocatek=20" a "$konec=39. Proč ne 21 a 40? Protože funkce "File()" 
+přiřazuje řádky od "0" - o tom již ale byla řeč. Jednoduchým cyklem pak již jen 
+zobrazíme příspěvky a na konec stránky přidáme odkazy pomocí námi definované 
+funkce "Odkaz()".</P>
+<P class=texttabulka>
+<TABLE cellSpacing=0 cellPadding=1 width="100%" border=0>
+  <TBODY>
+  <TR>
+    <TD>
+      <TABLE cellSpacing=0 cellPadding=2 width="100%" border=0>
+        <TBODY>
+        <TR>
+          <TD class=aktuality bgColor=white>if (File_Exists 
+            ("book.dat")):<BR>if (!IsSet($idprispevek)) $idprispevek=1;//je 
+            zinicializována proměnná id, pokud ne přiřadí standartní 
+            jedničku<BR>$pocatek = $idprispevek*20-20;//podle $idprispevek 
+            spočítá od kolikátého<BR>$konec = $idprispevek*20-1;//... do 
+            kolikáté příspěvku se bude zobrazovat<BR><BR>$prispevek = 
+            File("book.dat");//načte do pole obsah book.dat<BR>for 
+            ($i=$pocatek;$i&lt;=$konec;$i++):<BR>echo $prispevek[$i];//vypíše 
+            příspěvky mezi $prispevek a 
+            $konec<BR>endfor;<BR>endif;<BR><BR>Odkaz(); 
+  </TD></TR></TBODY></TABLE></TD></TR></TBODY></TABLE></P>
+<P class=texttabulka><B>Opakované odeslání příspěvku po stisknutí 
+Refresh</B></P>
+<P class=texttabulka>Obrovskou slabinou minulé verze bylo opakované odeslání 
+příspěvku po stisknutí Refresh. To se dá vyřešit třeba tak, že hlavní část 
+skriptu (zápis do datového souboru) umístíme do souboru "insert.php3". Do 
+formuláře v "kniha.php3" napíšeme jako hodnotu parametru ACTION u tagu FORM - 
+"insert.php3". Po odeslání příspěvku se tedy provedou všechny příkazy v souboru 
+"insert.php3" a pomocí "Meta-tagu Refresh" se ihned vrátíme na "kniha.php3".</P>
+<P class=texttabulka>Takto tedy bude vypadat soubor "insert.php3".</P>
+<P class=texttabulka>
+<TABLE cellSpacing=0 cellPadding=1 width="100%" border=0>
+  <TBODY>
+  <TR>
+    <TD>
+      <TABLE cellSpacing=0 cellPadding=2 width="100%" border=0>
+        <TBODY>
+        <TR>
+          <TD class=aktuality bgColor=white>&lt;?<BR>$name = 
+            "&lt;table&gt;&lt;tr&gt;&lt;td 
+            class=jmeno&gt;$jmeno&lt;/td&gt;&lt;/tr&gt;";<BR>$e_mail = 
+            "&lt;tr&gt;&lt;td class=odkaz&gt;&lt;A 
+            HREF=mailto:$email&gt;$email&lt;/A&gt;&lt;/td&gt;&lt;/tr&gt;";<BR>if 
+            ($web!="" &amp;&amp; $web!="http://"):<BR>$www = "&lt;tr&gt;&lt;td 
+            class=odkaz&gt;&lt;A 
+            HREF=\"$web\"&gt;$web&lt;/A&gt;&lt;/td&gt;&lt;/tr&gt;";<BR>endif;<BR>$cas 
+            = "&lt;tr&gt;&lt;td class=cas&gt;" . Date("j. " . "m. " . "Y, " . 
+            "H:i:s") . "&lt;/td&gt;&lt;/tr&gt;";<BR>$tag = 
+            HTMLSpecialChars($popis);<BR>$br = Str_Replace("\n"," &lt;BR&gt; ", 
+            $tag);<BR><BR>$zprava = "&lt;tr&gt;&lt;td 
+            class=text&gt;&lt;br&gt;$br&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;HR 
+            color=\"#00008B\"&gt;\n";<BR>$write = StripSlashes($name . $e_mail . 
+            $www . $cas . $zprava);<BR><BR>if (File_Exists ("book.dat")):<BR>$fp 
+            = FOpen ("book.dat", "r");<BR>$data = FRead ($fp, 
+            FileSize("book.dat"));<BR>FClose($fp);<BR>endif;<BR><BR>$fp = FOpen 
+            ("book.dat", "w");<BR>FWrite ($fp, $write.$data);<BR>FClose 
+            ($fp);<BR>?&gt;<BR>&lt;html&gt;&lt;head&gt;<BR>&lt;META 
+            HTTP-EQUIV="Refresh" CONTENT="0; 
+            URL=kniha.php3"&gt;<BR>&lt;/head&gt;&lt;/html&gt; 
+      </TD></TR></TBODY></TABLE></TD></TR></TBODY></TABLE></P>
+<P class=texttabulka>Oproti minulé verzi se liší tím, že každý příspěvek se 
+ukládá na 1 řádek, a to do tabulky. Zdálo se mi, že si Netscape lépe poradí se 
+styly v tabulkách. Protože nyní máme nastavenou v položce Web jako standardní 
+hodnotu "http://", musíme do podmínky přidat další část $web!="http://".</P>
+<P class=texttabulka>Pokud bychom v textu zprávy několikrát načali další řádek, 
+funkce "NL2BR()" způsobí uložení textu zprávy také na několik řádků. To je ale 
+nepřípustné, jestliže chceme zobrazovat příspěvky po 20. Použijeme místo toho 
+funkci "Str_Replace("\n"," &lt;BR&gt; ", $tag);", která nahrazuje jeden řetězec 
+druhým (v našem případě konec řádku \n tagem &lt;BR&gt;).</P>
+<P class=texttabulka>Celý další kód je totožný s tím minulým. Ještě k Meta-tagu 
+Refr esh, první parametr udává za kolik sekund bude provedeno přesměrování, 
+druhý na jakou stránku se přesměrujeme.</P>
+<P class=texttabulka>Menších změn doznal i soubor "styl.css" kvůli lepší 
+kompatibilitě s Netscape. Celou aplikaci si můžete pochopitelně <A 
+href="http://podklady.interval.cz/kebrt/kniha2.zip">stáhnout tady</A>. Balík 
+obsahuje soubory "kniha.php3, insert.php3, styl.css i prázdný book.dat". 
+Posledně jmenovaný soubor je ale nutný pouze v případě, pokud máte zakázáno 
+zapisování do souboru, jinak se vytvoří automaticky. Ještě jednou opakuji pro 
+ty, kteří mají zakázán zápis. Soubor "book.dat" nahrajte na server a tam změňte 
+atributy.</P>
+<P class=texttabulka>Příště bude řeč o regulárních výrazech. Ty využijeme i v 
+dalším díle "Návštěvní kniha", kde si povíme, jak odstranit příliš dlouhá slova, 
+která způsobí protahování stránky (tabulky) a jak povolit některé tagy - 
+"&lt;b&gt;, &lt;i&gt;, &lt;u&gt;". Kromě tohoto využijeme regulární výrazy i k 
+automatické detekci odkazů v Textu zprávy.</P>
+<DIV id=article-author><A href="http://interval.cz/autori/kebrt-michal/">Kebrt, 
+Michal</A> (12.&nbsp;12.&nbsp;2000) </DIV>
+<DIV class=refer>
+<H3><A 
+title="Návštěvní kniha v PHP bez použití databáze (úplný přehled článků seriálu)" 
+href="http://interval.cz/serialy/navstevni-kniha-v-php-bez-pouziti-databaze/">Návštěvní 
+kniha v PHP bez použití databáze</A></H3>
+<P>Návštěvní kniha je jednou z nejzákladnějších a nejjednodušších web-based 
+aplikací. Díky své jednoduchosti byla také jednou z prvních na internetu a stále 
+ještě nevymřela. Funkční ukázka včetně zdrojových kódů k dispozici. Tato série 
+článků již byla uzavřena, ačkoli další pokračování nelze vyloučit.</P>
+<UL>
+  <LI><A 
+  href="http://interval.cz/clanky/navstevni-kniha-v-php-bez-pouziti-databaze-osetreni-textu/">Návštěvní 
+  kniha v PHP bez použití databáze - ošetření textů</A> (22.&nbsp;2.&nbsp;2001)
+  <LI><STRONG>Návštěvní kniha v PHP bez použití databáze - bezpečnostní 
+  mechanismy</STRONG> (právě čtete)
+  <LI><A 
+  href="http://interval.cz/clanky/navstevni-kniha-v-php-bez-pouziti-databaze-zaklad-aplikace/">Návštěvní 
+  kniha v PHP bez použití databáze - základ aplikace</A> 
+  (14.&nbsp;11.&nbsp;2000)</LI></UL></DIV>
+<DIV class=noprint id=article-discussion><!-- cached 485-tabulka-navstevni-kniha-v-php-bez-pouziti-databaze-bezpecnostni-mechanismy.txt -->
+<DIV id=article-discussion-index>
+<FORM action=http://interval.cz/discussion-read.asp?disc=485 method=post>
+<TABLE cellSpacing=0>
+  <TBODY>
+  <TR>
+    <TH colSpan=4><A 
+      title="Návštěvní kniha v PHP bez použití databáze - bezpe ... (diskuse)" 
+      href="http://interval.cz/clanky/navstevni-kniha-v-php-bez-pouziti-databaze-bezpecnostni-mechanismy/diskuse/">Návštěvní 
+      kniha v PHP bez použití databáze - bezpe ... (diskuse)</A></TH></TR>
+  <TR>
+    <TD class=checkbox><INPUT title="0 5168" type=checkbox value=1 
+      name=checkboxDISKUZE5168></TD>
+    <TD class=date>2002-05-04 10:27:38</TD>
+    <TD class=sender>Petr Ocasek</TD>
+    <TD class=subject>jen poznamka: plna funkcnost javascript...</TD></TR>
+  <TR>
+    <TD class=checkbox><INPUT title="0 36324" type=checkbox value=1 
+      name=checkboxDISKUZE36324></TD>
+    <TD class=date>2005-04-09 22:18:22</TD>
+    <TD class=sender>Unpowered user</TD>
+    <TD class=subject>Dotaz</TD></TR>
+  <TR>
+    <TD class=checkbox><INPUT title="0 43970" type=checkbox value=1 
+      name=checkboxDISKUZE43970></TD>
+    <TD class=date>2006-04-20 15:55:50</TD>
+    <TD class=sender>AtLoX</TD>
+    <TD class=subject>Nefunguje mi to</TD></TR>
+  <TR>
+    <TD id=foot colSpan=4><INPUT class=submit id=display_selected type=submit value="Zobrazit vybrané" name=display_selected> 
+      &nbsp; <INPUT class=submit id=display_all type=submit value="Zobrazit vše" name=display_all> 
+      &nbsp; <INPUT class=submit id=add_new type=submit value="Vložit nový" name=add_new></TD></TR></TBODY></TABLE></FORM></DIV></DIV></DIV></DIV>
+<DIV id=page-right>
+<H2 class=textversion>Pravý sloupek</H2>
+<DIV id=search>
+<H3 class=textversion>Vyhledávání</H3>
+<FORM action=http://interval.cz/search.asp method=get>
+<DIV><INPUT class=text name=co> <!--  
+<select name='cim'>
+<option value ='Google' selected='selected'>Google</option>
+<option value ='Jyxo'>Jyxo</option>
+</select>
+<input type='hidden' name='nadpis' value='1' />
+<input type='hidden' name='popis' value='1' />
+<input type='hidden' name='text' value='1' />
+<input type='hidden' name='rubrika' value='0' />
+<input type='hidden' name='autor' value='0' />
+ --><INPUT class=submit type=submit value=Najdi! name=send> </DIV></FORM><!-- <div><a href='http://interval.cz/search.asp'>Rozšířené vyhledávání</a></div> --></DIV><!-- StartKód: adarbo2.bbmedia.cz 3.1 Nestandard  Interval(87) / home page(2) / textbox(1) / nestandard(24) -->
+<SCRIPT type=text/javascript>
+	<!-- <![CDATA[
+	var bbs=screen,bbn=navigator,bbh;bbh='&ubl='+bbn.browserLanguage+'&ucc='+bbn.cpuClass+'&ucd='+bbs.colorDepth+'&uce='+bbn.cookieEnabled+'&udx='+bbs.deviceXDPI+'&udy='+bbs.deviceYDPI+'&usl='+bbn.systemLanguage+'&uje='+bbn.javaEnabled()+'&uah='+bbs.availHeight+'&uaw='+bbs.availWidth+'&ubd='+bbs.bufferDepth+'&uhe='+bbs.height+'&ulx='+bbs.logicalXDPI+'&uly='+bbs.logicalYDPI+'&use='+bbs.fontSmoothingEnabled+'&uto='+(new Date()).getTimezoneOffset()+'&uti='+(new Date()).getTime()+'&uui='+bbs.updateInterval+'&uul='+bbn.userLanguage+'&uwi='+bbs.width;
+	document.write("<scr"+"ipt  language='JavaScript' type='text/javascript' src='http://adarbo2.bbmedia.cz/please/showit/87/2/1/24/?typkodu=non-standard"+bbh+"&alttext=0&border=0&bgcolor=FFFFFF&text=000000&link=0000FF&target=_blank&bust="+Math.random()+"'>");
+	document.write("<"+"\/scr"+"ipt>");
+	//]]> -->
+	</SCRIPT>
+<!-- KonecKód: adarbo2.bbmedia.cz 3.1 Nestandard --><!-- cached 10-knizni_tip.txt -->
+<DIV class="page-right-box book">
+<H3>Knižní tip</H3>
+<DIV class=page-right-box-in>
+<DIV class=book-top>
+<H4><A 
+href="http://interval.inshop.cz/inshop/scripts/detail.asp?kat=274">phpMyAdmin - 
+efektivní správa MySQL</A></H4></DIV>
+<DIV class=image><A 
+href="http://interval.inshop.cz/inshop/scripts/detail.asp?kat=274"><IMG 
+title="phpMyAdmin - efektivní správa MySQL" alt=obálka 
+src="Návštěvní kniha v PHP bez použití databáze - bezpečnostní mechanismy -- PHP -- Vývoj aplikací -- Interval_cz_soubory/274.jpg"></A></DIV></DIV></DIV><!-- cached 17-nejctenejsi_clanky.txt -->
+<DIV class="page-right-box reading">
+<H3 title="Nejčtenější články za posledních 28 dnů">Nejčtenější</H3>
+<DIV class=page-right-box-in>
+<UL>
+  <LI><A href="http://interval.cz/clanky/opera-9-pokrocila-konfigurace/">Opera 9 
+  - pokročilá konfigurace</A>
+  <LI><A 
+  href="http://interval.cz/clanky/adobe-photoshop-prakticky-webdesign-jakub-krcmar/">Adobe 
+  Photoshop - praktický webdesign (Jakub Krčmář)</A>
+  <LI><A 
+  href="http://interval.cz/clanky/drupal-tvorba-vlastniho-vzhledu/">Drupal - 
+  tvorba vlastního vzhledu</A>
+  <LI><A 
+  href="http://interval.cz/clanky/pruvodce-svg-dalsi-nastroje-pro-tvorbu-svg-grafiky/">Průvodce 
+  SVG - další nástroje pro tvorbu SVG grafiky</A>
+  <LI><A 
+  href="http://interval.cz/clanky/spravy-zo-slovenskeho-internetu-8/">Správy zo 
+  slovenského internetu 8.</A></LI></UL></DIV></DIV>
+<DIV class=merak-box style="MARGIN-TOP: 1.5em; TEXT-ALIGN: center">
+<DIV id=merak-content 
+style="BORDER-RIGHT: #000000 1px solid; BORDER-TOP: #000000 1px solid; FONT-WEIGHT: bold; FONT-SIZE: 11px; BACKGROUND-IMAGE: url(http://interval.cz/__services/__include_right/merak-background.png); MARGIN: 0px auto; BORDER-LEFT: #000000 1px solid; WIDTH: 160px; BORDER-BOTTOM: #000000 1px solid; BACKGROUND-REPEAT: no-repeat; FONT-FAMILY: Verdana, Arial, sans-serif; HEIGHT: 190px; TEXT-ALIGN: left; FONT-VARIANT: small-caps">
+<H3 style="FONT-SIZE: 12px; MARGIN: 55px 0px 10px 10px; FONT-VARIANT: normal"><A 
+title="Merak Mail Server 8" 
+style="COLOR: #000000; BACKGROUND-COLOR: transparent; TEXT-DECORATION: none" 
+href="http://www.merak-mail-server.cz/">Merak Mail Server 8</A></H3>
+<DIV id=merak-proclamation style="PADDING-LEFT: 10px">Integrovaný <EM><A 
+title="Merak Mail Server 8" 
+style="COLOR: #35a0df; FONT-STYLE: normal; BACKGROUND-COLOR: transparent; TEXT-DECORATION: none" 
+href="http://www.merak-mail-server.cz/">antispam</A></EM> <BR>Snadná <EM><A 
+title="Merak Mail Server 8" 
+style="COLOR: #35a0df; FONT-STYLE: normal; BACKGROUND-COLOR: transparent; TEXT-DECORATION: none" 
+href="http://www.merak-mail-server.cz/">instalace</A></EM> <BR>Zabezpečený 
+<EM><A title="Merak Mail Server 8" 
+style="COLOR: #35a0df; FONT-STYLE: normal; BACKGROUND-COLOR: transparent; TEXT-DECORATION: none" 
+href="http://www.merak-mail-server.cz/">groupware</A></EM> </DIV></DIV></DIV>
+<DIV class="page-right-box emailserv">
+<H3>Info servis</H3>
+<DIV class=page-right-box-in>
+<UL>
+  <LI><A title="Exporty aktuálních informací ve formátech Atom, RDF a RSS" 
+  href="http://export.interval.cz/">Atom, RDF, RSS</A> 
+  <LI>Informace e-mailem: </LI></UL>
+<FORM action=prihlaseni.asp method=post>
+<DIV class=shell><INPUT class=text name=adresa></DIV>
+<DIV class=shell><INPUT class=radio type=radio CHECKED value=1 name=co>Týdenní 
+přehled článků</DIV>
+<DIV class=shell><INPUT class=radio type=radio value=2 name=co>HELP 
+konference</DIV>
+<DIV 
+class=shell><INPUT class=submit type=submit value=Přihlásit></DIV></FORM></DIV></DIV>
+<DIV class=advertising-vertical-banner-outer>
+<DIV class=advertising-vertical-banner-inner><!-- Skyscraper Right --><!-- BBSTART Interval.cz/Skyscraper Right/rolovací/Skyscraper 120x600 -->
+<SCRIPT type=text/javascript>/* <![CDATA[ */
+var bbat=0,bbbr=0,bbtt='_blank',bbpath='17877/4/2/9',bbxl=1,bbac=1;
+//]]></SCRIPT>
+
+<SCRIPT 
+src="Návštěvní kniha v PHP bez použití databáze - bezpečnostní mechanismy -- PHP -- Vývoj aplikací -- Interval_cz_soubory/bb4.js" 
+type=text/javascript></SCRIPT>
+<NOSCRIPT>
+<DIV><A href="http://ad2.billboard.cz/please/redirect/17877/4/2/9/"><IMG 
+style="BORDER-RIGHT: 0px; BORDER-TOP: 0px; BORDER-LEFT: 0px; BORDER-BOTTOM: 0px" 
+height=600 alt=. 
+src="Návštěvní kniha v PHP bez použití databáze - bezpečnostní mechanismy -- PHP -- Vývoj aplikací -- Interval_cz_soubory/fallback9.gif" 
+width=120></A></DIV></NOSCRIPT><!-- BBKONEC --></DIV></DIV><!-- cached 17-nejdiskutovanejsi_clanky.txt -->
+<DIV class="page-right-box cauldron">
+<H3 title="Nejdiskutovanější články za posledních 28 dnů">Diskuzní kotel</H3>
+<DIV class=page-right-box-in>
+<UL>
+  <LI><A title="(103 komentářů)" 
+  href="http://interval.cz/clanky/opera-9-pokrocila-konfigurace/">Opera 9 - 
+  pokročilá konfigurace</A>
+  <LI><A title="(4 komentářů)" 
+  href="http://interval.cz/clanky/pruvodce-svg-dalsi-nastroje-pro-tvorbu-svg-grafiky/">Průvodce 
+  SVG - další nástroje pro tvorbu SVG grafiky</A>
+  <LI><A title="(2 komentářů)" 
+  href="http://interval.cz/clanky/drupal-tvorba-vlastniho-vzhledu/">Drupal - 
+  tvorba vlastního vzhledu</A>
+  <LI><A title="(2 komentářů)" 
+  href="http://interval.cz/clanky/spravy-zo-slovenskeho-internetu-9/">Správy zo 
+  slovenského internetu 9.</A>
+  <LI><A title="(1 komentářů)" 
+  href="http://interval.cz/clanky/lokalizace-asp-net-2-x-aplikaci/">Lokalizace 
+  ASP.NET 2.x aplikací</A></LI></UL></DIV></DIV></DIV>
+<DIV class=page-maker>&nbsp;</DIV>
+<DIV class=page-maker-white>&nbsp;</DIV></DIV>
+<DIV id=advertising-page-bottom>
+<DIV id=advertising-page-bottom-left>
+<DIV><!-- Full Banner Bottom --><!-- BBSTART Interval.cz/Full Banner Bottom/rolovací/Full Banner 468x60 -->
+<SCRIPT type=text/javascript>/* <![CDATA[ */
+var bbat=0,bbbr=0,bbtt='_blank',bbpath='17877/1/2/1',bbxl=1,bbac=1;
+//]]></SCRIPT>
+
+<SCRIPT 
+src="Návštěvní kniha v PHP bez použití databáze - bezpečnostní mechanismy -- PHP -- Vývoj aplikací -- Interval_cz_soubory/bb4.js" 
+type=text/javascript></SCRIPT>
+<NOSCRIPT>
+<DIV><A href="http://ad2.billboard.cz/please/redirect/17877/1/2/1/"><IMG 
+style="BORDER-RIGHT: 0px; BORDER-TOP: 0px; BORDER-LEFT: 0px; BORDER-BOTTOM: 0px" 
+height=60 alt=. 
+src="Návštěvní kniha v PHP bez použití databáze - bezpečnostní mechanismy -- PHP -- Vývoj aplikací -- Interval_cz_soubory/fallback1.gif" 
+width=468></A></DIV></NOSCRIPT><!-- BBKONEC --></DIV></DIV>
+<DIV id=advertising-page-bottom-right>
+<DIV><!-- Button2 Bottom --><!-- BBSTART Interval.cz/Button2 Bottom/rolovací/Button 2 120x60 -->
+<SCRIPT type=text/javascript>/* <![CDATA[ */
+var bbat=0,bbbr=0,bbtt='_blank',bbpath='17877/2/2/6',bbxl=1,bbac=1;
+//]]></SCRIPT>
+
+<SCRIPT 
+src="Návštěvní kniha v PHP bez použití databáze - bezpečnostní mechanismy -- PHP -- Vývoj aplikací -- Interval_cz_soubory/bb4.js" 
+type=text/javascript></SCRIPT>
+<NOSCRIPT>
+<DIV><A href="http://ad2.billboard.cz/please/redirect/17877/2/2/6/"><IMG 
+style="BORDER-RIGHT: 0px; BORDER-TOP: 0px; BORDER-LEFT: 0px; BORDER-BOTTOM: 0px" 
+height=60 alt=. 
+src="Návštěvní kniha v PHP bez použití databáze - bezpečnostní mechanismy -- PHP -- Vývoj aplikací -- Interval_cz_soubory/fallback6.gif" 
+width=120></A></DIV></NOSCRIPT><!-- BBKONEC --></DIV></DIV>
+<DIV class=page-maker>&nbsp;</DIV></DIV>
+<DIV id=page-foot>
+<DIV id=page-foot-menu><A href="http://interval.cz/redakce-inzerce.asp">Inzerce 
+na Interval.cz</A> &nbsp;|&nbsp; <A 
+href="http://interval.cz/redakce.asp">Redakce Interval.cz</A> &nbsp;|&nbsp; <A 
+href="http://interval.cz/autori.asp">Hledáme nové autory</A> </DIV>
+<DIV id=issn><A class=noprint 
+href="http://jigsaw.w3.org/css-validator/validator?uri=http%3A%2F%2Finterval.cz%3A80%2Fclanky%2Fnavstevni-kniha-v-php-bez-pouziti-databaze-bezpecnostni-mechanismy%2F">.</A> 
+ISSN 1212-8651 <A class=noprint 
+href="http://validator.w3.org/check?uri=http%3A%2F%2Finterval.cz%3A80%2Fclanky%2Fnavstevni-kniha-v-php-bez-pouziti-databaze-bezpecnostni-mechanismy%2F&amp;charset=%28detect+automatically%29&amp;doctype=%28detect+automatically%29&amp;outline=1&amp;verbose=1">.</A> 
+</DIV>
+<DIV id=page-foot-zoner>© Zoner software, s.r.o., všechna práva vyhrazena, tento 
+server dodržuje <A href="http://interval.cz/privacy.asp">právní předpisy</A> o 
+ochraně osobních údajů. </DIV></DIV>
+<SCRIPT 
+src="Návštěvní kniha v PHP bez použití databáze - bezpečnostní mechanismy -- PHP -- Vývoj aplikací -- Interval_cz_soubory/audits-footer.js" 
+type=text/javascript></SCRIPT>
+
+<SCRIPT 
+src="Návštěvní kniha v PHP bez použití databáze - bezpečnostní mechanismy -- PHP -- Vývoj aplikací -- Interval_cz_soubory/urchin.js" 
+type=text/javascript>
+</SCRIPT>
+
+<SCRIPT type=text/javascript>
+_uacct = "UA-173085-1";
+
+var len = _uOsr.length;
+_uOsr[len]="seznam.cz";       _uOkw[len]="w";
+_uOsr[len+1]="centrum.cz";    _uOkw[len+1]="q";
+_uOsr[len+2]="jyxo.cz";       _uOkw[len+2]="s";
+_uOsr[len+3]="atlas.cz";      _uOkw[len+3]="q";
+_uOsr[len+4]="zoohoo.cz";     _uOkw[len+4]="q";
+_uOsr[len+5]="tiscali.cz";    _uOkw[len+5]="query";
+_uOsr[len+6]="1.cz";          _uOkw[len+6]="q";
+_uOsr[len+7]="volny.cz";      _uOkw[len+7]="search";
+
+urchinTracker();
+</SCRIPT>
+</BODY></HTML>

@@ -1,0 +1,52 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<!-- saved from url=(0104)http://webdeveloper.earthweb.com/repository/webdev/content/software/1999/11/11/JS_21179/script21179.html -->
+<!-- This script has been in the http://www.javascripts.com Javascript Public Library! --><!-- Note that though this material may have been in a public depository, certain author copyright restrictions may apply. --><HTML><HEAD>
+<META http-equiv=Content-Type content="text/html; charset=windows-1250">
+<SCRIPT language=JavaScript>
+  <!-- Funny text script by Bart Jellema
+    var hellotext="What do you think of this?"
+    var thetext=""
+    var started=false
+    var step=0
+    var times=1
+
+    function welcometext()
+    {
+      times--
+      if (times==0)
+      { 
+        if (started==false)
+        {
+          started = true;
+          window.status = hellotext;
+          setTimeout("anim()",1); 
+        }
+        thetext = hellotext;
+      }
+    }
+
+    function showstatustext(txt)
+    {
+      thetext = txt;
+      setTimeout("welcometext()",4000)
+      times++
+    }
+
+    function anim()
+    {
+      step++
+      if (step==7) {step=1}
+      if (step==1) {window.status='>==='+thetext+'===<'}
+      if (step==2) {window.status='=>=='+thetext+'==<='}
+      if (step==3) {window.status='>=>='+thetext+'=<=<'}
+      if (step==4) {window.status='=>=>'+thetext+'<=<='}
+      if (step==5) {window.status='==>='+thetext+'=<=='}
+      if (step==6) {window.status='===>'+thetext+'<==='}
+      setTimeout("anim()",200);
+    }
+  // Funny text script by Bart Jellema -->
+</SCRIPT>
+
+<META content="MSHTML 5.50.4134.600" name=GENERATOR></HEAD>
+<BODY bgColor=#ffffff 
+onload=welcometext()><!-- Simba says Roar. --></BODY></HTML>

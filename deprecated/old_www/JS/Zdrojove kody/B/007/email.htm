@@ -1,0 +1,24 @@
+<HTML>
+  <HEAD>
+    <TITLE>Posílání dat na email</TITLE>
+    <SCRIPT Language="JavaScript">
+    <!--
+      // Kontrola pøed odesláním
+      function Conf() {
+        return confirm("Zmáèknìte OK pro poslání zprávy");
+      }
+    // -->
+    </SCRIPT>
+  </HEAD>
+
+  <BODY>
+    <FORM Method="post" Action="mailto:nekdo@nekde.cz"
+          Enctype="text/plain" OnSubmit="return Conf()">
+      <INPUT Type="Text" Name="Text1"><BR>
+      <INPUT Type="Text" Name="Text2"><BR>
+      <INPUT Type="Text" Name="Text3"><BR>
+      <INPUT type="Submit" Value="Poslat">
+    </FORM>
+  </BODY>
+</HTML>
+

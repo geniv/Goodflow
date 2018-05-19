@@ -1,0 +1,46 @@
+<HTML>
+<HEAD>
+<TITLE>Pøekladaè textu do morseovky</TITLE>
+<SCRIPT LANGUAGE="JavaScript">
+<!--
+function preloz(form) 
+{
+  znaky="abcdefghijklmnopqrstuvwxyz"+
+        "ABCDEFGHIJKLMNOPQRSTUVWXYZ .,?:-!";
+  kod=[".-","-...","-.-.","-..",".","..-.",
+  "--.","....","..",".---","-.-",".-..","--",
+  "-.","---",".--.","--.-",".-.","...","-",
+  "..-","...-",".--","-..-","-.--","--..",
+  ".-","-...","-.-.","-..",".","..-.","--.",
+  "....","..",".---","-.-",".-..","--","-.",
+  "---",".--.","--.-",".-.","...","-","..-",
+  "...-",".--","-..-","-.--","--.."," ",
+  ".-.-.-","--..--","..--..","---...",
+  "-....-","!"];
+
+  input=form.input.value; output="";
+  for (p=0;p<input.length;p++) 
+  {
+    daChar=input.charAt(p);
+    for (i=0;i<znaky.length;i++)
+      if (daChar==znaky.charAt(i)) 
+      {
+        output+=kod[i]+" ";
+        break;
+      }
+  }
+  form.output.value=output;
+}
+// -->
+</SCRIPT>
+</HEAD>
+<BODY>
+<FORM>
+Text (bez diakritiky):<BR>
+<TEXTAREA NAME="input" COLS="70" ROWS="3" WRAP="VIRTUAL"></TEXTAREA>
+<BR><INPUT TYPE="button" VALUE="Pøelož do morseovky" 
+  onClick="preloz(this.form)"><P>Morseovka:<BR>
+<TEXTAREA NAME="output" COLS="70" ROWS="3" wrap="VIRTUAL"></TEXTAREA>
+</FORM>
+</BODY>
+</HTML>

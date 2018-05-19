@@ -1,0 +1,125 @@
+
+
+
+Ohranièení obrázku v css
+Vydáno dne 17. 11. 2006 (145 pøeètení)
+
+
+Stylové a slušivé ohranièení textu, obrázku atd..
+
+Vítejte, doufám že vám tento tu bude nápomocen pøi stavbì vašeho webu: 
+
+#ohraniceni {  
+/* Libovolný název stylu */
+  border:  1px dashed #ccc; 
+/* Šíøka ohranièení bude 1px, èárkovaný a barvou #ccc */
+  padding: 1px;
+/* Ohranièení bude od obìjktu vzdáleno 1px */
+}
+
+
+Dá se to vèak také zapsat takto: 
+
+#ohraniceni {
+  border-style:    dashed;
+/* Ohranièení bude èárkované */
+  border-color:    #ccc;
+/* Barva ohranièení bude #ccc */
+  border-width:    1px;
+/* Šíøka ohranièení bude 1px */
+  padding:         1px;
+/* Ohranièení bude od obìjktu vzdáleno 1px */
+
+
+A teï jdeme na html:
+když vkládáme tøeba do textu: 
+
+<p id="ohraniceni">Tééééxt</p>
+
+
+A z toho nám vyjde : 
+Tééééxt
+
+Pokud jste zvyklí zadávat: 
+
+<p class="ohraniceni">
+
+
+Musíte v css místo #ohraniceni psát .ohraniceni
+A teï tøeba jdeme na obrázek: 
+
+<img src="URL-OBRAZKU" id="ohraniceni">
+
+
+A z toho nám vyjde :  
+
+--------------------------------------------------------------------------------
+Nìkdo používá také tuto možnost: 
+
+<img src="odkaz na obrázek"
+style:"border: 1px dashed #ccc; padding: 1px;">
+
+Nebo:
+
+<img src="odkaz na obrázek"
+style:"border-style: dashed; border-color: #ccc;
+border-width: 1px; padding: 1px;">
+
+Možnost kterou jsem vám ukázal na konec (style v html) mùžete vložit do èehokoliv(p, img, table).
+A to je pro dnešek vše :)
+
+
+Autor: KuKu | Poèet komentáøù: 0 | Pøidat komentáø | Tisk
+
+
+
+
+
+
+
+
+
+
+
+Doba naèítání stránky
+Vydáno dne 27. 02. 2006 (348 pøeètení)
+
+
+Pokdu si chcete na stránce zobrazit èas vygenerování stránky, ètìte tento èlánek.
+
+
+Script je velmi jednoduchý, nebudeme používat databázi. Do stránek jen pøidáme jednoduchý kód. Na zaèátek stránky (nejlépe hned za tag <BODY>) vložte tento kód:
+
+<? 
+$time1 = microtime(); 
+$time1 = explode(" ",$time1); 
+$time1 = $time1[1] + $time1[0]; 
+$rd = "100000"; //tady nastav zaokrouhlení 
+?> 
+
+A na konec stránky vložte pøed tag </BODY>:
+
+<?
+$time2 = microtime(); 
+$time2 = explode(" ",$time2); 
+$time2 = $time2[1] + $time2[0]; 
+$deltatime = $time2 - $time1; 
+$deltatime = (round(($deltatime*$rd)))/$rd; 
+echo "stránka naètena za $deltatime sekund"; 
+?>
+ 
+
+To je vše
+
+
+
+Autor: Tomáš Opekar | Poèet komentáøù: 52 | Pøidat komentáø | Tisk
+
+
+
+
+
+
+
+
+

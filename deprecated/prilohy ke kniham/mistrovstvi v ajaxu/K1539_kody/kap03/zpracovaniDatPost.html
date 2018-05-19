@@ -1,0 +1,53 @@
+<html> 
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>Příklad použití Ajaxu a metody POST</title> 
+
+    <script language="javascript">
+      var XMLHttpRequestObjekt = false; 
+
+      if (window.XMLHttpRequest) {
+        XMLHttpRequestObjekt = new XMLHttpRequest();
+      } else if (window.ActiveXObject) {
+        XMLHttpRequestObjekt = new ActiveXObject("Microsoft.XMLHTTP");
+      }
+
+      function ziskejData(zdrojDat, divID, data) 
+      { 
+        if(XMLHttpRequestObjekt) {
+          var obj = document.getElementById(divID); 
+          XMLHttpRequestObjekt.open("POST", zdrojDat); 
+          XMLHttpRequestObjekt.setRequestHeader('Content-Type', 
+            'application/x-www-form-urlencoded'); 
+
+          XMLHttpRequestObjekt.onreadystatechange = function() 
+          { 
+            if (XMLHttpRequestObjekt.readyState == 4 && 
+              XMLHttpRequestObjekt.status == 200) { 
+                obj.innerHTML = XMLHttpRequestObjekt.responseText; 
+            } 
+          } 
+
+          XMLHttpRequestObjekt.send("data=" + data); 
+        }
+      }
+    </script>
+  </head> 
+
+  <body>
+
+    <H1>Příklad použití Ajaxu a metody POST</H1>
+
+    <form>
+      <input type="button" value="Získej text 1" 
+        onclick="ziskejData('zpracovaniDatPost.php', 'cilovyDiv', 1)"> 
+      <input type="button" value="Získej text 2" 
+        onclick="ziskejData('zpracovaniDatPost.php', 'cilovyDiv', 2)"> 
+    </form>
+
+    <div id="cilovyDiv">
+      <p>Získaný text se zobrazí na tomto místě.</p> 
+    </div> 
+
+  </body> 
+</html>

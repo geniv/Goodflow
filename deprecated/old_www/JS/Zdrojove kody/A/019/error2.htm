@@ -1,0 +1,43 @@
+<HTML>
+  <HEAD>
+    <TITLE> Obsluha chyb </TITLE>
+    <SCRIPT language="JavaScript">
+      <!--
+      // Poèítadlo oken s chybovými zprávami
+      var ErrWinNum=0;
+
+      // Funkce ošetøující vzniklou chybu
+      function MyError2 (Message, Url, Line){
+        // Øetìzec obsahující chybovou hlášku
+        var ErrMsg;
+
+        ErrMsg =  " ===================================== \n";
+        ErrMsg += "                 Hlášení o chybì  \n";
+        ErrMsg += " ===================================== \n\n";
+        // Popis chyby
+        ErrMsg += "  Popis chyby: \n "+Message+"\n\n";
+        // Øádek, kde k ní došlo
+        ErrMsg += "  Øádek:       \n "+Line+"\n\n";
+        // Adresa stránky
+        ErrMsg += "  Url:         \n "+Url+"\n\n";
+        ErrMsg += " ===================================== \n";
+
+        // Zobrazení chybové hlášky
+        alert (ErrMsg);
+        return true;
+      }
+      
+      // Nastavení ovladaèe události onerror na vlastní funkci
+      self.onerror = MyError2;
+      // -->
+    </SCRIPT>
+  </HEAD>
+  <BODY>
+    <FORM name="Form1">
+      Zmáèknutím tlaèítka vyvoláte chybu.
+      <INPUT type=button name="Button1" value="  Test  "
+        onclick="BlaBlaBla">
+    </FORM>
+  </BODY>
+</HTML>
+

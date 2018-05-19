@@ -1,0 +1,26 @@
+<body onLoad="scroll()">
+<script language="Javascript">
+
+angle_a = 0;
+angle_b = 0;
+
+function scroll()
+ {
+ angle_a += -5;
+ angle_b += 3;
+ sinA = Math.sin(angle_a*Math.PI/90)*16+16;
+ sinB = Math.sin(angle_b*Math.PI/180)*16+16;
+ sin=Math.round(sinA+sinB);
+ retezec="";
+
+ for (i=0; i<sin; i++)
+ {retezec +=" ";}
+
+ retezec +="Lemur 2001";
+ window.status = retezec;
+
+ setTimeout ("scroll()", 100);
+ }
+
+</script>
+ 

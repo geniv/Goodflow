@@ -1,0 +1,68 @@
+<html> 
+  <head> 
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>Zvolte si uživatelské jméno</title> 
+
+    <style>
+    #cilovyDiv {
+      background-color: #FF9999;
+      width: 40%;
+    }
+    </style>
+
+    <script language="javascript">
+      function ziskejData(zdrojDat) 
+      { 
+        var XMLHttpRequestObjekt = false; 
+
+        if (window.XMLHttpRequest) {
+          XMLHttpRequestObjekt = new XMLHttpRequest();
+        } else if (window.ActiveXObject) {
+          XMLHttpRequestObjekt = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+
+        if(XMLHttpRequestObjekt) {
+          XMLHttpRequestObjekt.open("GET", zdrojDat); 
+
+          XMLHttpRequestObjekt.onreadystatechange = function() 
+          { 
+            if (XMLHttpRequestObjekt.readyState == 4 && 
+              XMLHttpRequestObjekt.status == 200) { 
+                if(XMLHttpRequestObjekt.responseText == "ne"){
+                  var cilovyDiv = document.getElementById("cilovyDiv");
+
+                  cilovyDiv.innerHTML = "<div>Toto uživatelské jméno není dostupné.</div>";
+                }
+            } 
+          } 
+
+          XMLHttpRequestObjekt.send(null); 
+        }
+      }
+
+      function overJmeno() 
+      {
+        var cilovyDiv = document.getElementById("cilovyDiv");
+        cilovyDiv.innerHTML = "<div></div>";
+        var vstup = document.getElementById("uzivjmeno");
+
+        if (vstup.value) {
+          ziskejData("uzivJmeno.php?qu=" + vstup.value);
+        } 
+      }
+    </script>
+
+  </head> 
+
+  <body>
+
+    <H1>Zvolte si uživatelské jméno</H1>
+
+    Zadejte uživatelské jméno: <input id="uzivjmeno" type="text" 
+      name="uzivjmeno" onkeyup="overJmeno()">
+
+    <div id="cilovyDiv"><div></div></div>
+
+  </body> 
+
+</html>

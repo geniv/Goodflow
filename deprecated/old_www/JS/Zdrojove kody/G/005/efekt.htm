@@ -1,0 +1,55 @@
+<HTML>
+  <HEAD>
+
+    <TITLE>Pulzující efekt</TITLE>
+
+    <SCRIPT Language="JavaScript">
+      <!--
+      // Minimální hodnota filtru
+      var MinVal = 1;
+      // Maximální hodnota filtru
+      var MaxVal = 8;
+      // Velikost èasové prodlevy
+      var Delay = 55;
+      // Barva popøedí
+      var FColor = "black";
+      // Inkrement (o kolik se zvedne hodnota filtru)
+      var Inc = 1;
+      // Aktuální hodnota filtru
+      var Val = 0;
+
+      // Zmìna hodnoty filtru
+      function ChangeFilter(){
+        // Pouze pro prohlížeèe podporující document.all
+        if (!document.all) return;
+
+        // Zmìna hodnoty
+        if (Inc > 0){
+          if (Val < MaxVal) Val += Inc;
+          else Inc = -Inc;
+        } else {
+          if (Val > MinVal) Val += Inc;
+          else Inc = -Inc;
+        }
+
+        // Nastavení filtru a jeho aplikace na element s ID=Caption
+        Caption.style.filter = "Glow(Color=" +
+          FColor + ", Strength=" + Val + ")";
+
+        // Nastavení èasovaèe na další zmìnu
+        Timeout = setTimeout('ChangeFilter()',Delay);
+      }
+      // -->
+    </SCRIPT>
+
+  </HEAD>
+
+  <BODY Onload="ChangeFilter();">
+
+    <SPAN ID="Caption" Style="width:100%">
+    <H1 Align="center">STAVBA 3D OBJEKTÙ</H1>
+    </SPAN>
+
+  </BODY>
+</HTML>
+

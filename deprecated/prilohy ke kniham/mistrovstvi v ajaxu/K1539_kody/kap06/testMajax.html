@@ -1,0 +1,41 @@
+<html> 
+  <head> 
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>Test frameworku Majax</title> 
+
+    <script type="text/javascript" src="majax.js"></script>
+
+    <script language="javascript">
+
+      function pouzijMajax()
+      {
+        var url = "majax.txt";
+        majax_get (url, null);
+      }
+
+      function callback()
+      {
+        var div = document.getElementById ("cilovyDiv"); 
+        div.innerHTML = MAJAX_RESPONSE;
+      }
+
+      MAJAXCM_COMPLETE.register(callback);
+  
+    </script>
+  </head> 
+
+  <body>
+
+    <H1>Test frameworku Majax</H1>
+
+    <form>
+      <input type="button" value="Získej text" 
+        onclick="pouzijMajax()"> 
+    </form>
+
+    <div id="cilovyDiv">
+      <p>Získaná data se zobrazí na tomto místě.</p> 
+    </div> 
+
+  </body> 
+</html>

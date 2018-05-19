@@ -1,0 +1,53 @@
+<html>
+<head>
+<script>
+function f(){
+popis.style.pixelTop=popis.style.pixelTop+1
+if (popis.style.pixelTop>300)
+popis.style.pixelTop=0;
+window.setTimeout("f();",120)
+}
+function f2(){
+popis2.style.pixelTop=popis2.style.pixelTop+1
+cas2=window.setTimeout("f2();",10)
+if (popis2.style.pixelTop>300){
+clearTimeout(cas2);
+f3();}
+}
+function f3(){
+popis2.style.pixelTop=popis2.style.pixelTop-1
+if (popis2.style.pixelTop==0){
+clearTimeout(cas);
+f2();}
+cas=window.setTimeout("f3();",100)
+}
+function f4(){
+popis3.style.pixelTop=popis3.style.pixelTop-1
+if (popis3.style.pixelTop<100)
+popis3.style.pixelTop=300;
+window.setTimeout("f4();",80)
+}
+ </script> 
+</head>
+<body onLoad="f();f2();f4();">
+<span id="popis" style="POSITION: absolute; left: 175px; top: 100px; background-color: orange;">
+s<br>p<br>a<br>d<br>n<br>e<br><br>
+a<br><br>z<br>a<br>è<br>n<br>e<br><br>z<br>n<br>o<br>v<br>u<br>
+<br>p<br>a<br>d<br>a<br>
+t</span>
+<span id="popis2" style="POSITION: absolute;Top:100px;LEFT:180px;background-color: white;">
+s<br>p<br>a<br>d<br>n<br>e<br><br>a<br><br>p<br>a<br>k<br>s<br>e<br>
+o<br>d<br>r<br>a<br>z<br>í</span>
+<span id="popis3" style="POSITION: absolute;Top:300px;LEFT:186px;background-color:#c4d8fd;">
+t<br>a<br>k<br>h<br>l<br>e<br><br>v<br>y<br>p<br>a<br>d<br>á<br>
+<br>
+m<br>
+a<br>
+t<br>
+r<br>
+i<br>
+x<br>
+!<br>
+!
+</span>
+</body></html>

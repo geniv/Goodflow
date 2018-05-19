@@ -1,0 +1,50 @@
+<HTML>
+<HEAD>
+<TITLE></TITLE>
+</HEAD>
+<BODY>
+<SCRIPT LANGUAGE=javascript>
+function poc()
+{
+if(fo.r1.checked){fo.tr.value=eval(fo.tu.value/fo.ti.value);}
+if(fo.r2.checked){fo.tu.value=eval(fo.tr.value*fo.ti.value);}
+if(fo.r3.checked){fo.ti.value=eval(fo.tu.value/fo.tr.value);}
+}
+function poc1()
+{
+if(fo.r4.checked){fo.pp.value=eval(fo.pu.value*fo.pi.value);}
+if(fo.r5.checked){fo.pu.value=eval(fo.pp.value/fo.pi.value);}
+if(fo.r6.checked){fo.pi.value=eval(fo.pp.value/fo.pu.value);}
+}
+</SCRIPT>
+<form name=fo>
+<HR><HR color=Red>
+<u>Ohmùv zákon:</u><br>
+<b>Neznáš:</b><br>
+Odpor: <INPUT type="radio" name=radio1 id=r1 onclick="fo.tr.disabled=true;fo.tu.disabled=false;fo.ti.disabled=false;"><br>
+Napìtí: <INPUT type="radio" name=radio1 id=r2 onclick="fo.tr.disabled=false;fo.tu.disabled=true;fo.ti.disabled=false;"><br>
+Proud:&nbsp; <INPUT type="radio" name=radio1 id=r3 onclick="fo.tr.disabled=false;fo.tu.disabled=false;fo.ti.disabled=true;">
+<HR>
+Odpor: <INPUT name=tr size=20 value=0 >Ohm<br>
+Napìtí: <INPUT name=tu size=20 value=0 >V<br>
+Proud:&nbsp;&nbsp;<INPUT name=ti size=20 value=0 >A<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<INPUT type="button" value="Spoèítej" name=button1 onclick="poc()">
+<HR color=Red><HR>
+<br>
+<HR><HR color=Red>
+<u>Elektrický výkon:</u><br>
+<b>Neznáš:</b><br>
+Práce:&nbsp;&nbsp;<INPUT type="radio" id=r4 name=radio2 onclick="fo.pp.disabled=true;fo.pu.disabled=false;fo.pi.disabled=false;"><br>
+Napìtí: <INPUT type="radio" id=r5 name=radio2 onclick="fo.pp.disabled=false;fo.pu.disabled=true;fo.pi.disabled=false;"><br>
+Proud:&nbsp;&nbsp;<INPUT type="radio" id=r6 name=radio2 onclick="fo.pp.disabled=false;fo.pu.disabled=false;fo.pi.disabled=true;"><br>
+<HR>
+Práce:&nbsp;&nbsp;<INPUT type="text" name=pp value=0>W<br>
+Napìtí: <INPUT type="text" name=pu value=0>V<br>
+Proud:&nbsp;&nbsp;<INPUT type="text" name=pi value=0>A<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+<INPUT type="button" value="Spoèítej" name=button2 onclick="poc1()">
+<HR color=Red><HR>
+</form>
+</BODY>
+</HTML>

@@ -1,0 +1,37 @@
+<HTML>
+  <HEAD>
+  <TITLE>Zad·v·nÌ ËÌsla</TITLE>
+    <SCRIPT Language="JavaScript">
+    <!--
+      // Funkce pro kontrolu zadanÈho ËÌsla
+      function CheckNumEdit (Edit) {
+        // P¯evod vstupu na ËÌslo
+        var S = Edit.value - 0;
+        // Kontrola, zda se jedn· o ËÌslo
+        if ((parseInt (S) == NaN)||
+            (parseInt (S)+'' != S)){
+            alert('äpatnÏ zadanÈ ËÌslo!');
+            Edit.focus();
+            Edit.select();
+        } else
+          Edit.value = parseInt (S);
+      }
+    // -->
+    </SCRIPT>
+  </HEAD>
+  <BODY>
+    <FORM Name="frmMain">
+      »Ìslo 1:
+        <INPUT Name="edNumber1" Type="Text" Value="0"
+          Size=8 onBlur="CheckNumEdit(this);"><BR>
+      »Ìslo 2:
+        <INPUT Name="edNumber2" Type="Text" Value="0"
+          Size=8 onBlur="CheckNumEdit(this);"><BR>
+      »Ìslo 3:
+        <INPUT Name="edNumber3" Type="Text" Value="0"
+          Size=8 onBlur="CheckNumEdit(this);"><BR>
+      <INPUT Name="btOk" Type="Button" Value=" Ok ">
+    </FORM>
+  </BODY>
+</HTML>
+

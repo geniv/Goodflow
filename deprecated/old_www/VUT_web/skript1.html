@@ -1,0 +1,96 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html>
+<head>
+  <meta content="text/html; charset=ISO-8859-2" http-equiv="content-type">
+  <link rel="stylesheet" type="text/css" href="styles/style5.css" media="screen" />
+  <title>Skripty</title>
+</head>
+<body>
+
+<script type="text/javascript">
+window.setInterval("zjisticas()", 1000);
+
+function zjisticas()
+  {
+    var cas = new Date();
+    var hhnula, mmnula, ssnula;
+    var hh = cas.getHours();
+    var mm = cas.getMinutes();
+    var ss = cas.getSeconds();
+    
+    if (hh < 10) {
+			hhnula = "0";
+			} else {
+			hhnula = "";
+			}
+			
+		if (mm < 10) {
+			mmnula = "0";
+			} else {
+			mmnula = "";
+			}
+			
+		if (ss < 10) {
+			ssnula = "0";
+			} else {
+			ssnula = "";
+			}
+    
+    cas = "Právě je: " + hhnula + hh + ":" + mmnula + mm + ":" + ssnula + ss;
+    var span_cas = document.getElementById("cas");
+    span_cas.innerHTML = cas;
+  }
+
+var hod = new Date();
+
+if (hod.getHours() <= 12)
+  {
+    //document.getElementById("cas").color = Red;  
+		document.write("<style> table td {background-color: yellow;} </style>");
+  }
+    else
+  {
+    //document.getElementById("cas").color = Red; 
+		document.write("<style> table td {background-color: darkblue;} </style>");
+  }
+</script>
+
+<h1>Vygenerovaná tabulka</h1>
+
+<table>
+<script type="text/javascript">
+var radek, sloupec;
+for (radek = 1; radek <= 10; radek++) {
+  document.write("<tr>");
+    for (sloupec = 1; sloupec <= 10; sloupec++) 
+    {
+      var tucne, styl;
+        if (radek == 1 || sloupec == 1)
+          {
+            tucne = "th";
+          }
+            else
+          {
+            tucne = "td";
+          }
+
+        if ((radek * sloupec) % 10 == 0)
+          {
+            styl = ' class="zvyrazneni"';
+          }
+            else
+          {
+            styl = "";
+          }
+        document.write('<' + tucne + styl+'>' + (radek * sloupec) + '</'+tucne+'>');
+    }
+    document.write("</tr>");
+}
+</script>
+</table>
+
+<br>
+<span id="cas"></span>
+
+</body>
+</html>

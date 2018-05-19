@@ -1,0 +1,31 @@
+<html>
+<head>
+<title>hodiny s datem</title>
+<meta http-equiv="content-type" content="text/html; charset=windows-1250">
+</head>
+
+<body bgcolor="#FFFFFF" text="#000000">
+
+<font face="Arial" size="2">
+<p  align="center">
+<SCRIPT TYPE="text/vbscript" LANGUAGE=“VBScript“>
+  <!--
+  	'--- Vypsat element s hodinami
+  	Document.Write "<SPAN ID=""span_Timer"">" & Now() & "</SPAN>"
+  
+  	'--- Nastavit první timeout na vteřinu
+  	SetTimeout "UpdateTimer()", 1000
+  
+  	'--- Funkce pro aktualizaci času v prvku span_Timer
+  	Function UpdateTimer()
+  		span_Timer.InnerText = Now()
+  		' Znovu zavolat za jednu vteřinu
+  		SetTimeout "UpdateTimer()", 1000
+  	End Function
+  -->
+</SCRIPT>
+</p>
+</font>
+
+</body>
+</html>

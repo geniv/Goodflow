@@ -1,0 +1,146 @@
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>Příklad nákupního košíku</title>
+
+    <style type="text/css">
+      #dvdPrehr {
+        position:absolute;
+        z-index:200;
+        background: #eecc00;
+        color:#0000FF;
+      }
+    
+      #kosik {
+        position:absolute;
+        background: #00ff00;
+        color:#000000;
+      }
+    </style>
+
+    <script type="text/javascript">
+
+      var poziceX, poziceY;
+  
+      function UdalostMysi(e) 
+      {
+        if(e) {
+          this.e = e; 
+        } else {
+          this.e = window.event; 
+        }
+
+        if(e.pageX) {
+          this.x = e.pageX; 
+        } else {
+          this.x = e.clientX; 
+        }
+
+        if(e.pageY) {
+          this.y = e.pageY; 
+        } else {
+          this.y = e.clientY; 
+        }
+
+        if(e.target) {
+          this.cil = e.target; 
+        } else {
+          this.cil = e.srcElement;
+        }
+      }
+  
+      function pridejCallback(typ, callback) 
+      {
+        if (document.addEventListener) {
+          document.addEventListener(typ, callback, false);
+        } else if (document.attachEvent) {
+          document.attachEvent("on" + typ, callback, false);
+        }
+      }
+  
+      function odeberCallback(typ, callback) 
+      {
+        if (document.removeEventListener) {
+          document.removeEventListener(typ, callback, false);
+        } else if (document.detachEvent) {
+          document.detachEvent("on" + typ, callback, false);
+        }
+      }
+  
+      function zpracujMouseDown(e) 
+      {
+        var e = new UdalostMysi(e);
+        pridejCallback("mousemove", zpracujMouseMove);
+        pridejCallback("mouseup", zpracujMouseUp);
+        poziceX = e.x - parseInt(e.cil.style.left);
+        poziceY = e.y - parseInt(e.cil.style.top);
+        document.getElementById("cilovyDiv").innerHTML = "";
+      }
+    
+      function zpracujMouseMove(e) 
+      {
+        var e = new UdalostMysi(e);
+        var x = e.x - poziceX;
+        e.cil.style.left = x + "px";
+        var y = e.y - poziceY;
+        e.cil.style.top = y + "px";
+      }
+    
+      function zpracujMouseUp(e) 
+      {
+        var e = new UdalostMysi(e);
+        odeberCallback("mousemove", zpracujMouseMove);
+        odeberCallback("mouseup", zpracujMouseUp);
+
+        var kosik = document.getElementById("kosik");
+        var x = parseInt(kosik.style.left);
+        var y = parseInt(kosik.style.top);
+        var sirka = parseInt(kosik.style.width);
+        var vyska = parseInt(kosik.style.height);
+
+        if(e.x > x && e.x < x + sirka &&
+          e.y > y && e.y < y + vyska){
+          var XMLHttpRequestObjekt = false; 
+
+          if (window.XMLHttpRequest) {
+            XMLHttpRequestObjekt = new XMLHttpRequest();
+          } else if (window.ActiveXObject) {
+            XMLHttpRequestObjekt = new ActiveXObject("Microsoft.XMLHTTP");
+          }
+
+          if(XMLHttpRequestObjekt) {
+            XMLHttpRequestObjekt.open("GET", "nakup.txt"); 
+
+            XMLHttpRequestObjekt.onreadystatechange = function() 
+            { 
+              if (XMLHttpRequestObjekt.readyState == 4 && 
+                XMLHttpRequestObjekt.status == 200) { 
+                  document.getElementById("cilovyDiv").innerHTML =
+                    XMLHttpRequestObjekt.responseText;
+                  delete XMLHttpRequestObjekt;
+                  XMLHttpRequestObjekt = null;
+              } 
+            } 
+
+            XMLHttpRequestObjekt.send(null); 
+          }
+        }
+      }
+    </script>
+  </head>
+
+  <body>
+    <h1>Kupte si přehrávač DVD - přetáhněte jej do nákupního košíku</h1>
+      <div id="cilovyDiv"></div>
+
+      <div id="dvdPrehr" 
+        style="left:180px; top:150px; width:80px; height:60px;"
+        onmousedown="zpracujMouseDown(event);">Přehrávač DVD</div>
+   
+      <div id="kosik" 
+        style="left:350px; top:250px; width:200px; height:100px;">
+        Nákupní košík</div>
+
+  </body>
+</html>
+

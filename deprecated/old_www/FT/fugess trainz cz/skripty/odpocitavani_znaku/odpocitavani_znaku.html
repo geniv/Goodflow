@@ -1,0 +1,29 @@
+<HTML>
+<HEAD>
+<meta http-equiv="Content-Type" content="text/html; charset=windows-1250">
+<meta http-equiv="Content-Language" content="cs">
+<SCRIPT LANGUAGE="JavaScript">
+<!-- Begin
+function textCounter(field, countfield, maxlimit) {
+if (field.value.length > maxlimit)
+field.value = field.value.substring(0, maxlimit);
+// otherwise, update 'characters left' counter
+else 
+countfield.value = maxlimit - field.value.length;
+}
+// End -->
+</script>
+<meta name="GENERATOR" content="Microsoft FrontPage 5.0">
+<meta name="ProgId" content="FrontPage.Editor.Document">
+<title></title>
+</HEAD>
+<BODY>
+<center>
+<form name=myform> 
+<font size="1" face="arial, helvetica, sans-serif">( Odpcitavani znaku )<br>
+<textarea name=message wrap=physical cols=28 rows=4 onKeyDown="textCounter(this.form.message,this.form.remLen,200);" onKeyUp="textCounter(this.form.message,this.form.remLen,200);"></textarea>
+<br>
+<input readonly type=text name=remLen size=3 maxlength=3 value="200">  
+</form>
+</center>
+</HTML>

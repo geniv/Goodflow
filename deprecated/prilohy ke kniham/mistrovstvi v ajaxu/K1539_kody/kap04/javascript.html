@@ -1,0 +1,56 @@
+<html> 
+  <head> 
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>Použití Ajaxu pro získání kódu v JavaScriptu</title> 
+
+    <script language="javascript">
+    
+      function ziskejData(zdrojDat) 
+      { 
+        var XMLHttpRequestObjekt = false; 
+
+        if (window.XMLHttpRequest) {
+          XMLHttpRequestObjekt = new XMLHttpRequest();
+        } else if (window.ActiveXObject) {
+          XMLHttpRequestObjekt = new ActiveXObject("Microsoft.XMLHTTP");
+        }
+
+        if(XMLHttpRequestObjekt) {
+          XMLHttpRequestObjekt.open("GET", zdrojDat); 
+
+          XMLHttpRequestObjekt.onreadystatechange = function() 
+          { 
+            if (XMLHttpRequestObjekt.readyState == 4 && 
+              XMLHttpRequestObjekt.status == 200) { 
+              eval(XMLHttpRequestObjekt.responseText); 
+            } 
+          } 
+
+          XMLHttpRequestObjekt.send(null); 
+        }
+      }
+
+      function zobraz() 
+      {
+        var cilovyDiv = document.getElementById("cilovyDiv");
+
+        cilovyDiv.innerHTML = "Funguje to!";
+      }
+    </script>
+  </head> 
+
+  <body>
+
+    <H1>Použití Ajaxu pro získání kódu v JavaScriptu</H1>
+
+    <form>
+      <input type="button" value="Získej JavaScript" 
+        onclick="ziskejData('javascript.php')"> 
+    </form>
+
+    <div id="cilovyDiv">
+      <p>Zpráva se zobrazí na tomto místě.</p> 
+    </div> 
+
+  </body> 
+</html>

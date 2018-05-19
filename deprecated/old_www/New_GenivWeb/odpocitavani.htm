@@ -1,0 +1,31 @@
+<HTML>
+<HEAD>
+<TITLE>Odpoèítávání</TITLE>
+</HEAD>
+<BODY onload="odpocet()">
+<SCRIPT LANGUAGE="javascript" type="text/javascript">
+//od 16.6. 2006 do 30.6. 2006
+var dat=new Date;
+var hod=dat.getHours();
+var min=dat.getMinutes();
+var sec=dat.getSeconds();
+var rok=dat.getYear();
+var mes=eval(dat.getMonth()+1);
+var den=dat.getDate();
+//zadání koncového èasu
+var dohod=12,domin=00,dorok=2007,domes=6,doden=15,zbytek=0;
+zbytek=((((doden-den)+(domes-mes)+(dorok-rok))*24*60*60)+((dohod-hod)*60*60)+((domin-min)*60));
+function odpocet()
+{ 
+zbytek--;
+cas.innerText="Dnes je: "+den+"."+mes+". "+rok;
+cas1.innerText="Do "+doden+"."+domes+". "+dorok+" ;  "+dohod+":"+domin+" ; zbývá: "+zbytek+" vteøin.";
+if(zbytek==0){alert("Právì vypršely poslední vteøiny");}
+if(zbytek<=0){clearTimeout(ti);}
+var ti=setTimeout("odpocet()",1000);
+}//by Geniv
+</SCRIPT>
+<p id="cas"></p>
+<p id="cas1"></p>
+</BODY>
+</HTML>

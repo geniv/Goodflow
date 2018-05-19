@@ -1,0 +1,58 @@
+<html> 
+  <head> 
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>Příklad použití Ajaxu</title> 
+
+    <script language="javascript">
+      var XMLHttpRequestObjekt = false;
+
+      try {
+        XMLHttpRequestObjekt = new ActiveXObject("MSXML2.XMLHTTP");
+      } catch (vyjimka1) {
+          try {
+            XMLHttpRequestObjekt = new ActiveXObject("Microsoft.XMLHTTP");
+          } catch (vyjimka2) {
+            XMLHttpRequestObjekt = false;
+          }
+      }
+
+      if (!XMLHttpRequestObjekt && window.XMLHttpRequest) {
+        XMLHttpRequestObjekt = new XMLHttpRequest();
+      }
+
+      function ziskejData(zdrojDat, divID) 
+      { 
+        if(XMLHttpRequestObjekt) {
+          var obj = document.getElementById(divID); 
+          XMLHttpRequestObjekt.open("GET", zdrojDat); 
+
+          XMLHttpRequestObjekt.onreadystatechange = function() 
+          { 
+            if (XMLHttpRequestObjekt.readyState == 4 && 
+              XMLHttpRequestObjekt.status == 200) { 
+                obj.innerHTML = XMLHttpRequestObjekt.responseText; 
+            } 
+          } 
+
+          XMLHttpRequestObjekt.send(null); 
+        }
+      }
+    </script>
+  </head> 
+
+  <body>
+
+    <H1>Příklad použití Ajaxu</H1>
+
+    <form>
+      <input type="button" value="Získej text" 
+        onclick="ziskejData('data.txt', 'cilovyDiv')"> 
+    </form>
+
+    <div id="cilovyDiv">
+      <p>Získaný text se zobrazí na tomto místě.</p> 
+    </div> 
+
+  </body> 
+</html>
+

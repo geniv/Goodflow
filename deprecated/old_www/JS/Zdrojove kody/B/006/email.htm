@@ -1,0 +1,51 @@
+<HTML>
+  <HEAD>
+    <TITLE> Kontrola e-mailu </TITLE>
+    <SCRIPT Language="JavaScript">
+    <!--
+      // Funkce na kontrolu emailu
+      function CheckEmail(S) {
+        // Pozice posledního znaku
+        var LastChar = S.length - 1;
+
+        // Pozice zavináèe - nesmí být ani na prvním,
+        // ani na posledním místì
+        var CharPos = S.indexOf("@");
+        if ((CharPos < 1) || (CharPos = LastChar)) return false;
+
+        // Pozice první teèky
+        var CharPos = S.indexOf(".");
+        if (CharPos < 1) return false;
+
+        // Pozice poslední teèky
+        var CharPos = S.lastIndexOf(".");
+        if (CharPos = LastChar) return false;
+
+        return true;
+      }
+
+      // Kontrola políèka, kam se píše email
+      function CheckEmailField(F) {
+        // pokud je email špatnì vyplnìn, upozorní se uživatel
+        // a formuláø se neodešle
+        if (!CheckEmail (F.value)){
+          alert ("Špatnì zadaná e-mailová adresa!");
+          F.focus();
+          F.select();
+          return false;
+        }
+        else
+          return true;
+      }
+    // -->
+    </SCRIPT>
+  </HEAD>
+  <BODY>
+     <FORM Name="frmMain"
+       onsubmit="return CheckEmailField (document.frmMain.edEmail);">
+       <INPUT Type="Text" Name="edEmail" Value="@">
+       <INPUT Type="Submit" Value="OK">
+     </FORM>
+  </BODY>
+</HTML>
+

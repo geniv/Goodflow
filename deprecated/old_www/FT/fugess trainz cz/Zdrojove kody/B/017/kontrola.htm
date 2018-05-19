@@ -1,0 +1,69 @@
+<HTML>
+  <HEAD>
+    <TITLE>Kontrola formuláøe</TITLE>
+    <SCRIPT Language="JavaScript">
+      <!--
+      // Funkce nastaví Elementu barvu Col
+      // využívá k tomu kaskádové styly
+      function SetCol(Element, Col) {
+        if (Element.style)
+          Element.style.backgroundColor = Col;
+      }
+
+      // Funkce pro kontrolu formuláøe
+      function CheckForm(Form){
+        // Barva špatnì vyplnìného pole
+        var ColErr = "red";
+        // Barva dobøe vyplnìného pole (výchozí barva prvku)
+        var ColOK = "";
+        // Pøíznak, zda je formuláø v poøádku
+        var Valid = true;
+
+        // Kontrola jména
+        if (Form.Name.value == ""){
+          // Nastaví se pøíznak (formuláø není správnì vyplnìn)
+          Valid = false;
+          // Nastaví se barva prvku (zvýrazní se)
+          SetCol(Form.Name, ColErr);
+        } else {
+          SetCol(Form.Name, ColOK);
+        }
+
+        // Kontrola pøíjmení
+        if (Form.SurName.value == ""){
+          Valid = false;
+          SetCol(Form.SurName, ColErr);
+        } else {
+          SetCol(Form.SurName, ColOK);
+        }
+
+        // Kontrola emailu
+        // navíc musí obsahovat zavináè
+        if ((Form.Email.value == "") ||
+            (Form.Email.value.indexOf('@') == -1)){
+          Valid = false;
+          SetCol(Form.Email, ColErr);
+        } else {
+          SetCol(Form.Email, ColOK);
+        }
+
+        // Pokud bylo nìco špatnì vyplnìno, zobrazí se hláška
+        if (!Valid)
+          alert("Prosím vyplòte správnì oznaèená políèka formuláøe!");
+
+        // Funkce vrací zda je formuláø pøipraven na odeslání
+        return Valid;
+      }
+      // -->
+    </SCRIPT>
+  </HEAD>
+  <BODY>
+    <FORM OnSubmit="return CheckForm(this)">
+      Jméno: <BR><INPUT Type="text" Name="Name" Value=""><BR>
+      Pøíjmení: <BR><INPUT Type="text" Name="SurName" Value=""><BR>
+      Email: <BR><INPUT Type="text" Name="Email" Value=""><BR><BR>
+      <INPUT Type="submit" Value="Odeslat formuláø">
+    </FORM>
+  </BODY>
+</HTML>
+

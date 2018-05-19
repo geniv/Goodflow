@@ -1,0 +1,47 @@
+<HTML>
+  <HEAD>
+    <TITLE> Kontrola a zobrazování délky textu </TITLE>
+    <SCRIPT Language="JavaScript">
+      <!--
+      // Maximální délka textu
+      MaxLength = 200;
+
+      // Funkce pro kontrolu délky
+      function TextLengthValidator (){
+        // Pokud je zapsaný text pøíliš dlouhý
+        // oøízne se metodou substring na pøíslušnou
+        // délku (MaxLength)
+        if (document.frmMain.taText.value.length > MaxLength)
+          document.frmMain.taText.value =
+            document.frmMain.taText.value.substring (0, MaxLength);
+
+        // Vypoète se a zobrazí poèet znakù, které lze ještì napsat
+        document.frmMain.edRemaining.value =
+          MaxLength - document.frmMain.taText.value.length;
+
+        // Zobrazí se poèet napsaných znakù
+        document.frmMain.edTotal.value =
+          document.frmMain.taText.value.length;
+      }
+      // -->
+    </SCRIPT>
+  </HEAD>
+
+  <BODY>
+    <CENTER>
+      <FORM Name="frmMain">
+        Napište, co máte na srdci (maximální délka je 200 znakù):
+        <BR>
+        <TEXTAREA Name="taText" Cols="50" Rows="7" Wrap="physical"
+          onKeyDown="TextLengthValidator()"
+          onKeyUp="TextLengthValidator()"></TEXTAREA>
+        <BR>
+        Zbývá ještì <INPUT Type="Text" Name="edRemaining"
+          Size="3" MaxLength=3 Value="200"> znakù,
+        napsáno již <INPUT Type="Text" Name="edTotal"
+          Size="3" MaxLength=3 Value="0"> znakù.
+      </FORM>
+    </CENTER>
+  </BODY>
+</HTML>
+

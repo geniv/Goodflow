@@ -1,0 +1,4 @@
+užiteèné odkazy
+<?
+
+?>

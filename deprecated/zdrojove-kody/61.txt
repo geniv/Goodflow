@@ -1,0 +1,20 @@
+﻿# Přesměrování na variantu bez www:
+
+RewriteEngine on
+RewriteCond %{HTTP_HOST} ^www\.vasedomena\.cz [nc]
+RewriteRule (.*) http://vasedomena.cz/$1 [R=301,L]
+RewriteCond %{HTTP_HOST} ^www\.vasedomena2\.cz [nc]
+RewriteRule (.*) http://vasedomena.cz/$1 [R=301,L]
+RewriteCond %{HTTP_HOST} ^vasedomena2\.cz [nc]
+RewriteRule (.*) http://vasedomena.cz/$1 [R=301,L]
+
+#  Přesměrování na variantu s www:
+
+RewriteEngine on
+RewriteCond %{HTTP_HOST} ^vasedomena\.cz [nc]
+RewriteRule (.*) http://www.vasedomena.cz/$1 [R=301,L]
+
+# Přesměrování na novou adresu:
+
+RewriteEngine on
+RewriteRule stranka-A\.html /stranka-B.html [R]
