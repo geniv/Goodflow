@@ -1,0 +1,82 @@
+2011-08-27  server  <geniv.radek@gmail.com>
+
+ * vylepseni metody Imagic->__construct aby se dali parametry zadat jak pres text a nebo jako asociativni pole
+
+
+2011-08-24  server  <geniv.radek@gmail.com>
+
+ * nahrazeni metody: getImageSize (deprecated) na getImageLength
+
+
+2011-08-23  server  <geniv.radek@gmail.com>
+
+ * optimalizace funkce seraprateRGB (zverejneni metody a rozsireni na 3 a 6 (+1: #) znakove barvy)
+ * pridani metody getMinimalVersion, ta vraci optimalni (minimalni) verzi imagicku na zpracovani danych prikazu
+
+
+2011-08-21  server  <geniv.radek@gmail.com>
+
+ * pridany do komentare funkce ktere jsou dostupne z ImagickDraw v ImagicDraw
+ * zapracovana prvni verze pretezovaci metody __call do ImagicDraw
+ * oprava metody annotateImage
+
+
+2011-08-20  server  <geniv.radek@gmail.com>
+
+ * opraven bug pri zjistovani mime
+ * zmena parametru konstroktoru na pole, 'path' je path .tmp souboru, 'files' pro vstupni soubor/y
+ * optimalizovana metoda getVersion
+ * Imagic pridano: getImageProperties, commentImage, getImageProperty, setImageProperty
+ * ImagicDraw pridano: setFontStretch, setFontStyle, setFontWeight
+ * pridany konstanty: STYLETYPE_ a STRETCH_
+
+
+2011-08-19  server  <geniv.radek@gmail.com>
+
+ * optimalizace identifikace obrazku
+ * vnitrni funkce na parsovani identify dat predelana na statickou metodu
+ * v testovacim php odstranena kontrola na ipa predelana na: extension_loaded()
+ * pozn: podpora animaci jeste neni kompletni!!!, trida jej umi zpracovat a nacist ale ne upravit! (k verzi 1.68)
+
+
+2011-08-15  server  <geniv.radek@gmail.com>
+
+ * pridano: getImageCompression, setImageCompression, getImageCompressionQuality, setImageCompressionQuality,
+            getImageMimeType, getImageSize, setImageDepth, getImageDepth, getImageColorspace, getImageChannel
+
+
+2011-08-13  server  <geniv.radek@gmail.com>
+
+ * pridano nekolik systemovych promennych a vylepseno parsrovani z identify
+ * pridany funkce getImageSignature, getImageDispose, setImageDispose
+
+
+2011-08-10  server  <geniv.radek@gmail.com>
+
+ * opraveno nekolik chybek,
+ * zabudovana zakladni podpora gif obrazku
+ * podpora vraceni indexu, posouvani indexu a overovani jestli jde posouvat index
+ * vylepsen konstruktor
+ * pridano pro gif setImageColorSpace, getCompressionQuality, setTextKerning, setTextInterWordSpacing, setTextInterLineSpacing
+ * pridano nastavovaci funkce setImageMatte, setImageMatteColor
+ * pridany dispose konstanty
+ * pro gif: getNumberImages, nextImage, hasNextImage, hasPreviousImage, getImageIndex, setImageIndex
+
+
+2011-06-20  geniv  <geniv.radek@gmail.com>
+
+ * objevena chyba pri zpracovani GIFu, pri vetsi predelavce se to predela
+
+
+2011-06-15  geniv  <geniv.radek@gmail.com>
+
+ * vlozeny jmene prostory (namespace + use), ukazka uziti v test.php (verze PHP >= 5.3.X), i kvuli Fluent Interface
+ * pozmeneno verzovani, vypustena pocatecni nula
+ * upraveno Exception
+
+
+2011-05-31  geniv  <geniv.radek@gmail.com>
+
+ * vlozeno verzovani, zacina na 0.1.4
+ * verzovani se da zjistit ve funkci: getVersion pod indexem: versionImagic
+ * pridana staticka metoda na overovani jestli je soubor obrazkem (PDF je taky zpracovatelny)

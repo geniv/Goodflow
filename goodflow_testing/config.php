@@ -1,0 +1,5 @@
+<?php
+
+  //nastaveni pro testovani....
+
+?>

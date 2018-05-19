@@ -1,0 +1,67 @@
+#! /bin/sh
+### BEGIN INIT INFO
+# Provides:          skeleton
+# Required-Start:    $remote_fs $syslog
+# Required-Stop:     $remote_fs $syslog
+# Default-Start:     2 3 4 5
+# Default-Stop:      0 1 6
+# Short-Description: Example initscript
+# Description:       This file should be used to construct scripts to be
+#                    placed in /etc/init.d.
+### END INIT INFO
+
+# Author editing: Radek Frystak <geniv.radek@gmail.com>
+
+# Do NOT "set -e"
+
+# PATH should only include /usr/* if it runs after the mountnfs.sh script
+PATH=/sbin:/usr/sbin:/bin:/usr/bin:/home/gmr/dedicated/teamspeak3-server_linux-amd64/
+TSPATH=/home/gmr/dedicated/teamspeak3-server_linux-amd64
+DESC="teamspeak3 server"
+NAME=ts3server_startscript.sh
+# DAEMON=/usr/sbin/$NAME
+DAEMON=$TSPATH/ts3server_linux_amd64
+#DAEMON_ARGS="--options args"
+DAEMON_ARGS=""
+PIDFILE=/var/run/$NAME.pid
+SCRIPTNAME=/etc/init.d/$NAME
+
+# Exit if the package is not installed
+[ -x "$DAEMON" ] || exit 0
+
+# Read configuration variable file if it is present
+[ -r /etc/default/$NAME ] && . /etc/default/$NAME
+
+# Load the VERBOSE setting and other rcS variables
+. /lib/init/vars.sh
+
+# Define LSB log_* functions.
+# Depend on lsb-base (>= 3.0-6) to ensure that this file is present.
+. /lib/lsb/init-functions
+
+#/home/server/teamspeak3-server/ts3server_startscript.sh {start|stop|restart|status}
+
+case "$1" in
+  start)
+	[ "$VERBOSE" != no ] && log_daemon_msg "Starting $DESC" "$NAME"
+	$TSPATH/$NAME start
+	;;
+  stop)
+	[ "$VERBOSE" != no ] && log_daemon_msg "Stopping $DESC" "$NAME"
+	$TSPATH/$NAME stop	
+	;;
+  status)
+	$TSPATH/ts3server_startscript.sh status
+       ;;
+  restart)
+	log_daemon_msg "Restarting $DESC" "$NAME"
+	$TSPATH/$NAME restart
+	;;
+  *)
+	#echo "Usage: $SCRIPTNAME {start|stop|restart|reload|force-reload}" >&2
+	echo "Usage: $SCRIPTNAME {start|stop|status|restart}" >&2
+	exit 3
+	;;
+esac
+
+:

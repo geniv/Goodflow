@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+	<meta charset=utf-8>
+	<title>Otáčení karet s použitím CSS3</title>
+	<link rel="stylesheet" href="css/css3flip.css" />
+</head>
+<body>
+	<header>
+		<h1>Otáčení karet s použitím CSS3</h1>
+	</header>
+	
+	<section id="game">
+		<div id="cards">
+			<div class="card">
+				<div class="face front"></div>
+				<div class="face back cardAK"></div>
+			</div> <!-- .card -->
+			<div class="card">
+				<div class="face front"></div>
+				<div class="face back cardAQ"></div>
+			</div> <!-- .card -->
+		</div> <!-- #cards -->
+	</section> <!-- #game -->
+	
+	<footer>
+		<p>Příklad ukazující otáčení karet s použitím CSS3.</p>
+		<p>Klepnutím na kartu ji otočíte.</p>
+	</footer>
+
+<script src="js/jquery-1.6.min.js"></script>
+<script>
+$(function(){
+	$("#cards").children().each(function(index) {
+		// nastavení obsluhy klepnutí u elementů reprezentujících karty
+		$(this).click(function() {
+      // přidání/odebrání třídy card-flipped
+      // prohlížeč zajistí animaci z výchozího do otočeného stavu 
+      // resp. naopak
+			$(this).toggleClass("card-flipped");
+		});
+	});
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,33 @@
+#NEON configure
+
+
+common:				# spolecne nastaveni
+	database:
+		name: test
+		driver: MySQL
+		autoinstall: false
+		charset: utf8
+		dsn:
+			host: localhost
+
+# @database
+
+					# vyvojovy blok
+development < common:
+	database:
+		name: test
+		driver:
+		autoinstall: true
+		charset:
+		dsn:
+			#host: localhost
+			username: root
+			password: geniv
+			port:
+			options:
+
+
+					# produkcni blok
+production < common:
+	database:
+		name: final-name

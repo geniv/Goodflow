@@ -1,0 +1,1555 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="generator" content="ApiGen 2.8.0" />
+
+	<title>Class classes\StaticACL | GoodFlow framework</title>
+
+	<script type="text/javascript" src="resources/combined.js?394153670"></script>
+	<script type="text/javascript" src="elementlist.js?4289113237"></script>
+	<link rel="stylesheet" type="text/css" media="all" href="resources/style.css?3505392360" />
+
+</head>
+
+<body>
+<div id="left">
+	<div id="menu">
+		<a href="index.html" title="Overview"><span>Overview</span></a>
+
+
+		<div id="groups">
+			<h3>Packages</h3>
+			<ul>
+				<li><a href="package-None.html">None</a>
+						</li>
+				<li><a href="package-PHP.html">PHP</a>
+						</li>
+				<li class="active"><a href="package-stable.html">stable<span></span></a>
+						<ul>
+				<li><a href="package-stable.configurator.html">configurator</a>
+						</li>
+				<li><a href="package-stable.form.html">form</a>
+						</li>
+				<li><a href="package-stable.pdo.html">pdo</a>
+						</li>
+				<li><a href="package-stable.session.html">session</a>
+						</li>
+				<li class="active"><a href="package-stable.user.html">user</a>
+						</li>
+							</ul></li>
+				<li><a href="package-unstable.html">unstable</a>
+						</li>
+			</ul>
+		</div>
+
+		<hr />
+
+
+		<div id="elements">
+			<h3>Classes</h3>
+			<ul>
+				<li><a href="class-classes.Identity.html">classes\Identity</a></li>
+				<li><a href="class-classes.SimpleAuthenticator.html">classes\SimpleAuthenticator</a></li>
+				<li><a href="class-classes.SimpleRuleAuthenticator.html">classes\SimpleRuleAuthenticator</a></li>
+				<li class="active"><a href="class-classes.StaticACL.html">classes\StaticACL</a></li>
+				<li><a href="class-classes.User.html">classes\User</a></li>
+			</ul>
+
+			<h3>Interfaces</h3>
+			<ul>
+				<li><a href="class-classes.IAuthorizator.html">classes\IAuthorizator</a></li>
+				<li><a href="class-classes.IIdentity.html">classes\IIdentity</a></li>
+			</ul>
+
+
+			<h3>Exceptions</h3>
+			<ul>
+				<li><a href="class-classes.ExceptionAuthorizator.html">classes\ExceptionAuthorizator</a></li>
+			</ul>
+
+
+		</div>
+	</div>
+</div>
+
+<div id="splitter"></div>
+
+<div id="right">
+<div id="rightInner">
+	<form id="search">
+		<input type="hidden" name="cx" value="" />
+		<input type="hidden" name="ie" value="UTF-8" />
+		<input type="text" name="q" class="text" />
+		<input type="submit" value="Search" />
+	</form>
+
+	<div id="navigation">
+		<ul>
+			<li>
+				<a href="index.html" title="Overview"><span>Overview</span></a>
+			</li>
+			<li>
+				<a href="package-stable.user.html" title="Summary of stable\user"><span>Package</span></a>
+			</li>
+			<li class="active">
+<span>Class</span>			</li>
+		</ul>
+		<ul>
+			<li>
+				<a href="tree.html" title="Tree view of classes, interfaces, traits and exceptions"><span>Tree</span></a>
+			</li>
+		</ul>
+		<ul>
+		</ul>
+	</div>
+
+<div id="content" class="class">
+	<h1>Class StaticACL</h1>
+
+
+	<div class="description">
+	
+<p>nevlastni trida spravujici staticke ACL (access control list)</p>
+
+	</div>
+
+	<dl class="tree">
+		<dd style="padding-left:0px">
+<b><span>classes\StaticACL</span></b>			
+			 implements 
+				<a href="class-classes.IAuthorizator.html"><span>classes\IAuthorizator</span></a>
+			
+			
+		</dd>
+	</dl>
+
+
+
+
+
+
+
+
+	<div class="info">
+		
+		
+		<b>Namespace:</b> classes<br />
+		<b>Package:</b> <a href="package-stable.html">stable</a>\<a href="package-stable.user.html">user</a><br />
+
+				<b>Author:</b>
+				geniv<br />
+				<b>Version:</b>
+				4.06<br />
+		<b>Located at</b> classes/user.php<br />
+	</div>
+
+
+
+	<table class="summary" id="methods">
+	<caption>Methods summary</caption>
+	<tr data-order="__construct" id="___construct">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#___construct">#</a>
+		<code>__construct( <span> <var>$path</var> = <span class="php-keyword1">null</span></span> )</code>
+
+		<div class="description short">
+			
+<p>hlavni konstruktor ACL</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>hlavni konstruktor ACL</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$path</var></dt>
+					<dd><code></code></dd>
+				</dl></div>
+
+
+
+				<h4>Since</h4>
+				<div class="list">
+						4.00<br />
+				</div>
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="addRole" id="_addRole">
+
+		<td class="attributes"><code>
+			 public 
+			this
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_addRole">#</a>
+		<code>addRole( <span>string <var>$role</var></span>, <span>string|array|null <var>$parents</var> = <span class="php-keyword1">null</span></span> )</code>
+
+		<div class="description short">
+			
+<p>pridavani novych roli</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>pridavani novych roli</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$role</var></dt>
+					<dd><code>string</code><br>role nazev role</dd>
+					<dt><var>$parents</var></dt>
+					<dd><code>string|array|null</code><br>parents nazev role od ktere dedi</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>this</code><br />
+				</div>
+
+
+				<h4>Since</h4>
+				<div class="list">
+						4.00<br />
+				</div>
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="hasRole" id="_hasRole">
+
+		<td class="attributes"><code>
+			 public 
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_hasRole">#</a>
+		<code>hasRole( <span>string <var>$role</var></span> )</code>
+
+		<div class="description short">
+			
+<p>obsahuje tuto roli?</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>obsahuje tuto roli?</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$role</var></dt>
+					<dd><code>string</code><br>role nazev role</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>boolean</code><br>true pokud roli obsahue<br />
+				</div>
+
+
+				<h4>Since</h4>
+				<div class="list">
+						4.00<br />
+				</div>
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getRoles" id="_getRoles">
+
+		<td class="attributes"><code>
+			 public 
+			array
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getRoles">#</a>
+		<code>getRoles( )</code>
+
+		<div class="description short">
+			
+<p>nacteni pole roli</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>nacteni pole roli</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>array</code><br>pole roli<br />
+				</div>
+
+
+				<h4>Since</h4>
+				<div class="list">
+						4.00<br />
+				</div>
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="setRoles" id="_setRoles">
+
+		<td class="attributes"><code>
+			 public 
+			this
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_setRoles">#</a>
+		<code>setRoles( <span>array <var>$roles</var></span> )</code>
+
+		<div class="description short">
+			
+<p>nastaveni pole roli</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>nastaveni pole roli</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$roles</var></dt>
+					<dd><code>array</code><br>pole roli</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>this</code><br />
+				</div>
+
+
+				<h4>Since</h4>
+				<div class="list">
+						4.00<br />
+				</div>
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getRoleParents" id="_getRoleParents">
+
+		<td class="attributes"><code>
+			 public 
+			array
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getRoleParents">#</a>
+		<code>getRoleParents( <span>string <var>$role</var></span> )</code>
+
+		<div class="description short">
+			
+<p>nacteni rodicu dane role</p>
+
+<ul>
+	<li>rekurzivne hleda vsechy rodice</li>
+</ul>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>nacteni rodicu dane role</p>
+
+<ul>
+	<li>rekurzivne hleda vsechy rodice</li>
+</ul>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$role</var></dt>
+					<dd><code>string</code><br>role nazev role</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>array</code><br>pole rodicu<br />
+				</div>
+
+
+				<h4>Since</h4>
+				<div class="list">
+						4.00<br />
+				</div>
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="roleInheritsFrom" id="_roleInheritsFrom">
+
+		<td class="attributes"><code>
+			 public 
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_roleInheritsFrom">#</a>
+		<code>roleInheritsFrom( <span>string <var>$role</var></span>, <span>string <var>$inherit</var></span> )</code>
+
+		<div class="description short">
+			
+<p>je role predkem?</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>je role predkem?</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$role</var></dt>
+					<dd><code>string</code><br>role hledana role</dd>
+					<dt><var>$inherit</var></dt>
+					<dd><code>string</code><br>inherit dedi z</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>boolean</code><br>true pokud je v dane roli<br />
+				</div>
+
+
+				<h4>Since</h4>
+				<div class="list">
+						4.00<br />
+				</div>
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="removeRole" id="_removeRole">
+
+		<td class="attributes"><code>
+			 public 
+			this
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_removeRole">#</a>
+		<code>removeRole( <span>string <var>$role</var></span> )</code>
+
+		<div class="description short">
+			
+<p>smazani konkretni role</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>smazani konkretni role</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$role</var></dt>
+					<dd><code>string</code><br>role nazev prole na smazani</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>this</code><br />
+				</div>
+
+
+				<h4>Since</h4>
+				<div class="list">
+						4.00<br />
+				</div>
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="removeAllRoles" id="_removeAllRoles">
+
+		<td class="attributes"><code>
+			 public 
+			this
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_removeAllRoles">#</a>
+		<code>removeAllRoles( )</code>
+
+		<div class="description short">
+			
+<p>smazani vsech roli</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>smazani vsech roli</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>this</code><br />
+				</div>
+
+
+				<h4>Since</h4>
+				<div class="list">
+						4.00<br />
+				</div>
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="addResource" id="_addResource">
+
+		<td class="attributes"><code>
+			 public 
+			this
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_addResource">#</a>
+		<code>addResource( <span>stinrg <var>$resource</var></span>, <span>string|array|null <var>$parents</var> = <span class="php-keyword1">null</span></span> )</code>
+
+		<div class="description short">
+			
+<p>pridavani novych zdroju</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>pridavani novych zdroju</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$resource</var></dt>
+					<dd><code>stinrg</code><br>resource nazev zdroje</dd>
+					<dt><var>$parents</var></dt>
+					<dd><code>string|array|null</code><br>parents nazev|pole zdroju od kterych dedi</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>this</code><br />
+				</div>
+
+
+				<h4>Since</h4>
+				<div class="list">
+						4.00<br />
+				</div>
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="hasResource" id="_hasResource">
+
+		<td class="attributes"><code>
+			 public 
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_hasResource">#</a>
+		<code>hasResource( <span>string <var>$resource</var></span> )</code>
+
+		<div class="description short">
+			
+<p>obsahuje tento zdroj?</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>obsahuje tento zdroj?</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$resource</var></dt>
+					<dd><code>string</code><br>resource nazev zdroje</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>boolean</code><br>true pokud zdroj existuje<br />
+				</div>
+
+
+				<h4>Since</h4>
+				<div class="list">
+						4.00<br />
+				</div>
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getResources" id="_getResources">
+
+		<td class="attributes"><code>
+			 public 
+			array
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getResources">#</a>
+		<code>getResources( )</code>
+
+		<div class="description short">
+			
+<p>nacteni pole zdroju</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>nacteni pole zdroju</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>array</code><br>pole zdroju<br />
+				</div>
+
+
+				<h4>Since</h4>
+				<div class="list">
+						4.00<br />
+				</div>
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="setResources" id="_setResources">
+
+		<td class="attributes"><code>
+			 public 
+			thia
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_setResources">#</a>
+		<code>setResources( <span>array <var>$resources</var></span> )</code>
+
+		<div class="description short">
+			
+<p>nastaveni pole zdroju</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>nastaveni pole zdroju</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$resources</var></dt>
+					<dd><code>array</code><br>resources pole zdroju</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>thia</code><br />
+				</div>
+
+
+				<h4>Since</h4>
+				<div class="list">
+						4.00<br />
+				</div>
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getResourceParents" id="_getResourceParents">
+
+		<td class="attributes"><code>
+			 public 
+			array
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getResourceParents">#</a>
+		<code>getResourceParents( <span>string <var>$resource</var></span> )</code>
+
+		<div class="description short">
+			
+<p>nacteni rodicu daneho zdroje</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>nacteni rodicu daneho zdroje</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$resource</var></dt>
+					<dd><code>string</code><br>resource nazev zdroje</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>array</code><br>pole rodicu<br />
+				</div>
+
+
+				<h4>Since</h4>
+				<div class="list">
+						4.00<br />
+				</div>
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="resourceInheritsFrom" id="_resourceInheritsFrom">
+
+		<td class="attributes"><code>
+			 public 
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_resourceInheritsFrom">#</a>
+		<code>resourceInheritsFrom( <span>string <var>$resource</var></span>, <span>string <var>$inherit</var></span> )</code>
+
+		<div class="description short">
+			
+<p>je zdroj predkem?</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>je zdroj predkem?</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$resource</var></dt>
+					<dd><code>string</code><br>resource hledany zdroj</dd>
+					<dt><var>$inherit</var></dt>
+					<dd><code>string</code><br>inherit dedi z</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>boolean</code><br>true pokud je v danem zdroji<br />
+				</div>
+
+
+				<h4>Since</h4>
+				<div class="list">
+						4.00<br />
+				</div>
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="removeResource" id="_removeResource">
+
+		<td class="attributes"><code>
+			 public 
+			this
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_removeResource">#</a>
+		<code>removeResource( <span>string <var>$resource</var></span> )</code>
+
+		<div class="description short">
+			
+<p>smazani konkretniho zdroje</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>smazani konkretniho zdroje</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$resource</var></dt>
+					<dd><code>string</code><br>resource nazev zdroje</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>this</code><br />
+				</div>
+
+
+				<h4>Since</h4>
+				<div class="list">
+						4.00<br />
+				</div>
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="removeAllResources" id="_removeAllResources">
+
+		<td class="attributes"><code>
+			 public 
+			this
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_removeAllResources">#</a>
+		<code>removeAllResources( )</code>
+
+		<div class="description short">
+			
+<p>smazani vsech zdroju</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>smazani vsech zdroju</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>this</code><br />
+				</div>
+
+
+				<h4>Since</h4>
+				<div class="list">
+						4.00<br />
+				</div>
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="allow" id="_allow">
+
+		<td class="attributes"><code>
+			 public 
+			this
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_allow">#</a>
+		<code>allow( <span>string <var>$role</var> = <code><a href="class-classes.IAuthorizator.html#ALL">classes\IAuthorizator::<b>ALL</b></a></code></span>, <span>string|array <var>$resources</var> = <code><a href="class-classes.IAuthorizator.html#ALL">classes\IAuthorizator::<b>ALL</b></a></code></span>, <span>string|array <var>$privileges</var> = <code><a href="class-classes.IAuthorizator.html#ALL">classes\IAuthorizator::<b>ALL</b></a></code></span>, <span>boolean|string <var>$last</var> = <span class="php-keyword1">false</span></span> )</code>
+
+		<div class="description short">
+			
+<p>nastaveni pristupu ALLOW (povoleni)</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>nastaveni pristupu ALLOW (povoleni)</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$role</var></dt>
+					<dd><code>string</code><br>role nazev role</dd>
+					<dt><var>$resources</var></dt>
+					<dd><code>string|array</code><br>resources nazev zdroje</dd>
+					<dt><var>$privileges</var></dt>
+					<dd><code>string|array</code><br>privileges nazev prava</dd>
+					<dt><var>$last</var></dt>
+					<dd><code>boolean|string</code><br>last boolean|path oznameni posledniho pravidla, respektive cesta pro cache ACL</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>this</code><br />
+				</div>
+
+
+				<h4>Since</h4>
+				<div class="list">
+						4.00<br />
+				</div>
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="deny" id="_deny">
+
+		<td class="attributes"><code>
+			 public 
+			this
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_deny">#</a>
+		<code>deny( <span>string <var>$role</var> = <code><a href="class-classes.IAuthorizator.html#ALL">classes\IAuthorizator::<b>ALL</b></a></code></span>, <span>string|array <var>$resources</var> = <code><a href="class-classes.IAuthorizator.html#ALL">classes\IAuthorizator::<b>ALL</b></a></code></span>, <span>string|array <var>$privileges</var> = <code><a href="class-classes.IAuthorizator.html#ALL">classes\IAuthorizator::<b>ALL</b></a></code></span>, <span>boolean|string <var>$last</var> = <span class="php-keyword1">false</span></span> )</code>
+
+		<div class="description short">
+			
+<p>nastaveni pristupu DENY (odepreni)</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>nastaveni pristupu DENY (odepreni)</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$role</var></dt>
+					<dd><code>string</code><br>role nazev role</dd>
+					<dt><var>$resources</var></dt>
+					<dd><code>string|array</code><br>resources nazev zdroje</dd>
+					<dt><var>$privileges</var></dt>
+					<dd><code>string|array</code><br>privileges nazev prava</dd>
+					<dt><var>$last</var></dt>
+					<dd><code>boolean|string</code><br>last boolean|path oznameni posledniho pravidla, respektive cesta pro cache ACL</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>this</code><br />
+				</div>
+
+
+				<h4>Since</h4>
+				<div class="list">
+						4.00<br />
+				</div>
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="removeAllow" id="_removeAllow">
+
+		<td class="attributes"><code>
+			 public 
+			this
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_removeAllow">#</a>
+		<code>removeAllow( <span>string <var>$role</var> = <code><a href="class-classes.IAuthorizator.html#ALL">classes\IAuthorizator::<b>ALL</b></a></code></span>, <span>string <var>$resource</var> = <code><a href="class-classes.IAuthorizator.html#ALL">classes\IAuthorizator::<b>ALL</b></a></code></span>, <span>string <var>$privilege</var> = <code><a href="class-classes.IAuthorizator.html#ALL">classes\IAuthorizator::<b>ALL</b></a></code></span> )</code>
+
+		<div class="description short">
+			
+<p>odstraneni ALLOW pristupu</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>odstraneni ALLOW pristupu</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$role</var></dt>
+					<dd><code>string</code><br>role nazev role</dd>
+					<dt><var>$resource</var></dt>
+					<dd><code>string</code><br>resource nazev zdroje</dd>
+					<dt><var>$privilege</var></dt>
+					<dd><code>string</code><br>privilege nazev prava</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>this</code><br />
+				</div>
+
+
+				<h4>Since</h4>
+				<div class="list">
+						4.00<br />
+				</div>
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="removeDeny" id="_removeDeny">
+
+		<td class="attributes"><code>
+			 public 
+			this
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_removeDeny">#</a>
+		<code>removeDeny( <span>string <var>$role</var> = <code><a href="class-classes.IAuthorizator.html#ALL">classes\IAuthorizator::<b>ALL</b></a></code></span>, <span>string <var>$resource</var> = <code><a href="class-classes.IAuthorizator.html#ALL">classes\IAuthorizator::<b>ALL</b></a></code></span>, <span>string <var>$privilege</var> = <code><a href="class-classes.IAuthorizator.html#ALL">classes\IAuthorizator::<b>ALL</b></a></code></span> )</code>
+
+		<div class="description short">
+			
+<p>odstraneni DENY pristupu</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>odstraneni DENY pristupu</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$role</var></dt>
+					<dd><code>string</code><br>role nazev role</dd>
+					<dt><var>$resource</var></dt>
+					<dd><code>string</code><br>resource nazev zdroje</dd>
+					<dt><var>$privilege</var></dt>
+					<dd><code>string</code><br>privilege nazev prava</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>this</code><br />
+				</div>
+
+
+				<h4>Since</h4>
+				<div class="list">
+						4.00<br />
+				</div>
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="hasRules" id="_hasRules">
+
+		<td class="attributes"><code>
+			 public 
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_hasRules">#</a>
+		<code>hasRules( <span>string <var>$role</var> = <code><a href="class-classes.IAuthorizator.html#ALL">classes\IAuthorizator::<b>ALL</b></a></code></span>, <span>string <var>$resource</var> = <code><a href="class-classes.IAuthorizator.html#ALL">classes\IAuthorizator::<b>ALL</b></a></code></span>, <span>string <var>$privilege</var> = <code><a href="class-classes.IAuthorizator.html#ALL">classes\IAuthorizator::<b>ALL</b></a></code></span> )</code>
+
+		<div class="description short">
+			
+<p>existuje toto pravidlo?</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>existuje toto pravidlo?</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$role</var></dt>
+					<dd><code>string</code><br>role nazev role</dd>
+					<dt><var>$resource</var></dt>
+					<dd><code>string</code><br>resource nazev zdroje</dd>
+					<dt><var>$privilege</var></dt>
+					<dd><code>string</code><br>privilege nazev opravneni</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>boolean</code><br>true pokud pravidlo existuje<br />
+				</div>
+
+
+				<h4>Since</h4>
+				<div class="list">
+						4.00<br />
+				</div>
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getRules" id="_getRules">
+
+		<td class="attributes"><code>
+			 public 
+			array
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getRules">#</a>
+		<code>getRules( )</code>
+
+		<div class="description short">
+			
+<p>nacteni pole pravidel</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>nacteni pole pravidel</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>array</code><br>pole pravidel<br />
+				</div>
+
+
+				<h4>Since</h4>
+				<div class="list">
+						4.00<br />
+				</div>
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="setRules" id="_setRules">
+
+		<td class="attributes"><code>
+			 public 
+			this
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_setRules">#</a>
+		<code>setRules( <span>array <var>$rules</var></span> )</code>
+
+		<div class="description short">
+			
+<p>nastaveni pole pravidel</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>nastaveni pole pravidel</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$rules</var></dt>
+					<dd><code>array</code><br>pole pravidel</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>this</code><br />
+				</div>
+
+
+				<h4>Since</h4>
+				<div class="list">
+						4.00<br />
+				</div>
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="removeAllRules" id="_removeAllRules">
+
+		<td class="attributes"><code>
+			 public 
+			this
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_removeAllRules">#</a>
+		<code>removeAllRules( )</code>
+
+		<div class="description short">
+			
+<p>smazani vsech pravidel</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>smazani vsech pravidel</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>this</code><br />
+				</div>
+
+
+				<h4>Since</h4>
+				<div class="list">
+						4.00<br />
+				</div>
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="loadFromFile" id="_loadFromFile">
+
+		<td class="attributes"><code>
+			 public 
+			this
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_loadFromFile">#</a>
+		<code>loadFromFile( <span>string|null <var>$path</var> = <span class="php-keyword1">null</span></span> )</code>
+
+		<div class="description short">
+			
+<p>nacitani ulozeneho ACL ze souboru</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>nacitani ulozeneho ACL ze souboru</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$path</var></dt>
+					<dd><code>string|null</code><br>path cesta pro soubor</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>this</code><br />
+				</div>
+
+
+				<h4>Since</h4>
+				<div class="list">
+						4.00<br />
+				</div>
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="isLoadFromFile" id="_isLoadFromFile">
+
+		<td class="attributes"><code>
+			 public 
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_isLoadFromFile">#</a>
+		<code>isLoadFromFile( )</code>
+
+		<div class="description short">
+			
+<p>je ACL nacteno ze souboru?</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>je ACL nacteno ze souboru?</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>boolean</code><br>true pokud nacteno ze souboru<br />
+				</div>
+
+
+				<h4>Since</h4>
+				<div class="list">
+						4.00<br />
+				</div>
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="commitRules" id="_commitRules">
+
+		<td class="attributes"><code>
+			 public 
+			this
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_commitRules">#</a>
+		<code>commitRules( <span>string|null <var>$path</var> = <span class="php-keyword1">null</span></span>, <span>boolean <var>$force</var> = <span class="php-keyword1">false</span></span> )</code>
+
+		<div class="description short">
+			
+<p>konecne potvrzeni pravidel, aplikace dedeni, ukladani do souboru</p>
+
+<ul>
+	<li>uklada pokud se ACL generuje, neuklada kdyz se nacita ze souboru!</li>
+</ul>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>konecne potvrzeni pravidel, aplikace dedeni, ukladani do souboru</p>
+
+<ul>
+	<li>uklada pokud se ACL generuje, neuklada kdyz se nacita ze souboru!</li>
+</ul>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$path</var></dt>
+					<dd><code>string|null</code><br>path cesta pro soubor</dd>
+					<dt><var>$force</var></dt>
+					<dd><code>boolean</code><br>force true pro urgentni ulozeni</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>this</code><br />
+				</div>
+
+
+				<h4>Since</h4>
+				<div class="list">
+						4.00<br />
+				</div>
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="isAllowed" id="_isAllowed">
+
+		<td class="attributes"><code>
+			 public 
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_isAllowed">#</a>
+		<code>isAllowed( <span>string <var>$role</var> = <code><a href="class-classes.IAuthorizator.html#ALL">classes\IAuthorizator::<b>ALL</b></a></code></span>, <span>string <var>$resource</var> = <code><a href="class-classes.IAuthorizator.html#ALL">classes\IAuthorizator::<b>ALL</b></a></code></span>, <span>string <var>$privilege</var> = <code><a href="class-classes.IAuthorizator.html#ALL">classes\IAuthorizator::<b>ALL</b></a></code></span> )</code>
+
+		<div class="description short">
+			
+<p>je dovoleno pristupovat podle zadaneho opravneni?</p>
+
+<ul>
+	<li>hlavni implementacni metoda</li>
+
+	<li>pokud neni definovano allow je automaticky false</li>
+
+	<li>all vyhodnocuje az posledni</li>
+</ul>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>je dovoleno pristupovat podle zadaneho opravneni?</p>
+
+<ul>
+	<li>hlavni implementacni metoda</li>
+
+	<li>pokud neni definovano allow je automaticky false</li>
+
+	<li>all vyhodnocuje az posledni</li>
+</ul>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$role</var></dt>
+					<dd><code>string</code><br>role nazev role</dd>
+					<dt><var>$resource</var></dt>
+					<dd><code>string</code><br>resource nazev zdroje</dd>
+					<dt><var>$privilege</var></dt>
+					<dd><code>string</code><br>privilege nazev prava</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>boolean</code><br>true pokud ma opravneni<br />
+				</div>
+
+
+				<h4>Since</h4>
+				<div class="list">
+						4.00<br />
+				</div>
+
+
+				<h4>Implementation of</h4>
+				<div class="list"><code><a href="class-classes.IAuthorizator.html#_isAllowed">classes\IAuthorizator::isAllowed()</a></code></div>
+		</div>
+		</div></td>
+	</tr>
+	</table>
+
+
+
+
+
+
+
+
+
+	<table class="summary inherited">
+	<caption>Constants inherited from <a href="class-classes.IAuthorizator.html#constants">classes\IAuthorizator</a></caption>
+	<tr>
+		<td><code>
+			<a href="class-classes.IAuthorizator.html#ALL"><b>ALL</b></a>, 
+			<a href="class-classes.IAuthorizator.html#ALLOW"><b>ALLOW</b></a>, 
+			<a href="class-classes.IAuthorizator.html#DENY"><b>DENY</b></a>
+		</code></td>
+	</tr>
+	</table>
+
+
+
+
+
+
+
+
+
+</div>
+
+	<div id="footer">
+		GoodFlow framework API documentation generated by <a href="http://apigen.org">ApiGen 2.8.0</a>
+	</div>
+</div>
+</div>
+</body>
+</html>

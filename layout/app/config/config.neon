@@ -1,0 +1,42 @@
+#NEON configure
+
+
+php:				# nastaveni php
+	date.timezone: Europe/Prague
+
+
+					# spolecne nastaveni
+common:
+	debugger: false	# vyvojovy rezim
+
+	errorloger:		# error loger
+		email: geniv.radek@gmail.com
+
+	runnable: true	# ochrana
+
+	router:
+		default: Homepage:default
+		list:
+			- action/id
+	user:
+		expire: 2 hours
+
+	session:
+
+	services:		# sluzby
+		db:
+			class:
+				clas: getFactoryDatabase(@database) ??????
+
+	factory:
+		nazev: konstruktor
+
+
+					# vyvojovy blok
+development < common:
+	debugger: true
+
+
+					# produkcni blok
+production < common:
+	debugger:

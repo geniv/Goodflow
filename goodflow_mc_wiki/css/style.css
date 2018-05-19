@@ -1,0 +1,870 @@
+body {
+   /* border: 1px solid orange;*/
+    background: url("../image/bg.png") repeat scroll 0 0 transparent;
+    color: black;
+    font: 12px Arial;
+	font-family: sans-serif;    
+}
+/*Obal celé stránky*/
+#obal {
+    margin: 0 auto;
+    width: 920px;
+    
+}
+/*Hlavička stránky obsahující nadpisy*/
+header {
+    text-align: center;
+	color: #FCF6E8;
+	padding:10px 0px 0px;
+}
+
+header h1 {
+	font-family: "Minecrafter 2.0 Regular";
+	font-size:50px;
+
+}
+
+header h1 a {
+	color:white;
+	text-decoration: none;
+
+}
+
+header h2 {
+	font-family: "Minecraft Regular";
+	padding:0px 0px 20px;
+}
+/*Reklama*/
+aside{
+	width: 250px;
+	height: 250px;
+    margin: 0 auto;
+	padding-bottom: 15px;
+}
+/*Menu*/
+nav {
+    overflow: auto;
+    padding:0px 0px 10px;
+    
+}
+
+nav ul {
+	padding-left: 2px
+}
+
+nav ul li {
+    float: left;
+	font-size:17px;
+
+}
+
+nav ul li a {
+	background: url("../image/navbg1.png") repeat scroll;
+	color:black;
+	border: 2px solid #56472A;
+    display: block;
+    margin: 8px;
+    padding: 11px 9px 10px;
+    text-decoration: none;
+    text-transform: capitalize; 
+    font-size:17px;
+
+}
+
+nav ul li a:hover {
+	background: url("../image/navbg2.png") repeat scroll; 
+	color:white;
+}
+
+nav ul li #aktivni {
+	background: url("../image/navbg2.png") repeat scroll; 
+	color:white;
+}
+
+/*Obal obsahové části stránky*/
+#obsah {
+    /*border: 1px solid white;*/
+    text-align: center;   
+    
+}
+
+/*Vhledánání*/
+#search {
+    /*border: 1px solid red;*/
+	color: white;
+	text-align: right;
+    padding:0px 8px 15px;
+    font-size:20px;
+	overflow:hidden;
+	height: 60px;
+}
+
+#search #search_obal{
+	float: left;
+	height: 60px;
+	width: 904px;
+	background: url(../image/mid_m.png) repeat-x;
+	padding: 10px 0px;
+	position:relative; /*Aby vse spravne fungovalo musi byt nastaena pozice relativni*/
+}
+/*Levy okraj panelu vyhledavani*/
+#search #search_obal:before {
+	background: url("../image/mid_l.png") repeat scroll 0 0 transparent; 
+    content: " ";
+    display: block;
+    height: 60px;
+	left:-8px;
+	top:0;
+    position: absolute;
+    width: 8px;
+}
+/*Pravy okraj panelu vyhledavani*/
+#search #search_obal:after {
+	background: url("../image/mid_r.png") repeat scroll 0 0 transparent; 
+    content: " ";
+    display: block;
+    height: 60px;
+	right:-8px;
+	top:0;
+    position: absolute;
+    width: 8px;
+}
+
+#search #search_obal p {
+    /*border: 1px solid lime;*/
+	text-align:left;
+	float:left;
+	height: 24px; 
+	font-size:18px;
+	line-height: 1.5em; 
+	background: #8B8B8B; 
+	color: #FFF; 
+	text-shadow: 2px 2px #3F3F3F; 
+	border: 2px solid #555; 
+	border-bottom-color: #FFF;
+	border-right-color: #FFF; 
+	padding: 6px; 
+		
+	}
+
+#search #search_obal form {
+    /*border: 1px solid white;*/
+	text-align:right;
+	float:right;
+	
+	}	
+
+
+#search #search_obal form input[type="search"] { 
+	float: left;
+	height: 24px; 
+	width: 200px; 
+	font-size:18px;
+	line-height: 1.5em; 
+	background: #8B8B8B; 
+	color: #FFF; 
+	text-shadow: 2px 2px #3F3F3F; 
+	border: 2px solid #555; 
+	border-bottom-color: #FFF; 
+	border-right: none; 
+	padding: 6px; 
+	-moz-appearance: textfield;
+	-webkit-appearance: textfield;
+	-o-appearance: textfield;		
+	-moz-box-sizing: content-box;
+	-webkit-box-sizing: content-box;
+	-o-box-sizing: content-box;
+}
+
+::-webkit-input-placeholder { color: #FFF; }
+::-moz-placeholder { color: #FFF; }
+::-o-placeholder { color: #FFF; }
+
+#search #search_obal form input.button { 
+	float: right;
+	width: 38px; 
+	height: 40px; 
+	border: 2px solid #555; 
+	border-left: none; 
+	border-bottom-color: #FFF;  /*barva spodni strany*/
+	background: url(../image/btn.png) no-repeat; 
+	color: transparent; 
+}
+
+#search #search_obal form input.button:hover { 
+	cursor: pointer; 
+	background: url(../image/btn_hover.png) no-repeat;
+}
+
+/*Prostredek, který zarucuje ze nedojde k deformaci stránky*/
+#obsah #middle {
+    overflow: hidden;
+
+}
+/*Levy sloupec*/
+#obsah #middle #left {
+	padding:25px 0px 0px;
+    width: 640px;
+    float:left;
+
+}
+
+#obsah #middle #left article:after {
+	background: url("../image/mainbg-bottom.png") repeat scroll 0 0 transparent; 
+    content: " ";
+    display: block;
+    height: 88px;
+	left:0;
+    position: absolute;
+    width: 640px;	
+ 
+}
+
+#obsah #middle #left article:before {
+	background: url("../image/mainbg-top.png") repeat scroll; 
+    content: " ";
+    display: block;
+    height: 66px;
+    left: 0;
+    position: absolute;
+    top: -26px;
+    width: 640px;
+    z-index: 2;
+}
+
+#obsah #middle #left article {
+	background: url("../image/mainbg.png") repeat scroll; 
+    margin-bottom: 70px;
+	padding: 45px 80px 60px;
+    position: relative;
+    z-index: 1;   
+	text-align:justify;    
+}
+
+#obsah #middle #left article h1{
+	color: #951A13;
+	text-align: center;
+	font-size:30px;
+    padding: 0px 0px 20px;
+	    
+}
+
+#obsah #middle #left article h2{
+    border-bottom: 2px solid #951A13;
+    display: block;
+    font-size: 25px;
+	    
+}
+
+#obsah #middle #left article h2 a{
+	color: black;
+	text-decoration:none;	    
+}
+
+#obsah #middle #left article h2 a:hover{
+	color: #555555;	    
+}
+
+#obsah #middle #left article h3{
+	text-align:right;
+}
+#obsah #middle #left article h3 a{
+	color: #951A13;
+}
+#obsah #middle #left article h3 a:hover{
+	color: red;
+}
+
+#obsah #middle #left article p{
+	padding: 10px 0px;
+	overflow:hidden;
+}
+
+#obsah #middle #left article p img{
+	float:left;
+	padding-right:7px;
+}
+/*Podpis pod článkem*/
+#obsah #middle #left article .podpis{
+	width: 200px;
+	text-align:right;
+	float:right;
+	color:#951A13;
+	font-family: "Minecraft Regular";
+	font-size:12px;
+	padding-bottom:10px;
+}
+
+/*Odkaz na číst celý článek (Archiv)*/
+#obsah #middle #left article .cistvice{
+	padding:40px 0px 0px;
+	text-align:center;
+}
+#obsah #middle #left article .cistvice a{
+	text-align:right;
+	color:#951A13;
+	font-size:15px;
+	font-size:18px;
+	font-weight:bold;
+}
+#obsah #middle #left article .cistvice a:hover{
+	color:red;
+}
+
+/*Nastaveni pro screenshoty*/
+#obsah #middle #left article #screenshot a{
+	text-decoration:none;
+}
+
+#obsah #middle #left article #screenshot img{
+	width:150px;
+	height:100%;
+	padding-bottom:10px;
+	padding-left:7px;
+}
+
+/*Strankovani*/
+#obsah #middle #left article #strankovani {
+	padding-top:60px;
+	height: 46px;
+	/*border: 1px solid #555;*/
+}
+#obsah #middle #left article #strankovani hr {
+	border-bottom: 2px solid #951A13;
+}
+#obsah #middle #left article #strankovani #next {
+	background: url("../image/next.png") no-repeat;
+	height: 36px;
+	width:	59px;
+	float: right;
+
+}
+#obsah #middle #left article #strankovani #list {
+	font-family: "Minecrafter 2.0 Regular";
+	font-size:20px;
+	text-align: center;	
+	width:	358px;
+	float: right;
+}
+#obsah #middle #left article #strankovani #list a {
+	color: #ce1f00;
+	text-decoration:none;
+}
+#obsah #middle #left article #strankovani #list a:hover {
+	color: #ec763e;
+}
+#obsah #middle #left article #strankovani #list .akt{
+	color: black;
+}
+#obsah #middle #left article #strankovani #list .akt:hover{
+	color: gray;
+}
+#obsah #middle #left article #strankovani #prev {
+	background: url("../image/prev.png") no-repeat;
+	height: 36px;
+	width:	59px;
+	float: left;
+}
+/*Podpis*/
+#obsah #middle #left article .popis {
+	//height: 80px;
+	height: 100%;
+	/*border: 1px solid #555;*/
+	overflow: auto;
+}
+
+/*informacni tlacitka napr stranka kde stahnou a seznam itemu*/
+#obsah #middle #left article .popis .info{
+	height: 36px;
+	font-size:20px;
+	padding-top:10px;
+}
+#obsah #middle #left article .popis .info .button{
+float: left;
+padding: 0px 40px;
+}
+#obsah #middle #left article .popis .info .button a {
+	background: url("../image/btn-n.png") repeat scroll 0 0 transparent;
+	height: 40px;
+	color: #E0E0E0;
+	text-decoration:none;
+	padding: 6px 3px;
+	border: 3px solid black; 
+}
+#obsah #middle #left article .popis .info .button a:hover {
+	background: url("../image/btn-h.png") repeat scroll 0 0 transparent;
+	color: #FFFFA0;
+}
+
+/*Hodnoceni*/
+#obsah #middle #left article .popis .hodnoceni {
+	width:160px;
+	float: left;
+	position: absolute;
+}
+#obsah #middle #left article .popis .hodnoceni p{
+	width:160px;
+	float: left;
+	color:#951A13;
+	font-family: "Minecraft Regular";
+	font-size:13px;
+	padding: 0px;
+}
+
+/*tabulka*/
+#obsah #middle #left article table, th, td
+{
+border: 1px solid #951A13;
+border-collapse:collapse;
+}
+#obsah #middle #left article table {
+	font-size:14px;
+	text-align:center;
+}
+#obsah #middle #left article table tr{
+
+}
+#obsah #middle #left article table tr th{
+	background: #951A13;
+	font-size:16px;
+	padding: 6px 0px;
+}
+#obsah #middle #left article table tr td{
+	width: 150px;
+	padding: 6px 5px;
+}
+#obsah #middle #left article table tr.alt td{
+	background: #959099;
+}
+/*Odkazy*/
+#obsah #middle #left article table tr a{
+	color: #951A13;
+}
+#obsah #middle #left article table tr a:hover{
+	color: red;
+}
+/*Text v tabulce*/
+#obsah #middle #left article table p{
+	text-align:left;
+	padding: 0px;
+}
+#obsah #middle #left article table ul{
+	padding: 0px 15px;
+}
+#obsah #middle #left article table ul li{
+	list-style:square;
+	padding: 0px;
+	text-align:left;
+}
+
+/*vyhledavani*/
+#obsah #middle #left article form{
+	height:115px;
+}
+
+#obsah #middle #left article form input[type="search"] { 
+	float: left;
+	height: 24px; 
+	width: 428px; 
+	font-size:18px;
+	line-height: 1.5em; 
+	background: #8B8B8B; 
+	color: #FFF; 
+	text-shadow: 2px 2px #3F3F3F; 
+	border: 2px solid #555; 
+	border-bottom-color: #FFF; 
+	border-right: none; 
+	padding: 6px; 
+	-moz-appearance: textfield;
+	-webkit-appearance: textfield;
+	-o-appearance: textfield;		
+	-moz-box-sizing: content-box;
+	-webkit-box-sizing: content-box;
+	-o-box-sizing: content-box;
+}
+
+::-webkit-input-placeholder { color: #FFF; }
+::-moz-placeholder { color: #FFF; }
+::-o-placeholder { color: #FFF; }
+
+#obsah #middle #left article form input.button { 
+	float: right;
+	width: 38px; 
+	height: 40px; 
+	border: 2px solid #555; 
+	border-left: none; 
+	border-bottom-color: #FFF;  /*barva spodni strany*/
+	background: url(../image/btn.png) no-repeat; 
+	color: transparent; 
+}
+
+#obsah #middle #left article form input.button:hover { 
+	cursor: pointer; 
+	background: url(../image/btn_hover.png) no-repeat;
+}
+
+#obsah #middle #left article form .polozka{ 
+	padding-top:3px;
+	width: 150px;
+	float: left;
+}
+
+/*pravy sloupec*/
+#obsah #middle #right {
+    width: 250px;
+    float:right;
+
+}
+
+#obsah #middle #right article {
+	padding:0px 0px 25px;
+
+}
+
+#obsah #middle #right article h1{
+    background:url("../image/side-title.png");
+	font-size:18px;
+	height:38px;
+    padding:17px 30px 0px;
+	color: #E0E0E0;
+	text-shadow: 2px 2px #383838;
+}
+
+#obsah #middle #right article .text:after {
+    background:url("../image/side-title_bottom.png")repeat scroll 0 0 transparent; 
+    content: " ";
+    display: block;
+    height: 8px;
+    top:100%;
+	left:0;
+    width: 250px;
+	position: absolute;
+	
+}
+
+#obsah #middle #right article .text {
+    background:url("../image/sidebg.png");
+	position: relative;
+	padding:10px 15px; 
+	/*text-align: justify;*/
+
+}		
+
+#obsah #middle #right article .text ul li a{
+	font-size:18px;
+	color: #951A13;
+}	
+	
+#obsah #middle #right article .text ul li a:hover{
+	color: red;
+}
+
+#obsah #middle #right article .text ul dt a{
+	font-size:13px;
+	color: black;
+	
+}	
+	
+#obsah #middle #right article .text ul dt a:hover{
+	color: gray;
+}
+		
+/* Zde začínají styly pro konkrétní item*/
+#obsah #middle #right article .text #obrazek {
+	padding-top:25px;
+	padding-bottom:25px;
+	/* border: 1px solid lime;*/
+
+}
+
+#obsah #middle #right article .text #obrazek img {
+	height: 155px;
+	width: 155px;
+	padding:5px;
+	background: #8B8B8B; 
+	border: 2px solid #555; 
+	border-bottom-color: #FFF;
+	border-right-color: #FFF;
+	
+   /* border: 1px solid red;*/
+
+}
+
+#obsah #middle #right article .text ul {
+	border-bottom: 2px solid gray;
+	padding-bottom:5px
+}
+
+#obsah #middle #right article .text ul li{
+    padding:5px 0px;
+	font-weight: bolder;
+	color:#951A13;
+	text-align:left;
+}
+
+#obsah #middle #right article .text ul dd{
+    padding:5px 0px;    
+    text-align:center;
+    font-weight: bolder;
+
+}
+#obsah #middle #right article .text ul dd a{
+	color: blue;
+}
+#obsah #middle #right article .text ul dd a:hover{
+	color:red;
+}
+
+#obsah #middle #right article .text ul dt{
+    padding:5px 0px;    
+    text-align:center;
+    font-weight: bolder;
+	list-style-type:circle;
+
+}
+/*Posledni ul bude bez potrzeni*/
+#obsah #middle #right article .text .last {
+    border-bottom:none;
+}
+
+/*Nastaveni vzhledu pro crafting*/
+/*CRAFTING*/
+#obsah #middle #right article .text #crafting{
+    background: url("../image/crafting.png") no-repeat;
+    padding-left:-10px;
+    width: 232px;
+    height: 108px;
+}
+
+#obsah #middle #right article .text #crafting .in{
+	/*border: 1px solid red;  */  
+}
+
+#obsah #middle #right article .text #crafting .in img{
+    width: 32px;
+    height: 32px;
+    padding:0px 1px;
+   
+}
+
+#obsah #middle #right article .text #crafting #in1{
+ 	position:absolute;
+	left:16px;
+	top:84px;   
+}
+#obsah #middle #right article .text #crafting #in2{
+ 	position:absolute;
+	left:52px;
+	top:84px;   
+}
+#obsah #middle #right article .text #crafting #in3{
+ 	position:absolute;
+	left:88px;
+	top:84px;   
+}
+#obsah #middle #right article .text #crafting #in4{
+ 	position:absolute;
+	left:16px;
+	top:48px;   
+}
+#obsah #middle #right article .text #crafting #in5{
+ 	position:absolute;
+	left:52px;
+	top:48px;   
+}
+#obsah #middle #right article .text #crafting #in6{
+ 	position:absolute;
+	left:88px;
+	top:48px;   
+}
+#obsah #middle #right article .text #crafting #in7{
+ 	position:absolute;
+	left:16px;
+	top:12px;   
+}
+#obsah #middle #right article .text #crafting #in8{
+ 	position:absolute;
+	left:52px;
+	top:12px;   
+}
+#obsah #middle #right article .text #crafting #in9{
+ 	position:absolute;
+	left:88px;
+	top:12px;   
+}
+
+#obsah #middle #right article .text #crafting #out{
+    width: 46px;
+    height: 46px;
+	position:absolute;
+	left:180px;
+	top:38px;
+
+	/*border: 1px solid blue; */ 
+}
+
+#obsah #middle #right article .text #crafting #out img{
+    width: 32px;
+    height: 32px;
+    padding: 10px 12px;
+    
+}
+
+/*ALCHEMIE*/
+#obsah #middle #right article .text #alchemy{
+    background: url("../image/alchemy.png") no-repeat;
+	left:40px;
+	position:relative;
+    width: 133px;
+    height: 114px;
+
+}
+
+#obsah #middle #right article .text #alchemy #in{
+	position:absolute;
+	left:50px;
+	top:4px;
+	
+	/*border: 1px solid green;*/
+}
+
+#obsah #middle #right article .text #alchemy #in img{
+    width: 32px;
+    height: 32px;
+	padding:0px;
+}
+
+#obsah #middle #right article .text #alchemy .out{
+	/*border: 1px solid red;*/
+}
+
+#obsah #middle #right article .text #alchemy .out img{
+    width: 32px;
+    height: 32px;
+	padding:0px;
+}
+
+#obsah #middle #right article .text #alchemy #out1{
+	position:absolute;
+	left:1px;
+	top:63px;
+}
+
+#obsah #middle #right article .text #alchemy #out2{
+	position:absolute;
+	left:49px;
+	top:77px;
+}
+
+#obsah #middle #right article .text #alchemy #out3{
+	position:absolute;
+	left:98px;
+	top:63px;
+}
+
+/*PECENI / FURNACE*/
+#obsah #middle #right article .text #furnace{
+    background: url("../image/furnace.png") no-repeat;
+	left:30px;
+	position:relative;
+    width: 169px;
+    height: 113px;
+
+}
+
+#obsah #middle #right article .text #furnace #in{
+	position:absolute;
+	left:2px;
+	top:2px;
+	
+	/*border: 1px solid green;*/
+}
+
+#obsah #middle #right article .text #furnace #in img{
+    width: 32px;
+    height: 32px;
+    padding: 0px;
+    
+}
+
+#obsah #middle #right article .text #furnace #out{
+    width: 50px;
+    height: 50px;
+	position:absolute;
+	left:116px;
+	top:31px;
+
+	/*border: 1px solid blue;*/
+}
+
+#obsah #middle #right article .text #furnace #out img {
+    width: 32px;
+    height: 32px;
+    padding: 10px 10px;
+
+}
+
+#obsah #middle #right article .text #furnace #fuel{
+	position:absolute;
+	left:2px;
+	top:76px;
+
+	/*border: 1px solid red;*/
+}
+
+#obsah #middle #right article .text #furnace #fuel img {
+    width: 32px;
+    height: 32px;
+    padding: 0px;
+}
+
+/*Nastaveni formulare*/
+#obsah #middle #right article .text option {
+    width: 200px;  
+}
+#obsah #middle #right article .text ul form {
+    
+}
+#obsah #middle #right article .text ul form .polozka{
+    width: 100px;
+    float: left;
+    text-align:left; 
+    padding-left:10px;  
+}
+#obsah #middle #right article .text ul form input[type="submit"] {
+    width: 150px;  
+}
+/*Tlacitka u modu*/
+#obsah #middle #right article .text .info{
+	height: 130px;
+	font-size:20px;
+	padding-top:5px;
+}
+#obsah #middle #right article .text .info .button{
+	padding: 5px 20px 15px;
+}
+#obsah #middle #right article .text .info .button a {
+	background: url("../image/btn-n.png") repeat scroll 0 0 transparent;
+	height: 40px;
+	color: #E0E0E0;
+	text-decoration:none;
+	padding: 6px 3px;
+	border: 3px solid black; 
+}
+#obsah #middle #right article .text .info .button a:hover {
+	background: url("../image/btn-h.png") repeat scroll 0 0 transparent;
+	color: #FFFFA0;
+}
+
+/*Patička stránky*/
+footer {
+	height: 30px;
+	color: #666666;
+	font-family: sans-serif; 
+	font-size:15px;
+	text-align:center;
+}
+footer a{
+	color: #E0E0E0;
+	text-decoration: none;
+}

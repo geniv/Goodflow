@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Ping pong</title>
+    <style>
+      #playground {
+        background: #e0ffe0;
+        width: 400px;
+        height: 200px;
+        position: relative;
+        overflow: hidden;
+      }
+
+      #ball {
+        background: #fbb;
+        position: absolute;
+        width: 20px;
+        height: 20px;
+        left: 150px;
+        top: 100px;
+        border-radius: 10px;
+        border: 1px solid red;
+      }
+
+      .paddle {
+        background: #bbf;
+        left: 50px;
+        top: 70px;
+        position: absolute;
+        width: 30px;
+        height: 70px;
+      }
+
+      #paddleB {
+        left: 320px;
+      }
+    </style>
+<!--
+    <script src="http://code.jquery.com/jquery.min.js"></script>
+    <script src="js/html5games.pingpong.js"></script>
+-->
+  </head>
+  <body>
+    <header>
+      <h1>Ping Pong</h1>
+    </header>
+
+    <div id="scoreboard">
+      <div class="score">Hrac A: <span id="scoreA">0</span></div>
+      <div class="score">Hrac B: <span id="scoreB">0</span></div>
+    </div>
+    <div id="game">
+      <div id="playground">
+        <div id="paddleA" class="paddle"></div>
+        <div id="paddleB" class="paddle"></div>
+        <div id="ball"></div>
+      </div>
+    </div>
+
+
+    <input type="text" id="chat-input" />
+    <input type="button" id="send" value="odeslat" />
+
+
+    <footer>
+      Příklad hry ping pong.
+    </footer>
+    <script src="http://code.jquery.com/jquery.min.js"></script>
+    <script src="js/html5games.pingpong.js"></script>
+  </body>
+</html>

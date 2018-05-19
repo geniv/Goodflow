@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+	<meta charset=utf-8>
+	<title>Ukázka použití WebSocket při vývoji her v HTML5</title>
+	<meta name="description" content="Toto je ukázka použití rozhraní WebSocket při vývoji her v HTML5">
+	<meta name="author" content="Makzan">
+	<style>
+		canvas{position:relative;}
+	</style>
+	<link href='http://fonts.googleapis.com/css?family=Ribeye+Marrow&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+	<link rel="stylesheet" type="text/css" media="all" href="css/drawguess.css">
+</head>
+<body>	
+	<section id="game">
+		<h1>Uhodni obrázek</h1>
+		<canvas id='drawing-pad' width='500' height='400'>
+		</canvas>
+		
+		<ul id="chat-history"></ul>
+		Zpráva:
+		<input type='text' id="chat-input">
+		<input type='button' value="Odeslat" id="send">
+		<input type='button' value="Restartovat" id="restart">
+	</section>
+
+<script src='js/jquery-1.6.min.js'></script>
+<script src='js/html5games.websocket.js'></script>
+</body>
+</html>

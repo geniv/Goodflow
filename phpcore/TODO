@@ -1,0 +1,168 @@
+seznam (trid)/veci ktere bude treba jeste udelat:
+
+-----
+modul "loudr" a sablonovaci system pro jednoduche nadefinovani "dynamicke stranky"
+→kazda dyn.stranka musi mit nejakou predlohu do ktere musi jit lehce vkadat cyklicke udaje z DB!
+  →tyto predlohy musi jit tvorit z adminu nebo se budou jistym stylem upravovat rucne, ale nesni obsahovat zadny kod, jen musi volat staticke metody (popr singletony)
+→admin by mel byt nejakou smesici takovych sablon s cachem, admin jako takovy by mel mit vlastni slozku s vlasnim loaderem
+→admin bude mit pobne sablony ze kterych bude vychazet a pokud bude potreba dalsi mobul tak se vezme zaklad a upravi se pro dotycny modul
+→otazkou je jestli neudelat pro ruzne moduly API a to pouzivat z nejakych univerzalnich sablonach???
+→udelat gui sablony pro potrebne modu do adminu, styl: pri list: add, edit, del, a pak moznost subsablony: add, edit a popr dalsi...
+→nejprve dat do kupy samotne skladani adminu
+posloupnost modulu: (modul→se pouziva..)
+html→form→addtemplate (nebo tak nejak, kde v templatu by se volaly staticke metody z obsluznych modulu/funkcnich bloku ktere by se includovaly)
+→samozrejme musi ybt v nejakem konfigu administrace zapsane moduly ktere se budou zatahovat
+(resp toto muze byt vlastne v indexu adminu?)
+→je otazkou je jestli ma cenu v klicovych modulech delat metodu typu configure nebo podobnou
+aby se pri skladani natahovala nejaka konfigurace? za predpokladu ze bude mnoho roztristeneho
+nastaveni tak se pak tato metoda hodi a nastaveni by se nejak sjednotilo do konfigu ktery by delal
+pri konfiguracih dalsich projektu bordel pac by mohl obsahovat veci ktere jsou z jinych neuzitych modulu
+-----
+
+do modulu debuggeru pridat moznost posilani debug sprav min "notice chyb" na pripadny zadany mail pokud tato fukce bude zapnuta
+
+
+cron tridu (musi byt i samostatna jednotka korenu) resp celou implementaci a zatahovani metod na volani
+tridu na zalohovani databazi (json,sqlite,mysql) a pod... za pouziti cronu
+
+modul pro podobnou funkci jako byl "dynamicky obsah", dynamicke tabulky
+
+moduly pro vytvareni dynamickych webu kde se sablona naklika v adminu? a udela se struktura nekde ve slozce templatu
+
+tridy pro tvorbu menu a jejich propojovani, jako:
+menu, menuitems, content... a popr dalsi jine
+
+
+modul pro prihlasovani ktery bude spravovat formular (instancni trida)
+modul pro autorizaci ktery bude overovat autorizacni udaje vhledem k nejake databazi (singleton)
+modul pro "skladani stranek" na urovni adminu a samotneho webu
+→bude mit konfigurak ve kterem budou napsany moduly ktere se budou natahovat (pro menu atd...)
+→kazdy modul bude mit svou slozku kte bude mit ulozeny template a svoji pripadne uloziste/databaze/obrazky/skripty apod.
+
+
+--na cajovne a kavarne udelat novinky, a pridat odkaz na FB stranky... pripadne v zavislosti na tom prohazet poradi menu
+→(nutne mit uz k dispozici grafiku od martina a pristup na ftp)
+
+TODO opravit json uloziste!
++udelat tridu ktera pro detekci chyb bude zasilat reporty na mail a ne je sama skladovat
+
+
+//TODO tady to testnou ++ pri md5 pridavat do textu nejaky tajny retzec ktery se k heslu prida (pode dylky hesla a nejakyho textu)
+
+mit udelatko ktere pri chybe bude posilat emaily, samozdrejme dne nastaveni, (trida notify??)
+
+//TODO trida na emaily dodelat!!!
+//TODO implementaci cronu!
+--
+udeat hru podobnou: Draw Something Free (jen cesky a ne pres FB)
+--
+implementace a nasazeni dynamickeho ACL modulu! (min 4 tabulky)
+(udelat navrh a implementaci dynamickeho ACL modulu!)
+--
+trida obalujici registrace a registracni/prihlasavaci formular??? ale asi vubec!
+--
+revizi minimalizatoru(tokenizatoru), musi umet i kompresi adresaru ktere jsou v jinych slozkach!
+--
+tridu ktera bude skladat celky??? nebo asi vubec
+--
+domyslet system(drobnosti) adminu (resp testovat az nad implementaci)
+--
+zrevidovat pripadne prepsat styrsi moduly ktere nespadly do deprecated!
+--
+tridy pryc: file?,(stare verze formularu)
+tridy revize: language, browscap, captcha, configuration, selectiontheme, json a xml storage
+--
+tridu na obsluhu online stavu?! (kdo je vse online??)
+--
+TODO nastrol ktery pri chybe bude odesilat reporty na mail
+--
+TODO cron ktery bude zajisteny http autorizaci aby se zbytecne nezpoustel!
+---
+TODO CRON, zalohovani(class), reportovani, user storage (koment+testy),tpl (koment?+testy), form (testy), core (koment, try, test)
+---
+maily, oprava captcha
+ACL na dynamicke urovni!
+
+++tabulku na otvirane porty (port, od-od, poradi!, na-stalo)
+
+DOLADIT:
+doladit konfiguraci apache pro jednotlive domeny, respektive jejich subdomeny a rewrite na jednotlivych subdomenach (udelat testovaci layout na test subdomen)
+php: staticweb nemusi vubec pouzivat callback sablonu menu, bude stacit kdyz bude vracet menu v poli? i kdyz to nebude zrovna moc pekne ale bude to plnit stejnou funkci jako callback
+cache vyhodit z indexu a nechat v mainclass jen když bude zapotřebí
+skusit udělat web který bude mív veškorý výkoný kod jen v templatech, že se nebude dělit na výkonnou část a template ale bude jen template.
+k adminum pridat nejaky textovy sloupec s popiskem, + dat moznost admini z administrace nejak modifikovat nebo alespoň kazdý vlastní udaje
+js sjednotit verze jQuery
+u prepisu na URL nepouzivat ajax ale primo preklad v ukladani do contentvalues!!!
+SPOUSTECI INIT script!! inicializace IPtables a postupne spousteni nastavenych her
+
+BUGY:
+opravit session+userstorage .. spis teda predelat
+(cron+message+error report) cron na pravidelne akce, message na posilani emailu a error report na zasilani error hlaseni na email
+
+FORM:
+++moznost vykreslovat rovnou z TPLka?!
+
+
+
+
+
+spotreba:
+18.1.2013 15:20 => 4272h, 225.8Kwh
+31.1.2013 13:30 => 4582h, 240.7Kwh
+16.2.2013 16:30 => 4969h, 259.2Kwh
+23.2.2013 10:51 => 5127h, 265.8Kwh
+1.3.2013 19:07 => 5276h, 274.0Kwh
+15.3.2013 11:02 => 5604h, 291.4Kwh
+1.4.2013 17:30 => 6016h, 313.9Kwh
+7.4.2013 18:55 => 6161h, 321.4Kwh
+14.4.2013 10:11 => 6320h, 329.7Kwh
+21.4.2013 15:50 => 6493h, 338.7Kwh
+6.5.2013 10:08 => 6847h, 361.5Kwh
+13.5.2013 10:21 => 7015h, 370.4Kwh
+3.6.2013 11:30 => 7519h, 396.3Kwh
+8.6.2013 10:15 => 7637h, 402.3Kwh
+17.07.2013 10:00 => 8572h, 453.3Kwh
+12.10.2013 12:00 => 661h, 565.1Kwh
+
+
+generator ini konfiguraku
+openttd -D -x -c ~/.openttd/openttd.cfg
+http://wiki.openttd.org/Openttd.cfg
+http://wiki.openttd.org/Dedicated_server
+
+$ ps aux | awk '{ print $8 " " $2 }' | grep -w Z
+$ kill -HUP `ps -A -ostat,ppid | grep -e '^[Zz]' | awk '{print $2}'`
+$ git clone https://github.com/Austinb/GameQ.git
+$ sudo apt-get install dconf-tools
+
+
+
+SELECT
+	idrecepty,
+	a_uzivatele.jmeno,
+	a_kategorie.nazev,
+	a_recepty.nazev,
+	doba,
+	porce,
+	a_recepty.pridano,
+	a_recepty.upraveno,
+	group_concat(DISTINCT a_nadobi.nazev),
+	group_concat(DISTINCT a_suroviny.nazev)
+FROM a_recepty
+JOIN a_uzivatele USING(iduzivatel)
+JOIN a_kategorie USING(idkategorie)
+JOIN a_nadobi_na_recepty USING(idrecepty)
+JOIN a_nadobi USING(idnadobi)
+JOIN a_suroviny_na_recepty USING(idrecepty)
+JOIN a_suroviny USING(idsuroviny)
+GROUP BY idrecepty;
+
+SELECT a_recepty.nazev nazev, a_recepty.popis popis, doba, porce, autor,
+REPLACE(group_concat(DISTINCT a_nadobi.nazev ORDER a_nadobi.nazev), ',', ', ') nadobi,
+ REPLACE(group_concat(DISTINCT a_suroviny.nazev), ',', ', ')  suroviny
+ FROM a_recepty
+ JOIN a_nadobi_na_recepty ON a_recepty._id=a_nadobi_na_recepty.idrecepty
+JOIN a_nadobi ON a_nadobi._id=idnadobi
+JOIN a_suroviny_na_recepty ON a_recepty._id=a_suroviny_na_recepty.idrecepty
+JOIN a_suroviny ON a_suroviny._id=idsuroviny
+ WHERE a_recepty._id=4

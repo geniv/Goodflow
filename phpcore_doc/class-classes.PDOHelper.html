@@ -1,0 +1,1092 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="generator" content="ApiGen 2.8.0" />
+
+	<title>Class classes\PDOHelper | GoodFlow framework</title>
+
+	<script type="text/javascript" src="resources/combined.js?394153670"></script>
+	<script type="text/javascript" src="elementlist.js?4289113237"></script>
+	<link rel="stylesheet" type="text/css" media="all" href="resources/style.css?3505392360" />
+
+</head>
+
+<body>
+<div id="left">
+	<div id="menu">
+		<a href="index.html" title="Overview"><span>Overview</span></a>
+
+
+		<div id="groups">
+			<h3>Packages</h3>
+			<ul>
+				<li><a href="package-None.html">None</a>
+						</li>
+				<li><a href="package-PHP.html">PHP</a>
+						</li>
+				<li class="active"><a href="package-stable.html">stable<span></span></a>
+						<ul>
+				<li><a href="package-stable.configurator.html">configurator</a>
+						</li>
+				<li><a href="package-stable.form.html">form</a>
+						</li>
+				<li class="active"><a href="package-stable.pdo.html">pdo</a>
+						</li>
+				<li><a href="package-stable.session.html">session</a>
+						</li>
+				<li><a href="package-stable.user.html">user</a>
+						</li>
+							</ul></li>
+				<li><a href="package-unstable.html">unstable</a>
+						</li>
+			</ul>
+		</div>
+
+		<hr />
+
+
+		<div id="elements">
+			<h3>Classes</h3>
+			<ul>
+				<li><a href="class-classes.__JavaIterator.html">classes\__JavaIterator</a></li>
+				<li><a href="class-classes.__MoveIterator.html">classes\__MoveIterator</a></li>
+				<li><a href="class-classes.ContentValues.html">classes\ContentValues</a></li>
+				<li><a href="class-classes.MySQLExporter.html">classes\MySQLExporter</a></li>
+				<li><a href="class-classes.PDOCursor.html">classes\PDOCursor</a></li>
+				<li><a href="class-classes.PDOCursorData.html">classes\PDOCursorData</a></li>
+				<li><a href="class-classes.PDODatabase.html">classes\PDODatabase</a></li>
+				<li class="active"><a href="class-classes.PDOHelper.html">classes\PDOHelper</a></li>
+				<li><a href="class-MyDatabaseHandler.html">MyDatabaseHandler</a></li>
+			</ul>
+
+
+
+
+
+		</div>
+	</div>
+</div>
+
+<div id="splitter"></div>
+
+<div id="right">
+<div id="rightInner">
+	<form id="search">
+		<input type="hidden" name="cx" value="" />
+		<input type="hidden" name="ie" value="UTF-8" />
+		<input type="text" name="q" class="text" />
+		<input type="submit" value="Search" />
+	</form>
+
+	<div id="navigation">
+		<ul>
+			<li>
+				<a href="index.html" title="Overview"><span>Overview</span></a>
+			</li>
+			<li>
+				<a href="package-stable.pdo.html" title="Summary of stable\pdo"><span>Package</span></a>
+			</li>
+			<li class="active">
+<span>Class</span>			</li>
+		</ul>
+		<ul>
+			<li>
+				<a href="tree.html" title="Tree view of classes, interfaces, traits and exceptions"><span>Tree</span></a>
+			</li>
+		</ul>
+		<ul>
+		</ul>
+	</div>
+
+<div id="content" class="class">
+	<h1>Class PDOHelper</h1>
+
+
+	<div class="description">
+	
+<p>PDOOpenHelper, tvorba integritnich omezeni (mysql: innodb)</p>
+
+<ul>
+	<li>zalozeno na: <a
+	href="http://developer.android.com/reference/android/database/sqlite/SQLiteOpenHelper.html">http://developer.android.com/reference/android/database/sqlite/SQLiteOpenHelper.html</a></li>
+</ul>
+
+	</div>
+
+
+
+	<div>
+		<h4>Direct known subclasses</h4>
+			<a href="class-DBHandler.html">DBHandler</a>, 
+			<a href="class-MyDatabaseHandler.html">MyDatabaseHandler</a>
+	</div>
+
+
+
+
+
+
+	<div class="info">
+		<b>Abstract</b><br />
+		
+		<b>Namespace:</b> classes<br />
+		<b>Package:</b> <a href="package-stable.html">stable</a>\<a href="package-stable.pdo.html">pdo</a><br />
+
+				<b>Author:</b>
+				geniv<br />
+				<b>Version:</b>
+				3.26<br />
+		<b>Located at</b> classes/pdohelper.php<br />
+	</div>
+
+
+
+	<table class="summary" id="methods">
+	<caption>Methods summary</caption>
+	<tr data-order="__construct" id="___construct">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#___construct">#</a>
+		<code>__construct( <span>string <var>$dbname</var></span>, <span>mixed <var>$options</var> = <span class="php-keyword1">array</span>()</span> )</code>
+
+		<div class="description short">
+			
+<p>Create a helper object to create, open, and/or manage a database.</p>
+
+<ul>
+	<li>#public SQLiteOpenHelper(Context context, String name,
+	SQLiteDatabase.CursorFactory factory, int version)</li>
+
+	<li>defautlni konstruktor</li>
+
+	<li>prefixy se resi pouze v odvozene tride!!!!</li>
+
+	<li>muze se dedit, pokud je potreba z venku zadavat nazev db; public function
+	__construct($name) { parent::__construct($name); }</li>
+</ul>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Create a helper object to create, open, and/or manage a database.</p>
+
+<ul>
+	<li>#public SQLiteOpenHelper(Context context, String name,
+	SQLiteDatabase.CursorFactory factory, int version)</li>
+
+	<li>defautlni konstruktor</li>
+
+	<li>prefixy se resi pouze v odvozene tride!!!!</li>
+
+	<li>muze se dedit, pokud je potreba z venku zadavat nazev db; public function
+	__construct($name) { parent::__construct($name); }</li>
+</ul>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$dbname</var></dt>
+					<dd><code>string</code><br>dbname of the database file or host mysql database or null for an in-memory
+database</dd>
+					<dt><var>$options</var></dt>
+					<dd></dd>
+				</dl></div>
+
+
+
+				<h4>Since</h4>
+				<div class="list">
+						2.00<br />
+				</div>
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="onCreate" id="_onCreate">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_onCreate">#</a>
+		<code>onCreate( <span><code><a href="class-classes.PDODatabase.html">classes\PDODatabase</a></code> <var>$db</var></span>, <span>mixed <var>$data</var> = <span class="php-keyword1">null</span></span> )</code>
+
+		<div class="description short">
+			
+<p>Called when the database is created for the first time. This is where the
+creation of tables and the initial population of the tables should happen.</p>
+
+<ul>
+	<li>#public abstract void onCreate (SQLiteDatabase db)</li>
+
+	<li>overlay on inheritance class</li>
+
+	<li>muze se dedit, pokud je potreba vytvaret a plnit tabulky; public function
+	onCreate(PDODatabase $db) { $db-&gt;execSQL(...); }</li>
+</ul>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Called when the database is created for the first time. This is where the
+creation of tables and the initial population of the tables should happen.</p>
+
+<ul>
+	<li>#public abstract void onCreate (SQLiteDatabase db)</li>
+
+	<li>overlay on inheritance class</li>
+
+	<li>muze se dedit, pokud je potreba vytvaret a plnit tabulky; public function
+	onCreate(PDODatabase $db) { $db-&gt;execSQL(...); }</li>
+</ul>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$db</var></dt>
+					<dd><code><code><a href="class-classes.PDODatabase.html">classes\PDODatabase</a></code></code><br>db The database.</dd>
+					<dt><var>$data</var></dt>
+					<dd><code>mixed</code><br>data uzivatelske data</dd>
+				</dl></div>
+
+
+
+				<h4>Since</h4>
+				<div class="list">
+						2.00<br />
+				</div>
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="close" id="_close">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_close">#</a>
+		<code>close( )</code>
+
+		<div class="description short">
+			
+<p>Close any open database object.</p>
+
+<ul>
+	<li>#public synchronized void close ()</li>
+</ul>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Close any open database object.</p>
+
+<ul>
+	<li>#public synchronized void close ()</li>
+</ul>
+
+
+
+
+
+
+				<h4>Since</h4>
+				<div class="list">
+						2.00<br />
+				</div>
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="SQLite3" id="_SQLite3">
+
+		<td class="attributes"><code>
+			 public 
+			this
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_SQLite3">#</a>
+		<code>SQLite3( <span>string <var>$dbpath</var> = <span class="php-keyword1">null</span></span> )</code>
+
+		<div class="description short">
+			
+<p>SQLite3 PDO connector</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>SQLite3 PDO connector</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$dbpath</var></dt>
+					<dd><code>string</code><br>path database path, nepovinny, null == memory</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>this</code><br />
+				</div>
+
+
+				<h4>Since</h4>
+				<div class="list">
+						2.00<br />
+				</div>
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getSQLitePath" id="_getSQLitePath">
+
+		<td class="attributes"><code>
+			 public 
+			string
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getSQLitePath">#</a>
+		<code>getSQLitePath( )</code>
+
+		<div class="description short">
+			
+<p>vrati cestu sqliteX databaze</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>vrati cestu sqliteX databaze</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>string</code><br>sqlite path<br />
+				</div>
+
+
+				<h4>Since</h4>
+				<div class="list">
+						2.00<br />
+				</div>
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="deleteDatabase" id="_deleteDatabase">
+
+		<td class="attributes"><code>
+			 public 
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_deleteDatabase">#</a>
+		<code>deleteDatabase( )</code>
+
+		<div class="description short">
+			
+<p>smaze SQLiteX databazi, teda pokud nejde o memory databazi</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>smaze SQLiteX databazi, teda pokud nejde o memory databazi</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>boolean</code><br>true pokud bylo uspesne smazano<br />
+				</div>
+
+
+				<h4>Since</h4>
+				<div class="list">
+						2.08<br />
+				</div>
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="processHost" id="_processHost">
+
+		<td class="attributes"><code>
+			 protected 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_processHost">#</a>
+		<code>processHost( <span>string <var>&amp; $host</var></span>, <span>string <var>&amp; $username</var></span>, <span>string <var>&amp; $password</var></span>, <span>integer <var>&amp; $port</var></span>, <span>array <var>&amp; $options</var></span> )</code>
+
+		<div class="description short">
+			
+<p>zpracovani promennych predanych pres array host</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>zpracovani promennych predanych pres array host</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$host</var></dt>
+					<dd><code>string</code><br>host hostname</dd>
+					<dt><var>$username</var></dt>
+					<dd><code>string</code><br>username username do databaze</dd>
+					<dt><var>$password</var></dt>
+					<dd><code>string</code><br>password password do databaze</dd>
+					<dt><var>$port</var></dt>
+					<dd><code>integer</code><br>port port k databazi</dd>
+					<dt><var>$options</var></dt>
+					<dd><code>array</code><br>options pdo options</dd>
+				</dl></div>
+
+
+
+				<h4>Since</h4>
+				<div class="list">
+						2.10<br />
+				</div>
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="MySQL" id="_MySQL">
+
+		<td class="attributes"><code>
+			 public 
+			this
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_MySQL">#</a>
+		<code>MySQL( <span>string|array <var>$host</var></span>, <span>string <var>$username</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$password</var> = <span class="php-keyword1">null</span></span>, <span>integer <var>$port</var> = <span class="php-keyword1">null</span></span>, <span>array <var>$options</var> = <span class="php-keyword1">null</span></span> )</code>
+
+		<div class="description short">
+			
+<p>MySQL PDO connector</p>
+
+<ul>
+	<li>stara se o navazani komunikace s MySQL serverem</li>
+</ul>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>MySQL PDO connector</p>
+
+<ul>
+	<li>stara se o navazani komunikace s MySQL serverem</li>
+</ul>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$host</var></dt>
+					<dd><code>string|array</code><br>host database host|array: array('host', 'username', 'password'[, 'port',
+'options'])</dd>
+					<dt><var>$username</var></dt>
+					<dd><code>string</code><br>username database user</dd>
+					<dt><var>$password</var></dt>
+					<dd><code>string</code><br>password database password</dd>
+					<dt><var>$port</var></dt>
+					<dd><code>integer</code><br>port database port</dd>
+					<dt><var>$options</var></dt>
+					<dd><code>array</code><br>options PDO option array</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>this</code><br />
+				</div>
+
+
+				<h4>Since</h4>
+				<div class="list">
+						2.00<br />
+				</div>
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="Oci8" id="_Oci8">
+
+		<td class="attributes"><code>
+			 public 
+			this
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_Oci8">#</a>
+		<code>Oci8( <span>string|array <var>$host</var></span>, <span>string <var>$username</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$password</var> = <span class="php-keyword1">null</span></span>, <span>integer <var>$port</var> = <span class="php-keyword1">null</span></span>, <span>array <var>$options</var> = <span class="php-keyword1">null</span></span> )</code>
+
+		<div class="description short">
+			
+<p>Oracle OCI8 PDO connector</p>
+
+<ul>
+	<li>pro fungovani je nutne doinstalovat z oracle potrebne ovladace</li>
+</ul>
+
+<p>//TODO pripojeni do OCI8 neni otestovano!!!!</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Oracle OCI8 PDO connector</p>
+
+<ul>
+	<li>pro fungovani je nutne doinstalovat z oracle potrebne ovladace</li>
+</ul>
+
+<p>//TODO pripojeni do OCI8 neni otestovano!!!!</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$host</var></dt>
+					<dd><code>string|array</code><br>host database host|array: array('host', 'username', 'password'[, 'port',
+'options'])</dd>
+					<dt><var>$username</var></dt>
+					<dd><code>string</code><br>username database user</dd>
+					<dt><var>$password</var></dt>
+					<dd><code>string</code><br>password database password</dd>
+					<dt><var>$port</var></dt>
+					<dd><code>integer</code><br>port database port</dd>
+					<dt><var>$options</var></dt>
+					<dd><code>array</code><br>options PDO option array</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>this</code><br />
+				</div>
+
+
+				<h4>Since</h4>
+				<div class="list">
+						2.20<br />
+				</div>
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getDatabase" id="_getDatabase">
+
+		<td class="attributes"><code>
+			 public 
+			<code><a href="class-classes.PDODatabase.html">classes\PDODatabase</a></code>
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getDatabase">#</a>
+		<code>getDatabase( <span>boolean <var>$autocreate</var> = <span class="php-keyword1">false</span></span>, <span>mixed <var>$data</var> = <span class="php-keyword1">null</span></span> )</code>
+
+		<div class="description short">
+			
+<p>Create and/or open a database.</p>
+
+<ul>
+	<li>#public SQLiteDatabase getReadableDatabase ()</li>
+
+	<li>#public SQLiteDatabase getWritableDatabase ()</li>
+
+	<li>defaultne nevytvari tabulky (neprovadi onCreate u potomka tridy)</li>
+</ul>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Create and/or open a database.</p>
+
+<ul>
+	<li>#public SQLiteDatabase getReadableDatabase ()</li>
+
+	<li>#public SQLiteDatabase getWritableDatabase ()</li>
+
+	<li>defaultne nevytvari tabulky (neprovadi onCreate u potomka tridy)</li>
+</ul>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$autocreate</var></dt>
+					<dd><code>boolean</code><br>autocreate true pro automaticke volani onCreate() v potomkovy</dd>
+					<dt><var>$data</var></dt>
+					<dd><code>mixed</code><br>data uzivatelske data</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code><code><a href="class-classes.PDODatabase.html">classes\PDODatabase</a></code></code><br>a database object valid until close() is called.<br />
+				</div>
+
+
+				<h4>Since</h4>
+				<div class="list">
+						2.00<br />
+				</div>
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getFactoryDatabase" id="_getFactoryDatabase">
+
+		<td class="attributes"><code>
+			 public static
+			<code><a href="class-classes.PDODatabase.html">classes\PDODatabase</a></code>
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getFactoryDatabase">#</a>
+		<code>getFactoryDatabase( <span>array <var>$configure</var></span>, <span>mixed <var>$data</var> = <span class="php-keyword1">null</span></span> )</code>
+
+		<div class="description short">
+			
+<p>tovarni metoda na pripojovani databazoveho layeru</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>tovarni metoda na pripojovani databazoveho layeru</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$configure</var></dt>
+					<dd><code>array</code><br>configure pole konfigurace, povinne: handler, driver</dd>
+					<dt><var>$data</var></dt>
+					<dd><code>mixed</code><br>data uzivatelske data</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code><code><a href="class-classes.PDODatabase.html">classes\PDODatabase</a></code></code><br>instance pripojeni<br />
+				</div>
+
+
+				<h4>Since</h4>
+				<div class="list">
+						3.22<br />
+				</div>
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getDatabaseName" id="_getDatabaseName">
+
+		<td class="attributes"><code>
+			 public 
+			string
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getDatabaseName">#</a>
+		<code>getDatabaseName( )</code>
+
+		<div class="description short">
+			
+<p>Return the name of the SQLite database being opened, as given to the
+constructor.</p>
+
+<ul>
+	<li>#public String getDatabaseName ()</li>
+</ul>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Return the name of the SQLite database being opened, as given to the
+constructor.</p>
+
+<ul>
+	<li>#public String getDatabaseName ()</li>
+</ul>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>string</code><br>Return the name of database<br />
+				</div>
+
+
+				<h4>Since</h4>
+				<div class="list">
+						2.00<br />
+				</div>
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="setDatabaseName" id="_setDatabaseName">
+
+		<td class="attributes"><code>
+			 public 
+			this
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_setDatabaseName">#</a>
+		<code>setDatabaseName( <span>string <var>$dbname</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Set new database name</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Set new database name</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$dbname</var></dt>
+					<dd><code>string</code><br>dbname new database name</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>this</code><br />
+				</div>
+
+
+				<h4>Since</h4>
+				<div class="list">
+						2.00<br />
+				</div>
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getDatabasePath" id="_getDatabasePath">
+
+		<td class="attributes"><code>
+			 public 
+			string
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getDatabasePath">#</a>
+		<code>getDatabasePath( )</code>
+
+		<div class="description short">
+			
+<p>vrati nastaveny db path</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>vrati nastaveny db path</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>string</code><br>database path<br />
+				</div>
+
+
+				<h4>Since</h4>
+				<div class="list">
+						2.00<br />
+				</div>
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="setDatabasePath" id="_setDatabasePath">
+
+		<td class="attributes"><code>
+			 public 
+			this
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_setDatabasePath">#</a>
+		<code>setDatabasePath( <span>string <var>$path</var></span> )</code>
+
+		<div class="description short">
+			
+<p>nastavi novy db path</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>nastavi novy db path</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$path</var></dt>
+					<dd><code>string</code><br>path nova cesta</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>this</code><br />
+				</div>
+
+
+				<h4>Since</h4>
+				<div class="list">
+						2.00<br />
+				</div>
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getCharset" id="_getCharset">
+
+		<td class="attributes"><code>
+			 public 
+			string
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getCharset">#</a>
+		<code>getCharset( )</code>
+
+		<div class="description short">
+			
+<p>nacteni charsetu</p>
+
+<ul>
+	<li>defaultne: utf8</li>
+</ul>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>nacteni charsetu</p>
+
+<ul>
+	<li>defaultne: utf8</li>
+</ul>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>string</code><br>aktualni charset<br />
+				</div>
+
+
+				<h4>Since</h4>
+				<div class="list">
+						2.00<br />
+				</div>
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="setCharset" id="_setCharset">
+
+		<td class="attributes"><code>
+			 public 
+			this
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_setCharset">#</a>
+		<code>setCharset( <span>string <var>$charset</var></span> )</code>
+
+		<div class="description short">
+			
+<p>nastaveni charsetu pro pripojeni</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>nastaveni charsetu pro pripojeni</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$charset</var></dt>
+					<dd><code>string</code><br>charset novy charset</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>this</code><br />
+				</div>
+
+
+				<h4>Since</h4>
+				<div class="list">
+						2.00<br />
+				</div>
+
+
+		</div>
+		</div></td>
+	</tr>
+	</table>
+
+
+
+
+
+
+
+
+	<table class="summary" id="constants">
+	<caption>Constants summary</caption>
+	<tr data-order="SQLITE_MEMORY" id="SQLITE_MEMORY">
+
+		<td class="attributes"><code>string</code></td>
+		<td class="name"><code>
+<b>SQLITE_MEMORY</b>		</code></td>
+		<td class="value"><code><span class="php-quote">':memory:'</span></code></td>
+		<td class="description"><div>
+			<a href="#SQLITE_MEMORY" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	<tr data-order="MIN_PHP" id="MIN_PHP">
+
+		<td class="attributes"><code>string</code></td>
+		<td class="name"><code>
+<b>MIN_PHP</b>		</code></td>
+		<td class="value"><code><span class="php-quote">'5.3.6'</span></code></td>
+		<td class="description"><div>
+			<a href="#MIN_PHP" class="anchor">#</a>
+
+			<div class="description short">
+				
+			</div>
+
+			<div class="description detailed hidden">
+				
+
+			</div>
+		</div></td>
+	</tr>
+	</table>
+
+
+
+
+
+
+
+
+
+
+</div>
+
+	<div id="footer">
+		GoodFlow framework API documentation generated by <a href="http://apigen.org">ApiGen 2.8.0</a>
+	</div>
+</div>
+</div>
+</body>
+</html>

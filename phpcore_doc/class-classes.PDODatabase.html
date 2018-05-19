@@ -1,0 +1,1565 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="generator" content="ApiGen 2.8.0" />
+
+	<title>Class classes\PDODatabase | GoodFlow framework</title>
+
+	<script type="text/javascript" src="resources/combined.js?394153670"></script>
+	<script type="text/javascript" src="elementlist.js?4289113237"></script>
+	<link rel="stylesheet" type="text/css" media="all" href="resources/style.css?3505392360" />
+
+</head>
+
+<body>
+<div id="left">
+	<div id="menu">
+		<a href="index.html" title="Overview"><span>Overview</span></a>
+
+
+		<div id="groups">
+			<h3>Packages</h3>
+			<ul>
+				<li><a href="package-None.html">None</a>
+						</li>
+				<li><a href="package-PHP.html">PHP</a>
+						</li>
+				<li class="active"><a href="package-stable.html">stable<span></span></a>
+						<ul>
+				<li><a href="package-stable.configurator.html">configurator</a>
+						</li>
+				<li><a href="package-stable.form.html">form</a>
+						</li>
+				<li class="active"><a href="package-stable.pdo.html">pdo</a>
+						</li>
+				<li><a href="package-stable.session.html">session</a>
+						</li>
+				<li><a href="package-stable.user.html">user</a>
+						</li>
+							</ul></li>
+				<li><a href="package-unstable.html">unstable</a>
+						</li>
+			</ul>
+		</div>
+
+		<hr />
+
+
+		<div id="elements">
+			<h3>Classes</h3>
+			<ul>
+				<li><a href="class-classes.__JavaIterator.html">classes\__JavaIterator</a></li>
+				<li><a href="class-classes.__MoveIterator.html">classes\__MoveIterator</a></li>
+				<li><a href="class-classes.ContentValues.html">classes\ContentValues</a></li>
+				<li><a href="class-classes.MySQLExporter.html">classes\MySQLExporter</a></li>
+				<li><a href="class-classes.PDOCursor.html">classes\PDOCursor</a></li>
+				<li><a href="class-classes.PDOCursorData.html">classes\PDOCursorData</a></li>
+				<li class="active"><a href="class-classes.PDODatabase.html">classes\PDODatabase</a></li>
+				<li><a href="class-classes.PDOHelper.html">classes\PDOHelper</a></li>
+				<li><a href="class-MyDatabaseHandler.html">MyDatabaseHandler</a></li>
+			</ul>
+
+
+
+
+
+		</div>
+	</div>
+</div>
+
+<div id="splitter"></div>
+
+<div id="right">
+<div id="rightInner">
+	<form id="search">
+		<input type="hidden" name="cx" value="" />
+		<input type="hidden" name="ie" value="UTF-8" />
+		<input type="text" name="q" class="text" />
+		<input type="submit" value="Search" />
+	</form>
+
+	<div id="navigation">
+		<ul>
+			<li>
+				<a href="index.html" title="Overview"><span>Overview</span></a>
+			</li>
+			<li>
+				<a href="package-stable.pdo.html" title="Summary of stable\pdo"><span>Package</span></a>
+			</li>
+			<li class="active">
+<span>Class</span>			</li>
+		</ul>
+		<ul>
+			<li>
+				<a href="tree.html" title="Tree view of classes, interfaces, traits and exceptions"><span>Tree</span></a>
+			</li>
+		</ul>
+		<ul>
+		</ul>
+	</div>
+
+<div id="content" class="class">
+	<h1>Class PDODatabase</h1>
+
+
+	<div class="description">
+	
+<p>PDODatabase, spravce samotne instance databaze, uvnitr PDO</p>
+
+<ul>
+	<li>zalozeno na: <a
+	href="http://developer.android.com/reference/android/database/sqlite/SQLiteDatabase.html">http://developer.android.com/reference/android/database/sqlite/SQLiteDatabase.html</a></li>
+</ul>
+
+	</div>
+
+
+
+
+
+
+
+
+
+	<div class="info">
+		<b>Final</b><br />
+		
+		<b>Namespace:</b> classes<br />
+		<b>Package:</b> <a href="package-stable.html">stable</a>\<a href="package-stable.pdo.html">pdo</a><br />
+
+				<b>Author:</b>
+				geniv<br />
+				<b>Version:</b>
+				2.54<br />
+		<b>Located at</b> classes/pdohelper.php<br />
+	</div>
+
+
+
+	<table class="summary" id="methods">
+	<caption>Methods summary</caption>
+	<tr data-order="__construct" id="___construct">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#___construct">#</a>
+		<code>__construct( <span>string <var>$uri</var></span>, <span>string <var>$user</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$passwd</var> = <span class="php-keyword1">null</span></span>, <span>array <var>$driver_options</var> = <span class="php-keyword1">array</span>()</span> )</code>
+
+		<div class="description short">
+			
+<p>Construct for create PDO object</p>
+
+<ul>
+	<li>defaultne nastavuje: ATTR_STATEMENT_CLASS na classes\PDOCursor</li>
+</ul>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Construct for create PDO object</p>
+
+<ul>
+	<li>defaultne nastavuje: ATTR_STATEMENT_CLASS na classes\PDOCursor</li>
+</ul>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$uri</var></dt>
+					<dd><code>string</code><br>uri PDO uri url</dd>
+					<dt><var>$user</var></dt>
+					<dd><code>string</code><br>user database user</dd>
+					<dt><var>$passwd</var></dt>
+					<dd><code>string</code><br>passwd datamase password</dd>
+					<dt><var>$driver_options</var></dt>
+					<dd><code>array</code><br>driver_options PDO options array</dd>
+				</dl></div>
+
+
+
+				<h4>Since</h4>
+				<div class="list">
+						2.00<br />
+				</div>
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getPDO" id="_getPDO">
+
+		<td class="attributes"><code>
+			 public 
+			<code><a href="class-PDO.html">PDO</a></code>
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getPDO">#</a>
+		<code>getPDO( )</code>
+
+		<div class="description short">
+			
+<p>nacteni vnitrni instance POD objektu</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>nacteni vnitrni instance POD objektu</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code><code><a href="class-PDO.html">PDO</a></code></code><br>vnitrni instance<br />
+				</div>
+
+
+				<h4>Since</h4>
+				<div class="list">
+						2.34<br />
+				</div>
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getError" id="_getError">
+
+		<td class="attributes"><code>
+			 public 
+			string
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getError">#</a>
+		<code>getError( )</code>
+
+		<div class="description short">
+			
+<p>vrati text chyby, pokud dotaz teda naskonci s PDOException</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>vrati text chyby, pokud dotaz teda naskonci s PDOException</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>string</code><br>text chyby<br />
+				</div>
+
+
+				<h4>Since</h4>
+				<div class="list">
+						2.00<br />
+				</div>
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="isError" id="_isError">
+
+		<td class="attributes"><code>
+			 public 
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_isError">#</a>
+		<code>isError( )</code>
+
+		<div class="description short">
+			
+<p>vyskytla se nejaka chyba?</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>vyskytla se nejaka chyba?</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>boolean</code><br>true pokud se vyskytla chyba<br />
+				</div>
+
+
+				<h4>Since</h4>
+				<div class="list">
+						2.00<br />
+				</div>
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="beginTransaction" id="_beginTransaction">
+
+		<td class="attributes"><code>
+			 public 
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_beginTransaction">#</a>
+		<code>beginTransaction( )</code>
+
+		<div class="description short">
+			
+<p>Initiates a transaction</p>
+
+<ul>
+	<li>Begins a transaction in EXCLUSIVE mode.</li>
+
+	<li>#public void beginTransaction ()</li>
+
+	<li>support: InnoDB</li>
+</ul>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Initiates a transaction</p>
+
+<ul>
+	<li>Begins a transaction in EXCLUSIVE mode.</li>
+
+	<li>#public void beginTransaction ()</li>
+
+	<li>support: InnoDB</li>
+</ul>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>boolean</code><br>Returns TRUE on success or FALSE on failure.<br />
+				</div>
+
+
+				<h4>Since</h4>
+				<div class="list">
+						2.00<br />
+				</div>
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="endTransaction" id="_endTransaction">
+
+		<td class="attributes"><code>
+			 public 
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_endTransaction">#</a>
+		<code>endTransaction( )</code>
+
+		<div class="description short">
+			
+<p>Commits a transaction</p>
+
+<ul>
+	<li>End a transaction.</li>
+
+	<li>#public void endTransaction ()</li>
+
+	<li>support: InnoDB</li>
+</ul>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Commits a transaction</p>
+
+<ul>
+	<li>End a transaction.</li>
+
+	<li>#public void endTransaction ()</li>
+
+	<li>support: InnoDB</li>
+</ul>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>boolean</code><br>Returns TRUE on success or FALSE on failure.<br />
+				</div>
+
+
+				<h4>Since</h4>
+				<div class="list">
+						2.00<br />
+				</div>
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="rollBack" id="_rollBack">
+
+		<td class="attributes"><code>
+			 public 
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_rollBack">#</a>
+		<code>rollBack( )</code>
+
+		<div class="description short">
+			
+<p>Rolls back the current transaction</p>
+
+<ul>
+	<li>vraceni zaznamu na zpet, pokud se transakce nezdarila</li>
+
+	<li>support: InnoDB</li>
+</ul>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Rolls back the current transaction</p>
+
+<ul>
+	<li>vraceni zaznamu na zpet, pokud se transakce nezdarila</li>
+
+	<li>support: InnoDB</li>
+</ul>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>boolean</code><br>Returns TRUE on success or FALSE on failure.<br />
+				</div>
+
+
+				<h4>Since</h4>
+				<div class="list">
+						2.00<br />
+				</div>
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="inTransaction" id="_inTransaction">
+
+		<td class="attributes"><code>
+			 public 
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_inTransaction">#</a>
+		<code>inTransaction( )</code>
+
+		<div class="description short">
+			
+<p>Checks if inside a transaction</p>
+
+<ul>
+	<li>Returns true if the current thread has a transaction pending.</li>
+
+	<li>#public boolean inTransaction ()</li>
+</ul>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Checks if inside a transaction</p>
+
+<ul>
+	<li>Returns true if the current thread has a transaction pending.</li>
+
+	<li>#public boolean inTransaction ()</li>
+</ul>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>boolean</code><br>Returns TRUE if a transaction is currently active, and FALSE if not.<br />
+				</div>
+
+
+				<h4>Since</h4>
+				<div class="list">
+						2.00<br />
+				</div>
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="insert" id="_insert">
+
+		<td class="attributes"><code>
+			 public 
+			integer
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_insert">#</a>
+		<code>insert( <span>string <var>$table</var></span>, <span><code><a href="class-classes.ContentValues.html">classes\ContentValues</a></code> <var>$values</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Convenience method for inserting a row into the database.</p>
+
+<ul>
+	<li>#public function insert(String table, String nullColumnHack, ContentValues
+	values)</li>
+</ul>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Convenience method for inserting a row into the database.</p>
+
+<ul>
+	<li>#public function insert(String table, String nullColumnHack, ContentValues
+	values)</li>
+</ul>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$table</var></dt>
+					<dd><code>string</code><br>table the table to insert the row into</dd>
+					<dt><var>$values</var></dt>
+					<dd><code><code><a href="class-classes.ContentValues.html">classes\ContentValues</a></code></code><br>values this map contains the initial column values for the row. The keys should
+be the column names and the values the column values</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>integer</code><br>the row ID of the newly inserted row, or -1 if an error occurred<br />
+				</div>
+
+
+				<h4>Since</h4>
+				<div class="list">
+						2.00<br />
+				</div>
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="insertOrThrow" id="_insertOrThrow">
+
+		<td class="attributes"><code>
+			 public 
+			integer
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_insertOrThrow">#</a>
+		<code>insertOrThrow( <span>string <var>$table</var></span>, <span><code><a href="class-classes.ContentValues.html">classes\ContentValues</a></code> <var>$values</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Convenience method for inserting a row into the database.</p>
+
+<ul>
+	<li>#public long insertOrThrow (String table, String nullColumnHack,
+	ContentValues values)</li>
+</ul>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Convenience method for inserting a row into the database.</p>
+
+<ul>
+	<li>#public long insertOrThrow (String table, String nullColumnHack,
+	ContentValues values)</li>
+</ul>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$table</var></dt>
+					<dd><code>string</code><br>table the table to insert the row into</dd>
+					<dt><var>$values</var></dt>
+					<dd><code><code><a href="class-classes.ContentValues.html">classes\ContentValues</a></code></code><br>values this map contains the initial column values for the row. The keys should
+be the column names and the values the column values</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>integer</code><br>the row ID of the newly inserted row, or -1 if an error occurred<br />
+				</div>
+
+
+				<h4>Since</h4>
+				<div class="list">
+						2.00<br />
+				</div>
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="insertMultiple" id="_insertMultiple">
+
+		<td class="attributes"><code>
+			 public 
+			integer
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_insertMultiple">#</a>
+		<code>insertMultiple( <span>string <var>$table</var></span>, <span>array <var>$values</var></span> )</code>
+
+		<div class="description short">
+			
+<p>vicenasobne vkladani radku do databaze</p>
+
+<ul>
+	<li>vklada se pole trid typu ContentValues</li>
+
+	<li>strukturalne podobna metode: insert()</li>
+</ul>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>vicenasobne vkladani radku do databaze</p>
+
+<ul>
+	<li>vklada se pole trid typu ContentValues</li>
+
+	<li>strukturalne podobna metode: insert()</li>
+</ul>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$table</var></dt>
+					<dd><code>string</code><br>table jmeno tabulky</dd>
+					<dt><var>$values</var></dt>
+					<dd><code>array</code><br>values pole trid ContentValues pro jednu tabulku</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>integer</code><br>pocet ovlivnenych polozek, -1 pri zadnem zasahu<br />
+				</div>
+
+
+				<h4>Since</h4>
+				<div class="list">
+						2.46<br />
+				</div>
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="update" id="_update">
+
+		<td class="attributes"><code>
+			 public 
+			integer
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_update">#</a>
+		<code>update( <span>string <var>$table</var></span>, <span><code><a href="class-classes.ContentValues.html">classes\ContentValues</a></code> <var>$values</var></span>, <span>string <var>$whereClause</var></span>, <span>array <var>$whereArgs</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Convenience method for updating rows in the database.</p>
+
+<ul>
+	<li>#public int update (String table, ContentValues values, String whereClause,
+	String[] whereArgs)</li>
+</ul>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Convenience method for updating rows in the database.</p>
+
+<ul>
+	<li>#public int update (String table, ContentValues values, String whereClause,
+	String[] whereArgs)</li>
+</ul>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$table</var></dt>
+					<dd><code>string</code><br>table the table to update in</dd>
+					<dt><var>$values</var></dt>
+					<dd><code><code><a href="class-classes.ContentValues.html">classes\ContentValues</a></code></code><br>values a map from column names to new column values. null is a valid value that
+will be translated to NULL.</dd>
+					<dt><var>$whereClause</var></dt>
+					<dd><code>string</code><br>whereClause the optional WHERE clause to apply when updating. Passing null will
+update all rows.</dd>
+					<dt><var>$whereArgs</var></dt>
+					<dd><code>array</code><br>whereArgs You may include ?s in the where clause, which will be replaced by the
+values from whereArgs. The values will be bound as Strings.</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>integer</code><br>the number of rows affected, or -1 if an error occurred<br />
+				</div>
+
+
+				<h4>Since</h4>
+				<div class="list">
+						2.00<br />
+				</div>
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="updateOrThrow" id="_updateOrThrow">
+
+		<td class="attributes"><code>
+			 public 
+			the
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_updateOrThrow">#</a>
+		<code>updateOrThrow( <span>string <var>$table</var></span>, <span><code><a href="class-classes.ContentValues.html">classes\ContentValues</a></code> <var>$values</var></span>, <span>string <var>$whereClause</var></span>, <span>array <var>$whereArgs</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Convenience method for updating rows in the database, with throw</p>
+
+<ul>
+	<li>#public int updateWithOnConflict (String table, ContentValues values, String
+	whereClause, String[] whereArgs, int conflictAlgorithm)</li>
+</ul>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Convenience method for updating rows in the database, with throw</p>
+
+<ul>
+	<li>#public int updateWithOnConflict (String table, ContentValues values, String
+	whereClause, String[] whereArgs, int conflictAlgorithm)</li>
+</ul>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$table</var></dt>
+					<dd><code>string</code><br>table the table to update in</dd>
+					<dt><var>$values</var></dt>
+					<dd><code><code><a href="class-classes.ContentValues.html">classes\ContentValues</a></code></code><br>values a map from column names to new column values. null is a valid value that
+will be translated to NULL.</dd>
+					<dt><var>$whereClause</var></dt>
+					<dd><code>string</code><br>whereClause the optional WHERE clause to apply when updating. Passing null will
+update all rows.</dd>
+					<dt><var>$whereArgs</var></dt>
+					<dd><code>array</code><br>whereArgs You may include ?s in the where clause, which will be replaced by the
+values from whereArgs. The values will be bound as Strings.</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>the</code><br>number of rows affected, or -1 if an error occurred<br />
+				</div>
+
+
+				<h4>Since</h4>
+				<div class="list">
+						2.42<br />
+				</div>
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="delete" id="_delete">
+
+		<td class="attributes"><code>
+			 public 
+			integer
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_delete">#</a>
+		<code>delete( <span>string <var>$table</var></span>, <span>string <var>$whereClause</var></span>, <span>array <var>$whereArgs</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Convenience method for deleting rows in the database.</p>
+
+<ul>
+	<li>#public int delete (String table, String whereClause, String[]
+	whereArgs)</li>
+</ul>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Convenience method for deleting rows in the database.</p>
+
+<ul>
+	<li>#public int delete (String table, String whereClause, String[]
+	whereArgs)</li>
+</ul>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$table</var></dt>
+					<dd><code>string</code><br>table the table to delete from</dd>
+					<dt><var>$whereClause</var></dt>
+					<dd><code>string</code><br>whereClause the optional WHERE clause to apply when deleting. Passing null will
+delete all rows.</dd>
+					<dt><var>$whereArgs</var></dt>
+					<dd><code>array</code><br>whereArgs</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>integer</code><br>the number of rows affected if a whereClause is passed in, 0 otherwise. To
+remove all rows and get a count pass "1" as the whereClause.<br />
+				</div>
+
+
+				<h4>Since</h4>
+				<div class="list">
+						2.00<br />
+				</div>
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="deleteOrThrow" id="_deleteOrThrow">
+
+		<td class="attributes"><code>
+			 public 
+			integer
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_deleteOrThrow">#</a>
+		<code>deleteOrThrow( <span>string <var>$table</var></span>, <span>string <var>$whereClause</var></span>, <span>array <var>$whereArgs</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Convenience method for deleting rows in the database, with throw</p>
+
+<ul>
+	<li>#public int deleteWithOnConflict (String table, ContentValues values, String
+	whereClause, String[] whereArgs, int conflictAlgorithm)</li>
+</ul>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Convenience method for deleting rows in the database, with throw</p>
+
+<ul>
+	<li>#public int deleteWithOnConflict (String table, ContentValues values, String
+	whereClause, String[] whereArgs, int conflictAlgorithm)</li>
+</ul>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$table</var></dt>
+					<dd><code>string</code><br>table the table to delete from</dd>
+					<dt><var>$whereClause</var></dt>
+					<dd><code>string</code><br>whereClause the optional WHERE clause to apply when deleting. Passing null will
+delete all rows.</dd>
+					<dt><var>$whereArgs</var></dt>
+					<dd><code>array</code><br>whereArgs</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>integer</code><br>the number of rows affected if a whereClause is passed in, 0 otherwise. To
+remove all rows and get a count pass "1" as the whereClause.<br />
+				</div>
+
+
+				<h4>Since</h4>
+				<div class="list">
+						2.44<br />
+				</div>
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="truncate" id="_truncate">
+
+		<td class="attributes"><code>
+			 public 
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_truncate">#</a>
+		<code>truncate( <span>string <var>$table</var></span>, <span>boolean <var>$disable_fk</var> = <span class="php-keyword1">true</span></span> )</code>
+
+		<div class="description short">
+			
+<p>provede sql truncate, spolehlivejsi nez delete</p>
+
+<ul>
+	<li>automaticky vypina FK zavislosti</li>
+</ul>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>provede sql truncate, spolehlivejsi nez delete</p>
+
+<ul>
+	<li>automaticky vypina FK zavislosti</li>
+</ul>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$table</var></dt>
+					<dd><code>string</code><br>table nazev tabulky</dd>
+					<dt><var>$disable_fk</var></dt>
+					<dd><code>boolean</code><br>disable_fk true pro vypinani FK zavislosti, false pro normali chod se
+zavislostma</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>boolean</code><br>true pokud se povedlo<br />
+				</div>
+
+
+				<h4>Since</h4>
+				<div class="list">
+						2.00<br />
+				</div>
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="query" id="_query">
+
+		<td class="attributes"><code>
+			 public 
+			<code><a href="class-classes.PDOCursor.html">classes\PDOCursor</a></code>
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_query">#</a>
+		<code>query( <span>string <var>$table</var></span>, <span>array|string|null <var>$columns</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$selection</var> = <span class="php-keyword1">null</span></span>, <span>array <var>$selectionArgs</var> = <span class="php-keyword1">array</span>()</span>, <span>string <var>$groupBy</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$having</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$orderBy</var> = <span class="php-keyword1">null</span></span>, <span>string <var>$limit</var> = <span class="php-keyword1">null</span></span> )</code>
+
+		<div class="description short">
+			
+<p>Query the given table, returning a Cursor over the result set.</p>
+
+<ul>
+	<li>#public Cursor query (String table, String[] columns, String selection,
+	String[] selectionArgs, String groupBy, String having, String orderBy, String
+	limit)</li>
+
+	<li>columns: null=*, array=implode(,), string=string</li>
+</ul>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Query the given table, returning a Cursor over the result set.</p>
+
+<ul>
+	<li>#public Cursor query (String table, String[] columns, String selection,
+	String[] selectionArgs, String groupBy, String having, String orderBy, String
+	limit)</li>
+
+	<li>columns: null=*, array=implode(,), string=string</li>
+</ul>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$table</var></dt>
+					<dd><code>string</code><br>table The table name to compile the query against.</dd>
+					<dt><var>$columns</var></dt>
+					<dd><code>array|string|null</code><br>columns A list of which columns to return. Passing null will return all columns,
+which is discouraged to prevent reading data from storage that isn't going to be
+used.</dd>
+					<dt><var>$selection</var></dt>
+					<dd><code>string</code><br>selection A filter declaring which rows to return, formatted as an SQL WHERE
+clause (excluding the WHERE itself). Passing null will return all rows for the
+given table.</dd>
+					<dt><var>$selectionArgs</var></dt>
+					<dd><code>array</code><br>selectionArgs You may include ?s in selection, which will be replaced by the
+values from selectionArgs, in order that they appear in the selection. The
+values will be bound as St</dd>
+					<dt><var>$groupBy</var></dt>
+					<dd><code>string</code><br>groupBy A filter declaring how to group rows, formatted as an SQL GROUP BY
+clause (excluding the GROUP BY itself). Passing null will cause the rows to not
+be grouped.</dd>
+					<dt><var>$having</var></dt>
+					<dd><code>string</code><br>having A filter declare which row groups to include in the cursor, if row
+grouping is being used, formatted as an SQL HAVING clause (excluding the HAVING
+itself). Passing null will cause all row groups to be included, and is required
+when row grouping is not being used.</dd>
+					<dt><var>$orderBy</var></dt>
+					<dd><code>string</code><br>orderBy How to order the rows, formatted as an SQL ORDER BY clause (excluding
+the ORDER BY itself). Passing null will use the default sort order, which may be
+unordered.</dd>
+					<dt><var>$limit</var></dt>
+					<dd><code>string</code><br>limit Limits the number of rows returned by the query, formatted as LIMIT
+clause. Passing null denotes no LIMIT clause.</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code><code><a href="class-classes.PDOCursor.html">classes\PDOCursor</a></code></code><br>A Cursor object, which is positioned before the first entry. Note that Cursors
+are not synchronized, see the documentation for more details.<br />
+				</div>
+
+
+				<h4>Since</h4>
+				<div class="list">
+						2.02<br />
+				</div>
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="rawQuery" id="_rawQuery">
+
+		<td class="attributes"><code>
+			 public 
+			<code><a href="class-classes.PDOCursor.html">classes\PDOCursor</a></code>
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_rawQuery">#</a>
+		<code>rawQuery( <span>string <var>$sql</var></span>, <span>array <var>$selectionArgs</var> = <span class="php-keyword1">array</span>()</span> )</code>
+
+		<div class="description short">
+			
+<p>Runs the provided SQL and returns a Cursor over the result set.</p>
+
+<ul>
+	<li>#public Cursor rawQuery (String sql, String[] selectionArgs)</li>
+</ul>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Runs the provided SQL and returns a Cursor over the result set.</p>
+
+<ul>
+	<li>#public Cursor rawQuery (String sql, String[] selectionArgs)</li>
+</ul>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$sql</var></dt>
+					<dd><code>string</code><br>sql the SQL query. The SQL string must not be ; terminated</dd>
+					<dt><var>$selectionArgs</var></dt>
+					<dd><code>array</code><br>selectionArgs You may include ?s in where clause in the query, which will be
+replaced by the values from selectionArgs. The values will be bound as Strings.</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code><code><a href="class-classes.PDOCursor.html">classes\PDOCursor</a></code></code><br>A Cursor object, which is positioned before the first entry. Note that Cursors
+are not synchronized, see the documentation for more details.<br />
+				</div>
+
+
+				<h4>Since</h4>
+				<div class="list">
+						2.02<br />
+				</div>
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="execSQL" id="_execSQL">
+
+		<td class="attributes"><code>
+			 public 
+			integer
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_execSQL">#</a>
+		<code>execSQL( <span>string <var>$sql</var></span>, <span>array <var>$param</var> = <span class="php-keyword1">array</span>()</span> )</code>
+
+		<div class="description short">
+			
+<p>Execute a single SQL statement that is NOT a SELECT or any other SQL
+statement that returns data.</p>
+
+<ul>
+	<li>#public void execSQL (String sql)</li>
+</ul>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Execute a single SQL statement that is NOT a SELECT or any other SQL
+statement that returns data.</p>
+
+<ul>
+	<li>#public void execSQL (String sql)</li>
+</ul>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$sql</var></dt>
+					<dd><code>string</code><br>sql the SQL statement to be executed. Multiple statements separated by
+semicolons are not supported.</dd>
+					<dt><var>$param</var></dt>
+					<dd><code>array</code><br>param pole hodnot na substituci; (%d,%s...) tak array('v1', 'v2')</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>integer</code><br>pocet pozmenenych radku<br />
+				</div>
+
+
+				<h4>Since</h4>
+				<div class="list">
+						2.00<br />
+				</div>
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getAvailableDrivers" id="_getAvailableDrivers">
+
+		<td class="attributes"><code>
+			 public static
+			array
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getAvailableDrivers">#</a>
+		<code>getAvailableDrivers( )</code>
+
+		<div class="description short">
+			
+<p>get available pdo drives</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>get available pdo drives</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>array</code><br>list array pdo drivers<br />
+				</div>
+
+
+				<h4>Since</h4>
+				<div class="list">
+						2.00<br />
+				</div>
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getDriverName" id="_getDriverName">
+
+		<td class="attributes"><code>
+			 public 
+			string
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getDriverName">#</a>
+		<code>getDriverName( )</code>
+
+		<div class="description short">
+			
+<p>get current pdo driver name</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>get current pdo driver name</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>string</code><br>current driver<br />
+				</div>
+
+
+				<h4>Since</h4>
+				<div class="list">
+						2.00<br />
+				</div>
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="isMySQL" id="_isMySQL">
+
+		<td class="attributes"><code>
+			 public 
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_isMySQL">#</a>
+		<code>isMySQL( )</code>
+
+		<div class="description short">
+			
+<p>zjistluje jestli jde o mysql</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>zjistluje jestli jde o mysql</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>boolean</code><br>true pokud je driver mysql<br />
+				</div>
+
+
+				<h4>Since</h4>
+				<div class="list">
+						2.00<br />
+				</div>
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="isSQLite" id="_isSQLite">
+
+		<td class="attributes"><code>
+			 public 
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_isSQLite">#</a>
+		<code>isSQLite( )</code>
+
+		<div class="description short">
+			
+<p>zjistuje jestli jde o sqlite3</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>zjistuje jestli jde o sqlite3</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>boolean</code><br>true pokud je driver sqlite3<br />
+				</div>
+
+
+				<h4>Since</h4>
+				<div class="list">
+						2.00<br />
+				</div>
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="isOCI8" id="_isOCI8">
+
+		<td class="attributes"><code>
+			 public 
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_isOCI8">#</a>
+		<code>isOCI8( )</code>
+
+		<div class="description short">
+			
+<p>zjisti jestli jde o OCI8 //TODO pripojeni do OCI8 neni otestovano!!!!</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>zjisti jestli jde o OCI8 //TODO pripojeni do OCI8 neni otestovano!!!!</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>boolean</code><br>true pokud je driver oci8<br />
+				</div>
+
+
+				<h4>Since</h4>
+				<div class="list">
+						2.00<br />
+				</div>
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getAttribute" id="_getAttribute">
+
+		<td class="attributes"><code>
+			 public 
+			mixed
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getAttribute">#</a>
+		<code>getAttribute( <span>integer <var>$attribute</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Retrieve a database connection attribute</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Retrieve a database connection attribute</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$attribute</var></dt>
+					<dd><code>integer</code><br>attribute One of the PDO::ATTR_* constants.</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>mixed</code><br>A successful call returns the value of the requested PDO attribute. An
+unsuccessful call returns null.<br />
+				</div>
+
+
+				<h4>Since</h4>
+				<div class="list">
+						2.00<br />
+				</div>
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="setAttribute" id="_setAttribute">
+
+		<td class="attributes"><code>
+			 public 
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_setAttribute">#</a>
+		<code>setAttribute( <span>integer <var>$attribute</var></span>, <span>mixed <var>$value</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Set an attribute</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Set an attribute</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$attribute</var></dt>
+					<dd><code>integer</code><br>attribute Sets an attribute on the database handle.</dd>
+					<dt><var>$value</var></dt>
+					<dd><code>mixed</code><br>value attribude new value</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>boolean</code><br>Returns TRUE on success or FALSE on failure.<br />
+				</div>
+
+
+				<h4>Since</h4>
+				<div class="list">
+						2.00<br />
+				</div>
+
+
+		</div>
+		</div></td>
+	</tr>
+	</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+
+	<div id="footer">
+		GoodFlow framework API documentation generated by <a href="http://apigen.org">ApiGen 2.8.0</a>
+	</div>
+</div>
+</div>
+</body>
+</html>
